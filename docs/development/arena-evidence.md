@@ -1,8 +1,11 @@
 # Bounded arena verification snapshot
 
 Date: 2026-10-07. SPEC-0003 / IMPL-0004 / TEST-0006.
-Executed code/test/build inputs will be pinned to the implementation commit after
-the scoped source review. This initial record does not predeclare a remote CI pass.
+Executed code/test/build inputs are frozen at
+`360c79d216b4262ff61310b35c72852603176777`. The local matrix used identical
+implementation, tests, scripts and build definitions before that commit.
+Subsequent source-pointer/CI text updates do not change those inputs.
+Remote CI has not yet been observed for this milestone.
 
 Local invocation: Verify-Arenas.ps1 -BuildRoot <fresh-output-directory> -Sanitizers.
 Five configurations pass 16/16 CTest checks each; x64 detection controls and ARM64
