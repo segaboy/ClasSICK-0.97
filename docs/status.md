@@ -26,6 +26,10 @@ does not imply that the complete project foundation or any OS boot is finished.
   distinguish our contract from historical behavior and boot completion.
 - [Immutable surface build snapshot](development/surface-evidence.md) pins the
   implementation revision and qualified local artifact hashes.
+- [Corrected Windows CI passed](https://github.com/segaboy/ClasSICK-0.97/actions/runs/37685301136)
+  at source `aeb7b1d57182a2bc254bbcfe1c34cb3c390abad4`, including the complete
+  sanitizer matrix. The preceding UBSan probe validation failure and native
+  diagnostic-capture correction are retained in the evidence record.
 - Public repository established; slug `ClasSICK-0.97`, human name ClasSICK 0.97.
 - Founding clean-room policy and contribution/publication safeguards committed
   first, before implementation work.

@@ -73,6 +73,14 @@ bounded diagnostic on failure. The complete local matrix passed again, with the
 same test executable hash. Core, conformance tests and v1 behavior are unchanged.
 Remote sanitizer validation is recorded separately when its rerun completes.
 
+The [corrected remote run 37685301136](https://github.com/segaboy/ClasSICK-0.97/actions/runs/37685301136)
+completed successfully at `aeb7b1d57182a2bc254bbcfe1c34cb3c390abad4`, including both
+intentional detection probes and the full instrumented/headless matrix. Direct
+stderr capture preserves signatures regardless of PowerShell formatting; an
+independent local narrow-width control demonstrates that the previous formatting
+can split the signature. The original remote failure's raw diagnostic is unavailable,
+so its exact cause is not asserted beyond the observed validation failure.
+
 Not run: m68k compilation/execution, ARM64 execution, second compiler, Linux/macOS
 execution, hardware framebuffer, boot/firmware link, interactive debugger, historical
 reference behavior, fuzzing or three-edition parity. Synthetic tests establish only

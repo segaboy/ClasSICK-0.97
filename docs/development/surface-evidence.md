@@ -48,6 +48,14 @@ bounded diagnostics on failures; the full local matrix passed again with unchang
 surface/test bytes and executable hash. Its source revision is preserved in Git
 history. Remote rerun results remain separate from this original local build.
 
+The corrected source revision `aeb7b1d57182a2bc254bbcfe1c34cb3c390abad4` then
+[passed Windows CI](https://github.com/segaboy/ClasSICK-0.97/actions/runs/37685301136):
+repository guard, pinned setup, original bootstrap twins and the complete surface
+matrix including raw-captured ASan/UBSan detection and instrumented tests. This
+was checked through the completed run/job/step results. The earlier failure is
+retained; surface implementation/test bytes are unchanged from 10acecb. The later
+documentation-only result commit does not claim a separate execution of new code.
+
 Inputs and review: owner requirements SRC-0001/SRC-0016, SPEC-0001 v1,
 IMPL-0002, TEST-0004; Codex self-review only, human review pending. No external
 graphics source/assets, Apple implementation or reference-system input. All
