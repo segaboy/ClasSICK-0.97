@@ -1,0 +1,64 @@
+# Bootstrap verification evidence
+
+Date: 2026-10-07. Classification: **independent local development experiment**,
+not an original Macintosh reference-system observation.
+
+## Repository and policy
+
+Public repository: [segaboy/ClasSICK-0.97](https://github.com/segaboy/ClasSICK-0.97).
+Founding safeguards were committed and pushed as `d3f3af8` before build probes or
+any OS implementation. All source remains text; no Apple code, private reference
+payload, tool binary, credential or license file is included.
+
+## Procedure and exact environment
+
+Built-in Windows PowerShell 5.1.26100.9549 ran `Setup-Windows.ps1` and
+`Verify-Bootstrap.ps1`; it did not depend on Codex's bundled Node/Python/PowerShell.
+The latter built into two previously nonexistent directories beneath the owner's
+`C:\ClasSICK` test workspace. The toolchain lock specifies the original publisher
+downloads and SHA-256 digests. All three archives matched before extraction.
+
+- Compiler: Clang 23.1.1 from LLVM-MinGW 20260908, native target
+  `x86_64-w64-windows-gnu`.
+- Build: CMake 4.4.4 and Ninja 1.13.2; C11 extensions disabled, warnings as errors.
+- Compile-only probe: fixed-width/byte/pointer integer assertions with
+  `-ffreestanding`; this has no OS runtime or historical semantics.
+- Hosted probe: native executable printed `ClasSICK 0.97 toolchain smoke: PASS`
+  and returned success. CTest passed **1/1 tests in each fresh build**.
+- Both fresh Debug executables had SHA-256:
+  `0bc09f5298526c6f9a6cd0f616bc9ead98e88a461f349502ae6ce567f0053caa`.
+- Setup made no persistent PATH/registry change. Verification restored PATH.
+
+The source files and lock are retained in Git; the commit containing this record
+ties the first evidence to the exact bootstrap source. This is a reproducible
+procedure plus a narrow executable identity check, not a universal future image
+determinism claim.
+
+## Repository guard and clean-clone replay
+
+The staged-index guard passed for 78 source/text files, checking required documents,
+local Markdown links, JSON, excluded payload paths/extensions and common credential
+signatures. An isolated alternate index using an existing harmless C source blob
+under a simulated `.rom` path was rejected as expected. No reference ROM or binary
+was created. The normal index was preserved and separately rechecked successfully.
+Setup reuse in offline mode also passed.
+
+A fresh local Git clone of the committed bootstrap was made in the owner's test
+workspace. Its ignored tool directories were initially absent; only the three
+hash-verified downloaded archives were copied as an offline cache. Built-in
+PowerShell re-extracted the tools, passed the repository guard, and built/tested
+twice under a second source path. Both executables matched the same SHA-256 above.
+This produced **four passing native probe builds** across two source checkouts.
+
+## Publication and CI permission
+
+GitHub accepted the founding safeguards. Publishing the complete bootstrap with
+the CI workflow was rejected because the current GitHub CLI OAuth login lacked
+`workflow` scope. The reviewed workflow is preserved as a local draft and in the
+local `bootstrap-ci-draft` branch. Documentation, source probes and build scripts
+can be published with existing repository permission. Workflow access was requested
+through GitHub's device authorization; provider approval remains pending.
+
+GitHub CI is **prepared but not yet published/executed**. No remote CI pass is
+claimed. No OS boot or Macintosh compatibility has been achieved. Interactive
+debugging, sanitizers, alternate compilers and m68k/ARM64 execution remain future gates.

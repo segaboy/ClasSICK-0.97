@@ -17,8 +17,13 @@ planned target, not the definition of the portable OS.
 ## Current state
 
 Project bootstrap began on **2026-10-07**. No OS subsystem has been implemented.
-The initial build will contain only development-toolchain probes. Those probes
+The initial build contains only development-toolchain probes. Those probes
 do not boot an OS and do not demonstrate Macintosh compatibility.
+
+The founding Windows setup has been exercised with built-in PowerShell. Two fresh
+native Windows probe builds passed CTest and produced identical executable hashes.
+See [verification evidence](docs/development/bootstrap-evidence.md) and
+[current project status](docs/status.md).
 
 The historical internal-version claim above is a founding scope statement;
 edition-specific primary evidence and reference behavior remain research tasks.
@@ -28,9 +33,18 @@ edition-specific primary evidence and reference behavior remain research tasks.
 - [Clean-room policy](docs/clean-room/POLICY.md)
 - [Contribution rules](CONTRIBUTING.md)
 - [Provenance rules](provenance/README.md)
+- [Project charter and success criteria](docs/charter.md)
+- [Architecture and subsystem boundaries](docs/architecture/overview.md)
+- [Windows setup and build](docs/development/windows.md)
+- [Milestones and first implementation](docs/roadmap.md)
+- [Native boot gates and dependency graph](docs/architecture/boot.md)
+- [Architecture decisions](docs/adr/README.md)
+- [Research questions](docs/research/questions.md)
+- [Testing and compatibility](docs/testing/methodology.md)
+- [Licensing options awaiting owner decision](docs/development/licensing.md)
+- [Founding assignment coverage](docs/bootstrap-assignment.md)
 
-Architecture, reproducible setup, milestones, and verification records will be
-added during bootstrap. Public source repository:
+Public source repository:
 [segaboy/ClasSICK-0.97](https://github.com/segaboy/ClasSICK-0.97).
 
 ## Licensing
