@@ -1,7 +1,11 @@
 # Project status
 
-Date: 2026-10-07. Current phase: **M0.0 bootstrap complete**.
+Date: 2026-10-07. Current phase: **M0.0 technical bootstrap verified**.
 GPL-3.0-or-later approved; local and remote verification passed. No OS subsystem implemented.
+
+The owner's broader project bootstrap continues in a separate headquarters
+documentation/evidence repository and personal project wiki. This technical gate
+does not imply that the complete project foundation or any OS boot is finished.
 
 ## Achieved
 

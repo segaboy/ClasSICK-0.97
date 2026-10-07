@@ -29,3 +29,11 @@ Read `docs/clean-room/POLICY.md`, `CONTRIBUTING.md`, and
   suggests future roles. Create them only when the user requests them.
 - Keep bootstrap status honest: build probes are not an OS boot or compatibility
   proof. Update ADRs and evidence when a claim becomes verified.
+- Cross-project evidence and documentation are maintained in the owner's separate
+  `C:\Repos\ClasSICK` headquarters repository. Consult its current instructions
+  before cross-project changes; keep private headquarters content out of this
+  public repository. Its registry preserves this project's local record namespace.
+- The owner authorized maintenance of the personal OneNote **ClasSICK** wiki with
+  repository/progress updates. Use the OneNote skill and the headquarters wiki
+  protocol; preserve personal notes, verify writes, and report any synchronization
+  gap. Never commit personal notebook IDs, URLs or reference payloads here.
