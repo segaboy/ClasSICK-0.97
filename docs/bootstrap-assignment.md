@@ -29,7 +29,7 @@ OS behavior. Final publication/CI results are tracked in the evidence/status rec
 | 21 Documentation/provenance | Stable IDs, claim classification, templates and source catalog |
 | 22 Milestone roadmap | [Dependency-driven roadmap](roadmap.md) |
 | 23 Unknowns/research | [Research and debt register](research/questions.md) |
-| 24 First subsystem | [SPEC-0001 bounded surfaces](specifications/SPEC-0001-surfaces.md), no implementation yet |
+| 24 First subsystem | [SPEC-0001 bounded surfaces](specifications/SPEC-0001-surfaces.md) was proposed at bootstrap; subsequent authorized implementation is tracked by IMPL-0002 / TEST-0004 |
 | 25 Boot dependencies | [Mermaid dependency graph](architecture/boot.md) |
 | 26 First successful boot | B0/B1/B2 exact gates; B2 requires post-firmware-handoff ownership/input/progress |
 | 27 Immediate ADRs | Eight initial ADRs; future JIT/target/runtime decisions require new records |

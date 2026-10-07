@@ -6,6 +6,7 @@ Exact reference profile remains unverified; see R-001 in the research backlog.
 | Area | Status | Evidence |
 | --- | --- | --- |
 | Native OS | Not implemented | Architecture and boot gates only |
+| Generic core surfaces | SPEC-0001 v1 verified on Windows x64/x86 | TEST-0004; independent contract, no historical compatibility implication |
 | QuickDraw/Toolbox managers | Not implemented | Planned responsibilities; no approved historical contracts |
 | MFS and resource/data forks | Not implemented | Research and generic device strategy only |
 | Macintosh 128K startup/replacement ROM | Not implemented | Hardware/budget research pending |

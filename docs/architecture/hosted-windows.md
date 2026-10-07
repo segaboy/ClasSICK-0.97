@@ -1,6 +1,7 @@
 # Windows hosted development
 
-Status: first execution platform; toolchain probes only at bootstrap.
+Status: first execution platform; SPEC-0001 headless conformance verified on x64/x86.
+The presentation adapter, arenas and events remain planned; B1 has not been met.
 
 Use a normal native Windows process linked to the same core library planned for
 bare-metal builds. The hosted adapter supplies memory arenas, Win32 window/input,
@@ -23,8 +24,10 @@ and RAM-backed devices allow tests to avoid real-time or floppy dependencies.
 
 Debug symbols and LLDB integration are planned, but a debugger must actually
 launch, set a breakpoint, and inspect state before being called verified. Sanitizer
-support is target-dependent: validate ASan/UBSan on the selected hosted package,
-then add presets. Availability in upstream tool documentation is not local test
+support is target-dependent: the pinned x64 package now detects deliberate heap
+overflow and signed overflow probes, then passes surface tests under ASan/UBSan
+through `Verify-Surfaces.ps1 -Sanitizers`. Other sanitizer targets remain unverified.
+Availability in upstream tool documentation is not local test
 evidence. Fuzzing starts with format decoders against original synthetic bytes.
 
 Windows process isolation and diagnostics improve development safety but are not

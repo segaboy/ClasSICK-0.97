@@ -1,7 +1,10 @@
 # Project status
 
-Date: 2026-10-07. Current phase: **M0.0 technical bootstrap verified**.
-GPL-3.0-or-later approved; local and remote verification passed. No OS subsystem implemented.
+Date: 2026-10-07. Current phase: **SPEC-0001 headless subsystem verified; M0.1 partial**.
+M0.0 technical bootstrap remains verified. The owner explicitly authorized the
+first bounded graphics subsystem in the project implementation chat on this date.
+SPEC-0001 v1 is finalized, implemented and tested under IMPL-0002 / TEST-0004.
+GPL-3.0-or-later remains approved. No OS boot or historical compatibility verified.
 
 The owner's broader project bootstrap continues in a separate headquarters
 documentation/evidence repository and personal project wiki. This technical gate
@@ -9,6 +12,18 @@ does not imply that the complete project foundation or any OS boot is finished.
 
 ## Achieved
 
+- First subsystem: caller-owned MSB-first 1bpp/RGBA8 surfaces, clear and clipped
+  half-open rectangle fill; stable errors, checked sizes and padding preservation.
+- Six CTest checks pass in two fresh x64 debug builds, x64 release, x86 debug,
+  and validated x64 ASan/UBSan. The matrix covers 8,424 whole-buffer cases per run.
+- ARM64 little/big-endian ELF compile/import checks pass, with no execution claim.
+  Optimized core objects have no undefined symbols/global data; native debug
+  archive/header dependencies were also inspected. Negative audit probes reject
+  an external call and mutable global. Strict warnings are errors.
+- Fresh x64 test executable hashes match. Core static archive hashes differ due
+  to COFF object timestamps; archive/image reproducibility is not established.
+- [Surface test/provenance results](../provenance/records/TEST-0004-surfaces.md)
+  distinguish our contract from historical behavior and boot completion.
 - Public repository established; slug `ClasSICK-0.97`, human name ClasSICK 0.97.
 - Founding clean-room policy and contribution/publication safeguards committed
   first, before implementation work.
@@ -34,8 +49,12 @@ does not imply that the complete project foundation or any OS boot is finished.
   license review under the approved project license.
 - Exact historical profile and 1984-applicable behavioral sources.
 - Macintosh 128K native feasibility, hardware startup and size budgets.
-- Debugger/sanitizer workflow, cross compilers, alternate native targets and boot.
-- First OS subsystem: SPEC-0001 bounded graphics surfaces, after bootstrap review.
+- Interactive debugger, other sanitizer targets, m68k toolchain/runtime and boot.
+- Next: separately specify Windows presentation; then arenas/events/clock and the
+  remaining B1/M0.1 checks. No subsequent subsystem is implemented by this task.
+- Three bootable editions remain separately not-started: original Macintosh,
+  native PC without Linux, Linux PC. Historical identity/QuickDraw and edition
+  parity remain unverified; no Linux divergence has been introduced.
 
 See [evidence](development/bootstrap-evidence.md) for exact verified claims and
 [compatibility status](compatibility/README.md) for the presently unimplemented APIs.

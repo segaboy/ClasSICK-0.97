@@ -1,8 +1,8 @@
 # Portable OS core
 
-Reserved for independently implemented freestanding core code. No OS code exists
-at bootstrap. Planned modules: memory arenas, filesystem/VFS, graphics surfaces,
-events, generic devices, timers and executable loading.
+Independently implemented freestanding core code. Bounded graphics surfaces are
+implemented and headless-tested under SPEC-0001. Planned modules: memory arenas,
+filesystem/VFS, events, generic devices, timers and executable loading.
 
 No Win32/UEFI/Macintosh headers, guest ABI assumptions, direct hardware registers,
 fixed display geometry, native MFS requirement or whole-machine emulator dependency.

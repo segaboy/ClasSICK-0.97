@@ -7,6 +7,9 @@ out of public commits.
 - `Setup-Windows.ps1`: prepare SHA-256-pinned portable tools; optional `-Offline`.
 - `Enter-DevEnvironment.ps1`: activate prepared tools in the current process only.
 - `Verify-Bootstrap.ps1`: two new native hosted builds, CTest and executable hashes.
+- `Verify-Surfaces.ps1 -BuildRoot <fresh-directory> -Sanitizers`: x64 debug twins,
+  release, x86 execution, ARM64 endian compile/import checks, validated x64 ASan/UBSan.
+- `Check-Freestanding.cmake`: reject core object undefined symbols/global data.
 - `Test-Repository.ps1`: audit indexed text/source, required docs, local Markdown
   links, JSON, common credentials and forbidden payload directories/extensions.
 - `toolchain-lock.json`: exact package URLs, digests, versions and purposes.

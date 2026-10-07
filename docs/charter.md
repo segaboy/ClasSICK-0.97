@@ -36,7 +36,15 @@ Hosted-core success requires the same freestanding core library to drive an
 abstract surface and events under Windows, with memory/input boundary tests.
 Native-boot success is defined separately in [boot gates](architecture/boot.md).
 
-Version 1.0 requires native boot on x86-64 and Motorola 68000, an ARM64 hosted or
+Every completed 0.97 version requires three independently tracked bootable editions:
+original Macintosh hardware with independent replacement firmware where required,
+native PC hardware without Linux as its base, and Linux-based PC hardware. The
+first two target functional parity against the same System 1 contracts. Linux may
+evolve into modular ClasSICK through explicit versioned divergence. A hosted
+process or one successful edition cannot establish version completion. All three
+physical-hardware gates remain pending; VM tests are earlier development gates.
+
+Version 1.0 additionally requires native boot on x86-64 and Motorola 68000, an ARM64 hosted or
 native build exercising the same core, documented System 1 API coverage, MFS and
 fork interoperability tests, and a named application corpus executing against our
 Toolbox implementation. Each included API/app has profile-specific tests and
@@ -51,10 +59,12 @@ and obtain an explicit scope decision rather than silently dropping the target.
 
 ## Governance and change control
 
-This founding chat is Project HQ. The owner is final authority on licensing,
-release scope, and policy exceptions that do not violate foundational exclusions.
-HQ maintains architecture, ADRs, milestone evidence, research priorities, and
-compatibility claims. Maintainers review provenance before merging code.
+The umbrella ClasSICK HQ owns cross-project architecture, governance and major
+scope decisions. The owner is final authority on licensing and release scope.
+The 0.97 main project chat owns day-to-day specifications, implementation, tests,
+provenance and progress. Its first surface implementation assignment was explicitly
+authorized on 2026-10-07. Maintainers review provenance; no independent human review
+is implied by an agent's self-review.
 
 Architecture decisions use numbered ADRs. Specifications use stable IDs and exact
 version applicability. Scope changes update the charter, roadmap, affected ADRs,

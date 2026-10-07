@@ -21,8 +21,11 @@ Read `docs/clean-room/POLICY.md`, `CONTRIBUTING.md`, and
   documentation and assets. Preserve that license and inbound-equals-outbound
   contribution terms; changes require explicit owner approval. Third-party inputs
   still need separate license/provenance review.
-- The founding assignment is documentation, policy, tooling, and build probes.
-  It does not authorize OS subsystem implementation.
+- The founding assignment covered documentation, policy, tooling, and build probes.
+  On 2026-10-07 the owner authorized the project implementation chat to finalize,
+  implement, test and publish SPEC-0001 bounded portable graphics surfaces. This
+  supersedes the bootstrap-only restriction for that subsystem. Subsequent
+  milestones remain separate; surfaces do not complete M0.1 or any boot edition.
 - Use `C:\Repos\ClasSICK-0.97` for source and `C:\ClasSICK` for local build/test
   output on the founding workstation. Do not depend on those paths in core code.
 - Do not create specialist chats or delegate work merely because the roadmap

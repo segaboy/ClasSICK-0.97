@@ -23,8 +23,8 @@ the project license. Record any future license change through owner approval/ADR
 
 ## Immediate dependency order after bootstrap
 
-1. Implement [SPEC-0001 bounded surfaces](specifications/SPEC-0001-surfaces.md)
-   with caller-supplied storage and original headless tests.
+1. Completed the headless [SPEC-0001 bounded surfaces](specifications/SPEC-0001-surfaces.md)
+   with caller-supplied storage and original tests; see TEST-0004. M0.1 remains open.
 2. Add the hosted Windows presentation adapter, then bounded arenas, normalized
    events, and a deterministic clock so B1 becomes measurable.
 3. Prove freestanding linkage/runtime ownership and a second compiler/core build.

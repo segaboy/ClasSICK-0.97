@@ -1,8 +1,11 @@
 # Project HQ and future specialist responsibilities
 
-The owner has final scope/licensing authority. This founding chat is Project HQ;
-the public repository is authoritative. No specialist chats are created during
-bootstrap. The following is a proposed division when the owner requests them.
+The owner has final scope/licensing authority. Umbrella ClasSICK HQ owns cross-project
+architecture/governance and major scope decisions; the 0.97 main project chat owns
+scoped implementation, specifications, tests, provenance and progress. The public
+repository is authoritative for detailed 0.97 work. The owner authorized SPEC-0001
+implementation on 2026-10-07. The following roles remain proposals; do not create
+chats, delegate to agents, schedule automations or message others without instruction.
 
 | Role | Owns | Deliverable to HQ |
 | --- | --- | --- |

@@ -1,7 +1,7 @@
 # Testing and compatibility methodology
 
-Status: initial test strategy. Bootstrap exercises only tooling and repository
-controls. No System 1 behavior has been observed or validated.
+Status: core contract tests now exercise SPEC-0001 in addition to tooling and
+repository controls. No historical System 1 behavior has been observed or validated.
 
 ## Evidence classes
 

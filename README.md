@@ -16,14 +16,21 @@ planned target, not the definition of the portable OS.
 
 ## Current state
 
-Project bootstrap began on **2026-10-07**. No OS subsystem has been implemented.
-The initial build contains only development-toolchain probes. Those probes
-do not boot an OS and do not demonstrate Macintosh compatibility.
+Project bootstrap began on **2026-10-07**. The first subsystem now implements
+[SPEC-0001 bounded graphics surfaces](docs/specifications/SPEC-0001-surfaces.md):
+caller-owned 1bpp MSB-first and RGBA8 storage, clear, clipped rectangle fill and
+stable validation errors. Independent headless tests pass on Windows x64 and x86,
+including validated ASan/UBSan on x64 and freestanding import checks.
+This verifies our generic contract; no OS boot or Macintosh compatibility is proven.
 
 The founding Windows setup has been exercised with built-in PowerShell. Two fresh
 native Windows probe builds passed CTest and produced identical executable hashes.
 See [verification evidence](docs/development/bootstrap-evidence.md) and
 [current project status](docs/status.md).
+
+Every completed version requires original-hardware, native-PC without Linux, and
+Linux-PC editions. Original/native-PC editions target the same behavior; Linux
+extensions require explicit versioned divergence. All three boot gates are pending.
 
 The historical internal-version claim above is a founding scope statement;
 edition-specific primary evidence and reference behavior remain research tasks.

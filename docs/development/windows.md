@@ -1,6 +1,6 @@
 # Reproducible Windows 11 development
 
-Status: bootstrap procedure for an ordinary x64 Windows 11 machine with Git.
+Status: pinned build and headless core procedure for an x64 Windows 11 machine with Git.
 It uses Windows PowerShell 5.1 and .NET supplied by Windows; PowerShell 7, Python,
 Visual Studio, WSL, Docker, a package manager, and an emulator are not prerequisites.
 
@@ -71,8 +71,9 @@ The verification wrapper restores its original PATH even when a step fails.
 
 ## What verification means
 
-The CMake project currently builds a hosted console smoke executable and a
-compile-only C11 freestanding width probe. CTest runs the smoke executable. Two
+The CMake project builds a hosted console smoke, a freestanding width probe, the
+freestanding surface library, an optimized surface import-audit object and hosted
+conformance tests. CTest runs the smoke, four surface suites and an object audit. Two
 fresh output directories must produce identical executable hashes. Path remapping
 and a fixed PE timestamp support that narrow reproducibility check. It does not
 claim byte-identical future OS images across compilers, machines or all artifacts.
@@ -82,12 +83,27 @@ The hosted smoke links the supplied Windows startup/runtime and standard output
 support. That dependency is **development infrastructure**, not part of the planned
 freestanding OS core. Future bare-metal links must audit their helper dependencies.
 
+For the surface verification matrix, use a fresh output directory:
+
+```powershell
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\scripts\Verify-Surfaces.ps1 -BuildRoot C:\ClasSICK\surfaces-local -Sanitizers
+```
+
+This runs fresh x64 debug twins (matching test executable hashes), x64 release,
+x86 Windows execution, ARM64 little/big-endian compile-only checks and import/data
+audits. `-Sanitizers` first verifies intentional heap/signed-overflow detection,
+then tests x64 surfaces with ASan/UBSan. Sanitizer runtime/stdio/startup belongs
+only to development executables; the audit object is deliberately uninstrumented.
+No new tool packages are required. `CLASSICK_SURFACE_SANITIZERS=ON` is the CMake
+option after support validation. Core archive bytes are not reproducible yet:
+COFF object timestamps differ. See [TEST-0004](../../provenance/records/TEST-0004-surfaces.md).
+
 ## Tools deferred until a concrete need
 
 | Tool/category | Purpose when introduced | Current state |
 | --- | --- | --- |
 | LLDB or another debugger | Breakpoints, guest/native state and symbols | Package includes LLDB; interactive debugging unverified |
-| ASan/UBSan/fuzzing support | Memory/undefined behavior and decoder robustness | Must validate local target support and add purpose-built presets |
+| ASan/UBSan/fuzzing support | Memory/undefined behavior and decoder robustness | x64 ASan/UBSan verified for surfaces; other targets and fuzzing pending |
 | QEMU plus reviewed UEFI firmware | Repeatable native x86-64 boot tests | Not installed by bootstrap |
 | m68k cross compiler, linker and runtime helpers | Original 68000 native images and ROM packaging | Must select/review independently |
 | ARM64 toolchain/runner | Native architecture parity | Runner/board unselected |

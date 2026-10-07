@@ -5,6 +5,18 @@ eligibility applies to the stated scope, not every resource reachable from a URL
 No Apple executable, source, disassembly, decompilation, or copied asset was used.
 No reference-system black-box observation has yet been performed.
 
+## SRC-0016 — Owner's first subsystem implementation assignment
+
+- Author/date: project owner, 2026-10-07; instruction retained by the owner.
+- Public derivative: SPEC-0001 v1 and IMPL-0002, independently summarized.
+- Classification: project requirement/implementation authorization after bootstrap.
+- Scope: finalize bounded surfaces, implement without heap/platform dependencies,
+  verify independent headless tests, freestanding boundaries and supported
+  sanitizers, maintain provenance/status/wiki, commit and push the scoped result.
+- Eligibility: requirement authority only, not a historical behavioral source.
+- Limits: surfaces do not establish M0.1, QuickDraw, any bootable edition or exact
+  January 1984 historical identity. No third-party implementation/asset input.
+
 ## SRC-0001 — Owner's founding brief
 
 - Author/date: project owner, 2026-10-07; private instruction retained by owner.

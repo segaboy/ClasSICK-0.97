@@ -1,4 +1,4 @@
-name: Bootstrap
+name: Core and bootstrap
 
 on:
   push:
@@ -26,3 +26,6 @@ jobs:
       - name: Verify two fresh hosted builds
         shell: powershell
         run: .\scripts\Verify-Bootstrap.ps1
+      - name: Verify surface contracts, freestanding boundaries and sanitizers
+        shell: powershell
+        run: .\scripts\Verify-Surfaces.ps1 -BuildRoot build\surface-verification -Sanitizers

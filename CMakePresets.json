@@ -4,7 +4,7 @@
   "configurePresets": [
     {
       "name": "windows-hosted",
-      "displayName": "ClasSICK 0.97 Windows bootstrap",
+      "displayName": "ClasSICK 0.97 Windows headless core",
       "generator": "Ninja",
       "binaryDir": "${sourceDir}/build/windows-hosted",
       "condition": { "type": "equals", "lhs": "${hostSystemName}", "rhs": "Windows" },
