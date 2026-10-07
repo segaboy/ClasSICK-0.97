@@ -63,6 +63,16 @@ the quoted flag and final wrapper run passed. No surface conformance defect was
 observed. ASan does not check writes within a larger live array, which is why exact
 whole-buffer/guard comparisons are required too.
 
+Remote run 37684200832 at evidence revision 81a6565 passed the guard, setup,
+bootstrap, x64 debug/release, i686 and ARM64 audits, then failed UBSan probe
+signature validation before the sanitizer conformance build. Its probe diagnostic
+was not emitted by that wrapper, so the log alone does not prove the cause.
+The verification wrapper now captures native stderr directly to a file through
+a hidden process, avoiding PowerShell error-record formatting and emitting a
+bounded diagnostic on failure. The complete local matrix passed again, with the
+same test executable hash. Core, conformance tests and v1 behavior are unchanged.
+Remote sanitizer validation is recorded separately when its rerun completes.
+
 Not run: m68k compilation/execution, ARM64 execution, second compiler, Linux/macOS
 execution, hardware framebuffer, boot/firmware link, interactive debugger, historical
 reference behavior, fuzzing or three-edition parity. Synthetic tests establish only

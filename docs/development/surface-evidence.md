@@ -40,6 +40,14 @@ after the pinned setup. CI now runs this matrix in addition to the original
 bootstrap verification. Remote CI results, when available, are separate evidence
 from this local execution; this record does not predeclare a remote pass.
 
+Remote [initial surface CI](https://github.com/segaboy/ClasSICK-0.97/actions/runs/37684200832)
+passed guard/setup/bootstrap and the uninstrumented x64/x86/endian checks, then
+stopped on UBSan probe signature validation. It did not establish a remote sanitizer
+pass. The subsequent wrapper correction captures raw native stderr and includes
+bounded diagnostics on failures; the full local matrix passed again with unchanged
+surface/test bytes and executable hash. Its source revision is preserved in Git
+history. Remote rerun results remain separate from this original local build.
+
 Inputs and review: owner requirements SRC-0001/SRC-0016, SPEC-0001 v1,
 IMPL-0002, TEST-0004; Codex self-review only, human review pending. No external
 graphics source/assets, Apple implementation or reference-system input. All

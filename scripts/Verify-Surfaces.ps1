@@ -51,14 +51,16 @@ try {
         & clang -std=c11 -Wall -Wextra -Wpedantic -Werror '-fsanitize=address,undefined' -fno-sanitize-recover=all (Join-Path $repoRoot 'tests/sanitizer-probe.c') -o $probe
         if ($LASTEXITCODE -ne 0) { throw 'Sanitizer support not validated: probe build failed' }
         foreach ($kind in @('address','undefined')) {
-            # Windows PowerShell represents redirected native stderr as error records.
-            $ErrorActionPreference = 'Continue'
-            $diagnostic = (& $probe $kind 2>&1 | Out-String)
-            $probeExit = $LASTEXITCODE
-            $ErrorActionPreference = 'Stop'
-            $diagnostic | Set-Content -LiteralPath (Join-Path $BuildRoot ($kind + '-probe.log')) -Encoding UTF8
+            # Capture native bytes: PowerShell error-record formatting can wrap
+            # the diagnostic signature depending on console width/path length.
+            $stderrLog = Join-Path $BuildRoot ($kind + '-probe.log')
+            $stdoutLog = Join-Path $BuildRoot ($kind + '-probe.stdout.log')
+            $process = Start-Process -FilePath $probe -ArgumentList $kind -Wait -PassThru -WindowStyle Hidden -RedirectStandardError $stderrLog -RedirectStandardOutput $stdoutLog
+            $probeExit = $process.ExitCode
+            $diagnostic = [IO.File]::ReadAllText($stderrLog)
             $signature = if ($kind -eq 'address') { 'AddressSanitizer: heap-buffer-overflow' } else { 'runtime error: signed integer overflow' }
             if ($probeExit -eq 0 -or -not $diagnostic.Contains($signature)) {
+                Write-Output ($diagnostic.Substring(0, [Math]::Min(1000, $diagnostic.Length)))
                 throw "Sanitizer support not validated: $kind did not detect its intentional defect"
             }
             Write-Output "Sanitizer detection validated: $kind"
