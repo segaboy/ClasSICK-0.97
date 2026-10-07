@@ -48,8 +48,9 @@ The six CTest checks are one bootstrap smoke, four surface suites and one optimi
 object audit. ASan/UBSan instrument both the library under test and test executable;
 the freestanding object audit stays uninstrumented. Windows startup, console and
 sanitizer imports in development executables do not belong to the portable core.
-Exact immutable source/artifact hashes are recorded in the subsequent build
-evidence registration; this record is also part of that versioned source snapshot.
+Exact immutable source/artifact hashes are recorded in the subsequent
+[build evidence](../../docs/development/surface-evidence.md); this record is also
+part of that versioned source snapshot.
 
 ## Limits and retained failures
 

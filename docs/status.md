@@ -24,6 +24,8 @@ does not imply that the complete project foundation or any OS boot is finished.
   to COFF object timestamps; archive/image reproducibility is not established.
 - [Surface test/provenance results](../provenance/records/TEST-0004-surfaces.md)
   distinguish our contract from historical behavior and boot completion.
+- [Immutable surface build snapshot](development/surface-evidence.md) pins the
+  implementation revision and qualified local artifact hashes.
 - Public repository established; slug `ClasSICK-0.97`, human name ClasSICK 0.97.
 - Founding clean-room policy and contribution/publication safeguards committed
   first, before implementation work.
