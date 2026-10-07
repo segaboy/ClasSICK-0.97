@@ -1,9 +1,11 @@
 # Project status
 
-Date: 2026-10-07. Current phase: **SPEC-0001 headless subsystem verified; M0.1 partial**.
+Date: 2026-10-07. Current phase: **surfaces and Windows presentation verified; M0.1 partial**.
 M0.0 technical bootstrap remains verified. The owner explicitly authorized the
 first bounded graphics subsystem in the project implementation chat on this date.
 SPEC-0001 v1 is finalized, implemented and tested under IMPL-0002 / TEST-0004.
+The owner authorized the next visible checkpoint. SPEC-0002 v1 adds a native
+Windows original-scene viewer under IMPL-0003 / TEST-0005.
 GPL-3.0-or-later remains approved. No OS boot or historical compatibility verified.
 
 The owner's broader project bootstrap continues in a separate headquarters
@@ -11,6 +13,14 @@ documentation/evidence repository and personal project wiki. This technical gate
 does not imply that the complete project foundation or any OS boot is finished.
 
 ## Achieved
+
+- Windows color/mono viewer: explicit BGRX conversion, integer scaling/crop,
+  clipping and resize/DPI handling. A visible preview was launched and inspected
+  through an original-scene capture; owner's manual acceptance is separate.
+- Ten CTest checks pass in fresh x64 Debug twins, Release, i686 and validated
+  x64 ASan/UBSan. Four added suites cover conversion/bounds, GDI pixels and hidden
+  window lifecycle. Fresh viewer/test executable hashes match. Core unchanged.
+- [Presentation results](../provenance/records/TEST-0005-windows-presentation.md).
 
 - First subsystem: caller-owned MSB-first 1bpp/RGBA8 surfaces, clear and clipped
   half-open rectangle fill; stable errors, checked sizes and padding preservation.
@@ -56,8 +66,9 @@ does not imply that the complete project foundation or any OS boot is finished.
 - Exact historical profile and 1984-applicable behavioral sources.
 - Macintosh 128K native feasibility, hardware startup and size budgets.
 - Interactive debugger, other sanitizer targets, m68k toolchain/runtime and boot.
-- Next: separately specify Windows presentation; then arenas/events/clock and the
-  remaining B1/M0.1 checks. No subsequent subsystem is implemented by this task.
+- Next: bounded arenas, normalized events and a deterministic clock, then the
+  remaining B1/M0.1 checks and interactive debugger workflow. The viewer alone
+  does not complete the hosted-core gate.
 - Three bootable editions remain separately not-started: original Macintosh,
   native PC without Linux, Linux PC. Historical identity/QuickDraw and edition
   parity remain unverified; no Linux divergence has been introduced.

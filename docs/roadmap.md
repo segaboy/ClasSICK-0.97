@@ -25,8 +25,10 @@ the project license. Record any future license change through owner approval/ADR
 
 1. Completed the headless [SPEC-0001 bounded surfaces](specifications/SPEC-0001-surfaces.md)
    with caller-supplied storage and original tests; see TEST-0004. M0.1 remains open.
-2. Add the hosted Windows presentation adapter, then bounded arenas, normalized
-   events, and a deterministic clock so B1 becomes measurable.
+2. [SPEC-0002 Windows presentation](specifications/SPEC-0002-windows-presentation.md)
+   and original scenes are verified under TEST-0005. Next add bounded arenas,
+   normalized events and a deterministic clock, then exercise the debug workflow
+   so B1/M0.1 becomes measurable.
 3. Prove freestanding linkage/runtime ownership and a second compiler/core build.
 4. Prepare/review UEFI VM tooling and device contracts; implement the B2 dependency
    chain in [the boot graph](architecture/boot.md).

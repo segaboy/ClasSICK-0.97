@@ -4,7 +4,7 @@
   "configurePresets": [
     {
       "name": "windows-hosted",
-      "displayName": "ClasSICK 0.97 Windows headless core",
+      "displayName": "ClasSICK 0.97 Windows core and surface viewer",
       "generator": "Ninja",
       "binaryDir": "${sourceDir}/build/windows-hosted",
       "condition": { "type": "equals", "lhs": "${hostSystemName}", "rhs": "Windows" },

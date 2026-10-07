@@ -23,6 +23,12 @@ stable validation errors. Independent headless tests pass on Windows x64 and x86
 including validated ASan/UBSan on x64 and freestanding import checks.
 This verifies our generic contract; no OS boot or Macintosh compatibility is proven.
 
+[SPEC-0002 Windows presentation](docs/specifications/SPEC-0002-windows-presentation.md)
+adds a native color/monochrome viewer with original geometric scenes. Space changes
+views; resizing uses sharp integer scaling. See
+[build, run and review instructions](docs/development/windows.md). Arenas, normalized
+events, clocks and the remaining hosted-core acceptance gate are still open.
+
 The founding Windows setup has been exercised with built-in PowerShell. Two fresh
 native Windows probe builds passed CTest and produced identical executable hashes.
 See [verification evidence](docs/development/bootstrap-evidence.md) and

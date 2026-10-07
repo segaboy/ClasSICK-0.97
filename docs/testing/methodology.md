@@ -1,7 +1,11 @@
 # Testing and compatibility methodology
 
-Status: core contract tests now exercise SPEC-0001 in addition to tooling and
+Status: tests exercise SPEC-0001 and SPEC-0002 Windows presentation alongside tooling and
 repository controls. No historical System 1 behavior has been observed or validated.
+
+Presentation tests inspect real GDI DIB pixels and a hidden native-window message
+path. Original geometric fixtures/captures test our adapter; owner visible review
+and historical equivalence remain separate evidence classes.
 
 ## Evidence classes
 

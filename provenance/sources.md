@@ -5,6 +5,36 @@ eligibility applies to the stated scope, not every resource reachable from a URL
 No Apple executable, source, disassembly, decompilation, or copied asset was used.
 No reference-system black-box observation has yet been performed.
 
+## SRC-0017 — Owner's next milestone authorization
+
+- Author/date: project owner, 2026-10-07, after the surface handoff.
+- Instruction: proceed with the proposed Windows presentation/original-scene
+  checkpoint, using the established implementation, verification, publication and
+  wiki workflow. Requirement authority only; no historical or boot certification.
+
+## SRC-0018 — Microsoft Win32 presentation interfaces
+
+- Publisher: Microsoft Learn, live public Win32 documentation, accessed 2026-10-07.
+- Sections used: parameters, return values and remarks of
+  [StretchDIBits](https://learn.microsoft.com/en-us/windows/win32/api/wingdi/nf-wingdi-stretchdibits),
+  [BITMAPINFOHEADER](https://learn.microsoft.com/en-us/windows/win32/api/wingdi/ns-wingdi-bitmapinfoheader),
+  [BITMAPINFO](https://learn.microsoft.com/en-us/windows/win32/api/wingdi/ns-wingdi-bitmapinfo),
+  [CreateDIBSection](https://learn.microsoft.com/en-us/windows/win32/api/wingdi/nf-wingdi-createdibsection),
+  [RectVisible](https://learn.microsoft.com/en-us/windows/win32/api/wingdi/nf-wingdi-rectvisible),
+  [IntersectClipRect](https://learn.microsoft.com/en-us/windows/win32/api/wingdi/nf-wingdi-intersectcliprect),
+  [PrintWindow](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-printwindow)
+  and the [painting lifecycle](https://learn.microsoft.com/en-us/windows/win32/learnwin32/painting-the-window).
+- DPI: parameters/returns/remarks of
+  [SetProcessDpiAwarenessContext](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-setprocessdpiawarenesscontext),
+  [AdjustWindowRectExForDpi](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-adjustwindowrectexfordpi),
+  and message semantics of [WM_DPICHANGED](https://learn.microsoft.com/en-us/windows/win32/hidpi/wm-dpichanged).
+- Eligibility: host interface prose and existing pinned Windows header signatures.
+  Independent SPEC-0002/code; no documentation sample implementation, third-party
+  rendering code or artwork incorporated. No Macintosh historical applicability.
+- Limits: Microsoft recommends manifest DPI configuration for production apps.
+  This bounded development viewer uses the documented API before any UI, avoiding
+  new resource tooling. Actual cross-monitor changes/physical colors unverified.
+
 ## SRC-0016 — Owner's first subsystem implementation assignment
 
 - Author/date: project owner, 2026-10-07; instruction retained by the owner.

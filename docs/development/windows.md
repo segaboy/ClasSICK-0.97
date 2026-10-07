@@ -98,6 +98,31 @@ No new tool packages are required. `CLASSICK_SURFACE_SANITIZERS=ON` is the CMake
 option after support validation. Core archive bytes are not reproducible yet:
 COFF object timestamps differ. See [TEST-0004](../../provenance/records/TEST-0004-surfaces.md).
 
+## Run and validate the original surface viewer
+
+After tool setup, choose a fresh output directory:
+
+```powershell
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\scripts\Verify-Presentation.ps1 -BuildRoot C:\ClasSICK\presentation-local -Sanitizers
+Start-Process C:\ClasSICK\presentation-local\debug-a\classick_surface_demo.exe
+```
+
+The wrapper runs ten CTest checks in fresh x64 debug twins, Release, i686 and
+validated x64 ASan/UBSan configurations, plus the existing core compile/import
+audits. It compares both presentation executable hashes and ends with
+`SPEC-0002 verification PASS`. Logs/hashes stay in the chosen output directory.
+CTest uses GDI memory targets and hidden windows; it does not require clicking UI.
+
+For manual review: Space switches color/monochrome; holding Space should switch
+once per press. Resize larger for sharp integer zoom with a dark centered border;
+resize below scene size for centered 1x crop. Minimize/restore and cover/uncover:
+the scene should repaint. Escape or Close exits. At different desktop DPI settings
+pixels remain integer-scaled; actual cross-monitor changes await manual review.
+The two scenes are original geometry, not a reconstructed Macintosh desktop.
+
+This adds presentation only. Windows heap/key handling is demo scaffolding;
+bounded core arenas, normalized events, clocks and debugger workflow remain open.
+
 ## Tools deferred until a concrete need
 
 | Tool/category | Purpose when introduced | Current state |

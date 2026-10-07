@@ -26,6 +26,10 @@ Read `docs/clean-room/POLICY.md`, `CONTRIBUTING.md`, and
   implement, test and publish SPEC-0001 bounded portable graphics surfaces. This
   supersedes the bootstrap-only restriction for that subsystem. Subsequent
   milestones remain separate; surfaces do not complete M0.1 or any boot edition.
+- The owner then authorized moving on to the Windows presentation adapter and
+  original visible test scene. Finalize SPEC-0002, implement and verify that scoped
+  milestone, and maintain/publish its evidence using the existing project workflow.
+  Arenas, normalized input, clocks and boot work remain subsequent contracts.
 - Use `C:\Repos\ClasSICK-0.97` for source and `C:\ClasSICK` for local build/test
   output on the founding workstation. Do not depend on those paths in core code.
 - Do not create specialist chats or delegate work merely because the roadmap
