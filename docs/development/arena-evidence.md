@@ -5,7 +5,11 @@ Executed code/test/build inputs are frozen at
 `360c79d216b4262ff61310b35c72852603176777`. The local matrix used identical
 implementation, tests, scripts and build definitions before that commit.
 Subsequent source-pointer/CI text updates do not change those inputs.
-Remote CI has not yet been observed for this milestone.
+Remote [Windows CI run 37699177939 passed](https://github.com/segaboy/ClasSICK-0.97/actions/runs/37699177939)
+at evidence revision `09907fb471484d2feafaea3fad269a53a5af748b`. The guard,
+pinned setup, bootstrap twins, full five-configuration matrix, sanitizer detection
+controls and ARM64 endian import checks pass. CI artifact hashes below match local
+fresh-twin hashes. No implementation or build inputs changed after 360c79d.
 
 Local invocation: Verify-Arenas.ps1 -BuildRoot <fresh-output-directory> -Sanitizers.
 Five configurations pass 16/16 CTest checks each; x64 detection controls and ARM64

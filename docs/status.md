@@ -26,7 +26,9 @@ does not imply that the complete project foundation or any OS boot is finished.
 - Fresh arena-test and updated viewer executable hashes match; unchanged surface
   and presentation-test hashes still match the preceding verified milestone.
 - [Arena test/provenance results](../provenance/records/TEST-0006-arenas.md) and
-  [immutable arena evidence](development/arena-evidence.md). Remote CI pending.
+  [immutable arena evidence](development/arena-evidence.md).
+- [Arena Windows CI passed](https://github.com/segaboy/ClasSICK-0.97/actions/runs/37699177939)
+  at evidence source 09907fb; complete matrix and all four local/remote hashes match.
 
 - Windows color/mono viewer: explicit BGRX conversion, integer scaling/crop,
   clipping and resize/DPI handling. A visible preview was launched and inspected

@@ -42,6 +42,12 @@ not modify or rerun implementation. Remote CI is recorded only after completion.
 
 ## Limits
 
+[Windows CI run 37699177939 passed](https://github.com/segaboy/ClasSICK-0.97/actions/runs/37699177939)
+at `09907fb471484d2feafaea3fad269a53a5af748b`: guard/setup, bootstrap twins and
+all five matrix configurations pass sixteen checks each; sanitizer controls and
+both ARM64 endian audits pass. All four recorded executable hashes match local.
+
+
 Live truthful max-aligned backing, non-aliasing descriptors/outputs/pools and caller
 synchronization/lifetime are preconditions. No individual free/rewind, stale-span
 detector, secure erasure, hostile isolation, over-aligned/page allocator or general
