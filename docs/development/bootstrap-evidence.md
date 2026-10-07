@@ -65,7 +65,17 @@ the source checkout. Extracted debug strings contained `./build/.../a` versus
 `./build/.../b`: the broad source prefix map took priority over the narrower build
 map. Reversing the option order removed those build-specific paths. Two fresh
 builds with the nested CI layout then matched the same licensed executable hash
-as the external-output layout. The corrected remote run is being verified.
+as the external-output layout.
+
+The [corrected remote run passed](https://github.com/segaboy/ClasSICK-0.97/actions/runs/37670548073)
+on the Windows hosted runner for commit
+`95adfa72b0fd4d0890a9fab73712e5bbb5254b0e`. Its pinned tool preparation, 80-file
+repository guard, two fresh native builds, CTest and matching executable hashes
+all passed. The actual run log reports executable SHA-256
+`af1f537373b43aceaccabbba553d3887b8900ea2b0049daf87f38a7db0871802`,
+matching the licensed local builds. Later
+evidence-only documentation edits are checked locally and do not alter those
+tested source/build/toolchain files.
 No OS boot or Macintosh compatibility has been achieved. Interactive debugging,
 sanitizers, alternate compilers and m68k/ARM64 execution remain future gates.
 

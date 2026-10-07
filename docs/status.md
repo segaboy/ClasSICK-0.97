@@ -1,7 +1,7 @@
 # Project status
 
-Date: 2026-10-07. Current phase: **M0.0 technical bootstrap complete**;
-GPL-3.0-or-later approved; remote CI validation in progress. No OS subsystem implemented.
+Date: 2026-10-07. Current phase: **M0.0 bootstrap complete**.
+GPL-3.0-or-later approved; local and remote verification passed. No OS subsystem implemented.
 
 ## Achieved
 
@@ -18,13 +18,16 @@ GPL-3.0-or-later approved; remote CI validation in progress. No OS subsystem imp
 - Fresh local-clone/offline-setup replay passed, producing two further matching
   native probe builds. Source/index/links/JSON/payload guard passed, including a
   simulated forbidden-extension rejection check.
+- Licensed-source builds passed both outside and inside the source checkout with
+  matching hashes after correcting debug prefix-map precedence.
+- [Windows CI passed](https://github.com/segaboy/ClasSICK-0.97/actions/runs/37670548073)
+  for source revision `95adfa72b0fd4d0890a9fab73712e5bbb5254b0e`: pinned setup,
+  80-file repository audit, two fresh native builds, CTest and matching hashes.
 
 ## Pending decisions and future work
 
 - External code/assets and releases still require provenance and third-party
   license review under the approved project license.
-- Reviewed Windows CI workflow permission is authorized; first-run verification
-  is in progress. No remote CI pass is claimed until the run completes.
 - Exact historical profile and 1984-applicable behavioral sources.
 - Macintosh 128K native feasibility, hardware startup and size budgets.
 - Debugger/sanitizer workflow, cross compilers, alternate native targets and boot.
