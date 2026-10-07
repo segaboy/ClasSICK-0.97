@@ -14,8 +14,9 @@ add_executable(classick_toolchain_smoke tools/toolchain-smoke/main.c)
 if(CMAKE_C_COMPILER_ID MATCHES "Clang|GNU")
     foreach(target classick_abi_probe classick_toolchain_smoke)
         target_compile_options(${target} PRIVATE -Wall -Wextra -Wpedantic -Werror
-            "-ffile-prefix-map=${CMAKE_BINARY_DIR}=."
-            "-ffile-prefix-map=${CMAKE_SOURCE_DIR}=.")
+            "-ffile-prefix-map=${CMAKE_SOURCE_DIR}=."
+            # Last matching mapping wins: preserve the narrower nested build map.
+            "-ffile-prefix-map=${CMAKE_BINARY_DIR}=.")
     endforeach()
     target_compile_options(classick_abi_probe PRIVATE -ffreestanding)
 elseif(MSVC)

@@ -58,7 +58,14 @@ the provider's device flow, allowing the reviewed Windows workflow to be publish
 separately. It uses an official checkout action pinned to a verified commit,
 read-only repository permission, and the same package lock/scripts as local tests.
 
-The first remote CI run is being verified; its actual result will be recorded here.
+The initial [remote CI run](https://github.com/segaboy/ClasSICK-0.97/actions/runs/37669248823)
+compiled and ran both probes successfully but rejected different executable hashes.
+The difference was reproduced locally when output directories were nested inside
+the source checkout. Extracted debug strings contained `./build/.../a` versus
+`./build/.../b`: the broad source prefix map took priority over the narrower build
+map. Reversing the option order removed those build-specific paths. Two fresh
+builds with the nested CI layout then matched the same licensed executable hash
+as the external-output layout. The corrected remote run is being verified.
 No OS boot or Macintosh compatibility has been achieved. Interactive debugging,
 sanitizers, alternate compilers and m68k/ARM64 execution remain future gates.
 
