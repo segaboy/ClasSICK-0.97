@@ -1,0 +1,57 @@
+# Private reference systems belong OUTSIDE this checkout, including ignored files.
+/reference/
+/private/
+/quarantine/
+/local/
+# Downloaded tools and generated output
+/.tools/
+/.downloads/
+/build/
+/out/
+/artifacts/
+CMakeUserPresets.json
+CMakeCache.txt
+CMakeFiles/
+Testing/
+compile_commands.json
+# Executable, disk, firmware, and archive payloads are never bootstrap inputs
+*.rom
+*.ROM
+*.img
+*.IMG
+*.dsk
+*.DSK
+*.iso
+*.hfv
+*.bin
+*.exe
+*.dll
+*.o
+*.obj
+*.a
+*.lib
+*.pdb
+*.elf
+*.efi
+*.zip
+*.7z
+*.tar
+*.gz
+# Secrets and workstation state
+.env
+.env.*
+*.pem
+*.key
+*.pfx
+*.p12
+id_rsa*
+id_ed25519*
+credentials*
+secrets*
+.vs/
+.idea/
+*.user
+*.suo
+*.log
+Thumbs.db
+.DS_Store
