@@ -5,6 +5,29 @@ eligibility applies to the stated scope, not every resource reachable from a URL
 No Apple executable, source, disassembly, decompilation, or copied asset was used.
 No reference-system black-box observation has yet been performed.
 
+## SRC-0019 — Owner's boot-goal reaffirmation and continuation
+
+- Author/date: project owner, 2026-10-07, in the implementation chat.
+- Requirement: retain the clean-room, independently implemented 0.97 goal,
+  bootable on a real Macintosh or mini vMac; then continue the project.
+- Scope: next roadmap contract SPEC-0003 arenas and viewer integration, with the
+  established verification/provenance/publication/wiki workflow. mini vMac is an
+  intended validation path; existing physical-hardware edition gates remain.
+- No emulator/firmware dependency, historical identity or completed boot approved
+  by this requirement. Inputs remain behavioral contracts, never Apple code.
+
+## SRC-0020 — WG14 C11 committee draft interface semantics
+
+- Publisher: ISO/IEC JTC1/SC22/WG14, N1570, 2011-04-12; accessed 2026-10-07.
+- [Committee draft](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n1570.pdf),
+  sections 6.2.8 (alignment), 6.5 paragraphs 6–7 (effective type),
+  6.5.6 (bounded pointer arithmetic), 7.19 (max_align_t) and 7.22.3
+  (host allocation alignment/lifetime).
+- Eligibility: published language/interface prose only. Independently designed
+  monotonic arena and tests; no sample implementation copied or adopted.
+- No historical Macintosh applicability, allocator algorithm source, runtime
+  dependency or general compiler certification. Host heap use stays in the adapter.
+
 ## SRC-0017 — Owner's next milestone authorization
 
 - Author/date: project owner, 2026-10-07, after the surface handoff.

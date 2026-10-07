@@ -12,3 +12,11 @@ sanitizer validation, never as a normal conformance test. Bootstrap CTest still
 runs the development probe from `tools/toolchain-smoke/`.
 See [results](../provenance/records/TEST-0004-surfaces.md).
 See [test strategy](../docs/testing/methodology.md).
+
+`arenas.c` is TEST-0006: literal aligned layouts, stable errors/transactional
+rejection, reset/reuse, independent ownership and an offset-scanning oracle.
+The tested x64/i686 alignment limit is 16, producing 751,740 whole-buffer matrix
+cases per execution. Typed native allocation is exercised over host-allocated
+storage only. `arenas.freestanding` audits the optimized core object, while
+`arenas.viewer-memory` exercises the real viewer with a one-byte-short pool.
+The ordinary hidden-window test also checks exact successful buffer reservations.

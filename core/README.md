@@ -1,7 +1,8 @@
 # Portable OS core
 
 Independently implemented freestanding core code. Bounded graphics surfaces are
-implemented and headless-tested under SPEC-0001. Planned modules: memory arenas,
+implemented and headless-tested under SPEC-0001. `memory/` now supplies bounded
+caller-owned arenas under SPEC-0003, including viewer integration. Planned modules:
 filesystem/VFS, events, generic devices, timers and executable loading.
 
 No Win32/UEFI/Macintosh headers, guest ABI assumptions, direct hardware registers,

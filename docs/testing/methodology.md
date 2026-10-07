@@ -1,11 +1,16 @@
 # Testing and compatibility methodology
 
-Status: tests exercise SPEC-0001 and SPEC-0002 Windows presentation alongside tooling and
+Status: tests exercise SPEC-0001, SPEC-0002 Windows presentation and SPEC-0003 arenas alongside tooling and
 repository controls. No historical System 1 behavior has been observed or validated.
 
 Presentation tests inspect real GDI DIB pixels and a hidden native-window message
 path. Original geometric fixtures/captures test our adapter; owner visible review
 and historical equivalence remain separate evidence classes.
+
+Arenas add four independent byte/state suites and a freestanding object audit.
+The matrix scans candidate offsets rather than using the core rounding formula,
+covering 751,740 whole-buffer cases with the tested max alignment of 16. Viewer
+tests verify exact buffer reservations and clean failure with a one-byte-short pool.
 
 ## Evidence classes
 

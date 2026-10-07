@@ -27,6 +27,13 @@ the GitHub slug is `ClasSICK-0.97`.
 
 ## Scope and success
 
+The owner reaffirmed the clean-room Macintosh boot goal on 2026-10-07 and named
+mini vMac as an intended validation path (SRC-0019). Our native Mac OS/replacement
+firmware image must be tested in the selected emulator and on declared original
+hardware. Emulator version/configuration, startup assumptions and independent
+firmware support require review; no emulator boot or tool adoption is claimed.
+This adds a validation path, not a fourth edition or replacement for physical gates.
+
 Bootstrap succeeds when the public repository contains binding safeguards,
 architecture/ADRs, source catalog, target/toolchain strategy, measurable milestone
 gates, an honest environment inventory, and verified repeatable build probes.

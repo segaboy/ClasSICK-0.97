@@ -1,18 +1,57 @@
 /* SPDX-License-Identifier: GPL-3.0-or-later */
 /* Copyright (C) 2026 Dean Howell. */
 #include "presenter.h"
+#include "arena.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
 enum { FRAME_WIDTH = 513, FRAME_HEIGHT = 321 };
 typedef struct {
+    cs_arena arena;
+    void *backing;
     cs_surface surfaces[2];
     uint8_t *storage[2], *scratch;
     size_t scratch_size;
     unsigned active, paints;
     int failed, destroyed;
 } demo_state;
+
+static size_t scene_stride(unsigned scene)
+{
+    return scene == 0 ? (size_t)FRAME_WIDTH * 4u + 8u
+        : ((size_t)FRAME_WIDTH + 7u) / 8u + 5u;
+}
+
+static size_t buffer_budget(void)
+{
+    /* Fixed original demo geometry: this is not a Macintosh RAM budget. */
+    return (scene_stride(0) + scene_stride(1) + (size_t)FRAME_WIDTH * 4u)
+        * FRAME_HEIGHT;
+}
+
+static int init_buffers(demo_state *state, size_t capacity)
+{
+    cs_arena_span span;
+    state->backing = malloc(capacity);
+    if (state->backing == NULL || cs_arena_init(&state->arena, state->backing,
+            capacity) != CS_ARENA_OK) return 0;
+    for (unsigned i = 0; i < 2; ++i) {
+        size_t stride = scene_stride(i), size = stride * FRAME_HEIGHT;
+        if (cs_arena_alloc(&state->arena, size, 1, &span) != CS_ARENA_OK) return 0;
+        state->storage[i] = span.data;
+        memset(span.data, 0, span.size);
+        if (cs_surface_init(&state->surfaces[i], span.data, span.size,
+                FRAME_WIDTH, FRAME_HEIGHT, stride,
+                i == 0 ? CS_SURFACE_RGBA8 : CS_SURFACE_MONO1_MSB) != CS_SURFACE_OK)
+            return 0;
+    }
+    state->scratch_size = (size_t)FRAME_WIDTH * FRAME_HEIGHT * 4u;
+    if (cs_arena_alloc(&state->arena, state->scratch_size, 1, &span) != CS_ARENA_OK)
+        return 0;
+    state->scratch = span.data;
+    return 1;
+}
 
 static int fill(cs_surface *surface, cs_rect rect, uint32_t color)
 {
@@ -175,24 +214,22 @@ int WINAPI WinMain(HINSTANCE instance, HINSTANCE previous, LPSTR command, int sh
     demo_state state = {0};
     int result = 1, registered = 0;
     int verify = strcmp(command, "--verify") == 0;
+    int verify_memory = strcmp(command, "--verify-memory") == 0;
     (void)previous;
-    if (command[0] != '\0' && !verify) return 2;
+    if (command[0] != '\0' && !verify && !verify_memory) return 2;
+    if (verify_memory) {
+        /* Independent literal lengths for the fixed color/mono/scratch scene. */
+        if (buffer_budget() != 1342422u || init_buffers(&state, 1342421u)
+                || state.backing == NULL || state.arena.used != 683730u
+                || state.scratch != NULL) goto cleanup;
+        puts("SPEC-0003 viewer undersized backing pool: PASS");
+        result = 0;
+        goto cleanup;
+    }
     /* Set before any UI: keep frame pixels sharp at non-integer desktop scaling. */
     if (!SetProcessDpiAwarenessContext(DPI_AWARENESS_CONTEXT_PER_MONITOR_AWARE_V2))
         goto cleanup;
-    state.scratch_size = (size_t)FRAME_WIDTH * FRAME_HEIGHT * 4u;
-    state.scratch = malloc(state.scratch_size);
-    for (unsigned i = 0; i < 2; ++i) {
-        size_t stride = i == 0 ? (size_t)FRAME_WIDTH * 4u + 8u
-            : ((size_t)FRAME_WIDTH + 7u) / 8u + 5u;
-        size_t size = stride * FRAME_HEIGHT;
-        state.storage[i] = calloc(size, 1);
-        if (state.storage[i] == NULL || cs_surface_init(&state.surfaces[i],
-                state.storage[i], size, FRAME_WIDTH, FRAME_HEIGHT, stride,
-                i == 0 ? CS_SURFACE_RGBA8 : CS_SURFACE_MONO1_MSB) != CS_SURFACE_OK)
-            goto cleanup;
-    }
-    if (state.scratch == NULL || !scenes(&state)) goto cleanup;
+    if (!init_buffers(&state, buffer_budget()) || !scenes(&state)) goto cleanup;
     klass.lpfnWndProc = window_proc; klass.hInstance = instance;
     klass.hCursor = LoadCursorW(NULL, MAKEINTRESOURCEW(32512));
     if (klass.hCursor == NULL) goto cleanup;
@@ -208,6 +245,10 @@ int WINAPI WinMain(HINSTANCE instance, HINSTANCE previous, LPSTR command, int sh
     if (window == NULL || !resize_client(window, verify ? 1 : 2)) goto cleanup;
     title(window, 0);
     if (verify) {
+        if (state.arena.capacity != 1342422u || state.arena.used != 1342422u
+                || state.storage[0] != state.arena.storage
+                || state.storage[1] != state.arena.storage + 661260u
+                || state.scratch != state.arena.storage + 683730u) goto cleanup;
         if (!verify_print(window, &state, 1)) goto cleanup;
         if (GetAwarenessFromDpiAwarenessContext(GetThreadDpiAwarenessContext())
                     != DPI_AWARENESS_PER_MONITOR_AWARE
@@ -235,7 +276,9 @@ int WINAPI WinMain(HINSTANCE instance, HINSTANCE previous, LPSTR command, int sh
 cleanup:
     if (window != NULL && IsWindow(window)) DestroyWindow(window);
     if (registered) UnregisterClassW(klass.lpszClassName, instance);
-    free(state.storage[0]); free(state.storage[1]); free(state.scratch);
+    /* Window callbacks have ended; every span is retired before pool release. */
+    (void)cs_arena_reset(&state.arena);
+    free(state.backing);
     if (result != 0) fputs("ClasSICK 0.97 viewer failed; see SPEC-0002.\n", stderr);
     return result;
 }

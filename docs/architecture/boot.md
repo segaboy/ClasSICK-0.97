@@ -76,6 +76,11 @@ hardware/VM and RAM/ROM map. Demonstrate cold-start behavior and guest trap entr
 with an independently authored probe. If an emulator requires an Apple ROM to
 initialize the machine, it cannot establish this gate.
 
+The owner named mini vMac for Mac-image validation (SRC-0019). Select and review
+its exact version/configuration and independent-firmware startup path before use.
+Run our own ROM/startup and OS image, retain repeatable cold-start evidence, then
+validate declared physical Macintosh hardware separately. Neither step is achieved.
+
 No Apple ROM dump or disassembly is a design input. Published hardware evidence,
 independent device experiments, and measured link maps establish the startup and
 budget design. Macintosh native boot does not by itself prove System 1 API or

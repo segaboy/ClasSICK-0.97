@@ -26,6 +26,6 @@ jobs:
       - name: Verify two fresh hosted builds
         shell: powershell
         run: .\scripts\Verify-Bootstrap.ps1
-      - name: Verify surfaces, Windows presentation, freestanding boundaries and sanitizers
+      - name: Verify surfaces, arenas, Windows presentation, freestanding boundaries and sanitizers
         shell: powershell
-        run: .\scripts\Verify-Presentation.ps1 -BuildRoot build\presentation-verification -Sanitizers
+        run: .\scripts\Verify-Arenas.ps1 -BuildRoot build\core-verification -Sanitizers

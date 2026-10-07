@@ -10,6 +10,9 @@ out of public commits.
 - `Verify-Surfaces.ps1 -BuildRoot <fresh-directory> -Sanitizers`: x64 debug twins,
   release, x86 execution, ARM64 endian compile/import checks, validated x64 ASan/UBSan.
 - `Check-Freestanding.cmake`: reject core object undefined symbols/global data.
+- `Verify-Presentation.ps1`: established matrix plus viewer/presentation hash checks.
+- `Verify-Arenas.ps1`: full matrix, arena executable hash and ARM64 endian arena
+  compile/import checks. Sixteen CTest checks per Windows configuration.
 - `Test-Repository.ps1`: audit indexed text/source, required docs, local Markdown
   links, JSON, common credentials and forbidden payload directories/extensions.
 - `toolchain-lock.json`: exact package URLs, digests, versions and purposes.

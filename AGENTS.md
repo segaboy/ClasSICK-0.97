@@ -30,6 +30,11 @@ Read `docs/clean-room/POLICY.md`, `CONTRIBUTING.md`, and
   original visible test scene. Finalize SPEC-0002, implement and verify that scoped
   milestone, and maintain/publish its evidence using the existing project workflow.
   Arenas, normalized input, clocks and boot work remain subsequent contracts.
+- The owner reaffirmed the independent clean-room Mac boot goal (real Macintosh
+  and mini vMac validation), then instructed this chat to continue on 2026-10-07.
+  This authorizes SPEC-0003 bounded core arenas, viewer-buffer integration, tests,
+  provenance and normal progress publication. Input/clock and boot remain later
+  contracts. Emulator validation does not close the physical-hardware edition gate.
 - Use `C:\Repos\ClasSICK-0.97` for source and `C:\ClasSICK` for local build/test
   output on the founding workstation. Do not depend on those paths in core code.
 - Do not create specialist chats or delegate work merely because the roadmap

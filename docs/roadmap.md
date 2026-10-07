@@ -26,8 +26,9 @@ the project license. Record any future license change through owner approval/ADR
 1. Completed the headless [SPEC-0001 bounded surfaces](specifications/SPEC-0001-surfaces.md)
    with caller-supplied storage and original tests; see TEST-0004. M0.1 remains open.
 2. [SPEC-0002 Windows presentation](specifications/SPEC-0002-windows-presentation.md)
-   and original scenes are verified under TEST-0005. Next add bounded arenas,
-   normalized events and a deterministic clock, then exercise the debug workflow
+   and original scenes are verified under TEST-0005. [SPEC-0003 bounded arenas](specifications/SPEC-0003-arenas.md)
+   and viewer-buffer integration now pass TEST-0006. Next add normalized events
+   and a deterministic clock, then exercise the debug workflow
    so B1/M0.1 becomes measurable.
 3. Prove freestanding linkage/runtime ownership and a second compiler/core build.
 4. Prepare/review UEFI VM tooling and device contracts; implement the B2 dependency
@@ -35,6 +36,8 @@ the project license. Record any future license change through owner approval/ADR
 5. In parallel only when explicitly staffed, pursue historical-source eligibility,
    Macintosh hardware budget, resource-fork/MFS specs, and trap ABI contracts.
    Those investigations must not import protected implementation material.
+   The owner named mini vMac for independent Mac firmware/OS image validation;
+   review its startup/configuration before testing and retain a physical Mac gate.
 6. Build compatibility managers from reviewed versioned specifications. Stage
    application translation after memory/trap/loader boundaries are measurable.
 

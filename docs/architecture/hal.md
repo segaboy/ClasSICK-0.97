@@ -16,7 +16,7 @@ memory-mapped register definitions.
 | Service | Contract to specify | Initial validation |
 | --- | --- | --- |
 | Boot context | Versioned memory ranges, reserved areas, framebuffer descriptor, platform capabilities; explicit ownership transfer | Reject invalid overlap/overflow and unsupported pixel formats |
-| Memory | Caller-supplied arenas; allocation alignment, ownership, failure semantics | Tiny arena, fragmentation, exhaustion, integer-overflow tests |
+| Memory | SPEC-0003 caller-supplied monotonic arenas; alignment, ownership and reset | Tiny arena, alignment waste, exhaustion, integer-overflow and lifetime tests; individual free/fragmentation outside v1 |
 | Graphics | Width/height, byte stride, pixel format, length, access mode; present invalidated regions | Unusual stride, 1bpp MSB-first and native-color conversion, clipped writes |
 | Input | Normalized button/key/pointer events with source and monotonic sequence/timestamp | Recorded synthetic traces; queue overflow contract |
 | Clock/timer | Monotonic duration units and wrap/availability contract; deterministic fake clock | No dependency on wall-clock/timezone or exact host scheduler delays |

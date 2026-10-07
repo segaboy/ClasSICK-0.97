@@ -1,11 +1,13 @@
 # Project status
 
-Date: 2026-10-07. Current phase: **surfaces and Windows presentation verified; M0.1 partial**.
+Date: 2026-10-07. Current phase: **surfaces, Windows presentation and bounded arenas verified; M0.1 partial**.
 M0.0 technical bootstrap remains verified. The owner explicitly authorized the
 first bounded graphics subsystem in the project implementation chat on this date.
 SPEC-0001 v1 is finalized, implemented and tested under IMPL-0002 / TEST-0004.
 The owner authorized the next visible checkpoint. SPEC-0002 v1 adds a native
 Windows original-scene viewer under IMPL-0003 / TEST-0005.
+The owner reaffirmed real Macintosh/mini vMac booting and instructed continuation.
+SPEC-0003 v1 adds bounded core arenas and viewer buffers under IMPL-0004 / TEST-0006.
 GPL-3.0-or-later remains approved. No OS boot or historical compatibility verified.
 
 The owner's broader project bootstrap continues in a separate headquarters
@@ -13,6 +15,18 @@ documentation/evidence repository and personal project wiki. This technical gate
 does not imply that the complete project foundation or any OS boot is finished.
 
 ## Achieved
+
+- Bounded caller-owned native arenas: alignment, checked arithmetic, stable errors,
+  exhaustion and all-span reset without heap calls or backing writes in the core.
+- Viewer color/mono/scratch buffers now share one host-owned pool reserved by the
+  core arena. Exact layout and a one-byte-short pool failure are checked.
+- Sixteen CTest checks pass in fresh x64 Debug twins, Release, actual i686 and
+  validated x64 ASan/UBSan. Arena matrix: 751,740 whole-buffer cases per execution.
+  ARM64 little/big-endian arena compile/import checks pass; no execution claim.
+- Fresh arena-test and updated viewer executable hashes match; unchanged surface
+  and presentation-test hashes still match the preceding verified milestone.
+- [Arena test/provenance results](../provenance/records/TEST-0006-arenas.md) and
+  [immutable arena evidence](development/arena-evidence.md). Remote CI pending.
 
 - Windows color/mono viewer: explicit BGRX conversion, integer scaling/crop,
   clipping and resize/DPI handling. A visible preview was launched and inspected
@@ -70,12 +84,15 @@ does not imply that the complete project foundation or any OS boot is finished.
 - Exact historical profile and 1984-applicable behavioral sources.
 - Macintosh 128K native feasibility, hardware startup and size budgets.
 - Interactive debugger, other sanitizer targets, m68k toolchain/runtime and boot.
-- Next: bounded arenas, normalized events and a deterministic clock, then the
+- Next: normalized events and a deterministic clock, then the
   remaining B1/M0.1 checks and interactive debugger workflow. The viewer alone
   does not complete the hosted-core gate.
 - Three bootable editions remain separately not-started: original Macintosh,
   native PC without Linux, Linux PC. Historical identity/QuickDraw and edition
   parity remain unverified; no Linux divergence has been introduced.
+- mini vMac is an owner-requested Mac-image validation path, with our replacement
+  firmware. Exact emulator/configuration/startup support still requires review;
+  emulator testing does not replace the required original-hardware result.
 
 See [evidence](development/bootstrap-evidence.md) for exact verified claims and
 [compatibility status](compatibility/README.md) for the presently unimplemented APIs.

@@ -1,8 +1,9 @@
 # Windows hosted development
 
 Status: first execution platform; SPEC-0001 headless conformance verified on x64/x86.
-SPEC-0002 adds presentation and an original color/mono viewer. Arenas, normalized
-events and clock remain planned; B1 has not been met.
+SPEC-0002 adds presentation and an original color/mono viewer. Normalized
+events and clock remain planned; B1 has not been met. SPEC-0003 now supplies
+bounded arenas for the viewer's buffers, verified independently by TEST-0006.
 
 Use a normal native Windows process linked to the same core library planned for
 bare-metal builds. The hosted adapter supplies memory arenas, Win32 window/input,
@@ -10,8 +11,8 @@ surface presentation, monotonic clock, local file/block devices, and logs. Begin
 without SDL, a GUI toolkit, WSL, Docker, or an emulator dependency.
 
 Current viewer: [SPEC-0002](../specifications/SPEC-0002-windows-presentation.md).
-platform/windows owns host conversion/GDI; apps/surface-demo owns Windows heap,
-window and native key scaffolding. Core source is unchanged. See
+platform/windows owns host conversion/GDI; apps/surface-demo owns one host heap
+region, supplies it to the core arena, and owns window/native key scaffolding. See
 [viewer instructions](../development/windows.md) for Space, resize and Close.
 
 A Win32 window is a presentation adapter. Core graphics write an abstract surface;
