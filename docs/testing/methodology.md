@@ -52,7 +52,7 @@ checks supplement runtime tests; they cannot replace m68k/ARM64 execution eviden
 
 ## Continuous integration
 
-The prepared bootstrap CI workflow targets Windows with the same pinned setup, source guard, fresh build,
+Bootstrap CI runs on Windows with the same pinned setup, source guard, fresh build,
 and CTest probes; it never fetches a reference system. Use read-only repository
 permissions and no untrusted PR secrets or `pull_request_target` execution. Future
 jobs add core contracts, alternate compilers, sanitizers, safe fuzzing, architecture

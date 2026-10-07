@@ -1,7 +1,7 @@
 # Project status
 
 Date: 2026-10-07. Current phase: **M0.0 technical bootstrap complete**;
-license decision and GitHub workflow permission pending. No OS subsystem implemented.
+license decision pending; remote CI validation in progress. No OS subsystem implemented.
 
 ## Achieved
 
@@ -20,8 +20,8 @@ license decision and GitHub workflow permission pending. No OS subsystem impleme
 ## Pending decisions and future work
 
 - Owner's license choice; external code/asset acceptance and releases remain gated.
-- Reviewed Windows CI workflow awaits GitHub `workflow` authorization. The CLI
-  rejected publishing that file with its current scope; no remote CI pass claimed.
+- Reviewed Windows CI workflow permission is authorized; first-run verification
+  is in progress. No remote CI pass is claimed until the run completes.
 - Exact historical profile and 1984-applicable behavioral sources.
 - Macintosh 128K native feasibility, hardware startup and size budgets.
 - Debugger/sanitizer workflow, cross compilers, alternate native targets and boot.

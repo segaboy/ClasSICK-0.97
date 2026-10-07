@@ -50,15 +50,14 @@ PowerShell re-extracted the tools, passed the repository guard, and built/tested
 twice under a second source path. Both executables matched the same SHA-256 above.
 This produced **four passing native probe builds** across two source checkouts.
 
-## Publication and CI permission
+## Public publication and CI
 
-GitHub accepted the founding safeguards. Publishing the complete bootstrap with
-the CI workflow was rejected because the current GitHub CLI OAuth login lacked
-`workflow` scope. The reviewed workflow is preserved as a local draft and in the
-local `bootstrap-ci-draft` branch. Documentation, source probes and build scripts
-can be published with existing repository permission. Workflow access was requested
-through GitHub's device authorization; provider approval remains pending.
+The completed documentation and build scripts were published as `a7f028f` after
+the founding safeguards. GitHub workflow scope was subsequently authorized through
+the provider's device flow, allowing the reviewed Windows workflow to be published
+separately. It uses an official checkout action pinned to a verified commit,
+read-only repository permission, and the same package lock/scripts as local tests.
 
-GitHub CI is **prepared but not yet published/executed**. No remote CI pass is
-claimed. No OS boot or Macintosh compatibility has been achieved. Interactive
-debugging, sanitizers, alternate compilers and m68k/ARM64 execution remain future gates.
+The first remote CI run is being verified; its actual result will be recorded here.
+No OS boot or Macintosh compatibility has been achieved. Interactive debugging,
+sanitizers, alternate compilers and m68k/ARM64 execution remain future gates.

@@ -1,0 +1,28 @@
+name: Bootstrap
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  windows-bootstrap:
+    runs-on: windows-2025
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Audit public source and documentation
+        shell: powershell
+        run: .\scripts\Test-Repository.ps1
+      - name: Prepare pinned portable tools
+        shell: powershell
+        run: .\scripts\Setup-Windows.ps1
+      - name: Verify two fresh hosted builds
+        shell: powershell
+        run: .\scripts\Verify-Bootstrap.ps1
