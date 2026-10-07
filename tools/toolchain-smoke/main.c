@@ -1,3 +1,5 @@
+/* SPDX-License-Identifier: GPL-3.0-or-later */
+/* Copyright (C) 2026 Dean Howell. */
 /* IMPL-0001: independently authored bootstrap probe; no Macintosh behavior. */
 #include <stdio.h>
 

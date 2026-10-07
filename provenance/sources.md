@@ -73,19 +73,25 @@ No reference-system black-box observation has yet been performed.
   oracle**. Establish edition/date and exact sections before any derived spec.
 - Limits: no QuickDraw behavioral implementation or historical fact is based on it.
 
-## License/reference-policy sources — no license selected
+## License/reference-policy sources
 
 | ID | Publisher and exact source | Sections / purpose |
 | --- | --- | --- |
 | SRC-0008 | [Apache Software Foundation, Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0) | Patent grant/termination and distribution conditions; decision comparison only |
 | SRC-0009 | [Open Source Initiative, BSD-2-Clause](https://opensource.org/license/bsd-2-clause) | Permissive terms and retained notices; decision comparison only |
-| SRC-0010 | [Free Software Foundation, GPL v3](https://www.gnu.org/licenses/gpl-3.0.html) | Corresponding Source, distribution, patents and installation obligations; comparison only |
+| SRC-0010 | [Free Software Foundation, GPL v3](https://www.gnu.org/licenses/gpl-3.0.html) | Corresponding Source, distribution, patents and installation obligations; selected after owner approval |
 | SRC-0011 | [Mozilla, MPL 2.0](https://www.mozilla.org/MPL/2.0/) | Covered files, distribution and patent terms; comparison only |
 | SRC-0012 | [GitHub, Licensing a repository](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/licensing-a-repository) | Public visibility, absent-license rights and GitHub view/fork exception |
 | SRC-0015 | [Open Source Initiative, MIT](https://opensource.org/license/mit) | Permissive use and notice retention; comparison only |
 
-These published license texts/guidance inform the owner's decision. They are linked,
-not installed as project license terms. No compatibility inference follows from them.
+The owner approved GPL-3.0-or-later on 2026-10-07. The standard GPL v3 text in
+`LICENSE` was retrieved verbatim from the [FSF publisher](https://www.gnu.org/licenses/gpl-3.0.txt)
+after that approval. Download SHA-256:
+`3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986`.
+The project's version-3-or-later grant is stated explicitly in README/COPYRIGHT.md
+and source SPDX notices; the standard license text itself is not modified. Other
+listed license texts are alternatives, not adopted terms. No compatibility inference
+follows from any license.
 
 ## SRC-0013 — GitHub Actions security guidance
 

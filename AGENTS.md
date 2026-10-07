@@ -17,9 +17,10 @@ Read `docs/clean-room/POLICY.md`, `CONTRIBUTING.md`, and
   needs provenance, tests, and an explicit compatibility status.
 - Use only independently generated, rights-cleared public fixtures. Private
   reference materials belong outside the repository and ordinary CI.
-- License selection belongs to the project owner. Do not add a license without
-  their explicit approval. External implementation contributions are deferred
-  while licensing remains undecided.
+- The owner approved GPL-3.0-or-later on 2026-10-07 for project-owned code,
+  documentation and assets. Preserve that license and inbound-equals-outbound
+  contribution terms; changes require explicit owner approval. Third-party inputs
+  still need separate license/provenance review.
 - The founding assignment is documentation, policy, tooling, and build probes.
   It does not authorize OS subsystem implementation.
 - Use `C:\Repos\ClasSICK-0.97` for source and `C:\ClasSICK` for local build/test

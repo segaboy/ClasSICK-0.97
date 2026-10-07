@@ -1,8 +1,12 @@
+# SPDX-License-Identifier: GPL-3.0-or-later
+# Copyright (C) 2026 Dean Howell.
 # Requires only Windows PowerShell 5.1+ and .NET supplied with Windows 11.
 [CmdletBinding()]
 param([switch]$Offline)
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
+# Windows PowerShell 5.1 progress rendering can dominate large archive downloads.
+$ProgressPreference = 'SilentlyContinue'
 if ([Environment]::OSVersion.Platform -ne [PlatformID]::Win32NT -or
     [Environment]::GetEnvironmentVariable('PROCESSOR_ARCHITECTURE') -ne 'AMD64') {
     throw 'This pinned bootstrap supports x64 Windows only.'
@@ -35,7 +39,7 @@ foreach ($tool in $lock.tools) {
         if ($Offline) { throw "Offline cache missing: $($tool.archive)" }
         Write-Output "Downloading $($tool.id): $($tool.purpose)"
         $partial = "$archive.partial"
-        Invoke-WebRequest -UseBasicParsing -Uri $tool.url -OutFile $partial
+        Invoke-WebRequest -UseBasicParsing -Uri $tool.url -OutFile $partial -TimeoutSec 300
         if ((Get-FileHash -LiteralPath $partial -Algorithm SHA256).Hash.ToLowerInvariant() -ne $tool.sha256) {
             throw "SHA-256 mismatch for $($tool.archive); nothing extracted."
         }

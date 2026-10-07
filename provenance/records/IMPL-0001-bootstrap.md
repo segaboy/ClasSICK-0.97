@@ -24,8 +24,9 @@
 - Review: Project HQ self-review for scope, policy, links, source boundaries and
   actual build results. No separate human or independently staffed-team review
   is claimed. Owner can inspect the public commit/diff before subsequent work.
-- License: owner decision pending; no project license selected. Upstream tools
-  retain their own notices. No probe binary is committed or released publicly.
+- License: GPL-3.0-or-later, explicitly approved by the owner on 2026-10-07 after
+  the comparison was prepared. Scope: our code, documentation and assets. Upstream
+  tools retain their own notices. No probe binary is committed or released publicly.
 - Evidence/limitations: [bootstrap verification](../../docs/development/bootstrap-evidence.md).
   No historical compatibility, debugger/sanitizer, native boot, m68k or ARM64
   execution claim follows from bootstrap.

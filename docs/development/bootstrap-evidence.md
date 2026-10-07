@@ -61,3 +61,19 @@ read-only repository permission, and the same package lock/scripts as local test
 The first remote CI run is being verified; its actual result will be recorded here.
 No OS boot or Macintosh compatibility has been achieved. Interactive debugging,
 sanitizers, alternate compilers and m68k/ARM64 execution remain future gates.
+
+## Owner-approved license
+
+The owner explicitly selected GPL-3.0-or-later on 2026-10-07 after reviewing the
+decision comparison. The standard GPL v3 document was obtained from its FSF
+publisher and left verbatim; README/COPYRIGHT.md and source SPDX notices state
+version 3 or later. Adding source notices changes debug metadata, so the original
+probe hash above remains evidence for the pre-notice bootstrap source; the licensed
+revision's fresh-build result is recorded separately below.
+
+After adding the notices, two further fresh Debug builds each passed CTest 1/1 and
+produced identical executable SHA-256:
+`af1f537373b43aceaccabbba553d3887b8900ea2b0049daf87f38a7db0871802`.
+The source guard additionally requires LICENSE and COPYRIGHT.md after approval.
+Windows PowerShell download progress is suppressed and each download has a
+300-second request timeout; this keeps large CI downloads practical and bounded.

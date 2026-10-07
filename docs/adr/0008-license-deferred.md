@@ -1,33 +1,38 @@
-# ADR-0008 — License selection reserved to the owner
+# ADR-0008 — Owner-approved GPL-3.0-or-later licensing
 
 - Date: 2026-10-07
-- Status: pending owner decision
+- Status: accepted after explicit owner approval on 2026-10-07
 - Sources: SRC-0001, SRC-0008 through SRC-0012, SRC-0015
 
 ## Context
 
-The owner expressly prohibited arbitrary license selection. The repository is
-public, but no general open-source grant follows from visibility alone.
+The owner prohibited arbitrary license selection. The comparison was prepared
+before any license was adopted. The owner then explicitly chose GPL-3.0-or-later
+for ClasSICK 0.97's own code, documentation and assets.
 
 ## Decision
 
-Commit a comparison and explicit pending status, not a license. Defer external
-implementation/asset merging until inbound/outbound terms are approved. The
-owner-authorized founding documentation and tooling probes can be published.
+Adopt the standard GNU GPL version 3 text with an explicit version-3-or-later
+grant for project-owned material. Use matching inbound-equals-outbound contribution
+terms; require accurate authorship and sufficient rights. Do not require copyright
+assignment or a separate CLA. Third-party tools retain their own terms, and any
+distributed runtime/dependency needs separate license/provenance review.
 
 ## Alternatives
 
 BSD/MIT are minimal permissive options; Apache adds explicit patent terms; MPL
 uses file-level reciprocity; GPL requires stronger reciprocal distribution terms.
-The owner chooses after reviewing the implications and license scope.
+The owner chose stronger reciprocal distribution terms after reviewing scope.
 
 ## Consequences and verification
 
-Do not label the project open source while undecided. No license file or standard
-SPDX license notice may be adopted without approval. Tool notices are separate;
-future distributed helper/runtime dependencies need their own audit.
+The project can now be described as GPL-3.0-or-later open-source work. The license
+does not supply Apple permissions or cure prohibited derivation. Record standard
+SPDX notices for our C/script sources and scope in COPYRIGHT.md. Review dependencies
+before incorporating or distributing them; compilation tooling alone is separate.
 
 ## Review conditions
 
-After explicit owner approval record exact license/version and scope, add standard
-text/accurate notices, update policy/README/ADR, and establish inbound terms.
+Any license change requires owner approval and review of contributor rights,
+existing grants, scope and third-party obligations. The filename remains stable
+for earlier links; this pending decision became accepted after the owner's choice.

@@ -1,3 +1,5 @@
+/* SPDX-License-Identifier: GPL-3.0-or-later */
+/* Copyright (C) 2026 Dean Howell. */
 /* IMPL-0001: compile-only freestanding data-width probe; no OS implementation. */
 #include <limits.h>
 #include <stdint.h>

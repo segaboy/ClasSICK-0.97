@@ -4,12 +4,19 @@ Read [the clean-room policy](docs/clean-room/POLICY.md) before opening an issue,
 PR, experiment, or AI-assisted task. It applies to all public surfaces, including
 attachments, commit messages, branch history, and CI artifacts.
 
-## Licensing gate
+## Licensing and inbound terms
 
-The owner has not selected a project license. Outside implementation and asset
-contributions must not be merged until the owner approves licensing and inbound
-terms. The owner-authorized founding documentation and build probes may proceed.
-Do not attach copyrighted implementations while asking a licensing question.
+The owner approved **GPL-3.0-or-later** on 2026-10-07 for the project's own code,
+documentation and assets. By intentionally submitting a contribution for inclusion,
+you offer it under those same terms unless a separate arrangement is explicitly
+agreed before acceptance. Retain accurate authorship/copyright notices and declare
+any third-party material. You must own the contribution or have sufficient rights
+to provide it under these terms. No copyright assignment or separate CLA is imposed.
+
+The project license does not waive the clean-room policy or grant rights in Apple
+software/assets or proprietary applications. Incompatible or uncertain-origin
+dependencies must not be merged. Do not attach protected implementations to ask
+about license compatibility. See [license scope](COPYRIGHT.md).
 
 ## Contribution sequence
 

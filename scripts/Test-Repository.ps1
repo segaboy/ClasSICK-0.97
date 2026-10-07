@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: GPL-3.0-or-later
+# Copyright (C) 2026 Dean Howell.
 # Audit the Git index, including staged content. Human provenance review is still required.
 [CmdletBinding()]
 param()
@@ -10,12 +12,13 @@ $required = @('README.md','CONTRIBUTING.md','AGENTS.md','.gitignore','.gitattrib
     'docs/clean-room/POLICY.md','provenance/README.md','docs/charter.md',
     'docs/architecture/overview.md','docs/adr/README.md','docs/roadmap.md',
     'docs/development/windows.md','docs/development/licensing.md',
-    'scripts/toolchain-lock.json','provenance/sources.md','docs/testing/methodology.md')
+    'scripts/toolchain-lock.json','provenance/sources.md','docs/testing/methodology.md',
+    'LICENSE','COPYRIGHT.md')
 $fileSet = New-Object 'System.Collections.Generic.HashSet[string]' ([StringComparer]::Ordinal)
 $caseSet = New-Object 'System.Collections.Generic.HashSet[string]' ([StringComparer]::OrdinalIgnoreCase)
 $contents = @{}
 $allowedExtensions = @('.md','.json','.yml','.yaml','.ps1','.c','.h','.cmake','.txt','.s','.ld','.inc')
-$allowedNames = @('.gitignore','.gitattributes','CODEOWNERS','CMakeLists.txt')
+$allowedNames = @('.gitignore','.gitattributes','CODEOWNERS','CMakeLists.txt','LICENSE')
 $forbiddenDirectories = '(^|/)(reference|private|quarantine|local|\.tools|\.downloads|build|out|artifacts)(/|$)'
 $secretSignatures = '(?m)-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----|\bgh[pousr]_[A-Za-z0-9]{30,}\b|\bgithub_pat_[A-Za-z0-9_]{50,}\b|\bAKIA[0-9A-Z]{16}\b|\bsk-(?:proj-)?[A-Za-z0-9_-]{40,}\b'
 foreach ($path in $files) {

@@ -22,7 +22,8 @@ the GitHub slug is `ClasSICK-0.97`.
 6. Reproducible Windows 11 development starting from Windows and Git; extra tools
    have documented purposes, pinned versions, and setup procedures.
 7. The owner selects licensing. Public publication does not itself make this an
-   open-source project.
+   open-source project. The owner approved GPL-3.0-or-later on 2026-10-07 for
+   project-owned code, documentation and assets; third-party rights stay separate.
 
 ## Scope and success
 

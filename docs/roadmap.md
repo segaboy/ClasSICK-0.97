@@ -6,7 +6,7 @@ implementation sequence. Early MFS/resource research feeds the complete M0.4 gat
 
 | Milestone | Deliverable | Evidence required to close |
 | --- | --- | --- |
-| M0.0 Project bootstrap | Public repo, policies, provenance, architecture, ADRs, toolchain/setup, build probes | Public commits, guard pass, ordinary Windows setup pass, two fresh native probe builds/tests; license explicitly pending if undecided |
+| M0.0 Project bootstrap | Public repo, policies, provenance, architecture, ADRs, toolchain/setup, build probes | Public commits, guard pass, ordinary Windows setup pass, two fresh native probe builds/tests; owner's license decision documented |
 | M0.1 Portable hosted core | Native Windows core and abstract graphics/input/memory | B1 gate; headless surface/arena/event contracts; no hardware imports in core; debug workflow exercised |
 | M0.2 Native x86-64 boot | Native UEFI loader/kernel with owned framebuffer/timing/keyboard | B2 gate; image/link provenance; repeated post-ExitBootServices progress/input; named VM/PC |
 | M0.3 Macintosh 128K boot | Native 68000 core and independently created ROM/startup | Published hardware/ISA specs, measured RAM/ROM budget, cold start/input, no Apple ROM execution |
@@ -16,10 +16,10 @@ implementation sequence. Early MFS/resource research feeds the complete M0.4 gat
 | M0.7 Expanded compatibility | Named January-1984-era application corpus and error coverage | Published matrix with supported operations, failures, profiles, source revision; cross-target parity |
 | M1.0 Portable System 1-compatible OS | Native x86-64 and 68000 boots, ARM64 native core execution, measured compatibility | Charter release gates, frozen corpus/coverage criteria, audited provenance, selected license, reproducible release artifacts |
 
-M0.0's **technical bootstrap** can complete without a license; contribution
-acceptance and any open-source/release claim remain gated on the owner's decision.
-If a later licensing choice requires changes to tooling/runtime distribution, revise
-the relevant provenance and ADR before release.
+The owner approved **GPL-3.0-or-later** during bootstrap for project-owned code,
+documentation and assets. Contributions/releases still require clean provenance
+and third-party runtime/dependency license review. Tool licenses do not become
+the project license. Record any future license change through owner approval/ADR.
 
 ## Immediate dependency order after bootstrap
 

@@ -17,7 +17,7 @@ evidence; foundational project constraints cannot be silently relaxed.
 | [ADR-0005](0005-clean-room-provenance.md) | Specification/evidence trace and clean-room publication gates | Accepted |
 | [ADR-0006](0006-compatibility-profiles.md) | Historical behavior and opt-in extensions use separate contracts | Accepted |
 | [ADR-0007](0007-boot-and-target-order.md) | Hosted contracts first, measurable native boot, 128K feasibility gate | Accepted |
-| [ADR-0008](0008-license-deferred.md) | License reserved to owner; external implementation acceptance deferred | Pending owner decision |
+| [ADR-0008](0008-license-deferred.md) | Owner-approved GPL-3.0-or-later for project code/docs/assets | Accepted |
 
 Use [the template](template.md). Every substantive decision cites founding
 requirements or approved sources, distinguishes design from historical fact,

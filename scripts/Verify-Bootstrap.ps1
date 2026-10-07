@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: GPL-3.0-or-later
+# Copyright (C) 2026 Dean Howell.
 [CmdletBinding()]
 param([string]$BuildRoot = '')
 Set-StrictMode -Version Latest

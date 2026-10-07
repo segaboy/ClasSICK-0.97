@@ -34,5 +34,5 @@ OS behavior. Final publication/CI results are tracked in the evidence/status rec
 | 26 First successful boot | B0/B1/B2 exact gates; B2 requires post-firmware-handoff ownership/input/progress |
 | 27 Immediate ADRs | Eight initial ADRs; future JIT/target/runtime decisions require new records |
 | 28 Future specialist chats | [Proposed responsibilities/handoffs](governance.md); none created |
-| 29 License options only | [Comparison](development/licensing.md); owner approval required, no license adopted |
+| 29 License options before choice | [Comparison](development/licensing.md) prepared first; GPL-3.0-or-later adopted only after explicit owner approval |
 | 30 Public bootstrap commits | Founding safeguards already public; completed documentation/tooling publication recorded in status/evidence |

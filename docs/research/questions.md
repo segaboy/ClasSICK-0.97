@@ -19,7 +19,7 @@ reflects potential scope impact, not confirmed incompatibility.
 | R-012 | Do selected LLDB and ASan/UBSan work in the pinned hosted package? | Breakpoint/state inspection and deliberately triggered diagnostic probes | Developer tooling |
 | R-013 | Which ARM64 host/board/runner and toolchain will prove runtime portability? | Select a concrete runner; compile and execute same core contracts | M1.0 portability |
 | R-014 | Which real applications form a lawful, representative 1984 corpus? | Owner-authorized local possession/use and safe workflow reports; no public binary uploads | M0.6/M0.7/release scope |
-| R-015 | What license supports the owner's adoption/reciprocity/patent goals? | Owner reviews documented options; no assumed default | External code acceptance / release |
+| R-015 (closed 2026-10-07) | What project license does the owner approve? | Owner selected GPL-3.0-or-later for own code/docs/assets after reviewing options; dependency license audits remain necessary | ADR-0008 accepted |
 | R-016 | Can historical appearance/layout remain useful with independently authored assets? | Define original font metrics/artwork and explicit appearance deviations | UI compatibility |
 | R-017 | Which programs depend on ROM entry points, direct hardware, timing or undocumented behavior? | Black-box symptom/probe catalog without internal code inspection | Application matrix |
 
@@ -32,8 +32,8 @@ reflects potential scope impact, not confirmed incompatibility.
   runtime checks without assuming they are already installed.
 - **TD-003, specification owner, before historical behavior implementation:** later
   public Apple manuals are discoverable but no 1984 contract has yet been approved.
-- **TD-004, maintainer, before broad contributions:** licensing and enforceable PR
-  protection settings remain separate gates. CODEOWNERS alone does not enforce review.
+- **TD-004, maintainer, before broad contributions:** review enforceable PR protection
+  settings and dependency licenses. CODEOWNERS alone does not enforce review.
 
 Reference/specification work never resolves these questions by reconstructing
 Apple instructions or importing a convenient implementation of uncertain origin.

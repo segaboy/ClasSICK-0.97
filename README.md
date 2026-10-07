@@ -41,7 +41,7 @@ edition-specific primary evidence and reference behavior remain research tasks.
 - [Architecture decisions](docs/adr/README.md)
 - [Research questions](docs/research/questions.md)
 - [Testing and compatibility](docs/testing/methodology.md)
-- [Licensing options awaiting owner decision](docs/development/licensing.md)
+- [Approved license and option comparison](docs/development/licensing.md)
 - [Founding assignment coverage](docs/bootstrap-assignment.md)
 
 Public source repository:
@@ -49,10 +49,11 @@ Public source repository:
 
 ## Licensing
 
-**No project license has been selected.** Publication on GitHub is not a general
-grant to reuse, modify, or redistribute this work. License selection is reserved
-to the owner. Do not call the project open source until that decision is made.
-External code contributions are deferred until inbound and outbound licensing
-terms are established. Public issue discussions must follow the clean-room policy.
+ClasSICK 0.97 is licensed under the **GNU General Public License, version 3 or,
+at your option, any later version** (`GPL-3.0-or-later`). The owner approved this
+choice on 2026-10-07 for the project's own code, documentation, and assets.
+See [LICENSE](LICENSE), [copyright and scope](COPYRIGHT.md), and
+[contribution terms](CONTRIBUTING.md). Third-party tools retain their own terms.
+All public contributions and discussions must follow the clean-room policy.
 
 ClasSICK 0.97 is an independent project and is not affiliated with Apple.

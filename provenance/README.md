@@ -30,5 +30,6 @@ not constitute the project license. Any runtime/library actually distributed wit
 a future product needs an explicit third-party license and provenance inventory.
 
 No external implementation, copied assets, or uncertain-origin runtime enters this
-repository until reviewed. The pending project license additionally defers external
-code contribution acceptance. See [policy](../docs/clean-room/POLICY.md).
+repository until reviewed. Project-owned contributions use the owner's approved
+GPL-3.0-or-later terms; third-party license compatibility needs separate review.
+See [policy](../docs/clean-room/POLICY.md).
