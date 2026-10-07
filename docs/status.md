@@ -23,6 +23,8 @@ does not imply that the complete project foundation or any OS boot is finished.
 - [Presentation results](../provenance/records/TEST-0005-windows-presentation.md).
 - [Immutable presentation snapshot](development/presentation-evidence.md) records
   executed source and qualified executable hashes.
+- [Presentation Windows CI passed](https://github.com/segaboy/ClasSICK-0.97/actions/runs/37691938711)
+  at evidence source 5c166dd, with all ten checks and matching local viewer/test hashes.
 
 - First subsystem: caller-owned MSB-first 1bpp/RGBA8 surfaces, clear and clipped
   half-open rectangle fill; stable errors, checked sizes and padding preservation.

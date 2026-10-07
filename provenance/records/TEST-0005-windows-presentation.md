@@ -50,7 +50,12 @@ A visible earlier viewer build was launched; its original client was captured
 locally through PrintWindow and visually inspected by Codex for sharp 2x geometry
 and channel colors. The final refinement adds clip handling without scene changes.
 This is render review, not owner manual acceptance or monitor color measurement.
-No capture/binary is tracked in Git. Remote CI is recorded only after completion.
+No capture/binary is tracked in Git.
+
+[Remote Windows CI run 37691938711 passed](https://github.com/segaboy/ClasSICK-0.97/actions/runs/37691938711)
+at `5c166dddc15069329aec153e2c707d1e9f61a1f0` with the same full matrix and
+matching local viewer/test hashes. The executed code/build/spec bytes are unchanged
+from implementation `bb2a9f39205175cb6cf4c88f692c4fd9feea29a9`.
 
 Not verified: real cross-monitor DPI change, physical colors, host-failure injection,
 performance, older Windows, other host OSs/compilers, ARM64/m68k execution,

@@ -33,7 +33,17 @@ The verification wrapper and manual run/review steps are in
 [Windows development](windows.md); detailed fixtures/failures/limits in
 [TEST-0005](../../provenance/records/TEST-0005-windows-presentation.md).
 
-Remote CI/publication is recorded after actual completion. No B1/M0.1 closure,
+## Remote validation
+
+[Windows CI run 37691938711 passed](https://github.com/segaboy/ClasSICK-0.97/actions/runs/37691938711)
+at `5c166dddc15069329aec153e2c707d1e9f61a1f0`: public 100-file guard, pinned setup,
+bootstrap twins and the full presentation/surface matrix, including both sanitizer
+detection controls and instrumented tests. All ten CTest checks pass per
+configuration. CI viewer/presentation/core test hashes equal the local values
+above. This CI revision differs from executed implementation bb2a9f3 only by text
+evidence/status; code, tests, build scripts and contract are unchanged.
+
+No B1/M0.1 closure,
 native boot, historical behavior, Linux/original-hardware edition or parity claim.
 Arenas, normalized events, clock/debug workflow and actual cross-monitor DPI tests
 remain open. Self-review is complete; separate human review remains pending.
