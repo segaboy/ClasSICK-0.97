@@ -21,6 +21,8 @@ does not imply that the complete project foundation or any OS boot is finished.
   x64 ASan/UBSan. Four added suites cover conversion/bounds, GDI pixels and hidden
   window lifecycle. Fresh viewer/test executable hashes match. Core unchanged.
 - [Presentation results](../provenance/records/TEST-0005-windows-presentation.md).
+- [Immutable presentation snapshot](development/presentation-evidence.md) records
+  executed source and qualified executable hashes.
 
 - First subsystem: caller-owned MSB-first 1bpp/RGBA8 surfaces, clear and clipped
   half-open rectangle fill; stable errors, checked sizes and padding preservation.
