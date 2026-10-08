@@ -5,8 +5,8 @@ planned supported target; do not infer hardware support from a directory name.
 
 | Target | Stage | Execution strategy | Status / release gate |
 | --- | --- | --- | --- |
-| Windows 11 x86-64 hosted | First development execution | Native process; explicit host adapter | Headless SPEC-0001 tests verified in debug/release and ASan/UBSan; B1 pending |
-| Windows x86 hosted | Native size-boundary check | 32-bit process on Windows x64 | Headless SPEC-0001 tests verified, including 32-bit row overflow; no OS adapter |
+| Windows 11 x86-64 hosted | First development execution | Native process; explicit host adapter | Current 34 core/adapter checks, validated ASan/UBSan and LLDB workflow pass; B1 acceptance pending |
+| Windows x86 hosted | Native size-boundary check | 32-bit process on Windows x64 | Current 34 core/adapter conformance checks pass; WOW64 debugger trial failed; no native OS boot |
 | x86-64 UEFI PC | First native boot, M0.2 | Native loader/kernel; generic firmware handoff; own post-handoff drivers | VM firmware, USB/PS2 driver choice, PE/COFF/link and compiler runtime pending |
 | Original 68000 Macintosh 128K | M0.3 | Native core/personality; independently created replacement ROM/startup | RAM/ROM feasibility and hardware specification gate pending |
 | mini vMac Macintosh validation | M0.3 development check | Intended runner for our independent native Mac image/replacement firmware | Owner-requested; exact emulator provenance/configuration and startup support unverified; physical boot remains separate |

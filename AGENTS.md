@@ -44,6 +44,11 @@ Read `docs/clean-room/POLICY.md`, `CONTRIBUTING.md`, and
   SPEC-0005 and hosted timed behavior, then publish evidence and Git wiki plans.
   Record VirtualBox availability without claiming a VM boot or hardware result.
   Debugger verification and native boot remain separate gates.
+- The owner then said "Do it" after the proposed debugger checkpoint. This
+  authorizes hosted LLDB launch/source/state/step/resume verification, necessary
+  viewer launch fixes, repeatable checks, provenance/publication and Git wiki plans.
+  TEST-0009 / IMPL-0007 are development evidence; B1 acceptance and native boots
+  remain separate. Live OneNote still requires an explicit publication request.
 - Use `C:\Repos\ClasSICK-0.97` for source and `C:\ClasSICK` for local build/test
   output on the founding workstation. Do not depend on those paths in core code.
 - Do not create specialist chats or delegate work merely because the roadmap

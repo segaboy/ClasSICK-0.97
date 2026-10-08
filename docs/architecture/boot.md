@@ -17,7 +17,8 @@ claim is required to meet B1. This is a hosted development start.
 
 Current partial progress: surfaces, arena ownership and SPEC-0004 normalized
 Space/Escape input and SPEC-0005 deterministic/monotonic time pass hosted tests.
-Interactive debug workflow and remaining acceptance remain open; B1 is not closed.
+The x64 debugger workflow now passes TEST-0009; remaining hosted-start acceptance
+is the next audit, so B1 is not closed by this debugger checkpoint.
 Full input/native drivers receive their own contracts when needed.
 
 The owner named installed VirtualBox for future native-PC boot tests; read-only

@@ -29,8 +29,8 @@ the project license. Record any future license change through owner approval/ADR
    and original scenes are verified under TEST-0005. [SPEC-0003 bounded arenas](specifications/SPEC-0003-arenas.md)
    and viewer-buffer integration now pass TEST-0006. [SPEC-0004 keyboard input](specifications/SPEC-0004-input.md)
    and shared synthetic/Windows viewer input pass TEST-0007. [SPEC-0005 clocks](specifications/SPEC-0005-clock.md)
-   and hosted timed behavior pass TEST-0008. Next exercise the debug workflow
-   so B1/M0.1 becomes measurable.
+   and hosted timed behavior pass TEST-0008. The x64 debug workflow now passes
+   TEST-0009. Next audit remaining B1/M0.1 hosted-start acceptance.
 3. Prove freestanding linkage/runtime ownership and a second compiler/core build.
 4. Prepare/review UEFI VM tooling and device contracts; the owner named installed
    VirtualBox (observed 7.2.16r174877) for native-PC tests. No VM/startup/firmware

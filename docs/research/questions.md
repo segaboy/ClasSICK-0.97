@@ -16,7 +16,7 @@ reflects potential scope impact, not confirmed incompatibility.
 | R-009 | What original 68000 instruction/exception/alignment/address-mask behavior is required? | Eligible published Motorola ISA manual; original conformance tests; no Apple ROM inputs | CPU runtime and m68k native |
 | R-010 | What PC machine, firmware and drivers make B2 repeatable? | Review QEMU/firmware packages and licenses, UEFI entry/link/runtime, timing and keyboard contracts | M0.2 |
 | R-011 | Which standalone Windows-hosted m68k compiler/linker and helper runtime are auditable and reproducible? | Evaluate GNU m68k cross-build/packaging and native instruction output; no assumption LLVM-MinGW solves m68k | M0.3 |
-| R-012 | Do selected LLDB and ASan/UBSan work in the pinned hosted package? | Breakpoint/state inspection and deliberately triggered diagnostic probes | Developer tooling |
+| R-012 (partially resolved 2026-10-07) | Do selected LLDB and ASan/UBSan work in the pinned hosted package? | TEST-0009 x64 source/state/step/resume passes; x64 sanitizer controls/current conformance pass. WOW64 debugger trial failed; other sanitizer/debug targets remain open | Developer tooling |
 | R-013 | Which ARM64 host/board/runner and toolchain will prove runtime portability? | Select a concrete runner; compile and execute same core contracts | M1.0 portability |
 | R-014 | Which real applications form a lawful, representative 1984 corpus? | Owner-authorized local possession/use and safe workflow reports; no public binary uploads | M0.6/M0.7/release scope |
 | R-015 (closed 2026-10-07) | What project license does the owner approve? | Owner selected GPL-3.0-or-later for own code/docs/assets after reviewing options; dependency license audits remain necessary | ADR-0008 accepted |

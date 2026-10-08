@@ -5,6 +5,36 @@ eligibility applies to the stated scope, not every resource reachable from a URL
 No Apple executable, source, disassembly, decompilation, or copied asset was used.
 No reference-system black-box observation has yet been performed.
 
+## SRC-0025 — Owner's debugger checkpoint authorization
+
+- Author/date: owner, 2026-10-07, "Do it" after proposed debugger verification.
+- Scope: hosted debugger tests, necessary viewer launch fixes, evidence/publication
+  and Git wiki plans. Existing independent core specifications remain authoritative.
+- Requirement only; no B1, native boot, historical behavior or live OneNote request.
+
+## SRC-0026 — LLVM LLDB command interfaces and diagnostic lead
+
+- LLVM project, accessed 2026-10-07: [Tutorial](https://lldb.llvm.org/use/tutorial.html)
+  command structure, breakpoints, frame variables and thread stepping;
+  [command map](https://lldb.llvm.org/use/map.html), source-map and launch workflow.
+  Bundled LLDB --help, process-handle help and version output were also inspected.
+- Published command-interface prose/examples, not tool implementation source.
+  Original verification commands and evidence checks; no copied implementation.
+- Diagnostic lead: [LLVM issue 58065](https://github.com/llvm/llvm-project/issues/58065)
+  reports a similar WOW64 frame symptom. Its diagnostic assembly excerpt was visible,
+  not copied or used as an implementation input. The local failure is independently
+  observed; shared root cause is an inference, not established by the report.
+- No Apple implementation inputs, historical applicability or universal debugger claim.
+
+## SRC-0027 — Microsoft runtime argument interface
+
+- Microsoft Learn, [__argc / __argv / __wargv](https://learn.microsoft.com/en-us/cpp/c-runtime-library/argc-argv-wargv?view=msvc-170),
+  remarks and header requirements, accessed 2026-10-07. Existing pinned stdlib.h
+  declarations were checked; runtime implementation source was not inspected.
+- Host-only parsed argument count/strings replace raw WinMain string comparison.
+  This uses the already linked Windows development runtime, with no new dependency
+  or portable-core change. No documentation sample implementation adopted.
+
 ## SRC-0023 — Owner's clock continuation and VirtualBox availability
 
 - Author/date: owner, 2026-10-07, after discussing the next clock milestone.

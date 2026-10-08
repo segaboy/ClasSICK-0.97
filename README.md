@@ -41,9 +41,15 @@ remain generic contract evidence, with full-input/native-driver work open.
 [SPEC-0005 portable time](docs/specifications/SPEC-0005-clock.md) now supplies
 checked elapsed-time arithmetic, monotonic observations and a controllable clock.
 The Windows provider and original viewer's timed strip pass the full 34-check
-matrix. See [clock results](provenance/records/TEST-0008-clocks.md). Interactive
-debugger verification and native boot work remain open. The owner's installed
+matrix. See [clock results](provenance/records/TEST-0008-clocks.md). The owner's installed
 VirtualBox is recorded as a future native-PC test option.
+
+The x64 [debugger workflow](docs/development/debugging.md) is now exercised:
+source breakpoints, typed core/viewer state, stepping, call stacks and clean resume.
+The viewer accepts parsed launch arguments, including a debugger's trailing space.
+Six scripted x64 sessions and three invalid-argument rejections pass; all 34 core/
+adapter checks still pass. A 32-bit WOW64 debugger trial failed and is outside this
+verified workflow. B1 acceptance and native boot work remain open.
 
 The owner reaffirmed real Macintosh booting and mini vMac validation. Those native
 images must use independently implemented OS/replacement firmware code. Emulator

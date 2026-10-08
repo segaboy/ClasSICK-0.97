@@ -373,14 +373,18 @@ int WINAPI WinMain(HINSTANCE instance, HINSTANCE previous, LPSTR command, int sh
     RECT rectangle = {0,0,FRAME_WIDTH,FRAME_HEIGHT};
     demo_state state = {0};
     int result = 1, registered = 0;
-    int verify = strcmp(command, "--verify") == 0;
-    int verify_memory = strcmp(command, "--verify-memory") == 0;
-    int verify_keys = strcmp(command, "--verify-input") == 0;
-    int verify_key_memory = strcmp(command, "--verify-input-memory") == 0;
-    int verify_time=strcmp(command,"--verify-clock")==0;
-    int verify_live=strcmp(command,"--verify-clock-live")==0;
+    /* The host runtime parses quoting/whitespace; LLDB adds a trailing delimiter. */
+    const char *option = __argc == 2 ? __argv[1] : "";
+    int verify = strcmp(option, "--verify") == 0;
+    int verify_memory = strcmp(option, "--verify-memory") == 0;
+    int verify_keys = strcmp(option, "--verify-input") == 0;
+    int verify_key_memory = strcmp(option, "--verify-input-memory") == 0;
+    int verify_time=strcmp(option,"--verify-clock")==0;
+    int verify_live=strcmp(option,"--verify-clock-live")==0;
     (void)previous;
-    if (command[0] != '\0' && !verify && !verify_memory && !verify_keys && !verify_key_memory && !verify_time && !verify_live) return 2;
+    (void)command;
+    if (__argc != 1 && (__argc != 2 || (!verify && !verify_memory && !verify_keys
+            && !verify_key_memory && !verify_time && !verify_live))) return 2;
     if (verify_key_memory) {
         if (buffer_budget() != 1342744u || init_buffers(&state, 1342743u)
                 || state.backing == NULL || state.arena.used != 1342422u

@@ -1,9 +1,9 @@
 # Windows hosted development
 
-Status: first execution platform; SPEC-0001 headless conformance verified on x64/x86.
-SPEC-0002 adds presentation and an original color/mono viewer. Normalized
-events and clock remain planned; B1 has not been met. SPEC-0003 now supplies
-bounded arenas for the viewer's buffers, verified independently by TEST-0006.
+Status: generic surfaces, bounded arenas, normalized keyboard and clocks plus
+Windows adapters pass 34 checks per configuration. SPEC-0002 supplies an original
+color/mono viewer. The x64 debugger workflow passes TEST-0009; B1 acceptance
+remains a separate audit, with no OS boot or historical compatibility claim.
 
 Use a normal native Windows process linked to the same core library planned for
 bare-metal builds. The hosted adapter supplies memory arenas, Win32 window/input,
@@ -29,13 +29,17 @@ and RAM-backed devices allow tests to avoid real-time or floppy dependencies.
 5. Preserve safe test summaries and artifact hashes with exact source revision.
 6. Reuse tests across adapters and target configurations as native builds arrive.
 
-Debug symbols and LLDB integration are planned, but a debugger must actually
-launch, set a breakpoint, and inspect state before being called verified. Sanitizer
-support is target-dependent: the pinned x64 package now detects deliberate heap
-overflow and signed overflow probes, then passes surface tests under ASan/UBSan
-through `Verify-Surfaces.ps1 -Sanitizers`. Other sanitizer targets remain unverified.
-Availability in upstream tool documentation is not local test
-evidence. Fuzzing starts with format decoders against original synthetic bytes.
+The bundled LLDB now launches x64 Debug executables, resolves mapped source,
+stops inside core/viewer functions, inspects typed state and stacks, steps over/
+in/out and resumes to exit zero. The [debug guide](../development/debugging.md)
+and TEST-0009 give a repeatable workflow. A WOW64/i686 trial failed with unavailable
+original frame state; it is outside the verified debugging scope. Debugger timing
+pauses do not establish physical timer accuracy or a scheduler guarantee.
+
+Sanitizer support is target-dependent: the pinned x64 package detects deliberate
+heap/signed overflow controls, then passes all current core/adapter checks under
+ASan/UBSan. Other sanitizer targets remain unverified. Availability in upstream
+documentation is not execution evidence. Fuzzing starts with original format bytes.
 
 Windows process isolation and diagnostics improve development safety but are not
 kernel services. Core code cannot call the host heap, filesystem, or threading

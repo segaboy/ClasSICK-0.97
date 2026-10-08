@@ -1,6 +1,6 @@
 # Project status
 
-Date: 2026-10-07. Current phase: **graphics, arenas, keyboard and clocks verified; M0.1 partial**.
+Date: 2026-10-07. Current phase: **hosted foundations and x64 debugging verified; M0.1 partial**.
 M0.0 technical bootstrap remains verified. The owner explicitly authorized the
 first bounded graphics subsystem in the project implementation chat on this date.
 SPEC-0001 v1 is finalized, implemented and tested under IMPL-0002 / TEST-0004.
@@ -15,6 +15,19 @@ documentation/evidence repository and personal project wiki. This technical gate
 does not imply that the complete project foundation or any OS boot is finished.
 
 ## Achieved
+
+- TEST-0009 / IMPL-0007 verifies the bundled LLDB 23.1.1 on x64 Debug twins:
+  source breakpoints, typed core/queue/viewer state, stacks, step over/in/out and
+  clean resume. A local interactive core session also passed.
+- Viewer launch now uses parsed host-runtime arguments. LLDB's observed trailing
+  delimiter is accepted; unknown, extra and empty arguments reject with exit 2.
+- Six valid x64 debugger sessions and three rejection launches pass. The full
+  local five-configuration 34-check matrix, sanitizers and core/endian audits pass;
+  viewer hash matches fresh twins and seven other executable hashes are unchanged.
+  [Debugger snapshot](development/debugger-evidence.md); remote CI pending.
+- Optional i686 debugging failed at WOW64 exception 0x4000001f, with unavailable
+  original frame state. Actual i686 conformance still passes; no i686 debugger
+  success, general debugger certification or new tool adoption is claimed.
 
 - SPEC-0005 v1 canonical seconds/nanoseconds, overflow/backward rejection,
   monotonic observations and deterministic advancement, IMPL-0006 / TEST-0008.
@@ -114,8 +127,9 @@ does not imply that the complete project foundation or any OS boot is finished.
   license review under the approved project license.
 - Exact historical profile and 1984-applicable behavioral sources.
 - Macintosh 128K native feasibility, hardware startup and size budgets.
-- Interactive debugger, other sanitizer targets, m68k toolchain/runtime and boot.
-- Next: interactive debugger workflow and remaining B1/M0.1 acceptance;
+- WOW64 debugger support, other sanitizer targets, m68k toolchain/runtime and boot.
+- Next: audit remaining B1/M0.1 hosted-start acceptance, then freestanding
+  linkage/runtime ownership and reviewed native-PC firmware/device contracts;
   wider input and native drivers receive contracts when required. The viewer alone
   does not complete the hosted-core gate.
 - Three bootable editions remain separately not-started: original Macintosh,

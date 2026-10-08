@@ -127,12 +127,13 @@ synthetic input uses the same queue/consumer. Full input and native drivers
 receive separate contracts. SPEC-0005 now provides controllable/core monotonic
 time and a Windows QPC provider. An initial Space press illuminates an original
 bottom strip for 250ms, with a timer wakeup checking our deadline. The 1,342,744-byte
-development pool is not a Macintosh RAM budget; interactive debugger work remains open.
+development pool is not a Macintosh RAM budget. The x64 debugger workflow is
+verified separately in [debugging.md](debugging.md); WOW64 support remains open.
 
 For the current complete core verification matrix, use a fresh output directory:
 
 ```powershell
-powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\scripts\Verify-Clocks.ps1 -BuildRoot C:\ClasSICK\core-local -Sanitizers
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\scripts\Verify-Debugger.ps1 -BuildRoot C:\ClasSICK\core-local -Sanitizers
 ```
 
 This also compares input-test executable hashes and audits ARM64 little/big-endian
@@ -141,12 +142,15 @@ synthetic/native-message input and memory exhaustion. See [input evidence](input
 The hidden checks also include --verify-clock and --verify-clock-live for controlled
 deadlines and a real delivered Windows timer/QPC sample. Tests make no exact
 scheduler-delay/physical accuracy claim. See [clock evidence](clock-evidence.md).
+The debugger wrapper also checks six valid x64 LLDB sessions and three invalid
+viewer launches. Command files, transcripts and a result/hash summary remain in
+the chosen output directory. LLDB is already in the pinned package; no new install.
 
 ## Tools deferred until a concrete need
 
 | Tool/category | Purpose when introduced | Current state |
 | --- | --- | --- |
-| LLDB or another debugger | Breakpoints, guest/native state and symbols | Package includes LLDB; interactive debugging unverified |
+| LLDB 23.1.1 | Source breakpoints, native typed state/stacks, stepping and resume | x64 Debug twins and local interactive core verified; WOW64 trial failed; guest/m68k debugging unverified |
 | ASan/UBSan/fuzzing support | Memory/undefined behavior and decoder robustness | x64 ASan/UBSan verified for surfaces; other targets and fuzzing pending |
 | VirtualBox / reviewed native-PC firmware | Owner-selected future PC VM tests | Installed 7.2.16r174877 observed; no VM/firmware/startup result. QEMU unselected |
 | m68k cross compiler, linker and runtime helpers | Original 68000 native images and ROM packaging | Must select/review independently |

@@ -26,6 +26,6 @@ jobs:
       - name: Verify two fresh hosted builds
         shell: powershell
         run: .\scripts\Verify-Bootstrap.ps1
-      - name: Verify graphics, memory, input, hosted adapters and freestanding boundaries
+      - name: Verify hosted core, freestanding boundaries and debugger workflow
         shell: powershell
-        run: .\scripts\Verify-Clocks.ps1 -BuildRoot build\core-verification -Sanitizers
+        run: .\scripts\Verify-Debugger.ps1 -BuildRoot build\core-verification -Sanitizers
