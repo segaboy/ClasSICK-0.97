@@ -37,11 +37,11 @@ Read `docs/clean-room/POLICY.md`, `CONTRIBUTING.md`, and
   contracts. Emulator validation does not close the physical-hardware edition gate.
 - The owner then instructed this chat to move to the next step on 2026-10-07.
   This authorizes SPEC-0004 bounded normalized keyboard events, Windows/viewer
-  integration, independent tests and ordinary evidence/wiki publication. Timing,
+  integration, independent tests and ordinary evidence/Git wiki planning. Timing,
   broader input and boot remain subsequent work; B1 remains open.
 - The owner authorized moving on to the portable clock on 2026-10-07 and named
   their installed VirtualBox for future boot tests. Finalize/implement/verify
-  SPEC-0005 and hosted timed behavior, then publish evidence and wiki updates.
+  SPEC-0005 and hosted timed behavior, then publish evidence and Git wiki plans.
   Record VirtualBox availability without claiming a VM boot or hardware result.
   Debugger verification and native boot remain separate gates.
 - Use `C:\Repos\ClasSICK-0.97` for source and `C:\ClasSICK` for local build/test
@@ -54,7 +54,10 @@ Read `docs/clean-room/POLICY.md`, `CONTRIBUTING.md`, and
   `C:\Repos\ClasSICK` headquarters repository. Consult its current instructions
   before cross-project changes; keep private headquarters content out of this
   public repository. Its registry preserves this project's local record namespace.
-- The owner authorized maintenance of the personal OneNote **ClasSICK** wiki with
-  repository/progress updates. Use the OneNote skill and the headquarters wiki
-  protocol; preserve personal notes, verify writes, and report any synchronization
-  gap. Never commit personal notebook IDs, URLs or reference payloads here.
+- The owner's latest HQ instruction supersedes automatic OneNote maintenance:
+  ordinary progress updates publish wiki plans in the private HQ Git queue.
+  Use repository mirrors without OneNote discovery, reads, writes or retries.
+  Contact OneNote only on "update wiki" or a specific requested OneNote operation;
+  each request authorizes one pass under the OneNote skill and HQ wiki protocol.
+  Preserve personal notes and verify writes in that pass; leave unfinished scope
+  queued. Never commit personal notebook IDs, URLs or reference payloads here.
