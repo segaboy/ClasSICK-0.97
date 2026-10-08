@@ -49,6 +49,12 @@ Read `docs/clean-room/POLICY.md`, `CONTRIBUTING.md`, and
   viewer launch fixes, repeatable checks, provenance/publication and Git wiki plans.
   TEST-0009 / IMPL-0007 are development evidence; B1 acceptance and native boots
   remain separate. Live OneNote still requires an explicit publication request.
+- The owner authorized the remaining B1/M0.1 audit with "OK, do it", then
+  explicitly requested opening the keyboard validation viewer on 2026-10-08.
+  TEST-0010 / IMPL-0008 combine hosted startup/input/timing/shutdown checks;
+  the operator session passed two Space presses/releases and Escape. B1/M0.1
+  technical acceptance is now passed, with human provenance review separate.
+  Native linkage/runtime, a second compiler and all OS boots remain later gates.
 - Use `C:\Repos\ClasSICK-0.97` for source and `C:\ClasSICK` for local build/test
   output on the founding workstation. Do not depend on those paths in core code.
 - Do not create specialist chats or delegate work merely because the roadmap

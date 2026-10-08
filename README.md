@@ -27,7 +27,7 @@ This verifies our generic contract; no OS boot or Macintosh compatibility is pro
 adds a native color/monochrome viewer with original geometric scenes. Space changes
 views; resizing uses sharp integer scaling. See
 [build, run and review instructions](docs/development/windows.md). The remaining
-hosted-core acceptance gate is still open.
+hosted-core acceptance gate is recorded in the [B1 audit](docs/development/hosted-start-audit.md).
 Bounded [SPEC-0003 arenas](docs/specifications/SPEC-0003-arenas.md) now reserve all
 viewer buffers from one host-owned region; independent boundary/ownership tests
 and the full sixteen-check Windows matrix pass. See [arena results](provenance/records/TEST-0006-arenas.md).
@@ -49,7 +49,13 @@ source breakpoints, typed core/viewer state, stepping, call stacks and clean res
 The viewer accepts parsed launch arguments, including a debugger's trailing space.
 Six scripted x64 sessions and three invalid-argument rejections pass; all 34 core/
 adapter checks still pass. A 32-bit WOW64 debugger trial failed and is outside this
-verified workflow. B1 acceptance and native boot work remain open.
+verified workflow. Native boot work remains open.
+
+**B1/M0.1 hosted start now passes (2026-10-08).** The combined startup, input,
+timing and clean shutdown test passes, and the owner completed a separate live
+keyboard session. All 36 checks in five configurations and the x64 debugger replay
+pass locally. This verifies a Windows development start; Mac/PC OS boot and
+historical compatibility remain future work. See the [audit and repeat instructions](docs/development/hosted-start-audit.md).
 
 The owner reaffirmed real Macintosh booting and mini vMac validation. Those native
 images must use independently implemented OS/replacement firmware code. Emulator

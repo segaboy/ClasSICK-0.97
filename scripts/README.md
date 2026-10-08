@@ -10,6 +10,9 @@ out of public commits.
 - `Verify-Surfaces.ps1 -BuildRoot <fresh-directory> -Sanitizers`: x64 debug twins,
   release, x86 execution, ARM64 endian compile/import checks, validated x64 ASan/UBSan.
 - `Check-Freestanding.cmake`: reject core object undefined symbols/global data.
+- `Check-Hosted-EarlyExit.cmake`: require early Escape to reject incomplete
+  acceptance despite clean shutdown. Normal combined startup is `hosted.start`;
+  operator validation and gate scope are in [the B1 audit](../docs/development/hosted-start-audit.md).
 - `Verify-Presentation.ps1`: established matrix plus viewer/presentation hash checks.
 - `Verify-Arenas.ps1`: full matrix, arena executable hash and ARM64 endian arena
   compile/import checks. Sixteen CTest checks per Windows configuration.

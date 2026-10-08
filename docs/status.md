@@ -1,6 +1,6 @@
 # Project status
 
-Date: 2026-10-07. Current phase: **hosted foundations and x64 debugging verified; M0.1 partial**.
+Date: 2026-10-08. Current phase: **B1/M0.1 hosted start verified; native boots pending**.
 M0.0 technical bootstrap remains verified. The owner explicitly authorized the
 first bounded graphics subsystem in the project implementation chat on this date.
 SPEC-0001 v1 is finalized, implemented and tested under IMPL-0002 / TEST-0004.
@@ -15,6 +15,18 @@ documentation/evidence repository and personal project wiki. This technical gate
 does not imply that the complete project foundation or any OS boot is finished.
 
 ## Achieved
+
+- TEST-0010 / IMPL-0008 completes the existing B1/M0.1 technical acceptance audit.
+  Combined synthetic/queued-message startup, timed pixels and Escape shutdown pass;
+  early Escape correctly reports incomplete acceptance after clean retirement.
+- The owner-operated visible session passes: two Space presses/releases and
+  Escape, five consumed records, 409 timer wakeups, destroyed window, zero retired
+  arena usage and exit zero. No test-generated input in that session. This is
+  scoped keyboard evidence; formal visual/DPI and human provenance review remain separate.
+- All 36 CTest checks pass in five fresh configurations, including actual i686
+  and x64 ASan/UBSan. Core/endian audits and all six x64 debugger sessions plus
+  three invalid launches pass. The operator executable matches the Debug twins.
+  [Hosted-start audit](development/hosted-start-audit.md) records scope and results.
 
 - TEST-0009 / IMPL-0007 verifies the bundled LLDB 23.1.1 on x64 Debug twins:
   source breakpoints, typed core/queue/viewer state, stacks, step over/in/out and
@@ -130,10 +142,10 @@ does not imply that the complete project foundation or any OS boot is finished.
 - Exact historical profile and 1984-applicable behavioral sources.
 - Macintosh 128K native feasibility, hardware startup and size budgets.
 - WOW64 debugger support, other sanitizer targets, m68k toolchain/runtime and boot.
-- Next: audit remaining B1/M0.1 hosted-start acceptance, then freestanding
-  linkage/runtime ownership and reviewed native-PC firmware/device contracts;
-  wider input and native drivers receive contracts when required. The viewer alone
-  does not complete the hosted-core gate.
+- Next: prove native freestanding linkage/runtime ownership and a second compiler
+  core build, then review native-PC firmware/device contracts. Wider input and
+  native drivers receive contracts when required. B1 is a Windows development
+  start; it does not establish any native boot.
 - Three bootable editions remain separately not-started: original Macintosh,
   native PC without Linux, Linux PC. Historical identity/QuickDraw and edition
   parity remain unverified; no Linux divergence has been introduced.

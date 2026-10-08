@@ -146,6 +146,11 @@ The debugger wrapper also checks six valid x64 LLDB sessions and three invalid
 viewer launches. Command files, transcripts and a result/hash summary remain in
 the chosen output directory. LLDB is already in the pinned package; no new install.
 
+The matrix also runs combined `--verify-start` message-loop integration and an
+early-exit rejection check. B1/M0.1 now passes with the separate owner-operated
+`--validate-start` keyboard session; see [the acceptance audit](hosted-start-audit.md).
+That interactive session is never substituted by CI-generated key messages.
+
 ## Tools deferred until a concrete need
 
 | Tool/category | Purpose when introduced | Current state |

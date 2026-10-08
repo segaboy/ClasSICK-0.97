@@ -21,6 +21,7 @@ typedef struct {
     size_t scratch_size;
     unsigned active, paints;
     unsigned consumed, clock_wakeups;
+    unsigned native_space_presses, native_space_releases, native_escape_presses;
     uint32_t last_source, last_sequence;
     int failed, destroyed, fake_time, flash, timer_active;
 } demo_state;
@@ -233,13 +234,22 @@ static LRESULT CALLBACK window_proc(HWND window, UINT message, WPARAM wparam, LP
         cs_input_event event;
         int mapped = cs_win_key_event(message, wparam, lparam, 2, &event);
         if (mapped == CS_WIN_INPUT_MAPPED) {
+            if (event.key == CS_KEY_SPACE && event.repeat == 0) {
+                if (event.action == CS_KEY_PRESS) ++state->native_space_presses;
+                else ++state->native_space_releases;
+            }
+            if (event.key == CS_KEY_ESCAPE && event.action == CS_KEY_PRESS
+                    && event.repeat == 0) ++state->native_escape_presses;
             if (!submit_input(window, state, &event)) PostMessageW(window, WM_CLOSE, 0, 0);
             return 0;
         }
         break;
     }
     case WM_DESTROY:
-        if (state->timer_active) { KillTimer(window,1); state->timer_active=0; }
+        if (state->timer_active) {
+            if (!KillTimer(window,1)) state->failed=1;
+            state->timer_active=0;
+        }
         state->destroyed = 1;
         PostQuitMessage(0);
         return 0;
@@ -372,7 +382,7 @@ int WINAPI WinMain(HINSTANCE instance, HINSTANCE previous, LPSTR command, int sh
     HWND window = NULL;
     RECT rectangle = {0,0,FRAME_WIDTH,FRAME_HEIGHT};
     demo_state state = {0};
-    int result = 1, registered = 0;
+    int result = 1, registered = 0, start_stage = 0;
     /* The host runtime parses quoting/whitespace; LLDB adds a trailing delimiter. */
     const char *option = __argc == 2 ? __argv[1] : "";
     int verify = strcmp(option, "--verify") == 0;
@@ -381,10 +391,14 @@ int WINAPI WinMain(HINSTANCE instance, HINSTANCE previous, LPSTR command, int sh
     int verify_key_memory = strcmp(option, "--verify-input-memory") == 0;
     int verify_time=strcmp(option,"--verify-clock")==0;
     int verify_live=strcmp(option,"--verify-clock-live")==0;
+    int incomplete_start=strcmp(option,"--verify-start-incomplete")==0;
+    int verify_start=strcmp(option,"--verify-start")==0 || incomplete_start;
+    int validate_start=strcmp(option,"--validate-start")==0;
     (void)previous;
     (void)command;
     if (__argc != 1 && (__argc != 2 || (!verify && !verify_memory && !verify_keys
-            && !verify_key_memory && !verify_time && !verify_live))) return 2;
+            && !verify_key_memory && !verify_time && !verify_live
+            && !verify_start && !validate_start))) return 2;
     if (verify_key_memory) {
         if (buffer_budget() != 1342744u || init_buffers(&state, 1342743u)
                 || state.backing == NULL || state.arena.used != 1342422u
@@ -416,13 +430,13 @@ int WINAPI WinMain(HINSTANCE instance, HINSTANCE previous, LPSTR command, int sh
     klass.lpszClassName = L"ClasSICK097OriginalSurfaceViewer";
     if (RegisterClassW(&klass) == 0) goto cleanup;
     registered = 1;
-    if (!verify && !verify_keys && !verify_time && !verify_live) { rectangle.right *= 2; rectangle.bottom *= 2; }
+    if (!verify && !verify_keys && !verify_time && !verify_live && !verify_start) { rectangle.right *= 2; rectangle.bottom *= 2; }
     if (!AdjustWindowRect(&rectangle, WS_OVERLAPPEDWINDOW, FALSE)) goto cleanup;
     window = CreateWindowExW(0, klass.lpszClassName, L"ClasSICK 0.97",
         WS_OVERLAPPEDWINDOW, CW_USEDEFAULT, CW_USEDEFAULT,
         rectangle.right - rectangle.left, rectangle.bottom - rectangle.top,
         NULL, NULL, instance, &state);
-    if (window == NULL || !resize_client(window, verify || verify_keys || verify_time || verify_live ? 1 : 2)) goto cleanup;
+    if (window == NULL || !resize_client(window, verify || verify_keys || verify_time || verify_live || verify_start ? 1 : 2)) goto cleanup;
     title(window, 0);
     if (verify_time || verify_live || (!verify && !verify_keys)) {
         if (SetTimer(window,1,25,NULL)==0) goto cleanup;
@@ -459,22 +473,89 @@ int WINAPI WinMain(HINSTANCE instance, HINSTANCE previous, LPSTR command, int sh
         result = 0;
     } else {
         MSG message;
-        ShowWindow(window, show); UpdateWindow(window);
+        if (verify_start || validate_start) {
+            if (state.arena.capacity != 1342744u || state.arena.used != 1342744u
+                    || !verify_print(window,&state,verify_start ? 1 : 2)) {
+                fputs("B1 initial arena/scene check failed.\n",stderr);
+                goto cleanup;
+            }
+        }
+        if (verify_start) {
+            const cs_input_event synthetic={1,CS_KEY_SPACE,CS_KEY_PRESS,0};
+            if (incomplete_start) {
+                if (!PostMessageW(window,WM_KEYDOWN,VK_ESCAPE,1)) goto cleanup;
+            } else if (!submit_input(window,&state,&synthetic) || state.active!=1
+                    || !verify_print(window,&state,1)
+                    || !PostMessageW(window,WM_KEYDOWN,VK_SPACE,1)
+                    || !PostMessageW(window,WM_KEYDOWN,VK_SPACE,((LPARAM)1<<30)|1)
+                    || !PostMessageW(window,WM_KEYUP,VK_SPACE,
+                        ((LPARAM)1<<31)|((LPARAM)1<<30)|1)
+                    || !PostMessageW(window,WM_APP+1,0,0)) goto cleanup;
+        } else {
+            if (validate_start) {
+                SetWindowTextW(window,L"ClasSICK 0.97 validation | Tap Space twice, wait for strip to clear, then Esc");
+                puts("B1 live validation: tap Space twice; confirm color/mono/color and brief bottom strip; then Esc.");
+                fflush(stdout);
+            }
+            ShowWindow(window, show);
+        }
+        UpdateWindow(window);
         for (;;) {
             BOOL received = GetMessageW(&message, NULL, 0, 0);
             if (received == -1) goto cleanup;
             if (received == 0) break;
             TranslateMessage(&message); DispatchMessageW(&message);
+            if (verify_start) {
+                if (message.message==WM_APP+1) {
+                    if (start_stage!=0 || state.consumed!=4 || state.active!=0
+                            || state.last_source!=2 || state.last_sequence!=4
+                            || state.input.count!=0 || state.native_space_presses!=1
+                            || state.native_space_releases!=1
+                            || !verify_print(window,&state,1)) goto cleanup;
+                    start_stage=1;
+                }
+                if (start_stage==1 && message.message==WM_TIMER && !state.flash) {
+                    if (!verify_print(window,&state,1)
+                            || !PostMessageW(window,WM_KEYDOWN,VK_ESCAPE,1)) goto cleanup;
+                    start_stage=2;
+                }
+                if (state.failed || state.clock.last.seconds>=5) goto cleanup;
+            }
         }
         result = state.failed ? 1 : 0;
+        if (verify_start || validate_start) {
+            if (!state.destroyed || state.timer_active || IsWindow(window)
+                    || state.clock_wakeups==0 || state.paints==0 || state.flash
+                    || state.active!=0 || state.native_escape_presses!=1
+                    || state.last_source!=2 || state.last_sequence!=state.consumed
+                    || state.input.count!=0 || state.arena.used!=1342744u
+                    || state.native_space_presses!=(verify_start ? 1u : 2u)
+                    || state.native_space_releases!=(verify_start ? 1u : 2u)
+                    || (verify_start && (start_stage!=2 || state.consumed!=5))) result=1;
+        }
     }
 cleanup:
     if (window != NULL && IsWindow(window)) DestroyWindow(window);
-    if (registered) UnregisterClassW(klass.lpszClassName, instance);
+    if (registered && !UnregisterClassW(klass.lpszClassName, instance)) result=1;
     /* Window callbacks have ended; every span is retired before pool release. */
-    (void)cs_input_reset(&state.input);
-    (void)cs_arena_reset(&state.arena);
+    {
+        cs_input_result input_reset=cs_input_reset(&state.input);
+        cs_arena_result arena_reset=cs_arena_reset(&state.arena);
+        if ((verify_start || validate_start) && (state.failed
+                || input_reset!=CS_INPUT_OK || arena_reset!=CS_ARENA_OK
+                || state.input.count!=0 || state.arena.used!=0)) result=1;
+    }
     free(state.backing);
-    if (result != 0) fputs("ClasSICK 0.97 viewer failed; see SPEC-0002.\n", stderr);
+    state.backing=NULL;
+    if (verify_start || validate_start) {
+        printf("B1 %s: %s; presses=%u releases=%u escape=%u consumed=%u timer=%u destroyed=%d retired=%zu\n",
+            verify_start ? "queued-message integration" : "operator keyboard session",
+            result==0 ? "PASS" : "INCOMPLETE/FAIL",state.native_space_presses,
+            state.native_space_releases,state.native_escape_presses,state.consumed,
+            state.clock_wakeups,state.destroyed,state.arena.used);
+    }
+    if (result != 0) fputs(verify_start || validate_start
+        ? "ClasSICK 0.97 hosted start incomplete; see hosted-start-audit.md.\n"
+        : "ClasSICK 0.97 viewer failed; see SPEC-0002.\n", stderr);
     return result;
 }

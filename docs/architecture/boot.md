@@ -1,6 +1,6 @@
 # Boot definitions and dependency graph
 
-Status: acceptance contracts, not achieved boot claims.
+Status: B0 and hosted B1 verified; native boot contracts remain unachieved.
 
 ## Three distinct gates
 
@@ -15,11 +15,15 @@ through an abstract surface, consumes normalized synthetic and live input, and
 exits cleanly. Headless bounds/ownership/event tests pass. No Toolbox compatibility
 claim is required to meet B1. This is a hosted development start.
 
-Current partial progress: surfaces, arena ownership and SPEC-0004 normalized
-Space/Escape input and SPEC-0005 deterministic/monotonic time pass hosted tests.
-The x64 debugger workflow now passes TEST-0009; remaining hosted-start acceptance
-is the next audit, so B1 is not closed by this debugger checkpoint.
-Full input/native drivers receive their own contracts when needed.
+Accepted 2026-10-08: SPEC-0001–0005 headless/hosted contracts, core import audits
+and TEST-0009 x64 debugging pass. TEST-0010 adds a combined real message-loop
+test, including synthetic and posted native messages, elapsed timing, pixels and
+Escape shutdown. A separate owner-operated visible session delivered two Space
+presses/releases and Escape, exiting zero after timer removal and arena retirement.
+Posted messages alone were not counted as live keyboard evidence. The existing
+B1/M0.1 technical gate passes; see [the audit](../development/hosted-start-audit.md).
+Human provenance review, broad input/native drivers, native boot and historical
+compatibility remain separate. No physical OS edition gate closes.
 
 The owner named installed VirtualBox for future native-PC boot tests; read-only
 version observation is 7.2.16r174877. No VM configuration, firmware/image adoption,

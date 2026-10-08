@@ -5,6 +5,27 @@ eligibility applies to the stated scope, not every resource reachable from a URL
 No Apple executable, source, disassembly, decompilation, or copied asset was used.
 No reference-system black-box observation has yet been performed.
 
+## SRC-0028 — Owner's B1 audit and live viewer validation
+
+- Author/date: owner, 2026-10-07–08, "OK, do it" after proposed remaining
+  hosted-start audit; on 2026-10-08 selected "I can test now—open the viewer".
+- Scope: existing B1/M0.1 audit, necessary combined checks/operator validation,
+  ordinary provenance/publication and Git wiki plans. No new core requirement,
+  OS boot claim, historical-source approval or live OneNote publication request.
+- Owner-operated test is project validation, not a reference-system observation.
+
+## SRC-0029 — Microsoft queued-message interfaces
+
+- Microsoft Learn, accessed 2026-10-08, parameters/returns/remarks of
+  [PostMessageW](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-postmessagew)
+  (updated 2023-03-21) and
+  [GetMessageW](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getmessagew).
+- Host message posting, retrieval, quit/error handling and ordering prose.
+  Adjacent public examples were visible, not copied or used as implementation.
+  Original bounded integration uses existing project Win32 interfaces.
+- No input-origin guarantee, historical Macintosh behavior or new runtime/tool
+  adoption follows. Posted key messages remain synthetic host-level fixtures.
+
 ## SRC-0025 — Owner's debugger checkpoint authorization
 
 - Author/date: owner, 2026-10-07, "Do it" after proposed debugger verification.

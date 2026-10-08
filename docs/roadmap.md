@@ -1,6 +1,6 @@
 # Milestone roadmap
 
-Status: dated 2026-10-07; dependency-driven gates, not calendar promises.
+Status: dated 2026-10-08; dependency-driven gates, not calendar promises.
 Milestone numbers retain the founding brief's labels; they are not a strict
 implementation sequence. Early MFS/resource research feeds the complete M0.4 gate.
 
@@ -24,13 +24,14 @@ the project license. Record any future license change through owner approval/ADR
 ## Immediate dependency order after bootstrap
 
 1. Completed the headless [SPEC-0001 bounded surfaces](specifications/SPEC-0001-surfaces.md)
-   with caller-supplied storage and original tests; see TEST-0004. M0.1 remains open.
+   with caller-supplied storage and original tests; see TEST-0004.
 2. [SPEC-0002 Windows presentation](specifications/SPEC-0002-windows-presentation.md)
    and original scenes are verified under TEST-0005. [SPEC-0003 bounded arenas](specifications/SPEC-0003-arenas.md)
    and viewer-buffer integration now pass TEST-0006. [SPEC-0004 keyboard input](specifications/SPEC-0004-input.md)
    and shared synthetic/Windows viewer input pass TEST-0007. [SPEC-0005 clocks](specifications/SPEC-0005-clock.md)
    and hosted timed behavior pass TEST-0008. The x64 debug workflow now passes
-   TEST-0009. Next audit remaining B1/M0.1 hosted-start acceptance.
+   TEST-0009. TEST-0010 and the owner-operated keyboard session now complete
+   [B1/M0.1 technical hosted-start acceptance](development/hosted-start-audit.md).
 3. Prove freestanding linkage/runtime ownership and a second compiler/core build.
 4. Prepare/review UEFI VM tooling and device contracts; the owner named installed
    VirtualBox (observed 7.2.16r174877) for native-PC tests. No VM/startup/firmware

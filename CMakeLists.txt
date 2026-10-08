@@ -150,6 +150,13 @@ if(BUILD_TESTING)
         set_tests_properties(clocks.viewer PROPERTIES TIMEOUT 15)
         add_test(NAME clocks.viewer-live COMMAND classick_surface_demo --verify-clock-live)
         set_tests_properties(clocks.viewer-live PROPERTIES TIMEOUT 15)
+        add_test(NAME hosted.start COMMAND classick_surface_demo --verify-start)
+        set_tests_properties(hosted.start PROPERTIES TIMEOUT 15
+            PASS_REGULAR_EXPRESSION "B1 queued-message integration: PASS")
+        add_test(NAME hosted.incomplete COMMAND ${CMAKE_COMMAND}
+            "-DVIEWER=$<TARGET_FILE:classick_surface_demo>"
+            -P ${CMAKE_SOURCE_DIR}/scripts/Check-Hosted-EarlyExit.cmake)
+        set_tests_properties(hosted.incomplete PROPERTIES TIMEOUT 15)
         add_test(NAME input.windows-mapping COMMAND classick_windows_input_tests)
         add_test(NAME input.viewer COMMAND classick_surface_demo --verify-input)
         set_tests_properties(input.viewer PROPERTIES TIMEOUT 15)
