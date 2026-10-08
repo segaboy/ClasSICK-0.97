@@ -116,5 +116,5 @@ try {
         $runs += [ordered]@{name=("reject-" + $case[0]);status='passed'}
     }
     [ordered]@{debugger=$version[0];runs=$runs} | ConvertTo-Json -Depth 6 | Set-Content -LiteralPath (Join-Path $OutputDirectory 'results.json') -Encoding UTF8
-    Write-Output 'TEST-0009 debugger verification PASS: six valid x64 LLDB runs and three argument rejections. WOW64 debugging unsupported; interactive local review recorded separately. B1 acceptance and all OS boots remain open.'
+    Write-Output 'TEST-0009 debugger verification PASS: six valid x64 LLDB runs and three argument rejections. WOW64 debugging unsupported; interactive local review and B1 gate acceptance recorded separately. No OS boot claim.'
 } finally { $env:PATH = $originalPath }

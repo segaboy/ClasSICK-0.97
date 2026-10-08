@@ -28,4 +28,4 @@ try {
         if ($LASTEXITCODE -ne 0) { throw "Input import check failed: $target" }
     }
 } finally { $env:PATH = $originalPath }
-Write-Output 'SPEC-0004 verification PASS. Bounded keyboard FIFO and hosted integration; clock, B1 and all OS boots remain open.'
+Write-Output 'SPEC-0004 verification PASS. Bounded keyboard FIFO and hosted integration; B1 gate acceptance is recorded separately, with no OS boot claim.'

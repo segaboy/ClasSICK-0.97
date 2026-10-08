@@ -54,7 +54,8 @@ verified workflow. Native boot work remains open.
 **B1/M0.1 hosted start now passes (2026-10-08).** The combined startup, input,
 timing and clean shutdown test passes, and the owner completed a separate live
 keyboard session. All 36 checks in five configurations and the x64 debugger replay
-pass locally. This verifies a Windows development start; Mac/PC OS boot and
+pass locally and in [Windows CI](https://github.com/segaboy/ClasSICK-0.97/actions/runs/37726362180).
+This verifies a Windows development start; Mac/PC OS boot and
 historical compatibility remain future work. See the [audit and repeat instructions](docs/development/hosted-start-audit.md).
 
 The owner reaffirmed real Macintosh booting and mini vMac validation. Those native

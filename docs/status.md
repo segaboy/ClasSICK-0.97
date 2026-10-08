@@ -29,6 +29,8 @@ does not imply that the complete project foundation or any OS boot is finished.
   Debug twins; final fixture-only unsigned-shift correction was followed by a
   second full matrix. Interactive/core/cleanup paths are identical between them.
   [Hosted-start audit](development/hosted-start-audit.md) records scope and results.
+  [Windows CI 37726362180 passed](https://github.com/segaboy/ClasSICK-0.97/actions/runs/37726362180)
+  at cf8b84e, including the full matrix/replay; eight local/remote hashes match.
 
 - TEST-0009 / IMPL-0007 verifies the bundled LLDB 23.1.1 on x64 Debug twins:
   source breakpoints, typed core/queue/viewer state, stacks, step over/in/out and

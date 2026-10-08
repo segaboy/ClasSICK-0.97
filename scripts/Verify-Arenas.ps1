@@ -25,4 +25,4 @@ try {
         if ($LASTEXITCODE -ne 0) { throw "Arena import check failed: $target" }
     }
 } finally { $env:PATH = $originalPath }
-Write-Output 'SPEC-0003 verification PASS. Bounded arena/ownership contracts and viewer integration; B1 and all OS boots remain open.'
+Write-Output 'SPEC-0003 verification PASS. Bounded arena/ownership contracts and viewer integration; B1 gate acceptance is recorded separately, with no OS boot claim.'

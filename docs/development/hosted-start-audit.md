@@ -12,7 +12,14 @@ The only subsequent implementation change constructs the posted release flag
 with an unsigned shift for 32-bit correctness. Interactive keyboard/presentation,
 core, event-loop and cleanup paths are unchanged. The final matrix was rerun;
 no second operator session or operator validation of the new binary is claimed.
-Remote CI is pending at this record revision and will be recorded after completion.
+Evidence/CI source: `cf8b84e50ca92b8130d9f24a9572a33a8df04031`.
+[Windows CI 37726362180 passed](https://github.com/segaboy/ClasSICK-0.97/actions/runs/37726362180):
+observed guard, pinned setup, bootstrap twins, all 36 checks in each matrix
+configuration, sanitizer/core/endian audits, six valid x64 debugger sessions and
+three rejected launches. All eight named executable hashes match local/remote.
+CI injected no live operator input; it does not replace the earlier owner session.
+This subsequent result update changes documentation and runner completion-message
+wording only; compiled inputs and verification logic are unchanged.
 
 | Existing requirement | Evidence and result |
 | --- | --- |
