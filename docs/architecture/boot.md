@@ -2,6 +2,11 @@
 
 Status: B0 and hosted B1 verified; native boot contracts remain unachieved.
 
+The [2026-10-08 readiness audit](../development/boot-readiness-audit.md)
+passes retained input/artifact integrity and five unloaded EFI inspections.
+Native launch is NO-GO pending formatted media and exact firmware/machine
+qualification. B2 and all physical edition gates remain open.
+
 ## Three distinct gates
 
 **B0 — bootstrap build:** the documented tools compile a native Windows development

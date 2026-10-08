@@ -1,0 +1,1317 @@
+{
+  "schema_version": 1,
+  "audit_date": "2026-10-08",
+  "audit_kind": "retained-artifact-integrity-and-boot-readiness",
+  "public_revision_audited": "653c442a9fa83e4bb2bfea727f43acb0a727f027",
+  "verified_source_revision": "3b44cb9510a400397a33cd1cc0802f45c36c8110",
+  "inputs_verified": 117,
+  "input_hashes": [
+    {
+      "path": ".github/ISSUE_TEMPLATE/config.yml",
+      "local_sha256": "13064e7bea658e01e718b414fbb7b3b244f36411fe25ee2055c151f7b534547a",
+      "committed_blob_sha256": "13064e7bea658e01e718b414fbb7b3b244f36411fe25ee2055c151f7b534547a",
+      "committed_comparison": "byte-identical"
+    },
+    {
+      "path": ".github/workflows/bootstrap.yml",
+      "local_sha256": "68c68f6f3be072e113c90c707ea754100761a1d89dac22aa181c6c2695f965f9",
+      "committed_blob_sha256": "68c68f6f3be072e113c90c707ea754100761a1d89dac22aa181c6c2695f965f9",
+      "committed_comparison": "byte-identical"
+    },
+    {
+      "path": "CMakeLists.txt",
+      "local_sha256": "27845441e42845175b66f3ffbbca224af5bceb4295a89bc7c0881e9c316491c9",
+      "committed_blob_sha256": "27845441e42845175b66f3ffbbca224af5bceb4295a89bc7c0881e9c316491c9",
+      "committed_comparison": "byte-identical"
+    },
+    {
+      "path": "CMakePresets.json",
+      "local_sha256": "f77b6cf4760d1a5b5aae2d69c7a024c0eed95ddf2b166f7fdf2a15628c191778",
+      "committed_blob_sha256": "f77b6cf4760d1a5b5aae2d69c7a024c0eed95ddf2b166f7fdf2a15628c191778",
+      "committed_comparison": "byte-identical"
+    },
+    {
+      "path": "apps/boot-scene/scene.c",
+      "local_sha256": "090066a925df667294024907594056f7211689774a47f053ac4ebdba7d94d6b6",
+      "committed_blob_sha256": "090066a925df667294024907594056f7211689774a47f053ac4ebdba7d94d6b6",
+      "committed_comparison": "byte-identical"
+    },
+    {
+      "path": "apps/boot-scene/scene.h",
+      "local_sha256": "817b14c8ed3326cde5413bb36c3f449c77f3ddd6092a64cd4da662332a7b77a8",
+      "committed_blob_sha256": "817b14c8ed3326cde5413bb36c3f449c77f3ddd6092a64cd4da662332a7b77a8",
+      "committed_comparison": "byte-identical"
+    },
+    {
+      "path": "apps/surface-demo/windows-main.c",
+      "local_sha256": "57ab44b945b864c7f6ae2553374c8305e77a07eaa067be98829a27ede949cf29",
+      "committed_blob_sha256": "57ab44b945b864c7f6ae2553374c8305e77a07eaa067be98829a27ede949cf29",
+      "committed_comparison": "byte-identical"
+    },
+    {
+      "path": "core/graphics/surface.c",
+      "local_sha256": "157ed442c0278a344b57cb0e08657c30273de2a62199d72a30b38e5ee7ea1c5c",
+      "committed_blob_sha256": "157ed442c0278a344b57cb0e08657c30273de2a62199d72a30b38e5ee7ea1c5c",
+      "committed_comparison": "byte-identical"
+    },
+    {
+      "path": "core/graphics/surface.h",
+      "local_sha256": "31de605b79282fac7f4208e28aab328662df975a03028ac16fe179672d6dc264",
+      "committed_blob_sha256": "31de605b79282fac7f4208e28aab328662df975a03028ac16fe179672d6dc264",
+      "committed_comparison": "byte-identical"
+    },
+    {
+      "path": "core/input/input.c",
+      "local_sha256": "7b83f08b94d01b100ec20e206cebc68aeafbe019214b327cadcd07ccf89f16c1",
+      "committed_blob_sha256": "7b83f08b94d01b100ec20e206cebc68aeafbe019214b327cadcd07ccf89f16c1",
+      "committed_comparison": "byte-identical"
+    },
+    {
+      "path": "core/input/input.h",
+      "local_sha256": "7cc26488f542677dd2f7882a7a440925816acf9ee225867508b19feb26ef4cb8",
+      "committed_blob_sha256": "7cc26488f542677dd2f7882a7a440925816acf9ee225867508b19feb26ef4cb8",
+      "committed_comparison": "byte-identical"
+    },
+    {
+      "path": "core/memory/arena.c",
+      "local_sha256": "d8eac4e4a45b8e6957473710404a3384d0a8d93dca30d0edb8883211b7926006",
+      "committed_blob_sha256": "d8eac4e4a45b8e6957473710404a3384d0a8d93dca30d0edb8883211b7926006",
+      "committed_comparison": "byte-identical"
+    },
+    {
+      "path": "core/memory/arena.h",
+      "local_sha256": "e26f9a33e8e1bc534ff738c131a2f3317159de600c5a59fa34f6788bbab8ceed",
+      "committed_blob_sha256": "e26f9a33e8e1bc534ff738c131a2f3317159de600c5a59fa34f6788bbab8ceed",
+      "committed_comparison": "byte-identical"
+    },
+    {
+      "path": "core/time/clock.c",
+      "local_sha256": "a6308d988ceb09ca449557d44a963f661888644a79bda832e7714c26771929cf",
+      "committed_blob_sha256": "a6308d988ceb09ca449557d44a963f661888644a79bda832e7714c26771929cf",
+      "committed_comparison": "byte-identical"
+    },
+    {
+      "path": "core/time/clock.h",
+      "local_sha256": "c3f1e2cd098cddba0090f4e1a2dd6973f39343736d80944503c6e17b5bc2fccf",
+      "committed_blob_sha256": "c3f1e2cd098cddba0090f4e1a2dd6973f39343736d80944503c6e17b5bc2fccf",
+      "committed_comparison": "byte-identical"
+    },
+    {
+      "path": "docs/development/ps2-keyboard-fingerprints.json",
+      "local_sha256": "5c86b47932e90320fc1ae7d82303510588c393fe42031928b7c47d3aca6491d3",
+      "committed_blob_sha256": "9bb34491ad821c8b924398d12322347a79d765021f2bf477bd01d9e98f26313e",
+      "committed_comparison": "CRLF-to-LF-only-under-recorded-text-eol-attributes"
+    },
+    {
+      "path": "platform/pc/acpi.c",
+      "local_sha256": "758a80e734103707c17adf332ff3414fabbc0b7ffc3f0f0e1256545134e0d1a2",
+      "committed_blob_sha256": "758a80e734103707c17adf332ff3414fabbc0b7ffc3f0f0e1256545134e0d1a2",
+      "committed_comparison": "byte-identical"
+    },
+    {
+      "path": "platform/pc/acpi.h",
+      "local_sha256": "550a20adfb213948ced74ada4b5eced47b4e256bdf553d3dc1d4ac3fbdca0143",
+      "committed_blob_sha256": "550a20adfb213948ced74ada4b5eced47b4e256bdf553d3dc1d4ac3fbdca0143",
+      "committed_comparison": "byte-identical"
+    },
+    {
+      "path": "platform/pc/framebuffer.c",
+      "local_sha256": "4c4f2513668688849a42ceb3895902781dbf18f3dc5026c6c7456132809bbfe2",
+      "committed_blob_sha256": "4c4f2513668688849a42ceb3895902781dbf18f3dc5026c6c7456132809bbfe2",
+      "committed_comparison": "byte-identical"
+    },
+    {
+      "path": "platform/pc/framebuffer.h",
+      "local_sha256": "3abdaf4d591fc79135dc6e4021dda496855a9efca1272725f8370a6517ca68d9",
+      "committed_blob_sha256": "3abdaf4d591fc79135dc6e4021dda496855a9efca1272725f8370a6517ca68d9",
+      "committed_comparison": "byte-identical"
+    },
+    {
+      "path": "platform/pc/pmtimer.c",
+      "local_sha256": "ac082045bd148ddaca80198b0b2b85914f51a0eb7554a9eb0f0cdf38d4fc0ddd",
+      "committed_blob_sha256": "ac082045bd148ddaca80198b0b2b85914f51a0eb7554a9eb0f0cdf38d4fc0ddd",
+      "committed_comparison": "byte-identical"
+    },
+    {
+      "path": "platform/pc/pmtimer.h",
+      "local_sha256": "77c51c08bea8fb2eccc060245dd44a665e5c906a14ade6a208cc7dbb91c9e558",
+      "committed_blob_sha256": "77c51c08bea8fb2eccc060245dd44a665e5c906a14ade6a208cc7dbb91c9e558",
+      "committed_comparison": "byte-identical"
+    },
+    {
+      "path": "platform/pc/ps2.c",
+      "local_sha256": "29ea28ccc7cee227122ba6adf2e8f97fd220ac163e6e2acbf02d5f233047db03",
+      "committed_blob_sha256": "29ea28ccc7cee227122ba6adf2e8f97fd220ac163e6e2acbf02d5f233047db03",
+      "committed_comparison": "byte-identical"
+    },
+    {
+      "path": "platform/pc/ps2.h",
+      "local_sha256": "79f6a3b12fbe0e89a62dbf8205e032bbd8954ef2d521c694514f917b1342f868",
+      "committed_blob_sha256": "79f6a3b12fbe0e89a62dbf8205e032bbd8954ef2d521c694514f917b1342f868",
+      "committed_comparison": "byte-identical"
+    },
+    {
+      "path": "platform/pc/uart.c",
+      "local_sha256": "e40579aee81ae72f0301fe70e103d044398aa5cd26366849082ebec02a81dbc3",
+      "committed_blob_sha256": "e40579aee81ae72f0301fe70e103d044398aa5cd26366849082ebec02a81dbc3",
+      "committed_comparison": "byte-identical"
+    },
+    {
+      "path": "platform/pc/uart.h",
+      "local_sha256": "13cac8e7a35cec1e31d54591bc650978b1d90281c0d35e18db5bb6a5b3b1e1a2",
+      "committed_blob_sha256": "13cac8e7a35cec1e31d54591bc650978b1d90281c0d35e18db5bb6a5b3b1e1a2",
+      "committed_comparison": "byte-identical"
+    },
+    {
+      "path": "platform/pc/x64/exceptions.S",
+      "local_sha256": "1b39155e50a3a1a2f9b9df33603e956180bd75d3af04bf8019093d5bccc9112d",
+      "committed_blob_sha256": "1b39155e50a3a1a2f9b9df33603e956180bd75d3af04bf8019093d5bccc9112d",
+      "committed_comparison": "byte-identical"
+    },
+    {
+      "path": "platform/pc/x64/io.S",
+      "local_sha256": "2a05be62bfb471cd7c68b0801811a3d09eefa53b83398331bf547df03c87432b",
+      "committed_blob_sha256": "2a05be62bfb471cd7c68b0801811a3d09eefa53b83398331bf547df03c87432b",
+      "committed_comparison": "byte-identical"
+    },
+    {
+      "path": "platform/pc/x64/keyboard-io.S",
+      "local_sha256": "254dcb9397b2fcaf5ff246fb457823e50425c92852bbd078b124725877186952",
+      "committed_blob_sha256": "254dcb9397b2fcaf5ff246fb457823e50425c92852bbd078b124725877186952",
+      "committed_comparison": "byte-identical"
+    },
+    {
+      "path": "platform/pc/x64/state.c",
+      "local_sha256": "fd489b0ffd86ba0dd23d37e208ac7c389fe13e1efb8885a3de61b51504984bed",
+      "committed_blob_sha256": "fd489b0ffd86ba0dd23d37e208ac7c389fe13e1efb8885a3de61b51504984bed",
+      "committed_comparison": "byte-identical"
+    },
+    {
+      "path": "platform/pc/x64/state.h",
+      "local_sha256": "a4bd58a8ef3134d8e18e84446661114c502bd446e9b782a3d2f46063ec7bda1e",
+      "committed_blob_sha256": "a4bd58a8ef3134d8e18e84446661114c502bd446e9b782a3d2f46063ec7bda1e",
+      "committed_comparison": "byte-identical"
+    },
+    {
+      "path": "platform/uefi/abi.h",
+      "local_sha256": "3c018d74b4ef8788a739b56939bdb130c7ffae8b2d6e8ceb5ceba475661fd7db",
+      "committed_blob_sha256": "3c018d74b4ef8788a739b56939bdb130c7ffae8b2d6e8ceb5ceba475661fd7db",
+      "committed_comparison": "byte-identical"
+    },
+    {
+      "path": "platform/uefi/contract.c",
+      "local_sha256": "57dd4c3902be4c420d7000f330a5977a35428d0088e6889fed9eb39fcf03970a",
+      "committed_blob_sha256": "57dd4c3902be4c420d7000f330a5977a35428d0088e6889fed9eb39fcf03970a",
+      "committed_comparison": "byte-identical"
+    },
+    {
+      "path": "platform/uefi/contract.h",
+      "local_sha256": "7deddb2179cbe392d604a0fdd9ed0ec2edfd47bb4c696a47fa0351d58e9b3158",
+      "committed_blob_sha256": "7deddb2179cbe392d604a0fdd9ed0ec2edfd47bb4c696a47fa0351d58e9b3158",
+      "committed_comparison": "byte-identical"
+    },
+    {
+      "path": "platform/uefi/entry.c",
+      "local_sha256": "a7f1a83a30b030d9f40388f9caf7e88e8bb14ab446ba61b039da682327ca8225",
+      "committed_blob_sha256": "a7f1a83a30b030d9f40388f9caf7e88e8bb14ab446ba61b039da682327ca8225",
+      "committed_comparison": "byte-identical"
+    },
+    {
+      "path": "platform/uefi/keyboard.c",
+      "local_sha256": "edc4742b84fb2cac91f5211297cf6e0ec28c3e59225ab6c39251c23a5ab623f3",
+      "committed_blob_sha256": "edc4742b84fb2cac91f5211297cf6e0ec28c3e59225ab6c39251c23a5ab623f3",
+      "committed_comparison": "byte-identical"
+    },
+    {
+      "path": "platform/uefi/keyboard.h",
+      "local_sha256": "1c9cc38ea98c4306790d132e6a00978b25417f7143dd1385d89142b0dabe64ba",
+      "committed_blob_sha256": "1c9cc38ea98c4306790d132e6a00978b25417f7143dd1385d89142b0dabe64ba",
+      "committed_comparison": "byte-identical"
+    },
+    {
+      "path": "platform/uefi/loader.c",
+      "local_sha256": "e847fe77e9aa7988d9ee1e27ff266e20081e88e8196c9b0a13586d236c22f2cd",
+      "committed_blob_sha256": "e847fe77e9aa7988d9ee1e27ff266e20081e88e8196c9b0a13586d236c22f2cd",
+      "committed_comparison": "byte-identical"
+    },
+    {
+      "path": "platform/uefi/loader.h",
+      "local_sha256": "806979defb6b7d44258096765757e26aa054493ad05eceb17fb6fac19714f575",
+      "committed_blob_sha256": "806979defb6b7d44258096765757e26aa054493ad05eceb17fb6fac19714f575",
+      "committed_comparison": "byte-identical"
+    },
+    {
+      "path": "platform/uefi/native.c",
+      "local_sha256": "a3b0e49d289054a8aa58d44f56c03f3a741e2df689f57cfd9a3d10d873ff7490",
+      "committed_blob_sha256": "a3b0e49d289054a8aa58d44f56c03f3a741e2df689f57cfd9a3d10d873ff7490",
+      "committed_comparison": "byte-identical"
+    },
+    {
+      "path": "platform/uefi/native.h",
+      "local_sha256": "8561d2c56883e735318bd7cd6c7b8941d6425168060c50e835e1f30e390222d0",
+      "committed_blob_sha256": "8561d2c56883e735318bd7cd6c7b8941d6425168060c50e835e1f30e390222d0",
+      "committed_comparison": "byte-identical"
+    },
+    {
+      "path": "platform/uefi/transition.S",
+      "local_sha256": "63db238b77026024133116117a70b598fa67e6d2bceb3a918ae7181ec23ec116",
+      "committed_blob_sha256": "63db238b77026024133116117a70b598fa67e6d2bceb3a918ae7181ec23ec116",
+      "committed_comparison": "byte-identical"
+    },
+    {
+      "path": "platform/uefi/uart.c",
+      "local_sha256": "fff67dc63218fb56cc8055385f0c2adafd083db094b5205e5c716b364c6d2172",
+      "committed_blob_sha256": "fff67dc63218fb56cc8055385f0c2adafd083db094b5205e5c716b364c6d2172",
+      "committed_comparison": "byte-identical"
+    },
+    {
+      "path": "platform/uefi/uart.h",
+      "local_sha256": "6fd2f84bf6f8415181a814d6a1053f3f1c902c1e91cce914566f16b21941ae8d",
+      "committed_blob_sha256": "6fd2f84bf6f8415181a814d6a1053f3f1c902c1e91cce914566f16b21941ae8d",
+      "committed_comparison": "byte-identical"
+    },
+    {
+      "path": "platform/windows/clock.c",
+      "local_sha256": "e1fc5c389c21c86ab9fc99b5055f0c5f4020242e5f7f2994bf264f581130b129",
+      "committed_blob_sha256": "e1fc5c389c21c86ab9fc99b5055f0c5f4020242e5f7f2994bf264f581130b129",
+      "committed_comparison": "byte-identical"
+    },
+    {
+      "path": "platform/windows/clock.h",
+      "local_sha256": "44e1181a55c2296a33815603a1b817ad64a9d168e8a0d9de6955964c5d9beb64",
+      "committed_blob_sha256": "44e1181a55c2296a33815603a1b817ad64a9d168e8a0d9de6955964c5d9beb64",
+      "committed_comparison": "byte-identical"
+    },
+    {
+      "path": "platform/windows/input.c",
+      "local_sha256": "796cccfd44dc573533af2cd14b93781354f07ad7275cf260ddf1e4018df02053",
+      "committed_blob_sha256": "796cccfd44dc573533af2cd14b93781354f07ad7275cf260ddf1e4018df02053",
+      "committed_comparison": "byte-identical"
+    },
+    {
+      "path": "platform/windows/input.h",
+      "local_sha256": "c5f71e34815fcba457811607b540141239d44a5ecd132332d7d72551a7678c3b",
+      "committed_blob_sha256": "c5f71e34815fcba457811607b540141239d44a5ecd132332d7d72551a7678c3b",
+      "committed_comparison": "byte-identical"
+    },
+    {
+      "path": "platform/windows/pixels.c",
+      "local_sha256": "e243cfd72313d957e5d7bfb31e61dbea078826bbf3544b0c17f891915fa6096e",
+      "committed_blob_sha256": "e243cfd72313d957e5d7bfb31e61dbea078826bbf3544b0c17f891915fa6096e",
+      "committed_comparison": "byte-identical"
+    },
+    {
+      "path": "platform/windows/pixels.h",
+      "local_sha256": "3e297dbbd9f8423f48cbac03c9829c216d3fd2d5aaa798fa7078365b215713d4",
+      "committed_blob_sha256": "3e297dbbd9f8423f48cbac03c9829c216d3fd2d5aaa798fa7078365b215713d4",
+      "committed_comparison": "byte-identical"
+    },
+    {
+      "path": "platform/windows/presenter.c",
+      "local_sha256": "02c44770e5acd3ee74d967be6bea5ab89ed4f63c2fe9b4ae8a0ad4d2598893c8",
+      "committed_blob_sha256": "02c44770e5acd3ee74d967be6bea5ab89ed4f63c2fe9b4ae8a0ad4d2598893c8",
+      "committed_comparison": "byte-identical"
+    },
+    {
+      "path": "platform/windows/presenter.h",
+      "local_sha256": "7692bd3e82a503366b23b34ff49a07743dea73f6061c80bcd43e50eddfbf2c2b",
+      "committed_blob_sha256": "7692bd3e82a503366b23b34ff49a07743dea73f6061c80bcd43e50eddfbf2c2b",
+      "committed_comparison": "byte-identical"
+    },
+    {
+      "path": "scripts/Check-Freestanding.cmake",
+      "local_sha256": "18900dd4d8eee678498fb788db3a0d4e40b30e1e8c4d0a948adcaacd69a42c90",
+      "committed_blob_sha256": "18900dd4d8eee678498fb788db3a0d4e40b30e1e8c4d0a948adcaacd69a42c90",
+      "committed_comparison": "byte-identical"
+    },
+    {
+      "path": "scripts/Check-Hosted-EarlyExit.cmake",
+      "local_sha256": "8868f90abd74da60f4675c7ce60fb7e559a50bbc70da39509d9f94b4b4bd4241",
+      "committed_blob_sha256": "8868f90abd74da60f4675c7ce60fb7e559a50bbc70da39509d9f94b4b4bd4241",
+      "committed_comparison": "byte-identical"
+    },
+    {
+      "path": "scripts/Check-LoaderObject.cmake",
+      "local_sha256": "e83ad0d5abde607512e9b5e99a62b62eec141d164b4f27230a4741907421881f",
+      "committed_blob_sha256": "e83ad0d5abde607512e9b5e99a62b62eec141d164b4f27230a4741907421881f",
+      "committed_comparison": "byte-identical"
+    },
+    {
+      "path": "scripts/Check-ObjectImports.cmake",
+      "local_sha256": "edde8b30323811c86ae6fe9150aefa4fc1b7dd0fa0540f3a3d43e8df242f7c73",
+      "committed_blob_sha256": "edde8b30323811c86ae6fe9150aefa4fc1b7dd0fa0540f3a3d43e8df242f7c73",
+      "committed_comparison": "byte-identical"
+    },
+    {
+      "path": "scripts/Enter-DevEnvironment.ps1",
+      "local_sha256": "0bb3c8f56100679f7c66496e6617513fb1b51eddee16098e624c0ec46ad9b89c",
+      "committed_blob_sha256": "0bb3c8f56100679f7c66496e6617513fb1b51eddee16098e624c0ec46ad9b89c",
+      "committed_comparison": "byte-identical"
+    },
+    {
+      "path": "scripts/Inventory-Windows.ps1",
+      "local_sha256": "756cbfe46fc2bbf2d08aef8975b611bc70d773ab42e08a34ea924eae35fbaa3f",
+      "committed_blob_sha256": "756cbfe46fc2bbf2d08aef8975b611bc70d773ab42e08a34ea924eae35fbaa3f",
+      "committed_comparison": "byte-identical"
+    },
+    {
+      "path": "scripts/Setup-SecondCompiler.ps1",
+      "local_sha256": "94f48913e6ef3b6b35456486b09923f5bc1ce24b77abed50c0bf43dc2b6f6ee4",
+      "committed_blob_sha256": "94f48913e6ef3b6b35456486b09923f5bc1ce24b77abed50c0bf43dc2b6f6ee4",
+      "committed_comparison": "byte-identical"
+    },
+    {
+      "path": "scripts/Setup-Windows.ps1",
+      "local_sha256": "990dccaff4968ffecfc86c364b6e02e69fd5d242d30a25a2fde8a3ddbd4a6734",
+      "committed_blob_sha256": "990dccaff4968ffecfc86c364b6e02e69fd5d242d30a25a2fde8a3ddbd4a6734",
+      "committed_comparison": "byte-identical"
+    },
+    {
+      "path": "scripts/Test-Debugger.ps1",
+      "local_sha256": "ca7659daba08b10468ebf974ea370ac13fd3108ce2b2a220d8fb793927afe4c4",
+      "committed_blob_sha256": "ca7659daba08b10468ebf974ea370ac13fd3108ce2b2a220d8fb793927afe4c4",
+      "committed_comparison": "byte-identical"
+    },
+    {
+      "path": "scripts/Test-LinkImage.ps1",
+      "local_sha256": "73b2f85368eb7d535bcea02702655eee9c2a3c99d14181a770968fd4f3b4f167",
+      "committed_blob_sha256": "73b2f85368eb7d535bcea02702655eee9c2a3c99d14181a770968fd4f3b4f167",
+      "committed_comparison": "byte-identical"
+    },
+    {
+      "path": "scripts/Test-Repository.ps1",
+      "local_sha256": "523556981e236eca7ddb54e21c530235bab1d2a825376a7dc22b04080e643cd1",
+      "committed_blob_sha256": "523556981e236eca7ddb54e21c530235bab1d2a825376a7dc22b04080e643cd1",
+      "committed_comparison": "byte-identical"
+    },
+    {
+      "path": "scripts/Test-UEFIImage.ps1",
+      "local_sha256": "2d5abcad8093f41e52e194cb496fe23ca704e8769a9ccd608c546d1c2049b0d3",
+      "committed_blob_sha256": "2d5abcad8093f41e52e194cb496fe23ca704e8769a9ccd608c546d1c2049b0d3",
+      "committed_comparison": "byte-identical"
+    },
+    {
+      "path": "scripts/Verify-Arenas.ps1",
+      "local_sha256": "b274b3e13952477202d925bfc32ae2de6db5a1fe8a9b2f48fa114d8de214ae2f",
+      "committed_blob_sha256": "b274b3e13952477202d925bfc32ae2de6db5a1fe8a9b2f48fa114d8de214ae2f",
+      "committed_comparison": "byte-identical"
+    },
+    {
+      "path": "scripts/Verify-Bootstrap.ps1",
+      "local_sha256": "d77b6fa8bdd860736c552543cfa00e6d2c591546477e59ca383cf87418b361cd",
+      "committed_blob_sha256": "d77b6fa8bdd860736c552543cfa00e6d2c591546477e59ca383cf87418b361cd",
+      "committed_comparison": "byte-identical"
+    },
+    {
+      "path": "scripts/Verify-Clocks.ps1",
+      "local_sha256": "cec5487f2970f1ac24dd85ee1ee2bde5f677c9da38c27a6f149a72c2c3962d41",
+      "committed_blob_sha256": "cec5487f2970f1ac24dd85ee1ee2bde5f677c9da38c27a6f149a72c2c3962d41",
+      "committed_comparison": "byte-identical"
+    },
+    {
+      "path": "scripts/Verify-CoreLink.ps1",
+      "local_sha256": "86c8645d0d6a15bfdd33c6bcf16b01da1a7df5c7a6aff53e940d821243aad07b",
+      "committed_blob_sha256": "86c8645d0d6a15bfdd33c6bcf16b01da1a7df5c7a6aff53e940d821243aad07b",
+      "committed_comparison": "byte-identical"
+    },
+    {
+      "path": "scripts/Verify-Debugger.ps1",
+      "local_sha256": "fb76c30810fc9cb62a788c3d443310b62bddc0773c38b7a0b31d087156fdc93f",
+      "committed_blob_sha256": "fb76c30810fc9cb62a788c3d443310b62bddc0773c38b7a0b31d087156fdc93f",
+      "committed_comparison": "byte-identical"
+    },
+    {
+      "path": "scripts/Verify-Input.ps1",
+      "local_sha256": "f6a0cc178489d27e002ea24dc982ef3fd4995336565f1c15f55f0eab9fb82e5e",
+      "committed_blob_sha256": "f6a0cc178489d27e002ea24dc982ef3fd4995336565f1c15f55f0eab9fb82e5e",
+      "committed_comparison": "byte-identical"
+    },
+    {
+      "path": "scripts/Verify-NativeFramebuffer.ps1",
+      "local_sha256": "4f63027459b08029af2d1172f584d08a8f707a7306adb652547a33c33cbc2258",
+      "committed_blob_sha256": "4f63027459b08029af2d1172f584d08a8f707a7306adb652547a33c33cbc2258",
+      "committed_comparison": "byte-identical"
+    },
+    {
+      "path": "scripts/Verify-PMTimer.ps1",
+      "local_sha256": "44bf5cffc8400ec06ca83083e6a13c31151ee25a942ea36f2bfa083813be6b69",
+      "committed_blob_sha256": "44bf5cffc8400ec06ca83083e6a13c31151ee25a942ea36f2bfa083813be6b69",
+      "committed_comparison": "byte-identical"
+    },
+    {
+      "path": "scripts/Verify-PS2Keyboard.ps1",
+      "local_sha256": "3f45156405a1ba9529a58f86b5b3ea020b5397734c327a399be4c50a9b1e7c8d",
+      "committed_blob_sha256": "3f45156405a1ba9529a58f86b5b3ea020b5397734c327a399be4c50a9b1e7c8d",
+      "committed_comparison": "byte-identical"
+    },
+    {
+      "path": "scripts/Verify-Presentation.ps1",
+      "local_sha256": "5530a4c2633b34a1a3f0903dcca1949b7b657fd648b59c3ddd37fecd4eb37721",
+      "committed_blob_sha256": "5530a4c2633b34a1a3f0903dcca1949b7b657fd648b59c3ddd37fecd4eb37721",
+      "committed_comparison": "byte-identical"
+    },
+    {
+      "path": "scripts/Verify-ProgressLoop.ps1",
+      "local_sha256": "47e8bf56a3949b19e26a9538595177f3b1c1721e2bba836737baaae77ec02353",
+      "committed_blob_sha256": "47e8bf56a3949b19e26a9538595177f3b1c1721e2bba836737baaae77ec02353",
+      "committed_comparison": "byte-identical"
+    },
+    {
+      "path": "scripts/Verify-Surfaces.ps1",
+      "local_sha256": "837aa5c27c6fe2601a54f46df56ba9990286939409f64e5aa571009d3bc3b323",
+      "committed_blob_sha256": "837aa5c27c6fe2601a54f46df56ba9990286939409f64e5aa571009d3bc3b323",
+      "committed_comparison": "byte-identical"
+    },
+    {
+      "path": "scripts/Verify-UARTDiagnostics.ps1",
+      "local_sha256": "0495d0ac5acd383d3ccc1617a596085de5aaf1d148b1d2dbb37992a41fef9bdf",
+      "committed_blob_sha256": "0495d0ac5acd383d3ccc1617a596085de5aaf1d148b1d2dbb37992a41fef9bdf",
+      "committed_comparison": "byte-identical"
+    },
+    {
+      "path": "scripts/Verify-UEFIContracts.ps1",
+      "local_sha256": "211c3f07ac291c8c9420f334aeb847c6f62e5ec38a2ed4f2332db879e222259a",
+      "committed_blob_sha256": "211c3f07ac291c8c9420f334aeb847c6f62e5ec38a2ed4f2332db879e222259a",
+      "committed_comparison": "byte-identical"
+    },
+    {
+      "path": "scripts/Verify-UEFIImage.ps1",
+      "local_sha256": "6072b722ad3d04850babb25abc9f74199c10eda60587389bfdd1daff17b45f7f",
+      "committed_blob_sha256": "6072b722ad3d04850babb25abc9f74199c10eda60587389bfdd1daff17b45f7f",
+      "committed_comparison": "byte-identical"
+    },
+    {
+      "path": "scripts/Verify-UEFILoader.ps1",
+      "local_sha256": "b734e53f1cdab7e01f9542ec607c9ef6208a05bc125de3e2dab3cf6ab02ddf06",
+      "committed_blob_sha256": "b734e53f1cdab7e01f9542ec607c9ef6208a05bc125de3e2dab3cf6ab02ddf06",
+      "committed_comparison": "byte-identical"
+    },
+    {
+      "path": "scripts/Verify-X64Exceptions.ps1",
+      "local_sha256": "cde1f04bd507206946d97575229ace7dcb15d7609b0adbf82c4fa3aca9fdcd86",
+      "committed_blob_sha256": "cde1f04bd507206946d97575229ace7dcb15d7609b0adbf82c4fa3aca9fdcd86",
+      "committed_comparison": "byte-identical"
+    },
+    {
+      "path": "scripts/gcc-toolchain-lock.json",
+      "local_sha256": "a354e0266626eae29268b399be926c4d0139c219eefc658c929edff1806ed4e1",
+      "committed_blob_sha256": "a354e0266626eae29268b399be926c4d0139c219eefc658c929edff1806ed4e1",
+      "committed_comparison": "byte-identical"
+    },
+    {
+      "path": "scripts/toolchain-lock.json",
+      "local_sha256": "1333d37082a7ec4cf732dcf2dc7630f238baf360c07e57e35c0bfba0c2735a22",
+      "committed_blob_sha256": "1333d37082a7ec4cf732dcf2dc7630f238baf360c07e57e35c0bfba0c2735a22",
+      "committed_comparison": "byte-identical"
+    },
+    {
+      "path": "tests/acpi-fixture.h",
+      "local_sha256": "664a755b3ae93861334d7ab7666853e07f63189b591e61245a590b672f147583",
+      "committed_blob_sha256": "664a755b3ae93861334d7ab7666853e07f63189b591e61245a590b672f147583",
+      "committed_comparison": "byte-identical"
+    },
+    {
+      "path": "tests/acpi-keyboard.c",
+      "local_sha256": "0929672f790f2cf4826dc8be09a49aa48bea67335c83ef96f2ea640c7e70ca06",
+      "committed_blob_sha256": "0929672f790f2cf4826dc8be09a49aa48bea67335c83ef96f2ea640c7e70ca06",
+      "committed_comparison": "byte-identical"
+    },
+    {
+      "path": "tests/acpi.c",
+      "local_sha256": "05a359f1a500d99d3bab1737fe18fd37859054a88891e2dbecf595c53891e51f",
+      "committed_blob_sha256": "05a359f1a500d99d3bab1737fe18fd37859054a88891e2dbecf595c53891e51f",
+      "committed_comparison": "byte-identical"
+    },
+    {
+      "path": "tests/arenas.c",
+      "local_sha256": "15ed2efaf0c04208f311f6315f7b68bedaaf1a3bfdff0cfc5527487114610415",
+      "committed_blob_sha256": "15ed2efaf0c04208f311f6315f7b68bedaaf1a3bfdff0cfc5527487114610415",
+      "committed_comparison": "byte-identical"
+    },
+    {
+      "path": "tests/boot-scene.c",
+      "local_sha256": "43c03468e1a9b6c909fa14f243b17240bad155c8d054322b8dc27fb1da71ff47",
+      "committed_blob_sha256": "43c03468e1a9b6c909fa14f243b17240bad155c8d054322b8dc27fb1da71ff47",
+      "committed_comparison": "byte-identical"
+    },
+    {
+      "path": "tests/clocks.c",
+      "local_sha256": "935dda53338a60a1c6fa5c1a023aafdcccfc45643b14ce3857f2c577e8b30b23",
+      "committed_blob_sha256": "935dda53338a60a1c6fa5c1a023aafdcccfc45643b14ce3857f2c577e8b30b23",
+      "committed_comparison": "byte-identical"
+    },
+    {
+      "path": "tests/core-link.c",
+      "local_sha256": "80a521ae3c3cc4595dc5bc112ef19ad5c7655d3dc5e31de4940bee810ec71618",
+      "committed_blob_sha256": "80a521ae3c3cc4595dc5bc112ef19ad5c7655d3dc5e31de4940bee810ec71618",
+      "committed_comparison": "byte-identical"
+    },
+    {
+      "path": "tests/input.c",
+      "local_sha256": "056a60ff0b3a50c766af197449e263842c63c99fd4808dd4e6ccdff851a280e2",
+      "committed_blob_sha256": "056a60ff0b3a50c766af197449e263842c63c99fd4808dd4e6ccdff851a280e2",
+      "committed_comparison": "byte-identical"
+    },
+    {
+      "path": "tests/native-framebuffer.c",
+      "local_sha256": "35f5fceaa24575132f0443bd69fd94dadbd82674c4ca0e225384521944e71784",
+      "committed_blob_sha256": "35f5fceaa24575132f0443bd69fd94dadbd82674c4ca0e225384521944e71784",
+      "committed_comparison": "byte-identical"
+    },
+    {
+      "path": "tests/native-keyboard.c",
+      "local_sha256": "abd20e6e0498aeb33a6684c60e6d636592f455ff67e3dad11dee70ea183a8a99",
+      "committed_blob_sha256": "abd20e6e0498aeb33a6684c60e6d636592f455ff67e3dad11dee70ea183a8a99",
+      "committed_comparison": "byte-identical"
+    },
+    {
+      "path": "tests/native-loop.c",
+      "local_sha256": "f6162c230faff9f845f0ef15f23d04d5aee4426d1ad60fcf446b632bc6ec9493",
+      "committed_blob_sha256": "f6162c230faff9f845f0ef15f23d04d5aee4426d1ad60fcf446b632bc6ec9493",
+      "committed_comparison": "byte-identical"
+    },
+    {
+      "path": "tests/native-present.c",
+      "local_sha256": "b382f639bb191e267c48f4bd9faddf07afaaa41cf38fdc7fc59d07538e424762",
+      "committed_blob_sha256": "b382f639bb191e267c48f4bd9faddf07afaaa41cf38fdc7fc59d07538e424762",
+      "committed_comparison": "byte-identical"
+    },
+    {
+      "path": "tests/native-timer.c",
+      "local_sha256": "19da0751ccbdc39ed3d1e838a69d6ac322b6f63042d6453236490b481a91ac14",
+      "committed_blob_sha256": "19da0751ccbdc39ed3d1e838a69d6ac322b6f63042d6453236490b481a91ac14",
+      "committed_comparison": "byte-identical"
+    },
+    {
+      "path": "tests/native-uart.c",
+      "local_sha256": "7a2ab7fd862f1daa35cbae410688b4a2752fc3121d998929a6cdb25fd2a61c96",
+      "committed_blob_sha256": "7a2ab7fd862f1daa35cbae410688b4a2752fc3121d998929a6cdb25fd2a61c96",
+      "committed_comparison": "byte-identical"
+    },
+    {
+      "path": "tests/pmtimer.c",
+      "local_sha256": "b4fd4a3e954ba217e7c685bff97c14e7da45187332e4ca041a74733252d2988e",
+      "committed_blob_sha256": "b4fd4a3e954ba217e7c685bff97c14e7da45187332e4ca041a74733252d2988e",
+      "committed_comparison": "byte-identical"
+    },
+    {
+      "path": "tests/ps2-fixture.h",
+      "local_sha256": "5c93d4e998a26f051664c72fdc83550612a5b2f23dd6420a7f871f6b8f292b08",
+      "committed_blob_sha256": "5c93d4e998a26f051664c72fdc83550612a5b2f23dd6420a7f871f6b8f292b08",
+      "committed_comparison": "byte-identical"
+    },
+    {
+      "path": "tests/ps2.c",
+      "local_sha256": "b06d5ac04c3e15982df439e2e3804070d7830070da34af3a0a1a4cd70c16d0b2",
+      "committed_blob_sha256": "b06d5ac04c3e15982df439e2e3804070d7830070da34af3a0a1a4cd70c16d0b2",
+      "committed_comparison": "byte-identical"
+    },
+    {
+      "path": "tests/sanitizer-probe.c",
+      "local_sha256": "6cbc6adcaa6a08965e8d9b9f871926a44a484ccef92735c8981e74728b8168d1",
+      "committed_blob_sha256": "6cbc6adcaa6a08965e8d9b9f871926a44a484ccef92735c8981e74728b8168d1",
+      "committed_comparison": "byte-identical"
+    },
+    {
+      "path": "tests/scene-oracle.h",
+      "local_sha256": "48f93083a4b8fc69796d42dfe9764fd299ac184d719b68eab461131128b34608",
+      "committed_blob_sha256": "48f93083a4b8fc69796d42dfe9764fd299ac184d719b68eab461131128b34608",
+      "committed_comparison": "byte-identical"
+    },
+    {
+      "path": "tests/surfaces.c",
+      "local_sha256": "861983e7d7b879852991136925112ffd1424916fd2f355d10c7dc1d5c49818ef",
+      "committed_blob_sha256": "861983e7d7b879852991136925112ffd1424916fd2f355d10c7dc1d5c49818ef",
+      "committed_comparison": "byte-identical"
+    },
+    {
+      "path": "tests/uart-fixture.h",
+      "local_sha256": "072bb9da97780ed01bc4156e323cefefc2d0c2dc4127d6ae0f26beb27056b296",
+      "committed_blob_sha256": "072bb9da97780ed01bc4156e323cefefc2d0c2dc4127d6ae0f26beb27056b296",
+      "committed_comparison": "byte-identical"
+    },
+    {
+      "path": "tests/uart.c",
+      "local_sha256": "ca7f5b35aae61753f992fba03745d5736272564e22a3dbac3e302db10e8e03f6",
+      "committed_blob_sha256": "ca7f5b35aae61753f992fba03745d5736272564e22a3dbac3e302db10e8e03f6",
+      "committed_comparison": "byte-identical"
+    },
+    {
+      "path": "tests/uefi-contract.c",
+      "local_sha256": "d40c7cd1743d6d12a0947e5f6803802bb6cda813e446f329e9842b0839dabfc2",
+      "committed_blob_sha256": "d40c7cd1743d6d12a0947e5f6803802bb6cda813e446f329e9842b0839dabfc2",
+      "committed_comparison": "byte-identical"
+    },
+    {
+      "path": "tests/uefi-loader.c",
+      "local_sha256": "073f062321584f1f9eecc50bc37013c8828482ebea6cf3273da24696d6d1bef7",
+      "committed_blob_sha256": "073f062321584f1f9eecc50bc37013c8828482ebea6cf3273da24696d6d1bef7",
+      "committed_comparison": "byte-identical"
+    },
+    {
+      "path": "tests/windows-clock.c",
+      "local_sha256": "54ff44dbc322e2465296b3798db43ae35abc16bf607aff3fe3c1511b46a375ac",
+      "committed_blob_sha256": "54ff44dbc322e2465296b3798db43ae35abc16bf607aff3fe3c1511b46a375ac",
+      "committed_comparison": "byte-identical"
+    },
+    {
+      "path": "tests/windows-input.c",
+      "local_sha256": "a246fb5642ce8cd15e37e7f2fc359704de287c8409d8cf9500fb15c5a0ed8e4e",
+      "committed_blob_sha256": "a246fb5642ce8cd15e37e7f2fc359704de287c8409d8cf9500fb15c5a0ed8e4e",
+      "committed_comparison": "byte-identical"
+    },
+    {
+      "path": "tests/windows-presentation.c",
+      "local_sha256": "ab3b60591980c4cc8fc444ee77e5ef8ae50399fa686a94631058305c3c87eb6c",
+      "committed_blob_sha256": "ab3b60591980c4cc8fc444ee77e5ef8ae50399fa686a94631058305c3c87eb6c",
+      "committed_comparison": "byte-identical"
+    },
+    {
+      "path": "tests/x64-state.c",
+      "local_sha256": "feaf868b522cf859191a556643a1c43d269070b4a6618980f91d7b1609d04b50",
+      "committed_blob_sha256": "feaf868b522cf859191a556643a1c43d269070b4a6618980f91d7b1609d04b50",
+      "committed_comparison": "byte-identical"
+    },
+    {
+      "path": "tools/core-link/import.c",
+      "local_sha256": "1abb8d903c755b0a79c490a3a11f65447ab79942fc05f9ab297aa2f3127c9667",
+      "committed_blob_sha256": "1abb8d903c755b0a79c490a3a11f65447ab79942fc05f9ab297aa2f3127c9667",
+      "committed_comparison": "byte-identical"
+    },
+    {
+      "path": "tools/core-link/missing.c",
+      "local_sha256": "1ba673d387fa00806e2287464cb2ada773e06261b05d3d41459f3601dd2adb77",
+      "committed_blob_sha256": "1ba673d387fa00806e2287464cb2ada773e06261b05d3d41459f3601dd2adb77",
+      "committed_comparison": "byte-identical"
+    },
+    {
+      "path": "tools/core-link/probe.c",
+      "local_sha256": "bd121d5ec3ec0f0eb51c538dbd571bcbe3bad37bc090dead1778475efa222740",
+      "committed_blob_sha256": "bd121d5ec3ec0f0eb51c538dbd571bcbe3bad37bc090dead1778475efa222740",
+      "committed_comparison": "byte-identical"
+    },
+    {
+      "path": "tools/core-link/probe.h",
+      "local_sha256": "1112b07efc32b5c0d2cb234e45424783397378c67f987939386329d20ffc0740",
+      "committed_blob_sha256": "1112b07efc32b5c0d2cb234e45424783397378c67f987939386329d20ffc0740",
+      "committed_comparison": "byte-identical"
+    },
+    {
+      "path": "tools/toolchain-smoke/abi-probe.c",
+      "local_sha256": "ad37fa9878975200a64787f3f595bc89fe62888688228c7cd51294626c70b002",
+      "committed_blob_sha256": "ad37fa9878975200a64787f3f595bc89fe62888688228c7cd51294626c70b002",
+      "committed_comparison": "byte-identical"
+    },
+    {
+      "path": "tools/toolchain-smoke/main.c",
+      "local_sha256": "fd78be4876127c14d7f3692c697bd78a8a0441df64e635191d3684f5668ed6e8",
+      "committed_blob_sha256": "fd78be4876127c14d7f3692c697bd78a8a0441df64e635191d3684f5668ed6e8",
+      "committed_comparison": "byte-identical"
+    }
+  ],
+  "committed_byte_identical_inputs": 116,
+  "line_ending_only_inputs": [
+    "docs/development/ps2-keyboard-fingerprints.json"
+  ],
+  "retained_logs": {
+    "local": {
+      "sha256": "71b7ef11904493f4cd828daa270bafa04ef64aeb29c5235d5a98f31e2f9e34c4",
+      "encoding": "utf-16"
+    },
+    "ci": {
+      "sha256": "312df9c4842cc70a6fdcbba45f37b85505e69e98e99516a06eb31e5d49eab261",
+      "encoding": "utf-8-sig"
+    }
+  },
+  "fingerprint_labels": 59,
+  "distinct_fingerprints": 53,
+  "artifact_matches": [
+    {
+      "label": "SHA-256 classick_surface_tests.exe",
+      "sha256": "6c44fa17d22f384f7a9e1837f887f39658df5adf30948fdc23a33b7ce4bcc667",
+      "retained_paths": [
+        "clang-hosted/debug-a/classick_surface_tests.exe",
+        "clang-hosted/debug-b/classick_surface_tests.exe"
+      ]
+    },
+    {
+      "label": "SHA-256 classick_presentation_tests.exe",
+      "sha256": "4cde2257f71a4ceec66fb6871a36ca5a5d452e342292a6c567eee8e06d35f01d",
+      "retained_paths": [
+        "clang-hosted/debug-a/classick_presentation_tests.exe",
+        "clang-hosted/debug-b/classick_presentation_tests.exe"
+      ]
+    },
+    {
+      "label": "SHA-256 classick_surface_demo.exe",
+      "sha256": "2040e263ad68ff877b00625fc05f409b1321e083702e484bcc8ca21debbf7a92",
+      "retained_paths": [
+        "clang-hosted/debug-a/classick_surface_demo.exe",
+        "clang-hosted/debug-b/classick_surface_demo.exe"
+      ]
+    },
+    {
+      "label": "SHA-256 classick_arena_tests.exe",
+      "sha256": "15a485fffd312f9221cf939cfc7dbaf0351a0a78ca7678f1e21ce3219f7ca6b5",
+      "retained_paths": [
+        "clang-hosted/debug-a/classick_arena_tests.exe",
+        "clang-hosted/debug-b/classick_arena_tests.exe"
+      ]
+    },
+    {
+      "label": "SHA-256 classick_input_tests.exe",
+      "sha256": "2e87cd26b4a79bf7900203c485e8071dab2494e0750a967e42acc22c2ab450b8",
+      "retained_paths": [
+        "clang-hosted/debug-a/classick_input_tests.exe",
+        "clang-hosted/debug-b/classick_input_tests.exe"
+      ]
+    },
+    {
+      "label": "SHA-256 classick_windows_input_tests.exe",
+      "sha256": "ff1328d879cb16ad279756162123fdf28637ee7cfccc814be798a742c6879c26",
+      "retained_paths": [
+        "clang-hosted/debug-a/classick_windows_input_tests.exe",
+        "clang-hosted/debug-b/classick_windows_input_tests.exe"
+      ]
+    },
+    {
+      "label": "SHA-256 classick_clock_tests.exe",
+      "sha256": "03c4e9abf6a75459113d28f255d97f48e0ab2b0d42ac90ca7f36e2e3d8224fc2",
+      "retained_paths": [
+        "clang-hosted/debug-a/classick_clock_tests.exe",
+        "clang-hosted/debug-b/classick_clock_tests.exe"
+      ]
+    },
+    {
+      "label": "SHA-256 classick_windows_clock_tests.exe",
+      "sha256": "2aa6fd9400a490975bc34ad9c70116a093dfdf06c5f32c83a1f3a8c4c82e0a95",
+      "retained_paths": [
+        "clang-hosted/debug-a/classick_windows_clock_tests.exe",
+        "clang-hosted/debug-b/classick_windows_clock_tests.exe"
+      ]
+    },
+    {
+      "label": "GCC SHA-256 classick_surface_tests.exe",
+      "sha256": "0b884aa722909866278c20b4772a20ac7ff821c6cdb6eba3f6c8e298f9b46ba9",
+      "retained_paths": [
+        "gcc-debug-a/classick_surface_tests.exe",
+        "gcc-debug-b/classick_surface_tests.exe"
+      ]
+    },
+    {
+      "label": "GCC SHA-256 classick_arena_tests.exe",
+      "sha256": "0a0cca4167d5b63f55c1e1c409522a428127191a2e06a7e538d681ad6784b4ab",
+      "retained_paths": [
+        "gcc-debug-a/classick_arena_tests.exe",
+        "gcc-debug-b/classick_arena_tests.exe"
+      ]
+    },
+    {
+      "label": "GCC SHA-256 classick_input_tests.exe",
+      "sha256": "acdace625ac8c5d48fb3cc346826a3f99c4cae6ea3b5c05f95bd532aa1ad573f",
+      "retained_paths": [
+        "gcc-debug-a/classick_input_tests.exe",
+        "gcc-debug-b/classick_input_tests.exe"
+      ]
+    },
+    {
+      "label": "GCC SHA-256 classick_clock_tests.exe",
+      "sha256": "b1a77e033faed2270c38799f391d87946e6708cc952d2333388f4587f83241a4",
+      "retained_paths": [
+        "gcc-debug-a/classick_clock_tests.exe",
+        "gcc-debug-b/classick_clock_tests.exe"
+      ]
+    },
+    {
+      "label": "GCC SHA-256 classick_core_link_tests.exe",
+      "sha256": "03e59cff82dde5f5667c6d4c497ffa27dcdbbf6562314319b65c9afda281ee71",
+      "retained_paths": [
+        "gcc-debug-a/classick_core_link_tests.exe",
+        "gcc-debug-b/classick_core_link_tests.exe"
+      ]
+    },
+    {
+      "label": "standalone SHA-256 clang-64-O0",
+      "sha256": "81817cc1cc6166f9079dff32bc10a4165103dc16e6e7c20eb88676620f5ff9e7",
+      "retained_paths": [
+        "links/clang-64-O0-a/core-link.exe",
+        "links/clang-64-O0-b/core-link.exe"
+      ]
+    },
+    {
+      "label": "standalone SHA-256 clang-64-O2",
+      "sha256": "010087001bb651974bb6a6dfce7de2023f92163f608d80df0c1b6278cb66388e",
+      "retained_paths": [
+        "links/clang-64-O2-a/core-link.exe",
+        "links/clang-64-O2-b/core-link.exe"
+      ]
+    },
+    {
+      "label": "standalone SHA-256 clang-32-O0",
+      "sha256": "b11dd0b9f4ab112e93a2f6cfb011242a880d4845a847f22e629c39db56d1175a",
+      "retained_paths": [
+        "links/clang-32-O0-a/core-link.exe",
+        "links/clang-32-O0-b/core-link.exe"
+      ]
+    },
+    {
+      "label": "standalone SHA-256 clang-32-O2",
+      "sha256": "91e4cf625774f4ee69cbf10e343691aaefcb015a62c83af083a65772afc74e38",
+      "retained_paths": [
+        "links/clang-32-O2-a/core-link.exe",
+        "links/clang-32-O2-b/core-link.exe"
+      ]
+    },
+    {
+      "label": "standalone SHA-256 gcc-64-O0",
+      "sha256": "76cd8fe78ac9ab8c65321fe3457d8642bfa42f7f30be37a2c867783b040901a7",
+      "retained_paths": [
+        "links/gcc-64-O0-a/core-link.exe",
+        "links/gcc-64-O0-b/core-link.exe"
+      ]
+    },
+    {
+      "label": "standalone SHA-256 gcc-64-O2",
+      "sha256": "42f74786aaa4b7613869d4af2ffe3811f9c7e08655f069ecf1b9af72b2d6f5a5",
+      "retained_paths": [
+        "links/gcc-64-O2-a/core-link.exe",
+        "links/gcc-64-O2-b/core-link.exe"
+      ]
+    },
+    {
+      "label": "standalone SHA-256 gcc-32-O0",
+      "sha256": "4651bf7400772a992b43d414213e9a5e5068c1718c8af6e861811dd14af5fd5d",
+      "retained_paths": [
+        "links/gcc-32-O0-a/core-link.exe",
+        "links/gcc-32-O0-b/core-link.exe"
+      ]
+    },
+    {
+      "label": "standalone SHA-256 gcc-32-O2",
+      "sha256": "eaf02fed90fbcbe0cc9db939df27a8ea2c9be57279135c9316df7730289ed1b7",
+      "retained_paths": [
+        "links/gcc-32-O2-a/core-link.exe",
+        "links/gcc-32-O2-b/core-link.exe"
+      ]
+    },
+    {
+      "label": "UEFI SHA-256 clang",
+      "sha256": "1ad1f49e96fb1681afc2847ae828c780b65e5fd4177bb36b280bddbf2ad12388",
+      "retained_paths": [
+        "clang-hosted/debug-a/classick_uefi_contract_tests.exe",
+        "clang-hosted/debug-b/classick_uefi_contract_tests.exe"
+      ]
+    },
+    {
+      "label": "UEFI SHA-256 gcc",
+      "sha256": "1af0a4d6f6e72fcc2a04a66e5d43fb3e3da66fb86209c4b9e961e4a30bca636a",
+      "retained_paths": [
+        "gcc-debug-a/classick_uefi_contract_tests.exe",
+        "gcc-debug-b/classick_uefi_contract_tests.exe"
+      ]
+    },
+    {
+      "label": "loader SHA-256 clang",
+      "sha256": "8798991a975cbe7b4d795b2387e61fa41ad663986683f7d8ac79536d72abcbe8",
+      "retained_paths": [
+        "clang-hosted/debug-a/classick_uefi_loader_tests.exe",
+        "clang-hosted/debug-b/classick_uefi_loader_tests.exe"
+      ]
+    },
+    {
+      "label": "loader SHA-256 gcc",
+      "sha256": "9d8dca71e250ad926eb367ac572c86eeaefa92c6e134a419636c6a98e134c596",
+      "retained_paths": [
+        "gcc-debug-a/classick_uefi_loader_tests.exe",
+        "gcc-debug-b/classick_uefi_loader_tests.exe"
+      ]
+    },
+    {
+      "label": "EFI SHA-256 clang-64-O0",
+      "sha256": "aaedda7e2c809203637e2ea46c7762339b6dc4500f3681fa284d4bc479f197d0",
+      "retained_paths": [
+        "efi/clang-64-O0-a/BOOTX64.EFI",
+        "efi/clang-64-O0-b/BOOTX64.EFI"
+      ]
+    },
+    {
+      "label": "EFI SHA-256 clang-64-O2",
+      "sha256": "8e25d6947677b538d84bc17f98ff44d056dcd3d7769d1389676072286ad831f2",
+      "retained_paths": [
+        "efi/clang-64-O2-a/BOOTX64.EFI",
+        "efi/clang-64-O2-b/BOOTX64.EFI",
+        "efi/payload/EFI/BOOT/BOOTX64.EFI"
+      ]
+    },
+    {
+      "label": "x64 state SHA-256 clang",
+      "sha256": "d2c64925847d05c4cfafdb186fdf5e365c2cb569c8f62e386f3a55a2ceb6e0c8",
+      "retained_paths": [
+        "clang-hosted/debug-a/classick_x64_state_tests.exe",
+        "clang-hosted/debug-b/classick_x64_state_tests.exe"
+      ]
+    },
+    {
+      "label": "x64 state SHA-256 gcc",
+      "sha256": "35a5683d1e6319b1fb45cc5cbd3b9adf4c57440aee76ef013f158b811eed570d",
+      "retained_paths": [
+        "gcc-debug-a/classick_x64_state_tests.exe",
+        "gcc-debug-b/classick_x64_state_tests.exe"
+      ]
+    },
+    {
+      "label": "native presentation SHA-256 clang classick_native_framebuffer_tests.exe",
+      "sha256": "d7512df5106e1ff97b42c70d63c8fc057d4288e2f12cab9166b777edf8152b55",
+      "retained_paths": [
+        "clang-hosted/debug-a/classick_native_framebuffer_tests.exe",
+        "clang-hosted/debug-b/classick_native_framebuffer_tests.exe"
+      ]
+    },
+    {
+      "label": "native presentation SHA-256 gcc classick_native_framebuffer_tests.exe",
+      "sha256": "9152124daea5151e2048b122492ff60e2c39b0b2e33e1a869b2ddcdf7234f243",
+      "retained_paths": [
+        "gcc-debug-a/classick_native_framebuffer_tests.exe",
+        "gcc-debug-b/classick_native_framebuffer_tests.exe"
+      ]
+    },
+    {
+      "label": "native presentation SHA-256 clang classick_boot_scene_tests.exe",
+      "sha256": "bcae81c41b9fcacc3e59da2fcf67ac84aecd7dde9d37a09aa8b6f1f2665b1709",
+      "retained_paths": [
+        "clang-hosted/debug-a/classick_boot_scene_tests.exe",
+        "clang-hosted/debug-b/classick_boot_scene_tests.exe"
+      ]
+    },
+    {
+      "label": "native presentation SHA-256 gcc classick_boot_scene_tests.exe",
+      "sha256": "3358842f5435741b98d820fae6d512725a2f3e5c432e6af6f4ce50170c73ab5d",
+      "retained_paths": [
+        "gcc-debug-a/classick_boot_scene_tests.exe",
+        "gcc-debug-b/classick_boot_scene_tests.exe"
+      ]
+    },
+    {
+      "label": "native presentation SHA-256 clang classick_native_present_tests.exe",
+      "sha256": "ccac90f8cfa5701f9b4a43cd6029ae4f1109ad6d2fccb17eeb794694d1dc6592",
+      "retained_paths": [
+        "clang-hosted/debug-a/classick_native_present_tests.exe",
+        "clang-hosted/debug-b/classick_native_present_tests.exe"
+      ]
+    },
+    {
+      "label": "native presentation SHA-256 gcc classick_native_present_tests.exe",
+      "sha256": "3bef8e6a44519810e1d993f50e85dbb4db286a578e608642267344935714c089",
+      "retained_paths": [
+        "gcc-debug-a/classick_native_present_tests.exe",
+        "gcc-debug-b/classick_native_present_tests.exe"
+      ]
+    },
+    {
+      "label": "PM timer SHA-256 clang classick_acpi_tests.exe",
+      "sha256": "3da8b6278982823bebb6bc0cfec4b5c8be6be3f7f1ce669077215c69cdeb0b9b",
+      "retained_paths": [
+        "clang-hosted/debug-a/classick_acpi_tests.exe",
+        "clang-hosted/debug-b/classick_acpi_tests.exe"
+      ]
+    },
+    {
+      "label": "PM timer SHA-256 gcc classick_acpi_tests.exe",
+      "sha256": "497d43e1f8eb530ecb2aa1d76f333d8ab896a6fda341ac3e20fbe704d9c831ac",
+      "retained_paths": [
+        "gcc-debug-a/classick_acpi_tests.exe",
+        "gcc-debug-b/classick_acpi_tests.exe"
+      ]
+    },
+    {
+      "label": "PM timer SHA-256 clang classick_pmtimer_tests.exe",
+      "sha256": "3e1ed3ee87f463ba1411d29a05bee3c78708c6290ac02b07fd210f3981f50f77",
+      "retained_paths": [
+        "clang-hosted/debug-a/classick_pmtimer_tests.exe",
+        "clang-hosted/debug-b/classick_pmtimer_tests.exe"
+      ]
+    },
+    {
+      "label": "PM timer SHA-256 gcc classick_pmtimer_tests.exe",
+      "sha256": "cce0b6bd46e747f98a35b5ce7158b5e1c1ab039acd66dea9512a5bc981d44969",
+      "retained_paths": [
+        "gcc-debug-a/classick_pmtimer_tests.exe",
+        "gcc-debug-b/classick_pmtimer_tests.exe"
+      ]
+    },
+    {
+      "label": "PM timer SHA-256 clang classick_native_timer_tests.exe",
+      "sha256": "d9f66a63eb7b1e26134b5bd6994bfb97bc643c3e15390b6bd9bb952d05e7bd2f",
+      "retained_paths": [
+        "clang-hosted/debug-a/classick_native_timer_tests.exe",
+        "clang-hosted/debug-b/classick_native_timer_tests.exe"
+      ]
+    },
+    {
+      "label": "PM timer SHA-256 gcc classick_native_timer_tests.exe",
+      "sha256": "fcb2a314d07af9bb83e785a0df048b23e31fe4cdd1f34e707409c48f551a7fae",
+      "retained_paths": [
+        "gcc-debug-a/classick_native_timer_tests.exe",
+        "gcc-debug-b/classick_native_timer_tests.exe"
+      ]
+    },
+    {
+      "label": "PM timer SHA-256 clang classick_uefi_loader_tests.exe",
+      "sha256": "8798991a975cbe7b4d795b2387e61fa41ad663986683f7d8ac79536d72abcbe8",
+      "retained_paths": [
+        "clang-hosted/debug-a/classick_uefi_loader_tests.exe",
+        "clang-hosted/debug-b/classick_uefi_loader_tests.exe"
+      ]
+    },
+    {
+      "label": "PM timer SHA-256 gcc classick_uefi_loader_tests.exe",
+      "sha256": "9d8dca71e250ad926eb367ac572c86eeaefa92c6e134a419636c6a98e134c596",
+      "retained_paths": [
+        "gcc-debug-a/classick_uefi_loader_tests.exe",
+        "gcc-debug-b/classick_uefi_loader_tests.exe"
+      ]
+    },
+    {
+      "label": "progress loop SHA-256 clang classick_native_loop_tests.exe",
+      "sha256": "5ff294856126fe9c52513dd10b6719ec5af9895e20e170aa0ec1c665c760a69c",
+      "retained_paths": [
+        "clang-hosted/debug-a/classick_native_loop_tests.exe",
+        "clang-hosted/debug-b/classick_native_loop_tests.exe"
+      ]
+    },
+    {
+      "label": "progress loop SHA-256 gcc classick_native_loop_tests.exe",
+      "sha256": "c9e221eda498e9de3fe62ca302edcca608d54f6274b2f5eee1052b8f32e3ad81",
+      "retained_paths": [
+        "gcc-debug-a/classick_native_loop_tests.exe",
+        "gcc-debug-b/classick_native_loop_tests.exe"
+      ]
+    },
+    {
+      "label": "progress loop SHA-256 clang classick_native_timer_tests.exe",
+      "sha256": "d9f66a63eb7b1e26134b5bd6994bfb97bc643c3e15390b6bd9bb952d05e7bd2f",
+      "retained_paths": [
+        "clang-hosted/debug-a/classick_native_timer_tests.exe",
+        "clang-hosted/debug-b/classick_native_timer_tests.exe"
+      ]
+    },
+    {
+      "label": "progress loop SHA-256 gcc classick_native_timer_tests.exe",
+      "sha256": "fcb2a314d07af9bb83e785a0df048b23e31fe4cdd1f34e707409c48f551a7fae",
+      "retained_paths": [
+        "gcc-debug-a/classick_native_timer_tests.exe",
+        "gcc-debug-b/classick_native_timer_tests.exe"
+      ]
+    },
+    {
+      "label": "progress loop SHA-256 clang classick_native_present_tests.exe",
+      "sha256": "ccac90f8cfa5701f9b4a43cd6029ae4f1109ad6d2fccb17eeb794694d1dc6592",
+      "retained_paths": [
+        "clang-hosted/debug-a/classick_native_present_tests.exe",
+        "clang-hosted/debug-b/classick_native_present_tests.exe"
+      ]
+    },
+    {
+      "label": "progress loop SHA-256 gcc classick_native_present_tests.exe",
+      "sha256": "3bef8e6a44519810e1d993f50e85dbb4db286a578e608642267344935714c089",
+      "retained_paths": [
+        "gcc-debug-a/classick_native_present_tests.exe",
+        "gcc-debug-b/classick_native_present_tests.exe"
+      ]
+    },
+    {
+      "label": "keyboard SHA-256 clang classick_ps2_tests.exe",
+      "sha256": "ec4f60b7d22ecca0a1ecb2843529a0ebb9042aa8898bf1cf36d14f31d2532818",
+      "retained_paths": [
+        "clang-hosted/debug-a/classick_ps2_tests.exe",
+        "clang-hosted/debug-b/classick_ps2_tests.exe"
+      ]
+    },
+    {
+      "label": "keyboard SHA-256 gcc classick_ps2_tests.exe",
+      "sha256": "8bfceb5ae1e75ca719ee51e7f7266fef0a04d40987ac6de6f3b7a5fc336ac027",
+      "retained_paths": [
+        "gcc-debug-a/classick_ps2_tests.exe",
+        "gcc-debug-b/classick_ps2_tests.exe"
+      ]
+    },
+    {
+      "label": "keyboard SHA-256 clang classick_acpi_keyboard_tests.exe",
+      "sha256": "e6f7cf02971aafc6670098a58bfe30c4be35fbbdc4d1d63ee2707d6acc148451",
+      "retained_paths": [
+        "clang-hosted/debug-a/classick_acpi_keyboard_tests.exe",
+        "clang-hosted/debug-b/classick_acpi_keyboard_tests.exe"
+      ]
+    },
+    {
+      "label": "keyboard SHA-256 gcc classick_acpi_keyboard_tests.exe",
+      "sha256": "2032a14fd2fbf2bf667fdda570e578d42b0db79b200d1f942c32e221ded938d3",
+      "retained_paths": [
+        "gcc-debug-a/classick_acpi_keyboard_tests.exe",
+        "gcc-debug-b/classick_acpi_keyboard_tests.exe"
+      ]
+    },
+    {
+      "label": "keyboard SHA-256 clang classick_native_keyboard_tests.exe",
+      "sha256": "06c4024a29d8d98a86cdfdfdbc4c780aaea11cbde1251c34e01193c83b3f721a",
+      "retained_paths": [
+        "clang-hosted/debug-a/classick_native_keyboard_tests.exe",
+        "clang-hosted/debug-b/classick_native_keyboard_tests.exe"
+      ]
+    },
+    {
+      "label": "keyboard SHA-256 gcc classick_native_keyboard_tests.exe",
+      "sha256": "6bb79a5bab8e7d72b45b97763d2ab7aee0925fd76cb62bf0b5057c7af047ce24",
+      "retained_paths": [
+        "gcc-debug-a/classick_native_keyboard_tests.exe",
+        "gcc-debug-b/classick_native_keyboard_tests.exe"
+      ]
+    },
+    {
+      "label": "UART SHA-256 clang classick_uart_tests.exe",
+      "sha256": "2747e2699ad81f36256f71db6765c461264c3a8a27447517ddfa9bd7c5c47fb7",
+      "retained_paths": [
+        "clang-hosted/debug-a/classick_uart_tests.exe",
+        "clang-hosted/debug-b/classick_uart_tests.exe"
+      ]
+    },
+    {
+      "label": "UART SHA-256 gcc classick_uart_tests.exe",
+      "sha256": "4778849ce445eed514cba4ec0a34a2749fc7b6abf9541b39169f7580a697b660",
+      "retained_paths": [
+        "gcc-debug-a/classick_uart_tests.exe",
+        "gcc-debug-b/classick_uart_tests.exe"
+      ]
+    },
+    {
+      "label": "UART SHA-256 clang classick_native_uart_tests.exe",
+      "sha256": "d818383de4cb1a87b3df488a2d76aa5a8762883d79705bc86825a0aface88791",
+      "retained_paths": [
+        "clang-hosted/debug-a/classick_native_uart_tests.exe",
+        "clang-hosted/debug-b/classick_native_uart_tests.exe"
+      ]
+    },
+    {
+      "label": "UART SHA-256 gcc classick_native_uart_tests.exe",
+      "sha256": "f2e96b679818da3f9d9521ae3bb9d33eeb46916f5882c1bcc168fb79d144808d",
+      "retained_paths": [
+        "gcc-debug-a/classick_native_uart_tests.exe",
+        "gcc-debug-b/classick_native_uart_tests.exe"
+      ]
+    }
+  ],
+  "prior_local_ctest_counts": [
+    100,
+    100,
+    100,
+    76,
+    100,
+    85,
+    85,
+    85,
+    61
+  ],
+  "prior_local_ctest_total": 792,
+  "prior_ctest_execution_repeated": false,
+  "payload": {
+    "kind": "directory-tree-not-disk",
+    "files": [
+      "EFI/BOOT/BOOTX64.EFI"
+    ],
+    "size_bytes": 37888,
+    "sha256": "8e25d6947677b538d84bc17f98ff44d056dcd3d7769d1389676072286ad831f2"
+  },
+  "media_inventory_scope": "Selected retained EFI payload and tracked platform/scripts/specification paths; not a workstation-wide media search",
+  "tracked_scope_path_inventory_sha256": "9d8024a798cfa0238fdd46262371e9d0b5945eabc253f6eea6f31b9a8de21268",
+  "formatted_boot_medium_verified": false,
+  "firmware_eligibility": "needs-review",
+  "isolated_machine_configuration_verified": false,
+  "native_execution_observed": false,
+  "b2_status": "not-passed",
+  "native_launch_decision": "no-go",
+  "edition_boots": {
+    "original-macintosh": "not-started",
+    "native-pc": "not-started",
+    "linux-pc": "not-started"
+  },
+  "historical_parity": "not-tested",
+  "initial_collection_attempts": {
+    "roots": [
+      "boot-readiness-audit-20261008-a",
+      "boot-readiness-audit-20261008-b"
+    ],
+    "status": "stopped-before-image-replay",
+    "cause": "Collector assumed all recorded worktree hashes equal Git blobs; a text JSON input has CRLF locally and LF in Git",
+    "additional_cause": "The second collector expected an older CTest summary spelling; the retained log uses 100% tests passed out of N",
+    "resolution": "Verify every local hash exactly, compare Git blobs exactly or explicit text/eol=lf CRLF normalization, record both hashes, and parse the observed summary spelling"
+  },
+  "limitations": [
+    "Aggregate integrity audit; no new UART implementation or algorithm review",
+    "Existing hosted and unloaded evidence does not establish hardware conformance or boot execution",
+    "No legal certification or independently staffed clean-room claim"
+  ],
+  "efi_replay": {
+    "auditor_sha256": "2d5abcad8093f41e52e194cb496fe23ca704e8769a9ccd608c546d1c2049b0d3",
+    "source": "3b44cb9510a400397a33cd1cc0802f45c36c8110",
+    "candidate_replays": [
+      {
+        "case": "clang-64-O0-a",
+        "sha256": "aaedda7e2c809203637e2ea46c7762339b6dc4500f3681fa284d4bc479f197d0",
+        "size_bytes": 55808,
+        "image_size": 69632,
+        "original_symbols": 59,
+        "relocations": 3,
+        "imports": 0,
+        "runtime_libraries": 0,
+        "vectors": 256,
+        "status": "passed-unloaded"
+      },
+      {
+        "case": "clang-64-O0-b",
+        "sha256": "aaedda7e2c809203637e2ea46c7762339b6dc4500f3681fa284d4bc479f197d0",
+        "size_bytes": 55808,
+        "image_size": 69632,
+        "original_symbols": 59,
+        "relocations": 3,
+        "imports": 0,
+        "runtime_libraries": 0,
+        "vectors": 256,
+        "status": "passed-unloaded"
+      },
+      {
+        "case": "clang-64-O2-a",
+        "sha256": "8e25d6947677b538d84bc17f98ff44d056dcd3d7769d1389676072286ad831f2",
+        "size_bytes": 37888,
+        "image_size": 53248,
+        "original_symbols": 59,
+        "relocations": 3,
+        "imports": 0,
+        "runtime_libraries": 0,
+        "vectors": 256,
+        "status": "passed-unloaded"
+      },
+      {
+        "case": "clang-64-O2-b",
+        "sha256": "8e25d6947677b538d84bc17f98ff44d056dcd3d7769d1389676072286ad831f2",
+        "size_bytes": 37888,
+        "image_size": 53248,
+        "original_symbols": 59,
+        "relocations": 3,
+        "imports": 0,
+        "runtime_libraries": 0,
+        "vectors": 256,
+        "status": "passed-unloaded"
+      }
+    ],
+    "payload_replay_sha256": "8e25d6947677b538d84bc17f98ff44d056dcd3d7769d1389676072286ad831f2",
+    "loaded": false
+  },
+  "retained_integrity_sha256": "6791daefbfabd7e112f6ee8e5e3dba7bf9468b3b565df326dbd67be111e15475",
+  "retained_efi_replay_sha256": "df9e7a4efb389859e56211fe526011574bfc3c7ecf5abdb828afac5cbf63be91",
+  "prior_public_ci": {
+    "run_id": 37827697279,
+    "head_sha": "3b44cb9510a400397a33cd1cc0802f45c36c8110",
+    "conclusion": "success",
+    "updated_at": "2026-10-08T18:58:32Z"
+  }
+}

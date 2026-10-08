@@ -5,6 +5,17 @@ eligibility applies to the stated scope, not every resource reachable from a URL
 No Apple executable, source, disassembly, decompilation, or copied asset was used.
 No reference-system black-box observation has yet been performed.
 
+## SRC-0055 — Owner's readiness audit request
+
+- Owner, 2026-10-08: "i typed 1 in error. Please perform the audit."
+- Scope: audit current retained evidence, native-PC boot readiness and provenance
+  prerequisites; record findings under the existing documentation/publication
+  workflow. The accidental numeric reply grants no additional work or delegation.
+- Requirement only. No firmware waiver, VM/native execution, additional agent,
+  new chat, automation, live OneNote or change to the real Macintosh/mini vMac
+  and three-edition requirements. TEST-0020 is aggregate evidence review;
+  UART implementation boundaries and human review remain separate.
+
 ## SRC-0053 — Owner's single fresh UART implementation-agent authorization
 
 - Owner, 2026-10-08: continue the missing native boot components with exactly

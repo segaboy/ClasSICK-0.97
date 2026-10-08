@@ -7,6 +7,11 @@ SPEC-0008 adds owned descriptor/terminal-fault scaffolding with hosted byte test
 and unloaded image audits. No VM/native boot exists; actual descriptor/fault
 execution, profile/mapping qualification and device work remain required.
 
+[The 2026-10-08 readiness audit](boot-readiness-audit.md) confirms current
+artifact integrity, including the payload copy. It records NO-GO for launch:
+the payload remains a directory tree, firmware eligibility remains needs-review,
+and this configuration/devices are unqualified. No native boot is observed.
+
 | Item | Proposed first configuration / required evidence |
 | --- | --- |
 | Platform | Owner-installed VirtualBox 7.2.16r174877, isolated project VM with retained configuration; existing owner VMs untouched |
