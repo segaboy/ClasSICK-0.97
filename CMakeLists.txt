@@ -22,7 +22,16 @@ target_include_directories(classick_arenas PUBLIC core/memory)
 add_library(classick_arenas_freestanding OBJECT core/memory/arena.c)
 add_executable(classick_arena_tests tests/arenas.c)
 target_link_libraries(classick_arena_tests PRIVATE classick_arenas)
+add_library(classick_input STATIC core/input/input.c)
+target_include_directories(classick_input PUBLIC core/input)
+add_library(classick_input_freestanding OBJECT core/input/input.c)
+add_executable(classick_input_tests tests/input.c)
+target_link_libraries(classick_input_tests PRIVATE classick_input)
 if(WIN32)
+    add_library(classick_windows_input STATIC platform/windows/input.c)
+    target_link_libraries(classick_windows_input PUBLIC classick_input)
+    add_executable(classick_windows_input_tests tests/windows-input.c)
+    target_link_libraries(classick_windows_input_tests PRIVATE classick_windows_input)
     add_library(classick_windows_presenter STATIC platform/windows/pixels.c
         platform/windows/presenter.c)
     target_include_directories(classick_windows_presenter PUBLIC platform/windows)
@@ -30,22 +39,24 @@ if(WIN32)
     add_executable(classick_presentation_tests tests/windows-presentation.c)
     target_link_libraries(classick_presentation_tests PRIVATE classick_windows_presenter)
     add_executable(classick_surface_demo WIN32 apps/surface-demo/windows-main.c)
-    target_link_libraries(classick_surface_demo PRIVATE classick_windows_presenter classick_arenas)
+    target_link_libraries(classick_surface_demo PRIVATE classick_windows_presenter classick_arenas classick_windows_input)
     target_compile_definitions(classick_surface_demo PRIVATE WINVER=0x0A00 _WIN32_WINNT=0x0A00)
     if(CMAKE_C_COMPILER_ID MATCHES "Clang|GNU")
-        foreach(target classick_windows_presenter classick_presentation_tests classick_surface_demo)
+        foreach(target classick_windows_presenter classick_presentation_tests classick_surface_demo
+                classick_windows_input classick_windows_input_tests)
             target_compile_options(${target} PRIVATE -Wall -Wextra -Wpedantic -Werror
                 -Wconversion -Wsign-conversion
                 "-ffile-prefix-map=${CMAKE_SOURCE_DIR}=."
                 "-ffile-prefix-map=${CMAKE_BINARY_DIR}=.")
         endforeach()
     elseif(MSVC)
-        foreach(target classick_windows_presenter classick_presentation_tests classick_surface_demo)
+        foreach(target classick_windows_presenter classick_presentation_tests classick_surface_demo
+                classick_windows_input classick_windows_input_tests)
             target_compile_options(${target} PRIVATE /W4 /WX)
         endforeach()
     endif()
     if(MINGW)
-        foreach(target classick_presentation_tests classick_surface_demo)
+        foreach(target classick_presentation_tests classick_surface_demo classick_windows_input_tests)
             target_link_options(${target} PRIVATE -Wl,--no-insert-timestamp)
         endforeach()
     endif()
@@ -54,7 +65,8 @@ option(CLASSICK_SURFACE_SANITIZERS "Validated Clang ASan/UBSan conformance build
 if(CMAKE_C_COMPILER_ID MATCHES "Clang|GNU")
     foreach(target classick_abi_probe classick_toolchain_smoke classick_surfaces
             classick_surfaces_freestanding classick_surface_tests
-            classick_arenas classick_arenas_freestanding classick_arena_tests)
+            classick_arenas classick_arenas_freestanding classick_arena_tests
+            classick_input classick_input_freestanding classick_input_tests)
         target_compile_options(${target} PRIVATE -Wall -Wextra -Wpedantic -Werror
             "-ffile-prefix-map=${CMAKE_SOURCE_DIR}=."
             # Last matching mapping wins: preserve the narrower nested build map.
@@ -62,18 +74,21 @@ if(CMAKE_C_COMPILER_ID MATCHES "Clang|GNU")
     endforeach()
     target_compile_options(classick_abi_probe PRIVATE -ffreestanding)
     foreach(target classick_surfaces classick_surfaces_freestanding
-            classick_arenas classick_arenas_freestanding)
+            classick_arenas classick_arenas_freestanding classick_input classick_input_freestanding)
         target_compile_options(${target} PRIVATE -ffreestanding -fno-builtin
             -fno-stack-protector -Wconversion -Wsign-conversion)
     endforeach()
     target_compile_options(classick_surfaces_freestanding PRIVATE -O2)
     target_compile_options(classick_arenas_freestanding PRIVATE -O2)
+    target_compile_options(classick_input_freestanding PRIVATE -O2)
     target_compile_options(classick_surface_tests PRIVATE -Wconversion -Wsign-conversion)
     target_compile_options(classick_arena_tests PRIVATE -Wconversion -Wsign-conversion)
+    target_compile_options(classick_input_tests PRIVATE -Wconversion -Wsign-conversion)
 elseif(MSVC)
     foreach(target classick_abi_probe classick_toolchain_smoke classick_surfaces
             classick_surfaces_freestanding classick_surface_tests
-            classick_arenas classick_arenas_freestanding classick_arena_tests)
+            classick_arenas classick_arenas_freestanding classick_arena_tests
+            classick_input classick_input_freestanding classick_input_tests)
         target_compile_options(${target} PRIVATE /W4 /WX)
     endforeach()
 endif()
@@ -81,18 +96,21 @@ if(CLASSICK_SURFACE_SANITIZERS)
     if(NOT CMAKE_C_COMPILER_ID MATCHES "Clang")
         message(FATAL_ERROR "Validate this compiler's sanitizer support before use")
     endif()
-    foreach(target classick_surfaces classick_surface_tests classick_arenas classick_arena_tests)
+    foreach(target classick_surfaces classick_surface_tests classick_arenas classick_arena_tests
+            classick_input classick_input_tests)
         target_compile_options(${target} PRIVATE -fsanitize=address,undefined
             -fno-sanitize-recover=all -fno-omit-frame-pointer)
     endforeach()
     target_link_options(classick_surface_tests PRIVATE -fsanitize=address,undefined)
     target_link_options(classick_arena_tests PRIVATE -fsanitize=address,undefined)
+    target_link_options(classick_input_tests PRIVATE -fsanitize=address,undefined)
     if(WIN32)
-        foreach(target classick_windows_presenter classick_presentation_tests classick_surface_demo)
+        foreach(target classick_windows_presenter classick_presentation_tests classick_surface_demo
+                classick_windows_input classick_windows_input_tests)
             target_compile_options(${target} PRIVATE -fsanitize=address,undefined
                 -fno-sanitize-recover=all -fno-omit-frame-pointer)
         endforeach()
-        foreach(target classick_presentation_tests classick_surface_demo)
+        foreach(target classick_presentation_tests classick_surface_demo classick_windows_input_tests)
             target_link_options(${target} PRIVATE -fsanitize=address,undefined)
         endforeach()
     endif()
@@ -101,6 +119,7 @@ if(MINGW)
     target_link_options(classick_toolchain_smoke PRIVATE -Wl,--no-insert-timestamp)
     target_link_options(classick_surface_tests PRIVATE -Wl,--no-insert-timestamp)
     target_link_options(classick_arena_tests PRIVATE -Wl,--no-insert-timestamp)
+    target_link_options(classick_input_tests PRIVATE -Wl,--no-insert-timestamp)
 endif()
 if(BUILD_TESTING)
     if(WIN32)
@@ -111,6 +130,11 @@ if(BUILD_TESTING)
         set_tests_properties(presentation.window PROPERTIES TIMEOUT 15)
         add_test(NAME arenas.viewer-memory COMMAND classick_surface_demo --verify-memory)
         set_tests_properties(arenas.viewer-memory PROPERTIES TIMEOUT 15)
+        add_test(NAME input.windows-mapping COMMAND classick_windows_input_tests)
+        add_test(NAME input.viewer COMMAND classick_surface_demo --verify-input)
+        set_tests_properties(input.viewer PROPERTIES TIMEOUT 15)
+        add_test(NAME input.viewer-memory COMMAND classick_surface_demo --verify-input-memory)
+        set_tests_properties(input.viewer-memory PROPERTIES TIMEOUT 15)
     endif()
     add_test(NAME bootstrap.hosted-smoke COMMAND classick_toolchain_smoke)
     set_tests_properties(bootstrap.hosted-smoke PROPERTIES
@@ -121,6 +145,9 @@ if(BUILD_TESTING)
     foreach(suite layout errors matrix ownership)
         add_test(NAME arenas.${suite} COMMAND classick_arena_tests ${suite})
     endforeach()
+    foreach(suite ordering errors traces independent)
+        add_test(NAME input.${suite} COMMAND classick_input_tests ${suite})
+    endforeach()
     if(CMAKE_C_COMPILER_ID MATCHES "Clang|GNU")
         find_program(CLASSICK_NM NAMES llvm-nm nm REQUIRED)
         add_test(NAME surfaces.freestanding COMMAND ${CMAKE_COMMAND}
@@ -130,6 +157,10 @@ if(BUILD_TESTING)
         add_test(NAME arenas.freestanding COMMAND ${CMAKE_COMMAND}
             "-DNM=${CLASSICK_NM}"
             "-DOBJECT=$<TARGET_OBJECTS:classick_arenas_freestanding>"
+            -P ${CMAKE_SOURCE_DIR}/scripts/Check-Freestanding.cmake)
+        add_test(NAME input.freestanding COMMAND ${CMAKE_COMMAND}
+            "-DNM=${CLASSICK_NM}"
+            "-DOBJECT=$<TARGET_OBJECTS:classick_input_freestanding>"
             -P ${CMAKE_SOURCE_DIR}/scripts/Check-Freestanding.cmake)
     endif()
 endif()

@@ -2,18 +2,22 @@
 /* Copyright (C) 2026 Dean Howell. */
 #include "presenter.h"
 #include "arena.h"
+#include "../../platform/windows/input.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
-enum { FRAME_WIDTH = 513, FRAME_HEIGHT = 321 };
+enum { FRAME_WIDTH = 513, FRAME_HEIGHT = 321, INPUT_CAPACITY = 16 };
 typedef struct {
     cs_arena arena;
+    cs_input_queue input;
     void *backing;
     cs_surface surfaces[2];
     uint8_t *storage[2], *scratch;
     size_t scratch_size;
     unsigned active, paints;
+    unsigned consumed;
+    uint32_t last_source, last_sequence;
     int failed, destroyed;
 } demo_state;
 
@@ -26,8 +30,11 @@ static size_t scene_stride(unsigned scene)
 static size_t buffer_budget(void)
 {
     /* Fixed original demo geometry: this is not a Macintosh RAM budget. */
-    return (scene_stride(0) + scene_stride(1) + (size_t)FRAME_WIDTH * 4u)
+    size_t bytes = (scene_stride(0) + scene_stride(1) + (size_t)FRAME_WIDTH * 4u)
         * FRAME_HEIGHT;
+    size_t alignment = _Alignof(cs_input_record);
+    return bytes + (alignment - bytes % alignment) % alignment
+        + INPUT_CAPACITY * sizeof(cs_input_record);
 }
 
 static int init_buffers(demo_state *state, size_t capacity)
@@ -50,6 +57,10 @@ static int init_buffers(demo_state *state, size_t capacity)
     if (cs_arena_alloc(&state->arena, state->scratch_size, 1, &span) != CS_ARENA_OK)
         return 0;
     state->scratch = span.data;
+    if (cs_arena_alloc(&state->arena, INPUT_CAPACITY * sizeof(cs_input_record),
+            _Alignof(cs_input_record), &span) != CS_ARENA_OK
+            || cs_input_init(&state->input, (cs_input_record *)span.data,
+                INPUT_CAPACITY) != CS_INPUT_OK) return 0;
     return 1;
 }
 
@@ -114,6 +125,37 @@ static void paint(HWND window, HDC dc, demo_state *state)
     ++state->paints;
 }
 
+static int consume_input(HWND window, demo_state *state)
+{
+    cs_input_record record;
+    cs_input_result result;
+    while ((result = cs_input_pop(&state->input, &record)) == CS_INPUT_OK) {
+        ++state->consumed;
+        state->last_source = record.event.source;
+        state->last_sequence = record.sequence;
+        if (record.event.action != CS_KEY_PRESS || record.event.repeat != 0) continue;
+        if (record.event.key == CS_KEY_SPACE) {
+            state->active ^= 1u;
+            title(window, state->active);
+            InvalidateRect(window, NULL, FALSE);
+        } else if (record.event.key == CS_KEY_ESCAPE) {
+            DestroyWindow(window);
+            return 1;
+        }
+    }
+    return result == CS_INPUT_ERR_EMPTY;
+}
+
+static int submit_input(HWND window, demo_state *state, const cs_input_event *event)
+{
+    if (cs_input_push(&state->input, event) != CS_INPUT_OK
+            || !consume_input(window, state)) {
+        state->failed = 1;
+        return 0;
+    }
+    return 1;
+}
+
 static LRESULT CALLBACK window_proc(HWND window, UINT message, WPARAM wparam, LPARAM lparam)
 {
     demo_state *state = (demo_state *)GetWindowLongPtrW(window, GWLP_USERDATA);
@@ -147,12 +189,15 @@ static LRESULT CALLBACK window_proc(HWND window, UINT message, WPARAM wparam, LP
         return 0;
     }
     case WM_KEYDOWN:
-        if (wparam == VK_SPACE && (lparam & ((LPARAM)1 << 30)) == 0) {
-            state->active ^= 1u;
-            title(window, state->active);
-            InvalidateRect(window, NULL, FALSE);
-        } else if (wparam == VK_ESCAPE) DestroyWindow(window);
-        return 0;
+    case WM_KEYUP: {
+        cs_input_event event;
+        int mapped = cs_win_key_event(message, wparam, lparam, 2, &event);
+        if (mapped == CS_WIN_INPUT_MAPPED) {
+            if (!submit_input(window, state, &event)) PostMessageW(window, WM_CLOSE, 0, 0);
+            return 0;
+        }
+        break;
+    }
     case WM_DESTROY:
         state->destroyed = 1;
         PostQuitMessage(0);
@@ -206,6 +251,37 @@ static int resize_client(HWND window, int scale)
             rect.bottom - rect.top, SWP_NOMOVE|SWP_NOZORDER|SWP_NOACTIVATE);
 }
 
+static int verify_input(HWND window, demo_state *state)
+{
+    const cs_input_event press = {1,CS_KEY_SPACE,CS_KEY_PRESS,0};
+    const cs_input_event release = {1,CS_KEY_SPACE,CS_KEY_RELEASE,0};
+    const cs_input_event repeat = {1,CS_KEY_SPACE,CS_KEY_PRESS,1};
+    const cs_input_event escape = {1,CS_KEY_ESCAPE,CS_KEY_PRESS,0};
+    cs_input_record before[INPUT_CAPACITY];
+    if (!submit_input(window, state, &press) || state->active != 1
+            || !submit_input(window, state, &release)
+            || !submit_input(window, state, &repeat) || state->active != 1) return 0;
+    SendMessageW(window, WM_KEYUP, VK_SPACE, (LPARAM)INT32_MIN);
+    SendMessageW(window, WM_KEYDOWN, VK_SPACE, 0);
+    if (state->active != 0 || state->consumed != 5 || state->last_source != 2
+            || state->last_sequence != 5 || state->input.count != 0) return 0;
+    SendMessageW(window, WM_KEYDOWN, 'A', 0);
+    if (state->consumed != 5 || !verify_print(window, state, 1)) return 0;
+    if (cs_input_reset(&state->input) != CS_INPUT_OK) return 0;
+    for (unsigned i = 0; i < INPUT_CAPACITY; ++i)
+        if (cs_input_push(&state->input, &repeat) != CS_INPUT_OK) return 0;
+    memcpy(before, state->input.storage, sizeof(before));
+    if (submit_input(window, state, &press) || !state->failed
+            || state->input.count != INPUT_CAPACITY || state->input.next_sequence != 17
+            || memcmp(before, state->input.storage, sizeof(before)) != 0) return 0;
+    state->failed = 0;
+    if (!consume_input(window, state) || state->input.count != 0 || state->active != 0
+            || state->last_sequence != 16 || state->last_source != 1) return 0;
+    if (!submit_input(window, state, &escape) || !state->destroyed || IsWindow(window)) return 0;
+    puts("SPEC-0004 hidden viewer synthetic/native FIFO, repeat, overflow/recovery, close: PASS");
+    return 1;
+}
+
 int WINAPI WinMain(HINSTANCE instance, HINSTANCE previous, LPSTR command, int show)
 {
     WNDCLASSW klass = {0};
@@ -215,11 +291,21 @@ int WINAPI WinMain(HINSTANCE instance, HINSTANCE previous, LPSTR command, int sh
     int result = 1, registered = 0;
     int verify = strcmp(command, "--verify") == 0;
     int verify_memory = strcmp(command, "--verify-memory") == 0;
+    int verify_keys = strcmp(command, "--verify-input") == 0;
+    int verify_key_memory = strcmp(command, "--verify-input-memory") == 0;
     (void)previous;
-    if (command[0] != '\0' && !verify && !verify_memory) return 2;
+    if (command[0] != '\0' && !verify && !verify_memory && !verify_keys && !verify_key_memory) return 2;
+    if (verify_key_memory) {
+        if (buffer_budget() != 1342744u || init_buffers(&state, 1342743u)
+                || state.backing == NULL || state.arena.used != 1342422u
+                || state.scratch == NULL || state.input.storage != NULL) goto cleanup;
+        puts("SPEC-0004 viewer one-byte-short input storage: PASS");
+        result = 0;
+        goto cleanup;
+    }
     if (verify_memory) {
         /* Independent literal lengths for the fixed color/mono/scratch scene. */
-        if (buffer_budget() != 1342422u || init_buffers(&state, 1342421u)
+        if (buffer_budget() != 1342744u || init_buffers(&state, 1342421u)
                 || state.backing == NULL || state.arena.used != 683730u
                 || state.scratch != NULL) goto cleanup;
         puts("SPEC-0003 viewer undersized backing pool: PASS");
@@ -236,19 +322,24 @@ int WINAPI WinMain(HINSTANCE instance, HINSTANCE previous, LPSTR command, int sh
     klass.lpszClassName = L"ClasSICK097OriginalSurfaceViewer";
     if (RegisterClassW(&klass) == 0) goto cleanup;
     registered = 1;
-    if (!verify) { rectangle.right *= 2; rectangle.bottom *= 2; }
+    if (!verify && !verify_keys) { rectangle.right *= 2; rectangle.bottom *= 2; }
     if (!AdjustWindowRect(&rectangle, WS_OVERLAPPEDWINDOW, FALSE)) goto cleanup;
     window = CreateWindowExW(0, klass.lpszClassName, L"ClasSICK 0.97",
         WS_OVERLAPPEDWINDOW, CW_USEDEFAULT, CW_USEDEFAULT,
         rectangle.right - rectangle.left, rectangle.bottom - rectangle.top,
         NULL, NULL, instance, &state);
-    if (window == NULL || !resize_client(window, verify ? 1 : 2)) goto cleanup;
+    if (window == NULL || !resize_client(window, verify || verify_keys ? 1 : 2)) goto cleanup;
     title(window, 0);
-    if (verify) {
-        if (state.arena.capacity != 1342422u || state.arena.used != 1342422u
+    if (verify_keys) {
+        if (!verify_input(window, &state)) goto cleanup;
+        result = 0;
+    } else if (verify) {
+        if (state.arena.capacity != 1342744u || state.arena.used != 1342744u
                 || state.storage[0] != state.arena.storage
                 || state.storage[1] != state.arena.storage + 661260u
-                || state.scratch != state.arena.storage + 683730u) goto cleanup;
+                || state.scratch != state.arena.storage + 683730u
+                || (unsigned char *)state.input.storage != state.arena.storage + 1342424u)
+            goto cleanup;
         if (!verify_print(window, &state, 1)) goto cleanup;
         if (GetAwarenessFromDpiAwarenessContext(GetThreadDpiAwarenessContext())
                     != DPI_AWARENESS_PER_MONITOR_AWARE
@@ -277,6 +368,7 @@ cleanup:
     if (window != NULL && IsWindow(window)) DestroyWindow(window);
     if (registered) UnregisterClassW(klass.lpszClassName, instance);
     /* Window callbacks have ended; every span is retired before pool release. */
+    (void)cs_input_reset(&state.input);
     (void)cs_arena_reset(&state.arena);
     free(state.backing);
     if (result != 0) fputs("ClasSICK 0.97 viewer failed; see SPEC-0002.\n", stderr);

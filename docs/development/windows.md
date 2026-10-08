@@ -107,7 +107,7 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\scripts\Verify-Present
 Start-Process C:\ClasSICK\presentation-local\debug-a\classick_surface_demo.exe
 ```
 
-The wrapper now runs sixteen CTest checks in fresh x64 debug twins, Release, i686 and
+The wrapper now runs 24 CTest checks in fresh x64 debug twins, Release, i686 and
 validated x64 ASan/UBSan configurations, plus the existing core compile/import
 audits. It compares both presentation executable hashes and ends with
 `SPEC-0002 verification PASS`. Logs/hashes stay in the chosen output directory.
@@ -121,19 +121,22 @@ pixels remain integer-scaled; actual cross-monitor changes await manual review.
 The two scenes are original geometry, not a reconstructed Macintosh desktop.
 
 The viewer now supplies one host-owned memory region to SPEC-0003 and reserves
-its color, mono and scratch buffers through our bounded core arena. Windows key
-handling remains demo scaffolding; normalized events, clocks and debugger work
-remain open. The 1,342,422-byte development pool is not a Macintosh RAM budget.
+its color, mono, scratch and sixteen input records through our bounded core arena.
+SPEC-0004 maps Windows Space/Escape messages to core press/release/repeat records;
+synthetic input uses the same queue/consumer. Clocks, full input and debugger work
+remain open. The 1,342,744-byte development pool is not a Macintosh RAM budget.
 
 For the current complete core verification matrix, use a fresh output directory:
 
 ```powershell
-powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\scripts\Verify-Arenas.ps1 -BuildRoot C:\ClasSICK\core-local -Sanitizers
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\scripts\Verify-Input.ps1 -BuildRoot C:\ClasSICK\core-local -Sanitizers
 ```
 
-This also compares the arena-test executable hash and audits ARM64 little/big-endian
-arena objects. All current CTest suites run, including actual viewer exhaustion
-and successful reservation checks. See [arena evidence](arena-evidence.md).
+This also compares input-test executable hashes and audits ARM64 little/big-endian
+input objects. All current suites run, including actual viewer overflow/recovery,
+synthetic/native-message input and memory exhaustion. See [input evidence](input-evidence.md).
+The hidden viewer checks can be run individually with --verify-input and
+--verify-input-memory. They do not inject input into other applications.
 
 ## Tools deferred until a concrete need
 

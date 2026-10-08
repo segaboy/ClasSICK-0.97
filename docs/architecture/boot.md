@@ -15,6 +15,10 @@ through an abstract surface, consumes normalized synthetic and live input, and
 exits cleanly. Headless bounds/ownership/event tests pass. No Toolbox compatibility
 claim is required to meet B1. This is a hosted development start.
 
+Current partial progress: surfaces, arena ownership and SPEC-0004 normalized
+Space/Escape input pass hosted tests. Deterministic/monotonic time, broader
+input requirements and the interactive debug workflow remain open; B1 is not closed.
+
 **B2 — first successful native OS boot (M0.2):** on one named x86-64 UEFI VM/PC
 configuration, an independently built native image:
 

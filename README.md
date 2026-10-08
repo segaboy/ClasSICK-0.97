@@ -26,11 +26,17 @@ This verifies our generic contract; no OS boot or Macintosh compatibility is pro
 [SPEC-0002 Windows presentation](docs/specifications/SPEC-0002-windows-presentation.md)
 adds a native color/monochrome viewer with original geometric scenes. Space changes
 views; resizing uses sharp integer scaling. See
-[build, run and review instructions](docs/development/windows.md). Normalized
-events, clocks and the remaining hosted-core acceptance gate are still open.
+[build, run and review instructions](docs/development/windows.md). Clocks and
+the remaining hosted-core acceptance gate are still open.
 Bounded [SPEC-0003 arenas](docs/specifications/SPEC-0003-arenas.md) now reserve all
 viewer buffers from one host-owned region; independent boundary/ownership tests
 and the full sixteen-check Windows matrix pass. See [arena results](provenance/records/TEST-0006-arenas.md).
+
+[SPEC-0004 keyboard events](docs/specifications/SPEC-0004-input.md) now routes
+Space/Escape press, release and repeat through one bounded portable queue.
+Synthetic and Windows-message input share the viewer consumer. The current
+24-check matrix passes; [input results](provenance/records/TEST-0007-input.md)
+remain generic contract evidence, with clock/full-input/native-driver work open.
 
 The owner reaffirmed real Macintosh booting and mini vMac validation. Those native
 images must use independently implemented OS/replacement firmware code. Emulator

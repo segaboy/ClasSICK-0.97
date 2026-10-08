@@ -1,6 +1,6 @@
 # Project status
 
-Date: 2026-10-07. Current phase: **surfaces, Windows presentation and bounded arenas verified; M0.1 partial**.
+Date: 2026-10-07. Current phase: **graphics, arenas and normalized keyboard input verified; M0.1 partial**.
 M0.0 technical bootstrap remains verified. The owner explicitly authorized the
 first bounded graphics subsystem in the project implementation chat on this date.
 SPEC-0001 v1 is finalized, implemented and tested under IMPL-0002 / TEST-0004.
@@ -15,6 +15,17 @@ documentation/evidence repository and personal project wiki. This technical gate
 does not imply that the complete project foundation or any OS boot is finished.
 
 ## Achieved
+
+- SPEC-0004 v1 bounded keyboard FIFO and Windows mapping, IMPL-0005 / TEST-0007.
+  Synthetic/native-message Space/Escape share one viewer queue and consumer;
+  explicit overflow/repeat/release/reset/sequence-exhaustion contracts.
+- 24 CTest checks per configuration pass in fresh x64 Debug twins, Release,
+  actual i686 and validated x64 ASan/UBSan. Independent list oracle: 327,680
+  eight-operation traces; 120 Windows mapping cases and actual hidden viewer tests.
+- Input records share the arena pool; exact input reservation and one-byte-short
+  storage failure pass. Core import/data and ARM64 LE/BE compile-only audits pass.
+- [Input results](../provenance/records/TEST-0007-input.md) and
+  [input snapshot](development/input-evidence.md). Remote CI publication pending.
 
 - Bounded caller-owned native arenas: alignment, checked arithmetic, stable errors,
   exhaustion and all-span reset without heap calls or backing writes in the core.
@@ -86,7 +97,7 @@ does not imply that the complete project foundation or any OS boot is finished.
 - Exact historical profile and 1984-applicable behavioral sources.
 - Macintosh 128K native feasibility, hardware startup and size budgets.
 - Interactive debugger, other sanitizer targets, m68k toolchain/runtime and boot.
-- Next: normalized events and a deterministic clock, then the
+- Next: deterministic/monotonic clock, wider input when required, then the
   remaining B1/M0.1 checks and interactive debugger workflow. The viewer alone
   does not complete the hosted-core gate.
 - Three bootable editions remain separately not-started: original Macintosh,

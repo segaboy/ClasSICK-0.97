@@ -5,6 +5,24 @@ eligibility applies to the stated scope, not every resource reachable from a URL
 No Apple executable, source, disassembly, decompilation, or copied asset was used.
 No reference-system black-box observation has yet been performed.
 
+## SRC-0021 — Owner's next implementation step
+
+- Author/date: project owner, 2026-10-07: move to the next step after arenas.
+- Requirement authority for SPEC-0004 normalized keyboard input, verification,
+  provenance and ordinary publication/wiki maintenance. No historical/boot claim.
+
+## SRC-0022 — Microsoft keyboard message interfaces
+
+- Publisher: Microsoft Learn; accessed 2026-10-07. Interface prose: parameters,
+  bit tables, returns and remarks of [WM_KEYDOWN](https://learn.microsoft.com/en-us/windows/win32/inputdev/wm-keydown)
+  and [WM_KEYUP](https://learn.microsoft.com/en-us/windows/win32/inputdev/wm-keyup),
+  plus Space/Escape entries in [Virtual-Key Codes](https://learn.microsoft.com/en-us/windows/win32/inputdev/virtual-key-codes).
+- Scope: Windows adapter only; one delivered message produces one normalized
+  event. No Windows sample implementation copied; original mapping/queue/tests.
+  The WM_KEYDOWN page's adjacent example was visible during documentation access;
+  it was not used as an implementation source. No Apple material involved.
+- No Macintosh applicability, keyboard layout/text, hardware driver or clock claim.
+
 ## SRC-0019 — Owner's boot-goal reaffirmation and continuation
 
 - Author/date: project owner, 2026-10-07, in the implementation chat.

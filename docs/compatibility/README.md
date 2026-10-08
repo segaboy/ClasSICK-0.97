@@ -7,6 +7,8 @@ Exact reference profile remains unverified; see R-001 in the research backlog.
 | --- | --- | --- |
 | Native OS | Not implemented | Architecture and boot gates only |
 | Generic core surfaces | SPEC-0001 v1 verified on Windows x64/x86 | TEST-0004; independent contract, no historical compatibility implication |
+| Generic native arenas | SPEC-0003 v1 verified on Windows x64/x86 | TEST-0006; no historical Memory Manager claim |
+| Generic keyboard FIFO | SPEC-0004 v1 verified, Space/Escape only | TEST-0007; Windows adapter, no historical Event Manager/native driver claim |
 | QuickDraw/Toolbox managers | Not implemented | Planned responsibilities; no approved historical contracts |
 | MFS and resource/data forks | Not implemented | Research and generic device strategy only |
 | Macintosh 128K startup/replacement ROM | Not implemented | Hardware/budget research pending |
