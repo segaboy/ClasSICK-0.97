@@ -2,7 +2,13 @@
 
 Date 2026-10-07. SPEC-0005 / IMPL-0006 / TEST-0008. Tested code/test/build inputs:
 `958e4794381e6dae25556a5c2796b1ad8c461e04`. This subsequent text-only record pins
-that immutable implementation. Remote CI is pending publication of this record.
+that immutable implementation. Evidence/CI source:
+`f814fd48991e14a2fd8ea0860471aa11d6c3dac1`.
+[Windows CI 37722447834 passed](https://github.com/segaboy/ClasSICK-0.97/actions/runs/37722447834)
+at that source. Observed guard/setup/bootstrap twins and full five-configuration
+34-check matrix pass, including sanitizer controls and endian core audits. All
+eight named executable hashes below match local and remote results. No code/test/
+build input changed after the implementation commit; this result is text-only.
 
 Verify-Clocks.ps1 -BuildRoot <fresh-output-directory> -Sanitizers: five
 configurations pass 34/34 checks each. Independent 5,184-pair arithmetic oracle,

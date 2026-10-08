@@ -26,7 +26,9 @@ does not imply that the complete project foundation or any OS boot is finished.
   delayed wakeup, real Windows timer dispatch and destruction. Eight executable
   hashes match fresh twins; all prior core/adapter tests remain verified.
 - Clock core import/data audits and ARM64 LE/BE compile-only checks pass.
-  [Clock snapshot](development/clock-evidence.md); remote CI pending publication.
+  [Clock Windows CI passed](https://github.com/segaboy/ClasSICK-0.97/actions/runs/37722447834)
+  at f814fd4: full matrix and all eight local/remote hashes match.
+  [Clock snapshot](development/clock-evidence.md) pins implementation/evidence inputs.
 - Owner's VirtualBox 7.2.16r174877 is available for future native-PC boot tests;
   read-only version query only, no VM or firmware configured/adopted/startup verified.
 
