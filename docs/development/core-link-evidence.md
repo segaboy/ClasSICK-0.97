@@ -92,6 +92,16 @@ GCC Debug-twin hosted hashes also match:
 | classick_clock_tests.exe | `b1a77e033faed2270c38799f391d87946e6708cc952d2333388f4587f83241a4` |
 | classick_core_link_tests.exe | `03e59cff82dde5f5667c6d4c497ffa27dcdbbf6562314319b65c9afda281ee71` |
 
-Remote CI is pending observation at this local-results publication. The prior
-B1 operator result remains separate and unchanged; no new keyboard session is
-claimed by this checkpoint.
+## Observed remote verification
+
+[Windows CI 37774811569 passed](https://github.com/segaboy/ClasSICK-0.97/actions/runs/37774811569)
+at evidence source `3950f3304dc21b1d611085542dca24939ca53b09`. Completed logs
+show the 156-file guard, fresh pinned Clang/GCC setup, two bootstrap builds,
+full five-configuration 37-check Clang matrix, validated sanitizers/core/endian
+audits, six x64 debugger sessions/three argument rejections, four-configuration
+22-check GCC matrix, all sixteen standalone links and nine failure controls.
+All twenty-one named local/remote hashes match: eight existing Clang hosted
+executables, five GCC hosted executables and eight standalone profile images.
+The preceding local-results publication did not predeclare a remote pass.
+This result update changes documentation only; compiled/tested inputs are unchanged.
+The prior B1 operator result remains separate; no new keyboard session is claimed.

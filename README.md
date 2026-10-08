@@ -63,7 +63,8 @@ images must use independently implemented OS/replacement firmware code. Emulator
 startup support, physical boot and exact historical 0.97 identity remain unverified.
 
 The [current-core link and second-compiler checkpoint](docs/development/core-link-evidence.md)
-now passes locally. Clang/LLD and GCC/GNU ld link all four core modules without
+now passes locally and in [Windows CI](https://github.com/segaboy/ClasSICK-0.97/actions/runs/37774811569).
+Clang/LLD and GCC/GNU ld link all four core modules without
 standard startup or runtime libraries at two widths and optimizations. Eight
 configuration pairs match; unresolved-helper and image rejection controls pass.
 The full Clang matrix has 37 checks per configuration; GCC passes 22 portable-core

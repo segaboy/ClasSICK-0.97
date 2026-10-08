@@ -46,6 +46,10 @@ four configurations, five GCC hosted twin hashes, all sixteen standalone links
 (eight matching pairs), four unresolved-helper controls and five image rejections
 pass. Fresh offline setup/extraction replay from the pinned cache also passes.
 Source/hash and observed remote results are pinned in the snapshot below.
+Completed Windows CI 37774811569 at evidence source 3950f33 passes the entire
+wrapper and fresh setup/bootstrap checks. Twenty-one named local/remote hashes
+match (eight existing Clang hosted, five GCC hosted, eight standalone profiles).
+This post-observation result update changes documentation only.
 
 No native-image execution, B2 boot, firmware/stack/exception/device implementation,
 Macintosh startup/budget or ARM64 linked execution. No general runtime-free C

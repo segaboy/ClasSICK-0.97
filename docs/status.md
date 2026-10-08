@@ -25,8 +25,10 @@ does not imply that the complete project foundation or any OS boot is finished.
   sanitizer/core/endian audits and x64 debugger replay. GCC core-only passes 22
   checks per Debug twin/Release/actual i686; five hosted executable twins match.
   Fresh cached second-compiler setup also passes without system changes.
-  [Scope and repeat instructions](development/core-link-evidence.md). Remote CI
-  will be recorded after observation; native execution and future runtime helpers
+  [Scope and repeat instructions](development/core-link-evidence.md).
+  [Windows CI 37774811569 passed](https://github.com/segaboy/ClasSICK-0.97/actions/runs/37774811569)
+  at 3950f33 with the full wrapper and twenty-one matching local/remote hashes;
+  native execution and future runtime helpers
   remain separate. The broader GCC Windows viewer build is unverified.
 
 - TEST-0010 / IMPL-0008 completes the existing B1/M0.1 technical acceptance audit.
