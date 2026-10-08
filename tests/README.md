@@ -20,3 +20,10 @@ cases per execution. Typed native allocation is exercised over host-allocated
 storage only. `arenas.freestanding` audits the optimized core object, while
 `arenas.viewer-memory` exercises the real viewer with a one-byte-short pool.
 The ordinary hidden-window test also checks exact successful buffer reservations.
+
+`core-link.c` is TEST-0011's hosted integration harness: independently guarded
+allocated storage, rejected capacities, separate ownership and the original
+four-module probe in `tools/core-link/`. `freestanding.probe` runs this behavior
+under Clang and GCC. The separate no-startup/no-library link and rejection matrix
+is run by `Verify-CoreLink.ps1`; its PE files are never loaded or counted as boots.
+See [scope and repeat instructions](../docs/development/core-link-evidence.md).

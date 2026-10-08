@@ -62,6 +62,13 @@ The owner reaffirmed real Macintosh booting and mini vMac validation. Those nati
 images must use independently implemented OS/replacement firmware code. Emulator
 startup support, physical boot and exact historical 0.97 identity remain unverified.
 
+The [current-core link and second-compiler checkpoint](docs/development/core-link-evidence.md)
+now passes locally. Clang/LLD and GCC/GNU ld link all four core modules without
+standard startup or runtime libraries at two widths and optimizations. Eight
+configuration pairs match; unresolved-helper and image rejection controls pass.
+The full Clang matrix has 37 checks per configuration; GCC passes 22 portable-core
+checks per configuration. These unloaded link fixtures precede native boot work.
+
 The founding Windows setup has been exercised with built-in PowerShell. Two fresh
 native Windows probe builds passed CTest and produced identical executable hashes.
 See [verification evidence](docs/development/bootstrap-evidence.md) and

@@ -5,6 +5,50 @@ eligibility applies to the stated scope, not every resource reachable from a URL
 No Apple executable, source, disassembly, decompilation, or copied asset was used.
 No reference-system black-box observation has yet been performed.
 
+## SRC-0030 — Owner's standalone-link and second-compiler continuation
+
+- Author/date: owner, 2026-10-08, "Do it" after proposed standalone linking and
+  another compiler before native boot work.
+- Scope: current-core link/runtime-boundary proof, necessary portable compiler,
+  tests/provenance/publication and Git wiki plans. B1 is already passed.
+- Requirement only; no firmware/VM selection, native boot or live OneNote request.
+
+## SRC-0031 — Portable GCC development distribution
+
+- Christopher Wellons / w64devkit, [immutable v2.10.0 release](https://github.com/skeeto/w64devkit/releases/tag/v2.10.0),
+  published 2026-09-14; release API asset digest/size and
+  [pinned README](https://github.com/skeeto/w64devkit/blob/v2.10.0/README.md),
+  Usage, Special linking considerations, Notes and Licenses; accessed 2026-10-08.
+- Package includes GCC 16.2.0 / GNU Binutils 2.47.20260726. Lock records official
+  package and observed compiler/linker hashes. Extracted tool/version outputs and
+  bundled COPYING.MinGW-w64-runtime.txt notices were inspected. Upstream
+  [UNLICENSE](https://github.com/skeeto/w64devkit/blob/v2.10.0/UNLICENSE) describes
+  the packaging project, not every bundled component's license.
+- Eligible external development tools; no tool implementation source fetched,
+  adopted or copied. README shell examples and runtime-helper descriptions were
+  visible, not adopted. GCC/MinGW hosted-test runtimes remain development-only;
+  standalone fixtures link no runtime library or helper. No binary redistribution.
+- GCC Runtime Library Exception link discovery timed out; no legal conclusion or
+  future product-runtime approval relies on its unread text. Preserve bundled
+  notices and independently review any later distribution or runtime adoption.
+
+## SRC-0032 — Compiler/linker and PE interface contracts
+
+- Accessed 2026-10-08: GNU [GCC link options](https://gcc.gnu.org/onlinedocs/gcc-16.2.0/gcc/Link-Options.html),
+  -nostdlib/-nodefaultlibs/-e; [C dialect options](https://gcc.gnu.org/onlinedocs/gcc/C-Dialect-Options.html),
+  freestanding; GNU Binutils [ld options](https://sourceware.org/binutils/docs/ld/Options.html)
+  and [WIN32](https://sourceware.org/binutils/docs/ld/WIN32.html), entry/map/subsystem;
+  LLVM [Clang manual](https://clang.llvm.org/docs/UsersManual.html) and
+  [LLD Windows support](https://lld.llvm.org/windows_support.html); Microsoft
+  [PE format](https://learn.microsoft.com/en-us/windows/win32/debug/pe-format),
+  COFF/optional/section headers and data-directory interface fields.
+- Current documentation versions may differ from pinned tools; the observed
+  commands/maps/bytes define tested scope. Pinned GCC C-dialect URL was unavailable;
+  the public current manual was read. Bundled tool --version/help and header
+  declarations are interfaces; no compiler/linker implementation code inspected.
+- Examples/interface snippets were visible; original probe/auditor/scripts only.
+  No Apple implementation input or historical Macintosh applicability.
+
 ## SRC-0028 — Owner's B1 audit and live viewer validation
 
 - Author/date: owner, 2026-10-07–08, "OK, do it" after proposed remaining

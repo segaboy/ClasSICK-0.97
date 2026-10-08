@@ -5,6 +5,14 @@ out of public commits.
 
 - `Inventory-Windows.ps1`: sanitized PATH/common-location capability inventory.
 - `Setup-Windows.ps1`: prepare SHA-256-pinned portable tools; optional `-Offline`.
+- `Setup-SecondCompiler.ps1`: prepare optional pinned GCC/GNU ld without system
+  changes; supports `-Offline`. Package and executable digests are in
+  `gcc-toolchain-lock.json`.
+- `Verify-CoreLink.ps1 -BuildRoot <fresh-directory> -Sanitizers`: full Clang
+  matrix/debugger replay, GCC core-only matrix and complete standalone link twins
+  at two widths/optimizations. Includes unresolved-helper and image rejection controls.
+- `Test-LinkImage.ps1`: bounded original PE/map auditor for unloaded link fixtures;
+  checks the actual entry address, retained core symbols and import/library boundary.
 - `Enter-DevEnvironment.ps1`: activate prepared tools in the current process only.
 - `Verify-Bootstrap.ps1`: two new native hosted builds, CTest and executable hashes.
 - `Verify-Surfaces.ps1 -BuildRoot <fresh-directory> -Sanitizers`: x64 debug twins,

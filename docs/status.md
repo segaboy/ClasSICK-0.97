@@ -16,6 +16,19 @@ does not imply that the complete project foundation or any OS boot is finished.
 
 ## Achieved
 
+- ADR-0009 / IMPL-0009 / TEST-0011 verifies complete current-core linkage under
+  Clang/LLD and GCC/GNU ld at x86-64/i686 O0/O2. Eight profile twins match;
+  eighteen original functions are retained with the exact named entry and no
+  standard startup/runtime library or imports. Four unresolved-helper and five
+  image-rejection controls pass. Images were never loaded.
+- The full local Clang matrix passes 37 checks per five configurations, existing
+  sanitizer/core/endian audits and x64 debugger replay. GCC core-only passes 22
+  checks per Debug twin/Release/actual i686; five hosted executable twins match.
+  Fresh cached second-compiler setup also passes without system changes.
+  [Scope and repeat instructions](development/core-link-evidence.md). Remote CI
+  will be recorded after observation; native execution and future runtime helpers
+  remain separate. The broader GCC Windows viewer build is unverified.
+
 - TEST-0010 / IMPL-0008 completes the existing B1/M0.1 technical acceptance audit.
   Combined synthetic/queued-message startup, timed pixels and Escape shutdown pass;
   early Escape correctly reports incomplete acceptance after clean retirement.
@@ -146,8 +159,8 @@ does not imply that the complete project foundation or any OS boot is finished.
 - Exact historical profile and 1984-applicable behavioral sources.
 - Macintosh 128K native feasibility, hardware startup and size budgets.
 - WOW64 debugger support, other sanitizer targets, m68k toolchain/runtime and boot.
-- Next: prove native freestanding linkage/runtime ownership and a second compiler
-  core build, then review native-PC firmware/device contracts. Wider input and
+- Next: review native-PC firmware/device contracts and specify loader, memory map,
+  handoff, stack/exception state and post-handoff ownership. Wider input and
   native drivers receive contracts when required. B1 is a Windows development
   start; it does not establish any native boot.
 - Three bootable editions remain separately not-started: original Macintosh,

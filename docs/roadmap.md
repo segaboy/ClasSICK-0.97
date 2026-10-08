@@ -32,7 +32,10 @@ the project license. Record any future license change through owner approval/ADR
    and hosted timed behavior pass TEST-0008. The x64 debug workflow now passes
    TEST-0009. TEST-0010 and the owner-operated keyboard session now complete
    [B1/M0.1 technical hosted-start acceptance](development/hosted-start-audit.md).
-3. Prove freestanding linkage/runtime ownership and a second compiler/core build.
+3. Completed the scoped [current-core link and second-compiler checkpoint](development/core-link-evidence.md):
+   Clang/LLD and GCC/GNU ld complete no-runtime links at two widths/optimizations,
+   matching twins and failure controls. This establishes the current profile's
+   closure; future helper dependencies and actual native execution need review.
 4. Prepare/review UEFI VM tooling and device contracts; the owner named installed
    VirtualBox (observed 7.2.16r174877) for native-PC tests. No VM/startup/firmware
    validation is claimed. Implement the B2 dependency

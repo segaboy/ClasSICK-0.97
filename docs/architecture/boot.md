@@ -56,6 +56,12 @@ Toolbox, MFS, and a 68000 interpreter are not prerequisites for B2.
 
 ## Dependency graph for B2
 
+ADR-0009 / TEST-0011 clears the current-core complete-link/second-compiler
+checkpoint: no startup/default libraries or imports in eight Clang/GCC width/
+optimization profiles, with exact entry checks and rejection controls. The
+[fixtures](../development/core-link-evidence.md) were never loaded. This does not
+clear firmware ABI, kernel entry/stack/exception setup, future runtime helpers or B2.
+
 ```mermaid
 flowchart TD
     P[Clean-room policy, provenance, reviewed design specs] --> T[Reproducible tools and freestanding build rules]

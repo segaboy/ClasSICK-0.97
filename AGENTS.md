@@ -55,6 +55,11 @@ Read `docs/clean-room/POLICY.md`, `CONTRIBUTING.md`, and
   the operator session passed two Space presses/releases and Escape. B1/M0.1
   technical acceptance is now passed, with human provenance review separate.
   Native linkage/runtime, a second compiler and all OS boots remain later gates.
+- The owner next authorized standalone linking and a second compiler with "Do it"
+  on 2026-10-08. ADR-0009 / IMPL-0009 / TEST-0011 cover current-core no-runtime
+  PE link fixtures and scoped GCC core conformance, including pinned portable
+  tooling and normal evidence/Git wiki publication. These fixtures are never
+  loaded; firmware/loader/stack/runtime beyond this profile and B2 remain separate.
 - Use `C:\Repos\ClasSICK-0.97` for source and `C:\ClasSICK` for local build/test
   output on the founding workstation. Do not depend on those paths in core code.
 - Do not create specialist chats or delegate work merely because the roadmap

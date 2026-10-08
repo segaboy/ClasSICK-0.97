@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "host": "windows-x86_64",
+  "verifiedDate": "2026-10-08",
+  "id": "gcc",
+  "distribution": "w64devkit 2.10.0",
+  "version": "GCC 16.2.0; GNU Binutils 2.47.20260726",
+  "purpose": "Second independent compiler and linker for core conformance and runtime-free link fixtures",
+  "archive": "w64devkit-x64-2.10.0.7z.exe",
+  "url": "https://github.com/skeeto/w64devkit/releases/download/v2.10.0/w64devkit-x64-2.10.0.7z.exe",
+  "sha256": "18d0a4c71a166f8401ab6305781bec5882b40b5e06ba9807c61cb5f3b3c6325e",
+  "sizeBytes": 67127496,
+  "bin": "w64devkit/bin",
+  "compilerSha256": "9a52de3e3af8f4896e963c4b68ed159f049954775decb20e421cd75d51aab6ed",
+  "linkerSha256": "354e557b21c3c0c73da2be7e42891eb0298cdf455a54f6dbbc7c6d9b53a1e349"
+}

@@ -151,6 +151,19 @@ early-exit rejection check. B1/M0.1 now passes with the separate owner-operated
 `--validate-start` keyboard session; see [the acceptance audit](hosted-start-audit.md).
 That interactive session is never substituted by CI-generated key messages.
 
+The complete link/second-compiler checkpoint adds optional pinned portable GCC:
+
+```powershell
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\scripts\Setup-SecondCompiler.ps1
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\scripts\Verify-CoreLink.ps1 -BuildRoot C:\ClasSICK\core-link-local -Sanitizers
+```
+
+This includes the existing full Clang matrix/debugger workflow (37 checks per
+configuration), GCC portable-core conformance (22 per configuration), complete
+no-startup/no-library link twins and failure controls. Windows adapters remain
+enabled by default; GCC's scoped core builds set `CLASSICK_WINDOWS_ADAPTERS=OFF`.
+No standalone image is loaded. See [the link snapshot](core-link-evidence.md).
+
 ## Tools deferred until a concrete need
 
 | Tool/category | Purpose when introduced | Current state |

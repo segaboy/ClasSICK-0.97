@@ -8,6 +8,7 @@ set(CMAKE_C_STANDARD 11)
 set(CMAKE_C_STANDARD_REQUIRED ON)
 set(CMAKE_C_EXTENSIONS OFF)
 include(CTest)
+option(CLASSICK_WINDOWS_ADAPTERS "Build Windows development adapters and viewer" ON)
 
 add_library(classick_abi_probe OBJECT tools/toolchain-smoke/abi-probe.c)
 add_executable(classick_toolchain_smoke tools/toolchain-smoke/main.c)
@@ -32,7 +33,9 @@ target_include_directories(classick_clocks PUBLIC core/time)
 add_library(classick_clocks_freestanding OBJECT core/time/clock.c)
 add_executable(classick_clock_tests tests/clocks.c)
 target_link_libraries(classick_clock_tests PRIVATE classick_clocks)
-if(WIN32)
+add_executable(classick_core_link_tests tests/core-link.c tools/core-link/probe.c)
+target_link_libraries(classick_core_link_tests PRIVATE classick_surfaces classick_arenas classick_input classick_clocks)
+if(WIN32 AND CLASSICK_WINDOWS_ADAPTERS)
     add_library(classick_windows_clock STATIC platform/windows/clock.c)
     target_link_libraries(classick_windows_clock PUBLIC classick_clocks)
     add_executable(classick_windows_clock_tests tests/windows-clock.c)
@@ -75,7 +78,7 @@ if(CMAKE_C_COMPILER_ID MATCHES "Clang|GNU")
     foreach(target classick_abi_probe classick_toolchain_smoke classick_surfaces
             classick_surfaces_freestanding classick_surface_tests
             classick_arenas classick_arenas_freestanding classick_arena_tests
-            classick_input classick_input_freestanding classick_input_tests classick_clocks classick_clocks_freestanding classick_clock_tests)
+            classick_input classick_input_freestanding classick_input_tests classick_clocks classick_clocks_freestanding classick_clock_tests classick_core_link_tests)
         target_compile_options(${target} PRIVATE -Wall -Wextra -Wpedantic -Werror
             "-ffile-prefix-map=${CMAKE_SOURCE_DIR}=."
             # Last matching mapping wins: preserve the narrower nested build map.
@@ -95,11 +98,12 @@ if(CMAKE_C_COMPILER_ID MATCHES "Clang|GNU")
     target_compile_options(classick_arena_tests PRIVATE -Wconversion -Wsign-conversion)
     target_compile_options(classick_input_tests PRIVATE -Wconversion -Wsign-conversion)
     target_compile_options(classick_clock_tests PRIVATE -Wconversion -Wsign-conversion)
+    target_compile_options(classick_core_link_tests PRIVATE -Wconversion -Wsign-conversion)
 elseif(MSVC)
     foreach(target classick_abi_probe classick_toolchain_smoke classick_surfaces
             classick_surfaces_freestanding classick_surface_tests
             classick_arenas classick_arenas_freestanding classick_arena_tests
-            classick_input classick_input_freestanding classick_input_tests classick_clocks classick_clocks_freestanding classick_clock_tests)
+            classick_input classick_input_freestanding classick_input_tests classick_clocks classick_clocks_freestanding classick_clock_tests classick_core_link_tests)
         target_compile_options(${target} PRIVATE /W4 /WX)
     endforeach()
 endif()
@@ -108,7 +112,7 @@ if(CLASSICK_SURFACE_SANITIZERS)
         message(FATAL_ERROR "Validate this compiler's sanitizer support before use")
     endif()
     foreach(target classick_surfaces classick_surface_tests classick_arenas classick_arena_tests
-            classick_input classick_input_tests classick_clocks classick_clock_tests)
+            classick_input classick_input_tests classick_clocks classick_clock_tests classick_core_link_tests)
         target_compile_options(${target} PRIVATE -fsanitize=address,undefined
             -fno-sanitize-recover=all -fno-omit-frame-pointer)
     endforeach()
@@ -116,7 +120,8 @@ if(CLASSICK_SURFACE_SANITIZERS)
     target_link_options(classick_arena_tests PRIVATE -fsanitize=address,undefined)
     target_link_options(classick_input_tests PRIVATE -fsanitize=address,undefined)
     target_link_options(classick_clock_tests PRIVATE -fsanitize=address,undefined)
-    if(WIN32)
+    target_link_options(classick_core_link_tests PRIVATE -fsanitize=address,undefined)
+    if(WIN32 AND CLASSICK_WINDOWS_ADAPTERS)
         foreach(target classick_windows_presenter classick_presentation_tests classick_surface_demo
                 classick_windows_input classick_windows_input_tests classick_windows_clock classick_windows_clock_tests)
             target_compile_options(${target} PRIVATE -fsanitize=address,undefined
@@ -133,9 +138,11 @@ if(MINGW)
     target_link_options(classick_arena_tests PRIVATE -Wl,--no-insert-timestamp)
     target_link_options(classick_input_tests PRIVATE -Wl,--no-insert-timestamp)
     target_link_options(classick_clock_tests PRIVATE -Wl,--no-insert-timestamp)
+    target_link_options(classick_core_link_tests PRIVATE -Wl,--no-insert-timestamp)
 endif()
 if(BUILD_TESTING)
-    if(WIN32)
+    add_test(NAME freestanding.probe COMMAND classick_core_link_tests)
+    if(WIN32 AND CLASSICK_WINDOWS_ADAPTERS)
         foreach(suite conversion bounds gdi)
             add_test(NAME presentation.${suite} COMMAND classick_presentation_tests ${suite})
         endforeach()
