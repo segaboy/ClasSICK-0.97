@@ -3,7 +3,9 @@
 Date 2026-10-08. ADR-0010 / SPEC-0006; loader ADR-0011 / SPEC-0007. This is a
 proposed native test profile. Original preboot validation and hosted loader calls
 pass; our own EFI entry/stack/stop image is linked and inspected, never loaded.
-No VM/native boot exists. Full owned exceptions and device work remain required.
+SPEC-0008 adds owned descriptor/terminal-fault scaffolding with hosted byte tests
+and unloaded image audits. No VM/native boot exists; actual descriptor/fault
+execution, profile/mapping qualification and device work remain required.
 
 | Item | Proposed first configuration / required evidence |
 | --- | --- |
@@ -101,7 +103,7 @@ changed. Resolve service availability in the isolated project environment before
 future configuration. This is a local tool limitation, not an auto-review rejection.
 
 Next: resolve the exact firmware eligibility/identity, format reviewed boot media,
-implement owned exception state and reviewed device leaves, then run B2
+validate owned exception execution and implement reviewed device leaves, then run B2
 with repeated cold-start traces and original-scene capture. Macintosh replacement
 firmware/mini vMac and physical hardware remain independent targets; all three
 OS edition boots and historical parity remain open.

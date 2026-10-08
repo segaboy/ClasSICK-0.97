@@ -16,6 +16,16 @@ does not imply that the complete project foundation or any OS boot is finished.
 
 ## Achieved
 
+- SPEC-0008 / ADR-0012 / IMPL-0012 / TEST-0014 adds original x64 GDT/TSS/IDT
+  serialization, four emergency stacks and terminal first-fault record assembly.
+  Complete local/remote Clang x64 53-check four-config/i686 48, scoped GCC x64
+  38-check three-config/i686 33 matrices and prior controls pass. Four unloaded
+  own EFI images/22 symbols/256 vectors, twenty corruptions and two omitted-object
+  controls pass; all 29 named local/remote fingerprints match.
+  [Immutable evidence](development/x64-exception-evidence.md) pins source 974d781
+  and passed Windows CI 37795563016. No actual descriptor/fault delivery, devices,
+  firmware adoption, VM, B2 or edition boot is verified.
+
 - SPEC-0007 / ADR-0011 / IMPL-0011 / TEST-0013 implements original x64 UEFI
   orchestration and an owned-stack terminal scaffold. Local Clang x64 48-check
   four-config/i686 43-check and GCC x64 33-check three-config/i686 28-check
@@ -188,10 +198,11 @@ does not imply that the complete project foundation or any OS boot is finished.
 - Exact historical profile and 1984-applicable behavioral sources.
 - Macintosh 128K native feasibility, hardware startup and size budgets.
 - WOW64 debugger support, other sanitizer targets, m68k toolchain/runtime and boot.
-- Next: resolve exact firmware identity/provenance, finalize the UEFI ABI/loader
-  and boot-medium recipe, implement native entry/stack/exceptions and reviewed
-  device leaves. Preboot data/model tests are complete; actual handoff, register
-  drivers and B2 remain open. B1 stays a Windows development start.
+- Next: resolve exact firmware identity/provenance, format reviewed boot media
+  and implement native framebuffer/timer/keyboard/diagnostic leaves and event loop.
+  Loader/entry/stack/exception scaffolds are built and inspected; real handoff,
+  descriptor installation/fault injection and B2 remain unverified. B1 stays a
+  Windows development start.
 - Three bootable editions remain separately not-started: original Macintosh,
   native PC without Linux, Linux PC. Historical identity/QuickDraw and edition
   parity remain unverified; no Linux divergence has been introduced.

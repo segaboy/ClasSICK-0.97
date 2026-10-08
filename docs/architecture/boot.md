@@ -123,7 +123,10 @@ reserved allocations and the service-call boundary from reviewed UEFI interfaces
 (SRC-0034, extending the earlier SRC-0005 lead). The proposed PC profile records
 stack/entry/interrupt and post-handoff device obligations. SPEC-0007 / ADR-0011 now
 implements original x64 calls and a stop scaffold, with hosted mocks and unloaded
-EFI-image audits. It has no owned exceptions/device loop or observed native handoff.
+EFI-image audits. SPEC-0008 / ADR-0012 now adds owned descriptor-table bytes and
+terminal fault assembly, verified under hosted tests and unloaded image inspection.
+Actual descriptor installation, fault delivery, device loop and native handoff
+remain unobserved; [the snapshot](../development/x64-exception-evidence.md) pins scope.
 Exact firmware eligibility, formatted boot media, Secure Boot and external VM/runtime
 rights remain separate work. [The metadata follow-up](../development/firmware-eligibility.md)
 identified the x64 producer and adopted no firmware. B2 remains unachieved.

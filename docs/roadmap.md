@@ -42,7 +42,9 @@ the project license. Record any future license change through owner approval/ADR
    original [SPEC-0007 loader/stop scaffold](development/uefi-loader-evidence.md)
    with hosted calls and unloaded EFI inspection. The actual x64 producer is
    identified; selected firmware provenance remains unresolved before launch.
-   Formatted boot media, owned exception state, reviewed device leaves and real
+   [Owned exception tables/scaffold](development/x64-exception-evidence.md) now
+   pass hosted byte tests and unloaded install/vector/fault-path audits.
+   Formatted boot media, actual exception delivery, reviewed device leaves and real
    handoff/stack execution remain required. B2 is unverified; follow
    [the boot graph](architecture/boot.md).
 5. In parallel only when explicitly staffed, pursue historical-source eligibility,
