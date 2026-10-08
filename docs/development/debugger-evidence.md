@@ -1,7 +1,8 @@
 # Hosted debugger verification snapshot
 
 Date 2026-10-07. IMPL-0007 / TEST-0009, existing SPEC-0002–0005.
-Tested source pin follows the implementation commit. Remote CI pending.
+Tested code/test/build inputs: `f2c53117981f5d21e6848a28c66273145bd32fc3`.
+This subsequent text-only record pins the implementation. Remote CI pending.
 
 Local matrix: five configurations, 34/34 checks each; validated sanitizer controls,
 optimized core imports/global-data and ARM64 LE/BE compile-only audits pass. Six
