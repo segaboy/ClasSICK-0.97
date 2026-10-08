@@ -19,7 +19,7 @@ memory-mapped register definitions.
 | Memory | SPEC-0003 caller-supplied monotonic arenas; alignment, ownership and reset | Tiny arena, alignment waste, exhaustion, integer-overflow and lifetime tests; individual free/fragmentation outside v1 |
 | Graphics | Width/height, byte stride, pixel format, length, access mode; present invalidated regions | Unusual stride, 1bpp MSB-first and native-color conversion, clipped writes |
 | Input | SPEC-0004 Space/Escape key records, source and bounded epoch sequence; pointer/text/timestamps later | Independent list traces; overflow/repeat/reset and Windows mapping/viewer tests |
-| Clock/timer | Monotonic duration units and wrap/availability contract; deterministic fake clock | No dependency on wall-clock/timezone or exact host scheduler delays |
+| Clock/timer | SPEC-0005 canonical seconds/nanoseconds, monotonic sample/error/overflow and controllable advancement; Windows QPC provider | Independent arithmetic/fault tests and fake/live viewer deadlines; no calendar or exact scheduler/accuracy claim |
 | Block device | Logical block size/count, bounded reads/writes, flush, media/read-only/errors | RAM/file-backed device; short/failing I/O; non-floppy storage |
 | Logging | Bounded diagnostic sink; optional capability | Operates without stdio or console firmware callbacks |
 | Halt/reset | Explicit terminal states and best-effort platform operation | Hosted shutdown and native diagnostic failure state |

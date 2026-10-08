@@ -26,8 +26,8 @@ This verifies our generic contract; no OS boot or Macintosh compatibility is pro
 [SPEC-0002 Windows presentation](docs/specifications/SPEC-0002-windows-presentation.md)
 adds a native color/monochrome viewer with original geometric scenes. Space changes
 views; resizing uses sharp integer scaling. See
-[build, run and review instructions](docs/development/windows.md). Clocks and
-the remaining hosted-core acceptance gate are still open.
+[build, run and review instructions](docs/development/windows.md). The remaining
+hosted-core acceptance gate is still open.
 Bounded [SPEC-0003 arenas](docs/specifications/SPEC-0003-arenas.md) now reserve all
 viewer buffers from one host-owned region; independent boundary/ownership tests
 and the full sixteen-check Windows matrix pass. See [arena results](provenance/records/TEST-0006-arenas.md).
@@ -36,7 +36,14 @@ and the full sixteen-check Windows matrix pass. See [arena results](provenance/r
 Space/Escape press, release and repeat through one bounded portable queue.
 Synthetic and Windows-message input share the viewer consumer. The current
 24-check matrix passes; [input results](provenance/records/TEST-0007-input.md)
-remain generic contract evidence, with clock/full-input/native-driver work open.
+remain generic contract evidence, with full-input/native-driver work open.
+
+[SPEC-0005 portable time](docs/specifications/SPEC-0005-clock.md) now supplies
+checked elapsed-time arithmetic, monotonic observations and a controllable clock.
+The Windows provider and original viewer's timed strip pass the full 34-check
+matrix. See [clock results](provenance/records/TEST-0008-clocks.md). Interactive
+debugger verification and native boot work remain open. The owner's installed
+VirtualBox is recorded as a future native-PC test option.
 
 The owner reaffirmed real Macintosh booting and mini vMac validation. Those native
 images must use independently implemented OS/replacement firmware code. Emulator

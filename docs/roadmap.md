@@ -28,11 +28,13 @@ the project license. Record any future license change through owner approval/ADR
 2. [SPEC-0002 Windows presentation](specifications/SPEC-0002-windows-presentation.md)
    and original scenes are verified under TEST-0005. [SPEC-0003 bounded arenas](specifications/SPEC-0003-arenas.md)
    and viewer-buffer integration now pass TEST-0006. [SPEC-0004 keyboard input](specifications/SPEC-0004-input.md)
-   and shared synthetic/Windows viewer input pass TEST-0007. Next add a
-   deterministic/monotonic clock and exercise the debug workflow
+   and shared synthetic/Windows viewer input pass TEST-0007. [SPEC-0005 clocks](specifications/SPEC-0005-clock.md)
+   and hosted timed behavior pass TEST-0008. Next exercise the debug workflow
    so B1/M0.1 becomes measurable.
 3. Prove freestanding linkage/runtime ownership and a second compiler/core build.
-4. Prepare/review UEFI VM tooling and device contracts; implement the B2 dependency
+4. Prepare/review UEFI VM tooling and device contracts; the owner named installed
+   VirtualBox (observed 7.2.16r174877) for native-PC tests. No VM/startup/firmware
+   validation is claimed. Implement the B2 dependency
    chain in [the boot graph](architecture/boot.md).
 5. In parallel only when explicitly staffed, pursue historical-source eligibility,
    Macintosh hardware budget, resource-fork/MFS specs, and trap ABI contracts.

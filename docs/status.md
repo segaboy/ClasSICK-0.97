@@ -1,6 +1,6 @@
 # Project status
 
-Date: 2026-10-07. Current phase: **graphics, arenas and normalized keyboard input verified; M0.1 partial**.
+Date: 2026-10-07. Current phase: **graphics, arenas, keyboard and clocks verified; M0.1 partial**.
 M0.0 technical bootstrap remains verified. The owner explicitly authorized the
 first bounded graphics subsystem in the project implementation chat on this date.
 SPEC-0001 v1 is finalized, implemented and tested under IMPL-0002 / TEST-0004.
@@ -15,6 +15,20 @@ documentation/evidence repository and personal project wiki. This technical gate
 does not imply that the complete project foundation or any OS boot is finished.
 
 ## Achieved
+
+- SPEC-0005 v1 canonical seconds/nanoseconds, overflow/backward rejection,
+  monotonic observations and deterministic advancement, IMPL-0006 / TEST-0008.
+  Host QPC conversion/availability/raw-monotonic checks stay outside the core.
+- 34 CTest checks pass per fresh x64 Debug twin, Release, actual i686 and validated
+  x64 ASan/UBSan configuration. Independent clock oracle: 5,184 boundary pairs;
+  thirteen conversion fixtures, injectable faults and 1,000 live QPC reads.
+- Fake/live hidden viewer tests verify deadline strip pixels, repeat behavior,
+  delayed wakeup, real Windows timer dispatch and destruction. Eight executable
+  hashes match fresh twins; all prior core/adapter tests remain verified.
+- Clock core import/data audits and ARM64 LE/BE compile-only checks pass.
+  [Clock snapshot](development/clock-evidence.md); remote CI pending publication.
+- Owner's VirtualBox 7.2.16r174877 is available for future native-PC boot tests;
+  read-only version query only, no VM or firmware configured/adopted/startup verified.
 
 - SPEC-0004 v1 bounded keyboard FIFO and Windows mapping, IMPL-0005 / TEST-0007.
   Synthetic/native-message Space/Escape share one viewer queue and consumer;
@@ -99,8 +113,8 @@ does not imply that the complete project foundation or any OS boot is finished.
 - Exact historical profile and 1984-applicable behavioral sources.
 - Macintosh 128K native feasibility, hardware startup and size budgets.
 - Interactive debugger, other sanitizer targets, m68k toolchain/runtime and boot.
-- Next: deterministic/monotonic clock, wider input when required, then the
-  remaining B1/M0.1 checks and interactive debugger workflow. The viewer alone
+- Next: interactive debugger workflow and remaining B1/M0.1 acceptance;
+  wider input and native drivers receive contracts when required. The viewer alone
   does not complete the hosted-core gate.
 - Three bootable editions remain separately not-started: original Macintosh,
   native PC without Linux, Linux PC. Historical identity/QuickDraw and edition

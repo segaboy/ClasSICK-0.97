@@ -16,8 +16,15 @@ exits cleanly. Headless bounds/ownership/event tests pass. No Toolbox compatibil
 claim is required to meet B1. This is a hosted development start.
 
 Current partial progress: surfaces, arena ownership and SPEC-0004 normalized
-Space/Escape input pass hosted tests. Deterministic/monotonic time, broader
-input requirements and the interactive debug workflow remain open; B1 is not closed.
+Space/Escape input and SPEC-0005 deterministic/monotonic time pass hosted tests.
+Interactive debug workflow and remaining acceptance remain open; B1 is not closed.
+Full input/native drivers receive their own contracts when needed.
+
+The owner named installed VirtualBox for future native-PC boot tests; read-only
+version observation is 7.2.16r174877. No VM configuration, firmware/image adoption,
+post-handoff device behavior or boot is verified. Review those inputs before B2.
+Macintosh/mini vMac replacement-firmware validation remains a separate target;
+VM results never close the original-hardware edition gate.
 
 **B2 — first successful native OS boot (M0.2):** on one named x86-64 UEFI VM/PC
 configuration, an independently built native image:

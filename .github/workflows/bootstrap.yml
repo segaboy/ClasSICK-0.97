@@ -28,4 +28,4 @@ jobs:
         run: .\scripts\Verify-Bootstrap.ps1
       - name: Verify graphics, memory, input, hosted adapters and freestanding boundaries
         shell: powershell
-        run: .\scripts\Verify-Input.ps1 -BuildRoot build\core-verification -Sanitizers
+        run: .\scripts\Verify-Clocks.ps1 -BuildRoot build\core-verification -Sanitizers

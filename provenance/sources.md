@@ -5,6 +5,30 @@ eligibility applies to the stated scope, not every resource reachable from a URL
 No Apple executable, source, disassembly, decompilation, or copied asset was used.
 No reference-system black-box observation has yet been performed.
 
+## SRC-0023 — Owner's clock continuation and VirtualBox availability
+
+- Author/date: owner, 2026-10-07, after discussing the next clock milestone.
+- Instruction: retain installed VirtualBox for future boot tests and move on.
+- Scope: SPEC-0005 time/provider/viewer tests and ordinary provenance/publication.
+  VirtualBox availability is a project requirement/tooling hint, not an OS boot,
+  VM/firmware provenance approval or replacement for Macintosh validation.
+- Read-only local VBoxManage version check returned 7.2.16r174877. No VM created,
+  altered or started, firmware adopted, package redistributed or existing VM read.
+
+## SRC-0024 — Microsoft elapsed-time and timer interfaces
+
+- Microsoft Learn, accessed 2026-10-07. Parameters/returns/remarks of
+  [QueryPerformanceCounter](https://learn.microsoft.com/en-us/windows/win32/api/profileapi/nf-profileapi-queryperformancecounter),
+  [QueryPerformanceFrequency](https://learn.microsoft.com/en-us/windows/win32/api/profileapi/nf-profileapi-queryperformancefrequency),
+  [SetTimer](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-settimer)
+  and [KillTimer](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-killtimer),
+  plus interface guidance in [Acquiring high-resolution time stamps](https://learn.microsoft.com/en-us/windows/win32/sysinfo/acquiring-high-resolution-time-stamps).
+- Published host-interface prose only. QPC's adjacent C++ example was visible
+  during access; no sample implementation copied/adopted. Original portable time,
+  host integer conversion, provider transitions, timed strip and independent tests.
+- No historical Macintosh applicability, hardware timing certification, UTC,
+  nanosecond accuracy or native timer/scheduler implementation claim.
+
 ## SRC-0021 — Owner's next implementation step
 
 - Author/date: project owner, 2026-10-07: move to the next step after arenas.

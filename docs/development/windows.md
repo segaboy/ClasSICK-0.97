@@ -107,7 +107,7 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\scripts\Verify-Present
 Start-Process C:\ClasSICK\presentation-local\debug-a\classick_surface_demo.exe
 ```
 
-The wrapper now runs 24 CTest checks in fresh x64 debug twins, Release, i686 and
+The wrapper now runs 34 CTest checks in fresh x64 debug twins, Release, i686 and
 validated x64 ASan/UBSan configurations, plus the existing core compile/import
 audits. It compares both presentation executable hashes and ends with
 `SPEC-0002 verification PASS`. Logs/hashes stay in the chosen output directory.
@@ -123,20 +123,24 @@ The two scenes are original geometry, not a reconstructed Macintosh desktop.
 The viewer now supplies one host-owned memory region to SPEC-0003 and reserves
 its color, mono, scratch and sixteen input records through our bounded core arena.
 SPEC-0004 maps Windows Space/Escape messages to core press/release/repeat records;
-synthetic input uses the same queue/consumer. Clocks, full input and debugger work
-remain open. The 1,342,744-byte development pool is not a Macintosh RAM budget.
+synthetic input uses the same queue/consumer. Full input and native drivers
+receive separate contracts. SPEC-0005 now provides controllable/core monotonic
+time and a Windows QPC provider. An initial Space press illuminates an original
+bottom strip for 250ms, with a timer wakeup checking our deadline. The 1,342,744-byte
+development pool is not a Macintosh RAM budget; interactive debugger work remains open.
 
 For the current complete core verification matrix, use a fresh output directory:
 
 ```powershell
-powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\scripts\Verify-Input.ps1 -BuildRoot C:\ClasSICK\core-local -Sanitizers
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\scripts\Verify-Clocks.ps1 -BuildRoot C:\ClasSICK\core-local -Sanitizers
 ```
 
 This also compares input-test executable hashes and audits ARM64 little/big-endian
 input objects. All current suites run, including actual viewer overflow/recovery,
 synthetic/native-message input and memory exhaustion. See [input evidence](input-evidence.md).
-The hidden viewer checks can be run individually with --verify-input and
---verify-input-memory. They do not inject input into other applications.
+The hidden checks also include --verify-clock and --verify-clock-live for controlled
+deadlines and a real delivered Windows timer/QPC sample. Tests make no exact
+scheduler-delay/physical accuracy claim. See [clock evidence](clock-evidence.md).
 
 ## Tools deferred until a concrete need
 
@@ -144,7 +148,7 @@ The hidden viewer checks can be run individually with --verify-input and
 | --- | --- | --- |
 | LLDB or another debugger | Breakpoints, guest/native state and symbols | Package includes LLDB; interactive debugging unverified |
 | ASan/UBSan/fuzzing support | Memory/undefined behavior and decoder robustness | x64 ASan/UBSan verified for surfaces; other targets and fuzzing pending |
-| QEMU plus reviewed UEFI firmware | Repeatable native x86-64 boot tests | Not installed by bootstrap |
+| VirtualBox / reviewed native-PC firmware | Owner-selected future PC VM tests | Installed 7.2.16r174877 observed; no VM/firmware/startup result. QEMU unselected |
 | m68k cross compiler, linker and runtime helpers | Original 68000 native images and ROM packaging | Must select/review independently |
 | ARM64 toolchain/runner | Native architecture parity | Runner/board unselected |
 | Python or other scripting runtime | Needed only if a future generator requires it | No prerequisite; launch aliases are not an interpreter |

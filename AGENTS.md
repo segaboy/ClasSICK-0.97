@@ -39,6 +39,11 @@ Read `docs/clean-room/POLICY.md`, `CONTRIBUTING.md`, and
   This authorizes SPEC-0004 bounded normalized keyboard events, Windows/viewer
   integration, independent tests and ordinary evidence/wiki publication. Timing,
   broader input and boot remain subsequent work; B1 remains open.
+- The owner authorized moving on to the portable clock on 2026-10-07 and named
+  their installed VirtualBox for future boot tests. Finalize/implement/verify
+  SPEC-0005 and hosted timed behavior, then publish evidence and wiki updates.
+  Record VirtualBox availability without claiming a VM boot or hardware result.
+  Debugger verification and native boot remain separate gates.
 - Use `C:\Repos\ClasSICK-0.97` for source and `C:\ClasSICK` for local build/test
   output on the founding workstation. Do not depend on those paths in core code.
 - Do not create specialist chats or delegate work merely because the roadmap

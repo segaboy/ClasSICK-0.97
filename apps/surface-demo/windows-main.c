@@ -3,6 +3,7 @@
 #include "presenter.h"
 #include "arena.h"
 #include "../../platform/windows/input.h"
+#include "../../platform/windows/clock.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -11,14 +12,17 @@ enum { FRAME_WIDTH = 513, FRAME_HEIGHT = 321, INPUT_CAPACITY = 16 };
 typedef struct {
     cs_arena arena;
     cs_input_queue input;
+    cs_win_clock host_clock;
+    cs_clock clock, fake_source;
+    cs_time deadline;
     void *backing;
     cs_surface surfaces[2];
     uint8_t *storage[2], *scratch;
     size_t scratch_size;
     unsigned active, paints;
-    unsigned consumed;
+    unsigned consumed, clock_wakeups;
     uint32_t last_source, last_sequence;
-    int failed, destroyed;
+    int failed, destroyed, fake_time, flash, timer_active;
 } demo_state;
 
 static size_t scene_stride(unsigned scene)
@@ -125,6 +129,32 @@ static void paint(HWND window, HDC dc, demo_state *state)
     ++state->paints;
 }
 
+static int flash(demo_state *state, int on)
+{
+    const cs_rect strip={12,314,501,319};
+    if (!fill(&state->surfaces[0],strip,on ? 0xEE6352FFu : 0xF1F4F8FFu)
+            || !fill(&state->surfaces[1],strip,on ? 1u : 0u)) return 0;
+    state->flash=on;
+    return 1;
+}
+
+static int sample_time(HWND window, demo_state *state)
+{
+    cs_time now;
+    int reached=0;
+    if (state->fake_time) now=state->fake_source.last;
+    else if (cs_win_clock_read(&state->host_clock,&now)!=CS_WIN_TIME_OK) return 0;
+    if (cs_clock_observe(&state->clock,now)!=CS_TIME_OK) return 0;
+    if (state->flash) {
+        if (cs_time_reached(now,state->deadline,&reached)!=CS_TIME_OK) return 0;
+        if (reached) {
+            if (!flash(state,0)) return 0;
+            InvalidateRect(window,NULL,FALSE);
+        }
+    }
+    return 1;
+}
+
 static int consume_input(HWND window, demo_state *state)
 {
     cs_input_record record;
@@ -135,6 +165,8 @@ static int consume_input(HWND window, demo_state *state)
         state->last_sequence = record.sequence;
         if (record.event.action != CS_KEY_PRESS || record.event.repeat != 0) continue;
         if (record.event.key == CS_KEY_SPACE) {
+            if (cs_time_add(state->clock.last,(cs_time){0,250000000},&state->deadline)
+                    !=CS_TIME_OK || !flash(state,1)) return 0;
             state->active ^= 1u;
             title(window, state->active);
             InvalidateRect(window, NULL, FALSE);
@@ -148,7 +180,7 @@ static int consume_input(HWND window, demo_state *state)
 
 static int submit_input(HWND window, demo_state *state, const cs_input_event *event)
 {
-    if (cs_input_push(&state->input, event) != CS_INPUT_OK
+    if (!sample_time(window,state) || cs_input_push(&state->input, event) != CS_INPUT_OK
             || !consume_input(window, state)) {
         state->failed = 1;
         return 0;
@@ -178,6 +210,14 @@ static LRESULT CALLBACK window_proc(HWND window, UINT message, WPARAM wparam, LP
         paint(window, (HDC)wparam, state);
         return 0;
     case WM_ERASEBKGND: return 1;
+    case WM_TIMER:
+        if (wparam!=1 || !state->timer_active || state->destroyed) return 0;
+        ++state->clock_wakeups;
+        if (!sample_time(window,state)) {
+            state->failed=1;
+            PostMessageW(window,WM_CLOSE,0,0);
+        }
+        return 0;
     case WM_SIZE:
         InvalidateRect(window, NULL, FALSE);
         return 0;
@@ -199,6 +239,7 @@ static LRESULT CALLBACK window_proc(HWND window, UINT message, WPARAM wparam, LP
         break;
     }
     case WM_DESTROY:
+        if (state->timer_active) { KillTimer(window,1); state->timer_active=0; }
         state->destroyed = 1;
         PostQuitMessage(0);
         return 0;
@@ -234,7 +275,10 @@ static int verify_print(HWND window, demo_state *state, int scale)
         && GetPixel(dc, 2 * scale, 2 * scale) ==
             (state->active == 0 ? RGB(241,244,248) : RGB(255,255,255))
         && GetPixel(dc, 12 * scale, 12 * scale) ==
-            (state->active == 0 ? RGB(30,40,58) : RGB(0,0,0));
+            (state->active == 0 ? RGB(30,40,58) : RGB(0,0,0))
+        && GetPixel(dc,12*scale,316*scale)==(state->active==0
+            ? (state->flash ? RGB(238,99,82) : RGB(241,244,248))
+            : (state->flash ? RGB(0,0,0) : RGB(255,255,255)));
 cleanup:
     if (previous != NULL && previous != (HBITMAP)HGDI_ERROR) SelectObject(dc, previous);
     if (bitmap != NULL) DeleteObject(bitmap);
@@ -282,6 +326,46 @@ static int verify_input(HWND window, demo_state *state)
     return 1;
 }
 
+static int verify_clock(HWND window,demo_state *state)
+{
+    const cs_input_event press={1,CS_KEY_SPACE,CS_KEY_PRESS,0};
+    const cs_input_event repeat={1,CS_KEY_SPACE,CS_KEY_PRESS,1};
+    if (!submit_input(window,state,&press) || !state->flash || !verify_print(window,state,1)) return 0;
+    if (cs_clock_advance(&state->fake_source,(cs_time){0,249999999})!=CS_TIME_OK) return 0;
+    SendMessageW(window,WM_TIMER,1,0);
+    if (!state->flash || !verify_print(window,state,1) || !submit_input(window,state,&repeat)
+            || state->deadline.seconds!=0 || state->deadline.nanoseconds!=250000000) return 0;
+    if (cs_clock_advance(&state->fake_source,(cs_time){0,1})!=CS_TIME_OK) return 0;
+    SendMessageW(window,WM_TIMER,1,0);
+    if (state->flash || !verify_print(window,state,1)) return 0;
+    SendMessageW(window,WM_KEYDOWN,VK_SPACE,0);
+    if (!state->flash || state->active!=0 || !verify_print(window,state,1)) return 0;
+    if (cs_clock_advance(&state->fake_source,(cs_time){7,0})!=CS_TIME_OK) return 0;
+    SendMessageW(window,WM_TIMER,1,0);
+    if (state->flash || !verify_print(window,state,1) || state->failed) return 0;
+    SendMessageW(window,WM_CLOSE,0,0);
+    if (!state->destroyed || state->timer_active || IsWindow(window)) return 0;
+    puts("SPEC-0005 hidden viewer fake/native-input deadline pixels and timer lifecycle: PASS");
+    return 1;
+}
+
+static int verify_live_clock(HWND window,demo_state *state)
+{
+    MSG message;
+    SendMessageW(window,WM_KEYDOWN,VK_SPACE,0);
+    while (state->clock_wakeups==0) {
+        BOOL received=GetMessageW(&message,NULL,0,0);
+        if (received<=0) return 0;
+        TranslateMessage(&message); DispatchMessageW(&message);
+    }
+    if (state->failed || (state->clock.last.seconds==0 && state->clock.last.nanoseconds==0)
+            || !verify_print(window,state,1)) return 0;
+    SendMessageW(window,WM_CLOSE,0,0);
+    if (!state->destroyed || state->timer_active || IsWindow(window)) return 0;
+    puts("SPEC-0005 hidden viewer live QPC and delivered Windows timer: PASS");
+    return 1;
+}
+
 int WINAPI WinMain(HINSTANCE instance, HINSTANCE previous, LPSTR command, int show)
 {
     WNDCLASSW klass = {0};
@@ -293,8 +377,10 @@ int WINAPI WinMain(HINSTANCE instance, HINSTANCE previous, LPSTR command, int sh
     int verify_memory = strcmp(command, "--verify-memory") == 0;
     int verify_keys = strcmp(command, "--verify-input") == 0;
     int verify_key_memory = strcmp(command, "--verify-input-memory") == 0;
+    int verify_time=strcmp(command,"--verify-clock")==0;
+    int verify_live=strcmp(command,"--verify-clock-live")==0;
     (void)previous;
-    if (command[0] != '\0' && !verify && !verify_memory && !verify_keys && !verify_key_memory) return 2;
+    if (command[0] != '\0' && !verify && !verify_memory && !verify_keys && !verify_key_memory && !verify_time && !verify_live) return 2;
     if (verify_key_memory) {
         if (buffer_budget() != 1342744u || init_buffers(&state, 1342743u)
                 || state.backing == NULL || state.arena.used != 1342422u
@@ -315,6 +401,10 @@ int WINAPI WinMain(HINSTANCE instance, HINSTANCE previous, LPSTR command, int sh
     /* Set before any UI: keep frame pixels sharp at non-integer desktop scaling. */
     if (!SetProcessDpiAwarenessContext(DPI_AWARENESS_CONTEXT_PER_MONITOR_AWARE_V2))
         goto cleanup;
+    state.fake_time=verify_time;
+    if (cs_clock_init(&state.clock,(cs_time){0,0})!=CS_TIME_OK
+            || cs_clock_init(&state.fake_source,(cs_time){0,0})!=CS_TIME_OK
+            || (!state.fake_time && cs_win_clock_init(&state.host_clock)!=CS_WIN_TIME_OK)) goto cleanup;
     if (!init_buffers(&state, buffer_budget()) || !scenes(&state)) goto cleanup;
     klass.lpfnWndProc = window_proc; klass.hInstance = instance;
     klass.hCursor = LoadCursorW(NULL, MAKEINTRESOURCEW(32512));
@@ -322,15 +412,25 @@ int WINAPI WinMain(HINSTANCE instance, HINSTANCE previous, LPSTR command, int sh
     klass.lpszClassName = L"ClasSICK097OriginalSurfaceViewer";
     if (RegisterClassW(&klass) == 0) goto cleanup;
     registered = 1;
-    if (!verify && !verify_keys) { rectangle.right *= 2; rectangle.bottom *= 2; }
+    if (!verify && !verify_keys && !verify_time && !verify_live) { rectangle.right *= 2; rectangle.bottom *= 2; }
     if (!AdjustWindowRect(&rectangle, WS_OVERLAPPEDWINDOW, FALSE)) goto cleanup;
     window = CreateWindowExW(0, klass.lpszClassName, L"ClasSICK 0.97",
         WS_OVERLAPPEDWINDOW, CW_USEDEFAULT, CW_USEDEFAULT,
         rectangle.right - rectangle.left, rectangle.bottom - rectangle.top,
         NULL, NULL, instance, &state);
-    if (window == NULL || !resize_client(window, verify || verify_keys ? 1 : 2)) goto cleanup;
+    if (window == NULL || !resize_client(window, verify || verify_keys || verify_time || verify_live ? 1 : 2)) goto cleanup;
     title(window, 0);
-    if (verify_keys) {
+    if (verify_time || verify_live || (!verify && !verify_keys)) {
+        if (SetTimer(window,1,25,NULL)==0) goto cleanup;
+        state.timer_active=1;
+    }
+    if (verify_live) {
+        if (!verify_live_clock(window,&state)) goto cleanup;
+        result=0;
+    } else if (verify_time) {
+        if (!verify_clock(window,&state)) goto cleanup;
+        result=0;
+    } else if (verify_keys) {
         if (!verify_input(window, &state)) goto cleanup;
         result = 0;
     } else if (verify) {
