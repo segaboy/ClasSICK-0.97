@@ -47,4 +47,10 @@ The snapshot/manifest retain all 59 labels / 53 distinct fingerprints, with 45
 prior fingerprints unchanged, four changed and four new. Compiled/test/script
 inputs remain unchanged after verification; final additions are evidence only.
 No firmware/ports/VM/image was executed; native delivery/faults/B2 and all edition
-boots remain open. Remote matching/publication and human provenance review pending.
+boots remain open. Pinned Windows CI 37827697279 passed on exact compiled/test/
+script revision `3b44cb9510a400397a33cd1cc0802f45c36c8110`. The same nine
+configurations and audits pass remotely, plus two 100-check bootstrap builds;
+all 59 labels / 53 distinct fingerprints match the fresh local run. The
+exposed lead records only these aggregate results and publication; source,
+specification, fixtures and their implementation review remain the fresh
+agent's work. Human provenance review remains pending.

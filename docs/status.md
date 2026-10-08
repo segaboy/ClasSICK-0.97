@@ -24,7 +24,8 @@ does not imply that the complete project foundation or any OS boot is finished.
   keyboard/60-second tests and unloaded EFI controls. All 59 labels / 53 distinct
   fingerprints are recorded in [the UART snapshot](development/uart-diagnostics-evidence.md).
   Native serial delivery, exact firmware eligibility, media and B2 remain open;
-  remote matching/publication and human provenance review are pending.
+  pinned Windows CI 37827697279 passed at `3b44cb9`, with all 53 local/CI
+  fingerprints matching. Human provenance review remains pending.
 
 - SPEC-0012 / ADR-0016 / IMPL-0016 / TEST-0018 implements an original bounded
   polling PS/2 set-2 keyboard and interactive successor loop. ACPI must declare

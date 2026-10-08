@@ -29,9 +29,20 @@ four UART labels are new. Of the preceding 49 distinct fingerprints, 45 remain
 unchanged. The verified compiled/test/script inputs were staged/reviewed before
 the run and are committed with this snapshot. Local `verified-inputs.json` and
 `uart-aggregate.json` retain input hashes and the exact aggregate comparison;
-subsequent changes are documentation/manifest evidence only. Remote matching and
-publication are pending. Final UTF-16 log SHA-256:
+subsequent changes are documentation/manifest evidence only. Final UTF-16 log SHA-256:
 `71b7ef11904493f4cd828daa270bafa04ef64aeb29c5235d5a98f31e2f9e34c4`.
+
+Compiled/test/script revision `3b44cb9510a400397a33cd1cc0802f45c36c8110`
+passed pinned [Windows CI 37827697279](https://github.com/segaboy/ClasSICK-0.97/actions/runs/37827697279)
+by workflow dispatch on the existing `claude/ci-staging` branch before main
+advanced. CI passes the same nine configurations and audits, plus two fresh
+100-check bootstrap builds. All 59 local/CI comparison labels / 53 distinct
+fingerprints match exactly, including the committed fingerprint manifest.
+The UTF-8 CI log is retained at `C:\ClasSICK\uart-ci-37827697279.log`.
+This follow-up records aggregate verification/publication only; it changes no
+compiled source, tests or scripts from the verified revision. Implementation
+and its review remain the owner-approved fresh agent's work; the lead handles
+results and headquarters. Human provenance review remains pending.
 
 | Comparison label | SHA-256 |
 | --- | --- |
@@ -62,5 +73,5 @@ after successful exit and owned-ready gates; native execution remains unverified
 TI provides scoped register semantics, not PC/VirtualBox mapping or clock proof.
 Machine qualification, eligible exact firmware, formatted boot media and B2 remain
 required. Real Macintosh/mini vMac, three physical-edition gates and historical
-parity remain separate/not-started or not-tested. Human provenance review and
-matching remote CI/publication are pending; no CI result is manufactured.
+parity remain separate/not-started or not-tested. Human provenance review remains
+pending; passing tests and matching CI do not prove native delivery or eligibility.

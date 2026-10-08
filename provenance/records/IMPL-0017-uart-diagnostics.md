@@ -27,4 +27,7 @@ Target assumptions are explicit: compatible TI semantics, scratch/FIFO/readback,
 No hardware identity, VM model, native delivery, asynchronous serial fault output,
 firmware eligibility, media, B2 or edition claim. Macintosh/mini vMac remain
 independent required goals. Source/provenance review covers every staged byte;
-remote CI matching/publication is pending in this implementation checkpoint.
+compiled/test/script revision `3b44cb9510a400397a33cd1cc0802f45c36c8110`
+passed CI 37827697279 and all 53 local/CI fingerprints match. The exposed lead's
+follow-up records aggregate results only; no implementation/specification/test
+changes follow the fresh agent's reviewed checkpoint. Human review stays pending.
