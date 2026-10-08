@@ -26,6 +26,8 @@ does not imply that the complete project foundation or any OS boot is finished.
   [the proposed PC profile](development/native-pc-profile.md) records ownership
   and device obligations. Exact selected x64 firmware closure/eligibility remains
   needs-review; metadata/license inventory is not firmware adoption.
+  [Windows CI 37780598062 passed](https://github.com/segaboy/ClasSICK-0.97/actions/runs/37780598062)
+  at 8b09ef3, with the full wrapper and twenty-three named local/remote hashes matching.
 
 - ADR-0009 / IMPL-0009 / TEST-0011 verifies complete current-core linkage under
   Clang/LLD and GCC/GNU ld at x86-64/i686 O0/O2. Eight profile twins match;

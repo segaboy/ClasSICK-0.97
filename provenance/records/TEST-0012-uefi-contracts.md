@@ -33,7 +33,10 @@ Final source `02160bc451d69cf78dd6149567ae54969bcee09f`, fresh local `c` matrix
 exits zero: all nine configurations, debugger/sanitizer/core/link controls and
 ARM64 LE/BE platform-object audits pass. Twenty-three named pairs match locally;
 the two new executable fingerprints and earlier unchanged twenty-one are pinned
-in the snapshot. Remote verification remains separately pending at this revision.
+in the snapshot. Observed Windows CI 37780598062 passes at evidence source
+`8b09ef30109ba42867c678e5812eb60c2bddb563`, with full guard/setup/bootstrap/
+matrix/debugger/link/preboot/endian protocol and twenty-three matching local/
+remote hashes. The result update is documentation-only, with tested inputs unchanged.
 
 Failures/limits outside conformance: VirtualBox help COM E_ACCESSDENIED; web HTML
 403/PDF size/timeouts handled through publisher/local manuals. First reviewed

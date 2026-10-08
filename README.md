@@ -78,7 +78,9 @@ See [verification evidence](docs/development/bootstrap-evidence.md) and
 [SPEC-0006 preboot contracts](docs/specifications/SPEC-0006-uefi-handoff.md) now
 validate bounded framebuffer/map data and reserved allocations, with a finite
 exit-outcome model. Independent hosted tests pass; the current matrix has 43
-checks per Clang configuration and 28 per scoped GCC configuration. See
+checks per Clang configuration and 28 per scoped GCC configuration locally and
+in [Windows CI](https://github.com/segaboy/ClasSICK-0.97/actions/runs/37780598062).
+Twenty-three named local/remote hashes match. See
 [results and repeat instructions](docs/development/uefi-contract-evidence.md).
 The [native-PC profile](docs/development/native-pc-profile.md) defines proposed
 loader/device ownership. Exact firmware eligibility remains unresolved; actual

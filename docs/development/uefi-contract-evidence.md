@@ -45,8 +45,15 @@ native image closure. With the two hashes above, the final local wrapper emits
 twenty-three named artifact comparisons. Hash agreement is scoped reproducibility,
 not legal originality, cross-compiler identity or future OS-image reproducibility.
 
-Remote CI is pending at this record revision. A subsequent result-only record
-will state the observed source/run/conclusion and compare all twenty-three hashes.
+[Windows CI 37780598062 passed](https://github.com/segaboy/ClasSICK-0.97/actions/runs/37780598062)
+at evidence source `8b09ef30109ba42867c678e5812eb60c2bddb563`. Observed completed
+166-file guard, pinned tool setup, bootstrap twins and the full final wrapper.
+Seven 43-check Clang result sets include bootstrap twins plus the five-config
+matrix; four 28-check GCC sets pass. Debugger/sanitizer/core/link/rejection and
+new preboot/endian checks pass. All twenty-three named local/remote hashes match.
+Remote tests generated their own synthetic inputs; no new operator keyboard
+session or native boot occurred. This result update changes documentation only.
+
 No firmware, UEFI ABI/real exit/entry/stack/exceptions, device or boot is tested.
 Firmware eligibility and the proposed VM remain needs-review; all OS edition
 gates and historical identity/parity stay open. Human provenance review pending.
