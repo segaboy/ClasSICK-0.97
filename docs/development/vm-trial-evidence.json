@@ -40,7 +40,12 @@
     "tool_refusals": 3,
     "log_sha256": "4fa41e9fe777f3a700bf4e5492e1a4e27e4716c795114e586a77d22049ce321f",
     "prior_windows_ci": "https://github.com/segaboy/ClasSICK-0.97/actions/runs/37846593238",
-    "new_ci_status": "pending"
+    "new_ci_status": "success",
+    "new_ci_source_revision": "b8696da3fb63e3b9f4a2892fb29eed2b40a77055",
+    "new_ci_url": "https://github.com/segaboy/ClasSICK-0.97/actions/runs/37858136145",
+    "new_ci_log_sha256": "916740a96452640f7e8bb59b9c1309de685736184346ef738c62ed40dcae5a12",
+    "matching_local_ci_labels": 64,
+    "matching_local_ci_distinct_fingerprints": 58
   },
   "media": {
     "raw_bytes": 67108864,
@@ -48,7 +53,8 @@
     "efi_bytes": 37888,
     "efi_sha256": "8e25d6947677b538d84bc17f98ff44d056dcd3d7769d1389676072286ad831f2",
     "vdi_sha256": "e4f04aa4e57d929e20c5d6b9a8619ed3f61ed60aa0a2dbab11a09af03d243952",
-    "roundtrip_raw_sha256": "370b7d4e7fc4200b77c367e09afa0c4944f534c2623d7f5f68db159c1da46078"
+    "roundtrip_raw_sha256": "370b7d4e7fc4200b77c367e09afa0c4944f534c2623d7f5f68db159c1da46078",
+    "post_trial_vdi_sha256": "e4f04aa4e57d929e20c5d6b9a8619ed3f61ed60aa0a2dbab11a09af03d243952"
   },
   "configuration": {
     "status": "passed-before-launch",
@@ -1207,5 +1213,7 @@
     }
   ],
   "preparation_command_log_sha256": "b88522a6e694f4ad7a8a11f96e4d42f3928958442ff2bf475e09b8974e1cf1b6",
-  "local_observer_sha256": "24b198c7f2bdd83c77500beb8a962f88d240c8e1ad31cc54324c93b91718016d"
+  "local_observer_sha256": "24b198c7f2bdd83c77500beb8a962f88d240c8e1ad31cc54324c93b91718016d",
+  "native_image_executed": true,
+  "final_project_machine_state": "powered-off-public-readback"
 }

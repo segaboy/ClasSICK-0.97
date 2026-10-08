@@ -87,3 +87,11 @@ no memory/code dump was taken. Explicit A20/machine-state self-test qualificatio
 firmware image fingerprint/binding and actual exception delivery remain unverified.
 No firmware internals or existing owner VM configuration is a debugging input.
 Formal B2 remains partial; all edition flags and Mac goals persist.
+
+Publication verification: [Windows CI 37858136145](https://github.com/segaboy/ClasSICK-0.97/actions/runs/37858136145)
+passed at `b8696da3fb63e3b9f4a2892fb29eed2b40a77055`: source guard, pinned
+setup, fresh bootstrap builds and the full hosted/unloaded/media chain. The
+chain's nine configuration counts match local 846-check admission. All 64
+comparison labels / 58 distinct fingerprints agree with the retained local log;
+the raw image and native payload identities are unchanged. This CI did not run
+VirtualBox or generate operator input. This follow-up changes records only.

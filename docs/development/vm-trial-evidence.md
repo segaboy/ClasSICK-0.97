@@ -89,5 +89,13 @@ All three full OS editions remain `not-started`, parity `not-tested`; System 0.9
 APIs, Macintosh 128K feasibility, independent replacement ROM/startup, real
 Macintosh and mini vMac boots and physical hardware gates remain required.
 Human provenance review is pending. CI verifies hosted/unloaded/media checks,
-not these local VM or operator results; the new publication CI result will be
-recorded only after it actually completes.
+not these local VM or operator results. The observed publication result is
+recorded below.
+
+Publication verification: [Windows CI 37858136145](https://github.com/segaboy/ClasSICK-0.97/actions/runs/37858136145)
+passed at `b8696da3fb63e3b9f4a2892fb29eed2b40a77055`: source guard, pinned
+setup, fresh bootstrap builds and the full hosted/unloaded/media chain. The
+chain's nine configuration counts match local 846-check admission. All 64
+comparison labels / 58 distinct fingerprints agree with the retained local log;
+the raw image and native payload identities are unchanged. This CI did not run
+VirtualBox or generate operator input. This follow-up changes records only.
