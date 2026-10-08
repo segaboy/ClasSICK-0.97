@@ -5,6 +5,22 @@ eligibility applies to the stated scope, not every resource reachable from a URL
 No Apple executable, source, disassembly, decompilation, or copied asset was used.
 No reference-system black-box observation has yet been performed.
 
+## SRC-0059 — Owner's firmware test-platform decision
+
+- Claude reported the documents-only firmware result on 2026-10-08: no permitted
+  document can bind the installed VirtualBox 7.2.16 x64 EFI image to its published
+  source (only a rebuild could, which stays excluded), while the binding policy
+  governs what enters System 0.97, not the platform it runs on. Offered: clear it
+  as a black-box test platform, keep it blocked, or seek another firmware. The
+  owner chose "Test platform only (Recommended)".
+- Scope: VirtualBox 7.2.16 x64 EFI may serve only as a black-box execution
+  platform for our own images, under the conditions in the
+  [firmware decision](../docs/development/firmware-eligibility.md). It does not
+  certify the firmware's provenance or rights, adopt or redistribute it, permit
+  extraction or study of its internals, or authorize a VM trial; that needs a
+  separate explicit owner go-ahead. Physical PCs' vendor firmware is treated the
+  same way when those gates come. Requirement only; no edition claim.
+
 ## SRC-0056 — Owner's boot-media continuation and FAT32 decision
 
 - Owner, 2026-10-08: "ok, do it." after Claude proposed the two preparation tracks

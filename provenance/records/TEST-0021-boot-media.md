@@ -66,3 +66,13 @@ writer builds generated identical images (each is compared as it is made). The s
 with no output: the wrapper had restored the original PATH after the UART chain,
 so the ASan runtime DLL from the pinned toolchain was not found. The wrapper now
 runs the writer builds with the pinned toolchain PATH; no product code changed.
+
+Run [37846593238](https://github.com/segaboy/ClasSICK-0.97/actions/runs/37846593238)
+on `78b00e51c401d1ee967618d7d2df316912cf917d` passed every step. CTest passed in
+all nine configurations (Clang x64 106, i686 82; GCC x64 91, i686 67). Twin
+hashes: Clang tool `17bcfdfd…5413d1a` and tests `059fb662…bf9b6b3`; GCC tool
+`7534dee9…5c94f2` and tests `ad74b18e…f8e47`. All nine writer builds produced
+image SHA-256 `370b7d4e7fc4200b77c367e09afa0c4944f534c2623d7f5f68db159c1da46078`,
+the same bytes the Linux GCC and Clang tools produced locally. The independent
+checker, 30 corruption rejections and three tool refusals passed; the EFI O2
+payload stayed `8e25d694…ad831f2`. No image was attached or booted.

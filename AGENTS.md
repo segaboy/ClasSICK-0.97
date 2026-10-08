@@ -7,7 +7,9 @@ Read `docs/clean-room/POLICY.md`, `CONTRIBUTING.md`, and
   firmware tracks (SRC-0056). Claude leads this work; ordinary spec/code/tests,
   provenance, commits/pushes and HQ registration. The owner accepted Microsoft's
   FAT32 specification terms for PC boot tooling, outside the System 0.97
-  clean-room scope. No VM/native run, firmware waiver, delegation or OneNote.
+  clean-room scope. VirtualBox 7.2.16 EFI is cleared only as a black-box test
+  platform (SRC-0059): never extract or study its internals. No VM trial without
+  a separate owner go-ahead; no delegation or OneNote.
 
 - On 2026-10-08 the owner explicitly authorized exactly one fresh implementation
   agent for SPEC-0013 polling UART diagnostics (SRC-0053), including original

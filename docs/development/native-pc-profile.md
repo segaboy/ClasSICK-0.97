@@ -16,7 +16,7 @@ and this configuration/devices are unqualified. No native boot is observed.
 | --- | --- |
 | Platform | Owner-installed VirtualBox 7.2.16r174877, isolated project VM with retained configuration; existing owner VMs untouched |
 | CPU/RAM | x86-64, one virtual CPU, 512 MiB; this is a PC development budget, unrelated to Macintosh 128K feasibility |
-| Firmware | EFI64 candidate only; exact firmware artifact hash, selected source/dependency/notice closure and clean-room eligibility required before launch |
+| Firmware | VirtualBox 7.2.16 EFI64, cleared as a black-box test platform only (SRC-0059, [conditions](firmware-eligibility.md)); provenance not certified, no extraction or study of internals; first launch needs a separate owner go-ahead |
 | Board | PIIX3, ACPI enabled; one polling CPU, hardware interrupts disabled after successful handoff until owned exception state is installed |
 | Display | VBoxVGA, 16 MiB VRAM, 3D off; SPEC-0007 reads current GOP RGB/BGR-reserved mode, rejects unsupported data and makes no mode change. SPEC-0009 presents the original scene with direct post-exit byte stores after the exit/ready gates; hosted-verified only. Later mode-selection contract is separate |
 | Input | Standard virtual PS/2 keyboard; no USB, Guest Additions, shared folders, clipboard or drag/drop dependency |

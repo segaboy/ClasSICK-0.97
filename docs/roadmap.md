@@ -2,8 +2,9 @@
 
 Current component checkpoint: SPEC-0014 original GPT/FAT32 boot media packages
 the audited loader reproducibly and passes independent checks; it has not been
-read by firmware. Next are exact firmware eligibility and machine qualification,
-then observed B2 cold starts. Macintosh replacement startup and
+read by firmware. VirtualBox EFI is cleared as a black-box test platform only
+(SRC-0059). Next, with the owner's go-ahead: an isolated VM configuration, image
+attachment, machine qualification, then observed B2 cold starts. Macintosh replacement startup and
 mini vMac validation remain later independent milestones.
 
 Status: dated 2026-10-08; dependency-driven gates, not calendar promises.

@@ -9,7 +9,7 @@ generated and independently checked artifact. **It is not a boot result.**
 | Item | Value |
 | --- | --- |
 | Payload | 37,888 bytes, SHA-256 `8e25d6947677b538d84bc17f98ff44d056dcd3d7769d1389676072286ad831f2` |
-| Image | 67,108,864 bytes, SHA-256 `370b7d4e7fc4200b77c367e09afa0c4944f534c2623d7f5f68db159c1da46078` (local GCC/Clang) |
+| Image | 67,108,864 bytes, SHA-256 `370b7d4e7fc4200b77c367e09afa0c4944f534c2623d7f5f68db159c1da46078` (nine Windows builds and local Linux GCC/Clang) |
 | GPT | Disk GUID 5AD001EF-55C4-45C1-91E6-B46E536C16DD; header CRCs 7A6BB824/F46774E1; entries AE2A952C |
 | ESP | LBA 2,048–129,023, FAT32, 78 reserved, 2×985 FAT sectors, data at disk LBA 4,096 |
 | Allocation | Clusters 2–4 directories, 5–78 payload, 124,851 free |
@@ -22,8 +22,11 @@ The image is generated output and is not committed.
 Local container results, black-box corroboration and controls are in
 [TEST-0021](../../provenance/records/TEST-0021-boot-media.md). The pinned
 Windows wrapper requires every hosted writer build to produce the same image.
-Pinned CI: pending at publication of this snapshot.
+[Pinned CI 37846593238](https://github.com/segaboy/ClasSICK-0.97/actions/runs/37846593238)
+passed at `78b00e5`: all nine Windows writer builds produced the same image hash
+as the local Linux tools, and the checker and all controls passed.
 
-Still open before any launch: firmware eligibility (no candidate firmware is
-cleared), isolated machine/device qualification and B2. Converting the raw
+Still open before any launch: the owner's go-ahead for a first VM trial (VirtualBox
+EFI is cleared only as a black-box test platform, SRC-0059), a recorded isolated
+VM configuration, machine/device qualification and B2. Converting the raw
 image for a VM or writing it to USB media needs its own recorded procedure.

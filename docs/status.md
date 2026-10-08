@@ -20,11 +20,13 @@ does not imply that the complete project foundation or any OS boot is finished.
   an original 64-MiB GPT image with one FAT32 EFI System Partition holding only
   `\EFI\BOOT\BOOTX64.EFI`. Hosted suites re-read every image with a separate
   oracle; an independent PowerShell checker, 30 corruption controls and three
-  tool refusals pass locally. Local GCC and Clang writers produce image SHA-256
-  `370b7d4e…a46078` ([snapshot](development/boot-media-evidence.md)). Built from
+  tool refusals pass. Pinned CI 37846593238 and local Linux GCC/Clang writers
+  all produce image SHA-256 `370b7d4e…a46078` ([snapshot](development/boot-media-evidence.md)). Built from
   Microsoft's FAT32 v1.03 and UEFI 2.11 under the owner's SRC-0056 decision.
-  Not booted; firmware eligibility, machine qualification and B2 remain open.
-  Pinned Windows CI and human provenance/rights review are pending.
+  Not booted; machine qualification and B2 remain open. VirtualBox EFI is cleared
+  only as a black-box test platform ([decision](development/firmware-eligibility.md),
+  SRC-0059); a first VM trial needs the owner's separate go-ahead.
+  Human provenance/rights review is pending.
 
 - SPEC-0013 / ADR-0017 / IMPL-0017 / TEST-0019 adds original bounded polling
   UART diagnostics to the native keyboard scene successor. A fixed queue counts
@@ -257,7 +259,8 @@ does not imply that the complete project foundation or any OS boot is finished.
 - Exact historical profile and 1984-applicable behavioral sources.
 - Macintosh 128K native feasibility, hardware startup and size budgets.
 - WOW64 debugger support, other sanitizer targets, m68k toolchain/runtime and boot.
-- Next: exact firmware eligibility and machine qualification. Boot media is
+- Next (with the owner's go-ahead): isolated VM configuration, image attachment
+  and machine qualification on the black-box VirtualBox platform. Boot media is
   generated and checked but unread by any firmware (SPEC-0014). Presenter, PM
   timer, loop, two-key keyboard and UART diagnostics have only hosted/unloaded
   evidence (SPEC-0009–0013).

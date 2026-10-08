@@ -7,7 +7,9 @@ passes retained input/artifact integrity and five unloaded EFI inspections.
 Native launch is NO-GO pending formatted media and exact firmware/machine
 qualification. B2 and all physical edition gates remain open. SPEC-0014 now
 supplies the formatted medium ([evidence](../development/boot-media-evidence.md));
-firmware eligibility and machine qualification still block a launch.
+VirtualBox EFI is now cleared as a black-box test platform only (SRC-0059); a
+launch still needs the owner's go-ahead, a recorded VM configuration and machine
+qualification.
 
 ## Three distinct gates
 

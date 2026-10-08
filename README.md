@@ -108,7 +108,9 @@ and [evidence](docs/development/boot-media-evidence.md). The audited loader is
 packaged in an original, reproducible GPT disk image with a FAT32 EFI System
 Partition, checked by two independent readers. Previous: [SPEC-0013 UART
 diagnostics](docs/specifications/SPEC-0013-uart-diagnostics.md). No native OS boot
-has occurred; firmware eligibility and machine qualification remain.
+has occurred. VirtualBox EFI is cleared only as a black-box test platform
+([decision](docs/development/firmware-eligibility.md)); a first VM trial needs the
+owner's go-ahead, then machine qualification and B2.
 
 - [Clean-room policy](docs/clean-room/POLICY.md)
 - [Contribution rules](CONTRIBUTING.md)
