@@ -36,6 +36,11 @@ all pending records each step and added the one-byte-short queue-storage check;
 the complete fresh 24-check matrix passed. No compiler or conformance failure.
 Artifact hashes and remote results are recorded in the snapshot after completion.
 
+[Windows CI 37719495759 passed](https://github.com/segaboy/ClasSICK-0.97/actions/runs/37719495759)
+at e237cbb: source audit/setup, bootstrap twins, complete five-configuration matrix,
+sanitizer detection controls and ARM64 LE/BE import checks. Six executable hashes
+match local. No code/tests/scripts/build inputs changed after c99ec65.
+
 Limits: Space/Escape only, no timestamp/clock, pointer/text/modifier support,
 physical driver, m68k execution, second compiler, historical Event Manager,
 B1/M0.1 closure or OS edition certification. No Apple inputs or release binaries.

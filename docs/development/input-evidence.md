@@ -4,7 +4,10 @@ Date: 2026-10-07. SPEC-0004 / IMPL-0005 / TEST-0007.
 Executed code/test/build inputs are frozen at
 `c99ec65870f51058185668542e839b23a46da802`. The final local matrix used identical
 inputs before that commit. Subsequent source-pointer/CI text updates do not
-change those inputs. Remote CI is pending; no remote success claimed yet.
+change those inputs. [Windows CI run 37719495759 passed](https://github.com/segaboy/ClasSICK-0.97/actions/runs/37719495759)
+at evidence revision `e237cbb58b7e2f2659af87fd8e5624d8c76d977e`: guard,
+pinned setup, bootstrap twins, five-configuration 24-check matrix, validated
+sanitizer controls and ARM64 endian audits. All six hashes below match local.
 
 Local invocation: Verify-Input.ps1 -BuildRoot <fresh-output-directory> -Sanitizers.
 Five configurations pass 24/24 checks each; independent queue oracle explores

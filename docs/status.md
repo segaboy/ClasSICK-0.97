@@ -25,7 +25,9 @@ does not imply that the complete project foundation or any OS boot is finished.
 - Input records share the arena pool; exact input reservation and one-byte-short
   storage failure pass. Core import/data and ARM64 LE/BE compile-only audits pass.
 - [Input results](../provenance/records/TEST-0007-input.md) and
-  [input snapshot](development/input-evidence.md). Remote CI publication pending.
+  [input snapshot](development/input-evidence.md).
+- [Input Windows CI passed](https://github.com/segaboy/ClasSICK-0.97/actions/runs/37719495759)
+  at e237cbb; complete 24-check matrix and all six local/remote hashes match.
 
 - Bounded caller-owned native arenas: alignment, checked arithmetic, stable errors,
   exhaustion and all-span reset without heap calls or backing writes in the core.
