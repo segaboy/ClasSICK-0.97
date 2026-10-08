@@ -5,6 +5,31 @@ eligibility applies to the stated scope, not every resource reachable from a URL
 No Apple executable, source, disassembly, decompilation, or copied asset was used.
 No reference-system black-box observation has yet been performed.
 
+## SRC-0042 — Owner's independent PC-boot continuation
+
+- Owner, 2026-10-08: "ok, let's do it" following the status explanation of the
+  next minimal independent PC boot and remaining Macintosh goals. Authorizes
+  missing startup components, original specifications/implementation/tests and
+  normal Git evidence/wiki plans. No firmware provenance waiver or boot claim.
+
+## SRC-0043 — Intel published x64 descriptor and exception interfaces
+
+- Intel SDM Volume 3A, 253668-090US, February 2026, accessed 2026-10-08;
+  [publisher PDF](https://cdrdv2-public.intel.com/874249/253668-090-sdm-vol-3a.pdf),
+  SHA-256 `42166ab4aeb53df119a794a1da36eaa8a9f123eea61d90e8fe6195da4ef6654f`.
+  Sections 3.4–3.5 (segment descriptors/tables), 6.8.5.1 (far transfers),
+  7.12.1.3–7.14.5 (interrupt gates/error codes/frame/IST), Table 7-1 / PDF 202–203 and 7.15
+  (exception vectors), 10.2.3–10.2.4 and 10.7 (TSS descriptor/register/format).
+  Figures 7-8, 10-4, 10-11 visually reviewed at PDF pages 220,295,308;
+  associated prose PDF 217–222,294–295,307–308. Public ISA layouts/prose only.
+- Extends SRC-0039 Volume 2A 253666-093US, September 2026, same pinned hash;
+  LGDT/LIDT printed 3-553–555 / PDF 671–673 reviewed. No sample implementation,
+  OS source, external headers or firmware adopted. Independently specified table
+  layout, allocation and terminal policy; no historical Macintosh applicability.
+- Initial sandbox download lacked DNS and local PyMuPDF was absent; reviewed
+  publisher download succeeded with network permission, using bundled pypdf and
+  PDFium rendering. Manual remains local, linked rather than vendored.
+
 ## SRC-0037 — Owner's native loader and firmware-review continuation
 
 - Owner, 2026-10-08: "OK, do it" after the proposed exact firmware eligibility

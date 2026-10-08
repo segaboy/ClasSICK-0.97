@@ -73,6 +73,12 @@ Read `docs/clean-room/POLICY.md`, `CONTRIBUTING.md`, and
   exact publisher build/license metadata while provenance remains uncertain. Do
   not adopt/run firmware until reviewed; native exceptions/devices/B2 and all
   edition boots remain separate. Preserve real Macintosh/mini vMac goals.
+- The owner said "ok, let's do it" after the first independent PC-boot milestone
+  was explained on 2026-10-08. This authorizes progressing its missing startup
+  components, including SPEC-0008 owned x64 exception state, original implementation,
+  tests and normal evidence/Git wiki publication. Exact firmware eligibility and
+  observed native execution remain prerequisites to boot claims; no provenance
+  waiver, live OneNote instruction, delegation or change to Macintosh goals.
 - Use `C:\Repos\ClasSICK-0.97` for source and `C:\ClasSICK` for local build/test
   output on the founding workstation. Do not depend on those paths in core code.
 - Do not create specialist chats or delegate work merely because the roadmap

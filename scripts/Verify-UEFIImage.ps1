@@ -12,7 +12,8 @@ try {
     & (Join-Path $PSScriptRoot 'Enter-DevEnvironment.ps1')
     $compiler=(Get-Command clang).Source; $nm=(Get-Command llvm-nm).Source
     $reader=(Get-Command llvm-readobj).Source; $disassembler=(Get-Command llvm-objdump).Source
-    $sources=@('platform/uefi/contract.c','platform/uefi/loader.c','platform/uefi/entry.c','platform/uefi/transition.S')
+    $sources=@('platform/uefi/contract.c','platform/uefi/loader.c','platform/uefi/entry.c',
+        'platform/uefi/transition.S','platform/pc/x64/state.c','platform/pc/x64/exceptions.S')
     $common=@('-m64','-Wall','-Wextra','-Wpedantic','-Werror','-Wconversion','-Wsign-conversion',
         '-ffreestanding','-fno-builtin','-fno-stack-protector','-fno-ident','-mno-red-zone','-mgeneral-regs-only',
         '-fno-asynchronous-unwind-tables','-fno-unwind-tables',"-ffile-prefix-map=$repoRoot=.")
@@ -25,11 +26,11 @@ try {
             [void][IO.Directory]::CreateDirectory($directory); $objects=@()
             for($i=0;$i -lt $sources.Count;++$i) {
                 $object=Join-Path $directory "$i.o"
-                if($i -eq 3){& $compiler -m64 -c (Join-Path $repoRoot $sources[$i]) -o $object}
+                if($sources[$i].EndsWith('.S')){& $compiler -m64 -c (Join-Path $repoRoot $sources[$i]) -o $object}
                 else{& $compiler @common -std=c11 "-O$opt" -c (Join-Path $repoRoot $sources[$i]) -o $object}
                 if($LASTEXITCODE -ne 0){throw 'Original EFI compile failed.'}
-                if($i -lt 2) {
-                    $check=if($i -eq 0){'Check-Freestanding.cmake'}else{'Check-LoaderObject.cmake'}
+                if($i -lt 2 -or $i -eq 4) {
+                    $check=if($i -eq 1){'Check-LoaderObject.cmake'}else{'Check-Freestanding.cmake'}
                     & cmake "-DNM=$nm" "-DOBJECT=$object" -P (Join-Path $PSScriptRoot $check)
                     if($LASTEXITCODE -ne 0){throw 'EFI object boundary failed.'}
                 }
@@ -68,7 +69,15 @@ try {
         [pscustomobject]@{name='anchor';at=$referenceAudit.anchor_raw;bytes=[BitConverter]::GetBytes([uint64]0);reason='transition anchor'},
         [pscustomobject]@{name='stack';at=$referenceAudit.transition_raw;bytes=[byte[]]@(0x90);reason='Stack transition'},
         [pscustomobject]@{name='halt';at=$referenceAudit.halt_raw+1;bytes=[byte[]]@(0x90);reason='Halt bytes'},
-        [pscustomobject]@{name='writable-code';at=$referenceAudit.first_section_header+36;bytes=[byte[]]@(0x20,0,0,0xE0);reason='Section bounds/permissions'})
+        [pscustomobject]@{name='writable-code';at=$referenceAudit.first_section_header+36;bytes=[byte[]]@(0x20,0,0,0xE0);reason='Section bounds/permissions'},
+        [pscustomobject]@{name='gdtr';at=$referenceAudit.install_raw+9;bytes=[byte[]]@(0x90);reason='Descriptor install bytes'},
+        [pscustomobject]@{name='tss-selector';at=$referenceAudit.reload_raw+18;bytes=[byte[]]@(0x10);reason='Descriptor reload bytes'},
+        [pscustomobject]@{name='vector-zero';at=$referenceAudit.vector_raw;bytes=[byte[]]@(0x90);reason='Vector error placeholder'},
+        [pscustomobject]@{name='vector-error';at=$referenceAudit.vector_raw+8*32;bytes=[byte[]]@(0x6A);reason='Vector bytes'},
+        [pscustomobject]@{name='vector-255';at=$referenceAudit.vector_raw+255*32+3;bytes=[byte[]]@(0xFE);reason='Vector bytes'},
+        [pscustomobject]@{name='fault-claim';at=$referenceAudit.fault_raw+20;bytes=[byte[]]@(0x90);reason='Fault capture bytes'},
+        [pscustomobject]@{name='fault-publish';at=$referenceAudit.fault_raw+128;bytes=[byte[]]@(1);reason='Fault publish bytes'},
+        [pscustomobject]@{name='active-state';at=$referenceAudit.state_raw;bytes=[byte[]]@(1);reason='Active-state initial'})
     foreach($mutation in $mutations) {
         $bytes=[byte[]]$original.Clone(); [Array]::Copy($mutation.bytes,0,$bytes,[int]$mutation.at,$mutation.bytes.Length)
         $image=Join-Path $controls ($mutation.name+'.EFI'); [IO.File]::WriteAllBytes($image,$bytes); $rejected=$false
@@ -79,18 +88,25 @@ try {
     $previousPreference=$ErrorActionPreference
     try {
         $ErrorActionPreference='Continue'
-        $missing=@(& $compiler @link $referenceObjects[0] $referenceObjects[1] $referenceObjects[2] -o (Join-Path $controls 'must-not-link.EFI') 2>&1)
+        $missing=@(& $compiler @link $referenceObjects[0] $referenceObjects[1] $referenceObjects[2] $referenceObjects[4] $referenceObjects[5] -o (Join-Path $controls 'must-not-link.EFI') 2>&1)
     } finally{$ErrorActionPreference=$previousPreference}
     if($LASTEXITCODE -eq 0 -or ($missing -join "`n") -notmatch 'cs_native_halt|cs_entry_anchor'){throw 'Missing transition control did not reject.'}
     # This deliberate rejected link is a passing control. GitHub's PowerShell
     # launcher propagates LASTEXITCODE even after a successful script return.
     $global:LASTEXITCODE=0
     $missing | Out-File -LiteralPath (Join-Path $controls 'missing-transition.log') -Encoding UTF8
+    try {
+        $ErrorActionPreference='Continue'
+        $missing=@(& $compiler @link $referenceObjects[0] $referenceObjects[1] $referenceObjects[2] $referenceObjects[3] $referenceObjects[4] -o (Join-Path $controls 'must-not-link-exceptions.EFI') 2>&1)
+    } finally{$ErrorActionPreference=$previousPreference}
+    if($LASTEXITCODE -eq 0 -or ($missing -join "`n") -notmatch 'cs_x64_install|cs_x64_vector_base'){throw 'Missing exceptions control did not reject.'}
+    $global:LASTEXITCODE=0
+    $missing | Out-File -LiteralPath (Join-Path $controls 'missing-exceptions.log') -Encoding UTF8
     $payload=Join-Path $BuildRoot 'payload/EFI/BOOT'; [void][IO.Directory]::CreateDirectory($payload)
     $packaged=Join-Path $payload 'BOOTX64.EFI'; Copy-Item -LiteralPath $release -Destination $packaged
     if((Get-FileHash -LiteralPath $packaged -Algorithm SHA256).Hash.ToLowerInvariant() -ne $results[1].sha256){throw 'EFI payload copy differs.'}
-    [ordered]@{images=$results;image_rejections=$mutations.Count;missing_transition_controls=1;
+    [ordered]@{images=$results;image_rejections=$mutations.Count;missing_transition_controls=1;missing_exceptions_controls=1;
         payload='payload/EFI/BOOT/BOOTX64.EFI';payload_kind='directory-tree-not-disk';loaded=$false} |
         ConvertTo-Json -Depth 8 | Set-Content -LiteralPath (Join-Path $BuildRoot 'efi-results.json') -Encoding UTF8
-    Write-Output 'EFI inspection PASS: four twin images, twelve corruption rejections, missing-transition rejection and original payload tree; no image executed.'
+    Write-Output 'EFI inspection PASS: four twin images, twenty corruption rejections, missing transition/exception rejections and original payload tree; no image executed.'
 } finally{$env:PATH=$originalPath}

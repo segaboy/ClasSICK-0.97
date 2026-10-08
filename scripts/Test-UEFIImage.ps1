@@ -43,7 +43,9 @@ for($i=0;$i -lt $count;++$i) {
     if($s.rva -ne $lastVirtual -or $s.rva%4096 -ne 0 -or $s.virtual -eq 0 -or
         $s.virtual -gt $imageSize-$s.rva -or $s.size -eq 0 -or $s.size%512 -ne 0 -or
         $s.raw%512 -ne 0 -or $s.raw -lt $lastRaw -or $s.size -lt $s.virtual -or
-        ($s.flags -band 2147483648) -ne 0 -or ($s.flags -band 0x40000000) -eq 0){throw 'Section bounds/permissions rejected.'}
+        ($s.flags -band 0x40000000) -eq 0 -or
+        (($s.flags -band 2147483648) -ne 0 -and
+            (($s.flags -band 0x20000000) -ne 0 -or $s.virtual -ne 8))){throw 'Section bounds/permissions rejected.'}
     Bounds $s.raw $s.size
     for($j=24;$j -lt 36;$j+=4){if((U32 ($at+$j)) -ne 0){throw 'Section metadata rejected.'}}
     $lastVirtual=$s.rva+[long]([Math]::Ceiling($s.virtual/4096.0)*4096)
@@ -72,14 +74,15 @@ $mapText=[IO.File]::ReadAllText([IO.Path]::GetFullPath($Map))
 if($mapText -match '(?i)\.(a|lib|dll)(?=[\s)\r\n]|$)'){throw 'Runtime library input rejected.'}
 $names=@('cs_uefi_check_framebuffer','cs_uefi_check_map','cs_uefi_check_owned','cs_uefi_exit_init',
     'cs_uefi_exit_snapshot','cs_uefi_exit_observe','cs_uefi_exit_allowed','cs_uefi_table_crc',
-    'cs_uefi_image_spans','cs_uefi_loader_run','cs_uefi_entry','cs_native_stop','cs_x64_enter','cs_native_halt','cs_entry_anchor')
+    'cs_uefi_image_spans','cs_uefi_loader_run','cs_uefi_entry','cs_native_stop','cs_x64_enter','cs_native_halt','cs_entry_anchor',
+    'cs_x64_tables_init','cs_x64_install','cs_x64_reload','cs_x64_vector_base','cs_x64_vector_end','cs_x64_fault','cs_x64_active_state')
 $symbols=@{}
 foreach($name in $names) {
     $matches=[regex]::Matches($mapText,'(?m)^([0-9a-fA-F]+)\s+[0-9a-fA-F]+\s+\d+\s+'+$name+'\s*$')
     $addresses=@($matches | ForEach-Object {[Convert]::ToInt64($_.Groups[1].Value,16)} | Select-Object -Unique)
     if($addresses.Count -ne 1){throw "Required original symbol absent/ambiguous: $name"}
     $symbols[$name]=$addresses[0]
-    if($name -ne 'cs_entry_anchor' -and -not (Executable $addresses[0])){throw 'Original function permissions rejected.'}
+    if($name -notin @('cs_entry_anchor','cs_x64_active_state') -and -not (Executable $addresses[0])){throw 'Original function permissions rejected.'}
 }
 if($entry -ne $symbols.cs_uefi_entry){throw 'Entry differs from original wrapper.'}
 $anchorRaw=Raw $symbols.cs_entry_anchor 8
@@ -115,8 +118,53 @@ $target=$symbols.cs_x64_enter+20+[BitConverter]::ToInt32($bytes,[int]($transitio
 if($target -ne $symbols.cs_native_stop -or $symbols.cs_native_halt -ne $symbols.cs_x64_enter+20){throw 'Transition destination rejected.'}
 $haltRaw=Raw $symbols.cs_native_halt 4; $halt=[byte[]]@(0xFA,0xF4,0xEB,0xFC)
 for($i=0;$i -lt 4;++$i){if($bytes[$haltRaw+$i] -ne $halt[$i]){throw 'Halt bytes rejected.'}}
+# One original pointer slot is the only writable image data. Tables/stacks live
+# in the separate loader bundle. LTR needs writable GDT busy-bit storage there.
+$dataSections=@($sections | Where-Object {($_.flags -band 2147483648) -ne 0})
+if($dataSections.Count -ne 1 -or $dataSections[0].rva -ne $symbols.cs_x64_active_state -or
+    $symbols.cs_x64_active_state%8 -ne 0 -or (Executable $symbols.cs_x64_active_state)) {throw 'Active-state section rejected.'}
+$stateRaw=Raw $symbols.cs_x64_active_state 8
+if((U64 $stateRaw) -ne 0){throw 'Active-state initial value rejected.'}
+function Exact([long]$rva,[byte[]]$expected,[string]$reason) {
+    $at=Raw $rva $expected.Length
+    for($i=0;$i -lt $expected.Length;++$i){if($bytes[$at+$i] -ne $expected[$i]){throw $reason}}
+}
+$install=$symbols.cs_x64_install; $installRaw=Raw $install 25
+Exact $install ([byte[]]@(0xFA,0xFC,0x48,0x89,0x0D)) 'Descriptor install bytes rejected.'
+if($install+9+[BitConverter]::ToInt32($bytes,[int]($installRaw+5)) -ne $symbols.cs_x64_active_state){throw 'Descriptor state pointer rejected.'}
+Exact ($install+9) ([byte[]]@(0x0F,0x01,0x51,0x28,0x6A,8,0x48,0x8D,5)) 'Descriptor install bytes rejected.'
+if($install+22+[BitConverter]::ToInt32($bytes,[int]($installRaw+18)) -ne $symbols.cs_x64_reload -or
+    $symbols.cs_x64_reload -ne $install+25){throw 'Descriptor reload destination rejected.'}
+Exact ($install+22) ([byte[]]@(0x50,0x48,0xCB)) 'Descriptor install bytes rejected.'
+$reloadRaw=Raw $symbols.cs_x64_reload 38
+Exact $symbols.cs_x64_reload ([byte[]]@(0x66,0xB8,0x10,0,0x8E,0xD8,0x8E,0xC0,0x8E,0xD0,
+    0x66,0x31,0xC0,0x0F,0,0xD0,0x66,0xB8,0x18,0,0x0F,0,0xD8,0x0F,1,0x59,0x32,
+    0xC7,0x81,0xF0,0,0,0,1,0,0,0,0xC3)) 'Descriptor reload bytes rejected.'
+$vector=$symbols.cs_x64_vector_base; $vectorRaw=Raw $vector 8192
+if($vector%32 -ne 0 -or $symbols.cs_x64_vector_end -ne $vector+8192 -or
+    $symbols.cs_x64_fault -ne $symbols.cs_x64_vector_end){throw 'Vector extent rejected.'}
+for($v=0;$v -lt 256;++$v) {
+    $at=$vectorRaw+$v*32; $prefix=if($v -in @(8,10,11,12,13,14,17,21)){0}else{2}
+    if($prefix -eq 2 -and ($bytes[$at] -ne 0x6A -or $bytes[$at+1] -ne 0)){throw 'Vector error placeholder rejected.'}
+    if($bytes[$at+$prefix] -ne 0x68 -or (U32 ($at+$prefix+1)) -ne $v -or
+        $bytes[$at+$prefix+5] -ne 0xE9 -or
+        $vector+$v*32+$prefix+10+[BitConverter]::ToInt32($bytes,[int]($at+$prefix+6)) -ne $symbols.cs_x64_fault){throw 'Vector bytes/destination rejected.'}
+    for($i=$prefix+10;$i -lt 32;++$i){if($bytes[$at+$i] -ne 0x90){throw 'Vector padding rejected.'}}
+}
+$fault=$symbols.cs_x64_fault; $faultRaw=Raw $fault 137
+Exact $fault ([byte[]]@(0xFA,0xFC,0x41,0x0F,0x20,0xD0,0x48,0x8B,0x0D)) 'Fault capture bytes rejected.'
+if($fault+13+[BitConverter]::ToInt32($bytes,[int]($faultRaw+9)) -ne $symbols.cs_x64_active_state){throw 'Fault state pointer rejected.'}
+Exact ($fault+13) ([byte[]]@(0x31,0xC0,0xBA,1,0,0,0,0xF0,0x0F,0xB1,0x91,0xB0,0,0,0,0x0F,0x85)) 'Fault capture bytes rejected.'
+if($fault+34+[BitConverter]::ToInt32($bytes,[int]($faultRaw+30)) -ne $symbols.cs_native_halt){throw 'Nested fault destination rejected.'}
+Exact ($fault+34) ([byte[]]@(0x8B,4,0x24,0x89,0x81,0xB4,0,0,0)) 'Fault capture bytes rejected.'
+for($field=0;$field -lt 6;++$field) {
+    Exact ($fault+43+$field*12) ([byte[]]@(0x48,0x8B,0x44,0x24,(8+$field*8),0x48,0x89,0x81,(184+$field*8),0,0,0)) 'Fault frame field rejected.'
+}
+Exact ($fault+115) ([byte[]]@(0x4C,0x89,0x81,0xE8,0,0,0,0xC7,0x81,0xB0,0,0,0,2,0,0,0,0xE9)) 'Fault publish bytes rejected.'
+if($fault+137+[BitConverter]::ToInt32($bytes,[int]($faultRaw+133)) -ne $symbols.cs_native_halt){throw 'Fault halt destination rejected.'}
 $result=[pscustomobject]@{sha256=(Get-FileHash -LiteralPath $Image -Algorithm SHA256).Hash.ToLowerInvariant();
     size_bytes=$bytes.Length;image_size=$imageSize;entry_rva=$entry;relocations=$patches.Count;
     original_symbols=$names.Count;imports=0;runtime_libraries=0;reloc_raw=$relocRaw;
-    anchor_raw=$anchorRaw;transition_raw=$transitionRaw;halt_raw=$haltRaw;first_section_header=$sections[0].header}
+    anchor_raw=$anchorRaw;transition_raw=$transitionRaw;halt_raw=$haltRaw;first_section_header=$sections[0].header;
+    install_raw=$installRaw;reload_raw=$reloadRaw;vector_raw=$vectorRaw;fault_raw=$faultRaw;state_raw=$stateRaw;vectors=256}
 if($PassThru){$result}else{Write-Output 'EFI image audit PASS: original entry/stack/halt, bounded relocations, zero imports/libraries; unloaded.'}

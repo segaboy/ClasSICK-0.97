@@ -29,6 +29,6 @@ jobs:
       - name: Verify two fresh hosted builds
         shell: powershell
         run: .\scripts\Verify-Bootstrap.ps1
-      - name: Verify hosted core, UEFI loader callbacks and unloaded EFI images
+      - name: Verify hosted core, loader and unloaded owned exception scaffold
         shell: powershell
-        run: .\scripts\Verify-UEFILoader.ps1 -BuildRoot build\uefi-loader-verification -Sanitizers
+        run: .\scripts\Verify-X64Exceptions.ps1 -BuildRoot build\x64-exception-verification -Sanitizers
