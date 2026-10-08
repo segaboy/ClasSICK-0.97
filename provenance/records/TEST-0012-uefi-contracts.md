@@ -24,11 +24,16 @@ include this new platform validator or establish its complete native link.
 Initial development six-suite pass and first full matrix pass precede the final
 maximum-map/eight-allocation boundary fixtures. The final fresh matrix is recorded
 separately in [the snapshot](../../docs/development/uefi-contract-evidence.md),
-with immutable code/source, hashes and remote results only after observation.
+with immutable source/hashes and remote results only after observation.
 
 Final review corrected the excessive-allocation-count fixture to supply a truthful
 nine-element array; validators and supported behavior are unchanged. A fresh full
 matrix follows that fixture-only correction and is the pinned final local run.
+Final source `02160bc451d69cf78dd6149567ae54969bcee09f`, fresh local `c` matrix
+exits zero: all nine configurations, debugger/sanitizer/core/link controls and
+ARM64 LE/BE platform-object audits pass. Twenty-three named pairs match locally;
+the two new executable fingerprints and earlier unchanged twenty-one are pinned
+in the snapshot. Remote verification remains separately pending at this revision.
 
 Failures/limits outside conformance: VirtualBox help COM E_ACCESSDENIED; web HTML
 403/PDF size/timeouts handled through publisher/local manuals. First reviewed

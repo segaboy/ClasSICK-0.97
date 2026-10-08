@@ -14,9 +14,39 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\scripts\Setup-SecondCo
 powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\scripts\Verify-UEFIContracts.ps1 -BuildRoot C:\ClasSICK\uefi-contract-local -Sanitizers
 ```
 
-Expected full protocol: 43 checks per five Clang configurations, 28 per four
-GCC configurations; existing debugger/sanitizer/core/endian/link controls plus
-ARM64 LE/BE preboot-object audits and two preboot-test executable twin hashes.
-Current-core link fixture hashes remain separate from the new platform adapter.
-Detailed fixture counts/limitations reside in TEST-0012. Final observed immutable
-source, artifact fingerprints and CI results will be added after verification.
+Final compiled/test/script source: `02160bc451d69cf78dd6149567ae54969bcee09f`.
+The local final fresh output `C:\ClasSICK\uefi-contract-verification-20261008-c`
+and adjacent `.log` exited zero under Windows PowerShell 5.1. Earlier development
+and full a/b runs pass but precede the final fixture-only truthful-array correction.
+No validator/core/interactive behavior changed in that correction.
+
+Observed full protocol: 43 checks in each of five Clang configurations (Debug
+twins, Release, actual i686 and x64 ASan+UBSan), 28 in each of four scoped GCC
+configurations (Debug twins, Release, actual i686; Windows adapters disabled).
+Existing sanitizer detection controls, freestanding core/import/data/endian
+audits, six x64 LLDB sessions and three rejected launches pass. New UEFI-object
+audits pass in each configuration and ARM64 LE/BE optimized compile-only audits.
+No ARM64 execution claim; failed WOW64 debugging and broader GCC viewer limitation
+remain unchanged. Fixture counts and failed exploration are recorded in TEST-0012.
+
+Debug twin `classick_uefi_contract_tests.exe` SHA-256:
+
+| Compiler | Matching SHA-256 |
+| --- | --- |
+| Clang 23.1.1 | `1ad1f49e96fb1681afc2847ae828c780b65e5fd4177bb36b280bddbf2ad12388` |
+| GCC 16.2.0 | `1af0a4d6f6e72fcc2a04a66e5d43fb3e3da66fb86209c4b9e961e4a30bca636a` |
+
+The prior twenty-one named Clang/GCC hosted/current-core link hashes still match
+[the immutable link snapshot](https://github.com/segaboy/ClasSICK-0.97/blob/bbdeebb0a1e8eedabd2994b5162774427f65d0a8/docs/development/core-link-evidence.md).
+Sixteen standalone images/eight profile twins, four missing-helper links and five
+PE rejection controls pass again. Those unloaded images contain the four portable
+core modules; they do not include the new platform validator or prove its full
+native image closure. With the two hashes above, the final local wrapper emits
+twenty-three named artifact comparisons. Hash agreement is scoped reproducibility,
+not legal originality, cross-compiler identity or future OS-image reproducibility.
+
+Remote CI is pending at this record revision. A subsequent result-only record
+will state the observed source/run/conclusion and compare all twenty-three hashes.
+No firmware, UEFI ABI/real exit/entry/stack/exceptions, device or boot is tested.
+Firmware eligibility and the proposed VM remain needs-review; all OS edition
+gates and historical identity/parity stay open. Human provenance review pending.
