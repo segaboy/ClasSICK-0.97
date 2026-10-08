@@ -25,7 +25,9 @@ does not imply that the complete project foundation or any OS boot is finished.
   scoped keyboard evidence; formal visual/DPI and human provenance review remain separate.
 - All 36 CTest checks pass in five fresh configurations, including actual i686
   and x64 ASan/UBSan. Core/endian audits and all six x64 debugger sessions plus
-  three invalid launches pass. The operator executable matches the Debug twins.
+  three invalid launches pass. The operator executable matches the first matrix's
+  Debug twins; final fixture-only unsigned-shift correction was followed by a
+  second full matrix. Interactive/core/cleanup paths are identical between them.
   [Hosted-start audit](development/hosted-start-audit.md) records scope and results.
 
 - TEST-0009 / IMPL-0007 verifies the bundled LLDB 23.1.1 on x64 Debug twins:

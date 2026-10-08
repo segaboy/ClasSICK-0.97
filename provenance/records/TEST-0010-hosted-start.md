@@ -7,7 +7,10 @@ human provenance review pending.
 The first development run failed before input consumption: an incorrectly ordered
 synthetic event initializer was rejected by the existing input contract. Corrected
 to source/key/action/repeat; no core change or weakened assertion. This record
-retains the failure and fix; the final fresh matrix passes.
+retains the failure and fix; the first fresh matrix passes. Final review also
+replaced the fixture's signed bit-31 shift with an unsigned shift, avoiding
+undefined behavior on i686. A second full fresh matrix/replay passes after that
+test-only correction; no interactive-input or core behavior changed.
 
 36/36 CTest checks per five configurations: x64 Debug twins, Release, actual i686
 and validated x64 ASan/UBSan. Sanitizer detection controls, optimized core import/
@@ -32,7 +35,12 @@ B1 operator keyboard session: PASS; presses=2 releases=2 escape=1 consumed=5 tim
 
 Process exit zero, empty stderr. Operator artifact SHA-256:
 `ef792283eea1d4c2755da9c3108812943aefe0724302e3dff05369dbbbd5e1fa`.
-This matches both final fresh x64 Debug viewer executables. Other seven named
+This matches both first-matrix x64 Debug viewer executables at source
+`0405f2842db446f8ca249dcc9a0864119dd6a571`. Final source
+`f3ce747913628a2fa4debc919704fc7a420e2687` changes only the test fixture's release
+flag expression; all interactive/core/cleanup paths are identical. No repeated
+operator session is claimed. Final Debug viewer twins match SHA-256
+`2040e263ad68ff877b00625fc05f409b1321e083702e484bcc8ca21debbf7a92`. Other seven named
 executable hashes retain the preceding verified values. No screenshot or formal
 operator visual/DPI review is claimed; the GDI pixel predicates pass independently.
 

@@ -5,6 +5,15 @@ Date 2026-10-08. **B1/M0.1 technical acceptance: passed.** This applies the exis
 not alter those requirements. IMPL-0008 / TEST-0010 reuse SPEC-0001–0005 and
 TEST-0009. Self-review; human provenance review remains pending.
 
+Final code/test/build source: `f3ce747913628a2fa4debc919704fc7a420e2687`.
+Operator-session and first full matrix source:
+`0405f2842db446f8ca249dcc9a0864119dd6a571`.
+The only subsequent implementation change constructs the posted release flag
+with an unsigned shift for 32-bit correctness. Interactive keyboard/presentation,
+core, event-loop and cleanup paths are unchanged. The final matrix was rerun;
+no second operator session or operator validation of the new binary is claimed.
+Remote CI is pending at this record revision and will be recorded after completion.
+
 | Existing requirement | Evidence and result |
 | --- | --- |
 | Native Windows process initializes the core from supplied arenas | Combined start checks, exact 1,342,744-byte arena and prior exact/short-pool tests: pass |
@@ -26,7 +35,7 @@ The distinct `--validate-start` session ran only after the owner requested openi
 the viewer. The agent/harness generated no input. It observed two Space presses,
 two releases and Escape, five consumed records, 409 timer wakeups, destroyed window,
 zero arena usage after retirement and exit zero. That operator artifact matches
-the final Debug twins, SHA-256
+the first matrix's Debug twins at 0405f28, SHA-256
 `ef792283eea1d4c2755da9c3108812943aefe0724302e3dff05369dbbbd5e1fa`.
 Counters alone do not prove the source of an arbitrary future run. No formal
 visual/DPI review or screenshot is claimed; independent pixel checks cover rendering.
@@ -34,7 +43,9 @@ visual/DPI review or screenshot is claimed; independent pixel checks cover rende
 Pinned LLVM-MinGW 20260908 / Clang/LLDB 23.1.1, CMake 4.4.4, Ninja 1.13.2 and
 Windows PowerShell 5.1. Fresh Debug twins/Release/i686/x64 ASan+UBSan pass 36 checks
 each, sanitizer controls and core/endian audits. Six valid x64 debugger sessions
-and three rejection launches pass. Seven other executable hashes remain listed in
+and three rejection launches pass. Final viewer Debug twins match SHA-256
+`2040e263ad68ff877b00625fc05f409b1321e083702e484bcc8ca21debbf7a92`.
+Seven other executable hashes remain listed in
 [the preceding debugger snapshot](debugger-evidence.md). WOW64 debugging still
 fails; actual i686 conformance passes. One compiler; ARM64 compile-only.
 
