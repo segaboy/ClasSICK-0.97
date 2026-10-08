@@ -1,6 +1,9 @@
 # Native-PC firmware eligibility follow-up
 
-Date 2026-10-08. SRC-0035/SRC-0040; no dependency adoption or VM launch.
+Date 2026-10-08. SRC-0035/SRC-0040; metadata review history, no dependency adoption.
+Later SRC-0060 approved SPEC-0015's isolated black-box VM trial;
+[own runtime evidence](vm-trial-evidence.md) now exists. Firmware image/source
+binding remains uncertified and no firmware internals were inspected.
 
 The exact official VirtualBox 7.2.16 x64 producer is now identified from publisher
 build metadata: OvmfPkgX64.dsc/fdf with VBOX=1 produces OVMF.fd, renamed to
@@ -48,12 +51,13 @@ platform only**, under these conditions:
 - Results are VM evidence for that exact configuration only; they do not certify
   the firmware or substitute for physical or Macintosh/mini vMac gates.
 
-This does not authorize a VM trial; the first launch needs the owner's separate
-explicit go-ahead. Remaining before it: an isolated VM configuration recorded
-against the [profile](native-pc-profile.md) and a reviewed procedure for
-converting/attaching the raw SPEC-0014 image.
+This decision alone did not authorize a VM trial. The owner later gave the
+separate explicit SRC-0060 go-ahead; SPEC-0015 recorded an isolated configuration
+and round-trip-verified media conversion/attachment, followed by observed cold
+starts. The decision's scope is unchanged.
 
 Our original EFI loader and hosted tests proceed independently. An unloaded image
-audit is not a VirtualBox boot. Firmware eligibility, isolated VM configuration,
-formatted media, native exception/device contracts and B2 remain open; selecting
-a different startup path would require an explicit revised profile and evidence.
+audit is not a VirtualBox boot. The trial is separate local runtime evidence.
+Formal B2 remains partial for exact firmware identity and machine-state
+qualification; adopting a different startup path would require a revised profile
+and evidence. No firmware extraction is a permitted way to close those gaps.

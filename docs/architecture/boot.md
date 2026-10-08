@@ -1,15 +1,16 @@
 # Boot definitions and dependency graph
 
-Status: B0 and hosted B1 verified; native boot contracts remain unachieved.
+Status: B0 and hosted B1 verified; native VM runtime/input observed, formal B2 partial.
 
 The [2026-10-08 readiness audit](../development/boot-readiness-audit.md)
-passes retained input/artifact integrity and five unloaded EFI inspections.
-Native launch is NO-GO pending formatted media and exact firmware/machine
-qualification. B2 and all physical edition gates remain open. SPEC-0014 now
-supplies the formatted medium ([evidence](../development/boot-media-evidence.md));
-VirtualBox EFI is now cleared as a black-box test platform only (SRC-0059); a
-launch still needs the owner's go-ahead, a recorded VM configuration and machine
-qualification.
+passes retained input/artifact integrity and five unloaded EFI inspections; its
+NO-GO describes that earlier checkpoint. SPEC-0014 supplied formatted media,
+SRC-0059 cleared black-box platform use and SRC-0060 authorized SPEC-0015's
+isolated trial. [Repeated native VM observations](../development/vm-trial-evidence.md)
+now show our original scene, 60-second guest completion, live Space and synthetic
+Escape. Formal B2 remains partial because firmware image identity and explicit
+self-test/machine-state qualification are incomplete. All physical/edition gates
+remain open. Later sections retain the dated dependency history.
 
 ## Three distinct gates
 
@@ -34,9 +35,10 @@ B1/M0.1 technical gate passes; see [the audit](../development/hosted-start-audit
 Human provenance review, broad input/native drivers, native boot and historical
 compatibility remain separate. No physical OS edition gate closes.
 
-The owner named installed VirtualBox for future native-PC boot tests; read-only
-version observation is 7.2.16r174877. No VM configuration, firmware/image adoption,
-post-handoff device behavior or boot is verified. Review those inputs before B2.
+The owner named installed VirtualBox for native-PC boot tests; version is
+7.2.16r174877. SPEC-0015 records the approved isolated VM and observed native
+device behavior. Firmware stays an uncertified black-box platform; no firmware
+implementation or payload is adopted into ClasSICK.
 Macintosh/mini vMac replacement-firmware validation remains a separate target;
 VM results never close the original-hardware edition gate.
 

@@ -1,0 +1,1211 @@
+{
+  "schema_version": 1,
+  "contract": "SPEC-0015",
+  "test": "TEST-0022",
+  "generated_on": "2026-10-08",
+  "classification": "own-native-vm-observation",
+  "compiled_source_revision": "78b00e51c401d1ee967618d7d2df316912cf917d",
+  "native_source_revision": "3b44cb9510a400397a33cd1cc0802f45c36c8110",
+  "checkout_before_trial": "052260b264c3b56ada60de1c63e697e6728d0b2f",
+  "native_code_changed": false,
+  "firmware_internal_reads": false,
+  "formal_b2": "partial",
+  "editions_changed": false,
+  "platform": {
+    "product": "Oracle VirtualBox",
+    "version": "7.2.16r174877",
+    "vboxmanage_sha256": "7fda8e54157eb94a5ebd9cea079a9fb8c23ade92ae71e13399dc3431c021a228",
+    "producer_container_sha256": "6cd01002214a130353b9e12405fa836b5efef7461e04e451460e529109796487",
+    "firmware_image_sha256": null,
+    "firmware_identity": "black-box platform only; image binding uncertified"
+  },
+  "verification": {
+    "ctest_total": 846,
+    "configurations": [
+      106,
+      106,
+      106,
+      82,
+      106,
+      91,
+      91,
+      91,
+      67
+    ],
+    "comparison_labels": 64,
+    "distinct_fingerprints": 58,
+    "previous_uart_labels_unchanged": 59,
+    "writer_builds": 9,
+    "corruption_rejections": 30,
+    "tool_refusals": 3,
+    "log_sha256": "4fa41e9fe777f3a700bf4e5492e1a4e27e4716c795114e586a77d22049ce321f",
+    "prior_windows_ci": "https://github.com/segaboy/ClasSICK-0.97/actions/runs/37846593238",
+    "new_ci_status": "pending"
+  },
+  "media": {
+    "raw_bytes": 67108864,
+    "raw_sha256": "370b7d4e7fc4200b77c367e09afa0c4944f534c2623d7f5f68db159c1da46078",
+    "efi_bytes": 37888,
+    "efi_sha256": "8e25d6947677b538d84bc17f98ff44d056dcd3d7769d1389676072286ad831f2",
+    "vdi_sha256": "e4f04aa4e57d929e20c5d6b9a8619ed3f61ed60aa0a2dbab11a09af03d243952",
+    "roundtrip_raw_sha256": "370b7d4e7fc4200b77c367e09afa0c4944f534c2623d7f5f68db159c1da46078"
+  },
+  "configuration": {
+    "status": "passed-before-launch",
+    "checked_settings": {
+      "firmware": "\"EFI64\"",
+      "memory": "512",
+      "cpus": "1",
+      "chipset": "\"piix3\"",
+      "acpi": "\"on\"",
+      "ioapic": "\"on\"",
+      "SecureBoot": "\"off\"",
+      "VMState": "\"poweroff\"",
+      "graphicscontroller": "\"vboxvga\"",
+      "vram": "16",
+      "accelerate3d": "\"off\"",
+      "hidkeyboard": "\"ps2kbd\"",
+      "hidpointing": "\"ps2mouse\"",
+      "paravirtprovider": "\"none\"",
+      "nested-hw-virt": "\"off\"",
+      "boot1": "\"disk\"",
+      "boot2": "\"none\"",
+      "boot3": "\"none\"",
+      "boot4": "\"none\"",
+      "audio": "\"none\"",
+      "audio_in": "\"off\"",
+      "audio_out": "\"off\"",
+      "usb": "\"off\"",
+      "ehci": "\"off\"",
+      "xhci": "\"off\"",
+      "clipboard": "\"disabled\"",
+      "clipboard_file_transfers": "\"off\"",
+      "draganddrop": "\"disabled\"",
+      "vrde": "\"off\"",
+      "uart1": "\"0x03f8,4\"",
+      "uarttype1": "\"16550A\"",
+      "uart2": "\"off\"",
+      "uart3": "\"off\"",
+      "uart4": "\"off\"",
+      "storagecontrollername0": "\"ClasSICK-SATA\"",
+      "storagecontrollertype0": "\"IntelAhci\"",
+      "storagecontrollerportcount0": "\"1\"",
+      "storagecontrollerbootable0": "\"on\"",
+      "nic1": "\"none\"",
+      "nic2": "\"none\"",
+      "nic3": "\"none\"",
+      "nic4": "\"none\"",
+      "nic5": "\"none\"",
+      "nic6": "\"none\"",
+      "nic7": "\"none\"",
+      "nic8": "\"none\""
+    },
+    "configuration_sha256": "6659a10b00cb3e323c9e301db1e776f514d98c23608dbd3db5fcfac86c267afd",
+    "vdi_sha256": "e4f04aa4e57d929e20c5d6b9a8619ed3f61ed60aa0a2dbab11a09af03d243952",
+    "inventory": "one-new-identity-only"
+  },
+  "operator": {
+    "trial": "cold-04",
+    "generated_key_input": false,
+    "confirmation": "I tapped Space twice and saw the scene change",
+    "space_presses": 2
+  },
+  "trials": [
+    {
+      "trial": "cold-01",
+      "mode": "headless",
+      "input_kind": "synthetic-space",
+      "raw_serial_sha256": "e6f9016b5b6ef99f2eb648fd01781217f54e7277eb38b76600bbb171185cab98",
+      "raw_serial_bytes": 948,
+      "own_serial_sha256": "1534be61a0488a1da3152d03b6bc036987866abdddf958dc8f2b7906c45f7804",
+      "own_serial_lines": [
+        "ClasSICK 0.97 UART v1",
+        "keyboard ready",
+        "frame=00000000 sec=00000000 space=00000000",
+        "frame=00000001 sec=00000004 space=00000000",
+        "frame=00000002 sec=00000008 space=00000000",
+        "frame=00000003 sec=0000000C space=00000000",
+        "frame=00000004 sec=0000000F space=00000000",
+        "frame=00000005 sec=00000013 space=00000000",
+        "frame=00000006 sec=00000017 space=00000000",
+        "frame=00000007 sec=0000001B space=00000000",
+        "frame=00000008 sec=0000001E space=00000000",
+        "frame=00000009 sec=00000022 space=00000000",
+        "frame=0000000A sec=00000026 space=00000000",
+        "frame=0000000B sec=0000002A space=00000000",
+        "frame=0000000C sec=0000002D space=00000000",
+        "frame=0000000D sec=00000031 space=00000000",
+        "frame=0000000E sec=00000035 space=00000000",
+        "frame=0000000F sec=00000035 space=00000001",
+        "frame=00000010 sec=00000039 space=00000001",
+        "frame=00000000 sec=0000003C space=00000001",
+        "result=00000000 kbd=00000001"
+      ],
+      "result": "result=00000000 kbd=00000001",
+      "captures": [
+        {
+          "name": "cold-01-screen-retry.png",
+          "sha256": "31e368ffeff985ad4d80e7d5126be84443eecc77a36ca4f47e7de4b8b7466c35",
+          "exported": false
+        }
+      ]
+    },
+    {
+      "trial": "cold-02",
+      "mode": "headless",
+      "input_kind": "none",
+      "raw_serial_sha256": "341b3b24a448a1f3c6d2bf21d6bb8bbc02434b9fd89a4e38acb9616fa44586c7",
+      "raw_serial_bytes": 904,
+      "own_serial_sha256": "fdc9b969771dcc30b8ec6aa95d572bfb48859d99bc97115501c682d4c97235b7",
+      "own_serial_lines": [
+        "ClasSICK 0.97 UART v1",
+        "keyboard ready",
+        "frame=00000000 sec=00000000 space=00000000",
+        "frame=00000001 sec=00000004 space=00000000",
+        "frame=00000002 sec=00000008 space=00000000",
+        "frame=00000003 sec=0000000C space=00000000",
+        "frame=00000004 sec=0000000F space=00000000",
+        "frame=00000005 sec=00000013 space=00000000",
+        "frame=00000006 sec=00000017 space=00000000",
+        "frame=00000007 sec=0000001B space=00000000",
+        "frame=00000008 sec=0000001E space=00000000",
+        "frame=00000009 sec=00000022 space=00000000",
+        "frame=0000000A sec=00000026 space=00000000",
+        "frame=0000000B sec=0000002A space=00000000",
+        "frame=0000000C sec=0000002D space=00000000",
+        "frame=0000000D sec=00000031 space=00000000",
+        "frame=0000000E sec=00000035 space=00000000",
+        "frame=0000000F sec=00000039 space=00000000",
+        "frame=00000010 sec=0000003C space=00000000",
+        "result=00000000 kbd=00000001"
+      ],
+      "result": "result=00000000 kbd=00000001",
+      "captures": [
+        {
+          "name": "cold-02-screen-010.png",
+          "sha256": "31e368ffeff985ad4d80e7d5126be84443eecc77a36ca4f47e7de4b8b7466c35",
+          "exported": false
+        },
+        {
+          "name": "cold-02-screen-030.png",
+          "sha256": "837250fabc661c9d3bcee2a95d63c3c829fe32162c7972889d8be8c99913608b",
+          "exported": false
+        },
+        {
+          "name": "cold-02-screen-060.png",
+          "sha256": "ae660e6e716e0fd730981ba16259f1be3c0754f4e5f44dda807d8c9b0454a205",
+          "exported": false
+        },
+        {
+          "name": "cold-02-screen-090.png",
+          "sha256": "027b6d2cbb634fe8099141e5711c45834ac43f5cb06d3dc41a1b888153574d53",
+          "exported": false
+        },
+        {
+          "name": "cold-02-screen-120.png",
+          "sha256": "027b6d2cbb634fe8099141e5711c45834ac43f5cb06d3dc41a1b888153574d53",
+          "exported": false
+        }
+      ],
+      "observation_source_sha256": "a52190075a1acfb05804dda57202d3ebb59578b4421bfe1498ab927533d2a987",
+      "started_utc": "2026-10-08T22:52:03.2843459Z",
+      "host_samples": [
+        {
+          "scheduled_seconds": 0,
+          "elapsed_host_seconds": 4.5084013999999994,
+          "utc": "2026-10-08T22:52:07.7929312Z",
+          "capture": "cold-02-screen-000.png",
+          "capture_exit": 1,
+          "serial_bytes": 0
+        },
+        {
+          "scheduled_seconds": 10,
+          "elapsed_host_seconds": 10.0625783,
+          "utc": "2026-10-08T22:52:13.3468670Z",
+          "capture": "cold-02-screen-010.png",
+          "capture_exit": 0,
+          "serial_bytes": 170,
+          "capture_sha256": "31e368ffeff985ad4d80e7d5126be84443eecc77a36ca4f47e7de4b8b7466c35"
+        },
+        {
+          "scheduled_seconds": 30,
+          "elapsed_host_seconds": 30.067586499999997,
+          "utc": "2026-10-08T22:52:33.3523742Z",
+          "capture": "cold-02-screen-030.png",
+          "capture_exit": 0,
+          "serial_bytes": 434,
+          "capture_sha256": "837250fabc661c9d3bcee2a95d63c3c829fe32162c7972889d8be8c99913608b"
+        },
+        {
+          "scheduled_seconds": 60,
+          "elapsed_host_seconds": 60.0680832,
+          "utc": "2026-10-08T22:53:03.3521897Z",
+          "capture": "cold-02-screen-060.png",
+          "capture_exit": 0,
+          "serial_bytes": 786,
+          "capture_sha256": "ae660e6e716e0fd730981ba16259f1be3c0754f4e5f44dda807d8c9b0454a205"
+        },
+        {
+          "scheduled_seconds": 90,
+          "elapsed_host_seconds": 90.0580876,
+          "utc": "2026-10-08T22:53:33.3418980Z",
+          "capture": "cold-02-screen-090.png",
+          "capture_exit": 0,
+          "serial_bytes": 904,
+          "capture_sha256": "027b6d2cbb634fe8099141e5711c45834ac43f5cb06d3dc41a1b888153574d53"
+        },
+        {
+          "scheduled_seconds": 120,
+          "elapsed_host_seconds": 120.05313179999999,
+          "utc": "2026-10-08T22:54:03.3372076Z",
+          "capture": "cold-02-screen-120.png",
+          "capture_exit": 0,
+          "serial_bytes": 904,
+          "capture_sha256": "027b6d2cbb634fe8099141e5711c45834ac43f5cb06d3dc41a1b888153574d53"
+        }
+      ]
+    },
+    {
+      "trial": "cold-03",
+      "mode": "gui",
+      "input_kind": "none",
+      "raw_serial_sha256": "341b3b24a448a1f3c6d2bf21d6bb8bbc02434b9fd89a4e38acb9616fa44586c7",
+      "raw_serial_bytes": 904,
+      "own_serial_sha256": "fdc9b969771dcc30b8ec6aa95d572bfb48859d99bc97115501c682d4c97235b7",
+      "own_serial_lines": [
+        "ClasSICK 0.97 UART v1",
+        "keyboard ready",
+        "frame=00000000 sec=00000000 space=00000000",
+        "frame=00000001 sec=00000004 space=00000000",
+        "frame=00000002 sec=00000008 space=00000000",
+        "frame=00000003 sec=0000000C space=00000000",
+        "frame=00000004 sec=0000000F space=00000000",
+        "frame=00000005 sec=00000013 space=00000000",
+        "frame=00000006 sec=00000017 space=00000000",
+        "frame=00000007 sec=0000001B space=00000000",
+        "frame=00000008 sec=0000001E space=00000000",
+        "frame=00000009 sec=00000022 space=00000000",
+        "frame=0000000A sec=00000026 space=00000000",
+        "frame=0000000B sec=0000002A space=00000000",
+        "frame=0000000C sec=0000002D space=00000000",
+        "frame=0000000D sec=00000031 space=00000000",
+        "frame=0000000E sec=00000035 space=00000000",
+        "frame=0000000F sec=00000039 space=00000000",
+        "frame=00000010 sec=0000003C space=00000000",
+        "result=00000000 kbd=00000001"
+      ],
+      "result": "result=00000000 kbd=00000001",
+      "captures": [
+        {
+          "name": "cold-03-screen-030.png",
+          "sha256": "524e4bbb844cb0b549653e7abe96f6830ee4be270877d5ce997decc9f0810c23",
+          "exported": false
+        },
+        {
+          "name": "cold-03-screen-060.png",
+          "sha256": "f7d1298344af85161839ad45cfc3ecc6bc07e9f0db25f79bb19b8fea3d6db6ff",
+          "exported": false
+        },
+        {
+          "name": "cold-03-screen-090.png",
+          "sha256": "027b6d2cbb634fe8099141e5711c45834ac43f5cb06d3dc41a1b888153574d53",
+          "exported": false
+        },
+        {
+          "name": "cold-03-screen-120.png",
+          "sha256": "027b6d2cbb634fe8099141e5711c45834ac43f5cb06d3dc41a1b888153574d53",
+          "exported": false
+        }
+      ],
+      "observation_source_sha256": "8c02afbd87ca7e59a2edd54b053bd7baead4d5854f27e748cf05e07a081a999a",
+      "started_utc": "2026-10-08T22:54:30.5444444Z",
+      "host_samples": [
+        {
+          "scheduled_seconds": 0,
+          "elapsed_host_seconds": 13.5318709,
+          "utc": "2026-10-08T22:54:44.0768172Z",
+          "capture": "cold-03-screen-000.png",
+          "capture_exit": 1,
+          "serial_bytes": 0
+        },
+        {
+          "scheduled_seconds": 10,
+          "elapsed_host_seconds": 13.605259799999999,
+          "utc": "2026-10-08T22:54:44.1507923Z",
+          "capture": "cold-03-screen-010.png",
+          "capture_exit": 1,
+          "serial_bytes": 0
+        },
+        {
+          "scheduled_seconds": 30,
+          "elapsed_host_seconds": 30.085945499999998,
+          "utc": "2026-10-08T22:55:00.6311777Z",
+          "capture": "cold-03-screen-030.png",
+          "capture_exit": 0,
+          "serial_bytes": 302,
+          "capture_sha256": "524e4bbb844cb0b549653e7abe96f6830ee4be270877d5ce997decc9f0810c23"
+        },
+        {
+          "scheduled_seconds": 60,
+          "elapsed_host_seconds": 60.094849399999994,
+          "utc": "2026-10-08T22:55:30.6394975Z",
+          "capture": "cold-03-screen-060.png",
+          "capture_exit": 0,
+          "serial_bytes": 654,
+          "capture_sha256": "f7d1298344af85161839ad45cfc3ecc6bc07e9f0db25f79bb19b8fea3d6db6ff"
+        },
+        {
+          "scheduled_seconds": 90,
+          "elapsed_host_seconds": 90.0600781,
+          "utc": "2026-10-08T22:56:00.6044738Z",
+          "capture": "cold-03-screen-090.png",
+          "capture_exit": 0,
+          "serial_bytes": 904,
+          "capture_sha256": "027b6d2cbb634fe8099141e5711c45834ac43f5cb06d3dc41a1b888153574d53"
+        },
+        {
+          "scheduled_seconds": 120,
+          "elapsed_host_seconds": 120.0544027,
+          "utc": "2026-10-08T22:56:30.5987515Z",
+          "capture": "cold-03-screen-120.png",
+          "capture_exit": 0,
+          "serial_bytes": 904,
+          "capture_sha256": "027b6d2cbb634fe8099141e5711c45834ac43f5cb06d3dc41a1b888153574d53"
+        }
+      ]
+    },
+    {
+      "trial": "cold-04",
+      "mode": "gui",
+      "input_kind": "operator-space",
+      "raw_serial_sha256": "ef58310ccd2b7019ebed1e0e6c3e4bda6ccecc02e25690e0146edc42e956ad66",
+      "raw_serial_bytes": 992,
+      "own_serial_sha256": "72ba134ced90b6434abffae6b3ef786e2e2dc32e4813439a795275238ff9c841",
+      "own_serial_lines": [
+        "ClasSICK 0.97 UART v1",
+        "keyboard ready",
+        "frame=00000000 sec=00000000 space=00000000",
+        "frame=00000001 sec=00000004 space=00000000",
+        "frame=00000002 sec=00000004 space=00000001",
+        "frame=00000003 sec=00000004 space=00000002",
+        "frame=00000004 sec=00000008 space=00000002",
+        "frame=00000005 sec=0000000C space=00000002",
+        "frame=00000006 sec=0000000F space=00000002",
+        "frame=00000007 sec=00000013 space=00000002",
+        "frame=00000008 sec=00000017 space=00000002",
+        "frame=00000009 sec=0000001B space=00000002",
+        "frame=0000000A sec=0000001E space=00000002",
+        "frame=0000000B sec=00000022 space=00000002",
+        "frame=0000000C sec=00000026 space=00000002",
+        "frame=0000000D sec=0000002A space=00000002",
+        "frame=0000000E sec=0000002D space=00000002",
+        "frame=0000000F sec=00000031 space=00000002",
+        "frame=00000010 sec=00000035 space=00000002",
+        "frame=00000000 sec=00000039 space=00000002",
+        "frame=00000001 sec=0000003C space=00000002",
+        "result=00000000 kbd=00000001"
+      ],
+      "result": "result=00000000 kbd=00000001",
+      "captures": [
+        {
+          "name": "cold-04-screen-030.png",
+          "sha256": "55fdaa32c4e1a7282dacff89b3fb6e900e53f819f98c10f2e01bce32985809a4",
+          "exported": false
+        },
+        {
+          "name": "cold-04-screen-060.png",
+          "sha256": "615edf28cb125fc5d585462ead8bb2b606c7367a8925f46cf87493e13d1cb494",
+          "exported": false
+        },
+        {
+          "name": "cold-04-screen-090.png",
+          "sha256": "e5d97e1fc98f1d634eecd4711500aaa7a225ddebab8550e88cf899484f1cefae",
+          "exported": false
+        },
+        {
+          "name": "cold-04-screen-120.png",
+          "sha256": "e5d97e1fc98f1d634eecd4711500aaa7a225ddebab8550e88cf899484f1cefae",
+          "exported": false
+        }
+      ],
+      "observation_source_sha256": "55545a1cadf218580cdeaf3ca338c6be0386ef2144b8e595a524e6f6fc75ff7b",
+      "started_utc": "2026-10-08T22:58:58.2437827Z",
+      "host_samples": [
+        {
+          "scheduled_seconds": 0,
+          "elapsed_host_seconds": 13.812208799999999,
+          "utc": "2026-10-08T22:59:12.0559663Z",
+          "capture": "cold-04-screen-000.png",
+          "capture_exit": 1,
+          "serial_bytes": 0
+        },
+        {
+          "scheduled_seconds": 10,
+          "elapsed_host_seconds": 14.045700499999999,
+          "utc": "2026-10-08T22:59:12.2891444Z",
+          "capture": "cold-04-screen-010.png",
+          "capture_exit": 1,
+          "serial_bytes": 0
+        },
+        {
+          "scheduled_seconds": 30,
+          "elapsed_host_seconds": 30.1705117,
+          "utc": "2026-10-08T22:59:28.4142838Z",
+          "capture": "cold-04-screen-030.png",
+          "capture_exit": 0,
+          "serial_bytes": 434,
+          "capture_sha256": "55fdaa32c4e1a7282dacff89b3fb6e900e53f819f98c10f2e01bce32985809a4"
+        },
+        {
+          "scheduled_seconds": 60,
+          "elapsed_host_seconds": 60.108354299999995,
+          "utc": "2026-10-08T22:59:58.3519492Z",
+          "capture": "cold-04-screen-060.png",
+          "capture_exit": 0,
+          "serial_bytes": 742,
+          "capture_sha256": "615edf28cb125fc5d585462ead8bb2b606c7367a8925f46cf87493e13d1cb494"
+        },
+        {
+          "scheduled_seconds": 90,
+          "elapsed_host_seconds": 90.07850959999999,
+          "utc": "2026-10-08T23:00:28.3218989Z",
+          "capture": "cold-04-screen-090.png",
+          "capture_exit": 0,
+          "serial_bytes": 992,
+          "capture_sha256": "e5d97e1fc98f1d634eecd4711500aaa7a225ddebab8550e88cf899484f1cefae"
+        },
+        {
+          "scheduled_seconds": 120,
+          "elapsed_host_seconds": 120.1127511,
+          "utc": "2026-10-08T23:00:58.3556861Z",
+          "capture": "cold-04-screen-120.png",
+          "capture_exit": 0,
+          "serial_bytes": 992,
+          "capture_sha256": "e5d97e1fc98f1d634eecd4711500aaa7a225ddebab8550e88cf899484f1cefae"
+        }
+      ]
+    },
+    {
+      "trial": "cold-05",
+      "mode": "headless",
+      "input_kind": "none",
+      "raw_serial_sha256": "341b3b24a448a1f3c6d2bf21d6bb8bbc02434b9fd89a4e38acb9616fa44586c7",
+      "raw_serial_bytes": 904,
+      "own_serial_sha256": "fdc9b969771dcc30b8ec6aa95d572bfb48859d99bc97115501c682d4c97235b7",
+      "own_serial_lines": [
+        "ClasSICK 0.97 UART v1",
+        "keyboard ready",
+        "frame=00000000 sec=00000000 space=00000000",
+        "frame=00000001 sec=00000004 space=00000000",
+        "frame=00000002 sec=00000008 space=00000000",
+        "frame=00000003 sec=0000000C space=00000000",
+        "frame=00000004 sec=0000000F space=00000000",
+        "frame=00000005 sec=00000013 space=00000000",
+        "frame=00000006 sec=00000017 space=00000000",
+        "frame=00000007 sec=0000001B space=00000000",
+        "frame=00000008 sec=0000001E space=00000000",
+        "frame=00000009 sec=00000022 space=00000000",
+        "frame=0000000A sec=00000026 space=00000000",
+        "frame=0000000B sec=0000002A space=00000000",
+        "frame=0000000C sec=0000002D space=00000000",
+        "frame=0000000D sec=00000031 space=00000000",
+        "frame=0000000E sec=00000035 space=00000000",
+        "frame=0000000F sec=00000039 space=00000000",
+        "frame=00000010 sec=0000003C space=00000000",
+        "result=00000000 kbd=00000001"
+      ],
+      "result": "result=00000000 kbd=00000001",
+      "captures": [
+        {
+          "name": "cold-05-final.png",
+          "sha256": "027b6d2cbb634fe8099141e5711c45834ac43f5cb06d3dc41a1b888153574d53",
+          "exported": false
+        }
+      ],
+      "observation_source_sha256": "e9e6a64c5dd63ed1cc618869adcda77af0d7647aa5a25f898238b23c32fc1344",
+      "started_utc": "2026-10-08T23:01:29.2841099Z",
+      "line_arrivals": [
+        {
+          "line": "ClasSICK 0.97 UART v1",
+          "previous_poll_seconds": 9.4978783,
+          "observed_host_seconds": 9.642786599999999,
+          "utc": "2026-10-08T23:01:38.9290543Z"
+        },
+        {
+          "line": "keyboard ready",
+          "previous_poll_seconds": 9.4978783,
+          "observed_host_seconds": 9.642786599999999,
+          "utc": "2026-10-08T23:01:38.9429682Z"
+        },
+        {
+          "line": "frame=00000000 sec=00000000 space=00000000",
+          "previous_poll_seconds": 9.4978783,
+          "observed_host_seconds": 9.642786599999999,
+          "utc": "2026-10-08T23:01:38.9429682Z"
+        },
+        {
+          "line": "frame=00000001 sec=00000004 space=00000000",
+          "previous_poll_seconds": 13.566292599999999,
+          "observed_host_seconds": 13.6872581,
+          "utc": "2026-10-08T23:01:42.9712864Z"
+        },
+        {
+          "line": "frame=00000002 sec=00000008 space=00000000",
+          "previous_poll_seconds": 17.5327716,
+          "observed_host_seconds": 17.6576669,
+          "utc": "2026-10-08T23:01:46.9413332Z"
+        },
+        {
+          "line": "frame=00000003 sec=0000000C space=00000000",
+          "previous_poll_seconds": 21.492168,
+          "observed_host_seconds": 21.6094312,
+          "utc": "2026-10-08T23:01:50.8927005Z"
+        },
+        {
+          "line": "frame=00000004 sec=0000000F space=00000000",
+          "previous_poll_seconds": 24.56666,
+          "observed_host_seconds": 24.6889356,
+          "utc": "2026-10-08T23:01:53.9722142Z"
+        },
+        {
+          "line": "frame=00000005 sec=00000013 space=00000000",
+          "previous_poll_seconds": 28.539599499999998,
+          "observed_host_seconds": 28.657238,
+          "utc": "2026-10-08T23:01:57.9409092Z"
+        },
+        {
+          "line": "frame=00000006 sec=00000017 space=00000000",
+          "previous_poll_seconds": 32.5395113,
+          "observed_host_seconds": 32.6583831,
+          "utc": "2026-10-08T23:02:01.9413162Z"
+        },
+        {
+          "line": "frame=00000007 sec=0000001B space=00000000",
+          "previous_poll_seconds": 36.4905909,
+          "observed_host_seconds": 36.6119553,
+          "utc": "2026-10-08T23:02:05.8950251Z"
+        },
+        {
+          "line": "frame=00000008 sec=0000001E space=00000000",
+          "previous_poll_seconds": 39.476420399999995,
+          "observed_host_seconds": 39.5948676,
+          "utc": "2026-10-08T23:02:08.8782218Z"
+        },
+        {
+          "line": "frame=00000009 sec=00000022 space=00000000",
+          "previous_poll_seconds": 43.538004,
+          "observed_host_seconds": 43.732513399999995,
+          "utc": "2026-10-08T23:02:13.0161495Z"
+        },
+        {
+          "line": "frame=0000000A sec=00000026 space=00000000",
+          "previous_poll_seconds": 47.5667049,
+          "observed_host_seconds": 47.6867812,
+          "utc": "2026-10-08T23:02:16.9697999Z"
+        },
+        {
+          "line": "frame=0000000B sec=0000002A space=00000000",
+          "previous_poll_seconds": 51.5385126,
+          "observed_host_seconds": 51.6593719,
+          "utc": "2026-10-08T23:02:20.9430438Z"
+        },
+        {
+          "line": "frame=0000000C sec=0000002D space=00000000",
+          "previous_poll_seconds": 54.503493399999996,
+          "observed_host_seconds": 54.622683699999996,
+          "utc": "2026-10-08T23:02:23.9059953Z"
+        },
+        {
+          "line": "frame=0000000D sec=00000031 space=00000000",
+          "previous_poll_seconds": 58.471623699999995,
+          "observed_host_seconds": 58.5870913,
+          "utc": "2026-10-08T23:02:27.8709034Z"
+        },
+        {
+          "line": "frame=0000000E sec=00000035 space=00000000",
+          "previous_poll_seconds": 62.537504199999994,
+          "observed_host_seconds": 62.6614989,
+          "utc": "2026-10-08T23:02:31.9444588Z"
+        },
+        {
+          "line": "frame=0000000F sec=00000039 space=00000000",
+          "previous_poll_seconds": 66.4924443,
+          "observed_host_seconds": 66.6037393,
+          "utc": "2026-10-08T23:02:35.8873585Z"
+        },
+        {
+          "line": "frame=00000010 sec=0000003C space=00000000",
+          "previous_poll_seconds": 69.5088292,
+          "observed_host_seconds": 69.61503239999999,
+          "utc": "2026-10-08T23:02:38.8977813Z"
+        },
+        {
+          "line": "result=00000000 kbd=00000001",
+          "previous_poll_seconds": 69.5088292,
+          "observed_host_seconds": 69.61503239999999,
+          "utc": "2026-10-08T23:02:38.8977813Z"
+        }
+      ],
+      "ready_to_terminal_observed_host_seconds": 59.97224579999999,
+      "arrival_difference_bracket_seconds": [
+        59.86604259999999,
+        60.11715409999999
+      ]
+    },
+    {
+      "trial": "cold-06",
+      "mode": "headless",
+      "input_kind": "none",
+      "raw_serial_sha256": "341b3b24a448a1f3c6d2bf21d6bb8bbc02434b9fd89a4e38acb9616fa44586c7",
+      "raw_serial_bytes": 904,
+      "own_serial_sha256": "fdc9b969771dcc30b8ec6aa95d572bfb48859d99bc97115501c682d4c97235b7",
+      "own_serial_lines": [
+        "ClasSICK 0.97 UART v1",
+        "keyboard ready",
+        "frame=00000000 sec=00000000 space=00000000",
+        "frame=00000001 sec=00000004 space=00000000",
+        "frame=00000002 sec=00000008 space=00000000",
+        "frame=00000003 sec=0000000C space=00000000",
+        "frame=00000004 sec=0000000F space=00000000",
+        "frame=00000005 sec=00000013 space=00000000",
+        "frame=00000006 sec=00000017 space=00000000",
+        "frame=00000007 sec=0000001B space=00000000",
+        "frame=00000008 sec=0000001E space=00000000",
+        "frame=00000009 sec=00000022 space=00000000",
+        "frame=0000000A sec=00000026 space=00000000",
+        "frame=0000000B sec=0000002A space=00000000",
+        "frame=0000000C sec=0000002D space=00000000",
+        "frame=0000000D sec=00000031 space=00000000",
+        "frame=0000000E sec=00000035 space=00000000",
+        "frame=0000000F sec=00000039 space=00000000",
+        "frame=00000010 sec=0000003C space=00000000",
+        "result=00000000 kbd=00000001"
+      ],
+      "result": "result=00000000 kbd=00000001",
+      "captures": [
+        {
+          "name": "cold-06-final.png",
+          "sha256": "027b6d2cbb634fe8099141e5711c45834ac43f5cb06d3dc41a1b888153574d53",
+          "exported": false
+        }
+      ],
+      "observation_source_sha256": "da64fe0f97e2d7ee8b354e9d8ee0305afbe99e6ed650724e40400ce4b0d6412f",
+      "started_utc": "2026-10-08T23:02:58.2892108Z",
+      "line_arrivals": [
+        {
+          "line": "ClasSICK 0.97 UART v1",
+          "previous_poll_seconds": 8.6143848,
+          "observed_host_seconds": 8.744554599999999,
+          "utc": "2026-10-08T23:03:07.0345744Z"
+        },
+        {
+          "line": "keyboard ready",
+          "previous_poll_seconds": 8.6143848,
+          "observed_host_seconds": 8.744554599999999,
+          "utc": "2026-10-08T23:03:07.0450966Z"
+        },
+        {
+          "line": "frame=00000000 sec=00000000 space=00000000",
+          "previous_poll_seconds": 8.6143848,
+          "observed_host_seconds": 8.744554599999999,
+          "utc": "2026-10-08T23:03:07.0450966Z"
+        },
+        {
+          "line": "frame=00000001 sec=00000004 space=00000000",
+          "previous_poll_seconds": 12.594179299999999,
+          "observed_host_seconds": 12.7062406,
+          "utc": "2026-10-08T23:03:10.9956660Z"
+        },
+        {
+          "line": "frame=00000002 sec=00000008 space=00000000",
+          "previous_poll_seconds": 16.6417502,
+          "observed_host_seconds": 16.7471952,
+          "utc": "2026-10-08T23:03:15.0362214Z"
+        },
+        {
+          "line": "frame=00000003 sec=0000000C space=00000000",
+          "previous_poll_seconds": 20.5801145,
+          "observed_host_seconds": 20.6951811,
+          "utc": "2026-10-08T23:03:18.9838992Z"
+        },
+        {
+          "line": "frame=00000004 sec=0000000F space=00000000",
+          "previous_poll_seconds": 23.6551364,
+          "observed_host_seconds": 23.7670314,
+          "utc": "2026-10-08T23:03:22.0554627Z"
+        },
+        {
+          "line": "frame=00000005 sec=00000013 space=00000000",
+          "previous_poll_seconds": 27.594436299999998,
+          "observed_host_seconds": 27.7042228,
+          "utc": "2026-10-08T23:03:25.9931005Z"
+        },
+        {
+          "line": "frame=00000006 sec=00000017 space=00000000",
+          "previous_poll_seconds": 31.654444199999997,
+          "observed_host_seconds": 31.7671624,
+          "utc": "2026-10-08T23:03:30.0563570Z"
+        },
+        {
+          "line": "frame=00000007 sec=0000001B space=00000000",
+          "previous_poll_seconds": 35.5944328,
+          "observed_host_seconds": 35.705898399999995,
+          "utc": "2026-10-08T23:03:33.9950269Z"
+        },
+        {
+          "line": "frame=00000008 sec=0000001E space=00000000",
+          "previous_poll_seconds": 38.6551425,
+          "observed_host_seconds": 38.765917,
+          "utc": "2026-10-08T23:03:37.0548757Z"
+        },
+        {
+          "line": "frame=00000009 sec=00000022 space=00000000",
+          "previous_poll_seconds": 42.593958099999995,
+          "observed_host_seconds": 42.7034776,
+          "utc": "2026-10-08T23:03:40.9926289Z"
+        },
+        {
+          "line": "frame=0000000A sec=00000026 space=00000000",
+          "previous_poll_seconds": 46.6393667,
+          "observed_host_seconds": 46.7481191,
+          "utc": "2026-10-08T23:03:45.0361965Z"
+        },
+        {
+          "line": "frame=0000000B sec=0000002A space=00000000",
+          "previous_poll_seconds": 50.6132159,
+          "observed_host_seconds": 50.7204215,
+          "utc": "2026-10-08T23:03:49.0092272Z"
+        },
+        {
+          "line": "frame=0000000C sec=0000002D space=00000000",
+          "previous_poll_seconds": 53.6720508,
+          "observed_host_seconds": 53.780009,
+          "utc": "2026-10-08T23:03:52.0679769Z"
+        },
+        {
+          "line": "frame=0000000D sec=00000031 space=00000000",
+          "previous_poll_seconds": 57.636711899999995,
+          "observed_host_seconds": 57.754883199999995,
+          "utc": "2026-10-08T23:03:56.0425997Z"
+        },
+        {
+          "line": "frame=0000000E sec=00000035 space=00000000",
+          "previous_poll_seconds": 61.6840942,
+          "observed_host_seconds": 61.796755899999994,
+          "utc": "2026-10-08T23:04:00.0857212Z"
+        },
+        {
+          "line": "frame=0000000F sec=00000039 space=00000000",
+          "previous_poll_seconds": 65.6264114,
+          "observed_host_seconds": 65.7356353,
+          "utc": "2026-10-08T23:04:04.0240316Z"
+        },
+        {
+          "line": "frame=00000010 sec=0000003C space=00000000",
+          "previous_poll_seconds": 68.60876,
+          "observed_host_seconds": 68.7158223,
+          "utc": "2026-10-08T23:04:07.0045471Z"
+        },
+        {
+          "line": "result=00000000 kbd=00000001",
+          "previous_poll_seconds": 68.60876,
+          "observed_host_seconds": 68.7158223,
+          "utc": "2026-10-08T23:04:07.0045471Z"
+        }
+      ],
+      "ready_to_terminal_observed_host_seconds": 59.9712677,
+      "arrival_difference_bracket_seconds": [
+        59.8642054,
+        60.1014375
+      ]
+    },
+    {
+      "trial": "cold-07",
+      "mode": "headless",
+      "input_kind": "synthetic-escape",
+      "raw_serial_sha256": "5399ce4f70a53b78e879ac6998a2ead492c59fbd272df1c03af41977f9f653c2",
+      "raw_serial_bytes": 288,
+      "own_serial_sha256": "094d9b58ec6cfe5d67fe07c3e28729f4cdae76733d0f76bc48ae0a10922f4cc6",
+      "own_serial_lines": [
+        "ClasSICK 0.97 UART v1",
+        "keyboard ready",
+        "frame=00000000 sec=00000000 space=00000000",
+        "frame=00000001 sec=00000004 space=00000000",
+        "frame=00000002 sec=00000005 space=00000000",
+        "result=0000000C kbd=00000001"
+      ],
+      "result": "result=0000000C kbd=00000001",
+      "captures": [
+        {
+          "name": "cold-07-final.png",
+          "sha256": "06282fda431e8dbdc570a8ea2a009e0220935350471347297fdd343fee1a19ad",
+          "exported": false
+        }
+      ],
+      "observation_source_sha256": "f174354000fa9a2fd0614eac654e85b666d772326a9fa456d47fd211548e6105",
+      "started_utc": "2026-10-08T23:04:50.7151447Z",
+      "line_arrivals": [
+        {
+          "line": "ClasSICK 0.97 UART v1",
+          "previous_poll_seconds": 10.1996156,
+          "observed_host_seconds": 10.3171577,
+          "utc": "2026-10-08T23:05:01.0338538Z"
+        },
+        {
+          "line": "keyboard ready",
+          "previous_poll_seconds": 10.1996156,
+          "observed_host_seconds": 10.3171577,
+          "utc": "2026-10-08T23:05:01.0415958Z"
+        },
+        {
+          "line": "frame=00000000 sec=00000000 space=00000000",
+          "previous_poll_seconds": 10.1996156,
+          "observed_host_seconds": 10.3171577,
+          "utc": "2026-10-08T23:05:01.0415958Z"
+        },
+        {
+          "line": "frame=00000001 sec=00000004 space=00000000",
+          "previous_poll_seconds": 14.1983094,
+          "observed_host_seconds": 14.3070653,
+          "utc": "2026-10-08T23:05:05.0217322Z"
+        },
+        {
+          "line": "frame=00000002 sec=00000005 space=00000000",
+          "previous_poll_seconds": 15.399458999999998,
+          "observed_host_seconds": 15.6298754,
+          "utc": "2026-10-08T23:05:06.3444984Z"
+        },
+        {
+          "line": "result=0000000C kbd=00000001",
+          "previous_poll_seconds": 15.399458999999998,
+          "observed_host_seconds": 15.6298754,
+          "utc": "2026-10-08T23:05:06.3444984Z"
+        }
+      ],
+      "ready_to_terminal_observed_host_seconds": 5.3127177,
+      "arrival_difference_bracket_seconds": [
+        5.082301299999999,
+        5.4302598
+      ]
+    }
+  ],
+  "retained_failures": [
+    {
+      "stage": "preparation-a",
+      "outcome": "modifyvm rejected merged --nicN/none argument; never started; no disk attached"
+    },
+    {
+      "stage": "preparation-b",
+      "outcome": "secureboot disable refused without PK; admitted only after public SecureBoot=off; no key enrolled"
+    },
+    {
+      "stage": "cold-01-collector",
+      "outcome": "initial 0x0 screenshot failure terminated first collector; own-scene retry succeeded; full guest result retained"
+    },
+    {
+      "stage": "cold-02/03/04 initial captures",
+      "outcome": "0x0 display screenshot refusals before own display appeared; retained; later original-scene captures succeeded"
+    },
+    {
+      "stage": "cold-03 operator attempt",
+      "outcome": "owner could not see window; space counter zero; no live keyboard acceptance"
+    },
+    {
+      "stage": "cold-04 preparation",
+      "outcome": "first serial reconfiguration refused while previous GUI session unlocked; retry after powered-off state succeeded"
+    },
+    {
+      "stage": "cold-06 Escape observer",
+      "outcome": "reserved PowerShell Input variable prevented injection; completed no-input duration run retained; corrected TrialInputMode used in cold-07"
+    }
+  ],
+  "limits": [
+    "Firmware image fingerprint/source binding unavailable under no-extraction boundary.",
+    "Controller self-test completed in successful path; A20/machine-state preservation not independently instrumented.",
+    "Owned serial output exported; RAM diagnostic headers and exception delivery not independently inspected.",
+    "VM file capture does not establish physical UART clock/baud/electrical conformance.",
+    "No historical Macintosh behavior, physical hardware, Mac/mini vMac or complete OS-edition acceptance."
+  ],
+  "preparation_commands": [
+    {
+      "step": 1,
+      "utc": "2026-10-08T22:46:35.4024322Z",
+      "argv": [
+        "--version"
+      ],
+      "exit": 0,
+      "private_output_sha256": "a3eef6f3d52ac9ed7edcbcab3dba700cca5160445c68012361144cd7b7633c06",
+      "output_retention": "file-hash"
+    },
+    {
+      "step": 2,
+      "utc": "2026-10-08T22:46:35.7765817Z",
+      "argv": [
+        "list",
+        "vms"
+      ],
+      "exit": 0,
+      "private_output_sha256": "40ae47568d4badec1fad46f9dc4fc8af98eecaf11252513900b864813dd34ed2",
+      "output_retention": "file-hash"
+    },
+    {
+      "step": 3,
+      "utc": "2026-10-08T22:46:35.9852114Z",
+      "argv": [
+        "convertfromraw",
+        "<BUILD>\\media\\clang-hosted-debug-a.img",
+        "<TRIAL>\\classick-097.vdi",
+        "--format",
+        "VDI",
+        "--variant",
+        "Fixed",
+        "--uuid",
+        "<OWN-MEDIUM-UUID>"
+      ],
+      "exit": 0,
+      "private_output_sha256": "2387be9e1f02c6384effb4580307ac9869fc766bf1e86b9a28cebe262d4cd944",
+      "output_retention": "file-hash"
+    },
+    {
+      "step": 4,
+      "utc": "2026-10-08T22:46:36.0874167Z",
+      "argv": [
+        "clonemedium",
+        "disk",
+        "<TRIAL>\\classick-097.vdi",
+        "<TRIAL>\\roundtrip.img",
+        "--format",
+        "RAW"
+      ],
+      "exit": 0,
+      "private_output_sha256": "77c9130ddf6da484c727b70d1297546fbe8d8e18e40766cb5883c1411b05d4ef",
+      "output_retention": "file-hash"
+    },
+    {
+      "step": 5,
+      "utc": "2026-10-08T22:46:36.2326896Z",
+      "argv": [
+        "createvm",
+        "--name",
+        "<OWN-VM-NAME>",
+        "--platform-architecture",
+        "x86",
+        "--ostype",
+        "Other_64",
+        "--basefolder",
+        "<TRIAL>",
+        "--uuid",
+        "<OWN-VM-UUID>",
+        "--register"
+      ],
+      "exit": 0,
+      "private_output_sha256": "311ebe721c15728190d0a9d66875e10f1dbbe6a37fc8a507a87da2c7aa5447cd",
+      "output_retention": "file-hash"
+    },
+    {
+      "step": 6,
+      "utc": "2026-10-08T22:46:36.2881416Z",
+      "argv": [
+        "modifyvm",
+        "<OWN-VM-UUID>",
+        "--firmware",
+        "efi64",
+        "--cpus",
+        "1",
+        "--memory",
+        "512",
+        "--chipset",
+        "piix3",
+        "--acpi",
+        "on",
+        "--ioapic",
+        "on",
+        "--graphicscontroller",
+        "vboxvga",
+        "--vram",
+        "16",
+        "--accelerate-3d",
+        "off",
+        "--monitor-count",
+        "1",
+        "--mouse",
+        "ps2",
+        "--keyboard",
+        "ps2",
+        "--hwvirtex",
+        "on",
+        "--nested-hw-virt",
+        "off",
+        "--paravirt-provider",
+        "none",
+        "--boot1",
+        "disk",
+        "--boot2",
+        "none",
+        "--boot3",
+        "none",
+        "--boot4",
+        "none",
+        "--audio-enabled",
+        "off",
+        "--audio-in",
+        "off",
+        "--audio-out",
+        "off",
+        "--usb-ohci",
+        "off",
+        "--usb-ehci",
+        "off",
+        "--usb-xhci",
+        "off",
+        "--clipboard-mode",
+        "disabled",
+        "--clipboard-file-transfers",
+        "disabled",
+        "--drag-and-drop",
+        "disabled",
+        "--vrde",
+        "off",
+        "--uart1",
+        "0x3F8",
+        "4",
+        "--uart-type1",
+        "16550A",
+        "--uart-mode1",
+        "file",
+        "<TRIAL>\\cold-01-serial.txt",
+        "--uart2",
+        "off",
+        "--uart3",
+        "off",
+        "--uart4",
+        "off",
+        "--nic1",
+        "none",
+        "--nic2",
+        "none",
+        "--nic3",
+        "none",
+        "--nic4",
+        "none",
+        "--nic5",
+        "none",
+        "--nic6",
+        "none",
+        "--nic7",
+        "none",
+        "--nic8",
+        "none"
+      ],
+      "exit": 0,
+      "private_output_sha256": null,
+      "output_retention": "successful-command-produced-no-output; original pipeline created no file"
+    },
+    {
+      "step": 7,
+      "utc": "2026-10-08T22:46:36.3489908Z",
+      "argv": [
+        "modifynvram",
+        "<OWN-VM-UUID>",
+        "inituefivarstore"
+      ],
+      "exit": 0,
+      "private_output_sha256": null,
+      "output_retention": "successful-command-produced-no-output; original pipeline created no file"
+    },
+    {
+      "step": 8,
+      "utc": "2026-10-08T22:46:36.4046723Z",
+      "argv": [
+        "modifynvram",
+        "<OWN-VM-UUID>",
+        "secureboot",
+        "--disable"
+      ],
+      "exit": 1,
+      "private_output_sha256": "4d90662c09df1af6c51c7f22cfdeaee03f6e3a09389819e889341fad3d8a1da9",
+      "output_retention": "file-hash"
+    },
+    {
+      "step": 9,
+      "utc": "2026-10-08T22:47:41.8539315Z",
+      "argv": [
+        "showvminfo",
+        "<OWN-VM-UUID>",
+        "--machinereadable"
+      ],
+      "exit": 0,
+      "private_output_sha256": "38d5712222e50695496ec9e62bd8c04eab4dd8a89a5447c5303aa952c1b1f1f4",
+      "output_retention": "file-hash"
+    },
+    {
+      "step": 10,
+      "utc": "2026-10-08T22:47:41.9425683Z",
+      "argv": [
+        "storagectl",
+        "<OWN-VM-UUID>",
+        "--name",
+        "ClasSICK-SATA",
+        "--add",
+        "sata",
+        "--controller",
+        "IntelAhci",
+        "--portcount",
+        "1",
+        "--hostiocache",
+        "off",
+        "--bootable",
+        "on"
+      ],
+      "exit": 0,
+      "private_output_sha256": null,
+      "output_retention": "successful-command-produced-no-output; original pipeline created no file"
+    },
+    {
+      "step": 11,
+      "utc": "2026-10-08T22:47:42.0020579Z",
+      "argv": [
+        "storageattach",
+        "<OWN-VM-UUID>",
+        "--storagectl",
+        "ClasSICK-SATA",
+        "--port",
+        "0",
+        "--device",
+        "0",
+        "--type",
+        "hdd",
+        "--medium",
+        "<TRIAL>\\classick-097.vdi"
+      ],
+      "exit": 0,
+      "private_output_sha256": null,
+      "output_retention": "successful-command-produced-no-output; original pipeline created no file"
+    },
+    {
+      "step": 12,
+      "utc": "2026-10-08T22:47:42.0633978Z",
+      "argv": [
+        "showvminfo",
+        "<OWN-VM-UUID>",
+        "--machinereadable"
+      ],
+      "exit": 0,
+      "private_output_sha256": "6659a10b00cb3e323c9e301db1e776f514d98c23608dbd3db5fcfac86c267afd",
+      "output_retention": "file-hash"
+    },
+    {
+      "step": 13,
+      "utc": "2026-10-08T22:47:42.1145406Z",
+      "argv": [
+        "list",
+        "vms"
+      ],
+      "exit": 0,
+      "private_output_sha256": "2b1c97f11cd3c90bda3812f7ac12b3cfa0fb64f5343d1c18aa568c3e1e4ed2dc",
+      "output_retention": "file-hash"
+    }
+  ],
+  "preparation_command_log_sha256": "b88522a6e694f4ad7a8a11f96e4d42f3928958442ff2bf475e09b8974e1cf1b6",
+  "local_observer_sha256": "24b198c7f2bdd83c77500beb8a962f88d240c8e1ad31cc54324c93b91718016d"
+}

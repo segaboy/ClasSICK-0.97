@@ -3,6 +3,13 @@
 Read `docs/clean-room/POLICY.md`, `CONTRIBUTING.md`, and
 `provenance/README.md` before researching or changing this project.
 
+- On 2026-10-08 the owner returned leadership through the boot-media handoff
+  and explicitly answered "Yes—prepare and run the isolated trial" (SRC-0060).
+  SPEC-0015 covers a fresh isolated VirtualBox machine, owned SPEC-0014 media,
+  black-box observation/repeated cold starts and ordinary publication/HQ Git
+  planning. SRC-0059's no-firmware-internals boundary persists. Existing VMs,
+  physical disks, delegation, new chats, automation and OneNote remain excluded.
+
 - On 2026-10-08 the owner said "ok, do it." to the media and documents-only
   firmware tracks (SRC-0056). Claude leads this work; ordinary spec/code/tests,
   provenance, commits/pushes and HQ registration. The owner accepted Microsoft's

@@ -1,11 +1,12 @@
 # Milestone roadmap
 
-Current component checkpoint: SPEC-0014 original GPT/FAT32 boot media packages
-the audited loader reproducibly and passes independent checks; it has not been
-read by firmware. VirtualBox EFI is cleared as a black-box test platform only
-(SRC-0059). Next, with the owner's go-ahead: an isolated VM configuration, image
-attachment, machine qualification, then observed B2 cold starts. Macintosh replacement startup and
-mini vMac validation remain later independent milestones.
+Current checkpoint: SPEC-0015 records first native execution of the unchanged
+image in the owner's approved isolated VirtualBox configuration. Repeated cold
+starts show the original scene, approximately 60-second progress and serial
+completion; owner-confirmed Space input works. Formal B2 is partial pending
+exact firmware image identity and explicit machine-state qualification. See
+[the trial evidence](development/vm-trial-evidence.md). Macintosh replacement
+startup, 128K feasibility and real Mac/mini vMac remain independent milestones.
 
 Status: dated 2026-10-08; dependency-driven gates, not calendar promises.
 Milestone numbers retain the founding brief's labels; they are not a strict
@@ -48,11 +49,13 @@ the project license. Record any future license change through owner approval/ADR
    [PC ownership/device profile](development/native-pc-profile.md) now has an
    original [SPEC-0007 loader/stop scaffold](development/uefi-loader-evidence.md)
    with hosted calls and unloaded EFI inspection. The actual x64 producer is
-   identified; selected firmware provenance remains unresolved before launch.
+   identified; selected firmware provenance remains uncertified. SRC-0059 later
+   cleared only black-box test use, and SRC-0060 authorized SPEC-0015's trial.
    [Owned exception tables/scaffold](development/x64-exception-evidence.md) now
    pass hosted byte tests and unloaded install/vector/fault-path audits.
-   Formatted boot media, actual exception delivery, reviewed device leaves and real
-   handoff/stack execution remain required. B2 is unverified; follow
+   Boot media and observed native scene/timing/input are now recorded. Actual
+   exception delivery and remaining machine-state/identity qualification remain
+   open. Formal B2 is partial; follow
    [the boot graph](architecture/boot.md).
 5. In parallel only when explicitly staffed, pursue historical-source eligibility,
    Macintosh hardware budget, resource-fork/MFS specs, and trap ABI contracts.

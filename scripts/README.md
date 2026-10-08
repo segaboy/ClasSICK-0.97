@@ -76,3 +76,14 @@ the audited O2 payload with all nine hosted writer builds and requires one image
 hash, then runs `Test-BootMedia.ps1`, three tool refusals and 30 corruption
 controls. `Test-BootMedia.ps1 -Image <img> -Payload <efi>` is the independent
 SPEC-0014 checker. Neither script attaches, writes or boots the image.
+
+`Prepare-VMTrial.ps1 -VBoxManage <installed-exe> -BuildRoot <verified-root>
+-TrialRoot <fresh-root> -VMName ClasSICK-097-B2-<unique-suffix> -OwnerApproved`
+implements SPEC-0015 preparation only. Use the switch only after explicit owner
+approval. It checks media identities, converts to a fixed VDI and back, creates
+one fresh project machine, records public management results and checks the
+inventory. Review the retained configuration before a separate launch; this
+script never starts or deletes a VM. The first recorded trial resumed manually
+after the missing-PK refusal; that history is preserved in TEST-0022. See the
+[trial evidence](../docs/development/vm-trial-evidence.md) for observations and
+the limits of formal B2 acceptance.

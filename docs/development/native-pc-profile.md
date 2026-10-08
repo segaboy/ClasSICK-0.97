@@ -1,16 +1,16 @@
 # First native-PC profile and ownership contract
 
-Date 2026-10-08. ADR-0010 / SPEC-0006; loader ADR-0011 / SPEC-0007. This is a
-proposed native test profile. Original preboot validation and hosted loader calls
-pass; our own EFI entry/stack/stop image is linked and inspected, never loaded.
-SPEC-0008 adds owned descriptor/terminal-fault scaffolding with hosted byte tests
-and unloaded image audits. No VM/native boot exists; actual descriptor/fault
-execution, profile/mapping qualification and device work remain required.
+Date 2026-10-08. ADR-0010 / SPEC-0006; loader ADR-0011 / SPEC-0007. The
+proposed profile was instantiated in SPEC-0015 after owner approval. Our unchanged
+image now executes with observed original scene, timer progress, UART diagnostics
+and live Space input. [Trial evidence](vm-trial-evidence.md) records settings,
+repeat cold starts and limits. Formal B2 is partial; exact firmware image identity,
+explicit A20/machine-state preservation and actual exception delivery remain open.
 
-[The 2026-10-08 readiness audit](boot-readiness-audit.md) confirms current
-artifact integrity, including the payload copy. It records NO-GO for launch:
-the payload remains a directory tree, firmware eligibility remains needs-review,
-and this configuration/devices are unqualified. No native boot is observed.
+[The readiness audit](boot-readiness-audit.md) is retained as the earlier NO-GO
+history, superseded for media, black-box platform clearance and observed execution.
+The ownership requirements below still govern the implementation; earlier
+hosted-only descriptions record the evidence available when those leaves landed.
 
 | Item | Proposed first configuration / required evidence |
 | --- | --- |
@@ -79,7 +79,8 @@ SPEC-0012 implements the scoped two-key polling contract with eligible
 manufacturer documentation. Require FADT revision >=3 with the 8042 bit set,
 PS/2-mode semantics, no translation/interrupts or USB/SMM interference, released
 keys during startup, and controller self-test that preserves A20/machine state.
-These are unverified machine qualification prerequisites. The interactive loop
+The successful trial accepted self-test and input; A20/machine-state preservation
+remains an uninstrumented qualification prerequisite. The interactive loop
 uses an eight-record arena FIFO and 112-byte trace at offset 128; only READY
 starts its 60-second duration. Escape is an early stop, not acceptance.
 
@@ -117,13 +118,13 @@ declarations; [the follow-up](firmware-eligibility.md) retains binary correspond
 and transitive derivation/notice closure as needs-review. No external EFI binary adopted.
 The observed VBoxDD2.dll hash is an installed file fingerprint, not a firmware hash.
 
-VBoxManage's version query works. Its modifyvm help request failed local COM setup
-with E_ACCESSDENIED before displaying help; no VM/configuration was examined or
-changed. Resolve service availability in the isolated project environment before
-future configuration. This is a local tool limitation, not an auto-review rejection.
+The earlier modifyvm help request failed COM setup with E_ACCESSDENIED. The
+approved SPEC-0015 management session works and records an isolated configuration;
+that historical denial was a local tool limitation, not an auto-review rejection.
 
-Next: resolve the exact firmware eligibility/identity, format reviewed boot media,
-validate owned exception execution and implement reviewed device leaves, then run B2
-with repeated cold-start traces and original-scene capture. Macintosh replacement
+Next: review remaining firmware identity and machine-state qualification within
+the owner's black-box boundary; exception delivery remains separate. Native
+runtime, repeated cold-start serial and original-scene captures now exist under
+SPEC-0015. Macintosh replacement
 firmware/mini vMac and physical hardware remain independent targets; all three
 OS edition boots and historical parity remain open.

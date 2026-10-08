@@ -16,13 +16,17 @@ planned target, not the definition of the portable OS.
 
 ## Current state
 
-The original [x64 UEFI loader](docs/development/uefi-loader-evidence.md) now passes
-hosted firmware-call tests and produces an inspected EFI file with an owned stack
-and terminal stop scaffold. [Owned x64 exception state](docs/development/x64-exception-evidence.md)
-now passes hosted table tests and unloaded install/fault-path inspection. No native
-boot has been observed. Firmware provenance, actual fault delivery and device
-drivers remain open; real Macintosh/mini vMac is still
-the intended independent Mac boot path.
+The unchanged original image now starts in an isolated VirtualBox EFI64 machine,
+draws its own scene, completes the native 60-second loop and reports serial
+diagnostics. The owner confirmed two live Space presses and visible scene changes;
+synthetic Escape stops early. [First VM evidence](docs/development/vm-trial-evidence.md)
+records repeated cold starts and retained failures. Formal B2 qualification is
+partial: exact firmware image identity and explicit machine-state qualification
+remain incomplete. No full OS edition or historical compatibility is certified.
+Real Macintosh/mini vMac with independent replacement startup remains required.
+
+The component summaries below describe their named historical checkpoints;
+the VM snapshot supersedes earlier statements that nothing had executed natively.
 
 Project bootstrap began on **2026-10-07**. The first subsystem now implements
 [SPEC-0001 bounded graphics surfaces](docs/specifications/SPEC-0001-surfaces.md):

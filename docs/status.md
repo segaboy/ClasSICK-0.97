@@ -1,6 +1,6 @@
 # Project status
 
-Date: 2026-10-08. Current phase: **B1/M0.1 hosted start verified; B2 components in progress, native boots pending**.
+Date: 2026-10-08. Current phase: **B1/M0.1 verified; first native-PC VM runtime/input observed, formal B2 partial**.
 M0.0 technical bootstrap remains verified. The owner explicitly authorized the
 first bounded graphics subsystem in the project implementation chat on this date.
 SPEC-0001 v1 is finalized, implemented and tested under IMPL-0002 / TEST-0004.
@@ -8,13 +8,26 @@ The owner authorized the next visible checkpoint. SPEC-0002 v1 adds a native
 Windows original-scene viewer under IMPL-0003 / TEST-0005.
 The owner reaffirmed real Macintosh/mini vMac booting and instructed continuation.
 SPEC-0003 v1 adds bounded core arenas and viewer buffers under IMPL-0004 / TEST-0006.
-GPL-3.0-or-later remains approved. No OS boot or historical compatibility verified.
+GPL-3.0-or-later remains approved. No full OS edition or historical compatibility verified.
 
 The owner's broader project bootstrap continues in a separate headquarters
 documentation/evidence repository and personal project wiki. This technical gate
 does not imply that the complete project foundation or any OS boot is finished.
 
 ## Achieved
+
+- SPEC-0015 / ADR-0019 / IMPL-0019 / TEST-0022 records the owner's approved
+  isolated VirtualBox trial of the unchanged image. Six uninterrupted cold starts
+  reach guest second 60 and success; the owner confirmed two live Space presses
+  and scene changes. A separate synthetic Escape run ends early as expected.
+  Host timing agrees with approximately 60 seconds; original scene/serial/configuration
+  evidence and observer/preparation failures are retained. The fresh full Windows
+  chain passes 846 CTest checks in nine configurations. [Snapshot](development/vm-trial-evidence.md).
+  Formal B2 remains partial because exact firmware image identity and explicit
+  self-test/machine-state qualification are incomplete. Human review pending.
+
+Earlier entries below are dated milestone evidence. Their no-native-execution
+statements describe those earlier checkpoints and are superseded by SPEC-0015.
 
 - SPEC-0014 / ADR-0018 / IMPL-0018 / TEST-0021 packages the audited O2 loader in
   an original 64-MiB GPT image with one FAT32 EFI System Partition holding only
@@ -259,14 +272,12 @@ does not imply that the complete project foundation or any OS boot is finished.
 - Exact historical profile and 1984-applicable behavioral sources.
 - Macintosh 128K native feasibility, hardware startup and size budgets.
 - WOW64 debugger support, other sanitizer targets, m68k toolchain/runtime and boot.
-- Next (with the owner's go-ahead): isolated VM configuration, image attachment
-  and machine qualification on the black-box VirtualBox platform. Boot media is
-  generated and checked but unread by any firmware (SPEC-0014). Presenter, PM
-  timer, loop, two-key keyboard and UART diagnostics have only hosted/unloaded
-  evidence (SPEC-0009–0013).
-  Loader/entry/stack/exception scaffolds are built and inspected; real handoff,
-  descriptor installation/fault injection and B2 remain unverified. B1 stays a
-  Windows development start.
+- Next: review the remaining formal B2 qualification gaps against SRC-0059's
+  black-box boundary. The image now executes natively in the VM, with observed
+  progress, serial and owner-operated Space input. Exact firmware image identity,
+  explicit A20/machine-state preservation and actual exception delivery remain
+  unverified. No extraction or further driver implementation is authorized by
+  the trial report. B1 stays a separate Windows development start.
 - Three bootable editions remain separately not-started: original Macintosh,
   native PC without Linux, Linux PC. Historical identity/QuickDraw and edition
   parity remain unverified; no Linux divergence has been introduced.

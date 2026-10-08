@@ -28,6 +28,7 @@ evidence; foundational project constraints cannot be silently relaxed.
 | [ADR-0016](0016-polling-ps2-keyboard.md) | Bounded untranslated set-2 polling keyboard and interactive successor loop | Accepted for development verification |
 | [ADR-0017](0017-bounded-uart-diagnostics.md) | Bounded polling UART and retained native keyboard diagnostics | Accepted for development verification |
 | [ADR-0018](0018-fixed-profile-boot-media.md) | Original fixed-profile GPT/FAT32 boot media | Accepted for development verification |
+| [ADR-0019](0019-isolated-black-box-vm-trial.md) | Isolated own-image VM configuration and retained cold-start observations | Accepted scoped trial; B2 qualification partial |
 
 Use [the template](template.md). Every substantive decision cites founding
 requirements or approved sources, distinguishes design from historical fact,

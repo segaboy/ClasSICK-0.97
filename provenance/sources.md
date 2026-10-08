@@ -5,6 +5,51 @@ eligibility applies to the stated scope, not every resource reachable from a URL
 No Apple executable, source, disassembly, decompilation, or copied asset was used.
 No reference-system black-box observation has yet been performed.
 
+## SRC-0060 — Owner's first isolated VM trial go-ahead
+
+- Owner, 2026-10-08, responding to the explicit trial question:
+  "Yes—prepare and run the isolated trial".
+- Authorizes a reviewed isolated VM configuration and recorded owned-media attach
+  procedure, first black-box execution/qualification, timing/input/serial/screen
+  evidence, repeat cold starts and ordinary project publication/HQ Git planning.
+- SRC-0059 conditions persist. No firmware extraction/study, Apple material,
+  existing-VM modification, physical disk writing, delegation, new chats,
+  automation or live OneNote. Macintosh/mini vMac and three-edition goals persist.
+- OpenAI Codex (GPT-6) resumes implementation leadership from the owner's Claude
+  continuation prompt. Requirement only; not evidence of a boot or compatibility.
+- The owner then accepted a live VM keyboard test and confirmed cold-04:
+  “I tapped Space twice and saw the scene change.” This is scoped operator
+  observation, corroborated by our own Space counter, not historical parity.
+
+## SRC-0062 — Project-owned native VM observation artifacts
+
+- Own unchanged SPEC-0014 disk and SPEC-0013 native image observed 2026-10-08
+  under SPEC-0015 / TEST-0022; [sanitized evidence](../docs/development/vm-trial-evidence.md).
+- Six uninterrupted cold starts reach the native 60-second endpoint; a separate
+  synthetic Escape trial checks early stop. cold-04 has owner-confirmed live
+  Space input. Local original-scene captures and own serial/host-clock records
+  are retained with hashes; only own text and sanitized metadata are published.
+- Original project output, GPL-3.0-or-later. No protected reference system,
+  firmware pixels/internals, implementation input or Apple material. Formal B2
+  qualification and human provenance review remain incomplete; no edition,
+  physical hardware or historical Macintosh compatibility claim.
+
+## SRC-0061 — Installed VirtualBox public management interface
+
+- Oracle VirtualBox 7.2.16r174877 public VBoxManage usage observed 2026-10-08,
+  scoped createvm, modifyvm, modifynvram Secure Boot configuration, convertfromraw,
+  clonemedium, storagectl/storageattach, showvminfo, startvm/controlvm screen,
+  scan-code input and power-off operations. Reuses SRC-0035's exact publisher
+  [manual](https://download.virtualbox.org/virtualbox/7.2.16/UserManual.pdf),
+  sections 15.7, 15.12/15.13, 15.15, 15.34/15.35, 15.44, 15.47–15.49; used locators and
+  executable/usage hashes are retained with TEST-0022.
+- Only public command contracts and existing primary manual text are reviewed.
+  No tool/firmware/device implementation body, dump or external driver code.
+  Native machine behavior is not inferred from help text or model names.
+- Earlier COM access denial did not recur in the approved management session.
+  Unsupported subcommand `--help` probes returned usage with nonzero exits;
+  they are retained as discovery attempts, not successful trial commands.
+
 ## SRC-0059 — Owner's firmware test-platform decision
 
 - Claude reported the documents-only firmware result on 2026-10-08: no permitted
