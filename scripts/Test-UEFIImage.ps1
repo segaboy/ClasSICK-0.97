@@ -75,7 +75,9 @@ if($mapText -match '(?i)\.(a|lib|dll)(?=[\s)\r\n]|$)'){throw 'Runtime library in
 $names=@('cs_uefi_check_framebuffer','cs_uefi_check_map','cs_uefi_check_owned','cs_uefi_exit_init',
     'cs_uefi_exit_snapshot','cs_uefi_exit_observe','cs_uefi_exit_allowed','cs_uefi_table_crc',
     'cs_uefi_image_spans','cs_uefi_loader_run','cs_uefi_entry','cs_native_stop','cs_x64_enter','cs_native_halt','cs_entry_anchor',
-    'cs_x64_tables_init','cs_x64_install','cs_x64_reload','cs_x64_vector_base','cs_x64_vector_end','cs_x64_fault','cs_x64_active_state')
+    'cs_x64_tables_init','cs_x64_install','cs_x64_reload','cs_x64_vector_base','cs_x64_vector_end','cs_x64_fault','cs_x64_active_state',
+    'cs_surface_init','cs_surface_fill','cs_surface_clear','cs_arena_init','cs_arena_alloc','cs_arena_reset',
+    'cs_fb_init','cs_fb_present','cs_scene_render','cs_boot_scene_prepare','cs_boot_scene_draw','cs_native_present')
 $symbols=@{}
 foreach($name in $names) {
     $matches=[regex]::Matches($mapText,'(?m)^([0-9a-fA-F]+)\s+[0-9a-fA-F]+\s+\d+\s+'+$name+'\s*$')

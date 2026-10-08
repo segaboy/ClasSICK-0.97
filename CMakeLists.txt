@@ -53,6 +53,73 @@ if(BUILD_TESTING)
     endif()
 endif()
 
+# SPEC-0009 native framebuffer presenter and original boot scene: portable C,
+# hosted on both widths. Volatile byte stores; no device access in hosted tests.
+add_library(classick_pc_framebuffer STATIC platform/pc/framebuffer.c)
+# Existing core libraries are defined below; target names resolve at generation.
+target_link_libraries(classick_pc_framebuffer PUBLIC classick_surfaces)
+add_library(classick_pc_framebuffer_freestanding OBJECT platform/pc/framebuffer.c)
+add_executable(classick_native_framebuffer_tests tests/native-framebuffer.c)
+target_link_libraries(classick_native_framebuffer_tests PRIVATE classick_pc_framebuffer)
+add_library(classick_boot_scene STATIC apps/boot-scene/scene.c)
+target_link_libraries(classick_boot_scene PUBLIC classick_pc_framebuffer classick_arenas)
+add_library(classick_boot_scene_freestanding OBJECT apps/boot-scene/scene.c)
+add_executable(classick_boot_scene_tests tests/boot-scene.c)
+target_link_libraries(classick_boot_scene_tests PRIVATE classick_boot_scene)
+set(CLASSICK_SCENE_TARGETS classick_pc_framebuffer classick_pc_framebuffer_freestanding
+    classick_native_framebuffer_tests classick_boot_scene classick_boot_scene_freestanding
+    classick_boot_scene_tests)
+if(CMAKE_C_COMPILER_ID MATCHES "Clang|GNU")
+    foreach(target ${CLASSICK_SCENE_TARGETS})
+        target_compile_options(${target} PRIVATE -Wall -Wextra -Wpedantic -Werror
+            -Wconversion -Wsign-conversion "-ffile-prefix-map=${CMAKE_SOURCE_DIR}=."
+            "-ffile-prefix-map=${CMAKE_BINARY_DIR}=.")
+    endforeach()
+    foreach(target classick_pc_framebuffer classick_pc_framebuffer_freestanding
+            classick_boot_scene classick_boot_scene_freestanding)
+        target_compile_options(${target} PRIVATE -ffreestanding -fno-builtin -fno-stack-protector)
+    endforeach()
+    target_compile_options(classick_pc_framebuffer_freestanding PRIVATE -O2)
+    target_compile_options(classick_boot_scene_freestanding PRIVATE -O2)
+elseif(MSVC)
+    foreach(target ${CLASSICK_SCENE_TARGETS})
+        target_compile_options(${target} PRIVATE /W4 /WX)
+    endforeach()
+endif()
+if(CLASSICK_SURFACE_SANITIZERS)
+    foreach(target classick_pc_framebuffer classick_native_framebuffer_tests
+            classick_boot_scene classick_boot_scene_tests)
+        target_compile_options(${target} PRIVATE -fsanitize=address,undefined
+            -fno-sanitize-recover=all -fno-omit-frame-pointer)
+    endforeach()
+    target_link_options(classick_native_framebuffer_tests PRIVATE -fsanitize=address,undefined)
+    target_link_options(classick_boot_scene_tests PRIVATE -fsanitize=address,undefined)
+endif()
+if(MINGW)
+    target_link_options(classick_native_framebuffer_tests PRIVATE -Wl,--no-insert-timestamp)
+    target_link_options(classick_boot_scene_tests PRIVATE -Wl,--no-insert-timestamp)
+endif()
+if(BUILD_TESTING)
+    foreach(suite conversion errors independent)
+        add_test(NAME framebuffer.${suite} COMMAND classick_native_framebuffer_tests ${suite})
+    endforeach()
+    foreach(suite oracle bands budget errors)
+        add_test(NAME scene.${suite} COMMAND classick_boot_scene_tests ${suite})
+    endforeach()
+    if(CMAKE_C_COMPILER_ID MATCHES "Clang|GNU")
+        find_program(CLASSICK_SCENE_NM NAMES llvm-nm nm REQUIRED)
+        add_test(NAME framebuffer.freestanding COMMAND ${CMAKE_COMMAND}
+            "-DNM=${CLASSICK_SCENE_NM}" "-DALLOWED=cs_surface_init"
+            "-DOBJECT=$<TARGET_OBJECTS:classick_pc_framebuffer_freestanding>"
+            -P ${CMAKE_SOURCE_DIR}/scripts/Check-ObjectImports.cmake)
+        add_test(NAME scene.freestanding COMMAND ${CMAKE_COMMAND}
+            "-DNM=${CLASSICK_SCENE_NM}"
+            "-DALLOWED=cs_surface_init,cs_surface_fill,cs_arena_alloc,cs_fb_init,cs_fb_present"
+            "-DOBJECT=$<TARGET_OBJECTS:classick_boot_scene_freestanding>"
+            -P ${CMAKE_SOURCE_DIR}/scripts/Check-ObjectImports.cmake)
+    endif()
+endif()
+
 add_library(classick_abi_probe OBJECT tools/toolchain-smoke/abi-probe.c)
 add_executable(classick_toolchain_smoke tools/toolchain-smoke/main.c)
 add_library(classick_surfaces STATIC core/graphics/surface.c)
@@ -128,6 +195,48 @@ if(CMAKE_SIZEOF_VOID_P EQUAL 8 AND CMAKE_SYSTEM_PROCESSOR MATCHES "^(AMD64|amd64
     add_library(classick_uefi_loader_freestanding OBJECT platform/uefi/loader.c)
     add_executable(classick_uefi_loader_tests tests/uefi-loader.c)
     target_link_libraries(classick_uefi_loader_tests PRIVATE classick_uefi_loader)
+    # SPEC-0009 post-handoff gate; the EFI entry only supplies identity pointers.
+    add_library(classick_native_present STATIC platform/uefi/native.c)
+    target_link_libraries(classick_native_present PUBLIC classick_uefi_contract classick_boot_scene)
+    add_library(classick_native_present_freestanding OBJECT platform/uefi/native.c)
+    add_executable(classick_native_present_tests tests/native-present.c)
+    target_link_libraries(classick_native_present_tests PRIVATE classick_native_present)
+    if(CMAKE_C_COMPILER_ID MATCHES "Clang|GNU")
+        foreach(target classick_native_present classick_native_present_freestanding classick_native_present_tests)
+            target_compile_options(${target} PRIVATE -Wall -Wextra -Wpedantic -Werror -Wconversion -Wsign-conversion
+                "-ffile-prefix-map=${CMAKE_SOURCE_DIR}=." "-ffile-prefix-map=${CMAKE_BINARY_DIR}=.")
+        endforeach()
+        foreach(target classick_native_present classick_native_present_freestanding)
+            target_compile_options(${target} PRIVATE -ffreestanding -fno-builtin -fno-stack-protector)
+        endforeach()
+        target_compile_options(classick_native_present_freestanding PRIVATE -O2)
+    elseif(MSVC)
+        foreach(target classick_native_present classick_native_present_freestanding classick_native_present_tests)
+            target_compile_options(${target} PRIVATE /W4 /WX)
+        endforeach()
+    endif()
+    if(CLASSICK_SURFACE_SANITIZERS)
+        foreach(target classick_native_present classick_native_present_tests)
+            target_compile_options(${target} PRIVATE -fsanitize=address,undefined -fno-sanitize-recover=all -fno-omit-frame-pointer)
+        endforeach()
+        target_link_options(classick_native_present_tests PRIVATE -fsanitize=address,undefined)
+    endif()
+    if(MINGW)
+        target_link_options(classick_native_present_tests PRIVATE -Wl,--no-insert-timestamp)
+    endif()
+    if(BUILD_TESTING)
+        foreach(suite gating rejection presentation)
+            add_test(NAME native.${suite} COMMAND classick_native_present_tests ${suite})
+        endforeach()
+        if(CMAKE_C_COMPILER_ID MATCHES "Clang|GNU")
+            find_program(CLASSICK_NATIVE_NM NAMES llvm-nm nm REQUIRED)
+            add_test(NAME native.freestanding COMMAND ${CMAKE_COMMAND}
+                "-DNM=${CLASSICK_NATIVE_NM}"
+                "-DALLOWED=cs_uefi_check_framebuffer,cs_fb_init,cs_arena_init,cs_boot_scene_prepare,cs_boot_scene_draw"
+                "-DOBJECT=$<TARGET_OBJECTS:classick_native_present_freestanding>"
+                -P ${CMAKE_SOURCE_DIR}/scripts/Check-ObjectImports.cmake)
+        endif()
+    endif()
     if(CMAKE_C_COMPILER_ID MATCHES "Clang|GNU")
         foreach(target classick_uefi_loader classick_uefi_loader_freestanding classick_uefi_loader_tests)
             target_compile_options(${target} PRIVATE -Wall -Wextra -Wpedantic -Werror -Wconversion -Wsign-conversion

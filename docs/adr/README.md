@@ -21,6 +21,8 @@ evidence; foundational project constraints cannot be silently relaxed.
 | [ADR-0009](0009-core-link-and-second-compiler.md) | Current-core complete no-runtime links and scoped GCC conformance | Accepted for development verification |
 | [ADR-0010](0010-uefi-preboot-contracts.md) | Original preboot data/exit model; proposed native-PC ownership/device profile | Accepted contract; firmware/profile needs review |
 | [ADR-0011](0011-original-uefi-loader.md) | Original x64 loader calls and owned stop scaffold; inspected EFI packaging | Accepted for development verification |
+| [ADR-0012](0012-owned-x64-exceptions.md) | Owned x64 descriptor bytes, emergency stacks and terminal first-fault capture | Accepted for development verification |
+| [ADR-0013](0013-native-framebuffer-presentation.md) | Gated native framebuffer presenter, bounded band staging and original boot scene | Accepted for development verification |
 
 Use [the template](template.md). Every substantive decision cites founding
 requirements or approved sources, distinguishes design from historical fact,

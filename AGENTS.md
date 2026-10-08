@@ -79,6 +79,14 @@ Read `docs/clean-room/POLICY.md`, `CONTRIBUTING.md`, and
   tests and normal evidence/Git wiki publication. Exact firmware eligibility and
   observed native execution remain prerequisites to boot claims; no provenance
   waiver, live OneNote instruction, delegation or change to Macintosh goals.
+- The owner handed implementation leadership to Claude on 2026-10-08 (SRC-0044),
+  authorizing the missing B2 boot components, their specifications, code, tests,
+  provenance, documentation, commits and pushes, then answered the verification
+  approach with "Do whatever you feel is best". SPEC-0009 / ADR-0013 / IMPL-0013 /
+  TEST-0015 add original native framebuffer presentation and a boot scene, with
+  hosted tests and unloaded EFI linkage. Develop in the lead's Linux workspace if
+  useful, but run evidence gates with the pinned Windows tools. No firmware waiver,
+  delegation, live OneNote instruction or change to the Macintosh goals.
 - Use `C:\Repos\ClasSICK-0.97` for source and `C:\ClasSICK` for local build/test
   output on the founding workstation. Do not depend on those paths in core code.
 - Do not create specialist chats or delegate work merely because the roadmap

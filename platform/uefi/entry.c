@@ -1,6 +1,6 @@
 /* SPDX-License-Identifier: GPL-3.0-or-later */
 /* Copyright (C) 2026 Dean Howell. */
-#include "loader.h"
+#include "native.h"
 #include "../pc/x64/state.h"
 typedef void (CS_EFIAPI *cs_native_transfer)(cs_uefi_handoff *,uint64_t);
 extern cs_native_transfer const volatile cs_entry_anchor;
@@ -19,6 +19,11 @@ void CS_EFIAPI cs_native_stop(cs_uefi_handoff *handoff)
         layout.ist_top[i]=handoff->bundle_base+CS_LOADER_FAULT_OFFSET+(i+1)*UINT64_C(4096);
     if(cs_x64_tables_init((void *)(uintptr_t)layout.state_base,CS_X64_STATE_BYTES,&layout)==CS_X64_OK)
         cs_x64_install((void *)(uintptr_t)layout.state_base);
+    /* SPEC-0009: presentation itself rechecks successful exit and the ready marker. */
+    volatile uint32_t *ready=(volatile uint32_t *)(uintptr_t)(layout.state_base+CS_X64_READY);
+    (void)cs_native_present(handoff,*ready,
+        (volatile unsigned char *)(uintptr_t)handoff->framebuffer.base,
+        (void *)(uintptr_t)handoff->arena_base,(unsigned char *)(uintptr_t)handoff->trace_base);
     cs_native_halt();
 }
 cs_efi_status CS_EFIAPI cs_uefi_entry(void *image,cs_efi_system *system)

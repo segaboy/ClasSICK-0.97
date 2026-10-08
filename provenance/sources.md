@@ -5,6 +5,24 @@ eligibility applies to the stated scope, not every resource reachable from a URL
 No Apple executable, source, disassembly, decompilation, or copied asset was used.
 No reference-system black-box observation has yet been performed.
 
+## SRC-0044 — Owner's Claude implementation-lead handoff
+
+- Owner, 2026-10-08: a written handoff that made Claude (Anthropic) the 0.97
+  implementation lead from the verified state at 2bceffc / HQ 2e160cc. It
+  authorizes continuing the missing B2 boot components, specifications,
+  implementation, tests, provenance, documentation, commits and pushes. It
+  recommends native framebuffer presentation and an original post-handoff scene
+  next. Later the same day, after the lead proposed Linux-VM development checks
+  plus pinned Windows gates, the owner said "Do whatever you feel is best".
+- Requirement only; no firmware provenance waiver, delegation, live OneNote
+  instruction, historical identity or completed edition. Existing scope, policies
+  and Macintosh/mini vMac goals preserved.
+- SPEC-0009 reuses SRC-0034's reviewed UEFI 12.9.2 GOP pixel-format and
+  pixels-per-scanline declarations. On 2026-10-08 the lead tried to re-open the
+  publisher PDF (agent proxy 403) and the HTML chapter (fetched text truncated
+  before 12.9). No newer UEFI text was reviewed. A web search listed third-party
+  GOP header titles, which were not opened or used.
+
 ## SRC-0042 — Owner's independent PC-boot continuation
 
 - Owner, 2026-10-08: "ok, let's do it" following the status explanation of the

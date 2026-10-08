@@ -13,7 +13,13 @@ try {
     $compiler=(Get-Command clang).Source; $nm=(Get-Command llvm-nm).Source
     $reader=(Get-Command llvm-readobj).Source; $disassembler=(Get-Command llvm-objdump).Source
     $sources=@('platform/uefi/contract.c','platform/uefi/loader.c','platform/uefi/entry.c',
-        'platform/uefi/transition.S','platform/pc/x64/state.c','platform/pc/x64/exceptions.S')
+        'platform/uefi/transition.S','platform/pc/x64/state.c','platform/pc/x64/exceptions.S',
+        'core/graphics/surface.c','core/memory/arena.c','platform/pc/framebuffer.c',
+        'apps/boot-scene/scene.c','platform/uefi/native.c')
+    # SPEC-0009 objects permit only these original project imports.
+    $allowedImports=@{8='cs_surface_init';
+        9='cs_surface_init,cs_surface_fill,cs_arena_alloc,cs_fb_init,cs_fb_present';
+        10='cs_uefi_check_framebuffer,cs_fb_init,cs_arena_init,cs_boot_scene_prepare,cs_boot_scene_draw'}
     $common=@('-m64','-Wall','-Wextra','-Wpedantic','-Werror','-Wconversion','-Wsign-conversion',
         '-ffreestanding','-fno-builtin','-fno-stack-protector','-fno-ident','-mno-red-zone','-mgeneral-regs-only',
         '-fno-asynchronous-unwind-tables','-fno-unwind-tables',"-ffile-prefix-map=$repoRoot=.")
@@ -29,10 +35,14 @@ try {
                 if($sources[$i].EndsWith('.S')){& $compiler -m64 -c (Join-Path $repoRoot $sources[$i]) -o $object}
                 else{& $compiler @common -std=c11 "-O$opt" -c (Join-Path $repoRoot $sources[$i]) -o $object}
                 if($LASTEXITCODE -ne 0){throw 'Original EFI compile failed.'}
-                if($i -lt 2 -or $i -eq 4) {
+                if($i -lt 2 -or $i -eq 4 -or $i -eq 6 -or $i -eq 7) {
                     $check=if($i -eq 1){'Check-LoaderObject.cmake'}else{'Check-Freestanding.cmake'}
                     & cmake "-DNM=$nm" "-DOBJECT=$object" -P (Join-Path $PSScriptRoot $check)
                     if($LASTEXITCODE -ne 0){throw 'EFI object boundary failed.'}
+                }
+                if($allowedImports.ContainsKey($i)) {
+                    & cmake "-DNM=$nm" "-DALLOWED=$($allowedImports[$i])" "-DOBJECT=$object" -P (Join-Path $PSScriptRoot 'Check-ObjectImports.cmake')
+                    if($LASTEXITCODE -ne 0){throw 'EFI presenter object boundary failed.'}
                 }
                 $objects += $object
             }
@@ -88,7 +98,7 @@ try {
     $previousPreference=$ErrorActionPreference
     try {
         $ErrorActionPreference='Continue'
-        $missing=@(& $compiler @link $referenceObjects[0] $referenceObjects[1] $referenceObjects[2] $referenceObjects[4] $referenceObjects[5] -o (Join-Path $controls 'must-not-link.EFI') 2>&1)
+        $missing=@(& $compiler @link @($referenceObjects | Where-Object {$_ -ne $referenceObjects[3]}) -o (Join-Path $controls 'must-not-link.EFI') 2>&1)
     } finally{$ErrorActionPreference=$previousPreference}
     if($LASTEXITCODE -eq 0 -or ($missing -join "`n") -notmatch 'cs_native_halt|cs_entry_anchor'){throw 'Missing transition control did not reject.'}
     # This deliberate rejected link is a passing control. GitHub's PowerShell
@@ -97,16 +107,23 @@ try {
     $missing | Out-File -LiteralPath (Join-Path $controls 'missing-transition.log') -Encoding UTF8
     try {
         $ErrorActionPreference='Continue'
-        $missing=@(& $compiler @link $referenceObjects[0] $referenceObjects[1] $referenceObjects[2] $referenceObjects[3] $referenceObjects[4] -o (Join-Path $controls 'must-not-link-exceptions.EFI') 2>&1)
+        $missing=@(& $compiler @link @($referenceObjects | Where-Object {$_ -ne $referenceObjects[5]}) -o (Join-Path $controls 'must-not-link-exceptions.EFI') 2>&1)
     } finally{$ErrorActionPreference=$previousPreference}
     if($LASTEXITCODE -eq 0 -or ($missing -join "`n") -notmatch 'cs_x64_install|cs_x64_vector_base'){throw 'Missing exceptions control did not reject.'}
     $global:LASTEXITCODE=0
     $missing | Out-File -LiteralPath (Join-Path $controls 'missing-exceptions.log') -Encoding UTF8
+    try {
+        $ErrorActionPreference='Continue'
+        $missing=@(& $compiler @link @($referenceObjects | Where-Object {$_ -ne $referenceObjects[8]}) -o (Join-Path $controls 'must-not-link-presenter.EFI') 2>&1)
+    } finally{$ErrorActionPreference=$previousPreference}
+    if($LASTEXITCODE -eq 0 -or ($missing -join "`n") -notmatch 'cs_fb_init|cs_fb_present'){throw 'Missing presenter control did not reject.'}
+    $global:LASTEXITCODE=0
+    $missing | Out-File -LiteralPath (Join-Path $controls 'missing-presenter.log') -Encoding UTF8
     $payload=Join-Path $BuildRoot 'payload/EFI/BOOT'; [void][IO.Directory]::CreateDirectory($payload)
     $packaged=Join-Path $payload 'BOOTX64.EFI'; Copy-Item -LiteralPath $release -Destination $packaged
     if((Get-FileHash -LiteralPath $packaged -Algorithm SHA256).Hash.ToLowerInvariant() -ne $results[1].sha256){throw 'EFI payload copy differs.'}
-    [ordered]@{images=$results;image_rejections=$mutations.Count;missing_transition_controls=1;missing_exceptions_controls=1;
+    [ordered]@{images=$results;image_rejections=$mutations.Count;missing_transition_controls=1;missing_exceptions_controls=1;missing_presenter_controls=1;
         payload='payload/EFI/BOOT/BOOTX64.EFI';payload_kind='directory-tree-not-disk';loaded=$false} |
         ConvertTo-Json -Depth 8 | Set-Content -LiteralPath (Join-Path $BuildRoot 'efi-results.json') -Encoding UTF8
-    Write-Output 'EFI inspection PASS: four twin images, twenty corruption rejections, missing transition/exception rejections and original payload tree; no image executed.'
+    Write-Output 'EFI inspection PASS: four twin images, twenty corruption rejections, missing transition/exception/presenter rejections and original payload tree; no image executed.'
 } finally{$env:PATH=$originalPath}

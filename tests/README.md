@@ -40,3 +40,10 @@ exit-outcome traces. Five behavioral suites and one optimized import/data audit
 raise the current matrix to 43 Clang / 28 scoped GCC checks per configuration.
 Physical addresses are metadata only; no firmware is invoked. See
 [the preboot snapshot](../docs/development/uefi-contract-evidence.md).
+
+`native-framebuffer.c`, `boot-scene.c` and `native-present.c` (TEST-0015) cover
+SPEC-0009. They compare 21,600 guarded placement cases against a per-pixel
+expectation, and the scene against the independent point classifier in
+`scene-oracle.h`. They also check band-partition independence, staging budgets
+and arena exhaustion, the exit/ready gates and the 32-byte trace record. Only
+synthetic buffers are written; no firmware or device is touched.

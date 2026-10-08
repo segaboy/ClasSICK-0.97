@@ -21,6 +21,12 @@ out of public commits.
 - `Verify-X64Exceptions.ps1 -BuildRoot <fresh-directory> -Sanitizers`: full loader
   protocol plus descriptor-byte suites at both widths and new Clang/GCC twins;
   current EFI audits cover owned installation/256 vectors/terminal fault capture.
+- `Verify-NativeFramebuffer.ps1 -BuildRoot <fresh-directory> -Sanitizers`: the
+  complete x64 exception wrapper, plus SPEC-0009 hosted presenter/scene/gate twin
+  hashes and AArch64 LE/BE compile/import audits. The EFI image now links the
+  presenter and must reject an omitted presenter object. No image is executed.
+- `Check-ObjectImports.cmake`: freestanding object audit with an exact list of
+  permitted original project imports and no mutable data.
 - `Verify-UEFIImage.ps1 -BuildRoot <fresh-directory>`: inspection-only Clang x64
   O0/O2 EFI twins, corruption/missing-transition controls and original payload tree.
 - `Test-UEFIImage.ps1`: bounded original EFI section/map/relocation/entry/stack/halt
