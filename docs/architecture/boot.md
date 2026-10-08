@@ -133,6 +133,10 @@ image linkage only. Presentation runs only after a recorded successful exit plus
 ready descriptors; it uses at most 64 KiB of arena staging and never calls GOP Blt.
 [The snapshot](../development/native-framebuffer-evidence.md) pins scope; visible
 native output, timing, keyboard, diagnostics and B2 remain unobserved.
+SPEC-0010 / ADR-0014 adds the owned time source candidate: pre-exit RSDP capture,
+a bounded map-checked ACPI walk, 24/32-bit PM timer extension and a gated probe.
+[The snapshot](../development/pm-timer-evidence.md) pins scope; real timer reads,
+the 60-second loop, keyboard, diagnostics and B2 remain unobserved.
 Exact firmware eligibility, formatted boot media, Secure Boot and external VM/runtime
 rights remain separate work. [The metadata follow-up](../development/firmware-eligibility.md)
 identified the x64 producer and adopted no firmware. B2 remains unachieved.

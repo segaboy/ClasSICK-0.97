@@ -16,6 +16,14 @@ does not imply that the complete project foundation or any OS boot is finished.
 
 ## Achieved
 
+- SPEC-0010 / ADR-0014 / IMPL-0014 / TEST-0016 captures the ACPI 2.0+ RSDP before
+  exit and walks RSDP/XSDT/FADT through a map-type-checked reader. It extends the
+  24/32-bit PM timer and runs a gated native probe recorded in owned trace storage.
+  Pinned [Windows CI 37810609408](https://github.com/segaboy/ClasSICK-0.97/actions/runs/37810609408)
+  passes at 222a837 (one earlier test-only LLP64 failure retained): Clang x64 78/
+  i686 65, GCC x64 63/i686 50. [Snapshot](development/pm-timer-evidence.md). No
+  port has been read natively; the 60-second loop and B2 remain open.
+
 - SPEC-0009 / ADR-0013 / IMPL-0013 / TEST-0015 adds a gated native framebuffer
   presenter (RGB/BGR-reserved, zero reserved byte, clipping, no framebuffer reads),
   an original band-rendered boot scene with at most 64 KiB of arena staging, and a
@@ -209,9 +217,9 @@ does not imply that the complete project foundation or any OS boot is finished.
 - Exact historical profile and 1984-applicable behavioral sources.
 - Macintosh 128K native feasibility, hardware startup and size budgets.
 - WOW64 debugger support, other sanitizer targets, m68k toolchain/runtime and boot.
-- Next: ACPI PM-timer discovery/sampling, PS/2 keyboard and polling UART leaves,
-  the cooperative event loop, reviewed boot media and exact firmware eligibility.
-  The framebuffer presenter is hosted-verified only (SPEC-0009).
+- Next: the cooperative 60-second progress loop on the PM timer, PS/2 keyboard and
+  polling UART leaves, reviewed boot media and exact firmware eligibility.
+  Presenter and PM timer are hosted-verified only (SPEC-0009/0010).
   Loader/entry/stack/exception scaffolds are built and inspected; real handoff,
   descriptor installation/fault injection and B2 remain unverified. B1 stays a
   Windows development start.

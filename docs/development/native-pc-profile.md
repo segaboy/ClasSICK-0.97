@@ -15,7 +15,7 @@ execution, profile/mapping qualification and device work remain required.
 | Board | PIIX3, ACPI enabled; one polling CPU, hardware interrupts disabled after successful handoff until owned exception state is installed |
 | Display | VBoxVGA, 16 MiB VRAM, 3D off; SPEC-0007 reads current GOP RGB/BGR-reserved mode, rejects unsupported data and makes no mode change. SPEC-0009 presents the original scene with direct post-exit byte stores after the exit/ready gates; hosted-verified only. Later mode-selection contract is separate |
 | Input | Standard virtual PS/2 keyboard; no USB, Guest Additions, shared folders, clipboard or drag/drop dependency |
-| Timer | Optional ACPI PM timer must be discovered/validated and sampled directly after exit; no firmware timer/Stall/Windows callbacks in native loop |
+| Timer | ACPI PM timer: SPEC-0010 captures the RSDP pre-exit, validates XSDT/FADT and samples the I/O port directly after exit (hosted-verified only); no firmware timer/Stall/Windows callbacks in native loop |
 | Diagnostics | Polling 16550A COM1 to local bounded capture; UART wait budgets must not block input/timer sampling |
 | Other devices | Network/audio/USB disabled, no extension-pack requirement, no unrelated mounted disk or external boot image |
 | Boot medium | Independently generated FAT/UEFI medium carrying only our PE image; packaging/filename/partition recipe will be specified and audited with the loader |
