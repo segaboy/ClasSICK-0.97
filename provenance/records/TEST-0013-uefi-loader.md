@@ -37,7 +37,7 @@ wrapper exits zero. Clang x64 48 checks in four configurations/i686 43, scoped
 GCC x64 33 in three/i686 28; all prior controls and four EFI images pass.
 Twenty-seven named pairs match; all earlier twenty-three fingerprints are preserved.
 The payload copy matches audited O2. Artifact fingerprints/local results are pinned
-in [the snapshot](../../docs/development/uefi-loader-evidence.md); remote pending.
+in [the snapshot](../../docs/development/uefi-loader-evidence.md).
 
 First remote CI 37788994328 at c8a2342 passes all guards/bootstrap/matrix/image
 checks and emits all 27 matching fingerprints, but the job fails: the intentional
@@ -48,6 +48,9 @@ assembly and fixtures are unchanged. A fresh full local replay checks both scrip
 success and final native exit zero before the corrected remote result is claimed.
 Final fresh `b` replay at script source `97b10493955f0e5b5331f61dd703c939b0566524`
 passes both exit checks and all protocol checks. All 27 fingerprints equal the
-initial `a` run; compiled/test inputs remain c912f2f. Corrected remote job pending.
+initial `a` run; compiled/test inputs remain c912f2f. Corrected remote CI 37790529852
+at `1acd2850fd1e6c6d408ac2205a002dc8048d41b2` passes full guard/setup/bootstrap/
+wrapper; six 48-check Clang sets/one 43-check i686, three 33-check GCC/one 28-check
+i686, all 27 fingerprints equal final local `b`. Observed result update is text only.
 Human provenance review, real firmware ABI/relocation/exit/owned-stack execution,
 exceptions/NMI, paging/devices/B2 and all historical/physical gates remain open.

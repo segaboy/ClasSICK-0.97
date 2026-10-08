@@ -45,7 +45,13 @@ emits twenty-seven named comparisons. Equality is scoped reproducibility, not
 provenance, reference compatibility or native boot proof. First CI 37788994328 at
 c8a2342 passes all checks/27 fingerprints but fails final status propagation from
 the deliberately rejected transition link. TEST-0013 records the correction.
-Corrected remote CI is pending publication/observation; no passing job claimed yet.
+Corrected [Windows CI 37790529852 passes](https://github.com/segaboy/ClasSICK-0.97/actions/runs/37790529852)
+at evidence source `1acd2850fd1e6c6d408ac2205a002dc8048d41b2`: 182-file guard,
+pinned tool preparation, bootstrap twins and full wrapper. Six 48-check Clang
+result sets (including bootstrap twins), one 43-check i686, three 33-check GCC
+sets and one 28-check i686 pass. All 27 named fingerprints equal final local `b`.
+All debugger/sanitizer/link/endian/image/control checks pass; no generated EFI
+code executed. This result update changes documentation only, tested inputs unchanged.
 
 [Firmware review](firmware-eligibility.md) now identifies the actual x64 producer
 and selected module declarations; installed correspondence/transitive derivation

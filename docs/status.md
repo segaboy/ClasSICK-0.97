@@ -23,8 +23,10 @@ does not imply that the complete project foundation or any OS boot is finished.
   unloaded EFI images form matching O0/O2 twins; twelve corruption controls and
   omitted-transition link reject. Twenty-seven named comparisons match locally.
   [Loader evidence](development/uefi-loader-evidence.md) pins immutable source
-  c912f2f compiled inputs/97b1049 script and final b fingerprints; corrected remote
-  pending after expected-control exit-status fix. [Firmware follow-up](development/firmware-eligibility.md)
+  c912f2f compiled inputs/97b1049 script and final b fingerprints. Corrected
+  [Windows CI 37790529852 passes](https://github.com/segaboy/ClasSICK-0.97/actions/runs/37790529852)
+  at 1acd285, full protocol/all 27 hashes matching after expected-control status fix.
+  [Firmware follow-up](development/firmware-eligibility.md)
   identifies the actual x64 producer but leaves binary/transitive provenance
   needs-review. No VM, native handoff, device loop, B2 or edition boot is verified.
 
