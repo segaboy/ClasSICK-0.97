@@ -17,15 +17,17 @@ try {
         'core/graphics/surface.c','core/memory/arena.c','platform/pc/framebuffer.c',
         'apps/boot-scene/scene.c','platform/uefi/native.c',
         'platform/pc/acpi.c','platform/pc/pmtimer.c','platform/pc/x64/io.S',
-        'platform/pc/ps2.c','platform/uefi/keyboard.c','core/input/input.c','platform/pc/x64/keyboard-io.S')
+        'platform/pc/ps2.c','platform/uefi/keyboard.c','core/input/input.c','platform/pc/x64/keyboard-io.S',
+        'platform/pc/uart.c','platform/uefi/uart.c')
     # SPEC-0009 objects permit only these original project imports.
     $allowedImports=@{8='cs_surface_init';
         9='cs_surface_init,cs_surface_fill,cs_arena_alloc,cs_fb_init,cs_fb_present';
         10='cs_uefi_check_framebuffer,cs_fb_init,cs_arena_init,cs_boot_scene_prepare,cs_boot_scene_draw,cs_uefi_check_map,cs_acpi_find_pm_timer,cs_pmtimer_init,cs_pmtimer_sample,cs_pmtimer_time';
         14='cs_input_push';
-        15='cs_ps2_begin,cs_ps2_poll,cs_native_read,cs_uefi_check_map,cs_acpi_find_pm_timer,cs_acpi_8042,cs_uefi_check_framebuffer,cs_fb_init,cs_arena_init,cs_arena_alloc,cs_boot_scene_prepare,cs_boot_scene_draw,cs_input_init,cs_input_pop,cs_pmtimer_init,cs_pmtimer_sample,cs_pmtimer_time'}
+        15='cs_ps2_begin,cs_ps2_poll,cs_native_read,cs_uefi_check_map,cs_acpi_find_pm_timer,cs_acpi_8042,cs_uefi_check_framebuffer,cs_fb_init,cs_arena_init,cs_arena_alloc,cs_boot_scene_prepare,cs_boot_scene_draw,cs_input_init,cs_input_pop,cs_pmtimer_init,cs_pmtimer_sample,cs_pmtimer_time';
+        19='cs_uart_begin,cs_uart_enqueue,cs_uart_finish,cs_uart_poll,cs_native_keyboard_observed,cs_acpi_find_pm_timer,cs_native_read,cs_pmtimer_init,cs_pmtimer_sample'}
     $common=@('-m64','-Wall','-Wextra','-Wpedantic','-Werror','-Wconversion','-Wsign-conversion',
-        '-ffreestanding','-fno-builtin','-fno-stack-protector','-fno-ident','-mno-red-zone','-mgeneral-regs-only',
+        '-ffreestanding','-fno-builtin','-fno-stack-protector','-fno-ident','-mno-red-zone','-mgeneral-regs-only','-Wframe-larger-than=2048',
         '-fno-asynchronous-unwind-tables','-fno-unwind-tables',"-ffile-prefix-map=$repoRoot=.")
     $link=@('-m64','-nostdlib','-Wl,--entry,cs_uefi_entry,--subsystem,efi_application,--no-insert-timestamp,--no-gc-sections,--strip-all,--build-id=none,--image-base,0x10000000')
     $results=@(); $reference=$null; $referenceMap=$null; $referenceObjects=@(); $release=$null
@@ -39,7 +41,7 @@ try {
                 if($sources[$i].EndsWith('.S')){& $compiler -m64 -c (Join-Path $repoRoot $sources[$i]) -o $object}
                 else{& $compiler @common -std=c11 "-O$opt" -c (Join-Path $repoRoot $sources[$i]) -o $object}
                 if($LASTEXITCODE -ne 0){throw 'Original EFI compile failed.'}
-                if($i -lt 2 -or $i -eq 4 -or $i -eq 6 -or $i -eq 7 -or $i -eq 11 -or $i -eq 12 -or $i -eq 16) {
+                if($i -lt 2 -or $i -eq 4 -or $i -eq 6 -or $i -eq 7 -or $i -eq 11 -or $i -eq 12 -or $i -eq 16 -or $i -eq 18) {
                     $check=if($i -eq 1){'Check-LoaderObject.cmake'}else{'Check-Freestanding.cmake'}
                     & cmake "-DNM=$nm" "-DOBJECT=$object" -P (Join-Path $PSScriptRoot $check)
                     if($LASTEXITCODE -ne 0){throw 'EFI object boundary failed.'}
@@ -133,7 +135,7 @@ try {
     if($LASTEXITCODE -eq 0 -or ($missing -join "`n") -notmatch 'cs_acpi_find_pm_timer'){throw 'Missing ACPI control did not reject.'}
     $global:LASTEXITCODE=0
     $missing | Out-File -LiteralPath (Join-Path $controls 'missing-acpi.log') -Encoding UTF8
-    foreach($control in @(@(14,'ps2','cs_ps2_poll'),@(15,'keyboard','cs_native_keyboard_loop'),@(16,'input','cs_input_push'),@(17,'byte-io','cs_x64_inb|cs_x64_outb'))) {
+    foreach($control in @(@(14,'ps2','cs_ps2_poll'),@(15,'keyboard','cs_native_keyboard_observed'),@(16,'input','cs_input_push'),@(17,'byte-io','cs_x64_inb|cs_x64_outb'),@(18,'uart','cs_uart_poll'),@(19,'native-uart','cs_native_uart_loop'))) {
         try {
             $ErrorActionPreference='Continue'
             $missing=@(& $compiler @link @($referenceObjects | Where-Object {$_ -ne $referenceObjects[$control[0]]}) -o (Join-Path $controls ('must-not-link-'+$control[1]+'.EFI')) 2>&1)
@@ -147,7 +149,8 @@ try {
     if((Get-FileHash -LiteralPath $packaged -Algorithm SHA256).Hash.ToLowerInvariant() -ne $results[1].sha256){throw 'EFI payload copy differs.'}
     [ordered]@{images=$results;image_rejections=$mutations.Count;missing_transition_controls=1;missing_exceptions_controls=1;missing_presenter_controls=1;missing_acpi_controls=1;
         missing_ps2_controls=1;missing_keyboard_controls=1;missing_input_controls=1;missing_byte_io_controls=1;
+        missing_uart_controls=1;missing_native_uart_controls=1;
         payload='payload/EFI/BOOT/BOOTX64.EFI';payload_kind='directory-tree-not-disk';loaded=$false} |
         ConvertTo-Json -Depth 8 | Set-Content -LiteralPath (Join-Path $BuildRoot 'efi-results.json') -Encoding UTF8
-    Write-Output "EFI inspection PASS: four twin images, $($mutations.Count) corruption rejections, eight omitted-object rejections and original payload tree; no image executed."
+    Write-Output "EFI inspection PASS: four twin images, $($mutations.Count) corruption rejections, ten omitted-object rejections and original payload tree; no image executed."
 } finally{$env:PATH=$originalPath}

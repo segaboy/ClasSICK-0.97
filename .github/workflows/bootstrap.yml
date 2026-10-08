@@ -29,6 +29,6 @@ jobs:
       - name: Verify two fresh hosted builds
         shell: powershell
         run: .\scripts\Verify-Bootstrap.ps1
-      - name: Verify hosted core, loader, exceptions, presenter, timer and PS/2 keyboard
+      - name: Verify hosted core, loader, exceptions, presenter, timer, keyboard and UART
         shell: powershell
-        run: .\scripts\Verify-PS2Keyboard.ps1 -BuildRoot build\ps2-keyboard-verification -Sanitizers
+        run: .\scripts\Verify-UARTDiagnostics.ps1 -BuildRoot build\uart-verification -Sanitizers

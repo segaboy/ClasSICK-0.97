@@ -145,9 +145,18 @@ rights remain separate work. [The metadata follow-up](../development/firmware-el
 identified the x64 producer and adopted no firmware. B2 remains unachieved.
 
 SPEC-0012 / ADR-0016 adds a polling keyboard successor to the timed loop
-([snapshot](../development/ps2-keyboard-evidence.md)). The native entry calls it
+([snapshot](../development/ps2-keyboard-evidence.md)). The native entry calls its
+SPEC-0013 diagnostic successor
 after presentation and timer probe. Only successful keyboard startup starts the
 60-second duration. Initial Space advances the scene offset; Escape draws a
 changed frame and ends early. Trace offset 128 holds 112 bytes; the entry no
 longer populates the timed-only record at offset 80. No native instruction has
-executed. UART, media and firmware qualification precede the B2 observation.
+executed. Media and firmware/machine qualification precede the B2 observation.
+
+SPEC-0013 / ADR-0017 adds a bounded polling UART and best-effort observer of
+the same keyboard/scene logic ([snapshot](../development/uart-diagnostics-evidence.md)).
+Startup and TX polls never wait internally; each timer turn services one UART
+poll, with a finite final drain after keyboard termination. Serial failure and
+atomic record loss persist in exactly 640 trace bytes at offset 256. Port mapping,
+clock and model require machine qualification; THR/TEMT observations in fixtures
+do not prove native remote delivery. No asynchronous serial exception path exists.

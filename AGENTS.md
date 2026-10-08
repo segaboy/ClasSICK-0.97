@@ -3,6 +3,12 @@
 Read `docs/clean-room/POLICY.md`, `CONTRIBUTING.md`, and
 `provenance/README.md` before researching or changing this project.
 
+- On 2026-10-08 the owner explicitly authorized exactly one fresh implementation
+  agent for SPEC-0013 polling UART diagnostics (SRC-0053), including original
+  spec/code/tests/provenance and an unpushed ordinary commit. The coordinating
+  lead handles HQ/publication; no further delegation, chats, automation, OneNote,
+  native/VM execution or firmware eligibility waiver. Macintosh goals persist.
+
 - On 2026-10-08 the owner returned implementation leadership to Codex with the
   Claude continuation handoff (SRC-0048). Continue SPEC-0012's reviewed PS/2
   contract, implementation, tests, provenance and ordinary commits/pushes.

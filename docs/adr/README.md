@@ -26,6 +26,7 @@ evidence; foundational project constraints cannot be silently relaxed.
 | [ADR-0014](0014-acpi-pm-timer.md) | ACPI PM timer via pre-exit RSDP capture and map-checked table walk | Accepted for development verification |
 | [ADR-0015](0015-cooperative-progress-loop.md) | Single cooperative timed progress loop before keyboard/UART | Accepted for development verification |
 | [ADR-0016](0016-polling-ps2-keyboard.md) | Bounded untranslated set-2 polling keyboard and interactive successor loop | Accepted for development verification |
+| [ADR-0017](0017-bounded-uart-diagnostics.md) | Bounded polling UART and retained native keyboard diagnostics | Accepted for development verification |
 
 Use [the template](template.md). Every substantive decision cites founding
 requirements or approved sources, distinguishes design from historical fact,

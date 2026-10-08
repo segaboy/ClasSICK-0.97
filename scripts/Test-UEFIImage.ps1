@@ -81,7 +81,8 @@ $names=@('cs_uefi_check_framebuffer','cs_uefi_check_map','cs_uefi_check_owned','
     'cs_uefi_acpi20_rsdp','cs_native_read','cs_native_timer_probe','cs_acpi_find_pm_timer',
     'cs_pmtimer_init','cs_pmtimer_sample','cs_pmtimer_time','cs_x64_inl','cs_native_progress_loop',
     'cs_ps2_begin','cs_ps2_poll','cs_acpi_8042','cs_native_keyboard_loop',
-    'cs_input_init','cs_input_push','cs_input_pop','cs_input_reset','cs_x64_inb','cs_x64_outb')
+    'cs_input_init','cs_input_push','cs_input_pop','cs_input_reset','cs_x64_inb','cs_x64_outb',
+    'cs_uart_begin','cs_uart_enqueue','cs_uart_finish','cs_uart_poll','cs_native_keyboard_observed','cs_native_uart_loop')
 $symbols=@{}
 foreach($name in $names) {
     $matches=[regex]::Matches($mapText,'(?m)^([0-9a-fA-F]+)\s+[0-9a-fA-F]+\s+\d+\s+'+$name+'\s*$')

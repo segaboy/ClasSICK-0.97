@@ -5,6 +5,49 @@ eligibility applies to the stated scope, not every resource reachable from a URL
 No Apple executable, source, disassembly, decompilation, or copied asset was used.
 No reference-system black-box observation has yet been performed.
 
+## SRC-0053 — Owner's single fresh UART implementation-agent authorization
+
+- Owner, 2026-10-08: continue the missing native boot components with exactly
+  one fresh implementation agent for bounded polling UART diagnostics; no inherited
+  conversation/search history. Specifications, implementation, original fixtures,
+  audits, provenance and ordinary commits are authorized under the existing scope.
+- Requirement only; firmware eligibility remains needs-review. No native/VM
+  execution, additional agents/chats, automation, live OneNote or change to the
+  independent real Macintosh/mini vMac and three-edition goals. Implementation
+  work is separately recorded from the lead's HQ/publication responsibility.
+- OpenAI Codex (GPT-6) assisted; fresh context and self-review are not a legally
+  certified or independently staffed clean-room procedure. Human review pending.
+
+## SRC-0054 — TI TL16C550C published UART interface
+
+- Texas Instruments, *TL16C550C Asynchronous Communications Element with
+  Autoflow Control*, SLLS177I, March 1994, revised March 2021. Publisher
+  <https://www.ti.com/lit/ds/symlink/tl16c550c.pdf>, directly reviewed from the
+  owner's local reference copy 2026-10-08. SHA-256
+  `3ef2d68733a8599cc2d0d7300b69c3530bc714de3ebb0fcfda03df60a4c7694e`.
+- PDF/printed 21–23, Tables 7-1/7-3 register selection/DLAB/bit declarations;
+  7.7.2 on 24 (FCR); 7.7.4/5 on 25 (polling/IER); 7.7.7 on 27 (LCR,
+  Tables 7-6/7); 7.7.8 on 28 (LSR/error-read/THRE/TEMT); 7.7.9 on 29
+  (MCR/Table 7-8); 7.7.11 on 31 (baud equation/Table 7-9); 7.7.13/14 on
+  32 (SCR/THR). Selected prose and register tables were visually reviewed using
+  PDFium images in the ignored owner workspace; pypdf extraction corroborated it.
+- Adjacent block/reset/FIFO interrupt/IIR/MSR/RBR and clock circuit declarations
+  were visible, unused beyond contextual read-only interface review. No code
+  samples, third-party drivers/headers/OS implementations, search engines or
+  firmware bodies were consulted. Initial extraction hit a local Windows encoding
+  error; UTF-8 extraction then succeeded. Document/images are not vendored.
+- Eligible scoped hardware interface only, copyrighted documentation linked rather
+  than copied. Does not establish universal 16550 support, VirtualBox device
+  implementation, PC address decoding, clock or native delivery. SPEC-0013's
+  proposed 0x3F8/1.8432-MHz profile, scratch/readback checks, queue, time/call
+  limits and conservative terminal error policy are original design decisions.
+  No historical Macintosh behavior or external implementation/license adoption.
+
+UART exposure boundary: existing eligible project contracts and owned source,
+SRC-0052's already reviewed original byte-port instructions and SRC-0046 timer
+are reused. The fresh implementer did not retrieve uncertain source or firmware.
+Provenance eligibility and human rights review remain distinct from test success.
+
 ## SRC-0048 — Owner's return-to-Codex keyboard handoff
 
 - Owner-supplied continuation, 2026-10-08, from Claude's verified handoff:

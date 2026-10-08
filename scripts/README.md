@@ -56,8 +56,16 @@ out of public commits.
 Run [the Windows procedure](../docs/development/windows.md). No script establishes
 clean-room originality, lawful reference use, or native boot by itself.
 
-`Verify-PS2Keyboard.ps1 -BuildRoot <fresh-directory> -Sanitizers` is the current
+`Verify-PS2Keyboard.ps1 -BuildRoot <fresh-directory> -Sanitizers` retains the prior
 full chain: prior progress-loop checks, keyboard/ACPI/interactive twin hashes,
 AArch64 LE/BE driver objects, and four unloaded EFI twins. Exact INB/OUTB byte
-checks have mutation controls; eight omitted-object links must fail. No port I/O
+checks have mutation controls; the EFI audit now also includes the two UART
+omissions (ten total). No port I/O
 occurs in hosted tests. Use a fresh output root for retained verification.
+
+`Verify-UARTDiagnostics.ps1 -BuildRoot <fresh-directory> -Sanitizers` is the
+current full chain. It calls the keyboard wrapper, adds UART/native diagnostic
+twin labels, Clang/GCC x64/i686 O0/O2 import/frame audits and AArch64 LE/BE UART
+objects. EFI keeps earlier source indexes and appends two UART sources; 59
+symbols and ten omitted-object controls apply. Hosted tests use synthetic ports;
+no native delivery, firmware adoption or edition boot is claimed.

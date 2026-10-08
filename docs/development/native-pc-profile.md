@@ -16,7 +16,7 @@ execution, profile/mapping qualification and device work remain required.
 | Display | VBoxVGA, 16 MiB VRAM, 3D off; SPEC-0007 reads current GOP RGB/BGR-reserved mode, rejects unsupported data and makes no mode change. SPEC-0009 presents the original scene with direct post-exit byte stores after the exit/ready gates; hosted-verified only. Later mode-selection contract is separate |
 | Input | Standard virtual PS/2 keyboard; no USB, Guest Additions, shared folders, clipboard or drag/drop dependency |
 | Timer | ACPI PM timer: SPEC-0010 captures the RSDP pre-exit, validates XSDT/FADT and samples the I/O port directly after exit (hosted-verified only); no firmware timer/Stall/Windows callbacks in native loop |
-| Diagnostics | Polling 16550A COM1 to local bounded capture; UART wait budgets must not block input/timer sampling |
+| Diagnostics | SPEC-0013 qualified TI-compatible byte-register UART at proposed 0x3F8, assumed 1.8432-MHz clock, divisor 12/9600 baud/8N1. Mapping/model/clock/capture require qualification; fixed queue, nonblocking service and bounded final drain are hosted-verified only |
 | Other devices | Network/audio/USB disabled, no extension-pack requirement, no unrelated mounted disk or external boot image |
 | Boot medium | Independently generated FAT/UEFI medium carrying only our PE image; packaging/filename/partition recipe will be specified and audited with the loader |
 
@@ -87,13 +87,17 @@ starts its 60-second duration. Escape is an early stop, not acceptance.
   Polling modular extension cannot recover an arbitrary multi-wrap pause. Bound
   loop/driver work, document sampling assumptions and compare the 60-second B2
   observation with an independent wall clock; no precision or paused-VM guarantee.
-- Diagnostics: separately reviewed 16550 register contract, bounded TX polling,
-  fixed-size trace ring, lost-record count and original text only. No blocking
-  stdio/firmware logger. Interrupt/CPU fault handling needs primary ISA contracts.
+- Diagnostics: SPEC-0013 uses the scoped TI register interface, one operation per
+  startup poll and one LSR plus at most one THR write per timer turn. A 512-byte
+  fixed queue counts dropped records; exactly 640 trace bytes at offset 256 retain
+  queue/transport/termination evidence without enlarging the bundle. UART failure
+  leaves keyboard progress intact. Final drain has 100-ms/100000-call limits and
+  requires TEMT. THR acceptance is not remote delivery. No stdio/firmware logger,
+  UART RX console or asynchronous fault output. Existing first-fault RAM remains.
 
-These are device ownership/acceptance requirements, not completed register-level
-drivers. Exact ISA/i8042/UART/ACPI-table parser leaf specifications and tests are
-required before implementation. Unknown device capability fails visibly; no hidden
+These are device ownership/acceptance requirements; scoped drivers are implemented
+and hosted-verified, while native behavior and machine qualification remain open.
+Unknown device capability fails visibly; no hidden
 firmware service fallback. This profile establishes no generic modern-PC/USB support.
 
 ## Provenance and current availability

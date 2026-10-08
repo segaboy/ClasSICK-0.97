@@ -16,6 +16,16 @@ does not imply that the complete project foundation or any OS boot is finished.
 
 ## Achieved
 
+- SPEC-0013 / ADR-0017 / IMPL-0017 / TEST-0019 adds original bounded polling
+  UART diagnostics to the native keyboard scene successor. A fixed queue counts
+  whole-record loss; RAM retains sticky serial failures while keyboard progress
+  continues. The complete fresh local wrapper passes Clang x64 100/i686 76 and
+  GCC x64 85/i686 61 checks per configuration, with x64 sanitizers, all prior
+  keyboard/60-second tests and unloaded EFI controls. All 59 labels / 53 distinct
+  fingerprints are recorded in [the UART snapshot](development/uart-diagnostics-evidence.md).
+  Native serial delivery, exact firmware eligibility, media and B2 remain open;
+  remote matching/publication and human provenance review are pending.
+
 - SPEC-0012 / ADR-0016 / IMPL-0016 / TEST-0018 implements an original bounded
   polling PS/2 set-2 keyboard and interactive successor loop. ACPI must declare
   a controller; startup negotiates untranslated set 2 with bounded replies and
@@ -26,7 +36,7 @@ does not imply that the complete project foundation or any OS boot is finished.
   fingerprints matching. Results are recorded in the
   [keyboard snapshot](development/ps2-keyboard-evidence.md). Codex now leads
   implementation (SRC-0048); no native keyboard or OS boot has been observed.
-  UART, boot media, firmware eligibility and B2 remain open.
+  Native UART delivery, boot media, firmware eligibility and B2 remain open.
 
 - SPEC-0011 / ADR-0015 / IMPL-0015 / TEST-0017 adds a cooperative loop that fills
   the scene's progress bar from PM timer seconds for 60 seconds, with stall and
@@ -236,9 +246,9 @@ does not imply that the complete project foundation or any OS boot is finished.
 - Exact historical profile and 1984-applicable behavioral sources.
 - Macintosh 128K native feasibility, hardware startup and size budgets.
 - WOW64 debugger support, other sanitizer targets, m68k toolchain/runtime and boot.
-- Next: polling UART diagnostics,
-  reviewed boot media and exact firmware eligibility. Presenter, PM timer and
-  loop and two-key keyboard are hosted-verified only (SPEC-0009–0012).
+- Next: reviewed boot media, exact firmware eligibility and machine qualification.
+  Presenter, PM timer, loop, two-key keyboard and UART diagnostics have only
+  hosted/unloaded evidence (SPEC-0009–0013).
   Loader/entry/stack/exception scaffolds are built and inspected; real handoff,
   descriptor installation/fault injection and B2 remain unverified. B1 stays a
   Windows development start.

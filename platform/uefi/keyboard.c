@@ -8,7 +8,10 @@ typedef struct {
     cs_ps2 keyboard;
     cs_time elapsed;
     uint64_t reads;
-    uint32_t seconds,frames,space,escape,consumed,late,max_delta,step,key,action,sequence;
+    uint64_t ticks;
+    cs_keyboard_observer observer;
+    void *context;
+    uint32_t seconds,frames,space,escape,consumed,late,max_delta,step,key,action,sequence,notice;
 } diagnostics;
 static void increment(uint32_t *v) { if(*v!=UINT32_MAX) ++*v; }
 static void put(unsigned char *p,uint64_t v,unsigned n)
@@ -27,6 +30,7 @@ static uint32_t record(unsigned char *trace,uint32_t result,const diagnostics *d
     put(trace+76,d->step,4); put(trace+80,d->keyboard.held,4); put(trace+84,d->key,4);
     put(trace+88,d->action,4); put(trace+92,d->sequence,4); put(trace+96,d->reads,8);
     put(trace+104,d->keyboard.last_byte,4); put(trace+108,d->keyboard.configuration,4);
+    if(d->observer!=NULL) d->observer(d->context,d->ticks,trace,result!=CS_KBD_RUNNING?1u:d->notice);
     return result;
 }
 static int draw(cs_boot_scene *scene,diagnostics *d,uint32_t step)
@@ -35,8 +39,9 @@ static int draw(cs_boot_scene *scene,diagnostics *d,uint32_t step)
     if(cs_boot_scene_draw(scene,step,&report)!=CS_BOOT_OK) return 0;
     d->step=step; increment(&d->frames); return 1;
 }
-uint32_t cs_native_keyboard_loop(const cs_uefi_handoff *h,uint32_t ready,
-    const cs_native_devices *dev,const cs_ps2_io *keyboard,uint32_t seconds,unsigned char *trace)
+uint32_t cs_native_keyboard_observed(const cs_uefi_handoff *h,uint32_t ready,
+    const cs_native_devices *dev,const cs_ps2_io *keyboard,uint32_t seconds,unsigned char *trace,
+    cs_keyboard_observer observer,void *context)
 {
     diagnostics d;
     cs_acpi_pm_timer timer;
@@ -53,6 +58,8 @@ uint32_t cs_native_keyboard_loop(const cs_uefi_handoff *h,uint32_t ready,
     uint64_t start=0;
     (void)cs_ps2_begin(&d.keyboard);
     d.elapsed.seconds=0; d.elapsed.nanoseconds=0; d.reads=0; d.seconds=seconds;
+    d.ticks=0; d.observer=observer; d.context=context;
+    d.notice=2;
     d.frames=0; d.space=0; d.escape=0; d.consumed=0; d.late=0; d.max_delta=0;
     d.step=0; d.key=0; d.action=0; d.sequence=0;
     if(trace==NULL) return CS_KBD_ARGUMENT;
@@ -87,6 +94,12 @@ uint32_t cs_native_keyboard_loop(const cs_uefi_handoff *h,uint32_t ready,
         ++d.reads;
         if(cs_pmtimer_sample(&counter,dev->port(dev->port_context,timer.port),&delta)!=CS_PMTIMER_OK)
             return record(trace,CS_KBD_VALUE,&d);
+        d.ticks=counter.ticks;
+        if(observer!=NULL) {
+            d.notice=0;
+            (void)record(trace,CS_KBD_RUNNING,&d);
+            d.notice=2;
+        }
         if(active!=0 && cs_pmtimer_time(counter.ticks-start,&d.elapsed)!=CS_PMTIMER_OK)
             return record(trace,CS_KBD_VALUE,&d);
         if(delta>d.max_delta) d.max_delta=delta;
@@ -124,4 +137,9 @@ uint32_t cs_native_keyboard_loop(const cs_uefi_handoff *h,uint32_t ready,
         }
         if(d.elapsed.seconds>=seconds) return record(trace,CS_KBD_OK,&d);
     }
+}
+uint32_t cs_native_keyboard_loop(const cs_uefi_handoff *h,uint32_t ready,
+    const cs_native_devices *dev,const cs_ps2_io *keyboard,uint32_t seconds,unsigned char *trace)
+{
+    return cs_native_keyboard_observed(h,ready,dev,keyboard,seconds,trace,NULL,NULL);
 }

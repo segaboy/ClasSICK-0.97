@@ -10,4 +10,7 @@ and no framebuffer reads. It is portable C, exercised by hosted tests on synthet
 buffers and linked into the unloaded EFI image. `x64/` holds owned exception state.
 `acpi.c` / `pmtimer.c` (SPEC-0010) walk RSDP/XSDT/FADT through a bounded reader
 and extend the 24/32-bit PM timer; `x64/io.S` holds the single port read. No native
-execution, keyboard or diagnostics driver exists yet.
+execution has occurred. `ps2.c` implements the SPEC-0012 two-key polling contract;
+`uart.c` implements the SPEC-0013 bounded byte-port diagnostic transport, both
+with caller-owned state and synthetic hosted callbacks. Target mapping/model/clock
+and observed native behavior remain qualification gates.

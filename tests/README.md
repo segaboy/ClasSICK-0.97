@@ -66,3 +66,11 @@ two-key FIFO behavior, bounded startup/retry/drain failures and interactive scen
 oracles. `ps2-fixture.h` supplies callbacks without touching hardware. Ten new
 x64 / six portable checks include optimized import/data audits; real keyboard
 events, controller timing and boot acceptance remain unobserved.
+
+`uart.c`, `uart-fixture.h` and `native-uart.c` (TEST-0019) verify exact startup
+accesses/aliases, divisor boundaries, all LSR byte values, queue wrap/atomic loss,
+THRE/TEMT, time/call bounds, saturation and sticky failure. The native successor
+checks actual original ASCII transport, rejected gates, retained trace/ring guards,
+scene oracle, 60-second wrap/Space/Escape and diagnostic failure independence.
+Nine x64 / five portable checks include optimized import audits. The complete
+prior PS/2 interaction and 60-second contracts remain separately covered.

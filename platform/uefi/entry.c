@@ -2,6 +2,7 @@
 /* Copyright (C) 2026 Dean Howell. */
 #include "native.h"
 #include "keyboard.h"
+#include "uart.h"
 #include "../pc/x64/state.h"
 typedef void (CS_EFIAPI *cs_native_transfer)(cs_uefi_handoff *,uint64_t);
 extern cs_native_transfer const volatile cs_entry_anchor;
@@ -49,15 +50,18 @@ void CS_EFIAPI cs_native_stop(cs_uefi_handoff *handoff)
     memory.window_physical=0; memory.window_size=UINT64_C(1)<<47; memory.window_base=0;
     (void)cs_native_timer_probe(handoff,*ready,&memory,port32,NULL,
         (unsigned char *)(uintptr_t)(handoff->trace_base+CS_NATIVE_TRACE_BYTES));
-    /* SPEC-0012: polling keyboard plus timed progress, then terminal halt. */
+    /* SPEC-0013: best-effort bounded serial diagnostics alongside SPEC-0012. */
     cs_native_devices devices;
     devices.memory=&memory; devices.port=port32; devices.port_context=NULL;
     devices.framebuffer=(volatile unsigned char *)(uintptr_t)handoff->framebuffer.base;
     devices.arena=(void *)(uintptr_t)handoff->arena_base;
     cs_ps2_io keyboard;
     keyboard.read=keyboard_read; keyboard.write=keyboard_write; keyboard.context=NULL;
-    (void)cs_native_keyboard_loop(handoff,*ready,&devices,&keyboard,60,
-        (unsigned char *)(uintptr_t)(handoff->trace_base+CS_KBD_TRACE_OFFSET));
+    cs_uart_io serial;
+    serial.read=keyboard_read; serial.write=keyboard_write; serial.context=NULL;
+    (void)cs_native_uart_loop(handoff,*ready,&devices,&keyboard,&serial,0x3F8,12,60,
+        (unsigned char *)(uintptr_t)(handoff->trace_base+CS_KBD_TRACE_OFFSET),
+        (unsigned char *)(uintptr_t)(handoff->trace_base+CS_UART_TRACE_OFFSET));
     cs_native_halt();
 }
 cs_efi_status CS_EFIAPI cs_uefi_entry(void *image,cs_efi_system *system)

@@ -1,8 +1,8 @@
 # Milestone roadmap
 
-Current component checkpoint: SPEC-0012 polling PS/2 keyboard and interactive
-native successor are implemented for hosted/unloaded verification. Next are a
-reviewed polling UART, independently generated boot media and firmware/machine
+Current component checkpoint: SPEC-0013 bounded polling UART and diagnostic
+keyboard successor are implemented for hosted/unloaded verification. Next are
+independently generated boot media and firmware/machine
 qualification, then observed B2 cold starts. Macintosh replacement startup and
 mini vMac validation remain later independent milestones.
 
