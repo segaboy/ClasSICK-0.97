@@ -16,6 +16,13 @@ does not imply that the complete project foundation or any OS boot is finished.
 
 ## Achieved
 
+- SPEC-0011 / ADR-0015 / IMPL-0015 / TEST-0017 adds a cooperative loop that fills
+  the scene's progress bar from PM timer seconds for 60 seconds, with stall and
+  late-sample diagnostics in owned trace storage. Pinned
+  [Windows CI 37812572045](https://github.com/segaboy/ClasSICK-0.97/actions/runs/37812572045)
+  passes: Clang x64 81/i686 65, GCC x64 66/i686 50.
+  [Snapshot](development/progress-loop-evidence.md). Never executed natively.
+
 - SPEC-0010 / ADR-0014 / IMPL-0014 / TEST-0016 captures the ACPI 2.0+ RSDP before
   exit and walks RSDP/XSDT/FADT through a map-type-checked reader. It extends the
   24/32-bit PM timer and runs a gated native probe recorded in owned trace storage.
@@ -217,9 +224,9 @@ does not imply that the complete project foundation or any OS boot is finished.
 - Exact historical profile and 1984-applicable behavioral sources.
 - Macintosh 128K native feasibility, hardware startup and size budgets.
 - WOW64 debugger support, other sanitizer targets, m68k toolchain/runtime and boot.
-- Next: the cooperative 60-second progress loop on the PM timer, PS/2 keyboard and
-  polling UART leaves, reviewed boot media and exact firmware eligibility.
-  Presenter and PM timer are hosted-verified only (SPEC-0009/0010).
+- Next: PS/2 keyboard ownership and events in the loop, polling UART diagnostics,
+  reviewed boot media and exact firmware eligibility. Presenter, PM timer and
+  loop are hosted-verified only (SPEC-0009–0011).
   Loader/entry/stack/exception scaffolds are built and inspected; real handoff,
   descriptor installation/fault injection and B2 remain unverified. B1 stays a
   Windows development start.
