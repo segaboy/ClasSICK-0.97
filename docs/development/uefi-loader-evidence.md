@@ -17,10 +17,13 @@ then builds/audits four native EFI images and packages the original O2 payload.
 An inspection-only image replay is available through Verify-UEFIImage.ps1 with a
 separate fresh output path. It executes no generated EFI file or privileged code.
 
-Final compiled/test/script source: `c912f2f4db67241c8114cc5415bb16ab873e1fc2`.
-Fresh local `C:\ClasSICK\uefi-loader-verification-20261008-a` and adjacent `.log`
-exit zero under Windows PowerShell 5.1. Preliminary hosted/image development passes
-precede this full run. Tested inputs are unchanged by the result documentation.
+Compiled/test inputs: `c912f2f4db67241c8114cc5415bb16ab873e1fc2`.
+Final verification-script source: `97b10493955f0e5b5331f61dd703c939b0566524`, with
+those C/assembly/fixture bytes unchanged. Fresh final local
+`C:\ClasSICK\uefi-loader-verification-20261008-b` and adjacent `.log` pass both
+script success and final native exit zero under Windows PowerShell 5.1. Earlier
+full `a` and development passes precede the expected-control status correction.
+All 27 fingerprints are identical between `a` and final `b`.
 
 Observed local matrix: Clang x64 48 checks per Debug twin/Release/ASan+UBSan,
 actual i686 43; scoped GCC x64 33 per Debug twin/Release, actual i686 28, Windows
@@ -39,8 +42,10 @@ omitted-transition link reject. The original O2 payload copy matches its audited
 All earlier twenty-three fingerprints are unchanged against the prior final local
 log, not inferred from partial documentation tables. With the four above the wrapper
 emits twenty-seven named comparisons. Equality is scoped reproducibility, not
-provenance, reference compatibility or native boot proof. Remote CI is pending
-publication and observation; no remote result is claimed by this local snapshot.
+provenance, reference compatibility or native boot proof. First CI 37788994328 at
+c8a2342 passes all checks/27 fingerprints but fails final status propagation from
+the deliberately rejected transition link. TEST-0013 records the correction.
+Corrected remote CI is pending publication/observation; no passing job claimed yet.
 
 [Firmware review](firmware-eligibility.md) now identifies the actual x64 producer
 and selected module declarations; installed correspondence/transitive derivation

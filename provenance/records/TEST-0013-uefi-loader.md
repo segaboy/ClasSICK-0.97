@@ -46,5 +46,8 @@ PowerShell launcher propagates. Reset that expected rejection only after validat
 its outcome/diagnostic; unexpected link success/failure still throws. Loader C,
 assembly and fixtures are unchanged. A fresh full local replay checks both script
 success and final native exit zero before the corrected remote result is claimed.
+Final fresh `b` replay at script source `97b10493955f0e5b5331f61dd703c939b0566524`
+passes both exit checks and all protocol checks. All 27 fingerprints equal the
+initial `a` run; compiled/test inputs remain c912f2f. Corrected remote job pending.
 Human provenance review, real firmware ABI/relocation/exit/owned-stack execution,
 exceptions/NMI, paging/devices/B2 and all historical/physical gates remain open.

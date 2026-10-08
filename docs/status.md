@@ -23,7 +23,8 @@ does not imply that the complete project foundation or any OS boot is finished.
   unloaded EFI images form matching O0/O2 twins; twelve corruption controls and
   omitted-transition link reject. Twenty-seven named comparisons match locally.
   [Loader evidence](development/uefi-loader-evidence.md) pins immutable source
-  c912f2f and final local fingerprints; remote pending. [Firmware follow-up](development/firmware-eligibility.md)
+  c912f2f compiled inputs/97b1049 script and final b fingerprints; corrected remote
+  pending after expected-control exit-status fix. [Firmware follow-up](development/firmware-eligibility.md)
   identifies the actual x64 producer but leaves binary/transitive provenance
   needs-review. No VM, native handoff, device loop, B2 or edition boot is verified.
 
