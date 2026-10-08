@@ -13,7 +13,7 @@ execution, profile/mapping qualification and device work remain required.
 | CPU/RAM | x86-64, one virtual CPU, 512 MiB; this is a PC development budget, unrelated to Macintosh 128K feasibility |
 | Firmware | EFI64 candidate only; exact firmware artifact hash, selected source/dependency/notice closure and clean-room eligibility required before launch |
 | Board | PIIX3, ACPI enabled; one polling CPU, hardware interrupts disabled after successful handoff until owned exception state is installed |
-| Display | VBoxVGA, 16 MiB VRAM, 3D off; SPEC-0007 reads current GOP RGB/BGR-reserved mode, rejects unsupported data and makes no mode change; later mode-selection contract is separate |
+| Display | VBoxVGA, 16 MiB VRAM, 3D off; SPEC-0007 reads current GOP RGB/BGR-reserved mode, rejects unsupported data and makes no mode change. SPEC-0009 presents the original scene with direct post-exit byte stores after the exit/ready gates; hosted-verified only. Later mode-selection contract is separate |
 | Input | Standard virtual PS/2 keyboard; no USB, Guest Additions, shared folders, clipboard or drag/drop dependency |
 | Timer | Optional ACPI PM timer must be discovered/validated and sampled directly after exit; no firmware timer/Stall/Windows callbacks in native loop |
 | Diagnostics | Polling 16550A COM1 to local bounded capture; UART wait budgets must not block input/timer sampling |
@@ -64,6 +64,9 @@ Initialize the arena, core surfaces/queue/clock and original scene from owned
 storage. Convert RGBA8 to GOP RGB/BGR with reserved byte explicitly zero; use
 bounded direct framebuffer writes and preserve scanline padding. Never call GOP Blt
 or SimpleTextInput/Output after exit. No visible pre-handoff picture counts as B2.
+SPEC-0009 implements this presentation step for the native stop path: whole-width
+bands of at most 64 KiB from the 128-KiB arena, a 32-byte owned trace record and
+no device access after a failed exit. Native mapping/caching/visibility unverified.
 
 ## Native device obligations before implementation
 

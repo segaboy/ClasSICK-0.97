@@ -12,6 +12,11 @@ The matrix scans candidate offsets rather than using the core rounding formula,
 covering 751,740 whole-buffer cases with the tested max alignment of 16. Viewer
 tests verify exact buffer reservations and clean failure with a one-byte-short pool.
 
+SPEC-0009 presentation tests write only synthetic guarded buffers: a per-pixel
+placement expectation for both GOP byte orders, an independent point classifier for
+the original scene, band-partition equality and native-gate trace bytes. They are
+graphics/unit evidence for our contract, not a native display observation.
+
 ## Evidence classes
 
 | Class | Input / oracle | Claim permitted |

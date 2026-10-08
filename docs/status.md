@@ -1,6 +1,6 @@
 # Project status
 
-Date: 2026-10-08. Current phase: **B1/M0.1 hosted start verified; native boots pending**.
+Date: 2026-10-08. Current phase: **B1/M0.1 hosted start verified; B2 components in progress, native boots pending**.
 M0.0 technical bootstrap remains verified. The owner explicitly authorized the
 first bounded graphics subsystem in the project implementation chat on this date.
 SPEC-0001 v1 is finalized, implemented and tested under IMPL-0002 / TEST-0004.
@@ -15,6 +15,17 @@ documentation/evidence repository and personal project wiki. This technical gate
 does not imply that the complete project foundation or any OS boot is finished.
 
 ## Achieved
+
+- SPEC-0009 / ADR-0013 / IMPL-0013 / TEST-0015 adds a gated native framebuffer
+  presenter (RGB/BGR-reserved, zero reserved byte, clipping, no framebuffer reads),
+  an original band-rendered boot scene with at most 64 KiB of arena staging, and a
+  post-handoff gate that requires a successful exit and ready descriptors. Pinned
+  [Windows CI 37806764756](https://github.com/segaboy/ClasSICK-0.97/actions/runs/37806764756)
+  passes at c6289e1: Clang x64 66 checks/i686 57, GCC x64 51/i686 42. The EFI
+  image links the new objects and three omitted-object links reject; 27 earlier
+  fingerprints are unchanged. [Snapshot](development/native-framebuffer-evidence.md).
+  Claude now leads implementation (SRC-0044). Native visible output and B2 remain
+  unverified.
 
 - SPEC-0008 / ADR-0012 / IMPL-0012 / TEST-0014 adds original x64 GDT/TSS/IDT
   serialization, four emergency stacks and terminal first-fault record assembly.
@@ -198,8 +209,9 @@ does not imply that the complete project foundation or any OS boot is finished.
 - Exact historical profile and 1984-applicable behavioral sources.
 - Macintosh 128K native feasibility, hardware startup and size budgets.
 - WOW64 debugger support, other sanitizer targets, m68k toolchain/runtime and boot.
-- Next: resolve exact firmware identity/provenance, format reviewed boot media
-  and implement native framebuffer/timer/keyboard/diagnostic leaves and event loop.
+- Next: ACPI PM-timer discovery/sampling, PS/2 keyboard and polling UART leaves,
+  the cooperative event loop, reviewed boot media and exact firmware eligibility.
+  The framebuffer presenter is hosted-verified only (SPEC-0009).
   Loader/entry/stack/exception scaffolds are built and inspected; real handoff,
   descriptor installation/fault injection and B2 remain unverified. B1 stays a
   Windows development start.

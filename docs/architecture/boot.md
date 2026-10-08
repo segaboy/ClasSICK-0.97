@@ -127,6 +127,12 @@ EFI-image audits. SPEC-0008 / ADR-0012 now adds owned descriptor-table bytes and
 terminal fault assembly, verified under hosted tests and unloaded image inspection.
 Actual descriptor installation, fault delivery, device loop and native handoff
 remain unobserved; [the snapshot](../development/x64-exception-evidence.md) pins scope.
+SPEC-0009 / ADR-0013 adds the first post-handoff device leaf: a gated native
+framebuffer presenter and original band-rendered scene. Hosted tests and unloaded
+image linkage only. Presentation runs only after a recorded successful exit plus
+ready descriptors; it uses at most 64 KiB of arena staging and never calls GOP Blt.
+[The snapshot](../development/native-framebuffer-evidence.md) pins scope; visible
+native output, timing, keyboard, diagnostics and B2 remain unobserved.
 Exact firmware eligibility, formatted boot media, Secure Boot and external VM/runtime
 rights remain separate work. [The metadata follow-up](../development/firmware-eligibility.md)
 identified the x64 producer and adopted no firmware. B2 remains unachieved.
