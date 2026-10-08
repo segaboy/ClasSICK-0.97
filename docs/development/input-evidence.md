@@ -1,8 +1,10 @@
 # Normalized keyboard verification snapshot
 
 Date: 2026-10-07. SPEC-0004 / IMPL-0005 / TEST-0007.
-Implementation revision and remote result are pinned after committing the tested
-source; pending publication at this draft stage. No remote success claimed yet.
+Executed code/test/build inputs are frozen at
+`c99ec65870f51058185668542e839b23a46da802`. The final local matrix used identical
+inputs before that commit. Subsequent source-pointer/CI text updates do not
+change those inputs. Remote CI is pending; no remote success claimed yet.
 
 Local invocation: Verify-Input.ps1 -BuildRoot <fresh-output-directory> -Sanitizers.
 Five configurations pass 24/24 checks each; independent queue oracle explores
@@ -11,7 +13,7 @@ audits pass; ARM64 LE/BE compile-only checks pass. See [TEST-0007](../../provena
 
 Fresh Debug twins match the two input tests and updated viewer. The surface,
 presentation-test and arena-test hashes retain their prior values. Hashes are
-listed after the final complete local run; no archive/OS-image reproducibility,
+listed below from the final complete local run; no archive/OS-image reproducibility,
 historical compatibility or boot result is asserted. Timing and debugger remain
 next work; B1/M0.1 and all three boot editions remain open.
 
