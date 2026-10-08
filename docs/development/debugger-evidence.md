@@ -2,7 +2,14 @@
 
 Date 2026-10-07. IMPL-0007 / TEST-0009, existing SPEC-0002–0005.
 Tested code/test/build inputs: `f2c53117981f5d21e6848a28c66273145bd32fc3`.
-This subsequent text-only record pins the implementation. Remote CI pending.
+This subsequent text-only record pins the implementation. Evidence/CI source:
+`469f30742345c4db6589e1a38a0a3d26230468c7`.
+[Windows CI 37724597975 passed](https://github.com/segaboy/ClasSICK-0.97/actions/runs/37724597975)
+at that source: observed guard/setup/bootstrap twins, full five-configuration
+34-check matrix, sanitizer/core/endian audits and all six valid x64 debugger
+sessions plus three rejection launches. All eight named executable hashes below
+match local and remote. No code/test/build input changed after f2c5311; this
+result-only update changes text.
 
 Local matrix: five configurations, 34/34 checks each; validated sanitizer controls,
 optimized core imports/global-data and ARM64 LE/BE compile-only audits pass. Six

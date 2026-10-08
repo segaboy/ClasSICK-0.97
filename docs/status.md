@@ -24,7 +24,9 @@ does not imply that the complete project foundation or any OS boot is finished.
 - Six valid x64 debugger sessions and three rejection launches pass. The full
   local five-configuration 34-check matrix, sanitizers and core/endian audits pass;
   viewer hash matches fresh twins and seven other executable hashes are unchanged.
-  [Debugger snapshot](development/debugger-evidence.md); remote CI pending.
+  [Debugger Windows CI passed](https://github.com/segaboy/ClasSICK-0.97/actions/runs/37724597975)
+  at 469f307 with the full matrix/replay and eight local/remote hashes matching.
+  [Debugger snapshot](development/debugger-evidence.md) pins code/evidence inputs.
 - Optional i686 debugging failed at WOW64 exception 0x4000001f, with unavailable
   original frame state. Actual i686 conformance still passes; no i686 debugger
   success, general debugger certification or new tool adoption is claimed.
