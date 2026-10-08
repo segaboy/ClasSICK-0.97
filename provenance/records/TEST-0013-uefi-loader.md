@@ -38,5 +38,13 @@ GCC x64 33 in three/i686 28; all prior controls and four EFI images pass.
 Twenty-seven named pairs match; all earlier twenty-three fingerprints are preserved.
 The payload copy matches audited O2. Artifact fingerprints/local results are pinned
 in [the snapshot](../../docs/development/uefi-loader-evidence.md); remote pending.
+
+First remote CI 37788994328 at c8a2342 passes all guards/bootstrap/matrix/image
+checks and emits all 27 matching fingerprints, but the job fails: the intentional
+missing-transition link's exit code remained in LASTEXITCODE, which GitHub's
+PowerShell launcher propagates. Reset that expected rejection only after validating
+its outcome/diagnostic; unexpected link success/failure still throws. Loader C,
+assembly and fixtures are unchanged. A fresh full local replay checks both script
+success and final native exit zero before the corrected remote result is claimed.
 Human provenance review, real firmware ABI/relocation/exit/owned-stack execution,
 exceptions/NMI, paging/devices/B2 and all historical/physical gates remain open.

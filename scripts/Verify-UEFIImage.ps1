@@ -82,6 +82,9 @@ try {
         $missing=@(& $compiler @link $referenceObjects[0] $referenceObjects[1] $referenceObjects[2] -o (Join-Path $controls 'must-not-link.EFI') 2>&1)
     } finally{$ErrorActionPreference=$previousPreference}
     if($LASTEXITCODE -eq 0 -or ($missing -join "`n") -notmatch 'cs_native_halt|cs_entry_anchor'){throw 'Missing transition control did not reject.'}
+    # This deliberate rejected link is a passing control. GitHub's PowerShell
+    # launcher propagates LASTEXITCODE even after a successful script return.
+    $global:LASTEXITCODE=0
     $missing | Out-File -LiteralPath (Join-Path $controls 'missing-transition.log') -Encoding UTF8
     $payload=Join-Path $BuildRoot 'payload/EFI/BOOT'; [void][IO.Directory]::CreateDirectory($payload)
     $packaged=Join-Path $payload 'BOOTX64.EFI'; Copy-Item -LiteralPath $release -Destination $packaged
