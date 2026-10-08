@@ -1,7 +1,8 @@
 # Portable clock verification snapshot
 
-Date 2026-10-07. SPEC-0005 / IMPL-0006 / TEST-0008. Code/test/build inputs are
-pinned after the tested source is committed. Remote CI pending at this draft.
+Date 2026-10-07. SPEC-0005 / IMPL-0006 / TEST-0008. Tested code/test/build inputs:
+`958e4794381e6dae25556a5c2796b1ad8c461e04`. This subsequent text-only record pins
+that immutable implementation. Remote CI is pending publication of this record.
 
 Verify-Clocks.ps1 -BuildRoot <fresh-output-directory> -Sanitizers: five
 configurations pass 34/34 checks each. Independent 5,184-pair arithmetic oracle,
