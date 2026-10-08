@@ -56,4 +56,13 @@ clusters used; GNU mtools 4.0.43 lists `\EFI\BOOT` and extracts a byte-identical
 payload; util-linux 2.39.3 `blkid` identifies GPT and FAT32. No source of these
 tools was read. Their acceptance says nothing about firmware behavior.
 
-Pinned Windows CI results are recorded in the evidence snapshot when they exist.
+## Pinned Windows CI
+
+Run [37845246261](https://github.com/segaboy/ClasSICK-0.97/actions/runs/37845246261)
+on `a6bb92f` failed and is retained. All nine hosted configurations passed CTest
+including the six media checks (Clang x64 106, i686 82; GCC x64 91, i686 67),
+the EFI O2 payload kept SHA-256 `8e25d694…ad831f2`, and the eight non-sanitized
+writer builds generated identical images (each is compared as it is made). The sanitized writer then exited nonzero
+with no output: the wrapper had restored the original PATH after the UART chain,
+so the ASan runtime DLL from the pinned toolchain was not found. The wrapper now
+runs the writer builds with the pinned toolchain PATH; no product code changed.

@@ -25,15 +25,20 @@ if(Test-Path -LiteralPath $mediaRoot){throw 'Use a fresh media output directory.
 $configs=@('clang-hosted/debug-a','clang-hosted/debug-b','clang-hosted/release','clang-hosted/i686','gcc-debug-a','gcc-debug-b','gcc-release','gcc-i686')
 if($Sanitizers){$configs+='clang-hosted/sanitized'}
 $images=[ordered]@{}; $reference=$null
-foreach($config in $configs) {
-    $tool=Join-Path $BuildRoot ($config+'/classick_boot_media.exe')
-    $image=Join-Path $mediaRoot (($config -replace '[/\\]','-')+'.img')
-    & $tool $payload $image
-    if($LASTEXITCODE -ne 0){throw "Boot-media generation failed: $config"}
-    $images[$config]=(Get-FileHash -LiteralPath $image -Algorithm SHA256).Hash.ToLowerInvariant()
-    if($null -eq $reference){$reference=$image}
-    elseif($images[$config] -ne $images[$configs[0]]){throw "Boot-media image differs across builds: $config"}
-}
+# The sanitized writer needs the pinned toolchain's runtime DLLs on PATH.
+$originalPath=$env:PATH
+try {
+    & (Join-Path $PSScriptRoot 'Enter-DevEnvironment.ps1')
+    foreach($config in $configs) {
+        $tool=Join-Path $BuildRoot ($config+'/classick_boot_media.exe')
+        $image=Join-Path $mediaRoot (($config -replace '[/\\]','-')+'.img')
+        & $tool $payload $image
+        if($LASTEXITCODE -ne 0){throw "Boot-media generation failed: $config"}
+        $images[$config]=(Get-FileHash -LiteralPath $image -Algorithm SHA256).Hash.ToLowerInvariant()
+        if($null -eq $reference){$reference=$image}
+        elseif($images[$config] -ne $images[$configs[0]]){throw "Boot-media image differs across builds: $config"}
+    }
+} finally { $env:PATH=$originalPath }
 Write-Output "Matching boot-media image SHA-256 across $($configs.Count) writer builds: $($images[$configs[0]])"
 $check=@(& (Join-Path $PSScriptRoot 'Test-BootMedia.ps1') -Image $reference -Payload $payload -PassThru)[-1]
 if($check.image_sha256 -ne $images[$configs[0]] -or $check.payload_sha256 -ne $payloadHash){throw 'Checker result mismatch.'}
