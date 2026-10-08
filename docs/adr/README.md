@@ -24,6 +24,7 @@ evidence; foundational project constraints cannot be silently relaxed.
 | [ADR-0012](0012-owned-x64-exceptions.md) | Owned x64 descriptor bytes, emergency stacks and terminal first-fault capture | Accepted for development verification |
 | [ADR-0013](0013-native-framebuffer-presentation.md) | Gated native framebuffer presenter, bounded band staging and original boot scene | Accepted for development verification |
 | [ADR-0014](0014-acpi-pm-timer.md) | ACPI PM timer via pre-exit RSDP capture and map-checked table walk | Accepted for development verification |
+| [ADR-0015](0015-cooperative-progress-loop.md) | Single cooperative timed progress loop before keyboard/UART | Accepted for development verification |
 
 Use [the template](template.md). Every substantive decision cites founding
 requirements or approved sources, distinguishes design from historical fact,

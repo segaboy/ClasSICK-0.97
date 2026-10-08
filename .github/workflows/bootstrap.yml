@@ -29,6 +29,6 @@ jobs:
       - name: Verify two fresh hosted builds
         shell: powershell
         run: .\scripts\Verify-Bootstrap.ps1
-      - name: Verify hosted core, loader, exceptions, presenter and unloaded PM timer probe
+      - name: Verify hosted core, loader, exceptions, presenter, PM timer and unloaded progress loop
         shell: powershell
-        run: .\scripts\Verify-PMTimer.ps1 -BuildRoot build\pm-timer-verification -Sanitizers
+        run: .\scripts\Verify-ProgressLoop.ps1 -BuildRoot build\progress-loop-verification -Sanitizers

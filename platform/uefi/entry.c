@@ -38,6 +38,13 @@ void CS_EFIAPI cs_native_stop(cs_uefi_handoff *handoff)
     memory.window_physical=0; memory.window_size=UINT64_C(1)<<47; memory.window_base=0;
     (void)cs_native_timer_probe(handoff,*ready,&memory,port32,NULL,
         (unsigned char *)(uintptr_t)(handoff->trace_base+CS_NATIVE_TRACE_BYTES));
+    /* SPEC-0011: visible 60-second progress on the owned PM timer, then halt. */
+    cs_native_devices devices;
+    devices.memory=&memory; devices.port=port32; devices.port_context=NULL;
+    devices.framebuffer=(volatile unsigned char *)(uintptr_t)handoff->framebuffer.base;
+    devices.arena=(void *)(uintptr_t)handoff->arena_base;
+    (void)cs_native_progress_loop(handoff,*ready,&devices,60,
+        (unsigned char *)(uintptr_t)(handoff->trace_base+CS_LOOP_TRACE_OFFSET));
     cs_native_halt();
 }
 cs_efi_status CS_EFIAPI cs_uefi_entry(void *image,cs_efi_system *system)

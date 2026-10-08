@@ -5,6 +5,13 @@ eligibility applies to the stated scope, not every resource reachable from a URL
 No Apple executable, source, disassembly, decompilation, or copied asset was used.
 No reference-system black-box observation has yet been performed.
 
+## SRC-0047 — Owner's progress-loop continuation
+
+- Owner, 2026-10-08: "do it." This came after the SPEC-0010 handoff named the
+  60-second timed progress loop next. It authorizes SPEC-0011, tests, provenance
+  and normal publication under SRC-0044. No external source is added.
+- Requirement only; no firmware waiver, VM launch, OneNote or edition claim.
+
 ## SRC-0045 — Owner's PM-timer continuation
 
 - Owner, 2026-10-08: "Do it." This came after the lead's SPEC-0009 handoff named

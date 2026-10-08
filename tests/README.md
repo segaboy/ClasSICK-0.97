@@ -54,3 +54,8 @@ every walk result, reader refusal at each stage, wrap extension against summed
 steps, time conversion against a native-division oracle, the map-type reader
 rules and probe traces. The loader `configuration` suite covers RSDP GUID
 selection and bounds.
+
+`native-loop.c` (TEST-0017) drives synthetic counters through the real presenter
+and scene. It covers gates, 24/32-bit wrapping progress over 1–60 seconds with
+exact frame and read counts, late samples, a 20,000,000-read stall and
+out-of-width values. The final frame is compared with the scene oracle.

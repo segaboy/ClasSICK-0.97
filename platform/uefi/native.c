@@ -133,3 +133,87 @@ uint32_t cs_native_timer_probe(const cs_uefi_handoff *handoff,uint32_t descripto
     (void)cs_pmtimer_time(counter.ticks,&elapsed);
     return timer_record(trace,CS_TIMER_OK,acpi,&timer,reads,counter.ticks,elapsed);
 }
+
+static uint32_t loop_record(unsigned char *trace,uint32_t result,uint32_t seconds,cs_time elapsed,
+    uint32_t frames,uint32_t late,uint64_t reads,uint32_t max_delta,uint32_t step)
+{
+    put32(trace,CS_LOOP_TRACE_MAGIC); put32(trace+4,CS_LOOP_TRACE_VERSION);
+    put32(trace+8,result); put32(trace+12,seconds);
+    put32(trace+16,elapsed.seconds); put32(trace+20,elapsed.nanoseconds);
+    put32(trace+24,frames); put32(trace+28,late);
+    put64(trace+32,reads); put32(trace+40,max_delta); put32(trace+44,step);
+    return result;
+}
+uint32_t cs_native_progress_loop(const cs_uefi_handoff *handoff,uint32_t descriptors_ready,
+    const cs_native_devices *devices,uint32_t seconds,unsigned char *trace)
+{
+    cs_acpi_pm_timer timer;
+    cs_pmtimer counter;
+    cs_uefi_framebuffer_layout layout;
+    cs_fb_target target;
+    cs_arena core;
+    cs_boot_scene scene;
+    cs_boot_report report;
+    cs_time zero,elapsed;
+    size_t descriptors;
+    uint64_t reads=0;
+    uint32_t frames=0,late=0,max_delta=0,step=0,delta,still=0,half;
+    zero.seconds=0; zero.nanoseconds=0; elapsed.seconds=0; elapsed.nanoseconds=0;
+    if(trace==NULL) return CS_LOOP_ARGUMENT;
+    if(handoff==NULL || devices==NULL || devices->memory==NULL || devices->port==NULL
+            || devices->framebuffer==NULL || devices->arena==NULL
+            || seconds==0 || seconds>CS_LOOP_MAX_SECONDS)
+        return loop_record(trace,CS_LOOP_ARGUMENT,seconds,zero,0,0,0,0,0);
+    if(handoff->stage!=CS_UEFI_EXITED || handoff->firmware_status!=0)
+        return loop_record(trace,CS_LOOP_NOT_EXITED,seconds,zero,0,0,0,0,0);
+    if(descriptors_ready!=1u) return loop_record(trace,CS_LOOP_NOT_READY,seconds,zero,0,0,0,0,0);
+    if(handoff->rsdp==0 || cs_uefi_check_map(devices->memory->map,devices->memory->map_size,
+                devices->memory->map_stride,devices->memory->map_version,&descriptors)!=CS_UEFI_OK
+            || cs_acpi_find_pm_timer(cs_native_read,(void *)(uintptr_t)devices->memory,
+                handoff->rsdp,&timer)!=CS_ACPI_OK)
+        return loop_record(trace,CS_LOOP_TIMER,seconds,zero,0,0,0,0,0);
+    if(cs_uefi_check_framebuffer(&handoff->framebuffer,&layout)!=CS_UEFI_OK
+            || handoff->framebuffer.size>(uint64_t)SIZE_MAX
+            || cs_fb_init(&target,devices->framebuffer,(size_t)handoff->framebuffer.size,
+                handoff->framebuffer.width,handoff->framebuffer.height,
+                handoff->framebuffer.pitch,handoff->framebuffer.format)!=CS_FB_OK)
+        return loop_record(trace,CS_LOOP_TARGET,seconds,zero,0,0,0,0,0);
+    if(handoff->arena_size!=CS_LOADER_ARENA_BYTES
+            || cs_arena_init(&core,devices->arena,(size_t)handoff->arena_size)!=CS_ARENA_OK
+            || cs_boot_scene_prepare(&core,&target,&scene)!=CS_BOOT_OK)
+        return loop_record(trace,CS_LOOP_ARENA,seconds,zero,0,0,0,0,0);
+    if(cs_boot_scene_draw(&scene,0,&report)!=CS_BOOT_OK)
+        return loop_record(trace,CS_LOOP_DRAW,seconds,zero,0,0,0,0,0);
+    frames=1;
+    reads=1;
+    if(cs_pmtimer_init(&counter,timer.bits,devices->port(devices->port_context,timer.port))!=CS_PMTIMER_OK)
+        return loop_record(trace,CS_LOOP_VALUE,seconds,zero,frames,0,reads,0,0);
+    half=counter.mask/2u;
+    for(;;) {
+        uint32_t want;
+        ++reads;
+        if(cs_pmtimer_sample(&counter,devices->port(devices->port_context,timer.port),&delta)
+                !=CS_PMTIMER_OK || cs_pmtimer_time(counter.ticks,&elapsed)!=CS_PMTIMER_OK)
+            return loop_record(trace,CS_LOOP_VALUE,seconds,elapsed,frames,late,reads,max_delta,step);
+        if(delta>max_delta) max_delta=delta;
+        /* A delta above half the period may hide a wrap: count it as a late sample. */
+        if(delta>half) ++late;
+        still=delta==0?still+1u:0u;
+        if(still>=CS_LOOP_STALL_READS)
+            return loop_record(trace,CS_LOOP_STALLED,seconds,elapsed,frames,late,reads,max_delta,step);
+        if(elapsed.seconds>=seconds) break;
+        /* Sixteen segments fill linearly over the requested duration. */
+        want=(uint32_t)(((uint64_t)elapsed.seconds*16u)/seconds);
+        if(want!=step) {
+            step=want;
+            if(cs_boot_scene_draw(&scene,step,&report)!=CS_BOOT_OK)
+                return loop_record(trace,CS_LOOP_DRAW,seconds,elapsed,frames,late,reads,max_delta,step);
+            ++frames;
+        }
+    }
+    step=16;
+    if(cs_boot_scene_draw(&scene,step,&report)!=CS_BOOT_OK)
+        return loop_record(trace,CS_LOOP_DRAW,seconds,elapsed,frames,late,reads,max_delta,step);
+    ++frames;
+    return loop_record(trace,CS_LOOP_OK,seconds,elapsed,frames,late,reads,max_delta,step);
+}

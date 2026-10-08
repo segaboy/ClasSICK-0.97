@@ -90,6 +90,9 @@ Read `docs/clean-room/POLICY.md`, `CONTRIBUTING.md`, and
 - The owner then said "Do it" (SRC-0045) for the next named step: SPEC-0010 /
   ADR-0014 / IMPL-0014 / TEST-0016 ACPI RSDP capture, a bounded XSDT/FADT walk,
   PM timer extension and a gated native probe. Hosted/unloaded verification only.
+- The owner said "do it." (SRC-0047) for SPEC-0011 / ADR-0015 / IMPL-0015 /
+  TEST-0017: one cooperative 60-second progress loop on the PM timer in the
+  native stop path. Hosted/unloaded verification only.
 - Use `C:\Repos\ClasSICK-0.97` for source and `C:\ClasSICK` for local build/test
   output on the founding workstation. Do not depend on those paths in core code.
 - Do not create specialist chats or delegate work merely because the roadmap

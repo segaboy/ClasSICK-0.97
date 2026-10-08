@@ -79,7 +79,7 @@ $names=@('cs_uefi_check_framebuffer','cs_uefi_check_map','cs_uefi_check_owned','
     'cs_surface_init','cs_surface_fill','cs_surface_clear','cs_arena_init','cs_arena_alloc','cs_arena_reset',
     'cs_fb_init','cs_fb_present','cs_scene_render','cs_boot_scene_prepare','cs_boot_scene_draw','cs_native_present',
     'cs_uefi_acpi20_rsdp','cs_native_read','cs_native_timer_probe','cs_acpi_find_pm_timer',
-    'cs_pmtimer_init','cs_pmtimer_sample','cs_pmtimer_time','cs_x64_inl')
+    'cs_pmtimer_init','cs_pmtimer_sample','cs_pmtimer_time','cs_x64_inl','cs_native_progress_loop')
 $symbols=@{}
 foreach($name in $names) {
     $matches=[regex]::Matches($mapText,'(?m)^([0-9a-fA-F]+)\s+[0-9a-fA-F]+\s+\d+\s+'+$name+'\s*$')

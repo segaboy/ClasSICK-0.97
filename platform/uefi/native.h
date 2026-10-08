@@ -32,4 +32,18 @@ typedef struct {
 int cs_native_read(void *memory,uint64_t physical,unsigned char *out,size_t length);
 uint32_t cs_native_timer_probe(const cs_uefi_handoff *handoff,uint32_t descriptors_ready,
     const cs_native_memory *memory,cs_native_port32 port,void *port_context,unsigned char *trace);
+
+/* SPEC-0011 cooperative timed progress loop and 48-byte owned trace record. */
+enum { CS_LOOP_OK=0, CS_LOOP_ARGUMENT=1, CS_LOOP_NOT_EXITED=2, CS_LOOP_NOT_READY=3,
+    CS_LOOP_TIMER=4, CS_LOOP_TARGET=5, CS_LOOP_ARENA=6, CS_LOOP_DRAW=7, CS_LOOP_VALUE=8,
+    CS_LOOP_STALLED=9 };
+enum { CS_LOOP_TRACE_MAGIC=0x314C5043, CS_LOOP_TRACE_VERSION=1, CS_LOOP_TRACE_BYTES=48,
+    CS_LOOP_TRACE_OFFSET=80, CS_LOOP_MAX_SECONDS=3600, CS_LOOP_STALL_READS=20000000 };
+typedef struct {
+    const cs_native_memory *memory;
+    cs_native_port32 port; void *port_context;
+    volatile unsigned char *framebuffer; void *arena;
+} cs_native_devices;
+uint32_t cs_native_progress_loop(const cs_uefi_handoff *handoff,uint32_t descriptors_ready,
+    const cs_native_devices *devices,uint32_t seconds,unsigned char *trace);
 #endif
