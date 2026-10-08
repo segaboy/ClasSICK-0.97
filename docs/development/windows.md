@@ -164,7 +164,7 @@ no-startup/no-library link twins and failure controls. Windows adapters remain
 enabled by default; GCC's scoped core builds set `CLASSICK_WINDOWS_ADAPTERS=OFF`.
 No standalone image is loaded. See [the link snapshot](core-link-evidence.md).
 
-For the complete current protocol, including SPEC-0006 preboot contracts:
+For the retained SPEC-0006 preboot protocol:
 
 ```powershell
 powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\scripts\Verify-UEFIContracts.ps1 -BuildRoot C:\ClasSICK\uefi-contract-local -Sanitizers
@@ -176,6 +176,15 @@ preboot-object audits. It compares twenty-three named executable/image pairs;
 the existing standalone images still contain only the four core modules. See
 [preboot results](uefi-contract-evidence.md) and [the proposed PC profile](native-pc-profile.md).
 No VM launch, firmware callback, native driver or boot result follows from these tests.
+
+For the complete current protocol including original x64 loader callbacks and
+unloaded EFI images, use Verify-UEFILoader.ps1 with a fresh BuildRoot and
+`-Sanitizers`. It adds five checks to each x64 configuration (Clang 48, GCC 33);
+i686 remains Clang 43/GCC 28 and excludes the x64 ABI. Four EFI images match per
+optimization profile, twelve corrupted images and missing-transition link reject,
+and an original O2 payload tree is prepared. Twenty-seven named comparisons are
+recorded in [loader evidence](uefi-loader-evidence.md). This executes only hosted
+mocks and existing development tests, never generated EFI code or external firmware.
 
 ## Tools deferred until a concrete need
 

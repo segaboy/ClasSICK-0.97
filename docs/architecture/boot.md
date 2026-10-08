@@ -121,6 +121,9 @@ application compatibility.
 SPEC-0006 / ADR-0010 specifies changed-map-key retries, bounded maps/framebuffers,
 reserved allocations and the service-call boundary from reviewed UEFI interfaces
 (SRC-0034, extending the earlier SRC-0005 lead). The proposed PC profile records
-stack/entry/interrupt and post-handoff device obligations. Actual loader/ISA/device
-leaves, exact firmware eligibility, boot media, Secure Boot and external VM/runtime
-distribution rights remain separate work. Public metadata review adopted no firmware.
+stack/entry/interrupt and post-handoff device obligations. SPEC-0007 / ADR-0011 now
+implements original x64 calls and a stop scaffold, with hosted mocks and unloaded
+EFI-image audits. It has no owned exceptions/device loop or observed native handoff.
+Exact firmware eligibility, formatted boot media, Secure Boot and external VM/runtime
+rights remain separate work. [The metadata follow-up](../development/firmware-eligibility.md)
+identified the x64 producer and adopted no firmware. B2 remains unachieved.

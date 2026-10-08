@@ -16,6 +16,17 @@ does not imply that the complete project foundation or any OS boot is finished.
 
 ## Achieved
 
+- SPEC-0007 / ADR-0011 / IMPL-0011 / TEST-0013 implements original x64 UEFI
+  orchestration and an owned-stack terminal scaffold. Local Clang x64 48-check
+  four-config/i686 43-check and GCC x64 33-check three-config/i686 28-check
+  matrices pass with existing debugger/sanitizer/link/endian controls. Four
+  unloaded EFI images form matching O0/O2 twins; twelve corruption controls and
+  omitted-transition link reject. Twenty-seven named comparisons match locally.
+  [Loader evidence](development/uefi-loader-evidence.md) will pin immutable source
+  and remote results after observation. [Firmware follow-up](development/firmware-eligibility.md)
+  identifies the actual x64 producer but leaves binary/transitive provenance
+  needs-review. No VM, native handoff, device loop, B2 or edition boot is verified.
+
 - SPEC-0006 / ADR-0010 / IMPL-0010 / TEST-0012 adds original platform validators
   for bounded framebuffer/map data, reserved allocation consistency and a finite
   exit-outcome model. Five behavioral suites and the object audit pass locally.

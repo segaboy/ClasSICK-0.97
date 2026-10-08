@@ -1,8 +1,9 @@
 # First native-PC profile and ownership contract
 
-Date 2026-10-08. ADR-0010 / SPEC-0006. This is a proposed reproducible test profile
-and an implementation contract; no VM, UEFI image or native boot exists yet.
-The tested subset is preboot data/exit-model validation, IMPL-0010 / TEST-0012.
+Date 2026-10-08. ADR-0010 / SPEC-0006; loader ADR-0011 / SPEC-0007. This is a
+proposed native test profile. Original preboot validation and hosted loader calls
+pass; our own EFI entry/stack/stop image is linked and inspected, never loaded.
+No VM/native boot exists. Full owned exceptions and device work remain required.
 
 | Item | Proposed first configuration / required evidence |
 | --- | --- |
@@ -10,7 +11,7 @@ The tested subset is preboot data/exit-model validation, IMPL-0010 / TEST-0012.
 | CPU/RAM | x86-64, one virtual CPU, 512 MiB; this is a PC development budget, unrelated to Macintosh 128K feasibility |
 | Firmware | EFI64 candidate only; exact firmware artifact hash, selected source/dependency/notice closure and clean-room eligibility required before launch |
 | Board | PIIX3, ACPI enabled; one polling CPU, hardware interrupts disabled after successful handoff until owned exception state is installed |
-| Display | VBoxVGA, 16 MiB VRAM, 3D off; query current GOP data, choose supported RGB/BGR-reserved mode before final capture; prefer 1024x768 without assuming availability |
+| Display | VBoxVGA, 16 MiB VRAM, 3D off; SPEC-0007 reads current GOP RGB/BGR-reserved mode, rejects unsupported data and makes no mode change; later mode-selection contract is separate |
 | Input | Standard virtual PS/2 keyboard; no USB, Guest Additions, shared folders, clipboard or drag/drop dependency |
 | Timer | Optional ACPI PM timer must be discovered/validated and sampled directly after exit; no firmware timer/Stall/Windows callbacks in native loop |
 | Diagnostics | Polling 16550A COM1 to local bounded capture; UART wait budgets must not block input/timer sampling |
@@ -19,7 +20,7 @@ The tested subset is preboot data/exit-model validation, IMPL-0010 / TEST-0012.
 
 ## Before final memory-map capture
 
-The future loader verifies x64 UEFI table signatures/revisions/lengths, EFIAPI
+The SPEC-0007 loader verifies x64 UEFI table signatures/revisions/lengths, EFIAPI
 calling convention and required function pointers. PE subsystem must be UEFI
 application, with exact entry/relocation/import audit independent of the earlier
 native-subsystem link fixtures. No CRT, unreviewed compiler helpers or third-party
@@ -88,8 +89,10 @@ SRC-0035 records installed tool/manual hashes and official v7.2.16 tag
 `4cf0b89546257f5044534a7b94cde2dac1e8c175`. Public license section 18.2.3.12
 includes Apple-attributed OVMF/Bhyve notices. That is an eligibility concern, not
 proof of Apple ROM code or of inclusion in VirtualBox's x64 firmware. Metadata
-inventory/ARM manifest/packaging entries do not establish the complete x64 binary
-closure. Firmware stays needs-review; no external EFI binary has been adopted.
+inventory/ARM manifest/packaging entries did not establish the x64 producer.
+SRC-0040 now locates OvmfPkgX64.dsc/fdf and selected VBOX modules from build/license
+declarations; [the follow-up](firmware-eligibility.md) retains binary correspondence
+and transitive derivation/notice closure as needs-review. No external EFI binary adopted.
 The observed VBoxDD2.dll hash is an installed file fingerprint, not a firmware hash.
 
 VBoxManage's version query works. Its modifyvm help request failed local COM setup
@@ -97,8 +100,8 @@ with E_ACCESSDENIED before displaying help; no VM/configuration was examined or
 changed. Resolve service availability in the isolated project environment before
 future configuration. This is a local tool limitation, not an auto-review rejection.
 
-Next: resolve the exact firmware eligibility/identity, finalize the loader/UEFI ABI
-and packaging, implement native entry and the reviewed device leaves, then run B2
+Next: resolve the exact firmware eligibility/identity, format reviewed boot media,
+implement owned exception state and reviewed device leaves, then run B2
 with repeated cold-start traces and original-scene capture. Macintosh replacement
 firmware/mini vMac and physical hardware remain independent targets; all three
 OS edition boots and historical parity remain open.

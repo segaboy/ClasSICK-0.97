@@ -66,6 +66,13 @@ Read `docs/clean-room/POLICY.md`, `CONTRIBUTING.md`, and
   hosted checks and normal evidence/Git wiki plans. Actual UEFI calls/native entry,
   drivers and boots remain later implementations. Uncertain firmware is ineligible
   until exact provenance is reviewed; do not adopt it from product/license names.
+- The owner accepted the next firmware review/native-loader step with "OK, do it"
+  on 2026-10-08. SPEC-0007 / ADR-0011 / IMPL-0011 / TEST-0013 cover original x64
+  UEFI calls, owned-stack stop scaffold, hosted mock checks, unloaded EFI image
+  audits and ordinary evidence/Git wiki publication. Firmware review is limited to
+  exact publisher build/license metadata while provenance remains uncertain. Do
+  not adopt/run firmware until reviewed; native exceptions/devices/B2 and all
+  edition boots remain separate. Preserve real Macintosh/mini vMac goals.
 - Use `C:\Repos\ClasSICK-0.97` for source and `C:\ClasSICK` for local build/test
   output on the founding workstation. Do not depend on those paths in core code.
 - Do not create specialist chats or delegate work merely because the roadmap

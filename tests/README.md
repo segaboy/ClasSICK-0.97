@@ -1,5 +1,11 @@
 # Tests
 
+`uefi-loader.c` (TEST-0013) exercises original x64 EFIAPI callbacks, independent
+CRC and finite exit traces, malformed data/ownership/cleanup and independent bundles.
+It uses live allocated mock storage and never executes privileged transition code
+or accesses a physical framebuffer. Native EFI inspection/failure controls are
+separate; see [loader evidence](../docs/development/uefi-loader-evidence.md).
+
 Reserved for core/subsystem, API, trap, format, graphics, portability and native
 boot suites using independently authored inputs and rights-cleared fixtures.
 No historical behavior tests are implemented yet. `surfaces.c` is TEST-0004:

@@ -5,6 +5,85 @@ eligibility applies to the stated scope, not every resource reachable from a URL
 No Apple executable, source, disassembly, decompilation, or copied asset was used.
 No reference-system black-box observation has yet been performed.
 
+## SRC-0037 — Owner's native loader and firmware-review continuation
+
+- Owner, 2026-10-08: "OK, do it" after the proposed exact firmware eligibility
+  review and native loader. Original interfaces/loader/transition/tests, inspected
+  own EFI packaging, evidence/publication and Git wiki plans are authorized.
+- Requirement only; no firmware provenance waiver, VM launch, historical identity,
+  completed OS edition or OneNote publication instruction.
+
+## SRC-0038 — UEFI Forum published loader interfaces
+
+- *UEFI Specification* 2.11, cover Nov 21, 2024; accessed 2026-10-08.
+  [Publisher PDF](https://uefi.org/sites/default/files/resources/UEFI_Spec_Final_2.11.pdf),
+  SHA-256 `a64b8e442004b91becc3de9afaf8ca61b259a9a3b436accb6b3711ab5400cee9`.
+- Extends SRC-0034's x64 calling/map/GOP/exit review. Sections 4.1–4.4 (printed
+  87–94 / PDF 171–178), 7.2.1–7.2.2 (154–156 / PDF 238–240), 7.3.7 and
+  7.3.9 (172–173,175–178 / PDF 256–257,259–262), 7.3.16 (193–194 / PDF
+  277–278), 7.5.1 (205–206 / PDF 289–290), 7.5.3 (209–210 / PDF 293–294),
+  9.1 (255–257 / PDF 339–341), 3.5.1.1/Table 3.4 (85 / PDF 169), Appendix
+  D status codes (1984–1985 / PDF 2068–2069): table/CRC, allocation, protocol
+  access, watchdog, LoadedImage and removable x64 payload name.
+- Eligible public interface prose/declarations; adjacent protocol implementation
+  examples were visible, neither copied nor adopted. No external UEFI headers,
+  firmware library, example loader or document redistribution. Original bounded
+  SPEC-0007 policy is narrower than general UEFI support. No Macintosh applicability.
+
+## SRC-0039 — Intel public x64 instruction interfaces
+
+- Intel, *64 and IA-32 Architectures Software Developer's Manual*, Volume 2A,
+  253666-093US, September 2026; accessed 2026-10-08.
+  [Publisher index](https://www.intel.com/content/www/us/en/developer/articles/technical/intel-sdm.html),
+  [publisher PDF](https://cdrdv2-public.intel.com/929353/253666-093-sdm-vol-2a.pdf),
+  SHA-256 `87c5acb6f27e24d9d364841a0d2346c91a8482e36f403409954e2d2a8c817bac`.
+- CLD printed 3-141 / PDF 259, CLI 3-148–149 / PDF 266–267, HLT 3-439 /
+  PDF 557: direction flag, CPL/interrupt-mask semantics and halt/resume behavior.
+- Eligible ISA interface, including instruction pseudocode, not an OS algorithm.
+  Original minimal stack/call/terminal assembly uses the reviewed x64 UEFI ABI.
+  CLI does not mask exceptions/NMI; descriptor tables/fault handlers are not owned
+  in this scaffold. No Intel implementation or firmware adopted. Initial local
+  PDF printing failed character encoding, then bounded UTF-8 extraction succeeded.
+
+## SRC-0040 — Exact VirtualBox x64 producer and selected module metadata
+
+- Oracle official v7.2.16 tag `4cf0b89546257f5044534a7b94cde2dac1e8c175`,
+  accessed 2026-10-08. Extends SRC-0035; eligible build/license declarations only.
+  Recursive source-tree path inventory SHA `d84e06dbfafbe9d8001be6179a662f9d857a1645`
+  was used to locate build files, not read implementation bodies.
+- [Firmware build manifest](https://github.com/VirtualBox/virtualbox/blob/4cf0b89546257f5044534a7b94cde2dac1e8c175/src/VBox/Devices/EFI/Firmware/Makefile.kmk),
+  blob `4910daa4af034774c3408814dfb23dfa9bba92e5`, line 120 and x64 build
+  lines 424–453: OVMF.fd is renamed VBoxEFI-amd64.fd; OvmfPkgX64.dsc/fdf are
+  selected with VBOX=1/VBOX_WITH_OVMF=1. Conditional feature definitions visible.
+- [x64 DSC](https://github.com/VirtualBox/virtualbox/blob/4cf0b89546257f5044534a7b94cde2dac1e8c175/src/VBox/Devices/EFI/Firmware/OvmfPkg/OvmfPkgX64.dsc),
+  blob `9cb47d072f0b54c41232785c051e600f41ce62e0`, copyright/license/build
+  declarations; [x64 FDF](https://github.com/VirtualBox/virtualbox/blob/4cf0b89546257f5044534a7b94cde2dac1e8c175/src/VBox/Devices/EFI/Firmware/OvmfPkg/OvmfPkgX64.fdf),
+  blob `1bee9af6836349d7a67c42663048aac9582a5d82`, VBOX-selected lines 327–334
+  include VBoxHfs, VBoxAppleSim and VBoxApfsJmpStartDxe among other modules.
+- Their .inf build/license declarations only were read: VBoxHfs blob
+  `1894a70523fb781549ae161264204eb898faa123`, VBoxAppleSim
+  `30a0fd54471b381df987c2691ad700ef7ec9b428`, VBoxApfsJmpStartDxe
+  `6bb7302ceecd63649df9cc2d728f8d7601490ccb`. They declare Oracle copyrights
+  and GPL-3.0-only OR CDDL-1.0; implementation filenames were visible, no bodies
+  fetched. Names/notices do not prove Apple code inclusion or clean provenance.
+- Exact x64 producer is now identified. Installed binary-to-source correspondence,
+  transitive source/notice/derivation closure and rights remain needs-review.
+  The earlier Bhyve notice is not automatically selected x64 content. No firmware
+  extraction, machine-code inspection, uncertain implementation adoption or VM run.
+  No external metadata contents are vendored or used to implement the loader.
+
+## SRC-0041 — Microsoft public PE relocation and section interfaces
+
+- Microsoft Learn, [PE Format](https://learn.microsoft.com/en-us/windows/win32/debug/pe-format),
+  accessed 2026-10-08; extends SRC-0032. Optional Header Windows-Specific Fields,
+  Data Directories, Section Table/Flags and .reloc/Base Relocation Block/Types:
+  EFI application subsystem, section/raw/image alignment and permissions, bounded
+  directory/block/type-offset layout and DIR64 delta semantics.
+- Eligible public file-format prose/declarations. Adjacent import/exception/TLS
+  declarations/example visible, unused. Original PowerShell bounded file/map
+  auditor; no external PE parser or firmware relocator adopted. This checks our
+  unloaded output, not actual firmware loading/relocation or hardware permissions.
+
 ## SRC-0033 — Owner's native preboot-contract continuation
 
 - Owner, 2026-10-08: "OK, move on" after proposed firmware handoff/device contracts

@@ -20,6 +20,7 @@ evidence; foundational project constraints cannot be silently relaxed.
 | [ADR-0008](0008-license-deferred.md) | Owner-approved GPL-3.0-or-later for project code/docs/assets | Accepted |
 | [ADR-0009](0009-core-link-and-second-compiler.md) | Current-core complete no-runtime links and scoped GCC conformance | Accepted for development verification |
 | [ADR-0010](0010-uefi-preboot-contracts.md) | Original preboot data/exit model; proposed native-PC ownership/device profile | Accepted contract; firmware/profile needs review |
+| [ADR-0011](0011-original-uefi-loader.md) | Original x64 loader calls and owned stop scaffold; inspected EFI packaging | Accepted for development verification |
 
 Use [the template](template.md). Every substantive decision cites founding
 requirements or approved sources, distinguishes design from historical fact,

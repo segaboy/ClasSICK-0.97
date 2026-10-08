@@ -16,6 +16,12 @@ planned target, not the definition of the portable OS.
 
 ## Current state
 
+The original [x64 UEFI loader](docs/development/uefi-loader-evidence.md) now passes
+hosted firmware-call tests and produces an inspected EFI file with an owned stack
+and terminal stop scaffold. No native boot has been observed. Firmware provenance,
+owned exceptions and device drivers remain open; real Macintosh/mini vMac is still
+the intended independent Mac boot path.
+
 Project bootstrap began on **2026-10-07**. The first subsystem now implements
 [SPEC-0001 bounded graphics surfaces](docs/specifications/SPEC-0001-surfaces.md):
 caller-owned 1bpp MSB-first and RGBA8 storage, clear, clipped rectangle fill and

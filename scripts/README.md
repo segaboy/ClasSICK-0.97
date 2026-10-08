@@ -16,6 +16,13 @@ out of public commits.
 - `Verify-UEFIContracts.ps1 -BuildRoot <fresh-directory> -Sanitizers`: complete
   Clang/GCC/link/debugger matrix plus preboot data/model behavior, executable twins
   and ARM64 endian compile/import audits. Never launches firmware or a VM.
+- `Verify-UEFILoader.ps1 -BuildRoot <fresh-directory> -Sanitizers`: full prior
+  protocol plus x64 loader callback behavior, twin executables and EFI image audit.
+- `Verify-UEFIImage.ps1 -BuildRoot <fresh-directory>`: inspection-only Clang x64
+  O0/O2 EFI twins, corruption/missing-transition controls and original payload tree.
+- `Test-UEFIImage.ps1`: bounded original EFI section/map/relocation/entry/stack/halt
+  audit; `Check-LoaderObject.cmake` permits only our preboot helpers and no mutable
+  globals. Neither script loads firmware or executes the generated EFI code.
 - `Enter-DevEnvironment.ps1`: activate prepared tools in the current process only.
 - `Verify-Bootstrap.ps1`: two new native hosted builds, CTest and executable hashes.
 - `Verify-Surfaces.ps1 -BuildRoot <fresh-directory> -Sanitizers`: x64 debug twins,

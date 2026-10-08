@@ -38,10 +38,12 @@ the project license. Record any future license change through owner approval/ADR
    closure; future helper dependencies and actual native execution need review.
 4. [SPEC-0006 preboot data/exit-model checks](specifications/SPEC-0006-uefi-handoff.md)
    pass with original hosted fixtures. The proposed VirtualBox
-   [PC ownership/device profile](development/native-pc-profile.md) precedes loader
-   implementation. Resolve selected x64 firmware provenance before launch; then
-   finalize ABI/boot-medium packaging, native entry/stack/exceptions and reviewed
-   device leaves. Actual firmware calls and B2 are unverified; follow
+   [PC ownership/device profile](development/native-pc-profile.md) now has an
+   original [SPEC-0007 loader/stop scaffold](development/uefi-loader-evidence.md)
+   with hosted calls and unloaded EFI inspection. The actual x64 producer is
+   identified; selected firmware provenance remains unresolved before launch.
+   Formatted boot media, owned exception state, reviewed device leaves and real
+   handoff/stack execution remain required. B2 is unverified; follow
    [the boot graph](architecture/boot.md).
 5. In parallel only when explicitly staffed, pursue historical-source eligibility,
    Macintosh hardware budget, resource-fork/MFS specs, and trap ABI contracts.
