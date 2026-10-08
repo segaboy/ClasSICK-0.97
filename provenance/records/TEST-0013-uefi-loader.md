@@ -32,7 +32,11 @@ subsystem spelling; the named EFI application spelling succeeds. First PowerShel
 auditor parse failed multiline operator placement, corrected before acceptance.
 These were build-tool/script mistakes, no native execution or altered firmware.
 
-Immutable final source, local/remote results and artifact fingerprints are pinned
-in [the snapshot](../../docs/development/uefi-loader-evidence.md) after observation.
+Final source `c912f2f4db67241c8114cc5415bb16ab873e1fc2`; fresh complete local
+wrapper exits zero. Clang x64 48 checks in four configurations/i686 43, scoped
+GCC x64 33 in three/i686 28; all prior controls and four EFI images pass.
+Twenty-seven named pairs match; all earlier twenty-three fingerprints are preserved.
+The payload copy matches audited O2. Artifact fingerprints/local results are pinned
+in [the snapshot](../../docs/development/uefi-loader-evidence.md); remote pending.
 Human provenance review, real firmware ABI/relocation/exit/owned-stack execution,
 exceptions/NMI, paging/devices/B2 and all historical/physical gates remain open.
