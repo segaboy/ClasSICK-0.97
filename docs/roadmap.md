@@ -1,5 +1,11 @@
 # Milestone roadmap
 
+Current component checkpoint: SPEC-0012 polling PS/2 keyboard and interactive
+native successor are implemented for hosted/unloaded verification. Next are a
+reviewed polling UART, independently generated boot media and firmware/machine
+qualification, then observed B2 cold starts. Macintosh replacement startup and
+mini vMac validation remain later independent milestones.
+
 Status: dated 2026-10-08; dependency-driven gates, not calendar promises.
 Milestone numbers retain the founding brief's labels; they are not a strict
 implementation sequence. Early MFS/resource research feeds the complete M0.4 gate.

@@ -70,6 +70,14 @@ no device access after a failed exit. Native mapping/caching/visibility unverifi
 
 ## Native device obligations before implementation
 
+SPEC-0012 implements the scoped two-key polling contract with eligible
+manufacturer documentation. Require FADT revision >=3 with the 8042 bit set,
+PS/2-mode semantics, no translation/interrupts or USB/SMM interference, released
+keys during startup, and controller self-test that preserves A20/machine state.
+These are unverified machine qualification prerequisites. The interactive loop
+uses an eight-record arena FIFO and 112-byte trace at offset 128; only READY
+starts its 60-second duration. Escape is an early stop, not acceptance.
+
 - PS/2: separately reviewed register/reset/command/ACK/error/scan-set specification;
   drain stale firmware bytes, negotiate the declared set, maintain press/release
   state, normalize Space/Escape to SPEC-0004, count overflow and bound all waits.

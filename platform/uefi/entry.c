@@ -1,6 +1,7 @@
 /* SPDX-License-Identifier: GPL-3.0-or-later */
 /* Copyright (C) 2026 Dean Howell. */
 #include "native.h"
+#include "keyboard.h"
 #include "../pc/x64/state.h"
 typedef void (CS_EFIAPI *cs_native_transfer)(cs_uefi_handoff *,uint64_t);
 extern cs_native_transfer const volatile cs_entry_anchor;
@@ -8,6 +9,16 @@ extern void CS_EFIAPI cs_native_halt(void);
 extern void CS_EFIAPI cs_x64_install(void *state);
 extern const unsigned char cs_x64_vector_base[];
 extern uint32_t CS_EFIAPI cs_x64_inl(uint32_t port);
+extern uint32_t CS_EFIAPI cs_x64_inb(uint32_t port);
+extern void CS_EFIAPI cs_x64_outb(uint32_t port,uint32_t value);
+static uint8_t keyboard_read(void *context,uint16_t port)
+{
+    (void)context; return (uint8_t)cs_x64_inb(port);
+}
+static void keyboard_write(void *context,uint16_t port,uint8_t value)
+{
+    (void)context; cs_x64_outb(port,value);
+}
 static uint32_t port32(void *context,uint16_t port)
 {
     (void)context;
@@ -38,13 +49,15 @@ void CS_EFIAPI cs_native_stop(cs_uefi_handoff *handoff)
     memory.window_physical=0; memory.window_size=UINT64_C(1)<<47; memory.window_base=0;
     (void)cs_native_timer_probe(handoff,*ready,&memory,port32,NULL,
         (unsigned char *)(uintptr_t)(handoff->trace_base+CS_NATIVE_TRACE_BYTES));
-    /* SPEC-0011: visible 60-second progress on the owned PM timer, then halt. */
+    /* SPEC-0012: polling keyboard plus timed progress, then terminal halt. */
     cs_native_devices devices;
     devices.memory=&memory; devices.port=port32; devices.port_context=NULL;
     devices.framebuffer=(volatile unsigned char *)(uintptr_t)handoff->framebuffer.base;
     devices.arena=(void *)(uintptr_t)handoff->arena_base;
-    (void)cs_native_progress_loop(handoff,*ready,&devices,60,
-        (unsigned char *)(uintptr_t)(handoff->trace_base+CS_LOOP_TRACE_OFFSET));
+    cs_ps2_io keyboard;
+    keyboard.read=keyboard_read; keyboard.write=keyboard_write; keyboard.context=NULL;
+    (void)cs_native_keyboard_loop(handoff,*ready,&devices,&keyboard,60,
+        (unsigned char *)(uintptr_t)(handoff->trace_base+CS_KBD_TRACE_OFFSET));
     cs_native_halt();
 }
 cs_efi_status CS_EFIAPI cs_uefi_entry(void *image,cs_efi_system *system)

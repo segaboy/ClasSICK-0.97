@@ -16,6 +16,15 @@ does not imply that the complete project foundation or any OS boot is finished.
 
 ## Achieved
 
+- SPEC-0012 / ADR-0016 / IMPL-0016 / TEST-0018 implements an original bounded
+  polling PS/2 set-2 keyboard and interactive successor loop. ACPI must declare
+  a controller; startup negotiates untranslated set 2 with bounded replies and
+  retries. Initial Space changes the scene; Escape ends early. Hosted verification
+  and unloaded EFI inspection are recorded in the
+  [keyboard snapshot](development/ps2-keyboard-evidence.md). Codex now leads
+  implementation (SRC-0048); no native keyboard or OS boot has been observed.
+  UART, boot media, firmware eligibility and B2 remain open.
+
 - SPEC-0011 / ADR-0015 / IMPL-0015 / TEST-0017 adds a cooperative loop that fills
   the scene's progress bar from PM timer seconds for 60 seconds, with stall and
   late-sample diagnostics in owned trace storage. Pinned
@@ -39,7 +48,7 @@ does not imply that the complete project foundation or any OS boot is finished.
   passes at c6289e1: Clang x64 66 checks/i686 57, GCC x64 51/i686 42. The EFI
   image links the new objects and three omitted-object links reject; 27 earlier
   fingerprints are unchanged. [Snapshot](development/native-framebuffer-evidence.md).
-  Claude now leads implementation (SRC-0044). Native visible output and B2 remain
+  Claude led this checkpoint (SRC-0044). Native visible output and B2 remain
   unverified.
 
 - SPEC-0008 / ADR-0012 / IMPL-0012 / TEST-0014 adds original x64 GDT/TSS/IDT
@@ -224,9 +233,9 @@ does not imply that the complete project foundation or any OS boot is finished.
 - Exact historical profile and 1984-applicable behavioral sources.
 - Macintosh 128K native feasibility, hardware startup and size budgets.
 - WOW64 debugger support, other sanitizer targets, m68k toolchain/runtime and boot.
-- Next: PS/2 keyboard ownership and events in the loop, polling UART diagnostics,
+- Next: polling UART diagnostics,
   reviewed boot media and exact firmware eligibility. Presenter, PM timer and
-  loop are hosted-verified only (SPEC-0009–0011).
+  loop and two-key keyboard are hosted-verified only (SPEC-0009–0012).
   Loader/entry/stack/exception scaffolds are built and inspected; real handoff,
   descriptor installation/fault injection and B2 remain unverified. B1 stays a
   Windows development start.

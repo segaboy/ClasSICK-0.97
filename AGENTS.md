@@ -3,6 +3,13 @@
 Read `docs/clean-room/POLICY.md`, `CONTRIBUTING.md`, and
 `provenance/README.md` before researching or changing this project.
 
+- On 2026-10-08 the owner returned implementation leadership to Codex with the
+  Claude continuation handoff (SRC-0048). Continue SPEC-0012's reviewed PS/2
+  contract, implementation, tests, provenance and ordinary commits/pushes.
+  No delegation, additional chats, automation or live OneNote publication.
+  Firmware eligibility and observed execution precede native boot claims;
+  preserve the independent real Macintosh/mini vMac and three-edition goals.
+
 - Preserve the exact human-facing name **ClasSICK 0.97**.
 - Behavioral compatibility is the goal; Apple's implementation is not a source.
 - Never fetch, inspect, copy, disassemble, decompile, translate, or prompt with

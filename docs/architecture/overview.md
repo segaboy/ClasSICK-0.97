@@ -74,3 +74,9 @@ The source directories above initially contain ownership notes only.
 Subsystem detail: [HAL](hal.md), [System 1 personality](system1.md),
 [legacy applications](legacy-m68k.md), [hosted development](hosted-windows.md),
 [boot gates](boot.md), [targets](targets.md).
+
+The current native-PC component chain includes original framebuffer presentation,
+ACPI PM timer and a bounded polling PS/2 keyboard through the shared core FIFO.
+The interactive loop uses owned arena/trace storage after exit and descriptor
+readiness. Hosted and unloaded checks pass; qualified native execution and every
+OS edition boot remain pending. [Keyboard evidence](../development/ps2-keyboard-evidence.md).

@@ -103,6 +103,11 @@ edition-specific primary evidence and reference behavior remain research tasks.
 
 ## Start here
 
+Latest checkpoint: [SPEC-0012 polling keyboard](docs/specifications/SPEC-0012-ps2-keyboard.md)
+and [verification evidence](docs/development/ps2-keyboard-evidence.md). Space and
+Escape drive the original scene through the core event queue in hosted fixtures.
+No native OS boot has occurred; UART, media and firmware qualification remain.
+
 - [Clean-room policy](docs/clean-room/POLICY.md)
 - [Contribution rules](CONTRIBUTING.md)
 - [Provenance rules](provenance/README.md)

@@ -55,3 +55,9 @@ out of public commits.
 
 Run [the Windows procedure](../docs/development/windows.md). No script establishes
 clean-room originality, lawful reference use, or native boot by itself.
+
+`Verify-PS2Keyboard.ps1 -BuildRoot <fresh-directory> -Sanitizers` is the current
+full chain: prior progress-loop checks, keyboard/ACPI/interactive twin hashes,
+AArch64 LE/BE driver objects, and four unloaded EFI twins. Exact INB/OUTB byte
+checks have mutation controls; eight omitted-object links must fail. No port I/O
+occurs in hosted tests. Use a fresh output root for retained verification.

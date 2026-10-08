@@ -143,3 +143,11 @@ B2 remain open, and nothing has executed natively.
 Exact firmware eligibility, formatted boot media, Secure Boot and external VM/runtime
 rights remain separate work. [The metadata follow-up](../development/firmware-eligibility.md)
 identified the x64 producer and adopted no firmware. B2 remains unachieved.
+
+SPEC-0012 / ADR-0016 adds a polling keyboard successor to the timed loop
+([snapshot](../development/ps2-keyboard-evidence.md)). The native entry calls it
+after presentation and timer probe. Only successful keyboard startup starts the
+60-second duration. Initial Space advances the scene offset; Escape draws a
+changed frame and ends early. Trace offset 128 holds 112 bytes; the entry no
+longer populates the timed-only record at offset 80. No native instruction has
+executed. UART, media and firmware qualification precede the B2 observation.

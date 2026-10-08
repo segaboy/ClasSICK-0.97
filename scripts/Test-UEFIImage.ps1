@@ -79,7 +79,9 @@ $names=@('cs_uefi_check_framebuffer','cs_uefi_check_map','cs_uefi_check_owned','
     'cs_surface_init','cs_surface_fill','cs_surface_clear','cs_arena_init','cs_arena_alloc','cs_arena_reset',
     'cs_fb_init','cs_fb_present','cs_scene_render','cs_boot_scene_prepare','cs_boot_scene_draw','cs_native_present',
     'cs_uefi_acpi20_rsdp','cs_native_read','cs_native_timer_probe','cs_acpi_find_pm_timer',
-    'cs_pmtimer_init','cs_pmtimer_sample','cs_pmtimer_time','cs_x64_inl','cs_native_progress_loop')
+    'cs_pmtimer_init','cs_pmtimer_sample','cs_pmtimer_time','cs_x64_inl','cs_native_progress_loop',
+    'cs_ps2_begin','cs_ps2_poll','cs_acpi_8042','cs_native_keyboard_loop',
+    'cs_input_init','cs_input_push','cs_input_pop','cs_input_reset','cs_x64_inb','cs_x64_outb')
 $symbols=@{}
 foreach($name in $names) {
     $matches=[regex]::Matches($mapText,'(?m)^([0-9a-fA-F]+)\s+[0-9a-fA-F]+\s+\d+\s+'+$name+'\s*$')
@@ -166,12 +168,15 @@ for($field=0;$field -lt 6;++$field) {
 }
 Exact ($fault+115) ([byte[]]@(0x4C,0x89,0x81,0xE8,0,0,0,0xC7,0x81,0xB0,0,0,0,2,0,0,0,0xE9)) 'Fault publish bytes rejected.'
 if($fault+137+[BitConverter]::ToInt32($bytes,[int]($faultRaw+133)) -ne $symbols.cs_native_halt){throw 'Fault halt destination rejected.'}
-# SPEC-0010: the only port access is one original 32-bit IN through EDX.
+# SPEC-0010/0012: original 32-bit timer IN and byte keyboard IN/OUT through DX.
 $inlRaw=Raw $symbols.cs_x64_inl 4
 Exact $symbols.cs_x64_inl ([byte[]]@(0x89,0xCA,0xED,0xC3)) 'Port read bytes rejected.'
+$inbRaw=Raw $symbols.cs_x64_inb 6; $outbRaw=Raw $symbols.cs_x64_outb 6
+Exact $symbols.cs_x64_inb ([byte[]]@(0x89,0xCA,0x31,0xC0,0xEC,0xC3)) 'Byte port read bytes rejected.'
+Exact $symbols.cs_x64_outb ([byte[]]@(0x89,0xD0,0x89,0xCA,0xEE,0xC3)) 'Byte port write bytes rejected.'
 $result=[pscustomobject]@{sha256=(Get-FileHash -LiteralPath $Image -Algorithm SHA256).Hash.ToLowerInvariant();
     size_bytes=$bytes.Length;image_size=$imageSize;entry_rva=$entry;relocations=$patches.Count;
     original_symbols=$names.Count;imports=0;runtime_libraries=0;reloc_raw=$relocRaw;
     anchor_raw=$anchorRaw;transition_raw=$transitionRaw;halt_raw=$haltRaw;first_section_header=$sections[0].header;
-    install_raw=$installRaw;reload_raw=$reloadRaw;vector_raw=$vectorRaw;fault_raw=$faultRaw;state_raw=$stateRaw;inl_raw=$inlRaw;vectors=256}
+    install_raw=$installRaw;reload_raw=$reloadRaw;vector_raw=$vectorRaw;fault_raw=$faultRaw;state_raw=$stateRaw;inl_raw=$inlRaw;inb_raw=$inbRaw;outb_raw=$outbRaw;vectors=256}
 if($PassThru){$result}else{Write-Output 'EFI image audit PASS: original entry/stack/halt, bounded relocations, zero imports/libraries; unloaded.'}

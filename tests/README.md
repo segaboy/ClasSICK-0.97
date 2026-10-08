@@ -59,3 +59,10 @@ selection and bounds.
 and scene. It covers gates, 24/32-bit wrapping progress over 1–60 seconds with
 exact frame and read counts, late samples, a 20,000,000-read stall and
 out-of-width values. The final frame is compared with the scene oracle.
+
+`ps2.c`, `acpi-keyboard.c` and `native-keyboard.c` (TEST-0018) add original
+controller transcripts and scan streams, positive FADT controller gating,
+two-key FIFO behavior, bounded startup/retry/drain failures and interactive scene
+oracles. `ps2-fixture.h` supplies callbacks without touching hardware. Ten new
+x64 / six portable checks include optimized import/data audits; real keyboard
+events, controller timing and boot acceptance remain unobserved.

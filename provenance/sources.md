@@ -5,6 +5,82 @@ eligibility applies to the stated scope, not every resource reachable from a URL
 No Apple executable, source, disassembly, decompilation, or copied asset was used.
 No reference-system black-box observation has yet been performed.
 
+## SRC-0048 — Owner's return-to-Codex keyboard handoff
+
+- Owner-supplied continuation, 2026-10-08, from Claude's verified handoff:
+  resume SPEC-0012 through specification, implementation, verification and normal
+  documentation/commit/push publication. Real Macintosh/mini vMac, all three
+  editions and firmware provenance gates remain required. No delegation, new
+  chats, automation, OneNote publication or firmware waiver is authorized.
+- Requirement only. OpenAI Codex (GPT-6) is the implementation assistant for this
+  checkpoint; implementation-lead self-review and human review remain distinct.
+
+## SRC-0049 — Published PS/2-mode controller interfaces
+
+- SMSC, *KBD43W13 Keyboard and PS/2 Mouse Controller*, undated 22-page edition,
+  manufacturer-issued datasheet archived at
+  <https://k.lse.epita.fr/data/8042.pdf>, accessed 2026-10-08. SHA-256
+  `20f990798e61f3f876864a6e14667bd907d8c7c4ec30718b2acf85a5551ae678`.
+  Reviewed buffers on printed/PDF 8, PS/2 status on 10, configuration and
+  commands on 12, and AB/AD/AE interfaces on 13. AT-mode status meanings on 8
+  are not substituted for the PS/2-mode contract. No internal implementation,
+  firmware, third-party header or driver is an input.
+- Holtek, *HT6542B Keyboard Controller with PS/2*, November 30, 1995, printed/PDF
+  5 power-on self-test/status prose (55 success). Manufacturer-issued archived copy
+  <https://telcontar.net/KBK/Holtek/docs/Holtek%20HT6542B%20datasheet.pdf>, accessed
+  2026-10-08; SHA-256
+  `27f40a0e58c9b476f2b39fbc51c9ec433686f6019a9b724997f91ef061d7910f`.
+  Corroborates the success code for that chip's power-on self-test; the explicit
+  AA command comes from SMSC. Requiring 55 after AA is the original qualified
+  profile's acceptance condition, not a documented universal-device guarantee.
+  This evidence does not establish another
+  device's implementation or VirtualBox conformance. SPEC-0012 is a qualified
+  compatible-device profile, not a universal i8042 claim.
+- Copyrighted interface documentation is linked, not republished. Selected-page
+  text/visual review occurred in the ignored owner workspace. No sample code used.
+
+## SRC-0050 — Published PS/2 keyboard protocol and set-2 codes
+
+- Holtek, *HT82K629B USB + PS/2 Keyboard Encoder*, revision 1.10, August 30,
+  2022, publisher <https://www.holtek.com.tw/webapi/11842/HT82K629Bv110.pdf>,
+  accessed 2026-10-08; SHA-256
+  `0fcc9cb8cb394c8f709edfec9f47bf5a92ffd3b06eb8823bfb71d9098b690979`.
+  Printed/PDF 4–6: reset/BAT, ACK/resend/error, F5/F0/02/F4 commands and timing;
+  10: Space/Escape set-2 make/break bytes; 11: extended/Pause prefixes.
+  Hardware interface prose/tables only; adjacent USB/circuit/unused commands
+  are not adopted. The protocol does not establish historical Macintosh behavior.
+- SPEC-0012's timeouts, two retries, two-key scope and parser recovery are
+  original policy choices. No third-party implementation or asset is copied.
+
+## SRC-0051 — ACPI controller-present indication
+
+- Extends SRC-0036/0046's pinned ACPI 6.6 publisher PDF (same SHA-256):
+  section 5.2.9.3, Table 5.11, PDF 196 / printed 125, IAPC_BOOT_ARCH bit 1;
+  Table 5.9's field offset 109. Reviewed 2026-10-08, including visual page review.
+  Eligible interface declarations; no actual firmware table or parser used.
+  A declaration is a prerequisite, not proof of controller readiness or rights.
+
+## SRC-0052 — Intel byte-port instruction interfaces
+
+- Extends SRC-0039/0043: Intel SDM volume 2A, order 253666-093, September 2026,
+  IN, PDF 573–574 / printed 3-455–456, same pinned hash
+  `87c5acb6f27e24d9d364841a0d2346c91a8482e36f403409954e2d2a8c817bac`.
+- Intel SDM volume 2B, order 253667-093, September 2026, OUT,
+  PDF 179–180 / printed 4-171–172, publisher
+  <https://cdrdv2-public.intel.com/929354/253667-093-sdm-vol-2b.pdf>, accessed
+  2026-10-08; SHA-256
+  `a261998ace8e07f624bf3e2486bb6cfe950fb8be8d0dc9631bcecb4c5ec953e4`.
+  Opcode EC/EE, AL/DX operands and privilege/exception interface only. Original
+  Microsoft-x64 register marshaling; no other assembly implementation consulted.
+
+Discovery exposure for SRC-0049–0052: search results showed OSDev/Wikipedia
+summaries and a NURVE Chameleon user-guide snippet containing driver/API examples.
+Those snippets were not adopted or studied as implementation inputs; the full
+guide and OS code were not opened. SMSC KBD42W11, Microchip LPC47M172 and Holtek
+HT6542B datasheet discovery was limited to published hardware interface pages.
+Only the catalogued scoped contracts support SPEC-0012. No Apple implementation,
+executable, ROM, copied asset or uncertain firmware body was retrieved or used.
+
 ## SRC-0047 — Owner's progress-loop continuation
 
 - Owner, 2026-10-08: "do it." This came after the SPEC-0010 handoff named the

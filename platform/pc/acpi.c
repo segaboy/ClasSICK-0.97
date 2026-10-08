@@ -114,3 +114,17 @@ cs_acpi_result cs_acpi_find_pm_timer(cs_acpi_reader read,void *context,uint64_t 
     *out=timer;
     return CS_ACPI_OK;
 }
+
+cs_acpi_result cs_acpi_8042(cs_acpi_reader read,void *context,uint64_t fadt,uint32_t *out)
+{
+    unsigned char header[36],flags[2];
+    uint32_t length;
+    cs_acpi_result result;
+    if(read==NULL || out==NULL) return CS_ACPI_ARGUMENT;
+    result=table(read,context,fadt,"FACP",116,header,&length);
+    if(result!=CS_ACPI_OK) return result;
+    if(header[8]<3) return CS_ACPI_UNSUPPORTED;
+    if(!read(context,fadt+109u,flags,2)) return CS_ACPI_ACCESS;
+    *out=(flags[0]>>1)&1u;
+    return CS_ACPI_OK;
+}

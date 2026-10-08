@@ -66,6 +66,13 @@ checks supplement runtime tests; they cannot replace m68k/ARM64 execution eviden
 
 ## Continuous integration
 
+SPEC-0012 / TEST-0018 adds synthetic PS/2 command transcripts and literal scan
+streams with independent expected events. Hosted interactive tests compare real
+core rendering against the existing point oracle and preserve device/trace guards.
+Full Clang/GCC, actual i686, x64 sanitizers, endian/import audits and unloaded EFI
+twins supplement these checks. They provide no real port, controller, firmware or
+native boot observation; those require the named qualified B2 environment.
+
 Bootstrap CI runs on Windows with the same pinned setup, source guard, fresh build,
 and CTest probes; it never fetches a reference system. Use read-only repository
 permissions and no untrusted PR secrets or `pull_request_target` execution. Future
