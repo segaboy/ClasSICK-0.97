@@ -20,7 +20,10 @@ does not imply that the complete project foundation or any OS boot is finished.
   polling PS/2 set-2 keyboard and interactive successor loop. ACPI must declare
   a controller; startup negotiates untranslated set 2 with bounded replies and
   retries. Initial Space changes the scene; Escape ends early. Hosted verification
-  and unloaded EFI inspection are recorded in the
+  and unloaded EFI inspection pass locally and in pinned
+  [Windows CI 37820711475](https://github.com/segaboy/ClasSICK-0.97/actions/runs/37820711475)
+  at e0b9d1a: Clang x64 91/i686 71, GCC x64 76/i686 56, with all 49 artifact
+  fingerprints matching. Results are recorded in the
   [keyboard snapshot](development/ps2-keyboard-evidence.md). Codex now leads
   implementation (SRC-0048); no native keyboard or OS boot has been observed.
   UART, boot media, firmware eligibility and B2 remain open.

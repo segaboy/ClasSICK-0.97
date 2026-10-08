@@ -44,5 +44,10 @@ uses ps2-keyboard-verification-20261008-b, without overwriting the failed log.
 That full matrix passed: Clang x64 91 per Debug twin/Release/ASan+UBSan and
 actual i686 71; scoped GCC x64 76 per Debug twin/Release and actual i686 56.
 The EFI controls and AArch64 LE/BE driver audits pass. See the snapshot for hashes.
+Compiled/test/script source `e0b9d1a5116d033266dd0270d0f88a7c538b212c`.
+Pinned [Windows CI 37820711475](https://github.com/segaboy/ClasSICK-0.97/actions/runs/37820711475)
+passes on that exact staging revision before main publication, with the same full
+matrix and two additional bootstrap builds. All 55 local/remote comparison labels
+/ 49 distinct artifact fingerprints match; 33 of the prior 43 are unchanged.
 No firmware, native ports, VM, native scene or B2 has been observed. Human review
 pending. Tests cannot establish physical device support or provenance certification.

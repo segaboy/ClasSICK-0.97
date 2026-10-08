@@ -25,3 +25,14 @@ Clang x64 81 checks per configuration, i686 65; GCC x64 66, i686 50.
 All other TEST-0016 fingerprints are unchanged, including the loader, ACPI, PM
 timer, framebuffer and scene tests. The EFI image now runs present, probe, then
 a 60-second loop, then halts; it has never been executed.
+
+## Owner-workstation replay follow-up — 2026-10-08
+
+Before the keyboard changes, the unmodified public f1e7a09 state passed a fresh
+local Verify-ProgressLoop matrix in `C:\ClasSICK\progress-loop-local-a`.
+All 49 printed comparison labels / 43 distinct fingerprints matched the retained
+CI 37812572045 log. The adjacent UTF-16 local log and hash records remain.
+One Debug directory was subsequently rebuilt for incremental keyboard work;
+those replacement binaries are not baseline evidence. The original dated
+snapshot above remains unchanged. [Keyboard verification](ps2-keyboard-evidence.md)
+records the independently fresh successor run and exact source boundary.

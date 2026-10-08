@@ -12,7 +12,15 @@ and Release, actual i686 56. Prior debugger/core-link/loader/presenter/timer
 controls remain. Four unloaded EFI O0/O2 twins pass 53 named symbols, three
 DIR64 relocations, one eight-byte writable slot, 23 corruption rejections and
 eight omitted-object links. AArch64 LE/BE keyboard import audits pass.
-Immutable source and CI identities will be added after remote verification.
+Compiled/test/script source `e0b9d1a5116d033266dd0270d0f88a7c538b212c`.
+Pinned [Windows CI 37820711475](https://github.com/segaboy/ClasSICK-0.97/actions/runs/37820711475)
+passed on that exact revision by workflow dispatch on the existing
+`claude/ci-staging` branch before `main` advanced. It passes the same full matrix
+and the public source guard (248 files), plus two fresh 91-check bootstrap builds.
+All 55 local/remote comparison labels / 49 distinct fingerprints match exactly.
+The downloaded UTF-8 CI log is retained at `C:\ClasSICK\ps2-ci-37820711475.log`.
+This follow-up adds results and a fingerprint manifest without changing any
+compiled source, test or script from the verified revision.
 The first root (-a) stopped on GCC test-file formatting warnings; its log is
 retained. Corrected tests pass GCC's new ten-check development selection.
 
@@ -25,6 +33,8 @@ The wrapper prints 55 comparison labels representing 49 distinct artifact
 fingerprints. Compared with the prior 43 fingerprints, 33 remain unchanged,
 ten change (ACPI tests, native gate/timer/loop tests and EFI images), and six are
 new. ACPI's appended presence function changes binaries that link that object.
+The complete [fingerprint manifest](ps2-keyboard-fingerprints.json) retains every
+printed comparison label, including repeated checks of the same artifact.
 
 | Artifact | SHA-256 |
 | --- | --- |
