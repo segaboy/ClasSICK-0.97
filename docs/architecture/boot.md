@@ -5,7 +5,9 @@ Status: B0 and hosted B1 verified; native boot contracts remain unachieved.
 The [2026-10-08 readiness audit](../development/boot-readiness-audit.md)
 passes retained input/artifact integrity and five unloaded EFI inspections.
 Native launch is NO-GO pending formatted media and exact firmware/machine
-qualification. B2 and all physical edition gates remain open.
+qualification. B2 and all physical edition gates remain open. SPEC-0014 now
+supplies the formatted medium ([evidence](../development/boot-media-evidence.md));
+firmware eligibility and machine qualification still block a launch.
 
 ## Three distinct gates
 
@@ -165,3 +167,9 @@ poll, with a finite final drain after keyboard termination. Serial failure and
 atomic record loss persist in exactly 640 trace bytes at offset 256. Port mapping,
 clock and model require machine qualification; THR/TEMT observations in fixtures
 do not prove native remote delivery. No asynchronous serial exception path exists.
+
+SPEC-0014 / ADR-0018 writes a fixed 64-MiB GPT disk: protective MBR, twin headers
+and arrays, one 1-MiB-aligned FAT32 ESP and only `\EFI\BOOT\BOOTX64.EFI` in
+contiguous clusters. Fixed GUIDs and dates make it reproducible; two copies must
+not be attached at once. Firmware acceptance, VM attachment and USB writing are
+unverified.

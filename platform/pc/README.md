@@ -13,4 +13,5 @@ and extend the 24/32-bit PM timer; `x64/io.S` holds the single port read. No nat
 execution has occurred. `ps2.c` implements the SPEC-0012 two-key polling contract;
 `uart.c` implements the SPEC-0013 bounded byte-port diagnostic transport, both
 with caller-owned state and synthetic hosted callbacks. Target mapping/model/clock
-and observed native behavior remain qualification gates.
+and observed native behavior remain qualification gates. `media.c` (SPEC-0014) is
+a host-side writer for the fixed GPT/FAT32 boot image; it is not linked into EFI.

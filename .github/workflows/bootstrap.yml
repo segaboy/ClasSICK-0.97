@@ -12,7 +12,7 @@ permissions:
 jobs:
   windows-bootstrap:
     runs-on: windows-2025
-    timeout-minutes: 20
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
@@ -29,6 +29,6 @@ jobs:
       - name: Verify two fresh hosted builds
         shell: powershell
         run: .\scripts\Verify-Bootstrap.ps1
-      - name: Verify hosted core, loader, exceptions, presenter, timer, keyboard and UART
+      - name: Verify hosted core, loader, exceptions, presenter, timer, keyboard, UART and boot media
         shell: powershell
-        run: .\scripts\Verify-UARTDiagnostics.ps1 -BuildRoot build\uart-verification -Sanitizers
+        run: .\scripts\Verify-BootMedia.ps1 -BuildRoot build\media-verification -Sanitizers

@@ -5,6 +5,71 @@ eligibility applies to the stated scope, not every resource reachable from a URL
 No Apple executable, source, disassembly, decompilation, or copied asset was used.
 No reference-system black-box observation has yet been performed.
 
+## SRC-0056 — Owner's boot-media continuation and FAT32 decision
+
+- Owner, 2026-10-08: "ok, do it." after Claude proposed the two preparation tracks
+  that need no VM: original FAT/UEFI media packaging with independent checks, and a
+  documents-only firmware eligibility review. Ordinary specification, code, tests,
+  provenance, commits/pushes and HQ registration under the existing workflow.
+- Asked whether Claude could fetch Microsoft's FAT32 specification through the
+  owner's desktop browser pane, the owner chose "Yes, download it". Asked to accept
+  its embedded agreement, the owner asked about alternatives (Linux FAT support was
+  explained as excluded implementation code; ECMA-107/FAT16 was offered), then
+  answered: "Our goal is to only clean room system 0.97. Adding FAT32 support is
+  outside of that. I think that's acceptable."
+- Recorded reading, stated back to the owner in chat with an offer to switch to
+  ECMA-107/FAT16: the owner accepts the Microsoft specification terms for this PC
+  boot tooling, and the clean-room requirement governs the System 0.97
+  reimplementation rather than published PC interface specifications used under
+  their own terms. No correction had been received at publication. This does not
+  relax the no-Apple-material rule, permit reading other implementations, waive
+  firmware eligibility or authorize a VM, native run, delegation or OneNote.
+- Claude (Anthropic; session configured as `claude-opus-5-5`) leads this work.
+  Human provenance/rights review pending; this is not legal advice.
+
+## SRC-0057 — Microsoft FAT32 File System Specification
+
+- Microsoft, *Microsoft Extensible Firmware Initiative FAT32 File System
+  Specification — FAT: General Overview of On-Disk Format*, Version 1.03,
+  December 6, 2000; legal agreement updated March 30, 2011. Publisher copy
+  <https://download.microsoft.com/download/1/6/1/161ba512-40e2-4cc9-843a-923143f3456c/fatgen103.doc>
+  (UEFI 2.11 "Links to UEFI-Related Documents" names this document), fetched
+  2026-10-08 into the owner's desktop browser pane: 222,720 bytes, SHA-256
+  `b17d66c796d9cd3070adf4ccbc00add5a8b6b6f5491fe8ea949df778fce60172`, served
+  Last-Modified 17 Feb 2025. Text was extracted in the page for review; the
+  document was not saved to the repository or vendored.
+- Reviewed: Boot Sector and BPB tables (offsets 0–35), FAT32 structure at offset
+  36, sector signature notes, FAT data structure and cluster/sector arithmetic,
+  FAT type determination, FAT32 28-bit entries/EOC/bad mark, FAT[0]/FAT[1], FAT
+  volume initialization (FAT32 sectors-per-cluster table and FAT size
+  computation), FSInfo and backup boot sector, 32-byte directory entries, name
+  rules, attributes, dot/dotdot, date/time formats and size limits. Long-name
+  sections were scanned only to confirm short names suffice; not implemented.
+- The document's C code fragments were read as interface description; none were
+  copied. The SPEC-0014 writer and both checkers are original.
+- Agreement: royalty-free copyright license and patent covenant limited to
+  products that comply with the unmodified specification and are used for UEFI
+  boot, install, setup, repair, diagnostics or inventory purposes; both terminate
+  if the user initiates patent litigation against Microsoft or covered parties;
+  export compliance applies. Accepted by the owner under SRC-0056. Scope fit and
+  rights are pending human review; no Microsoft code or boot code is used.
+
+## SRC-0058 — UEFI Forum published media and partition interfaces
+
+- *UEFI Specification* 2.11 (same publisher PDF and SHA-256
+  `a64b8e442004b91becc3de9afaf8ca61b259a9a3b436accb6b3711ab5400cee9` as
+  SRC-0034/0038), reviewed 2026-10-08 from the owner's local reference copy by
+  text extraction in the owner's Cowork Linux shell.
+- 4.2 CRC note (PDF 174); 5.1–5.3.3 with Tables 5.1–5.8 (printed 111–120 /
+  PDF 195–204): legacy and protective MBR, GPT overview, header, entry array,
+  ESP type GUID, attributes and alignment guidance; 13.3–13.3.4.3 (462–467 /
+  PDF 546–551): FAT variants, system partition, names, directory structure,
+  partition discovery and media formats; Appendix A Table A.1 (1970 / PDF 2054)
+  GUID storage. The removable-media file name is SRC-0038's 3.5.1.1 review.
+- Eligible public interface prose and tables. Adjacent structure declarations
+  were visible, not copied. Does not establish any firmware's actual FAT/GPT
+  behavior, VirtualBox media handling or historical Macintosh behavior.
+
 ## SRC-0055 — Owner's readiness audit request
 
 - Owner, 2026-10-08: "i typed 1 in error. Please perform the audit."
@@ -246,6 +311,10 @@ executable, ROM, copied asset or uncertain firmware body was retrieved or used.
   CLI does not mask exceptions/NMI; descriptor tables/fault handlers are not owned
   in this scaffold. No Intel implementation or firmware adopted. Initial local
   PDF printing failed character encoding, then bounded UTF-8 extraction succeeded.
+- SPEC-0014 addendum (2026-10-08, Claude): JMP rel8 `EB cb` (printed 3-503–504 /
+  PDF 622–623 of the same volume and hash): short jump with a sign-extended 8-bit
+  displacement added to the address of the next instruction. Used with CLI/HLT
+  only for the four-byte legacy stub in the FAT32 boot sector; UEFI never runs it.
 
 ## SRC-0040 — Exact VirtualBox x64 producer and selected module metadata
 

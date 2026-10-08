@@ -1,9 +1,9 @@
 # Milestone roadmap
 
-Current component checkpoint: SPEC-0013 bounded polling UART and diagnostic
-keyboard successor are implemented for hosted/unloaded verification. Next are
-independently generated boot media and firmware/machine
-qualification, then observed B2 cold starts. Macintosh replacement startup and
+Current component checkpoint: SPEC-0014 original GPT/FAT32 boot media packages
+the audited loader reproducibly and passes independent checks; it has not been
+read by firmware. Next are exact firmware eligibility and machine qualification,
+then observed B2 cold starts. Macintosh replacement startup and
 mini vMac validation remain later independent milestones.
 
 Status: dated 2026-10-08; dependency-driven gates, not calendar promises.

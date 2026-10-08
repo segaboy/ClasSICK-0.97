@@ -103,11 +103,12 @@ edition-specific primary evidence and reference behavior remain research tasks.
 
 ## Start here
 
-Latest checkpoint: [SPEC-0013 UART diagnostics](docs/specifications/SPEC-0013-uart-diagnostics.md)
-and [verification evidence](docs/development/uart-diagnostics-evidence.md). Space
-and Escape drive the original scene through the core event queue; original serial
-diagnostics and retained loss/failure records are checked in hosted fixtures.
-No native OS boot has occurred; native serial delivery, media and firmware qualification remain.
+Latest checkpoint: [SPEC-0014 boot media](docs/specifications/SPEC-0014-boot-media.md)
+and [evidence](docs/development/boot-media-evidence.md). The audited loader is
+packaged in an original, reproducible GPT disk image with a FAT32 EFI System
+Partition, checked by two independent readers. Previous: [SPEC-0013 UART
+diagnostics](docs/specifications/SPEC-0013-uart-diagnostics.md). No native OS boot
+has occurred; firmware eligibility and machine qualification remain.
 
 - [Clean-room policy](docs/clean-room/POLICY.md)
 - [Contribution rules](CONTRIBUTING.md)

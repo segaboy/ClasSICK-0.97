@@ -3,6 +3,12 @@
 Read `docs/clean-room/POLICY.md`, `CONTRIBUTING.md`, and
 `provenance/README.md` before researching or changing this project.
 
+- On 2026-10-08 the owner said "ok, do it." to the media and documents-only
+  firmware tracks (SRC-0056). Claude leads this work; ordinary spec/code/tests,
+  provenance, commits/pushes and HQ registration. The owner accepted Microsoft's
+  FAT32 specification terms for PC boot tooling, outside the System 0.97
+  clean-room scope. No VM/native run, firmware waiver, delegation or OneNote.
+
 - On 2026-10-08 the owner explicitly authorized exactly one fresh implementation
   agent for SPEC-0013 polling UART diagnostics (SRC-0053), including original
   spec/code/tests/provenance and an unpushed ordinary commit. The coordinating

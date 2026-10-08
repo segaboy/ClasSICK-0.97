@@ -23,7 +23,7 @@ and this configuration/devices are unqualified. No native boot is observed.
 | Timer | ACPI PM timer: SPEC-0010 captures the RSDP pre-exit, validates XSDT/FADT and samples the I/O port directly after exit (hosted-verified only); no firmware timer/Stall/Windows callbacks in native loop |
 | Diagnostics | SPEC-0013 qualified TI-compatible byte-register UART at proposed 0x3F8, assumed 1.8432-MHz clock, divisor 12/9600 baud/8N1. Mapping/model/clock/capture require qualification; fixed queue, nonblocking service and bounded final drain are hosted-verified only |
 | Other devices | Network/audio/USB disabled, no extension-pack requirement, no unrelated mounted disk or external boot image |
-| Boot medium | Independently generated FAT/UEFI medium carrying only our PE image; packaging/filename/partition recipe will be specified and audited with the loader |
+| Boot medium | SPEC-0014 original 64-MiB GPT raw image, one FAT32 ESP carrying only `\EFI\BOOT\BOOTX64.EFI`; generated and independently checked, not yet attached to any VM or read by firmware. VM disk conversion/attachment needs its own recorded procedure |
 
 ## Before final memory-map capture
 

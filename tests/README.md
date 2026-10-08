@@ -74,3 +74,9 @@ checks actual original ASCII transport, rejected gates, retained trace/ring guar
 scene oracle, 60-second wrap/Space/Escape and diagnostic failure independence.
 Nine x64 / five portable checks include optimized import audits. The complete
 prior PS/2 interaction and 60-second contracts remain separately covered.
+
+`boot-media.c` (TEST-0021) builds complete SPEC-0014 images and re-reads them
+with an oracle that shares no code with the writer: MBR, twin GPT and CRCs, BPB,
+FSInfo, FAT, the `\EFI\BOOT\BOOTX64.EFI` path, payload bytes and an all-other-
+sectors-zero scan, across nine payload sizes, argument rejections and rebuilds.
+Six checks per configuration; no image is booted.

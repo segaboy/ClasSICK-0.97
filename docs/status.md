@@ -16,6 +16,16 @@ does not imply that the complete project foundation or any OS boot is finished.
 
 ## Achieved
 
+- SPEC-0014 / ADR-0018 / IMPL-0018 / TEST-0021 packages the audited O2 loader in
+  an original 64-MiB GPT image with one FAT32 EFI System Partition holding only
+  `\EFI\BOOT\BOOTX64.EFI`. Hosted suites re-read every image with a separate
+  oracle; an independent PowerShell checker, 30 corruption controls and three
+  tool refusals pass locally. Local GCC and Clang writers produce image SHA-256
+  `370b7d4e…a46078` ([snapshot](development/boot-media-evidence.md)). Built from
+  Microsoft's FAT32 v1.03 and UEFI 2.11 under the owner's SRC-0056 decision.
+  Not booted; firmware eligibility, machine qualification and B2 remain open.
+  Pinned Windows CI and human provenance/rights review are pending.
+
 - SPEC-0013 / ADR-0017 / IMPL-0017 / TEST-0019 adds original bounded polling
   UART diagnostics to the native keyboard scene successor. A fixed queue counts
   whole-record loss; RAM retains sticky serial failures while keyboard progress
@@ -247,9 +257,10 @@ does not imply that the complete project foundation or any OS boot is finished.
 - Exact historical profile and 1984-applicable behavioral sources.
 - Macintosh 128K native feasibility, hardware startup and size budgets.
 - WOW64 debugger support, other sanitizer targets, m68k toolchain/runtime and boot.
-- Next: reviewed boot media, exact firmware eligibility and machine qualification.
-  Presenter, PM timer, loop, two-key keyboard and UART diagnostics have only
-  hosted/unloaded evidence (SPEC-0009–0013).
+- Next: exact firmware eligibility and machine qualification. Boot media is
+  generated and checked but unread by any firmware (SPEC-0014). Presenter, PM
+  timer, loop, two-key keyboard and UART diagnostics have only hosted/unloaded
+  evidence (SPEC-0009–0013).
   Loader/entry/stack/exception scaffolds are built and inspected; real handoff,
   descriptor installation/fault injection and B2 remain unverified. B1 stays a
   Windows development start.

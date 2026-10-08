@@ -69,3 +69,10 @@ twin labels, Clang/GCC x64/i686 O0/O2 import/frame audits and AArch64 LE/BE UART
 objects. EFI keeps earlier source indexes and appends two UART sources; 59
 symbols and ten omitted-object controls apply. Hosted tests use synthetic ports;
 no native delivery, firmware adoption or edition boot is claimed.
+
+`Verify-BootMedia.ps1 -BuildRoot <fresh-directory> -Sanitizers` is the current
+full chain. It calls the UART wrapper, checks boot-media tool/test twins, packages
+the audited O2 payload with all nine hosted writer builds and requires one image
+hash, then runs `Test-BootMedia.ps1`, three tool refusals and 30 corruption
+controls. `Test-BootMedia.ps1 -Image <img> -Payload <efi>` is the independent
+SPEC-0014 checker. Neither script attaches, writes or boots the image.
