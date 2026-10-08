@@ -489,7 +489,7 @@ int WINAPI WinMain(HINSTANCE instance, HINSTANCE previous, LPSTR command, int sh
                     || !PostMessageW(window,WM_KEYDOWN,VK_SPACE,1)
                     || !PostMessageW(window,WM_KEYDOWN,VK_SPACE,((LPARAM)1<<30)|1)
                     || !PostMessageW(window,WM_KEYUP,VK_SPACE,
-                        ((LPARAM)1<<31)|((LPARAM)1<<30)|1)
+                        (LPARAM)((uint32_t)1<<31)|((LPARAM)1<<30)|1)
                     || !PostMessageW(window,WM_APP+1,0,0)) goto cleanup;
         } else {
             if (validate_start) {
