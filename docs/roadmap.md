@@ -36,10 +36,13 @@ the project license. Record any future license change through owner approval/ADR
    Clang/LLD and GCC/GNU ld complete no-runtime links at two widths/optimizations,
    matching twins and failure controls. This establishes the current profile's
    closure; future helper dependencies and actual native execution need review.
-4. Prepare/review UEFI VM tooling and device contracts; the owner named installed
-   VirtualBox (observed 7.2.16r174877) for native-PC tests. No VM/startup/firmware
-   validation is claimed. Implement the B2 dependency
-   chain in [the boot graph](architecture/boot.md).
+4. [SPEC-0006 preboot data/exit-model checks](specifications/SPEC-0006-uefi-handoff.md)
+   pass with original hosted fixtures. The proposed VirtualBox
+   [PC ownership/device profile](development/native-pc-profile.md) precedes loader
+   implementation. Resolve selected x64 firmware provenance before launch; then
+   finalize ABI/boot-medium packaging, native entry/stack/exceptions and reviewed
+   device leaves. Actual firmware calls and B2 are unverified; follow
+   [the boot graph](architecture/boot.md).
 5. In parallel only when explicitly staffed, pursue historical-source eligibility,
    Macintosh hardware budget, resource-fork/MFS specs, and trap ABI contracts.
    Those investigations must not import protected implementation material.

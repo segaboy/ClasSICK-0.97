@@ -164,6 +164,19 @@ no-startup/no-library link twins and failure controls. Windows adapters remain
 enabled by default; GCC's scoped core builds set `CLASSICK_WINDOWS_ADAPTERS=OFF`.
 No standalone image is loaded. See [the link snapshot](core-link-evidence.md).
 
+For the complete current protocol, including SPEC-0006 preboot contracts:
+
+```powershell
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\scripts\Verify-UEFIContracts.ps1 -BuildRoot C:\ClasSICK\uefi-contract-local -Sanitizers
+```
+
+This runs 43 checks per five Clang configurations and 28 per four scoped GCC
+configurations, plus existing link/debugger/sanitizer controls and new ARM64 LE/BE
+preboot-object audits. It compares twenty-three named executable/image pairs;
+the existing standalone images still contain only the four core modules. See
+[preboot results](uefi-contract-evidence.md) and [the proposed PC profile](native-pc-profile.md).
+No VM launch, firmware callback, native driver or boot result follows from these tests.
+
 ## Tools deferred until a concrete need
 
 | Tool/category | Purpose when introduced | Current state |

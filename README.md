@@ -75,6 +75,15 @@ native Windows probe builds passed CTest and produced identical executable hashe
 See [verification evidence](docs/development/bootstrap-evidence.md) and
 [current project status](docs/status.md).
 
+[SPEC-0006 preboot contracts](docs/specifications/SPEC-0006-uefi-handoff.md) now
+validate bounded framebuffer/map data and reserved allocations, with a finite
+exit-outcome model. Independent hosted tests pass; the current matrix has 43
+checks per Clang configuration and 28 per scoped GCC configuration. See
+[results and repeat instructions](docs/development/uefi-contract-evidence.md).
+The [native-PC profile](docs/development/native-pc-profile.md) defines proposed
+loader/device ownership. Exact firmware eligibility remains unresolved; actual
+UEFI calls, native entry, drivers and boot still require implementation and evidence.
+
 Every completed version requires original-hardware, native-PC without Linux, and
 Linux-PC editions. Original/native-PC editions target the same behavior; Linux
 extensions require explicit versioned divergence. All three boot gates are pending.

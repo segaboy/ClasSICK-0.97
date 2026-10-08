@@ -29,6 +29,6 @@ jobs:
       - name: Verify two fresh hosted builds
         shell: powershell
         run: .\scripts\Verify-Bootstrap.ps1
-      - name: Verify hosted core, complete standalone links and second compiler
+      - name: Verify hosted core, complete links and UEFI preboot contracts
         shell: powershell
-        run: .\scripts\Verify-CoreLink.ps1 -BuildRoot build\core-link-verification -Sanitizers
+        run: .\scripts\Verify-UEFIContracts.ps1 -BuildRoot build\uefi-contract-verification -Sanitizers

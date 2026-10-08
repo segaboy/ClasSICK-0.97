@@ -62,6 +62,14 @@ optimization profiles, with exact entry checks and rejection controls. The
 [fixtures](../development/core-link-evidence.md) were never loaded. This does not
 clear firmware ABI, kernel entry/stack/exception setup, future runtime helpers or B2.
 
+SPEC-0006 / TEST-0012 now validates bounded framebuffer/map/owned-span data and
+the finite exit-outcome model through independent hosted tests. No firmware call
+or hardware access occurs. [The proposed profile](../development/native-pc-profile.md)
+defines loader/device ownership; exact selected firmware provenance remains
+needs-review. [The snapshot](../development/uefi-contract-evidence.md) records
+the full current 43-check Clang / 28-check scoped GCC matrix. Actual ABI/entry,
+drivers and boot still require implementation and repeatable native observations.
+
 ```mermaid
 flowchart TD
     P[Clean-room policy, provenance, reviewed design specs] --> T[Reproducible tools and freestanding build rules]
@@ -110,8 +118,9 @@ application compatibility.
 
 ## Firmware boundary research
 
-Before implementation, specify retry handling for a changed UEFI memory-map key,
-reserved ranges, framebuffer size/stride/format, stack alignment and entry ABI,
-interrupt state, and post-handoff driver ownership. UEFI publishes boot-service
-lifetime requirements (SRC-0005). Secure Boot signing, VM distribution rights,
-firmware setup, and compiler/linker support remain explicit research items.
+SPEC-0006 / ADR-0010 specifies changed-map-key retries, bounded maps/framebuffers,
+reserved allocations and the service-call boundary from reviewed UEFI interfaces
+(SRC-0034, extending the earlier SRC-0005 lead). The proposed PC profile records
+stack/entry/interrupt and post-handoff device obligations. Actual loader/ISA/device
+leaves, exact firmware eligibility, boot media, Secure Boot and external VM/runtime
+distribution rights remain separate work. Public metadata review adopted no firmware.

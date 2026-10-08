@@ -27,3 +27,10 @@ four-module probe in `tools/core-link/`. `freestanding.probe` runs this behavior
 under Clang and GCC. The separate no-startup/no-library link and rejection matrix
 is run by `Verify-CoreLink.ps1`; its PE files are never loaded or counted as boots.
 See [scope and repeat instructions](../docs/development/core-link-evidence.md).
+
+`uefi-contract.c` (TEST-0012) uses 11,520 framebuffer cases, 10,240 bitmap-oracle
+map layouts, maximum map/allocation limits, ownership/error guards and 27 finite
+exit-outcome traces. Five behavioral suites and one optimized import/data audit
+raise the current matrix to 43 Clang / 28 scoped GCC checks per configuration.
+Physical addresses are metadata only; no firmware is invoked. See
+[the preboot snapshot](../docs/development/uefi-contract-evidence.md).

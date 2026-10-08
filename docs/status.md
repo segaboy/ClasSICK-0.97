@@ -16,6 +16,17 @@ does not imply that the complete project foundation or any OS boot is finished.
 
 ## Achieved
 
+- SPEC-0006 / ADR-0010 / IMPL-0010 / TEST-0012 adds original platform validators
+  for bounded framebuffer/map data, reserved allocation consistency and a finite
+  exit-outcome model. Five behavioral suites and the object audit pass locally.
+  The full current matrix passes 43 checks per five Clang configurations and
+  28 per four scoped GCC configurations, with existing core/link/debugger checks
+  and ARM64 LE/BE preboot-object compile audits. No firmware callback or VM launch.
+  [Preboot evidence](development/uefi-contract-evidence.md) pins final results;
+  [the proposed PC profile](development/native-pc-profile.md) records ownership
+  and device obligations. Exact selected x64 firmware closure/eligibility remains
+  needs-review; metadata/license inventory is not firmware adoption.
+
 - ADR-0009 / IMPL-0009 / TEST-0011 verifies complete current-core linkage under
   Clang/LLD and GCC/GNU ld at x86-64/i686 O0/O2. Eight profile twins match;
   eighteen original functions are retained with the exact named entry and no
@@ -161,10 +172,10 @@ does not imply that the complete project foundation or any OS boot is finished.
 - Exact historical profile and 1984-applicable behavioral sources.
 - Macintosh 128K native feasibility, hardware startup and size budgets.
 - WOW64 debugger support, other sanitizer targets, m68k toolchain/runtime and boot.
-- Next: review native-PC firmware/device contracts and specify loader, memory map,
-  handoff, stack/exception state and post-handoff ownership. Wider input and
-  native drivers receive contracts when required. B1 is a Windows development
-  start; it does not establish any native boot.
+- Next: resolve exact firmware identity/provenance, finalize the UEFI ABI/loader
+  and boot-medium recipe, implement native entry/stack/exceptions and reviewed
+  device leaves. Preboot data/model tests are complete; actual handoff, register
+  drivers and B2 remain open. B1 stays a Windows development start.
 - Three bootable editions remain separately not-started: original Macintosh,
   native PC without Linux, Linux PC. Historical identity/QuickDraw and edition
   parity remain unverified; no Linux divergence has been introduced.

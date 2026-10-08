@@ -5,6 +5,68 @@ eligibility applies to the stated scope, not every resource reachable from a URL
 No Apple executable, source, disassembly, decompilation, or copied asset was used.
 No reference-system black-box observation has yet been performed.
 
+## SRC-0033 — Owner's native preboot-contract continuation
+
+- Owner, 2026-10-08: "OK, move on" after proposed firmware handoff/device contracts
+  before the first VirtualBox boot. Scoped original contracts/validators/tests,
+  provenance and normal evidence/Git wiki publication. No live OneNote request.
+- Requirement only; no firmware eligibility waiver, OS boot or historical result.
+
+## SRC-0034 — UEFI Forum published x64 boot interfaces
+
+- *UEFI Specification*, Release 2.11, cover Nov 21, 2024; accessed 2026-10-08.
+  [Publisher PDF](https://uefi.org/sites/default/files/resources/UEFI_Spec_Final_2.11.pdf),
+  SHA-256 `a64b8e442004b91becc3de9afaf8ca61b259a9a3b436accb6b3711ab5400cee9`.
+- 2.3.4 (printed 28–31 / PDF 112–115), 7.2.3 (156–160 / PDF 240–244),
+  7.4.6 (203–204 / PDF 287–288), 12.9.2 (445–449 / PDF 529–533): calling
+  convention, map stride/key/descriptors, exit lifetime/retry and GOP fields.
+- Eligible interface prose/declarations, not firmware implementation. Adjacent
+  allocation/exit prose and GOP bitmask sample were visible, not copied/adopted.
+  Original fixed-format validators only. HTML 403/oversized web PDF preceded
+  publisher download and bounded local extraction. No PDF/example vendored.
+- Project limits/policies are distinct from UEFI conformance; no Macintosh claim.
+
+## SRC-0035 — Oracle VirtualBox interfaces and firmware eligibility metadata
+
+- Installed Oracle VirtualBox 7.2.16r174877; read-only version/filename/hash
+  inventory, no machine-code inspection. *User Guide for Release 7.2*,
+  [publisher manual](https://download.virtualbox.org/virtualbox/7.2.16/UserManual.pdf),
+  sections 5.8/5.13/5.14/5.18/5.22/15.35/18.2.3.12, PDF pages 68–69,71–75,
+  79–83,411,518–520
+  and published device/setting prose. Local manual SHA-256
+  `bc95af3c86f226c253070e8c5916057822fc6f97c8beb89b1127797899e8a1ad`.
+- VBoxManage.exe SHA-256 `7fda8e54157eb94a5ebd9cea079a9fb8c23ade92ae71e13399dc3431c021a228`;
+  VBoxDD2.dll `6cd01002214a130353b9e12405fa836b5efef7461e04e451460e529109796487`.
+  The DLL fingerprint is not a standalone firmware-image fingerprint.
+- Official [v7.2.16 tag](https://github.com/VirtualBox/virtualbox/tree/4cf0b89546257f5044534a7b94cde2dac1e8c175)
+  and path inventory only. [VBoxPkg.dsc](https://github.com/VirtualBox/virtualbox/blob/4cf0b89546257f5044534a7b94cde2dac1e8c175/src/VBox/Devices/EFI/Firmware/VBoxPkg/VBoxPkg.dsc)
+  (Git blob 3b663df43a995e45b6b0b9ed79b2b8461a5f28ea) declares ARM/AARCH64,
+  so cannot validate x64. [Device packaging manifest](https://github.com/VirtualBox/virtualbox/blob/4cf0b89546257f5044534a7b94cde2dac1e8c175/src/VBox/Devices/Makefile.kmk)
+  (blob 146f5548bfb41200031c51cac15fc1168c5bdd36) names embedded amd64 firmware
+  inputs. No module implementation, firmware extraction or whole source archive fetched.
+- Eligibility: interface/version/build/license metadata only. License inventory
+  lists Apple-attributed portions in OVMF/Bhyve; it does not prove Apple ROM code
+  or selected-image inclusion. Exact x64 source/dependency/binary closure remains
+  unresolved; firmware needs-review and is not adopted. Product/permissive-license
+  labels are not approval. External VM/runtime distribution rights remain separate;
+  no Extension Pack or guest image adopted. Accessed 2026-10-08.
+- VBoxManage modifyvm help failed COM E_ACCESSDENIED; no VM/settings examined or
+  changed. Missing guessed metadata URL and ARM manifest trial are unsuccessful
+  eligibility leads. Unrelated search snippets discarded; no third-party/Apple-derived
+  implementation input. Public manual examples visible, not copied/adopted.
+
+## SRC-0036 — UEFI Forum published ACPI PM timer interface
+
+- *ACPI Specification*, Release 6.6, May 13, 2025; accessed 2026-10-08.
+  [Publisher PDF](https://uefi.org/sites/default/files/resources/ACPI_Spec_6.6.pdf),
+  SHA-256 `8c7542dd4de974ae47bba71bb0336637fe1e3838daad7692370ab4cf218efd35`.
+- 4.8.1.4, 4.8.2.1 and 4.8.3.3 / Table 4.14 (printed 67–68,83; PDF 138–139,154):
+  optional counter width/frequency/access. Nearby fixed-register prose was visible,
+  unused; 5.2.9 FADT located but not reviewed as parser input.
+- Eligible interface for proposed timer contract; no timer/FADT parser or native
+  driver implemented, no physical precision claim. HTML 403/incorrect PDF-name
+  lead preceded publisher download. No code copied or document vendored.
+
 ## SRC-0030 — Owner's standalone-link and second-compiler continuation
 
 - Author/date: owner, 2026-10-08, "Do it" after proposed standalone linking and
