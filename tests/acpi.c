@@ -5,13 +5,13 @@
 #include <stdio.h>
 static unsigned failures;
 #define CHECK(x) do { if(!(x)) { fprintf(stderr,"line %d: %s\n",__LINE__,#x); ++failures; } } while(0)
-typedef struct { uint64_t deny_from,deny_to; unsigned long reads,bytes; } reader_state;
+typedef struct { uint64_t deny_from,deny_to; size_t reads,bytes; } reader_state;
 static int reader(void *context,uint64_t physical,unsigned char *out,size_t length)
 {
     reader_state *s=context;
     if(physical<FX_PHYS || length>FX_SIZE || physical-FX_PHYS>FX_SIZE-length) return 0;
     if(physical<s->deny_to && s->deny_from<physical+length) return 0;
-    memcpy(out,fx+(physical-FX_PHYS),length);
+    memcpy(out,fx+(size_t)(physical-FX_PHYS),length);
     ++s->reads; s->bytes+=length;
     return 1;
 }
