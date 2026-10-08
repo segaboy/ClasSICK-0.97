@@ -29,6 +29,6 @@ jobs:
       - name: Verify two fresh hosted builds
         shell: powershell
         run: .\scripts\Verify-Bootstrap.ps1
-      - name: Verify hosted core, loader, exception scaffold and unloaded native presenter
+      - name: Verify hosted core, loader, exceptions, presenter and unloaded PM timer probe
         shell: powershell
-        run: .\scripts\Verify-NativeFramebuffer.ps1 -BuildRoot build\native-framebuffer-verification -Sanitizers
+        run: .\scripts\Verify-PMTimer.ps1 -BuildRoot build\pm-timer-verification -Sanitizers

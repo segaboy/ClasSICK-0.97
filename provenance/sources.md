@@ -5,6 +5,28 @@ eligibility applies to the stated scope, not every resource reachable from a URL
 No Apple executable, source, disassembly, decompilation, or copied asset was used.
 No reference-system black-box observation has yet been performed.
 
+## SRC-0045 — Owner's PM-timer continuation
+
+- Owner, 2026-10-08: "Do it." This came after the lead's SPEC-0009 handoff named
+  the ACPI PM timer as the next concrete task. It authorizes SPEC-0010
+  discovery/timer work, tests, provenance and normal publication under SRC-0044.
+- Requirement only; no firmware waiver, VM launch, OneNote or edition claim.
+
+## SRC-0046 — ACPI 6.6 system description table interfaces
+
+- Same pinned publisher PDF as SRC-0036 (SHA-256
+  `8c7542dd4de974ae47bba71bb0336637fe1e3838daad7692370ab4cf218efd35`), accessed
+  2026-10-08 from the owner workspace copy. Sections 5.2.3.2 / Tables 5.1–5.2
+  (GAS, PDF 172–174), 5.2.5.2–5.2.5.3 / Table 5.3 (UEFI RSDP location and GUIDs,
+  RSDP fields, PDF 175–176), 5.2.6 / Table 5.4 (header, PDF 176), 5.2.8 / Table
+  5.8 (XSDT, PDF 181), and 5.2.9 / Table 5.9 offsets 0–131 and 208–219 (FADT
+  PM_TMR_BLK, PM_TMR_LEN, Flags, X_PM_TMR_BLK, PDF 182–188). Table 5.10 bits 8
+  (TMR_VAL_EXT) and 20 (HW_REDUCED_ACPI), PDF 190–194.
+- Text was extracted locally with pypdf into the owner's ignored workspace.
+  Eligible published interface tables/prose only. No ASL, sample OS code,
+  firmware tables or third-party parser consulted. The original policy (ACPI 2.0+
+  only, one FADT, I/O-space timer, map-type checked reads) is narrower than ACPI.
+
 ## SRC-0044 — Owner's Claude implementation-lead handoff
 
 - Owner, 2026-10-08: a written handoff that made Claude (Anthropic) the 0.97

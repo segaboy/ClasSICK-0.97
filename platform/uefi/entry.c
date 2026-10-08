@@ -7,6 +7,12 @@ extern cs_native_transfer const volatile cs_entry_anchor;
 extern void CS_EFIAPI cs_native_halt(void);
 extern void CS_EFIAPI cs_x64_install(void *state);
 extern const unsigned char cs_x64_vector_base[];
+extern uint32_t CS_EFIAPI cs_x64_inl(uint32_t port);
+static uint32_t port32(void *context,uint16_t port)
+{
+    (void)context;
+    return cs_x64_inl(port);
+}
 void CS_EFIAPI cs_native_stop(cs_uefi_handoff *handoff)
 {
     volatile uint32_t *entered=&handoff->native_entered;
@@ -24,6 +30,14 @@ void CS_EFIAPI cs_native_stop(cs_uefi_handoff *handoff)
     (void)cs_native_present(handoff,*ready,
         (volatile unsigned char *)(uintptr_t)handoff->framebuffer.base,
         (void *)(uintptr_t)handoff->arena_base,(unsigned char *)(uintptr_t)handoff->trace_base);
+    /* SPEC-0010: identity window over the profile's physical range; map-type checked. */
+    cs_native_memory memory;
+    memory.map=(const unsigned char *)(uintptr_t)handoff->map_base;
+    memory.map_size=(size_t)handoff->map_size; memory.map_stride=(size_t)handoff->map_stride;
+    memory.map_version=handoff->map_version;
+    memory.window_physical=0; memory.window_size=UINT64_C(1)<<47; memory.window_base=0;
+    (void)cs_native_timer_probe(handoff,*ready,&memory,port32,NULL,
+        (unsigned char *)(uintptr_t)(handoff->trace_base+CS_NATIVE_TRACE_BYTES));
     cs_native_halt();
 }
 cs_efi_status CS_EFIAPI cs_uefi_entry(void *image,cs_efi_system *system)

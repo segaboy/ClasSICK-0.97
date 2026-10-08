@@ -47,3 +47,10 @@ expectation, and the scene against the independent point classifier in
 `scene-oracle.h`. They also check band-partition independence, staging budgets
 and arena exhaustion, the exit/ready gates and the 32-byte trace record. Only
 synthetic buffers are written; no firmware or device is touched.
+
+`acpi.c`, `pmtimer.c` and `native-timer.c` (TEST-0016) use original synthetic ACPI
+images from `acpi-fixture.h`, written from published field offsets. They cover
+every walk result, reader refusal at each stage, wrap extension against summed
+steps, time conversion against a native-division oracle, the map-type reader
+rules and probe traces. The loader `configuration` suite covers RSDP GUID
+selection and bounds.

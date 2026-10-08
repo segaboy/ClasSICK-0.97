@@ -77,7 +77,9 @@ $names=@('cs_uefi_check_framebuffer','cs_uefi_check_map','cs_uefi_check_owned','
     'cs_uefi_image_spans','cs_uefi_loader_run','cs_uefi_entry','cs_native_stop','cs_x64_enter','cs_native_halt','cs_entry_anchor',
     'cs_x64_tables_init','cs_x64_install','cs_x64_reload','cs_x64_vector_base','cs_x64_vector_end','cs_x64_fault','cs_x64_active_state',
     'cs_surface_init','cs_surface_fill','cs_surface_clear','cs_arena_init','cs_arena_alloc','cs_arena_reset',
-    'cs_fb_init','cs_fb_present','cs_scene_render','cs_boot_scene_prepare','cs_boot_scene_draw','cs_native_present')
+    'cs_fb_init','cs_fb_present','cs_scene_render','cs_boot_scene_prepare','cs_boot_scene_draw','cs_native_present',
+    'cs_uefi_acpi20_rsdp','cs_native_read','cs_native_timer_probe','cs_acpi_find_pm_timer',
+    'cs_pmtimer_init','cs_pmtimer_sample','cs_pmtimer_time','cs_x64_inl')
 $symbols=@{}
 foreach($name in $names) {
     $matches=[regex]::Matches($mapText,'(?m)^([0-9a-fA-F]+)\s+[0-9a-fA-F]+\s+\d+\s+'+$name+'\s*$')
@@ -164,9 +166,12 @@ for($field=0;$field -lt 6;++$field) {
 }
 Exact ($fault+115) ([byte[]]@(0x4C,0x89,0x81,0xE8,0,0,0,0xC7,0x81,0xB0,0,0,0,2,0,0,0,0xE9)) 'Fault publish bytes rejected.'
 if($fault+137+[BitConverter]::ToInt32($bytes,[int]($faultRaw+133)) -ne $symbols.cs_native_halt){throw 'Fault halt destination rejected.'}
+# SPEC-0010: the only port access is one original 32-bit IN through EDX.
+$inlRaw=Raw $symbols.cs_x64_inl 4
+Exact $symbols.cs_x64_inl ([byte[]]@(0x89,0xCA,0xED,0xC3)) 'Port read bytes rejected.'
 $result=[pscustomobject]@{sha256=(Get-FileHash -LiteralPath $Image -Algorithm SHA256).Hash.ToLowerInvariant();
     size_bytes=$bytes.Length;image_size=$imageSize;entry_rva=$entry;relocations=$patches.Count;
     original_symbols=$names.Count;imports=0;runtime_libraries=0;reloc_raw=$relocRaw;
     anchor_raw=$anchorRaw;transition_raw=$transitionRaw;halt_raw=$haltRaw;first_section_header=$sections[0].header;
-    install_raw=$installRaw;reload_raw=$reloadRaw;vector_raw=$vectorRaw;fault_raw=$faultRaw;state_raw=$stateRaw;vectors=256}
+    install_raw=$installRaw;reload_raw=$reloadRaw;vector_raw=$vectorRaw;fault_raw=$faultRaw;state_raw=$stateRaw;inl_raw=$inlRaw;vectors=256}
 if($PassThru){$result}else{Write-Output 'EFI image audit PASS: original entry/stack/halt, bounded relocations, zero imports/libraries; unloaded.'}

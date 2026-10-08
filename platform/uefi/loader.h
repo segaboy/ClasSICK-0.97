@@ -18,6 +18,7 @@ typedef struct {
     uint64_t arena_base,arena_size,trace_base,trace_size;
     uint32_t map_version,exit_attempts,span_count,native_entered;
     cs_uefi_owned_span spans[8];
+    uint64_t rsdp; /* SPEC-0010: ACPI 2.0+ RSDP physical address copied pre-exit, or zero */
 } cs_uefi_handoff;
 typedef struct { cs_efi_status status; uint32_t attempts,exited; cs_uefi_handoff *handoff; } cs_uefi_load_result;
 _Static_assert(sizeof(cs_uefi_handoff)<=4096,"Handoff fits reserved header page");
@@ -29,4 +30,7 @@ uint32_t cs_uefi_table_crc(const void *table,size_t size);
 cs_uefi_result cs_uefi_image_spans(const unsigned char *map,size_t length,size_t stride,
     uint32_t version,uint64_t image_base,uint64_t image_size,cs_uefi_owned_span *out,size_t *count);
 cs_efi_status cs_uefi_loader_run(void *image,cs_efi_system *system,cs_uefi_load_result *out);
+/* SPEC-0010: first ACPI 2.0+ configuration-table pointer among <=256 live 24-byte
+   entries, or zero. Count above 256 or a null table reads nothing. */
+uint64_t cs_uefi_acpi20_rsdp(size_t count,const void *table);
 #endif

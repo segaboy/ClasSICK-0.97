@@ -87,6 +87,9 @@ Read `docs/clean-room/POLICY.md`, `CONTRIBUTING.md`, and
   hosted tests and unloaded EFI linkage. Develop in the lead's Linux workspace if
   useful, but run evidence gates with the pinned Windows tools. No firmware waiver,
   delegation, live OneNote instruction or change to the Macintosh goals.
+- The owner then said "Do it" (SRC-0045) for the next named step: SPEC-0010 /
+  ADR-0014 / IMPL-0014 / TEST-0016 ACPI RSDP capture, a bounded XSDT/FADT walk,
+  PM timer extension and a gated native probe. Hosted/unloaded verification only.
 - Use `C:\Repos\ClasSICK-0.97` for source and `C:\ClasSICK` for local build/test
   output on the founding workstation. Do not depend on those paths in core code.
 - Do not create specialist chats or delegate work merely because the roadmap

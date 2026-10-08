@@ -8,4 +8,6 @@ post-handoff framebuffer/input/timing and devices; see
 converts clipped core RGBA8 rows with volatile byte stores, a zero reserved byte
 and no framebuffer reads. It is portable C, exercised by hosted tests on synthetic
 buffers and linked into the unloaded EFI image. `x64/` holds owned exception state.
-No native execution, timer, keyboard or diagnostics driver exists yet.
+`acpi.c` / `pmtimer.c` (SPEC-0010) walk RSDP/XSDT/FADT through a bounded reader
+and extend the 24/32-bit PM timer; `x64/io.S` holds the single port read. No native
+execution, keyboard or diagnostics driver exists yet.

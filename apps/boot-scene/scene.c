@@ -69,7 +69,10 @@ cs_boot_result cs_boot_scene_prepare(cs_arena *arena,const cs_fb_target *target,
     if(rows>(size_t)checked.height) rows=(size_t)checked.height;
     if(cs_arena_alloc(arena,rows*row,
             CS_ARENA_MAX_ALIGNMENT<16u?CS_ARENA_MAX_ALIGNMENT:16u,&span)!=CS_ARENA_OK) return CS_BOOT_ARENA;
-    out->target=checked;
+    /* Field copies keep every optimization level free of memcpy helpers. */
+    out->target.base=checked.base; out->target.size=checked.size;
+    out->target.width=checked.width; out->target.height=checked.height;
+    out->target.pitch=checked.pitch; out->target.format=checked.format;
     out->staging=span.data;
     out->staging_bytes=span.size;
     out->band_rows=(uint32_t)rows;

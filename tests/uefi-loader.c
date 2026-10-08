@@ -238,6 +238,44 @@ static int ownership(void)
     CHECK(count==99 && memcmp(out,saved,sizeof(out))==0);
     puts("Loader image coverage/seven-span bound/output stability PASS"); return 0;
 }
+/* SPEC-0010: ACPI 2.0+ GUID bytes written independently from the ACPI 6.6 text. */
+static void entry(unsigned char *p,int acpi20,uint64_t pointer)
+{
+    static const unsigned char v20[16]={0x71,0xE8,0x68,0x88,0xF1,0xE4,0xD3,0x11,0xBC,0x22,0,0x80,0xC7,0x3C,0x88,0x81};
+    static const unsigned char v10[16]={0x30,0x2D,0x9D,0xEB,0x88,0x2D,0xD3,0x11,0x9A,0x16,0,0x90,0x27,0x3F,0xC1,0x4D};
+    memcpy(p,acpi20?v20:v10,16); put(p+16,pointer,8);
+}
+static int configuration(void)
+{
+    unsigned char table[257*24];
+    memset(table,0x3C,sizeof table);
+    CHECK(cs_uefi_acpi20_rsdp(0,table)==0 && cs_uefi_acpi20_rsdp(3,NULL)==0);
+    entry(table,0,0x1000); entry(table+24,0,0x2000);
+    CHECK(cs_uefi_acpi20_rsdp(2,table)==0);
+    entry(table+48,1,0x7FF00100u); entry(table+72,1,0x9000);
+    CHECK(cs_uefi_acpi20_rsdp(4,table)==0x7FF00100u && cs_uefi_acpi20_rsdp(3,table)==0x7FF00100u);
+    CHECK(cs_uefi_acpi20_rsdp(2,table)==0);
+    table[48+15]^=1; CHECK(cs_uefi_acpi20_rsdp(4,table)==0x9000); table[48+15]^=1;
+    entry(table+255*24,1,0xABC000); memset(table,0,48*2);
+    for(unsigned i=0;i<255;++i) memset(table+i*24,0,24);
+    CHECK(cs_uefi_acpi20_rsdp(256,table)==0xABC000 && cs_uefi_acpi20_rsdp(257,table)==0);
+    CHECK(cs_uefi_acpi20_rsdp(255,table)==0);
+    /* End to end: the handoff carries the pointer; absent tables leave zero. */
+    fixture f; cs_uefi_load_result result;
+    CHECK(init(&f)==0); entry(table,1,0x7FF00100u);
+    f.system.configuration_count=1; f.system.configuration=table;
+    header(&f.system.header,UINT64_C(0x5453595320494249),sizeof(f.system));
+    CHECK(cs_uefi_loader_run(&f,&f.system,&result)==0 && result.handoff->rsdp==0x7FF00100u);
+    free(f.storage);
+    CHECK(init(&f)==0);
+    CHECK(cs_uefi_loader_run(&f,&f.system,&result)==0 && result.handoff->rsdp==0);
+    free(f.storage);
+    CHECK(init(&f)==0); f.system.configuration_count=300; f.system.configuration=table;
+    header(&f.system.header,UINT64_C(0x5453595320494249),sizeof(f.system));
+    CHECK(cs_uefi_loader_run(&f,&f.system,&result)==0 && result.handoff->rsdp==0);
+    free(f.storage);
+    puts("Loader configuration: ACPI 2.0 GUID selection, bounds and handoff capture PASS"); return 0;
+}
 int main(int argc,char **argv)
 {
     if(argc!=2) return 2;
@@ -245,5 +283,6 @@ int main(int argc,char **argv)
     if(strcmp(argv[1],"transactions")==0) return transactions();
     if(strcmp(argv[1],"rejection")==0) return rejection();
     if(strcmp(argv[1],"ownership")==0) return ownership();
+    if(strcmp(argv[1],"configuration")==0) return configuration();
     return 2;
 }

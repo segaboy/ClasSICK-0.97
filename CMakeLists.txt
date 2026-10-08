@@ -66,9 +66,19 @@ target_link_libraries(classick_boot_scene PUBLIC classick_pc_framebuffer classic
 add_library(classick_boot_scene_freestanding OBJECT apps/boot-scene/scene.c)
 add_executable(classick_boot_scene_tests tests/boot-scene.c)
 target_link_libraries(classick_boot_scene_tests PRIVATE classick_boot_scene)
+# SPEC-0010 ACPI PM timer discovery and counter extension: portable C, both widths.
+add_library(classick_pc_timer STATIC platform/pc/acpi.c platform/pc/pmtimer.c)
+target_link_libraries(classick_pc_timer PUBLIC classick_clocks)
+add_library(classick_pc_acpi_freestanding OBJECT platform/pc/acpi.c)
+add_library(classick_pc_pmtimer_freestanding OBJECT platform/pc/pmtimer.c)
+add_executable(classick_acpi_tests tests/acpi.c)
+target_link_libraries(classick_acpi_tests PRIVATE classick_pc_timer)
+add_executable(classick_pmtimer_tests tests/pmtimer.c)
+target_link_libraries(classick_pmtimer_tests PRIVATE classick_pc_timer)
 set(CLASSICK_SCENE_TARGETS classick_pc_framebuffer classick_pc_framebuffer_freestanding
     classick_native_framebuffer_tests classick_boot_scene classick_boot_scene_freestanding
-    classick_boot_scene_tests)
+    classick_boot_scene_tests classick_pc_timer classick_pc_acpi_freestanding
+    classick_pc_pmtimer_freestanding classick_acpi_tests classick_pmtimer_tests)
 if(CMAKE_C_COMPILER_ID MATCHES "Clang|GNU")
     foreach(target ${CLASSICK_SCENE_TARGETS})
         target_compile_options(${target} PRIVATE -Wall -Wextra -Wpedantic -Werror
@@ -76,11 +86,14 @@ if(CMAKE_C_COMPILER_ID MATCHES "Clang|GNU")
             "-ffile-prefix-map=${CMAKE_BINARY_DIR}=.")
     endforeach()
     foreach(target classick_pc_framebuffer classick_pc_framebuffer_freestanding
-            classick_boot_scene classick_boot_scene_freestanding)
+            classick_boot_scene classick_boot_scene_freestanding classick_pc_timer
+            classick_pc_acpi_freestanding classick_pc_pmtimer_freestanding)
         target_compile_options(${target} PRIVATE -ffreestanding -fno-builtin -fno-stack-protector)
     endforeach()
-    target_compile_options(classick_pc_framebuffer_freestanding PRIVATE -O2)
-    target_compile_options(classick_boot_scene_freestanding PRIVATE -O2)
+    foreach(target classick_pc_framebuffer_freestanding classick_boot_scene_freestanding
+            classick_pc_acpi_freestanding classick_pc_pmtimer_freestanding)
+        target_compile_options(${target} PRIVATE -O2)
+    endforeach()
 elseif(MSVC)
     foreach(target ${CLASSICK_SCENE_TARGETS})
         target_compile_options(${target} PRIVATE /W4 /WX)
@@ -88,16 +101,21 @@ elseif(MSVC)
 endif()
 if(CLASSICK_SURFACE_SANITIZERS)
     foreach(target classick_pc_framebuffer classick_native_framebuffer_tests
-            classick_boot_scene classick_boot_scene_tests)
+            classick_boot_scene classick_boot_scene_tests classick_pc_timer
+            classick_acpi_tests classick_pmtimer_tests)
         target_compile_options(${target} PRIVATE -fsanitize=address,undefined
             -fno-sanitize-recover=all -fno-omit-frame-pointer)
     endforeach()
-    target_link_options(classick_native_framebuffer_tests PRIVATE -fsanitize=address,undefined)
-    target_link_options(classick_boot_scene_tests PRIVATE -fsanitize=address,undefined)
+    foreach(target classick_native_framebuffer_tests classick_boot_scene_tests
+            classick_acpi_tests classick_pmtimer_tests)
+        target_link_options(${target} PRIVATE -fsanitize=address,undefined)
+    endforeach()
 endif()
 if(MINGW)
-    target_link_options(classick_native_framebuffer_tests PRIVATE -Wl,--no-insert-timestamp)
-    target_link_options(classick_boot_scene_tests PRIVATE -Wl,--no-insert-timestamp)
+    foreach(target classick_native_framebuffer_tests classick_boot_scene_tests
+            classick_acpi_tests classick_pmtimer_tests)
+        target_link_options(${target} PRIVATE -Wl,--no-insert-timestamp)
+    endforeach()
 endif()
 if(BUILD_TESTING)
     foreach(suite conversion errors independent)
@@ -105,6 +123,12 @@ if(BUILD_TESTING)
     endforeach()
     foreach(suite oracle bands budget errors)
         add_test(NAME scene.${suite} COMMAND classick_boot_scene_tests ${suite})
+    endforeach()
+    foreach(suite discovery checks walk)
+        add_test(NAME acpi.${suite} COMMAND classick_acpi_tests ${suite})
+    endforeach()
+    foreach(suite extension conversion errors)
+        add_test(NAME pmtimer.${suite} COMMAND classick_pmtimer_tests ${suite})
     endforeach()
     if(CMAKE_C_COMPILER_ID MATCHES "Clang|GNU")
         find_program(CLASSICK_SCENE_NM NAMES llvm-nm nm REQUIRED)
@@ -117,6 +141,14 @@ if(BUILD_TESTING)
             "-DALLOWED=cs_surface_init,cs_surface_fill,cs_arena_alloc,cs_fb_init,cs_fb_present"
             "-DOBJECT=$<TARGET_OBJECTS:classick_boot_scene_freestanding>"
             -P ${CMAKE_SOURCE_DIR}/scripts/Check-ObjectImports.cmake)
+        add_test(NAME acpi.freestanding COMMAND ${CMAKE_COMMAND}
+            "-DNM=${CLASSICK_SCENE_NM}"
+            "-DOBJECT=$<TARGET_OBJECTS:classick_pc_acpi_freestanding>"
+            -P ${CMAKE_SOURCE_DIR}/scripts/Check-Freestanding.cmake)
+        add_test(NAME pmtimer.freestanding COMMAND ${CMAKE_COMMAND}
+            "-DNM=${CLASSICK_SCENE_NM}"
+            "-DOBJECT=$<TARGET_OBJECTS:classick_pc_pmtimer_freestanding>"
+            -P ${CMAKE_SOURCE_DIR}/scripts/Check-Freestanding.cmake)
     endif()
 endif()
 
@@ -197,12 +229,14 @@ if(CMAKE_SIZEOF_VOID_P EQUAL 8 AND CMAKE_SYSTEM_PROCESSOR MATCHES "^(AMD64|amd64
     target_link_libraries(classick_uefi_loader_tests PRIVATE classick_uefi_loader)
     # SPEC-0009 post-handoff gate; the EFI entry only supplies identity pointers.
     add_library(classick_native_present STATIC platform/uefi/native.c)
-    target_link_libraries(classick_native_present PUBLIC classick_uefi_contract classick_boot_scene)
+    target_link_libraries(classick_native_present PUBLIC classick_uefi_contract classick_boot_scene classick_pc_timer)
     add_library(classick_native_present_freestanding OBJECT platform/uefi/native.c)
     add_executable(classick_native_present_tests tests/native-present.c)
     target_link_libraries(classick_native_present_tests PRIVATE classick_native_present)
+    add_executable(classick_native_timer_tests tests/native-timer.c)
+    target_link_libraries(classick_native_timer_tests PRIVATE classick_native_present)
     if(CMAKE_C_COMPILER_ID MATCHES "Clang|GNU")
-        foreach(target classick_native_present classick_native_present_freestanding classick_native_present_tests)
+        foreach(target classick_native_present classick_native_present_freestanding classick_native_present_tests classick_native_timer_tests)
             target_compile_options(${target} PRIVATE -Wall -Wextra -Wpedantic -Werror -Wconversion -Wsign-conversion
                 "-ffile-prefix-map=${CMAKE_SOURCE_DIR}=." "-ffile-prefix-map=${CMAKE_BINARY_DIR}=.")
         endforeach()
@@ -211,28 +245,33 @@ if(CMAKE_SIZEOF_VOID_P EQUAL 8 AND CMAKE_SYSTEM_PROCESSOR MATCHES "^(AMD64|amd64
         endforeach()
         target_compile_options(classick_native_present_freestanding PRIVATE -O2)
     elseif(MSVC)
-        foreach(target classick_native_present classick_native_present_freestanding classick_native_present_tests)
+        foreach(target classick_native_present classick_native_present_freestanding classick_native_present_tests classick_native_timer_tests)
             target_compile_options(${target} PRIVATE /W4 /WX)
         endforeach()
     endif()
     if(CLASSICK_SURFACE_SANITIZERS)
-        foreach(target classick_native_present classick_native_present_tests)
+        foreach(target classick_native_present classick_native_present_tests classick_native_timer_tests)
             target_compile_options(${target} PRIVATE -fsanitize=address,undefined -fno-sanitize-recover=all -fno-omit-frame-pointer)
         endforeach()
         target_link_options(classick_native_present_tests PRIVATE -fsanitize=address,undefined)
+        target_link_options(classick_native_timer_tests PRIVATE -fsanitize=address,undefined)
     endif()
     if(MINGW)
         target_link_options(classick_native_present_tests PRIVATE -Wl,--no-insert-timestamp)
+        target_link_options(classick_native_timer_tests PRIVATE -Wl,--no-insert-timestamp)
     endif()
     if(BUILD_TESTING)
         foreach(suite gating rejection presentation)
             add_test(NAME native.${suite} COMMAND classick_native_present_tests ${suite})
         endforeach()
+        foreach(suite gating reader probe)
+            add_test(NAME native-timer.${suite} COMMAND classick_native_timer_tests ${suite})
+        endforeach()
         if(CMAKE_C_COMPILER_ID MATCHES "Clang|GNU")
             find_program(CLASSICK_NATIVE_NM NAMES llvm-nm nm REQUIRED)
             add_test(NAME native.freestanding COMMAND ${CMAKE_COMMAND}
                 "-DNM=${CLASSICK_NATIVE_NM}"
-                "-DALLOWED=cs_uefi_check_framebuffer,cs_fb_init,cs_arena_init,cs_boot_scene_prepare,cs_boot_scene_draw"
+                "-DALLOWED=cs_uefi_check_framebuffer,cs_fb_init,cs_arena_init,cs_boot_scene_prepare,cs_boot_scene_draw,cs_uefi_check_map,cs_acpi_find_pm_timer,cs_pmtimer_init,cs_pmtimer_sample,cs_pmtimer_time"
                 "-DOBJECT=$<TARGET_OBJECTS:classick_native_present_freestanding>"
                 -P ${CMAKE_SOURCE_DIR}/scripts/Check-ObjectImports.cmake)
         endif()
@@ -261,7 +300,7 @@ if(CMAKE_SIZEOF_VOID_P EQUAL 8 AND CMAKE_SYSTEM_PROCESSOR MATCHES "^(AMD64|amd64
         target_link_options(classick_uefi_loader_tests PRIVATE -Wl,--no-insert-timestamp)
     endif()
     if(BUILD_TESTING)
-        foreach(suite crc transactions rejection ownership)
+        foreach(suite crc transactions rejection ownership configuration)
             add_test(NAME loader.${suite} COMMAND classick_uefi_loader_tests ${suite})
         endforeach()
         if(CMAKE_C_COMPILER_ID MATCHES "Clang|GNU")

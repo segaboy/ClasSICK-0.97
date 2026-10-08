@@ -56,6 +56,20 @@ cs_uefi_result cs_uefi_image_spans(const unsigned char *map,size_t length,size_t
     for(size_t i=0;i<used;++i) out[i]=pending[i];
     *count=used; return CS_UEFI_OK;
 }
+uint64_t cs_uefi_acpi20_rsdp(size_t count,const void *table)
+{
+    /* ACPI 6.6 5.2.5.2: 8868e871-e4f1-11d3-bc22-0080c73c8881, stored per UEFI GUID layout. */
+    static const unsigned char guid[16]={0x71,0xE8,0x68,0x88,0xF1,0xE4,0xD3,0x11,
+        0xBC,0x22,0x00,0x80,0xC7,0x3C,0x88,0x81};
+    const unsigned char *p=table;
+    if(p==NULL || count>256) return 0;
+    for(size_t i=0;i<count;++i,p+=24) {
+        unsigned j=0;
+        while(j<16 && p[j]==guid[j]) ++j;
+        if(j==16) return read64(p+16);
+    }
+    return 0;
+}
 static cs_efi_status finish(cs_uefi_load_result *out,cs_efi_status status)
 {
     out->status=status; return status;
@@ -66,6 +80,7 @@ cs_efi_status cs_uefi_loader_run(void *image,cs_efi_system *system,cs_uefi_load_
     const cs_efi_guid gop_guid={0x9042A9DE,0x23DC,0x4A38,{0x96,0xFB,0x7A,0xDE,0xD0,0x80,0x51,0x6A}};
     cs_efi_status status; void *protocol=NULL; cs_efi_image *loaded; cs_efi_gop *gop;
     cs_uefi_framebuffer f; cs_uefi_framebuffer_layout layout; uint64_t image_base,image_size,address;
+    uint64_t rsdp;
     if(out==NULL) return CS_EFI_ERROR(2);
     out->status=CS_EFI_ERROR(2); out->attempts=0; out->exited=0; out->handoff=NULL;
     if(image==NULL || system==NULL) return out->status;
@@ -75,6 +90,7 @@ cs_efi_status cs_uefi_loader_run(void *image,cs_efi_system *system,cs_uefi_load_
     if(boot->allocate==NULL || boot->free_pages==NULL || boot->get_map==NULL
             || boot->exit_boot==NULL || boot->open_protocol==NULL || boot->watchdog==NULL
             || boot->locate_protocol==NULL) return finish(out,CS_EFI_ERROR(3));
+    rsdp=cs_uefi_acpi20_rsdp(system->configuration_count,system->configuration);
     cs_efi_map get_map=boot->get_map; cs_efi_exit exit_boot=boot->exit_boot;
     cs_efi_free release=boot->free_pages;
     status=boot->watchdog(0,0,0,NULL);
@@ -113,6 +129,7 @@ cs_efi_status cs_uefi_loader_run(void *image,cs_efi_system *system,cs_uefi_load_
     h->fault_top=address+CS_LOADER_ARENA_OFFSET;
     h->arena_base=address+CS_LOADER_ARENA_OFFSET; h->arena_size=CS_LOADER_ARENA_BYTES;
     h->trace_base=address+CS_LOADER_TRACE_OFFSET; h->trace_size=CS_LOADER_TRACE_BYTES;
+    h->rsdp=rsdp;
     cs_uefi_exit_state state; (void)cs_uefi_exit_init(&state);
     for(;;) {
         size_t length=CS_LOADER_MAP_BYTES,stride=0,key=0,span_count=0; uint32_t version=0;

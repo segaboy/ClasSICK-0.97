@@ -25,6 +25,10 @@ out of public commits.
   complete x64 exception wrapper, plus SPEC-0009 hosted presenter/scene/gate twin
   hashes and AArch64 LE/BE compile/import audits. The EFI image now links the
   presenter and must reject an omitted presenter object. No image is executed.
+- `Verify-PMTimer.ps1 -BuildRoot <fresh-directory> -Sanitizers`: the complete
+  native framebuffer wrapper, plus SPEC-0010 ACPI/PM timer/native-probe/loader twin
+  hashes and AArch64 audits. The image audit checks the exact port-read bytes and
+  rejects an omitted ACPI object.
 - `Check-ObjectImports.cmake`: freestanding object audit with an exact list of
   permitted original project imports and no mutable data.
 - `Verify-UEFIImage.ps1 -BuildRoot <fresh-directory>`: inspection-only Clang x64

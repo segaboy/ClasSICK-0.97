@@ -23,6 +23,7 @@ evidence; foundational project constraints cannot be silently relaxed.
 | [ADR-0011](0011-original-uefi-loader.md) | Original x64 loader calls and owned stop scaffold; inspected EFI packaging | Accepted for development verification |
 | [ADR-0012](0012-owned-x64-exceptions.md) | Owned x64 descriptor bytes, emergency stacks and terminal first-fault capture | Accepted for development verification |
 | [ADR-0013](0013-native-framebuffer-presentation.md) | Gated native framebuffer presenter, bounded band staging and original boot scene | Accepted for development verification |
+| [ADR-0014](0014-acpi-pm-timer.md) | ACPI PM timer via pre-exit RSDP capture and map-checked table walk | Accepted for development verification |
 
 Use [the template](template.md). Every substantive decision cites founding
 requirements or approved sources, distinguishes design from historical fact,
