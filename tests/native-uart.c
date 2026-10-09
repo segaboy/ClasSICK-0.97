@@ -10,7 +10,7 @@
 static unsigned failures;
 #define CHECK(x) do { if(!(x)) { fprintf(stderr,"line %d: %s\n",__LINE__,#x); ++failures; } } while(0)
 enum { W=320,H=200,PITCH=328,SPAN=PITCH*4*H,GUARD=64 };
-static unsigned char map[48],trace[CS_UART_TRACE_BYTES+2*GUARD],kt[160],fb[SPAN+2*GUARD];
+static unsigned char map[48],map2[96],trace[CS_UART_TRACE_BYTES+2*GUARD],kt[160],qt[256],fb[SPAN+2*GUARD];
 static void *arena;
 static cs_native_memory memory;
 static ps2_fixture keyboard;
@@ -29,7 +29,7 @@ static cs_native_devices setup(timer_fixture *p)
     memory.map=map; memory.map_size=48; memory.map_stride=48; memory.map_version=1;
     memory.window_physical=FX_PHYS; memory.window_size=FX_SIZE; memory.window_base=(uintptr_t)fx;
     d.memory=&memory; d.port=timer_read; d.port_context=p; d.framebuffer=fb+GUARD; d.arena=arena;
-    memset(fb,0xA5,sizeof fb); memset(trace,0xE7,sizeof trace); memset(kt,0xD7,sizeof kt);
+    memset(fb,0xA5,sizeof fb); memset(trace,0xE7,sizeof trace); memset(kt,0xD7,sizeof kt); memset(qt,0xC7,sizeof qt);
     pf_init(&keyboard); uf_init(&serial);
     fx_build(p->mask==UINT32_MAX?1u<<8:0,276); fx[FX_FADT+8]=6; fx[FX_FADT+109]=2; fx_seal(fx+FX_FADT);
     return d;
@@ -39,7 +39,20 @@ static cs_uefi_handoff exited(void)
     cs_uefi_handoff h; memset(&h,0,sizeof h); h.stage=CS_UEFI_EXITED;
     h.rsdp=FX_PHYS+FX_RSDP; h.arena_size=CS_LOADER_ARENA_BYTES;
     h.framebuffer.base=UINT64_C(0x80000000); h.framebuffer.size=SPAN;
-    h.framebuffer.width=W; h.framebuffer.height=H; h.framebuffer.pitch=PITCH; h.framebuffer.format=1; return h;
+    h.framebuffer.width=W; h.framebuffer.height=H; h.framebuffer.pitch=PITCH; h.framebuffer.format=1;
+    /* SPEC-0016 identity fields; the raw 0x01 byte checks the UART's own printable filter. */
+    h.firmware_revision=0x00010000u; memcpy(h.firmware_vendor,"Original\001firmware",17);
+    h.image_base=UINT64_C(0x10000000); h.bundle_base=UINT64_C(0x1FE80000); h.stack_top=UINT64_C(0x1FEC1000);
+    return h;
+}
+/* Q=FX_PHYS+0xF000 is eligible RAM in this map; P=Q^1 MiB is the owned cell. */
+static void ram_map(void)
+{
+    memset(map2,0,sizeof map2);
+    fx_put(map2,9,4); fx_put(map2+8,FX_PHYS,8); fx_put(map2+16,FX_PHYS,8); fx_put(map2+24,8,8);
+    fx_put(map2+48,7,4); fx_put(map2+56,FX_PHYS+0x8000u,8); fx_put(map2+64,FX_PHYS+0x8000u,8);
+    fx_put(map2+72,8,8); fx_put(map2+80,8,8);
+    memory.map=map2; memory.map_size=sizeof map2;
 }
 static uint32_t get32(const unsigned char *p)
 { return (uint32_t)p[0]|((uint32_t)p[1]<<8)|((uint32_t)p[2]<<16)|((uint32_t)p[3]<<24); }
@@ -47,7 +60,7 @@ static uint32_t field(unsigned offset) { return get32(trace+GUARD+offset); }
 static uint32_t run(cs_uefi_handoff *h,uint32_t ready,cs_native_devices *d,uint32_t seconds)
 {
     cs_ps2_io k=pf_io(&keyboard); cs_uart_io u=uf_io(&serial);
-    return cs_native_uart_loop(h,ready,d,&k,&u,0x3F8,12,seconds,kt,trace+GUARD);
+    return cs_native_uart_loop(h,ready,d,&k,&u,0x3F8,12,seconds,kt,trace+GUARD,qt);
 }
 static void guards(void)
 {
@@ -55,6 +68,7 @@ static void guards(void)
     for(unsigned i=0;i<GUARD;++i) CHECK(trace[i]==0xE7 && trace[GUARD+CS_UART_TRACE_BYTES+i]==0xE7);
     for(unsigned i=88;i<128;++i) CHECK(trace[GUARD+i]==0);
     for(unsigned i=112;i<sizeof kt;++i) CHECK(kt[i]==0xD7);
+    for(unsigned i=CS_QUAL_TRACE_BYTES;i<sizeof qt;++i) CHECK(qt[i]==0xC7);
     CHECK(serial.violations==0 && keyboard.violations==0);
 }
 static int matches(uint32_t step)
@@ -71,12 +85,13 @@ static void gating(void)
 {
     timer_fixture p={0,0xFFFFFF,1000,0,0,0,0}; cs_native_devices d=setup(&p); cs_uefi_handoff h=exited();
     cs_ps2_io k=pf_io(&keyboard); cs_uart_io u=uf_io(&serial),bad=u;
-    CHECK(cs_native_uart_loop(&h,1,&d,&k,&u,0x3F8,12,60,kt,NULL)==1);
+    CHECK(cs_native_uart_loop(&h,1,&d,&k,&u,0x3F8,12,60,kt,NULL,qt)==1);
+    CHECK(cs_native_uart_loop(&h,1,&d,&k,&u,0x3F8,12,60,kt,trace+GUARD,NULL)==1 && field(12)==9 && qt[0]==0xC7);
     CHECK(run(NULL,1,&d,60)==1 && field(12)==9); guards();
     CHECK(run(&h,1,NULL,60)==1 && field(12)==9);
-    bad.read=NULL; CHECK(cs_native_uart_loop(&h,1,&d,&k,&bad,0x3F8,12,60,kt,trace+GUARD)==1);
-    CHECK(cs_native_uart_loop(&h,1,&d,&k,&u,65529,12,60,kt,trace+GUARD)==1);
-    CHECK(cs_native_uart_loop(&h,1,&d,&k,&u,0x3F8,0,60,kt,trace+GUARD)==1);
+    bad.read=NULL; CHECK(cs_native_uart_loop(&h,1,&d,&k,&bad,0x3F8,12,60,kt,trace+GUARD,qt)==1);
+    CHECK(cs_native_uart_loop(&h,1,&d,&k,&u,65529,12,60,kt,trace+GUARD,qt)==1);
+    CHECK(cs_native_uart_loop(&h,1,&d,&k,&u,0x3F8,0,60,kt,trace+GUARD,qt)==1);
     CHECK(run(&h,1,&d,0)==1 && run(&h,1,&d,3601)==1);
     h.stage=CS_UEFI_FAILED; CHECK(run(&h,1,&d,60)==2); h=exited(); h.firmware_status=1;
     CHECK(run(&h,1,&d,60)==2); h=exited(); CHECK(run(&h,0,&d,60)==3);
@@ -89,7 +104,11 @@ static void gating(void)
 }
 static void output(void)
 {
-    static const char expected[]="ClasSICK 0.97 UART v1\r\nkeyboard ready\r\n"
+    static const char expected[]="ClasSICK 0.97 UART v2\r\n"
+        "fw rev=00010000 state=00000000 vendor=Original?firmware\r\n"
+        "own img=0000000010000000 bun=000000001FE80000 stk=000000001FEC1000\r\n"
+        "keyboard ready\r\nqual port=000000CF/000000CF a20=00000002/00000002\r\n"
+        "alias q=0000000000100480 type=FFFFFFFF\r\n"
         "frame=00000000 sec=00000000 space=00000000\r\n"
         "frame=00000001 sec=00000000 space=00000001\r\n"
         "frame=00000002 sec=00000000 space=00000002\r\n"
@@ -102,7 +121,7 @@ static void output(void)
     CHECK(field(8)==12 && field(12)==2 && field(28)==0 && field(76)==1 && field(40)==0);
     CHECK(serial.output_count==sizeof expected-1 && memcmp(serial.output,expected,sizeof expected-1)==0);
     CHECK(memcmp(trace+GUARD+128,expected,sizeof expected-1)==0);
-    CHECK(field(36)==serial.output_count && field(72)==7 && field(68)<CS_UART_POLLS);
+    CHECK(field(36)==serial.output_count && field(72)==11 && field(68)<CS_UART_DRAIN_POLLS);
     CHECK(p.reads==(uint64_t)field(64)+field(68)+2u);
     CHECK(get32(kt+36)==2 && get32(kt+40)==1 && get32(kt+24)==0 && matches(3));
     for(unsigned width=0;width<2;++width) {
@@ -123,11 +142,15 @@ static void failure(void)
     d=setup(&p); serial.bad_offset=7; serial.bad_read=2;
     CHECK(run(&h,1,&d,1)==0 && field(12)==6 && serial.operations==7); guards();
     d=setup(&p); keyboard.live_bytes[0]=0x76; keyboard.live_count=1; serial.lsr=0;
-    CHECK(run(&h,1,&d,60)==12 && field(12)==5 && field(68)<=CS_UART_POLLS); guards();
+    CHECK(run(&h,1,&d,60)==12 && field(12)==5 && field(68)<=CS_UART_DRAIN_POLLS); guards();
     d=setup(&p); keyboard.self_test=0xFC;
     CHECK(run(&h,1,&d,60)==11 && field(8)==11 && field(12)==2); guards();
     d=setup(&p); p.stop=1; keyboard.live_bytes[0]=0x76; keyboard.live_count=1; serial.lsr=0x20;
-    CHECK(run(&h,1,&d,60)==12 && field(12)==5 && field(68)==CS_UART_POLLS); guards();
+    /* A stopped clock ends the drain at the transport's no-progress call bound, below the drain cap. */
+    CHECK(run(&h,1,&d,60)==12 && field(12)==5 && field(68)>CS_UART_POLLS && field(68)<CS_UART_POLLS+512u); guards();
+    /* Slow but progressing THRE with a stopped clock reaches the drain's own turn cap. */
+    d=setup(&p); keyboard.live_bytes[0]=0x76; keyboard.live_count=1; serial.thre_period=20000;
+    CHECK(run(&h,1,&d,60)==12 && field(12)==5 && field(68)==CS_UART_DRAIN_POLLS && field(28)>0); guards();
     p.stop=0; p.reads=0; d=setup(&p); p.invalid=1;
     CHECK(run(&h,1,&d,60)==8 && field(12)==4); guards();
     p.invalid=0; p.reads=0; p.fast=1; d=setup(&p);
@@ -141,11 +164,38 @@ static void failure(void)
     CHECK(run(&h,1,&d,60)==12 && field(12)==2 && field(40)>0 && field(44)>0); guards();
     CHECK(field(28)==0 && get32(kt+36)==21 && matches(5));
 }
+/* SPEC-0016: qualification failures still report through the armed UART. */
+static void qualification(void)
+{
+    static const char before[]="ClasSICK 0.97 UART v2\r\n"
+        "fw rev=00010000 state=00000000 vendor=Original?firmware\r\n"
+        "own img=0000000010000000 bun=000000001FE80000 stk=000000001FEC1000\r\n"
+        "qual port=00000100/00000100 a20=00000001/00000003\r\n"
+        "alias q=000000007FF0F000 type=00000007\r\nresult=0000000E kbd=00000000\r\n";
+    static const char port[]="qual port=000000CF/000000CD a20=00000000/00000003\r\n"
+        "alias q=000000007FF0F000 type=00000007\r\nresult=0000000E kbd=00000009\r\n";
+    timer_fixture p={0,0xFFFFFF,1000,0,0,0,0}; cs_native_devices d=setup(&p); cs_uefi_handoff h=exited();
+    cs_ps2_io k; cs_uart_io u; unsigned char *inside;
+    h.trace_base=((uint64_t)(FX_PHYS+0xF000u)^(UINT64_C(1)<<20))-CS_QUAL_CELL_OFFSET;
+    /* Masking before controller startup: the partner is the cell itself. */
+    ram_map(); k=pf_io(&keyboard); u=uf_io(&serial); inside=fx+0xF000u-CS_QUAL_TRACE_BYTES;
+    CHECK(cs_native_uart_loop(&h,1,&d,&k,&u,0x3F8,12,60,kt,trace+GUARD,inside)==CS_KBD_MACHINE);
+    guards(); CHECK(field(8)==14 && field(12)==2 && keyboard.writes==0 && keyboard.status_reads==0);
+    CHECK(serial.output_count==sizeof before-1 && memcmp(serial.output,before,sizeof before-1)==0);
+    for(unsigned i=0;i<sizeof fb;++i) CHECK(fb[i]==0xA5);
+    /* Self-test changes Gate A20: no keyboard-ready line, qualification printed at termination. */
+    d=setup(&p); ram_map(); keyboard.tested_port=0xCD;
+    CHECK(run(&h,1,&d,60)==CS_KBD_MACHINE); guards(); CHECK(field(12)==2 && get32(kt+12)==CS_PS2_MACHINE);
+    { size_t n=strlen(port); CHECK(serial.output_count>=n && memcmp(serial.output+serial.output_count-n,port,n)==0); }
+    CHECK(strstr((const char *)serial.output,"keyboard ready")==NULL);
+    for(unsigned i=0;i<sizeof fb;++i) CHECK(fb[i]==0xA5);
+}
 int main(int argc,char **argv)
 {
     const char *suite=argc>1?argv[1]:""; arena=malloc(CS_LOADER_ARENA_BYTES); if(!arena) return 2;
     if(strcmp(suite,"gating")==0) gating(); else if(strcmp(suite,"output")==0) output();
-    else if(strcmp(suite,"failure")==0) failure(); else { free(arena); return 2; }
+    else if(strcmp(suite,"failure")==0) failure(); else if(strcmp(suite,"qualification")==0) qualification();
+    else { free(arena); return 2; }
     free(arena); if(failures) return 1;
     printf("native UART %s: PASS\n",suite); return 0;
 }

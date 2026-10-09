@@ -6,8 +6,10 @@ starts show the original scene, approximately 60-second progress and serial
 completion; owner-confirmed Space input works. Formal B2 is partial pending
 exact firmware image identity and explicit machine-state qualification. See
 [the trial evidence](development/vm-trial-evidence.md) and the
-[B2 qualification audit](development/b2-qualification-audit.md), which proposes
-the remaining measurements and an M0.3 feasibility study. Macintosh replacement
+[B2 qualification audit](development/b2-qualification-audit.md). SPEC-0016
+now builds those measurements into a new candidate image, verified hosted and
+unloaded; its VM trial awaits the owner's go-ahead. An M0.3 feasibility study is
+proposed. Macintosh replacement
 startup, 128K feasibility and real Mac/mini vMac remain independent milestones.
 
 Status: dated 2026-10-08; dependency-driven gates, not calendar promises.
@@ -57,7 +59,7 @@ the project license. Record any future license change through owner approval/ADR
    pass hosted byte tests and unloaded install/vector/fault-path audits.
    Boot media and observed native scene/timing/input are now recorded. Actual
    exception delivery and remaining machine-state/identity qualification remain
-   open. Formal B2 is partial; follow
+   open; SPEC-0016's measurements await a VM trial. Formal B2 is partial; follow
    [the boot graph](architecture/boot.md).
 5. In parallel only when explicitly staffed, pursue historical-source eligibility,
    Macintosh hardware budget, resource-fork/MFS specs, and trap ABI contracts.

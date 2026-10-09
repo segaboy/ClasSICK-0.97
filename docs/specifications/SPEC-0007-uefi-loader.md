@@ -4,6 +4,10 @@ Status finalized v1, 2026-10-08, lead self-review; human provenance review pendi
 Owner SRC-0037; UEFI SRC-0038; Intel SRC-0039; metadata SRC-0040; PE SRC-0041.
 ADR-0011 / IMPL-0011 / TEST-0013. This is a native-PC loader contract, not
 Macintosh behavior. SPEC-0006 remains unchanged and supplies preboot validation.
+Amended 2026-10-09 by [SPEC-0016](SPEC-0016-qualification-diagnostics.md):
+handoff version 2 adds the firmware's self-reported revision and a bounded
+printable vendor copy taken before exit; after exit the native image reads one
+eligible 8-byte partner location for the bit-20 probe.
 
 The same orchestration code is linked into a PE32+ EFI application and exercised
 against original hosted callbacks. Only x64 declarations/calls are supported.

@@ -3,10 +3,15 @@
 Read `docs/clean-room/POLICY.md`, `CONTRIBUTING.md`, and
 `provenance/README.md` before researching or changing this project.
 
+- On 2026-10-08 the owner delegated the B2 qualification decisions to Claude
+  ("I think you should decide", SRC-0064). SPEC-0016 builds the measurements
+  (firmware self-report, controller output port, bit-20 alias probe) into the
+  normal native image. Criterion 6 stays as written: never relabel the firmware
+  container hash as an image hash. Running the new image in a VM still needs the
+  owner's explicit go-ahead in chat; QEMU/OVMF/MAME are not cleared platforms.
+
 - On 2026-10-08 the owner handed leadership back to Claude after the VM trial
-  (SRC-0063) for a read-only formal B2 audit. Its proposals (probe image,
-  criterion-6 clarification) await owner decisions; do not implement new guest
-  code or relabel the firmware container hash without them.
+  (SRC-0063) for a read-only formal B2 audit (TEST-0023).
 
 - On 2026-10-08 the owner returned leadership through the boot-media handoff
   and explicitly answered "Yes—prepare and run the isolated trial" (SRC-0060).

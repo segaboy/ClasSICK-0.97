@@ -9,6 +9,7 @@ typedef struct {
     cs_efi_system system; cs_efi_boot boot; cs_efi_image image;
     cs_efi_gop gop; cs_efi_gop_mode mode; cs_efi_gop_info info;
     unsigned char *storage; uint64_t bundle; unsigned sequence,fault,step,maps,exits,frees,errors;
+    unsigned char vendor[80];
     char calls[32]; size_t calls_count;
 } fixture;
 static fixture *active;
@@ -106,6 +107,7 @@ static cs_efi_status CS_EFIAPI exit_boot(void *image,size_t key)
     /* Destroy firmware/protocol fields after the first attempt; cached callbacks
        and owned metadata must sustain retries. This is an original mock only. */
     active->system.boot=NULL; active->boot.get_map=NULL; active->boot.exit_boot=NULL;
+    memset(active->vendor,'X',sizeof active->vendor); active->system.firmware_revision=0xDEADu;
     active->boot.free_pages=NULL; active->info.format=99; active->image.base=NULL;
     return outcome==0?0:(outcome==1?CS_EFI_ERROR(2):CS_EFI_ERROR(7));
 }
@@ -125,6 +127,10 @@ static int init(fixture *f)
     f->gop.mode=&f->mode; f->mode.max_mode=1; f->mode.info=&f->info; f->mode.info_size=36;
     f->mode.framebuffer=0x10000000; f->mode.framebuffer_size=4096;
     f->info.width=9; f->info.height=2; f->info.pitch=12; f->info.format=1;
+    /* SPEC-0016: an original UCS-2 vendor string, little-endian code units. */
+    { const char *name="Original test firmware";
+      for(size_t i=0;name[i]!=0;++i) f->vendor[2*i]=(unsigned char)name[i]; }
+    f->system.vendor=f->vendor; f->system.firmware_revision=0x0001ABCDu;
     header(&f->boot.header,UINT64_C(0x56524553544F4F42),sizeof(f->boot));
     header(&f->system.header,UINT64_C(0x5453595320494249),sizeof(f->system));
     active=f; return 0;
@@ -165,7 +171,10 @@ static int transactions(void)
         CHECK(strcmp(f.calls,expected)==0 && f.maps==attempts && f.exits==attempts && f.frees==0 && f.errors==0);
         CHECK(result.handoff==(cs_uefi_handoff *)(uintptr_t)f.bundle);
         cs_uefi_handoff *h=result.handoff;
-        CHECK(h->version==1 && h->image_base==0x400000 && h->image_size==16384 && h->span_count==3);
+        CHECK(h->version==2 && h->size==sizeof(*h) && h->image_base==0x400000 && h->image_size==16384 && h->span_count==3);
+        CHECK(h->firmware_revision==0x0001ABCDu && h->firmware_vendor_state==CS_UEFI_VENDOR_COMPLETE);
+        CHECK(memcmp(h->firmware_vendor,"Original test firmware",23)==0);
+        for(size_t i=23;i<32;++i) CHECK(h->firmware_vendor[i]==0);
         CHECK(h->map_size==144 && h->map_stride==48 && h->map_version==1 && h->exit_attempts==attempts);
         CHECK(h->framebuffer.format==1 && h->native_entered==0 && h->stack_top==f.bundle+331776);
         CHECK(h->spans[0].base==0x400000 && h->spans[0].size==8192 && h->spans[0].kind==1);
@@ -276,6 +285,37 @@ static int configuration(void)
     free(f.storage);
     puts("Loader configuration: ACPI 2.0 GUID selection, bounds and handoff capture PASS"); return 0;
 }
+/* SPEC-0016: bounded printable copy of FirmwareVendor, taken before exit. */
+static int vendor(void)
+{
+    static const struct { unsigned units,nul; uint32_t state; } cases[]={
+        {0,1,CS_UEFI_VENDOR_COMPLETE},{5,1,CS_UEFI_VENDOR_COMPLETE},{30,1,CS_UEFI_VENDOR_COMPLETE},
+        {31,1,CS_UEFI_VENDOR_COMPLETE},{32,1,CS_UEFI_VENDOR_TRUNCATED},{39,1,CS_UEFI_VENDOR_TRUNCATED},
+        {39,0,CS_UEFI_VENDOR_TRUNCATED}};
+    for(size_t c=0;c<sizeof cases/sizeof cases[0];++c) {
+        fixture f; cs_uefi_load_result result; unsigned char expected[32];
+        CHECK(init(&f)==0); memset(f.vendor,0,sizeof f.vendor); memset(expected,0,sizeof expected);
+        for(unsigned i=0;i<cases[c].units;++i) {
+            /* ASCII, then a control unit, a non-ASCII unit and DEL, each replaced by '?'. */
+            unsigned unit=i%7==3?0x09u:(i%7==5?0x263Au:(i%7==6?0x7Fu:0x41u+i%26u));
+            f.vendor[2*i]=(unsigned char)unit; f.vendor[2*i+1]=(unsigned char)(unit>>8);
+            if(i<31) expected[i]=(unsigned char)(i%7==3 || i%7>=5?0x3F:unit);
+        }
+        if(!cases[c].nul) memset(f.vendor+2*cases[c].units,0x41,sizeof f.vendor-2*cases[c].units);
+        header(&f.system.header,UINT64_C(0x5453595320494249),sizeof(f.system));
+        CHECK(cs_uefi_loader_run(&f,&f.system,&result)==0);
+        CHECK(result.handoff->firmware_vendor_state==cases[c].state);
+        CHECK(memcmp(result.handoff->firmware_vendor,expected,32)==0 && result.handoff->firmware_vendor[31]==0);
+        free(f.storage);
+    }
+    fixture f; cs_uefi_load_result result; CHECK(init(&f)==0);
+    f.system.vendor=NULL; f.system.firmware_revision=0; header(&f.system.header,UINT64_C(0x5453595320494249),sizeof(f.system));
+    CHECK(cs_uefi_loader_run(&f,&f.system,&result)==0);
+    CHECK(result.handoff->firmware_vendor_state==CS_UEFI_VENDOR_ABSENT && result.handoff->firmware_revision==0);
+    for(size_t i=0;i<32;++i) CHECK(result.handoff->firmware_vendor[i]==0);
+    free(f.storage);
+    puts("Loader firmware identity: bounded printable vendor copy, truncation and absence PASS"); return 0;
+}
 int main(int argc,char **argv)
 {
     if(argc!=2) return 2;
@@ -284,5 +324,6 @@ int main(int argc,char **argv)
     if(strcmp(argv[1],"rejection")==0) return rejection();
     if(strcmp(argv[1],"ownership")==0) return ownership();
     if(strcmp(argv[1],"configuration")==0) return configuration();
+    if(strcmp(argv[1],"vendor")==0) return vendor();
     return 2;
 }

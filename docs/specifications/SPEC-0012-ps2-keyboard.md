@@ -3,6 +3,10 @@
 Finalized v1, 2026-10-08, implementation-lead self-review; human provenance
 review pending. Owner SRC-0048; interfaces SRC-0049–0052; ADR-0016 /
 IMPL-0016 / TEST-0018. Original PC contract, no historical Macintosh behavior.
+Version 2, 2026-10-09 ([SPEC-0016](SPEC-0016-qualification-diagnostics.md)):
+Read Output Port (D0) before and after self-test (an absent reply is recorded,
+not fatal), result MACHINE=9 when bits 0–1 change, READY at phase 34, loop result
+MACHINE=14 and the qualification record.
 
 ## Profile and source boundary
 
@@ -39,8 +43,10 @@ Startup sequence (one operation per polling turn):
 1. Disable keyboard (AD) and auxiliary (A7); drain at most 64 stale bytes.
 2. Read configuration (20); retain only system flag bit 2. Write (60 then data)
    system flag plus 0x30: both interfaces disabled, IRQ bits and translation clear.
-3. Controller self-test (AA), require 55. Disable both interfaces again, drain,
-   rewrite configuration, read it back and require bits selected by 0x73 = 0x30.
+3. v2: read the output port (D0). Controller self-test (AA), require 55. Disable
+   both interfaces again, drain, read the output port again and require bits 0–1
+   unchanged (SPEC-0016), rewrite configuration, read it back and require bits
+   selected by 0x73 = 0x30.
 4. Keyboard interface test (AB), require 00; enable keyboard interface (AE).
 5. Keyboard reset FF, require ACK FA then BAT AA; F5/ACK disables scanning;
    F0/ACK and 02/ACK select set 2; F4/ACK enables scanning. Auxiliary stays disabled.
@@ -61,7 +67,7 @@ regression returns STATE with no I/O. Failed state remains terminal until begin;
 READY has no timeout. A drain of 64 bytes followed by another full buffer fails.
 
 Results: ACTIVE=0, READY=1, ARGUMENT=2, STATE=3, TIMEOUT=4, CONTROLLER=5,
-DEVICE=6, PROTOCOL=7, QUEUE=8. Null arguments return ARGUMENT without mutation.
+DEVICE=6, PROTOCOL=7, QUEUE=8, MACHINE=9 (v2). Null arguments return ARGUMENT without mutation.
 State corruption is outside live initialized-state preconditions; invalid phase
 or result is detected. Failure records its result without cleanup writes, since
 controller availability cannot be assumed. The native caller terminates on error.
@@ -106,11 +112,12 @@ display step 76, held mask 80, last key/action/sequence 84/88/92, timer reads u6
 96, last raw keyboard byte 104, configuration 108. Record is rewritten on each
 successful frame and on every termination; no atomic/crash-consistency claim.
 Old presentation/probe records remain; offset 80's timed-only record is unused
-by the new native entry. Remaining trace storage stays unchanged.
+by the new native entry. Remaining trace storage stays unchanged, except the
+v2 qualification record at 1024 and probe cell at 1152 (SPEC-0016).
 
 Loop results: OK=0, ARGUMENT=1, NOT_EXITED=2, NOT_READY=3, TIMER=4, TARGET=5,
 ARENA=6, DRAW=7, VALUE=8, STALLED=9, NO_8042=10, KEYBOARD=11, ESCAPED=12.
-In-progress frame snapshots use RUNNING=13.
+In-progress frame snapshots use RUNNING=13. v2 adds MACHINE=14 (SPEC-0016).
 Null trace writes nothing; other rejected gates write initialized diagnostics
 (including the requested duration). Hardware
 effects and actual latency remain unobserved until eligible native execution.

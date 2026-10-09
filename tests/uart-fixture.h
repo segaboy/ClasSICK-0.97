@@ -8,7 +8,7 @@
 typedef struct {
     uint8_t regs[8],dll,dlm,lsr,iir;
     unsigned operations,reads,writes,violations,bad_offset,bad_read,lsr_reads;
-    unsigned startup_count;
+    unsigned startup_count,thre_period; /* nonzero: THRE only on every Nth LSR read */
     uint8_t offsets[32],values[32],directions[32];
     unsigned char output[8192]; size_t output_count;
 } uart_fixture;
@@ -28,7 +28,10 @@ static uint8_t uf_read(void *context,uint16_t port)
     uart_fixture *f=context; unsigned offset=(unsigned)port-0x3F8u; uint8_t v=0;
     ++f->reads;
     if(offset<8) {
-        if(offset==5) { ++f->lsr_reads; v=f->lsr; }
+        if(offset==5) {
+            ++f->lsr_reads; v=f->lsr;
+            if(f->thre_period!=0 && f->lsr_reads%f->thre_period!=0) v=(uint8_t)(v&~0x60u);
+        }
         else if(offset==2) v=f->iir;
         else if((f->regs[3]&0x80u)!=0 && offset<2) v=offset?f->dlm:f->dll;
         else v=f->regs[offset];

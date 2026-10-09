@@ -5,6 +5,22 @@ eligibility applies to the stated scope, not every resource reachable from a URL
 No Apple executable, source, disassembly, decompilation, or copied asset was used.
 No reference-system black-box observation has yet been performed.
 
+## SRC-0064 — Owner's delegation of the B2 qualification decisions
+
+- Owner, 2026-10-08, after Claude's project-wide audit and prioritized queue:
+  asked Claude to "figure out how you could be effective RIGHT NOW", deferring
+  VM work to ChatGPT. Asked which items to start (including D1, the probe
+  image): "I think you should decide. I am underqualified for this." On D2,
+  criterion 6's firmware hash: "I don't know."
+- Claude's decisions under that delegation: implement SPEC-0016's measurements
+  in the normal native image (not a separate probe image), verify them in pinned
+  CI and hand the VM trial to ChatGPT; keep criterion 6 as written, so B2 stays
+  partial on the firmware hash; defer QEMU/OVMF/MAME platform clearance.
+- Requirement only. Covers code, records and CI. It does not authorize a VM start:
+  the next trial still needs the owner's explicit go-ahead in chat under
+  AGENTS.md, and SRC-0059/0060 boundaries persist. No delegation, new chats,
+  automation or live OneNote.
+
 ## SRC-0063 — Owner's Claude continuation after the first VM trial
 
 - Owner, 2026-10-08, supplied a Codex-written continuation naming Claude
@@ -236,6 +252,10 @@ Provenance eligibility and human rights review remain distinct from test success
   and PDF 12–13 command D0 Read Output Port; no stated self-test effect on the
   output port. Holtek PDF 5: successful self-test registers 55, sets the system
   flag and enables the keyboard interface. No A20 statement for self-test.
+- SPEC-0016 addendum (2026-10-09, Claude, same hashed copy): PDF 11 also defines
+  output-port bits 2–7 (auxiliary data/clock, keyboard and auxiliary buffer-full
+  interrupts, keyboard clock/data), which is why only bits 0–1 are compared. D1
+  Write Output Port and F0–FF Pulse Output Port (PDF 12–13) are never issued.
 
 ## SRC-0050 — Published PS/2 keyboard protocol and set-2 codes
 
@@ -380,6 +400,12 @@ executable, ROM, copied asset or uncertain firmware body was retrieved or used.
   examples were visible, neither copied nor adopted. No external UEFI headers,
   firmware library, example loader or document redistribution. Original bounded
   SPEC-0007 policy is narrower than general UEFI support. No Macintosh applicability.
+- SPEC-0016 addendum (2026-10-09, Claude, same hash): §4.3 (printed 90 / PDF 174)
+  states FirmwareVendor and FirmwareRevision stay valid after exit; §4.3.1 defines
+  them. Table 7.10 *Memory Type Usage after ExitBootServices()* and its note
+  (printed 153 / PDF 237): after exit the image owns unused LoaderCode/Data,
+  BootServicesCode/Data and ConventionalMemory. Used to bound the read-only
+  bit-20 partner to data and free types.
 
 ## SRC-0039 — Intel public x64 instruction interfaces
 
@@ -459,6 +485,10 @@ executable, ROM, copied asset or uncertain firmware body was retrieved or used.
   Original fixed-format validators only. HTML 403/oversized web PDF preceded
   publisher download and bounded local extraction. No PDF/example vendored.
 - Project limits/policies are distinct from UEFI conformance; no Macintosh claim.
+- SPEC-0016 addendum (2026-10-09, Claude, same hash): within 7.2.3, the memory
+  attribute definitions EFI_MEMORY_WB 0x8 and EFI_MEMORY_RUNTIME bit 63 (printed
+  158 / PDF 242); 2.3.4's identity mapping of map-described memory (printed 28 /
+  PDF 112) is why a partner address is accessed through the identity window.
 
 ## SRC-0035 — Oracle VirtualBox interfaces and firmware eligibility metadata
 

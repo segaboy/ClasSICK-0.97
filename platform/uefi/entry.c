@@ -59,9 +59,11 @@ void CS_EFIAPI cs_native_stop(cs_uefi_handoff *handoff)
     keyboard.read=keyboard_read; keyboard.write=keyboard_write; keyboard.context=NULL;
     cs_uart_io serial;
     serial.read=keyboard_read; serial.write=keyboard_write; serial.context=NULL;
+    /* SPEC-0016: qualification record and probe cell are identity views at 1024/1152. */
     (void)cs_native_uart_loop(handoff,*ready,&devices,&keyboard,&serial,0x3F8,12,60,
         (unsigned char *)(uintptr_t)(handoff->trace_base+CS_KBD_TRACE_OFFSET),
-        (unsigned char *)(uintptr_t)(handoff->trace_base+CS_UART_TRACE_OFFSET));
+        (unsigned char *)(uintptr_t)(handoff->trace_base+CS_UART_TRACE_OFFSET),
+        (unsigned char *)(uintptr_t)(handoff->trace_base+CS_QUAL_TRACE_OFFSET));
     cs_native_halt();
 }
 cs_efi_status CS_EFIAPI cs_uefi_entry(void *image,cs_efi_system *system)

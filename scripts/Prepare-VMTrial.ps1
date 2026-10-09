@@ -1,8 +1,11 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 # Copyright (C) 2026 Dean Howell.
 # SPEC-0015: prepare one fresh project VM; never starts it or modifies other VMs.
+# -Candidate names the admitted payload: SPEC-0015's first image or SPEC-0016's
+# qualification-diagnostics image. Both use the same machine configuration.
 [CmdletBinding()]
-param([Parameter(Mandatory=$true)][string]$VBoxManage,
+param([Parameter(Mandatory=$true)][ValidateSet('SPEC-0015','SPEC-0016')][string]$Candidate,
+      [Parameter(Mandatory=$true)][string]$VBoxManage,
       [Parameter(Mandatory=$true)][string]$BuildRoot,
       [Parameter(Mandatory=$true)][string]$TrialRoot,
       [Parameter(Mandatory=$true)][string]$VMName,
@@ -23,8 +26,11 @@ if($result.loaded -or $result.firmware -or $result.corruption_rejections -ne 30 
 if(@($result.writer_builds.PSObject.Properties).Count -ne 9){throw 'Require all nine Windows writer builds.'}
 $imageHash=(Get-FileHash -LiteralPath $image -Algorithm SHA256).Hash.ToLowerInvariant()
 $payloadHash=(Get-FileHash -LiteralPath $payload -Algorithm SHA256).Hash.ToLowerInvariant()
-if((Get-Item -LiteralPath $image).Length -ne 67108864 -or $imageHash -ne '370b7d4e7fc4200b77c367e09afa0c4944f534c2623d7f5f68db159c1da46078'){throw 'Raw image rejected.'}
-if((Get-Item -LiteralPath $payload).Length -ne 37888 -or $payloadHash -ne '8e25d6947677b538d84bc17f98ff44d056dcd3d7769d1389676072286ad831f2'){throw 'Payload rejected.'}
+$admitted=@{
+    'SPEC-0015'=@{payload_bytes=37888;payload='8e25d6947677b538d84bc17f98ff44d056dcd3d7769d1389676072286ad831f2';image='370b7d4e7fc4200b77c367e09afa0c4944f534c2623d7f5f68db159c1da46078'};
+    'SPEC-0016'=@{payload_bytes=43520;payload='920ed92c2b30609718d1ed95867e0cf79aab82ae5f9ce76ffee2c9b806ce5d16';image='e2e6a431722b39d6ed7c215bbc60727aef74ae776f74934f60ddfd0e6f4069e9'}}[$Candidate]
+if((Get-Item -LiteralPath $image).Length -ne 67108864 -or $imageHash -ne $admitted.image){throw 'Raw image rejected.'}
+if((Get-Item -LiteralPath $payload).Length -ne $admitted.payload_bytes -or $payloadHash -ne $admitted.payload){throw 'Payload rejected.'}
 & (Join-Path $PSScriptRoot 'Test-BootMedia.ps1') -Image $image -Payload $payload | Out-Null
 [void][IO.Directory]::CreateDirectory($TrialRoot)
 $script:stepNumber=0
@@ -82,7 +88,7 @@ $info=@(Run-VBox @('showvminfo',$uuid,'--machinereadable'))
 $after=@(Run-VBox @('list','vms'))
 $expected=@($before)+@('"'+$VMName+'" {'+$uuid+'}')
 if(@(Compare-Object ($expected | Sort-Object) ($after | Sort-Object)).Count -ne 0){throw 'VM inventory changed outside the one new identity.'}
-[ordered]@{contract='SPEC-0015';prepared_utc=[DateTime]::UtcNow.ToString('o');name=$VMName;uuid=$uuid;
+[ordered]@{contract='SPEC-0015';candidate=$Candidate;prepared_utc=[DateTime]::UtcNow.ToString('o');name=$VMName;uuid=$uuid;
     medium_uuid=$mediumUuid;raw_image=$image;raw_sha256=$imageHash;payload_sha256=$payloadHash;
     vdi=$vdi;vdi_sha256=(Get-FileHash -LiteralPath $vdi -Algorithm SHA256).Hash.ToLowerInvariant();
     roundtrip_sha256=(Get-FileHash -LiteralPath $roundtrip -Algorithm SHA256).Hash.ToLowerInvariant();

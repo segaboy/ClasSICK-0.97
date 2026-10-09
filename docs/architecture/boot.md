@@ -10,8 +10,11 @@ isolated trial. [Repeated native VM observations](../development/vm-trial-eviden
 now show our original scene, 60-second guest completion, live Space and synthetic
 Escape. Formal B2 remains partial because firmware image identity and explicit
 self-test/machine-state qualification are incomplete; the read-only
-[B2 audit](../development/b2-qualification-audit.md) maps every criterion and
-proposes the remaining measurements. All physical/edition gates remain open. Later sections retain the dated dependency history.
+[B2 audit](../development/b2-qualification-audit.md) maps every criterion.
+[SPEC-0016](../specifications/SPEC-0016-qualification-diagnostics.md) adds the
+self-test and bit-20 measurements and the firmware's self-report to a new
+candidate image ([evidence](../development/qualification-diagnostics-evidence.md));
+it has not yet run in a VM, and criterion 6's hash is unchanged. All physical/edition gates remain open. Later sections retain the dated dependency history.
 
 ## Three distinct gates
 

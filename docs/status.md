@@ -1,6 +1,6 @@
 # Project status
 
-Date: 2026-10-08. Current phase: **B1/M0.1 verified; first native-PC VM runtime/input observed, formal B2 partial**.
+Date: 2026-10-09. Current phase: **B1/M0.1 verified; first native-PC VM runtime/input observed, formal B2 partial**.
 M0.0 technical bootstrap remains verified. The owner explicitly authorized the
 first bounded graphics subsystem in the project implementation chat on this date.
 SPEC-0001 v1 is finalized, implemented and tested under IMPL-0002 / TEST-0004.
@@ -15,6 +15,17 @@ documentation/evidence repository and personal project wiki. This technical gate
 does not imply that the complete project foundation or any OS boot is finished.
 
 ## Achieved
+
+- SPEC-0016 / ADR-0020 / IMPL-0020 / TEST-0024 builds the B2 qualification
+  measurements into the normal native image under the owner's delegation
+  (SRC-0064): the firmware's self-reported vendor and revision, the controller
+  output port before and after self-test, and an owned-cell bit-20 alias probe
+  before startup and at keyboard READY, all on serial and in a trace record.
+  Either alias or a Gate A20/System Reset change fails closed. Hosted suites
+  pass locally ([snapshot](development/qualification-diagnostics-evidence.md));
+  pinned CI is recorded in TEST-0024. Not yet run in a VM: the next trial needs
+  the owner's go-ahead. Criterion 6's firmware hash is unchanged, so B2 stays
+  partial on it. Human review pending.
 
 - TEST-0023 [audits formal B2](development/b2-qualification-audit.md) read-only:
   criteria 1–5 are met by observation or reviewed gating, and no-input cold

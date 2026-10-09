@@ -19,7 +19,13 @@ typedef struct {
     uint32_t map_version,exit_attempts,span_count,native_entered;
     cs_uefi_owned_span spans[8];
     uint64_t rsdp; /* SPEC-0010: ACPI 2.0+ RSDP physical address copied pre-exit, or zero */
+    /* SPEC-0016 (handoff version 2): system-table firmware self-report copied
+       pre-exit. Vendor is at most 31 printable ASCII bytes, NUL-filled. */
+    uint32_t firmware_revision,firmware_vendor_state;
+    unsigned char firmware_vendor[32];
 } cs_uefi_handoff;
+enum { CS_UEFI_HANDOFF_VERSION=2, CS_UEFI_VENDOR_COMPLETE=0, CS_UEFI_VENDOR_TRUNCATED=1,
+    CS_UEFI_VENDOR_ABSENT=2, CS_UEFI_VENDOR_UNITS=31 };
 typedef struct { cs_efi_status status; uint32_t attempts,exited; cs_uefi_handoff *handoff; } cs_uefi_load_result;
 _Static_assert(sizeof(cs_uefi_handoff)<=4096,"Handoff fits reserved header page");
 /* Caller supplies truthful live/disjoint metadata; no native jump here. */

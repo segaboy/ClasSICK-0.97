@@ -3,6 +3,9 @@
 Version 1, finalized 2026-10-08. Original PC development profile; SRC-0053/0054,
 SRC-0052 byte-port instructions and SRC-0046 PM timer. ADR-0017 / IMPL-0017 /
 TEST-0019. Hosted/unloaded evidence only; human provenance review pending.
+Version 2, 2026-10-09 ([SPEC-0016](SPEC-0016-qualification-diagnostics.md)):
+banner `UART v2`, firmware/owned-address/qualification lines, a required
+qualification pointer and a 1-s / 4,000,000-turn termination drain.
 
 ## Interface facts and qualification
 
@@ -68,13 +71,14 @@ Observer callbacks and owned buffers are truthful, live/disjoint; trace capacity
 is the caller's responsibility as in preceding native APIs.
 
 Diagnostics enqueue original ASCII banner, keyboard-ready, changed-frame and
-termination records. Frame line fields are fixed eight-digit uppercase hex:
+termination records (v2 adds the SPEC-0016 lines). Frame line fields are fixed eight-digit uppercase hex:
 `frame=`, `sec=`, `space=`; end fields `result=`, `kbd=`. CRLF framing; no format
 library. Queue drops are explicit. Each timer turn runs at most one UART poll;
 serial startup/stall/line failures do not prevent keyboard progress or change its
 return result. Termination attempts a finite drain with fresh PM sampling,
-maximum 100000 turns and 357955 elapsed ticks, without extending the keyboard
-duration. Fresh timer initialization/map failure sets UART STATE; invalid drain
+maximum 100000 turns and 357955 elapsed ticks in v1 (v2: 4,000,000 turns and
+3,579,545 ticks), without extending the keyboard duration. Fresh timer
+initialization/map failure sets UART STATE; invalid drain
 samples, elapsed overflow or exhausted drain bounds set TIMEOUT. The independent
 drain epoch starts at its fresh initial timer sample; callback latency is external.
 No asynchronous exception logger: SPEC-0008 first-fault RAM evidence remains.

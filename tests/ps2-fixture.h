@@ -10,6 +10,7 @@ typedef struct {
     unsigned head,tail,writes,status_reads,data_reads,violations;
     unsigned config_pending,live,blocked,disable_reply,resend_value,resend_left;
     uint8_t configuration,self_test,interface_test,bat;
+    uint8_t output_port,tested_port; unsigned port_changes,silent_d0; /* SPEC-0016 D0 model */
     uint8_t live_bytes[64]; unsigned live_count;
 } ps2_fixture;
 static void pf_byte(ps2_fixture *f,uint8_t byte,uint8_t flags)
@@ -20,6 +21,7 @@ static void pf_byte(ps2_fixture *f,uint8_t byte,uint8_t flags)
 static void pf_init(ps2_fixture *f)
 {
     memset(f,0,sizeof *f); f->configuration=0x47; f->self_test=0x55; f->bat=0xAA;
+    f->output_port=0xCF; f->tested_port=0xCF;
 }
 static uint8_t pf_read(void *context,uint16_t port)
 {
@@ -42,11 +44,18 @@ static void pf_write(void *context,uint16_t port,uint8_t byte)
     ps2_fixture *f=context;
     if(f->blocked || f->writes>=128 || (port!=0x60 && port!=0x64)) { ++f->violations; return; }
     f->ports[f->writes]=(uint8_t)port; f->values[f->writes++]=byte;
+    /* Output-port writes (D1) and pulses (F0-FF) could reset or gate A20: never allowed. */
+    if(port==0x64 && (byte==0xD1 || byte>=0xF0)) ++f->violations;
     if(port==0x64) {
         if(byte==0x60) f->config_pending=1;
         else if(!f->disable_reply) {
             if(byte==0x20) pf_byte(f,f->configuration,0);
-            else if(byte==0xAA) { f->configuration=0x47; pf_byte(f,f->self_test,0); }
+            else if(byte==0xAA) {
+                f->configuration=0x47; pf_byte(f,f->self_test,0);
+                if(f->output_port!=f->tested_port) ++f->port_changes;
+                f->output_port=f->tested_port;
+            }
+            else if(byte==0xD0 && !f->silent_d0) pf_byte(f,f->output_port,0);
             else if(byte==0xAB) pf_byte(f,f->interface_test,0);
         }
     } else if(f->config_pending) { f->configuration=byte; f->config_pending=0; }

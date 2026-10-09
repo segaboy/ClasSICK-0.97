@@ -84,6 +84,13 @@ conformance beyond what we observed. All three OS editions, parity, Macintosh
 
 ## Proposed next qualification (draft only, not implemented)
 
+*Superseded 2026-10-09:* under the owner's delegation (SRC-0064) the
+measurements were built into the normal image instead of a separate probe
+image, with a read-only partner chosen from the final map rather than a reserved
+page. See [SPEC-0016](../specifications/SPEC-0016-qualification-diagnostics.md),
+ADR-0020 and the [evidence snapshot](qualification-diagnostics-evidence.md).
+The draft below is kept as written for the record.
+
 A separate **qualification probe image** keeps the B2 candidate image unchanged.
 It reuses the same loader, transition and SPEC-0012 startup and adds four bounded
 observations. Each goes to UART and to a new 64-byte record at trace offset 1024

@@ -70,6 +70,19 @@ uint64_t cs_uefi_acpi20_rsdp(size_t count,const void *table)
     }
     return 0;
 }
+/* SPEC-0016: bounded copy of the UCS-2 FirmwareVendor string, read bytewise. */
+static uint32_t vendor_copy(const unsigned char *vendor,unsigned char *out)
+{
+    uint32_t units;
+    if(vendor==NULL) return CS_UEFI_VENDOR_ABSENT;
+    for(units=0;units<CS_UEFI_VENDOR_UNITS;++units) {
+        uint32_t unit=(uint32_t)vendor[units*2u]|((uint32_t)vendor[units*2u+1u]<<8);
+        if(unit==0) return CS_UEFI_VENDOR_COMPLETE;
+        out[units]=(unsigned char)(unit>=0x20u && unit<0x7Fu?unit:0x3Fu);
+    }
+    return (vendor[2u*CS_UEFI_VENDOR_UNITS]|vendor[2u*CS_UEFI_VENDOR_UNITS+1u])==0
+        ?CS_UEFI_VENDOR_COMPLETE:CS_UEFI_VENDOR_TRUNCATED;
+}
 static cs_efi_status finish(cs_uefi_load_result *out,cs_efi_status status)
 {
     out->status=status; return status;
@@ -122,7 +135,7 @@ cs_efi_status cs_uefi_loader_run(void *image,cs_efi_system *system,cs_uefi_load_
     volatile unsigned char *zero=(volatile unsigned char *)(uintptr_t)address;
     for(size_t i=0;i<CS_LOADER_BUNDLE;++i) zero[i]=0;
     cs_uefi_handoff *h=(cs_uefi_handoff *)(uintptr_t)address;
-    h->magic=UINT64_C(0x4353303937484F46); h->version=1; h->size=(uint32_t)sizeof(*h);
+    h->magic=UINT64_C(0x4353303937484F46); h->version=CS_UEFI_HANDOFF_VERSION; h->size=(uint32_t)sizeof(*h);
     h->image_base=image_base; h->image_size=image_size; h->bundle_base=address; h->bundle_size=CS_LOADER_BUNDLE;
     h->framebuffer=f; h->map_base=address+CS_LOADER_MAP_OFFSET;
     h->stack_top=address+CS_LOADER_STACK_OFFSET+CS_LOADER_STACK_BYTES;
@@ -130,6 +143,8 @@ cs_efi_status cs_uefi_loader_run(void *image,cs_efi_system *system,cs_uefi_load_
     h->arena_base=address+CS_LOADER_ARENA_OFFSET; h->arena_size=CS_LOADER_ARENA_BYTES;
     h->trace_base=address+CS_LOADER_TRACE_OFFSET; h->trace_size=CS_LOADER_TRACE_BYTES;
     h->rsdp=rsdp;
+    h->firmware_revision=system->firmware_revision;
+    h->firmware_vendor_state=vendor_copy((const unsigned char *)system->vendor,h->firmware_vendor);
     cs_uefi_exit_state state; (void)cs_uefi_exit_init(&state);
     for(;;) {
         size_t length=CS_LOADER_MAP_BYTES,stride=0,key=0,span_count=0; uint32_t version=0;
