@@ -39,3 +39,8 @@ decisions D1/D2. A Macintosh M0.3 feasibility research milestone is proposed wit
 no code. Claude (Anthropic; session configured as `claude-opus-5-5`) performed
 this audit; human provenance review pending. All edition flags and Mac goals
 are unchanged.
+
+Publication verification: [Windows CI 37867141307](https://github.com/segaboy/ClasSICK-0.97/actions/runs/37867141307)
+passed every step at `4f667725bb8c3ec6791dc85709653d216bc18b93` (source guard,
+pinned setup, bootstrap builds and the full hosted/unloaded/media chain). It ran
+no VM. This follow-up records results only.
