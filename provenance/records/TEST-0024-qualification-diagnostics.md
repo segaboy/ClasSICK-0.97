@@ -65,4 +65,17 @@ packages the O2 payload as raw image `e2e6a431…4069e9`, accepted by
 
 ## Pinned Windows CI
 
-Pending.
+[Run 37930178034](https://github.com/segaboy/ClasSICK-0.97/actions/runs/37930178034)
+passed every step at `7eed40a67b19f7bbf4471812136d8b69322420cd`: source guard
+(291 files), pinned tool setup, two fresh bootstrap builds (110 CTest checks
+each) and the full `Verify-BootMedia.ps1 -Sanitizers` chain. Its nine
+configurations pass 876 CTest checks: Clang x64 110 (debug twins, release and
+sanitized), Clang i686 83, GCC x64 95 (debug twins and release), GCC i686 68
+(846 at the parent). All object import and freestanding audits pass. EFI twins:
+O0 `6a7469c98d75f977b7ce4044901180f14d12728708d0978edfe67eb621ad05f1`, O2
+`920ed92c2b30609718d1ed95867e0cf79aab82ae5f9ce76ffee2c9b806ce5d16`, with 23
+image corruption and ten omitted-object rejections. All nine writer builds give
+raw image `e2e6a431722b39d6ed7c215bbc60727aef74ae776f74934f60ddfd0e6f4069e9`
+(85 payload clusters); the independent checker, 30 corruption rejections and
+three tool refusals pass. All three hashes equal the local predictions above.
+Nothing was attached to a VM or booted. This follow-up records results only.

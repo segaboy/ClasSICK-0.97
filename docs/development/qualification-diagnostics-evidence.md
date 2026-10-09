@@ -22,10 +22,11 @@ shows `a20=00000000/00000000`, equal port bits 0–1 and no result `0000000E`
 (MACHINE). Unavailable (`2`) is incomplete, not a pass. Frame and result lines
 are unchanged.
 
-## Candidate identity (local prediction)
+## Candidate identity
 
-Built locally with the pinned LLVM-MinGW 20260908 Linux release, which reproduces
-the earlier audited payload byte for byte:
+Pinned [Windows CI 37930178034](https://github.com/segaboy/ClasSICK-0.97/actions/runs/37930178034)
+at `7eed40a` produced these values, the same as a local build with the pinned
+LLVM-MinGW 20260908 Linux release (which also reproduces the earlier payload):
 
 | Item | Value |
 | --- | --- |
@@ -33,7 +34,8 @@ the earlier audited payload byte for byte:
 | O0 payload | 60,928 bytes, SHA-256 `6a7469c98d75f977b7ce4044901180f14d12728708d0978edfe67eb621ad05f1` |
 | Raw disk | 64 MiB, SHA-256 `e2e6a431722b39d6ed7c215bbc60727aef74ae776f74934f60ddfd0e6f4069e9` |
 
-Pinned Windows CI is the authority; its result is recorded in TEST-0024.
+The nine configurations pass 876 CTest checks, with all EFI, object and media
+controls (TEST-0024).
 
 ## Trial plan (needs the owner's go-ahead)
 

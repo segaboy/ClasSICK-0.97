@@ -22,8 +22,10 @@ does not imply that the complete project foundation or any OS boot is finished.
   output port before and after self-test, and an owned-cell bit-20 alias probe
   before startup and at keyboard READY, all on serial and in a trace record.
   Either alias or a Gate A20/System Reset change fails closed. Hosted suites
-  pass locally ([snapshot](development/qualification-diagnostics-evidence.md));
-  pinned CI is recorded in TEST-0024. Not yet run in a VM: the next trial needs
+  pass locally and in pinned [CI 37930178034](https://github.com/segaboy/ClasSICK-0.97/actions/runs/37930178034)
+  (876 CTest checks in nine configurations; payload `920ed92c…ce5d16`, raw image
+  `e2e6a431…4069e9`; [snapshot](development/qualification-diagnostics-evidence.md)).
+  Not yet run in a VM: the next trial needs
   the owner's go-ahead. Criterion 6's firmware hash is unchanged, so B2 stays
   partial on it. Human review pending.
 

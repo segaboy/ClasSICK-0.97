@@ -49,8 +49,8 @@ byte for byte; this change gives O2 twins of 43,520 bytes, SHA-256
 60,928 bytes, `6a7469c98d75f977b7ce4044901180f14d12728708d0978edfe67eb621ad05f1`,
 both accepted by `Test-UEFIImage.ps1`. The SPEC-0014 writer packages the O2
 payload as raw image `e2e6a431722b39d6ed7c215bbc60727aef74ae776f74934f60ddfd0e6f4069e9`
-(85 payload clusters), accepted by `Test-BootMedia.ps1`. The pinned Windows CI
-result is recorded in TEST-0024.
+(85 payload clusters), accepted by `Test-BootMedia.ps1`. Pinned Windows CI
+37930178034 produced the same three hashes (TEST-0024).
 
 Nothing was executed natively or in a VM. B2 remains partial. Macintosh/mini
 vMac, 128K and three-edition goals are unchanged.
