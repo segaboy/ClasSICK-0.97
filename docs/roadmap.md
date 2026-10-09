@@ -5,7 +5,9 @@ image in the owner's approved isolated VirtualBox configuration. Repeated cold
 starts show the original scene, approximately 60-second progress and serial
 completion; owner-confirmed Space input works. Formal B2 is partial pending
 exact firmware image identity and explicit machine-state qualification. See
-[the trial evidence](development/vm-trial-evidence.md). Macintosh replacement
+[the trial evidence](development/vm-trial-evidence.md) and the
+[B2 qualification audit](development/b2-qualification-audit.md), which proposes
+the remaining measurements and an M0.3 feasibility study. Macintosh replacement
 startup, 128K feasibility and real Mac/mini vMac remain independent milestones.
 
 Status: dated 2026-10-08; dependency-driven gates, not calendar promises.

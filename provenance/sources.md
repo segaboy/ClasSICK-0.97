@@ -5,6 +5,19 @@ eligibility applies to the stated scope, not every resource reachable from a URL
 No Apple executable, source, disassembly, decompilation, or copied asset was used.
 No reference-system black-box observation has yet been performed.
 
+## SRC-0063 — Owner's Claude continuation after the first VM trial
+
+- Owner, 2026-10-08, supplied a Codex-written continuation naming Claude
+  (Anthropic) lead again. First assignment: a read-only, evidence-based audit of
+  remaining formal B2 qualification: map each criterion to evidence; review the
+  self-test/A20/machine-state precondition against eligible primary sources;
+  determine whether permitted metadata can close firmware identity; prepare the
+  smallest next qualification contract and any owner decision; separate
+  out-of-gate items; propose the next bounded Macintosh research milestone.
+- Requirement only. SRC-0059/0060 boundaries persist; no new guest code, VM
+  launch merely to reproduce settled results, firmware extraction, delegation,
+  new chats, automation or live OneNote. The prompt itself stays private.
+
 ## SRC-0060 — Owner's first isolated VM trial go-ahead
 
 - Owner, 2026-10-08, responding to the explicit trial question:
@@ -218,6 +231,11 @@ Provenance eligibility and human rights review remain distinct from test success
   compatible-device profile, not a universal i8042 claim.
 - Copyrighted interface documentation is linked, not republished. Selected-page
   text/visual review occurred in the ignored owner workspace. No sample code used.
+- TEST-0023 addendum (2026-10-08, Claude, text extraction of the same hashed
+  copies): SMSC PDF 11 PS/2-mode output port (bit 0 System Reset, bit 1 Gate A20)
+  and PDF 12–13 command D0 Read Output Port; no stated self-test effect on the
+  output port. Holtek PDF 5: successful self-test registers 55, sets the system
+  flag and enables the keyboard interface. No A20 statement for self-test.
 
 ## SRC-0050 — Published PS/2 keyboard protocol and set-2 codes
 
@@ -332,6 +350,11 @@ executable, ROM, copied asset or uncertain firmware body was retrieved or used.
 - Initial sandbox download lacked DNS and local PyMuPDF was absent; reviewed
   publisher download succeeded with network permission, using bundled pypdf and
   PDFium rendering. Manual remains local, linked rather than vendored.
+- TEST-0023 addendum (2026-10-08, Claude): §11.7.13.4 External Signal
+  Compatibility, printed 11-33 / PDF 341 of the same volume and hash: A20M#
+  masks physical-address bit 20 for external bus memory accesses; not used by
+  modern operating systems; may be absent on newer Intel 64 processors. No
+  IA-32e exemption is stated there. Used only to decide what to measure.
 
 ## SRC-0037 — Owner's native loader and firmware-review continuation
 

@@ -3,6 +3,11 @@
 Read `docs/clean-room/POLICY.md`, `CONTRIBUTING.md`, and
 `provenance/README.md` before researching or changing this project.
 
+- On 2026-10-08 the owner handed leadership back to Claude after the VM trial
+  (SRC-0063) for a read-only formal B2 audit. Its proposals (probe image,
+  criterion-6 clarification) await owner decisions; do not implement new guest
+  code or relabel the firmware container hash without them.
+
 - On 2026-10-08 the owner returned leadership through the boot-media handoff
   and explicitly answered "Yes—prepare and run the isolated trial" (SRC-0060).
   SPEC-0015 covers a fresh isolated VirtualBox machine, owned SPEC-0014 media,

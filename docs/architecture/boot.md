@@ -9,8 +9,9 @@ SRC-0059 cleared black-box platform use and SRC-0060 authorized SPEC-0015's
 isolated trial. [Repeated native VM observations](../development/vm-trial-evidence.md)
 now show our original scene, 60-second guest completion, live Space and synthetic
 Escape. Formal B2 remains partial because firmware image identity and explicit
-self-test/machine-state qualification are incomplete. All physical/edition gates
-remain open. Later sections retain the dated dependency history.
+self-test/machine-state qualification are incomplete; the read-only
+[B2 audit](../development/b2-qualification-audit.md) maps every criterion and
+proposes the remaining measurements. All physical/edition gates remain open. Later sections retain the dated dependency history.
 
 ## Three distinct gates
 

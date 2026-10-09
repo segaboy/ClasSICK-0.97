@@ -16,6 +16,13 @@ does not imply that the complete project foundation or any OS boot is finished.
 
 ## Achieved
 
+- TEST-0023 [audits formal B2](development/b2-qualification-audit.md) read-only:
+  criteria 1–5 are met by observation or reviewed gating, and no-input cold
+  starts have byte-identical transcripts and final captures. B2 stays partial:
+  criterion 6's firmware hash cannot exist under SRC-0059, and SPEC-0012's
+  self-test A20/machine-state precondition is unmeasured. A small probe image and
+  a criterion-6 clarification are proposed for owner decision; nothing implemented.
+
 - SPEC-0015 / ADR-0019 / IMPL-0019 / TEST-0022 records the owner's approved
   isolated VirtualBox trial of the unchanged image. Six uninterrupted cold starts
   reach guest second 60 and success; the owner confirmed two live Space presses
