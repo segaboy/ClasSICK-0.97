@@ -82,7 +82,8 @@ to the cell, otherwise PASS=0. A constant Q cannot match both patterns.
 The probe runs twice: once on the first timer turn after all SPEC-0012 gates and
 before the first controller access (`before`), and once when the keyboard first
 reports READY, before the first frame (`after`). Either ALIAS stops with loop
-result MACHINE=14 before any later device access or drawing. A PS/2 MACHINE
+result MACHINE=14 before any further keyboard access or drawing; the serial lines
+and termination drain still run. A PS/2 MACHINE
 result also maps to loop MACHINE=14 (keyboard result 9 tells them apart).
 NOT_RUN=3 marks a probe that did not run. A null qualification pointer, as in
 `cs_native_keyboard_loop`, disables both probes; behavior is otherwise identical.
