@@ -59,4 +59,12 @@ collectors completed; observer draft line-continuation errors were corrected
 before any execution. Final VM state is powered off and VDI hash unchanged.
 The SPEC-0012 measurement precondition now passes on this declared configuration.
 Formal B2 still remains partial on unchanged criterion 6. Physical/edition/Mac
-and human provenance gates remain independent. Publication CI is still pending.
+and human provenance gates remain independent. The observed publication CI result is recorded below.
+
+Publication verification: [Windows CI 38180032136](https://github.com/segaboy/ClasSICK-0.97/actions/runs/38180032136)
+passed at `8f330b8127ce7d29128a4b5da424ccf967ba50d8`: 296-file repository
+guard, pinned setup, fresh bootstrap twins and the full nine-configuration
+876-check hosted/unloaded/media chain. All 64 local/CI comparison labels and
+58 distinct fingerprints match, including unchanged O2/O0/raw candidate hashes.
+This CI did not run the VM, operator input or register observations. This
+follow-up records observed results only.

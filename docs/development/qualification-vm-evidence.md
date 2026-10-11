@@ -36,8 +36,8 @@ Retained full Windows log SHA-256:
 `6aab1918b1c501efa12afa71b03a6753bc42da07569822a7d4736253bc7914b1`.
 Prior [candidate CI 37930178034](https://github.com/segaboy/ClasSICK-0.97/actions/runs/37930178034)
 was independently confirmed successful; the fresh local chain reproduces its
-candidate identities. A separate publication CI result will be recorded after
-completion; CI does not provide VM/operator evidence.
+candidate identities. The observed publication CI result is recorded below; CI does not provide
+VM/operator evidence.
 
 ## Four retained cold starts
 
@@ -114,3 +114,11 @@ real Macintosh and mini vMac booting remain required. Human provenance review
 is pending. Claude's source-foundation and 128K documents-only lanes remain
 with Claude; no new implementation, emulator clearance or OneNote operation
 is authorized by this trial.
+
+Publication verification: [Windows CI 38180032136](https://github.com/segaboy/ClasSICK-0.97/actions/runs/38180032136)
+passed at `8f330b8127ce7d29128a4b5da424ccf967ba50d8`: 296-file repository
+guard, pinned setup, fresh bootstrap twins and the full nine-configuration
+876-check hosted/unloaded/media chain. All 64 local/CI comparison labels and
+58 distinct fingerprints match, including unchanged O2/O0/raw candidate hashes.
+This CI did not run the VM, operator input or register observations. This
+follow-up records observed results only.

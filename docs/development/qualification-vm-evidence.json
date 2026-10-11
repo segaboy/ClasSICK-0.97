@@ -41,7 +41,12 @@
     "tool_refusals": 3,
     "log_sha256": "6aab1918b1c501efa12afa71b03a6753bc42da07569822a7d4736253bc7914b1",
     "candidate_ci_url": "https://github.com/segaboy/ClasSICK-0.97/actions/runs/37930178034",
-    "publication_ci_status": "pending"
+    "publication_ci_status": "success",
+    "publication_ci_source": "8f330b8127ce7d29128a4b5da424ccf967ba50d8",
+    "publication_ci_url": "https://github.com/segaboy/ClasSICK-0.97/actions/runs/38180032136",
+    "publication_ci_log_sha256": "97dd971988c452696c8a4ae7e424b2b5d7ff21a9bb28c5b277da1512a4615203",
+    "matching_local_ci_labels": 64,
+    "matching_local_ci_distinct_fingerprints": 58
   },
   "media": {
     "raw_bytes": 67108864,
