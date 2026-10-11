@@ -28,8 +28,10 @@ System 1 profile (R-001) before a specification adopts it.
 Figure 9 also reserves 128 bytes between the main screen and sound buffers for
 the System Error Handler and leaves gaps whose sizes it states; the 512K adds
 $60000 to each buffer address (III-19, III-21). Volumes I–III do not state the
-trap dispatch table's address. It stays open until a published source or owner
-observation supplies it.
+trap dispatch table's address. Appendix D documents no global from $400 through
+$823, a gap large enough for the 1024-byte table; that is consistent with a
+table at $400 but is this project's inference, not a published statement. The
+address stays open until a published source or owner observation supplies it.
 
 ## Global variables by address
 
