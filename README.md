@@ -16,13 +16,13 @@ planned target, not the definition of the portable OS.
 
 ## Current state
 
-The unchanged original image now starts in an isolated VirtualBox EFI64 machine,
-draws its own scene, completes the native 60-second loop and reports serial
-diagnostics. The owner confirmed two live Space presses and visible scene changes;
-synthetic Escape stops early. [First VM evidence](docs/development/vm-trial-evidence.md)
-records repeated cold starts and retained failures. Formal B2 qualification is
-partial: exact firmware image identity and explicit machine-state qualification
-remain incomplete. No full OS edition or historical compatibility is certified.
+The SPEC-0016 image now passes the measured self-test/controller and bit-20 memory
+qualification on an isolated VirtualBox EFI64 machine. Three headless cold starts
+and a separate live keyboard run complete the native 60-second sequence; the
+owner confirmed Space scene changes. [Qualification trial](docs/development/qualification-vm-evidence.md)
+records the exact candidate, timings, owned-stack observations and limitations.
+Formal B2 remains partial on its unchanged firmware-image-hash requirement.
+No full OS edition or historical compatibility is certified.
 Real Macintosh/mini vMac with independent replacement startup remains required.
 
 The component summaries below describe their named historical checkpoints;

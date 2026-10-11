@@ -3,6 +3,14 @@
 Read `docs/clean-room/POLICY.md`, `CONTRIBUTING.md`, and
 `provenance/README.md` before researching or changing this project.
 
+- On 2026-10-11 the owner answered "Go ahead" to the SPEC-0016 VirtualBox
+  trial (SRC-0065): fresh pinned Windows verification, one new isolated project
+  VM, three headless cold starts and a separate owner-operated Space session,
+  retained observations and ordinary evidence/HQ Git publication. Preserve all
+  existing VMs and SRC-0059's black-box boundary. Criterion 6 is unchanged;
+  firmware self-report is not an image hash. No new guest/driver implementation,
+  delegation, other emulator clearance, automation, physical writing or OneNote.
+
 - On 2026-10-08 the owner delegated the B2 qualification decisions to Claude
   ("I think you should decide", SRC-0064). SPEC-0016 builds the measurements
   (firmware self-report, controller output port, bit-20 alias probe) into the

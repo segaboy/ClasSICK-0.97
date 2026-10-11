@@ -5,6 +5,37 @@ eligibility applies to the stated scope, not every resource reachable from a URL
 No Apple executable, source, disassembly, decompilation, or copied asset was used.
 No reference-system black-box observation has yet been performed.
 
+## SRC-0065 — Owner's qualification-candidate VM trial approval
+
+- Owner, 2026-10-11, after the SPEC-0016 continuation and read-only milestone
+  review, answered "Go ahead" to three automatic cold starts and about two
+  minutes of live Space input. This is approval for the new candidate, separate
+  from SRC-0060's earlier payload trial.
+- Covers fresh pinned Windows verification, a fresh isolated machine using
+  SPEC-0015 settings and SPEC-0016 media, serial/own-scene/host-clock observations,
+  operator input and ordinary public/HQ evidence and Git wiki publication.
+- SRC-0059's no-firmware-internals boundary, existing owner/project VM protection,
+  strict criterion 6, role separation and Macintosh/three-edition goals persist.
+  No new guest/driver code, delegation, chats, automation, other emulator clearance,
+  physical writing or live OneNote operation. Requirement, not a runtime result.
+- The owner accepted the live candidate session, then confirmed:
+  “I pressed Space several times and saw the scene change.” TEST-0025 retains
+  the observed six initial presses; no exact-two-count claim is made.
+
+## SRC-0066 — Project-owned qualification-candidate VM observations
+
+- Own SPEC-0016 image observed 2026-10-11 under SRC-0065 / TEST-0025 and
+  IMPL-0021; [sanitized evidence](../docs/development/qualification-vm-evidence.md).
+- Three no-input headless starts and one live owner-operated start pass both
+  alias probes, unchanged read controller bits and guest second 60/result zero.
+  Own scene/serial and bounded public post-READY RIP/RSP observations are retained.
+- Extends SRC-0061's same Oracle public management contract with getregisters,
+  manual section 15.16.2.11: only own post-READY RIP/RSP, no memory/code dump.
+  No external implementation, firmware internals or protected assets are inputs.
+- Original output/host orchestration under GPL-3.0-or-later. Firmware vendor and
+  revision are self-report, not an image fingerprint. Formal B2, historical
+  compatibility, physical/edition/Mac goals and human provenance review remain open.
+
 ## SRC-0064 — Owner's delegation of the B2 qualification decisions
 
 - Owner, 2026-10-08, after Claude's project-wide audit and prioritized queue:

@@ -1,6 +1,7 @@
 # Boot definitions and dependency graph
 
-Status: B0 and hosted B1 verified; native VM runtime/input observed, formal B2 partial.
+Status: B0/B1 verified; native VM runtime/input and measured self-test qualification
+pass, formal B2 partial on unchanged firmware image hash.
 
 The [2026-10-08 readiness audit](../development/boot-readiness-audit.md)
 passes retained input/artifact integrity and five unloaded EFI inspections; its
@@ -8,13 +9,13 @@ NO-GO describes that earlier checkpoint. SPEC-0014 supplied formatted media,
 SRC-0059 cleared black-box platform use and SRC-0060 authorized SPEC-0015's
 isolated trial. [Repeated native VM observations](../development/vm-trial-evidence.md)
 now show our original scene, 60-second guest completion, live Space and synthetic
-Escape. Formal B2 remains partial because firmware image identity and explicit
-self-test/machine-state qualification are incomplete; the read-only
-[B2 audit](../development/b2-qualification-audit.md) maps every criterion.
-[SPEC-0016](../specifications/SPEC-0016-qualification-diagnostics.md) adds the
-self-test and bit-20 measurements and the firmware's self-report to a new
-candidate image ([evidence](../development/qualification-diagnostics-evidence.md));
-it has not yet run in a VM, and criterion 6's hash is unchanged. All physical/edition gates remain open. Later sections retain the dated dependency history.
+Escape. The read-only [B2 audit](../development/b2-qualification-audit.md) mapped
+the remaining criteria. [SPEC-0016](../specifications/SPEC-0016-qualification-diagnostics.md)
+added the measurements; [TEST-0025's four candidate cold starts](../development/qualification-vm-evidence.md)
+now pass both bit-20 probes, preserved controller bits and live input, with
+observed owned-stack placement. Formal B2 is partial on unchanged criterion 6's
+firmware image hash. All physical/edition gates remain open. Later sections retain
+the dated dependency history; none changes the six gate criteria below.
 
 ## Three distinct gates
 

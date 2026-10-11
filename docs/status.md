@@ -1,6 +1,6 @@
 # Project status
 
-Date: 2026-10-09. Current phase: **B1/M0.1 verified; first native-PC VM runtime/input observed, formal B2 partial**.
+Date: 2026-10-11. Current phase: **B1/M0.1 verified; native VM measurements/input pass, formal B2 partial on firmware image hash**.
 M0.0 technical bootstrap remains verified. The owner explicitly authorized the
 first bounded graphics subsystem in the project implementation chat on this date.
 SPEC-0001 v1 is finalized, implemented and tested under IMPL-0002 / TEST-0004.
@@ -15,6 +15,19 @@ documentation/evidence repository and personal project wiki. This technical gate
 does not imply that the complete project foundation or any OS boot is finished.
 
 ## Achieved
+
+- TEST-0025 / IMPL-0021 / SRC-0065–0066 records the approved SPEC-0016 trial:
+  three headless no-input starts and one owner-operated visible start all pass
+  both bit-20 probes, unchanged read controller bits and native second 60/result
+  zero. Post-READY RIP/RSP are inside the own image/declared stack in every run.
+  The owner confirmed several Space presses and changes; actual count six is
+  retained. Fresh full Windows verification passes 876 checks and candidate
+  hashes match. [Snapshot](development/qualification-vm-evidence.md).
+  This closes the measured driver precondition on this configuration. Formal
+  B2 remains partial on unchanged criterion 6; human provenance review pending.
+
+Earlier dated entries below describe the evidence available at those checkpoints;
+TEST-0025 supersedes the candidate's not-yet-run and unmeasured-state wording.
 
 - SPEC-0016 / ADR-0020 / IMPL-0020 / TEST-0024 builds the B2 qualification
   measurements into the normal native image under the owner's delegation
@@ -292,12 +305,12 @@ statements describe those earlier checkpoints and are superseded by SPEC-0015.
 - Exact historical profile and 1984-applicable behavioral sources.
 - Macintosh 128K native feasibility, hardware startup and size budgets.
 - WOW64 debugger support, other sanitizer targets, m68k toolchain/runtime and boot.
-- Next: review the remaining formal B2 qualification gaps against SRC-0059's
-  black-box boundary. The image now executes natively in the VM, with observed
-  progress, serial and owner-operated Space input. Exact firmware image identity,
-  explicit A20/machine-state preservation and actual exception delivery remain
-  unverified. No extraction or further driver implementation is authorized by
-  the trial report. B1 stays a separate Windows development start.
+- Next: criterion 6's firmware image hash remains an owner decision under
+  SRC-0059's black-box boundary. TEST-0025 passes the measured self-test/bit-20
+  precondition and observes owned-stack placement on this configuration. Actual
+  exception delivery and physical device conformance remain separate. No
+  extraction or further driver implementation follows from this trial; B1 stays
+  a separate Windows development start.
 - Three bootable editions remain separately not-started: original Macintosh,
   native PC without Linux, Linux PC. Historical identity/QuickDraw and edition
   parity remain unverified; no Linux divergence has been introduced.

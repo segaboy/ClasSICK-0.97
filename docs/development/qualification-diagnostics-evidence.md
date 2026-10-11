@@ -6,6 +6,11 @@ ADR-0020 / IMPL-0020 / TEST-0024. The native image now measures what
 firmware's own name and revision. Hosted and unloaded evidence only: this image
 has not run in a VM. B2 stays partial.
 
+Later observation, 2026-10-11: [TEST-0025](qualification-vm-evidence.md) executes
+this exact O2/raw candidate in four cold starts. The measured precondition and
+live input pass; formal B2 remains partial on criterion 6. The build-only results
+and original trial plan below are retained as dated history.
+
 ## What the image now reports
 
 After the banner `ClasSICK 0.97 UART v2` the serial log gains four lines:

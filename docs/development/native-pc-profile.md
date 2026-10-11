@@ -3,9 +3,11 @@
 Date 2026-10-08. ADR-0010 / SPEC-0006; loader ADR-0011 / SPEC-0007. The
 proposed profile was instantiated in SPEC-0015 after owner approval. Our unchanged
 image now executes with observed original scene, timer progress, UART diagnostics
-and live Space input. [Trial evidence](vm-trial-evidence.md) records settings,
-repeat cold starts and limits. Formal B2 is partial; exact firmware image identity,
-explicit A20/machine-state preservation and actual exception delivery remain open.
+and live Space input. [First trial](vm-trial-evidence.md) records the original
+candidate. [TEST-0025](qualification-vm-evidence.md) later passes the SPEC-0016
+measured self-test/bit-20 precondition in four cold starts, with observed owned
+stack and live input. Formal B2 remains partial on the unchanged firmware image
+hash; actual exception delivery and physical device conformance remain separate.
 
 [The readiness audit](boot-readiness-audit.md) is retained as the earlier NO-GO
 history, superseded for media, black-box platform clearance and observed execution.
@@ -18,12 +20,12 @@ hosted-only descriptions record the evidence available when those leaves landed.
 | CPU/RAM | x86-64, one virtual CPU, 512 MiB; this is a PC development budget, unrelated to Macintosh 128K feasibility |
 | Firmware | VirtualBox 7.2.16 EFI64, cleared as a black-box test platform only (SRC-0059, [conditions](firmware-eligibility.md)); provenance not certified, no extraction or study of internals; first launch needs a separate owner go-ahead |
 | Board | PIIX3, ACPI enabled; one polling CPU, hardware interrupts disabled after successful handoff until owned exception state is installed |
-| Display | VBoxVGA, 16 MiB VRAM, 3D off; SPEC-0007 reads current GOP RGB/BGR-reserved mode, rejects unsupported data and makes no mode change. SPEC-0009 presents the original scene with direct post-exit byte stores after the exit/ready gates; hosted-verified only. Later mode-selection contract is separate |
+| Display | VBoxVGA, 16 MiB VRAM, 3D off; current GOP RGB/BGR-reserved mode, no mode change; original post-handoff scenes now observed under TEST-0022/0025. Later mode selection is separate |
 | Input | Standard virtual PS/2 keyboard; no USB, Guest Additions, shared folders, clipboard or drag/drop dependency |
-| Timer | ACPI PM timer: SPEC-0010 captures the RSDP pre-exit, validates XSDT/FADT and samples the I/O port directly after exit (hosted-verified only); no firmware timer/Stall/Windows callbacks in native loop |
-| Diagnostics | SPEC-0013 qualified TI-compatible byte-register UART at proposed 0x3F8, assumed 1.8432-MHz clock, divisor 12/9600 baud/8N1. Mapping/model/clock/capture require qualification; fixed queue, nonblocking service and bounded final drain are hosted-verified only |
+| Timer | ACPI PM timer: map-checked pre-exit RSDP/table capture and direct post-exit sampling; 60-second native completion/host arrival comparison now observed, without exact clock calibration |
+| Diagnostics | SPEC-0013 UART at 0x3F8/IRQ4, divisor 12/9600 baud/8N1; bounded v2 own output now captured. Physical clock/baud/electrical conformance is separate |
 | Other devices | Network/audio/USB disabled, no extension-pack requirement, no unrelated mounted disk or external boot image |
-| Boot medium | SPEC-0014 original 64-MiB GPT raw image, one FAT32 ESP carrying only `\EFI\BOOT\BOOTX64.EFI`; generated and independently checked, not yet attached to any VM or read by firmware. VM disk conversion/attachment needs its own recorded procedure |
+| Boot medium | SPEC-0014 original 64-MiB GPT/FAT32 writer, only own `\EFI\BOOT\BOOTX64.EFI`; SPEC-0016 candidate converted/round-trip checked/attached and executed under TEST-0025 |
 
 ## Before final memory-map capture
 
@@ -80,7 +82,8 @@ manufacturer documentation. Require FADT revision >=3 with the 8042 bit set,
 PS/2-mode semantics, no translation/interrupts or USB/SMM interference, released
 keys during startup, and controller self-test that preserves A20/machine state.
 The successful trial accepted self-test and input; A20/machine-state preservation
-remains an uninstrumented qualification prerequisite. The interactive loop
+is now measured by SPEC-0016 and passes in TEST-0025 on this declared machine.
+The interactive loop
 uses an eight-record arena FIFO and 112-byte trace at offset 128; only READY
 starts its 60-second duration. Escape is an early stop, not acceptance.
 
@@ -102,7 +105,8 @@ starts its 60-second duration. Escape is an early stop, not acceptance.
   UART RX console or asynchronous fault output. Existing first-fault RAM remains.
 
 These are device ownership/acceptance requirements; scoped drivers are implemented
-and hosted-verified, while native behavior and machine qualification remain open.
+and hosted-verified, with bounded native qualification/input now observed in
+TEST-0025. Broader devices and physical conformance remain open.
 Unknown device capability fails visibly; no hidden
 firmware service fallback. This profile establishes no generic modern-PC/USB support.
 
@@ -122,9 +126,9 @@ The earlier modifyvm help request failed COM setup with E_ACCESSDENIED. The
 approved SPEC-0015 management session works and records an isolated configuration;
 that historical denial was a local tool limitation, not an auto-review rejection.
 
-Next: review remaining firmware identity and machine-state qualification within
-the owner's black-box boundary; exception delivery remains separate. Native
-runtime, repeated cold-start serial and original-scene captures now exist under
-SPEC-0015. Macintosh replacement
+Next: criterion 6's firmware image identity remains an owner decision within the
+black-box boundary; its wording is unchanged. Measured machine-state qualification
+and repeated native observations now pass under TEST-0025. Exception delivery
+remains separate. Macintosh replacement
 firmware/mini vMac and physical hardware remain independent targets; all three
 OS edition boots and historical parity remain open.

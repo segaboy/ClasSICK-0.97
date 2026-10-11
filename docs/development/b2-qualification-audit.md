@@ -8,6 +8,12 @@ controller self-test preserves A20 and required machine state, which has not bee
 measured. SRC-0063 / TEST-0023. This is a read-only audit of retained evidence
 and eligible sources: no VM was started, no code changed and no firmware was read.
 
+Later result, 2026-10-11: [TEST-0025's SPEC-0016 trial](qualification-vm-evidence.md)
+measures and passes the self-test/bit-20 precondition in four cold starts and
+observes RSP within the declared owned stack. Criterion 6's firmware image hash
+remains open and unchanged. This supersedes the unmeasured-state gap below;
+the original audit and decisions remain history.
+
 The audit covers [SPEC-0015's trial](vm-trial-evidence.md) of payload
 `8e25d6947677b538d84bc17f98ff44d056dcd3d7769d1389676072286ad831f2` in raw image
 `370b7d4e7fc4200b77c367e09afa0c4944f534c2623d7f5f68db159c1da46078` on

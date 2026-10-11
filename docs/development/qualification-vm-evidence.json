@@ -1,0 +1,1824 @@
+{
+  "schema_version": 1,
+  "classification": "own-native-vm-qualification",
+  "test": "TEST-0025",
+  "observed_on": "2026-10-11",
+  "candidate": "SPEC-0016",
+  "owner_approval": "SRC-0065",
+  "checkout_at_admission": "16dbab99789b61062087cfc6b03bd18a48bc4e91",
+  "compiled_code_source": "7eed40a67b19f7bbf4471812136d8b69322420cd",
+  "native_code_changed": false,
+  "platform": {
+    "product": "Oracle VirtualBox",
+    "version": "7.2.16r174877",
+    "vboxmanage_sha256": "7fda8e54157eb94a5ebd9cea079a9fb8c23ade92ae71e13399dc3431c021a228",
+    "producer_container_sha256": "6cd01002214a130353b9e12405fa836b5efef7461e04e451460e529109796487",
+    "firmware_image_sha256": null,
+    "firmware_self_report": {
+      "vendor": "EDK II",
+      "revision_hex": "00010000",
+      "state_hex": "00000000"
+    },
+    "firmware_internal_reads": false
+  },
+  "verification": {
+    "ctest_total": 876,
+    "configurations": [
+      110,
+      110,
+      110,
+      83,
+      110,
+      95,
+      95,
+      95,
+      68
+    ],
+    "comparison_labels": 64,
+    "distinct_fingerprints": 58,
+    "writer_builds": 9,
+    "corruption_rejections": 30,
+    "tool_refusals": 3,
+    "log_sha256": "6aab1918b1c501efa12afa71b03a6753bc42da07569822a7d4736253bc7914b1",
+    "candidate_ci_url": "https://github.com/segaboy/ClasSICK-0.97/actions/runs/37930178034",
+    "publication_ci_status": "pending"
+  },
+  "media": {
+    "raw_bytes": 67108864,
+    "raw_sha256": "e2e6a431722b39d6ed7c215bbc60727aef74ae776f74934f60ddfd0e6f4069e9",
+    "o2_bytes": 43520,
+    "o2_sha256": "920ed92c2b30609718d1ed95867e0cf79aab82ae5f9ce76ffee2c9b806ce5d16",
+    "o0_bytes": 60928,
+    "o0_sha256": "6a7469c98d75f977b7ce4044901180f14d12728708d0978edfe67eb621ad05f1",
+    "image_size": 57344,
+    "vdi_sha256": "93d1ef50a6efcedf022fc6f5b6a2f8219e6d8b2f4c54d6ab6ef7b1f5e505af84",
+    "roundtrip_sha256": "e2e6a431722b39d6ed7c215bbc60727aef74ae776f74934f60ddfd0e6f4069e9",
+    "post_trial_vdi_sha256": "93d1ef50a6efcedf022fc6f5b6a2f8219e6d8b2f4c54d6ab6ef7b1f5e505af84"
+  },
+  "configuration": {
+    "status": "passed-before-launch",
+    "candidate": "SPEC-0016",
+    "reviewed_utc": "2026-10-11T22:04:42.1935112Z",
+    "checked_settings": {
+      "firmware": "\"EFI64\"",
+      "memory": "512",
+      "cpus": "1",
+      "chipset": "\"piix3\"",
+      "acpi": "\"on\"",
+      "ioapic": "\"on\"",
+      "SecureBoot": "\"off\"",
+      "VMState": "\"poweroff\"",
+      "graphicscontroller": "\"vboxvga\"",
+      "vram": "16",
+      "accelerate3d": "\"off\"",
+      "hidkeyboard": "\"ps2kbd\"",
+      "hidpointing": "\"ps2mouse\"",
+      "paravirtprovider": "\"none\"",
+      "nested-hw-virt": "\"off\"",
+      "boot1": "\"disk\"",
+      "boot2": "\"none\"",
+      "boot3": "\"none\"",
+      "boot4": "\"none\"",
+      "audio": "\"none\"",
+      "audio_in": "\"off\"",
+      "audio_out": "\"off\"",
+      "usb": "\"off\"",
+      "ehci": "\"off\"",
+      "xhci": "\"off\"",
+      "clipboard": "\"disabled\"",
+      "clipboard_file_transfers": "\"off\"",
+      "draganddrop": "\"disabled\"",
+      "vrde": "\"off\"",
+      "uart1": "\"0x03f8,4\"",
+      "uarttype1": "\"16550A\"",
+      "uart2": "\"off\"",
+      "uart3": "\"off\"",
+      "uart4": "\"off\"",
+      "storagecontrollername0": "\"ClasSICK-SATA\"",
+      "storagecontrollertype0": "\"IntelAhci\"",
+      "storagecontrollerportcount0": "\"1\"",
+      "storagecontrollerbootable0": "\"on\"",
+      "nic1": "\"none\"",
+      "nic2": "\"none\"",
+      "nic3": "\"none\"",
+      "nic4": "\"none\"",
+      "nic5": "\"none\"",
+      "nic6": "\"none\"",
+      "nic7": "\"none\"",
+      "nic8": "\"none\""
+    },
+    "monitor_count": 1,
+    "other_controllers": 0,
+    "shared_folders": 0,
+    "attached_disks": 1,
+    "disk_serial_binding": "matches-prepared",
+    "configuration_sha256": "bbe06f48e813dd3039e773bdb2e29c327766acbf555f9602338382a99c17eb15",
+    "vdi_sha256": "93d1ef50a6efcedf022fc6f5b6a2f8219e6d8b2f4c54d6ab6ef7b1f5e505af84",
+    "inventory": "one-new-identity-only"
+  },
+  "trial_count": 4,
+  "generated_keyboard_input": false,
+  "qualification": "passed-for-declared-configuration",
+  "formal_b2": "partial",
+  "remaining_b2_blocker": "Criterion 6 firmware image hash; unchanged by SRC-0064/0065.",
+  "operator": {
+    "trial": "cold-04",
+    "confirmation": "I pressed Space several times and saw the scene change",
+    "space_presses": 6,
+    "deviation": "Requested two taps; operator performed several. Actual six initial presses retained; no exact-two-count claim."
+  },
+  "final_project_machine_state": "powered-off-readback",
+  "trials": [
+    {
+      "trial": "cold-01",
+      "terminal": true,
+      "port_before": 3,
+      "port_after": 3,
+      "alias_before": 0,
+      "alias_after": 0,
+      "ports_read": true,
+      "port_low_bits_preserved": true,
+      "result": 0,
+      "keyboard_result": 1,
+      "guest_seconds": 60,
+      "space_presses": 0,
+      "qualification": "passed",
+      "ready_to_terminal_host_seconds": 59.995503,
+      "arrival_difference_bracket_seconds": [
+        59.881203799999994,
+        60.113720099999995
+      ],
+      "owned_stack_observed": true,
+      "own_image_rip_observed": true,
+      "mode": "headless",
+      "started_utc": "2026-10-11T22:04:43.0598018Z",
+      "own_serial_lines": [
+        "ClasSICK 0.97 UART v2",
+        "fw rev=00010000 state=00000000 vendor=EDK II",
+        "own img=0000000010000000 bun=000000001CFAB000 stk=000000001CFFC000",
+        "keyboard ready",
+        "qual port=00000003/00000003 a20=00000000/00000000",
+        "alias q=000000001D120480 type=00000004",
+        "frame=00000000 sec=00000000 space=00000000",
+        "frame=00000001 sec=00000004 space=00000000",
+        "frame=00000002 sec=00000008 space=00000000",
+        "frame=00000003 sec=0000000C space=00000000",
+        "frame=00000004 sec=0000000F space=00000000",
+        "frame=00000005 sec=00000013 space=00000000",
+        "frame=00000006 sec=00000017 space=00000000",
+        "frame=00000007 sec=0000001B space=00000000",
+        "frame=00000008 sec=0000001E space=00000000",
+        "frame=00000009 sec=00000022 space=00000000",
+        "frame=0000000A sec=00000026 space=00000000",
+        "frame=0000000B sec=0000002A space=00000000",
+        "frame=0000000C sec=0000002D space=00000000",
+        "frame=0000000D sec=00000031 space=00000000",
+        "frame=0000000E sec=00000035 space=00000000",
+        "frame=0000000F sec=00000039 space=00000000",
+        "frame=00000010 sec=0000003C space=00000000",
+        "result=00000000 kbd=00000001"
+      ],
+      "raw_serial_sha256": "2eca59bc307435c4dea52f9123b90df66adb19b875f66f52c8eab72186dc104a",
+      "own_serial_sha256": "428bf8b27516380c8d60601c19899fc2e6e71288fe73d5f35031b09e7cf47ffb",
+      "own_serial_bytes": 1022,
+      "line_arrivals": [
+        {
+          "line": "ClasSICK 0.97 UART v2",
+          "recognized": true,
+          "previous_poll_seconds": 20.7590663,
+          "observed_host_seconds": 20.8772834,
+          "utc": "2026-10-11T22:05:03.9359171Z"
+        },
+        {
+          "line": "fw rev=00010000 state=00000000 vendor=EDK II",
+          "recognized": true,
+          "previous_poll_seconds": 20.7590663,
+          "observed_host_seconds": 20.8772834,
+          "utc": "2026-10-11T22:05:03.9383351Z"
+        },
+        {
+          "line": "own img=0000000010000000 bun=000000001CFAB000 stk=000000001CFFC000",
+          "recognized": true,
+          "previous_poll_seconds": 20.7590663,
+          "observed_host_seconds": 20.8772834,
+          "utc": "2026-10-11T22:05:03.9383351Z"
+        },
+        {
+          "line": "keyboard ready",
+          "recognized": true,
+          "previous_poll_seconds": 20.7590663,
+          "observed_host_seconds": 20.8772834,
+          "utc": "2026-10-11T22:05:03.9383351Z"
+        },
+        {
+          "line": "qual port=00000003/00000003 a20=00000000/00000000",
+          "recognized": true,
+          "previous_poll_seconds": 20.7590663,
+          "observed_host_seconds": 20.8772834,
+          "utc": "2026-10-11T22:05:03.9423090Z"
+        },
+        {
+          "line": "alias q=000000001D120480 type=00000004",
+          "recognized": true,
+          "previous_poll_seconds": 20.7590663,
+          "observed_host_seconds": 20.8772834,
+          "utc": "2026-10-11T22:05:03.9428566Z"
+        },
+        {
+          "line": "frame=00000000 sec=00000000 space=00000000",
+          "recognized": true,
+          "previous_poll_seconds": 20.7590663,
+          "observed_host_seconds": 20.8772834,
+          "utc": "2026-10-11T22:05:03.9428566Z"
+        },
+        {
+          "line": "frame=00000001 sec=00000004 space=00000000",
+          "recognized": true,
+          "previous_poll_seconds": 24.784476599999998,
+          "observed_host_seconds": 24.9052269,
+          "utc": "2026-10-11T22:05:07.9647053Z"
+        },
+        {
+          "line": "frame=00000002 sec=00000008 space=00000000",
+          "recognized": true,
+          "previous_poll_seconds": 28.7422543,
+          "observed_host_seconds": 28.8547582,
+          "utc": "2026-10-11T22:05:11.9140118Z"
+        },
+        {
+          "line": "frame=00000003 sec=0000000C space=00000000",
+          "recognized": true,
+          "previous_poll_seconds": 32.7849389,
+          "observed_host_seconds": 32.9025816,
+          "utc": "2026-10-11T22:05:15.9620605Z"
+        },
+        {
+          "line": "frame=00000004 sec=0000000F space=00000000",
+          "recognized": true,
+          "previous_poll_seconds": 35.742333099999996,
+          "observed_host_seconds": 35.8535314,
+          "utc": "2026-10-11T22:05:18.9129031Z"
+        },
+        {
+          "line": "frame=00000005 sec=00000013 space=00000000",
+          "recognized": true,
+          "previous_poll_seconds": 39.787051,
+          "observed_host_seconds": 39.897511099999996,
+          "utc": "2026-10-11T22:05:22.9562784Z"
+        },
+        {
+          "line": "frame=00000006 sec=00000017 space=00000000",
+          "recognized": true,
+          "previous_poll_seconds": 43.7221245,
+          "observed_host_seconds": 43.8369055,
+          "utc": "2026-10-11T22:05:26.8961631Z"
+        },
+        {
+          "line": "frame=00000007 sec=0000001B space=00000000",
+          "recognized": true,
+          "previous_poll_seconds": 47.725063399999996,
+          "observed_host_seconds": 47.8369004,
+          "utc": "2026-10-11T22:05:30.8958445Z"
+        },
+        {
+          "line": "frame=00000008 sec=0000001E space=00000000",
+          "recognized": true,
+          "previous_poll_seconds": 50.7886162,
+          "observed_host_seconds": 50.903463699999996,
+          "utc": "2026-10-11T22:05:33.9627062Z"
+        },
+        {
+          "line": "frame=00000009 sec=00000022 space=00000000",
+          "recognized": true,
+          "previous_poll_seconds": 54.8159377,
+          "observed_host_seconds": 54.930645,
+          "utc": "2026-10-11T22:05:37.9896234Z"
+        },
+        {
+          "line": "frame=0000000A sec=00000026 space=00000000",
+          "recognized": true,
+          "previous_poll_seconds": 58.752630499999995,
+          "observed_host_seconds": 58.8744161,
+          "utc": "2026-10-11T22:05:41.9335344Z"
+        },
+        {
+          "line": "frame=0000000B sec=0000002A space=00000000",
+          "recognized": true,
+          "previous_poll_seconds": 62.8202408,
+          "observed_host_seconds": 62.934911899999996,
+          "utc": "2026-10-11T22:05:45.9935788Z"
+        },
+        {
+          "line": "frame=0000000C sec=0000002D space=00000000",
+          "recognized": true,
+          "previous_poll_seconds": 65.7717445,
+          "observed_host_seconds": 65.8905747,
+          "utc": "2026-10-11T22:05:48.9493196Z"
+        },
+        {
+          "line": "frame=0000000D sec=00000031 space=00000000",
+          "recognized": true,
+          "previous_poll_seconds": 69.8158907,
+          "observed_host_seconds": 69.93466169999999,
+          "utc": "2026-10-11T22:05:52.9934355Z"
+        },
+        {
+          "line": "frame=0000000E sec=00000035 space=00000000",
+          "recognized": true,
+          "previous_poll_seconds": 73.7560415,
+          "observed_host_seconds": 73.8719526,
+          "utc": "2026-10-11T22:05:56.9303568Z"
+        },
+        {
+          "line": "frame=0000000F sec=00000039 space=00000000",
+          "recognized": true,
+          "previous_poll_seconds": 77.8012415,
+          "observed_host_seconds": 77.9192097,
+          "utc": "2026-10-11T22:06:00.9776205Z"
+        },
+        {
+          "line": "frame=00000010 sec=0000003C space=00000000",
+          "recognized": true,
+          "previous_poll_seconds": 80.75848719999999,
+          "observed_host_seconds": 80.8727864,
+          "utc": "2026-10-11T22:06:03.9312508Z"
+        },
+        {
+          "line": "result=00000000 kbd=00000001",
+          "recognized": true,
+          "previous_poll_seconds": 80.75848719999999,
+          "observed_host_seconds": 80.8727864,
+          "utc": "2026-10-11T22:06:03.9312508Z"
+        }
+      ],
+      "captures": [
+        {
+          "label": "initial",
+          "name": "cold-01-initial.png",
+          "exit": 0,
+          "elapsed_host_seconds": 20.983348799999998,
+          "utc": "2026-10-11T22:05:04.0429116Z",
+          "sha256": "31e368ffeff985ad4d80e7d5126be84443eecc77a36ca4f47e7de4b8b7466c35",
+          "exported": false
+        },
+        {
+          "label": "intermediate",
+          "name": "cold-01-intermediate.png",
+          "exit": 0,
+          "elapsed_host_seconds": 50.9620134,
+          "utc": "2026-10-11T22:05:34.0204935Z",
+          "sha256": "6dc5204b6f821ba1601d571296d8bdcd81806bb65fd8144d7a7946ebdcba9d07",
+          "exported": false
+        },
+        {
+          "label": "final",
+          "name": "cold-01-final.png",
+          "exit": 0,
+          "elapsed_host_seconds": 80.92262649999999,
+          "utc": "2026-10-11T22:06:03.9815867Z",
+          "sha256": "027b6d2cbb634fe8099141e5711c45834ac43f5cb06d3dc41a1b888153574d53",
+          "exported": false
+        }
+      ],
+      "register_observation": {
+        "utc": "2026-10-11T22:05:03.9865686Z",
+        "exit": 0,
+        "output": "rip = 0x00000000100090f5\nrsp = 0x000000001cffba78"
+      },
+      "observation_log_sha256": "502f8af5a1b51a55058f5a82ea7da3ae034cfdf3600abaee23fd9ceb5bbe3f11",
+      "observer_source_sha256": "547b335eb6a44bfbb9e3ded71372ffb44c9c4fa7656b0c0908a73f74221bcb50",
+      "commands": [
+        {
+          "utc": "2026-10-11T22:04:42.9484800Z",
+          "argv": [
+            "showvminfo",
+            "<OWN-VM-UUID>",
+            "--machinereadable"
+          ],
+          "exit": 0
+        },
+        {
+          "utc": "2026-10-11T22:04:43.0151726Z",
+          "argv": [
+            "list",
+            "runningvms"
+          ],
+          "exit": 0
+        },
+        {
+          "utc": "2026-10-11T22:04:43.0547480Z",
+          "argv": [
+            "modifyvm",
+            "<OWN-VM-UUID>",
+            "--uart-mode1",
+            "file",
+            "<TRIAL>\\cold-01-serial.txt"
+          ],
+          "exit": 0
+        },
+        {
+          "utc": "2026-10-11T22:04:47.2533885Z",
+          "argv": [
+            "startvm",
+            "<OWN-VM-UUID>",
+            "--type",
+            "headless"
+          ],
+          "exit": 0
+        },
+        {
+          "utc": "2026-10-11T22:05:03.9846164Z",
+          "argv": [
+            "debugvm",
+            "<OWN-VM-UUID>",
+            "getregisters",
+            "rip",
+            "rsp"
+          ],
+          "exit": 0
+        },
+        {
+          "utc": "2026-10-11T22:05:04.0399660Z",
+          "argv": [
+            "controlvm",
+            "<OWN-VM-UUID>",
+            "screenshotpng",
+            "<TRIAL>\\cold-01-initial.png"
+          ],
+          "exit": 0
+        },
+        {
+          "utc": "2026-10-11T22:05:34.0179966Z",
+          "argv": [
+            "controlvm",
+            "<OWN-VM-UUID>",
+            "screenshotpng",
+            "<TRIAL>\\cold-01-intermediate.png"
+          ],
+          "exit": 0
+        },
+        {
+          "utc": "2026-10-11T22:06:03.9780598Z",
+          "argv": [
+            "controlvm",
+            "<OWN-VM-UUID>",
+            "screenshotpng",
+            "<TRIAL>\\cold-01-final.png"
+          ],
+          "exit": 0
+        }
+      ]
+    },
+    {
+      "trial": "cold-02",
+      "terminal": true,
+      "port_before": 3,
+      "port_after": 3,
+      "alias_before": 0,
+      "alias_after": 0,
+      "ports_read": true,
+      "port_low_bits_preserved": true,
+      "result": 0,
+      "keyboard_result": 1,
+      "guest_seconds": 60,
+      "space_presses": 0,
+      "qualification": "passed",
+      "ready_to_terminal_host_seconds": 59.913700500000004,
+      "arrival_difference_bracket_seconds": [
+        59.8001259,
+        60.0339077
+      ],
+      "owned_stack_observed": true,
+      "own_image_rip_observed": true,
+      "mode": "headless",
+      "started_utc": "2026-10-11T22:07:02.8030800Z",
+      "own_serial_lines": [
+        "ClasSICK 0.97 UART v2",
+        "fw rev=00010000 state=00000000 vendor=EDK II",
+        "own img=0000000010000000 bun=000000001CF90000 stk=000000001CFE1000",
+        "keyboard ready",
+        "qual port=00000003/00000003 a20=00000000/00000000",
+        "alias q=000000001D105480 type=00000004",
+        "frame=00000000 sec=00000000 space=00000000",
+        "frame=00000001 sec=00000004 space=00000000",
+        "frame=00000002 sec=00000008 space=00000000",
+        "frame=00000003 sec=0000000C space=00000000",
+        "frame=00000004 sec=0000000F space=00000000",
+        "frame=00000005 sec=00000013 space=00000000",
+        "frame=00000006 sec=00000017 space=00000000",
+        "frame=00000007 sec=0000001B space=00000000",
+        "frame=00000008 sec=0000001E space=00000000",
+        "frame=00000009 sec=00000022 space=00000000",
+        "frame=0000000A sec=00000026 space=00000000",
+        "frame=0000000B sec=0000002A space=00000000",
+        "frame=0000000C sec=0000002D space=00000000",
+        "frame=0000000D sec=00000031 space=00000000",
+        "frame=0000000E sec=00000035 space=00000000",
+        "frame=0000000F sec=00000039 space=00000000",
+        "frame=00000010 sec=0000003C space=00000000",
+        "result=00000000 kbd=00000001"
+      ],
+      "raw_serial_sha256": "6a08c5db14bf9c753ef40181c14ec28007e9058f2d93bd44099b6639f3189d70",
+      "own_serial_sha256": "6a5a1cfd69bd33bf05ca5d75a40153466fd886ea87b0e52e59b30246366e3eaf",
+      "own_serial_bytes": 1022,
+      "line_arrivals": [
+        {
+          "line": "ClasSICK 0.97 UART v2",
+          "recognized": true,
+          "previous_poll_seconds": 5.137092399999999,
+          "observed_host_seconds": 5.2572996,
+          "utc": "2026-10-11T22:07:08.0604478Z"
+        },
+        {
+          "line": "fw rev=00010000 state=00000000 vendor=EDK II",
+          "recognized": true,
+          "previous_poll_seconds": 5.137092399999999,
+          "observed_host_seconds": 5.2572996,
+          "utc": "2026-10-11T22:07:08.0620576Z"
+        },
+        {
+          "line": "own img=0000000010000000 bun=000000001CF90000 stk=000000001CFE1000",
+          "recognized": true,
+          "previous_poll_seconds": 5.137092399999999,
+          "observed_host_seconds": 5.2572996,
+          "utc": "2026-10-11T22:07:08.0620576Z"
+        },
+        {
+          "line": "keyboard ready",
+          "recognized": true,
+          "previous_poll_seconds": 5.137092399999999,
+          "observed_host_seconds": 5.2572996,
+          "utc": "2026-10-11T22:07:08.0620576Z"
+        },
+        {
+          "line": "qual port=00000003/00000003 a20=00000000/00000000",
+          "recognized": true,
+          "previous_poll_seconds": 5.137092399999999,
+          "observed_host_seconds": 5.2572996,
+          "utc": "2026-10-11T22:07:08.0669515Z"
+        },
+        {
+          "line": "alias q=000000001D105480 type=00000004",
+          "recognized": true,
+          "previous_poll_seconds": 5.137092399999999,
+          "observed_host_seconds": 5.2572996,
+          "utc": "2026-10-11T22:07:08.0669515Z"
+        },
+        {
+          "line": "frame=00000000 sec=00000000 space=00000000",
+          "recognized": true,
+          "previous_poll_seconds": 5.137092399999999,
+          "observed_host_seconds": 5.2572996,
+          "utc": "2026-10-11T22:07:08.0669515Z"
+        },
+        {
+          "line": "frame=00000001 sec=00000004 space=00000000",
+          "recognized": true,
+          "previous_poll_seconds": 9.0417725,
+          "observed_host_seconds": 9.1604151,
+          "utc": "2026-10-11T22:07:11.9627752Z"
+        },
+        {
+          "line": "frame=00000002 sec=00000008 space=00000000",
+          "recognized": true,
+          "previous_poll_seconds": 13.149983299999999,
+          "observed_host_seconds": 13.263102,
+          "utc": "2026-10-11T22:07:16.0659367Z"
+        },
+        {
+          "line": "frame=00000003 sec=0000000C space=00000000",
+          "recognized": true,
+          "previous_poll_seconds": 17.085494699999998,
+          "observed_host_seconds": 17.207344499999998,
+          "utc": "2026-10-11T22:07:20.0105905Z"
+        },
+        {
+          "line": "frame=00000004 sec=0000000F space=00000000",
+          "recognized": true,
+          "previous_poll_seconds": 20.044054199999998,
+          "observed_host_seconds": 20.1600397,
+          "utc": "2026-10-11T22:07:22.9630501Z"
+        },
+        {
+          "line": "frame=00000005 sec=00000013 space=00000000",
+          "recognized": true,
+          "previous_poll_seconds": 24.086202699999998,
+          "observed_host_seconds": 24.2013552,
+          "utc": "2026-10-11T22:07:27.0049784Z"
+        },
+        {
+          "line": "frame=00000006 sec=00000017 space=00000000",
+          "recognized": true,
+          "previous_poll_seconds": 28.074359599999998,
+          "observed_host_seconds": 28.188666299999998,
+          "utc": "2026-10-11T22:07:30.9914949Z"
+        },
+        {
+          "line": "frame=00000007 sec=0000001B space=00000000",
+          "recognized": true,
+          "previous_poll_seconds": 32.1169204,
+          "observed_host_seconds": 32.2315746,
+          "utc": "2026-10-11T22:07:35.0349910Z"
+        },
+        {
+          "line": "frame=00000008 sec=0000001E space=00000000",
+          "recognized": true,
+          "previous_poll_seconds": 35.0765021,
+          "observed_host_seconds": 35.2250492,
+          "utc": "2026-10-11T22:07:38.0279541Z"
+        },
+        {
+          "line": "frame=00000009 sec=00000022 space=00000000",
+          "recognized": true,
+          "previous_poll_seconds": 39.1175253,
+          "observed_host_seconds": 39.2325938,
+          "utc": "2026-10-11T22:07:42.0356690Z"
+        },
+        {
+          "line": "frame=0000000A sec=00000026 space=00000000",
+          "recognized": true,
+          "previous_poll_seconds": 43.0555206,
+          "observed_host_seconds": 43.1699128,
+          "utc": "2026-10-11T22:07:45.9726667Z"
+        },
+        {
+          "line": "frame=0000000B sec=0000002A space=00000000",
+          "recognized": true,
+          "previous_poll_seconds": 47.1174964,
+          "observed_host_seconds": 47.235434399999995,
+          "utc": "2026-10-11T22:07:50.0387833Z"
+        },
+        {
+          "line": "frame=0000000C sec=0000002D space=00000000",
+          "recognized": true,
+          "previous_poll_seconds": 50.0745468,
+          "observed_host_seconds": 50.188435,
+          "utc": "2026-10-11T22:07:52.9916360Z"
+        },
+        {
+          "line": "frame=0000000D sec=00000031 space=00000000",
+          "recognized": true,
+          "previous_poll_seconds": 54.116658,
+          "observed_host_seconds": 54.2351539,
+          "utc": "2026-10-11T22:07:57.0376208Z"
+        },
+        {
+          "line": "frame=0000000E sec=00000035 space=00000000",
+          "recognized": true,
+          "previous_poll_seconds": 58.057560699999996,
+          "observed_host_seconds": 58.1743758,
+          "utc": "2026-10-11T22:08:00.9767136Z"
+        },
+        {
+          "line": "frame=0000000F sec=00000039 space=00000000",
+          "recognized": true,
+          "previous_poll_seconds": 62.106262699999995,
+          "observed_host_seconds": 62.222207299999994,
+          "utc": "2026-10-11T22:08:05.0249281Z"
+        },
+        {
+          "line": "frame=00000010 sec=0000003C space=00000000",
+          "recognized": true,
+          "previous_poll_seconds": 65.0574255,
+          "observed_host_seconds": 65.1710001,
+          "utc": "2026-10-11T22:08:07.9735649Z"
+        },
+        {
+          "line": "result=00000000 kbd=00000001",
+          "recognized": true,
+          "previous_poll_seconds": 65.0574255,
+          "observed_host_seconds": 65.1710001,
+          "utc": "2026-10-11T22:08:07.9735649Z"
+        }
+      ],
+      "captures": [
+        {
+          "label": "initial",
+          "name": "cold-02-initial.png",
+          "exit": 0,
+          "elapsed_host_seconds": 5.3599011,
+          "utc": "2026-10-11T22:07:08.1628419Z",
+          "sha256": "31e368ffeff985ad4d80e7d5126be84443eecc77a36ca4f47e7de4b8b7466c35",
+          "exported": false
+        },
+        {
+          "label": "intermediate",
+          "name": "cold-02-intermediate.png",
+          "exit": 0,
+          "elapsed_host_seconds": 35.3934273,
+          "utc": "2026-10-11T22:07:38.1964808Z",
+          "sha256": "6dc5204b6f821ba1601d571296d8bdcd81806bb65fd8144d7a7946ebdcba9d07",
+          "exported": false
+        },
+        {
+          "label": "final",
+          "name": "cold-02-final.png",
+          "exit": 0,
+          "elapsed_host_seconds": 65.2252366,
+          "utc": "2026-10-11T22:08:08.0283490Z",
+          "sha256": "027b6d2cbb634fe8099141e5711c45834ac43f5cb06d3dc41a1b888153574d53",
+          "exported": false
+        }
+      ],
+      "register_observation": {
+        "utc": "2026-10-11T22:07:08.1043362Z",
+        "exit": 0,
+        "output": "rip = 0x00000000100090f5\nrsp = 0x000000001cfe0a18"
+      },
+      "observation_log_sha256": "d81225deba24d913786b6d84f4c58f2d7264334a6322855ed5ba619ac68ffdae",
+      "observer_source_sha256": "547b335eb6a44bfbb9e3ded71372ffb44c9c4fa7656b0c0908a73f74221bcb50",
+      "commands": [
+        {
+          "utc": "2026-10-11T22:07:02.7032825Z",
+          "argv": [
+            "showvminfo",
+            "<OWN-VM-UUID>",
+            "--machinereadable"
+          ],
+          "exit": 0
+        },
+        {
+          "utc": "2026-10-11T22:07:02.7597331Z",
+          "argv": [
+            "list",
+            "runningvms"
+          ],
+          "exit": 0
+        },
+        {
+          "utc": "2026-10-11T22:07:02.8010612Z",
+          "argv": [
+            "modifyvm",
+            "<OWN-VM-UUID>",
+            "--uart-mode1",
+            "file",
+            "<TRIAL>\\cold-02-serial.txt"
+          ],
+          "exit": 0
+        },
+        {
+          "utc": "2026-10-11T22:07:06.5874178Z",
+          "argv": [
+            "startvm",
+            "<OWN-VM-UUID>",
+            "--type",
+            "headless"
+          ],
+          "exit": 0
+        },
+        {
+          "utc": "2026-10-11T22:07:08.1003206Z",
+          "argv": [
+            "debugvm",
+            "<OWN-VM-UUID>",
+            "getregisters",
+            "rip",
+            "rsp"
+          ],
+          "exit": 0
+        },
+        {
+          "utc": "2026-10-11T22:07:08.1603023Z",
+          "argv": [
+            "controlvm",
+            "<OWN-VM-UUID>",
+            "screenshotpng",
+            "<TRIAL>\\cold-02-initial.png"
+          ],
+          "exit": 0
+        },
+        {
+          "utc": "2026-10-11T22:07:38.1938244Z",
+          "argv": [
+            "controlvm",
+            "<OWN-VM-UUID>",
+            "screenshotpng",
+            "<TRIAL>\\cold-02-intermediate.png"
+          ],
+          "exit": 0
+        },
+        {
+          "utc": "2026-10-11T22:08:08.0243391Z",
+          "argv": [
+            "controlvm",
+            "<OWN-VM-UUID>",
+            "screenshotpng",
+            "<TRIAL>\\cold-02-final.png"
+          ],
+          "exit": 0
+        }
+      ]
+    },
+    {
+      "trial": "cold-03",
+      "terminal": true,
+      "port_before": 3,
+      "port_after": 3,
+      "alias_before": 0,
+      "alias_after": 0,
+      "ports_read": true,
+      "port_low_bits_preserved": true,
+      "result": 0,
+      "keyboard_result": 1,
+      "guest_seconds": 60,
+      "space_presses": 0,
+      "qualification": "passed",
+      "ready_to_terminal_host_seconds": 60.05807089999999,
+      "arrival_difference_bracket_seconds": [
+        59.94774679999999,
+        60.177076199999995
+      ],
+      "owned_stack_observed": true,
+      "own_image_rip_observed": true,
+      "mode": "headless",
+      "started_utc": "2026-10-11T22:08:44.5707813Z",
+      "own_serial_lines": [
+        "ClasSICK 0.97 UART v2",
+        "fw rev=00010000 state=00000000 vendor=EDK II",
+        "own img=0000000010000000 bun=000000001CF90000 stk=000000001CFE1000",
+        "keyboard ready",
+        "qual port=00000003/00000003 a20=00000000/00000000",
+        "alias q=000000001D105480 type=00000004",
+        "frame=00000000 sec=00000000 space=00000000",
+        "frame=00000001 sec=00000004 space=00000000",
+        "frame=00000002 sec=00000008 space=00000000",
+        "frame=00000003 sec=0000000C space=00000000",
+        "frame=00000004 sec=0000000F space=00000000",
+        "frame=00000005 sec=00000013 space=00000000",
+        "frame=00000006 sec=00000017 space=00000000",
+        "frame=00000007 sec=0000001B space=00000000",
+        "frame=00000008 sec=0000001E space=00000000",
+        "frame=00000009 sec=00000022 space=00000000",
+        "frame=0000000A sec=00000026 space=00000000",
+        "frame=0000000B sec=0000002A space=00000000",
+        "frame=0000000C sec=0000002D space=00000000",
+        "frame=0000000D sec=00000031 space=00000000",
+        "frame=0000000E sec=00000035 space=00000000",
+        "frame=0000000F sec=00000039 space=00000000",
+        "frame=00000010 sec=0000003C space=00000000",
+        "result=00000000 kbd=00000001"
+      ],
+      "raw_serial_sha256": "6a08c5db14bf9c753ef40181c14ec28007e9058f2d93bd44099b6639f3189d70",
+      "own_serial_sha256": "6a5a1cfd69bd33bf05ca5d75a40153466fd886ea87b0e52e59b30246366e3eaf",
+      "own_serial_bytes": 1022,
+      "line_arrivals": [
+        {
+          "line": "ClasSICK 0.97 UART v2",
+          "recognized": true,
+          "previous_poll_seconds": 5.1781162,
+          "observed_host_seconds": 5.297121499999999,
+          "utc": "2026-10-11T22:08:49.8680466Z"
+        },
+        {
+          "line": "fw rev=00010000 state=00000000 vendor=EDK II",
+          "recognized": true,
+          "previous_poll_seconds": 5.1781162,
+          "observed_host_seconds": 5.297121499999999,
+          "utc": "2026-10-11T22:08:49.8690243Z"
+        },
+        {
+          "line": "own img=0000000010000000 bun=000000001CF90000 stk=000000001CFE1000",
+          "recognized": true,
+          "previous_poll_seconds": 5.1781162,
+          "observed_host_seconds": 5.297121499999999,
+          "utc": "2026-10-11T22:08:49.8690243Z"
+        },
+        {
+          "line": "keyboard ready",
+          "recognized": true,
+          "previous_poll_seconds": 5.1781162,
+          "observed_host_seconds": 5.297121499999999,
+          "utc": "2026-10-11T22:08:49.8690243Z"
+        },
+        {
+          "line": "qual port=00000003/00000003 a20=00000000/00000000",
+          "recognized": true,
+          "previous_poll_seconds": 5.297121499999999,
+          "observed_host_seconds": 5.4672296,
+          "utc": "2026-10-11T22:08:50.0381403Z"
+        },
+        {
+          "line": "alias q=000000001D105480 type=00000004",
+          "recognized": true,
+          "previous_poll_seconds": 5.297121499999999,
+          "observed_host_seconds": 5.4672296,
+          "utc": "2026-10-11T22:08:50.0391199Z"
+        },
+        {
+          "line": "frame=00000000 sec=00000000 space=00000000",
+          "recognized": true,
+          "previous_poll_seconds": 5.297121499999999,
+          "observed_host_seconds": 5.4672296,
+          "utc": "2026-10-11T22:08:50.0391199Z"
+        },
+        {
+          "line": "frame=00000001 sec=00000004 space=00000000",
+          "recognized": true,
+          "previous_poll_seconds": 9.192212999999999,
+          "observed_host_seconds": 9.311522499999999,
+          "utc": "2026-10-11T22:08:53.8825416Z"
+        },
+        {
+          "line": "frame=00000002 sec=00000008 space=00000000",
+          "recognized": true,
+          "previous_poll_seconds": 13.2411251,
+          "observed_host_seconds": 13.3513165,
+          "utc": "2026-10-11T22:08:57.9211376Z"
+        },
+        {
+          "line": "frame=00000003 sec=0000000C space=00000000",
+          "recognized": true,
+          "previous_poll_seconds": 17.1792932,
+          "observed_host_seconds": 17.291949499999998,
+          "utc": "2026-10-11T22:09:01.8625188Z"
+        },
+        {
+          "line": "frame=00000004 sec=0000000F space=00000000",
+          "recognized": true,
+          "previous_poll_seconds": 20.241512699999998,
+          "observed_host_seconds": 20.360077699999998,
+          "utc": "2026-10-11T22:09:04.9309236Z"
+        },
+        {
+          "line": "frame=00000005 sec=00000013 space=00000000",
+          "recognized": true,
+          "previous_poll_seconds": 24.179966699999998,
+          "observed_host_seconds": 24.2952116,
+          "utc": "2026-10-11T22:09:08.8655954Z"
+        },
+        {
+          "line": "frame=00000006 sec=00000017 space=00000000",
+          "recognized": true,
+          "previous_poll_seconds": 28.225307599999997,
+          "observed_host_seconds": 28.3357624,
+          "utc": "2026-10-11T22:09:12.9059230Z"
+        },
+        {
+          "line": "frame=00000007 sec=0000001B space=00000000",
+          "recognized": true,
+          "previous_poll_seconds": 32.2743045,
+          "observed_host_seconds": 32.3856683,
+          "utc": "2026-10-11T22:09:16.9555007Z"
+        },
+        {
+          "line": "frame=00000008 sec=0000001E space=00000000",
+          "recognized": true,
+          "previous_poll_seconds": 35.2270462,
+          "observed_host_seconds": 35.3356797,
+          "utc": "2026-10-11T22:09:19.9059364Z"
+        },
+        {
+          "line": "frame=00000009 sec=00000022 space=00000000",
+          "recognized": true,
+          "previous_poll_seconds": 39.208448499999996,
+          "observed_host_seconds": 39.3188574,
+          "utc": "2026-10-11T22:09:23.8888023Z"
+        },
+        {
+          "line": "frame=0000000A sec=00000026 space=00000000",
+          "recognized": true,
+          "previous_poll_seconds": 43.256966299999995,
+          "observed_host_seconds": 43.368551,
+          "utc": "2026-10-11T22:09:27.9384655Z"
+        },
+        {
+          "line": "frame=0000000B sec=0000002A space=00000000",
+          "recognized": true,
+          "previous_poll_seconds": 47.1942691,
+          "observed_host_seconds": 47.306719799999996,
+          "utc": "2026-10-11T22:09:31.8767592Z"
+        },
+        {
+          "line": "frame=0000000C sec=0000002D space=00000000",
+          "recognized": true,
+          "previous_poll_seconds": 50.257990199999995,
+          "observed_host_seconds": 50.3693187,
+          "utc": "2026-10-11T22:09:34.9392498Z"
+        },
+        {
+          "line": "frame=0000000D sec=00000031 space=00000000",
+          "recognized": true,
+          "previous_poll_seconds": 54.192096799999995,
+          "observed_host_seconds": 54.303530099999996,
+          "utc": "2026-10-11T22:09:38.8731326Z"
+        },
+        {
+          "line": "frame=0000000E sec=00000035 space=00000000",
+          "recognized": true,
+          "previous_poll_seconds": 58.2394269,
+          "observed_host_seconds": 58.355798,
+          "utc": "2026-10-11T22:09:42.9262035Z"
+        },
+        {
+          "line": "frame=0000000F sec=00000039 space=00000000",
+          "recognized": true,
+          "previous_poll_seconds": 62.178557899999994,
+          "observed_host_seconds": 62.289082799999996,
+          "utc": "2026-10-11T22:09:46.8590808Z"
+        },
+        {
+          "line": "frame=00000010 sec=0000003C space=00000000",
+          "recognized": true,
+          "previous_poll_seconds": 65.2448683,
+          "observed_host_seconds": 65.35519239999999,
+          "utc": "2026-10-11T22:09:49.9254396Z"
+        },
+        {
+          "line": "result=00000000 kbd=00000001",
+          "recognized": true,
+          "previous_poll_seconds": 65.2448683,
+          "observed_host_seconds": 65.35519239999999,
+          "utc": "2026-10-11T22:09:49.9254396Z"
+        }
+      ],
+      "captures": [
+        {
+          "label": "initial",
+          "name": "cold-03-initial.png",
+          "exit": 0,
+          "elapsed_host_seconds": 5.5176935,
+          "utc": "2026-10-11T22:08:50.0883744Z",
+          "sha256": "31e368ffeff985ad4d80e7d5126be84443eecc77a36ca4f47e7de4b8b7466c35",
+          "exported": false
+        },
+        {
+          "label": "intermediate",
+          "name": "cold-03-intermediate.png",
+          "exit": 0,
+          "elapsed_host_seconds": 35.3831658,
+          "utc": "2026-10-11T22:09:19.9535938Z",
+          "sha256": "6dc5204b6f821ba1601d571296d8bdcd81806bb65fd8144d7a7946ebdcba9d07",
+          "exported": false
+        },
+        {
+          "label": "final",
+          "name": "cold-03-final.png",
+          "exit": 0,
+          "elapsed_host_seconds": 65.40135719999999,
+          "utc": "2026-10-11T22:09:49.9711411Z",
+          "sha256": "027b6d2cbb634fe8099141e5711c45834ac43f5cb06d3dc41a1b888153574d53",
+          "exported": false
+        }
+      ],
+      "register_observation": {
+        "utc": "2026-10-11T22:08:49.9098542Z",
+        "exit": 0,
+        "output": "rip = 0x00000000100076d7\nrsp = 0x000000001cfe0a78"
+      },
+      "observation_log_sha256": "f02cbcad2ec0e57bf0a1b8e0ab5032ce0faef5e9399fa52b770465ca6f311247",
+      "observer_source_sha256": "547b335eb6a44bfbb9e3ded71372ffb44c9c4fa7656b0c0908a73f74221bcb50",
+      "commands": [
+        {
+          "utc": "2026-10-11T22:08:44.4700718Z",
+          "argv": [
+            "showvminfo",
+            "<OWN-VM-UUID>",
+            "--machinereadable"
+          ],
+          "exit": 0
+        },
+        {
+          "utc": "2026-10-11T22:08:44.5291289Z",
+          "argv": [
+            "list",
+            "runningvms"
+          ],
+          "exit": 0
+        },
+        {
+          "utc": "2026-10-11T22:08:44.5677708Z",
+          "argv": [
+            "modifyvm",
+            "<OWN-VM-UUID>",
+            "--uart-mode1",
+            "file",
+            "<TRIAL>\\cold-03-serial.txt"
+          ],
+          "exit": 0
+        },
+        {
+          "utc": "2026-10-11T22:08:48.3983625Z",
+          "argv": [
+            "startvm",
+            "<OWN-VM-UUID>",
+            "--type",
+            "headless"
+          ],
+          "exit": 0
+        },
+        {
+          "utc": "2026-10-11T22:08:49.9052826Z",
+          "argv": [
+            "debugvm",
+            "<OWN-VM-UUID>",
+            "getregisters",
+            "rip",
+            "rsp"
+          ],
+          "exit": 0
+        },
+        {
+          "utc": "2026-10-11T22:08:50.0872244Z",
+          "argv": [
+            "controlvm",
+            "<OWN-VM-UUID>",
+            "screenshotpng",
+            "<TRIAL>\\cold-03-initial.png"
+          ],
+          "exit": 0
+        },
+        {
+          "utc": "2026-10-11T22:09:19.9520329Z",
+          "argv": [
+            "controlvm",
+            "<OWN-VM-UUID>",
+            "screenshotpng",
+            "<TRIAL>\\cold-03-intermediate.png"
+          ],
+          "exit": 0
+        },
+        {
+          "utc": "2026-10-11T22:09:49.9701370Z",
+          "argv": [
+            "controlvm",
+            "<OWN-VM-UUID>",
+            "screenshotpng",
+            "<TRIAL>\\cold-03-final.png"
+          ],
+          "exit": 0
+        }
+      ]
+    },
+    {
+      "trial": "cold-04",
+      "terminal": true,
+      "port_before": 3,
+      "port_after": 3,
+      "alias_before": 0,
+      "alias_after": 0,
+      "ports_read": true,
+      "port_low_bits_preserved": true,
+      "result": 0,
+      "keyboard_result": 1,
+      "guest_seconds": 60,
+      "space_presses": 6,
+      "qualification": "passed",
+      "ready_to_terminal_host_seconds": 59.9777452,
+      "arrival_difference_bracket_seconds": [
+        59.86249029999999,
+        60.1022176
+      ],
+      "owned_stack_observed": true,
+      "own_image_rip_observed": true,
+      "mode": "gui",
+      "started_utc": "2026-10-11T22:10:15.7913026Z",
+      "own_serial_lines": [
+        "ClasSICK 0.97 UART v2",
+        "fw rev=00010000 state=00000000 vendor=EDK II",
+        "own img=0000000010000000 bun=000000001CF90000 stk=000000001CFE1000",
+        "keyboard ready",
+        "qual port=00000003/00000003 a20=00000000/00000000",
+        "alias q=000000001D105480 type=00000004",
+        "frame=00000000 sec=00000000 space=00000000",
+        "frame=00000001 sec=00000002 space=00000001",
+        "frame=00000002 sec=00000002 space=00000002",
+        "frame=00000003 sec=00000004 space=00000002",
+        "frame=00000004 sec=00000008 space=00000002",
+        "frame=00000005 sec=0000000C space=00000002",
+        "frame=00000006 sec=0000000C space=00000003",
+        "frame=00000007 sec=0000000D space=00000004",
+        "frame=00000008 sec=0000000F space=00000004",
+        "frame=00000009 sec=00000013 space=00000004",
+        "frame=0000000A sec=00000014 space=00000005",
+        "frame=0000000B sec=00000014 space=00000006",
+        "frame=0000000C sec=00000017 space=00000006",
+        "frame=0000000D sec=0000001B space=00000006",
+        "frame=0000000E sec=0000001E space=00000006",
+        "frame=0000000F sec=00000022 space=00000006",
+        "frame=00000010 sec=00000026 space=00000006",
+        "frame=00000000 sec=0000002A space=00000006",
+        "frame=00000001 sec=0000002D space=00000006",
+        "frame=00000002 sec=00000031 space=00000006",
+        "frame=00000003 sec=00000035 space=00000006",
+        "frame=00000004 sec=00000039 space=00000006",
+        "frame=00000005 sec=0000003C space=00000006",
+        "result=00000000 kbd=00000001"
+      ],
+      "raw_serial_sha256": "88b105b74a374a36a5c915bd50b3999c413fabac66bc1eb9ddc1078f86d67fbb",
+      "own_serial_sha256": "6bc2fcdfb3395fb6afa85be5e853b64a6f4d55ad297c89cb2137dfcfc8365caf",
+      "own_serial_bytes": 1286,
+      "line_arrivals": [
+        {
+          "line": "ClasSICK 0.97 UART v2",
+          "recognized": true,
+          "previous_poll_seconds": 14.2518908,
+          "observed_host_seconds": 14.3763632,
+          "utc": "2026-10-11T22:10:30.1687439Z"
+        },
+        {
+          "line": "fw rev=00010000 state=00000000 vendor=EDK II",
+          "recognized": true,
+          "previous_poll_seconds": 14.2518908,
+          "observed_host_seconds": 14.3763632,
+          "utc": "2026-10-11T22:10:30.1687439Z"
+        },
+        {
+          "line": "own img=0000000010000000 bun=000000001CF90000 stk=000000001CFE1000",
+          "recognized": true,
+          "previous_poll_seconds": 14.2518908,
+          "observed_host_seconds": 14.3763632,
+          "utc": "2026-10-11T22:10:30.1687439Z"
+        },
+        {
+          "line": "keyboard ready",
+          "recognized": true,
+          "previous_poll_seconds": 14.2518908,
+          "observed_host_seconds": 14.3763632,
+          "utc": "2026-10-11T22:10:30.1687439Z"
+        },
+        {
+          "line": "qual port=00000003/00000003 a20=00000000/00000000",
+          "recognized": true,
+          "previous_poll_seconds": 14.2518908,
+          "observed_host_seconds": 14.3763632,
+          "utc": "2026-10-11T22:10:30.1717128Z"
+        },
+        {
+          "line": "alias q=000000001D105480 type=00000004",
+          "recognized": true,
+          "previous_poll_seconds": 14.2518908,
+          "observed_host_seconds": 14.3763632,
+          "utc": "2026-10-11T22:10:30.1717128Z"
+        },
+        {
+          "line": "frame=00000000 sec=00000000 space=00000000",
+          "recognized": true,
+          "previous_poll_seconds": 14.2518908,
+          "observed_host_seconds": 14.3763632,
+          "utc": "2026-10-11T22:10:30.1728431Z"
+        },
+        {
+          "line": "frame=00000001 sec=00000002 space=00000001",
+          "recognized": true,
+          "previous_poll_seconds": 16.4851317,
+          "observed_host_seconds": 16.6056945,
+          "utc": "2026-10-11T22:10:32.3969692Z"
+        },
+        {
+          "line": "frame=00000002 sec=00000002 space=00000002",
+          "recognized": true,
+          "previous_poll_seconds": 16.8177736,
+          "observed_host_seconds": 16.935036399999998,
+          "utc": "2026-10-11T22:10:32.7267419Z"
+        },
+        {
+          "line": "frame=00000003 sec=00000004 space=00000002",
+          "recognized": true,
+          "previous_poll_seconds": 18.2417874,
+          "observed_host_seconds": 18.3571661,
+          "utc": "2026-10-11T22:10:34.1489377Z"
+        },
+        {
+          "line": "frame=00000004 sec=00000008 space=00000002",
+          "recognized": true,
+          "previous_poll_seconds": 22.2885936,
+          "observed_host_seconds": 22.4039234,
+          "utc": "2026-10-11T22:10:38.1956536Z"
+        },
+        {
+          "line": "frame=00000005 sec=0000000C space=00000002",
+          "recognized": true,
+          "previous_poll_seconds": 26.2534378,
+          "observed_host_seconds": 26.371289899999997,
+          "utc": "2026-10-11T22:10:42.1633558Z"
+        },
+        {
+          "line": "frame=00000006 sec=0000000C space=00000003",
+          "recognized": true,
+          "previous_poll_seconds": 26.909904899999997,
+          "observed_host_seconds": 27.028210299999998,
+          "utc": "2026-10-11T22:10:42.8202843Z"
+        },
+        {
+          "line": "frame=00000007 sec=0000000D space=00000004",
+          "recognized": true,
+          "previous_poll_seconds": 27.3457688,
+          "observed_host_seconds": 27.463479099999997,
+          "utc": "2026-10-11T22:10:43.2547884Z"
+        },
+        {
+          "line": "frame=00000008 sec=0000000F space=00000004",
+          "recognized": true,
+          "previous_poll_seconds": 29.3176535,
+          "observed_host_seconds": 29.434815399999998,
+          "utc": "2026-10-11T22:10:45.2264330Z"
+        },
+        {
+          "line": "frame=00000009 sec=00000013 space=00000004",
+          "recognized": true,
+          "previous_poll_seconds": 33.255761899999996,
+          "observed_host_seconds": 33.3714915,
+          "utc": "2026-10-11T22:10:49.1636963Z"
+        },
+        {
+          "line": "frame=0000000A sec=00000014 space=00000005",
+          "recognized": true,
+          "previous_poll_seconds": 34.8923299,
+          "observed_host_seconds": 35.009343099999995,
+          "utc": "2026-10-11T22:10:50.8009223Z"
+        },
+        {
+          "line": "frame=0000000B sec=00000014 space=00000006",
+          "recognized": true,
+          "previous_poll_seconds": 35.222944,
+          "observed_host_seconds": 35.340008,
+          "utc": "2026-10-11T22:10:51.1315255Z"
+        },
+        {
+          "line": "frame=0000000C sec=00000017 space=00000006",
+          "recognized": true,
+          "previous_poll_seconds": 37.3040362,
+          "observed_host_seconds": 37.414527299999996,
+          "utc": "2026-10-11T22:10:53.2064936Z"
+        },
+        {
+          "line": "frame=0000000D sec=0000001B space=00000006",
+          "recognized": true,
+          "previous_poll_seconds": 41.2363238,
+          "observed_host_seconds": 41.354141999999996,
+          "utc": "2026-10-11T22:10:57.1453851Z"
+        },
+        {
+          "line": "frame=0000000E sec=0000001E space=00000006",
+          "recognized": true,
+          "previous_poll_seconds": 44.2994869,
+          "observed_host_seconds": 44.4187838,
+          "utc": "2026-10-11T22:11:00.2109403Z"
+        },
+        {
+          "line": "frame=0000000F sec=00000022 space=00000006",
+          "recognized": true,
+          "previous_poll_seconds": 48.335235,
+          "observed_host_seconds": 48.4477913,
+          "utc": "2026-10-11T22:11:04.2384999Z"
+        },
+        {
+          "line": "frame=00000010 sec=00000026 space=00000006",
+          "recognized": true,
+          "previous_poll_seconds": 52.2691229,
+          "observed_host_seconds": 52.3886615,
+          "utc": "2026-10-11T22:11:08.1800130Z"
+        },
+        {
+          "line": "frame=00000000 sec=0000002A space=00000006",
+          "recognized": true,
+          "previous_poll_seconds": 56.3325768,
+          "observed_host_seconds": 56.4493631,
+          "utc": "2026-10-11T22:11:12.2412294Z"
+        },
+        {
+          "line": "frame=00000001 sec=0000002D space=00000006",
+          "recognized": true,
+          "previous_poll_seconds": 59.286216499999995,
+          "observed_host_seconds": 59.4010502,
+          "utc": "2026-10-11T22:11:15.1922888Z"
+        },
+        {
+          "line": "frame=00000002 sec=00000031 space=00000006",
+          "recognized": true,
+          "previous_poll_seconds": 63.286115699999996,
+          "observed_host_seconds": 63.4015717,
+          "utc": "2026-10-11T22:11:19.1934024Z"
+        },
+        {
+          "line": "frame=00000003 sec=00000035 space=00000006",
+          "recognized": true,
+          "previous_poll_seconds": 67.3352821,
+          "observed_host_seconds": 67.452157,
+          "utc": "2026-10-11T22:11:23.2432445Z"
+        },
+        {
+          "line": "frame=00000004 sec=00000039 space=00000006",
+          "recognized": true,
+          "previous_poll_seconds": 71.2870136,
+          "observed_host_seconds": 71.4046468,
+          "utc": "2026-10-11T22:11:27.1959876Z"
+        },
+        {
+          "line": "frame=00000005 sec=0000003C space=00000006",
+          "recognized": true,
+          "previous_poll_seconds": 74.23885349999999,
+          "observed_host_seconds": 74.3541084,
+          "utc": "2026-10-11T22:11:30.1450535Z"
+        },
+        {
+          "line": "result=00000000 kbd=00000001",
+          "recognized": true,
+          "previous_poll_seconds": 74.23885349999999,
+          "observed_host_seconds": 74.3541084,
+          "utc": "2026-10-11T22:11:30.1460416Z"
+        }
+      ],
+      "captures": [
+        {
+          "label": "initial",
+          "name": "cold-04-initial.png",
+          "exit": 0,
+          "elapsed_host_seconds": 14.4704955,
+          "utc": "2026-10-11T22:10:30.2622392Z",
+          "sha256": "31e368ffeff985ad4d80e7d5126be84443eecc77a36ca4f47e7de4b8b7466c35",
+          "exported": false
+        },
+        {
+          "label": "intermediate",
+          "name": "cold-04-intermediate.png",
+          "exit": 0,
+          "elapsed_host_seconds": 44.4869695,
+          "utc": "2026-10-11T22:11:00.2779885Z",
+          "sha256": "ae660e6e716e0fd730981ba16259f1be3c0754f4e5f44dda807d8c9b0454a205",
+          "exported": false
+        },
+        {
+          "label": "final",
+          "name": "cold-04-final.png",
+          "exit": 0,
+          "elapsed_host_seconds": 74.4116311,
+          "utc": "2026-10-11T22:11:30.2029131Z",
+          "sha256": "55fdaa32c4e1a7282dacff89b3fb6e900e53f819f98c10f2e01bce32985809a4",
+          "exported": false
+        }
+      ],
+      "register_observation": {
+        "utc": "2026-10-11T22:10:30.2056660Z",
+        "exit": 0,
+        "output": "rip = 0x00000000100090f5\nrsp = 0x000000001cfe0a18"
+      },
+      "observation_log_sha256": "a6efd90a556f46c52355e7b67d8ea190a8d11bb2113d06bef7dc9d09da5dea45",
+      "observer_source_sha256": "547b335eb6a44bfbb9e3ded71372ffb44c9c4fa7656b0c0908a73f74221bcb50",
+      "commands": [
+        {
+          "utc": "2026-10-11T22:10:15.6917649Z",
+          "argv": [
+            "showvminfo",
+            "<OWN-VM-UUID>",
+            "--machinereadable"
+          ],
+          "exit": 0
+        },
+        {
+          "utc": "2026-10-11T22:10:15.7487271Z",
+          "argv": [
+            "list",
+            "runningvms"
+          ],
+          "exit": 0
+        },
+        {
+          "utc": "2026-10-11T22:10:15.7897802Z",
+          "argv": [
+            "modifyvm",
+            "<OWN-VM-UUID>",
+            "--uart-mode1",
+            "file",
+            "<TRIAL>\\cold-04-serial.txt"
+          ],
+          "exit": 0
+        },
+        {
+          "utc": "2026-10-11T22:10:28.7011137Z",
+          "argv": [
+            "startvm",
+            "<OWN-VM-UUID>",
+            "--type",
+            "gui"
+          ],
+          "exit": 0
+        },
+        {
+          "utc": "2026-10-11T22:10:30.2036867Z",
+          "argv": [
+            "debugvm",
+            "<OWN-VM-UUID>",
+            "getregisters",
+            "rip",
+            "rsp"
+          ],
+          "exit": 0
+        },
+        {
+          "utc": "2026-10-11T22:10:30.2608882Z",
+          "argv": [
+            "controlvm",
+            "<OWN-VM-UUID>",
+            "screenshotpng",
+            "<TRIAL>\\cold-04-initial.png"
+          ],
+          "exit": 0
+        },
+        {
+          "utc": "2026-10-11T22:11:00.2756776Z",
+          "argv": [
+            "controlvm",
+            "<OWN-VM-UUID>",
+            "screenshotpng",
+            "<TRIAL>\\cold-04-intermediate.png"
+          ],
+          "exit": 0
+        },
+        {
+          "utc": "2026-10-11T22:11:30.2008357Z",
+          "argv": [
+            "controlvm",
+            "<OWN-VM-UUID>",
+            "screenshotpng",
+            "<TRIAL>\\cold-04-final.png"
+          ],
+          "exit": 0
+        }
+      ]
+    }
+  ],
+  "limits": [
+    "One owned bit-20 pair before startup and at READY, not all physical address lines or other machines.",
+    "Controller bits 0-1 are device self-report; alias PASS is the corresponding physical measurement.",
+    "Serial line-arrival timing includes polling, buffering and host scheduling; not exact clock calibration.",
+    "No native exception-delivery test, whole RAM trace export or physical UART conformance.",
+    "No full OS-edition, historical Macintosh compatibility, physical Mac or mini vMac acceptance."
+  ],
+  "retained_deviations": [
+    "secureboot disable refused without enrolled PK; admitted only after public SecureBoot=off; no key enrolled.",
+    "First GUI window enumeration found no running window yet; refreshed unique selection succeeded before operator input.",
+    "Observer draft line-continuation syntax errors were corrected before any execution; all four live observer runs completed.",
+    "Operator pressed Space several times rather than exactly twice; observed count six and explicit confirmation retained."
+  ],
+  "headless_own_transcripts_identical": false,
+  "headless_final_captures_identical": true,
+  "preparation_commands": [
+    {
+      "step": 1,
+      "utc": "2026-10-11T22:03:34.8707375Z",
+      "argv": [
+        "--version"
+      ],
+      "exit": 0,
+      "private_output_sha256": "a3eef6f3d52ac9ed7edcbcab3dba700cca5160445c68012361144cd7b7633c06"
+    },
+    {
+      "step": 2,
+      "utc": "2026-10-11T22:03:35.2472987Z",
+      "argv": [
+        "list",
+        "vms"
+      ],
+      "exit": 0,
+      "private_output_sha256": "ea4e1247e1d64156d8849304e791e44b0ba8118bf0639a4f78eede7f0b24371e"
+    },
+    {
+      "step": 3,
+      "utc": "2026-10-11T22:03:35.4984013Z",
+      "argv": [
+        "convertfromraw",
+        "<BUILD>\\media\\clang-hosted-debug-a.img",
+        "<TRIAL>\\classick-097.vdi",
+        "--format",
+        "VDI",
+        "--variant",
+        "Fixed",
+        "--uuid",
+        "<OWN-MEDIUM-UUID>"
+      ],
+      "exit": 0,
+      "private_output_sha256": "5a0c608994207989f4b0c269c64a98e113074e497abed7af8f45736c3251f46d"
+    },
+    {
+      "step": 4,
+      "utc": "2026-10-11T22:03:35.6640886Z",
+      "argv": [
+        "clonemedium",
+        "disk",
+        "<TRIAL>\\classick-097.vdi",
+        "<TRIAL>\\roundtrip.img",
+        "--format",
+        "RAW"
+      ],
+      "exit": 0,
+      "private_output_sha256": "c9862f4e1cf97da8095983380d599229a6cbdca07cfff478815c393908985404"
+    },
+    {
+      "step": 5,
+      "utc": "2026-10-11T22:03:35.8111554Z",
+      "argv": [
+        "createvm",
+        "--name",
+        "<OWN-VM-NAME>",
+        "--platform-architecture",
+        "x86",
+        "--ostype",
+        "Other_64",
+        "--basefolder",
+        "<TRIAL>",
+        "--uuid",
+        "<OWN-VM-UUID>",
+        "--register"
+      ],
+      "exit": 0,
+      "private_output_sha256": "2525ed7fe07ec83d74576b0749a13edfad8d8a6e7d6abbb22136ea9404540238"
+    },
+    {
+      "step": 6,
+      "utc": "2026-10-11T22:03:35.8773304Z",
+      "argv": [
+        "modifyvm",
+        "<OWN-VM-UUID>",
+        "--firmware",
+        "efi64",
+        "--cpus",
+        "1",
+        "--memory",
+        "512",
+        "--chipset",
+        "piix3",
+        "--acpi",
+        "on",
+        "--ioapic",
+        "on",
+        "--graphicscontroller",
+        "vboxvga",
+        "--vram",
+        "16",
+        "--accelerate-3d",
+        "off",
+        "--monitor-count",
+        "1",
+        "--mouse",
+        "ps2",
+        "--keyboard",
+        "ps2",
+        "--hwvirtex",
+        "on",
+        "--nested-hw-virt",
+        "off",
+        "--paravirt-provider",
+        "none",
+        "--boot1",
+        "disk",
+        "--boot2",
+        "none",
+        "--boot3",
+        "none",
+        "--boot4",
+        "none",
+        "--audio-enabled",
+        "off",
+        "--audio-in",
+        "off",
+        "--audio-out",
+        "off",
+        "--usb-ohci",
+        "off",
+        "--usb-ehci",
+        "off",
+        "--usb-xhci",
+        "off",
+        "--clipboard-mode",
+        "disabled",
+        "--clipboard-file-transfers",
+        "disabled",
+        "--drag-and-drop",
+        "disabled",
+        "--vrde",
+        "off",
+        "--uart1",
+        "0x3F8",
+        "4",
+        "--uart-type1",
+        "16550A",
+        "--uart-mode1",
+        "file",
+        "<TRIAL>\\cold-01-serial.txt",
+        "--uart2",
+        "off",
+        "--uart3",
+        "off",
+        "--uart4",
+        "off",
+        "--nic1",
+        "none",
+        "--nic2",
+        "none",
+        "--nic3",
+        "none",
+        "--nic4",
+        "none",
+        "--nic5",
+        "none",
+        "--nic6",
+        "none",
+        "--nic7",
+        "none",
+        "--nic8",
+        "none"
+      ],
+      "exit": 0,
+      "private_output_sha256": "f01a374e9c81e3db89b3a42940c4d6a5447684986a1296e42bf13f196eed6295"
+    },
+    {
+      "step": 7,
+      "utc": "2026-10-11T22:03:35.9179299Z",
+      "argv": [
+        "modifynvram",
+        "<OWN-VM-UUID>",
+        "inituefivarstore"
+      ],
+      "exit": 0,
+      "private_output_sha256": "f01a374e9c81e3db89b3a42940c4d6a5447684986a1296e42bf13f196eed6295"
+    },
+    {
+      "step": 8,
+      "utc": "2026-10-11T22:03:36.0099548Z",
+      "argv": [
+        "modifynvram",
+        "<OWN-VM-UUID>",
+        "secureboot",
+        "--disable"
+      ],
+      "exit": 1,
+      "private_output_sha256": "4d90662c09df1af6c51c7f22cfdeaee03f6e3a09389819e889341fad3d8a1da9"
+    },
+    {
+      "step": 9,
+      "utc": "2026-10-11T22:03:36.0815396Z",
+      "argv": [
+        "showvminfo",
+        "<OWN-VM-UUID>",
+        "--machinereadable"
+      ],
+      "exit": 0,
+      "private_output_sha256": "50b2b367bd7a4f8b5cd1059af87bd913e22636e9cda63f5555cac8ad9adccae5"
+    },
+    {
+      "step": 10,
+      "utc": "2026-10-11T22:03:36.1390643Z",
+      "argv": [
+        "storagectl",
+        "<OWN-VM-UUID>",
+        "--name",
+        "ClasSICK-SATA",
+        "--add",
+        "sata",
+        "--controller",
+        "IntelAhci",
+        "--portcount",
+        "1",
+        "--hostiocache",
+        "off",
+        "--bootable",
+        "on"
+      ],
+      "exit": 0,
+      "private_output_sha256": "f01a374e9c81e3db89b3a42940c4d6a5447684986a1296e42bf13f196eed6295"
+    },
+    {
+      "step": 11,
+      "utc": "2026-10-11T22:03:36.2011477Z",
+      "argv": [
+        "storageattach",
+        "<OWN-VM-UUID>",
+        "--storagectl",
+        "ClasSICK-SATA",
+        "--port",
+        "0",
+        "--device",
+        "0",
+        "--type",
+        "hdd",
+        "--medium",
+        "<TRIAL>\\classick-097.vdi"
+      ],
+      "exit": 0,
+      "private_output_sha256": "f01a374e9c81e3db89b3a42940c4d6a5447684986a1296e42bf13f196eed6295"
+    },
+    {
+      "step": 12,
+      "utc": "2026-10-11T22:03:36.2489409Z",
+      "argv": [
+        "showvminfo",
+        "<OWN-VM-UUID>",
+        "--machinereadable"
+      ],
+      "exit": 0,
+      "private_output_sha256": "bbe06f48e813dd3039e773bdb2e29c327766acbf555f9602338382a99c17eb15"
+    },
+    {
+      "step": 13,
+      "utc": "2026-10-11T22:03:36.2949529Z",
+      "argv": [
+        "list",
+        "vms"
+      ],
+      "exit": 0,
+      "private_output_sha256": "f35534c7d18d986e4f6a9565c7fd4826237696dbf87c7794e3bde3690e09803e"
+    }
+  ],
+  "preparation_command_log_sha256": "2e399f5d8c41194b5486260f740d5dc48c1710df44102841cd3a0641a63bc4ff"
+}

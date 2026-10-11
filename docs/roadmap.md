@@ -1,18 +1,15 @@
 # Milestone roadmap
 
-Current checkpoint: SPEC-0015 records first native execution of the unchanged
-image in the owner's approved isolated VirtualBox configuration. Repeated cold
-starts show the original scene, approximately 60-second progress and serial
-completion; owner-confirmed Space input works. Formal B2 is partial pending
-exact firmware image identity and explicit machine-state qualification. See
-[the trial evidence](development/vm-trial-evidence.md) and the
-[B2 qualification audit](development/b2-qualification-audit.md). SPEC-0016
-now builds those measurements into a new candidate image, verified hosted and
-unloaded; its VM trial awaits the owner's go-ahead. An M0.3 feasibility study is
-proposed. Macintosh replacement
+Current checkpoint: TEST-0025 observes the SPEC-0016 candidate in three no-input
+cold starts and one live keyboard run. All pass the measured controller/self-test
+and bit-20 precondition and complete guest second 60. Own-stack placement is now
+observed. [Qualification evidence](development/qualification-vm-evidence.md).
+Formal B2 remains partial on unchanged criterion 6's firmware image hash.
+Claude's next lane is the System 1 source foundation and proposed M0.3 feasibility
+documents; those do not follow automatically from this VM result. Macintosh replacement
 startup, 128K feasibility and real Mac/mini vMac remain independent milestones.
 
-Status: dated 2026-10-08; dependency-driven gates, not calendar promises.
+Status: dated 2026-10-11; dependency-driven gates, not calendar promises.
 Milestone numbers retain the founding brief's labels; they are not a strict
 implementation sequence. Early MFS/resource research feeds the complete M0.4 gate.
 

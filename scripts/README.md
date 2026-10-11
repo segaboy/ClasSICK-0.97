@@ -89,3 +89,13 @@ script never starts or deletes a VM. The first recorded trial resumed manually
 after the missing-PK refusal; that history is preserved in TEST-0022. See the
 [trial evidence](../docs/development/vm-trial-evidence.md) for observations and
 the limits of formal B2 acceptance.
+
+`Observe-QualificationTrial.ps1 -VBoxManage <installed-exe> -TrialRoot
+<admitted-root> -Trial cold-01 -Mode headless|gui -OwnerApproved` records one
+SPEC-0016 cold start after a matching configuration review. Use fresh trial names.
+It starts only the admitted project identity, sends no keyboard input, parses
+complete own UART v2 records and captures own scene/monotonic time and post-READY
+RIP/RSP. It never reads guest memory, deletes or powers off a VM. Management
+failures stop collection; observation failures are retained. Interpret results
+and obtain real operator confirmation separately. TEST-0025 / IMPL-0021 records
+the four actual runs and the continuing formal B2 limitation.
