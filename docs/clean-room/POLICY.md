@@ -35,7 +35,11 @@ and derivation review; prefer prose contracts and independent algorithms.
 - Copied Apple fonts, icons, sounds, cursors, or other copyrighted assets.
 
 Do not fetch or study disassembly/leaked-source repositories for implementation.
-Public availability does not make material eligible. Stop using uncertain material
+Public availability does not make material eligible. Owner ruling 2026-10-11
+(SRC-0067): pre-release drafts that their publisher marked confidential or
+declared not to constitute publication are not published documentation, even
+when scanned publicly; use published editions instead (SRC-0070 lists the
+excluded Apple drafts). Stop using uncertain material
 as an implementation source and record only a sanitized eligibility concern.
 
 ## Specification and implementation work

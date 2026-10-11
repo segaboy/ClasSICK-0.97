@@ -30,6 +30,11 @@ reflects potential scope impact, not confirmed incompatibility.
 - **TD-002, tooling owner, before core portability claims:** bootstrap tests only
   one native hosted compiler/architecture; add an alternate compiler and m68k/ARM64
   runtime checks without assuming they are already installed.
+- **TD-003 status 2026-10-11:** the earliest eligible Apple manual found is the
+  March 1985 Promotional Edition (SRC-0068), a later manual; the 1984 drafts are
+  excluded (SRC-0067/0070). Addresses for R-004 and 128K hardware contracts need
+  a published source or owner observation. See
+  [System 1 sources](system1-sources.md).
 - **TD-003, specification owner, before historical behavior implementation:** later
   public Apple manuals are discoverable but no 1984 contract has yet been approved.
 - **TD-004, maintainer, before broad contributions:** review enforceable PR protection

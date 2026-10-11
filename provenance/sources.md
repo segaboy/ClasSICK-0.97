@@ -5,6 +5,89 @@ eligibility applies to the stated scope, not every resource reachable from a URL
 No Apple executable, source, disassembly, decompilation, or copied asset was used.
 No reference-system black-box observation has yet been performed.
 
+## SRC-0070 — Excluded: Apple pre-publication Macintosh drafts (1984–85)
+
+- Excluded by owner decision SRC-0067 (2026-10-11); never an input for
+  specifications, tests, code or behavioral claims. Recorded here so the exact
+  items stay identifiable. All are bitsavers scans on archive.org, identified by
+  archive.org file SHA-1 (not downloaded):
+  - *Inside Macintosh* Vol 1 1984 binder, item `bitsavers_applemacIn84_27699101`,
+    `Inside_Macintosh_Vol_1_1984.pdf`, 27,699,101 bytes, SHA-1
+    `b96770af19a7daec610b4710108c10d8b6a8cf97`.
+  - *Inside Macintosh* Vol 2 1984 binder, item `bitsavers_applemacIn84_23664048`,
+    `Inside_Macintosh_Vol_2_1984.pdf`, 23,664,048 bytes, SHA-1
+    `5bb8e1411dc4e9c17d6ae1aa068402cb1c47a794`.
+  - *Programming Macintosh Applications in Assembly Language*, first draft
+    2/27/84 (a bound compilation of several draft chapters), item
+    `bitsavers_applemacdeogrammingMacintoshApplicationsinAssembly_29406178`,
+    29,406,178 bytes, SHA-1 `06e0d34b4c7b29add86bcf93414dc553777a7b1d`; the
+    dossier's kuiper/bitsavers mirror URL names the same document.
+  - *Inside Macintosh*, "The Macintosh Hardware", second draft 2/13/85, item
+    `bitsavers_applemacInre198502_22173505`, 22,173,505 bytes, SHA-1
+    `7b12178d66821efbf980555c0ed25efc215a3a93`.
+- Eligibility concern (sanitized): each copyright page states that distribution
+  of the draft in limited quantities does not constitute publication. Binder and
+  assembly-draft pages carry a running "CONFIDENTIAL" footer, and several
+  chapters are marked review or preliminary drafts "not for distribution". The
+  hardware draft has the publication notice but no confidential footer. Binder
+  chapter dates run from 1982 to July 1984. POLICY admits published
+  documentation; public scanning does not make these drafts published.
+- Exposure: the 2026-10-07 research dossier (Claude, separate chat) read
+  interface prose of the assembly draft (about pp. 5–22) and the hardware
+  draft's OCR text. On 2026-10-11 Claude read only the OCR title pages,
+  modification histories, copyright notices and running footers of all four to
+  assess eligibility; derived OCR text SHA-256 `3c9f325a…0c36e` (Vol 1),
+  `c9a06d7c…e981cf` (Vol 2), `2080565e…c46d33` (assembly draft) and
+  `97c507ab…c6ea678` (hardware). Dossier facts traced to these drafts must be
+  re-sourced from an eligible publication before any use. No content from them
+  is in this repository.
+
+## SRC-0069 — Motorola M68000 Family Programmer's Reference Manual
+
+- Motorola Inc., *M68000 Family Programmer's Reference Manual (Includes CPU32
+  Instructions)*, 1992; publisher-successor copy at
+  <https://www.nxp.com/docs/en/reference-manual/M68000PRM.pdf>, front matter
+  checked 2026-10-11. Appendix B (Exception Processing Reference, printed B-1
+  onward) includes the MC68000 bus/address-error stack frame (Figure B-2, B-3).
+- Eligible published ISA manual for R-009 and the 68000 exception model. Not yet
+  downloaded or hashed; record the SHA-256 and exact section locators when a
+  local copy is reviewed for a specification. No sample code adopted.
+
+## SRC-0068 — *Inside Macintosh* Promotional Edition (Apple, March 1985)
+
+- Apple Computer, *Inside Macintosh*, Promotional Edition, with "A Letter from
+  the Macintosh Developers Group" dated 15 March 1985. Bitsavers scan, archive.org
+  item `bitsavers_applemacInionalEdition1985_53888388`, file
+  `Inside_Macintosh_Promotional_Edition_1985.pdf`, 53,888,388 bytes, SHA-1
+  `4ed5b3c20289835996b160d7ab3a628f497f13c5`, MD5
+  `d3822276bc5f99a0e3e3beb69b609cbe` (archive.org metadata; PDF not
+  downloaded). Reviewed 2026-10-11 through archive.org's derived OCR text,
+  2,468,477 bytes, SHA-1 `f891c8ee9f6c74dc98cb1a427f300b0c76dcf781`, SHA-256
+  `77dca9ebd77b9f029f954b9e98dc247e224c6ec9f566d3701b4f72fce3b5dfd9`.
+- Published: the warranty page says the manual is "sold as is" to "you, the
+  purchaser", and the letter says this inexpensive edition meets demand until
+  the final edition reaches bookstores. No confidential markings or publication
+  disclaimer were found in the OCR text. Apple copyright; linked, not
+  republished.
+- Eligible for interface prose and data-structure descriptions of the 64-KB-ROM
+  Macintosh; sample code and Apple equate/definition files are not inputs.
+  Applicability: a later manual relative to January 1984. Its own index dates
+  each manual from 3/2/83 to 1/31/85; only QuickDraw (3/2/83) predates System
+  1's January 1984 release. See
+  [System 1 sources](../docs/research/system1-sources.md) for the per-manual table.
+  Every 1984 behavioral claim still needs owner-held reference confirmation.
+  It gives symbolic global names and sizes, not addresses; the low-memory map
+  (R-004) needs a published address source.
+
+## SRC-0067 — Owner decision: published editions only
+
+- Owner, 2026-10-11, asked whether to use Apple's 1984–85 pre-release drafts
+  (marked "CONFIDENTIAL" and "does not constitute publication") or only
+  published editions, chose "Published editions only (Recommended)": the March
+  1985 Promotional Edition, the 1985 *Inside Macintosh* books and Motorola's
+  manual, with 1984-specific details confirmed later on real hardware.
+- Binding eligibility ruling for this project; see SRC-0070. Requirement only.
+
 ## SRC-0065 — Owner's qualification-candidate VM trial approval
 
 - Owner, 2026-10-11, after the SPEC-0016 continuation and read-only milestone

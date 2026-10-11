@@ -3,6 +3,16 @@
 Read `docs/clean-room/POLICY.md`, `CONTRIBUTING.md`, and
 `provenance/README.md` before researching or changing this project.
 
+- On 2026-10-11 the owner ruled "published editions only" (SRC-0067). Apple's
+  1984–85 pre-release drafts (1984 *Inside Macintosh* binders, the February 1984
+  assembly-language draft, the February 1985 hardware draft) are excluded
+  (SRC-0070): they are marked "CONFIDENTIAL" and say their distribution "does
+  not constitute publication". Use the March 1985 Promotional Edition (SRC-0068),
+  the 1985 *Inside Macintosh* books and Motorola's manual (SRC-0069). Facts in the
+  owner's 2026-10-07 research dossier that came from the drafts must be
+  re-sourced first. See [System 1 sources](docs/research/system1-sources.md).
+  Claude leads; the VM trial lane is complete.
+
 - On 2026-10-11 the owner answered "Go ahead" to the SPEC-0016 VirtualBox
   trial (SRC-0065): fresh pinned Windows verification, one new isolated project
   VM, three headless cold starts and a separate owner-operated Space session,
