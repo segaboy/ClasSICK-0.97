@@ -7,19 +7,24 @@ is not a specification and accepts no historical behavior.
 ## Outcome
 
 - **Eligible now:** Apple's *Inside Macintosh* Promotional Edition of March 1985
-  (SRC-0068) and Motorola's *M68000 Family Programmer's Reference Manual*
-  (SRC-0069). Both are published.
+  (SRC-0068), the owner's copy of the 1985 Addison-Wesley *Inside Macintosh*
+  Volumes I–III (SRC-0071) and Motorola's *M68000 Family Programmer's Reference
+  Manual* (SRC-0069). All are published.
 - **Excluded:** Apple's 1984 *Inside Macintosh* binders, the February 1984
   assembly-language draft and the February 1985 hardware draft (SRC-0070). Each
   says its distribution "does not constitute publication", and most pages are
   marked "CONFIDENTIAL". The owner chose published editions only (SRC-0067).
-- **Applicability:** no eligible document found so far is dated before System 1
-  shipped except one chapter (QuickDraw, 3/2/83). Every other chapter is a later
-  manual for the January 1984 profile, and 1984 behavior still needs owner-held
-  reference observation.
-- **Gap:** the low-memory address map (R-004) and the 128K hardware contracts
-  (R-002/R-003) need a published source that the Promotional Edition does not
-  supply (see below).
+- **Applicability:** no eligible document is dated before System 1 shipped
+  except one Promotional Edition chapter (QuickDraw, 3/2/83). The 1985 volumes
+  describe ROM version 105 in the Macintosh 128K and 512K and the System file
+  created May 2, 1984 (I-4). Every fact from them is a later-manual fact until
+  owner-held reference observation confirms it for January 1984.
+- **Low-memory map:** a [draft](system1-low-memory.md) from Volume III's
+  Appendix D lists 138 documented globals by address. Two items stay open:
+  Volumes I–III do not state the trap dispatch table's address, and the printed
+  `SCCRd`/`VIA`/`SCCWr` locations overlap.
+- **128K hardware:** Volume III chapter 2 (III-15–46) is the published hardware
+  source for R-002/R-003 and the 128K feasibility study.
 
 ## Why the drafts are excluded
 
@@ -86,36 +91,68 @@ before the January 1984 release.
 
 ## R97-Q-04: low-memory map status
 
-The Promotional Edition deliberately gives symbolic names, sizes and meanings of
-global variables (in each chapter's summary), not their addresses; its assembly
-chapter tells programmers to use the names from Apple's equate files. Those
-are Apple-supplied definition source files, so they are not inputs here. A `system1-1984` low-memory map
-therefore needs one of:
+The Promotional Edition gives symbolic names, sizes and meanings of global
+variables (in each chapter's summary), not their addresses; its assembly chapter
+tells programmers to use the names from Apple's equate files. Those are
+Apple-supplied definition source files, so they are not inputs here.
 
-1. A published address list. The 1985 Addison-Wesley *Inside Macintosh* volumes
-   are expected to include one; to be confirmed when a lawful copy is available.
-2. Black-box observation on owner-held 64-KB-ROM hardware or software, under a
-   reviewed probe plan (R-001/R-004).
+The 1985 volumes (SRC-0071) supply the published address list. Appendix D
+(III-227–231) gives each documented global's location, and II-19–20 and
+III-17–21 give the RAM layout and buffer addresses. The
+[draft map](system1-low-memory.md) re-sorts the appendix by address; names and
+addresses were checked against the page images.
 
-Names and sizes from the Promotional Edition can seed the table now, marked as a
-later manual. No address enters a specification until source 1 or 2 supplies it.
+- **Answered, as a later manual:** documented globals and their locations, for
+  the May 1984 System file and ROM version 105.
+- **Open:** the trap dispatch table's address (I-87–88 describe a 1024-byte
+  table of 512 one-word entries in RAM but give no address); the overlapping
+  `SCCRd` $1D8, `VIA` $1DA and `SCCWr` $1DC entries; which entries existed in
+  January 1984 (the AppleTalk entries belong to a later product).
+- **Out of scope unless observed:** undocumented locations. Black-box
+  observation on owner-held 64-KB-ROM hardware or software, under a reviewed
+  probe plan, can confirm or extend the table (R-001/R-004).
+
+No address enters a specification until a specification adopts it with its
+1984 status stated.
 
 ## Effect on earlier research
 
 The 2026-10-07 *ClasSICK 0.97 Research Dossier* (an owner project document, not
 in this repository) took its trap-word, dispatch-table and low-memory facts from
 the excluded assembly draft and its 128K hardware facts from the excluded
-hardware draft. Those statements are not eligible inputs. The trap and dispatch
-topics also appear in the Promotional Edition's assembly chapter (1/22/85) and
-can be re-sourced from it. The 128K hardware contracts need a published hardware
-chapter or owner observation; the Promotional Edition marks its hardware
-description "forthcoming".
+hardware draft. Those statements are not eligible inputs. Each topic now has an
+eligible replacement in SRC-0071; a fact is re-sourced only by reading it there,
+not by keeping the dossier's wording.
+
+| Dossier topic | Eligible locator (SRC-0071) |
+| --- | --- |
+| Pascal data type sizes for assembly language | I-86 |
+| Trap dispatch table: size, entry encoding, RAM and ROM base addresses | I-87–88 |
+| Trap mechanism, trap word format, trap macros | I-88–90 |
+| Calling conventions: stack-based, register-based, result codes, saved registers | I-90–94 |
+| RAM organization of the 128K and 512K | II-19–20 (Figure 9) |
+| Documented global-variable locations | III-227–231 (Appendix D) |
+| Address space overview: RAM, ROM at $400000, I/O space | III-17–18 |
+| Video interface and screen buffers | III-18–20 |
+| Sound generator and sound buffers | III-20–22 |
+| SCC | III-22–25 |
+| Mouse | III-25–29 |
+| Keyboard and keypad, including their protocols | III-29–33 |
+| Disk interface | III-33–36 |
+| Real-time clock | III-36–39 |
+| VIA | III-39–42 |
+| System startup | III-42 |
+| Hardware summary: constants, variables, exception vectors | III-43–46 |
+
+The trap and dispatch topics also appear in the Promotional Edition's assembly
+chapter (1/22/85).
 
 ## Next steps
 
-- Owner: say whether lawful copies of the 1985 *Inside Macintosh* volumes are
-  available (owned, purchasable or borrowed). They unblock the low-memory map
-  and the published hardware chapter for the 128K study.
-- Claude: re-source the trap gateway facts from the Promotional Edition into a
-  draft specification; hash and locate the Motorola manual sections when a local
-  copy is approved; plan black-box probes for 1984 confirmation.
+- Claude: draft a trap-gateway specification from I-85–95, marked "later manual,
+  needs 1984 validation"; start the 128K feasibility study from III-15–46 and
+  II-19–20; write a black-box probe plan for the dispatch-table address, the
+  SCC/VIA locations and 1984 confirmation; hash and locate the Motorola manual
+  sections when a local copy is approved.
+- Owner: nothing is needed for these documents. Probes on real 64-KB-ROM
+  hardware or software wait for a reviewed plan and the owner's go-ahead.

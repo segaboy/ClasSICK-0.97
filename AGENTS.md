@@ -8,7 +8,8 @@ Read `docs/clean-room/POLICY.md`, `CONTRIBUTING.md`, and
   assembly-language draft, the February 1985 hardware draft) are excluded
   (SRC-0070): they are marked "CONFIDENTIAL" and say their distribution "does
   not constitute publication". Use the March 1985 Promotional Edition (SRC-0068),
-  the 1985 *Inside Macintosh* books and Motorola's manual (SRC-0069). Facts in the
+  the owner's 1985 *Inside Macintosh* Volumes I–III (SRC-0071; PDF kept outside
+  Git, never committed) and Motorola's manual (SRC-0069). Facts in the
   owner's 2026-10-07 research dossier that came from the drafts must be
   re-sourced first. See [System 1 sources](docs/research/system1-sources.md).
   Claude leads; the VM trial lane is complete.

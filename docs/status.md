@@ -22,9 +22,13 @@ does not imply that the complete project foundation or any OS boot is finished.
   are marked confidential and "not publication" (SRC-0070). The March 1985
   *Inside Macintosh* Promotional Edition (SRC-0068) and Motorola's 68000 manual
   (SRC-0069) are eligible. The Promotional Edition's own index dates 32
-  manuals from 3/2/83 to 1/31/85, so it is a later manual for System 1. A
-  low-memory address map and 128K hardware contracts need a published address
-  and hardware source or owner observation. No specification or code changed.
+  manuals from 3/2/83 to 1/31/85, so it is a later manual for System 1. The
+  owner then supplied his 1985 *Inside Macintosh* Volumes I–III (SRC-0071): a
+  [draft low-memory map](research/system1-low-memory.md) now lists 138
+  documented globals by address, and Volume III's hardware chapter covers the
+  128K and 512K. The volumes describe the May 1984 System file, so 1984
+  confirmation is still needed; the trap dispatch table's address and
+  overlapping SCC/VIA entries stay open. No specification or code changed.
 
 - TEST-0025 / IMPL-0021 / SRC-0065–0066 records the approved SPEC-0016 trial:
   three headless no-input starts and one owner-operated visible start all pass

@@ -32,8 +32,11 @@ reflects potential scope impact, not confirmed incompatibility.
   runtime checks without assuming they are already installed.
 - **TD-003 status 2026-10-11:** the earliest eligible Apple manual found is the
   March 1985 Promotional Edition (SRC-0068), a later manual; the 1984 drafts are
-  excluded (SRC-0067/0070). Addresses for R-004 and 128K hardware contracts need
-  a published source or owner observation. See
+  excluded (SRC-0067/0070). The owner's 1985 *Inside Macintosh* Volumes I–III
+  (SRC-0071) supply the documented low-memory locations (a
+  [draft map](system1-low-memory.md)) and the 128K/512K hardware chapter, also as
+  later manuals (May 1984 System file). Open: the trap dispatch table's address,
+  overlapping SCC/VIA entries and 1984 confirmation. See
   [System 1 sources](system1-sources.md).
 - **TD-003, specification owner, before historical behavior implementation:** later
   public Apple manuals are discoverable but no 1984 contract has yet been approved.

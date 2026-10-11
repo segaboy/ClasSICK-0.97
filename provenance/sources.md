@@ -5,6 +5,37 @@ eligibility applies to the stated scope, not every resource reachable from a URL
 No Apple executable, source, disassembly, decompilation, or copied asset was used.
 No reference-system black-box observation has yet been performed.
 
+## SRC-0071 — *Inside Macintosh* Volumes I–III (Addison-Wesley, 1985), owner's copy
+
+- Apple Computer, Inc., *Inside Macintosh*, Volumes I, II and III, Addison-Wesley,
+  copyright 1985; ISBN 0-201-17731-5 (I), 0-201-17732-3 (II) and 0-201-17733-1
+  (III). The copy's printing lines read ninth printing, December 1988 (II) and
+  twelfth printing, November 1990 (III); Volume I's printing line is not in the
+  scan. Locators are printed page numbers of this copy.
+- Owner, 2026-10-11, asked whether lawful copies were available, answered "Yes.
+  I have had them for many years. Here they are." and supplied one combined PDF:
+  1,284 pages, 19,245,372 bytes, SHA-256
+  `b65fe8efe782799a333a0b59b225e2bbaf9e2e150dc949dd555571971b331d97`; PDF
+  metadata name ABBYY FineReader 9.0 and 2008-11-18. Kept outside Git; not
+  committed, uploaded or republished. Reviewed by Claude 2026-10-11 through local
+  text extraction (poppler `pdftotext -layout` 24.02.0, SHA-256
+  `381d4d79034f00c04e88d1b92155153543b1895605c21946d643a9d965bb10d9`) and page
+  images wherever a value was recorded.
+- Published: a retail book with ISBNs, "simultaneously published in the United
+  States and Canada", with a retail-purchase warranty; no confidential marking or
+  publication disclaimer. Eligible under SRC-0067 for interface prose,
+  data-structure descriptions, the documented global-variable locations
+  (Appendix D, III-227–231) and the Macintosh 128K/512K hardware chapter
+  (III-15–46). Sample code and Apple equate/definition files are not inputs;
+  constants printed in chapter summaries are cited as documented facts, never
+  copied as source. Apple copyright; cited, not reproduced.
+- Applicability: the book describes ROM version 105 in the Macintosh 128K and
+  512K and the System file created May 2, 1984 (I-4), about four months after
+  System 1. Later printings may carry corrections. Every fact still needs
+  confirmation for the January 1984 profile (R-001) before a specification
+  adopts it. See [System 1 sources](../docs/research/system1-sources.md) and the
+  [low-memory map draft](../docs/research/system1-low-memory.md).
+
 ## SRC-0070 — Excluded: Apple pre-publication Macintosh drafts (1984–85)
 
 - Excluded by owner decision SRC-0067 (2026-10-11); never an input for
@@ -76,8 +107,8 @@ No reference-system black-box observation has yet been performed.
   1's January 1984 release. See
   [System 1 sources](../docs/research/system1-sources.md) for the per-manual table.
   Every 1984 behavioral claim still needs owner-held reference confirmation.
-  It gives symbolic global names and sizes, not addresses; the low-memory map
-  (R-004) needs a published address source.
+  It gives symbolic global names and sizes, not addresses; the published
+  address source is SRC-0071.
 
 ## SRC-0067 — Owner decision: published editions only
 
