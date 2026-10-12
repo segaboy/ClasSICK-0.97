@@ -43,6 +43,26 @@ shows native ClasSICK applications beside legacy ones),
    headers and much of the testing. With instruction-set tags it carries the
    design into the PowerPC era and Mac OS 9.2.2.
 
+## Owner decisions, 2026-10-12
+
+After reading this record the owner decided three questions. The implementation
+lead records them as sources.
+
+- **Transparency is the requirement, in the normal system.** The owner's
+  example: a 68000 version of a 1985-era word processor should run with the same
+  experience as on a real Macintosh, and an x86 version of the same program
+  should run too without the user knowing the difference. Native variants are
+  therefore chosen in the ordinary, faithful profile, with no switch and no
+  separate mode. T-1 to T-6 are requirements. Resolves NX-5.
+- **Licence.** "I have no control over what others do." No interface exception
+  and no licence change; ClasSICK states nothing about the licensing of programs
+  others build. Resolves NX-6.
+- **Order.** "I want a complete 68k experience before running any x86 code."
+  No native variant is loaded or run until the owner confirms the 68000
+  experience is complete. Shared foundations that 68000 programs need anyway
+  (section 8, step 1) proceed now; the native-first option in step 5 is
+  declined. ClasSICK's own native PC code is not affected.
+
 ## Sources and labels
 
 - **SRC-0071**, owner's *Inside Macintosh* Volumes I–III (1985), printed pages.
@@ -400,6 +420,8 @@ and must keep vector state intact across anything it runs in between (NX-9).
 
 ### 4.10 Profile and licence questions for the owner
 
+The owner decided both questions on 2026-10-12 (Owner decisions, above).
+
 - **Profile.** The System 1 personality requires an extension contract for every
   difference from `system1-1984`. The native interface is a
   `classick-extended` contract. Proposal: allow native variants under
@@ -511,6 +533,9 @@ is used.
 
 ## 8. Suggested order
 
+Per the owner's decision, steps 3 to 6 wait until the owner confirms the 68000
+experience is complete.
+
 1. Pieces 68000 programs need anyway: the interface registry format (start with
    the Memory Manager phase-1 routines and the two trap-address services),
    JSR/JMP and the call-into-guest service, typed dispatch entries.
@@ -520,8 +545,7 @@ is used.
 4. The launch service with variant selection.
 5. A first native program on the PC edition that opens a window and draws. It
    needs the Toolbox managers but not the interpreter, so it could run before
-   the 68000 application runtime is complete. Whether to go native-first is the
-   owner's call.
+   the 68000 application runtime is complete. The owner declined native-first.
 6. The transparency tests as soon as both paths run the test program.
 
 ## 9. Open questions
@@ -532,8 +556,8 @@ is used.
 | NX-2 | Image in the data fork by default (Apple's precedent; keeps it out of the guest heap) or in resources (for programs that use their data fork) | Specification; support both through the descriptor's location field |
 | NX-3 | Native-entry marker: a ClasSICK-private A-line word that no later Apple release assigns; the published routine-descriptor shape and $AAFE marker, so the PowerPC-era mechanism is the same one; or no marker and a reserved address range (native entries would then not be heap blocks, unlike the patch placement II-383–384 describes) | Register *PowerPC System Software*; later trap lists; ADR. Lean: routine-descriptor shape |
 | NX-4 | x86-64 boundary convention (Microsoft x64 or System V) and converter input (PE or ELF) | ADR; check the pinned toolchain's support for the chosen convention attribute |
-| NX-5 | Native variants under `system1-1984`, or only under `classick-extended` | Owner decision |
-| NX-6 | Licence exception for the native interface headers and import stubs | Owner decision; legal advice |
+| NX-5 | Native variants under `system1-1984`, or only under `classick-extended` | Decided 2026-10-12: chosen in the normal profile, transparently |
+| NX-6 | Licence exception for the native interface headers and import stubs | Decided 2026-10-12: no exception, no licence change |
 | NX-7 | App-visible memory size per profile, and whether private host memory should count against it for parity | Profile specifications |
 | NX-8 | Where interrupt-level native callbacks run on the PC (VBL timing, completion routines) and how the Appendix B rule is enforced | Event Manager, Vertical Retrace and Device Manager specifications |
 | NX-9 | SSE enablement after firmware handoff; vector-state handling if the system ever uses those registers | PC architecture specification; black-box observation on cleared platforms only |
