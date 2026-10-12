@@ -149,10 +149,11 @@ chapter (1/22/85).
 
 ## Next steps
 
-- Claude: draft a trap-gateway specification from I-85–95, marked "later manual,
-  needs 1984 validation"; start the 128K feasibility study from III-15–46 and
-  II-19–20; write a black-box probe plan for the dispatch-table address, the
-  SCC/VIA locations and 1984 confirmation; hash and locate the Motorola manual
-  sections when a local copy is approved.
+- Claude: the trap-gateway draft is
+  [SPEC-0017](../specifications/SPEC-0017-trap-gateway.md) (draft 0). Next, start
+  the 128K feasibility study from III-15–46 and II-19–20; write a black-box probe
+  plan for the dispatch-table address, the SCC/VIA locations, SPEC-0017's open
+  questions and 1984 confirmation; hash and locate the Motorola manual sections
+  when a local copy is approved.
 - Owner: nothing is needed for these documents. Probes on real 64-KB-ROM
   hardware or software wait for a reviewed plan and the owner's go-ahead.

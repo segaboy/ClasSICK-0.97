@@ -37,7 +37,9 @@ reflects potential scope impact, not confirmed incompatibility.
   [draft map](system1-low-memory.md)) and the 128K/512K hardware chapter, also as
   later manuals (May 1984 System file). Open: the trap dispatch table's address,
   overlapping SCC/VIA entries and 1984 confirmation. See
-  [System 1 sources](system1-sources.md).
+  [System 1 sources](system1-sources.md). For R-004, trap encodings and calling
+  conventions are drafted in
+  [SPEC-0017](../specifications/SPEC-0017-trap-gateway.md) with open questions.
 - **TD-003, specification owner, before historical behavior implementation:** later
   public Apple manuals are discoverable but no 1984 contract has yet been approved.
 - **TD-004, maintainer, before broad contributions:** review enforceable PR protection

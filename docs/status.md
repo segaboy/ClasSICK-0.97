@@ -16,6 +16,15 @@ does not imply that the complete project foundation or any OS boot is finished.
 
 ## Achieved
 
+- SPEC-0017 draft 0 (2026-10-11,
+  [draft](specifications/SPEC-0017-trap-gateway.md)): the System 1 trap gateway,
+  written from *Inside Macintosh* Volume I's assembly chapter and the two
+  dispatch-table routines (SRC-0071). It states trap word decoding, which
+  routine runs, stack- and register-based call conventions, auto-pop,
+  GetTrapAddress/SetTrapAddress and failures, labeling each item as documented
+  fact, design decision, assumption or open question (Q1–Q10). Not finalized or
+  implemented; every documented item needs January 1984 confirmation.
+
 - System 1 source foundation (2026-10-11,
   [record](research/system1-sources.md)): the owner ruled "published editions
   only" (SRC-0067). Apple's 1984–85 pre-release drafts are excluded because they
