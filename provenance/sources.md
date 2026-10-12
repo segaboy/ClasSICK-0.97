@@ -5,6 +5,18 @@ eligibility applies to the stated scope, not every resource reachable from a URL
 No Apple executable, source, disassembly, decompilation, or copied asset was used.
 No reference-system black-box observation has yet been performed.
 
+## SRC-0084 - Own original ROM Snow trial observations
+
+- Codex, 2026-10-11 local date (UTC observations on October 12), owner-directed
+  SPEC-0018 trial. [Dated record](../docs/development/mac-rom-trial.md), own
+  image/scene/counters only, exact SRC-0082 executable, Macintosh 128K model.
+- Initial image at `7c673f79` reached the original scene and advancing VBL
+  count with zero presses, but redraws were slow. A corrected multiplier is
+  separately built/verified; repeat qualification and owner input pending.
+  No Apple ROM, disks, emulator source or historical software runs.
+- Black-box development observation, not reference compatibility, physical
+  boot, calibrated time or complete edition evidence. Human review pending.
+
 ## SRC-0083 - Own original ROM verification artifacts
 
 - Codex, 2026-10-11, SPEC-0018 / IMPL-0022 / TEST-0026 and the
@@ -35,6 +47,8 @@ No reference-system black-box observation has yet been performed.
   transitive-license/provenance certification. Own ROM only, 128K model, normal
   speed, validation override, no persistent PRAM/disks/network, isolated app
   settings. Clearance precedes execution; actual observations belong in TEST-0026.
+  Required mouse mode: Relative (hardware emulation). The default Absolute
+  mode patches guest globals and is excluded from this own-ROM trial.
 
 ## SRC-0081 - Pinned Ubuntu GCC 13.3 68000 cross tooling
 
@@ -113,6 +127,13 @@ No reference-system black-box observation has yet been performed.
 - MIT license identity checked through publisher release/license metadata.
   No repository implementation, patch code, debugger static-global catalogs or
   reference payload read. Exact binary clearance is SRC-0082; no OS dependency.
+- Additional published user-manual review: Keyboard/mouse sections and
+  Workspaces at <https://docs.snowemu.com/print>, 2026-10-11. Absolute mouse
+  mode patches guest globals and is unsuitable for non-original software;
+  Relative hardware mode is selected before the first guest launch. This
+  qualifies the introductory no-hooks statement; it is not a blanket guarantee
+  for every default setting. Workspace data is saved by Snow's user interface
+  and inspected only as configuration, never as emulator implementation.
 
 ## SRC-0076 - Owner directs own-ROM startup in Snow
 

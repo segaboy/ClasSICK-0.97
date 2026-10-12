@@ -32,3 +32,10 @@ Build/hosted checks pass in [the snapshot](../../docs/development/mac-rom-eviden
 At this checkpoint the image is unloaded and Snow has not been run. Full OS
 services, keyboard/floppy/Toolbox, historical parity, physical validation and
 complete 128K budgets remain open. PC compiled paths and B2 criterion 6 unchanged.
+
+Follow-up: SRC-0084 records the first own-scene startup and advancing VBL.
+The original multiply loop now stops on zero remaining multiplier bits to reduce
+redraw cost, retaining modulo arithmetic and at most 32 iterations. Hosted and
+unloaded checks are repeated before the corrected image's qualification. The
+Windows verification script also clears the expected fault child's status only
+after recording/checking it, so passing controls do not falsely fail CI.

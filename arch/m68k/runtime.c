@@ -5,7 +5,8 @@
 uint32_t __mulsi3(uint32_t a, uint32_t b)
 {
     uint32_t product = 0;
-    for (unsigned i = 0; i < 32u; ++i) {
+    /* Remaining zero multiplier bits cannot contribute to the product. */
+    while (b != 0u) {
         if ((b & 1u) != 0u) product += a;
         a <<= 1u;
         b >>= 1u;
