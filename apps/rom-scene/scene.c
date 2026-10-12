@@ -4,9 +4,24 @@
 
 static int box(const cs_surface *s,int32_t x,int32_t y,int32_t w,int32_t h,uint32_t v)
 {
-    cs_rect r;
-    r.left=x; r.top=y; r.right=x+w; r.bottom=y+h;
-    return cs_surface_fill(s,r,v)==CS_SURFACE_OK;
+    /* Scene rectangles are bounded, not clipped. Preserve neighboring bits. */
+    if(x<0 || y<0 || w<=0 || h<=0 || w>s->width || h>s->height ||
+            x>s->width-w || y>s->height-h || v>1u) return 0;
+    size_t first=(size_t)x/8u, last=(size_t)(x+w-1)/8u;
+    uint8_t left=(uint8_t)(UINT32_C(0xFF)>>((uint32_t)x & 7u));
+    uint8_t right=(uint8_t)(UINT32_C(0xFF)<<(7u-((uint32_t)(x+w-1) & 7u)));
+    uint8_t *row=s->storage+(size_t)y*s->stride+first;
+    for(int32_t j=0;j<h;++j) {
+        for(size_t col=first;col<=last;++col) {
+            uint8_t mask=0xFFu;
+            if(col==first) mask&=left;
+            if(col==last) mask&=right;
+            uint8_t *p=row+(col-first);
+            *p=v!=0u ? (uint8_t)(*p|mask) : (uint8_t)(*p & (uint8_t)~mask);
+        }
+        if(j+1<h) row+=s->stride;
+    }
+    return 1;
 }
 
 /* Original three-column, five-row lettering, independently authored for this scene. */
@@ -40,11 +55,15 @@ int cs_mac_scene(const cs_surface *s,uint32_t ticks,uint32_t presses)
 {
     int ok=1;
     uint32_t lit;
+    cs_surface checked;
     if(s==NULL || s->format!=CS_SURFACE_MONO1_MSB || s->width!=512 || s->height!=342)
         return 0;
+    if(cs_surface_init(&checked,s->storage,s->storage_size,s->width,s->height,
+            s->stride,s->format)!=CS_SURFACE_OK) return 0;
+    s=&checked;
     if(ticks>CS_MAC_TOTAL_TICKS) ticks=CS_MAC_TOTAL_TICKS;
     lit=ticks==CS_MAC_TOTAL_TICKS ? 16u : ticks/226u;
-    ok &= cs_surface_clear(s,0)==CS_SURFACE_OK;
+    ok &= box(s,0,0,512,342,0);
     ok &= box(s,8,8,496,4,1); ok &= box(s,8,330,496,4,1);
     ok &= box(s,8,8,4,326,1); ok &= box(s,500,8,4,326,1);
     for(unsigned i=0;i<13u;++i) ok &= glyph(s,52+(int32_t)i*32,30,letters[i],6);

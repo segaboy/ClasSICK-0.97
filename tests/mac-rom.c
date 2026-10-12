@@ -126,6 +126,29 @@ static int pixels(void)
     CHECK(memcmp(a+8,b,sizeof(b))!=0);
     CHECK(cs_mac_scene(&surface,CS_MAC_TOTAL_TICKS,1));
     for(unsigned i=0;i<16u;++i) CHECK(pixel(a+8,52+i*26u,240));
+    /* Complete-frame baselines generated before the byte renderer change,
+       using the existing independently authored SPEC-0001 pixel renderer. */
+    const uint32_t cases[5][3]={{0,0,0x9D63DD89u},{60,1,0x93D17529u},
+        {226,2,0x63E496B9u},{3600,7,0x49177469u},{3610,UINT32_MAX,0xD160A621u}};
+    for(unsigned k=0;k<5u;++k) {
+        CHECK(cs_mac_scene(&surface,cases[k][0],cases[k][1]));
+        uint32_t hash=UINT32_C(2166136261);
+        for(size_t i=0;i<CS_MAC_SCREEN_BYTES;++i)
+            hash=(hash^a[i+8])*UINT32_C(16777619);
+        CHECK(hash==cases[k][2]);
+    }
+    unsigned char padded[65u*342u+16u]; cs_surface wide;
+    for(size_t i=0;i<sizeof(padded);++i) padded[i]=0xA5;
+    CHECK(cs_surface_init(&wide,padded+8,65u*342u,512,342,65,CS_SURFACE_MONO1_MSB)==CS_SURFACE_OK);
+    CHECK(cs_mac_scene(&wide,3610,UINT32_MAX));
+    for(unsigned y=0;y<342u;++y) {
+        CHECK(memcmp(padded+8+y*65u,a+8+y*64u,64)==0);
+        CHECK(padded[8+y*65u+64u]==0xA5);
+    }
+    for(unsigned i=0;i<8u;++i) CHECK(padded[i]==0xA5 && padded[65u*342u+8u+i]==0xA5);
+    wide.storage=NULL; CHECK(!cs_mac_scene(&wide,0,0));
+    wide=surface; wide.stride=SIZE_MAX; CHECK(!cs_mac_scene(&wide,0,0));
+    wide=surface; wide.storage_size=CS_MAC_SCREEN_BYTES-1u; CHECK(!cs_mac_scene(&wide,0,0));
     CHECK(!cs_mac_scene(NULL,0,0));
     surface.width=511; CHECK(!cs_mac_scene(&surface,0,0));
     return 0;

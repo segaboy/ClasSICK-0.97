@@ -75,6 +75,14 @@ Use SPEC-0001's MONO1_MSB surface directly over the main screen. Draw an origina
 geometric panel, progress segments and mouse-change indicator; original small
 glyphs label the project and counters. No Apple fonts, icons or pixels.
 
+The scene validates its full surface descriptor through SPEC-0001, then fills
+its known bounded rectangles a byte at a time, masking edge bits and preserving
+row padding. This original specialized renderer avoids per-pixel address
+multiplication on the 68000. Five whole-frame baselines from the earlier original
+pixel renderer verify unchanged output, including input parity and completion;
+padded rows and invalid descriptors have independent boundary checks. Shared
+portable/PC graphics source remains unchanged.
+
 After initial drawing, synchronize to one VBL flag and acknowledge it. Start
 progress at zero; count 3,610 further flags before completion (over 60 seconds
 at the documented approximate frame rate). Each flag is acknowledged by a

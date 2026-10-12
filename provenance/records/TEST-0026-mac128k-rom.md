@@ -54,3 +54,11 @@ seal `7a4c3e07`; O0 uses 4,580 bytes, SHA-256
 `028272b0`. RAM/stack reservations unchanged. Own emitted multiply helper
 reviewed: no recursive calls, early exit on zero remaining multiplier.
 See [the separate trial record](../../docs/development/mac-rom-trial.md).
+
+The multiplier-only trial remained slow and was stopped at an observed 1,860
+ticks/zero presses before completion. The latest original scene byte renderer
+passes all 24 suites/four fault controls, including five full-frame baselines
+generated with the preceding independently authored pixel renderer, padded-row
+preservation, guards, and invalid descriptors. Fresh 68000 twins/controls pass;
+Os/O0 now use 3,308/4,956 ROM bytes. Native qualification is still pending in
+the dated trial record. PC/core compiled paths remain unchanged.

@@ -36,6 +36,24 @@ SHA-256 `920fbcfcd22c8dbf7a7214a5a1b93e8c43689f87cfc610dea218a6097023618e`,
 3,160 used ROM bytes, seal `7a4c3e07`, 28 data/BSS bytes, 8 KiB reserved stack.
 Corrected-image cold starts, elapsed timing and owner input remain pending.
 
+The multiplier-only image at `04d932e3a4d03508a2224b765a79826201473ff0`
+was cold-started at 01:52:20.754 in the saved own-ROM workspace, reached the
+scene, and displayed 1,860/zero at 01:56:45.601. Redraws still took too long;
+the run was deliberately stopped before completion. No operator pass is claimed.
+
+The latest scene uses original bounded byte fills with edge masks. Its output
+matches all five complete-frame FNV-1a baselines generated with the earlier
+original SPEC-0001 pixel renderer before this change; padded rows/guards and
+invalid descriptors pass in all four hosted profiles. Shared graphics and PC
+sources remain unchanged. Latest Os image SHA-256
+`be506ad6e41d06ebcfe11678a4f6a64ba560920b16efa7fef884794f51690005`,
+seal `e333e427`, used ROM 3,308 bytes; O0 SHA-256
+`8152397d95c93169b8e41993d7d593c5e26952b64319c7a511f0601ef7b92689`,
+seal `33eef0a9`, used ROM 4,956 bytes. Data/BSS remains 28 bytes; summed
+reported frames plus 64-byte margin are 792 / 672 bytes, largest 116 / 84.
+Four fresh builds/twins and all negative controls pass. This candidate's native
+timing/input acceptance remains pending until separately observed.
+
 Publication CI: run 38192057023 at initial source passed the Linux image audits
 and Windows suites, but the Windows wrapper propagated an expected fault test's
 nonzero exit status. Reporting fix at `0c33d7e2089ec13aa3287347a8f6038eb41edc26`

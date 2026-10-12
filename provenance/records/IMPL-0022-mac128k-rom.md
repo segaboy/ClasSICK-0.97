@@ -39,3 +39,10 @@ redraw cost, retaining modulo arithmetic and at most 32 iterations. Hosted and
 unloaded checks are repeated before the corrected image's qualification. The
 Windows verification script also clears the expected fault child's status only
 after recording/checking it, so passing controls do not falsely fail CI.
+
+The scene now validates through the existing surface constructor and fills its
+bounded rectangles with original per-row byte masks, avoiding per-pixel address
+multiplication. Shared surface source stays unchanged. Complete-frame baselines
+were generated before the new algorithm using the original pixel implementation;
+no emulator or Apple pixels enter the fixture. TEST-0026 repeats native builds
+and hosted pixel/boundary checks before another startup trial.
