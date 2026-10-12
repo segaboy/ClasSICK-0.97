@@ -102,3 +102,9 @@ do not prove LGDT/LTR/LIDT, exception delivery, runtime stack safety or B2.
 Real boot fault injection, visible diagnostics, framebuffer/timer/keyboard loop,
 formatted media and firmware eligibility remain required. Mac/mini vMac and all
 physical-edition gates remain independent and unverified.
+
+2026-10-12 follow-up: SPEC-0019 / TEST-0027 observes UD/GP delivery and IST1
+on the exact declared VirtualBox platform, using no-call register exports.
+The earlier unobserved-execution text is the v1 checkpoint history. This scoped
+observation does not establish other faults, physical machines or formal B2's
+still-open firmware image fingerprint. See the [trial](../development/fault-checkpoint.md).

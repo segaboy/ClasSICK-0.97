@@ -28,3 +28,13 @@ media corruption controls and three writer refusals pass. All three media pass
 the independent checker. Native trial still pending at this dated build record.
 Full retained local verification log SHA-256:
 `90b9d0d5a294f8ba39b96e078e20ae5afeac45e2079446223864e751223e3450`.
+
+Trial follow-up: [dated report](../../docs/development/fault-checkpoint.md)
+passes three UD/vector6/error0 and three GP/vector13/error0x28 cold starts,
+exact saved instruction, published record and owned IST1 placement, stable
+selected registers, and one normal control. Every run completes its own second
+60/result0/kbd1 before observation. CI 38250103771 passes both jobs at
+`2f64689521fe57866b7a70572f2f3bb8a7bbb008`; six EFI fingerprints match local.
+Final powered-off/inventory/unchanged-disk checks pass. The host batch logging
+redirection error after all observers return is retained; no guest/test failure
+or repeated test is inferred from its outer process status. All limitations persist.

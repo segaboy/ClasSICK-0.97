@@ -1,0 +1,1292 @@
+{
+  "schema_version": 1,
+  "classification": "own-native-terminal-fault-checkpoint",
+  "test": "TEST-0027",
+  "source": "SRC-0087",
+  "observed_on": "2026-10-12",
+  "compiled_source_revision": "2f64689521fe57866b7a70572f2f3bb8a7bbb008",
+  "owner_approval": "SRC-0085",
+  "platform": {
+    "product": "Oracle VirtualBox",
+    "version": "7.2.16r174877",
+    "vboxmanage_sha256": "7fda8e54157eb94a5ebd9cea079a9fb8c23ade92ae71e13399dc3431c021a228",
+    "firmware_image_sha256": null,
+    "firmware_internal_reads": false,
+    "profile": "SPEC-0015 isolation, EFI64, one CPU, Secure Boot off"
+  },
+  "verification": {
+    "ctest_checks": 876,
+    "configuration_totals": [
+      110,
+      110,
+      110,
+      83,
+      110,
+      95,
+      95,
+      95,
+      68
+    ],
+    "classifier_positive_profiles": 3,
+    "classifier_rejections": 16,
+    "normal_writer_builds": 9,
+    "media_corruption_rejections": 30,
+    "writer_refusals": 3,
+    "local_log_sha256": "90b9d0d5a294f8ba39b96e078e20ae5afeac45e2079446223864e751223e3450",
+    "ci_url": "https://github.com/segaboy/ClasSICK-0.97/actions/runs/38250103771",
+    "ci_status": "success",
+    "matching_local_ci_efi_hashes": 6,
+    "ci_log_sha256": "980563ae37fe43ca11038faf8f2b0f95b8357ded957eec597bc2c47dfbcffa1e"
+  },
+  "profiles": {
+    "none": {
+      "images": [
+        {
+          "case": "clang-64-O0",
+          "sha256": "ed7921248a48d248798d9e8211ade506b414a18c732dc71c1cf3c99ea0cf1f51",
+          "size_bytes": 60928,
+          "image_size": 77824,
+          "relocations": 3,
+          "status": "passed-unloaded"
+        },
+        {
+          "case": "clang-64-O2",
+          "sha256": "95da0042afb44743bf14307cca866ac26b381cf7435c466ee04231282abcc5fe",
+          "size_bytes": 43520,
+          "image_size": 57344,
+          "relocations": 3,
+          "status": "passed-unloaded"
+        }
+      ],
+      "raw_sha256": "a75c1cb36c631ebb3737acbbb4e781f188e579569f850e8000b5c06e096ecfc6",
+      "vdi_sha256": "32bc689c4eb70781ba8ce14ed41992a493b1672dbf20ce96e3a57e2593388840",
+      "roundtrip": "matched-original-raw",
+      "post_trial_vdi": "unchanged",
+      "image_size": 57344,
+      "halt_rva": 10156,
+      "probe_rva": null,
+      "image_rejections": 25,
+      "profile_rejections": 0,
+      "omitted_object_rejections": 10
+    },
+    "ud": {
+      "images": [
+        {
+          "case": "clang-64-O0",
+          "sha256": "38afafd84274ef7ac42e516af8c491187794fe5347ae81f0da14817066e6e5cf",
+          "size_bytes": 60928,
+          "image_size": 77824,
+          "relocations": 3,
+          "status": "passed-unloaded"
+        },
+        {
+          "case": "clang-64-O2",
+          "sha256": "fc06905f718d6ff6db06a3e37254c6fc3abc337e6de247c9fca9a28a911eb11a",
+          "size_bytes": 43520,
+          "image_size": 57344,
+          "relocations": 3,
+          "status": "passed-unloaded"
+        }
+      ],
+      "raw_sha256": "7a5b657eecd900b3898988aec5f155756ca356bc58b206fb69fc0122a94da6d3",
+      "vdi_sha256": "4078646ac95bba11352c2776f907d998b3b7653f242725f003b4e545b3e2ba2a",
+      "roundtrip": "matched-original-raw",
+      "post_trial_vdi": "unchanged",
+      "image_size": 57344,
+      "halt_rva": 10160,
+      "probe_rva": 10156,
+      "image_rejections": 26,
+      "profile_rejections": 1,
+      "omitted_object_rejections": 10
+    },
+    "gp": {
+      "images": [
+        {
+          "case": "clang-64-O0",
+          "sha256": "141730f6a86ec39628d2aef816d0fa0c4fe2337d4c99a5c0c23e9de36dc0b9ce",
+          "size_bytes": 60928,
+          "image_size": 77824,
+          "relocations": 3,
+          "status": "passed-unloaded"
+        },
+        {
+          "case": "clang-64-O2",
+          "sha256": "58248ad62ce298f404622f05edae0a4e1eb5ecd6be589812058d11b8ebe4df7e",
+          "size_bytes": 43520,
+          "image_size": 57344,
+          "relocations": 3,
+          "status": "passed-unloaded"
+        }
+      ],
+      "raw_sha256": "e1d1319d15d591400f2f9ae41cf88d92721ed221fdef4578333581c416643ce1",
+      "vdi_sha256": "4ea78bd5f2d2dba94c39afc6640481b16e2947a901fa93783f600709215fba88",
+      "roundtrip": "matched-original-raw",
+      "post_trial_vdi": "unchanged",
+      "image_size": 57344,
+      "halt_rva": 10164,
+      "probe_rva": 10160,
+      "image_rejections": 26,
+      "profile_rejections": 1,
+      "omitted_object_rejections": 10
+    }
+  },
+  "trials": [
+    {
+      "trial": "cold-01",
+      "profile": "ud",
+      "status": "passed",
+      "events": [
+        {
+          "line": "ClasSICK 0.97 UART v2",
+          "host_seconds": 26.9786354,
+          "utc": "2026-10-12T12:37:33.2704078Z"
+        },
+        {
+          "line": "fw rev=00010000 state=00000000 vendor=EDK II",
+          "host_seconds": 26.9788677,
+          "utc": "2026-10-12T12:37:33.270639Z"
+        },
+        {
+          "line": "own img=0000000010000000 bun=000000001CFAB000 stk=000000001CFFC000",
+          "host_seconds": 26.9788869,
+          "utc": "2026-10-12T12:37:33.2706567Z"
+        },
+        {
+          "line": "keyboard ready",
+          "host_seconds": 26.9788937,
+          "utc": "2026-10-12T12:37:33.2706635Z"
+        },
+        {
+          "line": "qual port=00000003/00000003 a20=00000000/00000000",
+          "host_seconds": 26.9791902,
+          "utc": "2026-10-12T12:37:33.2709602Z"
+        },
+        {
+          "line": "alias q=000000001D120480 type=00000004",
+          "host_seconds": 26.979203,
+          "utc": "2026-10-12T12:37:33.2709727Z"
+        },
+        {
+          "line": "frame=00000000 sec=00000000 space=00000000",
+          "host_seconds": 26.9792101,
+          "utc": "2026-10-12T12:37:33.2709798Z"
+        },
+        {
+          "line": "frame=00000001 sec=00000004 space=00000000",
+          "host_seconds": 30.9240611,
+          "utc": "2026-10-12T12:37:37.2157973Z"
+        },
+        {
+          "line": "frame=00000002 sec=00000008 space=00000000",
+          "host_seconds": 34.9795994,
+          "utc": "2026-10-12T12:37:41.2713157Z"
+        },
+        {
+          "line": "frame=00000003 sec=0000000C space=00000000",
+          "host_seconds": 38.9272093,
+          "utc": "2026-10-12T12:37:45.218874Z"
+        },
+        {
+          "line": "frame=00000004 sec=0000000F space=00000000",
+          "host_seconds": 41.9883371,
+          "utc": "2026-10-12T12:37:48.2799756Z"
+        },
+        {
+          "line": "frame=00000005 sec=00000013 space=00000000",
+          "host_seconds": 45.9250465,
+          "utc": "2026-10-12T12:37:52.2166497Z"
+        },
+        {
+          "line": "frame=00000006 sec=00000017 space=00000000",
+          "host_seconds": 49.9752093,
+          "utc": "2026-10-12T12:37:56.2667762Z"
+        },
+        {
+          "line": "frame=00000007 sec=0000001B space=00000000",
+          "host_seconds": 53.9262882,
+          "utc": "2026-10-12T12:38:00.2178198Z"
+        },
+        {
+          "line": "frame=00000008 sec=0000001E space=00000000",
+          "host_seconds": 56.9863583,
+          "utc": "2026-10-12T12:38:03.2778626Z"
+        },
+        {
+          "line": "frame=00000009 sec=00000022 space=00000000",
+          "host_seconds": 60.9269493,
+          "utc": "2026-10-12T12:38:07.2184193Z"
+        },
+        {
+          "line": "frame=0000000A sec=00000026 space=00000000",
+          "host_seconds": 64.9714998,
+          "utc": "2026-10-12T12:38:11.2629333Z"
+        },
+        {
+          "line": "frame=0000000B sec=0000002A space=00000000",
+          "host_seconds": 68.9154838,
+          "utc": "2026-10-12T12:38:15.2068872Z"
+        },
+        {
+          "line": "frame=0000000C sec=0000002D space=00000000",
+          "host_seconds": 71.9762304,
+          "utc": "2026-10-12T12:38:18.267601Z"
+        },
+        {
+          "line": "frame=0000000D sec=00000031 space=00000000",
+          "host_seconds": 75.9095101,
+          "utc": "2026-10-12T12:38:22.2008456Z"
+        },
+        {
+          "line": "frame=0000000E sec=00000035 space=00000000",
+          "host_seconds": 79.9546182,
+          "utc": "2026-10-12T12:38:26.2459179Z"
+        },
+        {
+          "line": "frame=0000000F sec=00000039 space=00000000",
+          "host_seconds": 83.9133421,
+          "utc": "2026-10-12T12:38:30.2046069Z"
+        },
+        {
+          "line": "frame=00000010 sec=0000003C space=00000000",
+          "host_seconds": 86.9929897,
+          "utc": "2026-10-12T12:38:33.2842269Z"
+        },
+        {
+          "line": "result=00000000 kbd=00000001",
+          "host_seconds": 86.9930623,
+          "utc": "2026-10-12T12:38:33.284298Z"
+        }
+      ],
+      "ready_to_result_host_seconds": 60.014168600000005,
+      "registers": [
+        {
+          "host_seconds": 88.0690168,
+          "values": {
+            "r13": 2,
+            "r15": 8,
+            "r10": 0,
+            "rip": 268445618,
+            "rsp": 486526920,
+            "r14": 1129530929,
+            "r12": 486522504,
+            "rdi": 16,
+            "r9": 6,
+            "rsi": 65542,
+            "rcx": 486686720,
+            "r11": 268445612
+          }
+        },
+        {
+          "host_seconds": 89.1631158,
+          "values": {
+            "r13": 2,
+            "r15": 8,
+            "r10": 0,
+            "rip": 268445618,
+            "rsp": 486526920,
+            "r14": 1129530929,
+            "r12": 486522504,
+            "rdi": 16,
+            "r9": 6,
+            "rsi": 65542,
+            "rcx": 486686720,
+            "r11": 268445612
+          }
+        }
+      ],
+      "local_observation_sha256": "17b1d83dad3f1f702657f08f470c854c09a72205b158e69202415f129f01513c",
+      "generated_input": false
+    },
+    {
+      "trial": "cold-02",
+      "profile": "gp",
+      "status": "passed",
+      "events": [
+        {
+          "line": "ClasSICK 0.97 UART v2",
+          "host_seconds": 6.2916915,
+          "utc": "2026-10-12T12:39:28.726822Z"
+        },
+        {
+          "line": "fw rev=00010000 state=00000000 vendor=EDK II",
+          "host_seconds": 6.2919632,
+          "utc": "2026-10-12T12:39:28.7270918Z"
+        },
+        {
+          "line": "own img=0000000010000000 bun=000000001CF90000 stk=000000001CFE1000",
+          "host_seconds": 6.2920806,
+          "utc": "2026-10-12T12:39:28.7272087Z"
+        },
+        {
+          "line": "keyboard ready",
+          "host_seconds": 6.2921225,
+          "utc": "2026-10-12T12:39:28.7272494Z"
+        },
+        {
+          "line": "qual port=00000003/00000003 a20=00000000/00000000",
+          "host_seconds": 6.2926915,
+          "utc": "2026-10-12T12:39:28.7278197Z"
+        },
+        {
+          "line": "alias q=000000001D105480 type=00000004",
+          "host_seconds": 6.2927969,
+          "utc": "2026-10-12T12:39:28.7279237Z"
+        },
+        {
+          "line": "frame=00000000 sec=00000000 space=00000000",
+          "host_seconds": 6.2928221,
+          "utc": "2026-10-12T12:39:28.7279487Z"
+        },
+        {
+          "line": "frame=00000001 sec=00000004 space=00000000",
+          "host_seconds": 10.3438309,
+          "utc": "2026-10-12T12:39:32.778923Z"
+        },
+        {
+          "line": "frame=00000002 sec=00000008 space=00000000",
+          "host_seconds": 14.2875172,
+          "utc": "2026-10-12T12:39:36.7225889Z"
+        },
+        {
+          "line": "frame=00000003 sec=0000000C space=00000000",
+          "host_seconds": 18.3523859,
+          "utc": "2026-10-12T12:39:40.7874066Z"
+        },
+        {
+          "line": "frame=00000004 sec=0000000F space=00000000",
+          "host_seconds": 21.3165643,
+          "utc": "2026-10-12T12:39:43.7515597Z"
+        },
+        {
+          "line": "frame=00000005 sec=00000013 space=00000000",
+          "host_seconds": 25.2547272,
+          "utc": "2026-10-12T12:39:47.6896872Z"
+        },
+        {
+          "line": "frame=00000006 sec=00000017 space=00000000",
+          "host_seconds": 29.3162086,
+          "utc": "2026-10-12T12:39:51.7511321Z"
+        },
+        {
+          "line": "frame=00000007 sec=0000001B space=00000000",
+          "host_seconds": 33.2522119,
+          "utc": "2026-10-12T12:39:55.6871001Z"
+        },
+        {
+          "line": "frame=00000008 sec=0000001E space=00000000",
+          "host_seconds": 36.3548838,
+          "utc": "2026-10-12T12:39:58.7897445Z"
+        },
+        {
+          "line": "frame=00000009 sec=00000022 space=00000000",
+          "host_seconds": 40.2996656,
+          "utc": "2026-10-12T12:40:02.7344917Z"
+        },
+        {
+          "line": "frame=0000000A sec=00000026 space=00000000",
+          "host_seconds": 44.3497126,
+          "utc": "2026-10-12T12:40:06.784503Z"
+        },
+        {
+          "line": "frame=0000000B sec=0000002A space=00000000",
+          "host_seconds": 48.2961838,
+          "utc": "2026-10-12T12:40:10.7309389Z"
+        },
+        {
+          "line": "frame=0000000C sec=0000002D space=00000000",
+          "host_seconds": 51.252559,
+          "utc": "2026-10-12T12:40:13.687294Z"
+        },
+        {
+          "line": "frame=0000000D sec=00000031 space=00000000",
+          "host_seconds": 55.3127647,
+          "utc": "2026-10-12T12:40:17.7474559Z"
+        },
+        {
+          "line": "frame=0000000E sec=00000035 space=00000000",
+          "host_seconds": 59.2505577,
+          "utc": "2026-10-12T12:40:21.6852145Z"
+        },
+        {
+          "line": "frame=0000000F sec=00000039 space=00000000",
+          "host_seconds": 63.2962772,
+          "utc": "2026-10-12T12:40:25.7308985Z"
+        },
+        {
+          "line": "frame=00000010 sec=0000003C space=00000000",
+          "host_seconds": 66.2538408,
+          "utc": "2026-10-12T12:40:28.6884353Z"
+        },
+        {
+          "line": "result=00000000 kbd=00000001",
+          "host_seconds": 66.2539142,
+          "utc": "2026-10-12T12:40:28.6885071Z"
+        }
+      ],
+      "ready_to_result_host_seconds": 59.9617917,
+      "registers": [
+        {
+          "host_seconds": 67.3337874,
+          "values": {
+            "rdi": 16,
+            "r15": 8,
+            "rsi": 65542,
+            "r11": 268445616,
+            "r14": 1129530929,
+            "r13": 2,
+            "r12": 486411912,
+            "r9": 13,
+            "rcx": 486576128,
+            "rsp": 486416328,
+            "r10": 40,
+            "rip": 268445622
+          }
+        },
+        {
+          "host_seconds": 68.4273574,
+          "values": {
+            "rdi": 16,
+            "r15": 8,
+            "rsi": 65542,
+            "r11": 268445616,
+            "r14": 1129530929,
+            "r13": 2,
+            "r12": 486411912,
+            "r9": 13,
+            "rcx": 486576128,
+            "rsp": 486416328,
+            "r10": 40,
+            "rip": 268445622
+          }
+        }
+      ],
+      "local_observation_sha256": "f41159e4323be689ce4dfc66c1fb9dc189bf0b12c8ae5419123dffa8fd30f213",
+      "generated_input": false
+    },
+    {
+      "trial": "cold-03",
+      "profile": "ud",
+      "status": "passed",
+      "events": [
+        {
+          "line": "ClasSICK 0.97 UART v2",
+          "host_seconds": 6.3950513,
+          "utc": "2026-10-12T12:40:38.109833Z"
+        },
+        {
+          "line": "fw rev=00010000 state=00000000 vendor=EDK II",
+          "host_seconds": 6.395248,
+          "utc": "2026-10-12T12:40:38.1100298Z"
+        },
+        {
+          "line": "own img=0000000010000000 bun=000000001CF90000 stk=000000001CFE1000",
+          "host_seconds": 6.3952901,
+          "utc": "2026-10-12T12:40:38.1100704Z"
+        },
+        {
+          "line": "keyboard ready",
+          "host_seconds": 6.3952996,
+          "utc": "2026-10-12T12:40:38.1100814Z"
+        },
+        {
+          "line": "qual port=00000003/00000003 a20=00000000/00000000",
+          "host_seconds": 6.3957714,
+          "utc": "2026-10-12T12:40:38.1105531Z"
+        },
+        {
+          "line": "alias q=000000001D105480 type=00000004",
+          "host_seconds": 6.3958666,
+          "utc": "2026-10-12T12:40:38.1106471Z"
+        },
+        {
+          "line": "frame=00000000 sec=00000000 space=00000000",
+          "host_seconds": 6.3958766,
+          "utc": "2026-10-12T12:40:38.1106569Z"
+        },
+        {
+          "line": "frame=00000001 sec=00000004 space=00000000",
+          "host_seconds": 10.3281147,
+          "utc": "2026-10-12T12:40:42.0428615Z"
+        },
+        {
+          "line": "frame=00000002 sec=00000008 space=00000000",
+          "host_seconds": 14.3746284,
+          "utc": "2026-10-12T12:40:46.0893387Z"
+        },
+        {
+          "line": "frame=00000003 sec=0000000C space=00000000",
+          "host_seconds": 18.3121649,
+          "utc": "2026-10-12T12:40:50.0268404Z"
+        },
+        {
+          "line": "frame=00000004 sec=0000000F space=00000000",
+          "host_seconds": 21.3744284,
+          "utc": "2026-10-12T12:40:53.089077Z"
+        },
+        {
+          "line": "frame=00000005 sec=00000013 space=00000000",
+          "host_seconds": 25.3071201,
+          "utc": "2026-10-12T12:40:57.0217341Z"
+        },
+        {
+          "line": "frame=00000006 sec=00000017 space=00000000",
+          "host_seconds": 29.3272835,
+          "utc": "2026-10-12T12:41:01.041861Z"
+        },
+        {
+          "line": "frame=00000007 sec=0000001B space=00000000",
+          "host_seconds": 33.3836429,
+          "utc": "2026-10-12T12:41:05.0982656Z"
+        },
+        {
+          "line": "frame=00000008 sec=0000001E space=00000000",
+          "host_seconds": 36.3877897,
+          "utc": "2026-10-12T12:41:08.1023043Z"
+        },
+        {
+          "line": "frame=00000009 sec=00000022 space=00000000",
+          "host_seconds": 40.342358,
+          "utc": "2026-10-12T12:41:12.056837Z"
+        },
+        {
+          "line": "frame=0000000A sec=00000026 space=00000000",
+          "host_seconds": 44.389673,
+          "utc": "2026-10-12T12:41:16.1041162Z"
+        },
+        {
+          "line": "frame=0000000B sec=0000002A space=00000000",
+          "host_seconds": 48.327066,
+          "utc": "2026-10-12T12:41:20.0414742Z"
+        },
+        {
+          "line": "frame=0000000C sec=0000002D space=00000000",
+          "host_seconds": 51.3900674,
+          "utc": "2026-10-12T12:41:23.1044481Z"
+        },
+        {
+          "line": "frame=0000000D sec=00000031 space=00000000",
+          "host_seconds": 55.3897796,
+          "utc": "2026-10-12T12:41:27.1041246Z"
+        },
+        {
+          "line": "frame=0000000E sec=00000035 space=00000000",
+          "host_seconds": 59.3277927,
+          "utc": "2026-10-12T12:41:31.0421029Z"
+        },
+        {
+          "line": "frame=0000000F sec=00000039 space=00000000",
+          "host_seconds": 63.3748476,
+          "utc": "2026-10-12T12:41:35.0891215Z"
+        },
+        {
+          "line": "frame=00000010 sec=0000003C space=00000000",
+          "host_seconds": 66.3278866,
+          "utc": "2026-10-12T12:41:38.0421345Z"
+        },
+        {
+          "line": "result=00000000 kbd=00000001",
+          "host_seconds": 66.327927,
+          "utc": "2026-10-12T12:41:38.0421739Z"
+        }
+      ],
+      "ready_to_result_host_seconds": 59.9326274,
+      "registers": [
+        {
+          "host_seconds": 67.3778178,
+          "values": {
+            "rdi": 16,
+            "r15": 8,
+            "rsi": 65542,
+            "r11": 268445612,
+            "r14": 1129530929,
+            "r13": 2,
+            "r12": 486411912,
+            "r9": 6,
+            "rcx": 486576128,
+            "rsp": 486416328,
+            "r10": 0,
+            "rip": 268445618
+          }
+        },
+        {
+          "host_seconds": 68.4229755,
+          "values": {
+            "rdi": 16,
+            "r15": 8,
+            "rsi": 65542,
+            "r11": 268445612,
+            "r14": 1129530929,
+            "r13": 2,
+            "r12": 486411912,
+            "r9": 6,
+            "rcx": 486576128,
+            "rsp": 486416328,
+            "r10": 0,
+            "rip": 268445618
+          }
+        }
+      ],
+      "local_observation_sha256": "b677245af1758b2e7d5f7fcc6b9eebae7ca3ba8524e5d59e01648a499aa095d2",
+      "generated_input": false
+    },
+    {
+      "trial": "cold-04",
+      "profile": "gp",
+      "status": "passed",
+      "events": [
+        {
+          "line": "ClasSICK 0.97 UART v2",
+          "host_seconds": 6.2148999,
+          "utc": "2026-10-12T12:41:47.1501695Z"
+        },
+        {
+          "line": "fw rev=00010000 state=00000000 vendor=EDK II",
+          "host_seconds": 6.2149466,
+          "utc": "2026-10-12T12:41:47.1502153Z"
+        },
+        {
+          "line": "own img=0000000010000000 bun=000000001CF90000 stk=000000001CFE1000",
+          "host_seconds": 6.2149553,
+          "utc": "2026-10-12T12:41:47.1502238Z"
+        },
+        {
+          "line": "keyboard ready",
+          "host_seconds": 6.214961,
+          "utc": "2026-10-12T12:41:47.1502295Z"
+        },
+        {
+          "line": "qual port=00000003/00000003 a20=00000000/00000000",
+          "host_seconds": 6.2158289,
+          "utc": "2026-10-12T12:41:47.1510991Z"
+        },
+        {
+          "line": "alias q=000000001D105480 type=00000004",
+          "host_seconds": 6.3257033,
+          "utc": "2026-10-12T12:41:47.2609719Z"
+        },
+        {
+          "line": "frame=00000000 sec=00000000 space=00000000",
+          "host_seconds": 6.3257581,
+          "utc": "2026-10-12T12:41:47.2610257Z"
+        },
+        {
+          "line": "frame=00000001 sec=00000004 space=00000000",
+          "host_seconds": 10.2749304,
+          "utc": "2026-10-12T12:41:51.2101638Z"
+        },
+        {
+          "line": "frame=00000002 sec=00000008 space=00000000",
+          "host_seconds": 14.2262684,
+          "utc": "2026-10-12T12:41:55.1614667Z"
+        },
+        {
+          "line": "frame=00000003 sec=0000000C space=00000000",
+          "host_seconds": 18.2796754,
+          "utc": "2026-10-12T12:41:59.2148375Z"
+        },
+        {
+          "line": "frame=00000004 sec=0000000F space=00000000",
+          "host_seconds": 21.2372461,
+          "utc": "2026-10-12T12:42:02.1723821Z"
+        },
+        {
+          "line": "frame=00000005 sec=00000013 space=00000000",
+          "host_seconds": 25.2763899,
+          "utc": "2026-10-12T12:42:06.2114899Z"
+        },
+        {
+          "line": "frame=00000006 sec=00000017 space=00000000",
+          "host_seconds": 29.2155359,
+          "utc": "2026-10-12T12:42:10.1506006Z"
+        },
+        {
+          "line": "frame=00000007 sec=0000001B space=00000000",
+          "host_seconds": 33.2587761,
+          "utc": "2026-10-12T12:42:14.193805Z"
+        },
+        {
+          "line": "frame=00000008 sec=0000001E space=00000000",
+          "host_seconds": 36.213587,
+          "utc": "2026-10-12T12:42:17.1485898Z"
+        },
+        {
+          "line": "frame=00000009 sec=00000022 space=00000000",
+          "host_seconds": 40.2607496,
+          "utc": "2026-10-12T12:42:21.1957162Z"
+        },
+        {
+          "line": "frame=0000000A sec=00000026 space=00000000",
+          "host_seconds": 44.2160816,
+          "utc": "2026-10-12T12:42:25.1510129Z"
+        },
+        {
+          "line": "frame=0000000B sec=0000002A space=00000000",
+          "host_seconds": 48.2616555,
+          "utc": "2026-10-12T12:42:29.1965519Z"
+        },
+        {
+          "line": "frame=0000000C sec=0000002D space=00000000",
+          "host_seconds": 51.2144752,
+          "utc": "2026-10-12T12:42:32.1493439Z"
+        },
+        {
+          "line": "frame=0000000D sec=00000031 space=00000000",
+          "host_seconds": 55.2628026,
+          "utc": "2026-10-12T12:42:36.1976357Z"
+        },
+        {
+          "line": "frame=0000000E sec=00000035 space=00000000",
+          "host_seconds": 59.2013558,
+          "utc": "2026-10-12T12:42:40.1361538Z"
+        },
+        {
+          "line": "frame=0000000F sec=00000039 space=00000000",
+          "host_seconds": 63.246784,
+          "utc": "2026-10-12T12:42:44.181546Z"
+        },
+        {
+          "line": "frame=00000010 sec=0000003C space=00000000",
+          "host_seconds": 66.2069004,
+          "utc": "2026-10-12T12:42:47.1416361Z"
+        },
+        {
+          "line": "result=00000000 kbd=00000001",
+          "host_seconds": 66.2069505,
+          "utc": "2026-10-12T12:42:47.1416851Z"
+        }
+      ],
+      "ready_to_result_host_seconds": 59.9919895,
+      "registers": [
+        {
+          "host_seconds": 67.2517402,
+          "values": {
+            "rdi": 16,
+            "r15": 8,
+            "rsi": 65542,
+            "r11": 268445616,
+            "r14": 1129530929,
+            "r13": 2,
+            "r12": 486411912,
+            "r9": 13,
+            "rcx": 486576128,
+            "rsp": 486416328,
+            "r10": 40,
+            "rip": 268445622
+          }
+        },
+        {
+          "host_seconds": 68.3925008,
+          "values": {
+            "rdi": 16,
+            "r15": 8,
+            "rsi": 65542,
+            "r11": 268445616,
+            "r14": 1129530929,
+            "r13": 2,
+            "r12": 486411912,
+            "r9": 13,
+            "rcx": 486576128,
+            "rsp": 486416328,
+            "r10": 40,
+            "rip": 268445622
+          }
+        }
+      ],
+      "local_observation_sha256": "6f22d3ffe1ccc4f837cc5bff615201739336686318641465bd3fea0b2d588911",
+      "generated_input": false
+    },
+    {
+      "trial": "cold-05",
+      "profile": "ud",
+      "status": "passed",
+      "events": [
+        {
+          "line": "ClasSICK 0.97 UART v2",
+          "host_seconds": 6.2577432,
+          "utc": "2026-10-12T12:42:56.5926246Z"
+        },
+        {
+          "line": "fw rev=00010000 state=00000000 vendor=EDK II",
+          "host_seconds": 6.2578099,
+          "utc": "2026-10-12T12:42:56.5926899Z"
+        },
+        {
+          "line": "own img=0000000010000000 bun=000000001CF90000 stk=000000001CFE1000",
+          "host_seconds": 6.2578199,
+          "utc": "2026-10-12T12:42:56.5926998Z"
+        },
+        {
+          "line": "keyboard ready",
+          "host_seconds": 6.2578265,
+          "utc": "2026-10-12T12:42:56.5927064Z"
+        },
+        {
+          "line": "qual port=00000003/00000003 a20=00000000/00000000",
+          "host_seconds": 6.2581835,
+          "utc": "2026-10-12T12:42:56.5930644Z"
+        },
+        {
+          "line": "alias q=000000001D105480 type=00000004",
+          "host_seconds": 6.2582262,
+          "utc": "2026-10-12T12:42:56.5931062Z"
+        },
+        {
+          "line": "frame=00000000 sec=00000000 space=00000000",
+          "host_seconds": 6.2582364,
+          "utc": "2026-10-12T12:42:56.5931164Z"
+        },
+        {
+          "line": "frame=00000001 sec=00000004 space=00000000",
+          "host_seconds": 10.2329897,
+          "utc": "2026-10-12T12:43:00.5678353Z"
+        },
+        {
+          "line": "frame=00000002 sec=00000008 space=00000000",
+          "host_seconds": 14.285256,
+          "utc": "2026-10-12T12:43:04.620066Z"
+        },
+        {
+          "line": "frame=00000003 sec=0000000C space=00000000",
+          "host_seconds": 18.2226558,
+          "utc": "2026-10-12T12:43:08.55743Z"
+        },
+        {
+          "line": "frame=00000004 sec=0000000F space=00000000",
+          "host_seconds": 21.2849297,
+          "utc": "2026-10-12T12:43:11.619677Z"
+        },
+        {
+          "line": "frame=00000005 sec=00000013 space=00000000",
+          "host_seconds": 25.2184773,
+          "utc": "2026-10-12T12:43:15.5531893Z"
+        },
+        {
+          "line": "frame=00000006 sec=00000017 space=00000000",
+          "host_seconds": 29.2688421,
+          "utc": "2026-10-12T12:43:19.6035181Z"
+        },
+        {
+          "line": "frame=00000007 sec=0000001B space=00000000",
+          "host_seconds": 33.205689,
+          "utc": "2026-10-12T12:43:23.5403301Z"
+        },
+        {
+          "line": "frame=00000008 sec=0000001E space=00000000",
+          "host_seconds": 36.2658077,
+          "utc": "2026-10-12T12:43:26.6004215Z"
+        },
+        {
+          "line": "frame=00000009 sec=00000022 space=00000000",
+          "host_seconds": 40.2019517,
+          "utc": "2026-10-12T12:43:30.5365306Z"
+        },
+        {
+          "line": "frame=0000000A sec=00000026 space=00000000",
+          "host_seconds": 44.2695647,
+          "utc": "2026-10-12T12:43:34.6041075Z"
+        },
+        {
+          "line": "frame=0000000B sec=0000002A space=00000000",
+          "host_seconds": 48.2005337,
+          "utc": "2026-10-12T12:43:38.5350412Z"
+        },
+        {
+          "line": "frame=0000000C sec=0000002D space=00000000",
+          "host_seconds": 51.2677067,
+          "utc": "2026-10-12T12:43:41.6021868Z"
+        },
+        {
+          "line": "frame=0000000D sec=00000031 space=00000000",
+          "host_seconds": 55.20556,
+          "utc": "2026-10-12T12:43:45.5400054Z"
+        },
+        {
+          "line": "frame=0000000E sec=00000035 space=00000000",
+          "host_seconds": 59.2501125,
+          "utc": "2026-10-12T12:43:49.5845219Z"
+        },
+        {
+          "line": "frame=0000000F sec=00000039 space=00000000",
+          "host_seconds": 63.1908777,
+          "utc": "2026-10-12T12:43:53.5252519Z"
+        },
+        {
+          "line": "frame=00000010 sec=0000003C space=00000000",
+          "host_seconds": 66.2503274,
+          "utc": "2026-10-12T12:43:56.5846742Z"
+        },
+        {
+          "line": "result=00000000 kbd=00000001",
+          "host_seconds": 66.2503618,
+          "utc": "2026-10-12T12:43:56.5847078Z"
+        }
+      ],
+      "ready_to_result_host_seconds": 59.99253529999999,
+      "registers": [
+        {
+          "host_seconds": 67.2961055,
+          "values": {
+            "rdi": 16,
+            "r15": 8,
+            "rsi": 65542,
+            "r11": 268445612,
+            "r14": 1129530929,
+            "r13": 2,
+            "r12": 486411912,
+            "r9": 6,
+            "rcx": 486576128,
+            "rsp": 486416328,
+            "r10": 0,
+            "rip": 268445618
+          }
+        },
+        {
+          "host_seconds": 68.3470756,
+          "values": {
+            "rdi": 16,
+            "r15": 8,
+            "rsi": 65542,
+            "r11": 268445612,
+            "r14": 1129530929,
+            "r13": 2,
+            "r12": 486411912,
+            "r9": 6,
+            "rcx": 486576128,
+            "rsp": 486416328,
+            "r10": 0,
+            "rip": 268445618
+          }
+        }
+      ],
+      "local_observation_sha256": "3f6f6721c76cec7cef05e9e55a9770508f2518a8cbd57c8499fa868ca4bcd24a",
+      "generated_input": false
+    },
+    {
+      "trial": "cold-06",
+      "profile": "gp",
+      "status": "passed",
+      "events": [
+        {
+          "line": "ClasSICK 0.97 UART v2",
+          "host_seconds": 6.1119534,
+          "utc": "2026-10-12T12:44:05.8442864Z"
+        },
+        {
+          "line": "fw rev=00010000 state=00000000 vendor=EDK II",
+          "host_seconds": 6.1119927,
+          "utc": "2026-10-12T12:44:05.8443247Z"
+        },
+        {
+          "line": "own img=0000000010000000 bun=000000001CF90000 stk=000000001CFE1000",
+          "host_seconds": 6.1119995,
+          "utc": "2026-10-12T12:44:05.8443315Z"
+        },
+        {
+          "line": "keyboard ready",
+          "host_seconds": 6.1120044,
+          "utc": "2026-10-12T12:44:05.8443364Z"
+        },
+        {
+          "line": "qual port=00000003/00000003 a20=00000000/00000000",
+          "host_seconds": 6.1124415,
+          "utc": "2026-10-12T12:44:05.8447742Z"
+        },
+        {
+          "line": "alias q=000000001D105480 type=00000004",
+          "host_seconds": 6.1124705,
+          "utc": "2026-10-12T12:44:05.8448025Z"
+        },
+        {
+          "line": "frame=00000000 sec=00000000 space=00000000",
+          "host_seconds": 6.1124763,
+          "utc": "2026-10-12T12:44:05.8448083Z"
+        },
+        {
+          "line": "frame=00000001 sec=00000004 space=00000000",
+          "host_seconds": 10.053802,
+          "utc": "2026-10-12T12:44:09.7860999Z"
+        },
+        {
+          "line": "frame=00000002 sec=00000008 space=00000000",
+          "host_seconds": 14.1176047,
+          "utc": "2026-10-12T12:44:13.8498665Z"
+        },
+        {
+          "line": "frame=00000003 sec=0000000C space=00000000",
+          "host_seconds": 18.0599292,
+          "utc": "2026-10-12T12:44:17.7921559Z"
+        },
+        {
+          "line": "frame=00000004 sec=0000000F space=00000000",
+          "host_seconds": 21.1212386,
+          "utc": "2026-10-12T12:44:20.8534383Z"
+        },
+        {
+          "line": "frame=00000005 sec=00000013 space=00000000",
+          "host_seconds": 25.0542156,
+          "utc": "2026-10-12T12:44:24.7863804Z"
+        },
+        {
+          "line": "frame=00000006 sec=00000017 space=00000000",
+          "host_seconds": 29.1002192,
+          "utc": "2026-10-12T12:44:28.8323477Z"
+        },
+        {
+          "line": "frame=00000007 sec=0000001B space=00000000",
+          "host_seconds": 33.041385,
+          "utc": "2026-10-12T12:44:32.7734783Z"
+        },
+        {
+          "line": "frame=00000008 sec=0000001E space=00000000",
+          "host_seconds": 36.1040757,
+          "utc": "2026-10-12T12:44:35.8361419Z"
+        },
+        {
+          "line": "frame=00000009 sec=00000022 space=00000000",
+          "host_seconds": 40.0393535,
+          "utc": "2026-10-12T12:44:39.7713848Z"
+        },
+        {
+          "line": "frame=0000000A sec=00000026 space=00000000",
+          "host_seconds": 44.04021,
+          "utc": "2026-10-12T12:44:43.7722055Z"
+        },
+        {
+          "line": "frame=0000000B sec=0000002A space=00000000",
+          "host_seconds": 48.0862069,
+          "utc": "2026-10-12T12:44:47.8181666Z"
+        },
+        {
+          "line": "frame=0000000C sec=0000002D space=00000000",
+          "host_seconds": 51.0377821,
+          "utc": "2026-10-12T12:44:50.7697153Z"
+        },
+        {
+          "line": "frame=0000000D sec=00000031 space=00000000",
+          "host_seconds": 55.0889276,
+          "utc": "2026-10-12T12:44:54.8208249Z"
+        },
+        {
+          "line": "frame=0000000E sec=00000035 space=00000000",
+          "host_seconds": 59.0231684,
+          "utc": "2026-10-12T12:44:58.7550306Z"
+        },
+        {
+          "line": "frame=0000000F sec=00000039 space=00000000",
+          "host_seconds": 63.1201042,
+          "utc": "2026-10-12T12:45:02.8519305Z"
+        },
+        {
+          "line": "frame=00000010 sec=0000003C space=00000000",
+          "host_seconds": 66.0724991,
+          "utc": "2026-10-12T12:45:05.8042985Z"
+        },
+        {
+          "line": "result=00000000 kbd=00000001",
+          "host_seconds": 66.0725509,
+          "utc": "2026-10-12T12:45:05.8043494Z"
+        }
+      ],
+      "ready_to_result_host_seconds": 59.96054649999999,
+      "registers": [
+        {
+          "host_seconds": 67.1154682,
+          "values": {
+            "rdi": 16,
+            "r15": 8,
+            "rsi": 65542,
+            "r11": 268445616,
+            "r14": 1129530929,
+            "r13": 2,
+            "r12": 486411912,
+            "r9": 13,
+            "rcx": 486576128,
+            "rsp": 486416328,
+            "r10": 40,
+            "rip": 268445622
+          }
+        },
+        {
+          "host_seconds": 68.186321,
+          "values": {
+            "rdi": 16,
+            "r15": 8,
+            "rsi": 65542,
+            "r11": 268445616,
+            "r14": 1129530929,
+            "r13": 2,
+            "r12": 486411912,
+            "r9": 13,
+            "rcx": 486576128,
+            "rsp": 486416328,
+            "r10": 40,
+            "rip": 268445622
+          }
+        }
+      ],
+      "local_observation_sha256": "214e72ab6b0be848fc5d70bc9c2aeee52573d9422d8f4b7143cc0e0398ca5802",
+      "generated_input": false
+    },
+    {
+      "trial": "cold-07",
+      "profile": "none",
+      "status": "passed",
+      "events": [
+        {
+          "line": "ClasSICK 0.97 UART v2",
+          "host_seconds": 6.6201016,
+          "utc": "2026-10-12T12:45:15.352855Z"
+        },
+        {
+          "line": "fw rev=00010000 state=00000000 vendor=EDK II",
+          "host_seconds": 6.6201382,
+          "utc": "2026-10-12T12:45:15.3528908Z"
+        },
+        {
+          "line": "own img=0000000010000000 bun=000000001CF90000 stk=000000001CFE1000",
+          "host_seconds": 6.6201443,
+          "utc": "2026-10-12T12:45:15.3528968Z"
+        },
+        {
+          "line": "keyboard ready",
+          "host_seconds": 6.6202216,
+          "utc": "2026-10-12T12:45:15.3529745Z"
+        },
+        {
+          "line": "qual port=00000003/00000003 a20=00000000/00000000",
+          "host_seconds": 6.6204771,
+          "utc": "2026-10-12T12:45:15.3532298Z"
+        },
+        {
+          "line": "alias q=000000001D105480 type=00000004",
+          "host_seconds": 6.6204884,
+          "utc": "2026-10-12T12:45:15.3532409Z"
+        },
+        {
+          "line": "frame=00000000 sec=00000000 space=00000000",
+          "host_seconds": 6.6204939,
+          "utc": "2026-10-12T12:45:15.3532464Z"
+        },
+        {
+          "line": "frame=00000001 sec=00000004 space=00000000",
+          "host_seconds": 10.5559786,
+          "utc": "2026-10-12T12:45:19.2886973Z"
+        },
+        {
+          "line": "frame=00000002 sec=00000008 space=00000000",
+          "host_seconds": 14.6166336,
+          "utc": "2026-10-12T12:45:23.349316Z"
+        },
+        {
+          "line": "frame=00000003 sec=0000000C space=00000000",
+          "host_seconds": 18.5557964,
+          "utc": "2026-10-12T12:45:27.2884437Z"
+        },
+        {
+          "line": "frame=00000004 sec=0000000F space=00000000",
+          "host_seconds": 21.6215671,
+          "utc": "2026-10-12T12:45:30.3541871Z"
+        },
+        {
+          "line": "frame=00000005 sec=00000013 space=00000000",
+          "host_seconds": 25.5934832,
+          "utc": "2026-10-12T12:45:34.3260679Z"
+        },
+        {
+          "line": "frame=00000006 sec=00000017 space=00000000",
+          "host_seconds": 29.5294583,
+          "utc": "2026-10-12T12:45:38.2620078Z"
+        },
+        {
+          "line": "frame=00000007 sec=0000001B space=00000000",
+          "host_seconds": 33.5685797,
+          "utc": "2026-10-12T12:45:42.3010935Z"
+        },
+        {
+          "line": "frame=00000008 sec=0000001E space=00000000",
+          "host_seconds": 36.5315355,
+          "utc": "2026-10-12T12:45:45.264023Z"
+        },
+        {
+          "line": "frame=00000009 sec=00000022 space=00000000",
+          "host_seconds": 40.5667762,
+          "utc": "2026-10-12T12:45:49.2992274Z"
+        },
+        {
+          "line": "frame=0000000A sec=00000026 space=00000000",
+          "host_seconds": 44.6163028,
+          "utc": "2026-10-12T12:45:53.3487183Z"
+        },
+        {
+          "line": "frame=0000000B sec=0000002A space=00000000",
+          "host_seconds": 48.5565058,
+          "utc": "2026-10-12T12:45:57.2888862Z"
+        },
+        {
+          "line": "frame=0000000C sec=0000002D space=00000000",
+          "host_seconds": 51.615225,
+          "utc": "2026-10-12T12:46:00.3475784Z"
+        },
+        {
+          "line": "frame=0000000D sec=00000031 space=00000000",
+          "host_seconds": 55.5571654,
+          "utc": "2026-10-12T12:46:04.2894837Z"
+        },
+        {
+          "line": "frame=0000000E sec=00000035 space=00000000",
+          "host_seconds": 59.5382449,
+          "utc": "2026-10-12T12:46:08.2705274Z"
+        },
+        {
+          "line": "frame=0000000F sec=00000039 space=00000000",
+          "host_seconds": 63.603207,
+          "utc": "2026-10-12T12:46:12.3354534Z"
+        },
+        {
+          "line": "frame=00000010 sec=0000003C space=00000000",
+          "host_seconds": 66.5533911,
+          "utc": "2026-10-12T12:46:15.2856112Z"
+        },
+        {
+          "line": "result=00000000 kbd=00000001",
+          "host_seconds": 66.5534278,
+          "utc": "2026-10-12T12:46:15.285647Z"
+        }
+      ],
+      "ready_to_result_host_seconds": 59.933206199999994,
+      "registers": [
+        {
+          "host_seconds": 67.5940317,
+          "values": {
+            "rsp": 486411912,
+            "rip": 268445614
+          }
+        },
+        {
+          "host_seconds": 68.6368801,
+          "values": {
+            "rsp": 486411912,
+            "rip": 268445614
+          }
+        }
+      ],
+      "local_observation_sha256": "326d38a68edf5fe5255d11dada7d1c8499070b0d4ef802cbd86d866bc018d29b",
+      "generated_input": false
+    }
+  ],
+  "guest_memory_read": false,
+  "cr2_observed": false,
+  "other_vms_modified": false,
+  "formal_b2": "partial-criterion-6-unchanged",
+  "full_editions": "not-started",
+  "parity": "not-tested",
+  "limits": [
+    "two named vectors/IST1 on this exact platform only",
+    "no NMI/double-fault/recovery/physical-hardware claim",
+    "human provenance review pending"
+  ],
+  "batch_wrapper_exit_code": 1,
+  "batch_wrapper_error": "Invalid host redirection after six observers successfully completed; per-run logs retained.",
+  "final_vm_state": "poweroff",
+  "final_inventory": "one-new-identity-only"
+}

@@ -3,7 +3,18 @@
 Access/review date for external sources: **2026-10-07** unless noted. Catalog
 eligibility applies to the stated scope, not every resource reachable from a URL.
 No Apple executable, source, disassembly, decompilation, or copied asset was used.
-No reference-system black-box observation has yet been performed.
+Project-owned black-box native trials are recorded separately below.
+
+## SRC-0087 - Own native terminal-fault observations
+
+2026-10-12; SPEC-0019 / TEST-0027. Three UD and three GP cold starts plus one
+normal control on one newly isolated exact cleared VirtualBox machine. Only own
+post-success serial output and selected CPU registers observed, never memory or
+CR2. [Report](../docs/development/fault-checkpoint.md) and original sanitized
+manifest; compiled source `2f64689521fe57866b7a70572f2f3bb8a7bbb008`, CI
+38250103771 passes both jobs and six image hashes match. The outer batch logging
+syntax error occurs after all observers pass; preserve it separately. This is
+project development evidence, not historical/physical/firmware certification.
 
 ## SRC-0086 - Original native fault fixtures and verification
 

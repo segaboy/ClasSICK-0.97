@@ -1,5 +1,13 @@
 # Project status
 
+2026-10-12: the short native PC fault checkpoint passes three real UD and three
+real GP cold starts, owned first-fault/IST1 capture and stable terminal register
+observations, plus one normal control. [Report](development/fault-checkpoint.md),
+SPEC-0019 / SPEC-0008 v2 / IMPL-0023 / TEST-0027. Fresh 876-check local chain
+and CI 38250103771 pass; all six EFI fingerprints match. Original Mac ROM
+checkpoint remains intact. B2 criterion 6, full OS services/physical/edition
+gates remain open. Shared trap/service gateway is the next functional lane.
+
 2026-10-12: the original SPEC-0018 ROM passes two timed cold starts on Snow's
 128K model, own image/TRAP diagnostics and the owner-confirmed mouse test
 (two observed presses). [Trial](development/mac-rom-trial.md), IMPL-0022 /
