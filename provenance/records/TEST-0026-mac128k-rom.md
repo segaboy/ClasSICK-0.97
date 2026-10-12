@@ -30,3 +30,10 @@ Image hashes, source-input fingerprints, tool identities and scope are in
 has not executed in this initial record. No operator, time calibration, physical
 hardware, System 1 compatibility or full edition result follows from these checks.
 Original fixtures/code assisted by Codex; human provenance review pending.
+
+Publication follow-up: CI 38192057023 at `7c673f79` passed the Linux ROM
+twins/audits and all 24 Windows Mac suites/four fault controls. Its Windows job
+nevertheless exited 1 because the script left the expected final fault child's
+nonzero LASTEXITCODE for the CI PowerShell wrapper. Reset that status only after
+all results are checked/recorded; a fresh local run passes with process exit 0.
+This changes reporting, not guest code or either ROM image. Corrected CI pending.

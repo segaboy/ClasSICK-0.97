@@ -40,3 +40,6 @@ foreach($taskProfile in $taskProfiles) {
 $taskJson=@{specification='SPEC-0018';profiles=$taskRows;checks=24;zero_divisor_controls=4;emulator_run=$false} | ConvertTo-Json -Depth 8
 [IO.File]::WriteAllText((Join-Path $taskBuild 'manifest.json'),$taskJson,[Text.UTF8Encoding]::new($false))
 Write-Output 'Mac ROM hosted verification PASS: 24 suites in four profiles; four zero-divisor controls.'
+# Expected child faults have already been checked and recorded above. Do not
+# propagate the final control's nonzero status through PowerShell's CI wrapper.
+$global:LASTEXITCODE=0
