@@ -5,6 +5,130 @@ eligibility applies to the stated scope, not every resource reachable from a URL
 No Apple executable, source, disassembly, decompilation, or copied asset was used.
 No reference-system black-box observation has yet been performed.
 
+## SRC-0083 - Own original ROM verification artifacts
+
+- Codex, 2026-10-11, SPEC-0018 / IMPL-0022 / TEST-0026 and the
+  [build/hosted snapshot](../docs/development/mac-rom-evidence.md). Original
+  sources/fixtures only; 24 suites in four Clang/GCC profiles and four
+  zero-divisor fault controls; Os/O0 68000 image twins, corruption/omitted-object
+  controls, vector/span/helper/stack audits. Generated outputs remain outside Git.
+- Initial checkpoint is unloaded verification, not a Snow run, historical API
+  result, physical boot or whole-OS budget proof. Existing core/PC source bytes
+  are unchanged. Any trial/CI results get separate dated observations.
+- AI-assisted original implementation and self-review; human provenance review
+  pending. No target library implementation, emulator source or Apple payload.
+
+## SRC-0082 - Snow v1.5.0 Windows x86-64 black-box platform clearance
+
+- Publisher release <https://github.com/twvd/snow/releases/tag/v1.5.0>,
+  published 2026-07-06; Windows asset `Snow.Windows.x86_64.zip`, 9,423,852 bytes,
+  SHA-256 `d98643b7da36ec1a9adb39b8ca06f317a61c4bd07c033a22e3438c16974d955a`,
+  matches GitHub publisher asset digest. Archive contains only `snowemu.exe`,
+  23,706,597 bytes, SHA-256
+  `32cf5285582c0f509e4f1ac38d86bfb90440bae9da43b7823bfb0841dea588e6`.
+- Release license metadata: MIT; LICENSE blob
+  `a8abdfb415ddafc764b1e3530c96d5d4ae2a03e4` at the exact release tag. Reviewed
+  2026-10-11: user documentation and publisher asset/license metadata only.
+  No emulator source, disassembly, reference ROM or disk image retrieved.
+- Cleared only as an uncertified black-box test platform for SPEC-0018 under
+  SRC-0076. Not a product dependency, source input, historical oracle or
+  transitive-license/provenance certification. Own ROM only, 128K model, normal
+  speed, validation override, no persistent PRAM/disks/network, isolated app
+  settings. Clearance precedes execution; actual observations belong in TEST-0026.
+
+## SRC-0081 - Pinned Ubuntu GCC 13.3 68000 cross tooling
+
+- Ubuntu 24.04 package metadata and downloaded binary packages, 2026-10-11;
+  GCC/cpp/base/libgcc-header package version `13.3.0-6ubuntu2~24.04cross1`,
+  binutils `2.42-4ubuntu2.10`, target libc headers `2.39-0ubuntu8.2cross1`,
+  Linux headers `6.8.0-39.39cross1`, host libisl `0.26-3build1.1`, host libmpc
+  `1.3.1-1build1.1`. Origin archive.ubuntu.com, exact package hashes in the
+  [tool lock](../scripts/m68k-toolchain-lock.json).
+- Eligible compiler/header/build tooling only. Relocated workspace copy runs in
+  existing Ubuntu 24.04 WSL without installing system packages. Target runtime
+  archives and implementation bodies are not read, linked or redistributed.
+  GCC/GNU binutils licenses and compiler host libraries remain separate from
+  ClasSICK's own GPL-3.0-or-later code. Product-runtime adoption is not approved.
+- GCC option prose: <https://gcc.gnu.org/onlinedocs/gcc/M680x0-Options.html>;
+  compiler integer-helper interfaces: <https://gcc.gnu.org/onlinedocs/gccint/Integer-library-routines.html>.
+  No compiler/runtime source or sample algorithm used. Independently authored
+  helpers and explicit -nostdlib/68000 assembly validation under SPEC-0018.
+
+## SRC-0080 - Published Inside Macintosh III hardware scan, separate printing
+
+- Apple Computer, Inside Macintosh Volume III, Addison-Wesley, copyright 1985,
+  ISBN 0-201-17733-1; eleventh printing June 1990. Public scan at
+  <https://vintageapple.org/inside_o/pdf/Inside_Macintosh_Volume_III_1985.pdf>,
+  290 pages, 50,687,193 bytes, SHA-256
+  `4c0de9a3a4d41c41b8462b2a77aad8b95b92e1980afff165c1f986da0a81988b`.
+  Title/copyright/retail warranty identify a published edition, not a draft.
+- Read 2026-10-11 using bundled pypdf and Poppler page rendering. Hardware prose
+  and factual summary constants only: III-17-19, III-39-46 (PDF pages printed
+  locator +7), visually checked the VIA/address tables. This is a different
+  scan/printing from the owner's SRC-0071; it corroborates those hardware facts,
+  not byte identity. No equate files, code samples or Apple algorithms adopted;
+  independently declare cited numeric interface facts rather than copying text.
+- Eligible published 128K/512K hardware interface; later-manual System 1 API
+  applicability still needs confirmation. Copyrighted book stays outside Git;
+  no pages or copied assets republished.
+
+## SRC-0079 - Motorola MC68000UM reset and exception prose
+
+- Motorola M68000 8-/16-/32-Bit Microprocessors User's Manual, publisher-successor
+  copy <https://www.nxp.com/docs/en/reference-manual/MC68000UM.pdf>, accessed
+  2026-10-11 through cached browser PDF text. Sections 6.2.1, 6.2.4, 6.3.1 and
+  6.3.5, printed 6-4, 6-9 and 6-11-13. Scope: actual MC68000 reset SSP/PC,
+  supervisor/mask state, vector locations and ordinary TRAP exception return.
+- Eligible published CPU-interface prose; distinguish MC68010-specific VBR and
+  frames, which are not adopted. Complements SRC-0069's family reference.
+  Direct local download was blocked by publisher delivery; no local-file hash
+  or visual-table verification is claimed. No sample code or implementation used.
+
+## SRC-0078 - Synertek SY6522 published register references
+
+- Synertek Inc., SY6522/SY6522A Programming Reference, W-5K-9/80 (September 1980),
+  <http://www.6502.org/documents/datasheets/synertek/synertek_sy6522_programming_reference.pdf>,
+  7 PDF pages, 585,409 bytes, SHA-256
+  `96f0d696218a4cebb1124f555dbb13774d125d3f735ab7630d1418fc047e92fe`.
+  Title/publisher and internal-register/port/interrupt tables visually checked;
+  PDF pages 2/3/6 correspond to printed 2-3/4-5/10-11. AN5 corrects the earlier
+  reference's IER bit-7 read description; this profile never reads IER.
+- Synertek Applications Information AN5, March 1982, copyright 1982, publisher
+  reprint notice, <http://www.6502.org/documents/datasheets/synertek/synertek_sy6522.pdf>,
+  12 pages, 5,920,052 bytes, SHA-256
+  `cd617332a41f6820a50138c8f45883119f0df6ce710206b607c304142746d7f1`.
+  Section 1/Figure 1 (page 2) confirms CA1 clear and enable semantics. A separately
+  archived GIF reprint corroborates the title/table but is not the same PDF.
+- Eligible published hardware-interface descriptions, not code examples.
+  Read 2026-10-11 through Poppler page images; documents stay outside Git.
+  No Linux driver, confidential draft, emulator source or sample code is an input.
+
+## SRC-0077 - Snow published user documentation and license metadata
+
+- Thomas W. / Snow, <https://snowemu.com/>, <https://docs.snowemu.com/> and
+  <https://docs.snowemu.com/manual/starting>, reviewed 2026-10-11. Publisher
+  describes 128K support, hardware emulation without ROM hooks, and a Load ROM
+  advanced option disabling ROM validation for modified images. Eligibility is
+  user interface documentation only; these statements are not observed startup.
+- MIT license identity checked through publisher release/license metadata.
+  No repository implementation, patch code, debugger static-global catalogs or
+  reference payload read. Exact binary clearance is SRC-0082; no OS dependency.
+
+## SRC-0076 - Owner directs own-ROM startup in Snow
+
+- Owner, 2026-10-11: reaffirmed PC/Mac ports without an Apple-supplied ROM and
+  delegated the practical path; allowed recommendations of other emulators.
+  After the proposal to build our replacement ROM and test it in Snow, answered
+  "OK, do it!". The lead stated continuation strictly from published manuals
+  after the discovery audit. Scoped continuation includes own specification,
+  original code/tests, tool preparation, exact black-box platform clearance and
+  isolated Snow trial, ordinary commits/pushes and HQ Git wiki plans.
+- No emulator fork, source inspection, delegation, new chats, automation,
+  Apple payload, physical writing or OneNote operation. Human provenance review
+  remains pending; the continuation is not a legal/two-team certification or
+  waiver permitting uncertain material. Size budgets are deferred, not dropped;
+  real Macintosh/Mini vMac and full edition/parity gates remain separate.
+
 ## SRC-0075 — Own Mini vMac admission review and installed tool capability
 
 - Codex, 2026-10-11, [admission review](../docs/research/mini-vmac-admission.md),

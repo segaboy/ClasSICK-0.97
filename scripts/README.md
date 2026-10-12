@@ -1,7 +1,18 @@
 # Bootstrap scripts
 
-All scripts target built-in Windows PowerShell 5.1 and keep generated tools/output
-out of public commits.
+PowerShell scripts target built-in Windows PowerShell 5.1 and keep generated
+tools/output out of public commits. The original Mac ROM uses Python 3 and
+pinned Ubuntu tools through WSL or the Linux CI runner.
+
+- `Setup-M68k.py --output <workspace-tools>`: verifies/unpacks the nine locked
+  compiler/tool/header packages without installing system packages or adopting
+  their target runtimes. Run in Ubuntu 24.04 with Python 3 and dpkg-deb.
+- `Build-MacROM.py --tool-root <workspace-tools>/root --output <fresh-output>`:
+  original 68000-only Os/O0 ROM twins, vectors/seal/ELF spans/stack/import audits,
+  seven corruption and six omitted-object controls per build. Never runs a guest.
+- `Verify-MacROM.ps1 -BuildRoot <fresh-directory>`: 24 independent hosted suites
+  across four Clang/GCC width/optimization profiles, plus four zero-divisor fault
+  controls. This is separate from the existing PC matrix and certifies no boot.
 
 - `Inventory-Windows.ps1`: sanitized PATH/common-location capability inventory.
 - `Setup-Windows.ps1`: prepare SHA-256-pinned portable tools; optional `-Offline`.

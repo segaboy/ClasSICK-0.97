@@ -1,0 +1,89 @@
+{
+  "schema_version": 1,
+  "host": "Ubuntu 24.04 x86-64",
+  "compiler": "GCC 13.3.0",
+  "binutils": "2.42",
+  "packages": [
+    {
+      "package": "binutils-m68k-linux-gnu",
+      "version": "2.42-4ubuntu2.10",
+      "architecture": "amd64",
+      "archive": "binutils-m68k-linux-gnu_2.42-4ubuntu2.10_amd64.deb",
+      "url": "https://archive.ubuntu.com/ubuntu/pool/universe/b/binutils/binutils-m68k-linux-gnu_2.42-4ubuntu2.10_amd64.deb",
+      "size_bytes": 1307824,
+      "sha256": "e12c81d8d7ecd645f0e6da4f536d91b3d465d2f775e914c90415108cb72b5784"
+    },
+    {
+      "package": "cpp-13-m68k-linux-gnu",
+      "version": "13.3.0-6ubuntu2~24.04cross1",
+      "architecture": "amd64",
+      "archive": "cpp-13-m68k-linux-gnu_13.3.0-6ubuntu2~24.04cross1_amd64.deb",
+      "url": "https://archive.ubuntu.com/ubuntu/pool/universe/g/gcc-13-cross-ports/cpp-13-m68k-linux-gnu_13.3.0-6ubuntu2~24.04cross1_amd64.deb",
+      "size_bytes": 8650240,
+      "sha256": "3976e3a9c98ee17338f004086435d86ae3bc8c832c65bb9e7a3963aa5c0e6361"
+    },
+    {
+      "package": "gcc-13-m68k-linux-gnu-base",
+      "version": "13.3.0-6ubuntu2~24.04cross1",
+      "architecture": "amd64",
+      "archive": "gcc-13-m68k-linux-gnu-base_13.3.0-6ubuntu2~24.04cross1_amd64.deb",
+      "url": "https://archive.ubuntu.com/ubuntu/pool/universe/g/gcc-13-cross-ports/gcc-13-m68k-linux-gnu-base_13.3.0-6ubuntu2~24.04cross1_amd64.deb",
+      "size_bytes": 51696,
+      "sha256": "f28689247639ab76859fd6105a2c286958a9a5af9a3125ed82c23e0be0b35234"
+    },
+    {
+      "package": "gcc-13-m68k-linux-gnu",
+      "version": "13.3.0-6ubuntu2~24.04cross1",
+      "architecture": "amd64",
+      "archive": "gcc-13-m68k-linux-gnu_13.3.0-6ubuntu2~24.04cross1_amd64.deb",
+      "url": "https://archive.ubuntu.com/ubuntu/pool/universe/g/gcc-13-cross-ports/gcc-13-m68k-linux-gnu_13.3.0-6ubuntu2~24.04cross1_amd64.deb",
+      "size_bytes": 16539174,
+      "sha256": "f6016f6aece2380e7378aaaee76eabe1fc597a7f3b200b7dc82d6ef91b9225ce"
+    },
+    {
+      "package": "libc6-dev-m68k-cross",
+      "version": "2.39-0ubuntu8.2cross1",
+      "architecture": "all",
+      "archive": "libc6-dev-m68k-cross_2.39-0ubuntu8.2cross1_all.deb",
+      "url": "https://archive.ubuntu.com/ubuntu/pool/universe/c/cross-toolchain-base-ports/libc6-dev-m68k-cross_2.39-0ubuntu8.2cross1_all.deb",
+      "size_bytes": 1351284,
+      "sha256": "d91be1cd7da869055b76574a3e54ed1940bd5b46b796735edd4a17f996e62918"
+    },
+    {
+      "package": "libgcc-13-dev-m68k-cross",
+      "version": "13.3.0-6ubuntu2~24.04cross1",
+      "architecture": "all",
+      "archive": "libgcc-13-dev-m68k-cross_13.3.0-6ubuntu2~24.04cross1_all.deb",
+      "url": "https://archive.ubuntu.com/ubuntu/pool/universe/g/gcc-13-cross-ports/libgcc-13-dev-m68k-cross_13.3.0-6ubuntu2~24.04cross1_all.deb",
+      "size_bytes": 187822,
+      "sha256": "c6478f7e11eb36e2aca1574ee2f73e5715acfe36c7bc6584174e33c9a4f44e68"
+    },
+    {
+      "package": "libisl23",
+      "version": "0.26-3build1.1",
+      "architecture": "amd64",
+      "archive": "libisl23_0.26-3build1.1_amd64.deb",
+      "url": "https://archive.ubuntu.com/ubuntu/pool/main/i/isl/libisl23_0.26-3build1.1_amd64.deb",
+      "size_bytes": 679812,
+      "sha256": "4e040926e50fb961fae9bf95660189d468336a4a17bc321872c434fc8f777e7f"
+    },
+    {
+      "package": "libmpc3",
+      "version": "1.3.1-1build1.1",
+      "architecture": "amd64",
+      "archive": "libmpc3_1.3.1-1build1.1_amd64.deb",
+      "url": "https://archive.ubuntu.com/ubuntu/pool/main/m/mpclib3/libmpc3_1.3.1-1build1.1_amd64.deb",
+      "size_bytes": 54636,
+      "sha256": "cebe6098bb3d66fdacac9dc6fe406a651216d9c00f27c3f9c159d15d96cdf864"
+    },
+    {
+      "package": "linux-libc-dev-m68k-cross",
+      "version": "6.8.0-39.39cross1",
+      "architecture": "all",
+      "archive": "linux-libc-dev-m68k-cross_6.8.0-39.39cross1_all.deb",
+      "url": "https://archive.ubuntu.com/ubuntu/pool/universe/c/cross-toolchain-base-ports/linux-libc-dev-m68k-cross_6.8.0-39.39cross1_all.deb",
+      "size_bytes": 1361288,
+      "sha256": "40f5b84131772e67d61dfa7c3ce2a9c3b292c976fbd51f9bb633d8b23014a2bd"
+    }
+  ]
+}

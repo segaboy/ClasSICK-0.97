@@ -16,6 +16,13 @@ does not imply that the complete project foundation or any OS boot is finished.
 
 ## Achieved
 
+- SPEC-0018 / IMPL-0022 / TEST-0026 builds the original 128K ROM demonstrator:
+  reset/overlay/own vectors, image seal, own TRAP probe, original monochrome
+  scene and VBL/mouse loop. 24 hosted suites, four fault controls and Os/O0
+  ROM twins/negative controls pass. [Snapshot](development/mac-rom-evidence.md).
+  Snow is cleared only as a black-box platform; trial not yet run at this
+  preparation checkpoint. No full Macintosh OS/edition gate closes.
+
 - Mini vMac admission review (2026-10-11, SRC-0074/0075): publisher docs
   explicitly describe loaded-ROM patching, including a replacement disk driver.
   The documented check/test switches do not establish an unpatched image.

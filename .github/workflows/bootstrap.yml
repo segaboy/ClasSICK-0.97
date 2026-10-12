@@ -32,3 +32,26 @@ jobs:
       - name: Verify hosted core, loader, exceptions, presenter, timer, keyboard, UART and boot media
         shell: powershell
         run: .\scripts\Verify-BootMedia.ps1 -BuildRoot build\media-verification -Sanitizers
+      - name: Verify original Mac ROM hosted contracts
+        shell: powershell
+        run: .\scripts\Verify-MacROM.ps1 -BuildRoot build\mac-hosted
+
+  m68k-rom:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Prepare hash-pinned workspace 68000 tools
+        run: python3 scripts/Setup-M68k.py --output "$RUNNER_TEMP/classick-m68k"
+      - name: Build and audit original ROM twins
+        run: python3 scripts/Build-MacROM.py --tool-root "$RUNNER_TEMP/classick-m68k/root" --output "$RUNNER_TEMP/classick-rom"
+      - name: Retain own ROM and sanitized build manifest
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
+        with:
+          name: classick-original-68000-rom
+          path: |
+            ${{ runner.temp }}/classick-rom/Os-a/classick-097.rom
+            ${{ runner.temp }}/classick-rom/manifest.json
+          if-no-files-found: error

@@ -1,5 +1,12 @@
 # Tests
 
+`mac-rom.c` (TEST-0026) checks original arithmetic helpers against native-width
+oracles, literal CRC, injected VIA/flag traces, mouse edges and held-button
+behavior, stalled/saturating VBL progress, independent scene pixels and guards.
+`Verify-MacROM.ps1` exercises four hosted profiles and zero-divisor controls;
+`Build-MacROM.py` audits unloaded own ROM twins and rejects corruptions/omitted
+objects. These checks do not execute Macintosh hardware or an emulator.
+
 `uefi-loader.c` (TEST-0013) exercises original x64 EFIAPI callbacks, independent
 CRC and finite exit traces, malformed data/ownership/cleanup and independent bundles.
 It uses live allocated mock storage and never executes privileged transition code

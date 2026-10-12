@@ -3,6 +3,15 @@
 Read `docs/clean-room/POLICY.md`, `CONTRIBUTING.md`, and
 `provenance/README.md` before researching or changing this project.
 
+- On 2026-10-11 the owner reaffirmed independent PC/Mac ports without an Apple
+  supplied ROM, delegated the practical route, allowed other emulators, then
+  said "OK, do it!" after the proposal to build our replacement ROM and test
+  it in Snow (SRC-0076). This supersedes the earlier Mini-vMac-only availability
+  assumption. Continue strictly from eligible published manuals after the
+  recorded discovery audit; no uncertain excerpts or emulator source are inputs.
+  No delegation or emulator fork is authorized. Exact black-box platform
+  clearance precedes launch; retain the existing physical/128K/edition gates.
+
 - On 2026-10-11 the owner made booting in Mini vMac the top priority, "regardless
   of the size" (SRC-0073), and handed the work to ChatGPT. Only Mini vMac is
   available; no real Macintosh. Size budgets are deferred, not dropped. Clear
