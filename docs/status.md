@@ -1,5 +1,13 @@
 # Project status
 
+2026-10-12: the original SPEC-0018 ROM passes two timed cold starts on Snow's
+128K model, own image/TRAP diagnostics and the owner-confirmed mouse test
+(two observed presses). [Trial](development/mac-rom-trial.md), IMPL-0022 /
+TEST-0026 / SRC-0084. Both CI jobs pass at `a4124acd`; its ROM equals the local
+trial image. This completes the scoped startup demonstrator, not the full M0.3
+OS, physical, System 1 parity or edition gates. PC B2 stays partial on the
+unchanged firmware image hash. Earlier checkpoint text below is dated history.
+
 Date: 2026-10-11. Current phase: **B1/M0.1 verified; native VM measurements/input pass, formal B2 partial on firmware image hash**.
 M0.0 technical bootstrap remains verified. The owner explicitly authorized the
 first bounded graphics subsystem in the project implementation chat on this date.

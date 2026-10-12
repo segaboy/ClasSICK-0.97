@@ -1,8 +1,48 @@
 # Original Macintosh 128K ROM trial - 2026-10-11
 
 SPEC-0018 / ADR-0021 / IMPL-0022 / TEST-0026 / SRC-0084.
-**First own-scene startup observed; corrected-image qualification pending.**
-Local date October 11; timestamps below are UTC on October 12.
+**Scoped original-ROM startup, display, timing, trap and live-input checks pass.**
+Initial preparation was October 11; qualification completed October 12. Timestamps
+below are UTC. This is a demonstrator; complete OS and physical gates remain open.
+
+## Qualified candidate and observed outcome - 2026-10-12
+
+Compiled source `a4124acd289f5cd38d8778a764ab879563449f7c`, Os ROM
+SHA-256 `be506ad6e41d06ebcfe11678a4f6a64ba560920b16efa7fef884794f51690005`,
+64 KiB file / 3,308 used ROM bytes / 28 static RAM bytes / 8 KiB reserved stack.
+Two fresh-profile cold starts use the same own-ROM workspace; no saved machine
+state, Apple ROM or disk is involved. Both reach 3,610 counted VBL flags and
+remain running. Polling may coalesce flags while drawing; this is not a
+calibrated clock. The observation intervals below are deliberately coarse.
+
+| Trial | First visible scene UTC | Last incomplete observation | First complete observation | Completion bounds after first scene |
+| --- | --- | --- | --- | --- |
+| cold03 | 01:59:10.511, 540 displayed ticks | 02:00:17.944, 3,000/zero presses | 02:01:04.594, 3,610/zero | More than 67.44, at most 114.09 seconds |
+| cold04 | 11:47:55.241, partial redraw, count unavailable | 11:49:04.123, 3,180/zero presses | 11:52:38.292, 3,610/zero | More than 68.88, at most 283.05 seconds |
+
+Each was still progressing beyond 60 host seconds after its first scene snapshot.
+Cold03 was re-observed before ending: own RAM diagnostics at 0xB00 show magic
+`43533039`, stage 4, ticks 3,610, presses zero, TRAP count one, calculated image
+seal `e333e427`, fault zero. That later recheck is a point observation; no
+unobserved overnight continuity claim is made.
+
+After cold04 completed, the owner operated the mouse and confirmed: "Left button
+worked; stripes changed." At 11:53:58.508 and the subsequent unobscured snapshot,
+the displayed count is two presses. No synthetic guest input is credited.
+The panel returns to its original parity after the second press; the owner
+confirms the intervening visible changes. Both qualified runs were then closed
+normally with emulator exit zero; their isolated logs/screenshots are retained
+outside Git. The earlier pending operator request is superseded by this result.
+
+[CI run 38194014724](https://github.com/segaboy/ClasSICK-0.97/actions/runs/38194014724)
+passes both Windows and Linux jobs at this source pin. Its downloaded original
+Os ROM exactly matches the local/trial image. Os/O0 hashes, source fingerprints,
+symbols and stack/control data match; stack-frame list ordering differs between
+filesystems and is normalized for comparison. CI does not run Snow or the owner
+test. Existing PC hosted/unloaded/media checks also pass, with compiled PC/core
+source unchanged. [Sanitized evidence](mac-rom-trial-evidence.json).
+
+## Preparation and provisional runs (dated history)
 
 Snow v1.5.0-317c188 Windows x86-64 is the exact executable cleared by SRC-0082:
 SHA-256 `32cf5285582c0f509e4f1ac38d86bfb90440bae9da43b7823bfb0841dea588e6`.
@@ -18,6 +58,8 @@ an owner click. The alternate button opened the loader. No system mouse
 settings changed; this was an input-mapping issue, not a ROM execution failure.
 The successful run uses a new isolated application profile and explicit desktop
 execution context. No owner emulator configuration or ROM library was read.
+Automation required the alternate button; the later owner test worked with
+the left button. The precise harness/input cause was not isolated.
 
 Initial Os image from `7c673f79ba4353a75cc08d38904bc2750cc385dd`, SHA-256
 `563b98400615342f841fb11f0a4820127c605b6536ca2ad713c5511fce4d75f4`:

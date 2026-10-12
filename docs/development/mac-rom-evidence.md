@@ -5,6 +5,11 @@ SPEC-0018 / ADR-0021 / IMPL-0022 / TEST-0026; SRC-0076-0082.
 contains startup, an original display test and mouse polling, not System 0.97's
 Toolbox, storage, desktop or applications. All full edition/physical gates remain open.
 
+This is the retained initial preparation checkpoint. The subsequent optimized
+image and passing scoped emulator/operator result are in the separate
+[2026-10-12 trial record](mac-rom-trial.md); do not substitute its measurements
+into this earlier build table.
+
 | Profile | ROM file | Used ROM | Data/BSS | SHA-256 |
 | --- | --- | --- | --- | --- |
 | GCC 13.3 Os | 65,536 bytes | 3,168 bytes | 28 bytes | `563b98400615342f841fb11f0a4820127c605b6536ca2ad713c5511fce4d75f4` |

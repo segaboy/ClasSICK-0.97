@@ -1,0 +1,136 @@
+{
+  "schema_version": 1,
+  "profile": "original-macintosh128k-rom-demonstrator",
+  "specification": "SPEC-0018",
+  "implementation": "IMPL-0022",
+  "test": "TEST-0026",
+  "source": "SRC-0084",
+  "compiled_source_revision": "a4124acd289f5cd38d8778a764ab879563449f7c",
+  "status": "scoped-startup-display-timing-trap-and-live-input-passed",
+  "apple_rom_used": false,
+  "emulator_source_inspected": false,
+  "platform": {
+    "name": "Snow",
+    "version": "1.5.0-317c188",
+    "executable_sha256": "32cf5285582c0f509e4f1ac38d86bfb90440bae9da43b7823bfb0841dea588e6",
+    "clearance": "SRC-0082",
+    "model": "Macintosh 128K",
+    "ram_bytes": 131072,
+    "mouse": "Relative hardware emulation",
+    "speed": "normal",
+    "persistent_pram": false,
+    "extension_rom": false,
+    "disks": false,
+    "network_adapter": false,
+    "serial_bridges": false,
+    "isolated_profile_per_run": true
+  },
+  "roms": [
+    {
+      "optimization": "-Os",
+      "size_bytes": 65536,
+      "used_bytes": 3308,
+      "sha256": "be506ad6e41d06ebcfe11678a4f6a64ba560920b16efa7fef884794f51690005",
+      "seal": "e333e427",
+      "static_ram_bytes": 28
+    },
+    {
+      "optimization": "-O0",
+      "size_bytes": 65536,
+      "used_bytes": 4956,
+      "sha256": "8152397d95c93169b8e41993d7d593c5e26952b64319c7a511f0601ef7b92689",
+      "seal": "33eef0a9",
+      "static_ram_bytes": 28
+    }
+  ],
+  "verification": {
+    "hosted_suites": 24,
+    "hosted_profiles": 4,
+    "zero_divisor_fault_controls": 4,
+    "arithmetic_pairs_per_profile": 100000,
+    "whole_frame_baselines": 5,
+    "native_builds": 4,
+    "corruptions_per_build": 7,
+    "omitted_objects_per_build": 6,
+    "compiler": "m68k-linux-gnu-gcc-13 (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0",
+    "tool_lock_sha256": "a2fe02f949288826f6a1d11b55df1d3305aab4fb4726da83a4fb8695b7f21898",
+    "stack_reserved_bytes": 8192,
+    "frame_sum_plus_margin_bytes": [
+      792,
+      672
+    ],
+    "stack_high_water_measured": false
+  },
+  "ci": {
+    "run_id": 38194014724,
+    "source_revision": "a4124acd289f5cd38d8778a764ab879563449f7c",
+    "windows_job": "passed",
+    "linux_job": "passed",
+    "local_ci_rom_equal": true,
+    "manifest_equal_after_frame_order_normalization": true,
+    "emulator_run_in_ci": false
+  },
+  "trials": [
+    {
+      "source_revision": "a4124acd289f5cd38d8778a764ab879563449f7c",
+      "first_scene_utc": "2026-10-12T01:59:10.511Z",
+      "first_scene_ticks": 540,
+      "last_incomplete_utc": "2026-10-12T02:00:17.944Z",
+      "last_incomplete_ticks": 3000,
+      "first_completed_utc": "2026-10-12T02:01:04.594Z",
+      "completion_elapsed_from_first_scene_bounds_seconds": [
+        67.4358768,
+        114.0863441
+      ],
+      "completed_ticks": 3610,
+      "presses": 0,
+      "operator_confirmation": "pending",
+      "synthetic_guest_input": false,
+      "diagnostics": {
+        "observed_utc": "2026-10-12T11:45:45.416Z",
+        "address": "0xB00",
+        "magic": "43533039",
+        "stage": 4,
+        "ticks": 3610,
+        "presses": 0,
+        "traps": 1,
+        "image_crc": "e333e427",
+        "fault": 0
+      }
+    },
+    {
+      "source_revision": "a4124acd289f5cd38d8778a764ab879563449f7c",
+      "first_scene_utc": "2026-10-12T11:47:55.241Z",
+      "first_scene_ticks": null,
+      "last_incomplete_utc": "2026-10-12T11:49:04.123Z",
+      "last_incomplete_ticks": 3180,
+      "first_completed_utc": "2026-10-12T11:52:38.292Z",
+      "completion_elapsed_from_first_scene_bounds_seconds": [
+        68.8820006,
+        283.0518979000002
+      ],
+      "completed_ticks": 3610,
+      "presses_before_operator": 0,
+      "presses_after_operator": 2,
+      "operator_observed_utc": "2026-10-12T11:53:58.508Z",
+      "operator_confirmation": "Left button worked; stripes changed",
+      "synthetic_guest_input": false
+    }
+  ],
+  "operator": {
+    "status": "passed",
+    "trial": "cold04",
+    "observed_presses": 2,
+    "button": "left",
+    "owner_confirmation": "Left button worked; stripes changed",
+    "synthetic_presses_credited": 0
+  },
+  "limits": [
+    "Original demonstrator only; not complete System 0.97",
+    "No real Macintosh or Mini vMac execution",
+    "Polling may coalesce VBL flags; host observation bounds are not calibration",
+    "No historical Toolbox, desktop, filesystem or application conformance",
+    "Full editions and parity remain open",
+    "Human provenance review pending"
+  ]
+}

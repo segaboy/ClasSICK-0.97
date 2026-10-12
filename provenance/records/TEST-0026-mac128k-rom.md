@@ -62,3 +62,15 @@ generated with the preceding independently authored pixel renderer, padded-row
 preservation, guards, and invalid descriptors. Fresh 68000 twins/controls pass;
 Os/O0 now use 3,308/4,956 ROM bytes. Native qualification is still pending in
 the dated trial record. PC/core compiled paths remain unchanged.
+
+Qualification follow-up, 2026-10-12: source `a4124acd289f5cd38d8778a764ab879563449f7c`
+passes two fresh-profile Snow 128K cold starts to 3,610 flags. Both remain
+incomplete beyond 60 host seconds after the first scene observation, then finish;
+coarse completion bounds are retained, not a calibrated-clock claim. Cold03 own
+RAM shows stage 4, one TRAP return, expected seal and zero fault. In cold04 the
+owner confirms left-button presses change the stripes; two presses are observed
+after completion. No synthetic guest input is credited. Both close with exit 0.
+CI 38194014724 passes both jobs; downloaded Os image matches local/trial, and
+Os/O0 manifests agree after normalizing frame-list order. The prior pending
+qualification text is history. This scoped demonstrator passes; full M0.3,
+physical hardware, historical services, complete budgets and editions stay open.

@@ -46,3 +46,8 @@ multiplication. Shared surface source stays unchanged. Complete-frame baselines
 were generated before the new algorithm using the original pixel implementation;
 no emulator or Apple pixels enter the fixture. TEST-0026 repeats native builds
 and hosted pixel/boundary checks before another startup trial.
+
+The 2026-10-12 qualification follow-up passes two timed cold starts and the
+owner-confirmed mouse test, with CI-matched own image. See the separate
+[trial record](../../docs/development/mac-rom-trial.md). Earlier unloaded/pending
+statements are dated history, not current status. No full OS or physical claim.

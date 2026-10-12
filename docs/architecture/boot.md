@@ -125,7 +125,12 @@ initialize the machine, it cannot establish this gate.
 The owner named mini vMac for Mac-image validation (SRC-0019). Select and review
 its exact version/configuration and independent-firmware startup path before use.
 Run our own ROM/startup and OS image, retain repeatable cold-start evidence, then
-validate declared physical Macintosh hardware separately. Neither step is achieved.
+validate declared physical Macintosh hardware separately. SPEC-0018's original
+ROM demonstrator now passes scoped cold starts, timed display, its own TRAP probe
+and live owner mouse input in the cleared Snow 128K configuration (SRC-0076/0084);
+see [the trial](../development/mac-rom-trial.md). This is an initial startup
+result. Full OS services, Mini vMac qualification and physical validation remain
+unachieved; no physical edition gate closes.
 
 No Apple ROM dump or disassembly is a design input. Published hardware evidence,
 independent device experiments, and measured link maps establish the startup and

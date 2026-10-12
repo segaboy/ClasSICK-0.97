@@ -11,8 +11,11 @@ No reference-system black-box observation has yet been performed.
   SPEC-0018 trial. [Dated record](../docs/development/mac-rom-trial.md), own
   image/scene/counters only, exact SRC-0082 executable, Macintosh 128K model.
 - Initial image at `7c673f79` reached the original scene and advancing VBL
-  count with zero presses, but redraws were slow. A corrected multiplier is
-  separately built/verified; repeat qualification and owner input pending.
+  count with zero presses, but redraws were slow. Corrected source at `a4124acd`
+  passes two timed cold starts and the owner-confirmed left-button input test
+  with two observed presses. Own diagnostics show stage 4, one trap, expected
+  image seal and zero fault. CI 38194014724 passes and its own ROM matches local.
+  Follow-up completed 2026-10-12; provisional failures/limits remain in the record.
   No Apple ROM, disks, emulator source or historical software runs.
 - Black-box development observation, not reference compatibility, physical
   boot, calibrated time or complete edition evidence. Human review pending.

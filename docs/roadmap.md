@@ -1,5 +1,13 @@
 # Milestone roadmap
 
+2026-10-12: the original 128K ROM demonstrator has passed two Snow timed cold
+starts, own image/TRAP diagnostics and owner mouse input. See
+[the trial](development/mac-rom-trial.md). This advances the Macintosh startup
+lane; full M0.3, physical hardware, budgets and System 1 services remain open.
+The next runtime lane is the independent trap/service gateway; SPEC-0017 remains
+a later-manual draft requiring scoped finalization, not historical conformance.
+The earlier checkpoint below is retained history; formal PC B2 is unchanged.
+
 Current checkpoint: TEST-0025 observes the SPEC-0016 candidate in three no-input
 cold starts and one live keyboard run. All pass the measured controller/self-test
 and bit-20 precondition and complete guest second 60. Own-stack placement is now
