@@ -3,6 +3,13 @@
 Read `docs/clean-room/POLICY.md`, `CONTRIBUTING.md`, and
 `provenance/README.md` before researching or changing this project.
 
+- On 2026-10-12 the owner said "continue" after the shared services checkpoint
+  and proposed real instruction-call boundary (SRC-0092). SPEC-0021 covers an
+  original bounded 68000 interpreter/exception bridge, common original program,
+  tests/native builds, checks on the already cleared platforms with fresh
+  isolation, and ordinary evidence/HQ/wiki Git publication. General CPU/historical
+  gateway remains open. No UART body work, delegation, Apple input or OneNote.
+
 - On 2026-10-12 the owner said "OK, let's do it" to the shared OS services
   step after the PC fault checkpoint (SRC-0088). SPEC-0020 implements the first
   bounded portable trap-address service slice, its own native build probes,

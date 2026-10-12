@@ -45,6 +45,20 @@ cs_x64_services_stop:
     .byte 0xE9
     .long cs_native_halt-.-4
 .section .rdata,"dr"
+.text
+.globl cs_x64_aline_stop
+cs_x64_aline_stop:
+    cli
+    cld
+    movl (%rcx),%r9d
+    movl 4(%rcx),%r10d
+    movl 8(%rcx),%r11d
+    movl 12(%rcx),%r12d
+    movl 16(%rcx),%r13d
+    movl $0x43534131,%r14d
+    .byte 0xE9
+    .long cs_native_halt-.-4
+.section .rdata,"dr"
 .globl cs_entry_anchor
 .p2align 3
 cs_entry_anchor:

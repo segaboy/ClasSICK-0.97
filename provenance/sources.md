@@ -5,6 +5,35 @@ eligibility applies to the stated scope, not every resource reachable from a URL
 No Apple executable, source, disassembly, decompilation, or copied asset was used.
 Project-owned black-box native trials are recorded separately below.
 
+## SRC-0092 - Owner continuation to original A-line execution
+
+2026-10-12: "continue" after shared services passed and the next instruction-call
+boundary was proposed. Original bounded CPU/service contracts, fixtures,
+implementation/tests/builds and ordinary Git/HQ/wiki planning. Necessary checks
+on the same cleared platforms retain fresh isolation/prior media; no new emulator,
+Apple input, UART body work, delegation, OneNote or physical writing.
+
+## SRC-0093 - Published Motorola instruction and exception interfaces
+
+Motorola MC68000UM ninth edition 1993: 6.2.1/Table6-2 printed6-7 PDF92,
+6.2.4/Figure6-5 printed6-9/10 PDF94/95, 6.3.6 printed6-14 PDF99. Vector10,
+ordinary six-byte SR/PC exception frame and unimplemented A-word exceptions.
+[Official successor PDF](https://www.nxp.com/docs/en/reference-manual/MC68000UM.pdf).
+1992 M68000PRM: MOVEQ4-134 PDF238, NOP4-147 PDF251, RTS4-169 PDF273,
+RTE6-84 PDF538; instruction/encoding/register/flag prose only.
+[Official successor PDF](https://www.nxp.com/docs/en/reference-manual/M68000PRM.pdf).
+Access 2026-10-12; eligible published ISA documentation, extends SRC-0069/0079.
+Downloads failed at publisher, web parsing reviewed; no local hash/successful
+visual-page review claimed. No examples or implementation from these manuals.
+This is generic 68000 ISA evidence, not January1984 OS behavior.
+
+## SRC-0094 - Independent A-line fixture and boundary
+
+Original SPEC-0021 / ADR-0024 / IMPL-0025 / TEST-0029, portable C interpreter,
+shared value-frame boundary and original 68000 bridge/wrapper. Common twelve-byte
+fixture generated independently from documented encodings. Codex-assisted lead
+self-review; human review pending. No external implementation or assets.
+
 ## SRC-0091 - Shared C service probe observations
 
 2026-10-12, SPEC-0020 / TEST-0028, compiled source

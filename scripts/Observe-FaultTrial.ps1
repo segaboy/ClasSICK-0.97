@@ -9,10 +9,11 @@ $ErrorActionPreference='Stop'
 if(-not $OwnerApproved){throw 'Require owner approval for SPEC-0019 launch.'}
 . (Join-Path $PSScriptRoot 'FaultObservation.ps1')
 . (Join-Path $PSScriptRoot 'ServiceObservation.ps1')
+. (Join-Path $PSScriptRoot 'ALineObservation.ps1')
 $p=Get-Content -LiteralPath (Join-Path $TrialRoot 'prepared.json') -Raw | ConvertFrom-Json
 $admission=Get-Content -LiteralPath (Join-Path $TrialRoot 'fault-admission.json') -Raw | ConvertFrom-Json
-if($p.candidate -notin @('SPEC-0019','SPEC-0020') -or $admission.uuid -ne $p.uuid -or
-    ($p.candidate -eq 'SPEC-0020' -and $Profile -ne 'none')){throw 'Owned fault/service VM admission rejected.'}
+if($p.candidate -notin @('SPEC-0019','SPEC-0020','SPEC-0021') -or $admission.uuid -ne $p.uuid -or
+    ($p.candidate -in @('SPEC-0020','SPEC-0021') -and $Profile -ne 'none')){throw 'Owned fault/service VM admission rejected.'}
 $medium=$admission.profiles.$Profile
 $serial=Join-Path $TrialRoot ($Trial+'-serial.txt');$record=Join-Path $TrialRoot ($Trial+'-observations.json')
 $commandLog=Join-Path $TrialRoot ($Trial+'-commands.json')
@@ -61,6 +62,7 @@ try{
     $symbols=@{};foreach($item in $medium.symbols.PSObject.Properties){$symbols[$item.Name]=[long]$item.Value}
     $registerNames=if($Profile -eq 'none'){@('rip','rsp')}else{@('rip','rsp','rcx','r9','r10','r11','r12','r13','r14','r15','rsi','rdi')}
     if($p.candidate -eq 'SPEC-0020'){$registerNames+=@('rcx','r9','r10','r11','r14')}
+    if($p.candidate -eq 'SPEC-0021'){$registerNames+=@('rcx','r9','r10','r11','r12','r13','r14')}
     foreach($sample in @(1,2)){
         Start-Sleep -Milliseconds 1000
         $out=@(Run (@('debugvm',$p.uuid,'getregisters')+$registerNames));$registers=@{}
@@ -73,6 +75,7 @@ try{
         $observation | ConvertTo-Json -Depth 8 | Set-Content -LiteralPath $record -Encoding UTF8
         Confirm-FaultObservation $Profile $lines $registers $symbols
         if($p.candidate -eq 'SPEC-0020'){Confirm-ServiceObservation $lines $registers}
+        if($p.candidate -eq 'SPEC-0021'){Confirm-ALineObservation $lines $registers}
     }
     foreach($key in $registerNames){if($snapshots[0].values[$key] -ne $snapshots[1].values[$key]){throw 'Terminal register observation unstable.'}}
     $observation.status='passed';Write-Output "Native $Profile fault/control observation PASS."

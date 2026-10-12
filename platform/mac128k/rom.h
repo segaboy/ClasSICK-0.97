@@ -18,6 +18,7 @@ typedef struct {
 typedef struct {
     uint32_t magic, stage, ticks, presses, traps, image_crc, fault;
     uint32_t service_checks,service_status,service_signature;
+    uint32_t aline_checks,aline_status,aline_signature,aline_steps,aline_calls,native_aline_calls;
 } cs_mac_diagnostics;
 extern volatile cs_mac_diagnostics cs_mac_diag;
 uint32_t cs_mac_image_crc(const volatile uint8_t *image, size_t size);

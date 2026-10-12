@@ -2,6 +2,7 @@
 /* Copyright (C) 2026 Dean Howell. */
 #include "rom.h"
 #include "../../apps/service-probe/probe.h"
+#include "../../apps/aline-probe/probe.h"
 
 volatile cs_mac_diagnostics cs_mac_diag;
 static cs_trap_gateway cs_mac_services;
@@ -9,6 +10,23 @@ _Static_assert(offsetof(cs_mac_diagnostics,traps)==16,"Trap assembly offset");
 _Static_assert(offsetof(cs_mac_diagnostics,fault)==24,"Fault assembly offset");
 extern void cs_mac_probe(void);
 extern void cs_mac_fault(void);
+extern int cs_mac_aline_probe(void);
+extern const uint8_t cs_mac_aline_program[],cs_mac_aline_program_end[];
+_Static_assert(offsetof(cs_trap_frame,a[7])==60 && offsetof(cs_trap_frame,pc)==64 &&
+    offsetof(cs_trap_frame,sr)==68,"Native Line-A frame offsets");
+static void aline_fault(void) {cs_mac_diag.fault=7;for(;;) { }}
+void cs_mac_line_a(cs_trap_frame *f)
+{
+    uint32_t base=(uint32_t)(uintptr_t)cs_mac_aline_program;
+    uint32_t end=(uint32_t)(uintptr_t)cs_mac_aline_program_end;
+    cs_m68k_report report;
+    if((f->sr&0xA000u)!=0x2000u || (f->pc&1u)!=0 || f->pc<base || f->pc>=end ||
+        (f->a[7]&1u)!=0 || f->a[7]<0x2100u || f->a[7]>0x4000u) aline_fault();
+    const uint8_t *p=(const uint8_t *)(uintptr_t)f->pc;
+    uint16_t word=(uint16_t)(((uint16_t)p[0]<<8)|p[1]);
+    if(cs_m68k_aline(&cs_mac_services,word,f,&report)!=CS_M68K_OK) aline_fault();
+    ++cs_mac_diag.native_aline_calls;
+}
 
 static uint8_t read_reg(void *context,unsigned reg)
 {
@@ -41,6 +59,14 @@ void cs_mac_main(void)
     cs_mac_diag.service_status=service_result.status;
     cs_mac_diag.service_signature=service_result.signature;
     if(!services_ok) {cs_mac_diag.fault=6; for(;;) { }}
+    cs_aline_probe_result aline_result;
+    if(!cs_aline_probe(&cs_mac_services,&aline_result)) aline_fault();
+    cs_mac_diag.aline_checks=aline_result.checks;cs_mac_diag.aline_status=aline_result.status;
+    cs_mac_diag.aline_signature=aline_result.signature;cs_mac_diag.aline_steps=aline_result.steps;
+    cs_mac_diag.aline_calls=aline_result.calls;
+    /* The hardware Set must install this entry itself, independently of the interpreter. */
+    if(cs_trap_set(&cs_mac_services,0x20,cs_mac_services.config.unsupported_token)!=CS_TRAP_OK) aline_fault();
+    if(!cs_mac_aline_probe() || cs_mac_diag.native_aline_calls!=3) aline_fault();
     cs_mac_via_init(&io);
     if(cs_surface_init(&screen,(uint8_t *)(uintptr_t)UINT32_C(0x1A700),CS_MAC_SCREEN_BYTES,
             512,342,64,CS_SURFACE_MONO1_MSB)!=CS_SURFACE_OK) {

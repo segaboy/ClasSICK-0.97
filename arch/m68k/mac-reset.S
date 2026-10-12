@@ -5,7 +5,11 @@
 cs_mac_vectors:
     .long 0x4000
     .long cs_mac_reset
-    .rept 30
+    .rept 8
+    .long cs_mac_fault
+    .endr
+    .long cs_mac_line_a_handler
+    .rept 21
     .long cs_mac_fault
     .endr
     .long cs_mac_probe_handler

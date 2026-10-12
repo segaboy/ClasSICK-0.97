@@ -7,7 +7,7 @@ param([Parameter(Mandatory=$true)][string]$VBoxManage,
 Set-StrictMode -Version Latest
 $ErrorActionPreference='Stop'
 $p=Get-Content -LiteralPath (Join-Path $TrialRoot 'prepared.json') -Raw | ConvertFrom-Json
-if($p.candidate -notin @('SPEC-0019','SPEC-0020') -or $p.name -notmatch '^ClasSICK-097-B2-' -or
+if($p.candidate -notin @('SPEC-0019','SPEC-0020','SPEC-0021') -or $p.name -notmatch '^ClasSICK-097-B2-' -or
     (Get-FileHash -LiteralPath $VBoxManage -Algorithm SHA256).Hash.ToLowerInvariant() -ne '7fda8e54157eb94a5ebd9cea079a9fb8c23ade92ae71e13399dc3431c021a228'){
     throw 'Fault VM admission rejected.'
 }

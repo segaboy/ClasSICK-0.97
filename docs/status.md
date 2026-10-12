@@ -1,5 +1,12 @@
 # Project status
 
+2026-10-12: SPEC-0021 / IMPL-0025 / TEST-0029 adds an original bounded
+instruction interpreter and actual 68000 vector-10/RTE bridge for the two shared
+services. One common twelve-byte fixture, no external emulator/Apple code.
+1,002 local checks, twenty additional CPU object audits and deterministic own
+EFI/ROM negative controls pass. Native execution of this new image remains
+unobserved at this implementation commit; SPEC-0017/full CPU/OS gates remain open.
+
 2026-10-12: the first shared trap-address C services pass three native PC and
 two own-ROM Snow 128K probe starts, ten checks/zero errors/signature agreement.
 SPEC-0020 / IMPL-0024 / TEST-0028; [report](development/shared-services-evidence.md).

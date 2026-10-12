@@ -124,3 +124,9 @@ static service state below 0x2000 (expanded from the initial 0x1000 upper bound)
 keeping the 8-KiB ordinary stack and other RAM/hardware ranges. The linker and
 ELF audit enforce the new bound; record measured use separately. This C probe
 does not execute Line-A instructions or complete historical OS services.
+
+2026-10-12 SPEC-0021 adds the bounded original instruction fixture, vector-10
+assembly entry/RTE and shared C boundary, a separate portable interpreter probe
+and six appended diagnostic fields. The former TRAP/fault offsets and 0x2000
+data/BSS bound remain. Actual opcode entry/return requires separately recorded
+native observations; full historical services and application compatibility remain.
