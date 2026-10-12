@@ -38,3 +38,13 @@ stores, confirm only original imports, then repeat the complete chain/native
 builds in fresh directories. Provisional images are retained, never admitted.
 One attempted object-audit retry refused an existing output directory as required;
 the final fresh wrapper completed. No uncertain external implementation used.
+
+Native follow-up: three isolated PC starts and two fresh Snow 128K starts pass
+the same ten-check C probe. [Evidence](../../docs/development/shared-services-evidence.md)
+distinguishes native C service execution from still-unimplemented A-line/legacy
+application execution. PC post-second-60 registers and forty own Mac diagnostic
+bytes agree on zero service error/signature; both Mac runs reach stage4/ticks3610,
+one TRAP return/expected seal/zero fault. PC VM off/unchanged VDI, both Snow
+windows gone/normal loop-exit logs; no process-exit-code claim for Snow.
+CI 38257185223 passes both jobs at `02e2f5a6daf29a1fd4dc7a61ea460d371fa493ee`;
+six EFI/two ROM profiles and ROM source fingerprints match local admission.

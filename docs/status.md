@@ -1,5 +1,13 @@
 # Project status
 
+2026-10-12: the first shared trap-address C services pass three native PC and
+two own-ROM Snow 128K probe starts, ten checks/zero errors/signature agreement.
+SPEC-0020 / IMPL-0024 / TEST-0028; [report](development/shared-services-evidence.md).
+939 local checks, extra object/native-image audits and CI 38257185223 pass;
+all six EFI/two ROM profiles match. This is an adopted later-manual engineering
+slice. Actual A-line/guest execution and the full SPEC-0017 historical gateway
+remain next; no full OS/physical/edition or B2 criterion 6 gate closes.
+
 2026-10-12: the short native PC fault checkpoint passes three real UD and three
 real GP cold starts, owned first-fault/IST1 capture and stable terminal register
 observations, plus one normal control. [Report](development/fault-checkpoint.md),

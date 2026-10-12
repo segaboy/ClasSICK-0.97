@@ -1,0 +1,1088 @@
+{
+  "schema_version": 1,
+  "specification": "SPEC-0020",
+  "test": "TEST-0028",
+  "source": "SRC-0091",
+  "profile": "classick-trap-address-v1",
+  "classification": "shared-native-C-service-probe",
+  "observed_on": "2026-10-12",
+  "compiled_source_revision": "02e2f5a6daf29a1fd4dc7a61ea460d371fa493ee",
+  "historical_gateway_finalized": false,
+  "a_line_opcode_executed": false,
+  "legacy_application_executed": false,
+  "verification": {
+    "ctest_checks": 939,
+    "configuration_totals": [
+      117,
+      117,
+      117,
+      90,
+      117,
+      102,
+      102,
+      102,
+      75
+    ],
+    "object_audits": 20,
+    "service_observer_rejections": 5,
+    "mac_hosted_suites": 24,
+    "mac_fault_controls": 4,
+    "media_writers": 9,
+    "media_corruption_rejections": 30,
+    "writer_refusals": 3,
+    "ci_status": "success",
+    "ci_url": "https://github.com/segaboy/ClasSICK-0.97/actions/runs/38257185223",
+    "local_log_sha256": "475b5d9fc51bf6ca27461e7d89aedbf998721a47dc4530f501cf4796b21968df",
+    "ci_log_sha256": "ee8513a7f7933cc4082a2e31b341a79ff073fd51fbaefad2e79bbea6cae94b3a",
+    "matching_ci_efi_profiles": 6,
+    "matching_ci_rom_profiles": 2,
+    "ci_rom_inputs_match": true
+  },
+  "pc": {
+    "platform": "VirtualBox 7.2.16r174877; SPEC-0015 isolation, EFI64, Secure Boot off",
+    "platform_executable_sha256": "7fda8e54157eb94a5ebd9cea079a9fb8c23ade92ae71e13399dc3431c021a228",
+    "profiles": {
+      "none": {
+        "images": [
+          {
+            "case": "clang-64-O0",
+            "sha256": "edb25406e04008e3b3df70828b1603b50a54e970c139dea867e6ca0041695893",
+            "size_bytes": 65024,
+            "image_size": 81920,
+            "relocations": 3,
+            "status": "passed-unloaded"
+          },
+          {
+            "case": "clang-64-O2",
+            "sha256": "203f26ecc501c8fd931312df07aefbcab8522371467a13f41f103321638f33b1",
+            "size_bytes": 46080,
+            "image_size": 61440,
+            "relocations": 3,
+            "status": "passed-unloaded"
+          }
+        ],
+        "raw_sha256": "bd1dd8c4de1769a4dae7e9744bf6a12ceb883ec1067e6de535455186a9f2f5b2",
+        "image_size": 61440,
+        "corruption_rejections": 26,
+        "omitted_object_rejections": 12,
+        "profile_rejections": 0
+      },
+      "ud": {
+        "images": [
+          {
+            "case": "clang-64-O0",
+            "sha256": "5baa237b7eb1658e1660a5cecaa2a78984feb45ab09709f285d7e7d66cdc31f9",
+            "size_bytes": 65024,
+            "image_size": 81920,
+            "relocations": 3,
+            "status": "passed-unloaded"
+          },
+          {
+            "case": "clang-64-O2",
+            "sha256": "d4042d8d3e19a7610fd8b09927ebe59af8b7b625cd06a995c462fe2660c48cd3",
+            "size_bytes": 46080,
+            "image_size": 61440,
+            "relocations": 3,
+            "status": "passed-unloaded"
+          }
+        ],
+        "raw_sha256": "5bbf7b20083122a553b7b0a02515af81775dc7439242e1a7e3cd7720212b7592",
+        "image_size": 61440,
+        "corruption_rejections": 27,
+        "omitted_object_rejections": 12,
+        "profile_rejections": 1
+      },
+      "gp": {
+        "images": [
+          {
+            "case": "clang-64-O0",
+            "sha256": "c4593ae4b4c95f3b04698d24c30c783d7d4ef9f03951272753aea268b69c0bc3",
+            "size_bytes": 65024,
+            "image_size": 81920,
+            "relocations": 3,
+            "status": "passed-unloaded"
+          },
+          {
+            "case": "clang-64-O2",
+            "sha256": "0084afeb3ea888f90683371abbbb38263356bd9bc921c49d74a3dab95b46ccad",
+            "size_bytes": 46080,
+            "image_size": 61440,
+            "relocations": 3,
+            "status": "passed-unloaded"
+          }
+        ],
+        "raw_sha256": "2e1598a849c4a5a895e82b47c66b66e83793b78d4acbc098fad79a56e02c43e3",
+        "image_size": 61440,
+        "corruption_rejections": 27,
+        "omitted_object_rejections": 12,
+        "profile_rejections": 1
+      }
+    },
+    "vdi_sha256": "3037228ee4387e51f85a8ee39b0e4b37dfc238d0bef48e8a9df3b99a065c13f1",
+    "raw_roundtrip": "matched-original",
+    "post_trial_vdi": "unchanged",
+    "final_state": "poweroff",
+    "inventory": "one-new-identity-only",
+    "trials": [
+      {
+        "trial": "cold-01",
+        "status": "passed",
+        "events": [
+          {
+            "line": "ClasSICK 0.97 UART v2",
+            "host_seconds": 30.135341,
+            "utc": "2026-10-12T13:41:08.1809817Z"
+          },
+          {
+            "line": "fw rev=00010000 state=00000000 vendor=EDK II",
+            "host_seconds": 30.1355502,
+            "utc": "2026-10-12T13:41:08.1811886Z"
+          },
+          {
+            "line": "own img=0000000010000000 bun=000000001CFAA000 stk=000000001CFFB000",
+            "host_seconds": 30.1355885,
+            "utc": "2026-10-12T13:41:08.1812274Z"
+          },
+          {
+            "line": "keyboard ready",
+            "host_seconds": 30.1356197,
+            "utc": "2026-10-12T13:41:08.1812578Z"
+          },
+          {
+            "line": "qual port=00000003/00000003 a20=00000000/00000000",
+            "host_seconds": 30.1359519,
+            "utc": "2026-10-12T13:41:08.1815907Z"
+          },
+          {
+            "line": "alias q=000000001D11F480 type=00000004",
+            "host_seconds": 30.1359796,
+            "utc": "2026-10-12T13:41:08.1816177Z"
+          },
+          {
+            "line": "frame=00000000 sec=00000000 space=00000000",
+            "host_seconds": 30.1359885,
+            "utc": "2026-10-12T13:41:08.1816265Z"
+          },
+          {
+            "line": "frame=00000001 sec=00000004 space=00000000",
+            "host_seconds": 34.0906254,
+            "utc": "2026-10-12T13:41:12.1362358Z"
+          },
+          {
+            "line": "frame=00000002 sec=00000008 space=00000000",
+            "host_seconds": 38.1433851,
+            "utc": "2026-10-12T13:41:16.1889753Z"
+          },
+          {
+            "line": "frame=00000003 sec=0000000C space=00000000",
+            "host_seconds": 42.1233373,
+            "utc": "2026-10-12T13:41:20.1688881Z"
+          },
+          {
+            "line": "frame=00000004 sec=0000000F space=00000000",
+            "host_seconds": 45.0793977,
+            "utc": "2026-10-12T13:41:23.1249266Z"
+          },
+          {
+            "line": "frame=00000005 sec=00000013 space=00000000",
+            "host_seconds": 49.1373823,
+            "utc": "2026-10-12T13:41:27.1828815Z"
+          },
+          {
+            "line": "frame=00000006 sec=00000017 space=00000000",
+            "host_seconds": 53.0795464,
+            "utc": "2026-10-12T13:41:31.1250165Z"
+          },
+          {
+            "line": "frame=00000007 sec=0000001B space=00000000",
+            "host_seconds": 57.1252284,
+            "utc": "2026-10-12T13:41:35.1706681Z"
+          },
+          {
+            "line": "frame=00000008 sec=0000001E space=00000000",
+            "host_seconds": 60.0798698,
+            "utc": "2026-10-12T13:41:38.1252899Z"
+          },
+          {
+            "line": "frame=00000009 sec=00000022 space=00000000",
+            "host_seconds": 64.138837,
+            "utc": "2026-10-12T13:41:42.1842249Z"
+          },
+          {
+            "line": "frame=0000000A sec=00000026 space=00000000",
+            "host_seconds": 68.0786979,
+            "utc": "2026-10-12T13:41:46.1240570Z"
+          },
+          {
+            "line": "frame=0000000B sec=0000002A space=00000000",
+            "host_seconds": 72.1234996,
+            "utc": "2026-10-12T13:41:50.1688283Z"
+          },
+          {
+            "line": "frame=0000000C sec=0000002D space=00000000",
+            "host_seconds": 75.0740602,
+            "utc": "2026-10-12T13:41:53.1193747Z"
+          },
+          {
+            "line": "frame=0000000D sec=00000031 space=00000000",
+            "host_seconds": 79.1368016,
+            "utc": "2026-10-12T13:41:57.1820782Z"
+          },
+          {
+            "line": "frame=0000000E sec=00000035 space=00000000",
+            "host_seconds": 83.076728,
+            "utc": "2026-10-12T13:42:01.1219754Z"
+          },
+          {
+            "line": "frame=0000000F sec=00000039 space=00000000",
+            "host_seconds": 87.1235063,
+            "utc": "2026-10-12T13:42:05.1687234Z"
+          },
+          {
+            "line": "frame=00000010 sec=0000003C space=00000000",
+            "host_seconds": 90.0769367,
+            "utc": "2026-10-12T13:42:08.1221328Z"
+          },
+          {
+            "line": "result=00000000 kbd=00000001",
+            "host_seconds": 90.0770816,
+            "utc": "2026-10-12T13:42:08.1222783Z"
+          }
+        ],
+        "registers": [
+          {
+            "host_seconds": 91.1599302,
+            "values": {
+              "r14": 1129534257,
+              "r10": 0,
+              "r9": 10,
+              "rcx": 486692892,
+              "rip": 268445678,
+              "r11": 1398162225,
+              "rsp": 486518408
+            }
+          },
+          {
+            "host_seconds": 92.2829199,
+            "values": {
+              "r14": 1129534257,
+              "r10": 0,
+              "r9": 10,
+              "rcx": 486692892,
+              "rip": 268445678,
+              "r11": 1398162225,
+              "rsp": 486518408
+            }
+          }
+        ],
+        "ready_to_result_host_seconds": 59.9414619,
+        "generated_guest_input": false
+      },
+      {
+        "trial": "cold-02",
+        "status": "passed",
+        "events": [
+          {
+            "line": "ClasSICK 0.97 UART v2",
+            "host_seconds": 6.2893907,
+            "utc": "2026-10-12T13:42:17.3551169Z"
+          },
+          {
+            "line": "fw rev=00010000 state=00000000 vendor=EDK II",
+            "host_seconds": 6.2894402,
+            "utc": "2026-10-12T13:42:17.3551655Z"
+          },
+          {
+            "line": "own img=0000000010000000 bun=000000001CF90000 stk=000000001CFE1000",
+            "host_seconds": 6.2894475,
+            "utc": "2026-10-12T13:42:17.3551728Z"
+          },
+          {
+            "line": "keyboard ready",
+            "host_seconds": 6.2894535,
+            "utc": "2026-10-12T13:42:17.3551787Z"
+          },
+          {
+            "line": "qual port=00000003/00000003 a20=00000000/00000000",
+            "host_seconds": 6.2896349,
+            "utc": "2026-10-12T13:42:17.3553602Z"
+          },
+          {
+            "line": "alias q=000000001D105480 type=00000004",
+            "host_seconds": 6.2896442,
+            "utc": "2026-10-12T13:42:17.3553694Z"
+          },
+          {
+            "line": "frame=00000000 sec=00000000 space=00000000",
+            "host_seconds": 6.2896496,
+            "utc": "2026-10-12T13:42:17.3553748Z"
+          },
+          {
+            "line": "frame=00000001 sec=00000004 space=00000000",
+            "host_seconds": 10.33479,
+            "utc": "2026-10-12T13:42:21.4004860Z"
+          },
+          {
+            "line": "frame=00000002 sec=00000008 space=00000000",
+            "host_seconds": 14.2727885,
+            "utc": "2026-10-12T13:42:25.3384556Z"
+          },
+          {
+            "line": "frame=00000003 sec=0000000C space=00000000",
+            "host_seconds": 18.3496383,
+            "utc": "2026-10-12T13:42:29.4152753Z"
+          },
+          {
+            "line": "frame=00000004 sec=0000000F space=00000000",
+            "host_seconds": 21.3052536,
+            "utc": "2026-10-12T13:42:32.3708687Z"
+          },
+          {
+            "line": "frame=00000005 sec=00000013 space=00000000",
+            "host_seconds": 25.3477255,
+            "utc": "2026-10-12T13:42:36.4133115Z"
+          },
+          {
+            "line": "frame=00000006 sec=00000017 space=00000000",
+            "host_seconds": 29.2920207,
+            "utc": "2026-10-12T13:42:40.3575766Z"
+          },
+          {
+            "line": "frame=00000007 sec=0000001B space=00000000",
+            "host_seconds": 33.3528759,
+            "utc": "2026-10-12T13:42:44.4184020Z"
+          },
+          {
+            "line": "frame=00000008 sec=0000001E space=00000000",
+            "host_seconds": 36.3108173,
+            "utc": "2026-10-12T13:42:47.3763297Z"
+          },
+          {
+            "line": "frame=00000009 sec=00000022 space=00000000",
+            "host_seconds": 40.3506098,
+            "utc": "2026-10-12T13:42:51.4160839Z"
+          },
+          {
+            "line": "frame=0000000A sec=00000026 space=00000000",
+            "host_seconds": 44.2835003,
+            "utc": "2026-10-12T13:42:55.3489451Z"
+          },
+          {
+            "line": "frame=0000000B sec=0000002A space=00000000",
+            "host_seconds": 48.3308696,
+            "utc": "2026-10-12T13:42:59.3962845Z"
+          },
+          {
+            "line": "frame=0000000C sec=0000002D space=00000000",
+            "host_seconds": 51.2850803,
+            "utc": "2026-10-12T13:43:02.3504734Z"
+          },
+          {
+            "line": "frame=0000000D sec=00000031 space=00000000",
+            "host_seconds": 55.3351498,
+            "utc": "2026-10-12T13:43:06.4005129Z"
+          },
+          {
+            "line": "frame=0000000E sec=00000035 space=00000000",
+            "host_seconds": 59.2779557,
+            "utc": "2026-10-12T13:43:10.3432896Z"
+          },
+          {
+            "line": "frame=0000000F sec=00000039 space=00000000",
+            "host_seconds": 63.2931593,
+            "utc": "2026-10-12T13:43:14.3584644Z"
+          },
+          {
+            "line": "frame=00000010 sec=0000003C space=00000000",
+            "host_seconds": 66.3522351,
+            "utc": "2026-10-12T13:43:17.4175166Z"
+          },
+          {
+            "line": "result=00000000 kbd=00000001",
+            "host_seconds": 66.3522711,
+            "utc": "2026-10-12T13:43:17.4175518Z"
+          }
+        ],
+        "registers": [
+          {
+            "host_seconds": 67.3891262,
+            "values": {
+              "r14": 1129534257,
+              "r10": 0,
+              "r9": 10,
+              "rcx": 486586396,
+              "rip": 268445678,
+              "r11": 1398162225,
+              "rsp": 486411912
+            }
+          },
+          {
+            "host_seconds": 68.4293292,
+            "values": {
+              "r14": 1129534257,
+              "r10": 0,
+              "r9": 10,
+              "rcx": 486586396,
+              "rip": 268445678,
+              "r11": 1398162225,
+              "rsp": 486411912
+            }
+          }
+        ],
+        "ready_to_result_host_seconds": 60.062817599999995,
+        "generated_guest_input": false
+      },
+      {
+        "trial": "cold-03",
+        "status": "passed",
+        "events": [
+          {
+            "line": "ClasSICK 0.97 UART v2",
+            "host_seconds": 6.0080666,
+            "utc": "2026-10-12T13:43:26.0885583Z"
+          },
+          {
+            "line": "fw rev=00010000 state=00000000 vendor=EDK II",
+            "host_seconds": 6.008102,
+            "utc": "2026-10-12T13:43:26.0885928Z"
+          },
+          {
+            "line": "own img=0000000010000000 bun=000000001CF90000 stk=000000001CFE1000",
+            "host_seconds": 6.0081082,
+            "utc": "2026-10-12T13:43:26.0885989Z"
+          },
+          {
+            "line": "keyboard ready",
+            "host_seconds": 6.0081127,
+            "utc": "2026-10-12T13:43:26.0886034Z"
+          },
+          {
+            "line": "qual port=00000003/00000003 a20=00000000/00000000",
+            "host_seconds": 6.0082599,
+            "utc": "2026-10-12T13:43:26.0887507Z"
+          },
+          {
+            "line": "alias q=000000001D105480 type=00000004",
+            "host_seconds": 6.0082678,
+            "utc": "2026-10-12T13:43:26.0887584Z"
+          },
+          {
+            "line": "frame=00000000 sec=00000000 space=00000000",
+            "host_seconds": 6.0082732,
+            "utc": "2026-10-12T13:43:26.0887639Z"
+          },
+          {
+            "line": "frame=00000001 sec=00000004 space=00000000",
+            "host_seconds": 9.9723792,
+            "utc": "2026-10-12T13:43:30.0528414Z"
+          },
+          {
+            "line": "frame=00000002 sec=00000008 space=00000000",
+            "host_seconds": 14.0197261,
+            "utc": "2026-10-12T13:43:34.1001584Z"
+          },
+          {
+            "line": "frame=00000003 sec=0000000C space=00000000",
+            "host_seconds": 17.9698999,
+            "utc": "2026-10-12T13:43:38.0503030Z"
+          },
+          {
+            "line": "frame=00000004 sec=0000000F space=00000000",
+            "host_seconds": 20.9340568,
+            "utc": "2026-10-12T13:43:41.0144382Z"
+          },
+          {
+            "line": "frame=00000005 sec=00000013 space=00000000",
+            "host_seconds": 24.9758446,
+            "utc": "2026-10-12T13:43:45.0561968Z"
+          },
+          {
+            "line": "frame=00000006 sec=00000017 space=00000000",
+            "host_seconds": 29.0238033,
+            "utc": "2026-10-12T13:43:49.1041247Z"
+          },
+          {
+            "line": "frame=00000007 sec=0000001B space=00000000",
+            "host_seconds": 32.9560911,
+            "utc": "2026-10-12T13:43:53.0363835Z"
+          },
+          {
+            "line": "frame=00000008 sec=0000001E space=00000000",
+            "host_seconds": 36.0188891,
+            "utc": "2026-10-12T13:43:56.0991585Z"
+          },
+          {
+            "line": "frame=00000009 sec=00000022 space=00000000",
+            "host_seconds": 39.9589472,
+            "utc": "2026-10-12T13:44:00.0391874Z"
+          },
+          {
+            "line": "frame=0000000A sec=00000026 space=00000000",
+            "host_seconds": 44.0068437,
+            "utc": "2026-10-12T13:44:04.0870545Z"
+          },
+          {
+            "line": "frame=0000000B sec=0000002A space=00000000",
+            "host_seconds": 47.9578558,
+            "utc": "2026-10-12T13:44:08.0380372Z"
+          },
+          {
+            "line": "frame=0000000C sec=0000002D space=00000000",
+            "host_seconds": 50.9231348,
+            "utc": "2026-10-12T13:44:11.0032947Z"
+          },
+          {
+            "line": "frame=0000000D sec=00000031 space=00000000",
+            "host_seconds": 54.9756166,
+            "utc": "2026-10-12T13:44:15.0557467Z"
+          },
+          {
+            "line": "frame=0000000E sec=00000035 space=00000000",
+            "host_seconds": 59.0198148,
+            "utc": "2026-10-12T13:44:19.0999146Z"
+          },
+          {
+            "line": "frame=0000000F sec=00000039 space=00000000",
+            "host_seconds": 62.9580779,
+            "utc": "2026-10-12T13:44:23.0381483Z"
+          },
+          {
+            "line": "frame=00000010 sec=0000003C space=00000000",
+            "host_seconds": 66.0195221,
+            "utc": "2026-10-12T13:44:26.0995697Z"
+          },
+          {
+            "line": "result=00000000 kbd=00000001",
+            "host_seconds": 66.0195721,
+            "utc": "2026-10-12T13:44:26.0996189Z"
+          }
+        ],
+        "registers": [
+          {
+            "host_seconds": 67.0749205,
+            "values": {
+              "r14": 1129534257,
+              "r10": 0,
+              "r9": 10,
+              "rcx": 486586396,
+              "rip": 268445678,
+              "r11": 1398162225,
+              "rsp": 486411912
+            }
+          },
+          {
+            "host_seconds": 68.1184427,
+            "values": {
+              "r14": 1129534257,
+              "r10": 0,
+              "r9": 10,
+              "rcx": 486586396,
+              "rip": 268445678,
+              "r11": 1398162225,
+              "rsp": 486411912
+            }
+          }
+        ],
+        "ready_to_result_host_seconds": 60.01145940000001,
+        "generated_guest_input": false
+      }
+    ],
+    "guest_memory_read": false,
+    "cr2_observed": false
+  },
+  "mac": {
+    "platform": "Snow v1.5.0 Windows x86-64; Early128K; RelativeHw",
+    "platform_executable_sha256": "32cf5285582c0f509e4f1ac38d86bfb90440bae9da43b7823bfb0841dea588e6",
+    "profiles": [
+      {
+        "optimization": "-Os",
+        "image_size": 65536,
+        "image_sha256": "838a4d6213e3b9656dce43e3b0b6e626766f2c1068f3aa10f01ad5655f6604a0",
+        "image_crc32": "6ad16297",
+        "rom_used": 5260,
+        "ram_data_bss": 2116,
+        "symbols": {
+          "0.o": 0,
+          "cs_mac_probe_handler": 4194668,
+          "runtime.c": 0,
+          "divide": 4194696,
+          "loop.c": 0,
+          "entry.c": 0,
+          "read_reg": 4195380,
+          "write_reg": 4195400,
+          "cs_mac_services": 2856,
+          "scene.c": 0,
+          "box": 4195820,
+          "glyph": 4196008,
+          "number.constprop.0": 4196104,
+          "digits": 4199516,
+          "letters": 4199536,
+          "surface.c": 0,
+          "validate": 4196864,
+          "traps.c": 0,
+          "rom_address.isra.0": 4197616,
+          "executable": 4197652,
+          "config_valid": 4197718,
+          "state_valid": 4197898,
+          "intrinsic": 4198426,
+          "probe.c": 0,
+          "cs_surface_fill": 4197204,
+          "cs_trap_set": 4198330,
+          "__data_load": 4199564,
+          "cs_trap_get": 4198230,
+          "cs_surface_init": 4197110,
+          "cs_trap_direct": 4198798,
+          "memcpy": 4194944,
+          "__rom_code_end": 4199564,
+          "__udivsi3": 4194806,
+          "cs_trap_init": 4198104,
+          "cs_surface_clear": 4197526,
+          "__rom_end": 4199564,
+          "__bss_end": 4932,
+          "cs_mac_fault": 4194676,
+          "cs_mac_probe": 4194664,
+          "__umodsi3": 4194834,
+          "cs_trap_decode": 4197936,
+          "__data_end": 2816,
+          "__mulsi3": 4194776,
+          "cs_mac_scene": 4196220,
+          "cs_mac_image_crc": 4194976,
+          "__bss_start": 2816,
+          "cs_mac_loop_begin": 4195176,
+          "__divsi3": 4194866,
+          "cs_mac_main": 4195422,
+          "cs_service_probe": 4198932,
+          "cs_trap_call": 4198564,
+          "cs_mac_reset": 4194564,
+          "cs_mac_loop_poll": 4195210,
+          "cs_mac_vectors": 4194304,
+          "cs_mac_via_init": 4195072,
+          "cs_mac_diag": 2816,
+          "__data_start": 2816
+        },
+        "stack_frames": [
+          {
+            "function": "divide",
+            "bytes": 20
+          },
+          {
+            "function": "__mulsi3",
+            "bytes": 0
+          },
+          {
+            "function": "__udivsi3",
+            "bytes": 16
+          },
+          {
+            "function": "__umodsi3",
+            "bytes": 16
+          },
+          {
+            "function": "__divsi3",
+            "bytes": 24
+          },
+          {
+            "function": "memcpy",
+            "bytes": 0
+          },
+          {
+            "function": "cs_mac_image_crc",
+            "bytes": 8
+          },
+          {
+            "function": "cs_mac_via_init",
+            "bytes": 40
+          },
+          {
+            "function": "cs_mac_loop_begin",
+            "bytes": 0
+          },
+          {
+            "function": "cs_mac_loop_poll",
+            "bytes": 24
+          },
+          {
+            "function": "read_reg",
+            "bytes": 0
+          },
+          {
+            "function": "write_reg",
+            "bytes": 0
+          },
+          {
+            "function": "cs_mac_main",
+            "bytes": 112
+          },
+          {
+            "function": "box",
+            "bytes": 40
+          },
+          {
+            "function": "glyph",
+            "bytes": 56
+          },
+          {
+            "function": "number.constprop",
+            "bytes": 60
+          },
+          {
+            "function": "cs_mac_scene",
+            "bytes": 116
+          },
+          {
+            "function": "validate",
+            "bytes": 28
+          },
+          {
+            "function": "cs_surface_init",
+            "bytes": 52
+          },
+          {
+            "function": "cs_surface_fill",
+            "bytes": 84
+          },
+          {
+            "function": "cs_surface_clear",
+            "bytes": 44
+          },
+          {
+            "function": "rom_address.isra",
+            "bytes": 0
+          },
+          {
+            "function": "executable",
+            "bytes": 16
+          },
+          {
+            "function": "config_valid",
+            "bytes": 28
+          },
+          {
+            "function": "state_valid",
+            "bytes": 4
+          },
+          {
+            "function": "cs_trap_decode",
+            "bytes": 8
+          },
+          {
+            "function": "cs_trap_init",
+            "bytes": 12
+          },
+          {
+            "function": "cs_trap_get",
+            "bytes": 24
+          },
+          {
+            "function": "cs_trap_set",
+            "bytes": 24
+          },
+          {
+            "function": "intrinsic",
+            "bytes": 24
+          },
+          {
+            "function": "cs_trap_call",
+            "bytes": 32
+          },
+          {
+            "function": "cs_trap_direct",
+            "bytes": 32
+          },
+          {
+            "function": "cs_service_probe",
+            "bytes": 156
+          }
+        ],
+        "corruption_controls": 7,
+        "omitted_object_controls": 8
+      },
+      {
+        "optimization": "-O0",
+        "image_size": 65536,
+        "image_sha256": "6f6ab14ef4be10586e99914d27c6068f50de12928ad7fa703f4e09b4fcc20451",
+        "image_crc32": "ac8e9df7",
+        "rom_used": 7896,
+        "ram_data_bss": 2116,
+        "symbols": {
+          "0.o": 0,
+          "cs_mac_probe_handler": 4194668,
+          "runtime.c": 0,
+          "divide": 4194756,
+          "loop.c": 0,
+          "entry.c": 0,
+          "cs_mac_services": 2856,
+          "read_reg": 4195832,
+          "write_reg": 4195858,
+          "scene.c": 0,
+          "box": 4196372,
+          "letters": 4202154,
+          "digits": 4202180,
+          "glyph": 4196766,
+          "number": 4196952,
+          "surface.c": 0,
+          "validate": 4198084,
+          "traps.c": 0,
+          "rom_address": 4199288,
+          "config_valid": 4199342,
+          "state_valid": 4199684,
+          "executable": 4199730,
+          "intrinsic": 4200524,
+          "begin_report": 4200686,
+          "probe.c": 0,
+          "cs_surface_fill": 4198608,
+          "cs_trap_set": 4200416,
+          "__data_load": 4202200,
+          "cs_trap_get": 4200280,
+          "cs_surface_init": 4198486,
+          "cs_trap_direct": 4201130,
+          "memcpy": 4195094,
+          "__rom_code_end": 4202200,
+          "__udivsi3": 4194898,
+          "cs_trap_init": 4200050,
+          "cs_surface_clear": 4199182,
+          "__rom_end": 4202200,
+          "__bss_end": 4932,
+          "cs_mac_fault": 4194676,
+          "cs_mac_probe": 4194664,
+          "__umodsi3": 4194928,
+          "cs_trap_decode": 4199798,
+          "__data_end": 2816,
+          "__mulsi3": 4194696,
+          "cs_mac_scene": 4197116,
+          "cs_mac_image_crc": 4195164,
+          "__bss_start": 2816,
+          "cs_mac_loop_begin": 4195486,
+          "__divsi3": 4194962,
+          "cs_mac_main": 4195898,
+          "cs_service_probe": 4201268,
+          "cs_trap_call": 4200782,
+          "cs_mac_reset": 4194564,
+          "cs_mac_loop_poll": 4195554,
+          "cs_mac_vectors": 4194304,
+          "cs_mac_via_init": 4195308,
+          "cs_mac_diag": 2816,
+          "__data_start": 2816
+        },
+        "stack_frames": [
+          {
+            "function": "__mulsi3",
+            "bytes": 4
+          },
+          {
+            "function": "divide",
+            "bytes": 20
+          },
+          {
+            "function": "__udivsi3",
+            "bytes": 16
+          },
+          {
+            "function": "__umodsi3",
+            "bytes": 16
+          },
+          {
+            "function": "__divsi3",
+            "bytes": 32
+          },
+          {
+            "function": "memcpy",
+            "bytes": 12
+          },
+          {
+            "function": "cs_mac_image_crc",
+            "bytes": 20
+          },
+          {
+            "function": "cs_mac_via_init",
+            "bytes": 12
+          },
+          {
+            "function": "cs_mac_loop_begin",
+            "bytes": 4
+          },
+          {
+            "function": "cs_mac_loop_poll",
+            "bytes": 16
+          },
+          {
+            "function": "read_reg",
+            "bytes": 0
+          },
+          {
+            "function": "write_reg",
+            "bytes": 4
+          },
+          {
+            "function": "cs_mac_main",
+            "bytes": 100
+          },
+          {
+            "function": "box",
+            "bytes": 40
+          },
+          {
+            "function": "glyph",
+            "bytes": 44
+          },
+          {
+            "function": "number",
+            "bytes": 32
+          },
+          {
+            "function": "cs_mac_scene",
+            "bytes": 84
+          },
+          {
+            "function": "validate",
+            "bytes": 36
+          },
+          {
+            "function": "cs_surface_init",
+            "bytes": 28
+          },
+          {
+            "function": "cs_surface_fill",
+            "bytes": 64
+          },
+          {
+            "function": "cs_surface_clear",
+            "bytes": 40
+          },
+          {
+            "function": "rom_address",
+            "bytes": 0
+          },
+          {
+            "function": "config_valid",
+            "bytes": 8
+          },
+          {
+            "function": "state_valid",
+            "bytes": 4
+          },
+          {
+            "function": "executable",
+            "bytes": 8
+          },
+          {
+            "function": "cs_trap_decode",
+            "bytes": 4
+          },
+          {
+            "function": "cs_trap_init",
+            "bytes": 8
+          },
+          {
+            "function": "cs_trap_get",
+            "bytes": 12
+          },
+          {
+            "function": "cs_trap_set",
+            "bytes": 12
+          },
+          {
+            "function": "intrinsic",
+            "bytes": 24
+          },
+          {
+            "function": "begin_report",
+            "bytes": 0
+          },
+          {
+            "function": "cs_trap_call",
+            "bytes": 32
+          },
+          {
+            "function": "cs_trap_direct",
+            "bytes": 20
+          },
+          {
+            "function": "cs_service_probe",
+            "bytes": 140
+          }
+        ],
+        "corruption_controls": 7,
+        "omitted_object_controls": 8
+      }
+    ],
+    "inputs": {
+      "arch/m68k/mac-reset.S": "80c2cc8c5c4825e8fafb8a254e100a465a8ba364e0d049c46635b47615897337",
+      "arch/m68k/runtime.c": "1e3fa635a12a6ac91b30f25fdf19c493b84493dcecc4ce7e4dcc298c3412d078",
+      "platform/mac128k/loop.c": "89680e5d2c4222cfa1578012275c4ed074b67718c01fc97877a95c0124b7dacc",
+      "platform/mac128k/entry.c": "133e2d763ddda1c3652dd3de82a3eb77ea308c1a697115b17bbc08083d703720",
+      "apps/rom-scene/scene.c": "481af50ded6f22475d601de56039816463773f5f2916a6281110c7a8b8053c3e",
+      "core/graphics/surface.c": "157ed442c0278a344b57cb0e08657c30273de2a62199d72a30b38e5ee7ea1c5c",
+      "core/services/traps.c": "585adf0742f51390bc44ba086b58e22361bb7188c1205bcc11968875f0cbb1ef",
+      "apps/service-probe/probe.c": "0e32e53ebf65a4b99d9bb494f69ea86daaa6df880d5be28559870f7e218c2cc2",
+      "arch/m68k/runtime.h": "8b0de7d191dbcb43576a32c88e604f7c3145ac094af5137cc128381a0ff074e8",
+      "platform/mac128k/rom.h": "d6203725977adea526f568c1f57b5b0e96fef5a092ebadde1510290b0c3d990a",
+      "core/graphics/surface.h": "31de605b79282fac7f4208e28aab328662df975a03028ac16fe179672d6dc264",
+      "arch/m68k/mac-rom.ld": "5d5b7d93dde8b7ae395832955d43baede81f82df50a9b2cda07a2146dd40ae65",
+      "docs/specifications/SPEC-0018-mac128k-rom-startup.md": "7f3bd3beab2c72c478c96069ce3c034aa598d31f0dc753239e470d126779b434",
+      "core/services/traps.h": "a3346547364a2237027dbe1d134b81129e80f9731f4c49c813fc9f68563fd782",
+      "apps/service-probe/probe.h": "ae48c5583f34ad80ecb89bac0f8b3dfa0729b1f19c9270b01875e7b6305772ec",
+      "docs/specifications/SPEC-0020-shared-trap-address-services.md": "15604032e42f66ce560658c7446f943a0d5945fcf8dbb1e9e30d8439d1715c28"
+    },
+    "stack_reserved_bytes": 8192,
+    "stack_measured_high_water": false,
+    "ram_view_scope": "Own vector RAM initially visible, diagnostic record and adjacent own directory header; retain only 40 diagnostic bytes. No ROM/code/disassembly.",
+    "trials": [
+      {
+        "trial": "cold-01",
+        "status": "passed",
+        "started_utc": "2026-10-12T13:43:34.4713026Z",
+        "observed_utc": "2026-10-12T13:49:46.862Z",
+        "address": "00000B00",
+        "own_bytes": 40,
+        "diagnostic_hex": "435330390000000400000E1A00000000000000016AD16297000000000000000A0000000053564331",
+        "magic_hex": "43533039",
+        "stage": 4,
+        "ticks": 3610,
+        "presses": 0,
+        "trap_returns": 1,
+        "image_crc32": "6ad16297",
+        "fault": 0,
+        "service_checks": 10,
+        "service_status": 0,
+        "service_signature": "53564331",
+        "generated_guest_input": false,
+        "closed": "window-gone-and-normal-loop-exit-log",
+        "exit_code": null
+      },
+      {
+        "trial": "cold-02",
+        "status": "passed",
+        "started_utc": "2026-10-12T13:52:53.1534523Z",
+        "observed_utc": "2026-10-12T13:58:04.835Z",
+        "address": "00000B00",
+        "own_bytes": 40,
+        "diagnostic_hex": "435330390000000400000E1A00000000000000016AD16297000000000000000A0000000053564331",
+        "magic_hex": "43533039",
+        "stage": 4,
+        "ticks": 3610,
+        "presses": 0,
+        "trap_returns": 1,
+        "image_crc32": "6ad16297",
+        "fault": 0,
+        "service_checks": 10,
+        "service_status": 0,
+        "service_signature": "53564331",
+        "generated_guest_input": false,
+        "closed": "window-gone-and-normal-loop-exit-log",
+        "exit_code": null
+      }
+    ],
+    "windows_closed": true,
+    "apple_rom_used": false
+  },
+  "formal_b2": "partial-criterion-6-unchanged",
+  "full_editions": "not-started",
+  "parity": "not-tested",
+  "human_provenance_review": "pending",
+  "failure_history": [
+    "Additional i686 O0 audit found compiler-generated memcpy; replaced aggregate initialization/copy with scalar stores and repeated fresh verification.",
+    "Existing-output retry refused as required; final fresh object wrapper passed.",
+    "Snow accessibility clicks did not open menus; observed alternate-button coordinates worked."
+  ]
+}

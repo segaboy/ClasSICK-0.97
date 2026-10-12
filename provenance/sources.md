@@ -5,6 +5,18 @@ eligibility applies to the stated scope, not every resource reachable from a URL
 No Apple executable, source, disassembly, decompilation, or copied asset was used.
 Project-owned black-box native trials are recorded separately below.
 
+## SRC-0091 - Shared C service probe observations
+
+2026-10-12, SPEC-0020 / TEST-0028, compiled source
+`02e2f5a6daf29a1fd4dc7a61ea460d371fa493ee`. Three fresh isolated PC starts and
+two fresh Snow 128K profiles report ten original service checks, zero errors and
+signature 53564331. [Detailed report](../docs/development/shared-services-evidence.md).
+Only own post-success PC registers and own Mac RAM/scene observed; retain forty
+Mac diagnostic bytes, no firmware/code/full dumps or protected pixels. Exact
+cleared platforms retained; prior machines/media unchanged. CI 38257185223 passes
+both jobs and matches all six EFI/two ROM profiles/source fingerprints. Original
+project evidence, not January 1984/physical/complete OS compatibility.
+
 ## SRC-0088 - Owner continuation to shared OS services
 
 Owner, 2026-10-12: "OK, let's do it" after the completed PC fault checkpoint
