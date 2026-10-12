@@ -4,7 +4,7 @@ OUTPUT_FORMAT("elf32-m68k")
 OUTPUT_ARCH(m68k)
 ENTRY(cs_mac_reset)
 MEMORY { ROM (rx) : ORIGIN = 0x400000, LENGTH = 64K
-         RAM (rw) : ORIGIN = 0xB00, LENGTH = 0x500 }
+         RAM (rw) : ORIGIN = 0xB00, LENGTH = 0x1500 }
 SECTIONS {
     .vectors : { KEEP(*(.vectors)) } > ROM
     .seal : { KEEP(*(.seal)) } > ROM
@@ -22,5 +22,5 @@ SECTIONS {
 }
 ASSERT(SIZEOF(.vectors) == 256, "Reset/vector span differs")
 ASSERT(ADDR(.seal) == 0x400100 && SIZEOF(.seal) == 4, "Seal location differs")
-ASSERT(__bss_end <= 0x1000, "Own data/BSS exceeds reserved span")
+ASSERT(__bss_end <= 0x2000, "Own data/BSS exceeds reserved span")
 ASSERT(__rom_end <= 0x410000, "Demonstrator ROM exceeds 64 KiB")

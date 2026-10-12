@@ -116,3 +116,11 @@ quotient/remainder and signed division truncated toward zero. Signed minimum
 divided by -1 returns the minimum bit pattern by design; zero divisor triggers
 our fault path. Original memcpy handles non-overlapping valid ranges only.
 No target libgcc/libc runtime is linked. Unneeded 64-bit helpers are not adopted.
+
+2026-10-12 engineering extension, SPEC-0020: before VIA/scene startup, call the
+same portable trap-address probe as the PC. Append own check/status/signature
+fields to diagnostics without moving the TRAP/fault assembly fields. Reserve
+static service state below 0x2000 (expanded from the initial 0x1000 upper bound),
+keeping the 8-KiB ordinary stack and other RAM/hardware ranges. The linker and
+ELF audit enforce the new bound; record measured use separately. This C probe
+does not execute Line-A instructions or complete historical OS services.

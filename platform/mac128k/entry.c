@@ -1,8 +1,10 @@
 /* SPDX-License-Identifier: GPL-3.0-or-later */
 /* Copyright (C) 2026 Dean Howell. */
 #include "rom.h"
+#include "../../apps/service-probe/probe.h"
 
 volatile cs_mac_diagnostics cs_mac_diag;
+static cs_trap_gateway cs_mac_services;
 _Static_assert(offsetof(cs_mac_diagnostics,traps)==16,"Trap assembly offset");
 _Static_assert(offsetof(cs_mac_diagnostics,fault)==24,"Fault assembly offset");
 extern void cs_mac_probe(void);
@@ -33,6 +35,12 @@ void cs_mac_main(void)
     }
     cs_mac_probe();
     if(cs_mac_diag.traps!=1u) {cs_mac_diag.fault=2; for(;;) { }}
+    cs_service_probe_result service_result;
+    int services_ok=cs_service_probe(&cs_mac_services,&service_result);
+    cs_mac_diag.service_checks=service_result.checks;
+    cs_mac_diag.service_status=service_result.status;
+    cs_mac_diag.service_signature=service_result.signature;
+    if(!services_ok) {cs_mac_diag.fault=6; for(;;) { }}
     cs_mac_via_init(&io);
     if(cs_surface_init(&screen,(uint8_t *)(uintptr_t)UINT32_C(0x1A700),CS_MAC_SCREEN_BYTES,
             512,342,64,CS_SURFACE_MONO1_MSB)!=CS_SURFACE_OK) {

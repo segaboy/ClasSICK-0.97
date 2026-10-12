@@ -8,9 +8,11 @@ Set-StrictMode -Version Latest
 $ErrorActionPreference='Stop'
 if(-not $OwnerApproved){throw 'Require owner approval for SPEC-0019 launch.'}
 . (Join-Path $PSScriptRoot 'FaultObservation.ps1')
+. (Join-Path $PSScriptRoot 'ServiceObservation.ps1')
 $p=Get-Content -LiteralPath (Join-Path $TrialRoot 'prepared.json') -Raw | ConvertFrom-Json
 $admission=Get-Content -LiteralPath (Join-Path $TrialRoot 'fault-admission.json') -Raw | ConvertFrom-Json
-if($p.candidate -ne 'SPEC-0019' -or $admission.uuid -ne $p.uuid){throw 'Owned fault VM admission rejected.'}
+if($p.candidate -notin @('SPEC-0019','SPEC-0020') -or $admission.uuid -ne $p.uuid -or
+    ($p.candidate -eq 'SPEC-0020' -and $Profile -ne 'none')){throw 'Owned fault/service VM admission rejected.'}
 $medium=$admission.profiles.$Profile
 $serial=Join-Path $TrialRoot ($Trial+'-serial.txt');$record=Join-Path $TrialRoot ($Trial+'-observations.json')
 $commandLog=Join-Path $TrialRoot ($Trial+'-commands.json')
@@ -32,7 +34,7 @@ $null=Run @('storageattach',$p.uuid,'--storagectl','ClasSICK-SATA','--port','0',
 $null=Run @('modifyvm',$p.uuid,'--uart-mode1','file',$serial)
 & (Join-Path $PSScriptRoot 'Review-FaultVM.ps1') -VBoxManage $VBoxManage -TrialRoot $TrialRoot -Disk $medium.vdi -Serial $serial
 $clock=[Diagnostics.Stopwatch]::StartNew();$events=@();$snapshots=@();$seen=0;$started=$false
-$observation=[ordered]@{contract='SPEC-0019';trial=$Trial;profile=$Profile;source_revision=$admission.source_revision;
+$observation=[ordered]@{contract=$p.candidate;trial=$Trial;profile=$Profile;source_revision=$admission.source_revision;
     status='incomplete';generated_input=$false;firmware_memory_read=$false;events=@();registers=@()}
 try{
     $null=Run @('startvm',$p.uuid,'--type','headless');$started=$true
@@ -58,6 +60,7 @@ try{
         @($lines | Where-Object {$_ -eq 'qual port=00000003/00000003 a20=00000000/00000000'}).Count -ne 1){throw 'No successful own run; do not query registers.'}
     $symbols=@{};foreach($item in $medium.symbols.PSObject.Properties){$symbols[$item.Name]=[long]$item.Value}
     $registerNames=if($Profile -eq 'none'){@('rip','rsp')}else{@('rip','rsp','rcx','r9','r10','r11','r12','r13','r14','r15','rsi','rdi')}
+    if($p.candidate -eq 'SPEC-0020'){$registerNames+=@('rcx','r9','r10','r11','r14')}
     foreach($sample in @(1,2)){
         Start-Sleep -Milliseconds 1000
         $out=@(Run (@('debugvm',$p.uuid,'getregisters')+$registerNames));$registers=@{}
@@ -69,6 +72,7 @@ try{
         $observation.registers=$snapshots;$observation.events=$events
         $observation | ConvertTo-Json -Depth 8 | Set-Content -LiteralPath $record -Encoding UTF8
         Confirm-FaultObservation $Profile $lines $registers $symbols
+        if($p.candidate -eq 'SPEC-0020'){Confirm-ServiceObservation $lines $registers}
     }
     foreach($key in $registerNames){if($snapshots[0].values[$key] -ne $snapshots[1].values[$key]){throw 'Terminal register observation unstable.'}}
     $observation.status='passed';Write-Output "Native $Profile fault/control observation PASS."

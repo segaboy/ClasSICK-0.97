@@ -210,6 +210,12 @@ project's own choosing:
 
 ## Acceptance before finalization
 
+2026-10-12 cross-check: SRC-0089 confirms published 1985 word fields,
+Get/Set parameters, register rules and word-test behavior. It explicitly warns
+that format and calling convention have exceptions, so Q2 is still open.
+SPEC-0020 implements a separate bounded C engineering slice; this full historical
+draft remains unfinalized. No January 1984 confirmation or complete Line-A ABI.
+
 - Every **[DOC]** item confirmed for the January 1984 profile, or explicitly
   marked as a later-manual rule the profile adopts.
 - Q2–Q8 resolved or turned into explicit design decisions.

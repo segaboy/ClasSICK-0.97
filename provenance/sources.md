@@ -5,6 +5,45 @@ eligibility applies to the stated scope, not every resource reachable from a URL
 No Apple executable, source, disassembly, decompilation, or copied asset was used.
 Project-owned black-box native trials are recorded separately below.
 
+## SRC-0088 - Owner continuation to shared OS services
+
+Owner, 2026-10-12: "OK, let's do it" after the completed PC fault checkpoint
+and proposed shared OS services for Mac and PC. Authorizes original contracts,
+bounded implementation/probes/tests and normal evidence/HQ Git publication.
+The continuation go-ahead covers this slice's necessary bounded probe checks on
+the existing cleared platforms; use one fresh isolated PC VM and fresh Snow
+profiles, retaining prior machines/media and the no-firmware-internals boundary.
+No Apple input, firmware internals, UART implementation review, delegation,
+physical writing or OneNote. Full historical/edition gates remain separate.
+
+## SRC-0089 - Published trap-address service interfaces, cross-check
+
+2026-10-12, SRC-0068/0078 published March 1985 Promotional Edition, local
+1,326-page scan SHA-256 `924902074a9798457949c46f83ac016c98b10f50258ef36c277dcd0f8278b237`.
+Assembly chapter printed 8 (PDF106, Figures 2/3 visually reviewed), 9, 12 and
+14 (PDF107/110/112); OS Utilities printed 21-22 (PDF1178-1179). Scope: trap
+word fields, per-routine calling convention warning, register preservation,
+D0 word test, Get/Set parameters/results and installed-address semantics.
+Published retail Volume III (SRC-0080), Appendix C III-222 (PDF229, visually
+reviewed) confirms A146/A047. These are later-manual rules, not January 1984
+confirmation. [Published scan](https://vintageapple.org/inside_o/pdf/Inside_Macintosh_Promotional_Edition_1985.pdf).
+No sample caller instructions, equate files, compressed table representation,
+dispatcher algorithm, assets or Apple implementation used. The original flat
+32-bit address directory is our engineering choice, not an Apple layout.
+
+SRC-0069 additional prose reviewed: Motorola 1992 programmer's manual TST,
+printed 4-192 / PDF296: N/Z from operand, V/C clear, X unchanged. Official
+[publisher-successor PDF](https://www.nxp.com/docs/en/reference-manual/M68000PRM.pdf).
+No downloaded image/hash claimed; instruction prose only. Used for explicit
+word-test semantics in the two-service C boundary, not CPU instruction execution.
+
+## SRC-0090 - Original portable trap-address contract and fixtures
+
+SPEC-0020 / ADR-0023 / IMPL-0024 / TEST-0028: independently authored native
+C state, checked logical addresses, explicit service results and probes. Eligible
+project artifacts; Codex-assisted, lead self-review, human provenance review
+pending. No third-party implementation or copied assets.
+
 ## SRC-0087 - Own native terminal-fault observations
 
 2026-10-12; SPEC-0019 / TEST-0027. Three UD and three GP cold starts plus one

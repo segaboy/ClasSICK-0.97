@@ -77,14 +77,15 @@ $names=@('cs_uefi_check_framebuffer','cs_uefi_check_map','cs_uefi_check_owned','
     'cs_uefi_exit_snapshot','cs_uefi_exit_observe','cs_uefi_exit_allowed','cs_uefi_table_crc',
     'cs_uefi_image_spans','cs_uefi_loader_run','cs_uefi_entry','cs_native_stop','cs_x64_enter','cs_native_halt','cs_entry_anchor',
     'cs_x64_tables_init','cs_x64_install','cs_x64_reload','cs_x64_vector_base','cs_x64_vector_end','cs_x64_fault','cs_x64_active_state',
-    'cs_x64_terminal_halt','cs_x64_fault_observe',
+    'cs_x64_terminal_halt','cs_x64_fault_observe','cs_x64_services_stop',
     'cs_surface_init','cs_surface_fill','cs_surface_clear','cs_arena_init','cs_arena_alloc','cs_arena_reset',
     'cs_fb_init','cs_fb_present','cs_scene_render','cs_boot_scene_prepare','cs_boot_scene_draw','cs_native_present',
     'cs_uefi_acpi20_rsdp','cs_native_read','cs_native_timer_probe','cs_acpi_find_pm_timer',
     'cs_pmtimer_init','cs_pmtimer_sample','cs_pmtimer_time','cs_x64_inl','cs_native_progress_loop',
     'cs_ps2_begin','cs_ps2_poll','cs_acpi_8042','cs_native_keyboard_loop',
     'cs_input_init','cs_input_push','cs_input_pop','cs_input_reset','cs_x64_inb','cs_x64_outb',
-    'cs_uart_begin','cs_uart_enqueue','cs_uart_finish','cs_uart_poll','cs_native_keyboard_observed','cs_native_uart_loop')
+    'cs_uart_begin','cs_uart_enqueue','cs_uart_finish','cs_uart_poll','cs_native_keyboard_observed','cs_native_uart_loop',
+    'cs_trap_decode','cs_trap_init','cs_trap_get','cs_trap_set','cs_trap_call','cs_trap_direct','cs_service_probe')
 if($FaultProbe -ne 'none'){$names+='cs_x64_probe_instruction'}
 elseif($mapText -match '(?m)\s+cs_x64_probe_instruction\s*$'){throw 'Probe profile rejected.'}
 $symbols=@{}
@@ -144,6 +145,11 @@ if($FaultProbe -eq 'none'){
     if($FaultProbe -eq 'ud'){Exact $symbols.cs_native_halt ([byte[]]@(0x0F,0x0B,0xEB,0)) 'Probe bytes rejected.'}
     else{Exact $symbols.cs_native_halt ([byte[]]@(0x66,0xB8,0x28,0,0x8E,0xD8,0xEB,0)) 'Probe bytes rejected.'}
 }
+# SPEC-0020: after the ordinary loop, expose only our completed portable probe.
+$services=$symbols.cs_x64_services_stop; $servicesRaw=Raw $services 24
+Exact $services ([byte[]]@(0xFA,0xFC,0x44,0x8B,0x09,0x44,0x8B,0x51,4,0x44,0x8B,0x59,8,
+    0x41,0xBE,0x31,0x53,0x53,0x43,0xE9)) 'Service export bytes rejected.'
+if($services+24+[BitConverter]::ToInt32($bytes,[int]($servicesRaw+20)) -ne $symbols.cs_native_halt){throw 'Service halt destination rejected.'}
 # One original pointer slot is the only writable image data. Tables/stacks live
 # in the separate loader bundle. LTR needs writable GDT busy-bit storage there.
 $dataSections=@($sections | Where-Object {($_.flags -band 2147483648) -ne 0})
@@ -200,5 +206,5 @@ $result=[pscustomobject]@{sha256=(Get-FileHash -LiteralPath $Image -Algorithm SH
     original_symbols=$names.Count;imports=0;runtime_libraries=0;reloc_raw=$relocRaw;
     anchor_raw=$anchorRaw;transition_raw=$transitionRaw;halt_raw=$haltRaw;first_section_header=$sections[0].header;
     install_raw=$installRaw;reload_raw=$reloadRaw;vector_raw=$vectorRaw;fault_raw=$faultRaw;state_raw=$stateRaw;inl_raw=$inlRaw;inb_raw=$inbRaw;outb_raw=$outbRaw;vectors=256;
-    fault_probe=$FaultProbe;probe_raw=$probeRaw;symbols=$symbols}
+    fault_probe=$FaultProbe;probe_raw=$probeRaw;services_raw=$servicesRaw;symbols=$symbols}
 if($PassThru){$result}else{Write-Output 'EFI image audit PASS: original entry/stack/halt, bounded relocations, zero imports/libraries; unloaded.'}

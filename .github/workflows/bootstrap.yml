@@ -31,10 +31,7 @@ jobs:
         run: .\scripts\Verify-Bootstrap.ps1
       - name: Verify hosted core, loader, exceptions, devices, boot media and unloaded fault fixtures
         shell: powershell
-        run: .\scripts\Verify-FaultCheckpoint.ps1 -BuildRoot build\media-verification -Sanitizers
-      - name: Verify original Mac ROM hosted contracts
-        shell: powershell
-        run: .\scripts\Verify-MacROM.ps1 -BuildRoot build\mac-hosted
+        run: .\scripts\Verify-SharedServices.ps1 -BuildRoot build\media-verification -Sanitizers
 
   m68k-rom:
     runs-on: ubuntu-24.04

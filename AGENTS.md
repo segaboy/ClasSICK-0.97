@@ -3,6 +3,14 @@
 Read `docs/clean-room/POLICY.md`, `CONTRIBUTING.md`, and
 `provenance/README.md` before researching or changing this project.
 
+- On 2026-10-12 the owner said "OK, let's do it" to the shared OS services
+  step after the PC fault checkpoint (SRC-0088). SPEC-0020 implements the first
+  bounded portable trap-address service slice, its own native build probes,
+  verification on the already cleared VirtualBox/Snow platforms with fresh
+  isolation, and ordinary evidence/HQ Git publication. SPEC-0017's complete
+  historical gateway remains a draft. Preserve UART role separation and the
+  existing black-box/physical/edition boundaries; no new delegation or OneNote.
+
 - On 2026-10-12 the owner said "OK, do it" to the proposed short PC controlled
   CPU-fault checkpoint (SRC-0085). SPEC-0019 covers original exception/probe
   assembly, image audits, a new isolated VirtualBox VM, repeated headless cold

@@ -14,9 +14,11 @@ BASE=0x400000
 SEAL=256
 SIZE=65536
 SOURCES=('arch/m68k/mac-reset.S','arch/m68k/runtime.c','platform/mac128k/loop.c',
-         'platform/mac128k/entry.c','apps/rom-scene/scene.c','core/graphics/surface.c')
+         'platform/mac128k/entry.c','apps/rom-scene/scene.c','core/graphics/surface.c',
+         'core/services/traps.c','apps/service-probe/probe.c')
 HEADERS=('arch/m68k/runtime.h','platform/mac128k/rom.h','core/graphics/surface.h',
-         'arch/m68k/mac-rom.ld','docs/specifications/SPEC-0018-mac128k-rom-startup.md')
+         'arch/m68k/mac-rom.ld','docs/specifications/SPEC-0018-mac128k-rom-startup.md',
+         'core/services/traps.h','apps/service-probe/probe.h','docs/specifications/SPEC-0020-shared-trap-address-services.md')
 
 def run(args,env):
     p=subprocess.run([str(a) for a in args],env=env,text=True,stdout=subprocess.PIPE,stderr=subprocess.STDOUT)
@@ -52,7 +54,7 @@ def symbols(elf):
                 if index==0: raise ValueError('Undefined symbol '+label)
                 result[label]=value
     if entry!=result.get('cs_mac_reset') or not BASE+260<=entry<result.get('__rom_code_end',0): raise ValueError('Entry')
-    if not 0xB00<=result['__data_start']<=result['__data_end']<=result['__bss_start']<=result['__bss_end']<=0x1000: raise ValueError('RAM span')
+    if not 0xB00<=result['__data_start']<=result['__data_end']<=result['__bss_start']<=result['__bss_end']<=0x2000: raise ValueError('RAM span')
     if not BASE+260<=result['__rom_end']<=BASE+SIZE: raise ValueError('ROM span')
     return result
 
@@ -124,7 +126,7 @@ def main():
         if one['image_sha256']!=two['image_sha256']: raise ValueError('Image twins differ')
         manifests.append(one)
     inputs={f:hashlib.sha256((repo/f).read_bytes().replace(b'\r\n',b'\n')).hexdigest() for f in (*SOURCES,*HEADERS)}
-    result=dict(schema_version=1,specification='SPEC-0018',compiler=run([tools/'usr/bin/m68k-linux-gnu-gcc-13','--version'],env).splitlines()[0],
+    result=dict(schema_version=1,specification='SPEC-0018+SPEC-0020',compiler=run([tools/'usr/bin/m68k-linux-gnu-gcc-13','--version'],env).splitlines()[0],
                 tool_lock_sha256=hashlib.sha256((repo/'scripts/m68k-toolchain-lock.json').read_bytes().replace(b'\r\n',b'\n')).hexdigest(),
                 inputs=inputs,profiles=manifests,emulator_run=False)
     (out/'manifest.json').write_text(json.dumps(result,indent=2)+'\n')

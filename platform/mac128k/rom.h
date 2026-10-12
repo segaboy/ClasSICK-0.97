@@ -17,6 +17,7 @@ typedef struct {
 } cs_mac_loop;
 typedef struct {
     uint32_t magic, stage, ticks, presses, traps, image_crc, fault;
+    uint32_t service_checks,service_status,service_signature;
 } cs_mac_diagnostics;
 extern volatile cs_mac_diagnostics cs_mac_diag;
 uint32_t cs_mac_image_crc(const volatile uint8_t *image, size_t size);

@@ -4,9 +4,16 @@
 #include "keyboard.h"
 #include "uart.h"
 #include "../pc/x64/state.h"
+#include "../../apps/service-probe/probe.h"
+typedef struct { cs_trap_gateway gateway; cs_service_probe_result result; } cs_native_services;
+_Static_assert(sizeof(cs_native_services)<=CS_LOADER_SERVICE_BYTES,"Shared services fit owned tail slice");
+_Static_assert(offsetof(cs_native_services,result)==2076,"Published service observer offset");
+_Static_assert(CS_LOADER_SERVICE_OFFSET+CS_LOADER_SERVICE_BYTES<=CS_LOADER_BUNDLE,"Service slice fits bundle");
+_Static_assert(offsetof(cs_service_probe_result,status)==4 && offsetof(cs_service_probe_result,signature)==8,"Observer assembly offsets");
 typedef void (CS_EFIAPI *cs_native_transfer)(cs_uefi_handoff *,uint64_t);
 extern cs_native_transfer const volatile cs_entry_anchor;
 extern void CS_EFIAPI cs_native_halt(void);
+extern void CS_EFIAPI cs_x64_services_stop(const cs_service_probe_result *result);
 extern void CS_EFIAPI cs_x64_install(void *state);
 extern const unsigned char cs_x64_vector_base[];
 extern uint32_t CS_EFIAPI cs_x64_inl(uint32_t port);
@@ -35,8 +42,14 @@ void CS_EFIAPI cs_native_stop(cs_uefi_handoff *handoff)
     layout.stack_top=handoff->stack_top;
     for(unsigned i=0;i<4;++i)
         layout.ist_top[i]=handoff->bundle_base+CS_LOADER_FAULT_OFFSET+(i+1)*UINT64_C(4096);
-    if(cs_x64_tables_init((void *)(uintptr_t)layout.state_base,CS_X64_STATE_BYTES,&layout)==CS_X64_OK)
-        cs_x64_install((void *)(uintptr_t)layout.state_base);
+    if(cs_x64_tables_init((void *)(uintptr_t)layout.state_base,CS_X64_STATE_BYTES,&layout)!=CS_X64_OK) {
+        cs_native_halt(); for(;;) { }
+    }
+    cs_x64_install((void *)(uintptr_t)layout.state_base);
+    cs_native_services *services=(cs_native_services *)(uintptr_t)(handoff->bundle_base+CS_LOADER_SERVICE_OFFSET);
+    if(!cs_service_probe(&services->gateway,&services->result)) {
+        cs_native_halt(); for(;;) { }
+    }
     /* SPEC-0009: presentation itself rechecks successful exit and the ready marker. */
     volatile uint32_t *ready=(volatile uint32_t *)(uintptr_t)(layout.state_base+CS_X64_READY);
     (void)cs_native_present(handoff,*ready,
@@ -64,7 +77,7 @@ void CS_EFIAPI cs_native_stop(cs_uefi_handoff *handoff)
         (unsigned char *)(uintptr_t)(handoff->trace_base+CS_KBD_TRACE_OFFSET),
         (unsigned char *)(uintptr_t)(handoff->trace_base+CS_UART_TRACE_OFFSET),
         (unsigned char *)(uintptr_t)(handoff->trace_base+CS_QUAL_TRACE_OFFSET));
-    cs_native_halt();
+    cs_x64_services_stop(&services->result);
 }
 cs_efi_status CS_EFIAPI cs_uefi_entry(void *image,cs_efi_system *system)
 {
