@@ -5,6 +5,37 @@ eligibility applies to the stated scope, not every resource reachable from a URL
 No Apple executable, source, disassembly, decompilation, or copied asset was used.
 No reference-system black-box observation has yet been performed.
 
+## SRC-0075 — Own Mini vMac admission review and installed tool capability
+
+- Codex, 2026-10-11, [admission review](../docs/research/mini-vmac-admission.md),
+  from public `7d2c4bf514cd92bada3cdf2b1a07eb9b0b87061d` and SRC-0074.
+  Original documentation only; no emulator download/run/source inspection,
+  ROM access or new boot code. Exact platform clearance and trial approval absent.
+- Installed pinned LLVM-MinGW 20260908: Clang reports 23.1.1 and no M68k
+  registered target; `llc.exe` is absent. Tool capability observation, not a
+  compiler adoption or 68000 build result. The owner asked which Mini vMac to
+  provide and where; this is not a go-ahead to run it.
+- Publisher-documented ROM patching triggers the supplied handoff's stop for
+  owner decision. Originality/provenance self-review only; human review pending.
+
+## SRC-0074 — Gryphel Mini vMac publisher documentation
+
+- Paul C. Pratt / Gryphel Project; reviewed 2026-10-11 through browser-extracted
+  text: [stable 36.04 download](https://www.gryphel.com/c/minivmac/dnld_std.html),
+  [hardware reference](https://www.gryphel.com/c/minivmac/hardware.html),
+  [options](https://www.gryphel.com/c/minivmac/options.html),
+  [developer options](https://www.gryphel.com/c/minivmac/develop.html),
+  [variation directions](https://www.gryphel.com/c/minivmac/var_dir.html).
+- Eligible only as published user/build interface documentation: hardware ROM
+  loading/checksum/patching and Floppy Drives; options Model, Memory, ROM Size,
+  Check ROM Checksum, Disable Rom Check, Disable Ram Test and Minimum Extensions;
+  stable version/model and variation service conditions. Pages dated 2020;
+  exact installed variation behavior still needs qualification. Copyrighted
+  prose is cited and paraphrased, not republished; no source code, patch bodies,
+  binaries, Apple payloads or linked implementation material read or adopted.
+- This is documentation eligibility, **not** clearance of any Mini vMac binary.
+  Findings and unresolved platform admission: [review](../docs/research/mini-vmac-admission.md).
+
 ## SRC-0073 — Owner priority: Mini vMac first boot, size later
 
 - Owner, 2026-10-11, after the 128K feasibility study: "For right now, all I

@@ -16,6 +16,14 @@ does not imply that the complete project foundation or any OS boot is finished.
 
 ## Achieved
 
+- Mini vMac admission review (2026-10-11, SRC-0074/0075): publisher docs
+  explicitly describe loaded-ROM patching, including a replacement disk driver.
+  The documented check/test switches do not establish an unpatched image.
+  [Review and requested candidate](research/mini-vmac-admission.md): 36.04,
+  Windows x86-64, Macintosh 128K. No executable cleared or emulator run; owner
+  decision on further qualification pending under the supplied handoff. The
+  pinned Windows Clang has no M68k target. No boot code or gate changed.
+
 - Owner priority (2026-10-11, SRC-0073): get our own ROM image booting in Mini
   vMac first, regardless of size; size work later. Handed to ChatGPT.
 

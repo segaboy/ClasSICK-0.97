@@ -25,6 +25,12 @@ reflects potential scope impact, not confirmed incompatibility.
 
 ## Initial debt register
 
+- **R-003/R-011 update, 2026-10-11:** [Mini vMac admission review](mini-vmac-admission.md)
+  records publisher-documented ROM patching and a pending owner decision before
+  platform adoption/trial. A 36.04 Macintosh 128K variation is only a candidate.
+  Installed pinned Windows Clang has no M68k target. No emulator binary cleared,
+  no ROM built, no startup specification finalized.
+
 - **TD-001, HQ, before M0.3:** 128K feasibility and exact hardware startup remain
   unproven; architectural optionality is not a size proof. 2026-10-11:
   [feasibility study](mac128k-feasibility.md) budgets RAM from SRC-0071 and
