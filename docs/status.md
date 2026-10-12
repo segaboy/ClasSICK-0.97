@@ -16,6 +16,16 @@ does not imply that the complete project foundation or any OS boot is finished.
 
 ## Achieved
 
+- Macintosh 128K feasibility study (2026-10-11,
+  [record](research/mac128k-feasibility.md)): the documented 128K layout leaves
+  88,320 bytes for applications, so ClasSICK's RAM must fit where Apple's system
+  lived and its code must fit in a replacement ROM. Apple's ROM fits in 64 KB;
+  a vendor states 128K boards run 128 KB ROM code (SRC-0072, unverified). The
+  current core and boot scene measure 3,572 bytes for the 68000 (GCC, `-Os`).
+  Verdict: not yet proven; plausible with 128 KB of ROM. Recommendation: target
+  a replacement ROM of at least 128 KB, keep the RAM layout, add a 68000 size
+  report. No specification or code changed.
+
 - SPEC-0017 draft 0 (2026-10-11,
   [draft](specifications/SPEC-0017-trap-gateway.md)): the System 1 trap gateway,
   written from *Inside Macintosh* Volume I's assembly chapter and the two

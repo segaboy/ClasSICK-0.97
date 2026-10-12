@@ -5,6 +5,22 @@ eligibility applies to the stated scope, not every resource reachable from a URL
 No Apple executable, source, disassembly, decompilation, or copied asset was used.
 No reference-system black-box observation has yet been performed.
 
+## SRC-0072 — BMOW Mac ROM-inator product page (third party)
+
+- Big Mess o' Wires, "Mac ROM-inator" product page,
+  <https://www.bigmessowires.com/mac-rom>, read 2026-10-11 through the WebFetch
+  tool's extracted text (HQ lead CS-SRC-0035).
+- Claims used, each a vendor statement still to be verified on hardware: the kit
+  replaces the stock 64K or 128K ROM in a compact Macintosh with 1 MB of flash
+  (132K ROM code, 28K startup sound, up to 864K ROM disk); it supports the Plus,
+  512Ke, 512K and 128K; "128K ROM code turns a Mac 128K or 512K into a 128Ke or
+  512Ke"; its flash tool needs 192K of RAM, so reflashing on a 128K needs a second
+  Macintosh or an external programmer.
+- Eligible only for those hardware-capacity claims. The kit's ROM code is
+  patched Apple ROM code, and the page links to Apple ROM listings: never
+  inputs; their links were not followed. The page says the board design is
+  open source; its license and design files were not reviewed. No adoption.
+
 ## SRC-0071 — *Inside Macintosh* Volumes I–III (Addison-Wesley, 1985), owner's copy
 
 - Apple Computer, Inc., *Inside Macintosh*, Volumes I, II and III, Addison-Wesley,

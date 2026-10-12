@@ -26,7 +26,10 @@ reflects potential scope impact, not confirmed incompatibility.
 ## Initial debt register
 
 - **TD-001, HQ, before M0.3:** 128K feasibility and exact hardware startup remain
-  unproven; architectural optionality is not a size proof.
+  unproven; architectural optionality is not a size proof. 2026-10-11:
+  [feasibility study](mac128k-feasibility.md) budgets RAM from SRC-0071 and
+  recommends a replacement ROM of at least 128 KB (SRC-0072, unverified); ROM
+  decode on a stock 128K board and C code density remain open.
 - **TD-002, tooling owner, before core portability claims:** bootstrap tests only
   one native hosted compiler/architecture; add an alternate compiler and m68k/ARM64
   runtime checks without assuming they are already installed.
