@@ -5,6 +5,34 @@ eligibility applies to the stated scope, not every resource reachable from a URL
 No Apple executable, source, disassembly, decompilation, or copied asset was used.
 Project-owned black-box native trials are recorded separately below.
 
+## SRC-0096 - Owner continuation alongside allocation research
+
+2026-10-12: "OK, Claude is researching. Now, get to work." Continue the
+checked guest memory/instruction work while Claude researches Memory Manager
+contracts/test plans. Ordinary original specifications/code/tests/evidence and
+Git/HQ/wiki publication are authorized. No changes to Claude's draft files,
+UART body role, Apple input exclusions, platform admissions or edition gates.
+
+## SRC-0097 - Published Motorola data and control instruction interfaces
+
+Motorola, 1992 M68000 Family Programmer's Reference Manual, published ISA
+prose and instruction-format tables: 1.7.1/2 (1-25/27), 2.2.4/2.2.5 (2-6/7),
+2.2.17/18 (2-18/19), 2.6.1 (2-28),
+Table 3-19 (3-19), MOVE (4-116/118), MOVEA (4-119/120), Bcc (4-25/26),
+BRA (4-55/56), BSR (4-59/60). Existing SRC-0093 supplies MOVEQ/NOP/RTS.
+[Official successor PDF](https://www.nxp.com/docs/en/reference-manual/M68000PRM.pdf).
+Access 2026-10-12 via web parsing, no local PDF/hash or visual-review claim.
+68000-only interpretation distinguishes later long branch displacement forms.
+Eligible ISA facts, not January 1984 OS behavior. No examples/equates/sample
+code, emulator source or external implementation incorporated.
+
+## SRC-0098 - Original checked memory contract and fixtures
+
+SPEC-0022 / ADR-0025 / IMPL-0026 / TEST-0030. Independently authored map,
+temporary CPU frame/deferred store, 36-byte data/control program, condition
+truth masks and boundary fixtures. Codex-assisted lead self-review; human
+provenance review pending. Claude allocation drafts remain separate research.
+
 ## SRC-0095 - Own A-line instruction and native return observations
 
 2026-10-12, SPEC-0021 / TEST-0029, compiled source

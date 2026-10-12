@@ -3,6 +3,13 @@
 Read `docs/clean-room/POLICY.md`, `CONTRIBUTING.md`, and
 `provenance/README.md` before researching or changing this project.
 
+- On 2026-10-12 the owner said "OK, Claude is researching. Now, get to work"
+  after assigning Claude Memory Manager research only (SRC-0096). SPEC-0022
+  covers checked guest memory and bounded data/control instructions, original
+  fixtures/tests, compiler verification and ordinary Git/HQ/wiki evidence.
+  Preserve Claude's two research drafts, UART role separation and existing
+  exact-image/platform/edition gates. No new delegation or OneNote.
+
 - On 2026-10-12 the owner said "continue" after the shared services checkpoint
   and proposed real instruction-call boundary (SRC-0092). SPEC-0021 covers an
   original bounded 68000 interpreter/exception bridge, common original program,

@@ -31,7 +31,7 @@ jobs:
         run: .\scripts\Verify-Bootstrap.ps1
       - name: Verify hosted core, loader, exceptions, devices, boot media and unloaded fault fixtures
         shell: powershell
-        run: .\scripts\Verify-ALine.ps1 -BuildRoot build\media-verification -Sanitizers
+        run: .\scripts\Verify-GuestMemory.ps1 -BuildRoot build\media-verification -Sanitizers
 
   m68k-rom:
     runs-on: ubuntu-24.04
@@ -44,6 +44,14 @@ jobs:
         run: python3 scripts/Setup-M68k.py --output "$RUNNER_TEMP/classick-m68k"
       - name: Build and audit original ROM twins
         run: python3 scripts/Build-MacROM.py --tool-root "$RUNNER_TEMP/classick-m68k/root" --output "$RUNNER_TEMP/classick-rom"
+      - name: Audit original checked memory 68000 objects and program encoding
+        run: python3 scripts/Verify-GuestM68k.py --tool-root "$RUNNER_TEMP/classick-m68k/root" --output "$RUNNER_TEMP/classick-guest-memory"
+      - name: Retain checked memory build manifest
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
+        with:
+          name: classick-guest-memory-build
+          path: ${{ runner.temp }}/classick-guest-memory/manifest.json
+          if-no-files-found: error
       - name: Retain own ROM and sanitized build manifest
         uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
         with:
