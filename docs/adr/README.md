@@ -30,6 +30,7 @@ evidence; foundational project constraints cannot be silently relaxed.
 | [ADR-0018](0018-fixed-profile-boot-media.md) | Original fixed-profile GPT/FAT32 boot media | Accepted for development verification |
 | [ADR-0019](0019-isolated-black-box-vm-trial.md) | Isolated own-image VM configuration and retained cold-start observations | Accepted scoped trial; B2 qualification partial |
 | [ADR-0021](0021-mac128k-original-rom.md) | Original 68000 ROM, own helpers and isolated Snow 128K trial | Accepted scoped development/trial; hardware and OS gates open |
+| [ADR-0022](0022-native-fault-observation.md) | Original terminal record exports and separate UD/GP native fixtures | Accepted scoped development/trial; B2 firmware and OS gates unchanged |
 
 Use [the template](template.md). Every substantive decision cites founding
 requirements or approved sources, distinguishes design from historical fact,

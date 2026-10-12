@@ -5,6 +5,31 @@ eligibility applies to the stated scope, not every resource reachable from a URL
 No Apple executable, source, disassembly, decompilation, or copied asset was used.
 No reference-system black-box observation has yet been performed.
 
+## SRC-0086 - Original native fault fixtures and verification
+
+Corresponding original SPEC-0019 / ADR-0022 / IMPL-0023 / TEST-0027 assembly,
+tooling and own synthetic verification inputs. Project artifact, eligible within
+this scope; Codex-assisted original design, lead self-review and human provenance
+review pending. No external code/assets. Build checks do not prove native delivery.
+
+## SRC-0085 - Owner-authorized native PC fault checkpoint
+
+- Owner conversation, 2026-10-12: "OK, do it" after the proposal to deliberately
+  trigger a CPU error and verify our handler catches it and stops cleanly in
+  the installed VirtualBox, before returning to shared OS services.
+- Scope: SPEC-0019 implementation, verification, new isolated VM trial and
+  ordinary evidence/HQ Git publication. Existing trial permissions persist.
+  No physical writes, emulator internals, UART implementation work, delegation,
+  Apple input, OneNote or edition completion is authorized.
+- Additional SRC-0043 prose reviewed 2026-10-12: Intel SDM 3A 253668-090US,
+  February 2026, sections 7.13, 7.14.2/4/5, 7.15 Interrupt 6 (#UD, printed
+  7-31) and Interrupt 13 (#GP, printed 7-41/42). UD2 faults at its instruction
+  with no CPU error; descriptor-limit violations produce #GP and identify the
+  selector. Eight-byte saved fields and IST stack switching are CPU interfaces.
+  [Publisher PDF](https://cdrdv2-public.intel.com/874249/253668-090-sdm-vol-3a.pdf),
+  existing reviewed hash `42166ab4aeb53df119a794a1da36eaa8a9f123eea61d90e8fe6195da4ef6654f`.
+  No sample implementation or emulator source inspected or copied.
+
 ## SRC-0084 - Own original ROM Snow trial observations
 
 - Codex, 2026-10-11 local date (UTC observations on October 12), owner-directed

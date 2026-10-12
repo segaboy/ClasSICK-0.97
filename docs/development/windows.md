@@ -188,6 +188,12 @@ mocks and existing development tests, never generated EFI code or external firmw
 
 ## Tools deferred until a concrete need
 
+The current PC checkpoint uses `scripts/Verify-FaultCheckpoint.ps1` with a fresh
+`-BuildRoot` and `-Sanitizers`. It retains the full prior 876-check/nine-profile
+chain, then builds separate UD/GP EFI twins and audited original media. It never
+runs a VM. SPEC-0019's prepare/review/observer scripts are an owner-approved,
+local-only isolated trial; public CI never executes firmware or reads guest memory.
+
 | Tool/category | Purpose when introduced | Current state |
 | --- | --- | --- |
 | LLDB 23.1.1 | Source breakpoints, native typed state/stacks, stepping and resume | x64 Debug twins and local interactive core verified; WOW64 trial failed; guest/m68k debugging unverified |

@@ -2,7 +2,8 @@
 # Copyright (C) 2026 Dean Howell.
 [CmdletBinding()]
 param([Parameter(Mandatory=$true)][string]$Image,
-    [Parameter(Mandatory=$true)][string]$Map,[switch]$PassThru)
+    [Parameter(Mandatory=$true)][string]$Map,[switch]$PassThru,
+    [ValidateSet('none','ud','gp')][string]$FaultProbe='none')
 Set-StrictMode -Version Latest
 $ErrorActionPreference='Stop'
 if((Get-Item -LiteralPath $Image).Length -gt 4194304){throw 'Image size rejected.'}
@@ -76,6 +77,7 @@ $names=@('cs_uefi_check_framebuffer','cs_uefi_check_map','cs_uefi_check_owned','
     'cs_uefi_exit_snapshot','cs_uefi_exit_observe','cs_uefi_exit_allowed','cs_uefi_table_crc',
     'cs_uefi_image_spans','cs_uefi_loader_run','cs_uefi_entry','cs_native_stop','cs_x64_enter','cs_native_halt','cs_entry_anchor',
     'cs_x64_tables_init','cs_x64_install','cs_x64_reload','cs_x64_vector_base','cs_x64_vector_end','cs_x64_fault','cs_x64_active_state',
+    'cs_x64_terminal_halt','cs_x64_fault_observe',
     'cs_surface_init','cs_surface_fill','cs_surface_clear','cs_arena_init','cs_arena_alloc','cs_arena_reset',
     'cs_fb_init','cs_fb_present','cs_scene_render','cs_boot_scene_prepare','cs_boot_scene_draw','cs_native_present',
     'cs_uefi_acpi20_rsdp','cs_native_read','cs_native_timer_probe','cs_acpi_find_pm_timer',
@@ -83,6 +85,8 @@ $names=@('cs_uefi_check_framebuffer','cs_uefi_check_map','cs_uefi_check_owned','
     'cs_ps2_begin','cs_ps2_poll','cs_acpi_8042','cs_native_keyboard_loop',
     'cs_input_init','cs_input_push','cs_input_pop','cs_input_reset','cs_x64_inb','cs_x64_outb',
     'cs_uart_begin','cs_uart_enqueue','cs_uart_finish','cs_uart_poll','cs_native_keyboard_observed','cs_native_uart_loop')
+if($FaultProbe -ne 'none'){$names+='cs_x64_probe_instruction'}
+elseif($mapText -match '(?m)\s+cs_x64_probe_instruction\s*$'){throw 'Probe profile rejected.'}
 $symbols=@{}
 foreach($name in $names) {
     $matches=[regex]::Matches($mapText,'(?m)^([0-9a-fA-F]+)\s+[0-9a-fA-F]+\s+\d+\s+'+$name+'\s*$')
@@ -123,8 +127,23 @@ $expected=[byte[]]@(0xFA,0xFC,0x48,0x89,0xD4,0x48,0x83,0xE4,0xF0,0x31,0xED,0x48,
 for($i=0;$i -lt $expected.Length;++$i){if($bytes[$transitionRaw+$i] -ne $expected[$i]){throw 'Stack transition bytes rejected.'}}
 $target=$symbols.cs_x64_enter+20+[BitConverter]::ToInt32($bytes,[int]($transitionRaw+16))
 if($target -ne $symbols.cs_native_stop -or $symbols.cs_native_halt -ne $symbols.cs_x64_enter+20){throw 'Transition destination rejected.'}
-$haltRaw=Raw $symbols.cs_native_halt 4; $halt=[byte[]]@(0xFA,0xF4,0xEB,0xFC)
+$haltRaw=Raw $symbols.cs_x64_terminal_halt 4; $halt=[byte[]]@(0xFA,0xF4,0xEB,0xFC)
 for($i=0;$i -lt 4;++$i){if($bytes[$haltRaw+$i] -ne $halt[$i]){throw 'Halt bytes rejected.'}}
+function Exact([long]$rva,[byte[]]$expected,[string]$reason) {
+    $at=Raw $rva $expected.Length
+    for($i=0;$i -lt $expected.Length;++$i){if($bytes[$at+$i] -ne $expected[$i]){throw $reason}}
+}
+$probeRaw=$null
+if($FaultProbe -eq 'none'){
+    if($symbols.cs_native_halt -ne $symbols.cs_x64_terminal_halt){throw 'Probe profile rejected.'}
+}else{
+    $prefix=if($FaultProbe -eq 'ud'){0}else{4}
+    if($symbols.cs_x64_probe_instruction -ne $symbols.cs_native_halt+$prefix -or
+        $symbols.cs_x64_terminal_halt -ne $symbols.cs_native_halt+$prefix+4){throw 'Probe profile rejected.'}
+    $probeRaw=Raw $symbols.cs_x64_probe_instruction 2
+    if($FaultProbe -eq 'ud'){Exact $symbols.cs_native_halt ([byte[]]@(0x0F,0x0B,0xEB,0)) 'Probe bytes rejected.'}
+    else{Exact $symbols.cs_native_halt ([byte[]]@(0x66,0xB8,0x28,0,0x8E,0xD8,0xEB,0)) 'Probe bytes rejected.'}
+}
 # One original pointer slot is the only writable image data. Tables/stacks live
 # in the separate loader bundle. LTR needs writable GDT busy-bit storage there.
 $dataSections=@($sections | Where-Object {($_.flags -band 2147483648) -ne 0})
@@ -132,10 +151,6 @@ if($dataSections.Count -ne 1 -or $dataSections[0].rva -ne $symbols.cs_x64_active
     $symbols.cs_x64_active_state%8 -ne 0 -or (Executable $symbols.cs_x64_active_state)) {throw 'Active-state section rejected.'}
 $stateRaw=Raw $symbols.cs_x64_active_state 8
 if((U64 $stateRaw) -ne 0){throw 'Active-state initial value rejected.'}
-function Exact([long]$rva,[byte[]]$expected,[string]$reason) {
-    $at=Raw $rva $expected.Length
-    for($i=0;$i -lt $expected.Length;++$i){if($bytes[$at+$i] -ne $expected[$i]){throw $reason}}
-}
 $install=$symbols.cs_x64_install; $installRaw=Raw $install 25
 Exact $install ([byte[]]@(0xFA,0xFC,0x48,0x89,0x0D)) 'Descriptor install bytes rejected.'
 if($install+9+[BitConverter]::ToInt32($bytes,[int]($installRaw+5)) -ne $symbols.cs_x64_active_state){throw 'Descriptor state pointer rejected.'}
@@ -158,17 +173,22 @@ for($v=0;$v -lt 256;++$v) {
         $vector+$v*32+$prefix+10+[BitConverter]::ToInt32($bytes,[int]($at+$prefix+6)) -ne $symbols.cs_x64_fault){throw 'Vector bytes/destination rejected.'}
     for($i=$prefix+10;$i -lt 32;++$i){if($bytes[$at+$i] -ne 0x90){throw 'Vector padding rejected.'}}
 }
-$fault=$symbols.cs_x64_fault; $faultRaw=Raw $fault 137
+$fault=$symbols.cs_x64_fault; $faultRaw=Raw $fault 199
 Exact $fault ([byte[]]@(0xFA,0xFC,0x41,0x0F,0x20,0xD0,0x48,0x8B,0x0D)) 'Fault capture bytes rejected.'
 if($fault+13+[BitConverter]::ToInt32($bytes,[int]($faultRaw+9)) -ne $symbols.cs_x64_active_state){throw 'Fault state pointer rejected.'}
 Exact ($fault+13) ([byte[]]@(0x31,0xC0,0xBA,1,0,0,0,0xF0,0x0F,0xB1,0x91,0xB0,0,0,0,0x0F,0x85)) 'Fault capture bytes rejected.'
-if($fault+34+[BitConverter]::ToInt32($bytes,[int]($faultRaw+30)) -ne $symbols.cs_native_halt){throw 'Nested fault destination rejected.'}
+if($fault+34+[BitConverter]::ToInt32($bytes,[int]($faultRaw+30)) -ne $symbols.cs_x64_terminal_halt){throw 'Nested fault destination rejected.'}
 Exact ($fault+34) ([byte[]]@(0x8B,4,0x24,0x89,0x81,0xB4,0,0,0)) 'Fault capture bytes rejected.'
 for($field=0;$field -lt 6;++$field) {
     Exact ($fault+43+$field*12) ([byte[]]@(0x48,0x8B,0x44,0x24,(8+$field*8),0x48,0x89,0x81,(184+$field*8),0,0,0)) 'Fault frame field rejected.'
 }
-Exact ($fault+115) ([byte[]]@(0x4C,0x89,0x81,0xE8,0,0,0,0xC7,0x81,0xB0,0,0,0,2,0,0,0,0xE9)) 'Fault publish bytes rejected.'
-if($fault+137+[BitConverter]::ToInt32($bytes,[int]($faultRaw+133)) -ne $symbols.cs_native_halt){throw 'Fault halt destination rejected.'}
+Exact ($fault+115) ([byte[]]@(0x4C,0x89,0x81,0xE8,0,0,0,0xC7,0x81,0xB0,0,0,0,2,0,0,0)) 'Fault publish bytes rejected.'
+if($symbols.cs_x64_fault_observe -ne $fault+132){throw 'Fault export position rejected.'}
+Exact ($fault+132) ([byte[]]@(0x44,0x8B,0x89,0xB4,0,0,0,0x4C,0x8B,0x91,0xB8,0,0,0,
+    0x4C,0x8B,0x99,0xC0,0,0,0,0x4C,0x8B,0xA1,0xD8,0,0,0,0x44,0x8B,0xA9,0xB0,0,0,0,
+    0x41,0xBE,0x31,0x46,0x53,0x43,0x4C,0x8B,0xB9,0xC8,0,0,0,
+    0x48,0x8B,0xB1,0xD0,0,0,0,0x48,0x8B,0xB9,0xE0,0,0,0,0xE9)) 'Fault export bytes rejected.'
+if($fault+199+[BitConverter]::ToInt32($bytes,[int]($faultRaw+195)) -ne $symbols.cs_x64_terminal_halt){throw 'Fault halt destination rejected.'}
 # SPEC-0010/0012: original 32-bit timer IN and byte keyboard IN/OUT through DX.
 $inlRaw=Raw $symbols.cs_x64_inl 4
 Exact $symbols.cs_x64_inl ([byte[]]@(0x89,0xCA,0xED,0xC3)) 'Port read bytes rejected.'
@@ -179,5 +199,6 @@ $result=[pscustomobject]@{sha256=(Get-FileHash -LiteralPath $Image -Algorithm SH
     size_bytes=$bytes.Length;image_size=$imageSize;entry_rva=$entry;relocations=$patches.Count;
     original_symbols=$names.Count;imports=0;runtime_libraries=0;reloc_raw=$relocRaw;
     anchor_raw=$anchorRaw;transition_raw=$transitionRaw;halt_raw=$haltRaw;first_section_header=$sections[0].header;
-    install_raw=$installRaw;reload_raw=$reloadRaw;vector_raw=$vectorRaw;fault_raw=$faultRaw;state_raw=$stateRaw;inl_raw=$inlRaw;inb_raw=$inbRaw;outb_raw=$outbRaw;vectors=256}
+    install_raw=$installRaw;reload_raw=$reloadRaw;vector_raw=$vectorRaw;fault_raw=$faultRaw;state_raw=$stateRaw;inl_raw=$inlRaw;inb_raw=$inbRaw;outb_raw=$outbRaw;vectors=256;
+    fault_probe=$FaultProbe;probe_raw=$probeRaw;symbols=$symbols}
 if($PassThru){$result}else{Write-Output 'EFI image audit PASS: original entry/stack/halt, bounded relocations, zero imports/libraries; unloaded.'}

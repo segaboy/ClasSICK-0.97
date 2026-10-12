@@ -3,8 +3,9 @@
 # SPEC-0015: prepare one fresh project VM; never starts it or modifies other VMs.
 # -Candidate names the admitted payload: SPEC-0015's first image or SPEC-0016's
 # qualification-diagnostics image. Both use the same machine configuration.
+# SPEC-0019 admits its separately pinned normal terminal-export control image.
 [CmdletBinding()]
-param([Parameter(Mandatory=$true)][ValidateSet('SPEC-0015','SPEC-0016')][string]$Candidate,
+param([Parameter(Mandatory=$true)][ValidateSet('SPEC-0015','SPEC-0016','SPEC-0019')][string]$Candidate,
       [Parameter(Mandatory=$true)][string]$VBoxManage,
       [Parameter(Mandatory=$true)][string]$BuildRoot,
       [Parameter(Mandatory=$true)][string]$TrialRoot,
@@ -28,7 +29,8 @@ $imageHash=(Get-FileHash -LiteralPath $image -Algorithm SHA256).Hash.ToLowerInva
 $payloadHash=(Get-FileHash -LiteralPath $payload -Algorithm SHA256).Hash.ToLowerInvariant()
 $admitted=@{
     'SPEC-0015'=@{payload_bytes=37888;payload='8e25d6947677b538d84bc17f98ff44d056dcd3d7769d1389676072286ad831f2';image='370b7d4e7fc4200b77c367e09afa0c4944f534c2623d7f5f68db159c1da46078'};
-    'SPEC-0016'=@{payload_bytes=43520;payload='920ed92c2b30609718d1ed95867e0cf79aab82ae5f9ce76ffee2c9b806ce5d16';image='e2e6a431722b39d6ed7c215bbc60727aef74ae776f74934f60ddfd0e6f4069e9'}}[$Candidate]
+    'SPEC-0016'=@{payload_bytes=43520;payload='920ed92c2b30609718d1ed95867e0cf79aab82ae5f9ce76ffee2c9b806ce5d16';image='e2e6a431722b39d6ed7c215bbc60727aef74ae776f74934f60ddfd0e6f4069e9'};
+    'SPEC-0019'=@{payload_bytes=43520;payload='95da0042afb44743bf14307cca866ac26b381cf7435c466ee04231282abcc5fe';image='a75c1cb36c631ebb3737acbbb4e781f188e579569f850e8000b5c06e096ecfc6'}}[$Candidate]
 if((Get-Item -LiteralPath $image).Length -ne 67108864 -or $imageHash -ne $admitted.image){throw 'Raw image rejected.'}
 if((Get-Item -LiteralPath $payload).Length -ne $admitted.payload_bytes -or $payloadHash -ne $admitted.payload){throw 'Payload rejected.'}
 & (Join-Path $PSScriptRoot 'Test-BootMedia.ps1') -Image $image -Payload $payload | Out-Null

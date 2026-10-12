@@ -53,7 +53,7 @@ cs_x64_fault:
     xorl %eax,%eax
     movl $1,%edx
     lock cmpxchgl %edx,176(%rcx)
-    jne cs_native_halt
+    jne cs_x64_terminal_halt
     movl (%rsp),%eax
     movl %eax,180(%rcx)
     movq 8(%rsp),%rax
@@ -70,7 +70,18 @@ cs_x64_fault:
     movq %rax,224(%rcx)
     movq %r8,232(%rcx)
     movl $2,176(%rcx)
-    jmp cs_native_halt
+.globl cs_x64_fault_observe
+cs_x64_fault_observe:
+    movl 180(%rcx),%r9d
+    movq 184(%rcx),%r10
+    movq 192(%rcx),%r11
+    movq 216(%rcx),%r12
+    movl 176(%rcx),%r13d
+    movl $0x43534631,%r14d
+    movq 200(%rcx),%r15
+    movq 208(%rcx),%rsi
+    movq 224(%rcx),%rdi
+    jmp cs_x64_terminal_halt
 
 .data
 .p2align 3

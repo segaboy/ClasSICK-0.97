@@ -1,7 +1,8 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 # Copyright (C) 2026 Dean Howell.
 [CmdletBinding()]
-param([Parameter(Mandatory=$true)][string]$BuildRoot)
+param([Parameter(Mandatory=$true)][string]$BuildRoot,
+    [ValidateSet('none','ud','gp')][string]$FaultProbe='none')
 Set-StrictMode -Version Latest
 $ErrorActionPreference='Stop'
 $repoRoot=[IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..'))
@@ -11,6 +12,7 @@ $originalPath=$env:PATH
 try {
     & (Join-Path $PSScriptRoot 'Enter-DevEnvironment.ps1')
     $compiler=(Get-Command clang).Source; $nm=(Get-Command llvm-nm).Source
+    $probeNumber=@{none=0;ud=6;gp=13}[$FaultProbe]
     $reader=(Get-Command llvm-readobj).Source; $disassembler=(Get-Command llvm-objdump).Source
     $sources=@('platform/uefi/contract.c','platform/uefi/loader.c','platform/uefi/entry.c',
         'platform/uefi/transition.S','platform/pc/x64/state.c','platform/pc/x64/exceptions.S',
@@ -38,7 +40,7 @@ try {
             [void][IO.Directory]::CreateDirectory($directory); $objects=@()
             for($i=0;$i -lt $sources.Count;++$i) {
                 $object=Join-Path $directory "$i.o"
-                if($sources[$i].EndsWith('.S')){& $compiler -m64 -c (Join-Path $repoRoot $sources[$i]) -o $object}
+                if($sources[$i].EndsWith('.S')){& $compiler -m64 "-DCS_X64_FAULT_PROBE=$probeNumber" -c (Join-Path $repoRoot $sources[$i]) -o $object}
                 else{& $compiler @common -std=c11 "-O$opt" -c (Join-Path $repoRoot $sources[$i]) -o $object}
                 if($LASTEXITCODE -ne 0){throw 'Original EFI compile failed.'}
                 if($i -lt 2 -or $i -eq 4 -or $i -eq 6 -or $i -eq 7 -or $i -eq 11 -or $i -eq 12 -or $i -eq 16 -or $i -eq 18) {
@@ -55,7 +57,7 @@ try {
             $map=Join-Path $directory 'image.map'; $image=Join-Path $directory 'BOOTX64.EFI'
             & $compiler @link "-Wl,-Map,$map" @objects -o $image
             if($LASTEXITCODE -ne 0){throw 'Original EFI link failed.'}
-            $audit=& (Join-Path $PSScriptRoot 'Test-UEFIImage.ps1') -Image $image -Map $map -PassThru
+            $audit=& (Join-Path $PSScriptRoot 'Test-UEFIImage.ps1') -Image $image -Map $map -FaultProbe $FaultProbe -PassThru
             $inspection=@(& $reader --file-headers --coff-imports --coff-basereloc $image)
             if($LASTEXITCODE -ne 0 -or ($inspection -join "`n") -match '(?m)^Import \{' -or
                 ($inspection -join "`n") -notmatch 'IMAGE_SUBSYSTEM_EFI_APPLICATION'){throw 'Independent EFI inspection failed.'}
@@ -93,14 +95,23 @@ try {
         [pscustomobject]@{name='vector-255';at=$referenceAudit.vector_raw+255*32+3;bytes=[byte[]]@(0xFE);reason='Vector bytes'},
         [pscustomobject]@{name='fault-claim';at=$referenceAudit.fault_raw+20;bytes=[byte[]]@(0x90);reason='Fault capture bytes'},
         [pscustomobject]@{name='fault-publish';at=$referenceAudit.fault_raw+128;bytes=[byte[]]@(1);reason='Fault publish bytes'},
+        [pscustomobject]@{name='fault-export';at=$referenceAudit.fault_raw+135;bytes=[byte[]]@(0xB8);reason='Fault export bytes'},
+        [pscustomobject]@{name='fault-marker';at=$referenceAudit.fault_raw+169;bytes=[byte[]]@(0);reason='Fault export bytes'},
         [pscustomobject]@{name='active-state';at=$referenceAudit.state_raw;bytes=[byte[]]@(1);reason='Active-state initial'},
         [pscustomobject]@{name='port-read';at=$referenceAudit.inl_raw+2;bytes=[byte[]]@(0x90);reason='Port read bytes'},
         [pscustomobject]@{name='byte-read';at=$referenceAudit.inb_raw+4;bytes=[byte[]]@(0x90);reason='Byte port read bytes'},
         [pscustomobject]@{name='byte-write';at=$referenceAudit.outb_raw+4;bytes=[byte[]]@(0x90);reason='Byte port write bytes'})
+    if($FaultProbe -ne 'none'){
+        $mutations += [pscustomobject]@{name='probe-opcode';at=$referenceAudit.probe_raw;bytes=[byte[]]@(0x90);reason='Probe bytes'}
+        $rejected=$false
+        try{& (Join-Path $PSScriptRoot 'Test-UEFIImage.ps1') -Image $reference -Map $referenceMap -FaultProbe none | Out-Null}
+        catch{if($_.Exception.Message -notmatch 'Probe profile'){throw};$rejected=$true}
+        if(-not $rejected){throw 'Injected image accepted as normal.'}
+    }
     foreach($mutation in $mutations) {
         $bytes=[byte[]]$original.Clone(); [Array]::Copy($mutation.bytes,0,$bytes,[int]$mutation.at,$mutation.bytes.Length)
         $image=Join-Path $controls ($mutation.name+'.EFI'); [IO.File]::WriteAllBytes($image,$bytes); $rejected=$false
-        try{& (Join-Path $PSScriptRoot 'Test-UEFIImage.ps1') -Image $image -Map $referenceMap | Out-Null}
+        try{& (Join-Path $PSScriptRoot 'Test-UEFIImage.ps1') -Image $image -Map $referenceMap -FaultProbe $FaultProbe | Out-Null}
         catch{if($_.Exception.Message -notmatch $mutation.reason){throw}; $rejected=$true}
         if(-not $rejected){throw "EFI image control accepted: $($mutation.name)"}
     }
@@ -147,7 +158,7 @@ try {
     $payload=Join-Path $BuildRoot 'payload/EFI/BOOT'; [void][IO.Directory]::CreateDirectory($payload)
     $packaged=Join-Path $payload 'BOOTX64.EFI'; Copy-Item -LiteralPath $release -Destination $packaged
     if((Get-FileHash -LiteralPath $packaged -Algorithm SHA256).Hash.ToLowerInvariant() -ne $results[1].sha256){throw 'EFI payload copy differs.'}
-    [ordered]@{images=$results;image_rejections=$mutations.Count;missing_transition_controls=1;missing_exceptions_controls=1;missing_presenter_controls=1;missing_acpi_controls=1;
+    [ordered]@{fault_probe=$FaultProbe;images=$results;image_rejections=$mutations.Count;profile_rejections=[int]($FaultProbe -ne 'none');missing_transition_controls=1;missing_exceptions_controls=1;missing_presenter_controls=1;missing_acpi_controls=1;
         missing_ps2_controls=1;missing_keyboard_controls=1;missing_input_controls=1;missing_byte_io_controls=1;
         missing_uart_controls=1;missing_native_uart_controls=1;
         payload='payload/EFI/BOOT/BOOTX64.EFI';payload_kind='directory-tree-not-disk';loaded=$false} |

@@ -1,6 +1,6 @@
 # SPEC-0008 — Owned x64 terminal exception state
 
-Finalized v1, 2026-10-08; implementation lead self-review, human provenance review
+Finalized v2, 2026-10-12 (v1 2026-10-08); implementation lead self-review, human provenance review
 pending. Owner SRC-0042; Intel public interfaces SRC-0043; ADR-0012 / IMPL-0012 /
 TEST-0014. Original native-PC contract; no historical Macintosh behavior.
 
@@ -77,6 +77,12 @@ incomplete capture. A nested handler seeing nonzero state halts without modifyin
 the record. The first capture may remain incomplete if interrupted/faulted. CR2
 is diagnostic only and is the fault address only for a page fault. No GPR snapshot,
 UART/pixel fault report or recovery claim. The bounded record persists until reset.
+
+SPEC-0019 adds terminal exports after publication: RCX state pointer; R9 vector,
+R10 error, R11 saved RIP, R12 old RSP, R13 state, R14 marker 0x43534631,
+R15 old CS, RSI old RFLAGS, RDI old SS. These load only our record and do not
+preserve interrupted GPRs. Both complete and nested paths use the separate
+`cs_x64_terminal_halt`, never a test injection entry. No calls or device output.
 
 ## Acceptance and limitations
 

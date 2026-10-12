@@ -3,6 +3,14 @@
 Read `docs/clean-room/POLICY.md`, `CONTRIBUTING.md`, and
 `provenance/README.md` before researching or changing this project.
 
+- On 2026-10-12 the owner said "OK, do it" to the proposed short PC controlled
+  CPU-fault checkpoint (SRC-0085). SPEC-0019 covers original exception/probe
+  assembly, image audits, a new isolated VirtualBox VM, repeated headless cold
+  starts, post-readiness observation of our terminal registers, and ordinary
+  evidence/HQ Git publication. Preserve existing VMs, SRC-0059's black-box
+  boundary, UART role separation, B2 criterion 6 and all Mac/edition gates.
+  No firmware memory extraction, new delegation, OneNote or physical writing.
+
 - On 2026-10-11 the owner reaffirmed independent PC/Mac ports without an Apple
   supplied ROM, delegated the practical route, allowed other emulators, then
   said "OK, do it!" after the proposal to build our replacement ROM and test

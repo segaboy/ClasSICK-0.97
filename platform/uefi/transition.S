@@ -12,9 +12,28 @@ cs_x64_enter:
     call cs_native_stop
 .globl cs_native_halt
 cs_native_halt:
+#ifndef CS_X64_FAULT_PROBE
+#define CS_X64_FAULT_PROBE 0
+#endif
+#if CS_X64_FAULT_PROBE == 6
+.globl cs_x64_probe_instruction
+cs_x64_probe_instruction:
+    ud2
+    jmp cs_x64_terminal_halt
+#elif CS_X64_FAULT_PROBE == 13
+    movw $0x28,%ax
+.globl cs_x64_probe_instruction
+cs_x64_probe_instruction:
+    movw %ax,%ds
+    jmp cs_x64_terminal_halt
+#elif CS_X64_FAULT_PROBE != 0
+#error Unsupported fault probe
+#endif
+.globl cs_x64_terminal_halt
+cs_x64_terminal_halt:
     cli
     hlt
-    jmp cs_native_halt
+    jmp cs_x64_terminal_halt
 .section .rdata,"dr"
 .globl cs_entry_anchor
 .p2align 3
