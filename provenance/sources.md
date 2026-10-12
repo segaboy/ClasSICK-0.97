@@ -5,6 +5,19 @@ eligibility applies to the stated scope, not every resource reachable from a URL
 No Apple executable, source, disassembly, decompilation, or copied asset was used.
 No reference-system black-box observation has yet been performed.
 
+## SRC-0073 — Owner priority: Mini vMac first boot, size later
+
+- Owner, 2026-10-11, after the 128K feasibility study: "For right now, all I
+  have access to is Mini vMac, and the number one priority is to get this thing
+  booting, regardless of the size. We can work on that later." He then handed
+  the next work to ChatGPT.
+- Requirement only. The first M0.3 evidence target becomes a cold start of our
+  own ROM image in the owner's Mini vMac; RAM/ROM size budgets are deferred,
+  not dropped (the charter's 128K requirement and its scope-decision rule
+  persist). No real Macintosh hardware is available now. Running Mini vMac still
+  needs a recorded black-box clearance and the owner's go-ahead; no Apple ROM
+  may take part in the boot.
+
 ## SRC-0072 — BMOW Mac ROM-inator product page (third party)
 
 - Big Mess o' Wires, "Mac ROM-inator" product page,

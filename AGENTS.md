@@ -3,6 +3,13 @@
 Read `docs/clean-room/POLICY.md`, `CONTRIBUTING.md`, and
 `provenance/README.md` before researching or changing this project.
 
+- On 2026-10-11 the owner made booting in Mini vMac the top priority, "regardless
+  of the size" (SRC-0073), and handed the work to ChatGPT. Only Mini vMac is
+  available; no real Macintosh. Size budgets are deferred, not dropped. Clear
+  Mini vMac as a black-box test platform (as SRC-0059 did for VirtualBox) and get
+  the owner's go-ahead before running it; never use an Apple ROM for our boot
+  or read emulator source.
+
 - On 2026-10-11 the owner ruled "published editions only" (SRC-0067). Apple's
   1984–85 pre-release drafts (1984 *Inside Macintosh* binders, the February 1984
   assembly-language draft, the February 1985 hardware draft) are excluded
@@ -12,7 +19,7 @@ Read `docs/clean-room/POLICY.md`, `CONTRIBUTING.md`, and
   Git, never committed) and Motorola's manual (SRC-0069). Facts in the
   owner's 2026-10-07 research dossier that came from the drafts must be
   re-sourced first. See [System 1 sources](docs/research/system1-sources.md).
-  Claude leads; the VM trial lane is complete.
+  The VM trial lane is complete.
 
 - On 2026-10-11 the owner answered "Go ahead" to the SPEC-0016 VirtualBox
   trial (SRC-0065): fresh pinned Windows verification, one new isolated project

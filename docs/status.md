@@ -16,6 +16,9 @@ does not imply that the complete project foundation or any OS boot is finished.
 
 ## Achieved
 
+- Owner priority (2026-10-11, SRC-0073): get our own ROM image booting in Mini
+  vMac first, regardless of size; size work later. Handed to ChatGPT.
+
 - Macintosh 128K feasibility study (2026-10-11,
   [record](research/mac128k-feasibility.md)): the documented 128K layout leaves
   88,320 bytes for applications, so ClasSICK's RAM must fit where Apple's system
