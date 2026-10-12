@@ -1,0 +1,1234 @@
+{
+  "schema_version": 1,
+  "specification": "SPEC-0021",
+  "test": "TEST-0029",
+  "source": "SRC-0095",
+  "profile": "classick-aline-probe-v1",
+  "classification": "bounded-instruction-and-native-aline-probe",
+  "observed_on": "2026-10-12",
+  "compiled_source_revision": "f29113b13775102f294d76e9c3deb1691228b1c8",
+  "historical_gateway_finalized": false,
+  "legacy_application_executed": false,
+  "original_program_hex": "7046a1467020a047a1464e75",
+  "verification": {
+    "ctest_checks": 1002,
+    "configuration_totals": [
+      124,
+      124,
+      124,
+      97,
+      124,
+      109,
+      109,
+      109,
+      82
+    ],
+    "cpu_object_audits": 20,
+    "service_object_audits": 20,
+    "observer_rejections": 8,
+    "mac_hosted_suites": 24,
+    "mac_fault_controls": 4,
+    "ci_status": "success",
+    "ci_url": "https://github.com/segaboy/ClasSICK-0.97/actions/runs/38284131256",
+    "local_log_sha256": "68c41b775595b52f212d074df1491c51517a1bb6f829571f203fba076cffdc10",
+    "ci_log_sha256": "f883c7b254a401e766e4f8b3cc35522484af5ee919e22ee92a9c36038fd9071a",
+    "matching_ci_efi_profiles": 6,
+    "matching_ci_rom_profiles": 2,
+    "ci_rom_inputs_match": true
+  },
+  "pc": {
+    "platform": "VirtualBox 7.2.16r174877, isolated EFI64 black-box only",
+    "platform_executable_sha256": "7fda8e54157eb94a5ebd9cea079a9fb8c23ade92ae71e13399dc3431c021a228",
+    "profiles": {
+      "none": {
+        "images": [
+          {
+            "case": "clang-64-O0",
+            "sha256": "4ded876949c54def00634eb0c8e4367bcbb6d94fe255fbdbd861ec88b16aa18c",
+            "size_bytes": 68608,
+            "image_size": 86016,
+            "relocations": 3,
+            "status": "passed-unloaded"
+          },
+          {
+            "case": "clang-64-O2",
+            "sha256": "6e2ea128e819923e6f88fd933bf40c7a7c9c7871d18d59c08315976a610269a7",
+            "size_bytes": 48640,
+            "image_size": 65536,
+            "relocations": 3,
+            "status": "passed-unloaded"
+          }
+        ],
+        "corruption_rejections": 27,
+        "omitted_object_rejections": 14,
+        "profile_rejections": 0
+      },
+      "ud": {
+        "images": [
+          {
+            "case": "clang-64-O0",
+            "sha256": "476236db2e81008323b7f8b70b7f2c47cf4406c8d89399df653459b5eac33135",
+            "size_bytes": 68608,
+            "image_size": 86016,
+            "relocations": 3,
+            "status": "passed-unloaded"
+          },
+          {
+            "case": "clang-64-O2",
+            "sha256": "569f1540d6013777840c07f4879856a5625c3a1631baf2ca0434f3a9c360c14b",
+            "size_bytes": 48640,
+            "image_size": 65536,
+            "relocations": 3,
+            "status": "passed-unloaded"
+          }
+        ],
+        "corruption_rejections": 28,
+        "omitted_object_rejections": 14,
+        "profile_rejections": 1
+      },
+      "gp": {
+        "images": [
+          {
+            "case": "clang-64-O0",
+            "sha256": "a36b3ef4194c88a71d9144fc4fb912d44a903739309125ee18ce2e4545ed1b5e",
+            "size_bytes": 68608,
+            "image_size": 86016,
+            "relocations": 3,
+            "status": "passed-unloaded"
+          },
+          {
+            "case": "clang-64-O2",
+            "sha256": "c1b277a48c1b77f57e7a4966c1983c1b0941911e3da73d53d6217b989a14f4ba",
+            "size_bytes": 48640,
+            "image_size": 65536,
+            "relocations": 3,
+            "status": "passed-unloaded"
+          }
+        ],
+        "corruption_rejections": 28,
+        "omitted_object_rejections": 14,
+        "profile_rejections": 1
+      }
+    },
+    "raw_sha256": "d178b720ee2a17db1aaa933b6652f18bf868e493728033d442717cf7fc66ba40",
+    "vdi_sha256": "3c40b71b42267745c59a94f8b661fad24c049d757b36307f46fe651d5d6c45d0",
+    "post_trial_vdi": "unchanged",
+    "raw_roundtrip": "matches-original",
+    "final_state": "poweroff",
+    "inventory": "one-owned-machine-added-only",
+    "guest_memory_read": false,
+    "cr2_observed": false,
+    "cpu_execution": "original-bounded-interpreter-supervisor-immediate-service-model",
+    "trials": [
+      {
+        "contract": "SPEC-0021",
+        "trial": "cold-01",
+        "profile": "none",
+        "source_revision": "f29113b13775102f294d76e9c3deb1691228b1c8",
+        "status": "passed",
+        "generated_input": false,
+        "firmware_memory_read": false,
+        "events": [
+          {
+            "line": "ClasSICK 0.97 UART v2",
+            "host_seconds": 30.8065572,
+            "utc": "2026-10-12T17:27:20.6171959Z"
+          },
+          {
+            "line": "fw rev=00010000 state=00000000 vendor=EDK II",
+            "host_seconds": 30.8069183,
+            "utc": "2026-10-12T17:27:20.6175544Z"
+          },
+          {
+            "line": "own img=0000000010000000 bun=000000001CFAA000 stk=000000001CFFB000",
+            "host_seconds": 30.8069699,
+            "utc": "2026-10-12T17:27:20.6176050Z"
+          },
+          {
+            "line": "keyboard ready",
+            "host_seconds": 30.8069857,
+            "utc": "2026-10-12T17:27:20.6176208Z"
+          },
+          {
+            "line": "qual port=00000003/00000003 a20=00000000/00000000",
+            "host_seconds": 30.9384219,
+            "utc": "2026-10-12T17:27:20.7490572Z"
+          },
+          {
+            "line": "alias q=000000001D11F480 type=00000004",
+            "host_seconds": 30.9384742,
+            "utc": "2026-10-12T17:27:20.7491081Z"
+          },
+          {
+            "line": "frame=00000000 sec=00000000 space=00000000",
+            "host_seconds": 30.9384851,
+            "utc": "2026-10-12T17:27:20.7491189Z"
+          },
+          {
+            "line": "frame=00000001 sec=00000004 space=00000000",
+            "host_seconds": 34.7581236,
+            "utc": "2026-10-12T17:27:24.5687291Z"
+          },
+          {
+            "line": "frame=00000002 sec=00000008 space=00000000",
+            "host_seconds": 38.7563387,
+            "utc": "2026-10-12T17:27:28.5669114Z"
+          },
+          {
+            "line": "frame=00000003 sec=0000000C space=00000000",
+            "host_seconds": 42.7664905,
+            "utc": "2026-10-12T17:27:32.5770190Z"
+          },
+          {
+            "line": "frame=00000004 sec=0000000F space=00000000",
+            "host_seconds": 45.727005,
+            "utc": "2026-10-12T17:27:35.5375058Z"
+          },
+          {
+            "line": "frame=00000005 sec=00000013 space=00000000",
+            "host_seconds": 49.7451573,
+            "utc": "2026-10-12T17:27:39.5556232Z"
+          },
+          {
+            "line": "frame=00000006 sec=00000017 space=00000000",
+            "host_seconds": 53.7959523,
+            "utc": "2026-10-12T17:27:43.6063796Z"
+          },
+          {
+            "line": "frame=00000007 sec=0000001B space=00000000",
+            "host_seconds": 57.7447201,
+            "utc": "2026-10-12T17:27:47.5551121Z"
+          },
+          {
+            "line": "frame=00000008 sec=0000001E space=00000000",
+            "host_seconds": 60.8140141,
+            "utc": "2026-10-12T17:27:50.6243776Z"
+          },
+          {
+            "line": "frame=00000009 sec=00000022 space=00000000",
+            "host_seconds": 64.7627954,
+            "utc": "2026-10-12T17:27:54.5731229Z"
+          },
+          {
+            "line": "frame=0000000A sec=00000026 space=00000000",
+            "host_seconds": 68.8137289,
+            "utc": "2026-10-12T17:27:58.6240195Z"
+          },
+          {
+            "line": "frame=0000000B sec=0000002A space=00000000",
+            "host_seconds": 72.758719,
+            "utc": "2026-10-12T17:28:02.5689745Z"
+          },
+          {
+            "line": "frame=0000000C sec=0000002D space=00000000",
+            "host_seconds": 75.7247584,
+            "utc": "2026-10-12T17:28:05.5349982Z"
+          },
+          {
+            "line": "frame=0000000D sec=00000031 space=00000000",
+            "host_seconds": 79.8169007,
+            "utc": "2026-10-12T17:28:09.6270913Z"
+          },
+          {
+            "line": "frame=0000000E sec=00000035 space=00000000",
+            "host_seconds": 83.747751,
+            "utc": "2026-10-12T17:28:13.5579053Z"
+          },
+          {
+            "line": "frame=0000000F sec=00000039 space=00000000",
+            "host_seconds": 87.8193583,
+            "utc": "2026-10-12T17:28:17.6294763Z"
+          },
+          {
+            "line": "frame=00000010 sec=0000003C space=00000000",
+            "host_seconds": 90.7689991,
+            "utc": "2026-10-12T17:28:20.5790896Z"
+          },
+          {
+            "line": "result=00000000 kbd=00000001",
+            "host_seconds": 90.7690573,
+            "utc": "2026-10-12T17:28:20.5791467Z"
+          }
+        ],
+        "registers": [
+          {
+            "host_seconds": 91.8823932,
+            "values": {
+              "r11": 1095519793,
+              "rcx": 486692904,
+              "r9": 8,
+              "r10": 0,
+              "rsp": 486518408,
+              "r13": 3,
+              "r14": 1129529649,
+              "rip": 268445726,
+              "r12": 6
+            }
+          },
+          {
+            "host_seconds": 93.0173924,
+            "values": {
+              "r11": 1095519793,
+              "rcx": 486692904,
+              "r9": 8,
+              "r10": 0,
+              "rsp": 486518408,
+              "r13": 3,
+              "r14": 1129529649,
+              "rip": 268445726,
+              "r12": 6
+            }
+          }
+        ]
+      },
+      {
+        "contract": "SPEC-0021",
+        "trial": "cold-02",
+        "profile": "none",
+        "source_revision": "f29113b13775102f294d76e9c3deb1691228b1c8",
+        "status": "passed",
+        "generated_input": false,
+        "firmware_memory_read": false,
+        "events": [
+          {
+            "line": "ClasSICK 0.97 UART v2",
+            "host_seconds": 7.7743919,
+            "utc": "2026-10-12T17:28:31.6784561Z"
+          },
+          {
+            "line": "fw rev=00010000 state=00000000 vendor=EDK II",
+            "host_seconds": 7.7744635,
+            "utc": "2026-10-12T17:28:31.6785266Z"
+          },
+          {
+            "line": "own img=0000000010000000 bun=000000001CF90000 stk=000000001CFE1000",
+            "host_seconds": 7.7744717,
+            "utc": "2026-10-12T17:28:31.6785347Z"
+          },
+          {
+            "line": "keyboard ready",
+            "host_seconds": 7.7744774,
+            "utc": "2026-10-12T17:28:31.6785404Z"
+          },
+          {
+            "line": "qual port=00000003/00000003 a20=00000000/00000000",
+            "host_seconds": 7.7746839,
+            "utc": "2026-10-12T17:28:31.6787470Z"
+          },
+          {
+            "line": "alias q=000000001D105480 type=00000004",
+            "host_seconds": 7.7746963,
+            "utc": "2026-10-12T17:28:31.6787593Z"
+          },
+          {
+            "line": "frame=00000000 sec=00000000 space=00000000",
+            "host_seconds": 7.7747011,
+            "utc": "2026-10-12T17:28:31.6787641Z"
+          },
+          {
+            "line": "frame=00000001 sec=00000004 space=00000000",
+            "host_seconds": 11.8316572,
+            "utc": "2026-10-12T17:28:35.7356844Z"
+          },
+          {
+            "line": "frame=00000002 sec=00000008 space=00000000",
+            "host_seconds": 15.7694922,
+            "utc": "2026-10-12T17:28:39.6734835Z"
+          },
+          {
+            "line": "frame=00000003 sec=0000000C space=00000000",
+            "host_seconds": 19.8154604,
+            "utc": "2026-10-12T17:28:43.7194152Z"
+          },
+          {
+            "line": "frame=00000004 sec=0000000F space=00000000",
+            "host_seconds": 22.7730515,
+            "utc": "2026-10-12T17:28:46.6769791Z"
+          },
+          {
+            "line": "frame=00000005 sec=00000013 space=00000000",
+            "host_seconds": 26.8164276,
+            "utc": "2026-10-12T17:28:50.7203189Z"
+          },
+          {
+            "line": "frame=00000006 sec=00000017 space=00000000",
+            "host_seconds": 30.7486633,
+            "utc": "2026-10-12T17:28:54.6525194Z"
+          },
+          {
+            "line": "frame=00000007 sec=0000001B space=00000000",
+            "host_seconds": 34.8015258,
+            "utc": "2026-10-12T17:28:58.7053449Z"
+          },
+          {
+            "line": "frame=00000008 sec=0000001E space=00000000",
+            "host_seconds": 37.7542665,
+            "utc": "2026-10-12T17:29:01.6580578Z"
+          },
+          {
+            "line": "frame=00000009 sec=00000022 space=00000000",
+            "host_seconds": 41.8020162,
+            "utc": "2026-10-12T17:29:05.7057709Z"
+          },
+          {
+            "line": "frame=0000000A sec=00000026 space=00000000",
+            "host_seconds": 45.7453084,
+            "utc": "2026-10-12T17:29:09.6490274Z"
+          },
+          {
+            "line": "frame=0000000B sec=0000002A space=00000000",
+            "host_seconds": 49.8024114,
+            "utc": "2026-10-12T17:29:13.7060935Z"
+          },
+          {
+            "line": "frame=0000000C sec=0000002D space=00000000",
+            "host_seconds": 52.7546553,
+            "utc": "2026-10-12T17:29:16.6583101Z"
+          },
+          {
+            "line": "frame=0000000D sec=00000031 space=00000000",
+            "host_seconds": 56.812412,
+            "utc": "2026-10-12T17:29:20.7160298Z"
+          },
+          {
+            "line": "frame=0000000E sec=00000035 space=00000000",
+            "host_seconds": 60.8755654,
+            "utc": "2026-10-12T17:29:24.7791464Z"
+          },
+          {
+            "line": "frame=0000000F sec=00000039 space=00000000",
+            "host_seconds": 64.8238348,
+            "utc": "2026-10-12T17:29:28.7273794Z"
+          },
+          {
+            "line": "frame=00000010 sec=0000003C space=00000000",
+            "host_seconds": 67.8205471,
+            "utc": "2026-10-12T17:29:31.7240646Z"
+          },
+          {
+            "line": "result=00000000 kbd=00000001",
+            "host_seconds": 67.8205864,
+            "utc": "2026-10-12T17:29:31.7241030Z"
+          }
+        ],
+        "registers": [
+          {
+            "host_seconds": 68.9411201,
+            "values": {
+              "r11": 1095519793,
+              "rcx": 486586408,
+              "r9": 8,
+              "r10": 0,
+              "rsp": 486411912,
+              "r13": 3,
+              "r14": 1129529649,
+              "rip": 268445726,
+              "r12": 6
+            }
+          },
+          {
+            "host_seconds": 70.143141,
+            "values": {
+              "r11": 1095519793,
+              "rcx": 486586408,
+              "r9": 8,
+              "r10": 0,
+              "rsp": 486411912,
+              "r13": 3,
+              "r14": 1129529649,
+              "rip": 268445726,
+              "r12": 6
+            }
+          }
+        ]
+      },
+      {
+        "contract": "SPEC-0021",
+        "trial": "cold-03",
+        "profile": "none",
+        "source_revision": "f29113b13775102f294d76e9c3deb1691228b1c8",
+        "status": "passed",
+        "generated_input": false,
+        "firmware_memory_read": false,
+        "events": [
+          {
+            "line": "ClasSICK 0.97 UART v2",
+            "host_seconds": 11.9458924,
+            "utc": "2026-10-12T17:29:47.8978745Z"
+          },
+          {
+            "line": "fw rev=00010000 state=00000000 vendor=EDK II",
+            "host_seconds": 11.9459588,
+            "utc": "2026-10-12T17:29:47.8979398Z"
+          },
+          {
+            "line": "own img=0000000010000000 bun=000000001CF90000 stk=000000001CFE1000",
+            "host_seconds": 11.945966,
+            "utc": "2026-10-12T17:29:47.8979470Z"
+          },
+          {
+            "line": "keyboard ready",
+            "host_seconds": 11.9459712,
+            "utc": "2026-10-12T17:29:47.8979526Z"
+          },
+          {
+            "line": "qual port=00000003/00000003 a20=00000000/00000000",
+            "host_seconds": 11.946184,
+            "utc": "2026-10-12T17:29:47.8981656Z"
+          },
+          {
+            "line": "alias q=000000001D105480 type=00000004",
+            "host_seconds": 11.9461933,
+            "utc": "2026-10-12T17:29:47.8981743Z"
+          },
+          {
+            "line": "frame=00000000 sec=00000000 space=00000000",
+            "host_seconds": 11.9461982,
+            "utc": "2026-10-12T17:29:47.8981792Z"
+          },
+          {
+            "line": "frame=00000001 sec=00000004 space=00000000",
+            "host_seconds": 15.9026299,
+            "utc": "2026-10-12T17:29:51.8545759Z"
+          },
+          {
+            "line": "frame=00000002 sec=00000008 space=00000000",
+            "host_seconds": 19.9512844,
+            "utc": "2026-10-12T17:29:55.9031938Z"
+          },
+          {
+            "line": "frame=00000003 sec=0000000C space=00000000",
+            "host_seconds": 23.8915549,
+            "utc": "2026-10-12T17:29:59.8434282Z"
+          },
+          {
+            "line": "frame=00000004 sec=0000000F space=00000000",
+            "host_seconds": 26.959736,
+            "utc": "2026-10-12T17:30:02.9115811Z"
+          },
+          {
+            "line": "frame=00000005 sec=00000013 space=00000000",
+            "host_seconds": 30.892282,
+            "utc": "2026-10-12T17:30:06.8440915Z"
+          },
+          {
+            "line": "frame=00000006 sec=00000017 space=00000000",
+            "host_seconds": 34.9344317,
+            "utc": "2026-10-12T17:30:10.8862044Z"
+          },
+          {
+            "line": "frame=00000007 sec=0000001B space=00000000",
+            "host_seconds": 38.9214041,
+            "utc": "2026-10-12T17:30:14.8731412Z"
+          },
+          {
+            "line": "frame=00000008 sec=0000001E space=00000000",
+            "host_seconds": 41.8747909,
+            "utc": "2026-10-12T17:30:17.8265008Z"
+          },
+          {
+            "line": "frame=00000009 sec=00000022 space=00000000",
+            "host_seconds": 45.8866865,
+            "utc": "2026-10-12T17:30:21.8383596Z"
+          },
+          {
+            "line": "frame=0000000A sec=00000026 space=00000000",
+            "host_seconds": 49.8950152,
+            "utc": "2026-10-12T17:30:25.8466524Z"
+          },
+          {
+            "line": "frame=0000000B sec=0000002A space=00000000",
+            "host_seconds": 53.9509516,
+            "utc": "2026-10-12T17:30:29.9025518Z"
+          },
+          {
+            "line": "frame=0000000C sec=0000002D space=00000000",
+            "host_seconds": 57.0752361,
+            "utc": "2026-10-12T17:30:33.0268078Z"
+          },
+          {
+            "line": "frame=0000000D sec=00000031 space=00000000",
+            "host_seconds": 60.9350315,
+            "utc": "2026-10-12T17:30:36.8865682Z"
+          },
+          {
+            "line": "frame=0000000E sec=00000035 space=00000000",
+            "host_seconds": 64.8708593,
+            "utc": "2026-10-12T17:30:40.8223596Z"
+          },
+          {
+            "line": "frame=0000000F sec=00000039 space=00000000",
+            "host_seconds": 68.9198558,
+            "utc": "2026-10-12T17:30:44.8713196Z"
+          },
+          {
+            "line": "frame=00000010 sec=0000003C space=00000000",
+            "host_seconds": 71.8706041,
+            "utc": "2026-10-12T17:30:47.8220410Z"
+          },
+          {
+            "line": "result=00000000 kbd=00000001",
+            "host_seconds": 71.8706744,
+            "utc": "2026-10-12T17:30:47.8221102Z"
+          }
+        ],
+        "registers": [
+          {
+            "host_seconds": 72.9400553,
+            "values": {
+              "r11": 1095519793,
+              "rcx": 486586408,
+              "r9": 8,
+              "r10": 0,
+              "rsp": 486411912,
+              "r13": 3,
+              "r14": 1129529649,
+              "rip": 268445726,
+              "r12": 6
+            }
+          },
+          {
+            "host_seconds": 74.0148995,
+            "values": {
+              "r11": 1095519793,
+              "rcx": 486586408,
+              "r9": 8,
+              "r10": 0,
+              "rsp": 486411912,
+              "r13": 3,
+              "r14": 1129529649,
+              "rip": 268445726,
+              "r12": 6
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "mac": {
+    "platform": "Snow v1.5.0-317c188 Windows x64, Early128K, RelativeHw, own-ROM only",
+    "platform_executable_sha256": "32cf5285582c0f509e4f1ac38d86bfb90440bae9da43b7823bfb0841dea588e6",
+    "profiles": [
+      {
+        "optimization": "-Os",
+        "image_size": 65536,
+        "image_sha256": "20175281806971dd9b21f50f8f726947b162da38fe0b10571311515c0f313b22",
+        "image_crc32": "ad3b6bcb",
+        "rom_used": 7248,
+        "ram_data_bss": 2140,
+        "symbols": {
+          "0.o": 0,
+          "cs_mac_probe_handler": 4194668,
+          "runtime.c": 0,
+          "divide": 4194696,
+          "loop.c": 0,
+          "entry.c": 0,
+          "read_reg": 4195380,
+          "write_reg": 4195400,
+          "cs_mac_services": 2880,
+          "scene.c": 0,
+          "box": 4196108,
+          "glyph": 4196296,
+          "number.constprop.0": 4196392,
+          "digits": 4201492,
+          "letters": 4201512,
+          "surface.c": 0,
+          "validate": 4197152,
+          "traps.c": 0,
+          "rom_address.isra.0": 4197904,
+          "executable": 4197940,
+          "config_valid": 4198006,
+          "state_valid": 4198186,
+          "intrinsic": 4198714,
+          "probe.c": 0,
+          "m68k.c": 0,
+          "span": 4199804,
+          "contains": 4199862,
+          "program": 4201538,
+          "cs_surface_fill": 4197492,
+          "cs_mac_aline_program": 4201236,
+          "cs_trap_set": 4198618,
+          "__data_load": 4201552,
+          "cs_trap_get": 4198518,
+          "cs_surface_init": 4197398,
+          "cs_trap_direct": 4199086,
+          "memcpy": 4194944,
+          "__rom_code_end": 4201552,
+          "__udivsi3": 4194806,
+          "cs_mac_line_a": 4195422,
+          "cs_trap_init": 4198392,
+          "cs_surface_clear": 4197814,
+          "__rom_end": 4201552,
+          "__bss_end": 4956,
+          "cs_mac_fault": 4194676,
+          "cs_aline_probe": 4200632,
+          "cs_mac_probe": 4194664,
+          "__umodsi3": 4194834,
+          "cs_trap_decode": 4198224,
+          "__data_end": 2816,
+          "__mulsi3": 4194776,
+          "cs_mac_scene": 4196508,
+          "cs_mac_image_crc": 4194976,
+          "__bss_start": 2816,
+          "cs_mac_loop_begin": 4195176,
+          "cs_m68k_step": 4200102,
+          "__divsi3": 4194866,
+          "cs_mac_main": 4195566,
+          "cs_service_probe": 4199220,
+          "cs_trap_call": 4198852,
+          "cs_mac_reset": 4194564,
+          "cs_mac_aline_program_end": 4201248,
+          "cs_mac_loop_poll": 4195210,
+          "cs_m68k_aline": 4199912,
+          "cs_mac_line_a_handler": 4201176,
+          "cs_mac_vectors": 4194304,
+          "cs_mac_aline_probe": 4201248,
+          "cs_mac_via_init": 4195072,
+          "cs_mac_diag": 2816,
+          "__data_start": 2816
+        },
+        "stack_frames": [
+          {
+            "function": "divide",
+            "bytes": 20
+          },
+          {
+            "function": "__mulsi3",
+            "bytes": 0
+          },
+          {
+            "function": "__udivsi3",
+            "bytes": 16
+          },
+          {
+            "function": "__umodsi3",
+            "bytes": 16
+          },
+          {
+            "function": "__divsi3",
+            "bytes": 24
+          },
+          {
+            "function": "memcpy",
+            "bytes": 0
+          },
+          {
+            "function": "cs_mac_image_crc",
+            "bytes": 8
+          },
+          {
+            "function": "cs_mac_via_init",
+            "bytes": 40
+          },
+          {
+            "function": "cs_mac_loop_begin",
+            "bytes": 0
+          },
+          {
+            "function": "cs_mac_loop_poll",
+            "bytes": 24
+          },
+          {
+            "function": "read_reg",
+            "bytes": 0
+          },
+          {
+            "function": "write_reg",
+            "bytes": 0
+          },
+          {
+            "function": "cs_mac_line_a",
+            "bytes": 56
+          },
+          {
+            "function": "cs_mac_main",
+            "bytes": 132
+          },
+          {
+            "function": "box",
+            "bytes": 40
+          },
+          {
+            "function": "glyph",
+            "bytes": 56
+          },
+          {
+            "function": "number.constprop",
+            "bytes": 60
+          },
+          {
+            "function": "cs_mac_scene",
+            "bytes": 116
+          },
+          {
+            "function": "validate",
+            "bytes": 28
+          },
+          {
+            "function": "cs_surface_init",
+            "bytes": 52
+          },
+          {
+            "function": "cs_surface_fill",
+            "bytes": 84
+          },
+          {
+            "function": "cs_surface_clear",
+            "bytes": 44
+          },
+          {
+            "function": "rom_address.isra",
+            "bytes": 0
+          },
+          {
+            "function": "executable",
+            "bytes": 16
+          },
+          {
+            "function": "config_valid",
+            "bytes": 28
+          },
+          {
+            "function": "state_valid",
+            "bytes": 4
+          },
+          {
+            "function": "cs_trap_decode",
+            "bytes": 8
+          },
+          {
+            "function": "cs_trap_init",
+            "bytes": 12
+          },
+          {
+            "function": "cs_trap_get",
+            "bytes": 24
+          },
+          {
+            "function": "cs_trap_set",
+            "bytes": 24
+          },
+          {
+            "function": "intrinsic",
+            "bytes": 24
+          },
+          {
+            "function": "cs_trap_call",
+            "bytes": 32
+          },
+          {
+            "function": "cs_trap_direct",
+            "bytes": 32
+          },
+          {
+            "function": "cs_service_probe",
+            "bytes": 156
+          },
+          {
+            "function": "span",
+            "bytes": 4
+          },
+          {
+            "function": "contains",
+            "bytes": 4
+          },
+          {
+            "function": "cs_m68k_aline",
+            "bytes": 28
+          },
+          {
+            "function": "cs_m68k_step",
+            "bytes": 60
+          },
+          {
+            "function": "cs_aline_probe",
+            "bytes": 212
+          }
+        ],
+        "stack_extra_bytes": 192,
+        "corruption_controls": 8,
+        "resealed_aline_controls": 4,
+        "omitted_object_controls": 11
+      },
+      {
+        "optimization": "-O0",
+        "image_size": 65536,
+        "image_sha256": "578f8a727de9f63d735988cc655739c6f68fd8ba8ad18540702bf56c8dce92d6",
+        "image_crc32": "2ccb7293",
+        "rom_used": 11328,
+        "ram_data_bss": 2140,
+        "symbols": {
+          "0.o": 0,
+          "cs_mac_probe_handler": 4194668,
+          "runtime.c": 0,
+          "divide": 4194756,
+          "loop.c": 0,
+          "entry.c": 0,
+          "cs_mac_services": 2880,
+          "aline_fault": 4195832,
+          "read_reg": 4196100,
+          "write_reg": 4196126,
+          "scene.c": 0,
+          "box": 4196780,
+          "letters": 4205572,
+          "digits": 4205598,
+          "glyph": 4197174,
+          "number": 4197360,
+          "surface.c": 0,
+          "validate": 4198492,
+          "traps.c": 0,
+          "rom_address": 4199696,
+          "config_valid": 4199750,
+          "state_valid": 4200092,
+          "executable": 4200138,
+          "intrinsic": 4200932,
+          "begin_report": 4201094,
+          "probe.c": 0,
+          "m68k.c": 0,
+          "mode": 4202564,
+          "span": 4202612,
+          "contains": 4202674,
+          "begin": 4202736,
+          "finish": 4202884,
+          "read32": 4203184,
+          "write32": 4203274,
+          "program": 4205618,
+          "cs_surface_fill": 4199016,
+          "cs_mac_aline_program": 4205316,
+          "cs_trap_set": 4200824,
+          "__data_load": 4205632,
+          "cs_trap_get": 4200688,
+          "cs_surface_init": 4198894,
+          "cs_trap_direct": 4201538,
+          "memcpy": 4195094,
+          "__rom_code_end": 4205632,
+          "__udivsi3": 4194898,
+          "cs_mac_line_a": 4195848,
+          "cs_trap_init": 4200458,
+          "cs_surface_clear": 4199590,
+          "__rom_end": 4205632,
+          "__bss_end": 4956,
+          "cs_mac_fault": 4194676,
+          "cs_aline_probe": 4204456,
+          "cs_mac_probe": 4194664,
+          "__umodsi3": 4194928,
+          "cs_trap_decode": 4200206,
+          "__data_end": 2816,
+          "__mulsi3": 4194696,
+          "cs_mac_scene": 4197524,
+          "cs_mac_image_crc": 4195164,
+          "__bss_start": 2816,
+          "cs_mac_loop_begin": 4195486,
+          "cs_m68k_step": 4203348,
+          "__divsi3": 4194962,
+          "cs_mac_main": 4196166,
+          "cs_service_probe": 4201676,
+          "cs_trap_call": 4201190,
+          "cs_mac_reset": 4194564,
+          "cs_mac_aline_program_end": 4205328,
+          "cs_mac_loop_poll": 4195554,
+          "cs_m68k_aline": 4202904,
+          "cs_mac_line_a_handler": 4205256,
+          "cs_mac_vectors": 4194304,
+          "cs_mac_aline_probe": 4205328,
+          "cs_mac_via_init": 4195308,
+          "cs_mac_diag": 2816,
+          "__data_start": 2816
+        },
+        "stack_frames": [
+          {
+            "function": "__mulsi3",
+            "bytes": 4
+          },
+          {
+            "function": "divide",
+            "bytes": 20
+          },
+          {
+            "function": "__udivsi3",
+            "bytes": 16
+          },
+          {
+            "function": "__umodsi3",
+            "bytes": 16
+          },
+          {
+            "function": "__divsi3",
+            "bytes": 32
+          },
+          {
+            "function": "memcpy",
+            "bytes": 12
+          },
+          {
+            "function": "cs_mac_image_crc",
+            "bytes": 20
+          },
+          {
+            "function": "cs_mac_via_init",
+            "bytes": 12
+          },
+          {
+            "function": "cs_mac_loop_begin",
+            "bytes": 4
+          },
+          {
+            "function": "cs_mac_loop_poll",
+            "bytes": 16
+          },
+          {
+            "function": "aline_fault",
+            "bytes": 0
+          },
+          {
+            "function": "cs_mac_line_a",
+            "bytes": 68
+          },
+          {
+            "function": "read_reg",
+            "bytes": 0
+          },
+          {
+            "function": "write_reg",
+            "bytes": 4
+          },
+          {
+            "function": "cs_mac_main",
+            "bytes": 120
+          },
+          {
+            "function": "box",
+            "bytes": 40
+          },
+          {
+            "function": "glyph",
+            "bytes": 44
+          },
+          {
+            "function": "number",
+            "bytes": 32
+          },
+          {
+            "function": "cs_mac_scene",
+            "bytes": 84
+          },
+          {
+            "function": "validate",
+            "bytes": 36
+          },
+          {
+            "function": "cs_surface_init",
+            "bytes": 28
+          },
+          {
+            "function": "cs_surface_fill",
+            "bytes": 64
+          },
+          {
+            "function": "cs_surface_clear",
+            "bytes": 40
+          },
+          {
+            "function": "rom_address",
+            "bytes": 0
+          },
+          {
+            "function": "config_valid",
+            "bytes": 8
+          },
+          {
+            "function": "state_valid",
+            "bytes": 4
+          },
+          {
+            "function": "executable",
+            "bytes": 8
+          },
+          {
+            "function": "cs_trap_decode",
+            "bytes": 4
+          },
+          {
+            "function": "cs_trap_init",
+            "bytes": 8
+          },
+          {
+            "function": "cs_trap_get",
+            "bytes": 12
+          },
+          {
+            "function": "cs_trap_set",
+            "bytes": 12
+          },
+          {
+            "function": "intrinsic",
+            "bytes": 24
+          },
+          {
+            "function": "begin_report",
+            "bytes": 0
+          },
+          {
+            "function": "cs_trap_call",
+            "bytes": 32
+          },
+          {
+            "function": "cs_trap_direct",
+            "bytes": 20
+          },
+          {
+            "function": "cs_service_probe",
+            "bytes": 140
+          },
+          {
+            "function": "mode",
+            "bytes": 4
+          },
+          {
+            "function": "span",
+            "bytes": 0
+          },
+          {
+            "function": "contains",
+            "bytes": 0
+          },
+          {
+            "function": "begin",
+            "bytes": 4
+          },
+          {
+            "function": "finish",
+            "bytes": 0
+          },
+          {
+            "function": "cs_m68k_aline",
+            "bytes": 20
+          },
+          {
+            "function": "read32",
+            "bytes": 0
+          },
+          {
+            "function": "write32",
+            "bytes": 0
+          },
+          {
+            "function": "cs_m68k_step",
+            "bytes": 52
+          },
+          {
+            "function": "cs_aline_probe",
+            "bytes": 204
+          }
+        ],
+        "stack_extra_bytes": 192,
+        "corruption_controls": 8,
+        "resealed_aline_controls": 4,
+        "omitted_object_controls": 11
+      }
+    ],
+    "inputs": {
+      "arch/m68k/mac-reset.S": "b40c0b860836bfe398053251ffd810c98a1fae17ea049132573415475eaa013d",
+      "arch/m68k/runtime.c": "1e3fa635a12a6ac91b30f25fdf19c493b84493dcecc4ce7e4dcc298c3412d078",
+      "platform/mac128k/loop.c": "89680e5d2c4222cfa1578012275c4ed074b67718c01fc97877a95c0124b7dacc",
+      "platform/mac128k/entry.c": "5185d9c597bcec81ff7a8a3ac569dbc064acfa31f55cdcaa393689f0f016a2d9",
+      "apps/rom-scene/scene.c": "481af50ded6f22475d601de56039816463773f5f2916a6281110c7a8b8053c3e",
+      "core/graphics/surface.c": "157ed442c0278a344b57cb0e08657c30273de2a62199d72a30b38e5ee7ea1c5c",
+      "core/services/traps.c": "585adf0742f51390bc44ba086b58e22361bb7188c1205bcc11968875f0cbb1ef",
+      "apps/service-probe/probe.c": "0e32e53ebf65a4b99d9bb494f69ea86daaa6df880d5be28559870f7e218c2cc2",
+      "core/cpu/m68k.c": "c6c169c175a71bb24d2f6f375d5bca7dea4469ae4407c43159b3b27c6db613b8",
+      "apps/aline-probe/probe.c": "ff8942bf7e18c4b93302473421d3b69b9c7b32089999b728346a2766439e82e0",
+      "arch/m68k/aline.S": "1743e0f66d8a279780f61ba7b46e321d12ac0b1d15fa1eda21c5efced876aa63",
+      "arch/m68k/runtime.h": "8b0de7d191dbcb43576a32c88e604f7c3145ac094af5137cc128381a0ff074e8",
+      "platform/mac128k/rom.h": "65d6b789b7d809520773c77df787694010e2afcb0f8b05d7021b726c393705c7",
+      "core/graphics/surface.h": "31de605b79282fac7f4208e28aab328662df975a03028ac16fe179672d6dc264",
+      "arch/m68k/mac-rom.ld": "5d5b7d93dde8b7ae395832955d43baede81f82df50a9b2cda07a2146dd40ae65",
+      "docs/specifications/SPEC-0018-mac128k-rom-startup.md": "9437d29434f3c1f5e747968291b517537c99b0f976798ed7fd234d892e901c74",
+      "core/services/traps.h": "a3346547364a2237027dbe1d134b81129e80f9731f4c49c813fc9f68563fd782",
+      "apps/service-probe/probe.h": "ae48c5583f34ad80ecb89bac0f8b3dfa0729b1f19c9270b01875e7b6305772ec",
+      "docs/specifications/SPEC-0020-shared-trap-address-services.md": "15604032e42f66ce560658c7446f943a0d5945fcf8dbb1e9e30d8439d1715c28",
+      "core/cpu/m68k.h": "db12b5678ffe4b471082a3b9f6840719148d10032c2ba6dfeb2a9d83a03b7ad5",
+      "apps/aline-probe/probe.h": "c6e15ba0af8478c31adacbd1e9414141999c873a866e92cf33ac3e06816e9684",
+      "apps/aline-probe/program.h": "945b01c5806a30634321915a5e80a7b556e96f4ad0828fbb618b2899ee93b2fe",
+      "docs/specifications/SPEC-0021-aline-execution.md": "0ce5a1c89561ca1f1844d272be9f329393a495e39bc53608340d7e16791cd6d8"
+    },
+    "stack_reserved_bytes": 8192,
+    "stack_extra_allowance": 192,
+    "stack_measured_high_water": false,
+    "cpu_execution": "actual-emulated-68000-vector10-entry-and-RTE",
+    "ram_view_scope": "own RAM viewer initially vectors, then B00-B3F diagnostics and adjacent own directory header; only 64 diagnostic bytes retained",
+    "trials": [
+      {
+        "trial": "cold-01",
+        "observed_utc": "2026-10-12T17:29:16.062Z",
+        "status": "passed",
+        "address": "0xB00",
+        "bytes": 64,
+        "words_hex": [
+          "43533039",
+          "00000004",
+          "00000e1a",
+          "00000000",
+          "00000001",
+          "ad3b6bcb",
+          "00000000",
+          "0000000a",
+          "00000000",
+          "53564331",
+          "00000008",
+          "00000000",
+          "414c4e31",
+          "00000006",
+          "00000003",
+          "00000003"
+        ],
+        "generated_guest_input": false,
+        "process_exit_code": null,
+        "started_utc": "2026-10-12T17:27:03.8647842Z",
+        "window_closed": true
+      },
+      {
+        "trial": "cold-02",
+        "observed_utc": "2026-10-12T17:34:21.988Z",
+        "status": "passed",
+        "address": "0xB00",
+        "bytes": 64,
+        "words_hex": [
+          "43533039",
+          "00000004",
+          "00000e1a",
+          "00000000",
+          "00000001",
+          "ad3b6bcb",
+          "00000000",
+          "0000000a",
+          "00000000",
+          "53564331",
+          "00000008",
+          "00000000",
+          "414c4e31",
+          "00000006",
+          "00000003",
+          "00000003"
+        ],
+        "generated_guest_input": false,
+        "process_exit_code": null,
+        "started_utc": "2026-10-12T17:30:35.6038393Z",
+        "window_closed": true
+      }
+    ],
+    "windows_closed": true,
+    "apple_rom_used": false,
+    "physical_hardware_tested": false
+  },
+  "formal_b2": "partial-criterion-6-unchanged",
+  "full_editions": "not-started",
+  "parity": "not-tested",
+  "human_provenance_review": "pending",
+  "failure_history": [
+    "GCC rejected misleading indentation in new test main after five passing Clang configs; fixed and full fresh verification passed.",
+    "An owner-catalog update refused UTF-8 under host default encoding; corrected without changing prior content.",
+    "Publisher PDF downloads refused; eligible web-parsed documentation reviewed, no local download/hash or successful visual-page claim.",
+    "Initial native builds retained; hardware slot reset and exact bridge/assembly stack audits added before any native trial."
+  ]
+}

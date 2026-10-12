@@ -1,5 +1,13 @@
 # Project status
 
+2026-10-12: the original twelve-byte instruction probe passes three PC starts
+in the bounded interpreter and two own-ROM Snow 128K starts through actual
+vector10/RTE, three native calls, register/SR checks and zero faults. SPEC-0021 /
+IMPL-0025 / TEST-0029; [report](development/aline-execution-evidence.md).
+1,002 local checks and CI38284131256 pass, six EFI/two ROM profiles match.
+Legacy applications, full CPU/historical SPEC-0017/OS/physical/edition and B2
+criterion6 gates remain open. Earlier paragraphs are dated checkpoints.
+
 2026-10-12: SPEC-0021 / IMPL-0025 / TEST-0029 adds an original bounded
 instruction interpreter and actual 68000 vector-10/RTE bridge for the two shared
 services. One common twelve-byte fixture, no external emulator/Apple code.

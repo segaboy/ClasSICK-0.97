@@ -5,6 +5,20 @@ eligibility applies to the stated scope, not every resource reachable from a URL
 No Apple executable, source, disassembly, decompilation, or copied asset was used.
 Project-owned black-box native trials are recorded separately below.
 
+## SRC-0095 - Own A-line instruction and native return observations
+
+2026-10-12, SPEC-0021 / TEST-0029, compiled source
+`f29113b13775102f294d76e9c3deb1691228b1c8`. Three fresh PC starts interpret
+the original instruction fixture; two fresh Snow 128K starts execute actual
+vector10/RTE and three native service calls, register/SR/return checks and scene.
+[Report](../docs/development/aline-execution-evidence.md) separates these CPU
+paths and unimplemented historical/legacy/complete CPU boundaries. Retain only
+own post-success selected PC registers and 64 own Mac diagnostic RAM bytes.
+No firmware internals, emulator implementation, Apple ROM/code or assets used.
+No new operator evidence. VM off/unchanged VDI, both Snow windows closed normally;
+process exit codes not retained. CI38284131256 passes both jobs, six EFI/two ROM
+profiles and all ROM source fingerprints match local. Human review pending.
+
 ## SRC-0092 - Owner continuation to original A-line execution
 
 2026-10-12: "continue" after shared services passed and the next instruction-call

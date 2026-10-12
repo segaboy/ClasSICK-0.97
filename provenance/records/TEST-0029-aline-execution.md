@@ -28,3 +28,14 @@ fixture mutations and eleven omitted-object controls each. Os/O0 ROM use
 7,248/11,328 bytes, data/BSS 2,140; retain 8-KiB stack. Frame sums plus a
 192-byte assembly/exception allowance are 1,676/1,460, not measured high-water.
 Native trials are not yet credited at this implementation checkpoint.
+
+Native follow-up: three fresh native PC starts pass the same six-instruction/
+three-call/eight-check interpreter probe, exposing 8/0/414c4e31/6/3 after own
+successful second60 output; two register samples agree each run. Two fresh Snow
+128K own-ROM starts pass both portable probe and three actual vector10/RTE calls,
+preserved register/SR checks, stage4/ticks3610/one TRAP/expected seal/zero fault.
+[Detailed evidence](../../docs/development/aline-execution-evidence.md) retains
+CPU-path distinctions, 64 own diagnostic bytes and remaining unsupported scope.
+CI38284131256 passes both jobs at `f29113b13775102f294d76e9c3deb1691228b1c8`;
+six EFI/two ROM profiles and every ROM input fingerprint match local. VM off,
+VDI unchanged, both Snow windows absent/loop-exit logs; no Snow exit-code claim.
