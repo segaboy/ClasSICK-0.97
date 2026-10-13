@@ -95,21 +95,34 @@ synthetic fixtures first, as its README already requires.
 - **Resource map:** 16 + 4 + 2 bytes reserved (filled in memory with a copy of
   the header, a next-map handle and the file reference number), 2 bytes of file
   attributes, then offsets to the type list and name list.
+  I-129/RM-35 document the reserved fields as zero in the file.
 - **Type list:** count of types minus 1; for each type, the 4-byte type, count
   of resources minus 1, and offset to its reference list.
 - **Reference list entry (12 bytes):** ID, offset to name (−1 if none), 1 byte of
   attributes, 3-byte offset to the data's length field, and 4 bytes reserved for
   a handle.
+  I-130/RM-36 document the ordinary handle field as zero in the file.
 - **Name list:** length byte and characters per name.
 - **Attributes** (I-111, PDF 121): resSysHeap 64, resPurgeable 32, resLocked 16,
   resProtected 8, resPreload 4, resChanged 2; bits 0 and 7 are not for
   applications. Locked overrides purgeable.
-- **[INF]** The 3-byte data offset limits the resource data area to 16 MB.
+  `resChanged` must be zero in the file (I-112/RM-14).
+- **[DIFF]** The published 11/28/84 chapter describes bit-7 system references,
+  whose data offset is ignored and four-byte field contains a resource
+  specification (RM-37/39/41). The 1985 volume instead reserves the bit.
+- **[INF, corrected 2026-10-13]** The 3-byte data offset limits the position of
+  a resource's length prefix to 24 bits, not the size of the entire data area;
+  the 4-byte length can extend a resource farther.
 
 **[ENG]** The `formats/resourcefork` placeholder: a bounded, read-only parser
 returning (type, ID) → (attributes, data span, name), rejecting overlapping or
 out-of-range offsets. The in-memory map the Resource Manager builds (with
 handles in the reserved fields) is a separate, later contract.
+
+Lead follow-up, 2026-10-13: [SPEC-0024](../specifications/SPEC-0024-resource-fork-reader.md)
+finalizes a tolerant bounded reader profile with requested-key ambiguity errors,
+reference metadata and raw spans. This supersedes the preliminary overlap policy
+above. No reader implementation or test execution yet; see the [lead review](resourcefork-lead-review.md).
 
 ## 3. Code segments
 

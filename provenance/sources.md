@@ -5,6 +5,56 @@ eligibility applies to the stated scope, not every resource reachable from a URL
 No Apple executable, source, disassembly, decompilation, or copied asset was used.
 Project-owned black-box native trials are recorded separately below.
 
+## SRC-0106 - Claude resource-fork bundle and independent lead adoption
+
+Owner supplied two drafts and their work transcript on 2026-10-12, requested
+review/L-decisions/identifiers if adopted, and continued the review on 2026-10-13.
+[Lead review](../docs/research/resourcefork-lead-review.md) records their exact
+hashes and source boundaries. Original files remain unchanged outside Git and
+their original research copies remain untracked; no supplied code declaration,
+source quotation or throwaway checker is published as an implementation.
+
+The lead independently verified the identified SRC-0071 and SRC-0068 copies,
+read the selected I-108/110-112/114/125/128-131 and RM-13/14/30/34-37/39/41
+API/format sections and visually checked I-111/131 and RM-13/41. Published
+numeric facts only; ancillary constants/types are not copied code/equates.
+SRC-0097's existing byte-order source is reused, with no new local Motorola
+PDF/hash claim. SPEC-0024 / ADR-0028 adopts an explicitly original reader
+profile; TEST-0032 is planned, not executed. Edition differences and RF-1..9
+remain open. No parser, native/application/VM claim or reference observation.
+Lead self-review; human provenance review pending.
+
+## SRC-0107 - Claude asset dossier intake and original planning register
+
+Owner supplied the dossier with the resource-fork bundle. Original SHA-256
+d19d1a8d792ea4ec9d63dc373076067974a0c79873b47546e14a132758af533a;
+unchanged outside Git. [Lead review](../docs/research/asset-replacement-lead-review.md)
+and [asset register](../docs/compatibility/assets.md) adopt original asset
+tracking under existing policy. Selected SRC-0071 I-219/220/341/351/473/474
+numeric interface/prose checked; no glyph, icon, pattern bitmap, metrics table
+or Apple sample used as an asset/implementation. Later book facts are not a
+complete January 1984 inventory. Secondary legal/history conclusions and
+author's exposure attestation are not independently proven. No new artwork,
+name selection, metrics observation, legal clearance or added approval gate.
+
+## SRC-0108 - Selected primary publication and trademark notices
+
+Access/review 2026-10-12/13, source checks for the asset intake only:
+
+- Apple [third-party guidelines](https://www.apple.com/legal/intellectual-property/guidelinesfor3rdparties.html),
+  compatibility references, logo/name restrictions and publication conditions.
+- Apple [trademark list](https://www.apple.com/legal/intellectual-property/trademark/appletmlist.html),
+  relevant entries and explicit non-exhaustive/absence-of-waiver statements.
+- US Copyright Office [Circular 33](https://www.copyright.gov/circs/circ33.pdf),
+  printed 2-4: short phrases, typeface, layouts and familiar symbols.
+- US Copyright Office [Circular 15A](https://www.copyright.gov/circs/circ15a.pdf),
+  printed 1: different duration rules for authorship/publication categories.
+
+Primary publisher notices, not implementation input or project-specific legal
+clearance. Court summaries/statutes from the dossier were not independently
+validated or adopted. No actual source bitmap, code or protected page is
+republished. Lead self-review; human review pending; existing policy remains.
+
 ## SRC-0105 - Gemini MFS research intake and independent lead review
 
 2026-10-12: the owner supplied Gemini's three-document MFS research archive

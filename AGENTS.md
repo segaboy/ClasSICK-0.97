@@ -3,6 +3,15 @@
 Read `docs/clean-room/POLICY.md`, `CONTRIBUTING.md`, and
 `provenance/README.md` before researching or changing this project.
 
+- On 2026-10-13 the owner continued review of Claude's resource-fork drafts,
+  transcript and asset dossier (SRC-0106/0107). SPEC-0024 / ADR-0028 finalizes
+  the original bounded reader contract; TEST-0032 is planned, not executed.
+  Original research copies remain unchanged and untracked. Asset tracking is
+  planning under existing policy; attachment recommendations are not automatic
+  instructions or new approval gates. No parser/asset/boot implementation or
+  VM/native-application permission is inferred; prior compiled results and all
+  source/role/owner/edition gates remain unchanged. Normal Git/HQ/wiki records.
+
 - On 2026-10-12 the owner said "Do it" after the checked-memory checkpoint
   and proposed Memory Manager finalization/allocation (SRC-0101). SPEC-0023
   covers original bounded hosted pointer/handle/size/lock/copy services, reviewed

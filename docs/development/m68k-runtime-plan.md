@@ -29,6 +29,15 @@ name rules. Test categories are useful; no parser contract or fixture is finaliz
 and 12-bit packing remains unverified. Filename-comparison research is a separate
 follow-up. This leaves the guest-trap integration dependency order unchanged.
 
+2026-10-13: [Claude's resource-fork review](../research/resourcefork-lead-review.md)
+adopts SPEC-0024 / ADR-0028 and settles L-1..12 for a tolerant bounded reader.
+TEST-0032 is a conformance plan; no parser or audit has executed. The optional
+full audit remains deferred with explicit scratch/work requirements. The
+[asset register](../compatibility/assets.md) tracks future original content;
+its [source review](../research/asset-replacement-lead-review.md) does not create
+new legal approval gates. Existing compiled Memory Manager/native results and
+the implementation order remain unchanged.
+
 ## Work allowed now, in dependency order
 
 1. **Routine and record interface registry.** The two trap-address services and
