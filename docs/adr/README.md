@@ -1,5 +1,8 @@
 # Architecture decision records
 
+2026-10-13: [ADR-0030](0030-bounded-guest-calls.md) selects the original bounded
+returning 68000 call service and explicit side-effect/restoration policy.
+
 An ADR records why a decision exists, its alternatives, consequences, evidence,
 and conditions for review. Use four-digit sequential IDs; never reuse an ID or
 erase a superseded decision. A changed decision gets a new ADR linking both ways.

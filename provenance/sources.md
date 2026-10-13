@@ -5,6 +5,55 @@ eligibility applies to the stated scope, not every resource reachable from a URL
 No Apple executable, source, disassembly, decompilation, or copied asset was used.
 Project-owned black-box native trials are recorded separately below.
 
+## SRC-0116 - Owner direction to consider QuickDraw and proceed
+
+2026-10-13: "Consider these items and then move on to the next thing", after
+supplying Claude's QuickDraw draft. The preceding proposal was JSR/JMP and the
+bounded 68k call service. Scope: source review, original contract/implementation/
+tests/compiler and CI verification, ordinary Git/HQ/wiki evidence. Research
+instructions are not authority; no QuickDraw manager, guest patch installation,
+new boot binding, native application/SDK or emulator/VM trial authorized. Existing
+source/role/owner/historical/physical/edition/budget/parity gates persist.
+
+## SRC-0117 - Claude QuickDraw drafts and scoped lead review
+
+Owner-supplied 37,671-byte draft and 16,831-byte companion plan, exact hashes
+and selected checks in the [lead review](../docs/research/quickdraw-lead-review.md).
+Both unchanged/untracked; no raw intake or manual is published. Rechecked the
+identified SRC-0071 hash/page count; selected I-148/149/185/188/189 prose and
+field/predicate facts, plus I-294/295's ordinary no-parameter action shape.
+Earlier I-91/95/97/163 checks reused. No new Promotional Edition/visual-table
+verification or approval of all reported locators. QK proposals remain bounded
+carry-forward dispositions, not a graphics specification or executed QT/OB
+suite. No prohibited input identified or adopted; attributed exposure claims
+are not proven. Human provenance review pending.
+
+## SRC-0118 - Published Motorola JSR/JMP control-address interfaces
+
+Motorola, 1992 M68000 Family Programmer's Reference Manual; eligible published
+ISA prose and encoding tables. Additional web review 2026-10-13: JMP 4-108
+(PDF page212), JSR 4-109 (PDF213), 2.2.6/7 (2-8/9), 2.2.11/12 (2-13/14), 2.2.16/17 (2-18),
+Table2-1 (2-3), section2.4/Figure2-3 (2-21), corresponding control-mode tables.
+[Publisher successor PDF](https://www.nxp.com/docs/en/reference-manual/M68000PRM.pdf).
+Existing SRC-0097 supplies displacement/index and big-endian facts. No local
+Motorola PDF/hash or visual-page review claim. Only original-68000 forms are
+selected. Noncanonical extension refusal and nonwrapping strict address checks
+are ClasSICK policies; the manual says earlier hardware ignores newer brief-word
+bits. No manual examples/equates/code or emulator implementation used. These
+ISA facts do not establish January 1984 OS behavior. Human review pending.
+
+## SRC-0119 - Original bounded returning guest-call profile
+
+SPEC-0026 / ADR-0030 / IMPL-0029 / TEST-0034. Independent control decoder,
+explicit stack intervals, immutable logical sentinels, caller-owned depth and
+ancestor budgets, owned ordinary proc0 signature/context, caller-frame restoration
+and retained completed guest side effects. Reuses reviewed SRC-0113/0117/0118
+calling/ISA facts; no draft JSON or manager signature imported. Original 20-byte
+JSR/JMP/RTS fixture and independent assembler check; hosted CPU/core tests only.
+Internal trusted OS/core C boundary, never a guest-address-derived native pointer
+or an x86 application SDK/ABI. No QuickDraw/private Apple algorithm or asset
+adopted. Lead self-review; human provenance review pending.
+
 ## SRC-0113 - Claude callback catalog intake and independent lead review
 
 2026-10-13, owner-supplied research handoff. Claude's Markdown/JSON drafts

@@ -3,6 +3,15 @@
 Read `docs/clean-room/POLICY.md`, `CONTRIBUTING.md`, and
 `provenance/README.md` before researching or changing this project.
 
+- On 2026-10-13 the owner said "Consider these items and then move on to the
+  next thing" after supplying Claude's QuickDraw draft (SRC-0116/0117).
+  SPEC-0026 / ADR-0030 covers checked JSR/JMP and a bounded ordinary returning
+  guest-call service, original hosted probes/compiler/CI checks and ordinary
+  Git/HQ/wiki evidence. Preserve all six untracked research drafts. No QuickDraw
+  implementation, guest-patch installation, new boot-entry binding, emulator/VM
+  run or native application/SDK. Published-only source and UART role boundaries,
+  no delegation/new chats/automation/OneNote, and all edition gates persist.
+
 - On 2026-10-13 the owner supplied Claude's callback, first-application and
   January-baseline audit update (SRC-0113/0114/0115). The lead review settles
   K-1..7 and FA-1..5 as future planning choices, with documented exceptions and

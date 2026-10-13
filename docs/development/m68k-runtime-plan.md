@@ -6,6 +6,16 @@ treating research proposals as finalized historical specifications.
 
 ## Current foundation
 
+2026-10-13: SPEC-0026 / ADR-0030 now supplies canonical checked JMP/JSR,
+explicit stack intervals and the original ordinary proc0 call service. It bounds
+RTS completion, nesting and ancestor instruction budgets, restores caller
+controls, and makes retained guest effects on late failure explicit. Its
+20-byte original fixture returns in six instructions. Parameter/result
+marshalling, actual manager callbacks and guest-patch routing remain later
+contracts. The [QuickDraw intake](../research/quickdraw-lead-review.md)
+preserves layout/edition/clipping ambiguities as future graphics work; no
+graphics implementation or new boot/VM/native application permission inferred.
+
 SPEC-0020 supplies selected Get/SetTrapAddress services; SPEC-0021 supplies an
 original bounded A-line path and native Mac exception return. SPEC-0022 supplies
 checked data regions, selected MOVE/MOVEA and byte/word branches, BSR/RTS,
@@ -105,6 +115,9 @@ stays open. This research intake changes no code and authorizes no new slice.
    cover nesting, early failure, forged/bad return, stack exhaustion, budget
    exhaustion and incompatible signatures. This serves 68000 procedures and
    patches; it introduces no native application entries.
+   SPEC-0026 supplies the first bounded ordinary no-parameter/no-result service
+   and canonical control modes. Further call-site shapes still need verified
+   marshalling, return and side-effect contracts; no blanket callback support.
 4. **Typed dispatch.** Specify built-in identity and guest-code entries with
    consistent Get/Set/direct-call logical addresses. Route an installed guest
    patch through the bounded service, preserving per-routine calling rules.
