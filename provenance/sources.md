@@ -5,6 +5,25 @@ eligibility applies to the stated scope, not every resource reachable from a URL
 No Apple executable, source, disassembly, decompilation, or copied asset was used.
 Project-owned black-box native trials are recorded separately below.
 
+## SRC-0112 - Own guest memory trap execution and compiler verification
+
+2026-10-13, SPEC-0025 / TEST-0033, CI source
+`7004ade44f2a5bd7a0bc7f5402a71deaadf418fe` (implementation bf71ed5).
+Original 82-byte program covers eleven memory operations through35 steps/15
+interpreted A-line calls, signature47545231. Local nine-profile matrix1299
+checks passes; after compiler padding-initialization removal,54 affected tests
+were repeated across those profiles. Ten extra binding object audits and GNU
+68000 fourteen object audits/two complete links pass; assembler bytes and the
+entire binding manifest match local/CI. Binding state20 bytes, prior manager672
+and guest cells256 are partial budgets, not measured stack high-water.
+[CI38398755670](https://github.com/segaboy/ClasSICK-0.97/actions/runs/38398755670)
+passes both jobs, the full current-source matrix and two extra bootstrap builds.
+Six EFI/two own ROM profiles and ROM inputs remain unchanged. Concurrent
+application-interface research is preserved separately and was not used here.
+[Evidence](../docs/development/guest-memory-traps-evidence.md) retains hashes,
+scope and preparation failures. No new boot/VM/native application/callback,
+historical or complete edition claim. Lead self-review; human review pending.
+
 ## SRC-0110 - Owner go-ahead for guest memory trap integration
 
 2026-10-13: "OK, move forward" after the proposed integration of actual OS trap

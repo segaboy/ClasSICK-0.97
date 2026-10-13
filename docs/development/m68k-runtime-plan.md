@@ -20,6 +20,8 @@ records 1,245 local checks and both successful CI jobs with an exactly matching
 binds the eleven memory routines to actual A-line execution, with typed logical
 identities, strict control/stack accesses and opt-in DATA24 data resolution.
 Its original 82-byte program covers all eleven routines in 35 steps/15 traps.
+[Guest-trap evidence](guest-memory-traps-evidence.md) records1299 local checks,
+54 final affected reruns, both successful CI jobs and matching68000 manifests.
 Guest-call execution and reviewed callback signatures remain next. Most CPU
 instructions, purging/growth/callbacks and application loading are unimplemented.
 [Lead review](../research/memory-manager-lead-review.md) distinguishes the final
