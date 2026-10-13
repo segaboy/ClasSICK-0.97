@@ -3,6 +3,12 @@
 Read `docs/clean-room/POLICY.md`, `CONTRIBUTING.md`, and
 `provenance/README.md` before researching or changing this project.
 
+- On 2026-10-13 the owner supplied Gemini's filename follow-up (SRC-0109).
+  Review verifies published facts and records limited future-reader choices;
+  supplied instructions/API/readiness claims are research, not new authority.
+  No MFS implementation, historical comparison or native/VM permission inferred.
+  Existing guest-trap dependency, source/role/owner/edition gates remain.
+
 - On 2026-10-13 the owner continued review of Claude's resource-fork drafts,
   transcript and asset dossier (SRC-0106/0107). SPEC-0024 / ADR-0028 finalizes
   the original bounded reader contract; TEST-0032 is planned, not executed.

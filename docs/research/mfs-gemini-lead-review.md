@@ -77,6 +77,12 @@ engineering safety choices before a justified packing decoder is available;
 complete fork extraction cannot claim interoperability until that gap closes.
 No stock image, Apple boot block, executable or manual example becomes a fixture.
 
+2026-10-13: the requested [filename follow-up review](mfs-filenames-lead-review.md)
+(SRC-0109) corrects case-flag polarity, retains version-sensitive identity and
+the published accent distinction, and limits interim ASCII comparison to an
+engineering mode. Its bounded-reader directions do not finalize an MFS API or
+close the packing/historical gates. Original intake findings above remain.
+
 Suggested follow-up research: filename encoding/comparison, including
 case, diacritics, lengths, version numbers and duplicate names; separate creation
 rules from validation of existing disk entries. Claude's resource-fork draft and

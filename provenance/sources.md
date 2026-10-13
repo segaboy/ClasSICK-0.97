@@ -5,6 +5,28 @@ eligibility applies to the stated scope, not every resource reachable from a URL
 No Apple executable, source, disassembly, decompilation, or copied asset was used.
 Project-owned black-box native trials are recorded separately below.
 
+## SRC-0109 - Gemini filename dossier and independent lead review
+
+2026-10-13: owner supplied a filename follow-up after the MFS intake. Original
+16,463-byte dossier SHA-256
+151aef6c8790e82a52a80e97b48ebb8989676d3fa725d0219f1043c37d315628;
+unchanged copy outside Git. [Lead review](../docs/research/mfs-filenames-lead-review.md)
+records corrected facts and limited future-reader design choices. Supplied
+declarations/formal labels and exposure attestation are not independently proven
+implementation authority. No prohibited input identified; none adopted.
+
+The lead rechecked the owner's identified SRC-0071 copy/hash/page count, read
+I-246/247, II-79-85/371/377/378, III-110/185/239/241/258-260 and searched the
+III-237-260 glossary headings. Visual checks: I-247 numeric encoding chart,
+II-377 API flag table, III-110 on-disk directory summary. Prior SRC-0105 offset/
+boundary review reused. API prose/numeric facts only; ancillary declarations
+not copied as code and chart glyphs not assets. No new Promotional Edition
+review or January1984 evidence. Version-sensitive identity, retained diacritics
+and case flag polarity correct the dossier. Raw spans, limited ASCII mode and
+ambiguous-key refusal are engineering directions, not a finalized MFS API.
+No implementation/fixture/test execution or new native/VM/application claim.
+Lead self-review; human provenance review pending; all existing gates persist.
+
 ## SRC-0106 - Claude resource-fork bundle and independent lead adoption
 
 Owner supplied two drafts and their work transcript on 2026-10-12, requested

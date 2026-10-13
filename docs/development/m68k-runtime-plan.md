@@ -27,7 +27,11 @@ checks the supplied proposals against published format diagrams. It finds
 reversed lock bits, invalid fixture geometry and incomplete directory/empty-fork/
 name rules. Test categories are useful; no parser contract or fixture is finalized,
 and 12-bit packing remains unverified. Filename-comparison research is a separate
-follow-up. This leaves the guest-trap integration dependency order unchanged.
+follow-up. The 2026-10-13 [filename review](../research/mfs-filenames-lead-review.md)
+(SRC-0109) corrects the report's case flag and version/diacritic claims. Future
+reader choices preserve counted raw names and versions, identify ASCII-only
+comparison as incomplete, and refuse an ambiguous selected identity. No MFS API
+or decoder is finalized. Guest-trap integration remains the next dependency.
 
 2026-10-13: [Claude's resource-fork review](../research/resourcefork-lead-review.md)
 adopts SPEC-0024 / ADR-0028 and settles L-1..12 for a tolerant bounded reader.
