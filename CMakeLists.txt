@@ -161,6 +161,58 @@ if(BUILD_TESTING)
     endif()
 endif()
 
+# SPEC-0023: original bounded allocation and its separate guest-register boundary.
+add_library(classick_mm STATIC core/memory/manager.c personality/system1/memory-registers.c apps/heap-probe/probe.c)
+target_link_libraries(classick_mm PUBLIC classick_memory classick_services)
+add_library(classick_mm_freestanding OBJECT core/memory/manager.c)
+add_library(classick_mm_register_freestanding OBJECT personality/system1/memory-registers.c)
+add_library(classick_heap_probe_freestanding OBJECT apps/heap-probe/probe.c)
+add_executable(classick_mm_tests tests/memory-manager.c)
+target_link_libraries(classick_mm_tests PRIVATE classick_mm)
+set(CLASSICK_MM_TARGETS classick_mm classick_mm_freestanding classick_mm_register_freestanding
+    classick_heap_probe_freestanding classick_mm_tests)
+if(CMAKE_C_COMPILER_ID MATCHES "Clang|GNU")
+    foreach(target ${CLASSICK_MM_TARGETS})
+        target_compile_options(${target} PRIVATE -Wall -Wextra -Wpedantic -Werror -Wconversion -Wsign-conversion
+            "-ffile-prefix-map=${CMAKE_SOURCE_DIR}=." "-ffile-prefix-map=${CMAKE_BINARY_DIR}=.")
+    endforeach()
+    foreach(target classick_mm classick_mm_freestanding classick_mm_register_freestanding classick_heap_probe_freestanding)
+        target_compile_options(${target} PRIVATE -ffreestanding -fno-builtin -fno-stack-protector)
+    endforeach()
+    foreach(target classick_mm_freestanding classick_mm_register_freestanding classick_heap_probe_freestanding)
+        target_compile_options(${target} PRIVATE -O2)
+    endforeach()
+elseif(MSVC)
+    foreach(target ${CLASSICK_MM_TARGETS})
+        target_compile_options(${target} PRIVATE /W4 /WX)
+    endforeach()
+endif()
+if(CLASSICK_SURFACE_SANITIZERS)
+    foreach(target classick_mm classick_mm_tests)
+        target_compile_options(${target} PRIVATE -fsanitize=address,undefined -fno-sanitize-recover=all -fno-omit-frame-pointer)
+    endforeach()
+    target_link_options(classick_mm_tests PRIVATE -fsanitize=address,undefined)
+endif()
+if(MINGW)
+    target_link_options(classick_mm_tests PRIVATE -Wl,--no-insert-timestamp)
+endif()
+if(BUILD_TESTING)
+    foreach(suite allocation zones lifetime resize compaction locks copies failures registers long-sizes probe sequences)
+        add_test(NAME mm.${suite} COMMAND classick_mm_tests ${suite})
+    endforeach()
+    if(CMAKE_C_COMPILER_ID MATCHES "Clang|GNU")
+        add_test(NAME mm.freestanding COMMAND ${CMAKE_COMMAND} "-DNM=${CLASSICK_M68K_NM}"
+            "-DALLOWED=cs_guest_validate,cs_guest_window" "-DOBJECT=$<TARGET_OBJECTS:classick_mm_freestanding>"
+            -P ${CMAKE_SOURCE_DIR}/scripts/Check-ObjectImports.cmake)
+        add_test(NAME mm.register-freestanding COMMAND ${CMAKE_COMMAND} "-DNM=${CLASSICK_M68K_NM}"
+            "-DALLOWED=cs_trap_decode,cs_mm_execute" "-DOBJECT=$<TARGET_OBJECTS:classick_mm_register_freestanding>"
+            -P ${CMAKE_SOURCE_DIR}/scripts/Check-ObjectImports.cmake)
+        add_test(NAME mm.probe-freestanding COMMAND ${CMAKE_COMMAND} "-DNM=${CLASSICK_M68K_NM}"
+            "-DALLOWED=cs_mm_register_call,cs_guest_read,cs_guest_write" "-DOBJECT=$<TARGET_OBJECTS:classick_heap_probe_freestanding>"
+            -P ${CMAKE_SOURCE_DIR}/scripts/Check-ObjectImports.cmake)
+    endif()
+endif()
+
 # Byte serialization is hosted on either width; privileged x64 assembly is EFI-only.
 add_library(classick_x64_state STATIC platform/pc/x64/state.c)
 add_library(classick_x64_state_freestanding OBJECT platform/pc/x64/state.c)

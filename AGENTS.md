@@ -3,6 +3,14 @@
 Read `docs/clean-room/POLICY.md`, `CONTRIBUTING.md`, and
 `provenance/README.md` before researching or changing this project.
 
+- On 2026-10-12 the owner said "Do it" after the checked-memory checkpoint
+  and proposed Memory Manager finalization/allocation (SRC-0101). SPEC-0023
+  covers original bounded hosted pointer/handle/size/lock/copy services, reviewed
+  register contracts, interface records, tests/compiler audits and normal Git/HQ/
+  wiki evidence. No boot-entry integration or VM/emulator launch is included.
+  Preserve the closed native-application gate, UART role separation and all
+  historical/physical/edition limits. Claude's drafts retain their research role.
+
 - On 2026-10-12 the owner confirmed Claude's native-application handoff and
   directed recording its decisions (SRC-0099). Transparent variants in the
   ordinary experience are the future requirement; GPL-3.0-or-later stays

@@ -35,6 +35,7 @@ evidence; foundational project constraints cannot be silently relaxed.
 | [ADR-0024](0024-original-aline-execution.md) | Bounded original program and native A-line return bridge | Accepted scoped profile; complete CPU/historical gateway open |
 | [ADR-0025](0025-checked-guest-memory.md) | Checked mapped data and bounded MOVE/branch/subroutine instructions before allocation policy | Accepted engineering profile; native integration and allocation services separate |
 | [ADR-0026](0026-m68k-first-application-runtime.md) | Shared application memory, one routine implementation and CODE-only selection under the owner's 68k-first gate | Accepted 68000 foundations; native applications gated |
+| [ADR-0027](0027-bounded-memory-manager.md) | Original bounded pointer/handle allocator, transactional moves and guest register adapter | Accepted engineering profile; gateway/native/reference integration open |
 
 Use [the template](template.md). Every substantive decision cites founding
 requirements or approved sources, distinguishes design from historical fact,

@@ -6,6 +6,14 @@ finalized Memory Manager specification, source verification, or compatibility
 acceptance. The original draft files remain untouched and untracked. No manager
 implementation is based on their unverified citations yet.
 
+Dated follow-up, 2026-10-12: the lead independently reviewed the eligible owner's
+published copy's routine/register/flag/error/global interfaces (SRC-0102) and
+finalized [SPEC-0023](../specifications/SPEC-0023-bounded-memory-manager.md).
+That contract supersedes the proposed phase-1 choices below for implementation.
+The two original Claude drafts are preserved unchanged as versioned research;
+their OPEN items and test proposals are not automatically acceptance criteria.
+January1984 facts, earlier-edition conflicts and deferred phases remain open.
+
 ## Fit with the completed memory layer
 
 SPEC-0022 supplies big-endian byte/word/long data access, checked writable spans,
@@ -26,6 +34,16 @@ validate/reconcile that cell before moving or resizing its block.
 ## Proposed decisions for the first manager contract
 
 These are engineering directions pending the source/contract review below.
+
+SPEC-0023 now uses 32 caller-owned records, 128-byte master-cell bands per zone,
+opaque configured zone identities and a conservative transactional compactor.
+It implements the eleven routines through a separate value-frame adapter;
+gateway/CPU binding and data-bus normalization remain later work. Existing
+globals use the verified published numeric locations, with zone bounds fixed
+and validated rather than automatically expanded. No historical Zone or block
+header is recreated. Ordinary word-code results preserve D0's high word;
+size-query errors sign-extend explicitly. No linked Pascal MemError global is
+invented. These limits are stated in the final specification and tests.
 
 | Draft decision | Proposed direction |
 | --- | --- |

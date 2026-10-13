@@ -5,6 +5,41 @@ eligibility applies to the stated scope, not every resource reachable from a URL
 No Apple executable, source, disassembly, decompilation, or copied asset was used.
 Project-owned black-box native trials are recorded separately below.
 
+## SRC-0101 - Owner go-ahead for Memory Manager finalization
+
+2026-10-12: "Do it" after the verified SPEC-0022 checkpoint and proposal to
+finalize the Memory Manager contract and implement pointer/handle allocation.
+Original bounded hosted services, per-routine register/record metadata, tests,
+compiler verification and normal Git/HQ/wiki publication. No boot-entry change,
+native application or VM/emulator run; SRC-0099's owner-confirmation gates and
+the UART role/source/physical/edition boundaries persist.
+
+## SRC-0102 - Published Memory Manager interfaces, independent review
+
+Owner's SRC-0071 published 1985 Inside Macintosh I-III, verified original copy
+SHA-256 b65fe8efe782799a333a0b59b225e2bbaf9e2e150dc949dd555571971b331d97,
+1,284 pages. Read I-94/95 (PDF104/105), II-27 (595), II-30/34 (598/602),
+II-36/37 (604/605), II-41 (609), II-44/46/48/49/50 (612/614/616/617/618),
+III-211/213 (1214/1216), III-215/220 (1218/1223) and III-227/231 (1230/1234). PDF616/1221 and
+1230/1231/1233/1234 visually checked for flag/error values, allocation trap words
+and the six global locations. Only API prose/numeric calling/representation facts
+support SPEC-0023. Mixed summary pages exposed ancillary type/layout/example
+declarations; no header/Zone/list structure, allocator placement, sample code or
+equate text is incorporated. The published copy remains outside Git; no pages
+are republished. Access 2026-10-12, lead self-review; human review pending.
+The book describes a later System file, not January1984 confirmation. Earlier
+chapter/edition conflicts remain open; the engine explicitly selects the later
+register-preservation/overlap profile. Neither reference executable nor Apple
+implementation was inspected. No reliance on unregistered later-era native APIs.
+
+## SRC-0103 - Original bounded allocation profile and fixtures
+
+SPEC-0023 / ADR-0027 / IMPL-0027 / TEST-0031. Original caller-owned table and
+fixed cell bands, gap/placement plan and byte transactions; independent interval/
+guard/state tests and guest-only per-routine registry. Engineering choices are
+identified separately from published facts. No native application/SDK, copied
+heap structure or third-party runtime. Human provenance review pending.
+
 ## SRC-0100 - Own checked memory and compiler verification
 
 2026-10-12, SPEC-0022 / TEST-0030, compiled source
