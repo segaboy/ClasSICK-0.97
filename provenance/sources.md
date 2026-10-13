@@ -5,6 +5,26 @@ eligibility applies to the stated scope, not every resource reachable from a URL
 No Apple executable, source, disassembly, decompilation, or copied asset was used.
 Project-owned black-box native trials are recorded separately below.
 
+## SRC-0128 - Own bounded resource-fork reader verification
+
+2026-10-13, SPEC-0024 / TEST-0032 / IMPL-0031; compiled source
+`12208ed5591c17fbd4c031c22e138eecc69f2671`.
+Complete nine-profile matrix: 1,479 CTests. Each profile compares 113,664 original
+mutations against a delivered independent integer model (1,022,976 locally).
+Fourteen small variants have 4,232 truncated-length checks per profile; 27 explicit
+malformed cases and large/dense/lookup/output/unaligned/shared-span cases pass.
+Ten extra width/endian object audits, matching compiler debug twins and GNU68000
+two object audits/two complete links pass; complete local/CI manifests match.
+Descriptors cost 60/40/24 bytes, reader-closure frames 216/192; partial costs only.
+[CI38444454769](https://github.com/segaboy/ClasSICK-0.97/actions/runs/38444454769)
+passes both jobs and the final-source 1,479 plus 354 bootstrap checks. Six EFI/two
+own ROM profiles/input hashes and six original research hashes unchanged.
+[Evidence](../docs/development/resource-reader-evidence.md) records exact scope,
+model/input/tool hashes and preparation corrections. No resource loading, MFS,
+CODE launch, boot binding, native application/SDK, VM/emulator/reference trial or
+historical/full OS/physical/parity/edition claim. Lead self-review, human review
+pending. Concurrent Claude launch drafts remain separate, untouched research.
+
 ## SRC-0126 - Owner direction to implement the resource-fork reader
 
 2026-10-13: "OK, continue with the next task" after the resource-fork reader

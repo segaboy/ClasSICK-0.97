@@ -6,6 +6,20 @@ treating research proposals as finalized historical specifications.
 
 ## Current foundation
 
+Latest format checkpoint, 2026-10-13: SPEC-0024 / IMPL-0031 now implements the
+bounded read-only resource-fork reader. Exact type/ID lookup, structural-first
+bounds, duplicate refusal, opaque references and output preservation pass original
+fixtures and a delivered independent model. [Evidence](resource-reader-evidence.md)
+records 1,479 local CTests in nine profiles, 1,022,976 mutation comparisons, ten
+extra object audits and complete matching local/CI 68000 manifests. Both CI jobs
+pass the final-source matrix plus 354 bootstrap checks. Descriptor costs 124 bytes
+and frame bounds 216/192 are partial, not full 128K proof. No resources are loaded,
+MFS decoded or application started. Eight research drafts, including Claude's
+new launch/segment pair, remain untracked; the new pair has not been reviewed.
+Next is lead review of that handoff and remaining CODE-only launch prerequisites.
+All native-application, boot/VM, source/role and edition gates persist. Earlier
+checkpoint paragraphs retain their original dated scope.
+
 Latest checkpoint, 2026-10-13: SPEC-0027 / ADR-0031 supplies opt-in typed
 register trap patch execution for thirteen selected OS signatures. All eleven
 memory patches chain to saved originals with active allocation flags; nested
@@ -153,6 +167,10 @@ stays open. This research intake changes no code and authorizes no new slice.
    sections; keep unresolved offset/layout/entry-state questions explicit.
    Launch/LoadSeg/UnloadSeg/ExitToShell, Toolbox stack marshalling and heap-reset
    behavior each need their own spec/tests. No native descriptor or image loader.
+   SPEC-0024 now supplies the read-only resource-fork prerequisite; it is not
+   Resource Manager loading or an application loader. MFS packing remains an
+   unresolved source question. Claude's launch/segment drafts require lead
+   review before new startup/segment contracts or execution.
 6. **Useful original 68000 application, then complete experience.** Execute an
    independently generated resource-fork application through managers and
    lifecycle services, expand the missing ISA/QuickDraw/events/windows/menus/

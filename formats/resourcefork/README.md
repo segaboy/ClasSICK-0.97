@@ -1,11 +1,19 @@
-# Resource-fork format
+# Resource-fork reader
 
-Reserved for bounded independent data/resource-fork parsing and serialization.
-Resource Manager and application loading use approved format/ABI contracts.
-No CODE resources, Apple binaries, copied resources or parser implementation yet.
+Original bounded read-only metadata service, `classick-resource-reader-v1`.
+[Contract](../../docs/specifications/SPEC-0024-resource-fork-reader.md),
+[decision](../../docs/adr/0028-bounded-resource-fork-reader.md),
+[implementation](../../provenance/records/IMPL-0031-resource-fork-reader.md) and
+[conformance](../../provenance/records/TEST-0032-resource-fork-plan.md).
 
-2026-10-13: [SPEC-0024](../../docs/specifications/SPEC-0024-resource-fork-reader.md)
-finalizes the original bounded borrowing reader profile. [ADR-0028](../../docs/adr/0028-bounded-resource-fork-reader.md)
-and [TEST-0032](../../provenance/records/TEST-0032-resource-fork-plan.md)
-record decisions and planned conformance. Implementation and optional audit
-remain unstarted; no application, file fixture or native run is produced here.
+`cs_rf_open` validates an immutable caller buffer; `cs_rf_find` returns exact
+numeric type/signed-ID metadata. Offsets are checked file positions, never
+native pointers. Requested ambiguity is refused; bit-7 references have metadata
+and no local payload. No allocation, I/O, payload execution or Resource Manager
+loading/search chain. Optional strict audit, writing and guest adapters remain
+future contracts. Use truthful disjoint live objects and constructor-produced
+immutable views as described in reader.h.
+
+[Verified checkpoint](../../docs/development/resource-reader-evidence.md).
+Fixtures/model are original and generated; no Apple file or resource is an input.
+Engineering conformance does not establish January1984 behavior or a native boot.

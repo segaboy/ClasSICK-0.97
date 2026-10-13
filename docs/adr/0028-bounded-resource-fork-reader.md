@@ -1,6 +1,6 @@
 # ADR-0028 - Bounded read-only resource-fork profile
 
-Accepted engineering contract, 2026-10-13; implementation not started.
+Accepted engineering contract, 2026-10-13; implemented later under IMPL-0031.
 SRC-0106; [SPEC-0024](../specifications/SPEC-0024-resource-fork-reader.md).
 
 Application loading needs a format reader independent of MFS, heap management
@@ -22,3 +22,7 @@ system-reference resolution and optional audits need separate contracts.
 No new implementation/test-execution/boot claim. Guest-trap integration remains
 the current runtime dependency. Revisit with eligible source or approved owner
 observation, keeping existing native-app, VM, physical and edition gates.
+
+The original intake scope above is retained. SRC-0126 authorizes the subsequent
+implementation; [verified reader](../development/resource-reader-evidence.md)
+records engineering conformance without widening historical or edition claims.

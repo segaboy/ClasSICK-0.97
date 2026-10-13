@@ -88,3 +88,6 @@ plan; no application executable, native SDK or boot entry is generated.
 Large whole-buffer fixtures run in the hosted environment. A 128K execution
 profile uses a budget-fitting subset; shared semantics do not imply storing a
 17 MiB fork in 128K RAM. Standalone compiler audits are separate from execution.
+
+Accepted exact revisions, outcomes and limits:
+[reader evidence](../../docs/development/resource-reader-evidence.md).

@@ -1,7 +1,10 @@
 # Claude resource-fork handoff review - 2026-10-13
 
 SRC-0106 / SPEC-0024 / ADR-0028 / TEST-0032. Adopted engineering contract;
-implementation and conformance execution remain unstarted.
+the intake below predates implementation. The later authorized reader is
+IMPL-0031; [execution evidence](../development/resource-reader-evidence.md)
+records its scoped results. Research originals and historical questions remain
+unchanged.
 
 The owner's delivery comprises the two resource-fork drafts, the work transcript
 and a separate asset dossier. Those are research inputs, not automatic authority

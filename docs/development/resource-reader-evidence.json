@@ -1,0 +1,326 @@
+{
+  "schema_version": 1,
+  "specification": "SPEC-0024",
+  "implementation": "IMPL-0031",
+  "test": "TEST-0032",
+  "source": "SRC-0128",
+  "profile": "classick-resource-reader-v1",
+  "classification": "hosted-format-and-standalone-compiler-verification",
+  "verified_on": "2026-10-13",
+  "compiled_source_revision": "12208ed5591c17fbd4c031c22e138eecc69f2671",
+  "historical_1984_confirmed": false,
+  "new_native_application": false,
+  "new_boot_image_integration": false,
+  "new_vm_or_emulator_runs": 0,
+  "verification": {
+    "ctest_checks": 1479,
+    "configuration_totals": [
+      177,
+      177,
+      177,
+      150,
+      177,
+      162,
+      162,
+      162,
+      135
+    ],
+    "reader_object_audits": 10,
+    "hosted_twins": {
+      "clang": "3fc55cf913a5dceff357ed706504665525a912823dc77cd1fee971fbdc29cadf",
+      "gcc": "b4e68e2cec113b1bc9bcdcf1538710cb7ed557d1944d17f74f26066fe61d1dc8"
+    },
+    "small_variants": 14,
+    "small_truncation_checks_per_configuration": 4232,
+    "explicit_malformed_cases": 27,
+    "large_variants": 5,
+    "dense_reference_count": 5000,
+    "mutation_cases_per_configuration": 113664,
+    "mutation_cases_nine_configurations": 1022976,
+    "model_hashes": {
+      "clang-hosted/debug-a": {
+        "original-444.bin": "11681414528e36a45ccd1fb3c19d523e051785a3cf69198b5156a227f82e1c84",
+        "integer-model.bin": "b9fe5dc8f10e45a204065e0896c19c5522a32706a83fd27eca7840008110523a"
+      },
+      "clang-hosted/debug-b": {
+        "original-444.bin": "11681414528e36a45ccd1fb3c19d523e051785a3cf69198b5156a227f82e1c84",
+        "integer-model.bin": "b9fe5dc8f10e45a204065e0896c19c5522a32706a83fd27eca7840008110523a"
+      },
+      "clang-hosted/release": {
+        "original-444.bin": "11681414528e36a45ccd1fb3c19d523e051785a3cf69198b5156a227f82e1c84",
+        "integer-model.bin": "b9fe5dc8f10e45a204065e0896c19c5522a32706a83fd27eca7840008110523a"
+      },
+      "clang-hosted/i686": {
+        "original-444.bin": "11681414528e36a45ccd1fb3c19d523e051785a3cf69198b5156a227f82e1c84",
+        "integer-model.bin": "b9fe5dc8f10e45a204065e0896c19c5522a32706a83fd27eca7840008110523a"
+      },
+      "clang-hosted/sanitized": {
+        "original-444.bin": "11681414528e36a45ccd1fb3c19d523e051785a3cf69198b5156a227f82e1c84",
+        "integer-model.bin": "b9fe5dc8f10e45a204065e0896c19c5522a32706a83fd27eca7840008110523a"
+      },
+      "gcc-debug-a": {
+        "original-444.bin": "11681414528e36a45ccd1fb3c19d523e051785a3cf69198b5156a227f82e1c84",
+        "integer-model.bin": "b9fe5dc8f10e45a204065e0896c19c5522a32706a83fd27eca7840008110523a"
+      },
+      "gcc-debug-b": {
+        "original-444.bin": "11681414528e36a45ccd1fb3c19d523e051785a3cf69198b5156a227f82e1c84",
+        "integer-model.bin": "b9fe5dc8f10e45a204065e0896c19c5522a32706a83fd27eca7840008110523a"
+      },
+      "gcc-release": {
+        "original-444.bin": "11681414528e36a45ccd1fb3c19d523e051785a3cf69198b5156a227f82e1c84",
+        "integer-model.bin": "b9fe5dc8f10e45a204065e0896c19c5522a32706a83fd27eca7840008110523a"
+      },
+      "gcc-i686": {
+        "original-444.bin": "11681414528e36a45ccd1fb3c19d523e051785a3cf69198b5156a227f82e1c84",
+        "integer-model.bin": "b9fe5dc8f10e45a204065e0896c19c5522a32706a83fd27eca7840008110523a"
+      }
+    },
+    "local_matrix_log_sha256": "9d3ea679001cc499cb7f0b9683d91f37ef7dbdc507abb65d7729acfe8ea3ae7a",
+    "ci_log_sha256": "8682919afb9f2f1157f2a937b9c333f8dc472b47117310712ace089797aeb762",
+    "ci_url": "https://github.com/segaboy/ClasSICK-0.97/actions/runs/38444454769",
+    "ci_status": "success",
+    "ci_current_source_complete_matrix": true,
+    "ci_additional_bootstrap_ctest_checks": 354
+  },
+  "reader": {
+    "allocation": false,
+    "mutable_global_state": false,
+    "content_execution": false,
+    "payload_byte_scan": false,
+    "constructor_output_atomic": true,
+    "ambiguous_requested_keys_refused": true,
+    "unrelated_duplicates_usable": true,
+    "bit7_data_offset_ignored": true,
+    "reference_target_resolved": false,
+    "native_input_alignment_required": false,
+    "maximum_local_prefix_offset_tested": 16777215,
+    "data_region_above_16MiB_tested": true,
+    "storage_bytes_68000": {
+      "view": 60,
+      "entry": 40,
+      "report": 24
+    },
+    "reader_closure_frame_maxima": [
+      216,
+      192
+    ],
+    "resource_manager_loading": false,
+    "mfs_decoding": false,
+    "boot_entry_bound": false
+  },
+  "m68k": {
+    "schema_version": 1,
+    "specification": "SPEC-0024",
+    "compiler": "m68k-linux-gnu-gcc-13 (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0",
+    "object_audits": 2,
+    "complete_relocatable_links": 2,
+    "storage_bytes_68000": {
+      "view": 60,
+      "entry": 40,
+      "report": 24
+    },
+    "profiles": [
+      {
+        "optimization": "-O0",
+        "objects": 1,
+        "object_sha256": "c5dacd38641731faa6cceb601cb3e2d2e1923831a9f9602cce05ef867a6e8cfb",
+        "combined_sha256": "0c938fa07caba15e28e1643563ba9a72a0f2fef54cd0eeb1b7376a542c4f756b",
+        "stack_frames": [
+          {
+            "function": "u16",
+            "bytes": 0
+          },
+          {
+            "function": "u24",
+            "bytes": 0
+          },
+          {
+            "function": "u32",
+            "bytes": 0
+          },
+          {
+            "function": "count",
+            "bytes": 0
+          },
+          {
+            "function": "extent",
+            "bytes": 0
+          },
+          {
+            "function": "signed_id",
+            "bytes": 0
+          },
+          {
+            "function": "overlaps",
+            "bytes": 0
+          },
+          {
+            "function": "done",
+            "bytes": 0
+          },
+          {
+            "function": "begin",
+            "bytes": 0
+          },
+          {
+            "function": "end",
+            "bytes": 16
+          },
+          {
+            "function": "copy_view",
+            "bytes": 0
+          },
+          {
+            "function": "copy_entry",
+            "bytes": 0
+          },
+          {
+            "function": "record",
+            "bytes": 68
+          },
+          {
+            "function": "cs_rf_open",
+            "bytes": 216
+          },
+          {
+            "function": "valid",
+            "bytes": 12
+          },
+          {
+            "function": "cs_rf_find",
+            "bytes": 104
+          }
+        ]
+      },
+      {
+        "optimization": "-Os",
+        "objects": 1,
+        "object_sha256": "93149cca99dbba72b5244a3c7da00cb813e282dd7afb10a36fb049923204cb68",
+        "combined_sha256": "4a777e75b473179fae9e08d58b90ee1b2d23d85022d601a983550ee459ea6d9b",
+        "stack_frames": [
+          {
+            "function": "u16",
+            "bytes": 0
+          },
+          {
+            "function": "u32",
+            "bytes": 4
+          },
+          {
+            "function": "record",
+            "bytes": 48
+          },
+          {
+            "function": "cs_rf_open",
+            "bytes": 192
+          },
+          {
+            "function": "cs_rf_find",
+            "bytes": 104
+          }
+        ]
+      }
+    ],
+    "inputs": {
+      "formats/resourcefork/reader.c": "ef3ab3b867fa49c830559092d90ddba2c9d2df4edcb747665c907cd8cf6f23a9",
+      "formats/resourcefork/reader.h": "06fcb33136037f43662f155df9d4d896c4d28dc786f5eb59b5c94ae0925156ea",
+      "docs/specifications/SPEC-0024-resource-fork-reader.md": "0dde12c1f2888d7bbe00ef12a067603deba7ffa4056314862f332d2521f067c8",
+      "scripts/Verify-ResourceM68k.py": "ea90e27ef710b141d2bf353af677286a8b412f1c3fe9b5df015c3a6bf12275a3",
+      "scripts/Verify-GuestM68k.py": "548addd87816af0f0f190c4f82c6b17083155e3703d28c9d124a0038acf6ed68"
+    },
+    "tool_lock_sha256": "a2fe02f949288826f6a1d11b55df1d3305aab4fb4726da83a4fb8695b7f21898",
+    "native_executed": false,
+    "rom_integration": false
+  },
+  "inputs": {
+    "formats/resourcefork/reader.c": "ef3ab3b867fa49c830559092d90ddba2c9d2df4edcb747665c907cd8cf6f23a9",
+    "formats/resourcefork/reader.h": "06fcb33136037f43662f155df9d4d896c4d28dc786f5eb59b5c94ae0925156ea",
+    "tests/resourcefork.c": "42cdfae0ca09c90f9340444b772b2b3e0f3d3719cd76a7384c5f983b56eedeac",
+    "scripts/Test-ResourceFork.py": "1ee39a3357abbcac0d3bdc2db00424ad59a39e20a723ecdd8b7f6b69d1a711b2",
+    "scripts/Verify-ResourceReader.ps1": "6d33bc5c523c20ea9d7e1a9b3e7938c8694d58d9796942334cd5dc2f472f20e3",
+    "scripts/Verify-ResourceObjects.ps1": "1b83c4d569168868d35179046c1305f0a1756d10ab1e9a4c90a9a93ff0787029",
+    "scripts/Verify-ResourceM68k.py": "ea90e27ef710b141d2bf353af677286a8b412f1c3fe9b5df015c3a6bf12275a3"
+  },
+  "regression": {
+    "unchanged_efi_profiles": {
+      "none": [
+        {
+          "case": "clang-64-O0",
+          "sha256": "4ded876949c54def00634eb0c8e4367bcbb6d94fe255fbdbd861ec88b16aa18c",
+          "size_bytes": 68608,
+          "image_size": 86016,
+          "relocations": 3,
+          "status": "passed-unloaded"
+        },
+        {
+          "case": "clang-64-O2",
+          "sha256": "6e2ea128e819923e6f88fd933bf40c7a7c9c7871d18d59c08315976a610269a7",
+          "size_bytes": 48640,
+          "image_size": 65536,
+          "relocations": 3,
+          "status": "passed-unloaded"
+        }
+      ],
+      "ud": [
+        {
+          "case": "clang-64-O0",
+          "sha256": "476236db2e81008323b7f8b70b7f2c47cf4406c8d89399df653459b5eac33135",
+          "size_bytes": 68608,
+          "image_size": 86016,
+          "relocations": 3,
+          "status": "passed-unloaded"
+        },
+        {
+          "case": "clang-64-O2",
+          "sha256": "569f1540d6013777840c07f4879856a5625c3a1631baf2ca0434f3a9c360c14b",
+          "size_bytes": 48640,
+          "image_size": 65536,
+          "relocations": 3,
+          "status": "passed-unloaded"
+        }
+      ],
+      "gp": [
+        {
+          "case": "clang-64-O0",
+          "sha256": "a36b3ef4194c88a71d9144fc4fb912d44a903739309125ee18ce2e4545ed1b5e",
+          "size_bytes": 68608,
+          "image_size": 86016,
+          "relocations": 3,
+          "status": "passed-unloaded"
+        },
+        {
+          "case": "clang-64-O2",
+          "sha256": "c1b277a48c1b77f57e7a4966c1983c1b0941911e3da73d53d6217b989a14f4ba",
+          "size_bytes": 48640,
+          "image_size": 65536,
+          "relocations": 3,
+          "status": "passed-unloaded"
+        }
+      ]
+    },
+    "unchanged_rom_sha256": [
+      "20175281806971dd9b21f50f8f726947b162da38fe0b10571311515c0f313b22",
+      "578f8a727de9f63d735988cc655739c6f68fd8ba8ad18540702bf56c8dce92d6"
+    ],
+    "ci_rom_inputs_match_prior_baseline": true,
+    "research_draft_sha256": {
+      "callback-catalog-draft.md": "156bcf56f0c962045ffac30fbd5621ecae81a5a417a9970519102fd434764aee",
+      "callback-catalog-draft.json": "952715b94ae45822878ad7297d022b28b130e3de27762b51541cc3f537bc75fd",
+      "quickdraw-draft.md": "5b4823cc6a498c00a74476dd16846c24c84adfb169b55b5abd62e0fcc104a881",
+      "quickdraw-test-plan.md": "33d744e913749c1a63f0c75cd8b5c7c62e3cef4546265192ddae9dbf01bbaf81",
+      "resourcefork-draft.md": "d1976f32ffd4666f3dbc1c4073b964c08c01de388c1c6e18990270e4fecdf83f",
+      "resourcefork-test-plan.md": "e7e612c6fa2114ea68e6bc55ae44dcbd4e0cefd4ed7ba7251460d9a730252692"
+    }
+  },
+  "preparation_failures": [
+    "The first focused freestanding test used a symbol-tool variable initialized later in CMake; a dedicated tool lookup corrected it.",
+    "The first object-script preparation had an incorrect generated source path; corrected before compilation.",
+    "The initial native manifest precedes implementation-status wording in the contract and is superseded by the final exact matching manifest."
+  ],
+  "limits": [
+    "Engineering format conformance only; January1984 and edition disagreements remain open.",
+    "Immutable constructor-produced views/truthful disjoint native objects; no guest-facing adapter or forged native pointer guarantee.",
+    "Large buffers are hosted fixtures, not128K execution. Descriptor costs/frame bounds are not final linked RAM/ROM or measured stack high-water.",
+    "No full strict audit/sharing detector, Resource Manager loading/search chain, MFS, CODE launch, boot binding, native application/SDK, VM/emulator/reference run or full OS/physical/parity/edition/B2criterion6 acceptance."
+  ]
+}

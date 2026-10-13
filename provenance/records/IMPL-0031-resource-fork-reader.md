@@ -34,3 +34,6 @@ imports, deterministic twins and the standalone original68000 closure/storage.
 This header is internal core plumbing, not an application SDK. Resource Manager
 loading/search chains, optional strict audit, MFS, CODE launch, callbacks, boot
 binding, native applications and new VM/emulator/reference trials remain open.
+
+Accepted exact revisions, outcomes and limits:
+[reader evidence](../../docs/development/resource-reader-evidence.md).
