@@ -4,6 +4,31 @@ Owner-governed plan, SRC-0099 / ADR-0026. This incorporates Claude's returned
 Memory Manager, application-loading and native-application research without
 treating research proposals as finalized historical specifications.
 
+## Heap lifecycle and dispatch intake - 2026-10-13
+
+SRC-0135..0138: [one lead review](../research/heap-dispatch-lead-review.md)
+records the five verified identities and all sixteen HL dispositions, HT-A..F
+dependencies/corrections, convention exceptions and application profiles.
+All thirteen originals remain unchanged/untracked with private copies/manifest.
+Seven HL proposals adopted, nine adopted with changes for future contracts;
+HL-Q1..20 remain open, including Q18. SetApplLimit memFullErr and locked HPurge
+carry 1985-only qualifications. Per-routine convention records are required;
+three A0/A1 edition differences and unknown register/CCR rules remain explicit.
+Profiles need FKEY/DeskHook and transitive re-entry accounting, complete aliases/
+ownership and retained-pointer lifetime. No case execution, fixture, registry
+import, code, new build or implementation authority.
+
+SPEC-0028 already supplies prerequisite1. Next propose prerequisite2, typed
+Toolbox-format arguments and returning/continuation/no-return completion, with
+checked entry/result/auto-pop/control frames, per-routine signatures and shared
+call/session budgets. Loader continuation can remain reserved/refused until its
+own context exists; no-return inside returning callbacks remains unsupported
+without a reviewed unwind contract. Prerequisite3 heap-reset/lifetime follows
+with owned global/reference inventory, scrap-state matrix, staging/capacity and
+commit/recovery semantics. Numeric BufPtr/H_min remain unselected. Separate
+owner approval is needed before either implementation; all gates persist.
+Earlier checkpoint paragraphs retain their dated scope.
+
 ## Launch/segment research intake - 2026-10-13
 
 After the reader checkpoint was completed and recorded separately, SRC-0129/0130

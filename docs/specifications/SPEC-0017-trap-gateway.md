@@ -210,6 +210,16 @@ project's own choosing:
 
 ## Acceptance before finalization
 
+2026-10-13 intake: SRC-0137's
+[lead review](../research/heap-dispatch-lead-review.md) identifies twelve
+register-based Toolbox-format words and four internal-only OS words from later
+published evidence. A future typed dispatcher uses per-routine conventions,
+not bit11 alone. Three utility output registers differ between editions; other
+register/CCR promises remain unresolved. The no-stack-OS result is a bounded
+survey, not exhaustive proof. Q2's historical question stays open, and this
+draft is unfinalized; no executable gateway/registry change or new implementation
+authority follows from the intake.
+
 2026-10-12 cross-check: SRC-0089 confirms published 1985 word fields,
 Get/Set parameters, register rules and word-test behavior. It explicitly warns
 that format and calling convention have exceptions, so Q2 is still open.

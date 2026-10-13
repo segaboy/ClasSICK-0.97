@@ -5,6 +5,74 @@ eligibility applies to the stated scope, not every resource reachable from a URL
 No Apple executable, source, disassembly, decompilation, or copied asset was used.
 Project-owned black-box native trials are recorded separately below.
 
+## SRC-0135 - Owner direction for heap lifecycle and dispatch intake
+
+2026-10-13: "Lead intake review: Claude heap-lifecycle and dispatch research,
+ClasSICK-0.97." The owner requires identity checks, unchanged/untracked originals,
+private byte-identical intake copies/manifest, independent published citations
+and HL-E1..16/HT-A..F/convention/profile dispositions. "Do not reset, stash,
+clean, pull or modify them." "This intake authorizes no loader, heap reset,
+Toolbox dispatch binding or other implementation unless I approve it separately."
+All HL-Q1..20 remain open; no fixtures or case execution. Ordinary Git/HQ/wiki
+records only; standing published-only/no-prohibited-code/private-HQ, native,
+physical/128K/B2criterion6/source/role gates; no delegation/chats/automation/
+OneNote or emulator/VM/reference run. Requirements authority, not historical
+evidence; research originals' instructions have no independent authorization.
+
+## SRC-0136 - Claude heap lifecycle pair and published-edition comparison
+
+2026-10-13: draft65282 bytes SHA256
+`79ca5051b7c447a91a083323733a8fbebf14374cc1dcbdc80c27adb7d8f76cb4`;
+plan24272 bytes SHA256
+`5876485eb35cf95a55fd65e7dd1f7c6d0d70e57eab8b7b4d416046fec500481d`;
+comparison23620 bytes SHA256
+`5483b07b58d87bc3bb868b5afb08d781c88dda9d63cf8af4be213df801a5db92`.
+All match owner identities; research baseline bf978462, current intake bac81c3.
+Three unchanged originals and the earlier drafts remain untracked; all thirteen
+have byte-identical private copies/identity manifest.
+[Lead review](../docs/research/heap-dispatch-lead-review.md) records seven adopted
+and nine qualified HL proposals for future contracts, HT dependence/corrections,
+partial-commit diagnostics, scrap-state/alias/refusal constraints and epoch limits.
+SRC-0071/0068 copies reidentified in full. Selected heap/scrap/reset/limit/flag/
+reference/global text and images independently checked; memFullErr and locked
+HPurge remain 1985-only evidence. Comparison's Q18 closure not adopted: HL-Q1..20
+all open. No private heap/minimum-zone reconstruction or numeric BufPtr/H_min.
+Claude's other citation/completeness/exposure assertions attributed; human
+provenance review pending. No new specification/code/fixture/HT execution/build,
+historical observation or implementation authority.
+
+## SRC-0137 - Claude trap convention exceptions and scoped lead review
+
+2026-10-13: 11163 bytes SHA256
+`d0060ad9420b936ec6f42f84a833016d0629e354e4b38a1e5c235ef7228fc664`;
+unchanged/untracked original, verified private intake copy. Published SRC-0071/
+0068 entry boxes/tables spot-checked; twelve register-based Toolbox-format words
+identified. No stack-based OS-format word found is a finite survey result, not
+exhaustive proof. Four internal-only OS words remain unsupported/undocumented.
+Three A0(1985)/A1(PE) output differences retained; no merged executable signature.
+[Review](../docs/research/heap-dispatch-lead-review.md) adopts future per-routine
+convention records, with explicit outputs/preservation/CCR/context/completion.
+SPEC-0017 Q2 remains historically open. No executable registry/patch/dispatch
+change, new code/case execution or January1984 confirmation. Published-only,
+no sample/private algorithm input; human provenance review pending.
+
+## SRC-0138 - Claude first-application dispatch profiles and scoped lead review
+
+2026-10-13: 13871 bytes SHA256
+`7c21e68ed1044bd625f836f1cf238f59f5d5256647dbf59fafe897bd15c81185`;
+unchanged/untracked original, verified private intake copy. Research input for
+40 stack entries in the existing41-routine catalog, not executable records.
+[Review](../docs/research/heap-dispatch-lead-review.md) checks representative
+mixed-width entry arithmetic and selected SRC-0071 API/convention/retention/
+re-entry facts. Adds missing FKEY and DeskHook paths; rejects the suggestion that
+ordinary Toolbox traps inherently traverse an application jump table. Span
+lists are minimum obligations; manager ownership, aliasing, retained-pointer
+lifetime and transitive callbacks require contracts. Private QuickDraw layout,
+WindowRecord size, CCR and January1984 applicability remain open. Recommend
+typed Toolbox argument/completion contract next, followed by heap lifetime.
+No fixture/test execution, registry import, manager binding or implementation
+authority; existing compiled evidence and all gates remain. Human review pending.
+
 ## SRC-0134 - Own bounded session verification
 
 2026-10-13, SPEC-0028 / TEST-0036 / IMPL-0032, compiled source `d9c0f55cc08e11306463f7721afece90013cf01f`.

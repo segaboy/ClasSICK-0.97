@@ -1,5 +1,16 @@
 # ClasSICK 0.97 working instructions
 
+- On 2026-10-13 the owner requested "Lead intake review: Claude heap-lifecycle
+  and dispatch research" (SRC-0135..0138). Verify five identities, preserve all
+  thirteen unchanged/untracked originals and byte-identical copies/manifest
+  outside Git; no reset/stash/clean/pull. Review published source images and
+  record HL/HT/convention/profile dispositions in one lead review. HL-Q1..20
+  remain open; HT cases are unexecuted. This is ordinary Git/HQ/wiki intake
+  only: no loader, heap reset, Toolbox binding or other implementation without
+  separate owner approval. All source/role/native/VM/edition gates and no
+  delegation/chats/automation/OneNote persist. Earlier permissions below are
+  dated completed slices, not authority to implement this intake's proposals.
+
 - On 2026-10-13 the owner said "OK, Claude is researching this. Move on to
   the next task" (SRC-0132) after the bounded-session recommendation. Finalize
   SPEC-0028 / ADR-0032 and implement/verify the original hosted OS/core session,
