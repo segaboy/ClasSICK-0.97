@@ -178,7 +178,8 @@ static cs_m68k_result execute(context *a,cs_trap_frame *f,cs_s1_patch_report *r,
     } else {
         if(a->interrupt_context!=0) {r->call.status=CS_M68K_CALL_SIGNATURE;return finish(r,CS_M68K_SERVICE);}
         uint32_t d1=f->d[1],d2=f->d[2],a0=f->a[0],a1=f->a[1];uint16_t sr=f->sr;
-        context child={rt,(uint16_t)word,0,r};
+        context child;child.runtime=rt;child.word=(uint16_t)word;
+        child.interrupt_context=0;child.parent=r;
         cs_m68k_call_request q={e.target,f->a[5],rt->budget,CS_M68K_REGISTERS,CS_M68K_CALL_ORDINARY};
         cs_m68k_call_result result=cs_m68k_call_using(&rt->calls,&q,f,&r->call,guest_step,&child);
         r->entered=r->call.entered;
@@ -198,6 +199,7 @@ static cs_m68k_result execute(context *a,cs_trap_frame *f,cs_s1_patch_report *r,
 cs_m68k_result cs_s1_patch_step(cs_s1_patches *rt,unsigned interrupt_context,cs_trap_frame *f,cs_s1_patch_report *r)
 {
     if(rt==0 || f==0 || r==0 || interrupt_context>1 || rt->traps==0) return CS_M68K_ARGUMENT;
-    context a={rt,0,interrupt_context,r};cs_m68k_stack_limits l={rt->calls.config.stack_base,rt->calls.config.stack_size};
+    context a;a.runtime=rt;a.word=0;a.interrupt_context=interrupt_context;a.parent=r;
+    cs_m68k_stack_limits l={rt->calls.config.stack_base,rt->calls.config.stack_size};
     return execute(&a,f,r,&l);
 }
