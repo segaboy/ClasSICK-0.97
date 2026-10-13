@@ -3,6 +3,14 @@
 Read `docs/clean-room/POLICY.md`, `CONTRIBUTING.md`, and
 `provenance/README.md` before researching or changing this project.
 
+- On 2026-10-13 the owner supplied Claude's callback, first-application and
+  January-baseline audit update (SRC-0113/0114/0115). The lead review settles
+  K-1..7 and FA-1..5 as future planning choices, with documented exceptions and
+  mandatory bounded-executor safety. Original callback/resource-fork drafts
+  remain unchanged and untracked; no registry/code/test/boot change or new
+  implementation permission. Record ordinary Git/HQ/wiki intake only. All
+  existing source/role/native-application/VM/edition gates remain.
+
 - On 2026-10-13 the owner said "OK, move forward" after the proposed built-in
   Memory Manager trap integration and original guest program (SRC-0110).
   SPEC-0025 covers signature-checked identities, explicit CPU data addressing,

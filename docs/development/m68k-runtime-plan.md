@@ -60,6 +60,21 @@ of this built-in slice. Complete callback and user/Toolbox execution remain open
 
 ## Work allowed now, in dependency order
 
+2026-10-13 research intake: the [callback/application lead review](../research/callback-application-lead-review.md)
+(SRC-0113/0114/0115) settles K-1..7 and FA-1..5 as planning choices. Step 3
+uses call-site signatures, specific register exceptions and explicit A5 context;
+bounds/alignment, owned return, completion shape and depth/budget limits are
+mandatory. Unknown cleanup, interrupt entries and nonreturning entries are
+deferred. Step 4 assigns guest identities to supported defaults, without deriving
+native pointers from guest data. Step 1 imports no unreviewed catalog JSON;
+Appendix B omissions are not transitive safety guarantees. Steps 5/6 respect
+declared CODE0 sizes while checking the actual InitGraf span and (A5) slot;
+private QuickDraw state is original, and the first candidate workload is the
+23-routine window/drawing/mouse/quit tier, followed by menus/original accessories.
+The 512 by 342 guest screen is a planned engineering profile, with larger guest
+screens explicitly extended. Baseline UX claims remain a checklist and R-001
+stays open. This research intake changes no code and authorizes no new slice.
+
 1. **Routine and record interface registry.** The two trap-address services and
    eleven phase-1 Memory Manager routines are now recorded after source/contract
    review, with thirteen records and eight rejection controls passing. Expand

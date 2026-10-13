@@ -5,6 +5,44 @@ eligibility applies to the stated scope, not every resource reachable from a URL
 No Apple executable, source, disassembly, decompilation, or copied asset was used.
 Project-owned black-box native trials are recorded separately below.
 
+## SRC-0113 - Claude callback catalog intake and independent lead review
+
+2026-10-13, owner-supplied research handoff. Claude's Markdown/JSON drafts
+remain unchanged and untracked; exact input hashes/lengths and independent
+SRC-0071/0068 checks are in the [lead review](../docs/research/callback-application-lead-review.md).
+Published call-site/interface prose only; no sample/equate implementation or
+asset input. Adopts K-1..7 with specific register/A5 exceptions and mandatory
+bounded-executor safety. All forty-one grouped entries are research input,
+not approved registry signatures; completeness and AI exposure attestation are
+not independently proven. CQ-1..8 and January 1984 availability remain open.
+No callback code/execution or new implementation authorization. Codex lead
+self-review; human provenance review pending.
+
+## SRC-0114 - Claude first-application interface research and planning review
+
+Research committed in 799df5d, preserved through the existing merges. Original
+41-routine Markdown/JSON identity and metadata checked on 2026-10-13; exact
+hashes and scope in the [lead review](../docs/research/callback-application-lead-review.md).
+Selected published globals/parameter/A5 facts independently reviewed using
+SRC-0071/0068. FA-1..5 adopt a tier-1 candidate workload, original private state,
+checked actual InitGraf placement, a monochrome engineering profile and original
+accessory fixtures later. Remaining per-routine facts need individual approval;
+no JSON import, interface implementation, test application or new execution.
+Later manuals are not January 1984 proof. Codex lead self-review; human review
+pending.
+
+## SRC-0115 - Claude audit of Gemini January 1984 baseline, scoped intake
+
+Audit committed in 5aa75c2. On 2026-10-13 its identity and the unchanged
+34,883-byte original report (SHA-256 97974f8d8ec2763621072c108fa60a4043608203d4a56f8b4b885d98eb72d234)
+were checked. The [lead review](../docs/research/callback-application-lead-review.md)
+records selected independent SRC-0071 checks and preserves attributed/unverified
+findings. Research checklist only, not primary evidence for January 1984 or
+complete validation of J1-J26. R-001 stays open; hardcoded-Str63 inference not
+adopted. No unread guide/Byte or secondary assertion promoted, disk imaging,
+reference run, copied asset or new gate change. Codex lead self-review; human
+provenance review pending.
+
 ## SRC-0112 - Own guest memory trap execution and compiler verification
 
 2026-10-13, SPEC-0025 / TEST-0033, CI source
