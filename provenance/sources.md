@@ -5,6 +5,30 @@ eligibility applies to the stated scope, not every resource reachable from a URL
 No Apple executable, source, disassembly, decompilation, or copied asset was used.
 Project-owned black-box native trials are recorded separately below.
 
+## SRC-0110 - Owner go-ahead for guest memory trap integration
+
+2026-10-13: "OK, move forward" after the proposed integration of actual OS trap
+instructions with the eleven Memory Manager operations and an original guest
+program. The preceding discussion separates this slice from Claude's concurrent
+callback catalog. Normal specifications, original code/tests/compiler audits,
+provenance/Git/HQ/wiki publication. No guest callback, new boot-entry binding,
+native application or VM/emulator run authorized. Existing source/role/owner/
+historical/physical/edition/parity/budget gates persist.
+
+## SRC-0111 - Original bounded guest memory trap profile
+
+SPEC-0025 / ADR-0029 / IMPL-0028 / TEST-0033. Reuses SRC-0102's independently
+reviewed published Memory Manager calling/flag/master-cell facts and the
+thirteen existing guest interface contracts; no new primary-source exposure.
+Original logical routine identities, exact signature checks, internal trusted
+C service adapter, opt-in data-only address normalization and exception-scratch
+protection. Original 82-byte guest fixture and independent assembler oracle;
+no Apple application, manual sample, emulator source or copied assets. All
+native pointers refer to our own OS/core plumbing; none comes from a guest
+address or constitutes an application ABI/SDK/callback signature. Historical
+behavior beyond the earlier sources remains unconfirmed. Lead self-review;
+human provenance review pending.
+
 ## SRC-0109 - Gemini filename dossier and independent lead review
 
 2026-10-13: owner supplied a filename follow-up after the MFS intake. Original

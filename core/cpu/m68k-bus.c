@@ -4,6 +4,7 @@
 typedef struct {
     const cs_guest_map *map; cs_trap_frame frame; cs_m68k_bus_report *report;
     uint32_t cursor; uint8_t *store; uint8_t data[6]; unsigned store_bytes;
+    const cs_m68k_bus_options *options;
 } transaction;
 static void copy_frame(cs_trap_frame *to,const cs_trap_frame *from)
 {
@@ -69,6 +70,7 @@ static cs_m68k_result source(transaction *t,unsigned mode,unsigned reg,unsigned 
     }
     uint32_t at;cs_m68k_result status=effective(t,mode,reg,width,&at);
     if(status!=CS_M68K_OK) return status;
+    if(t->options!=0 && t->options->data_policy==CS_M68K_DATA24) at&=0xFFFFFFu;
     return read_value(t,at,width,CS_GUEST_READ,value);
 }
 static cs_m68k_result preflight_store(transaction *t,uint32_t at,unsigned width,uint32_t value)
@@ -97,6 +99,7 @@ static cs_m68k_result move(transaction *t,uint16_t word)
     else {
         uint32_t at;status=effective(t,dm,dr,width,&at);
         if(status!=CS_M68K_OK) return status;
+        if(t->options!=0 && t->options->data_policy==CS_M68K_DATA24) at&=0xFFFFFFu;
         status=preflight_store(t,at,width,value);
         if(status!=CS_M68K_OK) return status;
     }
@@ -164,22 +167,31 @@ static cs_m68k_result aline(transaction *t,cs_trap_gateway *g,uint16_t word)
     r->address=t->frame.a[7]-6;r->bytes=6;r->access=CS_GUEST_WRITE;
     r->memory=cs_guest_window(t->map,r->address,6,CS_GUEST_WRITE,&view);
     if(r->memory!=CS_GUEST_OK) return CS_M68K_ADDRESS;
-    cs_m68k_result status=cs_m68k_aline(g,word,&t->frame,&r->cpu);
+    cs_m68k_result status;
+    if(t->options!=0 && t->options->dispatch!=0) {
+        r->cpu.service_called=1;
+        cs_trap_result result=t->options->dispatch(t->options->context,word,&t->frame,&r->cpu.service);
+        status=result==CS_TRAP_OK?CS_M68K_OK:CS_M68K_SERVICE;
+        if(status==CS_M68K_OK) t->frame.pc+=2;
+    } else status=cs_m68k_aline(g,word,&t->frame,&r->cpu);
     if(status!=CS_M68K_OK) return status;
     t->store=view.writable;t->store_bytes=6;
     t->data[0]=(uint8_t)(t->frame.sr>>8);t->data[1]=(uint8_t)t->frame.sr;
     for(unsigned i=0;i<4;++i) t->data[i+2]=(uint8_t)(t->frame.pc>>((3u-i)*8u));
     return CS_M68K_OK;
 }
-cs_m68k_result cs_m68k_bus_step(const cs_guest_map *m,cs_trap_gateway *g,
-    cs_trap_frame *f,cs_m68k_bus_report *r)
+cs_m68k_result cs_m68k_bus_step_options(const cs_guest_map *m,cs_trap_gateway *g,
+    cs_trap_frame *f,cs_m68k_bus_report *r,const cs_m68k_bus_options *options)
 {
     if(m==0 || g==0 || f==0 || r==0) return CS_M68K_ARGUMENT;
+    if(options!=0 && options->data_policy!=CS_M68K_STRICT && options->data_policy!=CS_M68K_DATA24)
+        return CS_M68K_ARGUMENT;
     begin(r,f);r->memory=cs_guest_validate(m);
     if(r->memory!=CS_GUEST_OK) return done(r,CS_M68K_ADDRESS);
     if((f->pc&1u)!=0 || f->pc>0xFFFFFCu) return done(r,CS_M68K_ADDRESS);
     if((f->sr&0xA000u)!=0x2000u) return done(r,CS_M68K_MODE);
     transaction t;t.map=m;t.report=r;t.cursor=f->pc;t.store=0;t.store_bytes=0;
+    t.options=options;
     copy_frame(&t.frame,f);
     uint32_t fetched;cs_m68k_result status=extension(&t,2,&fetched);
     if(status!=CS_M68K_OK) return done(r,status);
@@ -203,3 +215,6 @@ cs_m68k_result cs_m68k_bus_step(const cs_guest_map *m,cs_trap_gateway *g,
     for(unsigned i=0;i<t.store_bytes;++i) t.store[i]=t.data[i];
     copy_frame(f,&t.frame);return done(r,CS_M68K_OK);
 }
+cs_m68k_result cs_m68k_bus_step(const cs_guest_map *m,cs_trap_gateway *g,
+    cs_trap_frame *f,cs_m68k_bus_report *r)
+{return cs_m68k_bus_step_options(m,g,f,r,0);}

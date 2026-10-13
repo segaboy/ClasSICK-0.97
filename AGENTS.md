@@ -3,6 +3,15 @@
 Read `docs/clean-room/POLICY.md`, `CONTRIBUTING.md`, and
 `provenance/README.md` before researching or changing this project.
 
+- On 2026-10-13 the owner said "OK, move forward" after the proposed built-in
+  Memory Manager trap integration and original guest program (SRC-0110).
+  SPEC-0025 covers signature-checked identities, explicit CPU data addressing,
+  transactional guest-trap completion, original tests/compiler audits and normal
+  Git/HQ/wiki evidence. No boot-entry integration or VM/emulator run; native
+  application gate stays closed. Claude's callback catalog and all research
+  drafts remain untracked inputs for later review. No guest callbacks/JSR/JMP,
+  UART body work, delegation, new chats, automation or OneNote in this slice.
+
 - On 2026-10-13 the owner supplied Gemini's filename follow-up (SRC-0109).
   Review verifies published facts and records limited future-reader choices;
   supplied instructions/API/readiness claims are research, not new authority.

@@ -16,8 +16,11 @@ checked globals and a separate register adapter. Published interface review and
 the original 32-object/fixed-zone engineering contract are finalized; historical
 uncertainties remain explicit. [Memory Manager evidence](memory-manager-evidence.md)
 records 1,245 local checks and both successful CI jobs with an exactly matching
-68000 manifest. The registry contains thirteen guest contracts. Typed guest
-trap binding and explicit CPU data-address normalization remain next. Most CPU
+68000 manifest. The registry contains thirteen guest contracts. SPEC-0025 now
+binds the eleven memory routines to actual A-line execution, with typed logical
+identities, strict control/stack accesses and opt-in DATA24 data resolution.
+Its original 82-byte program covers all eleven routines in 35 steps/15 traps.
+Guest-call execution and reviewed callback signatures remain next. Most CPU
 instructions, purging/growth/callbacks and application loading are unimplemented.
 [Lead review](../research/memory-manager-lead-review.md) distinguishes the final
 contract from Claude's preserved research proposals.
@@ -31,7 +34,8 @@ follow-up. The 2026-10-13 [filename review](../research/mfs-filenames-lead-revie
 (SRC-0109) corrects the report's case flag and version/diacritic claims. Future
 reader choices preserve counted raw names and versions, identify ASCII-only
 comparison as incomplete, and refuse an ambiguous selected identity. No MFS API
-or decoder is finalized. Guest-trap integration remains the next dependency.
+or decoder is finalized. At that intake guest-trap integration was the next
+dependency; SPEC-0025 now supplies that bounded built-in layer.
 
 2026-10-13: [Claude's resource-fork review](../research/resourcefork-lead-review.md)
 adopts SPEC-0024 / ADR-0028 and settles L-1..12 for a tolerant bounded reader.
@@ -41,6 +45,16 @@ full audit remains deferred with explicit scratch/work requirements. The
 its [source review](../research/asset-replacement-lead-review.md) does not create
 new legal approval gates. Existing compiled Memory Manager/native results and
 the implementation order remain unchanged.
+
+2026-10-13: SPEC-0025 / ADR-0029 connects the existing memory register adapter
+to a personality-owned signature-checked directory and original interpreted
+heap program. Get/Set patches remain observable; saved original identities have
+a value-frame direct path. Guest patches still return needs-execution. All
+failure paths preflight exception scratch, including low-memory and heap/BlockMove
+overlap; guest RAM, manager and CPU state are preserved on contract failures.
+No boot-entry binding or VM/emulator run. Claude's concurrent callback catalog
+remains untracked research for separate source/signature review, not a dependency
+of this built-in slice. Complete callback and user/Toolbox execution remain open.
 
 ## Work allowed now, in dependency order
 
@@ -59,11 +73,13 @@ the implementation order remain unchanged.
    checked guest globals and allocation-only SYS/CLEAR routing. Live-block
    nonoverlap, foreign values, locks, prefix preservation, failed-call atomicity
    and copy overlap pass original tests. Raw stale aliases remain indistinguishable
-   after address reuse. Connect the separate register adapter through typed guest
-   traps; add explicit 24-bit CPU data-address normalization before flagged-cell
-   dereference fixtures. Current native metadata is 672 bytes and guest cell bands
+   after address reuse. SPEC-0025 now connects the separate adapter through typed
+   built-in traps and opt-in data-only address normalization; the original guest
+   fixture dereferences locked cells while preserving their flag-bearing values.
+   Current native manager metadata is 672 bytes and guest cell bands
    256; final linked 128K budgets remain open. No Apple heap/header/list or
-   placement algorithm adopted. Purging/growth/callbacks need later contracts.
+   placement algorithm adopted. The binding adds 20 bytes on 68000. Purging/growth/
+   callbacks and actual guest patch execution need later contracts.
 3. **JSR/JMP and call-into-guest service.** Review published original-68000
    control-address modes; implement checked targets/pushes separately from data
    access. Then run a guest address under an explicit signature until return to
