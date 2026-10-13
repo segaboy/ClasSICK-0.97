@@ -1,0 +1,1277 @@
+{
+ "schema": "claude-first-application-interfaces/1",
+ "status": "Research record; not registry records; no stable IDs",
+ "prepared": "2026-10-13",
+ "sources": {
+  "SRC-0071": {
+   "sha256": "b65fe8efe782799a333a0b59b225e2bbaf9e2e150dc949dd555571971b331d97",
+   "pages": 1284
+  },
+  "SRC-0068": {
+   "sha1": "4ed5b3c20289835996b160d7ab3a628f497f13c5",
+   "sha256": "924902074a9798457949c46f83ac016c98b10f50258ef36c277dcd0f8278b237",
+   "pages": 1326
+  }
+ },
+ "stack_representation_I-91": {
+  "INTEGER": {
+   "stack_bytes": 2,
+   "passed_as": "value"
+  },
+  "LONGINT": {
+   "stack_bytes": 4,
+   "passed_as": "value"
+  },
+  "BOOLEAN": {
+   "stack_bytes": 2,
+   "passed_as": "value, bit 0 of high-order byte"
+  },
+  "CHAR": {
+   "stack_bytes": 2,
+   "passed_as": "value, low-order byte"
+  },
+  "Ptr": {
+   "stack_bytes": 4,
+   "passed_as": "address"
+  },
+  "WindowPtr": {
+   "stack_bytes": 4,
+   "passed_as": "address"
+  },
+  "GrafPtr": {
+   "stack_bytes": 4,
+   "passed_as": "address"
+  },
+  "MenuHandle": {
+   "stack_bytes": 4,
+   "passed_as": "address"
+  },
+  "ProcPtr": {
+   "stack_bytes": 4,
+   "passed_as": "code address"
+  },
+  "Str255": {
+   "stack_bytes": 4,
+   "passed_as": "pointer to string"
+  },
+  "Rect": {
+   "stack_bytes": 4,
+   "passed_as": "pointer to record (8 bytes)"
+  },
+  "Point": {
+   "stack_bytes": 4,
+   "passed_as": "record contents"
+  },
+  "ResType": {
+   "stack_bytes": 4,
+   "passed_as": "array contents"
+  },
+  "EventRecord": {
+   "stack_bytes": 4,
+   "passed_as": "pointer to record (16 bytes)"
+  }
+ },
+ "trap_number_rule_III-215": "Last two hex digits of the trap word, or 1 followed by them when the word begins A9",
+ "routines": [
+  {
+   "tier": 1,
+   "name": "InitGraf",
+   "macro": "InitGraf",
+   "trap_word": "A86E",
+   "trap_page": "III-217",
+   "convention": "pascal-stack",
+   "parameters": [
+    {
+     "name": "globalPtr",
+     "type": "Ptr",
+     "stack_bytes": 4,
+     "passed_as": "address",
+     "class": "object"
+    }
+   ],
+   "result": null,
+   "may_move_memory": false,
+   "src0071": [
+    "I-162",
+    "I-163"
+   ],
+   "src0068": "QD-34 (3/2/83)",
+   "notes": "Once only; pointer to thePort; stores it at (A5); globalPtr typed QDPtr in 3/2/83",
+   "format": "toolbox",
+   "trap_number": 110
+  },
+  {
+   "tier": 1,
+   "name": "InitFonts",
+   "macro": "InitFonts",
+   "trap_word": "A8FE",
+   "trap_page": "III-217, III-224",
+   "convention": "pascal-stack",
+   "parameters": [],
+   "result": null,
+   "may_move_memory": true,
+   "src0071": [
+    "I-222"
+   ],
+   "src0068": "FM-9 (6/11/84)",
+   "notes": "After QuickDraw, before the Window Manager. Alphabetical entry smudged; numeric table reads A8FE",
+   "format": "toolbox",
+   "trap_number": 254
+  },
+  {
+   "tier": 1,
+   "name": "InitWindows",
+   "macro": "InitWindows",
+   "trap_word": "A912",
+   "trap_page": "III-217",
+   "convention": "pascal-stack",
+   "parameters": [],
+   "result": null,
+   "may_move_memory": true,
+   "src0071": [
+    "I-280",
+    "I-281"
+   ],
+   "src0068": "WM-20 (5/30/84)",
+   "notes": "Draws desktop and empty menu bar",
+   "format": "toolbox",
+   "trap_number": 274
+  },
+  {
+   "tier": 1,
+   "name": "InitCursor",
+   "macro": "InitCursor",
+   "trap_word": "A850",
+   "trap_page": "III-217",
+   "convention": "pascal-stack",
+   "parameters": [],
+   "result": null,
+   "may_move_memory": false,
+   "src0071": [
+    "I-167"
+   ],
+   "src0068": "QD-39 (3/2/83)",
+   "notes": "Arrow cursor, level 0",
+   "format": "toolbox",
+   "trap_number": 80
+  },
+  {
+   "tier": 1,
+   "name": "FlushEvents",
+   "macro": "FlushEvents",
+   "trap_word": "A032",
+   "trap_page": "III-216",
+   "convention": "os-register",
+   "parameters": [
+    {
+     "name": "eventMask",
+     "type": "INTEGER",
+     "register": "D0 low word",
+     "class": "value"
+    },
+    {
+     "name": "stopMask",
+     "type": "INTEGER",
+     "register": "D0 high word",
+     "class": "value"
+    }
+   ],
+   "result": {
+    "register": "D0",
+    "meaning": "0 or event code (word)"
+   },
+   "may_move_memory": false,
+   "src0071": [
+    "II-69"
+   ],
+   "src0068": "OE-5 (11/19/84)",
+   "notes": "The only register-based routine in the set",
+   "format": "os",
+   "trap_number": 50
+  },
+  {
+   "tier": 1,
+   "name": "GetNewWindow",
+   "macro": "GetNewWindow",
+   "trap_word": "A9BD",
+   "trap_page": "III-217",
+   "convention": "pascal-stack",
+   "parameters": [
+    {
+     "name": "windowID",
+     "type": "INTEGER",
+     "stack_bytes": 2,
+     "passed_as": "value",
+     "class": "value"
+    },
+    {
+     "name": "wStorage",
+     "type": "Ptr",
+     "stack_bytes": 4,
+     "passed_as": "address",
+     "class": "object"
+    },
+    {
+     "name": "behind",
+     "type": "WindowPtr",
+     "stack_bytes": 4,
+     "passed_as": "address",
+     "class": "object"
+    }
+   ],
+   "result": {
+    "type": "WindowPtr",
+    "stack_bytes": 4
+   },
+   "may_move_memory": true,
+   "src0071": [
+    "I-283",
+    "I-302"
+   ],
+   "src0068": "WM-22 (5/30/84)",
+   "notes": "Reads a WIND template",
+   "format": "toolbox",
+   "trap_number": 445
+  },
+  {
+   "tier": 1,
+   "name": "NewWindow",
+   "macro": "NewWindow",
+   "trap_word": "A913",
+   "trap_page": "III-218",
+   "convention": "pascal-stack",
+   "parameters": [
+    {
+     "name": "wStorage",
+     "type": "Ptr",
+     "stack_bytes": 4,
+     "passed_as": "address",
+     "class": "object"
+    },
+    {
+     "name": "boundsRect",
+     "type": "Rect",
+     "stack_bytes": 4,
+     "passed_as": "pointer to record (8 bytes)",
+     "class": "value"
+    },
+    {
+     "name": "title",
+     "type": "Str255",
+     "stack_bytes": 4,
+     "passed_as": "pointer to string",
+     "class": "value"
+    },
+    {
+     "name": "visible",
+     "type": "BOOLEAN",
+     "stack_bytes": 2,
+     "passed_as": "value, bit 0 of high-order byte",
+     "class": "value"
+    },
+    {
+     "name": "procID",
+     "type": "INTEGER",
+     "stack_bytes": 2,
+     "passed_as": "value",
+     "class": "value"
+    },
+    {
+     "name": "behind",
+     "type": "WindowPtr",
+     "stack_bytes": 4,
+     "passed_as": "address",
+     "class": "object"
+    },
+    {
+     "name": "goAwayFlag",
+     "type": "BOOLEAN",
+     "stack_bytes": 2,
+     "passed_as": "value, bit 0 of high-order byte",
+     "class": "value"
+    },
+    {
+     "name": "refCon",
+     "type": "LONGINT",
+     "stack_bytes": 4,
+     "passed_as": "value",
+     "class": "value"
+    }
+   ],
+   "result": {
+    "type": "WindowPtr",
+    "stack_bytes": 4
+   },
+   "may_move_memory": true,
+   "src0071": [
+    "I-282"
+   ],
+   "src0068": "WM-21 (5/30/84)",
+   "notes": "",
+   "format": "toolbox",
+   "trap_number": 275
+  },
+  {
+   "tier": 1,
+   "name": "SetPort",
+   "macro": "SetPort",
+   "trap_word": "A873",
+   "trap_page": "III-220",
+   "convention": "pascal-stack",
+   "parameters": [
+    {
+     "name": "port",
+     "type": "GrafPtr",
+     "stack_bytes": 4,
+     "passed_as": "address",
+     "class": "object"
+    }
+   ],
+   "result": null,
+   "may_move_memory": false,
+   "src0071": [
+    "I-165"
+   ],
+   "src0068": "QD-36 (3/2/83)",
+   "notes": "Only SetPort, OpenPort and InitPort change the current port; parameter named gp in 3/2/83",
+   "format": "toolbox",
+   "trap_number": 115
+  },
+  {
+   "tier": 1,
+   "name": "BeginUpdate",
+   "macro": "BeginUpdate",
+   "trap_word": "A922",
+   "trap_page": "III-215",
+   "convention": "pascal-stack",
+   "parameters": [
+    {
+     "name": "theWindow",
+     "type": "WindowPtr",
+     "stack_bytes": 4,
+     "passed_as": "address",
+     "class": "object"
+    }
+   ],
+   "result": null,
+   "may_move_memory": true,
+   "src0071": [
+    "I-292"
+   ],
+   "src0068": "WM-32 (5/30/84)",
+   "notes": "",
+   "format": "toolbox",
+   "trap_number": 290
+  },
+  {
+   "tier": 1,
+   "name": "EndUpdate",
+   "macro": "EndUpdate",
+   "trap_word": "A923",
+   "trap_page": "III-216",
+   "convention": "pascal-stack",
+   "parameters": [
+    {
+     "name": "theWindow",
+     "type": "WindowPtr",
+     "stack_bytes": 4,
+     "passed_as": "address",
+     "class": "object"
+    }
+   ],
+   "result": null,
+   "may_move_memory": true,
+   "src0071": [
+    "I-293"
+   ],
+   "src0068": "WM-32 (5/30/84)",
+   "notes": "",
+   "format": "toolbox",
+   "trap_number": 291
+  },
+  {
+   "tier": 1,
+   "name": "EraseRect",
+   "macro": "EraseRect",
+   "trap_word": "A8A3",
+   "trap_page": "III-216",
+   "convention": "pascal-stack",
+   "parameters": [
+    {
+     "name": "r",
+     "type": "Rect",
+     "stack_bytes": 4,
+     "passed_as": "pointer to record (8 bytes)",
+     "class": "value"
+    }
+   ],
+   "result": null,
+   "may_move_memory": true,
+   "src0071": [
+    "I-177"
+   ],
+   "src0068": "QD-49 (3/2/83)",
+   "notes": "",
+   "format": "toolbox",
+   "trap_number": 163
+  },
+  {
+   "tier": 1,
+   "name": "MoveTo",
+   "macro": "MoveTo",
+   "trap_word": "A893",
+   "trap_page": "III-218",
+   "convention": "pascal-stack",
+   "parameters": [
+    {
+     "name": "h",
+     "type": "INTEGER",
+     "stack_bytes": 2,
+     "passed_as": "value",
+     "class": "value"
+    },
+    {
+     "name": "v",
+     "type": "INTEGER",
+     "stack_bytes": 2,
+     "passed_as": "value",
+     "class": "value"
+    }
+   ],
+   "result": null,
+   "may_move_memory": false,
+   "src0071": [
+    "I-170"
+   ],
+   "src0068": "QD-42 (3/2/83)",
+   "notes": "",
+   "format": "toolbox",
+   "trap_number": 147
+  },
+  {
+   "tier": 1,
+   "name": "DrawString",
+   "macro": "DrawString",
+   "trap_word": "A884",
+   "trap_page": "III-216",
+   "convention": "pascal-stack",
+   "parameters": [
+    {
+     "name": "s",
+     "type": "Str255",
+     "stack_bytes": 4,
+     "passed_as": "pointer to string",
+     "class": "value"
+    }
+   ],
+   "result": null,
+   "may_move_memory": true,
+   "src0071": [
+    "I-172"
+   ],
+   "src0068": "QD-44 (3/2/83)",
+   "notes": "",
+   "format": "toolbox",
+   "trap_number": 132
+  },
+  {
+   "tier": 1,
+   "name": "FrameRect",
+   "macro": "FrameRect",
+   "trap_word": "A8A1",
+   "trap_page": "III-216",
+   "convention": "pascal-stack",
+   "parameters": [
+    {
+     "name": "r",
+     "type": "Rect",
+     "stack_bytes": 4,
+     "passed_as": "pointer to record (8 bytes)",
+     "class": "value"
+    }
+   ],
+   "result": null,
+   "may_move_memory": true,
+   "src0071": [
+    "I-176"
+   ],
+   "src0068": "QD-49 (3/2/83)",
+   "notes": "",
+   "format": "toolbox",
+   "trap_number": 161
+  },
+  {
+   "tier": 1,
+   "name": "GetNextEvent",
+   "macro": "GetNextEvent",
+   "trap_word": "A970",
+   "trap_page": "III-217",
+   "convention": "pascal-stack",
+   "parameters": [
+    {
+     "name": "eventMask",
+     "type": "INTEGER",
+     "stack_bytes": 2,
+     "passed_as": "value",
+     "class": "value"
+    },
+    {
+     "name": "theEvent",
+     "type": "VAR EventRecord",
+     "stack_bytes": 4,
+     "passed_as": "address of variable",
+     "class": "value-out"
+    }
+   ],
+   "result": {
+    "type": "BOOLEAN",
+    "stack_bytes": 2
+   },
+   "may_move_memory": true,
+   "src0071": [
+    "I-257",
+    "I-258"
+   ],
+   "src0068": "EM-21 (11/19/84)",
+   "notes": "FALSE for a null event or one the Desk Manager handled (SystemEvent)",
+   "format": "toolbox",
+   "trap_number": 368
+  },
+  {
+   "tier": 1,
+   "name": "FindWindow",
+   "macro": "FindWindow",
+   "trap_word": "A92C",
+   "trap_page": "III-216",
+   "convention": "pascal-stack",
+   "parameters": [
+    {
+     "name": "thePt",
+     "type": "Point",
+     "stack_bytes": 4,
+     "passed_as": "record contents",
+     "class": "value"
+    },
+    {
+     "name": "whichWindow",
+     "type": "VAR WindowPtr",
+     "stack_bytes": 4,
+     "passed_as": "address of variable",
+     "class": "value-out"
+    }
+   ],
+   "result": {
+    "type": "INTEGER",
+    "stack_bytes": 2
+   },
+   "may_move_memory": false,
+   "src0071": [
+    "I-287"
+   ],
+   "src0068": "WM-26 (5/30/84)",
+   "notes": "Returns a part code",
+   "format": "toolbox",
+   "trap_number": 300
+  },
+  {
+   "tier": 1,
+   "name": "DragWindow",
+   "macro": "DragWindow",
+   "trap_word": "A925",
+   "trap_page": "III-216",
+   "convention": "pascal-stack",
+   "parameters": [
+    {
+     "name": "theWindow",
+     "type": "WindowPtr",
+     "stack_bytes": 4,
+     "passed_as": "address",
+     "class": "object"
+    },
+    {
+     "name": "startPt",
+     "type": "Point",
+     "stack_bytes": 4,
+     "passed_as": "record contents",
+     "class": "value"
+    },
+    {
+     "name": "boundsRect",
+     "type": "Rect",
+     "stack_bytes": 4,
+     "passed_as": "pointer to record (8 bytes)",
+     "class": "value"
+    }
+   ],
+   "result": null,
+   "may_move_memory": true,
+   "src0071": [
+    "I-289"
+   ],
+   "src0068": "WM-28 (5/30/84)",
+   "notes": "",
+   "format": "toolbox",
+   "trap_number": 293
+  },
+  {
+   "tier": 1,
+   "name": "SelectWindow",
+   "macro": "SelectWindow",
+   "trap_word": "A91F",
+   "trap_page": "III-219",
+   "convention": "pascal-stack",
+   "parameters": [
+    {
+     "name": "theWindow",
+     "type": "WindowPtr",
+     "stack_bytes": 4,
+     "passed_as": "address",
+     "class": "object"
+    }
+   ],
+   "result": null,
+   "may_move_memory": true,
+   "src0071": [
+    "I-284"
+   ],
+   "src0068": "WM-23 (5/30/84)",
+   "notes": "",
+   "format": "toolbox",
+   "trap_number": 287
+  },
+  {
+   "tier": 1,
+   "name": "TrackGoAway",
+   "macro": "TrackGoAway",
+   "trap_word": "A91E",
+   "trap_page": "III-220",
+   "convention": "pascal-stack",
+   "parameters": [
+    {
+     "name": "theWindow",
+     "type": "WindowPtr",
+     "stack_bytes": 4,
+     "passed_as": "address",
+     "class": "object"
+    },
+    {
+     "name": "thePt",
+     "type": "Point",
+     "stack_bytes": 4,
+     "passed_as": "record contents",
+     "class": "value"
+    }
+   ],
+   "result": {
+    "type": "BOOLEAN",
+    "stack_bytes": 2
+   },
+   "may_move_memory": true,
+   "src0071": [
+    "I-288"
+   ],
+   "src0068": "WM-27 (5/30/84)",
+   "notes": "",
+   "format": "toolbox",
+   "trap_number": 286
+  },
+  {
+   "tier": 1,
+   "name": "CloseWindow",
+   "macro": "CloseWindow",
+   "trap_word": "A92D",
+   "trap_page": "III-215",
+   "convention": "pascal-stack",
+   "parameters": [
+    {
+     "name": "theWindow",
+     "type": "WindowPtr",
+     "stack_bytes": 4,
+     "passed_as": "address",
+     "class": "object"
+    }
+   ],
+   "result": null,
+   "may_move_memory": true,
+   "src0071": [
+    "I-283"
+   ],
+   "src0068": "WM-22 (5/30/84)",
+   "notes": "For caller-supplied storage",
+   "format": "toolbox",
+   "trap_number": 301
+  },
+  {
+   "tier": 1,
+   "name": "DisposeWindow",
+   "macro": "DisposWindow",
+   "trap_word": "A914",
+   "trap_page": "III-216",
+   "convention": "pascal-stack",
+   "parameters": [
+    {
+     "name": "theWindow",
+     "type": "WindowPtr",
+     "stack_bytes": 4,
+     "passed_as": "address",
+     "class": "object"
+    }
+   ],
+   "result": null,
+   "may_move_memory": true,
+   "src0071": [
+    "I-284"
+   ],
+   "src0068": "WM-23 (5/30/84)",
+   "notes": "Macro name _DisposWindow",
+   "format": "toolbox",
+   "trap_number": 276
+  },
+  {
+   "tier": 1,
+   "name": "FrontWindow",
+   "macro": "FrontWindow",
+   "trap_word": "A924",
+   "trap_page": "III-216",
+   "convention": "pascal-stack",
+   "parameters": [],
+   "result": {
+    "type": "WindowPtr",
+    "stack_bytes": 4
+   },
+   "may_move_memory": false,
+   "src0071": [
+    "I-286"
+   ],
+   "src0068": "WM-26 (5/30/84)",
+   "notes": "",
+   "format": "toolbox",
+   "trap_number": 292
+  },
+  {
+   "tier": 1,
+   "name": "ExitToShell",
+   "macro": "ExitToShell",
+   "trap_word": "A9F4",
+   "trap_page": "III-216",
+   "convention": "pascal-stack",
+   "parameters": [],
+   "result": null,
+   "may_move_memory": true,
+   "src0071": [
+    "II-59"
+   ],
+   "src0068": "SL-9 (8/24/84)",
+   "notes": "Does not return; launches the application named in FinderName",
+   "format": "toolbox",
+   "trap_number": 500
+  },
+  {
+   "tier": 2,
+   "name": "InitMenus",
+   "macro": "InitMenus",
+   "trap_word": "A930",
+   "trap_page": "III-217",
+   "convention": "pascal-stack",
+   "parameters": [],
+   "result": null,
+   "may_move_memory": true,
+   "src0071": [
+    "I-349",
+    "I-351"
+   ],
+   "src0068": "MN-15 (9/24/84)",
+   "notes": "Once only",
+   "format": "toolbox",
+   "trap_number": 304
+  },
+  {
+   "tier": 2,
+   "name": "TEInit",
+   "macro": "TEInit",
+   "trap_word": "A9CC",
+   "trap_page": "III-220",
+   "convention": "pascal-stack",
+   "parameters": [],
+   "result": null,
+   "may_move_memory": true,
+   "src0071": [
+    "I-381",
+    "I-383"
+   ],
+   "src0068": "TE-16 (1/14/85)",
+   "notes": "Call even without TextEdit, for desk accessories and dialogs",
+   "format": "toolbox",
+   "trap_number": 460
+  },
+  {
+   "tier": 2,
+   "name": "InitDialogs",
+   "macro": "InitDialogs",
+   "trap_word": "A97B",
+   "trap_page": "III-217",
+   "convention": "pascal-stack",
+   "parameters": [
+    {
+     "name": "resumeProc",
+     "type": "ProcPtr",
+     "stack_bytes": 4,
+     "passed_as": "code address",
+     "class": "code"
+    }
+   ],
+   "result": null,
+   "may_move_memory": false,
+   "src0071": [
+    "I-410",
+    "I-411"
+   ],
+   "src0068": "DL-18 (7/6/84)",
+   "notes": "Parameter called restartProc, a fail-safe procedure, in 7/6/84",
+   "format": "toolbox",
+   "trap_number": 379
+  },
+  {
+   "tier": 2,
+   "name": "NewMenu",
+   "macro": "NewMenu",
+   "trap_word": "A931",
+   "trap_page": "III-218",
+   "convention": "pascal-stack",
+   "parameters": [
+    {
+     "name": "menuID",
+     "type": "INTEGER",
+     "stack_bytes": 2,
+     "passed_as": "value",
+     "class": "value"
+    },
+    {
+     "name": "menuTitle",
+     "type": "Str255",
+     "stack_bytes": 4,
+     "passed_as": "pointer to string",
+     "class": "value"
+    }
+   ],
+   "result": {
+    "type": "MenuHandle",
+    "stack_bytes": 4
+   },
+   "may_move_memory": true,
+   "src0071": [
+    "I-351"
+   ],
+   "src0068": "MN-16 (9/24/84)",
+   "notes": "",
+   "format": "toolbox",
+   "trap_number": 305
+  },
+  {
+   "tier": 2,
+   "name": "GetMenu",
+   "macro": "GetRMenu",
+   "trap_word": "A9BF",
+   "trap_page": "III-217",
+   "convention": "pascal-stack",
+   "parameters": [
+    {
+     "name": "resourceID",
+     "type": "INTEGER",
+     "stack_bytes": 2,
+     "passed_as": "value",
+     "class": "value"
+    }
+   ],
+   "result": {
+    "type": "MenuHandle",
+    "stack_bytes": 4
+   },
+   "may_move_memory": true,
+   "src0071": [
+    "I-351"
+   ],
+   "src0068": "MN-16, MN-17 (9/24/84)",
+   "notes": "Macro name _GetRMenu",
+   "format": "toolbox",
+   "trap_number": 447
+  },
+  {
+   "tier": 2,
+   "name": "AppendMenu",
+   "macro": "AppendMenu",
+   "trap_word": "A933",
+   "trap_page": "III-215",
+   "convention": "pascal-stack",
+   "parameters": [
+    {
+     "name": "theMenu",
+     "type": "MenuHandle",
+     "stack_bytes": 4,
+     "passed_as": "address",
+     "class": "object"
+    },
+    {
+     "name": "data",
+     "type": "Str255",
+     "stack_bytes": 4,
+     "passed_as": "pointer to string",
+     "class": "value"
+    }
+   ],
+   "result": null,
+   "may_move_memory": true,
+   "src0071": [
+    "I-352"
+   ],
+   "src0068": "MN-17 (9/24/84)",
+   "notes": "",
+   "format": "toolbox",
+   "trap_number": 307
+  },
+  {
+   "tier": 2,
+   "name": "AddResMenu",
+   "macro": "AddResMenu",
+   "trap_word": "A94D",
+   "trap_page": "III-215",
+   "convention": "pascal-stack",
+   "parameters": [
+    {
+     "name": "theMenu",
+     "type": "MenuHandle",
+     "stack_bytes": 4,
+     "passed_as": "address",
+     "class": "object"
+    },
+    {
+     "name": "theType",
+     "type": "ResType",
+     "stack_bytes": 4,
+     "passed_as": "array contents",
+     "class": "value"
+    }
+   ],
+   "result": null,
+   "may_move_memory": true,
+   "src0071": [
+    "I-353"
+   ],
+   "src0068": "MN-18 (9/24/84)",
+   "notes": "ResType is a 4-byte array, so passed by contents (I-91)",
+   "format": "toolbox",
+   "trap_number": 333
+  },
+  {
+   "tier": 2,
+   "name": "InsertMenu",
+   "macro": "InsertMenu",
+   "trap_word": "A935",
+   "trap_page": "III-217",
+   "convention": "pascal-stack",
+   "parameters": [
+    {
+     "name": "theMenu",
+     "type": "MenuHandle",
+     "stack_bytes": 4,
+     "passed_as": "address",
+     "class": "object"
+    },
+    {
+     "name": "beforeID",
+     "type": "INTEGER",
+     "stack_bytes": 2,
+     "passed_as": "value",
+     "class": "value"
+    }
+   ],
+   "result": null,
+   "may_move_memory": true,
+   "src0071": [
+    "I-353"
+   ],
+   "src0068": "MN-19 (9/24/84)",
+   "notes": "",
+   "format": "toolbox",
+   "trap_number": 309
+  },
+  {
+   "tier": 2,
+   "name": "DrawMenuBar",
+   "macro": "DrawMenuBar",
+   "trap_word": "A937",
+   "trap_page": "III-216",
+   "convention": "pascal-stack",
+   "parameters": [],
+   "result": null,
+   "may_move_memory": true,
+   "src0071": [
+    "I-354"
+   ],
+   "src0068": "MN-19 (9/24/84)",
+   "notes": "",
+   "format": "toolbox",
+   "trap_number": 311
+  },
+  {
+   "tier": 2,
+   "name": "MenuSelect",
+   "macro": "MenuSelect",
+   "trap_word": "A93D",
+   "trap_page": "III-218",
+   "convention": "pascal-stack",
+   "parameters": [
+    {
+     "name": "startPt",
+     "type": "Point",
+     "stack_bytes": 4,
+     "passed_as": "record contents",
+     "class": "value"
+    }
+   ],
+   "result": {
+    "type": "LONGINT",
+    "stack_bytes": 4
+   },
+   "may_move_memory": true,
+   "src0071": [
+    "I-355"
+   ],
+   "src0068": "MN-21 (9/24/84)",
+   "notes": "Menu ID in high word, item in low word",
+   "format": "toolbox",
+   "trap_number": 317
+  },
+  {
+   "tier": 2,
+   "name": "MenuKey",
+   "macro": "MenuKey",
+   "trap_word": "A93E",
+   "trap_page": "III-218",
+   "convention": "pascal-stack",
+   "parameters": [
+    {
+     "name": "ch",
+     "type": "CHAR",
+     "stack_bytes": 2,
+     "passed_as": "value, low-order byte",
+     "class": "value"
+    }
+   ],
+   "result": {
+    "type": "LONGINT",
+    "stack_bytes": 4
+   },
+   "may_move_memory": true,
+   "src0071": [
+    "I-356"
+   ],
+   "src0068": "MN-22 (9/24/84)",
+   "notes": "",
+   "format": "toolbox",
+   "trap_number": 318
+  },
+  {
+   "tier": 2,
+   "name": "HiliteMenu",
+   "macro": "HiliteMenu",
+   "trap_word": "A938",
+   "trap_page": "III-217",
+   "convention": "pascal-stack",
+   "parameters": [
+    {
+     "name": "menuID",
+     "type": "INTEGER",
+     "stack_bytes": 2,
+     "passed_as": "value",
+     "class": "value"
+    }
+   ],
+   "result": null,
+   "may_move_memory": true,
+   "src0071": [
+    "I-357"
+   ],
+   "src0068": "MN-22 (9/24/84)",
+   "notes": "",
+   "format": "toolbox",
+   "trap_number": 312
+  },
+  {
+   "tier": 2,
+   "name": "GetItem",
+   "macro": "GetItem",
+   "trap_word": "A946",
+   "trap_page": "III-217",
+   "convention": "pascal-stack",
+   "parameters": [
+    {
+     "name": "theMenu",
+     "type": "MenuHandle",
+     "stack_bytes": 4,
+     "passed_as": "address",
+     "class": "object"
+    },
+    {
+     "name": "item",
+     "type": "INTEGER",
+     "stack_bytes": 2,
+     "passed_as": "value",
+     "class": "value"
+    },
+    {
+     "name": "itemString",
+     "type": "VAR Str255",
+     "stack_bytes": 4,
+     "passed_as": "address of variable",
+     "class": "value-out"
+    }
+   ],
+   "result": null,
+   "may_move_memory": false,
+   "src0071": [
+    "I-358"
+   ],
+   "src0068": "MN-23 (9/24/84)",
+   "notes": "",
+   "format": "toolbox",
+   "trap_number": 326
+  },
+  {
+   "tier": 2,
+   "name": "OpenDeskAcc",
+   "macro": "OpenDeskAcc",
+   "trap_word": "A9B6",
+   "trap_page": "III-218",
+   "convention": "pascal-stack",
+   "parameters": [
+    {
+     "name": "theAcc",
+     "type": "Str255",
+     "stack_bytes": 4,
+     "passed_as": "pointer to string",
+     "class": "value"
+    }
+   ],
+   "result": {
+    "type": "INTEGER",
+    "stack_bytes": 2
+   },
+   "may_move_memory": true,
+   "src0071": [
+    "I-440"
+   ],
+   "src0068": "DS-7 (8/22/84)",
+   "notes": "Reads the accessory into the application heap; result should be ignored",
+   "format": "toolbox",
+   "trap_number": 438
+  },
+  {
+   "tier": 2,
+   "name": "CloseDeskAcc",
+   "macro": "CloseDeskAcc",
+   "trap_word": "A9B7",
+   "trap_page": "III-215",
+   "convention": "pascal-stack",
+   "parameters": [
+    {
+     "name": "refNum",
+     "type": "INTEGER",
+     "stack_bytes": 2,
+     "passed_as": "value",
+     "class": "value"
+    }
+   ],
+   "result": null,
+   "may_move_memory": false,
+   "src0071": [
+    "I-440"
+   ],
+   "src0068": "DS-8 (8/22/84)",
+   "notes": "refNum from the window's windowKind",
+   "format": "toolbox",
+   "trap_number": 439
+  },
+  {
+   "tier": 2,
+   "name": "SystemClick",
+   "macro": "SystemClick",
+   "trap_word": "A9B3",
+   "trap_page": "III-220",
+   "convention": "pascal-stack",
+   "parameters": [
+    {
+     "name": "theEvent",
+     "type": "EventRecord",
+     "stack_bytes": 4,
+     "passed_as": "pointer to record (16 bytes)",
+     "class": "value"
+    },
+    {
+     "name": "theWindow",
+     "type": "WindowPtr",
+     "stack_bytes": 4,
+     "passed_as": "address",
+     "class": "object"
+    }
+   ],
+   "result": null,
+   "may_move_memory": true,
+   "src0071": [
+    "I-441"
+   ],
+   "src0068": "DS-8 (8/22/84)",
+   "notes": "EventRecord by value is passed as a pointer (I-91)",
+   "format": "toolbox",
+   "trap_number": 435
+  },
+  {
+   "tier": 2,
+   "name": "SystemEdit",
+   "macro": "SysEdit",
+   "trap_word": "A9C2",
+   "trap_page": "III-220",
+   "convention": "pascal-stack",
+   "parameters": [
+    {
+     "name": "editCmd",
+     "type": "INTEGER",
+     "stack_bytes": 2,
+     "passed_as": "value",
+     "class": "value"
+    }
+   ],
+   "result": {
+    "type": "BOOLEAN",
+    "stack_bytes": 2
+   },
+   "may_move_memory": true,
+   "src0071": [
+    "I-441",
+    "I-442"
+   ],
+   "src0068": "DS-9 (8/22/84)",
+   "notes": "Macro name _SysEdit; editCmd = item number - 1",
+   "format": "toolbox",
+   "trap_number": 450
+  },
+  {
+   "tier": 2,
+   "name": "SystemTask",
+   "macro": "SystemTask",
+   "trap_word": "A9B4",
+   "trap_page": "III-220",
+   "convention": "pascal-stack",
+   "parameters": [],
+   "result": null,
+   "may_move_memory": false,
+   "src0071": [
+    "I-442"
+   ],
+   "src0068": "DS-10 (8/22/84)",
+   "notes": "Runs desk accessories' periodic actions; not listed in Appendix B",
+   "format": "toolbox",
+   "trap_number": 436
+  }
+ ]
+}
