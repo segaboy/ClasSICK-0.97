@@ -5,6 +5,26 @@ eligibility applies to the stated scope, not every resource reachable from a URL
 No Apple executable, source, disassembly, decompilation, or copied asset was used.
 Project-owned black-box native trials are recorded separately below.
 
+## SRC-0125 - Own typed register patch verification
+
+2026-10-13, SPEC-0027 / TEST-0035; compiled source
+`5c40c6d7acb445d8f0ba8a27173c85af0d0b1b1f`.
+Initial complete1416 CTests in nine profiles pass; after the debug padding-helper
+correction, all54 affected patch checks, ten final object audits and both compiler
+debug twins repeat successfully. Unaffected1362 results retained. GNU68000
+passes18 module audits/two complete links and independent10-byte encoding;
+complete local/CI manifests match. Metadata100bytes and closure frames608/604
+are partial costs, not cumulative stack or final128K proof.
+[CI38434766286](https://github.com/segaboy/ClasSICK-0.97/actions/runs/38434766286)
+passes both jobs and the entire final-source1416 plus340 bootstrap checks.
+All eleven memory chains, allocation flags, register results, nested budgets,
+pre-entry refusal and retained late guest/manager/directory effects pass.
+Six EFI/two own ROM profiles/input hashes and six research originals unchanged.
+[Evidence](../docs/development/guest-patches-evidence.md) preserves early failures
+and superseded CI38433125261 rather than relabeling them. Only selected register
+signatures; no boot binding, native application/SDK, VM/emulator/reference run,
+QuickDraw or CODE launch. Lead self-review, human provenance review pending.
+
 ## SRC-0124 - Windows hosted conformance execution metadata
 
 Microsoft Learn, Application manifests, trustInfo/requestedExecutionLevel;

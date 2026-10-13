@@ -33,3 +33,6 @@ original68000 closure in O0/Os, two complete relocatable links, frame reports,
 metadata footprint and independent ten-byte assembler encoding. Quantitative
 accepted results and retained preparation failures belong in development
 evidence after exact CI comparison. No VM/emulator/boot or reference observation.
+
+Accepted quantitative results, exact revisions and retained failures:
+[checkpoint evidence](../../docs/development/guest-patches-evidence.md).

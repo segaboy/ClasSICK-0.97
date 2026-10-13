@@ -6,6 +6,20 @@ treating research proposals as finalized historical specifications.
 
 ## Current foundation
 
+Latest checkpoint, 2026-10-13: SPEC-0027 / ADR-0031 supplies opt-in typed
+register trap patch execution for thirteen selected OS signatures. All eleven
+memory patches chain to saved originals with active allocation flags; nested
+patches share ancestor budgets. Register saves and pre-entry refusals are distinct
+from retained completed guest effects on late faults. The legacy atomic path
+remains available. [Evidence](guest-patches-evidence.md) records the initial1416
+matrix,54 final affected reruns, ten final object audits, matching compiler twins
+and complete matching68000 local/CI manifest. Both CI jobs pass the complete
+final-source1416 plus340 bootstrap checks. Existing boot images and all six
+research originals are unchanged. No boot binding, VM/emulator/reference trial,
+native application/SDK, QuickDraw or full callback/OS claim. Earlier paragraphs
+below retain their dated checkpoint scope. Next is implementing finalized
+SPEC-0024's bounded resource-fork reader for CODE-only loading prerequisites.
+
 2026-10-13: SPEC-0026 / ADR-0030 now supplies canonical checked JMP/JSR,
 explicit stack intervals and the original ordinary proc0 call service. It bounds
 RTS completion, nesting and ancestor instruction budgets, restores caller
@@ -126,7 +140,11 @@ stays open. This research intake changes no code and authorizes no new slice.
    patch through the bounded service, preserving per-routine calling rules.
    Reserve unspecified extension space; no third native kind, native marker or
    native-entry registry is populated. Test saved original-address chaining,
-   unsupported types, independent directories and errors without partial writes.
+   unsupported types, independent directories and pre-entry refusal without partial
+   writes; record completed guest effects retained after entry.
+   SPEC-0027 now supplies this selected register patch profile, including eleven
+   saved-original memory veneers. Get/Set direct veneers, arbitrary direct guest
+   calls, Pascal shapes and broader typed dispatch remain explicit later work.
 5. **CODE-only launch selection and format prerequisites.** Make selection a
    separate stage with one permitted outcome, 68000 CODE, plus explicit refusal
    diagnostics. First implement checked read-only resource/MFS contracts using

@@ -28,3 +28,6 @@ are OS/core conformance tests, not native applications or an SDK. Get/Set direct
 veneers, arbitrary direct guest calls, Pascal marshalling, actual manager
 callbacks, CODE launch, QuickDraw and full CPU remain later work. No boot-entry
 binding or VM/emulator/reference run. Six research drafts remain unchanged.
+
+Accepted quantitative results, exact revisions and retained failures:
+[checkpoint evidence](../../docs/development/guest-patches-evidence.md).

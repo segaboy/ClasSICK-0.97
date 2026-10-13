@@ -1,0 +1,893 @@
+{
+  "schema_version": 1,
+  "specification": "SPEC-0027",
+  "test": "TEST-0035",
+  "source": "SRC-0125",
+  "profile": "classick-register-patches-v1",
+  "classification": "hosted-interpreted-core-and-standalone-compiler-verification",
+  "verified_on": "2026-10-13",
+  "compiled_source_revision": "5c40c6d7acb445d8f0ba8a27173c85af0d0b1b1f",
+  "historical_1984_confirmed": false,
+  "new_native_application": false,
+  "new_boot_image_integration": false,
+  "new_vm_or_emulator_runs": 0,
+  "verification": {
+    "ctest_checks": 1416,
+    "configuration_totals": [
+      170,
+      170,
+      170,
+      143,
+      170,
+      155,
+      155,
+      155,
+      128
+    ],
+    "final_affected_reruns": 54,
+    "rerun_reason": "Explicit field initialization removes Clang64O0 padding memset after the initial complete1416 matrix; all54 patch checks repeat in nine profiles, unaffected1362 retained. CI runs the entire final source.",
+    "final_patch_log_sha256": "26c5a0ef3160a7247f87fdfea7120b920390642268221a89f8a861601eb18de2",
+    "patch_object_audits": 10,
+    "hosted_twins": {
+      "clang": "9ac14bd4fa329368619ab27c936f389ea14abf5c0de5544fb41c095b0e8cb034",
+      "gcc": "5660d6fd1ebc0decdcadf69db67c696b0796ec0bbaa99399c60a506e32f28476"
+    },
+    "program_bytes": 10,
+    "program_chain_steps": 4,
+    "program_tail_steps": 2,
+    "memory_signatures": 11,
+    "typed_os_signatures": 13,
+    "service_depth_limit": 4,
+    "budget_maximum": 1000000,
+    "local_matrix_log_sha256": "d6f08964b013fed9aa3ab8c94da3f204614454e8a1771157539c45255aad731c",
+    "ci_log_sha256": "598de16a709be704ecf88448934be02f531b3742de32645ee4c6357a7d330d61",
+    "ci_url": "https://github.com/segaboy/ClasSICK-0.97/actions/runs/38434766286",
+    "ci_status": "success",
+    "ci_current_source_complete_matrix": true,
+    "ci_additional_bootstrap_ctest_checks": 340
+  },
+  "patches": {
+    "runtime_metadata_bytes_68000": 100,
+    "whole_closure_compiler_frame_maxima": [
+      608,
+      604
+    ],
+    "guest_patch_dispatch": true,
+    "legacy_atomic_dispatch_retained": true,
+    "caller_controls_restored": [
+      "PC",
+      "A5",
+      "A7"
+    ],
+    "pre_entry_refusal_atomic": true,
+    "late_failure_caller_frame_restored": true,
+    "completed_guest_side_effects_retained": true,
+    "direct_saved_original_memory_veneers": true,
+    "active_word_flags_retained": true,
+    "arbitrary_direct_guest_calls": false,
+    "manager_callback_installation": false,
+    "boot_entry_bound": false
+  },
+  "m68k": {
+    "schema_version": 1,
+    "specification": "SPEC-0027",
+    "compiler": "m68k-linux-gnu-gcc-13 (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0",
+    "object_audits": 18,
+    "complete_relocatable_links": 2,
+    "assembler_fixture_bytes": 10,
+    "assembler_fixture_sha256": "f8f0b52a50795bf1ca8d87a32400d837123911d804d65b42257b0c223ad49f78",
+    "runtime_metadata_bytes": 100,
+    "profiles": [
+      {
+        "optimization": "-O0",
+        "objects": 9,
+        "combined_sha256": "436883ad31a3bd8bd2657efeb175a1f11d61612f559c567ddfce921df059f486",
+        "stack_frames": [
+          {
+            "function": "cs_guest_validate",
+            "bytes": 20
+          },
+          {
+            "function": "cs_guest_window",
+            "bytes": 20
+          },
+          {
+            "function": "operand",
+            "bytes": 24
+          },
+          {
+            "function": "cs_guest_read",
+            "bytes": 44
+          },
+          {
+            "function": "cs_guest_write",
+            "bytes": 36
+          },
+          {
+            "function": "copy_frame",
+            "bytes": 4
+          },
+          {
+            "function": "begin",
+            "bytes": 0
+          },
+          {
+            "function": "done",
+            "bytes": 0
+          },
+          {
+            "function": "read_value",
+            "bytes": 24
+          },
+          {
+            "function": "extension",
+            "bytes": 24
+          },
+          {
+            "function": "mask",
+            "bytes": 0
+          },
+          {
+            "function": "flags",
+            "bytes": 8
+          },
+          {
+            "function": "effective",
+            "bytes": 16
+          },
+          {
+            "function": "source",
+            "bytes": 36
+          },
+          {
+            "function": "preflight_store",
+            "bytes": 36
+          },
+          {
+            "function": "stack_span",
+            "bytes": 0
+          },
+          {
+            "function": "move",
+            "bytes": 64
+          },
+          {
+            "function": "condition",
+            "bytes": 20
+          },
+          {
+            "function": "target",
+            "bytes": 24
+          },
+          {
+            "function": "branch",
+            "bytes": 52
+          },
+          {
+            "function": "return_instruction",
+            "bytes": 28
+          },
+          {
+            "function": "sign_extend",
+            "bytes": 4
+          },
+          {
+            "function": "add_offset",
+            "bytes": 4
+          },
+          {
+            "function": "control_address",
+            "bytes": 48
+          },
+          {
+            "function": "jump",
+            "bytes": 28
+          },
+          {
+            "function": "aline",
+            "bytes": 60
+          },
+          {
+            "function": "step",
+            "bytes": 156
+          },
+          {
+            "function": "cs_m68k_bus_step_options",
+            "bytes": 24
+          },
+          {
+            "function": "cs_m68k_bus_step_bounded",
+            "bytes": 24
+          },
+          {
+            "function": "cs_m68k_bus_step",
+            "bytes": 20
+          },
+          {
+            "function": "mode",
+            "bytes": 4
+          },
+          {
+            "function": "span",
+            "bytes": 0
+          },
+          {
+            "function": "contains",
+            "bytes": 0
+          },
+          {
+            "function": "begin",
+            "bytes": 4
+          },
+          {
+            "function": "finish",
+            "bytes": 0
+          },
+          {
+            "function": "cs_m68k_aline",
+            "bytes": 20
+          },
+          {
+            "function": "read32",
+            "bytes": 0
+          },
+          {
+            "function": "write32",
+            "bytes": 0
+          },
+          {
+            "function": "cs_m68k_step",
+            "bytes": 52
+          },
+          {
+            "function": "rom_address",
+            "bytes": 0
+          },
+          {
+            "function": "config_valid",
+            "bytes": 8
+          },
+          {
+            "function": "state_valid",
+            "bytes": 4
+          },
+          {
+            "function": "executable",
+            "bytes": 8
+          },
+          {
+            "function": "cs_trap_decode",
+            "bytes": 4
+          },
+          {
+            "function": "cs_trap_init",
+            "bytes": 8
+          },
+          {
+            "function": "cs_trap_get",
+            "bytes": 12
+          },
+          {
+            "function": "cs_trap_set",
+            "bytes": 12
+          },
+          {
+            "function": "intrinsic",
+            "bytes": 24
+          },
+          {
+            "function": "begin_report",
+            "bytes": 0
+          },
+          {
+            "function": "cs_trap_call",
+            "bytes": 32
+          },
+          {
+            "function": "cs_trap_direct",
+            "bytes": 20
+          },
+          {
+            "function": "copy_frame",
+            "bytes": 4
+          },
+          {
+            "function": "interval",
+            "bytes": 40
+          },
+          {
+            "function": "valid",
+            "bytes": 28
+          },
+          {
+            "function": "cs_m68k_call_init",
+            "bytes": 16
+          },
+          {
+            "function": "finish",
+            "bytes": 0
+          },
+          {
+            "function": "sentinel",
+            "bytes": 0
+          },
+          {
+            "function": "cs_m68k_call_using",
+            "bytes": 228
+          },
+          {
+            "function": "cs_m68k_call",
+            "bytes": 24
+          },
+          {
+            "function": "zone",
+            "bytes": 0
+          },
+          {
+            "function": "read32",
+            "bytes": 0
+          },
+          {
+            "function": "write32",
+            "bytes": 0
+          },
+          {
+            "function": "intersects",
+            "bytes": 0
+          },
+          {
+            "function": "extent",
+            "bytes": 0
+          },
+          {
+            "function": "configuration",
+            "bytes": 52
+          },
+          {
+            "function": "cs_mm_init",
+            "bytes": 100
+          },
+          {
+            "function": "state",
+            "bytes": 48
+          },
+          {
+            "function": "compact",
+            "bytes": 36
+          },
+          {
+            "function": "fits",
+            "bytes": 28
+          },
+          {
+            "function": "gap",
+            "bytes": 40
+          },
+          {
+            "function": "copy_bytes",
+            "bytes": 8
+          },
+          {
+            "function": "commit_moves",
+            "bytes": 44
+          },
+          {
+            "function": "reply",
+            "bytes": 0
+          },
+          {
+            "function": "object",
+            "bytes": 20
+          },
+          {
+            "function": "cs_mm_execute",
+            "bytes": 608
+          },
+          {
+            "function": "finish",
+            "bytes": 0
+          },
+          {
+            "function": "cs_mm_register_call",
+            "bytes": 64
+          },
+          {
+            "function": "policy",
+            "bytes": 0
+          },
+          {
+            "function": "tokens",
+            "bytes": 8
+          },
+          {
+            "function": "valid",
+            "bytes": 4
+          },
+          {
+            "function": "cs_s1_traps_check",
+            "bytes": 16
+          },
+          {
+            "function": "cs_s1_traps_init",
+            "bytes": 60
+          },
+          {
+            "function": "begin",
+            "bytes": 4
+          },
+          {
+            "function": "finish",
+            "bytes": 0
+          },
+          {
+            "function": "index_of",
+            "bytes": 8
+          },
+          {
+            "function": "overlaps",
+            "bytes": 0
+          },
+          {
+            "function": "invoke",
+            "bytes": 48
+          },
+          {
+            "function": "cs_s1_trap_call",
+            "bytes": 40
+          },
+          {
+            "function": "cs_s1_trap_direct",
+            "bytes": 40
+          },
+          {
+            "function": "dispatch",
+            "bytes": 60
+          },
+          {
+            "function": "cs_s1_step",
+            "bytes": 48
+          },
+          {
+            "function": "copy_word",
+            "bytes": 0
+          },
+          {
+            "function": "copy_trap",
+            "bytes": 8
+          },
+          {
+            "function": "copy_bus",
+            "bytes": 8
+          },
+          {
+            "function": "overlap",
+            "bytes": 0
+          },
+          {
+            "function": "executable_window",
+            "bytes": 4
+          },
+          {
+            "function": "cs_s1_entry_resolve",
+            "bytes": 72
+          },
+          {
+            "function": "readonly_code",
+            "bytes": 12
+          },
+          {
+            "function": "cs_s1_patches_init",
+            "bytes": 88
+          },
+          {
+            "function": "begin",
+            "bytes": 12
+          },
+          {
+            "function": "finish",
+            "bytes": 0
+          },
+          {
+            "function": "stack",
+            "bytes": 0
+          },
+          {
+            "function": "guest_step",
+            "bytes": 172
+          },
+          {
+            "function": "veneer",
+            "bytes": 44
+          },
+          {
+            "function": "execute",
+            "bytes": 148
+          },
+          {
+            "function": "cs_s1_patch_step",
+            "bytes": 40
+          }
+        ]
+      },
+      {
+        "optimization": "-Os",
+        "objects": 9,
+        "combined_sha256": "fba6b46531dada588cab130a89253e56b57c344bc53311f8261fadb60a724c3a",
+        "stack_frames": [
+          {
+            "function": "cs_guest_validate",
+            "bytes": 28
+          },
+          {
+            "function": "cs_guest_window",
+            "bytes": 40
+          },
+          {
+            "function": "operand",
+            "bytes": 24
+          },
+          {
+            "function": "cs_guest_read",
+            "bytes": 36
+          },
+          {
+            "function": "cs_guest_write",
+            "bytes": 40
+          },
+          {
+            "function": "stack_span",
+            "bytes": 8
+          },
+          {
+            "function": "add_offset",
+            "bytes": 4
+          },
+          {
+            "function": "preflight_store",
+            "bytes": 40
+          },
+          {
+            "function": "read_value",
+            "bytes": 24
+          },
+          {
+            "function": "extension",
+            "bytes": 28
+          },
+          {
+            "function": "effective",
+            "bytes": 12
+          },
+          {
+            "function": "step",
+            "bytes": 200
+          },
+          {
+            "function": "cs_m68k_bus_step_options",
+            "bytes": 24
+          },
+          {
+            "function": "cs_m68k_bus_step_bounded",
+            "bytes": 8
+          },
+          {
+            "function": "cs_m68k_bus_step",
+            "bytes": 20
+          },
+          {
+            "function": "span",
+            "bytes": 4
+          },
+          {
+            "function": "contains",
+            "bytes": 4
+          },
+          {
+            "function": "cs_m68k_aline",
+            "bytes": 28
+          },
+          {
+            "function": "cs_m68k_step",
+            "bytes": 60
+          },
+          {
+            "function": "rom_address.isra",
+            "bytes": 0
+          },
+          {
+            "function": "executable",
+            "bytes": 16
+          },
+          {
+            "function": "config_valid",
+            "bytes": 28
+          },
+          {
+            "function": "state_valid",
+            "bytes": 4
+          },
+          {
+            "function": "cs_trap_decode",
+            "bytes": 8
+          },
+          {
+            "function": "cs_trap_init",
+            "bytes": 12
+          },
+          {
+            "function": "cs_trap_get",
+            "bytes": 24
+          },
+          {
+            "function": "cs_trap_set",
+            "bytes": 24
+          },
+          {
+            "function": "intrinsic",
+            "bytes": 24
+          },
+          {
+            "function": "cs_trap_call",
+            "bytes": 32
+          },
+          {
+            "function": "cs_trap_direct",
+            "bytes": 32
+          },
+          {
+            "function": "interval",
+            "bytes": 56
+          },
+          {
+            "function": "valid",
+            "bytes": 44
+          },
+          {
+            "function": "cs_m68k_call_init",
+            "bytes": 32
+          },
+          {
+            "function": "cs_m68k_call_using",
+            "bytes": 252
+          },
+          {
+            "function": "cs_m68k_call",
+            "bytes": 24
+          },
+          {
+            "function": "read32",
+            "bytes": 0
+          },
+          {
+            "function": "write32",
+            "bytes": 0
+          },
+          {
+            "function": "compact",
+            "bytes": 28
+          },
+          {
+            "function": "fits",
+            "bytes": 16
+          },
+          {
+            "function": "configuration",
+            "bytes": 56
+          },
+          {
+            "function": "copy_bytes",
+            "bytes": 0
+          },
+          {
+            "function": "commit_moves",
+            "bytes": 72
+          },
+          {
+            "function": "gap.constprop",
+            "bytes": 40
+          },
+          {
+            "function": "cs_mm_init",
+            "bytes": 120
+          },
+          {
+            "function": "cs_mm_execute",
+            "bytes": 604
+          },
+          {
+            "function": "cs_mm_register_call",
+            "bytes": 68
+          },
+          {
+            "function": "valid",
+            "bytes": 0
+          },
+          {
+            "function": "tokens",
+            "bytes": 0
+          },
+          {
+            "function": "invoke",
+            "bytes": 72
+          },
+          {
+            "function": "dispatch",
+            "bytes": 44
+          },
+          {
+            "function": "cs_s1_traps_check",
+            "bytes": 20
+          },
+          {
+            "function": "cs_s1_traps_init",
+            "bytes": 76
+          },
+          {
+            "function": "cs_s1_trap_call",
+            "bytes": 44
+          },
+          {
+            "function": "cs_s1_trap_direct",
+            "bytes": 44
+          },
+          {
+            "function": "cs_s1_step",
+            "bytes": 68
+          },
+          {
+            "function": "copy_trap",
+            "bytes": 0
+          },
+          {
+            "function": "stack",
+            "bytes": 0
+          },
+          {
+            "function": "overlap",
+            "bytes": 0
+          },
+          {
+            "function": "cs_s1_entry_resolve",
+            "bytes": 64
+          },
+          {
+            "function": "execute",
+            "bytes": 156
+          },
+          {
+            "function": "guest_step",
+            "bytes": 188
+          },
+          {
+            "function": "cs_s1_patches_init",
+            "bytes": 112
+          },
+          {
+            "function": "cs_s1_patch_step",
+            "bytes": 44
+          }
+        ]
+      }
+    ],
+    "inputs": {
+      "core/memory/guest.c": "9678b43e3dc82df2f66119794f08cb2a0dbd85c07a031085daba35b230b6f8a1",
+      "core/cpu/m68k-bus.c": "fbd450d38774fecd4b95bb09b1bb448f16c30884aef091567e5d383c15cb54d8",
+      "core/cpu/m68k.c": "c6c169c175a71bb24d2f6f375d5bca7dea4469ae4407c43159b3b27c6db613b8",
+      "core/services/traps.c": "585adf0742f51390bc44ba086b58e22361bb7188c1205bcc11968875f0cbb1ef",
+      "core/cpu/m68k-call.c": "83979538a7bbd666eafa3f33c483dd559beb6ca69f2d3e754c0b5ec95b7c96a1",
+      "core/memory/manager.c": "24f12c710e62f73c274964834ca4470d78c8b54c0e7dcfb6427ca94b9deff575",
+      "personality/system1/memory-registers.c": "cd0dcfda70933bfbebf23a6e8b20ad8be3f36a55102ff2a659ccf5f3d424c2e2",
+      "personality/system1/memory-traps.c": "00dc17a6fe1be6be14e9387d5392c5456727f7a256cec25e224da8fbef3e6b9e",
+      "personality/system1/guest-patches.c": "efa17203e35c5449973ecc6e1becee37ff65f138ac0361344019e9800d7b73d0",
+      "personality/system1/guest-patches.h": "24297e41236c88b8350d5f07c3b219763a33f1e2381a5099edab72f5b6cd14f2",
+      "personality/system1/memory-traps.h": "e020617dc8262dca6d096436a71553ea204da9c7a0e5ac44c7957751c1406f95",
+      "personality/system1/memory-registers.h": "a2e9457505cb4e0ceba39c8875cae2feb53f7d79c714387786cdbc0fba5004e6",
+      "core/memory/manager.h": "9752645a3c610d46c41e2826061853967baff6898c954c20006ce2949f8e1078",
+      "core/cpu/m68k-call.h": "5f320112485dfd98cd868e290bc1d3efdb8a0f3e81fbb4eb81fb93e6494cab1d",
+      "core/cpu/m68k-bus.h": "a0a8fa1ca3075be2c3f6eecfe18f45ef0c3db3c338af00d5451edc293ad2ce0a",
+      "core/cpu/m68k.h": "db12b5678ffe4b471082a3b9f6840719148d10032c2ba6dfeb2a9d83a03b7ad5",
+      "core/memory/guest.h": "5a89e549470bd0f3ffe50e7fb714342ff7dc6af0d49a0c154a7baebdf7e113ff",
+      "core/services/traps.h": "a3346547364a2237027dbe1d134b81129e80f9731f4c49c813fc9f68563fd782",
+      "apps/guest-patch-probe/program.h": "c1eb85319aa5283afdf80d78a72a1c4eb4563aea5094a39e86516ffc03a25cf0",
+      "apps/guest-patch-probe/program.S": "4443500c4bad7ee373468d0bbec215551712cdadc39297f960e3592c88405e5c",
+      "docs/specifications/SPEC-0027-guest-patches.md": "63cac41251d8743db4aff256e45a15bcbd83bde05f8ae75ea7b1512480e506c5",
+      "scripts/Verify-GuestPatchesM68k.py": "f32a1ecdf12d8e9a57f81291af243cb5925403253f65698ad80357a27a825372",
+      "scripts/Verify-GuestM68k.py": "548addd87816af0f0f190c4f82c6b17083155e3703d28c9d124a0038acf6ed68"
+    },
+    "tool_lock_sha256": "a2fe02f949288826f6a1d11b55df1d3305aab4fb4726da83a4fb8695b7f21898",
+    "native_executed": false,
+    "rom_integration": false
+  },
+  "regression": {
+    "unchanged_efi_profiles": {
+      "none": [
+        {
+          "case": "clang-64-O0",
+          "sha256": "4ded876949c54def00634eb0c8e4367bcbb6d94fe255fbdbd861ec88b16aa18c",
+          "size_bytes": 68608,
+          "image_size": 86016,
+          "relocations": 3,
+          "status": "passed-unloaded"
+        },
+        {
+          "case": "clang-64-O2",
+          "sha256": "6e2ea128e819923e6f88fd933bf40c7a7c9c7871d18d59c08315976a610269a7",
+          "size_bytes": 48640,
+          "image_size": 65536,
+          "relocations": 3,
+          "status": "passed-unloaded"
+        }
+      ],
+      "ud": [
+        {
+          "case": "clang-64-O0",
+          "sha256": "476236db2e81008323b7f8b70b7f2c47cf4406c8d89399df653459b5eac33135",
+          "size_bytes": 68608,
+          "image_size": 86016,
+          "relocations": 3,
+          "status": "passed-unloaded"
+        },
+        {
+          "case": "clang-64-O2",
+          "sha256": "569f1540d6013777840c07f4879856a5625c3a1631baf2ca0434f3a9c360c14b",
+          "size_bytes": 48640,
+          "image_size": 65536,
+          "relocations": 3,
+          "status": "passed-unloaded"
+        }
+      ],
+      "gp": [
+        {
+          "case": "clang-64-O0",
+          "sha256": "a36b3ef4194c88a71d9144fc4fb912d44a903739309125ee18ce2e4545ed1b5e",
+          "size_bytes": 68608,
+          "image_size": 86016,
+          "relocations": 3,
+          "status": "passed-unloaded"
+        },
+        {
+          "case": "clang-64-O2",
+          "sha256": "c1b277a48c1b77f57e7a4966c1983c1b0941911e3da73d53d6217b989a14f4ba",
+          "size_bytes": 48640,
+          "image_size": 65536,
+          "relocations": 3,
+          "status": "passed-unloaded"
+        }
+      ]
+    },
+    "unchanged_rom_sha256": [
+      "20175281806971dd9b21f50f8f726947b162da38fe0b10571311515c0f313b22",
+      "578f8a727de9f63d735988cc655739c6f68fd8ba8ad18540702bf56c8dce92d6"
+    ],
+    "ci_rom_inputs_match_prior_baseline": true,
+    "local_rom_rebuilt_this_milestone": false,
+    "research_draft_sha256": {
+      "callback-catalog-draft.md": "156bcf56f0c962045ffac30fbd5621ecae81a5a417a9970519102fd434764aee",
+      "callback-catalog-draft.json": "952715b94ae45822878ad7297d022b28b130e3de27762b51541cc3f537bc75fd",
+      "quickdraw-draft.md": "5b4823cc6a498c00a74476dd16846c24c84adfb169b55b5abd62e0fcc104a881",
+      "quickdraw-test-plan.md": "33d744e913749c1a63f0c75cd8b5c7c62e3cef4546265192ddae9dbf01bbaf81",
+      "resourcefork-draft.md": "d1976f32ffd4666f3dbc1c4073b964c08c01de388c1c6e18990270e4fecdf83f",
+      "resourcefork-test-plan.md": "e7e612c6fa2114ea68e6bc55ae44dcbd4e0cefd4ed7ba7251460d9a730252692"
+    }
+  },
+  "superseded_ci": {
+    "run": 38433125261,
+    "compiled_source_revision": "6326b1b64028df5994f4597e506f734e4015a239",
+    "status": "failure",
+    "cause": "Clang64O0 emitted memset for context padding in the extra object audit; corrected by explicit field initialization.",
+    "log_sha256": "697fee3fd213cded4f207db65decb8140570fd233ce4117268a65a1983272df9"
+  },
+  "preparation_failures": [
+    "First test used incorrect guest-region initializer order; corrected before accepted checks.",
+    "First budget test wrongly expected a seven-step routine to fail with budget seven; corrected to test budgets one through six.",
+    "Initial68000 audit found compiler-generated memcpy; explicit field copies remove it. Extra Clang64O0 audit then found padding memset; individual field initialization removes it, all54 affected tests/ten object audits/twins repeat on final source.",
+    "Initial32-bit hosted executable refused with WinError740; renaming alone failed. Original embedded asInvoker metadata fixes ordinary test launch.",
+    "Earlier incomplete matrices/native artifacts retained locally and superseded by the complete accepted final-source matrix/manifest."
+  ],
+  "limits": [
+    "Only selected register-based OS signatures; no Pascal parameter/results, interrupt/nonreturning callbacks or full CPU.",
+    "Only matching saved-original memory veneers under the active trap word; Get/Set direct veneers and arbitrary direct guest calls deferred.",
+    "Metadata100bytes and compiler-frame maxima are partial costs, not cumulative stack high-water or final128K budgets.",
+    "No native application/SDK, boot integration, VM/emulator/reference trial, QuickDraw or CODE launch. Historical/full OS/physical/parity/edition and B2criterion6 gates remain open."
+  ]
+}
