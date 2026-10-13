@@ -48,15 +48,15 @@ static cs_m68k_call_result finish(cs_m68k_call_report *r,cs_m68k_call_result sta
 {r->status=status;return status;}
 static int sentinel(const cs_m68k_calls *rt,uint32_t at)
 {return at>=rt->config.sentinel_base && at-rt->config.sentinel_base<CS_M68K_CALL_DEPTH*2u;}
-cs_m68k_call_result cs_m68k_call(cs_m68k_calls *rt,const cs_m68k_call_request *q,
-    cs_trap_frame *f,cs_m68k_call_report *r)
+cs_m68k_call_result cs_m68k_call_using(cs_m68k_calls *rt,const cs_m68k_call_request *q,
+    cs_trap_frame *f,cs_m68k_call_report *r,cs_m68k_call_step execute,void *context)
 {
     if(rt==0 || q==0 || f==0 || r==0) return CS_M68K_CALL_ARGUMENT;
     r->status=CS_M68K_CALL_OK;r->cpu=CS_M68K_OK;r->memory=CS_GUEST_OK;
-    r->pc=q->entry;r->steps=0;r->changed_preserved=0;
+    r->pc=q->entry;r->steps=0;r->changed_preserved=0;r->entered=0;
     if(rt->tag!=CALL_TAG || rt->gateway==0 || !valid(rt->map,&rt->config,&rt->options))
         return finish(r,CS_M68K_CALL_CONFIG);
-    if(q->signature!=CS_M68K_PROC0 || q->context!=CS_M68K_CALL_ORDINARY)
+    if((q->signature!=CS_M68K_PROC0 && q->signature!=CS_M68K_REGISTERS) || q->context!=CS_M68K_CALL_ORDINARY)
         return finish(r,CS_M68K_CALL_SIGNATURE);
     if(q->budget==0 || q->budget>CS_M68K_CALL_BUDGET) return finish(r,CS_M68K_CALL_ARGUMENT);
     if(rt->depth>=rt->config.max_depth) return finish(r,CS_M68K_CALL_DEPTH_LIMIT);
@@ -75,6 +75,7 @@ cs_m68k_call_result cs_m68k_call(cs_m68k_calls *rt,const cs_m68k_call_request *q
     unsigned slot=rt->depth;
     uint32_t token=rt->config.sentinel_base+slot*2u;
     rt->remaining[slot]=q->budget;rt->used[slot]=0;rt->sp[slot]=f->a[7];++rt->depth;
+    r->entered=1;
     for(unsigned i=0;i<4;++i) push.writable[i]=(uint8_t)(token>>((3u-i)*8u));
     f->a[7]-=4;f->a[5]=q->a5;f->pc=q->entry;
     cs_m68k_stack_limits limits={rt->config.stack_base,caller.a[7]-rt->config.stack_base};
@@ -86,7 +87,8 @@ cs_m68k_call_result cs_m68k_call(cs_m68k_calls *rt,const cs_m68k_call_request *q
         if(exhausted) {status=CS_M68K_CALL_BUDGET_LIMIT;break;}
         for(unsigned i=0;i<rt->depth;++i) {--rt->remaining[i];++rt->used[i];}
         r->pc=f->pc;
-        r->cpu=cs_m68k_bus_step_bounded(rt->map,rt->gateway,f,&bus,&rt->options,&limits);
+        r->cpu=execute==0?cs_m68k_bus_step_bounded(rt->map,rt->gateway,f,&bus,&rt->options,&limits):
+            execute(context,f,&bus,&limits);
         r->memory=bus.memory;
         if(r->cpu!=CS_M68K_OK) {status=CS_M68K_CALL_CPU;break;}
         if(sentinel(rt,f->pc)) {
@@ -106,3 +108,6 @@ cs_m68k_call_result cs_m68k_call(cs_m68k_calls *rt,const cs_m68k_call_request *q
     rt->remaining[slot]=0;rt->used[slot]=0;rt->sp[slot]=0;--rt->depth;
     return finish(r,status);
 }
+cs_m68k_call_result cs_m68k_call(cs_m68k_calls *rt,const cs_m68k_call_request *q,
+    cs_trap_frame *f,cs_m68k_call_report *r)
+{return cs_m68k_call_using(rt,q,f,r,0,0);}

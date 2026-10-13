@@ -31,7 +31,7 @@ jobs:
         run: .\scripts\Verify-Bootstrap.ps1
       - name: Verify hosted core, loader, exceptions, devices, boot media and unloaded fault fixtures
         shell: powershell
-        run: .\scripts\Verify-GuestCalls.ps1 -BuildRoot build\media-verification -Sanitizers
+        run: .\scripts\Verify-GuestPatches.ps1 -BuildRoot build\media-verification -Sanitizers
 
   m68k-rom:
     runs-on: ubuntu-24.04
@@ -75,6 +75,14 @@ jobs:
         with:
           name: classick-guest-calls-build
           path: ${{ runner.temp }}/classick-guest-calls/manifest.json
+          if-no-files-found: error
+      - name: Audit typed bounded register patch closure and original encoding
+        run: python3 scripts/Verify-GuestPatchesM68k.py --tool-root "$RUNNER_TEMP/classick-m68k/root" --output "$RUNNER_TEMP/classick-guest-patches"
+      - name: Retain typed guest-patch build manifest
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
+        with:
+          name: classick-guest-patches-build
+          path: ${{ runner.temp }}/classick-guest-patches/manifest.json
           if-no-files-found: error
       - name: Retain own ROM and sanitized build manifest
         uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6

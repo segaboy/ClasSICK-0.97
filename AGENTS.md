@@ -3,6 +3,15 @@
 Read `docs/clean-room/POLICY.md`, `CONTRIBUTING.md`, and
 `provenance/README.md` before researching or changing this project.
 
+- On 2026-10-13 the owner said "Continue" after bounded guest calls and the
+  proposal to connect guest trap patches and calling rules (SRC-0121).
+  SPEC-0027 / ADR-0031 authorizes a separate opt-in typed register patch executor,
+  original probes/tests, compiler/CI and ordinary Git/HQ/wiki evidence. This
+  supersedes the preceding slice's no-guest-patch-installation limit only within
+  this bounded hosted profile. Preserve all six research originals; no new boot
+  binding, VM/emulator/reference trial, native application/SDK, QuickDraw, UART
+  body work, delegation, new chats, automation or OneNote. All standing gates.
+
 - On 2026-10-13 the owner said "Consider these items and then move on to the
   next thing" after supplying Claude's QuickDraw draft (SRC-0116/0117).
   SPEC-0026 / ADR-0030 covers checked JSR/JMP and a bounded ordinary returning

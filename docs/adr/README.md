@@ -44,3 +44,6 @@ evidence; foundational project constraints cannot be silently relaxed.
 Use [the template](template.md). Every substantive decision cites founding
 requirements or approved sources, distinguishes design from historical fact,
 and names how portability/compatibility will be tested.
+
+2026-10-13: [ADR-0031](0031-guest-patches.md) separates typed register patch
+execution and retained late effects from the legacy atomic built-in dispatch.

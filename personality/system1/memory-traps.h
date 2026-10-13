@@ -18,6 +18,7 @@ typedef struct {
 /* SPEC-0025: caller-owned disjoint live objects/map; no guest callbacks. */
 cs_trap_result cs_s1_traps_init(cs_s1_traps *out,cs_trap_gateway *gateway,
     cs_mm_manager *memory,uint32_t token_base,cs_m68k_data_policy data_policy);
+cs_trap_result cs_s1_traps_check(const cs_s1_traps *runtime);
 cs_trap_result cs_s1_trap_call(cs_s1_traps *s,uint16_t word,unsigned interrupt_context,
     cs_trap_frame *frame,cs_s1_report *report);
 cs_trap_result cs_s1_trap_direct(cs_s1_traps *s,uint32_t target,uint16_t word,

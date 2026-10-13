@@ -5,6 +5,49 @@ eligibility applies to the stated scope, not every resource reachable from a URL
 No Apple executable, source, disassembly, decompilation, or copied asset was used.
 Project-owned black-box native trials are recorded separately below.
 
+## SRC-0124 - Windows hosted conformance execution metadata
+
+Microsoft Learn, Application manifests, trustInfo/requestedExecutionLevel;
+[primary documentation](https://learn.microsoft.com/en-us/windows/win32/sbscs/application-manifests),
+reviewed 2026-10-13 (page updated2024-05-30). The asInvoker value runs with the
+launching process's permissions. Own tests/dispatch.manifest and numeric resource
+binding are independently written metadata using the documented interface;
+no Microsoft implementation or sample application copied. The existing approved
+compiler bundles supply their resource compiler. Scope is the hosted OS/core
+conformance executable only, not an x86 application/SDK or native boot behavior.
+Local WinError740 was observed before adding explicit ordinary execution level;
+renaming alone did not resolve it. No protection setting is changed.
+
+## SRC-0121 - Owner continuation into typed guest patches
+
+2026-10-13: "Continue" after the bounded guest-call checkpoint and proposed
+connection of guest trap patches and calling conventions. Scope: SPEC-0027
+contract, original hosted implementation/fixtures/tests, compiler/CI verification
+and ordinary Git/HQ/wiki records. No new boot binding, emulator/VM/reference
+trial, native application/SDK, QuickDraw, delegation or OneNote. Standing gates.
+
+## SRC-0122 - Published register trap and saved-original calling rules
+
+Additional review 2026-10-13 of SRC-0071, owner's unchanged 1985 Volumes I-III:
+I-94/95 (PDF104/105) register saves, bit8 A0 and low-word D0 condition test;
+II-383/384 (PDF951/952) trap interception, saved-original chaining and direct
+calls without the dispatcher's extra saves. Eligible published API prose only.
+Manual sample instructions were visible in extraction but are not used or copied
+as implementation. No algorithm, private structure, external executable or
+emulator source adopted. Engineering return/budget/stack/flags boundaries are
+SPEC-0027 choices; no January1984 behavior or full callback guarantee inferred.
+No new Promotional Edition comparison or visual page review claim.
+
+## SRC-0123 - Original typed register patch engineering profile
+
+SPEC-0027 / ADR-0031 / IMPL-0030 / TEST-0035. Separate original executor,
+explicit built-in versus guest-code identities, active signature saved-original
+veneers, checked returns and ancestor budgets. No native-address cast, SDK or
+application entry. Legacy atomic dispatch remains unchanged; pre-entry refusals
+and retained effects after guest entry are distinguished. Original ten-byte
+assembly/byte fixture plus synthetic boundary/nesting/failure cases, not copied
+manual samples or applications. Lead self-review; human provenance review pending.
+
 ## SRC-0120 - Own bounded guest-call execution and compiler verification
 
 2026-10-13, SPEC-0026 / TEST-0034; compiled source

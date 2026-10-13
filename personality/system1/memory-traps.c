@@ -15,6 +15,14 @@ static int tokens(const cs_trap_gateway *g,uint32_t base)
 }
 static int valid(const cs_s1_traps *s)
 {return s->magic==CS_S1_MAGIC && s->gateway!=0 && s->memory!=0 && s->memory->map!=0 && policy(s->data_policy);}
+cs_trap_result cs_s1_traps_check(const cs_s1_traps *s)
+{
+    uint32_t ignored;
+    if(s==0) return CS_TRAP_ARGUMENT;
+    if(!valid(s) || cs_trap_get(s->gateway,0,&ignored)!=CS_TRAP_OK ||
+        !tokens(s->gateway,s->token_base)) return CS_TRAP_STATE;
+    return CS_TRAP_OK;
+}
 cs_trap_result cs_s1_traps_init(cs_s1_traps *out,cs_trap_gateway *g,
     cs_mm_manager *m,uint32_t base,cs_m68k_data_policy p)
 {
