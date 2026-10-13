@@ -3,6 +3,15 @@
 Read `docs/clean-room/POLICY.md`, `CONTRIBUTING.md`, and
 `provenance/README.md` before researching or changing this project.
 
+- On 2026-10-13 the owner said "OK, continue with the next task" after the
+  proposed resource-fork reader (SRC-0126). Implement finalized SPEC-0024 /
+  ADR-0028, execute TEST-0032 using original generators/model/boundary fixtures,
+  and maintain compiler/CI/Git/HQ/wiki evidence. No Resource Manager loading,
+  MFS decoder, application execution, boot binding, VM/emulator/reference run,
+  native application/SDK, QuickDraw or UART body work. Preserve all research
+  originals and concurrent Claude launch/segment drafts. No delegation, new
+  chats, automation or OneNote; all source/role/owner/edition gates remain.
+
 - On 2026-10-13 the owner said "Continue" after bounded guest calls and the
   proposal to connect guest trap patches and calling rules (SRC-0121).
   SPEC-0027 / ADR-0031 authorizes a separate opt-in typed register patch executor,

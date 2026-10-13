@@ -5,6 +5,28 @@ eligibility applies to the stated scope, not every resource reachable from a URL
 No Apple executable, source, disassembly, decompilation, or copied asset was used.
 Project-owned black-box native trials are recorded separately below.
 
+## SRC-0126 - Owner direction to implement the resource-fork reader
+
+2026-10-13: "OK, continue with the next task" after the resource-fork reader
+proposal and a separate research-only launch/segment prompt for Claude. Scope:
+finalized SPEC-0024 / ADR-0028, original reader/fixtures/model, TEST-0032,
+compiler/CI verification and ordinary Git/HQ/wiki evidence. Research drafts are
+preserved unchanged; concurrent launch research stays separate. No new boot
+binding, VM/emulator/reference trial, native application/SDK, QuickDraw, MFS or
+Resource Manager loading, UART body work, delegation/chats/automation/OneNote.
+
+## SRC-0127 - Original bounded resource-fork reader implementation inputs
+
+SPEC-0024 / ADR-0028 / IMPL-0031 / TEST-0032. The already reviewed source/format
+facts in SRC-0106 and its independent lead review are reused; no new manual,
+implementation, executable, font, asset or emulator source is consulted. Original
+bytewise decoder and constant-state validation/lookup, explicit offset/overflow,
+warning and diagnostic rules. Internal C OS/core header, not a native application
+SDK or guest/native entry descriptor. Original declarative generators and an
+independent arbitrary-precision test model replace the undelivered draft checker.
+Engineering choices remain distinct from January1984/reference observations.
+Lead self-review; human provenance review pending.
+
 ## SRC-0125 - Own typed register patch verification
 
 2026-10-13, SPEC-0027 / TEST-0035; compiled source

@@ -1,6 +1,48 @@
 # TEST-0032 - Resource-fork conformance plan
 
-Planned, 2026-10-13; SPEC-0024 / ADR-0028 / SRC-0106. No code or test run.
+2026-10-13; SPEC-0024 / ADR-0028 / IMPL-0031 / SRC-0106/0126/0127.
+The owner authorized execution after the original intake. Current coverage is
+recorded here; accepted counts/revisions belong in separate development evidence.
+The original planning section below retains its earlier scope.
+
+## Implemented conformance
+
+Five hosted suites, an independent-model suite and a freestanding audit.
+Fourteen small declarative variants include empty types/resources, signed-ID
+endpoints, nonprinting/zero type keys, no/empty/255-byte names, odd positions,
+partial prefix, gaps, trailing bytes and map-before-data. Every truncated length
+of those variants is tested in an exact-sized native allocation; removing only
+tolerated trailing bytes can remain valid. Additional raw-prefix overlap and
+unaligned input cases check L-12 and bytewise decoding.
+
+Twenty-seven explicit malformed cases check header/region carry and bounds,
+fixed/table/reference overlaps/order, bad names, local length-prefix/payload
+limits and structural-before-content precedence. Argument sentinels, failed
+reconstruction of a still-valid view and interleaved independent views check
+publication and lifetime rules without deliberately dereferencing invalid native
+pointers. Requested duplicates preserve entries and unrelated keys remain usable.
+Shared local/name spans and warning combinations are accepted; references with
+misleading FFFFFF data offsets expose only their opaque specification.
+
+Large generated cases exercise unsigned type/reference/name positions at8000,
+the maximum24-bit length-prefix offset with a data region beyond16MiB, payload
+length32769 and a5000-entry dense list. Their semantic boundary truncations are
+checked; large payload bytes are not redundantly swept at every length. Large
+host buffers do not claim a128K execution profile.
+
+The original444-byte six-resource fixture has113664 single-byte mutations.
+An independent Python arbitrary-precision range model reconstructs semantic
+records and determines exact open status/field/position/warnings/work plus lookup
+status/metadata. The C harness compares all cases, output refusal atomicity and
+unchanged input. Python and C encoders independently agree on the base bytes.
+All generators/model/harness are delivered; the earlier undelivered checker is
+not used. Numerical outcomes and superseded preparation failures are recorded
+after the final compiler/CI checks.
+
+## Original intake plan
+
+Initially planned before implementation, 2026-10-13; SPEC-0024 / ADR-0028 /
+SRC-0106. At that intake there was no parser code or executed conformance.
 Claude's original draft has 14 proposed base variants and 37 case rows. Its
 unprovided throwaway checker is not reproducible project test evidence.
 

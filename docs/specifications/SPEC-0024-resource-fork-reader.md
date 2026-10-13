@@ -1,6 +1,6 @@
 # SPEC-0024 - Bounded read-only resource-fork reader
 
-Finalized engineering contract v1, 2026-10-13; not implemented or executed.
+Finalized engineering contract v1, 2026-10-13; implemented by IMPL-0031.
 Profile `classick-resource-reader-v1`; SRC-0106 / ADR-0028 / TEST-0032.
 Lead self-review; human provenance review pending. January 1984 conformance is
 unconfirmed. This specifies an OS/core format service, not an application SDK.
@@ -130,6 +130,41 @@ and the reader's warnings do not claim whole-file uniqueness or sharing analysis
 | L-12 | Raw [16,128) and [128,256) diagnostic spans only when each complete span fits; otherwise mark that span unavailable. They may overlap other regions in tolerated layouts and carry no inferred semantic meaning. |
 
 RF-1 through RF-9 remain historical/documentation questions; choosing an
-engineering result does not close them. TEST-0032 is a plan, not a passing run.
+engineering result does not close them. TEST-0032 records original conformance;
+accepted quantitative results belong in the separate implementation evidence.
 No MFS decoder, boot entry, emulator/VM, x86 application or reference observation
 is authorized by this specification. Existing owner/platform/edition gates persist.
+
+## Implementation ABI refinement - 2026-10-13
+
+The owner's next-task direction (SRC-0126) authorizes this reader's original
+implementation, TEST-0032 execution and compiler/CI/Git/HQ/wiki evidence. The
+preceding intake's no-implementation restriction is superseded for this slice;
+all boot, native-application, source/role and edition gates remain.
+
+The internal OS/core header is reader.h, not an application SDK. Open accepts a
+native size_t length and rejects values above UINT32_MAX before reading bytes.
+NULL input/view/report is ARGUMENT, including NULL input with zero length. A
+nonnull input with length below16 is TRUNCATED. Find requires an immutable
+constructor-produced view, valid output/report and an int32 ID in signed16 range.
+Cheap tag/span checks reject an invalid view as ARGUMENT; arbitrary forged native
+pointers or modified input/view remain outside the truthful caller contract.
+
+Views borrow the input and expose file spans, type/name positions/count and
+warnings. Prefix-span length zero denotes unavailable; available lengths are112
+and128. Entries expose type, signed ID, reference position, attributes, present
+name span (including empty names), local data span or numeric raw reference
+specification. No-name, unavailable data and ordinary specification fields are
+zeroed deterministically. Successful find reports the reference position;
+duplicates report the second matching key's position after completing the scan.
+
+Reports include status, field category, absolute file position, warnings and
+type/reference work counters. Structural reference lists are all checked before
+any entry's name/payload; then each entry's name precedes its payload. Range/carry
+diagnostics use the relevant stored length/offset field, or the local length
+prefix. Reader header documents the owned enum values. Warning bits separately
+cover detected layout, reserved map bytes, ordinary handles, attributes bits0/1,
+references, empty per-type lists and payload lengths above32768. Layout detection
+covers data base other than256, nonadjacent/reversed data/map, trailing bytes,
+type-list position other than28 and structural reference/name gaps. It is not an
+audit of unreferenced payload/name bytes or a sharing/uniqueness detector.

@@ -31,7 +31,7 @@ jobs:
         run: .\scripts\Verify-Bootstrap.ps1
       - name: Verify hosted core, loader, exceptions, devices, boot media and unloaded fault fixtures
         shell: powershell
-        run: .\scripts\Verify-GuestPatches.ps1 -BuildRoot build\media-verification -Sanitizers
+        run: .\scripts\Verify-ResourceReader.ps1 -BuildRoot build\media-verification -Sanitizers
 
   m68k-rom:
     runs-on: ubuntu-24.04
@@ -83,6 +83,14 @@ jobs:
         with:
           name: classick-guest-patches-build
           path: ${{ runner.temp }}/classick-guest-patches/manifest.json
+          if-no-files-found: error
+      - name: Audit original bounded resource reader closure and storage
+        run: python3 scripts/Verify-ResourceM68k.py --tool-root "$RUNNER_TEMP/classick-m68k/root" --output "$RUNNER_TEMP/classick-resource-reader"
+      - name: Retain resource-reader build manifest
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
+        with:
+          name: classick-resource-reader-build
+          path: ${{ runner.temp }}/classick-resource-reader/manifest.json
           if-no-files-found: error
       - name: Retain own ROM and sanitized build manifest
         uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
