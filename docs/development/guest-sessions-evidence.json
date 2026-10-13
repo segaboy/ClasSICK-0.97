@@ -1,0 +1,653 @@
+{
+  "schema_version": 1,
+  "specification": "SPEC-0028",
+  "implementation": "IMPL-0032",
+  "test": "TEST-0036",
+  "source": "SRC-0134",
+  "profile": "classick-guest-sessions-v1",
+  "classification": "hosted-session-and-standalone-compiler-verification",
+  "verified_on": "2026-10-13",
+  "compiled_source_revision": "d9c0f55cc08e11306463f7721afece90013cf01f",
+  "historical_1984_confirmed": false,
+  "new_native_application": false,
+  "new_boot_image_integration": false,
+  "new_vm_or_emulator_runs": false,
+  "verification": {
+    "initial_ctest_checks": 1542,
+    "initial_configuration_totals": [
+      184,
+      184,
+      184,
+      157,
+      184,
+      169,
+      169,
+      169,
+      142
+    ],
+    "final_affected_ctest_checks": 63,
+    "final_affected_configuration_totals": [
+      7,
+      7,
+      7,
+      7,
+      7,
+      7,
+      7,
+      7,
+      7
+    ],
+    "unaffected_prior_ctest_checks_retained": 1479,
+    "session_object_audits": 10,
+    "hosted_twins": {
+      "clang": "ddc3d0be565bcbe4fda3ce95395cbc929ffdf3783a63afb07b673326c6e083b9",
+      "gcc": "145cc2b73eed2316a06678d46da1c10e12fbd7a2ac66fcbb29734d2077b1a9de"
+    },
+    "local_matrix_log_sha256": "cc88943916aef29a0d6bfb85667add29d14d1d1b23930b1ed0d5a3874845877d",
+    "final_affected_log_sha256": "657cfdbe1aa0c71cef7c16c4920bb359feb71dce0dba77f357698b55a7450fab",
+    "ci_log_sha256": "fc88fd38d9322e503421590f6b216ce4db49e49b72e573260376b21447f2086b",
+    "ci_url": "https://github.com/segaboy/ClasSICK-0.97/actions/runs/38470853695",
+    "ci_status": "success",
+    "ci_current_source_complete_matrix": 1542,
+    "ci_additional_bootstrap_ctest_checks": 368
+  },
+  "session": {
+    "original_fixture_bytes": 18,
+    "original_fixture_steps": 7,
+    "root_counts_toward_depth": true,
+    "complete_caller_frame_restoration": true,
+    "retained_guest_effects": true,
+    "exit_request_root_only": true,
+    "actual_exit_to_shell_bound": false,
+    "toolbox_completion_bound": false,
+    "heap_reset": false,
+    "loader": false
+  },
+  "m68k": {
+    "manifest": {
+      "schema_version": 1,
+      "specification": "SPEC-0028",
+      "compiler": "m68k-linux-gnu-gcc-13 (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0",
+      "object_audits": 12,
+      "complete_relocatable_links": 2,
+      "assembler_fixture_bytes": 18,
+      "assembler_fixture_sha256": "94878316d88b5097b7198eda392145ed9128b749888b20ac61473447ceb6eb70",
+      "storage_bytes_68000": {
+        "session": 124,
+        "report": 98,
+        "request": 16
+      },
+      "profiles": [
+        {
+          "optimization": "-O0",
+          "objects": 6,
+          "combined_sha256": "fd3acb496855b262206827a301df9f036b6b0c9ebc95d73764b9d94243223e8b",
+          "stack_frames": [
+            {
+              "function": "cs_guest_validate",
+              "bytes": 20
+            },
+            {
+              "function": "cs_guest_window",
+              "bytes": 20
+            },
+            {
+              "function": "operand",
+              "bytes": 24
+            },
+            {
+              "function": "cs_guest_read",
+              "bytes": 44
+            },
+            {
+              "function": "cs_guest_write",
+              "bytes": 36
+            },
+            {
+              "function": "copy_frame",
+              "bytes": 4
+            },
+            {
+              "function": "begin",
+              "bytes": 0
+            },
+            {
+              "function": "done",
+              "bytes": 0
+            },
+            {
+              "function": "read_value",
+              "bytes": 24
+            },
+            {
+              "function": "extension",
+              "bytes": 24
+            },
+            {
+              "function": "mask",
+              "bytes": 0
+            },
+            {
+              "function": "flags",
+              "bytes": 8
+            },
+            {
+              "function": "effective",
+              "bytes": 16
+            },
+            {
+              "function": "source",
+              "bytes": 36
+            },
+            {
+              "function": "preflight_store",
+              "bytes": 36
+            },
+            {
+              "function": "stack_span",
+              "bytes": 0
+            },
+            {
+              "function": "move",
+              "bytes": 64
+            },
+            {
+              "function": "condition",
+              "bytes": 20
+            },
+            {
+              "function": "target",
+              "bytes": 24
+            },
+            {
+              "function": "branch",
+              "bytes": 52
+            },
+            {
+              "function": "return_instruction",
+              "bytes": 28
+            },
+            {
+              "function": "sign_extend",
+              "bytes": 4
+            },
+            {
+              "function": "add_offset",
+              "bytes": 4
+            },
+            {
+              "function": "control_address",
+              "bytes": 48
+            },
+            {
+              "function": "jump",
+              "bytes": 28
+            },
+            {
+              "function": "aline",
+              "bytes": 60
+            },
+            {
+              "function": "step",
+              "bytes": 156
+            },
+            {
+              "function": "cs_m68k_bus_step_options",
+              "bytes": 24
+            },
+            {
+              "function": "cs_m68k_bus_step_bounded",
+              "bytes": 24
+            },
+            {
+              "function": "cs_m68k_bus_step",
+              "bytes": 20
+            },
+            {
+              "function": "mode",
+              "bytes": 4
+            },
+            {
+              "function": "span",
+              "bytes": 0
+            },
+            {
+              "function": "contains",
+              "bytes": 0
+            },
+            {
+              "function": "begin",
+              "bytes": 4
+            },
+            {
+              "function": "finish",
+              "bytes": 0
+            },
+            {
+              "function": "cs_m68k_aline",
+              "bytes": 20
+            },
+            {
+              "function": "read32",
+              "bytes": 0
+            },
+            {
+              "function": "write32",
+              "bytes": 0
+            },
+            {
+              "function": "cs_m68k_step",
+              "bytes": 52
+            },
+            {
+              "function": "rom_address",
+              "bytes": 0
+            },
+            {
+              "function": "config_valid",
+              "bytes": 8
+            },
+            {
+              "function": "state_valid",
+              "bytes": 4
+            },
+            {
+              "function": "executable",
+              "bytes": 8
+            },
+            {
+              "function": "cs_trap_decode",
+              "bytes": 4
+            },
+            {
+              "function": "cs_trap_init",
+              "bytes": 8
+            },
+            {
+              "function": "cs_trap_get",
+              "bytes": 12
+            },
+            {
+              "function": "cs_trap_set",
+              "bytes": 12
+            },
+            {
+              "function": "intrinsic",
+              "bytes": 24
+            },
+            {
+              "function": "begin_report",
+              "bytes": 0
+            },
+            {
+              "function": "cs_trap_call",
+              "bytes": 32
+            },
+            {
+              "function": "cs_trap_direct",
+              "bytes": 20
+            },
+            {
+              "function": "copy_frame",
+              "bytes": 4
+            },
+            {
+              "function": "interval",
+              "bytes": 40
+            },
+            {
+              "function": "valid",
+              "bytes": 28
+            },
+            {
+              "function": "cs_m68k_call_init",
+              "bytes": 16
+            },
+            {
+              "function": "finish",
+              "bytes": 0
+            },
+            {
+              "function": "sentinel",
+              "bytes": 0
+            },
+            {
+              "function": "cs_m68k_call_using",
+              "bytes": 228
+            },
+            {
+              "function": "cs_m68k_call",
+              "bytes": 24
+            },
+            {
+              "function": "copy_frame",
+              "bytes": 4
+            },
+            {
+              "function": "translate",
+              "bytes": 0
+            },
+            {
+              "function": "cs_m68k_session_init",
+              "bytes": 24
+            },
+            {
+              "function": "execute",
+              "bytes": 36
+            },
+            {
+              "function": "cs_m68k_session_request_exit",
+              "bytes": 0
+            },
+            {
+              "function": "cs_m68k_session_call",
+              "bytes": 24
+            },
+            {
+              "function": "cs_m68k_session_run_using",
+              "bytes": 152
+            },
+            {
+              "function": "cs_m68k_session_run",
+              "bytes": 24
+            }
+          ]
+        },
+        {
+          "optimization": "-Os",
+          "objects": 6,
+          "combined_sha256": "163c3bd64c580774aaad3dda3176ccfe218cbe03d10efa8eedc8356634770e57",
+          "stack_frames": [
+            {
+              "function": "cs_guest_validate",
+              "bytes": 28
+            },
+            {
+              "function": "cs_guest_window",
+              "bytes": 40
+            },
+            {
+              "function": "operand",
+              "bytes": 24
+            },
+            {
+              "function": "cs_guest_read",
+              "bytes": 36
+            },
+            {
+              "function": "cs_guest_write",
+              "bytes": 40
+            },
+            {
+              "function": "stack_span",
+              "bytes": 8
+            },
+            {
+              "function": "add_offset",
+              "bytes": 4
+            },
+            {
+              "function": "preflight_store",
+              "bytes": 40
+            },
+            {
+              "function": "read_value",
+              "bytes": 24
+            },
+            {
+              "function": "extension",
+              "bytes": 28
+            },
+            {
+              "function": "effective",
+              "bytes": 12
+            },
+            {
+              "function": "step",
+              "bytes": 200
+            },
+            {
+              "function": "cs_m68k_bus_step_options",
+              "bytes": 24
+            },
+            {
+              "function": "cs_m68k_bus_step_bounded",
+              "bytes": 8
+            },
+            {
+              "function": "cs_m68k_bus_step",
+              "bytes": 20
+            },
+            {
+              "function": "span",
+              "bytes": 4
+            },
+            {
+              "function": "contains",
+              "bytes": 4
+            },
+            {
+              "function": "cs_m68k_aline",
+              "bytes": 28
+            },
+            {
+              "function": "cs_m68k_step",
+              "bytes": 60
+            },
+            {
+              "function": "rom_address.isra",
+              "bytes": 0
+            },
+            {
+              "function": "executable",
+              "bytes": 16
+            },
+            {
+              "function": "config_valid",
+              "bytes": 28
+            },
+            {
+              "function": "state_valid",
+              "bytes": 4
+            },
+            {
+              "function": "cs_trap_decode",
+              "bytes": 8
+            },
+            {
+              "function": "cs_trap_init",
+              "bytes": 12
+            },
+            {
+              "function": "cs_trap_get",
+              "bytes": 24
+            },
+            {
+              "function": "cs_trap_set",
+              "bytes": 24
+            },
+            {
+              "function": "intrinsic",
+              "bytes": 24
+            },
+            {
+              "function": "cs_trap_call",
+              "bytes": 32
+            },
+            {
+              "function": "cs_trap_direct",
+              "bytes": 32
+            },
+            {
+              "function": "interval",
+              "bytes": 56
+            },
+            {
+              "function": "valid",
+              "bytes": 44
+            },
+            {
+              "function": "cs_m68k_call_init",
+              "bytes": 32
+            },
+            {
+              "function": "cs_m68k_call_using",
+              "bytes": 252
+            },
+            {
+              "function": "cs_m68k_call",
+              "bytes": 24
+            },
+            {
+              "function": "copy_frame",
+              "bytes": 12
+            },
+            {
+              "function": "execute",
+              "bytes": 44
+            },
+            {
+              "function": "cs_m68k_session_init",
+              "bytes": 24
+            },
+            {
+              "function": "cs_m68k_session_request_exit",
+              "bytes": 0
+            },
+            {
+              "function": "cs_m68k_session_call",
+              "bytes": 28
+            },
+            {
+              "function": "cs_m68k_session_run_using",
+              "bytes": 176
+            },
+            {
+              "function": "cs_m68k_session_run",
+              "bytes": 24
+            }
+          ]
+        }
+      ],
+      "inputs": {
+        "core/memory/guest.c": "9678b43e3dc82df2f66119794f08cb2a0dbd85c07a031085daba35b230b6f8a1",
+        "core/cpu/m68k-bus.c": "fbd450d38774fecd4b95bb09b1bb448f16c30884aef091567e5d383c15cb54d8",
+        "core/cpu/m68k.c": "c6c169c175a71bb24d2f6f375d5bca7dea4469ae4407c43159b3b27c6db613b8",
+        "core/services/traps.c": "585adf0742f51390bc44ba086b58e22361bb7188c1205bcc11968875f0cbb1ef",
+        "core/cpu/m68k-call.c": "83979538a7bbd666eafa3f33c483dd559beb6ca69f2d3e754c0b5ec95b7c96a1",
+        "core/cpu/m68k-session.c": "d4a430acf7d139ebeaa82de8b35ece0d1d2e8914447e8e0248137c9f9a17a5b3",
+        "core/cpu/m68k-session.h": "aea400413449630489f6fa0a8a6ab924271e254a4fd0d94724bc82dd9c70bdee",
+        "core/cpu/m68k-call.h": "5f320112485dfd98cd868e290bc1d3efdb8a0f3e81fbb4eb81fb93e6494cab1d",
+        "core/cpu/m68k-bus.h": "a0a8fa1ca3075be2c3f6eecfe18f45ef0c3db3c338af00d5451edc293ad2ce0a",
+        "core/cpu/m68k.h": "db12b5678ffe4b471082a3b9f6840719148d10032c2ba6dfeb2a9d83a03b7ad5",
+        "core/memory/guest.h": "5a89e549470bd0f3ffe50e7fb714342ff7dc6af0d49a0c154a7baebdf7e113ff",
+        "core/services/traps.h": "a3346547364a2237027dbe1d134b81129e80f9731f4c49c813fc9f68563fd782",
+        "apps/guest-session-probe/program.h": "0c0e7bbff4b531b5013a58f335c799efdef48fe4cda7c318de345a02518c500d",
+        "apps/guest-session-probe/program.S": "65e40f68be49681a5731ffe303aa27ad6119a70f392a57be3779e89b1087d24e",
+        "docs/specifications/SPEC-0028-bounded-guest-sessions.md": "b01091488f96e5bf16af2b1638a2145ca4952371a3edbcecad1939cba822e777",
+        "scripts/Verify-GuestSessionsM68k.py": "45b8d6f9aa41b7bf53ca9fd8a15a72b5c39dae474083dc5738fe82af215d6155",
+        "scripts/Verify-GuestM68k.py": "548addd87816af0f0f190c4f82c6b17083155e3703d28c9d124a0038acf6ed68"
+      },
+      "tool_lock_sha256": "a2fe02f949288826f6a1d11b55df1d3305aab4fb4726da83a4fb8695b7f21898",
+      "native_executed": false,
+      "rom_integration": false
+    },
+    "ci_manifest_equal_local": true
+  },
+  "inputs": {
+    "core/cpu/m68k-session.c": "d4a430acf7d139ebeaa82de8b35ece0d1d2e8914447e8e0248137c9f9a17a5b3",
+    "core/cpu/m68k-session.h": "aea400413449630489f6fa0a8a6ab924271e254a4fd0d94724bc82dd9c70bdee",
+    "tests/m68k-session.c": "8a49d7a15bc49588097078be82d7727b2004bb4b04d0035fc41c696490142af1",
+    "apps/guest-session-probe/program.h": "0c0e7bbff4b531b5013a58f335c799efdef48fe4cda7c318de345a02518c500d",
+    "apps/guest-session-probe/program.S": "65e40f68be49681a5731ffe303aa27ad6119a70f392a57be3779e89b1087d24e",
+    "scripts/Verify-GuestSessions.ps1": "cf294c52d3e3e73f315907f323745f0c2794d25d5cd0fb54efa6e29584ff2736",
+    "scripts/Verify-SessionObjects.ps1": "6e5a93672aea99455f605f60b196b8e067219b69185048acd6d8692994680e12",
+    "scripts/Verify-GuestSessionsM68k.py": "45b8d6f9aa41b7bf53ca9fd8a15a72b5c39dae474083dc5738fe82af215d6155"
+  },
+  "regression": {
+    "unchanged_efi_profiles": {
+      "none": [
+        {
+          "case": "clang-64-O0",
+          "sha256": "4ded876949c54def00634eb0c8e4367bcbb6d94fe255fbdbd861ec88b16aa18c",
+          "size_bytes": 68608,
+          "image_size": 86016,
+          "relocations": 3,
+          "status": "passed-unloaded"
+        },
+        {
+          "case": "clang-64-O2",
+          "sha256": "6e2ea128e819923e6f88fd933bf40c7a7c9c7871d18d59c08315976a610269a7",
+          "size_bytes": 48640,
+          "image_size": 65536,
+          "relocations": 3,
+          "status": "passed-unloaded"
+        }
+      ],
+      "ud": [
+        {
+          "case": "clang-64-O0",
+          "sha256": "476236db2e81008323b7f8b70b7f2c47cf4406c8d89399df653459b5eac33135",
+          "size_bytes": 68608,
+          "image_size": 86016,
+          "relocations": 3,
+          "status": "passed-unloaded"
+        },
+        {
+          "case": "clang-64-O2",
+          "sha256": "569f1540d6013777840c07f4879856a5625c3a1631baf2ca0434f3a9c360c14b",
+          "size_bytes": 48640,
+          "image_size": 65536,
+          "relocations": 3,
+          "status": "passed-unloaded"
+        }
+      ],
+      "gp": [
+        {
+          "case": "clang-64-O0",
+          "sha256": "a36b3ef4194c88a71d9144fc4fb912d44a903739309125ee18ce2e4545ed1b5e",
+          "size_bytes": 68608,
+          "image_size": 86016,
+          "relocations": 3,
+          "status": "passed-unloaded"
+        },
+        {
+          "case": "clang-64-O2",
+          "sha256": "c1b277a48c1b77f57e7a4966c1983c1b0941911e3da73d53d6217b989a14f4ba",
+          "size_bytes": 48640,
+          "image_size": 65536,
+          "relocations": 3,
+          "status": "passed-unloaded"
+        }
+      ]
+    },
+    "unchanged_rom_sha256": [
+      "20175281806971dd9b21f50f8f726947b162da38fe0b10571311515c0f313b22",
+      "578f8a727de9f63d735988cc655739c6f68fd8ba8ad18540702bf56c8dce92d6"
+    ],
+    "ci_rom_inputs_match_prior_baseline": true,
+    "research_draft_sha256": {
+      "docs/research/callback-catalog-draft.json": "952715b94ae45822878ad7297d022b28b130e3de27762b51541cc3f537bc75fd",
+      "docs/research/callback-catalog-draft.md": "156bcf56f0c962045ffac30fbd5621ecae81a5a417a9970519102fd434764aee",
+      "docs/research/launch-segment-contract-draft.md": "b6054b8ba5b039281c2ae85b059a62eaa6e51d08a3198705ca25ed78ec789a13",
+      "docs/research/quickdraw-draft.md": "5b4823cc6a498c00a74476dd16846c24c84adfb169b55b5abd62e0fcc104a881",
+      "docs/research/resourcefork-draft.md": "d1976f32ffd4666f3dbc1c4073b964c08c01de388c1c6e18990270e4fecdf83f",
+      "docs/research/quickdraw-test-plan.md": "33d744e913749c1a63f0c75cd8b5c7c62e3cef4546265192ddae9dbf01bbaf81",
+      "docs/research/resourcefork-test-plan.md": "e7e612c6fa2114ea68e6bc55ae44dcbd4e0cefd4ed7ba7251460d9a730252692",
+      "docs/research/launch-segment-test-plan.md": "8fcbfdb6d057c93d87deccb4fdfdc8f421a18731f1cc7b262e41412a1bae89ad"
+    },
+    "concurrent_research_unreviewed": true
+  },
+  "preparation_corrections": [
+    "Inactive option/configuration ownership was clarified in header/contract prose; all63 affected final checks and ten object audits/twins repeated. Earlier native manifest superseded; native profile outputs remained identical.",
+    "Initial staged documentation guard caught one inherited whitespace-only line in the generated object audit; fixed before publishing, final493-file guard passed.",
+    "Private regression helper initially looked for EFI reports in test-profile folders; corrected to efi/fault-ud/fault-gp, whose six image hashes matched. No conformance or image failure."
+  ],
+  "limits": [
+    "Lead self-review; human provenance review pending.",
+    "Actual Toolbox signatures/auto-pop/continuation/no-return propagation through returning callbacks remain separate contracts.",
+    "No loader, heap reset, native application/SDK, boot binding or new VM/emulator/reference run.",
+    "Partial metadata/frame costs only; no cumulative stack high-water or final128K proof.",
+    "Historical/physical/full OS/parity/three editions and B2criterion6 gates remain open."
+  ]
+}

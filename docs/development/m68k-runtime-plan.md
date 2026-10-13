@@ -21,6 +21,22 @@ foundation paragraphs are dated checkpoints, including their pre-intake status.
 
 ## Current foundation
 
+Latest execution checkpoint, 2026-10-13: SPEC-0028 / ADR-0032 provides the
+owned bounded session and root-step exit boundary. Complete caller restoration,
+separate guest-stop diagnostics, retained effects, shared budgets/depth and
+explicit exit admission pass. [Evidence](guest-sessions-evidence.md) records
+initial1542 plus63 final affected checks (1479 unaffected retained), ten final
+object audits/twins, matching twelve-module-audit/two-link68000 manifests and
+18-byte/seven-step original encoding. CI passes final1542 plus368 bootstrap checks.
+Session/report/request124/98/16 and closure frames228/252 are partial costs only.
+No actual ExitToShell/Toolbox stack/completion binding, loader, heap reset or boot
+entry. Eight earlier research originals remain unchanged; concurrent heap/convention
+drafts stay unreviewed for separate intake. Next contract: typed Toolbox stack
+arguments and returning/continuation/no-return completion; lifetime/reset follows
+Claude's separately reviewed research. All source/native/VM/role/edition gates.
+
+
+
 Latest format checkpoint, 2026-10-13: SPEC-0024 / IMPL-0031 now implements the
 bounded read-only resource-fork reader. Exact type/ID lookup, structural-first
 bounds, duplicate refusal, opaque references and output preservation pass original

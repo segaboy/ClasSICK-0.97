@@ -47,3 +47,6 @@ and names how portability/compatibility will be tested.
 
 2026-10-13: [ADR-0031](0031-guest-patches.md) separates typed register patch
 execution and retained late effects from the legacy atomic built-in dispatch.
+
+2026-10-13: [ADR-0032](0032-bounded-guest-sessions.md) reuses owned call bounds
+for session termination, complete caller restoration and retained guest effects.

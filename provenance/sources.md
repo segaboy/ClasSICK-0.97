@@ -5,6 +5,22 @@ eligibility applies to the stated scope, not every resource reachable from a URL
 No Apple executable, source, disassembly, decompilation, or copied asset was used.
 Project-owned black-box native trials are recorded separately below.
 
+## SRC-0134 - Own bounded session verification
+
+2026-10-13, SPEC-0028 / TEST-0036 / IMPL-0032, compiled source `d9c0f55cc08e11306463f7721afece90013cf01f`.
+Initial complete1542 CTests in nine profiles pass; after ownership-prose clarification,
+all63 affected final checks, ten final standalone audits and both compiler twins pass.
+Unchanged1479 results retained. GNU68000 twelve module audits/two complete links
+and independent18-byte encoding pass; full local/CI manifests match. Session/report/
+request124/98/16 bytes, closure frames228/252 are partial costs, not final budgets.
+[CI](https://github.com/segaboy/ClasSICK-0.97/actions/runs/38470853695) passes both jobs,
+the full final-source1542 plus368 bootstrap checks. Six EFI/two own ROM fingerprints
+and eight original research hashes unchanged; concurrent new research is unreviewed.
+[Evidence](../docs/development/guest-sessions-evidence.md) preserves exact scope and
+preparation corrections. No Toolbox binding, loader/heap reset, native application,
+boot integration, VM/emulator/reference observation or historical/edition closure.
+Lead self-review; human review pending; all standing owner/source/role gates remain.
+
 ## SRC-0131 - Owner research-assignment presentation preference
 
 2026-10-13: "Everytime you provide research requests for other tools, you must
