@@ -1,9 +1,13 @@
 # Milestone roadmap
 
-2026-10-12 current: SPEC-0022 checked data/selected MOVE/MOVEA/branches/BSR/RTS
-pass [hosted/compiler verification](development/guest-memory-evidence.md).
+2026-10-12 current: SPEC-0023 bounded pointer/handle allocation, size, resize,
+lock and copy services pass [hosted/compiler verification](development/memory-manager-evidence.md):
+1,245 local checks and both CI jobs, with an exactly matching 68000 manifest.
+Thirteen guest interface contracts are registered. The 32-object/fixed-zone
+engineering profile and register adapter still need typed guest trap binding
+and explicit data-address normalization; no new boot entry or native trial.
 The [68000 runtime plan](development/m68k-runtime-plan.md), SRC-0099 / ADR-0026,
-orders interface records, Memory Manager finalization, JSR/JMP/nested guest calls,
+records the completed registry/Memory Manager subset and orders JSR/JMP/nested guest calls,
 typed dispatch and CODE-only launch selection. X86 application/native test/loader
 work waits until the owner explicitly confirms the complete 68k experience;
 own native OS/core/tools are unaffected. Future emulator/VM runs need his

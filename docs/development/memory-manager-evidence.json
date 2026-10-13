@@ -1,0 +1,455 @@
+{
+  "schema_version": 1,
+  "specification": "SPEC-0023",
+  "test": "TEST-0031",
+  "source": "SRC-0104",
+  "profile": "classick-memory-manager-v1",
+  "classification": "hosted-services-and-standalone-compiler-verification",
+  "verified_on": "2026-10-12",
+  "compiled_source_revision": "58a1ca5ef680e2e7f7eed85d3880bbed42eb675f",
+  "historical_1984_confirmed": false,
+  "new_native_application": false,
+  "new_boot_image_integration": false,
+  "new_vm_or_emulator_runs": 0,
+  "verification": {
+    "ctest_checks": 1245,
+    "configuration_totals": [
+      151,
+      151,
+      151,
+      124,
+      151,
+      136,
+      136,
+      136,
+      109
+    ],
+    "new_manager_object_audits": 30,
+    "prior_guest_object_audits": 30,
+    "prior_cpu_object_audits": 20,
+    "prior_service_object_audits": 20,
+    "model_operations": 1500,
+    "unsupported_register_words": 65448,
+    "interface_records": 13,
+    "interface_refusal_controls": 8,
+    "common_probe_checks": 20,
+    "common_probe_status": 0,
+    "common_probe_signature": "48454131",
+    "local_log_sha256": "bb728fe7e23ddd0ac386f9e567cc9768eb97753a03e0ff89e793b2821a364d3d",
+    "ci_log_sha256": "23f3140221918be69b3d6712ae2f162090c6b8033d3c62096974e66e8f5159e8",
+    "ci_status": "success",
+    "ci_url": "https://github.com/segaboy/ClasSICK-0.97/actions/runs/38328896626",
+    "hosted_twins": {
+      "clang": "52779867568c6063d9ed64ffcc01d8b074b2703d4ccd3fcc2d725d97a6f6b543",
+      "gcc": "afadf4df0904c137f1e26900f406f9a1faab43c14f158c3cfee37b0bc2185a7e"
+    }
+  },
+  "manager": {
+    "operations": [
+      "NewPtr",
+      "DisposPtr",
+      "GetPtrSize",
+      "SetPtrSize",
+      "NewHandle",
+      "DisposHandle",
+      "GetHandleSize",
+      "SetHandleSize",
+      "HLock",
+      "HUnlock",
+      "BlockMove"
+    ],
+    "live_object_limit": 32,
+    "configured_zones": 2,
+    "master_cell_band_bytes_per_zone": 128,
+    "full_zone_record_layout": false,
+    "automatic_zone_growth": false,
+    "purging_or_grow_zone_callbacks": false,
+    "directory_or_cpu_binding": false,
+    "core_address_policy": "strict-24-bit-logical-no-masking",
+    "register_adapter": "separate-value-frame-contract"
+  },
+  "m68k": {
+    "schema_version": 1,
+    "specification": "SPEC-0023",
+    "compiler": "m68k-linux-gnu-gcc-13 (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0",
+    "object_audits": 10,
+    "complete_relocatable_links": 2,
+    "metadata_bytes": 672,
+    "record_bytes": 20,
+    "guest_cell_reserve_bytes": 256,
+    "profiles": [
+      {
+        "optimization": "-O0",
+        "objects": 5,
+        "combined_sha256": "c1bb191da029289299fe4507ee2be22d12b361317f71bb62d1604597cbe91892",
+        "stack_frames": [
+          {
+            "function": "cs_guest_validate",
+            "bytes": 20
+          },
+          {
+            "function": "cs_guest_window",
+            "bytes": 20
+          },
+          {
+            "function": "operand",
+            "bytes": 24
+          },
+          {
+            "function": "cs_guest_read",
+            "bytes": 44
+          },
+          {
+            "function": "cs_guest_write",
+            "bytes": 36
+          },
+          {
+            "function": "zone",
+            "bytes": 0
+          },
+          {
+            "function": "read32",
+            "bytes": 0
+          },
+          {
+            "function": "write32",
+            "bytes": 0
+          },
+          {
+            "function": "intersects",
+            "bytes": 0
+          },
+          {
+            "function": "extent",
+            "bytes": 0
+          },
+          {
+            "function": "configuration",
+            "bytes": 52
+          },
+          {
+            "function": "cs_mm_init",
+            "bytes": 100
+          },
+          {
+            "function": "state",
+            "bytes": 48
+          },
+          {
+            "function": "compact",
+            "bytes": 36
+          },
+          {
+            "function": "fits",
+            "bytes": 28
+          },
+          {
+            "function": "gap",
+            "bytes": 40
+          },
+          {
+            "function": "copy_bytes",
+            "bytes": 8
+          },
+          {
+            "function": "commit_moves",
+            "bytes": 44
+          },
+          {
+            "function": "reply",
+            "bytes": 0
+          },
+          {
+            "function": "object",
+            "bytes": 20
+          },
+          {
+            "function": "cs_mm_execute",
+            "bytes": 608
+          },
+          {
+            "function": "finish",
+            "bytes": 0
+          },
+          {
+            "function": "cs_mm_register_call",
+            "bytes": 64
+          },
+          {
+            "function": "call",
+            "bytes": 24
+          },
+          {
+            "function": "cs_heap_probe",
+            "bytes": 144
+          },
+          {
+            "function": "rom_address",
+            "bytes": 0
+          },
+          {
+            "function": "config_valid",
+            "bytes": 8
+          },
+          {
+            "function": "state_valid",
+            "bytes": 4
+          },
+          {
+            "function": "executable",
+            "bytes": 8
+          },
+          {
+            "function": "cs_trap_decode",
+            "bytes": 4
+          },
+          {
+            "function": "cs_trap_init",
+            "bytes": 8
+          },
+          {
+            "function": "cs_trap_get",
+            "bytes": 12
+          },
+          {
+            "function": "cs_trap_set",
+            "bytes": 12
+          },
+          {
+            "function": "intrinsic",
+            "bytes": 24
+          },
+          {
+            "function": "begin_report",
+            "bytes": 0
+          },
+          {
+            "function": "cs_trap_call",
+            "bytes": 32
+          },
+          {
+            "function": "cs_trap_direct",
+            "bytes": 20
+          }
+        ]
+      },
+      {
+        "optimization": "-Os",
+        "objects": 5,
+        "combined_sha256": "8900a65dbecf3c1cc3d3a812985dba7b172992b26d1c9a7a1d39fc475b7bfea1",
+        "stack_frames": [
+          {
+            "function": "cs_guest_validate",
+            "bytes": 28
+          },
+          {
+            "function": "cs_guest_window",
+            "bytes": 40
+          },
+          {
+            "function": "operand",
+            "bytes": 24
+          },
+          {
+            "function": "cs_guest_read",
+            "bytes": 36
+          },
+          {
+            "function": "cs_guest_write",
+            "bytes": 40
+          },
+          {
+            "function": "read32",
+            "bytes": 0
+          },
+          {
+            "function": "write32",
+            "bytes": 0
+          },
+          {
+            "function": "compact",
+            "bytes": 28
+          },
+          {
+            "function": "fits",
+            "bytes": 16
+          },
+          {
+            "function": "configuration",
+            "bytes": 56
+          },
+          {
+            "function": "copy_bytes",
+            "bytes": 0
+          },
+          {
+            "function": "commit_moves",
+            "bytes": 72
+          },
+          {
+            "function": "gap.constprop",
+            "bytes": 40
+          },
+          {
+            "function": "cs_mm_init",
+            "bytes": 120
+          },
+          {
+            "function": "cs_mm_execute",
+            "bytes": 604
+          },
+          {
+            "function": "cs_mm_register_call",
+            "bytes": 68
+          },
+          {
+            "function": "call",
+            "bytes": 24
+          },
+          {
+            "function": "cs_heap_probe",
+            "bytes": 160
+          },
+          {
+            "function": "rom_address.isra",
+            "bytes": 0
+          },
+          {
+            "function": "executable",
+            "bytes": 16
+          },
+          {
+            "function": "config_valid",
+            "bytes": 28
+          },
+          {
+            "function": "state_valid",
+            "bytes": 4
+          },
+          {
+            "function": "cs_trap_decode",
+            "bytes": 8
+          },
+          {
+            "function": "cs_trap_init",
+            "bytes": 12
+          },
+          {
+            "function": "cs_trap_get",
+            "bytes": 24
+          },
+          {
+            "function": "cs_trap_set",
+            "bytes": 24
+          },
+          {
+            "function": "intrinsic",
+            "bytes": 24
+          },
+          {
+            "function": "cs_trap_call",
+            "bytes": 32
+          },
+          {
+            "function": "cs_trap_direct",
+            "bytes": 32
+          }
+        ]
+      }
+    ],
+    "inputs": {
+      "core/memory/guest.c": "9678b43e3dc82df2f66119794f08cb2a0dbd85c07a031085daba35b230b6f8a1",
+      "core/memory/manager.c": "24f12c710e62f73c274964834ca4470d78c8b54c0e7dcfb6427ca94b9deff575",
+      "personality/system1/memory-registers.c": "cd0dcfda70933bfbebf23a6e8b20ad8be3f36a55102ff2a659ccf5f3d424c2e2",
+      "apps/heap-probe/probe.c": "87b44ba40b7c87c6d5b2d97a3bedcafdc634d7463fa72918d4d5405097af0d70",
+      "core/services/traps.c": "585adf0742f51390bc44ba086b58e22361bb7188c1205bcc11968875f0cbb1ef",
+      "core/memory/guest.h": "5a89e549470bd0f3ffe50e7fb714342ff7dc6af0d49a0c154a7baebdf7e113ff",
+      "core/memory/manager.h": "9752645a3c610d46c41e2826061853967baff6898c954c20006ce2949f8e1078",
+      "core/services/traps.h": "a3346547364a2237027dbe1d134b81129e80f9731f4c49c813fc9f68563fd782",
+      "personality/system1/memory-registers.h": "a2e9457505cb4e0ceba39c8875cae2feb53f7d79c714387786cdbc0fba5004e6",
+      "apps/heap-probe/probe.h": "bfee10ae86f97769c016d0bbaa960d54ea90ae943d292a5259589ecdeeedad06",
+      "docs/specifications/SPEC-0023-bounded-memory-manager.md": "d5bf7b7ea1ef67304037f4a25dcdc838afcb57ca0c76d73610e85a4c1f53d2eb",
+      "docs/interfaces/system1-routines.json": "4a31bcfb4d765b40d0692a7302eb73b7e361cf55416b634e1def789c92b6a857",
+      "scripts/Verify-MMM68k.py": "f464338dd9f66decb318e7c6794fe1695cd516897599925c8744336d185fd85b",
+      "scripts/Verify-GuestM68k.py": "548addd87816af0f0f190c4f82c6b17083155e3703d28c9d124a0038acf6ed68"
+    },
+    "tool_lock_sha256": "a2fe02f949288826f6a1d11b55df1d3305aab4fb4726da83a4fb8695b7f21898",
+    "native_executed": false,
+    "rom_integration": false
+  },
+  "regression": {
+    "unchanged_efi_profiles": {
+      "none": [
+        {
+          "case": "clang-64-O0",
+          "sha256": "4ded876949c54def00634eb0c8e4367bcbb6d94fe255fbdbd861ec88b16aa18c",
+          "size_bytes": 68608,
+          "image_size": 86016,
+          "relocations": 3,
+          "status": "passed-unloaded"
+        },
+        {
+          "case": "clang-64-O2",
+          "sha256": "6e2ea128e819923e6f88fd933bf40c7a7c9c7871d18d59c08315976a610269a7",
+          "size_bytes": 48640,
+          "image_size": 65536,
+          "relocations": 3,
+          "status": "passed-unloaded"
+        }
+      ],
+      "ud": [
+        {
+          "case": "clang-64-O0",
+          "sha256": "476236db2e81008323b7f8b70b7f2c47cf4406c8d89399df653459b5eac33135",
+          "size_bytes": 68608,
+          "image_size": 86016,
+          "relocations": 3,
+          "status": "passed-unloaded"
+        },
+        {
+          "case": "clang-64-O2",
+          "sha256": "569f1540d6013777840c07f4879856a5625c3a1631baf2ca0434f3a9c360c14b",
+          "size_bytes": 48640,
+          "image_size": 65536,
+          "relocations": 3,
+          "status": "passed-unloaded"
+        }
+      ],
+      "gp": [
+        {
+          "case": "clang-64-O0",
+          "sha256": "a36b3ef4194c88a71d9144fc4fb912d44a903739309125ee18ce2e4545ed1b5e",
+          "size_bytes": 68608,
+          "image_size": 86016,
+          "relocations": 3,
+          "status": "passed-unloaded"
+        },
+        {
+          "case": "clang-64-O2",
+          "sha256": "c1b277a48c1b77f57e7a4966c1983c1b0941911e3da73d53d6217b989a14f4ba",
+          "size_bytes": 48640,
+          "image_size": 65536,
+          "relocations": 3,
+          "status": "passed-unloaded"
+        }
+      ]
+    },
+    "unchanged_rom_sha256": [
+      "20175281806971dd9b21f50f8f726947b162da38fe0b10571311515c0f313b22",
+      "578f8a727de9f63d735988cc655739c6f68fd8ba8ad18540702bf56c8dce92d6"
+    ],
+    "ci_rom_inputs_match_prior_baseline": true,
+    "local_rom_rebuilt_this_milestone": false,
+    "unchanged_normal_raw_sha256": "d178b720ee2a17db1aaa933b6652f18bf868e493728033d442717cf7fc66ba40"
+  },
+  "limits": [
+    "Bounded engineering profile, not January1984/full Memory Manager conformance.",
+    "32 live objects; opaque configured zone identities; original fixed cell bands and side table.",
+    "Conservative compaction may fail despite total free capacity; failed plans leave state/RAM unchanged.",
+    "A raw pointer/handle cannot identify a stale alias after its address is reused.",
+    "No native application/SDK, actual CPU trap binding, boot-entry integration or VM/emulator run.",
+    "672 native manager bytes +256 guest cells are overhead, not complete ROM/RAM/stack high-water proof.",
+    "Linked Pascal result globals, purging, automatic growth, callbacks and full application runtime remain open.",
+    "Native application gate, physical hardware/full budgets/parity/three editions and B2 criterion6 unchanged."
+  ]
+}

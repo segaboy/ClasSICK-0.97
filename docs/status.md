@@ -1,5 +1,16 @@
 # Project status
 
+2026-10-12: SPEC-0023 / IMPL-0027 / TEST-0031 implements eleven bounded
+pointer/handle allocation, size, resize, lock and copy services and a separate
+register adapter. [Evidence](development/memory-manager-evidence.md) records
+1,245 local checks, both successful CI jobs, an exactly matching 68000 manager
+manifest, 672 bytes of manager metadata and 256 guest cell bytes. Thirteen guest
+interface records pass validation. This is an original 32-object/fixed-zone
+engineering profile, with purging/growth/callbacks and historical confirmation
+deferred. Guest trap binding and data-address normalization remain next; no new
+boot entry or VM/emulator run. Existing image/native observations and the closed
+x86-application gate retain their original scope. Earlier entries are dated history.
+
 2026-10-12: the original twelve-byte instruction probe passes three PC starts
 in the bounded interpreter and two own-ROM Snow 128K starts through actual
 vector10/RTE, three native calls, register/SR checks and zero faults. SPEC-0021 /

@@ -5,6 +5,24 @@ eligibility applies to the stated scope, not every resource reachable from a URL
 No Apple executable, source, disassembly, decompilation, or copied asset was used.
 Project-owned black-box native trials are recorded separately below.
 
+## SRC-0104 - Own bounded Memory Manager verification
+
+2026-10-12, SPEC-0023 / TEST-0031, compiled source
+`58a1ca5ef680e2e7f7eed85d3880bbed42eb675f`. Original core/register fixtures
+pass 1,245 hosted checks in nine configurations, including 1,500 mixed model
+operations, 65,448 unsupported register-word refusals, thirty additional object
+audits and ten 68000 object audits/two complete relocatable links. The common
+probe passes 20 checks, zero errors and signature 48454131. Thirteen guest
+interface records and eight refusal controls pass. Manager metadata is 672
+bytes, with 256 guest cell bytes; compiler frames are not measured high-water.
+[CI38328896626](https://github.com/segaboy/ClasSICK-0.97/actions/runs/38328896626)
+passes both jobs and its full manager manifest matches local exactly. Existing
+six EFI/two own ROM profiles and ROM input fingerprints remain unchanged.
+No new native observation, boot-entry binding, VM/emulator launch or historical
+heap/complete-OS claim. [Sanitized results](../docs/development/memory-manager-evidence.md)
+and JSON retain checksums and limits. Lead self-review; human provenance review
+pending. No protected reference pages, code samples or binaries are published.
+
 ## SRC-0101 - Owner go-ahead for Memory Manager finalization
 
 2026-10-12: "Do it" after the verified SPEC-0022 checkpoint and proposal to

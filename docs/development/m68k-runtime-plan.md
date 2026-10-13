@@ -11,29 +11,39 @@ original bounded A-line path and native Mac exception return. SPEC-0022 supplies
 checked data regions, selected MOVE/MOVEA and byte/word branches, BSR/RTS,
 transactional failures and a new original twelve-step program. That program is
 hosted/core verification, not an x86 application or a new boot-image trial.
-Most CPU instructions, an allocator, callbacks and application loading remain
-unimplemented. [Memory Manager lead review](../research/memory-manager-lead-review.md)
-records proposed representation/resize/flag decisions; exact published citations
-and historical uncertainties still need review before manager finalization.
+SPEC-0023 now supplies eleven bounded pointer/handle/size/lock/copy services,
+checked globals and a separate register adapter. Published interface review and
+the original 32-object/fixed-zone engineering contract are finalized; historical
+uncertainties remain explicit. [Memory Manager evidence](memory-manager-evidence.md)
+records 1,245 local checks and both successful CI jobs with an exactly matching
+68000 manifest. The registry contains thirteen guest contracts. Typed guest
+trap binding and explicit CPU data-address normalization remain next. Most CPU
+instructions, purging/growth/callbacks and application loading are unimplemented.
+[Lead review](../research/memory-manager-lead-review.md) distinguishes the final
+contract from Claude's preserved research proposals.
 
 ## Work allowed now, in dependency order
 
-1. **Routine and record interface registry.** Start with the two finalized
-   trap-address services; add the eleven phase-1 Memory Manager routines only
-   after source/contract review. Per routine record trap word/number, parameter
+1. **Routine and record interface registry.** The two trap-address services and
+   eleven phase-1 Memory Manager routines are now recorded after source/contract
+   review, with thirteen records and eight rejection controls passing. Expand
+   through further reviewed contracts. Per routine record trap word/number, parameter
    type/width/location, value/object/code class, procedure signature, result,
    result-code globals, preservation/stack cleanup, memory-movement status and
    profile availability. For guest records, record verified field widths,
    offsets/byte order and source locator. Unknown introduction release stays
    unknown; first documented edition is a separate field. Independently check
    68000 marshalling/guest parsing from the registry. No native headers/SDK.
-2. **Original bounded Memory Manager.** Finalize pointer/handle/cell/zone
-   representation over SPEC-0022, explicit invalid/zero/resize/error behavior,
-   checked guest globals and allocation-only SYS/CLEAR routing. Test live-block
-   nonoverlap, stale/foreign values, locks, prefix preservation, failed-call
-   atomicity and copy overlap. Add explicit 24-bit data-address normalization
-   before flagged-cell dereference fixtures. Budget every side-table byte on
-   the 128K target. No Apple heap/header/list or placement algorithm adopted.
+2. **Original bounded Memory Manager.** SPEC-0023 finalizes pointer/handle/cell/
+   zone representation over SPEC-0022, invalid/zero/resize/error behavior,
+   checked guest globals and allocation-only SYS/CLEAR routing. Live-block
+   nonoverlap, foreign values, locks, prefix preservation, failed-call atomicity
+   and copy overlap pass original tests. Raw stale aliases remain indistinguishable
+   after address reuse. Connect the separate register adapter through typed guest
+   traps; add explicit 24-bit CPU data-address normalization before flagged-cell
+   dereference fixtures. Current native metadata is 672 bytes and guest cell bands
+   256; final linked 128K budgets remain open. No Apple heap/header/list or
+   placement algorithm adopted. Purging/growth/callbacks need later contracts.
 3. **JSR/JMP and call-into-guest service.** Review published original-68000
    control-address modes; implement checked targets/pushes separately from data
    access. Then run a guest address under an explicit signature until return to

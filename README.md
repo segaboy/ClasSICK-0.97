@@ -16,11 +16,14 @@ planned target, not the definition of the portable OS.
 
 ## Current state
 
-2026-10-12: [checked guest memory and data/control execution](docs/development/guest-memory-evidence.md)
-pass 1,110 local checks and both CI jobs. Original programs can manipulate mapped
-data and use selected branches/subroutine calls; allocation and application
-loading remain next. Existing boot-image fingerprints are unchanged; the new
-program has hosted/core evidence, with no new native launch. The owner's
+2026-10-12: the [bounded Memory Manager](docs/development/memory-manager-evidence.md)
+implements eleven pointer/handle allocation, size, resize, lock and copy services.
+The full chain passes 1,245 local checks and both CI jobs; the complete 68000
+manager manifest matches local exactly. Its original 32-object table, fixed
+zones and separate register adapter are a scoped engineering profile. Guest
+trap binding, explicit data-address normalization and application loading remain
+next. Existing boot-image fingerprints are unchanged, with no new native launch.
+The owner's
 [68k-first runtime plan](docs/development/m68k-runtime-plan.md) keeps x86
 application work gated until his explicit confirmation of a complete 68k
 experience. Own native OS/core/tool verification remains permitted.
