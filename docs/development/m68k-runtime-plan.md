@@ -4,6 +4,21 @@ Owner-governed plan, SRC-0099 / ADR-0026. This incorporates Claude's returned
 Memory Manager, application-loading and native-application research without
 treating research proposals as finalized historical specifications.
 
+## Launch/segment research intake - 2026-10-13
+
+After the reader checkpoint was completed and recorded separately, SRC-0129/0130
+intakes Claude's startup/segment pair. [Lead review](../research/launch-segment-lead-review.md)
+records all LK-1..20 dispositions and selected text/image checks against both
+published editions. Eight originals remain unchanged/untracked. No fixture/code
+or case/probe execution; AL-2 and LQ-1..15 remain open, LO-1..8 unauthorized.
+Next proposed contract: bounded session execution with an owned exit transition,
+followed by typed Toolbox stack dispatch (continuation/no-return included),
+heap-reset/lifetime rules and focused confirmation of the existing four-byte
+push instruction coverage before loader fixtures. Numeric BufPtr/H_min remain
+unselected. This intake authorizes none of those implementations. Reader evidence,
+native-application/source/role/VM and edition gates stay unchanged. Earlier
+foundation paragraphs are dated checkpoints, including their pre-intake status.
+
 ## Current foundation
 
 Latest format checkpoint, 2026-10-13: SPEC-0024 / IMPL-0031 now implements the

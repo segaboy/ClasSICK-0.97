@@ -5,6 +5,38 @@ eligibility applies to the stated scope, not every resource reachable from a URL
 No Apple executable, source, disassembly, decompilation, or copied asset was used.
 Project-owned black-box native trials are recorded separately below.
 
+## SRC-0129 - Owner direction for separate launch/segment research intake
+
+2026-10-13: "Finish and record your current resource-fork reader slice first;
+don't mix the two." Then "Please do an intake review, as you did for the
+QuickDraw drafts (SRC-0117)." Verify identities/preserve originals outside Git,
+spot-check specified published pages, record LK-1..20 dispositions and runtime
+prerequisites. LQ-1..15 and AL-2 remain open. LO-1..8 and all emulator/VM/reference
+runs are unauthorized; case plans are not executed tests and supply no fixtures
+or code in this intake. Native-application gate, published-only/no-prohibited-code
+and private-HQ publication boundaries remain. Ordinary research/Git/HQ/wiki
+records only; no new implementation authority.
+
+## SRC-0130 - Claude startup/segment drafts and independent lead intake
+
+2026-10-13, original research pair: contract42399 bytes SHA256
+`b6054b8ba5b039281c2ae85b059a62eaa6e51d08a3198705ca25ed78ec789a13`;
+plan26893 bytes SHA256
+`8fcbfdb6d057c93d87deccb4fdfdc8f421a18731f1cc7b262e41412a1bae89ad`.
+Both match the handoff and unchanged private intake copies; originals remain
+untracked. Baseline190263b attribution is distinct from completed reader evidence.
+[Independent review](../docs/research/launch-segment-lead-review.md) records all
+LK decisions, open questions, case corrections and the recommended bounded session
+contract first. Source copies reidentified in full: SRC-0071/SRC-0068; selected
+I-89/91/94/95, II-57/59/60/61/62/364/365, III-226 and SL-4/11/13 checked.
+Visual I-89/91, II-61/62, III-226 and SL-4/11/12/13 checks; additional
+SL-7/9/12, II-17/20 and MM-13 prose. Only published interface/format facts;
+no sample/equate instructions, external executable/assets or private algorithm
+adopted. Remaining complete-page/exposure claims attributed to Claude. Later
+manuals do not prove January1984 behavior; AL-2 and LQ-1..15 stay open. No new
+specification/code/fixture/test execution/native trial. Lead self-review; human
+provenance review pending; existing implementation and owner/edition gates remain.
+
 ## SRC-0128 - Own bounded resource-fork reader verification
 
 2026-10-13, SPEC-0024 / TEST-0032 / IMPL-0031; compiled source

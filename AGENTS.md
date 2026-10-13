@@ -1,5 +1,14 @@
 # ClasSICK 0.97 working instructions
 
+- On 2026-10-13 the owner requested a separate launch/segment research intake
+  (SRC-0129/0130) after finishing and recording the resource reader. Preserve
+  eight research originals and byte-identical intake copies outside Git;
+  verify specified published citations and record LK dispositions/prerequisites.
+  LQ-1..15/AL-2 remain open, LO-1..8 are unauthorized, cases are unexecuted,
+  and no fixture/code, implementation or VM/emulator/reference run is authorized
+  by this intake. Existing native/source/role/edition gates and no delegation,
+  chats, automation or OneNote persist. Normal Git/HQ/wiki research records.
+
 Read `docs/clean-room/POLICY.md`, `CONTRIBUTING.md`, and
 `provenance/README.md` before researching or changing this project.
 
