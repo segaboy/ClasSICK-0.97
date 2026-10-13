@@ -1,5 +1,16 @@
 # ClasSICK 0.97 working instructions
 
+- On 2026-10-13 the owner said "OK, Claude is researching this. Move on to
+  the next task" (SRC-0132) after the bounded-session recommendation. Finalize
+  SPEC-0028 / ADR-0032 and implement/verify the original hosted OS/core session,
+  trusted exit boundary and shared budgets with normal compiler/CI/Git/HQ/wiki
+  evidence. No loader/heap reset/actual Toolbox completion binding/boot entry,
+  native application/SDK, VM/emulator/reference run, QuickDraw or UART body work.
+  Preserve all research originals and concurrent Claude heap drafts; existing
+  source/role/owner/edition gates and no delegation/chats/automation/OneNote.
+- The owner requires every research request for another tool to be presented
+  as a complete copyable prompt (SRC-0131), preserving existing scope and gates.
+
 - On 2026-10-13 the owner requested a separate launch/segment research intake
   (SRC-0129/0130) after finishing and recording the resource reader. Preserve
   eight research originals and byte-identical intake copies outside Git;

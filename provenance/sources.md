@@ -5,6 +5,39 @@ eligibility applies to the stated scope, not every resource reachable from a URL
 No Apple executable, source, disassembly, decompilation, or copied asset was used.
 Project-owned black-box native trials are recorded separately below.
 
+## SRC-0131 - Owner research-assignment presentation preference
+
+2026-10-13: "Everytime you provide research requests for other tools, you must
+present them as a prompt." Future research assignments are complete copyable
+prompts with their scope, deliverables and existing gates. This presentation
+preference grants no delegation, implementation or external-message authority.
+
+## SRC-0132 - Owner continuation into bounded session execution
+
+2026-10-13: "OK, Claude is researching this. Move on to the next task." This
+follows the proposed bounded-session contract, while Claude separately researches
+heap lifetime. SPEC-0028 / ADR-0032 covers original hosted OS/core session and
+exit boundary, original conformance/encoding checks, compiler/CI and ordinary
+Git/HQ/wiki records. Preserve research originals and concurrent heap drafts.
+No loader, heap reset, Resource Manager/MFS/QuickDraw, actual Toolbox completion
+binding, new boot entry, native application/SDK, VM/emulator/reference trial,
+UART body work, delegation, chats, automation or OneNote. All standing gates.
+
+## SRC-0133 - Original owned session execution profile
+
+SPEC-0028 / ADR-0032 / IMPL-0032 / TEST-0036. Reuse already reviewed project
+SPEC-0022/0025/0026/0027 CPU/control/trap/call interfaces and SRC-0130's scoped
+planning review. No new manual, sample instructions, private algorithm, third-party
+implementation, executable or asset is consulted. Original caller-owned wrapper
+shares stack/token/depth/ancestor budgets, captures the root stop and restores
+the complete caller frame. A trusted successful root-step request ends execution;
+requests inside returning callbacks are refused pending typed completion. Real
+CPU failures take precedence, guest effects remain and sessions are reusable.
+The independently authored18-byte push/pop/BSR/RTS fixture is hosted OS/core
+conformance, not a CODE file, native application or historical offset probe.
+Lead self-review; human provenance review pending. Research plans remain distinct
+from actual implemented checks; AL-2 and all historical/edition questions stay open.
+
 ## SRC-0129 - Owner direction for separate launch/segment research intake
 
 2026-10-13: "Finish and record your current resource-fork reader slice first;
