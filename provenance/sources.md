@@ -5,6 +5,25 @@ eligibility applies to the stated scope, not every resource reachable from a URL
 No Apple executable, source, disassembly, decompilation, or copied asset was used.
 Project-owned black-box native trials are recorded separately below.
 
+## SRC-0120 - Own bounded guest-call execution and compiler verification
+
+2026-10-13, SPEC-0026 / TEST-0034; compiled source
+`cd71fc8350958f1e53795e22b062c9a8dbf468dd`.
+Initial nine-profile matrix1362 CTests passes; after the ancestor-entry correction,
+all63 affected call checks repeat successfully on the final source. Ten final
+call-object audits and two matching compiler debug twins pass. GNU68000 audits
+ten modules/two complete links and independently matches the20 fixture bytes.
+The complete native manifest matches local/CI; runtime metadata92 bytes and
+closure frames228/252 are partial costs, not cumulative stack/128K proof.
+[CI38415231217](https://github.com/segaboy/ClasSICK-0.97/actions/runs/38415231217)
+passes both jobs, the entire final-source1362 matrix plus328 bootstrap checks.
+Six EFI/two own ROM profiles and ROM input fingerprints remain unchanged.
+[Evidence](../docs/development/guest-calls-evidence.md) records hashes, admitted
+scope and retained preparation failures. Only ordinary proc0 calls; no manager
+installation, guest patch dispatch, graphics/boot binding, VM/emulator run,
+native application/SDK or complete historical/edition claim. Codex lead
+self-review; human provenance review pending.
+
 ## SRC-0116 - Owner direction to consider QuickDraw and proceed
 
 2026-10-13: "Consider these items and then move on to the next thing", after

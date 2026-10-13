@@ -12,7 +12,9 @@ RTS completion, nesting and ancestor instruction budgets, restores caller
 controls, and makes retained guest effects on late failure explicit. Its
 20-byte original fixture returns in six instructions. Parameter/result
 marshalling, actual manager callbacks and guest-patch routing remain later
-contracts. The [QuickDraw intake](../research/quickdraw-lead-review.md)
+contracts. [Evidence](guest-calls-evidence.md) records1362 local CTests,63 final
+affected reruns, both successful CI jobs and an exactly matching68000 manifest.
+The [QuickDraw intake](../research/quickdraw-lead-review.md)
 preserves layout/edition/clipping ambiguities as future graphics work; no
 graphics implementation or new boot/VM/native application permission inferred.
 
@@ -32,7 +34,8 @@ identities, strict control/stack accesses and opt-in DATA24 data resolution.
 Its original 82-byte program covers all eleven routines in 35 steps/15 traps.
 [Guest-trap evidence](guest-memory-traps-evidence.md) records1299 local checks,
 54 final affected reruns, both successful CI jobs and matching68000 manifests.
-Guest-call execution and reviewed callback signatures remain next. Most CPU
+SPEC-0026 now supplies ordinary proc0 guest execution; other reviewed callback
+signatures and actual guest patch dispatch remain next. Most CPU
 instructions, purging/growth/callbacks and application loading are unimplemented.
 [Lead review](../research/memory-manager-lead-review.md) distinguishes the final
 contract from Claude's preserved research proposals.
