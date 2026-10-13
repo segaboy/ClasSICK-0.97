@@ -5,6 +5,26 @@ eligibility applies to the stated scope, not every resource reachable from a URL
 No Apple executable, source, disassembly, decompilation, or copied asset was used.
 Project-owned black-box native trials are recorded separately below.
 
+## SRC-0105 - Gemini MFS research intake and independent lead review
+
+2026-10-12: the owner supplied Gemini's three-document MFS research archive
+after commissioning a separate read-only file-format task. The original
+archive/documents remain unchanged outside Git; hashes and findings are in
+[the lead review](../docs/research/mfs-gemini-lead-review.md). Its declarations,
+algorithms, proposed decisions and formal labels remain unadopted research.
+Gemini's source-exposure attestation is not independently proven.
+
+The lead checked the eligible owner's SRC-0071 copy by hash/page count, read
+II-81/82/84/119-123 and visually checked II-81/120-123/Figures 6-8. Selected
+facts identify reversed lock bits, invalid fixture geometry, per-block directory
+boundaries, directory reservations, allocated empty files and overstated name
+limits. Ancillary API/type/equate summaries were encountered but not adopted.
+Promotional Edition claims and the nibble packing explanation remain unverified;
+no January 1984 confirmation, code/test execution or compatibility acceptance.
+Original sanitized review only; no reference page, input code declaration or
+external implementation is published. Existing native/application/VM/role gates
+persist. Lead self-review; human provenance review pending.
+
 ## SRC-0104 - Own bounded Memory Manager verification
 
 2026-10-12, SPEC-0023 / TEST-0031, compiled source

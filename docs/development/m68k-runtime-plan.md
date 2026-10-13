@@ -22,6 +22,13 @@ instructions, purging/growth/callbacks and application loading are unimplemented
 [Lead review](../research/memory-manager-lead-review.md) distinguishes the final
 contract from Claude's preserved research proposals.
 
+Gemini's [MFS research intake review](../research/mfs-gemini-lead-review.md)
+checks the supplied proposals against published format diagrams. It finds
+reversed lock bits, invalid fixture geometry and incomplete directory/empty-fork/
+name rules. Test categories are useful; no parser contract or fixture is finalized,
+and 12-bit packing remains unverified. Filename-comparison research is a separate
+follow-up. This leaves the guest-trap integration dependency order unchanged.
+
 ## Work allowed now, in dependency order
 
 1. **Routine and record interface registry.** The two trap-address services and
