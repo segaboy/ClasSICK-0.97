@@ -3,6 +3,19 @@
 Read `docs/clean-room/POLICY.md`, `CONTRIBUTING.md`, and
 `provenance/README.md` before researching or changing this project.
 
+- On 2026-10-12 the owner confirmed Claude's native-application handoff and
+  directed recording its decisions (SRC-0099). Transparent variants in the
+  ordinary experience are the future requirement; GPL-3.0-or-later stays
+  unchanged. No x86 application, native application test, native image loader,
+  converter/packager, native header/SDK or native-entry implementation is built,
+  loaded or run until the owner explicitly confirms the 68k experience complete.
+  Own native OS/core/tools/hosted conformance are unaffected. Proceed only with
+  the 68k interface registry, JSR/JMP/call-into-guest, built-in/guest typed entries
+  and CODE-only launch selection through normal contracts. Obtain the owner's
+  go-ahead before any future emulator/VM run; earlier continuation entries do
+  not override that gate. No delegation/chats/automation/OneNote. See ADR-0026
+  and docs/development/m68k-runtime-plan.md.
+
 - On 2026-10-12 the owner said "OK, Claude is researching. Now, get to work"
   after assigning Claude Memory Manager research only (SRC-0096). SPEC-0022
   covers checked guest memory and bounded data/control instructions, original

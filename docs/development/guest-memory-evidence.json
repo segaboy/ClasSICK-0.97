@@ -1,0 +1,481 @@
+{
+  "schema_version": 1,
+  "specification": "SPEC-0022",
+  "test": "TEST-0030",
+  "source": "SRC-0100",
+  "profile": "classick-memory-execution-v1",
+  "classification": "hosted-core-and-native-object-verification",
+  "verified_on": "2026-10-12",
+  "compiled_source_revision": "61c6c8de0963ee90748d284dab26b19727563e26",
+  "historical_memory_manager_implemented": false,
+  "legacy_application_executed": false,
+  "new_native_program_executed": false,
+  "new_boot_image_integration": false,
+  "verification": {
+    "ctest_checks": 1110,
+    "configuration_totals": [
+      136,
+      136,
+      136,
+      109,
+      136,
+      121,
+      121,
+      121,
+      94
+    ],
+    "guest_object_audits": 30,
+    "prior_cpu_object_audits": 20,
+    "prior_service_object_audits": 20,
+    "mac_hosted_suites": 24,
+    "mac_fault_controls": 4,
+    "local_log_sha256": "c74c0a6a4d237d0e5da8141abc6300b3fab12ff0dcbc1757f52fbef9ab2e07ff",
+    "ci_log_sha256": "aaa174751cc832557cc49c5405b14bbd12a51d6f2b0d7c366b8915e84229e147",
+    "ci_status": "success",
+    "ci_url": "https://github.com/segaboy/ClasSICK-0.97/actions/runs/38292360762",
+    "ci_source_revision": "61c6c8de0963ee90748d284dab26b19727563e26",
+    "ci_jobs": [
+      "windows-bootstrap",
+      "m68k-rom"
+    ],
+    "hosted_twins": {
+      "clang-guest": "4a930f21f13dcf8f21bf7f23e6fae9db310cd4f8786c03cf027f959459130e83",
+      "clang-bus": "9e3372fdb01754880c5fdc53c0fa48f18d5f0022bcbe4127698751ace9ea6f11",
+      "gcc-guest": "360e07475c369e7ddcfe0f6fb68d29b66eee27a2c677ddbc8a811e76a1914d7f",
+      "gcc-bus": "dd14281394f4b43a7aff832209f5036ac524df49d9b6e4972344ea17764589a2"
+    }
+  },
+  "original_probe": {
+    "bytes": 36,
+    "assembler_sha256": "0d8dcf6fb7e0a4f4edf9185836927be74ac833e7156c2a86a457234a178abd01",
+    "steps": 12,
+    "checks": 16,
+    "status": 0,
+    "signature": "4d454d31",
+    "subroutine_calls": 1,
+    "final_data_hex": "11227f5a",
+    "final_d1": "11223344",
+    "final_d2": "00007f5a",
+    "final_d3": "11227f5a",
+    "final_a0": "00001800",
+    "final_sr": "2710"
+  },
+  "m68k": {
+    "schema_version": 1,
+    "specification": "SPEC-0022",
+    "compiler": "m68k-linux-gnu-gcc-13 (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0",
+    "object_audits": 10,
+    "complete_relocatable_links": 2,
+    "assembler_fixture_bytes": 36,
+    "assembler_fixture_sha256": "0d8dcf6fb7e0a4f4edf9185836927be74ac833e7156c2a86a457234a178abd01",
+    "profiles": [
+      {
+        "optimization": "-O0",
+        "objects": 5,
+        "combined_sha256": "6d77a093f9701707e97bddcbb7d5222befe99f1f514af2a8c1b3a9b83300a1d3",
+        "stack_frames": [
+          {
+            "function": "aline",
+            "bytes": 44
+          },
+          {
+            "function": "begin",
+            "bytes": 0
+          },
+          {
+            "function": "begin",
+            "bytes": 4
+          },
+          {
+            "function": "begin_report",
+            "bytes": 0
+          },
+          {
+            "function": "branch",
+            "bytes": 52
+          },
+          {
+            "function": "condition",
+            "bytes": 20
+          },
+          {
+            "function": "config_valid",
+            "bytes": 8
+          },
+          {
+            "function": "contains",
+            "bytes": 0
+          },
+          {
+            "function": "copy_frame",
+            "bytes": 4
+          },
+          {
+            "function": "cs_guest_read",
+            "bytes": 44
+          },
+          {
+            "function": "cs_guest_validate",
+            "bytes": 20
+          },
+          {
+            "function": "cs_guest_window",
+            "bytes": 20
+          },
+          {
+            "function": "cs_guest_write",
+            "bytes": 36
+          },
+          {
+            "function": "cs_m68k_aline",
+            "bytes": 20
+          },
+          {
+            "function": "cs_m68k_bus_step",
+            "bytes": 132
+          },
+          {
+            "function": "cs_m68k_step",
+            "bytes": 52
+          },
+          {
+            "function": "cs_memory_probe",
+            "bytes": 348
+          },
+          {
+            "function": "cs_trap_call",
+            "bytes": 32
+          },
+          {
+            "function": "cs_trap_decode",
+            "bytes": 4
+          },
+          {
+            "function": "cs_trap_direct",
+            "bytes": 20
+          },
+          {
+            "function": "cs_trap_get",
+            "bytes": 12
+          },
+          {
+            "function": "cs_trap_init",
+            "bytes": 8
+          },
+          {
+            "function": "cs_trap_set",
+            "bytes": 12
+          },
+          {
+            "function": "done",
+            "bytes": 0
+          },
+          {
+            "function": "effective",
+            "bytes": 16
+          },
+          {
+            "function": "executable",
+            "bytes": 8
+          },
+          {
+            "function": "extension",
+            "bytes": 24
+          },
+          {
+            "function": "finish",
+            "bytes": 0
+          },
+          {
+            "function": "flags",
+            "bytes": 8
+          },
+          {
+            "function": "intrinsic",
+            "bytes": 24
+          },
+          {
+            "function": "mask",
+            "bytes": 0
+          },
+          {
+            "function": "mode",
+            "bytes": 4
+          },
+          {
+            "function": "move",
+            "bytes": 64
+          },
+          {
+            "function": "operand",
+            "bytes": 24
+          },
+          {
+            "function": "preflight_store",
+            "bytes": 36
+          },
+          {
+            "function": "read32",
+            "bytes": 0
+          },
+          {
+            "function": "read_value",
+            "bytes": 24
+          },
+          {
+            "function": "return_instruction",
+            "bytes": 28
+          },
+          {
+            "function": "rom_address",
+            "bytes": 0
+          },
+          {
+            "function": "source",
+            "bytes": 36
+          },
+          {
+            "function": "span",
+            "bytes": 0
+          },
+          {
+            "function": "state_valid",
+            "bytes": 4
+          },
+          {
+            "function": "target",
+            "bytes": 24
+          },
+          {
+            "function": "write32",
+            "bytes": 0
+          }
+        ]
+      },
+      {
+        "optimization": "-Os",
+        "objects": 5,
+        "combined_sha256": "09c992b46a2b1838d0f4b17f95905f9f248773624daeabc98b5ee20e89a495ae",
+        "stack_frames": [
+          {
+            "function": "config_valid",
+            "bytes": 28
+          },
+          {
+            "function": "contains",
+            "bytes": 4
+          },
+          {
+            "function": "cs_guest_read",
+            "bytes": 36
+          },
+          {
+            "function": "cs_guest_validate",
+            "bytes": 28
+          },
+          {
+            "function": "cs_guest_window",
+            "bytes": 40
+          },
+          {
+            "function": "cs_guest_write",
+            "bytes": 40
+          },
+          {
+            "function": "cs_m68k_aline",
+            "bytes": 28
+          },
+          {
+            "function": "cs_m68k_bus_step",
+            "bytes": 192
+          },
+          {
+            "function": "cs_m68k_step",
+            "bytes": 60
+          },
+          {
+            "function": "cs_memory_probe",
+            "bytes": 348
+          },
+          {
+            "function": "cs_trap_call",
+            "bytes": 32
+          },
+          {
+            "function": "cs_trap_decode",
+            "bytes": 8
+          },
+          {
+            "function": "cs_trap_direct",
+            "bytes": 32
+          },
+          {
+            "function": "cs_trap_get",
+            "bytes": 24
+          },
+          {
+            "function": "cs_trap_init",
+            "bytes": 12
+          },
+          {
+            "function": "cs_trap_set",
+            "bytes": 24
+          },
+          {
+            "function": "effective",
+            "bytes": 12
+          },
+          {
+            "function": "executable",
+            "bytes": 16
+          },
+          {
+            "function": "extension",
+            "bytes": 28
+          },
+          {
+            "function": "intrinsic",
+            "bytes": 24
+          },
+          {
+            "function": "operand",
+            "bytes": 24
+          },
+          {
+            "function": "preflight_store",
+            "bytes": 40
+          },
+          {
+            "function": "read_value",
+            "bytes": 24
+          },
+          {
+            "function": "rom_address.isra",
+            "bytes": 0
+          },
+          {
+            "function": "span",
+            "bytes": 4
+          },
+          {
+            "function": "state_valid",
+            "bytes": 4
+          }
+        ]
+      }
+    ],
+    "inputs": {
+      "core/memory/guest.c": "9678b43e3dc82df2f66119794f08cb2a0dbd85c07a031085daba35b230b6f8a1",
+      "core/cpu/m68k-bus.c": "a5e268858ed6fa1d1e154db88b2de3c72dd69cd2a11e71dac2b2adf37dface95",
+      "apps/memory-probe/probe.c": "2a03f73d68e51bff03aebed5add244003abb0fe5a5d1526d224a54ecf444b019",
+      "core/cpu/m68k.c": "c6c169c175a71bb24d2f6f375d5bca7dea4469ae4407c43159b3b27c6db613b8",
+      "core/services/traps.c": "585adf0742f51390bc44ba086b58e22361bb7188c1205bcc11968875f0cbb1ef",
+      "core/memory/guest.h": "5a89e549470bd0f3ffe50e7fb714342ff7dc6af0d49a0c154a7baebdf7e113ff",
+      "core/cpu/m68k-bus.h": "2d1c129d49ac909e99f573eccf259a6d4e07bf58fdaf64197ccc31b918f440c7",
+      "core/cpu/m68k.h": "db12b5678ffe4b471082a3b9f6840719148d10032c2ba6dfeb2a9d83a03b7ad5",
+      "core/services/traps.h": "a3346547364a2237027dbe1d134b81129e80f9731f4c49c813fc9f68563fd782",
+      "apps/memory-probe/probe.h": "841249c2ff18f41c4674421129707bc75be4553799ebfc65cf07e11eea49a09f",
+      "apps/memory-probe/program.h": "f5b9c19be4dcba1127f61b43994afb789e79fd444120c976e5b73935554215c3",
+      "apps/memory-probe/program.S": "7e7b69ac83cad8b732b02c99d7297df26bc77c573be5ffd5b90bcba110b60180",
+      "docs/specifications/SPEC-0022-guest-memory-execution.md": "2e324c509f1df56678e1214a5091140afabfd28e423cb65ba2c7b57f13564689"
+    },
+    "tool_lock_sha256": "a2fe02f949288826f6a1d11b55df1d3305aab4fb4726da83a4fb8695b7f21898",
+    "native_executed": false,
+    "rom_integration": false
+  },
+  "regression": {
+    "unchanged_efi_profiles": {
+      "none": [
+        {
+          "case": "clang-64-O0",
+          "sha256": "4ded876949c54def00634eb0c8e4367bcbb6d94fe255fbdbd861ec88b16aa18c",
+          "size_bytes": 68608,
+          "image_size": 86016,
+          "relocations": 3,
+          "status": "passed-unloaded"
+        },
+        {
+          "case": "clang-64-O2",
+          "sha256": "6e2ea128e819923e6f88fd933bf40c7a7c9c7871d18d59c08315976a610269a7",
+          "size_bytes": 48640,
+          "image_size": 65536,
+          "relocations": 3,
+          "status": "passed-unloaded"
+        }
+      ],
+      "ud": [
+        {
+          "case": "clang-64-O0",
+          "sha256": "476236db2e81008323b7f8b70b7f2c47cf4406c8d89399df653459b5eac33135",
+          "size_bytes": 68608,
+          "image_size": 86016,
+          "relocations": 3,
+          "status": "passed-unloaded"
+        },
+        {
+          "case": "clang-64-O2",
+          "sha256": "569f1540d6013777840c07f4879856a5625c3a1631baf2ca0434f3a9c360c14b",
+          "size_bytes": 48640,
+          "image_size": 65536,
+          "relocations": 3,
+          "status": "passed-unloaded"
+        }
+      ],
+      "gp": [
+        {
+          "case": "clang-64-O0",
+          "sha256": "a36b3ef4194c88a71d9144fc4fb912d44a903739309125ee18ce2e4545ed1b5e",
+          "size_bytes": 68608,
+          "image_size": 86016,
+          "relocations": 3,
+          "status": "passed-unloaded"
+        },
+        {
+          "case": "clang-64-O2",
+          "sha256": "c1b277a48c1b77f57e7a4966c1983c1b0941911e3da73d53d6217b989a14f4ba",
+          "size_bytes": 48640,
+          "image_size": 65536,
+          "relocations": 3,
+          "status": "passed-unloaded"
+        }
+      ]
+    },
+    "unchanged_mac_profiles": [
+      {
+        "optimization": "-Os",
+        "image_size": 65536,
+        "image_sha256": "20175281806971dd9b21f50f8f726947b162da38fe0b10571311515c0f313b22",
+        "image_crc32": "ad3b6bcb",
+        "rom_used": 7248,
+        "ram_data_bss": 2140,
+        "corruption_controls": 8,
+        "resealed_aline_controls": 4,
+        "omitted_object_controls": 11
+      },
+      {
+        "optimization": "-O0",
+        "image_size": 65536,
+        "image_sha256": "578f8a727de9f63d735988cc655739c6f68fd8ba8ad18540702bf56c8dce92d6",
+        "image_crc32": "2ccb7293",
+        "rom_used": 11328,
+        "ram_data_bss": 2140,
+        "corruption_controls": 8,
+        "resealed_aline_controls": 4,
+        "omitted_object_controls": 11
+      }
+    ],
+    "unchanged_normal_raw_sha256": "d178b720ee2a17db1aaa933b6652f18bf868e493728033d442717cf7fc66ba40",
+    "ci_efi_profiles_match": 6,
+    "ci_rom_profiles_match": 2,
+    "ci_rom_inputs_match": true,
+    "new_vm_or_snow_launches": 0
+  },
+  "limits": [
+    "Eight checked caller-owned regions; access fits one region; no MMIO.",
+    "High data address bits refused; future 24-bit address-bus normalization requires an explicit contract.",
+    "Selected supervisor-mode MOVE/MOVEA/branch/BSR/RTS/MOVEQ/NOP/A-line forms only.",
+    "No allocator, historical heap layout, callbacks, user stack, executable patch/stub or complete CPU.",
+    "68000 relocatable linkage/assembler audits are not native execution or final ROM/RAM budgets.",
+    "Physical hardware, three complete editions, parity, January 1984 confirmation and B2 criterion6 remain open."
+  ]
+}

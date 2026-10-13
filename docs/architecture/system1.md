@@ -15,6 +15,14 @@ color, RAM, newer storage, or new APIs. Every difference has an extension contra
 it cannot silently change `system1-1984` results. Initial boot does not require a
 fully instantiated System 1 personality.
 
+SRC-0099 separately requires future authorized native application variants to
+be transparent in the ordinary faithful experience, with no separate user mode.
+This does not waive any historical manager semantics or approve native
+application work now: the owner must explicitly confirm the complete 68k
+experience before that gate opens. [ADR-0026](../adr/0026-m68k-first-application-runtime.md)
+and the [runtime plan](../development/m68k-runtime-plan.md) govern allowed
+68000 foundations; GPL-3.0-or-later terms remain unchanged.
+
 ## Manager responsibilities and dependencies
 
 | Component | Independent responsibility | Principal prerequisites |

@@ -1,5 +1,14 @@
 # Milestone roadmap
 
+2026-10-12 current: SPEC-0022 checked data/selected MOVE/MOVEA/branches/BSR/RTS
+pass [hosted/compiler verification](development/guest-memory-evidence.md).
+The [68000 runtime plan](development/m68k-runtime-plan.md), SRC-0099 / ADR-0026,
+orders interface records, Memory Manager finalization, JSR/JMP/nested guest calls,
+typed dispatch and CODE-only launch selection. X86 application/native test/loader
+work waits until the owner explicitly confirms the complete 68k experience;
+own native OS/core/tools are unaffected. Future emulator/VM runs need his
+go-ahead. Prior entries below remain dated history; no full-edition gate closes.
+
 2026-10-12: the original 128K ROM demonstrator has passed two Snow timed cold
 starts, own image/TRAP diagnostics and owner mouse input. See
 [the trial](development/mac-rom-trial.md). This advances the Macintosh startup

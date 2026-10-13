@@ -37,3 +37,13 @@ fix. The subsequent full fresh chain built and checked every target. An initial
 register-prose locator was corrected to published 1.7.1/2 before publication.
 The earlier standalone manifest is retained; final manifest adds all dependency
 headers/tool lock and the corrected specification fingerprint.
+
+Publication follow-up: CI38292360762 passes both jobs at compiled source
+61c6c8de0963ee90748d284dab26b19727563e26. Combined 68000 objects, assembler
+fixture, source fingerprints and every frame value match local. The frame-list
+order differed by filesystem iteration; normalized comparison passes, without a
+raw manifest byte-identity claim. Six EFI/two ROM profiles and ROM source inputs
+match local/prior admitted images. No new native launch or application build.
+[Detailed report](../../docs/development/guest-memory-evidence.md).
+The owner confirmed the separate native-application gate in SRC-0099; records
+and the 68k runtime plan add no native application/loader/SDK implementation.

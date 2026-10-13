@@ -16,6 +16,17 @@ planned target, not the definition of the portable OS.
 
 ## Current state
 
+2026-10-12: [checked guest memory and data/control execution](docs/development/guest-memory-evidence.md)
+pass 1,110 local checks and both CI jobs. Original programs can manipulate mapped
+data and use selected branches/subroutine calls; allocation and application
+loading remain next. Existing boot-image fingerprints are unchanged; the new
+program has hosted/core evidence, with no new native launch. The owner's
+[68k-first runtime plan](docs/development/m68k-runtime-plan.md) keeps x86
+application work gated until his explicit confirmation of a complete 68k
+experience. Own native OS/core/tool verification remains permitted.
+
+The following paragraphs retain their dated earlier checkpoints.
+
 The SPEC-0016 image now passes the measured self-test/controller and bit-20 memory
 qualification on an isolated VirtualBox EFI64 machine. Three headless cold starts
 and a separate live keyboard run complete the native 60-second sequence; the

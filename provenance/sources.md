@@ -5,6 +5,73 @@ eligibility applies to the stated scope, not every resource reachable from a URL
 No Apple executable, source, disassembly, decompilation, or copied asset was used.
 Project-owned black-box native trials are recorded separately below.
 
+## SRC-0100 - Own checked memory and compiler verification
+
+2026-10-12, SPEC-0022 / TEST-0030, compiled source
+`61c6c8de0963ee90748d284dab26b19727563e26`. Original twelve-step data/control
+fixture, 1,110 hosted checks in nine configurations, thirty additional standalone
+width/endian audits and ten 68000 object audits/two complete relocatable links.
+The independent assembler agrees with the 36-byte fixture. CI38292360762 passes
+both jobs; combined objects, fixture, source fingerprints and function frame
+values match local after ordering the frame list. Existing six EFI/two ROM
+profiles and ROM input fingerprints are unchanged and match CI. No new probe
+boot linkage, VM/emulator launch, operator input or historical allocation claim.
+[Report](../docs/development/guest-memory-evidence.md) retains scope and safe
+checksums, no private paths/IDs/binaries. No Apple/Microsoft implementation,
+emulator source or firmware internals; UART bodies untouched. Human review pending.
+
+## SRC-0099 - Owner's application transparency and 68k-first gate
+
+Owner decisions of 2026-10-12, carried by Claude's native-application handoff
+and explicitly confirmed in the implementation chat. The owner requested
+research into transparent x86 versions of compatible programs and groundwork
+for clean-room versions through Mac OS 9.2.2. His exact decisions:
+
+The initial request, verbatim:
+
+> Next, there is an opportunity to run x86 code in this operating system. For
+> instance, if we were to clean-room Microsoft Word or something... we could
+> make an x86 version. We need to do the initial research into how we can launch
+> x86 versions of compatibile system0.97 software, transparent to the user, as
+> if it were 68k code. We also need to lay the groundwork for this to move going
+> forward. I say that, because we will do a clean room of every version of Mac
+> OS until 9.2.2.
+
+The subsequent decisions, verbatim:
+
+> I don't understand what strict 1984 mode is. This is what I want - if I
+> have a 68k version of Word 1.0, I should be able to run it with the same
+> experience as a real Mac. If I run an x86 version of Word 1.0 (which doesn't
+> exist except for the sake of argument), I should be able to run it, too, and
+> not know the difference as a user. It should be transparent.
+
+> License: I have no control over what others do.
+
+> I want a complete 68k experience before running any x86 code.
+
+> Write the handoff.
+
+The owner now explicitly confirms the gate includes building, loading and
+running x86 application code, native application tests and the native image
+loader; own native OS/core/tools are unaffected. Only the owner can open it.
+T-1 through T-6 in the [research record](../docs/research/native-applications.md)
+are future transparency requirements in the ordinary experience, with no
+separate user mode. GPL-3.0-or-later and inbound terms remain unchanged; no
+interface exception or declaration about others' licensing is added.
+The word-processor example is hypothetical for the x86 variant; possession,
+January1984 support and rights to third-party application bytes are not inferred.
+
+Allowed now: a routine/record interface registry, JSR/JMP and bounded nested
+guest calls, built-in/guest typed dispatch and a separate CODE-only selection
+stage. [Runtime plan](../docs/development/m68k-runtime-plan.md), ADR-0026.
+The owner requires a go-ahead before any future emulator/VM run. Published
+sources only; no Apple/Microsoft implementation, emulator source, delegation,
+new chats, automation or OneNote. Research snapshots 37534d7 (public) and
+3e0d917 (HQ) were fast-forwarded exactly; no local draft was overwritten.
+Requirement source, not historical/compatibility/build evidence. Later-era
+orientation manuals in the research are unregistered and supply no specification
+facts until independently reviewed/registered. Human provenance review pending.
+
 ## SRC-0096 - Owner continuation alongside allocation research
 
 2026-10-12: "OK, Claude is researching. Now, get to work." Continue the

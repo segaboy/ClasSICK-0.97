@@ -1,7 +1,12 @@
 # Legacy Motorola 68000 application strategy
 
-Status: staged design. No CPU interpreter, Apple application, ROM, or executable
-reference payload is included.
+Status: staged runtime with original bounded CPU/memory profiles SPEC-0021/0022;
+complete instruction/application support remains open. No Apple application,
+ROM or executable reference payload is included. The current
+[68000 runtime plan](../development/m68k-runtime-plan.md) incorporates the
+owner's SRC-0099 gate: x86 application building/loading/running waits for his
+explicit confirmation that the 68k experience is complete. Own native OS/core/
+tools remain permitted. Any future emulator/VM run needs his go-ahead.
 
 ## Native OS, optional guest execution
 
