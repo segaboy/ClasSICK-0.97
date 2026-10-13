@@ -5,6 +5,30 @@ eligibility applies to the stated scope, not every resource reachable from a URL
 No Apple executable, source, disassembly, decompilation, or copied asset was used.
 Project-owned black-box native trials are recorded separately below.
 
+## SRC-0139 - Owner continuation into bounded Toolbox dispatch
+
+2026-10-13: "OK, Claude is working on it. Now, do your next task." Follows the
+completed heap/dispatch intake and proposed next typed argument/completion
+contract; authorizes SPEC-0029 / ADR-0033's bounded original hosted OS/core slice,
+original conformance and compiler/CI/Git/HQ/wiki evidence. Claude's re-entry audit
+stays separate. Preserve thirteen originals and concurrent drafts. No loader/
+heap reset/manager/QuickDraw/native application/SDK/boot integration or new
+VM/emulator/reference trial; source/UART/historical/edition gates unchanged.
+No delegation/chats/automation/OneNote. Owner requirements, not historical proof.
+
+## SRC-0140 - Original typed Toolbox dispatch profile
+
+SPEC-0029 / ADR-0033 / TEST-0037 / IMPL-0033. Published parameter/cleanup facts
+reuse SRC-0137/0138's reviewed I-90/91/94/95 and II-59 evidence, not the raw drafts
+or new source discovery. Per-routine convention records, deterministic staged
+fixed outputs, strict alias/control checks and explicit deferred completion kinds
+are original engineering choices. ExitToShell ends a root hosted session without
+Finder/teardown. No private data structure/algorithm, manual sample, third-party
+implementation/executable/asset, emulator source or SRC-0070 consulted for code.
+Synthetic trap records and programs test this original OS/core boundary; they
+are neither application files nor a new x86 application/native SDK. Lead self-
+review; human provenance review pending; historical questions remain open.
+
 ## SRC-0135 - Owner direction for heap lifecycle and dispatch intake
 
 2026-10-13: "Lead intake review: Claude heap-lifecycle and dispatch research,

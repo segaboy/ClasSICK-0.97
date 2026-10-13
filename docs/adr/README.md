@@ -50,3 +50,6 @@ execution and retained late effects from the legacy atomic built-in dispatch.
 
 2026-10-13: [ADR-0032](0032-bounded-guest-sessions.md) reuses owned call bounds
 for session termination, complete caller restoration and retained guest effects.
+
+2026-10-13: [ADR-0033](0033-typed-toolbox-dispatch.md) stages typed stack outputs
+before returning/auto-pop completion and binds root ExitToShell through sessions.

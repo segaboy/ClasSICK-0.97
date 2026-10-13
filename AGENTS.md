@@ -1,5 +1,18 @@
 # ClasSICK 0.97 working instructions
 
+- On 2026-10-13 the owner said "OK, Claude is working on it. Now, do your next
+  task" (SRC-0139) after the typed Toolbox argument/completion recommendation.
+  SPEC-0029 / ADR-0033 covers the original bounded hosted dispatcher, staged
+  output/result writes, bounded returning/auto-pop completion and root-only
+  ExitToShell binding, original conformance/compiler/CI and ordinary Git/HQ/wiki
+  evidence. Continuation and register-format exceptions are typed refusals;
+  stack guest patches/direct veneers/manager callbacks remain deferred. No
+  loader, heap reset, QuickDraw/managers, boot binding, native application/SDK,
+  VM/emulator/reference run or UART body work. Preserve all thirteen research
+  originals and concurrent Claude re-entry drafts. No delegation/chats/automation/
+  OneNote; standing source/role/owner/edition gates remain. This supersedes the
+  preceding intake-only limit solely for this bounded dispatcher slice.
+
 - On 2026-10-13 the owner requested "Lead intake review: Claude heap-lifecycle
   and dispatch research" (SRC-0135..0138). Verify five identities, preserve all
   thirteen unchanged/untracked originals and byte-identical copies/manifest
