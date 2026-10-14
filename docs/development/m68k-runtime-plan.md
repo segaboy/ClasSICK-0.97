@@ -4,6 +4,29 @@ Owner-governed plan, SRC-0099 / ADR-0026. This incorporates Claude's returned
 Memory Manager, application-loading and native-application research without
 treating research proposals as finalized historical specifications.
 
+## Typed Toolbox checkpoint - 2026-10-14
+
+SRC-0139-0141 / SPEC-0029 / ADR-0033 supplies the bounded hosted prerequisite2
+slice: explicit per-routine conventions, checked stack arguments and result/
+staged writes, returning/procedure auto-pop, and actual root-only ExitToShell.
+Register Toolbox exceptions and LoadSeg continuations are recognized/refused;
+installed Pascal patches, direct veneers, retained pointers and manager callbacks
+remain later contracts. [Evidence](toolbox-evidence.md) records initial1614,
+final72 affected plus1542 unchanged retained checks; ten final audits/twins,
+matching complete fourteen-audit/two-link68000 manifests,30-byte/eight-step
+encoding and successful CI1614 plus384 bootstrap. Partial frames388/376 do not
+prove cumulative stack or128K fit. Six EFI/two own ROM profiles and all seventeen
+untracked research originals are preserved. Four concurrent arrivals stay
+unreviewed for a separate intake; Claude plans remain unexecuted.
+
+Next proposed prerequisite3 contract is heap lifecycle/reset: owned reference and
+global inventory, scrap-state matrix, capacity/preflight/staging, explicit commit
+and retained fault snapshots, teardown/zone epochs and stale aliases. It builds
+on SPEC-0023 allocation, SPEC-0028 sessions/fault snapshots, and this dispatch
+boundary. No loader/reset implementation follows automatically from this report.
+Numeric BufPtr/H_min and historical HL/LQ/AL questions remain unselected/open.
+All owner/source/role/native/VM/physical/128K/edition gates persist.
+
 ## Heap lifecycle and dispatch intake - 2026-10-13
 
 SRC-0135..0138: [one lead review](../research/heap-dispatch-lead-review.md)

@@ -1,9 +1,11 @@
-# TEST-0037 - Typed Toolbox dispatch conformance plan
+# TEST-0037 - Typed Toolbox dispatch conformance
 
-SPEC-0029 / ADR-0033 / SRC-0139/0140. Planned original hosted tests, 2026-10-13.
-This record is not execution evidence; results will be recorded separately.
+SPEC-0029 / ADR-0033 / SRC-0139-0141. Implemented original hosted tests,
+2026-10-14. Seven suites plus a freestanding check; [executed evidence](../../docs/development/toolbox-evidence.md)
+records exact revisions, matrix counts, final correction and compiler/CI results.
+Claude research plans remain unexecuted and are not these original tests.
 
-Cover canonical table admission and immutable identity/config checks; all scalar
+Original suites cover canonical table admission and immutable identity/config checks; all scalar
 widths, declaration order, bool/char encodings and empty/result frames; pointer
 alignment/permissions/end bounds/string length/full-span and pairwise/stack aliases;
 exact staged output counts, result/output/scratch commit and atomic refusals;

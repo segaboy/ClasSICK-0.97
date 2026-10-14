@@ -1,5 +1,18 @@
 # Project status
 
+2026-10-14: SPEC-0029 / ADR-0033 / IMPL-0033 / TEST-0037 implements the
+bounded typed Toolbox stack dispatcher, staged writes, checked normal/procedure
+auto-pop and root-only hosted ExitToShell. [Evidence](development/toolbox-evidence.md)
+records initial1614 plus72 final affected checks, ten object audits/twins, complete
+matching fourteen-audit/two-link68000 manifests and the30-byte/eight-step probe.
+CI passes corrected-source1614 plus384 bootstrap checks; six EFI/two own ROM
+profiles and seventeen untracked research originals are preserved. Explicit
+register/continuation refusals, Pascal patches/direct veneers/kept pointers/manager
+callbacks remain deferred. No loader, heap reset, manager/boot/native application
+or new VM/emulator/reference run. All source/role/native/edition gates remain;
+human provenance review pending. Next propose heap lifecycle/reset before launch.
+Earlier entries below retain their dated scope.
+
 2026-10-12: SPEC-0023 / IMPL-0027 / TEST-0031 implements eleven bounded
 pointer/handle allocation, size, resize, lock and copy services and a separate
 register adapter. [Evidence](development/memory-manager-evidence.md) records

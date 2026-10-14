@@ -5,6 +5,23 @@ eligibility applies to the stated scope, not every resource reachable from a URL
 No Apple executable, source, disassembly, decompilation, or copied asset was used.
 Project-owned black-box native trials are recorded separately below.
 
+## SRC-0141 - Own typed Toolbox dispatcher verification
+
+2026-10-14, SPEC-0029 / TEST-0037 / IMPL-0033, compiled source `9b4a96a7d9d72cfdc83a1eb86ae8b4938f705736`.
+Initial complete1614 CTests in nine profiles pass; after final permission correction
+all72 affected checks, ten standalone audits and both compiler twins pass. Unchanged
+1542 results retained. GNU68000 fourteen module audits/two complete links and
+independent30-byte encoding pass; full local/CI manifests match. Runtime/report/
+record/argument/input/reply68/28/34/20/104/24 bytes (report embedded in runtime),
+closure frames388/376 are partial costs, not final budgets. [CI](https://github.com/segaboy/ClasSICK-0.97/actions/runs/38543836785)
+passes both jobs, full corrected-source1614 plus384 bootstrap checks. Six EFI/two
+own ROM fingerprints, thirteen routine records and seventeen untracked research
+originals are preserved; four new research arrivals remain unreviewed. [Evidence](../docs/development/toolbox-evidence.md)
+preserves scope and preparation corrections. Root-only hosted ExitToShell, bounded
+return/auto-pop and staged writes only. No loader/heap reset, native application,
+default boot integration, VM/emulator/reference observation or historical/edition
+closure. Lead self-review; human review pending; all owner/source/role gates remain.
+
 ## SRC-0139 - Owner continuation into bounded Toolbox dispatch
 
 2026-10-13: "OK, Claude is working on it. Now, do your next task." Follows the

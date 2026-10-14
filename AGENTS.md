@@ -1,5 +1,13 @@
 # ClasSICK 0.97 working instructions
 
+- Completed 2026-10-14: SPEC-0029 / IMPL-0033 / TEST-0037 bounded hosted
+  typed Toolbox slice; SRC-0141 and docs/development/toolbox-evidence.md record
+  corrected-source CI and matching68000 manifests. Thirteen prior plus four
+  concurrent research originals remain unchanged/untracked. No loader/reset/
+  manager/native application/boot/VM step follows from this completion record.
+  Next proposed contract is heap lifecycle/reset, subject to owner continuation;
+  all existing source/role/owner/edition gates persist.
+
 - On 2026-10-13 the owner said "OK, Claude is working on it. Now, do your next
   task" (SRC-0139) after the typed Toolbox argument/completion recommendation.
   SPEC-0029 / ADR-0033 covers the original bounded hosted dispatcher, staged
