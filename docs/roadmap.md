@@ -1,5 +1,13 @@
 # Milestone roadmap
 
+2026-10-14: [Claude/Grok orchestration](development/agent-orchestration.md)
+is qualified for supervised document review under the owner's standing scoped
+transfer/delegation permission. Claude's Read-only check leads to SPEC-0030 v2's
+teardown/state clarification; the heap contract remains unimplemented. Existing
+verified/runtime/edition status and22 research originals are unchanged. Next:
+the separately scoped hosted heap implementation with independent failure and
+coverage review. Earlier checkpoints retain their dated scope.
+
 2026-10-14 contract checkpoint: [SPEC-0030](specifications/SPEC-0030-hosted-heap-lifecycle.md)
 / ADR-0034 defines host-only inactive heap retirement, exact preflight/staging,
 preserved system state, a memory-only scrap matrix, uint32 saturation and truthful

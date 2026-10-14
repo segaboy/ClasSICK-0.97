@@ -102,3 +102,15 @@ starting with inactive admission, plan/state/epoch ownership and scrap staging,
 then commit/teardown and meaningful fault/refusal tests. Loader, callbacks,
 historical probes and native applications do not follow automatically. Do not
 advance existing verified build/edition or full128K claims on this document.
+
+## Claude qualification follow-up - 2026-10-14
+
+SRC-0149/0150 / [orchestration protocol](agent-orchestration.md) records one
+Read/two model turns. Adopt D1 as overview clarification: the prior phase section
+already required teardown preservation, so reject an assertion of wholly absent
+scrap behavior. Adopt D2's explicit state/plan-lifetime transitions in revision2,
+including fresh-preparation after changed inputs and certificate revalidation.
+The stack-limit observation is a consistent refusal, not a proved defect. T1..8
+remain unexecuted input; T2's unchanged oracle is commit-entry state, and T5 must
+name its fault/write boundary. No fixture/TEST/IMPL/code or historical closure.
+All initial HL/RA/PG dispositions and scope gates remain. Raw report outside Git.

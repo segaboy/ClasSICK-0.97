@@ -1,5 +1,18 @@
 # ClasSICK 0.97 working instructions
 
+- On 2026-10-14 the owner requested Codex orchestration of Claude and Grok and
+  explicitly approved "Yes—this review and future scoped tasks" (SRC-0149/0150).
+  Standing permission covers relevant reviewed public ClasSICK-0.97 contracts
+  and original project code sent to Anthropic/Claude or xAI/Grok within the
+  active owner-authorized slice. Exclude HQ, untracked originals, manuals,
+  credentials and prohibited inputs. No extra subagents/new Codex chats/
+  automation/OneNote/native-app/VM or task expansion. This supersedes the older
+  sole-Grok/no-delegation limit only for these supervised CLI workers. Codex
+  retains decisions, one writer, verification and publication. The qualification
+  read one public spec and yields SPEC-0030 v2's wording/state clarification,
+  still unimplemented. All22 originals/copies and compiled/interface/boot inputs
+  are preserved; human provenance review and historical/edition gates persist.
+
 - On 2026-10-14 the owner requested Grok capability/usage assessment, separate
   existing Snow/VirtualBox boot screenshots, then "Thank you. Now, move on to
   the next tasks" and explicitly "Yes—approve this Grok review" for the named

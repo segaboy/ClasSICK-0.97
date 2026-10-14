@@ -1,5 +1,16 @@
 # 68000 application runtime plan - 2026-10-12
 
+## Claude/Grok orchestration - 2026-10-14
+
+SRC-0149/0150 / [protocol](agent-orchestration.md): owner authorizes Codex-led
+bounded assignments and relevant reviewed public-contract/original-code
+transfers to Claude/Anthropic and Grok/xAI. Other input/task/execution gates
+remain. Claude's first Read-only run returns two reviewed issues/eight unexecuted
+cases; SPEC-0030 v2 clarifies teardown scrap and explicit controller transitions.
+No implementation/fixture/TEST/IMPL/build or historical closure. Next remains
+the separately scoped hosted heap implementation; Codex writes, Claude checks
+failure oracles, Grok checks requirement coverage within approved scope.
+
 ## Hosted heap-lifecycle contract - 2026-10-14
 
 SRC-0146..0148 / [SPEC-0030](../specifications/SPEC-0030-hosted-heap-lifecycle.md)

@@ -1,5 +1,10 @@
 # ClasSICK 0.97
 
+2026-10-14: [supervised Claude/Grok work](docs/development/agent-orchestration.md)
+now has a successful Claude read-only qualification and standing owner-approved
+scope. SPEC-0030 v2 clarifies teardown/state transitions and remains unimplemented;
+no compiled build/edition/historical status advances from this review.
+
 2026-10-14: the [hosted heap-lifecycle contract](docs/specifications/SPEC-0030-hosted-heap-lifecycle.md)
 is finalized as engineering design and remains unimplemented. The latest implemented
 runtime boundary is SPEC-0029's typed Toolbox dispatcher. [Current status](docs/status.md)

@@ -1,5 +1,57 @@
 # Source catalog
 
+## SRC-0149 - Owner Claude/Grok orchestration and standing scoped transfers
+
+2026-10-14, owner: "Now that we have a working relationship with Grok, we need
+to create a working relationship with Claude. How do we do that? I want you to
+be able to use Claude as you use Grok, where you are the orchestrator, and you
+decide which tasks to give to which tools. For instance, the next tasks could
+use Grok AND Claude!"
+
+Owner completed the normal user-operated CLI sign-in and answered "Yes—this
+review and future scoped tasks" to the specific permission question: sending
+SPEC-0030 to Anthropic for this read-only qualification and relevant reviewed
+ClasSICK-0.97 contracts/original project code to Anthropic/Claude and xAI/Grok
+within owner-authorized task scope. Excluded: private HQ content, untracked
+research originals, manuals, credentials and prohibited inputs. Existing
+implementation/native-app/VM/role/edition gates remain; no other provider,
+subagent, new Codex chat, automation or OneNote authorization. This supersedes
+older no-delegation entries solely for these bounded CLI assignments/transfers.
+An automatic approval rejection held the new transfer until this explicit answer;
+normal approved retry succeeded. Later "retry limit?" was answered from actual
+results: no retry-limit/rate-limit error; the successful report is SRC-0150.
+Owner direction and scope only, not historical evidence or implementation approval.
+
+## SRC-0150 - Claude Code qualification review and lead contract clarification
+
+2026-10-14: native stableClaude Code2.1.287 installed through Anthropic's official
+documented Windows installer, then version/help and subscription login status
+verified. Tooling only; no runtime code/library enters ClasSICK. Installer metadata
+and account/session details remain outside Git. Official user-tool guidance:
+[setup](https://code.claude.com/docs/en/setup),
+[headless mode](https://code.claude.com/docs/en/headless),
+[CLI reference](https://code.claude.com/docs/en/cli-reference).
+
+Input: byte-identical public SPEC-0030 v1 at81259d20be248e39a010d610e43df40441c65926,
+SHA256fc635df4bd0f950d6ae783f1455f77d8ec6195b9579be78efe40c1f57f7a1319.
+Private report `claude-review.md`: 6112 bytes, SHA25637fad35579b072577bb4116dff6181bff89498a9547d2d78573c6d7933515d92.
+Raw prompt/report/stream/controls at `C:/ClasSICK/claude-orchestration-20261014-a`.
+Runtime: claude-opus-5-5, Read-only, one Read call/two model turns, success,
+no permission denial, web/MCP, command, write, extra file or subagent. Builtin
+plugins appear in metadata; their absence is not claimed. No retry-limit or
+rate-limit error. Four-turn/800-word limits were requested; the returned text
+exceeds the word target, so strict output-limit enforcement is not claimed.
+
+Lead adopts D1 as overview clarification, not missing preservation behavior:
+v1's phase section already required teardown SCRAP_PRESERVE. Adopt D2 by adding
+explicit native state/plan transitions, fresh-preparation and stable-validity
+semantics in SPEC-0030 v2. Limit/stack overlap is a consistent refusal, not a
+proved contradiction. Eight proposed cases remain unexecuted; changed-input
+refusal compares state at commit entry and partial-fault tests need a specified
+internal boundary. No new fixture/TEST/IMPL/code, historical fact or loader binding.
+Client reports18416 total tokens (thinking included in output) and list-price
+estimate0.1673112USD, not an invoice, additional charge or remaining quota.
+
 ## SRC-0146 - Owner platform review, boot screenshots and heap-contract continuation
 
 2026-10-14, owner-authored directions in the existing main implementation chat:

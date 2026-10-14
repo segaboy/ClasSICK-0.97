@@ -1,7 +1,8 @@
 # SPEC-0030 - Hosted application-heap lifecycle
 
-Finalized engineering v1, 2026-10-14; lead self-review, human provenance review
-pending. Profile `classick-hosted-heap-lifecycle-v1`; SRC-0146..0148 / ADR-0034.
+Finalized engineering v2, 2026-10-14; lead self-review, human provenance review
+pending. Profile `classick-hosted-heap-lifecycle-v1`; SRC-0146..0150 / ADR-0034.
+Revision2 clarifies the v1 teardown/state protocol; no runtime implementation.
 **Contract only, unimplemented.** This is runtime prerequisite 3 after the
 bounded session and typed Toolbox boundary, not a loader or historical reset ABI.
 
@@ -22,9 +23,11 @@ SetApplBase, SetApplLimit, Launch and Chain admission remains unsupported.
 Existing ordinary SPEC-0023 calls keep their behavior outside a coordinated
 lifecycle operation. No guest argument becomes a native function pointer.
 
-Reset makes a fresh empty application allocation state, optionally recreating
-resident scrap. Teardown has the same lifetime transition without application
-population. Neither starts a session, loads CODE, creates Finder information,
+Reset and teardown both retire application allocations and preserve admitted
+scrap, recreating application-resident scrap when required. Reset labels that
+recreation POPULATION; teardown labels it COMMIT/SCRAP_PRESERVE and skips the
+POPULATION phase. The phase label does not omit the preservation work. Neither
+operation starts a session, loads CODE, creates Finder information,
 runs goodBye/close callbacks, purges resources or binds a trap. In this profile
 population means scrap recreation only. A later loader owns all other population.
 Current A9F4 ExitToShell still ends a root session without teardown.
@@ -55,6 +58,29 @@ preflight refuses before staging. There is no wrapping or implicit reinitializat
 An admitted manager identity is not an epoch-tagged guest address: reused raw
 cell/payload numbers may identify new objects. No universal stale-pointer detector
 or whole-memory generation tag is claimed.
+
+Controller transitions are part of this engineering protocol:
+
+| Entry state / event | Exit state / plan lifetime |
+| --- | --- |
+| STABLE / failed preflight or staging | STABLE; no committable plan. No protected state/epoch change. Owned transient controller/plan/report/staging fields may change as permitted. |
+| STABLE / successful preparation | PREPARED; exactly one sealed unconsumed plan. |
+| PREPARED / cancel or failed revalidation | STABLE; invalidate/consume the plan. A retry needs fresh preparation; staging need not be cleared. Preserve the epoch and make no new manager/RAM/gateway/global changes. |
+| PREPARED / successful revalidation and first destructive write | COMMITTING; consume the plan and advance epoch once. |
+| COMMITTING / completed reset retirement | POPULATING, then STABLE after all preplanned scrap writes and invariant verification. |
+| COMMITTING / completed teardown, including SCRAP_PRESERVE | STABLE; POPULATING is skipped, plan consumed. A fresh reset or teardown may follow. |
+| COMMITTING or POPULATING / unexpected post-boundary invariant failure | FAULTED; sealed first-failure diagnostics/staging retained, no committable plan. |
+| FAULTED / any lifecycle, coordinated manager or session request | FAULTED; refusal preserves the first-failure record/effects. No reinitialization through this profile. |
+
+STABLE means no lifecycle operation/plan is active. Only successful initialization
+or completed reset/teardown supplies a current manager-validity certificate;
+every fresh operation still fully revalidates. A refusal after detecting caller
+mutation does not certify that mutated state healthy. Its unchanged-state oracle
+is the state at that refused operation's entry, not a rollback to preparation.
+During a synchronous prepare call, transient controller fields may change but
+concurrent operations remain forbidden; no external execution is admitted merely
+because the previous stable state is recorded. Nested/repeated prepare or a
+commit without a live PREPARED plan refuses without consuming another plan.
 
 ## Reference/global inventory and continuous validity
 

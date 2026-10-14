@@ -29,3 +29,9 @@ Grok's bounded document cross-check is review input, not contract authority or
 historical evidence. Codex retains design and adoption decisions. No original
 research file is modified; no fixtures/tests/code or new runtime binding is
 created by this decision. Existing own ROM/EFI images and historical gates persist.
+
+2026-10-14 clarification (SRC-0149/0150): Claude's read-only review exposed
+misleading overview wording and missing explicit controller transitions. Both
+reset and teardown preserve admitted scrap; phase labels do not omit that work.
+SPEC-0030 v2 defines cancel/refusal/success/FAULTED plan lifetime and state.
+No implementation or historical behavior changes; eight cases stay unexecuted.
