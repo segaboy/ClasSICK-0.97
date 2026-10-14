@@ -89,11 +89,12 @@ static void input_spans(fixture *x)
 }
 static void atomic(fixture *x,cs_tb_result expected)
 {
-    cs_trap_frame f=x->frame;cs_trap_gateway g=x->gateway;uint8_t data[512],stack[256];
-    memcpy(data,x->data,sizeof data);memcpy(stack,x->stack,sizeof stack);
+    cs_trap_frame f=x->frame;cs_trap_gateway g=x->gateway;uint8_t data[512],stack[256],code[512];
+    memcpy(data,x->data,sizeof data);memcpy(stack,x->stack,sizeof stack);memcpy(code,x->code,sizeof code);
     REQUIRE(step(x)==CS_M68K_SERVICE && x->toolbox.last.status==expected);
     REQUIRE(!memcmp(&f,&x->frame,sizeof f) && !memcmp(&g,&x->gateway,sizeof g));
     REQUIRE(!memcmp(data,x->data,sizeof data) && !memcmp(stack,x->stack,sizeof stack));
+    REQUIRE(!memcmp(code,x->code,sizeof code));
 }
 static void frames(void)
 {
@@ -187,6 +188,8 @@ static void spans(void)
     longword(x.stack+128,0xFFFFFF);x.regions[3].base=0xFFFF00;x.regions[3].size=256;x.data[255]=0;
     REQUIRE(step(&x)==CS_M68K_OK && x.frame.a[7]==0x8084);
     x.frame.pc=0x6000;x.frame.a[7]=0x8080;x.data[255]=1;atomic(&x,CS_TB_ADDRESS);
+    setup(&x);input_spans(&x);x.regions[0].flags=7;x.regions[0].writable=x.code;longword(x.stack+132,0x6002);
+    atomic(&x,CS_TB_ADDRESS);REQUIRE(x.report.memory==CS_GUEST_PERMISSION && x.toolbox.last.invoked==0);
 }
 static void failures(void)
 {

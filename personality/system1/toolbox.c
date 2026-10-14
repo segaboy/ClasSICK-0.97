@@ -219,6 +219,12 @@ cs_m68k_result cs_tb_step(void *context,cs_trap_frame *f,
             }
             if(overlap(value,input.length[i],config->stack_base,config->stack_size)) return failure(rt,r,CS_TB_ALIAS);
             if(window(rt,r,value,input.length[i],a->access,&views[i])!=CS_GUEST_OK) return failure(rt,r,CS_TB_ADDRESS);
+            if((a->access&2u)!=0) for(size_t j=0;j<rt->map->count;++j) {
+                const cs_guest_region *region=&rt->map->regions[j];
+                if((region->flags&CS_GUEST_EXECUTE)!=0 && overlap(value,input.length[i],region->base,region->size)) {
+                    r->memory=CS_GUEST_PERMISSION;return failure(rt,r,CS_TB_ADDRESS);
+                }
+            }
             for(unsigned j=0;j<i;++j)
                 if(overlap(value,input.length[i],addresses[j],input.length[j])) return failure(rt,r,CS_TB_ALIAS);
             if((a->access&1u)!=0) input.span[i]=views[i].bytes;
