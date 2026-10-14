@@ -1,5 +1,17 @@
 # Milestone roadmap
 
+2026-10-14: [SPEC-0031](specifications/SPEC-0031-hosted-resource-residency.md)
+/ ADR-0035 finalizes a hosted Resource Manager residency foundation: one immutable
+source,16 locked application copies,32 explicit tickets, release/eviction/close
+lifetimes, actual partial-fault diagnostics and FUTURE/REFUSE composition with
+heap cleanup. [Lead review](development/resource-residency-contract-review.md)
+records bounded Claude/Grok findings and final dispositions. Contract only,
+unimplemented; no new tests/fixtures/code/bindings/build or execution. All24
+research originals/copies and prior verified inputs are preserved. Next propose
+its original hosted implementation before CODE loading. Existing historical,
+native/VM/UART/physical/128K/edition/B2/human-review gates remain separate.
+Earlier checkpoint text below is dated history.
+
 2026-10-14: SPEC-0030 v2 / IMPL-0034 / TEST-0038 implements the bounded hosted
 application-heap lifecycle. Application allocations retire, persistent system
 state and admitted resident scrap survive, single-use plans revalidate, epochs

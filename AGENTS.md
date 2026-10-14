@@ -1,5 +1,17 @@
 # ClasSICK 0.97 working instructions
 
+- Current owner scope (2026-10-14, SRC-0155): "Do it" accepts the proposed
+  Resource Manager contract before CODE loading. SPEC-0031 / ADR-0035 defines
+  original hosted residency/cache/ticket/source/fault/lifecycle ownership only.
+  Bounded read-only Claude/Grok reviews under SRC-0149 and ordinary Git/HQ/wiki
+  records are allowed. No implementation/fixtures/runtime tests/TEST/IMPL/build,
+  guest ABI/registry/loader/boot binding, native application, VM/emulator/reference
+  run, UART body work, prohibited input, extra agent/chat/automation/OneNote.
+  Preserve all24 research originals/copies; prior runtime/build/edition evidence
+  stays exact. Human provenance review and historical/full128K/physical/B2 gates
+  remain open. [Lead review](docs/development/resource-residency-contract-review.md).
+  Earlier implementation permissions are dated completed slices.
+
 - Current owner scope (2026-10-14, SRC-0151): "Do it" approves the proposed
   original bounded SPEC-0030 hosted heap implementation, supervised Claude
   failure/Grok coverage reviews, original hosted/compiler/regression/CI checks

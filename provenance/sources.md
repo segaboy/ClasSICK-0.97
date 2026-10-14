@@ -1,5 +1,81 @@
 # Source catalog
 
+## SRC-0155 - Owner Resource Manager contract continuation
+
+2026-10-14, owner: "Do it." This accepts the preceding recommendation:
+"Next: the Resource Manager contract, before CODE loading." Current scope is
+original hosted residency/ownership/lifetime design, bounded Claude/Grok review,
+document/source/provenance checks and ordinary public/HQ/wiki records. It does
+not authorize implementation, fixtures, runtime tests, new ABI/registry binding,
+CODE loading/execution, native applications or a VM/emulator/reference trial.
+SRC-0149's scoped worker/transfer permission applies; HQ, untracked originals,
+manuals, credentials and prohibited input remain excluded. No extra agents,
+chats, automation or OneNote. Owner direction only, not historical evidence.
+
+## SRC-0156 - Claude resource-residency failure/lifetime review
+
+2026-10-14, Claude Code2.1.287, runtime claude-opus-5-5, requested medium effort.
+Exactly two Read calls/three turns; successful result with no permission denial
+or command/write/web/MCP/extra file/subagent action. Inputs: lead-reviewed own
+SPEC-0031 contract snapshot SHA256
+635c467c90c04c6969a84dfa8392c20df200e77d4bc3afa57f498e626e049477,
+and reviewed public-contract synopsis SHA256
+69f3a312b360325c0c0ce1c6e1a47b07f049bcb4bf32108b38b2e85fe93542f4.
+The lead checked hashes; the worker did not. Private review6597 bytes, SHA256
+c944e010c4b01ee143f7acaccded8d214362445392feb0ce805b9356621eac5e
+at C:/ClasSICK/resource-residency-contract-20261014-a/claude/review.md.
+
+Four findings receive lead dispositions: make OPEN-only operations explicit;
+supply fresh source arguments on reopen; order authoritative FUTURE registration
+before ownership and downgrade only after successful close; preserve per-slot
+disposal/retirement tags after faults. Four proposed cases remain unexecuted.
+Final contract edits receive lead self-review, not an unclaimed second worker pass.
+Client reports25373 tokens (10915 output includes8385 thinking), list-price
+estimate0.2965314USD. Not billing, extra subscription charge or remaining quota.
+1044 words exceeds requested800; verified turn/tool limits do not prove strict
+word enforcement. Raw prompts/streams/metadata/copies remain outside Git.
+Only reviewed public engineering contracts went to Anthropic; no source/manual
+or historical authority is acquired from that output. Human review pending.
+
+## SRC-0157 - Grok resource-residency requirements/scope review
+
+2026-10-14, Grok Build1.0.52, runtime grok-4.7-build, requested reasoning low.
+Exactly two read_file calls/two turns, end_turn, and no extra file/tool/command/
+write/web/MCP/subagent action. Same two frozen input hashes as SRC-0156.
+Private review6401 bytes, SHA256
+d92e2f6e95f09431bb918fb84d6e9fa7bd04ec9ec24b6a732bde578bbe2af27a
+at C:/ClasSICK/resource-residency-contract-20261014-a/grok/review.md.
+Lead checked identities; Grok computed no hashes and ran no tests.
+
+Twelve rows and three candidate leaks are engineering input. Adopt explicit open
+failure/diagnostic/capacity names and empty-span tagging without a zero-length
+map window; clarify provenance versus normative rules and imprecise reference
+wording. Reject removal of the application-only compaction scope: independently
+checked original manager.c filters compaction by the selected allocation zone.
+Other attributes are deliberately metadata and profile maxima do not prove
+physical capacity. Final lead review records all dispositions, not a blanket
+worker completeness/historical certification. Client reports26492 tokens (9516
+output includes7983 reasoning), estimated0.02717008USD; not an invoice/quota or
+controlled cross-provider benchmark. Report989 words exceeds requested850.
+Raw artifacts remain private; no implementation/fixtures/reference run follows.
+
+## SRC-0158 - Lead hosted residency contract and preservation review
+
+2026-10-14, SPEC-0031 / ADR-0035. Original design based on existing reviewed
+SPEC-0022/0023/0024/0030 and SRC-0106/0130 motivation. The lead reads public
+resource/launch reviews, own interfaces and selected own manager code to check
+selected-zone compaction. No new primary source, manual sample, third-party
+implementation, protected asset/executable or reference observation is read.
+
+[Contract review](../docs/development/resource-residency-contract-review.md)
+records source/ownership/cache/ticket/fault/composite-gate choices, worker scopes,
+usage and amendments. Unexecuted verification obligations are not TEST cases.
+No new TEST/IMPL/build, code/fixture/interface import or runtime execution is
+allocated; prior heap proof89e3bbb/public e2b0679 remains exact. All24 originals
+and byte-identical copies remain untouched/untracked. Source/native/UART/physical/
+128K/parity/edition/B2 and human provenance gates remain open. Normal Git/HQ/wiki
+queue only. Next propose a separately authorized original hosted implementation.
+
 ## SRC-0151 - Owner bounded heap-lifecycle implementation approval
 
 2026-10-14, owner: "Do it." This accepts the lead's immediately preceding

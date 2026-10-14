@@ -57,3 +57,7 @@ before returning/auto-pop completion and binds root ExitToShell through sessions
 2026-10-14: [ADR-0034](0034-hosted-heap-lifecycle.md) requires exact preflight and
 disjoint staging before host-only heap retirement; retained faults, scrap-state
 matrix and system/reference preservation are contract-only, unimplemented.
+
+2026-10-14: [ADR-0035](0035-hosted-resource-residency.md) selects explicit host
+leases for locked resource copies and close-before-reset ownership. Contract
+only, unimplemented; no historical Resource Manager ABI or loader admission.
