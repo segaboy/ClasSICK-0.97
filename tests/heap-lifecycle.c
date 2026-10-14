@@ -176,6 +176,10 @@ static void plans(void)
     REQUIRE(y.controller.active==&y.plan && y.plan.ready);
     REQUIRE(cs_life_cancel(&x.controller,&x.plan,&x.report)==CS_LIFE_OK);unchanged(&x,&s);
     REQUIRE(cs_life_commit(&x.controller,&x.plan,&x.report)==CS_LIFE_STATE);unchanged(&x,&s);
+    cs_life_plan held=y.plan;
+    REQUIRE(cs_life_prepare(&x.controller,&x.request,&y.plan,&x.report)==CS_LIFE_STATE);
+    REQUIRE(memcmp(&held,&y.plan,sizeof held)==0 && y.controller.active==&y.plan && x.controller.state==CS_LIFE_STABLE);
+    unchanged(&x,&s);
     run(&x);REQUIRE(cs_life_commit(&x.controller,&x.plan,&x.report)==CS_LIFE_STATE);
     REQUIRE(cs_life_init(&x.controller,&x.manager)==CS_LIFE_STATE);
     REQUIRE(cs_life_cancel(&y.controller,&y.plan,&y.report)==CS_LIFE_OK);

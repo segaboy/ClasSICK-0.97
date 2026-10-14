@@ -42,6 +42,12 @@ an initialization alias; the zeroed cell band correctly produces ALIAS, so that
 fixture expectation was corrected before the final matrix. Initial failed output
 roots/logs remain preserved outside Git; no earlier failure is described as a pass.
 
+The final lead review found a separate ownership edge: a stable controller could
+prepare into another controller's still-active plan. An explicit occupied-plan
+refusal and original cross-instance prepare test now preserve the foreign plan.
+New plans start zeroed. The earlier published candidate and its CI are retained
+as superseded history; the corrected source requires its own final checks and CI.
+
 Production width/optimization audits cover Clang/GCC32/64-bit at O0/O2 plus
 little/big-endian AArch64, allowing only existing original checked-map/manager/
 gateway imports. No writable global, external helper or test-injection symbol
@@ -54,7 +60,7 @@ at O0 and Os: eight module audits and two complete relocatable links with no
 external imports or mutable data. These are compile/link checks, not execution
 on a Macintosh or emulator. Complete source/tool fingerprints and all function
 frames are in the manifest. Earlier provisional compile-only outputs are retained;
-the final manifest is `m68k-final2/manifest.json` in the private slice workspace.
+the final manifest is `m68k-final3/manifest.json` in the private slice workspace.
 
 68000 controller/plan/entry/report/scrap/request sizes are112/5200/28/92/20/72
 bytes. With64 caller inventory entries, one report/request/descriptor and one

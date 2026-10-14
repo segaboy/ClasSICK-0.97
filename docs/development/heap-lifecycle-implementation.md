@@ -14,7 +14,7 @@ API description and from the workers' unexecuted review proposals.
 
 ## Host protocol and storage
 
-The trusted host supplies a zeroed controller, existing manager/map, one plan,
+The trusted host supplies a zeroed controller and new plan, existing manager/map,
 request, scrap descriptor, inventory, staging and report. Native objects must be
 truthful, aligned, live, synchronized and disjoint; all borrowed objects remain
 live through commit/cancel. The controller starts at epoch1 without RAM writes.
@@ -28,7 +28,8 @@ scrap against its live source. A changed input consumes the current plan and
 returns STABLE without additional protected writes or epoch advancement. This
 does not repair caller mutation. The unchanged oracle is commit-entry state.
 Cancel consumes only the current plan. Foreign/replayed requests cannot consume
-another controller's live plan. An invalid mandatory native object or unsafe
+another controller's live plan, including a prepare request that supplies an
+already prepared plan owned by another controller. An invalid mandatory native object or unsafe
 report is rejected before report writes; a usable output is a caller prerequisite.
 
 Plans and staging are owned immutable protocol state, not serialized untrusted
@@ -148,6 +149,11 @@ globals/cells/config, mirror backing, report safety on changed maps, retained-fa
 manager entry and byte preservation through repeated population. Some proposed
 coverage rows depended on omitted existing helpers; no blanket worker verdict
 or historical certification is adopted. Raw reports remain outside Git.
+
+Final lead ownership review also checks foreign-plan preparation, not only
+foreign commit/cancel. Preparing into an already active plan now refuses before
+staging and preserves that plan and its original controller. New caller plans
+start zeroed; native forgery of protocol state remains outside this profile.
 
 No new historical question is answered. HL-Q1..20, AL/LQ/RA/ES/PG and seven-draft
 MQ/WQ/SQ/OD questions, native applications, actual loader/manager/QuickDraw/MFS

@@ -269,6 +269,7 @@ cs_life_result cs_life_prepare(cs_life_controller *c,const cs_life_request *q,cs
     if(c->state==CS_LIFE_FAULTED){copy_report(out,&c->first_fault);return CS_LIFE_FAULT;}
     report(out,c,q->operation);
     if(c->state!=CS_LIFE_STABLE || c->active){out->cause=CS_LIFE_STATE;return CS_LIFE_STATE;}
+    if((p->tag!=0 && p->tag!=PLAN_TAG) || p->ready){out->cause=CS_LIFE_STATE;return CS_LIFE_STATE;}
     layout l;r=preflight(c,q,&l);if(r!=CS_LIFE_OK){out->cause=r;return r;}
     p->ready=0;p->owner=c;p->input=q;p->epoch=c->epoch;copy_request(&p->request,q);copy_scrap(&p->scrap,q->scrap);
     p->manager.magic=c->manager->magic;p->manager.map=c->manager->map;

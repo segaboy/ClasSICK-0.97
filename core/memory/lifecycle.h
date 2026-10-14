@@ -62,7 +62,7 @@ typedef struct cs_life_plan {
 #endif
 } cs_life_plan;
 /* SPEC-0030 v2. Native storage is truthful/live/aligned, caller synchronized.
- * Controller starts zeroed; tagged controllers cannot be reinitialized. All
+ * Controller and each new plan start zeroed; tagged controllers cannot be reinitialized. All
  * native objects and borrowed buffers are disjoint. Plans are owned protocol
  * state, not untrusted serializable input; mutation/cloning is not authorized.
  * Prepared opaque protected contents must remain immutable by the caller.

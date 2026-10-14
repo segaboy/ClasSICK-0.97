@@ -40,12 +40,18 @@
     "unaffected_checks_retained": 1614,
     "object_audits": 10,
     "hosted_twins": {
-      "clang": "927eb3c0de462327f4b275aa9159d86db45b1d29f7288d5ab4ee9d5af494a904",
-      "gcc": "41d932e8ef9303db9ace4f808950419f1c164a923f278861fe3b1936bd88a0bd"
+      "clang": "f74fa2ee7e8d3e47d8da48fef3cce673b3a440da9dfcf1127c34c2ccff1a3a5e",
+      "gcc": "7e296635ff2c3f69e6c73b0ccfc2d0c82e2383b33b4d6498f1229a2cc65aaab9"
     },
     "full_matrix_log_sha256": "ca260cb39cda95826092877c186aa3a6642fc6f0648ca40845cf0bfee2dd86ba",
-    "final_checks_log_sha256": "49db53b4e234e0847f5deb7091e611dfdce4e5080e9c3521ebe162c6a313b59b",
-    "ci_status": "pending"
+    "final_checks_log_sha256": "18d5523a5dc1c00d1604243466e9b4ec44a8304a4d5168d615bbf8d4809c85e0",
+    "ci_status": "pending",
+    "superseded_candidate": {
+      "revision": "71b3f0bc0365de5f8fd6b5fb06f126f996f1e9fe",
+      "ci_url": "https://github.com/segaboy/ClasSICK-0.97/actions/runs/38636017406",
+      "not_final_source": true,
+      "reason": "Foreign-plan prepare ownership refusal added before closing checkpoint."
+    }
   },
   "m68k": {
     "manifest": {
@@ -66,7 +72,7 @@
         {
           "optimization": "-O0",
           "objects": 4,
-          "combined_sha256": "6076af8999e52060eb632af14d53a0080c88db226b07eb25d3e62f135ede60d2",
+          "combined_sha256": "6963b464d8350a06583b99d9b3def656f9ab5752d6d3dc5645f435937e04996e",
           "stack_frames": [
             {
               "function": "cs_guest_validate",
@@ -361,7 +367,7 @@
         {
           "optimization": "-Os",
           "objects": 4,
-          "combined_sha256": "bc4342227e8168b97bf2758c471d40de3f81e3fb3ac429274591e95e783a8ce8",
+          "combined_sha256": "13489483cbec3111bae86effce28397f36cdd5ca5d17817bd15bcc63072eb3f6",
           "stack_frames": [
             {
               "function": "cs_guest_validate",
@@ -550,8 +556,8 @@
         "core/memory/guest.c": "9678b43e3dc82df2f66119794f08cb2a0dbd85c07a031085daba35b230b6f8a1",
         "core/memory/manager.c": "24f12c710e62f73c274964834ca4470d78c8b54c0e7dcfb6427ca94b9deff575",
         "core/services/traps.c": "585adf0742f51390bc44ba086b58e22361bb7188c1205bcc11968875f0cbb1ef",
-        "core/memory/lifecycle.c": "6568ec633e084ff0e9ce7f58be998326d80d3573b244c721f2a599fe26dffd2b",
-        "core/memory/lifecycle.h": "8f87f352e1af5c3a4c271150369f85a248535c72948b33f641f1309f5e7949e7",
+        "core/memory/lifecycle.c": "fa39f5d1daf5ddaac89129a17d0a51dde559509a135a9487ce02866de034c5ac",
+        "core/memory/lifecycle.h": "8d21a92f26f3b06973f77047721d46c040cb6daacb787f32372ffcb901cedf05",
         "core/memory/manager.h": "9752645a3c610d46c41e2826061853967baff6898c954c20006ce2949f8e1078",
         "core/memory/guest.h": "5a89e549470bd0f3ffe50e7fb714342ff7dc6af0d49a0c154a7baebdf7e113ff",
         "core/services/traps.h": "a3346547364a2237027dbe1d134b81129e80f9731f4c49c813fc9f68563fd782",
@@ -567,7 +573,7 @@
       "native_executed": false,
       "rom_integration": false
     },
-    "manifest_sha256": "4117c20e35300c8e508ddeffc516caa3f1b40111c86f6802712e7a965b6cf5c2",
+    "manifest_sha256": "d9540f9dd5cbfa25f41936a46bd0cccbd488de2d9a33274255f732d47cad5eca",
     "lifecycle_frame_maxima": {
       "-O0": 164,
       "-Os": 188
