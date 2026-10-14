@@ -4,6 +4,24 @@ Owner-governed plan, SRC-0099 / ADR-0026. This incorporates Claude's returned
 Memory Manager, application-loading and native-application research without
 treating research proposals as finalized historical specifications.
 
+## Re-entry, event and package intake - 2026-10-14
+
+SRC-0142..0145: [one lead review](../research/reentry-event-package-lead-review.md)
+records four matched identities,17 preserved originals, forty selected published
+image checks and all20 RA/ES/PG dispositions. Closed-world refusal comes first;
+EventAvail uses conservative(b), guest auto-key synthesis and a separate guest
+queue are planned, selective evaluation deferred. Packages need a separate mixed
+selector ABI; no fake system PACK handle. Direct library memory/ROM obligations
+are continuous, and MemError storage is unspecified. Existing dispatcher admission
+refuses absent/register records but has no hardcoded package blacklist. Correct
+queued-activate wording and complete picture/SystemClick closure in future records.
+All34 RA/ES/PG historical labels and earlier questions remain open; RA-S1..22 are
+unexecuted. No original is edited, registry imported, spec/code/fixture/build made
+or new execution/implementation gate opened. Completed SPEC-0029 evidence stays
+unchanged. Next remains the separate heap-lifecycle/reset contract, now with typed
+reference/global lifetime and continuous coherence obligations before guest code.
+Owner continuation precedes implementation; all standing gates persist.
+
 ## Typed Toolbox checkpoint - 2026-10-14
 
 SRC-0139-0141 / SPEC-0029 / ADR-0033 supplies the bounded hosted prerequisite2

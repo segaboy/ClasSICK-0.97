@@ -1,5 +1,16 @@
 # Project status
 
+2026-10-14 research intake: SRC-0142..0145 reviews Claude's re-entry,
+event-selection and package/library notes. [Lead review](research/reentry-event-package-lead-review.md)
+records four matched identities,17 preserved originals, forty selected manual
+image checks and future RA/ES/PG dispositions. Conservative event refusal first;
+selective evaluator and package/mixed-selector execution stay deferred. Correct
+queued-activate wording, picture/SystemClick closure and MemError storage inference.
+All34 new historical labels remain open;22 scenarios unexecuted. No spec/code/
+fixture/registry import/build or new implementation authority. The completed
+dispatcher checkpoint below retains its exact evidence and gates. Heap lifecycle/
+reset remains the proposed next contract after owner continuation.
+
 2026-10-14: SPEC-0029 / ADR-0033 / IMPL-0033 / TEST-0037 implements the
 bounded typed Toolbox stack dispatcher, staged writes, checked normal/procedure
 auto-pop and root-only hosted ExitToShell. [Evidence](development/toolbox-evidence.md)

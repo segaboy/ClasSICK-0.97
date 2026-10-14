@@ -1,5 +1,15 @@
 # ClasSICK 0.97 working instructions
 
+- On 2026-10-14 the owner requested the research-only re-entry/event/package
+  intake (SRC-0142..0145). All17 originals remain unchanged/untracked; keep
+  verified private copies/manifest and the completed dispatcher separate. No
+  reset/stash/clean/pull, new spec/ADR/test/implementation/fixture/scenario/code/
+  interface import or new implementation permission. The lead review records
+  RA/ES/PG choices and34 open historical labels, with sample material excluded.
+  Only ordinary Git/HQ/wiki intake; existing source/UART/native/VM/edition gates
+  and no delegation/chats/automation/OneNote. Next heap lifecycle/reset still
+  requires owner continuation. Earlier entries retain their dated scope.
+
 - Completed 2026-10-14: SPEC-0029 / IMPL-0033 / TEST-0037 bounded hosted
   typed Toolbox slice; SRC-0141 and docs/development/toolbox-evidence.md record
   corrected-source CI and matching68000 manifests. Thirteen prior plus four

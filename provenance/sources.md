@@ -5,6 +5,62 @@ eligibility applies to the stated scope, not every resource reachable from a URL
 No Apple executable, source, disassembly, decompilation, or copied asset was used.
 Project-owned black-box native trials are recorded separately below.
 
+## SRC-0142 - Owner direction for re-entry/event/package intake
+
+2026-10-14: "Lead intake review: Claude's re-entry audit, event-selection note
+and package/library-routine note." Research-only review, identities/private
+copies and published-source checks; RA/ES/PG dispositions and normal Git/HQ/wiki
+records. Preserve all17 unchanged/untracked originals; no reset/stash/clean/pull.
+No new SPEC/ADR/TEST/IMPL/fixture/scenario/registry import/code or implementation
+permission. Existing dispatcher work must finish separately (already recorded
+in fc2e44a before intake). Published SRC-0071/0068 only; no samples/prohibited
+implementation/assets, VM/emulator/reference run, native application, delegation,
+chats, automation or OneNote. Source/role/owner/edition gates retained. Owner
+requirements, not historical evidence; document recommendations are review input.
+
+## SRC-0143 - Claude41-routine re-entry and retained-pointer audit
+
+2026-10-14, attributed Claude research; unchanged/untracked originals:
+application-reentry-audit-draft.md: 41762 bytes, SHA-256 `8614803f637b4a0695e8fa353ab7f688b07995a50442e5b3d2601d0626c915fa`.
+application-reentry-audit-draft.json: 44569 bytes, SHA-256 `8e125f6ab79604f412a153e6726e578c7f6bd1f311d4ba70b43332e0421f5f79`.
+
+Assigned audit; requested baseline7d515a8 versus observed e6248a5, supporting JSON schema claude-application-reentry-audit-draft/1. Forty-one routine rows,25 paths,13 lifetimes,14 questions,7 proposals,22 unexecuted scenarios. Matrix corrections and conservative future admission choices are recorded; no completeness or executable-signature certification.
+[Lead review](../docs/research/reentry-event-package-lead-review.md) separates
+independent published checks from claims/attestations. Both manuals reidentified;
+forty selected image checks across this intake, not a full citation/exposure audit.
+Adjacent manual illustrations seen by the lead are excluded and recorded.
+No-other-change/exposure statements from Claude remain attributed. Later editions
+are not January1984 evidence. Private copies/manifest verified; no new behavior
+contract, admission, executed case or owner gate. Human provenance review pending.
+
+## SRC-0144 - Claude event-selection follow-up
+
+2026-10-14, attributed Claude research; unchanged/untracked originals:
+event-selection-draft.md: 24550 bytes, SHA-256 `aeb4002924a623f9987de423fa397f9e2d4b3cfc51ad7f6ff7075560ecc50240`.
+
+Unassigned RA-Q3/RA-E4 follow-up; priority documented but EventAvail effects/activate/auto-key ordering remain unresolved. ES choices are future engineering profiles; no queue/clock/event implementation or scenario execution.
+[Lead review](../docs/research/reentry-event-package-lead-review.md) separates
+independent published checks from claims/attestations. Both manuals reidentified;
+forty selected image checks across this intake, not a full citation/exposure audit.
+Adjacent manual illustrations seen by the lead are excluded and recorded.
+No-other-change/exposure statements from Claude remain attributed. Later editions
+are not January1984 evidence. Private copies/manifest verified; no new behavior
+contract, admission, executed case or owner gate. Human provenance review pending.
+
+## SRC-0145 - Claude package and linked-library follow-up
+
+2026-10-14, attributed Claude research; unchanged/untracked originals:
+package-and-glue-draft.md: 27220 bytes, SHA-256 `fe3bfe19f1ae8fd34d695ff75bbb45e4a693c6b563daa51f120ece79de6acb1a`.
+
+Unassigned convention/callback follow-up; stacked selectors and mixed A9EE, inline localRtn and continuous direct-access state documented with qualifications. MemError location is unspecified, Restart numeric sample excluded, package support/selector cleanup remains deferred. No source/resource/implementation import.
+[Lead review](../docs/research/reentry-event-package-lead-review.md) separates
+independent published checks from claims/attestations. Both manuals reidentified;
+forty selected image checks across this intake, not a full citation/exposure audit.
+Adjacent manual illustrations seen by the lead are excluded and recorded.
+No-other-change/exposure statements from Claude remain attributed. Later editions
+are not January1984 evidence. Private copies/manifest verified; no new behavior
+contract, admission, executed case or owner gate. Human provenance review pending.
+
 ## SRC-0141 - Own typed Toolbox dispatcher verification
 
 2026-10-14, SPEC-0029 / TEST-0037 / IMPL-0033, compiled source `9b4a96a7d9d72cfdc83a1eb86ae8b4938f705736`.
