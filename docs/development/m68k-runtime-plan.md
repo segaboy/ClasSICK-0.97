@@ -1,5 +1,25 @@
 # 68000 application runtime plan - 2026-10-12
 
+## Hosted heap-lifecycle contract - 2026-10-14
+
+SRC-0146..0148 / [SPEC-0030](../specifications/SPEC-0030-hosted-heap-lifecycle.md)
+/ ADR-0034 finalizes prerequisite3's engineering contract, not its implementation.
+Inactive closed-world ownership, exact placement/capacity, disjoint scrap staging,
+commit/fault/teardown separation, persistent system allocations and saturating
+native epochs are explicit. Guest resets/limit binding, installed patches,
+unsupported globals/references, system scrubs, disk scrap and Finder/A5/segment
+population refuse or remain later contracts. Six existing manager views are
+supported; the31-name inventory is future continuous-validity coverage, not31
+bound fields. Saved CPU snapshots are not heap/RAM copies; raw address reuse
+remains indistinguishable. Grok supplied a bounded18-row review, accepted with
+lead qualifications; all22 originals/copies remain unchanged/untracked.
+
+[Contract review](heap-lifecycle-contract-review.md) records the decisions and
+usage. No TEST/IMPL/build or executed case, code/registry/boot change or historical
+closure. Next propose the separately scoped original hosted implementation of
+this contract, followed by CODE-only loader-specific validation. Native/VM/source/
+UART/physical/full128K/edition/B2/human-review gates remain separate.
+
 Owner-governed plan, SRC-0099 / ADR-0026. This incorporates Claude's returned
 Memory Manager, application-loading and native-application research without
 treating research proposals as finalized historical specifications.

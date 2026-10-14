@@ -53,3 +53,7 @@ for session termination, complete caller restoration and retained guest effects.
 
 2026-10-13: [ADR-0033](0033-typed-toolbox-dispatch.md) stages typed stack outputs
 before returning/auto-pop completion and binds root ExitToShell through sessions.
+
+2026-10-14: [ADR-0034](0034-hosted-heap-lifecycle.md) requires exact preflight and
+disjoint staging before host-only heap retirement; retained faults, scrap-state
+matrix and system/reference preservation are contract-only, unimplemented.

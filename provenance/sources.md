@@ -1,5 +1,66 @@
 # Source catalog
 
+## SRC-0146 - Owner platform review, boot screenshots and heap-contract continuation
+
+2026-10-14, owner-authored directions in the existing main implementation chat:
+
+- "Ask Grok to look at the main ClasSICK repo and the 0.97 repo, and then report
+  back to you what it's capabilities are. Then, do an audit of your capabilities.
+  Then, decide how best you can deploy Grok for your next task. Our goal should be
+  to make the best use of usage across all platforms."
+- "Before you start the next assignment, I need you to launch Snow, and take a
+  screenshot of our test rom booting. Then, I need you to launch Virtualbox and
+  take a screenshot of that booted up."
+- "Thank you. Now, move on to the next tasks."
+- "Yes—approve this Grok review" in response to the specific question about
+  sending six selected sections of three public review/plan documents to xAI.
+
+Lead scope: assess tools, capture existing original boot scenes separately,
+then finalize the proposed host heap-lifecycle/reset contract with a bounded
+Grok cross-check. The automatic approval rejection was resolved by the owner's
+specific transfer approval before execution. No HQ, code, untracked originals
+or manuals were included in that second payload. No extra agent, chat, automation
+or OneNote permission follows. Screenshots/assessment/raw reports remain private.
+Contract design is the current slice; implementation, loader, new bindings and
+future VM/reference trials remain separate. Owner requirements and lead scope,
+not historical evidence or full compatibility/physical/native-app approval.
+
+## SRC-0147 - Grok capability assessment and lead tool/usage audit
+
+2026-10-14, Grok Build1.0.52 headless report from permitted project documents;
+private `assessment-read-stream-response.md`: 10398 bytes, SHA-256 `32181f82d84d30e4c57de40d95ce15645e57556f8b095861ded0762ddbe5031d`.
+Raw report and Codex self-audit/role decision remain outside Git at
+`C:/ClasSICK/grok-capability-audit-20261014-a`. Public entry records identity and
+process only, not HQ report content. Installed CLI help/version and actual read
+calls establish document access; coding/testing quality was not demonstrated.
+Initial startup was sandbox-blocked; normal approval enabled network/session
+storage. The initial lowercase tool filter exposed no reader and was interrupted
+after unsuccessful discovery against an empty MCP inventory. The corrected Read
+filter produced fifteen read_file calls over thirteen approved project documents,
+six model turns, no agent edits/commands or connected MCP/source retrieval.
+Both repositories'813 tracked/nonignored-untracked input identities were unchanged.
+Runtime reports model grok-4.7-build and292725 total tokens, estimatedUSD0.11941548;
+this is CLI accounting, not an invoice/quota/billing claim. A bounded second-check
+role was selected; every accepted design/provenance decision remains the lead's.
+Project process input only, no historical or implementation authority.
+
+## SRC-0148 - Grok bounded heap-requirements cross-check and lead adoption
+
+2026-10-14, private `grok-stream-response.md`: 14653 bytes, SHA-256 `f35d7e05f69b062c51f3a39040d49144557d44b8f16ee2f6b874945e6b04b8e9`.
+Input baseline33e203fede4552500bfc4df4d5622c2e257243f4; only six selected ranges
+of heap-dispatch-lead-review.md, reentry-event-package-lead-review.md and
+m68k-runtime-plan.md. Full prompt/report/stream/identity copies stay at
+`C:/ClasSICK/heap-lifecycle-contract-20261014-a`, outside Git. Owner's explicit
+xAI transfer approval precedes the accepted run. Runtime reports grok-4.7-build,
+two model turns, six read_file calls,39337 total tokens and estimatedUSD0.04832828.
+No edits, commands, web/MCP, subagents, originals, manuals or implementation bodies.
+The report supplies18 HL/RA/PG rows and five engineering gaps; it does not check
+HEAD or execute cases. Output exceeded the requested1000-word target. Lead adopts
+the bounded findings with the qualifications in
+[the contract review](../docs/development/heap-lifecycle-contract-review.md),
+chooses SPEC-0030's explicit engineering state/capacity/scrap/refusal rules and
+keeps every historical question open. No new primary-source fact or code authority.
+
 Access/review date for external sources: **2026-10-07** unless noted. Catalog
 eligibility applies to the stated scope, not every resource reachable from a URL.
 No Apple executable, source, disassembly, decompilation, or copied asset was used.

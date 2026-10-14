@@ -1,5 +1,12 @@
 # ClasSICK 0.97
 
+2026-10-14: the [hosted heap-lifecycle contract](docs/specifications/SPEC-0030-hosted-heap-lifecycle.md)
+is finalized as engineering design and remains unimplemented. The latest implemented
+runtime boundary is SPEC-0029's typed Toolbox dispatcher. [Current status](docs/status.md)
+and [contract review](docs/development/heap-lifecycle-contract-review.md) distinguish
+design, executed evidence and outstanding gates. Earlier dated summaries below
+are retained history, not the current next-step recommendation.
+
 ClasSICK 0.97 is a new, independently implemented, portable operating environment
 whose first compatibility target is the January 1984 Macintosh System 1.0
 environment, identified in the project brief as System 0.97 internally.

@@ -1,5 +1,16 @@
 # ClasSICK 0.97 working instructions
 
+- On 2026-10-14 the owner requested Grok capability/usage assessment, separate
+  existing Snow/VirtualBox boot screenshots, then "Thank you. Now, move on to
+  the next tasks" and explicitly "Yes—approve this Grok review" for the named
+  public document excerpts sent to xAI (SRC-0146..0148). SPEC-0030 / ADR-0034
+  finalizes the hosted heap lifecycle contract only; no code/fixture/TEST/IMPL/
+  build or loader/reset binding. Preserve all22 unchanged/untracked originals
+  and private copies. Bounded Grok document review is the sole new delegation
+  exception; no further task/agent/chat/automation/OneNote or VM/reference run
+  follows. Existing source/UART/native/physical/128K/edition/B2 and human-review
+  gates persist. Earlier dated permissions and intake limits retain their scope.
+
 - On 2026-10-14 the owner requested the research-only re-entry/event/package
   intake (SRC-0142..0145). All17 originals remain unchanged/untracked; keep
   verified private copies/manifest and the completed dispatcher separate. No

@@ -1,5 +1,16 @@
 # Milestone roadmap
 
+2026-10-14 contract checkpoint: [SPEC-0030](specifications/SPEC-0030-hosted-heap-lifecycle.md)
+/ ADR-0034 defines host-only inactive heap retirement, exact preflight/staging,
+preserved system state, a memory-only scrap matrix, uint32 saturation and truthful
+retained faults. [Lead review](development/heap-lifecycle-contract-review.md)
+records the approved bounded Grok check and18 requirements. Contract only,
+unimplemented; all22 research originals unchanged/untracked. No new tests,
+fixtures, code, compiled build or historical/runtime certification. Existing
+SPEC-0029 remains the latest implemented boundary. Next is a separately scoped
+original hosted implementation; loader/native/VM/source/edition gates persist.
+Earlier checkpoint paragraphs below retain their dated scope.
+
 2026-10-14 research intake: SRC-0142..0145 reviews Claude's re-entry,
 event-selection and package/library notes. [Lead review](research/reentry-event-package-lead-review.md)
 records four matched identities,17 preserved originals, forty selected manual
