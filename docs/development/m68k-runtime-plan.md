@@ -1,5 +1,21 @@
 # 68000 application runtime plan - 2026-10-12
 
+## Hosted heap-lifecycle implementation - 2026-10-14
+
+2026-10-14: SPEC-0030 v2 / IMPL-0034 / TEST-0038 implements the bounded hosted
+application-heap lifecycle. Application allocations retire, persistent system
+state and admitted resident scrap survive, single-use plans revalidate, epochs
+saturate and partial faults retain diagnostics and block coordinated entry.
+[Evidence](heap-lifecycle-evidence.md) records1713 initial local
+checks,99 final affected checks with1614 unaffected retained, ten object audits,
+compiler twins and standalone68000 closure/storage. Publication CI is pending.
+Claude/Grok provide bounded read-only reviews; Codex retains decisions. All24
+untracked research originals/copies and prior boot/interface/assets inputs are
+preserved. No guest reset/loader/boot binding, new VM/reference trial or native
+application. Next is Resource Manager service/lifetime design before CODE loading.
+Historical/full128K/physical/edition/B2 and human review gates remain separate.
+Earlier checkpoint text below is dated history.
+
 ## Claude/Grok orchestration - 2026-10-14
 
 SRC-0149/0150 / [protocol](agent-orchestration.md): owner authorizes Codex-led

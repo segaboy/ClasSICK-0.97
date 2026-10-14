@@ -1,5 +1,82 @@
 # Source catalog
 
+## SRC-0151 - Owner bounded heap-lifecycle implementation approval
+
+2026-10-14, owner: "Do it." This accepts the lead's immediately preceding
+proposal to implement SPEC-0030: retire application allocations, preserve system
+state and admitted Clipboard scrap, fail safely, and use Codex for original code,
+Claude for failure review and Grok for coverage review. Original hosted tests,
+compiler/regression/CI and ordinary public/HQ/wiki records are in that slice.
+SRC-0149's standing scoped transfers apply. No loader, new guest binding,
+native application, VM/emulator/reference trial, prohibited input, UART body
+work, extra agent/chat, automation or OneNote permission follows. Owner scope
+only; not a historical Macintosh source or certification.
+
+## SRC-0152 - Claude bounded heap-lifecycle failure review
+
+2026-10-14, Claude Code2.1.287, runtime claude-opus-5-5. Exactly three allowed
+Read calls/four turns, successful return without permission denial; no command,
+write, web/MCP, extra file or subagent call. Frozen input copies: SPEC-0030 v2
+SHA2562884f3987877c2146bea0c2a60a1a5d9c8cc11b68384f78773d274c32faaf028;
+original manager.h 9752645a3c610d46c41e2826061853967baff6898c954c20006ce2949f8e1078;
+guest.h 5a89e549470bd0f3ffe50e7fb714342ff7dc6af0d49a0c154a7baebdf7e113ff.
+The lead checked identities; Claude did not compute hashes or execute tests.
+Private `claude/review.md` SHA256
+2c6214eca03a736481b4b3f838a1ba06403252ef81364f1a0465d51a6194098c
+at `C:/ClasSICK/heap-lifecycle-implementation-20261014-a`.
+
+Twelve proposed cases/six gaps are review input. The lead independently checks
+foreign-plan semantics and the omitted existing manager/global/lock interfaces,
+adopts a test-only internal fault seam and clarifies gross H_min capacity. No
+worker case is counted as executed; original TEST-0038 is separate. Client reports
+22577 total tokens (6059 output including thinking2438), list-price estimate
+0.21501USD, not an invoice, additional subscription charge or remaining quota.
+Raw prompts/settings/streams/metadata remain outside Git. Only reviewed public
+contract/original headers went to Anthropic; no HQ, drafts, manuals, credentials
+or prohibited input. Process/engineering review only, human provenance pending.
+
+## SRC-0153 - Grok bounded implementation coverage review
+
+2026-10-14, Grok Build1.0.52, runtime grok-4.7-build. Four read_file calls/two
+model turns restricted to frozen SPEC-0030 v2 plus original lifecycle.h/.c and
+heap-lifecycle.c test source; no command/write/web/MCP/subagent or extra file.
+Final stopReason=end_turn. Lead checked all identities; Grok neither computed
+hashes nor ran tests. Contract hash as SRC-0152; input header
+SHA256efd064503cc2d725ce6f4eecaa27038893fe260cf46eb78ea865490d182d3719,
+implementation 68e612a383fe4ccdc792a6d85fa25ac02d1402d61cff0fe644c5f73774ad0d9d,
+tests 2f674ba3c8a20f218dd1a4310bb55e14e9cd90ad89f98bd09e3d68eec48ae9ff.
+Private `grok/review.md` SHA256
+0fbbf79264c563080cc1e09d006b0b3019aeba26162c79d80386b56ef348b35f
+in the same private slice directory.
+
+Fourteen requirement rows/five candidate defects received lead review. Existing
+checked-map and complete readonly manager validation refute three candidates;
+paired modification of immutable owned staging/source is a caller-precondition
+violation, not promised native authentication. Adopt separate validity for an
+actually published host handle after a fault, plus meaningful original coverage
+improvements. Input limits caused omitted-helper uncertainty; no broad worker
+coverage verdict or historical proof is adopted. The final source includes those
+lead changes and a GCC formatting correction after the frozen packet. Report1308
+words exceeds the requested1200 target; strict output enforcement is not claimed.
+Client reports81938 total tokens (44738 output includes41738 reasoning) and
+estimated0.11225304USD, not billing/quota or a controlled cross-provider benchmark.
+Raw files remain private; only reviewed public contract/original own code went
+through the owner-approved xAI boundary. No implementation authority from research.
+
+## SRC-0154 - Original heap-lifecycle verification and lead dispositions
+
+2026-10-14, SPEC-0030 v2 / ADR-0034 / IMPL-0034 / TEST-0038. Own synthetic
+hosted fixtures and compiler audits provide engineering evidence only. Exact
+compiled source revision, final/retained local checks, twins, freestanding/endian
+objects, 68000 closure/storage/frame costs, CI and preservation identities are
+recorded in [heap-lifecycle evidence](../docs/development/heap-lifecycle-evidence.md).
+The [API/lead review](../docs/development/heap-lifecycle-implementation.md) states
+trusted native ownership, limitations and bounded worker finding dispositions.
+No new manual/reference observation or historical question closure. Twenty-four
+untracked research originals and byte-identical private copies are preserved.
+Native-app/source/UART/physical/full128K/parity/edition/B2 and human-review gates
+remain open; no new boot integration, guest trap binding or emulator/VM run.
+
 ## SRC-0149 - Owner Claude/Grok orchestration and standing scoped transfers
 
 2026-10-14, owner: "Now that we have a working relationship with Grok, we need

@@ -2,8 +2,11 @@
 
 Finalized engineering v2, 2026-10-14; lead self-review, human provenance review
 pending. Profile `classick-hosted-heap-lifecycle-v1`; SRC-0146..0150 / ADR-0034.
-Revision2 clarifies the v1 teardown/state protocol; no runtime implementation.
-**Contract only, unimplemented.** This is runtime prerequisite 3 after the
+Revision2 clarifies the v1 teardown/state protocol. The authorized original
+hosted implementation is IMPL-0034 / TEST-0038; see the
+[API review](../development/heap-lifecycle-implementation.md) and
+[executed evidence](../development/heap-lifecycle-evidence.md).
+This is runtime prerequisite 3 after the
 bounded session and typed Toolbox boundary, not a loader or historical reset ABI.
 
 ## Basis and boundary
@@ -234,9 +237,9 @@ epoch. It preserves admitted scrap content, not object identity.
 
 ## Verification obligations and deferred work
 
-This document defines acceptance obligations, not executed cases or new TEST/IMPL
-records. Preserve the independently authored original HT-A..F and RA-S1..22 as
-unexecuted planning input. A separately authorized implementation must cover:
+These are acceptance obligations, not execution results. Original HT-A..F and
+RA-S1..22 remain unexecuted planning input; TEST-0038 records separately authored
+and executed conformance tests. An implementation must cover:
 
 - Complete scrap matrix, live-zero versus NIL-cell distinction, staged byte
   preservation, physical rounding, persistent system scrap and name-view refusal.

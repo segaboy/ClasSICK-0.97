@@ -1,5 +1,15 @@
 # ClasSICK 0.97 working instructions
 
+- Current owner scope (2026-10-14, SRC-0151): "Do it" approves the proposed
+  original bounded SPEC-0030 hosted heap implementation, supervised Claude
+  failure/Grok coverage reviews, original hosted/compiler/regression/CI checks
+  and ordinary public/HQ/wiki evidence. SRC-0149's scoped transfers apply.
+  No loader, new guest binding, native application, VM/emulator/reference run,
+  UART body work, prohibited input, extra agent/chat, automation or OneNote.
+  Preserve all24 untracked research originals/copies. Human review and
+  historical/physical/full128K/edition/B2 gates remain separate.
+  [Implementation/evidence](docs/development/heap-lifecycle-evidence.md).
+
 - On 2026-10-14 the owner requested Codex orchestration of Claude and Grok and
   explicitly approved "Yes—this review and future scoped tasks" (SRC-0149/0150).
   Standing permission covers relevant reviewed public ClasSICK-0.97 contracts
