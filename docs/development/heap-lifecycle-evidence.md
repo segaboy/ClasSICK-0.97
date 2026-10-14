@@ -2,8 +2,9 @@
 
 SPEC-0030 v2 / ADR-0034 / IMPL-0034 / TEST-0038 / SRC-0151..0154.
 [Machine-readable record](heap-lifecycle-evidence.json) retains exact identities.
-Lead self-review; human provenance review pending. Compiler/local verification
-is complete; publication CI and its exact revision are pending in this initial record.
+Lead self-review; human provenance review pending. Compiled source `89e3bbbade78498d57b3d6c68da5c6a54a75411e`. Both publication CI jobs pass;
+the complete local/CI lifecycle manifest matches, and the complete original ROM
+build manifest equals the prior checkpoint. [Publication CI](https://github.com/segaboy/ClasSICK-0.97/actions/runs/38637509326).
 
 The original host coordinator retires application allocations while preserving
 system state and admitted resident scrap. Reset and teardown use distinct phase
@@ -46,7 +47,7 @@ The final lead review found a separate ownership edge: a stable controller could
 prepare into another controller's still-active plan. An explicit occupied-plan
 refusal and original cross-instance prepare test now preserve the foreign plan.
 New plans start zeroed. The earlier published candidate and its CI are retained
-as superseded history; the corrected source requires its own final checks and CI.
+as superseded history; the corrected source passes its own final99 affected checks and publication CI.
 
 Production width/optimization audits cover Clang/GCC32/64-bit at O0/O2 plus
 little/big-endian AArch64, allowing only existing original checked-map/manager/
@@ -54,6 +55,9 @@ gateway imports. No writable global, external helper or test-injection symbol
 is admitted. Debug executable twins match each compiler; hashes are in JSON.
 
 ## Original 68000 compiler accounting
+
+CI executes the complete corrected-source1713 matrix plus406 bootstrap checks.
+The committed final inputs match all local/CI compiler-manifest fingerprints.
 
 The pinned GNU68000 compiler builds guest-map, manager, gateway and lifecycle
 at O0 and Os: eight module audits and two complete relocatable links with no

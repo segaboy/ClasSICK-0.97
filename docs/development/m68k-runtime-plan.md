@@ -8,7 +8,8 @@ state and admitted resident scrap survive, single-use plans revalidate, epochs
 saturate and partial faults retain diagnostics and block coordinated entry.
 [Evidence](heap-lifecycle-evidence.md) records1713 initial local
 checks,99 final affected checks with1614 unaffected retained, ten object audits,
-compiler twins and standalone68000 closure/storage. Publication CI is pending.
+compiler twins and standalone68000 closure/storage. Both publication CI jobs pass on corrected source `89e3bbb`;
+complete local/CI68000 manifests match, and prior ROM/media build identities are preserved.
 Claude/Grok provide bounded read-only reviews; Codex retains decisions. All24
 untracked research originals/copies and prior boot/interface/assets inputs are
 preserved. No guest reset/loader/boot binding, new VM/reference trial or native

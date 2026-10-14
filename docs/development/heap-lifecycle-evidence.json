@@ -6,7 +6,7 @@
   "source": "SRC-0154",
   "profile": "classick-hosted-heap-lifecycle-v1",
   "verified_on": "2026-10-14",
-  "compiled_source_revision": null,
+  "compiled_source_revision": "89e3bbbade78498d57b3d6c68da5c6a54a75411e",
   "classification": "hosted-heap-lifecycle-and-standalone-compiler-verification",
   "historical_1984_confirmed": false,
   "new_native_application": false,
@@ -45,13 +45,31 @@
     },
     "full_matrix_log_sha256": "ca260cb39cda95826092877c186aa3a6642fc6f0648ca40845cf0bfee2dd86ba",
     "final_checks_log_sha256": "18d5523a5dc1c00d1604243466e9b4ec44a8304a4d5168d615bbf8d4809c85e0",
-    "ci_status": "pending",
+    "ci_status": "success",
     "superseded_candidate": {
       "revision": "71b3f0bc0365de5f8fd6b5fb06f126f996f1e9fe",
       "ci_url": "https://github.com/segaboy/ClasSICK-0.97/actions/runs/38636017406",
       "not_final_source": true,
-      "reason": "Foreign-plan prepare ownership refusal added before closing checkpoint."
-    }
+      "reason": "Foreign-plan prepare ownership refusal added before closing checkpoint.",
+      "ci_status": "success"
+    },
+    "ci_url": "https://github.com/segaboy/ClasSICK-0.97/actions/runs/38637509326",
+    "ci_current_source_complete_matrix": 1713,
+    "ci_additional_bootstrap_ctest_checks": 406,
+    "ci_ctest_counts": [
+      203,
+      203,
+      203,
+      203,
+      203,
+      176,
+      203,
+      188,
+      188,
+      188,
+      161
+    ],
+    "ci_log_sha256": "378a8e7a510c24d32b1b9223445f60506b373f1b74f67217b6a1dec1dc22fead"
   },
   "m68k": {
     "manifest": {
@@ -581,7 +599,9 @@
     "fixed_coordinator_inventory_bytes_at_64_entries": 7288,
     "staging_bytes": "caller capacity, at least application scrap logical size",
     "cumulative_stack_measured": false,
-    "full_128k_proven": false
+    "full_128k_proven": false,
+    "ci_manifest_exact_match": true,
+    "ci_manifest_sha256": "d9540f9dd5cbfa25f41936a46bd0cccbd488de2d9a33274255f732d47cad5eca"
   },
   "workers": {
     "claude": {
@@ -669,7 +689,8 @@
     "private_copies_byte_identical": true,
     "boot_sources_assets_interfaces_uart_bodies_unchanged": true,
     "prior_boot_media_result_equal": true,
-    "no_hq_in_public": true
+    "no_hq_in_public": true,
+    "prior_complete_rom_ci_manifest_equal": true
   },
   "limits": {
     "guest_bindings_added": false,
