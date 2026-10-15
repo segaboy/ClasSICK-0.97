@@ -1,8 +1,8 @@
 # Hosted resource residency evidence - 2026-10-14
 
 SPEC-0031 / IMPL-0035 / TEST-0039 / SRC-0159..0162.
-Lead self-review; human provenance review pending. Compiled source revision and
-publication CI are pending recording. [Machine-readable results](resource-residency-evidence.json).
+Lead self-review; human provenance review pending. Compiled source `b94e2ff5581a91c46352edbb95f93d5366e04f56`;
+[publication CI](https://github.com/segaboy/ClasSICK-0.97/actions/runs/38675728784) passes both jobs. [Machine-readable results](resource-residency-evidence.json).
 
 All1803 initial CTests pass in nine fresh configurations: Clang debug twins,
 release, i686 and validated ASan/UBSan; GCC debug twins, release and i686.
@@ -27,9 +27,11 @@ an available-capacity or full128K proof.
 
 Closure maximum individual frames are608/O0 and604/Os in the existing manager;
 these are not cumulative stack or measured high-water. Complete manifest and
-input fingerprints are in the JSON; CI matching is pending. The native boot
+input fingerprints are in the JSON; The complete local/CI68000 manifest matches. The native boot
 media result object equals the prior heap-lifecycle checkpoint exactly.
-Prior boot/interface/assets/UART source identities and24 unchanged/untracked
+The complete own-ROM CI manifest equals the prior checkpoint, including image
+hashes and source inputs. CI runs1803 current-matrix plus426 bootstrap checks
+(2229 total); it does not run emulator/operator trials. Prior boot/interface/assets/UART source identities and24 unchanged/untracked
 research originals/copies are preserved by the separate baseline check.
 
 No guest Resource Manager trap, loader/CODE execution, native application,

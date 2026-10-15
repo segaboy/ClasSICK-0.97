@@ -2,7 +2,8 @@
 
 2026-10-14: SPEC-0031 / IMPL-0035 / TEST-0039 implements the original hosted resource-residency service: one immutable fork,16 locked application copies and32 distinct native lease tickets. Checked ownership, saturating IDs, source/epoch lifetime, explicit eviction/close and retained partial-fault masks precede any future CODE loader. All1803 initial local CTests pass across nine configurations;90 final affected checks pass with1713 unaffected retained, ten final width/endian object audits and matching compiler twins. GNU68000 twelve module audits/two complete relocatable links pass. Native service3314, request52, report246, ticket36 bytes; source bytes/resident extents and existing controls are additional costs, not full128K or cumulative-stack proof. Claude/Grok read one frozen public/original packet each and supply lead-reviewed findings, without execution or historical authority. All24 research originals/copies, prior interface/assets/boot/UART inputs and edition gates are preserved. No guest Resource Manager binding, loader/execution, native application or VM/emulator/reference trial. Human provenance review and historical/physical/parity/full128K/B2 gates remain open.
 
-[Implementation evidence](resource-residency-evidence.md). Publication CI is pending for this source.
+[Implementation evidence](resource-residency-evidence.md). Both publication CI jobs pass on compiled source `b94e2ff`;
+the complete local/CI68000 manifest matches.
 Next propose a bounded CODE-only launch/segment contract using these foundations;
 dynamic LoadSeg and transitive executable-resource ownership remain separate.
 Earlier checkpoint paragraphs are dated history.
