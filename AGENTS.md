@@ -1,5 +1,17 @@
 # ClasSICK 0.97 working instructions
 
+Current owner release groundwork (2026-10-15, SRC-0198): "I think the rom
+should be its own release..." and "ok, do the groundwork for this now."
+authorize separate ROM/System versions, histories, milestone/compatibility
+records and a local draft preparation tool, with ordinary public/HQ/wiki records.
+ROM 0.1.0-alpha.1 is a draft of the already observed image; System stays
+unversioned/unreleased. No tag, GitHub release, download publication, new binary,
+boot/reference trial, native application or publishing automation. Preserve all24
+research originals/copies, qualified inputs/artifacts, prior records and source/
+UART/physical/full128K/parity/edition/B2/human gates and both System1/ROM goals.
+No new agents/chats/OneNote. [Release policy](releases/README.md).
+Earlier scopes retain their dated meaning.
+
 Completed redraw trial (2026-10-15, SRC-0196/0197): explicit owner approval
 "Yes—test the redraw ROM in Snow" covers one now-closed isolated own-ROM run.
 The complete result and counter updates are observed without full-scene redraw

@@ -1,7 +1,8 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 # Copyright (C) 2026 Dean Howell.
 cmake_minimum_required(VERSION 3.25)
-project(ClasSICK VERSION 0.0.1 LANGUAGES C)
+# Independent ROM/System release versions live in releases/components.json.
+project(ClasSICK LANGUAGES C)
 
 # Portable core and hosted conformance. EFI inspection builds use a separate script.
 set(CMAKE_C_STANDARD 11)

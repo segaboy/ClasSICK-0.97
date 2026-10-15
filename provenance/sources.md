@@ -2714,3 +2714,22 @@ follows from any license.
   all-click reliability, human-input, calibrated timing or historical result.
   Original private screenshots/log/profile identities retained; no prohibited
   binary/source, emulator implementation or reference pixels used.
+
+## SRC-0198 - Owner independent ROM release and groundwork direction
+
+- Project owner, 2026-10-15, direct chat: "I think the rom should be its own
+  release..." then "ok, do the groundwork for this now."
+- Accepts the proposed independent ROM/System tracks in the same repository:
+  draft ROM 0.1.0-alpha.1, unreleased System, milestone overview, compatibility
+  matrix, version metadata and local draft preparation. Ordinary Git/HQ/wiki
+  records; no tag/release publication, new runtime or emulator trial.
+
+## SRC-0199 - Lead independent release groundwork
+
+- Codex, 2026-10-15; original project metadata, policy, changelogs, milestone
+  overview and checksum-checked local draft preparation under GPL-3.0-or-later.
+- [ADR-0040](../docs/adr/0040-independent-rom-system-releases.md),
+  [release policy](../releases/README.md) and
+  [verification](../docs/development/release-groundwork-evidence.md).
+- Pins the unchanged SRC-0195/0197 ROM; no new historical, runtime, physical or
+  System1/ROM compatibility result. Human provenance review remains pending.

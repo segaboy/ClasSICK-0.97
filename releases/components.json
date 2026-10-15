@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "compatibility_target": "ClasSICK 0.97 / owner-designated original System 1 target",
+  "version_policy": "releases/README.md",
+  "components": {
+    "rom": {
+      "name": "ClasSICK ROM",
+      "version": "0.1.0-alpha.1",
+      "state": "draft",
+      "tag_prefix": "rom-v",
+      "candidate_record": "releases/rom/0.1.0-alpha.1.json",
+      "release_notes": "releases/rom/0.1.0-alpha.1.md",
+      "changelog": "releases/rom/CHANGELOG.md",
+      "latest_published_version": null
+    },
+    "system": {
+      "name": "ClasSICK System software",
+      "version": null,
+      "state": "unreleased",
+      "tag_prefix": "system-v",
+      "candidate_record": null,
+      "release_notes": null,
+      "changelog": "releases/system/CHANGELOG.md",
+      "latest_published_version": null
+    }
+  }
+}

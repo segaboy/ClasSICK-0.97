@@ -1,5 +1,8 @@
 # Project status
 
+[Current milestones](milestones.md) and [independent release tracks](../releases/README.md)
+provide the short overview. ROM `0.1.0-alpha.1` is unpublished; System is unreleased.
+
 2026-10-15 redraw refinement: byte fills and counter-only updates preserve12 original frames exactly. 2127 local and2625 CI checks and original ROM twins pass. One freshly authorized Snow trial shows the complete result and counter updates without observed full-scene redraw; automated input delivery remains unqualified. [Evidence](development/loaded-app-redraw-evidence.md). Earlier checkpoints retain dated results.
 
 2026-10-15: The original resource/CODE loader now runs our twelve-byte 68k test application in the native boot ROM, captures D0=97 and its 0x5A5A5A5A write, and retires the image. One owner-authorized isolated Snow Macintosh 128K cold boot displays APP/097, the full pattern and six completed phases; an automated mouse event advances the kernel counter to 0001. All 2,118 final local and 2,614 CI checks pass. This is an integrated prototype, with general SPEC-0034, desktop/QuickDraw and both System 1/ROM interoperability targets still incomplete.

@@ -1,5 +1,9 @@
 # Architecture decision records
 
+2026-10-15: [ADR-0040](0040-independent-rom-system-releases.md) accepts independent
+ROM/System release tracks, a frozen unpublished ROM draft and local preparation
+only. No tag, publication, new binary or boot qualification follows.
+
 2026-10-13: [ADR-0030](0030-bounded-guest-calls.md) selects the original bounded
 returning 68000 call service and explicit side-effect/restoration policy.
 

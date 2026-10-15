@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "component": "rom",
+  "version": "0.1.0-alpha.1",
+  "state": "draft",
+  "published": false,
+  "proposed_tag": "rom-v0.1.0-alpha.1",
+  "tag_target_revision": null,
+  "profile": "first-loaded-rom-app-v1",
+  "specification": "SPEC-0035",
+  "artifact": {
+    "filename": "classick-rom-0.1.0-alpha.1-mac128k.rom",
+    "bytes": 65536,
+    "sha256": "43c0296f808b85366fdbe55c9bcfd42e2daf9ef5fae77dfecfb85e5f80db0942"
+  },
+  "compiled_source_revision": "2ea01129377d248ef48dd81d6f8873e948456ce6",
+  "evidence_revision": "031212db9de4711d157b8e997aa91777f999a47b",
+  "build_manifest": {
+    "bytes": 26277,
+    "sha256": "cda7dca85897b204223a550dd281dc575ff7cdb5806d78baed6dc413fe7027d0"
+  },
+  "qualification": {
+    "path": "docs/development/loaded-app-redraw-evidence.json",
+    "sha256_git_lf": "4d119e4b67895fe382c5fc64f3a0b847e04518bcb2546b11eea6b993df8182a1"
+  },
+  "ci_url": "https://github.com/segaboy/ClasSICK-0.97/actions/runs/38820467440",
+  "release_notes": "releases/rom/0.1.0-alpha.1.md",
+  "license": "GPL-3.0-or-later",
+  "source_url": "https://github.com/segaboy/ClasSICK-0.97/tree/2ea01129377d248ef48dd81d6f8873e948456ce6",
+  "source_archive_url": "https://github.com/segaboy/ClasSICK-0.97/archive/2ea01129377d248ef48dd81d6f8873e948456ce6.tar.gz",
+  "observed_platform": {
+    "emulator": "Snow v1.5.0-317c188 Windows x86-64",
+    "executable_sha256": "32cf5285582c0f509e4f1ac38d86bfb90440bae9da43b7823bfb0841dea588e6",
+    "model": "Early128K",
+    "ram_bytes": 131072,
+    "payload": "embedded original test application; no disk System",
+    "physical_macintosh_tested": false,
+    "input_delivery_qualified": false
+  },
+  "compatibility": {
+    "own_system_on_own_rom": "untested; no System release",
+    "original_system1_on_own_rom": "required, untested",
+    "own_system_on_supported_original_apple_rom": "required, untested",
+    "historical_097_qualified": false
+  },
+  "limits": [
+    "embedded original demonstration only; not a complete Macintosh ROM replacement",
+    "no disk System boot, guest QuickDraw desktop or application-manager experience",
+    "automated input delivery and human input remain unqualified",
+    "physical Macintosh and full 128K OS feasibility remain unqualified",
+    "native applications, edition/parity/B2 and human provenance gates remain"
+  ]
+}
