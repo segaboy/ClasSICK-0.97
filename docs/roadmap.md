@@ -1,5 +1,12 @@
 # Milestone roadmap
 
+2026-10-15: SPEC-0033 / IMPL-0037 / TEST-0041 implements original host-only eager CODE staging, exclusive locked handles, A5-world data population and explicit image retirement. A first allocator OOM retains PREPARED; a later ordinary OOM retains PARTIAL with explicit cleanup and no world writes. Unexpected faults retain exact effects and block further admission. No application execution, guest binding, reset/boot integration, native application or VM/emulator/reference trial. Historical/source/native/physical/full128K/parity/edition/B2 and human-review gates remain open; both required System1/ROM boot directions remain untested.
+
+[Implementation evidence](development/code-image-evidence.md). All2010 final local CTests, ten width/endian object audits and compiler twins pass;
+GNU68000 sixteen audits/two complete links pass. Publication CI is pending.
+Next is the controlled execution bridge contract; no automatic application launch.
+Earlier checkpoints are dated history.
+
 2026-10-15: SPEC-0033 / ADR-0037 finalizes an original host-only eager CODE image loading/ownership/retirement contract, unimplemented. Selected bytes stage in caller-owned native storage; exclusive locked handles and loaded-table data have one owner. First allocation commits effects; ordinary later OOM retains PARTIAL for explicit cleanup, unexpected faults stay quarantined. Destination EXEC permissions and physical executable aliases refuse; execution needs a later admission bridge. Claude/Grok each read one frozen public contract/API packet and return six lead-reviewed findings, not tests or historical evidence. All24 originals/copies, compiled/interface/boot/assets/build/edition/project pointers and both untested System1/ROM boot goals remain. No implementation/fixture/TEST/IMPL/build, guest binding, app execution, native application or VM/emulator/reference run. Human provenance and source/UART/native/physical/full128K/parity/B2 gates persist; Git wiki queue only.
 
 [Contract/review](development/code-image-contract-review.md). Next propose the original bounded load/cleanup implementation;

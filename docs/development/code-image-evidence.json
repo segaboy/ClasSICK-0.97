@@ -1,0 +1,1464 @@
+{
+  "schema_version": 1,
+  "specification": "SPEC-0033",
+  "implementation": "IMPL-0037",
+  "test": "TEST-0041",
+  "source": "SRC-0178",
+  "profile": "classick-owned-code-image-v1",
+  "verified_on": "2026-10-15",
+  "compiled_source_revision": null,
+  "classification": "hosted-data-only-code-image-lifecycle-and-standalone-compiler-verification",
+  "historical_1984_confirmed": false,
+  "new_native_application": false,
+  "new_boot_image_integration": false,
+  "new_vm_or_emulator_runs": false,
+  "application_executed": false,
+  "verification": {
+    "specification": "SPEC-0033",
+    "object_audits": 10,
+    "hosted_twins": {
+      "clang": "a669a4c98854568e42aee9b11e3cd9e7517f67ce85584bd3cd4c74db060269b8",
+      "gcc": "8797aadf48db9e3b7ca642417534da7987e58fb477032f51139ad8edf1bccc61"
+    },
+    "new_guest_or_boot_trial": false,
+    "final_complete_ctest_checks": 2010,
+    "final_profile_counts": [
+      236,
+      236,
+      236,
+      209,
+      236,
+      221,
+      221,
+      221,
+      194
+    ],
+    "partition_cases": 136,
+    "post_unit_fault_cases": 220,
+    "before_manager_fault_cases": 6,
+    "prepare_refusal_seams": 1,
+    "independent_load_units": 135,
+    "independent_release_units": 85,
+    "maximum_staging_test_bytes": 524816,
+    "maximum_staging_test_uses_larger_hosted_guest_map": true,
+    "worker_executed_cases": 0,
+    "final_log_sha256": "d325dacc69342b01f320063c1512c9fafe038cec7faced2cc412d4999e2db245",
+    "ci_status": "pending"
+  },
+  "m68k": {
+    "manifest": {
+      "schema_version": 1,
+      "specification": "SPEC-0033",
+      "compiler": "m68k-linux-gnu-gcc-13 (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0",
+      "object_audits": 16,
+      "complete_relocatable_links": 2,
+      "storage_bytes_68000": {
+        "service": 5202,
+        "profile": 16,
+        "context": 40,
+        "request": 80,
+        "report": 210,
+        "description": 426,
+        "workspace": 3588,
+        "segment": 20,
+        "manager": 672,
+        "lifecycle_controller": 112,
+        "resource_service": 3314
+      },
+      "profiles": [
+        {
+          "optimization": "-O0",
+          "objects": 8,
+          "combined_sha256": "3bccc390a2fae3f96e0ad3c7ce2de4ab3fa13461846e9efa2f1d449ca15fdd95",
+          "stack_frames": [
+            {
+              "function": "cs_guest_validate",
+              "bytes": 20
+            },
+            {
+              "function": "cs_guest_window",
+              "bytes": 20
+            },
+            {
+              "function": "operand",
+              "bytes": 24
+            },
+            {
+              "function": "cs_guest_read",
+              "bytes": 44
+            },
+            {
+              "function": "cs_guest_write",
+              "bytes": 36
+            },
+            {
+              "function": "zone",
+              "bytes": 0
+            },
+            {
+              "function": "read32",
+              "bytes": 0
+            },
+            {
+              "function": "write32",
+              "bytes": 0
+            },
+            {
+              "function": "intersects",
+              "bytes": 0
+            },
+            {
+              "function": "extent",
+              "bytes": 0
+            },
+            {
+              "function": "configuration",
+              "bytes": 52
+            },
+            {
+              "function": "cs_mm_init",
+              "bytes": 100
+            },
+            {
+              "function": "state",
+              "bytes": 48
+            },
+            {
+              "function": "compact",
+              "bytes": 36
+            },
+            {
+              "function": "fits",
+              "bytes": 28
+            },
+            {
+              "function": "gap",
+              "bytes": 40
+            },
+            {
+              "function": "copy_bytes",
+              "bytes": 8
+            },
+            {
+              "function": "commit_moves",
+              "bytes": 44
+            },
+            {
+              "function": "reply",
+              "bytes": 0
+            },
+            {
+              "function": "object",
+              "bytes": 20
+            },
+            {
+              "function": "cs_mm_execute",
+              "bytes": 608
+            },
+            {
+              "function": "rom_address",
+              "bytes": 0
+            },
+            {
+              "function": "config_valid",
+              "bytes": 8
+            },
+            {
+              "function": "state_valid",
+              "bytes": 4
+            },
+            {
+              "function": "executable",
+              "bytes": 8
+            },
+            {
+              "function": "cs_trap_decode",
+              "bytes": 4
+            },
+            {
+              "function": "cs_trap_init",
+              "bytes": 8
+            },
+            {
+              "function": "cs_trap_get",
+              "bytes": 12
+            },
+            {
+              "function": "cs_trap_set",
+              "bytes": 12
+            },
+            {
+              "function": "intrinsic",
+              "bytes": 24
+            },
+            {
+              "function": "begin_report",
+              "bytes": 0
+            },
+            {
+              "function": "cs_trap_call",
+              "bytes": 32
+            },
+            {
+              "function": "cs_trap_direct",
+              "bytes": 20
+            },
+            {
+              "function": "read32",
+              "bytes": 0
+            },
+            {
+              "function": "write32",
+              "bytes": 4
+            },
+            {
+              "function": "native_valid",
+              "bytes": 0
+            },
+            {
+              "function": "overlap",
+              "bytes": 8
+            },
+            {
+              "function": "guest_overlap",
+              "bytes": 0
+            },
+            {
+              "function": "same_bytes",
+              "bytes": 4
+            },
+            {
+              "function": "copy_report",
+              "bytes": 4
+            },
+            {
+              "function": "report",
+              "bytes": 4
+            },
+            {
+              "function": "integrity",
+              "bytes": 48
+            },
+            {
+              "function": "object_span",
+              "bytes": 12
+            },
+            {
+              "function": "envelope",
+              "bytes": 92
+            },
+            {
+              "function": "same_zone",
+              "bytes": 0
+            },
+            {
+              "function": "copy_zone",
+              "bytes": 0
+            },
+            {
+              "function": "same_block",
+              "bytes": 0
+            },
+            {
+              "function": "copy_block",
+              "bytes": 0
+            },
+            {
+              "function": "copy_scrap",
+              "bytes": 0
+            },
+            {
+              "function": "same_scrap",
+              "bytes": 0
+            },
+            {
+              "function": "copy_entry",
+              "bytes": 0
+            },
+            {
+              "function": "same_entry",
+              "bytes": 0
+            },
+            {
+              "function": "copy_request",
+              "bytes": 0
+            },
+            {
+              "function": "same_request",
+              "bytes": 0
+            },
+            {
+              "function": "copy_config",
+              "bytes": 0
+            },
+            {
+              "function": "same_config",
+              "bytes": 0
+            },
+            {
+              "function": "gateway_check",
+              "bytes": 36
+            },
+            {
+              "function": "inventory_check",
+              "bytes": 60
+            },
+            {
+              "function": "preflight",
+              "bytes": 92
+            },
+            {
+              "function": "cs_life_init",
+              "bytes": 88
+            },
+            {
+              "function": "cs_life_admit",
+              "bytes": 4
+            },
+            {
+              "function": "cs_life_manager_call",
+              "bytes": 16
+            },
+            {
+              "function": "cs_life_prepare",
+              "bytes": 164
+            },
+            {
+              "function": "current_plan",
+              "bytes": 0
+            },
+            {
+              "function": "output_safe",
+              "bytes": 76
+            },
+            {
+              "function": "revalidate",
+              "bytes": 164
+            },
+            {
+              "function": "invalidate",
+              "bytes": 0
+            },
+            {
+              "function": "completed",
+              "bytes": 0
+            },
+            {
+              "function": "fault",
+              "bytes": 12
+            },
+            {
+              "function": "invariants",
+              "bytes": 40
+            },
+            {
+              "function": "cs_life_commit",
+              "bytes": 52
+            },
+            {
+              "function": "cs_life_cancel",
+              "bytes": 20
+            },
+            {
+              "function": "u16",
+              "bytes": 0
+            },
+            {
+              "function": "u24",
+              "bytes": 0
+            },
+            {
+              "function": "u32",
+              "bytes": 0
+            },
+            {
+              "function": "count",
+              "bytes": 0
+            },
+            {
+              "function": "extent",
+              "bytes": 0
+            },
+            {
+              "function": "signed_id",
+              "bytes": 0
+            },
+            {
+              "function": "overlaps",
+              "bytes": 0
+            },
+            {
+              "function": "done",
+              "bytes": 0
+            },
+            {
+              "function": "begin",
+              "bytes": 0
+            },
+            {
+              "function": "end",
+              "bytes": 16
+            },
+            {
+              "function": "copy_view",
+              "bytes": 0
+            },
+            {
+              "function": "copy_entry",
+              "bytes": 0
+            },
+            {
+              "function": "record",
+              "bytes": 68
+            },
+            {
+              "function": "cs_rf_open",
+              "bytes": 216
+            },
+            {
+              "function": "valid",
+              "bytes": 12
+            },
+            {
+              "function": "cs_rf_find",
+              "bytes": 104
+            },
+            {
+              "function": "valid",
+              "bytes": 0
+            },
+            {
+              "function": "aligned",
+              "bytes": 16
+            },
+            {
+              "function": "overlap",
+              "bytes": 8
+            },
+            {
+              "function": "intersects",
+              "bytes": 0
+            },
+            {
+              "function": "clear",
+              "bytes": 8
+            },
+            {
+              "function": "copy",
+              "bytes": 12
+            },
+            {
+              "function": "be16",
+              "bytes": 0
+            },
+            {
+              "function": "be32",
+              "bytes": 8
+            },
+            {
+              "function": "add",
+              "bytes": 0
+            },
+            {
+              "function": "subtract",
+              "bytes": 0
+            },
+            {
+              "function": "envelope",
+              "bytes": 396
+            },
+            {
+              "function": "initialize",
+              "bytes": 8
+            },
+            {
+              "function": "fail",
+              "bytes": 0
+            },
+            {
+              "function": "inactive",
+              "bytes": 4
+            },
+            {
+              "function": "position",
+              "bytes": 0
+            },
+            {
+              "function": "find",
+              "bytes": 24
+            },
+            {
+              "function": "header",
+              "bytes": 40
+            },
+            {
+              "function": "cs_code_inspect",
+              "bytes": 152
+            },
+            {
+              "function": "resource_valid",
+              "bytes": 4
+            },
+            {
+              "function": "snapshot_valid",
+              "bytes": 72
+            },
+            {
+              "function": "backing_alias",
+              "bytes": 100
+            },
+            {
+              "function": "cs_code_check_layout",
+              "bytes": 168
+            },
+            {
+              "function": "valid",
+              "bytes": 0
+            },
+            {
+              "function": "aligned",
+              "bytes": 16
+            },
+            {
+              "function": "overlap",
+              "bytes": 8
+            },
+            {
+              "function": "bytes_copy",
+              "bytes": 12
+            },
+            {
+              "function": "clear",
+              "bytes": 8
+            },
+            {
+              "function": "read32",
+              "bytes": 0
+            },
+            {
+              "function": "envelope",
+              "bytes": 292
+            },
+            {
+              "function": "same_zone",
+              "bytes": 0
+            },
+            {
+              "function": "same_ticket",
+              "bytes": 0
+            },
+            {
+              "function": "identity",
+              "bytes": 0
+            },
+            {
+              "function": "topology",
+              "bytes": 28
+            },
+            {
+              "function": "cached_valid",
+              "bytes": 44
+            },
+            {
+              "function": "ownership",
+              "bytes": 108
+            },
+            {
+              "function": "admission",
+              "bytes": 32
+            },
+            {
+              "function": "registered",
+              "bytes": 0
+            },
+            {
+              "function": "initialize_report",
+              "bytes": 8
+            },
+            {
+              "function": "refuse",
+              "bytes": 0
+            },
+            {
+              "function": "fault",
+              "bytes": 12
+            },
+            {
+              "function": "unit",
+              "bytes": 0
+            },
+            {
+              "function": "call",
+              "bytes": 60
+            },
+            {
+              "function": "cs_res_init",
+              "bytes": 28
+            },
+            {
+              "function": "cache_slot",
+              "bytes": 4
+            },
+            {
+              "function": "lease_slot",
+              "bytes": 12
+            },
+            {
+              "function": "resident_report",
+              "bytes": 12
+            },
+            {
+              "function": "publish_ticket",
+              "bytes": 28
+            },
+            {
+              "function": "acquire",
+              "bytes": 240
+            },
+            {
+              "function": "dispose",
+              "bytes": 36
+            },
+            {
+              "function": "cs_res_execute",
+              "bytes": 148
+            },
+            {
+              "function": "cs_res_external_admit",
+              "bytes": 12
+            },
+            {
+              "function": "zero",
+              "bytes": 8
+            },
+            {
+              "function": "copy",
+              "bytes": 12
+            },
+            {
+              "function": "equal",
+              "bytes": 12
+            },
+            {
+              "function": "valid",
+              "bytes": 0
+            },
+            {
+              "function": "aligned",
+              "bytes": 16
+            },
+            {
+              "function": "overlap",
+              "bytes": 8
+            },
+            {
+              "function": "intersects",
+              "bytes": 0
+            },
+            {
+              "function": "u16",
+              "bytes": 0
+            },
+            {
+              "function": "u32",
+              "bytes": 8
+            },
+            {
+              "function": "bit",
+              "bytes": 0
+            },
+            {
+              "function": "protect",
+              "bytes": 20
+            },
+            {
+              "function": "add_span",
+              "bytes": 16
+            },
+            {
+              "function": "map_safe",
+              "bytes": 52
+            },
+            {
+              "function": "session_safe",
+              "bytes": 36
+            },
+            {
+              "function": "inventory_safe",
+              "bytes": 24
+            },
+            {
+              "function": "life_safe",
+              "bytes": 80
+            },
+            {
+              "function": "resource_safe",
+              "bytes": 56
+            },
+            {
+              "function": "native_safe",
+              "bytes": 224
+            },
+            {
+              "function": "identity",
+              "bytes": 0
+            },
+            {
+              "function": "inactive",
+              "bytes": 4
+            },
+            {
+              "function": "views",
+              "bytes": 36
+            },
+            {
+              "function": "binding",
+              "bytes": 28
+            },
+            {
+              "function": "physical_alias",
+              "bytes": 64
+            },
+            {
+              "function": "native_outside_guest",
+              "bytes": 36
+            },
+            {
+              "function": "acknowledged",
+              "bytes": 72
+            },
+            {
+              "function": "same_inventory",
+              "bytes": 28
+            },
+            {
+              "function": "failure",
+              "bytes": 0
+            },
+            {
+              "function": "status",
+              "bytes": 0
+            },
+            {
+              "function": "fault",
+              "bytes": 12
+            },
+            {
+              "function": "unit",
+              "bytes": 0
+            },
+            {
+              "function": "manager_call",
+              "bytes": 40
+            },
+            {
+              "function": "owned",
+              "bytes": 40
+            },
+            {
+              "function": "all_owned",
+              "bytes": 20
+            },
+            {
+              "function": "nonexec",
+              "bytes": 88
+            },
+            {
+              "function": "code_context",
+              "bytes": 0
+            },
+            {
+              "function": "layout",
+              "bytes": 36
+            },
+            {
+              "function": "capacity_ok",
+              "bytes": 32
+            },
+            {
+              "function": "staged",
+              "bytes": 40
+            },
+            {
+              "function": "seal_equal",
+              "bytes": 12
+            },
+            {
+              "function": "describe",
+              "bytes": 12
+            },
+            {
+              "function": "empty",
+              "bytes": 0
+            },
+            {
+              "function": "prepare",
+              "bytes": 56
+            },
+            {
+              "function": "table_byte",
+              "bytes": 20
+            },
+            {
+              "function": "world_valid",
+              "bytes": 52
+            },
+            {
+              "function": "world_clear",
+              "bytes": 40
+            },
+            {
+              "function": "load",
+              "bytes": 88
+            },
+            {
+              "function": "release",
+              "bytes": 44
+            },
+            {
+              "function": "cs_image_init",
+              "bytes": 116
+            },
+            {
+              "function": "cs_image_execute",
+              "bytes": 44
+            },
+            {
+              "function": "cs_image_external_admit",
+              "bytes": 12
+            }
+          ]
+        },
+        {
+          "optimization": "-Os",
+          "objects": 8,
+          "combined_sha256": "6b2abba14a9f1d036b05134b32f3d6fc34e9e188b09e8c80cfd450a52357e209",
+          "stack_frames": [
+            {
+              "function": "cs_guest_validate",
+              "bytes": 28
+            },
+            {
+              "function": "cs_guest_window",
+              "bytes": 40
+            },
+            {
+              "function": "operand",
+              "bytes": 24
+            },
+            {
+              "function": "cs_guest_read",
+              "bytes": 36
+            },
+            {
+              "function": "cs_guest_write",
+              "bytes": 40
+            },
+            {
+              "function": "read32",
+              "bytes": 0
+            },
+            {
+              "function": "write32",
+              "bytes": 0
+            },
+            {
+              "function": "compact",
+              "bytes": 28
+            },
+            {
+              "function": "fits",
+              "bytes": 16
+            },
+            {
+              "function": "configuration",
+              "bytes": 56
+            },
+            {
+              "function": "copy_bytes",
+              "bytes": 0
+            },
+            {
+              "function": "commit_moves",
+              "bytes": 72
+            },
+            {
+              "function": "gap.constprop",
+              "bytes": 40
+            },
+            {
+              "function": "cs_mm_init",
+              "bytes": 120
+            },
+            {
+              "function": "cs_mm_execute",
+              "bytes": 604
+            },
+            {
+              "function": "rom_address.isra",
+              "bytes": 0
+            },
+            {
+              "function": "executable",
+              "bytes": 16
+            },
+            {
+              "function": "config_valid",
+              "bytes": 28
+            },
+            {
+              "function": "state_valid",
+              "bytes": 4
+            },
+            {
+              "function": "cs_trap_decode",
+              "bytes": 8
+            },
+            {
+              "function": "cs_trap_init",
+              "bytes": 12
+            },
+            {
+              "function": "cs_trap_get",
+              "bytes": 24
+            },
+            {
+              "function": "cs_trap_set",
+              "bytes": 24
+            },
+            {
+              "function": "intrinsic",
+              "bytes": 24
+            },
+            {
+              "function": "cs_trap_call",
+              "bytes": 32
+            },
+            {
+              "function": "cs_trap_direct",
+              "bytes": 32
+            },
+            {
+              "function": "read32",
+              "bytes": 0
+            },
+            {
+              "function": "write32",
+              "bytes": 0
+            },
+            {
+              "function": "native_valid",
+              "bytes": 0
+            },
+            {
+              "function": "overlap",
+              "bytes": 4
+            },
+            {
+              "function": "copy_report",
+              "bytes": 0
+            },
+            {
+              "function": "report",
+              "bytes": 0
+            },
+            {
+              "function": "object_span",
+              "bytes": 12
+            },
+            {
+              "function": "current_plan",
+              "bytes": 0
+            },
+            {
+              "function": "output_safe",
+              "bytes": 72
+            },
+            {
+              "function": "envelope",
+              "bytes": 76
+            },
+            {
+              "function": "guest_overlap",
+              "bytes": 0
+            },
+            {
+              "function": "integrity",
+              "bytes": 48
+            },
+            {
+              "function": "preflight",
+              "bytes": 96
+            },
+            {
+              "function": "cs_life_init",
+              "bytes": 48
+            },
+            {
+              "function": "cs_life_admit",
+              "bytes": 0
+            },
+            {
+              "function": "cs_life_manager_call",
+              "bytes": 32
+            },
+            {
+              "function": "cs_life_prepare",
+              "bytes": 168
+            },
+            {
+              "function": "cs_life_commit",
+              "bytes": 188
+            },
+            {
+              "function": "cs_life_cancel",
+              "bytes": 32
+            },
+            {
+              "function": "u16",
+              "bytes": 0
+            },
+            {
+              "function": "u32",
+              "bytes": 4
+            },
+            {
+              "function": "record",
+              "bytes": 48
+            },
+            {
+              "function": "cs_rf_open",
+              "bytes": 192
+            },
+            {
+              "function": "cs_rf_find",
+              "bytes": 104
+            },
+            {
+              "function": "valid",
+              "bytes": 0
+            },
+            {
+              "function": "overlap",
+              "bytes": 4
+            },
+            {
+              "function": "copy",
+              "bytes": 0
+            },
+            {
+              "function": "be32",
+              "bytes": 0
+            },
+            {
+              "function": "resource_valid",
+              "bytes": 4
+            },
+            {
+              "function": "backing_alias",
+              "bytes": 100
+            },
+            {
+              "function": "find",
+              "bytes": 48
+            },
+            {
+              "function": "intersects",
+              "bytes": 0
+            },
+            {
+              "function": "inactive",
+              "bytes": 0
+            },
+            {
+              "function": "aligned.constprop",
+              "bytes": 12
+            },
+            {
+              "function": "envelope",
+              "bytes": 340
+            },
+            {
+              "function": "cs_code_inspect",
+              "bytes": 112
+            },
+            {
+              "function": "cs_code_check_layout",
+              "bytes": 184
+            },
+            {
+              "function": "valid",
+              "bytes": 0
+            },
+            {
+              "function": "overlap",
+              "bytes": 4
+            },
+            {
+              "function": "bytes_copy",
+              "bytes": 0
+            },
+            {
+              "function": "clear",
+              "bytes": 0
+            },
+            {
+              "function": "read32",
+              "bytes": 0
+            },
+            {
+              "function": "identity",
+              "bytes": 4
+            },
+            {
+              "function": "initialize_report",
+              "bytes": 16
+            },
+            {
+              "function": "fault",
+              "bytes": 12
+            },
+            {
+              "function": "resident_report",
+              "bytes": 36
+            },
+            {
+              "function": "publish_ticket",
+              "bytes": 24
+            },
+            {
+              "function": "cached_valid",
+              "bytes": 56
+            },
+            {
+              "function": "ownership",
+              "bytes": 104
+            },
+            {
+              "function": "aligned.constprop",
+              "bytes": 12
+            },
+            {
+              "function": "envelope",
+              "bytes": 240
+            },
+            {
+              "function": "call.isra",
+              "bytes": 72
+            },
+            {
+              "function": "dispose.isra",
+              "bytes": 48
+            },
+            {
+              "function": "topology",
+              "bytes": 12
+            },
+            {
+              "function": "cs_res_init",
+              "bytes": 56
+            },
+            {
+              "function": "cs_res_execute",
+              "bytes": 256
+            },
+            {
+              "function": "cs_res_external_admit",
+              "bytes": 20
+            },
+            {
+              "function": "zero",
+              "bytes": 0
+            },
+            {
+              "function": "copy",
+              "bytes": 0
+            },
+            {
+              "function": "equal",
+              "bytes": 0
+            },
+            {
+              "function": "overlap",
+              "bytes": 4
+            },
+            {
+              "function": "u32",
+              "bytes": 0
+            },
+            {
+              "function": "physical_alias",
+              "bytes": 72
+            },
+            {
+              "function": "same_inventory",
+              "bytes": 40
+            },
+            {
+              "function": "status",
+              "bytes": 0
+            },
+            {
+              "function": "fault",
+              "bytes": 28
+            },
+            {
+              "function": "table_byte",
+              "bytes": 8
+            },
+            {
+              "function": "views",
+              "bytes": 44
+            },
+            {
+              "function": "owned",
+              "bytes": 52
+            },
+            {
+              "function": "all_owned",
+              "bytes": 28
+            },
+            {
+              "function": "binding",
+              "bytes": 28
+            },
+            {
+              "function": "intersects",
+              "bytes": 0
+            },
+            {
+              "function": "acknowledged",
+              "bytes": 100
+            },
+            {
+              "function": "world_valid.constprop",
+              "bytes": 48
+            },
+            {
+              "function": "aligned.constprop",
+              "bytes": 0
+            },
+            {
+              "function": "capacity_ok.isra",
+              "bytes": 24
+            },
+            {
+              "function": "manager_call.isra",
+              "bytes": 44
+            },
+            {
+              "function": "unit.isra",
+              "bytes": 4
+            },
+            {
+              "function": "world_clear",
+              "bytes": 52
+            },
+            {
+              "function": "protect",
+              "bytes": 40
+            },
+            {
+              "function": "add_span",
+              "bytes": 24
+            },
+            {
+              "function": "map_safe",
+              "bytes": 40
+            },
+            {
+              "function": "session_safe",
+              "bytes": 32
+            },
+            {
+              "function": "inventory_safe",
+              "bytes": 32
+            },
+            {
+              "function": "life_safe",
+              "bytes": 40
+            },
+            {
+              "function": "resource_safe",
+              "bytes": 44
+            },
+            {
+              "function": "layout",
+              "bytes": 116
+            },
+            {
+              "function": "cs_image_init",
+              "bytes": 144
+            },
+            {
+              "function": "cs_image_execute",
+              "bytes": 208
+            },
+            {
+              "function": "cs_image_external_admit",
+              "bytes": 12
+            }
+          ]
+        }
+      ],
+      "inputs": {
+        "core/memory/guest.c": "9678b43e3dc82df2f66119794f08cb2a0dbd85c07a031085daba35b230b6f8a1",
+        "core/memory/manager.c": "24f12c710e62f73c274964834ca4470d78c8b54c0e7dcfb6427ca94b9deff575",
+        "core/services/traps.c": "585adf0742f51390bc44ba086b58e22361bb7188c1205bcc11968875f0cbb1ef",
+        "core/memory/lifecycle.c": "fa39f5d1daf5ddaac89129a17d0a51dde559509a135a9487ce02866de034c5ac",
+        "formats/resourcefork/reader.c": "ef3ab3b867fa49c830559092d90ddba2c9d2df4edcb747665c907cd8cf6f23a9",
+        "personality/system1/code-preflight.c": "eb17d35ec44452a08886c5901c1b43f0c5292a67e5feb9490da39bad1fd3e189",
+        "personality/system1/resources.c": "65cc2fa5496cd14c941acd36b061c586f5314cf463c9e76759f753191b879636",
+        "personality/system1/code-image.c": "79e946d054066dbeb2d09c34a85326b731251a06ef02b7614ab05bf90c694728",
+        "personality/system1/code-image.h": "030cd3e96eff4c21ba9a03e330d40a40af883cc5fbac2b0ff34443a5c8de7e8f",
+        "personality/system1/resources.h": "f19d4e3ba2283e2081e271660a086294cef31773121c329941faab8c99375fcb",
+        "personality/system1/code-preflight.h": "e422ee629c35489ec4c10ec6fb6b992e5a256ec5492701489f357a2c052ccac7",
+        "core/memory/lifecycle.h": "8d21a92f26f3b06973f77047721d46c040cb6daacb787f32372ffcb901cedf05",
+        "core/memory/manager.h": "9752645a3c610d46c41e2826061853967baff6898c954c20006ce2949f8e1078",
+        "core/memory/guest.h": "5a89e549470bd0f3ffe50e7fb714342ff7dc6af0d49a0c154a7baebdf7e113ff",
+        "core/services/traps.h": "a3346547364a2237027dbe1d134b81129e80f9731f4c49c813fc9f68563fd782",
+        "formats/resourcefork/reader.h": "06fcb33136037f43662f155df9d4d896c4d28dc786f5eb59b5c94ae0925156ea",
+        "core/cpu/m68k-session.h": "aea400413449630489f6fa0a8a6ab924271e254a4fd0d94724bc82dd9c70bdee",
+        "core/cpu/m68k-call.h": "5f320112485dfd98cd868e290bc1d3efdb8a0f3e81fbb4eb81fb93e6494cab1d",
+        "core/cpu/m68k-bus.h": "a0a8fa1ca3075be2c3f6eecfe18f45ef0c3db3c338af00d5451edc293ad2ce0a",
+        "core/cpu/m68k.h": "db12b5678ffe4b471082a3b9f6840719148d10032c2ba6dfeb2a9d83a03b7ad5",
+        "docs/specifications/SPEC-0033-owned-code-image-lifecycle.md": "83d85c15a14568f655b0f2fc86247800ec89b11d2626eeff43918de5b8aa177a",
+        "scripts/Verify-CodeImageM68k.py": "c10db348fdcccc20392c8b4df681480300ad7fa41e51e6a0b113abaf174b346b",
+        "scripts/Verify-GuestM68k.py": "548addd87816af0f0f190c4f82c6b17083155e3703d28c9d124a0038acf6ed68",
+        "tests/code-image.c": "89a1c81f815a7768a793e25777074c8e15a275b89477a348805f398fc8e0ee61"
+      },
+      "tool_lock_sha256": "a2fe02f949288826f6a1d11b55df1d3305aab4fb4726da83a4fb8695b7f21898",
+      "native_executed": false,
+      "rom_integration": false
+    },
+    "manifest_sha256": "7b9ad3994e59b9f190f29dbc03a952e8df9a3edee8516ee429f5df1b2de5fbc9",
+    "complete_manifest_matches_ci": false,
+    "individual_closure_frame_maxima": {
+      "-O0": 608,
+      "-Os": 604
+    },
+    "cumulative_stack_measured": false,
+    "full128K_fit_proven": false
+  },
+  "workers": {
+    "claude": {
+      "cli_version": "2.1.287",
+      "reported_models": [
+        "claude-opus-5-5"
+      ],
+      "effort": "low",
+      "model_turns": 2,
+      "actual_read_calls": 1,
+      "packet_bytes": 63429,
+      "packet_sha256": "0de3112d99ac8ead1a34495a41ca2d0295482b1cdc49aa8a0f67f5c332a0c5f4",
+      "report_bytes": 4433,
+      "report_sha256": "db0a67bb5e9c899eafde873269a8785167d2acb2301a1946fc59da2b62d29a5a",
+      "report_words": 625,
+      "requested_maximum_words": 600,
+      "reader_truncated": true,
+      "usage": {
+        "input_tokens": 4,
+        "cache_creation_input_tokens": 23271,
+        "cache_read_input_tokens": 4725,
+        "output_tokens": 4564,
+        "output_tokens_details": {
+          "thinking_tokens": 2788
+        },
+        "server_tool_use": {
+          "web_search_requests": 0,
+          "web_fetch_requests": 0
+        },
+        "service_tier": "standard",
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 23271,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "global",
+        "speed": "standard",
+        "fallback_credit": null
+      },
+      "cli_list_cost_estimate_usd": 0.278409,
+      "cost_is_billing_or_quota_measurement": false,
+      "worker_executed_tests": false,
+      "no_extra_file_command_edit_web_mcp_subagent": true
+    },
+    "claude-tail": {
+      "cli_version": "2.1.287",
+      "reported_models": [
+        "claude-opus-5-5"
+      ],
+      "effort": "low",
+      "model_turns": 2,
+      "actual_read_calls": 1,
+      "packet_bytes": 20001,
+      "packet_sha256": "3ae0cbb50549485a72ca595664b6830d06af3836740caeb5820760f77551962f",
+      "report_bytes": 4743,
+      "report_sha256": "ebc331260b964a53cb5fafe91f1b29edf868aafe00d457c66cd941d8effaf9e6",
+      "report_words": 722,
+      "requested_maximum_words": 500,
+      "reader_truncated": false,
+      "usage": {
+        "input_tokens": 4,
+        "cache_creation_input_tokens": 11527,
+        "cache_read_input_tokens": 5645,
+        "output_tokens": 4899,
+        "output_tokens_details": {
+          "thinking_tokens": 3074
+        },
+        "server_tool_use": {
+          "web_search_requests": 0,
+          "web_fetch_requests": 0
+        },
+        "service_tier": "standard",
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 11527,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "global",
+        "speed": "standard",
+        "fallback_credit": null
+      },
+      "cli_list_cost_estimate_usd": 0.19134099999999998,
+      "cost_is_billing_or_quota_measurement": false,
+      "worker_executed_tests": false,
+      "no_extra_file_command_edit_web_mcp_subagent": true
+    },
+    "grok": {
+      "cli_version": "1.0.52 (0920c8169e27) stable",
+      "reported_models": [
+        "grok-4.7-build"
+      ],
+      "effort": "low",
+      "model_turns": 2,
+      "actual_read_calls": 1,
+      "packet_bytes": 50049,
+      "packet_sha256": "49f22c2e9eb0a4c3cce4a3019f514365f43c690b9259a218b0f4815d0427f15d",
+      "report_bytes": 4600,
+      "report_sha256": "48c531f357501d0e3b13dd1bce9f5b3eb57efbe201b6cf225bd626feaecc515a",
+      "report_words": 598,
+      "requested_maximum_words": 600,
+      "reader_truncated": false,
+      "usage": {
+        "input_tokens": 19784,
+        "cache_read_input_tokens": 7296,
+        "cache_creation_input_tokens": 0,
+        "output_tokens": 9002,
+        "reasoning_tokens": 7842,
+        "total_tokens": 36082
+      },
+      "cli_list_cost_estimate_usd": 0.03305752,
+      "cost_is_billing_or_quota_measurement": false,
+      "worker_executed_tests": false,
+      "no_extra_file_command_edit_web_mcp_subagent": true
+    }
+  },
+  "preservation": {
+    "research_originals": 24,
+    "unchanged_untracked_and_private_copies": true,
+    "prior_runtime_boot_interface_asset_uart_inputs_unchanged": true,
+    "two_required_system1_rom_directions_tested": false,
+    "old_build_edition_records_preserved": true,
+    "complete_local_boot_media_results_match_prior": true
+  },
+  "human_provenance_review": "pending"
+}

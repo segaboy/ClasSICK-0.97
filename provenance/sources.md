@@ -1,5 +1,30 @@
 # Source catalog
 
+## SRC-0176 - Claude owned CODE image safety review
+
+2026-10-15. Two frozen reviewed-public/original-code packets, first Read truncated, separately shown smaller follow-up complete. Each one Read/two model turns, no other files/commands/edits/tests/web/MCP/subagents. Actual models, packet/report identities, usage and coverage/word overruns are recorded in docs/development/code-image-evidence.json. Conditional false historical/private-heap and negative-ID claims are rejected against reviewed own contracts; source-pointer hygiene/report clarity are adopted. Advisory only, not historical or legal certification.
+
+## SRC-0177 - Grok owned CODE image coverage review
+
+2026-10-15. One frozen reviewed-public contract/API/original-test packet, one completed read_file/two model turns; no edits/commands/tests/web/MCP/subagents. Lead adopts additional real locked fragmentation/retained-compaction, exact independent fault-mask/byte/unit, mixed-slot/scrap/world/alias/gate cases. Reject immovable-pointer misconception and apply native contract failure precedence. Actual identities and usage in evidence. Advisory only; worker tests zero.
+
+## SRC-0178 - Lead owned CODE image implementation verification
+
+2026-10-15. SPEC-0033 / IMPL-0037 / TEST-0041 implements original host-only eager CODE staging, exclusive locked handles, A5-world data population and explicit image retirement. A first allocator OOM retains PREPARED; a later ordinary OOM retains PARTIAL with explicit cleanup and no world writes. Unexpected faults retain exact effects and block further admission. No application execution, guest binding, reset/boot integration, native application or VM/emulator/reference trial. Historical/source/native/physical/full128K/parity/edition/B2 and human-review gates remain open; both required System1/ROM boot directions remain untested. Original implementation/fixtures derive only from reviewed own contracts and existing project interfaces/code; no raw drafts, manual samples, new historical source or third-party implementations/assets. Final local/compiler/CI evidence is recorded separately; human provenance pending.
+
+## SRC-0175 - Owner eager CODE image implementation continuation
+
+2026-10-15, owner: "Go for it." Accepts the proposed original loading/cleanup
+implementation and tests following SPEC-0033 / ADR-0037 at public8896713 /
+HQ7db5557. Scoped Claude/Grok review, compiler/regression/CI verification and
+ordinary Git/HQ/wiki publication follow established practice. This supersedes
+that contract-only limit solely for the hosted data-loading/ownership slice.
+No application execution, guest binding, reset/boot integration, native app/SDK
+or VM/emulator/reference trial. Preserve24 originals/copies and existing source/
+UART/native/physical/full128K/parity/edition/B2/human gates. SRC-0149 standing
+scoped public-contract/original-code transfers apply; HQ/raw originals/manuals/
+credentials/prohibited inputs excluded. No extra agents/chats/automation/OneNote.
+
 ## SRC-0173 - Claude owned CODE image contract review
 
 2026-10-15, Claude Code2.1.287, reported claude-opus-5-5, low effort. One Read of

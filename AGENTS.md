@@ -1,5 +1,15 @@
 # ClasSICK 0.97 working instructions
 
+- Current owner implementation scope (2026-10-15, SRC-0175): "Go for it"
+  accepts the original SPEC-0033 loading/ownership/cleanup implementation and
+  tests, bounded Claude/Grok reviews, compiler/regression/CI verification and
+  ordinary public/HQ/wiki records. This supersedes the previous contract-only
+  limit for this slice. Application execution, guest bindings, reset/boot
+  integration, native app/SDK and VM/emulator/reference trials remain outside
+  scope. Preserve all24 originals/copies and prior source/UART/native/physical/
+  full128K/edition/B2/human gates. No extra agents/chats/automation/OneNote;
+  SRC-0149 scoped reviewed-public/original-code CLI transfers apply.
+
 - Current owner contract scope (2026-10-15, SRC-0171): "OK, do it" accepts the
   proposed safe segment loading/ownership/cleanup contract after verified
   preflight. SPEC-0033 / ADR-0037 defines eager image staging/population/retirement

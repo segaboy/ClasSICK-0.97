@@ -1,8 +1,14 @@
 # SPEC-0033 - Owned CODE image loading and retirement
 
 Engineering contract v1, 2026-10-15. Profile `classick-owned-code-image-v1`.
-SRC-0171..0174 / ADR-0037. Contract only, unimplemented. No TEST/IMPL/build,
-fixture, guest binding, application execution or new trial. Human review pending.
+SRC-0171..0174 / ADR-0037. Initial publication was contract-only, unimplemented.
+2026-10-15 continuation SRC-0175..0178 / IMPL-0037 / TEST-0041 implements the
+host-only data loading/ownership/retirement slice. See
+[implementation](../development/code-image-implementation.md) and
+[evidence](../development/code-image-evidence.md). Earlier "unexecuted" notes
+describe the contract-publication checkpoint; only recorded executed checks are
+implementation evidence. No guest binding, application execution or new trial.
+Human review pending; normative v1 behavior below is unchanged.
 
 ## Scope and basis
 
