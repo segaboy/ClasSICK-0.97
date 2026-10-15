@@ -34,6 +34,7 @@ typedef struct { cs_image_result cause;cs_image_operation operation;cs_image_pha
     uint32_t segment_valid,segment,masks_valid;
     uint16_t allocated,locked,copied,live,disposed,retired;
     uint32_t execution_authorized;
+    uint32_t execution_scrubbed;
 } cs_image_report;
 typedef struct { cs_image_state state;uint32_t generation,generation_valid,epoch,epoch_valid;
     uint32_t entry_count,segment_count,warnings,execution_authorized;cs_code_layout layout;
@@ -54,6 +55,9 @@ typedef struct cs_image_service { uint32_t tag;const struct cs_image_service *se
     cs_image_segment segments[CS_CODE_SEGMENTS];
     uint16_t allocated,locked,copied,live,disposed,retired;uint32_t world_written;
     cs_image_report first_fault;
+    /* SPEC-0035 exclusive embedded execution participant, one use/generation.
+     * 0 ready,1 claimed,2 running,3 clean stop,4 guest stop,5 quarantine. */
+    uint32_t execution_state,execution_generation,execution_scrubbed;
 #ifdef CLASSICK_IMAGE_TEST_FAULTS
     uint32_t test_after,test_call,test_index,test_prepare;
 #endif

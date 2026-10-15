@@ -37,4 +37,18 @@ typedef struct {
 cs_m68k_result cs_m68k_bus_step_guarded(const cs_guest_map *map,cs_trap_gateway *gateway,
     cs_trap_frame *frame,cs_m68k_bus_report *report,const cs_m68k_stack_limits *limits,
     const cs_m68k_guard *guard);
+/* SPEC-0035 internal coordinator primitive. A trusted immutable owner policy
+ * must validate an exclusive live image lease before every call/access. This
+ * function alone grants no lease. READ-backed fetches remain guarded; ordinary
+ * step_guarded keeps its map EXEC requirement. Only a real RTS at root_slot may
+ * target token without reading it. Token/slot are checked 24-bit even addresses.
+ * No guest-selected policy, alternate executor, dispatch or service is admitted. */
+cs_m68k_result cs_m68k_bus_step_admitted(const cs_guest_map *map,cs_trap_gateway *gateway,
+    cs_trap_frame *frame,cs_m68k_bus_report *report,const cs_m68k_stack_limits *limits,
+    const cs_m68k_guard *guard,uint32_t token,uint32_t root_slot);
+/* Pure native-envelope check, including actual persistent driver locals; no
+ * report/frame/RAM publication and no instruction is fetched or executed. */
+cs_m68k_result cs_m68k_bus_guard_validate(const cs_guest_map *map,cs_trap_gateway *gateway,
+    cs_trap_frame *frame,cs_m68k_bus_report *report,const cs_m68k_stack_limits *limits,
+    const cs_m68k_guard *guard);
 #endif

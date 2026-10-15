@@ -31,7 +31,7 @@ jobs:
         run: .\scripts\Verify-Bootstrap.ps1
       - name: Verify hosted core, loader, exceptions, devices, boot media and unloaded fault fixtures
         shell: powershell
-        run: .\scripts\Verify-GuardedBus.ps1 -BuildRoot build\media-verification -Sanitizers
+        run: .\scripts\Verify-LoadedApp.ps1 -BuildRoot build\media-verification -Sanitizers
 
   m68k-rom:
     runs-on: ubuntu-24.04
@@ -155,4 +155,14 @@ jobs:
         with:
           name: classick-guarded-bus-build
           path: ${{ runner.temp }}/classick-guarded-bus/manifest.json
+          if-no-files-found: error
+      - name: Build first loaded-application ROM twins
+        run: python3 scripts/Build-LoadedAppROM.py --tool-root "$RUNNER_TEMP/classick-m68k/root" --output "$RUNNER_TEMP/classick-loaded-app"
+      - name: Retain original loaded-application ROM and manifest
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
+        with:
+          name: classick-loaded-app-rom
+          path: |
+            ${{ runner.temp }}/classick-loaded-app/manifest.json
+            ${{ runner.temp }}/classick-loaded-app/Os-a/classick-loaded-app.rom
           if-no-files-found: error

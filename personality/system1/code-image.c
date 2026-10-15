@@ -1,6 +1,7 @@
 /* SPDX-License-Identifier: GPL-3.0-or-later */
 /* Copyright (C) 2026 Dean Howell. Original SPEC-0033 data-only owner. */
 #include "code-image.h"
+#include "code-run-internal.h"
 #define TAG UINT32_C(0x494D4731)
 typedef struct {const void *p;size_t n;} span;
 typedef struct {span spans[10];unsigned count;const void *owner;} envelope;
@@ -303,6 +304,7 @@ static void describe(const cs_image_service *s,cs_image_description *d)
 }
 static void empty(cs_image_service *s)
 {
+    s->execution_state=0;
     s->state=CS_IMAGE_EMPTY;s->reservation=0;s->staging_borrow=0;s->staging=0;s->staging_capacity=0;s->staging_bytes=0;
     s->session=0;s->gateway=0;s->inventory_count=0;s->resource_count=0;
     s->allocated=0;s->locked=0;s->copied=0;s->live=0;s->disposed=0;s->retired=0;s->world_written=0;
@@ -446,6 +448,7 @@ cs_image_result cs_image_execute(cs_image_service *s,const cs_image_request *q,c
     if(!native_safe(s,q,w,capacity,out,r))return CS_IMAGE_ARGUMENT;
     zero(r,sizeof *r);r->operation=q->operation;r->phase=CS_IMAGE_ADMISSION;
     if(!identity(s) || s->state>CS_IMAGE_FAULTED || q->operation<CS_IMAGE_PREPARE || q->operation>CS_IMAGE_RELEASE)return failure(r,CS_IMAGE_STATE);
+    if(s->execution_state)return failure(r,s->execution_state==5?CS_IMAGE_FAULT:CS_IMAGE_IN_USE);
     if(s->state==CS_IMAGE_FAULTED){r->state=CS_IMAGE_FAULTED;return failure(r,CS_IMAGE_FAULT);}
     status(s,r);
     if(s->state==CS_IMAGE_POPULATING || s->state==CS_IMAGE_RETIRING ||
@@ -485,10 +488,78 @@ cs_image_result cs_image_execute(cs_image_service *s,const cs_image_request *q,c
 cs_image_result cs_image_external_admit(const cs_image_service *s)
 {
     if(!OBJ(s,cs_image_service) || !identity(s))return CS_IMAGE_ARGUMENT;
+    if(s->execution_state==5)return CS_IMAGE_FAULT;
     if(s->state==CS_IMAGE_FAULTED)return CS_IMAGE_FAULT;
     if(s->state!=CS_IMAGE_EMPTY)return CS_IMAGE_IN_USE;
     if(!binding(s) || cs_life_admit(s->lifecycle)!=CS_LIFE_OK)return CS_IMAGE_CHANGED;
     return CS_IMAGE_OK;
+}
+/* The image itself is the sole FUTURE/REFUSE execution participant. This
+ * dedicated first profile admits no other native/session/resource owner. */
+static int execution_safe(cs_image_service *s,const cs_image_run_request *q,
+    const span *outputs,unsigned count)
+{
+    if(!OBJ(s,cs_image_service) || !OBJ(q,cs_image_run_request) ||
+        !OBJ(q->gateway,cs_trap_gateway) || q->context.count!=1 ||
+        !OBJ(q->context.inventory,cs_life_entry) || q->context.resources ||
+        q->context.resource_count || q->context.session)return 0;
+    envelope e;e.count=0;e.owner=s;
+    if(!add_span(&e,(span){s,sizeof *s}) || !add_span(&e,(span){q,sizeof *q}) ||
+        !add_span(&e,(span){q->gateway,sizeof *q->gateway}) ||
+        !add_span(&e,(span){q->context.inventory,sizeof *q->context.inventory}))return 0;
+    for(unsigned i=0;i<count;++i)if(!add_span(&e,outputs[i]))return 0;
+    if(!life_safe(&e,s->lifecycle) || !map_safe(&e,s->map) ||
+        s->region_count>CS_GUEST_MAX_REGIONS || s->inventory_count>CS_LIFE_INVENTORY ||
+        !aligned(s->descriptors,s->region_count*sizeof *s->descriptors,_Alignof(cs_guest_region)) ||
+        !protect(&e,(span){s->descriptors,s->region_count*sizeof *s->descriptors}))return 0;
+    for(size_t i=0;i<s->region_count;++i)
+        if(!protect(&e,(span){s->regions[i].bytes,s->regions[i].size}) ||
+            !protect(&e,(span){s->regions[i].writable,s->regions[i].writable?s->regions[i].size:0}))return 0;
+    return inventory_safe(&e,s->inventory,s->inventory_count);
+}
+int cs_image_execution_native(cs_image_service *s,const cs_image_run_request *q,
+    cs_trap_frame *caller,cs_image_run_report *r)
+{
+    if(!OBJ(caller,cs_trap_frame) || !OBJ(r,cs_image_run_report))return 0;
+    span outputs[2]={{caller,sizeof *caller},{r,sizeof *r}};
+    return execution_safe(s,q,outputs,2);
+}
+int cs_image_execution_retire_native(cs_image_service *s,const cs_image_run_request *q,
+    cs_image_workspace *w,size_t capacity,cs_image_description *out,cs_image_report *r)
+{
+    if(!OBJ(w,cs_image_workspace) || capacity<sizeof *w || !OBJ(out,cs_image_description) ||
+        !OBJ(r,cs_image_report))return 0;
+    span outputs[3]={{w,capacity},{out,sizeof *out},{r,sizeof *r}};
+    return execution_safe(s,q,outputs,3);
+}
+int cs_image_execution_integrity(const cs_image_service *s,const cs_image_context *c,int dirty)
+{
+    if(!identity(s) || s->state!=CS_IMAGE_LOADED || !inactive(s,c) || c->count!=1 ||
+        c->resource_count || c->session || s->resource_count || s->session ||
+        !same_inventory(s,c) || !acknowledged(s,c,&s->layout,0) || !binding(s) ||
+        cs_life_admit(s->lifecycle)!=CS_LIFE_OK || s->epoch!=s->lifecycle->epoch ||
+        s->manifest.segment_count!=1 || s->manifest.entry_count!=1 ||
+        s->manifest.table_length!=s->manifest.entry_count*8u || !nonexec(s,&s->layout))return 0;
+    uint16_t mask=(uint16_t)((UINT32_C(1)<<s->manifest.segment_count)-1u);
+    if(s->allocated!=mask || s->locked!=mask || s->copied!=mask || s->live!=mask ||
+        s->disposed || s->retired || !all_owned(s))return 0;
+    for(unsigned i=0;i<6;++i){uint32_t value;
+        if(cs_guest_read(s->map,globals[i],4,CS_GUEST_READ,&value)!=CS_GUEST_OK || value!=s->globals[i])return 0;}
+    for(unsigned i=0;i<CS_MM_BLOCKS;++i){int own=0;
+        for(uint32_t j=0;j<s->manifest.segment_count;++j)if(s->segments[j].slot==i)own=1;
+        if(!own && !equal(&s->manager->blocks[i],&s->sealed_manager.blocks[i],sizeof(cs_mm_block)))return 0;
+        for(unsigned z=0;z<2;++z){uint32_t value,base=z?s->config.application.begin:s->config.system.begin;
+            if(cs_guest_read(s->map,base+i*4u,4,CS_GUEST_READ,&value)!=CS_GUEST_OK)return 0;
+            if((z==0 || !own) && value!=s->cells[z][i])return 0;}
+    }
+    if(!dirty)return world_valid(s,1);
+    for(uint32_t i=s->manifest.below_a5;i<s->manifest.below_a5+s->manifest.above_a5;++i){
+        uint32_t at=s->layout.globals_begin+i;cs_guest_view v;
+        if(cs_guest_window(s->map,at,1,CS_GUEST_READ,&v)!=CS_GUEST_OK)return 0;
+        uint8_t expected=at>=s->layout.table_begin && at<s->layout.table_end?table_byte(s,at-s->layout.table_begin):0;
+        if(v.bytes[0]!=expected)return 0;
+    }
+    return 1;
 }
 #ifdef CLASSICK_IMAGE_TEST_FAULTS
 cs_image_result cs_image_test_fault(cs_image_service *s,uint32_t after,uint32_t call,uint32_t index,uint32_t prepare_flag)

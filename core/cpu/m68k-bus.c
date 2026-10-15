@@ -8,6 +8,8 @@ typedef struct {
     const cs_m68k_stack_limits *limits;
     const cs_m68k_guard *guard;
     const cs_trap_frame *before;
+    uint32_t token,root_slot;
+    unsigned admitted;
 } transaction;
 static void copy_frame(cs_trap_frame *to,const cs_trap_frame *from)
 {
@@ -41,7 +43,8 @@ static cs_m68k_result read_value(transaction *t,uint32_t at,unsigned bytes,
     cs_m68k_bus_report *r=t->report;r->address=at;r->bytes=bytes;r->access=access;
     cs_m68k_result status=permit(t,kind,at,bytes,access);
     if(status!=CS_M68K_OK) return status;
-    r->memory=cs_guest_read(t->map,at,bytes,access,value);
+    uint32_t physical_access=t->admitted?(access&~(uint32_t)CS_GUEST_EXECUTE):access;
+    r->memory=cs_guest_read(t->map,at,bytes,physical_access,value);
     return r->memory==CS_GUEST_OK?CS_M68K_OK:CS_M68K_ADDRESS;
 }
 static cs_m68k_result extension(transaction *t,unsigned bytes,uint32_t *value)
@@ -145,6 +148,11 @@ static int condition(unsigned c,uint16_t sr)
 }
 static cs_m68k_result target(transaction *t,uint32_t at)
 {
+    if(t->admitted && t->report->cpu.word==0x4E75u && at==t->token &&
+        t->frame.a[7]==t->root_slot) {
+        t->report->address=at;t->report->bytes=2;t->report->access=CS_GUEST_READ|CS_GUEST_EXECUTE;
+        return permit(t,CS_M68K_GUARD_TARGET,at,2,CS_GUEST_READ|CS_GUEST_EXECUTE);
+    }
     uint32_t unused;
     return read_value(t,at,2,CS_GUEST_READ|CS_GUEST_EXECUTE,&unused,CS_M68K_GUARD_TARGET);
 }
@@ -268,7 +276,8 @@ static cs_m68k_result aline(transaction *t,cs_trap_gateway *g,uint16_t word)
 }
 static cs_m68k_result step(const cs_guest_map *m,cs_trap_gateway *g,
     cs_trap_frame *f,cs_m68k_bus_report *r,const cs_m68k_bus_options *options,
-    const cs_m68k_stack_limits *limits,const cs_m68k_guard *guard)
+    const cs_m68k_stack_limits *limits,const cs_m68k_guard *guard,unsigned admitted,
+    uint32_t token,uint32_t root_slot)
 {
     if(m==0 || g==0 || f==0 || r==0) return CS_M68K_ARGUMENT;
     if(options!=0 && options->data_policy!=CS_M68K_STRICT && options->data_policy!=CS_M68K_DATA24)
@@ -288,6 +297,7 @@ static cs_m68k_result step(const cs_guest_map *m,cs_trap_gateway *g,
     if(guard!=0 && (f->sr&0xA700u)!=0x2700u) return done(r,CS_M68K_MODE);
     transaction t;t.map=m;t.report=r;t.cursor=f->pc;t.store=0;t.store_bytes=0;
     t.options=options;t.limits=limits;t.guard=guard;t.before=f;
+    t.admitted=admitted;t.token=token;t.root_slot=root_slot;
     copy_frame(&t.frame,f);
     uint32_t fetched;cs_m68k_result status=read_value(&t,t.cursor,2,
         CS_GUEST_READ|CS_GUEST_EXECUTE,&fetched,CS_M68K_GUARD_OPCODE);
@@ -328,11 +338,11 @@ static cs_m68k_result step(const cs_guest_map *m,cs_trap_gateway *g,
 }
 cs_m68k_result cs_m68k_bus_step_options(const cs_guest_map *m,cs_trap_gateway *g,
     cs_trap_frame *f,cs_m68k_bus_report *r,const cs_m68k_bus_options *options)
-{return step(m,g,f,r,options,0,0);}
+{return step(m,g,f,r,options,0,0,0,0,0);}
 cs_m68k_result cs_m68k_bus_step_bounded(const cs_guest_map *m,cs_trap_gateway *g,
     cs_trap_frame *f,cs_m68k_bus_report *r,const cs_m68k_bus_options *options,
     const cs_m68k_stack_limits *limits)
-{if(limits==0) return CS_M68K_ARGUMENT;return step(m,g,f,r,options,limits,0);}
+{if(limits==0) return CS_M68K_ARGUMENT;return step(m,g,f,r,options,limits,0,0,0,0);}
 cs_m68k_result cs_m68k_bus_step(const cs_guest_map *m,cs_trap_gateway *g,
     cs_trap_frame *f,cs_m68k_bus_report *r)
 {return cs_m68k_bus_step_options(m,g,f,r,0);}
@@ -386,5 +396,18 @@ cs_m68k_result cs_m68k_bus_step_guarded(const cs_guest_map *m,cs_trap_gateway *g
 {
     /* No output publication until all native extents and aliases are safe. */
     if(!envelope(m,g,f,r,limits,guard)) return CS_M68K_ARGUMENT;
-    return step(m,g,f,r,0,limits,guard);
+    return step(m,g,f,r,0,limits,guard,0,0,0);
 }
+cs_m68k_result cs_m68k_bus_step_admitted(const cs_guest_map *m,cs_trap_gateway *g,
+    cs_trap_frame *f,cs_m68k_bus_report *r,const cs_m68k_stack_limits *limits,
+    const cs_m68k_guard *guard,uint32_t token,uint32_t root_slot)
+{
+    if(!envelope(m,g,f,r,limits,guard) || (token&1u) || token>0xFFFFF8u ||
+        (root_slot&1u) || root_slot<limits->base || limits->size<4 ||
+        root_slot-limits->base>limits->size-4u) return CS_M68K_ARGUMENT;
+    return step(m,g,f,r,0,limits,guard,1,token,root_slot);
+}
+cs_m68k_result cs_m68k_bus_guard_validate(const cs_guest_map *m,cs_trap_gateway *g,
+    cs_trap_frame *f,cs_m68k_bus_report *r,const cs_m68k_stack_limits *limits,
+    const cs_m68k_guard *guard)
+{return envelope(m,g,f,r,limits,guard)?CS_M68K_OK:CS_M68K_ARGUMENT;}

@@ -1,5 +1,19 @@
 # ClasSICK 0.97 working instructions
 
+Current owner integration scope (2026-10-15, SRC-0187): "OK, let's move on then."
+accepts the proposed visible milestone: one independently authored68k resource
+application loaded/executed through our machinery, with its observed result in
+our boot ROM. Implement SPEC-0035 as one coherent integration, focused tests,
+compiler/regression/CI and one public/HQ/wiki checkpoint; batch the former X-2
+through X-5 demo prerequisites rather than separate contract-only cycles. Codex
+sole writer; Claude primary original demo artifact and Grok one boundary check
+under SRC-0149. Own loaded-app ROM construction/integration is authorized.
+No QuickDraw/desktop/native application or historical compatibility claim follows.
+Emulator/VM/reference runs still require an explicit go-ahead before that trial.
+Preserve24 originals/copies and source/UART/physical/full128K/parity/edition/B2/
+human gates and both System1/ROM targets. No extra agents/chats/automation/OneNote.
+Older scopes retain their dated meaning.
+
 Current owner implementation scope (2026-10-15, SRC-0183): "Do it."
 accepts SPEC-0034 dependency X-1: original guarded interpreter access/class/
 proposed-state checks before staged commit, focused tests, one Claude test

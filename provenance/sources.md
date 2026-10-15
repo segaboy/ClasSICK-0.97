@@ -1,5 +1,29 @@
 # Source catalog
 
+## SRC-0188 - Claude original loaded-application demo artifact
+
+2026-10-15. One primary two-file portable demo assignment,4 bounded Reads/5 turns,126 C lines within300. Approved public API headers, original encoder/setup and brief only; no commands/edits/tests/web/MCP/subagents or prohibited inputs. Lead independently checks all366 resource bytes/offsets and twelve instruction bytes, corrects undefined permission macro names and adds real preparation/negative-program constructors. Returned read text is the authoritative private input snapshot; archive-time live-file copies are separately identified, not assumed immutable at read time. No historical authority or actual boot result.
+
+## SRC-0189 - Grok focused loaded-application execution boundary check
+
+2026-10-15. One scoped review,9 completed Reads/3 turns with no truncation, other tools or executed tests. Five asserted holes are resolved by shared decoder/control checks, mandatory quarantine retention, intended owner-admitted fetch and token/map/layout constraints. No implementation bug accepted; this is not a certification. Actual loaded-source trap/access/forged-return tests and existing mode/CCR/ordinary-EXEC tests provide lead verification. Report/range/input-payload identities and actual reported usage are in evidence; no extra inference call or quota/savings claim.
+
+## SRC-0190 - Lead first loaded-ROM-application integration
+
+2026-10-15. SPEC-0035 / IMPL-0039 / TEST-0043 connects the existing original resource/CODE loader to a dedicated guarded one-entry/one-segment session, balanced return, explicit cleanup and result-derived boot-screen rendering. The original program returns97 and writes0x5A5A5A5A in five steps. Hosted execution passes; the separate64KiB ROM is prepared for an authorized boot observation. General SPEC34, QuickDraw/desktop and original System1/ROM interoperability remain incomplete; native applications stay gated. Preserve24 originals/copies and all source/UART/physical/full128K/parity/edition/B2/human gates; no new emulator/reference run or OneNote. Original bridge, native profile, renderer, fixtures and tests derive only from reviewed own SPEC22/33/34 and original startup/runtime components. One prototype integration replaces separate dependency-only contract cycles. No raw drafts/manual samples, Apple/Microsoft implementation/assets or emulator source. No historical or physical compatibility certification; human review pending.
+
+## SRC-0187 - Owner first loaded-ROM-application integration
+
+2026-10-15. Owner: "OK, let's move on then." accepts the lead's recommendation
+to focus on a boot-ROM demonstration that loads an original68k program through
+our loader and displays its observed result, batching indispensable execution,
+ownership and retirement integration with meaningful checks and one evidence
+checkpoint. Authorizes own original code/fixtures/ROM building, scoped Claude/
+Grok work under SRC-0149 and ordinary public/HQ/wiki records. Does not authorize
+a VM/emulator/reference trial, protected inputs or native applications. All24
+originals/copies and source/UART/native/physical/full128K/parity/edition/B2/human
+and both original-System1/ROM interoperability gates persist.
+
 ## SRC-0183 - Owner guarded interpreter implementation continuation
 
 2026-10-15. Owner: "Do it." accepts the proposed first SPEC-0034 dependency X-1 and its focused implementation, original tests, bounded Claude/Grok assignments, compiler/regression/CI verification and ordinary public/HQ/wiki records. X-2..X-5, application/image/session admission, reset/boot integration and native applications remain outside scope. No new VM/emulator/reference trial, prohibited inputs, UART body work, extra agents/chats/automation/OneNote. SRC-0149 standing scoped public/original transfers persist.

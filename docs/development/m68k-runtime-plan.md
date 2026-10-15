@@ -1,5 +1,9 @@
 # 68000 application runtime plan - 2026-10-12
 
+2026-10-15: The original resource/CODE loader now runs a separately authored 68k application in a dedicated guarded session, captures its result, explicitly retires its image, and supplies the boot screen with the observed output. Hosted execution returns D0=97 and writes 0x5A5A5A5A in five interpreter steps. The separate 64 KiB ROM is built; its actual boot has not yet been observed.
+
+All 2,118 final local checks and original ROM twins pass. [Integration evidence](loaded-rom-app-evidence.md). CI publication is being recorded; an actual boot trial still requires explicit owner go-ahead. Earlier checkpoints are dated history.
+
 2026-10-15: SPEC-0034 X-1 / IMPL-0038 / TEST-0042 implements guarded single-instruction interpreter transactions. Actual opcode, extension, read, write, target, instruction and final-state checks precede staged RAM/frame publication. All A-lines refuse before either service route; strict24, bounded even A7 and S=1/T=0/I=7 apply. Existing unguarded APIs retain their semantics. X-2..X-5 and full owned-image execution remain unimplemented. No application/image/session entry, reset/boot integration, native application or VM/emulator/reference trial. All24 research originals/copies and source/UART/native/physical/full128K/parity/edition/B2/human gates and both untested System1/ROM goals remain.
 
 [Evidence](guarded-interpreter-evidence.md). All2055 final CTests, inherited object audits, guard-test compiler twins and GNU68000 closure checks pass. Both publication CI jobs pass on source `f2f0341`; complete local/CI guard manifests match after stack-frame-row sorting; own-ROM bytes are unchanged.
