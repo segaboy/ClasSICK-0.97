@@ -21,3 +21,9 @@ required regression; new wrapper RELEASE injection is not independently claimed.
 ROM twins and independent assembly encoding/static layout/stack/seal/link audits
 are compiler evidence. Actual emulator/physical boot is a separately authorized
 observation, not implied by source, host preview or test counts.
+
+SRC-0191/0192 separately records the owner-authorized isolated Snow cold boot:
+APP/097, full guest pattern, six completed phases and one automated kernel mouse
+event. One run only; no application Event Manager, human-input or historical
+interoperability test. Screenshots/log identities are private and sanitized
+conditions/results are in the integration evidence page/JSON.

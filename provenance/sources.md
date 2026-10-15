@@ -2648,3 +2648,20 @@ follows from any license.
 - Code is executed as an external pinned action, not vendored into this project.
 - CI execution and hosted runner revisions are recorded separately; runner images
   can change despite tool-package pins.
+
+## SRC-0191 - Owner isolated loaded-application ROM trial authorization
+
+- Author: project owner; direct task reply, 2026-10-15.
+- Words: "Yes—run the isolated Snow boot trial" accepts the specified own-ROM
+  Macintosh128K boot/screenshot/live-kernel check. No Apple ROM/disks, reference
+  inputs or additional future trial follows. Eligible scope instruction only.
+
+## SRC-0192 - Lead original loaded-application ROM observation
+
+- Author: Codex; 2026-10-15; SPEC-0035 / IMPL-0039 / TEST-0043.
+- One authorized fresh-profile Snow v1.5.0-317c188 Macintosh128K cold boot of our
+  original ROM. APP/097, complete guest pattern, six phases and one automated
+  kernel mouse event observed. No historical/reference/physical/desktop claim.
+- [Conditions, identities and limits](../docs/development/loaded-rom-app-evidence.md).
+  Original screenshots/profile/logs outside Git; no protected pixels or binary
+  input. This project observation does not settle R-001, AL-2 or interoperability.

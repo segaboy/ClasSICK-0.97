@@ -8,17 +8,19 @@
     "SRC-0187",
     "SRC-0188",
     "SRC-0189",
-    "SRC-0190"
+    "SRC-0190",
+    "SRC-0191",
+    "SRC-0192"
   ],
   "verified_on": "2026-10-15",
-  "compiled_source_revision": null,
+  "compiled_source_revision": "e8a238b4dfb64d0847cb583ba55c75cac59bab21",
   "classification": "hosted-loaded-application-and-original-rom-construction",
   "application_executed_hosted": true,
   "boot_entry_bound": true,
-  "rom_boot_observed": false,
+  "rom_boot_observed": true,
   "full_spec0034_bridge_implemented": false,
   "historical_1984_confirmed": false,
-  "new_vm_or_emulator_runs": false,
+  "new_vm_or_emulator_runs": true,
   "system1_rom_interoperability_tested": false,
   "verification": {
     "complete_local_profile_counts": [
@@ -264,9 +266,28 @@
     },
     "rom_workspace_bytes": 44496,
     "rom_stack_reserve_bytes": 24320,
-    "ci_status": "pending",
-    "ci_url": null,
-    "host_preview_is_emulator_screenshot": false
+    "ci_status": "success",
+    "ci_url": "https://github.com/segaboy/ClasSICK-0.97/actions/runs/38790620845",
+    "host_preview_is_emulator_screenshot": false,
+    "ci_ctest_counts": [
+      248,
+      248,
+      248,
+      248,
+      248,
+      221,
+      248,
+      233,
+      233,
+      233,
+      206
+    ],
+    "ci_ctest_checks": 2614,
+    "ci_final_log_sha256": "7310c8a8f0a586ea2fac0f1e00b13d2fdf5b05f11f0063b07c56d0e89b228031",
+    "local_ci_full_loaded_rom_manifest_equal": true,
+    "local_ci_loaded_rom_image_byte_equal": true,
+    "previous_rom_profiles_and_inputs_unchanged": true,
+    "previous_rom_comparison_normalization": "stack frame rows sorted only"
   },
   "worker_calls": {
     "claude": {
@@ -350,7 +371,7 @@
     "private_copies_byte_identical": true
   },
   "remaining_gates": [
-    "explicit-go-ahead-before-boot-trial",
+    "fresh-go-ahead-before-any-additional-trial",
     "general-SPEC0034",
     "QuickDraw-and-application-managers",
     "original-System1-on-our-ROM",
@@ -365,5 +386,54 @@
     "three-editions",
     "B2-criterion6",
     "human-provenance-review"
-  ]
+  ],
+  "boot_observation": {
+    "status": "passed",
+    "source_ids": [
+      "SRC-0191",
+      "SRC-0192"
+    ],
+    "authorization": "Yes\u2014run the isolated Snow boot trial",
+    "compiled_source_revision": "e8a238b4dfb64d0847cb583ba55c75cac59bab21",
+    "rom_sha256": "6e726ec3a5947ec60f16170be60262ab461625ac6f3698200daf221d2a0df256",
+    "emulator": "Snow v1.5.0-317c188 Windows x86-64",
+    "emulator_sha256": "32cf5285582c0f509e4f1ac38d86bfb90440bae9da43b7823bfb0841dea588e6",
+    "model": "Macintosh 128K / Early128K",
+    "cold_starts": 1,
+    "saved_machine_state_used": false,
+    "workspace_sha256_at_launch": "2e9dfb52748ea099bac9d1695f97fa87dd7aff5aa18bbef7fbac03118cb45ecf",
+    "reference_inputs": [],
+    "disks": [],
+    "shared_directory": null,
+    "serial_bridges": [],
+    "reset_log_utc": "2026-10-15T19:05:47Z",
+    "last_partial_snapshot_utc": "2026-10-15T19:06:10.647Z",
+    "first_complete_snapshot_utc": "2026-10-15T19:06:32.315Z",
+    "last_complete_snapshot_utc": "2026-10-15T19:07:30.093Z",
+    "observed": [
+      "APP/097",
+      "full guest-written 5A5A5A5A pattern",
+      "six completed phase markers",
+      "kernel mouse counter advanced0000 to0001"
+    ],
+    "input": "one automated alternate-button click, not a human test or guest Event Manager test",
+    "timing": "coarse point observations only; no calibrated startup/frame-rate/VBL duration claim",
+    "screenshots_private": {
+      "boot": {
+        "bytes": 81050,
+        "sha256": "9f1e36ec75c916088ab27be150bc8ad9d7cfa6869a8c81a9a9d769df9fb89fa9"
+      },
+      "after_input": {
+        "bytes": 80797,
+        "sha256": "23c8e25cfb6415eadcaf7af9410fc70446052a18902a42ccf04e5cf4d4901cdc"
+      }
+    },
+    "workspace_initial_cli_error": "Relative workspace path rejected before guest start; same prepared workspace opened via absolute GUI path.",
+    "window_closed_after_trial": true,
+    "close_log_utc": "2026-10-15T19:07:43Z",
+    "historical_system1_compatibility_proven": false,
+    "physical_macintosh_tested": false,
+    "boot_targets_interoperability_tested": false,
+    "performance_limitation": "Full redraws visibly take time and reveal intermediate drawing. No calibrated latency measurement; rendering speed is a follow-up before interactive applications."
+  }
 }

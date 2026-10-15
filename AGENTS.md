@@ -1,5 +1,11 @@
 # ClasSICK 0.97 working instructions
 
+Completed isolated trial (2026-10-15, SRC-0191/0192): owner explicitly said
+"Yes—run the isolated Snow boot trial". One original-ROM Macintosh128K cold
+boot passes APP/097/pattern/six phases and one automated kernel mouse event.
+The trial is closed. This grants no additional emulator/VM/reference run or
+historical/System1/physical claim. Future trials still need fresh go-ahead.
+
 Current owner integration scope (2026-10-15, SRC-0187): "OK, let's move on then."
 accepts the proposed visible milestone: one independently authored68k resource
 application loaded/executed through our machinery, with its observed result in

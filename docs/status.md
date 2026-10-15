@@ -1,8 +1,8 @@
 # Project status
 
-2026-10-15: The original resource/CODE loader now runs a separately authored 68k application in a dedicated guarded session, captures its result, explicitly retires its image, and supplies the boot screen with the observed output. Hosted execution returns D0=97 and writes 0x5A5A5A5A in five interpreter steps. The separate 64 KiB ROM is built; its actual boot has not yet been observed.
+2026-10-15: The original resource/CODE loader now runs our twelve-byte 68k test application in the native boot ROM, captures D0=97 and its 0x5A5A5A5A write, and retires the image. One owner-authorized isolated Snow Macintosh 128K cold boot displays APP/097, the full pattern and six completed phases; an automated mouse event advances the kernel counter to 0001. All 2,118 final local and 2,614 CI checks pass. This is an integrated prototype, with general SPEC-0034, desktop/QuickDraw and both System 1/ROM interoperability targets still incomplete.
 
-All 2,118 final local checks and original ROM twins pass. [Integration evidence](development/loaded-rom-app-evidence.md). CI publication is being recorded; an actual boot trial still requires explicit owner go-ahead. Earlier checkpoints are dated history.
+[Integrated boot evidence](development/loaded-rom-app-evidence.md). Future emulator/VM/reference trials still require fresh owner go-ahead. Earlier checkpoints are dated history.
 
 2026-10-15: SPEC-0034 X-1 / IMPL-0038 / TEST-0042 implements guarded single-instruction interpreter transactions. Actual opcode, extension, read, write, target, instruction and final-state checks precede staged RAM/frame publication. All A-lines refuse before either service route; strict24, bounded even A7 and S=1/T=0/I=7 apply. Existing unguarded APIs retain their semantics. X-2..X-5 and full owned-image execution remain unimplemented. No application/image/session entry, reset/boot integration, native application or VM/emulator/reference trial. All24 research originals/copies and source/UART/native/physical/full128K/parity/edition/B2/human gates and both untested System1/ROM goals remain.
 

@@ -2,7 +2,7 @@
 
 SPEC-0035 / ADR-0039 / IMPL-0039 / TEST-0043 / SRC-0187..0190.
 
-The original resource/CODE loader now runs a separately authored 68k application in a dedicated guarded session, captures its result, explicitly retires its image, and supplies the boot screen with the observed output. Hosted execution returns D0=97 and writes 0x5A5A5A5A in five interpreter steps. The separate 64 KiB ROM is built; its actual boot has not yet been observed.
+The original resource/CODE loader now runs a separately authored 68k application in a dedicated guarded session, captures its result, explicitly retires its image, and supplies the boot screen with the observed output. Hosted execution returns D0=97 and writes 0x5A5A5A5A in five interpreter steps. The separate 64 KiB ROM is built; one explicitly authorized isolated Snow cold boot now passes.
 
 ## Final local evidence
 
@@ -52,12 +52,43 @@ All 24 research originals remain unchanged/untracked with byte-identical private
 copies. UART bodies were not read or edited. No HQ, raw research, manual,
 credential, prohibited input or emulator source was sent to either worker.
 
-## Boot acceptance still pending
+## Authorized boot acceptance - passed
 
-CI results will be added after the compiled revision passes. The host preview
-is not an emulator screenshot. A fresh isolated Snow trial needs explicit owner
-go-ahead; acceptance is APP/097, the written pattern and six completed phases,
-with the kernel loop still alive. No Apple ROM, System, disk or resource is used.
+One fresh isolated Snow v1.5.0-317c188 Windows x86-64 Macintosh128K cold
+start used the exact verified own ROM and no Apple ROM, disks, saved machine
+state, shared directory or serial bridges. The owner explicitly answered
+"Yes—run the isolated Snow boot trial" (SRC-0191). The admitted Snow executable
+SHA-256 remains `32cf5285582c0f509e4f1ac38d86bfb90440bae9da43b7823bfb0841dea588e6`.
+
+Its reset is logged at19:05:47 UTC. A partial redraw is visible at19:06:10.647;
+the full APP/097, expected32-bit guest pattern and six completed phase markers
+are visible by19:06:32.315. One automated alternate-button event advances the
+kernel counter from0000 to0001. The complete result remains visible at19:07:30.093.
+This checks live kernel input, not application Event Manager or human input.
+These are coarse snapshots, not a calibrated timing or sustained-run test.
+Full redraws visibly take time and reveal intermediate drawing; the prototype
+is not yet a responsive application experience. Rendering latency needs a focused
+follow-up before a larger interactive application.
+The trial was closed normally at19:07:43; no overnight continuity is inferred.
+
+The relative CLI workspace path initially failed before guest startup. Opening
+the same prepared workspace by absolute GUI path succeeded. Accessible value
+replacement did not update Snow's custom editor; focused literal typing did.
+Automation needed the previously observed alternate mouse-button mapping.
+No system input settings changed. Screenshots and original profile/log identities
+are retained outside Git; the earlier preview remains labeled as hosted.
+No second cold start or additional reference trial is claimed or authorized.
+## Published compiler and regression checks - passed
+
+Compiled source `e8a238b4dfb64d0847cb583ba55c75cac59bab21` passes both jobs in [CI run38790620845](https://github.com/segaboy/ClasSICK-0.97/actions/runs/38790620845).
+All2,614 CTests pass: the complete2,118-check matrix plus496 checks in two fresh
+bootstrap profiles. New object audits and inherited checks pass in CI too.
+The downloaded loaded-ROM image and complete sanitized build manifest match
+local exactly. The previous own-ROM profiles and every input fingerprint remain
+unchanged; comparison sorts stack-frame rows only, without dropping fields.
+The actual trial image is byte-identical to this CI artifact. No emulator or
+reference system runs in CI. This evidence revision changes documentation only.
+
 
 General SPEC-0034, QuickDraw/windows/events, disk boot and both required original
 System 1/ROM directions remain incomplete. R-001/AL-2, native-application,
