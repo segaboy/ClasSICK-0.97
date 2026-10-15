@@ -1,5 +1,18 @@
 # ClasSICK 0.97 working instructions
 
+- Current owner contract scope (2026-10-15, SRC-0179): "OK. Carry out your plan
+  for the next task. GO." accepts the controlled owned-image execution contract
+  and efficient repo-based assignments: Claude drafts, Grok checks one risk,
+  Codex retains one repository writer, decisions, verification and publication.
+  [Task brief](docs/development/tasks/owned-image-execution.md). Initial budget
+  two supervised CLI calls with bounded selective reads; current scoped public/
+  original input permission SRC-0149 persists. No implementation/fixtures/new
+  TEST/IMPL/build, guest/application execution, reset/boot integration, native
+  app/SDK, emulator/VM/reference trial or prohibited inputs. Preserve24 originals/
+  copies, compiled/build/edition/UART/source/native/physical/full128K/parity/B2/
+  human gates and both untested ROM/System1 targets. No extra agents/chats/
+  scheduled automation/OneNote. Earlier scopes retain their dated meaning.
+
 - Current owner implementation scope (2026-10-15, SRC-0175): "Go for it"
   accepts the original SPEC-0033 loading/ownership/cleanup implementation and
   tests, bounded Claude/Grok reviews, compiler/regression/CI verification and

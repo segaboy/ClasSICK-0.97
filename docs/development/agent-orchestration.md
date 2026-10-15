@@ -1,5 +1,26 @@
 # Supervised Claude and Grok work - 2026-10-14
 
+## Current allocation - 2026-10-15, SRC-0179
+
+The owner accepted the usage-efficiency plan and repo-based briefs. Assign one
+bounded primary deliverable to one worker; avoid automatically paying for two
+full overlapping reviews of work Codex already completed. Claude may author a
+contract/deliverable from approved inputs, Grok checks a distinct selected risk,
+and Codex retains integration, decisions, verification and one repository writer.
+Worker drafting through captured output does not authorize direct file edits.
+
+Put compact current briefs in `docs/development/tasks/`, reference existing file
+ranges/functions/diffs, and state known file end lines to avoid EOF probes. Files
+do not remove tool/context limits or token use. Permit bounded selective Reads
+instead of forcing one giant Read. Default budget one primary call plus one
+distinct check; additional calls need a concrete unresolved blocking gap. Audit
+actual tools/ranges/truncation/reported usage and output overruns. Prefer focused
+checks while editing, required final checks after stabilization, and reusable
+ordinary record/hash scripts. These are not recurring automations. All previous
+source/provider/task/execution gates remain; no quota or model-quality guarantee.
+[First assignment](tasks/owned-image-execution.md) and
+[result](owned-image-execution-review.md). Earlier allocations below are dated history.
+
 SRC-0149/0150 records the owner's standing instruction: Codex orchestrates scoped
 Claude/Grok assignments and retains integration. Relevant reviewed public project
 contracts and original ClasSICK-0.97 code may be sent to Anthropic/Claude and

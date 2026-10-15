@@ -1,5 +1,11 @@
 # Milestone roadmap
 
+2026-10-15: SPEC-0034 / ADR-0038 finalizes an unimplemented controlled-image execution contract. One generation-bound root, strict guarded accesses/commit, explicit image/inventory authority, balanced return, distinct guest-fault/quarantine states and quiescent retirement precede any execution. X-1 guarded interpreter transactions are the first dependency. Claude authors the first draft; Grok checks one boundary; Codex integrates and remains the sole repository writer. Two bounded CLI calls, no truncated reads. No code/fixtures/TEST/IMPL/build, application/emulator/VM/reference run, native app or boot change. All24 originals/copies, compiled/build/edition/project pointers and both untested System1/ROM boot goals remain.
+
+[Contract and lead dispositions](development/owned-image-execution-review.md). Next: bounded X-1 guarded interpreter
+transactions before any session/image execution integration. Earlier checkpoints
+retain their dated scope; compiled/verified pointers and prior tests stay unchanged.
+
 2026-10-15: SPEC-0033 / IMPL-0037 / TEST-0041 implements original host-only eager CODE staging, exclusive locked handles, A5-world data population and explicit image retirement. A first allocator OOM retains PREPARED; a later ordinary OOM retains PARTIAL with explicit cleanup and no world writes. Unexpected faults retain exact effects and block further admission. No application execution, guest binding, reset/boot integration, native application or VM/emulator/reference trial. Historical/source/native/physical/full128K/parity/edition/B2 and human-review gates remain open; both required System1/ROM boot directions remain untested.
 
 [Implementation evidence](development/code-image-evidence.md). All2010 final local CTests, ten width/endian object audits and compiler twins pass;

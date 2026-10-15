@@ -1,0 +1,259 @@
+{
+  "schema_version": 1,
+  "specification": "SPEC-0034",
+  "adr": "ADR-0038",
+  "profile": "classick-owned-image-execution-v1",
+  "sources": [
+    "SRC-0179",
+    "SRC-0180",
+    "SRC-0181",
+    "SRC-0182"
+  ],
+  "reviewed_on": "2026-10-15",
+  "status": "contract-only-unimplemented",
+  "final_contract": {
+    "path": "docs/specifications/SPEC-0034-owned-image-execution.md",
+    "byte_convention": "git-lf",
+    "bytes": 13102,
+    "sha256": "79796e74a09607220c9d097e26f6bc1b86bcb003416996e38cd46a37534393bc"
+  },
+  "implementation": null,
+  "test": null,
+  "build": null,
+  "runtime_cases_executed": 0,
+  "application_executed": false,
+  "new_vm_emulator_reference_runs": false,
+  "historical_1984_confirmed": false,
+  "execution_authorized": false,
+  "workers": {
+    "claude": {
+      "role": "primary-contract-drafter",
+      "cli_version": "2.1.287",
+      "reported_models": [
+        "claude-opus-5-5"
+      ],
+      "effort": "low",
+      "model_turns": 6,
+      "reads": [
+        {
+          "file": "docs/development/tasks/owned-image-execution.md",
+          "offset": 1,
+          "limit": 110,
+          "source": {
+            "bytes": 5634,
+            "sha256": "6e25ab90d04352adacc52f377e64d1b1bc465b98d6d57ecc905c2f18b8db8a06",
+            "git_lf_sha256": "6e25ab90d04352adacc52f377e64d1b1bc465b98d6d57ecc905c2f18b8db8a06"
+          },
+          "selected_source_lines": 88,
+          "selected_bytes_identity": {
+            "bytes": 5634,
+            "sha256": "6e25ab90d04352adacc52f377e64d1b1bc465b98d6d57ecc905c2f18b8db8a06"
+          }
+        },
+        {
+          "file": "docs/specifications/SPEC-0033-owned-code-image-lifecycle.md",
+          "offset": 300,
+          "limit": 41,
+          "source": {
+            "bytes": 23175,
+            "sha256": "83d85c15a14568f655b0f2fc86247800ec89b11d2626eeff43918de5b8aa177a",
+            "git_lf_sha256": "83d85c15a14568f655b0f2fc86247800ec89b11d2626eeff43918de5b8aa177a"
+          },
+          "selected_source_lines": 39,
+          "selected_bytes_identity": {
+            "bytes": 2713,
+            "sha256": "c6c34b14befd7814dab8882b5b888a6d419ed0b908af642fd880fd44702a9d1e"
+          }
+        },
+        {
+          "file": "docs/specifications/SPEC-0028-bounded-guest-sessions.md",
+          "offset": 1,
+          "limit": 99,
+          "source": {
+            "bytes": 6661,
+            "sha256": "b01091488f96e5bf16af2b1638a2145ca4952371a3edbcecad1939cba822e777",
+            "git_lf_sha256": "b01091488f96e5bf16af2b1638a2145ca4952371a3edbcecad1939cba822e777"
+          },
+          "selected_source_lines": 99,
+          "selected_bytes_identity": {
+            "bytes": 6182,
+            "sha256": "d070c98665612e01e0982b831eec56d6d4127415dfc4c6d8ad36ebecf2a9cc26"
+          }
+        },
+        {
+          "file": "core/cpu/m68k-bus.h",
+          "offset": 1,
+          "limit": 40,
+          "source": {
+            "bytes": 1531,
+            "sha256": "a0a8fa1ca3075be2c3f6eecfe18f45ef0c3db3c338af00d5451edc293ad2ce0a",
+            "git_lf_sha256": "a0a8fa1ca3075be2c3f6eecfe18f45ef0c3db3c338af00d5451edc293ad2ce0a"
+          },
+          "selected_source_lines": 28,
+          "selected_bytes_identity": {
+            "bytes": 1531,
+            "sha256": "a0a8fa1ca3075be2c3f6eecfe18f45ef0c3db3c338af00d5451edc293ad2ce0a"
+          }
+        },
+        {
+          "file": "core/cpu/m68k-session.h",
+          "offset": 1,
+          "limit": 66,
+          "source": {
+            "bytes": 2482,
+            "sha256": "aea400413449630489f6fa0a8a6ab924271e254a4fd0d94724bc82dd9c70bdee",
+            "git_lf_sha256": "aea400413449630489f6fa0a8a6ab924271e254a4fd0d94724bc82dd9c70bdee"
+          },
+          "selected_source_lines": 47,
+          "selected_bytes_identity": {
+            "bytes": 2482,
+            "sha256": "aea400413449630489f6fa0a8a6ab924271e254a4fd0d94724bc82dd9c70bdee"
+          }
+        }
+      ],
+      "reader_truncated": false,
+      "calls_used": 1,
+      "requested_maximum_words": 1600,
+      "actual_words": 1810,
+      "report": {
+        "bytes": 11692,
+        "sha256": "0227629782f44ba81029376c45dd20ee33cd734c708bca0d5cb9446ce027a252"
+      },
+      "usage": {
+        "input_tokens": 6,
+        "cache_creation_input_tokens": 10352,
+        "cache_read_input_tokens": 10494,
+        "output_tokens": 5093,
+        "output_tokens_details": {
+          "thinking_tokens": 138
+        },
+        "server_tool_use": {
+          "web_search_requests": 0,
+          "web_fetch_requests": 0
+        },
+        "service_tier": "standard",
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 10352,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "global",
+        "speed": "standard",
+        "fallback_credit": null
+      },
+      "cli_list_cost_estimate_usd": 0.1867988,
+      "cost_is_billing_or_quota": false,
+      "no_extra_file_command_edit_web_mcp_subagent": true,
+      "runtime_cases_executed": 0
+    },
+    "grok": {
+      "role": "focused-fetch-write-stop-check",
+      "cli_version": "1.0.52 stable0920c8169e27",
+      "reported_models": [
+        "grok-4.7-build"
+      ],
+      "effort": "low",
+      "model_turns": 3,
+      "reads": [
+        {
+          "file": "docs/development/tasks/owned-image-execution-check.md",
+          "offset": 1,
+          "limit": 100,
+          "source": {
+            "bytes": 2122,
+            "sha256": "9b0457cc63b5c497f6b4f145bdd52b4289ef2a10b42a15bb5fac2f2de41c1caf",
+            "git_lf_sha256": "9b0457cc63b5c497f6b4f145bdd52b4289ef2a10b42a15bb5fac2f2de41c1caf"
+          },
+          "selected_source_lines": 30,
+          "selected_bytes_identity": {
+            "bytes": 2122,
+            "sha256": "9b0457cc63b5c497f6b4f145bdd52b4289ef2a10b42a15bb5fac2f2de41c1caf"
+          }
+        },
+        {
+          "file": "docs/specifications/SPEC-0034-owned-image-execution.md",
+          "offset": 1,
+          "limit": 100,
+          "source": {
+            "bytes": 11692,
+            "sha256": "0227629782f44ba81029376c45dd20ee33cd734c708bca0d5cb9446ce027a252",
+            "git_lf_sha256": "0227629782f44ba81029376c45dd20ee33cd734c708bca0d5cb9446ce027a252"
+          },
+          "selected_source_lines": 100,
+          "selected_bytes_identity": {
+            "bytes": 8554,
+            "sha256": "884f76ff025a9f94a182fca1a45825544d712531478a523c4611113164e0b606"
+          }
+        },
+        {
+          "file": "docs/specifications/SPEC-0034-owned-image-execution.md",
+          "offset": 101,
+          "limit": 100,
+          "source": {
+            "bytes": 11692,
+            "sha256": "0227629782f44ba81029376c45dd20ee33cd734c708bca0d5cb9446ce027a252",
+            "git_lf_sha256": "0227629782f44ba81029376c45dd20ee33cd734c708bca0d5cb9446ce027a252"
+          },
+          "selected_source_lines": 42,
+          "selected_bytes_identity": {
+            "bytes": 3138,
+            "sha256": "b0990cdd71390d59c0a1e304060adba7d017b5bbf739e7b5b8fba06e4a63bb32"
+          }
+        },
+        {
+          "file": "docs/specifications/SPEC-0034-owned-image-execution.md",
+          "offset": 201,
+          "limit": 100,
+          "source": {
+            "bytes": 11692,
+            "sha256": "0227629782f44ba81029376c45dd20ee33cd734c708bca0d5cb9446ce027a252",
+            "git_lf_sha256": "0227629782f44ba81029376c45dd20ee33cd734c708bca0d5cb9446ce027a252"
+          },
+          "selected_source_lines": 0,
+          "selected_bytes_identity": {
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        }
+      ],
+      "reader_truncated": false,
+      "calls_used": 1,
+      "requested_maximum_words": 350,
+      "actual_words": 467,
+      "report": {
+        "bytes": 2798,
+        "sha256": "bcf0648b08193ef46d203d0f7126d3158779571e1f6d192f1c23521e383cd4d2"
+      },
+      "usage": {
+        "input_tokens": 9113,
+        "cache_read_input_tokens": 13824,
+        "cache_creation_input_tokens": 0,
+        "output_tokens": 5816,
+        "reasoning_tokens": 4974,
+        "total_tokens": 28753
+      },
+      "cli_list_cost_estimate_usd": 0.02041156,
+      "cost_is_billing_or_quota": false,
+      "no_extra_file_command_edit_web_mcp_subagent": true,
+      "runtime_cases_executed": 0
+    }
+  },
+  "allocation": {
+    "planned_cli_calls": 2,
+    "actual_cli_calls": 2,
+    "retry_calls": 0,
+    "read_truncations": 0,
+    "unnecessary_eof_reads": 1,
+    "primary_deliverable_was_worker_authored": true,
+    "final_amendments_externally_rereviewed": false,
+    "scope_normalized_savings_benchmark": false,
+    "reported_tokens_not_subscription_quota": true
+  },
+  "preservation": {
+    "originals": 24,
+    "unchanged_untracked": true,
+    "byte_identical_private_copies": true,
+    "all_prior_runtime_build_edition_and_compiled_project_pointers_preserved": true,
+    "both_required_boot_directions_untested": true
+  },
+  "human_provenance_review": "pending"
+}

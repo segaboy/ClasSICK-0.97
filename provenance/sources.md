@@ -1,5 +1,21 @@
 # Source catalog
 
+## SRC-0179 - Owner controlled-execution and efficient orchestration continuation
+
+2026-10-15. Owner: "OK. Carry out your plan for the next task. GO." Accepts the proposed next controlled68k execution contract and efficient assignment plan: Claude authors a bounded deliverable, Grok checks a distinct risk, Codex integrates with one repository writer. Repo briefs reference selected file ranges; initial budget2 CLI calls, extra only for a concrete blocking gap. SRC-0149 scoped public/original transfer permission persists. No implementation, fixture, new TEST/IMPL/build, app/native app/emulator/VM/reference execution, reset/boot integration or prohibited inputs. Preserve24 originals/copies and all compiled/build/edition/source/UART/native/physical/full128K/parity/B2/human gates and both untested ROM/System1 targets; ordinary Git/HQ/wiki records only.
+
+## SRC-0180 - Claude first controlled-image execution contract draft
+
+2026-10-15. Claude Code2.1.287, reported claude-opus-5-5, low effort. Primary contract draft from small public task brief and four exact approved contract/API ranges:5 bounded Reads/6 turns, no truncation or other file/command/edit/web/MCP/subagent.1810 words exceeds1600. Lead adopts narrow root/RTS/dependency structure, corrects entry/logical extents/traps/retirement/inventory/frame/token boundaries against own contracts. Raw draft and exact inputs private; public manifests identify read ranges/hashes, reported25945 tokens and list estimate0.1867988USD (not billing/quota or benchmark). No code, tests or historical authority.
+
+## SRC-0181 - Grok focused controlled-image boundary check
+
+2026-10-15. Grok CLI1.0.52 stable0920c8169e27, reported grok-4.7-build, low effort. One selected fetch/write/stop/retirement check:4 completed bounded Reads/3 turns of task brief and draft, including1 unnecessary EOF probe. No truncation, other files/commands/edits/web/MCP/subagents or runtime.467 words exceeds350. Five findings adopted with staged-transaction/state-mechanism qualifications; precise entry/padding/trap/digest/stack corrections are in the lead review.28753 total tokens, list estimate0.02041156USD is not billing/quota/benchmark. Exact input/output/range identities in review manifest; all test suggestions unexecuted.
+
+## SRC-0182 - Lead controlled owned-image execution contract integration
+
+2026-10-15. SPEC-0034 / ADR-0038 finalizes an unimplemented controlled-image execution contract. One generation-bound root, strict guarded accesses/commit, explicit image/inventory authority, balanced return, distinct guest-fault/quarantine states and quiescent retirement precede any execution. X-1 guarded interpreter transactions are the first dependency. Claude authors the first draft; Grok checks one boundary; Codex integrates and remains the sole repository writer. Two bounded CLI calls, no truncated reads. No code/fixtures/TEST/IMPL/build, application/emulator/VM/reference run, native app or boot change. All24 originals/copies, compiled/build/edition/project pointers and both untested System1/ROM boot goals remain. Uses only reviewed own SPEC22/26/28/29/33, current original bus/API semantics and the scoped engineering draft/findings, not raw research/manual samples/new historical sources. No actual API/gate/runtime modification; new dependencies explicit. Final contract self-reviewed; human provenance pending.
+
 ## SRC-0176 - Claude owned CODE image safety review
 
 2026-10-15. Two frozen reviewed-public/original-code packets, first Read truncated, separately shown smaller follow-up complete. Each one Read/two model turns, no other files/commands/edits/tests/web/MCP/subagents. Actual models, packet/report identities, usage and coverage/word overruns are recorded in docs/development/code-image-evidence.json. Conditional false historical/private-heap and negative-ID claims are rejected against reviewed own contracts; source-pointer hygiene/report clarity are adopted. Advisory only, not historical or legal certification.
