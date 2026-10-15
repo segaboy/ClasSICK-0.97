@@ -1,5 +1,28 @@
 # Source catalog
 
+## SRC-0163 - Owner continuation after the resource checkpoint
+
+2026-10-14, owner: "When you're finished, move on to the next task."
+Finish SPEC-0031 implementation/publication first, then continue the preceding
+proposed bounded CODE-only launch/segment contract. This permits scoped contract
+review and ordinary Git/HQ/wiki records; no loader/fixture/guest binding/SDK,
+native application or VM/emulator/reference run is inferred. SRC-0149 bounded
+Claude/Grok public-contract/original-code transfers apply. Preserve all24 raw
+research originals/copies, human review and source/UART/native/physical/edition
+gates. No extra agent/chat/automation/OneNote. Owner scope, not history.
+
+## SRC-0164 - Owner two-direction System 1/ROM boot requirement
+
+2026-10-14, owner: "Original system 1 disks must boot on our custom rom, but also
+the custom System 1 needs to be able to boot from an original Apple rom."
+Record both as mandatory, separately unverified compatibility gates. These add
+original-ROM compatibility to the independent replacement-ROM/disk goal; an
+Apple ROM remains unnecessary for the complete independent distribution and
+PC/Linux ports. Exact disks/ROM/model identities, lawful reference availability
+and R-001 remain unsettled. This is a target requirement, not historical evidence,
+proven feasibility, protected-input clearance or approval for an actual trial.
+See [requirements](../docs/development/system1-rom-boot-requirements.md).
+
 ## SRC-0159 - Owner hosted resource implementation continuation
 
 2026-10-14, owner: "ok do it." This accepts the preceding proposal to implement

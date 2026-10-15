@@ -11,7 +11,9 @@ the GitHub slug is `ClasSICK-0.97`.
 
 ## Non-negotiable constraints
 
-1. Zero original Apple executable or ROM code and zero prohibited derived code.
+1. Zero original Apple executable/ROM code or prohibited derived code in our
+   implementation and distributed payloads. Separately admitted black-box
+   interoperability with lawfully held originals is a reference activity.
 2. Public development with auditable specifications, provenance, and tests.
 3. Native OS builds beyond Macintosh hardware; CPU translation is confined to
    legacy application instructions on non-68000 architectures.
@@ -24,6 +26,15 @@ the GitHub slug is `ClasSICK-0.97`.
 7. The owner selects licensing. Public publication does not itself make this an
    open-source project. The owner approved GPL-3.0-or-later on 2026-10-07 for
    project-owned code, documentation and assets; third-party rights stay separate.
+
+## Required System 1/ROM boot compatibility
+
+Owner requirement2026-10-14 (SRC-0164): original target System1 disks must boot
+on our replacement ROM, and our replacement System1 must boot with an identified,
+supported original Apple ROM. Both directions are mandatory and currently
+unverified. The fully independent ROM/system distribution remains required;
+PC/Linux ports require no Apple ROM. [Separate acceptance requirements](development/system1-rom-boot-requirements.md)
+retain exact identity, lawful-reference, source and trial-admission gates.
 
 ## Scope and success
 

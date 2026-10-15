@@ -88,3 +88,14 @@ implementer must restart from an independent specification. Deleting a file in a
 later commit is insufficient when prohibited content was already published.
 
 No contribution, task, deadline, or compatibility goal overrides these exclusions.
+
+## Owner-required System 1/ROM interoperability - 2026-10-14
+
+The owner requires original target System1 disks to boot on ClasSICK's replacement
+ROM, and ClasSICK's replacement System1 to boot with an identified supported
+original Apple ROM. These are future, separately admitted black-box compatibility
+targets. The ban on Apple implementation as a source, dependency of the independent
+distribution, copied payloads/assets, worker inputs and redistribution persists.
+Lawfully held original firmware/media may be reference-platform inputs only after
+exact source/platform admission and explicit owner trial authorization. This
+requirement grants no current run, download, source inspection or extraction.

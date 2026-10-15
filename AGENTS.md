@@ -1,5 +1,18 @@
 # ClasSICK 0.97 working instructions
 
+- Current owner continuation (2026-10-14, SRC-0163/0164): finish the verified
+  resource checkpoint, then the bounded CODE-only launch/preflight contract;
+  record original System1 disks on our ROM and our System1 on an identified
+  supported original Apple ROM as two mandatory unverified boot targets.
+  [Requirements](docs/development/system1-rom-boot-requirements.md). This adds
+  future black-box interoperability, not Apple implementation inputs, dependency
+  or redistribution. Source/platform admission and a fresh owner go-ahead still
+  precede any actual emulator/VM/reference trial. No implementation/fixture/
+  guest ABI/native application/SDK follows from this contract scope. Preserve
+  all24 originals/copies and existing source/UART/physical/edition/B2/human gates;
+  scoped Claude/Grok reviews and Git/HQ/wiki records only, no extra chats/agents/
+  automation/OneNote. Earlier completed implementation scopes remain dated.
+
 - Current owner scope (2026-10-14, SRC-0159): "ok do it" accepts the proposed
   original SPEC-0031 resource-loading implementation, ownership/cleanup tests,
   bounded Claude failure/Grok coverage reviews, compiler/regression/CI checks

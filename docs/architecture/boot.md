@@ -1,5 +1,11 @@
 # Boot definitions and dependency graph
 
+Owner requirement2026-10-14 (SRC-0164): [two separate System1/ROM compatibility
+gates](../development/system1-rom-boot-requirements.md) require original target
+System1 disks on our ROM and our replacement System1 on a supported original
+Apple ROM. Both are untested. Existing test-ROM scenes and B0/B1/B2 evidence
+do not establish disk/system compatibility or close physical/edition gates.
+
 Status: B0/B1 verified; native VM runtime/input and measured self-test qualification
 pass, formal B2 partial on unchanged firmware image hash.
 

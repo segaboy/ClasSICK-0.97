@@ -1,5 +1,10 @@
 # Project status
 
+Owner requirement2026-10-14: [System1/ROM compatibility](development/system1-rom-boot-requirements.md)
+now explicitly requires both original target disks on our replacement ROM and
+our replacement System1 on a supported original Apple ROM. Both remain untested;
+independent firmware/system distribution and existing boot/source gates remain.
+
 2026-10-14: SPEC-0031 / IMPL-0035 / TEST-0039 implements the original hosted resource-residency service: one immutable fork,16 locked application copies and32 distinct native lease tickets. Checked ownership, saturating IDs, source/epoch lifetime, explicit eviction/close and retained partial-fault masks precede any future CODE loader. All1803 initial local CTests pass across nine configurations;90 final affected checks pass with1713 unaffected retained, ten final width/endian object audits and matching compiler twins. GNU68000 twelve module audits/two complete relocatable links pass. Native service3314, request52, report246, ticket36 bytes; source bytes/resident extents and existing controls are additional costs, not full128K or cumulative-stack proof. Claude/Grok read one frozen public/original packet each and supply lead-reviewed findings, without execution or historical authority. All24 research originals/copies, prior interface/assets/boot/UART inputs and edition gates are preserved. No guest Resource Manager binding, loader/execution, native application or VM/emulator/reference trial. Human provenance review and historical/physical/parity/full128K/B2 gates remain open.
 
 [Implementation evidence](development/resource-residency-evidence.md). Both publication CI jobs pass on compiled source `b94e2ff`;
