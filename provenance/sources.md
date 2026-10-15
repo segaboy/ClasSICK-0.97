@@ -1,5 +1,56 @@
 # Source catalog
 
+## SRC-0168 - Claude CODE preflight failure-safety review
+
+2026-10-15. Claude Code2.1.287, reported claude-opus-5-5, medium effort. One Read of a
+frozen reviewed-public SPEC-0032/header/original implementation packet, two model
+turns; no extra file/command/edit/web/MCP/subagent use. Report5888 bytes SHA256
+88bfe732cf3133c61fb012284ec575b0dbf9ad0b119450c10ffa836f5aabab1f. Lead fixes stale diagnostic field and comment,
+independently strengthens pending-plan borrowed protections; reader-reference
+conditional is rejected after own-code checks and attribute round trips.39996
+reported tokens,13772 output including11489 thinking; list estimate0.4487666USD
+is not billing/quota or performance certification. Report exceeds700-word target.
+Packet identities and dispositions: docs/development/code-preflight-evidence.json
+and code-preflight-implementation.md. No worker tests or historical evidence.
+
+## SRC-0169 - Grok CODE preflight coverage review
+
+2026-10-15. Grok CLI1.0.52 (0920c8169e27), reported grok-4.7-build, low effort. One completed
+read_file of a frozen reviewed-public contract/original code/test packet, two
+model turns/end_turn; no extra command/edit/web/MCP/subagent use. Report5831 bytes
+SHA256 d5905e6c6fff942048cd7a25dabfe6f37f7d59b78daeeda80690fbcca3188bb4. Lead adopts isolated warnings and
+selected boundary/ambiguity/forgery tests; rejects wrapped-map and infeasible
+128-byte-only/giant-stack success oracles under earlier integrity/full-zone
+constraints. Some suggestions remain unexecuted, explicitly not coverage claims.
+57466 total tokens,24291 output including22763 reasoning; list estimate0.06793472USD
+is not billing/quota or a model benchmark. Report exceeds700-word target.
+Exact packet identities/usage and dispositions are linked in the implementation
+evidence. Review is advisory; worker runs no tests and establishes no history.
+
+## SRC-0170 - Lead CODE preflight implementation verification
+
+2026-10-15. SPEC-0032 / IMPL-0036 / TEST-0040 implements the original read-only hosted CODE inspection/layout checker. It checks64 entries/16 segments, literal resource-start offsets, header/group/routine bounds and explicit candidate A5/stack arithmetic without loading or executing an application. All1911 final CTests pass across nine configurations, ten width/endian object audits and matching compiler twins. GNU68000 twelve module audits/two complete relocatable links pass; manifest1440, workspace1632, layout68 bytes are partial costs, not full128K proof. Claude/Grok provide bounded read-only findings; Codex retains implementation and decisions. All24 originals/copies and prior interface/assets/boot/UART and edition records are preserved. Both required System1/ROM boot directions remain untested. No guest binding, loader/reset/boot integration, native application or VM/emulator/reference run. Human provenance and historical/physical/parity/full128K/B2 gates remain open. Original scanner/layout/snapshot algorithms, native API,
+fixtures and mathematical partition oracle derive only from reviewed own
+SPEC-0032/0024/0030, existing original interfaces/code and SRC-0130 lead decisions.
+No new external historical source, raw draft, manual sample or third-party
+implementation/assets. Final corrected-source verification and exact evidence
+are in docs/development/code-preflight-evidence.md/.json. Codex one writer/lead
+self-review; human provenance pending. Actual compiled/CI publication pointers
+are recorded separately; no inherited boot or edition claim is promoted.
+
+## SRC-0167 - Owner CODE preflight implementation continuation
+
+2026-10-15, owner: "OK, move on to the next task." After the completed
+SPEC-0032 contract checkpoint at4bd5b81 / HQc6cbc73, continue the original
+read-only CODE metadata/layout implementation with original tests, compiler/
+regression/CI verification, bounded Claude/Grok review and ordinary Git/HQ/wiki
+records. This supersedes that checkpoint's contract-only limit for this checker
+only. No application loading/execution, reset/binding/native SDK/boot change or
+VM/emulator/reference trial follows. SRC-0149 scoped public-contract/original-code
+transfers apply. Preserve all24 research originals/copies and prior source/UART/
+native/physical/full128K/parity/edition/B2/human gates. No extra agents/chats/
+automation/OneNote. Owner authority, not historical or compatibility evidence.
+
 ## SRC-0165 - Lead CODE-only preflight contract
 
 2026-10-14, owner SRC-0163 continued after completed resource implementation

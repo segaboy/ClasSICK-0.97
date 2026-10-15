@@ -1,7 +1,8 @@
 # ADR-0036 - Read-only CODE launch preflight first
 
 Status: accepted engineering design, 2026-10-14. SRC-0163/0165/0166;
-SPEC-0032. No implementation or historical confirmation.
+SPEC-0032. Implemented 2026-10-15 as IMPL-0036 / TEST-0040 under SRC-0167;
+no historical confirmation. Earlier contract-only status is dated history.
 
 The reader, bounded heap/session/Toolbox services and resource cache exist.
 They do not yet establish a safe legacy application launch: dynamic continuation
@@ -25,5 +26,5 @@ boot/application compatibility. This step introduces none of those behaviors.
 
 The two owner-required System1/ROM boot directions remain untested acceptance
 gates. Preflight helps a future loader and proves neither direction. Next
-implementation can test this original data-only subset separately; actual
+implementation now verifies this original data-only subset separately; actual
 execution/population/continuation needs further contracts and source/owner gates.

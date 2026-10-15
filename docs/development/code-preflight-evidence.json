@@ -1,0 +1,913 @@
+{
+  "schema_version": 1,
+  "specification": "SPEC-0032",
+  "implementation": "IMPL-0036",
+  "test": "TEST-0040",
+  "source": "SRC-0170",
+  "profile": "classick-code-preflight-v1",
+  "verified_on": "2026-10-15",
+  "compiled_source_revision": null,
+  "classification": "hosted-data-only-code-preflight-and-standalone-compiler-verification",
+  "historical_1984_confirmed": false,
+  "new_native_application": false,
+  "new_boot_image_integration": false,
+  "new_vm_or_emulator_runs": false,
+  "application_executed": false,
+  "verification": {
+    "specification": "SPEC-0032",
+    "object_audits": 10,
+    "hosted_twins": {
+      "clang": "be083092a8a0ba6ad22361bbb928ce3987ab4cc70c31b315d3863292e7bab685",
+      "gcc": "89cdbed2d396defc03dd7e0c2ebfc5f0d1519ffaa03b1fc00b4786443931888b"
+    },
+    "new_guest_or_boot_trial": false,
+    "final_complete_ctest_checks": 1911,
+    "final_profile_counts": [
+      225,
+      225,
+      225,
+      198,
+      225,
+      210,
+      210,
+      210,
+      183
+    ],
+    "independent_partition_cases": 904,
+    "truncated_lengths": 410,
+    "admitted_attribute_round_trips": 64,
+    "worker_suggested_cases_executed_by_worker": 0,
+    "final_log_sha256": "ac9d48339444e25d8983ea7a247c52a1b35a9df7a824e247d6343abff5667a18",
+    "ci_status": "pending"
+  },
+  "m68k": {
+    "manifest": {
+      "schema_version": 1,
+      "specification": "SPEC-0032",
+      "compiler": "m68k-linux-gnu-gcc-13 (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0",
+      "object_audits": 12,
+      "complete_relocatable_links": 2,
+      "storage_bytes_68000": {
+        "manifest": 1440,
+        "layout": 68,
+        "workspace": 1632,
+        "report": 76,
+        "context": 32,
+        "inspect_request": 44,
+        "layout_request": 48,
+        "entry": 8,
+        "segment": 52,
+        "manager": 672,
+        "lifecycle_controller": 112
+      },
+      "profiles": [
+        {
+          "optimization": "-O0",
+          "objects": 6,
+          "combined_sha256": "44f2f5ebcf8361529f4f11d475c2036d02fa08800c556ae16d3d5f1760ecd54f",
+          "stack_frames": [
+            {
+              "function": "cs_guest_validate",
+              "bytes": 20
+            },
+            {
+              "function": "cs_guest_window",
+              "bytes": 20
+            },
+            {
+              "function": "operand",
+              "bytes": 24
+            },
+            {
+              "function": "cs_guest_read",
+              "bytes": 44
+            },
+            {
+              "function": "cs_guest_write",
+              "bytes": 36
+            },
+            {
+              "function": "zone",
+              "bytes": 0
+            },
+            {
+              "function": "read32",
+              "bytes": 0
+            },
+            {
+              "function": "write32",
+              "bytes": 0
+            },
+            {
+              "function": "intersects",
+              "bytes": 0
+            },
+            {
+              "function": "extent",
+              "bytes": 0
+            },
+            {
+              "function": "configuration",
+              "bytes": 52
+            },
+            {
+              "function": "cs_mm_init",
+              "bytes": 100
+            },
+            {
+              "function": "state",
+              "bytes": 48
+            },
+            {
+              "function": "compact",
+              "bytes": 36
+            },
+            {
+              "function": "fits",
+              "bytes": 28
+            },
+            {
+              "function": "gap",
+              "bytes": 40
+            },
+            {
+              "function": "copy_bytes",
+              "bytes": 8
+            },
+            {
+              "function": "commit_moves",
+              "bytes": 44
+            },
+            {
+              "function": "reply",
+              "bytes": 0
+            },
+            {
+              "function": "object",
+              "bytes": 20
+            },
+            {
+              "function": "cs_mm_execute",
+              "bytes": 608
+            },
+            {
+              "function": "rom_address",
+              "bytes": 0
+            },
+            {
+              "function": "config_valid",
+              "bytes": 8
+            },
+            {
+              "function": "state_valid",
+              "bytes": 4
+            },
+            {
+              "function": "executable",
+              "bytes": 8
+            },
+            {
+              "function": "cs_trap_decode",
+              "bytes": 4
+            },
+            {
+              "function": "cs_trap_init",
+              "bytes": 8
+            },
+            {
+              "function": "cs_trap_get",
+              "bytes": 12
+            },
+            {
+              "function": "cs_trap_set",
+              "bytes": 12
+            },
+            {
+              "function": "intrinsic",
+              "bytes": 24
+            },
+            {
+              "function": "begin_report",
+              "bytes": 0
+            },
+            {
+              "function": "cs_trap_call",
+              "bytes": 32
+            },
+            {
+              "function": "cs_trap_direct",
+              "bytes": 20
+            },
+            {
+              "function": "read32",
+              "bytes": 0
+            },
+            {
+              "function": "write32",
+              "bytes": 4
+            },
+            {
+              "function": "native_valid",
+              "bytes": 0
+            },
+            {
+              "function": "overlap",
+              "bytes": 8
+            },
+            {
+              "function": "guest_overlap",
+              "bytes": 0
+            },
+            {
+              "function": "same_bytes",
+              "bytes": 4
+            },
+            {
+              "function": "copy_report",
+              "bytes": 4
+            },
+            {
+              "function": "report",
+              "bytes": 4
+            },
+            {
+              "function": "integrity",
+              "bytes": 48
+            },
+            {
+              "function": "object_span",
+              "bytes": 12
+            },
+            {
+              "function": "envelope",
+              "bytes": 92
+            },
+            {
+              "function": "same_zone",
+              "bytes": 0
+            },
+            {
+              "function": "copy_zone",
+              "bytes": 0
+            },
+            {
+              "function": "same_block",
+              "bytes": 0
+            },
+            {
+              "function": "copy_block",
+              "bytes": 0
+            },
+            {
+              "function": "copy_scrap",
+              "bytes": 0
+            },
+            {
+              "function": "same_scrap",
+              "bytes": 0
+            },
+            {
+              "function": "copy_entry",
+              "bytes": 0
+            },
+            {
+              "function": "same_entry",
+              "bytes": 0
+            },
+            {
+              "function": "copy_request",
+              "bytes": 0
+            },
+            {
+              "function": "same_request",
+              "bytes": 0
+            },
+            {
+              "function": "copy_config",
+              "bytes": 0
+            },
+            {
+              "function": "same_config",
+              "bytes": 0
+            },
+            {
+              "function": "gateway_check",
+              "bytes": 36
+            },
+            {
+              "function": "inventory_check",
+              "bytes": 60
+            },
+            {
+              "function": "preflight",
+              "bytes": 92
+            },
+            {
+              "function": "cs_life_init",
+              "bytes": 88
+            },
+            {
+              "function": "cs_life_admit",
+              "bytes": 4
+            },
+            {
+              "function": "cs_life_manager_call",
+              "bytes": 16
+            },
+            {
+              "function": "cs_life_prepare",
+              "bytes": 164
+            },
+            {
+              "function": "current_plan",
+              "bytes": 0
+            },
+            {
+              "function": "output_safe",
+              "bytes": 76
+            },
+            {
+              "function": "revalidate",
+              "bytes": 164
+            },
+            {
+              "function": "invalidate",
+              "bytes": 0
+            },
+            {
+              "function": "completed",
+              "bytes": 0
+            },
+            {
+              "function": "fault",
+              "bytes": 12
+            },
+            {
+              "function": "invariants",
+              "bytes": 40
+            },
+            {
+              "function": "cs_life_commit",
+              "bytes": 52
+            },
+            {
+              "function": "cs_life_cancel",
+              "bytes": 20
+            },
+            {
+              "function": "u16",
+              "bytes": 0
+            },
+            {
+              "function": "u24",
+              "bytes": 0
+            },
+            {
+              "function": "u32",
+              "bytes": 0
+            },
+            {
+              "function": "count",
+              "bytes": 0
+            },
+            {
+              "function": "extent",
+              "bytes": 0
+            },
+            {
+              "function": "signed_id",
+              "bytes": 0
+            },
+            {
+              "function": "overlaps",
+              "bytes": 0
+            },
+            {
+              "function": "done",
+              "bytes": 0
+            },
+            {
+              "function": "begin",
+              "bytes": 0
+            },
+            {
+              "function": "end",
+              "bytes": 16
+            },
+            {
+              "function": "copy_view",
+              "bytes": 0
+            },
+            {
+              "function": "copy_entry",
+              "bytes": 0
+            },
+            {
+              "function": "record",
+              "bytes": 68
+            },
+            {
+              "function": "cs_rf_open",
+              "bytes": 216
+            },
+            {
+              "function": "valid",
+              "bytes": 12
+            },
+            {
+              "function": "cs_rf_find",
+              "bytes": 104
+            },
+            {
+              "function": "valid",
+              "bytes": 0
+            },
+            {
+              "function": "aligned",
+              "bytes": 16
+            },
+            {
+              "function": "overlap",
+              "bytes": 8
+            },
+            {
+              "function": "intersects",
+              "bytes": 0
+            },
+            {
+              "function": "clear",
+              "bytes": 8
+            },
+            {
+              "function": "copy",
+              "bytes": 12
+            },
+            {
+              "function": "be16",
+              "bytes": 0
+            },
+            {
+              "function": "be32",
+              "bytes": 8
+            },
+            {
+              "function": "add",
+              "bytes": 0
+            },
+            {
+              "function": "subtract",
+              "bytes": 0
+            },
+            {
+              "function": "envelope",
+              "bytes": 396
+            },
+            {
+              "function": "initialize",
+              "bytes": 8
+            },
+            {
+              "function": "fail",
+              "bytes": 0
+            },
+            {
+              "function": "inactive",
+              "bytes": 4
+            },
+            {
+              "function": "position",
+              "bytes": 0
+            },
+            {
+              "function": "find",
+              "bytes": 24
+            },
+            {
+              "function": "header",
+              "bytes": 40
+            },
+            {
+              "function": "cs_code_inspect",
+              "bytes": 152
+            },
+            {
+              "function": "resource_valid",
+              "bytes": 4
+            },
+            {
+              "function": "snapshot_valid",
+              "bytes": 72
+            },
+            {
+              "function": "backing_alias",
+              "bytes": 100
+            },
+            {
+              "function": "cs_code_check_layout",
+              "bytes": 168
+            }
+          ]
+        },
+        {
+          "optimization": "-Os",
+          "objects": 6,
+          "combined_sha256": "8cfdd33df22e17ccfc56495a373468f47a9b75a7b5d697bbedf626506298c0ec",
+          "stack_frames": [
+            {
+              "function": "cs_guest_validate",
+              "bytes": 28
+            },
+            {
+              "function": "cs_guest_window",
+              "bytes": 40
+            },
+            {
+              "function": "operand",
+              "bytes": 24
+            },
+            {
+              "function": "cs_guest_read",
+              "bytes": 36
+            },
+            {
+              "function": "cs_guest_write",
+              "bytes": 40
+            },
+            {
+              "function": "read32",
+              "bytes": 0
+            },
+            {
+              "function": "write32",
+              "bytes": 0
+            },
+            {
+              "function": "compact",
+              "bytes": 28
+            },
+            {
+              "function": "fits",
+              "bytes": 16
+            },
+            {
+              "function": "configuration",
+              "bytes": 56
+            },
+            {
+              "function": "copy_bytes",
+              "bytes": 0
+            },
+            {
+              "function": "commit_moves",
+              "bytes": 72
+            },
+            {
+              "function": "gap.constprop",
+              "bytes": 40
+            },
+            {
+              "function": "cs_mm_init",
+              "bytes": 120
+            },
+            {
+              "function": "cs_mm_execute",
+              "bytes": 604
+            },
+            {
+              "function": "rom_address.isra",
+              "bytes": 0
+            },
+            {
+              "function": "executable",
+              "bytes": 16
+            },
+            {
+              "function": "config_valid",
+              "bytes": 28
+            },
+            {
+              "function": "state_valid",
+              "bytes": 4
+            },
+            {
+              "function": "cs_trap_decode",
+              "bytes": 8
+            },
+            {
+              "function": "cs_trap_init",
+              "bytes": 12
+            },
+            {
+              "function": "cs_trap_get",
+              "bytes": 24
+            },
+            {
+              "function": "cs_trap_set",
+              "bytes": 24
+            },
+            {
+              "function": "intrinsic",
+              "bytes": 24
+            },
+            {
+              "function": "cs_trap_call",
+              "bytes": 32
+            },
+            {
+              "function": "cs_trap_direct",
+              "bytes": 32
+            },
+            {
+              "function": "read32",
+              "bytes": 0
+            },
+            {
+              "function": "write32",
+              "bytes": 0
+            },
+            {
+              "function": "native_valid",
+              "bytes": 0
+            },
+            {
+              "function": "overlap",
+              "bytes": 4
+            },
+            {
+              "function": "copy_report",
+              "bytes": 0
+            },
+            {
+              "function": "report",
+              "bytes": 0
+            },
+            {
+              "function": "object_span",
+              "bytes": 12
+            },
+            {
+              "function": "current_plan",
+              "bytes": 0
+            },
+            {
+              "function": "output_safe",
+              "bytes": 72
+            },
+            {
+              "function": "envelope",
+              "bytes": 76
+            },
+            {
+              "function": "guest_overlap",
+              "bytes": 0
+            },
+            {
+              "function": "integrity",
+              "bytes": 48
+            },
+            {
+              "function": "preflight",
+              "bytes": 96
+            },
+            {
+              "function": "cs_life_init",
+              "bytes": 48
+            },
+            {
+              "function": "cs_life_admit",
+              "bytes": 0
+            },
+            {
+              "function": "cs_life_manager_call",
+              "bytes": 32
+            },
+            {
+              "function": "cs_life_prepare",
+              "bytes": 168
+            },
+            {
+              "function": "cs_life_commit",
+              "bytes": 188
+            },
+            {
+              "function": "cs_life_cancel",
+              "bytes": 32
+            },
+            {
+              "function": "u16",
+              "bytes": 0
+            },
+            {
+              "function": "u32",
+              "bytes": 4
+            },
+            {
+              "function": "record",
+              "bytes": 48
+            },
+            {
+              "function": "cs_rf_open",
+              "bytes": 192
+            },
+            {
+              "function": "cs_rf_find",
+              "bytes": 104
+            },
+            {
+              "function": "valid",
+              "bytes": 0
+            },
+            {
+              "function": "overlap",
+              "bytes": 4
+            },
+            {
+              "function": "copy",
+              "bytes": 0
+            },
+            {
+              "function": "be32",
+              "bytes": 0
+            },
+            {
+              "function": "resource_valid",
+              "bytes": 4
+            },
+            {
+              "function": "backing_alias",
+              "bytes": 100
+            },
+            {
+              "function": "find",
+              "bytes": 48
+            },
+            {
+              "function": "intersects",
+              "bytes": 0
+            },
+            {
+              "function": "inactive",
+              "bytes": 0
+            },
+            {
+              "function": "aligned.constprop",
+              "bytes": 12
+            },
+            {
+              "function": "envelope",
+              "bytes": 340
+            },
+            {
+              "function": "cs_code_inspect",
+              "bytes": 112
+            },
+            {
+              "function": "cs_code_check_layout",
+              "bytes": 184
+            }
+          ]
+        }
+      ],
+      "inputs": {
+        "core/memory/guest.c": "9678b43e3dc82df2f66119794f08cb2a0dbd85c07a031085daba35b230b6f8a1",
+        "core/memory/manager.c": "24f12c710e62f73c274964834ca4470d78c8b54c0e7dcfb6427ca94b9deff575",
+        "core/services/traps.c": "585adf0742f51390bc44ba086b58e22361bb7188c1205bcc11968875f0cbb1ef",
+        "core/memory/lifecycle.c": "fa39f5d1daf5ddaac89129a17d0a51dde559509a135a9487ce02866de034c5ac",
+        "formats/resourcefork/reader.c": "ef3ab3b867fa49c830559092d90ddba2c9d2df4edcb747665c907cd8cf6f23a9",
+        "personality/system1/code-preflight.c": "eb17d35ec44452a08886c5901c1b43f0c5292a67e5feb9490da39bad1fd3e189",
+        "personality/system1/code-preflight.h": "e422ee629c35489ec4c10ec6fb6b992e5a256ec5492701489f357a2c052ccac7",
+        "core/memory/lifecycle.h": "8d21a92f26f3b06973f77047721d46c040cb6daacb787f32372ffcb901cedf05",
+        "core/memory/manager.h": "9752645a3c610d46c41e2826061853967baff6898c954c20006ce2949f8e1078",
+        "core/memory/guest.h": "5a89e549470bd0f3ffe50e7fb714342ff7dc6af0d49a0c154a7baebdf7e113ff",
+        "core/services/traps.h": "a3346547364a2237027dbe1d134b81129e80f9731f4c49c813fc9f68563fd782",
+        "formats/resourcefork/reader.h": "06fcb33136037f43662f155df9d4d896c4d28dc786f5eb59b5c94ae0925156ea",
+        "core/cpu/m68k-session.h": "aea400413449630489f6fa0a8a6ab924271e254a4fd0d94724bc82dd9c70bdee",
+        "core/cpu/m68k-call.h": "5f320112485dfd98cd868e290bc1d3efdb8a0f3e81fbb4eb81fb93e6494cab1d",
+        "core/cpu/m68k-bus.h": "a0a8fa1ca3075be2c3f6eecfe18f45ef0c3db3c338af00d5451edc293ad2ce0a",
+        "core/cpu/m68k.h": "db12b5678ffe4b471082a3b9f6840719148d10032c2ba6dfeb2a9d83a03b7ad5",
+        "docs/specifications/SPEC-0032-code-only-launch-preflight.md": "0fef1aa5947ba6010fc193d25a9e45c3679c1a18b9a45cada9a0c42d0be1d1e5",
+        "scripts/Verify-CodePreflightM68k.py": "e8f591b2d4b023b3e8128462fe29ef993ef31646d1062e531e7836bd4ff7b4d5",
+        "scripts/Verify-GuestM68k.py": "548addd87816af0f0f190c4f82c6b17083155e3703d28c9d124a0038acf6ed68",
+        "tests/code-preflight.c": "7d3cc8fe0c03188166a0efb656d7c03bea43e98f068e1fee36661d10de188b3c"
+      },
+      "tool_lock_sha256": "a2fe02f949288826f6a1d11b55df1d3305aab4fb4726da83a4fb8695b7f21898",
+      "native_executed": false,
+      "rom_integration": false
+    },
+    "manifest_sha256": "3c138c8714d0a9b2f9b6c5e8ede5e4b818331358961bca581bab12e55bc99a90",
+    "complete_manifest_matches_ci": false,
+    "individual_closure_frame_maxima": {
+      "-O0": 608,
+      "-Os": 604
+    },
+    "cumulative_stack_measured": false,
+    "full128K_fit_proven": false
+  },
+  "workers": {
+    "claude": {
+      "cli_version": "2.1.287",
+      "reported_models": [
+        "claude-opus-5-5"
+      ],
+      "model_turns": 2,
+      "actual_read_calls": 1,
+      "permitted_packet": {
+        "docs/specifications/SPEC-0032-code-only-launch-preflight.md": {
+          "bytes": 17246,
+          "sha256": "99db28668fafdf60e626104eeae3423ac4d88a2a16cb7b9fb22403ce6f70766b"
+        },
+        "personality/system1/code-preflight.h": {
+          "bytes": 4127,
+          "sha256": "0814f2cfc9823c30b0a43eb24a5eaf010915e6112e11d463dcb0ea3b4524af64"
+        },
+        "personality/system1/code-preflight.c": {
+          "bytes": 19342,
+          "sha256": "de0142d9fa606815dbe2c74fc8be79216b1775b7469ffc5801c626f1783ba6cb"
+        },
+        "packet": {
+          "bytes": 41693,
+          "sha256": "ac34a2244f86141ad3856e2586a878cc67f11edcd6a5b0f386c59b177b70f4e7"
+        }
+      },
+      "report_bytes": 5888,
+      "report_sha256": "88bfe732cf3133c61fb012284ec575b0dbf9ad0b119450c10ffa836f5aabab1f",
+      "report_words": 820,
+      "usage": {
+        "input_tokens": 4,
+        "cache_creation_input_tokens": 21547,
+        "cache_read_input_tokens": 4673,
+        "output_tokens": 13772,
+        "output_tokens_details": {
+          "thinking_tokens": 11489
+        },
+        "server_tool_use": {
+          "web_search_requests": 0,
+          "web_fetch_requests": 0
+        },
+        "service_tier": "standard",
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 21547,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "global",
+        "speed": "standard",
+        "fallback_credit": null
+      },
+      "cli_list_cost_estimate_usd": 0.44876659999999996,
+      "cost_is_billing_or_quota_measurement": false,
+      "worker_executed_tests": false
+    },
+    "grok": {
+      "cli_version": "1.0.52 (0920c8169e27)",
+      "reported_models": [
+        "grok-4.7-build"
+      ],
+      "model_turns": 2,
+      "actual_read_calls": 1,
+      "permitted_packet": {
+        "docs/specifications/SPEC-0032-code-only-launch-preflight.md": {
+          "bytes": 17246,
+          "sha256": "99db28668fafdf60e626104eeae3423ac4d88a2a16cb7b9fb22403ce6f70766b"
+        },
+        "personality/system1/code-preflight.h": {
+          "bytes": 4127,
+          "sha256": "0814f2cfc9823c30b0a43eb24a5eaf010915e6112e11d463dcb0ea3b4524af64"
+        },
+        "personality/system1/code-preflight.c": {
+          "bytes": 19342,
+          "sha256": "de0142d9fa606815dbe2c74fc8be79216b1775b7469ffc5801c626f1783ba6cb"
+        },
+        "tests/code-preflight.c": {
+          "bytes": 18563,
+          "sha256": "d06bc606a96899dfd89163b3cb2ad51c25c07a7a36ca5dabb4fd2631d8d1cced"
+        },
+        "packet": {
+          "bytes": 60553,
+          "sha256": "440d730122461456dacef58f078d223bc607147431fbb46bef45b9a436523149"
+        }
+      },
+      "report_bytes": 5831,
+      "report_sha256": "d5905e6c6fff942048cd7a25dabfe6f37f7d59b78daeeda80690fbcca3188bb4",
+      "report_words": 887,
+      "usage": {
+        "input_tokens": 24983,
+        "cache_read_input_tokens": 8192,
+        "cache_creation_input_tokens": 0,
+        "output_tokens": 24291,
+        "reasoning_tokens": 22763,
+        "total_tokens": 57466
+      },
+      "cli_list_cost_estimate_usd": 0.06793472,
+      "cost_is_billing_or_quota_measurement": false,
+      "worker_executed_tests": false
+    }
+  },
+  "preservation": {
+    "research_originals": 24,
+    "unchanged_untracked_and_private_copies": true,
+    "prior_runtime_boot_interface_asset_uart_inputs_unchanged": true,
+    "two_required_system1_rom_directions_tested": false,
+    "old_build_edition_records_preserved": true
+  },
+  "human_provenance_review": "pending"
+}

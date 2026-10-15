@@ -1,5 +1,15 @@
 # ClasSICK 0.97 working instructions
 
+- Current owner implementation scope (2026-10-15, SRC-0167): "OK, move on to
+  the next task" continues SPEC-0032 into its original read-only hosted CODE
+  inspection/layout checker, original conformance/compiler/regression/CI checks,
+  bounded Claude/Grok review and ordinary public/HQ/wiki records. This supersedes
+  the prior contract-only limit solely for this checker. No loader, heap reset,
+  guest binding/execution, native application/SDK, boot change or VM/emulator/
+  reference run. Preserve all24 originals/copies and prior source/UART/edition/
+  physical/full128K/B2/human gates. SRC-0149 transfers apply; no extra agents,
+  chats, automation or OneNote. Earlier entries retain their dated scope.
+
 - Current next contract (2026-10-14, SRC-0163/0165/0166): after completing
   resource residency and separately recording the owner's two boot requirements,
   SPEC-0032 / ADR-0036 finalizes read-only CODE inspection/layout preflight only.

@@ -1,8 +1,10 @@
 # SPEC-0032 - CODE-only launch preflight
 
 Engineering contract v1, 2026-10-14. Profile `classick-code-preflight-v1`.
-SRC-0163/0165/0166 / ADR-0036. Contract only, unimplemented. Human provenance
-review pending. No TEST/IMPL/build, fixture, guest ABI or execution is introduced.
+SRC-0163/0165/0166 / ADR-0036. Implemented 2026-10-15 under SRC-0167 as
+IMPL-0036 / TEST-0040. Human provenance review pending. The original contract
+checkpoint was unimplemented; this bounded host-only implementation adds no
+guest ABI or execution. [Evidence](../development/code-preflight-evidence.md).
 
 ## Purpose and evidence boundary
 
@@ -250,8 +252,10 @@ routine-start span at both limits; literal versus alternative offset discriminat
 as policy only; exact32768/one-above segment restriction; layout underflow/strict24/
 zero-below/exact table end and slack; explicit H_min/cell band/zone/map overlap;
 current full-zone stack refusal versus admitted disjoint layout; stale native
-metadata/context/epoch and success with execution still unauthorized. These are
-unexecuted obligations: no fixture, code, TEST/IMPL/build or reference probe now.
+metadata/context/epoch and success with execution still unauthorized. These were
+unexecuted obligations at the contract checkpoint. TEST-0040 and the implementation
+evidence distinguish executed original cases from defensive or unreachable
+combinations. No reference probe is introduced.
 
 The required two System1/ROM boot directions (SRC-0164) remain separate, untested
 acceptance gates. Application preflight, replacement ROM scenes and hosted builds
