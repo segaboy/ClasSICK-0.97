@@ -2,7 +2,8 @@
 
 Engineering contract v1, 2026-10-14. Profile `classick-hosted-resource-residency-v1`.
 SRC-0155..0158 / ADR-0035. Lead self-review; human provenance review pending.
-Contract only, unimplemented. No historical Resource Manager ABI is introduced.
+Original hosted implementation: IMPL-0035 / TEST-0039 / SRC-0159..0162.
+No historical Resource Manager ABI is introduced.
 
 ## Basis and scope
 
@@ -292,9 +293,10 @@ of live executable resources and checking every transitive return path. A locked
 cell alone is not a proof that arbitrary guest code cannot alter it. No generic
 stack scan, raw-address authenticity or complete re-entry closure is promised.
 
-## Future verification obligations and deferred work
+## Verification obligations and deferred work
 
-These are unexecuted requirements, not fixtures or TEST/IMPL/build records:
+The implementation's executed subset and remaining limits are recorded separately
+in TEST-0039 and its evidence; this list alone is not execution evidence:
 
 - Initialization/open/close/reopen identities, maximum/zero/wrapped native lengths,
   source/report/control/guest backing aliases and argument-output preservation.
@@ -317,3 +319,50 @@ No MFS, search chain/current resource file, system references/resources, guest
 Resource Manager traps, purge/reload/detach/update/writeback, grow-zone callback,
 CODE parser/loader/execution, native application, boot change or reference trial.
 Existing source/UART/native/physical/128K/edition/B2/human-review gates remain.
+
+## Original hosted API binding - 2026-10-14
+
+`personality/system1/resources.h/.c` owns the native service and numeric enums.
+`cs_res_init` binds a zeroed service to the controller/manager/map and positive
+caller profile with a nonzero coordinator owner identifier. Mandatory pointer
+safety precedes tagged-instance refusal, which precedes profile-field validation.
+`cs_res_execute` takes one typed request and one disjoint report. Its report
+contains the acquired ticket; copy that value into a separate object before
+passing it as input to DESCRIBE/RELEASE. Constructor map descriptors, backing
+identities and manager zone configuration remain fixed; valid changes refuse
+CONFLICT rather than silently changing the service's binding. A valid lifecycle
+reset changes the epoch and application limit, not those bindings.
+
+The request context carries a truthful authoritative FUTURE/REFUSE entry with
+matching owner ID, native service pointer and byte size, and zero guest address/
+value. This acknowledgment is required before OPEN and throughout OPEN ownership;
+it does not discover or authenticate the coordinator's inventory. Optional session
+controls are independently checked inactive and bound to the same map. The trusted
+`cs_res_external_admit` gate allows CLOSED only for coordinated execution/reset;
+it does not intercept independent low-level APIs or authenticate native state.
+
+Reports have separately tagged captured generation/epoch and observed controller
+heap epoch. CLOSED numeric diagnostics are non-live. A failing call records its
+actual completed effects in the immutable owned `first_fault`. Subsequent FAULTED
+calls return a fresh no-effect refusal describing their own requested operation,
+with `retained_fault=1`; they do not republish a ticket, span, reader or manager
+result. The prior snapshot remains available for owned diagnostic inspection.
+Manager-boundary reports distinguish lifecycle result, actually written native
+manager result, reply validity and the allocation's separate movement count.
+Cache metadata retains the reader's real successful lookup diagnostics so a
+DESCRIBE can expose warnings without a new source lookup. A payload span is
+read-only; an EMPTY result has no zero-length guest window or writable pointer.
+
+The logical loading recipe revalidates the expected record, address, size, extent,
+locked cell and complete fresh span after locking and again before publication.
+Final CLOSE records closed ownership before its last semantic unit, while the
+source lifetime acknowledgment stays conservative until successful return; a
+post-unit fault retains that source borrow. Two incoming/retained read-only source
+arguments may coincide on a state-refused OPEN; this exception never permits
+source overlap with guest backing, protected controls or mutable outputs.
+
+Conformance-only `CLASSICK_RESOURCES_TEST_FAULTS` builds inject post-unit faults,
+before-call internal failures (no fabricated dispatched result), or record
+address/extent corruption after locking. These seams contain no callback and
+are absent from production objects. They are original failure oracles, not
+claims about a real manager malfunction or reference-system behavior.

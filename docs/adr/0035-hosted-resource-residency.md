@@ -36,3 +36,9 @@ Consequences: explicit capacity and source-buffer charges; callers must evict/cl
 root execution is not admitted, and a future loader must define its continuation
 and ownership boundary. This is a prerequisite with original semantics, not
 historical compatibility or a final128K proof. No code/tests/build or VM run.
+
+2026-10-14 implementation continuation (SRC-0159): IMPL-0035 / TEST-0039
+implements the reviewed hosted profile with the original API binding appended
+to SPEC-0031. [Evidence](../development/resource-residency-evidence.md) separates
+executed hosted/compiler checks from future loader and historical gates. The
+preceding contract-only decision remains dated history.

@@ -1,5 +1,15 @@
 # ClasSICK 0.97 working instructions
 
+- Current owner scope (2026-10-14, SRC-0159): "ok do it" accepts the proposed
+  original SPEC-0031 resource-loading implementation, ownership/cleanup tests,
+  bounded Claude failure/Grok coverage reviews, compiler/regression/CI checks
+  and ordinary public/HQ/wiki records. SRC-0149 scoped transfers apply. No guest
+  binding, CODE loader/execution, native application, new VM/emulator/reference
+  trial, UART body work, prohibited input, extra agent/chat/automation/OneNote.
+  Preserve all24 research originals/copies and prior build/edition evidence.
+  [Implementation/evidence](docs/development/resource-residency-evidence.md).
+  Earlier contract-only and implementation entries retain their dated scope.
+
 - Current owner scope (2026-10-14, SRC-0155): "Do it" accepts the proposed
   Resource Manager contract before CODE loading. SPEC-0031 / ADR-0035 defines
   original hosted residency/cache/ticket/source/fault/lifecycle ownership only.

@@ -1,5 +1,80 @@
 # Source catalog
 
+## SRC-0159 - Owner hosted resource implementation continuation
+
+2026-10-14, owner: "ok do it." This accepts the preceding proposal to implement
+SPEC-0031, test loading/shared access/allocation failures/cleanup, have Claude
+review failure handling and Grok check coverage, verify memory usage, and record
+results in both repos and the wiki queue. Ordinary compiler/regression/CI/Git
+publication follows existing practice. SRC-0149 permits scoped reviewed public
+contracts/original code to Anthropic/Claude and xAI/Grok. HQ, untracked originals,
+manuals, credentials and prohibited material remain excluded. No new guest binding,
+loader/application execution, native application or VM/emulator/reference trial.
+No extra agents/chats/automation/OneNote. Owner scope, not historical evidence.
+
+## SRC-0160 - Claude hosted residency implementation failure review
+
+2026-10-14, Claude Code2.1.287, runtime claude-opus-5-5, medium effort.
+One Read of the frozen public-contract/original-header/implementation packet,
+two model turns, successful result, no permission denial or other read/command/
+write/web/MCP/subagent action. The lead verifies actual tool use and identities.
+Report7145 bytes, SHA256052a636d35dc6b01c4cd98e31e06c27210e25823423c90b7f93b2414364f0b04.
+Adopt C1 with changes: fresh no-effect later FAULT refusals, original owned first
+snapshot separate. Adopt C2 with separate tagged lifecycle/native/reply outcomes;
+before-call seams publish no fabricated dispatch. Adopt C3 with exact post-lock/
+prepublication record and fresh-span checks, C4 tagged-init precedence and C5
+captured/current epoch and generation validity. No actual manager violation or
+historical behavior is inferred. Worker scenarios are unexecuted suggestions;
+the lead independently writes and executes original conformance cases.
+Runtime totals55312 tokens, including24420 output/21814 thinking; CLI list-cost
+estimate0.69925USD is not a charge, invoice, remaining quota or model benchmark.
+A rate-limit metadata event is retained; the run succeeds. The900-word request
+was not fully enforced. No second worker review of lead amendments is claimed.
+
+## SRC-0161 - Grok hosted residency coverage review
+
+2026-10-14, Grok CLI1.0.52, runtime grok-4.7-build, low reasoning effort.
+One read_file of a frozen public-contract/original-header/test packet, two model
+turns/end_turn, no command/edit/web/MCP/subagent or extra-file use. Report7895
+bytes, SHA256fffb1e6450b32724ffe54e2ff08cb60ccd3a3355bb33df0f55ab38bc2a1e929e.
+Adopt coverage requests with lead changes: cross-class refusal order, fresh fault
+quarantine on all terminal paths, remaining close survivors, unchanged refusal
+snapshots, exact resource maximum, shared-copy lifetime and monotonic model IDs.
+Resource logical length needs lookup before its bound can be checked; a proposed
+generic profile-before-resolution order is not adopted. Full huge-file payload
+boundary cases are not claimed executed. Compiler/import/storage checks are
+separate evidence; their absence from the test-only packet is not a runtime gap.
+Runtime36963 tokens, output7104 including5378 reasoning; list-cost estimate
+0.03061836USD is not billing, remaining quota or a cross-model efficiency proof.
+The900-word request was not fully enforced. Suggestions remain research until
+independently authored cases execute; no worker code or authoritative verdict.
+
+## SRC-0162 - Lead original residency implementation and verification review
+
+2026-10-14, SPEC-0031 / ADR-0035 / IMPL-0035 / TEST-0039.
+Lead uses only reviewed own contracts/interfaces and original manager/map/reader/
+lifecycle/session implementations. No new manual/sample, external implementation,
+Apple/Microsoft executable/asset, private heap reconstruction or emulator source.
+All24 untracked research originals and byte-identical private copies are preserved.
+Lead retains implementation decisions and one writer. Human provenance review
+remains pending. Bounded worker review is input, not execution or certification.
+See the original implementation review and evidence for corrected-source results,
+partial native storage/frame costs, retained older evidence and open gates.
+
+Frozen claude packet SHA256ddd20fba3b156461931afa34a90cbba79b74ee0d4f2dd4d3737a5287c1438418.
+Input identities (actual local source bytes, not final amended source):
+
+- `docs/specifications/SPEC-0031-hosted-resource-residency.md`: 2b9ebe81f5f33b7af492cc06110c2312bbcb722f4d487931026d3311b9201cf9
+- `personality/system1/resources.h`: f64b8911a2f152e92b5afab9c27d39857cb9d2c8b18670a101f02172e685c441
+- `personality/system1/resources.c`: f8adc8cd2b460cb163611b06f7257746161b390476ce1e2825f384e2a18b19b4
+
+Frozen grok packet SHA256678817b3eeec08eefb4961b475a9d92e0dee99f0f46debb23614ec1562969fde.
+Input identities (actual local source bytes, not final amended source):
+
+- `docs/specifications/SPEC-0031-hosted-resource-residency.md`: 2b9ebe81f5f33b7af492cc06110c2312bbcb722f4d487931026d3311b9201cf9
+- `personality/system1/resources.h`: f64b8911a2f152e92b5afab9c27d39857cb9d2c8b18670a101f02172e685c441
+- `tests/resource-residency.c`: 4081cac92bf222bc903322b3d5d1eb3452d0367a7de8bd3c41fae986ebb3745b
+
 ## SRC-0155 - Owner Resource Manager contract continuation
 
 2026-10-14, owner: "Do it." This accepts the preceding recommendation:

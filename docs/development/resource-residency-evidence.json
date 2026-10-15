@@ -1,0 +1,903 @@
+{
+  "schema_version": 1,
+  "specification": "SPEC-0031",
+  "implementation": "IMPL-0035",
+  "test": "TEST-0039",
+  "source": "SRC-0162",
+  "profile": "classick-hosted-resource-residency-v1",
+  "verified_on": "2026-10-14",
+  "compiled_source_revision": null,
+  "classification": "hosted-resource-residency-and-standalone-compiler-verification",
+  "historical_1984_confirmed": false,
+  "new_native_application": false,
+  "new_boot_image_integration": false,
+  "new_vm_or_emulator_runs": false,
+  "verification": {
+    "initial_full_ctest_checks": 1803,
+    "initial_profile_counts": [
+      213,
+      213,
+      213,
+      186,
+      213,
+      198,
+      198,
+      198,
+      171
+    ],
+    "final_affected_ctest_checks": 90,
+    "final_profile_counts": [
+      10,
+      10,
+      10,
+      10,
+      10,
+      10,
+      10,
+      10,
+      10
+    ],
+    "unaffected_checks_retained": 1713,
+    "object_audits": 10,
+    "hosted_twins": {
+      "clang": "cea19ffe099caf9284976b54915acbd3c6d20d78f311316937e30d773aa1609c",
+      "gcc": "e52382d5605ef1d5f93605549edc2e8594ef45cdce25f3487302d41afc1aa51a"
+    },
+    "full_matrix_log_sha256": "617bb1faeabb666c8641336d36d6d0af341e414d53515fc6ce8fc758c07437f7",
+    "final_checks_log_sha256": "668cd4afa6815103e7ba029c83b029b4fd780ea733026ac77fb59748a5da3205",
+    "ci_status": "pending"
+  },
+  "m68k": {
+    "manifest": {
+      "schema_version": 1,
+      "specification": "SPEC-0031",
+      "compiler": "m68k-linux-gnu-gcc-13 (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0",
+      "object_audits": 12,
+      "complete_relocatable_links": 2,
+      "storage_bytes_68000": {
+        "service": 3314,
+        "profile": 12,
+        "context": 28,
+        "ticket": 36,
+        "request": 52,
+        "report": 246,
+        "cache_entry": 92,
+        "lease_entry": 40,
+        "manager": 672,
+        "lifecycle_controller": 112
+      },
+      "profiles": [
+        {
+          "optimization": "-O0",
+          "objects": 6,
+          "combined_sha256": "405783bc2ac666fd6305328e444eb619514dfe4b59ebbdb03c954b815bae64e4",
+          "stack_frames": [
+            {
+              "function": "cs_guest_validate",
+              "bytes": 20
+            },
+            {
+              "function": "cs_guest_window",
+              "bytes": 20
+            },
+            {
+              "function": "operand",
+              "bytes": 24
+            },
+            {
+              "function": "cs_guest_read",
+              "bytes": 44
+            },
+            {
+              "function": "cs_guest_write",
+              "bytes": 36
+            },
+            {
+              "function": "zone",
+              "bytes": 0
+            },
+            {
+              "function": "read32",
+              "bytes": 0
+            },
+            {
+              "function": "write32",
+              "bytes": 0
+            },
+            {
+              "function": "intersects",
+              "bytes": 0
+            },
+            {
+              "function": "extent",
+              "bytes": 0
+            },
+            {
+              "function": "configuration",
+              "bytes": 52
+            },
+            {
+              "function": "cs_mm_init",
+              "bytes": 100
+            },
+            {
+              "function": "state",
+              "bytes": 48
+            },
+            {
+              "function": "compact",
+              "bytes": 36
+            },
+            {
+              "function": "fits",
+              "bytes": 28
+            },
+            {
+              "function": "gap",
+              "bytes": 40
+            },
+            {
+              "function": "copy_bytes",
+              "bytes": 8
+            },
+            {
+              "function": "commit_moves",
+              "bytes": 44
+            },
+            {
+              "function": "reply",
+              "bytes": 0
+            },
+            {
+              "function": "object",
+              "bytes": 20
+            },
+            {
+              "function": "cs_mm_execute",
+              "bytes": 608
+            },
+            {
+              "function": "rom_address",
+              "bytes": 0
+            },
+            {
+              "function": "config_valid",
+              "bytes": 8
+            },
+            {
+              "function": "state_valid",
+              "bytes": 4
+            },
+            {
+              "function": "executable",
+              "bytes": 8
+            },
+            {
+              "function": "cs_trap_decode",
+              "bytes": 4
+            },
+            {
+              "function": "cs_trap_init",
+              "bytes": 8
+            },
+            {
+              "function": "cs_trap_get",
+              "bytes": 12
+            },
+            {
+              "function": "cs_trap_set",
+              "bytes": 12
+            },
+            {
+              "function": "intrinsic",
+              "bytes": 24
+            },
+            {
+              "function": "begin_report",
+              "bytes": 0
+            },
+            {
+              "function": "cs_trap_call",
+              "bytes": 32
+            },
+            {
+              "function": "cs_trap_direct",
+              "bytes": 20
+            },
+            {
+              "function": "read32",
+              "bytes": 0
+            },
+            {
+              "function": "write32",
+              "bytes": 4
+            },
+            {
+              "function": "native_valid",
+              "bytes": 0
+            },
+            {
+              "function": "overlap",
+              "bytes": 8
+            },
+            {
+              "function": "guest_overlap",
+              "bytes": 0
+            },
+            {
+              "function": "same_bytes",
+              "bytes": 4
+            },
+            {
+              "function": "copy_report",
+              "bytes": 4
+            },
+            {
+              "function": "report",
+              "bytes": 4
+            },
+            {
+              "function": "integrity",
+              "bytes": 48
+            },
+            {
+              "function": "object_span",
+              "bytes": 12
+            },
+            {
+              "function": "envelope",
+              "bytes": 92
+            },
+            {
+              "function": "same_zone",
+              "bytes": 0
+            },
+            {
+              "function": "copy_zone",
+              "bytes": 0
+            },
+            {
+              "function": "same_block",
+              "bytes": 0
+            },
+            {
+              "function": "copy_block",
+              "bytes": 0
+            },
+            {
+              "function": "copy_scrap",
+              "bytes": 0
+            },
+            {
+              "function": "same_scrap",
+              "bytes": 0
+            },
+            {
+              "function": "copy_entry",
+              "bytes": 0
+            },
+            {
+              "function": "same_entry",
+              "bytes": 0
+            },
+            {
+              "function": "copy_request",
+              "bytes": 0
+            },
+            {
+              "function": "same_request",
+              "bytes": 0
+            },
+            {
+              "function": "copy_config",
+              "bytes": 0
+            },
+            {
+              "function": "same_config",
+              "bytes": 0
+            },
+            {
+              "function": "gateway_check",
+              "bytes": 36
+            },
+            {
+              "function": "inventory_check",
+              "bytes": 60
+            },
+            {
+              "function": "preflight",
+              "bytes": 92
+            },
+            {
+              "function": "cs_life_init",
+              "bytes": 88
+            },
+            {
+              "function": "cs_life_admit",
+              "bytes": 4
+            },
+            {
+              "function": "cs_life_manager_call",
+              "bytes": 16
+            },
+            {
+              "function": "cs_life_prepare",
+              "bytes": 164
+            },
+            {
+              "function": "current_plan",
+              "bytes": 0
+            },
+            {
+              "function": "output_safe",
+              "bytes": 76
+            },
+            {
+              "function": "revalidate",
+              "bytes": 164
+            },
+            {
+              "function": "invalidate",
+              "bytes": 0
+            },
+            {
+              "function": "completed",
+              "bytes": 0
+            },
+            {
+              "function": "fault",
+              "bytes": 12
+            },
+            {
+              "function": "invariants",
+              "bytes": 40
+            },
+            {
+              "function": "cs_life_commit",
+              "bytes": 52
+            },
+            {
+              "function": "cs_life_cancel",
+              "bytes": 20
+            },
+            {
+              "function": "u16",
+              "bytes": 0
+            },
+            {
+              "function": "u24",
+              "bytes": 0
+            },
+            {
+              "function": "u32",
+              "bytes": 0
+            },
+            {
+              "function": "count",
+              "bytes": 0
+            },
+            {
+              "function": "extent",
+              "bytes": 0
+            },
+            {
+              "function": "signed_id",
+              "bytes": 0
+            },
+            {
+              "function": "overlaps",
+              "bytes": 0
+            },
+            {
+              "function": "done",
+              "bytes": 0
+            },
+            {
+              "function": "begin",
+              "bytes": 0
+            },
+            {
+              "function": "end",
+              "bytes": 16
+            },
+            {
+              "function": "copy_view",
+              "bytes": 0
+            },
+            {
+              "function": "copy_entry",
+              "bytes": 0
+            },
+            {
+              "function": "record",
+              "bytes": 68
+            },
+            {
+              "function": "cs_rf_open",
+              "bytes": 216
+            },
+            {
+              "function": "valid",
+              "bytes": 12
+            },
+            {
+              "function": "cs_rf_find",
+              "bytes": 104
+            },
+            {
+              "function": "valid",
+              "bytes": 0
+            },
+            {
+              "function": "aligned",
+              "bytes": 16
+            },
+            {
+              "function": "overlap",
+              "bytes": 8
+            },
+            {
+              "function": "bytes_copy",
+              "bytes": 12
+            },
+            {
+              "function": "clear",
+              "bytes": 8
+            },
+            {
+              "function": "read32",
+              "bytes": 0
+            },
+            {
+              "function": "envelope",
+              "bytes": 292
+            },
+            {
+              "function": "same_zone",
+              "bytes": 0
+            },
+            {
+              "function": "same_ticket",
+              "bytes": 0
+            },
+            {
+              "function": "identity",
+              "bytes": 0
+            },
+            {
+              "function": "topology",
+              "bytes": 28
+            },
+            {
+              "function": "cached_valid",
+              "bytes": 44
+            },
+            {
+              "function": "ownership",
+              "bytes": 108
+            },
+            {
+              "function": "admission",
+              "bytes": 32
+            },
+            {
+              "function": "registered",
+              "bytes": 0
+            },
+            {
+              "function": "initialize_report",
+              "bytes": 8
+            },
+            {
+              "function": "refuse",
+              "bytes": 0
+            },
+            {
+              "function": "fault",
+              "bytes": 12
+            },
+            {
+              "function": "unit",
+              "bytes": 0
+            },
+            {
+              "function": "call",
+              "bytes": 60
+            },
+            {
+              "function": "cs_res_init",
+              "bytes": 28
+            },
+            {
+              "function": "cache_slot",
+              "bytes": 4
+            },
+            {
+              "function": "lease_slot",
+              "bytes": 12
+            },
+            {
+              "function": "resident_report",
+              "bytes": 12
+            },
+            {
+              "function": "publish_ticket",
+              "bytes": 28
+            },
+            {
+              "function": "acquire",
+              "bytes": 240
+            },
+            {
+              "function": "dispose",
+              "bytes": 36
+            },
+            {
+              "function": "cs_res_execute",
+              "bytes": 148
+            },
+            {
+              "function": "cs_res_external_admit",
+              "bytes": 12
+            }
+          ]
+        },
+        {
+          "optimization": "-Os",
+          "objects": 6,
+          "combined_sha256": "d8762b11c8393c1bca9f8e8f51f8224c8d55db2a0871160e0c749b49efb23204",
+          "stack_frames": [
+            {
+              "function": "cs_guest_validate",
+              "bytes": 28
+            },
+            {
+              "function": "cs_guest_window",
+              "bytes": 40
+            },
+            {
+              "function": "operand",
+              "bytes": 24
+            },
+            {
+              "function": "cs_guest_read",
+              "bytes": 36
+            },
+            {
+              "function": "cs_guest_write",
+              "bytes": 40
+            },
+            {
+              "function": "read32",
+              "bytes": 0
+            },
+            {
+              "function": "write32",
+              "bytes": 0
+            },
+            {
+              "function": "compact",
+              "bytes": 28
+            },
+            {
+              "function": "fits",
+              "bytes": 16
+            },
+            {
+              "function": "configuration",
+              "bytes": 56
+            },
+            {
+              "function": "copy_bytes",
+              "bytes": 0
+            },
+            {
+              "function": "commit_moves",
+              "bytes": 72
+            },
+            {
+              "function": "gap.constprop",
+              "bytes": 40
+            },
+            {
+              "function": "cs_mm_init",
+              "bytes": 120
+            },
+            {
+              "function": "cs_mm_execute",
+              "bytes": 604
+            },
+            {
+              "function": "rom_address.isra",
+              "bytes": 0
+            },
+            {
+              "function": "executable",
+              "bytes": 16
+            },
+            {
+              "function": "config_valid",
+              "bytes": 28
+            },
+            {
+              "function": "state_valid",
+              "bytes": 4
+            },
+            {
+              "function": "cs_trap_decode",
+              "bytes": 8
+            },
+            {
+              "function": "cs_trap_init",
+              "bytes": 12
+            },
+            {
+              "function": "cs_trap_get",
+              "bytes": 24
+            },
+            {
+              "function": "cs_trap_set",
+              "bytes": 24
+            },
+            {
+              "function": "intrinsic",
+              "bytes": 24
+            },
+            {
+              "function": "cs_trap_call",
+              "bytes": 32
+            },
+            {
+              "function": "cs_trap_direct",
+              "bytes": 32
+            },
+            {
+              "function": "read32",
+              "bytes": 0
+            },
+            {
+              "function": "write32",
+              "bytes": 0
+            },
+            {
+              "function": "native_valid",
+              "bytes": 0
+            },
+            {
+              "function": "overlap",
+              "bytes": 4
+            },
+            {
+              "function": "copy_report",
+              "bytes": 0
+            },
+            {
+              "function": "report",
+              "bytes": 0
+            },
+            {
+              "function": "object_span",
+              "bytes": 12
+            },
+            {
+              "function": "current_plan",
+              "bytes": 0
+            },
+            {
+              "function": "output_safe",
+              "bytes": 72
+            },
+            {
+              "function": "envelope",
+              "bytes": 76
+            },
+            {
+              "function": "guest_overlap",
+              "bytes": 0
+            },
+            {
+              "function": "integrity",
+              "bytes": 48
+            },
+            {
+              "function": "preflight",
+              "bytes": 96
+            },
+            {
+              "function": "cs_life_init",
+              "bytes": 48
+            },
+            {
+              "function": "cs_life_admit",
+              "bytes": 0
+            },
+            {
+              "function": "cs_life_manager_call",
+              "bytes": 32
+            },
+            {
+              "function": "cs_life_prepare",
+              "bytes": 168
+            },
+            {
+              "function": "cs_life_commit",
+              "bytes": 188
+            },
+            {
+              "function": "cs_life_cancel",
+              "bytes": 32
+            },
+            {
+              "function": "u16",
+              "bytes": 0
+            },
+            {
+              "function": "u32",
+              "bytes": 4
+            },
+            {
+              "function": "record",
+              "bytes": 48
+            },
+            {
+              "function": "cs_rf_open",
+              "bytes": 192
+            },
+            {
+              "function": "cs_rf_find",
+              "bytes": 104
+            },
+            {
+              "function": "valid",
+              "bytes": 0
+            },
+            {
+              "function": "overlap",
+              "bytes": 4
+            },
+            {
+              "function": "bytes_copy",
+              "bytes": 0
+            },
+            {
+              "function": "clear",
+              "bytes": 0
+            },
+            {
+              "function": "read32",
+              "bytes": 0
+            },
+            {
+              "function": "identity",
+              "bytes": 4
+            },
+            {
+              "function": "initialize_report",
+              "bytes": 16
+            },
+            {
+              "function": "fault",
+              "bytes": 12
+            },
+            {
+              "function": "resident_report",
+              "bytes": 36
+            },
+            {
+              "function": "publish_ticket",
+              "bytes": 24
+            },
+            {
+              "function": "cached_valid",
+              "bytes": 56
+            },
+            {
+              "function": "ownership",
+              "bytes": 104
+            },
+            {
+              "function": "aligned.constprop",
+              "bytes": 12
+            },
+            {
+              "function": "envelope",
+              "bytes": 240
+            },
+            {
+              "function": "call.isra",
+              "bytes": 72
+            },
+            {
+              "function": "dispose.isra",
+              "bytes": 48
+            },
+            {
+              "function": "topology",
+              "bytes": 12
+            },
+            {
+              "function": "cs_res_init",
+              "bytes": 56
+            },
+            {
+              "function": "cs_res_execute",
+              "bytes": 256
+            },
+            {
+              "function": "cs_res_external_admit",
+              "bytes": 20
+            }
+          ]
+        }
+      ],
+      "inputs": {
+        "core/memory/guest.c": "9678b43e3dc82df2f66119794f08cb2a0dbd85c07a031085daba35b230b6f8a1",
+        "core/memory/manager.c": "24f12c710e62f73c274964834ca4470d78c8b54c0e7dcfb6427ca94b9deff575",
+        "core/services/traps.c": "585adf0742f51390bc44ba086b58e22361bb7188c1205bcc11968875f0cbb1ef",
+        "core/memory/lifecycle.c": "fa39f5d1daf5ddaac89129a17d0a51dde559509a135a9487ce02866de034c5ac",
+        "formats/resourcefork/reader.c": "ef3ab3b867fa49c830559092d90ddba2c9d2df4edcb747665c907cd8cf6f23a9",
+        "personality/system1/resources.c": "65cc2fa5496cd14c941acd36b061c586f5314cf463c9e76759f753191b879636",
+        "personality/system1/resources.h": "f19d4e3ba2283e2081e271660a086294cef31773121c329941faab8c99375fcb",
+        "core/memory/lifecycle.h": "8d21a92f26f3b06973f77047721d46c040cb6daacb787f32372ffcb901cedf05",
+        "core/memory/manager.h": "9752645a3c610d46c41e2826061853967baff6898c954c20006ce2949f8e1078",
+        "core/memory/guest.h": "5a89e549470bd0f3ffe50e7fb714342ff7dc6af0d49a0c154a7baebdf7e113ff",
+        "core/services/traps.h": "a3346547364a2237027dbe1d134b81129e80f9731f4c49c813fc9f68563fd782",
+        "formats/resourcefork/reader.h": "06fcb33136037f43662f155df9d4d896c4d28dc786f5eb59b5c94ae0925156ea",
+        "core/cpu/m68k-session.h": "aea400413449630489f6fa0a8a6ab924271e254a4fd0d94724bc82dd9c70bdee",
+        "core/cpu/m68k-call.h": "5f320112485dfd98cd868e290bc1d3efdb8a0f3e81fbb4eb81fb93e6494cab1d",
+        "core/cpu/m68k-bus.h": "a0a8fa1ca3075be2c3f6eecfe18f45ef0c3db3c338af00d5451edc293ad2ce0a",
+        "core/cpu/m68k.h": "db12b5678ffe4b471082a3b9f6840719148d10032c2ba6dfeb2a9d83a03b7ad5",
+        "docs/specifications/SPEC-0031-hosted-resource-residency.md": "0137d1ec01e9ab4061981dfd0fc4cd927101b3aee83b616d2ac3838ff39d649a",
+        "scripts/Verify-ResidencyM68k.py": "0344d71313c4d53641053c851dfee77394fe61102593e6d1ec68902b5f9d3783",
+        "scripts/Verify-GuestM68k.py": "548addd87816af0f0f190c4f82c6b17083155e3703d28c9d124a0038acf6ed68",
+        "tests/resource-residency.c": "b10213b33c315354e76b9c2186d05233987285c9720ae5ad4b595e291d46d35a"
+      },
+      "tool_lock_sha256": "a2fe02f949288826f6a1d11b55df1d3305aab4fb4726da83a4fb8695b7f21898",
+      "native_executed": false,
+      "rom_integration": false
+    },
+    "complete_manifest_matches_ci": false
+  },
+  "storage": {
+    "resource_protocol_fixed_bytes_68000": 3716,
+    "includes": "one service, profile, context, input ticket, request, report and registration entry",
+    "manager_and_lifecycle_existing_bytes_68000": 784,
+    "source_and_resident_extents_additional": true,
+    "cumulative_stack_or_full_128k_proved": false
+  },
+  "preservation": {
+    "research_originals": 24,
+    "byte_identical_copies": 24,
+    "originals_untracked": true,
+    "prior_boot_media_results_equal": true,
+    "interfaces_assets_platform_inputs_unchanged": true,
+    "prior_build_and_edition_records_preserved": true
+  },
+  "worker_reviews": {
+    "claude": {
+      "review_bytes": 7145,
+      "review_sha256": "052a636d35dc6b01c4cd98e31e06c27210e25823423c90b7f93b2414364f0b04",
+      "turns": 2,
+      "packet_sha256": "ddd20fba3b156461931afa34a90cbba79b74ee0d4f2dd4d3737a5287c1438418",
+      "tool_reads": 1,
+      "executed_tests": false,
+      "final_amendments_reviewed": false
+    },
+    "grok": {
+      "review_bytes": 7895,
+      "review_sha256": "fffb1e6450b32724ffe54e2ff08cb60ccd3a3355bb33df0f55ab38bc2a1e929e",
+      "turns": 2,
+      "packet_sha256": "678817b3eeec08eefb4961b475a9d92e0dee99f0f46debb23614ec1562969fde",
+      "tool_reads": 1,
+      "executed_tests": false,
+      "final_amendments_reviewed": false
+    }
+  },
+  "limitations": [
+    "No valid2GB or uint32-maximum-sized source fixture",
+    "No cumulative stack/high-water/final128K/ROM proof",
+    "No historical/reference observation or January1984 identity closure",
+    "Human provenance review pending",
+    "Native-application, physical, parity, three-edition and B2criterion6 gates remain"
+  ]
+}
