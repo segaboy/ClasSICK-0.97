@@ -2,7 +2,8 @@
 
 2026-10-15: SPEC-0032 / IMPL-0036 / TEST-0040 implements the original read-only hosted CODE inspection/layout checker. It checks64 entries/16 segments, literal resource-start offsets, header/group/routine bounds and explicit candidate A5/stack arithmetic without loading or executing an application. All1911 final CTests pass across nine configurations, ten width/endian object audits and matching compiler twins. GNU68000 twelve module audits/two complete relocatable links pass; manifest1440, workspace1632, layout68 bytes are partial costs, not full128K proof. Claude/Grok provide bounded read-only findings; Codex retains implementation and decisions. All24 originals/copies and prior interface/assets/boot/UART and edition records are preserved. Both required System1/ROM boot directions remain untested. No guest binding, loader/reset/boot integration, native application or VM/emulator/reference run. Human provenance and historical/physical/parity/full128K/B2 gates remain open.
 
-[Implementation evidence](docs/development/code-preflight-evidence.md). Publication CI is pending. Next propose the
+[Implementation evidence](docs/development/code-preflight-evidence.md). Both publication CI jobs pass on source `724a72d`;
+the complete local/CI68000 manifest matches. Next propose the
 executable-image ownership and launch/population contract; dynamic LoadSeg and
 transitive entry lifetimes remain separate. Earlier checkpoints are dated history.
 
