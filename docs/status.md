@@ -1,5 +1,9 @@
 # Project status
 
+2026-10-14: SPEC-0032 / ADR-0036 finalizes data-only CODE launch preflight, unimplemented:64 entries/16 segments, literal resource-start offsets flagged historically unverified, conservative total32K segments, complete header/group/target bounds and explicit B/S/H_min world/stack arithmetic. Source warnings and snapshot applicability remain distinct from execution authority. Current full-zone stack refusal and CLOSED-only resource execution/reset gate remain; a later executable owner/continuation/population contract is required. Grok reads one frozen reviewed-public packet and returns five lead-reviewed findings, not executed tests. All24 originals/copies and compiled/interface/boot/assets/build/edition/current project pointers are preserved. Both System1/ROM boot directions remain required/unverified. No code, fixtures, TEST/IMPL/build, registry/guest binding, loader, native application or emulator/VM/reference run. Source/UART/native/128K/physical/parity/edition/B2/human gates remain; Git/HQ/wiki queue only.
+
+[Contract/review](development/code-preflight-contract-review.md). Earlier checkpoint paragraphs are dated history.
+
 Owner requirement2026-10-14: [System1/ROM compatibility](development/system1-rom-boot-requirements.md)
 now explicitly requires both original target disks on our replacement ROM and
 our replacement System1 on a supported original Apple ROM. Both remain untested;

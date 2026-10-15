@@ -1,5 +1,42 @@
 # Source catalog
 
+## SRC-0165 - Lead CODE-only preflight contract
+
+2026-10-14, owner SRC-0163 continued after completed resource implementation
+b94e2ff / evidence06e7751 / HQ6e6043c. Boot requirements SRC-0164 were recorded
+separately at84c19f4 / HQb288bd1. SPEC-0032 / ADR-0036 reuses only reviewed own
+SPEC-0024/0028/0029/0030/0031, SRC-0130's independently checked LK table and
+original session-fixture/manager/lifecycle code. No new historical source/manual
+sample, research original, protected code/asset or emulator implementation.
+64/16 capacities, header-inclusive32K ceiling, contiguous groups, literal offsets
+and typed failure order are explicit engineering choices, not1984 findings.
+Code/format/layout successes grant no executable ownership or entry. Current
+full-zone stack restriction and resource gate are independently checked in own
+code, not silently weakened. All24 originals/copies stay unchanged/untracked.
+No new TEST/IMPL/build, fixture, source observation or trial. Human review pending.
+[Lead review](../docs/development/code-preflight-contract-review.md).
+
+## SRC-0166 - Grok CODE preflight contract review
+
+2026-10-14, Grok CLI1.0.52, runtime reported grok-4.6-build, requested low effort.
+One read_file of the single frozen reviewed-public contract/synopsis packet,
+two model turns/end_turn, no extra-file/command/edit/web/MCP/subagent action.
+Lead checks actual tool paths and identities. Initial contract SHA256
+e96042f10fd07e70282c9f5050098a6fae143af4b4e4bae1b09dcd6eae4e4c34; packet SHA256
+829c904d4ed615dfd79aae882df7d5d88d5fba0f65ecbe263fa755e3cdabd5d9.
+Private review3896 bytes, SHA256975d0d7f0aaa07d4438b3e0664b5ae39bd72c6a0f0065adaa23be9b55dcab4fb.
+Adopt G1's precise layout order with integrity before arithmetic; G3's explicit
+128-byte cell-band formula; G4's snapshot/lease distinction with separate source
+versus layout applicability; G5's warning distinction and a corrected definition
+of local-storage eligibility (local payload/attribute, not native alias safety).
+Reject G2's suggested ban on H_min=0: the checked cell band already prevents an
+empty whole heap, while an empty allocatable remainder has no zero-byte window.
+Do not call the CLOSED-only execution/reset gate a general loading gate.
+The lead's final amendments are not claimed re-reviewed. Suggestions and future
+test obligations remain unexecuted. Total17687 tokens, output3713 including2699
+reasoning; CLI list-cost estimate0.01446564USD is not billing/quota or a model
+benchmark. Bounded scope/650-word target requested; no worker certification.
+
 ## SRC-0163 - Owner continuation after the resource checkpoint
 
 2026-10-14, owner: "When you're finished, move on to the next task."

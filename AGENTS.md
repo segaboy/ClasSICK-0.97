@@ -1,5 +1,15 @@
 # ClasSICK 0.97 working instructions
 
+- Current next contract (2026-10-14, SRC-0163/0165/0166): after completing
+  resource residency and separately recording the owner's two boot requirements,
+  SPEC-0032 / ADR-0036 finalizes read-only CODE inspection/layout preflight only.
+  [Review](docs/development/code-preflight-contract-review.md). No implementation,
+  fixture, TEST/IMPL/build, guest ABI/registry/loader/native application or new
+  VM/emulator/reference run. Preserve all24 originals/copies and prior compiled/
+  edition/native/source/UART/physical/128K/B2/human gates. Scoped Grok review and
+  ordinary Git/HQ/wiki records; no extra agent/chat/automation/OneNote. The
+  completed resource implementation permissions remain dated history.
+
 - Current owner continuation (2026-10-14, SRC-0163/0164): finish the verified
   resource checkpoint, then the bounded CODE-only launch/preflight contract;
   record original System1 disks on our ROM and our System1 on an identified

@@ -61,3 +61,9 @@ matrix and system/reference preservation are contract-only, unimplemented.
 2026-10-14: [ADR-0035](0035-hosted-resource-residency.md) selects explicit host
 leases for locked resource copies and close-before-reset ownership. Contract
 only, unimplemented; no historical Resource Manager ABI or loader admission.
+
+2026-10-14: ADR-0035 now has the independently verified IMPL-0035 / TEST-0039
+implementation; its earlier contract-only entry is dated history.
+[ADR-0036](0036-code-only-launch-preflight.md) selects read-only CODE inspection/
+layout first, without executable ownership, loading or running. SPEC-0032 is
+contract-only and leaves current lifecycle/resource gates unchanged.
