@@ -11,7 +11,7 @@
     "SRC-0186"
   ],
   "verified_on": "2026-10-15",
-  "compiled_source_revision": null,
+  "compiled_source_revision": "f2f0341fdd359662e46f5928d8ed40e4c09e8718",
   "classification": "guarded-single-instruction-and-standalone-compiler-verification",
   "full_execution_bridge_implemented": false,
   "unimplemented_dependencies": [
@@ -48,7 +48,25 @@
     "guard_suites": 5,
     "a_line_opcode_cases": 4096,
     "full_log_sha256": "fcce2b6e2baa0461537c00495f7b57f76eb504ca7d8a5c1f28eaf6c06c540791",
-    "ci_status": "pending"
+    "ci_status": "success",
+    "ci_url": "https://github.com/segaboy/ClasSICK-0.97/actions/runs/38778906896",
+    "ci_current_source_complete_matrix": 2055,
+    "ci_additional_bootstrap_checks": 482,
+    "ci_ctest_counts": [
+      241,
+      241,
+      241,
+      241,
+      241,
+      214,
+      241,
+      226,
+      226,
+      226,
+      199
+    ],
+    "ci_complete_ctest_checks": 2537,
+    "ci_log_sha256": "ec8890809400e7e162ed069b030a40dfc60bfa41fcb6db004bc169af1c6c9719"
   },
   "m68k": {
     "manifest": {
@@ -477,7 +495,11 @@
     },
     "complete_manifest_matches_ci": false,
     "cumulative_stack_measured": false,
-    "full128K_fit_proven": false
+    "full128K_fit_proven": false,
+    "complete_manifest_matches_ci_after_stack_frame_sort": true,
+    "manifest_normalization": "Sort only profiles[].stack_frames by function and bytes; retain every record, including duplicates, and every other field unchanged.",
+    "normalized_complete_manifest_sha256": "02559125ea50a04c5749ac125472737435f0ca6c20b8950b17b4c2f948461eae",
+    "ci_raw_manifest_sha256": "a666088eac33af5fd04edec29198f413fcbddf3076ceefc78694461b22184954"
   },
   "workers": {
     "claude": {
@@ -785,7 +807,12 @@
       "core/cpu/m68k.h"
     ],
     "old_unguarded_regression_passed": true,
-    "required_system1_rom_boot_directions_tested": false
+    "required_system1_rom_boot_directions_tested": false,
+    "prior_rom_binary_and_profile_equal": true,
+    "prior_rom_complete_manifest_equal": false,
+    "prior_rom_changed_inputs": [
+      "core/cpu/m68k.h"
+    ]
   },
   "human_provenance_review": "pending"
 }

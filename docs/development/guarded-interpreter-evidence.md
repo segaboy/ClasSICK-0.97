@@ -9,7 +9,9 @@ big-endian targets, with permitted own imports and no mutable process globals.
 ASan/UBSan profiles and their existing positive controls pass. The first focused
 attempt omitted the probe object target; building that target fixed the audit
 invocation. It was not a code/test failure and is excluded from final proof.
-Compiled revision and publication CI are pending recording.
+Compiled source `f2f0341fdd359662e46f5928d8ed40e4c09e8718`;
+[publication CI](https://github.com/segaboy/ClasSICK-0.97/actions/runs/38778906896) passes both jobs with2537 CTests:2055 final-matrix
+and482 additional fresh-bootstrap checks.
 
 [API and lead dispositions](guarded-interpreter-implementation.md);
 [machine-readable evidence](guarded-interpreter-evidence.json);
@@ -27,10 +29,12 @@ GNU68000 O0/Os passes ten module import/global audits and two complete zero-impo
 relocatable links through the actual decoder, guest memory, legacy CPU/services
 and original36-byte assembler fixture. Largest individual closure frame is348
 bytes in each profile, not cumulative stack or complete128K fit. The guard policy
-has no standalone68000 runtime trial. Local/CI guard manifest matching is pending.
-The complete local boot-media result equals the previous checkpoint. Own-ROM
-binary and known shared-header input comparison will be recorded with CI;
-no unchanged complete-ROM-manifest claim is made before that comparison.
+has no standalone68000 runtime trial. Complete local/CI guard manifests match after sorting only stack-frame rows; all input, object/link hashes and frame sizes are equal. Raw row order differs between filesystems.
+The complete local boot-media result equals the previous checkpoint. The CI own-ROM binary, all profile results and all other manifest fields equal
+the previous checkpoint. The complete manifest differs in exactly one input:
+core/cpu/m68k.h, which appends POLICY without changing prior enum values. Its
+current input digest matches the compiled Git blob. No ROM integration/boot trial
+follows from this compiler-only comparison.
 
 Exactly two supervised CLI calls: Claude supplies the primary290-line test file,
 Codex reviews/integrates/adds complete A-line/proposed-state cases, Grok checks the
