@@ -2696,3 +2696,21 @@ follows from any license.
 - [Evidence](../docs/development/loaded-app-redraw-evidence.md). This is an
   engineering result; actual current-candidate trial and historical gates are
   separately recorded, never inferred from source or host output.
+
+## SRC-0196 - Owner isolated redraw ROM trial authorization
+
+- Project owner,2026-10-15, direct task reply: "Yes—test the redraw ROM in Snow".
+  Authorizes the specified single fresh isolated original-ROM trial, automated
+  counter input checks and screenshot. No further trial or reference input.
+
+## SRC-0197 - Lead isolated original redraw ROM observation
+
+- Codex,2026-10-15; SPEC-0035 / IMPL-0039 / TEST-0043. One explicitly authorized
+  fresh Snow128K cold boot of the verified original ROM; complete APP/097/pattern/
+  phase marks and counter updates observed without full-scene redraw in the
+  captured points. Original diagnostic RAM reports stage16/ticks3610/fault0.
+- [Exact conditions and limits](../docs/development/loaded-app-redraw-evidence.md).
+  Some automated inputs uncredited, cause/event attribution unresolved. No
+  all-click reliability, human-input, calibrated timing or historical result.
+  Original private screenshots/log/profile identities retained; no prohibited
+  binary/source, emulator implementation or reference pixels used.

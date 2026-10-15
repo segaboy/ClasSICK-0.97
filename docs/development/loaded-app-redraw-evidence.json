@@ -8,15 +8,17 @@
   "sources": [
     "SRC-0193",
     "SRC-0194",
-    "SRC-0195"
+    "SRC-0195",
+    "SRC-0196",
+    "SRC-0197"
   ],
-  "compiled_source_revision": null,
+  "compiled_source_revision": "2ea01129377d248ef48dd81d6f8873e948456ce6",
   "classification": "original-frame-equivalence-and-rom-construction",
   "native_redraw_refinement_implemented": true,
   "new_guest_api": false,
   "cpu_loader_guest_program_changed": false,
-  "new_emulator_run": false,
-  "current_candidate_boot_observed": false,
+  "new_emulator_run": true,
+  "current_candidate_boot_observed": true,
   "historical_compatibility_proven": false,
   "verification": {
     "baseline_revision": "1b455ea24a163842e409b5915ccea9e07ae1e870",
@@ -176,8 +178,27 @@
       "sha256": "cda7dca85897b204223a550dd281dc575ff7cdb5806d78baed6dc413fe7027d0"
     },
     "workspace_bytes": 44496,
-    "ci_status": "pending",
-    "ci_url": null
+    "ci_status": "success",
+    "ci_url": "https://github.com/segaboy/ClasSICK-0.97/actions/runs/38820467440",
+    "ci_ctest_counts": [
+      249,
+      249,
+      249,
+      249,
+      249,
+      222,
+      249,
+      234,
+      234,
+      234,
+      207
+    ],
+    "ci_ctest_checks": 2625,
+    "ci_log_sha256": "a67f7f3a7681eb0c8423339c028082f2123c3689181584cab9870d6860fffd73",
+    "local_ci_complete_rom_manifest_equal": true,
+    "local_ci_complete_rom_image_equal": true,
+    "previous_rom_profiles_and_all_inputs_unchanged": true,
+    "previous_rom_comparison_normalization": "stack-frame rows sorted only"
   },
   "worker": {
     "role": "original-redraw-regression-artifact",
@@ -249,12 +270,96 @@
   },
   "limits": [
     "fresh owner go-ahead before another trial",
-    "actual responsiveness not yet observed",
     "no calibrated timing or speed ratio claim",
     "general SPEC0034 incomplete",
     "QuickDraw and application managers incomplete",
     "both System1/ROM directions untested",
     "native app gate closed",
-    "physical/full128K/parity/edition/B2/human gates remain"
-  ]
+    "physical/full128K/parity/edition/B2/human gates remain",
+    "automated input event delivery unqualified"
+  ],
+  "boot_observation": {
+    "status": "passed-scoped-rendering-observation",
+    "source_ids": [
+      "SRC-0196",
+      "SRC-0197"
+    ],
+    "owner_answer": "Yes\u2014test the redraw ROM in Snow",
+    "compiled_source_revision": "2ea01129377d248ef48dd81d6f8873e948456ce6",
+    "rom_sha256": "43c0296f808b85366fdbe55c9bcfd42e2daf9ef5fae77dfecfb85e5f80db0942",
+    "snow_version": "v1.5.0-317c188 Windows x86-64",
+    "snow_sha256": "32cf5285582c0f509e4f1ac38d86bfb90440bae9da43b7823bfb0841dea588e6",
+    "model": "Early128K",
+    "cold_starts": 1,
+    "reference_inputs": [],
+    "disks": [],
+    "saved_machine_state": false,
+    "shared_directory": null,
+    "serial_bridges": [],
+    "workspace_sha256_at_launch": "2e9dfb52748ea099bac9d1695f97fa87dd7aff5aa18bbef7fbac03118cb45ecf",
+    "reset_log_utc": "2026-10-15T22:57:02Z",
+    "first_complete_snapshot_utc": "2026-10-15T22:57:15.228Z",
+    "trial_closed_log_utc": "2026-10-15T23:04:31Z",
+    "observations": [
+      {
+        "kind": "complete-boot",
+        "captured_utc": "2026-10-15T22:57:15.228Z",
+        "counter": 0,
+        "file": "boot-0000.png"
+      },
+      {
+        "kind": "counter-update",
+        "button": "left",
+        "click_started_utc": "2026-10-15T22:58:27.842Z",
+        "captured_utc": "2026-10-15T22:58:28.985Z",
+        "counter": 1,
+        "file": "counter-0001.png",
+        "scene": "APP/097, complete pattern and six phases retained",
+        "host_action_and_capture_interval_ms": 1143
+      },
+      {
+        "kind": "later-counter-advancement",
+        "button": "right",
+        "action_started_utc": "2026-10-15T23:03:20.726Z",
+        "captured_utc": "2026-10-15T23:03:21.690Z",
+        "counter": "advanced beyond0001; no one-to-one input attribution",
+        "file": "counter-advanced.png",
+        "scene": "APP/097, pattern and six phase marks retained",
+        "host_action_and_capture_interval_ms": 964
+      }
+    ],
+    "own_diagnostics": {
+      "captured_utc": "2026-10-15T23:03:13.832Z",
+      "address": "0x1338",
+      "fields": {
+        "magic": 1129525305,
+        "stage": 16,
+        "ticks": 3610,
+        "presses": 1,
+        "traps": 1,
+        "image_crc": 1338531645,
+        "fault": 0
+      },
+      "scope": "Own original RAM only"
+    },
+    "screenshots": {
+      "boot-0000.png": {
+        "bytes": 81961,
+        "sha256": "7c16e7f819bb77d2261bb2314f0378adb7178eef28752f97dbee30a2aaee09d0"
+      },
+      "counter-0001.png": {
+        "bytes": 82271,
+        "sha256": "7d0dd5df47d8c83b2b86891ed41c4e7dd957e8dd46a658df39a96f21117f3ff3"
+      },
+      "counter-advanced.png": {
+        "bytes": 82416,
+        "sha256": "70771d3c8ca11bcf45f72a2b8e1d0cc65c9c3014835fc0d81d93462c6f815d09"
+      }
+    },
+    "timing_limits": "Point snapshots and host tool/capture intervals only, not calibrated native latency, frame trace or speed ratio.",
+    "input_delivery_limitation": "Some short clicks/drag were not visibly credited. Diagnostic UI interactions also occurred; exact input delivery cause and event attribution are unresolved. No human input credited.",
+    "input_delivery_qualified": false,
+    "human_input_credited": false,
+    "historical_or_physical_result": false
+  }
 }

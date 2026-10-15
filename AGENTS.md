@@ -1,5 +1,11 @@
 # ClasSICK 0.97 working instructions
 
+Completed redraw trial (2026-10-15, SRC-0196/0197): explicit owner approval
+"Yes—test the redraw ROM in Snow" covers one now-closed isolated own-ROM run.
+The complete result and counter updates are observed without full-scene redraw
+at captured points; some automated input delivery remains unresolved. No all-click,
+historical, physical or human-input qualification. Future trials need fresh go-ahead.
+
 Current owner redraw scope (2026-10-15, SRC-0193): "OK, next step." accepts the
 proposed focused rendering-speed fix within SPEC-0035 / IMPL-0039 / TEST-0043,
 with original regression/compiler/CI checks and ordinary public/HQ/wiki records.
