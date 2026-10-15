@@ -1,5 +1,16 @@
 # ClasSICK 0.97 working instructions
 
+Current owner redraw scope (2026-10-15, SRC-0193): "OK, next step." accepts the
+proposed focused rendering-speed fix within SPEC-0035 / IMPL-0039 / TEST-0043,
+with original regression/compiler/CI checks and ordinary public/HQ/wiki records.
+Codex implements and remains sole writer; one bounded Claude test artifact under
+SRC-0149, further worker calls only for a concrete gap. Optimize the native
+overlay and counter update; no CPU/loader/guest ABI/QuickDraw/native-app expansion.
+Future Snow/VM/reference trial still needs fresh explicit go-ahead. Preserve24
+originals and existing byte-identical private copies, old evidence/edition rows
+and source/UART/physical/128K/parity/B2/human gates and both System1/ROM targets.
+No new chats/agents/automation/OneNote. Earlier scopes retain dated meaning.
+
 Completed isolated trial (2026-10-15, SRC-0191/0192): owner explicitly said
 "Yes—run the isolated Snow boot trial". One original-ROM Macintosh128K cold
 boot passes APP/097/pattern/six phases and one automated kernel mouse event.

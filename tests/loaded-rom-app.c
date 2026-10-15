@@ -152,11 +152,124 @@ static void render(const char *path)
     r.success=0;r.phase=3;REQUIRE(cs_loaded_app_scene(&screen,&r,0));REQUIRE(pixels[150u*64u+20u/8u]&0x08u);
     free(w);
 }
+static uint32_t fnv(const uint8_t *p,size_t n)
+{
+    uint32_t h=2166136261u;for(size_t i=0;i<n;++i)h=(h^p[i])*16777619u;return h;
+}
+static int bit_at(const uint8_t *p,size_t stride,unsigned x,unsigned y)
+{
+    return (p[y*stride+x/8u]>>(7u-x%8u))&1u;
+}
+static int in_counter(unsigned x,unsigned y){return x>=352u && x<432u && y>=286u && y<306u;}
+static uint32_t mix(uint32_t *s){*s^=*s<<13;*s^=*s>>17;*s^=*s<<5;return *s;}
+/* Full frame from the existing renderer into a fresh 0xCC tight buffer. */
+static void full_frame(uint8_t *out,const cs_loaded_app_result *r,uint32_t presses)
+{
+    cs_surface s;memset(out,0xCC,21888);
+    REQUIRE(cs_surface_init(&s,out,21888,512,342,64,CS_SURFACE_MONO1_MSB)==CS_SURFACE_OK);
+    REQUIRE(cs_loaded_app_scene(&s,r,presses));
+}
+static void redraw(void)
+{
+    static const struct {uint32_t value,pattern,phase,success,presses,hash;} frozen[]={
+        {97,0x5A5A5A5A,6,1,0,3049100689u},{97,0x5A5A5A5A,6,1,1,144985001u},
+        {97,0x5A5A5A5A,6,1,2,2718142593u},{97,0x5A5A5A5A,6,1,9999,1255755017u},
+        {97,0x5A5A5A5A,6,1,10000,3049100689u},{97,0x5A5A5A5A,6,1,UINT32_MAX,3866680433u},
+        {0,0,0,0,0,705968457u},{97,0x5A5A5A5A,4,0,0,182201649u},
+        {97,UINT32_MAX,5,0,7,3247734721u},{3610,0x80000001,6,1,17,666794281u},
+        {UINT32_MAX,0,6,1,10001,3122324361u},{97,0x01010101,2,0,8,2519077233u}};
+    static uint8_t a[21888+8],b[21888+8];
+    cs_loaded_app_result r;cs_surface s;
+    /* 1. Frozen full-frame fingerprints, tail untouched. */
+    for(size_t i=0;i<sizeof frozen/sizeof frozen[0];++i){
+        memset(&r,0,sizeof r);r.value=frozen[i].value;r.pattern=frozen[i].pattern;
+        r.phase=frozen[i].phase;r.success=frozen[i].success;
+        memset(a,0xCC,sizeof a);
+        REQUIRE(cs_surface_init(&s,a,21888,512,342,64,CS_SURFACE_MONO1_MSB)==CS_SURFACE_OK);
+        REQUIRE(cs_loaded_app_scene(&s,&r,frozen[i].presses));
+        REQUIRE(fnv(a,21888)==frozen[i].hash);
+        for(size_t k=21888;k<sizeof a;++k)REQUIRE(a[k]==0xCC);
+    }
+    /* 2. Incremental sequence matches full frames byte-for-byte, incl. wrap,
+     * UINT32_MAX, repeats and decreasing values; tail canary preserved. */
+    static const uint32_t seq[]={0,1,1,2,9999,10000,10000,10001,UINT32_MAX,UINT32_MAX,17,0};
+    const cs_loaded_app_result *bases[3];cs_loaded_app_result rb[3];
+    memset(rb,0,sizeof rb);
+    rb[0].value=97;rb[0].pattern=0x5A5A5A5A;rb[0].phase=6;rb[0].success=1;
+    rb[1].value=97;rb[1].pattern=UINT32_MAX;rb[1].phase=5;
+    rb[2].value=UINT32_MAX;rb[2].phase=6;rb[2].success=1;
+    for(int j=0;j<3;++j)bases[j]=&rb[j];
+    for(int j=0;j<3;++j){
+        memset(a,0xCC,sizeof a);
+        REQUIRE(cs_surface_init(&s,a,21888,512,342,64,CS_SURFACE_MONO1_MSB)==CS_SURFACE_OK);
+        REQUIRE(cs_loaded_app_scene(&s,bases[j],seq[0]));
+        for(size_t i=1;i<sizeof seq/sizeof seq[0];++i){
+            REQUIRE(cs_loaded_app_scene_input(&s,seq[i]));
+            full_frame(b,bases[j],seq[i]);
+            REQUIRE(!memcmp(a,b,21888));
+            for(size_t k=21888;k<sizeof a;++k)REQUIRE(a[k]==0xCC);
+        }
+    }
+    /* 3. Arbitrary non-counter pixels preserved; counter rect equals full frame
+     * rect, including cleared zero pixels (start from all-ones noise too). */
+    for(uint32_t seed=1;seed<=3;++seed){
+        uint32_t st=0x9E3779B9u*seed;
+        for(size_t k=0;k<sizeof a;++k)a[k]=seed==3?0xFF:(uint8_t)mix(&st);
+        uint8_t before[21888+8];memcpy(before,a,sizeof a);
+        REQUIRE(cs_surface_init(&s,a,21888,512,342,64,CS_SURFACE_MONO1_MSB)==CS_SURFACE_OK);
+        uint32_t presses=seed==2?9999u:1234u*seed;
+        REQUIRE(cs_loaded_app_scene_input(&s,presses));
+        full_frame(b,&rb[0],presses);
+        for(unsigned y=0;y<342u;++y)for(unsigned x=0;x<512u;++x){
+            if(in_counter(x,y))REQUIRE(bit_at(a,64,x,y)==bit_at(b,64,x,y));
+            else REQUIRE(bit_at(a,64,x,y)==bit_at(before,64,x,y));
+        }
+        for(size_t k=21888;k<sizeof a;++k)REQUIRE(a[k]==before[k]);
+    }
+    /* 4. Refusal without any write: null, zeroed descriptor, wrong geometry
+     * (valid surfaces of other sizes), then valid padded updates. */
+    {
+        static uint8_t big[342*72+16];uint8_t snap[sizeof big];
+        uint32_t st=0xC0FFEEu;for(size_t k=0;k<sizeof big;++k)big[k]=(uint8_t)mix(&st);
+        memcpy(snap,big,sizeof big);
+        REQUIRE(!cs_loaded_app_scene_input(NULL,5));
+        cs_surface z;memset(&z,0,sizeof z);
+        REQUIRE(!cs_loaded_app_scene_input(&z,5));
+        REQUIRE(cs_surface_init(&s,big,21888,511,342,64,CS_SURFACE_MONO1_MSB)==CS_SURFACE_OK);
+        REQUIRE(!cs_loaded_app_scene_input(&s,5));
+        REQUIRE(cs_surface_init(&s,big,342*64-64,512,341,64,CS_SURFACE_MONO1_MSB)==CS_SURFACE_OK);
+        REQUIRE(!cs_loaded_app_scene_input(&s,5));
+        REQUIRE(!memcmp(big,snap,sizeof big));
+        /* Padded rows are valid. Check their logical output and every padding byte. */
+        REQUIRE(cs_surface_init(&s,big,342*72,512,342,72,CS_SURFACE_MONO1_MSB)==CS_SURFACE_OK);
+        REQUIRE(cs_loaded_app_scene_input(&s,5));
+        full_frame(b,&rb[0],5);
+        for(unsigned y=0;y<342u;++y)for(unsigned x=0;x<512u;++x){
+            if(in_counter(x,y))REQUIRE(bit_at(big,72,x,y)==bit_at(b,64,x,y));
+            else REQUIRE(bit_at(big,72,x,y)==bit_at(snap,72,x,y));
+        }
+        for(size_t k=0;k<sizeof big;++k)
+            if(k>=342u*72u || k%72u>=64u)REQUIRE(big[k]==snap[k]);
+        /* Corrupt only the descriptor; rejected updates cannot change backing. */
+        memcpy(snap,big,sizeof big);s.stride=63;
+        REQUIRE(!cs_loaded_app_scene_input(&s,6));REQUIRE(!memcmp(big,snap,sizeof big));
+        s.stride=72;s.storage_size=342u*72u-1u;
+        REQUIRE(!cs_loaded_app_scene_input(&s,6));REQUIRE(!memcmp(big,snap,sizeof big));
+        s.storage_size=342u*72u;s.format=CS_SURFACE_RGBA8;
+        REQUIRE(!cs_loaded_app_scene_input(&s,6));REQUIRE(!memcmp(big,snap,sizeof big));
+        s.format=CS_SURFACE_MONO1_MSB;s.storage=NULL;
+        REQUIRE(!cs_loaded_app_scene_input(&s,6));REQUIRE(!memcmp(big,snap,sizeof big));
+    }
+    /* 5. Refused call after a valid frame leaves that frame intact. */
+    full_frame(a,&rb[0],42);memcpy(b,a,sizeof a);
+    REQUIRE(!cs_loaded_app_scene_input(NULL,43));
+    REQUIRE(!memcmp(a,b,sizeof a));
+}
 int main(int argc,char **argv)
 {
     if(argc==3 && !strcmp(argv[1],"preview")){render(argv[2]);return 0;}
     if(argc!=2)return 2;
-    if(!strcmp(argv[1],"success"))success();else if(!strcmp(argv[1],"failures"))failures();
+    if(!strcmp(argv[1],"redraw"))redraw();else if(!strcmp(argv[1],"success"))success();else if(!strcmp(argv[1],"failures"))failures();
     else if(!strcmp(argv[1],"access"))access();else if(!strcmp(argv[1],"retire"))retire();else if(!strcmp(argv[1],"scene"))render(NULL);
     else if(!strcmp(argv[1],"claims"))claims();else return 2;
     puts("PASS");return 0;

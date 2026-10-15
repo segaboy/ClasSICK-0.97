@@ -12,3 +12,10 @@ result-driven renderer and separate128K/64KiB ROM startup profile. Existing
 ordinary execution/loader gates remain. No manual samples/raw research/private
 heap reconstruction, Apple/Microsoft implementation/asset, emulator source,
 native application/SDK, disk-system compatibility or unapproved guest trial.
+
+2026-10-15, SRC-0193..0195: focused redraw refinement preserves the frozen full
+frame, uses original byte fills and updates only the validated mouse counter.
+No CPU/loader/guest-program/shared-core change. [Delta evidence](../../docs/development/loaded-app-redraw-evidence.md)
+records original baselines, Claude test artifact/lead corrections, final compiler
+checks and the separately gated candidate boot observation. Earlier results
+retain their exact source pins; no historical compatibility is inferred.

@@ -2665,3 +2665,34 @@ follows from any license.
 - [Conditions, identities and limits](../docs/development/loaded-rom-app-evidence.md).
   Original screenshots/profile/logs outside Git; no protected pixels or binary
   input. This project observation does not settle R-001, AL-2 or interoperability.
+
+## SRC-0193 - Owner loaded-application redraw continuation
+
+- Author: project owner; direct task instruction, 2026-10-15: "OK, next step."
+- Accepts the proposed focused rendering-speed fix before a larger interactive
+  application: original implementation/regression/compiler/CI and ordinary
+  public/HQ/wiki records. No new historical contract or guest API follows.
+- Existing scoped public/original Claude/Grok permission applies; one bounded
+  Claude test artifact planned. Codex remains sole writer. A new Snow/VM/reference
+  trial requires fresh explicit owner go-ahead. All standing source/role/edition
+  gates and both System1/ROM targets persist. Eligible instruction, not history.
+
+## SRC-0194 - Claude original redraw regression artifact
+
+- Author/tool: Claude Code, reported claude-opus-5-5,2026-10-15; one supervised
+  artifact call under SRC-0149/0193. Five bounded public/original Reads, no other
+  tools, edits or executed tests. No retry or Grok call.
+- Codex integrated the original cases and corrected the unsupported padded-row
+  refusal. Private streams/returned Read payload identities retained. No HQ,
+  raw research/manual/credential/prohibited inputs. Original project artifact,
+  GPL-3.0-or-later; human provenance review remains pending.
+
+## SRC-0195 - Lead original redraw implementation and verification
+
+- Author: Codex,2026-10-15; SPEC-0035 / IMPL-0039 / TEST-0043 refinement.
+- Original native byte-fill overlay, validated counter-only update and kernel
+  binding. Pre-change full-frame bytes, independent fingerprints, incremental/
+  padding/refusal checks, compiler matrix and separate ROM construction.
+- [Evidence](../docs/development/loaded-app-redraw-evidence.md). This is an
+  engineering result; actual current-candidate trial and historical gates are
+  separately recorded, never inferred from source or host output.

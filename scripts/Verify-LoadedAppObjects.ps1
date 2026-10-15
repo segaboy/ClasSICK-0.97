@@ -13,7 +13,8 @@ try {
     $gcc=Join-Path $repo '.tools/gcc/w64devkit/bin/gcc.exe';$checks=0
     $modules=@(
         @('personality/system1/code-run.c','run','cs_guest_window,cs_guest_write,cs_image_execute,cs_image_execution_native,cs_image_execution_retire_native,cs_image_execution_integrity,cs_m68k_bus_guard_validate,cs_m68k_bus_step_admitted'),
-        @('apps/loaded-rom-app/probe.c','probe','cs_guest_read,cs_image_execute,cs_image_external_admit,cs_image_init,cs_image_run,cs_image_run_retire,cs_life_init,cs_mm_init'))
+        @('apps/loaded-rom-app/probe.c','probe','cs_guest_read,cs_image_execute,cs_image_external_admit,cs_image_init,cs_image_run,cs_image_run_retire,cs_life_init,cs_mm_init'),
+        @('apps/loaded-rom-app/scene.c','scene','cs_mac_scene,cs_surface_init'))
     foreach($compiler in @($clang,$gcc)){foreach($bits in @(32,64)){foreach($opt in @(0,2)){
         foreach($module in $modules){
             $name=if($compiler -eq $clang){'clang'}else{'gcc'};$object=Join-Path $objects "$name-$bits-O$opt-$($module[1]).o"
@@ -30,7 +31,7 @@ try {
         & cmake "-DNM=$nm" "-DOBJECT=$object" "-DALLOWED=$($module[2])" -P (Join-Path $PSScriptRoot 'Check-ObjectImports.cmake')
         if($LASTEXITCODE -ne 0){throw 'Loaded-app endian imports failed.'};++$checks
     }}
-    if($ObjectsOnly){Write-Output 'Twenty loaded-app object audits PASS.';return}
+    if($ObjectsOnly){Write-Output "$checks loaded-app object audits PASS.";return}
     $hashes=[ordered]@{}
     foreach($pair in @(@('clang','clang-hosted/debug-a','clang-hosted/debug-b'),@('gcc','gcc-debug-a','gcc-debug-b'))){
         $a=(Get-FileHash -LiteralPath (Join-Path $BuildRoot ($pair[1]+'/classick_loadedapp_tests.exe')) -Algorithm SHA256).Hash.ToLowerInvariant()

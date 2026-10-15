@@ -1,0 +1,260 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-15",
+  "specification": "SPEC-0035",
+  "refinement": "loaded-app-redraw",
+  "implementation": "IMPL-0039",
+  "test": "TEST-0043",
+  "sources": [
+    "SRC-0193",
+    "SRC-0194",
+    "SRC-0195"
+  ],
+  "compiled_source_revision": null,
+  "classification": "original-frame-equivalence-and-rom-construction",
+  "native_redraw_refinement_implemented": true,
+  "new_guest_api": false,
+  "cpu_loader_guest_program_changed": false,
+  "new_emulator_run": false,
+  "current_candidate_boot_observed": false,
+  "historical_compatibility_proven": false,
+  "verification": {
+    "baseline_revision": "1b455ea24a163842e409b5915ccea9e07ae1e870",
+    "frozen_frames": 12,
+    "compared_frame_bytes": 262656,
+    "full_frame_bytes_equal": true,
+    "old_frames": {
+      "bytes": 262656,
+      "sha256": "b49fdcb4c586928ae28f18372fc5d91fa15f8c89fae92fbd0556d94a55ab63ce"
+    },
+    "new_frames": {
+      "bytes": 262656,
+      "sha256": "b49fdcb4c586928ae28f18372fc5d91fa15f8c89fae92fbd0556d94a55ab63ce"
+    },
+    "frozen_fingerprints": [
+      {
+        "value": 97,
+        "pattern": 1515870810,
+        "phase": 6,
+        "success": 1,
+        "presses": 0,
+        "fnv1a32": 3049100689
+      },
+      {
+        "value": 97,
+        "pattern": 1515870810,
+        "phase": 6,
+        "success": 1,
+        "presses": 1,
+        "fnv1a32": 144985001
+      },
+      {
+        "value": 97,
+        "pattern": 1515870810,
+        "phase": 6,
+        "success": 1,
+        "presses": 2,
+        "fnv1a32": 2718142593
+      },
+      {
+        "value": 97,
+        "pattern": 1515870810,
+        "phase": 6,
+        "success": 1,
+        "presses": 9999,
+        "fnv1a32": 1255755017
+      },
+      {
+        "value": 97,
+        "pattern": 1515870810,
+        "phase": 6,
+        "success": 1,
+        "presses": 10000,
+        "fnv1a32": 3049100689
+      },
+      {
+        "value": 97,
+        "pattern": 1515870810,
+        "phase": 6,
+        "success": 1,
+        "presses": 4294967295,
+        "fnv1a32": 3866680433
+      },
+      {
+        "value": 0,
+        "pattern": 0,
+        "phase": 0,
+        "success": 0,
+        "presses": 0,
+        "fnv1a32": 705968457
+      },
+      {
+        "value": 97,
+        "pattern": 1515870810,
+        "phase": 4,
+        "success": 0,
+        "presses": 0,
+        "fnv1a32": 182201649
+      },
+      {
+        "value": 97,
+        "pattern": 4294967295,
+        "phase": 5,
+        "success": 0,
+        "presses": 7,
+        "fnv1a32": 3247734721
+      },
+      {
+        "value": 3610,
+        "pattern": 2147483649,
+        "phase": 6,
+        "success": 1,
+        "presses": 17,
+        "fnv1a32": 666794281
+      },
+      {
+        "value": 4294967295,
+        "pattern": 0,
+        "phase": 6,
+        "success": 1,
+        "presses": 10001,
+        "fnv1a32": 3122324361
+      },
+      {
+        "value": 97,
+        "pattern": 16843009,
+        "phase": 2,
+        "success": 0,
+        "presses": 8,
+        "fnv1a32": 2519077233
+      }
+    ],
+    "complete_local_profile_counts": [
+      249,
+      249,
+      249,
+      222,
+      249,
+      234,
+      234,
+      234,
+      207
+    ],
+    "complete_local_ctest_checks": 2127,
+    "local_log": {
+      "bytes": 253312,
+      "sha256": "8b1e64fecb22c6130445c5c29311f80d166aecbded9637455e9745ce2e1590b7"
+    },
+    "new_counter_suite": "loadedapp.redraw",
+    "hosted_twins": {
+      "clang": "9069d8e5e4f1eddfcf77ff8dcda15de0c3d97509617913ec7b2141942452f09c",
+      "gcc": "4beed3ab8d2ad78cc59bd11d861f877021fd42a2afdd33b895f2b2bd7578537f"
+    },
+    "loaded_app_object_audits": 30,
+    "scene_allowed_imports": [
+      "cs_mac_scene",
+      "cs_surface_init"
+    ],
+    "generic_per_pixel_fill_absent_from_linked_rom": true,
+    "rom": {
+      "optimization": "-Os",
+      "image_sha256": "43c0296f808b85366fdbe55c9bcfd42e2daf9ef5fae77dfecfb85e5f80db0942",
+      "image_size": 65536,
+      "rom_used": 42736,
+      "native_data_bss": 2168,
+      "workspace_begin": 32768,
+      "workspace_end": 77264,
+      "native_stack_base": 8448,
+      "native_stack_top": 32768,
+      "conservative_stack_bound": 9492,
+      "individual_frame_max": 604,
+      "corruption_controls": 8
+    },
+    "rom_twins_equal": true,
+    "rom_manifest": {
+      "bytes": 26277,
+      "sha256": "cda7dca85897b204223a550dd281dc575ff7cdb5806d78baed6dc413fe7027d0"
+    },
+    "workspace_bytes": 44496,
+    "ci_status": "pending",
+    "ci_url": null
+  },
+  "worker": {
+    "role": "original-redraw-regression-artifact",
+    "cli_calls": 1,
+    "reported_models": [
+      "claude-opus-5-5"
+    ],
+    "model_turns": 6,
+    "actual_reads": 5,
+    "usage": {
+      "input_tokens": 6,
+      "cache_creation_input_tokens": 6876,
+      "cache_read_input_tokens": 9899,
+      "output_tokens": 5199,
+      "output_tokens_details": {
+        "thinking_tokens": 957
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 6876,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 4585,
+          "cache_read_input_tokens": 5206,
+          "cache_creation_input_tokens": 3122,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 3122
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    },
+    "output": {
+      "bytes": 7121,
+      "sha256": "2e350fe44639c4584ec95d63e37ff8d2469b5e69093e095cc0d103df554d2d61"
+    },
+    "delivered_c_lines": 102,
+    "maximum_requested_c_lines": 180,
+    "worker_executed_tests": 0,
+    "worker_file_edits": 0,
+    "retry_count": 0,
+    "grok_calls": 0,
+    "quota_billing_or_savings_claim": false,
+    "lead_disposition": "Correct unsupported padded-stride refusal into valid stride72 updates; add explicit invalid stride/storage/format/null-storage checks. Native descriptors were not in selected worker inputs; no extra read/call needed. Frozen hashes and actual original bytes independently generated before edits."
+  },
+  "worker_identity_manifest": {
+    "bytes": 4034,
+    "sha256": "86e567b947505b8f752c0c9ba2ced1daeed79708360ca746a4b50a54d365ad8e"
+  },
+  "read_payloads_retained": true,
+  "archive_time_files_are_read_time_snapshots": false,
+  "grok_calls": 0,
+  "research_originals": {
+    "count": 24,
+    "unchanged_untracked": true,
+    "existing_private_copies_byte_identical": true,
+    "new_duplicate_copies": false
+  },
+  "limits": [
+    "fresh owner go-ahead before another trial",
+    "actual responsiveness not yet observed",
+    "no calibrated timing or speed ratio claim",
+    "general SPEC0034 incomplete",
+    "QuickDraw and application managers incomplete",
+    "both System1/ROM directions untested",
+    "native app gate closed",
+    "physical/full128K/parity/edition/B2/human gates remain"
+  ]
+}

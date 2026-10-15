@@ -66,9 +66,12 @@ void cs_mac_main(void)
     cs_mac_diag.stage=success?16u:8u;cs_mac_diag.fault=success?0u:8u;
     if(!cs_loaded_app_scene(&screen,&cs_mac_loaded_result,0)){cs_mac_diag.fault=4;for(;;){}}
     cs_mac_loop_begin(&loop,read_reg(0,0));
+    uint32_t shown_presses=0;
     for(;;){
-        int changed=cs_mac_loop_poll(&loop,&io);cs_mac_diag.ticks=loop.ticks;cs_mac_diag.presses=loop.presses;
-        if(changed && !cs_loaded_app_scene(&screen,&cs_mac_loaded_result,loop.presses)){
-            cs_mac_diag.fault=5;for(;;){}}
+        (void)cs_mac_loop_poll(&loop,&io);cs_mac_diag.ticks=loop.ticks;cs_mac_diag.presses=loop.presses;
+        if(loop.presses!=shown_presses){
+            if(!cs_loaded_app_scene_input(&screen,loop.presses)){cs_mac_diag.fault=5;for(;;){}}
+            shown_presses=loop.presses;
+        }
     }
 }

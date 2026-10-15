@@ -101,6 +101,17 @@ layout, not a full System1/physical/cumulative observed128K OS result.
 
 ## Required evidence and remaining gates
 
+Redraw refinement (2026-10-15, SRC-0193): preserve the existing complete-frame
+output while using original project masked-byte fills for the overlay. A separate
+native counter update validates a512x342 mono surface before writing only
+x[352,432),y[286,306), displays presses modulo10000 using the same original glyphs,
+and preserves every other pixel, row padding and tail byte. Descriptor/storage
+are ordinary live/disjoint native objects. The boot loop continues polling and
+recording ticks, but redraws only this counter when presses changes. No retained
+render state, second framebuffer, guest API or historical behavior is introduced.
+Use pre-change original frame output, padded/canary and rejection checks, then
+an independently authorized own-ROM trial to assess practical responsiveness.
+
 Run complete original-load/result/retirement tests, malformed/denied control/data
 paths, budget and single-use/refusal effects, protected native/backing aliases,
 balanced/forged returns, protected headers/rows, clean versus quarantined cleanup,

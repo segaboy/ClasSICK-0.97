@@ -27,3 +27,10 @@ APP/097, full guest pattern, six completed phases and one automated kernel mouse
 event. One run only; no application Event Manager, human-input or historical
 interoperability test. Screenshots/log identities are private and sanitized
 conditions/results are in the integration evidence page/JSON.
+
+2026-10-15, SRC-0193..0195: focused redraw refinement preserves the frozen full
+frame, uses original byte fills and updates only the validated mouse counter.
+No CPU/loader/guest-program/shared-core change. [Delta evidence](../../docs/development/loaded-app-redraw-evidence.md)
+records original baselines, Claude test artifact/lead corrections, final compiler
+checks and the separately gated candidate boot observation. Earlier results
+retain their exact source pins; no historical compatibility is inferred.
