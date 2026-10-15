@@ -73,7 +73,7 @@ def main():
     helper.run([cc, *flags, '-Os', '-I'+str(repo), '-c', footprint, '-o', out/'footprint.o'], env)
     helper.run([bins/'m68k-linux-gnu-objcopy', '-O', 'binary', '--only-section=.rodata', out/'footprint.o', out/'footprint.bin'], env)
     runtime_bytes = int.from_bytes((out/'footprint.bin').read_bytes(), 'big')
-    inputs = (*modules, 'core/cpu/m68k-bus.h', 'core/cpu/m68k.h', 'core/services/traps.h',
+    inputs = (*modules, 'core/cpu/m68k-bus.h', 'core/cpu/m68k-guard.h', 'core/cpu/m68k.h', 'core/services/traps.h',
               'core/memory/guest.h', 'core/memory/manager.h', 'personality/system1/memory-registers.h',
               'personality/system1/memory-traps.h', 'apps/guest-heap-probe/program.h', 'apps/guest-heap-probe/program.S',
               'docs/specifications/SPEC-0025-guest-memory-traps.md', 'scripts/Verify-MemoryTrapsM68k.py')

@@ -48,7 +48,7 @@ def main():
     footprint=out/'footprint.c';footprint.write_text('#include "personality/system1/guest-patches.h"\nconst uint32_t cs_call_bytes=sizeof(cs_s1_patches);\n',encoding='utf-8')
     h.run([cc,*flags,'-Os','-I'+str(repo),'-c',footprint,'-o',out/'footprint.o'],env)
     h.run([bins/'m68k-linux-gnu-objcopy','-O','binary','--only-section=.rodata',out/'footprint.o',out/'footprint.bin'],env)
-    inputs=[*modules,'personality/system1/guest-patches.h','personality/system1/memory-traps.h','personality/system1/memory-registers.h','core/memory/manager.h','core/cpu/m68k-call.h','core/cpu/m68k-bus.h','core/cpu/m68k.h','core/memory/guest.h',
+    inputs=[*modules,'personality/system1/guest-patches.h','personality/system1/memory-traps.h','personality/system1/memory-registers.h','core/memory/manager.h','core/cpu/m68k-call.h','core/cpu/m68k-bus.h','core/cpu/m68k-guard.h','core/cpu/m68k.h','core/memory/guest.h',
         'core/services/traps.h','apps/guest-patch-probe/program.h','apps/guest-patch-probe/program.S',
         'docs/specifications/SPEC-0027-guest-patches.md','scripts/Verify-GuestPatchesM68k.py','scripts/Verify-GuestM68k.py']
     result={'schema_version':1,'specification':'SPEC-0027','compiler':h.run([cc,'--version'],env).splitlines()[0],

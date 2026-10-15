@@ -31,7 +31,7 @@ jobs:
         run: .\scripts\Verify-Bootstrap.ps1
       - name: Verify hosted core, loader, exceptions, devices, boot media and unloaded fault fixtures
         shell: powershell
-        run: .\scripts\Verify-CodeImage.ps1 -BuildRoot build\media-verification -Sanitizers
+        run: .\scripts\Verify-GuardedBus.ps1 -BuildRoot build\media-verification -Sanitizers
 
   m68k-rom:
     runs-on: ubuntu-24.04
@@ -147,4 +147,12 @@ jobs:
           path: |
             ${{ runner.temp }}/classick-rom/Os-a/classick-097.rom
             ${{ runner.temp }}/classick-rom/manifest.json
+          if-no-files-found: error
+      - name: Audit guarded single-instruction 68000 closure
+        run: python3 scripts/Verify-GuardedBusM68k.py --tool-root "$RUNNER_TEMP/classick-m68k/root" --output "$RUNNER_TEMP/classick-guarded-bus"
+      - name: Retain guarded bus build manifest
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
+        with:
+          name: classick-guarded-bus-build
+          path: ${{ runner.temp }}/classick-guarded-bus/manifest.json
           if-no-files-found: error

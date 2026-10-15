@@ -44,7 +44,7 @@ def main():
     footprint=out/'footprint.c';footprint.write_text('#include "core/cpu/m68k-call.h"\nconst uint32_t cs_call_bytes=sizeof(cs_m68k_calls);\n',encoding='utf-8')
     h.run([cc,*flags,'-Os','-I'+str(repo),'-c',footprint,'-o',out/'footprint.o'],env)
     h.run([bins/'m68k-linux-gnu-objcopy','-O','binary','--only-section=.rodata',out/'footprint.o',out/'footprint.bin'],env)
-    inputs=[*modules,'core/cpu/m68k-call.h','core/cpu/m68k-bus.h','core/cpu/m68k.h','core/memory/guest.h',
+    inputs=[*modules,'core/cpu/m68k-call.h','core/cpu/m68k-bus.h','core/cpu/m68k-guard.h','core/cpu/m68k.h','core/memory/guest.h',
         'core/services/traps.h','apps/guest-call-probe/program.h','apps/guest-call-probe/program.S',
         'docs/specifications/SPEC-0026-bounded-guest-calls.md','scripts/Verify-GuestCallsM68k.py','scripts/Verify-GuestM68k.py']
     result={'schema_version':1,'specification':'SPEC-0026','compiler':h.run([cc,'--version'],env).splitlines()[0],

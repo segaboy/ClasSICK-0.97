@@ -1,0 +1,791 @@
+{
+  "schema_version": 1,
+  "specification": "SPEC-0034",
+  "dependency": "X-1",
+  "implementation": "IMPL-0038",
+  "test": "TEST-0042",
+  "sources": [
+    "SRC-0183",
+    "SRC-0184",
+    "SRC-0185",
+    "SRC-0186"
+  ],
+  "verified_on": "2026-10-15",
+  "compiled_source_revision": null,
+  "classification": "guarded-single-instruction-and-standalone-compiler-verification",
+  "full_execution_bridge_implemented": false,
+  "unimplemented_dependencies": [
+    "X-2",
+    "X-3",
+    "X-4",
+    "X-5"
+  ],
+  "application_executed": false,
+  "new_vm_or_emulator_runs": false,
+  "new_boot_image_integration": false,
+  "historical_1984_confirmed": false,
+  "verification": {
+    "specification": "SPEC-0034",
+    "dependency": "X-1",
+    "hosted_twins": {
+      "clang": "c5640d7f0fc76bcd10016e6b77492096b4659a176c92bb698eb776df7768a956",
+      "gcc": "5c3c0a0f8f3fb4919742bba193946909b1f199f2df2c8cf3ecc8392fd37f9800"
+    },
+    "guest_object_audits_inherited": 30,
+    "application_executed": false,
+    "complete_local_profile_counts": [
+      241,
+      241,
+      241,
+      214,
+      241,
+      226,
+      226,
+      226,
+      199
+    ],
+    "complete_local_ctest_checks": 2055,
+    "guard_suites": 5,
+    "a_line_opcode_cases": 4096,
+    "full_log_sha256": "fcce2b6e2baa0461537c00495f7b57f76eb504ca7d8a5c1f28eaf6c06c540791",
+    "ci_status": "pending"
+  },
+  "m68k": {
+    "manifest": {
+      "schema_version": 1,
+      "specification": "SPEC-0034",
+      "compiler": "m68k-linux-gnu-gcc-13 (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0",
+      "object_audits": 10,
+      "complete_relocatable_links": 2,
+      "assembler_fixture_bytes": 36,
+      "assembler_fixture_sha256": "0d8dcf6fb7e0a4f4edf9185836927be74ac833e7156c2a86a457234a178abd01",
+      "profiles": [
+        {
+          "optimization": "-O0",
+          "objects": 5,
+          "combined_sha256": "dfe7380489212fa2f529e4025eb3545bf311d338d6ebba3427ee179878234be6",
+          "stack_frames": [
+            {
+              "function": "cs_guest_validate",
+              "bytes": 20
+            },
+            {
+              "function": "cs_guest_window",
+              "bytes": 20
+            },
+            {
+              "function": "operand",
+              "bytes": 24
+            },
+            {
+              "function": "cs_guest_read",
+              "bytes": 44
+            },
+            {
+              "function": "cs_guest_write",
+              "bytes": 36
+            },
+            {
+              "function": "copy_frame",
+              "bytes": 4
+            },
+            {
+              "function": "begin",
+              "bytes": 0
+            },
+            {
+              "function": "done",
+              "bytes": 0
+            },
+            {
+              "function": "permit",
+              "bytes": 36
+            },
+            {
+              "function": "read_value",
+              "bytes": 28
+            },
+            {
+              "function": "extension",
+              "bytes": 28
+            },
+            {
+              "function": "mask",
+              "bytes": 0
+            },
+            {
+              "function": "flags",
+              "bytes": 8
+            },
+            {
+              "function": "effective",
+              "bytes": 16
+            },
+            {
+              "function": "source",
+              "bytes": 40
+            },
+            {
+              "function": "preflight_store",
+              "bytes": 40
+            },
+            {
+              "function": "stack_span",
+              "bytes": 0
+            },
+            {
+              "function": "move",
+              "bytes": 64
+            },
+            {
+              "function": "condition",
+              "bytes": 20
+            },
+            {
+              "function": "target",
+              "bytes": 28
+            },
+            {
+              "function": "branch",
+              "bytes": 52
+            },
+            {
+              "function": "return_instruction",
+              "bytes": 32
+            },
+            {
+              "function": "sign_extend",
+              "bytes": 4
+            },
+            {
+              "function": "add_offset",
+              "bytes": 4
+            },
+            {
+              "function": "control_address",
+              "bytes": 48
+            },
+            {
+              "function": "jump",
+              "bytes": 28
+            },
+            {
+              "function": "aline",
+              "bytes": 60
+            },
+            {
+              "function": "step",
+              "bytes": 168
+            },
+            {
+              "function": "cs_m68k_bus_step_options",
+              "bytes": 28
+            },
+            {
+              "function": "cs_m68k_bus_step_bounded",
+              "bytes": 28
+            },
+            {
+              "function": "cs_m68k_bus_step",
+              "bytes": 20
+            },
+            {
+              "function": "span",
+              "bytes": 4
+            },
+            {
+              "function": "overlaps",
+              "bytes": 0
+            },
+            {
+              "function": "envelope",
+              "bytes": 124
+            },
+            {
+              "function": "cs_m68k_bus_step_guarded",
+              "bytes": 28
+            },
+            {
+              "function": "cs_memory_probe",
+              "bytes": 348
+            },
+            {
+              "function": "mode",
+              "bytes": 4
+            },
+            {
+              "function": "span",
+              "bytes": 0
+            },
+            {
+              "function": "contains",
+              "bytes": 0
+            },
+            {
+              "function": "begin",
+              "bytes": 4
+            },
+            {
+              "function": "finish",
+              "bytes": 0
+            },
+            {
+              "function": "cs_m68k_aline",
+              "bytes": 20
+            },
+            {
+              "function": "read32",
+              "bytes": 0
+            },
+            {
+              "function": "write32",
+              "bytes": 0
+            },
+            {
+              "function": "cs_m68k_step",
+              "bytes": 52
+            },
+            {
+              "function": "rom_address",
+              "bytes": 0
+            },
+            {
+              "function": "config_valid",
+              "bytes": 8
+            },
+            {
+              "function": "state_valid",
+              "bytes": 4
+            },
+            {
+              "function": "executable",
+              "bytes": 8
+            },
+            {
+              "function": "cs_trap_decode",
+              "bytes": 4
+            },
+            {
+              "function": "cs_trap_init",
+              "bytes": 8
+            },
+            {
+              "function": "cs_trap_get",
+              "bytes": 12
+            },
+            {
+              "function": "cs_trap_set",
+              "bytes": 12
+            },
+            {
+              "function": "intrinsic",
+              "bytes": 24
+            },
+            {
+              "function": "begin_report",
+              "bytes": 0
+            },
+            {
+              "function": "cs_trap_call",
+              "bytes": 32
+            },
+            {
+              "function": "cs_trap_direct",
+              "bytes": 20
+            }
+          ]
+        },
+        {
+          "optimization": "-Os",
+          "objects": 5,
+          "combined_sha256": "ffd74ddc514e27cb9dd7d5eb4a9ca634b6e59685c03aefda2cf6c0e4437c6c28",
+          "stack_frames": [
+            {
+              "function": "cs_guest_validate",
+              "bytes": 28
+            },
+            {
+              "function": "cs_guest_window",
+              "bytes": 40
+            },
+            {
+              "function": "operand",
+              "bytes": 24
+            },
+            {
+              "function": "cs_guest_read",
+              "bytes": 36
+            },
+            {
+              "function": "cs_guest_write",
+              "bytes": 40
+            },
+            {
+              "function": "permit",
+              "bytes": 40
+            },
+            {
+              "function": "stack_span",
+              "bytes": 8
+            },
+            {
+              "function": "add_offset",
+              "bytes": 4
+            },
+            {
+              "function": "span",
+              "bytes": 4
+            },
+            {
+              "function": "preflight_store",
+              "bytes": 44
+            },
+            {
+              "function": "read_value",
+              "bytes": 40
+            },
+            {
+              "function": "extension",
+              "bytes": 32
+            },
+            {
+              "function": "effective",
+              "bytes": 12
+            },
+            {
+              "function": "target",
+              "bytes": 28
+            },
+            {
+              "function": "step",
+              "bytes": 212
+            },
+            {
+              "function": "cs_m68k_bus_step_options",
+              "bytes": 28
+            },
+            {
+              "function": "cs_m68k_bus_step_bounded",
+              "bytes": 28
+            },
+            {
+              "function": "cs_m68k_bus_step",
+              "bytes": 20
+            },
+            {
+              "function": "cs_m68k_bus_step_guarded",
+              "bytes": 152
+            },
+            {
+              "function": "cs_memory_probe",
+              "bytes": 348
+            },
+            {
+              "function": "span",
+              "bytes": 4
+            },
+            {
+              "function": "contains",
+              "bytes": 4
+            },
+            {
+              "function": "cs_m68k_aline",
+              "bytes": 28
+            },
+            {
+              "function": "cs_m68k_step",
+              "bytes": 60
+            },
+            {
+              "function": "rom_address.isra",
+              "bytes": 0
+            },
+            {
+              "function": "executable",
+              "bytes": 16
+            },
+            {
+              "function": "config_valid",
+              "bytes": 28
+            },
+            {
+              "function": "state_valid",
+              "bytes": 4
+            },
+            {
+              "function": "cs_trap_decode",
+              "bytes": 8
+            },
+            {
+              "function": "cs_trap_init",
+              "bytes": 12
+            },
+            {
+              "function": "cs_trap_get",
+              "bytes": 24
+            },
+            {
+              "function": "cs_trap_set",
+              "bytes": 24
+            },
+            {
+              "function": "intrinsic",
+              "bytes": 24
+            },
+            {
+              "function": "cs_trap_call",
+              "bytes": 32
+            },
+            {
+              "function": "cs_trap_direct",
+              "bytes": 32
+            }
+          ]
+        }
+      ],
+      "inputs": {
+        "core/memory/guest.c": "9678b43e3dc82df2f66119794f08cb2a0dbd85c07a031085daba35b230b6f8a1",
+        "core/cpu/m68k-bus.c": "de145c49e9cdfa401a4fb0f0bab0f7d92b57d0a0b1fcb4edb9c34fb130436ac0",
+        "apps/memory-probe/probe.c": "2a03f73d68e51bff03aebed5add244003abb0fe5a5d1526d224a54ecf444b019",
+        "core/cpu/m68k.c": "c6c169c175a71bb24d2f6f375d5bca7dea4469ae4407c43159b3b27c6db613b8",
+        "core/services/traps.c": "585adf0742f51390bc44ba086b58e22361bb7188c1205bcc11968875f0cbb1ef",
+        "core/memory/guest.h": "5a89e549470bd0f3ffe50e7fb714342ff7dc6af0d49a0c154a7baebdf7e113ff",
+        "core/cpu/m68k-bus.h": "a0a8fa1ca3075be2c3f6eecfe18f45ef0c3db3c338af00d5451edc293ad2ce0a",
+        "core/cpu/m68k-guard.h": "2448efd3db90cf185edee1361aecc5be172d87f2912220c57dbc701919ecd9d7",
+        "core/cpu/m68k.h": "1f19932c23f2a27f3764861f38d50cf4f68517b0a1a67b939a1bed12b1770b2c",
+        "core/services/traps.h": "a3346547364a2237027dbe1d134b81129e80f9731f4c49c813fc9f68563fd782",
+        "apps/memory-probe/probe.h": "841249c2ff18f41c4674421129707bc75be4553799ebfc65cf07e11eea49a09f",
+        "apps/memory-probe/program.h": "f5b9c19be4dcba1127f61b43994afb789e79fd444120c976e5b73935554215c3",
+        "apps/memory-probe/program.S": "7e7b69ac83cad8b732b02c99d7297df26bc77c573be5ffd5b90bcba110b60180",
+        "docs/specifications/SPEC-0022-guest-memory-execution.md": "2e324c509f1df56678e1214a5091140afabfd28e423cb65ba2c7b57f13564689",
+        "tests/m68k-guard.c": "ce4e84b0b1c486a2b31e5d729b71dd730faf8a4b3878e3568c2c6a165d04731f",
+        "scripts/Verify-GuardedBusM68k.py": "2fd697015e722f5d32aac5fdf39e1bcb163171d6987d2f261b78022ac5b3e5db",
+        "scripts/Verify-GuardedBus.ps1": "287d709110060d94afc23a77e8db7644b5472f18f8fc9e9dbdba2737ec78cb57",
+        "docs/specifications/SPEC-0034-owned-image-execution.md": "79796e74a09607220c9d097e26f6bc1b86bcb003416996e38cd46a37534393bc"
+      },
+      "tool_lock_sha256": "a2fe02f949288826f6a1d11b55df1d3305aab4fb4726da83a4fb8695b7f21898",
+      "native_executed": false,
+      "rom_integration": false,
+      "dependency": "X-1",
+      "base_specification": "SPEC-0022",
+      "application_executed": false,
+      "image_session_authority": false
+    },
+    "individual_frame_maxima": {
+      "-O0": 348,
+      "-Os": 348
+    },
+    "complete_manifest_matches_ci": false,
+    "cumulative_stack_measured": false,
+    "full128K_fit_proven": false
+  },
+  "workers": {
+    "claude": {
+      "role": "primary-original-test-author",
+      "calls_used": 1,
+      "reads": [
+        {
+          "file": "docs/development/tasks/guarded-interpreter.md",
+          "offset": 1,
+          "requested_limit": null,
+          "source": {
+            "bytes": 3841,
+            "sha256": "817299b5fd1684236d2d4d3d67c94722f74e8acb014ef5e365c4e8041d994a2c"
+          },
+          "selected_lines": 59,
+          "selected": {
+            "bytes": 3841,
+            "sha256": "817299b5fd1684236d2d4d3d67c94722f74e8acb014ef5e365c4e8041d994a2c"
+          }
+        },
+        {
+          "file": "core/cpu/m68k-guard.h",
+          "offset": 1,
+          "requested_limit": null,
+          "source": {
+            "bytes": 2010,
+            "sha256": "2448efd3db90cf185edee1361aecc5be172d87f2912220c57dbc701919ecd9d7"
+          },
+          "selected_lines": 40,
+          "selected": {
+            "bytes": 2010,
+            "sha256": "2448efd3db90cf185edee1361aecc5be172d87f2912220c57dbc701919ecd9d7"
+          }
+        },
+        {
+          "file": "core/cpu/m68k-bus.h",
+          "offset": 1,
+          "requested_limit": null,
+          "source": {
+            "bytes": 1531,
+            "sha256": "a0a8fa1ca3075be2c3f6eecfe18f45ef0c3db3c338af00d5451edc293ad2ce0a"
+          },
+          "selected_lines": 28,
+          "selected": {
+            "bytes": 1531,
+            "sha256": "a0a8fa1ca3075be2c3f6eecfe18f45ef0c3db3c338af00d5451edc293ad2ce0a"
+          }
+        },
+        {
+          "file": "tests/m68k-bus.c",
+          "offset": 1,
+          "requested_limit": 92,
+          "source": {
+            "bytes": 11371,
+            "sha256": "7be0e92c7875fbb0c1afc2ad3fffa4cb8e6e15e615204462b8c254700523a1ae"
+          },
+          "selected_lines": 92,
+          "selected": {
+            "bytes": 5944,
+            "sha256": "9a16d4352aeb05074f6ed229a29146a205a924fb7a892aa02677c36f7e5fd50d"
+          }
+        },
+        {
+          "file": "core/memory/guest.h",
+          "offset": 1,
+          "requested_limit": null,
+          "source": {
+            "bytes": 1343,
+            "sha256": "5a89e549470bd0f3ffe50e7fb714342ff7dc6af0d49a0c154a7baebdf7e113ff"
+          },
+          "selected_lines": 27,
+          "selected": {
+            "bytes": 1343,
+            "sha256": "5a89e549470bd0f3ffe50e7fb714342ff7dc6af0d49a0c154a7baebdf7e113ff"
+          }
+        },
+        {
+          "file": "core/services/traps.h",
+          "offset": 1,
+          "requested_limit": null,
+          "source": {
+            "bytes": 1630,
+            "sha256": "a3346547364a2237027dbe1d134b81129e80f9731f4c49c813fc9f68563fd782"
+          },
+          "selected_lines": 26,
+          "selected": {
+            "bytes": 1630,
+            "sha256": "a3346547364a2237027dbe1d134b81129e80f9731f4c49c813fc9f68563fd782"
+          }
+        },
+        {
+          "file": "core/cpu/m68k.h",
+          "offset": 1,
+          "requested_limit": null,
+          "source": {
+            "bytes": 904,
+            "sha256": "1f19932c23f2a27f3764861f38d50cf4f68517b0a1a67b939a1bed12b1770b2c"
+          },
+          "selected_lines": 18,
+          "selected": {
+            "bytes": 904,
+            "sha256": "1f19932c23f2a27f3764861f38d50cf4f68517b0a1a67b939a1bed12b1770b2c"
+          }
+        }
+      ],
+      "read_truncations": 0,
+      "reported_models": [
+        "claude-opus-5-5"
+      ],
+      "model_turns": 8,
+      "usage": {
+        "input_tokens": 8,
+        "cache_creation_input_tokens": 10810,
+        "cache_read_input_tokens": 20589,
+        "output_tokens": 17263,
+        "output_tokens_details": {
+          "thinking_tokens": 6893
+        },
+        "server_tool_use": {
+          "web_search_requests": 0,
+          "web_fetch_requests": 0
+        },
+        "service_tier": "standard",
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 10810,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "global",
+        "iterations": [
+          {
+            "input_tokens": 2,
+            "output_tokens": 16686,
+            "cache_read_input_tokens": 10517,
+            "cache_creation_input_tokens": 2677,
+            "cache_creation": {
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 2677
+            },
+            "type": "message"
+          }
+        ],
+        "speed": "standard",
+        "fallback_credit": null
+      },
+      "cli_list_cost_estimate_usd": 0.4358898,
+      "cost_is_billing_or_quota": false,
+      "output": {
+        "bytes": 16877,
+        "sha256": "a5de9b6562711aa8d9cd5b48a5eeba346d5e9e65de5b2522ca770f63073310c5"
+      },
+      "output_words": 934,
+      "other_file_command_edit_web_mcp_subagent": false,
+      "runtime_cases_executed": 0,
+      "cli_version": "2.1.287",
+      "delivered_c_lines": 290,
+      "requested_maximum_c_lines": 380
+    },
+    "grok": {
+      "role": "independent-bypass-check",
+      "calls_used": 1,
+      "reads": [
+        {
+          "file": "docs/development/tasks/guarded-interpreter-check.md",
+          "offset": 1,
+          "requested_limit": null,
+          "source": {
+            "bytes": 2012,
+            "sha256": "d096b0e356fb510e836c6c8d588461ac7782be2b8cfa9864ca72afb53a2a8638"
+          },
+          "selected_lines": 32,
+          "selected": {
+            "bytes": 2012,
+            "sha256": "d096b0e356fb510e836c6c8d588461ac7782be2b8cfa9864ca72afb53a2a8638"
+          }
+        },
+        {
+          "file": "core/cpu/m68k-guard.h",
+          "offset": 1,
+          "requested_limit": null,
+          "source": {
+            "bytes": 2010,
+            "sha256": "2448efd3db90cf185edee1361aecc5be172d87f2912220c57dbc701919ecd9d7"
+          },
+          "selected_lines": 40,
+          "selected": {
+            "bytes": 2010,
+            "sha256": "2448efd3db90cf185edee1361aecc5be172d87f2912220c57dbc701919ecd9d7"
+          }
+        },
+        {
+          "file": "core/cpu/m68k-bus.c",
+          "offset": 1,
+          "requested_limit": 120,
+          "source": {
+            "bytes": 18493,
+            "sha256": "de145c49e9cdfa401a4fb0f0bab0f7d92b57d0a0b1fcb4edb9c34fb130436ac0"
+          },
+          "selected_lines": 120,
+          "selected": {
+            "bytes": 5389,
+            "sha256": "981a8a60dc3594a35a185f78ae7c8dd463f7eafdfc1df431209cd4f79b2a9d91"
+          }
+        },
+        {
+          "file": "core/cpu/m68k-bus.c",
+          "offset": 121,
+          "requested_limit": 120,
+          "source": {
+            "bytes": 18493,
+            "sha256": "de145c49e9cdfa401a4fb0f0bab0f7d92b57d0a0b1fcb4edb9c34fb130436ac0"
+          },
+          "selected_lines": 120,
+          "selected": {
+            "bytes": 5121,
+            "sha256": "18d6ca9cee22258cfdd5d7faeb056b886c66257d33d6241a9ab13e58cb6e7ec9"
+          }
+        },
+        {
+          "file": "core/cpu/m68k-bus.c",
+          "offset": 241,
+          "requested_limit": 120,
+          "source": {
+            "bytes": 18493,
+            "sha256": "de145c49e9cdfa401a4fb0f0bab0f7d92b57d0a0b1fcb4edb9c34fb130436ac0"
+          },
+          "selected_lines": 120,
+          "selected": {
+            "bytes": 6467,
+            "sha256": "e6c626e66d9d9e226c44571a1691c2601e19c340eb96a9a1d517faac3643b341"
+          }
+        },
+        {
+          "file": "core/cpu/m68k-bus.c",
+          "offset": 361,
+          "requested_limit": 30,
+          "source": {
+            "bytes": 18493,
+            "sha256": "de145c49e9cdfa401a4fb0f0bab0f7d92b57d0a0b1fcb4edb9c34fb130436ac0"
+          },
+          "selected_lines": 30,
+          "selected": {
+            "bytes": 1516,
+            "sha256": "1badc5191f7678810d7c5910fff34dcd614c6a22a5558c95cd9bd7ab80740faf"
+          }
+        },
+        {
+          "file": "tests/m68k-guard.c",
+          "offset": 139,
+          "requested_limit": 52,
+          "source": {
+            "bytes": 18127,
+            "sha256": "3f382d6c7aa840944b945bd5379593fb27480aa6cb1e4df2074d4c71109c6ff9"
+          },
+          "selected_lines": 52,
+          "selected": {
+            "bytes": 3063,
+            "sha256": "fa5573e877c13b2c323997ae77ea4de6b30e90bdb3626529b5894777a0a7b14b"
+          }
+        }
+      ],
+      "read_truncations": 0,
+      "reported_models": [
+        "grok-4.7-build"
+      ],
+      "model_turns": 3,
+      "usage": {
+        "input_tokens": 15424,
+        "cache_read_input_tokens": 13696,
+        "cache_creation_input_tokens": 0,
+        "output_tokens": 4700,
+        "reasoning_tokens": 3808,
+        "total_tokens": 33820
+      },
+      "cli_list_cost_estimate_usd": 0.02240464,
+      "cost_is_billing_or_quota": false,
+      "output": {
+        "bytes": 2106,
+        "sha256": "5791695ef4066aa9a7925b3fdef91d437887f44a6fd1d3e072e758da732f8adc"
+      },
+      "output_words": 286,
+      "other_file_command_edit_web_mcp_subagent": false,
+      "runtime_cases_executed": 0,
+      "cli_version": "1.0.52 stable0920c8169e27",
+      "requested_maximum_words": 400,
+      "disposition": "No demonstrated bypass within named ranges. Clarify SR check masks S/T/I and permits CCR; no exact SR equality. Not an execution/provenance proof."
+    }
+  },
+  "allocation": {
+    "planned_cli_calls": 2,
+    "actual_cli_calls": 2,
+    "retry_calls": 0,
+    "read_truncations": 0,
+    "primary_deliverable": "Claude-authored conformance test file",
+    "focused_check": "Grok commit/access/service bypass",
+    "scope_normalized_savings_benchmark": false,
+    "reported_tokens_not_subscription_quota": true
+  },
+  "preservation": {
+    "originals": 24,
+    "unchanged_untracked_and_byte_identical_copies": true,
+    "prior_build_and_edition_records_preserved": true,
+    "prior_boot_media_results_equal": true,
+    "known_runtime_changes": [
+      "core/cpu/m68k-bus.c",
+      "core/cpu/m68k.h"
+    ],
+    "old_unguarded_regression_passed": true,
+    "required_system1_rom_boot_directions_tested": false
+  },
+  "human_provenance_review": "pending"
+}

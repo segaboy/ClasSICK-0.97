@@ -65,7 +65,7 @@ def main():
     text=(repo/'apps/memory-probe/program.h').read_text().split('#define CS_MEMORY_PROGRAM_BYTES',1)[1].split('#endif',1)[0]
     expected=bytes(int(token,0) for token in re.findall(r'0x[0-9A-Fa-f]+|\b[0-9]+\b',text))
     if len(expected)!=36 or raw.read_bytes()!=expected: raise ValueError('Assembler and C fixture differ')
-    inputs=(*MODULES,'core/memory/guest.h','core/cpu/m68k-bus.h','core/cpu/m68k.h','core/services/traps.h','apps/memory-probe/probe.h',
+    inputs=(*MODULES,'core/memory/guest.h','core/cpu/m68k-bus.h','core/cpu/m68k-guard.h','core/cpu/m68k.h','core/services/traps.h','apps/memory-probe/probe.h',
             'apps/memory-probe/program.h','apps/memory-probe/program.S','docs/specifications/SPEC-0022-guest-memory-execution.md')
     result={'schema_version':1,'specification':'SPEC-0022','compiler':run([cc,'--version'],env).splitlines()[0],
             'object_audits':10,'complete_relocatable_links':2,'assembler_fixture_bytes':36,

@@ -1,5 +1,16 @@
 # ClasSICK 0.97 working instructions
 
+Current owner implementation scope (2026-10-15, SRC-0183): "Do it."
+accepts SPEC-0034 dependency X-1: original guarded interpreter access/class/
+proposed-state checks before staged commit, focused tests, one Claude test
+artifact and one Grok bypass check, compiler/regression/CI and ordinary public/
+HQ/wiki records. Codex remains sole repository writer. This supersedes the
+prior contract-only limit solely for X-1. No X-2..X-5 bridge, application/image/
+session entry, reset/boot binding, native app or VM/emulator/reference trial.
+SRC-0149 scoped inputs persist; preserve24 originals/copies and all older gates.
+No extra agents/chats/automation/OneNote. [Evidence](docs/development/guarded-interpreter-evidence.md).
+Earlier entries retain their dated scope.
+
 - Current owner contract scope (2026-10-15, SRC-0179): "OK. Carry out your plan
   for the next task. GO." accepts the controlled owned-image execution contract
   and efficient repo-based assignments: Claude drafts, Grok checks one risk,

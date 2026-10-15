@@ -1,5 +1,21 @@
 # Source catalog
 
+## SRC-0183 - Owner guarded interpreter implementation continuation
+
+2026-10-15. Owner: "Do it." accepts the proposed first SPEC-0034 dependency X-1 and its focused implementation, original tests, bounded Claude/Grok assignments, compiler/regression/CI verification and ordinary public/HQ/wiki records. X-2..X-5, application/image/session admission, reset/boot integration and native applications remain outside scope. No new VM/emulator/reference trial, prohibited inputs, UART body work, extra agents/chats/automation/OneNote. SRC-0149 standing scoped public/original transfers persist.
+
+## SRC-0184 - Claude original guarded-interpreter tests
+
+2026-10-15. One scoped primary test-file assignment using seven Reads of the small public brief, original API headers and own tests/m68k-bus.c lines1..92. Delivered290 C lines within380,8 model turns; no implementation read, commands, edits, web/MCP/subagents or test execution. Codex reviews/integrates and adds proposed-state and all4096 A-line cases. Raw artifact/input copies private; exact identities, reported usage and limits in evidence JSON. Original engineering tests, not historical authority.
+
+## SRC-0185 - Grok focused guarded-interpreter bypass check
+
+2026-10-15. One distinct commit/service/access bypass check, seven completed Reads/3 model turns, <=120 actual lines each, no truncation or extra tool/input. No demonstrated bypass in scoped ranges. Lead corrects exact-SR-equality wording: S/T/I mask permits CCR changes. Ordinary unguarded routes and malicious native hooks are outside this API guarantee. No tests executed by worker; no historical/provenance certification or quota-savings claim. Raw report and identities private, sanitized metadata in evidence.
+
+## SRC-0186 - Lead guarded interpreter integration and verification
+
+2026-10-15. SPEC-0034 X-1 / IMPL-0038 / TEST-0042 implements guarded single-instruction interpreter transactions. Actual opcode, extension, read, write, target, instruction and final-state checks precede staged RAM/frame publication. All A-lines refuse before either service route; strict24, bounded even A7 and S=1/T=0/I=7 apply. Existing unguarded APIs retain their semantics. X-2..X-5 and full owned-image execution remain unimplemented. No application/image/session entry, reset/boot integration, native application or VM/emulator/reference trial. All24 research originals/copies and source/UART/native/physical/full128K/parity/edition/B2/human gates and both untested System1/ROM goals remain. Reviewed own SPEC22/34 and original bus/guest/trap APIs only; no raw research, manuals, sample code, private heap reconstruction or third-party implementation. Verification is recorded separately; human provenance review pending.
+
 ## SRC-0179 - Owner controlled-execution and efficient orchestration continuation
 
 2026-10-15. Owner: "OK. Carry out your plan for the next task. GO." Accepts the proposed next controlled68k execution contract and efficient assignment plan: Claude authors a bounded deliverable, Grok checks a distinct risk, Codex integrates with one repository writer. Repo briefs reference selected file ranges; initial budget2 CLI calls, extra only for a concrete blocking gap. SRC-0149 scoped public/original transfer permission persists. No implementation, fixture, new TEST/IMPL/build, app/native app/emulator/VM/reference execution, reset/boot integration or prohibited inputs. Preserve24 originals/copies and all compiled/build/edition/source/UART/native/physical/full128K/parity/B2/human gates and both untested ROM/System1 targets; ordinary Git/HQ/wiki records only.

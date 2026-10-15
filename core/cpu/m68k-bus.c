@@ -1,11 +1,13 @@
 /* SPDX-License-Identifier: GPL-3.0-or-later */
 /* Copyright (C) 2026 Dean Howell. */
-#include "m68k-bus.h"
+#include "m68k-guard.h"
 typedef struct {
     const cs_guest_map *map; cs_trap_frame frame; cs_m68k_bus_report *report;
     uint32_t cursor; uint8_t *store; uint8_t data[6]; unsigned store_bytes;
     const cs_m68k_bus_options *options;
     const cs_m68k_stack_limits *limits;
+    const cs_m68k_guard *guard;
+    const cs_trap_frame *before;
 } transaction;
 static void copy_frame(cs_trap_frame *to,const cs_trap_frame *from)
 {
@@ -24,16 +26,28 @@ static void begin(cs_m68k_bus_report *r,const cs_trap_frame *f)
 }
 static cs_m68k_result done(cs_m68k_bus_report *r,cs_m68k_result status)
 { r->cpu.status=status;return status; }
+static cs_m68k_result permit(transaction *t,cs_m68k_guard_kind kind,
+    uint32_t at,unsigned bytes,uint32_t access)
+{
+    if(t->guard==0) return CS_M68K_OK;
+    cs_m68k_guard_event event;
+    event.kind=kind;event.address=at;event.bytes=bytes;event.access=access;
+    event.word=t->report->cpu.word;event.before=t->before;event.proposed=&t->frame;
+    return t->guard->check(t->guard->context,&event)!=0?CS_M68K_OK:CS_M68K_POLICY;
+}
 static cs_m68k_result read_value(transaction *t,uint32_t at,unsigned bytes,
-    uint32_t access,uint32_t *value)
+    uint32_t access,uint32_t *value,cs_m68k_guard_kind kind)
 {
     cs_m68k_bus_report *r=t->report;r->address=at;r->bytes=bytes;r->access=access;
+    cs_m68k_result status=permit(t,kind,at,bytes,access);
+    if(status!=CS_M68K_OK) return status;
     r->memory=cs_guest_read(t->map,at,bytes,access,value);
     return r->memory==CS_GUEST_OK?CS_M68K_OK:CS_M68K_ADDRESS;
 }
 static cs_m68k_result extension(transaction *t,unsigned bytes,uint32_t *value)
 {
-    cs_m68k_result status=read_value(t,t->cursor,bytes,CS_GUEST_READ|CS_GUEST_EXECUTE,value);
+    cs_m68k_result status=read_value(t,t->cursor,bytes,CS_GUEST_READ|CS_GUEST_EXECUTE,value,
+        CS_M68K_GUARD_EXTENSION);
     if(status==CS_M68K_OK) t->cursor+=bytes;
     return status;
 }
@@ -72,12 +86,14 @@ static cs_m68k_result source(transaction *t,unsigned mode,unsigned reg,unsigned 
     uint32_t at;cs_m68k_result status=effective(t,mode,reg,width,&at);
     if(status!=CS_M68K_OK) return status;
     if(t->options!=0 && t->options->data_policy==CS_M68K_DATA24) at&=0xFFFFFFu;
-    return read_value(t,at,width,CS_GUEST_READ,value);
+    return read_value(t,at,width,CS_GUEST_READ,value,CS_M68K_GUARD_READ);
 }
 static cs_m68k_result preflight_store(transaction *t,uint32_t at,unsigned width,uint32_t value)
 {
     cs_m68k_bus_report *r=t->report;cs_guest_view view;
     r->address=at;r->bytes=width;r->access=CS_GUEST_WRITE;
+    cs_m68k_result status=permit(t,CS_M68K_GUARD_WRITE,at,width,CS_GUEST_WRITE);
+    if(status!=CS_M68K_OK) return status;
     if(width!=1 && (at&1u)!=0) {r->memory=CS_GUEST_ADDRESS;return CS_M68K_ADDRESS;}
     r->memory=cs_guest_window(t->map,at,width,CS_GUEST_WRITE,&view);
     if(r->memory!=CS_GUEST_OK) return CS_M68K_ADDRESS;
@@ -130,7 +146,7 @@ static int condition(unsigned c,uint16_t sr)
 static cs_m68k_result target(transaction *t,uint32_t at)
 {
     uint32_t unused;
-    return read_value(t,at,2,CS_GUEST_READ|CS_GUEST_EXECUTE,&unused);
+    return read_value(t,at,2,CS_GUEST_READ|CS_GUEST_EXECUTE,&unused,CS_M68K_GUARD_TARGET);
 }
 static cs_m68k_result branch(transaction *t,uint16_t word)
 {
@@ -166,7 +182,7 @@ static cs_m68k_result return_instruction(transaction *t)
 {
     uint32_t at;cs_m68k_result status=stack_span(t,t->frame.a[7],4);
     if(status!=CS_M68K_OK) return status;
-    status=read_value(t,t->frame.a[7],4,CS_GUEST_READ,&at);
+    status=read_value(t,t->frame.a[7],4,CS_GUEST_READ,&at,CS_M68K_GUARD_READ);
     if(status!=CS_M68K_OK) return status;
     status=target(t,at);
     if(status!=CS_M68K_OK) return status;
@@ -252,7 +268,7 @@ static cs_m68k_result aline(transaction *t,cs_trap_gateway *g,uint16_t word)
 }
 static cs_m68k_result step(const cs_guest_map *m,cs_trap_gateway *g,
     cs_trap_frame *f,cs_m68k_bus_report *r,const cs_m68k_bus_options *options,
-    const cs_m68k_stack_limits *limits)
+    const cs_m68k_stack_limits *limits,const cs_m68k_guard *guard)
 {
     if(m==0 || g==0 || f==0 || r==0) return CS_M68K_ARGUMENT;
     if(options!=0 && options->data_policy!=CS_M68K_STRICT && options->data_policy!=CS_M68K_DATA24)
@@ -269,13 +285,21 @@ static cs_m68k_result step(const cs_guest_map *m,cs_trap_gateway *g,
     }
     if((f->pc&1u)!=0 || f->pc>0xFFFFFCu) return done(r,CS_M68K_ADDRESS);
     if((f->sr&0xA000u)!=0x2000u) return done(r,CS_M68K_MODE);
+    if(guard!=0 && (f->sr&0xA700u)!=0x2700u) return done(r,CS_M68K_MODE);
     transaction t;t.map=m;t.report=r;t.cursor=f->pc;t.store=0;t.store_bytes=0;
-    t.options=options;t.limits=limits;
+    t.options=options;t.limits=limits;t.guard=guard;t.before=f;
     copy_frame(&t.frame,f);
-    uint32_t fetched;cs_m68k_result status=extension(&t,2,&fetched);
+    uint32_t fetched;cs_m68k_result status=read_value(&t,t.cursor,2,
+        CS_GUEST_READ|CS_GUEST_EXECUTE,&fetched,CS_M68K_GUARD_OPCODE);
     if(status!=CS_M68K_OK) return done(r,status);
+    t.cursor+=2;
     uint16_t word=(uint16_t)fetched;r->cpu.word=word;
     unsigned kind=word>>12;
+    status=permit(&t,CS_M68K_GUARD_INSTRUCTION,f->pc,2,CS_GUEST_READ|CS_GUEST_EXECUTE);
+    if(status!=CS_M68K_OK) return done(r,status);
+    /* A null legacy dispatch still reaches the native gateway. Guarded stepping
+     * refuses the entire A-line class before either service route is entered. */
+    if(guard!=0 && kind==10) return done(r,CS_M68K_POLICY);
     if(kind>=1 && kind<=3) {status=move(&t,word);t.frame.pc=t.cursor;}
     else if(kind==6) status=branch(&t,word);
     else if((word&0xF100u)==0x7000u) {
@@ -296,16 +320,71 @@ static cs_m68k_result step(const cs_guest_map *m,cs_trap_gateway *g,
         t.frame.a[7]>limits->base+limits->size)) {
         r->memory=CS_GUEST_ADDRESS;return done(r,CS_M68K_ADDRESS);
     }
+    if(guard!=0 && (t.frame.sr&0xA700u)!=0x2700u) return done(r,CS_M68K_MODE);
+    status=permit(&t,CS_M68K_GUARD_COMMIT,t.frame.pc,0,0);
+    if(status!=CS_M68K_OK) return done(r,status);
     for(unsigned i=0;i<t.store_bytes;++i) t.store[i]=t.data[i];
     copy_frame(f,&t.frame);return done(r,CS_M68K_OK);
 }
 cs_m68k_result cs_m68k_bus_step_options(const cs_guest_map *m,cs_trap_gateway *g,
     cs_trap_frame *f,cs_m68k_bus_report *r,const cs_m68k_bus_options *options)
-{return step(m,g,f,r,options,0);}
+{return step(m,g,f,r,options,0,0);}
 cs_m68k_result cs_m68k_bus_step_bounded(const cs_guest_map *m,cs_trap_gateway *g,
     cs_trap_frame *f,cs_m68k_bus_report *r,const cs_m68k_bus_options *options,
     const cs_m68k_stack_limits *limits)
-{if(limits==0) return CS_M68K_ARGUMENT;return step(m,g,f,r,options,limits);}
+{if(limits==0) return CS_M68K_ARGUMENT;return step(m,g,f,r,options,limits,0);}
 cs_m68k_result cs_m68k_bus_step(const cs_guest_map *m,cs_trap_gateway *g,
     cs_trap_frame *f,cs_m68k_bus_report *r)
 {return cs_m68k_bus_step_options(m,g,f,r,0);}
+
+typedef struct {uintptr_t at;size_t bytes;} native_span;
+static int span(native_span *out,const void *object,size_t bytes)
+{
+    uintptr_t at=(uintptr_t)object;
+    if(object==0 || bytes==0 || bytes>UINTPTR_MAX-at) return 0;
+    out->at=at;out->bytes=bytes;return 1;
+}
+static int overlaps(native_span a,native_span b)
+{return a.at<b.at+b.bytes && b.at<a.at+a.bytes;}
+static int envelope(const cs_guest_map *m,const cs_trap_gateway *g,
+    const cs_trap_frame *f,const cs_m68k_bus_report *r,
+    const cs_m68k_stack_limits *limits,const cs_m68k_guard *guard)
+{
+    native_span controls[8];size_t n=6;
+    if(!span(&controls[0],m,sizeof *m) || !span(&controls[1],g,sizeof *g) ||
+        !span(&controls[2],f,sizeof *f) || !span(&controls[3],r,sizeof *r) ||
+        !span(&controls[4],limits,sizeof *limits) || !span(&controls[5],guard,sizeof *guard)) return 0;
+    if(((uintptr_t)m&(_Alignof(cs_guest_map)-1u))!=0 ||
+        ((uintptr_t)g&(_Alignof(cs_trap_gateway)-1u))!=0 ||
+        ((uintptr_t)f&(_Alignof(cs_trap_frame)-1u))!=0 ||
+        ((uintptr_t)r&(_Alignof(cs_m68k_bus_report)-1u))!=0 ||
+        ((uintptr_t)limits&(_Alignof(cs_m68k_stack_limits)-1u))!=0 ||
+        ((uintptr_t)guard&(_Alignof(cs_m68k_guard)-1u))!=0) return 0;
+    if(m->count==0 || m->count>CS_GUEST_MAX_REGIONS ||
+        ((uintptr_t)m->regions&(_Alignof(cs_guest_region)-1u))!=0 ||
+        !span(&controls[n++],m->regions,m->count*sizeof *m->regions)) return 0;
+    if(guard->check==0 || ((guard->context==0)!=(guard->context_bytes==0))) return 0;
+    if(guard->context!=0 && !span(&controls[n++],guard->context,guard->context_bytes)) return 0;
+    for(size_t i=0;i<n;++i) for(size_t j=0;j<i;++j)
+        if(overlaps(controls[i],controls[j])) return 0;
+    if(cs_guest_validate(m)!=CS_GUEST_OK) return 0;
+    for(size_t i=0;i<m->count;++i) {
+        native_span backing;
+        if(!span(&backing,m->regions[i].bytes,m->regions[i].size)) return 0;
+        for(size_t j=0;j<n;++j) if(overlaps(backing,controls[j])) return 0;
+        for(size_t j=0;j<i;++j) {
+            native_span previous;
+            if(!span(&previous,m->regions[j].bytes,m->regions[j].size) ||
+                overlaps(backing,previous)) return 0;
+        }
+    }
+    return 1;
+}
+cs_m68k_result cs_m68k_bus_step_guarded(const cs_guest_map *m,cs_trap_gateway *g,
+    cs_trap_frame *f,cs_m68k_bus_report *r,const cs_m68k_stack_limits *limits,
+    const cs_m68k_guard *guard)
+{
+    /* No output publication until all native extents and aliases are safe. */
+    if(!envelope(m,g,f,r,limits,guard)) return CS_M68K_ARGUMENT;
+    return step(m,g,f,r,0,limits,guard);
+}

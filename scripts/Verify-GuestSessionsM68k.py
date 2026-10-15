@@ -46,7 +46,7 @@ def main():
     h.run([cc,*flags,'-Os','-I'+str(repo),'-c',footprint,'-o',out/'footprint.o'],env)
     h.run([bins/'m68k-linux-gnu-objcopy','-O','binary','--only-section=.rodata',out/'footprint.o',out/'footprint.bin'],env)
     storage=(out/'footprint.bin').read_bytes();assert len(storage)==12
-    inputs=[*modules,'core/cpu/m68k-session.h','core/cpu/m68k-call.h','core/cpu/m68k-bus.h','core/cpu/m68k.h','core/memory/guest.h',
+    inputs=[*modules,'core/cpu/m68k-session.h','core/cpu/m68k-call.h','core/cpu/m68k-bus.h','core/cpu/m68k-guard.h','core/cpu/m68k.h','core/memory/guest.h',
         'core/services/traps.h','apps/guest-session-probe/program.h','apps/guest-session-probe/program.S',
         'docs/specifications/SPEC-0028-bounded-guest-sessions.md','scripts/Verify-GuestSessionsM68k.py','scripts/Verify-GuestM68k.py']
     result={'schema_version':1,'specification':'SPEC-0028','compiler':h.run([cc,'--version'],env).splitlines()[0],

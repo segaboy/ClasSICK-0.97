@@ -4,7 +4,8 @@
 #define CLASSICK_CPU_M68K_H
 #include "../services/traps.h"
 typedef enum { CS_M68K_OK=0,CS_M68K_ARGUMENT=1,CS_M68K_ADDRESS=2,
-    CS_M68K_MODE=3,CS_M68K_OPCODE=4,CS_M68K_SERVICE=5 } cs_m68k_result;
+    CS_M68K_MODE=3,CS_M68K_OPCODE=4,CS_M68K_SERVICE=5,
+    CS_M68K_POLICY=6 } cs_m68k_result;
 typedef struct {
     const uint8_t *code; uint32_t code_base,code_size;
     uint8_t *stack; uint32_t stack_base,stack_size;
