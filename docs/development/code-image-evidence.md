@@ -8,7 +8,9 @@ a final complete matrix follows every source/test amendment. Ten final productio
 32/64-bit O0/O2 and ARM64 little/big-endian object audits pass with only8 permitted
 own imports, no mutable process globals and no test-injection symbol. ASan/UBSan
 are exercised with their inherited positive controls. Pre-final failed attempts
-are corrected and excluded. Compiled revision and publication CI remain pending.
+are corrected and excluded. Compiled source `99d4a02ce184c72324afa847a965262ce6dc80ea`;
+[publication CI](https://github.com/segaboy/ClasSICK-0.97/actions/runs/38737368099) passes both jobs with2482 CTests:2010 final-matrix
+and472 additional fresh-bootstrap checks.
 
 [Implementation and lead dispositions](code-image-implementation.md);
 [machine-readable evidence](code-image-evidence.json);
@@ -32,8 +34,7 @@ five together cost9506 bytes, excluding profile/context, staging up to524816,
 actual guest extents/world/stack, manager672/lifecycle112/resource-service3314,
 maps/backings/session/gateway/other inventory and cumulative stack. Individual
 closure frame maxima608/O0 and604/Os remain partial compiler costs. No complete
-physical128K/ROM or cumulative-stack fit is proven. Complete CI manifest matching
-is pending; fingerprints include exact Git-LF source/spec/test/audit inputs.
+physical128K/ROM or cumulative-stack fit is proven. The complete local/CI manifest matches; fingerprints include exact Git-LF source/spec/test/audit inputs.
 
 Claude Code2.1.287 reports claude-opus-5-5 on both low-effort reviews. The first
 one-Read/two-turn review is truncated at lines1..668/902 and explicitly partial;
@@ -50,6 +51,8 @@ receive lead review and actual final-source checks, no external re-review claim.
 All24 research originals remain unchanged and untracked with byte-identical private
 copies. Earlier source/interfaces/boot/assets/UART/build/edition data is preserved.
 The complete local boot-media result object matches the previous checkpoint.
+The complete CI own-ROM manifest also equals the previous checkpoint, including
+image hashes and all source inputs; no new integration or boot trial follows.
 Both mandatory original-System1/own-ROM and own-System1/identified-original-ROM
 boot directions remain untested. No application CODE, new boot/VM/emulator/reference
 trial or native application runs. R-001/AL-2/LQ and prior historical questions,

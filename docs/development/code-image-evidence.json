@@ -6,7 +6,7 @@
   "source": "SRC-0178",
   "profile": "classick-owned-code-image-v1",
   "verified_on": "2026-10-15",
-  "compiled_source_revision": null,
+  "compiled_source_revision": "99d4a02ce184c72324afa847a965262ce6dc80ea",
   "classification": "hosted-data-only-code-image-lifecycle-and-standalone-compiler-verification",
   "historical_1984_confirmed": false,
   "new_native_application": false,
@@ -43,7 +43,24 @@
     "maximum_staging_test_uses_larger_hosted_guest_map": true,
     "worker_executed_cases": 0,
     "final_log_sha256": "d325dacc69342b01f320063c1512c9fafe038cec7faced2cc412d4999e2db245",
-    "ci_status": "pending"
+    "ci_status": "success",
+    "ci_url": "https://github.com/segaboy/ClasSICK-0.97/actions/runs/38737368099",
+    "ci_current_source_complete_matrix": 2010,
+    "ci_additional_bootstrap_ctest_checks": 472,
+    "ci_ctest_counts": [
+      236,
+      236,
+      236,
+      236,
+      236,
+      209,
+      236,
+      221,
+      221,
+      221,
+      194
+    ],
+    "ci_log_sha256": "d649e98b3f9d9e88843bdf048d0480be5b1c0a45becbc41d0df8707e1a193787"
   },
   "m68k": {
     "manifest": {
@@ -1332,7 +1349,7 @@
       "rom_integration": false
     },
     "manifest_sha256": "7b9ad3994e59b9f190f29dbc03a952e8df9a3edee8516ee429f5df1b2de5fbc9",
-    "complete_manifest_matches_ci": false,
+    "complete_manifest_matches_ci": true,
     "individual_closure_frame_maxima": {
       "-O0": 608,
       "-Os": 604
@@ -1458,7 +1475,8 @@
     "prior_runtime_boot_interface_asset_uart_inputs_unchanged": true,
     "two_required_system1_rom_directions_tested": false,
     "old_build_edition_records_preserved": true,
-    "complete_local_boot_media_results_match_prior": true
+    "complete_local_boot_media_results_match_prior": true,
+    "complete_own_rom_manifest_matches_prior": true
   },
   "human_provenance_review": "pending"
 }

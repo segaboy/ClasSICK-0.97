@@ -3,7 +3,8 @@
 2026-10-15: SPEC-0033 / IMPL-0037 / TEST-0041 implements original host-only eager CODE staging, exclusive locked handles, A5-world data population and explicit image retirement. A first allocator OOM retains PREPARED; a later ordinary OOM retains PARTIAL with explicit cleanup and no world writes. Unexpected faults retain exact effects and block further admission. No application execution, guest binding, reset/boot integration, native application or VM/emulator/reference trial. Historical/source/native/physical/full128K/parity/edition/B2 and human-review gates remain open; both required System1/ROM boot directions remain untested.
 
 [Implementation evidence](development/code-image-evidence.md). All2010 final local CTests, ten width/endian object audits and compiler twins pass;
-GNU68000 sixteen audits/two complete links pass. Publication CI is pending.
+GNU68000 sixteen audits/two complete links pass. Both publication CI jobs pass on source `99d4a02`;
+the complete local/CI68000 image and prior own-ROM manifests match.
 Next is the controlled execution bridge contract; no automatic application launch.
 Earlier checkpoints are dated history.
 
