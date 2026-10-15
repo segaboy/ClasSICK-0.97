@@ -1,5 +1,11 @@
 # Project status
 
+2026-10-15: SPEC-0033 / ADR-0037 finalizes an original host-only eager CODE image loading/ownership/retirement contract, unimplemented. Selected bytes stage in caller-owned native storage; exclusive locked handles and loaded-table data have one owner. First allocation commits effects; ordinary later OOM retains PARTIAL for explicit cleanup, unexpected faults stay quarantined. Destination EXEC permissions and physical executable aliases refuse; execution needs a later admission bridge. Claude/Grok each read one frozen public contract/API packet and return six lead-reviewed findings, not tests or historical evidence. All24 originals/copies, compiled/interface/boot/assets/build/edition/project pointers and both untested System1/ROM boot goals remain. No implementation/fixture/TEST/IMPL/build, guest binding, app execution, native application or VM/emulator/reference run. Human provenance and source/UART/native/physical/full128K/parity/B2 gates persist; Git wiki queue only.
+
+[Contract/review](development/code-image-contract-review.md). Next propose the original bounded load/cleanup implementation;
+actual execution still needs its own ownership/fetch/write/re-entry bridge.
+Earlier checkpoint paragraphs are dated history.
+
 2026-10-15: SPEC-0032 / IMPL-0036 / TEST-0040 implements the original read-only hosted CODE inspection/layout checker. It checks64 entries/16 segments, literal resource-start offsets, header/group/routine bounds and explicit candidate A5/stack arithmetic without loading or executing an application. All1911 final CTests pass across nine configurations, ten width/endian object audits and matching compiler twins. GNU68000 twelve module audits/two complete relocatable links pass; manifest1440, workspace1632, layout68 bytes are partial costs, not full128K proof. Claude/Grok provide bounded read-only findings; Codex retains implementation and decisions. All24 originals/copies and prior interface/assets/boot/UART and edition records are preserved. Both required System1/ROM boot directions remain untested. No guest binding, loader/reset/boot integration, native application or VM/emulator/reference run. Human provenance and historical/physical/parity/full128K/B2 gates remain open.
 
 [Implementation evidence](development/code-preflight-evidence.md). Both publication CI jobs pass on source `724a72d`;

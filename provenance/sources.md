@@ -1,5 +1,61 @@
 # Source catalog
 
+## SRC-0173 - Claude owned CODE image contract review
+
+2026-10-15, Claude Code2.1.287, reported claude-opus-5-5, low effort. One Read of
+one frozen proposed public contract/original API synopsis, two turns. No extra
+file/command/edit/web/MCP/subagent or test. Private report4008 bytes SHA256
+b26d64d22d3e59b319c95d558bd64d57ae371a7cc36ffd4f1fb2d6868d675648.
+Lead adopts explicit ordinary-capacity PARTIAL cleanup, non-EXEC/physical-alias
+restriction, CANCEL clarity, named lock path and scalar tombstones. Reject the
+suggested guest MemError effect based on actual own native reply-only OOM path.
+19137 reported tokens including3472 output/1909 thinking; list estimate0.1574444USD
+is not billing/quota or benchmark.625-word report exceeds requested450; one
+Read/two turns verified. Input/report/final-contract identities and all
+dispositions: docs/development/code-image-contract-review.md/.json. Final lead
+amendments not externally re-reviewed; no runtime/historical authority.
+
+## SRC-0174 - Grok owned CODE image consistency review
+
+2026-10-15, Grok CLI1.0.52 (0920c8169e27), reported grok-4.6-build, low effort.
+One completed read_file of a frozen proposed public contract/own-API synopsis,
+two turns; no extra file/command/edit/web/MCP/subagent or test. Private report4431
+bytes SHA256d6c09304480a9c3ae855b567a77228c229869b80326f6edeec0cd51eb07a088e.
+Lead adopts capacity cleanup, precise ApplLimit accounting and committed flags;
+rejects claims that copied-manifest layout needs the fork, that an admitted stack
+can lower candidate into the full configured zone, or that preflight admits B
+smaller than the required table/parameter world. Preserve explicit gate protocol,
+separate byte/mask progress and no source authentication.20767 total tokens,
+5403 output including4318 reasoning; list estimate0.0183362USD is not billing/
+quota/benchmark.574 words exceeds requested450; scoped calls verified. Complete
+identity/disposition record in docs/development/code-image-contract-review.md/.json.
+Suggestions remain unexecuted and final amendments lead-only; no historical proof.
+
+## SRC-0171 - Owner image loading/ownership contract continuation
+
+2026-10-15, owner: "OK, do it." Accepts the proposed contract for safe segment
+loading, ownership and cleanup after implemented SPEC-0032 at compiled724a72d /
+records5486c1d / HQ3dcc4bd. Finalize the bounded original host-only contract,
+scoped Claude/Grok review and ordinary Git/HQ/wiki records. No implementation,
+fixture, new TEST/IMPL/build, guest binding/application execution, reset/boot
+integration, native application/SDK or VM/emulator/reference trial. SRC-0149
+scoped public-contract/original-code transfers apply, excluding HQ/raw research/
+manuals/credentials/prohibited inputs. Preserve all24 originals/copies and prior
+compiled/build/edition/source/UART/native/physical/128K/B2/human gates. No extra
+agents/chats/automation/OneNote. Authority only, not historical evidence.
+
+## SRC-0172 - Lead eager CODE image ownership contract
+
+2026-10-15, SPEC-0033 / ADR-0037. Reviewed own SPEC-0022/0023/0024/0028/0029/
+0030/0031/0032, SRC-0130 LK dispositions and existing original manager/session/
+CPU control/guest-patch code only. Direct exclusive image handles, compact native
+staging, current-limit equality, first-allocation commit and explicit inactive
+retirement are engineering choices. Existing own absolute-long JMP decoding/
+patch fixtures motivate encoding, not a historical observation or manual sample.
+No raw original, new external source/manual/code/asset or emulator input. Contract
+only: prior tests/compiled pointers remain exact and new obligations unexecuted.
+All historical/AL-2/LQ and physical/full128K/native/boot/source/human gates stay.
+
 ## SRC-0168 - Claude CODE preflight failure-safety review
 
 2026-10-15. Claude Code2.1.287, reported claude-opus-5-5, medium effort. One Read of a

@@ -1,0 +1,118 @@
+{
+  "schema_version": 1,
+  "specification": "SPEC-0033",
+  "adr": "ADR-0037",
+  "sources": [
+    "SRC-0171",
+    "SRC-0172",
+    "SRC-0173",
+    "SRC-0174"
+  ],
+  "profile": "classick-owned-code-image-v1",
+  "reviewed_on": "2026-10-15",
+  "status": "contract-only-unimplemented",
+  "final_contract": {
+    "identity_convention": "git-lf",
+    "bytes": 22753,
+    "sha256": "459a5c8df85665e9791fd4e9515842e729490bf48d87477017c70393e18e4927"
+  },
+  "implementation": null,
+  "test": null,
+  "build": null,
+  "runtime_cases_executed": 0,
+  "new_vm_emulator_reference_runs": false,
+  "execution_authorized": false,
+  "historical_1984_confirmed": false,
+  "final_amendments_externally_rereviewed": false,
+  "workers": {
+    "claude": {
+      "cli_version": "2.1.287",
+      "reported_models": [
+        "claude-opus-5-5"
+      ],
+      "requested_effort": "low",
+      "model_turns": 2,
+      "actual_read_calls": 1,
+      "packet_identity": {
+        "baseline": "5486c1dc9852a750a92b69fdb499b1c521658abb",
+        "specification": {
+          "bytes": 19434,
+          "sha256": "91da2b781e1053eece589c6954138f424e920668c1c5c63fcc13f26a41742e67"
+        },
+        "packet": {
+          "bytes": 23535,
+          "sha256": "e49d17be2040158961fb8a3d1bcbde660d9f90e101e0a6b7efc0cfb67a4077b3"
+        }
+      },
+      "report_bytes": 4008,
+      "report_sha256": "b26d64d22d3e59b319c95d558bd64d57ae371a7cc36ffd4f1fb2d6868d675648",
+      "report_words": 625,
+      "usage": {
+        "input_tokens": 4,
+        "cache_creation_input_tokens": 10879,
+        "cache_read_input_tokens": 4782,
+        "output_tokens": 3472,
+        "output_tokens_details": {
+          "thinking_tokens": 1909
+        },
+        "server_tool_use": {
+          "web_search_requests": 0,
+          "web_fetch_requests": 0
+        },
+        "service_tier": "standard",
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 10879,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "global",
+        "speed": "standard",
+        "fallback_credit": null
+      },
+      "cli_list_cost_estimate_usd": 0.15744439999999998,
+      "billing_quota_or_benchmark": false,
+      "worker_tests_executed": false
+    },
+    "grok": {
+      "cli_version": "1.0.52 (0920c8169e27)",
+      "reported_models": [
+        "grok-4.6-build"
+      ],
+      "requested_effort": "low",
+      "model_turns": 2,
+      "actual_read_calls": 1,
+      "packet_identity": {
+        "baseline": "5486c1dc9852a750a92b69fdb499b1c521658abb",
+        "specification": {
+          "bytes": 19434,
+          "sha256": "91da2b781e1053eece589c6954138f424e920668c1c5c63fcc13f26a41742e67"
+        },
+        "packet": {
+          "bytes": 23535,
+          "sha256": "e49d17be2040158961fb8a3d1bcbde660d9f90e101e0a6b7efc0cfb67a4077b3"
+        }
+      },
+      "report_bytes": 4431,
+      "report_sha256": "d6c09304480a9c3ae855b567a77228c229869b80326f6edeec0cd51eb07a088e",
+      "report_words": 574,
+      "usage": {
+        "input_tokens": 9220,
+        "cache_read_input_tokens": 6144,
+        "cache_creation_input_tokens": 0,
+        "output_tokens": 5403,
+        "reasoning_tokens": 4318,
+        "total_tokens": 20767
+      },
+      "cli_list_cost_estimate_usd": 0.0183362,
+      "billing_quota_or_benchmark": false,
+      "worker_tests_executed": false
+    }
+  },
+  "preservation": {
+    "originals": 24,
+    "copies_byte_identical": true,
+    "originals_untracked_unchanged": true,
+    "all_prior_compiled_build_edition_project_pointers_unchanged": true,
+    "both_required_boot_directions_untested": true
+  },
+  "human_provenance_review": "pending"
+}

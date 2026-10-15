@@ -1,5 +1,15 @@
 # ClasSICK 0.97 working instructions
 
+- Current owner contract scope (2026-10-15, SRC-0171): "OK, do it" accepts the
+  proposed safe segment loading/ownership/cleanup contract after verified
+  preflight. SPEC-0033 / ADR-0037 defines eager image staging/population/retirement
+  and keeps execution admission deferred. No implementation, fixture, new
+  TEST/IMPL/build, guest ABI/binding, app execution, boot change, native app/SDK
+  or VM/emulator/reference run. Scoped read-only Claude/Grok review and ordinary
+  Git/HQ/wiki records; preserve all24 originals/copies, compiled pointers and
+  existing source/UART/native/physical/full128K/edition/B2/human gates. No extra
+  agents/chats/automation/OneNote. Earlier scopes retain their dated meaning.
+
 - Current owner implementation scope (2026-10-15, SRC-0167): "OK, move on to
   the next task" continues SPEC-0032 into its original read-only hosted CODE
   inspection/layout checker, original conformance/compiler/regression/CI checks,
