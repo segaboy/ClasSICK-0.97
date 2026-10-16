@@ -59,3 +59,8 @@ One primary draft and one distinct independent-test task moved305 original code
 lines plus protocol drafting to the workers; only necessary lead corrections
 were made. No numerical ChatGPT quota saving is claimed. Verbose streams remain
 outside Git; Git wiki queue only, no OneNote contact.
+
+CI at `e5e42e1b9bc70789f2a101837ebbb11853d9032a` passes both jobs, all18 new mutation tests and
+all2812 existing CTests across11 profiles. The native ROM and optimized PC EFI
+hashes reported by CI remain the previously qualified values. No target run.
+[CI receipt](https://github.com/segaboy/ClasSICK-0.97/actions/runs/38977337503).

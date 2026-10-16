@@ -48,7 +48,6 @@
       "worker_checkout_edits": 0,
       "model_id": null,
       "model_note": "Existing configured default; actual model ID not reported.",
-      "model_turns": 1,
       "usage_provider_reported": {
         "input_tokens": 18647,
         "output_tokens": 4383,
@@ -61,7 +60,9 @@
       "actual_permission_mode": "request-review",
       "control_warning": "--mode plan has no effect while slash command expansion is disabled; broad tools remained exposed.",
       "instruction_compliance": "Only frozen packet read observed; no commands, edits, web/MCP/subagents or extra reads.",
-      "disposition": "Adopted original guard and protocol draft with two CMake parser corrections, scope/control/entitlement corrections and actual workflow integration. Illustrative patch needed real workflow name/commands."
+      "disposition": "Adopted original guard and protocol draft with two CMake parser corrections, scope/control/entitlement corrections and actual workflow integration. Illustrative patch needed real workflow name/commands.",
+      "reported_num_turns": 1,
+      "turn_counter_note": "Provider-reported num_turns is retained without interpreting it as a count of underlying model API calls."
     },
     "copilot": {
       "cli_version": "1.0.98",
@@ -186,11 +187,40 @@
   "claude_new_calls": 0,
   "grok_new_calls": 0,
   "chatgpt_quota_savings_measured": false,
-  "ci_status": "pending",
-  "ci_url": null,
+  "ci_status": "passed",
+  "ci_url": "https://github.com/segaboy/ClasSICK-0.97/actions/runs/38977337503",
   "final_artifacts": {
     "scripts/Verify-SceneImportContracts.py": "5a508e922921be23b8a1055914cb66af5d7487d6ddfd295d5db9a824af7af403",
     "tests/scene-import-contracts.py": "164fe4aa21aaeca0caac175e1597adaa86568ab3c490b182b10d78a4fcba8ceb",
-    "docs/development/agent-orchestration.md": "2967feef35b637d343360ae2922adc2372fd935a3e52d03561840d2ee6d12370"
-  }
+    "docs/development/agent-orchestration.md": "717760bcad4c52ad0df72bcfc47f7c2df5b96c3232845a0ddf814a44cc806cb4"
+  },
+  "future_controls_refinement": "Input-only working directory; separate sibling captures/logs/usage; no model access to transcripts.",
+  "ci_source_revision": "e5e42e1b9bc70789f2a101837ebbb11853d9032a",
+  "ci_profiles": [
+    266,
+    266,
+    266,
+    266,
+    266,
+    239,
+    266,
+    251,
+    251,
+    251,
+    224
+  ],
+  "ci_ctests": 2812,
+  "ci_mutation_tests": 18,
+  "candidate_hashes_unchanged_in_ci": true,
+  "native_rom_and_both_manifests_byte_identical_to_prior": true,
+  "ci_jobs": [
+    {
+      "name": "m68k-rom",
+      "conclusion": "success"
+    },
+    {
+      "name": "windows-bootstrap",
+      "conclusion": "success"
+    }
+  ]
 }
