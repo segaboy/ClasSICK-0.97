@@ -524,6 +524,16 @@ int cs_image_execution_native(cs_image_service *s,const cs_image_run_request *q,
     span outputs[2]={{caller,sizeof *caller},{r,sizeof *r}};
     return execution_safe(s,q,outputs,2);
 }
+int cs_image_execution_rect_native(cs_image_service *s,const cs_image_run_request *q,
+    cs_trap_frame *caller,cs_image_run_report *r,cs_qd_rect_port *port,
+    cs_image_rect_scratch *scratch)
+{
+    if(!OBJ(caller,cs_trap_frame) || !OBJ(r,cs_image_run_report) ||
+        !OBJ(port,cs_qd_rect_port) || !OBJ(scratch,cs_image_rect_scratch))return 0;
+    span outputs[4]={{caller,sizeof *caller},{r,sizeof *r},
+        {port,sizeof *port},{scratch,sizeof *scratch}};
+    return execution_safe(s,q,outputs,4);
+}
 int cs_image_execution_retire_native(cs_image_service *s,const cs_image_run_request *q,
     cs_image_workspace *w,size_t capacity,cs_image_description *out,cs_image_report *r)
 {

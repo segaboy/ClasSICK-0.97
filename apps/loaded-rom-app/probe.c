@@ -64,7 +64,7 @@ static int prepare(cs_loaded_app_workspace *w,cs_trap_gateway *gateway,const uin
     config.application.identity=0x402;config.application.begin=0x2000;config.application.end=0x6000;
     if(cs_mm_init(&w->manager,&w->map,&config)!=CS_MM_OK)return 0;
     if(cs_life_init(&w->lifecycle,&w->manager)!=CS_LIFE_OK)return 0;
-    cs_image_profile profile;profile.maximum_source=sizeof app_source;
+    cs_image_profile profile;profile.maximum_source=4096;
     profile.maximum_staging=sizeof w->staging;profile.maximum_world=4096;profile.owner=APP_OWNER;
     if(cs_image_init(&w->image,&w->lifecycle,&profile)!=CS_IMAGE_OK)return 0;
     w->inventory.kind=CS_LIFE_FUTURE;w->inventory.action=CS_LIFE_REFUSE;w->inventory.owner=APP_OWNER;
@@ -99,6 +99,9 @@ static int prepare(cs_loaded_app_workspace *w,cs_trap_gateway *gateway,const uin
 }
 int cs_loaded_app_prepare(cs_loaded_app_workspace *w,cs_trap_gateway *gateway)
 {return prepare(w,gateway,app_source,sizeof app_source);}
+int cs_loaded_app_prepare_source(cs_loaded_app_workspace *w,cs_trap_gateway *gateway,
+    const uint8_t *source,size_t length)
+{return source && length && length<=4096?prepare(w,gateway,source,length):0;}
 int cs_loaded_app_prepare_program(cs_loaded_app_workspace *w,cs_trap_gateway *gateway,
     const uint8_t *program,size_t length)
 {

@@ -1,7 +1,8 @@
 /* SPDX-License-Identifier: GPL-3.0-or-later */
 /* Copyright (C) 2026 Dean Howell. Original dedicated execution coordinator. */
 #include "code-run-internal.h"
-typedef struct {cs_image_service *image;const cs_image_run_request *request;uint32_t root;} policy;
+typedef struct {cs_image_service *image;const cs_image_run_request *request;
+    uint32_t root;cs_qd_rect_port *port;} policy;
 static void clear(void *p,size_t n){uint8_t *b=p;for(size_t i=0;i<n;++i)b[i]=0;}
 static void copy(void *p,const void *q,size_t n)
 {uint8_t *a=p;const uint8_t *b=q;for(size_t i=0;i<n;++i)a[i]=b[i];}
@@ -50,7 +51,8 @@ static int check(const void *opaque,const cs_m68k_guard_event *e)
         case CS_M68K_GUARD_READ:return memory(s,e,0);
         case CS_M68K_GUARD_WRITE:return memory(s,e,1);
         case CS_M68K_GUARD_INSTRUCTION:
-            if((e->word&0xF000u)==0xA000u)return 0;
+            if((e->word&0xF000u)==0xA000u)return p->port &&
+                (e->word==CS_QD_PAINT_RECT || e->word==CS_QD_ERASE_RECT);
             return !(e->before->pc>=s->layout.table_begin && e->before->pc<s->layout.table_end) || e->word==0x4EF9u;
         case CS_M68K_GUARD_TARGET:
             if(e->address==p->request->token)return e->word==0x4E75u && e->before->a[7]==p->root;
@@ -62,6 +64,59 @@ static int check(const void *opaque,const cs_m68k_guard_event *e)
             return opcode(s,e->proposed->pc);
         default:return 0;
     }
+}
+static int event(const policy *p,cs_m68k_guard_kind kind,const cs_trap_frame *before,
+    const cs_trap_frame *next,uint16_t word,uint32_t at,uint32_t bytes,uint32_t access)
+{
+    cs_m68k_guard_event e;e.kind=kind;e.before=before;e.proposed=next;
+    e.word=word;e.address=at;e.bytes=bytes;e.access=access;return check(p,&e);
+}
+static int rectangle_directory(const cs_image_run_request *q)
+{
+    uint32_t paint,erase;
+    return cs_trap_get(q->gateway,CS_QD_PAINT_RECT&0x1FFu,&paint)==CS_TRAP_OK &&
+        cs_trap_get(q->gateway,CS_QD_ERASE_RECT&0x1FFu,&erase)==CS_TRAP_OK &&
+        paint==q->gateway->config.unsupported_token && erase==q->gateway->config.unsupported_token;
+}
+/* Only the owning coordinator can enter this path. Every potentially failing
+ * check precedes native pixels, exception scratch and frame publication. */
+static cs_m68k_result rectangle(const policy *p,cs_trap_frame *f,
+    cs_m68k_bus_report *r,cs_image_rect_scratch *w,uint16_t word)
+{
+    cs_image_service *s=p->image;uint32_t sp=f->a[7],pointer;
+    r->cpu.pc=f->pc;r->cpu.word=word;r->cpu.service_called=1;
+    r->cpu.service.pc=f->pc;r->cpu.service.decoded.word=word;
+    r->cpu.service.decoded.number=(uint16_t)(word&0x1FFu);r->cpu.service.decoded.toolbox=1;
+    if((f->sr&0xA700u)!=0x2700u || f->a[5]!=s->layout.a5 || (sp&1u) || sp<6 ||
+        sp>p->root || p->root-sp<4u ||
+        !inside(sp-6u,10,s->layout.stack_base,s->layout.stack_top-s->layout.stack_base) ||
+        !rectangle_directory(p->request) ||
+        !event(p,CS_M68K_GUARD_OPCODE,f,f,0,f->pc,2,5) ||
+        !event(p,CS_M68K_GUARD_INSTRUCTION,f,f,word,f->pc,2,5) ||
+        !event(p,CS_M68K_GUARD_READ,f,f,word,sp,4,1))return CS_M68K_POLICY;
+    r->address=sp;r->bytes=4;r->access=1;
+    r->memory=cs_guest_window(s->map,sp,4,CS_GUEST_READ,&w->argument);
+    if(r->memory!=CS_GUEST_OK)return CS_M68K_ADDRESS;
+    pointer=0;for(unsigned i=0;i<4;++i)pointer=(pointer<<8)|w->argument.bytes[i];
+    if((pointer&1u) || !event(p,CS_M68K_GUARD_READ,f,f,word,pointer,8,1))return CS_M68K_POLICY;
+    r->address=pointer;r->bytes=8;
+    r->memory=cs_guest_window(s->map,pointer,8,CS_GUEST_READ,&w->rect);
+    if(r->memory!=CS_GUEST_OK)return CS_M68K_ADDRESS;
+    for(unsigned i=0;i<8;++i)w->bytes[i]=w->rect.bytes[i];
+    frame_copy(&w->next,f);w->next.pc+=2u;w->next.a[7]+=4u;
+    if(!event(p,CS_M68K_GUARD_WRITE,f,&w->next,word,sp-6u,6,2) ||
+        !event(p,CS_M68K_GUARD_COMMIT,f,&w->next,word,w->next.pc,0,0))return CS_M68K_POLICY;
+    r->address=sp-6u;r->bytes=6;r->access=2;
+    r->memory=cs_guest_window(s->map,sp-6u,6,CS_GUEST_WRITE,&w->scratch);
+    if(r->memory!=CS_GUEST_OK)return CS_M68K_ADDRESS;
+    /* Snapshot precedes scratch writes even when the guest Rect overlaps them.
+     * Canonical operation and nonnull port are already established. Helper
+     * refusal is pre-effect; after it succeeds all remaining writes are total. */
+    if(!cs_qd_rect(p->port,w->bytes,word))return CS_M68K_POLICY;
+    w->scratch.writable[0]=(uint8_t)(f->sr>>8);w->scratch.writable[1]=(uint8_t)f->sr;
+    for(unsigned i=0;i<4;++i)w->scratch.writable[2u+i]=(uint8_t)(w->next.pc>>((3u-i)*8u));
+    frame_copy(f,&w->next);r->cpu.service.status=CS_TRAP_OK;
+    return CS_M68K_OK;
 }
 static int token_valid(const cs_image_service *s,uint32_t at)
 {
@@ -82,14 +137,17 @@ static cs_image_run_result finish(cs_image_service *s,cs_image_run_report *r,
     else s->execution_state=4;
     return result;
 }
-cs_image_run_result cs_image_run(cs_image_service *s,const cs_image_run_request *q,
-    cs_trap_frame *caller,cs_image_run_report *r)
+static cs_image_run_result run(cs_image_service *s,const cs_image_run_request *q,
+    cs_trap_frame *caller,cs_image_run_report *r,cs_qd_rect_port *port)
 {
-    if(!cs_image_execution_native(s,q,caller,r))return CS_IMAGE_RUN_ARGUMENT;
+    cs_image_rect_scratch rectangle_scratch;
+    if(port?!cs_image_execution_rect_native(s,q,caller,r,port,&rectangle_scratch):
+        !cs_image_execution_native(s,q,caller,r))return CS_IMAGE_RUN_ARGUMENT;
     clear(r,sizeof *r);r->status=CS_IMAGE_RUN_REFUSED;
     if(s->execution_state || s->execution_generation==s->generation ||
         q->generation!=s->generation || q->epoch!=s->epoch || !q->budget || q->budget>1000000u ||
         !cs_image_execution_integrity(s,&q->context,0) || !token_valid(s,q->token) ||
+        (port && !rectangle_directory(q)) ||
         s->layout.stack_top<s->layout.stack_base+4u)return r->status;
     /* X-1's envelope rejects all distinct backing aliases and known native
      * controls. Check the same invariant before claiming or writing the token. */
@@ -101,7 +159,7 @@ cs_image_run_result cs_image_run(cs_image_service *s,const cs_image_run_request 
     cs_trap_frame guest;clear(&guest,sizeof guest);
     guest.pc=s->layout.table_begin+2u;guest.sr=0x2700;guest.a[5]=s->layout.a5;guest.a[7]=s->layout.stack_top;
     r->generation=s->generation;r->epoch=s->epoch;
-    policy p;clear(&p,sizeof p);p.image=s;p.request=q;p.root=s->layout.stack_top-4u;
+    policy p;clear(&p,sizeof p);p.image=s;p.request=q;p.root=s->layout.stack_top-4u;p.port=port;
     cs_m68k_guard guard;guard.check=check;guard.context=&p;guard.context_bytes=sizeof p;
     cs_m68k_stack_limits limits;limits.base=s->layout.stack_base;limits.size=s->layout.stack_top-s->layout.stack_base;
     cs_m68k_bus_report step;clear(&step,sizeof step);
@@ -117,7 +175,15 @@ cs_image_run_result cs_image_run(cs_image_service *s,const cs_image_run_request 
     for(uint32_t i=0;i<q->budget;++i){
         if(!cs_image_execution_integrity(s,&q->context,1))return finish(s,r,CS_IMAGE_RUN_QUARANTINED,&guest);
         clear(&step,sizeof step);
-        cs_m68k_result cpu=cs_m68k_bus_step_admitted(s->map,q->gateway,&guest,&step,&limits,&guard,q->token,p.root);
+        cs_m68k_result cpu;uint32_t word=0;
+        if(port && opcode(s,guest.pc) &&
+            cs_guest_read(s->map,guest.pc,2,CS_GUEST_READ,&word)==CS_GUEST_OK &&
+            (word==CS_QD_PAINT_RECT || word==CS_QD_ERASE_RECT))
+            cpu=rectangle(&p,&guest,&step,&rectangle_scratch,(uint16_t)word);
+        else cpu=cs_m68k_bus_step_admitted(s->map,q->gateway,&guest,&step,&limits,&guard,q->token,p.root);
+        step.cpu.status=cpu;
+        if(step.cpu.service_called && cpu!=CS_M68K_OK)
+            step.cpu.service.status=cpu==CS_M68K_ADDRESS?CS_TRAP_ADDRESS:CS_TRAP_UNSUPPORTED_FORMAT;
         r->cpu=cpu;r->memory=step.memory;
         if(cpu!=CS_M68K_OK){
             if(!cs_image_execution_integrity(s,&q->context,1) || cpu==CS_M68K_ARGUMENT)
@@ -133,6 +199,12 @@ cs_image_run_result cs_image_run(cs_image_service *s,const cs_image_run_request 
     }
     return finish(s,r,CS_IMAGE_RUN_BUDGET,&guest);
 }
+cs_image_run_result cs_image_run(cs_image_service *s,const cs_image_run_request *q,
+    cs_trap_frame *caller,cs_image_run_report *r)
+{return run(s,q,caller,r,0);}
+cs_image_run_result cs_image_run_rectangles(cs_image_service *s,const cs_image_run_request *q,
+    cs_trap_frame *caller,cs_image_run_report *r,cs_qd_rect_port *port)
+{return port?run(s,q,caller,r,port):CS_IMAGE_RUN_ARGUMENT;}
 cs_image_result cs_image_run_retire(cs_image_service *s,const cs_image_run_request *q,
     cs_image_workspace *w,size_t capacity,cs_image_description *out,cs_image_report *r)
 {

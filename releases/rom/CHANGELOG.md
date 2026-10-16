@@ -1,5 +1,11 @@
 # ClasSICK ROM release history
 
+## Unreleased development after 0.1.0-alpha.1
+
+- [Selected loaded rectangle calls](../../docs/development/drawing-app-evidence.md)
+  add a new original drawing-ROM candidate. No new version/tag/release has been
+  published; the existing alpha image and source pins remain immutable.
+
 [First experimental prerelease](https://github.com/segaboy/ClasSICK-0.97/releases/tag/rom-v0.1.0-alpha.1)
 published 2026-10-16. The System track remains unreleased.
 

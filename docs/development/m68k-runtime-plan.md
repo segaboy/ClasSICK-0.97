@@ -1,5 +1,13 @@
 # 68000 application runtime plan - 2026-10-12
 
+2026-10-16: SPEC-0036 / IMPL-0040 / TEST-0044 adds an explicit owned-code
+PaintRect/EraseRect profile over a fixed native128x64 monochrome port. The
+original loaded program produces a hollow rectangle in13 instructions and
+explicitly retires. [Evidence](drawing-app-evidence.md). Global QuickDraw/port
+state, Get/Set/direct equivalence and callbacks remain unimplemented; ordinary
+trap refusal remains. Candidate compilation and actual boot observation are
+separate. Released alpha assets and all historical/edition/source gates remain.
+
 2026-10-15 redraw refinement: byte fills and counter-only updates preserve12 original frames exactly. 2127 local and2625 CI checks and original ROM twins pass. One freshly authorized Snow trial shows the complete result and counter updates without observed full-scene redraw; automated input delivery remains unqualified. [Evidence](loaded-app-redraw-evidence.md). Earlier checkpoints retain dated results.
 
 2026-10-15: The original resource/CODE loader now runs our twelve-byte 68k test application in the native boot ROM, captures D0=97 and its 0x5A5A5A5A write, and retires the image. One owner-authorized isolated Snow Macintosh 128K cold boot displays APP/097, the full pattern and six completed phases; an automated mouse event advances the kernel counter to 0001. All 2,118 final local and 2,614 CI checks pass. This is an integrated prototype, with general SPEC-0034, desktop/QuickDraw and both System 1/ROM interoperability targets still incomplete.

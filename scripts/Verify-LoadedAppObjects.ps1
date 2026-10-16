@@ -12,7 +12,7 @@ try {
     $clang=(Get-Command clang).Source;$nm=(Get-Command llvm-nm).Source
     $gcc=Join-Path $repo '.tools/gcc/w64devkit/bin/gcc.exe';$checks=0
     $modules=@(
-        @('personality/system1/code-run.c','run','cs_guest_window,cs_guest_write,cs_image_execute,cs_image_execution_native,cs_image_execution_retire_native,cs_image_execution_integrity,cs_m68k_bus_guard_validate,cs_m68k_bus_step_admitted'),
+        @('personality/system1/code-run.c','run','cs_guest_window,cs_guest_read,cs_guest_write,cs_image_execute,cs_image_execution_native,cs_image_execution_rect_native,cs_image_execution_retire_native,cs_image_execution_integrity,cs_m68k_bus_guard_validate,cs_m68k_bus_step_admitted,cs_qd_rect,cs_trap_get'),
         @('apps/loaded-rom-app/probe.c','probe','cs_guest_read,cs_image_execute,cs_image_external_admit,cs_image_init,cs_image_run,cs_image_run_retire,cs_life_init,cs_mm_init'),
         @('apps/loaded-rom-app/scene.c','scene','cs_mac_scene,cs_surface_init'))
     foreach($compiler in @($clang,$gcc)){foreach($bits in @(32,64)){foreach($opt in @(0,2)){

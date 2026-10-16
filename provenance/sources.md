@@ -2755,3 +2755,54 @@ follows from any license.
 - Published 2026-10-16 as an experimental prerelease. Draft and public downloads
   match all four local assets and GitHub digests; annotated tag target checked.
   Exact release/asset identities are in the linked publication receipt.
+
+## SRC-0202 - Owner next visible application milestone continuation
+
+- Project owner, 2026-10-16: "Move on to the next thing." after the experimental
+  ROM alpha publication. Continue the next proposed drawing-through-APIs milestone
+  in docs/milestones.md; the lead selects the bounded SPEC-0036 implementation.
+- Ordinary original code/tests/compiler/CI/own-ROM construction and Git/HQ/wiki
+  records. Standing SRC-0149 scoped workers apply. No new trial, release,
+  native application or source/role/edition/human waiver is inferred.
+
+## SRC-0203 - Published rectangle interface verification for SPEC-0036
+
+- Codex, 2026-10-16; reidentified SRC-0071 owner's1284-page,19,245,372-byte PDF:
+  SHA-256 b65fe8efe782799a333a0b59b225e2bbaf9e2e150dc949dd555571971b331d97.
+- Selected public interface/field prose I-140/141,149,177 and trap tables
+  III-216/219; routine/table images and footers checked. Reuse the reviewed
+  Pascal convention from I-91/94/95 and SPEC-0029. No example implementation,
+  Apple equate file or private structure is an implementation input.
+- Facts: Rect field order/signed coordinates/empty case, routine-specific
+  patterns and unchanged pen location, off-screen clipping distinction and
+  canonical trap words. Profile limits, output preservation and scratch/frame
+  completion are separate engineering decisions. No January1984/region-layout
+  question settled. Private source images/text stay outside Git and worker inputs.
+
+## SRC-0204 - Claude original fixed rectangle helper artifact
+
+- One supervised Claude CLI request under SRC-0149, reported model
+  claude-opus-5-5. Three approved Reads: original brief, header and selected
+  SPEC-0036 lines. Returned103 C lines; no commands, tests or file edits.
+- [Task](../docs/development/tasks/rectangle-helper.md). Codex reviewed and
+  integrated the helper, with independent per-pixel/set oracles and compiler
+  audits. No raw research/manual/HQ/credential/prohibited inputs. GPL-3.0-or-later;
+  AI output is not human provenance certification or historical evidence.
+
+## SRC-0205 - Lead original rectangle integration and verification
+
+- Codex, 2026-10-16; original owned-call bridge, resource program, retained pixel
+  display, tests/compiler/CI and evidence under SPEC-0036 / IMPL-0040 / TEST-0044.
+- [Evidence](../docs/development/drawing-app-evidence.md). Existing released ROM
+  bytes/tag and prior results remain exact; a new candidate build is not a boot
+  observation, global QuickDraw manager or native-application gate opening.
+
+## SRC-0206 - Grok focused rectangle boundary check
+
+- One supervised read-only CLI request under SRC-0149. Reads only the frozen
+  original [327-line packet](../docs/development/tasks/drawing-boundary-packet.md).
+  The CLI read the whole allowed packet once instead of requested chunks.
+- No demonstrated ownership/partial-effect bypass in supplied code. Helper/CPU
+  internals omitted from that packet remain outside worker review; Codex supplies
+  independent execution tests. No commands/tests/edits, extra source/transfer,
+  historical certification, measured quota savings or human-review claim.

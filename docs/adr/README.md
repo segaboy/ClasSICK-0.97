@@ -1,5 +1,10 @@
 # Architecture decision records
 
+2026-10-16: [ADR-0041](0041-first-loaded-rectangle-calls.md) selects two canonical
+fixed-port rectangle calls under the owned-code boundary, with original pixels,
+independent oracles and unchanged ordinary trap refusals. No global QuickDraw,
+new release or emulator/reference trial follows.
+
 2026-10-15: [ADR-0040](0040-independent-rom-system-releases.md) accepts independent
 ROM/System release tracks, a frozen unpublished ROM draft and local preparation
 only. No tag, publication, new binary or boot qualification follows.

@@ -5,7 +5,7 @@
 #include "../../personality/system1/code-run.h"
 /* Cold zeroed caller workspace. Every control is a disjoint sibling subobject. */
 typedef struct {
-    uint8_t low[1024],ram[32768],staging[64];
+    uint8_t low[1024],ram[32768],staging[128];
     cs_guest_region regions[3];cs_guest_map map;cs_mm_manager manager;
     cs_life_controller lifecycle;cs_image_service image;cs_image_workspace image_workspace;
     cs_image_description description;cs_image_request image_request;cs_image_report image_report;
@@ -20,6 +20,11 @@ typedef struct { uint32_t success,phase,value,pattern,steps,generation,retired; 
 /* Original demo preparation, including fresh generations after successful
  * retirement. Never resets an active/faulted owner. Used by conformance too. */
 int cs_loaded_app_prepare(cs_loaded_app_workspace *w,cs_trap_gateway *gateway);
+/* SPEC-0036 original resource fixtures use the same owner/loader path. No
+ * post-LOAD code mutation, second loader or execution authority is introduced.
+ * Source<=4096 bytes, retained staging128, otherwise unchanged limits. */
+int cs_loaded_app_prepare_source(cs_loaded_app_workspace *w,cs_trap_gateway *gateway,
+    const uint8_t *source,size_t length);
 /* Original negative conformance programs are wrapped in the same resource fork
  * and pass PREPARE/LOAD; no post-LOAD mutation substitutes for loading. */
 int cs_loaded_app_prepare_program(cs_loaded_app_workspace *w,cs_trap_gateway *gateway,

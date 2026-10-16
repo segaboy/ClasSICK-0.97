@@ -49,7 +49,7 @@ def main():
     h.run([cc,*flags,'-Os','-I'+str(repo),'-c',source,'-o',out/'footprint.o'],env)
     h.run([bins/'m68k-linux-gnu-objcopy','-O','binary','--only-section=.rodata',out/'footprint.o',out/'footprint.bin'],env)
     sizes=struct.unpack('>11I',(out/'footprint.bin').read_bytes())
-    inputs=[*modules,'personality/system1/code-image.h','personality/system1/code-run.h','personality/system1/code-run-internal.h','core/cpu/m68k-guard.h','personality/system1/resources.h','personality/system1/code-preflight.h','core/memory/lifecycle.h','core/memory/manager.h','core/memory/guest.h',
+    inputs=[*modules,'personality/system1/code-image.h','personality/system1/code-run.h','personality/system1/code-run-internal.h','personality/system1/quickdraw-rects.h','core/cpu/m68k-guard.h','personality/system1/resources.h','personality/system1/code-preflight.h','core/memory/lifecycle.h','core/memory/manager.h','core/memory/guest.h',
         'core/services/traps.h','formats/resourcefork/reader.h','core/cpu/m68k-session.h','core/cpu/m68k-call.h',
         'core/cpu/m68k-bus.h','core/cpu/m68k.h','docs/specifications/SPEC-0033-owned-code-image-lifecycle.md',
         'scripts/Verify-CodeImageM68k.py','scripts/Verify-GuestM68k.py','tests/code-image.c']

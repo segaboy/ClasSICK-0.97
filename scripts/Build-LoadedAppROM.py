@@ -10,7 +10,7 @@ SOURCES=('arch/m68k/loaded-reset.S','arch/m68k/runtime.c','platform/mac128k/loop
  'arch/m68k/aline.S','core/memory/guest.c','core/memory/manager.c','core/memory/lifecycle.c',
  'formats/resourcefork/reader.c','personality/system1/code-preflight.c','personality/system1/resources.c',
  'personality/system1/code-image.c','personality/system1/code-run.c','core/cpu/m68k-bus.c',
- 'apps/loaded-rom-app/probe.c','apps/loaded-rom-app/scene.c')
+ 'apps/loaded-rom-app/probe.c','apps/loaded-rom-app/scene.c','personality/system1/quickdraw-rects.c')
 HEADERS=('arch/m68k/loaded-rom.ld','arch/m68k/runtime.h','platform/mac128k/rom.h',
  'apps/loaded-rom-app/probe.h','apps/loaded-rom-app/scene.h','core/graphics/surface.h',
  'core/services/traps.h','core/cpu/m68k.h','core/cpu/m68k-bus.h','core/cpu/m68k-guard.h',
@@ -18,14 +18,25 @@ HEADERS=('arch/m68k/loaded-rom.ld','arch/m68k/runtime.h','platform/mac128k/rom.h
  'core/memory/lifecycle.h','formats/resourcefork/reader.h','personality/system1/code-preflight.h',
  'personality/system1/resources.h','personality/system1/code-image.h','personality/system1/code-run.h',
  'personality/system1/code-run-internal.h','apps/service-probe/probe.h','apps/aline-probe/probe.h',
- 'apps/aline-probe/program.h','apps/loaded-rom-app/program.S','scripts/Build-LoadedAppROM.py','scripts/Build-MacROM.py','docs/specifications/SPEC-0035-first-loaded-rom-application.md')
+ 'apps/aline-probe/program.h','apps/loaded-rom-app/program.S','scripts/Build-LoadedAppROM.py','scripts/Build-MacROM.py','docs/specifications/SPEC-0035-first-loaded-rom-application.md',
+ 'personality/system1/quickdraw-rects.h','personality/system1/code-run.h','personality/system1/code-run-internal.h')
 def main():
     p=argparse.ArgumentParser();p.add_argument('--tool-root',required=True);p.add_argument('--output',required=True)
+    p.add_argument('--drawing',action='store_true',help='Build the SPEC-0036 fixed-port drawing candidate')
     a=p.parse_args();repo=Path(__file__).resolve().parents[1];tools=Path(a.tool_root).resolve();out=Path(a.output).resolve()
     out.mkdir(parents=True,exist_ok=False);sys.dont_write_bytecode=True
     spec=spec_from_file_location('base_rom',repo/'scripts/Build-MacROM.py');h=module_from_spec(spec);spec.loader.exec_module(h)
     env=os.environ.copy();env['LD_LIBRARY_PATH']=str(tools/'usr/lib/x86_64-linux-gnu')
     env['PATH']=str(tools/'usr/bin')+os.pathsep+env.get('PATH','');bins=tools/'usr/bin';cc=bins/'m68k-linux-gnu-gcc-13'
+    sources=SOURCES;headers=HEADERS;program_source='apps/loaded-rom-app/program.S'
+    program_hex='204d213c5a5a5a5a70614e75';specification='SPEC-0035';profile='first-loaded-rom-app-v1'
+    if a.drawing:
+        sources=tuple('platform/mac128k/drawing-entry.c' if s=='platform/mac128k/loaded-entry.c' else s for s in sources)
+        sources+=('apps/drawing-rom-app/probe.c','apps/drawing-rom-app/scene.c')
+        headers+=('apps/drawing-rom-app/probe.h','apps/drawing-rom-app/program.S','docs/specifications/SPEC-0036-loaded-rectangle-calls.md')
+        program_source='apps/drawing-rom-app/program.S'
+        program_hex='204d213c00380078213c000800082f08a8a2204d213c00300070213c001000102f08a8a370614e75'
+        specification='SPEC-0036';profile='loaded-rectangles-v1'
     profiles=[]
     for twin in ('a','b'):
         folder=out/('Os-'+twin);folder.mkdir();objects=[]
@@ -34,9 +45,9 @@ def main():
          '-fno-asynchronous-unwind-tables','-fno-tree-loop-distribute-patterns','-fstack-usage',
          '-ffunction-sections','-fdata-sections','-Wall','-Wextra','-Werror','-Wconversion','-Wsign-conversion',
          '--sysroot='+str(tools),'-ffile-prefix-map='+str(repo)+'=.','-ffile-prefix-map='+str(folder)+'=.']
-        for i,source in enumerate(SOURCES):
+        for i,source in enumerate(sources):
             obj=folder/f'{i}.o';objects.append(obj);h.run([cc,*flags,'-c',repo/source,'-o',obj],env)
-            if source!='platform/mac128k/loaded-entry.c':
+            if source not in ('platform/mac128k/loaded-entry.c','platform/mac128k/drawing-entry.c'):
                 for line in h.run([bins/'m68k-linux-gnu-nm','--defined-only','--format=posix',obj],env).splitlines():
                     fields=line.split()
                     if len(fields)>1 and fields[1] in 'BbCcDdGgSsVv':raise ValueError('Mutable core global: '+source+' '+line)
@@ -45,7 +56,8 @@ def main():
          '-Wl,-T,'+str(repo/'arch/m68k/loaded-rom.ld'),'-Wl,-Map,'+str(folder/'classick-loaded-app.map')]
         h.run([*link,*objects,'-o',elf],env);syms=h.symbols(elf)
         if not 0x8000<=syms['__loaded_app_start']<syms['__loaded_app_end']<=0x1A000:raise ValueError('Workspace bounds')
-        if 'cs_loaded_app_probe' not in syms or 'cs_image_run' not in syms or 'cs_m68k_bus_step_admitted' not in syms:raise ValueError('Disconnected demonstration')
+        required=('cs_drawing_app_probe','cs_image_run_rectangles') if a.drawing else ('cs_loaded_app_probe','cs_image_run')
+        if any(name not in syms for name in (*required,'cs_m68k_bus_step_admitted')):raise ValueError('Disconnected demonstration')
         raw=folder/'loaded.raw';h.run([bins/'m68k-linux-gnu-objcopy','-O','binary',elf,raw],env)
         b=bytearray(raw.read_bytes());b.extend(bytes(65536-len(b)));struct.pack_into('>I',b,256,h.crc(b))
         def audit(image):
@@ -77,13 +89,13 @@ def main():
          'individual_frame_max':max(x['bytes'] for x in frames),'stack_frames':frames,'symbols':syms,'corruption_controls':8})
     if profiles[0]!=profiles[1]:raise ValueError('ROM twins differ')
     fixture=out/'program.o';binary=out/'program.bin'
-    h.run([cc,'-mcpu=68000','-Wa,-m68000','-c',repo/'apps/loaded-rom-app/program.S','-o',fixture],env)
+    h.run([cc,'-mcpu=68000','-Wa,-m68000','-c',repo/program_source,'-o',fixture],env)
     h.run([bins/'m68k-linux-gnu-objcopy','-O','binary','--only-section=.text',fixture,binary],env)
-    if binary.read_bytes()!=bytes.fromhex('204d213c5a5a5a5a70614e75'):raise ValueError('Original program encoding mismatch')
-    manifest={'schema_version':1,'specification':'SPEC-0035','profile':'first-loaded-rom-app-v1',
+    if binary.read_bytes()!=bytes.fromhex(program_hex):raise ValueError('Original program encoding mismatch')
+    manifest={'schema_version':1,'specification':specification,'profile':profile,
      'compiler':h.run([cc,'--version'],env).splitlines()[0],'profiles':[profiles[0]],'twins_equal':True,
-     'original_program_bytes':12,'module_count':len(SOURCES),'emulator_run':False,'system1_compatibility_proven':False,
-     'inputs':{f:hashlib.sha256((repo/f).read_bytes().replace(b'\r\n',b'\n')).hexdigest() for f in (*SOURCES,*HEADERS)}}
+     'original_program_bytes':len(bytes.fromhex(program_hex)),'module_count':len(sources),'emulator_run':False,'system1_compatibility_proven':False,
+     'inputs':{f:hashlib.sha256((repo/f).read_bytes().replace(b'\r\n',b'\n')).hexdigest() for f in (*sources,*headers)}}
     (out/'manifest.json').write_text(json.dumps(manifest,indent=2)+'\n')
     print('First loaded-app ROM twins PASS:',profiles[0]['rom_used'],'ROM bytes,',profiles[0]['workspace_end']-0x8000,'workspace bytes; no boot trial.')
 if __name__=='__main__':main()

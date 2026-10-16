@@ -21,7 +21,8 @@ The current ROM's embedded demo is separate from a disk-based System release.
 | ROM | Original Macintosh 128K reset, native scene and kernel input | Demonstrated in Snow; [earlier qualification](development/mac-rom-trial.md). Physical and full OS gates open |
 | ROM/runtime | Load, execute and retire an original 68k application | Demonstrated in Snow; [integrated application](development/loaded-rom-app-evidence.md). Narrow prototype profile |
 | ROM/presentation | Preserve the scene while updating the input counter | Demonstrated at captured points; [redraw evidence](development/loaded-app-redraw-evidence.md). Automated input delivery unqualified |
-| ROM/runtime | Loaded application makes its first drawing calls through our APIs | Next proposed integration; not implemented by release groundwork |
+| ROM/runtime | Loaded application makes its first drawing calls through our APIs | [Selected two-call profile](development/drawing-app-evidence.md) passes hosted/compiler checks; candidate ROM built, new boot observation pending |
+| ROM/runtime | General guest port state, clipping and drawing-manager installation | Next expansion; the first rectangle profile has fixed native port state |
 | ROM/System | Boot our replacement System disk on our ROM | Required; not tested; no System release exists |
 | ROM | Boot owner-designated original System 1 disks | Required; not tested |
 | System | Windows, menus, events, files and useful desktop workflow | Incomplete; research and isolated foundations exist |

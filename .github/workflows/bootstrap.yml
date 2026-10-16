@@ -32,6 +32,9 @@ jobs:
       - name: Verify hosted core, loader, exceptions, devices, boot media and unloaded fault fixtures
         shell: powershell
         run: .\scripts\Verify-LoadedApp.ps1 -BuildRoot build\media-verification -Sanitizers
+      - name: Audit fixed-port drawing objects
+        shell: powershell
+        run: .\scripts\Verify-DrawingAppObjects.ps1 -BuildRoot build\drawing-verification
 
   m68k-rom:
     runs-on: ubuntu-24.04
@@ -165,4 +168,14 @@ jobs:
           path: |
             ${{ runner.temp }}/classick-loaded-app/manifest.json
             ${{ runner.temp }}/classick-loaded-app/Os-a/classick-loaded-app.rom
+          if-no-files-found: error
+      - name: Build selected drawing-application ROM twins
+        run: python3 scripts/Build-LoadedAppROM.py --drawing --tool-root "$RUNNER_TEMP/classick-m68k/root" --output "$RUNNER_TEMP/classick-drawing-app"
+      - name: Retain original drawing-application ROM candidate and manifest
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
+        with:
+          name: classick-drawing-app-rom
+          path: |
+            ${{ runner.temp }}/classick-drawing-app/manifest.json
+            ${{ runner.temp }}/classick-drawing-app/Os-a/classick-loaded-app.rom
           if-no-files-found: error

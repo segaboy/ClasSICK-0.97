@@ -4,6 +4,7 @@
 #define CLASSICK_SYSTEM1_CODE_RUN_H
 #include "code-image.h"
 #include "../../core/cpu/m68k-guard.h"
+#include "quickdraw-rects.h"
 typedef enum {CS_IMAGE_RUN_RETURNED=0,CS_IMAGE_RUN_ARGUMENT=1,CS_IMAGE_RUN_REFUSED=2,
     CS_IMAGE_RUN_CPU=3,CS_IMAGE_RUN_BUDGET=4,CS_IMAGE_RUN_QUARANTINED=5} cs_image_run_result;
 typedef struct {
@@ -27,6 +28,13 @@ typedef struct {
  * until explicit retirement scrubs below-A5 and uses original RELEASE. */
 cs_image_run_result cs_image_run(cs_image_service *image,const cs_image_run_request *request,
     cs_trap_frame *caller,cs_image_run_report *report);
+/* SPEC-0036 opt-in fixed-port rectangle profile. Only canonical A8A2/A8A3;
+ * all other traps and ordinary cs_image_run remain refused. Full native port
+ * extent is disjoint from controls/outputs/guest backings. Borrowed for this
+ * synchronous run only; its actual pixels/counts survive stop/retirement. */
+cs_image_run_result cs_image_run_rectangles(cs_image_service *image,
+    const cs_image_run_request *request,cs_trap_frame *caller,
+    cs_image_run_report *report,cs_qd_rect_port *port);
 cs_image_result cs_image_run_retire(cs_image_service *image,const cs_image_run_request *request,
     cs_image_workspace *scratch,size_t capacity,cs_image_description *out,cs_image_report *report);
 #endif

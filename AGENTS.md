@@ -1,5 +1,18 @@
 # ClasSICK 0.97 working instructions
 
+Current owner drawing continuation (2026-10-16, SRC-0202): "Move on to the next
+thing." continues to the next visible milestone in docs/milestones.md: an
+original loaded68k application drawing through selected APIs. SPEC-0036 /
+ADR-0041 permits the fixed128x64 mono PaintRect/EraseRect profile, original
+program/tests, compiler/CI and own-ROM candidate construction with ordinary
+Git/HQ/wiki records. Codex sole writer; one bounded Claude helper artifact and
+one Grok boundary check under standing SRC-0149. No global QuickDraw manager,
+guest GrafPort/InitGraf/regions, SDK/native application, new release or trial.
+Any emulator/VM/reference trial still needs fresh explicit owner go-ahead.
+Preserve24 originals/copies, released alpha assets/tag and old records; source/
+UART/historical/physical/full128K/parity/edition/B2/human and both boot gates
+remain. No extra agents/chats/automation/OneNote. Earlier scopes stay dated.
+
 Current owner ROM alpha publication (2026-10-16, SRC-0200): "OK, move on."
 accepts the proposed experimental ROM0.1.0-alpha.1 publication after final
 source packaging, Snow instructions and package/provenance review. Publish only
