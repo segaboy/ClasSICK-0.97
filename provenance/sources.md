@@ -2959,3 +2959,38 @@ reference payload, native format selection or current target run is admitted.
 - [Evidence](../docs/development/native-drawing-evidence.md). Prior sources,
   native/source/UART/physical/full128K/edition/B2/human and both boot requirements
   retain their scope; native workload parity is bounded and PC input parity open.
+
+## SRC-0223 - Owner four-tool orchestration and ChatGPT conservation
+
+- Dean Howell,2026-10-16: "The highest orchestration priority is conserving my ChatGPT usage."
+- Authorizes Antigravity and GitHub Copilot under existing reviewed-public/original
+  input boundaries, alongside Claude/Grok; one substantial primary deliverable,
+  second worker only for distinct risk. Codex alone integrates/writes/verifies.
+- Actual auth/entitlement checks, useful bounded qualification, protocol/HQ/Git
+  wiki records and current-scope continuation. No scope, trial, hardware, release,
+  publication or excluded-input expansion. No new Codex chats/subagents. OneNote
+  only on explicit "update wiki"; no such instruction in this task.
+
+## SRC-0224 - Antigravity original guard and protocol proposals
+
+- One authenticated bounded request, frozen reviewed-public input, captured
+  output only. Guard/protocol/integration proposals reviewed and corrected by
+  Codex; worker tests were not executed. [Brief](../docs/development/tasks/native-import-guard-primary.md).
+- [Identity/control/usage and disposition](../docs/development/worker-orchestration-qualification.json).
+  Runtime request-review/broad tools limitation is explicit; only packet read observed.
+
+## SRC-0225 - GitHub Copilot independent mutation-test artifact
+
+- One useful request proves existing GitHub service authentication/selected-model
+  entitlement; paid/free/trial plan and remaining quota not reported. Original17
+  tests supplied unexecuted, exposed one guard defect when lead ran them.
+- [Brief](../docs/development/tasks/native-import-guard-independent-tests.md),
+  [results](../docs/development/worker-orchestration-qualification.md). One extra
+  directory listing occurred; no other contents/commands/writes observed.
+
+## SRC-0226 - Lead worker qualification and native verification maintenance
+
+- Codex,2026-10-16; reviewed worker artifacts, necessary parser/control/CI edits,
+  independent actual tests and ordinary public/HQ/wiki records. Existing native
+  runtime, prior qualification and all excluded-input/trial/release gates persist.
+- [Evidence](../docs/development/worker-orchestration-qualification.md).

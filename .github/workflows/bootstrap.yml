@@ -20,6 +20,13 @@ jobs:
       - name: Audit public source and documentation
         shell: powershell
         run: .\scripts\Test-Repository.ps1
+      - name: Verify scene import contract consistency
+        shell: powershell
+        run: |
+          python -B scripts/Verify-SceneImportContracts.py --root .
+          if ($LASTEXITCODE -ne 0) { throw 'Scene import contract consistency failed.' }
+          python -B tests/scene-import-contracts.py
+          if ($LASTEXITCODE -ne 0) { throw 'Scene import contract mutation tests failed.' }
       - name: Prepare pinned portable tools
         shell: powershell
         run: .\scripts\Setup-Windows.ps1

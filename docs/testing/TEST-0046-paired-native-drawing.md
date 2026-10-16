@@ -1,5 +1,11 @@
 # TEST-0046 - Native drawing and separate legacy conformance
 
+2026-10-16 verification maintenance, SRC-0223..0226: worker-authored scene-import
+contract guard plus independent mutation tests prevent the earlier stale native
+allowlist regression. Eighteen actual Python cases and repository consistency
+pass; compiler audits remain authoritative. Native runtime/earlier qualified
+artifacts are unchanged; [qualification](../development/worker-orchestration-qualification.md).
+
 SPEC-0038 / ADR-0044 / IMPL-0042;2026-10-16; SRC-0219..0222.
 Seven native-drawing CTest suites: native, refusal, repeat, legacy, only, faults,
 freestanding. Independent rectangle-membership oracle checks all8192 pixels/

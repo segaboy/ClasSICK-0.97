@@ -1,0 +1,196 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-16",
+  "scope": "supervised-external-worker-qualification-and-SPEC0038-verification-maintenance",
+  "baseline_public_revision": "0d0bce1286fc2536e068c0347ae1e3e3dff36293",
+  "sources": [
+    "SRC-0223",
+    "SRC-0224",
+    "SRC-0225",
+    "SRC-0226"
+  ],
+  "workers": {
+    "agy": {
+      "cli_version": "1.4.0",
+      "cli_requests": 1,
+      "execution": {
+        "worker": "agy",
+        "exit_code": 0,
+        "timed_out": false,
+        "elapsed_seconds": 48.2,
+        "stream_bytes": 161120,
+        "stderr_bytes": 78
+      },
+      "input": {
+        "bytes": 14998,
+        "sha256": "8ad2932ea72feede30b4526b62dcc38fea727cf51d5e115154f0cf96cfe54fe0",
+        "lines": 132
+      },
+      "response_sha256": "723d1418cfb49fad1a82469da109a0bf32c2589d3483f3889c01fd47718b48f5",
+      "proposals": [
+        {
+          "path": "scripts/Verify-SceneImportContracts.py",
+          "lines": 174,
+          "sha256": "a3dcb568b5baf61f96753267f4eddaf5bf31c5fdeca8e0ec624cf11930fe4af1"
+        },
+        {
+          "path": "docs/development/agent-orchestration.md",
+          "lines": 37,
+          "sha256": "05a76b42db67025e1a616b4b792ee7217550d2b1f12bcac12f390926d7078496"
+        },
+        {
+          "path": "integration/CMakeLists.txt-and-ci.patch",
+          "lines": 18,
+          "sha256": "53b65aad1a4e7141bcca7ee9cf527de970154ea5ff107df05dfdca491666ed7d"
+        }
+      ],
+      "worker_test_runs": 0,
+      "worker_checkout_edits": 0,
+      "model_id": null,
+      "model_note": "Existing configured default; actual model ID not reported.",
+      "model_turns": 1,
+      "usage_provider_reported": {
+        "input_tokens": 18647,
+        "output_tokens": 4383,
+        "thinking_tokens": 0,
+        "cache_read_tokens": 13148,
+        "total_tokens": 23030
+      },
+      "cost_or_remaining_quota_reported": false,
+      "read_calls": 1,
+      "actual_permission_mode": "request-review",
+      "control_warning": "--mode plan has no effect while slash command expansion is disabled; broad tools remained exposed.",
+      "instruction_compliance": "Only frozen packet read observed; no commands, edits, web/MCP/subagents or extra reads.",
+      "disposition": "Adopted original guard and protocol draft with two CMake parser corrections, scope/control/entitlement corrections and actual workflow integration. Illustrative patch needed real workflow name/commands."
+    },
+    "copilot": {
+      "cli_version": "1.0.98",
+      "cli_requests": 1,
+      "execution": {
+        "worker": "copilot",
+        "exit_code": 0,
+        "timed_out": false,
+        "elapsed_seconds": 41.81,
+        "stream_bytes": 272268,
+        "stderr_bytes": 0
+      },
+      "input": {
+        "bytes": 13169,
+        "sha256": "dc24a123d61ab9d0c7b1bd991124c5cf39b773f51230d6c6504fc7218fd0d05b",
+        "lines": 131
+      },
+      "response_sha256": "a5847aaad3f5cdd53544db9faaedc2e7b14e16d3ef65d35a5ccc0b593fcdc60e",
+      "proposals": [
+        {
+          "path": "tests/scene-import-contracts.py",
+          "lines": 131,
+          "sha256": "88b075ca00451f84ece5659fa9bbcec4921f5b03ed43c9205f5d4b976daef2f1"
+        }
+      ],
+      "worker_test_runs": 0,
+      "worker_checkout_edits": 0,
+      "model_id": "claude-sonnet-5.5",
+      "model_calls": 3,
+      "service_provider": "GitHub Copilot",
+      "is_byok": false,
+      "authentication_usable": true,
+      "selected_model_entitlement_usable": true,
+      "paid_free_trial_plan": null,
+      "remaining_account_allowance": null,
+      "usage_provider_reported": {
+        "totalPremiumRequestCost": 1,
+        "totalUserRequests": 1,
+        "totalNanoAiu": 9556870000,
+        "aiCreditsStatus": "complete",
+        "tokenDetails": {
+          "input": {
+            "tokenCount": 254
+          },
+          "cache_read": {
+            "tokenCount": 11232
+          },
+          "cache_write": {
+            "tokenCount": 15599
+          },
+          "output": {
+            "tokenCount": 5494
+          }
+        },
+        "modelMetrics": {
+          "claude-sonnet-5.5": {
+            "requests": {
+              "count": 3,
+              "cost": 1
+            },
+            "usage": {
+              "inputTokens": 27085,
+              "outputTokens": 5494,
+              "cacheReadTokens": 11232,
+              "cacheWriteTokens": 15599,
+              "reasoningTokens": 1970
+            },
+            "cacheExpiresAt": "2026-10-16T22:38:46.959Z",
+            "totalNanoAiu": 9556870000,
+            "aiCreditsStatus": "complete",
+            "tokenDetails": {
+              "input": {
+                "tokenCount": 254
+              },
+              "cache_read": {
+                "tokenCount": 11232
+              },
+              "cache_write": {
+                "tokenCount": 15599
+              },
+              "output": {
+                "tokenCount": 5494
+              }
+            }
+          }
+        },
+        "codeChanges": {
+          "linesAdded": 0,
+          "linesRemoved": 0,
+          "filesModifiedCount": 0,
+          "filesModified": []
+        }
+      },
+      "read_calls": 2,
+      "instruction_compliance": "One packet view plus unnecessary directory listing; no other file contents, commands, writes, URL/web/MCP or subagents observed. Worker acknowledged deviation.",
+      "exposed_tools": [
+        "view"
+      ],
+      "credit_limit": 30,
+      "credit_limit_is_soft": true,
+      "disposition": "Adopted17 independent tests unchanged, then added one lead exact-name test. Original suite exposed primary whitespace bug. Coverage notes accepted: compiler remains real-import authority; CSV trimming and exact CMake selection clarified."
+    }
+  },
+  "reused_qualification": "docs/development/native-drawing-evidence.json",
+  "reused_native_checkpoint": {
+    "local_checks": 2280,
+    "ci_checks": 2812,
+    "verified_source_revision": "112780684253f3169df591fced5367de1ef21cd7"
+  },
+  "actual_new_tests": {
+    "independent_mutation_tests": 17,
+    "lead_added_tests": 1,
+    "final_passed": 18,
+    "repository_guard": "passed",
+    "initial_suite": "sandbox temporary-directory cleanup errors; corrected process-local TMP/TEMP to generated workspace",
+    "initial_worker_pair": "16 pass/1 failure: CMake whitespace parser; two lead parser fixes before final18 pass",
+    "focused_existing_scene_freestanding": "passed after CMake reconfiguration; no source recompilation or target execution"
+  },
+  "runtime_changes": false,
+  "new_target_trial": false,
+  "new_release": false,
+  "claude_new_calls": 0,
+  "grok_new_calls": 0,
+  "chatgpt_quota_savings_measured": false,
+  "ci_status": "pending",
+  "ci_url": null,
+  "final_artifacts": {
+    "scripts/Verify-SceneImportContracts.py": "5a508e922921be23b8a1055914cb66af5d7487d6ddfd295d5db9a824af7af403",
+    "tests/scene-import-contracts.py": "164fe4aa21aaeca0caac175e1597adaa86568ab3c490b182b10d78a4fcba8ceb",
+    "docs/development/agent-orchestration.md": "2967feef35b637d343360ae2922adc2372fd935a3e52d03561840d2ee6d12370"
+  }
+}

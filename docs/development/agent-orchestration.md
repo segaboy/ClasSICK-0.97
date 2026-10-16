@@ -1,101 +1,48 @@
-# Supervised Claude and Grok work - 2026-10-14
+# Agent Orchestration Protocol
 
-## Current allocation - 2026-10-15, SRC-0179
+## Authority and Standing Scope
+Current authority: SRC-0223..0226, extending SRC-0149/0150/0179 to four supervised external CLIs. Codex alone writes repositories. All existing implementation, emulator/hardware/reference, source, release and publication gates remain; each target trial still needs fresh owner approval. Private HQ, credentials, untracked research originals, manuals, prohibited implementation/assets and UART implementation/test bodies are excluded from worker inputs.
 
-The owner accepted the usage-efficiency plan and repo-based briefs. Assign one
-bounded primary deliverable to one worker; avoid automatically paying for two
-full overlapping reviews of work Codex already completed. Claude may author a
-contract/deliverable from approved inputs, Grok checks a distinct selected risk,
-and Codex retains integration, decisions, verification and one repository writer.
-Worker drafting through captured output does not authorize direct file edits.
+Standing service scope includes **Antigravity (`agy`)**, **GitHub Copilot CLI (`copilot`)**, **Claude** and **Grok**, using existing authenticated services. Do not reinstall working tools, purchase credits or change subscriptions:
+- **Source Research & Manuals**: Source research requires eligible admitted publications. No worker currently receives manuals, ROMs, media, disassembly, emulator source, or Apple/Microsoft implementation material.
+- **Kernel & Driver Code**: Unqualified kernel, driver, ABI, loader, or runtime code from external workers is not assumed safe.
 
-Put compact current briefs in `docs/development/tasks/`, reference existing file
-ranges/functions/diffs, and state known file end lines to avoid EOF probes. Files
-do not remove tool/context limits or token use. Permit bounded selective Reads
-instead of forcing one giant Read. Default budget one primary call plus one
-distinct check; additional calls need a concrete unresolved blocking gap. Audit
-actual tools/ranges/truncation/reported usage and output overruns. Prefer focused
-checks while editing, required final checks after stabilization, and reusable
-ordinary record/hash scripts. These are not recurring automations. All previous
-source/provider/task/execution gates remain; no quota or model-quality guarantee.
-[First assignment](tasks/owned-image-execution.md) and
-[result](owned-image-execution-review.md). Earlier allocations below are dated history.
+## Quota Conservation & Division of Labor
+Highest priority is conserving **ChatGPT / Codex usage**:
+1. **Codex Authority**: Codex alone holds repository edit, integration, decision, and final verification authority. Codex must never recreate a sound worker artifact.
+2. **Focused Worker Dispatch**: Give one worker a substantial bounded primary deliverable, which may contain several files. Add a second worker only for a distinct risk or unresolved gap. Do not send every task to every tool. Reuse prior qualifications and completed artifacts. This supersedes the old Codex-first implementation allocation.
+3. **No Cross-Provider Quota Equivalence**: Never equate external provider token counts or credits to ChatGPT quota. Do not spawn new ChatGPT chats or subagents.
 
-SRC-0149/0150 records the owner's standing instruction: Codex orchestrates scoped
-Claude/Grok assignments and retains integration. Relevant reviewed public project
-contracts and original ClasSICK-0.97 code may be sent to Anthropic/Claude and
-xAI/Grok within an owner-authorized slice. This supersedes older no-delegation
-wording only for these workers/input categories, not for task scope or other gates.
+## CLI Controls & Isolation Reality
+Prompt-only restrictions are never treated as hard security isolation. Do not claim unavailable CLI controls exist, and refuse unavailable controls rather than broadening access.
 
-Private HQ content, untracked research originals, manuals, credentials, prohibited
-code/assets and emulator source remain excluded. No further subagents, new Codex
-chats, automation, OneNote, native application or VM/reference permission follows.
-Additional data categories/providers need a separate owner decision.
+### Antigravity CLI (`agy 1.4.0`)
+- **Observed**: version1.4.0; authenticated model catalog and bounded print task succeeded. Used existing default model (actual model ID not reported), low effort, sandbox,180s print timeout and JSON stream capture. One packet read; no command/write/web/MCP/subagent call observed.
+- **Control limitation**: the CLI explicitly warned that `--mode plan` has no effect together with `--disable-slash-commands`; runtime permission mode was `request-review`, with broad tools exposed. Do not claim this was an enforced read-only toolset. Future calls must avoid that conflicting combination, retain normal permission review, deny extra permissions and verify actual control state; stop if stronger isolation is required and unavailable. No bypass flags. Frozen public-only working directories and transcript auditing remain necessary.
 
-## Roles and assignment cycle
+### GitHub Copilot CLI (`copilot 1.0.98`)
+- **Observed**: version1.0.98; one useful task succeeded through GitHub Copilot, model `claude-sonnet-5.5`, `isByok=false`. This confirms usable authentication/model entitlement at that time. Paid/free/trial plan label and remaining account allowance were not reported; do not assume a paid plan or continued availability.
+- **Controls**: `-p`, JSONL, `--available-tools=view`, explicit shell/write/URL denial, explicit disabling of built-in MCP/custom instructions/ask-user/remote/update; prompt memory is disabled by default. No all-tools/all-paths/autopilot/fleet/bypass. Low reasoning, default context,0 autopilot continuations, process timeout and usage JSON. `--max-ai-credits 30` is the documented minimum and a soft response-accounting cap, not a purchase or hard spending guarantee. Runtime exposed only `view`; one extra directory listing occurred beyond the requested packet read, with no other file content read. Record that deviation and keep work directories free of excluded inputs.
 
-| Worker | Initial role | Deliverable and lead check |
-| --- | --- | --- |
-| Codex | Contract/design owner, one implementation writer, integration, actual verification and provenance/publication | Adopt/reject each finding and maintain one writer per file/slice. |
-| Claude Code | Independent contradictions, failure analysis and test-case planning | Cited defects and unexecuted cases, checked against the contract and current scope. |
-| Grok Build | Requirements/coverage matrices and consistency review | Bounded traceability findings; lead checks completeness and assumptions. |
+## Role Qualifications & Candidate Boundaries
+Worker roles remain provisional until qualified on specific narrow tasks; qualification validates only the narrow role, not general model superiority:
+- **Claude (Historical Qualification)**: Qualified for adopted independent pixel, canary, and legacy C test suites. Do not rerun or rewrite adopted suites without cause.
+- **Grok (Historical Qualification)**: Qualified for boundary and coupling review (previously identified synthetic-result and allowlist coupling defects, though with higher reasoning overhead and an extra EOF read).
+- **Antigravity**: initial primary for bounded build/verification scripts, mechanical failure analysis and documentation drafts. It supplied the guard and protocol draft; integration required two parser fixes and adapting its illustrative CI patch to the actual workflow. Complex runtime/kernel/driver generation is unqualified.
+- **Copilot**: initial independent test-artifact and requirements-coverage worker. Its17 original tests exposed the guard's whitespace defect; Codex added one exact-name case. Prefer it when a concrete oracle/parser/coverage risk justifies a second worker; it is not a mandatory review after every primary.
+- **Claude**: use the established relationship for substantial contract drafts and original C test/code artifacts that fit its demonstrated strengths. The native-drawing qualification already produced adopted independent tests; no repeat qualification call here.
+- **Grok**: use a small selected defect/boundary review when there is a distinct risk. Prior useful findings coexist with substantial reasoning overhead; use precise scopes, low effort where supported and short outputs. No repeat qualification call here.
+- **Research**: approved-source research is a candidate role, not newly qualified. A task must identify eligible source categories/locators and permitted retrieval controls. Historical claims still need eligible primary evidence; worker opinion and implementation behavior cannot settle them. No manuals were transferred in this qualification.
 
-Prepare a complete copyable prompt with exact inputs/revisions/hashes, boundaries,
-deliverable, acceptance and turn/output limits. Prefer selected sections and
-Read-only first assignments. Use explicit working directories/tool controls,
-capture results outside Git and inspect actual tools/calls/errors/usage. Never
-use bypass-permissions mode or let two workers mutate the same file. Worker
-output is not an executed test, historical fact or provenance certification.
-Review every accepted finding, then run appropriate checks for actual changes.
+## Handoff, Transcript & Wiki Hygiene
+- **Exact Inputs**: Supply bounded packets with exact commit refs, file paths, and line ranges.
+- **Repository briefs**: use `docs/development/tasks/`, exact public revisions and selected functions/sections. Use a frozen public-only input directory when repository-wide access would expose research originals; never grant whole-repository access just to avoid assembling a small brief. State EOF/line counts. Files do not remove context or token limits.
+- **Captured Output Only**: Workers return proposed file contents and a concise structured handoff (`result`, `actionable_findings`, `tests_executed`, `blockers`, `decisions_needed` under 180 words).
+- **Honest Test Accounting**: Report only actually executed tests in `tests_executed` (empty `[]` in plan/read-only runs). Never count proposed tests as executed.
+- **Integration**: inspect accepted artifacts and actual tools, make only necessary corrections, run focused checks plus required final verification, and retain a concise disposition. Stop on unusable output, auth/rate/permission failure or budget exhaustion; retry only for a concrete correctable blocker. Keep elapsed time, provider-reported counters, instruction deviations and integration effort. These counters are not comparable quotas or a measurement of ChatGPT savings.
+- **Records & Wiki**: Keep raw transcripts private. Stage documentation updates in the Git wiki queue only; touch OneNote exclusively upon the exact owner instruction `"update wiki"`.
 
-These are supervised CLI calls during an active owner task. There is no daemon,
-scheduled job, background watcher or automatic expansion into another slice.
-Standing transfer/delegation permission avoids routine repeat questions but does
-not remove execution, clean-room, native-app, publication or approval-review gates.
-
-## Demonstrated Claude relationship
-
-Native Claude Code stable2.1.287 responds to version/help. Owner completed the
-normal browser login; the CLI confirms subscription authentication. Account
-details remain private.
-The launcher uses its absolute path without changing persistent PATH. No API key,
-new plan, credits purchase or credential value is recorded in Git.
-
-One qualified run sent only a byte-identical SPEC-0030 v1 public copy at
-81259d20be248e39a010d610e43df40441c65926. Runtime reports claude-opus-5-5,
-Read as the only available tool, one Read call, two turns, no denials, web/MCP,
-extra file, write, command or subagent. The response succeeded, with no retry-limit
-or rate-limit error. Builtin plugins appeared in runtime metadata; their absence
-is not claimed. Normal subscription authentication was retained rather than
-using --bare, which Anthropic documents as disabling OAuth.
-
-Claude proposed two issues and eight future cases. Lead adopts the teardown
-wording issue as clarification: v1's phase section already required preservation,
-but its overview was misleading. Lead adopts explicit state/plan-lifetime
-transitions. SPEC-0030 v2 adds them without code or historical changes. Correct
-the changed-input test's oracle to the state just before refused commit, and
-specify the exact internal fault boundary for a meaningful future injection.
-The limit/stack observation is a consistent refusal, not a proved contradiction.
-Cases remain unexecuted; no TEST/IMPL/fixture or loader/reset binding is created.
-
-## Usage and next implementation allocation
-
-Narrow scopes reduce repeated context. Claude's result reports4 input,8601
-cache-creation input,4936 cached input and4875 output tokens (2515 thinking
-included),18416 total. Its list-price cost estimate is0.1673112USD.
-That estimate is not an extra charge, invoice or remaining subscription quota.
-Do not compare token totals across providers as interchangeable allowances or
-claim coding superiority from one document review. Claude coding quality remains
-unqualified; Grok's previous successful review likewise does not prove it.
-
-For a later authorized hosted heap implementation: Codex writes admission/plan/
-scrap staging, then commit/teardown and evidence. Claude can refine counterexample
-oracles; Grok can check requirement coverage against the reviewed plan/diff.
-Neither invents historical answers or implementation permission. Record the
-actual model/tool, source exposure, accepted findings, checks and remaining limits.
-On real rate-limit/overload, follow the reported retry guidance without endless
-retries. On approval rejection, stop and obtain any necessary explicit authority.
-
-Raw prompts/streams/report/installer hash and local session controls are private
-at `C:/ClasSICK/claude-orchestration-20261014-a`. Published input identity and
-report identity are in the source catalog; no auth transcript is published.
+[Current qualification and verification](worker-orchestration-qualification.md);
+[dated prior protocol and Claude/Grok qualifications](agent-orchestration-2026-10-15.md).
+The present qualification continues SPEC-0038 verification only: no runtime change,
+new native target trial, driver implementation, release or historical claim.

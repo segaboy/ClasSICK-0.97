@@ -1156,7 +1156,7 @@ if(BUILD_TESTING)
             -P ${CMAKE_SOURCE_DIR}/scripts/Check-ObjectImports.cmake)
         add_test(NAME scene.freestanding COMMAND ${CMAKE_COMMAND}
             "-DNM=${CLASSICK_SCENE_NM}"
-            "-DALLOWED=cs_surface_init,cs_surface_fill,cs_arena_alloc,cs_fb_init,cs_fb_present,cs_product_scene,cs_service_probe,cs_native_draw"
+            "-DALLOWED=cs_surface_init,cs_arena_alloc,cs_fb_init,cs_fb_present,cs_product_scene,cs_service_probe,cs_native_draw"
             "-DOBJECT=$<TARGET_OBJECTS:classick_boot_scene_freestanding>"
             -P ${CMAKE_SOURCE_DIR}/scripts/Check-ObjectImports.cmake)
         add_test(NAME acpi.freestanding COMMAND ${CMAKE_COMMAND}

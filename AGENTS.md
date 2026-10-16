@@ -1,5 +1,15 @@
 # ClasSICK 0.97 working instructions
 
+Current owner orchestration extension (2026-10-16, SRC-0223..0226):
+highest priority conserve ChatGPT usage. Antigravity/Copilot join Claude/Grok
+under reviewed-public/original-only inputs. One substantial primary artifact,
+second worker only distinct risk; Codex sole writer, decisions/integration/final
+checks. Reuse existing qualifications. Current continuation is SPEC38 verification
+maintenance only, no runtime/driver/ABI/trial/hardware/release scope expansion.
+Preserve originals/copies, UART bodies and prior records/releases. No new Codex
+chats/subagents; ordinary Git/HQ/wiki queue. OneNote only explicit "update wiki".
+[Protocol](docs/development/agent-orchestration.md); [qualification](docs/development/worker-orchestration-qualification.md).
+
 Current owner native workload implementation (2026-10-16, SRC-0219..0222):
 "move on to the next task" with best use of Claude/Grok authorizes SPEC-0038 /
 ADR-0044 / IMPL-0042 / TEST-0046 direct native drawing on Mac/PC, standalone
