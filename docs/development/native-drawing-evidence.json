@@ -10,7 +10,7 @@
     "SRC-0221",
     "SRC-0222"
   ],
-  "compiled_source_revision": null,
+  "compiled_source_revision": "112780684253f3169df591fced5367de1ef21cd7",
   "classification": "paired-native-workload-construction-and-hosted-conformance",
   "current_candidate_boot_observed": false,
   "new_emulator_run": false,
@@ -74,7 +74,7 @@
         "checks": 224
       }
     ],
-    "checks": 2280.0
+    "checks": 2280
   },
   "object_audits": {
     "emulator_run": false,
@@ -249,8 +249,8 @@
       "future_efficiency": "Give small reviews explicit packet line counts/read limits and low reasoning effort where suitable; avoid redundant EOF probes. No extra review request made."
     }
   },
-  "ci_status": "pending",
-  "ci_url": null,
+  "ci_status": "passed",
+  "ci_url": "https://github.com/segaboy/ClasSICK-0.97/actions/runs/38972919659",
   "limits": [
     "No actual new candidate boot/input qualification.",
     "No external native application ABI/SDK/loader or general QuickDraw.",
@@ -265,5 +265,44 @@
     "windows_job": "failed-stale-framebuffer-import-allowlist",
     "runtime_change_required": false,
     "focused_local_endian_audits_after_fix": 2
-  }
+  },
+  "ci_checks": 2812,
+  "ci_profiles": [
+    266,
+    266,
+    266,
+    266,
+    266,
+    239,
+    266,
+    251,
+    251,
+    251,
+    224
+  ],
+  "ci_jobs": [
+    {
+      "name": "m68k-rom",
+      "conclusion": "success"
+    },
+    {
+      "name": "windows-bootstrap",
+      "conclusion": "success"
+    }
+  ],
+  "ci_artifact_comparison": {
+    "rom_bytes_equal": true,
+    "rom_sha256": "b02c765567787161b07c673c3edb8b84ca158dba45dfdef2e36d25d91c5a2fb1",
+    "rom_bytes": 65536,
+    "full_rom_manifest_bytes_equal": true,
+    "full_rom_manifest_sha256": "e9bf81660416d755b3a2589576c3a6b732f9ce43573e0fd8921262b7cd40b19f",
+    "full_closure_manifest_bytes_equal": true,
+    "full_closure_manifest_sha256": "6cbac5a0917f9a36af21df78a3ba60e9c1d45f5f3f2ffcad211a766e44306b1b",
+    "normalization": "none",
+    "ci_url": "https://github.com/segaboy/ClasSICK-0.97/actions/runs/38972919659",
+    "executed": false
+  },
+  "ci_pc_hashes_match": true,
+  "ci_missing_native_drawing_controls": 1,
+  "ci_object_audits": 60
 }

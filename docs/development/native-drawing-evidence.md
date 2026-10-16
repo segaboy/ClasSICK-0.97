@@ -51,7 +51,11 @@ parity. Windows arena budget is1428520 bytes (existing display/input storage plu
   CI's updated script runs all fifteen together and audits the native object.
 - Six valid x64 LLDB cases and three invalid-argument refusals pass. Compiler
   twins match for native conformance/native-only executables and the viewer.
-- Full local/CI matching and actual CI result are recorded after the source push.
+- Both [CI jobs](https://github.com/segaboy/ClasSICK-0.97/actions/runs/38972919659) pass all2812 CTests across11 profiles
+  at compiled revision `112780684253f3169df591fced5367de1ef21cd7`. The downloaded
+  native ROM, complete ROM manifest and complete native-closure manifest
+  match local bytes exactly, without normalization. Both EFI hashes appear
+  in CI;60 object audits and all15 omitted-object controls pass.
   Compiled-only identities/results are in the [JSON record](native-drawing-evidence.json).
 
 The new ROM is65536 bytes, SHA-256 `b02c765567787161b07c673c3edb8b84ca158dba45dfdef2e36d25d91c5a2fb1`.
