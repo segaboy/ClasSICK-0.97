@@ -10,7 +10,7 @@
     "SRC-0211",
     "SRC-0212"
   ],
-  "compiled_source_revision": null,
+  "compiled_source_revision": "a8b6aae8e583b26d16012d5af330b2a2092c6c59",
   "classification": "original-hosted-parity-and-native-construction",
   "logical_canvas": [
     512,
@@ -1206,8 +1206,8 @@
       "docs/specifications/SPEC-0036-loaded-rectangle-calls.md": "f028eaf73d7689b38e979b7876f5a744744b1b203fc57325f6de6c6c4dc95092"
     }
   },
-  "ci_status": "pending",
-  "ci_url": null,
+  "ci_status": "success",
+  "ci_url": "https://github.com/segaboy/ClasSICK-0.97/actions/runs/38922733567",
   "parity": {
     "mac_dimensions": [
       512,
@@ -1309,5 +1309,27 @@
       "windows_job": "failed",
       "reason": "LLDB wrapper expected obsolete viewer arena size1342744; corrected to1473768 and nine local debugger cases pass."
     }
-  ]
+  ],
+  "ci_ctest_counts": [
+    259,
+    259,
+    259,
+    259,
+    259,
+    232,
+    259,
+    244,
+    244,
+    244,
+    217
+  ],
+  "ci_ctest_checks": 2735,
+  "ci_final_rom_comparison": {
+    "source_revision": "a8b6aae8e583b26d16012d5af330b2a2092c6c59",
+    "run_id": 38922733567,
+    "rom_equal": true,
+    "complete_manifest_equal": true,
+    "sha256": "95d7cdef447768586e2d8e9af18771afbe87f197c273269690650fc18e2fe542"
+  },
+  "ci_reports_same_optimized_pc_payload_hash": true
 }

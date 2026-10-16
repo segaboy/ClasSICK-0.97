@@ -65,8 +65,13 @@ font, manual sample or external implementation was added. Existing independently
 authored letterforms and graphics/fixture contracts are reused. No external
 worker, new chat, agent, automation or OneNote operation. GPL-3.0-or-later.
 
-Compiler/hosted verification is separate from an actual boot. CI on the exact
-committed implementation remains pending until recorded below. No new Snow,
+Both jobs pass on implementation `a8b6aae8e583b26d16012d5af330b2a2092c6c59` in
+[CI run38922733567](https://github.com/segaboy/ClasSICK-0.97/actions/runs/38922733567). All2735 CTests pass in eleven
+profiles, including two fresh bootstrap profiles, plus the full debugger,
+native-image/media/qualification and object-audit wrapper chain. Downloaded
+ROM bytes and the complete manifest equal local results. CI also reports the
+same optimized PC payload SHA-256. Compiler/hosted verification is separate
+from an actual boot. No new Snow,
 VirtualBox or reference-system trial has been run; each needs fresh explicit
 owner go-ahead. Earlier drawing-ROM observations describe their earlier image,
 not this new candidate. Published alpha assets/tag and all24 untracked research
