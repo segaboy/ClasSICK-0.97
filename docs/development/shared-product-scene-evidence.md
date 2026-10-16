@@ -48,6 +48,15 @@ native workspace size. O0 aggregate initialization was changed to explicit
 field assignment to avoid an implicit memset dependency. Initial test/build
 iterations, final raw logs, image/preview originals and manifests stay private.
 
+## Debugger integration correction
+
+The first CI attempt passed its68000 job and fresh hosted tests, then found an
+obsolete LLDB viewer-memory expectation (1342744 bytes). The new64-bit viewer
+uses1473768 bytes including the original probe workspace. The wrapper now checks
+that value; all six local LLDB launch/source/state/step/resume runs and three
+argument rejections pass. No renderer/native input changed for this correction;
+the complete matrix and native artifacts remain valid by exact input identity.
+
 ## Scope and provenance
 
 The supplied49x56 PNG is retained outside Git with its byte identity. Renderer

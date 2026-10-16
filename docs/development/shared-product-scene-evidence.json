@@ -1253,5 +1253,61 @@
       "bytes": 2632,
       "sha256": "08492f2a6056e90a484b5d3524a1dae09c2ff49d70c61a814b45053843ef9876"
     }
-  }
+  },
+  "debugger_verification": {
+    "debugger": "lldb version 23.1.1 (https://github.com/llvm/llvm-project.git revision 6dfe1677ab8dffbc6ec13d53a1e0215d75147689)",
+    "runs": [
+      {
+        "name": "debug-a-core",
+        "status": "passed",
+        "sha256": "03c4e9abf6a75459113d28f255d97f48e0ab2b0d42ac90ca7f36e2e3d8224fc2"
+      },
+      {
+        "name": "debug-a-viewer-fake",
+        "status": "passed",
+        "sha256": "f267d9be22ef305ce693871f3add2807b1f38c5bc0bbaced1ca78773a26fce12"
+      },
+      {
+        "name": "debug-a-viewer-live",
+        "status": "passed",
+        "sha256": "f267d9be22ef305ce693871f3add2807b1f38c5bc0bbaced1ca78773a26fce12"
+      },
+      {
+        "name": "debug-b-core",
+        "status": "passed",
+        "sha256": "03c4e9abf6a75459113d28f255d97f48e0ab2b0d42ac90ca7f36e2e3d8224fc2"
+      },
+      {
+        "name": "debug-b-viewer-fake",
+        "status": "passed",
+        "sha256": "f267d9be22ef305ce693871f3add2807b1f38c5bc0bbaced1ca78773a26fce12"
+      },
+      {
+        "name": "debug-b-viewer-live",
+        "status": "passed",
+        "sha256": "f267d9be22ef305ce693871f3add2807b1f38c5bc0bbaced1ca78773a26fce12"
+      },
+      {
+        "name": "reject-unknown",
+        "status": "passed"
+      },
+      {
+        "name": "reject-extra",
+        "status": "passed"
+      },
+      {
+        "name": "reject-empty",
+        "status": "passed"
+      }
+    ]
+  },
+  "previous_ci_runs": [
+    {
+      "source_revision": "98e9a6b0f6afa2173d7d867c68016dba0a4bcdbb",
+      "run_id": 38921524119,
+      "mac_job": "success",
+      "windows_job": "failed",
+      "reason": "LLDB wrapper expected obsolete viewer arena size1342744; corrected to1473768 and nine local debugger cases pass."
+    }
+  ]
 }
