@@ -1,5 +1,12 @@
 # ClasSICK 0.97 working instructions
 
+Completed screenshot sessions (2026-10-16, SRC-0213/0214): owner requested
+"a screenshot for each of these for use in a blog post." One isolated own-ROM
+Snow128K boot and one own-image VirtualBox boot show the current branded scene,
+APP/097, drawing and six phases. PC512x342 is centered in1024x768. Both sessions
+are closed; no input test or future run authorized. Earlier compiled-only records
+retain dated meanings. [Observation](docs/development/shared-product-scene-boot-evidence.md).
+
 Current owner display scope (2026-10-16, SRC-0209/0210/0211): implement one
 portable monochrome scene and supplied-brand approximation for drawing-ROM,
 native-PC and hosted Windows targets. All PC work targets a logical512x342

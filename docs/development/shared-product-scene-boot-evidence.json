@@ -1,0 +1,156 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-16",
+  "specification": "SPEC-0036",
+  "presentation_specification": "SPEC-0037",
+  "sources": [
+    "SRC-0213",
+    "SRC-0214"
+  ],
+  "compiled_source_revision": "a8b6aae8e583b26d16012d5af330b2a2092c6c59",
+  "compiled_evidence_revision": "20efa50fd1ef4eb636609dfa2e4be738a5420233",
+  "classification": "isolated-own-build-screenshot-observation",
+  "current_candidate_boot_observed": true,
+  "new_runtime_build": false,
+  "system_state": "unreleased",
+  "owner_authorization": "I need a screenshot for each of these for use in a blog post.",
+  "authorization_scope": "One fresh isolated Snow128K boot and one fresh isolated VirtualBox boot for current-build screenshots; both now closed.",
+  "verification": {
+    "rom": {
+      "image_sha256": "95d7cdef447768586e2d8e9af18771afbe87f197c273269690650fc18e2fe542",
+      "image_size": 65536,
+      "rom_used": 46164,
+      "native_data_bss": 2168,
+      "workspace_begin": 32768,
+      "workspace_end": 78360,
+      "conservative_stack_bound": 10844,
+      "individual_frame_max": 604
+    },
+    "rom_manifest": {
+      "bytes": 29202,
+      "sha256": "ba3c3ff2e43826e23feb6b333db4bbe0c2ddb915270a7a21f1804e98215cfb0b"
+    },
+    "ci_status": "success",
+    "ci_url": "https://github.com/segaboy/ClasSICK-0.97/actions/runs/38922733567",
+    "ci_source_revision": "a8b6aae8e583b26d16012d5af330b2a2092c6c59",
+    "local_checks": 2217,
+    "ci_checks": 2735,
+    "native_input_fingerprints": 60,
+    "local_ci_rom_and_complete_manifest_equal": true
+  },
+  "boot_observation": {
+    "rom_sha256": "95d7cdef447768586e2d8e9af18771afbe87f197c273269690650fc18e2fe542",
+    "emulator": "Snow v1.5.0-317c188 Windows x86-64",
+    "executable_sha256": "32cf5285582c0f509e4f1ac38d86bfb90440bae9da43b7823bfb0841dea588e6",
+    "model": "Early128K",
+    "ram_bytes": 131072,
+    "started_utc": "2026-10-16T15:59:08.2399263Z",
+    "workspace": "fresh isolated profile; normal speed; RelativeHw; no media, shared directory, PRAM or serial bridge",
+    "observed": [
+      "shared monochrome monitor/C branding",
+      "APP/097",
+      "hollow rectangle",
+      "six completed phase marks",
+      "result0097",
+      "input0000"
+    ],
+    "session_closed": true,
+    "input_tested": false,
+    "human_input_qualified": false
+  },
+  "pc_observation": {
+    "payload_sha256": "3db614d71f8df9494bf3cf189f0d2be3a9adf401654ff92b17a9bcb01b468738",
+    "payload_bytes": 148992,
+    "raw_media_sha256": "2277c25884f0c731c91ebecdf42b288b0ce6eaed3374d1ae6981fc8ddd43a161",
+    "virtualbox": "7.2.16r174877",
+    "started_utc": "2026-10-16T16:00:47.2982837Z",
+    "configuration": "fresh x86-64 EFI VM;512MiB; one own disk; all NICs, shared folders, clipboard, drag-and-drop, USB and remote display absent/disabled",
+    "framebuffer": [
+      1024,
+      768
+    ],
+    "logical_canvas": [
+      512,
+      342
+    ],
+    "origin": [
+      256,
+      213
+    ],
+    "observed": [
+      "shared monochrome branding",
+      "APP/097",
+      "hollow rectangle",
+      "six completed phase marks",
+      "result0097",
+      "input0000",
+      "partway timer progress"
+    ],
+    "direct_framebuffer_capture": true,
+    "session_closed": true,
+    "input_tested": false
+  },
+  "screenshots": [
+    {
+      "file": "classick-mac-68k.png",
+      "bytes": 59631,
+      "sha256": "2e86f9439a3c5a99e8cbd261cbe0114a6b6ffc2bc44f3129eec29010cc09da9e",
+      "dimensions": [
+        985,
+        657
+      ]
+    },
+    {
+      "file": "classick-pc-x86.png",
+      "bytes": 4710,
+      "sha256": "b717d98cc09617a5ffc8d3d158f667c9eabc98ff4e43fe99ce6d96ea508f190b",
+      "dimensions": [
+        1024,
+        768
+      ]
+    },
+    {
+      "file": "classick-pc-x86-scene.png",
+      "bytes": 1939,
+      "sha256": "5e425931fcd1df9e3d0981234a9125d2559c4d406e586524309b3ac76bd91aaa",
+      "dimensions": [
+        512,
+        342
+      ]
+    },
+    {
+      "file": "classick-mac-68k-window.png",
+      "bytes": 75580,
+      "sha256": "16df72d9d2d43e3e697bb92da51210f7e0251b5de91116a4099287e8bcec5df8",
+      "dimensions": [
+        1002,
+        782
+      ]
+    },
+    {
+      "file": "classick-pc-x86-window.png",
+      "bytes": 53677,
+      "sha256": "4f8610a624084e317924eee566afdc5748b7909b124e3505e87779658cfbcba2",
+      "dimensions": [
+        1026,
+        854
+      ]
+    },
+    {
+      "file": "CAPTIONS.md",
+      "bytes": 1637,
+      "sha256": "f57749348a3319fd9cafe08aeec67dd38f10ce33102d6e61d4c24d77f114c852"
+    }
+  ],
+  "capture_notes": [
+    "Mac clean image is a crop of the actual scaled Snow framebuffer; no resampling or pixel synthesis.",
+    "PC screen is a direct VirtualBox framebuffer capture; optional512x342 crop.",
+    "Full emulator-window originals retained privately; screenshots are owner-requested blog artifacts, not historical reference pixels."
+  ],
+  "limits": [
+    "No human or automated input qualification in these sessions.",
+    "No complete System disk, desktop, general QuickDraw or original-System interoperability demonstrated.",
+    "No new physical/full128K/historical/parity/edition/B2 or human provenance certification.",
+    "Earlier build, compiler and trial records retain their original dated conditions."
+  ]
+}

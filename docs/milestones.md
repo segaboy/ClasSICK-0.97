@@ -1,5 +1,10 @@
 # Current milestones and release tracks
 
+2026-10-16: the current branded drawing ROM and native-PC candidate were
+captured from one isolated boot each for the owner's blog. APP/097, hollow
+rectangle and six phases are visible; PC512x342 is centered in1024x768. No input
+qualification. [Current boot observation](development/shared-product-scene-boot-evidence.md).
+
 2026-10-16: shared monochrome branding and512x342 canvas now compile for the drawing ROM, native-PC and hosted viewer, with exact hosted pixel parity. [Evidence](development/shared-product-scene-evidence.md); new-candidate target boots pending.
 
 As of 2026-10-16. This is the short current view; the [roadmap](roadmap.md)

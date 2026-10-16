@@ -2864,3 +2864,19 @@ follows from any license.
 - Equal logical pixels, compiler/hosted/native construction and later exact CI
   results are distinct from an authorized boot observation. Existing source,
   native-app, historical, physical, full128K/parity/B2/human gates persist.
+
+## SRC-0213 - Owner current-build blog screenshot request
+
+- Dean Howell,2026-10-16: "I need a screenshot for each of these for use in a blog post."
+- Fresh authority for one isolated own-build capture per platform (Snow128K and
+  VirtualBox x86-64); existing screenshot/VM source constraints persist. Both closed.
+- [Observation](../docs/development/shared-product-scene-boot-evidence.md). No
+  human input, reference media or future run authorized.
+
+## SRC-0214 - Lead shared-scene boot capture observation
+
+- Codex,2026-10-16; own original images and existing admitted black-box platforms.
+- Exact current ROM/EFI identities, APP/097, drawing/six phases and centered PC
+  presentation are recorded in the [observation](../docs/development/shared-product-scene-boot-evidence.json).
+- No emulator source, new manual or UART implementation/test body inspection;
+  screenshots only, no input or historical/physical/complete OS certification.
