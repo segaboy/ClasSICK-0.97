@@ -1,5 +1,11 @@
 # Project status
 
+2026-10-16: [ClasSICK ROM0.1.0-alpha.1](https://github.com/segaboy/ClasSICK-0.97/releases/tag/rom-v0.1.0-alpha.1)
+is published as an experimental prerelease. The four ROM/demo/source/checksum
+downloads match their local bytes and GitHub digests. System stays unreleased.
+[Receipt and limits](development/rom-alpha-release-evidence.md). No new build,
+trial, historical compatibility or physical/human qualification follows.
+
 [Current milestones](milestones.md) and [independent release tracks](../releases/README.md)
 provide the short overview. ROM `0.1.0-alpha.1` is unpublished; System is unreleased.
 

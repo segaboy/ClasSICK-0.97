@@ -1,6 +1,6 @@
 # Current milestones and release tracks
 
-As of 2026-10-15. This is the short current view; the [roadmap](roadmap.md)
+As of 2026-10-16. This is the short current view; the [roadmap](roadmap.md)
 retains founding M0.0-M1.0 criteria and dated history. Component milestones below
 describe capabilities, not release numbers or complete-edition certification.
 
@@ -8,7 +8,7 @@ describe capabilities, not release numbers or complete-edition certification.
 
 | Component | Version | State |
 | --- | --- | --- |
-| ClasSICK ROM | 0.1.0-alpha.1 | Draft candidate; no tag or published release |
+| ClasSICK ROM | 0.1.0-alpha.1 | Published experimental prerelease; rom-v0.1.0-alpha.1 |
 | ClasSICK System software | Unassigned | Unreleased |
 
 [Version authority, release process and compatibility matrix](../releases/README.md).

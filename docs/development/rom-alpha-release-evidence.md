@@ -63,3 +63,15 @@ and record actual tag target, release ID/date, asset IDs and digests in the rece
 The receipt's status distinguishes prepared from actually published. No published
 result is inferred from local files or an upload attempt. System stays unreleased;
 ordinary Git/HQ/wiki records only, no OneNote or automated future publication.
+
+## Recorded publication - passed
+
+[The alpha](https://github.com/segaboy/ClasSICK-0.97/releases/tag/rom-v0.1.0-alpha.1)
+was published 2026-10-16 with `draft=false`, `prerelease=true`, `latest=false`.
+Its annotated tag points to `06dd25ef7e139f947d50710db2acc8b841cb68ad`.
+All four draft downloads and all four public downloads are byte-identical to
+the local allowlist; GitHub's reported SHA-256 digests and sizes also match.
+The publication receipt contains the release ID, actual publication timestamp,
+tag object/target and every asset's ID, URL, size and checksum. All downloads
+total 1,641,857 bytes; the matching source accounts for 1,519,556 of those bytes.
+System remains unreleased. This closes distribution verification only.

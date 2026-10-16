@@ -14,7 +14,7 @@ our implementation's development releases. R-001's historical identity remains o
 
 | Component | Current development version | Release state | Tag format |
 | --- | --- | --- | --- |
-| ClasSICK ROM | 0.1.0-alpha.1 | Experimental alpha; publication state in receipt | rom-v0.1.0-alpha.1 |
+| ClasSICK ROM | 0.1.0-alpha.1 | Published experimental prerelease, 2026-10-16 | rom-v0.1.0-alpha.1 |
 | ClasSICK System software | Unassigned | Unreleased | system-vMAJOR.MINOR.PATCH |
 
 Versions use MAJOR.MINOR.PATCH, optionally followed by alpha.N, beta.N or rc.N.

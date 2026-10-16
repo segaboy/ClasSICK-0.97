@@ -6,13 +6,13 @@
     "rom": {
       "name": "ClasSICK ROM",
       "version": "0.1.0-alpha.1",
-      "state": "draft",
+      "state": "prerelease",
       "tag_prefix": "rom-v",
       "candidate_record": "releases/rom/0.1.0-alpha.1.json",
       "publication_record": "releases/rom/0.1.0-alpha.1-publication.json",
       "release_notes": "releases/rom/0.1.0-alpha.1.md",
       "changelog": "releases/rom/CHANGELOG.md",
-      "latest_published_version": null
+      "latest_published_version": "0.1.0-alpha.1"
     },
     "system": {
       "name": "ClasSICK System software",

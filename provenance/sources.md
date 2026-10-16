@@ -2752,3 +2752,6 @@ follows from any license.
 - Exact archive membership, source/native fingerprints, notices, deterministic
   packaging and uploaded-asset checks are engineering review. No new historical
   result or certification of human clean-room review; older gates remain open.
+- Published 2026-10-16 as an experimental prerelease. Draft and public downloads
+  match all four local assets and GitHub digests; annotated tag target checked.
+  Exact release/asset identities are in the linked publication receipt.

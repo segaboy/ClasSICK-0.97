@@ -1,7 +1,9 @@
 # ClasSICK 0.97
 
 [Current milestones](docs/milestones.md) · [ROM and System release tracks](releases/README.md).
-ROM `0.1.0-alpha.1` is a draft; the System has no release yet.
+[ROM `0.1.0-alpha.1`](https://github.com/segaboy/ClasSICK-0.97/releases/tag/rom-v0.1.0-alpha.1)
+is our first experimental prerelease; the System has no release yet.
+[Snow setup and rebuilding](releases/rom/TRYING-0.1.0-alpha.1.md).
 
 2026-10-15 redraw refinement: byte fills and counter-only updates preserve12 original frames exactly. 2127 local and2625 CI checks and original ROM twins pass. One freshly authorized Snow trial shows the complete result and counter updates without observed full-scene redraw; automated input delivery remains unqualified. [Evidence](docs/development/loaded-app-redraw-evidence.md). Earlier checkpoints retain dated results.
 
