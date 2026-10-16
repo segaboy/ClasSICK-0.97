@@ -32,7 +32,7 @@ jobs:
       - name: Verify hosted core, loader, exceptions, devices, boot media and unloaded fault fixtures
         shell: powershell
         run: .\scripts\Verify-LoadedApp.ps1 -BuildRoot build\media-verification -Sanitizers
-      - name: Audit fixed-port drawing objects
+      - name: Audit shared product scene and drawing objects
         shell: powershell
         run: .\scripts\Verify-DrawingAppObjects.ps1 -BuildRoot build\drawing-verification
 

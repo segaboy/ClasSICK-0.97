@@ -32,8 +32,8 @@ def main():
     program_hex='204d213c5a5a5a5a70614e75';specification='SPEC-0035';profile='first-loaded-rom-app-v1'
     if a.drawing:
         sources=tuple('platform/mac128k/drawing-entry.c' if s=='platform/mac128k/loaded-entry.c' else s for s in sources)
-        sources+=('apps/drawing-rom-app/probe.c','apps/drawing-rom-app/scene.c')
-        headers+=('apps/drawing-rom-app/probe.h','apps/drawing-rom-app/program.S','docs/specifications/SPEC-0036-loaded-rectangle-calls.md')
+        sources+=('apps/drawing-rom-app/probe.c','apps/drawing-rom-app/scene.c','apps/product-scene/scene.c')
+        headers+=('apps/product-scene/scene.h','docs/specifications/SPEC-0037-shared-product-scene.md','apps/drawing-rom-app/probe.h','apps/drawing-rom-app/program.S','docs/specifications/SPEC-0036-loaded-rectangle-calls.md')
         program_source='apps/drawing-rom-app/program.S'
         program_hex='204d213c00380078213c000800082f08a8a2204d213c00300070213c001000102f08a8a370614e75'
         specification='SPEC-0036';profile='loaded-rectangles-v1'

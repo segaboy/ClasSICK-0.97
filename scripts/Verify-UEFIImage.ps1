@@ -21,13 +21,19 @@ try {
         'platform/pc/acpi.c','platform/pc/pmtimer.c','platform/pc/x64/io.S',
         'platform/pc/ps2.c','platform/uefi/keyboard.c','core/input/input.c','platform/pc/x64/keyboard-io.S',
         'platform/pc/uart.c','platform/uefi/uart.c','core/services/traps.c','apps/service-probe/probe.c',
-        'core/cpu/m68k.c','apps/aline-probe/probe.c')
+        'core/cpu/m68k.c','apps/aline-probe/probe.c',
+        'apps/product-scene/scene.c','apps/drawing-rom-app/probe.c','apps/drawing-rom-app/scene.c',
+        'apps/loaded-rom-app/probe.c','apps/loaded-rom-app/scene.c','apps/rom-scene/scene.c',
+        'core/memory/guest.c','core/memory/manager.c','core/memory/lifecycle.c',
+        'formats/resourcefork/reader.c','personality/system1/code-preflight.c',
+        'personality/system1/resources.c','personality/system1/code-image.c',
+        'personality/system1/code-run.c','personality/system1/quickdraw-rects.c','core/cpu/m68k-bus.c')
     # SPEC-0009 objects permit only these original project imports.
     $allowedImports=@{8='cs_surface_init';
-        9='cs_surface_init,cs_surface_fill,cs_arena_alloc,cs_fb_init,cs_fb_present';
+        9='cs_surface_init,cs_arena_alloc,cs_fb_init,cs_fb_present,cs_product_scene,cs_service_probe,cs_drawing_app_probe';
         10='cs_uefi_check_framebuffer,cs_fb_init,cs_arena_init,cs_boot_scene_prepare,cs_boot_scene_draw,cs_uefi_check_map,cs_acpi_find_pm_timer,cs_pmtimer_init,cs_pmtimer_sample,cs_pmtimer_time';
         14='cs_input_push';
-        15='cs_ps2_begin,cs_ps2_poll,cs_native_read,cs_uefi_check_map,cs_acpi_find_pm_timer,cs_acpi_8042,cs_uefi_check_framebuffer,cs_fb_init,cs_arena_init,cs_arena_alloc,cs_boot_scene_prepare,cs_boot_scene_draw,cs_input_init,cs_input_pop,cs_pmtimer_init,cs_pmtimer_sample,cs_pmtimer_time';
+        15='cs_ps2_begin,cs_ps2_poll,cs_native_read,cs_uefi_check_map,cs_acpi_find_pm_timer,cs_acpi_8042,cs_uefi_check_framebuffer,cs_fb_init,cs_arena_init,cs_arena_alloc,cs_boot_scene_prepare,cs_boot_scene_draw_input,cs_input_init,cs_input_pop,cs_pmtimer_init,cs_pmtimer_sample,cs_pmtimer_time';
         19='cs_uart_begin,cs_uart_enqueue,cs_uart_finish,cs_uart_poll,cs_native_keyboard_observed,cs_acpi_find_pm_timer,cs_native_read,cs_pmtimer_init,cs_pmtimer_sample';
         21='cs_trap_init,cs_trap_call,cs_trap_direct';22='cs_trap_call';23='cs_trap_get,cs_trap_set,cs_m68k_step'}
     $common=@('-m64','-Wall','-Wextra','-Wpedantic','-Werror','-Wconversion','-Wsign-conversion',

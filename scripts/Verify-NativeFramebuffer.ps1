@@ -23,7 +23,7 @@ try {
     & (Join-Path $PSScriptRoot 'Enter-DevEnvironment.ps1')
     $clang=(Get-Command clang).Source; $nm=(Get-Command llvm-nm).Source
     $portable=@(@('platform/pc/framebuffer.c','cs_surface_init'),
-        @('apps/boot-scene/scene.c','cs_surface_init,cs_surface_fill,cs_arena_alloc,cs_fb_init,cs_fb_present'))
+        @('apps/boot-scene/scene.c','cs_surface_init,cs_arena_alloc,cs_fb_init,cs_fb_present,cs_product_scene,cs_service_probe,cs_drawing_app_probe'))
     foreach($target in @('aarch64-none-elf','aarch64_be-none-elf')) {
         foreach($item in $portable) {
             $object=Join-Path $BuildRoot ($target+'-'+[IO.Path]::GetFileNameWithoutExtension($item[0])+'.o')

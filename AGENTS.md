@@ -1,5 +1,18 @@
 # ClasSICK 0.97 working instructions
 
+Current owner display scope (2026-10-16, SRC-0209/0210/0211): implement one
+portable monochrome scene and supplied-brand approximation for drawing-ROM,
+native-PC and hosted Windows targets. All PC work targets a logical512x342
+image, centered in the reported framebuffer, until the owner says otherwise.
+640x480 is a checked case, not a mandatory hardware mode. SPEC-0037 / ADR-0042 /
+IMPL-0041 / TEST-0045; ordinary original code/tests/compiler/CI/builds and Git/HQ/
+wiki records. Existing own bootstrap/native code and68k fixture are permitted;
+native x86 application/SDK gate stays closed. Preserve24 originals/copies, UART
+bodies, old records and released alpha assets/tag. No new emulator/VM/reference
+trial without fresh explicit go-ahead; no agents/chats/automation/OneNote.
+[Standing display requirement](docs/development/display-target.md).
+Earlier drawing trials are closed and retain their exact earlier images.
+
 Completed drawing trial (2026-10-16, SRC-0207/0208): owner said
 "Yes—run the isolated drawing-ROM trial". One isolated own-ROM Snow128K cold
 boot displays APP/097, hollow rectangle and six phases; counter0000/0001 and a

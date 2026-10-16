@@ -1,0 +1,1257 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-16",
+  "specification": "SPEC-0037",
+  "implementation": "IMPL-0041",
+  "test": "TEST-0045",
+  "sources": [
+    "SRC-0209",
+    "SRC-0210",
+    "SRC-0211",
+    "SRC-0212"
+  ],
+  "compiled_source_revision": null,
+  "classification": "original-hosted-parity-and-native-construction",
+  "logical_canvas": [
+    512,
+    342
+  ],
+  "pc_requirement": "All PC work targets512x342 until the owner changes it; centered in reported framebuffer.",
+  "reference_artwork": {
+    "bytes": 1016,
+    "sha256": "9d00ccc955041fc853622f39a6981db62f44530d1ea5f7ddb520b9b1d3d36251",
+    "usage": "Owner explicitly requests monochrome approximation; original stays outside Git.",
+    "dimensions": [
+      49,
+      56
+    ]
+  },
+  "new_emulator_run": false,
+  "current_candidate_boot_observed": false,
+  "new_release": false,
+  "system_state": "unreleased",
+  "matrix": {
+    "profiles": [
+      {
+        "profile": "clang-hosted/debug-a",
+        "status": "passed",
+        "checks": 259
+      },
+      {
+        "profile": "clang-hosted/debug-b",
+        "status": "passed",
+        "checks": 259
+      },
+      {
+        "profile": "clang-hosted/release",
+        "status": "passed",
+        "checks": 259
+      },
+      {
+        "profile": "clang-hosted/i686",
+        "status": "passed",
+        "checks": 232
+      },
+      {
+        "profile": "clang-hosted/sanitized",
+        "status": "passed",
+        "checks": 259
+      },
+      {
+        "profile": "gcc-debug-a",
+        "status": "passed",
+        "checks": 244
+      },
+      {
+        "profile": "gcc-debug-b",
+        "status": "passed",
+        "checks": 244
+      },
+      {
+        "profile": "gcc-release",
+        "status": "passed",
+        "checks": 244
+      },
+      {
+        "profile": "gcc-i686",
+        "status": "passed",
+        "checks": 217
+      }
+    ],
+    "emulator_run": false,
+    "windows_adapters": "Clang profiles only",
+    "hosted_twins": {
+      "clang classick_product_scene_tests.exe": "44edc17c82c2771d2e08bf857331e4ffe95db8bda7f81e2787caa4d889885010",
+      "clang classick_surface_demo.exe": "f267d9be22ef305ce693871f3add2807b1f38c5bc0bbaced1ca78773a26fce12",
+      "gcc classick_product_scene_tests.exe": "7fbdb68a2cb89be8c7f1824ee9a215f92147759e9eb32b57596dbc2d0ad154ae"
+    },
+    "checks": 2217
+  },
+  "object_audits": 50,
+  "pc": {
+    "fault_probe": "none",
+    "images": [
+      {
+        "case": "clang-64-O0",
+        "sha256": "9d4d5241765b416c844c6e8d3e451fabd2d2e57e9fea08095c4c4d182536645b",
+        "size_bytes": 208896,
+        "image_size": 221184,
+        "relocations": 3,
+        "status": "passed-unloaded"
+      },
+      {
+        "case": "clang-64-O2",
+        "sha256": "3db614d71f8df9494bf3cf189f0d2be3a9adf401654ff92b17a9bcb01b468738",
+        "size_bytes": 148992,
+        "image_size": 163840,
+        "relocations": 3,
+        "status": "passed-unloaded"
+      }
+    ],
+    "image_rejections": 27,
+    "profile_rejections": 0,
+    "missing_transition_controls": 1,
+    "missing_exceptions_controls": 1,
+    "missing_presenter_controls": 1,
+    "missing_acpi_controls": 1,
+    "missing_ps2_controls": 1,
+    "missing_keyboard_controls": 1,
+    "missing_input_controls": 1,
+    "missing_byte_io_controls": 1,
+    "missing_uart_controls": 1,
+    "missing_native_uart_controls": 1,
+    "missing_service_controls": 1,
+    "missing_service_probe_controls": 1,
+    "missing_m68k_controls": 1,
+    "missing_aline_probe_controls": 1,
+    "payload": "payload/EFI/BOOT/BOOTX64.EFI",
+    "payload_kind": "directory-tree-not-disk",
+    "loaded": false
+  },
+  "rom": {
+    "schema_version": 1,
+    "specification": "SPEC-0036",
+    "profile": "loaded-rectangles-v1",
+    "compiler": "m68k-linux-gnu-gcc-13 (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0",
+    "profiles": [
+      {
+        "optimization": "-Os",
+        "image_sha256": "95d7cdef447768586e2d8e9af18771afbe87f197c273269690650fc18e2fe542",
+        "image_size": 65536,
+        "rom_used": 46164,
+        "native_data_bss": 2168,
+        "workspace_begin": 32768,
+        "workspace_end": 78360,
+        "native_stack_base": 8448,
+        "native_stack_top": 32768,
+        "conservative_stack_bound": 10844,
+        "individual_frame_max": 604,
+        "stack_frames": [
+          {
+            "function": "divide",
+            "bytes": 20
+          },
+          {
+            "function": "__mulsi3",
+            "bytes": 0
+          },
+          {
+            "function": "__udivsi3",
+            "bytes": 16
+          },
+          {
+            "function": "__umodsi3",
+            "bytes": 16
+          },
+          {
+            "function": "__divsi3",
+            "bytes": 24
+          },
+          {
+            "function": "memcpy",
+            "bytes": 0
+          },
+          {
+            "function": "cs_guest_validate",
+            "bytes": 28
+          },
+          {
+            "function": "cs_guest_window",
+            "bytes": 40
+          },
+          {
+            "function": "operand",
+            "bytes": 24
+          },
+          {
+            "function": "cs_guest_read",
+            "bytes": 36
+          },
+          {
+            "function": "cs_guest_write",
+            "bytes": 40
+          },
+          {
+            "function": "read32",
+            "bytes": 0
+          },
+          {
+            "function": "write32",
+            "bytes": 0
+          },
+          {
+            "function": "compact",
+            "bytes": 28
+          },
+          {
+            "function": "fits",
+            "bytes": 16
+          },
+          {
+            "function": "configuration",
+            "bytes": 56
+          },
+          {
+            "function": "copy_bytes",
+            "bytes": 0
+          },
+          {
+            "function": "commit_moves",
+            "bytes": 72
+          },
+          {
+            "function": "gap.constprop",
+            "bytes": 40
+          },
+          {
+            "function": "cs_mm_init",
+            "bytes": 120
+          },
+          {
+            "function": "cs_mm_execute",
+            "bytes": 604
+          },
+          {
+            "function": "read32",
+            "bytes": 0
+          },
+          {
+            "function": "write32",
+            "bytes": 0
+          },
+          {
+            "function": "native_valid",
+            "bytes": 0
+          },
+          {
+            "function": "overlap",
+            "bytes": 4
+          },
+          {
+            "function": "copy_report",
+            "bytes": 0
+          },
+          {
+            "function": "report",
+            "bytes": 0
+          },
+          {
+            "function": "object_span",
+            "bytes": 12
+          },
+          {
+            "function": "current_plan",
+            "bytes": 0
+          },
+          {
+            "function": "output_safe",
+            "bytes": 72
+          },
+          {
+            "function": "envelope",
+            "bytes": 76
+          },
+          {
+            "function": "guest_overlap",
+            "bytes": 0
+          },
+          {
+            "function": "integrity",
+            "bytes": 48
+          },
+          {
+            "function": "preflight",
+            "bytes": 96
+          },
+          {
+            "function": "cs_life_init",
+            "bytes": 48
+          },
+          {
+            "function": "cs_life_admit",
+            "bytes": 0
+          },
+          {
+            "function": "cs_life_manager_call",
+            "bytes": 32
+          },
+          {
+            "function": "cs_life_prepare",
+            "bytes": 168
+          },
+          {
+            "function": "cs_life_commit",
+            "bytes": 188
+          },
+          {
+            "function": "cs_life_cancel",
+            "bytes": 32
+          },
+          {
+            "function": "u16",
+            "bytes": 0
+          },
+          {
+            "function": "u32",
+            "bytes": 4
+          },
+          {
+            "function": "record",
+            "bytes": 48
+          },
+          {
+            "function": "cs_rf_open",
+            "bytes": 192
+          },
+          {
+            "function": "cs_rf_find",
+            "bytes": 104
+          },
+          {
+            "function": "valid",
+            "bytes": 0
+          },
+          {
+            "function": "overlap",
+            "bytes": 4
+          },
+          {
+            "function": "copy",
+            "bytes": 0
+          },
+          {
+            "function": "be32",
+            "bytes": 0
+          },
+          {
+            "function": "resource_valid",
+            "bytes": 4
+          },
+          {
+            "function": "backing_alias",
+            "bytes": 100
+          },
+          {
+            "function": "find",
+            "bytes": 48
+          },
+          {
+            "function": "intersects",
+            "bytes": 0
+          },
+          {
+            "function": "inactive",
+            "bytes": 0
+          },
+          {
+            "function": "aligned.constprop",
+            "bytes": 12
+          },
+          {
+            "function": "envelope",
+            "bytes": 340
+          },
+          {
+            "function": "cs_code_inspect",
+            "bytes": 112
+          },
+          {
+            "function": "cs_code_check_layout",
+            "bytes": 184
+          },
+          {
+            "function": "valid",
+            "bytes": 0
+          },
+          {
+            "function": "overlap",
+            "bytes": 4
+          },
+          {
+            "function": "bytes_copy",
+            "bytes": 0
+          },
+          {
+            "function": "clear",
+            "bytes": 0
+          },
+          {
+            "function": "read32",
+            "bytes": 0
+          },
+          {
+            "function": "identity",
+            "bytes": 4
+          },
+          {
+            "function": "initialize_report",
+            "bytes": 16
+          },
+          {
+            "function": "fault",
+            "bytes": 12
+          },
+          {
+            "function": "resident_report",
+            "bytes": 36
+          },
+          {
+            "function": "publish_ticket",
+            "bytes": 24
+          },
+          {
+            "function": "cached_valid",
+            "bytes": 56
+          },
+          {
+            "function": "ownership",
+            "bytes": 104
+          },
+          {
+            "function": "aligned.constprop",
+            "bytes": 12
+          },
+          {
+            "function": "envelope",
+            "bytes": 240
+          },
+          {
+            "function": "call.isra",
+            "bytes": 72
+          },
+          {
+            "function": "dispose.isra",
+            "bytes": 48
+          },
+          {
+            "function": "topology",
+            "bytes": 12
+          },
+          {
+            "function": "cs_res_init",
+            "bytes": 56
+          },
+          {
+            "function": "cs_res_execute",
+            "bytes": 256
+          },
+          {
+            "function": "cs_res_external_admit",
+            "bytes": 20
+          },
+          {
+            "function": "zero",
+            "bytes": 0
+          },
+          {
+            "function": "copy",
+            "bytes": 0
+          },
+          {
+            "function": "equal",
+            "bytes": 0
+          },
+          {
+            "function": "overlap",
+            "bytes": 4
+          },
+          {
+            "function": "u32",
+            "bytes": 0
+          },
+          {
+            "function": "physical_alias",
+            "bytes": 72
+          },
+          {
+            "function": "same_inventory",
+            "bytes": 40
+          },
+          {
+            "function": "status",
+            "bytes": 0
+          },
+          {
+            "function": "fault",
+            "bytes": 28
+          },
+          {
+            "function": "table_byte",
+            "bytes": 8
+          },
+          {
+            "function": "views",
+            "bytes": 44
+          },
+          {
+            "function": "owned",
+            "bytes": 52
+          },
+          {
+            "function": "all_owned",
+            "bytes": 28
+          },
+          {
+            "function": "binding",
+            "bytes": 28
+          },
+          {
+            "function": "intersects",
+            "bytes": 0
+          },
+          {
+            "function": "nonexec",
+            "bytes": 80
+          },
+          {
+            "function": "acknowledged",
+            "bytes": 100
+          },
+          {
+            "function": "world_valid.constprop",
+            "bytes": 48
+          },
+          {
+            "function": "aligned.constprop",
+            "bytes": 0
+          },
+          {
+            "function": "inactive",
+            "bytes": 0
+          },
+          {
+            "function": "capacity_ok.isra",
+            "bytes": 24
+          },
+          {
+            "function": "manager_call.isra",
+            "bytes": 44
+          },
+          {
+            "function": "unit.isra",
+            "bytes": 4
+          },
+          {
+            "function": "world_clear",
+            "bytes": 52
+          },
+          {
+            "function": "protect",
+            "bytes": 40
+          },
+          {
+            "function": "add_span",
+            "bytes": 24
+          },
+          {
+            "function": "map_safe",
+            "bytes": 40
+          },
+          {
+            "function": "session_safe",
+            "bytes": 32
+          },
+          {
+            "function": "inventory_safe",
+            "bytes": 32
+          },
+          {
+            "function": "life_safe",
+            "bytes": 40
+          },
+          {
+            "function": "resource_safe",
+            "bytes": 44
+          },
+          {
+            "function": "execution_safe",
+            "bytes": 132
+          },
+          {
+            "function": "layout",
+            "bytes": 68
+          },
+          {
+            "function": "cs_image_init",
+            "bytes": 144
+          },
+          {
+            "function": "cs_image_execute",
+            "bytes": 208
+          },
+          {
+            "function": "cs_image_external_admit",
+            "bytes": 12
+          },
+          {
+            "function": "cs_image_execution_native",
+            "bytes": 44
+          },
+          {
+            "function": "cs_image_execution_rect_native",
+            "bytes": 68
+          },
+          {
+            "function": "cs_image_execution_retire_native",
+            "bytes": 60
+          },
+          {
+            "function": "cs_image_execution_integrity",
+            "bytes": 68
+          },
+          {
+            "function": "clear",
+            "bytes": 0
+          },
+          {
+            "function": "frame_copy",
+            "bytes": 12
+          },
+          {
+            "function": "inside",
+            "bytes": 0
+          },
+          {
+            "function": "opcode",
+            "bytes": 40
+          },
+          {
+            "function": "rectangle_directory",
+            "bytes": 28
+          },
+          {
+            "function": "check",
+            "bytes": 48
+          },
+          {
+            "function": "run",
+            "bytes": 432
+          },
+          {
+            "function": "cs_image_run",
+            "bytes": 20
+          },
+          {
+            "function": "cs_image_run_rectangles",
+            "bytes": 4
+          },
+          {
+            "function": "cs_image_run_retire",
+            "bytes": 140
+          },
+          {
+            "function": "permit",
+            "bytes": 40
+          },
+          {
+            "function": "stack_span",
+            "bytes": 8
+          },
+          {
+            "function": "add_offset",
+            "bytes": 4
+          },
+          {
+            "function": "span",
+            "bytes": 4
+          },
+          {
+            "function": "envelope",
+            "bytes": 136
+          },
+          {
+            "function": "preflight_store",
+            "bytes": 44
+          },
+          {
+            "function": "read_value",
+            "bytes": 40
+          },
+          {
+            "function": "extension",
+            "bytes": 32
+          },
+          {
+            "function": "effective",
+            "bytes": 12
+          },
+          {
+            "function": "target",
+            "bytes": 28
+          },
+          {
+            "function": "step",
+            "bytes": 224
+          },
+          {
+            "function": "cs_m68k_bus_step_options",
+            "bytes": 40
+          },
+          {
+            "function": "cs_m68k_bus_step_bounded",
+            "bytes": 40
+          },
+          {
+            "function": "cs_m68k_bus_step",
+            "bytes": 20
+          },
+          {
+            "function": "cs_m68k_bus_step_guarded",
+            "bytes": 64
+          },
+          {
+            "function": "cs_m68k_bus_step_admitted",
+            "bytes": 76
+          },
+          {
+            "function": "cs_m68k_bus_guard_validate",
+            "bytes": 24
+          },
+          {
+            "function": "cs_mac_image_crc",
+            "bytes": 8
+          },
+          {
+            "function": "cs_mac_via_init",
+            "bytes": 40
+          },
+          {
+            "function": "cs_mac_loop_begin",
+            "bytes": 0
+          },
+          {
+            "function": "cs_mac_loop_poll",
+            "bytes": 24
+          },
+          {
+            "function": "prepare",
+            "bytes": 112
+          },
+          {
+            "function": "cs_loaded_app_prepare",
+            "bytes": 16
+          },
+          {
+            "function": "cs_loaded_app_prepare_source",
+            "bytes": 4
+          },
+          {
+            "function": "cs_loaded_app_prepare_program",
+            "bytes": 392
+          },
+          {
+            "function": "cs_loaded_app_probe",
+            "bytes": 48
+          },
+          {
+            "function": "rect",
+            "bytes": 40
+          },
+          {
+            "function": "cs_loaded_app_scene",
+            "bytes": 92
+          },
+          {
+            "function": "cs_loaded_app_scene_input",
+            "bytes": 100
+          },
+          {
+            "function": "cs_qd_rect_s16",
+            "bytes": 0
+          },
+          {
+            "function": "cs_qd_rect",
+            "bytes": 40
+          },
+          {
+            "function": "cs_drawing_app_prepare.part.0",
+            "bytes": 416
+          },
+          {
+            "function": "cs_drawing_app_prepare",
+            "bytes": 8
+          },
+          {
+            "function": "cs_drawing_app_probe",
+            "bytes": 72
+          },
+          {
+            "function": "cs_drawing_app_scene",
+            "bytes": 44
+          },
+          {
+            "function": "validate",
+            "bytes": 36
+          },
+          {
+            "function": "fill",
+            "bytes": 84
+          },
+          {
+            "function": "glyph",
+            "bytes": 56
+          },
+          {
+            "function": "number",
+            "bytes": 60
+          },
+          {
+            "function": "cs_product_scene",
+            "bytes": 192
+          },
+          {
+            "function": "cs_product_scene_input",
+            "bytes": 76
+          },
+          {
+            "function": "read_reg",
+            "bytes": 0
+          },
+          {
+            "function": "write_reg",
+            "bytes": 0
+          },
+          {
+            "function": "cs_mac_line_a",
+            "bytes": 56
+          },
+          {
+            "function": "cs_mac_main",
+            "bytes": 136
+          },
+          {
+            "function": "box",
+            "bytes": 40
+          },
+          {
+            "function": "glyph",
+            "bytes": 56
+          },
+          {
+            "function": "number.constprop",
+            "bytes": 60
+          },
+          {
+            "function": "cs_mac_scene",
+            "bytes": 116
+          },
+          {
+            "function": "validate",
+            "bytes": 28
+          },
+          {
+            "function": "cs_surface_init",
+            "bytes": 52
+          },
+          {
+            "function": "cs_surface_fill",
+            "bytes": 84
+          },
+          {
+            "function": "cs_surface_clear",
+            "bytes": 44
+          },
+          {
+            "function": "rom_address.isra",
+            "bytes": 0
+          },
+          {
+            "function": "executable",
+            "bytes": 16
+          },
+          {
+            "function": "config_valid",
+            "bytes": 28
+          },
+          {
+            "function": "state_valid",
+            "bytes": 4
+          },
+          {
+            "function": "cs_trap_decode",
+            "bytes": 8
+          },
+          {
+            "function": "cs_trap_init",
+            "bytes": 12
+          },
+          {
+            "function": "cs_trap_get",
+            "bytes": 24
+          },
+          {
+            "function": "cs_trap_set",
+            "bytes": 24
+          },
+          {
+            "function": "intrinsic",
+            "bytes": 24
+          },
+          {
+            "function": "cs_trap_call",
+            "bytes": 32
+          },
+          {
+            "function": "cs_trap_direct",
+            "bytes": 32
+          },
+          {
+            "function": "cs_service_probe",
+            "bytes": 156
+          },
+          {
+            "function": "span",
+            "bytes": 4
+          },
+          {
+            "function": "contains",
+            "bytes": 4
+          },
+          {
+            "function": "cs_m68k_aline",
+            "bytes": 28
+          },
+          {
+            "function": "cs_m68k_step",
+            "bytes": 60
+          },
+          {
+            "function": "cs_aline_probe",
+            "bytes": 212
+          }
+        ],
+        "symbols": {
+          "0.o": 0,
+          "cs_mac_probe_handler": 4194668,
+          "runtime.c": 0,
+          "divide": 4194694,
+          "loop.c": 0,
+          "drawing-entry.c": 0,
+          "read_reg": 4195300,
+          "write_reg": 4195320,
+          "cs_mac_services": 2844,
+          "workspace": 32768,
+          "surface.c": 0,
+          "validate": 4237690,
+          "traps.c": 0,
+          "rom_address.isra.0": 4196714,
+          "executable": 4196750,
+          "config_valid": 4196818,
+          "state_valid": 4197000,
+          "intrinsic": 4197540,
+          "probe.c": 0,
+          "m68k.c": 0,
+          "span": 4230726,
+          "contains": 4198698,
+          "program": 4239898,
+          "guest.c": 0,
+          "operand": 4200702,
+          "manager.c": 0,
+          "read32": 4213298,
+          "write32": 4201002,
+          "compact": 4201012,
+          "fits": 4201256,
+          "configuration": 4201404,
+          "globals": 4239936,
+          "copy_bytes": 4201680,
+          "commit_moves": 4201728,
+          "gap.constprop.0": 4201936,
+          "lifecycle.c": 0,
+          "overlap": 4214456,
+          "report": 4204640,
+          "integrity": 4204750,
+          "reader.c": 0,
+          "u16": 4205294,
+          "u32": 4214524,
+          "record": 4205372,
+          "code-preflight.c": 0,
+          "valid": 4213262,
+          "copy": 4214390,
+          "be32": 4207840,
+          "resource_valid": 4207848,
+          "backing_alias": 4207970,
+          "find": 4208334,
+          "intersects": 4216122,
+          "inactive": 4217560,
+          "aligned.constprop.0": 4217528,
+          "envelope": 4230772,
+          "resources.c": 0,
+          "identity": 4213306,
+          "cached_valid": 4213364,
+          "ownership": 4213606,
+          "topology": 4214032,
+          "code-image.c": 0,
+          "zero": 4214370,
+          "equal": 4214418,
+          "physical_alias": 4214532,
+          "same_inventory": 4214840,
+          "status": 4215112,
+          "fault": 4215222,
+          "table_byte": 4215294,
+          "views": 4215424,
+          "owned": 4215596,
+          "all_owned": 4215850,
+          "binding": 4215928,
+          "nonexec": 4216182,
+          "acknowledged": 4216508,
+          "world_valid.constprop.0": 4217406,
+          "capacity_ok.isra.0": 4217672,
+          "manager_call.isra.0": 4217822,
+          "unit.isra.0": 4217954,
+          "world_clear": 4218008,
+          "protect": 4218134,
+          "add_span": 4218224,
+          "map_safe": 4218290,
+          "session_safe": 4218474,
+          "inventory_safe": 4218658,
+          "life_safe": 4218790,
+          "resource_safe": 4219196,
+          "execution_safe": 4219468,
+          "layout": 4219938,
+          "code-run.c": 0,
+          "clear": 4226724,
+          "frame_copy": 4226744,
+          "inside": 4226794,
+          "opcode": 4226844,
+          "rectangle_directory": 4226972,
+          "check": 4227076,
+          "run": 4227864,
+          "m68k-bus.c": 0,
+          "permit": 4230488,
+          "stack_span": 4230586,
+          "add_offset": 4230666,
+          "preflight_store": 4231304,
+          "read_value": 4231466,
+          "extension": 4231578,
+          "effective": 4231634,
+          "target": 4231758,
+          "step": 4231882,
+          "prepare": 4235024,
+          "app_token": 4239960,
+          "scene.c": 0,
+          "rect": 4236024,
+          "digits.0": 4239968,
+          "quickdraw-rects.c": 0,
+          "cs_qd_rect_s16": 4236494,
+          "cs_drawing_app_prepare.part.0": 4236860,
+          "source": 4239988,
+          "fill": 4237824,
+          "glyph": 4238172,
+          "number": 4238270,
+          "digits": 4240422,
+          "title": 4240442,
+          "cs_life_init": 4204850,
+          "cs_surface_fill": 4196390,
+          "cs_image_execution_rect_native": 4225700,
+          "cs_mac_aline_program": 4200076,
+          "cs_trap_set": 4197440,
+          "__data_load": 4240468,
+          "cs_guest_read": 4200808,
+          "cs_trap_get": 4197336,
+          "cs_surface_init": 4196294,
+          "cs_trap_direct": 4197916,
+          "cs_image_execution_integrity": 4226016,
+          "cs_loaded_app_scene_input": 4236204,
+          "cs_m68k_bus_guard_validate": 4234978,
+          "memcpy": 4194868,
+          "__rom_code_end": 4240468,
+          "cs_mm_execute": 4202380,
+          "__udivsi3": 4194804,
+          "cs_mac_line_a": 4195342,
+          "cs_code_check_layout": 4211432,
+          "cs_trap_init": 4197208,
+          "__rom_end": 4240468,
+          "__bss_end": 4984,
+          "cs_mac_fault": 4194676,
+          "cs_image_run_retire": 4230072,
+          "cs_aline_probe": 4199472,
+          "__loaded_app_start": 32768,
+          "cs_image_init": 4220338,
+          "cs_drawing_app_program": 4240382,
+          "cs_mac_probe": 4194664,
+          "__umodsi3": 4194834,
+          "cs_m68k_bus_step_admitted": 4234826,
+          "cs_trap_decode": 4197040,
+          "cs_image_external_admit": 4225474,
+          "cs_image_execution_retire_native": 4225864,
+          "cs_qd_rect": 4236518,
+          "__data_end": 2816,
+          "__mulsi3": 4194774,
+          "cs_guest_window": 4200518,
+          "cs_drawing_app_probe": 4237050,
+          "__loaded_app_end": 78360,
+          "cs_mac_image_crc": 4194898,
+          "cs_rf_find": 4207052,
+          "cs_mac_loaded_result": 2816,
+          "__bss_start": 2816,
+          "cs_mac_loop_begin": 4195098,
+          "cs_mm_init": 4202104,
+          "cs_m68k_step": 4198938,
+          "cs_loaded_app_prepare_source": 4235960,
+          "cs_mac_main": 4195486,
+          "cs_service_probe": 4198056,
+          "cs_res_external_admit": 4214216,
+          "cs_drawing_app_prepare": 4236972,
+          "cs_guest_validate": 4200332,
+          "cs_trap_call": 4197678,
+          "cs_mac_reset": 4194564,
+          "cs_guest_write": 4200910,
+          "cs_mac_aline_program_end": 4200088,
+          "cs_mac_loop_poll": 4195132,
+          "cs_drawing_app_scene": 4237566,
+          "cs_rf_open": 4205830,
+          "cs_m68k_aline": 4198748,
+          "cs_mac_line_a_handler": 4200016,
+          "cs_mac_vectors": 4194304,
+          "cs_mac_aline_probe": 4200088,
+          "cs_image_execute": 4220650,
+          "cs_product_scene": 4238388,
+          "cs_mac_via_init": 4194994,
+          "cs_code_inspect": 4210206,
+          "cs_life_manager_call": 4205214,
+          "cs_life_admit": 4205150,
+          "cs_mac_diag": 4920,
+          "__data_start": 2816,
+          "cs_image_execution_native": 4225594,
+          "cs_image_run_rectangles": 4230014
+        },
+        "corruption_controls": 8
+      }
+    ],
+    "twins_equal": true,
+    "original_program_bytes": 40,
+    "module_count": 26,
+    "emulator_run": false,
+    "system1_compatibility_proven": false,
+    "inputs": {
+      "arch/m68k/loaded-reset.S": "9afd21ad00443cfdfd3567f772b0e2b5f26b0de3f0cdc0693235e812eab52d56",
+      "arch/m68k/runtime.c": "1e3fa635a12a6ac91b30f25fdf19c493b84493dcecc4ce7e4dcc298c3412d078",
+      "platform/mac128k/loop.c": "89680e5d2c4222cfa1578012275c4ed074b67718c01fc97877a95c0124b7dacc",
+      "platform/mac128k/drawing-entry.c": "7b11eb46561f0a43d94987aeaaa7f1e364f7da46373ef9f3b673a460bbbc0820",
+      "apps/rom-scene/scene.c": "481af50ded6f22475d601de56039816463773f5f2916a6281110c7a8b8053c3e",
+      "core/graphics/surface.c": "157ed442c0278a344b57cb0e08657c30273de2a62199d72a30b38e5ee7ea1c5c",
+      "core/services/traps.c": "585adf0742f51390bc44ba086b58e22361bb7188c1205bcc11968875f0cbb1ef",
+      "apps/service-probe/probe.c": "0e32e53ebf65a4b99d9bb494f69ea86daaa6df880d5be28559870f7e218c2cc2",
+      "core/cpu/m68k.c": "c6c169c175a71bb24d2f6f375d5bca7dea4469ae4407c43159b3b27c6db613b8",
+      "apps/aline-probe/probe.c": "ff8942bf7e18c4b93302473421d3b69b9c7b32089999b728346a2766439e82e0",
+      "arch/m68k/aline.S": "1743e0f66d8a279780f61ba7b46e321d12ac0b1d15fa1eda21c5efced876aa63",
+      "core/memory/guest.c": "9678b43e3dc82df2f66119794f08cb2a0dbd85c07a031085daba35b230b6f8a1",
+      "core/memory/manager.c": "24f12c710e62f73c274964834ca4470d78c8b54c0e7dcfb6427ca94b9deff575",
+      "core/memory/lifecycle.c": "fa39f5d1daf5ddaac89129a17d0a51dde559509a135a9487ce02866de034c5ac",
+      "formats/resourcefork/reader.c": "ef3ab3b867fa49c830559092d90ddba2c9d2df4edcb747665c907cd8cf6f23a9",
+      "personality/system1/code-preflight.c": "eb17d35ec44452a08886c5901c1b43f0c5292a67e5feb9490da39bad1fd3e189",
+      "personality/system1/resources.c": "65cc2fa5496cd14c941acd36b061c586f5314cf463c9e76759f753191b879636",
+      "personality/system1/code-image.c": "ba16bbb08e9fda8e2a65ebfdd461233bac1fcf0e2673c36d54814f0b556281f7",
+      "personality/system1/code-run.c": "83b393c56b94a529a9d3acceaa7e851bfe110ff4fc00ab88992f409df541c8a1",
+      "core/cpu/m68k-bus.c": "eb1037c253b98e9b46856f56ff2e1b04f45c1bcadb65a95f95ebecbf33b2b229",
+      "apps/loaded-rom-app/probe.c": "794bcab9b72b6005709884d7ab714c6a3e27a01aeada5a3b397bfdcb1fd024da",
+      "apps/loaded-rom-app/scene.c": "7413d3dd4dad82c1f1400d61c89d6b568d40c86caeff2fc243cfad23e23dcbac",
+      "personality/system1/quickdraw-rects.c": "3380aeeece0ad86954a266e24813ad498a154e17eb3b0b6be6c4875a08e8d437",
+      "apps/drawing-rom-app/probe.c": "6dd5f8ef03a8491b4456076b89bcbc010985156fde0411d5e7a3c21a5e5ff7f1",
+      "apps/drawing-rom-app/scene.c": "7d7375cf7c2e805e13358c4f9eee3ff7a6bca117e0a616ffc8e8bc65248a814a",
+      "apps/product-scene/scene.c": "7488910c401285b1e211d3c6eb95a17f04683748ffa8fc2dba4e2659725872d2",
+      "arch/m68k/loaded-rom.ld": "b1429411ac35642c4b57394acca2515c226f6b60b831038af503f2b37afb9380",
+      "arch/m68k/runtime.h": "8b0de7d191dbcb43576a32c88e604f7c3145ac094af5137cc128381a0ff074e8",
+      "platform/mac128k/rom.h": "65d6b789b7d809520773c77df787694010e2afcb0f8b05d7021b726c393705c7",
+      "apps/loaded-rom-app/probe.h": "cf73003427f44be07c77f7e514e1742f07f1593904f7c5c466b94a202462f866",
+      "apps/loaded-rom-app/scene.h": "98966055fa7a2ab8fa6323e499911ae427baaeb6b9fcc67e122b5d3da2ecc763",
+      "core/graphics/surface.h": "31de605b79282fac7f4208e28aab328662df975a03028ac16fe179672d6dc264",
+      "core/services/traps.h": "a3346547364a2237027dbe1d134b81129e80f9731f4c49c813fc9f68563fd782",
+      "core/cpu/m68k.h": "1f19932c23f2a27f3764861f38d50cf4f68517b0a1a67b939a1bed12b1770b2c",
+      "core/cpu/m68k-bus.h": "a0a8fa1ca3075be2c3f6eecfe18f45ef0c3db3c338af00d5451edc293ad2ce0a",
+      "core/cpu/m68k-guard.h": "b518410b3dfed00ed66dd17c3e704f332ff9aa77806b4f5475f23e9fef3d58f9",
+      "core/cpu/m68k-session.h": "aea400413449630489f6fa0a8a6ab924271e254a4fd0d94724bc82dd9c70bdee",
+      "core/cpu/m68k-call.h": "5f320112485dfd98cd868e290bc1d3efdb8a0f3e81fbb4eb81fb93e6494cab1d",
+      "core/memory/guest.h": "5a89e549470bd0f3ffe50e7fb714342ff7dc6af0d49a0c154a7baebdf7e113ff",
+      "core/memory/manager.h": "9752645a3c610d46c41e2826061853967baff6898c954c20006ce2949f8e1078",
+      "core/memory/lifecycle.h": "8d21a92f26f3b06973f77047721d46c040cb6daacb787f32372ffcb901cedf05",
+      "formats/resourcefork/reader.h": "06fcb33136037f43662f155df9d4d896c4d28dc786f5eb59b5c94ae0925156ea",
+      "personality/system1/code-preflight.h": "e422ee629c35489ec4c10ec6fb6b992e5a256ec5492701489f357a2c052ccac7",
+      "personality/system1/resources.h": "f19d4e3ba2283e2081e271660a086294cef31773121c329941faab8c99375fcb",
+      "personality/system1/code-image.h": "a5a7d9fd7cb012e5840afcb89fa2ef74e45737d099e9ef149e2edc6ca5a787bf",
+      "personality/system1/code-run.h": "1c4489624e1abccd9dc654aa51d962210c6a10ce37ccbd84ac1447037ff8238b",
+      "personality/system1/code-run-internal.h": "130e9dbd096336909f3eb9323e8c9023e209b4910b7f2e4bd18d5db5a2c7a58d",
+      "apps/service-probe/probe.h": "ae48c5583f34ad80ecb89bac0f8b3dfa0729b1f19c9270b01875e7b6305772ec",
+      "apps/aline-probe/probe.h": "c6e15ba0af8478c31adacbd1e9414141999c873a866e92cf33ac3e06816e9684",
+      "apps/aline-probe/program.h": "945b01c5806a30634321915a5e80a7b556e96f4ad0828fbb618b2899ee93b2fe",
+      "apps/loaded-rom-app/program.S": "7ba0f99f1febd3d7acb16894e72e0191f9cc145fcb9f0218c0c2b46301b41b7f",
+      "scripts/Build-LoadedAppROM.py": "eaaa440af416f3f954493321633f5612fb12b1e2e4443cc346c0a2fb7e9fdd0f",
+      "scripts/Build-MacROM.py": "ee4560d13d8b337f1b2ef975d1bd12265afcad98bbe950299c90e442b12f03c7",
+      "docs/specifications/SPEC-0035-first-loaded-rom-application.md": "8d98cbeb5f159929c0c7f6b3129a9ba78f41fa50b9a751097d841cc6c7872121",
+      "personality/system1/quickdraw-rects.h": "db9facdb5ef3742c3c8935255e3f627c30d31b323a8223e470d9851a48c81e09",
+      "apps/product-scene/scene.h": "7d5b50af59be3e25a67837d7183d0fa50afd36b9f0b3aaf1a1fb1ddea772ccf0",
+      "docs/specifications/SPEC-0037-shared-product-scene.md": "5e75c22158ac12c3f58f1d81bc23f3e7cdbb1ac744194367bab5e6751445613e",
+      "apps/drawing-rom-app/probe.h": "a5c4e9b148bf1bebfb058ae885ea347528eb9cd43f4c7bb7788bab48c77a327b",
+      "apps/drawing-rom-app/program.S": "690d41f1b73728c145ec78a75cdac94b89c914b29d940ddf6b0bd357aac2ada2",
+      "docs/specifications/SPEC-0036-loaded-rectangle-calls.md": "f028eaf73d7689b38e979b7876f5a744744b1b203fc57325f6de6c6c4dc95092"
+    }
+  },
+  "ci_status": "pending",
+  "ci_url": null,
+  "parity": {
+    "mac_dimensions": [
+      512,
+      342
+    ],
+    "pc_dimensions": [
+      640,
+      480
+    ],
+    "origin": [
+      64,
+      69
+    ],
+    "exact_logical_pixels_equal": true,
+    "pc_framebuffer_orders": [
+      "RGB-reserved",
+      "BGR-reserved"
+    ],
+    "actual_original_probe_instances": 2,
+    "result": 97,
+    "steps": 13,
+    "phases": 6,
+    "input_count": 1234,
+    "pc_arena_bytes": 112392,
+    "pc_staging_bytes": 64000,
+    "pc_workspace_bytes": 48392
+  },
+  "exposure": "Owner requirement/artwork and reviewed original code only; no external worker call or new manual/source input.",
+  "hosted_output": {
+    "mac.pbm": {
+      "bytes": 21899,
+      "sha256": "558afebfbc21be63ba365796d17b46092caeec5edbad1daf4809bae5d882af55"
+    },
+    "pc.ppm": {
+      "bytes": 921615,
+      "sha256": "3cccfd27031b99cd472e6acfb433bd2259fd1d041ea1d88251d90a2a98ee1f09"
+    },
+    "mac.png": {
+      "bytes": 721,
+      "sha256": "fdb6e3fc55335f9d06ca5c0463abdfb561579b944887f82ee88d12d753ac42a0"
+    },
+    "pc.png": {
+      "bytes": 2632,
+      "sha256": "08492f2a6056e90a484b5d3524a1dae09c2ff49d70c61a814b45053843ef9876"
+    }
+  }
+}

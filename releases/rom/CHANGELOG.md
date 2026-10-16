@@ -2,6 +2,9 @@
 
 ## Unreleased development after 0.1.0-alpha.1
 
+- Shared monochrome512x342 product scene and original monitor/C branding now
+  compile for68k and native-PC; [verification](../../docs/development/shared-product-scene-evidence.md). No new release or trial.
+
 - [Selected loaded rectangle calls](../../docs/development/drawing-app-evidence.md)
   add a new original drawing-ROM candidate, now observed in one isolated
   [Snow trial](../../docs/development/drawing-app-boot-trial.md). No new version/tag/release has been

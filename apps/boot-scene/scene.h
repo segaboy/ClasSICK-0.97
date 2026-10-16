@@ -7,19 +7,22 @@
 #include "../../core/graphics/surface.h"
 #include "../../core/memory/arena.h"
 #include "../../platform/pc/framebuffer.h"
+#include "../product-scene/scene.h"
 
 /* SPEC-0009 original geometric boot test scene; not a historical Macintosh image. */
 typedef enum { CS_SCENE_OK=0, CS_SCENE_ARGUMENT=1, CS_SCENE_DIMENSION=2,
     CS_SCENE_FORMAT=3, CS_SCENE_SURFACE=4 } cs_scene_result;
 typedef enum { CS_BOOT_OK=0, CS_BOOT_ARGUMENT=1, CS_BOOT_TARGET=2,
-    CS_BOOT_ARENA=3, CS_BOOT_SCENE=4, CS_BOOT_PRESENT=5 } cs_boot_result;
+    CS_BOOT_ARENA=3, CS_BOOT_SCENE=4, CS_BOOT_PRESENT=5, CS_BOOT_PROBE=6 } cs_boot_result;
 enum { CS_SCENE_MAX_DIMENSION=8192, CS_SCENE_SEGMENTS=16,
-    CS_BOOT_STAGING_LIMIT=65536 };
+    CS_BOOT_STAGING_LIMIT=65536, CS_BOOT_WORKSPACE_LIMIT=65536 };
 typedef struct {
     cs_fb_target target;
     unsigned char *staging;
     size_t staging_bytes;
     uint32_t band_rows;
+    size_t workspace_bytes;
+    cs_product_state state;
 } cs_boot_scene;
 typedef struct { uint32_t result,bands,band_rows,rows,step; } cs_boot_report;
 
@@ -32,4 +35,6 @@ cs_boot_result cs_boot_scene_prepare(cs_arena *arena,const cs_fb_target *target,
 /* Presents the complete frame top to bottom; report is always written when non-null. */
 cs_boot_result cs_boot_scene_draw(const cs_boot_scene *scene,uint32_t step,
     cs_boot_report *report);
+cs_boot_result cs_boot_scene_draw_input(const cs_boot_scene *scene,uint32_t step,
+    uint32_t inputs,cs_boot_report *report);
 #endif

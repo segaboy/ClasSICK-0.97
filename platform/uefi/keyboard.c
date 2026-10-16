@@ -11,7 +11,7 @@ typedef struct {
     uint64_t ticks;
     cs_keyboard_observer observer;
     void *context;
-    uint32_t seconds,frames,space,escape,consumed,late,max_delta,step,key,action,sequence,notice;
+    uint32_t seconds,frames,space,shown_space,escape,consumed,late,max_delta,step,key,action,sequence,notice;
     /* SPEC-0016 qualification state. */
     const cs_uefi_handoff *handoff;
     const cs_native_memory *memory;
@@ -109,8 +109,8 @@ static uint32_t record(unsigned char *trace,uint32_t result,const diagnostics *d
 static int draw(cs_boot_scene *scene,diagnostics *d,uint32_t step)
 {
     cs_boot_report report;
-    if(cs_boot_scene_draw(scene,step,&report)!=CS_BOOT_OK) return 0;
-    d->step=step; increment(&d->frames); return 1;
+    if(cs_boot_scene_draw_input(scene,step,d->space,&report)!=CS_BOOT_OK) return 0;
+    d->step=step; d->shown_space=d->space; increment(&d->frames); return 1;
 }
 uint32_t cs_native_keyboard_observed(const cs_uefi_handoff *h,uint32_t ready,
     const cs_native_devices *dev,const cs_ps2_io *keyboard,uint32_t seconds,unsigned char *trace,
@@ -133,7 +133,7 @@ uint32_t cs_native_keyboard_observed(const cs_uefi_handoff *h,uint32_t ready,
     d.elapsed.seconds=0; d.elapsed.nanoseconds=0; d.reads=0; d.seconds=seconds;
     d.ticks=0; d.observer=observer; d.context=context;
     d.notice=2;
-    d.frames=0; d.space=0; d.escape=0; d.consumed=0; d.late=0; d.max_delta=0;
+    d.frames=0; d.space=0; d.shown_space=0; d.escape=0; d.consumed=0; d.late=0; d.max_delta=0;
     d.step=0; d.key=0; d.action=0; d.sequence=0;
     d.handoff=h; d.memory=dev!=NULL?dev->memory:NULL; d.qualification=qualification;
     d.cell=h!=NULL?h->trace_base+CS_QUAL_CELL_OFFSET:0u; d.partner=h!=NULL?d.cell^(UINT64_C(1)<<20):0u;
@@ -218,7 +218,7 @@ uint32_t cs_native_keyboard_observed(const cs_uefi_handoff *h,uint32_t ready,
             }
         }
         want=(step+offset)%17u;
-        if(want!=d.step) {
+        if(want!=d.step || d.space!=d.shown_space) {
             if(!draw(&scene,&d,want)) return record(trace,CS_KBD_DRAW,&d);
             (void)record(trace,CS_KBD_RUNNING,&d);
         }

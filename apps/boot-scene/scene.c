@@ -2,57 +2,28 @@
 /* Copyright (C) 2026 Dean Howell. */
 #include "scene.h"
 
-static const uint32_t bar_colors[8]={0xFFFFFFFFu,0xFFFF00FFu,0x00FFFFFFu,0x00FF00FFu,
-    0xFF00FFFFu,0xFF0000FFu,0x0000FFFFu,0x000000FFu};
-
-/* Scene coordinates are bounded by 8192, so every sum below fits int32_t. */
-static int paint(const cs_surface *band,int32_t band_top,int32_t left,int32_t top,
-    int32_t right,int32_t bottom,uint32_t color)
-{
-    cs_rect rect;
-    if(right<left || bottom<top) return 1;
-    rect.left=left; rect.right=right;
-    rect.top=top-band_top; rect.bottom=bottom-band_top;
-    return cs_surface_fill(band,rect,color)==CS_SURFACE_OK;
-}
+#include "../drawing-rom-app/probe.h"
+#include "../service-probe/probe.h"
+typedef struct {
+    cs_trap_gateway gateway;
+    cs_drawing_app_workspace app;
+    cs_loaded_app_result result;
+} boot_workspace;
+_Static_assert(sizeof(boot_workspace)+_Alignof(boot_workspace)-1u<=CS_BOOT_WORKSPACE_LIMIT,"Probe workspace budget");
 
 cs_scene_result cs_scene_render(const cs_surface *band,int32_t width,int32_t height,
     int32_t band_top,uint32_t step)
 {
     cs_surface checked;
-    int32_t u,m,pw,ph,px,py,ix,iy,iw,ih,tx,ty,tw,tb,lit;
-    int ok=1;
-    if(band==NULL) return CS_SCENE_ARGUMENT;
-    if(width<1 || height<1 || width>CS_SCENE_MAX_DIMENSION || height>CS_SCENE_MAX_DIMENSION
-            || band_top<0 || band_top>=height) return CS_SCENE_DIMENSION;
+    if(!band)return CS_SCENE_ARGUMENT;
+    if(width<1 || height<1 || width>CS_SCENE_MAX_DIMENSION || height>CS_SCENE_MAX_DIMENSION ||
+        band_top<0 || band_top>=height)return CS_SCENE_DIMENSION;
     if(cs_surface_init(&checked,band->storage,band->storage_size,band->width,band->height,
-            band->stride,band->format)!=CS_SURFACE_OK) return CS_SCENE_SURFACE;
-    if(checked.format!=CS_SURFACE_RGBA8) return CS_SCENE_FORMAT;
-    u=(width<height?width:height)/32;
-    if(u<1) u=1;
-    m=2*u;
-    ok&=paint(&checked,band_top,0,0,width,height,0x1E3A4CFFu);
-    ok&=paint(&checked,band_top,0,0,m,m,0xFF0000FFu);
-    ok&=paint(&checked,band_top,width-m,0,width,m,0x00FF00FFu);
-    ok&=paint(&checked,band_top,0,height-m,m,height,0x0000FFFFu);
-    ok&=paint(&checked,band_top,width-m,height-m,width,height,0xFFFFFFFFu);
-    pw=width/2; ph=height/3; px=(width-pw)/2; py=(height-ph)/2;
-    ok&=paint(&checked,band_top,px,py,px+pw,py+ph,0xF2F2F2FFu);
-    ix=px+u; iy=py+u; iw=pw-2*u; ih=ph-2*u;
-    if(iw>0 && ih>0) {
-        ok&=paint(&checked,band_top,ix,iy,ix+iw,iy+ih,0x2B2B2BFFu);
-        for(int32_t i=0;i<8;++i)
-            ok&=paint(&checked,band_top,ix+iw*i/8,iy,ix+iw*(i+1)/8,iy+ih/2,bar_colors[i]);
-        tx=ix+u; tw=ix+iw-u-tx; ty=iy+ih/2+u; tb=iy+ih-u;
-        ok&=paint(&checked,band_top,tx,ty,tx+tw,tb,0x505050FFu);
-        lit=(int32_t)(step%17u);
-        if(tw>0) {
-            for(int32_t i=0;i<CS_SCENE_SEGMENTS;++i)
-                ok&=paint(&checked,band_top,tx+tw*i/16,ty,tx+tw*(i+1)/16-u/2,tb,
-                    i<lit?0x7FD35FFFu:0x3A3A3AFFu);
-        }
-    }
-    return ok?CS_SCENE_OK:CS_SCENE_SURFACE;
+        band->stride,band->format)!=CS_SURFACE_OK)return CS_SCENE_SURFACE;
+    if(checked.format!=CS_SURFACE_RGBA8)return CS_SCENE_FORMAT;
+    cs_product_state state;state.value=97;state.inputs=0;state.progress=step%17u;
+    state.phases=6;state.success=1;state.pixels=NULL;
+    return cs_product_scene(&checked,width,height,band_top,&state)?CS_SCENE_OK:CS_SCENE_SURFACE;
 }
 
 cs_boot_result cs_boot_scene_prepare(cs_arena *arena,const cs_fb_target *target,
@@ -60,22 +31,33 @@ cs_boot_result cs_boot_scene_prepare(cs_arena *arena,const cs_fb_target *target,
 {
     cs_fb_target checked;
     cs_arena_span span;
-    size_t row,rows;
+    size_t row,rows,staging,offset,alignment;
     if(arena==NULL || target==NULL || out==NULL) return CS_BOOT_ARGUMENT;
     if(cs_fb_init(&checked,target->base,target->size,target->width,target->height,
             target->pitch,target->format)!=CS_FB_OK) return CS_BOOT_TARGET;
     row=(size_t)checked.width*4u;
     rows=CS_BOOT_STAGING_LIMIT/row;
     if(rows>(size_t)checked.height) rows=(size_t)checked.height;
-    if(cs_arena_alloc(arena,rows*row,
+    staging=rows*row;alignment=_Alignof(boot_workspace);
+    offset=staging+(alignment-staging%alignment)%alignment;
+    if(cs_arena_alloc(arena,offset+sizeof(boot_workspace),
             CS_ARENA_MAX_ALIGNMENT<16u?CS_ARENA_MAX_ALIGNMENT:16u,&span)!=CS_ARENA_OK) return CS_BOOT_ARENA;
+    boot_workspace *w=(boot_workspace *)(void *)(span.data+offset);
+    unsigned char *bytes=(unsigned char *)(void *)w;
+    for(size_t i=0;i<sizeof *w;++i)bytes[i]=0;
+    cs_service_probe_result service;
+    if(!cs_service_probe(&w->gateway,&service) ||
+        !cs_drawing_app_probe(&w->app,&w->gateway,&w->result))return CS_BOOT_PROBE;
     /* Field copies keep every optimization level free of memcpy helpers. */
     out->target.base=checked.base; out->target.size=checked.size;
     out->target.width=checked.width; out->target.height=checked.height;
     out->target.pitch=checked.pitch; out->target.format=checked.format;
     out->staging=span.data;
-    out->staging_bytes=span.size;
-    out->band_rows=(uint32_t)rows;
+    out->staging_bytes=staging;
+    out->band_rows=(uint32_t)rows;out->workspace_bytes=offset-staging+sizeof *w;
+    out->state.value=w->result.value;out->state.inputs=0;out->state.progress=0;
+    out->state.phases=w->result.phase;out->state.success=w->result.success;
+    out->state.pixels=w->app.port.pixels;
     return CS_BOOT_OK;
 }
 
@@ -87,6 +69,11 @@ static cs_boot_result report_result(cs_boot_report *report,cs_boot_result result
 
 cs_boot_result cs_boot_scene_draw(const cs_boot_scene *scene,uint32_t step,
     cs_boot_report *report)
+{
+    return cs_boot_scene_draw_input(scene,step,0,report);
+}
+cs_boot_result cs_boot_scene_draw_input(const cs_boot_scene *scene,uint32_t step,
+    uint32_t inputs,cs_boot_report *report)
 {
     cs_fb_target target;
     uint32_t top;
@@ -110,8 +97,11 @@ cs_boot_result cs_boot_scene_draw(const cs_boot_scene *scene,uint32_t step,
         if(cs_surface_init(&band,scene->staging,scene->staging_bytes,(int32_t)target.width,
                 (int32_t)rows,(size_t)target.width*4u,CS_SURFACE_RGBA8)!=CS_SURFACE_OK)
             return report_result(report,CS_BOOT_ARENA);
-        if(cs_scene_render(&band,(int32_t)target.width,(int32_t)target.height,
-                (int32_t)top,step)!=CS_SCENE_OK) return report_result(report,CS_BOOT_SCENE);
+        cs_product_state state;
+        state.value=scene->state.value;state.inputs=inputs;state.progress=step%17u;
+        state.phases=scene->state.phases;state.success=scene->state.success;state.pixels=scene->state.pixels;
+        if(!cs_product_scene(&band,(int32_t)target.width,(int32_t)target.height,
+                (int32_t)top,&state))return report_result(report,CS_BOOT_SCENE);
         if(cs_fb_present(&target,&band,0,(int32_t)top)!=CS_FB_OK)
             return report_result(report,CS_BOOT_PRESENT);
         if(report!=NULL) { ++report->bands; report->rows+=rows; }

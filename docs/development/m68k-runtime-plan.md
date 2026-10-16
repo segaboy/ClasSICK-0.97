@@ -1,5 +1,7 @@
 # 68000 application runtime plan - 2026-10-12
 
+2026-10-16: One portable monochrome product scene now serves the drawing ROM, native-PC bootstrap and hosted Windows viewer. Both boot paths use the same original 68k drawing fixture, with real result/phase/pixel state. The logical canvas is512x342; PC640x480 centers it at(64,69), with exact pixel parity and white margins. The owner-supplied monitor/C mark is approximated in original black/white geometry. Both native candidates compile; no new target trial. [Shared scene](shared-product-scene-evidence.md). Native applications and older gates remain closed.
+
 2026-10-16 drawing trial: one freshly authorized isolated Snow128K boot shows APP/097, the original loaded application’s hollow rectangle and six phases. Counter0000/0001 and later0001 captures retain exact result-panel pixels. [Observation](drawing-app-boot-trial.md). Trial closed, automated delivery unqualified and no human input credited. General guest port state/clipping remains the next expansion; no new release or other gate closes.
 
 2026-10-16: SPEC-0036 / IMPL-0040 / TEST-0044 adds an explicit owned-code

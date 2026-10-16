@@ -1,6 +1,7 @@
 /* SPDX-License-Identifier: GPL-3.0-or-later */
 /* Copyright (C) 2026 Dean Howell. */
 #include "../platform/uefi/native.h"
+#include "../apps/boot-scene/scene.h"
 #include "scene-oracle.h"
 #include <stdio.h>
 #include <string.h>
@@ -104,8 +105,8 @@ static void presentation(void)
             }
             for(size_t p=(size_t)W*4u;p<(size_t)PITCH*4u;++p) CHECK(row[p]==0xA5);
         }
-        /* Staging used only the first 64 KiB of the arena; the rest is untouched. */
-        for(size_t i=(size_t)rows*W*4u;i<sizeof arena;++i) if(arena[i]!=0x3D) { CHECK(arena[i]==0x3D); break; }
+        /* Staging plus the declared bounded probe workspace; remaining arena untouched. */
+        for(size_t i=(size_t)rows*W*4u+CS_BOOT_WORKSPACE_LIMIT;i<sizeof arena;++i) if(arena[i]!=0x3D) { CHECK(arena[i]==0x3D); break; }
     }
 }
 int main(int argc,char **argv)

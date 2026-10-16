@@ -2827,3 +2827,40 @@ follows from any license.
 - Some short automated inputs were not immediately visibly credited; exact
   event attribution/delivery remain unqualified. No human input, continuous
   timing, historical, physical, full128K or complete-System compatibility claim.
+
+## SRC-0209 - Owner shared scene and monochrome branding implementation
+
+- Project owner,2026-10-16: asks for parity between the68k and x86 scene, one
+  portable implementation, monochrome output and an approximation of the
+  attached monitor/C image. Reuse the existing input-test scene and platform
+  paths; no new VM/emulator/reference run or native-application waiver inferred.
+- Initial640x480 suggestion is resolved by SRC-0210's logical-canvas decision.
+
+## SRC-0210 - Standing logical512x342 PC requirement
+
+- Project owner,2026-10-16: "I'm fine with you centering the 512x342 image for
+  this. In fact, let's make that the target for all PC work we do until I say
+  otherwise."
+- [Display requirement](../docs/development/display-target.md): fixed logical
+  canvas, centered within the platform's reported framebuffer; no mandatory
+  hardware resolution. Applies to all subsequent PC work until owner changes it.
+
+## SRC-0211 - Owner-supplied product mark reference
+
+- Attached49x56 monitor/C PNG, supplied by the owner for an expressly requested
+  monochrome approximation. 1016 bytes,
+  SHA-256 `9d00ccc955041fc853622f39a6981db62f44530d1ea5f7ddb520b9b1d3d36251`; original retained privately.
+- Original C rectangle geometry approximates the mark in black/white. No binary
+  artwork, Apple icon/font or external implementation enters the repository.
+  This is an engineering/branding input, not historical behavior evidence.
+
+## SRC-0212 - Lead shared-scene implementation and verification
+
+- Codex,2026-10-16; SPEC-0037 / IMPL-0041 / TEST-0045 and
+  [evidence](../docs/development/shared-product-scene-evidence.md). Sole writer,
+  no external worker/new manual input. Original project sources and the owner's
+  instructions/artwork only. Whole regressions and mechanical UART hashes;
+  no UART implementation/test body read or edit.
+- Equal logical pixels, compiler/hosted/native construction and later exact CI
+  results are distinct from an authorized boot observation. Existing source,
+  native-app, historical, physical, full128K/parity/B2/human gates persist.

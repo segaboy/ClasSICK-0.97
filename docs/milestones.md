@@ -1,5 +1,7 @@
 # Current milestones and release tracks
 
+2026-10-16: shared monochrome branding and512x342 canvas now compile for the drawing ROM, native-PC and hosted viewer, with exact hosted pixel parity. [Evidence](development/shared-product-scene-evidence.md); new-candidate target boots pending.
+
 As of 2026-10-16. This is the short current view; the [roadmap](roadmap.md)
 retains founding M0.0-M1.0 criteria and dated history. Component milestones below
 describe capabilities, not release numbers or complete-edition certification.

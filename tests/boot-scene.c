@@ -41,20 +41,16 @@ static void oracle(void)
         CHECK(raw[0]==0x6D && storage[bytes-1u]==0x6D);
         free(raw);
     }
-    /* Literal corner/progress spot checks independent of the oracle. */
+    /* Literal shared-frame/brand checks, independently stated geometry. */
     {
-        static unsigned char px[64*48*4];
-        cs_surface s;
-        CHECK(cs_surface_init(&s,px,sizeof px,64,48,256,CS_SURFACE_RGBA8)==CS_SURFACE_OK);
-        CHECK(cs_scene_render(&s,64,48,0,3)==CS_SCENE_OK);
-        CHECK(rgba(px)==0xFF0000FFu); CHECK(rgba(px+63*4)==0x00FF00FFu);
-        CHECK(rgba(px+47*256)==0x0000FFFFu); CHECK(rgba(px+47*256+63*4)==0xFFFFFFFFu);
-        CHECK(rgba(px+4*256+4*4)==0x1E3A4CFFu);
-        /* u=1: panel 32x16 at (16,16); inner (17,17) 30x14; bars rows 17..23. */
-        CHECK(rgba(px+16*256+16*4)==0xF2F2F2FFu); CHECK(rgba(px+17*256+17*4)==0xFFFFFFFFu);
-        CHECK(rgba(px+17*256+46*4)==0x000000FFu);
-        /* Track x 18..45, rows 25..29; segment 0 lit, segment 3 unlit (step 3). */
-        CHECK(rgba(px+25*256+18*4)==0x7FD35FFFu); CHECK(rgba(px+25*256+(18+28*3/16)*4)==0x3A3A3AFFu);
+        static unsigned char px[512*342*4];cs_surface s;
+        CHECK(cs_surface_init(&s,px,sizeof px,512,342,2048,CS_SURFACE_RGBA8)==CS_SURFACE_OK);
+        CHECK(cs_scene_render(&s,512,342,0,3)==CS_SCENE_OK);
+        CHECK(rgba(px)==0xFFFFFFFFu);CHECK(rgba(px+8*2048+8*4)==0x000000FFu);
+        CHECK(rgba(px+28*2048+40*4)==0x000000FFu);
+        CHECK(rgba(px+50*2048+60*4)==0xFFFFFFFFu);
+        CHECK(rgba(px+145*2048+201*4)==0x000000FFu);
+        CHECK(rgba(px+160*2048+220*4)==0xFFFFFFFFu);
     }
 }
 static void bands(void)
@@ -111,7 +107,7 @@ static void budget(void)
         CHECK(scene.band_rows==expected && scene.band_rows>=1u);
         CHECK(scene.staging_bytes==expected*(size_t)w*4u && scene.staging_bytes<=65536u);
         CHECK(scene.staging==arena_bytes && ((uintptr_t)scene.staging%(CS_ARENA_MAX_ALIGNMENT<16u?CS_ARENA_MAX_ALIGNMENT:16u))==0u);
-        CHECK(arena.used==scene.staging_bytes);
+        CHECK(arena.used==scene.staging_bytes+scene.workspace_bytes && arena.used<=sizeof arena_bytes);
     }
     /* Exhaustion: arena preserved, output untouched. */
     {
@@ -154,7 +150,7 @@ static void budget(void)
 static void errors(void)
 {
     static unsigned char px[8*4*4],copy[sizeof px];
-    static _Alignas(16) unsigned char arena_bytes[4096];
+    static _Alignas(16) unsigned char arena_bytes[131072];
     cs_surface s,bad; cs_arena arena; cs_fb_target t; cs_boot_scene scene,tampered;
     cs_boot_report report;
     unsigned char fb[8*4*4];

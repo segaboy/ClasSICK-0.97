@@ -2,15 +2,22 @@
 /* Copyright (C) 2026 Dean Howell. */
 #include "presenter.h"
 #include "arena.h"
+#include "../drawing-rom-app/probe.h"
+#include "../product-scene/scene.h"
+#include "../service-probe/probe.h"
 #include "../../platform/windows/input.h"
 #include "../../platform/windows/clock.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
-enum { FRAME_WIDTH = 513, FRAME_HEIGHT = 321, INPUT_CAPACITY = 16 };
+enum { FRAME_WIDTH = 512, FRAME_HEIGHT = 342, INPUT_CAPACITY = 16 };
 typedef struct {
     cs_arena arena;
+    cs_drawing_app_workspace *drawing;
+    cs_trap_gateway gateway;
+    cs_loaded_app_result result;
+    uint32_t accepted_spaces;
     cs_input_queue input;
     cs_win_clock host_clock;
     cs_clock clock, fake_source;
@@ -38,8 +45,10 @@ static size_t buffer_budget(void)
     size_t bytes = (scene_stride(0) + scene_stride(1) + (size_t)FRAME_WIDTH * 4u)
         * FRAME_HEIGHT;
     size_t alignment = _Alignof(cs_input_record);
-    return bytes + (alignment - bytes % alignment) % alignment
+    bytes += (alignment - bytes % alignment) % alignment
         + INPUT_CAPACITY * sizeof(cs_input_record);
+    alignment=_Alignof(cs_drawing_app_workspace);
+    return bytes+(alignment-bytes%alignment)%alignment+sizeof(cs_drawing_app_workspace);
 }
 
 static int init_buffers(demo_state *state, size_t capacity)
@@ -66,6 +75,10 @@ static int init_buffers(demo_state *state, size_t capacity)
             _Alignof(cs_input_record), &span) != CS_ARENA_OK
             || cs_input_init(&state->input, (cs_input_record *)span.data,
                 INPUT_CAPACITY) != CS_INPUT_OK) return 0;
+    if(cs_arena_alloc(&state->arena,sizeof(cs_drawing_app_workspace),
+            _Alignof(cs_drawing_app_workspace),&span)!=CS_ARENA_OK)return 0;
+    state->drawing=(cs_drawing_app_workspace *)(void *)span.data;
+    memset(span.data,0,span.size);
     return 1;
 }
 
@@ -76,46 +89,22 @@ static int fill(cs_surface *surface, cs_rect rect, uint32_t color)
 
 static int scenes(demo_state *state)
 {
-    static const uint32_t colors[6] = {
-        0xEE6352FFu, 0xF5B841FFu, 0x60B894FFu, 0x4597D2FFu, 0x8175BAFFu, 0xD36B9CFFu
-    };
-    cs_surface *color = &state->surfaces[0], *mono = &state->surfaces[1];
-    if (cs_surface_clear(color, 0xF1F4F8FFu) != CS_SURFACE_OK
-            || cs_surface_clear(mono, 0) != CS_SURFACE_OK) return 0;
-    if (!fill(color, (cs_rect){12,12,501,57}, 0x1E283AFFu)
-            || !fill(color, (cs_rect){26,27,37,42}, 0x60B894FFu)
-            || !fill(color, (cs_rect){44,27,55,42}, 0xF5B841FFu)
-            || !fill(color, (cs_rect){62,27,73,42}, 0xEE6352FFu)
-            || !fill(color, (cs_rect){92,30,350,38}, 0xF1F4F8FFu)
-            || !fill(color, (cs_rect){12,69,188,253}, 0xDCE3EBFFu)
-            || !fill(color, (cs_rect){200,69,501,253}, 0xDCE3EBFFu)) return 0;
-    for (int32_t y = 0; y < 5; ++y) for (int32_t x = 0; x < 5; ++x) {
-        if (!fill(color, (cs_rect){24+x*31,81+y*31,49+x*31,106+y*31},
-                colors[(x+y)%6])) return 0;
-    }
-    if (!fill(color, (cs_rect){221,90,395,219}, 0x4597D200u)
-            || !fill(color, (cs_rect){267,123,468,234}, 0xEE635280u)
-            || !fill(color, (cs_rect){301,153,426,203}, 0xF5B841FFu)) return 0;
-    for (int32_t x = 0; x < 6; ++x)
-        if (!fill(color, (cs_rect){12+x*82,265,94+x*82,309}, colors[x])) return 0;
-    if (!fill(mono, (cs_rect){12,12,501,309}, 1)
-            || !fill(mono, (cs_rect){14,14,499,307}, 0)
-            || !fill(mono, (cs_rect){26,27,487,55}, 1)) return 0;
-    for (int32_t y = 0; y < 10; ++y) for (int32_t x = 0; x < 12; ++x)
-        if ((x+y)%2 == 0 && !fill(mono,
-                (cs_rect){26+x*16,73+y*16,42+x*16,89+y*16}, 1)) return 0;
-    for (int32_t x = 0; x < 8; ++x)
-        if (!fill(mono, (cs_rect){241+x*31,73,250+x*31,278-x*15}, 1)) return 0;
-    /* Original edge bars deliberately cross the right edge of the logical frame. */
-    return fill(color, (cs_rect){485,100,540,107}, 0x1E283AFFu)
-        && fill(mono, (cs_rect){485,290,540,297}, 1);
+    cs_service_probe_result service;
+    if(!cs_service_probe(&state->gateway,&service) ||
+        !cs_drawing_app_probe(state->drawing,&state->gateway,&state->result))return 0;
+    cs_product_state scene;
+    scene.value=state->result.value;scene.inputs=state->accepted_spaces;scene.progress=0;
+    scene.phases=state->result.phase;scene.success=state->result.success;
+    scene.pixels=state->drawing->port.pixels;
+    return cs_product_scene(&state->surfaces[0],FRAME_WIDTH,FRAME_HEIGHT,0,&scene) &&
+        cs_product_scene(&state->surfaces[1],FRAME_WIDTH,FRAME_HEIGHT,0,&scene);
 }
 
 static void title(HWND window, unsigned active)
 {
     SetWindowTextW(window, active == 0
-        ? L"ClasSICK 0.97 - Color | Space: switch view | Esc: close"
-        : L"ClasSICK 0.97 - Monochrome | Space: switch view | Esc: close");
+        ? L"ClasSICK 0.97 - Monochrome RGBA | Space: count/switch format | Esc: close"
+        : L"ClasSICK 0.97 - Monochrome 1-bit | Space: count/switch format | Esc: close");
 }
 
 static void paint(HWND window, HDC dc, demo_state *state)
@@ -133,7 +122,7 @@ static void paint(HWND window, HDC dc, demo_state *state)
 static int flash(demo_state *state, int on)
 {
     const cs_rect strip={12,314,501,319};
-    if (!fill(&state->surfaces[0],strip,on ? 0xEE6352FFu : 0xF1F4F8FFu)
+    if (!fill(&state->surfaces[0],strip,on ? 0x000000FFu : 0xFFFFFFFFu)
             || !fill(&state->surfaces[1],strip,on ? 1u : 0u)) return 0;
     state->flash=on;
     return 1;
@@ -168,6 +157,9 @@ static int consume_input(HWND window, demo_state *state)
         if (record.event.key == CS_KEY_SPACE) {
             if (cs_time_add(state->clock.last,(cs_time){0,250000000},&state->deadline)
                     !=CS_TIME_OK || !flash(state,1)) return 0;
+            if(state->accepted_spaces!=UINT32_MAX)++state->accepted_spaces;
+            if(!cs_product_scene_input(&state->surfaces[0],state->accepted_spaces) ||
+                !cs_product_scene_input(&state->surfaces[1],state->accepted_spaces))return 0;
             state->active ^= 1u;
             title(window, state->active);
             InvalidateRect(window, NULL, FALSE);
@@ -282,13 +274,10 @@ static int verify_print(HWND window, demo_state *state, int scale)
     if (previous == NULL || previous == (HBITMAP)HGDI_ERROR) goto cleanup;
     SendMessageW(window, WM_PRINTCLIENT, (WPARAM)dc, PRF_CLIENT);
     passed = !state->failed && state->paints != 0
-        && GetPixel(dc, 2 * scale, 2 * scale) ==
-            (state->active == 0 ? RGB(241,244,248) : RGB(255,255,255))
-        && GetPixel(dc, 12 * scale, 12 * scale) ==
-            (state->active == 0 ? RGB(30,40,58) : RGB(0,0,0))
-        && GetPixel(dc,12*scale,316*scale)==(state->active==0
-            ? (state->flash ? RGB(238,99,82) : RGB(241,244,248))
-            : (state->flash ? RGB(0,0,0) : RGB(255,255,255)));
+        && GetPixel(dc,2*scale,2*scale)==RGB(255,255,255)
+        && GetPixel(dc,8*scale,8*scale)==RGB(0,0,0)
+        && GetPixel(dc,40*scale,28*scale)==RGB(0,0,0)
+        && GetPixel(dc,12*scale,316*scale)==(state->flash?RGB(0,0,0):RGB(255,255,255));
 cleanup:
     if (previous != NULL && previous != (HBITMAP)HGDI_ERROR) SelectObject(dc, previous);
     if (bitmap != NULL) DeleteObject(bitmap);
@@ -400,8 +389,8 @@ int WINAPI WinMain(HINSTANCE instance, HINSTANCE previous, LPSTR command, int sh
             && !verify_key_memory && !verify_time && !verify_live
             && !verify_start && !validate_start))) return 2;
     if (verify_key_memory) {
-        if (buffer_budget() != 1342744u || init_buffers(&state, 1342743u)
-                || state.backing == NULL || state.arena.used != 1342422u
+        if (buffer_budget() != 1427488u+sizeof(cs_drawing_app_workspace) || init_buffers(&state,1427487u)
+                || state.backing == NULL || state.arena.used != 1427166u
                 || state.scratch == NULL || state.input.storage != NULL) goto cleanup;
         puts("SPEC-0004 viewer one-byte-short input storage: PASS");
         result = 0;
@@ -409,8 +398,8 @@ int WINAPI WinMain(HINSTANCE instance, HINSTANCE previous, LPSTR command, int sh
     }
     if (verify_memory) {
         /* Independent literal lengths for the fixed color/mono/scratch scene. */
-        if (buffer_budget() != 1342744u || init_buffers(&state, 1342421u)
-                || state.backing == NULL || state.arena.used != 683730u
+        if (buffer_budget() != 1427488u+sizeof(cs_drawing_app_workspace) || init_buffers(&state,1427165u)
+                || state.backing == NULL || state.arena.used != 726750u
                 || state.scratch != NULL) goto cleanup;
         puts("SPEC-0003 viewer undersized backing pool: PASS");
         result = 0;
@@ -452,11 +441,11 @@ int WINAPI WinMain(HINSTANCE instance, HINSTANCE previous, LPSTR command, int sh
         if (!verify_input(window, &state)) goto cleanup;
         result = 0;
     } else if (verify) {
-        if (state.arena.capacity != 1342744u || state.arena.used != 1342744u
+        if (state.arena.capacity != 1427488u+sizeof(cs_drawing_app_workspace) || state.arena.used != 1427488u+sizeof(cs_drawing_app_workspace)
                 || state.storage[0] != state.arena.storage
-                || state.storage[1] != state.arena.storage + 661260u
-                || state.scratch != state.arena.storage + 683730u
-                || (unsigned char *)state.input.storage != state.arena.storage + 1342424u)
+                || state.storage[1] != state.arena.storage + 703152u
+                || state.scratch != state.arena.storage + 726750u
+                || (unsigned char *)state.input.storage != state.arena.storage + 1427168u)
             goto cleanup;
         if (!verify_print(window, &state, 1)) goto cleanup;
         if (GetAwarenessFromDpiAwarenessContext(GetThreadDpiAwarenessContext())
@@ -474,7 +463,7 @@ int WINAPI WinMain(HINSTANCE instance, HINSTANCE previous, LPSTR command, int sh
     } else {
         MSG message;
         if (verify_start || validate_start) {
-            if (state.arena.capacity != 1342744u || state.arena.used != 1342744u
+            if (state.arena.capacity != 1427488u+sizeof(cs_drawing_app_workspace) || state.arena.used != 1427488u+sizeof(cs_drawing_app_workspace)
                     || !verify_print(window,&state,verify_start ? 1 : 2)) {
                 fputs("B1 initial arena/scene check failed.\n",stderr);
                 goto cleanup;
@@ -528,7 +517,7 @@ int WINAPI WinMain(HINSTANCE instance, HINSTANCE previous, LPSTR command, int sh
                     || state.clock_wakeups==0 || state.paints==0 || state.flash
                     || state.active!=0 || state.native_escape_presses!=1
                     || state.last_source!=2 || state.last_sequence!=state.consumed
-                    || state.input.count!=0 || state.arena.used!=1342744u
+                    || state.input.count!=0 || state.arena.used!=1427488u+sizeof(cs_drawing_app_workspace)
                     || state.native_space_presses!=(verify_start ? 1u : 2u)
                     || state.native_space_releases!=(verify_start ? 1u : 2u)
                     || (verify_start && (start_stage!=2 || state.consumed!=5))) result=1;

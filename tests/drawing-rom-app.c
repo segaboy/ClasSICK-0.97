@@ -1,3 +1,4 @@
+#include "scene-oracle.h"
 /* SPDX-License-Identifier: GPL-3.0-or-later */
 /* Copyright (C) 2026 Dean Howell. Original pixel oracle and loaded calls. */
 #include "../apps/drawing-rom-app/probe.h"
@@ -177,12 +178,12 @@ static void scene(const char *path)
     memset(pixels,0xA5,size);memset(want,0xA5,size);cs_surface a,b;
     REQUIRE(cs_surface_init(&a,pixels,size,512,342,72,CS_SURFACE_MONO1_MSB)==CS_SURFACE_OK);
     REQUIRE(cs_surface_init(&b,want,size,512,342,72,CS_SURFACE_MONO1_MSB)==CS_SURFACE_OK);
-    REQUIRE(cs_loaded_app_scene(&b,&result,0));REQUIRE(cs_drawing_app_scene(&a,&result,&w->port,0));
-    for(unsigned y=0;y<342;++y)for(unsigned x=0;x<512;++x){size_t at=(size_t)y*72u+x/8u;uint8_t mask=(uint8_t)(128u>>(x%8u));
-        if(y>=132 && y<204 && x>=52 && x<460)want[at]=(uint8_t)(want[at]&(uint8_t)~mask);
-        if(y>=136 && y<200 && x>=192 && x<320){unsigned yy=y-136u,xx=x-192u;
-            unsigned bit=(w->port.pixels[yy*16u+xx/8u]>>(7u-(xx%8u)))&1u;
-            want[at]=bit?(uint8_t)(want[at]|mask):(uint8_t)(want[at]&(uint8_t)~mask);}}
+    REQUIRE(cs_drawing_app_scene(&a,&result,&w->port,0));
+    for(unsigned y=0;y<342;++y)for(unsigned x=0;x<512;++x){
+        size_t at=(size_t)y*72u+x/8u;uint8_t mask=(uint8_t)(128u>>(x%8u));
+        if(oracle_scene(512,342,0,(long)x,(long)y)==0x000000FFu)want[at]|=mask;
+        else want[at]&=(uint8_t)~mask;
+    }
     REQUIRE(!memcmp(want,pixels,size));REQUIRE(cs_loaded_app_scene_input(&a,1));
     for(unsigned y=0;y<64;++y)REQUIRE(!memcmp(pixels+(136u+y)*72u+24u,w->port.pixels+y*16u,16));
     if(path){FILE *f=fopen(path,"wb");REQUIRE(f);fprintf(f,"P4\n512 342\n");

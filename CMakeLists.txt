@@ -12,9 +12,51 @@ include(CTest)
 option(CLASSICK_WINDOWS_ADAPTERS "Build Windows development adapters and viewer" ON)
 option(CLASSICK_SURFACE_SANITIZERS "Validated Clang ASan/UBSan conformance build" OFF)
 
+# SPEC-0037: shared monochrome product presentation.
+add_library(classick_product_scene STATIC apps/product-scene/scene.c)
+target_link_libraries(classick_product_scene PUBLIC classick_surfaces)
+add_library(classick_product_scene_freestanding OBJECT apps/product-scene/scene.c)
+if(CMAKE_C_COMPILER_ID MATCHES "Clang|GNU")
+    foreach(target classick_product_scene classick_product_scene_freestanding)
+        target_compile_options(${target} PRIVATE -Wall -Wextra -Wpedantic -Werror -Wconversion -Wsign-conversion
+            -ffreestanding -fno-builtin -fno-stack-protector
+            "-ffile-prefix-map=${CMAKE_SOURCE_DIR}=." "-ffile-prefix-map=${CMAKE_BINARY_DIR}=.")
+    endforeach()
+    target_compile_options(classick_product_scene_freestanding PRIVATE -O2)
+endif()
+if(CLASSICK_SURFACE_SANITIZERS)
+    target_compile_options(classick_product_scene PRIVATE -fsanitize=address,undefined -fno-sanitize-recover=all -fno-omit-frame-pointer)
+endif()
+
+add_executable(classick_product_scene_tests tests/product-scene.c)
+target_link_libraries(classick_product_scene_tests PRIVATE classick_boot_scene classick_drawingapp)
+if(CMAKE_C_COMPILER_ID MATCHES "Clang|GNU")
+    target_compile_options(classick_product_scene_tests PRIVATE -Wall -Wextra -Wpedantic -Werror -Wconversion -Wsign-conversion
+        "-ffile-prefix-map=${CMAKE_SOURCE_DIR}=." "-ffile-prefix-map=${CMAKE_BINARY_DIR}=.")
+endif()
+if(CLASSICK_SURFACE_SANITIZERS)
+    target_compile_options(classick_product_scene_tests PRIVATE -fsanitize=address,undefined -fno-omit-frame-pointer)
+    target_link_options(classick_product_scene_tests PRIVATE -fsanitize=address,undefined)
+endif()
+if(MINGW)
+    target_link_options(classick_product_scene_tests PRIVATE -Wl,--no-insert-timestamp)
+endif()
+if(BUILD_TESTING)
+    foreach(suite parity updates errors)
+        add_test(NAME product-scene.${suite} COMMAND classick_product_scene_tests ${suite})
+    endforeach()
+    if(CMAKE_C_COMPILER_ID MATCHES "Clang|GNU")
+        find_program(CLASSICK_PRODUCT_NM NAMES llvm-nm nm REQUIRED)
+        add_test(NAME product-scene.freestanding COMMAND ${CMAKE_COMMAND}
+            "-DNM=${CLASSICK_PRODUCT_NM}" "-DALLOWED=cs_surface_init,cs_surface_fill"
+            "-DOBJECT=$<TARGET_OBJECTS:classick_product_scene_freestanding>"
+            -P ${CMAKE_SOURCE_DIR}/scripts/Check-ObjectImports.cmake)
+    endif()
+endif()
+
 # SPEC-0036: selected fixed-port rectangle calls through owned code execution.
 add_library(classick_drawingapp STATIC apps/drawing-rom-app/probe.c apps/drawing-rom-app/scene.c)
-target_link_libraries(classick_drawingapp PUBLIC classick_loadedapp)
+target_link_libraries(classick_drawingapp PUBLIC classick_loadedapp classick_product_scene)
 add_executable(classick_drawingapp_tests tests/drawing-rom-app.c)
 target_link_libraries(classick_drawingapp_tests PRIVATE classick_drawingapp)
 add_library(classick_rect_freestanding OBJECT personality/system1/quickdraw-rects.c)
@@ -950,7 +992,7 @@ if(BUILD_TESTING)
             -P ${CMAKE_SOURCE_DIR}/scripts/Check-ObjectImports.cmake)
         if(TARGET classick_native_keyboard_freestanding)
             add_test(NAME native-keyboard.freestanding COMMAND ${CMAKE_COMMAND} "-DNM=${CLASSICK_KEYBOARD_NM}"
-                "-DALLOWED=cs_ps2_begin,cs_ps2_poll,cs_native_read,cs_uefi_check_map,cs_acpi_find_pm_timer,cs_acpi_8042,cs_uefi_check_framebuffer,cs_fb_init,cs_arena_init,cs_arena_alloc,cs_boot_scene_prepare,cs_boot_scene_draw,cs_input_init,cs_input_pop,cs_pmtimer_init,cs_pmtimer_sample,cs_pmtimer_time"
+                "-DALLOWED=cs_ps2_begin,cs_ps2_poll,cs_native_read,cs_uefi_check_map,cs_acpi_find_pm_timer,cs_acpi_8042,cs_uefi_check_framebuffer,cs_fb_init,cs_arena_init,cs_arena_alloc,cs_boot_scene_prepare,cs_boot_scene_draw_input,cs_input_init,cs_input_pop,cs_pmtimer_init,cs_pmtimer_sample,cs_pmtimer_time"
                 "-DOBJECT=$<TARGET_OBJECTS:classick_native_keyboard_freestanding>"
                 -P ${CMAKE_SOURCE_DIR}/scripts/Check-ObjectImports.cmake)
         endif()
@@ -987,7 +1029,7 @@ add_library(classick_pc_framebuffer_freestanding OBJECT platform/pc/framebuffer.
 add_executable(classick_native_framebuffer_tests tests/native-framebuffer.c)
 target_link_libraries(classick_native_framebuffer_tests PRIVATE classick_pc_framebuffer)
 add_library(classick_boot_scene STATIC apps/boot-scene/scene.c)
-target_link_libraries(classick_boot_scene PUBLIC classick_pc_framebuffer classick_arenas)
+target_link_libraries(classick_boot_scene PUBLIC classick_pc_framebuffer classick_arenas classick_drawingapp classick_product_scene classick_services)
 add_library(classick_boot_scene_freestanding OBJECT apps/boot-scene/scene.c)
 add_executable(classick_boot_scene_tests tests/boot-scene.c)
 target_link_libraries(classick_boot_scene_tests PRIVATE classick_boot_scene)
@@ -1063,7 +1105,7 @@ if(BUILD_TESTING)
             -P ${CMAKE_SOURCE_DIR}/scripts/Check-ObjectImports.cmake)
         add_test(NAME scene.freestanding COMMAND ${CMAKE_COMMAND}
             "-DNM=${CLASSICK_SCENE_NM}"
-            "-DALLOWED=cs_surface_init,cs_surface_fill,cs_arena_alloc,cs_fb_init,cs_fb_present"
+            "-DALLOWED=cs_surface_init,cs_surface_fill,cs_arena_alloc,cs_fb_init,cs_fb_present,cs_product_scene,cs_service_probe,cs_drawing_app_probe"
             "-DOBJECT=$<TARGET_OBJECTS:classick_boot_scene_freestanding>"
             -P ${CMAKE_SOURCE_DIR}/scripts/Check-ObjectImports.cmake)
         add_test(NAME acpi.freestanding COMMAND ${CMAKE_COMMAND}
@@ -1122,7 +1164,7 @@ if(WIN32 AND CLASSICK_WINDOWS_ADAPTERS)
     add_executable(classick_presentation_tests tests/windows-presentation.c)
     target_link_libraries(classick_presentation_tests PRIVATE classick_windows_presenter)
     add_executable(classick_surface_demo WIN32 apps/surface-demo/windows-main.c)
-    target_link_libraries(classick_surface_demo PRIVATE classick_windows_presenter classick_arenas classick_windows_input classick_windows_clock)
+    target_link_libraries(classick_surface_demo PRIVATE classick_windows_presenter classick_arenas classick_windows_input classick_windows_clock classick_drawingapp classick_product_scene)
     target_compile_definitions(classick_surface_demo PRIVATE WINVER=0x0A00 _WIN32_WINNT=0x0A00)
     if(CMAKE_C_COMPILER_ID MATCHES "Clang|GNU")
         foreach(target classick_windows_presenter classick_presentation_tests classick_surface_demo
