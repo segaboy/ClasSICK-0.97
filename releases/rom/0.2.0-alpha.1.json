@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "component": "rom",
+  "version": "0.2.0-alpha.1",
+  "state": "draft",
+  "published": false,
+  "proposed_tag": "rom-v0.2.0-alpha.1",
+  "tag_target_revision": null,
+  "profile": "loaded-rectangles-v1",
+  "specification": "SPEC-0036",
+  "artifact": {
+    "filename": "classick-rom-0.2.0-alpha.1-mac128k.rom",
+    "bytes": 65536,
+    "sha256": "95d7cdef447768586e2d8e9af18771afbe87f197c273269690650fc18e2fe542"
+  },
+  "compiled_source_revision": "a8b6aae8e583b26d16012d5af330b2a2092c6c59",
+  "evidence_revision": "eee4327f2cd70c287e56d10c38c8d09da17dd012",
+  "build_manifest": {
+    "bytes": 29202,
+    "sha256": "ba3c3ff2e43826e23feb6b333db4bbe0c2ddb915270a7a21f1804e98215cfb0b"
+  },
+  "qualification": {
+    "path": "docs/development/shared-product-scene-boot-evidence.json",
+    "sha256_git_lf": "80856341fb4d0b2006e03ffeed7a5409d9ee94cb65903e198fcaadcddcbf04c6"
+  },
+  "ci_url": "https://github.com/segaboy/ClasSICK-0.97/actions/runs/38922733567",
+  "release_notes": "releases/rom/0.2.0-alpha.1.md",
+  "license": "GPL-3.0-or-later",
+  "source_url": "https://github.com/segaboy/ClasSICK-0.97/tree/a8b6aae8e583b26d16012d5af330b2a2092c6c59",
+  "source_archive_url": "https://github.com/segaboy/ClasSICK-0.97/archive/a8b6aae8e583b26d16012d5af330b2a2092c6c59.tar.gz",
+  "observed_platform": {
+    "emulator": "Snow v1.5.0-317c188 Windows x86-64",
+    "executable_sha256": "32cf5285582c0f509e4f1ac38d86bfb90440bae9da43b7823bfb0841dea588e6",
+    "model": "Early128K",
+    "ram_bytes": 131072,
+    "payload": "embedded original test application; no disk System",
+    "physical_macintosh_tested": false,
+    "input_delivery_qualified": false,
+    "input_tested_for_this_image": false
+  },
+  "compatibility": {
+    "own_system_on_own_rom": "untested; no System release",
+    "original_system1_on_own_rom": "required, untested",
+    "own_system_on_supported_original_apple_rom": "required, untested",
+    "historical_097_qualified": false
+  },
+  "limits": [
+    "embedded original drawing demonstration; not a complete Macintosh ROM replacement",
+    "selected PaintRect/EraseRect fixed-port profile; no general guest GrafPort/InitGraf/regions/QuickDraw manager",
+    "selected instruction subset and one-entry/one-segment prototype; no desktop or disk-System boot",
+    "input delivery/human input unqualified; new image screenshot sessions had input0000",
+    "physical Macintosh and full128K OS feasibility unqualified; native-app/edition/parity/B2 and human provenance gates persist"
+  ],
+  "presentation_specification": "SPEC-0037"
+}

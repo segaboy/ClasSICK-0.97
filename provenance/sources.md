@@ -2880,3 +2880,19 @@ follows from any license.
   presentation are recorded in the [observation](../docs/development/shared-product-scene-boot-evidence.json).
 - No emulator source, new manual or UART implementation/test body inspection;
   screenshots only, no input or historical/physical/complete OS certification.
+
+## SRC-0215 - Owner request for the next ROM release
+
+- Dean Howell,2026-10-16: "OK, I think this warrants another rom release."
+- After current-build boot screenshots, authorizes the next experimental ROM
+  prerelease: exact observed image, reviewed original source/text/checksums,
+  annotated tag and GitHub release. System stays unreleased; no new trial.
+- Lead selects0.2.0-alpha.1 under the existing visible-capability version policy.
+
+## SRC-0216 - Lead ROM0.2.0-alpha.1 package and publication verification
+
+- Codex,2026-10-16; reviewed original project source, existing compile/CI
+  evidence and SRC-0213/0214's exact-image boot observation.
+- [Release verification](../docs/development/rom-0.2.0-alpha.1-release-evidence.md)
+  distinguishes prepared assets from actual publication and preserves the
+  first alpha. No new runtime build/trial, reference input or worker/model call.

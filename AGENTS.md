@@ -1,5 +1,15 @@
 # ClasSICK 0.97 working instructions
 
+Current owner ROM release scope (2026-10-16, SRC-0215/0216): "OK, I think
+this warrants another rom release." Publish ROM0.2.0-alpha.1 as an experimental
+prerelease, using only the already boot-observed shared-scene ROM, matching
+original source and reviewed setup/notes/records/checksums. Annotated rom-v0.2.0-alpha.1
+tag and GitHub release permitted. System remains unreleased. No new build,
+emulator/VM/reference trial, native app, workers/agents/chats/automation/OneNote.
+Preserve24 originals/copies, UART bodies, prior assets/tags and all existing
+source/historical/physical/full128K/parity/edition/B2/human/boot gates.
+[Release notes](releases/rom/0.2.0-alpha.1.md).
+
 Completed screenshot sessions (2026-10-16, SRC-0213/0214): owner requested
 "a screenshot for each of these for use in a blog post." One isolated own-ROM
 Snow128K boot and one own-image VirtualBox boot show the current branded scene,

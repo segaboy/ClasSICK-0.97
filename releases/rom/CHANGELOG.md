@@ -1,5 +1,16 @@
 # ClasSICK ROM release history
 
+## 0.2.0-alpha.1 - prepared2026-10-16
+
+- Original loaded68k application now paints/erases its fixed port to produce
+  a hollow rectangle; shared monochrome512x342 scene and original branding.
+- Exact current ROM observed in Snow128K; no input qualification in that run.
+- [Notes](0.2.0-alpha.1.md), [candidate](0.2.0-alpha.1.json),
+  [publication state](0.2.0-alpha.1-publication.json). System remains unreleased.
+- Minor version advances for the new visible drawing capability. The first
+  alpha's bytes, annotated tag and records remain immutable.
+
+
 ## Unreleased development after 0.1.0-alpha.1
 
 - Shared monochrome512x342 product scene and original monitor/C branding now

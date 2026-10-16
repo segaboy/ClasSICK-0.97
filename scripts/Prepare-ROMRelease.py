@@ -131,11 +131,12 @@ def prepare(record, qbytes, args):
             "Output must be outside the repository and qualified source checkout")
     notes = lf(local(ROOT, record["release_notes"]))
     notes = notes.replace(f"({record['version']}.json)".encode(), b"(RELEASE.json)")
-    notes = notes.replace(b"(../../docs/development/loaded-app-redraw-evidence.md)",
+    qualification_note = str(Path(record["qualification"]["path"]).with_suffix(".md")).replace("\\", "/")
+    notes = notes.replace(("(../../" + qualification_note + ")").encode(),
                           ("(https://github.com/segaboy/ClasSICK-0.97/blob/"
                            + record["evidence_revision"]
-                           + "/docs/development/loaded-app-redraw-evidence.md)").encode())
-    for name in ("TRYING-0.1.0-alpha.1.md", "0.1.0-alpha.1-publication.json"):
+                           + "/" + qualification_note + ")").encode())
+    for name in (f"TRYING-{record['version']}.md", f"{record['version']}-publication.json"):
         notes = notes.replace(f"({name})".encode(),
                               ("(https://github.com/segaboy/ClasSICK-0.97/blob/main/releases/rom/"
                                + name + ")").encode())
