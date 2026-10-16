@@ -1,5 +1,9 @@
 # Current milestones and release tracks
 
+2026-10-16: The original native C drawing workload now calls the rectangle service directly on native68000 and x86 paths. PC boot/Windows viewer and a distinct native Mac ROM use real native results/pixels; the separate40-byte68k compatibility fixture remains. Independent pixel/failure/legacy tests, nine-profile2280 checks, dependency audits and native candidates pass. No new boot observation or release; PC mouse/event parity remains open.
+
+[Native drawing evidence](development/native-drawing-evidence.md).
+
 2026-10-16 owner clarification: each native Mac advancement needs matching
 native x86 PC behavior; legacy68k compatibility stays a separate required lane.
 Current renderer is native on both, but original native drawing-workload and

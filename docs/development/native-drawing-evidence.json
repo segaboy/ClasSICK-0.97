@@ -1,0 +1,260 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-16",
+  "specification": "SPEC-0038",
+  "implementation": "IMPL-0042",
+  "test": "TEST-0046",
+  "sources": [
+    "SRC-0219",
+    "SRC-0220",
+    "SRC-0221",
+    "SRC-0222"
+  ],
+  "compiled_source_revision": null,
+  "classification": "paired-native-workload-construction-and-hosted-conformance",
+  "current_candidate_boot_observed": false,
+  "new_emulator_run": false,
+  "new_release": false,
+  "system_state": "unreleased",
+  "matrix": {
+    "hosted_twins": {
+      "clang classick_native_drawing_tests.exe": "c01180736fa8bbccd2073c5152aa21203a5eb6ef09a0ff894912973cfcbc78a6",
+      "clang classick_native_drawing_only.exe": "e6dcc2fd4646971e8df75d59952ed1b277e70b80f76ada68ec99f7aa97641650",
+      "clang classick_product_scene_tests.exe": "93bf7d2c551a161268965e9d3ae4baa1cf43256bf2db276d572792bfa55931bc",
+      "clang classick_surface_demo.exe": "030d7d40e03fe2967c9edea0fc88902b09649269df82a5e0dd4c8e69f89bb3e4",
+      "gcc classick_native_drawing_tests.exe": "0eef730f058eae3a19abdfb5ad8cfdb5e3df31f88ba839e5310107fb03f14d29",
+      "gcc classick_native_drawing_only.exe": "bd71a7b0e46307f6d774a0d3b3cb881c174e108e0a6cd6f73c05f1faa784861b",
+      "gcc classick_product_scene_tests.exe": "dcc7c691f7b625c0c6deebab0f5397bca221598baa2b9fb5cdb4b7e127945030"
+    },
+    "emulator_run": false,
+    "profiles": [
+      {
+        "profile": "clang-hosted/debug-a",
+        "status": "passed",
+        "checks": 266
+      },
+      {
+        "profile": "clang-hosted/debug-b",
+        "status": "passed",
+        "checks": 266
+      },
+      {
+        "profile": "clang-hosted/release",
+        "status": "passed",
+        "checks": 266
+      },
+      {
+        "profile": "clang-hosted/i686",
+        "status": "passed",
+        "checks": 239
+      },
+      {
+        "profile": "clang-hosted/sanitized",
+        "status": "passed",
+        "checks": 266
+      },
+      {
+        "profile": "gcc-debug-a",
+        "status": "passed",
+        "checks": 251
+      },
+      {
+        "profile": "gcc-debug-b",
+        "status": "passed",
+        "checks": 251
+      },
+      {
+        "profile": "gcc-release",
+        "status": "passed",
+        "checks": 251
+      },
+      {
+        "profile": "gcc-i686",
+        "status": "passed",
+        "checks": 224
+      }
+    ],
+    "checks": 2280.0
+  },
+  "object_audits": {
+    "emulator_run": false,
+    "object_audits": 60,
+    "specification": "SPEC-0037"
+  },
+  "native_efi_supplement": {
+    "missing_native_drawing_controls": 1,
+    "native_source_index": 40,
+    "executed": false,
+    "native_efi_object_audits": 4
+  },
+  "native_closure": {
+    "specification": "SPEC-0038",
+    "selected_original_modules": [
+      "apps/native-drawing/workload.c",
+      "personality/system1/quickdraw-rects.c",
+      "arch/m68k/runtime.c"
+    ],
+    "undefined_imports": 0,
+    "interpreter_symbols": 0,
+    "twins_equal": true,
+    "object": {
+      "bytes": 3132,
+      "sha256": "1ef66ad69af6bb908ef2d595c80db933256ff438156db2518714cb3d9f2c6e0d"
+    },
+    "emulator_run": false
+  },
+  "rom": {
+    "image_sha256": "b02c765567787161b07c673c3edb8b84ca158dba45dfdef2e36d25d91c5a2fb1",
+    "image_size": 65536,
+    "rom_used": 7560,
+    "native_data_bss": 2160,
+    "workspace_begin": 32768,
+    "workspace_end": 33800,
+    "native_stack_base": 8448,
+    "native_stack_top": 32768,
+    "conservative_stack_bound": 10316,
+    "individual_frame_max": 604
+  },
+  "rom_manifest": {
+    "bytes": 24974,
+    "sha256": "e9bf81660416d755b3a2589576c3a6b732f9ce43573e0fd8921262b7cd40b19f"
+  },
+  "native_input_fingerprints": 58,
+  "pc": {
+    "fault_probe": "none",
+    "images": [
+      {
+        "case": "clang-64-O0",
+        "sha256": "94e6ebb867658c93c707d5f2a5e6619bc14a389f0aefe11c6fab978f7795a502",
+        "size_bytes": 209920,
+        "image_size": 225280,
+        "relocations": 3,
+        "status": "passed-unloaded"
+      },
+      {
+        "case": "clang-64-O2",
+        "sha256": "2df45e6116b78fe4e62ad134f83cb3f86671efb9056c27053c956e6260dfeef2",
+        "size_bytes": 149504,
+        "image_size": 163840,
+        "relocations": 3,
+        "status": "passed-unloaded"
+      }
+    ],
+    "image_rejections": 27,
+    "profile_rejections": 0,
+    "missing_transition_controls": 1,
+    "missing_exceptions_controls": 1,
+    "missing_presenter_controls": 1,
+    "missing_acpi_controls": 1,
+    "missing_ps2_controls": 1,
+    "missing_keyboard_controls": 1,
+    "missing_input_controls": 1,
+    "missing_byte_io_controls": 1,
+    "missing_uart_controls": 1,
+    "missing_native_uart_controls": 1,
+    "missing_service_controls": 1,
+    "missing_service_probe_controls": 1,
+    "missing_m68k_controls": 1,
+    "missing_aline_probe_controls": 1,
+    "payload": "payload/EFI/BOOT/BOOTX64.EFI",
+    "payload_kind": "directory-tree-not-disk",
+    "loaded": false
+  },
+  "debugger": {
+    "valid_runs": 6,
+    "argument_rejections": 3,
+    "status": "passed",
+    "wow64_supported": false
+  },
+  "workers": {
+    "claude": {
+      "cli_requests": 1,
+      "model_turns": 2,
+      "read_calls": 1,
+      "only_frozen_packet_read": true,
+      "packet_bytes": 9504,
+      "packet_sha256": "12237545fe7f1b1333b2a74961227bf12bfe59bc31e27c5c92cd7e644b1918a3",
+      "response_sha256": "08b52ab7481b1b57cb304c87bcebead8ee5885b0f1d13595a41801b49d3a15ee",
+      "models": [
+        "claude-opus-5-5"
+      ],
+      "usage_provider_reported": {
+        "input_tokens": 4,
+        "cache_creation_input_tokens": 6679,
+        "cache_read_input_tokens": 5062,
+        "output_tokens": 8054,
+        "output_tokens_details": {
+          "thinking_tokens": 3046
+        },
+        "server_tool_use": {
+          "web_search_requests": 0,
+          "web_fetch_requests": 0
+        },
+        "service_tier": "standard",
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 6679,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "global",
+        "iterations": [
+          {
+            "input_tokens": 2,
+            "output_tokens": 7974,
+            "cache_read_input_tokens": 3610,
+            "cache_creation_input_tokens": 4521,
+            "cache_creation": {
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 4521
+            },
+            "type": "message"
+          }
+        ],
+        "speed": "standard",
+        "fallback_credit": null
+      },
+      "worker_edits": 0,
+      "worker_test_runs": 0,
+      "delivered_c_lines": 288,
+      "requested_c_line_limit": 240,
+      "lead_disposition": "Adopted original independent pixel/canary/reset/refusal/legacy tests after full review; lead added owner notice. Extra48 lines accepted without another call."
+    },
+    "grok": {
+      "cli_requests": 1,
+      "model_turns": 3,
+      "read_calls": 2,
+      "only_frozen_packet_read": true,
+      "packet_bytes": 25431,
+      "packet_sha256": "ac9806934e29e217df339b387474a26207304eb200c06fcdb019b176c0190e7f",
+      "response_sha256": "f7a058a9796ae732708f7a6a25309be84c8b9e22d65f591da42c174edbc00008",
+      "models": [
+        "grok-4.6-build"
+      ],
+      "usage_provider_reported": {
+        "input_tokens": 12300,
+        "cache_read_input_tokens": 19968,
+        "cache_creation_input_tokens": 0,
+        "output_tokens": 13323,
+        "reasoning_tokens": 12226,
+        "total_tokens": 45591
+      },
+      "worker_edits": 0,
+      "worker_test_runs": 0,
+      "lead_disposition": [
+        "Synthetic scene-helper success: changed helper to execute the real native workload; added no-surface-write failure controls.",
+        "New Mac entry absent from platform mutable-data exception: independently caught by lead compiler before report; explicit platform entry admission fixed, core rules unchanged.",
+        "Legacy preflight coupling: removed legacy Line-A/interpreter prerequisites in distinct native Mac profile; pre-workload zero/failure display remains intentional, not false success.",
+        "Optional full native closure audit implemented; overlapping native objects remain an explicit disjointness precondition, not an unsupported-pointer runtime validator."
+      ],
+      "read_note": "The first read returned the whole counted packet; an extra offset459 read returned the final blank line. No missing-file or extra-scope read.",
+      "future_efficiency": "Give small reviews explicit packet line counts/read limits and low reasoning effort where suitable; avoid redundant EOF probes. No extra review request made."
+    }
+  },
+  "ci_status": "pending",
+  "ci_url": null,
+  "limits": [
+    "No actual new candidate boot/input qualification.",
+    "No external native application ABI/SDK/loader or general QuickDraw.",
+    "PC pointer/mouse-event parity incomplete.",
+    "Physical/full128K/historical/edition/B2/human and both System1/ROM gates remain."
+  ]
+}

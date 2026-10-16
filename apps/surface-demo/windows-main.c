@@ -2,7 +2,7 @@
 /* Copyright (C) 2026 Dean Howell. */
 #include "presenter.h"
 #include "arena.h"
-#include "../drawing-rom-app/probe.h"
+#include "../native-drawing/workload.h"
 #include "../product-scene/scene.h"
 #include "../service-probe/probe.h"
 #include "../../platform/windows/input.h"
@@ -14,9 +14,9 @@
 enum { FRAME_WIDTH = 512, FRAME_HEIGHT = 342, INPUT_CAPACITY = 16 };
 typedef struct {
     cs_arena arena;
-    cs_drawing_app_workspace *drawing;
+    cs_qd_rect_port *drawing;
     cs_trap_gateway gateway;
-    cs_loaded_app_result result;
+    cs_native_draw_result result;
     uint32_t accepted_spaces;
     cs_input_queue input;
     cs_win_clock host_clock;
@@ -47,8 +47,8 @@ static size_t buffer_budget(void)
     size_t alignment = _Alignof(cs_input_record);
     bytes += (alignment - bytes % alignment) % alignment
         + INPUT_CAPACITY * sizeof(cs_input_record);
-    alignment=_Alignof(cs_drawing_app_workspace);
-    return bytes+(alignment-bytes%alignment)%alignment+sizeof(cs_drawing_app_workspace);
+    alignment=_Alignof(cs_qd_rect_port);
+    return bytes+(alignment-bytes%alignment)%alignment+sizeof(cs_qd_rect_port);
 }
 
 static int init_buffers(demo_state *state, size_t capacity)
@@ -75,9 +75,9 @@ static int init_buffers(demo_state *state, size_t capacity)
             _Alignof(cs_input_record), &span) != CS_ARENA_OK
             || cs_input_init(&state->input, (cs_input_record *)span.data,
                 INPUT_CAPACITY) != CS_INPUT_OK) return 0;
-    if(cs_arena_alloc(&state->arena,sizeof(cs_drawing_app_workspace),
-            _Alignof(cs_drawing_app_workspace),&span)!=CS_ARENA_OK)return 0;
-    state->drawing=(cs_drawing_app_workspace *)(void *)span.data;
+    if(cs_arena_alloc(&state->arena,sizeof(cs_qd_rect_port),
+            _Alignof(cs_qd_rect_port),&span)!=CS_ARENA_OK)return 0;
+    state->drawing=(cs_qd_rect_port *)(void *)span.data;
     memset(span.data,0,span.size);
     return 1;
 }
@@ -91,11 +91,11 @@ static int scenes(demo_state *state)
 {
     cs_service_probe_result service;
     if(!cs_service_probe(&state->gateway,&service) ||
-        !cs_drawing_app_probe(state->drawing,&state->gateway,&state->result))return 0;
+        !cs_native_draw(state->drawing,&state->result))return 0;
     cs_product_state scene;
     scene.value=state->result.value;scene.inputs=state->accepted_spaces;scene.progress=0;
     scene.phases=state->result.phase;scene.success=state->result.success;
-    scene.pixels=state->drawing->port.pixels;
+    scene.pixels=state->drawing->pixels;
     return cs_product_scene(&state->surfaces[0],FRAME_WIDTH,FRAME_HEIGHT,0,&scene) &&
         cs_product_scene(&state->surfaces[1],FRAME_WIDTH,FRAME_HEIGHT,0,&scene);
 }
@@ -389,7 +389,7 @@ int WINAPI WinMain(HINSTANCE instance, HINSTANCE previous, LPSTR command, int sh
             && !verify_key_memory && !verify_time && !verify_live
             && !verify_start && !validate_start))) return 2;
     if (verify_key_memory) {
-        if (buffer_budget() != 1427488u+sizeof(cs_drawing_app_workspace) || init_buffers(&state,1427487u)
+        if (buffer_budget() != 1427488u+sizeof(cs_qd_rect_port) || init_buffers(&state,1427487u)
                 || state.backing == NULL || state.arena.used != 1427166u
                 || state.scratch == NULL || state.input.storage != NULL) goto cleanup;
         puts("SPEC-0004 viewer one-byte-short input storage: PASS");
@@ -398,7 +398,7 @@ int WINAPI WinMain(HINSTANCE instance, HINSTANCE previous, LPSTR command, int sh
     }
     if (verify_memory) {
         /* Independent literal lengths for the fixed color/mono/scratch scene. */
-        if (buffer_budget() != 1427488u+sizeof(cs_drawing_app_workspace) || init_buffers(&state,1427165u)
+        if (buffer_budget() != 1427488u+sizeof(cs_qd_rect_port) || init_buffers(&state,1427165u)
                 || state.backing == NULL || state.arena.used != 726750u
                 || state.scratch != NULL) goto cleanup;
         puts("SPEC-0003 viewer undersized backing pool: PASS");
@@ -441,7 +441,7 @@ int WINAPI WinMain(HINSTANCE instance, HINSTANCE previous, LPSTR command, int sh
         if (!verify_input(window, &state)) goto cleanup;
         result = 0;
     } else if (verify) {
-        if (state.arena.capacity != 1427488u+sizeof(cs_drawing_app_workspace) || state.arena.used != 1427488u+sizeof(cs_drawing_app_workspace)
+        if (state.arena.capacity != 1427488u+sizeof(cs_qd_rect_port) || state.arena.used != 1427488u+sizeof(cs_qd_rect_port)
                 || state.storage[0] != state.arena.storage
                 || state.storage[1] != state.arena.storage + 703152u
                 || state.scratch != state.arena.storage + 726750u
@@ -463,7 +463,7 @@ int WINAPI WinMain(HINSTANCE instance, HINSTANCE previous, LPSTR command, int sh
     } else {
         MSG message;
         if (verify_start || validate_start) {
-            if (state.arena.capacity != 1427488u+sizeof(cs_drawing_app_workspace) || state.arena.used != 1427488u+sizeof(cs_drawing_app_workspace)
+            if (state.arena.capacity != 1427488u+sizeof(cs_qd_rect_port) || state.arena.used != 1427488u+sizeof(cs_qd_rect_port)
                     || !verify_print(window,&state,verify_start ? 1 : 2)) {
                 fputs("B1 initial arena/scene check failed.\n",stderr);
                 goto cleanup;
@@ -517,7 +517,7 @@ int WINAPI WinMain(HINSTANCE instance, HINSTANCE previous, LPSTR command, int sh
                     || state.clock_wakeups==0 || state.paints==0 || state.flash
                     || state.active!=0 || state.native_escape_presses!=1
                     || state.last_source!=2 || state.last_sequence!=state.consumed
-                    || state.input.count!=0 || state.arena.used!=1427488u+sizeof(cs_drawing_app_workspace)
+                    || state.input.count!=0 || state.arena.used!=1427488u+sizeof(cs_qd_rect_port)
                     || state.native_space_presses!=(verify_start ? 1u : 2u)
                     || state.native_space_releases!=(verify_start ? 1u : 2u)
                     || (verify_start && (start_stage!=2 || state.consumed!=5))) result=1;

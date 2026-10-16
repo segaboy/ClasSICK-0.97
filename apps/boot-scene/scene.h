@@ -11,7 +11,7 @@
 
 /* SPEC-0009 original geometric boot test scene; not a historical Macintosh image. */
 typedef enum { CS_SCENE_OK=0, CS_SCENE_ARGUMENT=1, CS_SCENE_DIMENSION=2,
-    CS_SCENE_FORMAT=3, CS_SCENE_SURFACE=4 } cs_scene_result;
+    CS_SCENE_FORMAT=3, CS_SCENE_SURFACE=4, CS_SCENE_WORKLOAD=5 } cs_scene_result;
 typedef enum { CS_BOOT_OK=0, CS_BOOT_ARGUMENT=1, CS_BOOT_TARGET=2,
     CS_BOOT_ARENA=3, CS_BOOT_SCENE=4, CS_BOOT_PRESENT=5, CS_BOOT_PROBE=6 } cs_boot_result;
 enum { CS_SCENE_MAX_DIMENSION=8192, CS_SCENE_SEGMENTS=16,

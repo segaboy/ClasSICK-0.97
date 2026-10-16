@@ -95,7 +95,7 @@ try {
             'breakpoint disable', 'continue') 0
         Require-Text $body @(
             'stop reason = breakpoint', 'verify_print.* at windows-main\.c:', 'verify_clock.* at windows-main\.c:',
-            'command="--verify-clock "', 'state->arena.used = 1473768',
+            'command="--verify-clock "', 'state->arena.used = 1428520',
             'event = \(source = 1, key = 1, action = 1, repeat = 0\)', 'sequence = 1',
             'state->deadline = \(seconds = 0, nanoseconds = 250000000\)',
             '(?s)state->clock.last = \(seconds = 0, nanoseconds = 249999999\).*?state->flash = 1',

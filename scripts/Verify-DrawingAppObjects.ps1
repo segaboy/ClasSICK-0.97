@@ -13,10 +13,11 @@ $clang=(Get-Command clang).Source;$nm=(Get-Command llvm-nm).Source
 $gcc=Join-Path $repo '.tools/gcc/w64devkit/bin/gcc.exe';$checks=0
 $modules=@(
     @('personality/system1/quickdraw-rects.c','rect',''),
+    @('apps/native-drawing/workload.c','native','cs_qd_rect'),
     @('apps/drawing-rom-app/probe.c','probe','cs_loaded_app_prepare_source,cs_image_run_rectangles,cs_image_run_retire,cs_image_external_admit'),
     @('apps/drawing-rom-app/scene.c','scene','cs_product_scene'),
     @('apps/product-scene/scene.c','product','cs_surface_init,cs_surface_fill'),
-    @('apps/boot-scene/scene.c','boot','cs_surface_init,cs_arena_alloc,cs_fb_init,cs_fb_present,cs_product_scene,cs_service_probe,cs_drawing_app_probe'))
+    @('apps/boot-scene/scene.c','boot','cs_surface_init,cs_arena_alloc,cs_fb_init,cs_fb_present,cs_product_scene,cs_service_probe,cs_native_draw'))
 foreach($compiler in @($clang,$gcc)){foreach($bits in @(32,64)){foreach($opt in @(0,2)){
     foreach($module in $modules){
         $name=if($compiler -eq $clang){'clang'}else{'gcc'}

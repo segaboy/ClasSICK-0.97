@@ -2922,3 +2922,40 @@ reference payload, native format selection or current target run is admitted.
   backend. Native workload and pointer/event parity are not claimed complete.
 - Documentation/decision correction only: no runtime code/build/test execution,
   new trial, UART body work, new research/worker transfer or release change.
+
+## SRC-0219 - Owner paired native workload continuation and worker scope
+
+- Dean Howell,2026-10-16: "OK, move on to the next task. Please be sure to make best use of Claude and Grok."
+- Continues the recorded next paired native drawing slice under SRC-0217 /
+  ADR-0043: ordinary original code/tests/compiler/native construction/CI/Git/HQ/
+  wiki records. One bounded Claude original test artifact and one Grok read-only
+  review under standing scoped transfer permission; Codex sole writer/integrator.
+- No new emulator/VM/reference trial, native external loader/SDK, release,
+  additional agents/chats/automation/OneNote or protected inputs.
+
+## SRC-0220 - Claude original native drawing conformance artifact
+
+- One read-only request from a frozen reviewed SPEC-0038/API packet; original
+  test code, not historical evidence or executed tests. Lead-reviewed/adopted
+  in tests/native-drawing.c with independent pixel oracle and native/legacy checks.
+- [Prompt](../docs/development/tasks/native-drawing-tests.md),
+  [scope/identity/accounting and actual checks](../docs/development/native-drawing-evidence.json).
+  No source edits/commands, manuals/HQ/untracked originals/UART bodies or extra reads.
+
+## SRC-0221 - Grok native drawing boundary review
+
+- One read-only frozen contract/original-code packet; three lead-reviewed
+  findings and optional closure check, not executed tests or certification.
+- [Prompt](../docs/development/tasks/native-drawing-boundary-check.md),
+  [lead dispositions](../docs/development/native-drawing-evidence.md).
+  Helper/native-entry changes and actual checks belong to the lead. No extra
+  source/command/web/manual/HQ/credential/UART or model transfer scope.
+
+## SRC-0222 - Lead paired native drawing implementation/verification
+
+- Codex,2026-10-16; original SPEC-0038 / ADR-0044 / IMPL-0042 / TEST-0046.
+- Native C workload and direct native bindings, retained separate legacy
+  fixture, actual test/compiler/link/CI results; no target boot or release.
+- [Evidence](../docs/development/native-drawing-evidence.md). Prior sources,
+  native/source/UART/physical/full128K/edition/B2/human and both boot requirements
+  retain their scope; native workload parity is bounded and PC input parity open.

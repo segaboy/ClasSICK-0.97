@@ -1,5 +1,9 @@
 # 68000 application runtime plan - 2026-10-12
 
+2026-10-16: The original native C drawing workload now calls the rectangle service directly on native68000 and x86 paths. PC boot/Windows viewer and a distinct native Mac ROM use real native results/pixels; the separate40-byte68k compatibility fixture remains. Independent pixel/failure/legacy tests, nine-profile2280 checks, dependency audits and native candidates pass. No new boot observation or release; PC mouse/event parity remains open.
+
+[Native drawing evidence](native-drawing-evidence.md).
+
 Current owner correction2026-10-16: this is the68k runtime workstream, not a
 gate delaying native x86 OS counterparts. [Paired native delivery](native-parity-plan.md)
 advances each Mac/PC capability together under SRC-0217 / ADR-0043. Dated

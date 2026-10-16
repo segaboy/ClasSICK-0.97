@@ -3,8 +3,8 @@
 Current owner authority2026-10-16: SRC-0217/0218 and
 [ADR-0043](../adr/0043-coupled-native-mac-pc-parity.md).
 The former blanket wait for a complete Mac experience no longer governs native
-PC advancement or original native parity workloads. This is a scope correction,
-not a new code/build/test/boot result.
+PC advancement or original native parity workloads. This began as a scope correction. SPEC-0038 now implements the paired native
+drawing workload; target boots and broader parity remain separate evidence.
 
 ## Workstreams and completion
 
@@ -38,24 +38,18 @@ Existing transparent-variant and licensing requirements remain unchanged.
 | Branding/layout renderer | Native68000 C | Native x86 C | Shared512x342 renderer; hosted exact-pixel parity and current boot captures recorded |
 | Fixed-port PaintRect/EraseRect semantics | Native C manager | Native C manager | Selected bounded API profile; not general QuickDraw |
 | Existing original40-byte application fixture | Guarded68k interpreter prototype | Guarded68k interpreter prototype | Compatibility/runtime coverage; not native application-execution parity |
-| Original native drawing workload using those APIs | Paired native workload to add | Paired native workload to add | Next bounded parity slice; do not claim implemented |
+| Original native drawing workload using those APIs | Direct native C ROM candidate | Direct native C PC/Windows binding | SPEC-0038 compiler/hosted conformance passes; new target boots pending |
 | Scene input | Mac mouse backend | PC PS/2 keyboard counter | PC pointer/mouse-event parity missing; current image input reliability unqualified |
 | Full windows/menus/events/files/System disk experience | Incomplete | Incomplete | Develop each advancement on both native sides |
 
-The renderer is already native on both targets. The current PC demo still uses
-the68k application fixture to produce its drawing result. Keep that fixture as
-a compatibility test and add an original native C drawing workload compiled for
-both CPUs, calling the same selected drawing service, with expected pixels,
-result/error behavior and surface preservation checked against an independent
-oracle. Run it directly through native service calls, without the interpreter.
-This proves a bounded native service/workload path, not a general native app ABI
-or external executable loader. Preserve and compare the separate68k fixture.
-This is the next implementation slice to take before expanding drawing further.
-PC mouse/event parity is a separately identified follow-up, not satisfied by a
-keyboard counter or visual scene equality.
+The renderer and new original drawing workload now execute as native C on both
+targets under [SPEC-0038 evidence](native-drawing-evidence.md). The separate
+guarded40-byte68k fixture still supplies compatibility/runtime coverage. The
+new native Mac profile and native PC image are compiled candidates, not new
+boot observations. No general external native application ABI/loader is claimed.
 
-No implementation/fixtures/generated native app interface or new trial is part
-of this documentation correction. Ordinary scoped implementation follows the
-paired plan. Actual emulator/VM/reference trials still need fresh owner go-ahead.
-Keep24 originals/copies, UART bodies, published assets/tags and all prior result
-records unchanged. The standing canvas and both System1/ROM targets persist.
+Next paired advancement: PC pointer/mouse events and equivalent native Mac/PC
+scene input semantics, with a reviewed hardware/event contract and original
+tests. Keyboard counter or equal scene pixels cannot close pointer/event parity.
+Actual target runs need fresh owner go-ahead. Keep24 originals/copies, UART
+bodies, releases, previous results and both System1/ROM requirements intact.

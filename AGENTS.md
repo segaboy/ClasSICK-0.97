@@ -1,5 +1,18 @@
 # ClasSICK 0.97 working instructions
 
+Current owner native workload implementation (2026-10-16, SRC-0219..0222):
+"move on to the next task" with best use of Claude/Grok authorizes SPEC-0038 /
+ADR-0044 / IMPL-0042 / TEST-0046 direct native drawing on Mac/PC, standalone
+closure, original tests/compiler/CI/candidates and ordinary Git/HQ/wiki records.
+Codex sole writer, one bounded Claude test artifact and one Grok boundary report
+under standing reviewed-public/original transfer permission. Separate40-byte
+legacy fixture/--drawing profile remain. Native --native-drawing ROM and PC
+images are candidates, no new trial/release or external native ABI/SDK/loader.
+Preserve24 originals/copies, UART bodies, prior assets/tags/records. Fresh owner
+go-ahead before emulator/VM/reference runs; PC mouse/event parity remains open.
+No extra agents/chats/automation/OneNote. Earlier policy-only paragraph is dated.
+[Evidence](docs/development/native-drawing-evidence.md).
+
 Current owner native-parity correction (2026-10-16, SRC-0217/0218): complete
 the68k experience on Mac and advance the native x86 PC port with every matching
 capability. On PC the OS/managers are native x86; the interpreter serves legacy

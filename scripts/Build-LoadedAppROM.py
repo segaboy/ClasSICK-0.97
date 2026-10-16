@@ -22,7 +22,9 @@ HEADERS=('arch/m68k/loaded-rom.ld','arch/m68k/runtime.h','platform/mac128k/rom.h
  'personality/system1/quickdraw-rects.h','personality/system1/code-run.h','personality/system1/code-run-internal.h')
 def main():
     p=argparse.ArgumentParser();p.add_argument('--tool-root',required=True);p.add_argument('--output',required=True)
-    p.add_argument('--drawing',action='store_true',help='Build the SPEC-0036 fixed-port drawing candidate')
+    mode=p.add_mutually_exclusive_group()
+    mode.add_argument('--drawing',action='store_true',help='Build the SPEC-0036 interpreted drawing candidate')
+    mode.add_argument('--native-drawing',action='store_true',help='Build the SPEC-0038 direct native drawing candidate')
     a=p.parse_args();repo=Path(__file__).resolve().parents[1];tools=Path(a.tool_root).resolve();out=Path(a.output).resolve()
     out.mkdir(parents=True,exist_ok=False);sys.dont_write_bytecode=True
     spec=spec_from_file_location('base_rom',repo/'scripts/Build-MacROM.py');h=module_from_spec(spec);spec.loader.exec_module(h)
@@ -37,6 +39,13 @@ def main():
         program_source='apps/drawing-rom-app/program.S'
         program_hex='204d213c00380078213c000800082f08a8a2204d213c00300070213c001000102f08a8a370614e75'
         specification='SPEC-0036';profile='loaded-rectangles-v1'
+    if a.native_drawing:
+        sources=tuple('platform/mac128k/native-drawing-entry.c' if s=='platform/mac128k/loaded-entry.c' else s for s in sources)
+        sources+=('apps/native-drawing/workload.c','apps/product-scene/scene.c')
+        headers+=('apps/native-drawing/workload.h','apps/product-scene/scene.h',
+                  'docs/specifications/SPEC-0038-paired-native-drawing-workload.md',
+                  'docs/specifications/SPEC-0037-shared-product-scene.md')
+        program_source=None;program_hex='';specification='SPEC-0038';profile='native-rectangles-v1'
     profiles=[]
     for twin in ('a','b'):
         folder=out/('Os-'+twin);folder.mkdir();objects=[]
@@ -47,7 +56,7 @@ def main():
          '--sysroot='+str(tools),'-ffile-prefix-map='+str(repo)+'=.','-ffile-prefix-map='+str(folder)+'=.']
         for i,source in enumerate(sources):
             obj=folder/f'{i}.o';objects.append(obj);h.run([cc,*flags,'-c',repo/source,'-o',obj],env)
-            if source not in ('platform/mac128k/loaded-entry.c','platform/mac128k/drawing-entry.c'):
+            if source not in ('platform/mac128k/loaded-entry.c','platform/mac128k/drawing-entry.c','platform/mac128k/native-drawing-entry.c'):
                 for line in h.run([bins/'m68k-linux-gnu-nm','--defined-only','--format=posix',obj],env).splitlines():
                     fields=line.split()
                     if len(fields)>1 and fields[1] in 'BbCcDdGgSsVv':raise ValueError('Mutable core global: '+source+' '+line)
@@ -56,8 +65,11 @@ def main():
          '-Wl,-T,'+str(repo/'arch/m68k/loaded-rom.ld'),'-Wl,-Map,'+str(folder/'classick-loaded-app.map')]
         h.run([*link,*objects,'-o',elf],env);syms=h.symbols(elf)
         if not 0x8000<=syms['__loaded_app_start']<syms['__loaded_app_end']<=0x1A000:raise ValueError('Workspace bounds')
-        required=('cs_drawing_app_probe','cs_image_run_rectangles') if a.drawing else ('cs_loaded_app_probe','cs_image_run')
-        if any(name not in syms for name in (*required,'cs_m68k_bus_step_admitted')):raise ValueError('Disconnected demonstration')
+        required=('cs_native_draw','cs_qd_rect','cs_product_scene') if a.native_drawing else (('cs_drawing_app_probe','cs_image_run_rectangles') if a.drawing else ('cs_loaded_app_probe','cs_image_run'))
+        if not a.native_drawing:required=(*required,'cs_m68k_bus_step_admitted')
+        if any(name not in syms for name in required):raise ValueError('Disconnected demonstration')
+        if a.native_drawing and any(name.startswith(('cs_image_','cs_m68k_','cs_drawing_app_','cs_aline_probe')) for name in syms):
+            raise ValueError('Unexpected interpreted application in native drawing profile')
         raw=folder/'loaded.raw';h.run([bins/'m68k-linux-gnu-objcopy','-O','binary',elf,raw],env)
         b=bytearray(raw.read_bytes());b.extend(bytes(65536-len(b)));struct.pack_into('>I',b,256,h.crc(b))
         def audit(image):
@@ -88,13 +100,15 @@ def main():
          'native_stack_base':0x2100,'native_stack_top':0x8000,'conservative_stack_bound':stack_bound,
          'individual_frame_max':max(x['bytes'] for x in frames),'stack_frames':frames,'symbols':syms,'corruption_controls':8})
     if profiles[0]!=profiles[1]:raise ValueError('ROM twins differ')
-    fixture=out/'program.o';binary=out/'program.bin'
-    h.run([cc,'-mcpu=68000','-Wa,-m68000','-c',repo/program_source,'-o',fixture],env)
-    h.run([bins/'m68k-linux-gnu-objcopy','-O','binary','--only-section=.text',fixture,binary],env)
-    if binary.read_bytes()!=bytes.fromhex(program_hex):raise ValueError('Original program encoding mismatch')
+    if program_source is not None:
+        fixture=out/'program.o';binary=out/'program.bin'
+        h.run([cc,'-mcpu=68000','-Wa,-m68000','-c',repo/program_source,'-o',fixture],env)
+        h.run([bins/'m68k-linux-gnu-objcopy','-O','binary','--only-section=.text',fixture,binary],env)
+        if binary.read_bytes()!=bytes.fromhex(program_hex):raise ValueError('Original program encoding mismatch')
     manifest={'schema_version':1,'specification':specification,'profile':profile,
      'compiler':h.run([cc,'--version'],env).splitlines()[0],'profiles':[profiles[0]],'twins_equal':True,
-     'original_program_bytes':len(bytes.fromhex(program_hex)),'module_count':len(sources),'emulator_run':False,'system1_compatibility_proven':False,
+     'original_program_bytes':len(bytes.fromhex(program_hex)),'execution_path':'direct-native-c' if a.native_drawing else 'guarded-68k-fixture',
+     'module_count':len(sources),'emulator_run':False,'system1_compatibility_proven':False,
      'inputs':{f:hashlib.sha256((repo/f).read_bytes().replace(b'\r\n',b'\n')).hexdigest() for f in (*sources,*headers)}}
     (out/'manifest.json').write_text(json.dumps(manifest,indent=2)+'\n')
     print('First loaded-app ROM twins PASS:',profiles[0]['rom_used'],'ROM bytes,',profiles[0]['workspace_end']-0x8000,'workspace bytes; no boot trial.')

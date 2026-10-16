@@ -1,5 +1,9 @@
 # Architecture decision records
 
+2026-10-16: [ADR-0044](0044-paired-native-drawing-workload.md) binds one
+original direct native C drawing workload on Mac/PC and keeps interpreted
+legacy coverage separate. New candidates are compiled/tested, not boot-observed.
+
 2026-10-16: [ADR-0043](0043-coupled-native-mac-pc-parity.md) requires paired
 native Macintosh/x86 advancement and preserves a separate PC legacy68k lane.
 It supersedes blanket Mac-completion deferral for native PC counterparts and

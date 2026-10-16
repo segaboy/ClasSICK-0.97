@@ -27,15 +27,16 @@ try {
         'core/memory/guest.c','core/memory/manager.c','core/memory/lifecycle.c',
         'formats/resourcefork/reader.c','personality/system1/code-preflight.c',
         'personality/system1/resources.c','personality/system1/code-image.c',
-        'personality/system1/code-run.c','personality/system1/quickdraw-rects.c','core/cpu/m68k-bus.c')
+        'personality/system1/code-run.c','personality/system1/quickdraw-rects.c','core/cpu/m68k-bus.c','apps/native-drawing/workload.c')
     # SPEC-0009 objects permit only these original project imports.
     $allowedImports=@{8='cs_surface_init';
-        9='cs_surface_init,cs_arena_alloc,cs_fb_init,cs_fb_present,cs_product_scene,cs_service_probe,cs_drawing_app_probe';
+        9='cs_surface_init,cs_arena_alloc,cs_fb_init,cs_fb_present,cs_product_scene,cs_service_probe,cs_native_draw';
         10='cs_uefi_check_framebuffer,cs_fb_init,cs_arena_init,cs_boot_scene_prepare,cs_boot_scene_draw,cs_uefi_check_map,cs_acpi_find_pm_timer,cs_pmtimer_init,cs_pmtimer_sample,cs_pmtimer_time';
         14='cs_input_push';
         15='cs_ps2_begin,cs_ps2_poll,cs_native_read,cs_uefi_check_map,cs_acpi_find_pm_timer,cs_acpi_8042,cs_uefi_check_framebuffer,cs_fb_init,cs_arena_init,cs_arena_alloc,cs_boot_scene_prepare,cs_boot_scene_draw_input,cs_input_init,cs_input_pop,cs_pmtimer_init,cs_pmtimer_sample,cs_pmtimer_time';
         19='cs_uart_begin,cs_uart_enqueue,cs_uart_finish,cs_uart_poll,cs_native_keyboard_observed,cs_acpi_find_pm_timer,cs_native_read,cs_pmtimer_init,cs_pmtimer_sample';
         21='cs_trap_init,cs_trap_call,cs_trap_direct';22='cs_trap_call';23='cs_trap_get,cs_trap_set,cs_m68k_step'}
+    $allowedImports[$sources.Count-1]='cs_qd_rect'
     $common=@('-m64','-Wall','-Wextra','-Wpedantic','-Werror','-Wconversion','-Wsign-conversion',
         '-ffreestanding','-fno-builtin','-fno-stack-protector','-fno-ident','-mno-red-zone','-mgeneral-regs-only','-Wframe-larger-than=2048',
         '-fno-asynchronous-unwind-tables','-fno-unwind-tables',"-ffile-prefix-map=$repoRoot=.")
@@ -156,7 +157,7 @@ try {
     if($LASTEXITCODE -eq 0 -or ($missing -join "`n") -notmatch 'cs_acpi_find_pm_timer'){throw 'Missing ACPI control did not reject.'}
     $global:LASTEXITCODE=0
     $missing | Out-File -LiteralPath (Join-Path $controls 'missing-acpi.log') -Encoding UTF8
-    foreach($control in @(@(14,'ps2','cs_ps2_poll'),@(15,'keyboard','cs_native_keyboard_observed'),@(16,'input','cs_input_push'),@(17,'byte-io','cs_x64_inb|cs_x64_outb'),@(18,'uart','cs_uart_poll'),@(19,'native-uart','cs_native_uart_loop'),@(20,'services','cs_trap_call'),@(21,'service-probe','cs_service_probe'),@(22,'m68k','cs_m68k_step'),@(23,'aline-probe','cs_aline_probe'))) {
+    foreach($control in @(@(14,'ps2','cs_ps2_poll'),@(15,'keyboard','cs_native_keyboard_observed'),@(16,'input','cs_input_push'),@(17,'byte-io','cs_x64_inb|cs_x64_outb'),@(18,'uart','cs_uart_poll'),@(19,'native-uart','cs_native_uart_loop'),@(20,'services','cs_trap_call'),@(21,'service-probe','cs_service_probe'),@(22,'m68k','cs_m68k_step'),@(23,'aline-probe','cs_aline_probe'),@(($sources.Count-1),'native-drawing','cs_native_draw'))) {
         try {
             $ErrorActionPreference='Continue'
             $missing=@(& $compiler @link @($referenceObjects | Where-Object {$_ -ne $referenceObjects[$control[0]]}) -o (Join-Path $controls ('must-not-link-'+$control[1]+'.EFI')) 2>&1)
@@ -171,8 +172,8 @@ try {
     [ordered]@{fault_probe=$FaultProbe;images=$results;image_rejections=$mutations.Count;profile_rejections=[int]($FaultProbe -ne 'none');missing_transition_controls=1;missing_exceptions_controls=1;missing_presenter_controls=1;missing_acpi_controls=1;
         missing_ps2_controls=1;missing_keyboard_controls=1;missing_input_controls=1;missing_byte_io_controls=1;
         missing_uart_controls=1;missing_native_uart_controls=1;missing_service_controls=1;missing_service_probe_controls=1;
-        missing_m68k_controls=1;missing_aline_probe_controls=1;
+        missing_m68k_controls=1;missing_aline_probe_controls=1;missing_native_drawing_controls=1;
         payload='payload/EFI/BOOT/BOOTX64.EFI';payload_kind='directory-tree-not-disk';loaded=$false} |
         ConvertTo-Json -Depth 8 | Set-Content -LiteralPath (Join-Path $BuildRoot 'efi-results.json') -Encoding UTF8
-    Write-Output "EFI inspection PASS: four twin images, $($mutations.Count) corruption rejections, fourteen omitted-object rejections and original payload tree; no image executed."
+    Write-Output "EFI inspection PASS: four twin images, $($mutations.Count) corruption rejections, fifteen omitted-object rejections and original payload tree; no image executed."
 } finally{$env:PATH=$originalPath}

@@ -179,3 +179,16 @@ jobs:
             ${{ runner.temp }}/classick-drawing-app/manifest.json
             ${{ runner.temp }}/classick-drawing-app/Os-a/classick-loaded-app.rom
           if-no-files-found: error
+      - name: Build paired native drawing ROM twins
+        run: python3 scripts/Build-LoadedAppROM.py --native-drawing --tool-root "$RUNNER_TEMP/classick-m68k/root" --output "$RUNNER_TEMP/classick-native-drawing"
+      - name: Audit isolated native drawing closure
+        run: python3 scripts/Verify-NativeDrawingM68k.py --tool-root "$RUNNER_TEMP/classick-m68k/root" --rom-build "$RUNNER_TEMP/classick-native-drawing" --output "$RUNNER_TEMP/classick-native-drawing-closure"
+      - name: Retain original native drawing ROM candidate and manifest
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
+        with:
+          name: classick-native-drawing-rom
+          path: |
+            ${{ runner.temp }}/classick-native-drawing/manifest.json
+            ${{ runner.temp }}/classick-native-drawing/Os-a/classick-loaded-app.rom
+            ${{ runner.temp }}/classick-native-drawing-closure/manifest.json
+          if-no-files-found: error

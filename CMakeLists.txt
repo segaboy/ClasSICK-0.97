@@ -12,6 +12,57 @@ include(CTest)
 option(CLASSICK_WINDOWS_ADAPTERS "Build Windows development adapters and viewer" ON)
 option(CLASSICK_SURFACE_SANITIZERS "Validated Clang ASan/UBSan conformance build" OFF)
 
+# SPEC-0038: original direct native workload; no interpreter/loader dependency.
+add_library(classick_native_drawing STATIC apps/native-drawing/workload.c personality/system1/quickdraw-rects.c)
+add_library(classick_native_drawing_freestanding OBJECT apps/native-drawing/workload.c)
+add_executable(classick_native_drawing_tests tests/native-drawing.c)
+target_link_libraries(classick_native_drawing_tests PRIVATE classick_native_drawing classick_drawingapp)
+add_executable(classick_native_drawing_only tests/native-drawing-only.c)
+target_link_libraries(classick_native_drawing_only PRIVATE classick_native_drawing)
+add_executable(classick_native_drawing_faults tests/native-drawing-faults.c apps/native-drawing/workload.c)
+target_link_libraries(classick_native_drawing_faults PRIVATE classick_boot_scene)
+set(CLASSICK_NATIVE_DRAW_TARGETS classick_native_drawing classick_native_drawing_freestanding
+    classick_native_drawing_tests classick_native_drawing_only classick_native_drawing_faults)
+foreach(target ${CLASSICK_NATIVE_DRAW_TARGETS})
+    if(CMAKE_C_COMPILER_ID MATCHES "Clang|GNU")
+        target_compile_options(${target} PRIVATE -Wall -Wextra -Wpedantic -Werror -Wconversion -Wsign-conversion
+            "-ffile-prefix-map=${CMAKE_SOURCE_DIR}=." "-ffile-prefix-map=${CMAKE_BINARY_DIR}=.")
+    endif()
+endforeach()
+if(CMAKE_C_COMPILER_ID MATCHES "Clang|GNU")
+    foreach(target classick_native_drawing classick_native_drawing_freestanding)
+        target_compile_options(${target} PRIVATE -ffreestanding -fno-builtin -fno-stack-protector)
+    endforeach()
+    target_compile_options(classick_native_drawing_freestanding PRIVATE -O2)
+endif()
+if(CLASSICK_SURFACE_SANITIZERS)
+    foreach(target classick_native_drawing classick_native_drawing_tests classick_native_drawing_only classick_native_drawing_faults)
+        target_compile_options(${target} PRIVATE -fsanitize=address,undefined -fno-sanitize-recover=all -fno-omit-frame-pointer)
+    endforeach()
+    foreach(target classick_native_drawing_tests classick_native_drawing_only classick_native_drawing_faults)
+        target_link_options(${target} PRIVATE -fsanitize=address,undefined)
+    endforeach()
+endif()
+if(MINGW)
+    foreach(target classick_native_drawing_tests classick_native_drawing_only classick_native_drawing_faults)
+        target_link_options(${target} PRIVATE -Wl,--no-insert-timestamp)
+    endforeach()
+endif()
+if(BUILD_TESTING)
+    foreach(suite native refusal repeat legacy)
+        add_test(NAME native-drawing.${suite} COMMAND classick_native_drawing_tests ${suite})
+    endforeach()
+    add_test(NAME native-drawing.only COMMAND classick_native_drawing_only)
+    add_test(NAME native-drawing.faults COMMAND classick_native_drawing_faults)
+    if(CMAKE_C_COMPILER_ID MATCHES "Clang|GNU")
+        find_program(CLASSICK_NATIVE_DRAW_NM NAMES llvm-nm nm REQUIRED)
+        add_test(NAME native-drawing.freestanding COMMAND ${CMAKE_COMMAND}
+            "-DNM=${CLASSICK_NATIVE_DRAW_NM}" "-DALLOWED=cs_qd_rect"
+            "-DOBJECT=$<TARGET_OBJECTS:classick_native_drawing_freestanding>"
+            -P ${CMAKE_SOURCE_DIR}/scripts/Check-ObjectImports.cmake)
+    endif()
+endif()
+
 # SPEC-0037: shared monochrome product presentation.
 add_library(classick_product_scene STATIC apps/product-scene/scene.c)
 target_link_libraries(classick_product_scene PUBLIC classick_surfaces)
@@ -1029,7 +1080,7 @@ add_library(classick_pc_framebuffer_freestanding OBJECT platform/pc/framebuffer.
 add_executable(classick_native_framebuffer_tests tests/native-framebuffer.c)
 target_link_libraries(classick_native_framebuffer_tests PRIVATE classick_pc_framebuffer)
 add_library(classick_boot_scene STATIC apps/boot-scene/scene.c)
-target_link_libraries(classick_boot_scene PUBLIC classick_pc_framebuffer classick_arenas classick_drawingapp classick_product_scene classick_services)
+target_link_libraries(classick_boot_scene PUBLIC classick_pc_framebuffer classick_arenas classick_native_drawing classick_product_scene classick_services)
 add_library(classick_boot_scene_freestanding OBJECT apps/boot-scene/scene.c)
 add_executable(classick_boot_scene_tests tests/boot-scene.c)
 target_link_libraries(classick_boot_scene_tests PRIVATE classick_boot_scene)
@@ -1105,7 +1156,7 @@ if(BUILD_TESTING)
             -P ${CMAKE_SOURCE_DIR}/scripts/Check-ObjectImports.cmake)
         add_test(NAME scene.freestanding COMMAND ${CMAKE_COMMAND}
             "-DNM=${CLASSICK_SCENE_NM}"
-            "-DALLOWED=cs_surface_init,cs_surface_fill,cs_arena_alloc,cs_fb_init,cs_fb_present,cs_product_scene,cs_service_probe,cs_drawing_app_probe"
+            "-DALLOWED=cs_surface_init,cs_surface_fill,cs_arena_alloc,cs_fb_init,cs_fb_present,cs_product_scene,cs_service_probe,cs_native_draw"
             "-DOBJECT=$<TARGET_OBJECTS:classick_boot_scene_freestanding>"
             -P ${CMAKE_SOURCE_DIR}/scripts/Check-ObjectImports.cmake)
         add_test(NAME acpi.freestanding COMMAND ${CMAKE_COMMAND}
@@ -1164,7 +1215,7 @@ if(WIN32 AND CLASSICK_WINDOWS_ADAPTERS)
     add_executable(classick_presentation_tests tests/windows-presentation.c)
     target_link_libraries(classick_presentation_tests PRIVATE classick_windows_presenter)
     add_executable(classick_surface_demo WIN32 apps/surface-demo/windows-main.c)
-    target_link_libraries(classick_surface_demo PRIVATE classick_windows_presenter classick_arenas classick_windows_input classick_windows_clock classick_drawingapp classick_product_scene)
+    target_link_libraries(classick_surface_demo PRIVATE classick_windows_presenter classick_arenas classick_windows_input classick_windows_clock classick_native_drawing classick_product_scene classick_services)
     target_compile_definitions(classick_surface_demo PRIVATE WINVER=0x0A00 _WIN32_WINNT=0x0A00)
     if(CMAKE_C_COMPILER_ID MATCHES "Clang|GNU")
         foreach(target classick_windows_presenter classick_presentation_tests classick_surface_demo

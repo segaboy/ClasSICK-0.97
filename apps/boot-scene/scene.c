@@ -2,12 +2,12 @@
 /* Copyright (C) 2026 Dean Howell. */
 #include "scene.h"
 
-#include "../drawing-rom-app/probe.h"
+#include "../native-drawing/workload.h"
 #include "../service-probe/probe.h"
 typedef struct {
     cs_trap_gateway gateway;
-    cs_drawing_app_workspace app;
-    cs_loaded_app_result result;
+    cs_qd_rect_port port;
+    cs_native_draw_result result;
 } boot_workspace;
 _Static_assert(sizeof(boot_workspace)+_Alignof(boot_workspace)-1u<=CS_BOOT_WORKSPACE_LIMIT,"Probe workspace budget");
 
@@ -21,8 +21,10 @@ cs_scene_result cs_scene_render(const cs_surface *band,int32_t width,int32_t hei
     if(cs_surface_init(&checked,band->storage,band->storage_size,band->width,band->height,
         band->stride,band->format)!=CS_SURFACE_OK)return CS_SCENE_SURFACE;
     if(checked.format!=CS_SURFACE_RGBA8)return CS_SCENE_FORMAT;
-    cs_product_state state;state.value=97;state.inputs=0;state.progress=step%17u;
-    state.phases=6;state.success=1;state.pixels=NULL;
+    cs_qd_rect_port port;cs_native_draw_result result;
+    if(!cs_native_draw(&port,&result))return CS_SCENE_WORKLOAD;
+    cs_product_state state;state.value=result.value;state.inputs=0;state.progress=step%17u;
+    state.phases=result.phase;state.success=result.success;state.pixels=port.pixels;
     return cs_product_scene(&checked,width,height,band_top,&state)?CS_SCENE_OK:CS_SCENE_SURFACE;
 }
 
@@ -47,7 +49,7 @@ cs_boot_result cs_boot_scene_prepare(cs_arena *arena,const cs_fb_target *target,
     for(size_t i=0;i<sizeof *w;++i)bytes[i]=0;
     cs_service_probe_result service;
     if(!cs_service_probe(&w->gateway,&service) ||
-        !cs_drawing_app_probe(&w->app,&w->gateway,&w->result))return CS_BOOT_PROBE;
+        !cs_native_draw(&w->port,&w->result))return CS_BOOT_PROBE;
     /* Field copies keep every optimization level free of memcpy helpers. */
     out->target.base=checked.base; out->target.size=checked.size;
     out->target.width=checked.width; out->target.height=checked.height;
@@ -57,7 +59,7 @@ cs_boot_result cs_boot_scene_prepare(cs_arena *arena,const cs_fb_target *target,
     out->band_rows=(uint32_t)rows;out->workspace_bytes=offset-staging+sizeof *w;
     out->state.value=w->result.value;out->state.inputs=0;out->state.progress=0;
     out->state.phases=w->result.phase;out->state.success=w->result.success;
-    out->state.pixels=w->app.port.pixels;
+    out->state.pixels=w->port.pixels;
     return CS_BOOT_OK;
 }
 
