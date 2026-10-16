@@ -2896,3 +2896,29 @@ follows from any license.
 - [Release verification](../docs/development/rom-0.2.0-alpha.1-release-evidence.md)
   distinguishes prepared assets from actual publication and preserves the
   first alpha. No new runtime build/trial, reference input or worker/model call.
+
+## SRC-0217 - Owner clarification of native Mac/PC parity
+
+Dean Howell,2026-10-16, directly in the implementation chat:
+
+> I think there was a misunderstanding. The goal is to complete the 68k experience on Mac. The other goal is to reach that same parity with an x86 port on the PC.
+>
+> Every advancement on the 68k side should have the same advancement on the x86 side. Parity.
+>
+> Of course, 68k compatibility is still important to maintain, since I will want to run actual Macintosh software on the PC version, but the OS itself should be x86 aside from the interpreter.
+
+Authority: matching native Mac/PC feature delivery and retained PC legacy68k
+application compatibility. Supersedes earlier blanket deferral wherever it
+prevents native PC counterparts or original parity workloads. No new source,
+reference payload, native format selection or current target run is admitted.
+
+## SRC-0218 - Lead native-parity scope reconciliation
+
+- Codex,2026-10-16; [ADR-0043](../docs/adr/0043-coupled-native-mac-pc-parity.md)
+  and [paired delivery/gap plan](../docs/development/native-parity-plan.md).
+- The former gate was applied too broadly. Current renderer/managers compile
+  natively on both CPUs, but the original drawing application fixture uses the
+  guarded interpreter on both. PC uses a keyboard counter rather than a mouse
+  backend. Native workload and pointer/event parity are not claimed complete.
+- Documentation/decision correction only: no runtime code/build/test execution,
+  new trial, UART body work, new research/worker transfer or release change.

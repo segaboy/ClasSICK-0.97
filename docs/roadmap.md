@@ -1,5 +1,10 @@
 # Milestone roadmap
 
+Current owner delivery rule2026-10-16: native Mac and native x86 PC capabilities
+advance in step. [ADR-0043](adr/0043-coupled-native-mac-pc-parity.md) supersedes the
+earlier blanket native-app wait; [the paired plan](development/native-parity-plan.md)
+records current native-workload/input gaps separately from legacy68k support.
+
 2026-10-16: One portable monochrome product scene now serves the drawing ROM, native-PC bootstrap and hosted Windows viewer. Both boot paths use the same original 68k drawing fixture, with real result/phase/pixel state. The logical canvas is512x342; PC640x480 centers it at(64,69), with exact pixel parity and white margins. The owner-supplied monitor/C mark is approximated in original black/white geometry. All 2,217 local checks, 2,735 CI checks and native construction pass; new-candidate boots remain unobserved. [Evidence](development/shared-product-scene-evidence.md).
 
 2026-10-16: The original loaded 68k application paints a rectangle and erases its center through two selected drawing calls. One authorized Snow128K boot now shows APP/097, the hollow rectangle and six completed phases; the counter advances to 0001 with identical result-panel pixels at captured points. Automated input delivery remains unqualified; no human input credited. All 2,181 local and 2,691 CI checks passed. [Boot evidence](development/drawing-app-boot-trial.md). Published alpha assets and existing gates are unchanged.

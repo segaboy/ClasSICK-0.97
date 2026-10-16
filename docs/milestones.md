@@ -1,5 +1,10 @@
 # Current milestones and release tracks
 
+2026-10-16 owner clarification: each native Mac advancement needs matching
+native x86 PC behavior; legacy68k compatibility stays a separate required lane.
+Current renderer is native on both, but original native drawing-workload and
+PC mouse/event parity remain open. [Paired plan](development/native-parity-plan.md).
+
 2026-10-16: ROM0.2.0-alpha.1 is now published as an experimental prerelease.
 [Receipt](../releases/rom/0.2.0-alpha.1-publication.json); System remains unreleased.
 
@@ -42,6 +47,7 @@ The current ROM's embedded demo is separate from a disk-based System release.
 
 Future observations require exact artifact/platform identities and the owner's
 fresh go-ahead. Original reference media/firmware remain separately admitted
-black-box inputs. The native-application gate stays closed. Historical R-001,
+black-box inputs. Native PC counterparts follow the paired plan; detailed ABI/loading still needs
+bounded contracts. Historical R-001,
 source/UART roles, human provenance and [both boot directions](development/system1-rom-boot-requirements.md)
 remain in force. Milestone completion never follows from a version bump alone.

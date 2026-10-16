@@ -1,5 +1,10 @@
 # ADR-0042: one monochrome 512x342 product scene
 
+2026-10-16: [ADR-0043](0043-coupled-native-mac-pc-parity.md) supersedes the
+blanket native-application deferral below. Shared renderer/branding/canvas
+decisions remain; the existing interpreted fixture is compatibility coverage,
+with native workload parity still an open item.
+
 Accepted 2026-10-16, owner SRC-0209/0210/0211; SPEC-0037.
 
 Share the renderer, original branding geometry and original 68k probe across

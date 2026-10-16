@@ -1,5 +1,10 @@
 # 68000 application runtime plan - 2026-10-12
 
+Current owner correction2026-10-16: this is the68k runtime workstream, not a
+gate delaying native x86 OS counterparts. [Paired native delivery](native-parity-plan.md)
+advances each Mac/PC capability together under SRC-0217 / ADR-0043. Dated
+native-gate statements below retain their former checkpoint scope only.
+
 2026-10-16: One portable monochrome product scene now serves the drawing ROM, native-PC bootstrap and hosted Windows viewer. Both boot paths use the same original 68k drawing fixture, with real result/phase/pixel state. The logical canvas is512x342; PC640x480 centers it at(64,69), with exact pixel parity and white margins. The owner-supplied monitor/C mark is approximated in original black/white geometry. Both native candidates compile; no new target trial. [Shared scene](shared-product-scene-evidence.md). Native applications and older gates remain closed.
 
 2026-10-16 drawing trial: one freshly authorized isolated Snow128K boot shows APP/097, the original loaded application’s hollow rectangle and six phases. Counter0000/0001 and later0001 captures retain exact result-panel pixels. [Observation](drawing-app-boot-trial.md). Trial closed, automated delivery unqualified and no human input credited. General guest port state/clipping remains the next expansion; no new release or other gate closes.
@@ -404,21 +409,18 @@ Each step follows specifications, original code/tests, provenance and evidence;
 this plan is not authority to skip those gates. New VM/emulator execution waits
 for the owner's go-ahead and exact image/platform admission.
 
-## Closed native-application gate
+## Current native parity rule; earlier blanket gate superseded
 
-No x86 application/native test program or native image loader is built, loaded
-or run until the owner explicitly confirms the 68k experience complete. Own
-native OS/core/tools and hosted contract tests remain permitted. No native
-converter/packager, descriptor/type code, entry registry/marker, SDK/header or
-chosen x86 application ABI implementation is prepared meanwhile. D3/D5-D7 and
-ISA-tag/native format choices remain proposals; later-era orientation sources
-must be reviewed/registered before any specification relies on them.
+SRC-0217 / [ADR-0043](../adr/0043-coupled-native-mac-pc-parity.md) clarifies
+that a complete68k experience is the Mac goal; matching native x86 PC behavior
+must advance with it. No whole-Mac-completion prerequisite delays native PC
+counterparts or original native parity workloads. This plan remains the68k
+compatibility/runtime lane, coupled to the [native parity plan](native-parity-plan.md).
 
-When the 68k experience is near completion, propose measurable acceptance
-criteria for the owner's approval, including the supported manager/API matrix,
-M0.6/M0.7 results, his chosen application's real-Mac-equivalent workflow,
-document/file results and known differences. Only his confirmation opens the
-gate; neither a passing build nor a milestone automatically does so.
+Native ABI/SDK/container/loader details are not automatically implemented or
+selected by this clarification. Specify each needed boundary and validate it
+within its paired feature slice. Preserve all legacy instruction/guest-state
+and source/edition constraints. Actual target trials still require fresh go-ahead.
 
 Future authorized variants use the ordinary transparent experience: one file/
 identity, no choice prompt, matching results, shared guest-visible state,

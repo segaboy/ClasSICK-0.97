@@ -4,9 +4,11 @@ Status: staged runtime with original bounded CPU/memory profiles SPEC-0021/0022;
 complete instruction/application support remains open. No Apple application,
 ROM or executable reference payload is included. The current
 [68000 runtime plan](../development/m68k-runtime-plan.md) incorporates the
-owner's SRC-0099 gate: x86 application building/loading/running waits for his
-explicit confirmation that the 68k experience is complete. Own native OS/core/
-tools remain permitted. Any future emulator/VM run needs his go-ahead.
+owner's current SRC-0217 clarification: native Mac and x86 PC advancement is
+paired. SRC-0099's earlier blanket gate is superseded for native PC counterparts
+and original native parity workloads. The interpreter remains the legacy68k
+application lane. [Paired plan](../development/native-parity-plan.md).
+Any future emulator/VM run needs fresh owner go-ahead.
 
 ## Native OS, optional guest execution
 

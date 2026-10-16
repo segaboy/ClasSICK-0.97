@@ -1,5 +1,13 @@
 # Project charter
 
+Owner clarification2026-10-16 (SRC-0217): complete the native68000 Mac
+experience and reach the same experience through a native x86 PC port in step.
+Each advancement requires its corresponding native PC behavior and explicit
+parity evidence. PC OS services execute natively; only legacy68k application
+instructions enter the interpreter. Earlier blanket deferral of native PC
+counterparts until Mac completion is superseded. [ADR-0043](adr/0043-coupled-native-mac-pc-parity.md)
+and [paired delivery plan](development/native-parity-plan.md) govern current work.
+
 Status: approved founding requirements; dated 2026-10-07.
 
 ## Mission

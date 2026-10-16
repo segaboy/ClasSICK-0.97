@@ -1,5 +1,11 @@
 # Native application code research — 2026-10-12
 
+2026-10-16 owner clarification, SRC-0217: the order/gate recorded below is
+historical and superseded where it delays matching native PC features/workloads.
+See [ADR-0043](../adr/0043-coupled-native-mac-pc-parity.md). Research proposals
+are still not implementation authority; native OS parity and legacy application
+compatibility are separate required lanes. Original research text follows.
+
 Research record prepared by Claude at the owner's request. It is not a
 specification and changes no code; the implementation lead decides what to adopt
 and allocates identifiers. The owner asked for initial research into launching

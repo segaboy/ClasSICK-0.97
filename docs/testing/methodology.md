@@ -1,5 +1,13 @@
 # Testing and compatibility methodology
 
+2026-10-16 paired-native acceptance (SRC-0217 / ADR-0043): every new OS feature
+records native Mac and native x86 paths and applicable legacy68k compatibility
+coverage. Compare expected results, errors, state/pixels and preservation; use
+original native workloads compiled for both CPUs where practical. An interpreted
+application fixture or equal screenshot alone does not establish native workload
+or input parity. Keep compile/hosted/target/physical observations distinct and
+report an incomplete side as an open parity item. [Plan](../development/native-parity-plan.md).
+
 Status: tests exercise SPEC-0001, SPEC-0002 Windows presentation and SPEC-0003 arenas alongside tooling and
 repository controls. No historical System 1 behavior has been observed or validated.
 

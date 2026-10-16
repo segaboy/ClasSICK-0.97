@@ -1,5 +1,10 @@
 # Architecture decision records
 
+2026-10-16: [ADR-0043](0043-coupled-native-mac-pc-parity.md) requires paired
+native Macintosh/x86 advancement and preserves a separate PC legacy68k lane.
+It supersedes blanket Mac-completion deferral for native PC counterparts and
+original parity workloads; no implementation or target trial is claimed.
+
 2026-10-16: [ADR-0041](0041-first-loaded-rectangle-calls.md) selects two canonical
 fixed-port rectangle calls under the owned-code boundary, with original pixels,
 independent oracles and unchanged ordinary trap refusals. No global QuickDraw,

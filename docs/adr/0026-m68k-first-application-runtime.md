@@ -1,5 +1,10 @@
 # ADR-0026 - Shared application memory and 68000-first foundations
 
+2026-10-16 scope correction: [ADR-0043](0043-coupled-native-mac-pc-parity.md)
+supersedes this record's blanket wait for complete68k experience before native
+PC application/test/loader work where it blocks parity. Shared memory/interface
+foundations and transparency remain. The text below records the2026-10-12 decision.
+
 Accepted 2026-10-12 for the allowed 68000 foundations; SRC-0099.
 Native-application implementations remain gated on the owner's explicit
 confirmation that the 68k experience is complete. This is an architecture

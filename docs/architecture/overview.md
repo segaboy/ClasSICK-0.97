@@ -1,5 +1,11 @@
 # Architecture overview
 
+Current delivery rule2026-10-16: native68000 Mac and native x86 PC capabilities
+advance together; legacy68k application execution on PC is a separate compatible
+entry path to the same native managers. The interpreter is not an OS portability
+mechanism. [ADR-0043](../adr/0043-coupled-native-mac-pc-parity.md) supersedes the
+earlier blanket Mac-completion wait for native PC counterparts/parity workloads.
+
 Status: initial design, governed by ADR-0001 through ADR-0008. These are project
 choices, not claims about Apple's implementation.
 

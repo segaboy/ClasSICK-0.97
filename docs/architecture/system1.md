@@ -17,11 +17,11 @@ fully instantiated System 1 personality.
 
 SRC-0099 separately requires future authorized native application variants to
 be transparent in the ordinary faithful experience, with no separate user mode.
-This does not waive any historical manager semantics or approve native
-application work now: the owner must explicitly confirm the complete 68k
-experience before that gate opens. [ADR-0026](../adr/0026-m68k-first-application-runtime.md)
-and the [runtime plan](../development/m68k-runtime-plan.md) govern allowed
-68000 foundations; GPL-3.0-or-later terms remain unchanged.
+Current SRC-0217 / [ADR-0043](../adr/0043-coupled-native-mac-pc-parity.md)
+requires native Macintosh and x86 PC counterparts to advance together. The
+earlier whole-Mac-completion gate is superseded for native PC features and
+original parity workloads. Detailed variant ABI/loading remains bounded design
+work; historical semantics and GPL-3.0-or-later terms remain unchanged.
 
 ## Manager responsibilities and dependencies
 

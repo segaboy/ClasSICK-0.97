@@ -1,5 +1,19 @@
 # ClasSICK 0.97 working instructions
 
+Current owner native-parity correction (2026-10-16, SRC-0217/0218): complete
+the68k experience on Mac and advance the native x86 PC port with every matching
+capability. On PC the OS/managers are native x86; the interpreter serves legacy
+68k applications. This supersedes earlier blanket "68k complete first" native
+application/test/loader prohibitions wherever they block native PC counterparts
+or original parity workloads. No whole-Mac-completion prerequisite for that work.
+Detailed native ABI/SDK/loading still needs reviewed feature contracts; no broad
+third-party execution admission or current implementation is implied. Current
+task records policy/gaps only, no code/build/new trial. Preserve24 originals/
+copies, UART bodies, old releases/tags/records. Fresh go-ahead for each future
+emulator/VM/reference trial; no extra agents/chats/automation/OneNote.
+[Authoritative paired plan](docs/development/native-parity-plan.md). Earlier
+dated gate/result paragraphs are historical where superseded by this correction.
+
 Completed ROM0.2.0-alpha.1 publication (2026-10-16, SRC-0215/0216): four
 draft/public downloads and GitHub digests match; annotated tag verified. Uses
 exact previously observed shared-scene/drawing ROM and matching original

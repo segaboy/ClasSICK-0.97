@@ -1,5 +1,10 @@
 # ClasSICK 0.97
 
+2026-10-16 owner scope clarification: advance the native68000 Mac experience
+and native x86 PC port together, with per-feature parity evidence. The PC
+interpreter supports legacy68k applications; OS services execute natively.
+[Current paired plan and gaps](docs/development/native-parity-plan.md).
+
 2026-10-16: [ClasSICK ROM0.2.0-alpha.1](https://github.com/segaboy/ClasSICK-0.97/releases/tag/rom-v0.2.0-alpha.1) is published as an experimental prerelease. Loaded68k drawing calls, shared monochrome512x342 scene and original branding; exact Snow-observed ROM, matching original source, setup and checksums. System software remains unreleased.
 
 [Release notes](releases/rom/0.2.0-alpha.1.md); [download/setup](releases/rom/TRYING-0.2.0-alpha.1.md).
