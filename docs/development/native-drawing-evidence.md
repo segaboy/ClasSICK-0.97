@@ -91,6 +91,11 @@ sanitized. Initial compiler/check logs are retained. A repeated object-check
 attempt refused an existing output folder; final checks use a fresh directory.
 The private supplementary linker command first refused PowerShell syntax before
 execution; the quoted argument then ran and rejected the omitted object correctly.
+The first CI run's earlier framebuffer wrapper retained a stale dependency
+allowlist and rejected the new native call. Its scene entry now explicitly
+allows `cs_native_draw` instead of the old interpreted probe, matching the
+actual dependency and the other object audits; no runtime code changes.
+The corrected two endian scene audits are checked locally before rerunning CI.
 No failing attempt is counted as a pass. No new manual, reference payload,
 emulator implementation, UART body or historical claim was used. All24 originals/
 copies, prior evidence/edition/target records and released assets/tags are retained.

@@ -256,5 +256,14 @@
     "No external native application ABI/SDK/loader or general QuickDraw.",
     "PC pointer/mouse-event parity incomplete.",
     "Physical/full128K/historical/edition/B2/human and both System1/ROM gates remain."
-  ]
+  ],
+  "implementation_source_revision": "7ac031c86d678ec16f90fa508da4e0b5dcd17163",
+  "initial_ci_failure": {
+    "url": "https://github.com/segaboy/ClasSICK-0.97/actions/runs/38972004559",
+    "ctests_passed": 2812,
+    "m68k_job": "passed",
+    "windows_job": "failed-stale-framebuffer-import-allowlist",
+    "runtime_change_required": false,
+    "focused_local_endian_audits_after_fix": 2
+  }
 }
