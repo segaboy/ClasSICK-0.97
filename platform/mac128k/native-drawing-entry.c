@@ -2,6 +2,7 @@
 /* Copyright (C) 2026 Dean Howell. */
 #include "rom.h"
 #include "../../apps/service-probe/probe.h"
+#include "../../core/input/mouse.h"
 
 volatile cs_mac_diagnostics cs_mac_diag;
 static cs_trap_gateway cs_mac_services;
@@ -61,12 +62,16 @@ void cs_mac_main(void)
     cs_mac_diag.stage=success?16u:8u;cs_mac_diag.fault=success?0u:8u;
     if(!native_scene(&screen)){cs_mac_diag.fault=4;for(;;){}}
     cs_mac_loop_begin(&loop,read_reg(0,0));
+    cs_mouse_button mouse;
+    if(cs_mouse_button_begin(&mouse,loop.mouse_down)!=CS_MOUSE_OK){cs_mac_diag.fault=9;for(;;){}}
     uint32_t shown_presses=0;
     for(;;){
-        (void)cs_mac_loop_poll(&loop,&io);cs_mac_diag.ticks=loop.ticks;cs_mac_diag.presses=loop.presses;
-        if(loop.presses!=shown_presses){
-            if(!cs_product_scene_input(&screen,loop.presses)){cs_mac_diag.fault=5;for(;;){}}
-            shown_presses=loop.presses;
+        (void)cs_mac_loop_poll(&loop,&io);cs_mac_diag.ticks=loop.ticks;
+        if(cs_mouse_button_sample(&mouse,loop.mouse_down)>CS_MOUSE_CHANGED){cs_mac_diag.fault=10;for(;;){}}
+        cs_mac_diag.presses=mouse.presses;
+        if(mouse.presses!=shown_presses){
+            if(!cs_product_scene_input(&screen,mouse.presses)){cs_mac_diag.fault=5;for(;;){}}
+            shown_presses=mouse.presses;
         }
     }
 }

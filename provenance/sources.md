@@ -2994,3 +2994,34 @@ reference payload, native format selection or current target run is admitted.
   independent actual tests and ordinary public/HQ/wiki records. Existing native
   runtime, prior qualification and all excluded-input/trial/release gates persist.
 - [Evidence](../docs/development/worker-orchestration-qualification.md).
+
+## SRC-0227 - Owner continuation and permanent OneNote retirement
+
+- Owner,2026-10-16: "OK, now that the orchestration is in place, move on to the next task. Also, abandon all OneNote wiki information and don't record anymore. We won't be using that tool anymore for this project."
+- Continues the next native input foundation under the paired plan. Permanently retires OneNote and its Git wiki queue/mirrors/manifest maintenance; existing records remain frozen history. Ordinary development/provenance/HQ records continue. No new target run or release.
+
+## SRC-0228 - Microsoft public Win32 mouse message/capture interfaces
+
+- Microsoft Learn, published API prose; accessed2026-10-16. Selected sections: [WM_LBUTTONDOWN](https://learn.microsoft.com/en-us/windows/win32/inputdev/wm-lbuttondown) / [WM_LBUTTONUP](https://learn.microsoft.com/en-us/windows/win32/inputdev/wm-lbuttonup), message delivery and return; [WM_CAPTURECHANGED](https://learn.microsoft.com/en-us/windows/win32/inputdev/wm-capturechanged), remarks; [SetCapture](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-setcapture), [ReleaseCapture](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-releasecapture), [GetCapture](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getcapture), purpose/return/remarks.
+- Rights: link public interface descriptions, no republication or derivation from implementation. Page rendering also included a short published example; it was not adopted, copied or supplied to workers. Capture/cancel/count policy is original ClasSICK engineering.
+
+## SRC-0229 - Microsoft public standard PS/2 mouse report table
+
+- Microsoft, [Keyboard and mouse HID client drivers](https://learn.microsoft.com/en-us/windows-hardware/drivers/hid/keyboard-and-mouse-hid-client-drivers), section "Standard PS/2-compatible mouse data packet format (two buttons)", accessed2026-10-16.
+- Scope: three report-byte positions, button/sign/overflow/tag fields only. No driver implementation, samples, wheel extension or Microsoft overflow policy adopted. Strict tag admission, sign arithmetic and whole-overflow drop are explicit original profile choices. No historical Macintosh claim or controller-startup evidence.
+- Excluded discovery excerpts (third-party prose and an emulator source index containing only a pin-comment/datasheet link) were not opened or used. No third-party function bodies supplied an implementation input. Only the admitted public interface table feeds this contract.
+
+## SRC-0230 - Claude original mouse foundation proposals
+
+- One supervised read-only CLI request from pinned reviewed-public/original contract and three original viewer/Mac files; original C modules, contract, tests and exact binding edits returned as proposals. No commands/tests/checkout writes; no manuals, HQ, research originals, credentials or prohibited implementation inputs supplied.
+- [Primary brief](../docs/development/tasks/mouse-claude.md); [review/evidence](../docs/development/mouse-input-evidence.md).
+
+## SRC-0231 - Copilot independent mouse conformance artifact
+
+- One supervised request, API contract only, primary implementation withheld. Original C test artifact supplied unexecuted; actual tests credited only after lead execution. Existing GitHub service/model access, plan/remaining allowance still unspecified.
+- [Independent brief](../docs/development/tasks/mouse-copilot.md); [evidence](../docs/development/mouse-input-evidence.md).
+
+## SRC-0232 - Lead native mouse integration and verification
+
+- Codex,2026-10-16. Contract decisions, worker review/integration, authored Mac register transcript, build wiring and actual hosted/compiler/CI verification; no target trial, new release, hardware controller implementation or historical inference.
+- [SPEC-0039](../docs/specifications/SPEC-0039-native-mouse-foundations.md), [evidence](../docs/development/mouse-input-evidence.md).

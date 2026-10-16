@@ -1,5 +1,9 @@
 # Current milestones and release tracks
 
+2026-10-16: SPEC-0039 adds shared native button edges, a pure PS/2 report decoder and Windows/native-Mac scene bindings. Freestanding PC8042 startup/routing, pointer motion and full event parity remain open. No new target trial or release. OneNote and its Git wiki queue are permanently retired; existing wiki files stay frozen history.
+
+[Native mouse evidence](development/mouse-input-evidence.md).
+
 2026-10-16: The original native C drawing workload now calls the rectangle service directly on native68000 and x86 paths. PC boot/Windows viewer and a distinct native Mac ROM use real native results/pixels; the separate40-byte68k compatibility fixture remains. Independent pixel/failure/legacy tests, nine-profile2280 checks, dependency audits and native candidates pass. No new boot observation or release; PC mouse/event parity remains open.
 
 [Native drawing evidence](development/native-drawing-evidence.md).

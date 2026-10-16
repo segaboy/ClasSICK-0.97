@@ -34,15 +34,17 @@ Worker roles remain provisional until qualified on specific narrow tasks; qualif
 - **Grok**: use a small selected defect/boundary review when there is a distinct risk. Prior useful findings coexist with substantial reasoning overhead; use precise scopes, low effort where supported and short outputs. No repeat qualification call here.
 - **Research**: approved-source research is a candidate role, not newly qualified. A task must identify eligible source categories/locators and permitted retrieval controls. Historical claims still need eligible primary evidence; worker opinion and implementation behavior cannot settle them. No manuals were transferred in this qualification.
 
-## Handoff, Transcript & Wiki Hygiene
+## Handoff, Transcript & Record Hygiene
 - **Exact Inputs**: Supply bounded packets with exact commit refs, file paths, and line ranges.
 - **Repository briefs**: use `docs/development/tasks/`, exact public revisions and selected functions/sections. Use a frozen public-only input directory when repository-wide access would expose research originals; never grant whole-repository access just to avoid assembling a small brief. State EOF/line counts. Keep the working directory input-only and capture streams/logs/usage in a separate sibling directory, outside the model's permitted paths. Directory discovery cannot reveal a deliberately withheld implementation. Files do not remove context or token limits.
 - **Captured Output Only**: Workers return proposed file contents and a concise structured handoff (`result`, `actionable_findings`, `tests_executed`, `blockers`, `decisions_needed` under 180 words).
 - **Honest Test Accounting**: Report only actually executed tests in `tests_executed` (empty `[]` in plan/read-only runs). Never count proposed tests as executed.
 - **Integration**: inspect accepted artifacts and actual tools, make only necessary corrections, run focused checks plus required final verification, and retain a concise disposition. Stop on unusable output, auth/rate/permission failure or budget exhaustion; retry only for a concrete correctable blocker. Keep elapsed time, provider-reported counters, instruction deviations and integration effort. These counters are not comparable quotas or a measurement of ChatGPT savings.
-- **Records & Wiki**: Keep raw transcripts private. Stage documentation updates in the Git wiki queue only; touch OneNote exclusively upon the exact owner instruction `"update wiki"`.
+- **Observed mouse slice**: Claude supplied the substantial original C core/decoder, contract, primary tests and native binding edits; Copilot supplied199 independent C test lines from the API alone, covering8,388,608 report combinations. One Claude request timed out at240s without an artifact; one retry with supported `--effort low` completed in184.91s. Set effort explicitly on future Claude tasks and keep deadlines/output budgets matched to the deliverable. A requested thinking-token environment limit was not enforced (the result reported11,198 thinking tokens); do not claim it is a hard limit. Both successful calls read only their packet and made no edits/tests. Codex integrated sound artifacts, normalized the spec path and added an independent pixel-bound check; full results are in [the mouse receipt](mouse-input-evidence.md). No new Antigravity/Grok calls were needed.
+- **Records**: Keep raw transcripts private; maintain ordinary project/HQ development and provenance records. Owner retirement2026-10-16 supersedes all wiki instructions: never contact OneNote or add/maintain its Git wiki queue, mirrors or manifest. Existing wiki files are frozen history, not current authority.
 
 [Current qualification and verification](worker-orchestration-qualification.md);
 [dated prior protocol and Claude/Grok qualifications](agent-orchestration-2026-10-15.md).
-The present qualification continues SPEC-0038 verification only: no runtime change,
-new native target trial, driver implementation, release or historical claim.
+The qualification is dated SPEC-0038 evidence. Current owner continuation permits
+SPEC-0039 native mouse foundations; target trials, hardware controller routing,
+releases and historical claims remain separately gated.

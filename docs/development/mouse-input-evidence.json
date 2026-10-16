@@ -1,0 +1,237 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-16",
+  "baseline_public_revision": "1334d9ad858b0f75e3e2aa3cc21940ce9d71e1e0",
+  "sources": [
+    "SRC-0227",
+    "SRC-0228",
+    "SRC-0229",
+    "SRC-0230",
+    "SRC-0231",
+    "SRC-0232"
+  ],
+  "workers": {
+    "claude": {
+      "execution": {
+        "worker": "claude",
+        "exit_code": 0,
+        "timed_out": false,
+        "elapsed_seconds": 184.91,
+        "stream_bytes": 180853,
+        "stderr_bytes": 0
+      },
+      "input": {
+        "bytes": 35380,
+        "sha256": "7ea5e8728e8c6c768f8de94b64caf4a8d8e7efa5a976a5e4a0aaee1b0cbc57bd",
+        "lines": 693
+      },
+      "response_sha256": "dfaf8d9252ca4f416d8d07c74cfd51cdd7e03d4797eff58184e46a6acfbf83a8",
+      "packet_reads": 1,
+      "worker_tests_executed": 0,
+      "checkout_writes": 0,
+      "proposed_files": [
+        {
+          "path": "core/input/mouse.h",
+          "lines": 16,
+          "sha256": "d41c122f62933d83af8ad8015ca0f2b35298860bca80faa1dae0cd8705e8c542"
+        },
+        {
+          "path": "core/input/mouse.c",
+          "lines": 21,
+          "sha256": "fad65173ea1421fd02affc4fea7a52720fba515e849e9c3159c35eeeab18eb8d"
+        },
+        {
+          "path": "platform/pc/ps2-mouse.h",
+          "lines": 21,
+          "sha256": "13a3006a516eb4d51c61e08b6d5b3601f4291fc9dc7d6e2be13f527fcaaacbc9"
+        },
+        {
+          "path": "platform/pc/ps2-mouse.c",
+          "lines": 53,
+          "sha256": "0691455f1f5f99e8d8442526b011991c224d8e5429b64656f4175c6bb63fad0c"
+        },
+        {
+          "path": "tests/mouse.c",
+          "lines": 70,
+          "sha256": "22b78f78f382ff8b63b51d6c3bfab7483646659995e3fbd7d91ad8ef0e2688c9"
+        },
+        {
+          "path": "specs/SPEC-0039-mouse.md",
+          "lines": 46,
+          "sha256": "7fbfaba0561243bcf22b6e2d2e6a90e08987835ae8a006cc3f2b95f1b1d708e5"
+        }
+      ],
+      "instruction_compliance": "Only permitted frozen packet read observed; no writes, commands, tests, web, MCP or subagents.",
+      "model": "claude-opus-5-5",
+      "reported_usage": {
+        "input_tokens": 4,
+        "cache_creation_input_tokens": 18062,
+        "cache_read_input_tokens": 6171,
+        "output_tokens": 23153,
+        "output_tokens_details": {
+          "thinking_tokens": 11198
+        },
+        "server_tool_use": {
+          "web_search_requests": 0,
+          "web_fetch_requests": 0
+        },
+        "service_tier": "standard",
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 18062,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "global",
+        "iterations": [
+          {
+            "input_tokens": 2,
+            "output_tokens": 23074,
+            "cache_read_input_tokens": 3186,
+            "cache_creation_input_tokens": 17861,
+            "cache_creation": {
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 17861
+            },
+            "type": "message"
+          }
+        ],
+        "speed": "standard",
+        "fallback_credit": null
+      },
+      "provider_cost_estimate_usd": 0.6088062000000001,
+      "cost_basis": "provider-reported list estimate, not a subscription invoice or quota measure",
+      "first_attempt": {
+        "worker": "claude",
+        "exit_code": null,
+        "timed_out": true,
+        "elapsed_seconds": 240.05,
+        "stream_bytes": 118297,
+        "stderr_bytes": 0
+      },
+      "calls": 2,
+      "requested_effort_on_retry": "low",
+      "requested_thinking_limit_enforced": false,
+      "disposition": "Adopted core/decoder/tests and binding edits. Lead normalized spec path/status/IDs, added viewer independent counter bounds/title, Mac transcript and build wiring; native fault9/10 are profile-local."
+    },
+    "copilot": {
+      "execution": {
+        "worker": "copilot",
+        "exit_code": 0,
+        "timed_out": false,
+        "elapsed_seconds": 51.52,
+        "stream_bytes": 323940,
+        "stderr_bytes": 0
+      },
+      "input": {
+        "bytes": 4922,
+        "sha256": "05d905b1b2dca94a465511ef821d168559f8858b707b40bfaf5471a9373d51d6",
+        "lines": 11
+      },
+      "response_sha256": "7cceb8b30ac5f10704c89aaff54e536b6134b2cfc4602261d9e1b6365e4cc5d9",
+      "packet_reads": 1,
+      "worker_tests_executed": 0,
+      "checkout_writes": 0,
+      "proposed_files": [
+        {
+          "path": "tests/mouse-independent.c",
+          "lines": 199,
+          "sha256": "51859a3eb9eda6f46c0b39536777ca2c907a6a42a86f8917671b73afd81568be"
+        }
+      ],
+      "instruction_compliance": "Only permitted frozen packet read observed; no writes, commands, tests, web, MCP or subagents.",
+      "model": "claude-sonnet-5.5",
+      "calls": 1,
+      "reported_usage": {
+        "totalPremiumRequestCost": 1,
+        "totalUserRequests": 1,
+        "totalNanoAiu": 9482520000,
+        "tokenDetails": {
+          "input": {
+            "tokenCount": 168
+          },
+          "cache_read": {
+            "tokenCount": 6642
+          },
+          "cache_write": {
+            "tokenCount": 4806
+          },
+          "output": {
+            "tokenCount": 8181
+          }
+        },
+        "modelMetrics": {
+          "claude-sonnet-5.5": {
+            "requests": {
+              "count": 2,
+              "cost": 1
+            },
+            "usage": {
+              "inputTokens": 11616,
+              "outputTokens": 8181,
+              "cacheReadTokens": 6642,
+              "cacheWriteTokens": 4806,
+              "reasoningTokens": 1983
+            },
+            "cacheExpiresAt": "2026-10-16T23:16:28.501Z",
+            "totalNanoAiu": 9482520000,
+            "aiCreditsStatus": "complete",
+            "tokenDetails": {
+              "input": {
+                "tokenCount": 168
+              },
+              "cache_read": {
+                "tokenCount": 6642
+              },
+              "cache_write": {
+                "tokenCount": 4806
+              },
+              "output": {
+                "tokenCount": 8181
+              }
+            }
+          }
+        },
+        "codeChanges": {
+          "linesAdded": 0,
+          "linesRemoved": 0,
+          "filesModifiedCount": 0,
+          "filesModified": []
+        }
+      },
+      "plan_label": null,
+      "remaining_account_allowance": null,
+      "disposition": "199-line independent C tests adopted unchanged; root include path wired by lead. Implementation withheld."
+    }
+  },
+  "reused_qualifications": "docs/development/worker-orchestration-qualification.json",
+  "antigravity_new_calls": 0,
+  "grok_new_calls": 0,
+  "local_ctest_profiles": {
+    "clang-hosted-debug-a": 272,
+    "clang-hosted-sanitized": 272,
+    "gcc-i686": 229
+  },
+  "local_ctest_total": 773,
+  "post_bound_check_viewer_retests": 2,
+  "independent_report_combinations": 8388608,
+  "mac_authored_traces": 2048,
+  "width_endian_object_audits": 20,
+  "gnu68000_object_audits": 2,
+  "native_rom": {
+    "image_sha256": "5e415b9036802fcbb217fc6b98872b7e620a9603dbf4b478055e23f5ad68fdd7",
+    "image_size": 65536,
+    "rom_used": 7732,
+    "inputs": 61,
+    "twins_equal": true
+  },
+  "ci": {
+    "conclusion": "pending"
+  },
+  "one_note_retired": true,
+  "wiki_queue_retired": true,
+  "wiki_files_modified": false,
+  "extra_codex_agents_or_chats": 0,
+  "chatgpt_quota_savings_measured": false,
+  "target_trial": false,
+  "new_release": false,
+  "pc_freestanding_mouse_ready": false
+}

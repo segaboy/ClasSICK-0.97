@@ -1,5 +1,18 @@
 # ClasSICK 0.97 working instructions
 
+Current owner continuation (2026-10-16): proceed with SPEC-0039 shared native
+mouse-button core, pure PS/2 report decoder and Windows/native-Mac bindings,
+original hosted/compiler/CI/candidate checks; freestanding PC controller startup
+and routing follow separately. Claude primary/Copilot independent tests under
+standing reviewed-public/original-only service permission; Codex sole writer.
+No new emulator/VM/hardware/reference run or release. Preserve originals/copies,
+UART bodies and older releases/records. No extra Codex chats/subagents/automation.
+The owner permanently retired OneNote AND its Git wiki queue for this project:
+do not contact it or maintain/add wiki/queue/manifest records. Existing wiki files
+are frozen historical records. This supersedes every older wiki/"update wiki"
+instruction below; ordinary project/HQ development/provenance records continue.
+
+
 Current owner orchestration extension (2026-10-16, SRC-0223..0226):
 highest priority conserve ChatGPT usage. Antigravity/Copilot join Claude/Grok
 under reviewed-public/original-only inputs. One substantial primary artifact,
@@ -7,7 +20,7 @@ second worker only distinct risk; Codex sole writer, decisions/integration/final
 checks. Reuse existing qualifications. Current continuation is SPEC38 verification
 maintenance only, no runtime/driver/ABI/trial/hardware/release scope expansion.
 Preserve originals/copies, UART bodies and prior records/releases. No new Codex
-chats/subagents; ordinary Git/HQ/wiki queue. OneNote only explicit "update wiki".
+chats/subagents; ordinary Git/HQ/wiki queue. OneNote and its Git wiki queue are retired; see current owner scope above.
 [Protocol](docs/development/agent-orchestration.md); [qualification](docs/development/worker-orchestration-qualification.md).
 
 Current owner native workload implementation (2026-10-16, SRC-0219..0222):

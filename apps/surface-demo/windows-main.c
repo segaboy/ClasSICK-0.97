@@ -7,6 +7,7 @@
 #include "../service-probe/probe.h"
 #include "../../platform/windows/input.h"
 #include "../../platform/windows/clock.h"
+#include "../../core/input/mouse.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -18,6 +19,7 @@ typedef struct {
     cs_trap_gateway gateway;
     cs_native_draw_result result;
     uint32_t accepted_spaces;
+    cs_mouse_button mouse;
     cs_input_queue input;
     cs_win_clock host_clock;
     cs_clock clock, fake_source;
@@ -87,13 +89,19 @@ static int fill(cs_surface *surface, cs_rect rect, uint32_t color)
     return cs_surface_fill(surface, rect, color) == CS_SURFACE_OK;
 }
 
+static uint32_t shown_count(const demo_state *state)
+{
+    return state->mouse.presses > UINT32_MAX - state->accepted_spaces
+        ? UINT32_MAX : state->accepted_spaces + state->mouse.presses;
+}
+
 static int scenes(demo_state *state)
 {
     cs_service_probe_result service;
     if(!cs_service_probe(&state->gateway,&service) ||
         !cs_native_draw(state->drawing,&state->result))return 0;
     cs_product_state scene;
-    scene.value=state->result.value;scene.inputs=state->accepted_spaces;scene.progress=0;
+    scene.value=state->result.value;scene.inputs=shown_count(state);scene.progress=0;
     scene.phases=state->result.phase;scene.success=state->result.success;
     scene.pixels=state->drawing->pixels;
     return cs_product_scene(&state->surfaces[0],FRAME_WIDTH,FRAME_HEIGHT,0,&scene) &&
@@ -103,8 +111,8 @@ static int scenes(demo_state *state)
 static void title(HWND window, unsigned active)
 {
     SetWindowTextW(window, active == 0
-        ? L"ClasSICK 0.97 - Monochrome RGBA | Space: count/switch format | Esc: close"
-        : L"ClasSICK 0.97 - Monochrome 1-bit | Space: count/switch format | Esc: close");
+        ? L"ClasSICK 0.97 - Monochrome RGBA | Click: count | Space: count/switch format | Esc: close"
+        : L"ClasSICK 0.97 - Monochrome 1-bit | Click: count | Space: count/switch format | Esc: close");
 }
 
 static void paint(HWND window, HDC dc, demo_state *state)
@@ -158,8 +166,8 @@ static int consume_input(HWND window, demo_state *state)
             if (cs_time_add(state->clock.last,(cs_time){0,250000000},&state->deadline)
                     !=CS_TIME_OK || !flash(state,1)) return 0;
             if(state->accepted_spaces!=UINT32_MAX)++state->accepted_spaces;
-            if(!cs_product_scene_input(&state->surfaces[0],state->accepted_spaces) ||
-                !cs_product_scene_input(&state->surfaces[1],state->accepted_spaces))return 0;
+            if(!cs_product_scene_input(&state->surfaces[0],shown_count(state)) ||
+                !cs_product_scene_input(&state->surfaces[1],shown_count(state)))return 0;
             state->active ^= 1u;
             title(window, state->active);
             InvalidateRect(window, NULL, FALSE);
@@ -178,6 +186,25 @@ static int submit_input(HWND window, demo_state *state, const cs_input_event *ev
         state->failed = 1;
         return 0;
     }
+    return 1;
+}
+
+static int mouse_sample(HWND window, demo_state *state, uint32_t down)
+{
+    /* Held state changes before any capture call, so re-entrant
+     * WM_CAPTURECHANGED observes down=0 and is a no-op. */
+    uint32_t before = shown_count(state);
+    if (cs_mouse_button_sample(&state->mouse, down) > CS_MOUSE_CHANGED) {
+        state->failed = 1;
+        return 0;
+    }
+    if (shown_count(state) == before) return 1;
+    if (!cs_product_scene_input(&state->surfaces[0], shown_count(state))
+            || !cs_product_scene_input(&state->surfaces[1], shown_count(state))) {
+        state->failed = 1;
+        return 0;
+    }
+    InvalidateRect(window, NULL, FALSE);
     return 1;
 }
 
@@ -237,6 +264,23 @@ static LRESULT CALLBACK window_proc(HWND window, UINT message, WPARAM wparam, LP
         }
         break;
     }
+    case WM_LBUTTONDOWN:
+    case WM_LBUTTONUP: {
+        int down = message == WM_LBUTTONDOWN;
+        if (!mouse_sample(window, state, down ? 1u : 0u)) PostMessageW(window, WM_CLOSE, 0, 0);
+        else if (down && GetCapture() != window) SetCapture(window);
+        else if (!down && GetCapture() == window) ReleaseCapture();
+        return 0;
+    }
+    case WM_CAPTURECHANGED:
+        if ((HWND)lparam != window && !mouse_sample(window, state, 0))
+            PostMessageW(window, WM_CLOSE, 0, 0);
+        return 0;
+    case WM_CANCELMODE:
+    case WM_KILLFOCUS:
+        if (!mouse_sample(window, state, 0)) PostMessageW(window, WM_CLOSE, 0, 0);
+        if (GetCapture() == window) ReleaseCapture();
+        return 0;
     case WM_DESTROY:
         if (state->timer_active) {
             if (!KillTimer(window,1)) state->failed=1;
@@ -365,6 +409,86 @@ static int verify_live_clock(HWND window,demo_state *state)
     return 1;
 }
 
+/* message 0 means a real ReleaseCapture(), delivering WM_CAPTURECHANGED. */
+static int mouse_step(HWND window, demo_state *state, uint8_t *const before[2],
+    UINT message, LPARAM lparam, uint32_t presses, uint32_t down, int owned)
+{
+    unsigned active = state->active;
+    int lit = state->flash;
+    uint32_t shown = shown_count(state);
+    for (unsigned i = 0; i < 2; ++i)
+        memcpy(before[i], state->storage[i], scene_stride(i) * FRAME_HEIGHT);
+    if (message == 0) ReleaseCapture();
+    else SendMessageW(window, message, 0, lparam);
+    if (state->failed || state->mouse.presses != presses || state->mouse.down != down
+            || (GetCapture() == window) != owned || state->active != active
+            || state->flash != lit) return 0;
+    for (unsigned i = 0; i < 2; ++i) {
+        size_t size = scene_stride(i) * FRAME_HEIGHT;
+        cs_surface expected;
+        int same = memcmp(before[i], state->storage[i], size) == 0;
+        /* Independent fixed-layout bound: no byte outside the documented
+         * 80x20 counter cell (including row padding) may change. */
+        size_t first = i == 0 ? 352u * 4u : 44u;
+        size_t last = i == 0 ? 432u * 4u : 54u;
+        for (size_t y = 0; y < FRAME_HEIGHT; ++y)
+            for (size_t x = 0; x < scene_stride(i); ++x)
+                if (!(y >= 286u && y < 306u && x >= first && x < last)
+                        && before[i][y * scene_stride(i) + x]
+                        != state->storage[i][y * scene_stride(i) + x]) return 0;
+        if (shown_count(state) == shown) { if (!same) return 0; continue; }
+        /* Counter pixels change; every other byte matches the prior frame. */
+        if (same || cs_surface_init(&expected, before[i], size, FRAME_WIDTH, FRAME_HEIGHT,
+                scene_stride(i), i == 0 ? CS_SURFACE_RGBA8 : CS_SURFACE_MONO1_MSB) != CS_SURFACE_OK
+                || !cs_product_scene_input(&expected, shown_count(state))
+                || memcmp(before[i], state->storage[i], size) != 0) return 0;
+    }
+    return verify_print(window, state, 1);
+}
+
+static int verify_mouse(HWND window, demo_state *state)
+{
+    const LPARAM in = MAKELPARAM(20, 20), out = MAKELPARAM((WORD)-30, (WORD)-30);
+    uint8_t *before[2] = {malloc(scene_stride(0) * FRAME_HEIGHT),
+        malloc(scene_stride(1) * FRAME_HEIGHT)};
+    int passed = before[0] != NULL && before[1] != NULL
+        && mouse_step(window, state, before, WM_LBUTTONDOWN, in, 1, 1, 1)
+        && mouse_step(window, state, before, WM_LBUTTONDOWN, in, 1, 1, 1)
+        && mouse_step(window, state, before, WM_LBUTTONUP, in, 1, 0, 0)
+        && mouse_step(window, state, before, WM_LBUTTONDOWN, in, 2, 1, 1)
+        && mouse_step(window, state, before, WM_LBUTTONUP, out, 2, 0, 0)
+        && mouse_step(window, state, before, WM_LBUTTONDOWN, in, 3, 1, 1)
+        && mouse_step(window, state, before, 0, 0, 3, 0, 0)
+        && mouse_step(window, state, before, WM_LBUTTONUP, in, 3, 0, 0)
+        && mouse_step(window, state, before, WM_LBUTTONDOWN, in, 4, 1, 1)
+        && mouse_step(window, state, before, WM_CANCELMODE, 0, 4, 0, 0)
+        && mouse_step(window, state, before, WM_LBUTTONDOWN, in, 5, 1, 1)
+        && mouse_step(window, state, before, WM_KILLFOCUS, 0, 5, 0, 0);
+    if (passed) {
+        SendMessageW(window, WM_KEYDOWN, VK_SPACE, 0);
+        passed = state->accepted_spaces == 1 && state->active == 1 && state->flash
+            && shown_count(state) == 6 && verify_print(window, state, 1)
+            && mouse_step(window, state, before, WM_LBUTTONDOWN, in, 6, 1, 1)
+            && shown_count(state) == 7
+            && mouse_step(window, state, before, WM_LBUTTONUP, in, 6, 0, 0);
+    }
+    if (passed) {
+        state->accepted_spaces = UINT32_MAX - 7u;
+        passed = mouse_step(window, state, before, WM_LBUTTONDOWN, in, 7, 1, 1)
+            && shown_count(state) == UINT32_MAX
+            && mouse_step(window, state, before, WM_LBUTTONUP, in, 7, 0, 0)
+            && mouse_step(window, state, before, WM_LBUTTONDOWN, in, 8, 1, 1)
+            && mouse_step(window, state, before, WM_LBUTTONUP, in, 8, 0, 0);
+    }
+    free(before[0]);
+    free(before[1]);
+    if (!passed) return 0;
+    SendMessageW(window, WM_CLOSE, 0, 0);
+    if (!state->destroyed || IsWindow(window)) return 0;
+    puts("SPEC-0039 hidden viewer dispatched mouse messages/capture/Space sum (no platform or human input): PASS");
+    return 1;
+}
+
 int WINAPI WinMain(HINSTANCE instance, HINSTANCE previous, LPSTR command, int show)
 {
     WNDCLASSW klass = {0};
@@ -383,11 +507,12 @@ int WINAPI WinMain(HINSTANCE instance, HINSTANCE previous, LPSTR command, int sh
     int incomplete_start=strcmp(option,"--verify-start-incomplete")==0;
     int verify_start=strcmp(option,"--verify-start")==0 || incomplete_start;
     int validate_start=strcmp(option,"--validate-start")==0;
+    int verify_clicks=strcmp(option,"--verify-mouse")==0;
     (void)previous;
     (void)command;
     if (__argc != 1 && (__argc != 2 || (!verify && !verify_memory && !verify_keys
             && !verify_key_memory && !verify_time && !verify_live
-            && !verify_start && !validate_start))) return 2;
+            && !verify_start && !validate_start && !verify_clicks))) return 2;
     if (verify_key_memory) {
         if (buffer_budget() != 1427488u+sizeof(cs_qd_rect_port) || init_buffers(&state,1427487u)
                 || state.backing == NULL || state.arena.used != 1427166u
@@ -411,7 +536,8 @@ int WINAPI WinMain(HINSTANCE instance, HINSTANCE previous, LPSTR command, int sh
     state.fake_time=verify_time;
     if (cs_clock_init(&state.clock,(cs_time){0,0})!=CS_TIME_OK
             || cs_clock_init(&state.fake_source,(cs_time){0,0})!=CS_TIME_OK
-            || (!state.fake_time && cs_win_clock_init(&state.host_clock)!=CS_WIN_TIME_OK)) goto cleanup;
+            || (!state.fake_time && cs_win_clock_init(&state.host_clock)!=CS_WIN_TIME_OK)
+            || cs_mouse_button_begin(&state.mouse,0)!=CS_MOUSE_OK) goto cleanup;
     if (!init_buffers(&state, buffer_budget()) || !scenes(&state)) goto cleanup;
     klass.lpfnWndProc = window_proc; klass.hInstance = instance;
     klass.hCursor = LoadCursorW(NULL, MAKEINTRESOURCEW(32512));
@@ -419,15 +545,15 @@ int WINAPI WinMain(HINSTANCE instance, HINSTANCE previous, LPSTR command, int sh
     klass.lpszClassName = L"ClasSICK097OriginalSurfaceViewer";
     if (RegisterClassW(&klass) == 0) goto cleanup;
     registered = 1;
-    if (!verify && !verify_keys && !verify_time && !verify_live && !verify_start) { rectangle.right *= 2; rectangle.bottom *= 2; }
+    if (!verify && !verify_keys && !verify_time && !verify_live && !verify_start && !verify_clicks) { rectangle.right *= 2; rectangle.bottom *= 2; }
     if (!AdjustWindowRect(&rectangle, WS_OVERLAPPEDWINDOW, FALSE)) goto cleanup;
     window = CreateWindowExW(0, klass.lpszClassName, L"ClasSICK 0.97",
         WS_OVERLAPPEDWINDOW, CW_USEDEFAULT, CW_USEDEFAULT,
         rectangle.right - rectangle.left, rectangle.bottom - rectangle.top,
         NULL, NULL, instance, &state);
-    if (window == NULL || !resize_client(window, verify || verify_keys || verify_time || verify_live || verify_start ? 1 : 2)) goto cleanup;
+    if (window == NULL || !resize_client(window, verify || verify_keys || verify_time || verify_live || verify_start || verify_clicks ? 1 : 2)) goto cleanup;
     title(window, 0);
-    if (verify_time || verify_live || (!verify && !verify_keys)) {
+    if (verify_time || verify_live || (!verify && !verify_keys && !verify_clicks)) {
         if (SetTimer(window,1,25,NULL)==0) goto cleanup;
         state.timer_active=1;
     }
@@ -437,6 +563,9 @@ int WINAPI WinMain(HINSTANCE instance, HINSTANCE previous, LPSTR command, int sh
     } else if (verify_time) {
         if (!verify_clock(window,&state)) goto cleanup;
         result=0;
+    } else if (verify_clicks) {
+        if (!verify_mouse(window, &state)) goto cleanup;
+        result = 0;
     } else if (verify_keys) {
         if (!verify_input(window, &state)) goto cleanup;
         result = 0;

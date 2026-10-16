@@ -42,6 +42,9 @@ jobs:
       - name: Audit shared product scene and drawing objects
         shell: powershell
         run: .\scripts\Verify-DrawingAppObjects.ps1 -BuildRoot build\drawing-verification
+      - name: Mouse foundation width and endian object checks
+        shell: pwsh
+        run: .\scripts\Verify-MouseObjects.ps1 -BuildRoot build\mouse-verification
 
   m68k-rom:
     runs-on: ubuntu-24.04

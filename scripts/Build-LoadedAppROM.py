@@ -41,8 +41,9 @@ def main():
         specification='SPEC-0036';profile='loaded-rectangles-v1'
     if a.native_drawing:
         sources=tuple('platform/mac128k/native-drawing-entry.c' if s=='platform/mac128k/loaded-entry.c' else s for s in sources)
-        sources+=('apps/native-drawing/workload.c','apps/product-scene/scene.c')
-        headers+=('apps/native-drawing/workload.h','apps/product-scene/scene.h',
+        sources+=('apps/native-drawing/workload.c','apps/product-scene/scene.c','core/input/mouse.c')
+        headers+=('apps/native-drawing/workload.h','apps/product-scene/scene.h','core/input/mouse.h',
+                  'docs/specifications/SPEC-0039-native-mouse-foundations.md',
                   'docs/specifications/SPEC-0038-paired-native-drawing-workload.md',
                   'docs/specifications/SPEC-0037-shared-product-scene.md')
         program_source=None;program_hex='';specification='SPEC-0038';profile='native-rectangles-v1'
