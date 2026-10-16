@@ -1,8 +1,10 @@
 # Independent ROM and System releases
 
-2026-10-15, owner direction SRC-0198; [ADR-0040](../docs/adr/0040-independent-rom-system-releases.md).
-The ROM has its own release series. Preparing this groundwork creates no tag,
-GitHub release, published download or new boot qualification.
+2026-10-15 groundwork SRC-0198; 2026-10-16 alpha publication SRC-0200/0201;
+[ADR-0040](../docs/adr/0040-independent-rom-system-releases.md).
+The ROM has its own release series. The owner accepted the first experimental
+alpha publication; [the receipt](rom/0.1.0-alpha.1-publication.json) records its
+actual publication state, tag target and asset identities. No new boot trial.
 
 ## Version authority
 
@@ -12,7 +14,7 @@ our implementation's development releases. R-001's historical identity remains o
 
 | Component | Current development version | Release state | Tag format |
 | --- | --- | --- | --- |
-| ClasSICK ROM | 0.1.0-alpha.1 | Draft, unpublished | rom-v0.1.0-alpha.1 |
+| ClasSICK ROM | 0.1.0-alpha.1 | Experimental alpha; publication state in receipt | rom-v0.1.0-alpha.1 |
 | ClasSICK System software | Unassigned | Unreleased | system-vMAJOR.MINOR.PATCH |
 
 Versions use MAJOR.MINOR.PATCH, optionally followed by alpha.N, beta.N or rc.N.
@@ -25,17 +27,18 @@ tool changes are identified by their source revisions and evidence.
 
 ## Current ROM candidate
 
-[Draft notes](rom/0.1.0-alpha.1.md) and [frozen candidate record](rom/0.1.0-alpha.1.json)
+[Release notes](rom/0.1.0-alpha.1.md) and [frozen candidate record](rom/0.1.0-alpha.1.json)
 name the tested 64 KiB original ROM, compiled source, exact SHA-256, compiler
 manifest, evidence revision and limitations. The version is carried by the
 filename and release metadata; no bytes are patched into the qualified image.
 Its on-screen 0.97 remains the target label. This is an embedded-demo/application
 prototype; a complete System disk boot has not been demonstrated.
 
-The proposed tag has not been created and its target revision is unassigned.
-Before publication, select the reviewed metadata/source commit, confirm that
-every native build input equals the qualified manifest, and distinguish that
-tag revision from the compiled-source and observation revisions. Changed ROM
+The original frozen candidate preserves its draft admission state. The separate
+publication receipt records the actual tag and publication rather than rewriting
+that snapshot. Before publication, select the reviewed metadata/source commit,
+confirm that every native build input equals the qualified manifest, and
+distinguish the tag revision from the compiled-source and observation revisions. Changed ROM
 bytes require new build evidence and the appropriate separately authorized trial.
 Published artifact identities are immutable; later changes receive a new version.
 
@@ -69,7 +72,15 @@ matching source tree. Output inside either source checkout or an existing output
 directory is refused. It copies only the approved original ROM and named text
 records, notices, source links, checksum inventory and a prominent DRAFT marker.
 It performs no network request, Git mutation, tag, publication or guest launch.
-Do not stage its binary output in Git. This is a review bundle, not a release.
+Do not stage its binary output in Git. This tool always creates a marked local
+review draft, including when reproducing a candidate that has since been released.
+It does not reproduce the official download package or publish anything.
+
+The alpha downloads include a separately verified demo ZIP, standalone ROM,
+complete corresponding original source ZIP at the compiled revision and outer
+checksum inventory. [Setup/rebuild instructions](rom/TRYING-0.1.0-alpha.1.md) and
+[release verification](../docs/development/rom-alpha-release-evidence.md) describe
+their membership and checks. No compiler or emulator is bundled.
 
 ## Publication checklist
 
@@ -82,8 +93,9 @@ Do not stage its binary output in Git. This is a review bundle, not a release.
    Record the actual tag target and published asset identities in the release history.
 4. Update that component's published pointer; preserve earlier records and gates.
 
-This groundwork authorizes no publication. No automatic publishing workflow is
-installed. Apple/Microsoft payloads, raw research, manuals, private/HQ material,
+The groundwork alone authorized no publication; SRC-0200 accepts this one alpha.
+Future versions need the applicable owner scope. No automatic publishing workflow
+is installed. Apple/Microsoft payloads, raw research, manuals, private/HQ material,
 credentials and reference screenshots stay excluded. The package source links
 identify our original code; human provenance review remains required. No emulator/
 VM/reference trial follows from a version bump. Native-app, physical/128K/parity/

@@ -53,8 +53,10 @@ def metadata():
     require(catalog["schema_version"] == 1, "Unsupported component schema")
     rom = catalog["components"]["rom"]
     system = catalog["components"]["system"]
-    require(rom["state"] == "draft" and rom["latest_published_version"] is None,
-            "This preparer supports an unpublished ROM draft only")
+    require((rom["state"] == "draft" and rom["latest_published_version"] is None)
+            or (rom["state"] == "prerelease" and
+                rom["latest_published_version"] == rom["version"]),
+            "Unsupported ROM release state")
     require(system["state"] == "unreleased" and system["version"] is None
             and system["latest_published_version"] is None,
             "Review the preparer before introducing a System release")
@@ -133,6 +135,10 @@ def prepare(record, qbytes, args):
                           ("(https://github.com/segaboy/ClasSICK-0.97/blob/"
                            + record["evidence_revision"]
                            + "/docs/development/loaded-app-redraw-evidence.md)").encode())
+    for name in ("TRYING-0.1.0-alpha.1.md", "0.1.0-alpha.1-publication.json"):
+        notes = notes.replace(f"({name})".encode(),
+                              ("(https://github.com/segaboy/ClasSICK-0.97/blob/main/releases/rom/"
+                               + name + ")").encode())
     notes = notes.replace(b"(../README.md)",
                           b"(https://github.com/segaboy/ClasSICK-0.97/blob/main/releases/README.md)")
     files = {
@@ -181,7 +187,7 @@ def main():
     try:
         record, qbytes = metadata()
         if args.check:
-            print(f"Release metadata valid: ROM {record['version']} draft; System unreleased")
+            print(f"Release metadata valid: ROM {record['version']}; System unreleased")
         else:
             prepare(record, qbytes, args)
     except (OSError, ValueError, KeyError, TypeError) as error:

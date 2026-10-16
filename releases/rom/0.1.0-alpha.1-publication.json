@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "component": "rom",
+  "version": "0.1.0-alpha.1",
+  "status": "prepared",
+  "tag": "rom-v0.1.0-alpha.1",
+  "tag_target_revision": null,
+  "release_url": "https://github.com/segaboy/ClasSICK-0.97/releases/tag/rom-v0.1.0-alpha.1",
+  "release_id": null,
+  "published_at": null,
+  "prerelease": true,
+  "compiled_source_revision": "2ea01129377d248ef48dd81d6f8873e948456ce6",
+  "evidence_revision": "031212db9de4711d157b8e997aa91777f999a47b",
+  "source_archive_file_count": 616,
+  "assets": [
+    {
+      "filename": "classick-rom-0.1.0-alpha.1-demo.zip",
+      "bytes": 56454,
+      "sha256": "e1493fd3f267b915a2d63214558413a0f5e866d265a038d3e923886410d2ef77"
+    },
+    {
+      "filename": "classick-rom-0.1.0-alpha.1-mac128k.rom",
+      "bytes": 65536,
+      "sha256": "43c0296f808b85366fdbe55c9bcfd42e2daf9ef5fae77dfecfb85e5f80db0942"
+    },
+    {
+      "filename": "classick-rom-0.1.0-alpha.1-source.zip",
+      "bytes": 1519556,
+      "sha256": "a74030c6575fa7d4353d9a573bca334ec4ddef6718258fed080b22d85e523926"
+    },
+    {
+      "filename": "SHA256SUMS.txt",
+      "bytes": 311,
+      "sha256": "0712ebe6bf65b42236b47f8f30a5745904fe61e0f5f2de96bcfc6b9b016b3424"
+    }
+  ],
+  "system_state": "unreleased",
+  "new_runtime_build": false,
+  "new_emulator_trial": false,
+  "human_provenance_certification": false
+}

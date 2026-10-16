@@ -1,5 +1,16 @@
 # ClasSICK 0.97 working instructions
 
+Current owner ROM alpha publication (2026-10-16, SRC-0200): "OK, move on."
+accepts the proposed experimental ROM0.1.0-alpha.1 publication after final
+source packaging, Snow instructions and package/provenance review. Publish only
+the already observed own-ROM bytes and reviewed original source/text assets,
+using an annotated rom-v0.1.0-alpha.1 tag and GitHub prerelease. Keep System
+unreleased, historical/human provenance limitations explicit and all24 originals/
+copies, native inputs and previous records intact. No new binary build, trial,
+native application, workers/agents/chats/automation/OneNote. Existing source/
+UART/physical/full128K/parity/edition/B2/human and both System1/ROM gates persist.
+This supersedes the groundwork-only publication limit for this one ROM alpha.
+
 Current owner release groundwork (2026-10-15, SRC-0198): "I think the rom
 should be its own release..." and "ok, do the groundwork for this now."
 authorize separate ROM/System versions, histories, milestone/compatibility

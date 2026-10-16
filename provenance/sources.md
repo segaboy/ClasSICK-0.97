@@ -2733,3 +2733,22 @@ follows from any license.
   [verification](../docs/development/release-groundwork-evidence.md).
 - Pins the unchanged SRC-0195/0197 ROM; no new historical, runtime, physical or
   System1/ROM compatibility result. Human provenance review remains pending.
+
+## SRC-0200 - Owner experimental ROM alpha publication continuation
+
+- Project owner, 2026-10-16: "OK, move on." after the lead recommended publishing
+  experimental ROM0.1.0-alpha.1, completing matching source, Snow instructions
+  and final provenance/package review first. This accepts that scoped proposal.
+- One annotated component tag and GitHub prerelease with the already observed
+  image and reviewed original source/text assets; System remains unreleased.
+  No new runtime build, VM/emulator/reference trial or gate waiver.
+
+## SRC-0201 - Lead experimental ROM packaging and publication verification
+
+- Codex, 2026-10-16; independently authored instructions, release metadata and
+  local packaging from Git-pinned original source and the qualified ROM.
+- [Release verification](../docs/development/rom-alpha-release-evidence.md)
+  and [publication receipt](../releases/rom/0.1.0-alpha.1-publication.json).
+- Exact archive membership, source/native fingerprints, notices, deterministic
+  packaging and uploaded-asset checks are engineering review. No new historical
+  result or certification of human clean-room review; older gates remain open.
