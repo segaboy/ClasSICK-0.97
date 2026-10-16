@@ -13,7 +13,7 @@
   ],
   "profile": "loaded-rectangles-v1",
   "classification": "original-hosted-drawing-and-rom-construction",
-  "compiled_source_revision": null,
+  "compiled_source_revision": "7469caaf43346b019f98d75edcfaa7b3e2007917",
   "new_emulator_run": false,
   "current_candidate_boot_observed": false,
   "historical_1984_confirmed": false,
@@ -123,13 +123,31 @@
       "apps/drawing-rom-app/program.S": "690d41f1b73728c145ec78a75cdac94b89c914b29d940ddf6b0bd357aac2ada2",
       "docs/specifications/SPEC-0036-loaded-rectangle-calls.md": "f028eaf73d7689b38e979b7876f5a744744b1b203fc57325f6de6c6c4dc95092"
     },
-    "ci_status": "pending",
-    "ci_url": null,
+    "ci_status": "success",
+    "ci_url": "https://github.com/segaboy/ClasSICK-0.97/actions/runs/38884000515",
     "hosted_preview": {
       "classification": "hosted output, not an emulator observation",
       "bytes": 633,
       "sha256": "594f7a10b149017ad6854585692696a4f36c9fa659ccc36fa1f8fbf569bf604b"
-    }
+    },
+    "ci_ctest_counts": [
+      255,
+      255,
+      255,
+      255,
+      255,
+      228,
+      255,
+      240,
+      240,
+      240,
+      213
+    ],
+    "ci_ctest_checks": 2691,
+    "local_ci_complete_rom_image_equal": true,
+    "local_ci_complete_rom_manifest_equal": true,
+    "previous_baseline_original_rom_and_manifest_equal": true,
+    "previous_baseline_comparison_normalization": "stack_frame rows sorted only"
   },
   "workers": {
     "claude": {

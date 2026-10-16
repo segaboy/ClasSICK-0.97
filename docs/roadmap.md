@@ -1,5 +1,7 @@
 # Milestone roadmap
 
+2026-10-16: Our original loaded 68k application now paints a rectangle and erases its center through two selected drawing calls. Actual retained pixels appear in the native result panel. All 2,181 local checks, final affected checks/object audits and 2,691 CI checks pass; local/CI ROM twins and complete manifests match. This is a fixed-port prototype, with global QuickDraw/desktop and new-candidate boot observation still pending. [Evidence](development/drawing-app-evidence.md). Released alpha assets and existing gates remain unchanged.
+
 See [current milestones](milestones.md) for the concise capability overview and
 [release tracks](../releases/README.md) for separate ROM/System versions. The
 founding milestone definitions and dated checkpoints below retain their meaning.
