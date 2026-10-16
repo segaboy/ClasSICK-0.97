@@ -54,8 +54,11 @@ largest individual frame604. Sixty-one source/header/contract inputs identified.
 The decoder is not linked into the ROM; the shared button core is.
 [Sanitized compiled identity record](mouse-input-builds.json).
 
-CI is pending at this implementation checkpoint. Results will be recorded after
-the full Windows and68000 jobs finish; proposed tests were never counted as runs.
+CI at `8ba444410723616d9ed31a63904d0d6c1461e3fd` passes both Windows/68000 jobs, all2874
+CTests across11 profiles,18 mutation tests and20 mouse object audits. The
+native ROM and complete61-input manifest are byte-identical to local builds;
+the optimized native PC EFI hash is unchanged. No PC boot mouse binding is
+claimed. [CI receipt](https://github.com/segaboy/ClasSICK-0.97/actions/runs/38981277688).
 
 ## Current limits and next slice
 

@@ -224,7 +224,37 @@
     "twins_equal": true
   },
   "ci": {
-    "conclusion": "pending"
+    "conclusion": "success",
+    "headSha": "8ba444410723616d9ed31a63904d0d6c1461e3fd",
+    "url": "https://github.com/segaboy/ClasSICK-0.97/actions/runs/38981277688",
+    "ctest_profiles": [
+      272,
+      272,
+      272,
+      272,
+      272,
+      245,
+      272,
+      256,
+      256,
+      256,
+      229
+    ],
+    "ctests": 2874,
+    "mutation_tests": 18,
+    "width_endian_object_audits": 20,
+    "jobs": [
+      {
+        "name": "m68k-rom",
+        "conclusion": "success"
+      },
+      {
+        "name": "windows-bootstrap",
+        "conclusion": "success"
+      }
+    ],
+    "native_rom_and_manifest_match_local": true,
+    "optimized_efi_unchanged": true
   },
   "one_note_retired": true,
   "wiki_queue_retired": true,

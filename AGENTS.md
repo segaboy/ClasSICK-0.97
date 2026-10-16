@@ -1,6 +1,6 @@
 # ClasSICK 0.97 working instructions
 
-Current owner continuation (2026-10-16): proceed with SPEC-0039 shared native
+Current owner continuation (2026-10-16, SRC-0227..0232): proceed with SPEC-0039 shared native
 mouse-button core, pure PS/2 report decoder and Windows/native-Mac bindings,
 original hosted/compiler/CI/candidate checks; freestanding PC controller startup
 and routing follow separately. Claude primary/Copilot independent tests under
