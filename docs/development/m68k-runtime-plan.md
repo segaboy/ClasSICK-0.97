@@ -1,5 +1,7 @@
 # 68000 application runtime plan - 2026-10-12
 
+2026-10-16 drawing trial: one freshly authorized isolated Snow128K boot shows APP/097, the original loaded application’s hollow rectangle and six phases. Counter0000/0001 and later0001 captures retain exact result-panel pixels. [Observation](drawing-app-boot-trial.md). Trial closed, automated delivery unqualified and no human input credited. General guest port state/clipping remains the next expansion; no new release or other gate closes.
+
 2026-10-16: SPEC-0036 / IMPL-0040 / TEST-0044 adds an explicit owned-code
 PaintRect/EraseRect profile over a fixed native128x64 monochrome port. The
 original loaded program produces a hollow rectangle in13 instructions and

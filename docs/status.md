@@ -1,6 +1,6 @@
 # Project status
 
-2026-10-16: Our original loaded 68k application now paints a rectangle and erases its center through two selected drawing calls. Actual retained pixels appear in the native result panel. All 2,181 local checks, final affected checks/object audits and 2,691 CI checks pass; local/CI ROM twins and complete manifests match. This is a fixed-port prototype, with global QuickDraw/desktop and new-candidate boot observation still pending. [Evidence](development/drawing-app-evidence.md). Released alpha assets and existing gates remain unchanged.
+2026-10-16: The original loaded 68k application paints a rectangle and erases its center through two selected drawing calls. One authorized Snow128K boot now shows APP/097, the hollow rectangle and six completed phases; the counter advances to 0001 with identical result-panel pixels at captured points. Automated input delivery remains unqualified; no human input credited. All 2,181 local and 2,691 CI checks passed. [Boot evidence](development/drawing-app-boot-trial.md). Published alpha assets and existing gates are unchanged.
 
 2026-10-16: [ClasSICK ROM0.1.0-alpha.1](https://github.com/segaboy/ClasSICK-0.97/releases/tag/rom-v0.1.0-alpha.1)
 is published as an experimental prerelease. The four ROM/demo/source/checksum

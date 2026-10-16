@@ -9,13 +9,15 @@
     "SRC-0203",
     "SRC-0204",
     "SRC-0205",
-    "SRC-0206"
+    "SRC-0206",
+    "SRC-0207",
+    "SRC-0208"
   ],
   "profile": "loaded-rectangles-v1",
-  "classification": "original-hosted-drawing-and-rom-construction",
+  "classification": "original-hosted-drawing-construction-and-black-box-boot",
   "compiled_source_revision": "7469caaf43346b019f98d75edcfaa7b3e2007917",
-  "new_emulator_run": false,
-  "current_candidate_boot_observed": false,
+  "new_emulator_run": true,
+  "current_candidate_boot_observed": true,
   "historical_1984_confirmed": false,
   "system_state": "unreleased",
   "new_release": false,
@@ -195,5 +197,132 @@
     "both System1/ROM boot targets untested",
     "native-app gate closed",
     "historical/physical/full128K/parity/edition/B2/human gates remain"
-  ]
+  ],
+  "boot_observation": {
+    "status": "passed-scoped-boot-and-retained-drawing-observation",
+    "source_ids": [
+      "SRC-0207",
+      "SRC-0208"
+    ],
+    "owner_answer": "Yes—run the isolated drawing-ROM trial",
+    "owner_input_availability": "I’m unavailable—record the automated result",
+    "compiled_source_revision": "7469caaf43346b019f98d75edcfaa7b3e2007917",
+    "pretrial_result_revision": "1ffc49410af96124d85edf68ce9d5d4aa6a08582",
+    "rom_sha256": "494aa494b09ff616b8c755b5a07d61dc84594990336d718b65295e611d7d895a",
+    "snow_version": "v1.5.0-317c188 Windows x86-64",
+    "snow_sha256": "32cf5285582c0f509e4f1ac38d86bfb90440bae9da43b7823bfb0841dea588e6",
+    "model": "Early128K",
+    "cold_starts": 1,
+    "initial_launcher_exited_before_window_or_guest_reset": true,
+    "reference_inputs": [],
+    "disks": [],
+    "saved_machine_state": false,
+    "shared_directory": null,
+    "serial_bridges": [],
+    "isolated_profiles": true,
+    "workspace_sha256_at_launch": "1384b8e6075c5d114f35d3cf87658d525e7585667b112f564751db654ca8411c",
+    "workspace_sha256_after_close": "1384b8e6075c5d114f35d3cf87658d525e7585667b112f564751db654ca8411c",
+    "reset_log_utc": "2026-10-16T14:08:43Z",
+    "trial_closed_log_utc": "2026-10-16T14:12:48Z",
+    "closed_window_verified": true,
+    "observations": [
+      {
+        "kind": "complete-boot",
+        "captured_utc": "2026-10-16T14:09:14.565Z",
+        "counter": "0000",
+        "file": "boot-0000.png",
+        "scene": "APP/097, hollow rectangle and six completed phases"
+      },
+      {
+        "kind": "automated-left-click-not-visibly-credited",
+        "action_utc": "2026-10-16T14:09:29.984Z",
+        "captured_utc": "2026-10-16T14:09:31.403Z",
+        "counter": "0000"
+      },
+      {
+        "kind": "automated-short-drag-not-visibly-credited",
+        "action_utc": "2026-10-16T14:09:43.667Z",
+        "captured_utc": "2026-10-16T14:09:44.987Z",
+        "counter": "0000"
+      },
+      {
+        "kind": "automated-right-click-not-visibly-credited",
+        "action_utc": "2026-10-16T14:09:58.723Z",
+        "captured_utc": "2026-10-16T14:10:00.071Z",
+        "counter": "0000"
+      },
+      {
+        "kind": "first-counter-advancement",
+        "captured_utc": "2026-10-16T14:10:52.095Z",
+        "counter": "0001",
+        "scene": "Hollow rectangle and six phases intact; host window menu visible",
+        "input_attribution": "Multiple automated inputs occurred; exact one-to-one attribution unresolved; human confirmation pending"
+      },
+      {
+        "kind": "clean-counter-snapshot",
+        "captured_utc": "2026-10-16T14:11:15.799Z",
+        "counter": "0001",
+        "file": "counter-0001.png",
+        "scene": "APP/097, hollow rectangle and six phase marks retained",
+        "human_input_credited": false,
+        "input_attribution": "Unresolved pending owner confirmation"
+      },
+      {
+        "kind": "later-stability-snapshot",
+        "captured_utc": "2026-10-16T14:12:32.865Z",
+        "counter": "0001",
+        "file": "counter-0001-stable.png",
+        "scene": "Hollow rectangle and all six phases still intact; no additional counter advance observed"
+      }
+    ],
+    "screenshots": {
+      "boot-0000.png": {
+        "bytes": 75297,
+        "sha256": "6abf839f4b51e35e3121191d5b320e7118e19ce3520100f5796967c9dec0809b"
+      },
+      "counter-0001-menu.png": {
+        "bytes": 78132,
+        "sha256": "32eeb35fecb838a3bb62ad7e50f85bc88bcaafa951e7c21afa991b4a58d7f9d7"
+      },
+      "counter-0001.png": {
+        "bytes": 75637,
+        "sha256": "2a8fa1d0fab8183b0700f28704606c88c33c181367f799c4f1bdba93f3356c3f"
+      },
+      "counter-0001-stable.png": {
+        "bytes": 75512,
+        "sha256": "6e6a3db3f155bba17dd2f25441bc9895cb61b1fcad5ffc2023bb44dda3b594c3"
+      }
+    },
+    "captured_panel_comparison": {
+      "comparison": "pixel-identical native result panel and six phase marks between captured counter0000 and0001",
+      "image_dimensions": [
+        1002,
+        782
+      ],
+      "screenshot_region_xyxy": [
+        90,
+        340,
+        912,
+        550
+      ],
+      "identical": true,
+      "scope": "fixed window-size point snapshots; not a continuous frame trace or human input result",
+      "files": {
+        "boot-0000.png": {
+          "bytes": 75297,
+          "sha256": "6abf839f4b51e35e3121191d5b320e7118e19ce3520100f5796967c9dec0809b"
+        },
+        "counter-0001.png": {
+          "bytes": 75637,
+          "sha256": "2a8fa1d0fab8183b0700f28704606c88c33c181367f799c4f1bdba93f3356c3f"
+        }
+      }
+    },
+    "later_stability_panel_equal": true,
+    "new_trial_requires_fresh_go_ahead": true,
+    "input_delivery_qualified": false,
+    "human_input_credited": false,
+    "historical_or_physical_result": false,
+    "limits": "Point snapshots only, not continuous frame tracing, calibrated latency, one-to-one input attribution, or general mouse-delivery qualification. Short left-click, short drag and right-click were not immediately visibly credited; a later snapshot showed counter0001. Owner unavailable; no human input credited. No own RAM diagnostics read in this trial."
+  }
 }

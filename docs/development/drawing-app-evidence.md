@@ -1,6 +1,6 @@
 # First loaded rectangle calls - 2026-10-16
 
-SPEC-0036 / ADR-0041 / IMPL-0040 / TEST-0044; SRC-0202..0206.
+SPEC-0036 / ADR-0041 / IMPL-0040 / TEST-0044; SRC-0202..0208.
 
 An original resource/CODE application now calls the selected PaintRect and
 EraseRect cases through an explicit owned-code coordinator. Its40-byte program
@@ -64,9 +64,13 @@ Both jobs pass on compiled source `7469caaf43346b019f98d75edcfaa7b3e2007917` in
 All2691 final-source CTests pass, including two extra fresh bootstrap profiles.
 The downloaded new ROM and complete drawing manifest exactly match local bytes.
 The earlier baseline original-ROM image/manifest also match, sorting only its
-stack-frame rows for comparison. No CI emulator run. The new ROM has not
-been run in an emulator or on hardware; each trial needs fresh explicit owner
-go-ahead. It is a new candidate, not a release. Published alpha0.1.0-alpha.1
+stack-frame rows for comparison. No CI emulator run. One freshly authorized
+isolated Snow128K cold boot now shows APP/097, the hollow rectangle and all six
+phase marks. Counter0000 to0001 snapshots and a later0001 snapshot retain the
+exact result-panel pixels. [Trial record](drawing-app-boot-trial.md). Automated
+input delivery remains unqualified; the owner was unavailable, so no human input
+is credited. The trial is closed; future trials need fresh explicit go-ahead.
+Physical execution is untested. It is an unreleased candidate. Published alpha0.1.0-alpha.1
 assets/tag, all24 untracked research originals/existing copies and old records
 remain unchanged. No new duplicate research-copy set or UART body inspection.
 

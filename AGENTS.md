@@ -1,5 +1,14 @@
 # ClasSICK 0.97 working instructions
 
+Completed drawing trial (2026-10-16, SRC-0207/0208): owner said
+"Yes—run the isolated drawing-ROM trial". One isolated own-ROM Snow128K cold
+boot displays APP/097, hollow rectangle and six phases; counter0000/0001 and a
+later0001 capture retain exact result-panel pixels. Trial now closed. Automated
+input delivery remains unqualified; owner unavailable, no human input credited.
+Future emulator/VM/reference trials need fresh explicit go-ahead. No new release,
+historical/physical/full128K or System1/ROM gate closes. [Observation](docs/development/drawing-app-boot-trial.md).
+Earlier implementation and compiled-only checkpoints retain their dated scope.
+
 Current owner drawing continuation (2026-10-16, SRC-0202): "Move on to the next
 thing." continues to the next visible milestone in docs/milestones.md: an
 original loaded68k application drawing through selected APIs. SPEC-0036 /

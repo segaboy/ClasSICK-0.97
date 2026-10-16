@@ -3,7 +3,8 @@
 ## Unreleased development after 0.1.0-alpha.1
 
 - [Selected loaded rectangle calls](../../docs/development/drawing-app-evidence.md)
-  add a new original drawing-ROM candidate. No new version/tag/release has been
+  add a new original drawing-ROM candidate, now observed in one isolated
+  [Snow trial](../../docs/development/drawing-app-boot-trial.md). No new version/tag/release has been
   published; the existing alpha image and source pins remain immutable.
 
 [First experimental prerelease](https://github.com/segaboy/ClasSICK-0.97/releases/tag/rom-v0.1.0-alpha.1)

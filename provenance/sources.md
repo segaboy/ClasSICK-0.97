@@ -2806,3 +2806,24 @@ follows from any license.
   internals omitted from that packet remain outside worker review; Codex supplies
   independent execution tests. No commands/tests/edits, extra source/transfer,
   historical certification, measured quota savings or human-review claim.
+
+## SRC-0207 - Owner isolated drawing-ROM trial authorization
+
+- Project owner, 2026-10-16: "Yes—run the isolated drawing-ROM trial" explicitly
+  authorizes one fresh isolated Snow128K trial of the verified original drawing
+  ROM, counter-preservation check and screen capture. No Apple ROM, disks or
+  shared folders. This approval is consumed by the closed trial, not reusable.
+- Owner subsequently answered "I’m unavailable—record the automated result" to
+  the optional live-input question. No human input result is credited.
+
+## SRC-0208 - Isolated drawing-ROM boot and retained-panel observation
+
+- Codex, 2026-10-16; [trial record](../docs/development/drawing-app-boot-trial.md)
+  and [sanitized measurements](../docs/development/drawing-app-evidence.json).
+- One logged cold boot of the exact compiled original ROM, no external media,
+  on the previously admitted black-box Snow128K platform. APP/097, hollow
+  rectangle and six phase marks; counter0000 to0001, panel exact at captured
+  points and a later0001 point. Closed normally. Private captures/logs preserved.
+- Some short automated inputs were not immediately visibly credited; exact
+  event attribution/delivery remain unqualified. No human input, continuous
+  timing, historical, physical, full128K or complete-System compatibility claim.
