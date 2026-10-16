@@ -1,5 +1,8 @@
 # Current milestones and release tracks
 
+2026-10-16: ROM0.2.0-alpha.1 is now published as an experimental prerelease.
+[Receipt](../releases/rom/0.2.0-alpha.1-publication.json); System remains unreleased.
+
 2026-10-16: the current branded drawing ROM and native-PC candidate were
 captured from one isolated boot each for the owner's blog. APP/097, hollow
 rectangle and six phases are visible; PC512x342 is centered in1024x768. No input
@@ -15,7 +18,7 @@ describe capabilities, not release numbers or complete-edition certification.
 
 | Component | Version | State |
 | --- | --- | --- |
-| ClasSICK ROM | 0.1.0-alpha.1 | Published experimental prerelease; rom-v0.1.0-alpha.1 |
+| ClasSICK ROM | 0.2.0-alpha.1 | Published experimental prerelease; rom-v0.2.0-alpha.1 |
 | ClasSICK System software | Unassigned | Unreleased |
 
 [Version authority, release process and compatibility matrix](../releases/README.md).

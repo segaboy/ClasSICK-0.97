@@ -1,9 +1,9 @@
 # Independent ROM and System releases
 
-2026-10-15 groundwork SRC-0198; 2026-10-16 alpha publication SRC-0200/0201;
+2026-10-15 groundwork SRC-0198; 2026-10-16 alpha publication SRC-0200/0201; next release SRC-0215/0216;
 [ADR-0040](../docs/adr/0040-independent-rom-system-releases.md).
-The ROM has its own release series. The owner accepted the first experimental
-alpha publication; [the receipt](rom/0.1.0-alpha.1-publication.json) records its
+The ROM has its own release series. The owner requested the new drawing/shared-scene
+experimental prerelease; [the receipt](rom/0.2.0-alpha.1-publication.json) records its
 actual publication state, tag target and asset identities. No new boot trial.
 
 ## Version authority
@@ -14,7 +14,7 @@ our implementation's development releases. R-001's historical identity remains o
 
 | Component | Current development version | Release state | Tag format |
 | --- | --- | --- | --- |
-| ClasSICK ROM | 0.1.0-alpha.1 | Published experimental prerelease, 2026-10-16 | rom-v0.1.0-alpha.1 |
+| ClasSICK ROM | 0.2.0-alpha.1 | Published experimental prerelease, 2026-10-16 | rom-v0.2.0-alpha.1 |
 | ClasSICK System software | Unassigned | Unreleased | system-vMAJOR.MINOR.PATCH |
 
 Versions use MAJOR.MINOR.PATCH, optionally followed by alpha.N, beta.N or rc.N.
@@ -27,7 +27,7 @@ tool changes are identified by their source revisions and evidence.
 
 ## Current ROM candidate
 
-[Release notes](rom/0.1.0-alpha.1.md) and [frozen candidate record](rom/0.1.0-alpha.1.json)
+[Release notes](rom/0.2.0-alpha.1.md) and [frozen candidate record](rom/0.2.0-alpha.1.json)
 name the tested 64 KiB original ROM, compiled source, exact SHA-256, compiler
 manifest, evidence revision and limitations. The version is carried by the
 filename and release metadata; no bytes are patched into the qualified image.
@@ -78,7 +78,7 @@ It does not reproduce the official download package or publish anything.
 
 The alpha downloads include a separately verified demo ZIP, standalone ROM,
 complete corresponding original source ZIP at the compiled revision and outer
-checksum inventory. [Setup/rebuild instructions](rom/TRYING-0.1.0-alpha.1.md) and
+checksum inventory. [Setup/rebuild instructions](rom/TRYING-0.2.0-alpha.1.md) and
 [release verification](../docs/development/rom-alpha-release-evidence.md) describe
 their membership and checks. No compiler or emulator is bundled.
 
@@ -93,10 +93,12 @@ their membership and checks. No compiler or emulator is bundled.
    Record the actual tag target and published asset identities in the release history.
 4. Update that component's published pointer; preserve earlier records and gates.
 
-The groundwork alone authorized no publication; SRC-0200 accepts this one alpha.
+The groundwork alone authorized no publication; SRC-0215 requests this new prerelease.
 Future versions need the applicable owner scope. No automatic publishing workflow
 is installed. Apple/Microsoft payloads, raw research, manuals, private/HQ material,
 credentials and reference screenshots stay excluded. The package source links
 identify our original code; human provenance review remains required. No emulator/
 VM/reference trial follows from a version bump. Native-app, physical/128K/parity/
 edition/B2 and both System 1/ROM requirements remain unchanged.
+
+The earlier [ROM0.1.0-alpha.1](rom/0.1.0-alpha.1-publication.json) remains available with its original bytes, source, annotated tag and observation conditions.

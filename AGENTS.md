@@ -1,5 +1,12 @@
 # ClasSICK 0.97 working instructions
 
+Completed ROM0.2.0-alpha.1 publication (2026-10-16, SRC-0215/0216): four
+draft/public downloads and GitHub digests match; annotated tag verified. Uses
+exact previously observed shared-scene/drawing ROM and matching original
+source. First alpha immutable; System unreleased. Publication authorized by
+the owner's next-release request. No new build/trial or gate waiver.
+[Receipt](releases/rom/0.2.0-alpha.1-publication.json).
+
 Current owner ROM release scope (2026-10-16, SRC-0215/0216): "OK, I think
 this warrants another rom release." Publish ROM0.2.0-alpha.1 as an experimental
 prerelease, using only the already boot-observed shared-scene ROM, matching

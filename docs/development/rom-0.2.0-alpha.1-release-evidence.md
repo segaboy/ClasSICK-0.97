@@ -48,3 +48,14 @@ setup/qualification links. Both old and new prerelease metadata validate; an
 incorrect published-version pointer is refused. All24 originals/existing copies,
 211 runtime/test/old-candidate files and the four first-alpha assets are unchanged.
 The live published pointer stays on0.1.0-alpha.1 until actual new publication.
+
+## Publication - passed
+
+The [release](https://github.com/segaboy/ClasSICK-0.97/releases/tag/rom-v0.2.0-alpha.1) is published: release ID415149789,
+`2026-10-16T16:14:57Z`, draft=false/prerelease=true; stable latest not requested.
+Annotated tag object `27ddb67bea88d2f2630253c5f6213444e0739037` points to preparation commit
+`c7700ca9897258aee7907ce6e7e938ba7936215f`. All four draft and public downloads equal
+the local allowlist; publisher SHA-256 digests, sizes and outer checksums match.
+Total download size is1742793 bytes, including
+1619157 bytes of matching source. Source/build/boot/tag identities are distinct
+and retained in the receipt. This closes distribution verification only.
