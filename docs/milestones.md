@@ -1,5 +1,9 @@
 # Current milestones and release tracks
 
+2026-10-17: One approved isolated SPEC-0040 native PC boot passes READY, direct Space plus two mouse edges/held-repeat/release, exact static-scene pixels and normal guest-second60/count3. Desktop UI delivery and human input remain unqualified. Session closed; no Mac trial, code change or release.
+
+[Native PC mouse observation](development/pc-mouse-boot-trial.md).
+
 2026-10-16: SPEC-0040 implements single-owner8042 keyboard/mouse startup and routing, plus an explicit native x64 PC mouse build profile. Shared button semantics and512x342 scene match the existing Mac/Windows foundation. Hosted/compiler/EFI candidate evidence only; no emulator/VM/hardware/reference trial or release. Default legacy keyboard contract/trace, UART source/test bodies, Mac ROM inputs,24 originals/copies and frozen wiki remain preserved.
 
 [PC mouse checkpoint](development/pc-mouse-evidence.md).

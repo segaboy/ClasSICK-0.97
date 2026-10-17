@@ -1,0 +1,173 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-17",
+  "sources": [
+    "SRC-0238",
+    "SRC-0239"
+  ],
+  "specification": "SPEC-0040",
+  "test": "TEST-0049",
+  "classification": "isolated-own-build-input-observation",
+  "owner_authorization": "Continue",
+  "accepted_proposal": "Next is an isolated PC boot and mouse test, which needs your explicit approval.",
+  "scope": "One fresh isolated native PC boot; same session paused/resumed for inspection; now closed. No additional trial or release permission.",
+  "compiled_source_revision": "59ea57f4b6db02ffb8ecd9cbd4df8f6c485448a9",
+  "compiled_evidence_revision": "db4151b670c2c4e781232a1b5cf9aa8c347d2231",
+  "payload_sha256": "1f0d222b355f54b01a2822a8c857ba0f78b3dc9192744b562a6a3c2bdc2fd4c1",
+  "payload_bytes": 151552,
+  "raw_media_sha256": "8eae8204e46fb372049594493a21f3b5753c779ca0ca0bd456dd3b023e86929b",
+  "raw_media_bytes": 67108864,
+  "initial_vdi_sha256": "89cd68a5d4eadeffeee36c21a1fa2a47c5bf94a3387d2b4eaf34b8a76320bdff",
+  "raw_vdi_roundtrip_equal": true,
+  "platform": {
+    "virtualbox": "7.2.16r174877",
+    "management_executable_sha256": "7fda8e54157eb94a5ebd9cea079a9fb8c23ade92ae71e13399dc3431c021a228",
+    "architecture": "native x86-64",
+    "firmware": "EFI64; public self-report EDK II/revision00010000; firmware image hash unresolved",
+    "cpus": 1,
+    "memory_mib": 512,
+    "chipset": "piix3",
+    "graphics": "vboxvga",
+    "mouse": "ps2",
+    "keyboard": "ps2",
+    "isolation": "only own boot disk; all8 NICs, USB, audio, clipboard/file transfer, drag/drop and VRDE off; no shared folders",
+    "secure_boot": false
+  },
+  "display": {
+    "physical": [
+      1024,
+      768
+    ],
+    "logical": [
+      512,
+      342
+    ],
+    "origin": [
+      256,
+      213
+    ],
+    "monochrome": true,
+    "brand_app097_rectangle_six_phases_visible": true
+  },
+  "observations": {
+    "cold_starts": 1,
+    "session_closed": true,
+    "controller_ready": true,
+    "qual_port_before": "00000003",
+    "qual_port_after": "00000003",
+    "a20_before": "00000000",
+    "a20_after": "00000000",
+    "initial_counter": 0,
+    "desktop_automation": {
+      "left_click_attempts": 2,
+      "held_drag_attempts": 1,
+      "space_attempts": 1,
+      "counter_after": 0,
+      "delivery_qualified": false
+    },
+    "direct_keyboard": {
+      "api": "VBoxManage controlvm keyboardputscancode",
+      "make_break": [
+        "39",
+        "b9"
+      ],
+      "space_presses": 1,
+      "counter_after": 1
+    },
+    "direct_mouse": {
+      "api": "installed IMouse.PutMouseEvent(int,int,int,int,int)",
+      "relative": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "sequence": [
+        0,
+        1,
+        1,
+        0,
+        1,
+        0
+      ],
+      "counter_after_first": 2,
+      "counter_after_held_repeat": 2,
+      "counter_after_second": 3,
+      "presses": 2
+    },
+    "guest_final_seconds": 60,
+    "normal_result": "00000000",
+    "keyboard_ready_result": "00000001",
+    "final_combined_count": 3,
+    "pause_resume_used": true,
+    "uninterrupted_wall_clock_duration_qualified": false,
+    "human_input_confirmed": false,
+    "static_pixels_preserved_outside_progress_counter": true
+  },
+  "captures": {
+    "after-two-clicks.png": {
+      "sha256": "c43c894d070a2ebf234c6b7b93590f0cb11a0babd5000f3b4eef81ce0c8f38da",
+      "size": 4711,
+      "static_scene_unchanged": true
+    },
+    "after-space.png": {
+      "sha256": "3ef8f67ff6727e920ea789944b15738fc996c52833f334bec551bf74636cefdd",
+      "size": 4709,
+      "static_scene_unchanged": true
+    },
+    "direct-space.png": {
+      "sha256": "9b40b16bad58ea730e154d9ea45c7f7cd4490107cc9fc5b573ba60ccdd6784bc",
+      "size": 4705,
+      "static_scene_unchanged": true
+    },
+    "mouse-first-held.png": {
+      "sha256": "c2bbdcb10a7272a4b109d47ed99258650667cd62c2e1940e97554a9901d67b03",
+      "size": 4708,
+      "static_scene_unchanged": true
+    },
+    "mouse-still-held.png": {
+      "sha256": "c2bbdcb10a7272a4b109d47ed99258650667cd62c2e1940e97554a9901d67b03",
+      "size": 4708,
+      "static_scene_unchanged": true
+    },
+    "mouse-second-released.png": {
+      "sha256": "b92120db319be7d49ace0fd10859ddd7c7900297d9d965bbd6a5a67a4e1e703f",
+      "size": 4711,
+      "static_scene_unchanged": true
+    },
+    "final-screen.png": {
+      "sha256": "c88cb86673e0de658a3612435c7f37aa78d395df29702395f5432b06b4a08c0b",
+      "size": 4719,
+      "static_scene_unchanged": true
+    }
+  },
+  "actual_checks": {
+    "two_original_media_writers_agree": true,
+    "independent_media_reader_pass": true,
+    "vdi_roundtrip_pass": true,
+    "static_pixel_capture_comparisons": 7,
+    "held_counter_comparison_pass": true,
+    "existing_vm_inventory_running_state_preserved": true
+  },
+  "prior_ci": {
+    "url": "https://github.com/segaboy/ClasSICK-0.97/actions/runs/38998584190",
+    "ctests": 2925,
+    "reused_not_rerun": true
+  },
+  "observation_issues": [
+    "First serial ReadAllText failed due to sharing; corrected to shared-read access in the same session.",
+    "An early framebuffer request returned0x0; capture succeeded after the same boot exposed its display.",
+    "Initial window capture showed occluding content; window activation and direct framebuffer captures resolved observation.",
+    "Desktop UI click/drag/Space delivery did not advance the counter; direct device API events did.",
+    "Public SDK web reference unavailable; installed public COM method signature verified by introspection; no emulator source inspected."
+  ],
+  "new_runtime_build": false,
+  "new_workers": 0,
+  "worker_reason": "Codex target control/final verification; no new draft or code deliverable needed.",
+  "new_release": false,
+  "new_rom_trial": false,
+  "physical_historical_full128k_qualified": false,
+  "full_pointer_event_parity": false,
+  "source_uart_originals_previous_records_preserved": true,
+  "one_note_and_wiki_retired": true
+}

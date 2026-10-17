@@ -1,5 +1,15 @@
 # ClasSICK 0.97 working instructions
 
+Completed owner PC mouse trial (2026-10-17, SRC-0238/0239): "Continue" accepted
+the proposed single isolated native PC boot/input trial. That exact SPEC-0040
+candidate reached READY, passed direct keyboard/mouse API edge/held/release checks,
+retained static scene pixels and ended normally at guest second60/count3. Session
+closed. Desktop automation delivery and human input remain unqualified; pauses
+prevent uninterrupted timing claims. No new code/Mac trial/release. Future target
+runs need fresh owner go-ahead. Prior compiled records retain their dated scope;
+all source/UART/edition/physical/full128K/B2/historical/System1 boot gates persist.
+OneNote/wiki remain retired. [Observation](docs/development/pc-mouse-boot-trial.md).
+
 Current owner controller implementation (2026-10-16, SRC-0233..0237): "Do it" accepts SPEC-0040
 single-owner8042 mouse startup/routing, original code/hosted/compiler/CI/EFI
 candidate checks. Explicit PC mouse build profile preserves default legacy

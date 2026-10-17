@@ -3052,3 +3052,12 @@ reference payload, native format selection or current target run is admitted.
 
 - Codex,2026-10-16: eligible source section checks, original engineering decisions, artifact review/corrections, native/full-startup test fixtures, build/import/ABI/omission checks and ordinary records. No UART implementation/test-body inspection or modification.
 - SPEC-0040 / ADR-0046 / IMPL-0044 / TEST-0048; [evidence](../docs/development/pc-mouse-evidence.md).
+
+## SRC-0238 - Owner isolated PC mouse trial approval
+
+- Owner,2026-10-17: "Continue" accepts the immediately proposed isolated PC boot and mouse test of the verified SPEC-0040 candidate. One fresh original-image VirtualBox session, visible/synthetic input checks, captures and ordinary records. No additional trial, release, new runtime feature or historical/physical qualification. OneNote/wiki remain retired.
+
+## SRC-0239 - Lead native PC boot and device-input observation
+
+- Codex,2026-10-17: one isolated original-image VirtualBox7.2.16r174877 cold start, same-session pause/resume, failed desktop automation delivery, successful direct Space and public IMouse API events, held-repeat/release checks, guest-second60 normal result, exact pixel comparisons and closure/inventory checks. Installed COM method signature inspected; no emulator source or protected implementation. No human-input confirmation.
+- [Observation](../docs/development/pc-mouse-boot-trial.md), [sanitized identities](../docs/development/pc-mouse-boot-trial.json), TEST-0049. Original captures/logs remain outside Git; no UART implementation/test body inspected or modified. Existing CI results reused, not rerun. No new external worker needed for target control/final verification.
