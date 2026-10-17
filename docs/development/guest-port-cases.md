@@ -44,3 +44,9 @@ Not run. No fixture or test code exists. Each case expects pre-effect refusal
 C10-C15 depend on owner-capability admission; C20/C24 are inactive setup refusals,
 not guest CPU steps. C51 covers ordinary service-span faults before commit; trusted
 map/configuration corruption uses owner quarantine. No test has been implemented or run.
+
+## Later native-only analogue (2026-10-17)
+SPEC-0043 now executes independent pure native value/preflight tests. These do
+not execute this document's guest admission/frame/RAM/commit/quarantine cases;
+the no-test statements above retain the original guest-contract intake meaning.
+[Native results](native-selection-evidence.md). No guest binding/fixture exists.

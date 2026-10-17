@@ -5,6 +5,6 @@
 artifact. No implementation or implementation logs supplied, including retries
 (none). Codex reviews oracle/assertion quality and executes strict hosted builds,
 ASan/UBSan, compiler-width/endian import audits and broken-core controls.
-No worker-executed tests claimed. Pending68000 CI is only cross-compilation;
+No worker-executed tests claimed. Successful68000 CI is only cross-compilation;
 guest CPU/frame/current-cell/owner-quarantine cases remain unexecuted plans.
 [Actual results](../development/native-selection-evidence.md).

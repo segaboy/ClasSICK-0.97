@@ -41,7 +41,7 @@ The owner explicitly approved repository pushes/CI/evidence after the first
 automatic-review publication rejection. No target run or release permission changed.
 
 ## Actual verification
-810 local CTests pass: clang-hosted-debug-a 285, clang-hosted-sanitized 285, gcc-i686 240. 10 strict width/optimization/endian object audits pass with no undefined imports or mutable global data. 8 deliberately broken-core controls are rejected by the independent test artifact. CI and the separate68000 object compile audit are pending. Hosted tests are executions of original test programs; cross-compilation is not a target boot. Full CPU/stack/BE-current-cell/quarantine/commit cases remain unexecuted plans.
+810 local CTests pass: clang-hosted-debug-a 285, clang-hosted-sanitized 285, gcc-i686 240. 10 strict width/optimization/endian object audits pass with no undefined imports or mutable global data. 8 deliberately broken-core controls are rejected by the independent test artifact. CI [39074280105](https://github.com/segaboy/ClasSICK-0.97/actions/runs/39074280105) at `5da633e25a80b435792c3835b9f007b74a13bbec` passes both jobs: 3013 CTests across11 profiles,10 selection width/endian audits and6 native68000 selection objects (O0/O2/Os matching twins), with zero undefined imports/mutable data. No target execution. Hosted tests are executions of original test programs; cross-compilation is not a target boot. Full CPU/stack/BE-current-cell/quarantine/commit cases remain unexecuted plans.
 
 Native views/backings are borrowed live storage, with a flat uintptr_t span model
 on the supported targets; this cannot prove liveness of arbitrary native pointers.

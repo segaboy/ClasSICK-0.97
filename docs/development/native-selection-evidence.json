@@ -383,11 +383,531 @@
     "these_are_deliberately_broken_hosted_original_programs": true
   },
   "ci": {
-    "conclusion": "pending"
+    "conclusion": "success",
+    "headSha": "5da633e25a80b435792c3835b9f007b74a13bbec",
+    "jobs": [
+      {
+        "completedAt": "2026-10-17T22:22:51Z",
+        "conclusion": "success",
+        "databaseId": 117518108101,
+        "name": "windows-bootstrap",
+        "startedAt": "2026-10-17T22:15:03Z",
+        "status": "completed",
+        "steps": [
+          {
+            "completedAt": "2026-10-17T22:15:04Z",
+            "conclusion": "success",
+            "name": "Set up job",
+            "number": 1,
+            "startedAt": "2026-10-17T22:15:03Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-17T22:15:10Z",
+            "conclusion": "success",
+            "name": "Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1",
+            "number": 2,
+            "startedAt": "2026-10-17T22:15:04Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-17T22:15:56Z",
+            "conclusion": "success",
+            "name": "Audit public source and documentation",
+            "number": 3,
+            "startedAt": "2026-10-17T22:15:10Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-17T22:15:57Z",
+            "conclusion": "success",
+            "name": "Verify scene import contract consistency",
+            "number": 4,
+            "startedAt": "2026-10-17T22:15:56Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-17T22:16:06Z",
+            "conclusion": "success",
+            "name": "Prepare pinned portable tools",
+            "number": 5,
+            "startedAt": "2026-10-17T22:15:57Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-17T22:16:12Z",
+            "conclusion": "success",
+            "name": "Prepare pinned second compiler",
+            "number": 6,
+            "startedAt": "2026-10-17T22:16:06Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-17T22:17:00Z",
+            "conclusion": "success",
+            "name": "Verify two fresh hosted builds",
+            "number": 7,
+            "startedAt": "2026-10-17T22:16:12Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-17T22:22:32Z",
+            "conclusion": "success",
+            "name": "Verify hosted core, loader, exceptions, devices, boot media and unloaded fault fixtures",
+            "number": 8,
+            "startedAt": "2026-10-17T22:17:00Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-17T22:22:41Z",
+            "conclusion": "success",
+            "name": "Audit shared product scene and drawing objects",
+            "number": 9,
+            "startedAt": "2026-10-17T22:22:32Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-17T22:22:46Z",
+            "conclusion": "success",
+            "name": "Mouse foundation width and endian object checks",
+            "number": 10,
+            "startedAt": "2026-10-17T22:22:41Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-17T22:22:48Z",
+            "conclusion": "success",
+            "name": "Pure native selection width and endian objects",
+            "number": 11,
+            "startedAt": "2026-10-17T22:22:46Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-17T22:22:49Z",
+            "conclusion": "success",
+            "name": "Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1",
+            "number": 22,
+            "startedAt": "2026-10-17T22:22:48Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-17T22:22:49Z",
+            "conclusion": "success",
+            "name": "Complete job",
+            "number": 23,
+            "startedAt": "2026-10-17T22:22:49Z",
+            "status": "completed"
+          }
+        ],
+        "url": "https://github.com/segaboy/ClasSICK-0.97/actions/runs/39074280105/job/117518108101"
+      },
+      {
+        "completedAt": "2026-10-17T22:16:04Z",
+        "conclusion": "success",
+        "databaseId": 117518108182,
+        "name": "m68k-rom",
+        "startedAt": "2026-10-17T22:15:03Z",
+        "status": "completed",
+        "steps": [
+          {
+            "completedAt": "2026-10-17T22:15:04Z",
+            "conclusion": "success",
+            "name": "Set up job",
+            "number": 1,
+            "startedAt": "2026-10-17T22:15:03Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-17T22:15:06Z",
+            "conclusion": "success",
+            "name": "Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1",
+            "number": 2,
+            "startedAt": "2026-10-17T22:15:04Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-17T22:15:19Z",
+            "conclusion": "success",
+            "name": "Prepare hash-pinned workspace 68000 tools",
+            "number": 3,
+            "startedAt": "2026-10-17T22:15:06Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-17T22:15:19Z",
+            "conclusion": "success",
+            "name": "Compile pure native port selection for68000 (no target run)",
+            "number": 4,
+            "startedAt": "2026-10-17T22:15:19Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-17T22:15:20Z",
+            "conclusion": "success",
+            "name": "Retain native selection object manifest",
+            "number": 5,
+            "startedAt": "2026-10-17T22:15:19Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-17T22:15:21Z",
+            "conclusion": "success",
+            "name": "Build and audit original ROM twins",
+            "number": 6,
+            "startedAt": "2026-10-17T22:15:20Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-17T22:15:22Z",
+            "conclusion": "success",
+            "name": "Audit original checked memory 68000 objects and program encoding",
+            "number": 7,
+            "startedAt": "2026-10-17T22:15:21Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-17T22:15:23Z",
+            "conclusion": "success",
+            "name": "Retain checked memory build manifest",
+            "number": 8,
+            "startedAt": "2026-10-17T22:15:22Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-17T22:15:23Z",
+            "conclusion": "success",
+            "name": "Audit original Memory Manager 68000 objects and storage budget",
+            "number": 9,
+            "startedAt": "2026-10-17T22:15:23Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-17T22:15:25Z",
+            "conclusion": "success",
+            "name": "Retain Memory Manager build manifest",
+            "number": 10,
+            "startedAt": "2026-10-17T22:15:23Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-17T22:15:25Z",
+            "conclusion": "success",
+            "name": "Audit original guest memory trap objects and program encoding",
+            "number": 11,
+            "startedAt": "2026-10-17T22:15:25Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-17T22:15:27Z",
+            "conclusion": "success",
+            "name": "Retain guest memory trap build manifest",
+            "number": 12,
+            "startedAt": "2026-10-17T22:15:25Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-17T22:15:27Z",
+            "conclusion": "success",
+            "name": "Audit bounded returning guest calls and original encoding",
+            "number": 13,
+            "startedAt": "2026-10-17T22:15:27Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-17T22:15:28Z",
+            "conclusion": "success",
+            "name": "Retain bounded guest-call build manifest",
+            "number": 14,
+            "startedAt": "2026-10-17T22:15:27Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-17T22:15:29Z",
+            "conclusion": "success",
+            "name": "Audit typed bounded register patch closure and original encoding",
+            "number": 15,
+            "startedAt": "2026-10-17T22:15:28Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-17T22:15:30Z",
+            "conclusion": "success",
+            "name": "Retain typed guest-patch build manifest",
+            "number": 16,
+            "startedAt": "2026-10-17T22:15:29Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-17T22:15:30Z",
+            "conclusion": "success",
+            "name": "Audit original bounded resource reader closure and storage",
+            "number": 17,
+            "startedAt": "2026-10-17T22:15:30Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-17T22:15:32Z",
+            "conclusion": "success",
+            "name": "Retain resource-reader build manifest",
+            "number": 18,
+            "startedAt": "2026-10-17T22:15:30Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-17T22:15:32Z",
+            "conclusion": "success",
+            "name": "Audit original bounded session closure and encoding",
+            "number": 19,
+            "startedAt": "2026-10-17T22:15:32Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-17T22:15:34Z",
+            "conclusion": "success",
+            "name": "Retain bounded session build manifest",
+            "number": 20,
+            "startedAt": "2026-10-17T22:15:32Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-17T22:15:35Z",
+            "conclusion": "success",
+            "name": "Audit original typed Toolbox closure and encoding",
+            "number": 21,
+            "startedAt": "2026-10-17T22:15:34Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-17T22:15:36Z",
+            "conclusion": "success",
+            "name": "Retain typed Toolbox build manifest",
+            "number": 22,
+            "startedAt": "2026-10-17T22:15:35Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-17T22:15:37Z",
+            "conclusion": "success",
+            "name": "Audit original hosted heap lifecycle closure and storage",
+            "number": 23,
+            "startedAt": "2026-10-17T22:15:36Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-17T22:15:38Z",
+            "conclusion": "success",
+            "name": "Retain hosted heap lifecycle build manifest",
+            "number": 24,
+            "startedAt": "2026-10-17T22:15:37Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-17T22:15:39Z",
+            "conclusion": "success",
+            "name": "Audit original hosted resource residency closure and storage",
+            "number": 25,
+            "startedAt": "2026-10-17T22:15:38Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-17T22:15:40Z",
+            "conclusion": "success",
+            "name": "Retain hosted resource residency build manifest",
+            "number": 26,
+            "startedAt": "2026-10-17T22:15:39Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-17T22:15:41Z",
+            "conclusion": "success",
+            "name": "Audit original data-only CODE preflight closure and storage",
+            "number": 27,
+            "startedAt": "2026-10-17T22:15:40Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-17T22:15:42Z",
+            "conclusion": "success",
+            "name": "Retain CODE preflight build manifest",
+            "number": 28,
+            "startedAt": "2026-10-17T22:15:41Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-17T22:15:44Z",
+            "conclusion": "success",
+            "name": "Audit original data-only eager CODE image closure and storage",
+            "number": 29,
+            "startedAt": "2026-10-17T22:15:42Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-17T22:15:45Z",
+            "conclusion": "success",
+            "name": "Retain CODE image build manifest",
+            "number": 30,
+            "startedAt": "2026-10-17T22:15:44Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-17T22:15:46Z",
+            "conclusion": "success",
+            "name": "Retain own ROM and sanitized build manifest",
+            "number": 31,
+            "startedAt": "2026-10-17T22:15:45Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-17T22:15:47Z",
+            "conclusion": "success",
+            "name": "Audit guarded single-instruction 68000 closure",
+            "number": 32,
+            "startedAt": "2026-10-17T22:15:46Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-17T22:15:48Z",
+            "conclusion": "success",
+            "name": "Retain guarded bus build manifest",
+            "number": 33,
+            "startedAt": "2026-10-17T22:15:47Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-17T22:15:51Z",
+            "conclusion": "success",
+            "name": "Build first loaded-application ROM twins",
+            "number": 34,
+            "startedAt": "2026-10-17T22:15:48Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-17T22:15:52Z",
+            "conclusion": "success",
+            "name": "Retain original loaded-application ROM and manifest",
+            "number": 35,
+            "startedAt": "2026-10-17T22:15:51Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-17T22:15:56Z",
+            "conclusion": "success",
+            "name": "Build selected drawing-application ROM twins",
+            "number": 36,
+            "startedAt": "2026-10-17T22:15:52Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-17T22:15:57Z",
+            "conclusion": "success",
+            "name": "Retain original drawing-application ROM candidate and manifest",
+            "number": 37,
+            "startedAt": "2026-10-17T22:15:56Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-17T22:16:01Z",
+            "conclusion": "success",
+            "name": "Build paired native drawing ROM twins",
+            "number": 38,
+            "startedAt": "2026-10-17T22:15:57Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-17T22:16:01Z",
+            "conclusion": "success",
+            "name": "Audit isolated native drawing closure",
+            "number": 39,
+            "startedAt": "2026-10-17T22:16:01Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-17T22:16:02Z",
+            "conclusion": "success",
+            "name": "Retain original native drawing ROM candidate and manifest",
+            "number": 40,
+            "startedAt": "2026-10-17T22:16:01Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-17T22:16:02Z",
+            "conclusion": "success",
+            "name": "Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1",
+            "number": 80,
+            "startedAt": "2026-10-17T22:16:02Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-10-17T22:16:02Z",
+            "conclusion": "success",
+            "name": "Complete job",
+            "number": 81,
+            "startedAt": "2026-10-17T22:16:02Z",
+            "status": "completed"
+          }
+        ],
+        "url": "https://github.com/segaboy/ClasSICK-0.97/actions/runs/39074280105/job/117518108182"
+      }
+    ],
+    "url": "https://github.com/segaboy/ClasSICK-0.97/actions/runs/39074280105",
+    "ctests": 3013,
+    "profiles": 11,
+    "profile_counts": [
+      285,
+      285,
+      285,
+      285,
+      285,
+      256,
+      285,
+      269,
+      269,
+      269,
+      240
+    ],
+    "windows_selection_object_audits": 10,
+    "native_68000_object_audits": 6
   },
   "native_68000": {
-    "status": "pending-CI-compile",
-    "executed": false
+    "specification": "SPEC-0043",
+    "cpu": "68000",
+    "inputs": {
+      "personality/system1/quickdraw-select.c": "894f3e06bdfea0add97a659ef71a593b682c88a2310c719478d9e4c0dc191e3d",
+      "personality/system1/quickdraw-select.h": "cd72e096f6a9365ede45fd859df755fec021eb1986002d5ca8269a6c8f838624",
+      "personality/system1/quickdraw-view.h": "4a93567872049f5142a3980eba501c7a2e027c15de794dde11fbbd93cc3bbee7",
+      "personality/system1/quickdraw-rects.h": "db9facdb5ef3742c3c8935255e3f627c30d31b323a8223e470d9851a48c81e09"
+    },
+    "object_audits": 6,
+    "undefined_imports": 0,
+    "mutable_data": 0,
+    "records": [
+      {
+        "optimization": "O0",
+        "twins_equal": true,
+        "object": {
+          "bytes": 2692,
+          "sha256": "7a678383e533f574f7af12dc63da913723e1c99de29e12460bc0da5ec02fa92c"
+        }
+      },
+      {
+        "optimization": "O2",
+        "twins_equal": true,
+        "object": {
+          "bytes": 1536,
+          "sha256": "02b2617fee6f5a1bb0a8b5d5809e2b75dfbd3c53e3f11c8a50da6135c219c17e"
+        }
+      },
+      {
+        "optimization": "Os",
+        "twins_equal": true,
+        "object": {
+          "bytes": 1688,
+          "sha256": "80d6ef01b4be9b0fa2ed40b0f97c08d75a8a97b0f849c3cb206bcd55ffa84223"
+        }
+      }
+    ],
+    "target_executed": false,
+    "rom_inputs_changed": false
   },
   "guest_binding": false,
   "workload_rom_efi_inputs_unchanged": true,
@@ -400,7 +920,8 @@
       "run_id": 39073798505,
       "revision": "056165ecdfbb1eb6d079f5973e613aeab6f9afac",
       "m68k_result": "failure at new undefined-import/mutable-data audit; diagnostic omitted symbols",
-      "windows_result": "not used as final corrected-code evidence"
+      "windows_result": "not used as final corrected-code evidence",
+      "disposition": "Superseded workflow cancelled to avoid redundant runner work; its68000 audit had already failed. Final evidence uses corrected successful run39074280105."
     }
   ],
   "lead_approval": "Owner explicitly approved public-main pushes, normal CI and resulting public/private HQ evidence publication after the first automatic-review rejection.",
