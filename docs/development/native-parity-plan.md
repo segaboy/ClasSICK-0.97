@@ -1,5 +1,7 @@
 # Native Macintosh and x86 parity plan
 
+2026-10-17: SPEC-0044 / ADR-0050 finalize the prospective prepared-port ownership contract: exact-g integrity, explicit owner environment spans, one admission transaction and consumed-generation-safe retirement. All40 cases remain unexecuted. No code/binding/build/trial/release; existing native inputs unchanged. [Review](prepared-port-owner-lead-review.md).
+
 2026-10-17: SPEC-0043 implements pure shared native68000/x86 drawing-port selection plans; no guest memory access or trap binding. 810 local CTests,10 width/endian object audits and8 broken-core controls pass; CI passes3013 CTests across11 profiles and six68000 objects (no target execution). Existing scenes/workloads/ROM/EFI inputs unchanged. [Checkpoint](native-selection-evidence.md).
 
 2026-10-17: SPEC-0041 adds a borrowed native drawing view with coordinate translation and rectangular clipping. The same68000/x86 workload exercises both while preserving every scene pixel and the independent old68k fixture.804 local tests,70 object audits and unloaded EFI controls pass; full CI and native68000 cross-build pass. New candidates are unbooted; no target trial or release.

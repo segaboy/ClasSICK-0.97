@@ -1,5 +1,14 @@
 # ClasSICK 0.97 working instructions
 
+Current owner prepared-port ownership contract (2026-10-17,SRC-0262..0265):
+"Next task" accepts SPEC-0044 / ADR-0050 P1/P2/P4 owner integrity/environment-span/
+lifetime/admission/retirement contracts and unexecuted cases only. No code,fixture,
+runtime test,binding,build,target trial or release. Claude primary draft; one Grok
+stopped-lifetime/handback review; Codex sole writer/integrator/verifier. Prospective
+profile only; old runtime contracts,24 originals/copies,64 native inputs,UART,
+prior rows/releases/tags/wiki preserved. No OneNote/wiki,agents/chats/automation.
+[Review](docs/development/prepared-port-owner-lead-review.md).
+
 Current owner native selection implementation (2026-10-17, SRC-0258..0261):
 "get started" accepts SPEC-0043 pure shared native68000/x86 selection values,
 original code, independent API-only tests, paired compiler/CI verification and

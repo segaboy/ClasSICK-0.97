@@ -3164,3 +3164,19 @@ correction (33.89s),division-free alignment validation and improved lead CI
 diagnostics after the new68000 audit failed. No new historical source/API or
 independent-tester exposure. Owner explicitly approved repository pushes/CI and
 resulting public/HQ evidence after automatic approval initially blocked main.
+
+## SRC-0262 - Owner prepared-port ownership continuation
+
+- Owner,2026-10-17: "Next task" accepts the proposed P1/P2/P4 ownership/integrity/environment-span/retirement contract after SPEC-0043. Contract drafts/lead review/cases and ordinary Git/HQ records only; no code, fixture, executed test, binding, build, target run or release. Existing gates, sole writer and OneNote/wiki retirement persist.
+
+## SRC-0263 - Claude original owner-boundary contract and case proposals
+
+- Opus5.5 low,one66.84s bounded artifact call. Original167-line/1501-word contract and44-line/494-word35-case unexecuted plan,14 proposed O-decisions. No tools/writes/test runs or excluded inputs. [Prompt](../docs/development/tasks/prepared-port-owner-claude.md); [lead dispositions](../docs/development/prepared-port-owner-lead-review.md). Engineering proposals only,not primary historical evidence.
+
+## SRC-0264 - Grok focused stopped-owner lifetime and retirement review
+
+- Requested grok4.7 low,one44.42s call,three findings in291words. Limited original draft sections2/3/5/7 and concrete lifetime/handback question,not a duplicate full review. Zero tools/writes/tests. CLI reports fallback model_id grok-4.7 (requested); server resolution not independently attested. [Prompt](../docs/development/tasks/prepared-port-owner-grok.md); [all dispositions](../docs/development/prepared-port-owner-lead-review.md).
+
+## SRC-0265 - Lead owner-transaction decisions and documentation verification
+
+- Codex,2026-10-17:14 O-decisions and3 G-findings adjudicated; bound exact-g mode,logical/native alias domains,complete binding validation,root-local versus unresolved borrows,scalar-only cleanup and consumed-generation-protected canonical handback. No new historical facts/manual/sample/code input. [SPEC-0044](../docs/specifications/SPEC-0044-prepared-port-ownership.md), [lead review/limits](../docs/development/prepared-port-owner-lead-review.md), [receipt](../docs/development/prepared-port-owner-review.json). Forty cases unexecuted; prior runtime evidence remains dated and separate.

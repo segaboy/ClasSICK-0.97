@@ -181,3 +181,12 @@ Guest binding/owner amendments remain unimplemented and unauthorized here.
 Inactive/pure bad supplied descriptors return inert validation refusal; corruption
 of an admitted trusted record/map/lifetime/binding is owner quarantine under§11.
 C22b is clarified accordingly; no raw native pointer liveness probe is promised.
+
+## 16 Prospective owner contract (2026-10-17)
+[SPEC-0044](SPEC-0044-prepared-port-ownership.md) now specifies P1/P2/P4 and
+cross-binding ownership for a separate opt-in profile. Its single inactive native
+admission makes INSTALLED internal; it does not create a setup/cancel API. Existing
+native-control versus guest-backing separation is unchanged; current-cell logical
+RMW and same-logical-role map descriptors are distinct domains. Exact-g integrity,
+scalar-only post-quiescence cleanup and RETIRING consumed-generation protection are
+prospective clauses only. No owner implementation, P5 binding or P6 fixture follows.

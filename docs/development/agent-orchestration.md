@@ -7,13 +7,13 @@ Owner SRC-0252 requested the completed all-four capability audit and review roun
 evidence, Windows11 packets, test independence and control limitations where it
 corrects dated language below. [Full comparison/reviews](tool-capability-audit.md).
 No feature/source/target permission expands: current runtime scope is the subsequently accepted
-SPEC-0043 pure native selection implementation; guest binding remains deferred. The audit's four-way fan-out is not routine policy.
+SPEC-0044 prepared-port ownership contract-only slice; guest binding remains deferred. The audit's four-way fan-out is not routine policy.
 Always pin Antigravity to Argon4 High. Keep Codex sole writer/integrator/verifier;
 one normal primary and optional distinct-risk worker. Historical observations below
 remain dated evidence, not claims of current model access or hard tool isolation.
 
 ## Authority and Standing Scope
-Current owner continuation SRC-0258 permits SPEC-0043 pure native selection implementation, independent tests and paired compiler/CI verification; SPEC-0042 guest binding remains deferred; SRC-0227 permanently retires OneNote/wiki maintenance. Worker authority SRC-0223..0226 extends SRC-0149/0150/0179 to four supervised external CLIs. Codex alone writes repositories. All existing implementation, emulator/hardware/reference, source, release and publication gates remain; each target trial still needs fresh owner approval. Private HQ, credentials, untracked research originals, manuals, prohibited implementation/assets and UART implementation/test bodies are excluded from worker inputs.
+Current owner continuation SRC-0262 permits SPEC-0044 owner-boundary contracts/unexecuted cases only; no code,fixture,test,binding,build,trial or release; SPEC-0042 guest binding remains deferred; SRC-0227 permanently retires OneNote/wiki maintenance. Worker authority SRC-0223..0226 extends SRC-0149/0150/0179 to four supervised external CLIs. Codex alone writes repositories. All existing implementation, emulator/hardware/reference, source, release and publication gates remain; each target trial still needs fresh owner approval. Private HQ, credentials, untracked research originals, manuals, prohibited implementation/assets and UART implementation/test bodies are excluded from worker inputs.
 
 Standing service scope includes **Antigravity (`agy`)**, **GitHub Copilot CLI (`copilot`)**, **Claude** and **Grok**, using existing authenticated services. Do not reinstall working tools, purchase credits or change subscriptions:
 - **Source Research & Manuals**: Source research requires eligible admitted publications. No worker currently receives manuals, ROMs, media, disassembly, emulator source, or Apple/Microsoft implementation material.
@@ -109,3 +109,9 @@ One qualified-author Claude follow-up corrected an O0 native68000 import-audit
 failure without API changes. Three model calls total for this feature; no new
 oracle exposure or redundant boundary reviewer. Exact symbol was not printed in
 the first failure; improved diagnostics retained. Final tests are rerun on the fix.
+
+## Prepared-port ownership allocation result - 2026-10-17
+One substantial Claude draft plus one focused Grok review for stopped-lifetime/
+retirement handback. Two calls,zero tools/writes/tests,no retry. Lead adopts the
+draft with explicit14 O/3 G dispositions;40 cases stay unexecuted. Copilot/Argon
+qualification reused,no duplicate suite or all-tool review. [Review](prepared-port-owner-lead-review.md).

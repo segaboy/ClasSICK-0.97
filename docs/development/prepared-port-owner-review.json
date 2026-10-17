@@ -1,0 +1,256 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-17",
+  "specification": "SPEC-0044",
+  "baseline_public_revision": "39cb7c89f82e5bca2fe5f24c236a1979bcf792af",
+  "sources": [
+    "SRC-0262",
+    "SRC-0263",
+    "SRC-0264",
+    "SRC-0265"
+  ],
+  "input_identities": {
+    "docs/specifications/SPEC-0042-guest-port-selection.md": "ac4b11bc4156e72b031bcc97499b7c81a55a44a3d5087a27d96260d818f3b140",
+    "docs/specifications/SPEC-0043-native-port-selection.md": "ad1a9dc4a56ee6d05e88c4e423d3f4ebef914c930afbad2942c9a1fe5c481e72",
+    "personality/system1/quickdraw-select.h": "cd72e096f6a9365ede45fd859df755fec021eb1986002d5ca8269a6c8f838624",
+    "personality/system1/code-run.h": "1c4489624e1abccd9dc654aa51d962210c6a10ce37ccbd84ac1447037ff8238b",
+    "docs/specifications/SPEC-0029-typed-toolbox-dispatch.md": "a3da0d5b6b773e89bc2d692d7287a979e64cb24f24949b983500159d8daa82f2",
+    "docs/specifications/SPEC-0034-owned-image-execution.md": "79796e74a09607220c9d097e26f6bc1b86bcb003416996e38cd46a37534393bc",
+    "docs/specifications/SPEC-0035-first-loaded-rom-application.md": "8d98cbeb5f159929c0c7f6b3129a9ba78f41fa50b9a751097d841cc6c7872121",
+    "docs/specifications/SPEC-0036-loaded-rectangle-calls.md": "f028eaf73d7689b38e979b7876f5a744744b1b203fc57325f6de6c6c4dc95092"
+  },
+  "grok_input": {
+    "proposal_sha256": "0aa7740296f6f038018b25d3cec16304897d0ac452e683d2f35f08b4d77f974c",
+    "input_bytes": 7256,
+    "input_sha256": "278e3f3c4119eadc21a01cf21cf142a4358b929904247ed10a42469bee1e33dd",
+    "sections": [
+      2,
+      3,
+      5,
+      7
+    ],
+    "scope": "Only stopped lifetime, scalar-only integrity and canonical handback"
+  },
+  "workers": {
+    "claude": {
+      "execution": {
+        "round": "round1",
+        "worker": "claude",
+        "exit_code": 0,
+        "outer_timeout": false,
+        "elapsed_seconds": 66.84,
+        "input_bytes": 46731,
+        "input_sha256": "4aee3157b74afc08fc470a31885702386285140932feb8eecee78bbbb315b652",
+        "stderr_bytes": 0
+      },
+      "observed_tool_calls": 0,
+      "worker_writes": 0,
+      "tests_executed": [],
+      "response_sha256": "5415eeac1b40888698a2aeda50a67f10045e5557ac9f0f93511660fa0f16ca26",
+      "requested_model": "claude-opus-5-5",
+      "effort": "low",
+      "reported_models": [
+        "claude-opus-5-5"
+      ],
+      "usage": {
+        "input_tokens": 2,
+        "cache_creation_input_tokens": 17659,
+        "cache_read_input_tokens": 2384,
+        "output_tokens": 7091,
+        "output_tokens_details": {
+          "thinking_tokens": 888
+        },
+        "server_tool_use": {
+          "web_search_requests": 0,
+          "web_fetch_requests": 0
+        },
+        "service_tier": "standard",
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 17659,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "global",
+        "iterations": [
+          {
+            "input_tokens": 2,
+            "output_tokens": 7091,
+            "cache_read_input_tokens": 2384,
+            "cache_creation_input_tokens": 17659,
+            "cache_creation": {
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 17659
+            },
+            "type": "message"
+          }
+        ],
+        "speed": "standard",
+        "fallback_credit": null
+      },
+      "provider_list_cost_estimate_usd": 0.2835768,
+      "cost_is_subscription_bill": false,
+      "proposed_files": [
+        {
+          "path": "docs/specifications/SPEC-0044-prepared-port-ownership.md",
+          "words": 1501,
+          "lines": 167
+        },
+        {
+          "path": "docs/development/prepared-port-owner-cases.md",
+          "words": 494,
+          "lines": 44
+        }
+      ],
+      "budget_note": "Spec1501words vs1500 limit (one word over); cases494/600 words,35 proposed rows. No formatting retry."
+    },
+    "grok": {
+      "execution": {
+        "round": "round1",
+        "worker": "grok",
+        "exit_code": 0,
+        "outer_timeout": false,
+        "elapsed_seconds": 44.42,
+        "input_bytes": 7256,
+        "input_sha256": "278e3f3c4119eadc21a01cf21cf142a4358b929904247ed10a42469bee1e33dd",
+        "stderr_bytes": 195
+      },
+      "observed_tool_calls": 0,
+      "worker_writes": 0,
+      "tests_executed": [],
+      "response_sha256": "828161b719af6d26917dc1429758c77f4b305c44832d6fc6734d13be18f166d6",
+      "requested_model": "grok-4.7",
+      "effort": "low",
+      "server_resolved_model_independently_attested": false,
+      "usage": [
+        {
+          "input_tokens": 6736,
+          "output_tokens": 3054,
+          "cache_read_input_tokens": 2048,
+          "cache_creation_input_tokens": 0,
+          "reasoning_tokens": 2529
+        }
+      ],
+      "stderr_warnings": [
+        "Preferred-model warning fell back to CLI model_id=grok-4.7 (same as requested); no stronger backend attestation.",
+        "Authentication recovery proceeded without file lock; call completed, no sign-in/credit/subscription changes."
+      ],
+      "report_words": 291,
+      "findings": 3
+    }
+  },
+  "decisions": [
+    {
+      "id": "O-01",
+      "disposition": "adopt",
+      "worker_proposal": "Single native admission transaction; INSTALLED is an internal transient only.",
+      "lead_rule": "Single native admission, no guest effects/claim on failed preflight; no public installed/cancel API."
+    },
+    {
+      "id": "O-02",
+      "disposition": "adopt with changes",
+      "worker_proposal": "Authenticate the zero-header canonical world before installing g.",
+      "lead_rule": "Validate original canonical ownership, then full candidate/translated destinations; owner takes its own immutable snapshot."
+    },
+    {
+      "id": "O-03",
+      "disposition": "adopt with changes",
+      "worker_proposal": "Profile header predicate is (A5)..A5+3==g, enforced only while the scalar profile tag is bound.",
+      "lead_rule": "Expected g requires the complete owner-bound scalar/lease identity; a tag or generic dirty flag alone grants nothing."
+    },
+    {
+      "id": "O-04",
+      "disposition": "adopt",
+      "worker_proposal": "Supersede SPEC-0042 \u00a75/\u00a77 'install before admission' for this profile.",
+      "lead_rule": "Installs during inactive admission commit after claim, before guest entry; prior standalone INSTALLED is superseded only for this profile."
+    },
+    {
+      "id": "O-05",
+      "disposition": "adopt",
+      "worker_proposal": "owner-env-span is a coordinator-only class.",
+      "lead_rule": "Owner environment spans are not handler descriptors; generic SPEC29 purity/16-byte stream unchanged."
+    },
+    {
+      "id": "O-06",
+      "disposition": "adopt with changes",
+      "worker_proposal": "Current-cell RMW is the only allowed self-overlap; mirrors keep the truthful-map rule.",
+      "lead_rule": "Three distinct alias domains: native-control/backing disjointness never relaxed; same guest current-cell RMW allowed; existing map mirror rules retained."
+    },
+    {
+      "id": "O-07",
+      "disposition": "adopt",
+      "worker_proposal": "Pin translated destinations at preflight.",
+      "lead_rule": "Preflight/pin logical and physical destinations under exclusive lease; no fallible lookup or callback during commit."
+    },
+    {
+      "id": "O-08",
+      "disposition": "adopt with changes",
+      "worker_proposal": "Use complete snapshot equality, not digests.",
+      "lead_rule": "Owner-made complete immutable control-field snapshots, not padding/guest-record/pixel/payload hashes or hostile-native attestation."
+    },
+    {
+      "id": "O-09",
+      "disposition": "adopt with changes",
+      "worker_proposal": "Root-local borrows; image keeps only scalars after quiescence.",
+      "lead_rule": "End view/capability borrows only at proven synchronous quiescence; retain enough scalar layout/reservation identity for view-free retirement."
+    },
+    {
+      "id": "O-10",
+      "disposition": "adopt with changes",
+      "worker_proposal": "An unresolved borrow quarantines and leaves the caller a lifetime obligation.",
+      "lead_rule": "Unresolved borrow has no existing release/destruction/recovery permission. Caller unable to keep storage live must refuse before claim."
+    },
+    {
+      "id": "O-11",
+      "disposition": "adopt with changes",
+      "worker_proposal": "Retirement zeroes below-A5, then the A5 anchor, then revokes the profile, then RELEASE.",
+      "lead_rule": "Canonical below-A5 and final header clear; retain RETIRING exclusion, consumed-generation tombstone, phases and reservations through RELEASE success/failure."
+    },
+    {
+      "id": "O-12",
+      "disposition": "adopt",
+      "worker_proposal": "Retirement does not require a valid current ID.",
+      "lead_rule": "Malformed guest current-cell values do not block integral owner cleanup; all other protected checks remain."
+    },
+    {
+      "id": "O-13",
+      "disposition": "adopt with changes",
+      "worker_proposal": "Fault split: guest-malformed input is inert refusal; trusted mutation quarantines.",
+      "lead_rule": "Guest malformed values refuse; admitted trusted map/control corruption quarantines. Opaque guest-record content changes are not private-format corruption."
+    },
+    {
+      "id": "O-14",
+      "disposition": "adopt with changes",
+      "worker_proposal": "Five-step bounded implementation order, starting with the pure validator.",
+      "lead_rule": "Combine real owner-path dependencies in one bounded implementation proposal; freeze API/oracle first, do not create five mandatory acceptance rounds or duplicate pure validator."
+    }
+  ],
+  "focused_review_dispositions": [
+    {
+      "id": "G-1",
+      "disposition": "adopt with changes",
+      "lead_rule": "Retain scalar owned layout/reservation identity and original image-owned map/lifecycle controls. The original image already retains its map; reject the claim that map validation requires a hidden native view pointer."
+    },
+    {
+      "id": "G-2",
+      "disposition": "adopt with changes",
+      "lead_rule": "Retain consumed-generation tombstone and all unreleased reservations across RETIRING and failed RELEASE, with no interim ordinary-entry window. Revoke graphics authority, not ownership accounting."
+    },
+    {
+      "id": "G-3",
+      "disposition": "adopt",
+      "lead_rule": "Retirement explicitly requires owner-proven quiescence, zero unresolved borrows and no quarantine before cleanup mapping/effects; stale STOPPED labels grant nothing."
+    }
+  ],
+  "model_calls": 2,
+  "retries": 0,
+  "planned_case_rows": 40,
+  "executed_cases": [],
+  "runtime_tests": 0,
+  "fixtures_generated": 0,
+  "code_changes": false,
+  "new_build": false,
+  "new_target_trial": false,
+  "new_release": false,
+  "native_input_fingerprints_unchanged": 64,
+  "chatgpt_quota_savings_measured": false,
+  "remaining_account_allowances": null
+}
