@@ -1,0 +1,35 @@
+{
+  "worker": "grok-4.7",
+  "host_os": "Windows 11",
+  "verdict": "approve-with-changes",
+  "blocking_findings": [
+    {
+      "section": "5",
+      "problem": "Grok is described as an established Read-only, no-web, no-subagent control. This session is Grok 4.7 on Windows 11/PowerShell and still exposes file tools, MCP lookup/call, and skill entrypoints for browser, computer-use, web research, and subagent-style workflows. The plan states that Antigravity's broad tools are not hard isolation, but it does not apply that standard to Grok. Prompt text does not enforce those denials, so a packet could mutate files or reach the network despite section 6.",
+      "recommended_change": "Dispatch Grok only with an explicit tool allowlist: read-only file access; deny shell, write, web, MCP, browser, computer-use, and subagents. Record the actual tool list, requested model grok-4.7, resolved model, and effort. If the CLI cannot deny those tools, send no secret-adjacent or frozen-input packets and keep accepting stdout proposals only."
+    }
+  ],
+  "nonblocking_findings": [
+    {
+      "section": "2",
+      "problem": "Grok's primary role is one exact diff and one risk, while section 4 says Codex must not rebuild a sound artifact and prefers usable patches. A prose-only finding makes Codex re-derive the fix.",
+      "recommended_change": "For a local ownership, lifecycle, or coupling defect, require one applicable hunk plus the single risk. Keep ABI/kernel work on a reviewed contract; do not widen the review to the whole tree."
+    },
+    {
+      "section": "5",
+      "problem": "The 180-240s Grok cap is only a suggestion, but a single ABI or calling-convention question on Windows can exceed it if the packet includes headers and toolchain facts. Low effort matches a narrow review, not a short clock.",
+      "recommended_change": "Set the cap from the one deliverable after the packet is fixed. Record timeout separately from an empty or invalid artifact. Do not treat grok-4.7-build-fast as a latency or quality fallback without a new qualified trial."
+    }
+  ],
+  "model_role_advice": [
+    "Keep grok-4.7 at low effort for one focused defect or ownership/lifecycle/coupling review. Do not use it as coverage primary or as the test author for an implementation it wrote.",
+    "grok-4.7-build-fast, 4.6, and 4.5 stay unqualified candidates. This round does not confirm CLI 1.0.52 or the authenticated catalog; those remain prior audit claims.",
+    "No change to the Argon4 High pin, Codex-only integration, source gates, or Windows/PowerShell host assumptions."
+  ],
+  "changes_to_your_self_report": [
+    "Confirmed in this prompt only: worker is Grok 4.7 and the host is Windows 11 with PowerShell.",
+    "Default session surface includes file and MCP tools plus browser, computer-use, research, and subagent skills unless the invocation denies them. Read-only is not a property of the model.",
+    "No catalog, account, funding, or CLI-version rediscovery was performed. No tests were run."
+  ],
+  "tests_executed": []
+}

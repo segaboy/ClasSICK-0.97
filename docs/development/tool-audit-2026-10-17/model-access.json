@@ -1,0 +1,105 @@
+{
+  "agy": {
+    "source": "Authenticated agy models,2026-10-17",
+    "cli": "1.4.0",
+    "listed": [
+      "gemini-4-argon-medium",
+      "gemini-4-argon-high",
+      "gemini-4-argon-low",
+      "gemini-3.8-flash-high",
+      "gemini-3.8-flash-medium",
+      "gemini-3.8-flash-low",
+      "claude-opus-5-5-low",
+      "claude-opus-5-5-medium",
+      "claude-opus-5-5-high",
+      "claude-sonnet-5-5-low",
+      "claude-sonnet-5-5-medium",
+      "claude-sonnet-5-5-high",
+      "gpt-oss-120b-medium"
+    ],
+    "verified_execution": [
+      "gemini-4-argon-high"
+    ],
+    "constraint": "Owner requires Argon High: --model gemini-4-argon-high --effort high. Other listed models are inventory, not permission for automatic switching; xhigh conflict fell back to Medium."
+  },
+  "grok": {
+    "source": "Authenticated grok models,2026-10-17",
+    "cli": "1.0.52",
+    "listed": [
+      "grok-4.7",
+      "grok-4.7-build-fast",
+      "grok-4.6",
+      "grok-4.5"
+    ],
+    "default": "grok-4.7",
+    "verified_execution": [
+      "grok-4.7"
+    ],
+    "constraint": "This audit uses explicit grok-4.7, reasoning-effort low. Models listed are not all trialed."
+  },
+  "claude": {
+    "source": "Claude Code help + prior successful runtime metadata,2026-10-17",
+    "cli": "2.1.287",
+    "aliases_documented": [
+      "fable",
+      "opus",
+      "sonnet"
+    ],
+    "verified_execution": [
+      "claude-opus-5-5"
+    ],
+    "constraint": "Full authenticated model catalog unavailable from documented noninteractive CLI. Interactive model picker previously stopped at onboarding; no sign-in/account changes. Do not invent alias resolution or claim every model is entitled. This audit pins claude-opus-5-5, effort low."
+  },
+  "copilot": {
+    "source": "Live Copilot CLI model picker,2026-10-17; bounded traversal, catalog completeness NOT verified",
+    "cli": "1.0.98",
+    "listed_display_names": [
+      "GPT-5.6 Terra",
+      "GPT-6 Luna",
+      "Claude Sonnet 5.5",
+      "GPT-5.6 Luna",
+      "GPT-5.4",
+      "GPT-5.4 mini",
+      "GPT-5.3-Codex",
+      "GPT-5 mini",
+      "Claude Sonnet 5",
+      "Claude Haiku 5.5",
+      "Claude Haiku 4.5",
+      "MAI-Code-1.1-Flash",
+      "Gemini 3.8 Flash",
+      "Gemini 3.7 Flash",
+      "Grok 4.7",
+      "Grok 4.6",
+      "Grok 4.5",
+      "Kimi K3"
+    ],
+    "verified_execution": [
+      "claude-sonnet-5.5"
+    ],
+    "constraint": "Use explicit Sonnet5.5 low on the reported GitHub Copilot route. Auto/denied/unclassified routes are not admitted by a model name. Current usage reports do not contain isByok; do not invent it. Listed alternatives need a useful scoped artifact/route check, not new blanket owner approval. Catalog completeness remains unproven.",
+    "picker_denied_entries": [
+      "gpt-6.1-sol",
+      "gpt-6-sol",
+      "gpt-6-astra",
+      "gpt-5.6-sol",
+      "gpt-5.5",
+      "claude-fable-5.1",
+      "claude-sonnet-4.6"
+    ],
+    "denial_evidence": "Stored complete picker frames20..25 explicitly say plan does not include each model; later selected claude-sonnet-4.6 shows same denial. No selection, upgrade or inference on those IDs. Scanning local providers does not establish any row origin.",
+    "current_route_evidence": {
+      "provider_id": "copilot",
+      "provider_label": "GitHub Copilot",
+      "provider_kind": "copilot",
+      "reported_model": "claude-sonnet-5.5",
+      "isByok_current_receipt": null,
+      "isByok_prior_qualification": false,
+      "funding_or_plan_label": null
+    }
+  },
+  "host": {
+    "os": "Windows 11",
+    "shell_observed": "PowerShell 7.6.5",
+    "scope": "All task packets must distinguish Windows host, Linux CI and Mac/PC target."
+  }
+}

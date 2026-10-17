@@ -1,0 +1,119 @@
+{
+  "worker": "Claude Code CLI 2.1.287 (service route: Anthropic; underlying model: claude-opus-5-5, pinned, effort low)",
+  "host_os": "Windows 11",
+  "model_access": {
+    "verified_models": [
+      "claude-opus-5-5 (prior successful runtime metadata plus this session's self-identification)"
+    ],
+    "listed_or_alias_only": [
+      "fable (alias; how it resolves is unverified)",
+      "opus (alias; resolution unverified)",
+      "sonnet (alias; resolution unverified)",
+      "claude-fable-5-1, claude-sonnet-5-5 and claude-haiku-4-5-20251001 are publicly documented IDs, not verified entitlements"
+    ],
+    "unknowns": [
+      "Full authenticated catalog",
+      "Alias-to-ID mapping",
+      "Plan, quota and remaining balance (a successful call does not reveal these)",
+      "Price, latency and timeout behavior at higher effort or longer inputs",
+      "Whether this route hosts any non-Anthropic family (no evidence that it does)"
+    ]
+  },
+  "capabilities": [
+    {
+      "task_type": "Contract/spec drafts (SPEC-style guest/native interfaces, selection core, owner integrity and lifecycle binding)",
+      "best_candidate_model": "claude-opus-5-5 (hypothesis based on dated observation: earlier Claude contract drafts were adopted after lead corrections)",
+      "deliverable": "Spec text in stdout, listing invariants, error cases, open questions and frozen-baseline references",
+      "windows_constraints": "None for text; path conventions use C:\\Repos\\ClasSICK-0.97",
+      "qualification_status": "Partially observed; still needs lead review"
+    },
+    {
+      "task_type": "Portable C and bounded 68000/x86 ABI-boundary proposals",
+      "best_candidate_model": "claude-opus-5-5 (hypothesis)",
+      "deliverable": "Original C or assembly-stub proposals with stated assumptions about calling convention, stack and budget. No new ABI, SDK or loader",
+      "windows_constraints": "No local cross-compiler is assumed. Code is unbuilt and unverified",
+      "qualification_status": "Portable C partially observed; 68k/x86 ABI work unqualified"
+    },
+    {
+      "task_type": "Independent test/oracle artifacts",
+      "best_candidate_model": "Unqualified for claude here. Copilot has the observed API-only role",
+      "deliverable": "Can draft oracle cases only when independence from the implementation author is not required",
+      "windows_constraints": "Not executed",
+      "qualification_status": "Conflict of interest if I also wrote the code. Keep a different worker"
+    },
+    {
+      "task_type": "Defect, security and ownership review",
+      "best_candidate_model": "claude-opus-5-5 (hypothesis)",
+      "deliverable": "Findings with severity, location in the supplied text and suggested fix",
+      "windows_constraints": "Only reviews inline input",
+      "qualification_status": "Unqualified in this project. Grok holds the observed boundary-review role"
+    },
+    {
+      "task_type": "Requirements coverage matrices",
+      "best_candidate_model": "Unknown. Antigravity/Argon was observed doing this, with native/guest layer label errors",
+      "deliverable": "Coverage table mapping requirement to artifact to gap",
+      "windows_constraints": "None",
+      "qualification_status": "Unqualified; could serve as a second check on layer labels"
+    },
+    {
+      "task_type": "Build, link, compiler and CI failure analysis",
+      "best_candidate_model": "claude-opus-5-5 (hypothesis)",
+      "deliverable": "Root-cause hypotheses from pasted logs",
+      "windows_constraints": "Must keep the Linux CI runner separate from the Windows host. No reproduction",
+      "qualification_status": "Unqualified; needs supplied logs"
+    },
+    {
+      "task_type": "Verification scripts and mechanical maintenance (Python/PowerShell)",
+      "best_candidate_model": "Unknown. Antigravity holds the observed role",
+      "deliverable": "Script proposals in stdout",
+      "windows_constraints": "PowerShell 5/7 differences and quoting must be stated. Never run",
+      "qualification_status": "Unqualified"
+    },
+    {
+      "task_type": "Approved-source research and historical evidence limits",
+      "best_candidate_model": "None. Research is out of scope without approved locators",
+      "deliverable": "Lists of evidence gaps and the gates still open",
+      "windows_constraints": "No web access",
+      "qualification_status": "Cannot perform. No AI opinion establishes historical behavior"
+    },
+    {
+      "task_type": "Windows 11, PowerShell, CMake and cross-build planning",
+      "best_candidate_model": "claude-opus-5-5 (hypothesis)",
+      "deliverable": "Proposals for CMake presets and toolchain files, with explicit assumptions",
+      "windows_constraints": "No installed toolchain or WSL is assumed",
+      "qualification_status": "Unqualified"
+    },
+    {
+      "task_type": "Documentation, handoffs, model routing and usage efficiency",
+      "best_candidate_model": "claude-opus-5-5 (hypothesis)",
+      "deliverable": "Concise handoff notes and routing suggestions. No OneNote or wiki",
+      "windows_constraints": "None",
+      "qualification_status": "Partially observed"
+    }
+  ],
+  "best_contribution": "One substantial primary draft per task, either a contract/spec or original portable C, sized for a single lead review pass so Codex usage stays low",
+  "limitations": [
+    "No repository, file, command, test, web or tool access in this audit",
+    "Cannot compile, link, run emulators or verify ABI, stack or budget",
+    "Cannot verify alias entitlement or quota",
+    "Self-assessment is not project qualification",
+    "Larger inputs may time out (other tools have hit 180-240s limits); my own behavior at that size is unmeasured",
+    "Proposals do not authorize implementation"
+  ],
+  "controls": [
+    "Model pinned to claude-opus-5-5, effort low",
+    "Output to stdout only",
+    "Clean-room input: frozen public contracts and original code only",
+    "Lead corrections are required before adoption",
+    "Independent tests come from a different worker",
+    "Fresh owner go-ahead before any target, emulator, VM or reference run"
+  ],
+  "usage_reporting": "No token, quota or price data is visible to me. Owner should capture CLI usage output and wall-clock time externally",
+  "questions_or_decisions": [
+    "Should I keep the contract/C primary role?",
+    "What input size cap and timeout should apply to round 2?",
+    "Confirm the round 2 effort level (low or higher)",
+    "Is alias resolution needed, or is pinning sufficient?"
+  ],
+  "tests_executed": []
+}

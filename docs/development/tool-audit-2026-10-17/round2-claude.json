@@ -1,0 +1,42 @@
+{
+  "worker": "Claude Code 2.1.287 / claude-opus-5-5 (low effort requested; resolved model per CLI receipt)",
+  "host_os": "Windows 11",
+  "verdict": "approve-with-changes",
+  "blocking_findings": [],
+  "nonblocking_findings": [
+    {
+      "section": "2 Default allocation",
+      "problem": "There is no tie-break rule for build/link failures when the failing patch was not written by Claude. 'Argon High first ... or Claude if tied to its patch' could still send both workers the same logs.",
+      "recommended_change": "Add: one log-analysis worker per failure; pick the patch author if it is qualified, otherwise Argon. Use a second worker only after a recorded inconclusive result."
+    },
+    {
+      "section": "2 Test independence",
+      "problem": "An 'API-only oracle' can still pick up implementation details if the contract text was written alongside the draft, or if the same Claude session wrote both. Vendor diversity alone does not prevent this.",
+      "recommended_change": "Have Codex freeze the contract before dispatching the implementation. Give the oracle author only the frozen contract plus public headers, and record the contract hash in both packets."
+    },
+    {
+      "section": "5 Windows",
+      "problem": "The Windows checklist leaves out CRLF/LF autocrlf effects on patch application, UTF-8 BOM in PowerShell 5.1 Out-File/Set-Content, and path-length/case-insensitivity collisions. These are the usual ways stdout patches from workers fail on Windows.",
+      "recommended_change": "Ask workers for unified diffs with explicit LF/encoding notes. Codex applies them with git apply --check, and the PowerShell version (5.1 or 7.x) is named in each packet."
+    },
+    {
+      "section": "4 Integration",
+      "problem": "'Do not repeat unchanged tests' does not define what counts as unchanged. A dependency or toolchain change can invalidate an earlier pass.",
+      "recommended_change": "Key test reuse to the public revision, toolchain version and input hashes. Any change to these means re-running."
+    },
+    {
+      "section": "1 Evidence",
+      "problem": "The Claude entry describes catalog and alias resolution as unknown, but it doesn't say the receipts must record the resolved model ID.",
+      "recommended_change": "For each call, record the resolved model from Claude's JSON/stream output. If it is missing, label it 'resolution unverified' and don't assume it from the alias."
+    }
+  ],
+  "model_role_advice": [
+    "Claude/Opus 5.5 low: contracts and original portable C drafts. It should not also write the oracle for its own draft.",
+    "Fable/Sonnet aliases are untested hypotheses and have no project qualification yet."
+  ],
+  "changes_to_your_self_report": [
+    "My earlier self-report understated the scope of my qualified independent tests. The proposal's correction is accepted.",
+    "Any extra model IDs I mentioned before are not catalog evidence."
+  ],
+  "tests_executed": []
+}

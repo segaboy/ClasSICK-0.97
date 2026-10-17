@@ -1,5 +1,13 @@
 # ClasSICK 0.97 working instructions
 
+Owner capability-audit scope (2026-10-17, SRC-0252..0257): all four external CLIs
+reported Windows11 capabilities and reviewed one identical proposal. Final routing
+plan is [here](docs/development/tool-audit-2026-10-17/final-plan.md); normal tasks
+retain one primary/optional distinct-risk worker. Argon always High, Codex sole
+writer/integrator/final verifier. No feature/source/input/VM/hardware/release gate
+expansion, runtime code/build/fixtures, agents/chats/automation or OneNote/wiki work.
+Preserve originals/copies, native inputs, UART, releases/tags and old records.
+
 Current owner guest drawing-port contract scope (2026-10-17, SRC-0244..0248):
 "Next step" accepts the planned review/contract slice after SPEC-0041. SPEC-0042
 defines prepared GetPort/SetPort selection, one native68000/x86 semantic core,

@@ -1,0 +1,126 @@
+{
+  "worker": "copilot (GitHub Copilot CLI 1.0.98), running as claude-sonnet-5.5. Capability self-report only, not project qualification.",
+  "host_os": "Windows 11",
+  "model_access": {
+    "verified_models": [
+      "claude-sonnet-5.5 (the only verified execution; effort low, isByok=false, pinned for this audit)"
+    ],
+    "listed_or_alias_only": [
+      "GPT-5.6 Terra",
+      "GPT-6 Luna",
+      "GPT-5.6 Luna",
+      "GPT-5.4",
+      "GPT-5.4 mini",
+      "GPT-5.3-Codex",
+      "GPT-5 mini",
+      "Claude Sonnet 5",
+      "Claude Haiku 5.5",
+      "Claude Haiku 4.5",
+      "MAI-Code-1.1-Flash",
+      "Gemini 3.8 Flash",
+      "Gemini 3.7 Flash",
+      "Grok 4.7",
+      "Grok 4.6",
+      "Grok 4.5",
+      "Kimi K3",
+      "Auto (a picker option; the model it selects is unknown)"
+    ],
+    "unknowns": [
+      "Unclassified picker entries (gpt-6.1-sol, gpt-6-sol, gpt-6-astra, gpt-5.6-sol, gpt-5.5, claude-fable-5.1) have unknown route and entitlement. They may come from local providers and are not assumed GitHub-funded.",
+      "Picker catalog completeness was not verified.",
+      "Plan label and remaining allowance are unknown. A successful inference does not show balance.",
+      "Cost and speed per model are unknown.",
+      "Service route (the Copilot CLI) is distinct from the underlying model family. Copilot quota is separate from ChatGPT/Codex quota. Listed GPT names are not evidence of Codex-quota use, and none should be selected without owner approval."
+    ]
+  },
+  "capabilities": [
+    {
+      "task_type": "Contract/spec drafts, requirements coverage matrices",
+      "best_candidate_model": "claude-sonnet-5.5 (hypothesis; no other model is verified)",
+      "deliverable": "Draft spec text and requirement-to-evidence tables, returned on stdout.",
+      "windows_constraints": "None specific. Output should use ASCII and CRLF-tolerant formatting.",
+      "qualification_status": "Unqualified for this project. Prior Copilot work was independent tests and coverage, not specs."
+    },
+    {
+      "task_type": "Portable C and bounded 68000/x86 ABI code proposals",
+      "best_candidate_model": "claude-sonnet-5.5 (hypothesis)",
+      "deliverable": "Original C proposals with stated assumptions. ABI, stack and budget claims are labeled unchecked.",
+      "windows_constraints": "I cannot compile or check ABI or object output here. Assembly boundaries and sizes need Codex or CI verification.",
+      "qualification_status": "Unqualified. A proposal does not authorize any ABI, SDK or loader."
+    },
+    {
+      "task_type": "Independent test/oracle artifacts",
+      "best_candidate_model": "claude-sonnet-5.5 (hypothesis)",
+      "deliverable": "API-only tests, oracles and coverage lists written without reading implementations.",
+      "windows_constraints": "Tests must run under PowerShell, CMake and Python on Windows. Oracle and parser corrections have been needed before.",
+      "qualification_status": "Observed: Copilot's earlier API-only test artifacts were adopted after lead corrections. That evidence does not cover this model or version."
+    },
+    {
+      "task_type": "Defect/security/ownership review",
+      "best_candidate_model": "claude-sonnet-5.5 (hypothesis)",
+      "deliverable": "Findings with severity, location and confidence, all marked as unverified.",
+      "windows_constraints": "I read only supplied slices. Large inputs risk timeouts, as with Grok's 180s case.",
+      "qualification_status": "Unqualified. Grok focused boundary review has the better observed record."
+    },
+    {
+      "task_type": "Build/link/compiler/CI failure analysis",
+      "best_candidate_model": "claude-sonnet-5.5 (hypothesis)",
+      "deliverable": "Ranked causes and suggested checks from pasted logs.",
+      "windows_constraints": "I cannot reproduce failures. Linux CI behavior must not be conflated with the Windows host.",
+      "qualification_status": "Unqualified."
+    },
+    {
+      "task_type": "Verification-script and mechanical maintenance",
+      "best_candidate_model": "unknown. Antigravity has the observed allocation; I have no evidence against it.",
+      "deliverable": "Python/PowerShell script proposals and mechanical diffs on stdout.",
+      "windows_constraints": "I have no execution here, so scripts are untested. Quoting, path and encoding behavior in PowerShell is a risk.",
+      "qualification_status": "Unqualified."
+    },
+    {
+      "task_type": "Approved-source research and historical evidence",
+      "best_candidate_model": "none recommended",
+      "deliverable": "Only structured summaries of owner-supplied approved sources, with locators.",
+      "windows_constraints": "No web, no manuals, no ROM or emulator material.",
+      "qualification_status": "Cannot establish source, version or historical behavior. Model opinion is not evidence, and the source, role and edition gates stay open."
+    },
+    {
+      "task_type": "Windows 11 / PowerShell / CMake / cross-build proposals",
+      "best_candidate_model": "claude-sonnet-5.5 (hypothesis)",
+      "deliverable": "Command and CMake proposals with stated assumptions.",
+      "windows_constraints": "I do not assume WSL, a local cross-compiler or any toolchain. Nothing is installed or run.",
+      "qualification_status": "Unqualified."
+    },
+    {
+      "task_type": "Documentation, handoffs, model routing, usage efficiency",
+      "best_candidate_model": "claude-sonnet-5.5 (hypothesis). Cheaper listed models are unmeasured.",
+      "deliverable": "Concise handoffs and routing notes. No wiki or OneNote content.",
+      "windows_constraints": "Output is stdout only.",
+      "qualification_status": "Unqualified. I make no price or speed claims."
+    }
+  ],
+  "best_contribution": "Independent, API-only test and oracle artifacts and coverage gaps, plus a second-opinion review of one bounded proposal. This follows the observed allocation. Treat it as a hypothesis, not a ranking.",
+  "limitations": [
+    "I have no repository access, no private HQ and no credentials. I cannot run tests, builds, emulators or VMs.",
+    "I cannot decide, integrate, write repositories or do final verification. Codex alone does these.",
+    "I cannot establish Mac System 1 historical behavior or source identity.",
+    "I cannot infer account plan, balance or entitlement to other models.",
+    "My code and tests can contain layer-label, oracle, parser or budget errors. Lead correction is required.",
+    "Large inputs may time out."
+  ],
+  "controls": [
+    "Pin claude-sonnet-5.5, low effort, isByok=false.",
+    "Use no unclassified or local-provider entries and no Auto.",
+    "Make one scoped call per task with bounded input slices.",
+    "Send no ChatGPT/Codex-routed work and no extra Codex chats or subagents.",
+    "Return stdout only.",
+    "Get a fresh owner go-ahead before any target, emulator, VM or reference run.",
+    "Do not fan out every task to all four tools."
+  ],
+  "usage_reporting": "Report only observed facts: model and effort used, calls made, input and output sizes, and wall-clock time and timeouts where known. Report no price, speed or remaining-balance claims without supplied data. Session limits showed 30 AI credits remaining at this audit's start.",
+  "questions_or_decisions": [
+    "Owner: may Copilot take a bounded API-only test/oracle task as primary under the pinned model?",
+    "Owner: should any other listed model be qualified, and under what route and funding?",
+    "Owner: what input-slice size cap should apply, given the observed timeouts?"
+  ],
+  "tests_executed": []
+}

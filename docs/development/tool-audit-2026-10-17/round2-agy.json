@@ -1,0 +1,44 @@
+{
+  "worker": "agy (Antigravity 1.4.0 / Gemini 4 Argon High)",
+  "host_os": "Windows 11",
+  "verdict": "approve-with-changes",
+  "blocking_findings": [
+    {
+      "section": "Section 5",
+      "problem": "Antigravity's standard sandbox permits read/write in Cwd and <appDataDir>\\brain\\, and /plan injects instructions to read files and write plan artifacts via write_to_file.",
+      "recommended_change": "Omit /plan on non-planning calls, run in a frozen non-repo Cwd, forbid artifact writes in AGENTS.md, and audit transcript.jsonl for zero tool_calls."
+    }
+  ],
+  "nonblocking_findings": [
+    {
+      "section": "Section 2",
+      "problem": "Restricting Argon 4 High mostly to docs, coverage, and log triage underutilizes a pinned worker that saves ChatGPT/Codex quota.",
+      "recommended_change": "Permit Argon 4 High to draft bounded PowerShell scripts, fixture generators, ABI/layout checks, and secondary portable C drafts paired with an independent oracle."
+    },
+    {
+      "section": "Section 2 & 4",
+      "problem": "Pairing Claude Opus 5.5 implementation with Copilot Sonnet 5.5 tests shares Claude-family biases, and log-triage retries risk leaking implementation details to the oracle author.",
+      "recommended_change": "Keep oracle packets strictly contract-only across retries; never pass implementation diffs or implementation-side failure logs to the test author."
+    },
+    {
+      "section": "Section 4 & 5",
+      "problem": "PowerShell stdout redirection on Windows 11 can introduce UTF-16/UTF-8-BOM or CRLF mismatches that break unified diffs.",
+      "recommended_change": "Enforce UTF-8 no-BOM stdout capture in pwsh and normalize line endings before Codex applies worker patches."
+    },
+    {
+      "section": "Section 1 & 5",
+      "problem": "Antigravity stdout omits resolved-model receipts and quota/cost counters.",
+      "recommended_change": "Verify resolved model and tool compliance from <appDataDir>\\brain\\<conversation-id>\\.system_generated\\logs\\transcript.jsonl outside Git, recording cost/allowance as null."
+    }
+  ],
+  "model_role_advice": [
+    "Retain the Gemini 4 Argon High pin for Antigravity; treat other catalog models across workers as unverified hypotheses until a small scoped qualification and route-receipt check succeed.",
+    "Use Argon 4 High to offload mechanical C/PowerShell scaffolding and cross-family verification when Claude and Copilot share Anthropic model lineage."
+  ],
+  "changes_to_your_self_report": [
+    "Antigravity always exposes read/write/command/web/subagent tools in its schema; read-only compliance requires Cwd isolation plus post-call transcript.jsonl tool_calls auditing.",
+    "The /plan slash command instructs the model to create artifact files in <appDataDir>\\brain\\ unless explicitly overridden.",
+    "Resolved model/effort and tool audit trails reside in local transcript.jsonl logs, not stdout; billing/quota counters are unavailable (null)."
+  ],
+  "tests_executed": []
+}

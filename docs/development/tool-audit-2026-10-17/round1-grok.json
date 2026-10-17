@@ -1,0 +1,121 @@
+{
+  "worker": "grok",
+  "host_os": "Windows 11",
+  "model_access": {
+    "verified_models": [
+      "grok-4.7"
+    ],
+    "listed_or_alias_only": [
+      "grok-4.7-build-fast",
+      "grok-4.6",
+      "grok-4.5"
+    ],
+    "unknowns": [
+      "Whether listed non-default IDs differ in weights, tools, or context from grok-4.7",
+      "Any non-Grok family behind this CLI; catalog shows only grok-* IDs, so service route and underlying model are the same grok ID when one is invoked",
+      "Account plan, remaining balance, quotas, price, and speed",
+      "Project qualification of any listed model except that this audit invoked grok-4.7 at reasoning-effort low on CLI 1.0.52"
+    ]
+  },
+  "capabilities": [
+    {
+      "task_type": "Contract and spec drafts (public frozen contracts, SPEC-0042-style selection contracts, future shared selection and guest-manager interfaces)",
+      "best_candidate_model": "unqualified/unknown among listed Grok IDs",
+      "deliverable": "Stdout proposal text only. Hypothesis: grok-4.7 can draft bounded contract deltas for Codex review. Not an adopted-artifact claim.",
+      "windows_constraints": "No repo access. Cannot edit C:\\Repos\\ClasSICK-0.97 or private HQ. OneNote and Git wiki retired.",
+      "qualification_status": "hypothesis; sibling Claude drafts are dated observations, not a Grok ranking"
+    },
+    {
+      "task_type": "Portable C and bounded 68000/x86 ABI code proposals (shared C, native rectangle/view/input boundaries, no new ABI/SDK/loader)",
+      "best_candidate_model": "unqualified/unknown",
+      "deliverable": "Stdout proposals Codex may accept or discard. Worker text does not authorize implementation or a new native ABI.",
+      "windows_constraints": "No assumed local cross-compiler, WSL, or assembler. Linux CI is not this Windows 11 host.",
+      "qualification_status": "hypothesis only; no grok-4.7 code-proposal trial in the supplied observations"
+    },
+    {
+      "task_type": "Independent test and oracle artifacts",
+      "best_candidate_model": "unqualified/unknown",
+      "deliverable": "Hypothesis: API-level oracle sketches in stdout. This workflow forbids executing tests. Prior Copilot oracle work is a dated sibling observation, not a Grok qualification.",
+      "windows_constraints": "No test runs, emulators, VMs, or reference machines without a fresh owner go-ahead, which is outside this response.",
+      "qualification_status": "unqualified"
+    },
+    {
+      "task_type": "Defect, security, and ownership boundary review",
+      "best_candidate_model": "grok-4.7 as hypothesis only, because it is the sole verified execution ID; prior useful Grok boundary notes were not model-pinned",
+      "deliverable": "Narrow stdout review of one proposal: ownership, layer labels (native vs guest), integrity, environment-span, and lifecycle binding. Keep scope small.",
+      "windows_constraints": "A 406-line Grok review timed out at 180s; an older smaller boundary pass was useful. That is one dated observation, not a measured limit or ranking.",
+      "qualification_status": "narrow dated observation for the Grok worker; model-level qualification unknown"
+    },
+    {
+      "task_type": "Requirements coverage matrices",
+      "best_candidate_model": "unqualified/unknown",
+      "deliverable": "Hypothesis only: short gap notes. Argon High's 20-row trial found 4 useful gaps but mis-labeled native/guest layers. Do not treat Grok as the coverage primary.",
+      "windows_constraints": "Same-session resume after a 240s capture timeout finished in 68.64s once; not a quota or speed measurement.",
+      "qualification_status": "unqualified"
+    },
+    {
+      "task_type": "Build, link, compiler, and CI failure analysis",
+      "best_candidate_model": "unqualified/unknown",
+      "deliverable": "Hypothesis: explain a log the owner pastes. Cannot compile, link, or query GitHub CI from this response.",
+      "windows_constraints": "PowerShell host is stated. Installed CMake, compilers, GitHub CLI, and WSL are unverified. Do not assume them.",
+      "qualification_status": "hypothesis"
+    },
+    {
+      "task_type": "Verification-script and mechanical maintenance",
+      "best_candidate_model": "unqualified/unknown",
+      "deliverable": "Stdout script proposals only. Antigravity's prior script role is a sibling observation. No commands or file writes here.",
+      "windows_constraints": "Paths stay Windows-style if a proposal is later run by Codex. This audit runs nothing.",
+      "qualification_status": "unqualified"
+    },
+    {
+      "task_type": "Approved-source research and historical evidence",
+      "best_candidate_model": "unqualified/unknown",
+      "deliverable": "None in this response. No web lookup, manuals, ROM, media, disassembly, emulator sources, or Apple/Microsoft assets. Historical System 1 behavior is not established by implementation or model opinion.",
+      "windows_constraints": "Research needs approved-source locators and a separate permitted retrieval. Source, role, edition, physical, full 128K, B2, human, boot, and release gates still apply.",
+      "qualification_status": "blocked in this workflow"
+    },
+    {
+      "task_type": "Windows 11, PowerShell, CMake, and cross-build reasoning",
+      "best_candidate_model": "unqualified/unknown",
+      "deliverable": "Hypothesis: text-only notes on a described Windows or CI failure. Cannot discover or install a toolchain.",
+      "windows_constraints": "Host is Windows 11 with PowerShell. Native Mac cross-builds and ABI/stack/budget checks need evidence of a toolchain Codex controls. A Linux runner is a different machine.",
+      "qualification_status": "hypothesis"
+    },
+    {
+      "task_type": "Documentation, handoffs, model routing, and usage efficiency",
+      "best_candidate_model": "grok-4.7 hypothesis for a short stdout handoff; other listed IDs unknown",
+      "deliverable": "Routing note: Codex remains the only writer, integrator, and final verifier. Default one substantial primary and a second worker only for a distinct risk. This four-CLI audit is an explicit one-time exception, not a permanent fan-out change. Conserve ChatGPT/Codex; no extra Codex chats or subagents.",
+      "windows_constraints": "Handoffs are captured stdout. Wiki and OneNote are retired.",
+      "qualification_status": "owner constraint, not a measured quality ranking"
+    }
+  ],
+  "best_contribution": "Hypothesis, aligned with the existing allocation: use this Grok route for one narrow boundary review of a single Codex-selected proposal (ownership, native versus guest labels, integrity and lifecycle). grok-4.7 is the only verified model ID for that route. Do not assign Grok broad specs, oracles, coverage matrices, or repository edits.",
+  "limitations": [
+    "No repository access, commands, file reads or writes, tests, web, MCP, skills, memory, account or config inspection, subagents, or new chats in this audit.",
+    "Cannot decide, merge, implement, or finally verify; Codex alone does that.",
+    "Cannot use private HQ, credentials, untracked originals, manuals, ROM, emulator bodies, or UART tests.",
+    "Cannot authorize target, emulator, VM, or reference runs.",
+    "Cannot infer plan or remaining balance from a successful reply.",
+    "Listed models other than grok-4.7 were not trialed.",
+    "No price or speed claims.",
+    "A capability statement creates no native ABI, SDK, or loader.",
+    "tests_executed is empty."
+  ],
+  "controls": [
+    "Worker inputs are frozen reviewed-public contracts and original project code only.",
+    "Proposals return in captured stdout, not checkout edits.",
+    "Highest priority is conserving ChatGPT/Codex usage.",
+    "Per ordinary task: one primary, second only for distinct risk.",
+    "Fresh owner go-ahead before each target or reference run.",
+    "No install, update, purchase, subscription change, or extra authentication.",
+    "Pin any real call to grok-4.7 unless the owner separately qualifies another listed ID."
+  ],
+  "usage_reporting": "One grok-4.7 completion, CLI 1.0.52, reasoning-effort low, no tool calls and no subagents. Successful inference does not disclose plan, balance, quota, price, or latency entitlement. grok-4.7-build-fast, grok-4.6, and grok-4.5 were listed and not invoked.",
+  "questions_or_decisions": [
+    "Keep Grok on narrow single-proposal boundary review unless the owner runs a new bounded trial.",
+    "Do not switch to grok-4.7-build-fast, grok-4.6, or grok-4.5 without that trial; differences are unknown.",
+    "Whether to cap review size below the prior 406-line timeout is an owner decision; the 180s timeout is one observation, not a proven limit.",
+    "No brand is categorically best; prior adopted artifacts needed lead corrections."
+  ],
+  "tests_executed": []
+}

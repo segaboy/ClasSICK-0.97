@@ -1,5 +1,17 @@
 # Agent Orchestration Protocol
 
+## Current routing plan - 2026-10-17
+
+Owner SRC-0252 requested the completed all-four capability audit and review round.
+[Final plan](tool-audit-2026-10-17/final-plan.md) is current for routing, model/route
+evidence, Windows11 packets, test independence and control limitations where it
+corrects dated language below. [Full comparison/reviews](tool-capability-audit.md).
+No feature/source/target permission expands: current runtime scope remains the
+SPEC-0042 contract-only slice. The audit's four-way fan-out is not routine policy.
+Always pin Antigravity to Argon4 High. Keep Codex sole writer/integrator/verifier;
+one normal primary and optional distinct-risk worker. Historical observations below
+remain dated evidence, not claims of current model access or hard tool isolation.
+
 ## Authority and Standing Scope
 Current owner continuation SRC-0244 permits the SPEC-0042 guest selection contract/lead review only; no implementation or build; SRC-0227 permanently retires OneNote/wiki maintenance. Worker authority SRC-0223..0226 extends SRC-0149/0150/0179 to four supervised external CLIs. Codex alone writes repositories. All existing implementation, emulator/hardware/reference, source, release and publication gates remain; each target trial still needs fresh owner approval. Private HQ, credentials, untracked research originals, manuals, prohibited implementation/assets and UART implementation/test bodies are excluded from worker inputs.
 

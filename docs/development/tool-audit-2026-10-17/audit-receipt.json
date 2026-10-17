@@ -1,0 +1,642 @@
+{
+  "date": "2026-10-17",
+  "sources": [
+    "SRC-0252",
+    "SRC-0253",
+    "SRC-0254",
+    "SRC-0255",
+    "SRC-0256",
+    "SRC-0257"
+  ],
+  "baseline_public_revision": "b3e8cddc3ea436fb588212b572129dd5698b491b",
+  "host": "Windows 11",
+  "host_shell_observed": "PowerShell7.6.5",
+  "rounds": 2,
+  "controller_model_calls": 8,
+  "all_workers_reviewed_same_proposal": true,
+  "proposal": {
+    "sha256": "200934a78e8ea5aa92f9874964842e471940c939eb7a6487d27bb192855dbfe6",
+    "bytes": 9313,
+    "lines": 126
+  },
+  "worker_responses": {
+    "agy": {
+      "round1": {
+        "execution": {
+          "round": "round1",
+          "worker": "agy",
+          "exit_code": 0,
+          "outer_timeout": false,
+          "elapsed_seconds": 79.75,
+          "input_bytes": 6126,
+          "input_sha256": "6aedbae76476a5167e5f9bcc044a038e815f1451dfa9df4a94bcda0f9cda8de1",
+          "stderr_bytes": 0
+        },
+        "observed_tool_calls": 0,
+        "reported_metadata": {
+          "reported_model": "gemini-4-argon-high",
+          "permission_mode": "request-review",
+          "exposed_tools": [
+            "ask_custom_permission",
+            "ask_permission",
+            "ask_question",
+            "browser_click_element",
+            "browser_drag_pixel_to_pixel",
+            "browser_get_dom",
+            "browser_get_network_request",
+            "browser_input",
+            "browser_list_network_requests",
+            "browser_mouse_down",
+            "browser_mouse_up",
+            "browser_move_mouse",
+            "browser_press_key",
+            "browser_refresh_page",
+            "browser_resize_window",
+            "browser_scroll",
+            "browser_scroll_dom",
+            "browser_select_option",
+            "browser_subagent",
+            "call_mcp_tool",
+            "capture_browser_console_logs",
+            "capture_browser_screenshot",
+            "click_browser_pixel",
+            "command_status",
+            "define_subagent",
+            "delete_knowledge",
+            "execute_browser_javascript",
+            "find_by_name",
+            "finish",
+            "generate_image",
+            "grep_search",
+            "invoke_subagent",
+            "list_browser_pages",
+            "list_dir",
+            "list_permissions",
+            "list_plugin_accounts",
+            "list_resources",
+            "manage_inbox",
+            "manage_subagents",
+            "manage_task",
+            "multi_replace_file_content",
+            "notebook_edit",
+            "notebook_execution",
+            "open_browser_url",
+            "read_browser_page",
+            "read_resource",
+            "read_url_content",
+            "replace_file_content",
+            "run_command",
+            "run_workflow",
+            "schedule",
+            "search_marketplace",
+            "search_web",
+            "sed_file",
+            "send_command_input",
+            "send_message",
+            "view_file",
+            "wait",
+            "wait_5_seconds",
+            "write_to_file"
+          ],
+          "expanded_commands": [
+            {
+              "name": "plan",
+              "type": "system"
+            }
+          ],
+          "usage": {
+            "input_tokens": 15140,
+            "output_tokens": 6163,
+            "thinking_tokens": 3498,
+            "cache_read_tokens": 0,
+            "total_tokens": 21303
+          }
+        },
+        "approx_json_whitespace_words": 1084,
+        "response_sha256": "7ac87e19339752b9439157bf9de9fe51212fd5acaebe4aec74b2d456836a0b1b",
+        "tests_executed": []
+      },
+      "round2": {
+        "execution": {
+          "round": "round2",
+          "worker": "agy",
+          "exit_code": 0,
+          "outer_timeout": false,
+          "elapsed_seconds": 78.48,
+          "input_bytes": 11048,
+          "input_sha256": "09ee7a0a53bfc41c32c802e57a0c64aae1bb773ee48861c12660a4e82f1c09d4",
+          "stderr_bytes": 0
+        },
+        "observed_tool_calls": 0,
+        "reported_metadata": {
+          "reported_model": "gemini-4-argon-high",
+          "permission_mode": "request-review",
+          "exposed_tools": [
+            "ask_custom_permission",
+            "ask_permission",
+            "ask_question",
+            "browser_click_element",
+            "browser_drag_pixel_to_pixel",
+            "browser_get_dom",
+            "browser_get_network_request",
+            "browser_input",
+            "browser_list_network_requests",
+            "browser_mouse_down",
+            "browser_mouse_up",
+            "browser_move_mouse",
+            "browser_press_key",
+            "browser_refresh_page",
+            "browser_resize_window",
+            "browser_scroll",
+            "browser_scroll_dom",
+            "browser_select_option",
+            "browser_subagent",
+            "call_mcp_tool",
+            "capture_browser_console_logs",
+            "capture_browser_screenshot",
+            "click_browser_pixel",
+            "command_status",
+            "define_subagent",
+            "delete_knowledge",
+            "execute_browser_javascript",
+            "find_by_name",
+            "finish",
+            "generate_image",
+            "grep_search",
+            "invoke_subagent",
+            "list_browser_pages",
+            "list_dir",
+            "list_permissions",
+            "list_plugin_accounts",
+            "list_resources",
+            "manage_inbox",
+            "manage_subagents",
+            "manage_task",
+            "multi_replace_file_content",
+            "notebook_edit",
+            "notebook_execution",
+            "open_browser_url",
+            "read_browser_page",
+            "read_resource",
+            "read_url_content",
+            "replace_file_content",
+            "run_command",
+            "run_workflow",
+            "schedule",
+            "search_marketplace",
+            "search_web",
+            "sed_file",
+            "send_command_input",
+            "send_message",
+            "view_file",
+            "wait",
+            "wait_5_seconds",
+            "write_to_file"
+          ],
+          "expanded_commands": [
+            {
+              "name": "plan",
+              "type": "system"
+            }
+          ],
+          "usage": {
+            "input_tokens": 16273,
+            "output_tokens": 5966,
+            "thinking_tokens": 5204,
+            "cache_read_tokens": 0,
+            "total_tokens": 22239
+          }
+        },
+        "approx_json_whitespace_words": 353,
+        "response_sha256": "87cb3571fc68e4fe7e31a3b6a4d14e97c2cec0d6ee1d5ec2f6171d4bbb593a98",
+        "tests_executed": []
+      }
+    },
+    "copilot": {
+      "round1": {
+        "execution": {
+          "round": "round1",
+          "worker": "copilot",
+          "exit_code": 0,
+          "outer_timeout": false,
+          "elapsed_seconds": 22.69,
+          "input_bytes": 6507,
+          "input_sha256": "27956b2d1e961c66963a302fc4eae0841e584166b2621b730543ff3f4eaaf2cd",
+          "stderr_bytes": 0
+        },
+        "observed_tool_calls": 0,
+        "reported_metadata": {
+          "currentModel": "claude-sonnet-5.5",
+          "totalPremiumRequestCost": 1,
+          "totalNanoAiu": 4099430000,
+          "aiCreditsStatus": "complete",
+          "tokenDetails": {
+            "input": {
+              "tokenCount": 82
+            },
+            "cache_read": {
+              "tokenCount": 2028
+            },
+            "cache_write": {
+              "tokenCount": 4715
+            },
+            "output": {
+              "tokenCount": 2884
+            }
+          },
+          "providerModelMetrics": [
+            {
+              "provider": {
+                "id": "copilot",
+                "label": "GitHub Copilot",
+                "kind": "copilot"
+              },
+              "modelId": "claude-sonnet-5.5",
+              "metrics": {
+                "requests": {
+                  "count": 1,
+                  "cost": 1
+                },
+                "usage": {
+                  "inputTokens": 6825,
+                  "outputTokens": 2884,
+                  "cacheReadTokens": 2028,
+                  "cacheWriteTokens": 4715,
+                  "reasoningTokens": 0
+                },
+                "totalNanoAiu": 4099430000,
+                "aiCreditsStatus": "complete",
+                "tokenDetails": {
+                  "input": {
+                    "tokenCount": 82
+                  },
+                  "cache_read": {
+                    "tokenCount": 2028
+                  },
+                  "cache_write": {
+                    "tokenCount": 4715
+                  },
+                  "output": {
+                    "tokenCount": 2884
+                  }
+                }
+              },
+              "modelDisplayName": "Claude Sonnet 5.5"
+            }
+          ],
+          "modelMetrics": {
+            "claude-sonnet-5.5": {
+              "requests": {
+                "count": 1,
+                "cost": 1
+              },
+              "usage": {
+                "inputTokens": 6825,
+                "outputTokens": 2884,
+                "cacheReadTokens": 2028,
+                "cacheWriteTokens": 4715,
+                "reasoningTokens": 0
+              },
+              "cacheExpiresAt": "2026-10-17T16:53:17.486Z",
+              "totalNanoAiu": 4099430000,
+              "aiCreditsStatus": "complete",
+              "tokenDetails": {
+                "input": {
+                  "tokenCount": 82
+                },
+                "cache_read": {
+                  "tokenCount": 2028
+                },
+                "cache_write": {
+                  "tokenCount": 4715
+                },
+                "output": {
+                  "tokenCount": 2884
+                }
+              }
+            }
+          },
+          "totalApiDurationMs": 19596
+        },
+        "approx_json_whitespace_words": 882,
+        "response_sha256": "8ad8ca059c257c7f5c20160f52d4924b61067df1d93e2a58f789f0688ff6efd9",
+        "tests_executed": []
+      },
+      "round2": {
+        "execution": {
+          "round": "round2",
+          "worker": "copilot",
+          "exit_code": 0,
+          "outer_timeout": false,
+          "elapsed_seconds": 11.77,
+          "input_bytes": 11052,
+          "input_sha256": "6e4135af705a25eeb42f92b3117fbb242626800c3a5c0234d60bc62759c641fd",
+          "stderr_bytes": 0
+        },
+        "observed_tool_calls": 0,
+        "reported_metadata": {
+          "currentModel": "claude-sonnet-5.5",
+          "totalPremiumRequestCost": 1,
+          "totalNanoAiu": 2964710000,
+          "aiCreditsStatus": "complete",
+          "tokenDetails": {
+            "input": {
+              "tokenCount": 82
+            },
+            "cache_read": {
+              "tokenCount": 531
+            },
+            "cache_write": {
+              "tokenCount": 7848
+            },
+            "output": {
+              "tokenCount": 981
+            }
+          },
+          "providerModelMetrics": [
+            {
+              "provider": {
+                "id": "copilot",
+                "label": "GitHub Copilot",
+                "kind": "copilot"
+              },
+              "modelId": "claude-sonnet-5.5",
+              "metrics": {
+                "requests": {
+                  "count": 1,
+                  "cost": 1
+                },
+                "usage": {
+                  "inputTokens": 8461,
+                  "outputTokens": 981,
+                  "cacheReadTokens": 531,
+                  "cacheWriteTokens": 7848,
+                  "reasoningTokens": 0
+                },
+                "totalNanoAiu": 2964710000,
+                "aiCreditsStatus": "complete",
+                "tokenDetails": {
+                  "input": {
+                    "tokenCount": 82
+                  },
+                  "cache_read": {
+                    "tokenCount": 531
+                  },
+                  "cache_write": {
+                    "tokenCount": 7848
+                  },
+                  "output": {
+                    "tokenCount": 981
+                  }
+                }
+              },
+              "modelDisplayName": "Claude Sonnet 5.5"
+            }
+          ],
+          "modelMetrics": {
+            "claude-sonnet-5.5": {
+              "requests": {
+                "count": 1,
+                "cost": 1
+              },
+              "usage": {
+                "inputTokens": 8461,
+                "outputTokens": 981,
+                "cacheReadTokens": 531,
+                "cacheWriteTokens": 7848,
+                "reasoningTokens": 0
+              },
+              "cacheExpiresAt": "2026-10-17T16:58:42.532Z",
+              "totalNanoAiu": 2964710000,
+              "aiCreditsStatus": "complete",
+              "tokenDetails": {
+                "input": {
+                  "tokenCount": 82
+                },
+                "cache_read": {
+                  "tokenCount": 531
+                },
+                "cache_write": {
+                  "tokenCount": 7848
+                },
+                "output": {
+                  "tokenCount": 981
+                }
+              }
+            }
+          },
+          "totalApiDurationMs": 8984
+        },
+        "approx_json_whitespace_words": 362,
+        "response_sha256": "053719cfaa4c6a05677d0a7af10243380497b93845d022772489f02563da52bf",
+        "tests_executed": []
+      }
+    },
+    "claude": {
+      "round1": {
+        "execution": {
+          "round": "round1",
+          "worker": "claude",
+          "exit_code": 0,
+          "outer_timeout": false,
+          "elapsed_seconds": 24.27,
+          "input_bytes": 5930,
+          "input_sha256": "7d97740e1089843fa0c3b77e4b7a1b8e650ff5eeb3c779a3e688c7b20cc2dc49",
+          "stderr_bytes": 0
+        },
+        "observed_tool_calls": 0,
+        "reported_metadata": {
+          "usage": {
+            "input_tokens": 2,
+            "cache_creation_input_tokens": 3473,
+            "cache_read_input_tokens": 1452,
+            "output_tokens": 2155,
+            "output_tokens_details": {
+              "thinking_tokens": 0
+            },
+            "server_tool_use": {
+              "web_search_requests": 0,
+              "web_fetch_requests": 0
+            },
+            "service_tier": "standard",
+            "cache_creation": {
+              "ephemeral_1h_input_tokens": 3473,
+              "ephemeral_5m_input_tokens": 0
+            },
+            "inference_geo": "global",
+            "iterations": [
+              {
+                "input_tokens": 2,
+                "output_tokens": 2155,
+                "cache_read_input_tokens": 1452,
+                "cache_creation_input_tokens": 3473,
+                "cache_creation": {
+                  "ephemeral_5m_input_tokens": 0,
+                  "ephemeral_1h_input_tokens": 3473
+                },
+                "type": "message"
+              }
+            ],
+            "speed": "standard",
+            "fallback_credit": null
+          },
+          "modelUsage": {
+            "claude-opus-5-5": {
+              "inputTokens": 2,
+              "outputTokens": 2155,
+              "cacheReadInputTokens": 1452,
+              "cacheCreationInputTokens": 3473,
+              "webSearchRequests": 0,
+              "costUSD": 0.0711824,
+              "contextWindow": 1000000,
+              "maxOutputTokens": 128000,
+              "thinkingTokens": 0,
+              "canonicalModel": "claude-opus-5-5",
+              "provider": "firstParty",
+              "costBasis": "list"
+            }
+          },
+          "total_cost_usd": 0.0711824,
+          "permission_denials": [],
+          "num_turns": 1
+        },
+        "approx_json_whitespace_words": 565,
+        "response_sha256": "b35ccbf8237e48f31eb06efec1b4134a99d5ad1bb35de2e99d52fc26ed10b953",
+        "tests_executed": []
+      },
+      "round2": {
+        "execution": {
+          "round": "round2",
+          "worker": "claude",
+          "exit_code": 0,
+          "outer_timeout": false,
+          "elapsed_seconds": 12.88,
+          "input_bytes": 11051,
+          "input_sha256": "9e2d6eaa27067648f0939c4bc6f999dd75e532626b783b189b03e46f4c73157f",
+          "stderr_bytes": 0
+        },
+        "observed_tool_calls": 0,
+        "reported_metadata": {
+          "usage": {
+            "input_tokens": 2,
+            "cache_creation_input_tokens": 4544,
+            "cache_read_input_tokens": 2384,
+            "output_tokens": 985,
+            "output_tokens_details": {
+              "thinking_tokens": 0
+            },
+            "server_tool_use": {
+              "web_search_requests": 0,
+              "web_fetch_requests": 0
+            },
+            "service_tier": "standard",
+            "cache_creation": {
+              "ephemeral_1h_input_tokens": 4544,
+              "ephemeral_5m_input_tokens": 0
+            },
+            "inference_geo": "global",
+            "iterations": [
+              {
+                "input_tokens": 2,
+                "output_tokens": 985,
+                "cache_read_input_tokens": 2384,
+                "cache_creation_input_tokens": 4544,
+                "cache_creation": {
+                  "ephemeral_5m_input_tokens": 0,
+                  "ephemeral_1h_input_tokens": 4544
+                },
+                "type": "message"
+              }
+            ],
+            "speed": "standard",
+            "fallback_credit": null
+          },
+          "modelUsage": {
+            "claude-opus-5-5": {
+              "inputTokens": 2,
+              "outputTokens": 985,
+              "cacheReadInputTokens": 2384,
+              "cacheCreationInputTokens": 4544,
+              "webSearchRequests": 0,
+              "costUSD": 0.0565368,
+              "contextWindow": 1000000,
+              "maxOutputTokens": 128000,
+              "thinkingTokens": 0,
+              "canonicalModel": "claude-opus-5-5",
+              "provider": "firstParty",
+              "costBasis": "list"
+            }
+          },
+          "total_cost_usd": 0.0565368,
+          "permission_denials": [],
+          "num_turns": 1
+        },
+        "approx_json_whitespace_words": 357,
+        "response_sha256": "172515d8d677d39153981609d1bf7f4630480a15116467a79374cb913b3114b4",
+        "tests_executed": []
+      }
+    },
+    "grok": {
+      "round1": {
+        "execution": {
+          "round": "round1",
+          "worker": "grok",
+          "exit_code": 0,
+          "outer_timeout": false,
+          "elapsed_seconds": 62.94,
+          "input_bytes": 5756,
+          "input_sha256": "cb0978ef50f467ce78c8507d4b6b89f1d0e6ee129e40dd86deddc438c27f6dde",
+          "stderr_bytes": 0
+        },
+        "observed_tool_calls": 0,
+        "reported_metadata": {
+          "usage": [
+            {
+              "input_tokens": 7503,
+              "output_tokens": 3844,
+              "cache_read_input_tokens": 1536,
+              "cache_creation_input_tokens": 0,
+              "reasoning_tokens": 1917
+            }
+          ]
+        },
+        "approx_json_whitespace_words": 873,
+        "response_sha256": "69beb83d985deb904de5b389a82e0a5312dd78a0b00541d3d45218347aa8944c",
+        "tests_executed": []
+      },
+      "round2": {
+        "execution": {
+          "round": "round2",
+          "worker": "grok",
+          "exit_code": 0,
+          "outer_timeout": false,
+          "elapsed_seconds": 61.31,
+          "input_bytes": 11049,
+          "input_sha256": "14d7122e41b7d57d7f6081ef9fdd6fb7c5cf40493b7b95dd171ca35ceb775c0f",
+          "stderr_bytes": 0
+        },
+        "observed_tool_calls": 0,
+        "reported_metadata": {
+          "usage": [
+            {
+              "input_tokens": 9081,
+              "output_tokens": 3834,
+              "cache_read_input_tokens": 1152,
+              "cache_creation_input_tokens": 0,
+              "reasoning_tokens": 3134
+            }
+          ]
+        },
+        "approx_json_whitespace_words": 381,
+        "response_sha256": "37fbf2f73f7a004486cef84c8babb99ce7e76ba224c1cba0d991ab1f1e47f9c4",
+        "tests_executed": []
+      }
+    }
+  },
+  "tests_executed": [],
+  "runtime_or_build_changes": false,
+  "target_runs": false,
+  "release": false,
+  "source_permissions_changed": false,
+  "one_note_wiki_retired": true
+}

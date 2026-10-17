@@ -3117,3 +3117,28 @@ reference payload, native format selection or current target run is admitted.
 
 - Codex,2026-10-17: output/JSON/case-reference/budget checks, local evidence-based dispositions and tool/checkout/preservation audit. Four readiness findings retained as gaps/questions; mixed native/guest duties and false sequencing-coverage claims corrected in the separate review. No contract amendment, code/fixture/case execution, target run, release, role expansion or wiki maintenance.
 - [Lead review](../docs/development/argon-high-trial.md). Provider counters remain provider-specific; no cross-provider quota or billing inference. Raw transcripts outside Git.
+
+## SRC-0252 - Owner four-tool Windows capability audit and reviewed plan
+
+- Owner,2026-10-17: ask Antigravity, Copilot, Claude and Grok for complete project capabilities/model access/task fit; tell each Windows11; compare current orchestration; submit one proposal to all four; synthesize final plan from their reviews. Scoped all-four audit, not normal per-feature fan-out or any source/feature/target/implementation permission expansion. Argon remains High; Codex sole integrator. [Final plan](../docs/development/tool-audit-2026-10-17/final-plan.md).
+
+## SRC-0253 - Antigravity capability report and proposal review
+
+- Existing service, explicit gemini-4-argon-high/effort high, two completed bounded inline responses; zero tool calls/tests/writes. Original self-report and review are proposals; unsupported stdout/log-path assertions rejected. No manuals, HQ, research originals, credentials, UART bodies or prohibited input. [Report/review](../docs/development/tool-capability-audit.md).
+
+## SRC-0254 - Copilot capability report and proposal review
+
+- Explicit claude-sonnet-5.5/low, current receipts report provider id/kind copilot and model. Two completed responses, zero tools/tests/writes. Session cap is not account allowance, current isByok field absent, funding not inferred. Model picker/catalog observations and denials are lead metadata, not executed entitlement tests. [Report/review](../docs/development/tool-capability-audit.md).
+
+## SRC-0255 - Claude capability report and proposal review
+
+- Explicit claude-opus-5-5/low, reported model metadata captured; two completed inline responses, zero tools/tests/writes. Extra claimed model IDs are not catalog evidence; prior independent-test qualification retained. Alias resolution/full catalog unknown. Original suggestions reviewed, no historical/source authority. [Report/review](../docs/development/tool-capability-audit.md).
+
+## SRC-0256 - Grok capability report and proposal review
+
+- Explicit grok-4.7/low; authenticated catalog read separately by lead. Two completed responses, zero tools/tests/writes. Requested ID succeeded; backend/model/tool assertions only adopted to the extent actual metadata supports them. Broader role/alternate models unqualified. [Report/review](../docs/development/tool-capability-audit.md).
+
+## SRC-0257 - Lead model metadata, comparison and final orchestration synthesis
+
+- Codex,2026-10-17: local documented CLI catalogs/help/live picker and response metadata, no third-party source or emulator internals. Four capability reports, identical frozen proposal SHA-256 `200934a78e8ea5aa92f9874964842e471940c939eb7a6487d27bb192855dbfe6`, four reviews,18 dispositions and final plan. Eight model calls; no tools/worker writes, runtime tests, code/build/target/release or input-gate change. Source metadata records concerns/unknowns without treating model opinion as primary history evidence.
+- [Comparison](../docs/development/tool-capability-audit.md), [dispositions](../docs/development/tool-audit-2026-10-17/review-dispositions.md), [receipt](../docs/development/tool-audit-2026-10-17/audit-receipt.json). Raw captures/CLI logs private outside Git; account details excluded. Ordinary Git/HQ records only; OneNote/wiki retired.

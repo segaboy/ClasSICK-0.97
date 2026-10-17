@@ -1,0 +1,131 @@
+{
+  "worker": "agy (Antigravity CLI 1.4.0, Gemini 4 Argon High)",
+  "host_os": "Windows 11",
+  "model_access": {
+    "verified_models": [
+      "gemini-4-argon-high"
+    ],
+    "listed_or_alias_only": [
+      "gemini-4-argon-medium",
+      "gemini-4-argon-low",
+      "gemini-3.8-flash-high",
+      "gemini-3.8-flash-medium",
+      "gemini-3.8-flash-low",
+      "claude-opus-5-5-low",
+      "claude-opus-5-5-medium",
+      "claude-opus-5-5-high",
+      "claude-sonnet-5-5-low",
+      "claude-sonnet-5-5-medium",
+      "claude-sonnet-5-5-high",
+      "gpt-oss-120b-medium"
+    ],
+    "unknowns": [
+      "Account plan, remaining quota/balance, token pricing, and rate limits (not inferable from successful inference)",
+      "Execution qualification, latency, and quota pool rules for the 12 unverified listed models",
+      "Service-route vs. underlying provider quota separation for agy-hosted claude-5-5-* and gpt-oss-120b-medium entries",
+      "Root cause of --effort xhigh conflict falling back to Medium in CLI 1.4.0"
+    ]
+  },
+  "capabilities": [
+    {
+      "task_type": "Contract and spec drafts (shared native selection core, owner/lifecycle binding, guest manager interfaces beyond SPEC-0042)",
+      "best_candidate_model": "Unqualified/unknown in agy; pinned to gemini-4-argon-high (--effort high) by owner constraint (hypothesis: agy-hosted claude-opus-5-5-high is unverified/unauthorized)",
+      "deliverable": "Stdout markdown/text contract section drafts from inline frozen public specs",
+      "windows_constraints": "Inline context only; no repo access or new native ABI/SDK/loader authority",
+      "qualification_status": "Hypothesis (unverified in agy; Claude holds observed primary allocation)"
+    },
+    {
+      "task_type": "Portable C code proposals (shared native Mac/PC managers, 512x342 monochrome scene, fixed/clipped views)",
+      "best_candidate_model": "Unqualified/unknown in agy; pinned to gemini-4-argon-high (--effort high) (hypothesis only)",
+      "deliverable": "Stdout C99/portable C diffs or functions against inline baseline b3e8cddc3ea436fb588212b572129dd5698b491b",
+      "windows_constraints": "Cannot compile, link, or inspect C:\\Repos\\ClasSICK-0.97 checkout",
+      "qualification_status": "Hypothesis (unverified in agy; requires Codex compile/budget verification)"
+    },
+    {
+      "task_type": "Bounded 68000/x86 ABI, assembly boundary, calling-convention, and stack/budget proposals",
+      "best_candidate_model": "Unqualified/unknown in agy; pinned to gemini-4-argon-high (--effort high) (hypothesis only)",
+      "deliverable": "Stdout assembly/ABI boundary snippets and stack-budget notes",
+      "windows_constraints": "No local 68k/x86 cross-assembler, object inspector, or emulator execution on Windows 11",
+      "qualification_status": "Hypothesis (unqualified; high risk without assembler/object verification)"
+    },
+    {
+      "task_type": "Independent API-only test and oracle artifacts",
+      "best_candidate_model": "Unqualified/unknown in agy; pinned to gemini-4-argon-high (--effort high) (hypothesis only)",
+      "deliverable": "Stdout C/Python test cases and traceability matrices derived strictly from frozen public contracts",
+      "windows_constraints": "Cannot execute tests or validate oracle assertions locally",
+      "qualification_status": "Hypothesis (Copilot holds observed primary allocation; agy unverified for test code)"
+    },
+    {
+      "task_type": "Defect, security, memory-ownership, lifecycle, and environment-span boundary review",
+      "best_candidate_model": "Unqualified/unknown in agy; pinned to gemini-4-argon-high (--effort high) (hypothesis: useful as bounded secondary reviewer)",
+      "deliverable": "Stdout structured defect/ownership findings with line references to inline diffs",
+      "windows_constraints": "Limited to inline snippets; must stay tightly bounded to avoid >240s capture timeouts",
+      "qualification_status": "Hypothesis (unverified for code review; prior layer-label drift noted in coverage trial)"
+    },
+    {
+      "task_type": "Requirements coverage and contract-to-baseline gap matrices",
+      "best_candidate_model": "gemini-4-argon-high (--effort high, owner-pinned)",
+      "deliverable": "Stdout coverage tables mapping SPEC clauses (e.g., SPEC-0042) to native vs. guest layers",
+      "windows_constraints": "Stdout capture only; prompts must be scoped to prevent 240s CLI timeout",
+      "qualification_status": "Observed partial qualification (20-row trial found 4 real gaps in 68.64s resume after 240s timeout, but needed lead correction on native/guest layer labels)"
+    },
+    {
+      "task_type": "Build, link, compiler, object/ABI/stack budget, and Linux CI vs. Windows 11 failure analysis",
+      "best_candidate_model": "Unqualified/unknown in agy; pinned to gemini-4-argon-high (--effort high) (hypothesis only)",
+      "deliverable": "Stdout root-cause hypotheses and remediation diffs from pasted compiler/linker/CI logs",
+      "windows_constraints": "Must distinguish Linux CI runners from Windows 11 host; no assume-installed WSL/Linux toolchain",
+      "qualification_status": "Hypothesis (unverified on ClasSICK build logs)"
+    },
+    {
+      "task_type": "Verification-script and mechanical maintenance proposals (Python/PowerShell)",
+      "best_candidate_model": "gemini-4-argon-high (--effort high, owner-pinned)",
+      "deliverable": "Stdout bounded Python or Windows 11 PowerShell verification/audit scripts",
+      "windows_constraints": "Must target native Windows 11 PowerShell/Python paths without Unix shell assumptions; untested until Codex runs",
+      "qualification_status": "Observed bounded qualification (prior adopted allocation for bounded verification scripts with lead review)"
+    },
+    {
+      "task_type": "Approved-source research packaging and historical evidence boundary checks",
+      "best_candidate_model": "Unqualified/unknown in agy; pinned to gemini-4-argon-high (--effort high) (hypothesis only)",
+      "deliverable": "Stdout locator checklists and claim-vs-evidence audits enforcing clean-room gates",
+      "windows_constraints": "No web/network lookup, no manuals, ROMs, Apple/Microsoft assets, or AI opinion as historical fact",
+      "qualification_status": "Hypothesis (strictly limited to auditing inline approved-source locators)"
+    },
+    {
+      "task_type": "Windows 11, PowerShell, CMake, and native Mac cross-build configuration work",
+      "best_candidate_model": "Unqualified/unknown in agy; pinned to gemini-4-argon-high (--effort high) (hypothesis only)",
+      "deliverable": "Stdout CMakeLists/PowerShell wrapper proposals respecting Windows 11 host vs. CI separation",
+      "windows_constraints": "Cannot probe installed Windows toolchains, registry, or cross-compilers",
+      "qualification_status": "Hypothesis (unverified; requires Codex host verification)"
+    },
+    {
+      "task_type": "Active documentation, handoffs, model-routing hygiene, and Codex usage conservation",
+      "best_candidate_model": "gemini-4-argon-high (--effort high, owner-pinned)",
+      "deliverable": "Stdout concise handoff tables, audit JSONs, and active doc patches (excluding retired OneNote/Git wikis)",
+      "windows_constraints": "Stdout-only delivery; zero direct repo edits",
+      "qualification_status": "Observed bounded qualification (established role for bounded docs/coverage to offload Codex)"
+    }
+  ],
+  "best_contribution": "Bounded secondary worker under gemini-4-argon-high (--effort high) for requirements coverage matrices (with explicit native-vs-guest layer checklists), mechanical Python/PowerShell verification script drafts, and concise documentation/handoff artifacts via stdout\u2014offloading mechanical synthesis from Codex while leaving primary C/contracts to Claude, API tests to Copilot, and integration to Codex.",
+  "limitations": [
+    "No access to C:\\Repos\\ClasSICK-0.97 or private C:\\Repos\\ClasSICK HQ; no file reads/writes, shell commands, tests, network/web, MCP, skills, or subagents.",
+    "Cannot establish Macintosh System 1 historical behavior or source identity from model memory; no access to manuals, ROM/media, disassembly, emulator source, or UART bodies.",
+    "Observed tendency to conflate native and guest manager layer labels in coverage tables without explicit rubric enforcement.",
+    "Observed 240s stdout capture timeout on larger tasks (though session resume completed in 68.64s); unsuitable for oversized prompts.",
+    "Cannot assume WSL, bash, or local 68k cross-compilers exist on the Windows 11 host.",
+    "Listed claude-* and gpt-oss-* models are Antigravity-hosted service routes, unverified for execution and unauthorized under current owner pinning."
+  ],
+  "controls": [
+    "Pin invocations strictly to --model gemini-4-argon-high --effort high (avoid --effort xhigh to prevent Medium fallback).",
+    "Supply explicit native-vs-guest layer definitions inline when assigning coverage or SPEC-0042 traceability tasks.",
+    "Keep prompts and requested stdout outputs tightly scoped (<150s target) to avoid 240s capture timeouts.",
+    "Enforce clean-room, source/role/edition/physical/full128K/B2/human/boot/release gates; Codex performs all edits, builds, and target/VM runs after fresh owner go-ahead.",
+    "Never generate OneNote or Git wiki artifacts (permanently retired); route tasks to a single primary worker by default."
+  ],
+  "usage_reporting": "Antigravity CLI (agy) uses its own authenticated service quota distinct from ChatGPT/Codex, direct Claude CLI, and GitHub Copilot quotas (even when listing third-party model families as service routes). However, inference responses expose no live telemetry for account tier, token cost, or remaining balance; usage must be controlled via single-primary task routing and bounded prompt sizes.",
+  "questions_or_decisions": [
+    "Confirm whether agy should remain restricted to bounded coverage, verification scripts, and doc summaries on gemini-4-argon-high, or if small boundary-review trials are desired when Grok times out.",
+    "Adopt a mandatory inline 'native vs. guest layer' checklist in agy coverage prompts to eliminate label corrections.",
+    "Keep non-Argon listed routes (gemini-3.8-flash-*, claude-5-5-*, gpt-oss-120b-medium) locked as unused inventory unless owner explicitly re-tests."
+  ],
+  "tests_executed": []
+}

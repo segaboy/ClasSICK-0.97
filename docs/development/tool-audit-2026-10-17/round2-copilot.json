@@ -1,0 +1,43 @@
+{
+  "worker": "copilot",
+  "host_os": "Windows 11",
+  "verdict": "approve-with-changes",
+  "blocking_findings": [],
+  "nonblocking_findings": [
+    {
+      "section": "1/5 Copilot route",
+      "problem": "Receipt check for isByok=false only confirms the BYOK flag. It does not confirm GitHub funding or the resolved model. The proposal also reads the 30-credit soft cap as if it were a budget signal.",
+      "recommended_change": "Record requested model, resolved model, and isByok together from the receipt. Treat the cap as a session guard only. Mark funding and balance as unknown (null) unless the receipt reports them."
+    },
+    {
+      "section": "2 test independence",
+      "problem": "The rule that the author must be independent of the implementation artifact is not operational. Copilot/Sonnet5.5 as oracle author could still see the contract and the draft's wording, and Claude-written C paired with a Sonnet5.5 test could still share contract-interpretation bias.",
+      "recommended_change": "State that the oracle author gets only the accepted contract and public API, never the implementation or its prose. Codex records which inputs were withheld in the packet."
+    },
+    {
+      "section": "5 Windows",
+      "problem": "The Windows rules are a good start but omit points that cause real failures: CRLF vs LF in generated C and test vectors, UTF-8 without BOM from PowerShell 5.1 redirection (it writes UTF-16 by default), and a backslash path in a stdout-proposal patch.",
+      "recommended_change": "Require stdout patches to be LF, UTF-8 without BOM, and use repo-relative forward-slash paths in diffs. Require Codex to normalize and check this before apply."
+    },
+    {
+      "section": "4 dispatch",
+      "problem": "A wall cap does not catch a worker that returns a plausible but truncated patch. Exit 0 with a partial artifact is already called out as not complete, but there is no cheap pre-check.",
+      "recommended_change": "Add a Codex pre-check that the patch applies cleanly and that the stated file list matches the diff, before any semantic review. This reduces wasted review."
+    },
+    {
+      "section": "3 fallbacks",
+      "problem": "The Haiku5.5, Luna and Gemini Flash alternatives are only candidates, and there is no cap on how many trials may be run.",
+      "recommended_change": "Allow at most one alternate trial per role until it has a recorded useful result, to avoid a de facto benchmarking sweep."
+    }
+  ],
+  "model_role_advice": [
+    "Keep Copilot/Sonnet5.5 low as the independent test/oracle author, supported by prior project artifacts.",
+    "Treat Copilot's other models as untested hypotheses.",
+    "Copilot is best with compact view-only inputs and returning a patch or test file on stdout."
+  ],
+  "changes_to_your_self_report": [
+    "Do not describe the route as proven GitHub-funded. Only isByok=false is verified.",
+    "Copilot cannot run tests in this setup. Any 'tests run' claim must be empty."
+  ],
+  "tests_executed": []
+}
