@@ -44,11 +44,17 @@ isolation. Full old native/legacy image equality and failure-retention suites pa
 native workload and view. The view imports only the old rasterizer; the workload
 imports the four view APIs. Original EFI O0/O2 twins match;27 corruption and19
 omitted-object controls reject, including missing view. No image was executed.
-[Candidate identities](drawing-context-builds.json). CI pending at this checkpoint.
+[Candidate identities](drawing-context-builds.json). CI at `0563837809cd5201498a175b28f99af0721ce61e` passes both jobs: all2991
+CTests across11 profiles,18 mutation tests,70 drawing and34 mouse object audits
+with2 expected native-ABI rejections. The PC EFI matches the local candidate.
+[CI receipt](https://github.com/segaboy/ClasSICK-0.97/actions/runs/39028795556).
 
-The existing pinned CI environment will compile/audit native68000 ROM twins,
-zero-interpreter closure and stack/storage budgets. No local68000 ROM build is
-claimed. These new native candidates do not inherit old boot observations. The
+The pinned CI build produces matching native68000 ROM twins, SHA-256
+`48c0792bf3d9e01a59c33eccface86b89c88ee8905a3d153032dc005df70e6a2`. ROM used8456 bytes; data/BSS2160;
+workspace1032; conservative stack10456 within24320, maximum
+frame604. The complete64-input manifest matches current sources.
+Native workload/view/rasterizer/helpers link without undefined imports or interpreter
+symbols. No local68000 ROM build is claimed; these are partial-profile bounds. These new native candidates do not inherit old boot observations. The
 previous PC mouse trial remains a closed observation of its exact earlier EFI.
 
 No new VM/emulator/hardware/reference trial or release. Preserve all24 originals/

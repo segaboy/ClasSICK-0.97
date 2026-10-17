@@ -50,9 +50,41 @@
     "loaded": false
   },
   "native_mac": {
-    "status": "pending-CI-cross-build",
-    "locally_built": false
+    "status": "passed-CI-cross-build",
+    "locally_built": false,
+    "compiled_source_revision": "0563837809cd5201498a175b28f99af0721ce61e",
+    "image_sha256": "48c0792bf3d9e01a59c33eccface86b89c88ee8905a3d153032dc005df70e6a2",
+    "image_bytes": 65536,
+    "rom_used": 8456,
+    "native_data_bss": 2160,
+    "workspace_bytes": 1032,
+    "conservative_stack_bound": 10456,
+    "stack_reserved": 24320,
+    "individual_frame_max": 604,
+    "input_fingerprints": 64,
+    "manifest_sha256": "25fb26781dae63b93818a2e3f5bb0c9a1b3c224e6072da41bab9a2ebb7eaa431",
+    "all_inputs_match_current": true,
+    "closure": {
+      "specification": "SPEC-0038",
+      "native_drawing_context": "SPEC-0041",
+      "selected_original_modules": [
+        "apps/native-drawing/workload.c",
+        "personality/system1/quickdraw-view.c",
+        "personality/system1/quickdraw-rects.c",
+        "arch/m68k/runtime.c"
+      ],
+      "undefined_imports": 0,
+      "interpreter_symbols": 0,
+      "twins_equal": true,
+      "object": {
+        "bytes": 4944,
+        "sha256": "2168733ec63f1a2d3b18c178605bdb5637c6c92389adb03b9528ff406799caa9"
+      },
+      "emulator_run": false
+    },
+    "boot_observed": false
   },
   "new_target_trial": false,
-  "new_release": false
+  "new_release": false,
+  "verified_source_revision": "0563837809cd5201498a175b28f99af0721ce61e"
 }

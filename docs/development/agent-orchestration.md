@@ -47,7 +47,7 @@ Worker roles remain provisional until qualified on specific narrow tasks; qualif
 [Current qualification and verification](worker-orchestration-qualification.md);
 [dated prior protocol and Claude/Grok qualifications](agent-orchestration-2026-10-15.md).
 The qualification is dated SPEC-0038 evidence. Current owner continuation permits
-SPEC-0040 controller implementation and native candidate checks; target trials,
+SPEC-0041 drawing context/workload implementation and native candidate checks; target trials,
 releases, general native ABI/SDK and historical claims remain separately gated.
 
 ## Drawing-context allocation result - 2026-10-17

@@ -274,11 +274,77 @@
   "old_helper_and_guest_binding_unchanged": true,
   "uart_bodies_untouched": true,
   "ci": {
-    "conclusion": "pending"
+    "conclusion": "success",
+    "headSha": "0563837809cd5201498a175b28f99af0721ce61e",
+    "url": "https://github.com/segaboy/ClasSICK-0.97/actions/runs/39028795556",
+    "ctest_profiles": [
+      283,
+      283,
+      283,
+      283,
+      283,
+      254,
+      283,
+      267,
+      267,
+      267,
+      238
+    ],
+    "ctests": 2991,
+    "mutation_tests": 18,
+    "drawing_object_audits": 70,
+    "mouse_object_audits": 34,
+    "expected_abi_rejections": 2,
+    "optimized_efi_matches_local": true,
+    "jobs": [
+      {
+        "name": "m68k-rom",
+        "conclusion": "success"
+      },
+      {
+        "name": "windows-bootstrap",
+        "conclusion": "success"
+      }
+    ]
   },
   "new_target_trial": false,
   "new_release": false,
   "one_note_and_wiki_retired": true,
   "chatgpt_quota_savings_measured": false,
-  "worker_captures_outside_git": true
+  "worker_captures_outside_git": true,
+  "native_mac": {
+    "status": "passed-CI-cross-build",
+    "locally_built": false,
+    "compiled_source_revision": "0563837809cd5201498a175b28f99af0721ce61e",
+    "image_sha256": "48c0792bf3d9e01a59c33eccface86b89c88ee8905a3d153032dc005df70e6a2",
+    "image_bytes": 65536,
+    "rom_used": 8456,
+    "native_data_bss": 2160,
+    "workspace_bytes": 1032,
+    "conservative_stack_bound": 10456,
+    "stack_reserved": 24320,
+    "individual_frame_max": 604,
+    "input_fingerprints": 64,
+    "manifest_sha256": "25fb26781dae63b93818a2e3f5bb0c9a1b3c224e6072da41bab9a2ebb7eaa431",
+    "all_inputs_match_current": true,
+    "closure": {
+      "specification": "SPEC-0038",
+      "native_drawing_context": "SPEC-0041",
+      "selected_original_modules": [
+        "apps/native-drawing/workload.c",
+        "personality/system1/quickdraw-view.c",
+        "personality/system1/quickdraw-rects.c",
+        "arch/m68k/runtime.c"
+      ],
+      "undefined_imports": 0,
+      "interpreter_symbols": 0,
+      "twins_equal": true,
+      "object": {
+        "bytes": 4944,
+        "sha256": "2168733ec63f1a2d3b18c178605bdb5637c6c92389adb03b9528ff406799caa9"
+      },
+      "emulator_run": false
+    },
+    "boot_observed": false
+  }
 }

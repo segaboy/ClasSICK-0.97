@@ -1,6 +1,6 @@
 # Native Macintosh and x86 parity plan
 
-2026-10-17: SPEC-0041 adds a borrowed native drawing view with coordinate translation and rectangular clipping. The same68000/x86 workload exercises both while preserving every scene pixel and the independent old68k fixture.804 local tests,70 object audits and unloaded EFI controls pass; cross-build/CI pending. New candidates are unbooted; no target trial or release.
+2026-10-17: SPEC-0041 adds a borrowed native drawing view with coordinate translation and rectangular clipping. The same68000/x86 workload exercises both while preserving every scene pixel and the independent old68k fixture.804 local tests,70 object audits and unloaded EFI controls pass; full CI and native68000 cross-build pass. New candidates are unbooted; no target trial or release.
 
 [Drawing context checkpoint](drawing-context-evidence.md).
 
@@ -43,15 +43,17 @@ Existing transparent-variant and licensing requirements remain unchanged.
 | Fixed-port PaintRect/EraseRect semantics | Native C manager | Native C manager | Selected bounded API profile; not general QuickDraw |
 | Existing original40-byte application fixture | Guarded68k interpreter prototype | Guarded68k interpreter prototype | Compatibility/runtime coverage; not native application-execution parity |
 | Original native drawing workload using those APIs | Direct native C ROM candidate | Direct native C PC/Windows binding | SPEC-0038 compiler/hosted conformance passes; new target boots pending |
+| Native coordinate view and rectangular clip | Same original view in native68000 workload | Same view in native x86 workload | SPEC-0041; exact old image retained, compiled candidates require fresh boot observations |
 | Scene input | Shared native button core over existing Mac backend | Same core in Windows viewer and native x64 controller profile | SPEC-0040 native PC boot/direct keyboard+mouse API observed; desktop/human input and full pointer/event parity unqualified |
 | Full windows/menus/events/files/System disk experience | Incomplete | Incomplete | Develop each advancement on both native sides |
 
 The renderer and new original drawing workload now execute as native C on both
 targets under [SPEC-0038 evidence](native-drawing-evidence.md). The separate
 guarded40-byte68k fixture still supplies compatibility/runtime coverage. The
-new native Mac profile remains a compiled candidate. The exact native PC image
-has a scoped [boot/device-input observation](pc-mouse-boot-trial.md); desktop and
-human input delivery remain unqualified. No general external native application ABI/loader is claimed.
+new native Mac profile remains a compiled candidate. The earlier native PC mouse candidate
+has a scoped [boot/device-input observation](pc-mouse-boot-trial.md); the current
+drawing-view candidates require fresh boot observations. Desktop/human input
+delivery remains unqualified. No general external native application ABI/loader is claimed.
 
 SPEC-0039 supplies shared button semantics, native hosted bindings and pure report
 decoding. SPEC-0040 now implements single-owner8042 startup/routing and scene integration
