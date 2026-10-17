@@ -37,8 +37,10 @@ def main():
             undef = subprocess.check_output([nm, '-u', str(dest)], env=env, text=True)
             symbols = subprocess.check_output([nm, '--defined-only', '--format=posix',
                                                str(dest)], env=env, text=True)
-            if undef.strip() or re.search(r'^\S+ [BbCcDdGgSsVv] ', symbols, re.M):
-                raise ValueError('Selection has undefined imports or mutable data')
+            data = re.findall(r'^\S+ [BbCcDdGgSsVv] .*$', symbols, re.M)
+            if undef.strip() or data:
+                raise ValueError('Selection imports/data: ' + repr(undef.strip())
+                                 + ' / ' + repr(data))
             for name in ('cs_qd_select_get', 'cs_qd_select_set'):
                 if not re.search(r'^' + name + r' T ', symbols, re.M):
                     raise ValueError('Missing selection entry: ' + name)

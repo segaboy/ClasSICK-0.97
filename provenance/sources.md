@@ -3158,3 +3158,9 @@ reference payload, native format selection or current target run is admitted.
 ## SRC-0261 - Lead selection API, classification and verification
 
 - Codex,2026-10-17: froze SPEC-0043/header before worker dispatch; distinguished inert pure validation from future admitted-owner quarantine (C22b). Reviewed artifacts, integrated native tests and separate compiler/CI checks. No new primary-source research, historical claim, UART inspection, target run or release. [Evidence](../docs/development/native-selection-evidence.md).
+
+The same SRC-0259/0261 feature subsequently includes one bounded Claude build
+correction (33.89s),division-free alignment validation and improved lead CI
+diagnostics after the new68000 audit failed. No new historical source/API or
+independent-tester exposure. Owner explicitly approved repository pushes/CI and
+resulting public/HQ evidence after automatic approval initially blocked main.

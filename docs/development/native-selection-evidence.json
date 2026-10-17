@@ -77,7 +77,64 @@
         "fallback_credit": null
       },
       "provider_list_cost_estimate_usd": 0.13441039999999999,
-      "cost_is_subscription_bill": false
+      "cost_is_subscription_bill": false,
+      "build_correction": {
+        "execution": {
+          "round": "round2",
+          "worker": "claude",
+          "exit_code": 0,
+          "outer_timeout": false,
+          "elapsed_seconds": 33.89,
+          "input_bytes": 17827,
+          "input_sha256": "ebd3f10350cc7c16ff4614ec8de8a1e4f6bfd804012c3e662781361fc1fd312d",
+          "stderr_bytes": 0
+        },
+        "observed_tool_calls": 0,
+        "tests_executed": [],
+        "response_sha256": "c36cd81b268c2857fcc807c4a71ef7012e3ee5201c376f7f8e302e9417977329",
+        "requested_model": "claude-opus-5-5",
+        "effort": "low",
+        "reported_models": [
+          "claude-opus-5-5"
+        ],
+        "usage": {
+          "input_tokens": 2,
+          "cache_creation_input_tokens": 8112,
+          "cache_read_input_tokens": 2384,
+          "output_tokens": 4326,
+          "output_tokens_details": {
+            "thinking_tokens": 413
+          },
+          "server_tool_use": {
+            "web_search_requests": 0,
+            "web_fetch_requests": 0
+          },
+          "service_tier": "standard",
+          "cache_creation": {
+            "ephemeral_1h_input_tokens": 8112,
+            "ephemeral_5m_input_tokens": 0
+          },
+          "inference_geo": "global",
+          "iterations": [
+            {
+              "input_tokens": 2,
+              "output_tokens": 4326,
+              "cache_read_input_tokens": 2384,
+              "cache_creation_input_tokens": 8112,
+              "cache_creation": {
+                "ephemeral_5m_input_tokens": 0,
+                "ephemeral_1h_input_tokens": 8112
+              },
+              "type": "message"
+            }
+          ],
+          "speed": "standard",
+          "fallback_credit": null
+        },
+        "provider_list_cost_estimate_usd": 0.1519008,
+        "cost_is_subscription_bill": false,
+        "disposition": "Adopted four-line division-free alignment correction; exact original undefined helper was not printed, so root cause remains a hypothesis until import-free build succeeds."
+      }
     },
     "copilot": {
       "execution": {
@@ -245,7 +302,7 @@
     }
   },
   "integration_review": {
-    "core": "Adopted all198 proposed core lines unchanged after validation-order/span/alias/overflow review.",
+    "core": "Initial198-line Claude core adopted; subsequent bounded33.89s Claude correction removes dynamic modulo for natural-alignment validation;200 final lines. API/semantics unchanged. Audit now prints dependency/data names on failures.",
     "tests_proposed_lines": 549,
     "tests_final_lines": 577,
     "format_repair": "Removed one extraneous final square bracket from JSON; preserved raw response.",
@@ -260,7 +317,8 @@
       "Distinct partial native port/view overlaps; views validated before aliased field reads."
     ],
     "independence": "Core implementation/logs/history never sent to test author. Lead gap additions are implementation-aware, identified separately; original oracle remains API-only.",
-    "summary": "Claude core adopted unchanged (198 lines). Copilot returned549 test lines against400 budget and malformed JSON (one extra bracket); mechanical format repair retained the original content. Lead fixed the include path, one alias setup that corrupted numeric inputs, random-only coverage counters and an unreachable conditional; added two low-reservation boundaries and distinct partial native port/view overlaps. Original uint64 numeric oracle, complete input/backing snapshots, directed and randomized cases retained. No retry."
+    "summary": "Claude core adopted unchanged (198 lines). Copilot returned549 test lines against400 budget and malformed JSON (one extra bracket); mechanical format repair retained the original content. Lead fixed the include path, one alias setup that corrupted numeric inputs, random-only coverage counters and an unreachable conditional; added two low-reservation boundaries and distinct partial native port/view overlaps. Original uint64 numeric oracle, complete input/backing snapshots, directed and randomized cases retained. No retry. A subsequent68000 O0 import/data audit failed without symbol names. One focused Claude correction (33.89s) replaces dynamic modulo with a power-of-two guard/mask; adopted without API changes. The exact original helper is unconfirmed. Final corrected-code checks are recorded below.",
+    "extra_local_runs": "A local integration command had a quoting error; redundant unchanged-code local reruns were not treated as corrected-code evidence. Correction then applied successfully and final profiles rerun."
   },
   "local_profiles": {
     "clang-hosted-debug-a": 285,
@@ -335,5 +393,16 @@
   "workload_rom_efi_inputs_unchanged": true,
   "new_target_trial": false,
   "new_release": false,
-  "chatgpt_quota_savings_measured": false
+  "chatgpt_quota_savings_measured": false,
+  "worker_model_calls": 3,
+  "ci_attempts": [
+    {
+      "run_id": 39073798505,
+      "revision": "056165ecdfbb1eb6d079f5973e613aeab6f9afac",
+      "m68k_result": "failure at new undefined-import/mutable-data audit; diagnostic omitted symbols",
+      "windows_result": "not used as final corrected-code evidence"
+    }
+  ],
+  "lead_approval": "Owner explicitly approved public-main pushes, normal CI and resulting public/private HQ evidence publication after the first automatic-review rejection.",
+  "object_audit_manifest_sha256": "8e4d6e95775f4a76d12c8292372e4702a513621141e8a9ed9c1e5336c1045a15"
 }

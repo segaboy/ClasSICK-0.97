@@ -22,9 +22,23 @@ and excluded inputs; both recorded zero tool calls and executed no tests. Captur
 remain outside Git. Codex reviewed and integrated usable artifacts rather than
 recreating them. Grok/Argon qualifications were reused; no redundant worker call.
 
-Claude core adopted unchanged (198 lines). Copilot returned549 test lines against400 budget and malformed JSON (one extra bracket); mechanical format repair retained the original content. Lead fixed the include path, one alias setup that corrupted numeric inputs, random-only coverage counters and an unreachable conditional; added two low-reservation boundaries and distinct partial native port/view overlaps. Original uint64 numeric oracle, complete input/backing snapshots, directed and randomized cases retained. No retry.
+Claude core adopted unchanged (198 lines). Copilot returned549 test lines against400 budget and malformed JSON (one extra bracket); mechanical format repair retained the original content. Lead fixed the include path, one alias setup that corrupted numeric inputs, random-only coverage counters and an unreachable conditional; added two low-reservation boundaries and distinct partial native port/view overlaps. Original uint64 numeric oracle, complete input/backing snapshots, directed and randomized cases retained. No formatting retry.
 
-Claude 37.31s; Copilot 196.52s. One call each, no retry. Provider counters and list-cost basis are in the [receipt](native-selection-evidence.json); they are not subscription bills or measured ChatGPT quota savings. Account balances not exposed by these calls stay unknown.
+Claude 37.31s; Copilot 196.52s. Initial one call each; one subsequent qualified-author Claude build correction. No duplicate reviewer call. Provider counters and list-cost basis are in the [receipt](native-selection-evidence.json); they are not subscription bills or measured ChatGPT quota savings. Account balances not exposed by these calls stay unknown.
+
+## 68000 build correction
+The first CI attempt `056165e` failed the new68000 import/data audit at O0; its
+diagnostic did not print symbols. A dynamic uintptr_t modulo in alignment
+validation was the suspected compiler-helper source, not a confirmed symbol.
+Claude supplied one focused33.89s correction: natural alignment uses a
+power-of-two guard and mask, preserving the frozen API/results. Final core200
+lines; no contract/test-oracle changes. The audit now prints any offending symbols.
+All local checks below were rerun after the correction, including eight mutation
+controls. A local command quoting error caused redundant unchanged-code checks;
+those are not counted as corrected-code verification. Three worker model calls
+total (two Claude,one Copilot),all zero tools/writes/tests. No new Grok/Argon call.
+The owner explicitly approved repository pushes/CI/evidence after the first
+automatic-review publication rejection. No target run or release permission changed.
 
 ## Actual verification
 810 local CTests pass: clang-hosted-debug-a 285, clang-hosted-sanitized 285, gcc-i686 240. 10 strict width/optimization/endian object audits pass with no undefined imports or mutable global data. 8 deliberately broken-core controls are rejected by the independent test artifact. CI and the separate68000 object compile audit are pending. Hosted tests are executions of original test programs; cross-compilation is not a target boot. Full CPU/stack/BE-current-cell/quarantine/commit cases remain unexecuted plans.

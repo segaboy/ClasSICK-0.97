@@ -104,3 +104,8 @@ for runtime code or role reassignment. [Lead review](argon-high-trial.md),
 Claude primary core and independent API-only Copilot tests, one bounded call each;
 zero worker tools/writes/tests, frozen hashes checked before/after. No redundant
 Grok/Argon review. Lead integrated artifacts and ran checks. [Receipt](native-selection-evidence.md).
+
+One qualified-author Claude follow-up corrected an O0 native68000 import-audit
+failure without API changes. Three model calls total for this feature; no new
+oracle exposure or redundant boundary reviewer. Exact symbol was not printed in
+the first failure; improved diagnostics retained. Final tests are rerun on the fix.

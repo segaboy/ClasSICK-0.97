@@ -19,7 +19,9 @@ static int cs_qd_select_native(const void *p, uintptr_t size, uintptr_t align,
     if (p == 0)
         return 0;
     a = (uintptr_t)p;
-    if (align == 0u || a % align != 0u)
+    /* Division-free: C11 alignments are powers of two; refuse otherwise. */
+    if (align == 0u || (align & (align - 1u)) != 0u ||
+        (a & (align - 1u)) != 0u)
         return 0;
     if (a > UINTPTR_MAX - size)
         return 0;
