@@ -17,7 +17,7 @@ Highest priority is conserving **ChatGPT / Codex usage**:
 Prompt-only restrictions are never treated as hard security isolation. Do not claim unavailable CLI controls exist, and refuse unavailable controls rather than broadening access.
 
 ### Antigravity CLI (`agy 1.4.0`)
-- **Owner preference2026-10-17**: use Gemini4 Argon with very high effort. Live catalog/startup checks show only Low/Medium/High Argon variants; `--model gemini-4-argon-high --effort xhigh` warns of a conflict and resolves to **Medium**. Do not describe that as very high or submit work after that fallback. The verified highest available combination is `--model gemini-4-argon-high --effort high`, which resolves to **Gemini4 Argon (High)**. Pin this combination for future Argon assignments while xhigh is unavailable, and inspect the resolved model/effort before submitting work. No installation/subscription change or model inference request was made in these checks.
+- **Owner preference2026-10-17 (current)**: always use Argon4 High: `--model gemini-4-argon-high --effort high`. Verify the resolved model before work; no automatic switch to xhigh. The earlier very-high request is superseded. Installed agy1.4.0 only catalogues Low/Medium/High Argon variants; xhigh conflicted and resolved to Medium during a no-inference startup check.
 - **Observed**: version1.4.0; authenticated model catalog and bounded print task succeeded. Used existing default model (actual model ID not reported), low effort, sandbox,180s print timeout and JSON stream capture. One packet read; no command/write/web/MCP/subagent call observed.
 - **Control limitation**: the CLI explicitly warned that `--mode plan` has no effect together with `--disable-slash-commands`; runtime permission mode was `request-review`, with broad tools exposed. Do not claim this was an enforced read-only toolset. Future calls must avoid that conflicting combination, retain normal permission review, deny extra permissions and verify actual control state; stop if stronger isolation is required and unavailable. No bypass flags. Frozen public-only working directories and transcript auditing remain necessary.
 
@@ -75,3 +75,14 @@ independent finding was adopted and no retry followed. For future Grok reviews u
 the now-confirmed `--reasoning-effort low` control, a smaller selected risk packet
 and the same hard timeout; do not repeat this406-line second-review packet.
 [Dispositions](guest-port-lead-review.md); [receipt](guest-port-review.json).
+
+## Owner-requested Argon High trial - 2026-10-17
+
+One bounded coverage-audit assignment timed out after240s with exit0/SUCCESS but
+empty response; honest completion checks reject that status as a deliverable.
+After owner resume, a same-session continuation completed in68.64s, no reread or
+other tools, returning20 matrix rows and a readiness draft. Four useful coverage/
+classification findings retained; several matrix layer/coverage claims require
+lead correction. Existing roles/rules stay unchanged; no automatic qualification
+for runtime code or role reassignment. [Lead review](argon-high-trial.md),
+[receipt](argon-high-trial.json), [actual prompts](tasks/argon-high-trial.md).

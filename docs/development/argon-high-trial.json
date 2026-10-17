@@ -1,0 +1,123 @@
+{
+  "date": "2026-10-17",
+  "sources": [
+    "SRC-0249",
+    "SRC-0250",
+    "SRC-0251"
+  ],
+  "baseline_revision": "ffecc003c3a142e88366b6a5f7e7e392a213fd9b",
+  "scope": "Documentation-only supervised Argon High trial; no rule/role/contract/runtime change",
+  "model": "gemini-4-argon-high",
+  "effort": "high",
+  "provider_permission_mode": "request-review",
+  "tool_allowlist_enforced": false,
+  "calls": 2,
+  "same_conversation": true,
+  "first_attempt": {
+    "execution": {
+      "worker": "Antigravity",
+      "requested_model": "gemini-4-argon-high",
+      "requested_effort": "high",
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 241.98,
+      "stream_bytes": 2787,
+      "stderr_bytes": 79
+    },
+    "cli_print_timeout": true,
+    "raw_result_status": "SUCCESS",
+    "empty_response": true,
+    "completed": false,
+    "reported_usage_incomplete": {
+      "input_tokens": 14334,
+      "output_tokens": 529,
+      "thinking_tokens": 448,
+      "cache_read_tokens": 0,
+      "total_tokens": 14863
+    },
+    "tools": [
+      "view_file"
+    ]
+  },
+  "continuation": {
+    "execution": {
+      "worker": "Antigravity",
+      "requested_model": "gemini-4-argon-high",
+      "requested_effort": "high",
+      "same_conversation": true,
+      "exit_code": 0,
+      "outer_timeout": false,
+      "cli_print_timeout": false,
+      "has_final_response": true,
+      "elapsed_seconds": 68.64
+    },
+    "completed": true,
+    "tools": [],
+    "usage_by_step": [
+      {
+        "step": 6,
+        "input_tokens": 22070,
+        "output_tokens": 6182,
+        "thinking_tokens": 3027,
+        "cache_read_tokens": 0,
+        "total_tokens": 28252
+      }
+    ]
+  },
+  "provider_cumulative_reported_usage": {
+    "input_tokens": 56828,
+    "output_tokens": 25849,
+    "thinking_tokens": 22613,
+    "cache_read_tokens": 0,
+    "total_tokens": 82677
+  },
+  "provider_cumulative_duration_not_active_runtime": 13743.8905281,
+  "active_capture_wall_seconds": 310.62,
+  "paused_and_inspection_time_excluded": true,
+  "provider_price_not_reported": true,
+  "input": {
+    "revision": "ffecc003c3a142e88366b6a5f7e7e392a213fd9b",
+    "paths": [
+      "docs/specifications/SPEC-0042-guest-port-selection.md",
+      "docs/development/guest-port-cases.md"
+    ],
+    "bytes": 15884,
+    "lines": 227,
+    "sha256": "d6fb110c7e4f8e15a051913a47a75aadb4b1cf22f2a4c5b02ed4763e296979a3"
+  },
+  "output": {
+    "matrix_rows": 20,
+    "sections_covered": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14
+    ],
+    "proposed_lines": 44,
+    "handoff_words": 136,
+    "unknown_case_ids": [],
+    "planned_assessments": {
+      "covered": 11,
+      "partial": 8,
+      "no_planned_case": 1
+    }
+  },
+  "artifact_disposition": "Keep original matrix/readiness as unaccepted trial proposals; lead review corrects layer/coverage interpretation",
+  "tests_executed": [],
+  "model_commands_or_writes": 0,
+  "excluded_inputs_sent": false,
+  "other_workers_called": false,
+  "new_implementation_build_or_trial": false,
+  "raw_transcripts_outside_git": true,
+  "account_allowances_kept_private": true
+}

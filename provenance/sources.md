@@ -3103,3 +3103,17 @@ reference payload, native format selection or current target run is admitted.
 ## SRC-0248 - Lead port-selection decisions and documentation verification
 
 - Codex,2026-10-17: published interface checks, engineering dispositions, contract integration and repository/preservation checks only. SPEC-0042 / ADR-0048; [lead review](../docs/development/guest-port-lead-review.md). No code/fixture/test/build/trial/release, historical claim, source-gate waiver or wiki maintenance. Existing runtime/candidate/release inputs remain unchanged.
+
+## SRC-0249 - Owner Argon High trial and resume
+
+- Owner,2026-10-17: always use High for Argon; generate a task entirely for Argon, wait and report, as a trial with unchanged rules. Later paused the trial, then requested "Finish the trial." One bounded same-session continuation is within that resume. Documentation-only coverage audit; no broader implementation/target/release permission or permanent role change.
+
+## SRC-0250 - Argon High trial coverage proposals
+
+- Antigravity authenticated existing service, explicit gemini-4-argon-high/effort high. One initial call and owner-resumed continuation, original reviewed-public SPEC-0042/case-plan packet only. Initial timeout/empty response is incomplete; later continuation returns20 matrix rows and readiness draft. One packet view initially, no continuation tools, no edits/tests/excluded inputs. Proposals retained with lead corrections, not accepted requirements or passing cases.
+- [Prompt](../docs/development/tasks/argon-high-trial.md), [proposed matrix](../docs/development/guest-port-coverage-trial.json), [readiness draft](../docs/development/argon-trial-readiness.md), [receipt](../docs/development/argon-high-trial.json).
+
+## SRC-0251 - Lead Argon trial artifact and boundary review
+
+- Codex,2026-10-17: output/JSON/case-reference/budget checks, local evidence-based dispositions and tool/checkout/preservation audit. Four readiness findings retained as gaps/questions; mixed native/guest duties and false sequencing-coverage claims corrected in the separate review. No contract amendment, code/fixture/case execution, target run, release, role expansion or wiki maintenance.
+- [Lead review](../docs/development/argon-high-trial.md). Provider counters remain provider-specific; no cross-provider quota or billing inference. Raw transcripts outside Git.
