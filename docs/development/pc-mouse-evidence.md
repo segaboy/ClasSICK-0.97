@@ -57,7 +57,11 @@ Both unsupported native ARM ABI compilations reject as expected. Original EFI
 O0/O2 twins match,27 corruption rejections and18 omitted-object controls pass.
 Optimized candidate SHA-256 `1f0d222b355f54b01a2822a8c857ba0f78b3dc9192744b562a6a3c2bdc2fd4c1`.
 All61 native Mac ROM inputs remain byte-identical; that ROM is unchanged.
-[Candidate identity record](pc-mouse-builds.json). CI pending at this checkpoint.
+[Candidate identity record](pc-mouse-builds.json). CI at `59ea57f4b6db02ffb8ecd9cbd4df8f6c485448a9` passes both jobs, all2925 CTests
+across11 profiles,18 mutation tests and34 object audits, with2 expected ABI
+rejections. Native Mac ROM and full61-input manifest match the previous
+checkpoint byte for byte; the PC EFI matches the local candidate.
+[CI receipt](https://github.com/segaboy/ClasSICK-0.97/actions/runs/38998584190).
 
 ## Remaining gates
 

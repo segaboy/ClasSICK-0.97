@@ -199,7 +199,38 @@
   "worker_capture_paths_outside_git": true,
   "chatgpt_quota_savings_measured": false,
   "ci": {
-    "conclusion": "pending"
+    "conclusion": "success",
+    "headSha": "59ea57f4b6db02ffb8ecd9cbd4df8f6c485448a9",
+    "url": "https://github.com/segaboy/ClasSICK-0.97/actions/runs/38998584190",
+    "ctest_profiles": [
+      277,
+      277,
+      277,
+      277,
+      277,
+      248,
+      277,
+      261,
+      261,
+      261,
+      232
+    ],
+    "ctests": 2925,
+    "mutation_tests": 18,
+    "object_audits": 34,
+    "expected_abi_rejections": 2,
+    "jobs": [
+      {
+        "name": "m68k-rom",
+        "conclusion": "success"
+      },
+      {
+        "name": "windows-bootstrap",
+        "conclusion": "success"
+      }
+    ],
+    "native_rom_and_manifest_match_previous": true,
+    "optimized_efi_matches_local": true
   },
   "new_target_trial": false,
   "new_release": false,
