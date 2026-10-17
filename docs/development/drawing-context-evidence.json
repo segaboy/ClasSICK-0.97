@@ -1,0 +1,284 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-17",
+  "sources": [
+    "SRC-0240",
+    "SRC-0241",
+    "SRC-0242",
+    "SRC-0243"
+  ],
+  "specification": "SPEC-0041",
+  "baseline_public_revision": "dd4be7bdbbf327ca0a05dd7243e496cc53c50dae",
+  "workers": {
+    "claude": {
+      "calls": 1,
+      "execution": {
+        "worker": "claude",
+        "exit_code": 0,
+        "timed_out": false,
+        "elapsed_seconds": 64.95,
+        "stream_bytes": 291569,
+        "stderr_bytes": 0
+      },
+      "input": {
+        "bytes": 12021,
+        "lines": 193,
+        "sha256": "57a15285343a8054487be3f4d6996a5f5ebdb5a5ea89b54e556d683c10646ede"
+      },
+      "response_sha256": "540360f48c1cafacc8da6ac0ebf5390a60884c50afb43f31b2aa9dc881236ef6",
+      "proposed_files": [
+        {
+          "path": "personality/system1/quickdraw-view.h",
+          "lines": 22
+        },
+        {
+          "path": "personality/system1/quickdraw-view.c",
+          "lines": 144
+        },
+        {
+          "path": "apps/native-drawing/workload.c",
+          "lines": 35
+        },
+        {
+          "path": "docs/specifications/SPEC-0041-native-drawing-context.md",
+          "lines": 65
+        }
+      ],
+      "worker_test_runs": 0,
+      "worker_checkout_edits": 0,
+      "model": [
+        "claude-opus-5-5"
+      ],
+      "usage": {
+        "input_tokens": 4,
+        "cache_creation_input_tokens": 7570,
+        "cache_read_input_tokens": 4499,
+        "output_tokens": 7663,
+        "output_tokens_details": {
+          "thinking_tokens": 1771
+        },
+        "server_tool_use": {
+          "web_search_requests": 0,
+          "web_fetch_requests": 0
+        },
+        "service_tier": "standard",
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 7570,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "global",
+        "iterations": [
+          {
+            "input_tokens": 2,
+            "output_tokens": 7584,
+            "cache_read_input_tokens": 3047,
+            "cache_creation_input_tokens": 5975,
+            "cache_creation": {
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 5975
+            },
+            "type": "message"
+          }
+        ],
+        "speed": "standard",
+        "fallback_credit": null
+      },
+      "provider_list_cost_estimate_usd": 0.2147358,
+      "cost_is_subscription_bill": false,
+      "disposition": "Core/header and native replacement adopted unchanged; spec accepted with lead metadata/engineering boundary clarification. No retry.",
+      "packet_reads": 1
+    },
+    "copilot": {
+      "calls": 1,
+      "execution": {
+        "worker": "copilot",
+        "exit_code": 0,
+        "timed_out": false,
+        "elapsed_seconds": 86.05,
+        "stream_bytes": 534855,
+        "stderr_bytes": 0
+      },
+      "input": {
+        "bytes": 7862,
+        "lines": 55,
+        "sha256": "6c22c1e39a229ea5bb67a5e91ea976e9b5183f44d5dfef18baa942d503ecfdfc"
+      },
+      "response_sha256": "1b1400cca7bca04d6725c2e3d0c957a843db1919e548b64ef77f4654fef3ab18",
+      "proposed_files": [
+        {
+          "path": "tests/quickdraw-view-independent.c",
+          "lines": 351
+        }
+      ],
+      "worker_test_runs": 0,
+      "worker_checkout_edits": 0,
+      "usage": {
+        "totalPremiumRequestCost": 1,
+        "totalUserRequests": 1,
+        "totalNanoAiu": 14420530000,
+        "aiCreditsStatus": "complete",
+        "tokenDetails": {
+          "input": {
+            "tokenCount": 168
+          },
+          "cache_read": {
+            "tokenCount": 5168
+          },
+          "cache_write": {
+            "tokenCount": 7489
+          },
+          "output": {
+            "tokenCount": 12463
+          }
+        },
+        "totalApiDurationMs": 78063,
+        "sessionStartTime": "2026-10-17T11:18:21.167Z",
+        "codeChanges": {
+          "linesAdded": 0,
+          "linesRemoved": 0,
+          "filesModifiedCount": 0,
+          "filesModified": []
+        },
+        "modelMetrics": {
+          "claude-sonnet-5.5": {
+            "requests": {
+              "count": 2,
+              "cost": 1
+            },
+            "usage": {
+              "inputTokens": 12825,
+              "outputTokens": 12463,
+              "cacheReadTokens": 5168,
+              "cacheWriteTokens": 7489,
+              "reasoningTokens": 2986
+            },
+            "cacheExpiresAt": "2026-10-17T11:23:24.272Z",
+            "totalNanoAiu": 14420530000,
+            "aiCreditsStatus": "complete",
+            "tokenDetails": {
+              "input": {
+                "tokenCount": 168
+              },
+              "cache_read": {
+                "tokenCount": 5168
+              },
+              "cache_write": {
+                "tokenCount": 7489
+              },
+              "output": {
+                "tokenCount": 12463
+              }
+            }
+          }
+        },
+        "agentMetrics": {
+          "main": {
+            "totalApiDurationMs": 78063,
+            "totalNanoAiu": 14420530000,
+            "modelMetrics": {
+              "claude-sonnet-5.5": {
+                "requests": {
+                  "count": 2,
+                  "cost": 1
+                },
+                "usage": {
+                  "inputTokens": 12825,
+                  "outputTokens": 12463,
+                  "cacheReadTokens": 5168,
+                  "cacheWriteTokens": 7489,
+                  "reasoningTokens": 2986
+                },
+                "totalNanoAiu": 14420530000,
+                "tokenDetails": {
+                  "input": {
+                    "tokenCount": 168
+                  },
+                  "cache_read": {
+                    "tokenCount": 5168
+                  },
+                  "cache_write": {
+                    "tokenCount": 7489
+                  },
+                  "output": {
+                    "tokenCount": 12463
+                  }
+                }
+              }
+            }
+          }
+        },
+        "providerModelMetrics": [
+          {
+            "provider": {
+              "id": "copilot",
+              "label": "GitHub Copilot",
+              "kind": "copilot"
+            },
+            "modelId": "claude-sonnet-5.5",
+            "metrics": {
+              "requests": {
+                "count": 2,
+                "cost": 1
+              },
+              "usage": {
+                "inputTokens": 12825,
+                "outputTokens": 12463,
+                "cacheReadTokens": 5168,
+                "cacheWriteTokens": 7489,
+                "reasoningTokens": 2986
+              },
+              "totalNanoAiu": 14420530000,
+              "aiCreditsStatus": "complete",
+              "tokenDetails": {
+                "input": {
+                  "tokenCount": 168
+                },
+                "cache_read": {
+                  "tokenCount": 5168
+                },
+                "cache_write": {
+                  "tokenCount": 7489
+                },
+                "output": {
+                  "tokenCount": 12463
+                }
+              }
+            },
+            "modelDisplayName": "Claude Sonnet 5.5"
+          }
+        ],
+        "currentModel": "claude-sonnet-5.5",
+        "lastCallInputTokens": 8106,
+        "lastCallOutputTokens": 12386
+      },
+      "model": "claude-sonnet-5.5",
+      "plan_label": null,
+      "remaining_allowance": null,
+      "disposition": "Adopted inverse-mapping full-pixel oracle and adversarial tests.351 proposed lines exceed260 budget by91. Removed two tautologies and self-comparison, corrected one wrong known-pixel expectation, made fixture equality padding-independent and removed unused local. No implementation access/retry.",
+      "packet_reads": 1
+    }
+  },
+  "new_grok_calls": 0,
+  "new_antigravity_calls": 0,
+  "local_profiles": {
+    "clang-hosted-debug-a": 283,
+    "clang-hosted-sanitized": 283,
+    "gcc-i686": 238
+  },
+  "local_ctests": 804,
+  "object_audits": 70,
+  "efi_twins": 4,
+  "efi_corruption_rejections": 27,
+  "efi_omission_rejections": 19,
+  "old_scene_and_legacy_pixel_equality_pass": true,
+  "old_helper_and_guest_binding_unchanged": true,
+  "uart_bodies_untouched": true,
+  "ci": {
+    "conclusion": "pending"
+  },
+  "new_target_trial": false,
+  "new_release": false,
+  "one_note_and_wiki_retired": true,
+  "chatgpt_quota_savings_measured": false,
+  "worker_captures_outside_git": true
+}

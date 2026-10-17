@@ -1,5 +1,18 @@
 # ClasSICK 0.97 working instructions
 
+Current owner paired drawing-context scope (2026-10-17, SRC-0240..0243): "Next step"
+continues the planned native drawing-port/clipping foundation: SPEC-0041 original
+native borrowed view, coordinate offset and rectangular clip; same C on68000/x86,
+real native workload use with unchanged scene. Claude primary core/binding draft,
+Copilot independent geometry tests; Codex sole integrator. Original code/tests,
+compiler/CI/ROM/EFI candidates and ordinary Git/HQ records. No target trial/release,
+guest GrafPort/GetPort/SetPort ABI, regions, cursor/events or SDK/loader expansion.
+Preserve24 originals/copies, UART bodies, old helper/legacy fixture/released assets,
+prior records/tags and frozen wiki. New native candidate inputs may change; old
+boot observations don't transfer. OneNote/wiki remain retired; source/role/edition/
+physical/full128K/B2/human and both System1 boot gates persist. No Codex subagents.
+
+
 Completed owner PC mouse trial (2026-10-17, SRC-0238/0239): "Continue" accepted
 the proposed single isolated native PC boot/input trial. That exact SPEC-0040
 candidate reached READY, passed direct keyboard/mouse API edge/held/release checks,

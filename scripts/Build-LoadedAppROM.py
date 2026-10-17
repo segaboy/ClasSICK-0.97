@@ -41,8 +41,9 @@ def main():
         specification='SPEC-0036';profile='loaded-rectangles-v1'
     if a.native_drawing:
         sources=tuple('platform/mac128k/native-drawing-entry.c' if s=='platform/mac128k/loaded-entry.c' else s for s in sources)
-        sources+=('apps/native-drawing/workload.c','apps/product-scene/scene.c','core/input/mouse.c')
+        sources+=('apps/native-drawing/workload.c','apps/product-scene/scene.c','core/input/mouse.c','personality/system1/quickdraw-view.c')
         headers+=('apps/native-drawing/workload.h','apps/product-scene/scene.h','core/input/mouse.h',
+                  'personality/system1/quickdraw-view.h','docs/specifications/SPEC-0041-native-drawing-context.md',
                   'docs/specifications/SPEC-0039-native-mouse-foundations.md',
                   'docs/specifications/SPEC-0038-paired-native-drawing-workload.md',
                   'docs/specifications/SPEC-0037-shared-product-scene.md')
@@ -66,7 +67,7 @@ def main():
          '-Wl,-T,'+str(repo/'arch/m68k/loaded-rom.ld'),'-Wl,-Map,'+str(folder/'classick-loaded-app.map')]
         h.run([*link,*objects,'-o',elf],env);syms=h.symbols(elf)
         if not 0x8000<=syms['__loaded_app_start']<syms['__loaded_app_end']<=0x1A000:raise ValueError('Workspace bounds')
-        required=('cs_native_draw','cs_qd_rect','cs_product_scene') if a.native_drawing else (('cs_drawing_app_probe','cs_image_run_rectangles') if a.drawing else ('cs_loaded_app_probe','cs_image_run'))
+        required=('cs_native_draw','cs_qd_rect','cs_qd_view_init','cs_qd_view_offset','cs_qd_view_clip','cs_qd_view_rect','cs_product_scene') if a.native_drawing else (('cs_drawing_app_probe','cs_image_run_rectangles') if a.drawing else ('cs_loaded_app_probe','cs_image_run'))
         if not a.native_drawing:required=(*required,'cs_m68k_bus_step_admitted')
         if any(name not in syms for name in required):raise ValueError('Disconnected demonstration')
         if a.native_drawing and any(name.startswith(('cs_image_','cs_m68k_','cs_drawing_app_','cs_aline_probe')) for name in syms):
@@ -109,7 +110,7 @@ def main():
     manifest={'schema_version':1,'specification':specification,'profile':profile,
      'compiler':h.run([cc,'--version'],env).splitlines()[0],'profiles':[profiles[0]],'twins_equal':True,
      'original_program_bytes':len(bytes.fromhex(program_hex)),'execution_path':'direct-native-c' if a.native_drawing else 'guarded-68k-fixture',
-     'module_count':len(sources),'emulator_run':False,'system1_compatibility_proven':False,
+     'module_count':len(sources),'native_drawing_context':('SPEC-0041' if a.native_drawing else None),'emulator_run':False,'system1_compatibility_proven':False,
      'inputs':{f:hashlib.sha256((repo/f).read_bytes().replace(b'\r\n',b'\n')).hexdigest() for f in (*sources,*headers)}}
     (out/'manifest.json').write_text(json.dumps(manifest,indent=2)+'\n')
     print('First loaded-app ROM twins PASS:',profiles[0]['rom_used'],'ROM bytes,',profiles[0]['workspace_end']-0x8000,'workspace bytes; no boot trial.')

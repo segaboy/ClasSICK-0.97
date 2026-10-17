@@ -1,5 +1,9 @@
 # 68000 application runtime plan - 2026-10-12
 
+2026-10-17: SPEC-0041 adds a borrowed native drawing view with coordinate translation and rectangular clipping. The same68000/x86 workload exercises both while preserving every scene pixel and the independent old68k fixture.804 local tests,70 object audits and unloaded EFI controls pass; cross-build/CI pending. New candidates are unbooted; no target trial or release.
+
+[Drawing context checkpoint](drawing-context-evidence.md).
+
 2026-10-17: One approved isolated SPEC-0040 native PC boot passes READY, direct Space plus two mouse edges/held-repeat/release, exact static-scene pixels and normal guest-second60/count3. Desktop UI delivery and human input remain unqualified. Session closed; no Mac trial, code change or release.
 
 [Native PC mouse observation](pc-mouse-boot-trial.md).

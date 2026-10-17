@@ -3061,3 +3061,22 @@ reference payload, native format selection or current target run is admitted.
 
 - Codex,2026-10-17: one isolated original-image VirtualBox7.2.16r174877 cold start, same-session pause/resume, failed desktop automation delivery, successful direct Space and public IMouse API events, held-repeat/release checks, guest-second60 normal result, exact pixel comparisons and closure/inventory checks. Installed COM method signature inspected; no emulator source or protected implementation. No human-input confirmation.
 - [Observation](../docs/development/pc-mouse-boot-trial.md), [sanitized identities](../docs/development/pc-mouse-boot-trial.json), TEST-0049. Original captures/logs remain outside Git; no UART implementation/test body inspected or modified. Existing CI results reused, not rerun. No new external worker needed for target control/final verification.
+
+## SRC-0240 - Owner paired drawing-context continuation
+
+- Owner,2026-10-17: "Next step" continues the planned drawing-port/clipping foundation after the closed native PC mouse trial. Original native borrowed context, coordinate offset and rectangular clip, same C/workload on Mac/PC, unchanged scene, original tests/compiler/CI/candidates and ordinary records. No new target trial/release, guest GrafPort/manager ABI, cursor/events or SDK/loading expansion. Existing gates and OneNote/wiki retirement persist.
+
+## SRC-0241 - Claude original drawing-view and native-workload proposal
+
+- One bounded read-only call,266 total proposed lines; original header/core/native replacement and contract draft. One packet read, no tests, writes, commands, web or excluded inputs. Lead adopts sound code and finalizes engineering scope, not historical behavior.
+- [Prompt](../docs/development/tasks/drawing-context-claude.md); [review/evidence](../docs/development/drawing-context-evidence.md).
+
+## SRC-0242 - Copilot independent drawing-context test proposal
+
+- One API-only packet read, implementation withheld;351 proposed lines exceed260 budget. Independent inverse-mapping oracle retained. Lead removes tautologies/self-comparison, corrects one pixel expectation and padding assumptions/unused local. Proposed tests were unrun until lead verification.
+- [Prompt](../docs/development/tasks/drawing-context-copilot.md); [actual results](../docs/development/drawing-context-evidence.md). No paid-plan/remaining-allowance assumption.
+
+## SRC-0243 - Lead native context decisions, integration and verification
+
+- Codex,2026-10-17: original offset/physical-clip/lifetime/refusal contract over unchanged SPEC-0036 helper, artifact review, strict native build/import/closure/missing-object integration and actual tests. No new manual or historical claim, UART body inspection, target run or release.
+- SPEC-0041 / ADR-0047 / IMPL-0045 / TEST-0050; [evidence](../docs/development/drawing-context-evidence.md). Prior sources/observations/editions/releases remain dated and unchanged.

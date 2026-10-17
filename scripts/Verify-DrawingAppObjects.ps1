@@ -13,7 +13,8 @@ $clang=(Get-Command clang).Source;$nm=(Get-Command llvm-nm).Source
 $gcc=Join-Path $repo '.tools/gcc/w64devkit/bin/gcc.exe';$checks=0
 $modules=@(
     @('personality/system1/quickdraw-rects.c','rect',''),
-    @('apps/native-drawing/workload.c','native','cs_qd_rect'),
+    @('apps/native-drawing/workload.c','native','cs_qd_view_init,cs_qd_view_offset,cs_qd_view_clip,cs_qd_view_rect'),
+    @('personality/system1/quickdraw-view.c','view','cs_qd_rect'),
     @('apps/drawing-rom-app/probe.c','probe','cs_loaded_app_prepare_source,cs_image_run_rectangles,cs_image_run_retire,cs_image_external_admit'),
     @('apps/drawing-rom-app/scene.c','scene','cs_product_scene'),
     @('apps/product-scene/scene.c','product','cs_surface_init,cs_surface_fill'),
@@ -35,6 +36,6 @@ foreach($target in @('aarch64-none-elf','aarch64_be-none-elf')){foreach($module 
     & cmake "-DNM=$nm" "-DOBJECT=$object" "-DALLOWED=$($module[2])" -P (Join-Path $PSScriptRoot 'Check-ObjectImports.cmake')
     if($LASTEXITCODE -ne 0){throw 'Drawing endian imports failed.'};++$checks
 }}
-@{specification='SPEC-0037';object_audits=$checks;emulator_run=$false} |
+@{specification='SPEC-0041';object_audits=$checks;emulator_run=$false} |
     ConvertTo-Json | Set-Content -LiteralPath (Join-Path $BuildRoot 'drawing-object-results.json') -Encoding UTF8
 Write-Output "$checks drawing object audits PASS."

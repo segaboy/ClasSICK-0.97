@@ -1,5 +1,9 @@
 # Native Macintosh and x86 parity plan
 
+2026-10-17: SPEC-0041 adds a borrowed native drawing view with coordinate translation and rectangular clipping. The same68000/x86 workload exercises both while preserving every scene pixel and the independent old68k fixture.804 local tests,70 object audits and unloaded EFI controls pass; cross-build/CI pending. New candidates are unbooted; no target trial or release.
+
+[Drawing context checkpoint](drawing-context-evidence.md).
+
 Current owner authority2026-10-16: SRC-0217/0218 and
 [ADR-0043](../adr/0043-coupled-native-mac-pc-parity.md).
 The former blanket wait for a complete Mac experience no longer governs native

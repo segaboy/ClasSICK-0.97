@@ -1,7 +1,7 @@
 # Agent Orchestration Protocol
 
 ## Authority and Standing Scope
-Current owner continuation SRC-0233 permits SPEC-0040 PC controller startup/routing and native compiled profile; SRC-0227 permanently retires OneNote/wiki maintenance. Worker authority SRC-0223..0226 extends SRC-0149/0150/0179 to four supervised external CLIs. Codex alone writes repositories. All existing implementation, emulator/hardware/reference, source, release and publication gates remain; each target trial still needs fresh owner approval. Private HQ, credentials, untracked research originals, manuals, prohibited implementation/assets and UART implementation/test bodies are excluded from worker inputs.
+Current owner continuation SRC-0240 permits SPEC-0041 paired native drawing context and workload/candidate verification; SRC-0227 permanently retires OneNote/wiki maintenance. Worker authority SRC-0223..0226 extends SRC-0149/0150/0179 to four supervised external CLIs. Codex alone writes repositories. All existing implementation, emulator/hardware/reference, source, release and publication gates remain; each target trial still needs fresh owner approval. Private HQ, credentials, untracked research originals, manuals, prohibited implementation/assets and UART implementation/test bodies are excluded from worker inputs.
 
 Standing service scope includes **Antigravity (`agy`)**, **GitHub Copilot CLI (`copilot`)**, **Claude** and **Grok**, using existing authenticated services. Do not reinstall working tools, purchase credits or change subscriptions:
 - **Source Research & Manuals**: Source research requires eligible admitted publications. No worker currently receives manuals, ROMs, media, disassembly, emulator source, or Apple/Microsoft implementation material.
@@ -49,3 +49,14 @@ Worker roles remain provisional until qualified on specific narrow tasks; qualif
 The qualification is dated SPEC-0038 evidence. Current owner continuation permits
 SPEC-0040 controller implementation and native candidate checks; target trials,
 releases, general native ABI/SDK and historical claims remain separately gated.
+
+## Drawing-context allocation result - 2026-10-17
+
+One Claude primary completed266 proposed lines in64.95s from a193-line packet;
+one API-only Copilot artifact completed in86.05s from55 lines. No retry/new
+qualification or Grok/Antigravity call. Core/native delta adopted, test oracle
+retained after removing nonassertions and correcting one expectation. Copilot
+exceeded260 lines with351; budget compliance and assertion quality require review.
+Prefer bounded core+small binding replacements and a distinct-risk tester; no
+whole histories or redundant provider reviews. [Receipt](drawing-context-evidence.md).
+Current native context candidates do not authorize new target trials or releases.
