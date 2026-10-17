@@ -1,7 +1,7 @@
 # Agent Orchestration Protocol
 
 ## Authority and Standing Scope
-Current owner continuation SRC-0240 permits SPEC-0041 paired native drawing context and workload/candidate verification; SRC-0227 permanently retires OneNote/wiki maintenance. Worker authority SRC-0223..0226 extends SRC-0149/0150/0179 to four supervised external CLIs. Codex alone writes repositories. All existing implementation, emulator/hardware/reference, source, release and publication gates remain; each target trial still needs fresh owner approval. Private HQ, credentials, untracked research originals, manuals, prohibited implementation/assets and UART implementation/test bodies are excluded from worker inputs.
+Current owner continuation SRC-0244 permits the SPEC-0042 guest selection contract/lead review only; no implementation or build; SRC-0227 permanently retires OneNote/wiki maintenance. Worker authority SRC-0223..0226 extends SRC-0149/0150/0179 to four supervised external CLIs. Codex alone writes repositories. All existing implementation, emulator/hardware/reference, source, release and publication gates remain; each target trial still needs fresh owner approval. Private HQ, credentials, untracked research originals, manuals, prohibited implementation/assets and UART implementation/test bodies are excluded from worker inputs.
 
 Standing service scope includes **Antigravity (`agy`)**, **GitHub Copilot CLI (`copilot`)**, **Claude** and **Grok**, using existing authenticated services. Do not reinstall working tools, purchase credits or change subscriptions:
 - **Source Research & Manuals**: Source research requires eligible admitted publications. No worker currently receives manuals, ROMs, media, disassembly, emulator source, or Apple/Microsoft implementation material.
@@ -46,8 +46,8 @@ Worker roles remain provisional until qualified on specific narrow tasks; qualif
 
 [Current qualification and verification](worker-orchestration-qualification.md);
 [dated prior protocol and Claude/Grok qualifications](agent-orchestration-2026-10-15.md).
-The qualification is dated SPEC-0038 evidence. Current owner continuation permits
-SPEC-0041 drawing context/workload implementation and native candidate checks; target trials,
+The qualification is dated SPEC-0038 evidence. The prior continuation permitted
+SPEC-0041 drawing context/workload implementation and native candidate checks; the current slice is SPEC-0042 documentation only; target trials,
 releases, general native ABI/SDK and historical claims remain separately gated.
 
 ## Drawing-context allocation result - 2026-10-17
@@ -60,3 +60,17 @@ exceeded260 lines with351; budget compliance and assertion quality require revie
 Prefer bounded core+small binding replacements and a distinct-risk tester; no
 whole histories or redundant provider reviews. [Receipt](drawing-context-evidence.md).
 Current native context candidates do not authorize new target trials or releases.
+
+## Prepared-port contract allocation - 2026-10-17
+
+One Claude primary supplies the three usable contract/decision/case drafts;
+one Grok review only for the distinct A5-seal/environment-write/owner-lifetime risk.
+Codex performs local eligible-source checks, decisions, integration and documentation
+verification. No Copilot/Antigravity calls, repeat qualification or duplicated draft.
+No manual/HQ/untracked-original/UART inputs. Captures outside Git, bounded calls;
+line budgets and provider-reported usage are recorded without quota equivalence.
+Claude completed in83.58s; Grok reached180.11s without a finished report, so no
+independent finding was adopted and no retry followed. For future Grok reviews use
+the now-confirmed `--reasoning-effort low` control, a smaller selected risk packet
+and the same hard timeout; do not repeat this406-line second-review packet.
+[Dispositions](guest-port-lead-review.md); [receipt](guest-port-review.json).

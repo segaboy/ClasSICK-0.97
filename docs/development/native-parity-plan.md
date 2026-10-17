@@ -64,3 +64,5 @@ Mac profile boot and broader target qualification remain open; synthetic device
 events cannot close them.
 Actual target runs need fresh owner go-ahead. Keep24 originals/copies, UART
 bodies, releases, previous results and both System1/ROM requirements intact.
+
+2026-10-17: SPEC-0042 / ADR-0048 finalize the prepared guest GetPort/SetPort selection contract. Same native semantic core planned for68000/x86; exact A5 anchor/current-cell ownership and total-commit rules specified. No implementation, tests, registry binding, build or target run in this slice. Existing drawing candidates unchanged/unbooted; full InitGraf and selected-port drawing adapter remain prerequisites. [Lead review](guest-port-lead-review.md).

@@ -3080,3 +3080,26 @@ reference payload, native format selection or current target run is admitted.
 
 - Codex,2026-10-17: original offset/physical-clip/lifetime/refusal contract over unchanged SPEC-0036 helper, artifact review, strict native build/import/closure/missing-object integration and actual tests. No new manual or historical claim, UART body inspection, target run or release.
 - SPEC-0041 / ADR-0047 / IMPL-0045 / TEST-0050; [evidence](../docs/development/drawing-context-evidence.md). Prior sources/observations/editions/releases remain dated and unchanged.
+
+## SRC-0244 - Owner guest drawing-port next step
+
+- Owner,2026-10-17: "Next step." continues the proposed drawing-port setup contract after SPEC-0041. This slice is lead source/contract review only: SPEC-0042 / ADR-0048, ordinary Git/HQ records, no implementation/fixtures/tests/registry binding/build/target trial/release. Native Mac/PC parity and all existing gates persist; OneNote/wiki retired.
+
+## SRC-0245 - Lead published drawing-port interface checks
+
+- Reidentified existing SRC-0071 published Addison-Wesley1985 I-III copy (later printings),19245372 bytes/1284 pages/SHA-256 `b65fe8efe782799a333a0b59b225e2bbaf9e2e150dc949dd555571971b331d97`, and SRC-0068 published March1985 Promotional Edition,53888388 bytes/1326 pages/SHA-256 `924902074a9798457949c46f83ac016c98b10f50258ef36c277dcd0f8278b237`.
+- Locators/image and prose checks, access2026-10-17, purpose/eligibility and excluded call-example exposure are in the [lead review](../docs/development/guest-port-lead-review.md). Interface facts only; no sample, standalone equate file, private heap layout, Apple/MS implementation or assets adopted. Manuals/renders stay private and were not transferred to workers. Later publication facts do not settle January1984 behavior.
+
+## SRC-0246 - Claude prepared-port contract proposal
+
+- One supervised read-only call from a frozen reviewed-public/original packet. Three usable document proposals,226 lines total; spec exceeded its150-line file budget by5. No commands/tests/writes/web/MCP/subagents. Codex retains the draft base after source and engineering decisions, not as authority or passing tests.
+- [Actual prompt/scope](../docs/development/tasks/guest-port-claude.md); [review/receipt](../docs/development/guest-port-review.json). Provider counters/list-cost estimates are not subscription charges or ChatGPT quota equivalences.
+
+## SRC-0247 - Grok bounded owner-boundary review attempt
+
+- One406-line frozen public/original packet for the distinct A5-seal/environment-write/lifecycle risk, read once. Timed out at180.11s without a finished report; no finding adopted and no retry. Partial usage does not measure the whole timed-out request. No independent review completion or test claim.
+- [Actual prompt](../docs/development/tasks/guest-port-grok.md); [receipt](../docs/development/guest-port-review.json). Future reviews use the confirmed supported low-effort control and smaller selected sections.
+
+## SRC-0248 - Lead port-selection decisions and documentation verification
+
+- Codex,2026-10-17: published interface checks, engineering dispositions, contract integration and repository/preservation checks only. SPEC-0042 / ADR-0048; [lead review](../docs/development/guest-port-lead-review.md). No code/fixture/test/build/trial/release, historical claim, source-gate waiver or wiki maintenance. Existing runtime/candidate/release inputs remain unchanged.

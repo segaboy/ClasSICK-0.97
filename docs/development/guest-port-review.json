@@ -1,0 +1,156 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-17",
+  "sources": [
+    "SRC-0244",
+    "SRC-0245",
+    "SRC-0246",
+    "SRC-0247",
+    "SRC-0248"
+  ],
+  "specification": "SPEC-0042",
+  "baseline_public_revision": "ac201f160a90333e9f91a69f9ba31aac6d13ee7e",
+  "scope": "Accepted engineering contract only; no implementation/fixtures/tests/registry/build/trial/release",
+  "workers": {
+    "claude": {
+      "calls": 1,
+      "execution": {
+        "worker": "claude",
+        "exit_code": 0,
+        "timed_out": false,
+        "elapsed_seconds": 83.58,
+        "stream_bytes": 470390,
+        "stderr_bytes": 0
+      },
+      "input": {
+        "bytes": 45243,
+        "lines": 596,
+        "sha256": "b8260c0ee9626f6d53e0dc15103c5d4d6c718e4954ae4bd3ba6d7ca55a353d03"
+      },
+      "worker_test_runs": 0,
+      "worker_checkout_edits": 0,
+      "retries": 0,
+      "model": "claude-opus-5-5",
+      "provider_usage": {
+        "input_tokens": 4,
+        "cache_creation_input_tokens": 20478,
+        "cache_read_input_tokens": 5317,
+        "output_tokens": 8474,
+        "output_tokens_details": {
+          "thinking_tokens": 1532
+        },
+        "server_tool_use": {
+          "web_search_requests": 0,
+          "web_fetch_requests": 0
+        },
+        "service_tier": "standard",
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 20478,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "global",
+        "iterations": [
+          {
+            "input_tokens": 2,
+            "output_tokens": 8369,
+            "cache_read_input_tokens": 2933,
+            "cache_creation_input_tokens": 19929,
+            "cache_creation": {
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 19929
+            },
+            "type": "message"
+          }
+        ],
+        "speed": "standard",
+        "fallback_credit": null
+      },
+      "model_usage": {
+        "claude-opus-5-5": {
+          "inputTokens": 4,
+          "outputTokens": 8474,
+          "cacheReadInputTokens": 5317,
+          "cacheCreationInputTokens": 20478,
+          "webSearchRequests": 0,
+          "costUSD": 0.3343834,
+          "contextWindow": 1000000,
+          "maxOutputTokens": 128000,
+          "thinkingTokens": 1532,
+          "canonicalModel": "claude-opus-5-5",
+          "provider": "firstParty",
+          "costBasis": "list"
+        }
+      },
+      "provider_list_cost_usd": 0.3343834,
+      "subscription_charge_not_inferred": true,
+      "proposed_lines": [
+        155,
+        30,
+        41
+      ],
+      "file_budget_overrun_lines": 5,
+      "total_budget_exceeded": false,
+      "observed_tools": [
+        "Read packet.txt once"
+      ],
+      "disposition": "Adopted as base with lead corrections; source verification, extent/initial/disjointness/commit decisions differ."
+    },
+    "grok": {
+      "calls": 1,
+      "execution": {
+        "worker": "grok",
+        "exit_code": null,
+        "timed_out": true,
+        "elapsed_seconds": 180.11
+      },
+      "input": {
+        "bytes": 26275,
+        "lines": 406,
+        "sha256": "2abda263eb84882f117013e843fd2103b56e2b30fbcd27b42a6e824f4c43b245"
+      },
+      "worker_test_runs": 0,
+      "worker_checkout_edits": 0,
+      "retries": 0,
+      "completed_report": false,
+      "findings_adopted": [],
+      "observed_tools": [
+        "read_file packet.txt once"
+      ],
+      "partial_completed_turn_usage": [
+        {
+          "input_tokens": 5049,
+          "output_tokens": 310,
+          "cache_read_input_tokens": 128,
+          "cache_creation_input_tokens": 0,
+          "reasoning_tokens": 238
+        }
+      ],
+      "usage_complete": false,
+      "disposition": "Timeout at180.11s; no finished report, no retry, no independent completion claim. Future supported low-effort control required."
+    }
+  },
+  "primary_source_identities": [
+    {
+      "source": "SRC-0071",
+      "bytes": 19245372,
+      "sha256": "b65fe8efe782799a333a0b59b225e2bbaf9e2e150dc949dd555571971b331d97",
+      "pages": 1284
+    },
+    {
+      "source": "SRC-0068",
+      "bytes": 53888388,
+      "sha256": "924902074a9798457949c46f83ac016c98b10f50258ef36c277dcd0f8278b237",
+      "pages": 1326
+    }
+  ],
+  "manual_inputs_sent_to_workers": false,
+  "tests_executed": [],
+  "documentation_checks": [
+    "Repository index/link/JSON/whitespace guard (recorded at commit)",
+    "Preservation audit: original copies/UART/runtime/candidate inputs/prior records/tags/wiki (private receipt)"
+  ],
+  "prior_implementation_evidence_reused_not_rerun": "SPEC-0041 / verified0563837809cd5201498a175b28f99af0721ce61e / CI39028795556; not new SPEC-0042 test results",
+  "next_step": "Pure shared native selection core with independent tests; guest binding still requires exact-g integrity/environment-span/lifecycle contract amendments",
+  "raw_captures_outside_git": true,
+  "account_allowances_not_public": true
+}

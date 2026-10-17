@@ -1,5 +1,16 @@
 # ClasSICK 0.97 working instructions
 
+Current owner guest drawing-port contract scope (2026-10-17, SRC-0244..0248):
+"Next step" accepts the planned review/contract slice after SPEC-0041. SPEC-0042
+defines prepared GetPort/SetPort selection, one native68000/x86 semantic core,
+strict guest ownership and explicit future integrity/environment-span prerequisites.
+No implementation, fixtures, tests, registry entries, builds, trial or release in
+this slice. Claude primary contract; Grok distinct ownership review; Codex sole
+integrator. Preserve24 originals/copies, all runtime/build candidates, UART bodies,
+older records/releases/tags and frozen wiki. OneNote/wiki permanently retired;
+all source/role/edition/physical/full128K/B2/human/System1 gates persist. No agents.
+[Lead review](docs/development/guest-port-lead-review.md).
+
 Current owner paired drawing-context scope (2026-10-17, SRC-0240..0243): "Next step"
 continues the planned native drawing-port/clipping foundation: SPEC-0041 original
 native borrowed view, coordinate offset and rectangular clip; same C on68000/x86,
