@@ -172,3 +172,12 @@ independent tests on68000/x86, after owner acceptance. It cannot mutate guest RA
 enable traps. Next specify and verify P1/P2/P4 together, then the guest selection-only
 binding/workload. A real guest-record drawing adapter, InitGraf/OpenPort and full
 globals/assets/regions remain later work. No implementation permission follows here.
+
+## 15 Native implementation slice and C22b clarification (2026-10-17)
+The owner subsequently accepted SPEC-0043's pure native value/selection core and
+independent tests. The original no-implementation statement above describes this
+contract's original intake, not a prohibition on that separately accepted slice.
+Guest binding/owner amendments remain unimplemented and unauthorized here.
+Inactive/pure bad supplied descriptors return inert validation refusal; corruption
+of an admitted trusted record/map/lifetime/binding is owner quarantine under§11.
+C22b is clarified accordingly; no raw native pointer liveness probe is promised.

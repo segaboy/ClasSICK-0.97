@@ -3142,3 +3142,19 @@ reference payload, native format selection or current target run is admitted.
 
 - Codex,2026-10-17: local documented CLI catalogs/help/live picker and response metadata, no third-party source or emulator internals. Four capability reports, identical frozen proposal SHA-256 `200934a78e8ea5aa92f9874964842e471940c939eb7a6487d27bb192855dbfe6`, four reviews,18 dispositions and final plan. Eight model calls; no tools/worker writes, runtime tests, code/build/target/release or input-gate change. Source metadata records concerns/unknowns without treating model opinion as primary history evidence.
 - [Comparison](../docs/development/tool-capability-audit.md), [dispositions](../docs/development/tool-audit-2026-10-17/review-dispositions.md), [receipt](../docs/development/tool-audit-2026-10-17/audit-receipt.json). Raw captures/CLI logs private outside Git; account details excluded. Ordinary Git/HQ records only; OneNote/wiki retired.
+
+## SRC-0258 - Owner native selection implementation continuation
+
+- Owner,2026-10-17: "get started", then "continue", accepts the proposed shared native drawing-port selection core, Claude primary implementation and Copilot independent tests, lead API/refusal decisions/integration/paired verification and ordinary Git/HQ records. Guest trap binding follows later. No target trial or release; existing source/role/historical/physical/full128K/B2/System1 gates persist. OneNote/wiki permanently retired.
+
+## SRC-0259 - Claude original pure selection-core proposal
+
+- One bounded Opus5.5 low artifact call from frozen original public API/contract. Zero tools, checkout writes or executed tests. No HQ, untracked originals, manuals, prohibited source or UART bodies supplied. [Brief](../docs/development/tasks/native-selection-claude.md); [lead review/results](../docs/development/native-selection-evidence.md). Proposed behavior is engineering, not historical evidence.
+
+## SRC-0260 - Copilot independent selection-test proposal
+
+- One Sonnet5.5 low artifact call from the same frozen API/contract; implementation and implementation logs withheld. Zero tools/writes or worker test runs. Independent expectations require lead review and actual execution. [Brief](../docs/development/tasks/native-selection-copilot.md); [actual results](../docs/development/native-selection-evidence.md). No subscription/remaining-balance assumption.
+
+## SRC-0261 - Lead selection API, classification and verification
+
+- Codex,2026-10-17: froze SPEC-0043/header before worker dispatch; distinguished inert pure validation from future admitted-owner quarantine (C22b). Reviewed artifacts, integrated native tests and separate compiler/CI checks. No new primary-source research, historical claim, UART inspection, target run or release. [Evidence](../docs/development/native-selection-evidence.md).

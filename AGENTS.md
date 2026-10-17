@@ -1,5 +1,14 @@
 # ClasSICK 0.97 working instructions
 
+Current owner native selection implementation (2026-10-17, SRC-0258..0261):
+"get started" accepts SPEC-0043 pure shared native68000/x86 selection values,
+original code, independent API-only tests, paired compiler/CI verification and
+ordinary Git/HQ publication. Claude primary core; Copilot independent tests;
+Codex sole writer/integrator/final verifier. Freeze API before workers. No guest
+trap binding, owner lifecycle/header/environment-span amendments, workload/ROM/EFI
+input changes, target trial or release. Preserve24 originals/copies, UART bodies,
+old rows/releases/tags and frozen wiki. No OneNote/wiki,agents/chats/automation.
+
 Owner capability-audit scope (2026-10-17, SRC-0252..0257): all four external CLIs
 reported Windows11 capabilities and reviewed one identical proposal. Final routing
 plan is [here](docs/development/tool-audit-2026-10-17/final-plan.md); normal tasks

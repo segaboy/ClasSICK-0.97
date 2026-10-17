@@ -6,8 +6,8 @@ Owner SRC-0252 requested the completed all-four capability audit and review roun
 [Final plan](tool-audit-2026-10-17/final-plan.md) is current for routing, model/route
 evidence, Windows11 packets, test independence and control limitations where it
 corrects dated language below. [Full comparison/reviews](tool-capability-audit.md).
-No feature/source/target permission expands: current runtime scope remains the
-SPEC-0042 contract-only slice. The audit's four-way fan-out is not routine policy.
+No feature/source/target permission expands: current runtime scope is the subsequently accepted
+SPEC-0043 pure native selection implementation; guest binding remains deferred. The audit's four-way fan-out is not routine policy.
 Always pin Antigravity to Argon4 High. Keep Codex sole writer/integrator/verifier;
 one normal primary and optional distinct-risk worker. Historical observations below
 remain dated evidence, not claims of current model access or hard tool isolation.
@@ -98,3 +98,9 @@ classification findings retained; several matrix layer/coverage claims require
 lead correction. Existing roles/rules stay unchanged; no automatic qualification
 for runtime code or role reassignment. [Lead review](argon-high-trial.md),
 [receipt](argon-high-trial.json), [actual prompts](tasks/argon-high-trial.md).
+
+## Native selection allocation result - 2026-10-17
+
+Claude primary core and independent API-only Copilot tests, one bounded call each;
+zero worker tools/writes/tests, frozen hashes checked before/after. No redundant
+Grok/Argon review. Lead integrated artifacts and ran checks. [Receipt](native-selection-evidence.md).

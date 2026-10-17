@@ -45,6 +45,9 @@ jobs:
       - name: Mouse foundation width and endian object checks
         shell: pwsh
         run: .\scripts\Verify-MouseObjects.ps1 -BuildRoot build\mouse-verification
+      - name: Pure native selection width and endian objects
+        shell: pwsh
+        run: .\scripts\Verify-SelectionObjects.ps1 -BuildRoot build\selection-verification
 
   m68k-rom:
     runs-on: ubuntu-24.04
@@ -55,6 +58,14 @@ jobs:
           persist-credentials: false
       - name: Prepare hash-pinned workspace 68000 tools
         run: python3 scripts/Setup-M68k.py --output "$RUNNER_TEMP/classick-m68k"
+      - name: Compile pure native port selection for68000 (no target run)
+        run: python3 scripts/Verify-SelectionM68k.py --tool-root "$RUNNER_TEMP/classick-m68k/root" --output "$RUNNER_TEMP/classick-selection"
+      - name: Retain native selection object manifest
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
+        with:
+          name: classick-native-selection
+          path: ${{ runner.temp }}/classick-selection/manifest.json
+          if-no-files-found: error
       - name: Build and audit original ROM twins
         run: python3 scripts/Build-MacROM.py --tool-root "$RUNNER_TEMP/classick-m68k/root" --output "$RUNNER_TEMP/classick-rom"
       - name: Audit original checked memory 68000 objects and program encoding

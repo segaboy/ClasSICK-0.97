@@ -1,0 +1,339 @@
+{
+  "schema_version": 1,
+  "specification": "SPEC-0043",
+  "date": "2026-10-17",
+  "sources": [
+    "SRC-0258",
+    "SRC-0259",
+    "SRC-0260",
+    "SRC-0261"
+  ],
+  "baseline_public_revision": "36abbcf741440b9229ca647a3acb8ad2ad9c45f2",
+  "frozen_inputs": {
+    "personality/system1/quickdraw-select.h": "cd72e096f6a9365ede45fd859df755fec021eb1986002d5ca8269a6c8f838624",
+    "docs/specifications/SPEC-0043-native-port-selection.md": "ad1a9dc4a56ee6d05e88c4e423d3f4ebef914c930afbad2942c9a1fe5c481e72",
+    "personality/system1/quickdraw-view.h": "4a93567872049f5142a3980eba501c7a2e027c15de794dde11fbbd93cc3bbee7",
+    "personality/system1/quickdraw-rects.h": "db9facdb5ef3742c3c8935255e3f627c30d31b323a8223e470d9851a48c81e09"
+  },
+  "workers": {
+    "claude": {
+      "execution": {
+        "round": "round1",
+        "worker": "claude",
+        "exit_code": 0,
+        "outer_timeout": false,
+        "elapsed_seconds": 37.31,
+        "input_bytes": 10490,
+        "input_sha256": "1839c821031e67b5420a13b8db3454c183775bd41c973dd2d643b1956307faf2",
+        "stderr_bytes": 0
+      },
+      "observed_tool_calls": 0,
+      "tests_executed": [],
+      "returned_files": [
+        {
+          "path": "personality/system1/quickdraw-select.c",
+          "lines": 198,
+          "sha256": "3b961900a4bdc641750d4ee8c57c0823ec78715de21493649011d4d28d70e2b3"
+        }
+      ],
+      "response_sha256": "83f0580a2026bf1e598ee04d3565b57b5f95d0b6ba7e03f28f6ee8ed8d855504",
+      "requested_model": "claude-opus-5-5",
+      "effort": "low",
+      "reported_models": [
+        "claude-opus-5-5"
+      ],
+      "usage": {
+        "input_tokens": 2,
+        "cache_creation_input_tokens": 5724,
+        "cache_read_input_tokens": 1452,
+        "output_tokens": 4416,
+        "output_tokens_details": {
+          "thinking_tokens": 914
+        },
+        "server_tool_use": {
+          "web_search_requests": 0,
+          "web_fetch_requests": 0
+        },
+        "service_tier": "standard",
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 5724,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "global",
+        "iterations": [
+          {
+            "input_tokens": 2,
+            "output_tokens": 4416,
+            "cache_read_input_tokens": 1452,
+            "cache_creation_input_tokens": 5724,
+            "cache_creation": {
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 5724
+            },
+            "type": "message"
+          }
+        ],
+        "speed": "standard",
+        "fallback_credit": null
+      },
+      "provider_list_cost_estimate_usd": 0.13441039999999999,
+      "cost_is_subscription_bill": false
+    },
+    "copilot": {
+      "execution": {
+        "round": "round1",
+        "worker": "copilot",
+        "exit_code": 0,
+        "outer_timeout": false,
+        "elapsed_seconds": 196.52,
+        "input_bytes": 11165,
+        "input_sha256": "c467c32d3e2588a4d6744af926becf1cb77276dcb7e1d7da4554938ad2dcf9c1",
+        "stderr_bytes": 0
+      },
+      "observed_tool_calls": 0,
+      "tests_executed": [],
+      "returned_files": [
+        {
+          "path": "tests/quickdraw-select-independent.c",
+          "lines": 549,
+          "sha256": "ac3f8e64942840aaba0a52b23ddac589168c228ee481f72e6ae42ca63286231c"
+        }
+      ],
+      "response_sha256": "cc76154893f62accb4e151dfd3dfcdfa49f53ae14c971d2bf629cda33e6d0f5c",
+      "requested_model": "claude-sonnet-5.5",
+      "effort": "low",
+      "usage": {
+        "totalPremiumRequestCost": 1,
+        "totalUserRequests": 1,
+        "totalNanoAiu": 30711680000,
+        "aiCreditsStatus": "complete",
+        "tokenDetails": {
+          "input": {
+            "tokenCount": 82
+          },
+          "cache_read": {
+            "tokenCount": 2028
+          },
+          "cache_write": {
+            "tokenCount": 6828
+          },
+          "output": {
+            "tokenCount": 28968
+          }
+        },
+        "totalApiDurationMs": 192135,
+        "sessionStartTime": "2026-10-17T21:57:02.603Z",
+        "codeChanges": {
+          "linesAdded": 0,
+          "linesRemoved": 0,
+          "filesModifiedCount": 0,
+          "filesModified": []
+        },
+        "modelMetrics": {
+          "claude-sonnet-5.5": {
+            "requests": {
+              "count": 1,
+              "cost": 1
+            },
+            "usage": {
+              "inputTokens": 8938,
+              "outputTokens": 28968,
+              "cacheReadTokens": 2028,
+              "cacheWriteTokens": 6828,
+              "reasoningTokens": 16252
+            },
+            "cacheExpiresAt": "2026-10-17T22:02:03.939Z",
+            "totalNanoAiu": 30711680000,
+            "aiCreditsStatus": "complete",
+            "tokenDetails": {
+              "input": {
+                "tokenCount": 82
+              },
+              "cache_read": {
+                "tokenCount": 2028
+              },
+              "cache_write": {
+                "tokenCount": 6828
+              },
+              "output": {
+                "tokenCount": 28968
+              }
+            }
+          }
+        },
+        "agentMetrics": {
+          "main": {
+            "totalApiDurationMs": 192135,
+            "totalNanoAiu": 30711680000,
+            "modelMetrics": {
+              "claude-sonnet-5.5": {
+                "requests": {
+                  "count": 1,
+                  "cost": 1
+                },
+                "usage": {
+                  "inputTokens": 8938,
+                  "outputTokens": 28968,
+                  "cacheReadTokens": 2028,
+                  "cacheWriteTokens": 6828,
+                  "reasoningTokens": 16252
+                },
+                "totalNanoAiu": 30711680000,
+                "tokenDetails": {
+                  "input": {
+                    "tokenCount": 82
+                  },
+                  "cache_read": {
+                    "tokenCount": 2028
+                  },
+                  "cache_write": {
+                    "tokenCount": 6828
+                  },
+                  "output": {
+                    "tokenCount": 28968
+                  }
+                }
+              }
+            }
+          }
+        },
+        "providerModelMetrics": [
+          {
+            "provider": {
+              "id": "copilot",
+              "label": "GitHub Copilot",
+              "kind": "copilot"
+            },
+            "modelId": "claude-sonnet-5.5",
+            "metrics": {
+              "requests": {
+                "count": 1,
+                "cost": 1
+              },
+              "usage": {
+                "inputTokens": 8938,
+                "outputTokens": 28968,
+                "cacheReadTokens": 2028,
+                "cacheWriteTokens": 6828,
+                "reasoningTokens": 16252
+              },
+              "totalNanoAiu": 30711680000,
+              "aiCreditsStatus": "complete",
+              "tokenDetails": {
+                "input": {
+                  "tokenCount": 82
+                },
+                "cache_read": {
+                  "tokenCount": 2028
+                },
+                "cache_write": {
+                  "tokenCount": 6828
+                },
+                "output": {
+                  "tokenCount": 28968
+                }
+              }
+            },
+            "modelDisplayName": "Claude Sonnet 5.5"
+          }
+        ],
+        "currentModel": "claude-sonnet-5.5",
+        "lastCallInputTokens": 8938,
+        "lastCallOutputTokens": 28968
+      },
+      "remaining_allowance": null
+    }
+  },
+  "integration_review": {
+    "core": "Adopted all198 proposed core lines unchanged after validation-order/span/alias/overflow review.",
+    "tests_proposed_lines": 549,
+    "tests_final_lines": 577,
+    "format_repair": "Removed one extraneous final square bracket from JSON; preserved raw response.",
+    "test_corrections": [
+      "Fixed include path; added copyright.",
+      "Removed view.port write that corrupted overlapping selection numeric fields before intended alias check.",
+      "Reset random valid/invalid counters before random loop; earlier exhaustive outcomes no longer satisfy coverage.",
+      "Removed unreachable conditional on fixed view-field lower bounds."
+    ],
+    "lead_gap_cases": [
+      "Two low-reservation numeric boundary witnesses.",
+      "Distinct partial native port/view overlaps; views validated before aliased field reads."
+    ],
+    "independence": "Core implementation/logs/history never sent to test author. Lead gap additions are implementation-aware, identified separately; original oracle remains API-only.",
+    "summary": "Claude core adopted unchanged (198 lines). Copilot returned549 test lines against400 budget and malformed JSON (one extra bracket); mechanical format repair retained the original content. Lead fixed the include path, one alias setup that corrupted numeric inputs, random-only coverage counters and an unreachable conditional; added two low-reservation boundaries and distinct partial native port/view overlaps. Original uint64 numeric oracle, complete input/backing snapshots, directed and randomized cases retained. No retry."
+  },
+  "local_profiles": {
+    "clang-hosted-debug-a": 285,
+    "clang-hosted-sanitized": 285,
+    "gcc-i686": 240
+  },
+  "local_ctests": 810,
+  "object_audits": 10,
+  "mutation_controls": {
+    "total": 8,
+    "rejected": 8,
+    "cases": [
+      {
+        "name": "count-zero",
+        "compiled": true,
+        "rejected": true,
+        "exit_code": 1
+      },
+      {
+        "name": "id-parity",
+        "compiled": true,
+        "rejected": true,
+        "exit_code": 1
+      },
+      {
+        "name": "record-tail",
+        "compiled": true,
+        "rejected": true,
+        "exit_code": 1
+      },
+      {
+        "name": "record-reservation",
+        "compiled": true,
+        "rejected": true,
+        "exit_code": 1
+      },
+      {
+        "name": "view-offset",
+        "compiled": true,
+        "rejected": true,
+        "exit_code": 1
+      },
+      {
+        "name": "set-value",
+        "compiled": true,
+        "rejected": true,
+        "exit_code": 1
+      },
+      {
+        "name": "nil-get",
+        "compiled": true,
+        "rejected": true,
+        "exit_code": 1
+      },
+      {
+        "name": "native-alias",
+        "compiled": true,
+        "rejected": true,
+        "exit_code": 1
+      }
+    ],
+    "these_are_deliberately_broken_hosted_original_programs": true
+  },
+  "ci": {
+    "conclusion": "pending"
+  },
+  "native_68000": {
+    "status": "pending-CI-compile",
+    "executed": false
+  },
+  "guest_binding": false,
+  "workload_rom_efi_inputs_unchanged": true,
+  "new_target_trial": false,
+  "new_release": false,
+  "chatgpt_quota_savings_measured": false
+}

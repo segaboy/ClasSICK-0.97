@@ -21,7 +21,7 @@ Not run. No fixture or test code exists. Each case expects pre-effect refusal
 - C20 Duplicate IDs, odd ID, high (>24-bit) ID, ID 0 registration -> prepare refused.
 - C21 SetPort(NIL), SetPort(unregistered), SetPort(record extent past below-A5).
 - C22 Unknown value stored in g, then GetPort/SetPort refuse; no old-view fallback.
-- C22b Registered nonzero current with a nonlive/truncated record refuses on both calls.
+- C22b Inactive preparation/pure values: a truncated or invalid supplied record refuses on either call. After owner admission, trusted record/map/lifetime/binding corruption quarantines on either call; preserve prior effects and the actual stopped frame. A malformed guest ID alone remains a service refusal.
 - C23 GetPort dest odd, in stack, in a record, in g reservation, in A5/header.
 - C24 Record overlapping the g reservation or stack/CODE/jump table -> prepare refused.
 - C25 Parameter at root token; scratch below stack base; S+4 > root.
