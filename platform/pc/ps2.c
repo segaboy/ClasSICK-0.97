@@ -52,6 +52,15 @@ static uint32_t scan(cs_ps2 *s,uint8_t byte,cs_input_queue *q)
     else increment(&s->events);
     return CS_PS2_READY;
 }
+uint32_t cs_ps2_receive(cs_ps2 *s,uint8_t status,uint8_t byte,cs_input_queue *q)
+{
+    if(s==NULL || q==NULL || (status&1u)==0) return CS_PS2_ARGUMENT;
+    if(s->phase!=CS_PS2_PHASE_READY || s->result!=CS_PS2_READY) return CS_PS2_STATE;
+    s->last_byte=byte;
+    if((status&0xC0u)!=0) { increment(&s->errors); clear_keys(s); return CS_PS2_READY; }
+    if((status&0x20u)!=0) { increment(&s->auxiliary); return CS_PS2_READY; }
+    return scan(s,byte,q);
+}
 uint32_t cs_ps2_poll(cs_ps2 *s,const cs_ps2_io *io,uint64_t now,cs_input_queue *q)
 {
     uint8_t status,byte=0,command=0;
@@ -86,13 +95,9 @@ uint32_t cs_ps2_poll(cs_ps2 *s,const cs_ps2_io *io,uint64_t now,cs_input_queue *
         if(drain && s->retries>=64u) return fail(s,CS_PS2_CONTROLLER);
         byte=io->read(io->context,0x60); s->last_byte=byte;
         if(drain) { ++s->retries; increment(&s->drained); return s->result; }
-        if((status&0xC0u)!=0) {
-            increment(&s->errors);
-            if(phase==CS_PS2_PHASE_READY) { clear_keys(s); return CS_PS2_READY; }
-            return fail(s,CS_PS2_CONTROLLER);
-        }
+        if(phase==CS_PS2_PHASE_READY) return cs_ps2_receive(s,status,byte,q);
+        if((status&0xC0u)!=0) { increment(&s->errors); return fail(s,CS_PS2_CONTROLLER); }
         if((status&0x20u)!=0) { increment(&s->auxiliary); return s->result; }
-        if(phase==CS_PS2_PHASE_READY) return scan(s,byte,q);
         if(phase==4) s->configuration=(byte&4u)|0x30u;
         else if(phase==8) s->port_before=byte;
         else if(phase==15) {

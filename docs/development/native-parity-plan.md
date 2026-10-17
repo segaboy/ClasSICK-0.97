@@ -39,7 +39,7 @@ Existing transparent-variant and licensing requirements remain unchanged.
 | Fixed-port PaintRect/EraseRect semantics | Native C manager | Native C manager | Selected bounded API profile; not general QuickDraw |
 | Existing original40-byte application fixture | Guarded68k interpreter prototype | Guarded68k interpreter prototype | Compatibility/runtime coverage; not native application-execution parity |
 | Original native drawing workload using those APIs | Direct native C ROM candidate | Direct native C PC/Windows binding | SPEC-0038 compiler/hosted conformance passes; new target boots pending |
-| Scene input | Shared native button core over existing Mac backend | Same core in Windows viewer; pure PS/2 decoder ready | SPEC-0039 hosted foundations; freestanding PC controller routing and target input unqualified |
+| Scene input | Shared native button core over existing Mac backend | Same core in Windows viewer and native x64 controller profile | SPEC-0040 routing/hosted/compiled candidate; actual target input unqualified |
 | Full windows/menus/events/files/System disk experience | Incomplete | Incomplete | Develop each advancement on both native sides |
 
 The renderer and new original drawing workload now execute as native C on both
@@ -49,8 +49,9 @@ new native Mac profile and native PC image are compiled candidates, not new
 boot observations. No general external native application ABI/loader is claimed.
 
 SPEC-0039 supplies shared button semantics, native hosted bindings and pure report
-decoding. Next paired advancement: reviewed single-owner8042 mouse startup/AUX
-routing and corresponding scene integration. Full pointer motion/events and target
+decoding. SPEC-0040 now implements single-owner8042 startup/routing and scene integration
+in an explicit native x64 profile. Next is a separately approved native boot/input
+trial of that candidate. Full pointer motion/events and target
 qualification remain open. Keyboard counters or hosted tests cannot close them.
 Actual target runs need fresh owner go-ahead. Keep24 originals/copies, UART
 bodies, releases, previous results and both System1/ROM requirements intact.

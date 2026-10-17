@@ -1,5 +1,16 @@
 # ClasSICK 0.97 working instructions
 
+Current owner controller implementation (2026-10-16, SRC-0233..0237): "Do it" accepts SPEC-0040
+single-owner8042 mouse startup/routing, original code/hosted/compiler/CI/EFI
+candidate checks. Explicit PC mouse build profile preserves default legacy
+keyboard APIs/trace and all UART implementation/test bodies; no new target trial,
+release, native ABI/SDK or cursor/Event Manager expansion. Claude primary code,
+Copilot independent sequencing tests; Codex sole writer. Existing service/input,
+source/role/edition/physical/full128K/boot gates persist. Preserve24 originals/
+copies, Mac ROM inputs, old rows/releases/tags and frozen wiki. OneNote/wiki
+remain permanently retired. No extra Codex chats/subagents/automation.
+
+
 Current owner continuation (2026-10-16, SRC-0227..0232): proceed with SPEC-0039 shared native
 mouse-button core, pure PS/2 report decoder and Windows/native-Mac bindings,
 original hosted/compiler/CI/candidate checks; freestanding PC controller startup

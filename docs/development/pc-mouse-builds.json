@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "specification": "SPEC-0040",
+  "native_profile": "CLASSICK_PC_MOUSE=1",
+  "keyboard_trace_version": 2,
+  "keyboard_trace_bytes": 112,
+  "efi_results": {
+    "fault_probe": "none",
+    "images": [
+      {
+        "case": "clang-64-O0",
+        "sha256": "fef70677621681a3c57986ef34ebe34c6834c1add1d48a6bbccc3fea9935a76f",
+        "size_bytes": 215040,
+        "image_size": 229376,
+        "relocations": 3,
+        "status": "passed-unloaded"
+      },
+      {
+        "case": "clang-64-O2",
+        "sha256": "1f0d222b355f54b01a2822a8c857ba0f78b3dc9192744b562a6a3c2bdc2fd4c1",
+        "size_bytes": 151552,
+        "image_size": 163840,
+        "relocations": 3,
+        "status": "passed-unloaded"
+      }
+    ],
+    "image_rejections": 27,
+    "profile_rejections": 0,
+    "missing_transition_controls": 1,
+    "missing_exceptions_controls": 1,
+    "missing_presenter_controls": 1,
+    "missing_acpi_controls": 1,
+    "missing_ps2_controls": 1,
+    "missing_keyboard_controls": 1,
+    "missing_input_controls": 1,
+    "missing_byte_io_controls": 1,
+    "missing_uart_controls": 1,
+    "missing_native_uart_controls": 1,
+    "missing_service_controls": 1,
+    "missing_service_probe_controls": 1,
+    "missing_m68k_controls": 1,
+    "missing_aline_probe_controls": 1,
+    "missing_native_drawing_controls": 1,
+    "missing_mouse_button_controls": 1,
+    "missing_mouse_packet_controls": 1,
+    "missing_mouse_bus_controls": 1,
+    "pc_mouse_profile": 1,
+    "keyboard_trace_version": 2,
+    "payload": "payload/EFI/BOOT/BOOTX64.EFI",
+    "payload_kind": "directory-tree-not-disk",
+    "loaded": false
+  },
+  "mac_rom_61_inputs_unchanged": true,
+  "mac_rom_sha256": "5e415b9036802fcbb217fc6b98872b7e620a9603dbf4b478055e23f5ad68fdd7",
+  "new_target_trial": false,
+  "new_release": false
+}

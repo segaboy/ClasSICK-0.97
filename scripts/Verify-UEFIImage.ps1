@@ -27,16 +27,17 @@ try {
         'core/memory/guest.c','core/memory/manager.c','core/memory/lifecycle.c',
         'formats/resourcefork/reader.c','personality/system1/code-preflight.c',
         'personality/system1/resources.c','personality/system1/code-image.c',
-        'personality/system1/code-run.c','personality/system1/quickdraw-rects.c','core/cpu/m68k-bus.c','apps/native-drawing/workload.c')
+        'personality/system1/code-run.c','personality/system1/quickdraw-rects.c','core/cpu/m68k-bus.c','core/input/mouse.c','platform/pc/ps2-mouse.c','platform/pc/ps2-bus.c','apps/native-drawing/workload.c')
     # SPEC-0009 objects permit only these original project imports.
     $allowedImports=@{8='cs_surface_init';
         9='cs_surface_init,cs_arena_alloc,cs_fb_init,cs_fb_present,cs_product_scene,cs_service_probe,cs_native_draw';
         10='cs_uefi_check_framebuffer,cs_fb_init,cs_arena_init,cs_boot_scene_prepare,cs_boot_scene_draw,cs_uefi_check_map,cs_acpi_find_pm_timer,cs_pmtimer_init,cs_pmtimer_sample,cs_pmtimer_time';
         14='cs_input_push';
-        15='cs_ps2_begin,cs_ps2_poll,cs_native_read,cs_uefi_check_map,cs_acpi_find_pm_timer,cs_acpi_8042,cs_uefi_check_framebuffer,cs_fb_init,cs_arena_init,cs_arena_alloc,cs_boot_scene_prepare,cs_boot_scene_draw_input,cs_input_init,cs_input_pop,cs_pmtimer_init,cs_pmtimer_sample,cs_pmtimer_time';
+        15='cs_ps2_bus_begin,cs_ps2_bus_poll,cs_native_read,cs_uefi_check_map,cs_acpi_find_pm_timer,cs_acpi_8042,cs_uefi_check_framebuffer,cs_fb_init,cs_arena_init,cs_arena_alloc,cs_boot_scene_prepare,cs_boot_scene_draw_input,cs_input_init,cs_input_pop,cs_pmtimer_init,cs_pmtimer_sample,cs_pmtimer_time';
         19='cs_uart_begin,cs_uart_enqueue,cs_uart_finish,cs_uart_poll,cs_native_keyboard_observed,cs_acpi_find_pm_timer,cs_native_read,cs_pmtimer_init,cs_pmtimer_sample';
         21='cs_trap_init,cs_trap_call,cs_trap_direct';22='cs_trap_call';23='cs_trap_get,cs_trap_set,cs_m68k_step'}
     $allowedImports[$sources.Count-1]='cs_qd_rect'
+    $allowedImports[[Array]::IndexOf($sources,'platform/pc/ps2-bus.c')]='cs_ps2_begin,cs_ps2_poll,cs_ps2_receive,cs_ps2_mouse_begin,cs_ps2_mouse_feed,cs_mouse_button_begin,cs_mouse_button_sample'
     $common=@('-m64','-Wall','-Wextra','-Wpedantic','-Werror','-Wconversion','-Wsign-conversion',
         '-ffreestanding','-fno-builtin','-fno-stack-protector','-fno-ident','-mno-red-zone','-mgeneral-regs-only','-Wframe-larger-than=2048',
         '-fno-asynchronous-unwind-tables','-fno-unwind-tables',"-ffile-prefix-map=$repoRoot=.")
@@ -50,12 +51,20 @@ try {
             for($i=0;$i -lt $sources.Count;++$i) {
                 $object=Join-Path $directory "$i.o"
                 if($sources[$i].EndsWith('.S')){& $compiler -m64 "-DCS_X64_FAULT_PROBE=$probeNumber" -c (Join-Path $repoRoot $sources[$i]) -o $object}
-                else{& $compiler @common -std=c11 "-O$opt" -c (Join-Path $repoRoot $sources[$i]) -o $object}
+                else{
+                    $profileFlags=@()
+                    if($sources[$i] -eq 'platform/uefi/keyboard.c'){$profileFlags=@('-DCLASSICK_PC_MOUSE=1')}
+                    & $compiler @common @profileFlags -std=c11 "-O$opt" -c (Join-Path $repoRoot $sources[$i]) -o $object
+                }
                 if($LASTEXITCODE -ne 0){throw 'Original EFI compile failed.'}
                 if($i -lt 2 -or $i -eq 4 -or $i -eq 6 -or $i -eq 7 -or $i -eq 11 -or $i -eq 12 -or $i -eq 16 -or $i -eq 18 -or $i -eq 20) {
                     $check=if($i -eq 1){'Check-LoaderObject.cmake'}else{'Check-Freestanding.cmake'}
                     & cmake "-DNM=$nm" "-DOBJECT=$object" -P (Join-Path $PSScriptRoot $check)
                     if($LASTEXITCODE -ne 0){throw 'EFI object boundary failed.'}
+                }
+                if($sources[$i] -in @('core/input/mouse.c','platform/pc/ps2-mouse.c')) {
+                    & cmake "-DNM=$nm" "-DOBJECT=$object" -P (Join-Path $PSScriptRoot 'Check-Freestanding.cmake')
+                    if($LASTEXITCODE -ne 0){throw 'EFI pure mouse object boundary failed.'}
                 }
                 if($allowedImports.ContainsKey($i)) {
                     & cmake "-DNM=$nm" "-DALLOWED=$($allowedImports[$i])" "-DOBJECT=$object" -P (Join-Path $PSScriptRoot 'Check-ObjectImports.cmake')
@@ -157,7 +166,7 @@ try {
     if($LASTEXITCODE -eq 0 -or ($missing -join "`n") -notmatch 'cs_acpi_find_pm_timer'){throw 'Missing ACPI control did not reject.'}
     $global:LASTEXITCODE=0
     $missing | Out-File -LiteralPath (Join-Path $controls 'missing-acpi.log') -Encoding UTF8
-    foreach($control in @(@(14,'ps2','cs_ps2_poll'),@(15,'keyboard','cs_native_keyboard_observed'),@(16,'input','cs_input_push'),@(17,'byte-io','cs_x64_inb|cs_x64_outb'),@(18,'uart','cs_uart_poll'),@(19,'native-uart','cs_native_uart_loop'),@(20,'services','cs_trap_call'),@(21,'service-probe','cs_service_probe'),@(22,'m68k','cs_m68k_step'),@(23,'aline-probe','cs_aline_probe'),@(($sources.Count-1),'native-drawing','cs_native_draw'))) {
+    foreach($control in @(@(14,'ps2','cs_ps2_poll'),@(15,'keyboard','cs_native_keyboard_observed'),@(16,'input','cs_input_push'),@(17,'byte-io','cs_x64_inb|cs_x64_outb'),@(18,'uart','cs_uart_poll'),@(19,'native-uart','cs_native_uart_loop'),@(20,'services','cs_trap_call'),@(21,'service-probe','cs_service_probe'),@(22,'m68k','cs_m68k_step'),@(23,'aline-probe','cs_aline_probe'),@(($sources.Count-1),'native-drawing','cs_native_draw'),@([Array]::IndexOf($sources,'core/input/mouse.c'),'mouse-button','cs_mouse_button_'),@([Array]::IndexOf($sources,'platform/pc/ps2-mouse.c'),'mouse-packet','cs_ps2_mouse_'),@([Array]::IndexOf($sources,'platform/pc/ps2-bus.c'),'mouse-bus','cs_ps2_bus_'))) {
         try {
             $ErrorActionPreference='Continue'
             $missing=@(& $compiler @link @($referenceObjects | Where-Object {$_ -ne $referenceObjects[$control[0]]}) -o (Join-Path $controls ('must-not-link-'+$control[1]+'.EFI')) 2>&1)
@@ -172,8 +181,8 @@ try {
     [ordered]@{fault_probe=$FaultProbe;images=$results;image_rejections=$mutations.Count;profile_rejections=[int]($FaultProbe -ne 'none');missing_transition_controls=1;missing_exceptions_controls=1;missing_presenter_controls=1;missing_acpi_controls=1;
         missing_ps2_controls=1;missing_keyboard_controls=1;missing_input_controls=1;missing_byte_io_controls=1;
         missing_uart_controls=1;missing_native_uart_controls=1;missing_service_controls=1;missing_service_probe_controls=1;
-        missing_m68k_controls=1;missing_aline_probe_controls=1;missing_native_drawing_controls=1;
+        missing_m68k_controls=1;missing_aline_probe_controls=1;missing_native_drawing_controls=1;missing_mouse_button_controls=1;missing_mouse_packet_controls=1;missing_mouse_bus_controls=1;pc_mouse_profile=1;keyboard_trace_version=2;
         payload='payload/EFI/BOOT/BOOTX64.EFI';payload_kind='directory-tree-not-disk';loaded=$false} |
         ConvertTo-Json -Depth 8 | Set-Content -LiteralPath (Join-Path $BuildRoot 'efi-results.json') -Encoding UTF8
-    Write-Output "EFI inspection PASS: four twin images, $($mutations.Count) corruption rejections, fifteen omitted-object rejections and original payload tree; no image executed."
+    Write-Output "EFI inspection PASS: four twin images, $($mutations.Count) corruption rejections, eighteen omitted-object rejections and original payload tree; no image executed."
 } finally{$env:PATH=$originalPath}

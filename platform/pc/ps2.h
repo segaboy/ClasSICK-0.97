@@ -21,4 +21,6 @@ typedef struct {
 /* Live disjoint state/callbacks/queue; monotonic extended PM ticks. SPEC-0012 v2. */
 uint32_t cs_ps2_begin(cs_ps2 *state);
 uint32_t cs_ps2_poll(cs_ps2 *state,const cs_ps2_io *io,uint64_t now,cs_input_queue *queue);
+/* SPEC-0040: route one read byte in READY; no I/O or time effects. */
+uint32_t cs_ps2_receive(cs_ps2 *state,uint8_t status,uint8_t byte,cs_input_queue *queue);
 #endif

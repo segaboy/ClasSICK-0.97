@@ -3025,3 +3025,30 @@ reference payload, native format selection or current target run is admitted.
 
 - Codex,2026-10-16. Contract decisions, worker review/integration, authored Mac register transcript, build wiring and actual hosted/compiler/CI verification; no target trial, new release, hardware controller implementation or historical inference.
 - [SPEC-0039](../docs/specifications/SPEC-0039-native-mouse-foundations.md), [evidence](../docs/development/mouse-input-evidence.md).
+
+## SRC-0233 - Owner PC mouse-controller implementation
+
+- Owner,2026-10-16: "Do it." accepts the proposed PC mouse-controller startup/routing contract and implementation after SPEC-0039. Original code, tests, compiler/CI/candidate and ordinary Git/HQ records; no target run or release. OneNote/wiki remain permanently retired.
+
+## SRC-0234 - Published controller and mouse protocol interface sections
+
+- Reuse SRC-0049 SMSC *KBD43W13* datasheet, [canonical copy](https://k.lse.epita.fr/data/8042.pdf), printed12-13 / PDF12-13: PS/2 configuration bits, A7/A8/A9, AD/AE and D4 commands.123,924 bytes,22 pages, SHA-256 `20f990798e61f3f876864a6e14667bd907d8c7c4ec30718b2acf85a5551ae678`; identity matches existing source. Table images independently viewed.
+- Cypress Semiconductor, *PS/2 Device Datasheet PS2D V1.2*, document001-13681 Rev.*E,2014-12-05,16 pages, [publisher-hosted copy](https://www.infineon.com/dgdl/Infineon-PS2D_001-13681-Software%2BModule%2BDatasheets-v01_02-EN.pdf?fileId=8ac78c8c7d0d8da4017d0fab8b401c89), printed13 Table4: F5/F6/F4 and FA acknowledgments. Web-read protocol prose/table only; no module implementation/sample adopted.
+- Joshua Hintze and Andre' LaMothe / Nurve Networks LLC, *Chameleon PIC16-Bit User Manual v1.0*,2009, printing0001, [Microchip-hosted publication](https://ww1.microchip.com/downloads/en/devicedoc/cham_pic_user_manual_v1_0.pdf), printed/PDF63 section12.2.3 RESET Mode: reset/BAT/ID and reporting-disabled baseline.16,164,176 bytes,263 pages, SHA-256 `13596c2e347ea330554cfeaa23b3b42f533e5121ecbb7fd35f44f45a3f18a9bd`. Publication page2 and page63 rendered/viewed. The page's erroneous signed-range sentence and advice to ignore sign bits are excluded; SPEC-0039 arithmetic remains original/unchanged.
+- Microchip *TB058*,2004, [DS91058C](https://ww1.microchip.com/downloads/en/Appnotes/91058C.pdf), printed5 Table3, manufacturer-indexed command prose: device FE asks the host to repeat a command. No translator/example implementation used.
+- Accessed2026-10-16. Manuals retained privately for eligible interface checking, never committed or supplied to workers. Link/hash facts only; no copied code/algorithms/assets. Broad search also returned an unrelated community HID descriptor excerpt, not opened/adopted. No excluded implementation contributes to this code. Strict ID, deadlines, masks, drop/rebaseline and routing decisions are original qualification policy; no universal PC or historical Mac claim.
+
+## SRC-0235 - Claude original controller and native binding proposal
+
+- One combined draft timed out at360s without a deliverable. One narrower read-only retry returned controller code/header, a contract and exact native binding patches; only frozen reviewed-public/original inputs. No tests or checkout edits by worker.
+- [Brief and retry](../docs/development/tasks/pc-mouse-claude.md); [dispositions/results](../docs/development/pc-mouse-evidence.md).
+
+## SRC-0236 - Copilot independent controller test artifact
+
+- One read-only request from API/contract only, implementation withheld.273 proposed original C lines, not executed by worker. Lead corrects two expected outcomes, adds license/port checks and two phase/result refusal controls; actual execution recorded separately.
+- [Brief](../docs/development/tasks/pc-mouse-copilot.md), [evidence](../docs/development/pc-mouse-evidence.md). Paid/free/trial plan and remaining allowance remain unspecified.
+
+## SRC-0237 - Lead controller integration and actual verification
+
+- Codex,2026-10-16: eligible source section checks, original engineering decisions, artifact review/corrections, native/full-startup test fixtures, build/import/ABI/omission checks and ordinary records. No UART implementation/test-body inspection or modification.
+- SPEC-0040 / ADR-0046 / IMPL-0044 / TEST-0048; [evidence](../docs/development/pc-mouse-evidence.md).

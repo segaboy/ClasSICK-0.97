@@ -1,0 +1,12 @@
+# PC mouse claude prompt
+
+Read only packet.txt once, 660lines,EOFknown. Deliver the substantial original implementation: platform/pc/ps2-bus.h/.c, fullreplacement platform/uefi/keyboard.c preservingdefault0 behavior and macro1 binding above, tests/ps2-bus.c (fullstartup and focusedprimarycases, may reuseoriginalps2-fixture with a mousewrapper), tests/native-pointer.c (nativehostedgates/scene/input/v2trace/guard test usingprovidedACPI fixture; ownscriptedports, no UART), SPEC-0040 draft <=90lines atdocs/specifications/SPEC-0040-pc-mouse-controller.md, plus unique exact old/new edits tops2.h/.c exposingreceive. Keepoutput <=900lines; concise code. Do not supply buildsystemartifacts; integratorwires. ReturnJSON {files:[{path,content}],edits:[{path,old,new}],handoff:{result,actionable_findings,tests_executed:[],blockers,decisions_needed}}. No implementationplanonly: usable code/tests required. APIs/phases pinned; no new privateprotocol/UARTinspection. Defaultprofileexistingbehavior mustremain. Do not copy manual or external code; allcodeoriginal.
+
+Reviewed-public baseline`de7eab48d5721a4b55975d6b732ed91a5372f7f5`; exact frozen input identities recorded in evidence. Excludes manuals/HQ/original research/UART bodies; captures outsideGit. Sharedcontract: [controllerbrief](pc-mouse-contract.md).
+
+## Corrected bounded retry
+
+Initial combined code/native/test request expired at360s without an artifact.
+The following retry used the same packet with supported low effort and partial-output capture.
+
+Read only packet.txt once, 660lines,EOFknown. Deliver only the substantial implementation: platform/pc/ps2-bus.h/.c and unique exact old/new edits for ps2.h/.c and platform/uefi/keyboard.c (do not repeat unchanged functions/file; use a global replacement entry {path,old,new,all:true} for the repeated d.keyboard/d->keyboard field-to-pointer changes). A concise spec at docs/specifications/SPEC-0040-pc-mouse-controller.md may be <=65 lines. No test artifacts this retry: independent tests exist; integrator owns native integration test. Return JSON {files:[{path,content}],edits:[{path,old,new,all?:true}],handoff:{result,actionable_findings,tests_executed:[],blockers,decisions_needed}}. Total <=450 lines; header+core first, concise exact binding edits next, then spec. Preserve default0 behavior and macro1 semantics from contract. Do not produce plan or whole keyboard.c. Read packet only. No commands/writes/tests/web/extra paths/subagents. All code original. Stop after artifact.

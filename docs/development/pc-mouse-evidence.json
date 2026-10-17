@@ -1,0 +1,207 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-16",
+  "sources": [
+    "SRC-0233",
+    "SRC-0234",
+    "SRC-0235",
+    "SRC-0236",
+    "SRC-0237"
+  ],
+  "baseline_public_revision": "de7eab48d5721a4b55975d6b732ed91a5372f7f5",
+  "workers": {
+    "claude": {
+      "execution": {
+        "worker": "claude",
+        "exit_code": 0,
+        "timed_out": false,
+        "elapsed_seconds": 145.73,
+        "stream_bytes": 530985,
+        "stderr_bytes": 0
+      },
+      "input": {
+        "bytes": 39106,
+        "lines": 660,
+        "sha256": "54b17c3d21bc7123b492813f320f1097d0e8c3f749d2305259e62e1580f53901"
+      },
+      "response_sha256": "335b55918a42e0af43390e0760c1cab08c5482c141762f3d4ec497ab8de57f0a",
+      "packet_reads": 1,
+      "worker_test_runs": 0,
+      "worker_checkout_edits": 0,
+      "proposed_files": [
+        {
+          "path": "platform/pc/ps2-bus.h",
+          "lines": 21
+        },
+        {
+          "path": "platform/pc/ps2-bus.c",
+          "lines": 161
+        },
+        {
+          "path": "docs/specifications/SPEC-0040-pc-mouse-controller.md",
+          "lines": 38
+        }
+      ],
+      "calls": 2,
+      "first_attempt": {
+        "worker": "claude",
+        "exit_code": null,
+        "timed_out": true,
+        "elapsed_seconds": 360.05,
+        "stream_bytes": 211063,
+        "stderr_bytes": 0
+      },
+      "usage": {
+        "input_tokens": 4,
+        "cache_creation_input_tokens": 22239,
+        "cache_read_input_tokens": 5602,
+        "output_tokens": 17519,
+        "output_tokens_details": {
+          "thinking_tokens": 8391
+        },
+        "server_tool_use": {
+          "web_search_requests": 0,
+          "web_fetch_requests": 0
+        },
+        "service_tier": "standard",
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 22239,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "global",
+        "iterations": [
+          {
+            "input_tokens": 2,
+            "output_tokens": 17439,
+            "cache_read_input_tokens": 3218,
+            "cache_creation_input_tokens": 21405,
+            "cache_creation": {
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 21405
+            },
+            "type": "message"
+          }
+        ],
+        "speed": "standard",
+        "fallback_credit": null
+      },
+      "provider_list_cost_estimate_usd": 0.5294284,
+      "cost_is_subscription_bill": false,
+      "model": "claude-opus-5-5",
+      "disposition": "Adopted code/patches with AUX count correction, phase/result consistency guard and native queue-fault diagnostic. Lead handles integration tests, spec precision and build scripts."
+    },
+    "copilot": {
+      "execution": {
+        "worker": "copilot",
+        "exit_code": 0,
+        "timed_out": false,
+        "elapsed_seconds": 168.78,
+        "stream_bytes": 914862,
+        "stderr_bytes": 0
+      },
+      "input": {
+        "bytes": 13213,
+        "lines": 119,
+        "sha256": "dbb538bbf0ebbf9adb8c2c23d5b9f5568d9ccc100cf2616df94c52560253c070"
+      },
+      "response_sha256": "00aab79cb69787a5507757bde7278d425a6bcfbc8a60015e31f8a843fa9ec45b",
+      "packet_reads": 1,
+      "worker_test_runs": 0,
+      "worker_checkout_edits": 0,
+      "proposed_files": [
+        {
+          "path": "tests/ps2-bus-independent.c",
+          "lines": 273
+        }
+      ],
+      "calls": 1,
+      "usage": {
+        "totalPremiumRequestCost": 1,
+        "totalUserRequests": 1,
+        "totalNanoAiu": 26043130000,
+        "tokenDetails": {
+          "input": {
+            "tokenCount": 168
+          },
+          "cache_read": {
+            "tokenCount": 6728
+          },
+          "cache_write": {
+            "tokenCount": 9093
+          },
+          "output": {
+            "tokenCount": 23669
+          }
+        },
+        "modelMetrics": {
+          "claude-sonnet-5.5": {
+            "requests": {
+              "count": 2,
+              "cost": 1
+            },
+            "usage": {
+              "inputTokens": 15989,
+              "outputTokens": 23669,
+              "cacheReadTokens": 6728,
+              "cacheWriteTokens": 9093,
+              "reasoningTokens": 14016
+            },
+            "cacheExpiresAt": "2026-10-17T03:05:57.987Z",
+            "totalNanoAiu": 26043130000,
+            "aiCreditsStatus": "complete",
+            "tokenDetails": {
+              "input": {
+                "tokenCount": 168
+              },
+              "cache_read": {
+                "tokenCount": 6728
+              },
+              "cache_write": {
+                "tokenCount": 9093
+              },
+              "output": {
+                "tokenCount": 23669
+              }
+            }
+          }
+        },
+        "codeChanges": {
+          "linesAdded": 0,
+          "linesRemoved": 0,
+          "filesModifiedCount": 0,
+          "filesModified": []
+        }
+      },
+      "model": "claude-sonnet-5.5",
+      "plan_label": null,
+      "remaining_allowance": null,
+      "disposition": "273 proposed lines exceed260 budget by13. Corrected AUX count and overflow-header test expectation, added SPDX/license and port checks, explicit bounded signed conversions and2 lead forged-state controls. No implementation access."
+    }
+  },
+  "new_grok_calls": 0,
+  "new_antigravity_calls": 0,
+  "local_profiles": {
+    "clang-hosted-debug-a": 277,
+    "clang-hosted-sanitized": 277,
+    "gcc-i686": 232
+  },
+  "local_ctests": 786,
+  "final_independent_retests": 3,
+  "object_audits": 34,
+  "expected_abi_rejections": 2,
+  "efi_twins": 4,
+  "efi_corruption_rejections": 27,
+  "efi_omission_rejections": 18,
+  "mac_inputs_unchanged": 61,
+  "mac_rom_sha256": "5e415b9036802fcbb217fc6b98872b7e620a9603dbf4b478055e23f5ad68fdd7",
+  "uart_source_test_bodies_untouched": true,
+  "one_note_and_wiki_retired": true,
+  "worker_capture_paths_outside_git": true,
+  "chatgpt_quota_savings_measured": false,
+  "ci": {
+    "conclusion": "pending"
+  },
+  "new_target_trial": false,
+  "new_release": false,
+  "physical_human_historical_input_qualified": false
+}

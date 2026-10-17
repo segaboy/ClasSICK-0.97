@@ -1,5 +1,9 @@
 # 68000 application runtime plan - 2026-10-12
 
+2026-10-16: SPEC-0040 implements single-owner8042 keyboard/mouse startup and routing, plus an explicit native x64 PC mouse build profile. Shared button semantics and512x342 scene match the existing Mac/Windows foundation. Hosted/compiler/EFI candidate evidence only; no emulator/VM/hardware/reference trial or release. Default legacy keyboard contract/trace, UART source/test bodies, Mac ROM inputs,24 originals/copies and frozen wiki remain preserved.
+
+[PC mouse checkpoint](pc-mouse-evidence.md).
+
 2026-10-16: SPEC-0039 adds shared native button edges, a pure PS/2 report decoder and Windows/native-Mac scene bindings. Freestanding PC8042 startup/routing, pointer motion and full event parity remain open. No new target trial or release. OneNote and its Git wiki queue are permanently retired; existing wiki files stay frozen history.
 
 [Native mouse evidence](mouse-input-evidence.md).

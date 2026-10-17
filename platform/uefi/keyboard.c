@@ -4,8 +4,17 @@
 #include "../../apps/boot-scene/scene.h"
 #include "../pc/acpi.h"
 #include "../pc/pmtimer.h"
+#ifndef CLASSICK_PC_MOUSE
+#define CLASSICK_PC_MOUSE 0
+#endif
+#if CLASSICK_PC_MOUSE
+#include "../pc/ps2-bus.h"
+#endif
 typedef struct {
-    cs_ps2 keyboard;
+    cs_ps2 *keyboard; /* selected: legacy local or embedded bus.keyboard */
+#if CLASSICK_PC_MOUSE
+    cs_ps2_bus *bus;
+#endif
     cs_time elapsed;
     uint64_t reads;
     uint64_t ticks;
@@ -36,7 +45,7 @@ static void qualify(uint32_t result,const diagnostics *d)
     const cs_uefi_handoff *h=d->handoff;
     if(q==NULL) return;
     put(q,CS_QUAL_TRACE_MAGIC,4); put(q+4,CS_QUAL_TRACE_VERSION,4); put(q+8,result,4);
-    put(q+12,d->keyboard.result,4); put(q+16,d->keyboard.port_before,4); put(q+20,d->keyboard.port_after,4);
+    put(q+12,d->keyboard->result,4); put(q+16,d->keyboard->port_before,4); put(q+20,d->keyboard->port_after,4);
     put(q+24,d->before,4); put(q+28,d->after,4); put(q+32,d->partner_type,4);
     put(q+36,h!=NULL?h->firmware_revision:0u,4); put(q+40,d->cell,8); put(q+48,d->partner,8);
     put(q+56,d->partner_attribute,8); put(q+64,h!=NULL?h->image_base:0u,8);
@@ -90,18 +99,39 @@ static uint32_t probe(diagnostics *d)
     for(unsigned i=0;i<CS_QUAL_CELL_BYTES;++i) cell[i]=saved[i];
     return matched==2u*CS_QUAL_CELL_BYTES?CS_QUAL_ALIAS:CS_QUAL_PASS;
 }
+#if CLASSICK_PC_MOUSE
+static uint32_t total(uint32_t a,uint32_t b) { return a>UINT32_MAX-b?UINT32_MAX:a+b; }
+#endif
+/* SPEC-0040: shown input count; Space only in the legacy profile. */
+static uint32_t inputs(const diagnostics *d)
+{
+#if CLASSICK_PC_MOUSE
+    return total(d->space,d->bus->left.presses);
+#else
+    return d->space;
+#endif
+}
 static uint32_t record(unsigned char *trace,uint32_t result,const diagnostics *d)
 {
     put(trace,CS_KBD_TRACE_MAGIC,4); put(trace+4,1,4); put(trace+8,result,4);
-    put(trace+12,d->keyboard.result,4); put(trace+16,d->keyboard.phase,4);
+    put(trace+12,d->keyboard->result,4); put(trace+16,d->keyboard->phase,4);
     put(trace+20,d->seconds,4); put(trace+24,d->elapsed.seconds,4); put(trace+28,d->elapsed.nanoseconds,4);
     put(trace+32,d->frames,4); put(trace+36,d->space,4); put(trace+40,d->escape,4);
-    put(trace+44,d->consumed,4); put(trace+48,d->keyboard.dropped,4); put(trace+52,d->keyboard.errors,4);
-    put(trace+56,d->keyboard.auxiliary,4); put(trace+60,d->keyboard.drained,4);
-    put(trace+64,d->keyboard.resends,4); put(trace+68,d->late,4); put(trace+72,d->max_delta,4);
-    put(trace+76,d->step,4); put(trace+80,d->keyboard.held,4); put(trace+84,d->key,4);
+    put(trace+44,d->consumed,4); put(trace+48,d->keyboard->dropped,4); put(trace+52,d->keyboard->errors,4);
+    put(trace+56,d->keyboard->auxiliary,4); put(trace+60,d->keyboard->drained,4);
+    put(trace+64,d->keyboard->resends,4); put(trace+68,d->late,4); put(trace+72,d->max_delta,4);
+    put(trace+76,d->step,4); put(trace+80,d->keyboard->held,4); put(trace+84,d->key,4);
     put(trace+88,d->action,4); put(trace+92,d->sequence,4); put(trace+96,d->reads,8);
-    put(trace+104,d->keyboard.last_byte,4); put(trace+108,d->keyboard.configuration,4);
+    put(trace+104,d->keyboard->last_byte,4); put(trace+108,d->keyboard->configuration,4);
+#if CLASSICK_PC_MOUSE
+    /* SPEC-0040 v2 overlay: same 112 bytes, other fields unchanged. */
+    put(trace+4,2,4); put(trace+12,d->bus->result,4); put(trace+16,d->bus->phase,4);
+    put(trace+36,inputs(d),4); put(trace+52,total(d->keyboard->errors,d->bus->errors),4);
+    put(trace+56,total(d->keyboard->auxiliary,d->bus->auxiliary),4);
+    put(trace+60,total(d->keyboard->drained,d->bus->drained),4);
+    put(trace+64,total(d->keyboard->resends,d->bus->resends),4);
+    put(trace+104,d->bus->last_byte,4); put(trace+108,d->bus->configuration,4);
+#endif
     qualify(result,d);
     if(d->observer!=NULL) d->observer(d->context,d->ticks,trace,result!=CS_KBD_RUNNING?1u:d->notice);
     return result;
@@ -109,14 +139,19 @@ static uint32_t record(unsigned char *trace,uint32_t result,const diagnostics *d
 static int draw(cs_boot_scene *scene,diagnostics *d,uint32_t step)
 {
     cs_boot_report report;
-    if(cs_boot_scene_draw_input(scene,step,d->space,&report)!=CS_BOOT_OK) return 0;
-    d->step=step; d->shown_space=d->space; increment(&d->frames); return 1;
+    if(cs_boot_scene_draw_input(scene,step,inputs(d),&report)!=CS_BOOT_OK) return 0;
+    d->step=step; d->shown_space=inputs(d); increment(&d->frames); return 1;
 }
 uint32_t cs_native_keyboard_observed(const cs_uefi_handoff *h,uint32_t ready,
     const cs_native_devices *dev,const cs_ps2_io *keyboard,uint32_t seconds,unsigned char *trace,
     unsigned char *qualification,cs_keyboard_observer observer,void *context)
 {
     diagnostics d;
+#if CLASSICK_PC_MOUSE
+    cs_ps2_bus bus;
+#else
+    cs_ps2 legacy;
+#endif
     cs_acpi_pm_timer timer;
     cs_pmtimer counter;
     cs_uefi_framebuffer_layout layout;
@@ -129,7 +164,11 @@ uint32_t cs_native_keyboard_observed(const cs_uefi_handoff *h,uint32_t ready,
     size_t descriptors;
     uint32_t present=0,delta,still=0,offset=0,step=0,active=0;
     uint64_t start=0;
-    (void)cs_ps2_begin(&d.keyboard);
+#if CLASSICK_PC_MOUSE
+    (void)cs_ps2_bus_begin(&bus); d.bus=&bus; d.keyboard=&bus.keyboard;
+#else
+    (void)cs_ps2_begin(&legacy); d.keyboard=&legacy;
+#endif
     d.elapsed.seconds=0; d.elapsed.nanoseconds=0; d.reads=0; d.seconds=seconds;
     d.ticks=0; d.observer=observer; d.context=context;
     d.notice=2;
@@ -187,7 +226,11 @@ uint32_t cs_native_keyboard_observed(const cs_uefi_handoff *h,uint32_t ready,
         if(delta>counter.mask/2u) increment(&d.late);
         still=delta==0?still+1u:0u;
         if(still>=CS_LOOP_STALL_READS) return record(trace,CS_KBD_STALLED,&d);
-        result=cs_ps2_poll(&d.keyboard,keyboard,counter.ticks,&queue);
+#if CLASSICK_PC_MOUSE
+        result=cs_ps2_bus_poll(&bus,keyboard,counter.ticks,&queue);
+#else
+        result=cs_ps2_poll(d.keyboard,keyboard,counter.ticks,&queue);
+#endif
         if(result>CS_PS2_READY)
             return record(trace,result==CS_PS2_MACHINE?CS_KBD_MACHINE:CS_KBD_KEYBOARD,&d);
         if(active==0) {
@@ -206,7 +249,13 @@ uint32_t cs_native_keyboard_observed(const cs_uefi_handoff *h,uint32_t ready,
         for(unsigned i=0;i<8;++i) {
             cs_input_result popped=cs_input_pop(&queue,&event);
             if(popped==CS_INPUT_ERR_EMPTY) break;
-            if(popped!=CS_INPUT_OK) { d.keyboard.result=CS_PS2_QUEUE; return record(trace,CS_KBD_KEYBOARD,&d); }
+            if(popped!=CS_INPUT_OK) {
+                d.keyboard->result=CS_PS2_QUEUE;
+#if CLASSICK_PC_MOUSE
+                bus.result=CS_PS2_QUEUE;
+#endif
+                return record(trace,CS_KBD_KEYBOARD,&d);
+            }
             increment(&d.consumed); d.key=event.event.key; d.action=event.event.action; d.sequence=event.sequence;
             if(event.event.action==CS_KEY_PRESS && event.event.repeat==0) {
                 if(event.event.key==CS_KEY_SPACE) { increment(&d.space); offset=(offset+1u)%17u; }
@@ -218,7 +267,7 @@ uint32_t cs_native_keyboard_observed(const cs_uefi_handoff *h,uint32_t ready,
             }
         }
         want=(step+offset)%17u;
-        if(want!=d.step || d.space!=d.shown_space) {
+        if(want!=d.step || inputs(&d)!=d.shown_space) {
             if(!draw(&scene,&d,want)) return record(trace,CS_KBD_DRAW,&d);
             (void)record(trace,CS_KBD_RUNNING,&d);
         }
