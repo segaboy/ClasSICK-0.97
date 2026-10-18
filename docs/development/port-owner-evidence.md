@@ -47,10 +47,13 @@ fault. Failure quarantines without rollback. Unproved quiescence keeps all borro
 live and refuses cleanup. The complete actual stopped CPU frame survives retirement.
 
 ## Executed local checks
-814 CTest invocations:286 hosted Clang,286 ASan/UBSan,241 GCC32,and one focused
-final Clang rerun after the last selector-only gap corrections. All pass. The final
-owner suite checks52679 assertions per run. Ten strict32/64-bit Clang/GCC and
-little/big-endian ARM object audits pass with exact project imports and no mutable
+937 CTest invocations (including post-fix repeats):286 hosted Clang,286 ASan/UBSan,241 GCC32,and one focused
+final Clang rerun after the last selector-only gap corrections,and120 focused
+owner/image/legacy-run checks across all three compilers after the compiler and
+unresolved-borrow corrections,then3 selector checks after the final context-proof
+clarification. All pass. The final
+owner suite checks52683 assertions per run. Twenty strict32/64-bit Clang/GCC and
+little/big-endian ARM object audits of both owner and coordinator pass with exact project imports and no mutable
 global data. Six deliberately broken implementations are rejected by assertions:
 NIL Set,stale-NIL Get,missing anchor clear,retained resolved workspace,unchecked
 consumed record and premature ready state. These controls ran outside Git.
@@ -88,3 +91,26 @@ stay open. Selection is not InitGraf/OpenPort/full QuickDraw,global trap registr
 JSR equivalence,a native SDK or a selected-port drawing adapter.24 research originals/
 intake copies,UART bodies,old rows/releases/tags and frozen wiki must remain intact.
 OneNote/wiki are permanently retired.
+
+## Native68000 compiler correction
+The initial CI39094146156/8a26e21 native job rejected unresolved `memset`. The new
+temporary span array initialized only two of six elements; the backend zeroed the
+unused entries through a library call despite freestanding/no-builtin settings.
+Lead replaced this with explicit assignments to live elements,without an API or
+algorithm change. No runtime helper/library was added. The width/endian audit now
+covers code-image.c as well as code-select.c (20 final objects),and60 focused
+Clang/sanitized/GCC32 owner/image/legacy tests pass on the correction. The native
+link audit now identifies the importing source module on unresolved symbols.
+The corrected CI must pass before native68000 verification is claimed.
+
+The lead also made retries and retirement byte-inert while an unresolved borrow
+is retained: neither may reuse/clear the retained workspace or reports. A labelled
+retry snapshot case verifies this,with storage kept live through process exit.
+Final focused checks pass on all three profiles; all20 width/endian objects and
+the6 broken implementation controls were checked again on the complete correction.
+The original RELEASE report retains its original field meanings; selected-mode
+cleanup is accounted in the dedicated scrubbed_bytes/anchor_bytes/handback fields.
+
+Final shutdown proof also checks actual ordinary root/callback/patch/manager/session
+context fields before ending native borrows; nonquiescence forces quarantine.
+All three selector profiles,20 objects and6 broken controls pass on that exact code.

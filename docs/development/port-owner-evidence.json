@@ -127,9 +127,9 @@
       }
     ],
     "focused_final_debug_ctests": 1,
-    "ctest_invocations": 814,
-    "final_owner_assertions": 52679,
-    "width_endian_objects": 10,
+    "ctest_invocations": 937,
+    "final_owner_assertions": 52683,
+    "width_endian_objects": 20,
     "broken_implementation_controls": [
       {
         "name": "set-nil",
@@ -167,7 +167,10 @@
         "exit_code": 1,
         "diagnostic": "line 104: cs_image_run_selection_retire(&f->w->image,&f->req.run,&f->w->image_workspace, sizeof f->w->image_workspace,&f->desc,r)==CS_IMAGE_OK"
       }
-    ]
+    ],
+    "post_compiler_correction_ctests": 60,
+    "post_borrow_correction_ctests": 60,
+    "post_quiescence_proof_ctests": 3
   },
   "ci": {
     "status": "pending",
@@ -178,15 +181,24 @@
   "remaining_provider_allowance": "not exposed by task receipts; unknown for Claude/Copilot/Grok/Antigravity",
   "usage_limits": "Provider counters/list-cost estimates are not subscription bills or cross-provider ChatGPT-quota savings. Timed-out call has no final usage receipt. Copilot limit is soft; totalNanoAiu unit is retained without conversion.",
   "inputs": {
-    "personality/system1/code-image.c": "d5387cfd6dab3b6d94f580d17eb91c1e856cab2c9d8f042f6cf94b4fe2b95397",
+    "personality/system1/code-image.c": "daa29c05dc9ecdda51ad8dfa6e511aac572910c4ffb1801a73d893c37e7da234",
     "personality/system1/code-image.h": "6d95d79e9b33817ce2333c4d1323e92275feab884f53d3f10b439606ea91b50d",
     "personality/system1/code-run-internal.h": "4a78a56205337a4b2f868a59bff199767221cb61cb987bec5a79d9e1ec792b22",
-    "personality/system1/code-select.c": "959ed1a52f3807b0a89f8a5985b2ac3409a5589aeb419b292989b20900eb1cf7",
+    "personality/system1/code-select.c": "0a0fe60d3ff0574c0c8c63ad2b0ba9ae9a91c5aaf6e4d1967b98d4e6af3899ae",
     "personality/system1/code-select.h": "9036683e158a2e9d765e8ebe5eb9ae83f531b9272174210251d2e292d7b93f5c",
-    "tests/code-select-independent.c": "5bf14340721901bb64d2e3d0014e61d1feca07c124bf565b9e888c534a5ea520",
-    "scripts/Verify-PortOwnerM68k.py": "96015050e7d1753e1fdd14ae9c880b03d326b619cdd8160f6cadabb8087ba5cc",
-    "scripts/Verify-PortOwnerObjects.ps1": "81f2c12dd767e76d8bbe04d121a54dc27ff81dc1410d2da30894f6a3dc22fd8e",
+    "tests/code-select-independent.c": "c1668d52f0417e100c4a5c37d9f44c90748d4f9f02ae6f253a20769e78a3ccdc",
+    "scripts/Verify-PortOwnerM68k.py": "f1e2f6982ed2999fae13d8f26650fd0332ffc873880fa91188a541df6de109c9",
+    "scripts/Verify-PortOwnerObjects.ps1": "6a26d4fd96a5ae04bbda2ea29db890e2df2d8a8daebdffe84997167d81cd3bf2",
     "CMakeLists.txt": "683e9680801f13036b4f3d8fe811e584e5ad69833472114b5d3b591412331787",
     ".github/workflows/bootstrap.yml": "865706b7b8c286cf030468e8e03849f8c72832259894188ac84923b471eabd40"
-  }
+  },
+  "ci_attempts": [
+    {
+      "headSha": "8a26e213a5e5dc6737abad584025e0e84f851497",
+      "run_id": 39094146156,
+      "native68000_conclusion": "failure",
+      "cause": "Compiler-generated memset from partially initialized temporary span array; explicit live-element assignment replaces it.",
+      "corrected": true
+    }
+  ]
 }

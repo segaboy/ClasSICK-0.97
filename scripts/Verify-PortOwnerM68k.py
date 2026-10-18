@@ -62,7 +62,13 @@ def main():
             run([bins / 'm68k-linux-gnu-ld', '-r', *objects, '-o', combined])
             undefined = run([nm, '-u', combined]).strip()
             if undefined:
-                raise ValueError('Unresolved owner closure: ' + undefined)
+                names = {line.split()[-1] for line in undefined.splitlines()}
+                owners = {name: run([nm, '-u', obj]).strip()
+                    for name, obj in zip(MODULES, objects)
+                    if any(line.split()[-1] in names
+                           for line in run([nm, '-u', obj]).splitlines())}
+                raise ValueError('Unresolved owner closure: ' + undefined + '\n'
+                                 + json.dumps(owners, indent=2))
             symbols = run([nm, '--defined-only', '--format=posix', combined])
             for entry in ('cs_image_run_selection', 'cs_image_run_selection_retire',
                           'cs_qd_select_get', 'cs_qd_select_set'):

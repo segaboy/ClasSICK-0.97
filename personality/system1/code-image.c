@@ -650,7 +650,9 @@ int cs_image_select_native(cs_image_service *s,const cs_image_select_request *q,
         capacity<sizeof *w || !OBJ(r,cs_image_select_report) || !OBJ(q->selection,cs_qd_selection))return 0;
     const cs_qd_selection *c=q->selection;
     if(c->count<1u || c->count>CS_QD_SELECT_CAPACITY)return 0;
-    span part[2u+2u*CS_QD_SELECT_CAPACITY]={{&q->selection,sizeof q->selection},{c,sizeof *c}};unsigned n=2;
+    span part[2u+2u*CS_QD_SELECT_CAPACITY];unsigned n=2;
+    /* Explicit live elements avoid a compiler-generated memset for unused slots. */
+    part[0]=(span){&q->selection,sizeof q->selection};part[1]=(span){c,sizeof *c};
     for(uint32_t i=0;i<c->count;++i){const cs_qd_view *v=c->bindings[i].view;
         if(!OBJ(v,cs_qd_view) || !OBJ(v->port,cs_qd_rect_port))return 0;
         part[n++]=(span){v,sizeof *v};part[n++]=(span){v->port,sizeof *v->port};}

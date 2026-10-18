@@ -356,6 +356,11 @@ static void test_faults(void)
         uint8_t *ws=snap(f->ws,sizeof *f->ws);
         if(kind==CS_IMAGE_SELECT_TEST_QUIESCENCE){
             REQUIRE(f->rep.borrow_unresolved==1 && !zero(f->ws,sizeof *f->ws));
+            uint8_t *saved_report=snap(&f->rep,sizeof f->rep);
+            REQUIRE(cs_image_run_selection(&f->w->image,&f->req,&f->caller,f->ws,
+                sizeof *f->ws,&f->rep)==CS_IMAGE_RUN_REFUSED);
+            same(&f->rep,saved_report,sizeof f->rep);
+            REQUIRE(!memcmp(f->ws,ws,sizeof *f->ws));
         } else {
             REQUIRE(f->rep.borrow_unresolved==0 && zero(f->ws,sizeof *f->ws));
             REQUIRE(f->rep.first_fault_cause==(kind==CS_IMAGE_SELECT_TEST_BINDING?

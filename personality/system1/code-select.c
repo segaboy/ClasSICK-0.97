@@ -217,6 +217,11 @@ static cs_image_run_result finish(cs_image_service *s,cs_image_select_workspace 
     cs_image_select_report *r,cs_image_run_result result,cs_image_select_cause cause)
 {
     cs_image_select_state *o=&s->select;
+    const cs_image_context *c=&w->policy.request->run.context;
+    o->quiescent=!o->depth && c->context==CS_LIFE_ORDINARY && !c->active_root &&
+        !c->active_callback && !c->active_patch && !c->active_manager && !c->session;
+    if(!o->quiescent){result=CS_IMAGE_RUN_QUARANTINED;
+        if(cause==CS_IMAGE_SELECT_OK)cause=CS_IMAGE_SELECT_LEASE;}
     frame_copy(&r->run.guest,&w->guest);r->run.status=result;
     s->execution_state=result==CS_IMAGE_RUN_RETURNED?3u:result==CS_IMAGE_RUN_QUARANTINED?5u:4u;
     o->phase=result==CS_IMAGE_RUN_QUARANTINED?CS_IMAGE_SELECT_QUARANTINE:CS_IMAGE_SELECT_STOPPED;
@@ -225,7 +230,7 @@ static cs_image_run_result finish(cs_image_service *s,cs_image_select_workspace 
         o->stop_steps=r->run.steps;o->stop_entered=r->run.entered;frame_copy(&o->stop_frame,&w->guest);}
     if(cause!=CS_IMAGE_SELECT_OK && !o->fault_valid){o->fault_valid=1;o->fault_cause=cause;
         o->fault_phase=CS_IMAGE_SELECT_ACTIVE;o->fault_pc=w->guest.pc;o->fault_word=w->word;}
-    o->quiescent=o->depth==0;o->borrow_open=o->quiescent?0u:1u;
+    o->borrow_open=o->quiescent?0u:1u;
     r->cause=cause;fill(s,r,0);
     if(o->quiescent)clear(w,capacity);
     return result;
@@ -327,6 +332,8 @@ cs_image_run_result cs_image_run_selection(cs_image_service *s,const cs_image_se
     cs_trap_frame *caller,cs_image_select_workspace *w,size_t capacity,cs_image_select_report *r)
 {
     if(!cs_image_select_native(s,q,caller,w,capacity,r))return CS_IMAGE_RUN_ARGUMENT;
+    /* A retained unresolved workspace cannot become scratch for a retry. */
+    if(s->select.borrow_open)return CS_IMAGE_RUN_REFUSED;
     run_control control;copy(&control.request,q,sizeof *q);
     copy(&control.config,&q->run.gateway->config,sizeof control.config);control.magic=q->run.gateway->magic;
     clear(r,sizeof *r);r->run.status=CS_IMAGE_RUN_REFUSED;
@@ -347,6 +354,7 @@ cs_image_result cs_image_run_selection_retire(cs_image_service *s,const cs_image
     cs_image_workspace *w,size_t capacity,cs_image_description *out,cs_image_select_report *r)
 {
     if(!cs_image_select_retire_native(s,q,w,capacity,out,r))return CS_IMAGE_ARGUMENT;
+    if(s->select.borrow_open)return CS_IMAGE_STATE;
     cs_image_select_state *o=&s->select;cs_guest_view below,anchor;
     clear(r,sizeof *r);
     if(o->phase!=CS_IMAGE_SELECT_STOPPED ||
