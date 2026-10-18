@@ -49,7 +49,7 @@ Local PC: four O0/O2 twin EFI images,27 corruption rejections,21 omitted-object
 controls; two original media writers agree and the independent filesystem/payload
 checker passes. All target images remained unloaded. Actual native hosted render
 previews are outside Git; their hashes are in the receipt,not boot screenshots.
-CI/paired68000 candidate verification pending.
+[CI 39165130102](https://github.com/segaboy/ClasSICK-0.97/actions/runs/39165130102) passes at `ac4e7b31784dde1620938ca9a2855e61f14d7c1c`: 3068 CTests across11 profiles. Mac ROM twins match at `1cd00f53acefff1be8c553924d3b5d27d2e9f964a551b6de2b38330878800167`; 10088 used ROM bytes,3088 workspace bytes,11200 conservative summed-frame stack bound. Its isolated native selection/view closure has no unresolved imports or interpreter symbols. PC O0/O2 twins and both media writers match; O2 EFI `a19e85ff866586fc6eada703e1c9a2ec8d1c2a42e113d911260afb4f92c72e36`, disk `8a2eaf896b7e51363182d7ee53741429dd14d943b87dd3e63298c8b944ee9fac`. CI and local PC image hashes agree. These are unbooted candidates,not releases or full128K/target qualification. Raw artifacts remain outside Git.
 
 ## Build/use and remaining gates
 Build Mac with Build-LoadedAppROM.py --selected-drawing and the pinned tool root.

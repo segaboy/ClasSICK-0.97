@@ -163,8 +163,26 @@
     "target_executed": false
   },
   "ci": {
-    "status": "pending",
-    "conclusion": null
+    "headSha": "ac4e7b31784dde1620938ca9a2855e61f14d7c1c",
+    "status": "completed",
+    "conclusion": "success",
+    "url": "https://github.com/segaboy/ClasSICK-0.97/actions/runs/39165130102",
+    "databaseId": 39165130102,
+    "ctests": 3068,
+    "profiles": 11,
+    "profile_ctests": [
+      290,
+      290,
+      290,
+      290,
+      290,
+      261,
+      290,
+      274,
+      274,
+      274,
+      245
+    ]
   },
   "target_run": false,
   "release": false,
@@ -188,5 +206,83 @@
   "hosted_previews": {
     "mac-hosted-preview.png": "e904ac70f45c6e552d860869be66ff342f496ed9cefa8afa12f88429b55f6858",
     "pc-hosted-preview.png": "df8f5f5afb7b6dc9bee23d721aafbdbd52aaecb9827b09bd431d458b3d0f6283"
+  },
+  "native_mac": {
+    "image_sha256": "1cd00f53acefff1be8c553924d3b5d27d2e9f964a551b6de2b38330878800167",
+    "image_size": 65536,
+    "rom_used": 10088,
+    "native_data_bss": 2168,
+    "workspace_begin": 32768,
+    "workspace_end": 35856,
+    "native_stack_base": 8448,
+    "native_stack_top": 32768,
+    "conservative_stack_bound": 11200,
+    "individual_frame_max": 604,
+    "corruption_controls": 8,
+    "twins_equal": true,
+    "module_count": 29,
+    "closure": {
+      "specification": "SPEC-0047",
+      "native_drawing_context": "SPEC-0041",
+      "selected_original_modules": [
+        "apps/selected-drawing/workload.c",
+        "personality/system1/quickdraw-select.c",
+        "personality/system1/quickdraw-view.c",
+        "personality/system1/quickdraw-rects.c",
+        "arch/m68k/runtime.c"
+      ],
+      "undefined_imports": 0,
+      "interpreter_symbols": 0,
+      "twins_equal": true,
+      "object": {
+        "bytes": 7584,
+        "sha256": "4bdb0bf3ab27b357a0c08de5f34497040b800a026cf1776e32a1dc783de5633a"
+      },
+      "emulator_run": false
+    },
+    "manifest_sha256": "e9dd4b585a08739c8d4c8201fdb198997359dd52584e8653d601c11639062dea",
+    "target_executed": false
+  },
+  "native_pc": {
+    "images": [
+      {
+        "case": "clang-64-O0",
+        "sha256": "e712079d740096f2fdc409fa242022243548ea062e55157a756afe87c703f2da",
+        "size_bytes": 225792,
+        "image_size": 241664,
+        "relocations": 3,
+        "status": "passed-unloaded"
+      },
+      {
+        "case": "clang-64-O2",
+        "sha256": "a19e85ff866586fc6eada703e1c9a2ec8d1c2a42e113d911260afb4f92c72e36",
+        "size_bytes": 159232,
+        "image_size": 172032,
+        "relocations": 3,
+        "status": "passed-unloaded"
+      }
+    ],
+    "media": {
+      "image_sha256": "8a2eaf896b7e51363182d7ee53741429dd14d943b87dd3e63298c8b944ee9fac",
+      "payload_sha256": "a19e85ff866586fc6eada703e1c9a2ec8d1c2a42e113d911260afb4f92c72e36",
+      "image_bytes": 67108864,
+      "partition_first": 2048,
+      "partition_sectors": 126976,
+      "partition_name": "ClasSICK ESP",
+      "reserved_sectors": 78,
+      "fat_sectors": 985,
+      "clusters": 124928,
+      "payload_clusters": 311,
+      "free_clusters": 124614,
+      "header_crc": "7A6BB824",
+      "backup_crc": "F46774E1",
+      "loaded": false
+    },
+    "writer_twins_equal": true,
+    "width_endian_objects": 30,
+    "image_rejections": 27,
+    "omitted_object_rejections": 21,
+    "source_revision": "ac4e7b31784dde1620938ca9a2855e61f14d7c1c",
+    "target_executed": false
   }
 }
