@@ -135,3 +135,10 @@ Sonnet5.5 low for the distinct independent pixel/routing/refusal oracle. Freeze
 the explicit opt-in API/contract first; keep new implementation out of the oracle
 packet. No duplicated Grok/Argon call. Codex integrates and executes checks.
 [Actual receipt](selected-drawing-evidence.md). Existing no-writes/input/usage rules remain.
+
+## Paired visual workload allocation -2026-10-18
+Claude supplies one bounded native C/binding delta; Copilot independently checks
+two-port pixels and Mac/PC output from frozen API/contracts only. Both calls
+returned artifacts without retries. Smaller exact packets avoid repeating owner
+history; Codex integrates rather than recreating sound code. No new Grok/Argon
+call or qualification. [Actual results/limits](paired-selection-evidence.md).

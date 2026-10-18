@@ -26,7 +26,8 @@ def main():
     mode=p.add_mutually_exclusive_group()
     mode.add_argument('--drawing',action='store_true',help='Build the SPEC-0036 interpreted drawing candidate')
     mode.add_argument('--native-drawing',action='store_true',help='Build the SPEC-0038 direct native drawing candidate')
-    a=p.parse_args();repo=Path(__file__).resolve().parents[1];tools=Path(a.tool_root).resolve();out=Path(a.output).resolve()
+    mode.add_argument('--selected-drawing',action='store_true',help='Build the SPEC-0047 direct native two-port candidate')
+    a=p.parse_args();native=a.native_drawing or a.selected_drawing;repo=Path(__file__).resolve().parents[1];tools=Path(a.tool_root).resolve();out=Path(a.output).resolve()
     out.mkdir(parents=True,exist_ok=False);sys.dont_write_bytecode=True
     spec=spec_from_file_location('base_rom',repo/'scripts/Build-MacROM.py');h=module_from_spec(spec);spec.loader.exec_module(h)
     env=os.environ.copy();env['LD_LIBRARY_PATH']=str(tools/'usr/lib/x86_64-linux-gnu')
@@ -40,7 +41,7 @@ def main():
         program_source='apps/drawing-rom-app/program.S'
         program_hex='204d213c00380078213c000800082f08a8a2204d213c00300070213c001000102f08a8a370614e75'
         specification='SPEC-0036';profile='loaded-rectangles-v1'
-    if a.native_drawing:
+    if native:
         sources=tuple('platform/mac128k/native-drawing-entry.c' if s=='platform/mac128k/loaded-entry.c' else s for s in sources)
         sources+=('apps/native-drawing/workload.c','apps/product-scene/scene.c','core/input/mouse.c','personality/system1/quickdraw-view.c')
         headers+=('apps/native-drawing/workload.h','apps/product-scene/scene.h','core/input/mouse.h',
@@ -49,6 +50,11 @@ def main():
                   'docs/specifications/SPEC-0038-paired-native-drawing-workload.md',
                   'docs/specifications/SPEC-0037-shared-product-scene.md')
         program_source=None;program_hex='';specification='SPEC-0038';profile='native-rectangles-v1'
+    if a.selected_drawing:
+        sources+=('apps/selected-drawing/workload.c','personality/system1/quickdraw-select.c')
+        headers+=('apps/selected-drawing/workload.h','personality/system1/quickdraw-select.h',
+                  'docs/specifications/SPEC-0047-paired-selected-drawing.md')
+        specification='SPEC-0047';profile='native-selected-ports-v1'
     profiles=[]
     for twin in ('a','b'):
         folder=out/('Os-'+twin);folder.mkdir();objects=[]
@@ -57,6 +63,7 @@ def main():
          '-fno-asynchronous-unwind-tables','-fno-tree-loop-distribute-patterns','-fstack-usage',
          '-ffunction-sections','-fdata-sections','-Wall','-Wextra','-Werror','-Wconversion','-Wsign-conversion',
          '--sysroot='+str(tools),'-ffile-prefix-map='+str(repo)+'=.','-ffile-prefix-map='+str(folder)+'=.']
+        if a.selected_drawing:flags+=['-DCLASSICK_SELECTED_DRAWING=1']
         for i,source in enumerate(sources):
             obj=folder/f'{i}.o';objects.append(obj);h.run([cc,*flags,'-c',repo/source,'-o',obj],env)
             if source not in ('platform/mac128k/loaded-entry.c','platform/mac128k/drawing-entry.c','platform/mac128k/native-drawing-entry.c'):
@@ -68,10 +75,11 @@ def main():
          '-Wl,-T,'+str(repo/'arch/m68k/loaded-rom.ld'),'-Wl,-Map,'+str(folder/'classick-loaded-app.map')]
         h.run([*link,*objects,'-o',elf],env);syms=h.symbols(elf)
         if not 0x8000<=syms['__loaded_app_start']<syms['__loaded_app_end']<=0x1A000:raise ValueError('Workspace bounds')
-        required=('cs_native_draw','cs_qd_rect','cs_qd_view_init','cs_qd_view_offset','cs_qd_view_clip','cs_qd_view_rect','cs_product_scene') if a.native_drawing else (('cs_drawing_app_probe','cs_image_run_rectangles') if a.drawing else ('cs_loaded_app_probe','cs_image_run'))
-        if not a.native_drawing:required=(*required,'cs_m68k_bus_step_admitted')
+        required=('cs_native_draw','cs_qd_rect','cs_qd_view_init','cs_qd_view_offset','cs_qd_view_clip','cs_qd_view_rect','cs_product_scene') if native else (('cs_drawing_app_probe','cs_image_run_rectangles') if a.drawing else ('cs_loaded_app_probe','cs_image_run'))
+        if not native:required=(*required,'cs_m68k_bus_step_admitted')
+        if a.selected_drawing:required=tuple(x for x in required if x!='cs_native_draw')+('cs_selected_draw','cs_qd_select_get','cs_qd_select_set')
         if any(name not in syms for name in required):raise ValueError('Disconnected demonstration')
-        if a.native_drawing and any(name.startswith(('cs_image_','cs_m68k_','cs_drawing_app_','cs_aline_probe')) for name in syms):
+        if native and any(name.startswith(('cs_image_','cs_m68k_','cs_drawing_app_','cs_aline_probe')) for name in syms):
             raise ValueError('Unexpected interpreted application in native drawing profile')
         raw=folder/'loaded.raw';h.run([bins/'m68k-linux-gnu-objcopy','-O','binary',elf,raw],env)
         b=bytearray(raw.read_bytes());b.extend(bytes(65536-len(b)));struct.pack_into('>I',b,256,h.crc(b))
@@ -110,8 +118,8 @@ def main():
         if binary.read_bytes()!=bytes.fromhex(program_hex):raise ValueError('Original program encoding mismatch')
     manifest={'schema_version':1,'specification':specification,'profile':profile,
      'compiler':h.run([cc,'--version'],env).splitlines()[0],'profiles':[profiles[0]],'twins_equal':True,
-     'original_program_bytes':len(bytes.fromhex(program_hex)),'execution_path':'direct-native-c' if a.native_drawing else 'guarded-68k-fixture',
-     'module_count':len(sources),'native_drawing_context':('SPEC-0041' if a.native_drawing else None),'emulator_run':False,'system1_compatibility_proven':False,
+     'original_program_bytes':len(bytes.fromhex(program_hex)),'execution_path':'direct-native-c' if native else 'guarded-68k-fixture',
+     'module_count':len(sources),'selected_ports':bool(a.selected_drawing),'native_drawing_context':('SPEC-0041' if native else None),'emulator_run':False,'system1_compatibility_proven':False,
      'inputs':{f:hashlib.sha256((repo/f).read_bytes().replace(b'\r\n',b'\n')).hexdigest() for f in (*sources,*headers)}}
     (out/'manifest.json').write_text(json.dumps(manifest,indent=2)+'\n')
     print('First loaded-app ROM twins PASS:',profiles[0]['rom_used'],'ROM bytes,',profiles[0]['workspace_end']-0x8000,'workspace bytes; no boot trial.')

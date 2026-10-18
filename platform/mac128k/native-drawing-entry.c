@@ -31,16 +31,26 @@ static void write_reg(void *context,unsigned reg,uint8_t value)
     *(volatile uint8_t *)(uintptr_t)(UINT32_C(0xEFE1FE)+reg*512u)=value;
 }
 
-#include "../../apps/native-drawing/workload.h"
 #include "../../apps/product-scene/scene.h"
+#ifdef CLASSICK_SELECTED_DRAWING
+#include "../../apps/selected-drawing/workload.h"
+static cs_selected_draw_workspace selected __attribute__((section(".loaded_app")));
+cs_selected_draw_result cs_mac_selected_result;
+#define CS_MAC_DRAW cs_mac_selected_result.draw
+#define CS_MAC_PIXELS selected.pixels
+#else
+#include "../../apps/native-drawing/workload.h"
 static cs_qd_rect_port port __attribute__((section(".loaded_app")));
 cs_native_draw_result cs_mac_native_result;
+#define CS_MAC_DRAW cs_mac_native_result
+#define CS_MAC_PIXELS port.pixels
+#endif
 static int native_scene(const cs_surface *screen)
 {
     cs_product_state state;
-    state.value=cs_mac_native_result.value;state.inputs=0;state.progress=0;
-    state.phases=cs_mac_native_result.phase;state.success=cs_mac_native_result.success;
-    state.pixels=port.pixels;
+    state.value=CS_MAC_DRAW.value;state.inputs=0;state.progress=0;
+    state.phases=CS_MAC_DRAW.phase;state.success=CS_MAC_DRAW.success;
+    state.pixels=CS_MAC_PIXELS;
     return cs_product_scene(screen,512,342,0,&state);
 }
 void cs_mac_main(void)
@@ -56,9 +66,15 @@ void cs_mac_main(void)
     cs_mac_via_init(&io);
     if(cs_surface_init(&screen,(uint8_t *)(uintptr_t)0x1A700,CS_MAC_SCREEN_BYTES,
         512,342,64,CS_SURFACE_MONO1_MSB)!=CS_SURFACE_OK){cs_mac_diag.fault=3;for(;;){}}
+#ifdef CLASSICK_SELECTED_DRAWING
+    uint8_t *bytes=(uint8_t *)&selected;for(size_t i=0;i<sizeof selected;++i)bytes[i]=0;
+    (void)native_scene(&screen);
+    int success=cs_selected_draw(&selected,&cs_mac_selected_result);
+#else
     uint8_t *bytes=(uint8_t *)&port;for(size_t i=0;i<sizeof port;++i)bytes[i]=0;
     (void)native_scene(&screen);
     int success=cs_native_draw(&port,&cs_mac_native_result);
+#endif
     cs_mac_diag.stage=success?16u:8u;cs_mac_diag.fault=success?0u:8u;
     if(!native_scene(&screen)){cs_mac_diag.fault=4;for(;;){}}
     cs_mac_loop_begin(&loop,read_reg(0,0));

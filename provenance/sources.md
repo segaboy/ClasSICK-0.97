@@ -3212,3 +3212,19 @@ resulting public/HQ evidence after automatic approval initially blocked main.
 ## SRC-0273 - Lead selected drawing decisions and verification
 
 - Codex,2026-10-18: frozen opt-in PRF2/range/commit/lifetime decisions,artifact review,integration and actual compiler/test verification. [SPEC-0046](../docs/specifications/SPEC-0046-selected-port-drawing.md), [receipt](../docs/development/selected-drawing-evidence.md). Engineering evidence only,no new historical claims.
+
+## SRC-0274 - Owner paired visual workload continuation
+
+- Dean Howell,2026-10-18: "Do it." accepts the proposed paired visual workload after selected-port drawing. Shared native Mac/PC implementation,original tests/compiler/CI/candidates and ordinary Git/HQ; target trials/releases remain separately gated. No historical or physical/full128K/B2/System1 closure.
+
+## SRC-0275 - Claude original paired workload and binding proposal
+
+- Explicit Opus5.5 low,one bounded reviewed-public/original packet. [Prompt](../docs/development/tasks/paired-selection-claude.md). Engineering proposal only; no worker repository writes or tests.
+
+## SRC-0276 - Copilot independent native visual parity oracle
+
+- Explicit Sonnet5.5 low,frozen API/contracts and headers only,new implementation/logs withheld. [Prompt](../docs/development/tasks/paired-selection-copilot.md). Proposed tests become evidence only after lead execution.
+
+## SRC-0277 - Lead paired workload decisions and verification
+
+- Codex,2026-10-18: frozen native workload/display decisions,artifact integration and actual compiler/hosted/candidate verification. [SPEC-0047](../docs/specifications/SPEC-0047-paired-selected-drawing.md), [receipt](../docs/development/paired-selection-evidence.md). No new historical source facts or target execution.

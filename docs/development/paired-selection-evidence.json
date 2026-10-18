@@ -1,0 +1,192 @@
+{
+  "specification": "SPEC-0047",
+  "baseline": "71ccf7af12f2226e798d531cc3b643afa81ed2ad",
+  "frozen_api": {
+    "apps/selected-drawing/workload.h": "98063deca9234f02febcc71da6a47d9fcf64781f6acb3686f9b8d879c00c9664",
+    "docs/specifications/SPEC-0047-paired-selected-drawing.md": "ffb25d959be3a256335104bf33d499a4642eaa065919437a5453128bc95233dc"
+  },
+  "workers": [
+    {
+      "round": "implementation",
+      "worker": "claude",
+      "exit_code": 0,
+      "outer_timeout": false,
+      "elapsed_seconds": 63.67,
+      "input_bytes": 22691,
+      "input_sha256": "b83f46f4bc1208a89790221904a9c7b082fd9b82e413aced9d36441569a1cf04",
+      "stderr_bytes": 0,
+      "observed_tool_calls": 0,
+      "artifact_lines": 75,
+      "replacement_count": 5,
+      "tests_executed": [],
+      "reported_usage": {
+        "claude-opus-5-5": {
+          "inputTokens": 2,
+          "outputTokens": 7929,
+          "cacheReadInputTokens": 1452,
+          "cacheCreationInputTokens": 12080,
+          "webSearchRequests": 0,
+          "costUSD": 0.25551840000000003,
+          "contextWindow": 1000000,
+          "maxOutputTokens": 128000,
+          "thinkingTokens": 3462,
+          "canonicalModel": "claude-opus-5-5",
+          "provider": "firstParty",
+          "costBasis": "list"
+        }
+      }
+    },
+    {
+      "round": "implementation",
+      "worker": "copilot",
+      "exit_code": 0,
+      "outer_timeout": false,
+      "elapsed_seconds": 185.8,
+      "input_bytes": 19158,
+      "input_sha256": "7d374c50b426327bf4c8190ff7691e32922533c36b9431650749f8a3b6294a1a",
+      "stderr_bytes": 0,
+      "observed_tool_calls": 10,
+      "artifact_lines": 84,
+      "replacement_count": 0,
+      "tests_executed": [],
+      "instruction_deviations": [
+        "One input-only directory listing beyond the requested packet-only reads. Only prompt.txt was present; no other file content read."
+      ],
+      "reported_usage": {
+        "totalUserRequests": 1,
+        "totalPremiumRequestCost": 1,
+        "totalNanoAiu": 27383910000,
+        "tokenDetails": {
+          "input": {
+            "tokenCount": 942
+          },
+          "cache_read": {
+            "tokenCount": 123451
+          },
+          "cache_write": {
+            "tokenCount": 23704
+          },
+          "output": {
+            "tokenCount": 20035
+          }
+        },
+        "totalApiDurationMs": 177926,
+        "aiCreditsStatus": "complete"
+      }
+    }
+  ],
+  "local_tests": {
+    "final_full_suites": [
+      {
+        "profile": "debug",
+        "ctests": 290
+      },
+      {
+        "profile": "sanitized",
+        "ctests": 290
+      },
+      {
+        "profile": "gcc32",
+        "ctests": 245
+      }
+    ],
+    "final_ctests": 825,
+    "visual_assertions": 482430,
+    "source_contract_mutation_tests": 18,
+    "width_endian_objects": 30,
+    "broken_implementations": [
+      {
+        "name": "wrong-port",
+        "result": "assertion rejected broken implementation",
+        "diagnostic": "FAIL 88: cs_selected_draw(w,r)==1"
+      },
+      {
+        "name": "first-port-only",
+        "result": "assertion rejected broken implementation",
+        "diagnostic": "FAIL 88: cs_selected_draw(w,r)==1"
+      },
+      {
+        "name": "wrong-selections",
+        "result": "assertion rejected broken implementation",
+        "diagnostic": "FAIL 40: r->selections==2&&r->current==0x706Cu"
+      },
+      {
+        "name": "wrong-hash",
+        "result": "assertion rejected broken implementation",
+        "diagnostic": "FAIL 39: r->draw.black_pixels==n&&r->draw.pattern==fnv(u,sizeof u)"
+      },
+      {
+        "name": "failed-composite-published",
+        "result": "assertion rejected broken implementation",
+        "diagnostic": "line 28: !w->pixels[i]"
+      }
+    ]
+  },
+  "local_pc": {
+    "images": [
+      {
+        "case": "clang-64-O0",
+        "sha256": "e712079d740096f2fdc409fa242022243548ea062e55157a756afe87c703f2da",
+        "size_bytes": 225792,
+        "image_size": 241664,
+        "relocations": 3,
+        "status": "passed-unloaded"
+      },
+      {
+        "case": "clang-64-O2",
+        "sha256": "a19e85ff866586fc6eada703e1c9a2ec8d1c2a42e113d911260afb4f92c72e36",
+        "size_bytes": 159232,
+        "image_size": 172032,
+        "relocations": 3,
+        "status": "passed-unloaded"
+      }
+    ],
+    "image_rejections": 27,
+    "omitted_object_rejections": 21,
+    "media": {
+      "image_sha256": "8a2eaf896b7e51363182d7ee53741429dd14d943b87dd3e63298c8b944ee9fac",
+      "payload_sha256": "a19e85ff866586fc6eada703e1c9a2ec8d1c2a42e113d911260afb4f92c72e36",
+      "image_bytes": 67108864,
+      "partition_first": 2048,
+      "partition_sectors": 126976,
+      "partition_name": "ClasSICK ESP",
+      "reserved_sectors": 78,
+      "fat_sectors": 985,
+      "clusters": 124928,
+      "payload_clusters": 311,
+      "free_clusters": 124614,
+      "header_crc": "7A6BB824",
+      "backup_crc": "F46774E1",
+      "loaded": false
+    },
+    "writer_twins_equal": true,
+    "target_executed": false
+  },
+  "ci": {
+    "status": "pending",
+    "conclusion": null
+  },
+  "target_run": false,
+  "release": false,
+  "remaining_provider_allowance": "Unknown for Claude,Copilot,Grok,Argon; CLI task receipts expose consumption,not remaining account allowances.",
+  "usage_limits": "List-price/token/AIU counters are provider task data,not subscription charges or equivalent ChatGPT quota savings.",
+  "inputs": {
+    "apps/selected-drawing/workload.c": "1945f7c0a97cf1d96d8aaea935a14aa8f5b950770dec3d3e8cce7f41908524fa",
+    "apps/selected-drawing/workload.h": "98063deca9234f02febcc71da6a47d9fcf64781f6acb3686f9b8d879c00c9664",
+    "apps/boot-scene/scene.c": "d2a96abddbec4dbd028b8fb5e2204ebd5818273a3dde31ba3bf8937bbf9e2e9b",
+    "platform/mac128k/native-drawing-entry.c": "457aacf137fb0919c15748062ddf8993f9d1dd9aa1efe16438ab8eea0e1f2c0f",
+    "tests/selected-drawing-independent.c": "87a4a93efad9096852b397f6e25ba6e19cb55fff50dde68055452308518018aa",
+    "tests/selected-drawing-faults.c": "938efc3fd00661ea96eeaabaf05485281f8dd154a06cc46f06dd30e57bdc17bf",
+    "scripts/Build-LoadedAppROM.py": "d009b40726987434468b61c8a7a99cb8a3970743e8c0a335dd6f7cded1b7f891",
+    "scripts/Verify-NativeDrawingM68k.py": "dbeae96c2169ec8916b3f4b215c407c143c1fa155d8acf414a50466eb4cec840",
+    "scripts/Verify-UEFIImage.ps1": "632f4900bdc0b31bc94f6672dfe184c05b41d90dc90f508a11ba24b2ebeedce3",
+    "scripts/Verify-SelectedDrawingObjects.ps1": "8ff607ba6e98ac5eae8cff2ec917ed7902504b9fba90c4bc27f055ad5d87c9a9",
+    "scripts/Package-SelectedDrawingPC.ps1": "ea218e3cdf6472339bed86ecfde10303d5980577fafea6b2dfcb2eb01e3c1f98",
+    "CMakeLists.txt": "dfaa2ed6b15084d5fc0d3ceb5291050ff7d76ed0b977be085cf59a058c3f6c2b",
+    ".github/workflows/bootstrap.yml": "19b681ded7d68ad6727aa40f5d9aadcafc4a80996b16a6865aa73fb0425fd3b1"
+  },
+  "hosted_previews": {
+    "mac-hosted-preview.png": "e904ac70f45c6e552d860869be66ff342f496ed9cefa8afa12f88429b55f6858",
+    "pc-hosted-preview.png": "df8f5f5afb7b6dc9bee23d721aafbdbd52aaecb9827b09bd431d458b3d0f6283"
+  }
+}

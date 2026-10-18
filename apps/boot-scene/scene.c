@@ -4,10 +4,18 @@
 
 #include "../native-drawing/workload.h"
 #include "../service-probe/probe.h"
+#ifdef CLASSICK_SELECTED_DRAWING
+#include "../selected-drawing/workload.h"
+#endif
 typedef struct {
     cs_trap_gateway gateway;
+#ifdef CLASSICK_SELECTED_DRAWING
+    cs_selected_draw_workspace selected;
+    cs_selected_draw_result result;
+#else
     cs_qd_rect_port port;
     cs_native_draw_result result;
+#endif
 } boot_workspace;
 _Static_assert(sizeof(boot_workspace)+_Alignof(boot_workspace)-1u<=CS_BOOT_WORKSPACE_LIMIT,"Probe workspace budget");
 
@@ -48,8 +56,13 @@ cs_boot_result cs_boot_scene_prepare(cs_arena *arena,const cs_fb_target *target,
     unsigned char *bytes=(unsigned char *)(void *)w;
     for(size_t i=0;i<sizeof *w;++i)bytes[i]=0;
     cs_service_probe_result service;
+#ifdef CLASSICK_SELECTED_DRAWING
+    if(!cs_service_probe(&w->gateway,&service) ||
+        !cs_selected_draw(&w->selected,&w->result))return CS_BOOT_PROBE;
+#else
     if(!cs_service_probe(&w->gateway,&service) ||
         !cs_native_draw(&w->port,&w->result))return CS_BOOT_PROBE;
+#endif
     /* Field copies keep every optimization level free of memcpy helpers. */
     out->target.base=checked.base; out->target.size=checked.size;
     out->target.width=checked.width; out->target.height=checked.height;
@@ -57,9 +70,15 @@ cs_boot_result cs_boot_scene_prepare(cs_arena *arena,const cs_fb_target *target,
     out->staging=span.data;
     out->staging_bytes=staging;
     out->band_rows=(uint32_t)rows;out->workspace_bytes=offset-staging+sizeof *w;
+#ifdef CLASSICK_SELECTED_DRAWING
+    out->state.value=w->result.draw.value;out->state.inputs=0;out->state.progress=0;
+    out->state.phases=w->result.draw.phase;out->state.success=w->result.draw.success;
+    out->state.pixels=w->selected.pixels;
+#else
     out->state.value=w->result.value;out->state.inputs=0;out->state.progress=0;
     out->state.phases=w->result.phase;out->state.success=w->result.success;
     out->state.pixels=w->port.pixels;
+#endif
     return CS_BOOT_OK;
 }
 

@@ -1,5 +1,16 @@
 # ClasSICK 0.97 working instructions
 
+Current owner paired selected-port demonstration (2026-10-18,SRC-0274..0277):
+"Do it" accepts SPEC-0047 original native68000/x86 two-port visual workload,
+explicit Mac/PC candidate modes,independent tests/compiler/CI and ordinary Git/HQ.
+Shared branding,logical512x342/PCcentering and counter behavior persist; old modes
+and release assets retain behavior. Claude primary C/bindings,Copilot independent
+pixel/scene oracle,Codex sole writer/integrator/verifier. No target/emulator/VM/
+reference/hardware trial or release; source/edition/physical/full128K/B2/human/
+both System1 gates persist. Preserve24 originals/copies,UART,old rows/releases/
+tags/frozen wiki. No OneNote/wiki,extra chats/subagents/automation.
+[Evidence](docs/development/paired-selection-evidence.md).
+
 Current owner selected-port drawing scope (2026-10-18,SRC-0270..0273):
 "Continue with the next task" accepts SPEC-0046 opt-in drawing through current
 prepared port,original native68000/x86 code,independent tests/compiler/CI and
