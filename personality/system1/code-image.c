@@ -3,6 +3,10 @@
 #include "code-image.h"
 #include "code-run-internal.h"
 #define TAG UINT32_C(0x494D4731)
+static int select_owned(const cs_image_service *s,const cs_image_context *c);
+static int integrity(const cs_image_service *s,const cs_image_context *c,int dirty,uint32_t anchor);
+static int select_open(const cs_image_service *s)
+{return s->select.phase!=CS_IMAGE_SELECT_NONE && s->select.phase!=CS_IMAGE_SELECT_RETIRED;}
 typedef struct {const void *p;size_t n;} span;
 typedef struct {span spans[10];unsigned count;const void *owner;} envelope;
 static void zero(void *p,size_t n){uint8_t *b=p;for(size_t i=0;i<n;++i)b[i]=0;}
@@ -442,13 +446,17 @@ cs_image_result cs_image_init(cs_image_service *s,cs_life_controller *l,const cs
     copy(s->regions,s->map->regions,s->region_count*sizeof *s->regions);copy(&s->config,&s->manager->config,sizeof s->config);
     copy(&s->profile,p,sizeof *p);return CS_IMAGE_OK;
 }
-cs_image_result cs_image_execute(cs_image_service *s,const cs_image_request *q,cs_image_workspace *w,size_t capacity,
-    cs_image_description *out,cs_image_report *r)
+static cs_image_result execute(cs_image_service *s,const cs_image_request *q,cs_image_workspace *w,size_t capacity,
+    cs_image_description *out,cs_image_report *r,int handback)
 {
     if(!native_safe(s,q,w,capacity,out,r))return CS_IMAGE_ARGUMENT;
     zero(r,sizeof *r);r->operation=q->operation;r->phase=CS_IMAGE_ADMISSION;
     if(!identity(s) || s->state>CS_IMAGE_FAULTED || q->operation<CS_IMAGE_PREPARE || q->operation>CS_IMAGE_RELEASE)return failure(r,CS_IMAGE_STATE);
-    if(s->execution_state)return failure(r,s->execution_state==5?CS_IMAGE_FAULT:CS_IMAGE_IN_USE);
+    if(handback && (q->operation!=CS_IMAGE_RELEASE || s->select.phase!=CS_IMAGE_SELECT_HANDBACK ||
+        !select_owned(s,&q->context) || !integrity(s,&q->context,0,0)))return failure(r,CS_IMAGE_FAULT);
+    if(!handback && select_open(s))return failure(r,s->execution_state==5?CS_IMAGE_FAULT:CS_IMAGE_IN_USE);
+    if(s->execution_state && !(handback && q->operation==CS_IMAGE_RELEASE && s->select.phase==CS_IMAGE_SELECT_HANDBACK &&
+        (s->execution_state==3 || s->execution_state==4)))return failure(r,s->execution_state==5?CS_IMAGE_FAULT:CS_IMAGE_IN_USE);
     if(s->state==CS_IMAGE_FAULTED){r->state=CS_IMAGE_FAULTED;return failure(r,CS_IMAGE_FAULT);}
     status(s,r);
     if(s->state==CS_IMAGE_POPULATING || s->state==CS_IMAGE_RETIRING ||
@@ -488,7 +496,8 @@ cs_image_result cs_image_execute(cs_image_service *s,const cs_image_request *q,c
 cs_image_result cs_image_external_admit(const cs_image_service *s)
 {
     if(!OBJ(s,cs_image_service) || !identity(s))return CS_IMAGE_ARGUMENT;
-    if(s->execution_state==5)return CS_IMAGE_FAULT;
+    if(s->execution_state==5 || s->select.phase==CS_IMAGE_SELECT_QUARANTINE)return CS_IMAGE_FAULT;
+    if(select_open(s))return CS_IMAGE_IN_USE;
     if(s->state==CS_IMAGE_FAULTED)return CS_IMAGE_FAULT;
     if(s->state!=CS_IMAGE_EMPTY)return CS_IMAGE_IN_USE;
     if(!binding(s) || cs_life_admit(s->lifecycle)!=CS_LIFE_OK)return CS_IMAGE_CHANGED;
@@ -540,9 +549,10 @@ int cs_image_execution_retire_native(cs_image_service *s,const cs_image_run_requ
     if(!OBJ(w,cs_image_workspace) || capacity<sizeof *w || !OBJ(out,cs_image_description) ||
         !OBJ(r,cs_image_report))return 0;
     span outputs[3]={{w,capacity},{out,sizeof *out},{r,sizeof *r}};
-    return execution_safe(s,q,outputs,3);
+    if(!execution_safe(s,q,outputs,3))return 0;
+    return s->select.phase==CS_IMAGE_SELECT_NONE || s->select.phase==CS_IMAGE_SELECT_RETIRED;
 }
-int cs_image_execution_integrity(const cs_image_service *s,const cs_image_context *c,int dirty)
+static int integrity(const cs_image_service *s,const cs_image_context *c,int dirty,uint32_t anchor)
 {
     if(!identity(s) || s->state!=CS_IMAGE_LOADED || !inactive(s,c) || c->count!=1 ||
         c->resource_count || c->session || s->resource_count || s->session ||
@@ -562,14 +572,100 @@ int cs_image_execution_integrity(const cs_image_service *s,const cs_image_contex
             if(cs_guest_read(s->map,base+i*4u,4,CS_GUEST_READ,&value)!=CS_GUEST_OK)return 0;
             if((z==0 || !own) && value!=s->cells[z][i])return 0;}
     }
-    if(!dirty)return world_valid(s,1);
+    if(!dirty)return !anchor && world_valid(s,1);
     for(uint32_t i=s->manifest.below_a5;i<s->manifest.below_a5+s->manifest.above_a5;++i){
-        uint32_t at=s->layout.globals_begin+i;cs_guest_view v;
+        uint32_t at=s->layout.globals_begin+i,k=at-s->layout.a5;cs_guest_view v;
         if(cs_guest_window(s->map,at,1,CS_GUEST_READ,&v)!=CS_GUEST_OK)return 0;
-        uint8_t expected=at>=s->layout.table_begin && at<s->layout.table_end?table_byte(s,at-s->layout.table_begin):0;
+        uint8_t expected=(uint8_t)(at>=s->layout.table_begin && at<s->layout.table_end?table_byte(s,at-s->layout.table_begin):
+            at>=s->layout.a5 && k<4u?(uint8_t)(anchor>>((3u-k)*8u)):0u);
         if(v.bytes[0]!=expected)return 0;
     }
     return 1;
+}
+int cs_image_execution_integrity(const cs_image_service *s,const cs_image_context *c,int dirty)
+{return !select_open(s) && integrity(s,c,dirty,0);}
+cs_image_result cs_image_execute(cs_image_service *s,const cs_image_request *q,cs_image_workspace *w,size_t capacity,
+    cs_image_description *out,cs_image_report *r)
+{return execute(s,q,w,capacity,out,r,0);}
+/* Owner-internal handback: the unchanged RELEASE path while HANDBACK holds ownership. */
+cs_image_result cs_image_select_release(cs_image_service *s,const cs_image_request *q,cs_image_workspace *w,size_t capacity,
+    cs_image_description *out,cs_image_report *r)
+{return execute(s,q,w,capacity,out,r,1);}
+/* Constructor-owned scalar record, including every duplicated identity/range.
+ * This is invariant validation, not authentication against hostile native code. */
+static int select_owned(const cs_image_service *s,const cs_image_context *c)
+{
+    const cs_image_select_state *o=&s->select;
+    if(!identity(s) || o->profile!=CS_IMAGE_SELECT_PROFILE ||
+        o->generation!=s->generation || o->execution_generation!=s->execution_generation ||
+        o->consumed_generation!=s->generation || o->epoch!=s->epoch ||
+        o->owner!=(uintptr_t)s || o->map!=(uintptr_t)s->map ||
+        o->lifecycle!=(uintptr_t)s->lifecycle || o->manager!=(uintptr_t)s->manager ||
+        o->owner_id!=s->profile.owner || !equal(&o->layout,&s->layout,sizeof o->layout) ||
+        o->globals_begin!=s->layout.globals_begin || o->a5!=s->layout.a5 ||
+        o->below_a5!=s->manifest.below_a5 || o->above_a5!=s->manifest.above_a5 ||
+        o->stack_base!=s->layout.stack_base || o->stack_top!=s->layout.stack_top ||
+        o->stack_top<o->stack_base+4u || o->root!=o->stack_top-4u ||
+        !o->token || (o->token&1u) || o->token>0xFFFFF8u ||
+        !c || c->count!=1 || !c->inventory ||
+        o->inventory_native!=(uintptr_t)c->inventory[0].native ||
+        o->inventory_kind!=(uint32_t)c->inventory[0].kind ||
+        o->inventory_bytes!=c->inventory[0].bytes ||
+        o->count<1u || o->count>CS_QD_SELECT_CAPACITY || o->extent!=CS_QD_SELECT_RECORD_BYTES ||
+        !o->g || (o->g&1u) || o->g>0xFFFFFCu || o->g<CS_IMAGE_SELECT_BELOW_G ||
+        o->reservation_begin!=o->g-CS_IMAGE_SELECT_BELOW_G ||
+        o->reservation_begin<o->globals_begin || o->g>o->a5 || o->a5-o->g<4u ||
+        o->fault_valid || o->depth)return 0;
+    for(uint32_t i=0;i<o->count;++i){uint32_t id=o->ids[i];
+        if(!id || (id&1u) || id>0xFFFFFFu || id<o->globals_begin || id>o->a5 ||
+            o->a5-id<o->extent || intersects(id,o->extent,o->reservation_begin,CS_IMAGE_SELECT_RESERVATION))return 0;
+        for(uint32_t j=0;j<i;++j)if(intersects(id,o->extent,o->ids[j],o->extent))return 0;}
+    if(o->phase==CS_IMAGE_SELECT_ACTIVE)return s->execution_state==2 &&
+        o->borrow_open==1 && !o->quiescent && !o->stop_valid &&
+        !o->scrubbed && !o->anchor_cleared && !o->handback_started;
+    if(o->phase!=CS_IMAGE_SELECT_STOPPED && o->phase!=CS_IMAGE_SELECT_PIN &&
+        o->phase!=CS_IMAGE_SELECT_HANDBACK)return 0;
+    if(o->borrow_open || o->quiescent!=1 || !o->stop_valid ||
+        o->stop_pc!=o->stop_frame.pc || o->stop_a7!=o->stop_frame.a[7] ||
+        (s->execution_state!=3 && s->execution_state!=4) ||
+        (s->execution_state==3?o->stop_status!=CS_IMAGE_RUN_RETURNED:
+            (o->stop_status!=CS_IMAGE_RUN_CPU && o->stop_status!=CS_IMAGE_RUN_BUDGET)))return 0;
+    if(o->phase==CS_IMAGE_SELECT_HANDBACK)return o->scrubbed==o->below_a5 &&
+        o->anchor_cleared==4 && o->handback_started==1;
+    return !o->scrubbed && !o->anchor_cleared && !o->handback_started;
+}
+/* Exact-g accepted only after the complete owner record validates; a tag alone grants nothing. */
+int cs_image_select_integrity(const cs_image_service *s,const cs_image_context *c,uint32_t anchor)
+{
+    if(!select_owned(s,c) || !anchor || s->select.g!=anchor ||
+        s->select.phase==CS_IMAGE_SELECT_HANDBACK)return 0;
+    return integrity(s,c,1,anchor);
+}
+/* Generic envelope holds 10 spans: two staged full-control passes, then
+ * views/ports pairwise against caller/workspace/report. */
+int cs_image_select_native(cs_image_service *s,const cs_image_select_request *q,cs_trap_frame *caller,
+    cs_image_select_workspace *w,size_t capacity,cs_image_select_report *r)
+{
+    if(!OBJ(q,cs_image_select_request) || !OBJ(caller,cs_trap_frame) || !OBJ(w,cs_image_select_workspace) ||
+        capacity<sizeof *w || !OBJ(r,cs_image_select_report) || !OBJ(q->selection,cs_qd_selection))return 0;
+    const cs_qd_selection *c=q->selection;
+    if(c->count<1u || c->count>CS_QD_SELECT_CAPACITY)return 0;
+    span part[2u+2u*CS_QD_SELECT_CAPACITY]={{&q->selection,sizeof q->selection},{c,sizeof *c}};unsigned n=2;
+    for(uint32_t i=0;i<c->count;++i){const cs_qd_view *v=c->bindings[i].view;
+        if(!OBJ(v,cs_qd_view) || !OBJ(v->port,cs_qd_rect_port))return 0;
+        part[n++]=(span){v,sizeof *v};part[n++]=(span){v->port,sizeof *v->port};}
+    span outputs[5]={{caller,sizeof *caller},{w,capacity},{r,sizeof *r},part[0],part[1]};
+    if(!execution_safe(s,&q->run,outputs,5) || !execution_safe(s,&q->run,part,n))return 0;
+    for(unsigned i=2;i<n;++i)for(unsigned j=0;j<3;++j)if(overlap(part[i],outputs[j]))return 0;
+    return 1;
+}
+int cs_image_select_retire_native(cs_image_service *s,const cs_image_run_request *q,
+    cs_image_workspace *w,size_t capacity,cs_image_description *out,cs_image_select_report *r)
+{
+    if(!OBJ(w,cs_image_workspace) || capacity<sizeof *w || !OBJ(out,cs_image_description) ||
+        !OBJ(r,cs_image_select_report))return 0;
+    span outputs[3]={{w,capacity},{out,sizeof *out},{r,sizeof *r}};
+    return execution_safe(s,q,outputs,3);
 }
 #ifdef CLASSICK_IMAGE_TEST_FAULTS
 cs_image_result cs_image_test_fault(cs_image_service *s,uint32_t after,uint32_t call,uint32_t index,uint32_t prepare_flag)

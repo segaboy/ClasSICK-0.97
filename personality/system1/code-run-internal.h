@@ -16,4 +16,13 @@ int cs_image_execution_native(cs_image_service *s,const cs_image_run_request *q,
 int cs_image_execution_retire_native(cs_image_service *s,const cs_image_run_request *q,
     cs_image_workspace *w,size_t capacity,cs_image_description *out,cs_image_report *r);
 int cs_image_execution_integrity(const cs_image_service *s,const cs_image_context *c,int dirty);
+#include "code-select.h"
+/* SPEC-0045 private owner hooks; no public bypass. */
+int cs_image_select_native(cs_image_service *s,const cs_image_select_request *q,cs_trap_frame *caller,
+    cs_image_select_workspace *w,size_t capacity,cs_image_select_report *r);
+int cs_image_select_retire_native(cs_image_service *s,const cs_image_run_request *q,
+    cs_image_workspace *w,size_t capacity,cs_image_description *out,cs_image_select_report *r);
+int cs_image_select_integrity(const cs_image_service *s,const cs_image_context *c,uint32_t anchor);
+cs_image_result cs_image_select_release(cs_image_service *s,const cs_image_request *q,
+    cs_image_workspace *w,size_t capacity,cs_image_description *out,cs_image_report *r);
 #endif

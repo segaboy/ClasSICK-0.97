@@ -1,0 +1,192 @@
+{
+  "specification": "SPEC-0045",
+  "baseline": "25811071daa248780ad91221fa55aa0fd7342a20",
+  "workers": [
+    {
+      "round": "api",
+      "worker": "claude",
+      "exit_code": 0,
+      "outer_timeout": false,
+      "elapsed_seconds": 93.36,
+      "input_bytes": 82232,
+      "input_sha256": "ca6b3c75b1dc5a9ad9fd3397165312843eb164acb6fdfda9309bc25de3caf1cd",
+      "stderr_bytes": 0,
+      "observed_tool_calls": 0,
+      "reported_usage": {
+        "claude-opus-5-5": {
+          "inputTokens": 2,
+          "outputTokens": 10139,
+          "cacheReadInputTokens": 1452,
+          "cacheCreationInputTokens": 38611,
+          "webSearchRequests": 0,
+          "costUSD": 0.5119664,
+          "contextWindow": 1000000,
+          "maxOutputTokens": 128000,
+          "thinkingTokens": 4442,
+          "canonicalModel": "claude-opus-5-5",
+          "provider": "firstParty",
+          "costBasis": "list"
+        }
+      },
+      "tests_executed": []
+    },
+    {
+      "round": "implementation",
+      "worker": "claude",
+      "exit_code": null,
+      "outer_timeout": true,
+      "elapsed_seconds": 300.06,
+      "input_bytes": 129249,
+      "input_sha256": "623cd199920f0ec54529e0a689fc1b07f4c2a81c47aa239c0d6deafc0181f4fa",
+      "stderr_bytes": 0,
+      "reported_usage": null,
+      "observed_tool_calls": 0,
+      "tests_executed": []
+    },
+    {
+      "round": "implementation-followup",
+      "worker": "claude",
+      "exit_code": 0,
+      "outer_timeout": false,
+      "elapsed_seconds": 364.05,
+      "input_bytes": 129879,
+      "input_sha256": "f954021d8c9d583860ae66a9c645d8b3e246e85b04e6bacae0ad9f0093b927cd",
+      "stderr_bytes": 0,
+      "observed_tool_calls": 0,
+      "reported_usage": {
+        "claude-opus-5-5": {
+          "inputTokens": 2,
+          "outputTokens": 45106,
+          "cacheReadInputTokens": 2384,
+          "cacheCreationInputTokens": 60880,
+          "webSearchRequests": 0,
+          "costUSD": 1.3896448000000001,
+          "contextWindow": 1000000,
+          "maxOutputTokens": 128000,
+          "thinkingTokens": 27990,
+          "canonicalModel": "claude-opus-5-5",
+          "provider": "firstParty",
+          "costBasis": "list"
+        }
+      },
+      "tests_executed": []
+    },
+    {
+      "round": "implementation",
+      "worker": "copilot",
+      "exit_code": 0,
+      "outer_timeout": false,
+      "elapsed_seconds": 199.08,
+      "input_bytes": 94664,
+      "input_sha256": "4c3c3cef5b727dbd9f8a1cdf6197c1aa1cd8a83cbeaa3425021b1c37795d57fe",
+      "stderr_bytes": 0,
+      "observed_tool_calls": 6,
+      "reported_usage": {
+        "currentModel": "claude-sonnet-5.5",
+        "totalPremiumRequestCost": 1,
+        "totalUserRequests": 1,
+        "totalNanoAiu": 46238380000,
+        "tokenDetails": {
+          "input": {
+            "tokenCount": 598
+          },
+          "cache_read": {
+            "tokenCount": 107578
+          },
+          "cache_write": {
+            "tokenCount": 67848
+          },
+          "output": {
+            "tokenCount": 28081
+          }
+        },
+        "totalApiDurationMs": 190827,
+        "aiCreditsStatus": "complete"
+      },
+      "tests_executed": []
+    }
+  ],
+  "frozen_api": {
+    "personality/system1/code-select.h": "9036683e158a2e9d765e8ebe5eb9ae83f531b9272174210251d2e292d7b93f5c",
+    "personality/system1/code-image.h": "6d95d79e9b33817ce2333c4d1323e92275feab884f53d3f10b439606ea91b50d",
+    "docs/specifications/SPEC-0045-integrated-port-selection.md": "b4886c24e72bf4462b0dafd486401e1b39cdc5faa4c4f9d21ab2a3135ee408ad"
+  },
+  "local_tests": {
+    "full_suites": [
+      {
+        "profile": "clang-debug",
+        "ctests": 286
+      },
+      {
+        "profile": "clang-ASan-UBSan",
+        "ctests": 286
+      },
+      {
+        "profile": "gcc-i686",
+        "ctests": 241
+      }
+    ],
+    "focused_final_debug_ctests": 1,
+    "ctest_invocations": 814,
+    "final_owner_assertions": 52679,
+    "width_endian_objects": 10,
+    "broken_implementation_controls": [
+      {
+        "name": "set-nil",
+        "result": "assertion rejected broken implementation",
+        "exit_code": 1,
+        "diagnostic": "line 152: rd(f,OUT0)==0 && rd(f,OUT1)==REC1 && rd(f,OUT2)==REC2"
+      },
+      {
+        "name": "get-stale-nil",
+        "result": "assertion rejected broken implementation",
+        "exit_code": 1,
+        "diagnostic": "line 152: rd(f,OUT0)==0 && rd(f,OUT1)==REC1 && rd(f,OUT2)==REC2"
+      },
+      {
+        "name": "anchor-not-cleared",
+        "result": "assertion rejected broken implementation",
+        "exit_code": 1,
+        "diagnostic": "line 104: cs_image_run_selection_retire(&f->w->image,&f->req.run,&f->w->image_workspace, sizeof f->w->image_workspace,&f->desc,r)==CS_IMAGE_OK"
+      },
+      {
+        "name": "workspace-borrow-retained",
+        "result": "assertion rejected broken implementation",
+        "exit_code": 1,
+        "diagnostic": "line 118: zero(f->ws,sizeof *f->ws)"
+      },
+      {
+        "name": "consumed-record-unchecked",
+        "result": "assertion rejected broken implementation",
+        "exit_code": 1,
+        "diagnostic": "line 333: cs_image_run_selection_retire(&f->w->image,&f->req.run,&f->w->image_workspace, sizeof f->w->image_workspace,&f->desc,&f->rep2)==CS_IMAGE_FAULT"
+      },
+      {
+        "name": "premature-ready",
+        "result": "assertion rejected broken implementation",
+        "exit_code": 1,
+        "diagnostic": "line 104: cs_image_run_selection_retire(&f->w->image,&f->req.run,&f->w->image_workspace, sizeof f->w->image_workspace,&f->desc,r)==CS_IMAGE_OK"
+      }
+    ]
+  },
+  "ci": {
+    "status": "pending",
+    "conclusion": null
+  },
+  "target_run": false,
+  "release": false,
+  "remaining_provider_allowance": "not exposed by task receipts; unknown for Claude/Copilot/Grok/Antigravity",
+  "usage_limits": "Provider counters/list-cost estimates are not subscription bills or cross-provider ChatGPT-quota savings. Timed-out call has no final usage receipt. Copilot limit is soft; totalNanoAiu unit is retained without conversion.",
+  "inputs": {
+    "personality/system1/code-image.c": "d5387cfd6dab3b6d94f580d17eb91c1e856cab2c9d8f042f6cf94b4fe2b95397",
+    "personality/system1/code-image.h": "6d95d79e9b33817ce2333c4d1323e92275feab884f53d3f10b439606ea91b50d",
+    "personality/system1/code-run-internal.h": "4a78a56205337a4b2f868a59bff199767221cb61cb987bec5a79d9e1ec792b22",
+    "personality/system1/code-select.c": "959ed1a52f3807b0a89f8a5985b2ac3409a5589aeb419b292989b20900eb1cf7",
+    "personality/system1/code-select.h": "9036683e158a2e9d765e8ebe5eb9ae83f531b9272174210251d2e292d7b93f5c",
+    "tests/code-select-independent.c": "5bf14340721901bb64d2e3d0014e61d1feca07c124bf565b9e888c534a5ea520",
+    "scripts/Verify-PortOwnerM68k.py": "96015050e7d1753e1fdd14ae9c880b03d326b619cdd8160f6cadabb8087ba5cc",
+    "scripts/Verify-PortOwnerObjects.ps1": "81f2c12dd767e76d8bbe04d121a54dc27ff81dc1410d2da30894f6a3dc22fd8e",
+    "CMakeLists.txt": "683e9680801f13036b4f3d8fe811e584e5ad69833472114b5d3b591412331787",
+    ".github/workflows/bootstrap.yml": "865706b7b8c286cf030468e8e03849f8c72832259894188ac84923b471eabd40"
+  }
+}

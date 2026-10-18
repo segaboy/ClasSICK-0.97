@@ -19,7 +19,8 @@ HEADERS=('arch/m68k/loaded-rom.ld','arch/m68k/runtime.h','platform/mac128k/rom.h
  'personality/system1/resources.h','personality/system1/code-image.h','personality/system1/code-run.h',
  'personality/system1/code-run-internal.h','apps/service-probe/probe.h','apps/aline-probe/probe.h',
  'apps/aline-probe/program.h','apps/loaded-rom-app/program.S','scripts/Build-LoadedAppROM.py','scripts/Build-MacROM.py','docs/specifications/SPEC-0035-first-loaded-rom-application.md',
- 'personality/system1/quickdraw-rects.h','personality/system1/code-run.h','personality/system1/code-run-internal.h')
+ 'personality/system1/quickdraw-rects.h','personality/system1/code-run.h','personality/system1/code-run-internal.h',
+ 'personality/system1/code-select.h','personality/system1/quickdraw-select.h','personality/system1/quickdraw-view.h')
 def main():
     p=argparse.ArgumentParser();p.add_argument('--tool-root',required=True);p.add_argument('--output',required=True)
     mode=p.add_mutually_exclusive_group()

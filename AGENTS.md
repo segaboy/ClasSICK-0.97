@@ -1,5 +1,17 @@
 # ClasSICK 0.97 working instructions
 
+Current owner integrated port-selection scope (2026-10-17,SRC-0266..0269):
+"Next step" continues SPEC-0042/0043/0044 through SPEC-0045's actual native owner,
+canonical GetPort/SetPort coordinator, original selection-only legacy fixture and
+independent tests/compiler/CI/ordinary Git/HQ. Claude primary API/code; Copilot
+frozen-API independent oracle; Codex sole writer/integrator/final verifier. Old
+default/fixed-port semantics and UI workloads persist; new opt-in mode only.
+No selected-port drawing/full manager/global registry/JSR/callback/SDK expansion,
+target/reference/hardware trial or release. Preserve24 originals/copies,UART,
+old rows/releases/tags and frozen wiki; current compiler inputs may change and
+old boot observations do not transfer. No OneNote/wiki,agents/chats/automation.
+[Evidence](docs/development/port-owner-evidence.md).
+
 Current owner prepared-port ownership contract (2026-10-17,SRC-0262..0265):
 "Next task" accepts SPEC-0044 / ADR-0050 P1/P2/P4 owner integrity/environment-span/
 lifetime/admission/retirement contracts and unexecuted cases only. No code,fixture,

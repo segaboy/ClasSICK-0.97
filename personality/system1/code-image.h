@@ -40,6 +40,39 @@ typedef struct { cs_image_state state;uint32_t generation,generation_valid,epoch
     uint32_t entry_count,segment_count,warnings,execution_authorized;cs_code_layout layout;
     uint16_t live;cs_image_segment segments[CS_CODE_SEGMENTS];
 } cs_image_description;
+/* code-image.h, before cs_image_service. All scalar; uintptr_t identities
+ * are compared, never dereferenced. Zeroed by cs_image_init; empty() and
+ * original RELEASE never touch it. */
+typedef enum { CS_IMAGE_SELECT_NONE=0,CS_IMAGE_SELECT_ADMISSION=1,
+    CS_IMAGE_SELECT_ACTIVE=2,CS_IMAGE_SELECT_STOPPED=3,CS_IMAGE_SELECT_PIN=4,
+    CS_IMAGE_SELECT_SCRUB=5,CS_IMAGE_SELECT_ANCHOR=6,CS_IMAGE_SELECT_HANDBACK=7,
+    CS_IMAGE_SELECT_RETIRED=8,CS_IMAGE_SELECT_QUARANTINE=9 } cs_image_select_phase;
+typedef enum { CS_IMAGE_SELECT_OK=0,CS_IMAGE_SELECT_ARGUMENT=1,
+    CS_IMAGE_SELECT_STATE=2,CS_IMAGE_SELECT_WORLD=3,CS_IMAGE_SELECT_CANDIDATE=4,
+    CS_IMAGE_SELECT_OVERLAP=5,CS_IMAGE_SELECT_MAP=6,CS_IMAGE_SELECT_DIRECTORY=7,
+    CS_IMAGE_SELECT_FRAME=8,CS_IMAGE_SELECT_GENERATION=9,CS_IMAGE_SELECT_EPOCH=10,
+    CS_IMAGE_SELECT_LAYOUT=11,CS_IMAGE_SELECT_BINDING=12,CS_IMAGE_SELECT_SEAL=13,
+    CS_IMAGE_SELECT_HEADER=14,CS_IMAGE_SELECT_LEASE=15,
+    CS_IMAGE_SELECT_RELEASE=16 } cs_image_select_cause;
+typedef struct {
+    uint32_t profile;                 /* CS_IMAGE_SELECT_PROFILE once claimed */
+    cs_image_select_phase phase;
+    uint32_t generation,execution_generation,epoch,consumed_generation;
+    uintptr_t owner,map,lifecycle,manager,inventory_native;
+    uint32_t owner_id,inventory_kind,inventory_bytes;
+    cs_code_layout layout; /* frozen complete scalar layout */
+    uint32_t globals_begin,a5,below_a5,above_a5,stack_base,stack_top,root,token;
+    uint32_t g,reservation_begin,count,ids[2],extent;
+    uint32_t borrow_open,quiescent,depth;
+    uint32_t services,last_word;
+    uint32_t stop_valid,stop_status,stop_pc,stop_a7;
+    uint32_t stop_cpu,stop_memory,stop_steps,stop_entered;
+    cs_trap_frame stop_frame; /* immutable complete actual stopped frame */
+    uint32_t fault_valid;cs_image_select_cause fault_cause;
+    cs_image_select_phase fault_phase;uint32_t fault_pc,fault_word;
+    uint32_t scrubbed,anchor_cleared,handback_started,handback_result;
+} cs_image_select_state;
+
 typedef struct cs_image_service { uint32_t tag;const struct cs_image_service *self;
     cs_life_controller *lifecycle;cs_mm_manager *manager;const cs_guest_map *map;
     const cs_guest_region *descriptors;size_t region_count;cs_guest_region regions[CS_GUEST_MAX_REGIONS];
@@ -58,8 +91,10 @@ typedef struct cs_image_service { uint32_t tag;const struct cs_image_service *se
     /* SPEC-0035 exclusive embedded execution participant, one use/generation.
      * 0 ready,1 claimed,2 running,3 clean stop,4 guest stop,5 quarantine. */
     uint32_t execution_state,execution_generation,execution_scrubbed;
+    cs_image_select_state select;
 #ifdef CLASSICK_IMAGE_TEST_FAULTS
     uint32_t test_after,test_call,test_index,test_prepare;
+    uint32_t select_test_after,select_test_kind;
 #endif
 } cs_image_service;
 typedef struct { cs_code_workspace parser;cs_code_inspect_request inspect;

@@ -48,6 +48,9 @@ jobs:
       - name: Pure native selection width and endian objects
         shell: pwsh
         run: .\scripts\Verify-SelectionObjects.ps1 -BuildRoot build\selection-verification
+      - name: Integrated port owner width and endian objects
+        shell: pwsh
+        run: .\scripts\Verify-PortOwnerObjects.ps1 -BuildRoot build\port-owner-verification
 
   m68k-rom:
     runs-on: ubuntu-24.04
@@ -60,6 +63,14 @@ jobs:
         run: python3 scripts/Setup-M68k.py --output "$RUNNER_TEMP/classick-m68k"
       - name: Compile pure native port selection for68000 (no target run)
         run: python3 scripts/Verify-SelectionM68k.py --tool-root "$RUNNER_TEMP/classick-m68k/root" --output "$RUNNER_TEMP/classick-selection"
+      - name: Audit integrated prepared-port native68000 closure and storage
+        run: python3 scripts/Verify-PortOwnerM68k.py --tool-root "$RUNNER_TEMP/classick-m68k/root" --output "$RUNNER_TEMP/classick-port-owner"
+      - name: Retain prepared-port closure manifest
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
+        with:
+          name: classick-port-owner-build
+          path: ${{ runner.temp }}/classick-port-owner/manifest.json
+          if-no-files-found: error
       - name: Retain native selection object manifest
         uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
         with:

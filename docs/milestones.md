@@ -1,5 +1,7 @@
 # Current milestones and release tracks
 
+2026-10-17: SPEC-0045 integrates actual prepared GetPort/SetPort owner transactions and original loaded-guest selection conformance. Local native-width/sanitized/regression checks pass; CI/native68000 receipt pending. Selected-port drawing/full manager remains next,not enabled here. No target trial/release. [Evidence](development/port-owner-evidence.md).
+
 2026-10-17: SPEC-0044 / ADR-0050 finalize the prospective prepared-port ownership contract: exact-g integrity, explicit owner environment spans, one admission transaction and consumed-generation-safe retirement. All40 cases remain unexecuted. No code/binding/build/trial/release; existing native inputs unchanged. [Review](development/prepared-port-owner-lead-review.md).
 
 2026-10-17: SPEC-0043 implements pure shared native68000/x86 drawing-port selection plans; no guest memory access or trap binding. 810 local CTests,10 width/endian object audits and8 broken-core controls pass; CI passes3013 CTests across11 profiles and six68000 objects (no target execution). Existing scenes/workloads/ROM/EFI inputs unchanged. [Checkpoint](development/native-selection-evidence.md).

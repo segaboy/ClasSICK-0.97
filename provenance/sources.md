@@ -3180,3 +3180,19 @@ resulting public/HQ evidence after automatic approval initially blocked main.
 ## SRC-0265 - Lead owner-transaction decisions and documentation verification
 
 - Codex,2026-10-17:14 O-decisions and3 G-findings adjudicated; bound exact-g mode,logical/native alias domains,complete binding validation,root-local versus unresolved borrows,scalar-only cleanup and consumed-generation-protected canonical handback. No new historical facts/manual/sample/code input. [SPEC-0044](../docs/specifications/SPEC-0044-prepared-port-ownership.md), [lead review/limits](../docs/development/prepared-port-owner-lead-review.md), [receipt](../docs/development/prepared-port-owner-review.json). Forty cases unexecuted; prior runtime evidence remains dated and separate.
+
+## SRC-0266 - Owner integrated prepared-port continuation
+
+- Dean Howell,2026-10-17: "Next step" accepts the planned integrated SPEC-0044 successor: frozen owner API, actual GetPort/SetPort binding, original selection-only legacy fixture, independent tests/compiler/CI and ordinary Git/HQ. No target/reference/hardware run or release; all source/native-app/physical128K/historical gates persist; OneNote/wiki retired.
+
+## SRC-0267 - Claude original integrated owner API and code proposal
+
+- Reviewed public contracts/original code only,explicit Opus5.5 low; bounded API artifact followed by primary code assignment. Captures outside Git,sole lead repository integration. [Prompt](../docs/development/tasks/port-owner-claude.md); [actual outcomes](../docs/development/port-owner-evidence.md). Proposals are engineering inputs,not historical evidence or executed tests.
+
+## SRC-0268 - Copilot independent prepared-port oracle artifact
+
+- Frozen API/contracts and old original fixture helpers only,new implementation/logs withheld. Explicit Sonnet5.5 low through existing GitHub service,view-only controls. Original339-line C test proposal; lead reviews oracle semantics before implementation. [Prompt](../docs/development/tasks/port-owner-copilot.md); [actual tests/limits](../docs/development/port-owner-evidence.md).
+
+## SRC-0269 - Lead integrated owner review and verification
+
+- Codex,2026-10-17: frozen API/transaction/result/lifetime decisions,artifact integration and actual compiler/test evidence. Original engineering only,no new manual/source facts. [SPEC-0045](../docs/specifications/SPEC-0045-integrated-port-selection.md), [ADR-0051](../docs/adr/0051-integrated-port-selection-owner.md), [receipt](../docs/development/port-owner-evidence.md). No historical compatibility inferred from implementation or proposed tests.
