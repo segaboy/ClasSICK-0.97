@@ -20,7 +20,7 @@ integrating. Copilot's first160.75s call exhausted its per-call budget without a
 test artifact and opened the provided Claude settings file despite packet-only
 instructions. No private/excluded content was present there; deviation retained.
 One narrower correction reuses old fixture helpers instead of copying them.
-It returned145 test lines in68.89s with two view calls limited to the packet.
+It returned140 test lines in68.89s with two view calls limited to the packet.
 No new implementation/history/author logs were supplied to either oracle call.
 Workers did not write repositories or execute tests. Codex is sole integrator.
 Final oracle corrections/lead gap additions and actual assertions are recorded
@@ -42,7 +42,7 @@ attempts exposed the corrected owner-record and lead-oracle issues above.
 Twenty strict32/64-bit and little/big-endian owner/coordinator objects pass their
 exact import/no-mutable-data audits. Broken implementation controls are assertion
 rejected; see the JSON receipt. Tests execute original hosted fixtures only.
-CI/native68000 closure results are pending in this implementation commit.
+[CI 39137123487](https://github.com/segaboy/ClasSICK-0.97/actions/runs/39137123487) passes at `b91641b95a968ca5d4e13958fc31fcadae1b06a6`: 3035 CTests across11 profiles. Native68000 closure:64 original objects,4 complete relocatable links,matchingO0/Os twins,no unresolved imports/mutable globals/production fault schedule. Maximum individual frames: O0 608 bytes, Os 604 bytes. Measured storage: cs_image_service=5560, cs_image_select_state=342, cs_image_select_workspace=408, cs_image_select_request=64, cs_image_select_report=416 bytes. Raw artifacts/logs remain outside Git. These checks do not close native execution/full128K/whole-stack-budget gates.
 
 ## Limits and next work
 Compile/link checks are not a target boot observation. Existing ROM/EFI assets,

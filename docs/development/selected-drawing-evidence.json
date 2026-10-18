@@ -162,8 +162,27 @@
     ]
   },
   "ci": {
-    "status": "pending",
-    "conclusion": null
+    "headSha": "b91641b95a968ca5d4e13958fc31fcadae1b06a6",
+    "status": "completed",
+    "conclusion": "success",
+    "url": "https://github.com/segaboy/ClasSICK-0.97/actions/runs/39137123487",
+    "databaseId": 39137123487,
+    "ctests": 3035,
+    "profiles": 11,
+    "profile_ctests": [
+      287,
+      287,
+      287,
+      287,
+      287,
+      258,
+      287,
+      271,
+      271,
+      271,
+      242
+    ],
+    "verified_on": "2026-10-18"
   },
   "target_run": false,
   "release": false,
@@ -178,5 +197,35 @@
     "CMakeLists.txt": "b1256105d930041032b2e9824e697cb407e9ecc7e4f962387fda20066625b16f"
   },
   "remaining_provider_allowance": "Unknown for Claude,Copilot,Grok,Antigravity; task receipts do not expose remaining account allowances.",
-  "usage_limits": "Provider task counters and list-price estimates are not subscription bills or directly comparable ChatGPT-quota savings."
+  "usage_limits": "Provider task counters and list-price estimates are not subscription bills or directly comparable ChatGPT-quota savings.",
+  "native68000": {
+    "object_audits": 64,
+    "complete_relocatable_links": 4,
+    "storage_bytes_68000": {
+      "cs_image_service": 5560,
+      "cs_image_select_state": 342,
+      "cs_image_select_workspace": 408,
+      "cs_image_select_request": 64,
+      "cs_image_select_report": 416
+    },
+    "target_executed": false,
+    "raw_manifest_sha256": "80ef00d64b22a03dbdd134b2097a6d6516f8adb806a95960abd189d1ef06a88e",
+    "profiles": [
+      {
+        "optimization": "O0",
+        "twins_equal": true,
+        "sha256": "f057507cae63cfb5b62e02648cc44718e03c5f3546344133475f386c5298733a",
+        "bytes": 120760,
+        "max_frame_bytes": 608
+      },
+      {
+        "optimization": "Os",
+        "twins_equal": true,
+        "sha256": "45e77b2cfde3450766560a713dee244a2ae518302347f31244d6d8aff55498af",
+        "bytes": 68076,
+        "max_frame_bytes": 604
+      }
+    ],
+    "toolchain_lock_sha256": "a2fe02f949288826f6a1d11b55df1d3305aab4fb4726da83a4fb8695b7f21898"
+  }
 }

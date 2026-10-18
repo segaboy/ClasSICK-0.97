@@ -1,6 +1,6 @@
 # 68000 application runtime plan - 2026-10-12
 
-2026-10-18: SPEC-0046 implements explicit selected-port PaintRect/EraseRect through the shared native68000/x86 owner/view. Local tests pass; CI/native68000 verification pending. Old modes/UI scenes unchanged,no target trial/release. Next is the original paired workload. [Evidence](selected-drawing-evidence.md).
+2026-10-18: SPEC-0046 implements explicit selected-port PaintRect/EraseRect through the shared native68000/x86 owner/view. Hosted/sanitized tests and CI/native68000 compile/link checks pass. Old modes/UI scenes unchanged,no target trial/release. Next is the original paired workload. [Evidence](selected-drawing-evidence.md).
 
 2026-10-17: SPEC-0045 integrates actual prepared GetPort/SetPort owner transactions and original loaded-guest selection conformance. Hosted/sanitized checks and CI/native68000 compile/link verification pass (2026-10-18). Selected-port drawing/full manager remains next,not enabled here. No target trial/release. [Evidence](port-owner-evidence.md).
 
