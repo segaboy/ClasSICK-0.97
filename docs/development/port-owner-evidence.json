@@ -173,8 +173,27 @@
     "post_quiescence_proof_ctests": 3
   },
   "ci": {
-    "status": "pending",
-    "conclusion": null
+    "headSha": "709b0ebf1fba87f57891b93b9dc99100fde0e4fc",
+    "status": "completed",
+    "conclusion": "success",
+    "url": "https://github.com/segaboy/ClasSICK-0.97/actions/runs/39115140634",
+    "databaseId": 39115140634,
+    "ctests": 3024,
+    "profiles": 11,
+    "profile_ctests": [
+      286,
+      286,
+      286,
+      286,
+      286,
+      257,
+      286,
+      270,
+      270,
+      270,
+      241
+    ],
+    "verified_on": "2026-10-18"
   },
   "target_run": false,
   "release": false,
@@ -200,5 +219,35 @@
       "cause": "Compiler-generated memset from partially initialized temporary span array; explicit live-element assignment replaces it.",
       "corrected": true
     }
-  ]
+  ],
+  "native68000": {
+    "object_audits": 60,
+    "complete_relocatable_links": 4,
+    "storage_bytes_68000": {
+      "cs_image_service": 5556,
+      "cs_image_select_state": 338,
+      "cs_image_select_workspace": 400,
+      "cs_image_select_request": 64,
+      "cs_image_select_report": 416
+    },
+    "target_executed": false,
+    "raw_manifest_sha256": "f2f729aa7ddb007e2eef9341261126f02ccece64d5890731a91df5afa60002cc",
+    "profiles": [
+      {
+        "optimization": "O0",
+        "twins_equal": true,
+        "sha256": "f0360b904fbd1d5c46d9ae6556a54faa9dd7e690ba84d0b60e435fe614121ebc",
+        "bytes": 118216,
+        "max_frame_bytes": 608
+      },
+      {
+        "optimization": "Os",
+        "twins_equal": true,
+        "sha256": "cc74ec3dda4be093a125878391c62ebb136f7b219791f8d4337f341111af5bb5",
+        "bytes": 66460,
+        "max_frame_bytes": 604
+      }
+    ],
+    "toolchain_lock_sha256": "a2fe02f949288826f6a1d11b55df1d3305aab4fb4726da83a4fb8695b7f21898"
+  }
 }

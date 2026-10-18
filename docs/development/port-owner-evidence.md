@@ -58,11 +58,15 @@ global data. Six deliberately broken implementations are rejected by assertions:
 NIL Set,stale-NIL Get,missing anchor clear,retained resolved workspace,unchecked
 consumed record and premature ready state. These controls ran outside Git.
 
-CI/native68000 closure results are pending in the initial implementation commit.
-The new audit requires60 original objects,four complete relocatable links,matching
-O0/Os twins,no unresolved imports/mutable globals/production fault schedule,bounded
-frames and measured owner storage. Requirements are not passing checks until its
-receipt is recorded. Native compile/link is not native target execution.
+Corrected [CI 39115140634](https://github.com/segaboy/ClasSICK-0.97/actions/runs/39115140634) passes at `709b0ebf1fba87f57891b93b9dc99100fde0e4fc`
+(verified2026-10-18): 3024 CTests across11 profiles,20 owner/coordinator width/endian
+objects,and60 native68000 original objects with4 complete relocatable links.
+O0/Os twins match,no unresolved imports/mutable globals/production fault schedule.
+Maximum individual frames: O0 608 bytes, Os 604 bytes.
+Measured68000 storage: cs_image_service=5556, cs_image_select_state=338, cs_image_select_workspace=400, cs_image_select_request=64, cs_image_select_report=416.
+These are compiler/hosted checks,not target execution or a closed full128K/stack-budget gate.
+Raw compiler/frame/log artifacts stay outside Git; the compact [receipt](port-owner-evidence.json)
+records hashes and counts. Existing ROM candidate builds also pass their normal CI checks.
 
 ## Worker use and limits
 Claude API93.36s; initial combined implementation timed out300.06s during reasoning,
@@ -101,7 +105,7 @@ algorithm change. No runtime helper/library was added. The width/endian audit no
 covers code-image.c as well as code-select.c (20 final objects),and60 focused
 Clang/sanitized/GCC32 owner/image/legacy tests pass on the correction. The native
 link audit now identifies the importing source module on unresolved symbols.
-The corrected CI must pass before native68000 verification is claimed.
+The corrected CI above passes; the earlier rejected candidate remains recorded as a failed attempt.
 
 The lead also made retries and retirement byte-inert while an unresolved borrow
 is retained: neither may reuse/clear the retained workspace or reports. A labelled
