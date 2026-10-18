@@ -4,7 +4,7 @@
 typedef struct {
     cs_image_select_request request;
     cs_trap_config config;
-    uint32_t magic;
+    uint32_t magic,profile;
 } run_control;
 static void clear(void *p,size_t n){uint8_t *b=p;for(size_t i=0;i<n;++i)b[i]=0;}
 static void copy(void *p,const void *q,size_t n)
@@ -19,6 +19,16 @@ static int apart(const uint8_t *a,size_t n,const uint8_t *b,size_t m)
 static uint32_t be32(const uint8_t *p)
 {return ((uint32_t)p[0]<<24)|((uint32_t)p[1]<<16)|((uint32_t)p[2]<<8)|p[3];}
 static void put32(uint8_t *p,uint32_t v){for(unsigned i=0;i<4;++i)p[i]=(uint8_t)(v>>((3u-i)*8u));}
+/* PRF1 keeps its two-slot rule; PRF2 also requires both Rect slots unsupported. */
+static int directory(const cs_trap_gateway *gw,uint32_t profile)
+{
+    static const uint16_t words[4]={CS_IMAGE_SELECT_SET_PORT,CS_IMAGE_SELECT_GET_PORT,
+        CS_QD_PAINT_RECT,CS_QD_ERASE_RECT};
+    uint32_t n=profile==CS_IMAGE_SELECT_DRAW_PROFILE?4u:2u,t;
+    for(uint32_t i=0;i<n;++i)if(cs_trap_get(gw,(uint16_t)(words[i]&0x1FFu),&t)!=CS_TRAP_OK ||
+        t!=gw->config.unsupported_token)return 0;
+    return 1;
+}
 static int table_slot(const cs_image_service *s,uint32_t pc)
 {return pc>=s->layout.table_begin+2u && pc<s->layout.table_end && ((pc-s->layout.table_begin)&7u)==2u;}
 static int opcode(const cs_image_service *s,uint32_t pc)
@@ -134,7 +144,7 @@ static void fill(const cs_image_service *s,cs_image_select_report *r,int run)
 static cs_image_select_cause owner(const cs_image_service *s,const cs_image_select_request *q,
     const cs_image_select_workspace *w,const run_control *control)
 {
-    if(!same_control(q,control))return CS_IMAGE_SELECT_BINDING;
+    if(!same_control(q,control) || s->select.profile!=control->profile)return CS_IMAGE_SELECT_BINDING;
     const cs_image_select_state *o=&s->select;const cs_qd_selection *c=q->selection;uint32_t seal;cs_guest_view v;
     if(s->execution_state!=2 || o->phase!=CS_IMAGE_SELECT_ACTIVE || o->depth || !o->borrow_open)
         return CS_IMAGE_SELECT_LEASE;
@@ -154,10 +164,10 @@ static cs_image_select_cause owner(const cs_image_service *s,const cs_image_sele
 }
 /* Every fallible check precedes the claim; afterwards only total stores. */
 static cs_image_select_cause admit(cs_image_service *s,const cs_image_select_request *q,
-    cs_image_select_workspace *w,cs_image_select_report *r)
+    cs_image_select_workspace *w,cs_image_select_report *r,uint32_t profile)
 {
     const cs_image_run_request *run=&q->run;const cs_qd_selection *c=q->selection;cs_guest_view v;
-    cs_image_select_state *o=&s->select;uint32_t a,b,root;
+    cs_image_select_state *o=&s->select;uint32_t root;
     if(o->phase!=CS_IMAGE_SELECT_NONE && o->phase!=CS_IMAGE_SELECT_RETIRED)return CS_IMAGE_SELECT_STATE;
     if(s->execution_state || s->execution_generation==s->generation ||
         (o->profile && o->consumed_generation==s->generation))return CS_IMAGE_SELECT_GENERATION;
@@ -177,10 +187,7 @@ static cs_image_select_cause admit(cs_image_service *s,const cs_image_select_req
         w->selection.bindings[i].view=c->bindings[i].view;copy(&w->views[i],c->bindings[i].view,sizeof w->views[i]);}
     if(c->a5!=s->layout.a5 || c->globals_begin!=s->layout.globals_begin ||
         !cs_qd_select_get(&w->selection,0,&w->plan))return CS_IMAGE_SELECT_CANDIDATE;
-    if(cs_trap_get(run->gateway,CS_IMAGE_SELECT_SET_PORT&0x1FFu,&a)!=CS_TRAP_OK ||
-        cs_trap_get(run->gateway,CS_IMAGE_SELECT_GET_PORT&0x1FFu,&b)!=CS_TRAP_OK ||
-        a!=run->gateway->config.unsupported_token || b!=run->gateway->config.unsupported_token)
-        return CS_IMAGE_SELECT_DIRECTORY;
+    if(!directory(run->gateway,profile))return CS_IMAGE_SELECT_DIRECTORY;
     root=s->layout.stack_top-4u;
     if(cs_guest_window(s->map,c->a5,4,CS_GUEST_READ|CS_GUEST_WRITE,&w->seal)!=CS_GUEST_OK ||
         cs_guest_window(s->map,c->g,4,CS_GUEST_READ|CS_GUEST_WRITE,&w->cell)!=CS_GUEST_OK ||
@@ -195,7 +202,7 @@ static cs_image_select_cause admit(cs_image_service *s,const cs_image_select_req
     clear(&w->step,sizeof w->step);
     if(cs_m68k_bus_guard_validate(s->map,run->gateway,&w->guest,&w->step,&w->limits,&w->guard)!=CS_M68K_OK)
         return CS_IMAGE_SELECT_FRAME;
-    clear(o,sizeof *o);o->profile=CS_IMAGE_SELECT_PROFILE;o->phase=CS_IMAGE_SELECT_ACTIVE;
+    clear(o,sizeof *o);o->profile=profile;o->admitted_profile=profile;o->phase=CS_IMAGE_SELECT_ACTIVE;
     o->generation=s->generation;o->execution_generation=s->generation;o->epoch=s->epoch;
     o->consumed_generation=s->generation;o->owner=(uintptr_t)s;o->map=(uintptr_t)s->map;
     o->lifecycle=(uintptr_t)s->lifecycle;o->manager=(uintptr_t)s->manager;
@@ -238,16 +245,15 @@ static cs_image_run_result finish(cs_image_service *s,cs_image_select_workspace 
 /* Canonical A873/A874, SPEC-0042 section 10 order. Bad guest input is a
  * pre-effect policy stop; *cause reports trusted mismatches. */
 static cs_m68k_result service(cs_image_service *s,cs_image_select_workspace *w,uint16_t word,
-    cs_image_select_cause *cause)
+    uint32_t profile,cs_image_select_cause *cause)
 {
     const cs_image_select_state *o=&s->select;cs_trap_frame *f=&w->guest;cs_m68k_bus_report *b=&w->step;
-    const cs_trap_gateway *gw=w->policy.request->run.gateway;uint32_t sp=f->a[7],seal,x,y;cs_guest_view v;
+    const cs_trap_gateway *gw=w->policy.request->run.gateway;uint32_t sp=f->a[7],seal,index=0;cs_guest_view v;
+    int draw=word==CS_QD_PAINT_RECT || word==CS_QD_ERASE_RECT;
     *cause=CS_IMAGE_SELECT_OK;
     b->cpu.pc=f->pc;b->cpu.word=word;b->cpu.service_called=1;b->cpu.service.pc=f->pc;
     b->cpu.service.decoded.word=word;b->cpu.service.decoded.number=(uint16_t)(word&0x1FFu);b->cpu.service.decoded.toolbox=1;
-    if(cs_trap_get(gw,CS_IMAGE_SELECT_SET_PORT&0x1FFu,&x)!=CS_TRAP_OK ||
-        cs_trap_get(gw,CS_IMAGE_SELECT_GET_PORT&0x1FFu,&y)!=CS_TRAP_OK ||
-        x!=gw->config.unsupported_token || y!=gw->config.unsupported_token)return CS_M68K_POLICY;
+    if((draw && profile!=CS_IMAGE_SELECT_DRAW_PROFILE) || !directory(gw,profile))return CS_M68K_POLICY;
     if((f->sr&0xA700u)!=0x2700u || f->a[5]!=o->a5 || (sp&1u) || sp<6u || sp>o->root || o->root-sp<4u ||
         !inside(sp-6u,10,o->stack_base,o->stack_top-o->stack_base) || !opcode(s,f->pc+2u))return CS_M68K_POLICY;
     b->address=sp;b->bytes=4;b->access=CS_GUEST_READ;
@@ -261,6 +267,19 @@ static cs_m68k_result service(cs_image_service *s,cs_image_select_workspace *w,u
     w->current=be32(w->cell.bytes);
     if(word==CS_IMAGE_SELECT_SET_PORT){
         if(!cs_qd_select_set(&w->selection,w->current,w->parameter_value,&w->plan))return CS_M68K_POLICY;
+    }else if(draw){uint32_t d=w->parameter_value;
+        /* Whole table validated; NIL/unknown current is guest policy refusal. */
+        if(!cs_qd_select_get(&w->selection,w->current,&w->plan) || !w->plan.value)return CS_M68K_POLICY;
+        while(index<o->count && w->selection.bindings[index].id!=w->current)++index;
+        if(index>=o->count || (d&1u) || d>0xFFFFF8u)return CS_M68K_POLICY;
+        if(!inside(d,8,o->stack_base,o->root-o->stack_base)){
+            if(!inside(d,8,o->globals_begin,o->a5-o->globals_begin) ||
+                intersects(d,8,o->reservation_begin,CS_IMAGE_SELECT_RESERVATION))return CS_M68K_POLICY;
+            for(uint32_t i=0;i<o->count;++i)if(intersects(d,8,o->ids[i],o->extent))return CS_M68K_POLICY;}
+        b->address=d;b->bytes=8;b->access=CS_GUEST_READ;
+        b->memory=cs_guest_window(s->map,d,8,CS_GUEST_READ,&w->destination);
+        if(b->memory!=CS_GUEST_OK)return CS_M68K_ADDRESS;
+        copy(w->rect_bytes,w->destination.bytes,8);w->plan.value=0;
     }else{uint32_t d=w->parameter_value;
         if(!cs_qd_select_get(&w->selection,w->current,&w->plan))return CS_M68K_POLICY;
         if((d&1u) || !inside(d,CS_IMAGE_SELECT_DEST_BYTES,o->globals_begin,o->a5-o->globals_begin) ||
@@ -282,9 +301,12 @@ static cs_m68k_result service(cs_image_service *s,cs_image_select_workspace *w,u
     frame_copy(&w->next,f);w->next.pc+=2u;w->next.a[7]+=4u;
     w->scratch_bytes[0]=(uint8_t)(f->sr>>8);w->scratch_bytes[1]=(uint8_t)f->sr;
     put32(w->scratch_bytes+2,w->next.pc);put32(w->value_bytes,w->staged_value);
+    /* Helper on the owner-checked root-local view; refusal is pre-effect. */
+    if(draw && !cs_qd_view_rect(&w->views[index],w->rect_bytes,word))
+        {*cause=CS_IMAGE_SELECT_BINDING;return CS_M68K_POLICY;}
     /* Commit: total, no lookup or callback. */
     copy(w->scratch.writable,w->scratch_bytes,6);
-    copy(word==CS_IMAGE_SELECT_SET_PORT?w->cell.writable:w->destination.writable,w->value_bytes,4);
+    if(!draw)copy(word==CS_IMAGE_SELECT_SET_PORT?w->cell.writable:w->destination.writable,w->value_bytes,4);
     frame_copy(f,&w->next);
     ++s->select.services;s->select.last_word=word;b->cpu.service.status=CS_TRAP_OK;
     return CS_M68K_OK;
@@ -307,8 +329,10 @@ static cs_image_run_result drive(cs_image_service *s,const cs_image_select_reque
         clear(&w->step,sizeof w->step);
         cs_m68k_result cpu;
         if(opcode(s,w->guest.pc) && cs_guest_read(s->map,w->guest.pc,2,CS_GUEST_READ,&w->word)==CS_GUEST_OK &&
-            (w->word==CS_IMAGE_SELECT_SET_PORT || w->word==CS_IMAGE_SELECT_GET_PORT))
-            cpu=service(s,w,(uint16_t)w->word,&cause);
+            (w->word==CS_IMAGE_SELECT_SET_PORT || w->word==CS_IMAGE_SELECT_GET_PORT ||
+            (control->profile==CS_IMAGE_SELECT_DRAW_PROFILE &&
+            (w->word==CS_QD_PAINT_RECT || w->word==CS_QD_ERASE_RECT))))
+            cpu=service(s,w,(uint16_t)w->word,control->profile,&cause);
         else cpu=cs_m68k_bus_step_admitted(s->map,run->gateway,&w->guest,&w->step,&w->limits,&w->guard,
             run->token,s->select.root);
         w->step.cpu.status=cpu;
@@ -328,20 +352,27 @@ static cs_image_run_result drive(cs_image_service *s,const cs_image_select_reque
     }
     return finish(s,w,capacity,r,CS_IMAGE_RUN_BUDGET,CS_IMAGE_SELECT_OK);
 }
-cs_image_run_result cs_image_run_selection(cs_image_service *s,const cs_image_select_request *q,
-    cs_trap_frame *caller,cs_image_select_workspace *w,size_t capacity,cs_image_select_report *r)
+static cs_image_run_result run_profile(cs_image_service *s,const cs_image_select_request *q,
+    cs_trap_frame *caller,cs_image_select_workspace *w,size_t capacity,cs_image_select_report *r,
+    uint32_t profile)
 {
     if(!cs_image_select_native(s,q,caller,w,capacity,r))return CS_IMAGE_RUN_ARGUMENT;
     /* A retained unresolved workspace cannot become scratch for a retry. */
     if(s->select.borrow_open)return CS_IMAGE_RUN_REFUSED;
     run_control control;copy(&control.request,q,sizeof *q);
-    copy(&control.config,&q->run.gateway->config,sizeof control.config);control.magic=q->run.gateway->magic;
+    copy(&control.config,&q->run.gateway->config,sizeof control.config);control.magic=q->run.gateway->magic;control.profile=profile;
     clear(r,sizeof *r);r->run.status=CS_IMAGE_RUN_REFUSED;
-    cs_image_select_cause cause=admit(s,q,w,r);
+    cs_image_select_cause cause=admit(s,q,w,r,profile);
     if(cause!=CS_IMAGE_SELECT_OK){fill(s,r,0);r->cause=cause;r->run.status=CS_IMAGE_RUN_REFUSED;
         clear(w,capacity);return CS_IMAGE_RUN_REFUSED;}
     return drive(s,q,w,capacity,r,&control);
 }
+cs_image_run_result cs_image_run_selection(cs_image_service *s,const cs_image_select_request *q,
+    cs_trap_frame *caller,cs_image_select_workspace *w,size_t capacity,cs_image_select_report *r)
+{return run_profile(s,q,caller,w,capacity,r,CS_IMAGE_SELECT_PROFILE);}
+cs_image_run_result cs_image_run_selection_draw(cs_image_service *s,const cs_image_select_request *q,
+    cs_trap_frame *caller,cs_image_select_workspace *w,size_t capacity,cs_image_select_report *r)
+{return run_profile(s,q,caller,w,capacity,r,CS_IMAGE_SELECT_DRAW_PROFILE);}
 static cs_image_result retire_fault(cs_image_service *s,cs_image_select_report *r,cs_image_select_cause cause)
 {
     cs_image_select_state *o=&s->select;

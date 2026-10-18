@@ -1,5 +1,7 @@
 # Native Macintosh and x86 parity plan
 
+2026-10-18: SPEC-0046 implements explicit selected-port PaintRect/EraseRect through the shared native68000/x86 owner/view. Local tests pass; CI/native68000 verification pending. Old modes/UI scenes unchanged,no target trial/release. Next is the original paired workload. [Evidence](selected-drawing-evidence.md).
+
 2026-10-17: SPEC-0045 integrates actual prepared GetPort/SetPort owner transactions and original loaded-guest selection conformance. Hosted/sanitized checks and CI/native68000 compile/link verification pass (2026-10-18). Selected-port drawing/full manager remains next,not enabled here. No target trial/release. [Evidence](port-owner-evidence.md).
 
 2026-10-17: SPEC-0044 / ADR-0050 finalize the prospective prepared-port ownership contract: exact-g integrity, explicit owner environment spans, one admission transaction and consumed-generation-safe retirement. All40 cases remain unexecuted. No code/binding/build/trial/release; existing native inputs unchanged. [Review](prepared-port-owner-lead-review.md).

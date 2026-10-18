@@ -3196,3 +3196,19 @@ resulting public/HQ evidence after automatic approval initially blocked main.
 ## SRC-0269 - Lead integrated owner review and verification
 
 - Codex,2026-10-17: frozen API/transaction/result/lifetime decisions,artifact integration and actual compiler/test evidence. Original engineering only,no new manual/source facts. [SPEC-0045](../docs/specifications/SPEC-0045-integrated-port-selection.md), [ADR-0051](../docs/adr/0051-integrated-port-selection-owner.md), [receipt](../docs/development/port-owner-evidence.md). No historical compatibility inferred from implementation or proposed tests.
+
+## SRC-0270 - Owner selected drawing continuation
+
+- Dean Howell,2026-10-18: "Continue with the next task." accepts the planned selected-port drawing adapter,shared native68000/x86 semantics,original implementation,independent tests/compiler/CI and ordinary Git/HQ. No target/reference/hardware run or release; all existing source/edition/physical/full128K/B2/human/both System1 gates persist. OneNote/wiki retired.
+
+## SRC-0271 - Claude original selected drawing delta
+
+- Explicit Opus5.5 low,reviewed public/original input packet only,no repository edits or tests. [Prompt](../docs/development/tasks/selected-drawing-claude.md). Proposed artifacts subject to lead integration and verification.
+
+## SRC-0272 - Copilot independent selected drawing oracle
+
+- Explicit Sonnet5.5 low through existing service,frozen API/contracts and old original fixture helpers; new implementation/logs withheld. [Prompt](../docs/development/tasks/selected-drawing-copilot.md). Tests are proposals until executed by lead.
+
+## SRC-0273 - Lead selected drawing decisions and verification
+
+- Codex,2026-10-18: frozen opt-in PRF2/range/commit/lifetime decisions,artifact review,integration and actual compiler/test verification. [SPEC-0046](../docs/specifications/SPEC-0046-selected-port-drawing.md), [receipt](../docs/development/selected-drawing-evidence.md). Engineering evidence only,no new historical claims.

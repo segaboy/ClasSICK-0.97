@@ -1,5 +1,16 @@
 # ClasSICK 0.97 working instructions
 
+Current owner selected-port drawing scope (2026-10-18,SRC-0270..0273):
+"Continue with the next task" accepts SPEC-0046 opt-in drawing through current
+prepared port,original native68000/x86 code,independent tests/compiler/CI and
+ordinary Git/HQ records. Claude primary delta; Copilot independent frozen-API
+pixel/routing oracle; Codex sole writer/integrator/final verifier. Preserve old
+default/fixed/selection modes and UI workloads. No full manager/global registry/
+JSR/callback/SDK expansion,target/reference/hardware run or release. Preserve24
+originals/copies,UART,old rows/releases/tags and frozen wiki; existing gates persist.
+OneNote/wiki retired; no extra agents/chats/automation.
+[Evidence](docs/development/selected-drawing-evidence.md).
+
 Current owner integrated port-selection scope (2026-10-17,SRC-0266..0269):
 "Next step" continues SPEC-0042/0043/0044 through SPEC-0045's actual native owner,
 canonical GetPort/SetPort coordinator, original selection-only legacy fixture and

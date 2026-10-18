@@ -55,7 +55,7 @@ typedef enum { CS_IMAGE_SELECT_OK=0,CS_IMAGE_SELECT_ARGUMENT=1,
     CS_IMAGE_SELECT_HEADER=14,CS_IMAGE_SELECT_LEASE=15,
     CS_IMAGE_SELECT_RELEASE=16 } cs_image_select_cause;
 typedef struct {
-    uint32_t profile;                 /* CS_IMAGE_SELECT_PROFILE once claimed */
+    uint32_t profile,admitted_profile; /* bound mode, retained through retirement */
     cs_image_select_phase phase;
     uint32_t generation,execution_generation,epoch,consumed_generation;
     uintptr_t owner,map,lifecycle,manager,inventory_native;

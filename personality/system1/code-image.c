@@ -596,7 +596,8 @@ cs_image_result cs_image_select_release(cs_image_service *s,const cs_image_reque
 static int select_owned(const cs_image_service *s,const cs_image_context *c)
 {
     const cs_image_select_state *o=&s->select;
-    if(!identity(s) || o->profile!=CS_IMAGE_SELECT_PROFILE ||
+    if(!identity(s) || (o->profile!=CS_IMAGE_SELECT_PROFILE &&
+        o->profile!=CS_IMAGE_SELECT_DRAW_PROFILE) || o->profile!=o->admitted_profile ||
         o->generation!=s->generation || o->execution_generation!=s->execution_generation ||
         o->consumed_generation!=s->generation || o->epoch!=s->epoch ||
         o->owner!=(uintptr_t)s || o->map!=(uintptr_t)s->map ||

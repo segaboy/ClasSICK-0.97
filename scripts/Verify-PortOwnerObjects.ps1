@@ -11,7 +11,7 @@ if(Test-Path -LiteralPath $BuildRoot){throw 'Fresh port owner object directory r
 $clang=(Get-Command clang).Source
 $nm=(Get-Command llvm-nm).Source
 $gcc=Join-Path $repo '.tools/gcc/w64devkit/bin/gcc.exe'
-$allowed='cs_guest_read,cs_guest_window,cs_image_execution_integrity,cs_image_select_integrity,cs_image_select_native,cs_image_select_release,cs_image_select_retire_native,cs_m68k_bus_guard_validate,cs_m68k_bus_step_admitted,cs_qd_select_get,cs_qd_select_set,cs_trap_get'
+$allowed='cs_guest_read,cs_guest_window,cs_image_execution_integrity,cs_image_select_integrity,cs_image_select_native,cs_image_select_release,cs_image_select_retire_native,cs_m68k_bus_guard_validate,cs_m68k_bus_step_admitted,cs_qd_select_get,cs_qd_select_set,cs_qd_view_rect,cs_trap_get'
 $modules=@(
     @('code-select.c',$allowed),
     @('code-image.c','cs_code_check_layout,cs_code_inspect,cs_guest_read,cs_guest_validate,cs_guest_window,cs_life_admit,cs_life_manager_call,cs_res_external_admit'))
@@ -33,6 +33,6 @@ foreach($target in @('aarch64-none-elf','aarch64_be-none-elf')){foreach($module 
     if($LASTEXITCODE -ne 0){throw 'Port owner endian imports/data audit failed.'}
     ++$checks
 }}
-@{specification='SPEC-0045';object_audits=$checks;target_executed=$false} |
+@{specification='SPEC-0046';object_audits=$checks;target_executed=$false} |
     ConvertTo-Json | Set-Content -LiteralPath (Join-Path $BuildRoot 'manifest.json') -Encoding UTF8
 Write-Output "$checks port owner object audits PASS."

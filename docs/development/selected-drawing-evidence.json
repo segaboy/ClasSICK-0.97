@@ -1,0 +1,182 @@
+{
+  "specification": "SPEC-0046",
+  "baseline": "c9aa8494a5ce4aa7ef0febbb55e0f945d20be5fb",
+  "workers": [
+    {
+      "round": "implementation",
+      "worker": "claude",
+      "exit_code": 0,
+      "outer_timeout": false,
+      "elapsed_seconds": 80.06,
+      "input_bytes": 74990,
+      "input_sha256": "b2738aee95d9ebc388b4aa1225a9b3c89f02b6bd8bc421b5b7303064a05298b9",
+      "stderr_bytes": 0,
+      "reported_usage": {
+        "claude-opus-5-5": {
+          "inputTokens": 2,
+          "outputTokens": 9636,
+          "cacheReadInputTokens": 1452,
+          "cacheCreationInputTokens": 38184,
+          "webSearchRequests": 0,
+          "costUSD": 0.4984904,
+          "contextWindow": 1000000,
+          "maxOutputTokens": 128000,
+          "thinkingTokens": 4785,
+          "canonicalModel": "claude-opus-5-5",
+          "provider": "firstParty",
+          "costBasis": "list"
+        }
+      },
+      "observed_tool_calls": 0,
+      "tests_executed": [],
+      "artifact_usable": true
+    },
+    {
+      "round": "implementation",
+      "worker": "copilot",
+      "exit_code": 0,
+      "outer_timeout": false,
+      "elapsed_seconds": 160.75,
+      "input_bytes": 43313,
+      "input_sha256": "e38f6e3f46b548668022884f90ea9d225f3617cd82008df9c514b15127cf7ceb",
+      "stderr_bytes": 0,
+      "reported_usage": {
+        "totalPremiumRequestCost": 1,
+        "totalUserRequests": 1,
+        "totalNanoAiu": 29278120000,
+        "tokenDetails": {
+          "input": {
+            "tokenCount": 430
+          },
+          "cache_read": {
+            "tokenCount": 38987
+          },
+          "cache_write": {
+            "tokenCount": 45581
+          },
+          "output": {
+            "tokenCount": 17407
+          }
+        },
+        "totalApiDurationMs": 152776,
+        "aiCreditsStatus": "complete"
+      },
+      "observed_tool_calls": 4,
+      "tests_executed": [],
+      "artifact_usable": false
+    },
+    {
+      "round": "oracle-correction",
+      "worker": "copilot",
+      "exit_code": 0,
+      "outer_timeout": false,
+      "elapsed_seconds": 68.89,
+      "input_bytes": 44427,
+      "input_sha256": "5b8157abb7b0e5bc077d89fcaefcc3db53d0fccfb443795757e9134a8c64660b",
+      "stderr_bytes": 0,
+      "reported_usage": {
+        "totalPremiumRequestCost": 1,
+        "totalUserRequests": 1,
+        "totalNanoAiu": 15276820000,
+        "tokenDetails": {
+          "input": {
+            "tokenCount": 254
+          },
+          "cache_read": {
+            "tokenCount": 10902
+          },
+          "cache_write": {
+            "tokenCount": 23544
+          },
+          "output": {
+            "tokenCount": 9231
+          }
+        },
+        "totalApiDurationMs": 66717,
+        "aiCreditsStatus": "complete"
+      },
+      "observed_tool_calls": 2,
+      "tests_executed": [],
+      "artifact_usable": true
+    }
+  ],
+  "frozen_api": {
+    "personality/system1/code-select.h": "e798c5c84ab896c279566b3b7465b7e039c7344f9f0bcfaa8956686d46921890",
+    "docs/specifications/SPEC-0046-selected-port-drawing.md": "f280f9eab1133b28d452d6da83a0eb76f709c9bd019a8d52384911fcb9725d43"
+  },
+  "local_tests": {
+    "full_suites": [
+      {
+        "profile": "debug",
+        "ctests": 287
+      },
+      {
+        "profile": "sanitized",
+        "ctests": 287
+      },
+      {
+        "profile": "gcc32",
+        "ctests": 242
+      }
+    ],
+    "ctest_invocations": 816,
+    "drawing_assertions": 361585,
+    "width_endian_objects": 20,
+    "broken_implementation_controls": [
+      {
+        "name": "wrong-port",
+        "result": "assertion rejected broken implementation",
+        "exit_code": 1,
+        "diagnostic": "line 23: px(p->pixels,x,y)==(in?value:px(init,x,y))"
+      },
+      {
+        "name": "geometry-bypass",
+        "result": "assertion rejected broken implementation",
+        "exit_code": 1,
+        "diagnostic": "line 23: px(p->pixels,x,y)==(in?value:px(init,x,y))"
+      },
+      {
+        "name": "draw-skipped",
+        "result": "assertion rejected broken implementation",
+        "exit_code": 1,
+        "diagnostic": "line 23: px(p->pixels,x,y)==(in?value:px(init,x,y))"
+      },
+      {
+        "name": "rect-not-copied",
+        "result": "assertion rejected broken implementation",
+        "exit_code": 1,
+        "diagnostic": "line 23: px(p->pixels,x,y)==(in?value:px(init,x,y))"
+      },
+      {
+        "name": "drawing-slots-unchecked",
+        "result": "assertion rejected broken implementation",
+        "exit_code": 1,
+        "diagnostic": "line 120: f->res==CS_IMAGE_RUN_REFUSED && f->rep.cause==CS_IMAGE_SELECT_DIRECTORY"
+      },
+      {
+        "name": "admission-mode-unchecked",
+        "result": "assertion rejected broken implementation",
+        "exit_code": 1,
+        "diagnostic": "line 201: cs_image_run_selection_retire(&f->w->image,&f->req.run,&f->w->image_workspace, sizeof f->w->image_workspace,&f->desc,&f->rep2)==CS_IMAGE_FAULT"
+      }
+    ]
+  },
+  "ci": {
+    "status": "pending",
+    "conclusion": null
+  },
+  "target_run": false,
+  "release": false,
+  "inputs": {
+    "personality/system1/code-select.c": "c1ba6fb91801dd1c6f92f4347b8aedf0418cc8c538f8aef6e735c76e510353ce",
+    "personality/system1/code-select.h": "e798c5c84ab896c279566b3b7465b7e039c7344f9f0bcfaa8956686d46921890",
+    "personality/system1/code-image.c": "18de61fd8ef75cf56f346359a955f76d62cdab9812dba0cbb751a28ca2605152",
+    "personality/system1/code-image.h": "506e4064134feaea612b85b7571e19ae5a69bb0d4e19b8ea3ceab33fbdbc3574",
+    "tests/code-select-drawing-independent.c": "aa94ac0d6bb5c1cd27394e72fdc5085ceda4680f76fa3dabc9c6a0498b219d07",
+    "scripts/Verify-PortOwnerM68k.py": "77658063b2f623fa10225efbbe990b55161d8226ab1e76d922c0faf33b5be085",
+    "scripts/Verify-PortOwnerObjects.ps1": "3c7c4c797fe91e0f7345f2c15168ad01b8162f0939a823908f678218d922a499",
+    "CMakeLists.txt": "b1256105d930041032b2e9824e697cb407e9ecc7e4f962387fda20066625b16f"
+  },
+  "remaining_provider_allowance": "Unknown for Claude,Copilot,Grok,Antigravity; task receipts do not expose remaining account allowances.",
+  "usage_limits": "Provider task counters and list-price estimates are not subscription bills or directly comparable ChatGPT-quota savings."
+}

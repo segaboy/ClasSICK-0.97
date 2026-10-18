@@ -128,3 +128,10 @@ qualification or redundant reviewer. Prefer <=450-line dependent author artifact
 behind frozen private hooks within one accepted milestone. Keep unchanged packet
 prefixes stable; append follow-up deltas to preserve potential caching. Test worker
 never receives implementation/history during those phases. [Receipt](port-owner-evidence.md).
+
+## Selected-port drawing allocation -2026-10-18
+Reuse qualified Claude Opus5.5 low for one bounded coordinator delta and Copilot
+Sonnet5.5 low for the distinct independent pixel/routing/refusal oracle. Freeze
+the explicit opt-in API/contract first; keep new implementation out of the oracle
+packet. No duplicated Grok/Argon call. Codex integrates and executes checks.
+[Actual receipt](selected-drawing-evidence.md). Existing no-writes/input/usage rules remain.

@@ -7,6 +7,7 @@
 /* Profile prepared-port-owner-v1. cs_image_select_state/_phase/_cause and the
  * image member `select` live in code-image.h (constructor-zeroed scalars). */
 #define CS_IMAGE_SELECT_PROFILE UINT32_C(0x50524631)
+#define CS_IMAGE_SELECT_DRAW_PROFILE UINT32_C(0x50524632)
 #define CS_IMAGE_SELECT_RESERVATION UINT32_C(206)
 #define CS_IMAGE_SELECT_BELOW_G UINT32_C(202)
 #define CS_IMAGE_SELECT_DEST_BYTES UINT32_C(4)
@@ -44,7 +45,7 @@ typedef struct {
     cs_m68k_guard guard;
     cs_image_select_policy policy;
     uint32_t word,parameter_value,current,staged_value;
-    uint8_t scratch_bytes[6],value_bytes[4];
+    uint8_t scratch_bytes[6],value_bytes[4],rect_bytes[8];
 } cs_image_select_workspace;
 /* Reports never contain a native view/port pointer. run.guest is the actual
  * stop frame; first_* are copies of the image's immutable first-stop and
@@ -85,6 +86,13 @@ typedef struct {
  * ARGUMENT and preserves every output byte, including report and workspace.
  * Unknown native liveness is a truthful-host precondition, not detected. */
 cs_image_run_result cs_image_run_selection(cs_image_service *image,
+    const cs_image_select_request *request,cs_trap_frame *caller,
+    cs_image_select_workspace *workspace,size_t capacity,
+    cs_image_select_report *report);
+/* SPEC-0046 opt-in PRF2: selection plus canonical PaintRect/EraseRect through
+ * freshly selected native view. All four slots unsupported; owned8-byte Rect
+ * copied before helper/scratch writes. Existing PRF1 entry remains unchanged. */
+cs_image_run_result cs_image_run_selection_draw(cs_image_service *image,
     const cs_image_select_request *request,cs_trap_frame *caller,
     cs_image_select_workspace *workspace,size_t capacity,
     cs_image_select_report *report);

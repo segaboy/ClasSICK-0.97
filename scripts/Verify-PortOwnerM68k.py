@@ -17,6 +17,7 @@ MODULES = ('core/memory/guest.c', 'core/memory/manager.c',
     'personality/system1/resources.c', 'personality/system1/code-image.c',
     'personality/system1/code-run.c', 'personality/system1/code-select.c',
     'personality/system1/quickdraw-select.c', 'personality/system1/quickdraw-rects.c',
+    'personality/system1/quickdraw-view.c',
     'core/cpu/m68k.c', 'core/cpu/m68k-bus.c', 'arch/m68k/runtime.c')
 
 
@@ -70,7 +71,7 @@ def main():
                 raise ValueError('Unresolved owner closure: ' + undefined + '\n'
                                  + json.dumps(owners, indent=2))
             symbols = run([nm, '--defined-only', '--format=posix', combined])
-            for entry in ('cs_image_run_selection', 'cs_image_run_selection_retire',
+            for entry in ('cs_image_run_selection', 'cs_image_run_selection_draw', 'cs_image_run_selection_retire',
                           'cs_qd_select_get', 'cs_qd_select_set'):
                 if not re.search(r'^' + entry + r' T ', symbols, re.M):
                     raise ValueError('Disconnected owner entry ' + entry)
@@ -106,7 +107,7 @@ def main():
         'formats/resourcefork/reader.h', 'arch/m68k/runtime.h',
         'docs/specifications/SPEC-0045-integrated-port-selection.md',
         'scripts/Verify-PortOwnerM68k.py')
-    report = dict(specification='SPEC-0045', native_cpu='68000',
+    report = dict(specification='SPEC-0046', native_cpu='68000',
         object_audits=4 * len(MODULES), complete_relocatable_links=4,
         storage_bytes_68000=sizes, profiles=profiles, target_executed=False,
         inputs={f: hashlib.sha256((repo / f).read_bytes().replace(b'\r\n', b'\n')).hexdigest()
