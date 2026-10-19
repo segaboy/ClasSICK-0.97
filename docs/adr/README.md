@@ -1,5 +1,7 @@
 # Architecture decision records
 
+2026-10-19: [ADR-0059](0059-native-pointer-input-contract.md) freezes SPEC-0051 original pointer/input semantics and68 unexecuted cases. Core-only contract,no code/adapter/trial;Mac source lane held pending owner disposition.
+
 2026-10-19: [ADR-0058](0058-next-paired-release-goal.md) recommends the next cursor/interactive-window paired release goal and first source/input contract slice. Planning only,no feature tests or changed published pointers.
 
 2026-10-19: [ADR-0057](0057-paired-release-package-freeze.md) freezes unchanged paired candidates and exact uploads for owner approval. Published pointers stay unchanged;no runtime/trial/publication scope expands.

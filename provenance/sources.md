@@ -3358,3 +3358,19 @@ SRC-0300 executed checkpoint: CI3150/11;local596/2;38 mouse+5 Space events throu
 ## SRC-0309 - Lead next-release selection and planning review
 
 - Codex adopts and tightens the worker plan,defines provisional paired versions,first source/contract slice,release checks and explicit gates. Original engineering planning,no historical claim or executed feature test. [Review](../docs/development/next-release-plan-review.md).
+
+## SRC-0310 - Owner first release2 contract task
+
+- Dean Howell,2026-10-19: "Great. Start your next task toward the next release." Accepts the proposed pointer/input contract and Mac motion-source/PC evidence inventory slice after ADR-0058. No implementation,fixtures,test execution,new target trial or release. [Review](../docs/development/pointer-input-contract-review.md).
+
+## SRC-0311 - Claude original pointer contract and case draft
+
+- One8332-byte frozen reviewed-public/original packet,Opus5.5 low,111.14s,zero tools/writes/tests.195 spec lines exceeds170 cap;90 case lines;54 proposed identifiers,not reported44. No manuals/hardware algorithm supplied. [Receipt](../docs/development/pointer-input-contract-review.json).
+
+## SRC-0312 - Copilot independent cancellation/counter contract review
+
+- One11928-byte corrected core/case excerpt,Sonnet5.5 low,16.19s,one permitted prompt read,zero writes/tests. Five findings,over250-word cap;lead partially adopts coverage and rejects erroneous trace/inapplicable claims. No source/hardware/implementation input. [Dispositions](../docs/development/pointer-input-contract-review.md).
+
+## SRC-0313 - Lead pointer contract/source-boundary review
+
+- Codex finalizes original engineering semantics,68 unexecuted case identifiers and PC evidence classes. Rechecks SRC-0080 identity;holds Mac source review after one unrelated declaration peek under owner-disposition policy,no function body/use/export or affected implementation. No new motion facts admitted. [Inventory](../docs/development/pointer-source-and-input-inventory.md),[review](../docs/development/pointer-input-contract-review.md).

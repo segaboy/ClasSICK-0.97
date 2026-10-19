@@ -1,5 +1,7 @@
 # Native Macintosh and x86 parity plan
 
+2026-10-19 release2 first slice: SPEC-0051 pure native pointer/input contract for both CPUs,68 unexecuted case identifiers and separate PC input-evidence inventory. Mac hardware source lane held for owner disposition;no motion binding or pixel/GUI/human pass claimed. [Review](pointer-input-contract-review.md).
+
 Current release/next goal2026-10-19: ROM0.3.0-alpha.1/PC0.1.0-alpha.1 published;[receipt](../../releases/paired-native-preview-1-publication.json) supersedes earlier pending-status paragraphs. Next proposed [paired-native-preview-2](../../releases/paired-native-preview-2.md) adds pointer/cursor and one draggable/content-click window to both native paths. Planning only;source sufficiency/contract first,no code or new trial.
 
 2026-10-19 paired-native-preview-1: SPEC-0050 removes the PC normal60-second/Escape stop;38 mouse+5 Space inputs accepted through185 guest seconds,scene intact. Mac ROM byte-identical. CI3150/11 pass;human PC capture/GUI startup and release freeze remain open. [Evidence](preview-session-evidence.md).

@@ -1,5 +1,7 @@
 # Current milestones and release tracks
 
+2026-10-19 paired-native-preview-2: SPEC-0051 pointer/input contract and68 unexecuted cases reviewed. PC evidence inventory complete;Mac hardware-source review held pending owner disposition. No moving cursor/adapter implementation or new trial. [Review](development/pointer-input-contract-review.md).
+
 2026-10-19 next goal proposed: [paired-native-preview-2](../releases/paired-native-preview-2.md),first interactive native window. Pointer/cursor,drag/content action,dirty redraw and input reliability must match Mac68000/x86-64 PC. First slice:source-sufficiency/input contract. All feature checks unexecuted,current releases unchanged.
 
 2026-10-19 paired-native-preview-1: ROM0.3.0-alpha.1/PC0.1.0-alpha.1 published experimental prereleases. Exact eight downloads/digests/tags verified;complete source,license and setup guides included. No System release or compatibility-gate closure. [Receipt](../releases/paired-native-preview-1-publication.json).

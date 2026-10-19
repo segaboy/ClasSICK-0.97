@@ -137,3 +137,7 @@ Checks:
 ## Review basis
 
 [Published pair](paired-native-preview-1-publication.json),[native parity](../docs/development/native-parity-plan.md),[display target](../docs/development/display-target.md),[SPEC-0039](../docs/specifications/SPEC-0039-native-mouse-foundations.md),[Window Manager review](../docs/research/seven-draft-lead-review-2026-10-14.md#window-manager-wk-1-through-wk-16),[event review](../docs/research/reentry-event-package-lead-review.md#es-o-dispositions-and-event-profile). Later-manual reviews are inputs to future contracts,not proof of January1984 behavior. Both required System1/ROM boot directions remain untested.
+
+## First-slice checkpoint -2026-10-19
+
+[SPEC-0051 contract/review](../docs/development/pointer-input-contract-review.md) and68 unexecuted case identifiers are ready;PC evidence inventory separates device/GUI/human classes. Mac source lane is held pending the owner decision after an unrelated manual declaration peek;no new motion facts or algorithms adopted. No core/cursor/adapter implementation or new trial is authorized by this checkpoint.

@@ -1,0 +1,474 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-19",
+  "baseline": "14a2c31a51221e5c287ae5bbe9b90531e8fada73",
+  "specification": "SPEC-0051",
+  "decision": "ADR-0059",
+  "test_case_inventory": "TEST-0061",
+  "sources": [
+    "SRC-0310",
+    "SRC-0311",
+    "SRC-0312",
+    "SRC-0313"
+  ],
+  "workers": [
+    {
+      "worker": "claude",
+      "model": "claude-opus-5-5",
+      "effort": "low",
+      "execution": {
+        "round": "contract",
+        "worker": "claude",
+        "exit_code": 0,
+        "outer_timeout": false,
+        "elapsed_seconds": 111.14,
+        "input_bytes": 8332,
+        "input_sha256": "f27fc734335b3c030caf3490bce35090b32723ce368147fe4123d9ccfc7ab2ac",
+        "stderr_bytes": 0
+      },
+      "observed_tools": [],
+      "proposed_files": [
+        {
+          "path": "docs/specifications/SPEC-0051-native-pointer-input.md",
+          "lines": 195,
+          "sha256": "2c44e503e0d29c6ba9c2139c0989d4195768a7bafe0a3f1ca5b75f6ef00ac305"
+        },
+        {
+          "path": "docs/testing/TEST-0061-pointer-input-contract-cases.md",
+          "lines": 90,
+          "sha256": "669aa803e37735a532ab7d0e9069afb04f3f25ccfd20b2566eed7c5f52133971"
+        }
+      ],
+      "findings": [
+        "PC adapter must negate PS/2 dy and call cancel on DROPPED.",
+        "Mac motion has no established decoder; adapter limited to button-only until source inventory."
+      ],
+      "tests_executed": [],
+      "worker_writes": 0,
+      "provider_reported": {
+        "usage": {
+          "input_tokens": 2,
+          "cache_creation_input_tokens": 3830,
+          "cache_read_input_tokens": 2384,
+          "output_tokens": 11520,
+          "output_tokens_details": {
+            "thinking_tokens": 4102
+          },
+          "server_tool_use": {
+            "web_search_requests": 0,
+            "web_fetch_requests": 0
+          },
+          "service_tier": "standard",
+          "cache_creation": {
+            "ephemeral_1h_input_tokens": 3830,
+            "ephemeral_5m_input_tokens": 0
+          },
+          "inference_geo": "global",
+          "iterations": [
+            {
+              "input_tokens": 2,
+              "output_tokens": 11520,
+              "cache_read_input_tokens": 2384,
+              "cache_creation_input_tokens": 3830,
+              "cache_creation": {
+                "ephemeral_5m_input_tokens": 0,
+                "ephemeral_1h_input_tokens": 3830
+              },
+              "type": "message"
+            }
+          ],
+          "speed": "standard",
+          "fallback_credit": null
+        },
+        "modelUsage": {
+          "claude-opus-5-5": {
+            "inputTokens": 2,
+            "outputTokens": 11520,
+            "cacheReadInputTokens": 2384,
+            "cacheCreationInputTokens": 3830,
+            "webSearchRequests": 0,
+            "costUSD": 0.2615248,
+            "contextWindow": 1000000,
+            "maxOutputTokens": 128000,
+            "thinkingTokens": 4102,
+            "canonicalModel": "claude-opus-5-5",
+            "provider": "firstParty",
+            "costBasis": "list"
+          }
+        },
+        "total_cost_usd": 0.2615248,
+        "permission_denials": [],
+        "num_turns": 1
+      },
+      "deviation": "spec195 lines exceeds170 cap;case list54 identifiers,not reported44,above requested approximately35-45"
+    },
+    {
+      "worker": "copilot",
+      "model": "claude-sonnet-5.5",
+      "effort": "low",
+      "execution": {
+        "round": "review",
+        "worker": "copilot",
+        "exit_code": 0,
+        "outer_timeout": false,
+        "elapsed_seconds": 16.19,
+        "input_bytes": 11928,
+        "input_sha256": "1812afb5dad87c6a8a04a543b1045129bbdcc6485eab529f5432120d8e370f48",
+        "stderr_bytes": 0
+      },
+      "observed_tools": [
+        {
+          "type": "tool.execution_start",
+          "data": {
+            "toolCallId": "toolu_01JEMdy8zVyWzLQTFDdkEo5E",
+            "toolName": "view",
+            "arguments": {
+              "path": "C:\\ClasSICK\\pointer-contract-20261019-a\\review\\copilot\\input\\prompt.txt"
+            },
+            "turnId": "0",
+            "model": "claude-sonnet-5.5",
+            "toolTitle": "Viewing file"
+          },
+          "id": "f26dfff7-89c6-4c4b-8c81-0580dad76704",
+          "timestamp": "2026-10-19T21:13:48.827Z",
+          "parentId": "1a72fe68-0949-4c61-9f84-dd86df4510a7"
+        }
+      ],
+      "proposed_files": [],
+      "findings": [
+        {
+          "severity": "high",
+          "clause": "\u00a76 Counter / cancel; C28",
+          "trace": "Pointer down=1, counter.down=1. Cancel produces R. The owner calls sample(btn,0). A repeated cancel produces C,Su with no R, so the counter is untouched. The case says 'one owner release' but never checks counter.down==0 or that count is unchanged. C24 says 'counter count unchanged' while the spec says a cancel release calls sample(btn,0).",
+          "problem": "The expected counter behavior is ambiguous. The release may be counted or not, and it is unclear whether the counter mirror is verified.",
+          "suggested_fix": "State exactly what sample(btn,0) does to the counter on a cancel release. Add a mirror-equality assertion (counter.down==pointer.down) after every case."
+        },
+        {
+          "severity": "high",
+          "clause": "\u00a76 begin / Counter",
+          "trace": "Pointer is re-begun with b=LEFT while the old counter.down=1. The pointer has down=0, so the mirror diverges. Nothing in the core detects this.",
+          "problem": "Re-begin relies on an owner-side reset. No case covers a re-begin while the counter is down, or a begin with held LEFT against a fresh counter.",
+          "suggested_fix": "Add owner-level cases for re-begin with a stale counter. Require counter re-begin before the pointer's first sample."
+        },
+        {
+          "severity": "medium",
+          "clause": "\u00a75 saturation; C30/C31",
+          "trace": "Counter at MAX, pointer press. The count stays MAX but P is published. The release then calls sample(btn,0), which leaves down=0 while the count is unchanged.",
+          "problem": "After saturation, the count no longer reflects the number of presses. The cases do not check counter.down parity or that the next press is still seen as an edge.",
+          "suggested_fix": "Assert counter.down transitions 1\u21920\u21921 at saturation. Document that count is saturating telemetry only."
+        },
+        {
+          "severity": "medium",
+          "clause": "\u00a75 return codes; C16/C20",
+          "trace": "S(down=0,suppress=1), sample (0,0,2). The result is OK, but out.buttons=2 while suppressed. Cancel publishes buttons=0 and returns CHANGED. A repeated cancel returns CHANGED with no state change.",
+          "problem": "CHANGED does not mean state changed, and OK/CHANGED cannot be used as a state-delta signal. Consumers could misuse it.",
+          "suggested_fix": "Document CHANGED as 'notify consumers', and add a test that the owner keys on flags rather than the return code."
+        },
+        {
+          "severity": "low",
+          "clause": "\u00a74 precedence; C22/C23",
+          "trace": "Invalid buttons together with a NULL out, or invalid buttons with an invalid stored state. The expected result is ARGUMENT, since step 3 precedes step 4. Only single-fault cases exist.",
+          "problem": "Precedence is untested across multiple faults. Begin with an alias and bad buttons is also untested.",
+          "suggested_fix": "Add multi-fault cases: bad buttons plus a corrupt state must give ARGUMENT; NULL plus alias; wrapping range plus bad buttons."
+        }
+      ],
+      "tests_executed": [],
+      "worker_writes": 0,
+      "provider_reported": {
+        "totalPremiumRequestCost": 1,
+        "totalUserRequests": 1,
+        "totalNanoAiu": 3206750000,
+        "aiCreditsStatus": "complete",
+        "tokenDetails": {
+          "input": {
+            "tokenCount": 168
+          },
+          "cache_read": {
+            "tokenCount": 6390
+          },
+          "cache_write": {
+            "tokenCount": 7749
+          },
+          "output": {
+            "tokenCount": 1172
+          }
+        },
+        "totalApiDurationMs": 10620,
+        "sessionStartTime": "2026-10-19T21:13:46.412Z",
+        "codeChanges": {
+          "linesAdded": 0,
+          "linesRemoved": 0,
+          "filesModifiedCount": 0,
+          "filesModified": []
+        },
+        "modelMetrics": {
+          "claude-sonnet-5.5": {
+            "requests": {
+              "count": 2,
+              "cost": 1
+            },
+            "usage": {
+              "inputTokens": 14307,
+              "outputTokens": 1172,
+              "cacheReadTokens": 6390,
+              "cacheWriteTokens": 7749,
+              "reasoningTokens": 0
+            },
+            "cacheExpiresAt": "2026-10-19T21:18:48.856Z",
+            "totalNanoAiu": 3206750000,
+            "aiCreditsStatus": "complete",
+            "tokenDetails": {
+              "input": {
+                "tokenCount": 168
+              },
+              "cache_read": {
+                "tokenCount": 6390
+              },
+              "cache_write": {
+                "tokenCount": 7749
+              },
+              "output": {
+                "tokenCount": 1172
+              }
+            }
+          }
+        },
+        "agentMetrics": {
+          "main": {
+            "totalApiDurationMs": 10620,
+            "totalNanoAiu": 3206750000,
+            "modelMetrics": {
+              "claude-sonnet-5.5": {
+                "requests": {
+                  "count": 2,
+                  "cost": 1
+                },
+                "usage": {
+                  "inputTokens": 14307,
+                  "outputTokens": 1172,
+                  "cacheReadTokens": 6390,
+                  "cacheWriteTokens": 7749,
+                  "reasoningTokens": 0
+                },
+                "totalNanoAiu": 3206750000,
+                "tokenDetails": {
+                  "input": {
+                    "tokenCount": 168
+                  },
+                  "cache_read": {
+                    "tokenCount": 6390
+                  },
+                  "cache_write": {
+                    "tokenCount": 7749
+                  },
+                  "output": {
+                    "tokenCount": 1172
+                  }
+                }
+              }
+            }
+          }
+        },
+        "providerModelMetrics": [
+          {
+            "provider": {
+              "id": "copilot",
+              "label": "GitHub Copilot",
+              "kind": "copilot"
+            },
+            "modelId": "claude-sonnet-5.5",
+            "metrics": {
+              "requests": {
+                "count": 2,
+                "cost": 1
+              },
+              "usage": {
+                "inputTokens": 14307,
+                "outputTokens": 1172,
+                "cacheReadTokens": 6390,
+                "cacheWriteTokens": 7749,
+                "reasoningTokens": 0
+              },
+              "totalNanoAiu": 3206750000,
+              "aiCreditsStatus": "complete",
+              "tokenDetails": {
+                "input": {
+                  "tokenCount": 168
+                },
+                "cache_read": {
+                  "tokenCount": 6390
+                },
+                "cache_write": {
+                  "tokenCount": 7749
+                },
+                "output": {
+                  "tokenCount": 1172
+                }
+              }
+            },
+            "modelDisplayName": "Claude Sonnet 5.5"
+          }
+        ],
+        "currentModel": "claude-sonnet-5.5",
+        "lastCallInputTokens": 9863,
+        "lastCallOutputTokens": 1091
+      },
+      "deviation": "audit response exceeds250-word limit;partial case excerpt excluded later multi-fault additions"
+    }
+  ],
+  "lead_corrections": [
+    "Keep all prior38mouse+5Space/185second headless observations as E2 device/API,never E3GUI or E4human.",
+    "Define cancel event buttons0 as unknown physical state,DOWN/SUPPRESSED final-state flags,and repeated cancel CHANGED notifications.",
+    "Keep one transition owner/counter mirror;release never increments count and saturation does not hide an edge. No silent live re-begin or replay deduplication promise.",
+    "Specify input initialization,flat-address checked overlap/range admission,validation priority,all-defined-field success and no arbitrary unreadable-pointer recovery.",
+    "Do not silently mask invalid decoder outputs or negate arbitrary INT32_MIN;PC directional mapping requires later source/qualification evidence.",
+    "Remove stale-save/wrap optimism:old cursor area must be repaired,storage retired while live,identity exhaustion refuses until a separately specified quiescent protocol;actual cursor API deferred.",
+    "Use48B Mono/1024B RGBA save caps,64B art and provisional64B metadata design cap;prove actual ABI/cost later,no new full-screen buffer.",
+    "Specify final movement before ending an old drag and new press hit-testing at the final position.",
+    "Permit bounded raw interrupt records under future adapter contracts rather than imposing byte-only IRQ data on unreviewed Mac hardware."
+  ],
+  "independent_review_dispositions": [
+    {
+      "item": 1,
+      "disposition": "adopt case coverage;reject claimed ambiguity",
+      "reason": "existing button contract already proves release does not count;add mirror checks and explicit release behavior."
+    },
+    {
+      "item": 2,
+      "disposition": "adopt owner cases;not a core defect",
+      "reason": "live re-begin violates stated quiescence;core cannot inspect an external counter."
+    },
+    {
+      "item": 3,
+      "disposition": "adopt stronger saturation trace",
+      "reason": "count saturation was already declared;add mirror1/0/1 and event survival assertions."
+    },
+    {
+      "item": 4,
+      "disposition": "adopt caution;correct reviewer trace",
+      "reason": "suppress1 plus buttons2 observes LEFT0 and returnsCHANGED,notOK;return codes are not redraw commands."
+    },
+    {
+      "item": 5,
+      "disposition": "adopt combined-case clarity;reject inapplicable begin alias",
+      "reason": "multi-fault R09-R11 already existed outside provided excerpt;begin has only one pointer. AddR12 combination case."
+    }
+  ],
+  "case_ids": [
+    "A01",
+    "A02",
+    "A03",
+    "A04",
+    "A05",
+    "C01",
+    "C02",
+    "C03",
+    "C04",
+    "C05",
+    "C06",
+    "C07",
+    "C08",
+    "C09",
+    "C10",
+    "C11",
+    "C12",
+    "C13",
+    "C14",
+    "C15",
+    "C16",
+    "C17",
+    "C18",
+    "C19",
+    "C20",
+    "C21",
+    "C22",
+    "C23",
+    "C24",
+    "C25",
+    "C26",
+    "C27",
+    "C28",
+    "C29",
+    "C30",
+    "C31",
+    "C32",
+    "E01",
+    "E02",
+    "E03",
+    "K01",
+    "K02",
+    "K03",
+    "K04",
+    "K05",
+    "K06",
+    "K07",
+    "K08",
+    "K09",
+    "K10",
+    "O01",
+    "O02",
+    "O03",
+    "O04",
+    "R01",
+    "R02",
+    "R03",
+    "R04",
+    "R05",
+    "R06",
+    "R07",
+    "R08",
+    "R09",
+    "R10",
+    "R11",
+    "R12",
+    "W01",
+    "W02"
+  ],
+  "case_count": 68,
+  "cases_executed": [],
+  "feature_tests_executed": [],
+  "implementation_authorized": false,
+  "new_target_run_authorized": false,
+  "mac_source_review": {
+    "state": "held-owner-disposition-pending",
+    "identity_rechecked": {
+      "source_id": "SRC-0080",
+      "bytes": 50687193,
+      "sha256": "4c0de9a3a4d41c41b8462b2a77aad8b95b92e1980afff165c1f986da0a81988b",
+      "pages": 290
+    },
+    "new_motion_facts_adopted": false,
+    "sanitized_exposure": {
+      "status": "held-owner-disposition-pending",
+      "source": "SRC-0080",
+      "context": "page-location peek in already-admitted published manual",
+      "exposure": "one unrelated printed sound constant declaration; no function body,firmware,emulator source or mouse algorithm",
+      "affected_lane": "Mac motion source-sufficiency review only",
+      "affected_implementation_paths": [],
+      "affected_commits": [],
+      "use_or_redistribution": false,
+      "worker_manual_exposure": false,
+      "source_pdf_identity_rechecked": true,
+      "unaffected_work": [
+        "independent original pointer contract",
+        "unexecuted case review",
+        "existing PC evidence inventory"
+      ],
+      "policy": "docs/clean-room/POLICY.md#contamination-response",
+      "owner_question_pending": true
+    }
+  },
+  "pc_evidence_inventory": "docs/development/pointer-source-and-input-inventory.md",
+  "contract_hashes_git_lf": {
+    "docs/specifications/SPEC-0051-native-pointer-input.md": "b7cbd6ccaec5466c4fd45b05c133d189dc88b978a528afbb3eb83b87297f2a23",
+    "docs/testing/TEST-0061-pointer-input-contract-cases.md": "7314ec3ef35741e993e62cc622a34e002bc0c7c67d7e305a049e1cc9b2e1e973",
+    "docs/development/pointer-source-and-input-inventory.md": "2dfd6360b0615c2b815d4a128a5490c9bad9981ac5277519de0d68ed0661692b"
+  },
+  "remaining_account_allowances": {
+    "claude": "unavailable;not exposed",
+    "copilot": "unavailable;not exposed",
+    "grok": "unavailable;not exposed",
+    "antigravity": "unavailable;not exposed"
+  },
+  "scope": "SPEC-0051 original native pointer/input contract and68 unexecuted TEST-0061 case identifiers reviewed for paired-native-preview-2. Shared signed-safe coordinates,one-owner edge/cancel/suppression,counter mirror and future bounded cursor composition requirements;no code/header/fixtures/test execution/build/binding/target run/release. PC evidence inventory distinguishes hosted,E2device,E3GUI,E4human;no input fix claimed. Mac motion source review held for owner disposition after one unrelated published-manual constant-declaration peek;no function bodies,no adopted declaration,no worker/manual exposure or affected implementation. Current releases/24 originals/held brief/UART/wiki preserved;OneNote/wiki retired and existing compatibility gates persist."
+}

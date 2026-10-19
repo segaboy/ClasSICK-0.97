@@ -1,5 +1,7 @@
 # Agent Orchestration Protocol
 
+Pointer-contract allocation2026-10-19: Claude primary195/90-line original contract/cases,111.14s,zero tools/writes/tests;spec cap exceeded. One distinct-risk Copilot cancellation/counter audit16.19s,one permitted prompt read,zero writes/tests;lead corrects erroneous/partial-context findings. Manuals withheld from both;Mac source lane held under policy,independent work unaffected. All case lists unexecuted. [Review](pointer-input-contract-review.md).
+
 Next-release planning2026-10-19: one Claude primary139-line plan,53.75s,zero tools/writes/tests,within150 cap. Codex selects/tightens goal and evidence gates;no second worker or requalification. Future slices keep substantial external primary,distinct-risk independent oracle only,and Codex sole source reviewer/writer/integrator/verifier. [Review](next-release-plan-review.md).
 
 Final-package allocation2026-10-19: one Claude primary303-line builder/four notes,one distinct-risk independent Copilot283-line auditor;Codex integrates rather than recreates and runs37 actual package checks. Two calls,prior qualifications reused;Grok/Argon idle. Both exceed output-line caps;lead fixes sourceZIP directory and compression-flag assumptions. Remaining allowances unavailable. [Review](paired-release-package-review.md).

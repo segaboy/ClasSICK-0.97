@@ -1,5 +1,7 @@
 # ClasSICK 0.97
 
+2026-10-19: release2 pointer/input engineering contract reviewed;68 cases unexecuted. PC GUI/device/human evidence separated;Mac motion source review held for owner disposition. No runtime/release change. [Review](docs/development/pointer-input-contract-review.md).
+
 2026-10-19 next proposed paired release: moving original cursor and one draggable/click-responsive native window on Mac68000 and x86-64 PC. ROM0.4.0-alpha.1/PC0.2.0-alpha.1 provisional;planning only,no code/trial/release. [Goal](releases/paired-native-preview-2.md).
 
 2026-10-19: [Mac ROM0.3.0-alpha.1](https://github.com/segaboy/ClasSICK-0.97/releases/tag/rom-v0.3.0-alpha.1) and [native PC0.1.0-alpha.1](https://github.com/segaboy/ClasSICK-0.97/releases/tag/pc-v0.1.0-alpha.1) published as paired experimental drawing previews. All eight public assets verified;System unreleased and known input/GUI/hardware limits remain. [Receipt](releases/paired-native-preview-1-publication.json).
