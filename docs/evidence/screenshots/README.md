@@ -19,3 +19,21 @@ Representative matched-counter captures:
 ![Native x86-64 selected-port boot after two synthetic presses](2026-10-18/paired-selection-pc-two-presses.png)
 
 See [storage and publication policy](../../development/screenshot-evidence.md). The original private captures and verbose logs remain preserved; this index adds reviewed publication copies.
+
+- [Mac native outline scene before input,counter0000.](2026-10-19/paired-preview-mac-initial.png) — [trial](../../development/paired-preview-boot-trial.md).
+
+- [Mac human-confirmed two-click result,counter0002,drawing intact.](2026-10-19/paired-preview-mac-two-presses.png) — [trial](../../development/paired-preview-boot-trial.md).
+
+- [PC native outline scene before input,counter0000.](2026-10-19/paired-preview-pc-initial.png) — [trial](../../development/paired-preview-boot-trial.md).
+
+- [PC first synthetic mouse press,counter0001.](2026-10-19/paired-preview-pc-first-press.png) — [trial](../../development/paired-preview-boot-trial.md).
+
+- [PC repeated held state leaves counter0001.](2026-10-19/paired-preview-pc-held-repeat.png) — [trial](../../development/paired-preview-boot-trial.md).
+
+- [PC second synthetic press,counter0002.](2026-10-19/paired-preview-pc-two-presses.png) — [trial](../../development/paired-preview-boot-trial.md).
+
+- [PC synthetic two presses plus Space,counter0003.](2026-10-19/paired-preview-pc-after-space.png) — [trial](../../development/paired-preview-boot-trial.md).
+
+- [PC diagnostic completion,counter0006 after mixed synthetic and unreliable owner input; human qualification failed.](2026-10-19/paired-preview-pc-complete-human-attempt.png) — [trial](../../development/paired-preview-boot-trial.md).
+
+- [PC automated follow-up:21 accepted mouse presses plus Space,counter0022; normal diagnostic completion.](2026-10-19/paired-preview-pc-automated-complete.png) — [trial](../../development/paired-preview-boot-trial.md).

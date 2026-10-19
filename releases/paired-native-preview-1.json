@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "candidate": "paired-native-preview-1",
-  "status": "compiler-verified-unbooted-draft",
+  "status": "boot-observed-pc-human-input-blocked",
   "owner_source": "SRC-0291",
   "decision": "ADR-0055",
   "specification": "SPEC-0049",
@@ -12,8 +12,8 @@
       "proposed_version": "0.3.0-alpha.1",
       "build_mode": "--outline-drawing",
       "compiler_verified": true,
-      "boot_qualified": false,
-      "human_input_qualified": false,
+      "boot_qualified": true,
+      "human_input_qualified": true,
       "image_sha256": "2b600319d334145e582adc3db0e0fcf495d5f44309488c19e652dfb378391780"
     },
     "pc": {
@@ -22,10 +22,12 @@
       "proposed_version": "0.1.0-alpha.1",
       "build_mode": "-OutlineDrawing",
       "compiler_verified": true,
-      "boot_qualified": false,
+      "boot_qualified": true,
       "human_input_qualified": false,
       "image_sha256": "e9567ac8f91c48dd435ed7fc7c1021511da131ab8975a7ca7a3ad17aeaa8127c",
-      "payload_sha256": "cc667453316e262de61af774c880e3607b034cded3d742957b220a589f36e042"
+      "payload_sha256": "cc667453316e262de61af774c880e3607b034cded3d742957b220a589f36e042",
+      "human_input_status": "failed-unreliable",
+      "automated_input_status": "21-of-21-duration-matrix-plus-space-pass"
     }
   },
   "feature_checks": {
@@ -40,10 +42,9 @@
   },
   "release_ready": false,
   "blockers": [
-    "Both exact-byte candidate boot qualifications need fresh owner trial approval.",
-    "Ordinary human input walkthrough and reviewed screenshots pending.",
-    "Document and resolve/accept PC diagnostic session lifecycle.",
-    "Local DRAFT prepared; package/source/license/checksum review and final freeze pending.",
+    "PC ordinary human clicks were unreliable; synthetic matrix does not reproduce or close this issue.",
+    "PC active/completed session state and60-second input cutoff need resolution or explicit preview acceptance.",
+    "Local DRAFT prepared; final package/source/license/checksum review and freeze pending.",
     "Publication requires explicit owner request for reviewed candidates."
   ],
   "unchanged_gates": [
@@ -59,5 +60,6 @@
   "new_target_run_or_publication_authorized": false,
   "source_revision": "207e557b83cbab6933e7628275879f0f38c11021",
   "verification_receipt": "../docs/development/paired-preview-evidence.json",
-  "feature_check_scope": "Hosted/compiler conformance only; no target/human qualification."
+  "feature_check_scope": "Hosted/compiler checks plus actual narrow exact-image boot/scene observations; PC human reliability remains failed.",
+  "boot_trial_receipt": "../docs/development/paired-preview-boot-trial.json"
 }

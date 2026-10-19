@@ -1,5 +1,7 @@
 # Paired native drawing preview 1 - release target
 
+2026-10-19 qualification checkpoint: both exact candidates boot and all logical pixels match at equal counts. Mac human check passes; PC human check failed on intermittent clicks.21/21 synthetic presses and Space pass; diagnostic stops consuming input after60 guest seconds. Release remains blocked. [Evidence](../docs/development/paired-preview-boot-trial.md); [clear test procedure](../docs/development/paired-preview-input-check.md).
+
 Draft target2026-10-19; SRC-0291 / ADR-0055 / SPEC-0049. No publication,tag or
 target trial authorized here. [Machine readiness](paired-native-preview-1.json).
 

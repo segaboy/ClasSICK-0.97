@@ -1,5 +1,7 @@
 # Native Macintosh and x86 parity plan
 
+2026-10-19 paired-native-preview-1: exact native Mac/PC boots and all175104 same-counter scene pixels match. Mac human input passes; PC human input unreliable despite21/21 synthetic presses. Release blocked on PC input/lifecycle and package/publication. [Evidence](paired-preview-boot-trial.md).
+
 2026-10-19: owner directs every substantive slice toward paired nativeMac68000/x86 PC preview releases. Current target [paired-native-preview-1](../../releases/paired-native-preview-1.md),ADR-0055: finish outlines in both native scenes,then package/qualify/freeze the pair. Compiler/hosted/target/human/package/publication states are distinct; no launch/publication permission expands.
 
 2026-10-19: SPEC-0048 separate original native68000/x86 outline helper implemented; independent pixel/state/canary tests and compiler/CI checks recorded. No existing scene/ROM/EFI input or trap change,target run or release. H1-H5 and existing gates remain open. [Evidence](native-outline-evidence.md).

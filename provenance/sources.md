@@ -3296,3 +3296,15 @@ resulting public/HQ evidence after automatic approval initially blocked main.
 ## SRC-0294 - Lead paired preview release decisions and verification
 
 - Codex selects paired-native-preview-1,freezes original geometry/API and release criteria,adopts reviewed worker artifacts,wires builds/negative controls and performs actual verification. Published versions/assets remain immutable; historical and target qualifications remain separate. [Receipt](../docs/development/paired-preview-evidence.md).
+
+## SRC-0295 - Owner paired trial authorization and live observations
+
+- Dean Howell,2026-10-19: "Do it" accepts the proposed exact-byte Mac/PC trials and ordinary records. Owner ready for input; Mac confirmation "Yes—0002, drawing stayed intact". PC report: "I clicked many times and sometimes it worked and sometimes it didn't"; requests clear test instructions. PC human check remains failed/unreliable. [Observation](../docs/development/paired-preview-boot-trial.md).
+
+## SRC-0296 - Lead paired preview boot and capture observations
+
+- Codex exact-image/isolation checks,one Snow and two separately authorized PC boots,input captures/pixel comparisons,normal diagnostic completion and closure/inventory verification. Engineering observations only; synthetic passes do not override owner-reported PC misses. [Receipt](../docs/development/paired-preview-boot-trial.json).
+
+## SRC-0297 - Owner automated testing clearance
+
+- Dean Howell,2026-10-19: "I am giving you clearance to do automated tests. Please proceed without my input." Applied to one bounded additional isolated PC duration matrix on unchanged reviewed original images,without another human test. No reference/prohibited-source,implementation or release gate waiver. [Result](../docs/development/paired-preview-boot-trial.md).
