@@ -259,10 +259,684 @@
     "tracked_source_dirty_at_local_build": true
   },
   "ci": {
-    "status": "pending"
+    "conclusion": "success",
+    "databaseId": 39301375020,
+    "headSha": "c631b824b2a264c6d81eb9832f17b7b5918aa9ff",
+    "status": "completed",
+    "url": "https://github.com/segaboy/ClasSICK-0.97/actions/runs/39301375020",
+    "runtime_ctests": 3150,
+    "profiles": 11,
+    "profile_counts": [
+      298,
+      298,
+      298,
+      298,
+      298,
+      266,
+      298,
+      282,
+      282,
+      282,
+      250
+    ]
   },
   "target": {
-    "status": "not-yet-run"
+    "images": {
+      "BOOTX64.EFI": {
+        "sha256": "23e021a4ab57cfd57559777e05d57e41f2b2217b4975b0543d9834414989d8f0",
+        "bytes": 159232
+      },
+      "outline-drawing.img": {
+        "sha256": "fcfc90027a6910fd6f7362a21037ba277286b7dae80667303afd46456086eb2a",
+        "bytes": 67108864
+      }
+    },
+    "compiled_source_revision": "c631b824b2a264c6d81eb9832f17b7b5918aa9ff",
+    "emulator": "VirtualBox7.2.16r174877",
+    "guest_cold_starts": 1,
+    "failed_gui_preboot_attempts": 1,
+    "initial_frontend_error": "VERR_CPUM_TOO_MANY_CPUID_SUBLEAVES before guest initialization",
+    "fallback": "One unchanged-VM headless attempt succeeded; no host/VM configuration change",
+    "isolation": "EFI64,1CPU,512MiB,PS2,vboxvga;only own disk;all8 NICs,USB,audio,clipboard,drag/drop,VRDE off;no shares",
+    "matrix": {
+      "rows": [
+        {
+          "phase_host_second": 0,
+          "requested_ms": 5,
+          "repeat": 1,
+          "actual_interval_ms": 6.7425,
+          "before": {
+            "guest_second": 1,
+            "count": 2
+          },
+          "after": {
+            "guest_second": 1,
+            "count": 3
+          }
+        },
+        {
+          "phase_host_second": 0,
+          "requested_ms": 5,
+          "repeat": 2,
+          "actual_interval_ms": 16.06,
+          "before": {
+            "guest_second": 1,
+            "count": 3
+          },
+          "after": {
+            "guest_second": 1,
+            "count": 4
+          }
+        },
+        {
+          "phase_host_second": 0,
+          "requested_ms": 5,
+          "repeat": 3,
+          "actual_interval_ms": 17.7343,
+          "before": {
+            "guest_second": 1,
+            "count": 4
+          },
+          "after": {
+            "guest_second": 1,
+            "count": 5
+          }
+        },
+        {
+          "phase_host_second": 0,
+          "requested_ms": 25,
+          "repeat": 1,
+          "actual_interval_ms": 26.3685,
+          "before": {
+            "guest_second": 1,
+            "count": 5
+          },
+          "after": {
+            "guest_second": 2,
+            "count": 6
+          }
+        },
+        {
+          "phase_host_second": 0,
+          "requested_ms": 25,
+          "repeat": 2,
+          "actual_interval_ms": 35.465,
+          "before": {
+            "guest_second": 2,
+            "count": 6
+          },
+          "after": {
+            "guest_second": 2,
+            "count": 7
+          }
+        },
+        {
+          "phase_host_second": 0,
+          "requested_ms": 25,
+          "repeat": 3,
+          "actual_interval_ms": 35.0536,
+          "before": {
+            "guest_second": 2,
+            "count": 7
+          },
+          "after": {
+            "guest_second": 2,
+            "count": 8
+          }
+        },
+        {
+          "phase_host_second": 0,
+          "requested_ms": 100,
+          "repeat": 1,
+          "actual_interval_ms": 100.8428,
+          "before": {
+            "guest_second": 2,
+            "count": 8
+          },
+          "after": {
+            "guest_second": 3,
+            "count": 9
+          }
+        },
+        {
+          "phase_host_second": 0,
+          "requested_ms": 100,
+          "repeat": 2,
+          "actual_interval_ms": 100.6017,
+          "before": {
+            "guest_second": 3,
+            "count": 9
+          },
+          "after": {
+            "guest_second": 3,
+            "count": 10
+          }
+        },
+        {
+          "phase_host_second": 0,
+          "requested_ms": 100,
+          "repeat": 3,
+          "actual_interval_ms": 102.4973,
+          "before": {
+            "guest_second": 3,
+            "count": 10
+          },
+          "after": {
+            "guest_second": 3,
+            "count": 11
+          }
+        },
+        {
+          "phase_host_second": 65,
+          "requested_ms": 5,
+          "repeat": 1,
+          "actual_interval_ms": 4.7597,
+          "before": {
+            "guest_second": 4,
+            "count": 12
+          },
+          "after": {
+            "guest_second": 65,
+            "count": 13
+          }
+        },
+        {
+          "phase_host_second": 65,
+          "requested_ms": 5,
+          "repeat": 2,
+          "actual_interval_ms": 7.0856,
+          "before": {
+            "guest_second": 65,
+            "count": 13
+          },
+          "after": {
+            "guest_second": 65,
+            "count": 14
+          }
+        },
+        {
+          "phase_host_second": 65,
+          "requested_ms": 5,
+          "repeat": 3,
+          "actual_interval_ms": 17.9694,
+          "before": {
+            "guest_second": 65,
+            "count": 14
+          },
+          "after": {
+            "guest_second": 65,
+            "count": 15
+          }
+        },
+        {
+          "phase_host_second": 65,
+          "requested_ms": 25,
+          "repeat": 1,
+          "actual_interval_ms": 35.1344,
+          "before": {
+            "guest_second": 65,
+            "count": 15
+          },
+          "after": {
+            "guest_second": 66,
+            "count": 16
+          }
+        },
+        {
+          "phase_host_second": 65,
+          "requested_ms": 25,
+          "repeat": 2,
+          "actual_interval_ms": 35.1678,
+          "before": {
+            "guest_second": 66,
+            "count": 16
+          },
+          "after": {
+            "guest_second": 66,
+            "count": 17
+          }
+        },
+        {
+          "phase_host_second": 65,
+          "requested_ms": 25,
+          "repeat": 3,
+          "actual_interval_ms": 25.8975,
+          "before": {
+            "guest_second": 66,
+            "count": 17
+          },
+          "after": {
+            "guest_second": 66,
+            "count": 18
+          }
+        },
+        {
+          "phase_host_second": 65,
+          "requested_ms": 100,
+          "repeat": 1,
+          "actual_interval_ms": 106.5601,
+          "before": {
+            "guest_second": 66,
+            "count": 18
+          },
+          "after": {
+            "guest_second": 67,
+            "count": 19
+          }
+        },
+        {
+          "phase_host_second": 65,
+          "requested_ms": 100,
+          "repeat": 2,
+          "actual_interval_ms": 101.4403,
+          "before": {
+            "guest_second": 67,
+            "count": 19
+          },
+          "after": {
+            "guest_second": 67,
+            "count": 20
+          }
+        },
+        {
+          "phase_host_second": 65,
+          "requested_ms": 100,
+          "repeat": 3,
+          "actual_interval_ms": 101.2974,
+          "before": {
+            "guest_second": 67,
+            "count": 20
+          },
+          "after": {
+            "guest_second": 67,
+            "count": 21
+          }
+        },
+        {
+          "phase_host_second": 95,
+          "requested_ms": 5,
+          "repeat": 1,
+          "actual_interval_ms": 10.5163,
+          "before": {
+            "guest_second": 68,
+            "count": 22
+          },
+          "after": {
+            "guest_second": 95,
+            "count": 23
+          }
+        },
+        {
+          "phase_host_second": 95,
+          "requested_ms": 5,
+          "repeat": 2,
+          "actual_interval_ms": 17.2641,
+          "before": {
+            "guest_second": 95,
+            "count": 23
+          },
+          "after": {
+            "guest_second": 95,
+            "count": 24
+          }
+        },
+        {
+          "phase_host_second": 95,
+          "requested_ms": 5,
+          "repeat": 3,
+          "actual_interval_ms": 7.2134,
+          "before": {
+            "guest_second": 95,
+            "count": 24
+          },
+          "after": {
+            "guest_second": 95,
+            "count": 25
+          }
+        },
+        {
+          "phase_host_second": 95,
+          "requested_ms": 25,
+          "repeat": 1,
+          "actual_interval_ms": 35.2243,
+          "before": {
+            "guest_second": 95,
+            "count": 25
+          },
+          "after": {
+            "guest_second": 96,
+            "count": 26
+          }
+        },
+        {
+          "phase_host_second": 95,
+          "requested_ms": 25,
+          "repeat": 2,
+          "actual_interval_ms": 35.4412,
+          "before": {
+            "guest_second": 96,
+            "count": 26
+          },
+          "after": {
+            "guest_second": 96,
+            "count": 27
+          }
+        },
+        {
+          "phase_host_second": 95,
+          "requested_ms": 25,
+          "repeat": 3,
+          "actual_interval_ms": 35.2282,
+          "before": {
+            "guest_second": 96,
+            "count": 27
+          },
+          "after": {
+            "guest_second": 96,
+            "count": 28
+          }
+        },
+        {
+          "phase_host_second": 95,
+          "requested_ms": 100,
+          "repeat": 1,
+          "actual_interval_ms": 114.4812,
+          "before": {
+            "guest_second": 96,
+            "count": 28
+          },
+          "after": {
+            "guest_second": 97,
+            "count": 29
+          }
+        },
+        {
+          "phase_host_second": 95,
+          "requested_ms": 100,
+          "repeat": 2,
+          "actual_interval_ms": 108.8736,
+          "before": {
+            "guest_second": 97,
+            "count": 29
+          },
+          "after": {
+            "guest_second": 97,
+            "count": 30
+          }
+        },
+        {
+          "phase_host_second": 95,
+          "requested_ms": 100,
+          "repeat": 3,
+          "actual_interval_ms": 100.5757,
+          "before": {
+            "guest_second": 97,
+            "count": 30
+          },
+          "after": {
+            "guest_second": 97,
+            "count": 31
+          }
+        },
+        {
+          "phase_host_second": 125,
+          "requested_ms": 5,
+          "repeat": 1,
+          "actual_interval_ms": 5.0016,
+          "before": {
+            "guest_second": 98,
+            "count": 32
+          },
+          "after": {
+            "guest_second": 125,
+            "count": 33
+          }
+        },
+        {
+          "phase_host_second": 125,
+          "requested_ms": 5,
+          "repeat": 2,
+          "actual_interval_ms": 5.8413,
+          "before": {
+            "guest_second": 125,
+            "count": 33
+          },
+          "after": {
+            "guest_second": 125,
+            "count": 34
+          }
+        },
+        {
+          "phase_host_second": 125,
+          "requested_ms": 5,
+          "repeat": 3,
+          "actual_interval_ms": 6.7959,
+          "before": {
+            "guest_second": 125,
+            "count": 34
+          },
+          "after": {
+            "guest_second": 125,
+            "count": 35
+          }
+        },
+        {
+          "phase_host_second": 125,
+          "requested_ms": 25,
+          "repeat": 1,
+          "actual_interval_ms": 36.7227,
+          "before": {
+            "guest_second": 125,
+            "count": 35
+          },
+          "after": {
+            "guest_second": 126,
+            "count": 36
+          }
+        },
+        {
+          "phase_host_second": 125,
+          "requested_ms": 25,
+          "repeat": 2,
+          "actual_interval_ms": 33.9216,
+          "before": {
+            "guest_second": 126,
+            "count": 36
+          },
+          "after": {
+            "guest_second": 126,
+            "count": 37
+          }
+        },
+        {
+          "phase_host_second": 125,
+          "requested_ms": 25,
+          "repeat": 3,
+          "actual_interval_ms": 26.4536,
+          "before": {
+            "guest_second": 126,
+            "count": 37
+          },
+          "after": {
+            "guest_second": 126,
+            "count": 38
+          }
+        },
+        {
+          "phase_host_second": 125,
+          "requested_ms": 100,
+          "repeat": 1,
+          "actual_interval_ms": 108.346,
+          "before": {
+            "guest_second": 126,
+            "count": 38
+          },
+          "after": {
+            "guest_second": 126,
+            "count": 39
+          }
+        },
+        {
+          "phase_host_second": 125,
+          "requested_ms": 100,
+          "repeat": 2,
+          "actual_interval_ms": 100.3155,
+          "before": {
+            "guest_second": 126,
+            "count": 39
+          },
+          "after": {
+            "guest_second": 127,
+            "count": 40
+          }
+        },
+        {
+          "phase_host_second": 125,
+          "requested_ms": 100,
+          "repeat": 3,
+          "actual_interval_ms": 100.4757,
+          "before": {
+            "guest_second": 127,
+            "count": 40
+          },
+          "after": {
+            "guest_second": 127,
+            "count": 41
+          }
+        }
+      ],
+      "phases": [
+        {
+          "requested_host_second": 0,
+          "actual_host_second": 4.5335246,
+          "snapshot": {
+            "guest_second": 4,
+            "count": 12
+          }
+        },
+        {
+          "requested_host_second": 65,
+          "actual_host_second": 68.43938,
+          "snapshot": {
+            "guest_second": 68,
+            "count": 22
+          }
+        },
+        {
+          "requested_host_second": 95,
+          "actual_host_second": 98.4690488,
+          "snapshot": {
+            "guest_second": 98,
+            "count": 32
+          }
+        },
+        {
+          "requested_host_second": 125,
+          "actual_host_second": 128.392129,
+          "snapshot": {
+            "guest_second": 128,
+            "count": 42
+          }
+        }
+      ],
+      "initial_mouse_presses": 2,
+      "matrix_mouse_presses": 36,
+      "spaces": 4,
+      "escape_events": 4,
+      "combined_count": 42,
+      "normal_result_seen": false,
+      "elapsed_host_seconds": 128.4674509,
+      "human_input": false
+    },
+    "final_guest_second": 185,
+    "final_combined_count": 43,
+    "total_mouse_presses": 38,
+    "total_space_presses": 5,
+    "escape_pairs_injected": 4,
+    "normal_result_seen": false,
+    "session_closed": true,
+    "inventory_preserved": true,
+    "pc_human_input_qualified": false,
+    "host_pointer_capture_qualified": false,
+    "manager_display_check": "Manager opened for same-session attachment check; Show remained disabled/no guest window. No additional guest start or host UI input qualification. Manager closed.",
+    "static_pixels_per_capture": 173504,
+    "static_comparisons": 8,
+    "same_counter_mac_comparisons": 2,
+    "pixels_per_same_counter_comparison": 175104,
+    "capture_checks": [
+      {
+        "file": "pc-initial.png",
+        "bytes": 4732,
+        "sha256": "1fa9bdc3016f2469455cbd6352b0caeebbe211ccdda3ed52441981e3d53b496d",
+        "static_pixel_differences": 0,
+        "physical_margins_white": true
+      },
+      {
+        "file": "first-held.png",
+        "bytes": 4731,
+        "sha256": "c2c95d855e1c282fa30deb78707bd0160734cb99b1898d412acc5dfdda924a11",
+        "static_pixel_differences": 0,
+        "physical_margins_white": true
+      },
+      {
+        "file": "two-presses.png",
+        "bytes": 4734,
+        "sha256": "53a03b41dd0a6fcd979beb0412e77bde26daa6705cf6f7b6790469afc4cd968e",
+        "static_pixel_differences": 0,
+        "physical_margins_white": true
+      },
+      {
+        "file": "phase-0.png",
+        "bytes": 4747,
+        "sha256": "fdb5bac78361201f4f899018e2cfd65c0b751a12a1a1e5a3a8566f811cbc5995",
+        "static_pixel_differences": 0,
+        "physical_margins_white": true
+      },
+      {
+        "file": "phase-65.png",
+        "bytes": 4748,
+        "sha256": "40b11ed02f6ab0418ad4f1f4b6bd6d98e7cb1f3516ef2b3cc1bcfb1318eed01b",
+        "static_pixel_differences": 0,
+        "physical_margins_white": true
+      },
+      {
+        "file": "phase-95.png",
+        "bytes": 4740,
+        "sha256": "3a41bbf7d443a2bb8f8a2b4298de85b37f82171fdd575479794de012b0a8bd0b",
+        "static_pixel_differences": 0,
+        "physical_margins_white": true
+      },
+      {
+        "file": "phase-125.png",
+        "bytes": 4747,
+        "sha256": "30d320b98d6466faf05935592066ea6e34200f22c88dbefd084da27f2b96288c",
+        "static_pixel_differences": 0,
+        "physical_margins_white": true
+      },
+      {
+        "file": "pc-final.png",
+        "bytes": 4746,
+        "sha256": "e7689a6035f8a12778c5583600117379a2aed28de2b8de37c7096b52154eb4f5",
+        "static_pixel_differences": 0,
+        "physical_margins_white": true
+      }
+    ],
+    "mac_rom_byte_identical_to_prior_boot": true,
+    "mac_rom_sha256": "2b600319d334145e582adc3db0e0fcf495d5f44309488c19e652dfb378391780",
+    "mac_new_ci": {
+      "twins_equal": true,
+      "undefined_imports": 0,
+      "interpreter_symbols": 0
+    },
+    "limits": [
+      "Original PC human-intermittence report stays failed/unresolved; device injection bypasses capture/focus.",
+      "New preview is continuously polled under normal conditions,not an unlimited-time or hardware guarantee.",
+      "Matrix interval was128.47 host seconds; subsequent manager check/final Space extended the same guest to185 seconds,exceeding the initially noted180-second total-active budget. Future helpers must share an outer deadline across UI checks.",
+      "No uninterrupted wall-clock timing qualification; initial/final pauses used.",
+      "GUI preboot failure is retained; headless fallback is one successful guest boot."
+    ],
+    "status": "passed-bounded-headless-native-trial",
+    "ci_image_matches_executed_image": true
   },
   "mac": {
     "runtime_inputs_unchanged": true,
@@ -276,5 +950,61 @@
     "Copilot": "unavailable",
     "Grok": "unavailable",
     "Antigravity": "unavailable"
+  },
+  "compiled_source_revision": "c631b824b2a264c6d81eb9832f17b7b5918aa9ff",
+  "procedural_corrections": [
+    "Private records helper initially used a nonexistent implementation-record directory; corrected to normal provenance/records before staging.",
+    "Flag-control wrapper initially propagated an intentionally failing compiler status after all controls passed; explicit successful script exit added and controls verified.",
+    "First GUI launch aborted before guest initialization; one same-VM headless attempt succeeded.",
+    "Manager Show unavailable; no host-capture test or extra guest start claimed.",
+    "Matrix128.47s; later same-boot UI display check/final Space reached185 guest seconds,slightly exceeding the initial180-second total-active budget. Future helpers need one deadline spanning all phases."
+  ],
+  "draft_bundle": {
+    "prepared": true,
+    "published": false,
+    "source_revision": "c631b824b2a264c6d81eb9832f17b7b5918aa9ff",
+    "inventory": {
+      "ClasSICK-mac-DRAFT.zip": {
+        "bytes": 20673,
+        "sha256": "c7bc51a7a3c1e0ccc2e5609421431cb641903fd732a60f7052847773ff36df41"
+      },
+      "ClasSICK-pc-DRAFT.zip": {
+        "bytes": 252382,
+        "sha256": "6f76972e2bbdb13a9e94ae45f1b3bf38956e44630140fc6940f0f8b585bb999f"
+      },
+      "COPYING": {
+        "bytes": 35149,
+        "sha256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986"
+      },
+      "corresponding-source.zip": {
+        "bytes": 2100291,
+        "sha256": "b8e1537750316012a3bad8afb497d3f4043bb0cf0baf1ea8bb6eebcd92d28865"
+      },
+      "DRAFT.txt": {
+        "bytes": 186,
+        "sha256": "b43ba7d3ab9395d9c5c2882f6d719e2049744e07797cf3e782f6f12b43dacf88"
+      },
+      "mac/ClasSICK-ROM-0.3.0-alpha.1-DRAFT.rom": {
+        "bytes": 65536,
+        "sha256": "2b600319d334145e582adc3db0e0fcf495d5f44309488c19e652dfb378391780"
+      },
+      "pc/BOOTX64.EFI": {
+        "bytes": 159232,
+        "sha256": "23e021a4ab57cfd57559777e05d57e41f2b2217b4975b0543d9834414989d8f0"
+      },
+      "pc/ClasSICK-PC-0.1.0-alpha.1-DRAFT.img": {
+        "bytes": 67108864,
+        "sha256": "fcfc90027a6910fd6f7362a21037ba277286b7dae80667303afd46456086eb2a"
+      },
+      "SOURCE.txt": {
+        "bytes": 329,
+        "sha256": "9078aced48a0feca55047d2280179e6f875198a36dcf2613a306bf7d808293c7"
+      },
+      "TRYING.md": {
+        "bytes": 1857,
+        "sha256": "b92050102ce3c29342fd62ca8f6e94cdff91912b0a4b5c6aa9c7af11f6bca919"
+      }
+    },
+    "checksums_sha256": "52d16a497de8be826b76a5f9b10b19c1d63523087d0cad0b8913e5850e39d5d9"
   }
 }

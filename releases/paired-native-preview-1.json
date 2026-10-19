@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "candidate": "paired-native-preview-1",
-  "status": "boot-observed-pc-human-input-blocked",
+  "status": "continuous-session-automated-qualified-review-pending",
   "owner_source": "SRC-0291",
   "decision": "ADR-0055",
   "specification": "SPEC-0049",
@@ -14,7 +14,8 @@
       "compiler_verified": true,
       "boot_qualified": true,
       "human_input_qualified": true,
-      "image_sha256": "2b600319d334145e582adc3db0e0fcf495d5f44309488c19e652dfb378391780"
+      "image_sha256": "2b600319d334145e582adc3db0e0fcf495d5f44309488c19e652dfb378391780",
+      "unchanged_rom_from_prior_boot": true
     },
     "pc": {
       "architecture": "x86-64",
@@ -24,10 +25,11 @@
       "compiler_verified": true,
       "boot_qualified": true,
       "human_input_qualified": false,
-      "image_sha256": "e9567ac8f91c48dd435ed7fc7c1021511da131ab8975a7ca7a3ad17aeaa8127c",
-      "payload_sha256": "cc667453316e262de61af774c880e3607b034cded3d742957b220a589f36e042",
-      "human_input_status": "failed-unreliable",
-      "automated_input_status": "21-of-21-duration-matrix-plus-space-pass"
+      "image_sha256": "fcfc90027a6910fd6f7362a21037ba277286b7dae80667303afd46456086eb2a",
+      "payload_sha256": "23e021a4ab57cfd57559777e05d57e41f2b2217b4975b0543d9834414989d8f0",
+      "human_input_status": "previous-failed-unreliable;not-retested",
+      "automated_input_status": "38-mouse-plus5-Space-accepted-through-guest185;Escape-does-not-stop",
+      "continuous_session": true
     }
   },
   "feature_checks": {
@@ -42,10 +44,10 @@
   },
   "release_ready": false,
   "blockers": [
-    "PC ordinary human clicks were unreliable; synthetic matrix does not reproduce or close this issue.",
-    "PC active/completed session state and60-second input cutoff need resolution or explicit preview acceptance.",
-    "Local DRAFT prepared; final package/source/license/checksum review and freeze pending.",
-    "Publication requires explicit owner request for reviewed candidates."
+    "Ordinary human capture/focus remains unqualified after the prior intermittent-click report;synthetic passes do not override it.",
+    "One VirtualBox GUI startup failed before boot;headless fallback worked,GUI-start/display behavior still needs a bounded qualification or explicit preview limitation.",
+    "Fresh continuous-session DRAFT prepared;final package/source/license/checksum freeze review pending.",
+    "Publication requires explicit owner request for the reviewed candidates."
   ],
   "unchanged_gates": [
     "clean-room/source/role",
@@ -58,8 +60,8 @@
     "both System1/ROM boot directions"
   ],
   "new_target_run_or_publication_authorized": false,
-  "source_revision": "207e557b83cbab6933e7628275879f0f38c11021",
-  "verification_receipt": "../docs/development/paired-preview-evidence.json",
-  "feature_check_scope": "Hosted/compiler checks plus actual narrow exact-image boot/scene observations; PC human reliability remains failed.",
-  "boot_trial_receipt": "../docs/development/paired-preview-boot-trial.json"
+  "source_revision": "c631b824b2a264c6d81eb9832f17b7b5918aa9ff",
+  "verification_receipt": "../docs/development/preview-session-evidence.json",
+  "feature_check_scope": "Hosted/compiler+actual own-image headless continuous session through185 guest seconds;Mac ROM unchanged and prior boot reused;human PC reliability unqualified.",
+  "boot_trial_receipt": "../docs/development/preview-session-evidence.json"
 }

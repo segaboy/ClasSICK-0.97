@@ -1,5 +1,7 @@
 # Native Macintosh and x86 parity plan
 
+2026-10-19 paired-native-preview-1: SPEC-0050 removes the PC normal60-second/Escape stop;38 mouse+5 Space inputs accepted through185 guest seconds,scene intact. Mac ROM byte-identical. CI3150/11 pass;human PC capture/GUI startup and release freeze remain open. [Evidence](preview-session-evidence.md).
+
 2026-10-19 paired-native-preview-1: exact native Mac/PC boots and all175104 same-counter scene pixels match. Mac human input passes; PC human input unreliable despite21/21 synthetic presses. Release blocked on PC input/lifecycle and package/publication. [Evidence](paired-preview-boot-trial.md).
 
 2026-10-19: owner directs every substantive slice toward paired nativeMac68000/x86 PC preview releases. Current target [paired-native-preview-1](../../releases/paired-native-preview-1.md),ADR-0055: finish outlines in both native scenes,then package/qualify/freeze the pair. Compiler/hosted/target/human/package/publication states are distinct; no launch/publication permission expands.

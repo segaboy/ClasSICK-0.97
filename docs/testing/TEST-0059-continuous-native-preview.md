@@ -10,3 +10,5 @@ deadline/Escape expectations. Compiler flag refusals,strict/sanitized profiles,
 native EFI twins/media and CI/target observations are reported only after actual
 execution in the [receipt](../development/preview-session-evidence.json).
 No test proposal or synthetic event establishes ordinary human reliability.
+
+Executed result: local596 CTests/2 profiles;CI3150/11;2 valid/6 invalid compiler configurations;EFI twins,27 corruption/22 omission controls,matching original disk writers;one successful headless guest boot after GUI preboot failure.38 mouse+5 Space events accepted through guest second185;8 static and2 whole-canvas Mac comparisons pass. Escape injections did not stop later input. Host pointer capture/human reliability unqualified;old VM inventory restored.

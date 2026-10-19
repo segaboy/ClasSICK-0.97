@@ -1,5 +1,7 @@
 # Paired preview input check instructions
 
+Current SPEC-0050 continuous outline candidate no longer stops normally at60 seconds or Escape; end it through the host. The dated diagnostic procedure below applies to older images. Capture setup must be separated from the measured click baseline. [Current instructions](../../releases/pc/TRYING-paired-preview-1.md); [verified session](preview-session-evidence.md).
+
 SPEC-0049 / TEST-0058; procedure clarified2026-10-19 after the failed PC human check.
 These are instructions for a future explicitly scoped trial,not a new pass or run.
 The owner has cleared automated testing without requiring human participation.

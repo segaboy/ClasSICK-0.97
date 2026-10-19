@@ -37,3 +37,19 @@ See [storage and publication policy](../../development/screenshot-evidence.md). 
 - [PC diagnostic completion,counter0006 after mixed synthetic and unreliable owner input; human qualification failed.](2026-10-19/paired-preview-pc-complete-human-attempt.png) — [trial](../../development/paired-preview-boot-trial.md).
 
 - [PC automated follow-up:21 accepted mouse presses plus Space,counter0022; normal diagnostic completion.](2026-10-19/paired-preview-pc-automated-complete.png) — [trial](../../development/paired-preview-boot-trial.md).
+
+- [Continuous native PC preview before input,count0000.](2026-10-19/continuous-preview-pc-initial.png) — [evidence](../../development/preview-session-evidence.md).
+
+- [Continuous preview held repeat counts one press,count0001.](2026-10-19/continuous-preview-first-held.png) — [evidence](../../development/preview-session-evidence.md).
+
+- [Continuous preview second press,count0002;full scene matches Mac.](2026-10-19/continuous-preview-two-presses.png) — [evidence](../../development/preview-session-evidence.md).
+
+- [Continuous preview automated phase at guest second4,count0012.](2026-10-19/continuous-preview-phase-0.png) — [evidence](../../development/preview-session-evidence.md).
+
+- [Continuous preview remains active at guest second68,count0022.](2026-10-19/continuous-preview-phase-65.png) — [evidence](../../development/preview-session-evidence.md).
+
+- [Continuous preview remains active at guest second98,count0032.](2026-10-19/continuous-preview-phase-95.png) — [evidence](../../development/preview-session-evidence.md).
+
+- [Continuous preview remains active at guest second128,count0042.](2026-10-19/continuous-preview-phase-125.png) — [evidence](../../development/preview-session-evidence.md).
+
+- [Continuous preview accepts final Space at guest second185,count0043.](2026-10-19/continuous-preview-pc-final.png) — [evidence](../../development/preview-session-evidence.md).

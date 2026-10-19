@@ -3320,3 +3320,5 @@ resulting public/HQ evidence after automatic approval initially blocked main.
 ## SRC-0300 - Lead continuous-preview integration and verification
 
 - Codex adopts original worker artifacts,freezes opt-in session policy,wires actual outline fixture/legacy rejection/compiler flags and executes verification. Historical/human/physical acceptance is not inferred from synthetic passes. [Evidence](../docs/development/preview-session-evidence.md).
+
+SRC-0300 executed checkpoint: CI3150/11;local596/2;38 mouse+5 Space events through guest185;8 static/two full Mac comparisons,unchanged Mac ROM,one headless guest boot after GUI preboot failure,closed inventory. Human capture unqualified;no release. [Final receipt](../docs/development/preview-session-evidence.json).
