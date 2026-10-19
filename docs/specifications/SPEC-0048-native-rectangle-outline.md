@@ -59,7 +59,9 @@ OL9 Clip. The painted set is the coverage (OL8) intersected with the view clip. 
     The clip boundary must never appear as an outline edge: clipping removes pixels and never
     adds any. Pixels outside 128x64 are never addressed.
 OL10 Raster op and counters. Covered pixels are set to the same black polarity and bit mapping
-    that `cs_qd_rect` uses for A8A2 Paint (stride 16). This is an OR/set operation; pixels that
+    that `cs_qd_rect` uses for A8A2 Paint: black=1,stride16 bytes,byte(r*16+(c>>3)),
+    mask(0x80>>(c&7)),MSB first. These native storage facts were checked in the reviewed
+    original project source; they do not establish historical QuickDraw behavior. This is an OR/set operation; pixels that
     are not covered are never cleared. After preflight succeeds, `port->paints` increases by
     exactly 1 per successful call, saturating at UINT32_MAX. This holds even when the result is
     empty, clipped, inverted or zero-pen. The helper never adds 4 (one per strip) and never
@@ -87,8 +89,7 @@ OL15 Legacy guest binding (an outline trap, pen state, GrafPort pnSize) is defer
 
 ## Follow-up prerequisites (must hold before implementation is accepted)
 P1 Lead finalizes this engineering contract, source IDs and ADR. A later authorized implementation slice assigns IMPL/TEST IDs; this contract does not authorize runtime code.
-P2 The exact `cs_qd_rect` black polarity and bit order are confirmed from the existing reviewed
-   source and written into the new module's header comment.
+P2 Lead checked the original `personality/system1/quickdraw-rects.c` at22b6100: black1,MSB-first,stride16,as fixed in OL10. The future module header must retain this explicit mapping; no further source research is needed for that native storage fact.
 P3 A size/offset audit proves existing port/view layouts unchanged. This contract slice preserves all existing runtime, binding and build-input bytes; later object/ROM identity checks use named build profiles, never an unspecified all-hashes claim.
 P4 Build wiring for the separate module is approved for Mac 68000 native, PC x86 and the EFI
    twins, with direct-native symbol and zero-interpreter audits.

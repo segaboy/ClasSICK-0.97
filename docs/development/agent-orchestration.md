@@ -145,7 +145,7 @@ call or qualification. [Actual results/limits](paired-selection-evidence.md).
 
 ## Screenshot guard and next outline contract -2026-10-18
 One Argon4 High guard primary hit its420s print cap,423.86s elapsed,exit0 with
-empty response: not success. No tools/artifact,reported zero counters not proof
+empty response: not success. No tool action observed or artifact,reported zero counters not proof
 of zero consumption. Stop and reroute rather than repeat. One focused Claude
 fallback produced231 reviewed Python lines in82.19s; independent Copilot270-line
 oracle from frozen requirements caught admission risks without seeing code.
@@ -158,3 +158,5 @@ Argon remains High for shorter diagnostic/review scopes until comparable artifac
 latency succeeds. Grok only for a distinct unresolved risk. No mandatory fan-out.
 Store future reviewed product evidence screenshots/manifest in Git for the owner's
 research updater; transient private UI/logs stay outside. OneNote/wiki stay retired.
+
+The CLI print deadline is not a provider-side cancellation or spending guarantee; no reliable backend-cancellation or remaining-quota indicator was reported.

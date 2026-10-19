@@ -8,7 +8,8 @@
     "SRC-0282",
     "SRC-0283",
     "SRC-0284",
-    "SRC-0285"
+    "SRC-0285",
+    "SRC-0286"
   ],
   "screenshot_import": {
     "screenshots": 7,
@@ -170,7 +171,7 @@
     "unittest_methods": 12,
     "result": "pass",
     "scope": "Independent generated original PNG/Git-index/provenance/structure tests; no full PNG decoder or originality proof",
-    "ci": "pending"
+    "ci": "pass"
   },
   "lead_corrections": [
     "Outline intermediate range minimum-98303; pairwise disjoint readable/writable storage; remove poisoned-native-pointer test and invented documentation approval.",
@@ -201,5 +202,52 @@
     "text_files": 843,
     "registered_pngs": 7,
     "result": "pass"
+  },
+  "format_source_review": {
+    "source": "SRC-0286",
+    "edition": "W3C PNG1.0 Recommendation1996-10-01",
+    "scope": "Selected structure/critical-chunk prose and tables; no sample-code appendix; strict publication policy is not universal decoder conformance"
+  },
+  "ci": {
+    "headSha": "22b6100b9f1302dc1184741eeeac4f8bdce62f22",
+    "status": "completed",
+    "conclusion": "success",
+    "url": "https://github.com/segaboy/ClasSICK-0.97/actions/runs/39189223166",
+    "databaseId": 39189223166,
+    "screenshot_unittest_methods": 12,
+    "screenshot_admission_step": "success",
+    "inherited_runtime_ctests": 3068,
+    "runtime_profiles": 11,
+    "profile_ctests": [
+      290,
+      290,
+      290,
+      290,
+      290,
+      261,
+      290,
+      274,
+      274,
+      274,
+      245
+    ],
+    "jobs": [
+      {
+        "name": "windows-bootstrap",
+        "conclusion": "success"
+      },
+      {
+        "name": "m68k-rom",
+        "conclusion": "success"
+      }
+    ],
+    "new_native_build_inputs": false,
+    "new_outline_tests": 0
+  },
+  "superseded_ci": {
+    "databaseId": 39188920765,
+    "headSha": "38268e4d5ac3e0bd4ab3a38af634cb28d33f964c",
+    "disposition": "cancelled after replacement run started",
+    "reason": "final fixture cleanup safety correction; no failed check claimed"
   }
 }

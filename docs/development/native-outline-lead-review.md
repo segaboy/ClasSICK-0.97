@@ -32,3 +32,5 @@ give Claude one bounded C artifact and Copilot the frozen-API pixel oracle; audi
 32/64/endian/native68000 closure and unchanged candidate inputs. Selected demo,
 guest trap, target trial and release remain separate. Physical/full128K/B2/
 edition/native-external-app/both System1 gates persist. No OneNote/wiki.
+
+Lead also checked the existing original `quickdraw-rects.c` pixel masks/OR at22b6100,confirming native black1/MSB-first/stride16. OL10 is now explicit and P2 is confirmed for the contract; the future header must repeat it. This closes no historical question and changes no runtime byte.

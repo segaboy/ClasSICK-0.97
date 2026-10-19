@@ -1,6 +1,6 @@
 # Screenshot publication and native outline contract -2026-10-18
 
-SRC-0280..0285; infrastructure IMPL-0050 / TEST-0056; outline SPEC-0048 / ADR-0054.
+SRC-0280..0286; infrastructure IMPL-0050 / TEST-0056; outline SPEC-0048 / ADR-0054.
 Owner requests repository screenshots for the morning research updater and then
 the next task. [Screenshot index](../evidence/screenshots/README.md),
 [machine-readable manifest](../evidence/screenshots/manifest.json),
@@ -38,8 +38,10 @@ reviewed intact. No worker edits or tests. Raw transcripts remain outside Git.
 
 Actual local verification:12 unittest methods covering acceptance, malformed PNG,
 CRC/order/trailing bytes, registration/paths/provenance/strict JSON, index-versus-
-worktree discrepancies and no mutation pass. Full repository/publication guard
-and CI results are recorded on completion. These are screenshot infrastructure
+worktree discrepancies and no mutation pass. Repository guard passes843 text/source files plus7 registered PNGs.
+[CI 39189223166](https://github.com/segaboy/ClasSICK-0.97/actions/runs/39189223166) passes at `22b6100b9f1302dc1184741eeeac4f8bdce62f22`: the12 screenshot
+unittest methods plus3068 inherited CTests in11 runtime profiles. CI rebuilds
+existing unchanged native profiles, without target execution or outline implementation. These are screenshot infrastructure
 checks, not executed outline tests or reruns of the existing runtime test suite.
 
 [Outline contract](../specifications/SPEC-0048-native-rectangle-outline.md) defines

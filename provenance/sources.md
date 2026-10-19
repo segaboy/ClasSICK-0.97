@@ -3243,7 +3243,7 @@ resulting public/HQ evidence after automatic approval initially blocked main.
 
 ## SRC-0281 - Argon4 High screenshot guard attempt
 
-- One bounded frozen-public primary call, actual gemini-4-argon-high/High. CLI print timeout420s,423.86s elapsed,exit0 but response empty; no usable artifact or tool action. Zero reported timeout counters are not a quota/billing conclusion. No retry.
+- One bounded frozen-public primary call, actual gemini-4-argon-high/High. CLI print timeout420s,423.86s elapsed,exit0 but response empty; no usable artifact or observed tool action. Zero reported timeout counters are not a quota/billing conclusion. No retry.
 
 ## SRC-0282 - Claude native outline contract proposal
 
@@ -3260,3 +3260,7 @@ resulting public/HQ evidence after automatic approval initially blocked main.
 ## SRC-0285 - Claude focused screenshot validator fallback
 
 - Explicit Opus5.5 low after unusable bounded Argon call, no same-provider retry. Frozen public admission contract, independent tests withheld,231 Python lines in82.19s, zero tools/writes/tests. [Prompt](../docs/development/tasks/screenshot-validator-claude.md).
+
+## SRC-0286 - W3C PNG1.0 published format chapters
+
+- W3C / PNG Development Group, PNG (Portable Network Graphics) Specification Version1.0, W3C Recommendation01-October-1996. Reviewed2026-10-18: [File Structure](https://www.w3.org/TR/PNG-Structure.html) §§3.1-3.3 (signature/chunk length/CRC scope/property bits), [Chunk Specifications](https://www.w3.org/TR/PNG-Chunks.html) §§4.1.1-4.1.4 (IHDR/depth/type,PLTE limits,consecutive IDAT,final empty IEND). Eligible published interface prose/tables for screenshot infrastructure only,not historical Macintosh evidence. No sample-code appendix opened or copied; link rather than republish. The strict publication profile rejects reserved-bit extensions as an engineering choice; §3.3 separately advises tolerant decoder handling. No complete PNG conformance claim.

@@ -40,3 +40,5 @@ unchanged private originals. Their earlier records retain their dated status;
 publication copies add discovery links and hashes, with no new boot or rebuild.
 The private logs and earlier capture originals remain preserved. No retired wiki
 queue or OneNote entry is created or maintained.
+
+Format cross-check: SRC-0286,[PNG1.0 File Structure](https://www.w3.org/TR/PNG-Structure.html) and [critical chunks](https://www.w3.org/TR/PNG-Chunks.html),W3C Recommendation1996. This is a selected publication profile,not a universal decoder: the uppercase third chunk byte is an encoding restriction chosen here,while §3.3 advises decoders to tolerate future use of that bit. Version1 metadata has an exact field set; extensions require a reviewed schema change. No PNG sample implementation is an input.

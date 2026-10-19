@@ -1,6 +1,6 @@
 # ClasSICK 0.97 working instructions
 
-Current owner screenshot publication and next outline contract (2026-10-18,SRC-0280..0285):
+Current owner screenshot publication and next outline contract (2026-10-18,SRC-0280..0286):
 Store reviewed own-product evidence PNGs in docs/evidence/screenshots with indexed
 manifest/hashes/captions/rights/source pins and research/test links for the morning
 updater.7 prior SPEC-0047 captures are publication copies,no new target run.
