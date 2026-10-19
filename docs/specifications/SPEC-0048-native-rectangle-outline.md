@@ -2,10 +2,10 @@
 <!-- Copyright (C) 2026 Dean Howell. -->
 # SPEC-0048: Native rectangle outline on a SPEC-0041 view
 
-Status: Accepted engineering contract2026-10-18; SRC-0280/0282/0284 / ADR-0054 (contract only), baseline public 01e6400d9f83a51ebb93bb7747f21af627829720.
+Status: Helper implemented2026-10-19 (IMPL-0051 / TEST-0057); [actual verification](../development/native-outline-evidence.md). Original accepted engineering contract2026-10-18; SRC-0280/0282/0284 / ADR-0054 (original contract checkpoint), baseline public 01e6400d9f83a51ebb93bb7747f21af627829720.
 Original native engineering contract. This is not the historical FrameRect and makes no
-historical claim. It is not a boot observation, trial or release. Nothing here is implemented.
-This outline-contract slice changes no runtime, API header, outline code/fixture, build input, trap, registry or loader. Screenshot infrastructure is recorded separately.
+historical claim. It is not a boot observation, trial or release. The separate helper is implemented; later selected-view workload and guest binding remain deferred.
+At the original contract checkpoint no runtime/header/fixture/build input changed. The authorized helper slice adds a separate module/tests/compiler wiring only; existing workload and image inputs, trap, registry and loader stay unchanged.
 
 ## Scope
 This spec defines an original portable freestanding C helper. It paints a black outline of a
@@ -16,7 +16,7 @@ the `cs_qd_view_*` functions, `sizeof(cs_qd_rect_port)` (1032), `sizeof(cs_qd_vi
 layout and the counter meaning. No struct field is added. There is no guest A8A1/SDK ABI, no pen
 state, no pattern, no transfer mode and no region. The current demo, ROM and EFI images are unchanged.
 
-## Proposed API (future separate header/module, not created here)
+## Native API (separate quickdraw-outline.h/.c)
 `int cs_qd_view_outline(cs_qd_view *view, const uint8_t rect[8], int32_t horizontal_width,
 int32_t vertical_height);`
 It returns 1 on success and 0 on refusal.
@@ -96,9 +96,8 @@ P4 Build wiring for the separate module is approved for Mac 68000 native, PC x86
 P5 The test plan in docs/development/native-outline-test-plan.md is executed by Codex, with
    outputs recorded.
 
-## Not run
-No test, build, emulator, VM, hardware, reference or CI run backs this draft. The matrix rows
-are prospective only.
+## Verification checkpoints
+The2026-10-18 contract draft had no test/build/CI backing; its matrix was prospective. The2026-10-19 implementation receipt records actual tests and compiler checks and separates remaining deferred/non-coverage rows. No emulator,VM,hardware or reference run is authorized here.
 
 ## Historical questions (open, not asserted)
 H1 Does historical FrameRect use pnSize.h for the left/right strips and pnSize.v for the

@@ -67,6 +67,9 @@ jobs:
       - name: Mouse foundation width and endian object checks
         shell: pwsh
         run: .\scripts\Verify-MouseObjects.ps1 -BuildRoot build\mouse-verification
+      - name: Native outline width, endian and EFI-ABI object twins
+        shell: pwsh
+        run: .\scripts\Verify-OutlineObjects.ps1 -BuildRoot build\outline-verification
       - name: Pure native selection width and endian objects
         shell: pwsh
         run: .\scripts\Verify-SelectionObjects.ps1 -BuildRoot build\selection-verification
@@ -83,6 +86,14 @@ jobs:
           persist-credentials: false
       - name: Prepare hash-pinned workspace 68000 tools
         run: python3 scripts/Setup-M68k.py --output "$RUNNER_TEMP/classick-m68k"
+      - name: Compile separate native outline for68000 (no target run)
+        run: python3 scripts/Verify-OutlineM68k.py --tool-root "$RUNNER_TEMP/classick-m68k/root" --output "$RUNNER_TEMP/classick-outline"
+      - name: Retain native outline compiler manifest
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
+        with:
+          name: classick-native-outline
+          path: ${{ runner.temp }}/classick-outline/manifest.json
+          if-no-files-found: error
       - name: Compile pure native port selection for68000 (no target run)
         run: python3 scripts/Verify-SelectionM68k.py --tool-root "$RUNNER_TEMP/classick-m68k/root" --output "$RUNNER_TEMP/classick-selection"
       - name: Audit integrated prepared-port native68000 closure and storage

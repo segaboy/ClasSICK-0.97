@@ -2,7 +2,7 @@
 <!-- Copyright (C) 2026 Dean Howell. -->
 # Native outline prospective acceptance matrix (SPEC-0048)
 
-Status: UNEXECUTED. These are proposals only; no row has run and no result is claimed.
+Original2026-10-18 status: UNEXECUTED proposed matrix. Implementation checkpoint2026-10-19: [TEST-0057 actual dispositions/results](native-outline-evidence.md). Rows35-41 have explicit compiler/regression limits;42-44 remain deferred/unclaimed. This matrix itself is not proof of execution.
 
 Oracle: independent int64 inverse mapping. For each physical pixel (r,c) in 128x64, compute
 the logical rect from the decoded int64 edges and offset. The pixel is set if it lies inside

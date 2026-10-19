@@ -3264,3 +3264,19 @@ resulting public/HQ evidence after automatic approval initially blocked main.
 ## SRC-0286 - W3C PNG1.0 published format chapters
 
 - W3C / PNG Development Group, PNG (Portable Network Graphics) Specification Version1.0, W3C Recommendation01-October-1996. Reviewed2026-10-18: [File Structure](https://www.w3.org/TR/PNG-Structure.html) §§3.1-3.3 (signature/chunk length/CRC scope/property bits), [Chunk Specifications](https://www.w3.org/TR/PNG-Chunks.html) §§4.1.1-4.1.4 (IHDR/depth/type,PLTE limits,consecutive IDAT,final empty IEND). Eligible published interface prose/tables for screenshot infrastructure only,not historical Macintosh evidence. No sample-code appendix opened or copied; link rather than republish. The strict publication profile rejects reserved-bit extensions as an engineering choice; §3.3 separately advises tolerant decoder handling. No complete PNG conformance claim.
+
+## SRC-0287 - Owner next outline implementation continuation
+
+- Dean Howell,2026-10-18: "OK, move on to the next task." accepts the proposed SPEC-0048 separate portable helper,independent tests/compiler/CI and ordinary Git/HQ.2026-10-19 "continue" resumes the same slice. No existing workload/binding/target/release expansion. [Receipt](../docs/development/native-outline-evidence.md).
+
+## SRC-0288 - Claude original native outline core
+
+- One Opus5.5 low frozen-public call,104 C lines,22.2s,zero tools/writes/tests. [Receipt](../docs/development/native-outline-evidence.md).
+
+## SRC-0289 - Copilot independent native outline oracle
+
+- One Sonnet5.5 low frozen-API call,350 proposed test lines,126.72s,one permitted prompt read,zero writes/tests; implementation/logs withheld.320-line cap exceeded; lead corrections required. [Receipt](../docs/development/native-outline-evidence.md).
+
+## SRC-0290 - Lead outline integration and verification
+
+- Codex freezes API,adopts core and independent oracle with recorded corrections,wires separate build/audits and runs verification. Original engineering evidence,no historical claim. [Receipt](../docs/development/native-outline-evidence.md).

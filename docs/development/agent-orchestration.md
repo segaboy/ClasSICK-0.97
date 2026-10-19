@@ -1,5 +1,7 @@
 # Agent Orchestration Protocol
 
+Current native outline allocation2026-10-19: one Claude Opus5.5 low core (104 lines,22.2s),one distinct-risk Copilot Sonnet5.5 low inverse-map oracle (350 lines,126.72s),no retry/requalification/redundant Grok/Argon call. Oracle withheld implementation; one permitted prompt read,no worker writes/tests. Codex corrected fixture/count/include/dead-loop issues and integrated rather than recreated artifacts. Copilot exceeded320-line cap; review remains necessary. Remaining account allowances unavailable. [Actual evidence](native-outline-evidence.md).
+
 ## Current routing plan - 2026-10-17
 
 Owner SRC-0252 requested the completed all-four capability audit and review round.

@@ -1,5 +1,7 @@
 # Current milestones and release tracks
 
+2026-10-19: SPEC-0048 separate original native68000/x86 outline helper implemented; independent pixel/state/canary tests and compiler/CI checks recorded. No existing scene/ROM/EFI input or trap change,target run or release. H1-H5 and existing gates remain open. [Evidence](development/native-outline-evidence.md).
+
 2026-10-18: reviewed native Mac/PC boot screenshots now live in Git for research/web discovery: [image index](evidence/screenshots/README.md). SPEC-0048 defines the next paired native rectangle-outline contract; implementation and44 proposed checks remain pending.
 
 2026-10-18: exact SPEC-0047 native68000/x86 candidates booted once each; two-port drawing and synthetic counters observed. Six static PC comparisons and normalized Mac/PC same-counter comparison pass. Sessions closed; no release. Mac progress/PC timing, Snow preference isolation and human/physical/remaining compatibility gates retain explicit limits. [Evidence](development/paired-selection-boot-trial.md).

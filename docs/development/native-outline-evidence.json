@@ -1,0 +1,200 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-19",
+  "started_on": "2026-10-18",
+  "baseline": "141da1b3895209dc5d82d1df3256206ccaa9930a",
+  "specification": "SPEC-0048",
+  "implementation": "IMPL-0051",
+  "tests": "TEST-0057",
+  "sources": [
+    "SRC-0287",
+    "SRC-0288",
+    "SRC-0289",
+    "SRC-0290"
+  ],
+  "implemented": true,
+  "workers": [
+    {
+      "round": "implementation",
+      "worker": "claude",
+      "exit_code": 0,
+      "outer_timeout": false,
+      "elapsed_seconds": 22.2,
+      "input_bytes": 14171,
+      "input_sha256": "321dea81ffc9996c3373b477bd3c5d83e8fdf57869cc5c4df8160c0e85fca4f2",
+      "stderr_bytes": 0,
+      "observed_tools": 0,
+      "artifact_lines": {
+        "personality/system1/quickdraw-outline.c": 104
+      },
+      "reported_usage": {
+        "modelUsage": {
+          "claude-opus-5-5": {
+            "inputTokens": 2,
+            "outputTokens": 2456,
+            "cacheReadInputTokens": 2384,
+            "cacheCreationInputTokens": 6192,
+            "webSearchRequests": 0,
+            "costUSD": 0.0991408,
+            "contextWindow": 1000000,
+            "maxOutputTokens": 128000,
+            "thinkingTokens": 550,
+            "canonicalModel": "claude-opus-5-5",
+            "provider": "firstParty",
+            "costBasis": "list"
+          }
+        },
+        "reported_list_cost_usd": 0.0991408
+      },
+      "worker_tests_executed": 0
+    },
+    {
+      "round": "implementation",
+      "worker": "copilot",
+      "exit_code": 0,
+      "outer_timeout": false,
+      "elapsed_seconds": 126.72,
+      "input_bytes": 19277,
+      "input_sha256": "7dc38911e07e054306961c4722b1a49c36a7336d3ded3f9e02a96267480e1c70",
+      "stderr_bytes": 0,
+      "observed_tools": 1,
+      "artifact_lines": {
+        "tests/quickdraw-outline-independent.c": 350
+      },
+      "reported_usage": {
+        "currentModel": "claude-sonnet-5.5",
+        "totalPremiumRequestCost": 1,
+        "totalUserRequests": 1,
+        "totalNanoAiu": 21382730000,
+        "tokenDetails": {
+          "input": {
+            "tokenCount": 168
+          },
+          "cache_read": {
+            "tokenCount": 4888
+          },
+          "cache_write": {
+            "tokenCount": 11849
+          },
+          "output": {
+            "tokenCount": 18338
+          }
+        }
+      },
+      "worker_tests_executed": 0
+    }
+  ],
+  "local": {
+    "ctests": 847,
+    "profile_counts": [
+      292,
+      292,
+      263
+    ],
+    "profiles": [
+      "Clang64 Debug",
+      "Clang64 ASan/UBSan",
+      "GCC32 Debug"
+    ],
+    "oracle_per_profile": {
+      "cases": 838,
+      "valid": 534,
+      "refused": 304,
+      "painting": 128,
+      "assertions": 1705
+    },
+    "seeded_cases_per_profile": 640,
+    "broken_cores_rejected": [
+      {
+        "mutation": "solid",
+        "rejected": true,
+        "exit_code": 1
+      },
+      {
+        "mutation": "clear",
+        "rejected": true,
+        "exit_code": 1
+      },
+      {
+        "mutation": "four-count",
+        "rejected": true,
+        "exit_code": 1
+      },
+      {
+        "mutation": "no-saturate",
+        "rejected": true,
+        "exit_code": 1
+      },
+      {
+        "mutation": "erase",
+        "rejected": true,
+        "exit_code": 1
+      },
+      {
+        "mutation": "clip-edge",
+        "rejected": true,
+        "exit_code": 1
+      },
+      {
+        "mutation": "swap-pen",
+        "rejected": true,
+        "exit_code": 1
+      },
+      {
+        "mutation": "zero-no-count",
+        "rejected": true,
+        "exit_code": 1
+      }
+    ],
+    "object_checks": {
+      "target_executed": false,
+      "specification": "SPEC-0048",
+      "efi_abi_object_twins_equal": true,
+      "object_audits": 12,
+      "efi_image_changed": false
+    }
+  },
+  "ci": {
+    "status": "pending"
+  },
+  "lead_corrections": [
+    "Oracle include path, six fixture call arities, full-black pixel count8192, dead offset loop and explicit unsigned rect encoding. Core comment clarified; no core behavior/API change.",
+    "Local CMake Python explicitly pinned to existing bundled runtime; initial GCC -m32 with x64 resource tool failed before tests, replaced by existing prefixed i686 compiler/resource tools. Mutation harness unique erase anchor corrected before successful8 controls."
+  ],
+  "instruction_deviations": [
+    "Copilot350 proposed lines exceeded320 cap; complete reviewed suite retained."
+  ],
+  "preservation": {
+    "originals": 24,
+    "runtime_input_files_unchanged": 166,
+    "existing_runtime_source_and_headers_unchanged": true,
+    "existing_demo_rom_efi_inputs_unchanged": true,
+    "seven_published_screenshots_unchanged": true,
+    "frozen_wiki_retired": true
+  },
+  "coverage": {
+    "rows_1_to_31_and_33_34": "executed independent pixel/canary/state tests",
+    "row_32": "existing hosted regression suites executed; old core source/header hashes unchanged",
+    "rows_35_36": "x86 width runtime tests and compiler-only opposite-endian ARM/native68000; no BE target execution",
+    "row_37": "ASan/UBSan profile passed",
+    "row_38": "12 local no-import/mutable-data object checks; six68000 audits pendingCI",
+    "row_39": "native68000 compiler-only pendingCI",
+    "row_40": "x86 object checks and EFI-ABI object twins; no newEFIimage",
+    "row_41": "unchanged existing build inputs and prior candidate identities, normalCI regressions pending",
+    "rows_42_44": "deferred or explicitly not claimed"
+  },
+  "historical_questions_open": [
+    "H1",
+    "H2",
+    "H3",
+    "H4",
+    "H5"
+  ],
+  "new_target_run_or_release": false,
+  "remaining_external_allowances": {
+    "Claude": "unavailable",
+    "Copilot": "unavailable",
+    "Grok": "unavailable",
+    "Antigravity": "unavailable"
+  }
+}

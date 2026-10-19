@@ -1,5 +1,7 @@
 # ClasSICK 0.97 working instructions
 
+Current owner outline implementation2026-10-18/19,SRC-0287..0290: "OK, move on to the next task" and "continue" accept the proposed SPEC-0048 separate native helper,independent tests/compiler/CI and ordinary Git/HQ. Claude primary,Copilot independent frozen-API oracle,Codex sole writer/integrator/verifier. Existing headers/core/workloads/ROM/EFI inputs/candidates unchanged; no guest binding/full manager,target/reference/hardware run or release. Preserve24 originals/copies,UART,old rows/releases/tags and frozen wiki. No OneNote/wiki,chats/subagents/automation;source/edition/physical/full128K/B2/human/native-app/both System1 gates persist. [Evidence](docs/development/native-outline-evidence.md).
+
 Current owner screenshot publication and next outline contract (2026-10-18,SRC-0280..0286):
 Store reviewed own-product evidence PNGs in docs/evidence/screenshots with indexed
 manifest/hashes/captions/rights/source pins and research/test links for the morning

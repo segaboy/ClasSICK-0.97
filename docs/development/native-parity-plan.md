@@ -1,5 +1,7 @@
 # Native Macintosh and x86 parity plan
 
+2026-10-19: SPEC-0048 separate original native68000/x86 outline helper implemented; independent pixel/state/canary tests and compiler/CI checks recorded. No existing scene/ROM/EFI input or trap change,target run or release. H1-H5 and existing gates remain open. [Evidence](native-outline-evidence.md).
+
 2026-10-18: [SPEC-0048](../specifications/SPEC-0048-native-rectangle-outline.md) finalizes the next original native68000/x86 rectangle-outline contract only. No runtime/candidate changes;44 cases unexecuted,H1-H5 open. [Boot screenshots](../evidence/screenshots/README.md) are now published unchanged in Git.
 
 2026-10-18: exact SPEC-0047 native68000/x86 candidates booted once each; two-port drawing and synthetic counters observed. Six static PC comparisons and normalized Mac/PC same-counter comparison pass. Sessions closed; no release. Mac progress/PC timing, Snow preference isolation and human/physical/remaining compatibility gates retain explicit limits. [Evidence](paired-selection-boot-trial.md).
