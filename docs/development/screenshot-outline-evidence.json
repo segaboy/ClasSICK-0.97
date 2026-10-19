@@ -1,0 +1,204 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-18",
+  "baseline": "01e6400d9f83a51ebb93bb7747f21af627829720",
+  "sources": [
+    "SRC-0280",
+    "SRC-0281",
+    "SRC-0282",
+    "SRC-0283",
+    "SRC-0284",
+    "SRC-0285"
+  ],
+  "screenshot_import": {
+    "screenshots": 7,
+    "bytes": 66476,
+    "byte_identical": true,
+    "manifest_sha256": "6f5369559444c62a6f5c55599ed0df0a89770aa5c0d3a451a46ff2b08cf0b7ad",
+    "manifest_hash_encoding": "Git UTF-8 LF"
+  },
+  "screenshot_manifest": "docs/evidence/screenshots/manifest.json",
+  "original_boot_trial_revision": "01e6400d9f83a51ebb93bb7747f21af627829720",
+  "outline": {
+    "specification": "SPEC-0048",
+    "adr": "ADR-0054",
+    "implemented": false,
+    "prospective_rows": 44,
+    "executed_outline_tests": 0,
+    "historical_questions_open": [
+      "H1",
+      "H2",
+      "H3",
+      "H4",
+      "H5"
+    ]
+  },
+  "workers": [
+    {
+      "round": "primary",
+      "worker": "agy",
+      "exit_code": 0,
+      "outer_timeout": false,
+      "elapsed_seconds": 423.86,
+      "input_bytes": 8302,
+      "input_sha256": "cedf1e3487b709c99027ce2b1a409a48872db55fc4887aa563593b3deac78de8",
+      "stderr_bytes": 79,
+      "observed_tools": 0,
+      "usable_artifact": false,
+      "artifact_lines": {},
+      "reported_usage": {
+        "model": "gemini-4-argon-high",
+        "reported_usage": {
+          "input_tokens": 0,
+          "output_tokens": 0,
+          "thinking_tokens": 0,
+          "cache_read_tokens": 0,
+          "total_tokens": 0
+        },
+        "response_bytes": 0,
+        "observed_tools": [],
+        "usable_artifact": false,
+        "reason": "CLI print timeout420s despite exit0"
+      }
+    },
+    {
+      "round": "primary",
+      "worker": "claude",
+      "exit_code": 0,
+      "outer_timeout": false,
+      "elapsed_seconds": 68.0,
+      "input_bytes": 13840,
+      "input_sha256": "42641734805b7a19b62a6671307107d02d6be87ebee2f9836c1d97536b545e34",
+      "stderr_bytes": 0,
+      "observed_tools": 0,
+      "usable_artifact": true,
+      "artifact_lines": {
+        "docs/specifications/SPEC-0048-native-rectangle-outline.md": 114,
+        "docs/development/native-outline-test-plan.md": 64
+      },
+      "reported_usage": {
+        "modelUsage": {
+          "claude-opus-5-5": {
+            "inputTokens": 2,
+            "outputTokens": 6523,
+            "cacheReadInputTokens": 1452,
+            "cacheCreationInputTokens": 6990,
+            "webSearchRequests": 0,
+            "costUSD": 0.1866784,
+            "contextWindow": 1000000,
+            "maxOutputTokens": 128000,
+            "thinkingTokens": 861,
+            "canonicalModel": "claude-opus-5-5",
+            "provider": "firstParty",
+            "costBasis": "list"
+          }
+        },
+        "reported_list_cost_usd": 0.1866784
+      }
+    },
+    {
+      "round": "guard-oracle",
+      "worker": "copilot",
+      "exit_code": 0,
+      "outer_timeout": false,
+      "elapsed_seconds": 60.67,
+      "input_bytes": 4291,
+      "input_sha256": "bf32f52a3906684ecc0ee335f090ff1bcb08578d34eb5502ca70008a5155e5a3",
+      "stderr_bytes": 0,
+      "observed_tools": 1,
+      "usable_artifact": true,
+      "artifact_lines": {
+        "tests/screenshot-evidence.py": 270
+      },
+      "reported_usage": {
+        "totalPremiumRequestCost": 1,
+        "totalUserRequests": 1,
+        "totalNanoAiu": 10339800000,
+        "currentModel": "claude-sonnet-5.5",
+        "tokenDetails": {
+          "input": {
+            "tokenCount": 168
+          },
+          "cache_read": {
+            "tokenCount": 6395
+          },
+          "cache_write": {
+            "tokenCount": 4125
+          },
+          "output": {
+            "tokenCount": 9211
+          }
+        }
+      }
+    },
+    {
+      "round": "guard-fallback",
+      "worker": "claude",
+      "exit_code": 0,
+      "outer_timeout": false,
+      "elapsed_seconds": 82.19,
+      "input_bytes": 4565,
+      "input_sha256": "ce7689e8a980d5aead9a90e0a6995d8db95c83475c33e388607ce773149a02a4",
+      "stderr_bytes": 0,
+      "observed_tools": 0,
+      "usable_artifact": true,
+      "artifact_lines": {
+        "scripts/check_screenshots.py": 231
+      },
+      "reported_usage": {
+        "modelUsage": {
+          "claude-opus-5-5": {
+            "inputTokens": 2,
+            "outputTokens": 10179,
+            "cacheReadInputTokens": 2384,
+            "cacheCreationInputTokens": 2191,
+            "webSearchRequests": 0,
+            "costUSD": 0.2215928,
+            "contextWindow": 1000000,
+            "maxOutputTokens": 128000,
+            "thinkingTokens": 5159,
+            "canonicalModel": "claude-opus-5-5",
+            "provider": "firstParty",
+            "costBasis": "list"
+          }
+        },
+        "reported_list_cost_usd": 0.2215928
+      }
+    }
+  ],
+  "guard_tests": {
+    "unittest_methods": 12,
+    "result": "pass",
+    "scope": "Independent generated original PNG/Git-index/provenance/structure tests; no full PNG decoder or originality proof",
+    "ci": "pending"
+  },
+  "lead_corrections": [
+    "Outline intermediate range minimum-98303; pairwise disjoint readable/writable storage; remove poisoned-native-pointer test and invented documentation approval.",
+    "Oracle fixtures now include required indexed palette, correct scanline lengths and split single-zlib consecutive IDAT; remove dead code and normalize license.",
+    "Validator SPDX/copyright plus PNG reserved-bit/palette-depth guards. Exact v1 metadata fields chosen.",
+    "Codex wires small PowerShell index-only exception, binary attributes and CI test step."
+  ],
+  "instruction_deviations": [
+    "Copilot270 lines exceeded200 target and handoff misstated11 methods/about200 lines; actual adopted suite has12 methods.",
+    "Claude fallback231 lines exceeded190 target; preserved complete reviewed artifact instead of truncating."
+  ],
+  "preserved_originals": 24,
+  "runtime_and_build_inputs_unchanged": true,
+  "old_rows_releases_tags_and_frozen_wiki_preserved": true,
+  "one_note_and_wiki_retired": true,
+  "remaining_external_allowances": {
+    "Antigravity": "unavailable; timeout zero counters are not proof of zero account consumption",
+    "Copilot": "unavailable",
+    "Claude": "unavailable",
+    "Grok": "unavailable"
+  },
+  "new_release_or_target_run": false,
+  "new_target_trial": false,
+  "new_runtime_profile": false,
+  "ordinary_ci_may_rebuild_unchanged_profiles": true,
+  "local_repository_guard": {
+    "text_files": 843,
+    "registered_pngs": 7,
+    "result": "pass"
+  }
+}

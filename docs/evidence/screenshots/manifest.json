@@ -1,0 +1,163 @@
+{
+  "schema_version": 1,
+  "screenshots": [
+    {
+      "id": "2026-10-18-paired-selection-mac-two-presses",
+      "path": "docs/evidence/screenshots/2026-10-18/paired-selection-mac-two-presses.png",
+      "sha256": "dc04d2ad4499d4745869cde2a7b44d43933ea5c86f31a61a15c38a7ca994f412",
+      "bytes": 38100,
+      "width": 512,
+      "height": 342,
+      "captured_on": "2026-10-18",
+      "target": "native-mac68000",
+      "caption": "Native68000 selected-port boot: two synthetic mouse presses, counter0002.",
+      "alt": "Monochrome ClasSICK0.97 branding, APP097, left rectangular outline, right split block, six phase marks, result0097 and counter0002.",
+      "source_revision": "01e6400d9f83a51ebb93bb7747f21af627829720",
+      "compiled_source_revision": "ac4e7b31784dde1620938ca9a2855e61f14d7c1c",
+      "evidence": "docs/development/paired-selection-boot-trial.md",
+      "license": "GPL-3.0-or-later",
+      "rights": "Original ClasSICK product framebuffer only; no reference-system, emulator-chrome or desktop pixels.",
+      "input": "synthetic",
+      "limitations": [
+        "Snow palette is dark/light gray.",
+        "Progress strip remains empty by the existing Mac binding.",
+        "Persistent preference isolation and human/physical input are unqualified.",
+        "Own prototype engineering observation, not historical/physical/System1 qualification.",
+        "Synthetic input only; no human-input confirmation."
+      ]
+    },
+    {
+      "id": "2026-10-18-paired-selection-pc-initial",
+      "path": "docs/evidence/screenshots/2026-10-18/paired-selection-pc-initial.png",
+      "sha256": "20df80abd6fdcca892c59214dfb88db0f775b324482834f1db2325941b7db1e2",
+      "bytes": 4729,
+      "width": 1024,
+      "height": 768,
+      "captured_on": "2026-10-18",
+      "target": "native-x86_64",
+      "caption": "Native x86-64 selected-port boot before input, counter0000.",
+      "alt": "Monochrome ClasSICK0.97 branding, APP097, left rectangular outline, right split block, six phase marks, result0097 and counter0000.",
+      "source_revision": "01e6400d9f83a51ebb93bb7747f21af627829720",
+      "compiled_source_revision": "ac4e7b31784dde1620938ca9a2855e61f14d7c1c",
+      "evidence": "docs/development/paired-selection-boot-trial.md",
+      "license": "GPL-3.0-or-later",
+      "rights": "Original ClasSICK product framebuffer only; no reference-system, emulator-chrome or desktop pixels.",
+      "input": "synthetic",
+      "limitations": [
+        "Own prototype engineering observation, not historical/physical/System1 qualification.",
+        "Synthetic input only; no human-input confirmation."
+      ]
+    },
+    {
+      "id": "2026-10-18-paired-selection-pc-first-press",
+      "path": "docs/evidence/screenshots/2026-10-18/paired-selection-pc-first-press.png",
+      "sha256": "4e3d8ea901e2b8f3e9e42edc1e66c67a78f286b66ac7af916b8c9153372188eb",
+      "bytes": 4728,
+      "width": 1024,
+      "height": 768,
+      "captured_on": "2026-10-18",
+      "target": "native-x86_64",
+      "caption": "Native x86-64 first synthetic mouse press, counter0001.",
+      "alt": "Monochrome ClasSICK0.97 branding, APP097, left rectangular outline, right split block, six phase marks, result0097 and counter0001.",
+      "source_revision": "01e6400d9f83a51ebb93bb7747f21af627829720",
+      "compiled_source_revision": "ac4e7b31784dde1620938ca9a2855e61f14d7c1c",
+      "evidence": "docs/development/paired-selection-boot-trial.md",
+      "license": "GPL-3.0-or-later",
+      "rights": "Original ClasSICK product framebuffer only; no reference-system, emulator-chrome or desktop pixels.",
+      "input": "synthetic",
+      "limitations": [
+        "Own prototype engineering observation, not historical/physical/System1 qualification.",
+        "Synthetic input only; no human-input confirmation."
+      ]
+    },
+    {
+      "id": "2026-10-18-paired-selection-pc-held-repeat",
+      "path": "docs/evidence/screenshots/2026-10-18/paired-selection-pc-held-repeat.png",
+      "sha256": "c8142f26ddacc2809e68e687283ebf2d3adfd62e03743b97edb295c1c1621906",
+      "bytes": 4728,
+      "width": 1024,
+      "height": 768,
+      "captured_on": "2026-10-18",
+      "target": "native-x86_64",
+      "caption": "Native x86-64 repeated held-button state leaves counter0001.",
+      "alt": "Monochrome ClasSICK0.97 branding, APP097, left rectangular outline, right split block, six phase marks, result0097 and Native x86-64 repeated held-button state leaves counter0001.",
+      "source_revision": "01e6400d9f83a51ebb93bb7747f21af627829720",
+      "compiled_source_revision": "ac4e7b31784dde1620938ca9a2855e61f14d7c1c",
+      "evidence": "docs/development/paired-selection-boot-trial.md",
+      "license": "GPL-3.0-or-later",
+      "rights": "Original ClasSICK product framebuffer only; no reference-system, emulator-chrome or desktop pixels.",
+      "input": "synthetic",
+      "limitations": [
+        "Own prototype engineering observation, not historical/physical/System1 qualification.",
+        "Synthetic input only; no human-input confirmation."
+      ]
+    },
+    {
+      "id": "2026-10-18-paired-selection-pc-two-presses",
+      "path": "docs/evidence/screenshots/2026-10-18/paired-selection-pc-two-presses.png",
+      "sha256": "d2251b4c68fd9dfc7dbd6dc4be7022ea5641605149dafe38f525867acde79aca",
+      "bytes": 4730,
+      "width": 1024,
+      "height": 768,
+      "captured_on": "2026-10-18",
+      "target": "native-x86_64",
+      "caption": "Native x86-64 second synthetic mouse press, counter0002.",
+      "alt": "Monochrome ClasSICK0.97 branding, APP097, left rectangular outline, right split block, six phase marks, result0097 and counter0002.",
+      "source_revision": "01e6400d9f83a51ebb93bb7747f21af627829720",
+      "compiled_source_revision": "ac4e7b31784dde1620938ca9a2855e61f14d7c1c",
+      "evidence": "docs/development/paired-selection-boot-trial.md",
+      "license": "GPL-3.0-or-later",
+      "rights": "Original ClasSICK product framebuffer only; no reference-system, emulator-chrome or desktop pixels.",
+      "input": "synthetic",
+      "limitations": [
+        "Own prototype engineering observation, not historical/physical/System1 qualification.",
+        "Synthetic input only; no human-input confirmation."
+      ]
+    },
+    {
+      "id": "2026-10-18-paired-selection-pc-after-space",
+      "path": "docs/evidence/screenshots/2026-10-18/paired-selection-pc-after-space.png",
+      "sha256": "9887251bb2cf97637f805345d67c322f17cd0baafaf2011ab490496a05d39c88",
+      "bytes": 4728,
+      "width": 1024,
+      "height": 768,
+      "captured_on": "2026-10-18",
+      "target": "native-x86_64",
+      "caption": "Native x86-64 two synthetic mouse presses plus Space, counter0003.",
+      "alt": "Monochrome ClasSICK0.97 branding, APP097, left rectangular outline, right split block, six phase marks, result0097 and counter0003.",
+      "source_revision": "01e6400d9f83a51ebb93bb7747f21af627829720",
+      "compiled_source_revision": "ac4e7b31784dde1620938ca9a2855e61f14d7c1c",
+      "evidence": "docs/development/paired-selection-boot-trial.md",
+      "license": "GPL-3.0-or-later",
+      "rights": "Original ClasSICK product framebuffer only; no reference-system, emulator-chrome or desktop pixels.",
+      "input": "synthetic",
+      "limitations": [
+        "Own prototype engineering observation, not historical/physical/System1 qualification.",
+        "Synthetic input only; no human-input confirmation."
+      ]
+    },
+    {
+      "id": "2026-10-18-paired-selection-pc-complete",
+      "path": "docs/evidence/screenshots/2026-10-18/paired-selection-pc-complete.png",
+      "sha256": "43ce8e15e83c1a583df0a188a75c4c8a105f641d69071cf1e466ac8deb682b21",
+      "bytes": 4733,
+      "width": 1024,
+      "height": 768,
+      "captured_on": "2026-10-18",
+      "target": "native-x86_64",
+      "caption": "Native x86-64 normal completion at guest second60, combined counter0003.",
+      "alt": "Monochrome ClasSICK0.97 branding, APP097, left rectangular outline, right split block, six phase marks, result0097 and combined counter0003.",
+      "source_revision": "01e6400d9f83a51ebb93bb7747f21af627829720",
+      "compiled_source_revision": "ac4e7b31784dde1620938ca9a2855e61f14d7c1c",
+      "evidence": "docs/development/paired-selection-boot-trial.md",
+      "license": "GPL-3.0-or-later",
+      "rights": "Original ClasSICK product framebuffer only; no reference-system, emulator-chrome or desktop pixels.",
+      "input": "synthetic",
+      "limitations": [
+        "Session pauses/resumes preclude uninterrupted wall-clock timing qualification.",
+        "Own prototype engineering observation, not historical/physical/System1 qualification.",
+        "Synthetic input only; no human-input confirmation."
+      ]
+    }
+  ]
+}

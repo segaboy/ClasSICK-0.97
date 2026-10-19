@@ -1,5 +1,7 @@
 # ClasSICK 0.97
 
+2026-10-18: reviewed native Mac/PC boot screenshots now live in Git for research/web discovery: [image index](docs/evidence/screenshots/README.md). SPEC-0048 defines the next paired native rectangle-outline contract; implementation and44 proposed checks remain pending.
+
 2026-10-16: The original native C drawing workload now calls the rectangle service directly on native68000 and x86 paths. PC boot/Windows viewer and a distinct native Mac ROM use real native results/pixels; the separate40-byte68k compatibility fixture remains. Independent pixel/failure/legacy tests, nine-profile2280 checks, dependency audits and native candidates pass. No new boot observation or release; PC mouse/event parity remains open.
 
 [Native drawing evidence](docs/development/native-drawing-evidence.md).

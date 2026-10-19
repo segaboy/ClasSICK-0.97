@@ -69,3 +69,7 @@ native external-application gate and both System1 boot requirements remain open.
 Next proposed slice: define the next paired drawing primitive and its independent
 oracle before implementation, using the existing native selection/view foundation.
 No further target trial, release or new runtime implementation is authorized here.
+
+## Subsequent screenshot publication -2026-10-18
+
+At the owner's direction,SRC-0280 publishes7 unchanged own-product capture copies in [the screenshot index](../evidence/screenshots/README.md) with [manifest identities/captions/limits](../evidence/screenshots/manifest.json). Private originals/logs remain preserved. This adds discovery/publication,no new run or observation.

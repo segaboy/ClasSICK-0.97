@@ -20,6 +20,11 @@ jobs:
       - name: Audit public source and documentation
         shell: powershell
         run: .\scripts\Test-Repository.ps1
+      - name: Verify screenshot evidence admission
+        shell: powershell
+        run: |
+          python -B tests/screenshot-evidence.py
+          if ($LASTEXITCODE -ne 0) { throw 'Screenshot evidence admission tests failed.' }
       - name: Verify scene import contract consistency
         shell: powershell
         run: |

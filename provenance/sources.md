@@ -3236,3 +3236,27 @@ resulting public/HQ evidence after automatic approval initially blocked main.
 ## SRC-0279 - Lead paired native boot observations
 
 - Codex,2026-10-18 local /2026-10-19 UTC: one own-ROM Snow session and one own-disk VirtualBox session, configuration/identity checks, synthetic input, actual captures/comparisons, PC terminal result and session closure. Original engineering observation only; persistent Snow preference isolation, human/physical input, timing/edition/full128K/B2/System1 acceptance are not established. [Receipt](../docs/development/paired-selection-boot-trial.json).
+
+## SRC-0280 - Owner screenshot publication and next-task instruction
+
+- Dean Howell,2026-10-18: "As you continue to take screenshots, store them in the repo" for the morning research updater/web-facing content; "Now, on to the next task." Authorizes reviewed own-product evidence copies, bounded publication-guard changes/tests/ordinary CI/Git/HQ and the next paired drawing-primitive contract. No new runtime/target/reference/hardware/release scope or protected image rights.
+
+## SRC-0281 - Argon4 High screenshot guard attempt
+
+- One bounded frozen-public primary call, actual gemini-4-argon-high/High. CLI print timeout420s,423.86s elapsed,exit0 but response empty; no usable artifact or tool action. Zero reported timeout counters are not a quota/billing conclusion. No retry.
+
+## SRC-0282 - Claude native outline contract proposal
+
+- Explicit Opus5.5 low, one frozen reviewed-public API/contract packet, no tools/writes/tests.114-line spec and44 prospective matrix rows; lead decisions are independent engineering choices. [Prompt](../docs/development/tasks/native-outline-claude.md).
+
+## SRC-0283 - Copilot independent screenshot admission oracle
+
+- Explicit Sonnet5.5 low, frozen admission contract only, validator/logs withheld. One permitted prompt read,270-line artifact, no writes/tests. Code is a proposal until lead correction/execution. [Prompt](../docs/development/tasks/screenshot-oracle-copilot.md).
+
+## SRC-0284 - Lead screenshot intake and outline contract decisions
+
+- Codex reviews original-only captures, validates identities/decoder/limits, integrates worker artifacts and allocates stable IDs. Screenshot infrastructure tests are actual; outline44 matrix rows are prospective, H1-H5 open. [Evidence](../docs/development/screenshot-outline-evidence.md).
+
+## SRC-0285 - Claude focused screenshot validator fallback
+
+- Explicit Opus5.5 low after unusable bounded Argon call, no same-provider retry. Frozen public admission contract, independent tests withheld,231 Python lines in82.19s, zero tools/writes/tests. [Prompt](../docs/development/tasks/screenshot-validator-claude.md).

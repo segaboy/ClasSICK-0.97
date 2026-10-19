@@ -142,3 +142,19 @@ two-port pixels and Mac/PC output from frozen API/contracts only. Both calls
 returned artifacts without retries. Smaller exact packets avoid repeating owner
 history; Codex integrates rather than recreating sound code. No new Grok/Argon
 call or qualification. [Actual results/limits](paired-selection-evidence.md).
+
+## Screenshot guard and next outline contract -2026-10-18
+One Argon4 High guard primary hit its420s print cap,423.86s elapsed,exit0 with
+empty response: not success. No tools/artifact,reported zero counters not proof
+of zero consumption. Stop and reroute rather than repeat. One focused Claude
+fallback produced231 reviewed Python lines in82.19s; independent Copilot270-line
+oracle from frozen requirements caught admission risks without seeing code.
+One separate Claude contract produced114 spec lines/44 unexecuted matrix rows in68s.
+Codex integrates sound artifacts; no competing worker writes or repeated runtime
+suite locally. Exact output-budget deviations,fixture/validator corrections and
+actual tests are [recorded](screenshot-outline-evidence.md). Prefer established
+Claude for the next bounded code artifact,Copilot for its independent oracle;
+Argon remains High for shorter diagnostic/review scopes until comparable artifact
+latency succeeds. Grok only for a distinct unresolved risk. No mandatory fan-out.
+Store future reviewed product evidence screenshots/manifest in Git for the owner's
+research updater; transient private UI/logs stay outside. OneNote/wiki stay retired.

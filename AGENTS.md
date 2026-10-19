@@ -1,5 +1,16 @@
 # ClasSICK 0.97 working instructions
 
+Current owner screenshot publication and next outline contract (2026-10-18,SRC-0280..0285):
+Store reviewed own-product evidence PNGs in docs/evidence/screenshots with indexed
+manifest/hashes/captions/rights/source pins and research/test links for the morning
+updater.7 prior SPEC-0047 captures are publication copies,no new target run.
+Implement narrow screenshot guard/tests/CI only; SPEC-0048 / ADR-0054 is contract
+only,44 unexecuted outline cases,H1-H5 open,no runtime/header/build/trap/scene
+change. Argon4 High timed out,no artifact; one Claude guard fallback and independent
+Copilot tests,Claude outline contract. Codex sole writer/integrator/verifier.
+Preserve24 originals/copies,UART,old rows/releases/tags/wiki and existing gates.
+No OneNote/wiki,chats/subagents/automation,new trial or release. [Evidence](docs/development/screenshot-outline-evidence.md).
+
 Current owner paired selected-port boot observations (2026-10-18,SRC-0278/0279):
 "Continue" accepts the proposed one Snow Early128K and one isolated native PC
 trial of exact SPEC-0047 candidates,synthetic input/captures and ordinary Git/HQ.

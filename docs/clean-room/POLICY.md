@@ -99,3 +99,7 @@ distribution, copied payloads/assets, worker inputs and redistribution persists.
 Lawfully held original firmware/media may be reference-platform inputs only after
 exact source/platform admission and explicit owner trial authorization. This
 requirement grants no current run, download, source inspection or extraction.
+
+## Reviewed original screenshot evidence -2026-10-18
+
+Owner SRC-0280 requires reviewed own-product screenshots in Git for research/web discovery. The narrow indexed PNG/manifest exception in [the storage policy](../development/screenshot-evidence.md) admits no protected/reference pixels,emulator chrome,desktop,credentials,ROM/media or arbitrary binary payload. All previous exclusions and trial/rights gates persist. Structural/hash checks do not replace human source/privacy/rights review.

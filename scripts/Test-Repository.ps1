@@ -2,12 +2,18 @@
 # Copyright (C) 2026 Dean Howell.
 # Audit the Git index, including staged content. Human provenance review is still required.
 [CmdletBinding()]
-param()
+param([string]$Python = 'python')
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
 $repoRoot = [IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..'))
 $files = @(& git -C $repoRoot -c core.quotepath=false ls-files)
 if ($LASTEXITCODE -ne 0 -or $files.Count -eq 0) { throw 'Cannot read a nonempty Git index' }
+$screenshotReport = & $Python -B (Join-Path $PSScriptRoot 'check_screenshots.py') --root $repoRoot
+if ($LASTEXITCODE -ne 0) { throw 'Indexed screenshot evidence validation failed' }
+$registeredScreenshots = @{}
+foreach ($imagePath in ($screenshotReport | ConvertFrom-Json).screenshots) {
+    $registeredScreenshots[[string]$imagePath] = $true
+}
 $required = @('README.md','CONTRIBUTING.md','AGENTS.md','.gitignore','.gitattributes',
     'docs/clean-room/POLICY.md','provenance/README.md','docs/charter.md',
     'docs/architecture/overview.md','docs/adr/README.md','docs/roadmap.md',
@@ -28,7 +34,7 @@ foreach ($path in $files) {
     if ($path -match $forbiddenDirectories) { throw "Excluded payload directory tracked: $path" }
     $leaf = [IO.Path]::GetFileName($path)
     $extension = [IO.Path]::GetExtension($path).ToLowerInvariant()
-    if ($allowedExtensions -notcontains $extension -and $allowedNames -notcontains $leaf) {
+    if ($allowedExtensions -notcontains $extension -and $allowedNames -notcontains $leaf -and -not $registeredScreenshots.ContainsKey($path)) {
         throw "Non-source/text payload needs explicit policy review: $path"
     }
     if ($leaf -match '^(\.env($|\.)|credentials|secrets|id_rsa|id_ed25519)') {
@@ -36,6 +42,7 @@ foreach ($path in $files) {
     }
     $indexSize = & git -C $repoRoot cat-file -s ":$path"
     if ($LASTEXITCODE -ne 0 -or [long]$indexSize -gt 1048576) { throw "Unexpected index size: $path" }
+    if ($registeredScreenshots.ContainsKey($path)) { continue }
     $content = (& git -C $repoRoot show ":$path") -join "`n"
     if ($LASTEXITCODE -ne 0) { throw "Cannot read indexed file: $path" }
     if ($content.Contains([char]0)) { throw "Binary content in text file: $path" }
@@ -64,5 +71,5 @@ foreach ($path in $files | Where-Object { $_ -like '*.md' }) {
 }
 & git -C $repoRoot diff --cached --check
 if ($LASTEXITCODE -ne 0) { throw 'Staged whitespace check failed' }
-Write-Output "Repository guard PASS: $($files.Count) indexed text/source files; required docs, local links, JSON, payload exclusions, and common credential signatures checked."
+Write-Output "Repository guard PASS: $($files.Count - $registeredScreenshots.Count) indexed text/source files and $($registeredScreenshots.Count) registered PNG screenshots; required docs, local links, JSON, payload exclusions, and common credential signatures checked."
 Write-Output 'Originality, reference rights, and full secret detection still require human review.'
