@@ -1,0 +1,109 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-19",
+  "baseline": "3b909d731c7457a81f7a29086db3a3b0a610dbb1",
+  "sources": [
+    "SRC-0307",
+    "SRC-0308",
+    "SRC-0309"
+  ],
+  "decision": "ADR-0058",
+  "scope": "Plan only for paired-native-preview-2: recommended original moving cursor plus one draggable/content-click native window on shared C compiled68000/x86-64,logical512x342;provisional ROM0.4.0-alpha.1/PC0.2.0-alpha.1. First proposed slice is pointer/input contract and Mac motion-source sufficiency/PC GUI evidence inventory. No implementation,fixtures,tests,build,target run,version-pointer change or release;all acceptance checks unexecuted. Current published pair/assets/tags,24 originals/held brief/UART/wiki and all compatibility gates preserved;OneNote/wiki retired.",
+  "worker": {
+    "name": "claude",
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "execution": {
+      "round": "planning",
+      "worker": "claude",
+      "exit_code": 0,
+      "outer_timeout": false,
+      "elapsed_seconds": 53.75,
+      "input_bytes": 28064,
+      "input_sha256": "ba642916fb2dc8f3116d8e7929c228560b46af192784459c2bc250a3b76cbfa3",
+      "stderr_bytes": 0
+    },
+    "proposed_document_lines": 139,
+    "line_limit": 150,
+    "tools": [],
+    "worker_writes": 0,
+    "tests_executed": [],
+    "provider_reported": {
+      "usage": {
+        "input_tokens": 2,
+        "cache_creation_input_tokens": 11343,
+        "cache_read_input_tokens": 2384,
+        "output_tokens": 4819,
+        "output_tokens_details": {
+          "thinking_tokens": 781
+        },
+        "server_tool_use": {
+          "web_search_requests": 0,
+          "web_fetch_requests": 0
+        },
+        "service_tier": "standard",
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 11343,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "global",
+        "iterations": [
+          {
+            "input_tokens": 2,
+            "output_tokens": 4819,
+            "cache_read_input_tokens": 2384,
+            "cache_creation_input_tokens": 11343,
+            "cache_creation": {
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 11343
+            },
+            "type": "message"
+          }
+        ],
+        "speed": "standard",
+        "fallback_credit": null
+      },
+      "modelUsage": {
+        "claude-opus-5-5": {
+          "inputTokens": 2,
+          "outputTokens": 4819,
+          "cacheReadInputTokens": 2384,
+          "cacheCreationInputTokens": 11343,
+          "webSearchRequests": 0,
+          "costUSD": 0.18760880000000002,
+          "contextWindow": 1000000,
+          "maxOutputTokens": 128000,
+          "thinkingTokens": 781,
+          "canonicalModel": "claude-opus-5-5",
+          "provider": "firstParty",
+          "costBasis": "list"
+        }
+      },
+      "total_cost_usd": 0.18760880000000002,
+      "permission_denials": [],
+      "num_turns": 1
+    }
+  },
+  "lead_corrections": [
+    "Recommend a reusable native window and content-click action,not another static frame;keep full guest Window/Event/QuickDraw ABI out of scope.",
+    "Narrow absence claims to the released UI;Mac source sufficiency is unestablished for a new adapter,not proof no eligible source exists.",
+    "Existing counter redraw already exists;the goal generalizes dirty repaint to moving cursor/window objects.",
+    "Separate hosted viewer dispatch checks from the observed native-PC VM capture/focus failure;GUI preboot error cause remains unknown.",
+    "Move pointer/motion source-sufficiency and contract decisions to the first slice;add64KiB ROM/actual footprint gate and single-owner sample distribution.",
+    "Compare decoded state and normalized monochrome pixels,not differently packed/endian native structures/framebuffers.",
+    "Do not promise automatic rollback/idle after post-effect faults;freeze retained-effect/recovery/cancellation rules first.",
+    "Require automated end-to-end GUI evidence separately from device injection;human availability does not block all engineering,while human qualification and new release-limit acceptance stay separate.",
+    "Restore external primary/Codex integration routing;manual source eligibility stays with lead,not an unqualified worker/manual transfer."
+  ],
+  "planning_review_completed": true,
+  "runtime_qualification_changed": false,
+  "implementation_or_target_run": false,
+  "plan_sha256_git_lf": "4627f9aedb2d1acfd2e95028a9b94a2719bd4e5b70b6656e23e2542207f63965",
+  "proposed_release_tests_executed": [],
+  "remaining_account_allowances": {
+    "claude": "unavailable;not exposed",
+    "copilot": "unavailable;not exposed",
+    "grok": "unavailable;not exposed",
+    "antigravity": "unavailable;not exposed"
+  }
+}

@@ -3346,3 +3346,15 @@ SRC-0300 executed checkpoint: CI3150/11;local596/2;38 mouse+5 Space events throu
 ## SRC-0306 - Lead actual paired publication verification
 
 - Codex verifies frozen inputs,annotated local/remote tags,all eight authenticated draft downloads,all eight post-publication downloads,GitHub digests,release bodies/prerelease/latest states and prior release preservation. Original engineering evidence,not historical/human/physical qualification. No worker,build or target run. [Evidence](../docs/development/paired-release-publication-evidence.md).
+
+## SRC-0307 - Owner next release planning goal
+
+- Dean Howell,2026-10-19: "Now, your next goal is to plan for the next release. Think about what would warrant a new release, and then we will work toward that goal." Authorizes a concrete next-release recommendation and ordinary planning records;not implementation,new target trial or publication. [Plan](../releases/paired-native-preview-2.md).
+
+## SRC-0308 - Claude bounded next-release plan draft
+
+- One28064-byte reviewed-public contract/review packet,Opus5.5 low,53.75s,139 lines within150 cap,zero tools/writes/tests. Recommends pointer plus original draggable window;lead corrects source-absence,PC path,redraw,parity-byte,fault,human-gate and orchestration assumptions. [Receipt](../docs/development/next-release-plan-review.json).
+
+## SRC-0309 - Lead next-release selection and planning review
+
+- Codex adopts and tightens the worker plan,defines provisional paired versions,first source/contract slice,release checks and explicit gates. Original engineering planning,no historical claim or executed feature test. [Review](../docs/development/next-release-plan-review.md).

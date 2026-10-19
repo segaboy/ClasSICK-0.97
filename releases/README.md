@@ -1,5 +1,7 @@
 # Independent ROM and System releases
 
+Next release goal proposed2026-10-19: [paired-native-preview-2](paired-native-preview-2.md),one interactive original native window with pointer/cursor and matched Mac/PC behavior. Proposed0.4ROM/0.2PC alpha versions,not assigned published versions. Contract/source sufficiency comes first;no implementation/trial/release authorized by this plan.
+
 Published2026-10-19: [paired ROM0.3.0-alpha.1 / PC0.1.0-alpha.1 receipt](paired-native-preview-1-publication.json). Both experimental prereleases have four verified public assets each. Source/license/setup/checksums included;System unreleased and stated preview limits remain. Older dated approval/preparation paragraphs below are history.
 
 Preparation history2026-10-19: [paired approval proposal](paired-native-preview-1-approval.md) records the37 package checks and admission-time pending state. The separate publication receipt above records the subsequent owner-approved releases.

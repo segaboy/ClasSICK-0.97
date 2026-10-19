@@ -1,5 +1,7 @@
 # Agent Orchestration Protocol
 
+Next-release planning2026-10-19: one Claude primary139-line plan,53.75s,zero tools/writes/tests,within150 cap. Codex selects/tightens goal and evidence gates;no second worker or requalification. Future slices keep substantial external primary,distinct-risk independent oracle only,and Codex sole source reviewer/writer/integrator/verifier. [Review](next-release-plan-review.md).
+
 Final-package allocation2026-10-19: one Claude primary303-line builder/four notes,one distinct-risk independent Copilot283-line auditor;Codex integrates rather than recreates and runs37 actual package checks. Two calls,prior qualifications reused;Grok/Argon idle. Both exceed output-line caps;lead fixes sourceZIP directory and compression-flag assumptions. Remaining allowances unavailable. [Review](paired-release-package-review.md).
 
 Preview-session allocation2026-10-19: one Claude primary4 replacements/104 test lines/60 spec lines,131.73s,zero tools/writes/tests. Codex strengthens exact counter-area test,uses real outline scene and legacy rejection,handles compiler/target verification. Existing independent scene/input oracles reused; no second worker or repeated qualification. All four remaining account allowances unavailable; model counters/list cost are not quota equivalence. [Evidence](preview-session-evidence.md).

@@ -1,5 +1,7 @@
 # Current milestones and release tracks
 
+2026-10-19 next goal proposed: [paired-native-preview-2](../releases/paired-native-preview-2.md),first interactive native window. Pointer/cursor,drag/content action,dirty redraw and input reliability must match Mac68000/x86-64 PC. First slice:source-sufficiency/input contract. All feature checks unexecuted,current releases unchanged.
+
 2026-10-19 paired-native-preview-1: ROM0.3.0-alpha.1/PC0.1.0-alpha.1 published experimental prereleases. Exact eight downloads/digests/tags verified;complete source,license and setup guides included. No System release or compatibility-gate closure. [Receipt](../releases/paired-native-preview-1-publication.json).
 
 2026-10-19 paired-native-preview-1: final package/source/license/checksum freeze passes37 actual checks. Ready for owner approval,not published;PC human capture/GUI limitations require explicit preview acceptance. [Proposal](../releases/paired-native-preview-1-approval.md).
@@ -71,7 +73,8 @@ describe capabilities, not release numbers or complete-edition certification.
 
 | Component | Version | State |
 | --- | --- | --- |
-| ClasSICK ROM | 0.2.0-alpha.1 | Published experimental prerelease; rom-v0.2.0-alpha.1 |
+| ClasSICK ROM | 0.3.0-alpha.1 | Published experimental prerelease; rom-v0.3.0-alpha.1 |
+| ClasSICK PC Preview | 0.1.0-alpha.1 | Published experimental prerelease; pc-v0.1.0-alpha.1 |
 | ClasSICK System software | Unassigned | Unreleased |
 
 [Version authority, release process and compatibility matrix](../releases/README.md).
@@ -85,7 +88,8 @@ The current ROM's embedded demo is separate from a disk-based System release.
 | ROM/runtime | Load, execute and retire an original 68k application | Demonstrated in Snow; [integrated application](development/loaded-rom-app-evidence.md). Narrow prototype profile |
 | ROM/presentation | Preserve the scene while updating the input counter | Demonstrated at captured points; [redraw evidence](development/loaded-app-redraw-evidence.md). Automated input delivery unqualified |
 | ROM/runtime | Loaded application makes its first drawing calls through our APIs | [Selected two-call profile](development/drawing-app-evidence.md) passes hosted/compiler/CI checks; [one Snow boot](development/drawing-app-boot-trial.md) shows drawing retained as counter advances; input delivery unqualified |
-| ROM/runtime | General guest port state, clipping and drawing-manager installation | Next expansion; the first rectangle profile has fixed native port state |
+| Native graphics / legacy ABI | Prepared port selection, clipping and general guest port installation | Native selection/clip/outline foundations and paired preview implemented;general guest InitGraf/Window/Event installation remains incomplete |
+| Native Mac/PC next release | Moving cursor and one draggable/content-click window | Proposed paired-native-preview-2;not implemented or tested |
 | ROM/System | Boot our replacement System disk on our ROM | Required; not tested; no System release exists |
 | ROM | Boot owner-designated original System 1 disks | Required; not tested |
 | System | Windows, menus, events, files and useful desktop workflow | Incomplete; research and isolated foundations exist |
