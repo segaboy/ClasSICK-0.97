@@ -1,5 +1,7 @@
 # Architecture decision records
 
+2026-10-19: [ADR-0057](0057-paired-release-package-freeze.md) freezes unchanged paired candidates and exact uploads for owner approval. Published pointers stay unchanged;no runtime/trial/publication scope expands.
+
 2026-10-19: [ADR-0055](0055-paired-release-cadence.md) ties current work to a named paired preview candidate,matching feature checks and separate qualification/publication states.
 
 2026-10-16: [ADR-0044](0044-paired-native-drawing-workload.md) binds one

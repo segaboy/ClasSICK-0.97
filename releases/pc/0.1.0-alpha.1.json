@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "component": "pc",
+  "version": "0.1.0-alpha.1",
+  "state": "prepared-awaiting-owner-approval",
+  "published": false,
+  "proposed_tag": "pc-v0.1.0-alpha.1",
+  "tag_target_revision": null,
+  "tag_target_selection": "reviewed metadata commit named in approval request",
+  "compiled_source_revision": "c631b824b2a264c6d81eb9832f17b7b5918aa9ff",
+  "evidence_revision": "87e95de40cfb0f06b6398a3cfa762e9c62b87375",
+  "qualification": {
+    "path": "docs/development/preview-session-evidence.json",
+    "sha256_git_lf": "821893c1fb693c188d4430eac5fba04cf7f020aa92f5ba85f774d478cec9dace"
+  },
+  "ci_url": "https://github.com/segaboy/ClasSICK-0.97/actions/runs/39301375020",
+  "license": "GPL-3.0-or-later",
+  "source_url": "https://github.com/segaboy/ClasSICK-0.97/tree/c631b824b2a264c6d81eb9832f17b7b5918aa9ff",
+  "source_archive": "classick-pc-0.1.0-alpha.1-source.zip",
+  "artifact": {
+    "filename": "classick-pc-0.1.0-alpha.1-x86_64.efi",
+    "bytes": 159232,
+    "sha256": "23e021a4ab57cfd57559777e05d57e41f2b2217b4975b0543d9834414989d8f0"
+  },
+  "upload_assets": {
+    "SHA256SUMS.txt": {
+      "bytes": 309,
+      "sha256": "b17962367afba6e9c8f2a98c1f9102b12de8abf75627fff35a3e51135427b451"
+    },
+    "classick-pc-0.1.0-alpha.1-source.zip": {
+      "bytes": 2100291,
+      "sha256": "b8e1537750316012a3bad8afb497d3f4043bb0cf0baf1ea8bb6eebcd92d28865"
+    },
+    "classick-pc-0.1.0-alpha.1-x86_64.efi": {
+      "bytes": 159232,
+      "sha256": "23e021a4ab57cfd57559777e05d57e41f2b2217b4975b0543d9834414989d8f0"
+    },
+    "classick-pc-0.1.0-alpha.1-x86_64.zip": {
+      "bytes": 255134,
+      "sha256": "4c6a95de87c56600aad34e78e1c169ad4ffd17b13f34d7450d43bd683c02ea8c"
+    }
+  },
+  "release_notes": "releases/pc/0.1.0-alpha.1.md",
+  "trying_guide": "releases/pc/TRYING-0.1.0-alpha.1.md",
+  "package_review": "docs/development/paired-release-package-review.json",
+  "package_review_passed": true,
+  "human_input_qualified": false,
+  "observed_platform": "VirtualBox7.2.16 Windows11 EFI64 1CPU512MiB PS2;headless fallback",
+  "observed_input": "38 injected mouse+5 Space through guest185;human capture unresolved",
+  "compatibility": {
+    "own_system_on_own_rom": "untested;no System release",
+    "original_system1_on_own_rom": "required,untested",
+    "own_system_on_supported_original_apple_rom": "required,untested",
+    "historical_097_qualified": false,
+    "physical_hardware_qualified": false
+  },
+  "limits": [
+    "PC human pointer capture/focus after intermittent-click report",
+    "One VirtualBox GUI preboot CPU-initialization failure;headless fallback passed",
+    "Snow persistent preference isolation",
+    "Physical Macintosh/PC,full128K,B2,historical/edition,System1-ROM boot directions,native external apps,Linux complete edition"
+  ]
+}

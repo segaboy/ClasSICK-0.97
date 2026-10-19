@@ -1,5 +1,7 @@
 # Independent ROM and System releases
 
+Prepared2026-10-19: [paired ROM0.3.0-alpha.1 / PC0.1.0-alpha.1 approval proposal](paired-native-preview-1-approval.md),37 actual package checks passed. No tag/release yet;PC human capture/GUI and other preview limits require explicit acceptance. The current published version table below is unchanged.
+
 Current owner direction2026-10-19: work toward paired native Macintosh/x86 PC preview releases. [ADR-0055](../docs/adr/0055-paired-release-cadence.md) and [paired-native-preview-1](paired-native-preview-1.md) define the bounded target and readiness matrix. PC preview is currently unversioned/unreleased; proposed versions are draft only. Existing ROM/System pointers and published assets unchanged; target trials and publication still need explicit owner decisions.
 
 2026-10-15 groundwork SRC-0198; 2026-10-16 alpha publication SRC-0200/0201; next release SRC-0215/0216;

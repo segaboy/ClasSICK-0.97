@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "component": "rom",
+  "version": "0.3.0-alpha.1",
+  "state": "prepared-awaiting-owner-approval",
+  "published": false,
+  "proposed_tag": "rom-v0.3.0-alpha.1",
+  "tag_target_revision": null,
+  "tag_target_selection": "reviewed metadata commit named in approval request",
+  "compiled_source_revision": "c631b824b2a264c6d81eb9832f17b7b5918aa9ff",
+  "evidence_revision": "87e95de40cfb0f06b6398a3cfa762e9c62b87375",
+  "qualification": {
+    "path": "docs/development/preview-session-evidence.json",
+    "sha256_git_lf": "821893c1fb693c188d4430eac5fba04cf7f020aa92f5ba85f774d478cec9dace"
+  },
+  "ci_url": "https://github.com/segaboy/ClasSICK-0.97/actions/runs/39301375020",
+  "license": "GPL-3.0-or-later",
+  "source_url": "https://github.com/segaboy/ClasSICK-0.97/tree/c631b824b2a264c6d81eb9832f17b7b5918aa9ff",
+  "source_archive": "classick-rom-0.3.0-alpha.1-source.zip",
+  "artifact": {
+    "filename": "classick-rom-0.3.0-alpha.1-mac128k.rom",
+    "bytes": 65536,
+    "sha256": "2b600319d334145e582adc3db0e0fcf495d5f44309488c19e652dfb378391780"
+  },
+  "upload_assets": {
+    "SHA256SUMS.txt": {
+      "bytes": 311,
+      "sha256": "cd3d096f5b2f38aafddc86bb78c7b7ef6b2bdc468d143d212bf2f693c726c901"
+    },
+    "classick-rom-0.3.0-alpha.1-demo.zip": {
+      "bytes": 22530,
+      "sha256": "e7b1d6a867a9335b952457e0dc24081b03ce6ec85d72251135754f5231dbbf4c"
+    },
+    "classick-rom-0.3.0-alpha.1-mac128k.rom": {
+      "bytes": 65536,
+      "sha256": "2b600319d334145e582adc3db0e0fcf495d5f44309488c19e652dfb378391780"
+    },
+    "classick-rom-0.3.0-alpha.1-source.zip": {
+      "bytes": 2100291,
+      "sha256": "b8e1537750316012a3bad8afb497d3f4043bb0cf0baf1ea8bb6eebcd92d28865"
+    }
+  },
+  "release_notes": "releases/rom/0.3.0-alpha.1.md",
+  "trying_guide": "releases/rom/TRYING-0.3.0-alpha.1.md",
+  "package_review": "docs/development/paired-release-package-review.json",
+  "package_review_passed": true,
+  "human_input_qualified": true,
+  "observed_platform": "Snow v1.5.0-317c188 Windows11 Early128K 128KB",
+  "observed_input": "human2 clicks confirmed intact scene;same ROM rebuilt unchanged",
+  "compatibility": {
+    "own_system_on_own_rom": "untested;no System release",
+    "original_system1_on_own_rom": "required,untested",
+    "own_system_on_supported_original_apple_rom": "required,untested",
+    "historical_097_qualified": false,
+    "physical_hardware_qualified": false
+  },
+  "limits": [
+    "PC human pointer capture/focus after intermittent-click report",
+    "One VirtualBox GUI preboot CPU-initialization failure;headless fallback passed",
+    "Snow persistent preference isolation",
+    "Physical Macintosh/PC,full128K,B2,historical/edition,System1-ROM boot directions,native external apps,Linux complete edition"
+  ]
+}

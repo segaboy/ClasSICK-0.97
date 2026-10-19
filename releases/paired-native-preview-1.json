@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "candidate": "paired-native-preview-1",
-  "status": "continuous-session-automated-qualified-review-pending",
+  "status": "packages-reviewed-awaiting-owner-approval",
   "owner_source": "SRC-0291",
   "decision": "ADR-0055",
   "specification": "SPEC-0049",
@@ -40,13 +40,14 @@
   },
   "packages": {
     "draft_prepared": true,
-    "published": false
+    "published": false,
+    "final_prepared": true,
+    "source_license_checksums_verified": true
   },
   "release_ready": false,
   "blockers": [
     "Ordinary human capture/focus remains unqualified after the prior intermittent-click report;synthetic passes do not override it.",
     "One VirtualBox GUI startup failed before boot;headless fallback worked,GUI-start/display behavior still needs a bounded qualification or explicit preview limitation.",
-    "Fresh continuous-session DRAFT prepared;final package/source/license/checksum freeze review pending.",
     "Publication requires explicit owner request for the reviewed candidates."
   ],
   "unchanged_gates": [
@@ -63,5 +64,9 @@
   "source_revision": "c631b824b2a264c6d81eb9832f17b7b5918aa9ff",
   "verification_receipt": "../docs/development/preview-session-evidence.json",
   "feature_check_scope": "Hosted/compiler+actual own-image headless continuous session through185 guest seconds;Mac ROM unchanged and prior boot reused;human PC reliability unqualified.",
-  "boot_trial_receipt": "../docs/development/preview-session-evidence.json"
+  "boot_trial_receipt": "../docs/development/preview-session-evidence.json",
+  "package_review_passed": true,
+  "ready_for_owner_approval": true,
+  "approval_proposal": "paired-native-preview-1-approval.json",
+  "package_review": "../docs/development/paired-release-package-review.json"
 }

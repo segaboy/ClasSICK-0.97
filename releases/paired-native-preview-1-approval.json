@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "candidate": "paired-native-preview-1",
+  "state": "approval-pending",
+  "published": false,
+  "ready_for_owner_approval": true,
+  "release_ready": false,
+  "proposed_tags": {
+    "mac": "rom-v0.3.0-alpha.1",
+    "pc": "pc-v0.1.0-alpha.1"
+  },
+  "tag_target_revision": null,
+  "tag_target_selection": "reviewed metadata commit named in approval request",
+  "compiled_source_revision": "c631b824b2a264c6d81eb9832f17b7b5918aa9ff",
+  "evidence_revision": "87e95de40cfb0f06b6398a3cfa762e9c62b87375",
+  "upload_allowlist": {
+    "mac": {
+      "assets": {
+        "SHA256SUMS.txt": {
+          "bytes": 311,
+          "sha256": "cd3d096f5b2f38aafddc86bb78c7b7ef6b2bdc468d143d212bf2f693c726c901"
+        },
+        "classick-rom-0.3.0-alpha.1-demo.zip": {
+          "bytes": 22530,
+          "sha256": "e7b1d6a867a9335b952457e0dc24081b03ce6ec85d72251135754f5231dbbf4c"
+        },
+        "classick-rom-0.3.0-alpha.1-mac128k.rom": {
+          "bytes": 65536,
+          "sha256": "2b600319d334145e582adc3db0e0fcf495d5f44309488c19e652dfb378391780"
+        },
+        "classick-rom-0.3.0-alpha.1-source.zip": {
+          "bytes": 2100291,
+          "sha256": "b8e1537750316012a3bad8afb497d3f4043bb0cf0baf1ea8bb6eebcd92d28865"
+        }
+      },
+      "tag": "rom-v0.3.0-alpha.1",
+      "version": "0.3.0-alpha.1"
+    },
+    "pc": {
+      "assets": {
+        "SHA256SUMS.txt": {
+          "bytes": 309,
+          "sha256": "b17962367afba6e9c8f2a98c1f9102b12de8abf75627fff35a3e51135427b451"
+        },
+        "classick-pc-0.1.0-alpha.1-source.zip": {
+          "bytes": 2100291,
+          "sha256": "b8e1537750316012a3bad8afb497d3f4043bb0cf0baf1ea8bb6eebcd92d28865"
+        },
+        "classick-pc-0.1.0-alpha.1-x86_64.efi": {
+          "bytes": 159232,
+          "sha256": "23e021a4ab57cfd57559777e05d57e41f2b2217b4975b0543d9834414989d8f0"
+        },
+        "classick-pc-0.1.0-alpha.1-x86_64.zip": {
+          "bytes": 255134,
+          "sha256": "4c6a95de87c56600aad34e78e1c169ad4ffd17b13f34d7450d43bd683c02ea8c"
+        }
+      },
+      "tag": "pc-v0.1.0-alpha.1",
+      "version": "0.1.0-alpha.1"
+    }
+  },
+  "owner_acceptance_required": [
+    "PC human pointer capture/focus after intermittent-click report",
+    "One VirtualBox GUI preboot CPU-initialization failure;headless fallback passed",
+    "Snow persistent preference isolation",
+    "Physical Macintosh/PC,full128K,B2,historical/edition,System1-ROM boot directions,native external apps,Linux complete edition"
+  ],
+  "no_runtime_rebuild_or_trial_needed_for_this_freeze": true,
+  "review": "docs/development/paired-release-package-review.json"
+}

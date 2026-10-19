@@ -47,3 +47,7 @@ reference media,manuals,private HQ or third-party emulator/compiler binary is bu
 Future task rule: name this candidate and state the release criterion advanced.
 Prioritize verified packaging/qualification fixes before new optional graphics
 features. Mac/PC feature parity is mandatory; version-number equality is not.
+
+## Final package checkpoint -2026-10-19
+
+[Approval proposal](paired-native-preview-1-approval.md): component-specific download/setup notes,complete compiled source,license and exact inner/outer inventories verified.37 actual package checks pass. Ready for owner approval only;ordinary human capture/GUI and other preview limits require explicit owner acceptance. Current published pointers unchanged;no tag or release.

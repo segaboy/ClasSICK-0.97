@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "compiled_source_revision": "c631b824b2a264c6d81eb9832f17b7b5918aa9ff",
+  "evidence_revision": "87e95de40cfb0f06b6398a3cfa762e9c62b87375",
+  "ci_url": "https://github.com/segaboy/ClasSICK-0.97/actions/runs/39301375020",
+  "license": "GPL-3.0-or-later",
+  "inputs": {
+    "rom.rom": {
+      "bytes": 65536,
+      "sha256": "2b600319d334145e582adc3db0e0fcf495d5f44309488c19e652dfb378391780"
+    },
+    "BOOTX64.EFI": {
+      "bytes": 159232,
+      "sha256": "23e021a4ab57cfd57559777e05d57e41f2b2217b4975b0543d9834414989d8f0"
+    },
+    "pc.img": {
+      "bytes": 67108864,
+      "sha256": "fcfc90027a6910fd6f7362a21037ba277286b7dae80667303afd46456086eb2a"
+    },
+    "source.zip": {
+      "bytes": 2100291,
+      "sha256": "b8e1537750316012a3bad8afb497d3f4043bb0cf0baf1ea8bb6eebcd92d28865"
+    },
+    "COPYING": {
+      "bytes": 35149,
+      "sha256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986"
+    }
+  },
+  "components": {
+    "mac": {
+      "name": "ClasSICK ROM",
+      "version": "0.3.0-alpha.1",
+      "tag": "rom-v0.3.0-alpha.1",
+      "binary_input": "rom.rom",
+      "standalone": "classick-rom-0.3.0-alpha.1-mac128k.rom",
+      "archive": "classick-rom-0.3.0-alpha.1-demo.zip",
+      "source_archive": "classick-rom-0.3.0-alpha.1-source.zip",
+      "payloads": {
+        "classick-rom-0.3.0-alpha.1-mac128k.rom": "rom.rom"
+      },
+      "documents": {
+        "README.txt": "releases/rom/TRYING-0.3.0-alpha.1.md",
+        "RELEASE.txt": "releases/rom/0.3.0-alpha.1.md"
+      }
+    },
+    "pc": {
+      "name": "ClasSICK PC Preview",
+      "version": "0.1.0-alpha.1",
+      "tag": "pc-v0.1.0-alpha.1",
+      "binary_input": "BOOTX64.EFI",
+      "standalone": "classick-pc-0.1.0-alpha.1-x86_64.efi",
+      "archive": "classick-pc-0.1.0-alpha.1-x86_64.zip",
+      "source_archive": "classick-pc-0.1.0-alpha.1-source.zip",
+      "payloads": {
+        "EFI/BOOT/BOOTX64.EFI": "BOOTX64.EFI",
+        "classick-pc-0.1.0-alpha.1-x86_64.img": "pc.img"
+      },
+      "documents": {
+        "README.txt": "releases/pc/TRYING-0.1.0-alpha.1.md",
+        "RELEASE.txt": "releases/pc/0.1.0-alpha.1.md"
+      }
+    }
+  },
+  "unqualified": [
+    "PC human pointer capture/focus after intermittent-click report",
+    "One VirtualBox GUI preboot CPU-initialization failure;headless fallback passed",
+    "Snow persistent preference isolation",
+    "Physical Macintosh/PC,full128K,B2,historical/edition,System1-ROM boot directions,native external apps,Linux complete edition"
+  ]
+}

@@ -3322,3 +3322,19 @@ resulting public/HQ evidence after automatic approval initially blocked main.
 - Codex adopts original worker artifacts,freezes opt-in session policy,wires actual outline fixture/legacy rejection/compiler flags and executes verification. Historical/human/physical acceptance is not inferred from synthetic passes. [Evidence](../docs/development/preview-session-evidence.md).
 
 SRC-0300 executed checkpoint: CI3150/11;local596/2;38 mouse+5 Space events through guest185;8 static/two full Mac comparisons,unchanged Mac ROM,one headless guest boot after GUI preboot failure,closed inventory. Human capture unqualified;no release. [Final receipt](../docs/development/preview-session-evidence.json).
+
+## SRC-0301 - Owner final paired package preparation
+
+- Dean Howell,2026-10-19: "OK, move on to the final package review and prepare the paired Mac and PC release for approval." Accepts unchanged-image packaging,notes/checksums/source/license review,supervised original artifacts and ordinary Git/HQ records. No tag/release/publication or compatibility waiver. [Proposal](../releases/paired-native-preview-1-approval.md).
+
+## SRC-0302 - Claude paired package builder and notes
+
+- One reviewed-public/original frozen9796-byte contract packet,Opus5.5 low,275.66s,zero tools/writes/tests;303 builder lines and194 document lines,497 total versus430 cap. Lead corrections retained. [Receipt](../docs/development/paired-release-package-review.json).
+
+## SRC-0303 - Copilot independent package audit artifact
+
+- One8498-byte frozen contract packet,Sonnet5.5 low,48.97s,one permitted prompt read,zero writes/tests;283 proposed audit lines versus240 cap. Builder/logs withheld; sourceZIP-directory and compression-level assumptions corrected by lead. [Receipt](../docs/development/paired-release-package-review.json).
+
+## SRC-0304 - Lead final package review and executed controls
+
+- Codex integrates original artifacts,corrects component docs/ZIP assumptions and executes37 package checks/source identity/repeatability controls. This is original engineering evidence,not historical compatibility or release approval. [Review](../docs/development/paired-release-package-review.md).
