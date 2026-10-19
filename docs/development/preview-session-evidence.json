@@ -1,0 +1,280 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-19",
+  "baseline": "30e861c85af9f979930931fe15b7683957573739",
+  "release_candidate": "paired-native-preview-1",
+  "specification": "SPEC-0050",
+  "decision": "ADR-0056",
+  "implementation": "IMPL-0053",
+  "tests": "TEST-0059",
+  "sources": [
+    "SRC-0298",
+    "SRC-0299",
+    "SRC-0300"
+  ],
+  "workers": [
+    {
+      "round": "implementation",
+      "worker": "claude",
+      "exit_code": 0,
+      "outer_timeout": false,
+      "elapsed_seconds": 131.73,
+      "input_bytes": 33019,
+      "input_sha256": "c59de380af62d0a6881e194cc9b27cd50129ebd267825f1dac8f8127e2600ec8",
+      "stderr_bytes": 0,
+      "metadata": {
+        "observed_tools": [],
+        "provider_reported": {
+          "usage": {
+            "input_tokens": 2,
+            "cache_creation_input_tokens": 18500,
+            "cache_read_input_tokens": 1452,
+            "output_tokens": 14627,
+            "output_tokens_details": {
+              "thinking_tokens": 7941
+            },
+            "server_tool_use": {
+              "web_search_requests": 0,
+              "web_fetch_requests": 0
+            },
+            "service_tier": "standard",
+            "cache_creation": {
+              "ephemeral_1h_input_tokens": 18500,
+              "ephemeral_5m_input_tokens": 0
+            },
+            "inference_geo": "global",
+            "iterations": [
+              {
+                "input_tokens": 2,
+                "output_tokens": 14627,
+                "cache_read_input_tokens": 1452,
+                "cache_creation_input_tokens": 18500,
+                "cache_creation": {
+                  "ephemeral_5m_input_tokens": 0,
+                  "ephemeral_1h_input_tokens": 18500
+                },
+                "type": "message"
+              }
+            ],
+            "speed": "standard",
+            "fallback_credit": null
+          },
+          "modelUsage": {
+            "claude-opus-5-5": {
+              "inputTokens": 2,
+              "outputTokens": 14627,
+              "cacheReadInputTokens": 1452,
+              "cacheCreationInputTokens": 18500,
+              "webSearchRequests": 0,
+              "costUSD": 0.44083839999999996,
+              "contextWindow": 1000000,
+              "maxOutputTokens": 128000,
+              "thinkingTokens": 7941,
+              "canonicalModel": "claude-opus-5-5",
+              "provider": "firstParty",
+              "costBasis": "list"
+            }
+          },
+          "total_cost_usd": 0.44083839999999996,
+          "permission_denials": [],
+          "num_turns": 1
+        }
+      },
+      "worker_tests_executed": 0,
+      "adopted_replacements": 4,
+      "proposed_test_lines": 104,
+      "proposed_spec_lines": 60
+    }
+  ],
+  "lead_changes": [
+    "Exact noncounter pixel/padding checks replace assumed6400-byte difference cap.",
+    "Actual outline scene/workload compiled in fixture.",
+    "Legacy-linked WILL_FAIL control rejects old behavior.",
+    "Mechanical CMake/compiler flag and manifest wiring."
+  ],
+  "local": {
+    "status": "passed",
+    "ctests": 596,
+    "profile_counts": [
+      298,
+      298
+    ],
+    "profiles": [
+      "Clang64 Debug",
+      "Clang64 ASan/UBSan"
+    ],
+    "flag_controls": [
+      {
+        "case": "default",
+        "exit": 0,
+        "expected_rejection": false,
+        "passed": true
+      },
+      {
+        "case": "preview",
+        "exit": 0,
+        "expected_rejection": false,
+        "passed": true
+      },
+      {
+        "case": "two",
+        "exit": 1,
+        "expected_rejection": true,
+        "passed": true
+      },
+      {
+        "case": "negative",
+        "exit": 1,
+        "expected_rejection": true,
+        "passed": true
+      },
+      {
+        "case": "no-mouse",
+        "exit": 1,
+        "expected_rejection": true,
+        "passed": true
+      },
+      {
+        "case": "no-outline",
+        "exit": 1,
+        "expected_rejection": true,
+        "passed": true
+      },
+      {
+        "case": "no-selection",
+        "exit": 1,
+        "expected_rejection": true,
+        "passed": true
+      },
+      {
+        "case": "outline-zero",
+        "exit": 1,
+        "expected_rejection": true,
+        "passed": true
+      }
+    ],
+    "efi": {
+      "fault_probe": "none",
+      "outline_drawing": true,
+      "continuous_preview": true,
+      "missing_outline_controls": 3,
+      "selected_drawing": false,
+      "missing_selected_workload_controls": 0,
+      "missing_selected_core_controls": 0,
+      "images": [
+        {
+          "case": "clang-64-O0",
+          "sha256": "f8012213d0d6758c9166f34f93cf959cf412d77eef01bab7c894c01986685696",
+          "size_bytes": 226816,
+          "image_size": 241664,
+          "relocations": 3,
+          "status": "passed-unloaded"
+        },
+        {
+          "case": "clang-64-O2",
+          "sha256": "23e021a4ab57cfd57559777e05d57e41f2b2217b4975b0543d9834414989d8f0",
+          "size_bytes": 159232,
+          "image_size": 172032,
+          "relocations": 3,
+          "status": "passed-unloaded"
+        }
+      ],
+      "image_rejections": 27,
+      "profile_rejections": 0,
+      "missing_transition_controls": 1,
+      "missing_exceptions_controls": 1,
+      "missing_presenter_controls": 1,
+      "missing_acpi_controls": 1,
+      "missing_ps2_controls": 1,
+      "missing_keyboard_controls": 1,
+      "missing_input_controls": 1,
+      "missing_byte_io_controls": 1,
+      "missing_uart_controls": 1,
+      "missing_native_uart_controls": 1,
+      "missing_service_controls": 1,
+      "missing_service_probe_controls": 1,
+      "missing_m68k_controls": 1,
+      "missing_aline_probe_controls": 1,
+      "missing_native_drawing_controls": 1,
+      "missing_mouse_button_controls": 1,
+      "missing_mouse_packet_controls": 1,
+      "missing_mouse_bus_controls": 1,
+      "missing_drawing_view_controls": 1,
+      "drawing_context_specification": "SPEC-0041",
+      "pc_mouse_profile": 1,
+      "keyboard_trace_version": 2,
+      "payload": "payload/EFI/BOOT/BOOTX64.EFI",
+      "payload_kind": "directory-tree-not-disk",
+      "loaded": false
+    },
+    "disk": {
+      "specification": "SPEC-0049",
+      "session_specification": "SPEC-0050",
+      "continuous_preview": true,
+      "source_revision": "30e861c85af9f979930931fe15b7683957573739",
+      "tracked_source_dirty": true,
+      "inputs": {
+        "apps/outline-drawing/workload.c": "86a52a091c82b33b733aa0564417d6f773584807c430f07aaa2b122d746f1cad",
+        "apps/outline-drawing/workload.h": "463ae3d8db57650051039fc6af79b4a46702c072f25e5f5e1c450a01a9032745",
+        "apps/boot-scene/scene.c": "0930a87b8a6510e13894ff4c40aa445a9c93ec5abe24a4715bc1b6c18678f5aa",
+        "apps/boot-scene/scene.h": "5642a9ec3d8ebf31579a61d0a5b0e6567d2db8756d429f041c66753f3d00b9ef",
+        "personality/system1/quickdraw-outline.c": "11f2c4953e8d514a1a76d8767b366c84a73b4cb820ecbbf277087f84d8131e8a",
+        "personality/system1/quickdraw-outline.h": "def9e4da6c957e799146604d1c1ad0b7a786dad5c5e6305bf1e1d90bc1e2f468",
+        "personality/system1/quickdraw-select.c": "894f3e06bdfea0add97a659ef71a593b682c88a2310c719478d9e4c0dc191e3d",
+        "personality/system1/quickdraw-select.h": "cd72e096f6a9365ede45fd859df755fec021eb1986002d5ca8269a6c8f838624",
+        "personality/system1/quickdraw-view.c": "8bfbb05564a2d6c799790f11c952a1f4b3c43130c2fb855a9035103f5f6da152",
+        "personality/system1/quickdraw-view.h": "4a93567872049f5142a3980eba501c7a2e027c15de794dde11fbbd93cc3bbee7",
+        "personality/system1/quickdraw-rects.c": "3380aeeece0ad86954a266e24813ad498a154e17eb3b0b6be6c4875a08e8d437",
+        "personality/system1/quickdraw-rects.h": "db9facdb5ef3742c3c8935255e3f627c30d31b323a8223e470d9851a48c81e09",
+        "platform/uefi/keyboard.c": "18f0fe6e5954f57be98c12a4b097b647adad64f5b99e292ad3e332cacb00747f",
+        "docs/specifications/SPEC-0050-continuous-native-preview.md": "f7bd1c513ee9d1f09382f997b8a15e0c2d593a28cd8ce4ab41962b2689f14680",
+        "apps/product-scene/scene.c": "7488910c401285b1e211d3c6eb95a17f04683748ffa8fc2dba4e2659725872d2",
+        "apps/product-scene/scene.h": "7d5b50af59be3e25a67837d7183d0fa50afd36b9f0b3aaf1a1fb1ddea772ccf0",
+        "scripts/Verify-UEFIImage.ps1": "80c6be800d05ba82b3808be39e678966ac94c68a1d5b91a917e8247bbcd50823",
+        "scripts/Package-OutlineDrawingPC.ps1": "0406bb76839dff49a45d544a7a7c2d7dbb15e04ef5d3e53e39adde7eed4f637b",
+        "docs/specifications/SPEC-0049-paired-native-outline.md": "1001690b4b401d58925c8d1b43ca3d796d6a819d7c89bf266cd6766d8f74d013"
+      },
+      "input_scope": "outline-workload subset; source revision identifies remaining inputs",
+      "efi_sha256": "23e021a4ab57cfd57559777e05d57e41f2b2217b4975b0543d9834414989d8f0",
+      "media": {
+        "image_sha256": "fcfc90027a6910fd6f7362a21037ba277286b7dae80667303afd46456086eb2a",
+        "payload_sha256": "23e021a4ab57cfd57559777e05d57e41f2b2217b4975b0543d9834414989d8f0",
+        "image_bytes": 67108864,
+        "partition_first": 2048,
+        "partition_sectors": 126976,
+        "partition_name": "ClasSICK ESP",
+        "reserved_sectors": 78,
+        "fat_sectors": 985,
+        "clusters": 124928,
+        "payload_clusters": 311,
+        "free_clusters": 124614,
+        "header_crc": "7A6BB824",
+        "backup_crc": "F46774E1",
+        "loaded": false
+      },
+      "writer_twins_equal": true,
+      "target_executed": false,
+      "release": false
+    },
+    "tracked_source_dirty_at_local_build": true
+  },
+  "ci": {
+    "status": "pending"
+  },
+  "target": {
+    "status": "not-yet-run"
+  },
+  "mac": {
+    "runtime_inputs_unchanged": true,
+    "previous_rom_sha256": "2b600319d334145e582adc3db0e0fcf495d5f44309488c19e652dfb378391780",
+    "previous_boot_receipt": "docs/development/paired-preview-boot-trial.json"
+  },
+  "previous_pc_human_input": "failed-unreliable; preserved,not overridden by synthetic results",
+  "release": false,
+  "remaining_external_allowances": {
+    "Claude": "unavailable",
+    "Copilot": "unavailable",
+    "Grok": "unavailable",
+    "Antigravity": "unavailable"
+  }
+}

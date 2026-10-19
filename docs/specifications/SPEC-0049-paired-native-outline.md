@@ -64,3 +64,5 @@ modes and `cs_scene_render` are unchanged.
 - No VM, emulator, hardware or reference run is claimed.
 
 Native truthful live/aligned/disjoint/exclusive caller premises persist. H1-H5 from SPEC-0048 remain open; this is not historical FrameRect. Physical/full128K/B2/human/native-external-app/Linux/complete-edition and both System1 boot gates remain separate.
+
+Subsequent2026-10-19 engineering profile: [SPEC-0050 continuous PC preview](SPEC-0050-continuous-native-preview.md) removes normal deadline/Escape termination only when its explicit flag is enabled. The earlier exact images and diagnostic-mode statements above retain their dated meaning.

@@ -3308,3 +3308,15 @@ resulting public/HQ evidence after automatic approval initially blocked main.
 ## SRC-0297 - Owner automated testing clearance
 
 - Dean Howell,2026-10-19: "I am giving you clearance to do automated tests. Please proceed without my input." Applied to one bounded additional isolated PC duration matrix on unchanged reviewed original images,without another human test. No reference/prohibited-source,implementation or release gate waiver. [Result](../docs/development/paired-preview-boot-trial.md).
+
+## SRC-0298 - Owner PC input/session repair continuation
+
+- Dean Howell,2026-10-19: "Do it" after the proposed PC input/session release blocker. Continues original code/tests/compiler/CI,ordinary records and bounded automated own-build verification under prior explicit "Please proceed without my input" clearance. No reference/physical/release waiver. [Scope](../docs/development/preview-session-evidence.md).
+
+## SRC-0299 - Claude bounded continuous-session artifact
+
+- One Opus5.5 low call from33019-byte frozen reviewed-public/original packet,131.73s,zero tools/writes/tests;4 keyboard replacements,104 test lines,60 spec lines. Spec cap55 exceeded; loose scene-difference assumption corrected by lead. [Receipt](../docs/development/preview-session-evidence.json).
+
+## SRC-0300 - Lead continuous-preview integration and verification
+
+- Codex adopts original worker artifacts,freezes opt-in session policy,wires actual outline fixture/legacy rejection/compiler flags and executes verification. Historical/human/physical acceptance is not inferred from synthetic passes. [Evidence](../docs/development/preview-session-evidence.md).

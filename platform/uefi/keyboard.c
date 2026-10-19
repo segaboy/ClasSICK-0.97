@@ -7,6 +7,18 @@
 #ifndef CLASSICK_PC_MOUSE
 #define CLASSICK_PC_MOUSE 0
 #endif
+#ifndef CLASSICK_PC_PREVIEW_SESSION
+#define CLASSICK_PC_PREVIEW_SESSION 0
+#endif
+#if CLASSICK_PC_PREVIEW_SESSION!=0 && CLASSICK_PC_PREVIEW_SESSION!=1
+#error "CLASSICK_PC_PREVIEW_SESSION must be 0 or 1"
+#endif
+/* SPEC-0050: preview session only for the selected outline mouse profile. */
+#if CLASSICK_PC_PREVIEW_SESSION && !(defined(CLASSICK_OUTLINE_DRAWING) && defined(CLASSICK_SELECTED_DRAWING))
+#error "CLASSICK_PC_PREVIEW_SESSION requires outline and selected drawing"
+#elif CLASSICK_PC_PREVIEW_SESSION && !(CLASSICK_PC_MOUSE==1 && CLASSICK_OUTLINE_DRAWING==1 && CLASSICK_SELECTED_DRAWING==1)
+#error "CLASSICK_PC_PREVIEW_SESSION requires mouse, outline and selected drawing"
+#endif
 #if CLASSICK_PC_MOUSE
 #include "../pc/ps2-bus.h"
 #endif
@@ -245,7 +257,11 @@ uint32_t cs_native_keyboard_observed(const cs_uefi_handoff *h,uint32_t ready,
             (void)record(trace,CS_KBD_RUNNING,&d);
             continue;
         }
+#if CLASSICK_PC_PREVIEW_SESSION
+        step=0; /* SPEC-0050: no normal deadline; seconds stays validated metadata. */
+#else
         step=d.elapsed.seconds>=seconds?16u:d.elapsed.seconds*16u/seconds;
+#endif
         for(unsigned i=0;i<8;++i) {
             cs_input_result popped=cs_input_pop(&queue,&event);
             if(popped==CS_INPUT_ERR_EMPTY) break;
@@ -261,8 +277,10 @@ uint32_t cs_native_keyboard_observed(const cs_uefi_handoff *h,uint32_t ready,
                 if(event.event.key==CS_KEY_SPACE) { increment(&d.space); offset=(offset+1u)%17u; }
                 else if(event.event.key==CS_KEY_ESCAPE) {
                     increment(&d.escape);
+#if !CLASSICK_PC_PREVIEW_SESSION
                     if(!draw(&scene,&d,(step+offset+1u)%17u)) return record(trace,CS_KBD_DRAW,&d);
                     return record(trace,CS_KBD_ESCAPED,&d);
+#endif
                 }
             }
         }
@@ -271,7 +289,9 @@ uint32_t cs_native_keyboard_observed(const cs_uefi_handoff *h,uint32_t ready,
             if(!draw(&scene,&d,want)) return record(trace,CS_KBD_DRAW,&d);
             (void)record(trace,CS_KBD_RUNNING,&d);
         }
+#if !CLASSICK_PC_PREVIEW_SESSION
         if(d.elapsed.seconds>=seconds) return record(trace,CS_KBD_OK,&d);
+#endif
     }
 }
 uint32_t cs_native_keyboard_loop(const cs_uefi_handoff *h,uint32_t ready,

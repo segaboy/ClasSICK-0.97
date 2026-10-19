@@ -23,14 +23,14 @@ $check=@(& (Join-Path $PSScriptRoot 'Test-BootMedia.ps1') -Image $disk -Payload 
 $inputs=[ordered]@{}
 foreach($path in @('apps/outline-drawing/workload.c','apps/outline-drawing/workload.h','apps/boot-scene/scene.c','apps/boot-scene/scene.h',
     'personality/system1/quickdraw-outline.c','personality/system1/quickdraw-outline.h','personality/system1/quickdraw-select.c','personality/system1/quickdraw-select.h','personality/system1/quickdraw-view.c','personality/system1/quickdraw-view.h','personality/system1/quickdraw-rects.c','personality/system1/quickdraw-rects.h',
-    'apps/product-scene/scene.c','apps/product-scene/scene.h','scripts/Verify-UEFIImage.ps1','scripts/Package-OutlineDrawingPC.ps1','docs/specifications/SPEC-0049-paired-native-outline.md')){
+    'platform/uefi/keyboard.c','docs/specifications/SPEC-0050-continuous-native-preview.md','apps/product-scene/scene.c','apps/product-scene/scene.h','scripts/Verify-UEFIImage.ps1','scripts/Package-OutlineDrawingPC.ps1','docs/specifications/SPEC-0049-paired-native-outline.md')){
     $bytes=[Text.Encoding]::UTF8.GetBytes([IO.File]::ReadAllText((Join-Path $repo $path)).Replace("`r`n","`n"))
     $digest=[Security.Cryptography.SHA256]::Create().ComputeHash($bytes)
     $inputs[$path]=($digest | ForEach-Object {$_.ToString('x2')}) -join ''
 }
 $head=(& git -C $repo rev-parse HEAD).Trim()
 $dirty=[bool]@(& git -C $repo diff --name-only HEAD).Count
-[ordered]@{specification='SPEC-0049';source_revision=$head;tracked_source_dirty=$dirty;inputs=$inputs;input_scope='outline-workload subset; source revision identifies remaining inputs';
+[ordered]@{specification='SPEC-0049';session_specification='SPEC-0050';continuous_preview=$true;source_revision=$head;tracked_source_dirty=$dirty;inputs=$inputs;input_scope='outline-workload subset; source revision identifies remaining inputs';
     efi_sha256=$hash;media=$check;writer_twins_equal=$true;target_executed=$false;release=$false} |
     ConvertTo-Json -Depth 8 | Set-Content -LiteralPath (Join-Path $BuildRoot 'outline-media.json') -Encoding UTF8
 Write-Output 'Outline native PC media PASS: matching writer images, independent filesystem/payload check; no image executed.'
