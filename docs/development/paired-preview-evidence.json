@@ -129,15 +129,195 @@
     "tracked_source_dirty_at_local_build": true
   },
   "ci": {
-    "status": "pending"
+    "databaseId": 39259718049,
+    "headSha": "207e557b83cbab6933e7628275879f0f38c11021",
+    "status": "completed",
+    "conclusion": "success",
+    "url": "https://github.com/segaboy/ClasSICK-0.97/actions/runs/39259718049",
+    "runtime_ctests": 3123,
+    "runtime_profiles": 11,
+    "profile_ctests": [
+      295,
+      295,
+      295,
+      295,
+      295,
+      266,
+      295,
+      279,
+      279,
+      279,
+      250
+    ],
+    "new_outline_test_executions": 33,
+    "jobs": [
+      {
+        "name": "m68k-rom",
+        "conclusion": "success"
+      },
+      {
+        "name": "windows-bootstrap",
+        "conclusion": "success"
+      }
+    ]
   },
   "native_mac": {
-    "status": "pending CI compiler/closure verification",
+    "status": "compiler-verified-unbooted",
+    "image_sha256": "2b600319d334145e582adc3db0e0fcf495d5f44309488c19e652dfb378391780",
+    "image_bytes": 65536,
+    "rom_used": 9928,
+    "workspace_begin": 32768,
+    "workspace_end": 35856,
+    "conservative_stack_bound": 11256,
+    "twins_equal": true,
+    "closure": {
+      "specification": "SPEC-0049",
+      "native_drawing_context": "SPEC-0041",
+      "selected_original_modules": [
+        "apps/outline-drawing/workload.c",
+        "personality/system1/quickdraw-select.c",
+        "personality/system1/quickdraw-outline.c",
+        "personality/system1/quickdraw-view.c",
+        "personality/system1/quickdraw-rects.c",
+        "arch/m68k/runtime.c"
+      ],
+      "undefined_imports": 0,
+      "interpreter_symbols": 0,
+      "twins_equal": true,
+      "object": {
+        "bytes": 8476,
+        "sha256": "8a75e73704f098fd166f80afbb14803fb51bf46d30ce65eee644d8e6a8ff6c0f"
+      },
+      "emulator_run": false
+    },
+    "inputs": {
+      "arch/m68k/loaded-reset.S": "9afd21ad00443cfdfd3567f772b0e2b5f26b0de3f0cdc0693235e812eab52d56",
+      "arch/m68k/runtime.c": "1e3fa635a12a6ac91b30f25fdf19c493b84493dcecc4ce7e4dcc298c3412d078",
+      "platform/mac128k/loop.c": "89680e5d2c4222cfa1578012275c4ed074b67718c01fc97877a95c0124b7dacc",
+      "platform/mac128k/native-drawing-entry.c": "ff7e44b6c6716424f395046f4c271ec6f842db1b4e57a11c9ea5251664730928",
+      "apps/rom-scene/scene.c": "481af50ded6f22475d601de56039816463773f5f2916a6281110c7a8b8053c3e",
+      "core/graphics/surface.c": "157ed442c0278a344b57cb0e08657c30273de2a62199d72a30b38e5ee7ea1c5c",
+      "core/services/traps.c": "585adf0742f51390bc44ba086b58e22361bb7188c1205bcc11968875f0cbb1ef",
+      "apps/service-probe/probe.c": "0e32e53ebf65a4b99d9bb494f69ea86daaa6df880d5be28559870f7e218c2cc2",
+      "core/cpu/m68k.c": "c6c169c175a71bb24d2f6f375d5bca7dea4469ae4407c43159b3b27c6db613b8",
+      "apps/aline-probe/probe.c": "ff8942bf7e18c4b93302473421d3b69b9c7b32089999b728346a2766439e82e0",
+      "arch/m68k/aline.S": "1743e0f66d8a279780f61ba7b46e321d12ac0b1d15fa1eda21c5efced876aa63",
+      "core/memory/guest.c": "9678b43e3dc82df2f66119794f08cb2a0dbd85c07a031085daba35b230b6f8a1",
+      "core/memory/manager.c": "24f12c710e62f73c274964834ca4470d78c8b54c0e7dcfb6427ca94b9deff575",
+      "core/memory/lifecycle.c": "fa39f5d1daf5ddaac89129a17d0a51dde559509a135a9487ce02866de034c5ac",
+      "formats/resourcefork/reader.c": "ef3ab3b867fa49c830559092d90ddba2c9d2df4edcb747665c907cd8cf6f23a9",
+      "personality/system1/code-preflight.c": "eb17d35ec44452a08886c5901c1b43f0c5292a67e5feb9490da39bad1fd3e189",
+      "personality/system1/resources.c": "65cc2fa5496cd14c941acd36b061c586f5314cf463c9e76759f753191b879636",
+      "personality/system1/code-image.c": "18de61fd8ef75cf56f346359a955f76d62cdab9812dba0cbb751a28ca2605152",
+      "personality/system1/code-run.c": "83b393c56b94a529a9d3acceaa7e851bfe110ff4fc00ab88992f409df541c8a1",
+      "core/cpu/m68k-bus.c": "eb1037c253b98e9b46856f56ff2e1b04f45c1bcadb65a95f95ebecbf33b2b229",
+      "apps/loaded-rom-app/probe.c": "794bcab9b72b6005709884d7ab714c6a3e27a01aeada5a3b397bfdcb1fd024da",
+      "apps/loaded-rom-app/scene.c": "7413d3dd4dad82c1f1400d61c89d6b568d40c86caeff2fc243cfad23e23dcbac",
+      "personality/system1/quickdraw-rects.c": "3380aeeece0ad86954a266e24813ad498a154e17eb3b0b6be6c4875a08e8d437",
+      "apps/native-drawing/workload.c": "18c5d193e78d6a476104d28fcac3705977485cb47b2f5bc9de3937500b4af1f5",
+      "apps/product-scene/scene.c": "7488910c401285b1e211d3c6eb95a17f04683748ffa8fc2dba4e2659725872d2",
+      "core/input/mouse.c": "fad65173ea1421fd02affc4fea7a52720fba515e849e9c3159c35eeeab18eb8d",
+      "personality/system1/quickdraw-view.c": "8bfbb05564a2d6c799790f11c952a1f4b3c43130c2fb855a9035103f5f6da152",
+      "apps/outline-drawing/workload.c": "86a52a091c82b33b733aa0564417d6f773584807c430f07aaa2b122d746f1cad",
+      "personality/system1/quickdraw-select.c": "894f3e06bdfea0add97a659ef71a593b682c88a2310c719478d9e4c0dc191e3d",
+      "personality/system1/quickdraw-outline.c": "11f2c4953e8d514a1a76d8767b366c84a73b4cb820ecbbf277087f84d8131e8a",
+      "arch/m68k/loaded-rom.ld": "b1429411ac35642c4b57394acca2515c226f6b60b831038af503f2b37afb9380",
+      "arch/m68k/runtime.h": "8b0de7d191dbcb43576a32c88e604f7c3145ac094af5137cc128381a0ff074e8",
+      "platform/mac128k/rom.h": "65d6b789b7d809520773c77df787694010e2afcb0f8b05d7021b726c393705c7",
+      "apps/loaded-rom-app/probe.h": "cf73003427f44be07c77f7e514e1742f07f1593904f7c5c466b94a202462f866",
+      "apps/loaded-rom-app/scene.h": "98966055fa7a2ab8fa6323e499911ae427baaeb6b9fcc67e122b5d3da2ecc763",
+      "core/graphics/surface.h": "31de605b79282fac7f4208e28aab328662df975a03028ac16fe179672d6dc264",
+      "core/services/traps.h": "a3346547364a2237027dbe1d134b81129e80f9731f4c49c813fc9f68563fd782",
+      "core/cpu/m68k.h": "1f19932c23f2a27f3764861f38d50cf4f68517b0a1a67b939a1bed12b1770b2c",
+      "core/cpu/m68k-bus.h": "a0a8fa1ca3075be2c3f6eecfe18f45ef0c3db3c338af00d5451edc293ad2ce0a",
+      "core/cpu/m68k-guard.h": "b518410b3dfed00ed66dd17c3e704f332ff9aa77806b4f5475f23e9fef3d58f9",
+      "core/cpu/m68k-session.h": "aea400413449630489f6fa0a8a6ab924271e254a4fd0d94724bc82dd9c70bdee",
+      "core/cpu/m68k-call.h": "5f320112485dfd98cd868e290bc1d3efdb8a0f3e81fbb4eb81fb93e6494cab1d",
+      "core/memory/guest.h": "5a89e549470bd0f3ffe50e7fb714342ff7dc6af0d49a0c154a7baebdf7e113ff",
+      "core/memory/manager.h": "9752645a3c610d46c41e2826061853967baff6898c954c20006ce2949f8e1078",
+      "core/memory/lifecycle.h": "8d21a92f26f3b06973f77047721d46c040cb6daacb787f32372ffcb901cedf05",
+      "formats/resourcefork/reader.h": "06fcb33136037f43662f155df9d4d896c4d28dc786f5eb59b5c94ae0925156ea",
+      "personality/system1/code-preflight.h": "e422ee629c35489ec4c10ec6fb6b992e5a256ec5492701489f357a2c052ccac7",
+      "personality/system1/resources.h": "f19d4e3ba2283e2081e271660a086294cef31773121c329941faab8c99375fcb",
+      "personality/system1/code-image.h": "506e4064134feaea612b85b7571e19ae5a69bb0d4e19b8ea3ceab33fbdbc3574",
+      "personality/system1/code-run.h": "1c4489624e1abccd9dc654aa51d962210c6a10ce37ccbd84ac1447037ff8238b",
+      "personality/system1/code-run-internal.h": "4a78a56205337a4b2f868a59bff199767221cb61cb987bec5a79d9e1ec792b22",
+      "apps/service-probe/probe.h": "ae48c5583f34ad80ecb89bac0f8b3dfa0729b1f19c9270b01875e7b6305772ec",
+      "apps/aline-probe/probe.h": "c6e15ba0af8478c31adacbd1e9414141999c873a866e92cf33ac3e06816e9684",
+      "apps/aline-probe/program.h": "945b01c5806a30634321915a5e80a7b556e96f4ad0828fbb618b2899ee93b2fe",
+      "apps/loaded-rom-app/program.S": "7ba0f99f1febd3d7acb16894e72e0191f9cc145fcb9f0218c0c2b46301b41b7f",
+      "scripts/Build-LoadedAppROM.py": "6973d8d5bd05249b58b74f217ec10f3fae406298e30d4ab0c63a22d7540f604d",
+      "scripts/Build-MacROM.py": "ee4560d13d8b337f1b2ef975d1bd12265afcad98bbe950299c90e442b12f03c7",
+      "docs/specifications/SPEC-0035-first-loaded-rom-application.md": "8d98cbeb5f159929c0c7f6b3129a9ba78f41fa50b9a751097d841cc6c7872121",
+      "personality/system1/quickdraw-rects.h": "db9facdb5ef3742c3c8935255e3f627c30d31b323a8223e470d9851a48c81e09",
+      "personality/system1/code-select.h": "e798c5c84ab896c279566b3b7465b7e039c7344f9f0bcfaa8956686d46921890",
+      "personality/system1/quickdraw-select.h": "cd72e096f6a9365ede45fd859df755fec021eb1986002d5ca8269a6c8f838624",
+      "personality/system1/quickdraw-view.h": "4a93567872049f5142a3980eba501c7a2e027c15de794dde11fbbd93cc3bbee7",
+      "apps/native-drawing/workload.h": "5c536aa74ac4799a941b68d6246f42a68937d77aa37f18ff3c73d79560872194",
+      "apps/product-scene/scene.h": "7d5b50af59be3e25a67837d7183d0fa50afd36b9f0b3aaf1a1fb1ddea772ccf0",
+      "core/input/mouse.h": "d41c122f62933d83af8ad8015ca0f2b35298860bca80faa1dae0cd8705e8c542",
+      "docs/specifications/SPEC-0041-native-drawing-context.md": "03e10961746f3741afa0c314bc4c77dd505a734bb052212cefdb36e492cbbdd8",
+      "docs/specifications/SPEC-0039-native-mouse-foundations.md": "660b867b662cf09969e1a74bb5a84fa6efe9156df7bc53ef48c5115a5b7ed1a2",
+      "docs/specifications/SPEC-0038-paired-native-drawing-workload.md": "19847679bd444b04eaac9bea44914414ab4977dc1f38844a26698bf62160d9f1",
+      "docs/specifications/SPEC-0037-shared-product-scene.md": "5e75c22158ac12c3f58f1d81bc23f3e7cdbb1ac744194367bab5e6751445613e",
+      "apps/outline-drawing/workload.h": "463ae3d8db57650051039fc6af79b4a46702c072f25e5f5e1c450a01a9032745",
+      "apps/selected-drawing/workload.h": "98063deca9234f02febcc71da6a47d9fcf64781f6acb3686f9b8d879c00c9664",
+      "personality/system1/quickdraw-outline.h": "def9e4da6c957e799146604d1c1ad0b7a786dad5c5e6305bf1e1d90bc1e2f468",
+      "docs/specifications/SPEC-0048-native-rectangle-outline.md": "885e3aa72d54f7cb61b53cf801fa142da08fb2ba39ea1a126fcf82f16b1c0f28",
+      "docs/specifications/SPEC-0049-paired-native-outline.md": "6027da5cdda57f56be380a3711608d42b38f2b5a6179c2071fb9d62f3b7c2c05"
+    },
     "target_executed": false
   },
   "draft_bundle": {
-    "prepared": false,
-    "published": false
+    "prepared": true,
+    "published": false,
+    "source_revision": "207e557b83cbab6933e7628275879f0f38c11021",
+    "inventory": {
+      "ClasSICK-mac-0.3.0-alpha.1-DRAFT.zip": {
+        "bytes": 20438,
+        "sha256": "cf2c583d0e5222309663c9cbed752a8a2293a0bd23e8dc427e622320d87dc155"
+      },
+      "ClasSICK-pc-0.1.0-alpha.1-DRAFT.zip": {
+        "bytes": 251766,
+        "sha256": "370710626d7834f0180ea30756c3859255ca73036ed5ca18f822aa4b58ca0fa9"
+      },
+      "COPYING": {
+        "bytes": 35149,
+        "sha256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986"
+      },
+      "corresponding-source.zip": {
+        "bytes": 2053402,
+        "sha256": "4099623123e90414368b7bc10d675ac5d688da533499a6de7cc6aea49c08adb5"
+      },
+      "DRAFT.txt": {
+        "bytes": 210,
+        "sha256": "f585b9a3e344de4acef005560ceee01b02a5261112547b0fb94c4e7901b36e51"
+      },
+      "mac/ClasSICK-ROM-0.3.0-alpha.1-DRAFT.rom": {
+        "bytes": 65536,
+        "sha256": "2b600319d334145e582adc3db0e0fcf495d5f44309488c19e652dfb378391780"
+      },
+      "pc/BOOTX64.EFI": {
+        "bytes": 159232,
+        "sha256": "cc667453316e262de61af774c880e3607b034cded3d742957b220a589f36e042"
+      },
+      "pc/ClasSICK-PC-0.1.0-alpha.1-DRAFT.img": {
+        "bytes": 67108864,
+        "sha256": "e9567ac8f91c48dd435ed7fc7c1021511da131ab8975a7ca7a3ad17aeaa8127c"
+      },
+      "SOURCE.txt": {
+        "bytes": 317,
+        "sha256": "c2e24ead76cc642e49b73195ce1818cfb0cfed88ce82f3010b92fdd977050dca"
+      },
+      "TRYING.md": {
+        "bytes": 1185,
+        "sha256": "9d21792ca3dac139ecb0d04f95b665e213dc10b3b08503430957ea3199c4fd16"
+      }
+    },
+    "checksum_inventory_bytes": 892,
+    "checksum_inventory_sha256": "538c10025e5d47a348129a6a9a92be0d6d661581e0a5331e36fb86ffc63e4df9",
+    "archive_source_and_no_untracked_payload_checks": "pass",
+    "notes": "Local DRAFT outsideGit; no boot/human qualification or publication."
   },
   "lead_decisions": [
     "Interpret owner PC/x86 wording in existing nativeMac68000/x86 PC parity context; current version/published pointers unchanged,PC preview entry remains unassigned/unreleased.",
@@ -175,5 +355,35 @@
     "Copilot": "unavailable",
     "Grok": "unavailable",
     "Antigravity": "unavailable"
+  },
+  "native_pc": {
+    "status": "compiler-verified-unbooted",
+    "images": [
+      {
+        "case": "clang-64-O0",
+        "sha256": "ef670d696f5df7550cda3a393d7a215e04e088b2f12b694f8705c179e82dd452",
+        "size_bytes": 227328,
+        "image_size": 241664,
+        "relocations": 3,
+        "status": "passed-unloaded"
+      },
+      {
+        "case": "clang-64-O2",
+        "sha256": "cc667453316e262de61af774c880e3607b034cded3d742957b220a589f36e042",
+        "size_bytes": 159232,
+        "image_size": 172032,
+        "relocations": 3,
+        "status": "passed-unloaded"
+      }
+    ],
+    "disk_sha256": "e9567ac8f91c48dd435ed7fc7c1021511da131ab8975a7ca7a3ad17aeaa8127c",
+    "disk_bytes": 67108864,
+    "payload_sha256": "cc667453316e262de61af774c880e3607b034cded3d742957b220a589f36e042",
+    "writer_twins_equal": true,
+    "corruption_rejections": 27,
+    "omitted_object_rejections": 22,
+    "width_endian_object_audits": 40,
+    "source_revision": "207e557b83cbab6933e7628275879f0f38c11021",
+    "target_executed": false
   }
 }

@@ -45,7 +45,7 @@ retained port effects and suppressed failed presentation.40 width/endian/import/
 mutable-data object audits pass. Native PC O0/O2 twins pass27 corruption and22
 omitted-object controls; different original writers produce identical checked
 boot disks. Local builds are explicitly dirty-source compiler observations;
-clean-source CI/native68000 and both artifact identities are pending below.
+clean-source CI passes3,123 CTests across11 profiles,including33 new outline suite executions. Both native candidates are compiler-verified/unbooted; Mac twins,stack/storage checks and isolated native closure pass with zero imports/interpreter symbols. [CI](https://github.com/segaboy/ClasSICK-0.97/actions/runs/39259718049) verifies source `207e557b83cbab6933e7628275879f0f38c11021`. Local DRAFT ROM/EFI/disk/source/license/instructions/checksum bundle is prepared outsideGit; inventory and identities are in the machine receipt. No target qualification or publication is implied.
 
 Existing ROM release metadata check passes with new PC unreleased entry.24
 originals/copies,protected old manager/UART/product/selected/release/screenshot

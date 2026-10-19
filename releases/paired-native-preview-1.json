@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "candidate": "paired-native-preview-1",
-  "status": "draft-in-development",
+  "status": "compiler-verified-unbooted-draft",
   "owner_source": "SRC-0291",
   "decision": "ADR-0055",
   "specification": "SPEC-0049",
@@ -11,28 +11,31 @@
       "artifact": "original ROM",
       "proposed_version": "0.3.0-alpha.1",
       "build_mode": "--outline-drawing",
-      "compiler_verified": false,
+      "compiler_verified": true,
       "boot_qualified": false,
-      "human_input_qualified": false
+      "human_input_qualified": false,
+      "image_sha256": "2b600319d334145e582adc3db0e0fcf495d5f44309488c19e652dfb378391780"
     },
     "pc": {
       "architecture": "x86-64",
       "artifact": "EFI and original boot disk",
       "proposed_version": "0.1.0-alpha.1",
       "build_mode": "-OutlineDrawing",
-      "compiler_verified": false,
+      "compiler_verified": true,
       "boot_qualified": false,
-      "human_input_qualified": false
+      "human_input_qualified": false,
+      "image_sha256": "e9567ac8f91c48dd435ed7fc7c1021511da131ab8975a7ca7a3ad17aeaa8127c",
+      "payload_sha256": "cc667453316e262de61af774c880e3607b034cded3d742957b220a589f36e042"
     }
   },
   "feature_checks": {
-    "native_outline_and_selection": false,
-    "shared_scene_and_static_progress": false,
-    "counter_redraw_preserves_scene": false,
-    "independent_fault_and_sanitizer_checks": false
+    "native_outline_and_selection": true,
+    "shared_scene_and_static_progress": true,
+    "counter_redraw_preserves_scene": true,
+    "independent_fault_and_sanitizer_checks": true
   },
   "packages": {
-    "draft_prepared": false,
+    "draft_prepared": true,
     "published": false
   },
   "release_ready": false,
@@ -40,7 +43,7 @@
     "Both exact-byte candidate boot qualifications need fresh owner trial approval.",
     "Ordinary human input walkthrough and reviewed screenshots pending.",
     "Document and resolve/accept PC diagnostic session lifecycle.",
-    "Draft package/source/license/checksum review and final freeze pending.",
+    "Local DRAFT prepared; package/source/license/checksum review and final freeze pending.",
     "Publication requires explicit owner request for reviewed candidates."
   ],
   "unchanged_gates": [
@@ -53,5 +56,8 @@
     "Linux complete edition",
     "both System1/ROM boot directions"
   ],
-  "new_target_run_or_publication_authorized": false
+  "new_target_run_or_publication_authorized": false,
+  "source_revision": "207e557b83cbab6933e7628275879f0f38c11021",
+  "verification_receipt": "../docs/development/paired-preview-evidence.json",
+  "feature_check_scope": "Hosted/compiler conformance only; no target/human qualification."
 }
