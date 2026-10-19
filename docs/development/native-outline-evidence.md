@@ -32,7 +32,7 @@ intentionally broken cores are rejected (solid fill,clearing,4-count,wrap,erases
 false clip edge,asymmetric pen mixup,zero-pen missing count).12 local compiler
 objects pass no-import/no-mutable-data audit: Clang/GCC32/64 O0/O2,ARM LE/BE O2,
 and matching native EFI-ABI object twins. Those twins are not linked EFI images.
-CI native68000 O0/O2/Os twins and full existing profiles are pending below.
+CI native68000 O0/O2/Os twins pass (six objects),with zero imports/mutable data. Full CI passes3090 CTests across11 profiles,including11 outline oracle and11 freestanding checks;12 width/endian/EFI-ABI objects pass again. [CI](https://github.com/segaboy/ClasSICK-0.97/actions/runs/39242454432) verifies source `8bae006ea4230ccb92355afdf84918936272c9d9`.
 
 The first local configure lacked the bundled Python path; specifying it fixed
 the harness. A generic GCC -m32 build selected an x64 resource compiler and failed
@@ -45,8 +45,8 @@ Matrix dispositions:1-31,33-34 are executed oracle/state/layout cases;32 uses
 existing regression suites plus immutable old source/header identities.35-36
 include actual x86 width runs and compiler-only BE ARM/native68000,not target
 endian execution;37 sanitizers passes;38 no-import/no-data audit;39 native68000
-compiler-only CI pending;40 x86 and EFI-ABI objects,not new image integration;
-41 named existing inputs/candidates preserved and normal CI regressions pending.
+compiler-only CI passes;40 x86 and EFI-ABI objects,not new image integration;
+41 named existing inputs/candidates preserved and normal CI regressions pass.
 42 selected-view workload integration and43 legacy binding deferred;44 historical
 equivalence not claimed,H1-H5 open. Do not summarize all44 rows as executed tests.
 

@@ -155,7 +155,80 @@
     }
   },
   "ci": {
-    "status": "pending"
+    "databaseId": 39242454432,
+    "headSha": "8bae006ea4230ccb92355afdf84918936272c9d9",
+    "status": "completed",
+    "conclusion": "success",
+    "url": "https://github.com/segaboy/ClasSICK-0.97/actions/runs/39242454432",
+    "runtime_ctests": 3090,
+    "runtime_profiles": 11,
+    "profile_ctests": [
+      292,
+      292,
+      292,
+      292,
+      292,
+      263,
+      292,
+      276,
+      276,
+      276,
+      247
+    ],
+    "outline_independent_ctests": 11,
+    "outline_freestanding_ctests": 11,
+    "width_endian_efi_abi_objects": 12,
+    "native_m68k": {
+      "specification": "SPEC-0048",
+      "cpu": "68000",
+      "inputs": {
+        "personality/system1/quickdraw-outline.c": "11f2c4953e8d514a1a76d8767b366c84a73b4cb820ecbbf277087f84d8131e8a",
+        "personality/system1/quickdraw-outline.h": "def9e4da6c957e799146604d1c1ad0b7a786dad5c5e6305bf1e1d90bc1e2f468",
+        "personality/system1/quickdraw-view.h": "4a93567872049f5142a3980eba501c7a2e027c15de794dde11fbbd93cc3bbee7",
+        "personality/system1/quickdraw-rects.h": "db9facdb5ef3742c3c8935255e3f627c30d31b323a8223e470d9851a48c81e09"
+      },
+      "object_audits": 6,
+      "undefined_imports": 0,
+      "mutable_data": 0,
+      "records": [
+        {
+          "optimization": "O0",
+          "twins_equal": true,
+          "object": {
+            "bytes": 1764,
+            "sha256": "2898c462fdae650a57129ae575b4ff33689c9874528e914b8d2ecb45ddd3e0ca"
+          }
+        },
+        {
+          "optimization": "O2",
+          "twins_equal": true,
+          "object": {
+            "bytes": 1072,
+            "sha256": "fa0c95b6a6091a937797b7d694b5c2cad95d4ce7128cd27fa08c7fc04d1d0058"
+          }
+        },
+        {
+          "optimization": "Os",
+          "twins_equal": true,
+          "object": {
+            "bytes": 1056,
+            "sha256": "45c72ac3c05583d99ff0241a29983066fead507718f399643f5aa7a66c57b444"
+          }
+        }
+      ],
+      "target_executed": false,
+      "rom_inputs_changed": false
+    },
+    "jobs": [
+      {
+        "name": "windows-bootstrap",
+        "conclusion": "success"
+      },
+      {
+        "name": "m68k-rom",
+        "conclusion": "success"
+      }
+    ]
   },
   "lead_corrections": [
     "Oracle include path, six fixture call arities, full-black pixel count8192, dead offset loop and explicit unsigned rect encoding. Core comment clarified; no core behavior/API change.",
@@ -177,10 +250,10 @@
     "row_32": "existing hosted regression suites executed; old core source/header hashes unchanged",
     "rows_35_36": "x86 width runtime tests and compiler-only opposite-endian ARM/native68000; no BE target execution",
     "row_37": "ASan/UBSan profile passed",
-    "row_38": "12 local no-import/mutable-data object checks; six68000 audits pendingCI",
-    "row_39": "native68000 compiler-only pendingCI",
+    "row_38": "12 local and12CI no-import/mutable-data checks; six68000 audits pass",
+    "row_39": "native68000 O0/O2/Os compiler-only twins pass; no execution",
     "row_40": "x86 object checks and EFI-ABI object twins; no newEFIimage",
-    "row_41": "unchanged existing build inputs and prior candidate identities, normalCI regressions pending",
+    "row_41": "existing named build inputs unchanged and normalCI regressions pass; helper absent from old image modes",
     "rows_42_44": "deferred or explicitly not claimed"
   },
   "historical_questions_open": [
