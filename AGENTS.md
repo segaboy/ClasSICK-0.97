@@ -1,5 +1,15 @@
 # ClasSICK 0.97 working instructions
 
+Current owner paired selected-port boot observations (2026-10-18,SRC-0278/0279):
+"Continue" accepts the proposed one Snow Early128K and one isolated native PC
+trial of exact SPEC-0047 candidates,synthetic input/captures and ordinary Git/HQ.
+Both sessions are now closed; no further trial,build,release or runtime scope is
+authorized. Native drawing/counters observed; Snow persistent preference isolation
+and human/physical input remain unqualified; Mac empty/PC timed progress differ.
+24 originals/copies,UART,old records/releases/tags/wiki preserved; all existing
+source/edition/physical/full128K/B2/native-app/both System1 gates persist. No
+OneNote/wiki,extra chats/subagents/automation. [Trial](docs/development/paired-selection-boot-trial.md).
+
 Current owner paired selected-port demonstration (2026-10-18,SRC-0274..0277):
 "Do it" accepts SPEC-0047 original native68000/x86 two-port visual workload,
 explicit Mac/PC candidate modes,independent tests/compiler/CI and ordinary Git/HQ.

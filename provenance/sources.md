@@ -3228,3 +3228,11 @@ resulting public/HQ evidence after automatic approval initially blocked main.
 ## SRC-0277 - Lead paired workload decisions and verification
 
 - Codex,2026-10-18: frozen native workload/display decisions,artifact integration and actual compiler/hosted/candidate verification. [SPEC-0047](../docs/specifications/SPEC-0047-paired-selected-drawing.md), [receipt](../docs/development/paired-selection-evidence.md). No new historical source facts or target execution.
+
+## SRC-0278 - Owner paired boot-trial continuation
+
+- Dean Howell,2026-10-18: "Continue" after "Next: separately approved Mac and PC boot trials" accepts one Snow Early128K and one isolated PC trial of the exact SPEC-0047 candidates, synthetic input/captures and ordinary Git/HQ records. No additional trial, rebuild, release or reference payload/source permission. [Scope/result](../docs/development/paired-selection-boot-trial.md).
+
+## SRC-0279 - Lead paired native boot observations
+
+- Codex,2026-10-18 local /2026-10-19 UTC: one own-ROM Snow session and one own-disk VirtualBox session, configuration/identity checks, synthetic input, actual captures/comparisons, PC terminal result and session closure. Original engineering observation only; persistent Snow preference isolation, human/physical input, timing/edition/full128K/B2/System1 acceptance are not established. [Receipt](../docs/development/paired-selection-boot-trial.json).

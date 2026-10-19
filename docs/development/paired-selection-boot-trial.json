@@ -1,0 +1,222 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-18",
+  "utc_date": "2026-10-19",
+  "sources": [
+    "SRC-0278",
+    "SRC-0279"
+  ],
+  "specification": "SPEC-0047",
+  "test": "TEST-0055",
+  "classification": "isolated-own-build-observation-with-limits",
+  "owner_request": "Continue",
+  "accepted_proposal": "Next: separately approved Mac and PC boot trials.",
+  "scope": "One isolated Snow Early128K session and one isolated VirtualBox session; exact SPEC-0047 candidates; synthetic input and screenshots; no release or extra cold starts.",
+  "compiled_source_revision": "ac4e7b31784dde1620938ca9a2855e61f14d7c1c",
+  "compiled_evidence_revision": "71047e966997d3935260f363326a824cec0a7ff7",
+  "inputs": {
+    "rom": {
+      "sha256": "1cd00f53acefff1be8c553924d3b5d27d2e9f964a551b6de2b38330878800167",
+      "bytes": 65536
+    },
+    "efi": {
+      "sha256": "a19e85ff866586fc6eada703e1c9a2ec8d1c2a42e113d911260afb4f92c72e36",
+      "bytes": 159232
+    },
+    "raw": {
+      "sha256": "8a2eaf896b7e51363182d7ee53741429dd14d943b87dd3e63298c8b944ee9fac",
+      "bytes": 67108864
+    }
+  },
+  "mac": {
+    "emulator": "Snow v1.5.0-317c188",
+    "executable_sha256": "32cf5285582c0f509e4f1ac38d86bfb90440bae9da43b7823bfb0841dea588e6",
+    "model": "Early128K",
+    "ram_bytes": 131072,
+    "native_architecture": "68000",
+    "cold_starts": 1,
+    "session_closed": true,
+    "fresh_workspace": true,
+    "persistent_preferences_isolation_qualified": false,
+    "profile_note": "Three child profile environment overrides were attempted; directories remained empty and file picker showed a prior project location. Persistent application preference isolation is unqualified. Explicit workspace was separately verified.",
+    "isolation": "own ROM only; no floppy/SCSI/shared directory/extension ROM/PRAM/serial bridge; debug panels closed; Early128K has no Ethernet device",
+    "logical": [
+      512,
+      342
+    ],
+    "initial_counter": 0,
+    "synthetic_mouse_presses": 2,
+    "counter_sequence": [
+      0,
+      1,
+      2
+    ],
+    "transport": "Sky alternate-button clicks; observed UI mapping; no physical/human confirmation",
+    "six_phases_visible": true,
+    "result_value": "0097",
+    "progress": "empty by existing native Mac binding design; no timing/completion qualification"
+  },
+  "pc": {
+    "emulator": "VirtualBox 7.2.16r174877",
+    "management_executable_sha256": "7fda8e54157eb94a5ebd9cea079a9fb8c23ade92ae71e13399dc3431c021a228",
+    "native_architecture": "x86-64",
+    "cold_starts": 1,
+    "session_closed": true,
+    "unregistered": true,
+    "cpus": 1,
+    "memory_mib": 512,
+    "firmware": "EFI64; EDK II/revision00010000 self-report; B2 criterion6 firmware-image hash unresolved",
+    "isolation": "only own disk; all8 NICs/USB/audio/clipboard/file transfer/drag-drop/VRDE disabled; no shared folders",
+    "secure_boot": false,
+    "raw_vdi_roundtrip_equal": true,
+    "initial_vdi_sha256": "e89237d08d0253867c0e42bc2c2349612ef5c826465fe13b915ae1e537a82edf",
+    "physical": [
+      1024,
+      768
+    ],
+    "logical": [
+      512,
+      342
+    ],
+    "origin": [
+      256,
+      213
+    ],
+    "synthetic_mouse": {
+      "api": "public IMouse.PutMouseEvent",
+      "relative": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "masks": [
+        0,
+        1,
+        1,
+        0,
+        1,
+        0
+      ],
+      "counter_sequence": [
+        0,
+        1,
+        1,
+        2
+      ]
+    },
+    "synthetic_keyboard": {
+      "api": "VBoxManage keyboardputscancode",
+      "codes": [
+        "39",
+        "b9"
+      ],
+      "presses": 1,
+      "counter_after": 3
+    },
+    "qualification_port": [
+      "00000003",
+      "00000003"
+    ],
+    "a20": [
+      "00000000",
+      "00000000"
+    ],
+    "guest_terminal_second": 60,
+    "normal_result": "00000000",
+    "keyboard_ready": "00000001",
+    "final_combined_counter": 3,
+    "pause_resume_used": true,
+    "uninterrupted_timing_qualified": false,
+    "existing_inventory_and_running_state_preserved": true
+  },
+  "capture_checks": {
+    "logical": [
+      512,
+      342
+    ],
+    "pc_physical": [
+      1024,
+      768
+    ],
+    "pc_origin": [
+      256,
+      213
+    ],
+    "comparison": "binary threshold128; normalize Snow dark/light palette only; original screenshots retained unchanged",
+    "static_pixels_per_capture": 161856,
+    "captures": {
+      "pc-initial.png": {
+        "sha256": "20df80abd6fdcca892c59214dfb88db0f775b324482834f1db2325941b7db1e2",
+        "bytes": 4729,
+        "static_pixel_differences": 0,
+        "outside_logical_canvas_all_white": true
+      },
+      "mouse-first-held.png": {
+        "sha256": "4e3d8ea901e2b8f3e9e42edc1e66c67a78f286b66ac7af916b8c9153372188eb",
+        "bytes": 4728,
+        "static_pixel_differences": 0,
+        "outside_logical_canvas_all_white": true
+      },
+      "mouse-still-held.png": {
+        "sha256": "c8142f26ddacc2809e68e687283ebf2d3adfd62e03743b97edb295c1c1621906",
+        "bytes": 4728,
+        "static_pixel_differences": 0,
+        "outside_logical_canvas_all_white": true
+      },
+      "mouse-second-released.png": {
+        "sha256": "d2251b4c68fd9dfc7dbd6dc4be7022ea5641605149dafe38f525867acde79aca",
+        "bytes": 4730,
+        "static_pixel_differences": 0,
+        "outside_logical_canvas_all_white": true
+      },
+      "pc-after-space.png": {
+        "sha256": "9887251bb2cf97637f805345d67c322f17cd0baafaf2011ab490496a05d39c88",
+        "bytes": 4728,
+        "static_pixel_differences": 0,
+        "outside_logical_canvas_all_white": true
+      },
+      "final-screen.png": {
+        "sha256": "43ce8e15e83c1a583df0a188a75c4c8a105f641d69071cf1e466ac8deb682b21",
+        "bytes": 4733,
+        "static_pixel_differences": 0,
+        "outside_logical_canvas_all_white": true
+      }
+    },
+    "mac_capture": {
+      "sha256": "dc04d2ad4499d4745869cde2a7b44d43933ea5c86f31a61a15c38a7ca994f412",
+      "bytes": 38100
+    },
+    "mac_pc_same_counter_differences_outside_progress": 0,
+    "held_counter_unchanged": true,
+    "second_press_counter_changed": true,
+    "static_comparisons": 6,
+    "same_counter_comparison_pixels": 163456
+  },
+  "observation_limits": [
+    "Synthetic input only; human/physical pointer behavior and Event Manager parity remain unqualified.",
+    "Mac empty progress strip and PC timed strip retain existing distinct carrier behavior; drawing and counter pixels match after palette normalization, excluding progress.",
+    "Snow workspace command-line path failed before guest start; same process loaded verified absolute workspace through UI. Left click did not dismiss initial dialog; alternate mapping worked; unsupported right double-click produced no input.",
+    "Snow child profile environment overrides did not establish persistent preference isolation; no preference-isolation claim.",
+    "Sandbox VirtualBox management access was denied before preparation; approved host-context execution succeeded.",
+    "First unregister attempted before powered-off GUI released its lock; completed after release without another start."
+  ],
+  "prior_ci": {
+    "url": "https://github.com/segaboy/ClasSICK-0.97/actions/runs/39165130102",
+    "ctests": 3068,
+    "profiles": 11,
+    "reused_not_rerun": true
+  },
+  "new_runtime_build": false,
+  "new_release": false,
+  "new_workers": 0,
+  "worker_reason": "Target control, capture comparison, integration and final verification belong to Codex; no new draft/code gap.",
+  "external_worker_remaining_usage": {
+    "Claude": "unavailable",
+    "Grok": "unavailable",
+    "Antigravity": "unavailable",
+    "Copilot": "unavailable"
+  },
+  "historical_physical_full128k_b2_system1_acceptance": false,
+  "one_note_and_wiki_retired": true
+}
