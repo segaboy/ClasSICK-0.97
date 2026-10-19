@@ -3338,3 +3338,11 @@ SRC-0300 executed checkpoint: CI3150/11;local596/2;38 mouse+5 Space events throu
 ## SRC-0304 - Lead final package review and executed controls
 
 - Codex integrates original artifacts,corrects component docs/ZIP assumptions and executes37 package checks/source identity/repeatability controls. This is original engineering evidence,not historical compatibility or release approval. [Review](../docs/development/paired-release-package-review.md).
+
+## SRC-0305 - Owner paired prerelease publication approval
+
+- Dean Howell,2026-10-19: "Publishing them." in response to the reviewed ROM0.3.0-alpha.1/PC0.1.0-alpha.1 approval request at d9c2341,explicitly including documented experimental limitations. Authorizes both tags,prereleases/eight assets and ordinary publication receipts/current pointers;no future release or compatibility waiver. [Receipt](../releases/paired-native-preview-1-publication.json).
+
+## SRC-0306 - Lead actual paired publication verification
+
+- Codex verifies frozen inputs,annotated local/remote tags,all eight authenticated draft downloads,all eight post-publication downloads,GitHub digests,release bodies/prerelease/latest states and prior release preservation. Original engineering evidence,not historical/human/physical qualification. No worker,build or target run. [Evidence](../docs/development/paired-release-publication-evidence.md).

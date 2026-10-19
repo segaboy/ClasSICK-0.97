@@ -1,5 +1,7 @@
 # Current milestones and release tracks
 
+2026-10-19 paired-native-preview-1: ROM0.3.0-alpha.1/PC0.1.0-alpha.1 published experimental prereleases. Exact eight downloads/digests/tags verified;complete source,license and setup guides included. No System release or compatibility-gate closure. [Receipt](../releases/paired-native-preview-1-publication.json).
+
 2026-10-19 paired-native-preview-1: final package/source/license/checksum freeze passes37 actual checks. Ready for owner approval,not published;PC human capture/GUI limitations require explicit preview acceptance. [Proposal](../releases/paired-native-preview-1-approval.md).
 
 2026-10-19 paired-native-preview-1: SPEC-0050 removes the PC normal60-second/Escape stop;38 mouse+5 Space inputs accepted through185 guest seconds,scene intact. Mac ROM byte-identical. CI3150/11 pass;human PC capture/GUI startup and release freeze remain open. [Evidence](development/preview-session-evidence.md).

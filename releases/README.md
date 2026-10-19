@@ -1,8 +1,10 @@
 # Independent ROM and System releases
 
-Prepared2026-10-19: [paired ROM0.3.0-alpha.1 / PC0.1.0-alpha.1 approval proposal](paired-native-preview-1-approval.md),37 actual package checks passed. No tag/release yet;PC human capture/GUI and other preview limits require explicit acceptance. The current published version table below is unchanged.
+Published2026-10-19: [paired ROM0.3.0-alpha.1 / PC0.1.0-alpha.1 receipt](paired-native-preview-1-publication.json). Both experimental prereleases have four verified public assets each. Source/license/setup/checksums included;System unreleased and stated preview limits remain. Older dated approval/preparation paragraphs below are history.
 
-Current owner direction2026-10-19: work toward paired native Macintosh/x86 PC preview releases. [ADR-0055](../docs/adr/0055-paired-release-cadence.md) and [paired-native-preview-1](paired-native-preview-1.md) define the bounded target and readiness matrix. PC preview is currently unversioned/unreleased; proposed versions are draft only. Existing ROM/System pointers and published assets unchanged; target trials and publication still need explicit owner decisions.
+Preparation history2026-10-19: [paired approval proposal](paired-native-preview-1-approval.md) records the37 package checks and admission-time pending state. The separate publication receipt above records the subsequent owner-approved releases.
+
+Owner direction2026-10-19: work toward paired native Macintosh/x86 PC releases. [ADR-0055](../docs/adr/0055-paired-release-cadence.md) and [paired-native-preview-1](paired-native-preview-1.md) define the first bounded preview. The version table below records its current published components. Future target trials and releases still need the applicable owner decisions.
 
 2026-10-15 groundwork SRC-0198; 2026-10-16 alpha publication SRC-0200/0201; next release SRC-0215/0216;
 [ADR-0040](../docs/adr/0040-independent-rom-system-releases.md).
@@ -18,9 +20,9 @@ our implementation's development releases. R-001's historical identity remains o
 
 | Component | Current development version | Release state | Tag format |
 | --- | --- | --- | --- |
-| ClasSICK ROM | 0.2.0-alpha.1 | Published experimental prerelease, 2026-10-16 | rom-v0.2.0-alpha.1 |
+| ClasSICK ROM | 0.3.0-alpha.1 | Published experimental prerelease, 2026-10-19 | rom-v0.3.0-alpha.1 |
 | ClasSICK System software | Unassigned | Unreleased | system-vMAJOR.MINOR.PATCH |
-| ClasSICK PC Preview | Unassigned | Unreleased | pc-vMAJOR.MINOR.PATCH |
+| ClasSICK PC Preview | 0.1.0-alpha.1 | Published experimental prerelease, 2026-10-19 | pc-v0.1.0-alpha.1 |
 
 Versions use MAJOR.MINOR.PATCH, optionally followed by alpha.N, beta.N or rc.N.
 Group fixes into the next candidate; advance the minor version for a substantial
@@ -30,28 +32,25 @@ release notes. Every component has its own [ROM](rom/CHANGELOG.md) or
 The common CMake build harness has no umbrella product version. Shared core and
 tool changes are identified by their source revisions and evidence.
 
-## Current ROM candidate
+## Current paired releases
 
-[Release notes](rom/0.2.0-alpha.1.md) and [frozen candidate record](rom/0.2.0-alpha.1.json)
-name the tested 64 KiB original ROM, compiled source, exact SHA-256, compiler
-manifest, evidence revision and limitations. The version is carried by the
-filename and release metadata; no bytes are patched into the qualified image.
-Its on-screen 0.97 remains the target label. This is an embedded-demo/application
-prototype; a complete System disk boot has not been demonstrated.
+[ROM notes](rom/0.3.0-alpha.1.md), [Mac setup](rom/TRYING-0.3.0-alpha.1.md),
+[PC notes](pc/0.1.0-alpha.1.md) and [PC setup](pc/TRYING-0.1.0-alpha.1.md)
+describe the same original native drawing scene on68000 and x86-64.
+The [paired publication receipt](paired-native-preview-1-publication.json) records
+the actual tags, release IDs and exact eight public asset identities.
 
-The original frozen candidate preserves its draft admission state. The separate
-publication receipt records the actual tag and publication rather than rewriting
-that snapshot. Before publication, select the reviewed metadata/source commit,
-confirm that every native build input equals the qualified manifest, and
-distinguish the tag revision from the compiled-source and observation revisions. Changed ROM
-bytes require new build evidence and the appropriate separately authorized trial.
-Published artifact identities are immutable; later changes receive a new version.
+Frozen candidate and approval records preserve admission-time pending state.
+Separate publication receipts establish the current state; snapshots are not
+rewritten after publication. Tag metadata d9c2341, compiled source c631b824 and
+qualification evidence87e95de remain distinct. Image bytes are unchanged.
+System remains unreleased; human PC capture/GUI and other limits stay explicit.
 
 ## Compatibility matrix
 
 | ROM | System/workload | State |
 | --- | --- | --- |
-| Current ClasSICK ROM draft | Embedded original scene and original 68k test application | Observed in isolated Snow Macintosh 128K; input delivery remains unqualified |
+| ClasSICK ROM0.3.0-alpha.1 | Embedded original native drawing workload | Snow Early128K observed; human2 clicks pass; physical/full128K/mini-vMac unqualified |
 | ClasSICK ROM | ClasSICK replacement System disk | Required; not tested; no System release exists |
 | ClasSICK ROM | Owner-designated original System 1 disks | Required; not tested; exact reference/media admission still required |
 | Identified supported original Apple ROM | ClasSICK replacement System disk | Required; not tested; no System release exists |
@@ -61,10 +60,13 @@ and workload. An emulator result does not certify real hardware or every ROM/
 System pairing. [The owner-required boot directions](../docs/development/system1-rom-boot-requirements.md)
 and [current milestones](../docs/milestones.md) remain independent gates.
 
-## Prepare a local review bundle
+## Earlier ROM draft helper
 
-Run `python scripts/Prepare-ROMRelease.py --check` to validate the draft metadata.
-To stage the exact admitted candidate outside the checkout:
+The legacy `Prepare-ROMRelease.py` expects the earlier single-ROM candidate
+schema. Use it from that release's corresponding source archive, with its matching
+catalog and qualification records. The current paired schema uses the tools below.
+From an earlier release source archive, run `python scripts/Prepare-ROMRelease.py --check`
+to validate its metadata. To stage that earlier candidate outside its checkout:
 
 ```text
 python scripts/Prepare-ROMRelease.py --rom PATH_TO_QUALIFIED_ROM --build-manifest PATH_TO_QUALIFIED_MANIFEST --output NEW_EXTERNAL_DIRECTORY
@@ -98,7 +100,7 @@ their membership and checks. No compiler or emulator is bundled.
    Record the actual tag target and published asset identities in the release history.
 4. Update that component's published pointer; preserve earlier records and gates.
 
-The groundwork alone authorized no publication; SRC-0215 requests this new prerelease.
+SRC-0305 approves the paired previews named above. The earlier SRC-0215 approval covered ROM0.2.0-alpha.1 only.
 Future versions need the applicable owner scope. No automatic publishing workflow
 is installed. Apple/Microsoft payloads, raw research, manuals, private/HQ material,
 credentials and reference screenshots stay excluded. The package source links
@@ -107,3 +109,14 @@ VM/reference trial follows from a version bump. Native-app, physical/128K/parity
 edition/B2 and both System 1/ROM requirements remain unchanged.
 
 The earlier [ROM0.1.0-alpha.1](rom/0.1.0-alpha.1-publication.json) remains available with its original bytes, source, annotated tag and observation conditions.
+
+## Paired package verification tools
+
+The frozen [input manifest](paired-native-preview-1-inputs.json) admits five original inputs by size/hash:rom.rom,BOOTX64.EFI,pc.img,source.zip,COPYING. Keep them in a separate admitted directory.
+
+```text
+python scripts/Prepare-PairedRelease.py --config releases/paired-native-preview-1-inputs.json --inputs ADMITTED_INPUTS --docs PUBLIC_ROOT --output NEW_EXTERNAL_DIRECTORY
+python scripts/Test-PairedRelease.py --config releases/paired-native-preview-1-inputs.json --inputs ADMITTED_INPUTS --docs PUBLIC_ROOT --package NEW_EXTERNAL_DIRECTORY
+```
+
+The builder always creates an unpublished local approval kit;it never uploads,tags,publishes or runs a guest. Its external pending markers are excluded from the four-file component upload allowlists. Publication state comes from the separate receipts. Earlier ROM0.1.0-alpha.1 and ROM0.2.0-alpha.1 releases remain immutable.

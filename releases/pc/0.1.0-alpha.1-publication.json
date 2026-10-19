@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "component": "pc",
+  "version": "0.1.0-alpha.1",
+  "status": "published",
+  "owner_source": "SRC-0305",
+  "tag": "pc-v0.1.0-alpha.1",
+  "tag_target_revision": "d9c2341a50f713d568f7d6e71d40a436dfc1dbce",
+  "annotated_tag_object": "e0b7e16131d886f63ca0b7b4a514f4810e8009ef",
+  "release_url": "https://github.com/segaboy/ClasSICK-0.97/releases/tag/pc-v0.1.0-alpha.1",
+  "release_id": 417723272,
+  "published_at": "2026-10-19T20:36:58Z",
+  "prerelease": true,
+  "compiled_source_revision": "c631b824b2a264c6d81eb9832f17b7b5918aa9ff",
+  "evidence_revision": "87e95de40cfb0f06b6398a3cfa762e9c62b87375",
+  "package_metadata_revision": "d9c2341a50f713d568f7d6e71d40a436dfc1dbce",
+  "package_review": "docs/development/paired-release-package-review.json",
+  "metadata_ci_url": "https://github.com/segaboy/ClasSICK-0.97/actions/runs/39318175809",
+  "assets": [
+    {
+      "filename": "SHA256SUMS.txt",
+      "bytes": 309,
+      "sha256": "b17962367afba6e9c8f2a98c1f9102b12de8abf75627fff35a3e51135427b451",
+      "asset_id": 657371832,
+      "download_url": "https://github.com/segaboy/ClasSICK-0.97/releases/download/pc-v0.1.0-alpha.1/SHA256SUMS.txt",
+      "github_digest": "sha256:b17962367afba6e9c8f2a98c1f9102b12de8abf75627fff35a3e51135427b451"
+    },
+    {
+      "filename": "classick-pc-0.1.0-alpha.1-source.zip",
+      "bytes": 2100291,
+      "sha256": "b8e1537750316012a3bad8afb497d3f4043bb0cf0baf1ea8bb6eebcd92d28865",
+      "asset_id": 657371831,
+      "download_url": "https://github.com/segaboy/ClasSICK-0.97/releases/download/pc-v0.1.0-alpha.1/classick-pc-0.1.0-alpha.1-source.zip",
+      "github_digest": "sha256:b8e1537750316012a3bad8afb497d3f4043bb0cf0baf1ea8bb6eebcd92d28865"
+    },
+    {
+      "filename": "classick-pc-0.1.0-alpha.1-x86_64.efi",
+      "bytes": 159232,
+      "sha256": "23e021a4ab57cfd57559777e05d57e41f2b2217b4975b0543d9834414989d8f0",
+      "asset_id": 657371833,
+      "download_url": "https://github.com/segaboy/ClasSICK-0.97/releases/download/pc-v0.1.0-alpha.1/classick-pc-0.1.0-alpha.1-x86_64.efi",
+      "github_digest": "sha256:23e021a4ab57cfd57559777e05d57e41f2b2217b4975b0543d9834414989d8f0"
+    },
+    {
+      "filename": "classick-pc-0.1.0-alpha.1-x86_64.zip",
+      "bytes": 255134,
+      "sha256": "4c6a95de87c56600aad34e78e1c169ad4ffd17b13f34d7450d43bd683c02ea8c",
+      "asset_id": 657371834,
+      "download_url": "https://github.com/segaboy/ClasSICK-0.97/releases/download/pc-v0.1.0-alpha.1/classick-pc-0.1.0-alpha.1-x86_64.zip",
+      "github_digest": "sha256:4c6a95de87c56600aad34e78e1c169ad4ffd17b13f34d7450d43bd683c02ea8c"
+    }
+  ],
+  "license": "GPL-3.0-or-later",
+  "system_state": "unreleased",
+  "new_runtime_build": false,
+  "new_emulator_trial": false,
+  "human_provenance_certification": false,
+  "human_pc_input_qualified": false,
+  "verification": {
+    "draft_download_bytes_equal": true,
+    "public_download_bytes_equal": true,
+    "github_asset_digests_match": true,
+    "remote_annotated_tag_checked": true,
+    "notes_match_reviewed_body": true,
+    "stable_latest_requested": false,
+    "stable_latest_observed": false,
+    "previous_releases_preserved": true
+  },
+  "accepted_preview_limits": [
+    "PC human pointer capture/focus after intermittent-click report",
+    "One VirtualBox GUI preboot CPU-initialization failure;headless fallback passed",
+    "Snow persistent preference isolation",
+    "Physical Macintosh/PC,full128K,B2,historical/edition,System1-ROM boot directions,native external apps,Linux complete edition"
+  ],
+  "compatibility_gates_closed": []
+}

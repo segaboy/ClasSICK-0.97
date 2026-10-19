@@ -1,5 +1,7 @@
 # ClasSICK 0.97
 
+2026-10-19: [Mac ROM0.3.0-alpha.1](https://github.com/segaboy/ClasSICK-0.97/releases/tag/rom-v0.3.0-alpha.1) and [native PC0.1.0-alpha.1](https://github.com/segaboy/ClasSICK-0.97/releases/tag/pc-v0.1.0-alpha.1) published as paired experimental drawing previews. All eight public assets verified;System unreleased and known input/GUI/hardware limits remain. [Receipt](releases/paired-native-preview-1-publication.json).
+
 2026-10-19: paired ROM0.3.0-alpha.1 / PC0.1.0-alpha.1 packages reviewed,37 checks pass,ready for owner approval only. PC human-capture/GUI limits remain;published versions unchanged. [Proposal](releases/paired-native-preview-1-approval.md).
 
 2026-10-18: reviewed native Mac/PC boot screenshots now live in Git for research/web discovery: [image index](docs/evidence/screenshots/README.md). SPEC-0048 defines the next paired native rectangle-outline contract; implementation and44 proposed checks remain pending.

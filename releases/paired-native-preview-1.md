@@ -51,3 +51,7 @@ features. Mac/PC feature parity is mandatory; version-number equality is not.
 ## Final package checkpoint -2026-10-19
 
 [Approval proposal](paired-native-preview-1-approval.md): component-specific download/setup notes,complete compiled source,license and exact inner/outer inventories verified.37 actual package checks pass. Ready for owner approval only;ordinary human capture/GUI and other preview limits require explicit owner acceptance. Current published pointers unchanged;no tag or release.
+
+## Published -2026-10-19
+
+Owner SRC-0305 approves both experimental prereleases with the documented limits. [Actual publication receipt](paired-native-preview-1-publication.json): all eight draft/public downloads,GitHub digests and annotated tags verified. Frozen approval documents above retain their pre-publication state. No historical,human PC,GUI,hardware or System1 gate closes.
