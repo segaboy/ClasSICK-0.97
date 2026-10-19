@@ -1,0 +1,179 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-19",
+  "baseline": "29f0aa6bd218d0946bfb6bbbb72efaebbb81c821",
+  "release_candidate": "paired-native-preview-1",
+  "specification": "SPEC-0049",
+  "decision": "ADR-0055",
+  "implementation": "IMPL-0052",
+  "tests": "TEST-0058",
+  "sources": [
+    "SRC-0291",
+    "SRC-0292",
+    "SRC-0293",
+    "SRC-0294"
+  ],
+  "workers": [
+    {
+      "round": "implementation",
+      "worker": "claude",
+      "exit_code": 0,
+      "outer_timeout": false,
+      "elapsed_seconds": 53.84,
+      "input_bytes": 26988,
+      "input_sha256": "aaedae204e82c455f43e1196fcac7b24c8fe08ece003ae9a81c3e826600fb197",
+      "stderr_bytes": 0,
+      "observed_tools": 0,
+      "artifact_lines": {
+        "apps/outline-drawing/workload.c": 79,
+        "docs/specifications/SPEC-0049-paired-native-outline.md": 63
+      },
+      "replacements": 6,
+      "worker_tests_executed": 0,
+      "reported_usage": {
+        "modelUsage": {
+          "claude-opus-5-5": {
+            "inputTokens": 2,
+            "outputTokens": 6411,
+            "cacheReadInputTokens": 1452,
+            "cacheCreationInputTokens": 14070,
+            "webSearchRequests": 0,
+            "costUSD": 0.2410784,
+            "contextWindow": 1000000,
+            "maxOutputTokens": 128000,
+            "thinkingTokens": 1743,
+            "canonicalModel": "claude-opus-5-5",
+            "provider": "firstParty",
+            "costBasis": "list"
+          }
+        },
+        "reported_list_cost_usd": 0.2410784
+      }
+    },
+    {
+      "round": "implementation",
+      "worker": "copilot",
+      "exit_code": 0,
+      "outer_timeout": false,
+      "elapsed_seconds": 94.27,
+      "input_bytes": 21376,
+      "input_sha256": "30098dcbbc91a099425fa2bfc25b590a6d6a3579d7d007f5b27f8330269e9cc3",
+      "stderr_bytes": 0,
+      "observed_tools": 5,
+      "artifact_lines": {
+        "tests/outline-drawing-independent.c": 133
+      },
+      "replacements": 0,
+      "worker_tests_executed": 0,
+      "reported_usage": {
+        "currentModel": "claude-sonnet-5.5",
+        "totalPremiumRequestCost": 1,
+        "totalUserRequests": 1,
+        "totalNanoAiu": 17968270000,
+        "tokenDetails": {
+          "input": {
+            "tokenCount": 512
+          },
+          "cache_read": {
+            "tokenCount": 45687
+          },
+          "cache_write": {
+            "tokenCount": 24536
+          },
+          "output": {
+            "tokenCount": 11275
+          }
+        }
+      }
+    }
+  ],
+  "local": {
+    "ctests": 856,
+    "profiles": [
+      "Clang64 Debug",
+      "Clang64 ASan/UBSan",
+      "GCC32 Debug"
+    ],
+    "profile_counts": [
+      295,
+      295,
+      266
+    ],
+    "independent_assertions_per_profile": 1872900,
+    "failure_modes": 4,
+    "object_audits": 40,
+    "pc_images": [
+      {
+        "case": "clang-64-O0",
+        "sha256": "ef670d696f5df7550cda3a393d7a215e04e088b2f12b694f8705c179e82dd452",
+        "size_bytes": 227328,
+        "image_size": 241664,
+        "relocations": 3,
+        "status": "passed-unloaded"
+      },
+      {
+        "case": "clang-64-O2",
+        "sha256": "cc667453316e262de61af774c880e3607b034cded3d742957b220a589f36e042",
+        "size_bytes": 159232,
+        "image_size": 172032,
+        "relocations": 3,
+        "status": "passed-unloaded"
+      }
+    ],
+    "efi_corruption_rejections": 27,
+    "omitted_object_rejections": 22,
+    "native_disk_sha256": "e9567ac8f91c48dd435ed7fc7c1021511da131ab8975a7ca7a3ad17aeaa8127c",
+    "efi_payload_sha256": "cc667453316e262de61af774c880e3607b034cded3d742957b220a589f36e042",
+    "writer_twins_equal": true,
+    "target_executed": false,
+    "tracked_source_dirty_at_local_build": true
+  },
+  "ci": {
+    "status": "pending"
+  },
+  "native_mac": {
+    "status": "pending CI compiler/closure verification",
+    "target_executed": false
+  },
+  "draft_bundle": {
+    "prepared": false,
+    "published": false
+  },
+  "lead_decisions": [
+    "Interpret owner PC/x86 wording in existing nativeMac68000/x86 PC parity context; current version/published pointers unchanged,PC preview entry remains unassigned/unreleased.",
+    "Adopt additional index==selection-step integrity check; selected root-local ID bindings imply it.",
+    "New PC mode uses static progress0 matching Mac; old modes retain timed progress. B2 visible-progress qualification does not transfer.",
+    "Copilot oracle locals promoted to int64 as requested; no new implementation exposure.",
+    "Codex mechanical build/manifest wiring,four failure/retained-effect controls and source/packaging records."
+  ],
+  "instruction_deviations": [
+    "Copilot five view actions: initial >20KiB read refused,forced full21376-byte prompt read reachedEOF,then unnecessary input directory listing,benign session-settings.json read and prompt-line reread. No excluded input or implementation exposed.",
+    "Copilot handoff claimed about190 lines; artifact is133 lines; CMake absence reported as blocker although source-only assignment deliberately left CMake to Codex."
+  ],
+  "future_worker_controls": [
+    "Copilot input directories contain only prompt.txt; Claude control JSON stays only in Claude directory.",
+    "Keep each view-read packet below18KiB or split into exact named chunks; a file is not unlimited context or tool-read capacity."
+  ],
+  "preservation": {
+    "research_originals": 24,
+    "protected_old_files_byte_identical": 98,
+    "published_versions_and_assets_unchanged": true,
+    "uart_and_existing_manager_bodies_unchanged": true,
+    "seven_existing_screenshots_unchanged": true,
+    "wiki_retired": true
+  },
+  "new_target_trial_or_publication": false,
+  "historical_questions_open": [
+    "H1",
+    "H2",
+    "H3",
+    "H4",
+    "H5"
+  ],
+  "remaining_external_allowances": {
+    "Claude": "unavailable",
+    "Copilot": "unavailable",
+    "Grok": "unavailable",
+    "Antigravity": "unavailable"
+  }
+}

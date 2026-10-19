@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "candidate": "paired-native-preview-1",
+  "status": "draft-in-development",
+  "owner_source": "SRC-0291",
+  "decision": "ADR-0055",
+  "specification": "SPEC-0049",
+  "targets": {
+    "mac": {
+      "architecture": "68000",
+      "artifact": "original ROM",
+      "proposed_version": "0.3.0-alpha.1",
+      "build_mode": "--outline-drawing",
+      "compiler_verified": false,
+      "boot_qualified": false,
+      "human_input_qualified": false
+    },
+    "pc": {
+      "architecture": "x86-64",
+      "artifact": "EFI and original boot disk",
+      "proposed_version": "0.1.0-alpha.1",
+      "build_mode": "-OutlineDrawing",
+      "compiler_verified": false,
+      "boot_qualified": false,
+      "human_input_qualified": false
+    }
+  },
+  "feature_checks": {
+    "native_outline_and_selection": false,
+    "shared_scene_and_static_progress": false,
+    "counter_redraw_preserves_scene": false,
+    "independent_fault_and_sanitizer_checks": false
+  },
+  "packages": {
+    "draft_prepared": false,
+    "published": false
+  },
+  "release_ready": false,
+  "blockers": [
+    "Both exact-byte candidate boot qualifications need fresh owner trial approval.",
+    "Ordinary human input walkthrough and reviewed screenshots pending.",
+    "Document and resolve/accept PC diagnostic session lifecycle.",
+    "Draft package/source/license/checksum review and final freeze pending.",
+    "Publication requires explicit owner request for reviewed candidates."
+  ],
+  "unchanged_gates": [
+    "clean-room/source/role",
+    "historical/edition",
+    "physical hardware",
+    "full128K",
+    "B2",
+    "native external applications",
+    "Linux complete edition",
+    "both System1/ROM boot directions"
+  ],
+  "new_target_run_or_publication_authorized": false
+}

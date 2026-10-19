@@ -23,6 +23,16 @@
       "release_notes": null,
       "changelog": "releases/system/CHANGELOG.md",
       "latest_published_version": null
+    },
+    "pc": {
+      "name": "ClasSICK PC Preview",
+      "version": null,
+      "state": "unreleased",
+      "tag_prefix": "pc-v",
+      "candidate_record": null,
+      "release_notes": null,
+      "changelog": "releases/pc/CHANGELOG.md",
+      "latest_published_version": null
     }
   }
 }

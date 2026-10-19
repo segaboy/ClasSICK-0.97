@@ -3280,3 +3280,19 @@ resulting public/HQ evidence after automatic approval initially blocked main.
 ## SRC-0290 - Lead outline integration and verification
 
 - Codex freezes API,adopts core and independent oracle with recorded corrections,wires separate build/audits and runs verification. Original engineering evidence,no historical claim. [Receipt](../docs/development/native-outline-evidence.md).
+
+## SRC-0291 - Owner release-oriented parity continuation
+
+- Dean Howell,2026-10-19: "I want you to continue the work you're already doing, but tune it so that you're always working toward a new release." In the ongoing nativeMac/x86 context this accepts a named paired candidate,matching feature/readiness criteria and current outline integration/compiler/draft-preparation work; no standing target-run/publication permission. [Receipt](../docs/development/paired-preview-evidence.md).
+
+## SRC-0292 - Claude paired outline workload and bindings
+
+- One bounded Opus5.5 low frozen reviewed-public/original packet;79 workload lines,63 spec lines,6 exact binding replacements,53.84s,zero tools/writes/tests. Proposals reviewed by lead. [Receipt](../docs/development/paired-preview-evidence.md).
+
+## SRC-0293 - Copilot independent paired-scene oracle
+
+- One bounded Sonnet5.5 low API/contract/old-test-style packet;133 test lines,94.27s,new implementation/logs withheld.5 view actions included redundant prompt reads,one listing and benign session-settings.json despite prompt-only scope; no excluded input/implementation exposure,writes or tests. [Receipt](../docs/development/paired-preview-evidence.md).
+
+## SRC-0294 - Lead paired preview release decisions and verification
+
+- Codex selects paired-native-preview-1,freezes original geometry/API and release criteria,adopts reviewed worker artifacts,wires builds/negative controls and performs actual verification. Published versions/assets remain immutable; historical and target qualifications remain separate. [Receipt](../docs/development/paired-preview-evidence.md).

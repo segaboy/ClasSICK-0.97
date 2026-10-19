@@ -2,9 +2,10 @@
 # Copyright (C) 2026 Dean Howell.
 [CmdletBinding()]
 param([Parameter(Mandatory=$true)][string]$BuildRoot,
-    [ValidateSet('none','ud','gp')][string]$FaultProbe='none',[switch]$SelectedDrawing)
+    [ValidateSet('none','ud','gp')][string]$FaultProbe='none',[switch]$SelectedDrawing,[switch]$OutlineDrawing)
 Set-StrictMode -Version Latest
 $ErrorActionPreference='Stop'
+if($SelectedDrawing -and $OutlineDrawing){throw 'Select only one drawing profile.'}
 $repoRoot=[IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..'))
 $BuildRoot=[IO.Path]::GetFullPath($BuildRoot)
 if(Test-Path -LiteralPath $BuildRoot){throw 'Use a fresh EFI output directory.'}
@@ -45,6 +46,13 @@ try {
         $allowedImports[[Array]::IndexOf($sources,'apps/selected-drawing/workload.c')]='cs_qd_select_get,cs_qd_select_set,cs_qd_view_init,cs_qd_view_offset,cs_qd_view_clip,cs_qd_view_rect'
         $allowedImports[[Array]::IndexOf($sources,'personality/system1/quickdraw-select.c')]=''
     }
+    if($OutlineDrawing) {
+        $sources+=@('apps/outline-drawing/workload.c','personality/system1/quickdraw-select.c','personality/system1/quickdraw-outline.c')
+        $allowedImports[9]+=',cs_outline_draw'
+        $allowedImports[[Array]::IndexOf($sources,'apps/outline-drawing/workload.c')]='cs_qd_select_get,cs_qd_select_set,cs_qd_view_init,cs_qd_view_offset,cs_qd_view_clip,cs_qd_view_outline'
+        $allowedImports[[Array]::IndexOf($sources,'personality/system1/quickdraw-select.c')]=''
+        $allowedImports[[Array]::IndexOf($sources,'personality/system1/quickdraw-outline.c')]=''
+    }
     $common=@('-m64','-Wall','-Wextra','-Wpedantic','-Werror','-Wconversion','-Wsign-conversion',
         '-ffreestanding','-fno-builtin','-fno-stack-protector','-fno-ident','-mno-red-zone','-mgeneral-regs-only','-Wframe-larger-than=2048',
         '-fno-asynchronous-unwind-tables','-fno-unwind-tables',"-ffile-prefix-map=$repoRoot=.")
@@ -61,7 +69,8 @@ try {
                 else{
                     $profileFlags=@()
                     if($sources[$i] -eq 'platform/uefi/keyboard.c'){$profileFlags=@('-DCLASSICK_PC_MOUSE=1')}
-                    if($SelectedDrawing){$profileFlags+='-DCLASSICK_SELECTED_DRAWING=1'}
+                    if($SelectedDrawing -or $OutlineDrawing){$profileFlags+='-DCLASSICK_SELECTED_DRAWING=1'}
+                    if($OutlineDrawing){$profileFlags+='-DCLASSICK_OUTLINE_DRAWING=1'}
                     & $compiler @common @profileFlags -std=c11 "-O$opt" -c (Join-Path $repoRoot $sources[$i]) -o $object
                 }
                 if($LASTEXITCODE -ne 0){throw 'Original EFI compile failed.'}
@@ -84,6 +93,10 @@ try {
             & $compiler @link "-Wl,-Map,$map" @objects -o $image
             if($LASTEXITCODE -ne 0){throw 'Original EFI link failed.'}
             $audit=& (Join-Path $PSScriptRoot 'Test-UEFIImage.ps1') -Image $image -Map $map -FaultProbe $FaultProbe -PassThru
+            if($OutlineDrawing){
+                $mapText=[IO.File]::ReadAllText($map)
+                foreach($name in @('cs_outline_draw','cs_qd_view_outline','cs_qd_select_get','cs_qd_select_set')){if($mapText -notmatch ('\b'+$name+'\b')){throw 'Disconnected native outline preview.'}}
+            }
             $inspection=@(& $reader --file-headers --coff-imports --coff-basereloc $image)
             if($LASTEXITCODE -ne 0 -or ($inspection -join "`n") -match '(?m)^Import \{' -or
                 ($inspection -join "`n") -notmatch 'IMAGE_SUBSYSTEM_EFI_APPLICATION'){throw 'Independent EFI inspection failed.'}
@@ -176,6 +189,7 @@ try {
     $missing | Out-File -LiteralPath (Join-Path $controls 'missing-acpi.log') -Encoding UTF8
     $componentControls=@(@(14,'ps2','cs_ps2_poll'),@(15,'keyboard','cs_native_keyboard_observed'),@(16,'input','cs_input_push'),@(17,'byte-io','cs_x64_inb|cs_x64_outb'),@(18,'uart','cs_uart_poll'),@(19,'native-uart','cs_native_uart_loop'),@(20,'services','cs_trap_call'),@(21,'service-probe','cs_service_probe'),@(22,'m68k','cs_m68k_step'),@(23,'aline-probe','cs_aline_probe'),@(([Array]::IndexOf($sources,'apps/native-drawing/workload.c')),'native-drawing','cs_native_draw'),@([Array]::IndexOf($sources,'core/input/mouse.c'),'mouse-button','cs_mouse_button_'),@([Array]::IndexOf($sources,'platform/pc/ps2-mouse.c'),'mouse-packet','cs_ps2_mouse_'),@([Array]::IndexOf($sources,'platform/pc/ps2-bus.c'),'mouse-bus','cs_ps2_bus_'),@([Array]::IndexOf($sources,'personality/system1/quickdraw-view.c'),'drawing-view','cs_qd_view_'))
     if($SelectedDrawing){$componentControls+=@(@([Array]::IndexOf($sources,'apps/selected-drawing/workload.c'),'selected-workload','cs_selected_draw'),@([Array]::IndexOf($sources,'personality/system1/quickdraw-select.c'),'selected-core','cs_qd_select_'))}
+    if($OutlineDrawing){$componentControls+=@(@([Array]::IndexOf($sources,'apps/outline-drawing/workload.c'),'outline-workload','cs_outline_draw'),@([Array]::IndexOf($sources,'personality/system1/quickdraw-select.c'),'outline-selection','cs_qd_select_'),@([Array]::IndexOf($sources,'personality/system1/quickdraw-outline.c'),'outline-core','cs_qd_view_outline'))}
     foreach($control in $componentControls) {
         try {
             $ErrorActionPreference='Continue'
@@ -188,11 +202,11 @@ try {
     $payload=Join-Path $BuildRoot 'payload/EFI/BOOT'; [void][IO.Directory]::CreateDirectory($payload)
     $packaged=Join-Path $payload 'BOOTX64.EFI'; Copy-Item -LiteralPath $release -Destination $packaged
     if((Get-FileHash -LiteralPath $packaged -Algorithm SHA256).Hash.ToLowerInvariant() -ne $results[1].sha256){throw 'EFI payload copy differs.'}
-    [ordered]@{fault_probe=$FaultProbe;selected_drawing=[bool]$SelectedDrawing;missing_selected_workload_controls=[int][bool]$SelectedDrawing;missing_selected_core_controls=[int][bool]$SelectedDrawing;images=$results;image_rejections=$mutations.Count;profile_rejections=[int]($FaultProbe -ne 'none');missing_transition_controls=1;missing_exceptions_controls=1;missing_presenter_controls=1;missing_acpi_controls=1;
+    [ordered]@{fault_probe=$FaultProbe;outline_drawing=[bool]$OutlineDrawing;missing_outline_controls=(3*[int][bool]$OutlineDrawing);selected_drawing=[bool]$SelectedDrawing;missing_selected_workload_controls=[int][bool]$SelectedDrawing;missing_selected_core_controls=[int][bool]$SelectedDrawing;images=$results;image_rejections=$mutations.Count;profile_rejections=[int]($FaultProbe -ne 'none');missing_transition_controls=1;missing_exceptions_controls=1;missing_presenter_controls=1;missing_acpi_controls=1;
         missing_ps2_controls=1;missing_keyboard_controls=1;missing_input_controls=1;missing_byte_io_controls=1;
         missing_uart_controls=1;missing_native_uart_controls=1;missing_service_controls=1;missing_service_probe_controls=1;
         missing_m68k_controls=1;missing_aline_probe_controls=1;missing_native_drawing_controls=1;missing_mouse_button_controls=1;missing_mouse_packet_controls=1;missing_mouse_bus_controls=1;missing_drawing_view_controls=1;drawing_context_specification='SPEC-0041';pc_mouse_profile=1;keyboard_trace_version=2;
         payload='payload/EFI/BOOT/BOOTX64.EFI';payload_kind='directory-tree-not-disk';loaded=$false} |
         ConvertTo-Json -Depth 8 | Set-Content -LiteralPath (Join-Path $BuildRoot 'efi-results.json') -Encoding UTF8
-    Write-Output "EFI inspection PASS: four twin images, $($mutations.Count) corruption rejections, $(19+2*[int][bool]$SelectedDrawing) omitted-object rejections and original payload tree; no image executed."
+    Write-Output "EFI inspection PASS: four twin images, $($mutations.Count) corruption rejections, $(19+2*[int][bool]$SelectedDrawing+3*[int][bool]$OutlineDrawing) omitted-object rejections and original payload tree; no image executed."
 } finally{$env:PATH=$originalPath}

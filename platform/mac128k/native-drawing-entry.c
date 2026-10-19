@@ -32,8 +32,14 @@ static void write_reg(void *context,unsigned reg,uint8_t value)
 }
 
 #include "../../apps/product-scene/scene.h"
+#if defined(CLASSICK_OUTLINE_DRAWING) && !defined(CLASSICK_SELECTED_DRAWING)
+#error "CLASSICK_OUTLINE_DRAWING requires CLASSICK_SELECTED_DRAWING=1"
+#endif
 #ifdef CLASSICK_SELECTED_DRAWING
 #include "../../apps/selected-drawing/workload.h"
+#ifdef CLASSICK_OUTLINE_DRAWING
+#include "../../apps/outline-drawing/workload.h"
+#endif
 static cs_selected_draw_workspace selected __attribute__((section(".loaded_app")));
 cs_selected_draw_result cs_mac_selected_result;
 #define CS_MAC_DRAW cs_mac_selected_result.draw
@@ -69,7 +75,11 @@ void cs_mac_main(void)
 #ifdef CLASSICK_SELECTED_DRAWING
     uint8_t *bytes=(uint8_t *)&selected;for(size_t i=0;i<sizeof selected;++i)bytes[i]=0;
     (void)native_scene(&screen);
+#ifdef CLASSICK_OUTLINE_DRAWING
+    int success=cs_outline_draw(&selected,&cs_mac_selected_result);
+#else
     int success=cs_selected_draw(&selected,&cs_mac_selected_result);
+#endif
 #else
     uint8_t *bytes=(uint8_t *)&port;for(size_t i=0;i<sizeof port;++i)bytes[i]=0;
     (void)native_scene(&screen);

@@ -7,6 +7,12 @@
 #ifdef CLASSICK_SELECTED_DRAWING
 #include "../selected-drawing/workload.h"
 #endif
+#ifdef CLASSICK_OUTLINE_DRAWING
+#ifndef CLASSICK_SELECTED_DRAWING
+#error "CLASSICK_OUTLINE_DRAWING requires CLASSICK_SELECTED_DRAWING=1"
+#endif
+#include "../outline-drawing/workload.h"
+#endif
 typedef struct {
     cs_trap_gateway gateway;
 #ifdef CLASSICK_SELECTED_DRAWING
@@ -58,7 +64,11 @@ cs_boot_result cs_boot_scene_prepare(cs_arena *arena,const cs_fb_target *target,
     cs_service_probe_result service;
 #ifdef CLASSICK_SELECTED_DRAWING
     if(!cs_service_probe(&w->gateway,&service) ||
+#ifdef CLASSICK_OUTLINE_DRAWING
+        !cs_outline_draw(&w->selected,&w->result))return CS_BOOT_PROBE;
+#else
         !cs_selected_draw(&w->selected,&w->result))return CS_BOOT_PROBE;
+#endif
 #else
     if(!cs_service_probe(&w->gateway,&service) ||
         !cs_native_draw(&w->port,&w->result))return CS_BOOT_PROBE;
@@ -119,7 +129,11 @@ cs_boot_result cs_boot_scene_draw_input(const cs_boot_scene *scene,uint32_t step
                 (int32_t)rows,(size_t)target.width*4u,CS_SURFACE_RGBA8)!=CS_SURFACE_OK)
             return report_result(report,CS_BOOT_ARENA);
         cs_product_state state;
+#ifdef CLASSICK_OUTLINE_DRAWING
+        state.value=scene->state.value;state.inputs=inputs;state.progress=0;
+#else
         state.value=scene->state.value;state.inputs=inputs;state.progress=step%17u;
+#endif
         state.phases=scene->state.phases;state.success=scene->state.success;state.pixels=scene->state.pixels;
         if(!cs_product_scene(&band,(int32_t)target.width,(int32_t)target.height,
                 (int32_t)top,&state))return report_result(report,CS_BOOT_SCENE);

@@ -50,6 +50,23 @@ jobs:
           .\scripts\Verify-UEFIImage.ps1 -BuildRoot build\selected-drawing-efi -SelectedDrawing
           .\scripts\Package-SelectedDrawingPC.ps1 -BuildRoot build\selected-drawing-efi -MediaWriter build\media-verification\clang-hosted\debug-a\classick_boot_media.exe -TwinWriter build\media-verification\gcc-i686\classick_boot_media.exe
           .\scripts\Verify-SelectedDrawingObjects.ps1 -BuildRoot build\selected-drawing-objects
+      - name: Build paired native outline PC preview candidate (unbooted)
+        shell: pwsh
+        run: |
+          .\scripts\Verify-UEFIImage.ps1 -BuildRoot build\outline-drawing-efi -OutlineDrawing
+          .\scripts\Package-OutlineDrawingPC.ps1 -BuildRoot build\outline-drawing-efi -MediaWriter build\media-verification\clang-hosted\debug-a\classick_boot_media.exe -TwinWriter build\media-verification\gcc-i686\classick_boot_media.exe
+          .\scripts\Verify-OutlineDrawingObjects.ps1 -BuildRoot build\outline-drawing-objects
+      - name: Retain paired native outline PC preview candidate
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
+        with:
+          name: classick-outline-preview-pc
+          path: |
+            build/outline-drawing-efi/efi-results.json
+            build/outline-drawing-efi/outline-media.json
+            build/outline-drawing-efi/outline-drawing.img
+            build/outline-drawing-efi/payload/EFI/BOOT/BOOTX64.EFI
+            build/outline-drawing-objects/manifest.json
+          if-no-files-found: error
       - name: Retain paired selected-port PC candidate
         uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
         with:
@@ -269,4 +286,17 @@ jobs:
             ${{ runner.temp }}/classick-selected-drawing/manifest.json
             ${{ runner.temp }}/classick-selected-drawing/Os-a/classick-loaded-app.rom
             ${{ runner.temp }}/classick-selected-drawing-closure/manifest.json
+          if-no-files-found: error
+      - name: Build paired native outline Mac preview candidate (unbooted)
+        run: python3 scripts/Build-LoadedAppROM.py --outline-drawing --tool-root "$RUNNER_TEMP/classick-m68k/root" --output "$RUNNER_TEMP/classick-outline-preview"
+      - name: Audit isolated native outline closure
+        run: python3 scripts/Verify-NativeDrawingM68k.py --tool-root "$RUNNER_TEMP/classick-m68k/root" --rom-build "$RUNNER_TEMP/classick-outline-preview" --output "$RUNNER_TEMP/classick-outline-closure"
+      - name: Retain paired native outline Mac preview candidate
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
+        with:
+          name: classick-outline-preview-mac
+          path: |
+            ${{ runner.temp }}/classick-outline-preview/manifest.json
+            ${{ runner.temp }}/classick-outline-preview/Os-a/classick-loaded-app.rom
+            ${{ runner.temp }}/classick-outline-closure/manifest.json
           if-no-files-found: error

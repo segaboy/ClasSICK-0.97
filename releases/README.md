@@ -1,5 +1,7 @@
 # Independent ROM and System releases
 
+Current owner direction2026-10-19: work toward paired native Macintosh/x86 PC preview releases. [ADR-0055](../docs/adr/0055-paired-release-cadence.md) and [paired-native-preview-1](paired-native-preview-1.md) define the bounded target and readiness matrix. PC preview is currently unversioned/unreleased; proposed versions are draft only. Existing ROM/System pointers and published assets unchanged; target trials and publication still need explicit owner decisions.
+
 2026-10-15 groundwork SRC-0198; 2026-10-16 alpha publication SRC-0200/0201; next release SRC-0215/0216;
 [ADR-0040](../docs/adr/0040-independent-rom-system-releases.md).
 The ROM has its own release series. The owner requested the new drawing/shared-scene
@@ -16,6 +18,7 @@ our implementation's development releases. R-001's historical identity remains o
 | --- | --- | --- | --- |
 | ClasSICK ROM | 0.2.0-alpha.1 | Published experimental prerelease, 2026-10-16 | rom-v0.2.0-alpha.1 |
 | ClasSICK System software | Unassigned | Unreleased | system-vMAJOR.MINOR.PATCH |
+| ClasSICK PC Preview | Unassigned | Unreleased | pc-vMAJOR.MINOR.PATCH |
 
 Versions use MAJOR.MINOR.PATCH, optionally followed by alpha.N, beta.N or rc.N.
 Group fixes into the next candidate; advance the minor version for a substantial

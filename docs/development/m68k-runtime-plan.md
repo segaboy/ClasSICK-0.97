@@ -1,5 +1,7 @@
 # 68000 application runtime plan - 2026-10-12
 
+2026-10-19: owner directs every substantive slice toward paired nativeMac68000/x86 PC preview releases. Current target [paired-native-preview-1](../../releases/paired-native-preview-1.md),ADR-0055: finish outlines in both native scenes,then package/qualify/freeze the pair. Compiler/hosted/target/human/package/publication states are distinct; no launch/publication permission expands.
+
 2026-10-19: SPEC-0048 separate original native68000/x86 outline helper implemented; independent pixel/state/canary tests and compiler/CI checks recorded. No existing scene/ROM/EFI input or trap change,target run or release. H1-H5 and existing gates remain open. [Evidence](native-outline-evidence.md).
 
 2026-10-18: SPEC-0047 adds the shared native two-port visual workload and explicit Mac/PC candidates. Final hosted/sanitized/compiler/media checks pass; paired CI/native68000 ROM and native PC disk verification pass. Existing modes and input behavior preserved; no target run/release. [Evidence](paired-selection-evidence.md).

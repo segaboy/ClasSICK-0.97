@@ -1,5 +1,7 @@
 # Current milestones and release tracks
 
+2026-10-19: owner directs every substantive slice toward paired nativeMac68000/x86 PC preview releases. Current target [paired-native-preview-1](../releases/paired-native-preview-1.md),ADR-0055: finish outlines in both native scenes,then package/qualify/freeze the pair. Compiler/hosted/target/human/package/publication states are distinct; no launch/publication permission expands.
+
 2026-10-19: SPEC-0048 separate original native68000/x86 outline helper implemented; independent pixel/state/canary tests and compiler/CI checks recorded. No existing scene/ROM/EFI input or trap change,target run or release. H1-H5 and existing gates remain open. [Evidence](development/native-outline-evidence.md).
 
 2026-10-18: reviewed native Mac/PC boot screenshots now live in Git for research/web discovery: [image index](evidence/screenshots/README.md). SPEC-0048 defines the next paired native rectangle-outline contract; implementation and44 proposed checks remain pending.

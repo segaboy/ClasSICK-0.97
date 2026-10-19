@@ -27,7 +27,8 @@ def main():
     mode.add_argument('--drawing',action='store_true',help='Build the SPEC-0036 interpreted drawing candidate')
     mode.add_argument('--native-drawing',action='store_true',help='Build the SPEC-0038 direct native drawing candidate')
     mode.add_argument('--selected-drawing',action='store_true',help='Build the SPEC-0047 direct native two-port candidate')
-    a=p.parse_args();native=a.native_drawing or a.selected_drawing;repo=Path(__file__).resolve().parents[1];tools=Path(a.tool_root).resolve();out=Path(a.output).resolve()
+    mode.add_argument('--outline-drawing',action='store_true',help='Build the SPEC-0049 paired native outline preview')
+    a=p.parse_args();native=a.native_drawing or a.selected_drawing or a.outline_drawing;repo=Path(__file__).resolve().parents[1];tools=Path(a.tool_root).resolve();out=Path(a.output).resolve()
     out.mkdir(parents=True,exist_ok=False);sys.dont_write_bytecode=True
     spec=spec_from_file_location('base_rom',repo/'scripts/Build-MacROM.py');h=module_from_spec(spec);spec.loader.exec_module(h)
     env=os.environ.copy();env['LD_LIBRARY_PATH']=str(tools/'usr/lib/x86_64-linux-gnu')
@@ -55,6 +56,10 @@ def main():
         headers+=('apps/selected-drawing/workload.h','personality/system1/quickdraw-select.h',
                   'docs/specifications/SPEC-0047-paired-selected-drawing.md')
         specification='SPEC-0047';profile='native-selected-ports-v1'
+    if a.outline_drawing:
+        sources+=('apps/outline-drawing/workload.c','personality/system1/quickdraw-select.c','personality/system1/quickdraw-outline.c')
+        headers+=('apps/outline-drawing/workload.h','apps/selected-drawing/workload.h','personality/system1/quickdraw-select.h','personality/system1/quickdraw-outline.h','docs/specifications/SPEC-0048-native-rectangle-outline.md','docs/specifications/SPEC-0049-paired-native-outline.md')
+        specification='SPEC-0049';profile='native-outline-preview-v1'
     profiles=[]
     for twin in ('a','b'):
         folder=out/('Os-'+twin);folder.mkdir();objects=[]
@@ -63,7 +68,8 @@ def main():
          '-fno-asynchronous-unwind-tables','-fno-tree-loop-distribute-patterns','-fstack-usage',
          '-ffunction-sections','-fdata-sections','-Wall','-Wextra','-Werror','-Wconversion','-Wsign-conversion',
          '--sysroot='+str(tools),'-ffile-prefix-map='+str(repo)+'=.','-ffile-prefix-map='+str(folder)+'=.']
-        if a.selected_drawing:flags+=['-DCLASSICK_SELECTED_DRAWING=1']
+        if a.selected_drawing or a.outline_drawing:flags+=['-DCLASSICK_SELECTED_DRAWING=1']
+        if a.outline_drawing:flags+=['-DCLASSICK_OUTLINE_DRAWING=1']
         for i,source in enumerate(sources):
             obj=folder/f'{i}.o';objects.append(obj);h.run([cc,*flags,'-c',repo/source,'-o',obj],env)
             if source not in ('platform/mac128k/loaded-entry.c','platform/mac128k/drawing-entry.c','platform/mac128k/native-drawing-entry.c'):
@@ -78,6 +84,7 @@ def main():
         required=('cs_native_draw','cs_qd_rect','cs_qd_view_init','cs_qd_view_offset','cs_qd_view_clip','cs_qd_view_rect','cs_product_scene') if native else (('cs_drawing_app_probe','cs_image_run_rectangles') if a.drawing else ('cs_loaded_app_probe','cs_image_run'))
         if not native:required=(*required,'cs_m68k_bus_step_admitted')
         if a.selected_drawing:required=tuple(x for x in required if x!='cs_native_draw')+('cs_selected_draw','cs_qd_select_get','cs_qd_select_set')
+        if a.outline_drawing:required=tuple(x for x in required if x not in ('cs_native_draw','cs_qd_rect','cs_qd_view_rect'))+('cs_outline_draw','cs_qd_view_outline','cs_qd_select_get','cs_qd_select_set')
         if any(name not in syms for name in required):raise ValueError('Disconnected demonstration')
         if native and any(name.startswith(('cs_image_','cs_m68k_','cs_drawing_app_','cs_aline_probe')) for name in syms):
             raise ValueError('Unexpected interpreted application in native drawing profile')
@@ -119,7 +126,7 @@ def main():
     manifest={'schema_version':1,'specification':specification,'profile':profile,
      'compiler':h.run([cc,'--version'],env).splitlines()[0],'profiles':[profiles[0]],'twins_equal':True,
      'original_program_bytes':len(bytes.fromhex(program_hex)),'execution_path':'direct-native-c' if native else 'guarded-68k-fixture',
-     'module_count':len(sources),'selected_ports':bool(a.selected_drawing),'native_drawing_context':('SPEC-0041' if native else None),'emulator_run':False,'system1_compatibility_proven':False,
+     'module_count':len(sources),'selected_ports':bool(a.selected_drawing or a.outline_drawing),'outline_drawing':bool(a.outline_drawing),'native_drawing_context':('SPEC-0041' if native else None),'emulator_run':False,'system1_compatibility_proven':False,
      'inputs':{f:hashlib.sha256((repo/f).read_bytes().replace(b'\r\n',b'\n')).hexdigest() for f in (*sources,*headers)}}
     (out/'manifest.json').write_text(json.dumps(manifest,indent=2)+'\n')
     print('First loaded-app ROM twins PASS:',profiles[0]['rom_used'],'ROM bytes,',profiles[0]['workspace_end']-0x8000,'workspace bytes; no boot trial.')

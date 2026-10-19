@@ -16,13 +16,15 @@ def main():
     p.add_argument('--output',required=True,type=Path)
     a=p.parse_args();repo=Path(__file__).resolve().parents[1]
     manifest=json.loads((a.rom_build/'manifest.json').read_text())
-    if (manifest['specification'] not in ('SPEC-0038','SPEC-0047') or manifest['execution_path']!='direct-native-c'
+    if (manifest['specification'] not in ('SPEC-0038','SPEC-0047','SPEC-0049') or manifest['execution_path']!='direct-native-c'
         or manifest.get('native_drawing_context')!='SPEC-0041'):
         raise ValueError('Require the paired native ROM build')
     modules=list(manifest['inputs'])[:manifest['module_count']]
     selected=('apps/native-drawing/workload.c','personality/system1/quickdraw-view.c','personality/system1/quickdraw-rects.c','arch/m68k/runtime.c')
     if manifest['specification']=='SPEC-0047':
         selected=('apps/selected-drawing/workload.c','personality/system1/quickdraw-select.c',*selected[1:])
+    if manifest['specification']=='SPEC-0049':
+        selected=('apps/outline-drawing/workload.c','personality/system1/quickdraw-select.c','personality/system1/quickdraw-outline.c',*selected[1:])
     for name in selected:
         if hashlib.sha256((repo/name).read_bytes().replace(b'\r\n',b'\n')).hexdigest()!=manifest['inputs'][name]:
             raise ValueError('Native input changed: '+name)
@@ -41,6 +43,7 @@ def main():
             raise ValueError('Native closure contains imports or a compatibility dependency')
         required=('cs_qd_rect','cs_qd_view_init','cs_qd_view_offset','cs_qd_view_clip','cs_qd_view_rect')
         required+=('cs_selected_draw','cs_qd_select_get','cs_qd_select_set') if manifest['specification']=='SPEC-0047' else ('cs_native_draw',)
+        if manifest['specification']=='SPEC-0049':required=tuple(x for x in required if x!='cs_native_draw')+('cs_outline_draw','cs_qd_view_outline','cs_qd_select_get','cs_qd_select_set')
         if not all(token in names for token in required):
             raise ValueError('Native workload/service absent')
         records.append(dict(bytes=dest.stat().st_size,sha256=hashlib.sha256(dest.read_bytes()).hexdigest()))
