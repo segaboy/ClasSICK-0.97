@@ -52,7 +52,11 @@ def man(*entries, **kw):
 
 class Base(unittest.TestCase):
     def repo(self, files, stage=True):
-        d = tempfile.mkdtemp(prefix="shot-", dir=os.environ.get("TMP") or None)
+        parent = os.path.realpath(os.environ.get("TMP") or tempfile.gettempdir())
+        d = tempfile.mkdtemp(prefix="shot-", dir=parent)
+        resolved = os.path.realpath(d)
+        if resolved == parent or os.path.commonpath((parent, resolved)) != parent:
+            raise RuntimeError("Fixture cleanup target leaves its explicit temp root")
         self.addCleanup(shutil.rmtree, d, True)
         subprocess.run(["git", "init", "-q", d], check=True, capture_output=True)
         self.write(d, files)

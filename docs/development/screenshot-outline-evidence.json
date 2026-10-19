@@ -176,7 +176,8 @@
     "Outline intermediate range minimum-98303; pairwise disjoint readable/writable storage; remove poisoned-native-pointer test and invented documentation approval.",
     "Oracle fixtures now include required indexed palette, correct scanline lengths and split single-zlib consecutive IDAT; remove dead code and normalize license.",
     "Validator SPDX/copyright plus PNG reserved-bit/palette-depth guards. Exact v1 metadata fields chosen.",
-    "Codex wires small PowerShell index-only exception, binary attributes and CI test step."
+    "Codex wires small PowerShell index-only exception, binary attributes and CI test step.",
+    "Fixture cleanup resolves/checks its exact target inside the explicit temporary root before recursive removal; targeted acceptance test rerun passes."
   ],
   "instruction_deviations": [
     "Copilot270 lines exceeded200 target and handoff misstated11 methods/about200 lines; actual adopted suite has12 methods.",
