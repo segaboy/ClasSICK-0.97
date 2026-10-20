@@ -137,9 +137,10 @@
     "specification": "SPEC-0054",
     "implementation": "IMPL-0057",
     "verification": "TEST-0065",
-    "status": "local-passed-native68000-ci-pending",
+    "status": "hosted-and-native68000-compiler-verified-unbound",
     "boot_bound": false,
     "input_owner_installed": false,
-    "evidence": "docs/development/window-composition-evidence.json"
+    "evidence": "docs/development/window-composition-evidence.json",
+    "source_revision": "6be9f0dbc425e6890c5cd9766debf25747c2ab91"
   }
 }

@@ -18,8 +18,11 @@ Independent new-compositor oracle compares2,008 complete images over8layouts;
 old backdrop API is shared,not independently reimplemented. Directed injected
 failures prove reported stages and explicit repaint recovery,not hardware traps.
 4 optimized Clang/GCC32/64 oracles pass;2 compiled defective compositions fail.
-12width/endian/EFI object audits pass. Native68000 CI pending at this source
-checkpoint.32-byte effect,no persistent compositor state or extra framebuffer.
+12width/endian/EFI object audits pass. Native68000 CI passes at6be9f0d:
+42compilations/6matching-twin closures,no imports/mutable data. Actual compiler
+frames are in the receipt,not whole-system stack/ROM/128K qualification.
+32-byte effect,no persistent compositor state or extra framebuffer.
+[Exact CI](https://github.com/segaboy/ClasSICK-0.97/actions/runs/39499537553).
 [Exact evidence and source pins](../../docs/development/window-composition-evidence.json).
 
 Existing pointer/window/cursor/base-scene APIs and boot workload source lists
