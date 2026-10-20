@@ -3392,3 +3392,27 @@ SRC-0300 executed checkpoint: CI3150/11;local596/2;38 mouse+5 Space events throu
   No worker/manual transfer, code, tests, build or target run.
   [Review](../docs/development/mac-pointer-source-review.md),
   [receipt](../docs/development/mac-pointer-source-review.json).
+
+
+## SRC-0316 - Owner cursor-contract continuation and Codex usage priority
+
+- Dean Howell,2026-10-19: "Remember, your goal was to protect Codex usage."
+  Then "OK, move on to the next development task." Accepts the proposed next
+  bounded cursor composition contract. Keep direct small tasks,one substantial
+  primary,optional distinct-risk help,concise required records and existing
+  clean-room/verification gates. No implementation or target/release expansion.
+
+## SRC-0317 - Claude original cursor contract and focused correction
+
+- One Claude primary,reviewed-public/original packet and one bounded correction
+  of concrete validation/lifecycle contradictions. No second provider,manual,
+  HQ,untracked original,UART,tool use,worker edit or executed test.
+  [Actual usage and dispositions](../docs/development/cursor-composition-review.json).
+
+## SRC-0318 - Lead cursor composition integration review
+
+- Codex reviews and integrates the original SPEC-0052 / ADR-0060 contract and
+  TEST-0062 unexecuted case inventory. The receipt distinguishes theoretical
+  native layouts/cost targets from future measured compiler/target evidence.
+  Original engineering decisions only,no historical behavior or runtime claim.
+  [Contract](../docs/specifications/SPEC-0052-native-cursor-composition.md).

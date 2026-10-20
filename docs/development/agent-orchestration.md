@@ -34,7 +34,7 @@ Standing service scope includes **Antigravity (`agy`)**, **GitHub Copilot CLI (`
 - **Kernel & Driver Code**: Unqualified kernel, driver, ABI, loader, or runtime code from external workers is not assumed safe.
 
 ## Quota Conservation & Division of Labor
-Highest priority is conserving **ChatGPT / Codex usage**:
+Highest priority is conserving **ChatGPT / Codex usage**. Minimize total Codex effort per verified deliverable, including briefing, context reads, review, integration and records; worker activity alone is not evidence of savings. Handle small tasks directly when coordination would cost comparable effort. Delegate substantial bounded deliverables, adopt sound artifacts, and keep required records concise without duplicating unchanged context. Preserve clean-room and verification requirements. Do not claim net savings without measurements that support that claim.
 1. **Codex Authority**: Codex alone holds repository edit, integration, decision, and final verification authority. Codex must never recreate a sound worker artifact.
 2. **Focused Worker Dispatch**: Give one worker a substantial bounded primary deliverable, which may contain several files. Add a second worker only for a distinct risk or unresolved gap. Do not send every task to every tool. Reuse prior qualifications and completed artifacts. This supersedes the old Codex-first implementation allocation.
 3. **No Cross-Provider Quota Equivalence**: Never equate external provider token counts or credits to ChatGPT quota. Do not spawn new ChatGPT chats or subagents.
@@ -174,3 +174,6 @@ Store future reviewed product evidence screenshots/manifest in Git for the owner
 research updater; transient private UI/logs stay outside. OneNote/wiki stay retired.
 
 The CLI print deadline is not a provider-side cancellation or spending guarantee; no reliable backend-cancellation or remaining-quota indicator was reported.
+
+
+Cursor-contract allocation2026-10-19: one Claude primary and one focused correction for concrete lifecycle/validation contradictions;no redundant provider review. Codex integrates sound sections,keeps compact contract/case inventory and required provenance/HQ records,and verifies documents only. [Receipt](cursor-composition-review.json).

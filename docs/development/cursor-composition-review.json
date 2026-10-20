@@ -1,0 +1,147 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-19",
+  "baseline": "3bdc896aafb4ce7e449a229a31407a1bf0c73d89",
+  "sources": [
+    "SRC-0316",
+    "SRC-0317",
+    "SRC-0318"
+  ],
+  "specification": "SPEC-0052",
+  "decision": "ADR-0060",
+  "case_inventory": "TEST-0062 within SPEC-0052",
+  "classification": "original-engineering-contract;not-historical",
+  "status": "reviewed-not-implemented",
+  "workers": [
+    {
+      "worker": "Claude",
+      "requested_model": "claude-opus-5-5",
+      "effort": "low",
+      "rounds": [
+        {
+          "round": "contract",
+          "execution": {
+            "round": "contract",
+            "worker": "claude",
+            "exit_code": 0,
+            "outer_timeout": false,
+            "elapsed_seconds": 161.2,
+            "input_bytes": 10731,
+            "input_sha256": "a4b05836ac0fa5ddb93a98535c9af1a4616ddd1637ca43319639b68067434b83",
+            "stderr_bytes": 0
+          },
+          "observed_tools": [],
+          "worker_edits": 0,
+          "tests_executed": [],
+          "provider_reported": {
+            "modelUsage": {
+              "claude-opus-5-5": {
+                "inputTokens": 2,
+                "outputTokens": 16536,
+                "cacheReadInputTokens": 2384,
+                "cacheCreationInputTokens": 4792,
+                "webSearchRequests": 0,
+                "costUSD": 0.36954079999999995,
+                "contextWindow": 1000000,
+                "maxOutputTokens": 128000,
+                "thinkingTokens": 8402,
+                "canonicalModel": "claude-opus-5-5",
+                "provider": "firstParty",
+                "costBasis": "list"
+              }
+            },
+            "total_cost_usd": 0.36954079999999995,
+            "num_turns": 1,
+            "permission_denials": []
+          }
+        },
+        {
+          "round": "repair",
+          "execution": {
+            "round": "repair",
+            "worker": "claude",
+            "exit_code": 0,
+            "outer_timeout": false,
+            "elapsed_seconds": 148.06,
+            "input_bytes": 21029,
+            "input_sha256": "4edf3775067a57dd07fa8bdb0cee5bd3355ae0c90f80ab143bc1f0f0f9c03668",
+            "stderr_bytes": 0
+          },
+          "observed_tools": [],
+          "worker_edits": 0,
+          "tests_executed": [],
+          "provider_reported": {
+            "modelUsage": {
+              "claude-opus-5-5": {
+                "inputTokens": 2,
+                "outputTokens": 17738,
+                "cacheReadInputTokens": 2384,
+                "cacheCreationInputTokens": 9554,
+                "webSearchRequests": 0,
+                "costUSD": 0.4316768,
+                "contextWindow": 1000000,
+                "maxOutputTokens": 128000,
+                "thinkingTokens": 9983,
+                "canonicalModel": "claude-opus-5-5",
+                "provider": "firstParty",
+                "costBasis": "list"
+              }
+            },
+            "total_cost_usd": 0.4316768,
+            "num_turns": 1,
+            "permission_denials": []
+          }
+        }
+      ]
+    }
+  ],
+  "second_worker": false,
+  "provider_deviations": [
+    "Initial213 lines exceeds210 cap by3.",
+    "Correction contains13 edits,not claimed12 and above12-edit cap;93 replacement-content lines stay within150 cap."
+  ],
+  "primary_dispositions": [
+    "Adopt caller-owned48B ILP32/56B LP64 theoretical state,separate48B Mono/1024B RGBA payload and64B original supplied art.",
+    "Adopt explicit init/bind/show/move/hide/advance/discard/repaired/unbind/abandon/query lifecycle,per-state tokens and truthful owner quiescence.",
+    "Use one focused correction for validation/status/field/capacity/output/repair contradictions;no redundant provider."
+  ],
+  "lead_clarifications": [
+    "Record accepted contract and stable unexecuted case inventory without installing an API.",
+    "Distinguish full art validation reads from clipped drawing.",
+    "Remove impossible promise to detect or avoid evaluating arbitrary never-initialized state.",
+    "Validate saved rectangle against the logical canvas as well as physical frame.",
+    "Avoid forbidding the scene pixel changes the lifecycle explicitly supports.",
+    "Make revision exhaustion safe even when the owner has already mutated pixels.",
+    "Do not claim every possible non-dereferencing overlap check is impossible; state what is actually guaranteed.",
+    "Restrict derived array validation to calls that may access descriptor/pixels.",
+    "Check retained descriptor ranges before reading its fields, with explicit precedence.",
+    "Include retained descriptor in complete pixel-call disjointness checks.",
+    "Give null art bits a defined pre-dereference ART refusal.",
+    "Bound the exact save-prefix writes and preserve unused payload capacity.",
+    "Cover all four corners, not just one.",
+    "Avoid a misleading huge live-buffer test with dishonest allocation capacity.",
+    "Clarify cancellation separation and bound the byte-residue sweep.",
+    "Make null-art-bit and candidate-bind range precedence explicit."
+  ],
+  "unexecuted_case_count": 34,
+  "feature_tests_executed": [],
+  "layout_verification": "theoretical offsets/sizes only;future compiler verification required",
+  "actual_stack_or_native_memory_measured": false,
+  "implementation_or_artwork_or_fixture_generated": false,
+  "builds": [],
+  "target_runs": [],
+  "release": false,
+  "remaining_gates": [
+    "Mac M1-M7 motion binding",
+    "PC GUI/human reliability",
+    "source/role/historical/edition/physical/full128K/B2/native-app/Linux/mini-vMac/both System1-ROM"
+  ],
+  "next_recommended": "original shared pointer/cursor helper implementation and independent hosted state/pixel tests under this reviewed contract,after owner acceptance;no target trial or release implied",
+  "external_remaining_usage": {
+    "Claude": null,
+    "Copilot": null,
+    "Grok": null,
+    "Antigravity": null
+  },
+  "usage_note": "Reported provider list cost is not billed cost,remaining allowance or cross-provider ChatGPT quota savings."
+}
