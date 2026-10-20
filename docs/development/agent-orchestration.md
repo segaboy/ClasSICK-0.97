@@ -190,3 +190,16 @@ but no worker tool use occurs. A print-process stop does not prove backend cance
 For later CLI calls set the supported transport retry limit before dispatch where
 verified,as outer time/turn bounds did not prevent repeated service retries here.
 No remaining quota or net savings reported. [Receipt](window-interaction-evidence.json).
+
+
+Composition allocation2026-10-20: one frozen15,996-byte public/original primary
+brief. Stop Claude restricted-environment retries without assuming a provider
+outage/quota cause. Copilot sandbox cache launch fails EPERM;the same existing
+authenticated CLI succeeds with approved outside-sandbox service/cache access,
+no reinstall. Use required approved CLI network/cache access at dispatch instead
+of repeating a doomed restricted launch. One prompt view,262 proposed lines
+within450,no worker writes/tests. Codex corrects concrete defects and supplies
+contract-first pixel oracle/fault injection;no second provider review. Inspect
+stream metadata at the first progress check and stop repeated transport retries
+without artifact. All-four remaining allowances unavailable;no net savings claim.
+[Receipt](window-composition-evidence.json).

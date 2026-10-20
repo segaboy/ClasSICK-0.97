@@ -99,6 +99,9 @@ jobs:
       - name: Audit original window native objects (no target run)
         shell: pwsh
         run: .\scripts\Verify-WindowObjects.ps1 -BuildRoot build\window-objects
+      - name: Audit original window composition objects (no target run)
+        shell: pwsh
+        run: .\scripts\Verify-WindowSceneObjects.ps1 -BuildRoot build\window-scene-objects
 
   m68k-rom:
     runs-on: ubuntu-24.04
@@ -109,6 +112,14 @@ jobs:
           persist-credentials: false
       - name: Prepare hash-pinned workspace 68000 tools
         run: python3 scripts/Setup-M68k.py --output "$RUNNER_TEMP/classick-m68k"
+      - name: Compile original window composition for68000 (no target run)
+        run: python3 scripts/Verify-WindowSceneM68k.py --tool-root "$RUNNER_TEMP/classick-m68k/root" --output "$RUNNER_TEMP/classick-window-scene"
+      - name: Retain native window composition compiler manifest
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
+        with:
+          name: classick-window-scene-build
+          path: ${{ runner.temp }}/classick-window-scene/manifest.json
+          if-no-files-found: error
       - name: Compile original native window for68000 (no target run)
         run: python3 scripts/Verify-WindowM68k.py --tool-root "$RUNNER_TEMP/classick-m68k/root" --output "$RUNNER_TEMP/classick-window"
       - name: Retain native window compiler manifest

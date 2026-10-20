@@ -3463,3 +3463,25 @@ Codex freezes SPEC-0053 and valid-event model before writing original native C.
 Directed tests follow;actual executions/compiler audits are separately recorded.
 No historical or whole-System claim. GPL-3.0-or-later;no external implementation,
 runtime or art. [Implementation](records/IMPL-0056-window-interaction.md).
+
+
+## SRC-0326 - Owner window/cursor composition continuation
+
+Dean Howell,2026-10-20:"Do it",accepting the proposed window redraw/cursor
+restoration slice,shared native68000/x86 C,hosted/compiler/normal CI/Git/HQ.
+No hardware/input-owner/boot binding,target trial or release scope expansion.
+
+## SRC-0327 - Copilot original native compositor proposal and attempts
+
+One frozen reviewed-public/original brief,existing authenticated CLI. Initial
+cache-launch EPERM resolved by approved service/cache access;no reinstall.
+262 proposed lines/one prompt view/no edits or tests. Prior Claude restricted-
+environment transport retries yield no artifact;cause unclassified. Proposal
+needs lead corrections,not historical authority. [Receipt](../docs/development/window-composition-evidence.json).
+
+## SRC-0328 - Lead contract,oracle,integration and actual verification
+
+Independent engineering specification and pixel model precede implementation
+review. Lead corrections and synthetic fault tests are separate from the oracle.
+Original GPL-3.0-or-later code and tests,no third-party implementation/art or
+manual samples. [Implementation](records/IMPL-0057-window-composition.md).

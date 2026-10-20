@@ -1,0 +1,207 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-20",
+  "baseline": "e4c1dc1023d8183213ffc90b82c038005c0c2509",
+  "sources": [
+    "SRC-0326",
+    "SRC-0327",
+    "SRC-0328"
+  ],
+  "specification": "SPEC-0054",
+  "decision": "ADR-0062",
+  "implementation": "IMPL-0057",
+  "verification": "TEST-0065",
+  "status": "local-passed-native68000-ci-pending",
+  "scope": "Original stateless shared native window/cursor compositor and hosted/compiler/normal CI verification;no input owner,hardware presentation,boot workload binding,target trial or release.",
+  "inputs_git_lf_sha256": {
+    "apps/window-scene/scene.h": "f7e608eb507b3d5fe4af2720263b55c894454946f4637124c391b2eaaeca9982",
+    "apps/window-scene/scene.c": "bc3f8ac625bd782d368709cf915a94bbd7f9a6c4dd810197a11ae157363afa3f",
+    "apps/product-scene/scene.h": "7d5b50af59be3e25a67837d7183d0fa50afd36b9f0b3aaf1a1fb1ddea772ccf0",
+    "apps/product-scene/scene.c": "7488910c401285b1e211d3c6eb95a17f04683748ffa8fc2dba4e2659725872d2",
+    "core/graphics/cursor.h": "0ffc237d90b9b58ab26752223a73710e0cad4b0a24d53fd0ac0cfe08c42818d7",
+    "core/graphics/cursor.c": "c239ef42783ffaa446c59f7ba630b5b1cd78c95444449fa63b983f4c3bb98fe5",
+    "core/graphics/surface.h": "31de605b79282fac7f4208e28aab328662df975a03028ac16fe179672d6dc264",
+    "core/graphics/surface.c": "157ed442c0278a344b57cb0e08657c30273de2a62199d72a30b38e5ee7ea1c5c",
+    "core/ui/window.h": "0a964c1801facd731c58abf3e88fdb96d39c3cd38bbf473bba4f879852a8b1a2",
+    "core/ui/window.c": "ddec6ccab8bf5148240d6269bf33374180ac60406b4ab50558809ff3e53aa18a",
+    "core/input/pointer.h": "d0a53cdadbe728195ce2c35bc4ef0b2a1687351912c759eda1bf6b4c38abdc38",
+    "arch/m68k/runtime.c": "1e3fa635a12a6ac91b30f25fdf19c493b84493dcecc4ce7e4dcc298c3412d078",
+    "tests/window-scene-reference.c": "b6e614b01c039918a6be7f360d79decfc3762c5bd9e983c2ba12df334344c04e",
+    "tests/window-scene-faults.c": "daa499b09964d256c98245f30c2d332deb90944c4d24718521d5ccb3d678749d",
+    "tests/window-scene-layout.c": "37c0e55a6e0dd4218bab6082d299bf8751ef7362d0f52637d500a5d658019d97"
+  },
+  "workers": {
+    "claude": {
+      "status": "restricted-environment transport retries;interrupted,no artifact",
+      "observed_retries": 7,
+      "tools_observed": [],
+      "root_cause": "unclassified;no provider outage or quota conclusion",
+      "backend_cancellation_not_proven": true
+    },
+    "copilot_failed_launch": {
+      "round": "implementation",
+      "worker": "copilot",
+      "exit_code": 1,
+      "outer_timeout": false,
+      "elapsed_seconds": 16.88,
+      "input_bytes": 15996,
+      "input_sha256": "c0573e3e186ea4da94a8d460fdbbea3db582967e244c709f6d7b2ba257e76ff3",
+      "stderr_bytes": 4982
+    },
+    "copilot": {
+      "execution": {
+        "round": "implementation",
+        "worker": "copilot",
+        "exit_code": 0,
+        "outer_timeout": false,
+        "elapsed_seconds": 78.09,
+        "input_bytes": 15996,
+        "input_sha256": "c0573e3e186ea4da94a8d460fdbbea3db582967e244c709f6d7b2ba257e76ff3",
+        "stderr_bytes": 0
+      },
+      "model_requested": "claude-sonnet-5.5",
+      "model_observed": "claude-sonnet-5.5",
+      "effort": "low",
+      "launch": "existing authenticated CLI,approved outside restricted sandbox;no reinstall",
+      "permitted_inputs": "one frozen reviewed-public/original15,996-byte prompt",
+      "tools": [
+        {
+          "name": "view",
+          "input": "own frozen prompt only",
+          "forceReadLargeFiles": true
+        }
+      ],
+      "proposed_lines": 262,
+      "budget_lines": 450,
+      "worker_edits": 0,
+      "worker_tests_executed": [],
+      "provider_reported": {
+        "totalPremiumRequestCost": 1,
+        "totalNanoAiu": 13360200000,
+        "tokenDetails": {
+          "input": {
+            "tokenCount": 168
+          },
+          "cache_read": {
+            "tokenCount": 6410
+          },
+          "cache_write": {
+            "tokenCount": 9938
+          },
+          "output": {
+            "tokenCount": 10778
+          }
+        },
+        "totalApiDurationMs": 70424
+      }
+    }
+  },
+  "integration": [
+    "Adopt original Copilot compositor;correct canvas window bounds,remove known unused label and invert product-scene success check.",
+    "Validate fixed product span before dereferencing pixels.",
+    "Use borrowed immutable descriptor plus scalar effect stores/checked band init to avoid implicit library copies.",
+    "Codex contract-first pixel oracle and implementation-aware fault injection;one substantial external deliverable,no redundant review."
+  ],
+  "verification_results": {
+    "profiles": [
+      {
+        "profile": "debug",
+        "tests": 308,
+        "failed": 0,
+        "scope": "full regression",
+        "junit_sha256": "be40a711a81ae4ed0622923e7ddcea9d586368250ede17e687dfcce811f4d321"
+      },
+      {
+        "profile": "sanitized",
+        "tests": 3,
+        "failed": 0,
+        "scope": "composition-only focused",
+        "junit_sha256": "ac9de0d2ccefd856ac430ffb9bdecb3e03c3ea94622faaec0a8a603f0de44f2e"
+      },
+      {
+        "profile": "gcc-i686",
+        "tests": 3,
+        "failed": 0,
+        "scope": "composition-only focused",
+        "junit_sha256": "6a0a4f1291ec1ce194f8d2560f92e2885a619658b8d330873040bc18911fd295"
+      }
+    ],
+    "total_ctests": 314,
+    "failed": 0,
+    "reference_layouts": 8,
+    "reference_complete_frames": 2008,
+    "optimized": [
+      {
+        "compiler": "clang",
+        "bits": 32,
+        "exit_code": 0,
+        "output": "Window composition reference PASS:2008 complete frames,8104 checks"
+      },
+      {
+        "compiler": "clang",
+        "bits": 64,
+        "exit_code": 0,
+        "output": "Window composition reference PASS:2008 complete frames,8104 checks"
+      },
+      {
+        "compiler": "gcc",
+        "bits": 32,
+        "exit_code": 0,
+        "output": "Window composition reference PASS:2008 complete frames,8104 checks"
+      },
+      {
+        "compiler": "gcc",
+        "bits": 64,
+        "exit_code": 0,
+        "output": "Window composition reference PASS:2008 complete frames,8104 checks"
+      }
+    ],
+    "negative_controls": [
+      {
+        "defect": "hide-after-paint",
+        "compiled": true,
+        "rejected": true,
+        "diagnostic": "mismatch 512x342 format1 frame0\nline 80: 0"
+      },
+      {
+        "defect": "lost-old-dirty-area",
+        "compiled": true,
+        "rejected": true,
+        "diagnostic": "mismatch 512x342 format1 frame0\nline 80: 0"
+      }
+    ],
+    "objects": {
+      "object_audits": 12,
+      "target_executed": false,
+      "efi_abi_object_twins_equal": true,
+      "efi_image_changed": false,
+      "specifications": [
+        "SPEC-0054"
+      ]
+    },
+    "ci": null
+  },
+  "memory": {
+    "effect_bytes": 32,
+    "persistent_compositor_bytes": 0,
+    "allocation_bytes": 0,
+    "extra_framebuffers": 0,
+    "cursor_payload_unchanged": true,
+    "actual_native_frames": "pending CI;not full stack/ROM/128K certification"
+  },
+  "not_claimed": [
+    "input owner or boot/GUI integration",
+    "hardware/VM/emulator/reference trial",
+    "arbitrary invalid native-pointer or hardware-exception recovery",
+    "historical Window Manager behavior",
+    "release readiness",
+    "net Codex quota savings"
+  ],
+  "external_remaining_usage": {
+    "Claude": null,
+    "Copilot": null,
+    "Grok": null,
+    "Antigravity": null
+  },
+  "usage_note": "Provider-reported task counters are not remaining balances or comparable Codex quota savings. Grok/Antigravity not invoked."
+}
