@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "candidate": "paired-native-preview-2",
-  "status": "shared-helpers-hosted-verified-native68000-ci-pending",
+  "status": "shared-helpers-hosted-and-native68000-verified-unbound",
   "goal": "first interactive original native window",
   "baseline_public_revision": "3b909d731c7457a81f7a29086db3a3b0a610dbb1",
   "current_releases": {
@@ -117,7 +117,9 @@
     "local_ctests": 874,
     "failed": 0,
     "object_audits": 24,
-    "native68000": "ci-pending",
-    "boot_binding": false
+    "native68000": "30object-compilations/6closures passed;no run",
+    "boot_binding": false,
+    "compiled_source_revision": "7e749ea27100765be14692376b11f41ba71e27eb",
+    "ci_url": "https://github.com/segaboy/ClasSICK-0.97/actions/runs/39410506895"
   }
 }

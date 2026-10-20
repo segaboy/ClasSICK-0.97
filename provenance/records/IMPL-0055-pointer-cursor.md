@@ -22,8 +22,7 @@ zero failures;24 width/endian/EFI-ABI object audits. Pointer direct test uses300
 reference transitions/13675 assertions. Cursor oracle compares complete storage
 on10 layouts;its cases cover corners/hotspots,byte residues,transparency,moves,
 background restore,guards and lifecycle/refusals. Theoretical48/56B state layout
-is now checked by native compile-time assertions. Native68000 CI is pending in
-this source checkpoint;the receipt records the eventual exact CI source/result.
+is now checked by native compile-time assertions. Native68000 CI now passes30 object compilations and6 matching-twin closure audits,with no imports or mutable data;actual48B state layout passes. No target ran. The receipt pins the exact verified source and CI result.
 
 TEST-0061/0062 remain original proposed inventories,not blanket execution claims.
 Quarantine/retire-while-live is tested;arbitrary expired/unmapped-pointer recovery

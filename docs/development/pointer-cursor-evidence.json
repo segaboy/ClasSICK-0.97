@@ -15,7 +15,7 @@
   "implementation": "IMPL-0055",
   "verification": "TEST-0063",
   "scope": "Original shared native helpers and hosted/compiler/CI verification only;no platform/workload binding,artwork,hardware/reference/emulator/VM trial or release.",
-  "status": "local-passed-native68000-ci-pending",
+  "status": "hosted-and-native68000-verified-unbound",
   "inputs_git_lf_sha256": {
     "core/input/pointer.c": "d38b4b131f44a3ce8bf8019cdef8aa4e56e3d5c09f0bc9b154fd1f8ff920afa7",
     "core/input/pointer.h": "d0a53cdadbe728195ce2c35bc4ef0b2a1687351912c759eda1bf6b4c38abdc38",
@@ -67,24 +67,12 @@
       ],
       "delivered": true,
       "provider_reported": {
-        "modelUsage": {
-          "claude-opus-5-5": {
-            "inputTokens": 2,
-            "outputTokens": 37600,
-            "cacheReadInputTokens": 2384,
-            "cacheCreationInputTokens": 18703,
-            "webSearchRequests": 0,
-            "costUSD": 0.9021088,
-            "contextWindow": 1000000,
-            "maxOutputTokens": 128000,
-            "thinkingTokens": 20559,
-            "canonicalModel": "claude-opus-5-5",
-            "provider": "firstParty",
-            "costBasis": "list"
-          }
-        },
         "total_cost_usd": 0.9021088
-      }
+      },
+      "resolved_models": [
+        "claude-opus-5-5"
+      ],
+      "reported_usage_capture": "outside Git"
     },
     {
       "worker": "copilot",
@@ -115,22 +103,12 @@
       "delivered": false,
       "provider_reported": {
         "totalPremiumRequestCost": 1,
-        "totalNanoAiu": 40294860000,
-        "tokenDetails": {
-          "input": {
-            "tokenCount": 254
-          },
-          "cache_read": {
-            "tokenCount": 10906
-          },
-          "cache_write": {
-            "tokenCount": 24392
-          },
-          "output": {
-            "tokenCount": 34037
-          }
-        }
-      }
+        "totalNanoAiu": 40294860000
+      },
+      "resolved_models": [
+        "claude-sonnet-5.5"
+      ],
+      "reported_usage_capture": "outside Git"
     },
     {
       "worker": "copilot",
@@ -166,22 +144,12 @@
       "delivered": true,
       "provider_reported": {
         "totalPremiumRequestCost": 1,
-        "totalNanoAiu": 29690660000,
-        "tokenDetails": {
-          "input": {
-            "tokenCount": 254
-          },
-          "cache_read": {
-            "tokenCount": 10911
-          },
-          "cache_write": {
-            "tokenCount": 14631
-          },
-          "output": {
-            "tokenCount": 25873
-          }
-        }
-      }
+        "totalNanoAiu": 29690660000
+      },
+      "resolved_models": [
+        "claude-sonnet-5.5"
+      ],
+      "reported_usage_capture": "outside Git"
     }
   ],
   "deviations": [
@@ -233,7 +201,22 @@
       "object_audits": 24,
       "efi_abi_object_twins_equal": true
     },
-    "ci": null,
+    "ci": {
+      "run_id": 39410506895,
+      "url": "https://github.com/segaboy/ClasSICK-0.97/actions/runs/39410506895",
+      "source_revision": "7e749ea27100765be14692376b11f41ba71e27eb",
+      "conclusion": "success",
+      "jobs": [
+        {
+          "name": "windows-bootstrap",
+          "conclusion": "success"
+        },
+        {
+          "name": "m68k-rom",
+          "conclusion": "success"
+        }
+      ]
+    },
     "refined_cursor_runs": [
       {
         "profile": "debug",
@@ -332,7 +315,45 @@
         "oracle_rejected": true
       }
     ],
-    "full_matrix_note": "874 full-matrix tests preceded the padding/payload-prefix supplement;the final cursor test then reran successfully in all3 profiles. Unrelated relevant inputs unchanged."
+    "full_matrix_note": "874 full-matrix tests preceded the padding/payload-prefix supplement;the final cursor test then reran successfully in all3 profiles. Unrelated relevant inputs unchanged.",
+    "native68000": {
+      "object_compilations": 30,
+      "closure_audits": 6,
+      "undefined_imports": 0,
+      "mutable_data": 0,
+      "abi_assertions_passed": true,
+      "records": [
+        {
+          "optimization": "O0",
+          "twins_equal": true,
+          "closure": {
+            "bytes": 11664,
+            "sha256": "2f1477c96d77e9f48b24d90058276b9b4788c0854fa947fc3631750181b4630a"
+          },
+          "largest_frame": 92
+        },
+        {
+          "optimization": "O2",
+          "twins_equal": true,
+          "closure": {
+            "bytes": 9504,
+            "sha256": "52f66cef8fd9c92e6c2e942e196bc85ee5cd91cb9b9dbeb18f4fd90f427298a0"
+          },
+          "largest_frame": 108
+        },
+        {
+          "optimization": "Os",
+          "twins_equal": true,
+          "closure": {
+            "bytes": 7928,
+            "sha256": "2fba9ac4360f31b9e91ed36a77fe55940423781b5fe48653225f67448d683e17"
+          },
+          "largest_frame": 100
+        }
+      ],
+      "manifest_sha256": "d795918720cb659ab64b036fe969faa5625e13b3b3b71b8fd164025e57cf1a00",
+      "target_executed": false
+    }
   },
   "memory": {
     "state_bytes": {
@@ -344,95 +365,14 @@
       "RGBA8": 1024
     },
     "art_bits_bytes": 64,
-    "native_x64_general_registers_static_frames": [
-      {
-        "function": "cs_cursor_init",
-        "bytes": 0,
-        "kind": "static"
-      },
-      {
-        "function": "span_add",
-        "bytes": 0,
-        "kind": "static"
-      },
-      {
-        "function": "cs_cursor_bind",
-        "bytes": 168,
-        "kind": "static"
-      },
-      {
-        "function": "cur_state_ok",
-        "bytes": 56,
-        "kind": "static"
-      },
-      {
-        "function": "cs_cursor_show",
-        "bytes": 168,
-        "kind": "static"
-      },
-      {
-        "function": "cur_prepare",
-        "bytes": 104,
-        "kind": "static"
-      },
-      {
-        "function": "cur_save_draw",
-        "bytes": 136,
-        "kind": "static"
-      },
-      {
-        "function": "cs_cursor_move",
-        "bytes": 168,
-        "kind": "static"
-      },
-      {
-        "function": "cur_restore",
-        "bytes": 128,
-        "kind": "static"
-      },
-      {
-        "function": "cs_cursor_hide",
-        "bytes": 152,
-        "kind": "static"
-      },
-      {
-        "function": "cs_cursor_advance",
-        "bytes": 56,
-        "kind": "static"
-      },
-      {
-        "function": "cs_cursor_discard",
-        "bytes": 56,
-        "kind": "static"
-      },
-      {
-        "function": "cs_cursor_repaired",
-        "bytes": 72,
-        "kind": "static"
-      },
-      {
-        "function": "cs_cursor_unbind",
-        "bytes": 56,
-        "kind": "static"
-      },
-      {
-        "function": "cs_cursor_abandon",
-        "bytes": 56,
-        "kind": "static"
-      },
-      {
-        "function": "cs_cursor_query",
-        "bytes": 56,
-        "kind": "static"
-      },
-      {
-        "function": "cur_art_ok",
-        "bytes": 24,
-        "kind": "static"
-      }
-    ],
     "native_x64_largest_frame": 168,
-    "stack_note": "Compiler frames include ABI/register-save/call costs.96B theoretical local-workspace target is not a96B whole-frame or whole-system guarantee;full target stack budget remains a binding prerequisite."
+    "stack_note": "Compiler frames include ABI/register-save/call costs.96B theoretical local-workspace target is not a96B whole-frame or whole-system guarantee;full target stack budget remains a binding prerequisite.",
+    "native_x64_stack_method": "ClangO2 Windows x64 general-registers profile,fstack-usage;full per-function data outside Git",
+    "native_x64_largest_frame_functions": [
+      "cs_cursor_bind",
+      "cs_cursor_show",
+      "cs_cursor_move"
+    ]
   },
   "not_claimed": [
     "all68 TEST-0061 or all34 TEST-0062 literal rows executed",
@@ -447,5 +387,6 @@
     "Grok": null,
     "Antigravity": null
   },
-  "usage_note": "Provider counters/list cost are not remaining quota,billed cost or measured net Codex savings."
+  "usage_note": "Provider counters/list cost are not remaining quota,billed cost or measured net Codex savings.",
+  "compiled_source_revision": "7e749ea27100765be14692376b11f41ba71e27eb"
 }
