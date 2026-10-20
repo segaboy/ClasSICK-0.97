@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "candidate": "paired-native-preview-2",
-  "status": "shared-helpers-hosted-and-native68000-verified-unbound",
+  "status": "shared-window-pointer-cursor-helpers-verified-unbound",
   "goal": "first interactive original native window",
   "baseline_public_revision": "3b909d731c7457a81f7a29086db3a3b0a610dbb1",
   "current_releases": {
@@ -24,7 +24,7 @@
     "x86-64 PC"
   ],
   "legacy68k": "existing fixture/dispatch/state regression retained;no general guest Window/Event ABI admission",
-  "scope_authorized_now": "isolated shared pointer/cursor helpers,original hosted tests and compiler/CI verification only;no platform binding,target trial or release",
+  "scope_authorized_now": "Isolated original native window interaction helper and hosted/compiler/CI verification;no scene,driver,guest ABI or platform binding,target run or release.",
   "implementation_authorized": true,
   "target_trials_authorized": false,
   "publication_authorized": false,
@@ -121,5 +121,13 @@
     "boot_binding": false,
     "compiled_source_revision": "7e749ea27100765be14692376b11f41ba71e27eb",
     "ci_url": "https://github.com/segaboy/ClasSICK-0.97/actions/runs/39410506895"
+  },
+  "window_helper_progress": {
+    "specification": "SPEC-0053",
+    "implementation": "IMPL-0056",
+    "verification": "TEST-0064",
+    "status": "local-passed-native68000-ci-pending",
+    "scene_bound": false,
+    "evidence": "docs/development/window-interaction-evidence.json"
   }
 }

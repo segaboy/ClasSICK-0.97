@@ -3442,3 +3442,24 @@ SRC-0300 executed checkpoint: CI3150/11;local596/2;38 mouse+5 Space events throu
 - Codex reviews/integrates sound artifacts,authors the smaller contract-derived
   pointer reference test,corrects fixture retirement and bounded workspace,
   and executes actual checks. [IMPL-0055/TEST-0063](records/IMPL-0055-pointer-cursor.md).
+
+
+## SRC-0323 - Owner next window-helper continuation
+
+Dean Howell,2026-10-20:"Next task",accepting the proposed original window
+interaction helper toward paired-native-preview-2. Shared helper/hosted/compiler/
+normal CI/Git/HQ only;no scene binding,target run or release.
+
+## SRC-0324 - Bounded Claude attempt without deliverable
+
+One reviewed-public/original7,063-byte Windows11 brief,Opus5.5 low. Repeated API
+retries,no assistant artifact/tools/tests;lead interrupts and takes small direct
+fallback. No HQ/manual/original-draft/UART exposure. Attempt is not implementation
+or verification authority. [Receipt](../docs/development/window-interaction-evidence.json).
+
+## SRC-0325 - Original engineering contract,implementation and verification
+
+Codex freezes SPEC-0053 and valid-event model before writing original native C.
+Directed tests follow;actual executions/compiler audits are separately recorded.
+No historical or whole-System claim. GPL-3.0-or-later;no external implementation,
+runtime or art. [Implementation](records/IMPL-0056-window-interaction.md).

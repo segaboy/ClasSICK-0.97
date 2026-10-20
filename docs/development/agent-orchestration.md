@@ -180,3 +180,13 @@ Cursor-contract allocation2026-10-19: one Claude primary and one focused correct
 
 
 2026-10-20 implementation allocation: Claude four-file primary;Copilot combined oracle returned no artifact under session cap,one reduced cursor-only correction delivered. Codex handles the smaller pointer test directly from the contract,integrates rather than recreates core code,and runs actual checks. No Grok/Argon/requalification/redundant review. Oversized artifacts and extra own-prompt reads remain deviations. [Receipt](pointer-cursor-evidence.json).
+
+
+Window-helper allocation2026-10-20: one compact Claude primary call repeatedly
+retries at the service layer without an assistant artifact. Stop the call;do not
+repeat/rebrief/fan out. Codex directly implements this small bounded helper using
+the already-frozen contract/model. Expose onlyRead,dontAsk/no MCP/memory/hooks,
+but no worker tool use occurs. A print-process stop does not prove backend cancel.
+For later CLI calls set the supported transport retry limit before dispatch where
+verified,as outer time/turn bounds did not prevent repeated service retries here.
+No remaining quota or net savings reported. [Receipt](window-interaction-evidence.json).

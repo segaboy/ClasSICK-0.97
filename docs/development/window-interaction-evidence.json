@@ -1,0 +1,183 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-20",
+  "baseline": "5f8a99ff977c6f460052a4e7c17ada7c069a809b",
+  "sources": [
+    "SRC-0323",
+    "SRC-0324",
+    "SRC-0325"
+  ],
+  "specification": "SPEC-0053",
+  "decision": "ADR-0061",
+  "implementation": "IMPL-0056",
+  "verification": "TEST-0064",
+  "status": "local-passed-native68000-ci-pending",
+  "scope": "Isolated original native window interaction helper and hosted/compiler/CI verification;no scene,driver,guest ABI or platform binding,target run or release.",
+  "inputs_git_lf_sha256": {
+    "core/ui/window.h": "0a964c1801facd731c58abf3e88fdb96d39c3cd38bbf473bba4f879852a8b1a2",
+    "core/ui/window.c": "ddec6ccab8bf5148240d6269bf33374180ac60406b4ab50558809ff3e53aa18a",
+    "core/input/pointer.h": "d0a53cdadbe728195ce2c35bc4ef0b2a1687351912c759eda1bf6b4c38abdc38",
+    "core/input/pointer.c": "d38b4b131f44a3ce8bf8019cdef8aa4e56e3d5c09f0bc9b154fd1f8ff920afa7",
+    "tests/window-interaction.c": "872ba9a10761c5796a41cf896364ffe59726aba3b4b7d915f28f669897485fc4",
+    "tests/window-reference.c": "edd6d79df44be7839effd2c1efb9513bbd39e64b065c7d86c0d7cbf33855adbb",
+    "tests/window-layout.c": "bef4b60be4018cdd7b23aea0b5b7602ab199f6cea8db2da4bd5c7648aa078bb9"
+  },
+  "workers": [
+    {
+      "worker": "Claude",
+      "model_requested": "claude-opus-5-5",
+      "effort": "low",
+      "input_bytes": 7063,
+      "status": "interrupted-after-repeated-service-retries-no-deliverable",
+      "observed_api_retries": 9,
+      "tools_observed": [],
+      "artifact_files": [],
+      "worker_tests_executed": [],
+      "provider_remaining_usage": null,
+      "backend_cancellation_not_proven": true
+    }
+  ],
+  "allocation": "One bounded Claude attempt stopped after service retries/no artifact;small direct Codex fallback,no second worker or requalification.",
+  "originality": "Codex contract and reference model frozen before implementation;no historical implementation/material used. Directed tests authored with implementation awareness.",
+  "verification_results": {
+    "profiles": [
+      {
+        "profile": "debug",
+        "tests": 305,
+        "failed": 0,
+        "scope": "full regression",
+        "junit_sha256": "54fb7dfb6768a59c5a74dba8dd302c38eefdc263e42f7abe7565951b04624d16"
+      },
+      {
+        "profile": "sanitized",
+        "tests": 3,
+        "failed": 0,
+        "scope": "window-only focused",
+        "junit_sha256": "9810510b81eb692c228dc13eb9b2f25de183303eb9fceb26ae4716a422a71744"
+      },
+      {
+        "profile": "gcc-i686",
+        "tests": 3,
+        "failed": 0,
+        "scope": "window-only focused",
+        "junit_sha256": "25e7367e37984d97442bddba8ac4bab4cae970910230deed383ff7d12d267b65"
+      }
+    ],
+    "total_ctests": 311,
+    "failed": 0,
+    "reference_transitions": 10000,
+    "optimized_suites": [
+      {
+        "compiler": "clang",
+        "bits": 32,
+        "suite": "window-interaction",
+        "exit_code": 0,
+        "output": "Window directed PASS:227 checks"
+      },
+      {
+        "compiler": "clang",
+        "bits": 32,
+        "suite": "window-reference",
+        "exit_code": 0,
+        "output": "Window reference PASS:10000 authentic transitions,80002 checks"
+      },
+      {
+        "compiler": "clang",
+        "bits": 64,
+        "suite": "window-interaction",
+        "exit_code": 0,
+        "output": "Window directed PASS:227 checks"
+      },
+      {
+        "compiler": "clang",
+        "bits": 64,
+        "suite": "window-reference",
+        "exit_code": 0,
+        "output": "Window reference PASS:10000 authentic transitions,80002 checks"
+      },
+      {
+        "compiler": "gcc",
+        "bits": 32,
+        "suite": "window-interaction",
+        "exit_code": 0,
+        "output": "Window directed PASS:227 checks"
+      },
+      {
+        "compiler": "gcc",
+        "bits": 32,
+        "suite": "window-reference",
+        "exit_code": 0,
+        "output": "Window reference PASS:10000 authentic transitions,80002 checks"
+      },
+      {
+        "compiler": "gcc",
+        "bits": 64,
+        "suite": "window-interaction",
+        "exit_code": 0,
+        "output": "Window directed PASS:227 checks"
+      },
+      {
+        "compiler": "gcc",
+        "bits": 64,
+        "suite": "window-reference",
+        "exit_code": 0,
+        "output": "Window reference PASS:10000 authentic transitions,80002 checks"
+      }
+    ],
+    "negative_controls": [
+      {
+        "defect": "lost-final-release",
+        "compiled": true,
+        "rejected": true,
+        "exit_code": 1,
+        "diagnostic": "line 54: w.x==80 && w.y==115 && !w.dragging && !w.down && !w.grab_x && !w.grab_y"
+      },
+      {
+        "defect": "repeated-held-action",
+        "compiled": true,
+        "rejected": true,
+        "exit_code": 1,
+        "diagnostic": "line 50: w.x==288 && w.y==198 && w.grab_x==20 && w.grab_y==5 && o.flags==CS_WINDOW_MOVED"
+      }
+    ],
+    "object_checks": {
+      "target_executed": false,
+      "efi_abi_object_twins_equal": true,
+      "efi_image_changed": false,
+      "object_audits": 12,
+      "specifications": [
+        "SPEC-0053"
+      ]
+    },
+    "ci": null
+  },
+  "memory": {
+    "state_bytes": 44,
+    "config_bytes": 20,
+    "effect_bytes": 20,
+    "allocation_bytes": 0,
+    "retained_pointers": 0,
+    "mutable_globals": 0
+  },
+  "integration": {
+    "scene_bound": false,
+    "rom_efi_input_lists_changed": false,
+    "existing_apis_changed": false
+  },
+  "protected_originals": 24,
+  "not_claimed": [
+    "boot window or target execution",
+    "dirty compositor or hardware input",
+    "historical Window Manager behavior",
+    "physical/full128K/whole-ROM or whole-system stack certification",
+    "release readiness",
+    "net Codex quota savings"
+  ],
+  "external_remaining_usage": {
+    "Claude": null,
+    "Copilot": null,
+    "Grok": null,
+    "Antigravity": null
+  },
+  "usage_note": "No provider remaining allowance reported;unknown is not zero. API retry attempt produced no usable artifact or reported task usage;no quota savings claimed."
+}
