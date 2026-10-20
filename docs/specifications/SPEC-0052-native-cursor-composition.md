@@ -1,8 +1,8 @@
 # SPEC-0052: Native cursor save/restore/composition contract
 
-Status: Reviewed original engineering contract2026-10-19;ADR-0060 / SRC-0316..0318 / TEST-0062. Not implemented. Scope: cursor contract only. Baseline: public 3bdc896aafb4ce7e449a229a31407a1bf0c73d89.
+Status: Reviewed original engineering contract2026-10-19;ADR-0060 / SRC-0316..0318 / TEST-0062. Shared helper implemented2026-10-20 (IMPL-0055/TEST-0063);platform binding/art deferred. Baseline: public 3bdc896aafb4ce7e449a229a31407a1bf0c73d89.
 Targets: proposed ROM0.4.0-alpha.1 / PC0.2.0-alpha.1, using the same native portable C on 68000 and x86.
-This spec does not grant permission to implement, build, add fixtures, run tests, change targets or release.
+SRC-0319 accepts the shared helper and hosted/compiler/CI verification;no platform binding,target trial or release.
 It does not change any of these: runtime/surface/port headers, released ROM0.3.0-alpha.1/PC0.1.0-alpha.1, the 24 originals, the held brief, UART, the wiki, or SPEC-0051.
 All historical, source, role, edition, physical, B2, native-app and System1 gates still apply. The Mac motion adapter is still blocked at M1-M7. That block does not block this design.
 This spec does not cover: a window manager, guest ABI, loader, regions, SDK, band renderer, MMIO/volatile binding, artwork, fixture bytes or code.
@@ -15,7 +15,7 @@ This spec does not cover: a window manager, guest ABI, loader, regions, SDK, ban
 - The helper never calls back, never redraws the scene, never allocates, and uses no globals or retained stack objects. It needs no libc copy (byte loops are allowed).
 - All mutating calls are serialized by one owner. They are never called from an IRQ and never reentrant. Breaking this is a caller lifetime breach (section 8).
 
-## 2. Prospective types (exact; to be installed later as `core/graphics/cursor.h`)
+## 2. Native types (`core/graphics/cursor.h`)
 
 ```c
 #include "surface.h"
@@ -87,7 +87,7 @@ Costs are kept separate:
 - Row r (0..15) is bytes `[2r]` and `[2r+1]`. Column c is bit `7-(c%8)` of byte `2r+c/8`. Order is MSB first and does not depend on endian.
 - mask 1 = opaque. Opaque pixels write `image`: bit 1 = Mono value 1 / RGBA bytes R,G,B,A = 00,00,00,FF (black); bit 0 = Mono 0 / RGBA bytes FF,FF,FF,FF (white), as SPEC-0001 supplies. The bytes written are exactly what `cs_surface_fill` writes for that value.
 - mask 0 = transparent, and the pixel is unchanged. mask 0 with image 1 is refused (no XOR/invert mode).
-- Valid art: bits non-NULL; 1<=width,height<=16; hot_x<width; hot_y<height. Every mask/image bit at a column >=width or row >=height must be 0. All 64 bytes are read and checked. Only mapped in-bounds art pixels participate in drawing; validation still reads the full 64-byte block.
+- Valid art: bits non-NULL; 1<=width,height<=16; hot_x<width; hot_y<height. Every mask/image bit at a column >=width or row >=height must be 0. All64 bytes are checked for accepted art;invalid art may refuse early. Only mapped in-bounds art pixels participate in drawing; validation still reads the full 64-byte block.
 
 ## 5. Geometry
 
@@ -191,7 +191,7 @@ Owner protocol:
 - **Owner-diagnosed protocol violation:** a scene write while VISIBLE. Recover with discard/repaired (section 7).
 - **Post-acceptance pipeline fault:** the owner's scene redraw fails after hide or discard. The owner keeps the cursor HIDDEN or in REPAIR and must not call show until it has repaired.
 
-## 9. Unexecuted acceptance cases
+## 9. Original proposed case inventory (TEST-0062;not an execution record)
 
 Notation: M512 = Mono 512x342, stride 64, size 21888, payload cap 48. Canary 0xA5 fills tails and padding. Art A16 = 16x16, full mask, image checker, hot(0,0). Art A1 = 1x1, mask1, image1.
 
@@ -248,3 +248,8 @@ Record the following on actual 68000 and x86 builds before acceptance:
 The section 3 layout and the stack target are theoretical. Nothing here was built or executed.
 
 This is not a full 128K System certification.
+
+
+## Helper verification checkpoint -2026-10-20
+
+[IMPL-0055/TEST-0063](../../provenance/records/IMPL-0055-pointer-cursor.md) records actual helper checks;the inventory above is not a blanket claim that every row ran. Compile-time48/56B layouts and per-function native compiler frames are separate from the96B theoretical local-workspace target. No whole-system stack/ROM/128K or target qualification is implied.

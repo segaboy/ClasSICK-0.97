@@ -1,6 +1,6 @@
-# SPEC-0051: Native pointer/input semantic core (proposed)
+# SPEC-0051: Native pointer/input semantic core
 
-Status: reviewed engineering contract for future ROM0.4.0-alpha.1 / PC0.2.0-alpha.1,2026-10-19;ADR-0059. Documentation only;implementation not authorized. Basis:
+Status: reviewed engineering contract for future ROM0.4.0-alpha.1 / PC0.2.0-alpha.1,2026-10-19;ADR-0059. Helper implemented2026-10-20 (IMPL-0055/TEST-0063);platform bindings deferred. Original contract basis:
 PUBLIC HEAD 14a2c31. Published ROM0.3.0-alpha.1 and PC0.1.0-alpha.1 stay
 immutable. System is unreleased. Every behavior here is an original engineering
 choice. It makes no claim about January 1984 Macintosh behavior, and later
@@ -13,9 +13,8 @@ and x86-64. The core turns normalized pointer samples into exactly one
 transition per call. A single input owner then gives that transition to the
 press counter, the one fixed-size draggable window and the cursor compositor.
 The core does not include a guest trap ABI, an EventRecord queue, timestamps,
-acceleration, globals/A5, a window manager or rendering code. The cursor
-renderer is the next contract; section 9 states only its composition
-requirements. No hardware-register algorithm is selected here (section 8).
+acceleration, globals/A5, a window manager or rendering code. The cursor renderer has its separate SPEC-0052 contract; section 9 records its
+original composition requirements. No hardware-register algorithm is selected here (section 8).
 
 ## 2. Coordinates
 
@@ -26,7 +25,7 @@ requirements. No hardware-register algorithm is selected here (section 8).
 - Initial position at begin and at every re-begin: (256,171), the integer
   center. Cancel never moves the pointer.
 
-## 3. Prospective API (plain C, not installed)
+## 3. Native API (core/input/pointer.h)
 
 ```c
 typedef struct { int32_t x, y; uint32_t down, suppress, valid; } cs_pointer;
@@ -163,4 +162,4 @@ The following evidence classes are never merged:
 - E3 automated host-delivered GUI input through the visible VM/viewer,with capture/focus/transform/launch configuration recorded;not established by prior E2.
 - E4 actual human GUI input:prior PC clicks failed/intermittent,not a pass. Unavailable human input is recorded as unavailable,never synthesized into E4.
 
-The cause of the GUI preboot CPUID failure remains unknown. Later source admissions,code,exact-image trials and publication retain separate gates. Published-source/role/edition/physical/full128K/B2/native-app/legacy/System1-ROM requirements remain. [TEST-0061](../testing/TEST-0061-pointer-input-contract-cases.md) cases are all unexecuted. This document installs no API/header/renderer/adapter and authorizes no run.
+The cause of the GUI preboot CPUID failure remains unknown. Later source admissions,code,exact-image trials and publication retain separate gates. Published-source/role/edition/physical/full128K/B2/native-app/legacy/System1-ROM requirements remain. [TEST-0061](../testing/TEST-0061-pointer-input-contract-cases.md) cases are all unexecuted. The shared pointer API/header is implemented;adapter/window/IRQ bindings remain deferred. Actual helper checks are in IMPL-0055/TEST-0063;no target trial is authorized.

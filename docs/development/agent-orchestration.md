@@ -177,3 +177,6 @@ The CLI print deadline is not a provider-side cancellation or spending guarantee
 
 
 Cursor-contract allocation2026-10-19: one Claude primary and one focused correction for concrete lifecycle/validation contradictions;no redundant provider review. Codex integrates sound sections,keeps compact contract/case inventory and required provenance/HQ records,and verifies documents only. [Receipt](cursor-composition-review.json).
+
+
+2026-10-20 implementation allocation: Claude four-file primary;Copilot combined oracle returned no artifact under session cap,one reduced cursor-only correction delivered. Codex handles the smaller pointer test directly from the contract,integrates rather than recreates core code,and runs actual checks. No Grok/Argon/requalification/redundant review. Oversized artifacts and extra own-prompt reads remain deviations. [Receipt](pointer-cursor-evidence.json).

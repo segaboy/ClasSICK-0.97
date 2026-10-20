@@ -3416,3 +3416,29 @@ SRC-0300 executed checkpoint: CI3150/11;local596/2;38 mouse+5 Space events throu
   native layouts/cost targets from future measured compiler/target evidence.
   Original engineering decisions only,no historical behavior or runtime claim.
   [Contract](../docs/specifications/SPEC-0052-native-cursor-composition.md).
+
+
+## SRC-0319 - Owner shared helper implementation continuation
+
+- Dean Howell,2026-10-20: "Next task please",accepting the proposed shared
+  pointer/cursor helper implementation and independent verification. Native
+  helpers/hosted/compiler/CI scope only,no platform binding,target run or release.
+
+## SRC-0320 - Claude original pointer/cursor implementation proposal
+
+- One bounded four-file original code proposal from frozen public contracts and
+  APIs;no tools,worker edits or tests.831 source/header lines,over650 cap and
+  inaccurate about640 self-count. [Receipt](../docs/development/pointer-cursor-evidence.json).
+
+## SRC-0321 - Copilot independent cursor oracle and empty first attempt
+
+- Combined job returned no artifact under its session cap;one reduced cursor-only
+  job returned393 original test lines,over280 cap. Implementation withheld;
+  own prompt read twice each round,no other input/edit/execution. Proposed tests
+  became evidence only after Codex correction and actual runs. [Receipt](../docs/development/pointer-cursor-evidence.json).
+
+## SRC-0322 - Lead integration and helper verification
+
+- Codex reviews/integrates sound artifacts,authors the smaller contract-derived
+  pointer reference test,corrects fixture retirement and bounded workspace,
+  and executes actual checks. [IMPL-0055/TEST-0063](records/IMPL-0055-pointer-cursor.md).

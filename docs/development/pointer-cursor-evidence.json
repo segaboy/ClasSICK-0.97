@@ -1,0 +1,451 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-20",
+  "baseline": "66a3c35eae3750a79e64977a739108bd99e7797c",
+  "sources": [
+    "SRC-0319",
+    "SRC-0320",
+    "SRC-0321",
+    "SRC-0322"
+  ],
+  "specifications": [
+    "SPEC-0051",
+    "SPEC-0052"
+  ],
+  "implementation": "IMPL-0055",
+  "verification": "TEST-0063",
+  "scope": "Original shared native helpers and hosted/compiler/CI verification only;no platform/workload binding,artwork,hardware/reference/emulator/VM trial or release.",
+  "status": "local-passed-native68000-ci-pending",
+  "inputs_git_lf_sha256": {
+    "core/input/pointer.c": "d38b4b131f44a3ce8bf8019cdef8aa4e56e3d5c09f0bc9b154fd1f8ff920afa7",
+    "core/input/pointer.h": "d0a53cdadbe728195ce2c35bc4ef0b2a1687351912c759eda1bf6b4c38abdc38",
+    "core/graphics/cursor.c": "c239ef42783ffaa446c59f7ba630b5b1cd78c95444449fa63b983f4c3bb98fe5",
+    "core/graphics/cursor.h": "0ffc237d90b9b58ab26752223a73710e0cad4b0a24d53fd0ac0cfe08c42818d7",
+    "core/graphics/surface.c": "157ed442c0278a344b57cb0e08657c30273de2a62199d72a30b38e5ee7ea1c5c",
+    "core/graphics/surface.h": "31de605b79282fac7f4208e28aab328662df975a03028ac16fe179672d6dc264",
+    "core/input/mouse.c": "fad65173ea1421fd02affc4fea7a52720fba515e849e9c3159c35eeeab18eb8d",
+    "core/input/mouse.h": "d41c122f62933d83af8ad8015ca0f2b35298860bca80faa1dae0cd8705e8c542",
+    "arch/m68k/runtime.c": "1e3fa635a12a6ac91b30f25fdf19c493b84493dcecc4ce7e4dcc298c3412d078",
+    "tests/pointer-independent.c": "1100c91778c01f4ca21929c351f094ff4beaba915d51bcfca2566b4f3b6a504c",
+    "tests/cursor-independent.c": "eda9cbccdcb1c1796f1e003ee35d17785ae5baf06e86f1fe40e77b67f8c5b1a6",
+    "tests/pointer-cursor-layout.c": "53f3d98555aa024aa52aa8bdaa3969eb2e0c4d7f473375f71c677f472a5a1f6c"
+  },
+  "workers": [
+    {
+      "worker": "claude",
+      "round": "implementation",
+      "execution": {
+        "round": "implementation",
+        "worker": "claude",
+        "exit_code": 0,
+        "outer_timeout": false,
+        "elapsed_seconds": 309.88,
+        "input_bytes": 43238,
+        "input_sha256": "b6f7558a17b61634637c56c3c5d25ee4afc5ae72e5c9d28507847bfedc4c6361",
+        "stderr_bytes": 0
+      },
+      "tools_used": [],
+      "repository_edits": 0,
+      "tests_executed": [],
+      "files": [
+        {
+          "path": "core/input/pointer.h",
+          "lines": 33
+        },
+        {
+          "path": "core/input/pointer.c",
+          "lines": 156
+        },
+        {
+          "path": "core/graphics/cursor.h",
+          "lines": 52
+        },
+        {
+          "path": "core/graphics/cursor.c",
+          "lines": 590
+        }
+      ],
+      "delivered": true,
+      "provider_reported": {
+        "modelUsage": {
+          "claude-opus-5-5": {
+            "inputTokens": 2,
+            "outputTokens": 37600,
+            "cacheReadInputTokens": 2384,
+            "cacheCreationInputTokens": 18703,
+            "webSearchRequests": 0,
+            "costUSD": 0.9021088,
+            "contextWindow": 1000000,
+            "maxOutputTokens": 128000,
+            "thinkingTokens": 20559,
+            "canonicalModel": "claude-opus-5-5",
+            "provider": "firstParty",
+            "costBasis": "list"
+          }
+        },
+        "total_cost_usd": 0.9021088
+      }
+    },
+    {
+      "worker": "copilot",
+      "round": "oracle",
+      "execution": {
+        "round": "oracle",
+        "worker": "copilot",
+        "exit_code": 0,
+        "outer_timeout": false,
+        "elapsed_seconds": 266.91,
+        "input_bytes": 50549,
+        "input_sha256": "3b50d02a7024920884b232ce6497e7baef46fe21d7865463eae400bcf489e2d6",
+        "stderr_bytes": 0
+      },
+      "tools_used": [
+        {
+          "name": "view",
+          "path": "own frozen prompt only"
+        },
+        {
+          "name": "view",
+          "path": "own frozen prompt only"
+        }
+      ],
+      "repository_edits": 0,
+      "tests_executed": [],
+      "files": [],
+      "delivered": false,
+      "provider_reported": {
+        "totalPremiumRequestCost": 1,
+        "totalNanoAiu": 40294860000,
+        "tokenDetails": {
+          "input": {
+            "tokenCount": 254
+          },
+          "cache_read": {
+            "tokenCount": 10906
+          },
+          "cache_write": {
+            "tokenCount": 24392
+          },
+          "output": {
+            "tokenCount": 34037
+          }
+        }
+      }
+    },
+    {
+      "worker": "copilot",
+      "round": "oracle-repair",
+      "execution": {
+        "round": "oracle-repair",
+        "worker": "copilot",
+        "exit_code": 0,
+        "outer_timeout": false,
+        "elapsed_seconds": 174.84,
+        "input_bytes": 27183,
+        "input_sha256": "58565a6120ab0d479af48547c17fd37ba7954fb5a5d1f7fb495157f9122a7ac3",
+        "stderr_bytes": 0
+      },
+      "tools_used": [
+        {
+          "name": "view",
+          "path": "own frozen prompt only"
+        },
+        {
+          "name": "view",
+          "path": "own frozen prompt only"
+        }
+      ],
+      "repository_edits": 0,
+      "tests_executed": [],
+      "files": [
+        {
+          "path": "tests/cursor-independent.c",
+          "lines": 393
+        }
+      ],
+      "delivered": true,
+      "provider_reported": {
+        "totalPremiumRequestCost": 1,
+        "totalNanoAiu": 29690660000,
+        "tokenDetails": {
+          "input": {
+            "tokenCount": 254
+          },
+          "cache_read": {
+            "tokenCount": 10911
+          },
+          "cache_write": {
+            "tokenCount": 14631
+          },
+          "output": {
+            "tokenCount": 25873
+          }
+        }
+      }
+    }
+  ],
+  "deviations": [
+    "Claude831 lines exceeds650;about640 self-count is inaccurate.",
+    "First Copilot combined test request delivered no files under session cap;one reduced cursor-only correction retained same30 cap.",
+    "Cursor oracle393 lines exceeds280;two permitted own-prompt reads rather than one,no implementation exposure."
+  ],
+  "integration": [
+    "Keep original APIs/semantics;reduce retained span set from6 to5 plus terminal read-only comparison,88B LP64/48B ILP32 explicit validation workspace.",
+    "Narrow proven bounded drawing indices to uint32_t;no token/state ABI change.",
+    "Codex authors pointer reference test from frozen contract before implementation body review:13675 assertions,3000 transitions and saturation/cancel/refusal checks.",
+    "Correct oracle fixture retirement between sessions and wrong saved-right restoration;quarantined allocations remain live until abandon,not a claim about expired-allocation recovery.",
+    "Codex implementation-aware supplement checks changing nonpixel padding between calls and unused payload prefix/tail;original external per-pixel oracle remains separate. Three deliberate defective private builds compile and are rejected by tests."
+  ],
+  "verification_results": {
+    "local_profiles": [
+      {
+        "profile": "debug",
+        "tests": 302,
+        "failed": 0,
+        "junit_sha256": "41c3c9d91d81525ecd708e9997dcf141263d5390184f83ed6f4e236b23d43c7b"
+      },
+      {
+        "profile": "sanitized",
+        "tests": 302,
+        "failed": 0,
+        "junit_sha256": "4523a0d404f880fac2f6091e7124ddf7d9490febac1b76a84da1a2f47f762eef"
+      },
+      {
+        "profile": "gcc-i686",
+        "tests": 270,
+        "failed": 0,
+        "junit_sha256": "08e8c862798401da32f1462d299c98e0b14a7ea897fdfce6932491660f979a08"
+      }
+    ],
+    "total_ctests": 874,
+    "failed": 0,
+    "pointer_direct_assertions": 13675,
+    "pointer_reference_transitions": 3000,
+    "cursor_oracle_layouts": 10,
+    "cursor_direct_failures": 0,
+    "object_checks": {
+      "specifications": [
+        "SPEC-0051",
+        "SPEC-0052"
+      ],
+      "efi_image_changed": false,
+      "target_executed": false,
+      "object_audits": 24,
+      "efi_abi_object_twins_equal": true
+    },
+    "ci": null,
+    "refined_cursor_runs": [
+      {
+        "profile": "debug",
+        "tests": 1,
+        "failed": 0,
+        "junit_sha256": "dfa844563caaca3fd3a751dff150f2319fd29074cfde814b5ba4e58999d8a024"
+      },
+      {
+        "profile": "sanitized",
+        "tests": 1,
+        "failed": 0,
+        "junit_sha256": "2b712b409238d26865b702960b9918b8c237cdccc6128293b1dfcee183443fec"
+      },
+      {
+        "profile": "gcc-i686",
+        "tests": 1,
+        "failed": 0,
+        "junit_sha256": "e2422fc09ef03d41607846a29f1c6b0e41276f1f1c4a8b48cafaf01fc4766d75"
+      }
+    ],
+    "optimized_suites": [
+      {
+        "compiler": "clang",
+        "bits": 32,
+        "optimization": "O2",
+        "suite": "pointer",
+        "exit_code": 0
+      },
+      {
+        "compiler": "clang",
+        "bits": 32,
+        "optimization": "O2",
+        "suite": "cursor",
+        "exit_code": 0
+      },
+      {
+        "compiler": "clang",
+        "bits": 64,
+        "optimization": "O2",
+        "suite": "pointer",
+        "exit_code": 0
+      },
+      {
+        "compiler": "clang",
+        "bits": 64,
+        "optimization": "O2",
+        "suite": "cursor",
+        "exit_code": 0
+      },
+      {
+        "compiler": "gcc",
+        "bits": 32,
+        "optimization": "O2",
+        "suite": "pointer",
+        "exit_code": 0
+      },
+      {
+        "compiler": "gcc",
+        "bits": 32,
+        "optimization": "O2",
+        "suite": "cursor",
+        "exit_code": 0
+      },
+      {
+        "compiler": "gcc",
+        "bits": 64,
+        "optimization": "O2",
+        "suite": "pointer",
+        "exit_code": 0
+      },
+      {
+        "compiler": "gcc",
+        "bits": 64,
+        "optimization": "O2",
+        "suite": "cursor",
+        "exit_code": 0
+      }
+    ],
+    "negative_controls": [
+      {
+        "mutation": "pointer-clamp-notification",
+        "compiled": true,
+        "exit_code": 1,
+        "oracle_rejected": true
+      },
+      {
+        "mutation": "cursor-missing-restore",
+        "compiled": true,
+        "exit_code": 1,
+        "oracle_rejected": true
+      },
+      {
+        "mutation": "cursor-full-byte-restore",
+        "compiled": true,
+        "exit_code": 1,
+        "oracle_rejected": true
+      }
+    ],
+    "full_matrix_note": "874 full-matrix tests preceded the padding/payload-prefix supplement;the final cursor test then reran successfully in all3 profiles. Unrelated relevant inputs unchanged."
+  },
+  "memory": {
+    "state_bytes": {
+      "ILP32": 48,
+      "LP64": 56
+    },
+    "payload_bytes": {
+      "MONO1": 48,
+      "RGBA8": 1024
+    },
+    "art_bits_bytes": 64,
+    "native_x64_general_registers_static_frames": [
+      {
+        "function": "cs_cursor_init",
+        "bytes": 0,
+        "kind": "static"
+      },
+      {
+        "function": "span_add",
+        "bytes": 0,
+        "kind": "static"
+      },
+      {
+        "function": "cs_cursor_bind",
+        "bytes": 168,
+        "kind": "static"
+      },
+      {
+        "function": "cur_state_ok",
+        "bytes": 56,
+        "kind": "static"
+      },
+      {
+        "function": "cs_cursor_show",
+        "bytes": 168,
+        "kind": "static"
+      },
+      {
+        "function": "cur_prepare",
+        "bytes": 104,
+        "kind": "static"
+      },
+      {
+        "function": "cur_save_draw",
+        "bytes": 136,
+        "kind": "static"
+      },
+      {
+        "function": "cs_cursor_move",
+        "bytes": 168,
+        "kind": "static"
+      },
+      {
+        "function": "cur_restore",
+        "bytes": 128,
+        "kind": "static"
+      },
+      {
+        "function": "cs_cursor_hide",
+        "bytes": 152,
+        "kind": "static"
+      },
+      {
+        "function": "cs_cursor_advance",
+        "bytes": 56,
+        "kind": "static"
+      },
+      {
+        "function": "cs_cursor_discard",
+        "bytes": 56,
+        "kind": "static"
+      },
+      {
+        "function": "cs_cursor_repaired",
+        "bytes": 72,
+        "kind": "static"
+      },
+      {
+        "function": "cs_cursor_unbind",
+        "bytes": 56,
+        "kind": "static"
+      },
+      {
+        "function": "cs_cursor_abandon",
+        "bytes": 56,
+        "kind": "static"
+      },
+      {
+        "function": "cs_cursor_query",
+        "bytes": 56,
+        "kind": "static"
+      },
+      {
+        "function": "cur_art_ok",
+        "bytes": 24,
+        "kind": "static"
+      }
+    ],
+    "native_x64_largest_frame": 168,
+    "stack_note": "Compiler frames include ABI/register-save/call costs.96B theoretical local-workspace target is not a96B whole-frame or whole-system guarantee;full target stack budget remains a binding prerequisite."
+  },
+  "not_claimed": [
+    "all68 TEST-0061 or all34 TEST-0062 literal rows executed",
+    "window/GUI/IRQ/adapter behavior",
+    "arbitrary expired/unmapped native pointer recovery",
+    "physical/full128K or whole-ROM size/stack certification",
+    "new boot observation or release readiness"
+  ],
+  "external_remaining_usage": {
+    "Claude": null,
+    "Copilot": null,
+    "Grok": null,
+    "Antigravity": null
+  },
+  "usage_note": "Provider counters/list cost are not remaining quota,billed cost or measured net Codex savings."
+}

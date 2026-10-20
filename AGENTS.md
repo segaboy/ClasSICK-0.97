@@ -1,5 +1,7 @@
 # ClasSICK 0.97 working instructions
 
+2026-10-20,SRC-0319..0322: implement SPEC-0051/0052 isolated native pointer/cursor helpers plus hosted/compiler/CI verification under IMPL-0055/TEST-0063. No scene/driver/binding/UART or target/reference/hardware/release change. Claude primary,Copilot cursor oracle(one empty attempt then reduced artifact),Codex direct small pointer test and sole integrator/verifier. [Actual evidence](docs/development/pointer-cursor-evidence.json). Preserve24 originals/held brief/old records/releases/wiki;existing Mac M1-M7,PC GUI/human and compatibility gates persist.
+
 2026-10-19 cursor contract,SRC-0316..0318: SPEC-0052 / ADR-0060 and TEST-0062 unexecuted cases reviewed for paired preview2;no code/art/fixture/test execution/build/trial/release. One Claude primary plus one focused correction,no second worker. [Contract](docs/specifications/SPEC-0052-native-cursor-composition.md). Existing source/compatibility/PC GUI/Mac M1-M7 gates remain;current releases and originals preserved.
 
 Owner priority: protect Codex usage. Count coordination, reading, review and bookkeeping as costs. Do small tasks directly when delegation adds comparable overhead; delegate substantial bounded work and integrate sound artifacts. Keep required records concise, reuse unchanged context/evidence, and preserve clean-room and verification gates. External worker activity does not prove net savings. See [orchestration](docs/development/agent-orchestration.md).
