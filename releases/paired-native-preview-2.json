@@ -65,7 +65,7 @@
   ],
   "checks_executed": [],
   "tests_executed": [],
-  "no_runtime_build_or_trial": true,
+  "no_runtime_build_or_trial": false,
   "blockers": [
     "Mac source assessment complete;M1-M7 block full motion adapter admission",
     "PC native VM capture/focus reliability not human-qualified",
@@ -126,8 +126,11 @@
     "specification": "SPEC-0053",
     "implementation": "IMPL-0056",
     "verification": "TEST-0064",
-    "status": "local-passed-native68000-ci-pending",
+    "status": "hosted-and-native68000-compiler-verified-unbound",
     "scene_bound": false,
-    "evidence": "docs/development/window-interaction-evidence.json"
-  }
+    "evidence": "docs/development/window-interaction-evidence.json",
+    "source_revision": "b9d6c8865cecaed8ce532d033e298c0f7e931170"
+  },
+  "runtime_build_scope": "Isolated helper compilation and normal CI existing unbooted regression candidates;new feature remains unbound.",
+  "target_trial_executed": false
 }

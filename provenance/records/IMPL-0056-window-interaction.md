@@ -12,7 +12,9 @@ tests pass.10,000 valid pointer transitions agree with the independent window
 model.8 optimized Clang/GCC32/64 suites pass;2 compiled intentional defects are
 rejected.12 width/endian/EFI-ABI object audits show no imports/mutable globals.
 44-byte state,20-byte config and20-byte effects checked at compile time.
-Native68000 CI pending at this source checkpoint;no target executes.
+Native68000 CI passes atb9d6c88:12 object compiles/6 matching-twin closures,
+no imports or mutable data,44-byte state checked. No target executes.
+[Exact source CI](https://github.com/segaboy/ClasSICK-0.97/actions/runs/39442569569).
 
 No scene,driver,Uart,ROM/EFI input or existing API edits. Mac M1-M7,PC GUI/human
 input and existing source/role/historical/edition/physical/full128K/B2/native-app/

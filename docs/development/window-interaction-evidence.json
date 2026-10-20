@@ -11,7 +11,7 @@
   "decision": "ADR-0061",
   "implementation": "IMPL-0056",
   "verification": "TEST-0064",
-  "status": "local-passed-native68000-ci-pending",
+  "status": "hosted-and-native68000-compiler-verified-unbound",
   "scope": "Isolated original native window interaction helper and hosted/compiler/CI verification;no scene,driver,guest ABI or platform binding,target run or release.",
   "inputs_git_lf_sha256": {
     "core/ui/window.h": "0a964c1801facd731c58abf3e88fdb96d39c3cd38bbf473bba4f879852a8b1a2",
@@ -149,7 +149,141 @@
         "SPEC-0053"
       ]
     },
-    "ci": null
+    "ci": {
+      "source_revision": "b9d6c8865cecaed8ce532d033e298c0f7e931170",
+      "url": "https://github.com/segaboy/ClasSICK-0.97/actions/runs/39442569569",
+      "conclusion": "success",
+      "jobs": {
+        "m68k-rom": "success",
+        "windows-bootstrap": "success"
+      },
+      "final_attempt": 2,
+      "first_attempt": {
+        "conclusion": "failure",
+        "failure": "GCC fatal error:atexit failed compiling unchanged platform/uefi/keyboard.c;no source diagnostic",
+        "native68000": "success"
+      },
+      "recovery": "Retry failed Windows job once at identical source;no source or toolchain change. Compiler-process cause remains unclassified.",
+      "native68000": {
+        "specifications": [
+          "SPEC-0053"
+        ],
+        "cpu": "68000",
+        "inputs": {
+          "core/ui/window.c": "ddec6ccab8bf5148240d6269bf33374180ac60406b4ab50558809ff3e53aa18a",
+          "tests/window-layout.c": "bef4b60be4018cdd7b23aea0b5b7602ab199f6cea8db2da4bd5c7648aa078bb9",
+          "core/ui/window.h": "0a964c1801facd731c58abf3e88fdb96d39c3cd38bbf473bba4f879852a8b1a2",
+          "core/input/pointer.h": "d0a53cdadbe728195ce2c35bc4ef0b2a1687351912c759eda1bf6b4c38abdc38"
+        },
+        "object_compilations": 12,
+        "closure_audits": 6,
+        "undefined_imports": 0,
+        "mutable_data": 0,
+        "records": [
+          {
+            "optimization": "O0",
+            "twins_equal": true,
+            "closure": {
+              "bytes": 2736,
+              "sha256": "5a1a0e3da7ba322f57def0040d2b189c70e7e3d10aa791620a0faa5f104a5f06"
+            },
+            "static_frames": [
+              {
+                "function": "span",
+                "bytes": 0,
+                "kind": "static"
+              },
+              {
+                "function": "overlap",
+                "bytes": 0,
+                "kind": "static"
+              },
+              {
+                "function": "geometry",
+                "bytes": 0,
+                "kind": "static"
+              },
+              {
+                "function": "canonical",
+                "bytes": 28,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "event_valid",
+                "bytes": 8,
+                "kind": "static"
+              },
+              {
+                "function": "clamp",
+                "bytes": 0,
+                "kind": "static"
+              },
+              {
+                "function": "cs_window_begin",
+                "bytes": 28,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cs_window_apply",
+                "bytes": 40,
+                "kind": "dynamic,bounded"
+              }
+            ],
+            "largest_frame": 40
+          },
+          {
+            "optimization": "O2",
+            "twins_equal": true,
+            "closure": {
+              "bytes": 1912,
+              "sha256": "c2eb8f57a19d8aaede73b73412e49383076b2dee49fcee72f97ed60c720bc7a0"
+            },
+            "static_frames": [
+              {
+                "function": "cs_window_begin",
+                "bytes": 16,
+                "kind": "static"
+              },
+              {
+                "function": "cs_window_apply",
+                "bytes": 64,
+                "kind": "static"
+              }
+            ],
+            "largest_frame": 64
+          },
+          {
+            "optimization": "Os",
+            "twins_equal": true,
+            "closure": {
+              "bytes": 1664,
+              "sha256": "150ab6f721fa0ea9841955590563028ebd5d8911fe17aed21c8a7b91b166e263"
+            },
+            "static_frames": [
+              {
+                "function": "geometry",
+                "bytes": 8,
+                "kind": "static"
+              },
+              {
+                "function": "cs_window_begin",
+                "bytes": 44,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cs_window_apply",
+                "bytes": 76,
+                "kind": "dynamic,bounded"
+              }
+            ],
+            "largest_frame": 76
+          }
+        ],
+        "stack_note": "Per-function compiler frames include ABI costs; not whole-system stack certification.",
+        "target_executed": false,
+        "rom_inputs_changed": false
+      }
+    }
   },
   "memory": {
     "state_bytes": 44,
