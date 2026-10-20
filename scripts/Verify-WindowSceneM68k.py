@@ -54,6 +54,8 @@ def main():
             undefined = run([nm, '-u', closure]).strip()
             defined = run([nm, '--defined-only', '--format=posix', closure])
             if undefined or re.search(r'^\S+ [BbCcDdGgSsVv] ', defined, re.M):
+                for source, obj in zip(SOURCES, objects):
+                    print('MODULE', 'O' + opt, source, run([nm, '-u', obj]).strip(), flush=True)
                 raise ValueError('Native helper closure imports or mutable data: ' + undefined)
             if not all(re.search(r'^' + api + r' T ', defined, re.M) for api in APIS):
                 raise ValueError('Missing native window API')
