@@ -12,11 +12,11 @@ import subprocess
 
 SOURCES = ('apps/window-scene/scene.c', 'apps/product-scene/scene.c',
            'core/graphics/cursor.c', 'core/graphics/surface.c',
-           'arch/m68k/runtime.c', 'tests/window-scene-layout.c')
+           'arch/m68k/runtime.c', 'arch/m68k/composition-runtime.c', 'tests/window-scene-layout.c')
 HEADERS = ('apps/window-scene/scene.h', 'apps/product-scene/scene.h',
            'core/ui/window.h', 'core/input/pointer.h',
-           'core/graphics/cursor.h', 'core/graphics/surface.h')
-APIS = ('cs_window_scene_compose',)
+           'core/graphics/cursor.h', 'core/graphics/surface.h', 'arch/m68k/runtime.h')
+APIS = ('cs_window_scene_compose', '__modsi3')
 
 
 def main():
@@ -76,12 +76,12 @@ def main():
     inputs = {name: hashlib.sha256((repo / name).read_bytes().replace(b'\r\n', b'\n')).hexdigest()
               for name in SOURCES + HEADERS}
     report = dict(specifications=['SPEC-0054'], cpu='68000',
-                  inputs=inputs, object_compilations=36, closure_audits=6,
+                  inputs=inputs, object_compilations=42, closure_audits=6,
                   undefined_imports=0, mutable_data=0, records=records,
                   stack_note='Per-function compiler frames include ABI costs; not whole-system stack certification.',
                   target_executed=False, rom_inputs_changed=False)
     (args.output / 'manifest.json').write_text(json.dumps(report, indent=2) + '\n', encoding='utf-8')
-    print('Window composition68000 PASS:36 objects,6 closures,matching twins,no imports/data;no run.')
+    print('Window composition68000 PASS:42 objects,6 closures,matching twins,no imports/data;no run.')
 
 
 if __name__ == '__main__':

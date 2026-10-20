@@ -3485,3 +3485,12 @@ Independent engineering specification and pixel model precede implementation
 review. Lead corrections and synthetic fault tests are separate from the oracle.
 Original GPL-3.0-or-later code and tests,no third-party implementation/art or
 manual samples. [Implementation](records/IMPL-0057-window-composition.md).
+
+
+SRC-0328 compiler followup2026-10-20,reusing SRC-0081:targeted review of
+[GCC Internals3.1.1](https://gcc.gnu.org/onlinedocs/gccint/Integer-library-routines.html),
+published __modsi3/__umodsi3 signatures and remainder semantics only. Versioned
+13.4 URL was unavailable;current manual interface prose plus actual pinned13.3
+compiler closure establishes this limited ABI use. No compiler/runtime source,
+target archives or manual algorithm admitted or sent to workers. Original signed
+remainder adapter and tests by Codex,not historical Macintosh implementation.

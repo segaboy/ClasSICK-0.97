@@ -27,3 +27,13 @@ remain unchanged. Owner/platform binding is next;Mac M1-M7,PC GUI/human and all
 existing source/role/historical/edition/physical/full128K/B2/native-app/Linux/
 mini-vMac/both System1-ROM gates persist.24originals/held brief/UART/old records,
 released assets/tags and retired wiki preserved. No target trial or release.
+
+
+Native followup:initial and diagnostic CI expose anO2 __modsi3 import in the
+unchanged branding renderer. Add original signed remainder adapter to the isolated
+compiler closure only,using admitted SRC-0081 interface facts and original
+__umodsi3. No GCC implementation/archive or new release-runtime dependency.
+Three final remainder CTests pass(10,110 cases each);four optimized32/64-bit
+Clang/GCC suites pass. Retained final local total317;prior composition inputs
+unchanged. Zero-divisor trap unexecuted. Native closure now42compiles/6twins.
+Superseded failed workflows are retained/cancelled,never reported as passing.

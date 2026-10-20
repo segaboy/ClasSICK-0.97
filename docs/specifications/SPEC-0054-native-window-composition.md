@@ -40,3 +40,17 @@ Directed tests inject hide/paint/advance/show failures,check pre-effect refusals
 exhaustion and explicit repaint recovery. These are synthetic API failures,not
 native hardware-exception recovery or a claim that every malformed case ran.
 [Executed profiles,negative controls and exact inputs](../development/window-composition-evidence.json).
+
+
+Native compiler closure followup(SRC-0081/SRC-0328):GCC'sO2 branding renderer
+requires __modsi3. Its published compiler interface returns a signed remainder;
+no target runtime archive or implementation is admitted. An original separate
+composition-runtime.c converts operands to unsigned magnitudes,uses the existing
+original __umodsi3,and reapplies the dividend sign. For nonzero divisor,the
+magnitude is <=INT32_MAX,so INT32_MIN is handled without signed negation/overflow.
+As an engineering extension,INT32_MIN/-1 yields0. Zero divisor delegates the
+existing helper's trap;that path is not executed by this slice's tests.
+Only isolated composition compiler/test targets include this file;the released
+ROM/EFI runtime lists,old runtime.c/runtime.h and product-scene.c remain unchanged.
+10,110 boundary/reference cases and four optimized host/compiler profiles execute;
+native ABI/closure is verified by pinned GCC13 compilation,not a target run.

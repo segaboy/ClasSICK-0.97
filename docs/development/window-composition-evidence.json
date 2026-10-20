@@ -28,7 +28,10 @@
     "arch/m68k/runtime.c": "1e3fa635a12a6ac91b30f25fdf19c493b84493dcecc4ce7e4dcc298c3412d078",
     "tests/window-scene-reference.c": "b6e614b01c039918a6be7f360d79decfc3762c5bd9e983c2ba12df334344c04e",
     "tests/window-scene-faults.c": "daa499b09964d256c98245f30c2d332deb90944c4d24718521d5ccb3d678749d",
-    "tests/window-scene-layout.c": "37c0e55a6e0dd4218bab6082d299bf8751ef7362d0f52637d500a5d658019d97"
+    "tests/window-scene-layout.c": "37c0e55a6e0dd4218bab6082d299bf8751ef7362d0f52637d500a5d658019d97",
+    "arch/m68k/composition-runtime.c": "a5fd0811ca98811ea7f45e3a2dfa95f42f6bf5298fadb37ad8bc5ebdbac55720",
+    "arch/m68k/runtime.h": "8b0de7d191dbcb43576a32c88e604f7c3145ac094af5137cc128381a0ff074e8",
+    "tests/composition-remainder.c": "57c84add78746fabf4a8baba9a354187d8ce92fc7b78128f09b708dec7791d56"
   },
   "workers": {
     "claude": {
@@ -126,7 +129,7 @@
         "junit_sha256": "6a0a4f1291ec1ce194f8d2560f92e2885a619658b8d330873040bc18911fd295"
       }
     ],
-    "total_ctests": 314,
+    "total_ctests": 317,
     "failed": 0,
     "reference_layouts": 8,
     "reference_complete_frames": 2008,
@@ -179,7 +182,59 @@
         "SPEC-0054"
       ]
     },
-    "ci": null
+    "ci": null,
+    "remainder": {
+      "cases_per_execution": 10110,
+      "final_profiles": [
+        {
+          "profile": "debug",
+          "tests": 1,
+          "failed": 0,
+          "junit_sha256": "f59baebf98dbb8a8e5e7aa19bd84da18fa679e3dda7ffd9bbd3380d1dbf2aba4"
+        },
+        {
+          "profile": "sanitized",
+          "tests": 1,
+          "failed": 0,
+          "junit_sha256": "0ee8fd16bdbae5c3fa45f25afdb780db8ecac17fc64109873a1d1cbe46b324d6"
+        },
+        {
+          "profile": "gcc-i686",
+          "tests": 1,
+          "failed": 0,
+          "junit_sha256": "a9f9ce96ca8c4578f57bbd239e53b5bb91ef0b1e262d16e1eb93d7e6d9fa0b4b"
+        }
+      ],
+      "optimized": [
+        {
+          "compiler": "clang",
+          "bits": 32,
+          "exit_code": 0,
+          "output": "Composition remainder PASS:10110 cases;zero-divisor trap not executed"
+        },
+        {
+          "compiler": "clang",
+          "bits": 64,
+          "exit_code": 0,
+          "output": "Composition remainder PASS:10110 cases;zero-divisor trap not executed"
+        },
+        {
+          "compiler": "gcc",
+          "bits": 32,
+          "exit_code": 0,
+          "output": "Composition remainder PASS:10110 cases;zero-divisor trap not executed"
+        },
+        {
+          "compiler": "gcc",
+          "bits": 64,
+          "exit_code": 0,
+          "output": "Composition remainder PASS:10110 cases;zero-divisor trap not executed"
+        }
+      ],
+      "zero_divisor_executed": false,
+      "MIN_div_minus_one": "original engineering extension returns0;avoids C overflow oracle"
+    },
+    "matrix_note": "308 full and3+3 focused composition tests precede isolated arithmetic addition;3 final arithmetic-only reruns pass afterward. Original composition/runtime inputs unchanged."
   },
   "memory": {
     "effect_bytes": 32,
@@ -203,5 +258,18 @@
     "Grok": null,
     "Antigravity": null
   },
-  "usage_note": "Provider-reported task counters are not remaining balances or comparable Codex quota savings. Grok/Antigravity not invoked."
+  "usage_note": "Provider-reported task counters are not remaining balances or comparable Codex quota savings. Grok/Antigravity not invoked.",
+  "compiler_followup": {
+    "initial_source": "d6a88add9c8a6e49e349087961be45037b2b32dd",
+    "diagnostic_source": "42c120b36701a9f386f9013924ffdd85ff5fe1e6",
+    "failure": "Native O2 closure imports __modsi3 from unchanged apps/product-scene/scene.c",
+    "diagnostic": "Per-module nm imports identify existing branding renderer,not speculative code change",
+    "resolution": "Original arch/m68k/composition-runtime.c wraps existing original unsigned helper using safe signed magnitudes;isolated compiler closure only",
+    "interface_source": "SRC-0081,GCC Internals3.1.1 __modsi3 and __umodsi3",
+    "boundaries": "Published interface declarations/prose only;no compiler/runtime implementation source,archives or manual algorithm read/linked",
+    "superseded_ci_runs": [
+      "https://github.com/segaboy/ClasSICK-0.97/actions/runs/39497833940",
+      "https://github.com/segaboy/ClasSICK-0.97/actions/runs/39498387142"
+    ]
+  }
 }
