@@ -3374,3 +3374,21 @@ SRC-0300 executed checkpoint: CI3150/11;local596/2;38 mouse+5 Space events throu
 ## SRC-0313 - Lead pointer contract/source-boundary review
 
 - Codex finalizes original engineering semantics,68 unexecuted case identifiers and PC evidence classes. Rechecks SRC-0080 identity;holds Mac source review after one unrelated declaration peek under owner-disposition policy,no function body/use/export or affected implementation. No new motion facts admitted. [Inventory](../docs/development/pointer-source-and-input-inventory.md),[review](../docs/development/pointer-input-contract-review.md).
+
+
+## SRC-0314 - Owner narrow published-source review disposition
+
+- Dean Howell,2026-10-19: "Continue the narrow published-source review", replying
+  to the sanitized single-declaration exposure question. Clears mouse prose,
+  figures/interface facts only; unrelated declaration remains excluded. No
+  implementation, execution or publication expansion. [Review](../docs/development/mac-pointer-source-review.md).
+
+## SRC-0315 - Lead Mac mouse interface source-sufficiency assessment
+
+- Codex reidentifies admitted SRC-0080 and visually checks III-27..29,
+  1-basedPDF34..36: mouse prose/interface table/Figures5-7, no adoption of
+  symbolic declarations or samples. Signal/direction facts suffice; M1-M7
+  block a complete motion binding. Later edition is not January1984 proof.
+  No worker/manual transfer, code, tests, build or target run.
+  [Review](../docs/development/mac-pointer-source-review.md),
+  [receipt](../docs/development/mac-pointer-source-review.json).

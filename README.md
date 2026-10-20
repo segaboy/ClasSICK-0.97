@@ -1,5 +1,7 @@
 # ClasSICK 0.97
 
+2026-10-19 source-review continuation, SRC-0314/0315: owner clears narrow published mouse review; earlier hold resolved, declaration excluded. First pointer/input contract/inventory slice complete with Mac adapter gaps M1-M7; no code, tests, build or trial. Next recommended: bounded cursor composition contract. [Review](docs/development/mac-pointer-source-review.md). Older held checkpoints below are historical. Existing gates and released capabilities remain unchanged.
+
 2026-10-19: release2 pointer/input engineering contract reviewed;68 cases unexecuted. PC GUI/device/human evidence separated;Mac motion source review held for owner disposition. No runtime/release change. [Review](docs/development/pointer-input-contract-review.md).
 
 2026-10-19 next proposed paired release: moving original cursor and one draggable/click-responsive native window on Mac68000 and x86-64 PC. ROM0.4.0-alpha.1/PC0.2.0-alpha.1 provisional;planning only,no code/trial/release. [Goal](releases/paired-native-preview-2.md).

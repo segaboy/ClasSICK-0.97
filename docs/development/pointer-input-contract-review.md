@@ -33,3 +33,12 @@ SRC-0080 private PDF identity matches the admitted50,687,193-byte/hash/290-page 
 All68 cases and proposed GUI qualification steps are unexecuted. Doc guards are mechanical checks,not feature evidence. Renderer API/art,Mac/PC adapters,directional proof,window integration and exact-image qualification remain later accepted slices. No hardware register mapping,guest manager ABI or new SDK is installed.
 
 Claude provider-reported list cost0.2615248USD and Copilot1 premium request are task counters,not billed cost or cross-provider quota savings. All four remaining allowances unavailable. Full packets/transcripts/private source identity/exposure audit stay outside Git;no manual/code text is republished.
+
+
+## Subsequent owner disposition -2026-10-19
+
+The source-review hold above describes this original checkpoint. SRC-0314 now
+clears the narrow published-source review; the unrelated declaration stays
+excluded. [The continuation](mac-pointer-source-review.md) completes the
+sufficiency assessment with M1-M7 blocking Mac adapter admission. The contract,
+68 unexecuted cases and original worker receipt remain unchanged.

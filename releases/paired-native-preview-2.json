@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "candidate": "paired-native-preview-2",
-  "status": "pointer-contract-reviewed-mac-source-review-held",
+  "status": "pointer-contract-and-source-assessment-complete-adapter-blocked",
   "goal": "first interactive original native window",
   "baseline_public_revision": "3b909d731c7457a81f7a29086db3a3b0a610dbb1",
   "current_releases": {
@@ -67,7 +67,7 @@
   "tests_executed": [],
   "no_runtime_build_or_trial": true,
   "blockers": [
-    "Mac motion hardware/procedure source sufficiency not established by current button contract",
+    "Mac source assessment complete;M1-M7 block full motion adapter admission",
     "PC native VM capture/focus reliability not human-qualified",
     "one GUI preboot startup failure unclassified",
     "feature contracts/art/API/memory/cancellation choices not finalized",
@@ -95,8 +95,9 @@
     "pointer_contract": "SPEC-0051-reviewed-core-only",
     "case_inventory": "TEST-0061;68 unexecuted identifiers",
     "pc_evidence_inventory": "reviewed;no new observation",
-    "mac_source_review": "held-owner-disposition-pending",
-    "complete": false
+    "mac_source_review": "completed-signal-facts;M1-M7-block-complete-adapter",
+    "complete": true
   },
-  "pointer_contract_review": "docs/development/pointer-input-contract-review.json"
+  "pointer_contract_review": "docs/development/pointer-input-contract-review.json",
+  "mac_source_review": "docs/development/mac-pointer-source-review.json"
 }

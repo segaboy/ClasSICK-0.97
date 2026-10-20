@@ -1,5 +1,7 @@
 # Native Macintosh and x86 parity plan
 
+2026-10-19 source-review continuation, SRC-0314/0315: owner clears narrow published mouse review; earlier hold resolved, declaration excluded. First pointer/input contract/inventory slice complete with Mac adapter gaps M1-M7; no code, tests, build or trial. Next recommended: bounded cursor composition contract. [Review](mac-pointer-source-review.md). Older held checkpoints below are historical. Existing gates and released capabilities remain unchanged.
+
 2026-10-19 release2 first slice: SPEC-0051 pure native pointer/input contract for both CPUs,68 unexecuted case identifiers and separate PC input-evidence inventory. Mac hardware source lane held for owner disposition;no motion binding or pixel/GUI/human pass claimed. [Review](pointer-input-contract-review.md).
 
 Current release/next goal2026-10-19: ROM0.3.0-alpha.1/PC0.1.0-alpha.1 published;[receipt](../../releases/paired-native-preview-1-publication.json) supersedes earlier pending-status paragraphs. Next proposed [paired-native-preview-2](../../releases/paired-native-preview-2.md) adds pointer/cursor and one draggable/content-click window to both native paths. Planning only;source sufficiency/contract first,no code or new trial.

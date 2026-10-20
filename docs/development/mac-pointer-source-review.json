@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-19",
+  "baseline": "c2795041a1ee4aefd026cdda037c675af8f37718",
+  "sources": [
+    "SRC-0314",
+    "SRC-0315",
+    "SRC-0080"
+  ],
+  "scope": "Owner clears narrow published mouse prose/figures/interface review; unrelated declaration stays excluded. SRC-0080 III-27..29 visually checked: signal wiring/direction sufficient as interface facts, complete SCC/VIA motion binding insufficient. No code/header/fixtures/feature-test/build/target run/release. SPEC-0051 and68 unexecuted cases unchanged; all prior releases,24 originals,held brief,UART and retired wiki preserved.",
+  "owner_disposition": {
+    "answer": "Continue the narrow published-source review",
+    "affected_lane": "Mac motion source review",
+    "unrelated_declaration": "excluded-unused-undistributed",
+    "affected_implementation_paths": [],
+    "affected_commits": [],
+    "implementation_authorized": false
+  },
+  "source_identity": {
+    "source": "SRC-0080",
+    "bytes": 50687193,
+    "sha256": "4c0de9a3a4d41c41b8462b2a77aad8b95b92e1980afff165c1f986da0a81988b",
+    "pages": 290
+  },
+  "visual_checks": [
+    {
+      "pdf_page": 34,
+      "printed": "III-27",
+      "scope": "mouse prose/interface table/figures only;symbolic declarations excluded"
+    },
+    {
+      "pdf_page": 35,
+      "printed": "III-28",
+      "scope": "mouse prose/interface table/figures only;symbolic declarations excluded"
+    },
+    {
+      "pdf_page": 36,
+      "printed": "III-29",
+      "scope": "mouse prose/interface table/figures only;symbolic declarations excluded"
+    }
+  ],
+  "verdict": "signal-interface-facts-sufficient-complete-motion-binding-insufficient",
+  "gaps": [
+    "M1",
+    "M2",
+    "M3",
+    "M4",
+    "M5",
+    "M6",
+    "M7"
+  ],
+  "first_slice_complete": true,
+  "mac_adapter_admitted": false,
+  "specification_unchanged": "SPEC-0051",
+  "case_inventory_unchanged": "TEST-0061",
+  "unexecuted_case_count": 68,
+  "feature_tests_executed": [],
+  "workers_called": [],
+  "builds": [],
+  "target_runs": [],
+  "publication": false,
+  "next_recommended": "bounded original cursor composition contract",
+  "external_remaining_usage": "not exposed for all four tools"
+}

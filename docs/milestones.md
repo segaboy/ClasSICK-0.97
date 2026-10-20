@@ -1,5 +1,7 @@
 # Current milestones and release tracks
 
+2026-10-19 source-review continuation, SRC-0314/0315: owner clears narrow published mouse review; earlier hold resolved, declaration excluded. First pointer/input contract/inventory slice complete with Mac adapter gaps M1-M7; no code, tests, build or trial. Next recommended: bounded cursor composition contract. [Review](development/mac-pointer-source-review.md). Older held checkpoints below are historical. Existing gates and released capabilities remain unchanged.
+
 2026-10-19 paired-native-preview-2: SPEC-0051 pointer/input contract and68 unexecuted cases reviewed. PC evidence inventory complete;Mac hardware-source review held pending owner disposition. No moving cursor/adapter implementation or new trial. [Review](development/pointer-input-contract-review.md).
 
 2026-10-19 next goal proposed: [paired-native-preview-2](../releases/paired-native-preview-2.md),first interactive native window. Pointer/cursor,drag/content action,dirty redraw and input reliability must match Mac68000/x86-64 PC. First slice:source-sufficiency/input contract. All feature checks unexecuted,current releases unchanged.

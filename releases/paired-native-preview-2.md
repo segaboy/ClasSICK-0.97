@@ -141,3 +141,14 @@ Checks:
 ## First-slice checkpoint -2026-10-19
 
 [SPEC-0051 contract/review](../docs/development/pointer-input-contract-review.md) and68 unexecuted case identifiers are ready;PC evidence inventory separates device/GUI/human classes. Mac source lane is held pending the owner decision after an unrelated manual declaration peek;no new motion facts or algorithms adopted. No core/cursor/adapter implementation or new trial is authorized by this checkpoint.
+
+
+## First-slice completion -2026-10-19
+
+SRC-0314 resolves the source-review hold in the earlier checkpoint. The
+[completed source assessment](../docs/development/mac-pointer-source-review.md)
+verifies mouse signal/direction facts and records M1-M7 before Mac adapter
+admission. SPEC-0051 and68 unexecuted cases are unchanged. The contract/input
+inventory slice is complete with these explicit blockers; release2 remains
+unready. Next recommended is the bounded cursor composition contract. No
+implementation, fixture, test execution, build, target run or release occurred.

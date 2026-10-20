@@ -3,37 +3,25 @@
 SPEC-0051 / ADR-0059. This is an inventory and proposed qualification path,
 not a new target observation or hardware motion implementation.
 
-## Mac source lane: held for owner disposition
+## Mac source lane: owner-cleared review; adapter prerequisites remain open
 
-SRC-0080 is already admitted:published *Inside Macintosh* III,1985,
-separate printing. The private copy was mechanically reidentified at50,687,193
-bytes,SHA-256 `4c0de9a3a4d41c41b8462b2a77aad8b95b92e1980afff165c1f986da0a81988b`,290 pages.
-The existing public source map points to SCC III-22..25,Mouse III-25..29 and
-VIA III-39..42;SRC-0071 is the separately admitted owner's combined edition.
-These are candidate locators,not newly verified motion facts in this slice.
+SRC-0314 records the owner's "Continue the narrow published-source review".
+The previous source-review hold is resolved; the unrelated declaration remains
+excluded, with no affected implementation or worker exposure. The historical
+held checkpoint is preserved.
 
-A page-location peek landed on one unrelated printed constant declaration in
-a sound paragraph. No function body,ROM/binary,emulator implementation or
-mouse algorithm was read or adopted. The declaration is excluded;its text is
-not reproduced here. No implementation exists in this slice and no worker
-received manual content. The Mac hardware-source review was stopped under
-[POLICY.md,Contamination response](../clean-room/POLICY.md#contamination-response).
-Owner disposition is pending. The independent original pointer contract,
-case review and existing PC evidence inventory are unaffected.
+[The completed visual source assessment](mac-pointer-source-review.md) verifies
+SRC-0080 identity and mouse prose/table/Figures5-7 at III-27..29 (PDF34..36).
+It establishes published signal wiring and direction facts. It does not establish
+complete SCC initialization/status/acknowledgment, VIA ownership, CPU routing,
+loss/baseline/coherent delivery or target cost/applicability. Gaps M1-M7 block
+Mac adapter admission. No decoder, controller algorithm or polling procedure is
+inferred. Printed symbolic declarations/sample code stay excluded from adoption.
 
-The next source review must establish,without copying samples or equates:
-
-- Motion signals and their independently documented direction/edge interpretation.
-- Relevant SCC/VIA input/interrupt/configuration interfaces and safe acknowledge/order rules.
-- Required initialization and interrupt/polling interaction with the current native loop.
-- What can be observed as raw motion versus what requires an admitted register/protocol manual.
-- Native button/motion sampling coherency and any loss/overflow/cancellation limits.
-
-No controller initialization,signal table or decoder is inferred from the old
-button-only loop,an emulator implementation,or an incomplete locator peek.
-If further published interface manuals are required,review their eligibility
-before use. January1984/hardware applicability remains a separate question.
-No private PDF/text/page image is committed or supplied to external workers.
+The first contract/inventory slice is complete as an assessment with blockers;
+it is not a complete hardware specification. The next recommended engineering
+slice is the cursor composition contract. No private PDF/text/page image is
+committed or supplied to external workers. No new implementation or run occurs.
 
 ## Existing native input evidence
 

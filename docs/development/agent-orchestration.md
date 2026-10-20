@@ -1,5 +1,7 @@
 # Agent Orchestration Protocol
 
+2026-10-19 Mac source continuation: Codex alone checks admitted published mouse prose/figures, after explicit owner disposition. No manual input or fresh task to workers; reuse completed Claude pointer draft and Copilot review. Source sufficiency is partial, Mac binding blocked. Next engineering draft should use one external primary and reviewed-public contracts only; a second worker requires a distinct unresolved risk. [Review](mac-pointer-source-review.md).
+
 Pointer-contract allocation2026-10-19: Claude primary195/90-line original contract/cases,111.14s,zero tools/writes/tests;spec cap exceeded. One distinct-risk Copilot cancellation/counter audit16.19s,one permitted prompt read,zero writes/tests;lead corrects erroneous/partial-context findings. Manuals withheld from both;Mac source lane held under policy,independent work unaffected. All case lists unexecuted. [Review](pointer-input-contract-review.md).
 
 Next-release planning2026-10-19: one Claude primary139-line plan,53.75s,zero tools/writes/tests,within150 cap. Codex selects/tightens goal and evidence gates;no second worker or requalification. Future slices keep substantial external primary,distinct-risk independent oracle only,and Codex sole source reviewer/writer/integrator/verifier. [Review](next-release-plan-review.md).
