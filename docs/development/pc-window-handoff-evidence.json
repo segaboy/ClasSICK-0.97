@@ -6,7 +6,7 @@
   "verification": "TEST-0068",
   "decision": "ADR-0065",
   "baseline_revision": "aa2859f24370746243c93ce7199b8023309444e1",
-  "status": "hosted-and-compiler-verified-boot-unbound",
+  "status": "hosted-compiler-and-normal-ci-verified-boot-unbound",
   "scope": "Complete decoded PC report to shared native window owner;hosted tests,compiler/normal CI and ordinary Git/HQ only. No controller/boot/guest ABI binding,VM/emulator/reference/hardware run or release.",
   "sources": [
     "SRC-0336",
@@ -32,7 +32,22 @@
     ],
     "object_audits": 12,
     "efi_abi_full_file_twins_equal": true,
-    "ci": null,
+    "ci": {
+      "headSha": "983823a576c38eea9494860eb813a1b3a298e107",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/segaboy/ClasSICK-0.97/actions/runs/39646760468",
+      "jobs": [
+        {
+          "name": "m68k-rom",
+          "conclusion": "success"
+        },
+        {
+          "name": "windows-bootstrap",
+          "conclusion": "success"
+        }
+      ]
+    },
     "local_final_ctests": 322,
     "final_focused_ctests_per_additional_profile": 3
   },

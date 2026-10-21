@@ -173,8 +173,9 @@
     "implementation": "IMPL-0060",
     "verification": "TEST-0068",
     "evidence": "docs/development/pc-window-handoff-evidence.json",
-    "status": "hosted-and-compiler-verified-boot-unbound",
+    "status": "hosted-compiler-and-normal-ci-verified-boot-unbound",
     "controller_bound": false,
-    "boot_bound": false
+    "boot_bound": false,
+    "source_revision": "983823a576c38eea9494860eb813a1b3a298e107"
   }
 }

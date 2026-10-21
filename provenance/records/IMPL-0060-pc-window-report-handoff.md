@@ -16,7 +16,8 @@ saturated counters and invalid/refused input. Existing renderer is reused in the
 whole-frame comparison;no new independent renderer or device-direction claim.
 Three compiled faulty adapters are rejected.12 width/endian/EFI-ABI object audits
 pass,including delayed full-file-identical twins and no mutable global/imports
-beyond cs_window_input_sample. Normal CI pending.
+beyond cs_window_input_sample. Windows and68000 regression CI pass at983823a.
+[CI](https://github.com/segaboy/ClasSICK-0.97/actions/runs/39646760468). New PC adapter is not bound to either boot image.
 
 Test-only corrections:RGBA enum spelling;right edge expected288=512-224;
 saturation fixture must update its actual rendered snapshot as well as count.
