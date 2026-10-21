@@ -45,7 +45,7 @@ int main(int argc,char **argv)
  }
  event(&s,WM_MOUSEMOVE,270,135,1);event(&s,WM_LBUTTONUP,270,135,0);CHECK(s.input.window.x==250 && s.input.window.y==130 && !s.input.window.dragging);
  capture(&s,"hosted-window-dragged");
- RECT r={0,0,1280,960};CHECK(AdjustWindowRect(&r,WS_OVERLAPPEDWINDOW,FALSE));CHECK(SetWindowPos(s.window,NULL,0,0,r.right-r.left,r.bottom-r.top,SWP_NOMOVE|SWP_NOZORDER|SWP_NOACTIVATE));
+ RECT r={0,0,1280,960};CHECK(AdjustWindowRect(&r,WS_OVERLAPPEDWINDOW,FALSE));CHECK(SetWindowPos(s.window,NULL,0,0,r.right-r.left,r.bottom-r.top,SWP_NOMOVE|SWP_NOZORDER|SWP_NOACTIVATE|SWP_NOSENDCHANGING));
  event(&s,WM_LBUTTONUP,350,200,0);event(&s,WM_LBUTTONDOWN,350,200,1);event(&s,WM_LBUTTONUP,350,200,0);
  CHECK(s.input.counter.presses==3u && s.input.window.pattern==0u);capture(&s,"hosted-window-large");
  cs_win_window_close(&s);puts("Capture PASS:49 drag frames,2 stills;every GDI pixel matches native frame;synthetic only");return 0;

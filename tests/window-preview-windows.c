@@ -47,11 +47,23 @@ static void send_at(cs_win_window *s,UINT msg,int x,int y,int down)
     int ox=r.right>640?(r.right-640)/2:0,oy=r.bottom>480?(r.bottom-480)/2:0;
     SendMessageW(s->window,msg,down?MK_LBUTTON:0,position(x+ox+64,y+oy+69));image(s);
 }
+/* Reproduce a CI-sized desktop without depending on the host monitor. */
+static WNDPROC original_size_proc;
+static LRESULT CALLBACK limited_size_proc(HWND window,UINT message,WPARAM wp,LPARAM lp)
+{
+    LRESULT result=CallWindowProcW(original_size_proc,window,message,wp,lp);
+    if(message==WM_GETMINMAXINFO){MINMAXINFO *m=(MINMAXINFO*)lp;m->ptMaxTrackSize.x=800;m->ptMaxTrackSize.y=600;}
+    return result;
+}
 static void resize(cs_win_window *s,int width,int height)
 {
     RECT r={0,0,width,height};CHECK(AdjustWindowRect(&r,WS_OVERLAPPEDWINDOW,FALSE));
-    CHECK(SetWindowPos(s->window,NULL,0,0,r.right-r.left,r.bottom-r.top,SWP_NOMOVE|SWP_NOZORDER|SWP_NOACTIVATE));
-    RECT actual;CHECK(GetClientRect(s->window,&actual));CHECK(actual.right==width && actual.bottom==height);
+    original_size_proc=(WNDPROC)GetWindowLongPtrW(s->window,GWLP_WNDPROC);
+    CHECK(SetWindowLongPtrW(s->window,GWLP_WNDPROC,(LONG_PTR)limited_size_proc));
+    BOOL resized=SetWindowPos(s->window,NULL,0,0,r.right-r.left,r.bottom-r.top,SWP_NOMOVE|SWP_NOZORDER|SWP_NOACTIVATE|SWP_NOSENDCHANGING);
+    CHECK(SetWindowLongPtrW(s->window,GWLP_WNDPROC,(LONG_PTR)original_size_proc));CHECK(resized);
+    RECT actual;CHECK(GetClientRect(s->window,&actual));if(actual.right!=width || actual.bottom!=height)fprintf(stderr,"requested client %dx%d;actual %ldx%ld\n",width,height,actual.right,actual.bottom);
+    CHECK(actual.right==width && actual.bottom==height);
 }
 static void print_client(cs_win_window *s)
 {

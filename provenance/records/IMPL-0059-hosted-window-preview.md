@@ -15,7 +15,7 @@ validation. Independent adapter oracle predates worker output inspection;
 subsequent directed cases cover clarified behavior. No second worker or retry.
 
 313 full Clang64 CTests plus1 sanitized/1 GCC32 focused test pass. Each adapter
-run verifies38 complete frames,3 client paints and1,656,250 assertions. Directed
+run verifies38 complete frames,3 client paints and1,656,254 assertions. Directed
 traces cover signed outside coordinates,held input,press/release,drag/final
 release,capture/focus/cancel loss,margins,resize,cleanup/reopen and fault stop.
 GCC64-O2 passes;two compiled click-release/scaled-presentation defects fail.
@@ -36,3 +36,12 @@ stream and encoded asset. A GCC observer indentation warning is fixed without
 semantic change. Narrow exact-path/exact-SHA GIF admission plus three tamper/
 provenance unit cases;no arbitrary GIF policy expansion. No screenshots of a
 reference system,desktop/chrome or firmware run. [Media](../../docs/evidence/screenshots/2026-10-21/README.md).
+
+
+Initial Windows CI fails the hidden fixture's1280x960 size assertion. Lead
+reproduces the monitor/tracking ceiling locally(800x600 ->784x561 client).
+Test and capture observers explicitly suppress pre-change size validation;
+product adapter is unchanged. Tests retain full large-client pixel assertions
+under the forced ceiling. Three negative controls now include the reproduced
+sizing failure;all315 final local CTests pass. Captures remain byte-identical.
+[Failed CI retained](https://github.com/segaboy/ClasSICK-0.97/actions/runs/39597371865).

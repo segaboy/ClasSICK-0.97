@@ -17,7 +17,7 @@
     "platform/windows/window-preview.h": "d0f81fba9464faf687290537631705587a4943351e815d12713a5f3d51245fe5",
     "platform/windows/window-preview.c": "3c9bc8a5e3dd927b7edeea0f770984d1816d83cd18a0055fe1244f386464c9f1",
     "apps/window-scene/windows-main.c": "59b53e3efb77debab80b6e90be78406da93ce661a39d63c5a579bc162dd33503",
-    "tests/window-preview-windows.c": "0d1785b6c64a1841ec0766389fec84c3593528f2791c9289537c63357672896e",
+    "tests/window-preview-windows.c": "0147ed150522091513023745701534f8227b41d5c7bc5a984870f94b2a7c80fd",
     "CMakeLists.txt": "d819e4c143a66c9ac4cbea13932e6493cb306c44da9cc48d8a660169eb823673",
     "platform/windows/presenter.h": "7692bd3e82a503366b23b34ff49a07743dea73f6061c80bcd43e50eddfbf2c2b",
     "platform/windows/presenter.c": "02c44770e5acd3ee74d967be6bea5ab89ed4f63c2fe9b4ae8a0ad4d2598893c8",
@@ -39,7 +39,7 @@
     "core/input/mouse.c": "fad65173ea1421fd02affc4fea7a52720fba515e849e9c3159c35eeeab18eb8d",
     "core/ui/window.h": "0a964c1801facd731c58abf3e88fdb96d39c3cd38bbf473bba4f879852a8b1a2",
     "core/ui/window.c": "ddec6ccab8bf5148240d6269bf33374180ac60406b4ab50558809ff3e53aa18a",
-    "tools/evidence/window-capture.c": "f5dd78118d59a03450660c119fc79eed2b3f065190742bed28974b50746d6f0d",
+    "tools/evidence/window-capture.c": "9c308f1ddf891a924c0eb446f91430c4b73a7d325aefaa450242a94841773e4b",
     "tools/evidence/window-media.py": "b87acc8fb61208c94cd45468d199ad74f6010f51c79390ed809101a2f2a6df80",
     "scripts/Test-Repository.ps1": "87e256e986e9f6696c5759fa13571081fb15ca6ae856e8edadb7248873f8e449",
     "scripts/check_animations.py": "d7933d01a207ff8daf7f7c3a14bf2e8451d4250c0efaaf3df82c0522cfbfd36e",
@@ -105,28 +105,28 @@
         "tests": 313,
         "failed": 0,
         "scope": "full regression,incremental existing build",
-        "junit_sha256": "54ed45ea4fda50016dba6a43778730f3e7ae46c12bfebc5345f62ada4d1e07eb"
+        "junit_sha256": "40f8cfd340180e1b9bf7da21b795a275951710ebde32ce762c773b0f8d83b5ce"
       },
       {
         "profile": "sanitized",
         "tests": 1,
         "failed": 0,
         "scope": "new preview only",
-        "junit_sha256": "fcd9ffb2dc49713828f765d39e8332a7799833a4cad55478a1d9d63ae60bde2e"
+        "junit_sha256": "9a4b94322087f2f08ad1eb2c3c1d771cc1efb5fe4ed1687d640142d82199906c"
       },
       {
         "profile": "gcc32",
         "tests": 1,
         "failed": 0,
         "scope": "new preview only",
-        "junit_sha256": "f7d7e73c814bb72327409874c53b350be4770d2bd64021eea2cb9b01a07e4373"
+        "junit_sha256": "fc34fe1c87fddbca1c218b599b69e944c7475bb571a7e9191991dad68b5d0066"
       }
     ],
     "total_final_profile_ctests": 315,
     "failed": 0,
     "complete_reference_frames_per_run": 38,
     "client_paints_per_run": 3,
-    "checks_per_run": 1656250,
+    "checks_per_run": 1656254,
     "client_sizes": [
       [
         640,
@@ -145,19 +145,25 @@
       {
         "profile": "gcc64-O2",
         "exit_code": 0,
-        "output": "Hosted window adapter PASS:38 complete frames,3 client paints,1656250 checks;synthetic messages only"
+        "output": "Hosted window adapter PASS:38 complete frames,3 client paints,1656254 checks;synthetic messages only"
       }
     ],
     "negative_controls": [
       {
         "profile": "release-cancels-next-click",
         "exit_code": 1,
-        "output": "line 81:s.input.counter.presses==1u && s.input.window.pattern==1u && GetCapture()==s.window"
+        "output": "line 93:s.input.counter.presses==1u && s.input.window.pattern==1u && GetCapture()==s.window"
       },
       {
         "profile": "scaled-and-centered-clipping",
         "exit_code": 1,
-        "output": "line 70:b[0]==(black?0u:255u) && b[1]==b[0] && b[2]==b[0]"
+        "output": "line 82:b[0]==(black?0u:255u) && b[1]==b[0] && b[2]==b[0]"
+      },
+      {
+        "profile": "desktop-size-ceiling-before-fixture-fix",
+        "exit_code": 1,
+        "output": "requested client 1280x960;actual 784x561\nline 66:actual.right==width && actual.bottom==height",
+        "source_sha256": "4f4de74bf77a36ac5e5d58999f60086c2b5d869e68ab77546e7a5373ffbcb7d7"
       }
     ],
     "gui_subsystem_verified": [
@@ -208,5 +214,16 @@
     "all_decoded_pixels_exact": true,
     "Clang64_GCC32_capture_reproduction_exact": true,
     "guard": "one exact-path/exact-SHA GIF exception;no general GIF admission"
-  }
+  },
+  "ci_failures": [
+    {
+      "source_revision": "61c2c58483254a3357c18185f829e9c8015826eb",
+      "url": "https://github.com/segaboy/ClasSICK-0.97/actions/runs/39597371865",
+      "job": "windows-bootstrap",
+      "result": "failed",
+      "diagnostic": "hidden test client size differs from requested1280x960",
+      "local_reproduction": "800x600 tracking ceiling produces784x561 client",
+      "correction": "Test/capture sizing suppresses WM_WINDOWPOSCHANGING validation;product adapter unchanged. Test retains actual1280x960 image checks under an explicit smaller tracking ceiling."
+    }
+  ]
 }

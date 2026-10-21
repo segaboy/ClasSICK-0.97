@@ -79,7 +79,7 @@
   ],
   "captured_on": "2026-10-21",
   "product_source_revision": "cb2a753a005637c0e5255985fea01da0af4df616",
-  "capture_observer_git_lf_sha256": "f5dd78118d59a03450660c119fc79eed2b3f065190742bed28974b50746d6f0d",
+  "capture_observer_git_lf_sha256": "9c308f1ddf891a924c0eb446f91430c4b73a7d325aefaa450242a94841773e4b",
   "encoder_git_lf_sha256": "b87acc8fb61208c94cd45468d199ad74f6010f51c79390ed809101a2f2a6df80",
   "decoder": "existing Pillow12.3.0",
   "synthetic": true,
@@ -100,8 +100,13 @@
     {
       "compiler": "GCC32",
       "source_git_lf_sha256": "f5dd78118d59a03450660c119fc79eed2b3f065190742bed28974b50746d6f0d"
+    },
+    {
+      "compiler": "Clang64-size-fixture-fix",
+      "source_git_lf_sha256": "9c308f1ddf891a924c0eb446f91430c4b73a7d325aefaa450242a94841773e4b"
     }
   ],
   "observer_source_note": "GCC32 build includes a whitespace-only fix for GCC misleading-indentation diagnostics;all51 captured pixel streams and all3 encoded files match Clang64 exactly.",
-  "width_compiler_reproduction_exact": true
+  "width_compiler_reproduction_exact": true,
+  "size_fixture_capture_reproduction_exact": true
 }

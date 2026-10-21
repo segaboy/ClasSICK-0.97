@@ -61,3 +61,9 @@ Pillow only outside normal build/CI;every decoded GIF/PNG pixel must equal its
 capture. Store2 PNGs and one specifically reviewed49-frame GIF with source pins,
 rights,captions,hashes and explicit synthetic limitations. Animation timing is
 chosen presentation timing,not a benchmark. General GIFs remain excluded.
+
+
+Hidden-window test/capture fixtures must request dimensions independently of
+monitor tracking-size limits;this changes fixture setup,not product constraints.
+A controlled800x600 tracking ceiling reproduces the original CI assertion before
+the fixture fix. Retain1280x960 client/pixel checks;never skip or reduce them.
