@@ -1,0 +1,193 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-21",
+  "baseline": "e0969eedd38212d492d3b4a37b18db666de0ab06",
+  "sources": [
+    "SRC-0329",
+    "SRC-0330",
+    "SRC-0331"
+  ],
+  "specification": "SPEC-0055",
+  "decision": "ADR-0063",
+  "implementation": "IMPL-0058",
+  "verification": "TEST-0066",
+  "status": "local-passed-native68000-ci-pending",
+  "scope": "Isolated original native pointer/counter/window/compositor owner and hosted/compiler/normal CI verification;no platform,hardware,guest ABI or boot binding,target trial or release.",
+  "inputs_git_lf_sha256": {
+    "apps/window-scene/input.h": "33899a80efee4acfa83a7aaeb8e1509fa7ce3d47436b67ddc20629ebd0d35011",
+    "apps/window-scene/input.c": "2b10f8c6de9349e41a02d3138abd8bb04a83b0d7eb8cc646c627a0e5d2a44b19",
+    "apps/window-scene/scene.h": "f7e608eb507b3d5fe4af2720263b55c894454946f4637124c391b2eaaeca9982",
+    "apps/window-scene/scene.c": "bc3f8ac625bd782d368709cf915a94bbd7f9a6c4dd810197a11ae157363afa3f",
+    "apps/product-scene/scene.h": "7d5b50af59be3e25a67837d7183d0fa50afd36b9f0b3aaf1a1fb1ddea772ccf0",
+    "apps/product-scene/scene.c": "7488910c401285b1e211d3c6eb95a17f04683748ffa8fc2dba4e2659725872d2",
+    "core/graphics/cursor.h": "0ffc237d90b9b58ab26752223a73710e0cad4b0a24d53fd0ac0cfe08c42818d7",
+    "core/graphics/cursor.c": "c239ef42783ffaa446c59f7ba630b5b1cd78c95444449fa63b983f4c3bb98fe5",
+    "core/graphics/surface.h": "31de605b79282fac7f4208e28aab328662df975a03028ac16fe179672d6dc264",
+    "core/graphics/surface.c": "157ed442c0278a344b57cb0e08657c30273de2a62199d72a30b38e5ee7ea1c5c",
+    "core/input/pointer.h": "d0a53cdadbe728195ce2c35bc4ef0b2a1687351912c759eda1bf6b4c38abdc38",
+    "core/input/pointer.c": "d38b4b131f44a3ce8bf8019cdef8aa4e56e3d5c09f0bc9b154fd1f8ff920afa7",
+    "core/input/mouse.h": "d41c122f62933d83af8ad8015ca0f2b35298860bca80faa1dae0cd8705e8c542",
+    "core/input/mouse.c": "fad65173ea1421fd02affc4fea7a52720fba515e849e9c3159c35eeeab18eb8d",
+    "core/ui/window.h": "0a964c1801facd731c58abf3e88fdb96d39c3cd38bbf473bba4f879852a8b1a2",
+    "core/ui/window.c": "ddec6ccab8bf5148240d6269bf33374180ac60406b4ab50558809ff3e53aa18a",
+    "arch/m68k/runtime.h": "8b0de7d191dbcb43576a32c88e604f7c3145ac094af5137cc128381a0ff074e8",
+    "arch/m68k/runtime.c": "1e3fa635a12a6ac91b30f25fdf19c493b84493dcecc4ce7e4dcc298c3412d078",
+    "arch/m68k/composition-runtime.c": "a5fd0811ca98811ea7f45e3a2dfa95f42f6bf5298fadb37ad8bc5ebdbac55720",
+    "tests/window-input-independent.c": "5a8940cd21d6e91b37340306961ac8a7f6f06b477d0dfa868aa5e7136348307f",
+    "tests/window-input-layout.c": "b9fa95810862ccb3d619ff770b4bbf6d0f1c7ea8888315c668f28dbbf57ed1f2",
+    "scripts/Verify-WindowInputObjects.ps1": "561b11246db4223b15be1cbec3800b5b35102d88a8cabd846c72d42649ffac15",
+    "scripts/Verify-WindowInputM68k.py": "d5abf7c31c0e73a409ebc5ae82d703ef4ad31c81a538053593d6264fad554cb4",
+    "CMakeLists.txt": "5b37e046bfd31b3573407441b60709acedee68cddaab13fc8bef60d681e7f195",
+    ".github/workflows/bootstrap.yml": "ff37065463c1df78925833ac2abd39188863a2d8fcdc0172ab6d6e7c2568a747"
+  },
+  "worker": {
+    "provider": "GitHub Copilot",
+    "requested_model": "claude-sonnet-5.5",
+    "observed_model": "claude-sonnet-5.5",
+    "effort": "low",
+    "execution": {
+      "round": "implementation",
+      "worker": "copilot",
+      "exit_code": 0,
+      "outer_timeout": false,
+      "elapsed_seconds": 148.19,
+      "input_bytes": 20865,
+      "input_sha256": "afb9593801deef0185450d588c98256320e9df33627468cb49555e7cf6438447",
+      "stderr_bytes": 0
+    },
+    "tool_calls": [
+      {
+        "name": "view",
+        "path": "own frozen public/original prompt only",
+        "forceReadLargeFiles": true
+      }
+    ],
+    "proposed_lines": 345,
+    "line_limit": 550,
+    "accepted_header_source_lines": 287,
+    "tests_executed": [],
+    "checkout_edits": 0,
+    "provider_reported": {
+      "totalPremiumRequestCost": 1,
+      "totalNanoAiu": 24750010000,
+      "tokenDetails": {
+        "input": {
+          "tokenCount": 168
+        },
+        "cache_read": {
+          "tokenCount": 6416
+        },
+        "cache_write": {
+          "tokenCount": 12289
+        },
+        "output": {
+          "tokenCount": 21580
+        }
+      },
+      "totalApiDurationMs": 139997
+    },
+    "disposition": "Header/core adopted with targeted corrections;unfinished58-line basic test excluded;pre-existing contract-first lead oracle used."
+  },
+  "integration": [
+    "Check parent/descriptor aliases before child descriptor reads.",
+    "Validate pattern and product state and original cursor artwork before effects.",
+    "Resynchronize caller-supplied cursor token before pending recovery operations.",
+    "Keep frozen224/248-byte layout;compiler memory copies resolve only to original runtime in native closure."
+  ],
+  "verification_results": {
+    "profiles": [
+      {
+        "profile": "clang-final",
+        "tests": 311,
+        "failed": 0,
+        "scope": "full regression",
+        "junit_sha256": "ad72f5b8e02bbe3d92ffef69b0f18181440c007098648283828be5154a94a8a0"
+      },
+      {
+        "profile": "sanitized",
+        "tests": 2,
+        "failed": 0,
+        "scope": "new owner focused",
+        "junit_sha256": "9e434a0e865dba693ac2aa3b0a66b105dc01a3da7a03c71466629e6ff30b0e91"
+      },
+      {
+        "profile": "gcc32",
+        "tests": 2,
+        "failed": 0,
+        "scope": "new owner focused",
+        "junit_sha256": "2c2d72077c5b7a34f9a77e7a9355a75f26cc2fcbbb55392d65184c82b9c64136"
+      }
+    ],
+    "total_final_profile_ctests": 315,
+    "failed": 0,
+    "independent_complete_frames_per_run": 63,
+    "independent_checks_per_run": 565,
+    "optimized": [
+      {
+        "profile": "clang32",
+        "exit_code": 0,
+        "output": "Input owner independent PASS:63 frames,565 checks"
+      },
+      {
+        "profile": "clang64",
+        "exit_code": 0,
+        "output": "Input owner independent PASS:63 frames,565 checks"
+      },
+      {
+        "profile": "gcc32",
+        "exit_code": 0,
+        "output": "Input owner independent PASS:63 frames,565 checks"
+      },
+      {
+        "profile": "gcc64",
+        "exit_code": 0,
+        "output": "Input owner independent PASS:63 frames,565 checks"
+      }
+    ],
+    "negative_controls": [
+      {
+        "profile": "stale-render-receipt",
+        "exit_code": 1,
+        "output": "line 144: f.owner.render.stage==0u && f.owner.token.revision==before.revision"
+      },
+      {
+        "profile": "repair-recounts-press",
+        "exit_code": 1,
+        "output": "line 156: f.owner.counter.presses==1u && f.owner.window.pattern==1u && f.owner.pointer.suppress==1u && !f.owner.window.dragging"
+      }
+    ],
+    "objects": {
+      "object_audits": 12,
+      "target_executed": false,
+      "specifications": [
+        "SPEC-0055"
+      ],
+      "efi_abi_object_twins_equal": true,
+      "efi_image_changed": false
+    },
+    "ci": null
+  },
+  "memory": {
+    "state_bytes_ILP32": 224,
+    "state_bytes_LP64": 248,
+    "new_heap_allocations": 0,
+    "new_framebuffers": 0,
+    "cursor_payload_unchanged": true,
+    "actual_native_frames": null
+  },
+  "not_claimed": [
+    "platform/hardware/boot workload or guest ABI binding",
+    "target/VM/emulator/reference/hardware trial",
+    "hardware-exception or arbitrary invalid native-pointer recovery",
+    "historical Macintosh behavior",
+    "full128K/whole-call-stack/ROM-size certification",
+    "release readiness or net Codex quota savings"
+  ],
+  "external_remaining_usage": {
+    "Claude": null,
+    "Copilot": null,
+    "Grok": null,
+    "Antigravity": null
+  },
+  "usage_note": "Remaining account allowances unavailable;reported task counters are not balances or comparable Codex quota savings. One bounded primary,no second worker/retry;other qualifications reused."
+}

@@ -99,6 +99,9 @@ jobs:
       - name: Audit original window native objects (no target run)
         shell: pwsh
         run: .\scripts\Verify-WindowObjects.ps1 -BuildRoot build\window-objects
+      - name: Verify native input owner objects
+        shell: pwsh
+        run: .\scripts\Verify-WindowInputObjects.ps1 -BuildRoot build\window-input-objects
       - name: Audit original window composition objects (no target run)
         shell: pwsh
         run: .\scripts\Verify-WindowSceneObjects.ps1 -BuildRoot build\window-scene-objects
@@ -112,6 +115,13 @@ jobs:
           persist-credentials: false
       - name: Prepare hash-pinned workspace 68000 tools
         run: python3 scripts/Setup-M68k.py --output "$RUNNER_TEMP/classick-m68k"
+      - name: Verify isolated native input owner closure
+        run: python3 scripts/Verify-WindowInputM68k.py --tool-root "$RUNNER_TEMP/classick-m68k/root" --output "$RUNNER_TEMP/classick-window-input"
+      - uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
+        with:
+          name: classick-window-input-build
+          path: ${{ runner.temp }}/classick-window-input/manifest.json
+          if-no-files-found: error
       - name: Compile original window composition for68000 (no target run)
         run: python3 scripts/Verify-WindowSceneM68k.py --tool-root "$RUNNER_TEMP/classick-m68k/root" --output "$RUNNER_TEMP/classick-window-scene"
       - name: Retain native window composition compiler manifest

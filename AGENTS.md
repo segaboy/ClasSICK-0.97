@@ -1,5 +1,7 @@
 # ClasSICK 0.97 working instructions
 
+2026-10-21,SRC-0329..0331: SPEC-0055 isolated shared native input owner under IMPL-0058/TEST-0066. One pointer event to counter/window/compositor;retained fault prefix,explicit cancel/full-repaint recovery. Copilot primary,Codex sole integrator/independent oracle/verifier. Hosted/compiler/normal CI only;no platform/boot/guest ABI binding,target trial or release. Preserve24 originals/held brief/UART/old rows/releases/tags/retired wiki and all gates. [Receipt](docs/development/window-input-evidence.json).
+
 2026-10-20,SRC-0326..0328: SPEC-0054 isolated native window/cursor composition under IMPL-0057/TEST-0065. Hide/repaint/advance/show,shared nativeC,hosted/compiler/normal CI only. Copilot primary after Claude transport/cache-launch failures,Codex sole integrator/oracle/verifier. No input owner/platform/boot binding,target trial or release. Preserve24 originals/held brief/UART/old rows/releases/tags/frozen wiki and all existing gates. [Receipt](docs/development/window-composition-evidence.json).
 
 2026-10-20,SRC-0323..0325: SPEC-0053 isolated original native window helper under IMPL-0056/TEST-0064:drag/content/cancel only,hosted/compiler/CI verification. One Claude attempt yields service retries/no artifact;Codex direct fallback and contract-first model. No scene/driver/guest ABI/ROM/EFI binding or target run/release. Preserve24 originals/held brief/UART/old records/assets/tags/frozen wiki and all existing gates. [Receipt](docs/development/window-interaction-evidence.json).

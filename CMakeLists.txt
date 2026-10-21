@@ -1967,3 +1967,49 @@ if(BUILD_TESTING)
             "-DOBJECT=$<TARGET_OBJECTS:classick_window_scene_freestanding>" -P ${CMAKE_SOURCE_DIR}/scripts/Check-ObjectImports.cmake)
     endif()
 endif()
+
+# SPEC-0055 isolated native input owner; no platform or boot binding.
+add_library(classick_window_input STATIC apps/window-scene/input.c)
+target_link_libraries(classick_window_input PUBLIC classick_window_scene classick_window_core classick_pointer_core classick_mouse)
+add_library(classick_window_input_freestanding OBJECT apps/window-scene/input.c)
+add_library(classick_window_input_layout OBJECT tests/window-input-layout.c)
+add_library(classick_window_input_fault_object OBJECT apps/window-scene/input.c)
+target_compile_definitions(classick_window_input_fault_object PRIVATE
+    cs_window_input_begin=cs_fault_input_begin cs_window_input_sample=cs_fault_input_sample
+    cs_window_input_cancel=cs_fault_input_cancel cs_window_input_repair=cs_fault_input_repair
+    cs_mouse_button_sample=cs_fault_mouse_sample cs_window_apply=cs_fault_window_apply
+    cs_window_scene_compose=cs_fault_compose)
+add_executable(classick_window_input_independent tests/window-input-independent.c $<TARGET_OBJECTS:classick_window_input_fault_object>)
+target_link_libraries(classick_window_input_independent PRIVATE classick_window_input)
+foreach(target classick_window_input classick_window_input_freestanding classick_window_input_layout
+    classick_window_input_fault_object classick_window_input_independent)
+    if(CMAKE_C_COMPILER_ID MATCHES "Clang|GNU")
+        target_compile_options(${target} PRIVATE -Wall -Wextra -Wpedantic -Werror -Wconversion -Wsign-conversion
+            "-ffile-prefix-map=${CMAKE_SOURCE_DIR}=." "-ffile-prefix-map=${CMAKE_BINARY_DIR}=.")
+    elseif(MSVC)
+        target_compile_options(${target} PRIVATE /W4 /WX)
+    endif()
+endforeach()
+if(CMAKE_C_COMPILER_ID MATCHES "Clang|GNU")
+    foreach(target classick_window_input classick_window_input_freestanding classick_window_input_fault_object)
+        target_compile_options(${target} PRIVATE -ffreestanding -fno-builtin -fno-stack-protector)
+    endforeach()
+    target_compile_options(classick_window_input_freestanding PRIVATE -O2)
+endif()
+if(CLASSICK_SURFACE_SANITIZERS)
+    foreach(target classick_window_input classick_window_input_fault_object classick_window_input_independent)
+        target_compile_options(${target} PRIVATE -fsanitize=address,undefined -fno-sanitize-recover=all -fno-omit-frame-pointer)
+    endforeach()
+    target_link_options(classick_window_input_independent PRIVATE -fsanitize=address,undefined)
+endif()
+if(MINGW)
+    target_link_options(classick_window_input_independent PRIVATE -Wl,--no-insert-timestamp)
+endif()
+if(BUILD_TESTING)
+    add_test(NAME window-input.independent COMMAND classick_window_input_independent)
+    if(CMAKE_C_COMPILER_ID MATCHES "Clang|GNU")
+        add_test(NAME window-input.freestanding COMMAND ${CMAKE_COMMAND} "-DNM=${CLASSICK_NATIVE_DRAW_NM}"
+            "-DALLOWED=memcpy,cs_surface_init,cs_cursor_query,cs_cursor_hide,cs_pointer_begin,cs_pointer_sample_apply,cs_pointer_cancel,cs_mouse_button_begin,cs_mouse_button_sample,cs_window_begin,cs_window_apply,cs_window_scene_compose"
+            "-DOBJECT=$<TARGET_OBJECTS:classick_window_input_freestanding>" -P ${CMAKE_SOURCE_DIR}/scripts/Check-ObjectImports.cmake)
+    endif()
+endif()

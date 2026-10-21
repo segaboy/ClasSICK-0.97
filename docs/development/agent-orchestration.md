@@ -203,3 +203,13 @@ contract-first pixel oracle/fault injection;no second provider review. Inspect
 stream metadata at the first progress check and stop repeated transport retries
 without artifact. All-four remaining allowances unavailable;no net savings claim.
 [Receipt](window-composition-evidence.json).
+
+
+Input-owner allocation2026-10-21:one Copilot primary,Sonnet5.5 low,148.19s,
+one20,865-byte frozen public/original prompt view;345 proposed lines/550limit,
+no checkout edits/tests. Adopt header/core after concrete corrections;exclude
+unfinished58-line test rather than count it as verification. Use the lead's
+already-authored contract-first oracle and directed fault tests;no second
+provider,retry,new qualification or recreated sound core. Prior qualifications
+reused. All-four account balances unavailable;task counters don't establish
+Codex savings. [Receipt](window-input-evidence.json).

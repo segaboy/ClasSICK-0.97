@@ -3494,3 +3494,25 @@ published __modsi3/__umodsi3 signatures and remainder semantics only. Versioned
 compiler closure establishes this limited ABI use. No compiler/runtime source,
 target archives or manual algorithm admitted or sent to workers. Original signed
 remainder adapter and tests by Codex,not historical Macintosh implementation.
+
+
+## SRC-0329 - Owner next-step continuation
+
+Dean Howell,2026-10-21:"Move on to the next step",accepting the proposed isolated
+native input owner over the verified pointer/window/compositor,hosted/compiler/
+normal CI/Git/HQ verification. No platform/boot binding,target trial or release.
+
+## SRC-0330 - Copilot original input-owner proposal
+
+One frozen reviewed-public/original20,865-byte prompt;345 proposed header/core/
+test lines,one prompt view,no edits or tests. Core adopted after targeted lead
+corrections;unfinished test excluded. No HQ/manual/research-original/UART input.
+Worker proposals are engineering input,not historical authority.
+[Receipt](../docs/development/window-input-evidence.json).
+
+## SRC-0331 - Lead contract,independent oracle,integration and verification
+
+Frozen engineering contract and full-image model precede worker implementation
+inspection;subsequent directed failure tests exercise explicit recovery. Original
+GPL-3.0-or-later C and fixtures,no third-party implementation or manual samples.
+[Implementation](records/IMPL-0058-window-input-owner.md).
