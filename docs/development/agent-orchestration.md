@@ -239,3 +239,14 @@ directly by Codex;no worker briefing,fan-out,retry or requalification. Reuse
 existing core/renderer evidence and incremental builds. This avoids new worker
 coordination but does not establish net Codex quota savings. All-four remaining
 allowances unavailable. [Actual checks](pc-window-handoff-evidence.json).
+
+
+PC controller delivery2026-10-21:one bounded Copilot Sonnet5.5 low test primary,
+16933 original/public bytes,360.06s timeout,no artifact. Three transport EOF
+failures and six model-call starts;one prompt read plus an extra input-directory
+listing,no outside contents/edits/tests. Stop,no rebrief/retry/fan-out. Codex
+finishes focused tests from existing fixtures;no worker code credited. Before a
+future Copilot dispatch,check a supported transport-retry control if needed;
+do not invent a flag or infer a provider outage/quota problem. No complete
+session usage or balance;timeout is not backend cancellation. All-four remaining
+allowances unavailable. [Evidence](pc-bus-delivery-evidence.json).

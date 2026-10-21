@@ -4,6 +4,8 @@
 #include <stdlib.h>
 #include <string.h>
 #include "../platform/pc/window-input.h"
+#include "../platform/pc/ps2-bus.h"
+#include "ps2-bus-fixture.h"
 static unsigned checks,frames,packets;
 #define CHECK(x) do { ++checks; if(!(x)) { fprintf(stderr,"line %d: %s\n",__LINE__,#x); exit(1); } } while(0)
 typedef struct {
@@ -156,8 +158,59 @@ static void refusals(void)
     CHECK(memcmp(&f.owner,&saved,sizeof(saved))==0 && memcmp(copy,f.frame,f.bytes+32u)==0);
     f.owner.valid=CS_WINDOW_INPUT_VALID; free(copy); end(&f);
 }
+static void bus_trace(cs_surface_format format)
+{
+    static const row rows[]={
+        {{0x09,0,0},0,0,1},{{0x09,0,0},0,0,1},{{0x08,0,0},0,0,0},
+        {{0x18,100,96},-156,-96,0},{{0x09,0,0},0,0,1},
+        {{0x29,120,216},120,40,1},{{0x28,20,246},20,10,0},
+        {{0x09,0,0},0,0,1},{{0x09,10,0},10,0,1},
+        {{0x08,0,0},0,0,0},{{0x09,0,0},0,0,1},{{0x08,0,0},0,0,0}
+    };
+    bus_fixture hw; cs_ps2_bus bus; cs_ps2_bus_delivery event;
+    cs_input_queue queue; cs_input_record storage[8]; uint64_t now=0;
+    bf_init(&hw); cs_ps2_io io=bf_io(&hw);
+    CHECK(cs_input_init(&queue,storage,8)==CS_INPUT_OK);
+    CHECK(cs_ps2_bus_begin(&bus)==CS_PS2_ACTIVE);
+    for(unsigned i=0;i<200u && bus.result==CS_PS2_ACTIVE;++i) {
+        now+=1000u;
+        CHECK(cs_ps2_bus_poll_delivery(&bus,&io,now,&queue,&event)<=CS_PS2_READY);
+        CHECK(event.kind==CS_PS2_DELIVERY_NONE);
+    }
+    CHECK(bus.result==CS_PS2_READY && !hw.key.violations);
+    bus.packets=bus.errors=bus.auxiliary=bus.left.presses=UINT32_MAX;
+    fixture a,b; begin(&a,format,0); begin(&b,format,0);
+    for(unsigned n=0;n<sizeof(rows)/sizeof(rows[0]);++n) {
+        if(n==8u) { /* Known loss during the second title drag. */
+            CHECK(a.owner.window.dragging && a.owner.counter.presses==3u);
+            pf_byte(&hw.key,0,0x20); now+=1000u;
+            CHECK(cs_ps2_bus_poll_delivery(&bus,&io,now,&queue,&event)==CS_PS2_READY);
+            CHECK(event.kind==CS_PS2_DELIVERY_LOST);
+            CHECK(cs_window_input_cancel(&a.owner)==cs_window_input_cancel(&b.owner)); compare(&a,&b);
+            CHECK(!a.owner.window.dragging && a.owner.pointer.suppress==1u);
+        }
+        for(unsigned i=0;i<3u;++i) {
+            pf_byte(&hw.key,rows[n].raw[i],0x20); now+=1000u;
+            CHECK(cs_ps2_bus_poll_delivery(&bus,&io,now,&queue,&event)==CS_PS2_READY);
+            CHECK(event.kind==(i==2u?CS_PS2_DELIVERY_PACKET:CS_PS2_DELIVERY_NONE));
+            if(i==2u) {
+                const cs_pointer_sample sample={rows[n].x,rows[n].y,rows[n].buttons};
+                CHECK(cs_pc_window_packet(&a.owner,&event.packet)==cs_window_input_sample(&b.owner,&sample));
+                ++packets;
+            }
+            compare(&a,&b);
+        }
+        if(n==1u) CHECK(a.owner.counter.presses==1u && a.owner.window.pattern==1u);
+        if(n==6u) CHECK(a.owner.window.x==220 && a.owner.window.y==120 && !a.owner.window.dragging);
+        if(n==8u) CHECK(a.owner.counter.presses==3u && !a.owner.window.dragging);
+    }
+    CHECK(a.owner.counter.presses==4u && !a.owner.window.dragging);
+    CHECK(bus.packets==UINT32_MAX && bus.errors==UINT32_MAX && bus.auxiliary==UINT32_MAX);
+    CHECK(!hw.key.violations); end(&a); end(&b);
+}
 int main(void)
 {
     trace(CS_SURFACE_MONO1_MSB); trace(CS_SURFACE_RGBA8); refusals();
+    bus_trace(CS_SURFACE_MONO1_MSB); bus_trace(CS_SURFACE_RGBA8);
     printf("%u checks, %u frame comparisons, %u packets PASS\n",checks,frames,packets); return 0;
 }

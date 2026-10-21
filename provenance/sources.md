@@ -3569,3 +3569,25 @@ Reuses SPEC-0039 decoder and SPEC-0055 owner;no new manual,implementation source
 or research original. Raw-Y inversion is an explicit engineering profile with
 actual device/GUI directional qualification pending,not a new historical fact.
 [Evidence](../docs/development/pc-window-handoff-evidence.json).
+
+
+## SRC-0338 - Owner controller-delivery continuation
+
+Dean Howell,2026-10-21:"Next task." Continues the paired preview2 milestone
+through explicit per-poll controller delivery,original tests/compiler/normal CI
+and ordinary Git/HQ. No window boot binding,target/reference/hardware run or release.
+
+## SRC-0339 - Copilot bounded controller-test attempt
+
+Existing authenticated Sonnet5.5 low;one16933-byte frozen public/original brief.
+No completed artifact at360.06s;three transport failures/service retries,no code
+adopted. One prompt view and one extra input-directory listing;no outside
+content,edits or tests. No complete session usage or remaining balance;no zero
+consumption/backend cancellation claim. [Prompt/outcome](../docs/development/tasks/pc-bus-delivery-tests.md).
+
+## SRC-0340 - Lead original controller delivery and verification
+
+Original GPL-3.0-or-later contract,driver extension and fallback tests from the
+frozen interfaces/project fixtures. Baseline comparison uses only our own prior
+public driver source. No new manuals,third-party implementation,untracked
+research or historical inference. [Actual checks](../docs/development/pc-bus-delivery-evidence.json).

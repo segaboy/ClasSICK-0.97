@@ -1,0 +1,117 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-21",
+  "specification": "SPEC-0058",
+  "implementation": "IMPL-0061",
+  "verification": "TEST-0069",
+  "decision": "ADR-0066",
+  "baseline_revision": "4d8589c0d55e662147f17e5e624e2c2dfef47f60",
+  "status": "hosted-compiler-verified-window-boot-unbound",
+  "scope": "Explicit per-poll PC controller packet/loss receipt,legacy behavior preservation and hosted window handoff tests;compiler/normal CI and ordinary Git/HQ. Controller source changes require fresh candidate builds;no window boot binding,target/VM/emulator/reference/hardware run or release.",
+  "sources": [
+    "SRC-0338",
+    "SRC-0339",
+    "SRC-0340"
+  ],
+  "tests": {
+    "ctests": {
+      "clang": 317,
+      "sanitized": 12,
+      "gcc32": 7
+    },
+    "local_final_ctests": 336,
+    "delivery_assertions_per_run": 1883,
+    "paired_polls_per_run": 150,
+    "window_report_assertions_per_run": 6166,
+    "whole_frame_comparisons_per_run": 222,
+    "decoded_reports_per_run": 70,
+    "baseline_source_comparisons": [
+      {
+        "profile": "clang64",
+        "result": "1883 delivery checks/150 paired polls PASS",
+        "source_revision": "4d8589c0d55e662147f17e5e624e2c2dfef47f60"
+      },
+      {
+        "profile": "gcc32",
+        "result": "1883 delivery checks/150 paired polls PASS",
+        "source_revision": "4d8589c0d55e662147f17e5e624e2c2dfef47f60"
+      },
+      {
+        "profile": "gcc64",
+        "result": "1883 delivery checks/150 paired polls PASS",
+        "source_revision": "4d8589c0d55e662147f17e5e624e2c2dfef47f60"
+      }
+    ],
+    "baseline_source_identity": {
+      "revision": "4d8589c0d55e662147f17e5e624e2c2dfef47f60",
+      "path": "platform/pc/ps2-bus.c",
+      "bytes": 6799,
+      "git_blob_sha256": "1f4da8c2b0f82e11ed06de39d5b1139b26cd36f34a4c67e02d3b2f1f79eb38f9"
+    },
+    "negative_controls": [
+      {
+        "mutation": "stale-receipt",
+        "exit_code": 1,
+        "diagnostic": "line 49: event.kind==kind && event.packet.dx==x && event.packet.dy==y && event.packet.buttons==buttons"
+      },
+      {
+        "mutation": "saturation-hides-packet",
+        "exit_code": 1,
+        "diagnostic": "line 49: event.kind==kind && event.packet.dx==x && event.packet.dy==y && event.packet.buttons==buttons"
+      },
+      {
+        "mutation": "saturation-hides-loss",
+        "exit_code": 1,
+        "diagnostic": "line 49: event.kind==kind && event.packet.dx==x && event.packet.dy==y && event.packet.buttons==buttons"
+      }
+    ],
+    "compiler_object_audits": 34,
+    "expected_unsupported_native_abi_rejections": 2,
+    "ci": null
+  },
+  "test_limits": "E1 authored synthetic controller transcripts;whole-frame equivalence reuses the independently verified renderer. No device,GUI,human or hardware-direction qualification. Baseline replay is local,source-pinned,not claimed as CI execution.",
+  "workers": {
+    "copilot": {
+      "round": "tests",
+      "worker": "copilot",
+      "exit_code": null,
+      "outer_timeout": true,
+      "elapsed_seconds": 360.06,
+      "input_bytes": 16933,
+      "input_sha256": "e06add6e8aaa959efb86081a6d6050d4984be32690cb231651cbafa8e6f70ec3",
+      "stderr_bytes": 0
+    },
+    "requested_model": "claude-sonnet-5.5",
+    "effort": "low",
+    "transport_failures": 3,
+    "observed_model_call_starts": 6,
+    "completed_artifact": false,
+    "adopted_code_lines": 0,
+    "observed_tools": [
+      "one frozen prompt-file view",
+      "one extra input-directory listing"
+    ],
+    "deviation": "Directory listing beyond the requested single prompt read;no outside content read or edits/tests.",
+    "session_usage": "No complete usage file produced;no zero-consumption inference.",
+    "cancellation_limit": "CLI timeout does not establish provider-side cancellation.",
+    "fallback": "Codex original tests,no further worker/retry/qualification",
+    "remaining_all_four_allowances": "Unavailable;no fresh account checks or net savings claim."
+  },
+  "controller_source_changed": true,
+  "bus_layout_changed": false,
+  "legacy_poll_api_preserved": true,
+  "window_boot_bound": false,
+  "new_target_trial": false,
+  "release_ready": false,
+  "next": "PC window boot-binding contract covering ordinary-RAM cursor storage,presentation,lifecycle/traces and memory costs;Mac M1-M7 source closure remains required.",
+  "inputs_git_lf_sha256": {
+    "platform/pc/ps2-bus.h": "422c27a92d7323791cec451d534d8a0127d46a938e5b641a7c81caa2d4c9c8d9",
+    "platform/pc/ps2-bus.c": "273da199c535adbfe8b5f2f2d0acc0c922cc37159dcf1d09f725d9238d50926d",
+    "tests/ps2-bus-delivery.c": "e93a4e274d5a35126a72ad2feea384ce3f9bbe4024cd353d79926c942a03012a",
+    "tests/pc-window-input.c": "87fafa55e8caa5753000c1353da9339d6dbdb3a8b9730b165d3aee0814f5e549",
+    "CMakeLists.txt": "7840035cea577f520877928db1a72fcf489ff27d10c83def7870998f9a81b34a",
+    "docs/specifications/SPEC-0058-pc-bus-delivery.md": "135571c2a592e5f1e92e2d50cef2846f75166b4fe1f4832a88ca3c442996692f",
+    "docs/adr/0066-explicit-pc-bus-delivery.md": "1d3be8ad27fea9aab228b5244b36dee2001e322357ec93235f5681b9597baac8",
+    "docs/development/tasks/pc-bus-delivery-tests.md": "b8273c694da80453a440e68b861c4b0e8cbdaa54a630216fb42fd882e704c4e7"
+  }
+}

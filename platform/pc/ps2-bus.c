@@ -73,7 +73,8 @@ static void lose(cs_ps2_bus *b)
     (void)cs_mouse_button_sample(&b->left,0);
     b->synced=0;
 }
-static uint32_t ready(cs_ps2_bus *b,const cs_ps2_io *io,uint8_t status,cs_input_queue *q)
+static uint32_t ready(cs_ps2_bus *b,const cs_ps2_io *io,uint8_t status,cs_input_queue *q,
+    cs_ps2_bus_delivery *delivery)
 {
     cs_ps2_mouse_packet packet;
     uint8_t byte;
@@ -89,25 +90,40 @@ static uint32_t ready(cs_ps2_bus *b,const cs_ps2_io *io,uint8_t status,cs_input_
     if((status&0xC0u)!=0) {
         increment(&b->errors);
         (void)cs_ps2_mouse_feed(&b->decoder,byte,1,&packet);
-        lose(b); return CS_PS2_READY;
+        lose(b);
+        if(delivery!=NULL) delivery->kind=CS_PS2_DELIVERY_LOST;
+        return CS_PS2_READY;
     }
     /* FA/FE/AA are report payload here. Sync after unreported loss is unprovable. */
     fed=cs_ps2_mouse_feed(&b->decoder,byte,0,&packet);
     if(fed==CS_PS2_MOUSE_MORE) return CS_PS2_READY;
-    if(fed==CS_PS2_MOUSE_DROPPED) { increment(&b->errors); lose(b); return CS_PS2_READY; }
+    if(fed==CS_PS2_MOUSE_DROPPED) {
+        increment(&b->errors); lose(b);
+        if(delivery!=NULL) delivery->kind=CS_PS2_DELIVERY_LOST;
+        return CS_PS2_READY;
+    }
     if(fed!=CS_PS2_MOUSE_PACKET) return fail(b,CS_PS2_STATE);
     b->report=packet; increment(&b->packets);
-    if(b->synced==0) { b->left.down=packet.buttons&1u; b->synced=1; return CS_PS2_READY; }
-    if(cs_mouse_button_sample(&b->left,packet.buttons&1u)>CS_MOUSE_CHANGED) return fail(b,CS_PS2_STATE);
+    if(b->synced==0) { b->left.down=packet.buttons&1u; b->synced=1; }
+    else if(cs_mouse_button_sample(&b->left,packet.buttons&1u)>CS_MOUSE_CHANGED) return fail(b,CS_PS2_STATE);
+    if(delivery!=NULL) {
+        delivery->packet=packet;
+        delivery->kind=CS_PS2_DELIVERY_PACKET;
+    }
     return CS_PS2_READY;
 }
-uint32_t cs_ps2_bus_poll(cs_ps2_bus *b,const cs_ps2_io *io,uint64_t now,cs_input_queue *q)
+static uint32_t poll(cs_ps2_bus *b,const cs_ps2_io *io,uint64_t now,cs_input_queue *q,
+    cs_ps2_bus_delivery *delivery)
 {
     uint8_t status,byte,value=0;
     uint16_t port=0;
     uint32_t phase,result,limit;
     if(b==NULL || io==NULL || io->read==NULL || io->write==NULL || q==NULL)
         return CS_PS2_ARGUMENT;
+    if(delivery!=NULL) {
+        delivery->kind=CS_PS2_DELIVERY_NONE;
+        delivery->packet.dx=0; delivery->packet.dy=0; delivery->packet.buttons=0;
+    }
     if(b->phase>CS_PS2_BUS_READY || b->result>CS_PS2_MACHINE || b->synced>1u)
         return fail(b,CS_PS2_STATE);
     if(b->result>CS_PS2_READY) return b->result;
@@ -128,7 +144,7 @@ uint32_t cs_ps2_bus_poll(cs_ps2_bus *b,const cs_ps2_io *io,uint64_t now,cs_input
         ++b->polls;
     }
     status=io->read(io->context,0x64);
-    if(phase==CS_PS2_BUS_READY) return ready(b,io,status,q);
+    if(phase==CS_PS2_BUS_READY) return ready(b,io,status,q,delivery);
     if((status&1u)!=0) {
         if(phase==3) {
             if(b->retries>=64u) return fail(b,CS_PS2_CONTROLLER);
@@ -160,4 +176,14 @@ uint32_t cs_ps2_bus_poll(cs_ps2_bus *b,const cs_ps2_io *io,uint64_t now,cs_input
     if((status&2u)!=0) return b->result;
     io->write(io->context,port,value);
     enter(b,phase+1u,now); return b->result;
+}
+uint32_t cs_ps2_bus_poll(cs_ps2_bus *b,const cs_ps2_io *io,uint64_t now,cs_input_queue *q)
+{
+    return poll(b,io,now,q,NULL);
+}
+uint32_t cs_ps2_bus_poll_delivery(cs_ps2_bus *b,const cs_ps2_io *io,uint64_t now,
+    cs_input_queue *q,cs_ps2_bus_delivery *delivery)
+{
+    if(delivery==NULL) return CS_PS2_ARGUMENT;
+    return poll(b,io,now,q,delivery);
 }

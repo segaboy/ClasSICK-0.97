@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "candidate": "paired-native-preview-2",
-  "status": "windows-hosted-window-preview-verified-boot-unbound",
+  "status": "pc-controller-delivery-verified-window-boot-unbound",
   "goal": "first interactive original native window",
   "baseline_public_revision": "3b909d731c7457a81f7a29086db3a3b0a610dbb1",
   "current_releases": {
@@ -24,7 +24,7 @@
     "x86-64 PC"
   ],
   "legacy68k": "existing fixture/dispatch/state regression retained;no general guest Window/Event ABI admission",
-  "scope_authorized_now": "Complete decoded PC report to shared native window owner;hosted tests,compiler/normal CI and ordinary Git/HQ only. No controller/boot/guest ABI binding,VM/emulator/reference/hardware run or release.",
+  "scope_authorized_now": "Explicit per-poll PC controller packet/loss receipt,legacy behavior preservation and hosted window handoff tests;compiler/normal CI and ordinary Git/HQ. Controller source changes require fresh candidate builds;no window boot binding,target/VM/emulator/reference/hardware run or release.",
   "implementation_authorized": true,
   "target_trials_authorized": false,
   "publication_authorized": false,
@@ -131,7 +131,7 @@
     "evidence": "docs/development/window-interaction-evidence.json",
     "source_revision": "b9d6c8865cecaed8ce532d033e298c0f7e931170"
   },
-  "runtime_build_scope": "Isolated helper compilation and normal CI existing unbooted regression candidates;new feature remains unbound.",
+  "runtime_build_scope": "PC controller source changed;existing unbooted candidates rebuilt by normal CI. Shared native cores unchanged;new window boot binding absent.",
   "target_trial_executed": false,
   "window_composition_progress": {
     "specification": "SPEC-0054",
@@ -177,5 +177,15 @@
     "controller_bound": false,
     "boot_bound": false,
     "source_revision": "983823a576c38eea9494860eb813a1b3a298e107"
+  },
+  "pc_bus_delivery_progress": {
+    "specification": "SPEC-0058",
+    "implementation": "IMPL-0061",
+    "verification": "TEST-0069",
+    "evidence": "docs/development/pc-bus-delivery-evidence.json",
+    "status": "hosted-compiler-verified-window-boot-unbound",
+    "delivery_api_installed": true,
+    "legacy_poll_preserved": true,
+    "window_boot_bound": false
   }
 }
