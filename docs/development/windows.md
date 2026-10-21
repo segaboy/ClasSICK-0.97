@@ -205,3 +205,23 @@ local-only isolated trial; public CI never executes firmware or reads guest memo
 
 Do not install these merely because they appear in the roadmap. Describe purpose,
 pin packages, review distribution/provenance, and add reproducible setup first.
+
+
+## Optional native window preview - SPEC-0056
+
+With the existing pinned development environment active,from the public repo:
+
+```powershell
+cmake --preset windows-hosted
+cmake --build --preset windows-hosted --target classick_window_preview
+.\build\windows-hosted\classick_window_preview.exe
+```
+
+Move the mouse within the centered monochrome scene. Drag the patterned window's
+top strip;click its content to alternate the pattern. Each accepted left press
+inside the canvas increments the counter,including title presses. Margin clicks
+are ignored. Release the button after focus/capture loss before starting again.
+Escape closes. Resizing keeps512x342 unscaled inside a640x480 physical frame;
+large clients center the frame and small clients clip it. The old surface viewer
+retains its behavior. This is a Windows hosted preview;both boot bindings remain
+separate work. [Synthetic verification](hosted-window-preview-evidence.json).

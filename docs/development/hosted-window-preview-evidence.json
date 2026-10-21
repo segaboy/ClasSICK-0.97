@@ -1,0 +1,196 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-21",
+  "baseline": "6104c664077b1a447d3c980a88765ae0b617248e",
+  "sources": [
+    "SRC-0332",
+    "SRC-0333",
+    "SRC-0334"
+  ],
+  "specification": "SPEC-0056",
+  "decision": "ADR-0064",
+  "implementation": "IMPL-0059",
+  "verification": "TEST-0067",
+  "status": "local-passed-normal-ci-pending",
+  "scope": "Opt-in Windows hosted preview over SPEC-0055,synthetic Win32/client-paint tests,compiler and normal CI/Git/HQ verification;no ROM/UEFI/guest ABI binding,VM/emulator/reference/hardware trial or release.",
+  "inputs_git_lf_sha256": {
+    "platform/windows/window-preview.h": "d0f81fba9464faf687290537631705587a4943351e815d12713a5f3d51245fe5",
+    "platform/windows/window-preview.c": "3c9bc8a5e3dd927b7edeea0f770984d1816d83cd18a0055fe1244f386464c9f1",
+    "apps/window-scene/windows-main.c": "59b53e3efb77debab80b6e90be78406da93ce661a39d63c5a579bc162dd33503",
+    "tests/window-preview-windows.c": "0d1785b6c64a1841ec0766389fec84c3593528f2791c9289537c63357672896e",
+    "CMakeLists.txt": "d517d3493273bcfe78e183b458856d86538758cec005c041a7e37fa19e9e9d55",
+    "platform/windows/presenter.h": "7692bd3e82a503366b23b34ff49a07743dea73f6061c80bcd43e50eddfbf2c2b",
+    "platform/windows/presenter.c": "02c44770e5acd3ee74d967be6bea5ab89ed4f63c2fe9b4ae8a0ad4d2598893c8",
+    "platform/windows/pixels.h": "3e297dbbd9f8423f48cbac03c9829c216d3fd2d5aaa798fa7078365b215713d4",
+    "platform/windows/pixels.c": "e243cfd72313d957e5d7bfb31e61dbea078826bbf3544b0c17f891915fa6096e",
+    "apps/window-scene/input.h": "33899a80efee4acfa83a7aaeb8e1509fa7ce3d47436b67ddc20629ebd0d35011",
+    "apps/window-scene/input.c": "2b10f8c6de9349e41a02d3138abd8bb04a83b0d7eb8cc646c627a0e5d2a44b19",
+    "apps/window-scene/scene.h": "f7e608eb507b3d5fe4af2720263b55c894454946f4637124c391b2eaaeca9982",
+    "apps/window-scene/scene.c": "bc3f8ac625bd782d368709cf915a94bbd7f9a6c4dd810197a11ae157363afa3f",
+    "apps/product-scene/scene.h": "7d5b50af59be3e25a67837d7183d0fa50afd36b9f0b3aaf1a1fb1ddea772ccf0",
+    "apps/product-scene/scene.c": "7488910c401285b1e211d3c6eb95a17f04683748ffa8fc2dba4e2659725872d2",
+    "core/graphics/cursor.h": "0ffc237d90b9b58ab26752223a73710e0cad4b0a24d53fd0ac0cfe08c42818d7",
+    "core/graphics/cursor.c": "c239ef42783ffaa446c59f7ba630b5b1cd78c95444449fa63b983f4c3bb98fe5",
+    "core/graphics/surface.h": "31de605b79282fac7f4208e28aab328662df975a03028ac16fe179672d6dc264",
+    "core/graphics/surface.c": "157ed442c0278a344b57cb0e08657c30273de2a62199d72a30b38e5ee7ea1c5c",
+    "core/input/pointer.h": "d0a53cdadbe728195ce2c35bc4ef0b2a1687351912c759eda1bf6b4c38abdc38",
+    "core/input/pointer.c": "d38b4b131f44a3ce8bf8019cdef8aa4e56e3d5c09f0bc9b154fd1f8ff920afa7",
+    "core/input/mouse.h": "d41c122f62933d83af8ad8015ca0f2b35298860bca80faa1dae0cd8705e8c542",
+    "core/input/mouse.c": "fad65173ea1421fd02affc4fea7a52720fba515e849e9c3159c35eeeab18eb8d",
+    "core/ui/window.h": "0a964c1801facd731c58abf3e88fdb96d39c3cd38bbf473bba4f879852a8b1a2",
+    "core/ui/window.c": "ddec6ccab8bf5148240d6269bf33374180ac60406b4ab50558809ff3e53aa18a"
+  },
+  "worker": {
+    "provider": "GitHub Copilot",
+    "requested_model": "claude-sonnet-5.5",
+    "observed_model": "claude-sonnet-5.5",
+    "effort": "low",
+    "execution": {
+      "round": "implementation",
+      "worker": "copilot",
+      "exit_code": 0,
+      "outer_timeout": false,
+      "elapsed_seconds": 64.22,
+      "input_bytes": 21108,
+      "input_sha256": "e5a84aafee6302633d932d716a81779154383dbffe5d694cdea8df60ef553a0a",
+      "stderr_bytes": 0
+    },
+    "tools": [
+      {
+        "name": "view",
+        "path": "own frozen public/original prompt only",
+        "forceReadLargeFiles": true
+      }
+    ],
+    "proposed_lines": 305,
+    "line_limit": 400,
+    "worker_edits": 0,
+    "worker_tests_executed": [],
+    "provider_reported": {
+      "totalPremiumRequestCost": 1,
+      "totalNanoAiu": 13145280000,
+      "tokenDetails": {
+        "input": {
+          "tokenCount": 168
+        },
+        "cache_read": {
+          "tokenCount": 6418
+        },
+        "cache_write": {
+          "tokenCount": 13142
+        },
+        "output": {
+          "tokenCount": 9762
+        }
+      },
+      "totalApiDurationMs": 58854
+    }
+  },
+  "integration": [
+    "Adopt all three305-line worker files;no second provider/retry or recreated adapter.",
+    "Lead corrects inaccurate briefing assumption:legacy presenter scales/center-crops/uses charcoal outer margins;local saved-DC wrapper keeps new preview unscaled/white.",
+    "Deliver observed margin release after cancellation;constructor live flag starts after initial ShowWindow;check window-state publication failure.",
+    "Build GUI-subsystem32/64 executables with explicit Unicode Win32 interface settings.",
+    "GCC64 test-macro signed-conversion diagnostic corrected using GetObjectType instead of HGDI_ERROR encoding;private harness capture/fresh-directory errors corrected,no product failure hidden."
+  ],
+  "verification_results": {
+    "profiles": [
+      {
+        "profile": "clang64",
+        "tests": 312,
+        "failed": 0,
+        "scope": "full regression,incremental existing build",
+        "junit_sha256": "9e3db5dd7a02d2f35b2f7c32a42c86c4a0833006826950416f3d94ac9bfd02f4"
+      },
+      {
+        "profile": "sanitized",
+        "tests": 1,
+        "failed": 0,
+        "scope": "new preview only",
+        "junit_sha256": "fcd9ffb2dc49713828f765d39e8332a7799833a4cad55478a1d9d63ae60bde2e"
+      },
+      {
+        "profile": "gcc32",
+        "tests": 1,
+        "failed": 0,
+        "scope": "new preview only",
+        "junit_sha256": "f7d7e73c814bb72327409874c53b350be4770d2bd64021eea2cb9b01a07e4373"
+      }
+    ],
+    "total_final_profile_ctests": 314,
+    "failed": 0,
+    "complete_reference_frames_per_run": 38,
+    "client_paints_per_run": 3,
+    "checks_per_run": 1656250,
+    "client_sizes": [
+      [
+        640,
+        480
+      ],
+      [
+        1280,
+        960
+      ],
+      [
+        400,
+        300
+      ]
+    ],
+    "optimized": [
+      {
+        "profile": "gcc64-O2",
+        "exit_code": 0,
+        "output": "Hosted window adapter PASS:38 complete frames,3 client paints,1656250 checks;synthetic messages only"
+      }
+    ],
+    "negative_controls": [
+      {
+        "profile": "release-cancels-next-click",
+        "exit_code": 1,
+        "output": "line 81:s.input.counter.presses==1u && s.input.window.pattern==1u && GetCapture()==s.window"
+      },
+      {
+        "profile": "scaled-and-centered-clipping",
+        "exit_code": 1,
+        "output": "line 70:b[0]==(black?0u:255u) && b[1]==b[0] && b[2]==b[0]"
+      }
+    ],
+    "gui_subsystem_verified": [
+      "Clang64",
+      "Clang64-sanitized",
+      "GCC32"
+    ],
+    "ci": null
+  },
+  "evidence_class": "hosted synthetic Win32 API/client-paint evidence;not host-delivered GUI,human or boot qualification",
+  "memory": {
+    "host_mono_frame": 38400,
+    "host_bgrx_scratch": 1228800,
+    "cursor_payload": 48,
+    "logical_canvas": [
+      512,
+      342
+    ],
+    "physical_frame": [
+      640,
+      480
+    ],
+    "host_memory_is_not_Mac_budget": true
+  },
+  "unchanged_core_evidence": "docs/development/window-input-evidence.json",
+  "not_claimed": [
+    "ROM/UEFI boot binding or changed native core",
+    "target/VM/emulator/reference/hardware trial",
+    "GUI-host/human input qualification",
+    "historical Macintosh ABI/behavior",
+    "full128K/ROM/whole-stack certification",
+    "release readiness or net Codex quota savings"
+  ],
+  "external_remaining_usage": {
+    "Claude": null,
+    "Copilot": null,
+    "Grok": null,
+    "Antigravity": null
+  },
+  "usage_note": "All four remaining account allowances unavailable;task counters are not balances or comparable Codex quota savings. One primary,no redundant review/requalification;existing builds/oracles reused."
+}

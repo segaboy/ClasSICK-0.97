@@ -3516,3 +3516,25 @@ Frozen engineering contract and full-image model precede worker implementation
 inspection;subsequent directed failure tests exercise explicit recovery. Original
 GPL-3.0-or-later C and fixtures,no third-party implementation or manual samples.
 [Implementation](records/IMPL-0058-window-input-owner.md).
+
+
+## SRC-0332 - Owner hosted-preview continuation
+
+Dean Howell,2026-10-21:"Do it",accepting the proposed shared-owner Windows
+hosted preview,independent automated tests/compiler/normal CI and ordinary Git/HQ.
+No ROM/UEFI/guest ABI binding,VM/emulator/reference/hardware trial or release.
+
+## SRC-0333 - Copilot original hosted adapter proposal
+
+One frozen reviewed-public/original21,108-byte prompt;305 header/adapter/main
+lines,one prompt read,no edits/tests. Existing authenticated Sonnet5.5 low CLI.
+Adopted with targeted lead corrections;no HQ/manual/research-original/UART input.
+[Receipt](../docs/development/hosted-window-preview-evidence.json).
+
+## SRC-0334 - Lead hosted contract,oracle,integration and actual tests
+
+Original GPL-3.0-or-later code,fixtures and reference pixels;contract-first adapter
+oracle plus implementation-aware corrections and negative controls. Existing
+project presenter behavior corrects the brief's inaccurate scaling assumption.
+No third-party implementation,manual samples or historical conclusions.
+[Implementation](records/IMPL-0059-hosted-window-preview.md).

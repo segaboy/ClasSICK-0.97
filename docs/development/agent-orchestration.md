@@ -213,3 +213,12 @@ already-authored contract-first oracle and directed fault tests;no second
 provider,retry,new qualification or recreated sound core. Prior qualifications
 reused. All-four account balances unavailable;task counters don't establish
 Codex savings. [Receipt](window-input-evidence.json).
+
+
+Hosted-window allocation2026-10-21:one Copilot Sonnet5.5 low primary,305 complete
+lines/400limit,64.22s,one21,108-byte reviewed-public/original prompt view,no edits/
+tests. Adopt adapter/main/header;lead corrects presenter assumption and concrete
+lifecycle/edge details,uses contract-first adapter/GDI oracle and two negative
+controls. No second worker,retry or qualification;reuse incremental builds and
+existing core/pixel evidence. No account balances or net Codex savings reported.
+[Receipt](hosted-window-preview-evidence.json).
