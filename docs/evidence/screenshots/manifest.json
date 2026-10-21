@@ -575,6 +575,52 @@
         "512x342 centered at256,213 in1024x768;static progress.",
         "No historical,physical,full128K,B2,System1 or full desktop acceptance."
       ]
+    },
+    {
+      "id": "2026-10-21-hosted-window-dragged",
+      "path": "docs/evidence/screenshots/2026-10-21/hosted-window-dragged.png",
+      "sha256": "cce4692b77e86c7dad6dbd2448e1081385e30b3ff2a19372510223d994fd9f78",
+      "bytes": 2236,
+      "width": 640,
+      "height": 480,
+      "captured_on": "2026-10-21",
+      "target": "native-x86_64",
+      "caption": "Windows hosted prototype after synthetic title drag;striped window,counter0002.",
+      "alt": "Original monochrome ClasSICK branding with a striped foreground window and plus cursor.",
+      "source_revision": "cb2a753a005637c0e5255985fea01da0af4df616",
+      "compiled_source_revision": "cb2a753a005637c0e5255985fea01da0af4df616",
+      "evidence": "docs/evidence/screenshots/2026-10-21/README.md",
+      "license": "GPL-3.0-or-later",
+      "rights": "Original ClasSICK hosted client pixels only;no desktop,window-chrome,emulator or reference-system pixels.",
+      "input": "synthetic",
+      "limitations": [
+        "Hidden Win32 WM_PRINTCLIENT/GDI capture from automated messages.",
+        "Not OS-delivered GUI,human,Mac/firmware/VM boot or release qualification.",
+        "Capture observer identified separately by source hash in the linked audit."
+      ]
+    },
+    {
+      "id": "2026-10-21-hosted-window-large",
+      "path": "docs/evidence/screenshots/2026-10-21/hosted-window-large.png",
+      "sha256": "96026eccd3e7cc8029e62680dfb3dff8413ba443576be2fed30a720d2c7cfa7b",
+      "bytes": 5848,
+      "width": 1280,
+      "height": 960,
+      "captured_on": "2026-10-21",
+      "target": "native-x86_64",
+      "caption": "Windows hosted1280x960 client;unscaled512x342 scene,checkerboard window,counter0003.",
+      "alt": "Original monochrome ClasSICK scene centered at unchanged pixel size in large white margins,with a checkerboard foreground window.",
+      "source_revision": "cb2a753a005637c0e5255985fea01da0af4df616",
+      "compiled_source_revision": "cb2a753a005637c0e5255985fea01da0af4df616",
+      "evidence": "docs/evidence/screenshots/2026-10-21/README.md",
+      "license": "GPL-3.0-or-later",
+      "rights": "Original ClasSICK hosted client pixels only;no desktop,window-chrome,emulator or reference-system pixels.",
+      "input": "synthetic",
+      "limitations": [
+        "Hidden Win32 WM_PRINTCLIENT/GDI capture from automated messages.",
+        "Not OS-delivered GUI,human,Mac/firmware/VM boot or release qualification.",
+        "Capture observer identified separately by source hash in the linked audit."
+      ]
     }
   ]
 }

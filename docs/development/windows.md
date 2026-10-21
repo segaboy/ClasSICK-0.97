@@ -225,3 +225,10 @@ Escape closes. Resizing keeps512x342 unscaled inside a640x480 physical frame;
 large clients center the frame and small clients clip it. The old surface viewer
 retains its behavior. This is a Windows hosted preview;both boot bindings remain
 separate work. [Synthetic verification](hosted-window-preview-evidence.json).
+
+
+[Captured stills and looping drag GIF](../evidence/screenshots/2026-10-21/README.md)
+are original hosted synthetic client paints. Reproduce with the optional
+classick_window_capture target and an existing output directory;encode its PPM
+files with tools/evidence/window-media.py using existing Pillow. Raw frames stay
+outside Git. Normal build/CI does not require Pillow or create media.

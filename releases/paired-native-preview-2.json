@@ -164,6 +164,7 @@
     "status": "local-passed-normal-ci-pending",
     "hosted_bound": true,
     "boot_bound": false,
-    "evidence": "docs/development/hosted-window-preview-evidence.json"
+    "evidence": "docs/development/hosted-window-preview-evidence.json",
+    "media": "docs/evidence/screenshots/2026-10-21/README.md"
   }
 }

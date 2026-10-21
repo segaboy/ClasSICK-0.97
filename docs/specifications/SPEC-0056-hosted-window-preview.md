@@ -52,3 +52,12 @@ writes. Large1280x960/default640x480/small400x300 client images check1:1 mapping
 white margins and clipping. Synthetic results do not qualify host-delivered GUI,
 human input,firmware,Mac hardware or release readiness.
 [Executed results](../development/hosted-window-preview-evidence.json).
+
+
+Owner-requested evidence extension:separate original capture observer exports
+actual hidden-client paints for stills and drag demonstration. It checks native
+frame/GDI equality and logical drag/count at each step. Encoder uses existing
+Pillow only outside normal build/CI;every decoded GIF/PNG pixel must equal its
+capture. Store2 PNGs and one specifically reviewed49-frame GIF with source pins,
+rights,captions,hashes and explicit synthetic limitations. Animation timing is
+chosen presentation timing,not a benchmark. General GIFs remain excluded.

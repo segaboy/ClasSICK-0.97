@@ -1,0 +1,107 @@
+{
+  "frames": 49,
+  "duration_ms": 4200,
+  "loop": 0,
+  "decoded_pixels_exact": true,
+  "rgb_frame_sha256": [
+    "2abda09fbb7c9e65ee90d775b8ed9ec952e6d4e85e16be587a7cb24990199ab2",
+    "d12b5daa3b4c2c841ea32c96e163c6abd8e6e49677e7bd721031c3d1e7e727cb",
+    "9360d434622eca43848ec225a28c2c025ddfda619193a1ab5f6523f60018eb26",
+    "f55c33c79d2010e306ad967d311805186a1e4127ea3ff358bf0f03c811f4dd9a",
+    "ac18650a9095a01eb4cab1c0728fcf518187995173f017e4d16dc56604fb299a",
+    "2fba718259f472a7abe38947822804a25dd7c43fccd201c46189d067088332fa",
+    "3cdbaef7845d20b6529f5c476cfde58087cc186d02b0f466a4b1df76c99483e1",
+    "f7c5ee362b099aa1ddc5a754665520e91d4b5bee03a67e9f1d00e2aee05525df",
+    "b200acf2a1e806e9039ba1bacb582e1e85a11d8c408564ee3dc85b9ffc727e4d",
+    "235bdd7d1f86a2673ab3768ac550d34ff2c2667e72bc7108baaaa01833f9cfec",
+    "18da1b4e83371a3065d9cf52a86c72972da1df7999a603abf3d7827612d49d78",
+    "519e8836f5966f7f44c3a96eb37ac4485bde8e6668a23ce172caf76deb0bd791",
+    "33cda05961031c80d7d92c8f53979b6db6842f6ace5024f6f7808847a41208e1",
+    "4c0a8adce3f56a377bf905403b0dd1eb7fc0e710b36e29e32cd6aec164d6f31d",
+    "4ec8d5f1f1b561653ff8a472771a280b4956b3e44729d293dab36aa33a33025d",
+    "c5c79a5a050cfcf66475c62afc7ee041306d4cf72c5d160ef8214b0edd58ddcf",
+    "3fa417d63c13cab372057f8d7c427fb6f0ef7f2dbe5efc4ad07f08e9f4f8565e",
+    "e6b79cca4c0ee4971b27c3313eff6d883a1d816b33a8850e768690429951b655",
+    "99bf2f02f96e6eb01de2b4fba95d1b2a82ab01151e8b59c527fcb17f950b8352",
+    "dd24e22be187d90f90e1c6ebcf05079645e842f20571873b0fd07c980de4fe37",
+    "37e07eb2f407d6ac3e60d62e71e06c9ed08613bc8e6f98331c434ad0115258ff",
+    "f94c6a412f5645648e4503a23f89319838e7600424fcaca92800c355491945b7",
+    "4c1a33c8c6060a4199a5bb75e0bfd55ad5b2f911d3587cccad436ea21e5bb6a7",
+    "8fbbed26ef46611f931914d47b9ba38afd9d9ed21f51ccbd8c884f4f745dc823",
+    "7fc1bd328901bda6d064a6177265e649c12e333ea7c9be816420009657f3c1f2",
+    "8fbbed26ef46611f931914d47b9ba38afd9d9ed21f51ccbd8c884f4f745dc823",
+    "4c1a33c8c6060a4199a5bb75e0bfd55ad5b2f911d3587cccad436ea21e5bb6a7",
+    "f94c6a412f5645648e4503a23f89319838e7600424fcaca92800c355491945b7",
+    "37e07eb2f407d6ac3e60d62e71e06c9ed08613bc8e6f98331c434ad0115258ff",
+    "dd24e22be187d90f90e1c6ebcf05079645e842f20571873b0fd07c980de4fe37",
+    "99bf2f02f96e6eb01de2b4fba95d1b2a82ab01151e8b59c527fcb17f950b8352",
+    "e6b79cca4c0ee4971b27c3313eff6d883a1d816b33a8850e768690429951b655",
+    "3fa417d63c13cab372057f8d7c427fb6f0ef7f2dbe5efc4ad07f08e9f4f8565e",
+    "c5c79a5a050cfcf66475c62afc7ee041306d4cf72c5d160ef8214b0edd58ddcf",
+    "4ec8d5f1f1b561653ff8a472771a280b4956b3e44729d293dab36aa33a33025d",
+    "4c0a8adce3f56a377bf905403b0dd1eb7fc0e710b36e29e32cd6aec164d6f31d",
+    "33cda05961031c80d7d92c8f53979b6db6842f6ace5024f6f7808847a41208e1",
+    "519e8836f5966f7f44c3a96eb37ac4485bde8e6668a23ce172caf76deb0bd791",
+    "18da1b4e83371a3065d9cf52a86c72972da1df7999a603abf3d7827612d49d78",
+    "235bdd7d1f86a2673ab3768ac550d34ff2c2667e72bc7108baaaa01833f9cfec",
+    "b200acf2a1e806e9039ba1bacb582e1e85a11d8c408564ee3dc85b9ffc727e4d",
+    "f7c5ee362b099aa1ddc5a754665520e91d4b5bee03a67e9f1d00e2aee05525df",
+    "3cdbaef7845d20b6529f5c476cfde58087cc186d02b0f466a4b1df76c99483e1",
+    "2fba718259f472a7abe38947822804a25dd7c43fccd201c46189d067088332fa",
+    "ac18650a9095a01eb4cab1c0728fcf518187995173f017e4d16dc56604fb299a",
+    "f55c33c79d2010e306ad967d311805186a1e4127ea3ff358bf0f03c811f4dd9a",
+    "9360d434622eca43848ec225a28c2c025ddfda619193a1ab5f6523f60018eb26",
+    "d12b5daa3b4c2c841ea32c96e163c6abd8e6e49677e7bd721031c3d1e7e727cb",
+    "2abda09fbb7c9e65ee90d775b8ed9ec952e6d4e85e16be587a7cb24990199ab2"
+  ],
+  "gif": {
+    "path": "hosted-window-drag.gif",
+    "width": 640,
+    "height": 480,
+    "bytes": 308010,
+    "sha256": "b610d8372e626e14c1840914ebc9c61e84dc5cb76c4f6c8d25d4f171f16f04b9"
+  },
+  "stills": [
+    {
+      "path": "hosted-window-dragged.png",
+      "width": 640,
+      "height": 480,
+      "bytes": 2236,
+      "sha256": "cce4692b77e86c7dad6dbd2448e1081385e30b3ff2a19372510223d994fd9f78"
+    },
+    {
+      "path": "hosted-window-large.png",
+      "width": 1280,
+      "height": 960,
+      "bytes": 5848,
+      "sha256": "96026eccd3e7cc8029e62680dfb3dff8413ba443576be2fed30a720d2c7cfa7b"
+    }
+  ],
+  "captured_on": "2026-10-21",
+  "product_source_revision": "cb2a753a005637c0e5255985fea01da0af4df616",
+  "capture_observer_git_lf_sha256": "f5dd78118d59a03450660c119fc79eed2b3f065190742bed28974b50746d6f0d",
+  "encoder_git_lf_sha256": "b87acc8fb61208c94cd45468d199ad74f6010f51c79390ed809101a2f2a6df80",
+  "decoder": "existing Pillow12.3.0",
+  "synthetic": true,
+  "method": "Hidden Win32 client paints;all GDI RGB pixels checked against native frame;each decoded GIF/PNG image matches capture exactly.",
+  "product_source_note": "Pinned revision identifies unchanged product adapter/core libraries;separate original capture observer is identified by source hash.",
+  "rights": "Original ClasSICK pixels only;GPL-3.0-or-later",
+  "not_claimed": [
+    "real GUI/human or firmware/VM input qualification",
+    "historical behavior",
+    "measured frame rate",
+    "release readiness"
+  ],
+  "observer_runs": [
+    {
+      "compiler": "Clang64",
+      "source_git_lf_sha256": "23700e928dbeec160c9e9f24398b75dda233c839d9247f814a62d904d084e0eb"
+    },
+    {
+      "compiler": "GCC32",
+      "source_git_lf_sha256": "f5dd78118d59a03450660c119fc79eed2b3f065190742bed28974b50746d6f0d"
+    }
+  ],
+  "observer_source_note": "GCC32 build includes a whitespace-only fix for GCC misleading-indentation diagnostics;all51 captured pixel streams and all3 encoded files match Clang64 exactly.",
+  "width_compiler_reproduction_exact": true
+}

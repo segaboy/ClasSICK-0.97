@@ -3522,7 +3522,11 @@ GPL-3.0-or-later C and fixtures,no third-party implementation or manual samples.
 
 Dean Howell,2026-10-21:"Do it",accepting the proposed shared-owner Windows
 hosted preview,independent automated tests/compiler/normal CI and ordinary Git/HQ.
-No ROM/UEFI/guest ABI binding,VM/emulator/reference/hardware trial or release.
+Owner additionally says:"If these tests result in interesting screenshots,take
+them" and requests"a gif animation of the dragging for demonstration". Store
+reviewed original client stills/animation in Git under existing evidence rules,
+with a narrow exact-identity GIF exception. No ROM/UEFI/guest ABI binding,
+VM/emulator/reference/hardware trial or release.
 
 ## SRC-0333 - Copilot original hosted adapter proposal
 

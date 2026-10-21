@@ -103,3 +103,11 @@ requirement grants no current run, download, source inspection or extraction.
 ## Reviewed original screenshot evidence -2026-10-18
 
 Owner SRC-0280 requires reviewed own-product screenshots in Git for research/web discovery. The narrow indexed PNG/manifest exception in [the storage policy](../development/screenshot-evidence.md) admits no protected/reference pixels,emulator chrome,desktop,credentials,ROM/media or arbitrary binary payload. All previous exclusions and trial/rights gates persist. Structural/hash checks do not replace human source/privacy/rights review.
+
+
+Owner SRC-0332 additionally requests original hosted demonstration stills/GIF on
+2026-10-21. The one-GIF exception in the screenshot storage policy admits only
+`docs/evidence/screenshots/2026-10-21/hosted-window-drag.gif`,pinned to its reviewed
+SHA-256 in scripts/check_animations.py and its indexed identity/rights/source
+record. All49 decoded frames were compared with original native client captures.
+This admits no arbitrary GIF,protected pixels,desktop/chrome or target trial.

@@ -12,13 +12,13 @@
   "implementation": "IMPL-0059",
   "verification": "TEST-0067",
   "status": "local-passed-normal-ci-pending",
-  "scope": "Opt-in Windows hosted preview over SPEC-0055,synthetic Win32/client-paint tests,compiler and normal CI/Git/HQ verification;no ROM/UEFI/guest ABI binding,VM/emulator/reference/hardware trial or release.",
+  "scope": "Opt-in Windows hosted preview over SPEC-0055,synthetic Win32/client-paint tests,compiler and normal CI/Git/HQ verification;no ROM/UEFI/guest ABI binding,VM/emulator/reference/hardware trial or release. Owner additionally requests original test stills and drag GIF in Git;no target run.",
   "inputs_git_lf_sha256": {
     "platform/windows/window-preview.h": "d0f81fba9464faf687290537631705587a4943351e815d12713a5f3d51245fe5",
     "platform/windows/window-preview.c": "3c9bc8a5e3dd927b7edeea0f770984d1816d83cd18a0055fe1244f386464c9f1",
     "apps/window-scene/windows-main.c": "59b53e3efb77debab80b6e90be78406da93ce661a39d63c5a579bc162dd33503",
     "tests/window-preview-windows.c": "0d1785b6c64a1841ec0766389fec84c3593528f2791c9289537c63357672896e",
-    "CMakeLists.txt": "d517d3493273bcfe78e183b458856d86538758cec005c041a7e37fa19e9e9d55",
+    "CMakeLists.txt": "d819e4c143a66c9ac4cbea13932e6493cb306c44da9cc48d8a660169eb823673",
     "platform/windows/presenter.h": "7692bd3e82a503366b23b34ff49a07743dea73f6061c80bcd43e50eddfbf2c2b",
     "platform/windows/presenter.c": "02c44770e5acd3ee74d967be6bea5ab89ed4f63c2fe9b4ae8a0ad4d2598893c8",
     "platform/windows/pixels.h": "3e297dbbd9f8423f48cbac03c9829c216d3fd2d5aaa798fa7078365b215713d4",
@@ -38,7 +38,12 @@
     "core/input/mouse.h": "d41c122f62933d83af8ad8015ca0f2b35298860bca80faa1dae0cd8705e8c542",
     "core/input/mouse.c": "fad65173ea1421fd02affc4fea7a52720fba515e849e9c3159c35eeeab18eb8d",
     "core/ui/window.h": "0a964c1801facd731c58abf3e88fdb96d39c3cd38bbf473bba4f879852a8b1a2",
-    "core/ui/window.c": "ddec6ccab8bf5148240d6269bf33374180ac60406b4ab50558809ff3e53aa18a"
+    "core/ui/window.c": "ddec6ccab8bf5148240d6269bf33374180ac60406b4ab50558809ff3e53aa18a",
+    "tools/evidence/window-capture.c": "f5dd78118d59a03450660c119fc79eed2b3f065190742bed28974b50746d6f0d",
+    "tools/evidence/window-media.py": "b87acc8fb61208c94cd45468d199ad74f6010f51c79390ed809101a2f2a6df80",
+    "scripts/Test-Repository.ps1": "87e256e986e9f6696c5759fa13571081fb15ca6ae856e8edadb7248873f8e449",
+    "scripts/check_animations.py": "d7933d01a207ff8daf7f7c3a14bf2e8451d4250c0efaaf3df82c0522cfbfd36e",
+    "tests/animation-admission.py": "051019fc7d7c15b7e6620650dcde6353d1e0f885513aaf92c4f5cafb90658a11"
   },
   "worker": {
     "provider": "GitHub Copilot",
@@ -97,10 +102,10 @@
     "profiles": [
       {
         "profile": "clang64",
-        "tests": 312,
+        "tests": 313,
         "failed": 0,
         "scope": "full regression,incremental existing build",
-        "junit_sha256": "9e3db5dd7a02d2f35b2f7c32a42c86c4a0833006826950416f3d94ac9bfd02f4"
+        "junit_sha256": "54ed45ea4fda50016dba6a43778730f3e7ae46c12bfebc5345f62ada4d1e07eb"
       },
       {
         "profile": "sanitized",
@@ -117,7 +122,7 @@
         "junit_sha256": "f7d7e73c814bb72327409874c53b350be4770d2bd64021eea2cb9b01a07e4373"
       }
     ],
-    "total_final_profile_ctests": 314,
+    "total_final_profile_ctests": 315,
     "failed": 0,
     "complete_reference_frames_per_run": 38,
     "client_paints_per_run": 3,
@@ -192,5 +197,16 @@
     "Grok": null,
     "Antigravity": null
   },
-  "usage_note": "All four remaining account allowances unavailable;task counters are not balances or comparable Codex quota savings. One primary,no redundant review/requalification;existing builds/oracles reused."
+  "usage_note": "All four remaining account allowances unavailable;task counters are not balances or comparable Codex quota savings. One primary,no redundant review/requalification;existing builds/oracles reused.",
+  "media": {
+    "audit": "docs/development/hosted-window-media.json",
+    "index": "docs/evidence/screenshots/2026-10-21/README.md",
+    "pngs": 2,
+    "gifs": 1,
+    "frames": 49,
+    "duration_ms": 4200,
+    "all_decoded_pixels_exact": true,
+    "Clang64_GCC32_capture_reproduction_exact": true,
+    "guard": "one exact-path/exact-SHA GIF exception;no general GIF admission"
+  }
 }

@@ -42,3 +42,18 @@ The private logs and earlier capture originals remain preserved. No retired wiki
 queue or OneNote entry is created or maintained.
 
 Format cross-check: SRC-0286,[PNG1.0 File Structure](https://www.w3.org/TR/PNG-Structure.html) and [critical chunks](https://www.w3.org/TR/PNG-Chunks.html),W3C Recommendation1996. This is a selected publication profile,not a universal decoder: the uppercase third chunk byte is an encoding restriction chosen here,while §3.3 advises decoders to tolerate future use of that bit. Version1 metadata has an exact field set; extensions require a reviewed schema change. No PNG sample implementation is an input.
+
+
+## One reviewed hosted animation - 2026-10-21
+
+SRC-0332 owner requests interesting test screenshots and a dragging GIF.
+The PNG rules remain unchanged. One separate exact-path/exact-SHA GIF exception
+is registered in docs/evidence/animations.json and checked from the Git index by
+scripts/check_animations.py. That guard checks the pinned identity/header/metadata,
+not general GIF validity. Lead independently decoded every one of49 frames with
+existing Pillow12.3.0 and compared RGB bytes against actual original Win32 client
+captures;the audit records each frame hash and chosen4.2-second presentation loop.
+Any different GIF requires a new explicit source/rights/decode review and guard
+change. It is never admitted by extension alone. Original client pixels only,
+GPL-3.0-or-later;no desktop/window chrome/reference/emulator content.
+[Stills and animation](../evidence/screenshots/2026-10-21/README.md).

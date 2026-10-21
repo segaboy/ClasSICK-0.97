@@ -14,7 +14,7 @@ GCC64 exposes a test-only HGDI_ERROR signed-macro conversion;use object-type
 validation. Independent adapter oracle predates worker output inspection;
 subsequent directed cases cover clarified behavior. No second worker or retry.
 
-312 full Clang64 CTests plus1 sanitized/1 GCC32 focused test pass. Each adapter
+313 full Clang64 CTests plus1 sanitized/1 GCC32 focused test pass. Each adapter
 run verifies38 complete frames,3 client paints and1,656,250 assertions. Directed
 traces cover signed outside coordinates,held input,press/release,drag/final
 release,capture/focus/cancel loss,margins,resize,cleanup/reopen and fault stop.
@@ -27,3 +27,12 @@ GUI/human/boot/VM/emulator/hardware qualification or release. Old viewer/present
 shared cores,ROM/EFI source lists,24 originals/held brief/UART/old rows/releases/
 tags/retired wiki preserved. Mac M1-M7,PC GUI/human and all source/role/historical/
 edition/physical/full128K/B2/native-app/Linux/mini-vMac/both System1-ROM gates remain.
+
+
+Owner additionally requests interesting stills and a drag animation. Two original
+PNG client captures and a49-frame/4.2-second looping GIF are stored/indexed in Git.
+All decoded pixels match capture;Clang64/GCC32 observers reproduce every pixel
+stream and encoded asset. A GCC observer indentation warning is fixed without
+semantic change. Narrow exact-path/exact-SHA GIF admission plus three tamper/
+provenance unit cases;no arbitrary GIF policy expansion. No screenshots of a
+reference system,desktop/chrome or firmware run. [Media](../../docs/evidence/screenshots/2026-10-21/README.md).
