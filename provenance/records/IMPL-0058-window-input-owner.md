@@ -17,7 +17,10 @@ run checks63 complete images and565 assertions,including drag/clamp/final
 release,held suppression,cancel,saturation,retained counter/window/render fault
 prefixes,repeated cancellation failure,begin failure and explicit cursor rebind.
 Four optimized Clang/GCC32/64 variants pass;two compiled defects are rejected.
-12width/endian/EFI object audits pass. Native68000 CI pending at source commit.
+12width/endian/EFI object audits pass. Native68000 CI passes at 7e6e11a:
+66 object compilations/6 matching-twin closures,no imports or mutable data.
+Actual per-function frames are in the receipt,not whole-system certification.
+[CI](https://github.com/segaboy/ClasSICK-0.97/actions/runs/39586910856).
 [Exact evidence and source pins](../../docs/development/window-input-evidence.json).
 
 No platform/boot/guest ABI binding,target run or release. Existing Mac M1-M7,

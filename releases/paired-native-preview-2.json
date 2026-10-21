@@ -147,9 +147,10 @@
     "specification": "SPEC-0055",
     "implementation": "IMPL-0058",
     "verification": "TEST-0066",
-    "status": "local-passed-native68000-ci-pending",
+    "status": "hosted-and-native68000-compiler-verified-unbound",
     "boot_bound": false,
     "platform_bound": false,
-    "evidence": "docs/development/window-input-evidence.json"
+    "evidence": "docs/development/window-input-evidence.json",
+    "source_revision": "7e6e11a8bc07960e05de82ea0f520d8643c330d0"
   }
 }
