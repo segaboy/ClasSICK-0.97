@@ -3552,3 +3552,20 @@ No code bodies,HQ,manuals,research originals,ROM/media or emulator input.
 Uncertain incremental-linker timestamp hypothesis/control is engineering review
 input;lead verifies accepted compiler flags and full bytes across delayed builds.
 No compiler implementation source read. [Evidence](../docs/development/hosted-window-preview-evidence.json).
+
+
+## SRC-0336 - Owner next development step
+
+Dean Howell,2026-10-21:"Move on to the next step." Continues the paired preview2
+milestone with a bounded complete-PC-report handoff to the shared native window
+owner,original tests/compiler/normal CI and ordinary Git/HQ. No controller/boot
+binding,target/reference/hardware trial or release. Small work is done directly
+under the owner's Codex-usage priority;existing worker qualifications reused.
+
+## SRC-0337 - Lead original PC report normalization and verification
+
+Original GPL-3.0-or-later stateless adapter,contract,authored traces and tests.
+Reuses SPEC-0039 decoder and SPEC-0055 owner;no new manual,implementation source
+or research original. Raw-Y inversion is an explicit engineering profile with
+actual device/GUI directional qualification pending,not a new historical fact.
+[Evidence](../docs/development/pc-window-handoff-evidence.json).

@@ -232,3 +232,10 @@ keeps full object SHA equality and runs72 audits/6 delayed pairs. No manuals,
 compiler implementation source or extra provider/requalification. Earlier no-
 second-worker statement describes initial adapter allocation. Provider counters
 are not account balances or Codex savings. [Receipt](hosted-window-preview-evidence.json).
+
+
+PC handoff2026-10-21:small stateless adapter and focused boundary tests are done
+directly by Codex;no worker briefing,fan-out,retry or requalification. Reuse
+existing core/renderer evidence and incremental builds. This avoids new worker
+coordination but does not establish net Codex quota savings. All-four remaining
+allowances unavailable. [Actual checks](pc-window-handoff-evidence.json).

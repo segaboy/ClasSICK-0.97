@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-21",
+  "specification": "SPEC-0057",
+  "implementation": "IMPL-0060",
+  "verification": "TEST-0068",
+  "decision": "ADR-0065",
+  "baseline_revision": "aa2859f24370746243c93ce7199b8023309444e1",
+  "status": "hosted-and-compiler-verified-boot-unbound",
+  "scope": "Complete decoded PC report to shared native window owner;hosted tests,compiler/normal CI and ordinary Git/HQ only. No controller/boot/guest ABI binding,VM/emulator/reference/hardware run or release.",
+  "sources": [
+    "SRC-0336",
+    "SRC-0337"
+  ],
+  "engineering_transform": "dx unchanged;dy negated;buttons unchanged;raw coordinates -256..255 validated before effects",
+  "tests": {
+    "regression_ctests": 316,
+    "focused_profiles": [
+      "Clang64",
+      "Clang64 ASan/UBSan",
+      "GCC32"
+    ],
+    "report_checks_per_run": 3938,
+    "whole_frame_comparisons_per_run": 148,
+    "decoded_packets_per_run": 46,
+    "stub_boundary_checks": 196,
+    "stub_single_deliveries": 49,
+    "negative_controls": [
+      "unflipped-y",
+      "dropped-buttons",
+      "reject-valid-minimum"
+    ],
+    "object_audits": 12,
+    "efi_abi_full_file_twins_equal": true,
+    "ci": null,
+    "local_final_ctests": 322,
+    "final_focused_ctests_per_additional_profile": 3
+  },
+  "oracle_limits": "Original fixed raw-byte/logical-sample pairs and explicit state assertions;whole-frame comparison uses previously verified shared renderer,not a new independent renderer or hardware-direction observation. Stub tests check single call/all button bits/result propagation.",
+  "fixture_corrections": [
+    "RGBA enum typo",
+    "expected drag X corrected to288=512-224,retaining clamp assertion",
+    "saturation fixture establishes both count and truthful rendered snapshot before delivery"
+  ],
+  "workers": {
+    "new_calls": 0,
+    "reason": "Small direct adapter;briefing/review would add comparable work. Reuse qualifications.",
+    "remaining_allowances": "Unavailable for all four external tools;no fresh account query or quota saving claimed."
+  },
+  "next": "Fresh per-poll packet/loss receipt independent of saturating bus counters,then PC binding contract;Mac hardware prerequisites M1-M7 separately open.",
+  "boot_bound": false,
+  "new_target_trial": false,
+  "historical_qualification": false,
+  "release_ready": false,
+  "inputs_git_lf_sha256": {
+    "platform/pc/window-input.h": "b3e7b9e109b39fee2d186414d1710fb4384b347a1e5c1ff76548ffc1bd5493ca",
+    "platform/pc/window-input.c": "6e7a512f0c76b57e561d6be76d347fb5bf2555c114cb4dadb5d3255f16540868",
+    "tests/pc-window-input.c": "9319d63106068ccba2080d21083c2ff0029252b058774f868acc05493a8c3f15",
+    "tests/pc-window-input-propagation.c": "eca533bef697055d7bc34d98b83ec4c9e826ba9b42bb3914aec00790b7aee0f8",
+    "scripts/Verify-PCWindowObjects.ps1": "e2e3a3a0576c1b2b00fd211609256489beb8594ba921846774c227ef947e3916",
+    "CMakeLists.txt": "84c084c8a07ad2ff14e379866fe637558078c9170b88e7f3de0a67b4ba975539",
+    ".github/workflows/bootstrap.yml": "fc9216a83a7e04b08b7cdee9b7673edad09e4b87417820cc35a799b1263c6421",
+    "docs/specifications/SPEC-0057-pc-window-report-handoff.md": "fbf40d173cf64ef954c4becb5ff295e720253208ab8441c3346eb005531f7950",
+    "docs/adr/0065-pc-window-report-handoff.md": "e1f5c71f57b01683d13ed170fa9026db0e71c80d5b628fbd9ebe7d4dce2ac84b"
+  }
+}
