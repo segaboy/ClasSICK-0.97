@@ -14,7 +14,8 @@ controller receipts,loss during drag,held suppression/release and saturation.
 Three local baseline-source comparisons (Clang64,GCC32,GCC64) preserve original
 4d8589c bus state,queues and I/O traffic. Three compiled receipt defects fail.
 34 width/endian/import/global audits pass,plus2 expected native-x64 ABI
-rejections.16-byte receipt layout asserted. Normal CI pending.
+rejections.16-byte receipt layout asserted. Windows and68000 regression CI pass atb4ad772.
+[CI](https://github.com/segaboy/ClasSICK-0.97/actions/runs/39694205628). No new target run.
 
 One Copilot Sonnet5.5 low test primary,16933-byte frozen public/original brief,
 360.06s outer timeout,no artifact or adopted lines. Three transport EOF failures

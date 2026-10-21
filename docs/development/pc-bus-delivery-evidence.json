@@ -6,7 +6,7 @@
   "verification": "TEST-0069",
   "decision": "ADR-0066",
   "baseline_revision": "4d8589c0d55e662147f17e5e624e2c2dfef47f60",
-  "status": "hosted-compiler-verified-window-boot-unbound",
+  "status": "hosted-compiler-and-normal-ci-verified-window-boot-unbound",
   "scope": "Explicit per-poll PC controller packet/loss receipt,legacy behavior preservation and hosted window handoff tests;compiler/normal CI and ordinary Git/HQ. Controller source changes require fresh candidate builds;no window boot binding,target/VM/emulator/reference/hardware run or release.",
   "sources": [
     "SRC-0338",
@@ -67,7 +67,22 @@
     ],
     "compiler_object_audits": 34,
     "expected_unsupported_native_abi_rejections": 2,
-    "ci": null
+    "ci": {
+      "headSha": "b4ad772cd07e98c0ff0cb8155b6b844573004ac1",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/segaboy/ClasSICK-0.97/actions/runs/39694205628",
+      "jobs": [
+        {
+          "name": "windows-bootstrap",
+          "conclusion": "success"
+        },
+        {
+          "name": "m68k-rom",
+          "conclusion": "success"
+        }
+      ]
+    }
   },
   "test_limits": "E1 authored synthetic controller transcripts;whole-frame equivalence reuses the independently verified renderer. No device,GUI,human or hardware-direction qualification. Baseline replay is local,source-pinned,not claimed as CI execution.",
   "workers": {

@@ -183,9 +183,10 @@
     "implementation": "IMPL-0061",
     "verification": "TEST-0069",
     "evidence": "docs/development/pc-bus-delivery-evidence.json",
-    "status": "hosted-compiler-verified-window-boot-unbound",
+    "status": "hosted-compiler-and-normal-ci-verified-window-boot-unbound",
     "delivery_api_installed": true,
     "legacy_poll_preserved": true,
-    "window_boot_bound": false
+    "window_boot_bound": false,
+    "source_revision": "b4ad772cd07e98c0ff0cb8155b6b844573004ac1"
   }
 }
