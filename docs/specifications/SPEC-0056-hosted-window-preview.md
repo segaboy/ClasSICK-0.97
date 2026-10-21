@@ -1,6 +1,6 @@
 # SPEC-0056 - Original Windows hosted window preview
 
-Accepted2026-10-21;SRC-0332..0334;ADR-0064.
+Accepted2026-10-21;SRC-0332..0335;ADR-0064.
 Separate classick_window_preview executable;existing surface-demo unchanged.
 Shared native C owner,window,cursor,product backdrop and counter remain unchanged.
 This adapter is an engineering test/preview interface,not a Macintosh ABI.
@@ -67,3 +67,10 @@ Hidden-window test/capture fixtures must request dimensions independently of
 monitor tracking-size limits;this changes fixture setup,not product constraints.
 A controlled800x600 tracking ceiling reproduces the original CI assertion before
 the fixture fix. Retain1280x960 client/pixel checks;never skip or reduce them.
+
+
+Compiler audit follow-up:five existing Clang EFI-ABI object audits request stable
+COFF metadata through the actual supported -Xclang
+-mno-incremental-linker-compatible control. Separate twins by1.1s and retain full
+byte/hash equality. Do not normalize headers or ignore bytes. Runtime image
+source lists/compile inputs and released artifacts remain unchanged.

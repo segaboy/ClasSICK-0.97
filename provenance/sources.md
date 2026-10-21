@@ -3542,3 +3542,13 @@ oracle plus implementation-aware corrections and negative controls. Existing
 project presenter behavior corrects the brief's inaccurate scaling assumption.
 No third-party implementation,manual samples or historical conclusions.
 [Implementation](records/IMPL-0059-hosted-window-preview.md).
+
+
+## SRC-0335 - Grok bounded compiler-timestamp review
+
+2026-10-21;one1,479-byte reviewed-public/original diagnostic brief,existing
+Grok4.7 CLI,low effort,resolved grok-4.7-build.22.38s,zero tools/edits/tests.
+No code bodies,HQ,manuals,research originals,ROM/media or emulator input.
+Uncertain incremental-linker timestamp hypothesis/control is engineering review
+input;lead verifies accepted compiler flags and full bytes across delayed builds.
+No compiler implementation source read. [Evidence](../docs/development/hosted-window-preview-evidence.json).

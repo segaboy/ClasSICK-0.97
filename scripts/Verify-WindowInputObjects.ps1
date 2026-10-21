@@ -33,8 +33,10 @@ foreach($target in @('aarch64-none-elf','aarch64_be-none-elf')){
 }
 $twins=@()
 foreach($twin in @('a','b')){
+    # Cross a timestamp tick so nondeterministic COFF headers cannot pass by chance.
+    if($twin -eq 'b'){Start-Sleep -Milliseconds 1100}
     $object=Join-Path $BuildRoot "$prefix-efi-$twin.o"
-    & $clang -m64 -O2 -std=c11 -ffreestanding -fno-builtin -fno-stack-protector -fno-ident -mno-red-zone -mgeneral-regs-only -Wframe-larger-than=2048 -Wall -Wextra -Wpedantic -Werror -Wconversion -Wsign-conversion -c (Join-Path $repo $source) -o $object
+    & $clang -m64 -O2 -std=c11 -ffreestanding -fno-builtin -fno-stack-protector -fno-ident -Xclang -mno-incremental-linker-compatible -mno-red-zone -mgeneral-regs-only -Wframe-larger-than=2048 -Wall -Wextra -Wpedantic -Werror -Wconversion -Wsign-conversion -c (Join-Path $repo $source) -o $object
     if($LASTEXITCODE -ne 0){throw 'Window EFI-ABI compile failed.'}
     & cmake "-DNM=$nm" "-DOBJECT=$object" "-DALLOWED=memcpy,cs_surface_init,cs_cursor_query,cs_cursor_hide,cs_pointer_begin,cs_pointer_sample_apply,cs_pointer_cancel,cs_mouse_button_begin,cs_mouse_button_sample,cs_window_begin,cs_window_apply,cs_window_scene_compose" -P (Join-Path $PSScriptRoot 'Check-ObjectImports.cmake')
     if($LASTEXITCODE -ne 0){throw 'Window EFI-ABI audit failed.'}

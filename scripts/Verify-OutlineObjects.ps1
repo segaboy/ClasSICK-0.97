@@ -31,8 +31,10 @@ foreach($target in @('aarch64-none-elf','aarch64_be-none-elf')){
 }
 $twins=@()
 foreach($twin in @('a','b')){
+    # Cross a timestamp tick so nondeterministic COFF headers cannot pass by chance.
+    if($twin -eq 'b'){Start-Sleep -Milliseconds 1100}
     $object=Join-Path $BuildRoot "efi-$twin.o"
-    & $clang -m64 -O2 -std=c11 -ffreestanding -fno-builtin -fno-stack-protector -fno-ident -mno-red-zone -mgeneral-regs-only -Wframe-larger-than=2048 -Wall -Wextra -Wpedantic -Werror -Wconversion -Wsign-conversion -c (Join-Path $repo 'personality/system1/quickdraw-outline.c') -o $object
+    & $clang -m64 -O2 -std=c11 -ffreestanding -fno-builtin -fno-stack-protector -fno-ident -Xclang -mno-incremental-linker-compatible -mno-red-zone -mgeneral-regs-only -Wframe-larger-than=2048 -Wall -Wextra -Wpedantic -Werror -Wconversion -Wsign-conversion -c (Join-Path $repo 'personality/system1/quickdraw-outline.c') -o $object
     if($LASTEXITCODE -ne 0){throw 'Outline EFI-ABI compile failed.'}
     & cmake "-DNM=$nm" "-DOBJECT=$object" -P (Join-Path $PSScriptRoot 'Check-Freestanding.cmake')
     if($LASTEXITCODE -ne 0){throw 'Outline EFI-ABI audit failed.'}

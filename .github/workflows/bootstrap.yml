@@ -41,6 +41,21 @@ jobs:
       - name: Verify two fresh hosted builds
         shell: powershell
         run: .\scripts\Verify-Bootstrap.ps1
+      - name: Native outline width, endian and EFI-ABI object twins
+        shell: pwsh
+        run: .\scripts\Verify-OutlineObjects.ps1 -BuildRoot build\outline-verification
+      - name: Pointer and cursor width/endian/EFI-ABI objects
+        shell: pwsh
+        run: .\scripts\Verify-PointerCursorObjects.ps1 -BuildRoot build\pointer-cursor-objects
+      - name: Audit original window native objects (no target run)
+        shell: pwsh
+        run: .\scripts\Verify-WindowObjects.ps1 -BuildRoot build\window-objects
+      - name: Verify native input owner objects
+        shell: pwsh
+        run: .\scripts\Verify-WindowInputObjects.ps1 -BuildRoot build\window-input-objects
+      - name: Audit original window composition objects (no target run)
+        shell: pwsh
+        run: .\scripts\Verify-WindowSceneObjects.ps1 -BuildRoot build\window-scene-objects
       - name: Verify hosted core, loader, exceptions, devices, boot media and unloaded fault fixtures
         shell: powershell
         run: .\scripts\Verify-LoadedApp.ps1 -BuildRoot build\media-verification -Sanitizers
@@ -84,27 +99,15 @@ jobs:
       - name: Mouse foundation width and endian object checks
         shell: pwsh
         run: .\scripts\Verify-MouseObjects.ps1 -BuildRoot build\mouse-verification
-      - name: Native outline width, endian and EFI-ABI object twins
-        shell: pwsh
-        run: .\scripts\Verify-OutlineObjects.ps1 -BuildRoot build\outline-verification
+
       - name: Pure native selection width and endian objects
         shell: pwsh
         run: .\scripts\Verify-SelectionObjects.ps1 -BuildRoot build\selection-verification
       - name: Integrated port owner width and endian objects
         shell: pwsh
         run: .\scripts\Verify-PortOwnerObjects.ps1 -BuildRoot build\port-owner-verification
-      - name: Pointer and cursor width/endian/EFI-ABI objects
-        shell: pwsh
-        run: .\scripts\Verify-PointerCursorObjects.ps1 -BuildRoot build\pointer-cursor-objects
-      - name: Audit original window native objects (no target run)
-        shell: pwsh
-        run: .\scripts\Verify-WindowObjects.ps1 -BuildRoot build\window-objects
-      - name: Verify native input owner objects
-        shell: pwsh
-        run: .\scripts\Verify-WindowInputObjects.ps1 -BuildRoot build\window-input-objects
-      - name: Audit original window composition objects (no target run)
-        shell: pwsh
-        run: .\scripts\Verify-WindowSceneObjects.ps1 -BuildRoot build\window-scene-objects
+
+
 
   m68k-rom:
     runs-on: ubuntu-24.04

@@ -45,3 +45,23 @@ product adapter is unchanged. Tests retain full large-client pixel assertions
 under the forced ceiling. Three negative controls now include the reproduced
 sizing failure;all315 final local CTests pass. Captures remain byte-identical.
 [Failed CI retained](https://github.com/segaboy/ClasSICK-0.97/actions/runs/39597371865).
+
+
+A later CI audit fails pointer/cursor object-twin equality after runtime
+regressions pass. Failed remote objects were not retained. Lead reproduces the
+same flags locally across time:only the COFF timestamp differs. SOURCE_DATE_EPOCH
+alone is ineffective. One distinct-risk Grok review(22.38s,1,479-byte original
+facts brief,zero tools/edits/tests) proposes incremental-linker control,unverified.
+Lead checks compiler help and actual accepted -Xclang spelling. Five audit scripts
+now generate stable headers with -mno-incremental-linker-compatible and deliberately
+separate twins by1.1s. All72 object audits and6 full-file identical pairs pass.
+No bytes are normalized/ignored,and runtime image compiler inputs are unchanged.
+[Second failed CI retained](https://github.com/segaboy/ClasSICK-0.97/actions/runs/39599190731).
+SRC-0335 records the bounded review;neither worker opinion nor object behavior
+settles historical Macintosh behavior. Remaining provider balances unavailable.
+
+
+The same five quick object audits now run immediately after fresh hosted builds,
+before the long regression matrix. No check or gate is removed;all five scripts
+were independently run against fresh object folders. This exposes compiler-audit
+failures earlier instead of after the full matrix.

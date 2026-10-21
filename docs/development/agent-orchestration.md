@@ -222,3 +222,13 @@ lifecycle/edge details,uses contract-first adapter/GDI oracle and two negative
 controls. No second worker,retry or qualification;reuse incremental builds and
 existing core/pixel evidence. No account balances or net Codex savings reported.
 [Receipt](hosted-window-preview-evidence.json).
+
+
+Hosted CI follow-up2026-10-21:one second worker is justified by a distinct observed
+compiler nondeterminism gap. Grok4.7 low,resolved grok-4.7-build,returns a bounded
+uncertain timestamp-control direction in22.38s from1,479 original diagnostic
+bytes,zero tools/edits/tests. Codex verifies the actual compiler option/spelling,
+keeps full object SHA equality and runs72 audits/6 delayed pairs. No manuals,
+compiler implementation source or extra provider/requalification. Earlier no-
+second-worker statement describes initial adapter allocation. Provider counters
+are not account balances or Codex savings. [Receipt](hosted-window-preview-evidence.json).

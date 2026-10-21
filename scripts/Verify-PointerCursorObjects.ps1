@@ -18,30 +18,32 @@ foreach($compiler in @($clang,$gcc)){foreach($bits in @(32,64)){foreach($opt in 
     $name=if($compiler -eq $clang){'clang'}else{'gcc'}
     $object=Join-Path $BuildRoot "$prefix-$name-$bits-O$opt.o"
     & $compiler "-m$bits" "-O$opt" -std=c11 -ffreestanding -fno-builtin -fno-stack-protector -Wall -Wextra -Wpedantic -Werror -Wconversion -Wsign-conversion -c (Join-Path $repo $source) -o $object
-    if($LASTEXITCODE -ne 0){throw 'Outline object compile failed.'}
+    if($LASTEXITCODE -ne 0){throw 'Pointer/cursor object compile failed.'}
     & cmake "-DNM=$nm" "-DOBJECT=$object" "-DALLOWED=cs_surface_init" -P (Join-Path $repo 'scripts/Check-ObjectImports.cmake')
-    if($LASTEXITCODE -ne 0){throw 'Outline imports/data audit failed.'}
+    if($LASTEXITCODE -ne 0){throw 'Pointer/cursor imports/data audit failed.'}
     ++$checks
 }}}
 foreach($target in @('aarch64-none-elf','aarch64_be-none-elf')){
     $object=Join-Path $BuildRoot "$prefix-$target.o"
     & $clang "--target=$target" -O2 -std=c11 -ffreestanding -fno-builtin -fno-stack-protector -Wall -Wextra -Wpedantic -Werror -Wconversion -Wsign-conversion -c (Join-Path $repo $source) -o $object
-    if($LASTEXITCODE -ne 0){throw 'Outline endian compile failed.'}
+    if($LASTEXITCODE -ne 0){throw 'Pointer/cursor endian compile failed.'}
     & cmake "-DNM=$nm" "-DOBJECT=$object" "-DALLOWED=cs_surface_init" -P (Join-Path $repo 'scripts/Check-ObjectImports.cmake')
-    if($LASTEXITCODE -ne 0){throw 'Outline endian imports/data audit failed.'}
+    if($LASTEXITCODE -ne 0){throw 'Pointer/cursor endian imports/data audit failed.'}
     ++$checks
 }
 $twins=@()
 foreach($twin in @('a','b')){
+    # Cross a timestamp tick so nondeterministic COFF headers cannot pass by chance.
+    if($twin -eq 'b'){Start-Sleep -Milliseconds 1100}
     $object=Join-Path $BuildRoot "$prefix-efi-$twin.o"
-    & $clang -m64 -O2 -std=c11 -ffreestanding -fno-builtin -fno-stack-protector -fno-ident -mno-red-zone -mgeneral-regs-only -Wframe-larger-than=2048 -Wall -Wextra -Wpedantic -Werror -Wconversion -Wsign-conversion -c (Join-Path $repo $source) -o $object
-    if($LASTEXITCODE -ne 0){throw 'Outline EFI-ABI compile failed.'}
+    & $clang -m64 -O2 -std=c11 -ffreestanding -fno-builtin -fno-stack-protector -fno-ident -Xclang -mno-incremental-linker-compatible -mno-red-zone -mgeneral-regs-only -Wframe-larger-than=2048 -Wall -Wextra -Wpedantic -Werror -Wconversion -Wsign-conversion -c (Join-Path $repo $source) -o $object
+    if($LASTEXITCODE -ne 0){throw 'Pointer/cursor EFI-ABI compile failed.'}
     & cmake "-DNM=$nm" "-DOBJECT=$object" "-DALLOWED=cs_surface_init" -P (Join-Path $PSScriptRoot 'Check-ObjectImports.cmake')
-    if($LASTEXITCODE -ne 0){throw 'Outline EFI-ABI audit failed.'}
+    if($LASTEXITCODE -ne 0){throw 'Pointer/cursor EFI-ABI audit failed.'}
     $twins+=((Get-FileHash -LiteralPath $object -Algorithm SHA256).Hash.ToLowerInvariant())
     ++$checks
 }
-if($twins[0] -ne $twins[1]){throw 'Outline EFI-ABI object twins differ.'}
+if($twins[0] -ne $twins[1]){throw 'Pointer/cursor EFI-ABI object twins differ.'}
 }
 @{efi_abi_object_twins_equal=$true;efi_image_changed=$false;specifications=@('SPEC-0051','SPEC-0052');object_audits=$checks;target_executed=$false} |
     ConvertTo-Json | Set-Content -LiteralPath (Join-Path $BuildRoot 'manifest.json') -Encoding UTF8

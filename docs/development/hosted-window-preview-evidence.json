@@ -5,7 +5,8 @@
   "sources": [
     "SRC-0332",
     "SRC-0333",
-    "SRC-0334"
+    "SRC-0334",
+    "SRC-0335"
   ],
   "specification": "SPEC-0056",
   "decision": "ADR-0064",
@@ -43,7 +44,13 @@
     "tools/evidence/window-media.py": "b87acc8fb61208c94cd45468d199ad74f6010f51c79390ed809101a2f2a6df80",
     "scripts/Test-Repository.ps1": "87e256e986e9f6696c5759fa13571081fb15ca6ae856e8edadb7248873f8e449",
     "scripts/check_animations.py": "d7933d01a207ff8daf7f7c3a14bf2e8451d4250c0efaaf3df82c0522cfbfd36e",
-    "tests/animation-admission.py": "051019fc7d7c15b7e6620650dcde6353d1e0f885513aaf92c4f5cafb90658a11"
+    "tests/animation-admission.py": "051019fc7d7c15b7e6620650dcde6353d1e0f885513aaf92c4f5cafb90658a11",
+    "scripts/Verify-OutlineObjects.ps1": "b135bed18a7d0b27cd6d3823e046d39d8761fe6db1e64635faf499165d21e159",
+    "scripts/Verify-PointerCursorObjects.ps1": "93b5a9dcb3fc6c78009111f153f7a5f213245f886c03caafc268c2d47f495aef",
+    "scripts/Verify-WindowObjects.ps1": "883ed55e68a9e8b967d866745820ad5b50433a53d9080486705d60da40851705",
+    "scripts/Verify-WindowSceneObjects.ps1": "c9ea67812af8cba8e416078a8200145c2a7851444820ec7d066a3cc4e56aca12",
+    "scripts/Verify-WindowInputObjects.ps1": "25ec7eca8dde0055879e306d48da4719ecf1e2d456cef83f65af89f30fdf2a81",
+    ".github/workflows/bootstrap.yml": "9d2d2b475dc930887fb9119dbae14a6cee724c67e9117ac0a7f5b761654798e6"
   },
   "worker": {
     "provider": "GitHub Copilot",
@@ -89,7 +96,8 @@
         }
       },
       "totalApiDurationMs": 58854
-    }
+    },
+    "role": "bounded substantial primary,Windows adapter/header/main"
   },
   "integration": [
     "Adopt all three305-line worker files;no second provider/retry or recreated adapter.",
@@ -171,7 +179,121 @@
       "Clang64-sanitized",
       "GCC32"
     ],
-    "ci": null
+    "ci": null,
+    "coff_reproducibility": {
+      "before": [
+        {
+          "module": "pointer",
+          "bytes": [
+            1602,
+            1602
+          ],
+          "differing_offsets": [
+            4
+          ],
+          "difference_count": 1,
+          "header_timestamp_a": 1792586623,
+          "header_timestamp_b": 1792586624
+        },
+        {
+          "module": "cursor",
+          "bytes": [
+            7219,
+            7219
+          ],
+          "differing_offsets": [
+            4
+          ],
+          "difference_count": 1,
+          "header_timestamp_a": 1792586624,
+          "header_timestamp_b": 1792586626
+        }
+      ],
+      "compiler_control": [
+        "-Xclang",
+        "-mno-incremental-linker-compatible"
+      ],
+      "seconds_between_twins": 1.1,
+      "total_object_audits": 72,
+      "full_file_hash_equality_required": true,
+      "no_binary_normalization": true,
+      "no_runtime_image_input_changes": true,
+      "records": [
+        {
+          "script": "Outline",
+          "object_audits": 12,
+          "pairs": [
+            {
+              "module": "efi",
+              "bytes": 1125,
+              "sha256": "dc6616f8a9ba6e64861f77f71946855a70f5cc9b0f8c8a8ba8881c6595c92695",
+              "timestamp": 0,
+              "full_bytes_equal": true
+            }
+          ]
+        },
+        {
+          "script": "PointerCursor",
+          "object_audits": 24,
+          "pairs": [
+            {
+              "module": "cursor-efi",
+              "bytes": 7219,
+              "sha256": "48be59117ac7eabab7f655f560faa91b190db6d090971c0bf10f8e17f4370bdb",
+              "timestamp": 0,
+              "full_bytes_equal": true
+            },
+            {
+              "module": "pointer-efi",
+              "bytes": 1602,
+              "sha256": "c2d5ff24c8f6acf4f35fc81a113d1b9e8f164b11e87632cf98f0aa0e7a8cd123",
+              "timestamp": 0,
+              "full_bytes_equal": true
+            }
+          ]
+        },
+        {
+          "script": "Window",
+          "object_audits": 12,
+          "pairs": [
+            {
+              "module": "window-efi",
+              "bytes": 1964,
+              "sha256": "73ece2a72e1b0a7a70f8f0ad7bf29706f2dc4741d5aecb50ab34103f1d8488a0",
+              "timestamp": 0,
+              "full_bytes_equal": true
+            }
+          ]
+        },
+        {
+          "script": "WindowScene",
+          "object_audits": 12,
+          "pairs": [
+            {
+              "module": "window-scene-efi",
+              "bytes": 5763,
+              "sha256": "26ed9e81c253400adb737b6dd39fa8982a56db5f2a1fc12bf15bea27694b8394",
+              "timestamp": 0,
+              "full_bytes_equal": true
+            }
+          ]
+        },
+        {
+          "script": "WindowInput",
+          "object_audits": 12,
+          "pairs": [
+            {
+              "module": "window-input-efi",
+              "bytes": 5980,
+              "sha256": "b543104867936632bee22ff89c0f32dc5bba45d1f4cc9a4148a73f283e8d6c59",
+              "timestamp": 0,
+              "full_bytes_equal": true
+            }
+          ]
+        }
+      ],
+      "ci_order": "same five object audits moved immediately after fresh builds,before long regression matrix;no checks removed"
+    }
   },
   "evidence_class": "hosted synthetic Win32 API/client-paint evidence;not host-delivered GUI,human or boot qualification",
   "memory": {
@@ -203,7 +325,7 @@
     "Grok": null,
     "Antigravity": null
   },
-  "usage_note": "All four remaining account allowances unavailable;task counters are not balances or comparable Codex quota savings. One primary,no redundant review/requalification;existing builds/oracles reused.",
+  "usage_note": "One substantial Copilot primary;one later22.38s Grok review only for concrete compiler nondeterminism. Remaining account balances unavailable;task counters are not comparable Codex savings.",
   "media": {
     "audit": "docs/development/hosted-window-media.json",
     "index": "docs/evidence/screenshots/2026-10-21/README.md",
@@ -224,6 +346,67 @@
       "diagnostic": "hidden test client size differs from requested1280x960",
       "local_reproduction": "800x600 tracking ceiling produces784x561 client",
       "correction": "Test/capture sizing suppresses WM_WINDOWPOSCHANGING validation;product adapter unchanged. Test retains actual1280x960 image checks under an explicit smaller tracking ceiling."
+    },
+    {
+      "source_revision": "972da1d95f788b97ade6e5c02bf70c1ba6c46b7b",
+      "url": "https://github.com/segaboy/ClasSICK-0.97/actions/runs/39599190731",
+      "job": "windows-bootstrap",
+      "result": "failed after full regression suite and unbooted candidate builds passed",
+      "diagnostic": "Verify-PointerCursorObjects.ps1 full object twins differ",
+      "remote_objects_retained": false,
+      "local_reproduction": "same flags with delayed compiles differ only at COFF timestamp;SOURCE_DATE_EPOCH=0 has no effect",
+      "correction": "Compiler generates stable timestamp through -Xclang -mno-incremental-linker-compatible in five audit scripts. Full-file SHA comparison retained;1.1-second delayed twins all match. No runtime-image compilation input changes."
     }
-  ]
+  ],
+  "focused_review": {
+    "provider": "xAI Grok",
+    "model_requested": "grok-4.7",
+    "model_observed": "grok-4.7-build",
+    "effort": "low",
+    "execution": {
+      "round": "object-review",
+      "worker": "grok",
+      "exit_code": 0,
+      "outer_timeout": false,
+      "elapsed_seconds": 22.38,
+      "input_bytes": 1479,
+      "input_sha256": "a481194fb1f9bcb3374eef20431449a6fb37bd35ee31534cd130031b5cc04633",
+      "stderr_bytes": 148
+    },
+    "tools_observed": [],
+    "worker_edits": 0,
+    "worker_tests_executed": [],
+    "proposal": {
+      "hypothesis": "Uncertain. Byte 4 is the COFF TimeDateStamp. llvm-mingw appears to default to incremental-linker-compatible output, which writes time() and overrides SOURCE_DATE_EPOCH. The driver already rejected -Xclang -fno-incremental-linker-compatible and named -mno-incremental-linker-compatible. That is the smallest control to try. Whether it yields a stable zero or SOURCE_DATE_EPOCH timestamp is unconfirmed.",
+      "flags_to_verify": [
+        "-mno-incremental-linker-compatible"
+      ],
+      "regression_check": "Keep the current warning set and compile flags. Compile pointer.c and cursor.c twice each. Require identical bytes, including byte 4, and unchanged sizes 1602 and 7219. Confirm -Wframe-larger-than=2048 still applies. Leave SOURCE_DATE_EPOCH=0 set only as a second probe if the flag alone still changes byte 4.",
+      "limitations": "No compiler run was done here. Do not treat the suggested spelling as proven support. -Wa,-timestamp=0 and cc1as showed no timestamp switch. No archive, runtime, reinstall, or source edit is recommended. If the flag is rejected or byte 4 still follows the wall clock, stop; no other flag is known from this evidence.",
+      "tests_executed": []
+    },
+    "provider_reported": {
+      "usage": {
+        "input_tokens": 4334,
+        "cache_read_input_tokens": 3200,
+        "cache_creation_input_tokens": 0,
+        "output_tokens": 1392,
+        "reasoning_tokens": 1111,
+        "total_tokens": 8926
+      },
+      "num_turns": 1,
+      "total_cost_usd": 0.0063308,
+      "modelUsage": {
+        "grok-4.7-build": {
+          "inputTokens": 4334,
+          "outputTokens": 1392,
+          "cacheReadInputTokens": 3200,
+          "cacheCreationInputTokens": 0,
+          "modelCalls": 1,
+          "costUSD": 0.0063308
+        }
+      }
+    },
+    "disposition": "Narrow incremental-linker timestamp hypothesis/control direction retained as proposal;lead verifies accepted -Xclang spelling and actual compiler output. No compiler implementation source inspected."
+  }
 }
