@@ -161,10 +161,11 @@
     "specification": "SPEC-0056",
     "implementation": "IMPL-0059",
     "verification": "TEST-0067",
-    "status": "local-passed-normal-ci-pending",
+    "status": "hosted-preview-and-normal-ci-verified-boot-unbound",
     "hosted_bound": true,
     "boot_bound": false,
     "evidence": "docs/development/hosted-window-preview-evidence.json",
-    "media": "docs/evidence/screenshots/2026-10-21/README.md"
+    "media": "docs/evidence/screenshots/2026-10-21/README.md",
+    "source_revision": "aa071f80b4f210c27012675630e053ce75574c91"
   }
 }

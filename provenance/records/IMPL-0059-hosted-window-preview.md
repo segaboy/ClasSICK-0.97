@@ -19,7 +19,9 @@ run verifies38 complete frames,3 client paints and1,656,254 assertions. Directed
 traces cover signed outside coordinates,held input,press/release,drag/final
 release,capture/focus/cancel loss,margins,resize,cleanup/reopen and fault stop.
 GCC64-O2 passes;two compiled click-release/scaled-presentation defects fail.
-Actual32/64 executables use the Windows GUI subsystem. Normal CI pending here.
+Actual32/64 executables use the Windows GUI subsystem. Windows and68000 regression CI pass ataa071f8.
+New Win32 adapter is not a68000 module;shared native core is unchanged.
+[CI](https://github.com/segaboy/ClasSICK-0.97/actions/runs/39604180548).
 [Exact evidence](../../docs/development/hosted-window-preview-evidence.json).
 
 All observations are synthetic messages/hidden-window client painting. No real
