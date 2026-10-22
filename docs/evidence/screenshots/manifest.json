@@ -621,6 +621,126 @@
         "Not OS-delivered GUI,human,Mac/firmware/VM boot or release qualification.",
         "Capture observer identified separately by source hash in the linked audit."
       ]
+    },
+    {
+      "id": "2026-10-22-pc-window-initial",
+      "path": "docs/evidence/screenshots/2026-10-22/pc-window-initial.png",
+      "sha256": "7bd4dc9c78b1729f5d88da5f57ee1813666714caf17fce88913d97cee4abc5a7",
+      "bytes": 4850,
+      "width": 1024,
+      "height": 768,
+      "captured_on": "2026-10-22",
+      "target": "native-x86_64",
+      "caption": "Native PC window boot before input, counter0000.",
+      "alt": "Original monochrome ClasSICK0.97 branding, movable patterned window, plus cursor and input counter.",
+      "source_revision": "a23e9f9f786cfb21b1fa2afb9f297bec7d29b185",
+      "compiled_source_revision": "0b23981a83f5c1e0fdb231707d83c3d25c6085c8",
+      "evidence": "docs/development/pc-window-boot-trial.md",
+      "license": "GPL-3.0-or-later",
+      "rights": "Original ClasSICK product framebuffer only;no emulator chrome,desktop,reference-system or credential pixels.",
+      "input": "synthetic",
+      "limitations": [
+        "One isolated headless VirtualBox boot;device injection bypasses host capture/focus.",
+        "Not GUI,human,Mac parity,historical,physical/full128K/B2 or release qualification.",
+        "Unscaled512x342 centered at256,213 in1024x768;unchanged captured bytes.",
+        "CWP1 unavailable;external poweroff,not guest STOPPED."
+      ]
+    },
+    {
+      "id": "2026-10-22-pc-window-body-held",
+      "path": "docs/evidence/screenshots/2026-10-22/pc-window-body-held.png",
+      "sha256": "98ccf1ccde50e98dceffecfbd5ae664615f5af90b4b46889cd7c3969db0c85d3",
+      "bytes": 4688,
+      "width": 1024,
+      "height": 768,
+      "captured_on": "2026-10-22",
+      "target": "native-x86_64",
+      "caption": "Body press toggles stripes; held movement leaves counter0001.",
+      "alt": "Original monochrome ClasSICK0.97 branding, movable patterned window, plus cursor and input counter.",
+      "source_revision": "a23e9f9f786cfb21b1fa2afb9f297bec7d29b185",
+      "compiled_source_revision": "0b23981a83f5c1e0fdb231707d83c3d25c6085c8",
+      "evidence": "docs/development/pc-window-boot-trial.md",
+      "license": "GPL-3.0-or-later",
+      "rights": "Original ClasSICK product framebuffer only;no emulator chrome,desktop,reference-system or credential pixels.",
+      "input": "synthetic",
+      "limitations": [
+        "One isolated headless VirtualBox boot;device injection bypasses host capture/focus.",
+        "Not GUI,human,Mac parity,historical,physical/full128K/B2 or release qualification.",
+        "Unscaled512x342 centered at256,213 in1024x768;unchanged captured bytes.",
+        "CWP1 unavailable;external poweroff,not guest STOPPED."
+      ]
+    },
+    {
+      "id": "2026-10-22-pc-window-drag-release",
+      "path": "docs/evidence/screenshots/2026-10-22/pc-window-drag-release.png",
+      "sha256": "cde996a1cae9a69392e87a62b4a811e09b70ef7b1662b3ef2a46a1a972177955",
+      "bytes": 4757,
+      "width": 1024,
+      "height": 768,
+      "captured_on": "2026-10-22",
+      "target": "native-x86_64",
+      "caption": "Window dragged60 pixels right and30 down, counter0002.",
+      "alt": "Original monochrome ClasSICK0.97 branding, movable patterned window, plus cursor and input counter.",
+      "source_revision": "a23e9f9f786cfb21b1fa2afb9f297bec7d29b185",
+      "compiled_source_revision": "0b23981a83f5c1e0fdb231707d83c3d25c6085c8",
+      "evidence": "docs/development/pc-window-boot-trial.md",
+      "license": "GPL-3.0-or-later",
+      "rights": "Original ClasSICK product framebuffer only;no emulator chrome,desktop,reference-system or credential pixels.",
+      "input": "synthetic",
+      "limitations": [
+        "One isolated headless VirtualBox boot;device injection bypasses host capture/focus.",
+        "Not GUI,human,Mac parity,historical,physical/full128K/B2 or release qualification.",
+        "Unscaled512x342 centered at256,213 in1024x768;unchanged captured bytes.",
+        "CWP1 unavailable;external poweroff,not guest STOPPED."
+      ]
+    },
+    {
+      "id": "2026-10-22-pc-window-content-release",
+      "path": "docs/evidence/screenshots/2026-10-22/pc-window-content-release.png",
+      "sha256": "d19830f825f0a11d53e522a64904424f4ea27e7d31c87a8ac3c23094303208ed",
+      "bytes": 4932,
+      "width": 1024,
+      "height": 768,
+      "captured_on": "2026-10-22",
+      "target": "native-x86_64",
+      "caption": "Content click changes to checkerboard, counter0003.",
+      "alt": "Original monochrome ClasSICK0.97 branding, movable patterned window, plus cursor and input counter.",
+      "source_revision": "a23e9f9f786cfb21b1fa2afb9f297bec7d29b185",
+      "compiled_source_revision": "0b23981a83f5c1e0fdb231707d83c3d25c6085c8",
+      "evidence": "docs/development/pc-window-boot-trial.md",
+      "license": "GPL-3.0-or-later",
+      "rights": "Original ClasSICK product framebuffer only;no emulator chrome,desktop,reference-system or credential pixels.",
+      "input": "synthetic",
+      "limitations": [
+        "One isolated headless VirtualBox boot;device injection bypasses host capture/focus.",
+        "Not GUI,human,Mac parity,historical,physical/full128K/B2 or release qualification.",
+        "Unscaled512x342 centered at256,213 in1024x768;unchanged captured bytes.",
+        "CWP1 unavailable;external poweroff,not guest STOPPED."
+      ]
+    },
+    {
+      "id": "2026-10-22-pc-window-final-release",
+      "path": "docs/evidence/screenshots/2026-10-22/pc-window-final-release.png",
+      "sha256": "133a22df845a5e9d12d89067593e27672d67880a45d95ffc5439876c02dbbc57",
+      "bytes": 4755,
+      "width": 1024,
+      "height": 768,
+      "captured_on": "2026-10-22",
+      "target": "native-x86_64",
+      "caption": "After70 continuous host seconds and keys, a later press works, counter0004.",
+      "alt": "Original monochrome ClasSICK0.97 branding, movable patterned window, plus cursor and input counter.",
+      "source_revision": "a23e9f9f786cfb21b1fa2afb9f297bec7d29b185",
+      "compiled_source_revision": "0b23981a83f5c1e0fdb231707d83c3d25c6085c8",
+      "evidence": "docs/development/pc-window-boot-trial.md",
+      "license": "GPL-3.0-or-later",
+      "rights": "Original ClasSICK product framebuffer only;no emulator chrome,desktop,reference-system or credential pixels.",
+      "input": "synthetic",
+      "limitations": [
+        "One isolated headless VirtualBox boot;device injection bypasses host capture/focus.",
+        "Not GUI,human,Mac parity,historical,physical/full128K/B2 or release qualification.",
+        "Unscaled512x342 centered at256,213 in1024x768;unchanged captured bytes.",
+        "CWP1 unavailable;external poweroff,not guest STOPPED."
+      ]
     }
   ]
 }

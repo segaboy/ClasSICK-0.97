@@ -3745,3 +3745,30 @@ test integration and narrow primary fixes;348 profile CTests,8 object audits,
 verified without execution. Explicit TEST-0072 keyboard-code coverage correction.
 All device/GUI/human,Mac,compatibility/release gates persist;no BIOS support claim.
 [Receipt](../docs/development/pc-window-boot-evidence.json).
+
+
+## SRC-0359 - Owner exact PC window qualification continuation
+
+Dean Howell,2026-10-22:"Do the next step." Accepts the immediately proposed
+qualification of the exact CI-built,previously unbooted SPEC-0062 candidate.
+One isolated automated VirtualBox boot,input/captures,cleanup and ordinary Git/HQ;
+no second trial,other platform,implementation or release expansion.
+
+## SRC-0360 - Interface-discovery concern and owner disposition
+
+2026-10-22:unrelated emulator table entries appeared in a debugger-documentation
+search excerpt. No function body/page read,reuse,worker transfer or affected
+ClasSICK code. Lead stopped that review and notified owner under POLICY81-88.
+Owner:"Do what you think is right. My only goal is to achieve an all original
+code reproduction of system 1." Lead excludes excerpt and continues narrow
+public API/own-data inspection. Public COM type information exposes a read
+method;its actual invocation returns not implemented. No source content admitted.
+
+## SRC-0361 - Original PC window boot observations and five reviewed captures
+
+2026-10-22;SPEC-0062;TEST-0074. One isolated headless exact-CI-candidate boot;
+16 decoded captures,four accepted mouse edges,three drag moves and70 continuous
+host seconds followed by working input. Five unchanged own-product PNGs reviewed
+and registered under SRC-0280;GPL-3.0-or-later,no desktop/emulator chrome/reference
+pixels/credentials/protected assets. CWP1 unobserved;no GUI/human/Mac/physical/
+128K/historical/release claim. [Receipt](../docs/development/pc-window-boot-trial.json).

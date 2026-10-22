@@ -167,3 +167,12 @@ implementation, fixture, test execution, build, target run or release occurred.
 
 
 2026-10-22 SPEC-0062:opt-in PC WindowDrawing boot binding and160-byte CWP1 trace implemented. [Unbooted candidate/software evidence](../docs/development/pc-window-boot-evidence.md):348 profile CTests,8 audits,4 compiled defects,EFI twin/control and two-writer media checks. No target/device/GUI/human qualification,Mac M1-M7 waiver or release. New exact-image permission remains necessary.
+
+
+2026-10-22 [TEST-0074 PC trial](../docs/development/pc-window-boot-trial.md): exact
+CI candidate boots,accepts4 synthetic presses,drags through3 positions and stays
+responsive after70 continuous host seconds.16 decoded frames/five reviewed PNGs;
+one VM closed,inventory/media preserved. No runtime edit,rebuild or worker call.
+CWP1 unavailable(public read not implemented);GUI/human and Mac M1-M7/paired
+parity remain open. Earlier unbooted/CI entries are historical checkpoints.
+No release or further trial permission. Next:Mac motion-source/adapter review.

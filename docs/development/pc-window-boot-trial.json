@@ -1,0 +1,272 @@
+{
+  "source_revision": "0b23981a83f5c1e0fdb231707d83c3d25c6085c8",
+  "ci_url": "https://github.com/segaboy/ClasSICK-0.97/actions/runs/39826971657",
+  "images": {
+    "window-drawing.img": {
+      "bytes": 67108864,
+      "sha256": "4529eb740639b868dce5cf57224574ebb78bc5f1518146a6389a26563b4bc748"
+    },
+    "BOOTX64.EFI": {
+      "bytes": 182272,
+      "sha256": "3bd7d5a286f3fa5b3f0c4765d23a23e2de5c78ed1b924c67aceeaf680f8839a9"
+    }
+  },
+  "cold_starts": 1,
+  "closed": {
+    "utc": "2026-10-22T23:06:26.8038238Z",
+    "cold_starts": 1,
+    "state": "poweroff",
+    "unregistered": true,
+    "existing_vm_inventory_preserved": true,
+    "running_state_preserved": true,
+    "post_trial_raw_roundtrip_equal": true,
+    "artifacts_retained": true,
+    "semantic_session_stop_observed": false,
+    "termination": "external poweroff from paused state"
+  },
+  "classification": "E2-synthetic-device/framebuffer observation;not E3 GUI/E4 human",
+  "captures_verified": [
+    {
+      "file": "initial.png",
+      "sha256": "7bd4dc9c78b1729f5d88da5f57ee1813666714caf17fce88913d97cee4abc5a7",
+      "bytes": 4850,
+      "width": 1024,
+      "height": 768,
+      "counter": 0,
+      "monochrome": true,
+      "white_margins": true
+    },
+    {
+      "file": "released.png",
+      "sha256": "8d30bc22665eaaa231366ecf6698b1241cf9fd585d26a3b2822c624f48a78bba",
+      "bytes": 4856,
+      "width": 1024,
+      "height": 768,
+      "counter": 0,
+      "monochrome": true,
+      "white_margins": true
+    },
+    {
+      "file": "body-first.png",
+      "sha256": "e6a84e448fd7d51c9767e38ff4b9f4b5dd0fb3db1b07ea2cf21852896b977e63",
+      "bytes": 4687,
+      "width": 1024,
+      "height": 768,
+      "counter": 1,
+      "monochrome": true,
+      "white_margins": true
+    },
+    {
+      "file": "body-held.png",
+      "sha256": "98ccf1ccde50e98dceffecfbd5ae664615f5af90b4b46889cd7c3969db0c85d3",
+      "bytes": 4688,
+      "width": 1024,
+      "height": 768,
+      "counter": 1,
+      "monochrome": true,
+      "white_margins": true
+    },
+    {
+      "file": "body-release.png",
+      "sha256": "98ccf1ccde50e98dceffecfbd5ae664615f5af90b4b46889cd7c3969db0c85d3",
+      "bytes": 4688,
+      "width": 1024,
+      "height": 768,
+      "counter": 1,
+      "monochrome": true,
+      "white_margins": true
+    },
+    {
+      "file": "title-hover.png",
+      "sha256": "3a5a8df31b61801d543c356c99520fbf5f91b628df848644317e420e415a9d44",
+      "bytes": 4682,
+      "width": 1024,
+      "height": 768,
+      "counter": 1,
+      "monochrome": true,
+      "white_margins": true
+    },
+    {
+      "file": "title-pressed.png",
+      "sha256": "6742248d33bd7c98b5e92820d34c8b4dadf943bcaf39a439258a4e4158f64470",
+      "bytes": 4685,
+      "width": 1024,
+      "height": 768,
+      "counter": 2,
+      "monochrome": true,
+      "white_margins": true
+    },
+    {
+      "file": "drag-1.png",
+      "sha256": "17e0f3329182af667730e4f45c29e0ab88c922b8078f31eb87d336d175566dad",
+      "bytes": 4694,
+      "width": 1024,
+      "height": 768,
+      "counter": 2,
+      "monochrome": true,
+      "white_margins": true
+    },
+    {
+      "file": "drag-2.png",
+      "sha256": "133be00d1e74bcf208e145edb684b21fb4a6d45bf749bb51179ca368668c4730",
+      "bytes": 4728,
+      "width": 1024,
+      "height": 768,
+      "counter": 2,
+      "monochrome": true,
+      "white_margins": true
+    },
+    {
+      "file": "drag-3.png",
+      "sha256": "cde996a1cae9a69392e87a62b4a811e09b70ef7b1662b3ef2a46a1a972177955",
+      "bytes": 4757,
+      "width": 1024,
+      "height": 768,
+      "counter": 2,
+      "monochrome": true,
+      "white_margins": true
+    },
+    {
+      "file": "drag-release.png",
+      "sha256": "cde996a1cae9a69392e87a62b4a811e09b70ef7b1662b3ef2a46a1a972177955",
+      "bytes": 4757,
+      "width": 1024,
+      "height": 768,
+      "counter": 2,
+      "monochrome": true,
+      "white_margins": true
+    },
+    {
+      "file": "content-click.png",
+      "sha256": "d19830f825f0a11d53e522a64904424f4ea27e7d31c87a8ac3c23094303208ed",
+      "bytes": 4932,
+      "width": 1024,
+      "height": 768,
+      "counter": 3,
+      "monochrome": true,
+      "white_margins": true
+    },
+    {
+      "file": "content-release.png",
+      "sha256": "d19830f825f0a11d53e522a64904424f4ea27e7d31c87a8ac3c23094303208ed",
+      "bytes": 4932,
+      "width": 1024,
+      "height": 768,
+      "counter": 3,
+      "monochrome": true,
+      "white_margins": true
+    },
+    {
+      "file": "keys-after70.png",
+      "sha256": "d19830f825f0a11d53e522a64904424f4ea27e7d31c87a8ac3c23094303208ed",
+      "bytes": 4932,
+      "width": 1024,
+      "height": 768,
+      "counter": 3,
+      "monochrome": true,
+      "white_margins": true
+    },
+    {
+      "file": "final-press.png",
+      "sha256": "133a22df845a5e9d12d89067593e27672d67880a45d95ffc5439876c02dbbc57",
+      "bytes": 4755,
+      "width": 1024,
+      "height": 768,
+      "counter": 4,
+      "monochrome": true,
+      "white_margins": true
+    },
+    {
+      "file": "final-release.png",
+      "sha256": "133a22df845a5e9d12d89067593e27672d67880a45d95ffc5439876c02dbbc57",
+      "bytes": 4755,
+      "width": 1024,
+      "height": 768,
+      "counter": 4,
+      "monochrome": true,
+      "white_margins": true
+    }
+  ],
+  "counter_sequence": [
+    0,
+    1,
+    2,
+    3,
+    4
+  ],
+  "accepted_mouse_down_edges": 4,
+  "held_move_additional_count": 0,
+  "drag_positions": [
+    [
+      80,
+      70
+    ],
+    [
+      100,
+      80
+    ],
+    [
+      120,
+      90
+    ],
+    [
+      140,
+      100
+    ]
+  ],
+  "translated_window_pixels_equal_per_capture": 32256,
+  "translated_window_comparisons": 4,
+  "unchanged_pixels_outside_old_new_windows_and_counter": 127688,
+  "logical_resolution": [
+    512,
+    342
+  ],
+  "physical_resolution": [
+    1024,
+    768
+  ],
+  "origin": [
+    256,
+    213
+  ],
+  "continuous_final_interval_host_seconds_at_least": 70,
+  "total_host_active_seconds_upper_bound": 120.03507919999997,
+  "keyboard_injected": "VBox keyboardputscancode39 b9 01 81;API success;unchanged framebuffer and later mouse response;actual drain not observable",
+  "trace_observed": false,
+  "trace_limitation": "Public COM MachineDebugger::readPhysicalMemory returned not implemented at first432-byte own header read;no memory bytes returned,no scan/core/firmware/source read. Own descriptor/stack registers only.",
+  "source_tests_reused": "TEST-0073 E1/348 profile CTests and source-pinned Windows/68000 CI;not rerun or newly counted",
+  "worker_calls": 0,
+  "worker_rationale": "Reuse completed Claude/Copilot artifacts and established device controls;small qualification performed directly rather than adding coordination.",
+  "remaining_allowances": "Claude earlier five-hour/seven-day snapshot stale;all current external balances unavailable",
+  "limitations": [
+    "No GUI/capture/human-input qualification;prior intermittent human PC report remains unresolved.",
+    "No device-loss/fault/saturation/invalid report injections in this trial.",
+    "No observed CWP1 diagnostics or semantic STOPPED;external poweroff after final pause.",
+    "Initial9-second capture failed0x0;25-second same-boot continuation produced original scene.",
+    "Host helper Move alias collision caused one empty input phase;fixed before any mouse event.",
+    "Initial budget calculation misread UTC suffix-less VM timestamp as local;corrected4h before further execution.",
+    "Snapshot pauses prevent uninterrupted timing claims except explicitly70-second final interval.",
+    "Mac M1-M7/paired parity,BIOS,physical/full128K/B2/historical/edition/native external-app/Linux/both System1-ROM gates remain open."
+  ],
+  "schema_version": 1,
+  "date": "2026-10-22",
+  "sources": [
+    "SRC-0359",
+    "SRC-0360",
+    "SRC-0361"
+  ],
+  "specification": "SPEC-0062",
+  "test": "TEST-0074",
+  "owner_request": "Do the next step.",
+  "scope": "One isolated automated exact-CI-candidate VirtualBox boot,input/captures and cleanup;no runtime edit,release or additional trial.",
+  "source_inputs_revision": "a23e9f9f786cfb21b1fa2afb9f297bec7d29b185",
+  "emulator": "VirtualBox7.2.16r174877;VBoxManage SHA256 7fda8e54157eb94a5ebd9cea079a9fb8c23ade92ae71e13399dc3431c021a228",
+  "isolation": "EFI64,1CPU,512MiB,vboxvga,PS2 keyboard/mouse,only own disk;SecureBoot/all8NICs/USB/audio/UART/clipboard/file-transfers/drag-drop/VRDE off;no shares",
+  "remaining_external_allowances": {
+    "Claude": "Earlier five-hour snapshot expired;current remaining unknown",
+    "Grok": "unavailable",
+    "Copilot": "unavailable",
+    "Antigravity_Argon4_High": "unavailable"
+  },
+  "release_ready": false
+}

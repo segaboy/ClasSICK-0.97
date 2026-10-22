@@ -245,7 +245,7 @@
     "tests": "TEST-0073",
     "implemented": true,
     "boot_bound": true,
-    "unbooted": true,
+    "unbooted": false,
     "trace_magic": "CWP1",
     "trace_version": 1,
     "trace_bytes": 160,
@@ -267,6 +267,18 @@
       "local_CI_images_equal": true,
       "target_executed": false,
       "artifact_name": "classick-window-preview-pc-unbooted"
+    },
+    "qualification": {
+      "date": "2026-10-22",
+      "source_revision": "0b23981a83f5c1e0fdb231707d83c3d25c6085c8",
+      "evidence": "docs/development/pc-window-boot-trial.json",
+      "test": "TEST-0074",
+      "cold_starts": 1,
+      "device_framebuffer_pass": true,
+      "target_trace_observed": false,
+      "GUI_human_qualified": false,
+      "session_closed": true,
+      "release_ready": false
     }
   }
 }
