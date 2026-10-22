@@ -158,3 +158,6 @@ implementation, fixture, test execution, build, target run or release occurred.
 
 
 2026-10-22 PC binding contract checkpoint: [SPEC-0059](../docs/specifications/SPEC-0059-pc-window-boot-binding.md) freezes the behavioral boundary,not runtime code. Mono1 RAM512x342 plus one RGBA row;startup suppression/one poll owner/partial-publication faults explicit. [32 planned TEST-0070 cases](../provenance/records/TEST-0070-pc-window-boot-plan.md) remain unexecuted. Window binding,Mac M1-M7,measured budgets,E2/E3/E4 and fresh trial/release permissions remain pending. No existing acceptance waiver or version change.
+
+
+2026-10-22 SPEC-0060 leaf complete: [isolated PC monochrome row bridge](../docs/development/pc-mono-present-evidence.md) verifies fixed-canvas presentation and partial-row diagnostics with326 final local CTests,10 audits and3 compiled negative controls. No native window session/boot binding or new target evidence;TEST-0070 full cases stay unexecuted. Mac source/budget/paired qualification and all prior limits persist.

@@ -44,6 +44,9 @@ jobs:
       - name: PC window report width and endian objects
         shell: pwsh
         run: .\scripts\Verify-PCWindowObjects.ps1 -BuildRoot build\pc-window-objects
+
+      - name: Audit isolated monochrome presentation objects
+        run: .\scripts\Verify-MonoPresentObjects.ps1 -BuildRoot build\mono-present-objects
       - name: Native outline width, endian and EFI-ABI object twins
         shell: pwsh
         run: .\scripts\Verify-OutlineObjects.ps1 -BuildRoot build\outline-verification

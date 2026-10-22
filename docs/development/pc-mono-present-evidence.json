@@ -1,0 +1,405 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-22",
+  "baseline": "63f6b2bbac99900db48f8ec85ffc8cc49e1f5806",
+  "sources": [
+    "SRC-0349",
+    "SRC-0350",
+    "SRC-0351",
+    "SRC-0352"
+  ],
+  "specification": "SPEC-0060",
+  "decision": "ADR-0069",
+  "implementation": "IMPL-0062",
+  "tests": "TEST-0071",
+  "classification": "original-native-PC-engineering;E1-only",
+  "status": "locally-verified;CI-pending",
+  "verification": {
+    "tests": {
+      "clang64": {
+        "ctests": 320,
+        "oracle": [
+          {
+            "mode": "normal",
+            "cases": 95,
+            "checks": 834,
+            "complete_frames": 49,
+            "failures": 0
+          },
+          {
+            "mode": "fault",
+            "cases": 87,
+            "checks": 112218,
+            "complete_frames": 9,
+            "failures": 0
+          }
+        ]
+      },
+      "sanitized": {
+        "ctests": 3,
+        "oracle": [
+          {
+            "mode": "normal",
+            "cases": 95,
+            "checks": 834,
+            "complete_frames": 49,
+            "failures": 0
+          },
+          {
+            "mode": "fault",
+            "cases": 87,
+            "checks": 112218,
+            "complete_frames": 9,
+            "failures": 0
+          }
+        ]
+      },
+      "gcc32": {
+        "ctests": 3,
+        "oracle": [
+          {
+            "mode": "normal",
+            "cases": 95,
+            "checks": 834,
+            "complete_frames": 49,
+            "failures": 0
+          },
+          {
+            "mode": "fault",
+            "cases": 87,
+            "checks": 112218,
+            "complete_frames": 9,
+            "failures": 0
+          }
+        ]
+      }
+    },
+    "objects": {
+      "specification": "SPEC-0060",
+      "target_run": false,
+      "object_audits": [
+        {
+          "object_bytes": 2787,
+          "profile": "clang-32-O0"
+        },
+        {
+          "object_bytes": 2125,
+          "profile": "clang-32-O2"
+        },
+        {
+          "object_bytes": 3140,
+          "profile": "clang-64-O0"
+        },
+        {
+          "object_bytes": 1946,
+          "profile": "clang-64-O2"
+        },
+        {
+          "object_bytes": 2100,
+          "profile": "gcc-32-O0"
+        },
+        {
+          "object_bytes": 1974,
+          "profile": "gcc-32-O2"
+        },
+        {
+          "object_bytes": 3058,
+          "profile": "gcc-64-O0"
+        },
+        {
+          "object_bytes": 2058,
+          "profile": "gcc-64-O2"
+        },
+        {
+          "object_bytes": 2056,
+          "profile": "aarch64-none-elf"
+        },
+        {
+          "object_bytes": 2256,
+          "profile": "aarch64_be-none-elf"
+        }
+      ],
+      "whole_stack_budget_certified": false
+    },
+    "stack_usage": {
+      "aarch64-none-elf": [
+        {
+          "function": "cs_pc_mono_present",
+          "bytes": 224,
+          "kind": "static"
+        }
+      ],
+      "aarch64_be-none-elf": [
+        {
+          "function": "cs_pc_mono_present",
+          "bytes": 224,
+          "kind": "static"
+        }
+      ],
+      "clang-32-O0": [
+        {
+          "function": "cs_pc_mono_present",
+          "bytes": 264,
+          "kind": "static"
+        },
+        {
+          "function": "span",
+          "bytes": 12,
+          "kind": "static"
+        },
+        {
+          "function": "overlap",
+          "bytes": 28,
+          "kind": "static"
+        }
+      ],
+      "clang-32-O2": [
+        {
+          "function": "cs_pc_mono_present",
+          "bytes": 124,
+          "kind": "static"
+        }
+      ],
+      "clang-64-O0": [
+        {
+          "function": "cs_pc_mono_present",
+          "bytes": 472,
+          "kind": "static"
+        },
+        {
+          "function": "span",
+          "bytes": 40,
+          "kind": "static"
+        },
+        {
+          "function": "overlap",
+          "bytes": 40,
+          "kind": "static"
+        }
+      ],
+      "clang-64-O2": [
+        {
+          "function": "cs_pc_mono_present",
+          "bytes": 264,
+          "kind": "static"
+        }
+      ],
+      "gcc-32-O0": [
+        {
+          "function": "span",
+          "bytes": 12,
+          "kind": "static"
+        },
+        {
+          "function": "overlap",
+          "bytes": 8,
+          "kind": "static"
+        },
+        {
+          "function": "cs_pc_mono_present",
+          "bytes": 236,
+          "kind": "static"
+        }
+      ],
+      "gcc-32-O2": [
+        {
+          "function": "cs_pc_mono_present",
+          "bytes": 204,
+          "kind": "static"
+        }
+      ],
+      "gcc-64-O0": [
+        {
+          "function": "span",
+          "bytes": 32,
+          "kind": "static"
+        },
+        {
+          "function": "overlap",
+          "bytes": 64,
+          "kind": "static"
+        },
+        {
+          "function": "cs_pc_mono_present",
+          "bytes": 432,
+          "kind": "static"
+        }
+      ],
+      "gcc-64-O2": [
+        {
+          "function": "cs_pc_mono_present",
+          "bytes": 384,
+          "kind": "static"
+        }
+      ]
+    },
+    "negative_controls": [
+      {
+        "name": "black-becomes-white",
+        "compiled": true,
+        "rejected": true,
+        "exit_code": 1,
+        "summary": "TEST-0071 normal: cases=95 checks=834 frames=49 failures=49"
+      },
+      {
+        "name": "odd-center-rounds-up",
+        "compiled": true,
+        "rejected": true,
+        "exit_code": 1,
+        "summary": "TEST-0071 normal: cases=95 checks=834 frames=49 failures=16"
+      },
+      {
+        "name": "false-row-progress",
+        "compiled": true,
+        "rejected": true,
+        "exit_code": 1,
+        "summary": "TEST-0071 normal: cases=95 checks=834 frames=49 failures=49"
+      }
+    ],
+    "grok": {
+      "execution": {
+        "round": "code",
+        "worker": "grok",
+        "exit_code": null,
+        "outer_timeout": true,
+        "elapsed_seconds": 240.97,
+        "input_bytes": 13972,
+        "input_sha256": "abcabe36dcf81222ff721b0a500768fd06e3ba0cac913b9c2175c6f629415dc4",
+        "stderr_bytes": 0
+      },
+      "event_types": {
+        "available_commands": 2,
+        "thought": 1264,
+        "text": 40
+      },
+      "text_bytes": 109,
+      "usable_code_artifact": false,
+      "adopted_lines": 0,
+      "complete_usage": null,
+      "backend_cancellation_proven": false
+    },
+    "claude": {
+      "execution": {
+        "round": "code",
+        "worker": "claude",
+        "exit_code": 0,
+        "outer_timeout": false,
+        "elapsed_seconds": 231.05,
+        "input_bytes": 11740,
+        "input_sha256": "da3fc3217e26da3b18eb914f32940b9b9da533b2643b33c5520edaaacd3de674",
+        "stderr_bytes": 0
+      },
+      "event_types": {
+        "system": 129,
+        "stream_event": 1585,
+        "assistant": 2,
+        "rate_limit_event": 1,
+        "result": 1
+      },
+      "reported_usage": {
+        "total_cost_usd": 0.5967904,
+        "num_turns": 1,
+        "is_error": false,
+        "subtype": "success",
+        "modelUsage": {
+          "claude-opus-5-5": {
+            "inputTokens": 2,
+            "outputTokens": 27203,
+            "cacheReadInputTokens": 1452,
+            "cacheCreationInputTokens": 6554,
+            "webSearchRequests": 0,
+            "costUSD": 0.5967904,
+            "contextWindow": 1000000,
+            "maxOutputTokens": 128000,
+            "thinkingTokens": 16320,
+            "canonicalModel": "claude-opus-5-5",
+            "provider": "firstParty",
+            "costBasis": "list"
+          }
+        }
+      },
+      "observed_tools": [],
+      "artifact_lines": {
+        "tests/mono-present.c": 431
+      },
+      "packaging_tail": "}"
+    },
+    "claude_handoff_words": 158,
+    "input_manifest": {
+      "grok": {
+        "bytes": 13972,
+        "lines": 282,
+        "sha256": "abcabe36dcf81222ff721b0a500768fd06e3ba0cac913b9c2175c6f629415dc4",
+        "inputs": [
+          {
+            "path": "docs/specifications/SPEC-0060-pc-mono-presentation.md",
+            "sha256": "264d5a4922954d4fcd165ba2c4b467f6b70a5be57e3359484e3d7a94aaa76c97"
+          },
+          {
+            "path": "platform/pc/mono-present.h",
+            "sha256": "e04bf0a60e32484c5ee49d10a3c3052788ae524599b955c60702cd4a0307aa0e"
+          },
+          {
+            "path": "platform/pc/framebuffer.h",
+            "sha256": "3abdaf4d591fc79135dc6e4021dda496855a9efca1272725f8370a6517ca68d9"
+          },
+          {
+            "path": "platform/pc/framebuffer.c",
+            "sha256": "4c4f2513668688849a42ceb3895902781dbf18f3dc5026c6c7456132809bbfe2"
+          },
+          {
+            "path": "core/graphics/surface.h",
+            "sha256": "31de605b79282fac7f4208e28aab328662df975a03028ac16fe179672d6dc264"
+          }
+        ]
+      },
+      "claude": {
+        "bytes": 11740,
+        "lines": 220,
+        "sha256": "da3fc3217e26da3b18eb914f32940b9b9da533b2643b33c5520edaaacd3de674",
+        "inputs": [
+          {
+            "path": "docs/specifications/SPEC-0060-pc-mono-presentation.md",
+            "sha256": "264d5a4922954d4fcd165ba2c4b467f6b70a5be57e3359484e3d7a94aaa76c97"
+          },
+          {
+            "path": "platform/pc/mono-present.h",
+            "sha256": "e04bf0a60e32484c5ee49d10a3c3052788ae524599b955c60702cd4a0307aa0e"
+          },
+          {
+            "path": "platform/pc/framebuffer.h",
+            "sha256": "3abdaf4d591fc79135dc6e4021dda496855a9efca1272725f8370a6517ca68d9"
+          },
+          {
+            "path": "core/graphics/surface.h",
+            "sha256": "31de605b79282fac7f4208e28aab328662df975a03028ac16fe179672d6dc264"
+          }
+        ]
+      }
+    },
+    "inputs_unchanged_after_workers": true,
+    "runtime_interface_frozen_before_workers": true,
+    "new_boot_binding": false,
+    "new_target_run": false,
+    "native_window_session_implemented": false
+  },
+  "production_author": "Codex original fallback after Grok timeout;frozen contract/API",
+  "oracle_author": "Claude independently from frozen API without new implementation",
+  "integration_changes": [
+    "extract JSON artifact despite preface/fence/extra outer brace",
+    "RGBA alpha checks",
+    "numeric fixed-object wrap before dereference"
+  ],
+  "ci": {
+    "status": "pending",
+    "source_revision": null,
+    "url": null
+  },
+  "native_window_session_implemented": false,
+  "boot_inputs_changed": false,
+  "target_trials": [],
+  "releases_changed": false,
+  "native_stack_budget_certified": false,
+  "account_allowances": "Claude sampled privately;other balances unavailable;not public metadata",
+  "net_codex_savings_measured": false
+}

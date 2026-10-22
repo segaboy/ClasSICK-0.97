@@ -3663,3 +3663,35 @@ product buffer,keyboard drain/terminal ordering,legacy continuous behavior and
 dedicated trace. Native interfaces/trace layout remain implementation work;
 no code or fixtures. TEST-0070 is32 unexecuted cases,not test results.
 [Review](../docs/development/pc-window-boot-contract-review.md).
+
+
+## SRC-0349 - Owner presentation-bridge implementation continuation
+
+Dean Howell,2026-10-22: "Next step" accepts the proposed isolated PC Mono1/one-row
+bridge,independent hosted/compiler/normal CI checks and ordinary Git/HQ records.
+No native window session,UEFI/ROM binding,target trial or release expansion.
+
+## SRC-0350 - Grok bounded original bridge attempt;no usable artifact
+
+One Grok4.7 low primary,13972-byte frozen original/public packet. Outer240.97s
+timeout,109 text bytes of an unfinished license prefix,no complete C/adopted
+lines or usage/resolved-model receipt. No tools/writes/tests observed. No retry;
+timeout is not proof of zero spending or backend cancellation. Lead fallback.
+[Prompt/outcome](../docs/development/tasks/pc-mono-present-workers.md).
+
+## SRC-0351 - Claude original independent monochrome presentation oracle
+
+One Opus5.5 low call,11740-byte frozen API/spec/dependency-header packet,new
+implementation withheld;231.05s,431 C source lines,158-word handoff,zero tools/
+writes/tests. Preface/fence/extra JSON brace corrected in capture parsing;lead
+adds alpha/numeric-wrap checks. Original authored synthetic patterns/whole-frame
+and refusal oracle,not historical/device authority. No manuals,HQ,original drafts,
+UART or third-party implementation. [Actual checks](../docs/development/pc-mono-present-evidence.md).
+
+## SRC-0352 - Lead original bridge implementation and actual verification
+
+SPEC-0060/ADR-0069,IMPL-0062/TEST-0071:Codex writes frozen-contract production
+fallback after Grok cap,integrates independent tests,and verifies326 final
+profile CTests,10 object audits and3 compiled defective controls. E1 only;no
+boot/session binding,new device interface,target run or release. Source/role/
+Mac M1-M7 and all compatibility gates persist. [Receipt](../docs/development/pc-mono-present-evidence.json).
