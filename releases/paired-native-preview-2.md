@@ -176,3 +176,11 @@ one VM closed,inventory/media preserved. No runtime edit,rebuild or worker call.
 CWP1 unavailable(public read not implemented);GUI/human and Mac M1-M7/paired
 parity remain open. Earlier unbooted/CI entries are historical checkpoints.
 No release or further trial permission. Next:Mac motion-source/adapter review.
+
+
+2026-10-22 [Mac motion prerequisite review](../docs/development/mac-motion-prerequisites.md):
+published SCC access/latch constraints and VIA read-side effects checked. One
+Grok design draft integrated with no-coalescing/single-owner/lifecycle fixes;
+M1-M7 remain partial/open,12 TEST-0075 cases unexecuted. No runtime/API/build or
+trial. Next:bounded ordered capture/drain contract/helper before MMIO. This
+adds source/design readiness,not Mac parity or paired-release acceptance.

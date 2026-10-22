@@ -280,5 +280,24 @@
       "session_closed": true,
       "release_ready": false
     }
+  },
+  "mac_motion_prerequisite_review": {
+    "date": "2026-10-22",
+    "evidence": "docs/development/mac-motion-prerequisites.json",
+    "test_plan": "TEST-0075",
+    "Mac_adapter_admitted": false,
+    "gaps": {
+      "M1": "partial",
+      "M2": "partial",
+      "M3": "partial",
+      "M4": "partial",
+      "M5": "design direction reviewed",
+      "M6": "open",
+      "M7": "open"
+    },
+    "runtime_inputs_changed": false,
+    "target_trials": 0,
+    "next_slice": "Freeze original bounded ordered capture/drain helper contract and limits;then implement/host/native-object verify before MMIO.",
+    "release_ready": false
   }
 }

@@ -1,0 +1,303 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-22",
+  "sources": [
+    "SRC-0362",
+    "SRC-0363",
+    "SRC-0364",
+    "SRC-0365"
+  ],
+  "baseline_revision": "a6b27db085ad63290f7c7a01e632e45e6d89663e",
+  "classification": "lead-only published-interface review and reviewed original engineering proposal",
+  "source_identities": [
+    {
+      "source": "SRC-0080",
+      "bytes": 50687193,
+      "sha256": "4c0de9a3a4d41c41b8462b2a77aad8b95b92e1980afff165c1f986da0a81988b",
+      "pages": 290
+    },
+    {
+      "source": "SRC-0078-programming",
+      "bytes": 585409,
+      "sha256": "96f0d696218a4cebb1124f555dbb13774d125d3f735ab7630d1418fc047e92fe",
+      "pages": 7
+    },
+    {
+      "source": "SRC-0078-AN5",
+      "bytes": 5920052,
+      "sha256": "cd617332a41f6820a50138c8f45883119f0df6ce710206b607c304142746d7f1",
+      "pages": 12
+    },
+    {
+      "source": "SRC-0363",
+      "bytes": 88330952,
+      "sha256": "2a13683ee0e423ee3cdf2781a4ce6b4df65c1e069a269e4234fa6964b4a3bea0",
+      "pages": 394
+    }
+  ],
+  "new_source_url": "https://www.zilog.com/docs/serial/scc_escc_um.pdf",
+  "new_source_title": "Zilog SCC/ESCC User Manual UM010902-0609,June2009",
+  "new_source_selected_printed_pages": [
+    13,
+    30,
+    38,
+    39,
+    56,
+    57,
+    58,
+    59,
+    139,
+    142,
+    159,
+    172,
+    173,
+    174,
+    175,
+    176,
+    177,
+    181
+  ],
+  "new_source_PDF_offset": 7,
+  "visual_checks": [
+    "SRC-0080 III-25/PDF32,III-40/PDF47,III-46/PDF53",
+    "SRC-0078 programming PDF3/printed4-5 andPDF6/printed10-11",
+    "SRC-0363 p57/PDF64,p59/PDF66,p173/PDF180,p177/PDF184"
+  ],
+  "source_exclusions": [
+    "application notes/sample code,printed symbolic listings and ESCC-only assumptions excluded from adoption",
+    "No Apple/Microsoft implementation,ROM/media/disassembly/emulator source or private heap structures",
+    "No manuals,HQ,untracked originals or implementation bodies supplied to worker"
+  ],
+  "worker": {
+    "execution": {
+      "round": "review",
+      "worker": "grok",
+      "exit_code": 0,
+      "outer_timeout": false,
+      "elapsed_seconds": 99.03,
+      "input_bytes": 17051,
+      "input_sha256": "b90986946c0cc49d5e21f5a8f8fa627dedb46046fa62c9e56eb98bc3e23dc0cf",
+      "stderr_bytes": 195
+    },
+    "event_types": {
+      "available_commands": 14,
+      "thought": 720,
+      "text": 2100,
+      "usage": 1,
+      "end": 1
+    },
+    "tools_observed": [],
+    "reported_usage": {
+      "usage": {
+        "input_tokens": 9495,
+        "cache_read_input_tokens": 2048,
+        "cache_creation_input_tokens": 0,
+        "output_tokens": 7511,
+        "reasoning_tokens": 5411,
+        "total_tokens": 19054
+      },
+      "num_turns": 1,
+      "total_cost_usd": 0.0221272,
+      "modelUsage": {
+        "grok-4.7-build": {
+          "inputTokens": 9495,
+          "outputTokens": 7511,
+          "cacheReadInputTokens": 2048,
+          "cacheCreationInputTokens": 0,
+          "modelCalls": 1,
+          "costUSD": 0.0221272
+        }
+      }
+    },
+    "artifact_lines": 70,
+    "artifact_words": 1160,
+    "handoff": {
+      "result": "proposal_only",
+      "actionable_findings": [
+        "MG1\u2013MG8: one SCC selector and I/O owner; ordered axis/button records; coalesce displacement only at drain; sticky loss, drop stale prefix, cancel, rebaseline, suppress held input; exactly-once foreground delivery independent of saturating counters.",
+        "First useful slice is a host drain into existing pointer and window owners before MMIO. MP1\u2013MP12 are temporary planned cases, not repository IDs.",
+        "Detectable software loss is owner-visible. Hidden latch transitions are not recoverable and set no flag. Masking and publication need a later MC68000 contract."
+      ],
+      "tests_executed": [],
+      "blockers": [
+        "M1\u2013M7 each stay partial or open: programming, polarity, vector conflict, simultaneity, part applicability, and unmeasured cost.",
+        "Live Mac loop remains mask 7 with VIA delivery disabled. No interrupt or shutdown binding. 2009 SCC notes are not model or 1984 proof."
+      ],
+      "decisions_needed": [
+        "Codex accepts or revises MG1\u2013MG8.",
+        "Later MC68000 contract for masks, critical sections, and memory publication.",
+        "Separate MMIO contract for addresses, spacing, ack, reset, IUS, and master enable."
+      ]
+    },
+    "artifact_sha256": "bcb301445920ceee078429eeca28ba67a5b86c4f27e69197bcd6b7e80c27f884"
+  },
+  "worker_input": {
+    "bytes": 17051,
+    "lines": 242,
+    "sha256": "b90986946c0cc49d5e21f5a8f8fa627dedb46046fa62c9e56eb98bc3e23dc0cf",
+    "public_revision": "a6b27db085ad63290f7c7a01e632e45e6d89663e",
+    "manuals_transferred": false,
+    "HQ_transferred": false,
+    "code_implementations_transferred": false,
+    "worker": "Grok4.7 low",
+    "task": "bounded Mac capture boundary proposal",
+    "on_disk_bytes": 17293,
+    "on_disk_sha256": "1a60945f7cd4e4d2c08923927ec8ae000ac273ed2538a16bd456576d5f6a92b1",
+    "identity_note": "Existing runner reports normalized UTF8/LF prompt bytes/hash;frozen file is deterministic UTF8/CRLF. Both identities recorded;normalized contents unchanged."
+  },
+  "decisions": [
+    {
+      "proposal": "MG1",
+      "disposition": "adopt",
+      "lead_result": "Bound capture only;no rendering/allocation/callback in interrupt path."
+    },
+    {
+      "proposal": "MG2",
+      "disposition": "adopt with changes",
+      "lead_result": "One SCC selector/I/O owner also owns relevant VIA reads. PB reads can clear CB1/CB2 flags under current PCR mode;do not promise unrelated flag preservation or reuse startup writes as a shared-driver contract."
+    },
+    {
+      "proposal": "MG3",
+      "disposition": "adopt with changes",
+      "lead_result": "Preserve every accepted normalized record in order. Reject displacement coalescing:clamping and drag paths are nonlinear,even without intervening button changes."
+    },
+    {
+      "proposal": "MG4",
+      "disposition": "adopt with changes",
+      "lead_result": "Sticky detectable loss discards unread prefix and calls existing owner cancel. Rebaseline never creates a press;held left remains suppressed until a later released observation,not any arbitrary edge. Hidden hardware loss has no guaranteed flag."
+    },
+    {
+      "proposal": "MG5",
+      "disposition": "adopt with changes",
+      "lead_result": "Deliver each committed record once through cs_window_input_sample;cancel through cs_window_input_cancel. Do not directly call pointer/window leaves or duplicate counter/cursor composition. On owner fault retain prefix and stop;no auto-replay/repair."
+    },
+    {
+      "proposal": "MG6",
+      "disposition": "adopt with changes",
+      "lead_result": "Quiescent begin and bounded stop barriers;never publish a partial record. Stop ends admission and abandons undelivered records,cancels once if owner ready,retains diagnostics. Later begin cannot replay. Exact masks/publication/epoch exhaustion need the concrete contract."
+    },
+    {
+      "proposal": "MG7",
+      "disposition": "adopt",
+      "lead_result": "Fixed caller-owned storage and bounded stack;exact layout/capacity and measurements remain prerequisites,not claimed128K fit."
+    },
+    {
+      "proposal": "MG8",
+      "disposition": "adopt with changes",
+      "lead_result": "First next slice:freeze an original pure capture/drain API and fixed limits,then sequential synthetic tests/native68000+x64 object checks before MMIO. Current intake creates no API/code/fixtures or test execution."
+    }
+  ],
+  "M_gaps": [
+    {
+      "gap": "M1",
+      "status": "partial",
+      "remaining": "Published access width/parity/spacing,selector and latch semantics reviewed. Exact MMIO profile,pin polarity,register programming/reset/ack/IUS/master-enable remain."
+    },
+    {
+      "gap": "M2",
+      "status": "partial",
+      "remaining": "Input/latch and PB side effects reviewed;current isolated profile understood. Shared VIA ownership/flags and cross-chip coherence remain."
+    },
+    {
+      "gap": "M3",
+      "status": "partial",
+      "remaining": "VIA0x64/SCC0x68/combined0x6C vector table corroborated;earlier prose disagreement retained. Actual CPU mask/vector/entry-save/RTE/reentry/start-stop contract remains."
+    },
+    {
+      "gap": "M4",
+      "status": "partial",
+      "remaining": "Coalescing/hidden-transition and cross-chip sampling limitations identified. No valid latency bound or all-edge guarantee."
+    },
+    {
+      "gap": "M5",
+      "status": "design direction reviewed",
+      "remaining": "Ordered bounded capture,sticky visible-loss/cancel and one foreground owner selected;no code or concurrency proof."
+    },
+    {
+      "gap": "M6",
+      "status": "open",
+      "remaining": "2009 family documentation distinguishes NMOS/CMOS/ESCC;does not prove a particular1984 part,Snow model or physical board."
+    },
+    {
+      "gap": "M7",
+      "status": "open",
+      "remaining": "No new ROM/RAM/stack/IRQ measurements or target tests."
+    }
+  ],
+  "test_plan": "TEST-0075",
+  "planned_cases": [
+    {
+      "case": "MP1",
+      "requirement": "Quiescent begin admits no record and performs no MMIO.",
+      "executed": false
+    },
+    {
+      "case": "MP2",
+      "requirement": "One accepted normalized X record reaches the existing input owner once.",
+      "executed": false
+    },
+    {
+      "case": "MP3",
+      "requirement": "One accepted normalized Y record reaches the existing input owner once.",
+      "executed": false
+    },
+    {
+      "case": "MP4",
+      "requirement": "Motion/press/motion/release order is preserved;no button sampled from a later record.",
+      "executed": false
+    },
+    {
+      "case": "MP5",
+      "requirement": "Boundary reversal remains two records:atx0,-1then+1 endsx1;coalescedzero would endx0. Include dragged-window clamp path.",
+      "executed": false
+    },
+    {
+      "case": "MP6",
+      "requirement": "Capacity overflow sets sticky detectable loss;unread prefix is discarded and owner cancel occurs once.",
+      "executed": false
+    },
+    {
+      "case": "MP7",
+      "requirement": "Rebaseline with held left stays suppressed;only a fresh released observation permits a later press.",
+      "executed": false
+    },
+    {
+      "case": "MP8",
+      "requirement": "Pre-baseline/stopped records never cross into a new session;generation exhaustion cannot wrap into replay.",
+      "executed": false
+    },
+    {
+      "case": "MP9",
+      "requirement": "Saturated diagnostic counters do not suppress or duplicate valid delivery.",
+      "executed": false
+    },
+    {
+      "case": "MP10",
+      "requirement": "Owner refusal/fault retains its diagnostic prefix;no requeue,auto-repair or leaf-call retry.",
+      "executed": false
+    },
+    {
+      "case": "MP11",
+      "requirement": "Stop at publication boundaries exposes no partial record,ends admission and retains diagnostic state.",
+      "executed": false
+    },
+    {
+      "case": "MP12",
+      "requirement": "Marked uncertainty takes cancellation path;hidden even-edge collapse cannot be claimed detected. Synthetic interleavings are not hardware timing proof.",
+      "executed": false
+    }
+  ],
+  "feature_tests_executed": [],
+  "code_headers_fixtures_changed": false,
+  "runtime_inputs_changed": false,
+  "target_trials": [],
+  "Mac_adapter_admitted": false,
+  "publication_scope": "ordinary reviewed public/HQ Git records only;no release",
+  "remaining_external_allowances": {
+    "Grok": "not reported;task counters/cost only",
+    "Claude": "current balance unavailable;earlier snapshot stale",
+    "Copilot": "not reported",
+    "Antigravity_Argon4_High": "not reported"
+  },
+  "net_Codex_usage_savings_measured": false
+}

@@ -3772,3 +3772,41 @@ host seconds followed by working input. Five unchanged own-product PNGs reviewed
 and registered under SRC-0280;GPL-3.0-or-later,no desktop/emulator chrome/reference
 pixels/credentials/protected assets. CWP1 unobserved;no GUI/human/Mac/physical/
 128K/historical/release claim. [Receipt](../docs/development/pc-window-boot-trial.json).
+
+
+## SRC-0362 - Owner Mac prerequisite-review continuation
+
+Dean Howell,2026-10-22:"Do the next task." Accepts the proposed Mac motion-source
+and adapter-prerequisite review after the PC window trial. Source/design review,
+one supervised public/original worker and ordinary Git/HQ;no new runtime,fixture,
+feature test,hardware/emulator trial or release permission.
+
+## SRC-0363 - Zilog published SCC/ESCC hardware-interface manual
+
+Zilog,Inc.,SCC/ESCC User Manual UM010902-0609,June2009,copyright2009;
+<https://www.zilog.com/docs/serial/scc_escc_um.pdf>,accessed2026-10-22.
+88,330,952B,394PDF pages,SHA256
+`2a13683ee0e423ee3cdf2781a4ce6b4df65c1e069a269e4234fa6964b4a3bea0`.
+Publisher cover/edition;selected pin/access/interrupt/register prose pp13,30,
+38-39,56-59,139,142,159,172-177,181;checked PDF=printed+7. Visual register/latch
+checks p57/59/173/177. Eligible manufacturer interface facts only,with explicit
+NMOS/CMOS/ESCC distinctions;not exact1984-part/Snow or January1984 evidence.
+Application notes,sample code,printed symbolic listings and enhanced-only
+assumptions excluded. WholePDF/renders remain local,never Git/worker inputs.
+
+## SRC-0364 - Lead Mac interface sufficiency and proposal dispositions
+
+Reidentifies admitted SRC-0078(twoPDFs)/0080 by bytes/hash/page count;checks
+published SCC access limits,VIA input/read side effects and vector table. Every
+M1-M7 gap remains partial/open. Adopts bounded ordered capture direction with
+explicit no-coalescing,single existing owner,lifecycle and suppression fixes;
+no code/API/fixtures/build/feature tests/trial.12 TEST-0075 cases stay planned.
+[Review](../docs/development/mac-motion-prerequisites.md).
+
+## SRC-0365 - Grok original Mac capture-boundary proposal
+
+One grok4.7 low/resolvedgrok-4.7-build call,99.03s,17,051B frozen public/original
+packet;70lines/1160words,zero tools/writes/tests,retry or second worker. No manuals,
+HQ,untracked originals or implementation bodies. MG1-MG8/MP1-MP12 are proposal
+labels;lead dispositions and revised tests prevail. Reported$0.0221272/19,054
+task tokens are not balance or measured Codex savings. [Assignment](../docs/development/tasks/mac-motion-prerequisites-grok.md).

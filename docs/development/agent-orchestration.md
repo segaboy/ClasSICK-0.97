@@ -265,3 +265,13 @@ PC session2026-10-22:one Claude Opus5.5 low primary34035-byte690-line packet cap
 
 
 PC boot2026-10-22:one Claude Opus5.5 low primary correctly refuses missing types15.52s;one justified corrected39048B772-line public-only packet returns355 C lines176.84s. Zero tools/writes/tests,no second worker/requalification. Lead adopts/fixes rather than recreates,adds frozen-API tests/trace/profile/media wiring;tests not strict final author-blind after integration. Include all required type definitions in first briefs. Correct TEST-0072 unrecognized keyboard bytes and assert actual drains. 348 profile CTests/8 audits/4 compiled defects and unbooted EFI/media verified. Native frame limits remain enforced outside ASan-expanded diagnostic builds. Combined$0.7532672 list/session cost not balance/measured Codex saving;Claude quota snapshot private,other balances unavailable. Other workers idle. [Receipt](pc-window-boot-evidence.json).
+
+
+Mac motion prerequisites2026-10-22:lead-only published manuals stay private;
+one Grok4.7 low original capture-boundary proposal from17,051B public/fact packet
+returns70lines/1160words in99.03s,zero tools/writes/tests,retry or second worker.
+Lead adopts draft with concrete no-coalescing,input-owner-route,suppression and
+stop/publication corrections. Reuse roles/CLI controls,no capability audit or
+manual/HQ/originals exposure.12 cases planned,none executed. Reported19,054
+tokens/$0.0221272 are session counters,not remaining allowance or measured Codex
+savings. Others idle;balances unavailable. [Review](mac-motion-prerequisites.md).
