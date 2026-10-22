@@ -12,7 +12,7 @@
   "implementation": "IMPL-0064",
   "tests": "TEST-0073",
   "classification": "original-native-UEFI-window-binding;E1-only;images-unbooted",
-  "status": "locally-verified;CI-pending",
+  "status": "locally-and-source-CI-verified",
   "verification": {
     "tests": {
       "clang64": {
@@ -862,9 +862,20 @@
     "whole_stack_or_128K_certified": false
   },
   "ci": {
-    "status": "pending",
-    "source_revision": null,
-    "url": null
+    "headSha": "0b23981a83f5c1e0fdb231707d83c3d25c6085c8",
+    "status": "completed",
+    "conclusion": "success",
+    "url": "https://github.com/segaboy/ClasSICK-0.97/actions/runs/39826971657",
+    "jobs": [
+      {
+        "name": "m68k-rom",
+        "conclusion": "success"
+      },
+      {
+        "name": "windows-bootstrap",
+        "conclusion": "success"
+      }
+    ]
   },
   "native_window_boot_bound": true,
   "trial_authorized": false,
@@ -875,5 +886,17 @@
   "remaining_external_allowances": "Claude sampled privately;other providers unavailable",
   "net_codex_savings_measured": false,
   "boot_inputs_changed": true,
-  "integration_final_range_correction": "Declared image extent may lie within owned pages;reject only invalid/uncovered ranges,not additional page alignment.Regression accepted."
+  "integration_final_range_correction": "Declared image extent may lie within owned pages;reject only invalid/uncovered ranges,not additional page alignment.Regression accepted.",
+  "ci_candidate_verification": {
+    "source_revision": "0b23981a83f5c1e0fdb231707d83c3d25c6085c8",
+    "source_clean": true,
+    "runtime_inputs_match_local": true,
+    "efi_sha256": "3bd7d5a286f3fa5b3f0c4765d23a23e2de5c78ed1b924c67aceeaf680f8839a9",
+    "efi_bytes": 182272,
+    "disk_sha256": "4529eb740639b868dce5cf57224574ebb78bc5f1518146a6389a26563b4bc748",
+    "disk_bytes": 67108864,
+    "local_CI_images_equal": true,
+    "target_executed": false,
+    "artifact_name": "classick-window-preview-pc-unbooted"
+  }
 }

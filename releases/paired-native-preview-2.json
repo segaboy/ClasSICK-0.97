@@ -254,7 +254,19 @@
     "object_audits": 8,
     "local_defective_controls_rejected": 4,
     "evidence": "docs/development/pc-window-boot-evidence.json",
-    "source_revision": null,
-    "new_trial_authorized": false
+    "source_revision": "0b23981a83f5c1e0fdb231707d83c3d25c6085c8",
+    "new_trial_authorized": false,
+    "ci_candidate": {
+      "source_revision": "0b23981a83f5c1e0fdb231707d83c3d25c6085c8",
+      "source_clean": true,
+      "runtime_inputs_match_local": true,
+      "efi_sha256": "3bd7d5a286f3fa5b3f0c4765d23a23e2de5c78ed1b924c67aceeaf680f8839a9",
+      "efi_bytes": 182272,
+      "disk_sha256": "4529eb740639b868dce5cf57224574ebb78bc5f1518146a6389a26563b4bc748",
+      "disk_bytes": 67108864,
+      "local_CI_images_equal": true,
+      "target_executed": false,
+      "artifact_name": "classick-window-preview-pc-unbooted"
+    }
   }
 }

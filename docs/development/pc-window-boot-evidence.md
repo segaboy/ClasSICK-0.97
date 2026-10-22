@@ -88,3 +88,8 @@ Mac binding/source work remains necessary for paired-native-preview-2 parity.
 
 
 Final range review removes an extra page-alignment restriction on the declared image extent;the existing loader ownership contract permits it within admitted owned pages. A regression accepts that case while retaining bounded image coverage. Final tests,candidate twins/media,object audits and faulty controls are rerun on this correction.
+
+
+Source-pinned verification: `0b23981a83f5c1e0fdb231707d83c3d25c6085c8`;[Windows and68000 CI](https://github.com/segaboy/ClasSICK-0.97/actions/runs/39826971657) both succeed. Follow-up changes metadata only;all runtime/build inputs remain at this verified source.
+
+Retained CI candidate verification: clean source and matching runtime input hashes; EFI182272B and disk67108864B are byte-identical to the locally inspected final candidate. Exact digests and unbooted classification are in the JSON receipt.
