@@ -13,7 +13,7 @@
   "implementation": "IMPL-0062",
   "tests": "TEST-0071",
   "classification": "original-native-PC-engineering;E1-only",
-  "status": "locally-verified;CI-pending",
+  "status": "locally-and-source-CI-verified",
   "verification": {
     "tests": {
       "clang64": {
@@ -391,9 +391,20 @@
     "numeric fixed-object wrap before dereference"
   ],
   "ci": {
-    "status": "pending",
-    "source_revision": null,
-    "url": null
+    "headSha": "4f44d3ba162a307067a1ca5f5be73807158e38a5",
+    "status": "completed",
+    "conclusion": "success",
+    "url": "https://github.com/segaboy/ClasSICK-0.97/actions/runs/39772942816",
+    "jobs": [
+      {
+        "name": "m68k-rom",
+        "conclusion": "success"
+      },
+      {
+        "name": "windows-bootstrap",
+        "conclusion": "success"
+      }
+    ]
   },
   "native_window_session_implemented": false,
   "boot_inputs_changed": false,

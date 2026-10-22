@@ -50,3 +50,6 @@ cases remain unexecuted;this leaf tests presentation portions only. Mac M1-M7,
 PC GUI/human/CPUID,source/role/historical/edition/physical/full128K/B2/native-app/
 Linux/mini-vMac/both System1 directions persist. Next:neutral PC window session
 using explicit packet/loss receipts,then the opt-in UEFI binding and trace.
+
+
+Source-pinned verification: `4f44d3ba162a307067a1ca5f5be73807158e38a5`;[Windows and68000 CI](https://github.com/segaboy/ClasSICK-0.97/actions/runs/39772942816) both succeed. This follow-up changes metadata only;old released assets and all runtime inputs stay unchanged.

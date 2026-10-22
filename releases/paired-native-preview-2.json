@@ -224,6 +224,6 @@
     "object_audits": 10,
     "local_defective_controls_rejected": 3,
     "evidence": "docs/development/pc-mono-present-evidence.json",
-    "source_revision": null
+    "source_revision": "4f44d3ba162a307067a1ca5f5be73807158e38a5"
   }
 }
