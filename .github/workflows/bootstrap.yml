@@ -79,6 +79,23 @@ jobs:
           .\scripts\Verify-UEFIImage.ps1 -BuildRoot build\outline-drawing-efi -OutlineDrawing
           .\scripts\Package-OutlineDrawingPC.ps1 -BuildRoot build\outline-drawing-efi -MediaWriter build\media-verification\clang-hosted\debug-a\classick_boot_media.exe -TwinWriter build\media-verification\gcc-i686\classick_boot_media.exe
           .\scripts\Verify-OutlineDrawingObjects.ps1 -BuildRoot build\outline-drawing-objects
+      - name: Build opt-in native window PC candidate (unbooted)
+        shell: pwsh
+        run: |
+          .\scripts\Verify-UEFIImage.ps1 -BuildRoot build\window-drawing-efi -WindowDrawing
+          .\scripts\Package-WindowPC.ps1 -BuildRoot build\window-drawing-efi -MediaWriter build\media-verification\clang-hosted\debug-a\classick_boot_media.exe -TwinWriter build\media-verification\gcc-i686\classick_boot_media.exe
+          .\scripts\Verify-WindowBootObjects.ps1 -BuildRoot build\window-boot-objects
+      - name: Retain native window PC candidate and diagnostics (unbooted)
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
+        with:
+          name: classick-window-preview-pc-unbooted
+          path: |
+            build/window-drawing-efi/efi-results.json
+            build/window-drawing-efi/window-media.json
+            build/window-drawing-efi/window-drawing.img
+            build/window-drawing-efi/payload/EFI/BOOT/BOOTX64.EFI
+            build/window-boot-objects/window-objects.json
+          if-no-files-found: error
       - name: Retain paired native outline PC preview candidate
         uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
         with:

@@ -238,5 +238,23 @@
     "local_defective_controls_rejected": 4,
     "evidence": "docs/development/pc-window-session-evidence.json",
     "source_revision": "c863cf66fc78f8a8298fbcca2a7ca3fa88948ea8"
+  },
+  "pc_window_boot": {
+    "specification": "SPEC-0062",
+    "implementation": "IMPL-0064",
+    "tests": "TEST-0073",
+    "implemented": true,
+    "boot_bound": true,
+    "unbooted": true,
+    "trace_magic": "CWP1",
+    "trace_version": 1,
+    "trace_bytes": 160,
+    "trace_offset": 2048,
+    "local_final_profile_ctests": 348,
+    "object_audits": 8,
+    "local_defective_controls_rejected": 4,
+    "evidence": "docs/development/pc-window-boot-evidence.json",
+    "source_revision": null,
+    "new_trial_authorized": false
   }
 }

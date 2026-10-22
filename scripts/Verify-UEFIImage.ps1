@@ -2,10 +2,10 @@
 # Copyright (C) 2026 Dean Howell.
 [CmdletBinding()]
 param([Parameter(Mandatory=$true)][string]$BuildRoot,
-    [ValidateSet('none','ud','gp')][string]$FaultProbe='none',[switch]$SelectedDrawing,[switch]$OutlineDrawing)
+    [ValidateSet('none','ud','gp')][string]$FaultProbe='none',[switch]$SelectedDrawing,[switch]$OutlineDrawing,[switch]$WindowDrawing)
 Set-StrictMode -Version Latest
 $ErrorActionPreference='Stop'
-if($SelectedDrawing -and $OutlineDrawing){throw 'Select only one drawing profile.'}
+if(([int][bool]$SelectedDrawing+[int][bool]$OutlineDrawing+[int][bool]$WindowDrawing) -gt 1){throw 'Select only one drawing profile.'}
 $repoRoot=[IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..'))
 $BuildRoot=[IO.Path]::GetFullPath($BuildRoot)
 if(Test-Path -LiteralPath $BuildRoot){throw 'Use a fresh EFI output directory.'}
@@ -53,6 +53,18 @@ try {
         $allowedImports[[Array]::IndexOf($sources,'personality/system1/quickdraw-select.c')]=''
         $allowedImports[[Array]::IndexOf($sources,'personality/system1/quickdraw-outline.c')]=''
     }
+    if($WindowDrawing) {
+        $sources+=@('platform/uefi/window.c','platform/pc/window-session.c','platform/pc/mono-present.c','platform/pc/window-input.c','core/input/pointer.c','core/graphics/cursor.c','core/ui/window.c','apps/window-scene/scene.c','apps/window-scene/input.c')
+        $allowedImports[[Array]::IndexOf($sources,'platform/uefi/window.c')]='cs_uefi_check_framebuffer,cs_uefi_check_map,cs_uefi_check_owned,cs_native_read,cs_acpi_find_pm_timer,cs_acpi_8042,cs_pmtimer_init,cs_pmtimer_sample,cs_arena_init,cs_arena_alloc,cs_pc_window_session_start,cs_pc_window_session_poll,cs_pc_window_session_stop,cs_fb_init'
+        $allowedImports[[Array]::IndexOf($sources,'platform/pc/window-session.c')]='cs_fb_init,cs_surface_init,cs_cursor_init,cs_cursor_bind,cs_input_init,cs_input_pop,cs_window_input_begin,cs_window_input_cancel,cs_pc_window_packet,cs_pc_mono_present,cs_ps2_bus_begin,cs_ps2_bus_poll_delivery'
+        $allowedImports[[Array]::IndexOf($sources,'platform/pc/mono-present.c')]='cs_fb_init,cs_surface_init,cs_fb_present'
+        $allowedImports[[Array]::IndexOf($sources,'platform/pc/window-input.c')]='cs_window_input_sample'
+        $allowedImports[[Array]::IndexOf($sources,'core/input/pointer.c')]=''
+        $allowedImports[[Array]::IndexOf($sources,'core/graphics/cursor.c')]='cs_surface_init'
+        $allowedImports[[Array]::IndexOf($sources,'core/ui/window.c')]=''
+        $allowedImports[[Array]::IndexOf($sources,'apps/window-scene/scene.c')]='cs_surface_init,cs_surface_fill,cs_product_scene,cs_cursor_query,cs_cursor_hide,cs_cursor_move,cs_cursor_advance,cs_cursor_show'
+        $allowedImports[[Array]::IndexOf($sources,'apps/window-scene/input.c')]='memcpy,cs_surface_init,cs_cursor_query,cs_cursor_hide,cs_pointer_begin,cs_pointer_sample_apply,cs_pointer_cancel,cs_mouse_button_begin,cs_mouse_button_sample,cs_window_begin,cs_window_apply,cs_window_scene_compose'
+    }
     $common=@('-m64','-Wall','-Wextra','-Wpedantic','-Werror','-Wconversion','-Wsign-conversion',
         '-ffreestanding','-fno-builtin','-fno-stack-protector','-fno-ident','-mno-red-zone','-mgeneral-regs-only','-Wframe-larger-than=2048',
         '-fno-asynchronous-unwind-tables','-fno-unwind-tables',"-ffile-prefix-map=$repoRoot=.")
@@ -68,6 +80,7 @@ try {
                 if($sources[$i].EndsWith('.S')){& $compiler -m64 "-DCS_X64_FAULT_PROBE=$probeNumber" -c (Join-Path $repoRoot $sources[$i]) -o $object}
                 else{
                     $profileFlags=@()
+                    if($WindowDrawing){$profileFlags+='-DCLASSICK_WINDOW_DRAWING=1'}
                     if($sources[$i] -eq 'platform/uefi/keyboard.c'){$profileFlags=@('-DCLASSICK_PC_MOUSE=1')}
                     if($SelectedDrawing -or $OutlineDrawing){$profileFlags+='-DCLASSICK_SELECTED_DRAWING=1'}
                     if($OutlineDrawing){$profileFlags+='-DCLASSICK_OUTLINE_DRAWING=1'}
@@ -97,6 +110,10 @@ try {
             if($OutlineDrawing){
                 $mapText=[IO.File]::ReadAllText($map)
                 foreach($name in @('cs_outline_draw','cs_qd_view_outline','cs_qd_select_get','cs_qd_select_set')){if($mapText -notmatch ('\b'+$name+'\b')){throw 'Disconnected native outline preview.'}}
+            }
+            if($WindowDrawing){
+                $mapText=[IO.File]::ReadAllText($map)
+                foreach($name in @('cs_native_window_loop','cs_pc_window_session_start','cs_pc_window_session_poll','cs_window_input_sample','cs_pc_mono_present')){if($mapText -notmatch ('\b'+$name+'\b')){throw 'Disconnected window profile.'}}
             }
             $inspection=@(& $reader --file-headers --coff-imports --coff-basereloc $image)
             if($LASTEXITCODE -ne 0 -or ($inspection -join "`n") -match '(?m)^Import \{' -or
@@ -191,6 +208,19 @@ try {
     $componentControls=@(@(14,'ps2','cs_ps2_poll'),@(15,'keyboard','cs_native_keyboard_observed'),@(16,'input','cs_input_push'),@(17,'byte-io','cs_x64_inb|cs_x64_outb'),@(18,'uart','cs_uart_poll'),@(19,'native-uart','cs_native_uart_loop'),@(20,'services','cs_trap_call'),@(21,'service-probe','cs_service_probe'),@(22,'m68k','cs_m68k_step'),@(23,'aline-probe','cs_aline_probe'),@(([Array]::IndexOf($sources,'apps/native-drawing/workload.c')),'native-drawing','cs_native_draw'),@([Array]::IndexOf($sources,'core/input/mouse.c'),'mouse-button','cs_mouse_button_'),@([Array]::IndexOf($sources,'platform/pc/ps2-mouse.c'),'mouse-packet','cs_ps2_mouse_'),@([Array]::IndexOf($sources,'platform/pc/ps2-bus.c'),'mouse-bus','cs_ps2_bus_'),@([Array]::IndexOf($sources,'personality/system1/quickdraw-view.c'),'drawing-view','cs_qd_view_'))
     if($SelectedDrawing){$componentControls+=@(@([Array]::IndexOf($sources,'apps/selected-drawing/workload.c'),'selected-workload','cs_selected_draw'),@([Array]::IndexOf($sources,'personality/system1/quickdraw-select.c'),'selected-core','cs_qd_select_'))}
     if($OutlineDrawing){$componentControls+=@(@([Array]::IndexOf($sources,'apps/outline-drawing/workload.c'),'outline-workload','cs_outline_draw'),@([Array]::IndexOf($sources,'personality/system1/quickdraw-select.c'),'outline-selection','cs_qd_select_'),@([Array]::IndexOf($sources,'personality/system1/quickdraw-outline.c'),'outline-core','cs_qd_view_outline'))}
+    if($WindowDrawing){
+        # These two exports are intentionally not imported by the new entry.
+        $componentControls=@($componentControls | Where-Object {$_[1] -notin @('native-uart','aline-probe')})
+        $componentControls+=,@([Array]::IndexOf($sources,'platform/uefi/window.c'),'window-binding','cs_native_window_loop')
+        $componentControls+=,@([Array]::IndexOf($sources,'platform/pc/window-session.c'),'window-session','cs_pc_window_session_')
+        $componentControls+=,@([Array]::IndexOf($sources,'platform/pc/mono-present.c'),'mono-present','cs_pc_mono_present')
+        $componentControls+=,@([Array]::IndexOf($sources,'platform/pc/window-input.c'),'window-packet','cs_pc_window_packet')
+        $componentControls+=,@([Array]::IndexOf($sources,'core/input/pointer.c'),'pointer','cs_pointer_')
+        $componentControls+=,@([Array]::IndexOf($sources,'core/graphics/cursor.c'),'cursor','cs_cursor_')
+        $componentControls+=,@([Array]::IndexOf($sources,'core/ui/window.c'),'window-state','cs_window_')
+        $componentControls+=,@([Array]::IndexOf($sources,'apps/window-scene/scene.c'),'window-compose','cs_window_scene_compose')
+        $componentControls+=,@([Array]::IndexOf($sources,'apps/window-scene/input.c'),'window-owner','cs_window_input_')
+    }
     foreach($control in $componentControls) {
         try {
             $ErrorActionPreference='Continue'
@@ -203,11 +233,11 @@ try {
     $payload=Join-Path $BuildRoot 'payload/EFI/BOOT'; [void][IO.Directory]::CreateDirectory($payload)
     $packaged=Join-Path $payload 'BOOTX64.EFI'; Copy-Item -LiteralPath $release -Destination $packaged
     if((Get-FileHash -LiteralPath $packaged -Algorithm SHA256).Hash.ToLowerInvariant() -ne $results[1].sha256){throw 'EFI payload copy differs.'}
-    [ordered]@{fault_probe=$FaultProbe;outline_drawing=[bool]$OutlineDrawing;continuous_preview=[bool]$OutlineDrawing;missing_outline_controls=(3*[int][bool]$OutlineDrawing);selected_drawing=[bool]$SelectedDrawing;missing_selected_workload_controls=[int][bool]$SelectedDrawing;missing_selected_core_controls=[int][bool]$SelectedDrawing;images=$results;image_rejections=$mutations.Count;profile_rejections=[int]($FaultProbe -ne 'none');missing_transition_controls=1;missing_exceptions_controls=1;missing_presenter_controls=1;missing_acpi_controls=1;
+    [ordered]@{fault_probe=$FaultProbe;window_drawing=[bool]$WindowDrawing;window_trace_version=$(if($WindowDrawing){1}else{0});window_trace_offset=$(if($WindowDrawing){2048}else{0});missing_window_controls=(9*[int][bool]$WindowDrawing);outline_drawing=[bool]$OutlineDrawing;continuous_preview=([bool]$OutlineDrawing -or [bool]$WindowDrawing);missing_outline_controls=(3*[int][bool]$OutlineDrawing);selected_drawing=[bool]$SelectedDrawing;missing_selected_workload_controls=[int][bool]$SelectedDrawing;missing_selected_core_controls=[int][bool]$SelectedDrawing;images=$results;image_rejections=$mutations.Count;profile_rejections=[int]($FaultProbe -ne 'none');missing_transition_controls=1;missing_exceptions_controls=1;missing_presenter_controls=1;missing_acpi_controls=1;
         missing_ps2_controls=1;missing_keyboard_controls=1;missing_input_controls=1;missing_byte_io_controls=1;
-        missing_uart_controls=1;missing_native_uart_controls=1;missing_service_controls=1;missing_service_probe_controls=1;
-        missing_m68k_controls=1;missing_aline_probe_controls=1;missing_native_drawing_controls=1;missing_mouse_button_controls=1;missing_mouse_packet_controls=1;missing_mouse_bus_controls=1;missing_drawing_view_controls=1;drawing_context_specification='SPEC-0041';pc_mouse_profile=1;keyboard_trace_version=2;
+        missing_uart_controls=1;missing_native_uart_controls=([int](-not $WindowDrawing));missing_service_controls=1;missing_service_probe_controls=1;
+        missing_m68k_controls=1;missing_aline_probe_controls=([int](-not $WindowDrawing));missing_native_drawing_controls=1;missing_mouse_button_controls=1;missing_mouse_packet_controls=1;missing_mouse_bus_controls=1;missing_drawing_view_controls=1;drawing_context_specification='SPEC-0041';pc_mouse_profile=1;keyboard_trace_version=$(if($WindowDrawing){0}else{2});
         payload='payload/EFI/BOOT/BOOTX64.EFI';payload_kind='directory-tree-not-disk';loaded=$false} |
         ConvertTo-Json -Depth 8 | Set-Content -LiteralPath (Join-Path $BuildRoot 'efi-results.json') -Encoding UTF8
-    Write-Output "EFI inspection PASS: four twin images, $($mutations.Count) corruption rejections, $(19+2*[int][bool]$SelectedDrawing+3*[int][bool]$OutlineDrawing) omitted-object rejections and original payload tree; no image executed."
+    Write-Output "EFI inspection PASS: four twin images, $($mutations.Count) corruption rejections, $(19+2*[int][bool]$SelectedDrawing+3*[int][bool]$OutlineDrawing+7*[int][bool]$WindowDrawing) omitted-object rejections and original payload tree; no image executed."
 } finally{$env:PATH=$originalPath}

@@ -1,0 +1,879 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-22",
+  "baseline": "fa4c63a34317ceca62247f6d99445369057b7f35",
+  "sources": [
+    "SRC-0356",
+    "SRC-0357",
+    "SRC-0358"
+  ],
+  "specification": "SPEC-0062",
+  "decision": "ADR-0071",
+  "implementation": "IMPL-0064",
+  "tests": "TEST-0073",
+  "classification": "original-native-UEFI-window-binding;E1-only;images-unbooted",
+  "status": "locally-verified;CI-pending",
+  "verification": {
+    "tests": {
+      "clang64": {
+        "ctests": 328,
+        "binding": [
+          {
+            "mode": "binding",
+            "cases": 34,
+            "checks": 10154263,
+            "failures": 0
+          },
+          {
+            "mode": "fault",
+            "cases": 39,
+            "checks": 10154319,
+            "failures": 0
+          }
+        ],
+        "trace_parser": true,
+        "session_keyboard_correction_verified": true
+      },
+      "sanitized": {
+        "ctests": 8,
+        "binding": [
+          {
+            "mode": "binding",
+            "cases": 34,
+            "checks": 10154263,
+            "failures": 0
+          },
+          {
+            "mode": "fault",
+            "cases": 39,
+            "checks": 10154319,
+            "failures": 0
+          }
+        ],
+        "trace_parser": true,
+        "session_keyboard_correction_verified": true
+      },
+      "gcc64": {
+        "ctests": 8,
+        "binding": [
+          {
+            "mode": "binding",
+            "cases": 34,
+            "checks": 10154263,
+            "failures": 0
+          },
+          {
+            "mode": "fault",
+            "cases": 39,
+            "checks": 10154319,
+            "failures": 0
+          }
+        ],
+        "trace_parser": true,
+        "session_keyboard_correction_verified": true
+      },
+      "gcc32": {
+        "ctests": 4,
+        "binding": [],
+        "trace_parser": true,
+        "session_keyboard_correction_verified": true
+      }
+    },
+    "objects": {
+      "object_audits": [
+        {
+          "profile": "clang-64-O0-window",
+          "object_bytes": 11029
+        },
+        {
+          "profile": "clang-64-O0-entry",
+          "object_bytes": 2408
+        },
+        {
+          "profile": "clang-64-O2-window",
+          "object_bytes": 6121
+        },
+        {
+          "profile": "clang-64-O2-entry",
+          "object_bytes": 2235
+        },
+        {
+          "profile": "gcc-64-O0-window",
+          "object_bytes": 10158
+        },
+        {
+          "profile": "gcc-64-O0-entry",
+          "object_bytes": 2758
+        },
+        {
+          "profile": "gcc-64-O2-window",
+          "object_bytes": 6646
+        },
+        {
+          "profile": "gcc-64-O2-entry",
+          "object_bytes": 2700
+        }
+      ],
+      "target_executed": false,
+      "specification": "SPEC-0062",
+      "whole_stack_budget_certified": false
+    },
+    "stack_usage": {
+      "clang-64-O0-entry": [
+        {
+          "function": "cs_native_stop",
+          "bytes": 312,
+          "kind": "static"
+        },
+        {
+          "function": "port32",
+          "bytes": 56,
+          "kind": "static"
+        },
+        {
+          "function": "keyboard_read",
+          "bytes": 56,
+          "kind": "static"
+        },
+        {
+          "function": "keyboard_write",
+          "bytes": 56,
+          "kind": "static"
+        },
+        {
+          "function": "cs_uefi_entry",
+          "bytes": 88,
+          "kind": "static"
+        }
+      ],
+      "clang-64-O0-window": [
+        {
+          "function": "cs_native_window_loop",
+          "bytes": 728,
+          "kind": "static"
+        },
+        {
+          "function": "uwin_span",
+          "bytes": 32,
+          "kind": "static"
+        },
+        {
+          "function": "uwin_translate",
+          "bytes": 48,
+          "kind": "static"
+        },
+        {
+          "function": "uwin_overlap",
+          "bytes": 24,
+          "kind": "static"
+        },
+        {
+          "function": "uwin_finish",
+          "bytes": 56,
+          "kind": "static"
+        },
+        {
+          "function": "uwin_read",
+          "bytes": 120,
+          "kind": "static"
+        },
+        {
+          "function": "uwin_snapshot",
+          "bytes": 72,
+          "kind": "static"
+        },
+        {
+          "function": "put32",
+          "bytes": 24,
+          "kind": "static"
+        },
+        {
+          "function": "put64",
+          "bytes": 56,
+          "kind": "static"
+        }
+      ],
+      "clang-64-O2-entry": [
+        {
+          "function": "cs_native_stop",
+          "bytes": 280,
+          "kind": "static"
+        },
+        {
+          "function": "port32",
+          "bytes": 0,
+          "kind": "static"
+        },
+        {
+          "function": "keyboard_read",
+          "bytes": 0,
+          "kind": "static"
+        },
+        {
+          "function": "keyboard_write",
+          "bytes": 0,
+          "kind": "static"
+        },
+        {
+          "function": "cs_uefi_entry",
+          "bytes": 56,
+          "kind": "static"
+        }
+      ],
+      "clang-64-O2-window": [
+        {
+          "function": "cs_native_window_loop",
+          "bytes": 648,
+          "kind": "static"
+        },
+        {
+          "function": "uwin_finish",
+          "bytes": 0,
+          "kind": "static"
+        },
+        {
+          "function": "uwin_read",
+          "bytes": 16,
+          "kind": "static"
+        }
+      ],
+      "gcc-64-O0-entry": [
+        {
+          "function": "keyboard_read",
+          "bytes": 48,
+          "kind": "static"
+        },
+        {
+          "function": "keyboard_write",
+          "bytes": 48,
+          "kind": "static"
+        },
+        {
+          "function": "port32",
+          "bytes": 48,
+          "kind": "static"
+        },
+        {
+          "function": "cs_native_stop",
+          "bytes": 352,
+          "kind": "static"
+        },
+        {
+          "function": "cs_uefi_entry",
+          "bytes": 80,
+          "kind": "static"
+        }
+      ],
+      "gcc-64-O0-window": [
+        {
+          "function": "uwin_span",
+          "bytes": 16,
+          "kind": "static"
+        },
+        {
+          "function": "uwin_overlap",
+          "bytes": 16,
+          "kind": "static"
+        },
+        {
+          "function": "uwin_translate",
+          "bytes": 32,
+          "kind": "static"
+        },
+        {
+          "function": "uwin_read",
+          "bytes": 96,
+          "kind": "static"
+        },
+        {
+          "function": "put32",
+          "bytes": 16,
+          "kind": "static"
+        },
+        {
+          "function": "put64",
+          "bytes": 48,
+          "kind": "static"
+        },
+        {
+          "function": "uwin_snapshot",
+          "bytes": 64,
+          "kind": "static"
+        },
+        {
+          "function": "uwin_finish",
+          "bytes": 48,
+          "kind": "static"
+        },
+        {
+          "function": "cs_native_window_loop",
+          "bytes": 736,
+          "kind": "static"
+        }
+      ],
+      "gcc-64-O2-entry": [
+        {
+          "function": "keyboard_write",
+          "bytes": 8,
+          "kind": "static"
+        },
+        {
+          "function": "keyboard_read",
+          "bytes": 48,
+          "kind": "static"
+        },
+        {
+          "function": "port32",
+          "bytes": 8,
+          "kind": "static"
+        },
+        {
+          "function": "cs_native_stop",
+          "bytes": 352,
+          "kind": "static"
+        },
+        {
+          "function": "cs_uefi_entry",
+          "bytes": 80,
+          "kind": "static"
+        }
+      ],
+      "gcc-64-O2-window": [
+        {
+          "function": "uwin_read",
+          "bytes": 32,
+          "kind": "static"
+        },
+        {
+          "function": "uwin_snapshot",
+          "bytes": 8,
+          "kind": "static"
+        },
+        {
+          "function": "cs_native_window_loop",
+          "bytes": 720,
+          "kind": "static"
+        }
+      ]
+    },
+    "unbooted_efi": {
+      "fault_probe": "none",
+      "window_drawing": true,
+      "window_trace_version": 1,
+      "window_trace_offset": 2048,
+      "missing_window_controls": 9,
+      "outline_drawing": false,
+      "continuous_preview": true,
+      "missing_outline_controls": 0,
+      "selected_drawing": false,
+      "missing_selected_workload_controls": 0,
+      "missing_selected_core_controls": 0,
+      "images": [
+        {
+          "case": "clang-64-O0",
+          "sha256": "096c2071d47b9efae351f2f7e5acedb499cc45a8424cdd145171cc43673403c2",
+          "size_bytes": 266240,
+          "image_size": 278528,
+          "relocations": 3,
+          "status": "passed-unloaded"
+        },
+        {
+          "case": "clang-64-O2",
+          "sha256": "3bd7d5a286f3fa5b3f0c4765d23a23e2de5c78ed1b924c67aceeaf680f8839a9",
+          "size_bytes": 182272,
+          "image_size": 196608,
+          "relocations": 3,
+          "status": "passed-unloaded"
+        }
+      ],
+      "image_rejections": 27,
+      "profile_rejections": 0,
+      "missing_transition_controls": 1,
+      "missing_exceptions_controls": 1,
+      "missing_presenter_controls": 1,
+      "missing_acpi_controls": 1,
+      "missing_ps2_controls": 1,
+      "missing_keyboard_controls": 1,
+      "missing_input_controls": 1,
+      "missing_byte_io_controls": 1,
+      "missing_uart_controls": 1,
+      "missing_native_uart_controls": 0,
+      "missing_service_controls": 1,
+      "missing_service_probe_controls": 1,
+      "missing_m68k_controls": 1,
+      "missing_aline_probe_controls": 0,
+      "missing_native_drawing_controls": 1,
+      "missing_mouse_button_controls": 1,
+      "missing_mouse_packet_controls": 1,
+      "missing_mouse_bus_controls": 1,
+      "missing_drawing_view_controls": 1,
+      "drawing_context_specification": "SPEC-0041",
+      "pc_mouse_profile": 1,
+      "keyboard_trace_version": 0,
+      "payload": "payload/EFI/BOOT/BOOTX64.EFI",
+      "payload_kind": "directory-tree-not-disk",
+      "loaded": false
+    },
+    "local_media": {
+      "specification": "SPEC-0062",
+      "session_specification": "SPEC-0061",
+      "continuous_preview": true,
+      "source_revision": "fa4c63a34317ceca62247f6d99445369057b7f35",
+      "tracked_source_dirty": true,
+      "inputs": {
+        "platform/uefi/window.c": "020560e0b3840c32764894fd1b5b32af4ca49d641a922f23ecb3ddd479d6b653",
+        "platform/uefi/window.h": "c76a06800546e60ffc35d09e0da47b7cc3c931305578911c0368c307b8e9c012",
+        "platform/uefi/entry.c": "36aea57dfa1e683cbf02acb0f67f9865aec688517471b2da6ea7ce9dfb3a43fb",
+        "platform/pc/window-session.c": "ccb27545a1fc2f2184788fe3b9d3b0b16cc7746daba297deaba3bd80b96b01af",
+        "platform/pc/window-session.h": "2219eef76f805af841d8b162ad21b4f49642e8b26d83839ac65171bc0938922d",
+        "platform/pc/mono-present.c": "a41537f75ea4d0fc392a375c6bd57e7e6a65d726b50ebac3dc7baedfa0d954f9",
+        "platform/pc/mono-present.h": "e04bf0a60e32484c5ee49d10a3c3052788ae524599b955c60702cd4a0307aa0e",
+        "platform/pc/window-input.c": "6e7a512f0c76b57e561d6be76d347fb5bf2555c114cb4dadb5d3255f16540868",
+        "platform/pc/window-input.h": "b3e7b9e109b39fee2d186414d1710fb4384b347a1e5c1ff76548ffc1bd5493ca",
+        "apps/window-scene/input.c": "2b10f8c6de9349e41a02d3138abd8bb04a83b0d7eb8cc646c627a0e5d2a44b19",
+        "apps/window-scene/scene.c": "bc3f8ac625bd782d368709cf915a94bbd7f9a6c4dd810197a11ae157363afa3f",
+        "core/graphics/cursor.c": "c239ef42783ffaa446c59f7ba630b5b1cd78c95444449fa63b983f4c3bb98fe5",
+        "core/input/pointer.c": "d38b4b131f44a3ce8bf8019cdef8aa4e56e3d5c09f0bc9b154fd1f8ff920afa7",
+        "core/ui/window.c": "ddec6ccab8bf5148240d6269bf33374180ac60406b4ab50558809ff3e53aa18a",
+        "apps/product-scene/scene.c": "7488910c401285b1e211d3c6eb95a17f04683748ffa8fc2dba4e2659725872d2",
+        "scripts/Verify-UEFIImage.ps1": "4120c647d53e3fe984c01dbd1277c0682ca4021fb501da278cc5e99229fda66d",
+        "scripts/Package-WindowPC.ps1": "c644ef55ab49c370ba990807be9acfa24eefd61bee6f20f53e693b29666df94a",
+        "docs/specifications/SPEC-0062-uefi-window-binding.md": "928412d6ad0c286a01ecb48476acd0e7e220b88b6cbea8cce59754d3736e1241"
+      },
+      "input_scope": "window binding subset;source revision identifies remaining inputs",
+      "efi_sha256": "3bd7d5a286f3fa5b3f0c4765d23a23e2de5c78ed1b924c67aceeaf680f8839a9",
+      "media": {
+        "image_sha256": "4529eb740639b868dce5cf57224574ebb78bc5f1518146a6389a26563b4bc748",
+        "payload_sha256": "3bd7d5a286f3fa5b3f0c4765d23a23e2de5c78ed1b924c67aceeaf680f8839a9",
+        "image_bytes": 67108864,
+        "partition_first": 2048,
+        "partition_sectors": 126976,
+        "partition_name": "ClasSICK ESP",
+        "reserved_sectors": 78,
+        "fat_sectors": 985,
+        "clusters": 124928,
+        "payload_clusters": 356,
+        "free_clusters": 124569,
+        "header_crc": "7A6BB824",
+        "backup_crc": "F46774E1",
+        "loaded": false
+      },
+      "writer_twins_equal": true,
+      "target_executed": false,
+      "release": false
+    },
+    "compiled_defective_controls": [
+      {
+        "name": "missing-native-ready",
+        "compiled": true,
+        "rejected": true,
+        "assertion": "assert:82",
+        "exit_code": 1
+      },
+      {
+        "name": "stale-receipt-before-clock",
+        "compiled": true,
+        "rejected": true,
+        "assertion": "assert:70",
+        "exit_code": 1
+      },
+      {
+        "name": "stale-publication-after-clock",
+        "compiled": true,
+        "rejected": true,
+        "assertion": "assert:261",
+        "exit_code": 1
+      },
+      {
+        "name": "hidden-metadata-deadline",
+        "compiled": true,
+        "rejected": true,
+        "assertion": "assert:226",
+        "exit_code": 1
+      }
+    ],
+    "unmodified_fail_fast_control_passed": true,
+    "invalid_macro_controls": [
+      {
+        "name": "bad-window-value",
+        "rejected": true,
+        "expected_diagnostic": "must be 0 or 1"
+      },
+      {
+        "name": "mixed-drawing-profiles",
+        "rejected": true,
+        "expected_diagnostic": "separate explicit profile"
+      }
+    ],
+    "conflicting_switch_controls": [
+      {
+        "rejected": true,
+        "profile": "SelectedDrawing",
+        "output_created": false
+      },
+      {
+        "rejected": true,
+        "profile": "OutlineDrawing",
+        "output_created": false
+      }
+    ],
+    "workers": [
+      {
+        "execution": {
+          "round": "code",
+          "worker": "claude",
+          "exit_code": 0,
+          "outer_timeout": false,
+          "elapsed_seconds": 15.52,
+          "input_bytes": 28258,
+          "input_sha256": "548a5b4aa6ed1d9f23b8789717839b8d6a0f84101535674593bb7173e938257c",
+          "stderr_bytes": 0
+        },
+        "event_types": {
+          "system": 7,
+          "stream_event": 164,
+          "assistant": 2,
+          "rate_limit_event": 1,
+          "result": 1
+        },
+        "reported_usage": {
+          "total_cost_usd": 0.1503784,
+          "num_turns": 1,
+          "subtype": "success",
+          "is_error": false,
+          "modelUsage": {
+            "claude-opus-5-5": {
+              "inputTokens": 2,
+              "outputTokens": 1298,
+              "cacheReadInputTokens": 1452,
+              "cacheCreationInputTokens": 15515,
+              "webSearchRequests": 0,
+              "costUSD": 0.1503784,
+              "contextWindow": 1000000,
+              "maxOutputTokens": 128000,
+              "thinkingTokens": 441,
+              "canonicalModel": "claude-opus-5-5",
+              "provider": "firstParty",
+              "costBasis": "list"
+            }
+          }
+        },
+        "observed_tool_starts": [],
+        "handoff": {
+          "result": "BLOCKED: window.c not written; frozen inline input lacks required type definitions.",
+          "actionable_findings": [
+            "window-session.h includes window-input.h, ps2-bus.h and mono-present.h. Those headers, plus apps/window-scene/scene.h, core/input/mouse.h, core/input/input.h, core/time/clock.h and platform/uefi/abi.h, are absent from the input.",
+            "Unknown fields: cs_fb_target (config construction), cs_pointer (x/y/down/suppression), cs_window (x/y/dragging/pattern), cs_product_state (inputs), cs_ps2_bus_delivery (kind), cs_pc_mono_report (phase/rows/required/cause), cs_ps2_bus (stage, init marker).",
+            "The cs_native_read(void*) context type and the expected cs_ps2_io for 8042 discovery are unclear."
+          ],
+          "tests_executed": [],
+          "blockers": [
+            "Missing frozen headers listed above, with SHA256 digests"
+          ],
+          "decisions_needed": [
+            "Lead to supply the missing headers inline, or authorize reads of the baseline fa4c63a3 headers"
+          ]
+        },
+        "artifact_lines": {},
+        "packaging_tail": ""
+      },
+      {
+        "execution": {
+          "round": "fix",
+          "worker": "claude",
+          "exit_code": 0,
+          "outer_timeout": false,
+          "elapsed_seconds": 176.84,
+          "input_bytes": 39048,
+          "input_sha256": "f1526d4f5e67f6a6e785e497cd7054acfe043fd8982c14d0ed3acdcaa22f2006",
+          "stderr_bytes": 0
+        },
+        "event_types": {
+          "system": 97,
+          "stream_event": 1240,
+          "assistant": 2,
+          "rate_limit_event": 1,
+          "result": 1
+        },
+        "reported_usage": {
+          "total_cost_usd": 0.6028888,
+          "num_turns": 1,
+          "subtype": "success",
+          "is_error": false,
+          "modelUsage": {
+            "claude-opus-5-5": {
+              "inputTokens": 2,
+              "outputTokens": 21525,
+              "cacheReadInputTokens": 2384,
+              "cacheCreationInputTokens": 21488,
+              "webSearchRequests": 0,
+              "costUSD": 0.6028888,
+              "contextWindow": 1000000,
+              "maxOutputTokens": 128000,
+              "thinkingTokens": 12694,
+              "canonicalModel": "claude-opus-5-5",
+              "provider": "firstParty",
+              "costBasis": "list"
+            }
+          }
+        },
+        "observed_tool_starts": [],
+        "handoff": {
+          "result": "platform/uefi/window.c implemented from the frozen SPEC-0062/API; nothing compiled or run.",
+          "actionable_findings": [
+            "The ACPI overlap guard rejects by calling cs_native_read on a copy of the memory descriptor whose window is set to size 0, so it returns that function's own failure code.",
+            "The checks treat h->stage==CS_UEFI_EXITED as the exit check, take framebuffer pitch to be in the same units in UEFI and cs_fb_target, and take cs_acpi_8042 output of 0 to mean no 8042."
+          ],
+          "tests_executed": [],
+          "blockers": [],
+          "decisions_needed": [
+            "Confirm those three assumptions match the existing native code.",
+            "Gate failures are recorded with phase GATE and module GATE_MODULE; confirm this is the intended phase."
+          ]
+        },
+        "artifact_lines": {
+          "platform/uefi/window.c": 355
+        },
+        "packaging_tail": "}"
+      }
+    ],
+    "inputs": [
+      {
+        "worker": "claude",
+        "bytes": 28258,
+        "lines": 535,
+        "sha256": "548a5b4aa6ed1d9f23b8789717839b8d6a0f84101535674593bb7173e938257c",
+        "inputs": [
+          {
+            "path": "docs/specifications/SPEC-0062-uefi-window-binding.md",
+            "sha256": "928412d6ad0c286a01ecb48476acd0e7e220b88b6cbea8cce59754d3736e1241"
+          },
+          {
+            "path": "platform/uefi/window.h",
+            "sha256": "c76a06800546e60ffc35d09e0da47b7cc3c931305578911c0368c307b8e9c012"
+          },
+          {
+            "path": "platform/uefi/native.h",
+            "sha256": "8561d2c56883e735318bd7cd6c7b8941d6425168060c50e835e1f30e390222d0"
+          },
+          {
+            "path": "platform/uefi/loader.h",
+            "sha256": "46212e6ed12b1c27130866fc2ec52d130b6d40aaeda732b15e982da1def24e72"
+          },
+          {
+            "path": "platform/uefi/contract.h",
+            "sha256": "7deddb2179cbe392d604a0fdd9ed0ec2edfd47bb4c696a47fa0351d58e9b3158"
+          },
+          {
+            "path": "platform/pc/window-session.h",
+            "sha256": "2219eef76f805af841d8b162ad21b4f49642e8b26d83839ac65171bc0938922d"
+          },
+          {
+            "path": "apps/window-scene/input.h",
+            "sha256": "33899a80efee4acfa83a7aaeb8e1509fa7ce3d47436b67ddc20629ebd0d35011"
+          },
+          {
+            "path": "platform/pc/ps2.h",
+            "sha256": "79a4b9f0c6c0cff7ab67bc4b47a2041673ea483f35f17c5c04304e611909000f"
+          },
+          {
+            "path": "platform/pc/acpi.h",
+            "sha256": "550a20adfb213948ced74ada4b5eced47b4e256bdf553d3dc1d4ac3fbdca0143"
+          },
+          {
+            "path": "platform/pc/pmtimer.h",
+            "sha256": "77c51c08bea8fb2eccc060245dd44a665e5c906a14ade6a208cc7dbb91c9e558"
+          },
+          {
+            "path": "core/memory/arena.h",
+            "sha256": "e26f9a33e8e1bc534ff738c131a2f3317159de600c5a59fa34f6788bbab8ceed"
+          }
+        ]
+      },
+      {
+        "worker": "claude",
+        "bytes": 39048,
+        "lines": 772,
+        "sha256": "f1526d4f5e67f6a6e785e497cd7054acfe043fd8982c14d0ed3acdcaa22f2006",
+        "inputs": [
+          {
+            "path": "docs/specifications/SPEC-0062-uefi-window-binding.md",
+            "sha256": "928412d6ad0c286a01ecb48476acd0e7e220b88b6cbea8cce59754d3736e1241",
+            "excerpt": null,
+            "rendered_sha256": "928412d6ad0c286a01ecb48476acd0e7e220b88b6cbea8cce59754d3736e1241"
+          },
+          {
+            "path": "platform/uefi/window.h",
+            "sha256": "c76a06800546e60ffc35d09e0da47b7cc3c931305578911c0368c307b8e9c012",
+            "excerpt": null,
+            "rendered_sha256": "5b92549ac21dfb20af78c3f426088dd691addccec80e92e19c2833e15085eda8"
+          },
+          {
+            "path": "platform/uefi/native.h",
+            "sha256": "8561d2c56883e735318bd7cd6c7b8941d6425168060c50e835e1f30e390222d0",
+            "excerpt": null,
+            "rendered_sha256": "b3848b9aca8595c3d2429c540edc62406bec685ae88b60e1a77a485e0e072c3a"
+          },
+          {
+            "path": "platform/uefi/loader.h",
+            "sha256": "46212e6ed12b1c27130866fc2ec52d130b6d40aaeda732b15e982da1def24e72",
+            "excerpt": null,
+            "rendered_sha256": "5ea3aef119f7409b7260be6a273d0c132422347c8cefd0c94c33711487606a4b"
+          },
+          {
+            "path": "platform/uefi/contract.h",
+            "sha256": "7deddb2179cbe392d604a0fdd9ed0ec2edfd47bb4c696a47fa0351d58e9b3158",
+            "excerpt": null,
+            "rendered_sha256": "86d6815a037edda7c3ea4724123c5ace7ae07c46b4fb4625dd057fb7b0bf424e"
+          },
+          {
+            "path": "platform/pc/window-session.h",
+            "sha256": "2219eef76f805af841d8b162ad21b4f49642e8b26d83839ac65171bc0938922d",
+            "excerpt": null,
+            "rendered_sha256": "c0d1e73cda38976353eec4a47f2053766bc349bbabea9fca0deb0c6d4f704465"
+          },
+          {
+            "path": "apps/window-scene/input.h",
+            "sha256": "33899a80efee4acfa83a7aaeb8e1509fa7ce3d47436b67ddc20629ebd0d35011",
+            "excerpt": null,
+            "rendered_sha256": "bf0d2b6e417599b4651d6f3e11c44e8c181df76056b099c81f783802117152ee"
+          },
+          {
+            "path": "platform/pc/ps2.h",
+            "sha256": "79a4b9f0c6c0cff7ab67bc4b47a2041673ea483f35f17c5c04304e611909000f",
+            "excerpt": null,
+            "rendered_sha256": "5a9a071f86421a11df6f24be2ee7b94ef01ce583978f9becf3dc807c6648bdc9"
+          },
+          {
+            "path": "platform/pc/acpi.h",
+            "sha256": "550a20adfb213948ced74ada4b5eced47b4e256bdf553d3dc1d4ac3fbdca0143",
+            "excerpt": null,
+            "rendered_sha256": "88f67b1482cfca59d6c6216c6228252eab8f6acc693b64fe06b5bb0cc15524cb"
+          },
+          {
+            "path": "platform/pc/pmtimer.h",
+            "sha256": "77c51c08bea8fb2eccc060245dd44a665e5c906a14ade6a208cc7dbb91c9e558",
+            "excerpt": null,
+            "rendered_sha256": "906a480beec9ff87311996ef942b8f0b24822555050694b2c3394d936828ebb1"
+          },
+          {
+            "path": "core/memory/arena.h",
+            "sha256": "e26f9a33e8e1bc534ff738c131a2f3317159de600c5a59fa34f6788bbab8ceed",
+            "excerpt": null,
+            "rendered_sha256": "5f8e16f5087269b36ac6c28fcaabf02dfed20b1033973e63c4845b65e1ce387b"
+          },
+          {
+            "path": "platform/pc/window-input.h",
+            "sha256": "b3e7b9e109b39fee2d186414d1710fb4384b347a1e5c1ff76548ffc1bd5493ca",
+            "excerpt": null,
+            "rendered_sha256": "305053d8ff5e730068d27f70649a469a535dae4846b7fa0e2aa691cd76ffdfb9"
+          },
+          {
+            "path": "platform/pc/ps2-bus.h",
+            "sha256": "422c27a92d7323791cec451d534d8a0127d46a938e5b641a7c81caa2d4c9c8d9",
+            "excerpt": null,
+            "rendered_sha256": "73edf3e326f8c143c1e7fd1f33588ec1d6206e84c00e31f0631d319d018326a1"
+          },
+          {
+            "path": "platform/pc/mono-present.h",
+            "sha256": "e04bf0a60e32484c5ee49d10a3c3052788ae524599b955c60702cd4a0307aa0e",
+            "excerpt": null,
+            "rendered_sha256": "5326106198751bd100f50aba5702733d5c107d3d47e4fd9ce54ba5b1c88c2a34"
+          },
+          {
+            "path": "apps/window-scene/scene.h",
+            "sha256": "f7e608eb507b3d5fe4af2720263b55c894454946f4637124c391b2eaaeca9982",
+            "excerpt": null,
+            "rendered_sha256": "ef520984e35d8cc96cbf0731a06679eafe4dfa95f8738ca914e4ae8022cdf37f"
+          },
+          {
+            "path": "core/input/mouse.h",
+            "sha256": "d41c122f62933d83af8ad8015ca0f2b35298860bca80faa1dae0cd8705e8c542",
+            "excerpt": null,
+            "rendered_sha256": "a3b5ffb1cd51ec9efdfaffc4cd53f07c47b89862bb960218fa3c664c37d9757f"
+          },
+          {
+            "path": "core/input/input.h",
+            "sha256": "7cc26488f542677dd2f7882a7a440925816acf9ee225867508b19feb26ef4cb8",
+            "excerpt": null,
+            "rendered_sha256": "d71d45746653c368b7e65e4d9a237f7b21d7faf8b915d7967f20d27b78d90378"
+          },
+          {
+            "path": "core/time/clock.h",
+            "sha256": "c3f1e2cd098cddba0090f4e1a2dd6973f39343736d80944503c6e17b5bc2fccf",
+            "excerpt": null,
+            "rendered_sha256": "40b453eebfcab9295a0713c6e1f9991204542d908157637f82ffd09eeb062909"
+          },
+          {
+            "path": "core/input/pointer.h",
+            "sha256": "d0a53cdadbe728195ce2c35bc4ef0b2a1687351912c759eda1bf6b4c38abdc38",
+            "excerpt": null,
+            "rendered_sha256": "855eafc7ae2136f29500b7666f97450e12f86a8c0a7c804bb82d871c2114763f"
+          },
+          {
+            "path": "core/ui/window.h",
+            "sha256": "0a964c1801facd731c58abf3e88fdb96d39c3cd38bbf473bba4f879852a8b1a2",
+            "excerpt": null,
+            "rendered_sha256": "469b3276c58441bc36bfd14ccc116adc6a54da04dc9cb1073c2aa83530b7d73e"
+          },
+          {
+            "path": "apps/product-scene/scene.h",
+            "sha256": "7d5b50af59be3e25a67837d7183d0fa50afd36b9f0b3aaf1a1fb1ddea772ccf0",
+            "excerpt": null,
+            "rendered_sha256": "2ef304226141c14ffb33b85280530b699c8cab4cd4383f10590d168dd1876c4f"
+          },
+          {
+            "path": "core/graphics/cursor.h",
+            "sha256": "0ffc237d90b9b58ab26752223a73710e0cad4b0a24d53fd0ac0cfe08c42818d7",
+            "excerpt": null,
+            "rendered_sha256": "f21660e908d27409beef3452635ac2fcd87ae5a10297568476e0eaa238ecfe48"
+          },
+          {
+            "path": "core/graphics/surface.h",
+            "sha256": "31de605b79282fac7f4208e28aab328662df975a03028ac16fe179672d6dc264",
+            "excerpt": null,
+            "rendered_sha256": "468279de7c6ec86d2bd52503619fa88a5ef74f275e011606c0adffec66d3fe8a"
+          },
+          {
+            "path": "platform/pc/framebuffer.h",
+            "sha256": "3abdaf4d591fc79135dc6e4021dda496855a9efca1272725f8370a6517ca68d9",
+            "excerpt": null,
+            "rendered_sha256": "460ed06f5456e6e454bfd70fcb6110323526ac293a2829138d0cd026872b75b7"
+          },
+          {
+            "path": "platform/pc/ps2-mouse.h",
+            "sha256": "13a3006a516eb4d51c61e08b6d5b3601f4291fc9dc7d6e2be13f527fcaaacbc9",
+            "excerpt": null,
+            "rendered_sha256": "c627a9e9d8155c1e8a162e2a5084b20e6644bd7efdd7bd3dd04bcb5bef204789"
+          },
+          {
+            "path": "platform/uefi/abi.h",
+            "sha256": "3c018d74b4ef8788a739b56939bdb130c7ffae8b2d6e8ceb5ceba475661fd7db",
+            "excerpt": "1..24",
+            "rendered_sha256": "04839f51d124b2340f206e76adc684e8a74f7002d9548f04300230898909efb2"
+          }
+        ]
+      }
+    ],
+    "frozen_inputs_unchanged": true,
+    "test_author": "Codex from frozen API before new implementation;later concrete fault/diagnostic additions",
+    "source_tests_changed_after_primary": "only original session keyboard regression uses Set2 and asserts actual drains",
+    "target_trials": [],
+    "whole_stack_or_128K_certified": false
+  },
+  "ci": {
+    "status": "pending",
+    "source_revision": null,
+    "url": null
+  },
+  "native_window_boot_bound": true,
+  "trial_authorized": false,
+  "target_trials": [],
+  "released_assets_changed": false,
+  "bios_implemented": false,
+  "whole_stack_or_128K_certified": false,
+  "remaining_external_allowances": "Claude sampled privately;other providers unavailable",
+  "net_codex_savings_measured": false,
+  "boot_inputs_changed": true,
+  "integration_final_range_correction": "Declared image extent may lie within owned pages;reject only invalid/uncovered ranges,not additional page alignment.Regression accepted."
+}

@@ -12,3 +12,6 @@ unmodified fail-fast control passes. Most fault assertions are repeated clock
 stall turns;scenario counts remain30/43 LP64 and29/42 ILP32. E1 RAM/transcript
 only;TEST-0070 full boot binding cases remain planned.
 [Results/limits](../../docs/development/pc-window-session-evidence.json).
+
+
+Correction2026-10-22,SRC-0358/TEST-0073:the previous real-byte keyboard fixture used unrecognized Set1-style codes,so its earlier drain-coverage statement was overstated. Current source uses project Set2 Space/Escape press/release codes and asserts4 actual drains on64/32-bit profiles. Old source-pinned results remain historical. [Correction and actual verification](../../docs/development/pc-window-boot-evidence.md).

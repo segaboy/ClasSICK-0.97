@@ -164,3 +164,6 @@ implementation, fixture, test execution, build, target run or release occurred.
 
 
 2026-10-22 SPEC-0061 leaf complete: [firmware-neutral PC window session](../docs/development/pc-window-session-evidence.md),329 profile CTests/10 audits/4 compiled defects verified. Current boot images remain unchanged;the UEFI window binding/trace and Mac boot work remain. TEST-0070 full cases stay planned. No target trial or release waiver.
+
+
+2026-10-22 SPEC-0062:opt-in PC WindowDrawing boot binding and160-byte CWP1 trace implemented. [Unbooted candidate/software evidence](../docs/development/pc-window-boot-evidence.md):348 profile CTests,8 audits,4 compiled defects,EFI twin/control and two-writer media checks. No target/device/GUI/human qualification,Mac M1-M7 waiver or release. New exact-image permission remains necessary.

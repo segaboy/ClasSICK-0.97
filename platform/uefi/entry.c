@@ -6,6 +6,19 @@
 #include "../pc/x64/state.h"
 #include "../../apps/service-probe/probe.h"
 #include "../../apps/aline-probe/probe.h"
+
+#ifndef CLASSICK_WINDOW_DRAWING
+#define CLASSICK_WINDOW_DRAWING 0
+#endif
+#if CLASSICK_WINDOW_DRAWING!=0 && CLASSICK_WINDOW_DRAWING!=1
+#error "CLASSICK_WINDOW_DRAWING must be 0 or 1"
+#endif
+#if CLASSICK_WINDOW_DRAWING
+#if defined(CLASSICK_SELECTED_DRAWING) || defined(CLASSICK_OUTLINE_DRAWING)
+#error "Window drawing is a separate explicit profile"
+#endif
+#include "window.h"
+#endif
 typedef struct { cs_trap_gateway gateway; cs_service_probe_result result; cs_aline_probe_result aline; } cs_native_services;
 _Static_assert(sizeof(cs_native_services)<=CS_LOADER_SERVICE_BYTES,"Shared services fit owned tail slice");
 _Static_assert(offsetof(cs_native_services,result)==2076,"Published service observer offset");
@@ -51,6 +64,27 @@ void CS_EFIAPI cs_native_stop(cs_uefi_handoff *handoff)
         cs_native_halt(); for(;;) { }
     }
     cs_x64_install((void *)(uintptr_t)layout.state_base);
+#if CLASSICK_WINDOW_DRAWING
+    cs_native_memory memory;
+    memory.map=(const unsigned char *)(uintptr_t)handoff->map_base;
+    memory.map_size=(size_t)handoff->map_size; memory.map_stride=(size_t)handoff->map_stride;
+    memory.map_version=handoff->map_version;
+    memory.window_physical=0; memory.window_size=UINT64_C(1)<<47; memory.window_base=0;
+    cs_native_devices devices;
+    devices.memory=&memory; devices.port=port32; devices.port_context=NULL;
+    devices.framebuffer=(volatile unsigned char *)(uintptr_t)handoff->framebuffer.base;
+    devices.arena=(void *)(uintptr_t)handoff->arena_base;
+    cs_ps2_io keyboard;
+    keyboard.read=keyboard_read; keyboard.write=keyboard_write; keyboard.context=NULL;
+    cs_native_window_binding binding;
+    binding.devices=&devices; binding.keyboard=&keyboard;
+    binding.physical=0; binding.size=UINT64_C(1)<<47; binding.base=0;
+    binding.observer=NULL; binding.context=NULL;
+    volatile uint32_t *ready=(volatile uint32_t *)(uintptr_t)(layout.state_base+CS_X64_READY);
+    (void)cs_native_window_loop(handoff,*ready,&binding,60,
+        (unsigned char *)(uintptr_t)(handoff->trace_base+CS_UWIN_TRACE_OFFSET));
+    cs_native_halt(); for(;;) { }
+#else
     cs_native_services *services=(cs_native_services *)(uintptr_t)(handoff->bundle_base+CS_LOADER_SERVICE_OFFSET);
     if(!cs_service_probe(&services->gateway,&services->result)) {
         cs_native_halt(); for(;;) { }
@@ -86,6 +120,7 @@ void CS_EFIAPI cs_native_stop(cs_uefi_handoff *handoff)
         (unsigned char *)(uintptr_t)(handoff->trace_base+CS_UART_TRACE_OFFSET),
         (unsigned char *)(uintptr_t)(handoff->trace_base+CS_QUAL_TRACE_OFFSET));
     cs_x64_aline_stop(&services->aline);
+#endif
 }
 cs_efi_status CS_EFIAPI cs_uefi_entry(void *image,cs_efi_system *system)
 {

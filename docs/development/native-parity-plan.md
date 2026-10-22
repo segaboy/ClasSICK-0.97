@@ -1,5 +1,7 @@
 # Native Macintosh and x86 parity plan
 
+2026-10-22,SPEC-0062:[PC window boot binding/CWP1 trace](pc-window-boot-evidence.md) implemented;unbooted EFI/media verified. Next:source-pinned exact-candidate review and separately authorized trial. Mac M1-M7/source/binding and paired release qualification persist;no BIOS implementation or release waiver.
+
 2026-10-22,SPEC-0061:firmware-neutral [PC window session](pc-window-session-evidence.md) implemented and hosted/compiler verified. It joins shared window input/controller receipts/presentation;not boot-bound. Next:opt-in UEFI arena/trace binding. Mac M1-M7 and paired release qualification persist.
 
 2026-10-22,SPEC-0060:isolated PC [Mono1/row presentation bridge](pc-mono-present-evidence.md) hosted/compiler verified,not boot-bound. Shared scene/core and Mac/PC release parity unchanged. Next:neutral PC window session;Mac M1-M7 remain independent prerequisites.

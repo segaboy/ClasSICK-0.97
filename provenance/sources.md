@@ -3719,3 +3719,29 @@ cursor and GCC32 warning,finishes tests and adds real transcript/retirement/
 terminal/prefix checks. 329 profile CTests,10 object audits and4 actual compiled
 defects verified. E1 only,no boot binding,target run,release or historical claim.
 [Evidence](../docs/development/pc-window-session-evidence.json).
+
+
+## SRC-0356 - Owner PC window boot and diagnostics implementation
+
+Dean Howell,2026-10-22: "OK, back to ClasSICK. Move on to connecting the window
+session to the PC boot path and adding diagnostic tracing." Authorizes this
+binding,hosted/compiler/unbooted candidate/normal CI and ordinary Git/HQ work.
+No new target trial,release,BIOS/native-app or other gate expansion.
+
+## SRC-0357 - Claude original UEFI window wrapper
+
+Opus5.5 low:one15.52s correct missing-type refusal,then one corrected176.84s
+public-only call returning355 original C lines. Zero observed tools/writes/tests;
+no manuals,HQ,untracked originals,UART bodies or third-party implementation.
+Lead integrates with narrow gate/ACPI/clock fixes. JSON fence/extra brace extracted.
+Reported$0.7532672 combined list/session cost is not balance or Codex quota savings.
+[Prompts/disposition](../docs/development/tasks/pc-window-boot-worker.md).
+
+## SRC-0358 - Lead PC window binding and actual verification
+
+SPEC-0062/ADR-0071;IMPL-0064/TEST-0073. Original entry/profile/trace reader/media/
+test integration and narrow primary fixes;348 profile CTests,8 object audits,
+4 compiled defects,EFI twins/corruption/omission controls and two-writer media
+verified without execution. Explicit TEST-0072 keyboard-code coverage correction.
+All device/GUI/human,Mac,compatibility/release gates persist;no BIOS support claim.
+[Receipt](../docs/development/pc-window-boot-evidence.json).
