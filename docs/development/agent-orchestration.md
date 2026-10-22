@@ -253,3 +253,6 @@ allowances unavailable. [Evidence](pc-bus-delivery-evidence.json).
 
 
 Unified-PC inventory2026-10-21:one Grok4.7 low primary completes93.23s from37731 frozen public/original bytes,64 lines/1090 words within caps;zero observed tools/writes/tests. Codex integrates the draft with normalized-memory,mapping/readiness and migration corrections. No repeat qualification,retry,second provider or manual/HQ/UART/original-draft exposure. Provider reports26952 total tokens and$0.02676072 list/session cost;neither a remaining balance nor measured Codex savings. Other workers idle;all-four remaining allowances unavailable. [Receipt](unified-x64-boot-inventory.json).
+
+
+PC window boot contract2026-10-22:one Grok4.7 low primary returns73 lines/1659 words in118.48s from45866 public/original bytes,within220/2400 caps;zero observed tools/writes/tests. Codex integrates with startup-batching,NULL-product-buffer,queue-order,legacy-continuous and truthful trace/fault corrections;28 proposed cases become32 planned cases. No retry/second provider/requalification;other workers idle. Reported28695 total tokens/$0.02910468 are not quota equivalence or measured Codex savings;all-four balances unavailable. [Review](pc-window-boot-contract-review.md).

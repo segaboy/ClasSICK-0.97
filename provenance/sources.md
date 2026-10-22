@@ -3637,3 +3637,29 @@ mapping/ownership/native CPU readiness and an independent canonical payload.
 Documented proposal only;all runtime/build inputs,24 originals,held brief,old
 records/releases/tags and retired wiki preserved. Feature tests/trials unexecuted.
 [Inventory](../docs/development/unified-x64-boot-inventory.md).
+
+
+## SRC-0346 - Owner PC window boot-contract continuation
+
+Dean Howell,2026-10-22: "Do it."
+Accept the proposed PC draggable-window boot-binding contract slice,with paired
+Mac/PC parity. No new code,header,fixture,build,BIOS,target trial or release.
+
+## SRC-0347 - Grok original PC window binding contract and case drafts
+
+One supervised Grok4.7 low primary,reported grok-4.7-build,118.48s,73 lines/1659
+words. Frozen45866-byte/652-line reviewed-public original packet at3cf2b72.
+No tools,writes or tests observed;no manuals,HQ,untracked originals,UART bodies
+or external implementation. Proposed contract,not historical or tested behavior.
+No retry/second provider;10 proposals reviewed,28 draft cases become32 planned
+cases after corrections. [Prompt](../docs/development/tasks/pc-window-boot-contract-grok.md).
+
+## SRC-0348 - Lead original PC window boot-binding decisions
+
+SPEC-0059/ADR-0068 behavioral contract:fixed logical RAM canvas,one RGBA row,
+full UEFI gates,one startup cancel before first publication,single-poller receipt
+routing and independent owner/presentation fault semantics. Correct optional
+product buffer,keyboard drain/terminal ordering,legacy continuous behavior and
+dedicated trace. Native interfaces/trace layout remain implementation work;
+no code or fixtures. TEST-0070 is32 unexecuted cases,not test results.
+[Review](../docs/development/pc-window-boot-contract-review.md).

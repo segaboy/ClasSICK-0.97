@@ -155,3 +155,6 @@ admission. SPEC-0051 and68 unexecuted cases are unchanged. The contract/input
 inventory slice is complete with these explicit blockers; release2 remains
 unready. Next recommended is the bounded cursor composition contract. No
 implementation, fixture, test execution, build, target run or release occurred.
+
+
+2026-10-22 PC binding contract checkpoint: [SPEC-0059](../docs/specifications/SPEC-0059-pc-window-boot-binding.md) freezes the behavioral boundary,not runtime code. Mono1 RAM512x342 plus one RGBA row;startup suppression/one poll owner/partial-publication faults explicit. [32 planned TEST-0070 cases](../provenance/records/TEST-0070-pc-window-boot-plan.md) remain unexecuted. Window binding,Mac M1-M7,measured budgets,E2/E3/E4 and fresh trial/release permissions remain pending. No existing acceptance waiver or version change.

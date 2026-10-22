@@ -1,5 +1,7 @@
 # Native Macintosh and x86 parity plan
 
+2026-10-22,SPEC-0059/ADR-0068: [PC window boot-binding behavior](../specifications/SPEC-0059-pc-window-boot-binding.md) finalized,32 planned TEST-0070 cases unexecuted. No binding/code/build/trial yet;first proposed implementation is the RAM Mono1/one-row PC presentation bridge. Mac M1-M7 closure and paired release criteria remain separate.
+
 2026-10-21,SRC-0341/0342: owner adopts a [unified native x86-64 PC distribution](unified-x64-pc-plan.md):one shared compiled OS payload with BIOS/UEFI entries and growing tested hardware coverage. Current PC release remains UEFI-only;universal support is a goal,not an observed result. Paired-native-preview-2 remains the immediate checkpoint;no new code,build,trial or release in this intake.
 
 2026-10-19 source-review continuation, SRC-0314/0315: owner clears narrow published mouse review; earlier hold resolved, declaration excluded. First pointer/input contract/inventory slice complete with Mac adapter gaps M1-M7; no code, tests, build or trial. Next recommended: bounded cursor composition contract. [Review](mac-pointer-source-review.md). Older held checkpoints below are historical. Existing gates and released capabilities remain unchanged.

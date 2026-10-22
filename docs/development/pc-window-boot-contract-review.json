@@ -1,0 +1,278 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-22",
+  "baseline": "3cf2b723c9388890a7cc2808f948abb518b0935e",
+  "sources": [
+    "SRC-0346",
+    "SRC-0347",
+    "SRC-0348"
+  ],
+  "specification": "SPEC-0059",
+  "decision": "ADR-0068",
+  "case_inventory": "TEST-0070",
+  "classification": "independent-platform-contract;not-historical",
+  "status": "behavior-finalized;unimplemented",
+  "input": {
+    "source_revision": "3cf2b723c9388890a7cc2808f948abb518b0935e",
+    "bytes": 45866,
+    "lines": 652,
+    "sha256": "b82cbc0b6b5926afe3c330ab4932951a69fab7e36c5648f6b2e4f4214d47f32a",
+    "inputs": [
+      {
+        "path": "docs/specifications/SPEC-0055-window-input-owner.md",
+        "file_sha256": "d1c07ab4d3eb791d60fb75b05e508d92234a58a5d1161a91e1a26c7c1e38685c",
+        "ranges": [
+          [
+            1,
+            29
+          ]
+        ]
+      },
+      {
+        "path": "docs/specifications/SPEC-0057-pc-window-report-handoff.md",
+        "file_sha256": "fbf40d173cf64ef954c4becb5ff295e720253208ab8441c3346eb005531f7950",
+        "ranges": [
+          [
+            1,
+            38
+          ]
+        ]
+      },
+      {
+        "path": "docs/specifications/SPEC-0058-pc-bus-delivery.md",
+        "file_sha256": "135571c2a592e5f1e92e2d50cef2846f75166b4fe1f4832a88ca3c442996692f",
+        "ranges": [
+          [
+            1,
+            42
+          ]
+        ]
+      },
+      {
+        "path": "apps/window-scene/input.h",
+        "file_sha256": "33899a80efee4acfa83a7aaeb8e1509fa7ce3d47436b67ddc20629ebd0d35011",
+        "ranges": [
+          [
+            1,
+            33
+          ]
+        ]
+      },
+      {
+        "path": "apps/window-scene/scene.h",
+        "file_sha256": "f7e608eb507b3d5fe4af2720263b55c894454946f4637124c391b2eaaeca9982",
+        "ranges": [
+          [
+            1,
+            31
+          ]
+        ]
+      },
+      {
+        "path": "platform/pc/window-input.h",
+        "file_sha256": "b3e7b9e109b39fee2d186414d1710fb4384b347a1e5c1ff76548ffc1bd5493ca",
+        "ranges": [
+          [
+            1,
+            16
+          ]
+        ]
+      },
+      {
+        "path": "platform/pc/ps2-bus.h",
+        "file_sha256": "422c27a92d7323791cec451d534d8a0127d46a938e5b641a7c81caa2d4c9c8d9",
+        "ranges": [
+          [
+            1,
+            30
+          ]
+        ]
+      },
+      {
+        "path": "core/graphics/cursor.h",
+        "file_sha256": "0ffc237d90b9b58ab26752223a73710e0cad4b0a24d53fd0ac0cfe08c42818d7",
+        "ranges": [
+          [
+            1,
+            52
+          ]
+        ]
+      },
+      {
+        "path": "platform/pc/framebuffer.h",
+        "file_sha256": "3abdaf4d591fc79135dc6e4021dda496855a9efca1272725f8370a6517ca68d9",
+        "ranges": [
+          [
+            1,
+            26
+          ]
+        ]
+      },
+      {
+        "path": "platform/pc/framebuffer.c",
+        "file_sha256": "4c4f2513668688849a42ceb3895902781dbf18f3dc5026c6c7456132809bbfe2",
+        "ranges": [
+          [
+            1,
+            68
+          ]
+        ]
+      },
+      {
+        "path": "platform/uefi/loader.h",
+        "file_sha256": "46212e6ed12b1c27130866fc2ec52d130b6d40aaeda732b15e982da1def24e72",
+        "ranges": [
+          [
+            1,
+            43
+          ]
+        ]
+      },
+      {
+        "path": "platform/uefi/native.h",
+        "file_sha256": "8561d2c56883e735318bd7cd6c7b8941d6425168060c50e835e1f30e390222d0",
+        "ranges": [
+          [
+            1,
+            49
+          ]
+        ]
+      },
+      {
+        "path": "platform/uefi/keyboard.c",
+        "file_sha256": "18f0fe6e5954f57be98c12a4b097b647adad64f5b99e292ad3e332cacb00747f",
+        "ranges": [
+          [
+            189,
+            217
+          ],
+          [
+            235,
+            294
+          ]
+        ]
+      }
+    ]
+  },
+  "worker": {
+    "execution": {
+      "round": "contract",
+      "worker": "grok",
+      "exit_code": 0,
+      "outer_timeout": false,
+      "elapsed_seconds": 118.48,
+      "input_bytes": 45866,
+      "input_sha256": "b82cbc0b6b5926afe3c330ab4932951a69fab7e36c5648f6b2e4f4214d47f32a",
+      "stderr_bytes": 117
+    },
+    "event_types": {
+      "available_commands": 17,
+      "thought": 653,
+      "text": 2899,
+      "usage": 1,
+      "end": 1
+    },
+    "model": [
+      "grok-4.7-build"
+    ],
+    "usage": {
+      "input_tokens": 18826,
+      "cache_read_input_tokens": 2048,
+      "cache_creation_input_tokens": 0,
+      "output_tokens": 7821,
+      "reasoning_tokens": 4922,
+      "total_tokens": 28695
+    },
+    "reported_cost_usd": 0.02910468,
+    "turns": 1,
+    "stop_reason": "end_turn",
+    "artifact_lines": 73,
+    "artifact_words": 1659,
+    "artifact_sha256": "684fb8cac13c9e52656fccf5cffa5ee03a5c30e3b4fac4ed14ee337bc5460aab"
+  },
+  "worker_tools_observed": 0,
+  "worker_writes": 0,
+  "worker_tests_executed": [],
+  "dispositions": [
+    {
+      "proposal": "B-neutral-split",
+      "result": "adopt with changes",
+      "decision": "Full UEFI ownership/mapping/capability gates,not exit alone;PC session/bridge own no UEFI types."
+    },
+    {
+      "proposal": "B-row-present",
+      "result": "adopt",
+      "decision": "Borrow fixed Mono canvas and one RGBA row;reuse framebuffer APIs unchanged."
+    },
+    {
+      "proposal": "B-margin-once",
+      "result": "adopt with changes",
+      "decision": "Initial full physical row publication;later only logical canvas;software completion is not atomic scanout."
+    },
+    {
+      "proposal": "B-arena-once",
+      "result": "adopt with changes",
+      "decision": "Hosted recipe has pixels=NULL;54704 fixed buffers at max width,plus64 if art bits in RAM;no double1024 allocation or whole-fit claim."
+    },
+    {
+      "proposal": "B-neutral-cancel",
+      "result": "adopt with changes",
+      "decision": "Begin+cancel before ONE first publication;software neutral state is not device evidence. Require released motion before qualification clicks."
+    },
+    {
+      "proposal": "B-one-poller",
+      "result": "adopt with changes",
+      "decision": "Clear receipt before clock;poll once when eligible;drain8 before mouse dispatch. Terminal error cannot replay a receipt."
+    },
+    {
+      "proposal": "B-publish-accept",
+      "result": "adopt with changes",
+      "decision": "Every accepted RUNNING call publishes;startup is one batch. Owner pre-effect refusal can still terminally diagnose the session."
+    },
+    {
+      "proposal": "B-fault-class",
+      "result": "adopt with changes",
+      "decision": "Distinguish owner prefix,presenter refusal and unknown hardware exception;dedicated versioned trace semantics,not old UART/keyboard ABI."
+    },
+    {
+      "proposal": "B-uart-bypass",
+      "result": "adopt",
+      "decision": "No UART body/observer change;explicitly disclose absent telemetry."
+    },
+    {
+      "proposal": "B-profile-opt-in",
+      "result": "adopt with changes",
+      "decision": "Future WindowDrawing/CLASSICK_WINDOW_DRAWING;preserve both timed old modes AND already-continuous outline behavior."
+    }
+  ],
+  "case_count": 32,
+  "cases_status": "PLANNED/UNEXECUTED",
+  "fixed_buffer_bytes_max": 54704,
+  "product_pixels": null,
+  "art_bits_bytes_if_in_ram": 64,
+  "complete_arena_stack_image_costs_measured": false,
+  "runtime_inputs_changed": false,
+  "native_interfaces_or_trace_layout_installed": false,
+  "implementation_authorized_by_this_intake": false,
+  "feature_tests_executed": [],
+  "fixtures_generated": false,
+  "boot_or_hardware_trial": false,
+  "release_or_tag_change": false,
+  "first_implementation_proposal": "isolated Mono1/one-RGBA-row PC presentation bridge",
+  "account_allowances": {
+    "Grok": null,
+    "Claude": null,
+    "Copilot": null,
+    "Antigravity": null
+  },
+  "net_codex_savings_measured": false,
+  "preservation": {
+    "research_originals": 24,
+    "held_brief": true,
+    "old_registry_rows_checkpoints": true,
+    "runtime_and_release_assets": true,
+    "tags": true,
+    "wiki_retired": true
+  },
+  "verification": "documentation/preservation checks;results in checkpoint handoff,not feature tests"
+}

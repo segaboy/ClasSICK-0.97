@@ -197,5 +197,19 @@
     "bios_uefi_entries": "planned",
     "current_paired_checkpoint_unchanged": true,
     "bios_required_for_this_pair": false
+  },
+  "pc_window_boot_contract": {
+    "specification": "SPEC-0059",
+    "decision": "ADR-0068",
+    "case_inventory": "TEST-0070",
+    "case_count": 32,
+    "cases_executed": 0,
+    "behavior_finalized": true,
+    "implemented": false,
+    "binding_authorized_by_this_contract": false,
+    "boot_trial_authorized": false,
+    "shared_native_mac_pc_parity_required": true,
+    "first_implementation_proposal": "isolated Mono1/one-row PC presentation bridge",
+    "review": "docs/development/pc-window-boot-contract-review.json"
   }
 }
