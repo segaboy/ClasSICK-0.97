@@ -237,6 +237,6 @@
     "object_audits": 10,
     "local_defective_controls_rejected": 4,
     "evidence": "docs/development/pc-window-session-evidence.json",
-    "source_revision": null
+    "source_revision": "c863cf66fc78f8a8298fbcca2a7ca3fa88948ea8"
   }
 }

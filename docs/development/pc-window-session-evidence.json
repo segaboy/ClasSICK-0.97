@@ -12,7 +12,7 @@
   "implementation": "IMPL-0063",
   "tests": "TEST-0072",
   "classification": "original-native-PC-session;E1-only",
-  "status": "locally-verified;CI-pending",
+  "status": "locally-and-source-CI-verified",
   "verification": {
     "tests": {
       "clang64": {
@@ -567,9 +567,20 @@
     "whole_stack_or_128K_certified": false
   },
   "ci": {
-    "status": "pending",
-    "source_revision": null,
-    "url": null
+    "headSha": "c863cf66fc78f8a8298fbcca2a7ca3fa88948ea8",
+    "status": "completed",
+    "conclusion": "success",
+    "url": "https://github.com/segaboy/ClasSICK-0.97/actions/runs/39809337561",
+    "jobs": [
+      {
+        "name": "windows-bootstrap",
+        "conclusion": "success"
+      },
+      {
+        "name": "m68k-rom",
+        "conclusion": "success"
+      }
+    ]
   },
   "integration_changes": [
     "exclusive nonwrapping endpoint preflight",

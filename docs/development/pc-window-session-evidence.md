@@ -62,3 +62,6 @@ native-app/Linux/mini-vMac/both System1 directions persist. Next:opt-in UEFI
 window binding with the owned arena and versioned trace,then separately gated
 candidate/trial qualification. This result advances paired-native-preview-2;
 it does not supply missing Mac boot work or authorize publishing a release.
+
+
+Source-pinned verification: `c863cf66fc78f8a8298fbcca2a7ca3fa88948ea8`;[Windows and68000 CI](https://github.com/segaboy/ClasSICK-0.97/actions/runs/39809337561) both succeed. Follow-up changes metadata only;all runtime/build inputs remain at this verified source.
