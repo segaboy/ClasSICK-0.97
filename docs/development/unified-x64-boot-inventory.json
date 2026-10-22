@@ -1,0 +1,238 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-21",
+  "sources": [
+    "SRC-0343",
+    "SRC-0344",
+    "SRC-0345"
+  ],
+  "status": "lead-reviewed-inventory;semantic-proposals-only",
+  "source_revision": "fdc6d3e983b55f7a3c3bb38da345ab71e34b7944",
+  "input": {
+    "revision": "fdc6d3e983b55f7a3c3bb38da345ab71e34b7944",
+    "input_bytes": 37731,
+    "input_lines": 610,
+    "input_sha256": "51c6ad4bfdee9c7e866272f3265b542c6e3861daa7bc85c2d922205afc980bbd",
+    "inputs": [
+      {
+        "path": "docs/development/unified-x64-pc-plan.md",
+        "revision": "fdc6d3e983b55f7a3c3bb38da345ab71e34b7944",
+        "file_sha256": "0ac6a0e637249c2e7c1339cca6dd6ce23bb359db0d7c1efe2320834449560df4",
+        "ranges": [
+          [
+            1,
+            63
+          ]
+        ]
+      },
+      {
+        "path": "platform/uefi/loader.h",
+        "revision": "fdc6d3e983b55f7a3c3bb38da345ab71e34b7944",
+        "file_sha256": "46212e6ed12b1c27130866fc2ec52d130b6d40aaeda732b15e982da1def24e72",
+        "ranges": [
+          [
+            1,
+            43
+          ]
+        ]
+      },
+      {
+        "path": "platform/uefi/contract.h",
+        "revision": "fdc6d3e983b55f7a3c3bb38da345ab71e34b7944",
+        "file_sha256": "7deddb2179cbe392d604a0fdd9ed0ec2edfd47bb4c696a47fa0351d58e9b3158",
+        "ranges": [
+          [
+            1,
+            33
+          ]
+        ]
+      },
+      {
+        "path": "platform/uefi/native.h",
+        "revision": "fdc6d3e983b55f7a3c3bb38da345ab71e34b7944",
+        "file_sha256": "8561d2c56883e735318bd7cd6c7b8941d6425168060c50e835e1f30e390222d0",
+        "ranges": [
+          [
+            1,
+            49
+          ]
+        ]
+      },
+      {
+        "path": "platform/pc/framebuffer.h",
+        "revision": "fdc6d3e983b55f7a3c3bb38da345ab71e34b7944",
+        "file_sha256": "3abdaf4d591fc79135dc6e4021dda496855a9efca1272725f8370a6517ca68d9",
+        "ranges": [
+          [
+            1,
+            26
+          ]
+        ]
+      },
+      {
+        "path": "platform/pc/x64/state.h",
+        "revision": "fdc6d3e983b55f7a3c3bb38da345ab71e34b7944",
+        "file_sha256": "a4bd58a8ef3134d8e18e84446661114c502bd446e9b782a3d2f46063ec7bda1e",
+        "ranges": [
+          [
+            1,
+            19
+          ]
+        ]
+      },
+      {
+        "path": "platform/uefi/abi.h",
+        "revision": "fdc6d3e983b55f7a3c3bb38da345ab71e34b7944",
+        "file_sha256": "3c018d74b4ef8788a739b56939bdb130c7ffae8b2d6e8ceb5ceba475661fd7db",
+        "ranges": [
+          [
+            1,
+            17
+          ]
+        ]
+      },
+      {
+        "path": "platform/uefi/entry.c",
+        "revision": "fdc6d3e983b55f7a3c3bb38da345ab71e34b7944",
+        "file_sha256": "524808da6dd8fe2b9a53f9b516a8fc40da15525dbee357b961add09f9306f1f9",
+        "ranges": [
+          [
+            17,
+            74
+          ]
+        ]
+      },
+      {
+        "path": "platform/uefi/transition.S",
+        "revision": "fdc6d3e983b55f7a3c3bb38da345ab71e34b7944",
+        "file_sha256": "f2491ee2e8c8679e3916a8e350fcc75449d4417bf0999eeef48ab6e34381ff55",
+        "ranges": [
+          [
+            1,
+            12
+          ]
+        ]
+      },
+      {
+        "path": "platform/uefi/loader.c",
+        "revision": "fdc6d3e983b55f7a3c3bb38da345ab71e34b7944",
+        "file_sha256": "d232d95c42e372ac8e8aa160f8dc5461679bfcd95e6aac8691025964a8d3d40a",
+        "ranges": [
+          [
+            88,
+            180
+          ]
+        ]
+      },
+      {
+        "path": "platform/uefi/native.c",
+        "revision": "fdc6d3e983b55f7a3c3bb38da345ab71e34b7944",
+        "file_sha256": "a3b0e49d289054a8aa58d44f56c03f3a741e2df689f57cfd9a3d10d873ff7490",
+        "ranges": [
+          [
+            23,
+            80
+          ],
+          [
+            98,
+            120
+          ]
+        ]
+      },
+      {
+        "path": "platform/uefi/keyboard.c",
+        "revision": "fdc6d3e983b55f7a3c3bb38da345ab71e34b7944",
+        "file_sha256": "18f0fe6e5954f57be98c12a4b097b647adad64f5b99e292ad3e332cacb00747f",
+        "ranges": [
+          [
+            198,
+            221
+          ]
+        ]
+      },
+      {
+        "path": "scripts/Verify-UEFIImage.ps1",
+        "revision": "fdc6d3e983b55f7a3c3bb38da345ab71e34b7944",
+        "file_sha256": "80c6be800d05ba82b3808be39e678966ac94c68a1d5b91a917e8247bbcd50823",
+        "ranges": [
+          [
+            17,
+            30
+          ],
+          [
+            60,
+            63
+          ],
+          [
+            93,
+            96
+          ]
+        ]
+      }
+    ]
+  },
+  "worker": {
+    "provider": "xAI/Grok",
+    "requested_model": "grok-4.7",
+    "reported_models": [
+      "grok-4.7-build"
+    ],
+    "effort": "low",
+    "calls": 1,
+    "elapsed_seconds": 93.23,
+    "turns": 1,
+    "stop_reason": "end_turn",
+    "observed_tool_actions": 0,
+    "writes": 0,
+    "tests_executed": [],
+    "draft_lines": 64,
+    "draft_words": 1090,
+    "output_caps": {
+      "lines": 140,
+      "words": 1100
+    },
+    "reported_usage": {
+      "input_tokens": 17407,
+      "cache_read_input_tokens": 2432,
+      "cache_creation_input_tokens": 0,
+      "output_tokens": 7113,
+      "reasoning_tokens": 4524,
+      "total_tokens": 26952
+    },
+    "reported_cost_usd": 0.02676072,
+    "remaining_account_allowance": null,
+    "notes": "CLI reported preferred-model fallback and auth-recovery without file lock;successful completed artifact. Reported cost is not a purchase or remaining balance. Captures outside Git;advertised commands are not tool executions."
+  },
+  "dispositions": {
+    "current_inventory": "adopt-with-changes:separate timer/8042 requirements;transfer is not exit proof;path locators normalized",
+    "identity_display_ownership_capabilities": "adopt-as-semantic-proposals",
+    "memory": "change:normalized ranges;raw UEFI map/key diagnostics stay adapter-private or optional tagged extension",
+    "mapping": "change:explicit mapping validity/lifetime;declared window is not page-table proof",
+    "readiness": "change:producer-specific obligations and common validation;native table readiness separate;never fabricate UEFI exit for BIOS",
+    "migration": "change:independent payload link and UEFI adapter before second entry;keep immediate pair priority",
+    "binary_abi_payload_format_cpu_media_bios": "defer;reviewed contract/source prerequisites pending"
+  },
+  "lead_code_checks": [
+    "platform/uefi/entry.c:cs_uefi_entry and cs_native_stop",
+    "platform/uefi/contract.c:cs_uefi_check_map/check_owned/check_framebuffer",
+    "platform/pc/x64/exceptions.S:cs_x64_install"
+  ],
+  "runtime_inputs_changed": false,
+  "feature_tests_executed": [],
+  "bios_build_executed": false,
+  "boot_or_hardware_trial": false,
+  "release_or_tag_change": false,
+  "common_handoff_frozen": false,
+  "next_release_task": "PC window boot-binding contract;Mac M1-M7 source prerequisites separate",
+  "first_unified_loader_contract": "firmware-independent semantic handoff and payload/build boundary",
+  "verification": {
+    "frozen_inputs_unchanged": true,
+    "runtime_unchanged_from_goal_baseline": true,
+    "research_originals_preserved": 24,
+    "held_brief_preserved": true,
+    "tags_preserved": true,
+    "repository_guard": "Staged-index result recorded in private HQ CS-EVD-0114 after validation"
+  },
+  "net_codex_savings_measured": false,
+  "other_workers_called": []
+}

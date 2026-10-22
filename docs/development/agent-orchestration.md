@@ -250,3 +250,6 @@ future Copilot dispatch,check a supported transport-retry control if needed;
 do not invent a flag or infer a provider outage/quota problem. No complete
 session usage or balance;timeout is not backend cancellation. All-four remaining
 allowances unavailable. [Evidence](pc-bus-delivery-evidence.json).
+
+
+Unified-PC inventory2026-10-21:one Grok4.7 low primary completes93.23s from37731 frozen public/original bytes,64 lines/1090 words within caps;zero observed tools/writes/tests. Codex integrates the draft with normalized-memory,mapping/readiness and migration corrections. No repeat qualification,retry,second provider or manual/HQ/UART/original-draft exposure. Provider reports26952 total tokens and$0.02676072 list/session cost;neither a remaining balance nor measured Codex savings. Other workers idle;all-four remaining allowances unavailable. [Receipt](unified-x64-boot-inventory.json).

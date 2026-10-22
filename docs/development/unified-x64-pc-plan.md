@@ -61,3 +61,6 @@ continue unchanged. No new worker call is needed for this small decision.
 [Current parity](native-parity-plan.md),[display target](display-target.md),
 [current release goal](../../releases/paired-native-preview-2.md),
 [machine-readable scope](unified-x64-pc-plan.json).
+
+First dependency inventory complete as a reviewed proposal;common handoff/ABI not frozen.
+[Inventory](unified-x64-boot-inventory.md),[source identities/receipt](unified-x64-boot-inventory.json).

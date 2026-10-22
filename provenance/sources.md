@@ -3612,3 +3612,28 @@ architecture and evidence retain their scope;no BIOS implementation,hardware
 qualification,new source recipe,feature tests or release. Paired preview2 stays
 the immediate checkpoint. Small direct record task;no external calls.
 [Roadmap](../docs/development/unified-x64-pc-plan.md).
+
+
+## SRC-0343 - Owner next-task continuation
+
+Dean Howell,2026-10-21: "OK, perform the next task."
+Continue the announced bounded original UEFI dependency inventory/common-payload
+boundary draft. No BIOS implementation,device recipe,trial or release clearance.
+
+## SRC-0344 - Grok original unified-payload dependency draft
+
+One supervised Grok4.7 low primary,reported grok-4.7-build,93.23s,64 lines/1090
+words from37731 frozen public/original bytes at fdc6d3e. No manuals,HQ,research
+originals,UART bodies or external implementation;no observed tools,writes or
+tests. Proposed architecture,not historical authority or a finished ABI. No
+retry/second provider;qualifications reused. Lead corrects memory normalization,
+mapping/readiness and migration boundaries. [Brief](../docs/development/tasks/unified-x64-boot-inventory-grok.md).
+
+## SRC-0345 - Lead original unified-boot inventory review
+
+Original code/engineering review only:verify current UEFI coupling,retain
+firmware-specific exit gates,normalize proposed common memory semantics,require
+mapping/ownership/native CPU readiness and an independent canonical payload.
+Documented proposal only;all runtime/build inputs,24 originals,held brief,old
+records/releases/tags and retired wiki preserved. Feature tests/trials unexecuted.
+[Inventory](../docs/development/unified-x64-boot-inventory.md).
