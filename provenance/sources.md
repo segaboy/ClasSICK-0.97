@@ -3591,3 +3591,24 @@ Original GPL-3.0-or-later contract,driver extension and fallback tests from the
 frozen interfaces/project fixtures. Baseline comparison uses only our own prior
 public driver source. No new manuals,third-party implementation,untracked
 research or historical inference. [Actual checks](../docs/development/pc-bus-delivery-evidence.json).
+
+
+## SRC-0341 - Owner unified x86-64 PC distribution goal
+
+Dean Howell,2026-10-21:
+
+> I think we should do that. What I want is a single 64-bit build that will work on any 64-bit PC.
+
+In context,the owner accepts a PC target spanning legacy BIOS and UEFI. Record
+broad hardware coverage as a goal,not current universal support. This decision
+intake changes roadmap/records;existing source/trial/release gates remain.
+
+## SRC-0342 - Lead unified PC architecture interpretation and roadmap
+
+Original engineering plan,ADR-0067:one canonical compiled native x86-64 OS
+payload,firmware entry stubs and shared distribution;tested hardware profiles
+and later reviewed BIOS/common-handoff/driver contracts. Current UEFI-specific
+architecture and evidence retain their scope;no BIOS implementation,hardware
+qualification,new source recipe,feature tests or release. Paired preview2 stays
+the immediate checkpoint. Small direct record task;no external calls.
+[Roadmap](../docs/development/unified-x64-pc-plan.md).

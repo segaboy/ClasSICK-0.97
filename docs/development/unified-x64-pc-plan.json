@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-21",
+  "decision": "ADR-0067",
+  "sources": [
+    "SRC-0341",
+    "SRC-0342"
+  ],
+  "status": "accepted-long-term-goal;not-implemented",
+  "owner_words": "I think we should do that. What I want is a single 64-bit build that will work on any 64-bit PC.",
+  "target": "One x86-64 PC release/build pipeline,one canonical native64-bit OS payload,BIOS and UEFI entry loaders.",
+  "payload_identity": "Both firmware entries must load the identical compiled OS payload;verify hashes and common handoff behavior.",
+  "packaging": "Aim for one primary dual-firmware boot image;any additional media wrappers retain the same payload and release identity.",
+  "bootstrap_modes": "Firmware startup modes may vary;the running OS is native x86-64. No separate BIOS OS and UEFI OS editions.",
+  "universal_hardware_support": "owner-goal;not-demonstrated",
+  "coverage_policy": "Publish tested CPU/firmware/device profiles and gaps;boot-method support alone is not universal hardware compatibility.",
+  "current_pc_release_support": [
+    "UEFI-only original PC image;source-pinned existing qualifications"
+  ],
+  "bios_loader_implemented": false,
+  "common_bios_uefi_payload_implemented": false,
+  "firmware_bitness_inventory": "pending;do not equate CPU width with firmware ABI",
+  "hardware_work": [
+    "CPU baseline and feature detection",
+    "display adapters and common framebuffer description",
+    "timing alternatives",
+    "keyboard/mouse including USB coverage",
+    "storage/boot-media controller coverage",
+    "firmware boot-permission/locked-profile inventory"
+  ],
+  "first_engineering_step": "Inventory UEFI coupling;freeze firmware-independent payload handoff,ownership and boot-media/source prerequisites.",
+  "decisions_pending": [
+    "payload format and ABI",
+    "CPU minimum/features",
+    "memory/stack/device lifetime",
+    "BIOS/UEFI loader and media layout",
+    "additional firmware entry requirements",
+    "driver/profile priority and qualification matrix"
+  ],
+  "immediate_checkpoint": "paired-native-preview-2 unchanged;BIOS not newly required for provisional ROM0.4.0-alpha.1/PC0.2.0-alpha.1",
+  "display": "Original monochrome512x342 logical scene,unscaled and centered on supported larger PC framebuffers.",
+  "native_parity": "Shared native68000/x86 features and PC legacy68k compatibility retained;external native-application gate unchanged.",
+  "runtime_inputs_changed": false,
+  "feature_tests_executed": [],
+  "bios_build_executed": false,
+  "new_boot_or_hardware_trial": false,
+  "release_or_tag_change": false,
+  "worker_calls": 0,
+  "workers": "Small lead decision/record task;qualifications reused. No new quota/savings claims;remaining external allowances unavailable.",
+  "roadmap": "docs/development/unified-x64-pc-plan.md"
+}

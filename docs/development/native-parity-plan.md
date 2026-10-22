@@ -1,5 +1,7 @@
 # Native Macintosh and x86 parity plan
 
+2026-10-21,SRC-0341/0342: owner adopts a [unified native x86-64 PC distribution](unified-x64-pc-plan.md):one shared compiled OS payload with BIOS/UEFI entries and growing tested hardware coverage. Current PC release remains UEFI-only;universal support is a goal,not an observed result. Paired-native-preview-2 remains the immediate checkpoint;no new code,build,trial or release in this intake.
+
 2026-10-19 source-review continuation, SRC-0314/0315: owner clears narrow published mouse review; earlier hold resolved, declaration excluded. First pointer/input contract/inventory slice complete with Mac adapter gaps M1-M7; no code, tests, build or trial. Next recommended: bounded cursor composition contract. [Review](mac-pointer-source-review.md). Older held checkpoints below are historical. Existing gates and released capabilities remain unchanged.
 
 2026-10-19 release2 first slice: SPEC-0051 pure native pointer/input contract for both CPUs,68 unexecuted case identifiers and separate PC input-evidence inventory. Mac hardware source lane held for owner disposition;no motion binding or pixel/GUI/human pass claimed. [Review](pointer-input-contract-review.md).
@@ -73,7 +75,7 @@ Existing transparent-variant and licensing requirements remain unchanged.
 | Original native drawing workload using those APIs | Published ROM0.3.0-alpha.1 | Published native PC0.1.0-alpha.1;hosted binding also exists | Both exact images observed;shared outline/counter scene and normalized pixel parity recorded |
 | Native coordinate view,rectangular clip and outline | Same original view/selection/outline core in native68000 workload | Same core in native x86 workload | SPEC-0041/0045..0049 foundations are used by the released pair;general guest graphics ABI remains incomplete |
 | Scene input | Shared native button core;Snow human2 clicks pass | Shared core;native continuous preview38 mouse+5 Space injected through guest185 | Mac motion/cursor and full event parity absent from released UI;PC human capture/GUI unqualified,synthetic success is scoped |
-| Pointer/cursor and one interactive window | Proposed native68000 adapter/core | Proposed same core with native x86 adapter | Next planned paired release;no implementation or feature tests yet |
+| Pointer/cursor and one interactive window | Shared native core compiler-verified;Mac motion/boot adapter pending | Shared core and Windows hosted preview verified;PC controller delivery verified;window boot binding pending | Paired-native-preview-2 in progress;hosted/compiler evidence does not qualify native motion boots |
 | Full windows/menus/events/files/System disk experience | Incomplete | Incomplete | Develop each advancement on both native sides |
 
 The renderer and original drawing workload execute as native C on both targets.

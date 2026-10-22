@@ -26,6 +26,9 @@ is inferred from this synthetic workload.
 | C. Disk/System boot | Boots from media | File/device managers, resources, complete boot contracts | Defer this release; remains the longer-term goal |
 
 ## 3. Recommended release goal
+
+2026-10-21 roadmap alignment:the owner's [unified x86-64 PC goal](../docs/development/unified-x64-pc-plan.md),ADR-0067,targets one payload with BIOS/UEFI entries and broader tested hardware. This paired window milestone remains the immediate checkpoint;BIOS support is not a new acceptance condition for this provisional pair. No existing runtime/trial/publication gate changes.
+
 On both native targets the user moves an original cursor and presses on the title strip
 of ONE original fixed-size frame. They then drag the frame within the 512x342 logical
 canvas. Clicking its content toggles an original monochrome pattern exactly once per press. The window redraws without trails;the original branding and diagnostic counter remain available.

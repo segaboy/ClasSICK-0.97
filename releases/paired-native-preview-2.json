@@ -188,5 +188,14 @@
     "legacy_poll_preserved": true,
     "window_boot_bound": false,
     "source_revision": "b4ad772cd07e98c0ff0cb8155b6b844573004ac1"
+  },
+  "long_term_pc_distribution_goal": {
+    "decision": "ADR-0067",
+    "roadmap": "docs/development/unified-x64-pc-plan.md",
+    "scope": "docs/development/unified-x64-pc-plan.json",
+    "single_native_x64_payload": true,
+    "bios_uefi_entries": "planned",
+    "current_paired_checkpoint_unchanged": true,
+    "bios_required_for_this_pair": false
   }
 }
