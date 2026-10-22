@@ -3695,3 +3695,27 @@ fallback after Grok cap,integrates independent tests,and verifies326 final
 profile CTests,10 object audits and3 compiled defective controls. E1 only;no
 boot/session binding,new device interface,target run or release. Source/role/
 Mac M1-M7 and all compatibility gates persist. [Receipt](../docs/development/pc-mono-present-evidence.json).
+
+
+## SRC-0353 - Owner firmware-neutral session continuation
+
+Dean Howell,2026-10-22: "Next step please." Continues the proposed isolated native
+PC session after SPEC-0060;hosted/compiler/normal CI and ordinary Git/HQ records.
+No UEFI/ROM boot binding,target trial,release or other gate expansion.
+
+## SRC-0354 - Claude original native session and partial tests
+
+One Opus5.5 low primary,34035-byte690-line frozen public/original packet;420.09s
+cap without complete result/handoff/usage. Complete272 production lines and375
+partial test lines salvaged,647 exceeding600 cap. Zero observed tools/writes/
+tests;no retry/second worker. No manuals,HQ,untracked originals,UART or prohibited
+implementation inputs. Primary tests are not independent. Captures outside Git.
+[Assignment and disposition](../docs/development/tasks/pc-window-session-worker.md).
+
+## SRC-0355 - Lead session integration and actual software verification
+
+SPEC-0061/ADR-0070;IMPL-0063/TEST-0072. Lead corrects range endpoint,transparent
+cursor and GCC32 warning,finishes tests and adds real transcript/retirement/
+terminal/prefix checks. 329 profile CTests,10 object audits and4 actual compiled
+defects verified. E1 only,no boot binding,target run,release or historical claim.
+[Evidence](../docs/development/pc-window-session-evidence.json).

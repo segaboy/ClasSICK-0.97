@@ -1,5 +1,7 @@
 # Native Macintosh and x86 parity plan
 
+2026-10-22,SPEC-0061:firmware-neutral [PC window session](pc-window-session-evidence.md) implemented and hosted/compiler verified. It joins shared window input/controller receipts/presentation;not boot-bound. Next:opt-in UEFI arena/trace binding. Mac M1-M7 and paired release qualification persist.
+
 2026-10-22,SPEC-0060:isolated PC [Mono1/row presentation bridge](pc-mono-present-evidence.md) hosted/compiler verified,not boot-bound. Shared scene/core and Mac/PC release parity unchanged. Next:neutral PC window session;Mac M1-M7 remain independent prerequisites.
 
 2026-10-22,SPEC-0059/ADR-0068: [PC window boot-binding behavior](../specifications/SPEC-0059-pc-window-boot-binding.md) finalized,32 planned TEST-0070 cases unexecuted. No binding/code/build/trial yet;first proposed implementation is the RAM Mono1/one-row PC presentation bridge. Mac M1-M7 closure and paired release criteria remain separate.

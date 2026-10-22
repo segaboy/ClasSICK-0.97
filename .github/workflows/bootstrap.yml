@@ -47,6 +47,8 @@ jobs:
 
       - name: Audit isolated monochrome presentation objects
         run: .\scripts\Verify-MonoPresentObjects.ps1 -BuildRoot build\mono-present-objects
+      - name: Audit firmware-neutral window session objects
+        run: .\scripts\Verify-WindowSessionObjects.ps1 -BuildRoot build\window-session-objects
       - name: Native outline width, endian and EFI-ABI object twins
         shell: pwsh
         run: .\scripts\Verify-OutlineObjects.ps1 -BuildRoot build\outline-verification

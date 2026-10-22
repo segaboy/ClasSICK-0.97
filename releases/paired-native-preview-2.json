@@ -225,5 +225,18 @@
     "local_defective_controls_rejected": 3,
     "evidence": "docs/development/pc-mono-present-evidence.json",
     "source_revision": "4f44d3ba162a307067a1ca5f5be73807158e38a5"
+  },
+  "pc_window_session": {
+    "specification": "SPEC-0061",
+    "implementation": "IMPL-0063",
+    "tests": "TEST-0072",
+    "implemented": true,
+    "isolated": true,
+    "boot_bound": false,
+    "local_final_profile_ctests": 329,
+    "object_audits": 10,
+    "local_defective_controls_rejected": 4,
+    "evidence": "docs/development/pc-window-session-evidence.json",
+    "source_revision": null
   }
 }

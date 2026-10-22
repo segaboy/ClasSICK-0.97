@@ -1,0 +1,593 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-22",
+  "baseline": "b46876d18f0ed70eb62df256445cd310bb1c8a06",
+  "sources": [
+    "SRC-0353",
+    "SRC-0354",
+    "SRC-0355"
+  ],
+  "specification": "SPEC-0061",
+  "decision": "ADR-0070",
+  "implementation": "IMPL-0063",
+  "tests": "TEST-0072",
+  "classification": "original-native-PC-session;E1-only",
+  "status": "locally-verified;CI-pending",
+  "verification": {
+    "tests": {
+      "clang64": {
+        "ctests": 323,
+        "session_checks": [
+          {
+            "mode": "normal",
+            "cases": 30,
+            "checks": 257,
+            "complete_presentations": 11,
+            "failures": 0,
+            "native_session_bytes": 984
+          },
+          {
+            "mode": "fault",
+            "cases": 43,
+            "checks": 4000732,
+            "complete_presentations": 36,
+            "failures": 0,
+            "native_session_bytes": 984
+          }
+        ]
+      },
+      "sanitized": {
+        "ctests": 3,
+        "session_checks": [
+          {
+            "mode": "normal",
+            "cases": 30,
+            "checks": 257,
+            "complete_presentations": 11,
+            "failures": 0,
+            "native_session_bytes": 984
+          },
+          {
+            "mode": "fault",
+            "cases": 43,
+            "checks": 4000732,
+            "complete_presentations": 36,
+            "failures": 0,
+            "native_session_bytes": 984
+          }
+        ]
+      },
+      "gcc32": {
+        "ctests": 3,
+        "session_checks": [
+          {
+            "mode": "normal",
+            "cases": 29,
+            "checks": 254,
+            "complete_presentations": 11,
+            "failures": 0,
+            "native_session_bytes": 888
+          },
+          {
+            "mode": "fault",
+            "cases": 42,
+            "checks": 4000729,
+            "complete_presentations": 36,
+            "failures": 0,
+            "native_session_bytes": 888
+          }
+        ]
+      }
+    },
+    "object_audits": {
+      "whole_stack_budget_certified": false,
+      "target_run": false,
+      "specification": "SPEC-0061",
+      "object_audits": [
+        {
+          "profile": "clang-32-O0",
+          "object_bytes": 5697
+        },
+        {
+          "profile": "clang-32-O2",
+          "object_bytes": 4516
+        },
+        {
+          "profile": "clang-64-O0",
+          "object_bytes": 6424
+        },
+        {
+          "profile": "clang-64-O2",
+          "object_bytes": 4583
+        },
+        {
+          "profile": "gcc-32-O0",
+          "object_bytes": 5061
+        },
+        {
+          "profile": "gcc-32-O2",
+          "object_bytes": 4896
+        },
+        {
+          "profile": "gcc-64-O0",
+          "object_bytes": 5797
+        },
+        {
+          "profile": "gcc-64-O2",
+          "object_bytes": 5055
+        },
+        {
+          "profile": "aarch64-none-elf",
+          "object_bytes": 4672
+        },
+        {
+          "profile": "aarch64_be-none-elf",
+          "object_bytes": 5672
+        }
+      ]
+    },
+    "stack_usage": {
+      "aarch64-none-elf": [
+        {
+          "function": "cs_pc_window_session_start",
+          "bytes": 128,
+          "kind": "static"
+        },
+        {
+          "function": "cs_pc_window_session_poll",
+          "bytes": 64,
+          "kind": "static"
+        },
+        {
+          "function": "cs_pc_window_session_stop",
+          "bytes": 0,
+          "kind": "static"
+        }
+      ],
+      "aarch64_be-none-elf": [
+        {
+          "function": "cs_pc_window_session_start",
+          "bytes": 144,
+          "kind": "static"
+        },
+        {
+          "function": "cs_pc_window_session_poll",
+          "bytes": 64,
+          "kind": "static"
+        },
+        {
+          "function": "cs_pc_window_session_stop",
+          "bytes": 0,
+          "kind": "static"
+        }
+      ],
+      "clang-32-O0": [
+        {
+          "function": "cs_pc_window_session_start",
+          "bytes": 132,
+          "kind": "static"
+        },
+        {
+          "function": "pws_preflight",
+          "bytes": 132,
+          "kind": "static"
+        },
+        {
+          "function": "pws_clear",
+          "bytes": 4,
+          "kind": "static"
+        },
+        {
+          "function": "pws_fail",
+          "bytes": 4,
+          "kind": "static"
+        },
+        {
+          "function": "cs_pc_window_session_poll",
+          "bytes": 100,
+          "kind": "static"
+        },
+        {
+          "function": "pws_inc",
+          "bytes": 8,
+          "kind": "static"
+        },
+        {
+          "function": "cs_pc_window_session_stop",
+          "bytes": 8,
+          "kind": "static"
+        },
+        {
+          "function": "pws_span",
+          "bytes": 8,
+          "kind": "static"
+        },
+        {
+          "function": "pws_overlap",
+          "bytes": 8,
+          "kind": "static"
+        }
+      ],
+      "clang-32-O2": [
+        {
+          "function": "cs_pc_window_session_start",
+          "bytes": 112,
+          "kind": "static"
+        },
+        {
+          "function": "cs_pc_window_session_poll",
+          "bytes": 36,
+          "kind": "static"
+        },
+        {
+          "function": "cs_pc_window_session_stop",
+          "bytes": 0,
+          "kind": "static"
+        }
+      ],
+      "clang-64-O0": [
+        {
+          "function": "cs_pc_window_session_start",
+          "bytes": 168,
+          "kind": "static"
+        },
+        {
+          "function": "pws_preflight",
+          "bytes": 216,
+          "kind": "static"
+        },
+        {
+          "function": "pws_clear",
+          "bytes": 8,
+          "kind": "static"
+        },
+        {
+          "function": "pws_fail",
+          "bytes": 24,
+          "kind": "static"
+        },
+        {
+          "function": "cs_pc_window_session_poll",
+          "bytes": 120,
+          "kind": "static"
+        },
+        {
+          "function": "pws_inc",
+          "bytes": 8,
+          "kind": "static"
+        },
+        {
+          "function": "cs_pc_window_session_stop",
+          "bytes": 16,
+          "kind": "static"
+        },
+        {
+          "function": "pws_span",
+          "bytes": 24,
+          "kind": "static"
+        },
+        {
+          "function": "pws_overlap",
+          "bytes": 40,
+          "kind": "static"
+        }
+      ],
+      "clang-64-O2": [
+        {
+          "function": "cs_pc_window_session_start",
+          "bytes": 248,
+          "kind": "static"
+        },
+        {
+          "function": "cs_pc_window_session_poll",
+          "bytes": 104,
+          "kind": "static"
+        },
+        {
+          "function": "cs_pc_window_session_stop",
+          "bytes": 0,
+          "kind": "static"
+        }
+      ],
+      "gcc-32-O0": [
+        {
+          "function": "pws_inc",
+          "bytes": 8,
+          "kind": "static"
+        },
+        {
+          "function": "pws_span",
+          "bytes": 8,
+          "kind": "static"
+        },
+        {
+          "function": "pws_overlap",
+          "bytes": 8,
+          "kind": "static"
+        },
+        {
+          "function": "pws_preflight",
+          "bytes": 128,
+          "kind": "static"
+        },
+        {
+          "function": "pws_fail",
+          "bytes": 8,
+          "kind": "static"
+        },
+        {
+          "function": "pws_clear",
+          "bytes": 8,
+          "kind": "static"
+        },
+        {
+          "function": "cs_pc_window_session_start",
+          "bytes": 112,
+          "kind": "static"
+        },
+        {
+          "function": "cs_pc_window_session_poll",
+          "bytes": 88,
+          "kind": "static"
+        },
+        {
+          "function": "cs_pc_window_session_stop",
+          "bytes": 8,
+          "kind": "static"
+        }
+      ],
+      "gcc-32-O2": [
+        {
+          "function": "cs_pc_window_session_start",
+          "bytes": 288,
+          "kind": "static"
+        },
+        {
+          "function": "cs_pc_window_session_poll",
+          "bytes": 64,
+          "kind": "static"
+        },
+        {
+          "function": "cs_pc_window_session_stop",
+          "bytes": 8,
+          "kind": "static"
+        }
+      ],
+      "gcc-64-O0": [
+        {
+          "function": "pws_inc",
+          "bytes": 16,
+          "kind": "static"
+        },
+        {
+          "function": "pws_span",
+          "bytes": 16,
+          "kind": "static"
+        },
+        {
+          "function": "pws_overlap",
+          "bytes": 16,
+          "kind": "static"
+        },
+        {
+          "function": "pws_preflight",
+          "bytes": 224,
+          "kind": "static"
+        },
+        {
+          "function": "pws_fail",
+          "bytes": 16,
+          "kind": "static"
+        },
+        {
+          "function": "pws_clear",
+          "bytes": 16,
+          "kind": "static"
+        },
+        {
+          "function": "cs_pc_window_session_start",
+          "bytes": 160,
+          "kind": "static"
+        },
+        {
+          "function": "cs_pc_window_session_poll",
+          "bytes": 112,
+          "kind": "static"
+        },
+        {
+          "function": "cs_pc_window_session_stop",
+          "bytes": 16,
+          "kind": "static"
+        }
+      ],
+      "gcc-64-O2": [
+        {
+          "function": "cs_pc_window_session_start",
+          "bytes": 464,
+          "kind": "static"
+        },
+        {
+          "function": "cs_pc_window_session_poll",
+          "bytes": 112,
+          "kind": "static"
+        },
+        {
+          "function": "cs_pc_window_session_stop",
+          "bytes": 8,
+          "kind": "static"
+        }
+      ]
+    },
+    "defective_controls": [
+      {
+        "name": "stale-start-receipt",
+        "compiled": true,
+        "rejected": true,
+        "exit_code": 1,
+        "harness": "same assertions with fail-fast exit;prevents deliberately broken loop from doing1000000 presentations"
+      },
+      {
+        "name": "none-fabricates-publication",
+        "compiled": true,
+        "rejected": true,
+        "exit_code": 1,
+        "harness": "same assertions with fail-fast exit;prevents deliberately broken loop from doing1000000 presentations"
+      },
+      {
+        "name": "accepted-unchanged-skips-publication",
+        "compiled": true,
+        "rejected": true,
+        "exit_code": 1,
+        "harness": "same assertions with fail-fast exit;prevents deliberately broken loop from doing1000000 presentations"
+      },
+      {
+        "name": "exclusive-endpoint-wrap",
+        "compiled": true,
+        "rejected": true,
+        "exit_code": 1,
+        "harness": "same assertions with fail-fast exit;prevents deliberately broken loop from doing1000000 presentations"
+      }
+    ],
+    "unmodified_fail_fast_control_passed": true,
+    "worker": {
+      "execution": {
+        "round": "code",
+        "worker": "claude",
+        "exit_code": null,
+        "outer_timeout": true,
+        "elapsed_seconds": 420.09,
+        "input_bytes": 34035,
+        "input_sha256": "362ffa0ea9eeeff3a7e108ac12e259b2070e98b9b1c19950a0b57170b92d1e00",
+        "stderr_bytes": 0
+      },
+      "event_types": {
+        "system": 252,
+        "stream_event": 2365,
+        "assistant": 1
+      },
+      "observed_tools": [],
+      "observed_models": [
+        "claude-opus-5-5"
+      ],
+      "complete_result_or_handoff": false,
+      "complete_usage_or_cost": null,
+      "backend_cancellation_proven": false,
+      "salvaged_production_lines": 272,
+      "salvaged_partial_test_lines": 375,
+      "requested_combined_line_cap": 600,
+      "returned_partial_lines": 647,
+      "worker_tests_executed": [],
+      "new_calls": 1,
+      "retries": 0
+    },
+    "input_manifest": {
+      "worker": "claude",
+      "bytes": 34035,
+      "lines": 690,
+      "sha256": "362ffa0ea9eeeff3a7e108ac12e259b2070e98b9b1c19950a0b57170b92d1e00",
+      "inputs": [
+        {
+          "path": "docs/specifications/SPEC-0061-pc-window-session.md",
+          "sha256": "05e4d27a6a115b42767c65f4dd72f0f8a454d123a665faa3ce9ba78c805feef7"
+        },
+        {
+          "path": "platform/pc/window-session.h",
+          "sha256": "2219eef76f805af841d8b162ad21b4f49642e8b26d83839ac65171bc0938922d"
+        },
+        {
+          "path": "platform/pc/mono-present.h",
+          "sha256": "e04bf0a60e32484c5ee49d10a3c3052788ae524599b955c60702cd4a0307aa0e"
+        },
+        {
+          "path": "platform/pc/window-input.h",
+          "sha256": "b3e7b9e109b39fee2d186414d1710fb4384b347a1e5c1ff76548ffc1bd5493ca"
+        },
+        {
+          "path": "platform/pc/ps2-bus.h",
+          "sha256": "422c27a92d7323791cec451d534d8a0127d46a938e5b641a7c81caa2d4c9c8d9"
+        },
+        {
+          "path": "platform/pc/ps2.h",
+          "sha256": "79a4b9f0c6c0cff7ab67bc4b47a2041673ea483f35f17c5c04304e611909000f"
+        },
+        {
+          "path": "platform/pc/ps2-mouse.h",
+          "sha256": "13a3006a516eb4d51c61e08b6d5b3601f4291fc9dc7d6e2be13f527fcaaacbc9"
+        },
+        {
+          "path": "core/input/input.h",
+          "sha256": "7cc26488f542677dd2f7882a7a440925816acf9ee225867508b19feb26ef4cb8"
+        },
+        {
+          "path": "apps/window-scene/input.h",
+          "sha256": "33899a80efee4acfa83a7aaeb8e1509fa7ce3d47436b67ddc20629ebd0d35011"
+        },
+        {
+          "path": "apps/window-scene/scene.h",
+          "sha256": "f7e608eb507b3d5fe4af2720263b55c894454946f4637124c391b2eaaeca9982"
+        },
+        {
+          "path": "core/graphics/cursor.h",
+          "sha256": "0ffc237d90b9b58ab26752223a73710e0cad4b0a24d53fd0ac0cfe08c42818d7"
+        },
+        {
+          "path": "core/graphics/surface.h",
+          "sha256": "31de605b79282fac7f4208e28aab328662df975a03028ac16fe179672d6dc264"
+        },
+        {
+          "path": "core/input/pointer.h",
+          "sha256": "d0a53cdadbe728195ce2c35bc4ef0b2a1687351912c759eda1bf6b4c38abdc38"
+        },
+        {
+          "path": "core/input/mouse.h",
+          "sha256": "d41c122f62933d83af8ad8015ca0f2b35298860bca80faa1dae0cd8705e8c542"
+        },
+        {
+          "path": "core/ui/window.h",
+          "sha256": "0a964c1801facd731c58abf3e88fdb96d39c3cd38bbf473bba4f879852a8b1a2"
+        },
+        {
+          "path": "apps/product-scene/scene.h",
+          "sha256": "7d5b50af59be3e25a67837d7183d0fa50afd36b9f0b3aaf1a1fb1ddea772ccf0"
+        },
+        {
+          "path": "platform/pc/framebuffer.h",
+          "sha256": "3abdaf4d591fc79135dc6e4021dda496855a9efca1272725f8370a6517ca68d9"
+        },
+        {
+          "path": "apps/product-scene/scene.h",
+          "sha256": "7d5b50af59be3e25a67837d7183d0fa50afd36b9f0b3aaf1a1fb1ddea772ccf0"
+        }
+      ]
+    },
+    "frozen_inputs_unchanged": true,
+    "primary_test_independence": false,
+    "new_boot_binding": false,
+    "target_trials": [],
+    "whole_stack_or_128K_certified": false
+  },
+  "ci": {
+    "status": "pending",
+    "source_revision": null,
+    "url": null
+  },
+  "integration_changes": [
+    "exclusive nonwrapping endpoint preflight",
+    "transparent plus mask rather than white box",
+    "conditional payload capacity check for GCC32",
+    "finish truncated tests and main",
+    "explicit quiescent cursor abandonment between fixtures",
+    "real controller byte-to-window drag/keyboard/loss integration test",
+    "cursor bits and pre-effect endpoint checks",
+    "terminal byte snapshots and retained device-prefix check",
+    "clock cause0 annotation after frozen dispatch"
+  ],
+  "primary_tests_independent": false,
+  "native_window_session_implemented": true,
+  "boot_inputs_changed": false,
+  "target_trials": [],
+  "releases_changed": false,
+  "whole_stack_or_128K_certified": false,
+  "remaining_external_allowances": "unavailable;no fresh complete snapshots",
+  "net_codex_savings_measured": false
+}

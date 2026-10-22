@@ -161,3 +161,6 @@ implementation, fixture, test execution, build, target run or release occurred.
 
 
 2026-10-22 SPEC-0060 leaf complete: [isolated PC monochrome row bridge](../docs/development/pc-mono-present-evidence.md) verifies fixed-canvas presentation and partial-row diagnostics with326 final local CTests,10 audits and3 compiled negative controls. No native window session/boot binding or new target evidence;TEST-0070 full cases stay unexecuted. Mac source/budget/paired qualification and all prior limits persist.
+
+
+2026-10-22 SPEC-0061 leaf complete: [firmware-neutral PC window session](../docs/development/pc-window-session-evidence.md),329 profile CTests/10 audits/4 compiled defects verified. Current boot images remain unchanged;the UEFI window binding/trace and Mac boot work remain. TEST-0070 full cases stay planned. No target trial or release waiver.
