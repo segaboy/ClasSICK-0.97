@@ -90,3 +90,9 @@ The selected5170 6MHz/640KiB/EGA and provisional20MB fully installed hard-disk
 product goal persists;Word edition,fit,speed and full application support remain
 unqualified. No system-floppy packaging promise. Existing paired release order,
 source/native-app/edition/physical/128K/B2,trial and publication gates persist.
+
+Follow-up2026-10-23: [IMPL-0070 delta](cpu-c16-evidence.md) adds isolated
+C99 assert/chunk/flag/guest-offset helpers.9 final pinned calls,6 helper-free own
+objects,3 deliberately false assertion refusals; no repeated old matrix, link
+or target execution. General alignment query, memory model and segmented views
+remain unresolved. [Surface proof](c16-surface-width-proof.md), TEST-0083.

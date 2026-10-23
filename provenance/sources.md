@@ -4038,3 +4038,44 @@ tooling.344 local profile checks,12 object audits and3 compiled faulty variants
 verified;source-pinned CI recorded separately when observed. No actual CPU mask,
 SCC/MMIO/ISR/latency/full128K/target/release claim. Prior compiler facts remain
 dated,not new286 tests. Shared semantic/native performance and all gates retained.
+
+## SRC-0394 - Owner continuation and fresh-worker disposition
+
+2026-10-23. Continue paired release work with bounded286 progress. After an
+unrelated compiler-documentation example appeared in an excerpt, owner explicitly
+admits a fresh unexposed worker using reviewed interface facts only. Prior
+implementation/target/release/source/role gates remain. No excluded code reused.
+
+## SRC-0395 - Published Motorola supervisor and interrupt interfaces
+
+Motorola1992 M68000 Family Programmer's Reference Manual,1.3.2/Fig1-8,
+4-125,6-19..20,6-27; [publisher](https://www.nxp.com/docs/en/reference-manual/M68000PRM.pdf).
+Reuses SRC-0097 with these additional interfaces. Motorola1993 M68000 User's
+Manual6.3.2/6-12..13 [publisher](https://www.nxp.com/docs/en/reference-manual/MC68000UM.pdf).
+Web-parsed646/189-page copies,2026-10-23; no local hash/visual-review claim.
+Narrow SR snapshot/replacement, privileged OR and interrupt mask/level7 facts.
+No manual samples/equates/code adopted; not historical OS or board equivalence.
+
+## SRC-0396 - Published GCC compiler ordering interface and exclusion
+
+[GNU Extended Asm documentation](https://gcc.gnu.org/onlinedocs/gcc/Extended-Asm.html),
+Volatile and cc/memory clobber prose, accessed2026-10-23. Compiler ordering
+interface only, not a CPU fence/concurrency proof. An unrelated example in an
+excerpt was excluded. Owner disposition SRC-0394; fresh worker gets only an
+original reviewed summary. No example bytes or algorithms reused or transferred.
+
+## SRC-0397 - Fresh Claude original exclusion proposal
+
+One supervised fresh Opus5.5 low session,104.66s,276 artifact lines and522
+contract words, zero tools/writes/tests/retry. Only frozen original/reviewed-public
+inputs,11924 bytes/117 lines. Original callbacks/contract/compiler audit adopted
+with lead parser/clobber/timeout corrections. Worker statements are proposals.
+No manual, sample, HQ, research original, credential or UART input supplied.
+
+## SRC-0398 - Lead C16 facade, integration and verification
+
+Original C99 assertion/chunk/flag/numeric-offset facade, optional pinned compile
+delta, host controls and surface-span algebra. Current production core unchanged.
+IMPL-0069/0070,TEST-0082/0083. [Evidence](../docs/development/cpu-c16-evidence.md)
+separates actual host/compile checks from unexecuted target/ISR/ABI/fit claims.
+Normal source-pinned CI pending at the implementation checkpoint.

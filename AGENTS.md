@@ -1,5 +1,14 @@
 # ClasSICK 0.97 working instructions
 
+2026-10-23,SRC-0394..0398/ADR-0079/SPEC-0068/IMPL-0069/0070/TEST-0082/0083:
+isolated supervisor exclusion callbacks (no ISR/MMIO/boot binding), plus C16
+assert/chunk/flag/guest-offset facade.343 final local profiles; WCC delta9 calls/
+6 helper-free objects/3 intentional refusals, no target run; native CI pending.
+Owner admits fresh worker after excluded compiler example; one fresh Claude
+primary, lead direct small286 delta. General alignment/segmented views and all
+M1-M7/compatibility gates remain. Preserve24 originals/held brief/UART/old rows/
+assets/tags/retired wiki. [Checkpoint](docs/development/cpu-c16-evidence.md).
+
 2026-10-23,SRC-0390..0393/ADR-0078:owner requires paired releasePRIMARY with
 bounded286 progress alongside. SPEC-0066/IMPL-0068 foreground coordinator joins
 inbox/capture through abstract short exclusion,unmasked owner calls;344 local

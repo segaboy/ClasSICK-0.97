@@ -165,6 +165,14 @@ jobs:
         with:
           name: classick-foreground-build
           path: ${{ runner.temp }}/classick-foreground/manifest.json
+      - name: Audit isolated MC68000 short-exclusion callbacks (unbound)
+        run: python3 scripts/Verify-M68kExclusion.py --tool-root "$RUNNER_TEMP/classick-m68k/root" --output "$RUNNER_TEMP/classick-m68k-exclusion"
+      - name: Retain MC68000 exclusion compiler manifest
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
+        with:
+          name: classick-m68k-exclusion
+          path: ${{ runner.temp }}/classick-m68k-exclusion/manifest.json
+          if-no-files-found: error
       - name: Retain inbox compiler manifest
         uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
         with:

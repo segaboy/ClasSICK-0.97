@@ -1,0 +1,382 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-23",
+  "baseline": "2b086efa5014eab38af8ba05af36c3cc56266ee6",
+  "sources": [
+    "SRC-0394",
+    "SRC-0395",
+    "SRC-0396",
+    "SRC-0397",
+    "SRC-0398"
+  ],
+  "scope": "isolated MC68000 exclusion callbacks and C16 facade; neither boot-bound",
+  "code_input_sha256": {
+    "arch/m68k/exclusion.h": "40cdee62139cfd310233b67c69ea8dbd565c3866e09419451b61b7c7adef3e08",
+    "arch/m68k/exclusion.c": "8f481960aa2792bfc18a090ad849f529ff9e4c1bf6083e6374c460a8316b4ac7",
+    "arch/i286/c16.h": "0d7634a598aa92a0971f8e1bcf55b63df0f3820cb78d4f7817641b27544a3920",
+    "scripts/Verify-M68kExclusion.py": "a232d12067e3ef9966e59bf81638c3bdeaf0fd806f9b52d90eaeb0fb5398d2a8",
+    "scripts/Probe-PC286C16.py": "ebae4c26ae684b50b6a30dbb4cd65022e2dfaa0c0a05e0434052bb872c1da3a6",
+    "probes/pc286/c16.c": "abb80f5c9b9a4f45f456abbcb4971b0cabe55bb9951d1ae887aa5fef2d28c1d2",
+    "tests/c16-facade.c": "14daeb6ba16cfa402beea4225c1ecbafa100651539f27b792ee7052cd1438531",
+    "tests/c16-width-proof.py": "52804e152dc5e4dc4a3809b61e161884d74bf5689165aa327d7b790d1cb90300",
+    "tests/m68k-exclusion-audit.py": "dce3cb64b812a2099771eabf8ad3b40b99df9e65c7e1ca69ac3647ae0256c4ff",
+    "CMakeLists.txt": "bbb7f04cb46c4c437f067a91265ec9f601d3cf70360158c80d770f577b799a32",
+    ".github/workflows/bootstrap.yml": "d21d0401fbe6a2939e9e41f36007901e06025f4ac4da5938b559b3ed8aa55f4f"
+  },
+  "local_checks": {
+    "full_clang_debug_ctests": 341,
+    "additional_c16_gcc_release": 1,
+    "additional_c16_clang_sanitized": 1,
+    "profile_checks_total": 343,
+    "c16_host_assertions_per_profile": 77,
+    "audit_unittest_methods": 9,
+    "SR_model_states": 256,
+    "surface_width_boundary_combinations": 22176,
+    "non_m68k_expected_compile_refusal": 1,
+    "runtime_privileged_callbacks_executed": false,
+    "independence": "lead controls after primary read; not author-blind"
+  },
+  "c16": {
+    "compiler_pin": "2026-10-01-Build",
+    "final_compiler_calls": 9,
+    "final_objects": 6,
+    "final_expected_assert_refusals": 3,
+    "preliminary_harness_calls": 3,
+    "preliminary_harness_issue": "WCC names the source line and E1020, not the typedef; corrected recognizer",
+    "rows": [
+      {
+        "case": "ms-od",
+        "model": "ms",
+        "exit_code": 0,
+        "expected_success": true,
+        "target_executed": false,
+        "object_bytes": 721,
+        "object_sha256": "8a2d091b3a5fd68385df485d8977b780f0a3ed52c245dd923d1abb36f110fe60",
+        "external_symbols": [],
+        "compiler_metadata_80286": true,
+        "segments": [
+          [
+            "_TEXT",
+            "16",
+            "0000014A"
+          ],
+          [
+            "CONST",
+            "16",
+            "00000000"
+          ],
+          [
+            "CONST2",
+            "16",
+            "00000000"
+          ],
+          [
+            "_DATA",
+            "16",
+            "00000000"
+          ]
+        ]
+      },
+      {
+        "case": "ms-os",
+        "model": "ms",
+        "exit_code": 0,
+        "expected_success": true,
+        "target_executed": false,
+        "object_bytes": 457,
+        "object_sha256": "14c208ba7747959f2ae84d90168f936f337720cf9411baf222f9f0772f673aed",
+        "external_symbols": [],
+        "compiler_metadata_80286": true,
+        "segments": [
+          [
+            "_TEXT",
+            "16",
+            "00000049"
+          ],
+          [
+            "CONST",
+            "16",
+            "00000000"
+          ],
+          [
+            "CONST2",
+            "16",
+            "00000000"
+          ],
+          [
+            "_DATA",
+            "16",
+            "00000000"
+          ]
+        ]
+      },
+      {
+        "case": "ms-os-false-assert",
+        "model": "ms",
+        "exit_code": 1,
+        "expected_success": false,
+        "target_executed": false
+      },
+      {
+        "case": "mm-od",
+        "model": "mm",
+        "exit_code": 0,
+        "expected_success": true,
+        "target_executed": false,
+        "object_bytes": 724,
+        "object_sha256": "34e63169dc10646543566120dc4d4de75daf8dba54683f275ae542839fb4dba3",
+        "external_symbols": [],
+        "compiler_metadata_80286": true,
+        "segments": [
+          [
+            "c16_TEXT",
+            "16",
+            "0000014A"
+          ],
+          [
+            "CONST",
+            "16",
+            "00000000"
+          ],
+          [
+            "CONST2",
+            "16",
+            "00000000"
+          ],
+          [
+            "_DATA",
+            "16",
+            "00000000"
+          ]
+        ]
+      },
+      {
+        "case": "mm-os",
+        "model": "mm",
+        "exit_code": 0,
+        "expected_success": true,
+        "target_executed": false,
+        "object_bytes": 460,
+        "object_sha256": "92d8f7e02e6ba0f4b9a6de14cf8d1ef01f7334302f0549534fb6444397de4b15",
+        "external_symbols": [],
+        "compiler_metadata_80286": true,
+        "segments": [
+          [
+            "c16_TEXT",
+            "16",
+            "00000049"
+          ],
+          [
+            "CONST",
+            "16",
+            "00000000"
+          ],
+          [
+            "CONST2",
+            "16",
+            "00000000"
+          ],
+          [
+            "_DATA",
+            "16",
+            "00000000"
+          ]
+        ]
+      },
+      {
+        "case": "mm-os-false-assert",
+        "model": "mm",
+        "exit_code": 1,
+        "expected_success": false,
+        "target_executed": false
+      },
+      {
+        "case": "ml-od",
+        "model": "ml",
+        "exit_code": 0,
+        "expected_success": true,
+        "target_executed": false,
+        "object_bytes": 743,
+        "object_sha256": "3e0999656dba6940196ec275e7f1048b0990ff979e961d30b8bc39e9a2858bb8",
+        "external_symbols": [],
+        "compiler_metadata_80286": true,
+        "segments": [
+          [
+            "c16_TEXT",
+            "16",
+            "0000015D"
+          ],
+          [
+            "CONST",
+            "16",
+            "00000000"
+          ],
+          [
+            "CONST2",
+            "16",
+            "00000000"
+          ],
+          [
+            "_DATA",
+            "16",
+            "00000000"
+          ]
+        ]
+      },
+      {
+        "case": "ml-os",
+        "model": "ml",
+        "exit_code": 0,
+        "expected_success": true,
+        "target_executed": false,
+        "object_bytes": 466,
+        "object_sha256": "fa88c98585c7b1ccabf4f4feb60261d28da964cea3ce8cb9164350fce767dc6b",
+        "external_symbols": [],
+        "compiler_metadata_80286": true,
+        "segments": [
+          [
+            "c16_TEXT",
+            "16",
+            "0000004F"
+          ],
+          [
+            "CONST",
+            "16",
+            "00000000"
+          ],
+          [
+            "CONST2",
+            "16",
+            "00000000"
+          ],
+          [
+            "_DATA",
+            "16",
+            "00000000"
+          ]
+        ]
+      },
+      {
+        "case": "ml-os-false-assert",
+        "model": "ml",
+        "exit_code": 1,
+        "expected_success": false,
+        "target_executed": false
+      }
+    ],
+    "inputs": {
+      "arch/i286/c16.h": "0d7634a598aa92a0971f8e1bcf55b63df0f3820cb78d4f7817641b27544a3920",
+      "probes/pc286/c16.c": "abb80f5c9b9a4f45f456abbcb4971b0cabe55bb9951d1ae887aa5fef2d28c1d2"
+    },
+    "linked": false,
+    "target_executed": false,
+    "memory_model_frozen": false,
+    "general_C_alignment_query": "not implemented or admitted",
+    "segmented_backend": "unimplemented"
+  },
+  "native_CI": {
+    "status": "pending",
+    "source_revision": null,
+    "run_url": null
+  },
+  "worker": {
+    "execution": {
+      "round": "main",
+      "worker": "claude",
+      "exit_code": 0,
+      "outer_timeout": false,
+      "elapsed_seconds": 104.66,
+      "input_bytes": 11924,
+      "input_sha256": "e0dcf232abc6bbdee73d5af22fdb7e6a109d7bb4cea5ab334caf4bcb9bc4e1ba",
+      "stderr_bytes": 0
+    },
+    "artifact_lines": 276,
+    "contract_words": 522,
+    "observed_tools": [],
+    "handoff": {
+      "result": "Wrote isolated C callbacks for enter (one asm block: MOVE SR,Dn then ORI #0x700,SR) and leave (MOVE Dn,SR), plus the contract and audit script. Nothing was compiled, run or tested here.",
+      "actionable_findings": [
+        "Run the audit in normal CI with the GCC13 m68k tools; check the objdump syntax it gets (movew/oriw, #1792).",
+        "parse() and check() can be called directly for synthetic negative tests."
+      ],
+      "tests_executed": [],
+      "blockers": [
+        "No m68k compiler on this workstation, so the 6 compiles, sizes and frames are unverified."
+      ],
+      "decisions_needed": [
+        "How the future levels 1..6 producer enters, returns and saves registers (still UNADMITTED).",
+        "Who owns the later ISR contract for an interrupt taken just before the mask."
+      ]
+    },
+    "usage": {
+      "total_cost_usd": 0.2924904,
+      "num_turns": 1,
+      "modelUsage": {
+        "claude-opus-5-5": {
+          "inputTokens": 2,
+          "outputTokens": 12150,
+          "cacheReadInputTokens": 1452,
+          "cacheCreationInputTokens": 6149,
+          "webSearchRequests": 0,
+          "costUSD": 0.2924904,
+          "contextWindow": 1000000,
+          "maxOutputTokens": 128000,
+          "thinkingTokens": 6197,
+          "canonicalModel": "claude-opus-5-5",
+          "provider": "firstParty",
+          "costBasis": "list"
+        }
+      }
+    }
+  },
+  "service_remaining_allowances": {
+    "claude": "unverified",
+    "grok": "unverified",
+    "copilot": "unverified",
+    "antigravity": "unverified"
+  },
+  "source_review": {
+    "PRM": {
+      "url": "https://www.nxp.com/docs/en/reference-manual/M68000PRM.pdf",
+      "edition": "Motorola1992",
+      "PDF_pages": 646,
+      "locators": [
+        "1.3.2/Fig1-8",
+        "4-125",
+        "6-19..20",
+        "6-27"
+      ]
+    },
+    "UM": {
+      "url": "https://www.nxp.com/docs/en/reference-manual/MC68000UM.pdf",
+      "edition": "Motorola1993",
+      "PDF_pages": 189,
+      "locators": [
+        "6.3.2,6-12..13"
+      ]
+    },
+    "GCC": {
+      "url": "https://gcc.gnu.org/onlinedocs/gcc/Extended-Asm.html",
+      "locators": [
+        "Volatile",
+        "Clobbers and Scratch Registers:cc,memory"
+      ]
+    },
+    "visual_review": "web screenshots unavailable to image inspection; direct publisher PDF retrieval refused; prose/web parsing only, no local PDF identity claim",
+    "exposure_disposition": "Unrelated GCC documentation example excluded; affected lane stopped; owner explicitly admits fresh unexposed worker from reviewed interface facts only; one fresh session, no example/manual transferred"
+  },
+  "limits": [
+    "No ISR/SCC/VIA/vector/RTE/ROM/EFI binding or target execution",
+    "No level7/fault/DMA exclusion or whole-stack/128K/latency proof",
+    "No C16 production core patch, far-pointer access, ABI choice or compiler helper admission",
+    "All M1-M7,edition/native-app/physical/B2/GUI/human/CWP1/BIOS/Linux/System1-ROM gates retained"
+  ],
+  "preservation": [
+    "24 untracked research originals",
+    "held native-outline brief",
+    "UART bodies",
+    "old records/assets/tags",
+    "retired wiki"
+  ],
+  "raw_workspace": "C:/ClasSICK/cpu-c16-20261023-a"
+}

@@ -355,3 +355,14 @@ phase and C16 span/shift corrections,integration and344 actual profile checks/
 permission reused correctly;no sandbox DNS retry. Reported$0.4192408/$0.02194564
 list/session cost not balance/net Codex saving;Copilot/Argon idle,all balances
 unverified. [Plan](release-and-pc286-plan.md),[evidence](window-foreground-evidence.md).
+
+## Fresh CPU primary and direct C16 delta -2026-10-23
+
+One fresh Claude Opus5.5 low session from reviewed interface facts only follows
+the owner's explicit exposure disposition.276 original artifact lines adopted;
+lead tightens parser/clobber controls and handles the small independent C16
+delta directly. No second provider or renewed qualification. Raw captures stay
+outside Git; the worker makes zero tools/writes/tests/retry. Extra trailing JSON
+brace corrected during packaging. [Actual scope/results](cpu-c16-evidence.md).
+Continue protecting Codex effort: avoid duplicating this adopted code or the old
+WCC matrix; no claimed provider-token equivalence or live balance.

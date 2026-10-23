@@ -55,6 +55,7 @@ if(CMAKE_SIZEOF_VOID_P EQUAL 8 AND CMAKE_SYSTEM_PROCESSOR MATCHES "^(AMD64|amd64
     list(APPEND CLASSICK_BUS_OBJECTS classick_native_preview_freestanding)
     list(APPEND CLASSICK_BUS_TESTS classick_native_preview_tests classick_native_preview_legacy_control)
 endif()
+
 foreach(target ${CLASSICK_BUS_LIBS} ${CLASSICK_BUS_OBJECTS} ${CLASSICK_BUS_TESTS})
     if(CMAKE_C_COMPILER_ID MATCHES "Clang|GNU")
         target_compile_options(${target} PRIVATE -Wall -Wextra -Wpedantic -Werror -Wconversion -Wsign-conversion
@@ -2399,4 +2400,20 @@ if(BUILD_TESTING)
             "-DALLOWED=cs_inbox_begin,cs_inbox_claim,cs_inbox_complete,cs_inbox_discard,cs_inbox_fault,cs_inbox_restart,cs_inbox_resume,cs_inbox_stop,cs_capture_begin,cs_capture_drain,cs_capture_push,cs_capture_rebaseline,cs_capture_restart,cs_capture_stop,cs_capture_uncertain"
             "-DOBJECT=$<TARGET_OBJECTS:classick_window_foreground_freestanding>" -P ${CMAKE_SOURCE_DIR}/scripts/Check-ObjectImports.cmake)
     endif()
+endif()
+
+# SPEC-0067: isolated C99 facade checks; production targets retain C11.
+add_executable(classick_c16_facade_tests tests/c16-facade.c)
+set_target_properties(classick_c16_facade_tests PROPERTIES C_STANDARD 99 C_STANDARD_REQUIRED ON)
+if(CMAKE_C_COMPILER_ID MATCHES "Clang|GNU")
+    target_compile_options(classick_c16_facade_tests PRIVATE -Wall -Wextra -Wpedantic -Werror -Wconversion -Wsign-conversion)
+endif()
+if(CLASSICK_SURFACE_SANITIZERS)
+    target_compile_options(classick_c16_facade_tests PRIVATE -fsanitize=address,undefined -fno-sanitize-recover=all -fno-omit-frame-pointer)
+    target_link_options(classick_c16_facade_tests PRIVATE -fsanitize=address,undefined)
+endif()
+if(BUILD_TESTING)
+    add_test(NAME c16.facade COMMAND classick_c16_facade_tests)
+    add_test(NAME c16.width-proof COMMAND ${Python3_EXECUTABLE} -B ${CMAKE_SOURCE_DIR}/tests/c16-width-proof.py)
+    add_test(NAME m68k-exclusion.audit-controls COMMAND ${Python3_EXECUTABLE} -B ${CMAKE_SOURCE_DIR}/tests/m68k-exclusion-audit.py)
 endif()
