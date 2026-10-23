@@ -3,7 +3,9 @@
 2026-10-23,SRC-0390..0393/ADR-0078:owner requires paired releasePRIMARY with
 bounded286 progress alongside. SPEC-0066/IMPL-0068 foreground coordinator joins
 inbox/capture through abstract short exclusion,unmasked owner calls;344 local
-profile checks/12 audits/3 compiled defects pass,Windows/68000 CI pending. No CPU/
+profile checks/12 audits/3 compiled defects pass; Windows/68000 CI passes at b079f20.
+68000 compiler results: 90 objects/six closures, 40-byte descriptor and 72-byte
+largest coordinator function frame. No target execution or full-stack fit claim. No CPU/
 SCC/boot binding or target/release permission. SPEC-0067 C16 policy adopted,
 8 TEST-0081 cases UNEXECUTED,prior compiler facts reused. One Claude primary,
 one Grok distinct286 gap,no other fan-out. Preserve24 originals/held brief/UART/

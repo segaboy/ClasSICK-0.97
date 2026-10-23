@@ -10,8 +10,10 @@ owner oracles predate reading primary;later metadata/cancel-time/begin-fault cas
 added and final independence qualified. Raw-byte snapshots avoid padding copies.
 Three compiled mutants(owner under exclusion,completion erases loss,stop not
 terminal)reject;valid control passes.12 width/endian/EFI-ABI audits/import allowlist,
-no mutable globals,matching delayed twins,per-function512 bound pass. Actual68000
-closure/size/frame evidence and normal source-pinned CI are pending.
+no mutable globals,matching delayed twins,per-function512 bound pass. The 68000 checks compile
+90 objects and audit six closures with matching twins: a 40-byte descriptor and
+72-byte largest coordinator function frame. Source-pinned Windows/68000 CI passes.
+Exact input hashes were checked; no target was executed.
 
 Cases verified in software:baseline/no duplicatecancel,PRIMING staging,one ordered
 sample,loss during delivery/baseline/cancel,helper mismatch beforeclaim,first fault

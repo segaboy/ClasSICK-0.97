@@ -12,7 +12,7 @@
     "specification": "SPEC-0066",
     "implementation": "IMPL-0068",
     "tests": "TEST-0080",
-    "status": "isolated-software-verified-local;nativeCI-pending",
+    "status": "isolated-software-and-native-compiler-verified",
     "profile_CTests": {
       "clang": 338,
       "gcc-release": 3,
@@ -75,10 +75,1604 @@
       "begin cancellation fault"
     ],
     "native_CI": {
-      "status": "pending",
-      "source_revision": null,
-      "run_url": null,
-      "manifest": null
+      "status": "success",
+      "source_revision": "b079f206bac985b877e60316e9e9b8a9dd7fe5a3",
+      "run_url": "https://github.com/segaboy/ClasSICK-0.97/actions/runs/39979294484",
+      "manifest": {
+        "helper_largest_frame": 72,
+        "descriptor_bound_bytes": 128,
+        "descriptor_bytes": 40,
+        "specifications": [
+          "SPEC-0066"
+        ],
+        "cpu": "68000",
+        "inputs": {
+          "apps/window-scene/capture.c": "1620f9cd72fab3159965a7f41d6192756981e774dc67cb05b90da37a9480f58e",
+          "tests/window-foreground-layout.c": "6c54024d662051324ff098a37aa55670d54f4c9da5b1905a978158030ecb62c7",
+          "apps/window-scene/input.c": "2b10f8c6de9349e41a02d3138abd8bb04a83b0d7eb8cc646c627a0e5d2a44b19",
+          "apps/window-scene/scene.c": "bc3f8ac625bd782d368709cf915a94bbd7f9a6c4dd810197a11ae157363afa3f",
+          "apps/product-scene/scene.c": "7488910c401285b1e211d3c6eb95a17f04683748ffa8fc2dba4e2659725872d2",
+          "core/graphics/cursor.c": "c239ef42783ffaa446c59f7ba630b5b1cd78c95444449fa63b983f4c3bb98fe5",
+          "core/graphics/surface.c": "157ed442c0278a344b57cb0e08657c30273de2a62199d72a30b38e5ee7ea1c5c",
+          "core/input/pointer.c": "d38b4b131f44a3ce8bf8019cdef8aa4e56e3d5c09f0bc9b154fd1f8ff920afa7",
+          "core/input/mouse.c": "fad65173ea1421fd02affc4fea7a52720fba515e849e9c3159c35eeeab18eb8d",
+          "core/ui/window.c": "ddec6ccab8bf5148240d6269bf33374180ac60406b4ab50558809ff3e53aa18a",
+          "arch/m68k/runtime.c": "1e3fa635a12a6ac91b30f25fdf19c493b84493dcecc4ce7e4dcc298c3412d078",
+          "arch/m68k/composition-runtime.c": "a5fd0811ca98811ea7f45e3a2dfa95f42f6bf5298fadb37ad8bc5ebdbac55720",
+          "tests/window-input-layout.c": "b9fa95810862ccb3d619ff770b4bbf6d0f1c7ea8888315c668f28dbbf57ed1f2",
+          "apps/window-scene/inbox.c": "24939209ed957f9c6c796b60eeee518cfacdd7d0c9ed1d43cfba216fc60db8f4",
+          "apps/window-scene/foreground.c": "ee7eb178e437ada21190317c492bb593e667f24a0e21ef2f225ee5479adce2b7",
+          "apps/window-scene/capture.h": "bac5f1bd614ecacc90fe9110ce3046bf257e06fd99b770c0b38dd6e00bef8cf7",
+          "apps/window-scene/input.h": "33899a80efee4acfa83a7aaeb8e1509fa7ce3d47436b67ddc20629ebd0d35011",
+          "apps/window-scene/scene.h": "f7e608eb507b3d5fe4af2720263b55c894454946f4637124c391b2eaaeca9982",
+          "apps/product-scene/scene.h": "7d5b50af59be3e25a67837d7183d0fa50afd36b9f0b3aaf1a1fb1ddea772ccf0",
+          "core/ui/window.h": "0a964c1801facd731c58abf3e88fdb96d39c3cd38bbf473bba4f879852a8b1a2",
+          "core/input/pointer.h": "d0a53cdadbe728195ce2c35bc4ef0b2a1687351912c759eda1bf6b4c38abdc38",
+          "core/input/mouse.h": "d41c122f62933d83af8ad8015ca0f2b35298860bca80faa1dae0cd8705e8c542",
+          "core/graphics/cursor.h": "0ffc237d90b9b58ab26752223a73710e0cad4b0a24d53fd0ac0cfe08c42818d7",
+          "core/graphics/surface.h": "31de605b79282fac7f4208e28aab328662df975a03028ac16fe179672d6dc264",
+          "arch/m68k/runtime.h": "8b0de7d191dbcb43576a32c88e604f7c3145ac094af5137cc128381a0ff074e8",
+          "apps/window-scene/foreground.h": "4b38bf1c6f0a40cf4e89d7b3a624be2088dc191dedc7e4f151b1826ccbbc969c",
+          "apps/window-scene/inbox.h": "2bebf4901506814c270c4612b9170ad0dce2da58a037fa4e187f8a748bc3fa90"
+        },
+        "object_compilations": 90,
+        "closure_audits": 6,
+        "undefined_imports": 0,
+        "mutable_data": 0,
+        "records": [
+          {
+            "optimization": "O0",
+            "twins_equal": true,
+            "descriptor_bytes": 40,
+            "closure": {
+              "bytes": 38612,
+              "sha256": "ee944e590e6b4b8ce595ca86435eaa165364cccf212712eb4e011e5766c3fb1c"
+            },
+            "static_frames": [
+              {
+                "function": "inbox_valid",
+                "bytes": 12,
+                "kind": "static"
+              },
+              {
+                "function": "inbox_unavailable",
+                "bytes": 0,
+                "kind": "static"
+              },
+              {
+                "function": "inbox_sat",
+                "bytes": 0,
+                "kind": "static"
+              },
+              {
+                "function": "inbox_reset",
+                "bytes": 0,
+                "kind": "static"
+              },
+              {
+                "function": "inbox_enter_loss",
+                "bytes": 4,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cs_inbox_begin",
+                "bytes": 8,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cs_inbox_restart",
+                "bytes": 12,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cs_inbox_baseline",
+                "bytes": 12,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cs_inbox_push",
+                "bytes": 16,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cs_inbox_uncertain",
+                "bytes": 16,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cs_inbox_claim",
+                "bytes": 20,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cs_inbox_complete",
+                "bytes": 20,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cs_inbox_discard",
+                "bytes": 12,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cs_inbox_resume",
+                "bytes": 12,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cs_inbox_fault",
+                "bytes": 12,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cs_inbox_stop",
+                "bytes": 12,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "span",
+                "bytes": 0,
+                "kind": "static"
+              },
+              {
+                "function": "overlap",
+                "bytes": 0,
+                "kind": "static"
+              },
+              {
+                "function": "geometry",
+                "bytes": 0,
+                "kind": "static"
+              },
+              {
+                "function": "canonical",
+                "bytes": 28,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "event_valid",
+                "bytes": 8,
+                "kind": "static"
+              },
+              {
+                "function": "clamp",
+                "bytes": 0,
+                "kind": "static"
+              },
+              {
+                "function": "cs_window_begin",
+                "bytes": 28,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cs_window_apply",
+                "bytes": 40,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "__modsi3",
+                "bytes": 20,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "validate",
+                "bytes": 36,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cs_surface_init",
+                "bytes": 28,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cs_surface_fill",
+                "bytes": 64,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cs_surface_clear",
+                "bytes": 40,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cs_mouse_button_begin",
+                "bytes": 0,
+                "kind": "static"
+              },
+              {
+                "function": "cs_mouse_button_sample",
+                "bytes": 0,
+                "kind": "static"
+              },
+              {
+                "function": "cs_cap_owner_ok",
+                "bytes": 0,
+                "kind": "static"
+              },
+              {
+                "function": "cs_cap_saturate",
+                "bytes": 0,
+                "kind": "static"
+              },
+              {
+                "function": "cs_cap_owner_ready",
+                "bytes": 0,
+                "kind": "static"
+              },
+              {
+                "function": "cs_cap_disjoint",
+                "bytes": 16,
+                "kind": "static"
+              },
+              {
+                "function": "cs_cap_note",
+                "bytes": 8,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cs_cap_check",
+                "bytes": 0,
+                "kind": "static"
+              },
+              {
+                "function": "cs_cap_gated",
+                "bytes": 0,
+                "kind": "static"
+              },
+              {
+                "function": "cs_cap_start",
+                "bytes": 16,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cs_capture_begin",
+                "bytes": 12,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cs_capture_restart",
+                "bytes": 20,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cs_cap_lose",
+                "bytes": 4,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cs_capture_push",
+                "bytes": 16,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cs_capture_uncertain",
+                "bytes": 12,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cs_capture_drain",
+                "bytes": 20,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cs_capture_rebaseline",
+                "bytes": 16,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cs_capture_stop",
+                "bytes": 20,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cur_spans_init",
+                "bytes": 0,
+                "kind": "static"
+              },
+              {
+                "function": "span_add",
+                "bytes": 16,
+                "kind": "static"
+              },
+              {
+                "function": "cur_min",
+                "bytes": 0,
+                "kind": "static"
+              },
+              {
+                "function": "cur_max",
+                "bytes": 0,
+                "kind": "static"
+              },
+              {
+                "function": "cur_origin",
+                "bytes": 0,
+                "kind": "static"
+              },
+              {
+                "function": "cur_required",
+                "bytes": 0,
+                "kind": "static"
+              },
+              {
+                "function": "cur_state_ok",
+                "bytes": 44,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cur_surface_ok",
+                "bytes": 20,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cur_clear",
+                "bytes": 0,
+                "kind": "static"
+              },
+              {
+                "function": "cur_zero_save",
+                "bytes": 0,
+                "kind": "static"
+              },
+              {
+                "function": "cur_put_rect",
+                "bytes": 0,
+                "kind": "static"
+              },
+              {
+                "function": "cur_gate",
+                "bytes": 8,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cur_art_ok",
+                "bytes": 32,
+                "kind": "static"
+              },
+              {
+                "function": "cur_prepare",
+                "bytes": 20,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cur_bits_in",
+                "bytes": 16,
+                "kind": "static"
+              },
+              {
+                "function": "cur_restore",
+                "bytes": 48,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cur_save_draw",
+                "bytes": 92,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cs_cursor_init",
+                "bytes": 64,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cs_cursor_bind",
+                "bytes": 68,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cs_cursor_show",
+                "bytes": 72,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cs_cursor_move",
+                "bytes": 72,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cs_cursor_hide",
+                "bytes": 72,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cs_cursor_advance",
+                "bytes": 68,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cs_cursor_discard",
+                "bytes": 68,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cs_cursor_repaired",
+                "bytes": 68,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cs_cursor_unbind",
+                "bytes": 68,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cs_cursor_abandon",
+                "bytes": 64,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cs_cursor_query",
+                "bytes": 64,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "mk",
+                "bytes": 8,
+                "kind": "static"
+              },
+              {
+                "function": "bad",
+                "bytes": 0,
+                "kind": "static"
+              },
+              {
+                "function": "hit",
+                "bytes": 0,
+                "kind": "static"
+              },
+              {
+                "function": "mn",
+                "bytes": 0,
+                "kind": "static"
+              },
+              {
+                "function": "mx",
+                "bytes": 0,
+                "kind": "static"
+              },
+              {
+                "function": "win_ok",
+                "bytes": 0,
+                "kind": "static"
+              },
+              {
+                "function": "art_ok",
+                "bytes": 20,
+                "kind": "static"
+              },
+              {
+                "function": "eff",
+                "bytes": 0,
+                "kind": "static"
+              },
+              {
+                "function": "rect",
+                "bytes": 44,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "draw_window",
+                "bytes": 60,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cs_window_scene_compose",
+                "bytes": 328,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "fill",
+                "bytes": 84,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "glyph",
+                "bytes": 44,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "number",
+                "bytes": 32,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "validate",
+                "bytes": 40,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "setup",
+                "bytes": 0,
+                "kind": "static"
+              },
+              {
+                "function": "cs_product_scene",
+                "bytes": 136,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cs_product_scene_input",
+                "bytes": 72,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cs_fg_enter",
+                "bytes": 4,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cs_fg_leave",
+                "bytes": 8,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cs_fg_owner_ready",
+                "bytes": 0,
+                "kind": "static"
+              },
+              {
+                "function": "cs_fg_stage",
+                "bytes": 0,
+                "kind": "static"
+              },
+              {
+                "function": "cs_fg_note",
+                "bytes": 0,
+                "kind": "static"
+              },
+              {
+                "function": "cs_fg_raw",
+                "bytes": 0,
+                "kind": "static"
+              },
+              {
+                "function": "cs_fg_fail",
+                "bytes": 16,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cs_fg_check",
+                "bytes": 0,
+                "kind": "static"
+              },
+              {
+                "function": "cs_foreground_begin",
+                "bytes": 24,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cs_fg_loss",
+                "bytes": 28,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cs_foreground_step",
+                "bytes": 60,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cs_foreground_stop",
+                "bytes": 32,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cs_foreground_restart",
+                "bytes": 28,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "mk",
+                "bytes": 4,
+                "kind": "static"
+              },
+              {
+                "function": "clash",
+                "bytes": 8,
+                "kind": "static"
+              },
+              {
+                "function": "art_ok",
+                "bytes": 20,
+                "kind": "static"
+              },
+              {
+                "function": "graph",
+                "bytes": 196,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "ptr_ok",
+                "bytes": 0,
+                "kind": "static"
+              },
+              {
+                "function": "win_ok",
+                "bytes": 0,
+                "kind": "static"
+              },
+              {
+                "function": "win_eq",
+                "bytes": 0,
+                "kind": "static"
+              },
+              {
+                "function": "win_copy",
+                "bytes": 0,
+                "kind": "static"
+              },
+              {
+                "function": "cq",
+                "bytes": 8,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "ready",
+                "bytes": 72,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "render",
+                "bytes": 72,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "logic",
+                "bytes": 36,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "finish",
+                "bytes": 12,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cs_window_input_begin",
+                "bytes": 144,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cs_window_input_sample",
+                "bytes": 60,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cs_window_input_cancel",
+                "bytes": 32,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cs_window_input_repair",
+                "bytes": 92,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "__mulsi3",
+                "bytes": 4,
+                "kind": "static"
+              },
+              {
+                "function": "divide",
+                "bytes": 20,
+                "kind": "static"
+              },
+              {
+                "function": "__udivsi3",
+                "bytes": 16,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "__umodsi3",
+                "bytes": 16,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "__divsi3",
+                "bytes": 32,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "memcpy",
+                "bytes": 12,
+                "kind": "static"
+              },
+              {
+                "function": "ptr_span",
+                "bytes": 4,
+                "kind": "static"
+              },
+              {
+                "function": "ptr_disjoint",
+                "bytes": 0,
+                "kind": "static"
+              },
+              {
+                "function": "ptr_state_ok",
+                "bytes": 0,
+                "kind": "static"
+              },
+              {
+                "function": "ptr_axis",
+                "bytes": 0,
+                "kind": "static"
+              },
+              {
+                "function": "cs_pointer_begin",
+                "bytes": 24,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cs_pointer_sample_apply",
+                "bytes": 80,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cs_pointer_cancel",
+                "bytes": 36,
+                "kind": "dynamic,bounded"
+              }
+            ],
+            "largest_frame": 328
+          },
+          {
+            "optimization": "O2",
+            "twins_equal": true,
+            "descriptor_bytes": 40,
+            "closure": {
+              "bytes": 30080,
+              "sha256": "bf31cbb93394842508032bd1667e1b6d5c8a59d9b005d47967a0026813f9a36a"
+            },
+            "static_frames": [
+              {
+                "function": "inbox_valid.part.0",
+                "bytes": 12,
+                "kind": "static"
+              },
+              {
+                "function": "cs_inbox_begin",
+                "bytes": 0,
+                "kind": "static"
+              },
+              {
+                "function": "cs_inbox_restart",
+                "bytes": 12,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cs_inbox_baseline",
+                "bytes": 12,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cs_inbox_push",
+                "bytes": 16,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cs_inbox_uncertain",
+                "bytes": 8,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cs_inbox_claim",
+                "bytes": 16,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cs_inbox_complete",
+                "bytes": 12,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cs_inbox_discard",
+                "bytes": 12,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cs_inbox_resume",
+                "bytes": 12,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cs_inbox_fault",
+                "bytes": 8,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cs_inbox_stop",
+                "bytes": 8,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cs_window_begin",
+                "bytes": 16,
+                "kind": "static"
+              },
+              {
+                "function": "cs_window_apply",
+                "bytes": 64,
+                "kind": "static"
+              },
+              {
+                "function": "__modsi3",
+                "bytes": 8,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cs_surface_init",
+                "bytes": 36,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cs_surface_fill",
+                "bytes": 72,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cs_surface_clear",
+                "bytes": 40,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cs_mouse_button_begin",
+                "bytes": 0,
+                "kind": "static"
+              },
+              {
+                "function": "cs_mouse_button_sample",
+                "bytes": 4,
+                "kind": "static"
+              },
+              {
+                "function": "cs_capture_begin",
+                "bytes": 8,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cs_capture_restart",
+                "bytes": 12,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cs_capture_push",
+                "bytes": 8,
+                "kind": "static"
+              },
+              {
+                "function": "cs_capture_uncertain",
+                "bytes": 4,
+                "kind": "static"
+              },
+              {
+                "function": "cs_capture_drain",
+                "bytes": 20,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cs_capture_rebaseline",
+                "bytes": 16,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cs_capture_stop",
+                "bytes": 12,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "span_add",
+                "bytes": 16,
+                "kind": "static"
+              },
+              {
+                "function": "cur_state_ok",
+                "bytes": 48,
+                "kind": "static"
+              },
+              {
+                "function": "cur_surface_ok",
+                "bytes": 12,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cur_prepare",
+                "bytes": 60,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cur_restore",
+                "bytes": 84,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cur_save_draw.isra",
+                "bytes": 84,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cs_cursor_init",
+                "bytes": 0,
+                "kind": "static"
+              },
+              {
+                "function": "cs_cursor_bind",
+                "bytes": 84,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cs_cursor_show",
+                "bytes": 104,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cs_cursor_move",
+                "bytes": 108,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cs_cursor_hide",
+                "bytes": 88,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cs_cursor_advance",
+                "bytes": 80,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cs_cursor_discard",
+                "bytes": 84,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cs_cursor_repaired",
+                "bytes": 96,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cs_cursor_unbind",
+                "bytes": 16,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cs_cursor_abandon",
+                "bytes": 72,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cs_cursor_query",
+                "bytes": 72,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "win_ok",
+                "bytes": 8,
+                "kind": "static"
+              },
+              {
+                "function": "rect",
+                "bytes": 52,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cs_window_scene_compose",
+                "bytes": 296,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "fill",
+                "bytes": 84,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "number",
+                "bytes": 76,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cs_product_scene",
+                "bytes": 204,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cs_product_scene_input",
+                "bytes": 84,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cs_fg_fail",
+                "bytes": 28,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cs_foreground_begin",
+                "bytes": 20,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cs_foreground_step",
+                "bytes": 60,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cs_foreground_stop",
+                "bytes": 36,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cs_foreground_restart",
+                "bytes": 40,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "clash",
+                "bytes": 16,
+                "kind": "static"
+              },
+              {
+                "function": "win_ok",
+                "bytes": 8,
+                "kind": "static"
+              },
+              {
+                "function": "logic",
+                "bytes": 36,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "ptr_ok",
+                "bytes": 4,
+                "kind": "static"
+              },
+              {
+                "function": "graph.constprop",
+                "bytes": 204,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "ready",
+                "bytes": 72,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "render",
+                "bytes": 56,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cs_window_input_begin",
+                "bytes": 168,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cs_window_input_sample",
+                "bytes": 40,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cs_window_input_cancel",
+                "bytes": 36,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cs_window_input_repair",
+                "bytes": 92,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "__mulsi3",
+                "bytes": 0,
+                "kind": "static"
+              },
+              {
+                "function": "__udivsi3",
+                "bytes": 24,
+                "kind": "static"
+              },
+              {
+                "function": "__umodsi3",
+                "bytes": 16,
+                "kind": "static"
+              },
+              {
+                "function": "__divsi3",
+                "bytes": 24,
+                "kind": "static"
+              },
+              {
+                "function": "memcpy",
+                "bytes": 4,
+                "kind": "static"
+              },
+              {
+                "function": "ptr_state_ok",
+                "bytes": 4,
+                "kind": "static"
+              },
+              {
+                "function": "cs_pointer_begin",
+                "bytes": 0,
+                "kind": "static"
+              },
+              {
+                "function": "cs_pointer_sample_apply",
+                "bytes": 44,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cs_pointer_cancel",
+                "bytes": 12,
+                "kind": "dynamic,bounded"
+              }
+            ],
+            "largest_frame": 296
+          },
+          {
+            "optimization": "Os",
+            "twins_equal": true,
+            "descriptor_bytes": 40,
+            "closure": {
+              "bytes": 25352,
+              "sha256": "cb877a862ebc983d8eebee1f78009171a184e97e58a361c1492c7c031b99ef3f"
+            },
+            "static_frames": [
+              {
+                "function": "inbox_unavailable",
+                "bytes": 0,
+                "kind": "static"
+              },
+              {
+                "function": "inbox_valid",
+                "bytes": 12,
+                "kind": "static"
+              },
+              {
+                "function": "cs_inbox_begin",
+                "bytes": 0,
+                "kind": "static"
+              },
+              {
+                "function": "cs_inbox_restart",
+                "bytes": 20,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cs_inbox_baseline",
+                "bytes": 24,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cs_inbox_push",
+                "bytes": 36,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cs_inbox_uncertain",
+                "bytes": 20,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cs_inbox_claim",
+                "bytes": 20,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cs_inbox_complete",
+                "bytes": 24,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cs_inbox_discard",
+                "bytes": 20,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cs_inbox_resume",
+                "bytes": 20,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cs_inbox_fault",
+                "bytes": 20,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cs_inbox_stop",
+                "bytes": 16,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "geometry",
+                "bytes": 8,
+                "kind": "static"
+              },
+              {
+                "function": "cs_window_begin",
+                "bytes": 44,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cs_window_apply",
+                "bytes": 76,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "__modsi3",
+                "bytes": 16,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "validate",
+                "bytes": 28,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cs_surface_init",
+                "bytes": 52,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cs_surface_fill",
+                "bytes": 84,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cs_surface_clear",
+                "bytes": 44,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cs_mouse_button_begin",
+                "bytes": 0,
+                "kind": "static"
+              },
+              {
+                "function": "cs_mouse_button_sample",
+                "bytes": 4,
+                "kind": "static"
+              },
+              {
+                "function": "cs_cap_note",
+                "bytes": 4,
+                "kind": "static"
+              },
+              {
+                "function": "cs_cap_check",
+                "bytes": 4,
+                "kind": "static"
+              },
+              {
+                "function": "cs_capture_begin",
+                "bytes": 20,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cs_capture_restart",
+                "bytes": 32,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cs_capture_push",
+                "bytes": 20,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cs_capture_uncertain",
+                "bytes": 12,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cs_capture_drain",
+                "bytes": 28,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cs_capture_rebaseline",
+                "bytes": 32,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cs_capture_stop",
+                "bytes": 20,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "span_add",
+                "bytes": 16,
+                "kind": "static"
+              },
+              {
+                "function": "cur_state_ok",
+                "bytes": 48,
+                "kind": "static"
+              },
+              {
+                "function": "cur_surface_ok",
+                "bytes": 12,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cur_gate",
+                "bytes": 16,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cur_prepare",
+                "bytes": 60,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cur_restore",
+                "bytes": 88,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cur_save_draw",
+                "bytes": 84,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cs_cursor_init",
+                "bytes": 68,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cs_cursor_bind",
+                "bytes": 100,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cs_cursor_show",
+                "bytes": 96,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cs_cursor_move",
+                "bytes": 96,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cs_cursor_hide",
+                "bytes": 80,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cs_cursor_advance",
+                "bytes": 84,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cs_cursor_discard",
+                "bytes": 80,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cs_cursor_repaired",
+                "bytes": 96,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cs_cursor_unbind",
+                "bytes": 68,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cs_cursor_abandon",
+                "bytes": 80,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cs_cursor_query",
+                "bytes": 80,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "win_ok",
+                "bytes": 8,
+                "kind": "static"
+              },
+              {
+                "function": "rect",
+                "bytes": 52,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cs_window_scene_compose",
+                "bytes": 284,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "validate",
+                "bytes": 36,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "fill",
+                "bytes": 84,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "glyph",
+                "bytes": 56,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "number",
+                "bytes": 60,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cs_product_scene",
+                "bytes": 192,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cs_product_scene_input",
+                "bytes": 76,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cs_fg_enter",
+                "bytes": 0,
+                "kind": "static"
+              },
+              {
+                "function": "cs_fg_leave",
+                "bytes": 0,
+                "kind": "static"
+              },
+              {
+                "function": "cs_fg_note",
+                "bytes": 0,
+                "kind": "static"
+              },
+              {
+                "function": "cs_fg_check",
+                "bytes": 0,
+                "kind": "static"
+              },
+              {
+                "function": "cs_fg_fail",
+                "bytes": 28,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cs_foreground_begin",
+                "bytes": 28,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cs_foreground_step",
+                "bytes": 72,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cs_foreground_stop",
+                "bytes": 52,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cs_foreground_restart",
+                "bytes": 44,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "mk",
+                "bytes": 4,
+                "kind": "static"
+              },
+              {
+                "function": "clash",
+                "bytes": 12,
+                "kind": "static"
+              },
+              {
+                "function": "win_ok",
+                "bytes": 8,
+                "kind": "static"
+              },
+              {
+                "function": "render",
+                "bytes": 56,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "logic",
+                "bytes": 36,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "ptr_ok",
+                "bytes": 4,
+                "kind": "static"
+              },
+              {
+                "function": "graph.constprop",
+                "bytes": 212,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "ready",
+                "bytes": 84,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cs_window_input_begin",
+                "bytes": 180,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cs_window_input_sample",
+                "bytes": 76,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cs_window_input_cancel",
+                "bytes": 44,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cs_window_input_repair",
+                "bytes": 112,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "divide",
+                "bytes": 20,
+                "kind": "static"
+              },
+              {
+                "function": "__mulsi3",
+                "bytes": 0,
+                "kind": "static"
+              },
+              {
+                "function": "__udivsi3",
+                "bytes": 16,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "__umodsi3",
+                "bytes": 16,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "__divsi3",
+                "bytes": 24,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "memcpy",
+                "bytes": 0,
+                "kind": "static"
+              },
+              {
+                "function": "ptr_state_ok",
+                "bytes": 4,
+                "kind": "static"
+              },
+              {
+                "function": "cs_pointer_begin",
+                "bytes": 0,
+                "kind": "static"
+              },
+              {
+                "function": "cs_pointer_sample_apply",
+                "bytes": 48,
+                "kind": "dynamic,bounded"
+              },
+              {
+                "function": "cs_pointer_cancel",
+                "bytes": 12,
+                "kind": "dynamic,bounded"
+              }
+            ],
+            "largest_frame": 284
+          }
+        ],
+        "stack_note": "Per-function compiler frames include ABI costs; not whole-system stack certification.",
+        "target_executed": false,
+        "rom_inputs_changed": false
+      },
+      "code_input_hashes_unchanged": true,
+      "target_executed": false
     },
     "target_executed": false,
     "boot_bound": false,

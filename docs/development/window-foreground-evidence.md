@@ -20,7 +20,13 @@ Real owner verifies pointer/window clamp reversal,drag/loss and held-release
 suppression. Three compiled defective variants are rejected,valid control passes.
 12 width/endian/EFI-ABI object audits pass with the exact inbox/capture import
 allowlist,no mutable globals,delayed EFI-ABI twins and per-function512-byte bound.
-Source-pinned Windows/68000 CI is pending;no native size/frame result yet.
+Source-pinned [Windows/68000 CI](https://github.com/segaboy/ClasSICK-0.97/actions/runs/39979294484) passes at `b079f206bac985b877e60316e9e9b8a9dd7fe5a3`.
+The 68000 checks compile 90 objects and audit six closures, with matching
+O0/O2/Os twins, no unresolved imports and no mutable globals. The coordinator
+descriptor is 40 bytes; its largest reported function frame is 72 bytes. All
+input hashes match the normalized local code and header bytes. No target was
+executed. These compiler results do not establish whole-system 128K fit or
+combined foreground and interrupt stack use. This follow-up changes no tested code.
 
 The initial API-only oracle and adapted prior real-owner oracle were frozen
 before reading primary code. Later integration extends cases;final suite is not
