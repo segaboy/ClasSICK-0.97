@@ -7,15 +7,15 @@
 #include "../../core/services/traps.h"
 
 /* SPEC-0072 opt-in native window entry. The SCC MMIO profile below is an
- * ENGINEERING HYPOTHESIS, not a published exact-port claim: lowest aliases of
+ * ENGINEERING HYPOTHESIS, not a published exact-port claim: upper aliases of
  * the published 128K SCC read (even) and write (odd) windows. A/B select on
  * address bit 1 and D/C on bit 2 are inferred and UNVERIFIED. Only control
  * ports are used. The motion core readback gate (both marker writes before
  * both reads) stays the alias detector; failure is a terminal fault. */
-#define CS_MAC_SCC_READ_B  UINT32_C(0x900000)
-#define CS_MAC_SCC_READ_A  UINT32_C(0x900002)
-#define CS_MAC_SCC_WRITE_B UINT32_C(0xB00001)
-#define CS_MAC_SCC_WRITE_A UINT32_C(0xB00003)
+#define CS_MAC_SCC_READ_B  UINT32_C(0x9FFFF8)
+#define CS_MAC_SCC_READ_A  UINT32_C(0x9FFFFA)
+#define CS_MAC_SCC_WRITE_B UINT32_C(0xBFFFF9)
+#define CS_MAC_SCC_WRITE_A UINT32_C(0xBFFFFB)
 #define CS_MAC_VIA         UINT32_C(0xEFE1FE)
 #ifndef CLASSICK_MAC_DCD_INVERT
 #define CLASSICK_MAC_DCD_INVERT 0 /* raw RR0 DCD sense UNVERIFIED */

@@ -59,11 +59,17 @@ autovectors0x19/1A/1B, locations0x64/68/6C. Later publication is hardware
 interface evidence, not proof of January1984 OS behavior.
 
 Exact SCC channel/control offsets and raw DCD voltage sense remain unverified.
-An original lowest-alias hypothesis within the published read/write windows
-may be tested with our ROM: readB900000/readA900002; writeB B00001/writeA
-B00003. This is an explicit engineering hypothesis, not a copied equate or
-established physical mapping. Distinct-channel readback must gate arming.
-Own-candidate emulator observations cannot close physical validation.
+The original lowest-alias hypothesis (readB900000/readA900002; writeB B00001/
+writeA B00003) failed in the approved Snow trial: unimplemented-access warnings,
+no input and an own-ROM terminal spin. Keep that candidate as negative evidence.
+The next bounded engineering hypothesis uses the top eight-byte cell of each
+same published window: readB9FFFF8/readA9FFFFA; writeB BFFFF9/writeA BFFFFB.
+It retains the same inferred select bits and read-even/write-odd rule. This is
+an original experimental choice, not a copied equate or established physical
+mapping. No address search, fallback or silent retry occurs in the ROM.
+Distinct-channel readback still gates arming; actual native build and target
+observations are required. Own-candidate emulator observations cannot close
+physical validation. See SRC-0416..0418 and the boot/input follow-up receipt.
 
 Three original GNU veneers raise IPL7 first, save D0-D7/A0-A6, pass source1/2/3,
 restore registers and RTE. Before the first mask instruction higher IRQ can

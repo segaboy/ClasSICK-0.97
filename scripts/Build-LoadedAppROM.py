@@ -205,8 +205,8 @@ def main():
      'inputs':{f:hashlib.sha256((repo/f).read_bytes().replace(b'\r\n',b'\n')).hexdigest() for f in (*sources,*headers)}}
     if a.window_drawing:manifest.update({'window_drawing':True,'native_drawing_context':None,
      'dcd_invert':a.dcd_invert,'dcd_invert_verified':False,'cpu_callbacks':list(cpu_callbacks),
-     'board_profile':{'status':'engineering-hypothesis-unverified','scc_read_b':0x900000,'scc_read_a':0x900002,
-      'scc_write_b':0xB00001,'scc_write_a':0xB00003,'ab_select_bit':1,'dc_select_bit':2,'scc_byte_guard_nops':16},
+     'board_profile':{'status':'engineering-upper-alias-hypothesis-unverified','scc_read_b':0x9FFFF8,'scc_read_a':0x9FFFFA,
+      'scc_write_b':0xBFFFF9,'scc_write_a':0xBFFFFB,'ab_select_bit':1,'dc_select_bit':2,'scc_byte_guard_nops':16},
      'interrupt_stack_margin':stack_margin,
      'proof_limits':['compile/link/seal only','no boot or hardware trial','SCC aliases, DCD sense, pending coherence and physical fit unverified','stack bound is a nonrecursive frame sum plus margin, not measured']})
     (out/'manifest.json').write_text(json.dumps(manifest,indent=2)+'\n')

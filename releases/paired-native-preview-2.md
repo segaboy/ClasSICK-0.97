@@ -1,8 +1,10 @@
 # Paired native preview 2 - first interactive window
 
-Current2026-10-23: native window ROMs compile/verify, PC E2 drag passes,
-E3 GUI drag fails and current Windows GUI access is denied. Mac candidates
-are UNBOOTED. No release freeze/package approval. The original acceptance
+Current2026-10-23 follow-up: the first Mac window scene displays but SCC setup
+refuses the original alias profile; a bounded revised profile awaits native
+verification. PC corrected GUI primary-button click passes; primary-button drag
+is unverified. Desktop access restored; no release freeze/package approval.
+[Boot/input findings](../docs/development/boot-input-followup.md). The original acceptance
 criteria and stop rules below remain; no preview1 waiver is carried forward.
 [Actual current receipt](../docs/development/release2-integration-evidence.json).
 

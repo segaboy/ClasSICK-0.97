@@ -1,0 +1,57 @@
+{
+  "date": "2026-10-23",
+  "source_revision_before_followup": "d617d205f5a66739972ad6ba5b2e07bc91e8403e",
+  "Mac": {
+    "ROM_SHA256": "d1ef824abab8deaacdc1ab10676acb483551559ec724f652dfc9918f478b9f2f",
+    "compiled_source_revision": "ae4ae473507846dc0be84e2d8cc0c69d6854465a",
+    "initial_scene_visible": true,
+    "SCC_preparation_failed": true,
+    "functional_input": false,
+    "register_PC": "0040072C",
+    "register_SR": "2700",
+    "register_D0": "00000006",
+    "warnings": "Unimplemented accesses at own selected SCC aliases; no emulator source inspected",
+    "initial_scene_thresholded_mask_equals_PC": true,
+    "colour_limit": "Snow PNG uses its display palette; comparison thresholds the two monochrome palettes, not RGB byte parity",
+    "launch_limit": "First launch path relative failed; corrected absolute workspace path worked; failed attempts retained",
+    "closed": true
+  },
+  "PC": {
+    "EFI_SHA256": "2ce9b2c1ec39d3e1d0fa1f58aed6ba04cad8639df714d2304098f11ea8734531",
+    "compiled_source_revision": "a045d8bbe5425205b55c4630e2fbf2860d0c9d09",
+    "diagnostic_profile": true,
+    "initial_counter": 0,
+    "secondary_button_drag_counter": 0,
+    "primary_button_click_counter": 1,
+    "LOST_spin_observed": false,
+    "RIP_after_drag": "10008F65",
+    "RIP_after_primary_click": "10007447",
+    "mailbox_decoded": false,
+    "mailbox_gate": "RIP was not in own probe spin; no register payload interpreted",
+    "host_swap_mouse_buttons": 1,
+    "host_setting_changed_for_this_trial": false,
+    "finding": "SKY right-button click activates host primary controls and increments guest left counter; default drag has no button selector",
+    "E3_drag": "unverified; earlier failing attempts did not exercise the primary-button drag",
+    "closed": {
+      "utc": "2026-10-23T22:21:31.6104669Z",
+      "cold_starts": 1,
+      "state": "poweroff",
+      "unregistered": true,
+      "existing_vm_inventory_preserved": true,
+      "running_state_preserved": true,
+      "post_trial_raw_roundtrip_equal": true,
+      "artifacts_retained": true,
+      "semantic_session_stop_observed": false,
+      "termination": "external poweroff from paused state",
+      "close_harness_retry": "first unregister raced the GUI session lock; retried after powered-off verification"
+    }
+  },
+  "runtime_change": "Four Mac alias constants and matching manifest metadata only; next experimental profile unbooted",
+  "limits": [
+    "No E4 human, physical, reference-system or System1 compatibility claim",
+    "No release freeze/publication",
+    "No PC driver policy change from an unmeasured loss hypothesis"
+  ],
+  "workers": "No new worker for bounded GUI observations and four-constant integration; prior code/review qualifications reused",
+  "remaining_AI_usage": "Claude/Grok/Copilot/Antigravity remaining account balances unavailable; no new calls"
+}

@@ -1101,6 +1101,50 @@
         "512x342 unscaled at256,213 inside1024x768; captured PNG bytes unchanged.",
         "Snapshot pauses except the explicitly recorded40-second interval; no performance claim."
       ]
+    },
+    {
+      "id": "2026-10-23-mac-window-first-boot",
+      "path": "docs/evidence/screenshots/2026-10-23/mac-window-first-boot.png",
+      "sha256": "e104371c343ce10d770b9c60317da07362bc457c9140f7100feb2acd1018f087",
+      "bytes": 53539,
+      "width": 512,
+      "height": 342,
+      "captured_on": "2026-10-23",
+      "target": "native-mac68000",
+      "caption": "Original Mac window scene before failed SCC input preparation.",
+      "alt": "Original Mac window scene before failed SCC input preparation.",
+      "source_revision": "ae4ae473507846dc0be84e2d8cc0c69d6854465a",
+      "compiled_source_revision": "ae4ae473507846dc0be84e2d8cc0c69d6854465a",
+      "evidence": "docs/development/boot-input-followup.md",
+      "license": "GPL-3.0-or-later",
+      "rights": "Original ClasSICK framebuffer only; no desktop, emulator chrome, credentials or third-party pixels.",
+      "input": "synthetic",
+      "limitations": [
+        "Boot scene and corrected click evidence only; no successful GUI drag or human/physical/System1 qualification.",
+        "Mac has terminal SCC setup refusal; PC is the explicitly marked diagnostic build."
+      ]
+    },
+    {
+      "id": "2026-10-23-pc-window-primary-button",
+      "path": "docs/evidence/screenshots/2026-10-23/pc-window-primary-button.png",
+      "sha256": "e70f4b632f14c510c9fb3e0fefd11b459b8e6b1ca7694cd1e7233da8e8a4246c",
+      "bytes": 4839,
+      "width": 1024,
+      "height": 768,
+      "captured_on": "2026-10-23",
+      "target": "native-x86_64",
+      "caption": "Native PC diagnostic build accepts the corrected host primary-button click, counter0001.",
+      "alt": "Native PC diagnostic build accepts the corrected host primary-button click, counter0001.",
+      "source_revision": "a045d8bbe5425205b55c4630e2fbf2860d0c9d09",
+      "compiled_source_revision": "a045d8bbe5425205b55c4630e2fbf2860d0c9d09",
+      "evidence": "docs/development/boot-input-followup.md",
+      "license": "GPL-3.0-or-later",
+      "rights": "Original ClasSICK framebuffer only; no desktop, emulator chrome, credentials or third-party pixels.",
+      "input": "synthetic",
+      "limitations": [
+        "Boot scene and corrected click evidence only; no successful GUI drag or human/physical/System1 qualification.",
+        "Mac has terminal SCC setup refusal; PC is the explicitly marked diagnostic build."
+      ]
     }
   ]
 }

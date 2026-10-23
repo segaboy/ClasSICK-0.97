@@ -31,3 +31,11 @@ Full1024x768 frame keeps the unscaled512x342 scene centered. No interpolation.
 [PNG identities](../manifest.json), [GIF identity](../../animations.json),
 [decoded-frame audit](../../../development/native-pc-window-media.json).
 GPL-3.0-or-later. Sessions closed, previous VM inventory/media preserved.
+
+
+Follow-up after desktop access returned (SRC-0416..0418):
+
+- [First Mac native window scene; SCC setup then refuses the unimplemented alias profile.](mac-window-first-boot.png)
+- [Corrected host primary-button command reaches the native PC counter,0001.](pc-window-primary-button.png)
+
+[Follow-up findings and limits](../../../development/boot-input-followup.md).

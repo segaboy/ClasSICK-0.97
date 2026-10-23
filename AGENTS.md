@@ -1,5 +1,13 @@
 # ClasSICK 0.97 working instructions
 
+2026-10-23 follow-up,SRC-0416..0418: desktop trials resumed. Mac default ROM
+draws the shared scene then refuses SCC setup at unimplemented lowest aliases.
+Revised upper-cell alias profile remains an unverified engineering candidate.
+PC diagnostic GUI primary click advances0001 with swapped host button mapping;
+the old default-button drag did not exercise primary dragging. No observed
+LOST spin/mailbox, no PC loss-policy change. Both owned trials closed/media/
+VM inventory preserved. E3 drag/Mac input/release gates remain. [Receipt](docs/development/boot-input-followup.json).
+
 2026-10-23 current checkpoint: native window ROM/compiler audit passes atae4ae47
 (two declared polarity profiles,22500B ROM/964B workspace), both UNBOOTED.
 PC device-control drag passes, automated GUI drag still FAILED. Later Windows

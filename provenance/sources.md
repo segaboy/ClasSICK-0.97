@@ -4209,3 +4209,31 @@ GIF allowance, protected content, GUI/human pass or speed claim. Existing GIF
 is unchanged. Twelve screenshot/four animation methods and strict staged guard
 pass. [Evidence](../docs/development/release2-integration-evidence.json).
 No release freeze/publication; accessible GUI needed for already-approved trials.
+
+
+## SRC-0416 - Owner resumes boot/input qualification
+
+2026-10-23: "The desktop is unlocked now. Continue with the Mac boot/input tests and the PC GUI dragging issue."
+Resumes the existing three-scope original-candidate approval, no publication,
+reference system, hardware or source-boundary expansion.
+[Follow-up](../docs/development/boot-input-followup.md).
+
+## SRC-0417 - Original-candidate black-box boot and button observations
+
+Default ae4ae47 Mac ROM draws the scene but lowest SCC alias setup fails;
+own register PC0040072C/SR2700 and runtime unimplemented-access warnings.
+Optional a045d8b PC probe never enters its LOST spin in the attempted drag.
+Read-only Windows mouse preference equals1; explicit primary-button GUI click
+advances native PC counter0001. Two original PNGs; owned sessions closed,
+PC inventory/media restored. Neither a drag pass nor historical evidence.
+[Exact receipt](../docs/development/boot-input-followup.json).
+
+## SRC-0418 - Lead original bounded SCC profile revision
+
+After the rejected lowest-alias hypothesis, choose the upper eight-byte cell
+of the same published SCC windows (existing SRC-0080 III17/25), retaining
+inferred select bits/read-even/write-odd. Four original constants/manifest
+values only; still an engineering hypothesis, not a copied equate or physical
+mapping. Native compile/own-candidate observation required; no broad probe,
+sample code, held summary or emulator source. SPEC-0072/IMPL-0074/TEST-0087.
+[Follow-up](../docs/development/boot-input-followup.md).
