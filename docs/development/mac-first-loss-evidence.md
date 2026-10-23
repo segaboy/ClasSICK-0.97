@@ -46,3 +46,36 @@ IO order/admission and adding no reads. Three local profiles5750 checks and four
 compiled controls pass again; native rebuild/repeat trial pending. The pre-fault
 [product capture](../evidence/screenshots/2026-10-23/mac-window-first-click.png)
 is indexed with the fault limitation, not promoted to release evidence.
+
+
+## Actual producer loss and bounded recovery change
+
+SRC-0426: efbc62f native CI40040817047 passes; ROMcd96fdbf22980B used,
+300B BSS/964B graph/4976B conservative bound. Matching sources/seal/twins/
+12 controls/three veneers verified. Fresh isolated trial accepts one GUI button
+event, stage16/trap1/presses1/fault0/CRC DA5C6E10. No alignment exception.
+Pointer stays256,171. Producer first-loss at its own known field is UNSTABLE2,
+RR3=9, samples AF4C44/9F4444/AF4C4C, previous01000000, entry READY3.
+The strict rejection is correct for these changing bytes. Foreground copy is
+stillNONE/last-services3519 while direct IRQ counters reach VBL4846/SCC24685.
+Thus foreground diagnostics can be stale even in a paused memory snapshot;
+persistent interrupt delivery preventing foreground recovery is the engineering
+diagnosis. No emulator source or historical/physical claim. Own trial closed.
+
+One isolated unchanged PC image tests Windows Mouse Keys via documented keypad
+selection/hold/release/movement. No confirmed hold or useful movement, counter0;
+initial/final RGB differ in box512,381..768,555, so do not claim unchanged pixels
+or resolve the earlier4x7 difference. Original Flags62/speed80/acceleration3000/
+Right-primary1 restored exactly. VM/media/inventory restored. No PC driver edit,
+second blind attempt or E3 promotion. Product PNGs are indexed, not desktop UI.
+
+SRC-0427: one distinct next primary (Copilot Sonnet5.5 low,67.16s, one packet
+view, zero writes/commands/tests) supplies original loss-quiescence code/tests.
+Master disables once after valid LOSS, allowing foreground discard/resume.
+Unstable WAIT remains gated; stable queued fresh baseline enables master last.
+Initial arm/terminal faults and sample-admission rules remain. Codex fixes two
+expected IO counts for the deliberate added mask write.6295 actual checks/
+32 phase cases, three local profiles and four compiled original broken controls
+pass. New native build/trial pending; no claimed successful recovery or drag.
+Both worker calls report one premium request each; balances unavailable. No
+additional model review, source research, native-app work, release or wiki.

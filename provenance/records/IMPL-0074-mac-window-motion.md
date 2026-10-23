@@ -19,3 +19,6 @@ updated native compilation and own-ROM trials required. No source from emulator.
 
 
 SRC-0424: bounded first-loss observation adopted from Copilot with lead hard-fault separation; no hardware transaction/admission-policy change. [Receipt](../../docs/development/mac-first-loss-evidence.md).
+
+
+SRC-0426/0427: pointer-only snapshots native-boot without alignment fault. Producer identifies unstable sampling; original loss master-gating permits foreground recovery until stable fresh baseline. Local verified, new target pending. [Receipt](../../docs/development/mac-first-loss-evidence.md).

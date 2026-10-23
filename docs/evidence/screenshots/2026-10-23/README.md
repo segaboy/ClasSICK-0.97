@@ -47,3 +47,9 @@ Follow-up after desktop access returned (SRC-0416..0418):
 These show current failed/partial qualification, not a release or successful drag.
 
 - [Mac first accepted GUI button event,0001; later native diagnostic fault, motion not qualified.](mac-window-first-click.png)
+
+- [mac-window-abi-corrected-click](mac-window-abi-corrected-click.png)
+
+- [pc-window-mousekeys-initial](pc-window-mousekeys-initial.png)
+
+- [pc-window-mousekeys-negative](pc-window-mousekeys-negative.png)

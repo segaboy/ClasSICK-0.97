@@ -119,3 +119,18 @@ or admission-policy change. Retain through recovery/stop; fresh prepare clears.
 Unstable WAIT/already-LOSS/hard fault do not create a record. MWP1 v2 appends
 these28B after its unchanged100B prefix; separate diagnostics unchanged. Existing
 192B motion/320B combined bound remains; native sizes/stack must reverify.
+
+
+## Loss quiescence (engineering, SRC-0427)
+
+A valid LOSS transition disables whole-chip SCC master once (WR9=02), retaining
+a quiesced flag. Already-LOSS service does so once for externally originated loss
+without inventing a first-loss record. VIA remains independently available for
+finite service/baseline work while foreground cancel/discard/resume proceeds.
+Keep master off during unstable WAIT. Only a successfully queued stable fresh
+baseline reenables master (WR9=0A) last and clears the flag. Initial arm and
+FAILED/STOPPED refusal remain; no extra sample read or relaxed phase/pending/
+overflow policy. Native sizes/stack and actual recovery must reverify. This
+changes loss interrupt gating deliberately; the prior observation-only slice
+remains separately identified. Compact samples are passed by pointer, avoiding
+the observed odd-address native aggregate copy.

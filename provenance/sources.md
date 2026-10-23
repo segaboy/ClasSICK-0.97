@@ -4294,3 +4294,12 @@ or historical evidence; no worker transfer of this document.
 ## SRC-0425 - Original native alignment counterexample and correction
 
 2026-10-23, original ROM96ae9127/compiled0f0bf6d, one isolated Snow trial after native CI40039752635 and source/seal/twins/12 controls. One GUI button event passes; later own odd-stack aggregate copy causes address error. Own emitted disassembly/black-box log only. Lead changes snapshots to pointer-only passing; local5750 checks/three profiles/four compiled controls pass, new native trial pending. [Receipt](../docs/development/mac-first-loss-evidence.json).
+
+
+## SRC-0426 - Corrected native first-loss and PC input observations
+
+2026-10-23, verified original ROMcd96fdbf/nativeefbc62f reaches stage16/fault0/click0001. Producer reasonUNSTABLE2/RR3=9 with changing three snapshots; stale foreground copy/direct IRQ divergence retained. Bounded unchanged PC MouseKeys attempt negative, exact settings/media/VM inventory restored. [Receipt](../docs/development/mac-first-loss-evidence.json).
+
+## SRC-0427 - Original bounded SCC loss-quiescence artifact
+
+2026-10-23, one67.16s Copilot Sonnet5.5 low original-public proposal, no worker execution/writes. Lead adopts with two test-count corrections;6295 checks/32 phase cases/three local profiles/four compiled faulty controls pass. Engineering interrupt-gating change; native/target pending. [Receipt](../docs/development/mac-first-loss-evidence.json).

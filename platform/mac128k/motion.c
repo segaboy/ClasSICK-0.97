@@ -27,6 +27,14 @@ static int fail(struct cs_mac_motion *m, uint32_t stage, int32_t cause)
     return CS_MAC_MOTION_FAULT;
 }
 
+/* Loss quiesce: master interrupt off once so foreground can recover. */
+static void quiesce(struct cs_mac_motion *m)
+{
+    if (m->quiesced) return;
+    wr(m, CS_MAC_SCC_A, 9u, WR9_NV);
+    m->quiesced = 1u;
+}
+
 static void take(const struct cs_mac_motion *m, snap *s)
 {
     s->pb = m->io.pb(m->io.cookie);
@@ -129,6 +137,7 @@ static int uncertain(struct cs_mac_motion *m, uint32_t reason, uint8_t rr3,
     m->losses = sat(m->losses);
     if (r != CS_INBOX_OK && r != CS_INBOX_LOST)
         return fail(m, CS_MAC_STAGE_INBOX, CS_MAC_CAUSE_INBOX_RESULT);
+    quiesce(m);
     return CS_MAC_MOTION_LOST;
 }
 
@@ -170,6 +179,7 @@ int cs_mac_motion_service(struct cs_mac_motion *m)
     switch (in->phase) {
     case CS_INBOX_LOSS:
         m->have_phase = 0u;
+        quiesce(m);
         return CS_MAC_MOTION_LOST;
     case CS_INBOX_WAIT:
         if (!stable) { m->have_phase = 0u; return CS_MAC_MOTION_EMPTY; }
@@ -180,6 +190,10 @@ int cs_mac_motion_service(struct cs_mac_motion *m)
         m->last_buttons = buttons;
         m->have_phase = 1u;
         m->baselines = sat(m->baselines);
+        if (m->quiesced) { /* stable baseline queued: restore master last */
+            wr(m, CS_MAC_SCC_A, 9u, WR9_MIE_NV);
+            m->quiesced = 0u;
+        }
         return CS_MAC_MOTION_BASELINED;
     case CS_INBOX_READY:
     case CS_INBOX_PRIMING:
@@ -209,6 +223,7 @@ int cs_mac_motion_service(struct cs_mac_motion *m)
     if (r == CS_INBOX_LOST) {
         note(m, CS_MAC_LOSS_OVERFLOW, rr3, &s1, &s2, &s3, entry);
         m->have_phase = 0u;
+        quiesce(m);
         m->losses = sat(m->losses);
         return CS_MAC_MOTION_LOST;
     }

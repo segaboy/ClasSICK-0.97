@@ -118,7 +118,7 @@
   "pc286": "Prior7bb9856 bounded logical-bank qualification retained; no far backend or target run",
   "excluded_inputs_preserved": true,
   "ABI_correction": {
-    "status": "lead pointer-only sample passing, locally reverified; native rebuild pending",
+    "status": "native verified and booted; alignment fault absent; actual unstable sample rejected",
     "MMIO_and_admission": "unchanged",
     "controls": {
       "actual_compiled_controls": [
@@ -157,6 +157,175 @@
       "phase_cases": 32,
       "test_sha256": "498c88979dad83429e1dc74cac59609269d17ed99a0e506dd975481646202a4a"
     },
-    "profiles": "2 CTests each: Clang Debug/GCC Release/Clang ASan-UBSan"
+    "profiles": "2 CTests each: Clang Debug/GCC Release/Clang ASan-UBSan",
+    "trial": {
+      "native": {
+        "source_revision": "efbc62f23bf4c10c635f81f8d4ef2c39dcdcbbe4",
+        "CI_run": 40040817047,
+        "native_job": "success",
+        "SHA256": "cd96fdbf9fdd595e92838b0ab80bdd8fa1567b4e2bd4d5e009e08783f51da127",
+        "ROM_used": 22980,
+        "data_bss": 300,
+        "graph": 964,
+        "stack_bound": 4976,
+        "largest_frame": 284,
+        "symbols": {
+          "cs_mac_trace": 2924,
+          "cs_mac_diag": 3052
+        },
+        "source_hashes": true,
+        "twins": true,
+        "seal": true,
+        "controls": 12,
+        "exact_veneers": 3,
+        "booted": true
+      },
+      "controller_first_loss": {
+        "reason": 2,
+        "rr3": 9,
+        "snapshot1": 11488324,
+        "snapshot2": 10437700,
+        "snapshot3": 11488332,
+        "previous": 16777216,
+        "inbox_phase": 3
+      },
+      "foreground_copy_reason": 0,
+      "diagnostic": {
+        "stage": 16,
+        "ticks": 4846,
+        "presses": 1,
+        "traps": 1,
+        "image_crc": "0xda5c6e10",
+        "fault": 0
+      },
+      "trace": {
+        "VBL": 4846,
+        "SCC": 24685,
+        "services_last_foreground": 3519,
+        "baseline_last_foreground": 1,
+        "losses_last_foreground": 0,
+        "peak_last_foreground": 1,
+        "delivered_last_foreground": 2,
+        "pointer": [
+          256,
+          171
+        ],
+        "window": [
+          80,
+          70
+        ]
+      },
+      "limit": "Paused CPU data; foreground trace can predate producer state. Interrupt starvation is engineering diagnosis, not historical proof.",
+      "closed": true
+    }
+  },
+  "PC_MouseKeys_trial": {
+    "EFI_SHA256": "de02e416fc92bc69fb4e07e41eb8a79a2f1cd00493e12104e1e47dba55e55d0f",
+    "source_revision": "6aa671c4c4934c3fc74937a54a98f26146d2edd3",
+    "UUID": "e42cad58-226e-448e-8860-b2b134211616",
+    "result": "No confirmed MouseKeys hold or movement; counter0, no E3/drag qualification",
+    "attempts": [
+      "MouseKeys On, OnlyWhenNumLockOn unchecked",
+      "KP_Subtract, KP_0, KP_6, KP_Decimal",
+      "KP_Divide, KP_0, KP_Decimal",
+      "Space then ordinary primary click: no confirmed response in this capture state"
+    ],
+    "initial_SHA256": "7bd4dc9c78b1729f5d88da5f57ee1813666714caf17fce88913d97cee4abc5a7",
+    "after_SHA256": "b70ec8c601318a20084e0cc180e82d07adddced435de03483bc05620a294b3d4",
+    "frames_exactly_equal": false,
+    "RIP": "10008F65",
+    "mailbox_decoded": false,
+    "host_before": {
+      "Flags": "62",
+      "MaximumSpeed": "80",
+      "TimeToMaximumSpeed": "3000",
+      "SwapMouseButtons": "1"
+    },
+    "host_restored": {
+      "Flags": "62",
+      "MaximumSpeed": "80",
+      "TimeToMaximumSpeed": "3000",
+      "SwapMouseButtons": "1"
+    },
+    "closed": {
+      "utc": "2026-10-23T23:42:54.3600697Z",
+      "cold_starts": 1,
+      "state": "poweroff",
+      "unregistered": true,
+      "existing_vm_inventory_preserved": true,
+      "running_state_preserved": true,
+      "post_trial_raw_roundtrip_equal": true,
+      "artifacts_retained": true,
+      "semantic_session_stop_observed": false,
+      "termination": "external poweroff from paused state"
+    },
+    "RGB_pixels_equal": false,
+    "RGB_difference_box": [
+      512,
+      381,
+      768,
+      555
+    ]
+  },
+  "loss_quiescence": {
+    "status": "locally verified; native compilation/trial pending",
+    "policy": "Mask SCC master once after LOSS, retain VIA service; restore only after successfully queued stable fresh baseline",
+    "unchanged": "Stability/pending/delta/button/overflow/first-loss rules",
+    "worker": {
+      "name": "Copilot Sonnet5.5 low",
+      "execution": {
+        "round": "quiescence",
+        "worker": "copilot",
+        "exit_code": 0,
+        "outer_timeout": false,
+        "elapsed_seconds": 67.16,
+        "input_bytes": 30778,
+        "input_sha256": "04758dda46b5ae153888ec01cabd17834efbe684e74d1af97c0ca5c1084cf5fb",
+        "stderr_bytes": 0
+      },
+      "tools": "one view of the frozen original packet; no other input/write/command/test",
+      "premium_requests_reported": 1,
+      "provider_requests": 2,
+      "tests_executed": [],
+      "artifact": "adopted; lead fixes two IO-count expectations for deliberate new mask write"
+    },
+    "verification": {
+      "checks": 6295,
+      "phase_cases": 32,
+      "actual_compiled_controls": [
+        {
+          "case": "correct",
+          "compiled": true,
+          "exit": 0,
+          "output": "Mac motion: 6295 checks,32 phase/inversion cases; synthetic IO, no target execution."
+        },
+        {
+          "case": "master-left-on",
+          "compiled": true,
+          "exit": 1,
+          "output": "motion check 4079 line 148"
+        },
+        {
+          "case": "no-baseline-rearm",
+          "compiled": true,
+          "exit": 1,
+          "output": "motion check 3702 line 142"
+        },
+        {
+          "case": "unstable-rearm",
+          "compiled": true,
+          "exit": 1,
+          "output": "motion check 4664 line 184"
+        },
+        {
+          "case": "external-loss-unmasked",
+          "compiled": true,
+          "exit": 1,
+          "output": "motion check 6173 line 263"
+        }
+      ]
+    },
+    "local_profiles": "Two targeted CTests each: Clang Debug, GCC Release, Clang ASan-UBSan",
+    "remaining_balance": "unavailable"
   }
 }

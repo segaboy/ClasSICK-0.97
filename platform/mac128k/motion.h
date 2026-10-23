@@ -49,7 +49,7 @@ struct cs_mac_motion {
     cs_mac_motion_io io;          /* copied */
     cs_window_inbox *inbox;       /* borrowed */
     uint32_t epoch, phase, have_phase, last_raw_a, last_raw_b, last_buttons;
-    uint32_t invert, stage;
+    uint32_t invert, stage, quiesced; /* quiesced: SCC master off after loss */
     int32_t cause;
     uint32_t services, samples, baselines, losses, peak_queued; /* saturate */
     struct cs_mac_motion_loss first_loss;

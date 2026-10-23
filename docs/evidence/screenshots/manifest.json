@@ -1213,6 +1213,72 @@
         "One accepted GUI button event, not motion or drag qualification.",
         "Subsequent diagnostic address fault; no release qualification."
       ]
+    },
+    {
+      "id": "2026-10-23-mac-window-abi-corrected-click",
+      "path": "docs/evidence/screenshots/2026-10-23/mac-window-abi-corrected-click.png",
+      "sha256": "cd5add487ce7d8fd2065bb10c3c23e06cbe54d7cba188b92a09080a71438438f",
+      "bytes": 74339,
+      "width": 512,
+      "height": 342,
+      "captured_on": "2026-10-23",
+      "target": "native-mac68000",
+      "caption": "ABI-corrected original Mac ROM accepts0001/pattern toggle; no alignment fault, but unstable motion is rejected and recovery remains unqualified.",
+      "alt": "ABI-corrected original Mac ROM accepts0001/pattern toggle; no alignment fault, but unstable motion is rejected and recovery remains unqualified.",
+      "source_revision": "efbc62f23bf4c10c635f81f8d4ef2c39dcdcbbe4",
+      "compiled_source_revision": "efbc62f23bf4c10c635f81f8d4ef2c39dcdcbbe4",
+      "evidence": "docs/development/mac-first-loss-evidence.md",
+      "license": "GPL-3.0-or-later",
+      "rights": "Original ClasSICK framebuffer only; no desktop, emulator chrome, credentials or third-party pixels.",
+      "input": "synthetic",
+      "limitations": [
+        "No successful native GUI drag/release/human/physical/System1 qualification.",
+        "Mac first-loss and PC Mouse Keys negative results retained; host settings restored."
+      ]
+    },
+    {
+      "id": "2026-10-23-pc-window-mousekeys-initial",
+      "path": "docs/evidence/screenshots/2026-10-23/pc-window-mousekeys-initial.png",
+      "sha256": "7bd4dc9c78b1729f5d88da5f57ee1813666714caf17fce88913d97cee4abc5a7",
+      "bytes": 4850,
+      "width": 1024,
+      "height": 768,
+      "captured_on": "2026-10-23",
+      "target": "native-x86_64",
+      "caption": "Original PC scene before bounded Mouse Keys attempt; input release qualification remains open.",
+      "alt": "Original PC scene before bounded Mouse Keys attempt; input release qualification remains open.",
+      "source_revision": "6aa671c4c4934c3fc74937a54a98f26146d2edd3",
+      "compiled_source_revision": "6aa671c4c4934c3fc74937a54a98f26146d2edd3",
+      "evidence": "docs/development/mac-first-loss-evidence.md",
+      "license": "GPL-3.0-or-later",
+      "rights": "Original ClasSICK framebuffer only; no desktop, emulator chrome, credentials or third-party pixels.",
+      "input": "synthetic",
+      "limitations": [
+        "No successful native GUI drag/release/human/physical/System1 qualification.",
+        "Mac first-loss and PC Mouse Keys negative results retained; host settings restored."
+      ]
+    },
+    {
+      "id": "2026-10-23-pc-window-mousekeys-negative",
+      "path": "docs/evidence/screenshots/2026-10-23/pc-window-mousekeys-negative.png",
+      "sha256": "b70ec8c601318a20084e0cc180e82d07adddced435de03483bc05620a294b3d4",
+      "bytes": 4840,
+      "width": 1024,
+      "height": 768,
+      "captured_on": "2026-10-23",
+      "target": "native-x86_64",
+      "caption": "PC Mouse Keys attempt confirms no held-button or useful movement; counter0000, pixels differ from initial, no drag pass.",
+      "alt": "PC Mouse Keys attempt confirms no held-button or useful movement; counter0000, pixels differ from initial, no drag pass.",
+      "source_revision": "6aa671c4c4934c3fc74937a54a98f26146d2edd3",
+      "compiled_source_revision": "6aa671c4c4934c3fc74937a54a98f26146d2edd3",
+      "evidence": "docs/development/mac-first-loss-evidence.md",
+      "license": "GPL-3.0-or-later",
+      "rights": "Original ClasSICK framebuffer only; no desktop, emulator chrome, credentials or third-party pixels.",
+      "input": "synthetic",
+      "limitations": [
+        "No successful native GUI drag/release/human/physical/System1 qualification.",
+        "Mac first-loss and PC Mouse Keys negative results retained; host settings restored."
+      ]
     }
   ]
 }

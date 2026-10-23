@@ -1,5 +1,11 @@
 # ClasSICK 0.97 working instructions
 
+2026-10-23,SRC-0426/0427: nativeefbc62f accepts click0001/fault0; actual
+producer loss is UNSTABLE, foreground copy stale while IRQs advance. Original
+SCC loss-quiescence/rebaseline rearm passes6295 local checks/three profiles/
+four compiled controls; native repeat pending. PC MouseKeys negative/restored;
+54 PNG/two GIF. No drag/release pass. [Receipt](docs/development/mac-first-loss-evidence.md).
+
 2026-10-23,SRC-0425: native0f0bf6d trial accepts GUI click0001/pattern toggle,
 then its new three-byte by-value diagnostic copy faults at an odd stack address.
 Lead pointer-only correction passes local profiles; native repeat pending.

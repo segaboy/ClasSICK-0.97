@@ -15,3 +15,6 @@ Local GCC/Clang/sanitized checks pass; native/target results separate.
 
 
 SRC-0424:5750 checks/32 phase cases, three local profiles and four compiled faulty original controls verified for first-loss ordering, retention, reset, reasons and hard-fault exclusion. Native/target verification separate. [Receipt](../../docs/development/mac-first-loss-evidence.md).
+
+
+SRC-0427:6295 checks/32 phase cases, three local profiles; persistent-request scheduler and baseline-boundary oracle. Four actually compiled broken controls reject master-left-on, no-rearm, unstable rearm and externally originated loss left unmasked. Native trial separate. [Receipt](../../docs/development/mac-first-loss-evidence.md).
