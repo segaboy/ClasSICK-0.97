@@ -119,3 +119,12 @@ Preserve24 originals,held brief,UART bodies,old records/checkpoints,release
 assets/tags and retired wiki. Native-app,historical/edition,physical/full128K,
 B2,GUI/human,BIOS,Linux and both System1-ROM gates remain. No Mac parity or
 paired release acceptance claimed. Ordinary public/private HQ Git records only.
+
+
+Dated follow-up2026-10-23:SPEC-0063 sequential implementation is verified,but
+is not an IRQ queue. [SPEC-0064 binding review](mac-scc-binding-review.md) selects
+a separate inbox/short claim and PRIMING baseline staging before unmasked
+foreground delivery. Fourteen cases planned;no hardware/CPU binding admitted.
+Additional SCC enable/IP/IUS/reset facts reviewed;WR0 diagram/prose encoding
+disagreement and physical status polarity remain unresolved. M1-M7 stay open
+or partial. Next proposal:pure inbox/interleaving implementation before driver.

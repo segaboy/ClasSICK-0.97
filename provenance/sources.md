@@ -3840,3 +3840,42 @@ structure-copy padding in the lead oracle. Reproduced locally,corrected to raw
 byte snapshots without weakening full-byte no-effect assertions.343 final local
 profile CTests/three defective controls verified;no production code change or
 extra worker. Test text changed after initial freeze;expectations unchanged.
+
+
+## SRC-0369 - Owner next Mac motion binding task
+
+Owner2026-10-23:"Next task." Continues the current paired-native-preview-2
+milestone and ordinary scoped Git/HQ records. Lead selects SCC/interrupt source
+and scheduling contract review following the sequential helper. No driver,
+hardware/VM/emulator/reference run,release or gate expansion. Existing input
+and external-worker boundaries persist;OneNote/wiki remains retired.
+
+## SRC-0370 - Lead SCC interrupt controls and software binding assessment
+
+Additional narrow eligible published SRC-0363 review,Zilog UM010902-0609,
+June2009,[publisher](https://www.zilog.com/docs/serial/scc_escc_um.pdf),access
+2026-10-23. Copy88330952B/394pages,SHA256
+2a13683ee0e423ee3cdf2781a4ce6b4df65c1e069a269e4234fa6964b4a3bea0.
+Printed30,40-41,140,142,160-161,176-177;PDF=printed+7;visually checked140/142/160.
+Master/source enable,IP/IUS/ack distinctions,NMOS software-ack exclusion,reset
+side effects/timing obligation. Diagram/prose Highest-IUS encoding disagreement
+retained,no opcode adopted. Pin voltage/status-bit mapping remains unproven.
+Other earlier Mac/VIA/source facts reused,not new identity checks. Original
+scheduling assessment rejects whole-owner-call interrupt masking and helper
+concurrency;SPEC-0064 is an original two-domain design,not an Apple algorithm.
+No manual code/equates/algorithm/sample adopted;manuals/images private,not
+worker inputs. Not evidence of1984 exact part/Snow/physical/history. Lead
+self-review;human provenance review pending. See mac-scc-binding-review.
+
+## SRC-0371 - Grok original IRQ-to-foreground contract draft
+
+2026-10-23;one bounded grok4.7 low/resolvedgrok-4.7-build primary127.28s,
+11627B/100line frozen reviewed-public/original packet,SHA256
+def97286465a211754782a80862b2681d8baf960240ea00cb0bfd3ea35008091.
+130lines/1965words,zero observed tools/edits/tests,retry or second worker.
+Lead adopts original inbox direction with explicit clamp,discard,PRIMING,
+lifecycle/invariant/fault corrections;14 cases remain UNEXECUTED. No manuals,
+private HQ,credentials,untracked research originals,UART or implementation
+bodies transferred. Claims are engineering proposals until reviewed;no driver,
+IRQ-safety/timing/physical/historical/release claim. Ordinary source/provenance
+review pending;prompt and compact receipt in docs/development.

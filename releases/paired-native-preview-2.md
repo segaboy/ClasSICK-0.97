@@ -191,3 +191,10 @@ implements the shared native input boundary before hardware admission.340 local
 profile CTests/12 object audits/three compiled faulty controls pass;68000 source-
 pinned CI pending checkpoint. No interrupt/MMIO/boot binding or target run;Mac
 parity remains open. No visual change or new GIF;released assets unchanged.
+
+
+2026-10-23:SPEC-0064 Mac capture handoff contract selects a separate IRQ inbox
+before unmasked sequential foreground rendering,including PRIMING baseline
+staging. No implementation or target qualification. Hardware control/polarity,
+CPU/compiler exclusion,latency and total128K budget remain blockers.14 planned
+TEST-0077 cases are unexecuted;current published pair unchanged.

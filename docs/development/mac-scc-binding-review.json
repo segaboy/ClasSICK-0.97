@@ -1,0 +1,214 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-23",
+  "sources": [
+    "SRC-0369",
+    "SRC-0370",
+    "SRC-0371"
+  ],
+  "baseline_revision": "2571beaca19c4d861520d94d5fef50cbb60d59db",
+  "specification": "SPEC-0064",
+  "decision": "ADR-0073",
+  "planned_test": "TEST-0077",
+  "classification": "published-interface check and original engineering contract only",
+  "source_identity": {
+    "source": "SRC-0363",
+    "bytes": 88330952,
+    "pages": 394,
+    "sha256": "2a13683ee0e423ee3cdf2781a4ce6b4df65c1e069a269e4234fa6964b4a3bea0",
+    "reviewed_printed_pages": [
+      30,
+      40,
+      41,
+      140,
+      142,
+      160,
+      161,
+      176,
+      177
+    ],
+    "visually_checked_printed_pages": [
+      140,
+      142,
+      160
+    ],
+    "pdf_offset": 7,
+    "other_source_identity_rechecks": false
+  },
+  "worker": {
+    "execution": {
+      "round": "contract",
+      "worker": "grok",
+      "exit_code": 0,
+      "outer_timeout": false,
+      "elapsed_seconds": 127.28,
+      "input_bytes": 11627,
+      "input_sha256": "def97286465a211754782a80862b2681d8baf960240ea00cb0bfd3ea35008091",
+      "stderr_bytes": 195
+    },
+    "resolved_model": "grok-4.7-build",
+    "input_packet": {
+      "bytes": 11627,
+      "lines": 100,
+      "sha256": "def97286465a211754782a80862b2681d8baf960240ea00cb0bfd3ea35008091",
+      "baseline_revision": "2571beaca19c4d861520d94d5fef50cbb60d59db",
+      "spec0063_git_sha256": "79d3f8d9c5149415b59118de8290bf4f8838cd42d61cabc74f3dac2ea2d503c9"
+    },
+    "artifact": {
+      "artifact_bytes": 12281,
+      "artifact_lines": 130,
+      "artifact_words": 1965,
+      "artifact_sha256": "52ac0767ad5a6f9848ff7f9d282db757827c4285cac032b3d86219dfe83d67c8"
+    },
+    "observed_tools": [],
+    "tests_executed": [],
+    "usage": {
+      "input_tokens": 7610,
+      "cache_read_input_tokens": 2048,
+      "cache_creation_input_tokens": 0,
+      "output_tokens": 10295,
+      "reasoning_tokens": 7322,
+      "total_tokens": 19953
+    },
+    "reported_list_session_cost_usd": 0.02652476,
+    "handoff": {
+      "result": "Draft contract only. No implementation or tests. SPEC-0063 stays unchanged and is not claimed IRQ-safe. Separate 16-record inbox, one claimed sample, sticky loss, foreground delivery after exclusion. Baseline must be a post-barrier fresh IRQ observation. Twelve cases named and unexecuted. Next slice is a software stand-in on the existing helper.",
+      "actionable_findings": [],
+      "tests_executed": [],
+      "blockers": [],
+      "decisions_needed": []
+    },
+    "cli_diagnostic": "Preferred model alias warning;final usage receipt confirms previously qualified grok-4.7-build route. No extra model call/retry observed."
+  },
+  "dispositions": [
+    {
+      "proposal": "separate16-record inbox/short claim/unmasked foreground delivery",
+      "disposition": "adopt"
+    },
+    {
+      "proposal": "clamping before enqueue",
+      "disposition": "reject",
+      "correction": "unchanged normalized dx/dy;existing foreground owner clamps per record"
+    },
+    {
+      "proposal": "loss/cancel timeline",
+      "disposition": "adopt with changes",
+      "correction": "explicitly discard IRQ inbox;helper clears only its own queue;WAIT skips duplicate cancel"
+    },
+    {
+      "proposal": "fresh post-barrier baseline",
+      "disposition": "adopt with changes",
+      "correction": "PRIMING stages later records during baseline foreground call;LOSS/fault wins before later claim;hardware barrier remains open"
+    },
+    {
+      "proposal": "fresh begin refuses live bytes without reading them",
+      "disposition": "adopt with changes",
+      "correction": "fresh quiescent storage is caller precondition;restart uses helper restart,not begin;epochs cannot wrap"
+    },
+    {
+      "proposal": "unexpected helper phase silently drops claim",
+      "disposition": "reject",
+      "correction": "dedicated helper empty/READY at ordinary boundaries;unexpected state is integration fault"
+    },
+    {
+      "proposal": "first fault and stop boundaries",
+      "disposition": "adopt with changes",
+      "correction": "foreground publishes fault under exclusion before processing loss;in-flight delivery finishes before stop;quiesce before free/rebind"
+    },
+    {
+      "proposal": "12 proposed cases",
+      "disposition": "adopt with changes",
+      "correction": "14 final unexecuted cases,including lead baseline-stage and raw-motion checks"
+    }
+  ],
+  "planned_cases": [
+    {
+      "case": "IC-01",
+      "requirement": "Begin leaves hardware disabled until helper cancellation has succeeded.",
+      "executed": false
+    },
+    {
+      "case": "IC-02",
+      "requirement": "A record can be claimed only after its full payload and then its committed count.",
+      "executed": false
+    },
+    {
+      "case": "IC-03",
+      "requirement": "A sample past capacity sticks LOSS, keeps every unread record, and overwrites none.",
+      "executed": false
+    },
+    {
+      "case": "IC-04",
+      "requirement": "Explicit uncertainty on an empty inbox sticks LOSS, independent of the saturating counter.",
+      "executed": false
+    },
+    {
+      "case": "IC-05",
+      "requirement": "Claim copies one record and issues no helper, owner, render, wait, or scan inside exclusion.",
+      "executed": false
+    },
+    {
+      "case": "IC-06",
+      "requirement": "Release restores the prior exclusion state and does not globally enable interrupts;delivery requires an otherwise capture-permitting foreground context.",
+      "executed": false
+    },
+    {
+      "case": "IC-07",
+      "requirement": "The claimed delivery finishes after a newer loss; the next record waits until one cancel path completes.",
+      "executed": false
+    },
+    {
+      "case": "IC-08",
+      "requirement": "Foreground stop discards unread data and the undelivered claim, then uses one helper stop, with no producer callback.",
+      "executed": false
+    },
+    {
+      "case": "IC-09",
+      "requirement": "Rebaseline accepts only a post-barrier fresh zero-motion observation; queued motion is not trusted drag; held left stays suppressed.",
+      "executed": false
+    },
+    {
+      "case": "IC-10",
+      "requirement": "A second loss view does not cancel twice, and an empty drain is not treated as a loss cancel.",
+      "executed": false
+    },
+    {
+      "case": "IC-11",
+      "requirement": "A stale epoch is refused, maximum-epoch restart has no effect, and the first fault is retained.",
+      "executed": false
+    },
+    {
+      "case": "IC-12",
+      "requirement": "The producer is quiescent before rebind, does not nest, and does not preempt inside exclusion.",
+      "executed": false
+    },
+    {
+      "case": "IC-13",
+      "requirement": "A baseline published before foreground rebaseline stages later records;loss before/during rebaseline takes the correct WAIT/READY cancellation path without a blind interval.",
+      "executed": false
+    },
+    {
+      "case": "IC-14",
+      "requirement": "Ordered -1,+1 at a pointer boundary remains distinct;neither producer clamping nor coalescing changes the existing owner result.",
+      "executed": false
+    }
+  ],
+  "feature_tests_executed": [],
+  "runtime_inputs_changed": false,
+  "hardware_adapter_admitted": false,
+  "target_trials": [],
+  "release_ready": false,
+  "remaining_external_allowances": {
+    "Grok": "not reported;current allowance unavailable",
+    "Claude": "not reported;current allowance unavailable",
+    "Copilot": "not reported;current allowance unavailable",
+    "Antigravity_Argon4_High": "not reported;current allowance unavailable"
+  },
+  "net_Codex_usage_savings_measured": false,
+  "record_checks": {
+    "public_index_guard": "Repository guard PASS: 1071 indexed text/source files and 31 registered PNG screenshots and 1 reviewed GIF animations; required docs, local links, JSON, payload exclusions, and common credential signatures checked.\nOriginality, reference rights, and full secret detection still require human review.",
+    "private_HQ_guard": "recorded separately in private HQ checkpoint",
+    "preservation_audit": "passed;exact allowlists,24 originals,held brief,other tracked bytes and tags preserved",
+    "final_metadata_checks": "JSON/case/link/whitespace/preservation checks repeated after recording guard result"
+  }
+}

@@ -318,5 +318,19 @@
     "ci_url": "https://github.com/segaboy/ClasSICK-0.97/actions/runs/39882048452",
     "m68k_descriptor_bytes": 248,
     "m68k_helper_largest_frame": 32
+  },
+  "mac_capture_handoff_contract": {
+    "specification": "SPEC-0064",
+    "decision": "ADR-0073",
+    "test": "TEST-0077",
+    "evidence": "docs/development/mac-scc-binding-review.json",
+    "implemented": false,
+    "planned_cases": 14,
+    "feature_tests_executed": [],
+    "hardware_bound": false,
+    "runtime_inputs_changed": false,
+    "target_trials": 0,
+    "release_ready": false,
+    "next_slice": "Pure bounded inbox and deterministic interleaving/native-object checks;no SCC/CPU binding until source/primitive/timing admission."
   }
 }

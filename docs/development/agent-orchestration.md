@@ -293,3 +293,15 @@ Follow-up control:for future byte-exact/state-lifetime tests,use raw-byte
 representation snapshots and one focused optimized GCC profile before the first
 push. The capture oracle's GCC Release padding failure was locally reproduced
 and fixed without changing production;initial failure remains recorded.
+
+
+Mac IRQ handoff2026-10-23:one Grok4.7 low/resolvedgrok-4.7-build primary from
+11627B frozen fact/contract packet,127.28s,130lines/1965words within caps. Zero
+tools/writes/tests,retry,second worker or requalification. Lead-only admitted
+manuals remain private;worker gets paraphrased facts and SPEC-0063 only. Adopt
+draft with clamp/inbox-discard/baseline-PRIMING/lifecycle/fault corrections;
+14 cases planned,none executed. Source uncertainty stays explicit,no hardware
+recipe. Reported19953 task tokens/$0.02652476 list cost do not prove balance or
+net Codex savings;all-four current allowances unavailable. Keep next author
+slice focused on pure ingress and synthetic interleavings,not a driver assumed
+safe from sequential tests. [Review](mac-scc-binding-review.md).
