@@ -4078,4 +4078,5 @@ Original C99 assertion/chunk/flag/numeric-offset facade, optional pinned compile
 delta, host controls and surface-span algebra. Current production core unchanged.
 IMPL-0069/0070,TEST-0082/0083. [Evidence](../docs/development/cpu-c16-evidence.md)
 separates actual host/compile checks from unexecuted target/ISR/ABI/fit claims.
-Normal source-pinned CI pending at the implementation checkpoint.
+Normal source-pinned Windows/68000 CI passes at f69f27f; six new native objects
+with matching twins and checked input identities. No target execution.

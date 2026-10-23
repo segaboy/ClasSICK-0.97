@@ -275,9 +275,113 @@
     "segmented_backend": "unimplemented"
   },
   "native_CI": {
-    "status": "pending",
-    "source_revision": null,
-    "run_url": null
+    "status": "success",
+    "source_revision": "f69f27f97238c9666a21d8c7df1ee1c172dd43db",
+    "run_url": "https://github.com/segaboy/ClasSICK-0.97/actions/runs/39989825970",
+    "manifest": {
+      "specifications": [
+        "SPEC-0068"
+      ],
+      "cpu": "68000",
+      "lto": false,
+      "inputs": {
+        "arch/m68k/exclusion.c": "8f481960aa2792bfc18a090ad849f529ff9e4c1bf6083e6374c460a8316b4ac7",
+        "arch/m68k/exclusion.h": "40cdee62139cfd310233b67c69ea8dbd565c3866e09419451b61b7c7adef3e08"
+      },
+      "object_compilations": 6,
+      "undefined_imports": 0,
+      "mutable_data": 0,
+      "frame_bound_bytes": 64,
+      "records": [
+        {
+          "optimization": "O0",
+          "twins_equal": true,
+          "object_sha256": "5bda5287173bad54026f50b42414a8bc37b5dcc846df7af53d9d36faef2dc6e2",
+          "function_bytes": {
+            "cs_m68k_foreground_enter": 24,
+            "cs_m68k_foreground_leave": 22
+          },
+          "frame_bytes": {
+            "cs_m68k_foreground_enter": 4,
+            "cs_m68k_foreground_leave": 4
+          },
+          "sr_operations": {
+            "enter": [
+              "movew %sr,%d0",
+              "oriw #1792,%sr"
+            ],
+            "leave": [
+              "movew %d0,%sr"
+            ]
+          },
+          "disassembly": "\n/home/runner/work/_temp/classick-m68k-exclusion/O0-a/exclusion.o:     file format elf32-m68k\n\n\nDisassembly of section .text:\n\n00000000 <cs_m68k_foreground_enter>:\n   0:\t4e56 fffc      \tlinkw %fp,#-4\n   4:\t40c0           \tmovew %sr,%d0\n   6:\t007c 0700      \toriw #1792,%sr\n   a:\t3d40 fffe      \tmovew %d0,%fp@(-2)\n   e:\t7000           \tmoveq #0,%d0\n  10:\t302e fffe      \tmovew %fp@(-2),%d0\n  14:\t4e5e           \tunlk %fp\n  16:\t4e75           \trts\n\n00000018 <cs_m68k_foreground_leave>:\n  18:\t4e56 fffc      \tlinkw %fp,#-4\n  1c:\t3d6e 000e fffe \tmovew %fp@(14),%fp@(-2)\n  22:\t302e fffe      \tmovew %fp@(-2),%d0\n  26:\t46c0           \tmovew %d0,%sr\n  28:\t4e71           \tnop\n  2a:\t4e5e           \tunlk %fp\n  2c:\t4e75           \trts\n"
+        },
+        {
+          "optimization": "O2",
+          "twins_equal": true,
+          "object_sha256": "96ae2bc3fddcf8aa05a6c101a56fc84b1d35909c488723a5ef976a7f79d768b2",
+          "function_bytes": {
+            "cs_m68k_foreground_enter": 14,
+            "cs_m68k_foreground_leave": 8
+          },
+          "frame_bytes": {
+            "cs_m68k_foreground_enter": 0,
+            "cs_m68k_foreground_leave": 0
+          },
+          "sr_operations": {
+            "enter": [
+              "movew %sr,%d0",
+              "oriw #1792,%sr"
+            ],
+            "leave": [
+              "movew %d0,%sr"
+            ]
+          },
+          "disassembly": "\n/home/runner/work/_temp/classick-m68k-exclusion/O2-a/exclusion.o:     file format elf32-m68k\n\n\nDisassembly of section .text:\n\n00000000 <cs_m68k_foreground_enter>:\n   0:\t40c0           \tmovew %sr,%d0\n   2:\t007c 0700      \toriw #1792,%sr\n   6:\t0280 0000 ffff \tandil #65535,%d0\n   c:\t4e75           \trts\n\n0000000e <cs_m68k_foreground_leave>:\n   e:\t202f 0008      \tmovel %sp@(8),%d0\n  12:\t46c0           \tmovew %d0,%sr\n  14:\t4e75           \trts\n"
+        },
+        {
+          "optimization": "Os",
+          "twins_equal": true,
+          "object_sha256": "96ae2bc3fddcf8aa05a6c101a56fc84b1d35909c488723a5ef976a7f79d768b2",
+          "function_bytes": {
+            "cs_m68k_foreground_enter": 14,
+            "cs_m68k_foreground_leave": 8
+          },
+          "frame_bytes": {
+            "cs_m68k_foreground_enter": 0,
+            "cs_m68k_foreground_leave": 0
+          },
+          "sr_operations": {
+            "enter": [
+              "movew %sr,%d0",
+              "oriw #1792,%sr"
+            ],
+            "leave": [
+              "movew %d0,%sr"
+            ]
+          },
+          "disassembly": "\n/home/runner/work/_temp/classick-m68k-exclusion/Os-a/exclusion.o:     file format elf32-m68k\n\n\nDisassembly of section .text:\n\n00000000 <cs_m68k_foreground_enter>:\n   0:\t40c0           \tmovew %sr,%d0\n   2:\t007c 0700      \toriw #1792,%sr\n   6:\t0280 0000 ffff \tandil #65535,%d0\n   c:\t4e75           \trts\n\n0000000e <cs_m68k_foreground_leave>:\n   e:\t202f 0008      \tmovel %sp@(8),%d0\n  12:\t46c0           \tmovew %d0,%sr\n  14:\t4e75           \trts\n"
+        }
+      ],
+      "note": "Selected-object checks only; not proof of all compiler ordering, CPU concurrency, latency or opcode completeness.",
+      "target_executed": false
+    },
+    "code_input_hashes_unchanged": true,
+    "target_executed": false,
+    "lead_dataflow_review": {
+      "manifest_sha256": "41394a45eb6f10c16b989463b4a4ca298346737f36759c949d528c61d065d8ed",
+      "token_flow_reviewed": true,
+      "source_revision": "f69f27f97238c9666a21d8c7df1ee1c172dd43db",
+      "observations": [
+        "O0 enter saves SR word to local, clears D0, reloads word for zero-extension",
+        "O0 leave loads low token word at frame+14 into local/register then SR",
+        "O2/Os enter snapshots SR before ORI0700 then clears high D0 bits",
+        "O2/Os leave loads token argument at stack+8 and moves its low word to SR"
+      ],
+      "optimized_function_text_bytes": 22,
+      "maximum_compiler_su_report": 4,
+      "limits": "Own selected compiler output only; .su0 does not include all call/argument/return/interrupt stack; no callback execution or hardware proof."
+    }
   },
   "worker": {
     "execution": {

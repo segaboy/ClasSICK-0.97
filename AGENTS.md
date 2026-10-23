@@ -3,7 +3,8 @@
 2026-10-23,SRC-0394..0398/ADR-0079/SPEC-0068/IMPL-0069/0070/TEST-0082/0083:
 isolated supervisor exclusion callbacks (no ISR/MMIO/boot binding), plus C16
 assert/chunk/flag/guest-offset facade.343 final local profiles; WCC delta9 calls/
-6 helper-free objects/3 intentional refusals, no target run; native CI pending.
+6 helper-free objects/3 intentional refusals, no target run; Windows/68000 CI
+passes at f69f27f, six native objects/matching twins, largest callback frame 4B.
 Owner admits fresh worker after excluded compiler example; one fresh Claude
 primary, lead direct small286 delta. General alignment/segmented views and all
 M1-M7/compatibility gates remain. Preserve24 originals/held brief/UART/old rows/

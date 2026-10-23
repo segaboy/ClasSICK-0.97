@@ -9,7 +9,13 @@ The token records SR at the asm snapshot; C caller condition codes are not
 promised across the ABI. IPL7 does not exclude level7 transitions, faults or
 DMA. Hooks must bracket only the short inbox operation, never owner/rendering.
 Lead fixes the audit's blank-line gap and comment-based clobber false positive,
-bounds compiler calls and retains own disassembly. Native CI is pending.
+bounds compiler calls and retains own disassembly. Source-pinned [Windows/68000 CI](https://github.com/segaboy/ClasSICK-0.97/actions/runs/39989825970) passes at `f69f27f97238c9666a21d8c7df1ee1c172dd43db`.
+Actual native checks: six objects, matching O0/O2/Os twins, no imports or mutable
+data; largest reported callback function frame 4 bytes. Retained own
+disassembly is reviewed for snapshot/mask and token-to-SR flow. O2/Os function
+text is14+8=22 bytes. The optimized .su value0 is not zero stack use: arguments,
+return addresses and caller/interrupt frames remain. These are compiler facts,
+not execution, full-stack, latency or whole128K proof.
 
 Actual local verification:341 full ClangDebug CTests, plus one GCCRelease and
 one ClangASan+UBSan facade run:343 final profile checks. The facade has77

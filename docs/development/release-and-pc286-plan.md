@@ -33,7 +33,7 @@ from the two-lane priority. Ordinary code/compiler/CI/Git/HQ work stays scoped;
 OneNote/wiki remain retired,no additional chats/subagents or automation.
 
 Follow-up2026-10-23: isolated SPEC-0068 supervisor exclusion callbacks now
-implemented under IMPL-0069, pending native CI; no ISR/MMIO/boot binding.
+implemented under IMPL-0069, source-pinned Windows/68000 CI passed; no ISR/MMIO/boot binding.
 SPEC-0067 gains IMPL-0070 C99 assertion/chunk/offset facade and a surface-width
 proof:9 final WCC calls/6 helper-free objects/3 deliberate refusals, no link/run.
 General C alignment and segmented views remain open. [Checkpoint](cpu-c16-evidence.md).

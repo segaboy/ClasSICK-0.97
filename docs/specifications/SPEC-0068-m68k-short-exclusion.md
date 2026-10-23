@@ -75,4 +75,5 @@ nothing on the target.
 Lead adoption: preserve instruction order across blank lines; reject unexpected
 disassembly syntax; strip source comments before clobber checks; bound subprocesses.
 Checks and limitations are in [the evidence](../development/cpu-c16-evidence.md).
-Native compilation is pending until the source-pinned CI receipt is completed.
+Native compilation passes at the source-pinned CI revision in that receipt;
+no target execution or hardware exclusion proof is claimed.
