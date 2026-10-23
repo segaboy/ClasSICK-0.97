@@ -3942,3 +3942,28 @@ Original baseline4f231b5 code/header spot-check:guest.c12/25 ~7u prospective16bi
 ## SRC-0382 - Claude original286 feasibility roadmap draft
 
 One Opus5.5 low53.45s,29739B431line reviewed-public/original packet,SHA256f8d41ba4e96a5423781a67e9f80525916722e95b75a8a0f191178b0af9ee53b4.220lines/2158words,180line capmissed/2200word capmet;zero tools/edits/tests/retry/secondworker. Lead adopts with alignment,cost,execution-context,guest-address/tier/standalone refinements. No manuals,HQ,credentials,untracked originals,prohibited or UART bodies transferred.
+
+## SRC-0383 - Owner's refined 286 finished-product discussion
+
+2026-10-23 conversation following SRC-0375: narrow the first target to one
+machine/adapter; discussed PC/AT5170 6MHz,640KiB,EGA/5154 and provisional20MB
+hard disk. Entire system installed on hard disk, no routine system floppy;
+real Macintosh application use such as Word expected. Exact Word edition,
+hardware/firmware profile, fit, speed and sales ranking remain unqualified.
+No Apple/Microsoft binary, implementation or media was supplied or admitted.
+
+## SRC-0384 - Owner requires target-native performance
+
+2026-10-23 owner instruction: "take full advantage of the 286 with an ultimate
+level of optimization"; "the same for the 128k version and also our UEFI
+version"; "I don't want the portability of it all to impact performance."
+Record as a performance priority, not evidence of achieved optimality or zero
+overhead. No blanket implementation, benchmark/target-run or source waiver.
+
+## SRC-0385 - Lead original native performance plan
+
+Original engineering plan in docs/development/native-performance-plan.md and
+ADR-0076: shared semantics plus measured original per-target backends, explicit
+baseline/candidate resources and latency, conformance and speed/space tradeoffs.
+Direct small record, no worker/benchmark/fixture/code/build/trial or new external
+transfer. Current paired milestone and source/native-app/publication gates persist.

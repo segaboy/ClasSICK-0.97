@@ -1,5 +1,16 @@
 # Native 80286 PC port: feasibility and proposed roadmap
 
+Owner refinement after this study, 2026-10-23 (SRC-0383): the first working
+configuration discussed is IBM PC/AT 5170, 6MHz, 640KiB conventional RAM,
+IBM EGA/5154, a provisional 20MB hard disk and 1.2MB installation/recovery floppy.
+The finished system installs fully to the hard disk and needs no system floppy
+for regular boot/use. Real unchanged Mac128K application use, including an
+appropriate Word edition to be identified, is a product goal. No single-floppy
+size, memory fit, usable speed, best-selling-machine rank, exact firmware/media
+profile or application compatibility is established. Broader adapter/clone
+coverage below is subsequent work. This refinement does not admit a target run.
+See the [native performance requirement](native-performance-plan.md).
+
 2026-10-23;SRC-0375..0382 / ADR-0075. Lead-reviewed investigation proposal.
 Public base4f231b559e491b1e4b4663d1e67ed6b8634cc056.
 [Source review and dispositions](../research/pc286-source-review.md),[receipt](pc286-feasibility.json).

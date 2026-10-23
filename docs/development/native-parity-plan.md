@@ -1,5 +1,11 @@
 # Native Macintosh and x86 parity plan
 
+2026-10-23, SRC-0384 / ADR-0076: the owner requires native performance on
+Macintosh 128K, proposed 286 and x86-64 UEFI. Preserve shared behavior with
+separately reviewed target fast paths where measured; portability cannot excuse
+demonstrated avoidable cost. No optimality/zero-overhead claim or new code/trial
+authorization. [Performance plan](native-performance-plan.md).
+
 2026-10-22,SPEC-0062:[PC window boot binding/CWP1 trace](pc-window-boot-evidence.md) implemented;unbooted EFI/media verified. Next:source-pinned exact-candidate review and separately authorized trial. Mac M1-M7/source/binding and paired release qualification persist;no BIOS implementation or release waiver.
 
 2026-10-22,SPEC-0061:firmware-neutral [PC window session](pc-window-session-evidence.md) implemented and hosted/compiler verified. It joins shared window input/controller receipts/presentation;not boot-bound. Next:opt-in UEFI arena/trace binding. Mac M1-M7 and paired release qualification persist.

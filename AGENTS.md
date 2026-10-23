@@ -1,5 +1,13 @@
 # ClasSICK 0.97 working instructions
 
+2026-10-23, SRC-0383..0385 / ADR-0076: owner refines first286 goal to PC/AT5170
+6MHz/640KiB/EGA and full hard-disk installation, no routine system floppy;
+Word edition/fit/performance remain unqualified. Native performance is required
+for Mac128K/68000, proposed286 and x64UEFI: shared C semantics, measured original
+platform fast paths, no avoidable cost accepted merely for portability. Plan
+only, no code/build/benchmark/target run/release; paired milestone and all gates
+persist. [Plan](docs/development/native-performance-plan.md).
+
 2026-10-23,SRC-0375..0382/ADR-0075:owner286 feasibility study complete,proposal only. Separate native16bit BIOS-first build plus original68k app runtime;true C16 toolchain/segmented guest views/int-width masks are prerequisites.640KiB planning profile/576KiB cap UNMEASURED;512x342 unscaled retained,CGA diagnostic candidate. One Claude primary,lead source/code checks;8 proposed checks UNEXECUTED. No install/code/build/target/release or current paired-milestone change. Preserve24 originals/held brief/UART/old records/assets/tags/retired wiki/all gates. [Study](docs/development/pc286-feasibility.md).
 
 2026-10-23,SRC-0372..0374:SPEC-0065/ADR-0074 isolated pure inbox under IMPL-0066/TEST-0078. One Claude254-line primary,lead no-claim return fix and independent initial API tests;final test changes disclosed.343 final local profile checks/12 audits/three compiled defects pass;Windows/68000 CI passes atdcf4f42. No production coordinator,CPU/ISR/MMIO/boot binding,target trial/release/GIF. Original IC cases retain partial/unexecuted hardware scope,M1-M7/gates persist;preserve24 originals/held brief/UART/old records/assets/tags/retired wiki. [Evidence](docs/development/window-inbox-evidence.json).
