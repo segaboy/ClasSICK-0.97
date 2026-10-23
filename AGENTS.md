@@ -1,5 +1,14 @@
 # ClasSICK 0.97 working instructions
 
+2026-10-23,SRC-0390..0393/ADR-0078:owner requires paired releasePRIMARY with
+bounded286 progress alongside. SPEC-0066/IMPL-0068 foreground coordinator joins
+inbox/capture through abstract short exclusion,unmasked owner calls;344 local
+profile checks/12 audits/3 compiled defects pass,Windows/68000 CI pending. No CPU/
+SCC/boot binding or target/release permission. SPEC-0067 C16 policy adopted,
+8 TEST-0081 cases UNEXECUTED,prior compiler facts reused. One Claude primary,
+one Grok distinct286 gap,no other fan-out. Preserve24 originals/held brief/UART/
+old records/assets/tags/retired wiki and all gates. [Plan](docs/development/release-and-pc286-plan.md).
+
 2026-10-23,SRC-0386..0389/ADR-0077/IMPL-0067/TEST-0079: isolated pinnedWCC16
 compile preparation;39 final compiler calls/32 objects/7 expected rejections,
 2 harness refusals,no link/target execution. C16 mask hazard confirmed atcompile

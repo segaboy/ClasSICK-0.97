@@ -343,3 +343,15 @@ Use established scoped network permission for CLI services;do not treat a sandbo
 DNS failure as provider/model quality. Reported$0.2536408 list/session cost is not
 balance or measured Codex saving;all remaining balances unverified,other workers
 idle. [Results](pc286-toolchain-preparation.md).
+
+
+Two-lane batch2026-10-23:paired releasePRIMARY with a distinct bounded286 gap,
+not mandatory fan-out. Claude Opus5.5 low125.30s returns334 combined source/contract
+lines/533words from26214B;Grok4.7 low96.28s returns76lines1133words from14165B
+for C16 policy. Both within caps,zero tools/edits/tests/retry/requalification.
+Codex supplies frozen header,independent initial oracles,necessary resume/restart/
+phase and C16 span/shift corrections,integration and344 actual profile checks/
+12 audits/3 compiled defects. Final oracle extensions disclosed. Service network
+permission reused correctly;no sandbox DNS retry. Reported$0.4192408/$0.02194564
+list/session cost not balance/net Codex saving;Copilot/Argon idle,all balances
+unverified. [Plan](release-and-pc286-plan.md),[evidence](window-foreground-evidence.md).

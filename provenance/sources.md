@@ -4004,3 +4004,37 @@ near-far widths and USE16/80286 metadata recorded. Own objects only,no target
 execution,full link/fit or timing proof. Initial DATA-label scanner false-positive
 fixed andfinal matrix rerun. Full logs/objects/tool files outsideGit;review/receipt
 carry source/rights/coverage limitations. Existing gates remain.
+
+## SRC-0390 - Owner sets paired release primary with286 progress alongside
+
+2026-10-23 owner:"our next goal is to work toward our release milestone as we
+had been before,but at the same time,there should be progress on the286 port."
+Lead scopes one release coordinator plus one concrete C16 contract gap;no new
+firmware/target run,reference input,third release gate or publication authority.
+
+## SRC-0391 - Claude original foreground coordinator proposal
+
+Opus5.5 low125.30s from26214B525line reviewed-public/original packet,SHA256 in
+task brief;334 combined code/contract lines533 contractwords,zero tools/edits/
+tests/retries. Frozen lead header/behavior contract,original inbox/capture APIs
+and capture body;tests withheld. Wrapper prose/fence removed;lead checks missing
+inbox return assumptions and fixes resume(BASELINE),restart emptiness and phase
+preflight. Raw input/output kept outsideGit;no prohibited/manual/HQ/draft exposure.
+
+## SRC-0392 - Grok original C16 language/helper contract proposal
+
+Grok4.7 low/resolvedgrok-4.7-build96.28s,14165B234line frozen public/original
+packet,SHA256 in task brief;76lines1133words,zero tools/edits/tests/retry. Concrete
+separate286 gap while release primary runs. Lead corrects all-target performance,
+signed-shift safety,valid large guest spans versus native chunks,owned C versus
+compiler-private ABI options,and avoids repeating admitted compile observations.
+No implementation or helper ABI admitted;TEST-0081 all8 cases unexecuted.
+
+## SRC-0393 - Lead original two-lane contracts and verification
+
+SPEC-0066/0067,IMPL-0068,TEST-0080/0081:independent pre-artifact API and reused
+real-owner oracles,explicit laterextensions,original integration/compiler/CI
+tooling.344 local profile checks,12 object audits and3 compiled faulty variants
+verified;source-pinned CI recorded separately when observed. No actual CPU mask,
+SCC/MMIO/ISR/latency/full128K/target/release claim. Prior compiler facts remain
+dated,not new286 tests. Shared semantic/native performance and all gates retained.

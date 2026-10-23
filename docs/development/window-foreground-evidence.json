@@ -1,0 +1,229 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-23",
+  "sources": [
+    "SRC-0390",
+    "SRC-0391",
+    "SRC-0392",
+    "SRC-0393"
+  ],
+  "base_revision": "0fea94de310fe1a1907182f99777758d343ca59e",
+  "main_track": {
+    "specification": "SPEC-0066",
+    "implementation": "IMPL-0068",
+    "tests": "TEST-0080",
+    "status": "isolated-software-verified-local;nativeCI-pending",
+    "profile_CTests": {
+      "clang": 338,
+      "gcc-release": 3,
+      "sanitized": 3
+    },
+    "total_profile_checks": 344,
+    "unit_assertions_per_profile": 276,
+    "real_owner_assertions_per_profile": 79,
+    "object_audits": {
+      "efi_image_changed": false,
+      "object_audits": 12,
+      "target_executed": false,
+      "specifications": [
+        "SPEC-0066"
+      ],
+      "efi_abi_object_twins_equal": true
+    },
+    "compiled_defects": [
+      {
+        "case": "valid",
+        "compile_exit": 0,
+        "run_exit": 0,
+        "expected_valid_pass_or_defect_rejection": true,
+        "diagnostic": "foreground:276 checks"
+      },
+      {
+        "case": "owner_under_exclusion",
+        "compile_exit": 0,
+        "run_exit": 1,
+        "expected_valid_pass_or_defect_rejection": true,
+        "diagnostic": "line33:p==&owner && depth==0 && samples<64 && box.claimed!=CS_INBOX_NONE"
+      },
+      {
+        "case": "completion_erases_loss",
+        "compile_exit": 0,
+        "run_exit": 1,
+        "expected_valid_pass_or_defect_rejection": true,
+        "diagnostic": "line80:box.phase==CS_INBOX_LOSS && box.count==1 && samples==4"
+      },
+      {
+        "case": "stop_not_terminal",
+        "compile_exit": 0,
+        "run_exit": 1,
+        "expected_valid_pass_or_defect_rejection": true,
+        "diagnostic": "line106:fg.phase==CS_FG_ENDED && fg.cause==37 && fg.stage==CS_FG_DRAIN && box.phase==CS_INBOX_ENDED"
+      }
+    ],
+    "initial_oracle_freeze": {
+      "status": "authored from frozen header/normative brief before reading primary implementation",
+      "files": {
+        "tests/window-foreground.c": "87624e3c135bca40e26e0bb030b39ed64274bacadc7a1a5e798fb1aa5fa6bd39",
+        "tests/window-foreground-integration.c": "8ea40486aa0db19848658e379b8f17dc116533ff20cd216a15b983bec3504064"
+      }
+    },
+    "strict_final_author_blind": false,
+    "later_oracle_extensions": [
+      "cancel-time producer loss",
+      "inbox/helper phase mismatch beforeclaim",
+      "malformed-ended restart preflight",
+      "begin cancellation fault"
+    ],
+    "native_CI": {
+      "status": "pending",
+      "source_revision": null,
+      "run_url": null,
+      "manifest": null
+    },
+    "target_executed": false,
+    "boot_bound": false,
+    "ROM_EFI_inputs_changed": false
+  },
+  "pc286_track": {
+    "specification": "SPEC-0067",
+    "tests": "TEST-0081",
+    "status": "contract-adopted;not-implemented",
+    "cases_unexecuted": 8,
+    "prior_TEST0079": "reused,did not rerun unchanged matrix",
+    "new_header_or_helper": false,
+    "new_link_or_target_execution": false,
+    "lead_corrections": [
+      "all-three performance priority,pairedrelease work primary",
+      "signed-shift overflow/right-shift rules beyond countbounds",
+      "single-native-chunk narrowing distinctfromvalidlargerlogicalguestoperations",
+      "owned multiword C boundary versus compiler-private helperABI",
+      "reuse prior compile facts,no redundant qualification runs"
+    ]
+  },
+  "decision": "ADR-0078",
+  "workers": {
+    "main": {
+      "execution": {
+        "round": "main",
+        "worker": "claude",
+        "exit_code": 0,
+        "outer_timeout": false,
+        "elapsed_seconds": 125.3,
+        "input_bytes": 26214,
+        "input_sha256": "6180d5241c0e9e506a61d64bd3cebb9a1203e4768621bcd115af3e5c524a1ed1",
+        "stderr_bytes": 0
+      },
+      "artifact_lines": 334,
+      "artifact_words": 533,
+      "files": {
+        "foreground.c": "d72833e81780ee7c28617d7695b30ebd85c47c5b28fc4f006d54a522e1dbe331",
+        "contract.md": "5fd3bfe1a042c26b2a0fb12cf8bab90c1a9935c5e8e697c1fc7e3e9cd05d29f0"
+      },
+      "observed_tools": [],
+      "handoff": {
+        "result": "foreground.c and contract.md written against the frozen headers and capture.c. Not compiled and no tests run. inbox.c was not supplied, so the inbox return codes are assumed and listed in contract.md.",
+        "actionable_findings": [
+          "Check the inbox claim return codes for WAIT/PRIMING (assumed BASELINE/EMPTY).",
+          "Check that cs_inbox_restart moves its epoch to the restarted capture's epoch.",
+          "If capture begin fails, the inbox is started and faulted at epoch 1 so producer admission stays closed.",
+          "If the inbox fails after a successful capture restart, the capture is left in WAIT (not stopped) to avoid an extra owner call."
+        ],
+        "tests_executed": [],
+        "blockers": [
+          "inbox.c body unavailable: inbox return-code behavior is unverified until the lead runs its tests."
+        ]
+      },
+      "usage": {
+        "total_cost_usd": 0.41924079999999997,
+        "num_turns": 1,
+        "modelUsage": {
+          "claude-opus-5-5": {
+            "inputTokens": 2,
+            "outputTokens": 15599,
+            "cacheReadInputTokens": 2384,
+            "cacheCreationInputTokens": 13347,
+            "webSearchRequests": 0,
+            "costUSD": 0.41924079999999997,
+            "contextWindow": 1000000,
+            "maxOutputTokens": 128000,
+            "thinkingTokens": 8096,
+            "canonicalModel": "claude-opus-5-5",
+            "provider": "firstParty",
+            "costBasis": "list"
+          }
+        }
+      }
+    },
+    "pc286": {
+      "execution": {
+        "round": "pc286",
+        "worker": "grok",
+        "exit_code": 0,
+        "outer_timeout": false,
+        "elapsed_seconds": 96.28,
+        "input_bytes": 14165,
+        "input_sha256": "e967cb305415db5a120b81ca4fa235943d03908a945e4f27b6c2abaf0e54473d",
+        "stderr_bytes": 0
+      },
+      "artifact_lines": 76,
+      "artifact_words": 1133,
+      "files": {
+        "c16-contract.md": "249834037375d58d26f169815b33c819b6e1c9f41fed7905f7d19f4ba1a61649"
+      },
+      "observed_tools": [],
+      "handoff": {
+        "result": "Drafted the C16 language, checked-arithmetic, and helper-policy contract from the pinned WCC observations and the surface validation shape. No implementation, ABI, opcode, or helper body. Paired Mac/x64 C11 stays primary. Every verification case is unexecuted.",
+        "actionable_findings": [
+          "Keep the primary CMake language on C11 and put C16 assertions behind ClasSICK-owned names.",
+          "Require width-correct masks and prove shift and divide inputs before the operator.",
+          "Reject guest 32-bit spans that do not fit in 16-bit size_t before any narrowing store.",
+          "Leave __U4M, __U4D, __I4D, __U8M, __U8DQ, __U8DR, and __STK unimplemented until a published interface review.",
+          "Next bound is one unlinked header plus the surface width note, then the P286-2 segment map. No loader."
+        ],
+        "tests_executed": [],
+        "blockers": []
+      },
+      "usage": {
+        "total_cost_usd": 0.02194564,
+        "num_turns": 1,
+        "modelUsage": {
+          "grok-4.7-build": {
+            "inputTokens": 9728,
+            "outputTokens": 7419,
+            "cacheReadInputTokens": 1152,
+            "cacheCreationInputTokens": 0,
+            "modelCalls": 1,
+            "costUSD": 0.02194564
+          }
+        }
+      }
+    }
+  },
+  "main_lead_corrections": [
+    "cs_inbox_resume actual success isBASELINE,notOK",
+    "empty-ended restart metadata preflight before effects",
+    "helper legalhead/phase coupling beforeclaim",
+    "extended original API-only and real-owner tests;not strict final authorblind"
+  ],
+  "code_input_sha256": {
+    "apps/window-scene/foreground.h": "4b38bf1c6f0a40cf4e89d7b3a624be2088dc191dedc7e4f151b1826ccbbc969c",
+    "apps/window-scene/foreground.c": "ee7eb178e437ada21190317c492bb593e667f24a0e21ef2f225ee5479adce2b7",
+    "tests/window-foreground.c": "d61ad2739bfb79413b1947b15366cc6d43b8412ec118f82000f2af79aeb299dd",
+    "tests/window-foreground-integration.c": "8ea40486aa0db19848658e379b8f17dc116533ff20cd216a15b983bec3504064",
+    "tests/window-foreground-layout.c": "6c54024d662051324ff098a37aa55670d54f4c9da5b1905a978158030ecb62c7",
+    "scripts/Verify-ForegroundObjects.ps1": "004da140910d63c238cd963c58485831de0bdab3014adb7d03632f82b5844d85",
+    "scripts/Verify-ForegroundM68k.py": "8ffbd78cd447e1cf16c4b923d1ecf8a969a6bfab762bc575a2ee2ea59951a175",
+    "CMakeLists.txt": "d35a6b112a3983258fc48a03b8d8209af2e81a3db149409b4b5c85d9d2dfc38a",
+    ".github/workflows/bootstrap.yml": "34ce0d69709b3af979bdb16c41851667ee8200e454c997f3bea1f8d5dc0a78bf"
+  },
+  "current_release_versions_changed": false,
+  "new_release": false,
+  "new_VM_emulator_hardware_run": false,
+  "remaining_allowances": {
+    "Claude": "unverified",
+    "Grok": "unverified",
+    "Copilot": "unavailable/unverified;idle",
+    "Antigravity_Argon4_High": "unavailable/unverified;idle"
+  },
+  "net_Codex_savings_measured": false
+}

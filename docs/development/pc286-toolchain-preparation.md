@@ -1,5 +1,12 @@
 # PC/AT 286 toolchain preparation
 
+2026-10-23,SRC-0390/0392/0393:active286 side-lane progress is now
+[SPEC-0067](../specifications/SPEC-0067-c16-portability-policy.md),the reviewed C16
+language/checked-math/helper policy.8 TEST-0081 cases unexecuted;prior TEST-0079
+observations reused,no repeated matrix or new implementation/target trial.
+Next:unlinked owned assert/alignment facade and surface width proof,then P286-2.
+Paired native Mac/x64 release remains the primary workstream.
+
 2026-10-23; SRC-0386..0389, ADR-0077, IMPL-0067 / TEST-0079.
 [Machine-readable evidence](pc286-toolchain-evidence.json),
 [optional reproducer](../../probes/pc286/README.md),

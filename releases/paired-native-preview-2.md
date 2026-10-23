@@ -1,5 +1,14 @@
 # Paired native preview 2 - first interactive window
 
+Current2026-10-23,SRC-0390..0393/ADR-0078:paired Mac/x64 release isPRIMARY,
+with bounded286 progress alongside,not a new third release prerequisite.
+SPEC-0066 foreground coordinator locally verified;CPU/SCC/boot binding and
+visible/human/physical/M1-M7/whole128K gates remain. SPEC-0067 is the286 contract
+outcome,8 cases unexecuted. [Two-lane plan](../docs/development/release-and-pc286-plan.md),
+[current evidence](../docs/development/window-foreground-evidence.md).
+The original dated planning text below retains its initial scope/status;the
+unexecuted release acceptance items are not software/compiler foundation claims.
+
 Status: proposed release goal,2026-10-19,SRC-0307..0309 / ADR-0058. Planning only; no implementation, trial or publication authority.
 All checks below are planned and unexecuted. No historical Macintosh behavior
 is inferred from this synthetic workload.
