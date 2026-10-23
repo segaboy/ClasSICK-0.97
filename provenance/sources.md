@@ -3967,3 +3967,40 @@ ADR-0076: shared semantics plus measured original per-target backends, explicit
 baseline/candidate resources and latency, conformance and speed/space tradeoffs.
 Direct small record, no worker/benchmark/fixture/code/build/trial or new external
 transfer. Current paired milestone and source/native-app/publication gates persist.
+
+## SRC-0386 - Owner authorizes preparation for the286 port
+
+2026-10-23 owner:"You next task is to prepare for the286 port." Interpret as
+bounded first C16 toolchain/compile preparation under P286-1 and ADR-0075/0076;
+no firmware,emulator/hardware run,loader/full port or release permission.
+
+## SRC-0387 - Pinned compiler-tool release,license and option interfaces
+
+Open Watcomv2 publisher2026-10-01-Build release/API metadata,Windowsx64-host C
+package128123174B,SHA2563d2d2b56c890e4ac6661cee7b85c9aa33369677c0a8ff1ed70f1a711942094f0.
+Selected package/member hashes in scripts/pc286-toolchain-lock.json. License1.0
+retained with unmodified local tools;only compiler/object binaries,5 standard
+interface headers andlicense selectively extracted. Publisher current UserGuide
+option2,memorymodels,zastd=c89/c99,-s/-zl interfaces reviewed2026-10-23;modern
+tool facts,not Macintosh1984 evidence. URLs in lock/review;no compiler/runtime
+implementation body or manual sample adopted. No runtime distribution admitted.
+
+## SRC-0388 - Claude original compile probes and focused audit
+
+Opus5.5 low;11931B224line frozen original packet,exactSHA in task brief. First
+restricted-context DNS failure182.91s,no artifact;one corrected network-authorized
+call94.14s yields197 lines/1096 audit words,zero tools/edits/tests. Five original
+C probes and an audit;lead corrects char-width tautology,pointer identity and
+blanket arithmetic/model claims. Actual selected-source/compiler observations
+remain lead verification,not worker passing-test claims. Session listcost
+$0.2536408 is not balance or net Codex saving;other workers idle.
+
+## SRC-0389 - Lead original C16 compile and object observations
+
+TEST-0079/IMPL-0067:32 own objects from39 final compiler calls,7 expected
+rejections;2 harness refusal controls. Selected current4 C units compile in3
+models,high-bit mask hazard confirmed atcompile time,C11 failures/helper names/
+near-far widths and USE16/80286 metadata recorded. Own objects only,no target
+execution,full link/fit or timing proof. Initial DATA-label scanner false-positive
+fixed andfinal matrix rerun. Full logs/objects/tool files outsideGit;review/receipt
+carry source/rights/coverage limitations. Existing gates remain.

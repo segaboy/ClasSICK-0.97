@@ -1,5 +1,14 @@
 # ClasSICK 0.97 working instructions
 
+2026-10-23,SRC-0386..0389/ADR-0077/IMPL-0067/TEST-0079: isolated pinnedWCC16
+compile preparation;39 final compiler calls/32 objects/7 expected rejections,
+2 harness refusals,no link/target execution. C16 mask hazard confirmed atcompile
+time,C11/helper/segmented-view/model/full-map/speed gaps remain;P286-1 partial.
+One Claude DNS-context failure then network-authorized corrected primary;197
+lines adopted with lead controls/harness. No runtime/core/CMake/boot input,
+installer/firmware/emulator run or release. Preserve originals/held brief/UART/
+old records/assets/tags/retired wiki and all gates. [Review](docs/development/pc286-toolchain-preparation.md).
+
 2026-10-23, SRC-0383..0385 / ADR-0076: owner refines first286 goal to PC/AT5170
 6MHz/640KiB/EGA and full hard-disk installation, no routine system floppy;
 Word edition/fit/performance remain unqualified. Native performance is required

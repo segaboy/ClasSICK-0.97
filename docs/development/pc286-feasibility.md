@@ -1,5 +1,11 @@
 # Native 80286 PC port: feasibility and proposed roadmap
 
+2026-10-23, SRC-0386..0389 / ADR-0077: first [C16 compile preparation](pc286-toolchain-preparation.md)
+complete as a bounded tool slice:39 final compile invocations/32 objects/7 expected
+rejections and2 harness refusals. P286-1 production gate remains partial:C11,
+helper closure,segmented views/model/ABI/maps/fit/performance and286 execution
+remain. No runtime/loader,firmware profile,target trial or release change.
+
 Owner refinement after this study, 2026-10-23 (SRC-0383): the first working
 configuration discussed is IBM PC/AT 5170, 6MHz, 640KiB conventional RAM,
 IBM EGA/5154, a provisional 20MB hard disk and 1.2MB installation/recovery floppy.

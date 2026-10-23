@@ -1,0 +1,571 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-23",
+  "sources": [
+    "SRC-0386",
+    "SRC-0387",
+    "SRC-0388",
+    "SRC-0389"
+  ],
+  "decision": "ADR-0077",
+  "implementation": "IMPL-0067",
+  "test_record": "TEST-0079",
+  "base_revision": "248214d527fbee34d411ce0f4d1c175b582f00df",
+  "scope": "isolated Windows-hosted trueC16 compile-only preparation;production toolchain gate partial",
+  "compiler_archive_sha256": "3d2d2b56c890e4ac6661cee7b85c9aa33369677c0a8ff1ed70f1a711942094f0",
+  "final_matrix": {
+    "compile_invocations": 39,
+    "objects_emitted": 32,
+    "expected_refusals": 7,
+    "expectations_met": true,
+    "runtime_tests": 0,
+    "target_executions": 0,
+    "linked_images": 0,
+    "selected_ISA_guards_passed": true,
+    "exhaustive_ISA_validation": false
+  },
+  "harness_controls": [
+    {
+      "case": "wrong-archive",
+      "exit_code": 1,
+      "expected_refusal_observed": true
+    },
+    {
+      "case": "existing-output",
+      "exit_code": 1,
+      "expected_refusal_observed": true
+    }
+  ],
+  "case_columns": [
+    "case",
+    "exit_code",
+    "expected_compile_success",
+    "object_bytes",
+    "TEXT_bytes",
+    "external_references"
+  ],
+  "case_rows": [
+    [
+      "ms-abi",
+      0,
+      true,
+      468,
+      0,
+      []
+    ],
+    [
+      "ms-arithmetic",
+      0,
+      true,
+      814,
+      187,
+      [
+        "__I4D",
+        "__U4D",
+        "__U4M"
+      ]
+    ],
+    [
+      "ms-far",
+      0,
+      true,
+      587,
+      56,
+      [
+        "far_callee_",
+        "far_import_"
+      ]
+    ],
+    [
+      "ms-c99",
+      0,
+      true,
+      451,
+      85,
+      [
+        "__U8DQ",
+        "__U8M"
+      ]
+    ],
+    [
+      "ms-c11",
+      1,
+      false,
+      null,
+      null,
+      []
+    ],
+    [
+      "ms-controls",
+      0,
+      true,
+      358,
+      7,
+      []
+    ],
+    [
+      "ms-header",
+      0,
+      true,
+      306,
+      0,
+      []
+    ],
+    [
+      "ms-memory-guest",
+      0,
+      true,
+      1328,
+      785,
+      [
+        "cs_guest_validate_",
+        "cs_guest_window_"
+      ]
+    ],
+    [
+      "ms-graphics-surface",
+      0,
+      true,
+      1521,
+      920,
+      [
+        "__U8DQ",
+        "__U8DR",
+        "__U8M",
+        "cs_surface_fill_"
+      ]
+    ],
+    [
+      "ms-services-traps",
+      0,
+      true,
+      2224,
+      1372,
+      [
+        "cs_trap_decode_",
+        "cs_trap_get_",
+        "cs_trap_set_"
+      ]
+    ],
+    [
+      "ms-cpu-m68k",
+      0,
+      true,
+      1785,
+      1074,
+      [
+        "cs_m68k_aline_",
+        "cs_trap_call_"
+      ]
+    ],
+    [
+      "mm-abi",
+      0,
+      true,
+      471,
+      0,
+      []
+    ],
+    [
+      "mm-arithmetic",
+      0,
+      true,
+      832,
+      195,
+      [
+        "__I4D",
+        "__U4D",
+        "__U4M"
+      ]
+    ],
+    [
+      "mm-far",
+      0,
+      true,
+      588,
+      54,
+      [
+        "far_callee_",
+        "far_import_"
+      ]
+    ],
+    [
+      "mm-c99",
+      0,
+      true,
+      458,
+      89,
+      [
+        "__U8DQ",
+        "__U8M"
+      ]
+    ],
+    [
+      "mm-c11",
+      1,
+      false,
+      null,
+      null,
+      []
+    ],
+    [
+      "mm-controls",
+      0,
+      true,
+      366,
+      7,
+      []
+    ],
+    [
+      "mm-header",
+      0,
+      true,
+      316,
+      0,
+      []
+    ],
+    [
+      "mm-memory-guest",
+      0,
+      true,
+      1338,
+      790,
+      [
+        "cs_guest_validate_",
+        "cs_guest_window_"
+      ]
+    ],
+    [
+      "mm-graphics-surface",
+      0,
+      true,
+      1535,
+      927,
+      [
+        "__U8DQ",
+        "__U8DR",
+        "__U8M",
+        "cs_surface_fill_"
+      ]
+    ],
+    [
+      "mm-services-traps",
+      0,
+      true,
+      2235,
+      1378,
+      [
+        "cs_trap_decode_",
+        "cs_trap_get_",
+        "cs_trap_set_"
+      ]
+    ],
+    [
+      "mm-cpu-m68k",
+      0,
+      true,
+      1792,
+      1077,
+      [
+        "cs_m68k_aline_",
+        "cs_trap_call_"
+      ]
+    ],
+    [
+      "ml-abi",
+      0,
+      true,
+      471,
+      0,
+      []
+    ],
+    [
+      "ml-arithmetic",
+      0,
+      true,
+      836,
+      199,
+      [
+        "__I4D",
+        "__U4D",
+        "__U4M"
+      ]
+    ],
+    [
+      "ml-far",
+      0,
+      true,
+      587,
+      53,
+      [
+        "far_callee_",
+        "far_import_"
+      ]
+    ],
+    [
+      "ml-c99",
+      0,
+      true,
+      458,
+      89,
+      [
+        "__U8DQ",
+        "__U8M"
+      ]
+    ],
+    [
+      "ml-c11",
+      1,
+      false,
+      null,
+      null,
+      []
+    ],
+    [
+      "ml-controls",
+      0,
+      true,
+      366,
+      7,
+      []
+    ],
+    [
+      "ml-header",
+      0,
+      true,
+      316,
+      0,
+      []
+    ],
+    [
+      "ml-memory-guest",
+      0,
+      true,
+      1448,
+      900,
+      [
+        "cs_guest_validate_",
+        "cs_guest_window_"
+      ]
+    ],
+    [
+      "ml-graphics-surface",
+      0,
+      true,
+      1594,
+      986,
+      [
+        "__U8DQ",
+        "__U8DR",
+        "__U8M",
+        "cs_surface_fill_"
+      ]
+    ],
+    [
+      "ml-services-traps",
+      0,
+      true,
+      2567,
+      1676,
+      [
+        "cs_trap_decode_",
+        "cs_trap_get_",
+        "cs_trap_set_"
+      ]
+    ],
+    [
+      "ml-cpu-m68k",
+      0,
+      true,
+      2027,
+      1290,
+      [
+        "cs_m68k_aline_",
+        "cs_trap_call_"
+      ]
+    ],
+    [
+      "bad-int",
+      1,
+      false,
+      null,
+      null,
+      []
+    ],
+    [
+      "bad-far",
+      1,
+      false,
+      null,
+      null,
+      []
+    ],
+    [
+      "checked-stack",
+      0,
+      true,
+      393,
+      19,
+      [
+        "__STK"
+      ]
+    ],
+    [
+      "align",
+      1,
+      false,
+      null,
+      null,
+      []
+    ],
+    [
+      "c11-mode",
+      1,
+      false,
+      null,
+      null,
+      []
+    ],
+    [
+      "far-o0",
+      0,
+      true,
+      588,
+      54,
+      [
+        "far_callee_",
+        "far_import_"
+      ]
+    ]
+  ],
+  "input_sha256": {
+    "probes/pc286/abi.c": "295fc11cc2338e6625a7f08a59384e073e6b4d60a4b3cd57538cb010eaa7c1bc",
+    "probes/pc286/arithmetic.c": "51b34b92822bb20dca7ee9daaa583062155a7f8b8ea230fa7483773569a032ec",
+    "probes/pc286/far.c": "bdeee08720dbe43284dc87b86ebc76c53cab92ebe61e795631bc6f37b7fe7816",
+    "probes/pc286/c99.c": "d2e5e0b7ea45d5d38786376fc4e572b201bec2c361a4956d95ff273f2731691a",
+    "probes/pc286/c11.c": "497df40d08d2157c530cf6d3f5e9a2b4e4294fcf28bec7880a2b07b24da0372c",
+    "probes/pc286/controls.c": "513c491d07bf14469d83a4fa6d72d6661fa4e2972e5742b9917ec7471409bac9",
+    "probes/pc286/header-abi.c": "6f79f310391bf23c6c1633d5945edefe4dd6b6017dfda5080bfcea362d837a4e",
+    "core/memory/guest.c": "9678b43e3dc82df2f66119794f08cb2a0dbd85c07a031085daba35b230b6f8a1",
+    "core/graphics/surface.c": "157ed442c0278a344b57cb0e08657c30273de2a62199d72a30b38e5ee7ea1c5c",
+    "core/services/traps.c": "585adf0742f51390bc44ba086b58e22361bb7188c1205bcc11968875f0cbb1ef",
+    "core/cpu/m68k.c": "c6c169c175a71bb24d2f6f375d5bca7dea4469ae4407c43159b3b27c6db613b8",
+    "probes/pc286/align.c": "26d77e2ac58de61a7bfa8a31d194ca5224862cd7af4040032f0a197d5518a74b"
+  },
+  "raw_final_report_sha256": "a242d9372847cfe49c6486529b02533e8d87595d4aad378e1ec545be0e4d3ce5",
+  "worker": {
+    "execution": {
+      "round": "primary-network",
+      "worker": "claude",
+      "exit_code": 0,
+      "outer_timeout": false,
+      "elapsed_seconds": 94.14,
+      "input_bytes": 11931,
+      "input_sha256": "ede6f77e4e69445da8c5b33a8233c62bd983a4bc3cc37d3bb8bebb7f55a1a69a",
+      "stderr_bytes": 0
+    },
+    "observed_tools": [],
+    "artifact_lines": 197,
+    "audit_words": 1096,
+    "files": {
+      "abi.c": "6579dd9abe43fc758dae1167a262e678f9b06d0d3b74a9bbd57c7b96181200cd",
+      "arithmetic.c": "51b34b92822bb20dca7ee9daaa583062155a7f8b8ea230fa7483773569a032ec",
+      "far.c": "bdeee08720dbe43284dc87b86ebc76c53cab92ebe61e795631bc6f37b7fe7816",
+      "c99.c": "d2e5e0b7ea45d5d38786376fc4e572b201bec2c361a4956d95ff273f2731691a",
+      "c11.c": "497df40d08d2157c530cf6d3f5e9a2b4e4294fcf28bec7880a2b07b24da0372c",
+      "audit.md": "caf6360a8c8077db8b1346a4831ab7620c387559eb5931573fb3c51d65e064cb"
+    },
+    "handoff": {
+      "result": "Six compile-only probes and the audit are drafted. Nothing was compiled or run, and no results are claimed.",
+      "actionable_findings": [
+        "guest.c validate and window: ~7u zero-extends to 0x0000FFF8 under 16-bit int, so flag/access bits 16-31 are accepted; use ~7UL or ~(uint32_t)7",
+        "guest.c window: r->bytes+(at-r->base) cannot address regions of 64 KiB or more through offset-only far arithmetic; the 128 KiB RAM needs a segmented or paged backend",
+        "cs_guest_view raw pointers kept by callers must not cross a segment; needs an API redesign",
+        "surface.h size_t storage_size/stride is 16-bit; check stride*height in 32 bits before narrowing",
+        "guest.c uses C99 for-declarations and mixed declarations, and all files need stdint.h; qualify C99 mode or hoist",
+        "Far pointer equality and ordering are unreliable for host identity; keep overlap checks on guest addresses"
+      ],
+      "tests_executed": [],
+      "blockers": [
+        "OpenWatcom 2 WCC binary, version and options are unqualified",
+        "Guest-memory backend and view API are undesigned",
+        "Memory model and native manager call ABI are undefined",
+        "Helper runtime licence and provenance policy is undecided",
+        "5170 fit and performance are unmeasured",
+        "Word edition is unqualified",
+        "Existing milestone, source, native-app, trial and release gates still apply"
+      ]
+    },
+    "usage": {
+      "total_cost_usd": 0.2536408,
+      "num_turns": 1,
+      "is_error": false,
+      "modelUsage": {
+        "claude-opus-5-5": {
+          "inputTokens": 2,
+          "outputTokens": 10097,
+          "cacheReadInputTokens": 2384,
+          "cacheCreationInputTokens": 6402,
+          "webSearchRequests": 0,
+          "costUSD": 0.2536408,
+          "contextWindow": 1000000,
+          "maxOutputTokens": 128000,
+          "thinkingTokens": 3243,
+          "canonicalModel": "claude-opus-5-5",
+          "provider": "firstParty",
+          "costBasis": "list"
+        }
+      }
+    }
+  },
+  "first_worker_attempt": {
+    "execution": {
+      "round": "primary",
+      "worker": "claude",
+      "exit_code": 1,
+      "outer_timeout": false,
+      "elapsed_seconds": 182.91,
+      "input_bytes": 11931,
+      "input_sha256": "ede6f77e4e69445da8c5b33a8233c62bd983a4bc3cc37d3bb8bebb7f55a1a69a",
+      "stderr_bytes": 0
+    },
+    "event_types": {
+      "system": 12,
+      "assistant": 1,
+      "result": 1
+    },
+    "subtype": "success",
+    "is_error": true,
+    "artifact_available": false,
+    "tools": [],
+    "usage": {
+      "total_cost_usd": 0,
+      "num_turns": 1,
+      "modelUsage": {}
+    }
+  },
+  "integration_corrections": [
+    "sizeof(char)==1 replaced by substantive unsigned-char wrap check",
+    "far-pointer inequality does not prove nonaliasing;equal canonical values are not disproved",
+    "qualify broad all32bit-operation/memory-model claims",
+    "ISA scanner initially misread DATA far_callee label as instruction;restrict ownTEXT sections and rerun"
+  ],
+  "remaining_blockers": [
+    "C11 _Static_assert/_Alignof unsupported in probes;current main build requiresC11",
+    "Compiler arithmetic/stack helper closure and distribution not admitted",
+    "True segmented guest backend/view/canonical ownership and model/ABI not specified",
+    "No full link/map or RAM/stack/disk fit measured",
+    "No minimum-ISA execution,firmware/boot/storage/graphics/input profile qualification",
+    "No Word edition or real application/performance qualification"
+  ],
+  "new_runtime_build": false,
+  "native_boot_inputs_changed": false,
+  "current_paired_milestone_changed": false,
+  "remaining_external_allowances": {
+    "Claude": "unverified;session listcost not account balance",
+    "Grok": "unavailable/unverified;idle",
+    "Copilot": "unavailable/unverified;idle",
+    "Antigravity_Argon4_High": "unavailable/unverified;idle"
+  },
+  "net_Codex_usage_savings_measured": false
+}

@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "status": "isolated compile-only candidate,not a qualified production runtime",
+  "release": "2026-10-01-Build",
+  "release_url": "https://github.com/open-watcom/open-watcom-v2/releases/tag/2026-10-01-Build",
+  "archive": {
+    "name": "open-watcom-2_0-c-win-x64.exe",
+    "url": "https://github.com/open-watcom/open-watcom-v2/releases/download/2026-10-01-Build/open-watcom-2_0-c-win-x64.exe",
+    "bytes": 128123174,
+    "sha256": "3d2d2b56c890e4ac6661cee7b85c9aa33369677c0a8ff1ed70f1a711942094f0"
+  },
+  "compiler_banner": "Open Watcom C x86 16-bit Optimizing Compiler;Version2.0 beta Oct1 2026 06:47:30 (64-bit Windows host)",
+  "selected_members": [
+    {
+      "path": "binnt64/wcc.exe",
+      "bytes": 118272,
+      "sha256": "ba98a515edf58c21d69ca14600573930decb94aae64f914fc103465e890a8987"
+    },
+    {
+      "path": "binnt64/wccd.dll",
+      "bytes": 1368576,
+      "sha256": "ff5131d9d2638e6839915d4329b2e39178e229c1af80620f89296b7f3a5c2e90"
+    },
+    {
+      "path": "binnt64/wdis.exe",
+      "bytes": 483328,
+      "sha256": "1d6b4dbcb93215a906b3dad21f6b432805aa54181054bed948361719d0f8eb3c"
+    },
+    {
+      "path": "binnt64/wlink.exe",
+      "bytes": 203776,
+      "sha256": "480433043bf88e34dd46d3d8277f3e85a33b2589f012bc04f82ad3fa6751c801"
+    },
+    {
+      "path": "binnt64/wlinkd.dll",
+      "bytes": 714240,
+      "sha256": "c6538c2570057ee1b73955f70eee64f8cb0db80bd6182437d0ce0a597bb57471"
+    },
+    {
+      "path": "binnt64/dmpobj.exe",
+      "bytes": 150016,
+      "sha256": "74956da2a89d85a8a5de0c7e87bf305f6d05e7a88f6d124c9bae03e2a8e8f480"
+    },
+    {
+      "path": "license.txt",
+      "bytes": 20778,
+      "sha256": "b5e6676779126951c3bf84547b577ec7370b073791ca6072aa5568c62a2d7aef"
+    },
+    {
+      "path": "h/stdint.h",
+      "bytes": 8028,
+      "sha256": "f381e49067a625235d75859cd6725e672aadfc328bf2fb4ea181f37ef4d99f4d"
+    },
+    {
+      "path": "h/stddef.h",
+      "bytes": 2523,
+      "sha256": "85c3ebd6d75f3a2ad74e9ed8c54f9a0bb22d39b3d48c8d33a4acec260714184d"
+    },
+    {
+      "path": "h/_comdef.h",
+      "bytes": 5243,
+      "sha256": "601de6f145cf5a5e63db92574b0d76bc2fcac64929482ca52c4f2c8c1eccabf7"
+    },
+    {
+      "path": "h/limits.h",
+      "bytes": 4728,
+      "sha256": "97c3496421b53a333260e78de12dc1fd045e65c083a1be8c2cfaa09c8f7a1877"
+    },
+    {
+      "path": "h/stdbool.h",
+      "bytes": 1366,
+      "sha256": "f7e8733fb0896bf65d17c99bb9c54d274239c3d96fe98f52b8f1420ebc337607"
+    }
+  ],
+  "license": "Sybase Open Watcom Public License1.0,retained with local unmodified tools;no runtime/helper distribution admitted",
+  "license_url": "https://raw.githubusercontent.com/open-watcom/open-watcom-v2/2026-10-01-Build/license.txt",
+  "target_executed": false,
+  "installer_executed": false
+}

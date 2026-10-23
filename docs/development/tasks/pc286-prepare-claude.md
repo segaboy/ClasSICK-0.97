@@ -1,0 +1,18 @@
+# PC286 compile-preparation primary brief
+
+2026-10-23; public base248214d527fbee34d411ce0f4d1c175b582f00df.
+The frozen original file packet was11931 bytes/224 lines,SHA256
+`ede6f77e4e69445da8c5b33a8233c62bd983a4bc3cc37d3bb8bebb7f55a1a69a`.
+No manual/HQ/credentials/untracked-draft/UART or prohibited input.
+
+Prepare original compile-only qualification artifacts and a portability audit for ClasSICK's proposed native80286 PC build. Windows11/PowerShell host;public revision248214d527fbee34d411ce0f4d1c175b582f00df. Codex is sole writer/integrator/verifier. One bounded primary. No tools,commands,edits,other paths,web,MCP,delegation or tests. Only frozen reviewed-public/original inputs below;no manuals,HQ,credentials,untracked research,Apple/Microsoft implementation,ROM/media,emulator source or UART bodies.
+
+Return JSON {"files":{"abi.c":"...","arithmetic.c":"...","far.c":"...","c99.c":"...","c11.c":"...","audit.md":"..."},"handoff":{"result":"...","actionable_findings":[],"tests_executed":[],"blockers":[]}}. <=300 combined source/markdown lines, <=1300 audit words. No stable IDs. Artifacts usable, original GPL-3.0-or-later SPDX and Copyright(C)2026 Dean Howell. No production patches, BIOS/loader code, executables, disk fixtures or target runs.
+
+Purpose: actual true16-bit compiler/ABI/helper/dialect preparation, not claim a working port. Candidate OpenWatcom2 Windows-hosted WCC16-bit, not WCC386;compiler binary/version not yet qualified. Published interface facts reviewed by lead: integer/short16bits,long32; __near2byte and __far4byte pointers; far increment only offset; ordinary objects cannot cross64KiB. Target286 via option2; no386+,FPU,unreal/EMS/XMS required. Hosted Win11/x64 execution is NOT16-bit execution. Current giant guest views/uintptr arithmetic need redesigned backend; no page/API chosen.
+
+Generate small standalone C probes(no headers,library calls,printf,malloc,main or target entry) allowing COMPILE-TIME sizeof checks and own-object listings to establish ABI,near/far code/data,sizeof long long availability,old ~7u32bit-mask failure versus ~7UL high-bit rejection,32bit add/shift/multiply/divide helper behavior,far-pointer addition and far function calls. Target syntax __near/__far allowed. Use plain C90 except isolated c99.c(for-declaration/mixed declaration) and c11.c(_Static_assert/_Alignof). Keep each probe independently compilable/failable; helper calls are diagnostic unresolved imports, never silently link runtimes. Use typedef char checks for C90, and visible constant results for semantic-mask assertions; compile-time negative controls are lead-owned. Do not claim execution from constant folding. No third-party runtime bodies/headers required. Conservative C90 ordinary code;processor size assumptions explicitly tested,not presumed.
+
+Audit the supplied original guest.c/h,surface.h,m68k.h,traps.h. Prioritize actual lines/classes: narrow unsigned masks/promotions,size_t truncation,far pointer ordering/wrap/retained views,for-declarations/C11 widths,span and transaction semantics,interpreter/native manager boundary. Separate proven language/ABI reasoning from empirical compiler results,which you cannot know yet. Include minimum project compile slice and precise remaining blockers;zero passing-test claims. Full128KiB guestRAM is runtime allocation,not a disk file. Current target goal5170 6MHz/640KiB/EGA/20MB harddisk installed(no system floppy regularuse);fit/performance unmeasured. Shared semantics but measured per-CPU optimization, no weakening correctness. No original Mac binaries fetched/run;specific Word edition remains unqualified. Current paired milestone/source/native-app/trial/release gates persist.
+
+FROZEN ORIGINAL FILES:

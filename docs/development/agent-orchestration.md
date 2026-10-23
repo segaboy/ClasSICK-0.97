@@ -331,3 +331,15 @@ guest,alignment,segmentation,coverage and Windows11-execution corrections.
 stays lead-only under existing input exclusions. Reported$0.2222208 list cost
 is not remaining allowance/measured Codex saving;other workers idle,all-four
 remaining allowances unverified. [Review](../research/pc286-source-review.md).
+
+
+PC286 preparation2026-10-23:one Claude Opus5.5 low primary;first restricted-context
+call DNS ENOTFOUND182.91s,no artifact,corrected network-authorized same11931B
+packet succeeds94.14s,197lines/1096words,zero tools/edits/tests. No other provider,
+requalification or unproductive retry. Lead integrates probes/audit with explicit
+width/identity corrections and independent ABI controls/reusable compiler harness;
+39 final compiler invocations/32 objects/7 expected rejections,2 harness refusals.
+Use established scoped network permission for CLI services;do not treat a sandbox
+DNS failure as provider/model quality. Reported$0.2536408 list/session cost is not
+balance or measured Codex saving;all remaining balances unverified,other workers
+idle. [Results](pc286-toolchain-preparation.md).
