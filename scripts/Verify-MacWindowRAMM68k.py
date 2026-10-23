@@ -15,7 +15,11 @@ def main():
     a=p.parse_args();repo=Path(__file__).resolve().parents[1];a.output.mkdir(parents=True,exist_ok=False)
     bins=a.tool_root/'usr/bin';cc=bins/'m68k-linux-gnu-gcc-13';nm=bins/'m68k-linux-gnu-nm'
     env=os.environ.copy();env['LD_LIBRARY_PATH']=str(a.tool_root/'usr/lib/x86_64-linux-gnu')
-    def run(args):return subprocess.check_output([str(x) for x in args],env=env,text=True,stderr=subprocess.STDOUT,timeout=60)
+    def run(args):
+        try:return subprocess.check_output([str(x) for x in args],env=env,text=True,stderr=subprocess.STDOUT,timeout=60)
+        except subprocess.CalledProcessError as error:
+            print(error.output,flush=True)
+            raise
     flags=['-mcpu=68000','-std=c11','-ffreestanding','-fno-builtin','-fno-stack-protector','-fno-ident',
            '-Wall','-Wextra','-Wpedantic','-Werror','-Wconversion','-Wsign-conversion',
            '-ffile-prefix-map='+str(repo)+'=.','-ffile-prefix-map='+str(a.output)+'=.']

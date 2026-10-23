@@ -33,9 +33,12 @@ int cs_mac_window_begin(cs_mac_window_session *session,uint8_t *canvas,
 
     if (session == NULL || canvas == NULL || hooks == NULL)
         return CS_MAC_WINDOW_ARGUMENT;
-    if (capacity < (size_t)CS_MAC_WINDOW_BYTES ||
-        (uintmax_t)capacity > (uintmax_t)UINTPTR_MAX)
+    if (capacity < (size_t)CS_MAC_WINDOW_BYTES)
         return CS_MAC_WINDOW_ARGUMENT;
+#if SIZE_MAX > UINTPTR_MAX
+    if (capacity > (size_t)UINTPTR_MAX)
+        return CS_MAC_WINDOW_ARGUMENT;
+#endif
     sa = (uintptr_t)(void *)session;
     ca = (uintptr_t)(void *)canvas;
     ha = (uintptr_t)(const void *)hooks;

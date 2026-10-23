@@ -53,3 +53,12 @@ The existing24 originals, held brief, UART bodies, old evidence/assets/releases/
 tags and retired wiki stay preserved. Native-app, historical, physical/full128K,
 both-System1-ROM and other edition gates persist. Compiler/boot results and
 final package source pins will be added only after execution.
+
+Follow-up: the clean Clang350-test regression passes; focused GCC Release and
+Clang ASan+UBSan each pass10 tests. Three compiled overpublication/centering/
+inverted-preflight defects are rejected. Native CI40020378727 stops in the
+bootstrap compile. GCC -m32 independently reproduces a Wtype-limits error in
+the widened capacity comparison. Lead gates that check with SIZE_MAX greater
+than UINTPTR_MAX, keeping the check only when meaningful; the32-bit compile
+then passes. The verifier now prints captured compiler diagnostics on failure.
+This correction changes no PC image bytes; native CI remains pending.
