@@ -1,9 +1,10 @@
 # TEST-0076 - Ordered capture verification
 
 2026-10-22;SPEC-0063;IMPL-0065;SRC-0366..0368.
-340 local profile CTests,12 native object audits,three actual compiled defects
+343 final local profile CTests,12 native object audits,three actual compiled defects
 rejected and valid control passed. Native68000 compiler/closure checks pending CI.
-Two test sources frozen before implementation inspection and unchanged afterward.
+Two API-only tests frozen before implementation inspection;later raw-byte snapshot
+correction follows the first GCC Release CI failure without changing expectations.
 
 |TEST-0075 case|Actually executed scope / limits|
 |---|---|
@@ -22,3 +23,9 @@ Two test sources frozen before implementation inspection and unchanged afterward
 
 All observations are E1 original software evidence,no IRQ/physical/historical
 claim. Exact source-pinned CI and full report:[evidence](../../docs/development/window-capture-evidence.json).
+
+
+First CI62926d1:68000 passes,GCC Release oracle fails on struct-copy padding.
+Reproduced atGCC-O3;raw byte snapshots fix that harness error while preserving
+full-byte no-effect checks.343 final local CTests include3 GCC64 Release checks;
+three compiled defects still reject. Production code unchanged.

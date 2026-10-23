@@ -10,15 +10,15 @@ One Claude Opus5.5 low primary returns259 C lines in53.97s from a complete
 22,167B/439line original-contract/public-type packet. Zero tools,edits,tests,
 retry,second worker or requalification. Lead adopts sound code,fixes the stop
 path and adds a power-of-two assertion. Tests were authored from the frozen API
-before implementation inspection and remain unchanged. A preexisting CMake
+before implementation inspection and remained unchanged through initial integration. A preexisting CMake
 executable name required renaming the new static library;no existing target edits.
 Non-ready owner STATE preflight is clarified without changing the intended API.
 Reported$0.2354344 list/session cost is not account balance or Codex savings.
 [Assignment](tasks/window-capture-claude.md);raw captures/builds outside Git:
 C:/ClasSICK/mac-capture-helper-20261022-a. Current quota sample remains private.
 
-Actual local verification:331 Clang64 regression CTests plus3 focused checks
-each on ASan/UBSan,GCC64 and GCC32,total340 profile CTests. Contract oracle1143
+Actual final local verification:331 Clang64 regression CTests plus3 focused checks
+each on ASan/UBSan,GCC64 Debug,GCC32 and GCC64 Release,total343 profile CTests including3 new GCC64 Release checks. Contract oracle1143
 assertions/real-owner integration89 per profile;these are assertions,not1232
 distinct scenarios. Real pointer boundary reversal,drag/content/counter and
 held-button cancellation/recovery pass. Three actual compiled defects reject:
@@ -46,3 +46,15 @@ historical/edition/physical/full128K/B2/native-app/BIOS/Linux/both System1-ROM
 gates remain. Next:the exact Mac SCC access/polarity/interrupt binding contract;
 no further implementation or target trial is granted by this completed slice.
 [Machine receipt](window-capture-evidence.json).
+
+
+CI correction:run39880414054/source62926d1 passes68000 but fails the GCC Release
+contract oracle. The lead's structure-value snapshots/by-value comparison did
+not preserve unspecified padding. The same failure was reproduced locally at
+GCC-O3. Raw byte-array snapshots replace those copies;the full-byte no-effect
+assertions and1143 expected assertions remain. Corrected oracle passes release
+and all previous profiles;all three compiled defective controls still reject
+and the valid control passes. No production/helper change or new worker call.
+The test source is therefore no longer unchanged from the initial author-blind
+freeze;this is an explicit harness correction,not relaxed no-effect behavior.
+New normal source-pinned CI pending;first failure and passing68000 manifest kept.

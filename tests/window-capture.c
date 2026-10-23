@@ -38,11 +38,12 @@ static void ready(uint32_t buttons)
     CHECK(calls[0].dx==0 && calls[0].dy==0 && calls[0].buttons==buttons);
     samples=0;
 }
-static void same(cs_window_capture old)
-{CHECK(memcmp(&old,&c,sizeof c)==0);}
+/* Byte snapshots include initialized padding without structure-value copies. */
+static void same(const unsigned char *old)
+{CHECK(memcmp(old,&c,sizeof c)==0);}
 static void refuses(void)
 {
-    fresh();cs_window_capture old=c;
+    fresh();unsigned char old[sizeof c];memcpy(old,&c,sizeof c);
     CHECK(cs_capture_push(&c,1,1,0,0)==CS_CAPTURE_BASELINE);same(old);
     CHECK(cs_capture_drain(&c,1)==CS_CAPTURE_BASELINE);same(old);
     CHECK(cs_capture_uncertain(&c,1)==CS_CAPTURE_BASELINE);same(old);
@@ -57,15 +58,15 @@ static void refuses(void)
     CHECK(cs_capture_begin(&c,&owner)==CS_CAPTURE_STATE);same(old);
     owner.phase=CS_WINDOW_INPUT_READY;
     CHECK(cs_capture_begin(&c,(cs_window_input *)(void *)&c)==CS_CAPTURE_ARGUMENT);same(old);
-    ready(0);old=c;
+    ready(0);memcpy(old,&c,sizeof c);
     CHECK(cs_capture_rebaseline(&c,1,0)==CS_CAPTURE_STATE);same(old);
     CHECK(cs_capture_drain(&c,1)==CS_CAPTURE_EMPTY);same(old);
     CHECK(cs_capture_push(&c,2,1,0,0)==CS_CAPTURE_STATE);same(old);
     for(unsigned mode=0;mode<6;++mode){
-        c=old;
+        memcpy(&c,old,sizeof c);
         switch(mode){case 0:c.valid=0;break;case 1:c.epoch=0;break;
         case 2:c.phase=99;break;case 3:c.head=16;break;case 4:c.count=17;break;default:c.owner=NULL;break;}
-        cs_window_capture bad=c;
+        unsigned char bad[sizeof c];memcpy(bad,&c,sizeof c);
         CHECK(cs_capture_drain(&c,1)==CS_CAPTURE_STATE);same(bad);
         CHECK(cs_capture_push(&c,1,0,0,0)==CS_CAPTURE_STATE);same(bad);
     }
@@ -80,7 +81,7 @@ static void ordered(void)
     for(unsigned i=0;i<7;++i){expected_count=6u-i;CHECK(cs_capture_drain(&c,1)==CS_CAPTURE_DELIVERED);}
     CHECK(samples==7 && c.delivered==7 && c.count==0);
     for(unsigned i=0;i<7;++i)CHECK(calls[i].dx==steps[i].dx && calls[i].dy==steps[i].dy && calls[i].buttons==steps[i].buttons);
-    expected_count=UINT32_MAX;cs_window_capture old=c;CHECK(cs_capture_drain(&c,1)==CS_CAPTURE_EMPTY);same(old);
+    expected_count=UINT32_MAX;unsigned char old[sizeof c];memcpy(old,&c,sizeof c);CHECK(cs_capture_drain(&c,1)==CS_CAPTURE_EMPTY);same(old);
     /* Producer must not consult owner state or call it. */
     owner.valid=0;owner.phase=CS_WINDOW_INPUT_FAULTED;
     CHECK(cs_capture_push(&c,1,1,1,0)==CS_CAPTURE_OK);
@@ -94,13 +95,13 @@ static void overflow(void)
     CHECK(cs_capture_push(&c,1,99,99,0)==CS_CAPTURE_LOST);
     CHECK(c.phase==CS_CAPTURE_LOSS && c.count==16 && c.loss_reason==CS_CAPTURE_OVERFLOW && c.losses==1);
     CHECK(memcmp(before,c.records,sizeof before)==0 && samples==0 && cancels==1);
-    cs_window_capture old=c;
+    unsigned char old[sizeof c];memcpy(old,&c,sizeof c);
     CHECK(cs_capture_push(&c,1,0,0,0)==CS_CAPTURE_LOST);same(old);
     CHECK(cs_capture_uncertain(&c,1)==CS_CAPTURE_LOST);same(old);
     CHECK(cs_capture_rebaseline(&c,1,0)==CS_CAPTURE_LOST);same(old);
     CHECK(cs_capture_drain(&c,1)==CS_CAPTURE_RESET);
     CHECK(c.phase==CS_CAPTURE_WAIT && c.count==0 && c.head==0 && cancels==2 && samples==0);
-    old=c;CHECK(cs_capture_drain(&c,1)==CS_CAPTURE_BASELINE);same(old);CHECK(cancels==2);
+    memcpy(old,&c,sizeof c);CHECK(cs_capture_drain(&c,1)==CS_CAPTURE_BASELINE);same(old);CHECK(cancels==2);
     CHECK(cs_capture_rebaseline(&c,1,1)==CS_CAPTURE_OK);CHECK(samples==1 && calls[0].buttons==1);
     CHECK(cs_capture_push(&c,1,9,0,1)==CS_CAPTURE_OK);expected_count=0;
     CHECK(cs_capture_drain(&c,1)==CS_CAPTURE_DELIVERED);CHECK(samples==2 && calls[1].dx==9);
@@ -127,15 +128,15 @@ static void failures(void)
     sample_result=CS_WINDOW_INPUT_ARGUMENT;expected_count=1;
     CHECK(cs_capture_drain(&c,1)==CS_CAPTURE_OWNER);
     CHECK(c.phase==CS_CAPTURE_FAULT && c.cause==CS_WINDOW_INPUT_ARGUMENT && c.stage==CS_CAPTURE_SAMPLE && c.count==1 && samples==1);
-    cs_window_capture old=c;CHECK(cs_capture_drain(&c,1)==CS_CAPTURE_OWNER);same(old);
+    unsigned char old[sizeof c];memcpy(old,&c,sizeof c);CHECK(cs_capture_drain(&c,1)==CS_CAPTURE_OWNER);same(old);
     CHECK(cs_capture_push(&c,1,0,0,0)==CS_CAPTURE_OWNER);same(old);
     cancel_result=CS_WINDOW_INPUT_FAULT;
     CHECK(cs_capture_stop(&c,1)==CS_CAPTURE_OWNER);CHECK(c.phase==CS_CAPTURE_ENDED && c.count==0 && cancels==2);
     CHECK(c.cause==CS_WINDOW_INPUT_ARGUMENT && c.stage==CS_CAPTURE_SAMPLE);
-    old=c;CHECK(cs_capture_stop(&c,1)==CS_CAPTURE_STOPPED);same(old);CHECK(cancels==2);
+    memcpy(old,&c,sizeof c);CHECK(cs_capture_stop(&c,1)==CS_CAPTURE_STOPPED);same(old);CHECK(cancels==2);
     cancel_result=CS_WINDOW_INPUT_OK;sample_result=CS_WINDOW_INPUT_OK;expected_count=UINT32_MAX;
     CHECK(cs_capture_restart(&c,&owner)==CS_CAPTURE_OK);CHECK(c.epoch==2 && c.phase==CS_CAPTURE_WAIT && c.cause==0 && c.delivered==0 && c.losses==0);
-    old=c;CHECK(cs_capture_push(&c,1,1,1,0)==CS_CAPTURE_STATE);same(old);
+    memcpy(old,&c,sizeof c);CHECK(cs_capture_push(&c,1,1,1,0)==CS_CAPTURE_STATE);same(old);
     CHECK(cs_capture_rebaseline(&c,2,0)==CS_CAPTURE_OK);
     CHECK(cs_capture_push(&c,2,1,1,0)==CS_CAPTURE_OK);CHECK(cs_capture_drain(&c,2)==CS_CAPTURE_DELIVERED);
     ready(0);CHECK(cs_capture_uncertain(&c,1)==CS_CAPTURE_LOST);cancel_result=-123;
@@ -150,11 +151,11 @@ static void stopping(void)
 {
     ready(0);CHECK(cs_capture_push(&c,1,4,5,0)==CS_CAPTURE_OK);
     CHECK(cs_capture_stop(&c,1)==CS_CAPTURE_STOPPED);CHECK(c.count==0 && c.head==0 && samples==0 && cancels==2);
-    cs_window_capture old=c;CHECK(cs_capture_drain(&c,1)==CS_CAPTURE_STOPPED);same(old);
+    unsigned char old[sizeof c];memcpy(old,&c,sizeof c);CHECK(cs_capture_drain(&c,1)==CS_CAPTURE_STOPPED);same(old);
     CHECK(cs_capture_push(&c,1,0,0,0)==CS_CAPTURE_STOPPED);same(old);
     CHECK(cs_capture_uncertain(&c,1)==CS_CAPTURE_STOPPED);same(old);
     CHECK(cs_capture_rebaseline(&c,1,0)==CS_CAPTURE_STOPPED);same(old);
-    c.epoch=UINT32_MAX;old=c;CHECK(cs_capture_restart(&c,&owner)==CS_CAPTURE_EXHAUSTED);same(old);
+    c.epoch=UINT32_MAX;memcpy(old,&c,sizeof c);CHECK(cs_capture_restart(&c,&owner)==CS_CAPTURE_EXHAUSTED);same(old);
     ready(0);CHECK(cs_capture_uncertain(&c,1)==CS_CAPTURE_LOST);
     CHECK(cs_capture_stop(&c,1)==CS_CAPTURE_STOPPED);CHECK(cancels==2 && c.count==0 && c.losses==1);
 }

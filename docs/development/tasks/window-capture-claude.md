@@ -18,4 +18,4 @@ One53.97s call,259 lines within350 cap,zero tools/writes/tests. Read-only tools,
 dontAsk,no MCP/memory/hooks/slash commands/session persistence,max2turns,420s
 outer bound,Opus5.5 low. No manuals/HQ/original drafts/implementation bodies.
 Lead stop-path/static-assert fixes and STATE clarification recorded separately.
-No second worker,retry or qualification;independent lead tests remain frozen.
+No second worker,retry or qualification;initial lead tests were API-only;later CI raw-snapshot correction is explicit.

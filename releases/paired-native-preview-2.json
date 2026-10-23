@@ -309,9 +309,9 @@
     "sequential_only": true,
     "hardware_bound": false,
     "boot_inputs_changed": false,
-    "local_profile_CTests": 340,
+    "local_profile_CTests": 343,
     "native_object_audits": 12,
-    "m68k_ci": "pending",
+    "m68k_ci": "first source passed;test-only fix CI pending",
     "Mac_adapter_admitted": false,
     "release_ready": false
   }

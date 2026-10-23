@@ -3833,3 +3833,10 @@ author-blind to new production until first artifact inspection;unchanged after.
 340 profile CTests,12 native object audits,three compiled faulty controls and
 valid harness verified.68000 CI pending checkpoint;no target run/boot input or
 published binary change. Partial MP5/MP11/MP12 limits explicit. [Receipt](../docs/development/window-capture-evidence.json).
+
+
+SRC-0368 CI correction:source62926d1 passes68000;Windows GCC Release reveals
+structure-copy padding in the lead oracle. Reproduced locally,corrected to raw
+byte snapshots without weakening full-byte no-effect assertions.343 final local
+profile CTests/three defective controls verified;no production code change or
+extra worker. Test text changed after initial freeze;expectations unchanged.

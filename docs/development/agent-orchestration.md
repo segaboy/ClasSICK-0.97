@@ -280,8 +280,10 @@ savings. Others idle;balances unavailable. [Review](mac-motion-prerequisites.md)
 Ordered capture2026-10-22:one Claude Opus5.5 low primary53.97s from22,167B/439line
 complete original contract/type packet yields259 C lines,zero tools/edits/tests.
 Lead adopts with stop-path/static-assert fixes;two API-only lead tests frozen
-before implementation inspection and unchanged afterward. No retry,second
-worker or requalification.340 local profile CTests/12 native audits/three actual
+before implementation inspection. CI later exposes a struct-padding snapshot
+harness error;lead substitutes raw byte snapshots,keeps byte-exact expectations,
+adds GCC Release profile and reruns all fault controls. No retry,second
+worker or requalification.343 final local profile CTests/12 reused native audits/three actual
 compiled defects verified;68000 CI separately recorded. Reported$0.2354344 list
 cost is not balance/Codex savings;quota snapshot private,others unknown.
 [Evidence](window-capture-evidence.json).

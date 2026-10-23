@@ -93,16 +93,18 @@
     "Stop must cancel a valid READY owner even after capture FAULT;first cause/stage preserved.",
     "Power-of-two mask assumption enforced by static assertion.",
     "Contract clarifies non-READY/tag owner preflight STATE,as already expected by frozen tests.",
-    "New CMake static library renamed core to avoid existing hosted capture executable target."
+    "New CMake static library renamed core to avoid existing hosted capture executable target.",
+    "CI GCC Release test fix:byte snapshots replace structure-value copies/by-value parameter,avoiding unspecified padding without weakening full-byte no-effect assertions. No production code change."
   ],
-  "test_independence": "Two lead test sources frozen before first implementation artifact inspection;unchanged after integration. Existing independent component oracles reused.",
+  "test_independence": "Original API-only tests frozen before first production inspection. Subsequent CI correction replaces structure-value copies with raw byte snapshots;no-effect byte assertions and expected API semantics unchanged. Final corrected source is lead-maintained,not unchanged author-blind text.",
   "local_verification": {
-    "profile_CTests": 340,
+    "profile_CTests": 343,
     "profiles": {
       "Clang64_full": 331,
       "Clang64_ASan_UBSan_focused": 3,
       "GCC64_focused": 3,
-      "GCC32_focused": 3
+      "GCC32_focused": 3,
+      "GCC64_Release_focused": 3
     },
     "unit_assertions_per_profile": 1143,
     "real_owner_assertions_per_profile": 89,
@@ -130,7 +132,7 @@
         "compiled": true,
         "exit": 1,
         "stdout": "",
-        "stderr": "line133:cs_capture_stop(&c,1)==CS_CAPTURE_OWNER",
+        "stderr": "line134:cs_capture_stop(&c,1)==CS_CAPTURE_OWNER",
         "expected_result_observed": true
       },
       {
@@ -138,7 +140,7 @@
         "compiled": true,
         "exit": 1,
         "stdout": "",
-        "stderr": "line95:c.phase==CS_CAPTURE_LOSS && c.count==16 && c.loss_reason==CS_CAPTURE_OVERFLOW && c.losses==1",
+        "stderr": "line96:c.phase==CS_CAPTURE_LOSS && c.count==16 && c.loss_reason==CS_CAPTURE_OVERFLOW && c.losses==1",
         "expected_result_observed": true
       },
       {
@@ -146,7 +148,7 @@
         "compiled": true,
         "exit": 1,
         "stdout": "",
-        "stderr": "line121:cs_capture_drain(&c,1)==CS_CAPTURE_DELIVERED",
+        "stderr": "line122:cs_capture_drain(&c,1)==CS_CAPTURE_DELIVERED",
         "expected_result_observed": true
       }
     ],
@@ -166,9 +168,9 @@
     }
   },
   "ci": {
-    "status": "pending",
+    "status": "pending test-only fix CI",
     "compiled_source_revision": null,
-    "m68k_result": "pending source-pinned CI;not locally executed"
+    "m68k_result": "First source62926d1 passed;identical helper/hash and new source-pin CI to be checked."
   },
   "boot_input_lists_changed": false,
   "existing_runtime_helpers_changed": false,
@@ -179,5 +181,18 @@
   "Mac_adapter_admitted": false,
   "whole128K_fit_certified": false,
   "remaining_external_allowances": "Claude snapshot retained privately;Grok/Copilot/Argon unavailable",
-  "net_Codex_usage_savings_measured": false
+  "net_Codex_usage_savings_measured": false,
+  "first_ci": {
+    "source_revision": "62926d1f9d1fe52306160d18d488612cd0f30ead",
+    "run": 39880414054,
+    "url": "https://github.com/segaboy/ClasSICK-0.97/actions/runs/39880414054",
+    "m68k_conclusion": "success",
+    "Windows_conclusion": "failure",
+    "failure": "GCC release contract oracle compared structure-copy padding;real-owner integration and freestanding checks passed.",
+    "local_failure_reproduced_before_fix": true
+  },
+  "test_source_hashes_after_CI_fix": {
+    "tests/window-capture.c": "849fb7a682cc307a5f238aa9b271800a82287c897c54a5e610b6b8a8b9cbf6f2",
+    "tests/window-capture-integration.c": "b82138c5bb7205544d744631a696272cd4e2816cc3d5efc164e36c78850e97fd"
+  }
 }
