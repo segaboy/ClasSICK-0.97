@@ -7,27 +7,38 @@
 static unsigned checks;
 #define CHECK(x) do { ++checks; if(!(x)){fprintf(stderr,"motion check %u line %d\n",checks,__LINE__);exit(1);} } while(0)
 typedef struct { uint32_t ch,reg,value; } write_event;
+typedef struct { uint32_t ch,reg,value,write,a_mask,b_mask,mie; } access_event;
 typedef struct {
     uint8_t regs[2][16],raw[2],pb,pending;
     unsigned calls,writes,snapshots,unstable,alias,bad_read;
     write_event log[256];
+    unsigned accesses;
+    access_event access[512];
 } chip;
 static chip hw;
 static struct cs_mac_motion m;
 static cs_window_inbox inbox;
+static void log_access(chip *p,uint32_t ch,uint32_t reg,uint32_t value,uint32_t write)
+{
+    CHECK(p->accesses<512);
+    p->access[p->accesses++]=(access_event){ch,reg,value,write,
+        p->regs[0][15],p->regs[1][15],p->regs[0][9]&8u};
+}
 static uint8_t rd(void *c,uint32_t ch,uint32_t reg)
 {
     chip *p=c;p->calls++;CHECK(ch<2 && reg<16);
-    if(reg==0)return p->raw[ch];
-    if(reg==3){CHECK(ch==0);return p->pending;}
-    if(reg==12 && p->bad_read)return 0;
-    return p->regs[p->alias?0:ch][reg];
+    uint8_t v=p->regs[p->alias?0:ch][reg];
+    if(reg==0)v=p->raw[ch];
+    if(reg==3){CHECK(ch==0);v=p->pending;}
+    if(reg==15 && p->bad_read==ch+1u)v=(uint8_t)(ch==0?0:8);
+    log_access(p,ch,reg,v,0);return v;
 }
 static void wr(void *c,uint32_t ch,uint32_t reg,uint8_t v)
 {
     chip *p=c;p->calls++;CHECK(ch<2 && reg<16 && p->writes<256);
     p->log[p->writes++]=(write_event){ch,reg,v};
     p->regs[p->alias?0:ch][reg]=v;
+    log_access(p,ch,reg,v,1);
     if(reg==0 && v==0x10)p->pending&=(uint8_t)(ch==0?0xF7u:0xFEu);
 }
 static uint8_t pb(void *c)
@@ -36,12 +47,35 @@ static uint8_t pb(void *c)
     return (uint8_t)(p->pb ^ ((p->unstable && p->snapshots%3u==0u)?0x10u:0u));
 }
 static cs_mac_motion_io io={&hw,rd,wr,pb};
+/* Contract oracle: partial ordering and observed masks, not a duplicate driver. */
+static void prepared(void)
+{
+    unsigned aw=512,bw=512,ar=512,br=512,enabled=512,reads=0;
+    CHECK(hw.regs[0][9]==2 && hw.regs[0][15]==8 && hw.regs[1][15]==8);
+    for(unsigned i=0;i<hw.accesses;i++){
+        const access_event *a=&hw.access[i];
+        CHECK(a->reg!=12 && a->reg!=13 && !a->mie);
+        if(a->reg!=15)continue;
+        if(a->write){
+            if(a->ch==0 && a->value==8)aw=i;
+            if(a->ch==1 && a->value==0)bw=i;
+            if(a->ch==1 && a->value==8)enabled=i;
+        }else{
+            CHECK(a->a_mask==8 && a->b_mask==0);
+            if(a->ch==0){CHECK(a->value==8);ar=i;}
+            else {CHECK(a->value==0);br=i;}
+            reads++;
+        }
+    }
+    CHECK(reads==2 && aw<ar && aw<br && bw<ar && bw<br);
+    CHECK(ar<enabled && br<enabled && enabled<hw.accesses);
+}
 static void fresh(uint32_t invert)
 {
     memset(&hw,0,sizeof hw);memset(&m,0xCC,sizeof m);hw.pb=8;
     CHECK(cs_inbox_begin(&inbox)==CS_INBOX_OK);
     CHECK(cs_mac_motion_prepare(&m,&io,&inbox,invert)==CS_MAC_MOTION_OK);
-    CHECK(hw.regs[0][9]==2 && hw.regs[0][12]==0x35 && hw.regs[1][12]==0x6A);
+    prepared();
     CHECK(!m.have_phase && inbox.phase==CS_INBOX_WAIT);
     CHECK(cs_mac_motion_arm(&m)==CS_MAC_MOTION_OK);
     CHECK(hw.log[hw.writes-1].reg==9 && hw.log[hw.writes-1].value==0x0A);
@@ -108,11 +142,13 @@ int main(void)
     fresh(0);inbox.epoch=2;CHECK(cs_mac_motion_service(&m)==CS_MAC_MOTION_FAULT && hw.regs[0][9]==2);
     fresh(0);CHECK(cs_inbox_stop(&inbox,1)==CS_INBOX_STOPPED);
     CHECK(cs_mac_motion_service(&m)==CS_MAC_MOTION_FAULT && hw.regs[0][9]==2);
-    for(unsigned fault=0;fault<2;fault++){
-        memset(&hw,0,sizeof hw);hw.pb=8;hw.alias=fault;hw.bad_read=!fault;
+    for(unsigned fault=0;fault<3;fault++){
+        memset(&hw,0,sizeof hw);hw.pb=8;hw.alias=fault==2;hw.bad_read=fault<2?fault+1u:0;
         CHECK(cs_inbox_begin(&inbox)==CS_INBOX_OK);
         CHECK(cs_mac_motion_prepare(&m,&io,&inbox,0)==CS_MAC_MOTION_FAULT);
         CHECK(m.phase==CS_MAC_MOTION_FAILED && m.cause==CS_MAC_CAUSE_READBACK && hw.regs[0][9]==2);
+        CHECK(m.stage==(fault==1?CS_MAC_STAGE_READBACK_B:CS_MAC_STAGE_READBACK_A));
+        for(unsigned i=0;i<hw.accesses;i++)CHECK(!hw.access[i].mie && hw.access[i].reg!=12);
         n=hw.calls;CHECK(cs_mac_motion_arm(&m)==CS_MAC_MOTION_STATE && hw.calls==n);
     }
     memset(&m,0xCC,sizeof m);unsigned char old[sizeof m];memcpy(old,&m,sizeof m);

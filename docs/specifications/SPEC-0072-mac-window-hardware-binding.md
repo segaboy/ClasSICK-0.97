@@ -20,9 +20,11 @@ no canvas, allocator, owner/render callback or MMIO address.
 
 Prepare requires a valid nonzero-epoch WAIT inbox, copies IO, resets SCC,
 keeps MIE off, configures only external DCD interrupts, and writes distinct
-WR12 markers to both channels before reading both back. Failure retains
-first stage/cause with master disabled. Readback rejects an aliased control
-port; it does not establish board channel assignment. Arm enables MIE last
+distinct DCD masks (A WR15=8, B WR15=0) before reading A RR15=8 and B
+RR15=0. Only after both pass, enable B WR15=8, still with MIE off. Failure
+retains first stage/cause with master disabled. Readback rejects aliased
+controls; it does not establish physical channel assignment. No baud generator
+access or unsupported-register fallback occurs. Arm enables MIE last
 only for matching WAIT. No fabricated baseline or automatic rearm.
 
 Each service is one finite pass: read A RR3; reject unsupported pending bits;
@@ -53,7 +55,7 @@ odd-byte writes, >=2.2us gap, PCLK3.672MHz, DCD A/B first mouse phases,
 PB4/5 second phases and PB3 active-low button. SRC-0408 Figure11.1 confirms
 WR0 highest-IUS opcode111 (0x38), external reset010 (0x10), against the old
 SRC-0363 prose/diagram disagreement. Figures10.1/10.2 identify RR0DCD,
-RR3A external bits and readable RR12. No manufacturer's ISR recipe is used.
+RR3A external bits and RR15 DCD interrupt-enable readback fields. No manufacturer's ISR recipe is used.
 SRC-0409 Table3-1 p92 corroborates VIA/SCC/transient-combined levels1/2/3,
 autovectors0x19/1A/1B, locations0x64/68/6C. Later publication is hardware
 interface evidence, not proof of January1984 OS behavior.

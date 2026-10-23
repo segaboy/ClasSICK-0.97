@@ -5,8 +5,7 @@
 enum { WR9_RESET = 0xC0, WR9_NV = 0x02, WR9_MIE_NV = 0x0A,
        WR0_RESET_EXT = 0x10, WR0_RESET_IUS = 0x38,
        RR0_DCD = 0x08, RR3_EXT_A = 0x08, RR3_EXT_B = 0x01,
-       PB_MASK = 0x38, PB_BUTTON = 0x08, PB_X2 = 0x10, PB_Y2 = 0x20,
-       TC_A = 0x35, TC_B = 0x6A };
+       PB_MASK = 0x38, PB_BUTTON = 0x08, PB_X2 = 0x10, PB_Y2 = 0x20 };
 
 typedef struct { uint8_t pb, a, b; } snap;
 
@@ -68,17 +67,19 @@ int cs_mac_motion_prepare(struct cs_mac_motion *m, const cs_mac_motion_io *io,
     wr(m, CS_MAC_SCC_A, 1u, 0x01);
     wr(m, CS_MAC_SCC_A, 15u, 0x08);
     wr(m, CS_MAC_SCC_B, 1u, 0x01);
-    wr(m, CS_MAC_SCC_B, 15u, 0x08);
+    wr(m, CS_MAC_SCC_B, 15u, 0x00);
     wr(m, CS_MAC_SCC_A, 2u, 0x00);
 
-    wr(m, CS_MAC_SCC_A, 12u, TC_A);
-    wr(m, CS_MAC_SCC_B, 12u, TC_B);
+    /* Probe distinct controls through the DCD masks this path actually uses.
+     * Both writes precede both reads; an alias sees B's final zero in A.
+     * MIE stays off. No baud-rate register or unsupported-register fallback. */
     m->stage = CS_MAC_STAGE_READBACK_A;
-    if (m->io.read(m->io.cookie, CS_MAC_SCC_A, 12u) != TC_A)
+    if (m->io.read(m->io.cookie, CS_MAC_SCC_A, 15u) != RR0_DCD)
         return fail(m, CS_MAC_STAGE_READBACK_A, CS_MAC_CAUSE_READBACK);
     m->stage = CS_MAC_STAGE_READBACK_B;
-    if (m->io.read(m->io.cookie, CS_MAC_SCC_B, 12u) != TC_B)
+    if (m->io.read(m->io.cookie, CS_MAC_SCC_B, 15u) != 0u)
         return fail(m, CS_MAC_STAGE_READBACK_B, CS_MAC_CAUSE_READBACK);
+    wr(m, CS_MAC_SCC_B, 15u, RR0_DCD);
     return CS_MAC_MOTION_OK;
 }
 

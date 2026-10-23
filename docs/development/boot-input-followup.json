@@ -53,5 +53,150 @@
     "No PC driver policy change from an unmeasured loss hypothesis"
   ],
   "workers": "No new worker for bounded GUI observations and four-constant integration; prior code/review qualifications reused",
-  "remaining_AI_usage": "Claude/Grok/Copilot/Antigravity remaining account balances unavailable; no new calls"
+  "remaining_AI_usage": "Claude/Grok/Copilot/Antigravity remaining account balances unavailable; no new calls",
+  "Mac_upper_alias_trial": {
+    "source_revision": "4cadc6955f51e112ffa8cfd3bcbaf16745fa5e6b",
+    "CI_run": 40033711283,
+    "native_job": "success",
+    "ROM_SHA256": "61b34a6df7692baa8b471797338bee1b26991c7bf46a8df477b76822304183d1",
+    "bytes": 65536,
+    "ROM_used": 22500,
+    "data_bss": 244,
+    "workspace": 964,
+    "stack_frame_sum_with_margin": 4912,
+    "twins": true,
+    "controls": 12,
+    "source_inputs_match": true,
+    "seal_valid": true,
+    "IRQ_veneers_exact": true,
+    "own_address_immediates_present": {
+      "scc_read_b": 1,
+      "scc_read_a": 1,
+      "scc_write_b": 3,
+      "scc_write_a": 3
+    },
+    "board_profile": {
+      "status": "engineering-upper-alias-hypothesis-unverified",
+      "scc_read_b": 10485752,
+      "scc_read_a": 10485754,
+      "scc_write_b": 12582905,
+      "scc_write_a": 12582907,
+      "ab_select_bit": 1,
+      "dc_select_bit": 2,
+      "scc_byte_guard_nops": 16
+    },
+    "booted": true,
+    "scene_visible": true,
+    "input": false,
+    "result": "Named SCC channels reached; unused baud WR12/RR12 unimplemented by model; readback refusal retained",
+    "closed": true
+  },
+  "RR15_refinement": {
+    "status": "local GCC/Clang/sanitized verification; native compile and new trial pending",
+    "interface_source": "SRC-0408 Figure10.2, printed1-17; independent lead visual review of RR15 fields",
+    "algorithm": "Original distinct DCD-mask transaction, no manufacturer algorithm; no fallback or removed alias guard",
+    "tests": {
+      "checks": 4549,
+      "phase_inversion_cases": 32,
+      "tests_source_sha256": "9b3ab632a4c450dc9bf17cd5d8a6ab8f5f34fea35c3058b3c288b5e2857ec728",
+      "actual_compiled_controls": [
+        {
+          "case": "correct",
+          "compiled": true,
+          "exit": 0,
+          "result": "passed",
+          "output": "Mac motion: 4549 checks,32 phase/inversion cases; synthetic IO, no target execution."
+        },
+        {
+          "case": "no-b-reenable",
+          "compiled": true,
+          "exit": 1,
+          "result": "faulty original control rejected",
+          "output": "motion check 21 line 54"
+        },
+        {
+          "case": "master-enabled-early",
+          "compiled": true,
+          "exit": 1,
+          "result": "faulty original control rejected",
+          "output": "motion check 23 line 54"
+        },
+        {
+          "case": "sequential-marker-alias",
+          "compiled": true,
+          "exit": 1,
+          "result": "faulty original control rejected",
+          "output": "motion check 38 line 70"
+        }
+      ]
+    },
+    "worker": {
+      "round": "rr15",
+      "worker": "claude",
+      "exit_code": 1,
+      "outer_timeout": false,
+      "elapsed_seconds": 180.81,
+      "input_bytes": 19143,
+      "input_sha256": "8bfd8ca5f147c996c5563cc583aabce3afd0190e17c6dc1d21df9cef6ca5217e",
+      "stderr_bytes": 0,
+      "reported_cost_usd": 0,
+      "reported_input_tokens": 0,
+      "reported_output_tokens": 0
+    },
+    "worker_artifact": false,
+    "provider_error": "server_error after10 internally reported retries; no external retry or second worker",
+    "tests_run_by_worker": false,
+    "local_profiles": {
+      "clang_debug": "2 targeted CTests",
+      "gcc_release": "register model/freestanding plus standalone frozen oracle",
+      "clang_asan_ubsan": "2 targeted CTests; passed after activating pinned runtime PATH"
+    },
+    "harness_failures_retained": [
+      "Initial sanitizer launch lacked pinned runtime PATH; stalled/terminated and timed-out attempts retained; unchanged final code passes after environment correction",
+      "Test helper renamed log_access; no evidence that its previous name caused the runtime stall"
+    ]
+  },
+  "PC_normal_GUI": {
+    "compiled_source_revision": "6aa671c4c4934c3fc74937a54a98f26146d2edd3",
+    "EFI_SHA256": "de02e416fc92bc69fb4e07e41eb8a79a2f1cd00493e12104e1e47dba55e55d0f",
+    "raw_disk_SHA256": "66a105266a18b1f8e95593b88e7f8d6b7768a17200af33bd03d8fceadd8b5202",
+    "diagnostic_profile": false,
+    "host_button_setting": "Temporarily Left via Settings; original Right restored and registry readback1 verified",
+    "actual_GUI_press_count": 2,
+    "counter_crop_matches_verified_counter2": true,
+    "window_borders_match_initial": true,
+    "window_local_pixel_difference_box": [
+      176,
+      98,
+      180,
+      105
+    ],
+    "window_pixel_difference_unresolved": "4x7 cursor-like region; may be transient paused publication, not established as persistent damage",
+    "cursor_after_drag": [
+      511,
+      341
+    ],
+    "E2_setup_for_second_drag": "Only pointer preposition at100,78 with buttons released; all subsequent press/move/release through SKY/Windows",
+    "E3_drag": "failed; no observed translation, no successful release gate",
+    "cause": "captured injected-coordinate path unresolved; no guest driver defect established",
+    "closed": {
+      "utc": "2026-10-23T22:32:53.1457254Z",
+      "cold_starts": 1,
+      "state": "poweroff",
+      "unregistered": true,
+      "existing_vm_inventory_preserved": true,
+      "running_state_preserved": true,
+      "post_trial_raw_roundtrip_equal": true,
+      "artifacts_retained": true,
+      "semantic_session_stop_observed": false,
+      "termination": "external poweroff from paused state"
+    },
+    "host_preference_restored": {
+      "utc": "2026-10-23T22:33:25.4595673Z",
+      "original": "Right",
+      "restored": "Right",
+      "readback": "1",
+      "other_mouse_preferences_changed": false
+    }
+  }
 }

@@ -1,5 +1,14 @@
 # ClasSICK 0.97 working instructions
 
+2026-10-23,SRC-0419..0421: upper SCC aliases reach named controls in Snow;
+its unused WR12/RR12 model is unimplemented, so a DCD-mask WR15/RR15 guard
+replaces baud markers without dropping alias checks.4549 synthetic checks/
+32 phase cases/three compiled faulty controls pass; new native compile/trial
+pending. Normal PC GUI counter reaches0002 with standard test primary mapping,
+drag still fails; original Right-primary host preference restored/read back.
+One4x7 snapshot difference remains unclassified. No PC driver-policy change,
+release freeze, new source waiver or physical/reference claim. [Follow-up](docs/development/boot-input-followup.json).
+
 2026-10-23 follow-up,SRC-0416..0418: desktop trials resumed. Mac default ROM
 draws the shared scene then refuses SCC setup at unimplemented lowest aliases.
 Revised upper-cell alias profile remains an unverified engineering candidate.

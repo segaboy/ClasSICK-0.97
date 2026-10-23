@@ -10,7 +10,7 @@
  * ENGINEERING HYPOTHESIS, not a published exact-port claim: upper aliases of
  * the published 128K SCC read (even) and write (odd) windows. A/B select on
  * address bit 1 and D/C on bit 2 are inferred and UNVERIFIED. Only control
- * ports are used. The motion core readback gate (both marker writes before
+ * ports are used. The motion core readback gate (both DCD-mask writes before
  * both reads) stays the alias detector; failure is a terminal fault. */
 #define CS_MAC_SCC_READ_B  UINT32_C(0x9FFFF8)
 #define CS_MAC_SCC_READ_A  UINT32_C(0x9FFFFA)

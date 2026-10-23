@@ -4237,3 +4237,30 @@ values only; still an engineering hypothesis, not a copied equate or physical
 mapping. Native compile/own-candidate observation required; no broad probe,
 sample code, held summary or emulator source. SPEC-0072/IMPL-0074/TEST-0087.
 [Follow-up](../docs/development/boot-input-followup.md).
+
+
+## SRC-0419 - Narrow RR15 interface diagram review
+
+Lead independently views admitted SRC-0408 PS018401-0802 Figure10.2 printed1-17:
+RR15 DCD interrupt-enable bit3, zero bits0/2, remaining external-mask fields.
+Reuse previously reviewed WR15 DCD bit. Diagram facts only, no sample/algorithm;
+private page remains lead-only, worker receives paraphrase only.
+[Follow-up](../docs/development/boot-input-followup.md).
+
+## SRC-0420 - Bounded readback worker failure
+
+Claude Opus5.5 low,19143B original/public/fact-only packet;180.81s exit1,
+server_error after10 provider-internal API retries, no usable artifact or tests.
+No external retry, second worker, HQ/manual/research/UART input or checkout edit.
+Remaining account balance unavailable; do not infer quota savings.
+[Follow-up](../docs/development/boot-input-followup.md).
+
+## SRC-0421 - Lead required-register refinement and normal GUI trial
+
+After verified4cadc69 upper-alias trial exposes unimplemented WR12/RR12, lead
+original WR15/RR15 DCD-mask guard retains alias refusal and master-off ordering.
+4549 actual synthetic checks/32 phase cases and three compiled faulty controls
+verified. Native build/trial remain separate. Normal PC GUI trial temporarily
+uses standard primary mapping then restores original Right; counter0002 works,
+drag still fails/cursor clamps, E2 preposition disclosed. No PC driver-policy edit.
+[Receipt](../docs/development/boot-input-followup.json).

@@ -63,3 +63,51 @@ No new external worker is warranted for these bounded observations and four
 constant edits. Prior qualified implementations/reviews are reused; no provider
 retry or duplicate review. Remaining Claude/Grok/Copilot/Antigravity balances
 are unavailable. Native compilation and subsequent trials are reported separately.
+
+
+## Revised native trial and required-register check
+
+Source4cadc695 passes the native job of CI40033711283. Default ROM SHA256
+61b34a6df7692baa8b471797338bee1b26991c7bf46a8df477b76822304183d1;
+source hashes/seal/twins/12 controls/three exact veneers verified.22500B ROM,
+244B data,964B graph,4912B conservative frame sum. A fresh own-ROM Snow trial
+shows the scene and reaches named SCC A/B controls. The model then warns that
+WR12 writes/RR12 reads are unimplemented; prepare correctly refuses. Trial closed.
+
+The lead visually checks SRC-0408 Figure10.2 (printed1-17): RR15 bit3 is DCD
+interrupt enable, bits0/2 zero, other fields other external interrupt enables.
+Existing eligible WR15 DCD-mask facts are reused. No sample code or algorithm.
+The original refinement checks distinct A8/B0 DCD masks through RR15, then sets
+B8 while MIE remains off. It keeps alias rejection/first fault and has no baud
+access, fallback, scan or permissive mode. A missing RR15 capability still fails.
+
+Claude's one19143B bounded original-input call ends after180.81s with a server
+error/10 internally reported API retries and no artifact. No external retry or
+second worker. Codex supplies the small change and transaction-order oracle.
+4549 actual checks/32 phase/inversion cases pass locally; compiled original
+fault controls reject sequential write/read alias handling, missing B re-enable
+and prematurely enabled master interrupts. GCC/Clang/sanitized checks are local;
+new native compiler and boot observations remain separate.
+
+## Normal PC image with corrected primary mapping
+
+A fresh exact normal EFI trial (de02e416, no probe) temporarily selects Left
+primary through Windows Settings, then restores Right and verifies readback1.
+Other mouse preferences remain unchanged. GUI dragging generates two accepted
+press edges, counter0002, but window borders stay at the initial80,70 and the
+guest cursor ends511,341. One4x7 cursor-like content difference remains; a
+paused publication prefix is possible, persistent damage is not established.
+The second gesture is explicitly
+preconditioned by E2 cursor-only placement at100,78; subsequent press/move/release
+is through Windows. This is still a failed drag, not E3 qualification. The
+captured injected-coordinate path remains unresolved; no PC guest driver change.
+The native counter crop equals the previously verified counter2 capture exactly.
+The VM closes with existing inventory/running states and raw media unchanged.
+
+
+Sanitizer harness correction: initial launch omitted the pinned compiler-runtime
+directory from PATH and stalled/failed without a test result. Attempts are
+retained; activating the normal development environment makes both targeted
+ASan/UBSan tests pass in0.28s. The test helper was also renamed log_access;
+there is no evidence that the former helper name caused the launch failure.
+The final test source hash and actual compiled controls are in the receipt.
