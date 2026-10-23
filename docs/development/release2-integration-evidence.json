@@ -1,0 +1,280 @@
+{
+  "date": "2026-10-23",
+  "compiled_source_revision": "ae4ae473507846dc0be84e2d8cc0c69d6854465a",
+  "CI": {
+    "run_id": 40025868785,
+    "url": "https://github.com/segaboy/ClasSICK-0.97/actions/runs/40025868785",
+    "native_status": "success",
+    "windows_status": "success",
+    "overall_status": "success",
+    "reported_CTest_profile_totals": [
+      352,
+      352,
+      352,
+      352,
+      352,
+      316,
+      352,
+      335,
+      335,
+      335,
+      299
+    ],
+    "reported_CTest_executions": 3732,
+    "unique_test_claim": false
+  },
+  "release_status": "not-ready-not-frozen",
+  "native_mac": [
+    {
+      "folder": "ci-window-mac",
+      "sha256": "d1ef824abab8deaacdc1ab10676acb483551559ec724f652dfc9918f478b9f2f",
+      "image_bytes": 65536,
+      "rom_used": 22500,
+      "native_data_bss": 244,
+      "workspace_bytes": 964,
+      "stack_bound": 4912,
+      "largest_frame": 284,
+      "dcd_invert": 0,
+      "inputs_match_source": "ae4ae473507846dc0be84e2d8cc0c69d6854465a",
+      "twins": true,
+      "native_controls": 12,
+      "booted": false
+    },
+    {
+      "folder": "ci-window-inverted",
+      "sha256": "621d3169957aa7f7a5eb2fb994e8775c03b3e5f96b298e06b0646e9ef8144f54",
+      "image_bytes": 65536,
+      "rom_used": 22500,
+      "native_data_bss": 244,
+      "workspace_bytes": 964,
+      "stack_bound": 4912,
+      "largest_frame": 284,
+      "dcd_invert": 3,
+      "inputs_match_source": "ae4ae473507846dc0be84e2d8cc0c69d6854465a",
+      "twins": true,
+      "native_controls": 12,
+      "booted": false
+    }
+  ],
+  "native_mac_layout": {
+    "descriptor_bytes": 964,
+    "native_data_bss": 244,
+    "frame_sum_plus_margin_reported_by_builder": 4912,
+    "stack_reserve": 24320,
+    "whole128K_or_measured_stack_proof": false,
+    "SCC_guards": "own compiled callbacks visually reviewed;16NOP guard after every selector/data byte",
+    "MMIO_board_offsets_and_DCD_polarity": "experimental profiles unqualified by boot"
+  },
+  "local_checks": {
+    "full_Clang_CTests_before_two_new_tests": 350,
+    "GCC_focused_CTests": 10,
+    "sanitized_focused_CTests": 10,
+    "additional_new_CTests_each_GCC_and_sanitized": 2,
+    "motion_assertions": 2382,
+    "phase_inversion_cases": 32,
+    "rectangle_checks": 698,
+    "rectangle_positive_cases": 60,
+    "rectangle_refusals": 11,
+    "compiled_rectangle_faults_rejected": 3,
+    "probe_host_checks": 13,
+    "probe_native_twin_images": 4,
+    "probe_corruption_rejections": 27,
+    "probe_omitted_object_rejections": 28,
+    "normal_native_image_byte_identity_preserved": true,
+    "index_reader_controls": 7,
+    "screenshot_test_methods": 12,
+    "animation_test_methods": 4
+  },
+  "PC_E2": {
+    "compiled_source_revision": "6aa671c4c4934c3fc74937a54a98f26146d2edd3",
+    "classification": "E2 control passes; E3 automated GUI capture/drag fails; E4 untested",
+    "captures": [
+      {
+        "file": "initial.png",
+        "sha256": "7bd4dc9c78b1729f5d88da5f57ee1813666714caf17fce88913d97cee4abc5a7",
+        "bytes": 4850,
+        "counter": 0
+      },
+      {
+        "file": "gui-drag.png",
+        "sha256": "b70ec8c601318a20084e0cc180e82d07adddced435de03483bc05620a294b3d4",
+        "bytes": 4840,
+        "counter": 0
+      },
+      {
+        "file": "device-anchor.png",
+        "sha256": "280f768f1277b67611a5ab38ebc6aa5e09047772d705ecddfb21ee1342ef8e19",
+        "bytes": 4842,
+        "counter": 0
+      },
+      {
+        "file": "device-title-hover.png",
+        "sha256": "6d92d4bc3e6be4decef190c27efc097c3a72eeb683ca28be3a98ebcc8fb38ece",
+        "bytes": 4853,
+        "counter": 0
+      },
+      {
+        "file": "device-title-down.png",
+        "sha256": "aff35cd69182cc3721122581ab36b83b105089ebcbab5d21d678b02ddefb949a",
+        "bytes": 4852,
+        "counter": 1
+      },
+      {
+        "file": "device-drag-1.png",
+        "sha256": "a2f01f50fdb3e8b0440a617417f89e8a98b7de98a20920352a3feb4b3decdd05",
+        "bytes": 4896,
+        "counter": 1
+      },
+      {
+        "file": "device-drag-2.png",
+        "sha256": "1c24dcc51f29700afa3aeaf6aabede58e0b96c675878df0e68199f6d0e3fb847",
+        "bytes": 4903,
+        "counter": 1
+      },
+      {
+        "file": "device-drag-3.png",
+        "sha256": "c20726b0a31dfe86b75fa0067ec75837e5fa9e10185d9030726c901b3b85a0e8",
+        "bytes": 4939,
+        "counter": 1
+      },
+      {
+        "file": "device-drag-4.png",
+        "sha256": "bfbc848d5c2986c3685b3a02af27cd6f9adcf4da0951f2093dbbef1fe77b0be8",
+        "bytes": 4932,
+        "counter": 1
+      },
+      {
+        "file": "device-drag-release.png",
+        "sha256": "bfbc848d5c2986c3685b3a02af27cd6f9adcf4da0951f2093dbbef1fe77b0be8",
+        "bytes": 4932,
+        "counter": 1
+      },
+      {
+        "file": "device-content-down.png",
+        "sha256": "702e754fe1c411b472df4ec61d773e8e5d3eeeadaa6623caff96e2514d788a59",
+        "bytes": 4753,
+        "counter": 2
+      },
+      {
+        "file": "device-content-release.png",
+        "sha256": "702e754fe1c411b472df4ec61d773e8e5d3eeeadaa6623caff96e2514d788a59",
+        "bytes": 4753,
+        "counter": 2
+      },
+      {
+        "file": "device-later.png",
+        "sha256": "702e754fe1c411b472df4ec61d773e8e5d3eeeadaa6623caff96e2514d788a59",
+        "bytes": 4753,
+        "counter": 2
+      },
+      {
+        "file": "device-later-down.png",
+        "sha256": "44dadf38fe180601f275075c64070bb91cadea6114d2080b1236ac361327b9b4",
+        "bytes": 4928,
+        "counter": 3
+      },
+      {
+        "file": "device-final.png",
+        "sha256": "44dadf38fe180601f275075c64070bb91cadea6114d2080b1236ac361327b9b4",
+        "bytes": 4928,
+        "counter": 3
+      }
+    ],
+    "drag_positions": [
+      [
+        80,
+        70
+      ],
+      [
+        100,
+        80
+      ],
+      [
+        120,
+        90
+      ],
+      [
+        140,
+        100
+      ],
+      [
+        160,
+        110
+      ]
+    ],
+    "logical_resolution": [
+      512,
+      342
+    ],
+    "device_press_edges": 3,
+    "closed": {
+      "utc": "2026-10-23T20:42:18.1285808Z",
+      "cold_starts": 1,
+      "state": "poweroff",
+      "unregistered": true,
+      "existing_vm_inventory_preserved": true,
+      "running_state_preserved": true,
+      "post_trial_raw_roundtrip_equal": true,
+      "artifacts_retained": true,
+      "semantic_session_stop_observed": false,
+      "termination": "external poweroff from paused state"
+    },
+    "limits": [
+      "No CWP1 read",
+      "Synthetic device control bypasses GUI",
+      "No human/physical/system-compatibility acceptance"
+    ]
+  },
+  "PC_E3": {
+    "failed_prior_and_current_GUI_drag": true,
+    "cause": "unproven",
+    "worker_review": "no concrete guest burst-ordering defect found; overflow/loss/suppression hypothesis unmeasured",
+    "diagnostic_boot": {
+      "image_SHA256": "2ce9b2c1ec39d3e1d0fa1f58aed6ba04cad8639df714d2304098f11ea8734531",
+      "input_delivered": false,
+      "mailbox_observed": false,
+      "blocked_by": "Windows GUI activation failure and GetCursorPos access denied",
+      "closed": {
+        "utc": "2026-10-23T21:16:38.1800982Z",
+        "cold_starts": 1,
+        "state": "poweroff",
+        "unregistered": true,
+        "existing_vm_inventory_preserved": true,
+        "running_state_preserved": true,
+        "post_trial_raw_roundtrip_equal": true,
+        "artifacts_retained": true,
+        "semantic_session_stop_observed": false,
+        "termination": "external poweroff from paused state"
+      }
+    }
+  },
+  "286": {
+    "model_commit": "7bb9856e1007d2fc6807aa835094200528e46ccb",
+    "frozen_checks": 38,
+    "flat_cases": 1596,
+    "fault_controls": 3,
+    "native_far_backend_or_target_run": false
+  },
+  "media": {
+    "new_unchanged_PNGs": 15,
+    "new_GIF_bytes": 57129,
+    "GIF_frames": 8,
+    "GIF_duration_ms": 4850,
+    "GIF_SHA256": "b709aae8c0a6097142b02813093123d003ddb7b39999e81a0b1cf3a6fab84455",
+    "decoded_frames_exactly_match_original_PNGs": true,
+    "presentation_timing_not_performance": true
+  },
+  "source_exclusion": "held cached summary remains excluded; owner explicitly approves three scopes; manuals lead-only",
+  "quota": "current external remaining allowances unavailable; per-task reported usage is not a balance or Codex saving",
+  "preservation": {
+    "research_originals": 24,
+    "held_brief": "byte-identical to baseline",
+    "UART_bodies_old_rows_assets_tags_retired_wiki": "preserved"
+  },
+  "remaining": [
+    "Accessible Windows GUI for original PC probe/input test and Mac candidate boot/direction/drag tests",
+    "E1-E3 release acceptance and actual polarity/profile selection",
+    "Final package review and separate publication approval"
+  ],
+  "no_release_reference_physical_run": true
+}

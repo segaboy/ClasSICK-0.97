@@ -111,3 +111,13 @@ Owner SRC-0332 additionally requests original hosted demonstration stills/GIF on
 SHA-256 in scripts/check_animations.py and its indexed identity/rights/source
 record. All49 decoded frames were compared with original native client captures.
 This admits no arbitrary GIF,protected pixels,desktop/chrome or target trial.
+
+2026-10-23 follow-up,SRC-0415 under the same standing own-product capture/demo
+requests SRC-0280/0332: one additional exact native device-control animation is
+reviewed: `docs/evidence/screenshots/2026-10-23/native-pc-window-drag.gif`,
+SHA-256 b709aae8c0a6097142b02813093123d003ddb7b39999e81a0b1cf3a6fab84455.
+All eight decoded1024x768 frames equal original framebuffer PNGs; timing is for
+presentation. The original49-frame GIF and its identity stay unchanged. The
+indexed guard permits these two exact identities only, with separate source/
+rights/capture/evidence records. This admits no arbitrary GIF, reference pixels,
+UI chrome, desktop, new trial or GUI/human/benchmark claim.

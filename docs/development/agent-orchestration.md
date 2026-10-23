@@ -386,3 +386,19 @@ only for the independent pixel risk. Adopt usable artifacts rather than
 recreating them; disclose necessary lead fixes. No worker execution claims,
 quota equivalence, requalification or blanket fan-out.
 [Results](release2-integration-evidence.md).
+
+Final window batch: Claude provides the substantial RAM/controller/boot-binding/
+PC-presentation artifacts; Copilot provides an implementation-withheld rectangle
+oracle and later a distinct concrete GUI-loss review. Grok's earlier model
+attempt timed out,then bounded Copilot correction succeeded. Argon stays idle;
+no routine all-tool fan-out. Lead adopts usable work, fixes specific reproduced
+issues and executes tests. A later Claude diagnostic response is cut off; three
+complete original files(64lines) are reviewed/adopted, lead supplies13 frozen
+checks/binding, no provider retry. Raw transcripts remain outside Git.
+
+Source CI succeeds; GUI access then denies automation,so the probe closes before
+input and Mac candidates stay unbooted. No invented result/release waiver.
+All current external remaining quotas are unavailable; per-task charges/tokens
+are recorded privately and do not establish quota or net Codex savings.
+Batched Git-index reads reduce the observed full public guard to8.75s while
+retaining its checks. [Receipt](release2-integration-evidence.json).

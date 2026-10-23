@@ -125,3 +125,27 @@ The own VM is closed/unregistered, media roundtrip and previous inventory
 verified. No authentication, security settings or desktop bypass was attempted.
 GUI-dependent PC/Mac trials await an accessible interactive desktop; this is
 not release acceptance. All independent compile/evidence work continues.
+
+Final native job40025868785 passes. Both source-pinned64KiB ROMs use22500B
+ROM/244B native data/964B workspace; the builder reports4912B frame-sum-plus-
+margin versus24320B reserved stack, with284B largest individual C frame.
+This is static compiler evidence, not measured IRQ latency/full128K proof.
+All native input hashes match ae4ae47. Own compiled SCC callbacks retain16NOP
+recovery after every selector/data byte; no ROM has been booted in this slice.
+
+[Machine-readable results](release2-integration-evidence.json) separate source,
+compiler, actual E2/failed E3 and unexecuted probes. [Fifteen captures and native
+GIF](../evidence/screenshots/2026-10-23/README.md) are for research/web reuse.
+Eight decoded GIF frames match source PNG pixels exactly; presentation timing
+is not a benchmark. The old GIF stays unchanged; one additional exact hash/
+geometry identity is admitted, no general GIF allowance. Twelve screenshot
+methods/four animation methods pass. Screenshot tests initially hit sandbox
+TMP restrictions; the unchanged tests pass using the owned fixture root.
+Remaining external quotas are unavailable, and reported per-task usage is not
+quota or demonstrated Codex savings. No release or paired GUI qualification.
+
+Source CI40025868785 succeeds in both native and Windows jobs atae4ae47.
+Windows reports CTest profile totals [352, 352, 352, 352, 352, 316, 352, 335, 335, 335, 299] (3732 executions, not
+that many unique tests). New media/admission changes are separately checked
+locally; source/code pins and unchanged candidate bytes remain explicit.
+The two reviewed Mac trial workspaces are prepared outside Git, not launched.

@@ -18,6 +18,24 @@
       "input": "synthetic",
       "caption": "Automated Windows hosted native window drag,out and back;presentation timing,not a performance measurement.",
       "decode_audit": "docs/development/hosted-window-media.json"
+    },
+    {
+      "path": "docs/evidence/screenshots/2026-10-23/native-pc-window-drag.gif",
+      "sha256": "b709aae8c0a6097142b02813093123d003ddb7b39999e81a0b1cf3a6fab84455",
+      "bytes": 57129,
+      "width": 1024,
+      "height": 768,
+      "frames": 8,
+      "duration_ms": 4850,
+      "captured_on": "2026-10-23",
+      "source_revision": "6aa671c4c4934c3fc74937a54a98f26146d2edd3",
+      "compiled_source_revision": "6aa671c4c4934c3fc74937a54a98f26146d2edd3",
+      "evidence": "docs/evidence/screenshots/2026-10-23/README.md",
+      "license": "GPL-3.0-or-later",
+      "rights": "Original ClasSICK framebuffer only; no desktop,emulator chrome,reference or credential pixels.",
+      "input": "synthetic",
+      "caption": "Native PC device-control window drag and pattern clicks;E2 evidence,not GUI/human qualification;presentation timing only.",
+      "decode_audit": "docs/development/native-pc-window-media.json"
     }
   ]
 }

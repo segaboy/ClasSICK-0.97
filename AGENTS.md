@@ -1,5 +1,14 @@
 # ClasSICK 0.97 working instructions
 
+2026-10-23 current checkpoint: native window ROM/compiler audit passes atae4ae47
+(two declared polarity profiles,22500B ROM/964B workspace), both UNBOOTED.
+PC device-control drag passes, automated GUI drag still FAILED. Later Windows
+GUI access is denied, so the diagnostic VM was closed before input; no mailbox
+result.15 original PNGs/new exact-identity GIF recorded.286 model7bb9856
+verified, no far backend/target run. Release2 is NOT ready/frozen. Explicit
+three-scope approval below remains valid for needed verified original trials;
+publication/reference/physical hardware separate. [Receipt](docs/development/release2-integration-evidence.json).
+
 2026-10-23,SRC-0402..0411/SPEC-0070..0072: explicit owner three-scope
 approval clears original SCC/VIA implementation from independently reviewed
 published facts, reviewed paraphrases to fresh workers (pages lead-only), and

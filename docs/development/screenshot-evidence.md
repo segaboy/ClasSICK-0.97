@@ -57,3 +57,14 @@ Any different GIF requires a new explicit source/rights/decode review and guard
 change. It is never admitted by extension alone. Original client pixels only,
 GPL-3.0-or-later;no desktop/window chrome/reference/emulator content.
 [Stills and animation](../evidence/screenshots/2026-10-21/README.md).
+
+2026-10-23 scoped addition,SRC-0415: the standing original capture/drag-demo
+request also has one reviewed native-PC device-control GIF at
+`docs/evidence/screenshots/2026-10-23/native-pc-window-drag.gif` (57129B,
+1024x768,8 frames/4850ms), SHA-256
+b709aae8c0a6097142b02813093123d003ddb7b39999e81a0b1cf3a6fab84455.
+All decoded frames match the15-capture evidence set; only eight are sequenced.
+[Decoded audit](native-pc-window-media.json),
+[still/animation record](../evidence/screenshots/2026-10-23/README.md).
+The earlier exact GIF exception stays unchanged; no generic GIF policy. E2
+controls are labeled separately from failed E3; no human or speed claim.

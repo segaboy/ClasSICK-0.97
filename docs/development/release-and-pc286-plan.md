@@ -45,3 +45,14 @@ guest-view/callout inventory, then qualified native bank access. No production
 backend or target run. The Mac binding review is held for owner source-exposure
 disposition; the exact unchanged PC candidate is hash-verified and a fresh visible
 GUI trial requested. No new boot or release. [Checkpoint](segmented-storage-evidence.md).
+
+Current follow-up: the source hold is resolved by explicit owner approval of
+original SCC/VIA implementation, fresh-worker fact summaries and necessary
+isolated verified original release trials; excluded material remains excluded.
+Native Mac window profiles compile/verify but are unbooted. PC E2 drag passes,
+E3 still fails; later desktop access is denied. No freeze or reduced-goal waiver.
+The286 model/contract is material bounded progress, not a third release target.
+Next: restore available GUI observation, run the existing verified diagnostic
+and Mac candidates, then qualify exact parity before packaging. No new scope
+question is needed for those already approved trials.
+[Current results](release2-integration-evidence.json).

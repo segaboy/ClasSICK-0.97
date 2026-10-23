@@ -11,6 +11,15 @@ class Admission(unittest.TestCase):
     def setUp(self):
         self.row=json.loads((root/gate.MANIFEST).read_text())['animations'][0];self.data=(root/gate.PATH).read_bytes()
     def test_reviewed_original(self):gate.verify_blob(gate.PATH,self.data,self.row)
+    def test_native_device_sequence(self):
+        row=next(x for x in json.loads((root/gate.MANIFEST).read_text())['animations'] if x['path']==gate.NATIVE_PATH)
+        data=(root/gate.NATIVE_PATH).read_bytes();gate.verify_blob(gate.NATIVE_PATH,data,row)
+        for key,value in [('width',512),('duration_ms',4200),('frames',9),('captured_on','2026-10-21')]:
+            bad=copy.deepcopy(row);bad[key]=value
+            with self.assertRaises(gate.Fail):gate.verify_blob(gate.NATIVE_PATH,data,bad)
+        for at in (0,100,len(data)-1):
+            bad=bytearray(data);bad[at]^=1
+            with self.assertRaises(gate.Fail):gate.verify_blob(gate.NATIVE_PATH,bytes(bad),row)
     def test_pixel_payload_tamper(self):
         for index in (0,100,len(self.data)-1):
             with self.subTest(index=index):

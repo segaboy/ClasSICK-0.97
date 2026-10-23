@@ -1,5 +1,11 @@
 # Paired native preview 2 - first interactive window
 
+Current2026-10-23: native window ROMs compile/verify, PC E2 drag passes,
+E3 GUI drag fails and current Windows GUI access is denied. Mac candidates
+are UNBOOTED. No release freeze/package approval. The original acceptance
+criteria and stop rules below remain; no preview1 waiver is carried forward.
+[Actual current receipt](../docs/development/release2-integration-evidence.json).
+
 Current2026-10-23,SRC-0390..0393/ADR-0078:paired Mac/x64 release isPRIMARY,
 with bounded286 progress alongside,not a new third release prerequisite.
 SPEC-0066 foreground coordinator locally verified;CPU/SCC/boot binding and

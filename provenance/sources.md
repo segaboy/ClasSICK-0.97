@@ -4192,3 +4192,20 @@ vector stores to an original quiescent assembly boundary, retaining warnings;
 32-bit C front-end check passes, actual68000 result pending. Lead supplies
 frozen-word diagnostic tests, optional probe binding and batched strict index
 reader; tests and actual boot results remain distinct. [Evidence](../docs/development/release2-integration-evidence.md).
+
+## SRC-0415 - Final scoped compiler, trial and original-media checkpoint
+
+Source ae4ae473 passes native/Windows CI40025868785;3732 reported CTest
+executions across11 profiles, not unique tests. Native window default/invert3
+ROMs each64KiB/22500B used,244B data/964B graph; unbooted. PC original-device
+trial verifies15 captures/four translations/three presses; GUI attempt fails.
+Later diagnostic VM closes before input after Windows desktop access denied.
+
+Standing owner requests SRC-0280/0332 cover original product captures and drag
+animation for research/web/demo use. Lead admits15 unchanged framebuffer PNGs
+and one additional exact native device-control GIF (b709aae8c0a6097142b02813093123d003ddb7b39999e81a0b1cf3a6fab84455,
+57129B,1024x768,8 frames/4850ms); decoded pixels match captured PNGs. No generic
+GIF allowance, protected content, GUI/human pass or speed claim. Existing GIF
+is unchanged. Twelve screenshot/four animation methods and strict staged guard
+pass. [Evidence](../docs/development/release2-integration-evidence.json).
+No release freeze/publication; accessible GUI needed for already-approved trials.

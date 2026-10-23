@@ -1,0 +1,62 @@
+{
+  "format": "GIF89a",
+  "frame_count": 8,
+  "size": [
+    1024,
+    768
+  ],
+  "duration_ms": 4850,
+  "all_decoded_frames_equal_original_PNGs": true,
+  "no_interpolation": true,
+  "timing": "presentation timing, not measured emulator performance",
+  "frames": [
+    {
+      "frame": 0,
+      "png": "docs/evidence/screenshots/2026-10-23/pc-window-device-title-hover.png",
+      "decoded_RGB_SHA256": "1592b90b57c4a6f4e3a88d0c49f9ae71c13e6f62f562c08ffbd22f1265e63ca1",
+      "duration_ms": 900
+    },
+    {
+      "frame": 1,
+      "png": "docs/evidence/screenshots/2026-10-23/pc-window-device-title-down.png",
+      "decoded_RGB_SHA256": "6e9369d7bcf805d64def285b8fa7d617a6cff9316f4d8e5f82245c734c90d822",
+      "duration_ms": 500
+    },
+    {
+      "frame": 2,
+      "png": "docs/evidence/screenshots/2026-10-23/pc-window-device-drag-1.png",
+      "decoded_RGB_SHA256": "49564c194130eb0e2164d4f3cdeae97444f29a8205a136d6e0f6e0a047323f33",
+      "duration_ms": 350
+    },
+    {
+      "frame": 3,
+      "png": "docs/evidence/screenshots/2026-10-23/pc-window-device-drag-2.png",
+      "decoded_RGB_SHA256": "0d78904efd0e6c567c19d107b697e75e0d47240740b935d9b72ee52a344966fc",
+      "duration_ms": 350
+    },
+    {
+      "frame": 4,
+      "png": "docs/evidence/screenshots/2026-10-23/pc-window-device-drag-3.png",
+      "decoded_RGB_SHA256": "14b1263cf125cb82b3efb888727a04be16a6c987a658409b884c6e1f898c7b57",
+      "duration_ms": 350
+    },
+    {
+      "frame": 5,
+      "png": "docs/evidence/screenshots/2026-10-23/pc-window-device-drag-4.png",
+      "decoded_RGB_SHA256": "fe11a6b0b05388370ea1c8a3daaae072c8f9f21e2123b23e7ab05c39040ab34c",
+      "duration_ms": 800
+    },
+    {
+      "frame": 6,
+      "png": "docs/evidence/screenshots/2026-10-23/pc-window-device-content-down.png",
+      "decoded_RGB_SHA256": "a9c40409dc1fb96386fe5d6096a6e4d3e57d0ecc31eb8655ea429304fd01924e",
+      "duration_ms": 800
+    },
+    {
+      "frame": 7,
+      "png": "docs/evidence/screenshots/2026-10-23/pc-window-device-final.png",
+      "decoded_RGB_SHA256": "bf63d924a544a18b2b3d772911fb5f24440c773b2bb3ef951086a6353bb7d9c5",
+      "duration_ms": 800
+    }
+  ]
+}
