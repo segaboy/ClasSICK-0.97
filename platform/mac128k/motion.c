@@ -42,6 +42,27 @@ static int same(snap x, snap y)
 
 static uint32_t bit(uint8_t v, int mask) { return (v & mask) ? 1u : 0u; }
 
+static uint32_t pack(snap s)
+{
+    return (uint32_t)s.pb << 16 | (uint32_t)s.a << 8 | s.b;
+}
+
+/* Observation only: no IO. Keeps the first record; reason is written last. */
+static void note(struct cs_mac_motion *m, uint32_t reason, uint8_t rr3,
+    snap s1, snap s2, snap s3, uint32_t entry)
+{
+    struct cs_mac_motion_loss *l = &m->first_loss;
+    if (l->reason != CS_MAC_LOSS_NONE) return;
+    l->rr3 = rr3;
+    l->snapshots[0] = pack(s1);
+    l->snapshots[1] = pack(s2);
+    l->snapshots[2] = pack(s3);
+    l->previous = m->have_phase << 24 | m->last_raw_a << 16
+        | m->last_raw_b << 8 | m->last_buttons;
+    l->inbox_phase = entry;
+    l->reason = reason;
+}
+
 int cs_mac_motion_prepare(struct cs_mac_motion *m, const cs_mac_motion_io *io,
     cs_window_inbox *inbox, uint32_t invert)
 {
@@ -98,9 +119,12 @@ int cs_mac_motion_arm(struct cs_mac_motion *m)
     return CS_MAC_MOTION_OK;
 }
 
-static int uncertain(struct cs_mac_motion *m)
+static int uncertain(struct cs_mac_motion *m, uint32_t reason, uint8_t rr3,
+    snap s1, snap s2, snap s3, uint32_t entry)
 {
     int r = cs_inbox_uncertain(m->inbox, m->epoch);
+    if (r == CS_INBOX_OK || r == CS_INBOX_LOST)
+        note(m, reason, rr3, s1, s2, s3, entry);
     m->have_phase = 0u;
     m->losses = sat(m->losses);
     if (r != CS_INBOX_OK && r != CS_INBOX_LOST)
@@ -116,12 +140,14 @@ int cs_mac_motion_service(struct cs_mac_motion *m)
     int32_t dx = 0, dy = 0;
     snap s1, s2, s3;
     int stable, r;
+    uint32_t entry;
 
     if (!m) return CS_MAC_MOTION_ARGUMENT;
     if (m->phase != CS_MAC_MOTION_ARMED) return CS_MAC_MOTION_STATE;
     m->services = sat(m->services);
     in = m->inbox;
 
+    entry = in->phase;
     rr3 = m->io.read(m->io.cookie, CS_MAC_SCC_A, 3u);
     if (rr3 & ~(RR3_EXT_A | RR3_EXT_B) & 0xFF)
         return fail(m, CS_MAC_STAGE_PENDING, CS_MAC_CAUSE_PENDING);
@@ -162,10 +188,15 @@ int cs_mac_motion_service(struct cs_mac_motion *m)
         return fail(m, CS_MAC_STAGE_INBOX, CS_MAC_CAUSE_INBOX_STATE);
     }
 
-    if (!m->have_phase || !stable) return uncertain(m);
+    if (!m->have_phase || !stable) {
+        return uncertain(m, !m->have_phase ? CS_MAC_LOSS_NO_PHASE : CS_MAC_LOSS_UNSTABLE,
+            rr3, s1, s2, s3, entry);
+    }
     ch_a = ra != m->last_raw_a;
     ch_b = rb != m->last_raw_b;
-    if (ch_a != pend_a || ch_b != pend_b) return uncertain(m);
+    if (ch_a != pend_a || ch_b != pend_b) {
+        return uncertain(m, CS_MAC_LOSS_PENDING, rr3, s1, s2, s3, entry);
+    }
     if (ch_a)
         dx = ((ra ^ (m->invert & 1u)) == bit(s3.pb, PB_X2)) ? 1 : -1;
     if (ch_b)
@@ -176,6 +207,7 @@ int cs_mac_motion_service(struct cs_mac_motion *m)
     r = cs_inbox_push(in, m->epoch, dx, dy, buttons);
     m->samples = sat(m->samples);
     if (r == CS_INBOX_LOST) {
+        note(m, CS_MAC_LOSS_OVERFLOW, rr3, s1, s2, s3, entry);
         m->have_phase = 0u;
         m->losses = sat(m->losses);
         return CS_MAC_MOTION_LOST;

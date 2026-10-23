@@ -33,6 +33,18 @@ enum { CS_MAC_CAUSE_NONE = 0, CS_MAC_CAUSE_READBACK = 1,
        CS_MAC_CAUSE_PENDING = 2, CS_MAC_CAUSE_INBOX_STATE = 3,
        CS_MAC_CAUSE_INBOX_RESULT = 4 };
 
+enum { CS_MAC_LOSS_NONE = 0, CS_MAC_LOSS_NO_PHASE = 1,
+       CS_MAC_LOSS_UNSTABLE = 2, CS_MAC_LOSS_PENDING = 3,
+       CS_MAC_LOSS_OVERFLOW = 4 };
+
+/* First actual transition to loss since prepare; observation only.
+ * snapshots[i]=PB<<16|RR0A<<8|RR0B; previous=have_phase<<24|last_raw_a<<16|
+ * last_raw_b<<8|last_buttons. reason is committed last. */
+struct cs_mac_motion_loss {
+    uint32_t reason, rr3, snapshots[3], previous, inbox_phase;
+};
+_Static_assert(sizeof(struct cs_mac_motion_loss)==28,"Loss record size");
+
 struct cs_mac_motion {
     cs_mac_motion_io io;          /* copied */
     cs_window_inbox *inbox;       /* borrowed */
@@ -40,6 +52,7 @@ struct cs_mac_motion {
     uint32_t invert, stage;
     int32_t cause;
     uint32_t services, samples, baselines, losses, peak_queued; /* saturate */
+    struct cs_mac_motion_loss first_loss;
 };
 
 int cs_mac_motion_prepare(struct cs_mac_motion *m, const cs_mac_motion_io *io,

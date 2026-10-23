@@ -12,3 +12,6 @@ both enabled before arm and MIE off. A/B wrong-read and aliased-control refusals
 retain master-off first causes. Three actually compiled faulty controls rejected.
 Local GCC/Clang/sanitized checks pass; native/target results separate.
 [Follow-up](../../docs/development/boot-input-followup.md).
+
+
+SRC-0424:5750 checks/32 phase cases, three local profiles and four compiled faulty original controls verified for first-loss ordering, retention, reset, reasons and hard-fault exclusion. Native/target verification separate. [Receipt](../../docs/development/mac-first-loss-evidence.md).

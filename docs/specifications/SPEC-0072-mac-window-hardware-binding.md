@@ -106,3 +106,16 @@ nonrecursive C frames plus256B interrupt/assembly margin must fit24320B stack
 reserve. This is a conservative static budget, not measured worst-case timing
 or complete128K System1 certification. Source hashes and actual native RAM/ROM
 sizes must be reviewed before any boot trial.
+
+
+## First-loss observation (engineering, SRC-0424)
+
+Append28B to the motion state: reason, raw RR3, three packed snapshots
+(PB<<16|RR0A<<8|RR0B), previous(have_phase<<24|last_raw_a<<16|last_raw_b<<8|last_buttons),
+and entry inbox phase. NONE0/NO_PHASE1/UNSTABLE2/PENDING3/OVERFLOW4 follow existing
+decision precedence. Record only the first accepted transition to loss, reason
+last, using existing sampled bytes and exclusion. No new MMIO/callback/allocation
+or admission-policy change. Retain through recovery/stop; fresh prepare clears.
+Unstable WAIT/already-LOSS/hard fault do not create a record. MWP1 v2 appends
+these28B after its unchanged100B prefix; separate diagnostics unchanged. Existing
+192B motion/320B combined bound remains; native sizes/stack must reverify.

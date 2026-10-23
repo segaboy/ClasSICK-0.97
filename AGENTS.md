@@ -1,5 +1,10 @@
 # ClasSICK 0.97 working instructions
 
+2026-10-23,SRC-0424: first-loss observation only, no sample-admission/MMIO change.
+5750 checks/32 phase cases/three local profiles/four compiled controls pass.
+MWP1 v2 size128/prefix100; native build and trial pending. Mac input and PC GUI
+drag/release gates remain open. [Receipt](docs/development/mac-first-loss-evidence.md).
+
 2026-10-23 final boot/input follow-up,SRC-0422/0423: RR15 source0ce4c34e
 native-verifies and boots to stage16/fault0 in Snow. Own trace has live VBL/SCC,
 four baselines/three losses, zero delivered samples; Mac input NOT qualified.

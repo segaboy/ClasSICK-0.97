@@ -16,3 +16,6 @@ Original lead refinement uses documented DCD-mask WR15/RR15 only, keeping the
 distinct-channel guard/master-off fault policy. No skipped check or fallback;
 updated native compilation and own-ROM trials required. No source from emulator.
 [Follow-up](../../docs/development/boot-input-followup.md).
+
+
+SRC-0424: bounded first-loss observation adopted from Copilot with lead hard-fault separation; no hardware transaction/admission-policy change. [Receipt](../../docs/development/mac-first-loss-evidence.md).

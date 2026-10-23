@@ -46,7 +46,10 @@ struct cs_mac_window_trace {
     int32_t pointer_x,pointer_y,window_x,window_y;
     uint32_t pattern,phase,motion_stage,raw_a,raw_b,buttons;
     int32_t motion_cause,cause;
+    uint32_t loss_reason,loss_rr3,loss_snap[3],loss_previous,loss_phase;
 };
+_Static_assert(sizeof(struct cs_mac_window_trace)==128,"MWP1 v2 size");
+_Static_assert(offsetof(struct cs_mac_window_trace,loss_reason)==100,"MWP1 v1 prefix");
 volatile struct cs_mac_window_trace cs_mac_trace;
 
 static cs_mac_window_session session __attribute__((section(".loaded_app")));
@@ -163,6 +166,13 @@ static uint32_t observe(void)
         cs_mac_trace.pointer_x=session.input.pointer.x;cs_mac_trace.pointer_y=session.input.pointer.y;
         cs_mac_trace.window_x=session.input.window.x;cs_mac_trace.window_y=session.input.window.y;
         cs_mac_trace.pattern=session.input.window.pattern;cs_mac_trace.phase=session.foreground.phase;
+        cs_mac_trace.loss_rr3=motion.first_loss.rr3;
+        cs_mac_trace.loss_snap[0]=motion.first_loss.snapshots[0];
+        cs_mac_trace.loss_snap[1]=motion.first_loss.snapshots[1];
+        cs_mac_trace.loss_snap[2]=motion.first_loss.snapshots[2];
+        cs_mac_trace.loss_previous=motion.first_loss.previous;
+        cs_mac_trace.loss_phase=motion.first_loss.inbox_phase;
+        cs_mac_trace.loss_reason=motion.first_loss.reason;
     }
     cs_m68k_foreground_leave(0,token);
     return dead;
@@ -174,7 +184,7 @@ void cs_mac_main(void)
     io.context=0;io.read=via_read;io.write=via_write;
     terminal=0u;
     cs_mac_diag.magic=UINT32_C(0x43533039);cs_mac_diag.stage=1;
-    cs_mac_trace.tag=UINT32_C(0x4D575031);cs_mac_trace.version=1u;
+    cs_mac_trace.tag=UINT32_C(0x4D575031);cs_mac_trace.version=2u;
     cs_mac_trace.bytes=(uint32_t)sizeof(struct cs_mac_window_trace);
     cs_mac_diag.image_crc=cs_mac_image_crc((const volatile uint8_t *)(uintptr_t)0x400000,CS_MAC_ROM_BYTES);
     if(cs_mac_diag.image_crc!=*(const volatile uint32_t *)(uintptr_t)0x400100)halt(1);

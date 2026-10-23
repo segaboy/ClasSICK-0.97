@@ -10,7 +10,7 @@ typedef struct { uint32_t ch,reg,value; } write_event;
 typedef struct { uint32_t ch,reg,value,write,a_mask,b_mask,mie; } access_event;
 typedef struct {
     uint8_t regs[2][16],raw[2],pb,pending;
-    unsigned calls,writes,snapshots,unstable,alias,bad_read;
+    unsigned calls,writes,snapshots,unstable,alias,bad_read,scripted;
     write_event log[256];
     unsigned accesses;
     access_event access[512];
@@ -44,6 +44,7 @@ static void wr(void *c,uint32_t ch,uint32_t reg,uint8_t v)
 static uint8_t pb(void *c)
 {
     chip *p=c;p->calls++;p->snapshots++;
+    if(p->scripted){const uint8_t v[3]={0x88,0x48,0x28};return v[(p->snapshots-1u)%3u];}
     return (uint8_t)(p->pb ^ ((p->unstable && p->snapshots%3u==0u)?0x10u:0u));
 }
 static cs_mac_motion_io io={&hw,rd,wr,pb};
@@ -159,6 +160,65 @@ int main(void)
     CHECK(cs_mac_motion_prepare(&m,&invalid,&inbox,0)==CS_MAC_MOTION_ARGUMENT && hw.calls==n);
     inbox.phase=CS_INBOX_READY;
     CHECK(cs_mac_motion_prepare(&m,&io,&inbox,0)==CS_MAC_MOTION_STATE && hw.calls==n);
+    /* First-loss record: hand-encoded expectations. */
+    fresh(0);hw.unstable=1;n=hw.calls;
+    CHECK(cs_mac_motion_service(&m)==CS_MAC_MOTION_EMPTY && hw.calls-n==11);
+    CHECK(m.first_loss.reason==CS_MAC_LOSS_NONE);
+    fresh(0);baseline();hw.unstable=1;n=hw.calls;
+    CHECK(cs_mac_motion_service(&m)==CS_MAC_MOTION_LOST && hw.calls-n==11);
+    CHECK(m.first_loss.reason==CS_MAC_LOSS_UNSTABLE && m.first_loss.rr3==0);
+    CHECK(m.first_loss.snapshots[0]==0x080000u && m.first_loss.snapshots[1]==0x080000u);
+    CHECK(m.first_loss.snapshots[2]==0x180000u && m.first_loss.previous==0x01000000u);
+    CHECK(m.first_loss.inbox_phase==CS_INBOX_READY);
+    struct cs_mac_motion_loss first=m.first_loss;
+    CHECK(cs_mac_motion_service(&m)==CS_MAC_MOTION_LOST);
+    CHECK(!memcmp(&first,&m.first_loss,sizeof first));
+    CHECK(cs_inbox_discard(&inbox,1)==CS_INBOX_OK);
+    CHECK(cs_inbox_resume(&inbox,1)==CS_INBOX_BASELINE);hw.unstable=0;
+    CHECK(cs_mac_motion_service(&m)==CS_MAC_MOTION_BASELINED && m.baselines==2);
+    CHECK(cs_inbox_claim(&inbox,1)==CS_INBOX_BASELINE_ITEM);
+    CHECK(cs_inbox_complete(&inbox,1,0)==CS_INBOX_OK);
+    hw.raw[0]=8;CHECK(cs_mac_motion_service(&m)==CS_MAC_MOTION_LOST && m.losses==2);
+    CHECK(!memcmp(&first,&m.first_loss,sizeof first));
+    CHECK(cs_mac_motion_stop(&m)==CS_MAC_MOTION_OK);
+    CHECK(!memcmp(&first,&m.first_loss,sizeof first));
+    fresh(0);CHECK(m.first_loss.reason==CS_MAC_LOSS_NONE && !m.first_loss.previous);
+    baseline();m.have_phase=0;hw.unstable=1;
+    CHECK(cs_mac_motion_service(&m)==CS_MAC_MOTION_LOST);
+    CHECK(m.first_loss.reason==CS_MAC_LOSS_NO_PHASE && m.first_loss.previous==0);
+    CHECK(m.first_loss.snapshots[2]==0x180000u && m.first_loss.inbox_phase==CS_INBOX_READY);
+    fresh(0);baseline();hw.pending=8;n=hw.calls;
+    CHECK(cs_mac_motion_service(&m)==CS_MAC_MOTION_LOST && hw.calls-n==12);
+    CHECK(m.first_loss.reason==CS_MAC_LOSS_PENDING && m.first_loss.rr3==8);
+    for(unsigned i=0;i<3;i++)CHECK(m.first_loss.snapshots[i]==0x080000u);
+    CHECK(m.first_loss.previous==0x01000000u && m.first_loss.inbox_phase==CS_INBOX_READY);
+    fresh(0);baseline();
+    for(unsigned i=0;i<16;i++){hw.pb=(uint8_t)((i&1u)?8:0);CHECK(cs_mac_motion_service(&m)==CS_MAC_MOTION_OK);}
+    hw.pb=0;CHECK(cs_mac_motion_service(&m)==CS_MAC_MOTION_LOST);
+    CHECK(m.first_loss.reason==CS_MAC_LOSS_OVERFLOW && m.first_loss.rr3==0);
+    for(unsigned i=0;i<3;i++)CHECK(m.first_loss.snapshots[i]==0u);
+    CHECK(m.first_loss.previous==0x01000000u && m.first_loss.inbox_phase==CS_INBOX_READY);
+    fresh(0);baseline();CHECK(cs_inbox_uncertain(&inbox,1)==CS_INBOX_LOST);
+    CHECK(cs_mac_motion_service(&m)==CS_MAC_MOTION_LOST && m.first_loss.reason==CS_MAC_LOSS_NONE);
+    fresh(0);baseline();hw.pending=2;
+    CHECK(cs_mac_motion_service(&m)==CS_MAC_MOTION_FAULT && m.first_loss.reason==CS_MAC_LOSS_NONE);
+    /* Malformed inbox can refuse uncertain(): hard fault, not a loss record. */
+    fresh(0);baseline();inbox.count=17;hw.unstable=1;
+    CHECK(cs_mac_motion_service(&m)==CS_MAC_MOTION_FAULT && m.first_loss.reason==CS_MAC_LOSS_NONE);
+    fresh(0);
+    const struct cs_mac_motion_loss empty={0};
+    CHECK(!memcmp(&m.first_loss,&empty,sizeof empty));
+    /* Full raw bytes are retained, including bits not used by admission. */
+    hw.pb=0xC8;hw.raw[0]=0x80;hw.raw[1]=0x40;baseline();
+    hw.pending=9;
+    CHECK(cs_mac_motion_service(&m)==CS_MAC_MOTION_LOST && m.first_loss.reason==CS_MAC_LOSS_PENDING);
+    for(unsigned i=0;i<3;i++)CHECK(m.first_loss.snapshots[i]==0xC88040u);
+    CHECK(m.first_loss.rr3==9 && m.first_loss.previous==0x01000000u);
+    fresh(0);hw.raw[0]=0x80;hw.raw[1]=0x40;baseline();hw.scripted=1;
+    CHECK(cs_mac_motion_service(&m)==CS_MAC_MOTION_LOST && m.first_loss.reason==CS_MAC_LOSS_UNSTABLE);
+    CHECK(m.first_loss.snapshots[0]==0x888040u);
+    CHECK(m.first_loss.snapshots[1]==0x488040u);
+    CHECK(m.first_loss.snapshots[2]==0x288040u);
     printf("Mac motion: %u checks,32 phase/inversion cases; synthetic IO, no target execution.\n",checks);
     return 0;
 }

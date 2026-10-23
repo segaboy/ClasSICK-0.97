@@ -4284,3 +4284,8 @@ Keypad button-selection/hold/release prose only, no API or implementation code,
 manual sample or guest algorithm. Temporary automated attempt yields no confirmed
 held-button delivery; original preferences restored exactly. Not guest behavior
 or historical evidence; no worker transfer of this document.
+
+
+## SRC-0424 - Original first-loss worker artifact and lead verification
+
+2026-10-23, bounded Copilot Sonnet5.5 low original public-only proposal,108.83s, no worker execution/write. Codex corrects hard-fault classification and test expectations, integrates first-loss observation, and executes5750 checks/32 phase cases/three compiler profiles/four compiled faulty controls. Engineering evidence only; native/target pending. [Receipt](../docs/development/mac-first-loss-evidence.json).

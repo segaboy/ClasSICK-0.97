@@ -1,0 +1,78 @@
+{
+  "date": "2026-10-23",
+  "baseline": "cfaeb7a3b4ba325e03993d8671f016e9d07be0a0",
+  "scope": "First-loss observation only; no admission or MMIO change",
+  "worker": {
+    "name": "Copilot Sonnet5.5 low",
+    "execution": {
+      "round": "primary",
+      "worker": "copilot",
+      "exit_code": 0,
+      "outer_timeout": false,
+      "elapsed_seconds": 108.83,
+      "input_bytes": 29510,
+      "input_sha256": "001dea7fd3eefdebc4db1ea88f381cef90be9e5ddf7f09ad368c0b7ae373ca94",
+      "stderr_bytes": 0
+    },
+    "tool_calls": "two views of the single frozen prompt (second redundant one-line read); no other input/write/command/test",
+    "premium_requests_reported": 1,
+    "provider_requests": 3,
+    "remaining_balance": "unavailable",
+    "artifact": "adopted with lead corrections",
+    "tests_executed_by_worker": []
+  },
+  "lead_corrections": [
+    "Do not record hard inbox failure as loss",
+    "Recovery test expects second baseline; uncertain returns LOST",
+    "Added exact raw-byte and ordered snapshot checks and fresh-zero/fault cases",
+    "Assert native trace prefix100/size128"
+  ],
+  "local_verification": {
+    "clang_debug": "2 targeted CTests passed",
+    "gcc_release": "2 targeted CTests passed",
+    "clang_asan_ubsan": "2 targeted CTests passed",
+    "controls": {
+      "actual_compiled_controls": [
+        {
+          "case": "correct",
+          "compiled": true,
+          "exit": 0,
+          "output": "Mac motion: 5750 checks,32 phase/inversion cases; synthetic IO, no target execution."
+        },
+        {
+          "case": "overwrite-first",
+          "compiled": true,
+          "exit": 1,
+          "output": "motion check 4760 line 182"
+        },
+        {
+          "case": "swap-snapshots",
+          "compiled": true,
+          "exit": 1,
+          "output": "motion check 5748 line 219"
+        },
+        {
+          "case": "pending-as-unstable",
+          "compiled": true,
+          "exit": 1,
+          "output": "motion check 4946 line 192"
+        },
+        {
+          "case": "fault-recorded-as-loss",
+          "compiled": true,
+          "exit": 1,
+          "output": "motion check 5570 line 207"
+        }
+      ],
+      "checks": 5750,
+      "phase_cases": 32,
+      "test_sha256": "498c88979dad83429e1dc74cac59609269d17ed99a0e506dd975481646202a4a"
+    }
+  },
+  "native_build": "pending",
+  "target_trial": "not run",
+  "release_ready": false,
+  "PC": "GUI drag remains unqualified; normal clicks passed; no driver policy change",
+  "pc286": "Prior7bb9856 bounded logical-bank qualification retained; no far backend or target run",
+  "excluded_inputs_preserved": true
+}

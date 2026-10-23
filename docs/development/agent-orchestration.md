@@ -413,3 +413,6 @@ than external retry/fan-out; lead supplies the small original change and runs
 contract-order tests/three compiled controls. Codex alone handles desktop/native
 verification and repository integration. Copilot/Grok/Argon idle; all remaining
 balances unavailable. This is not evidence of quota savings. [Receipt](boot-input-followup.json).
+
+
+2026-10-23 first-loss allocation: one Copilot Sonnet5.5 low primary supplies usable original motion/trace/tests;108.83s, two views of the same frozen packet (second redundant), zero writes/commands/tests. Lead adopts, fixes hard-fault classification/two expectations, adds controls and executes verification. One reported premium request/three provider requests; remaining balance unavailable. No redundant second worker or quota-equivalence claim. [Receipt](mac-first-loss-evidence.md).
