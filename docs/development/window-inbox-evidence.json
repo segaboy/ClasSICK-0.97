@@ -220,7 +220,30 @@
       "scope": "Real pointer AND dragged-window boundary -1,+1 remain ordered and end atx1;no coalescing/clamping upstream."
     }
   ],
-  "native68000_CI": "pending",
+  "native68000_CI": {
+    "helper_largest_frame": 36,
+    "descriptor_bound_bytes": 256,
+    "descriptor_bytes": 244,
+    "specifications": [
+      "SPEC-0065"
+    ],
+    "cpu": "68000",
+    "inputs": {
+      "apps/window-scene/inbox.c": "24939209ed957f9c6c796b60eeee518cfacdd7d0c9ed1d43cfba216fc60db8f4",
+      "tests/window-inbox-layout.c": "bafd6fb74e0316dd30746ee119f0593ee8ea4ecc43231ae044cb4888baa3d5eb",
+      "apps/window-scene/inbox.h": "2bebf4901506814c270c4612b9170ad0dce2da58a037fa4e187f8a748bc3fa90",
+      "core/input/pointer.h": "d0a53cdadbe728195ce2c35bc4ef0b2a1687351912c759eda1bf6b4c38abdc38"
+    },
+    "object_compilations": 12,
+    "closure_audits": 6,
+    "undefined_imports": 0,
+    "mutable_data": 0,
+    "stack_note": "Per-function compiler frames include ABI costs; not whole-system stack certification.",
+    "target_executed": false,
+    "rom_inputs_changed": false,
+    "manifest_sha256": "d496b0442d47a5731553d3731ddc640406455cdda8fd6ce9a9839120783c66cd",
+    "twins_equal": true
+  },
   "public_guard": "PASS:1086 indexed text/source files,31 PNGs,1 reviewed GIF;record checks only",
   "boot_inputs_changed": false,
   "hardware_bound": false,
@@ -228,5 +251,25 @@
   "target_trials": [],
   "new_visual_evidence": false,
   "release_ready": false,
-  "net_Codex_usage_savings_measured": false
+  "net_Codex_usage_savings_measured": false,
+  "normal_CI": {
+    "headSha": "dcf4f42c06873b2e189a45e9c740ef735344c12e",
+    "url": "https://github.com/segaboy/ClasSICK-0.97/actions/runs/39951159752",
+    "conclusion": "success",
+    "jobs": [
+      {
+        "name": "m68k-rom",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "name": "windows-bootstrap",
+        "status": "completed",
+        "conclusion": "success"
+      }
+    ],
+    "duplicate_run_cancelled": 39951159430,
+    "retained_run": 39951159752
+  },
+  "preservation": "PASS:24 originals,held brief,other tracked bytes,tags and old boot source lists preserved"
 }

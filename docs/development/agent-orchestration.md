@@ -315,3 +315,8 @@ author-blind;other workers idle,no retry/requalification/fan-out.343 final local
 profile checks/12 audits/three compiled faulty controls pass;no CPU/IRQ proof.
 Reported$0.1984488 list cost is not balance/net Codex savings. Private Claude
 task-time snapshot only;others unavailable. [Receipt](window-inbox-evidence.json).
+
+Pure-inbox follow-up:source-pinned Windows/68000 CI passes atdcf4f42;target
+descriptor244B,largest inbox function frame36B,12 objects/6 closures/twins.
+All manifest input hashes match. Duplicate CI push run cancelled;one retained
+successful run. No additional worker/test-source change or IRQ-safety claim.

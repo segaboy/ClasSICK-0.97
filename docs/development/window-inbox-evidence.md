@@ -36,7 +36,7 @@ window clamping reversal,loss cancellation,held-left suppression/release pass.
 matching delayed EFI-ABI twins,per-frame512 bound. Descriptor244B on hostedx64.
 Three actually compiled faulty controls are rejected;valid control passes.
 Baseline-loss defect uses the interleaving oracle,not the unit-only oracle.
-Native68000 source-pinned compiler CI is pending;no target execution.
+Windows/68000 [source-pinned CI](https://github.com/segaboy/ClasSICK-0.97/actions/runs/39951159752) passes at`dcf4f42c06873b2e189a45e9c740ef735344c12e`. Actual68000:12 objects/6 closures,matchingO0/O2/Os twins,descriptor244B,largest inbox function frame36B. All manifest input hashes match local normalized source/header bytes. No target execution.
 
 IC-01..14 retain explicit partial/unexecuted hardware parts in TEST-0078;no
 claim that all14 original cases are complete. In particular actual CPU mask
@@ -53,3 +53,10 @@ Claude's task-time allowance snapshot is private and time-limited;Grok,Copilot
 and Argon High idle/current balances unavailable. No additional quota calls.
 Next proposed slice:a bounded production foreground coordinator using the
 reviewed short-section interface,then separately admitted CPU/SCC binding.
+
+
+Repository guard passes:1086 indexed text/source files,31 registered PNGs and
+1 reviewed GIF. JSON/links/Python syntax/whitespace and preservation checks pass.
+Two identical push-triggered CI runs appeared;older39951159430 cancelled,newer
+39951159752 retained and successful. Metadata-only follow-up changes no tested
+code,input,API,oracle or compiled candidate.

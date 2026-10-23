@@ -343,8 +343,12 @@
     "CPU_hardware_bound": false,
     "boot_inputs_changed": false,
     "local_profile_CTests": 343,
-    "m68k_ci": "pending",
+    "m68k_ci": "passed",
     "target_trials": 0,
-    "release_ready": false
+    "release_ready": false,
+    "source_revision": "dcf4f42c06873b2e189a45e9c740ef735344c12e",
+    "ci_url": "https://github.com/segaboy/ClasSICK-0.97/actions/runs/39951159752",
+    "m68k_descriptor_bytes": 244,
+    "m68k_largest_function_frame": 36
   }
 }
