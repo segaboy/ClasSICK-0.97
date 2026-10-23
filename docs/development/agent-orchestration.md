@@ -320,3 +320,14 @@ Pure-inbox follow-up:source-pinned Windows/68000 CI passes atdcf4f42;target
 descriptor244B,largest inbox function frame36B,12 objects/6 closures/twins.
 All manifest input hashes match. Duplicate CI push run cancelled;one retained
 successful run. No additional worker/test-source change or IRQ-safety claim.
+
+
+286 investigation2026-10-23:lead-only published source eligibility/private
+manuals;one Claude Opus5.5 low53.45s from29739B431line reviewed-public/original
+packet.220lines/2158words (line180cap missed,word2200cap met),zero tools/edits/
+tests/retry/second worker/requalification. Integrate draft with targeted native/
+guest,alignment,segmentation,coverage and Windows11-execution corrections.
+8 proposed checks unexecuted,no build/install/target run. Source-review burden
+stays lead-only under existing input exclusions. Reported$0.2222208 list cost
+is not remaining allowance/measured Codex saving;other workers idle,all-four
+remaining allowances unverified. [Review](../research/pc286-source-review.md).

@@ -64,3 +64,9 @@ continue unchanged. No new worker call is needed for this small decision.
 
 First dependency inventory complete as a reviewed proposal;common handoff/ABI not frozen.
 [Inventory](unified-x64-boot-inventory.md),[source identities/receipt](unified-x64-boot-inventory.json).
+
+
+Owner286 investigation2026-10-23,SRC-0375..0382:the separate future
+[native16-bit286 study](pc286-feasibility.md) does not replace this64-bit
+payload/distribution goal or the immediate paired-native-preview-2 milestone.
+It is research only,not a second implementation/boot/release authorization.

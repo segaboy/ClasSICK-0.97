@@ -1,0 +1,301 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-23",
+  "sources": [
+    "SRC-0375",
+    "SRC-0376",
+    "SRC-0377",
+    "SRC-0378",
+    "SRC-0379",
+    "SRC-0380",
+    "SRC-0381",
+    "SRC-0382"
+  ],
+  "decision": "ADR-0075",
+  "baseline_revision": "4f231b559e491b1e4b4663d1e67ed6b8634cc056",
+  "scope": "286 feasibility/source/original engineering study only",
+  "target_status": "proposed future PC286 lane;no validated hardware profile",
+  "local_source_identities": [
+    {
+      "file": "openwatcom-general.pdf",
+      "bytes": 849005,
+      "sha256": "7db3a7563e3436302bf76384bbd2f54339a991b106e69651eb07ef83249e2517",
+      "pages": 557,
+      "url": "https://openwatcom.org/ftp/manuals/current/cguide.pdf"
+    },
+    {
+      "file": "ibm-ega.pdf",
+      "bytes": 4242750,
+      "sha256": "d2411a689d762e9c6915fd3b15a92f760beada41a4cd1b0020fd29814db151bd",
+      "pages": 174,
+      "url": "https://www.minuszerodegrees.net/oa/OA%20-%20IBM%20Enhanced%20Graphics%20Adapter.pdf"
+    },
+    {
+      "file": "ibm-cga.pdf",
+      "bytes": 565691,
+      "sha256": "658276c95354923bf65e04044f82af7d260c1de22d867d4c9d5b9c35f339916a",
+      "pages": 42,
+      "url": "https://www.minuszerodegrees.net/oa/OA%20-%20IBM%20Color%20Graphics%20Monitor%20Adapter%20%28CGA%29.pdf"
+    },
+    {
+      "file": "hercules-gb101.pdf",
+      "bytes": 6092414,
+      "sha256": "9bbbe148d3c09a02064def6026d26802570d0c6abc8e74ec3a3ffff07f181f84",
+      "pages": 15,
+      "url": "https://www.retrocmp.de/hardware/hercules-card/GB101_Owners-Manual_text.pdf"
+    },
+    {
+      "file": "ibm-at-drive.pdf",
+      "bytes": 244603,
+      "sha256": "fb7b8b1a1bb82e49c1caf874ec9061e5817ce1d464c199c6ed8f67e0c85f2612",
+      "pages": 12,
+      "url": "https://www.minuszerodegrees.net/oa/OA%20-%20IBM%20PC%20AT%20High%20Capacity%20Diskette%20Drive.pdf"
+    }
+  ],
+  "web_only_sources": [
+    {
+      "source": "SRC-0376",
+      "title": "Intel SDM Vol1 253665-021 September2006",
+      "url": "https://www.intel.com/content/dam/support/us/en/documents/processors/pentium4/sb/25366521.pdf",
+      "locators": "2.1.1..2.1.3,printed2-1..2-2,PDF31..32;cover",
+      "local_pdf_hash_claim": false
+    },
+    {
+      "source": "SRC-0376",
+      "title": "Intel SDM Vol3A 253668-021 October2006",
+      "url": "https://www.intel.com/content/dam/support/us/en/documents/processors/pentium4/sb/25366821.pdf",
+      "locators": "Architecture Compatibility17-38..39,PDF630..631;cover",
+      "local_pdf_hash_claim": false
+    },
+    {
+      "source": "SRC-0377",
+      "title": "GCC16.1 x86 options",
+      "url": "https://gcc.gnu.org/onlinedocs/gcc-16.1.0/gcc/x86-Options.html",
+      "locators": "-m16/-m32,.code16gcc",
+      "local_pdf_hash_claim": false
+    }
+  ],
+  "worker": {
+    "execution": {
+      "round": "study",
+      "worker": "claude",
+      "exit_code": 0,
+      "outer_timeout": false,
+      "elapsed_seconds": 53.45,
+      "input_bytes": 29739,
+      "input_sha256": "f8d41ba4e96a5423781a67e9f80525916722e95b75a8a0f191178b0af9ee53b4",
+      "stderr_bytes": 0
+    },
+    "event_types": {
+      "system": 5,
+      "stream_event": 995,
+      "assistant": 2,
+      "rate_limit_event": 1,
+      "result": 1
+    },
+    "observed_tools": [],
+    "artifact_lines": 220,
+    "artifact_words": 2158,
+    "artifact_sha256": "cd4f0c054cf457044970ee44c67e901d507edf67eaced5332f2dd3d6ab28ad4f",
+    "handoff": {
+      "result": "Investigation-only feasibility study drafted: real-mode 286 separate native build; near-hot/far-code/explicit banked guest backend recommended; tiers, 576KiB design cap, reuse table, gates, M1-M6 sequence.",
+      "actionable_findings": [
+        "guest.c ~7u masks are a reasoned 16-bit-int ABI risk (unexecuted)",
+        "cs_guest_window contiguous-view contract cannot span 64KiB segments; backend redesign needed",
+        "Qualify genuine 16-bit compiler before any porting"
+      ],
+      "tests_executed": [],
+      "blockers": [
+        "No qualified 16-bit toolchain",
+        "BIOS/loader/serial interfaces unadmitted",
+        "286 test environment unadmitted"
+      ],
+      "decisions_needed": [
+        "Approve compiler candidate for M1",
+        "CGA policy (diagnostic-only vs scale/pan)",
+        "Confirm 640KiB target / 512KiB stretch"
+      ]
+    },
+    "usage": {
+      "total_cost_usd": 0.2222208,
+      "num_turns": 1,
+      "subtype": "success",
+      "is_error": false,
+      "modelUsage": {
+        "claude-opus-5-5": {
+          "inputTokens": 2,
+          "outputTokens": 5852,
+          "cacheReadInputTokens": 2384,
+          "cacheCreationInputTokens": 13087,
+          "webSearchRequests": 0,
+          "costUSD": 0.2222208,
+          "contextWindow": 1000000,
+          "maxOutputTokens": 128000,
+          "thinkingTokens": 238,
+          "canonicalModel": "claude-opus-5-5",
+          "provider": "firstParty",
+          "costBasis": "list"
+        }
+      }
+    },
+    "packaging_tail": ""
+  },
+  "input_packet": {
+    "bytes": 29739,
+    "lines": 431,
+    "sha256": "f8d41ba4e96a5423781a67e9f80525916722e95b75a8a0f191178b0af9ee53b4",
+    "files": {
+      "docs/development/unified-x64-pc-plan.md": "9bfc699349e2a5762cfa84e451089ef7de42d2cc7e3b471151e3458e00a269dd",
+      "core/memory/guest.h": "5a89e549470bd0f3ffe50e7fb714342ff7dc6af0d49a0c154a7baebdf7e113ff",
+      "core/memory/guest.c": "9678b43e3dc82df2f66119794f08cb2a0dbd85c07a031085daba35b230b6f8a1",
+      "core/cpu/m68k.h": "1f19932c23f2a27f3764861f38d50cf4f68517b0a1a67b939a1bed12b1770b2c",
+      "core/cpu/m68k-bus.h": "a0a8fa1ca3075be2c3f6eecfe18f45ef0c3db3c338af00d5451edc293ad2ce0a",
+      "core/graphics/surface.h": "31de605b79282fac7f4208e28aab328662df975a03028ac16fe179672d6dc264",
+      "docs/specifications/SPEC-0035-first-loaded-rom-application.md": "8d98cbeb5f159929c0c7f6b3129a9ba78f41fa50b9a751097d841cc6c7872121"
+    }
+  },
+  "dispositions": [
+    {
+      "proposal": "separate16bit native OS with guest68000 app interpreter",
+      "disposition": "adopt as investigation architecture;no implementation contract"
+    },
+    {
+      "proposal": "real-mode BIOS-first baseline,near hot data/far code/checked guest chunks",
+      "disposition": "adopt as candidate direction;exact toolchain,page/API,firmware ABI unadmitted"
+    },
+    {
+      "proposal": "640KiB first envelope/512KiB stretch",
+      "disposition": "adopt as unmeasured planning profile,not minimum or achieved fit"
+    },
+    {
+      "proposal": "coverage tiers B0/B1/B2 and phases M1-M6",
+      "disposition": "adopt with changes",
+      "correction": "T286-D/G/A and P286-1..6 avoid existing B2/M1-M7 identifiers;diagnostic boot never counts as GUI/app support"
+    },
+    {
+      "proposal": "all odd-address accesses fault",
+      "disposition": "correct",
+      "correction": "odd byte accesses valid;word/long odd faults only"
+    },
+    {
+      "proposal": "every32bit guest value costs multiple instructions",
+      "disposition": "qualify",
+      "correction": "32bit arithmetic generally needs multiple16bit operations;not a literal instruction-count guarantee"
+    },
+    {
+      "proposal": "16bit build runs in hosted Windows harness",
+      "disposition": "correct",
+      "correction": "ordinary Windows11/x64 reference is not actual16bit execution;new suitable environment/exact goahead required"
+    },
+    {
+      "proposal": "CGA scale/pan policy decision now",
+      "disposition": "defer",
+      "correction": "standing unscaled512x342 already governs;no change or owner question needed for research"
+    },
+    {
+      "proposal": "full draft220lines versus180line cap",
+      "disposition": "usable with integration",
+      "correction": "2158words within2200 word cap;line-cap deviation recorded,no retry/second worker;lead condenses verification section"
+    }
+  ],
+  "planning_budget_KiB": {
+    "guest_RAM_including_guest_screen": 128,
+    "own_guest_compatibility_ROM_veneers": 64,
+    "native_kernel_interpreter_managers_code": 192,
+    "native_working_storage": 96,
+    "presentation": 32,
+    "firmware_loader_stacks_IO_reserve": 64,
+    "total": 576,
+    "candidate_conventional_profile": 640,
+    "margin": 64,
+    "measured": false
+  },
+  "compiler_PATH_check": {
+    "queried": [
+      "wcc",
+      "wcc386",
+      "wlink",
+      "ia16-elf-gcc"
+    ],
+    "found": [],
+    "exhaustive_machine_inventory": false,
+    "installed": false
+  },
+  "portability_findings": [
+    {
+      "file": "core/memory/guest.c",
+      "lines": [
+        12,
+        25
+      ],
+      "finding": "~7u is narrow on16bit-unsigned ABI and can miss high guest-permission bits",
+      "status": "reasoned prospective ABI defect;not an executed16bit failure/current-target bug"
+    },
+    {
+      "file": "core/memory/guest.h",
+      "finding": "contiguous pointer views/32bit spans require segmentation-safe backend",
+      "status": "source review;no patch"
+    },
+    {
+      "finding": "numeric uintptr_t overlap checks and C11/int64/size_t/helper ABI require qualification",
+      "status": "audit prerequisite,not complete audit"
+    }
+  ],
+  "proposed_checks": [
+    {
+      "id": "P286-V1",
+      "scope": "True16-bit ABI/286 ISA/compiler dialect/helpers/imports",
+      "executed": false
+    },
+    {
+      "id": "P286-V2",
+      "scope": "Cross64KiB guest read/write/fetch/copy,permissions/odd-byte-versus-word/long faults,no partial commit",
+      "executed": false
+    },
+    {
+      "id": "P286-V3",
+      "scope": "Segmented pointer/canonical ownership and high-bit integer-mask oracle",
+      "executed": false
+    },
+    {
+      "id": "P286-V4",
+      "scope": "Native segment/layout/total conventional-memory map against provisional envelope",
+      "executed": false
+    },
+    {
+      "id": "P286-V5",
+      "scope": "BIOS/media/keyboard/serial/adapter-monitor diagnostic versus GUI matrix",
+      "executed": false
+    },
+    {
+      "id": "P286-V6",
+      "scope": "Unscaled512x342 goldens and native presentation/cursor/drag cost",
+      "executed": false
+    },
+    {
+      "id": "P286-V7",
+      "scope": "Original guest fixture and later admitted named128K-app/trap/manager/ROM-services profiles",
+      "executed": false
+    },
+    {
+      "id": "P286-V8",
+      "scope": "Instruction/trap/graphics/input/launch/memory performance on slow/fast286s",
+      "executed": false
+    }
+  ],
+  "feature_tests_executed": [],
+  "compiler_builds_executed": [],
+  "target_trials": [],
+  "runtime_inputs_changed": false,
+  "implementation_authorized": false,
+  "current_Mac_x64_milestone_changed": false,
+  "new_release": false,
+  "record_checks": "PASS: repository guard (1091 indexed text/source files,31 registered PNGs,1 reviewed GIF); targeted JSON/local-link/budget/unexecuted-case/whitespace checks; preservation audit",
+  "remaining_external_allowances": {
+    "Claude": "unverified/not exposed as reliable live remaining allowance",
+    "Grok": "unverified/not exposed as reliable live remaining allowance",
+    "Copilot": "unverified/not exposed as reliable live remaining allowance",
+    "Antigravity_Argon4_High": "unverified/not exposed as reliable live remaining allowance"
+  },
+  "net_Codex_usage_savings_measured": false
+}

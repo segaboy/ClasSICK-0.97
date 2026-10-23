@@ -3909,3 +3909,36 @@ clamped drag/recovery checks. Reused compiler controls/three actual faulty
 variants,normal CI. No new manual review/code extraction/reference run;prior
 source facts remain separate. No CPU exclusion or full physical capture proof.
 Lead self-review;human provenance review pending.
+
+
+## SRC-0375 - Owner286 port investigation goal
+
+Owner2026-10-23 requests investigation of a286 port bootable/runnable on most286machines,and an original68k interpreter launching unchanged applications intended forMac128K. Research/roadmap only;no install,code,build,target/release authority. Existing native-app/source/edition/physical/gate rules persist.
+
+## SRC-0376 - Published Intel286 architecture compatibility interfaces
+
+Intel SDM Vol1 Order253665-021 September2006,cover and2.1.1..2.1.3 printed2-1..2-2/PDF31..32;Vol3A Order253668-021 October2006,cover and17-38..39/PDF630..631. Official publisher URLs in pc286-feasibility.json.16-bit registers,24-bit protected base/64KiB limits,386 register extension. Web prose only,no local byte hashes,ISA code examples or mode-switch implementation;not Mac historical evidence.
+
+## SRC-0377 - Published GCC16.1 x86 mode-option interface
+
+GNU GCC16.1 official x86-Options.html,-m16/-m32/.code16gcc,access2026-10-23. Combined with Intel width facts,not a286 code-generator qualification. No compiler source/patch implementation used. URL in source review/receipt.
+
+## SRC-0378 - Published Open Watcom16bit compiler/model interfaces
+
+Open Watcom User Guide Version1.8,copyright2002-2008;prefaceiii,printed5/113..114/120(PDF17/125..126/132). WCC/WCC386 and CPU options,near/far/huge model table and arithmetic cost,int/long sizes. Model table visually checked. Local849005B557pages,SHA2567db3a7563e3436302bf76384bbd2f54339a991b106e69651eb07ef83249e2517. Dated manual not currentv2/C11/Windows11/runtime/licence qualification;no manual samples adopted.
+
+## SRC-0379 - Published IBM display and AT drive descriptions
+
+Original IBM Hardware Reference Library Options/Adapters scans:selected EGA descriptionp1/PDF5 August2,1984;CGA pp1..2/PDF5..6(dateunconfirmed);PCAT HighCapacityDrivep1/PDF5 August31,1984. EGA/CGA pages visually checked. Dimensions/media facts only,no BIOS/driver listing,fonts or resources. Three exactPDF identities/URLs in source receipt;archive commentary not evidence.
+
+## SRC-0380 - Published Hercules graphics capability
+
+Hercules Computer Technology,GraphicsCard OwnerManual Edition2.0,copyright1984,p1/PDF3,edition/copyright/intro visuallychecked.720x348 graphics pages. Local6092414B15pages,SHA2569bbbe148d3c09a02064def6026d26802570d0c6abc8e74ec3a3ffff07f181f84. No HBASIC/disk/code/programming sample adopted;URL in source review.
+
+## SRC-0381 - Lead original286 portability and coverage assessment
+
+Original baseline4f231b5 code/header spot-check:guest.c12/25 ~7u prospective16bit-int risk,contiguous guest views,segmented uintptr/size_t/retained-view requirements. Reasoned findings,not executed16bit tests or current-target defects. Proposed memory envelope/tier geometry/source gates;no ABI/code/toolchain selection freeze. Manual eligibility lead-only.
+
+## SRC-0382 - Claude original286 feasibility roadmap draft
+
+One Opus5.5 low53.45s,29739B431line reviewed-public/original packet,SHA256f8d41ba4e96a5423781a67e9f80525916722e95b75a8a0f191178b0af9ee53b4.220lines/2158words,180line capmissed/2200word capmet;zero tools/edits/tests/retry/secondworker. Lead adopts with alignment,cost,execution-context,guest-address/tier/standalone refinements. No manuals,HQ,credentials,untracked originals,prohibited or UART bodies transferred.
