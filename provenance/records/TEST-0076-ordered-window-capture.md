@@ -29,3 +29,9 @@ First CI62926d1:68000 passes,GCC Release oracle fails on struct-copy padding.
 Reproduced atGCC-O3;raw byte snapshots fix that harness error while preserving
 full-byte no-effect checks.343 final local CTests include3 GCC64 Release checks;
 three compiled defects still reject. Production code unchanged.
+
+
+Source-pinned CI `d6e851fc42743430db371c0f599862231662defe` succeeds for Windows and68000.
+Actual target compiler checks:78 objects/6 closed links,matching twins,O0/O2/Os,
+descriptor248B/helper largest frame32B.
+No target execution or all-IRQ/full128K claim. [CI](https://github.com/segaboy/ClasSICK-0.97/actions/runs/39882048452).

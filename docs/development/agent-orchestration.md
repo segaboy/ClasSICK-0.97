@@ -287,3 +287,9 @@ worker or requalification.343 final local profile CTests/12 reused native audits
 compiled defects verified;68000 CI separately recorded. Reported$0.2354344 list
 cost is not balance/Codex savings;quota snapshot private,others unknown.
 [Evidence](window-capture-evidence.json).
+
+
+Follow-up control:for future byte-exact/state-lifetime tests,use raw-byte
+representation snapshots and one focused optimized GCC profile before the first
+push. The capture oracle's GCC Release padding failure was locally reproduced
+and fixed without changing production;initial failure remains recorded.

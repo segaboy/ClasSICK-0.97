@@ -311,8 +311,12 @@
     "boot_inputs_changed": false,
     "local_profile_CTests": 343,
     "native_object_audits": 12,
-    "m68k_ci": "first source passed;test-only fix CI pending",
+    "m68k_ci": "passed",
     "Mac_adapter_admitted": false,
-    "release_ready": false
+    "release_ready": false,
+    "source_revision": "d6e851fc42743430db371c0f599862231662defe",
+    "ci_url": "https://github.com/segaboy/ClasSICK-0.97/actions/runs/39882048452",
+    "m68k_descriptor_bytes": 248,
+    "m68k_helper_largest_frame": 32
   }
 }

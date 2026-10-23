@@ -58,3 +58,11 @@ and the valid control passes. No production/helper change or new worker call.
 The test source is therefore no longer unchanged from the initial author-blind
 freeze;this is an explicit harness correction,not relaxed no-effect behavior.
 New normal source-pinned CI pending;first failure and passing68000 manifest kept.
+
+
+Verified source `d6e851fc42743430db371c0f599862231662defe`: [Windows and68000 CI](https://github.com/segaboy/ClasSICK-0.97/actions/runs/39882048452) both pass.
+Retained classick-capture-build manifest matches every local normalized source/
+header hash:78 target object compilations,6 closures,no imports/mutable data,
+matching twins atO0/O2/Os. Actual68000 descriptor248B;
+largest helper function frame32B,not a whole-call-graph
+or System128K certificate. No target execution. Follow-up modifies metadata only.
