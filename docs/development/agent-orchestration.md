@@ -275,3 +275,13 @@ stop/publication corrections. Reuse roles/CLI controls,no capability audit or
 manual/HQ/originals exposure.12 cases planned,none executed. Reported19,054
 tokens/$0.0221272 are session counters,not remaining allowance or measured Codex
 savings. Others idle;balances unavailable. [Review](mac-motion-prerequisites.md).
+
+
+Ordered capture2026-10-22:one Claude Opus5.5 low primary53.97s from22,167B/439line
+complete original contract/type packet yields259 C lines,zero tools/edits/tests.
+Lead adopts with stop-path/static-assert fixes;two API-only lead tests frozen
+before implementation inspection and unchanged afterward. No retry,second
+worker or requalification.340 local profile CTests/12 native audits/three actual
+compiled defects verified;68000 CI separately recorded. Reported$0.2354344 list
+cost is not balance/Codex savings;quota snapshot private,others unknown.
+[Evidence](window-capture-evidence.json).

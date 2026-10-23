@@ -299,5 +299,20 @@
     "target_trials": 0,
     "next_slice": "Freeze original bounded ordered capture/drain helper contract and limits;then implement/host/native-object verify before MMIO.",
     "release_ready": false
+  },
+  "ordered_capture_helper": {
+    "specification": "SPEC-0063",
+    "implementation": "IMPL-0065",
+    "test": "TEST-0076",
+    "evidence": "docs/development/window-capture-evidence.json",
+    "implemented": true,
+    "sequential_only": true,
+    "hardware_bound": false,
+    "boot_inputs_changed": false,
+    "local_profile_CTests": 340,
+    "native_object_audits": 12,
+    "m68k_ci": "pending",
+    "Mac_adapter_admitted": false,
+    "release_ready": false
   }
 }

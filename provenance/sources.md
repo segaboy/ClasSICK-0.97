@@ -3810,3 +3810,26 @@ packet;70lines/1160words,zero tools/writes/tests,retry or second worker. No manu
 HQ,untracked originals or implementation bodies. MG1-MG8/MP1-MP12 are proposal
 labels;lead dispositions and revised tests prevail. Reported$0.0221272/19,054
 task tokens are not balance or measured Codex savings. [Assignment](../docs/development/tasks/mac-motion-prerequisites-grok.md).
+
+
+## SRC-0366 - Owner ordered capture helper implementation
+
+Dean Howell,2026-10-22:"Do the next step. Create a gif if necessary." Accepts
+the proposed bounded capture/drain helper,API/limits and hosted/native-object
+verification before hardware integration;normal CI/Git/HQ. No MMIO/ISR/boot
+binding,target run or release. No GIF needed for a nonvisual isolated helper.
+
+## SRC-0367 - Claude original ordered capture code
+
+One Opus5.5 low call,53.97s,22,167B frozen original/public type packet;259 C lines,
+zero tools/writes/tests,retry or second worker. No manuals,HQ,untracked originals,
+implementation bodies or prohibited material. Lead adopts with stop-path/static
+assert fixes. [Prompt](../docs/development/tasks/window-capture-claude.md).
+
+## SRC-0368 - Lead capture contract,integration and actual verification
+
+SPEC-0063/ADR-0072;IMPL-0065/TEST-0076. Two contract-first test sources remain
+author-blind to new production until first artifact inspection;unchanged after.
+340 profile CTests,12 native object audits,three compiled faulty controls and
+valid harness verified.68000 CI pending checkpoint;no target run/boot input or
+published binary change. Partial MP5/MP11/MP12 limits explicit. [Receipt](../docs/development/window-capture-evidence.json).

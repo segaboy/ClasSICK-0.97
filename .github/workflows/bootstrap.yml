@@ -61,6 +61,9 @@ jobs:
       - name: Verify native input owner objects
         shell: pwsh
         run: .\scripts\Verify-WindowInputObjects.ps1 -BuildRoot build\window-input-objects
+      - name: Verify ordered native capture objects
+        shell: pwsh
+        run: .\scripts\Verify-CaptureObjects.ps1 -BuildRoot build\capture-objects
       - name: Audit original window composition objects (no target run)
         shell: pwsh
         run: .\scripts\Verify-WindowSceneObjects.ps1 -BuildRoot build\window-scene-objects
@@ -145,6 +148,14 @@ jobs:
         run: python3 scripts/Setup-M68k.py --output "$RUNNER_TEMP/classick-m68k"
       - name: Verify isolated native input owner closure
         run: python3 scripts/Verify-WindowInputM68k.py --tool-root "$RUNNER_TEMP/classick-m68k/root" --output "$RUNNER_TEMP/classick-window-input"
+      - name: Verify isolated capture helper closure for68000
+        run: python3 scripts/Verify-CaptureM68k.py --tool-root "$RUNNER_TEMP/classick-m68k/root" --output "$RUNNER_TEMP/classick-capture"
+      - name: Retain capture helper compiler manifest
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
+        with:
+          name: classick-capture-build
+          path: ${{ runner.temp }}/classick-capture/manifest.json
+          if-no-files-found: error
       - uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
         with:
           name: classick-window-input-build

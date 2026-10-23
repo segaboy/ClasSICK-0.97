@@ -1,0 +1,183 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-22",
+  "sources": [
+    "SRC-0366",
+    "SRC-0367",
+    "SRC-0368"
+  ],
+  "specification": "SPEC-0063",
+  "implementation": "IMPL-0065",
+  "test": "TEST-0076",
+  "baseline_revision": "f46d5bbea9083ff18898192c69f82a8dc6202d50",
+  "classification": "E1 original sequential software/helper only",
+  "worker": {
+    "execution": {
+      "round": "code",
+      "worker": "claude",
+      "exit_code": 0,
+      "outer_timeout": false,
+      "elapsed_seconds": 53.97,
+      "input_bytes": 22167,
+      "input_sha256": "585aa6bd69cc990e90e7081fea2cabdca869c198a0a70d3468b7061e216cb803",
+      "stderr_bytes": 0
+    },
+    "event_types": {
+      "system": 16,
+      "stream_event": 696,
+      "assistant": 2,
+      "rate_limit_event": 1,
+      "result": 1
+    },
+    "observed_tool_starts": [],
+    "handoff": {
+      "result": "Proposed capture.c only, about 250 lines; it has not been compiled or tested.",
+      "actionable_findings": [
+        "The head is advanced with a bit mask, which assumes CS_CAPTURE_CAPACITY stays a power of two (it is 16).",
+        "A recorded cause of 0 means no failure is retained, because OK and CHANGED are 0 and 1.",
+        "Rebaseline clears the queue fields again, which has no effect in WAIT."
+      ],
+      "tests_executed": [],
+      "blockers": [],
+      "decisions_needed": [
+        "When begin or restart gets a non-READY owner, it returns STATE. The spec doesn't say which code to use (OWNER is the other option). Please confirm.",
+        "Restart checks for epoch UINT32_MAX before it validates the owner."
+      ]
+    },
+    "artifact_lines": 259,
+    "artifact_sha256": "bdfc4c624c631d33e4f1c6732a38bde998411a1fea602ac5e2e222ad69dd2cea",
+    "packaging_tail": "",
+    "usage": {
+      "total_cost_usd": 0.2354344,
+      "num_turns": 1,
+      "subtype": "success",
+      "is_error": false,
+      "modelUsage": {
+        "claude-opus-5-5": {
+          "inputTokens": 2,
+          "outputTokens": 6902,
+          "cacheReadInputTokens": 1452,
+          "cacheCreationInputTokens": 12137,
+          "webSearchRequests": 0,
+          "costUSD": 0.2354344,
+          "contextWindow": 1000000,
+          "maxOutputTokens": 128000,
+          "thinkingTokens": 1884,
+          "canonicalModel": "claude-opus-5-5",
+          "provider": "firstParty",
+          "costBasis": "list"
+        }
+      }
+    }
+  },
+  "input_packet": {
+    "bytes": 22167,
+    "lines": 439,
+    "sha256": "585aa6bd69cc990e90e7081fea2cabdca869c198a0a70d3468b7061e216cb803",
+    "files": {
+      "docs/specifications/SPEC-0063-ordered-window-capture.md": "9f114d4c8891ef295aca0c3e28ce40d98b3ab453bd2d1c767d56b3da23fb7615",
+      "apps/window-scene/capture.h": "bac5f1bd614ecacc90fe9110ce3046bf257e06fd99b770c0b38dd6e00bef8cf7",
+      "core/graphics/surface.h": "31de605b79282fac7f4208e28aab328662df975a03028ac16fe179672d6dc264",
+      "core/graphics/cursor.h": "0ffc237d90b9b58ab26752223a73710e0cad4b0a24d53fd0ac0cfe08c42818d7",
+      "core/input/pointer.h": "d0a53cdadbe728195ce2c35bc4ef0b2a1687351912c759eda1bf6b4c38abdc38",
+      "core/ui/window.h": "0a964c1801facd731c58abf3e88fdb96d39c3cd38bbf473bba4f879852a8b1a2",
+      "apps/product-scene/scene.h": "7d5b50af59be3e25a67837d7183d0fa50afd36b9f0b3aaf1a1fb1ddea772ccf0",
+      "apps/window-scene/scene.h": "f7e608eb507b3d5fe4af2720263b55c894454946f4637124c391b2eaaeca9982",
+      "core/input/mouse.h": "d41c122f62933d83af8ad8015ca0f2b35298860bca80faa1dae0cd8705e8c542",
+      "apps/window-scene/input.h": "33899a80efee4acfa83a7aaeb8e1509fa7ce3d47436b67ddc20629ebd0d35011"
+    },
+    "worker": "Claude Opus5.5 low",
+    "manuals_HQ_research_originals_implementation_bodies": false
+  },
+  "lead_changes": [
+    "Stop must cancel a valid READY owner even after capture FAULT;first cause/stage preserved.",
+    "Power-of-two mask assumption enforced by static assertion.",
+    "Contract clarifies non-READY/tag owner preflight STATE,as already expected by frozen tests.",
+    "New CMake static library renamed core to avoid existing hosted capture executable target."
+  ],
+  "test_independence": "Two lead test sources frozen before first implementation artifact inspection;unchanged after integration. Existing independent component oracles reused.",
+  "local_verification": {
+    "profile_CTests": 340,
+    "profiles": {
+      "Clang64_full": 331,
+      "Clang64_ASan_UBSan_focused": 3,
+      "GCC64_focused": 3,
+      "GCC32_focused": 3
+    },
+    "unit_assertions_per_profile": 1143,
+    "real_owner_assertions_per_profile": 89,
+    "object_audits": 12,
+    "object_twin_equality": true,
+    "native_frame_limit": 512,
+    "descriptor_layout": {
+      "x64_bytes": 256,
+      "x86_32_bytes": 248,
+      "bound_bytes": 256
+    },
+    "compiled_faulty_controls_rejected": 3,
+    "valid_control_passed": true,
+    "negative_controls": [
+      {
+        "variant": "valid",
+        "compiled": true,
+        "exit": 0,
+        "stdout": "window-capture contract oracle: 1143 assertions passed",
+        "stderr": "",
+        "expected_result_observed": true
+      },
+      {
+        "variant": "stop_skips_ready_owner_after_fault",
+        "compiled": true,
+        "exit": 1,
+        "stdout": "",
+        "stderr": "line133:cs_capture_stop(&c,1)==CS_CAPTURE_OWNER",
+        "expected_result_observed": true
+      },
+      {
+        "variant": "overflow_discards_unread_before_foreground",
+        "compiled": true,
+        "exit": 1,
+        "stdout": "",
+        "stderr": "line95:c.phase==CS_CAPTURE_LOSS && c.count==16 && c.loss_reason==CS_CAPTURE_OVERFLOW && c.losses==1",
+        "expected_result_observed": true
+      },
+      {
+        "variant": "saturated_diagnostic_blocks_delivery",
+        "compiled": true,
+        "exit": 1,
+        "stdout": "",
+        "stderr": "line121:cs_capture_drain(&c,1)==CS_CAPTURE_DELIVERED",
+        "expected_result_observed": true
+      }
+    ],
+    "planned_case_dispositions": {
+      "MP1": "Sequential begin/WAIT,no capture admission;no MMIO in helper. Owner cancel is foreground-only.",
+      "MP2": "Ordered normalized X records through stub and real owner.",
+      "MP3": "Ordered Y records and full int32 values;real owner coordinate transform.",
+      "MP4": "Motion/press/held/release order;real title drag/body toggle/counter.",
+      "MP5": "Pointer boundary -1,+1 endsx1. Actual window drag verified;new dragged-window boundary-reversal subcase not executed.",
+      "MP6": "Overflow retains stale prefix until foreground cancellation;three faulty controls include premature discard.",
+      "MP7": "Real owner held rebaseline remains suppressed until fresh release;no invented press.",
+      "MP8": "Stop/restart discards old records;stale epochs refused. Exhaustion is an injected UINT32_MAX endpoint,not billions of restarts.",
+      "MP9": "Injected saturated delivered/loss diagnostics do not gate freshness.",
+      "MP10": "Sample/baseline/cancel failures retain first raw stage/cause;no replay/automatic repair.",
+      "MP11": "Sequential stop/operation boundaries only;no interrupt/preempted partial-publication proof.",
+      "MP12": "Explicit uncertainty cancels. Hidden hardware edge loss cannot be tested or claimed detected here."
+    }
+  },
+  "ci": {
+    "status": "pending",
+    "compiled_source_revision": null,
+    "m68k_result": "pending source-pinned CI;not locally executed"
+  },
+  "boot_input_lists_changed": false,
+  "existing_runtime_helpers_changed": false,
+  "new_helper_implementation": true,
+  "target_trials": [],
+  "GIF_created": false,
+  "GIF_reason": "No visible product change;helper is not bound to a renderer or boot path. Existing demonstrations remain unchanged.",
+  "Mac_adapter_admitted": false,
+  "whole128K_fit_certified": false,
+  "remaining_external_allowances": "Claude snapshot retained privately;Grok/Copilot/Argon unavailable",
+  "net_Codex_usage_savings_measured": false
+}

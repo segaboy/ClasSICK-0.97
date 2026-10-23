@@ -184,3 +184,10 @@ Grok design draft integrated with no-coalescing/single-owner/lifecycle fixes;
 M1-M7 remain partial/open,12 TEST-0075 cases unexecuted. No runtime/API/build or
 trial. Next:bounded ordered capture/drain contract/helper before MMIO. This
 adds source/design readiness,not Mac parity or paired-release acceptance.
+
+
+2026-10-22 [ordered capture/drain helper](../docs/development/window-capture-evidence.md)
+implements the shared native input boundary before hardware admission.340 local
+profile CTests/12 object audits/three compiled faulty controls pass;68000 source-
+pinned CI pending checkpoint. No interrupt/MMIO/boot binding or target run;Mac
+parity remains open. No visual change or new GIF;released assets unchanged.
