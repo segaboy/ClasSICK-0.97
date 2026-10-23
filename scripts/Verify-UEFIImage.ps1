@@ -2,10 +2,11 @@
 # Copyright (C) 2026 Dean Howell.
 [CmdletBinding()]
 param([Parameter(Mandatory=$true)][string]$BuildRoot,
-    [ValidateSet('none','ud','gp')][string]$FaultProbe='none',[switch]$SelectedDrawing,[switch]$OutlineDrawing,[switch]$WindowDrawing)
+    [ValidateSet('none','ud','gp')][string]$FaultProbe='none',[switch]$SelectedDrawing,[switch]$OutlineDrawing,[switch]$WindowDrawing,[switch]$WindowInputProbe)
 Set-StrictMode -Version Latest
 $ErrorActionPreference='Stop'
 if(([int][bool]$SelectedDrawing+[int][bool]$OutlineDrawing+[int][bool]$WindowDrawing) -gt 1){throw 'Select only one drawing profile.'}
+if($WindowInputProbe -and (-not $WindowDrawing -or $FaultProbe -ne 'none')){throw 'Input probe requires WindowDrawing with no fault probe.'}
 $repoRoot=[IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..'))
 $BuildRoot=[IO.Path]::GetFullPath($BuildRoot)
 if(Test-Path -LiteralPath $BuildRoot){throw 'Use a fresh EFI output directory.'}
@@ -65,6 +66,11 @@ try {
         $allowedImports[[Array]::IndexOf($sources,'apps/window-scene/scene.c')]='cs_surface_init,cs_surface_fill,cs_product_scene,cs_cursor_query,cs_cursor_hide,cs_cursor_move,cs_cursor_advance,cs_cursor_show'
         $allowedImports[[Array]::IndexOf($sources,'apps/window-scene/input.c')]='memcpy,cs_surface_init,cs_cursor_query,cs_cursor_hide,cs_pointer_begin,cs_pointer_sample_apply,cs_pointer_cancel,cs_mouse_button_begin,cs_mouse_button_sample,cs_window_begin,cs_window_apply,cs_window_scene_compose'
     }
+    if($WindowInputProbe) {
+        $sources+=@('platform/pc/input-probe.c','platform/pc/x64/input-probe-halt.S')
+        $allowedImports[[Array]::IndexOf($sources,'platform/pc/input-probe.c')]='cs_pc_input_probe_halt'
+        $allowedImports[[Array]::IndexOf($sources,'platform/pc/x64/input-probe-halt.S')]=''
+    }
     $common=@('-m64','-Wall','-Wextra','-Wpedantic','-Werror','-Wconversion','-Wsign-conversion',
         '-ffreestanding','-fno-builtin','-fno-stack-protector','-fno-ident','-mno-red-zone','-mgeneral-regs-only','-Wframe-larger-than=2048',
         '-fno-asynchronous-unwind-tables','-fno-unwind-tables',"-ffile-prefix-map=$repoRoot=.")
@@ -81,6 +87,7 @@ try {
                 else{
                     $profileFlags=@()
                     if($WindowDrawing){$profileFlags+='-DCLASSICK_WINDOW_DRAWING=1'}
+                    if($WindowInputProbe){$profileFlags+='-DCLASSICK_WINDOW_INPUT_PROBE=1'}
                     if($sources[$i] -eq 'platform/uefi/keyboard.c'){$profileFlags=@('-DCLASSICK_PC_MOUSE=1')}
                     if($SelectedDrawing -or $OutlineDrawing){$profileFlags+='-DCLASSICK_SELECTED_DRAWING=1'}
                     if($OutlineDrawing){$profileFlags+='-DCLASSICK_OUTLINE_DRAWING=1'}
@@ -114,6 +121,11 @@ try {
             if($WindowDrawing){
                 $mapText=[IO.File]::ReadAllText($map)
                 foreach($name in @('cs_native_window_loop','cs_pc_window_session_start','cs_pc_window_session_poll','cs_window_input_sample','cs_pc_mono_present','cs_pc_mono_present_rects')){if($mapText -notmatch ('\b'+$name+'\b')){throw 'Disconnected window profile.'}}
+            }
+            if($WindowInputProbe){
+                foreach($name in @('cs_pc_input_probe_observe','cs_pc_input_probe_halt','cs_pc_input_probe_spin')){
+                    if($mapText -notmatch ('\b'+$name+'\b')){throw 'Disconnected input probe.'}
+                }
             }
             $inspection=@(& $reader --file-headers --coff-imports --coff-basereloc $image)
             if($LASTEXITCODE -ne 0 -or ($inspection -join "`n") -match '(?m)^Import \{' -or
@@ -221,6 +233,10 @@ try {
         $componentControls+=,@([Array]::IndexOf($sources,'apps/window-scene/scene.c'),'window-compose','cs_window_scene_compose')
         $componentControls+=,@([Array]::IndexOf($sources,'apps/window-scene/input.c'),'window-owner','cs_window_input_')
     }
+    if($WindowInputProbe){
+        $componentControls+=,@([Array]::IndexOf($sources,'platform/pc/input-probe.c'),'input-probe','cs_pc_input_probe_observe')
+        $componentControls+=,@([Array]::IndexOf($sources,'platform/pc/x64/input-probe-halt.S'),'input-probe-halt','cs_pc_input_probe_halt')
+    }
     foreach($control in $componentControls) {
         try {
             $ErrorActionPreference='Continue'
@@ -233,11 +249,11 @@ try {
     $payload=Join-Path $BuildRoot 'payload/EFI/BOOT'; [void][IO.Directory]::CreateDirectory($payload)
     $packaged=Join-Path $payload 'BOOTX64.EFI'; Copy-Item -LiteralPath $release -Destination $packaged
     if((Get-FileHash -LiteralPath $packaged -Algorithm SHA256).Hash.ToLowerInvariant() -ne $results[1].sha256){throw 'EFI payload copy differs.'}
-    [ordered]@{fault_probe=$FaultProbe;window_drawing=[bool]$WindowDrawing;window_trace_version=$(if($WindowDrawing){1}else{0});window_trace_offset=$(if($WindowDrawing){2048}else{0});missing_window_controls=(9*[int][bool]$WindowDrawing);outline_drawing=[bool]$OutlineDrawing;continuous_preview=([bool]$OutlineDrawing -or [bool]$WindowDrawing);missing_outline_controls=(3*[int][bool]$OutlineDrawing);selected_drawing=[bool]$SelectedDrawing;missing_selected_workload_controls=[int][bool]$SelectedDrawing;missing_selected_core_controls=[int][bool]$SelectedDrawing;images=$results;image_rejections=$mutations.Count;profile_rejections=[int]($FaultProbe -ne 'none');missing_transition_controls=1;missing_exceptions_controls=1;missing_presenter_controls=1;missing_acpi_controls=1;
+    [ordered]@{fault_probe=$FaultProbe;window_input_probe=[bool]$WindowInputProbe;missing_input_probe_controls=(2*[int][bool]$WindowInputProbe);window_drawing=[bool]$WindowDrawing;window_trace_version=$(if($WindowDrawing){1}else{0});window_trace_offset=$(if($WindowDrawing){2048}else{0});missing_window_controls=(9*[int][bool]$WindowDrawing);outline_drawing=[bool]$OutlineDrawing;continuous_preview=([bool]$OutlineDrawing -or [bool]$WindowDrawing);missing_outline_controls=(3*[int][bool]$OutlineDrawing);selected_drawing=[bool]$SelectedDrawing;missing_selected_workload_controls=[int][bool]$SelectedDrawing;missing_selected_core_controls=[int][bool]$SelectedDrawing;images=$results;image_rejections=$mutations.Count;profile_rejections=[int]($FaultProbe -ne 'none');missing_transition_controls=1;missing_exceptions_controls=1;missing_presenter_controls=1;missing_acpi_controls=1;
         missing_ps2_controls=1;missing_keyboard_controls=1;missing_input_controls=1;missing_byte_io_controls=1;
         missing_uart_controls=1;missing_native_uart_controls=([int](-not $WindowDrawing));missing_service_controls=1;missing_service_probe_controls=1;
         missing_m68k_controls=1;missing_aline_probe_controls=([int](-not $WindowDrawing));missing_native_drawing_controls=1;missing_mouse_button_controls=1;missing_mouse_packet_controls=1;missing_mouse_bus_controls=1;missing_drawing_view_controls=1;drawing_context_specification='SPEC-0041';pc_mouse_profile=1;keyboard_trace_version=$(if($WindowDrawing){0}else{2});
         payload='payload/EFI/BOOT/BOOTX64.EFI';payload_kind='directory-tree-not-disk';loaded=$false} |
         ConvertTo-Json -Depth 8 | Set-Content -LiteralPath (Join-Path $BuildRoot 'efi-results.json') -Encoding UTF8
-    Write-Output "EFI inspection PASS: four twin images, $($mutations.Count) corruption rejections, $(19+2*[int][bool]$SelectedDrawing+3*[int][bool]$OutlineDrawing+7*[int][bool]$WindowDrawing) omitted-object rejections and original payload tree; no image executed."
+    Write-Output "EFI inspection PASS: four twin images, $($mutations.Count) corruption rejections, $(19+2*[int][bool]$SelectedDrawing+3*[int][bool]$OutlineDrawing+7*[int][bool]$WindowDrawing+2*[int][bool]$WindowInputProbe) omitted-object rejections and original payload tree; no image executed."
 } finally{$env:PATH=$originalPath}

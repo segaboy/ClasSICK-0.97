@@ -79,3 +79,33 @@ used a sandbox temp path that Git could not initialize; rerun in the owned
 workspace passes. No extra provider call was used for this small tooling change.
 Copilot's28.50s bounded PC review finds no proven guest defect or test artifact;
 its overflow/loss/suppression explanation is an unmeasured hypothesis, not a fix.
+
+Native run40023110712 verifies the RAM descriptor at964B and all19 object/
+runtime closures. Os imports original memcpy; no external runtime is admitted.
+It then rejects literal low-address C vector stores. An original assembly
+installer now owns exactly those three stores under the existing quiescent
+IPL7 contract. A32-bit C front-end check passes; native assembly/seal/IRQ
+verification is still pending. Both explicit raw-DCD polarity hypotheses
+(default0 and invert3) will be compiled, without asserting either is physical
+truth; own-candidate direction tests select any usable experimental profile.
+
+The new PC trial uses the unchanged source-pinned EFI de02e416...55e55d0f /
+disk66a10526...d8b5202. Fifteen decoded captures verify monochrome/margins/
+counters, four exact window translations, three presses and40-second later
+response. E3 GUI capture/drag still fails; the E2 control is not a substitute.
+The VM is closed/unregistered and disk/inventory preserved. No release freeze
+or reduced-goal waiver follows. SPEC-0073 is a separate explicit first-LOSS
+register probe, not a normal preview feature. Its13 hosted oracle checks pass;
+its native execution remains pending. No forbidden memory read/dump is used.
+
+The diagnostic native build passes four image twins,27 corruption checks and
+28 omitted-object checks; all four own backends match38 exact linked bytes,
+with three altered-opcode controls per image rejected. The O2 spin is at
+0x1002d052 in this exact own image. The diagnostic EFI hash is
+2ce9b2c1ec39d3e1d0fa1f58aed6ba04cad8639df714d2304098f11ea8734531.
+Two media writers agree. The normal build separately passes its27/26 controls
+and retains exact O2EFI de02e416...55e55d0f, so its existing trial is reusable.
+Normal packaging now refuses a diagnostic image unless an explicit matching
+InputProbe switch is supplied. Two new focused CTests pass in GCC and Clang
+ASan+UBSan (index boundaries and intercepted probe words); no native probe
+execution is claimed before the actual isolated trial.

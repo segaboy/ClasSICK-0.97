@@ -25,6 +25,15 @@
     CS_WINDOW_VENEER cs_mac_window_scc_irq, 2
     CS_WINDOW_VENEER cs_mac_window_combined_irq, 3
 
+    /* Quiescent IPL7 caller only. Absolute vector RAM stores belong to this
+     * native boundary, rather than C pointers close to the null address. */
+    .globl cs_mac_window_install_vectors
+cs_mac_window_install_vectors:
+    move.l #cs_mac_window_via_irq,0x64
+    move.l #cs_mac_window_scc_irq,0x68
+    move.l #cs_mac_window_combined_irq,0x6C
+    rts
+
     .globl cs_mac_line_a_handler
 cs_mac_line_a_handler:
     jmp cs_mac_fault

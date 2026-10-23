@@ -13,6 +13,18 @@
 #if CLASSICK_WINDOW_DRAWING!=0 && CLASSICK_WINDOW_DRAWING!=1
 #error "CLASSICK_WINDOW_DRAWING must be 0 or 1"
 #endif
+#ifndef CLASSICK_WINDOW_INPUT_PROBE
+#define CLASSICK_WINDOW_INPUT_PROBE 0
+#endif
+#if CLASSICK_WINDOW_INPUT_PROBE != 0 && CLASSICK_WINDOW_INPUT_PROBE != 1
+#error "CLASSICK_WINDOW_INPUT_PROBE must be 0 or 1"
+#endif
+#if CLASSICK_WINDOW_INPUT_PROBE && !CLASSICK_WINDOW_DRAWING
+#error "Input probe requires the window profile"
+#endif
+#if CLASSICK_WINDOW_INPUT_PROBE
+#include "../pc/input-probe.h"
+#endif
 #if CLASSICK_WINDOW_DRAWING
 #if defined(CLASSICK_SELECTED_DRAWING) || defined(CLASSICK_OUTLINE_DRAWING)
 #error "Window drawing is a separate explicit profile"
@@ -79,7 +91,12 @@ void CS_EFIAPI cs_native_stop(cs_uefi_handoff *handoff)
     cs_native_window_binding binding;
     binding.devices=&devices; binding.keyboard=&keyboard;
     binding.physical=0; binding.size=UINT64_C(1)<<47; binding.base=0;
-    binding.observer=NULL; binding.context=NULL;
+#if CLASSICK_WINDOW_INPUT_PROBE
+    binding.observer=cs_pc_input_probe_observe;
+#else
+    binding.observer=NULL;
+#endif
+    binding.context=NULL;
     volatile uint32_t *ready=(volatile uint32_t *)(uintptr_t)(layout.state_base+CS_X64_READY);
     (void)cs_native_window_loop(handoff,*ready,&binding,60,
         (unsigned char *)(uintptr_t)(handoff->trace_base+CS_UWIN_TRACE_OFFSET));

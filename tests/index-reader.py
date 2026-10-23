@@ -14,7 +14,10 @@ class IndexTests(unittest.TestCase):
     def setUp(self):
         self.tmp=tempfile.TemporaryDirectory(dir=os.environ.get('CLASSICK_TEST_TEMP'));self.root=Path(self.tmp.name)
         self.git('init','-q');self.git('config','core.autocrlf','false')
-    def tearDown(self):self.tmp.cleanup()
+    def tearDown(self):
+        parent=Path(os.environ.get('CLASSICK_TEST_TEMP') or tempfile.gettempdir()).resolve()
+        if self.root.resolve().parent!=parent:raise ValueError('Unexpected cleanup target')
+        self.tmp.cleanup()
     def git(self,*args):return subprocess.check_output(['git','-C',str(self.root),*args],stderr=subprocess.STDOUT)
     def stage(self,name,data):
         (self.root/name).write_bytes(data);self.git('add','--',name)

@@ -4170,3 +4170,25 @@ veneer names with actual names, records actual inbox count, removes unused
 Line-A fixture dependency, and adds exact linked IRQ opcode checks. Board
 aliases/DCD polarity remain explicit engineering hypotheses. Build and boot
 verification are separate. [Evidence](../docs/development/release2-integration-evidence.md).
+
+## SRC-0413 - Scoped PC loss review and partial diagnostic proposal
+
+Copilot Sonnet5.5 low28.50s, one prompt view, zero edits/tests, no concrete
+burst-ordering defect found; overflow/drop/cancel/suppress is an unmeasured
+hypothesis. Reported1 premium-cost unit/9568460000 nanoAIU are not balances.
+One Claude Opus5.5 low43.34s diagnostic proposal is incomplete after a reported
+response cutoff; three complete original files (64lines) retained for lead
+review, no complete tests/contract/handoff or execution. No provider retry.
+Only reviewed public original inputs, no manuals/HQ/UART/research originals.
+SPEC-0073/IMPL-0075/TEST-0088; no historical or host-cause claim.
+
+## SRC-0414 - Lead native boundary, diagnostic and guard integration
+
+Native bootstrap audit now passes19 object builds/closed original runtime
+O0/O2/Os twins, descriptor964B. Raw Os needs the project's own memcpy; O0/O2
+show the five platform imports directly. Native compiler then rejects C stores
+near address0 under array-bounds diagnostics. Lead moves the three absolute
+vector stores to an original quiescent assembly boundary, retaining warnings;
+32-bit C front-end check passes, actual68000 result pending. Lead supplies
+frozen-word diagnostic tests, optional probe binding and batched strict index
+reader; tests and actual boot results remain distinct. [Evidence](../docs/development/release2-integration-evidence.md).

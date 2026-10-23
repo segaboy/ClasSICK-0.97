@@ -36,6 +36,7 @@ extern void cs_mac_fault(void);
 extern void cs_mac_window_via_irq(void);
 extern void cs_mac_window_scc_irq(void);
 extern void cs_mac_window_combined_irq(void);
+extern void cs_mac_window_install_vectors(void);
 void cs_mac_window_interrupt(uint32_t source);
 
 /* Own compact diagnostic record; not an ABI, never part of the 64B prefix. */
@@ -192,9 +193,7 @@ void cs_mac_main(void)
     if(r!=CS_MAC_MOTION_OK){cs_mac_trace.cause=r;halt(12);}
     cs_mac_diag.stage=6;
     /* Still IPL7 and quiescent: install level 1/2/3 autovectors. */
-    *(volatile uint32_t *)(uintptr_t)0x64=(uint32_t)(uintptr_t)cs_mac_window_via_irq;
-    *(volatile uint32_t *)(uintptr_t)0x68=(uint32_t)(uintptr_t)cs_mac_window_scc_irq;
-    *(volatile uint32_t *)(uintptr_t)0x6C=(uint32_t)(uintptr_t)cs_mac_window_combined_irq;
+    cs_mac_window_install_vectors();
     r=cs_mac_motion_arm(&motion);
     if(r!=CS_MAC_MOTION_OK){cs_mac_trace.cause=r;halt(13);}
     via_write(0,14,0x82); /* CA1 enable last */
