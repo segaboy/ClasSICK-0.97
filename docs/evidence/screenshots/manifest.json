@@ -1145,6 +1145,52 @@
         "Boot scene and corrected click evidence only; no successful GUI drag or human/physical/System1 qualification.",
         "Mac has terminal SCC setup refusal; PC is the explicitly marked diagnostic build."
       ]
+    },
+    {
+      "id": "2026-10-23-mac-window-irq-running",
+      "path": "docs/evidence/screenshots/2026-10-23/mac-window-irq-running.png",
+      "sha256": "e104371c343ce10d770b9c60317da07362bc457c9140f7100feb2acd1018f087",
+      "bytes": 53539,
+      "width": 512,
+      "height": 342,
+      "captured_on": "2026-10-23",
+      "target": "native-mac68000",
+      "caption": "Mac ROM reaches stage16 with live IRQs, but zero accepted input samples and counter0000.",
+      "alt": "Mac ROM reaches stage16 with live IRQs, but zero accepted input samples and counter0000.",
+      "source_revision": "0ce4c34e44bf1937dc9e97f45394e90d7b135ae4",
+      "compiled_source_revision": "0ce4c34e44bf1937dc9e97f45394e90d7b135ae4",
+      "evidence": "docs/development/boot-input-followup.md",
+      "license": "GPL-3.0-or-later",
+      "rights": "Original ClasSICK framebuffer only; no desktop, emulator chrome, credentials or third-party pixels.",
+      "input": "synthetic",
+      "limitations": [
+        "No successful GUI drag, human input, physical hardware or System1 qualification.",
+        "Mac has zero delivered samples; PC has an unresolved4x7 paused-snapshot difference.",
+        "Host primary and Mouse Keys preferences restored exactly."
+      ]
+    },
+    {
+      "id": "2026-10-23-pc-window-gui-primary-drag",
+      "path": "docs/evidence/screenshots/2026-10-23/pc-window-gui-primary-drag.png",
+      "sha256": "2ffe23762a906fc2076eac7d9a3a71536ad17db12ee5adf11c121557a03da360",
+      "bytes": 4842,
+      "width": 1024,
+      "height": 768,
+      "captured_on": "2026-10-23",
+      "target": "native-x86_64",
+      "caption": "Corrected GUI presses reach counter0002; window borders stay fixed and drag remains unqualified.",
+      "alt": "Corrected GUI presses reach counter0002; window borders stay fixed and drag remains unqualified.",
+      "source_revision": "6aa671c4c4934c3fc74937a54a98f26146d2edd3",
+      "compiled_source_revision": "6aa671c4c4934c3fc74937a54a98f26146d2edd3",
+      "evidence": "docs/development/boot-input-followup.md",
+      "license": "GPL-3.0-or-later",
+      "rights": "Original ClasSICK framebuffer only; no desktop, emulator chrome, credentials or third-party pixels.",
+      "input": "synthetic",
+      "limitations": [
+        "No successful GUI drag, human input, physical hardware or System1 qualification.",
+        "Mac has zero delivered samples; PC has an unresolved4x7 paused-snapshot difference.",
+        "Host primary and Mouse Keys preferences restored exactly."
+      ]
     }
   ]
 }

@@ -402,3 +402,14 @@ All current external remaining quotas are unavailable; per-task charges/tokens
 are recorded privately and do not establish quota or net Codex savings.
 Batched Git-index reads reduce the observed full public guard to8.75s while
 retaining its checks. [Receipt](release2-integration-evidence.json).
+
+
+## Boot/input follow-up -2026-10-23
+
+Reuse prior qualifications for GUI trials and four-constant integration. One
+fresh bounded Claude Opus5.5 low readback task fails after180.81s/10 provider
+internal retries, reported0 cost/input/output tokens, no artifact. Stop rather
+than external retry/fan-out; lead supplies the small original change and runs
+contract-order tests/three compiled controls. Codex alone handles desktop/native
+verification and repository integration. Copilot/Grok/Argon idle; all remaining
+balances unavailable. This is not evidence of quota savings. [Receipt](boot-input-followup.json).

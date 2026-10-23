@@ -1,5 +1,14 @@
 # ClasSICK 0.97 working instructions
 
+2026-10-23 final boot/input follow-up,SRC-0422/0423: RR15 source0ce4c34e
+native-verifies and boots to stage16/fault0 in Snow. Own trace has live VBL/SCC,
+four baselines/three losses, zero delivered samples; Mac input NOT qualified.
+PC GUI counter0002 works, drag still fails and one4x7 snapshot difference is
+unclassified. Original primary/MouseKeys settings restored exactly; all owned
+sessions closed, media/VM inventory preserved.50 original PNGs/two existing GIFs.
+No release freeze/E3/E4/hardware/System1 claim. Full native/Windows source
+CI40036196626 passes at0ce4c34e. [Receipt](docs/development/boot-input-followup.json).
+
 2026-10-23,SRC-0419..0421: upper SCC aliases reach named controls in Snow;
 its unused WR12/RR12 model is unimplemented, so a DCD-mask WR15/RR15 guard
 replaces baud markers without dropping alias checks.4549 synthetic checks/

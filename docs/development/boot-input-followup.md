@@ -111,3 +111,45 @@ retained; activating the normal development environment makes both targeted
 ASan/UBSan tests pass in0.28s. The test helper was also renamed log_access;
 there is no evidence that the former helper name caused the launch failure.
 The final test source hash and actual compiled controls are in the receipt.
+
+
+## Actual RR15 boot result and final diagnostic finding
+
+Native source0ce4c34e, CI40036196626 native job success. The exact65536B ROM
+SHA256 dee0760cc4c66287979dfe02f15c31cadabdf962c595de2c7e0db3ab1d33e184
+uses22480B ROM/244B data/964B graph. Source hashes/seal/twins/12 corruption
+controls/three exact IRQ veneers pass. A fresh original-only Snow trial reaches
+diagnostic stage16 with fault0, one original trap probe and matching image CRC.
+The rebuilt Mac capture's thresholded monochrome mask equals the PC initial
+scene. Palette RGB bytes differ, as disclosed above.
+
+The own100B MWP1 record and adjacent own diagnostic prefix are read via Snow's
+public Memory UI, bounded to their known addresses. Initial default display
+contains only our own vector table. No memory scan, foreign ROM, disassembly or
+emulator source. Live reads across two views are not an atomic/timing snapshot.
+Observed: foreground ACTIVE, motion ARM stage, VBL/SCC handlers and service
+counts advancing, four baselines, three loss/rebaseline cycles, peak queued0,
+deliveries0, pointer256,171, window80,70, cause0, diagnostic presses0/fault0.
+Thus controller startup is fixed, but no input sample reaches the owner. Earlier
+visual pointer annotations were not proof of guest movement. Mac input is NOT
+qualified. Snow also logs unsupported ResetHighestIUS; impact remains unqualified.
+
+One bounded attempt uses the documented Windows Mouse Keys operator interface
+for button selection/hold/release. Injected keypad sequences do not change the
+Mac counter, so held-button delivery is not proven. The feature/NumLock condition
+are restored exactly: Flags62,MaximumSpeed80,TimeToMaximumSpeed3000; original
+Right-primary setting1 remains. No security/privacy changes or helper bypass.
+The resolved missing-sanitizer-DLL dialogs are dismissed; no reinstall occurs.
+Owned Snow and both new PC trials are closed; PC media and existing VM states
+are preserved. Four original PNGs from this continuation are indexed; no new GIF.
+
+Next technical work is a bounded source/trace review of Mac sample admission
+and real input pacing, plus the captured Windows coordinate path and transient
+pixel difference. Keep the strict loss policy until a defect or revised
+contract has evidence; no invented successful E3/E4 or release freeze.286 status
+is unchanged and its completed work is not restarted. Full RR15 Windows CI is
+pending at this record; the preceding4cadc69 full native/Windows run passed.
+
+Final CI update: source0ce4c34e completes both native and Windows jobs successfully
+in [run40036196626](https://github.com/segaboy/ClasSICK-0.97/actions/runs/40036196626).
+This supersedes pending-source-CI wording above; input/release gates remain open.

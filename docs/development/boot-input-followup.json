@@ -92,7 +92,7 @@
     "closed": true
   },
   "RR15_refinement": {
-    "status": "local GCC/Clang/sanitized verification; native compile and new trial pending",
+    "status": "native compiler/seal/twins/opcode controls passed; startup observed at stage16; input qualification failed",
     "interface_source": "SRC-0408 Figure10.2, printed1-17; independent lead visual review of RR15 fields",
     "algorithm": "Original distinct DCD-mask transaction, no manufacturer algorithm; no fallback or removed alias guard",
     "tests": {
@@ -198,5 +198,122 @@
       "readback": "1",
       "other_mouse_preferences_changed": false
     }
+  },
+  "Mac_RR15_trial": {
+    "source_revision": "0ce4c34e44bf1937dc9e97f45394e90d7b135ae4",
+    "CI_run": 40036196626,
+    "native_job": "success",
+    "ROM_SHA256": "dee0760cc4c66287979dfe02f15c31cadabdf962c595de2c7e0db3ab1d33e184",
+    "bytes": 65536,
+    "ROM_used": 22480,
+    "data_bss": 244,
+    "workspace": 964,
+    "stack_frame_sum_with_margin": 4912,
+    "twins": true,
+    "controls": 12,
+    "source_inputs_match": true,
+    "seal_valid": true,
+    "IRQ_veneers_exact": true,
+    "own_address_immediates_present": {
+      "scc_read_b": 1,
+      "scc_read_a": 1,
+      "scc_write_b": 3,
+      "scc_write_a": 3
+    },
+    "board_profile": {
+      "status": "engineering-upper-alias-hypothesis-unverified",
+      "scc_read_b": 10485752,
+      "scc_read_a": 10485754,
+      "scc_write_b": 12582905,
+      "scc_write_a": 12582907,
+      "ab_select_bit": 1,
+      "dc_select_bit": 2,
+      "scc_byte_guard_nops": 16
+    },
+    "booted": true,
+    "startup_pass": true,
+    "input_pass": false,
+    "trace": {
+      "tag": 1297567793,
+      "version": 1,
+      "bytes": 100,
+      "source_irq": 1,
+      "vbl": 45128,
+      "scc": 41247,
+      "combined": 0,
+      "services": 84393,
+      "baselines": 4,
+      "losses": 3,
+      "queued": 0,
+      "peak": 0,
+      "deliveries": 0,
+      "pointer_x": 256,
+      "pointer_y": 171,
+      "window_x": 80,
+      "window_y": 70,
+      "pattern": 0,
+      "phase": 1,
+      "motion_stage": 5,
+      "raw_a": 0,
+      "raw_b": 1,
+      "buttons": 0,
+      "motion_cause": 0,
+      "cause": 0
+    },
+    "diagnostic_prefix": {
+      "magic": 1129525305,
+      "stage": 16,
+      "ticks": 60697,
+      "presses": 0,
+      "traps": 1,
+      "image_crc": 2771739097,
+      "fault": 0
+    },
+    "observation": "Live own MWP1 and diagnostic-prefix reads through public UI; not an atomic snapshot or timing measurement",
+    "warning": "Snow logs unsupported ResetHighestIUS command; functional impact unqualified, no emulator source read",
+    "closed": true,
+    "semantic_stop": false,
+    "physical_validation": false,
+    "initial_scene_mask_matches_native_PC": true
+  },
+  "MouseKeys_test": {
+    "interface_document": "https://support.microsoft.com/en-us/accessibility/windows/use-mouse-keys-to-move-the-mouse-pointer",
+    "review_scope": "Published operator interface only, no implementation code; numpad button select/hold/release",
+    "attempt": "KP_Subtract/0/Decimal and KP_Divide/0/Decimal through supported SKY keyboard API",
+    "result": "No visible counter change; no confirmed held-button delivery or relative movement, not an input pass",
+    "restoration": {
+      "utc": "2026-10-23T22:59:57.3833448Z",
+      "before": {
+        "Flags": "62",
+        "MaximumSpeed": "80",
+        "TimeToMaximumSpeed": "3000"
+      },
+      "after": {
+        "Flags": "62",
+        "MaximumSpeed": "80",
+        "TimeToMaximumSpeed": "3000"
+      },
+      "exact_preferences_restored": true,
+      "primary_button": "1"
+    }
+  },
+  "remaining": [
+    "Mac: qualify actual sampled transitions; current trace has3 losses/rebaselines and zero delivered samples",
+    "PC: captured GUI drag remains failed, with4x7 paused-snapshot difference still unclassified",
+    "Both native E1-E3 gates and final package review before separate publication approval"
+  ],
+  "release_status": "not-ready-not-frozen",
+  "CI_followup": {
+    "alias_run": 40033711283,
+    "alias_full_result": "success",
+    "RR15_run": 40036196626,
+    "RR15_native_result": "success",
+    "RR15_Windows_result": "success"
+  },
+  "media_followup": {
+    "new_PNGs_this_continuation": 4,
+    "registered_total": 50,
+    "new_GIF": false,
+    "reason": "No new successful drag sequence; existing exact-identity animations unchanged"
   }
 }

@@ -4264,3 +4264,23 @@ verified. Native build/trial remain separate. Normal PC GUI trial temporarily
 uses standard primary mapping then restores original Right; counter0002 works,
 drag still fails/cursor clamps, E2 preposition disclosed. No PC driver-policy edit.
 [Receipt](../docs/development/boot-input-followup.json).
+
+
+## SRC-0422 - Rebuilt native startup and bounded diagnostic observation
+
+Source0ce4c34e native CI40036196626 passes; own RR15 ROM dee0760c reaches
+stage16/fault0, matching own CRC and trap probe. Own MWP1 shows active IRQs,
+four baselines/three losses and zero delivered samples; input gate remains open.
+Live bounded own-data reads are not an atomic/performance/reference observation.
+Normal PC counter0002, fixed borders and4x7 pixel difference remain unqualified.
+Owned trials closed, host preferences restored, four original PNGs indexed.
+[Receipt](../docs/development/boot-input-followup.json).
+
+## SRC-0423 - Published Windows Mouse Keys operator interface
+
+Microsoft Support, Use Mouse keys to move the mouse pointer, Windows11/10,
+accessed2026-10-23. [Operator documentation](https://support.microsoft.com/en-us/accessibility/windows/use-mouse-keys-to-move-the-mouse-pointer).
+Keypad button-selection/hold/release prose only, no API or implementation code,
+manual sample or guest algorithm. Temporary automated attempt yields no confirmed
+held-button delivery; original preferences restored exactly. Not guest behavior
+or historical evidence; no worker transfer of this document.

@@ -39,3 +39,9 @@ Follow-up after desktop access returned (SRC-0416..0418):
 - [Corrected host primary-button command reaches the native PC counter,0001.](pc-window-primary-button.png)
 
 [Follow-up findings and limits](../../../development/boot-input-followup.md).
+
+
+- [Rebuilt Mac ROM reaches stage16/live IRQs; input samples remain unaccepted.](mac-window-irq-running.png)
+- [Normal PC GUI presses reach0002, but dragging remains unqualified.](pc-window-gui-primary-drag.png)
+
+These show current failed/partial qualification, not a release or successful drag.
