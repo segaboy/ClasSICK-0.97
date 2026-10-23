@@ -109,3 +109,19 @@ Normal packaging now refuses a diagnostic image unless an explicit matching
 InputProbe switch is supplied. Two new focused CTests pass in GCC and Clang
 ASan+UBSan (index boundaries and intercepted probe words); no native probe
 execution is claimed before the actual isolated trial.
+
+Run40024934006 compiles and links the native Mac window closure, then the
+legacy base audit raises KeyError because it assumes an interpreted Line-A
+fixture. The window profile now checks its own reset/exception table, seal,
+fatal Line-A entry, all three exact IRQ veneers and the absolute vector
+installer. Four resealed semantic corruptions supplement the eight existing
+seal controls. Legacy profile audits stay unchanged. Passing this revised
+native audit remains pending until execution.
+
+The diagnostic PC candidate boots once in an isolated VM. Before any GUI
+input, Windows automation loses desktop access (activation fails, then
+GetCursorPos returns access denied); no mailbox sample or E3 result is claimed.
+The own VM is closed/unregistered, media roundtrip and previous inventory
+verified. No authentication, security settings or desktop bypass was attempted.
+GUI-dependent PC/Mac trials await an accessible interactive desktop; this is
+not release acceptance. All independent compile/evidence work continues.

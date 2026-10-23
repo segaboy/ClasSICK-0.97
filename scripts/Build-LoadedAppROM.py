@@ -118,21 +118,46 @@ def main():
             raise ValueError('Unexpected interpreted application in native drawing profile')
         raw=folder/'loaded.raw';h.run([bins/'m68k-linux-gnu-objcopy','-O','binary',elf,raw],env)
         b=bytearray(raw.read_bytes());b.extend(bytes(65536-len(b)));struct.pack_into('>I',b,256,h.crc(b))
-        def audit(image):
-            if len(image)!=65536 or struct.unpack_from('>II',image)!=(0x8000,syms['cs_mac_reset']):raise ValueError('Loaded reset vectors')
-            if struct.unpack_from('>I',image,256)[0]!=h.crc(image):raise ValueError('Loaded seal')
-            legacy=bytearray(image);struct.pack_into('>I',legacy,0,0x4000);struct.pack_into('>I',legacy,256,h.crc(legacy))
-            h.audit_image(legacy,syms)
-        audit(b)
-        irq_audit=[]
-        if a.window_drawing:
+        def audit_window_code(image):
+            rows=[]
             for source,name in enumerate(('cs_mac_window_via_irq','cs_mac_window_scc_irq','cs_mac_window_combined_irq'),1):
                 expected=(bytes.fromhex('007c070048e7fffe2f3c')+struct.pack('>I',source)
                     +bytes.fromhex('4eb9')+struct.pack('>I',syms['cs_mac_window_interrupt'])
                     +bytes.fromhex('588f4cdf7fff4e73'))
                 at=syms[name]-0x400000
-                if b[at:at+len(expected)]!=expected:raise ValueError('IRQ preservation/mask/RTE: '+name)
-                irq_audit.append({'name':name,'source':source,'bytes':len(expected),'exact_opcodes_verified':True})
+                if not 260<=at<=65536-len(expected) or image[at:at+len(expected)]!=expected:
+                    raise ValueError('IRQ preservation/mask/RTE: '+name)
+                rows.append({'name':name,'source':source,'bytes':len(expected),'exact_opcodes_verified':True})
+            at=syms['cs_mac_window_install_vectors']-0x400000
+            for vector,name in zip((0x64,0x68,0x6C),('cs_mac_window_via_irq','cs_mac_window_scc_irq','cs_mac_window_combined_irq')):
+                if not 260<=at<=65526:raise ValueError('Vector installer span')
+                opcode=struct.unpack_from('>H',image,at)[0]
+                if opcode==0x21FC:destination=struct.unpack_from('>H',image,at+6)[0];length=8
+                elif opcode==0x23FC:destination=struct.unpack_from('>I',image,at+6)[0];length=10
+                else:raise ValueError('Vector installer instruction')
+                if struct.unpack_from('>I',image,at+2)[0]!=syms[name] or destination!=vector:
+                    raise ValueError('Vector installer target/destination')
+                at+=length
+            if image[at:at+2]!=bytes.fromhex('4e75'):raise ValueError('Vector installer return')
+            return rows
+        def audit(image):
+            if len(image)!=65536 or struct.unpack_from('>II',image)!=(0x8000,syms['cs_mac_reset']):raise ValueError('Loaded reset vectors')
+            if struct.unpack_from('>I',image,256)[0]!=h.crc(image):raise ValueError('Loaded seal')
+            if a.window_drawing:
+                for vector in range(2,64):
+                    target=syms['cs_mac_probe_handler'] if vector==32 else syms['cs_mac_line_a_handler'] if vector==10 else syms['cs_mac_fault']
+                    if struct.unpack_from('>I',image,vector*4)[0]!=target:raise ValueError('Native window exception vector')
+                at=syms['cs_mac_line_a_handler']-0x400000
+                fatal=bytes.fromhex('4ef9')+struct.pack('>I',syms['cs_mac_fault'])
+                if image[at:at+len(fatal)]!=fatal:raise ValueError('Native window Line-A fatal entry')
+                audit_window_code(image)
+            else:
+                legacy=bytearray(image);struct.pack_into('>I',legacy,0,0x4000);struct.pack_into('>I',legacy,256,h.crc(legacy))
+                h.audit_image(legacy,syms)
+        audit(b)
+        irq_audit=[]
+        if a.window_drawing:
+            irq_audit=audit_window_code(b)
             listing=h.run([bins/'m68k-linux-gnu-objdump','-d',elf],env)
             (folder/'native-window-disassembly.txt').write_text(listing)
         for offset in (0,4,8,40,128,256,1024,65535):
@@ -140,6 +165,13 @@ def main():
             try:audit(bad)
             except ValueError:pass
             else:raise ValueError('Corruption accepted')
+        if a.window_drawing:
+            for offset in (40,syms['cs_mac_line_a_handler']-0x400000,
+                    syms['cs_mac_window_via_irq']-0x400000+3,syms['cs_mac_window_install_vectors']-0x400000+7):
+                bad=bytearray(b);bad[offset]^=1;struct.pack_into('>I',bad,256,h.crc(bad))
+                try:audit(bad)
+                except ValueError:pass
+                else:raise ValueError('Resealed native corruption accepted')
         frames=[]
         for f in sorted(folder.glob('*.su')):
             for line in f.read_text().splitlines():
@@ -159,7 +191,7 @@ def main():
          'workspace_begin':syms['__loaded_app_start'],'workspace_end':syms['__loaded_app_end'],
          'native_stack_base':0x2100,'native_stack_top':0x8000,'conservative_stack_bound':stack_bound,
          'individual_frame_max':max(x['bytes'] for x in frames),'stack_frames':frames,'symbols':syms,'corruption_controls':8})
-        if a.window_drawing:profiles[-1]['irq_veneer_audit']=irq_audit
+        if a.window_drawing:profiles[-1].update(irq_veneer_audit=irq_audit,resealed_native_corruption_controls=4)
     if profiles[0]!=profiles[1]:raise ValueError('ROM twins differ')
     if program_source is not None:
         fixture=out/'program.o';binary=out/'program.bin'
