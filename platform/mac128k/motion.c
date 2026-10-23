@@ -7,6 +7,8 @@ enum { WR9_RESET = 0xC0, WR9_NV = 0x02, WR9_MIE_NV = 0x0A,
        RR0_DCD = 0x08, RR3_EXT_A = 0x08, RR3_EXT_B = 0x01,
        PB_MASK = 0x38, PB_BUTTON = 0x08, PB_X2 = 0x10, PB_Y2 = 0x20 };
 
+/* Keep compact byte samples, but pass them by address: the native compiler's
+ * three-byte by-value stack copy produced an odd word access on MC68000. */
 typedef struct { uint8_t pb, a, b; } snap;
 
 static uint32_t sat(uint32_t v) { return v == UINT32_MAX ? v : v + 1u; }
@@ -25,31 +27,29 @@ static int fail(struct cs_mac_motion *m, uint32_t stage, int32_t cause)
     return CS_MAC_MOTION_FAULT;
 }
 
-static snap take(const struct cs_mac_motion *m)
+static void take(const struct cs_mac_motion *m, snap *s)
 {
-    snap s;
-    s.pb = m->io.pb(m->io.cookie);
-    s.a = m->io.read(m->io.cookie, CS_MAC_SCC_A, 0u);
-    s.b = m->io.read(m->io.cookie, CS_MAC_SCC_B, 0u);
-    return s;
+    s->pb = m->io.pb(m->io.cookie);
+    s->a = m->io.read(m->io.cookie, CS_MAC_SCC_A, 0u);
+    s->b = m->io.read(m->io.cookie, CS_MAC_SCC_B, 0u);
 }
 
-static int same(snap x, snap y)
+static int same(const snap *x, const snap *y)
 {
-    return ((x.pb ^ y.pb) & PB_MASK) == 0 && ((x.a ^ y.a) & RR0_DCD) == 0
-        && ((x.b ^ y.b) & RR0_DCD) == 0;
+    return ((x->pb ^ y->pb) & PB_MASK) == 0 && ((x->a ^ y->a) & RR0_DCD) == 0
+        && ((x->b ^ y->b) & RR0_DCD) == 0;
 }
 
 static uint32_t bit(uint8_t v, int mask) { return (v & mask) ? 1u : 0u; }
 
-static uint32_t pack(snap s)
+static uint32_t pack(const snap *s)
 {
-    return (uint32_t)s.pb << 16 | (uint32_t)s.a << 8 | s.b;
+    return (uint32_t)s->pb << 16 | (uint32_t)s->a << 8 | s->b;
 }
 
 /* Observation only: no IO. Keeps the first record; reason is written last. */
 static void note(struct cs_mac_motion *m, uint32_t reason, uint8_t rr3,
-    snap s1, snap s2, snap s3, uint32_t entry)
+    const snap *s1, const snap *s2, const snap *s3, uint32_t entry)
 {
     struct cs_mac_motion_loss *l = &m->first_loss;
     if (l->reason != CS_MAC_LOSS_NONE) return;
@@ -120,7 +120,7 @@ int cs_mac_motion_arm(struct cs_mac_motion *m)
 }
 
 static int uncertain(struct cs_mac_motion *m, uint32_t reason, uint8_t rr3,
-    snap s1, snap s2, snap s3, uint32_t entry)
+    const snap *s1, const snap *s2, const snap *s3, uint32_t entry)
 {
     int r = cs_inbox_uncertain(m->inbox, m->epoch);
     if (r == CS_INBOX_OK || r == CS_INBOX_LOST)
@@ -153,13 +153,13 @@ int cs_mac_motion_service(struct cs_mac_motion *m)
         return fail(m, CS_MAC_STAGE_PENDING, CS_MAC_CAUSE_PENDING);
     pend_a = bit(rr3, RR3_EXT_A);
     pend_b = bit(rr3, RR3_EXT_B);
-    s1 = take(m);
-    s2 = take(m);
+    take(m, &s1);
+    take(m, &s2);
     if (pend_a) wr(m, CS_MAC_SCC_A, 0u, WR0_RESET_EXT);
     if (pend_b) wr(m, CS_MAC_SCC_B, 0u, WR0_RESET_EXT);
     wr(m, CS_MAC_SCC_A, 0u, WR0_RESET_IUS); /* whole chip owned */
-    s3 = take(m);
-    stable = same(s1, s2) && same(s2, s3);
+    take(m, &s3);
+    stable = same(&s1, &s2) && same(&s2, &s3);
 
     if (in->valid != CS_INBOX_VALID || in->epoch != m->epoch)
         return fail(m, CS_MAC_STAGE_INBOX, CS_MAC_CAUSE_INBOX_STATE);
@@ -190,12 +190,12 @@ int cs_mac_motion_service(struct cs_mac_motion *m)
 
     if (!m->have_phase || !stable) {
         return uncertain(m, !m->have_phase ? CS_MAC_LOSS_NO_PHASE : CS_MAC_LOSS_UNSTABLE,
-            rr3, s1, s2, s3, entry);
+            rr3, &s1, &s2, &s3, entry);
     }
     ch_a = ra != m->last_raw_a;
     ch_b = rb != m->last_raw_b;
     if (ch_a != pend_a || ch_b != pend_b) {
-        return uncertain(m, CS_MAC_LOSS_PENDING, rr3, s1, s2, s3, entry);
+        return uncertain(m, CS_MAC_LOSS_PENDING, rr3, &s1, &s2, &s3, entry);
     }
     if (ch_a)
         dx = ((ra ^ (m->invert & 1u)) == bit(s3.pb, PB_X2)) ? 1 : -1;
@@ -207,7 +207,7 @@ int cs_mac_motion_service(struct cs_mac_motion *m)
     r = cs_inbox_push(in, m->epoch, dx, dy, buttons);
     m->samples = sat(m->samples);
     if (r == CS_INBOX_LOST) {
-        note(m, CS_MAC_LOSS_OVERFLOW, rr3, s1, s2, s3, entry);
+        note(m, CS_MAC_LOSS_OVERFLOW, rr3, &s1, &s2, &s3, entry);
         m->have_phase = 0u;
         m->losses = sat(m->losses);
         return CS_MAC_MOTION_LOST;

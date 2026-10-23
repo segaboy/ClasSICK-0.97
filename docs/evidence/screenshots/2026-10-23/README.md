@@ -45,3 +45,5 @@ Follow-up after desktop access returned (SRC-0416..0418):
 - [Normal PC GUI presses reach0002, but dragging remains unqualified.](pc-window-gui-primary-drag.png)
 
 These show current failed/partial qualification, not a release or successful drag.
+
+- [Mac first accepted GUI button event,0001; later native diagnostic fault, motion not qualified.](mac-window-first-click.png)

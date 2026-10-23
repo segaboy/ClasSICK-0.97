@@ -69,10 +69,94 @@
       "test_sha256": "498c88979dad83429e1dc74cac59609269d17ed99a0e506dd975481646202a4a"
     }
   },
-  "native_build": "pending",
-  "target_trial": "not run",
+  "native_build": {
+    "source_revision": "0f0bf6d4cbadfbb22989e011afeb3f3d898b6960",
+    "CI_run": 40039752635,
+    "native_job": "success",
+    "SHA256": "96ae9127503cbf4c488523ded066344f98b566da0c3036299d70c4c590ae2033",
+    "ROM_used": 23076,
+    "data_bss": 300,
+    "graph": 964,
+    "stack_bound": 4952,
+    "largest_frame": 284,
+    "symbols": {
+      "cs_mac_trace": 2924,
+      "cs_mac_diag": 3052
+    },
+    "source_hashes": true,
+    "twins": true,
+    "seal": true,
+    "controls": 12,
+    "exact_veneers": 3,
+    "booted": true
+  },
+  "target_trial": {
+    "source_revision": "0f0bf6d4cbadfbb22989e011afeb3f3d898b6960",
+    "one_primary_GUI_click": true,
+    "counter": 1,
+    "pattern": 1,
+    "accepted_records": 2,
+    "pointer": [
+      256,
+      171
+    ],
+    "motion_passed": false,
+    "first_loss_record": "NONE before fault; diagnostic fault prevents further observation",
+    "runtime_fault": {
+      "PC": "00400182",
+      "SR": "2700",
+      "originating_own_PC": "004010F0",
+      "read_address": "00007F27",
+      "cause": "Own generated code copied a three-byte by-value snapshot with a word access at odd stack address; CPU address error",
+      "instruction": "Own4010EE: movew sp@(65),a0@ with a0=sp+1"
+    },
+    "closed": true,
+    "limits": "Last foreground trace snapshot stops at fault; do not describe unchanged counts as live execution"
+  },
   "release_ready": false,
   "PC": "GUI drag remains unqualified; normal clicks passed; no driver policy change",
   "pc286": "Prior7bb9856 bounded logical-bank qualification retained; no far backend or target run",
-  "excluded_inputs_preserved": true
+  "excluded_inputs_preserved": true,
+  "ABI_correction": {
+    "status": "lead pointer-only sample passing, locally reverified; native rebuild pending",
+    "MMIO_and_admission": "unchanged",
+    "controls": {
+      "actual_compiled_controls": [
+        {
+          "case": "correct",
+          "compiled": true,
+          "exit": 0,
+          "output": "Mac motion: 5750 checks,32 phase/inversion cases; synthetic IO, no target execution."
+        },
+        {
+          "case": "overwrite-first",
+          "compiled": true,
+          "exit": 1,
+          "output": "motion check 4760 line 182"
+        },
+        {
+          "case": "swap-snapshots",
+          "compiled": true,
+          "exit": 1,
+          "output": "motion check 5748 line 219"
+        },
+        {
+          "case": "pending-as-unstable",
+          "compiled": true,
+          "exit": 1,
+          "output": "motion check 4946 line 192"
+        },
+        {
+          "case": "fault-recorded-as-loss",
+          "compiled": true,
+          "exit": 1,
+          "output": "motion check 5570 line 207"
+        }
+      ],
+      "checks": 5750,
+      "phase_cases": 32,
+      "test_sha256": "498c88979dad83429e1dc74cac59609269d17ed99a0e506dd975481646202a4a"
+    },
+    "profiles": "2 CTests each: Clang Debug/GCC Release/Clang ASan-UBSan"
+  }
 }

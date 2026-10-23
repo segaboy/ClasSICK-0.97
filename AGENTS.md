@@ -1,5 +1,10 @@
 # ClasSICK 0.97 working instructions
 
+2026-10-23,SRC-0425: native0f0bf6d trial accepts GUI click0001/pattern toggle,
+then its new three-byte by-value diagnostic copy faults at an odd stack address.
+Lead pointer-only correction passes local profiles; native repeat pending.
+Motion/drag/release gates remain open;51 PNG/two GIF. [Receipt](docs/development/mac-first-loss-evidence.md).
+
 2026-10-23,SRC-0424: first-loss observation only, no sample-admission/MMIO change.
 5750 checks/32 phase cases/three local profiles/four compiled controls pass.
 MWP1 v2 size128/prefix100; native build and trial pending. Mac input and PC GUI

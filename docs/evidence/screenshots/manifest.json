@@ -1191,6 +1191,28 @@
         "Mac has zero delivered samples; PC has an unresolved4x7 paused-snapshot difference.",
         "Host primary and Mouse Keys preferences restored exactly."
       ]
+    },
+    {
+      "id": "2026-10-23-mac-window-first-click",
+      "path": "docs/evidence/screenshots/2026-10-23/mac-window-first-click.png",
+      "sha256": "cd5add487ce7d8fd2065bb10c3c23e06cbe54d7cba188b92a09080a71438438f",
+      "bytes": 74339,
+      "width": 512,
+      "height": 342,
+      "captured_on": "2026-10-23",
+      "target": "native-mac68000",
+      "caption": "Original Mac ROM accepts a GUI button event: counter0001 and vertical pattern. Pointer motion remains unqualified; later native diagnostic alignment fault is retained.",
+      "alt": "Original Mac ROM accepts a GUI button event: counter0001 and vertical pattern. Pointer motion remains unqualified; later native diagnostic alignment fault is retained.",
+      "source_revision": "0f0bf6d4cbadfbb22989e011afeb3f3d898b6960",
+      "compiled_source_revision": "0f0bf6d4cbadfbb22989e011afeb3f3d898b6960",
+      "evidence": "docs/development/mac-first-loss-evidence.md",
+      "license": "GPL-3.0-or-later",
+      "rights": "Original ClasSICK framebuffer only; no desktop, emulator chrome, credentials or third-party pixels.",
+      "input": "synthetic",
+      "limitations": [
+        "One accepted GUI button event, not motion or drag qualification.",
+        "Subsequent diagnostic address fault; no release qualification."
+      ]
     }
   ]
 }

@@ -4289,3 +4289,8 @@ or historical evidence; no worker transfer of this document.
 ## SRC-0424 - Original first-loss worker artifact and lead verification
 
 2026-10-23, bounded Copilot Sonnet5.5 low original public-only proposal,108.83s, no worker execution/write. Codex corrects hard-fault classification and test expectations, integrates first-loss observation, and executes5750 checks/32 phase cases/three compiler profiles/four compiled faulty controls. Engineering evidence only; native/target pending. [Receipt](../docs/development/mac-first-loss-evidence.json).
+
+
+## SRC-0425 - Original native alignment counterexample and correction
+
+2026-10-23, original ROM96ae9127/compiled0f0bf6d, one isolated Snow trial after native CI40039752635 and source/seal/twins/12 controls. One GUI button event passes; later own odd-stack aggregate copy causes address error. Own emitted disassembly/black-box log only. Lead changes snapshots to pointer-only passing; local5750 checks/three profiles/four compiled controls pass, new native trial pending. [Receipt](../docs/development/mac-first-loss-evidence.json).
