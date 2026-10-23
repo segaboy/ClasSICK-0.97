@@ -198,3 +198,9 @@ before unmasked sequential foreground rendering,including PRIMING baseline
 staging. No implementation or target qualification. Hardware control/polarity,
 CPU/compiler exclusion,latency and total128K budget remain blockers.14 planned
 TEST-0077 cases are unexecuted;current published pair unchanged.
+
+
+2026-10-23:SPEC-0065 pure inbox implemented/hosted verified with synthetic
+foreground harness. Production coordinator,CPU/ISR/SCC binding,real latency
+and full128K budget remain open. Original IC cases retain partial/unexecuted
+hardware scope;no Mac parity,release acceptance or new target run.

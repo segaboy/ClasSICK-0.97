@@ -64,6 +64,9 @@ jobs:
       - name: Verify ordered native capture objects
         shell: pwsh
         run: .\scripts\Verify-CaptureObjects.ps1 -BuildRoot build\capture-objects
+      - name: Verify pure native inbox objects
+        shell: pwsh
+        run: .\scripts\Verify-InboxObjects.ps1 -BuildRoot build\inbox-objects
       - name: Audit original window composition objects (no target run)
         shell: pwsh
         run: .\scripts\Verify-WindowSceneObjects.ps1 -BuildRoot build\window-scene-objects
@@ -150,6 +153,14 @@ jobs:
         run: python3 scripts/Verify-WindowInputM68k.py --tool-root "$RUNNER_TEMP/classick-m68k/root" --output "$RUNNER_TEMP/classick-window-input"
       - name: Verify isolated capture helper closure for68000
         run: python3 scripts/Verify-CaptureM68k.py --tool-root "$RUNNER_TEMP/classick-m68k/root" --output "$RUNNER_TEMP/classick-capture"
+      - name: Verify isolated inbox closure for68000
+        run: python3 scripts/Verify-InboxM68k.py --tool-root "$RUNNER_TEMP/classick-m68k/root" --output "$RUNNER_TEMP/classick-inbox"
+      - name: Retain inbox compiler manifest
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
+        with:
+          name: classick-inbox-build
+          path: ${{ runner.temp }}/classick-inbox/manifest.json
+          if-no-files-found: error
       - name: Retain capture helper compiler manifest
         uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
         with:

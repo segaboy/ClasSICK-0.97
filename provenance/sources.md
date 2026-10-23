@@ -3879,3 +3879,33 @@ private HQ,credentials,untracked research originals,UART or implementation
 bodies transferred. Claims are engineering proposals until reviewed;no driver,
 IRQ-safety/timing/physical/historical/release claim. Ordinary source/provenance
 review pending;prompt and compact receipt in docs/development.
+
+
+## SRC-0372 - Owner isolated inbox implementation continuation
+
+2026-10-23:"Next task" accepts next proposed pure inbox implementation,
+original synthetic interleaving/native-object verification and ordinary CI/
+public-HQ Git. No hardware/CPU binding,production bridge,target trial,release
+or gate expansion. Preserve24 originals,held brief,UART,old records/assets/
+tags/retired wiki. Existing external-input/sole-integrator boundaries persist.
+
+## SRC-0373 - Claude original pure inbox implementation
+
+2026-10-23;one Opus5.5 low call54.11s,13188B188line frozen reviewed-public/
+original SPEC-0065/header/type packet,SHA256
+ae6268a58da14e1591240cab79cfed7c9b3386c260a9b4402d509f67f187cf19.
+254 C lines,zero tools/edits/tests,retry/second worker/requalification. Lead
+adopts with complete(no claim) STATE correction;worker ambiguity disclosed.
+No manuals,HQ,credentials,held originals,implementation bodies or prohibited
+material transferred. Not an IRQ/physical/timing/edition/release claim.
+
+## SRC-0374 - Lead original inbox API,oracles and integration checks
+
+2026-10-23;SPEC-0065/ADR-0074/IMPL-0066/TEST-0078. Original fixed storage,
+state/lifecycle API and three tests initially frozen before inbox-body read;
+later exact-refusal assertion and harness failure-reset correction disclosed.
+Raw snapshots,ordered transcript,mock callback interleavings and real-owner
+clamped drag/recovery checks. Reused compiler controls/three actual faulty
+variants,normal CI. No new manual review/code extraction/reference run;prior
+source facts remain separate. No CPU exclusion or full physical capture proof.
+Lead self-review;human provenance review pending.

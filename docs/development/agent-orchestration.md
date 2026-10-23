@@ -305,3 +305,13 @@ recipe. Reported19953 task tokens/$0.02652476 list cost do not prove balance or
 net Codex savings;all-four current allowances unavailable. Keep next author
 slice focused on pure ingress and synthetic interleavings,not a driver assumed
 safe from sequential tests. [Review](mac-scc-binding-review.md).
+
+
+Pure inbox2026-10-23:one Claude Opus5.5 low primary54.11s,13188B188line frozen
+original contract/type packet,254 C lines/330 limit,zero tools/writes/tests.
+Lead adopts with no-claim status correction,initially API-only tests and later
+explicit refusal assertion/harness failure-reset fix. Final tests not unchanged
+author-blind;other workers idle,no retry/requalification/fan-out.343 final local
+profile checks/12 audits/three compiled faulty controls pass;no CPU/IRQ proof.
+Reported$0.1984488 list cost is not balance/net Codex savings. Private Claude
+task-time snapshot only;others unavailable. [Receipt](window-inbox-evidence.json).

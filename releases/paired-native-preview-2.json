@@ -332,5 +332,19 @@
     "target_trials": 0,
     "release_ready": false,
     "next_slice": "Pure bounded inbox and deterministic interleaving/native-object checks;no SCC/CPU binding until source/primitive/timing admission."
+  },
+  "pure_window_inbox": {
+    "specification": "SPEC-0065",
+    "implementation": "IMPL-0066",
+    "test": "TEST-0078",
+    "evidence": "docs/development/window-inbox-evidence.json",
+    "implemented": true,
+    "production_coordinator": false,
+    "CPU_hardware_bound": false,
+    "boot_inputs_changed": false,
+    "local_profile_CTests": 343,
+    "m68k_ci": "pending",
+    "target_trials": 0,
+    "release_ready": false
   }
 }

@@ -1,0 +1,232 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-23",
+  "baseline_revision": "5192efb3bd3fabdbf0eafae10283ed1b0f2f6c37",
+  "sources": [
+    "SRC-0372",
+    "SRC-0373",
+    "SRC-0374"
+  ],
+  "specification": "SPEC-0065",
+  "implementation": "IMPL-0066",
+  "test": "TEST-0078",
+  "classification": "E1 pure operation-level inbox and synthetic foreground harness;no hardware exclusion proof",
+  "worker": {
+    "execution": {
+      "round": "code",
+      "worker": "claude",
+      "exit_code": 0,
+      "outer_timeout": false,
+      "elapsed_seconds": 54.11,
+      "input_bytes": 13188,
+      "input_sha256": "ae6268a58da14e1591240cab79cfed7c9b3386c260a9b4402d509f67f187cf19",
+      "stderr_bytes": 0
+    },
+    "event_types": {
+      "system": 13,
+      "stream_event": 737,
+      "assistant": 2,
+      "rate_limit_event": 1,
+      "result": 1
+    },
+    "observed_tool_starts": [],
+    "handoff": {
+      "result": "inbox.c implemented to SPEC-0065/inbox.h as an isolated pure state machine. It applies canonical validation before any write, and refused calls leave every byte unchanged. Not compiled, executed, or frame-measured.",
+      "actionable_findings": [
+        "Native per-function frame <=512B and Werror/Wconversion build still need to be measured by Codex."
+      ],
+      "tests_executed": [],
+      "blockers": [],
+      "decisions_needed": [
+        "Spec ambiguity: complete without claim in LOSS returns LOST (PRIMING/READY STATE); discard with pending claim in LOSS returns STATE. Confirm."
+      ]
+    },
+    "artifact_lines": 254,
+    "artifact_sha256": "3b9179a8ff2c398ddbc80cbbfdbe6c349d4c6ba3828ef378bce5c7fb7f2407f4",
+    "packaging_tail": "",
+    "usage": {
+      "total_cost_usd": 0.1984488,
+      "num_turns": 1,
+      "subtype": "success",
+      "is_error": false,
+      "modelUsage": {
+        "claude-opus-5-5": {
+          "inputTokens": 2,
+          "outputTokens": 7325,
+          "cacheReadInputTokens": 2384,
+          "cacheCreationInputTokens": 6433,
+          "webSearchRequests": 0,
+          "costUSD": 0.1984488,
+          "contextWindow": 1000000,
+          "maxOutputTokens": 128000,
+          "thinkingTokens": 1888,
+          "canonicalModel": "claude-opus-5-5",
+          "provider": "firstParty",
+          "costBasis": "list"
+        }
+      }
+    }
+  },
+  "input_packet": {
+    "bytes": 13188,
+    "lines": 188,
+    "sha256": "ae6268a58da14e1591240cab79cfed7c9b3386c260a9b4402d509f67f187cf19",
+    "files": {
+      "docs/specifications/SPEC-0065-pure-window-inbox.md": "08769971d85995e2d5ba48350276dda4334a0738dc3a959b03bf317504ec8d95",
+      "apps/window-scene/inbox.h": "2bebf4901506814c270c4612b9170ad0dce2da58a037fa4e187f8a748bc3fa90",
+      "core/input/pointer.h": "d0a53cdadbe728195ce2c35bc4ef0b2a1687351912c759eda1bf6b4c38abdc38"
+    }
+  },
+  "lead_changes": [
+    "complete without a claim returns STATE even in LOSS;discard with pending claim also STATE",
+    "independent tests/integration/build/audits",
+    "test harness restart resets simulated sample failure;remove tautological abstract-mask check"
+  ],
+  "initial_test_freeze": {
+    "inbox_implementation_inspected": false,
+    "tests": {
+      "tests/window-inbox.c": "e40711ca1a7b403f9962024170f5139d2f6c1f3afd779f46ccd431cc38fdf7ee",
+      "tests/window-inbox-interleavings.c": "adf5c2dec12eba03138b726d809ea0c70ead75fe4d1a8dc8174359816fe937d3",
+      "tests/window-inbox-integration.c": "6c32c95e9f6e5a5d2fc50141e04263ce4fcbc38ad68091e157947bdbf5437af5",
+      "tests/window-inbox-layout.c": "bafd6fb74e0316dd30746ee119f0593ee8ea4ecc43231ae044cb4888baa3d5eb"
+    }
+  },
+  "tests_changed_after_initial_inspection": [
+    "tests/window-inbox.c",
+    "tests/window-inbox-interleavings.c"
+  ],
+  "strict_final_author_blind_test_claim": false,
+  "local_checks": {
+    "profile_CTests": 343,
+    "profiles": {
+      "Clang64_Debug_full": 335,
+      "GCC64_Release_focused": 4,
+      "Clang64_ASan_UBSan_focused": 4
+    },
+    "unit_assertions_per_profile": 10024,
+    "mock_interleaving_assertions_per_profile": 290,
+    "real_owner_assertions_per_profile": 118,
+    "ordered_records_per_unit_run": 2400,
+    "native_object_audits": 12,
+    "compiled_faulty_variants_rejected": 3,
+    "fault_control_receipt": [
+      {
+        "variant": "valid",
+        "oracle": "tests/window-inbox.c",
+        "compiled": true,
+        "exit": 0,
+        "stdout": "window-inbox contract:10024 assertions;2400 ordered records;bytes=244",
+        "stderr": "",
+        "expected_result_observed": true
+      },
+      {
+        "variant": "baseline_complete_erases_concurrent_loss",
+        "oracle": "tests/window-inbox-interleavings.c",
+        "compiled": true,
+        "exit": 1,
+        "stdout": "",
+        "stderr": "line67:cs_inbox_discard(&box,box.epoch)==CS_INBOX_OK",
+        "expected_result_observed": true
+      },
+      {
+        "variant": "producer_loss_discards_unread",
+        "oracle": "tests/window-inbox.c",
+        "compiled": true,
+        "exit": 1,
+        "stdout": "",
+        "stderr": "line108:box.phase==CS_INBOX_LOSS && box.count==16 && box.loss_reason==CS_INBOX_OVERFLOW && box.losses==1",
+        "expected_result_observed": true
+      },
+      {
+        "variant": "saturated_counter_blocks_claim",
+        "oracle": "tests/window-inbox.c",
+        "compiled": true,
+        "exit": 1,
+        "stdout": "",
+        "stderr": "line147:cs_inbox_claim(&box,1)==CS_INBOX_SAMPLE_ITEM",
+        "expected_result_observed": true
+      }
+    ]
+  },
+  "test0077_mapping": [
+    {
+      "case": "IC-01",
+      "status": "partial",
+      "scope": "Harness helper cancellation precedes inbox begin;hardware enable/CPU delivery unexecuted."
+    },
+    {
+      "case": "IC-02",
+      "status": "partial",
+      "scope": "Complete scalar FIFO observed;actual interrupt publication/barriers/partial-write preemption unexecuted."
+    },
+    {
+      "case": "IC-03",
+      "status": "software-pass",
+      "scope": "16-record capacity/overflow retains unread prefix;three compiled defect controls separately recorded."
+    },
+    {
+      "case": "IC-04",
+      "status": "software-pass",
+      "scope": "Empty-inbox uncertainty and saturated diagnostics do not gate delivery."
+    },
+    {
+      "case": "IC-05",
+      "status": "partial",
+      "scope": "Pure claim has no imports;mock owner callbacks run outside abstract exclusion. No real mask proof."
+    },
+    {
+      "case": "IC-06",
+      "status": "unexecuted",
+      "scope": "Actual save/restore/exclusion primitive and capture-permitting CPU context not implemented."
+    },
+    {
+      "case": "IC-07",
+      "status": "software-pass",
+      "scope": "One claimed record completes during injected newer loss;later record blocked/discarded before cancel/rebaseline."
+    },
+    {
+      "case": "IC-08",
+      "status": "software-pass",
+      "scope": "Boundary stop drops queued/claimed records;repeat no callback;first fault survives failed stop cancel."
+    },
+    {
+      "case": "IC-09",
+      "status": "partial",
+      "scope": "Real owner held-button suppression/release observed;fresh physical barrier/coherent baseline not proved."
+    },
+    {
+      "case": "IC-10",
+      "status": "software-pass",
+      "scope": "Loss before baseline skips duplicate WAIT cancel;loss during successful baseline cancels READY once."
+    },
+    {
+      "case": "IC-11",
+      "status": "software-pass",
+      "scope": "Stale epoch/no-wrap exhaustion and first raw fault retention;epochs injected at endpoints."
+    },
+    {
+      "case": "IC-12",
+      "status": "unexecuted",
+      "scope": "Actual producer non-nesting/quiescence/CPU preemption proof remains caller/hardware work."
+    },
+    {
+      "case": "IC-13",
+      "status": "software-pass",
+      "scope": "Producer stages later records during baseline callback;before/during loss and full-inbox baseline cases exercised."
+    },
+    {
+      "case": "IC-14",
+      "status": "software-pass",
+      "scope": "Real pointer AND dragged-window boundary -1,+1 remain ordered and end atx1;no coalescing/clamping upstream."
+    }
+  ],
+  "native68000_CI": "pending",
+  "public_guard": "PASS:1086 indexed text/source files,31 PNGs,1 reviewed GIF;record checks only",
+  "boot_inputs_changed": false,
+  "hardware_bound": false,
+  "production_foreground_bridge_implemented": false,
+  "target_trials": [],
+  "new_visual_evidence": false,
+  "release_ready": false,
+  "net_Codex_usage_savings_measured": false
+}
