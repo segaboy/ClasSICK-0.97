@@ -62,3 +62,20 @@ the widened capacity comparison. Lead gates that check with SIZE_MAX greater
 than UINTPTR_MAX, keeping the check only when meaningful; the32-bit compile
 then passes. The verifier now prints captured compiler diagnostics on failure.
 This correction changes no PC image bytes; native CI remains pending.
+
+The next native stop is the isolated bootstrap import audit. Verification now
+reports raw imports and requires a closure linked solely with the two existing
+original runtime modules; the exact five platform-external imports and no
+mutable data are still required. It also uses the established non-PIC ROM flags.
+This does not admit foreign runtime code or count the closure as passed before CI.
+
+Repository guard tooling now reads staged source blobs through three batched
+Git calls, retaining screenshot/animation admission, size limits, JSON, local
+links, credential patterns, payload rules and whitespace checks. It adds strict
+UTF-8/regular-stage validation. Seven real-index controls pass (working-tree
+changes ignored, exact Unicode, binary extension skip separate from admission,
+invalid UTF-8/NUL/oversize/path refusal and empty index). The first test attempt
+used a sandbox temp path that Git could not initialize; rerun in the owned
+workspace passes. No extra provider call was used for this small tooling change.
+Copilot's28.50s bounded PC review finds no proven guest defect or test artifact;
+its overflow/loss/suppression explanation is an unmeasured hypothesis, not a fix.

@@ -2424,6 +2424,8 @@ if(BUILD_TESTING AND Python3_Interpreter_FOUND)
         ${CMAKE_SOURCE_DIR}/probes/pc286/segmented_model.py)
     add_test(NAME pc286.segmented-oracle COMMAND ${Python3_EXECUTABLE} -B
         ${CMAKE_SOURCE_DIR}/tests/pc286-segmented.py)
+    add_test(NAME index-reader.boundaries COMMAND ${Python3_EXECUTABLE} -B
+        ${CMAKE_SOURCE_DIR}/tests/index-reader.py)
 endif()
 
 

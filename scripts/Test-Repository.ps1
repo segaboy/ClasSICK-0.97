@@ -29,6 +29,14 @@ $required = @('README.md','CONTRIBUTING.md','AGENTS.md','.gitignore','.gitattrib
 $fileSet = New-Object 'System.Collections.Generic.HashSet[string]' ([StringComparer]::Ordinal)
 $caseSet = New-Object 'System.Collections.Generic.HashSet[string]' ([StringComparer]::OrdinalIgnoreCase)
 $contents = @{}
+$indexedText = @{}
+$indexedSizes = @{}
+$batchJson = & $Python -B (Join-Path $PSScriptRoot 'read_index_text.py') --root $repoRoot
+if ($LASTEXITCODE -ne 0) { throw 'Cannot read bounded staged UTF-8 blobs' }
+foreach ($entry in ($batchJson | ConvertFrom-Json)) {
+    $indexedText[[string]$entry.path] = [string]$entry.content
+    $indexedSizes[[string]$entry.path] = [long]$entry.size
+}
 $allowedExtensions = @('.md','.json','.yml','.yaml','.ps1','.py','.c','.h','.cmake','.txt','.s','.ld','.inc','.rc','.manifest')
 $allowedNames = @('.gitignore','.gitattributes','CODEOWNERS','CMakeLists.txt','LICENSE')
 $forbiddenDirectories = '(^|/)(reference|private|quarantine|local|\.tools|\.downloads|build|out|artifacts)(/|$)'
@@ -46,11 +54,9 @@ foreach ($path in $files) {
     if ($leaf -match '^(\.env($|\.)|credentials|secrets|id_rsa|id_ed25519)') {
         throw "Secret-like filename tracked: $path"
     }
-    $indexSize = & git -C $repoRoot cat-file -s ":$path"
-    if ($LASTEXITCODE -ne 0 -or [long]$indexSize -gt 1048576) { throw "Unexpected index size: $path" }
     if ($registeredScreenshots.ContainsKey($path) -or $registeredAnimations.ContainsKey($path)) { continue }
-    $content = (& git -C $repoRoot show ":$path") -join "`n"
-    if ($LASTEXITCODE -ne 0) { throw "Cannot read indexed file: $path" }
+    if (-not $indexedText.ContainsKey($path) -or $indexedSizes[$path] -gt 1048576) { throw "Unexpected index size: $path" }
+    $content = $indexedText[$path]
     if ($content.Contains([char]0)) { throw "Binary content in text file: $path" }
     if ($content -match $secretSignatures) { throw "Possible credential in $path (value withheld)" }
     if ($extension -eq '.json') { $null = $content | ConvertFrom-Json }
