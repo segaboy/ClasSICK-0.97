@@ -366,3 +366,14 @@ outside Git; the worker makes zero tools/writes/tests/retry. Extra trailing JSON
 brace corrected during packaging. [Actual scope/results](cpu-c16-evidence.md).
 Continue protecting Codex effort: avoid duplicating this adopted code or the old
 WCC matrix; no claimed provider-token equivalence or live balance.
+
+
+286 storage model2026-10-23: one Grok low timeout/no artifact, then Copilot
+Sonnet5.5 low original404-line model/contract (300 cap missed) plus one bounded
+91-line correction for concrete reproduced defects. Adopt corrected artifacts;
+lead does not recreate them. Primary extra input-directory listing/no extra
+contents; correction prompt-only. No worker writes/tests/web.38 initial frozen
+checks,1,596 post-read flat cases/three bad controls executed by lead. Reported
+premium-cost2/nanoAIU31,133,040,000 are not balances or measured Codex savings.
+Stop provider retries; no renewed qualification or broad fan-out. All-four
+remaining allowances unavailable. [Receipt](segmented-storage-evidence.json).

@@ -4080,3 +4080,23 @@ IMPL-0069/0070,TEST-0082/0083. [Evidence](../docs/development/cpu-c16-evidence.m
 separates actual host/compile checks from unexecuted target/ISR/ABI/fit claims.
 Normal source-pinned Windows/68000 CI passes at f69f27f; six new native objects
 with matching twins and checked input identities. No target execution.
+
+## SRC-0399 - Owner full next-release continuation with286 progress
+
+2026-10-23: "Do all the work necessary to reach the next release, while advancing
+the286 work." Continue paired-native-preview-2 as primary and bounded286 work;
+existing source, exact-trial, publication and native-app gates persist.
+
+## SRC-0400 - Supervised original segmented-storage proposals
+
+Grok4.7 low timeout yields no artifact. Copilot Sonnet5.5 low original host
+model/contract and one bounded correction are review inputs, not evidence of
+passing tests. Frozen reviewed-public contracts/original code only; no manuals,
+HQ, research originals, credentials or prohibited code transferred. Extra input
+directory listing and primary line-cap miss recorded in the evidence.
+
+## SRC-0401 - Lead storage-model integration and actual checks
+
+SPEC-0069/ADR-0080/IMPL-0071/TEST-0084.38 frozen checks,1,596 flat cases,
+three rejected faults and two targeted CTests; production native paths unchanged.
+No native286 backend or target run. [Evidence](../docs/development/segmented-storage-evidence.md).

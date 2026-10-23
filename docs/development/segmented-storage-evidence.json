@@ -1,0 +1,92 @@
+{
+  "date": "2026-10-23",
+  "baseline": "f070557e119dc3895f421c2364d4609fb46747ac",
+  "scope": "P286-2 original contract and executable Python reference model, production integration deferred",
+  "sources": [
+    "SRC-0399",
+    "SRC-0400",
+    "SRC-0401"
+  ],
+  "specification": "SPEC-0069",
+  "implementation": "IMPL-0071",
+  "test": "TEST-0084",
+  "actual_checks": {
+    "targeted_CTests_passed": 2,
+    "worker_self_test": "passed after correction",
+    "independent_frozen_checks": 38,
+    "flat_read_write_cases": 1596,
+    "bad_controls_rejected": [
+      "endian",
+      "partial-write",
+      "chunk-bound"
+    ],
+    "native286_compiled_or_executed": false,
+    "old_native_tests": "reused, not rerun locally"
+  },
+  "independence": {
+    "frozen_oracle": "before worker artifact read",
+    "private_original_SHA256": "521eaa160efadcfbc4846b9b15d945e82b11a3c0b0c2c84e2154d8e15558dabf",
+    "public_Git_LF_SHA256": "85f4697fedade09f293b6b88779b761d086ae02837caac518c65b46d6011f18f",
+    "extended_flat_cases_and_fault_controls": "lead authored after worker read; not final author-blind"
+  },
+  "retained_failures": [
+    "Grok240.78s timeout, thought-only, no usable artifact; no same-provider retry",
+    "Copilot first model self-test failed and passed29/38 frozen checks; nine validation/lifetime/rights failures corrected",
+    "First public-oracle hash check compared Git LF against private CRLF hash; corrected normalization, JSON content unchanged"
+  ],
+  "workers": {
+    "grok": {
+      "model": "grok-4.7",
+      "effort": "low",
+      "elapsed_seconds": 240.78,
+      "artifact": false,
+      "usage": "not reported"
+    },
+    "copilot": {
+      "model": "claude-sonnet-5.5",
+      "effort": "low",
+      "primary_seconds": 123.75,
+      "correction_seconds": 57.97,
+      "primary_lines": 404,
+      "line_cap": 300,
+      "contract_words": 1042,
+      "correction_edits": 21,
+      "correction_replacement_lines": 91,
+      "tool_compliance": "primary one permitted prompt view plus disallowed input-directory listing; no extra file content, writes, web, commands or tests; correction one permitted prompt view only",
+      "reported_premium_request_cost_total": 2,
+      "reported_totalNanoAiu_sum": 31133040000,
+      "remaining_allowance": "not exposed"
+    }
+  },
+  "CI": {
+    "status": "pending",
+    "source_revision": null,
+    "run_url": null
+  },
+  "remaining_allowances": {
+    "claude": "unverified/not exposed; no quota equivalence claim",
+    "grok": "unverified/not exposed; no quota equivalence claim",
+    "copilot": "unverified/not exposed; no quota equivalence claim",
+    "antigravity": "unverified/not exposed; no quota equivalence claim"
+  },
+  "release": {
+    "milestone": "paired-native-preview-2",
+    "Mac_binding": "held for owner clean-room disposition; excluded cached assembly-style constants, no routine bodies or worker transfer",
+    "PC_candidate": "unchanged 0b23981a83f5c1e0fdb231707d83c3d25c6085c8",
+    "PC_GUI_trial": "exact-image fresh approval requested, not executed",
+    "release_publication": "not authorized"
+  },
+  "limits": [
+    "No production guest.c/guest.h/surface or native boot input changes",
+    "No native far-memory access, helper ABI, memory-model selection, callout inventory or target execution",
+    "Physical bank disjointness and infallible preflighted commit/staging remain backend obligations",
+    "M1-M7/GUI/human/parity/128K and all prior compatibility gates persist"
+  ],
+  "input_SHA256_Git_LF": {
+    "CMakeLists.txt": "075cdb1884abf68b44a81f756ff589b2dffab8e58fa1065329f6883b88c59c43",
+    "probes/pc286/segmented_model.py": "1c976519d33f7c2a2aa58989858abfa4aee431d218f676a7c9964e035884f9ad",
+    "tests/pc286-segmented.py": "02c318192ce2e8b2cff8d38b19f8740115cb9a776d947dd77099cddf1eecc7e5",
+    "tests/data/pc286-segmented-oracle.json": "85f4697fedade09f293b6b88779b761d086ae02837caac518c65b46d6011f18f",
+    "docs/specifications/SPEC-0069-checked-segmented-storage.md": "7226ea005b18ba81b3b32c2725d1295a7a5ce01f522d38f12879122518e18e73"
+  }
+}

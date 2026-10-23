@@ -2417,3 +2417,11 @@ if(BUILD_TESTING)
     add_test(NAME c16.width-proof COMMAND ${Python3_EXECUTABLE} -B ${CMAKE_SOURCE_DIR}/tests/c16-width-proof.py)
     add_test(NAME m68k-exclusion.audit-controls COMMAND ${Python3_EXECUTABLE} -B ${CMAKE_SOURCE_DIR}/tests/m68k-exclusion-audit.py)
 endif()
+
+
+if(BUILD_TESTING AND Python3_Interpreter_FOUND)
+    add_test(NAME pc286.segmented-model COMMAND ${Python3_EXECUTABLE} -B
+        ${CMAKE_SOURCE_DIR}/probes/pc286/segmented_model.py)
+    add_test(NAME pc286.segmented-oracle COMMAND ${Python3_EXECUTABLE} -B
+        ${CMAKE_SOURCE_DIR}/tests/pc286-segmented.py)
+endif()

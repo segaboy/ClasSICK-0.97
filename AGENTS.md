@@ -1,5 +1,14 @@
 # ClasSICK 0.97 working instructions
 
+2026-10-23,SRC-0399..0401/SPEC-0069/ADR-0080/IMPL-0071/TEST-0084:
+bounded286 logical-bank/capability contract and host model;2 targeted CTests,
+38 frozen checks/1596 flat cases/3 faulty controls pass. Production native paths
+unchanged; no far backend/target run. Paired release remains primary; Mac binding
+held for owner disposition after excluded cached summary constants, no bodies
+or worker transfer. PC exact candidate verified, fresh GUI trial requested but
+not run; CI pending. Preserve24 originals/held brief/UART/old rows/assets/tags/
+retired wiki. [Checkpoint](docs/development/segmented-storage-evidence.md).
+
 2026-10-23,SRC-0394..0398/ADR-0079/SPEC-0068/IMPL-0069/0070/TEST-0082/0083:
 isolated supervisor exclusion callbacks (no ISR/MMIO/boot binding), plus C16
 assert/chunk/flag/guest-offset facade.343 final local profiles; WCC delta9 calls/

@@ -37,3 +37,11 @@ implemented under IMPL-0069, source-pinned Windows/68000 CI passed; no ISR/MMIO/
 SPEC-0067 gains IMPL-0070 C99 assertion/chunk/offset facade and a surface-width
 proof:9 final WCC calls/6 helper-free objects/3 deliberate refusals, no link/run.
 General C alignment and segmented views remain open. [Checkpoint](cpu-c16-evidence.md).
+
+
+2026-10-23 full-release continuation: partial P286-2 now has SPEC-0069/IMPL-0071
+bank/capability contract and verified host model; next286 gap is the retained
+guest-view/callout inventory, then qualified native bank access. No production
+backend or target run. The Mac binding review is held for owner source-exposure
+disposition; the exact unchanged PC candidate is hash-verified and a fresh visible
+GUI trial requested. No new boot or release. [Checkpoint](segmented-storage-evidence.md).

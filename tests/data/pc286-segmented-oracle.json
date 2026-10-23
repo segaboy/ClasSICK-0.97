@@ -1,0 +1,132 @@
+{
+  "frozen_before_worker_read": true,
+  "region_base": 65536,
+  "region_size": 131072,
+  "bank_sizes": [
+    32767,
+    32767,
+    32767,
+    32767,
+    4
+  ],
+  "pattern": "(logical_offset*7+11)&255",
+  "read_cases": [
+    {
+      "name": "flat-truth-0-1",
+      "offset": 0,
+      "width": 1,
+      "expected_value": 11,
+      "expected_status": "ok"
+    },
+    {
+      "name": "flat-truth-0-2",
+      "offset": 0,
+      "width": 2,
+      "expected_value": 2834,
+      "expected_status": "ok"
+    },
+    {
+      "name": "flat-truth-32766-2",
+      "offset": 32766,
+      "width": 2,
+      "expected_value": 64772,
+      "expected_status": "ok"
+    },
+    {
+      "name": "flat-truth-32766-4",
+      "offset": 32766,
+      "width": 4,
+      "expected_value": 4244900626,
+      "expected_status": "ok"
+    },
+    {
+      "name": "flat-truth-65532-4",
+      "offset": 65532,
+      "width": 4,
+      "expected_value": 4025941252,
+      "expected_status": "ok"
+    },
+    {
+      "name": "flat-truth-65534-2",
+      "offset": 65534,
+      "width": 2,
+      "expected_value": 64772,
+      "expected_status": "ok"
+    },
+    {
+      "name": "flat-truth-98300-4",
+      "offset": 98300,
+      "width": 4,
+      "expected_value": 4025941252,
+      "expected_status": "ok"
+    },
+    {
+      "name": "flat-truth-131068-4",
+      "offset": 131068,
+      "width": 4,
+      "expected_value": 4025941252,
+      "expected_status": "ok"
+    },
+    {
+      "name": "flat-truth-131071-1",
+      "offset": 131071,
+      "width": 1,
+      "expected_value": 4,
+      "expected_status": "ok"
+    },
+    {
+      "name": "refuse-1-2",
+      "offset": 1,
+      "width": 2,
+      "expected_status": "address",
+      "output_unchanged": true
+    },
+    {
+      "name": "refuse-1-4",
+      "offset": 1,
+      "width": 4,
+      "expected_status": "address",
+      "output_unchanged": true
+    },
+    {
+      "name": "refuse-32767-2",
+      "offset": 32767,
+      "width": 2,
+      "expected_status": "address",
+      "output_unchanged": true
+    },
+    {
+      "name": "refuse-131070-4",
+      "offset": 131070,
+      "width": 4,
+      "expected_status": "address",
+      "output_unchanged": true
+    },
+    {
+      "name": "refuse-131072-1",
+      "offset": 131072,
+      "width": 1,
+      "expected_status": "address",
+      "output_unchanged": true
+    }
+  ],
+  "full_capability_expected_chunks": [
+    32767,
+    32767,
+    32767,
+    32767,
+    4
+  ],
+  "adjacent_regions_long": "address",
+  "same_region_cross_two_banks_long": "ok",
+  "high_flags_0x80000001": "map",
+  "invalid_later_bank_write": "map with every backing byte unchanged",
+  "invariant_cases": [
+    "duplicate canonical bank identifiers refused",
+    "hole in bank coverage refused",
+    "stale generation refuses old capability with no output",
+    "epoch exhaustion never wraps or reuses",
+    "full span is preflighted before first chunk is exposed",
+    "physical aliases are owner preconditions, not claimed detected"
+  ]
+}
