@@ -56,7 +56,7 @@ try {
     if($WindowDrawing) {
         $sources+=@('platform/uefi/window.c','platform/pc/window-session.c','platform/pc/mono-present.c','platform/pc/window-input.c','core/input/pointer.c','core/graphics/cursor.c','core/ui/window.c','apps/window-scene/scene.c','apps/window-scene/input.c')
         $allowedImports[[Array]::IndexOf($sources,'platform/uefi/window.c')]='cs_uefi_check_framebuffer,cs_uefi_check_map,cs_uefi_check_owned,cs_native_read,cs_acpi_find_pm_timer,cs_acpi_8042,cs_pmtimer_init,cs_pmtimer_sample,cs_arena_init,cs_arena_alloc,cs_pc_window_session_start,cs_pc_window_session_poll,cs_pc_window_session_stop,cs_fb_init'
-        $allowedImports[[Array]::IndexOf($sources,'platform/pc/window-session.c')]='cs_fb_init,cs_surface_init,cs_cursor_init,cs_cursor_bind,cs_input_init,cs_input_pop,cs_window_input_begin,cs_window_input_cancel,cs_pc_window_packet,cs_pc_mono_present,cs_ps2_bus_begin,cs_ps2_bus_poll_delivery'
+        $allowedImports[[Array]::IndexOf($sources,'platform/pc/window-session.c')]='cs_fb_init,cs_surface_init,cs_cursor_init,cs_cursor_bind,cs_input_init,cs_input_pop,cs_window_input_begin,cs_window_input_cancel,cs_pc_window_packet,cs_pc_mono_present,cs_pc_mono_present_rects,cs_ps2_bus_begin,cs_ps2_bus_poll_delivery'
         $allowedImports[[Array]::IndexOf($sources,'platform/pc/mono-present.c')]='cs_fb_init,cs_surface_init,cs_fb_present'
         $allowedImports[[Array]::IndexOf($sources,'platform/pc/window-input.c')]='cs_window_input_sample'
         $allowedImports[[Array]::IndexOf($sources,'core/input/pointer.c')]=''
@@ -113,7 +113,7 @@ try {
             }
             if($WindowDrawing){
                 $mapText=[IO.File]::ReadAllText($map)
-                foreach($name in @('cs_native_window_loop','cs_pc_window_session_start','cs_pc_window_session_poll','cs_window_input_sample','cs_pc_mono_present')){if($mapText -notmatch ('\b'+$name+'\b')){throw 'Disconnected window profile.'}}
+                foreach($name in @('cs_native_window_loop','cs_pc_window_session_start','cs_pc_window_session_poll','cs_window_input_sample','cs_pc_mono_present','cs_pc_mono_present_rects')){if($mapText -notmatch ('\b'+$name+'\b')){throw 'Disconnected window profile.'}}
             }
             $inspection=@(& $reader --file-headers --coff-imports --coff-basereloc $image)
             if($LASTEXITCODE -ne 0 -or ($inspection -join "`n") -match '(?m)^Import \{' -or

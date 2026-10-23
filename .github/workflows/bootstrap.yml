@@ -165,6 +165,14 @@ jobs:
         with:
           name: classick-foreground-build
           path: ${{ runner.temp }}/classick-foreground/manifest.json
+      - name: Verify Mac RAM window bootstrap68000
+        run: python3 scripts/Verify-MacWindowRAMM68k.py --tool-root "$RUNNER_TEMP/classick-m68k/root" --output "$RUNNER_TEMP/classick-mac-ram"
+      - name: Retain Mac RAM bootstrap manifest
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
+        with:
+          name: classick-mac-ram
+          path: ${{ runner.temp }}/classick-mac-ram/manifest.json
+          if-no-files-found: error
       - name: Audit isolated MC68000 short-exclusion callbacks (unbound)
         run: python3 scripts/Verify-M68kExclusion.py --tool-root "$RUNNER_TEMP/classick-m68k/root" --output "$RUNNER_TEMP/classick-m68k-exclusion"
       - name: Retain MC68000 exclusion compiler manifest
@@ -410,4 +418,16 @@ jobs:
             ${{ runner.temp }}/classick-outline-preview/manifest.json
             ${{ runner.temp }}/classick-outline-preview/Os-a/classick-loaded-app.rom
             ${{ runner.temp }}/classick-outline-closure/manifest.json
+          if-no-files-found: error
+      - name: Build native Mac window candidate twins (unbooted)
+        run: python3 scripts/Build-LoadedAppROM.py --window-drawing --tool-root "$RUNNER_TEMP/classick-m68k/root" --output "$RUNNER_TEMP/classick-window-preview"
+      - name: Retain native Mac window candidate
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
+        with:
+          name: classick-window-preview-mac
+          path: |
+            ${{ runner.temp }}/classick-window-preview/manifest.json
+            ${{ runner.temp }}/classick-window-preview/Os-a/classick-loaded-app.rom
+            ${{ runner.temp }}/classick-window-preview/Os-a/classick-loaded-app.map
+            ${{ runner.temp }}/classick-window-preview/Os-a/native-window-disassembly.txt
           if-no-files-found: error

@@ -221,8 +221,10 @@ static void live(uint32_t seconds)
     CHECK(s->owner.product.inputs==2u && s->bus.left.presses==3u);
     CHECK(s->owner.window.x==100 && s->owner.window.y==80 && s->owner.window.pattern==1u);
     CHECK(s->owner.pointer.x==212 && s->owner.pointer.y==160 && s->owner.pointer.suppress==1u);
-    CHECK(drained==4u && loss_seen==1u && published==11u);
-    CHECK(u32(trace()+104)==11u && u32(trace()+108)==0u && u32(trace()+112)==0u);
+    /* Startup plus five visual updates: two moves, drag, title count, content toggle.
+     * Held/release/cancel receipts with no pixel change now publish nothing. */
+    CHECK(drained==4u && loss_seen==1u && published==6u);
+    CHECK(u32(trace()+104)==6u && u32(trace()+108)==0u && u32(trace()+112)==0u);
     CHECK(u64(trace()+136)>=UINT64_C(62)*CS_PMTIMER_HZ && reads==u64(trace()+128)+1u);
     CHECK(u32(trace()+144)==((sizeof(*s)+_Alignof(max_align_t)-1u)&~(_Alignof(max_align_t)-1u))
         +CS_PWS_CANVAS+CS_PWS_PAYLOAD+4u*W);

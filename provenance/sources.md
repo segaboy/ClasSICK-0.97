@@ -4100,3 +4100,73 @@ directory listing and primary line-cap miss recorded in the evidence.
 SPEC-0069/ADR-0080/IMPL-0071/TEST-0084.38 frozen checks,1,596 flat cases,
 three rejected faults and two targeted CTests; production native paths unchanged.
 No native286 backend or target run. [Evidence](../docs/development/segmented-storage-evidence.md).
+
+## SRC-0402 - Owner explicit three-scope approval
+
+2026-10-23: "I explicitly approve these three scopes" answers the exact original SCC/VIA implementation, reviewed-paraphrase worker transfer and isolated verified original-candidate release trial scopes. Publication/reference/physical hardware separate. Prior general answers/rejections do not replace this later explicit authorization.
+
+[Combined evidence](../docs/development/release2-integration-evidence.md).
+
+## SRC-0403 - Original supervised RAM-bootstrap proposal
+
+Claude Opus5.5 low returns158 combined C/header lines/576 contract words from frozen original public inputs,63.22s,zero tools/writes/tests. Lead independently verifies and fixes callback admission order. SPEC-0070/IMPL-0072/TEST-0085.
+
+[Combined evidence](../docs/development/release2-integration-evidence.md).
+
+## SRC-0404 - Original PC GUI trial and device control
+
+Old TEST-0074 exact candidate boots in a fresh isolated visible VirtualBox session. Automated Windows click/drag attempts fail to advance counter; same-boot device injection advances once. E3 failure and E2 control remain separate. Closed VM/restored inventory and media, no reference media. New candidate not yet qualified.
+
+[Combined evidence](../docs/development/release2-integration-evidence.md).
+
+## SRC-0405 - Original dirty-presentation proposal
+
+Claude Opus5.5 low78.73s,131 source/replacement lines/403 contract words,zero tools/writes/tests. Frozen original presenter/session packet. Adopt with defensive child-cause retention; no GUI repair conclusion.
+
+[Combined evidence](../docs/development/release2-integration-evidence.md).
+
+## SRC-0406 - Independent rectangle-test proposal
+
+Copilot Sonnet5.5 low62.48s,143 C lines,one permitted prompt view,zero writes/tests. Implementation withheld; lead corrects bit-pattern oracle and typed alias storage before execution. Final tests not unchanged author-blind.
+
+[Combined evidence](../docs/development/release2-integration-evidence.md).
+
+## SRC-0407 - Lead paired software integration checks
+
+SPEC-0070/0071, IMPL-0072/0073, TEST-0085/0086. Actual local hosted/sanitized/native EFI/media results, initial failures and limits appear in the combined evidence. No unexecuted case counted as passing.
+
+[Combined evidence](../docs/development/release2-integration-evidence.md).
+
+## SRC-0408 - Zilog NMOS SCC product specification
+
+Published manufacturer PS018401-0802, August2002,49 PDF pages,1457494 bytes; SHA256 8eda49fb091c3471398909375c1ff4005bf48b210abd2eb49c0ebde7168fc382. [Publisher PDF](https://www.zilog.com/docs/ps0184.pdf). Lead visually checks Figures10.1/10.2/11.1 printed1-16..1-18 for register fields/readback/opcodes. Facts only, no example algorithm or code; pages remain private. Independent diagram corroboration resolves opcode selection, old SRC-0363 prose conflict retained.
+
+[Combined evidence](../docs/development/release2-integration-evidence.md).
+
+## SRC-0409 - Published Macintosh family hardware guide
+
+Apple Computer/Addison-Wesley, Guide to the Macintosh Family Hardware,SecondEdition,thirdprintingDecember1990,ISBN0-201-52405-8.559 PDF pages,30212736 bytes; SHA256 87f563d405a9d83aabb554ae574706b6dc18be8591b65c52543da3ff9820c4ea. [Published scan](https://www.vintageapple.org/inside_o/pdf/Guide_to_Macintosh_Family_Hardware_2nd_Edition_1990.pdf). Lead checks copyright/identity, Table3-1 p92 and Figure3-1 p123 plus Plus-and-earlier qualifiers and symbolic SCC descriptions. Facts/figures only, no samples. Hardware-interface evidence, not January1984 OS proof; exact SCC offsets remain unverified.
+
+[Combined evidence](../docs/development/release2-integration-evidence.md).
+
+## SRC-0410 - Lead source exclusion and clearance record
+
+Cached summary assembly-style constant definitions were excluded; no routines or algorithms adopted or transferred. Work stopped after two automatic approval rejections. SRC-0402 explicitly clears narrow original code/reviewed-paraphrase/current-release trial scopes. Rejected edits did not land. Excluded page stays excluded; lowest-alias board profile is explicitly an original hypothesis, not verified mapping.
+
+[Combined evidence](../docs/development/release2-integration-evidence.md).
+
+## SRC-0411 - Fresh original motion and IRQ proposal
+
+Fresh Claude Opus5.5 low106.91s,282 combined C/header/assembly lines,zero tools/writes/tests; reported session cost0.3264664USD is not balance/savings. Paraphrased reviewed facts and original inbox headers only. Codex fixes marker ordering/WAIT status and runs2382 synthetic checks. Native qualification is separate. SPEC-0072/IMPL-0074/TEST-0087.
+
+[Combined evidence](../docs/development/release2-integration-evidence.md).
+
+## SRC-0412 - Original Mac native window boot-binding proposal
+
+Claude Opus5.5 low212.52s from36808B frozen original-code/reviewed-fact packet,
+211 C lines/10 exact builder edits, zero tools/writes/tests. Reported session
+cost0.6588048USD is not remaining quota or Codex savings. Lead replaces guessed
+veneer names with actual names, records actual inbox count, removes unused
+Line-A fixture dependency, and adds exact linked IRQ opcode checks. Board
+aliases/DCD polarity remain explicit engineering hypotheses. Build and boot
+verification are separate. [Evidence](../docs/development/release2-integration-evidence.md).

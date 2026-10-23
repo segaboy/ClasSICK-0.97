@@ -58,6 +58,21 @@ static void setup(void)
 #endif
 }
 
+static void published_pixels(void)
+{
+    int correct=1;
+    for(unsigned y=0;y<H;++y)for(unsigned x=0;x<W;++x){
+        uint8_t v=255;
+        if(x>=4u && x<516u && y>=4u && y<346u){
+            unsigned sx=x-4u,sy=y-4u;
+            if(((uint32_t)canvas[sy*64u+sx/8u]>>(7u-sx%8u)&1u)!=0u)v=0;
+        }
+        size_t n=((size_t)y*W+x)*4u;
+        if(fb[n]!=v || fb[n+1]!=v || fb[n+2]!=v || fb[n+3]!=0)correct=0;
+    }
+    CHECK(correct);
+}
+
 static int same(const void *p, unsigned char v, size_t n)
 {
     const unsigned char *b = p; size_t i;
@@ -193,6 +208,7 @@ static void real_bytes(uint8_t status, uint8_t a, uint8_t b, uint8_t c, size_t n
         if (n == 3u && i < 2u) CHECK(ses.published_frames == before);
     }
     CHECK(wire_at == n);
+    published_pixels();
 }
 static void test_real_reports(void)
 {
@@ -202,8 +218,12 @@ static void test_real_reports(void)
     ses.bus.keyboard.phase = CS_PS2_PHASE_READY; ses.bus.keyboard.result = CS_PS2_READY;
     real_bytes(0x21u, 0x09u, 0u, 0u, 3u); /* unknown first down suppressed */
     CHECK(ses.owner.product.inputs == 0u && ses.owner.pointer.suppress == 1u);
+    before=ses.published_frames;
+    unsigned char saved_report[sizeof ses.presentation];
+    memcpy(saved_report,&ses.presentation,sizeof saved_report);
     real_bytes(0x21u, 0x08u, 0u, 0u, 3u);
     CHECK(ses.owner.pointer.suppress == 0u);
+    CHECK(ses.published_frames==before && memcmp(saved_report,&ses.presentation,sizeof saved_report)==0);
     real_bytes(0x21u, 0x18u, 120u, 93u, 3u); /* -136,+93 -> (120,78) */
     CHECK(ses.owner.pointer.x == 120 && ses.owner.pointer.y == 78);
     real_bytes(0x21u, 0x09u, 0u, 0u, 3u);
@@ -225,7 +245,7 @@ static void test_real_reports(void)
     real_bytes(0xE1u, 0x08u, 0u, 0u, 1u);
     CHECK(ses.delivery.kind == CS_PS2_DELIVERY_LOST && ses.consumed == 1u);
     CHECK(ses.owner.pointer.suppress == 1u && ses.owner.window.dragging == 0u);
-    CHECK(ses.published_frames == before + 1u);
+    CHECK(ses.published_frames == before); /* Cancel changes no visible pixels. */
     frames += ses.published_frames - 1u;
 }
 #endif
@@ -310,6 +330,20 @@ int cs_test_present(const cs_fb_target *t, const cs_surface *c, uint8_t *r, size
     if (result == CS_MONO_OK) ++F.frames;
     return result;
 }
+int cs_test_present_rects(const cs_fb_target *t,const cs_surface *c,uint8_t *r,size_t cap,
+    const cs_rect *rects,size_t count,cs_pc_mono_report *out)
+{
+    note('P');++F.presents;
+    CHECK(t==&ses.target && c==&ses.canvas && r==row && cap==sizeof row && out==&ses.presentation);
+    CHECK(rects!=NULL && count>0 && count<=3);
+    if(F.present_r>=0){
+        fb[0]=0x42u;out->phase=CS_MONO_FAILED;out->rows=5;out->required=342;out->cause=CS_FB_STORAGE;
+        return F.present_r;
+    }
+    int result=cs_pc_mono_present_rects(t,c,r,cap,rects,count,out);
+    if(result==CS_MONO_OK)++F.frames;
+    return result;
+}
 int cs_test_begin(cs_window_input *owner, cs_cursor_state *cursor, cs_cursor_token token,
     const cs_cursor_art *art, const cs_window_config *w, const cs_product_state *p, uint32_t buttons)
 {
@@ -339,7 +373,9 @@ static uint32_t step(uint32_t kind, int32_t dx, int32_t dy, uint32_t buttons)
     F.pk.dx = dx; F.pk.dy = dy; F.pk.buttons = buttons;
     r = cs_pc_window_session_poll(&ses, ++tick, 1u);
     if (r == CS_PWS_OK && kind != CS_PS2_DELIVERY_NONE) {
-        CHECK(F.presents == before + 1u && ses.consumed == 1u && ses.stage == CS_PWS_PUBLISH);
+        CHECK(F.presents>=before && F.presents<=before+1u && ses.consumed==1u);
+        CHECK(ses.stage==(F.presents==before?CS_PWS_DISPATCH:CS_PWS_PUBLISH));
+        if(F.present_r<0)published_pixels();
         CHECK(ses.ram_frames == (ram == UINT32_MAX ? ram : ram + 1u));
     }
     return r;
@@ -390,7 +426,7 @@ static void test_faults(void)
     CHECK(ses.delivery.kind == CS_PS2_DELIVERY_NONE && ses.delivery.packet.dx == 0 && ses.consumed == 0u);
     CHECK(ses.stage == CS_PWS_DRAIN && ses.published_frames == 1u && F.presents == 1u);
     untrail(); /* held LEFT after start is ignored until a real release */
-    CHECK(step(CS_PS2_DELIVERY_PACKET, 0, 0, 1u) == CS_PWS_OK && strcmp(trail, "QKMP") == 0);
+    CHECK(step(CS_PS2_DELIVERY_PACKET, 0, 0, 1u) == CS_PWS_OK && strcmp(trail, "QKM") == 0);
     go(120, 78, 1u);
     CHECK(step(CS_PS2_DELIVERY_PACKET, 10, 0, 1u) == CS_PWS_OK);
     CHECK(ses.owner.window.x == 80 && ses.owner.window.y == 70);
@@ -411,9 +447,9 @@ static void test_faults(void)
     ses.ram_frames = ses.published_frames = UINT32_MAX; i = F.presents;
     CHECK(step(CS_PS2_DELIVERY_PACKET, 0, 0, 0u) == CS_PWS_OK);
     CHECK(step(CS_PS2_DELIVERY_PACKET, 0, 0, 0u) == CS_PWS_OK);
-    CHECK(F.presents == i + 2u && ses.ram_frames == UINT32_MAX && ses.published_frames == UINT32_MAX);
+    CHECK(F.presents == i && ses.ram_frames == UINT32_MAX && ses.published_frames == UINT32_MAX);
     untrail(); i = F.cancels;
-    CHECK(step(CS_PS2_DELIVERY_LOST, 0, 0, 0u) == CS_PWS_OK && strcmp(trail, "QKCP") == 0 && F.cancels == i + 1u);
+    CHECK(step(CS_PS2_DELIVERY_LOST, 0, 0, 0u) == CS_PWS_OK && strcmp(trail, "QKC") == 0 && F.cancels == i + 1u);
     F.pop_mode = 1; F.pops = 0u; i = F.presents;
     CHECK(step(CS_PS2_DELIVERY_NONE, 0, 0, 0u) == CS_PWS_OK && ses.drained == 2u && F.pops == 3u);
     CHECK(F.presents == i && ses.phase == CS_PWS_RUNNING);

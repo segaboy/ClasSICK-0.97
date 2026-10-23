@@ -34,4 +34,15 @@ typedef struct {
  * writes:reuse cs_fb_init,cs_surface_init and cs_fb_present unchanged. */
 int cs_pc_mono_present(const cs_fb_target *target,const cs_surface *canvas,
     uint8_t *row,size_t row_capacity,uint32_t initial,cs_pc_mono_report *out);
+/* Dirty-rect variant. count 0..3; rects may be NULL only when count is 0.
+ * Logical half-open noninverted rects (else ARGUMENT), clipped to 512x342
+ * before subtraction; empty ones skipped; overlaps/repeats published in
+ * caller order. Preflight as cs_pc_mono_present plus rect span/order in
+ * ARGUMENT and the rect array as a readonly ALIAS span. Report VALIDATED,
+ * rows0, required=sum of clipped heights. Each rect row converts exactly its
+ * width to RGBA and presents at centered origin+left/top. Count 0 validates
+ * and reports COMPLETE rows0 required0. Failure semantics as above. */
+int cs_pc_mono_present_rects(const cs_fb_target *target,const cs_surface *canvas,
+    uint8_t *row,size_t row_capacity,const cs_rect *rects,size_t count,
+    cs_pc_mono_report *out);
 #endif

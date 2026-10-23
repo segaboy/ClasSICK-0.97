@@ -21,6 +21,16 @@ HEADERS=('arch/m68k/loaded-rom.ld','arch/m68k/runtime.h','platform/mac128k/rom.h
  'apps/aline-probe/program.h','apps/loaded-rom-app/program.S','scripts/Build-LoadedAppROM.py','scripts/Build-MacROM.py','docs/specifications/SPEC-0035-first-loaded-rom-application.md',
  'personality/system1/quickdraw-rects.h','personality/system1/code-run.h','personality/system1/code-run-internal.h',
  'personality/system1/code-select.h','personality/system1/quickdraw-select.h','personality/system1/quickdraw-view.h')
+WINDOW_SOURCES=('arch/m68k/loaded-reset.S','arch/m68k/runtime.c','arch/m68k/composition-runtime.c','arch/m68k/exclusion.c',
+ 'arch/m68k/window-irqs.S','platform/mac128k/loop.c','platform/mac128k/window-entry.c','platform/mac128k/window-session.c',
+ 'platform/mac128k/motion.c','core/graphics/surface.c','core/graphics/cursor.c','core/input/pointer.c','core/input/mouse.c',
+ 'core/ui/window.c','apps/product-scene/scene.c','apps/window-scene/scene.c','apps/window-scene/input.c',
+ 'apps/window-scene/capture.c','apps/window-scene/inbox.c','apps/window-scene/foreground.c')
+WINDOW_HEADERS=('arch/m68k/loaded-rom.ld','arch/m68k/runtime.h','arch/m68k/exclusion.h','platform/mac128k/rom.h',
+ 'platform/mac128k/window-session.h','platform/mac128k/motion.h','core/graphics/surface.h','core/graphics/cursor.h',
+ 'core/input/pointer.h','core/input/mouse.h','core/ui/window.h','core/services/traps.h','apps/product-scene/scene.h',
+ 'apps/window-scene/scene.h','apps/window-scene/input.h','apps/window-scene/capture.h','apps/window-scene/inbox.h',
+ 'apps/window-scene/foreground.h','scripts/Build-LoadedAppROM.py','scripts/Build-MacROM.py')
 def main():
     p=argparse.ArgumentParser();p.add_argument('--tool-root',required=True);p.add_argument('--output',required=True)
     mode=p.add_mutually_exclusive_group()
@@ -28,7 +38,11 @@ def main():
     mode.add_argument('--native-drawing',action='store_true',help='Build the SPEC-0038 direct native drawing candidate')
     mode.add_argument('--selected-drawing',action='store_true',help='Build the SPEC-0047 direct native two-port candidate')
     mode.add_argument('--outline-drawing',action='store_true',help='Build the SPEC-0049 paired native outline preview')
-    a=p.parse_args();native=a.native_drawing or a.selected_drawing or a.outline_drawing;repo=Path(__file__).resolve().parents[1];tools=Path(a.tool_root).resolve();out=Path(a.output).resolve()
+    mode.add_argument('--window-drawing',action='store_true',help='Build the SPEC-0072 native Mac window preview')
+    p.add_argument('--dcd-invert',type=int,choices=(0,1,2,3),default=0,help='Unverified raw RR0 DCD sense mask; window profile only')
+    a=p.parse_args();native=a.native_drawing or a.selected_drawing or a.outline_drawing or a.window_drawing
+    if a.dcd_invert and not a.window_drawing:p.error('--dcd-invert requires --window-drawing')
+    repo=Path(__file__).resolve().parents[1];tools=Path(a.tool_root).resolve();out=Path(a.output).resolve()
     out.mkdir(parents=True,exist_ok=False);sys.dont_write_bytecode=True
     spec=spec_from_file_location('base_rom',repo/'scripts/Build-MacROM.py');h=module_from_spec(spec);spec.loader.exec_module(h)
     env=os.environ.copy();env['LD_LIBRARY_PATH']=str(tools/'usr/lib/x86_64-linux-gnu')
@@ -60,6 +74,14 @@ def main():
         sources+=('apps/outline-drawing/workload.c','personality/system1/quickdraw-select.c','personality/system1/quickdraw-outline.c')
         headers+=('apps/outline-drawing/workload.h','apps/selected-drawing/workload.h','personality/system1/quickdraw-select.h','personality/system1/quickdraw-outline.h','docs/specifications/SPEC-0048-native-rectangle-outline.md','docs/specifications/SPEC-0049-paired-native-outline.md')
         specification='SPEC-0049';profile='native-outline-preview-v1'
+    if a.window_drawing:
+        specs=[]
+        for number in ('0070','0072'):
+            found=sorted(repo.glob('docs/specifications/SPEC-'+number+'-*.md'))
+            if len(found)!=1:raise ValueError('Specification lookup SPEC-'+number)
+            specs.append(found[0].relative_to(repo).as_posix())
+        sources=WINDOW_SOURCES;headers=WINDOW_HEADERS+tuple(specs)
+        program_source=None;program_hex='';specification='SPEC-0072';profile='native-window-preview-v1'
     profiles=[]
     for twin in ('a','b'):
         folder=out/('Os-'+twin);folder.mkdir();objects=[]
@@ -70,9 +92,10 @@ def main():
          '--sysroot='+str(tools),'-ffile-prefix-map='+str(repo)+'=.','-ffile-prefix-map='+str(folder)+'=.']
         if a.selected_drawing or a.outline_drawing:flags+=['-DCLASSICK_SELECTED_DRAWING=1']
         if a.outline_drawing:flags+=['-DCLASSICK_OUTLINE_DRAWING=1']
+        if a.window_drawing:flags+=['-DCLASSICK_MAC_DCD_INVERT='+str(a.dcd_invert)]
         for i,source in enumerate(sources):
             obj=folder/f'{i}.o';objects.append(obj);h.run([cc,*flags,'-c',repo/source,'-o',obj],env)
-            if source not in ('platform/mac128k/loaded-entry.c','platform/mac128k/drawing-entry.c','platform/mac128k/native-drawing-entry.c'):
+            if source not in ('platform/mac128k/loaded-entry.c','platform/mac128k/drawing-entry.c','platform/mac128k/native-drawing-entry.c','platform/mac128k/window-entry.c'):
                 for line in h.run([bins/'m68k-linux-gnu-nm','--defined-only','--format=posix',obj],env).splitlines():
                     fields=line.split()
                     if len(fields)>1 and fields[1] in 'BbCcDdGgSsVv':raise ValueError('Mutable core global: '+source+' '+line)
@@ -85,8 +108,13 @@ def main():
         if not native:required=(*required,'cs_m68k_bus_step_admitted')
         if a.selected_drawing:required=tuple(x for x in required if x!='cs_native_draw')+('cs_selected_draw','cs_qd_select_get','cs_qd_select_set')
         if a.outline_drawing:required=tuple(x for x in required if x not in ('cs_native_draw','cs_qd_rect','cs_qd_view_rect'))+('cs_outline_draw','cs_qd_view_outline','cs_qd_select_get','cs_qd_select_set')
+        if a.window_drawing:required=('cs_mac_main','cs_mac_window_begin','cs_mac_motion_service','cs_foreground_step','cs_mac_window_via_irq','cs_mac_window_scc_irq','cs_mac_window_combined_irq','cs_mac_window_interrupt','cs_product_scene','cs_window_apply','cs_m68k_foreground_enter','cs_m68k_foreground_leave')
+        if a.window_drawing and not any(name.startswith('cs_cursor_') for name in syms):raise ValueError('Disconnected cursor helper')
         if any(name not in syms for name in required):raise ValueError('Disconnected demonstration')
-        if native and any(name.startswith(('cs_image_','cs_m68k_','cs_drawing_app_','cs_aline_probe')) for name in syms):
+        cpu_callbacks=('cs_m68k_foreground_enter','cs_m68k_foreground_leave') if a.window_drawing else ()
+        if any(name not in syms for name in cpu_callbacks):raise ValueError('Missing CPU exclusion callbacks')
+        forbidden=('cs_image_','cs_m68k_','cs_drawing_app_','cs_aline_probe')+(('cs_guest_','cs_memory_','cs_resource','cs_rsrc_','cs_code_','cs_system1_','cs_trap_','cs_service_','cs_qd_','cs_mac_loop_') if a.window_drawing else ())
+        if native and any(name.startswith(forbidden) and name not in cpu_callbacks for name in syms):
             raise ValueError('Unexpected interpreted application in native drawing profile')
         raw=folder/'loaded.raw';h.run([bins/'m68k-linux-gnu-objcopy','-O','binary',elf,raw],env)
         b=bytearray(raw.read_bytes());b.extend(bytes(65536-len(b)));struct.pack_into('>I',b,256,h.crc(b))
@@ -96,6 +124,17 @@ def main():
             legacy=bytearray(image);struct.pack_into('>I',legacy,0,0x4000);struct.pack_into('>I',legacy,256,h.crc(legacy))
             h.audit_image(legacy,syms)
         audit(b)
+        irq_audit=[]
+        if a.window_drawing:
+            for source,name in enumerate(('cs_mac_window_via_irq','cs_mac_window_scc_irq','cs_mac_window_combined_irq'),1):
+                expected=(bytes.fromhex('007c070048e7fffe2f3c')+struct.pack('>I',source)
+                    +bytes.fromhex('4eb9')+struct.pack('>I',syms['cs_mac_window_interrupt'])
+                    +bytes.fromhex('588f4cdf7fff4e73'))
+                at=syms[name]-0x400000
+                if b[at:at+len(expected)]!=expected:raise ValueError('IRQ preservation/mask/RTE: '+name)
+                irq_audit.append({'name':name,'source':source,'bytes':len(expected),'exact_opcodes_verified':True})
+            listing=h.run([bins/'m68k-linux-gnu-objdump','-d',elf],env)
+            (folder/'native-window-disassembly.txt').write_text(listing)
         for offset in (0,4,8,40,128,256,1024,65535):
             bad=bytearray(b);bad[offset]^=1
             try:audit(bad)
@@ -107,9 +146,12 @@ def main():
                 fields=line.split('\t')
                 if len(fields)!=3 or fields[2] not in ('static','dynamic,bounded') or int(fields[1])>1024:raise ValueError('Frame: '+line)
                 frames.append({'function':fields[0].split(':')[-1],'bytes':int(fields[1])})
-        # This synchronous, nonrecursive profile runs with mask7 and no callbacks.
-        # Sum even discarded function frames, plus original assembly/exception margin.
-        stack_bound=sum(x['bytes'] for x in frames)+192
+        # Sum even discarded frames. Legacy synchronous profiles stay mask7.
+        # Window profile permits one serialized producer over unmasked foreground;
+        # 256B covers register save/argument/return and pre-mask exception margin.
+        # Calls are nonrecursive; shared inbox operations cannot overlap.
+        stack_margin=256 if a.window_drawing else 192
+        stack_bound=sum(x['bytes'] for x in frames)+stack_margin
         if stack_bound>0x8000-0x2100:raise ValueError('Conservative native stack reserve exceeded: '+str(stack_bound))
         image=folder/'classick-loaded-app.rom';image.write_bytes(b)
         profiles.append({'optimization':'-Os','image_sha256':hashlib.sha256(b).hexdigest(),'image_size':len(b),
@@ -117,6 +159,7 @@ def main():
          'workspace_begin':syms['__loaded_app_start'],'workspace_end':syms['__loaded_app_end'],
          'native_stack_base':0x2100,'native_stack_top':0x8000,'conservative_stack_bound':stack_bound,
          'individual_frame_max':max(x['bytes'] for x in frames),'stack_frames':frames,'symbols':syms,'corruption_controls':8})
+        if a.window_drawing:profiles[-1]['irq_veneer_audit']=irq_audit
     if profiles[0]!=profiles[1]:raise ValueError('ROM twins differ')
     if program_source is not None:
         fixture=out/'program.o';binary=out/'program.bin'
@@ -128,6 +171,12 @@ def main():
      'original_program_bytes':len(bytes.fromhex(program_hex)),'execution_path':'direct-native-c' if native else 'guarded-68k-fixture',
      'module_count':len(sources),'selected_ports':bool(a.selected_drawing or a.outline_drawing),'outline_drawing':bool(a.outline_drawing),'native_drawing_context':('SPEC-0041' if native else None),'emulator_run':False,'system1_compatibility_proven':False,
      'inputs':{f:hashlib.sha256((repo/f).read_bytes().replace(b'\r\n',b'\n')).hexdigest() for f in (*sources,*headers)}}
+    if a.window_drawing:manifest.update({'window_drawing':True,'native_drawing_context':None,
+     'dcd_invert':a.dcd_invert,'dcd_invert_verified':False,'cpu_callbacks':list(cpu_callbacks),
+     'board_profile':{'status':'engineering-hypothesis-unverified','scc_read_b':0x900000,'scc_read_a':0x900002,
+      'scc_write_b':0xB00001,'scc_write_a':0xB00003,'ab_select_bit':1,'dc_select_bit':2,'scc_byte_guard_nops':16},
+     'interrupt_stack_margin':stack_margin,
+     'proof_limits':['compile/link/seal only','no boot or hardware trial','SCC aliases, DCD sense, pending coherence and physical fit unverified','stack bound is a nonrecursive frame sum plus margin, not measured']})
     (out/'manifest.json').write_text(json.dumps(manifest,indent=2)+'\n')
     print('First loaded-app ROM twins PASS:',profiles[0]['rom_used'],'ROM bytes,',profiles[0]['workspace_end']-0x8000,'workspace bytes; no boot trial.')
 if __name__=='__main__':main()

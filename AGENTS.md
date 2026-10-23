@@ -1,5 +1,16 @@
 # ClasSICK 0.97 working instructions
 
+2026-10-23,SRC-0402..0411/SPEC-0070..0072: explicit owner three-scope
+approval clears original SCC/VIA implementation from independently reviewed
+published facts, reviewed paraphrases to fresh workers (pages lead-only), and
+isolated verified original-candidate Snow/VirtualBox trials needed for this
+release. Excluded cached summary remains excluded; publication/reference/
+physical hardware separate. Mac RAM/PC dirty presentation/controller synthetic
+checks pass; native Mac/boot parity and final package remain pending.286 model
+is committed7bb9856. Preserve24 originals/held brief/UART/old rows/assets/tags/
+retired wiki and existing compatibility gates. Older held checkpoints below
+are historical. [Evidence](docs/development/release2-integration-evidence.md).
+
 2026-10-23,SRC-0399..0401/SPEC-0069/ADR-0080/IMPL-0071/TEST-0084:
 bounded286 logical-bank/capability contract and host model;2 targeted CTests,
 38 frozen checks/1596 flat cases/3 faulty controls pass. Production native paths

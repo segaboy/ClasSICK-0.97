@@ -12,7 +12,7 @@ if(Test-Path -LiteralPath $BuildRoot){throw 'Use a fresh window session object d
 $clang=(Get-Command clang).Source;$nm=(Get-Command llvm-nm).Source
 $gcc=Join-Path $repo '.tools/gcc/w64devkit/bin/gcc.exe'
 $source=Join-Path $repo 'platform/pc/window-session.c'
-$allowed='cs_fb_init,cs_surface_init,cs_cursor_init,cs_cursor_bind,cs_input_init,cs_input_pop,cs_window_input_begin,cs_window_input_cancel,cs_pc_window_packet,cs_pc_mono_present,cs_ps2_bus_begin,cs_ps2_bus_poll_delivery';$audits=@()
+$allowed='cs_fb_init,cs_surface_init,cs_cursor_init,cs_cursor_bind,cs_input_init,cs_input_pop,cs_window_input_begin,cs_window_input_cancel,cs_pc_window_packet,cs_pc_mono_present,cs_pc_mono_present_rects,cs_ps2_bus_begin,cs_ps2_bus_poll_delivery';$audits=@()
 foreach($compiler in @($clang,$gcc)){foreach($bits in @(32,64)){foreach($opt in @(0,2)){
     $name=if($compiler -eq $clang){'clang'}else{'gcc'}
     $object=Join-Path $BuildRoot "$name-$bits-O$opt.o"

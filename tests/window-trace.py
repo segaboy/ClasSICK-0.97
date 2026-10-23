@@ -57,7 +57,8 @@ if len(sys.argv) == 2:
     assert actual['phase'] == 3 and actual['result'] == 1
     assert (actual['pointer_x'], actual['pointer_y']) == (212, 160)
     assert (actual['window_x'], actual['window_y'], actual['pattern']) == (100, 80, 1)
-    assert actual['inputs'] == 2 and actual['published_frames'] == 11
+    # Startup plus five visual updates; unchanged receipts no longer publish.
+    assert actual['inputs'] == 2 and actual['published_frames'] == 6
     assert actual['publication_phase'] == 0 and actual['publication_rows'] == 0
     assert actual['ticks'] >= 62 * 3579545
     print('TEST-0073 native RAM trace roundtrip PASS; no image executed')

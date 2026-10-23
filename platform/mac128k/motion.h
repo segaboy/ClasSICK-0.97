@@ -1,0 +1,52 @@
+/* SPDX-License-Identifier: GPL-3.0-or-later */
+/* Copyright (C) 2026 Dean Howell. */
+#ifndef CS_MAC_MOTION_H
+#define CS_MAC_MOTION_H
+#include <stdint.h>
+#include "../../apps/window-scene/inbox.h"
+
+/* Original Mac SCC/VIA quadrature motion core. See SPEC-0072. No MMIO,
+ * no rendering/owner calls, no allocation, no globals. IO callbacks perform
+ * one complete selector/data transaction each; the target guarantees chip
+ * access spacing and recovery. Producer operations are serialized by the
+ * caller; foreground inbox operations are excluded around service(). */
+enum { CS_MAC_SCC_A = 0, CS_MAC_SCC_B = 1 };
+
+typedef struct {
+    void *cookie;
+    uint8_t (*read)(void *cookie, uint32_t channel, uint32_t reg);
+    void (*write)(void *cookie, uint32_t channel, uint32_t reg, uint8_t v);
+    uint8_t (*pb)(void *cookie);
+} cs_mac_motion_io;
+
+enum { CS_MAC_MOTION_OK = 0, CS_MAC_MOTION_EMPTY = 1,
+       CS_MAC_MOTION_BASELINED = 2, CS_MAC_MOTION_LOST = 3,
+       CS_MAC_MOTION_ARGUMENT = 4, CS_MAC_MOTION_STATE = 5,
+       CS_MAC_MOTION_FAULT = 6 };
+enum { CS_MAC_MOTION_PREPARED = 1, CS_MAC_MOTION_ARMED = 2,
+       CS_MAC_MOTION_FAILED = 3, CS_MAC_MOTION_STOPPED = 4 };
+enum { CS_MAC_STAGE_NONE = 0, CS_MAC_STAGE_RESET = 1,
+       CS_MAC_STAGE_CONFIG = 2, CS_MAC_STAGE_READBACK_A = 3,
+       CS_MAC_STAGE_READBACK_B = 4, CS_MAC_STAGE_ARM = 5,
+       CS_MAC_STAGE_PENDING = 6, CS_MAC_STAGE_INBOX = 7 };
+enum { CS_MAC_CAUSE_NONE = 0, CS_MAC_CAUSE_READBACK = 1,
+       CS_MAC_CAUSE_PENDING = 2, CS_MAC_CAUSE_INBOX_STATE = 3,
+       CS_MAC_CAUSE_INBOX_RESULT = 4 };
+
+struct cs_mac_motion {
+    cs_mac_motion_io io;          /* copied */
+    cs_window_inbox *inbox;       /* borrowed */
+    uint32_t epoch, phase, have_phase, last_raw_a, last_raw_b, last_buttons;
+    uint32_t invert, stage;
+    int32_t cause;
+    uint32_t services, samples, baselines, losses, peak_queued; /* saturate */
+};
+
+int cs_mac_motion_prepare(struct cs_mac_motion *m, const cs_mac_motion_io *io,
+    cs_window_inbox *inbox, uint32_t invert);
+int cs_mac_motion_arm(struct cs_mac_motion *m);
+int cs_mac_motion_service(struct cs_mac_motion *m);
+int cs_mac_motion_stop(struct cs_mac_motion *m);
+
+_Static_assert(sizeof(struct cs_mac_motion)<=192,"Bounded motion controller");
+#endif

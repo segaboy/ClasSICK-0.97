@@ -14,6 +14,17 @@ static int pws_span(uintptr_t at, size_t size)
     return at != 0u && size != 0u && size <= (size_t)(UINTPTR_MAX - at);
 }
 
+static cs_rect pws_cursor_rect(int32_t x, int32_t y)
+{
+    cs_rect r;
+
+    r.left = x < INT32_MIN + 3 ? INT32_MIN : x - 3;
+    r.top = y < INT32_MIN + 3 ? INT32_MIN : y - 3;
+    r.right = x > INT32_MAX - 4 ? INT32_MAX : x + 4;
+    r.bottom = y > INT32_MAX - 4 ? INT32_MAX : y + 4;
+    return r;
+}
+
 static int pws_overlap(uintptr_t a, size_t a_size, uintptr_t b, size_t b_size)
 {
     return a <= b + (uintptr_t)(b_size - 1u) && b <= a + (uintptr_t)(a_size - 1u);
@@ -197,6 +208,9 @@ uint32_t cs_pc_window_session_poll(cs_pc_window_session *s, uint64_t now,
     cs_input_record record;
     uint32_t r, kind, i;
     int owner;
+    cs_rect rects[3];
+    size_t count;
+    int32_t old_x, old_y;
 
     if (s == NULL || s->magic != CS_PWS_MAGIC)
         return CS_PWS_ARGUMENT;
@@ -243,15 +257,27 @@ uint32_t cs_pc_window_session_poll(cs_pc_window_session *s, uint64_t now,
     if (kind != CS_PS2_DELIVERY_PACKET && kind != CS_PS2_DELIVERY_LOST)
         return pws_fail(s, CS_PWS_CONTROLLER, CS_PWS_DISPATCH, CS_PS2_STATE);
     s->consumed = 1u;
+    old_x = s->owner.pointer.x;
+    old_y = s->owner.pointer.y;
     owner = kind == CS_PS2_DELIVERY_PACKET
         ? cs_pc_window_packet(&s->owner, &s->delivery.packet)
         : cs_window_input_cancel(&s->owner);
     if (owner != CS_WINDOW_INPUT_OK && owner != CS_WINDOW_INPUT_CHANGED)
         return pws_fail(s, CS_PWS_OWNER, CS_PWS_DISPATCH, owner);
     s->ram_frames = pws_inc(s->ram_frames);
+    count = 0u;
+    if (s->owner.render.dirty.left < s->owner.render.dirty.right
+        && s->owner.render.dirty.top < s->owner.render.dirty.bottom)
+        rects[count++] = s->owner.render.dirty;
+    if (s->owner.pointer.x != old_x || s->owner.pointer.y != old_y) {
+        rects[count++] = pws_cursor_rect(old_x, old_y);
+        rects[count++] = pws_cursor_rect(s->owner.pointer.x, s->owner.pointer.y);
+    }
+    if (count == 0u)
+        return CS_PWS_OK;
     s->stage = CS_PWS_PUBLISH;
-    owner = cs_pc_mono_present(&s->target, &s->canvas, s->row, s->row_capacity,
-        0u, &s->presentation);
+    owner = cs_pc_mono_present_rects(&s->target, &s->canvas, s->row,
+        s->row_capacity, rects, count, &s->presentation);
     if (owner != CS_MONO_OK || s->presentation.phase != CS_MONO_COMPLETE)
         return pws_fail(s, CS_PWS_PRESENT, CS_PWS_PUBLISH, owner);
     s->published_frames = pws_inc(s->published_frames);

@@ -377,3 +377,12 @@ checks,1,596 post-read flat cases/three bad controls executed by lead. Reported
 premium-cost2/nanoAIU31,133,040,000 are not balances or measured Codex savings.
 Stop provider retries; no renewed qualification or broad fan-out. All-four
 remaining allowances unavailable. [Receipt](segmented-storage-evidence.json).
+
+Release2 continuation2026-10-23: owner explicitly clears reviewed-fact summaries
+to fresh supervised workers, lead-only manual pages, original SCC/VIA code and
+isolated verified original-candidate release trials. Excluded source stays
+excluded. One substantial bounded Claude primary; a distinct Copilot oracle
+only for the independent pixel risk. Adopt usable artifacts rather than
+recreating them; disclose necessary lead fixes. No worker execution claims,
+quota equivalence, requalification or blanket fan-out.
+[Results](release2-integration-evidence.md).
