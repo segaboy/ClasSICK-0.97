@@ -77,3 +77,17 @@ metadata; legacy absent-mode proof defaults to loss only when probe=true.
 Diagnostic inputs are source-hashed in the package record. Normal modes stay
 excluded and must match the previous normal executable byte-for-byte. Target
 trials stay inside existing isolated verified-original release-test scope.
+
+
+## Optional following-packet mode (SRC-0432)
+
+`CLASSICK_PC_INPUT_PROBE_SKIP_FIRST_PACKET` defaults numeric0; only0/1 valid,
+and1 requires MOTION=1. With1, ignore total decoded-packet counts0/1, then use
+the existing nonzero PACKET trigger. Count>=2 means total decoded packets,
+not necessarily a second motion sample. No counter/history/state/IO added;
+all output words, post-dispatch observation and field lifetime stay unchanged.
+Select explicit `-WindowDrawing -WindowInputProbe -WindowInputProbeMode motion-later`.
+Build/package metadata distinguishes it from loss/motion/none; missing probe
+and inconsistent metadata refuse before output. Normal binary equality is
+required. Actual later-packet observation remains separate from GUI drag and
+human qualification. [Verification](../development/pc-following-motion-evidence.md).

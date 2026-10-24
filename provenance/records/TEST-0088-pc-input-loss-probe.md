@@ -17,3 +17,6 @@ SRC-0430: legacy13/new35 literal-word checks, three host profiles, three compile
 
 
 SRC-0431: actual first-motion spin observed with guarded RIP/magic; dx255/dy-255/right button2. Header/X are post-reset parser state, not retained raw bytes; synthetic tests cover packing only. All-frame pixel replay matches; no GUI-drag/release pass. [Completed evidence](../../docs/development/pc-first-motion-evidence.md).
+
+
+SRC-0432: optional motion-later gate uses total decoded count>=2, no mutable history;201 checks/three profiles/three compiled defects/seven mode refusals verified, normal binary unchanged. Native later-packet trial pending. [Evidence](../../docs/development/pc-following-motion-evidence.md).

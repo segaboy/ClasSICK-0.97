@@ -37,6 +37,11 @@ static void capture(const uint64_t *e)
     for(unsigned i=0;i<8;i++)CHECK(actual[i]==e[i]);
     calls=0;
 }
+static void at(uint32_t n,unsigned kind,int dx,int dy,const uint64_t *e)
+{
+    graph.bus.packets=n;graph.delivery.kind=kind;graph.delivery.packet.dx=dx;graph.delivery.packet.dy=dy;
+    if(e)capture(e);else ignored(kind,dx,dy);
+}
 int main(void)
 {
     /* Literal oracles; author supplied implementation and tests. */
@@ -64,6 +69,28 @@ int main(void)
     graph.delivery.packet.dx=-3;graph.delivery.packet.dy=5;capture(mixed);
     graph.delivery.packet.dx=4;graph.delivery.packet.dy=0;capture(xonly);
     graph.delivery.packet.dx=0;graph.delivery.packet.dy=-1;capture(yonly);
+    /* Realistic reset parser state: header/X cleared, only rawY retained. */
+    graph.bus.errors=0;graph.bus.decoder.header=0;graph.bus.decoder.x=0;graph.bus.last_byte=1;
+    graph.delivery.packet.buttons=2;graph.owner.pointer.down=1;graph.owner.pointer.suppress=0;
+    graph.owner.pointer.x=10;graph.owner.pointer.y=20;graph.owner.window.x=30;graph.owner.window.y=40;
+    graph.owner.product.inputs=3;graph.owner.window.dragging=1;
+    {
+        static const uint64_t two[8]={UINT64_C(0x4353504D4F543031),UINT64_C(0x0000000200000000),
+            UINT64_C(0x0000000000000001),UINT64_C(0x000000FFFFFFFF01),UINT64_C(0x0000000200000001),
+            UINT64_C(0x0000000A00000014),UINT64_C(0x0000001E00000028),UINT64_C(0x0000000300000001)};
+        uint64_t w[8];
+        const int later=CLASSICK_PC_INPUT_PROBE_SKIP_FIRST_PACKET;
+        memcpy(w,two,sizeof w);
+        w[1]=0;at(0,1,255,-255,later?NULL:w);
+        w[1]=UINT64_C(0x0000000100000000);at(1,1,255,-255,later?NULL:w);
+        at(1,0,255,-255,NULL);at(1,2,255,-255,NULL);at(1,1,0,0,NULL);
+        at(2,0,255,-255,NULL);at(2,2,255,-255,NULL);at(2,1,0,0,NULL);
+        at(2,1,255,-255,two);
+        memcpy(w,two,sizeof w);
+        w[3]=UINT64_C(0x0000000400000000);at(2,1,4,0,w);
+        w[3]=UINT64_C(0x00000000FFFFFFFF);at(2,1,0,-1,w);
+        w[1]=UINT64_C(0xFFFFFFFF00000000);w[3]=two[3];at(UINT32_MAX,1,255,-255,w);
+    }
     printf("Input motion probe: %u checks; literal oracle; native backend unexecuted.\n",checks);
     return 0;
 }

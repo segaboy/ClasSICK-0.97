@@ -422,3 +422,6 @@ balances unavailable. This is not evidence of quota savings. [Receipt](boot-inpu
 
 
 2026-10-24 PC packet diagnostic: one Copilot Sonnet5.5 low primary,12451B frozen original-public packet,41.16s/one read/no writes/tests. Lead integrates usable code/tests, adds strict mode/refusal controls and byte-identical normal-image check. No second review or requalification; one reported premium request, balances unavailable. [Evidence](pc-first-motion-evidence.md).
+
+
+2026-10-24 following-packet diagnostic: one Copilot Sonnet5.5 low primary,19530B frozen public packet/55.23s/one read/no writes,commands or tests. Adopt12 exact replacements in6files; lead verifies201 checks/three profiles/three defects/seven refusals, native normal-image equality. No second worker, renewed qualification or code recreation. One reported premium request;all-four remaining balances unavailable. [Receipt](pc-following-motion-evidence.json).

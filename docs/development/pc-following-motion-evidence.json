@@ -1,0 +1,107 @@
+{
+  "date": "2026-10-24",
+  "baseline": "a98788192b041c3186062d20afe93aabefb004b7",
+  "scope": "Optional motion-later diagnostic skips total decoded packet counts0/1, then observes nonzero PACKET; no mutable history or input-policy change",
+  "worker": {
+    "provider": "Copilot",
+    "model": "Sonnet5.5 low",
+    "execution": {
+      "round": "primary",
+      "worker": "copilot",
+      "exit_code": 0,
+      "outer_timeout": false,
+      "elapsed_seconds": 55.23,
+      "input_bytes": 19530,
+      "input_sha256": "c5ebe75f93a105f3884e29b59fe3c107c995a27a0b36f4130e80276f2d5e8c13",
+      "stderr_bytes": 0
+    },
+    "tool_reads": 1,
+    "writes": 0,
+    "commands": 0,
+    "tests_executed": [],
+    "reported_premium_requests": 1,
+    "disposition": "adopt12 exact replacements in6 files; no independent author-test review or lead code recreation"
+  },
+  "tools_review": "Supported drag API has window-relative endpoints, no button/relative-delta controls. Click has button selector. Interface facts only; no implementation inspected.",
+  "tests": {
+    "legacy_checks": 13,
+    "motion_checks": 101,
+    "later_checks": 87,
+    "checks_per_profile": 201,
+    "profiles": [
+      "Clang Debug",
+      "GCC Release",
+      "Clang ASan-UBSan"
+    ],
+    "CTests_per_profile": 3,
+    "controls": [
+      {
+        "case": "correct",
+        "compiled": true,
+        "exit": 0,
+        "output": "Input motion probe: 87 checks; literal oracle; native backend unexecuted."
+      },
+      {
+        "case": "too-early",
+        "compiled": true,
+        "exit": 1,
+        "output": "unexpected motion-probe capture"
+      },
+      {
+        "case": "too-late",
+        "compiled": true,
+        "exit": 1,
+        "output": "motion probe line34"
+      },
+      {
+        "case": "wrong-axis",
+        "compiled": true,
+        "exit": 1,
+        "output": "motion probe line37"
+      },
+      {
+        "case": "motion=1/skip='2'",
+        "compile_refused": true
+      },
+      {
+        "case": "motion=1/skip=''",
+        "compile_refused": true
+      },
+      {
+        "case": "motion=1/skip='not_a_value'",
+        "compile_refused": true
+      },
+      {
+        "case": "motion=0/skip='1'",
+        "compile_refused": true
+      },
+      {
+        "case": "motion-later-without-probe-0",
+        "refused_before_output": true
+      },
+      {
+        "case": "motion-later-without-probe-1",
+        "refused_before_output": true
+      },
+      {
+        "case": "non-probe-with-motion-later-metadata",
+        "refused_before_media_write": true
+      }
+    ]
+  },
+  "normal_native": {
+    "SHA256": "de02e416fc92bc69fb4e07e41eb8a79a2f1cd00493e12104e1e47dba55e55d0f",
+    "byte_identical": true,
+    "twins": 4,
+    "corruption_controls": 27
+  },
+  "later_native": "pending committed-source build and isolated trial",
+  "release_ready": false,
+  "remaining_balances": {
+    "Copilot": "unavailable",
+    "Claude": "unavailable",
+    "Grok": "unavailable",
+    "Argon": "unavailable"
+  },
+  "gates": "Mac motion/PC GUI left-drag unqualified;286 unchanged;no source/reference/physical/System1/native-app/full128K/B2/release change"
+}

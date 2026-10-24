@@ -17,6 +17,19 @@ enum { CS_PC_INPUT_PROBE_WORDS=8 };
 #endif
 _Static_assert(CLASSICK_PC_INPUT_PROBE_MOTION==0 || CLASSICK_PC_INPUT_PROBE_MOTION==1,
     "Input-probe mode must be numeric 0 or 1");
+/* Diagnostic-only: with MOTION=1, ignore PACKET deliveries while the total decoded-packet
+ * counter is <=1. Observes the first nonzero packet whose total counter is >=2. */
+#ifndef CLASSICK_PC_INPUT_PROBE_SKIP_FIRST_PACKET
+#define CLASSICK_PC_INPUT_PROBE_SKIP_FIRST_PACKET 0
+#endif
+#if (CLASSICK_PC_INPUT_PROBE_SKIP_FIRST_PACKET+0)!=0 && (CLASSICK_PC_INPUT_PROBE_SKIP_FIRST_PACKET+0)!=1
+#error CLASSICK_PC_INPUT_PROBE_SKIP_FIRST_PACKET must be 0 or 1
+#endif
+_Static_assert(CLASSICK_PC_INPUT_PROBE_SKIP_FIRST_PACKET==0 || CLASSICK_PC_INPUT_PROBE_SKIP_FIRST_PACKET==1,
+    "Skip-first-packet must be numeric 0 or 1");
+#if (CLASSICK_PC_INPUT_PROBE_SKIP_FIRST_PACKET+0)==1 && (CLASSICK_PC_INPUT_PROBE_MOTION+0)!=1
+#error CLASSICK_PC_INPUT_PROBE_SKIP_FIRST_PACKET=1 requires CLASSICK_PC_INPUT_PROBE_MOTION=1
+#endif
 #define CS_PC_INPUT_PROBE_MOTION_MAGIC UINT64_C(0x4353504D4F543031)
 /* Ignores context/trace; s must be the live const session. Mode0 stops on
  * LOST; mode1 on a PACKET with nonzero motion. Other paths return0. */

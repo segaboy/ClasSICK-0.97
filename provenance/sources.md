@@ -4328,3 +4328,14 @@ proof. Lead corrects original brief's parser lifetime: header/X reset, only
 last rawY retained. All logical pixels match shared-core expected final states;
 old4x7 difference classified as cursor restoration, no window damage found.
 Original trial closed/media/inventory preserved. [Evidence](../docs/development/pc-first-motion-evidence.md).
+
+
+## SRC-0432 - Original following-packet diagnostic and tool-interface review
+
+2026-10-24, one bounded Copilot original-public artifact,55.23s/one read/no
+writes/commands/tests,12 replacements adopted. Lead runs201 checks per profile
+in three compiler configurations,three compiled bad controls/seven invalid
+mode refusals;normal native image unchanged. Supported drag API has endpoint
+coordinates,no button or relative-delta option;no implementation inspected.
+Committed-source later-packet native trial pending. No historical/emulator/
+release/physical/native-app gate changes. [Evidence](../docs/development/pc-following-motion-evidence.md).

@@ -1,5 +1,10 @@
 # ClasSICK 0.97 working instructions
 
+2026-10-24,SRC-0432: optional motion-later diagnostic waits for total packet
+count>=2;201 checks/three profiles/three compiled defects/seven mode refusals
+pass, normal EFI unchanged. Committed-source native later-packet build/trial
+pending; no input-policy/release change. [Evidence](docs/development/pc-following-motion-evidence.md).
+
 2026-10-24,SRC-0431: first-motion source999f5bb7 full CI40094774719 passes.
 Actual guarded packet for one-pixel GUI gesture is dx255/dy-255/right button2;
 native clipping correct, no left drag. Header/X are cleared parser state,

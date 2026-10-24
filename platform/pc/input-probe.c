@@ -16,6 +16,9 @@ int cs_pc_input_probe_observe(void *context,const unsigned char *trace,
 #if CLASSICK_PC_INPUT_PROBE_MOTION
     if(!s||s->delivery.kind!=CS_PS2_DELIVERY_PACKET||
         (!s->delivery.packet.dx&&!s->delivery.packet.dy)) return 0;
+#if CLASSICK_PC_INPUT_PROBE_SKIP_FIRST_PACKET
+    if(s->bus.packets<=1) return 0;
+#endif
     v[0]=CS_PC_INPUT_PROBE_MOTION_MAGIC;
     v[1]=pair(s->bus.packets,s->bus.errors);
     v[2]=pair(s->bus.decoder.header,
