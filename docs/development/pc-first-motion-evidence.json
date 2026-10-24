@@ -1,0 +1,108 @@
+{
+  "date": "2026-10-24",
+  "baseline": "88cbdee767b7dd19b8ad342a1067ec18e8397bdc",
+  "previous_runtime_CI": {
+    "source": "b3cb3fea29f510129b2c74f77ad5cd546d9fa119",
+    "run": 40042117791,
+    "native": "success",
+    "Windows": "success"
+  },
+  "scope": "Opt-in first nonzero decoded PC mouse packet; no normal runtime input-policy change",
+  "worker": {
+    "name": "Copilot Sonnet5.5 low",
+    "execution": {
+      "round": "primary",
+      "worker": "copilot",
+      "exit_code": 0,
+      "outer_timeout": false,
+      "elapsed_seconds": 41.16,
+      "input_bytes": 12451,
+      "input_sha256": "adf7c529f23bab923b538a5e503b26536add7d39036abccb4c3c195cd3b67373",
+      "stderr_bytes": 0
+    },
+    "tools": "one view of frozen original-public packet; no commands/writes/tests",
+    "reported_premium_requests": 1,
+    "remaining_balance": "unavailable",
+    "tests_executed": [],
+    "disposition": "adopt code/tests; lead adds numeric-mode assertion and deterministic unexpected-backend guard, build/package wiring"
+  },
+  "tests": {
+    "legacy_checks": 13,
+    "motion_checks": 35,
+    "profiles": "Two targeted CTests each: Clang Debug, GCC Release, Clang ASan-UBSan",
+    "compiled_controls": [
+      {
+        "case": "correct",
+        "compiled": true,
+        "exit": 0,
+        "output": "Input motion probe: 35 checks; literal oracle; native backend unexecuted."
+      },
+      {
+        "case": "wrong-trigger",
+        "compiled": true,
+        "exit": 1,
+        "output": "unexpected motion-probe capture"
+      },
+      {
+        "case": "swapped-deltas",
+        "compiled": true,
+        "exit": 1,
+        "output": "motion probe line37"
+      },
+      {
+        "case": "graph-mutation",
+        "compiled": true,
+        "exit": 1,
+        "output": "motion probe line36"
+      },
+      {
+        "case": "invalid-mode-'2'",
+        "refused": true
+      },
+      {
+        "case": "invalid-mode-''",
+        "refused": true
+      },
+      {
+        "case": "invalid-mode-'not_a_mode'",
+        "refused": true
+      }
+    ],
+    "mode_controls": [
+      {
+        "case": "package-probe-True-mode-none",
+        "refused_before_media_write": true
+      },
+      {
+        "case": "package-probe-False-mode-motion",
+        "refused_before_media_write": true
+      },
+      {
+        "case": "package-probe-True-mode-invalid",
+        "refused_before_media_write": true
+      },
+      {
+        "case": "bad-build-0",
+        "refused_before_output": true
+      },
+      {
+        "case": "bad-build-1",
+        "refused_before_output": true
+      }
+    ],
+    "harness_limit": "Initial Windows PowerShell5 child refused by AuthorizationManager before test. No bypass; configured PowerShell7 runtime executes the actual negative controls."
+  },
+  "builds": {
+    "normal_SHA256": "de02e416fc92bc69fb4e07e41eb8a79a2f1cd00493e12104e1e47dba55e55d0f",
+    "normal_matches_previous": true,
+    "motion_precommit_SHA256": "bf0b1026598ae00eb7bee19f7fe21c8b28dd770af06307141636f891115e8939",
+    "normal_twin_images": 4,
+    "motion_twin_images": 4,
+    "corruption_controls_each": 27,
+    "motion_omitted_probe_controls": 2,
+    "new_native_trial": "pending final committed-source rebuild and isolated run"
+  },
+  "release_ready": false,
+  "gates": "Mac motion and PC GUI dragging remain unqualified; no release/physical/reference/System1/native-app/full128K claim",
+  "pc286": "Prior qualified model/toolchain status retained; no new far backend/target run"
+}

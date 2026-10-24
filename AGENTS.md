@@ -1,5 +1,11 @@
 # ClasSICK 0.97 working instructions
 
+2026-10-24,SRC-0429/0430: priorb3cb3fe full CI40042117791 passes. Optional
+first-motion PC probe passes48 checks/three profiles/three compiled defects/
+eight mode refusals; normal EFI byte-identical. Source-committed diagnostic
+trial pending, no input-policy change or release pass. Preserve originals and
+all gates. [Receipt](docs/development/pc-first-motion-evidence.md).
+
 2026-10-23,SRC-0428: nativeb3cb3fe loss-gating trial shows foreground recovery,
 two baselines/two losses, fault0, but zero samples/presses and fixed pointer.
 6295 checks/three local profiles/four compiled recovery controls pass; native

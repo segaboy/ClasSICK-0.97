@@ -2,11 +2,13 @@
 # Copyright (C) 2026 Dean Howell.
 [CmdletBinding()]
 param([Parameter(Mandatory=$true)][string]$BuildRoot,
-    [ValidateSet('none','ud','gp')][string]$FaultProbe='none',[switch]$SelectedDrawing,[switch]$OutlineDrawing,[switch]$WindowDrawing,[switch]$WindowInputProbe)
+    [ValidateSet('none','ud','gp')][string]$FaultProbe='none',[switch]$SelectedDrawing,[switch]$OutlineDrawing,[switch]$WindowDrawing,[switch]$WindowInputProbe,
+    [ValidateSet('loss','motion')][string]$WindowInputProbeMode='loss')
 Set-StrictMode -Version Latest
 $ErrorActionPreference='Stop'
 if(([int][bool]$SelectedDrawing+[int][bool]$OutlineDrawing+[int][bool]$WindowDrawing) -gt 1){throw 'Select only one drawing profile.'}
 if($WindowInputProbe -and (-not $WindowDrawing -or $FaultProbe -ne 'none')){throw 'Input probe requires WindowDrawing with no fault probe.'}
+if($WindowInputProbeMode -eq 'motion' -and -not $WindowInputProbe){throw 'Motion mode requires the explicit input-probe switch.'}
 $repoRoot=[IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..'))
 $BuildRoot=[IO.Path]::GetFullPath($BuildRoot)
 if(Test-Path -LiteralPath $BuildRoot){throw 'Use a fresh EFI output directory.'}
@@ -88,6 +90,7 @@ try {
                     $profileFlags=@()
                     if($WindowDrawing){$profileFlags+='-DCLASSICK_WINDOW_DRAWING=1'}
                     if($WindowInputProbe){$profileFlags+='-DCLASSICK_WINDOW_INPUT_PROBE=1'}
+                    if($WindowInputProbe -and $WindowInputProbeMode -eq 'motion'){$profileFlags+='-DCLASSICK_PC_INPUT_PROBE_MOTION=1'}
                     if($sources[$i] -eq 'platform/uefi/keyboard.c'){$profileFlags=@('-DCLASSICK_PC_MOUSE=1')}
                     if($SelectedDrawing -or $OutlineDrawing){$profileFlags+='-DCLASSICK_SELECTED_DRAWING=1'}
                     if($OutlineDrawing){$profileFlags+='-DCLASSICK_OUTLINE_DRAWING=1'}
@@ -249,7 +252,7 @@ try {
     $payload=Join-Path $BuildRoot 'payload/EFI/BOOT'; [void][IO.Directory]::CreateDirectory($payload)
     $packaged=Join-Path $payload 'BOOTX64.EFI'; Copy-Item -LiteralPath $release -Destination $packaged
     if((Get-FileHash -LiteralPath $packaged -Algorithm SHA256).Hash.ToLowerInvariant() -ne $results[1].sha256){throw 'EFI payload copy differs.'}
-    [ordered]@{fault_probe=$FaultProbe;window_input_probe=[bool]$WindowInputProbe;missing_input_probe_controls=(2*[int][bool]$WindowInputProbe);window_drawing=[bool]$WindowDrawing;window_trace_version=$(if($WindowDrawing){1}else{0});window_trace_offset=$(if($WindowDrawing){2048}else{0});missing_window_controls=(9*[int][bool]$WindowDrawing);outline_drawing=[bool]$OutlineDrawing;continuous_preview=([bool]$OutlineDrawing -or [bool]$WindowDrawing);missing_outline_controls=(3*[int][bool]$OutlineDrawing);selected_drawing=[bool]$SelectedDrawing;missing_selected_workload_controls=[int][bool]$SelectedDrawing;missing_selected_core_controls=[int][bool]$SelectedDrawing;images=$results;image_rejections=$mutations.Count;profile_rejections=[int]($FaultProbe -ne 'none');missing_transition_controls=1;missing_exceptions_controls=1;missing_presenter_controls=1;missing_acpi_controls=1;
+    [ordered]@{fault_probe=$FaultProbe;window_input_probe=[bool]$WindowInputProbe;window_input_probe_mode=$(if($WindowInputProbe){$WindowInputProbeMode}else{'none'});missing_input_probe_controls=(2*[int][bool]$WindowInputProbe);window_drawing=[bool]$WindowDrawing;window_trace_version=$(if($WindowDrawing){1}else{0});window_trace_offset=$(if($WindowDrawing){2048}else{0});missing_window_controls=(9*[int][bool]$WindowDrawing);outline_drawing=[bool]$OutlineDrawing;continuous_preview=([bool]$OutlineDrawing -or [bool]$WindowDrawing);missing_outline_controls=(3*[int][bool]$OutlineDrawing);selected_drawing=[bool]$SelectedDrawing;missing_selected_workload_controls=[int][bool]$SelectedDrawing;missing_selected_core_controls=[int][bool]$SelectedDrawing;images=$results;image_rejections=$mutations.Count;profile_rejections=[int]($FaultProbe -ne 'none');missing_transition_controls=1;missing_exceptions_controls=1;missing_presenter_controls=1;missing_acpi_controls=1;
         missing_ps2_controls=1;missing_keyboard_controls=1;missing_input_controls=1;missing_byte_io_controls=1;
         missing_uart_controls=1;missing_native_uart_controls=([int](-not $WindowDrawing));missing_service_controls=1;missing_service_probe_controls=1;
         missing_m68k_controls=1;missing_aline_probe_controls=([int](-not $WindowDrawing));missing_native_drawing_controls=1;missing_mouse_button_controls=1;missing_mouse_packet_controls=1;missing_mouse_bus_controls=1;missing_drawing_view_controls=1;drawing_context_specification='SPEC-0041';pc_mouse_profile=1;keyboard_trace_version=$(if($WindowDrawing){0}else{2});

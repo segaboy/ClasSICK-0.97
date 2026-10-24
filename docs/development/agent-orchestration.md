@@ -419,3 +419,6 @@ balances unavailable. This is not evidence of quota savings. [Receipt](boot-inpu
 
 
 2026-10-23 loss recovery: actual producer trace identifies unstable sampling and foreground/IRQ divergence. A separate bounded primary Copilot call supplies recovery code/tests in67.16s, one frozen-packet view/no writes/tests. Lead adopts and fixes two IO counts; no second reviewer/fan-out. One reported premium request; account balance unavailable. First diagnostic author artifact also needed a native pointer-only ABI correction after real negative boot evidence. [Receipt](mac-first-loss-evidence.md).
+
+
+2026-10-24 PC packet diagnostic: one Copilot Sonnet5.5 low primary,12451B frozen original-public packet,41.16s/one read/no writes/tests. Lead integrates usable code/tests, adds strict mode/refusal controls and byte-identical normal-image check. No second review or requalification; one reported premium request, balances unavailable. [Evidence](pc-first-motion-evidence.md).

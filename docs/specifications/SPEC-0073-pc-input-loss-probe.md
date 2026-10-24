@@ -4,7 +4,7 @@
 candidate, excluded from normal previews and release packaging.
 
 The unchanged SPEC-0062 readonly observer runs after a receipt, before the
-next poll. NONE/PACKET returns0 without effects. First LOST reads only the
+next poll. In default loss mode, NONE/PACKET returns0 without effects. First LOST reads only the
 live session's own scalar diagnostics into eight64-bit words, then enters an
 original nonreturning native backend. It neither changes the loss policy nor
 mutates the graph, pixels, trace or hardware. No allocator, UART or guest-memory
@@ -40,3 +40,36 @@ controls. Normal builds keep a NULL observer and exclude both probe modules.
 Require byte equality of the normal candidate after integration. Any actual
 probe trial requires the current release's owner-approved isolated original
 candidate scope and exact artifact verification; publication remains separate.
+
+
+## Optional first-motion mode (SRC-0430)
+
+`CLASSICK_PC_INPUT_PROBE_MOTION` defaults0; only numeric0/1 are valid. Default
+keeps the preceding first-LOST contract. Mode1 stops only on PACKET with
+nonzero dx or dy; NULL/NONE/LOST/zero-motion return0 unchanged. The observer
+runs after normal dispatch/publication, so owner positions are POST receipt.
+No mutable history, extra IO, allocation or runtime input-policy change.
+
+| Register | High32 | Low32 |
+| --- | --- | --- |
+| r8 | original4353504D4F543031 magic | whole64-bit magic |
+| r9 | bus packets | bus errors |
+| r10 | retained decoder header | (raw X&255)<<8 OR (raw Y&255) |
+| r11 | signed dx as uint32 | signed dy as uint32 |
+| r12 | report buttons | down OR (suppress<<1) |
+| r13 | pointer X as uint32 | pointer Y as uint32 |
+| r14 | window X as uint32 | window Y as uint32 |
+| r15 | input count | dragging |
+
+Raw Y is the completed poll's last byte; raw fields are retained parser
+values, not re-encoded decoded deltas. Use exact own spin RIP AND this mode's
+magic before interpreting. A first packet is a diagnostic, not a host-cause,
+usability, successful drag or semantic STOPPED proof.
+
+Select `-WindowDrawing -WindowInputProbe -WindowInputProbeMode motion` in the
+image builder. Motion without explicit probe, incompatible drawing/fault and
+invalid mode refuse. Package requires explicit InputProbe and consistent mode
+metadata; legacy absent-mode proof defaults to loss only when probe=true.
+Diagnostic inputs are source-hashed in the package record. Normal modes stay
+excluded and must match the previous normal executable byte-for-byte. Target
+trials stay inside existing isolated verified-original release-test scope.

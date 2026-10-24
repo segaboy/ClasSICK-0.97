@@ -9,3 +9,6 @@ reviewed by the lead; no normal guest behavior/loss policy is changed.
 
 Probe modules are absent from normal images. No artifact or proposed test is
 counted as passing without lead execution. [Evidence](../../docs/development/release2-integration-evidence.md).
+
+
+SRC-0430: opt-in first nonzero PACKET mode uses CSPMOT01/raw fields and existing const observer/backend. Default loss semantics and normal binary preserved. [Evidence](../../docs/development/pc-first-motion-evidence.md).

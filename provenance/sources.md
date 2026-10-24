@@ -4308,3 +4308,12 @@ or historical evidence; no worker transfer of this document.
 ## SRC-0428 - Verified original native loss-recovery trial
 
 2026-10-23, compiledb3cb3fe/ROM673a2cca/nativeCI40042117791. Seal/source hashes/twins/12 corruption controls/three veneers and resource budgets verified. Actual paused own trace records foreground recovery, two baselines/two losses and fault0; zero samples/presses, pointer/drag unqualified. Same-cold-run one-pixel case unconfirmed, no RAM re-read. Owned trial closed,55 PNG/two GIF, no release. [Receipt](../docs/development/mac-first-loss-evidence.json).
+
+
+## SRC-0429 - Completed source CI result
+
+2026-10-24 read-only result for original runtimeb3cb3fe, CI40042117791: both native and Windows jobs pass. This settles the prior pending CI entry, not mouse/drag qualification. [Receipt](../docs/development/pc-first-motion-evidence.json).
+
+## SRC-0430 - Original bounded first-motion worker artifact and verification
+
+2026-10-24, one Copilot Sonnet5.5 low original-public draft,41.16s/one packet view/no worker execution or writes. Lead adopts code/tests with numeric-mode/test-harness controls and explicit build/package integration;48 local checks/three profiles/three compiled defects/eight invalid-mode controls pass. Normal native executable is byte-identical. Diagnostic native trial pending. [Receipt](../docs/development/pc-first-motion-evidence.json).
