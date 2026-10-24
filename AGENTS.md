@@ -1,5 +1,7 @@
 # ClasSICK 0.97 working instructions
 
+2026-10-24,SRC-0436/0437:automatic idle diagnostic reaches own PC004002DC/IPL7 after500 services,baseline1/loss0/delivery0/fault0 before deliberate GUI input. Normal ROM byte-identical;probe adds16B ROM/zero RAM,13 native controls/three IRQ veneers/five refusals pass.63PNG/twoGIF,own trial closed/preserved. Native source CI passes,Windows pending;Mac motion/PC GUI/release gates remain,286 unchanged. [Evidence](docs/development/mac-idle-probe-evidence.md).
+
 2026-10-24,SRC-0434/0435:Mac audit finds no supported code fix. Reused verified
 ROM accepts1press/2records/fault0,pointer fixed;losses1->3,pre-gesture control
 not clean idle. Normalized pixels match;62PNG/twoGIF. Own process/host preference

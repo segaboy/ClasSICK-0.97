@@ -1455,6 +1455,28 @@
         "One accepted press,no accepted displacement or GUI drag/release qualification.",
         "UI-driven pre-gesture pause is not a clean idle observation."
       ]
+    },
+    {
+      "id": "2026-10-24-mac-idle-checkpoint",
+      "path": "docs/evidence/screenshots/2026-10-24/mac-idle-checkpoint.png",
+      "sha256": "e104371c343ce10d770b9c60317da07362bc457c9140f7100feb2acd1018f087",
+      "bytes": 53539,
+      "width": 512,
+      "height": 342,
+      "captured_on": "2026-10-24",
+      "target": "native-mac68000",
+      "caption": "Native Mac automatic idle checkpoint:500 services,one baseline,zero losses or faults;input motion remains unqualified.",
+      "alt": "Native Mac automatic idle checkpoint:500 services,one baseline,zero losses or faults;input motion remains unqualified.",
+      "source_revision": "6892de0f43b4409e5b0fd9160981d8e7c23d8938",
+      "compiled_source_revision": "6892de0f43b4409e5b0fd9160981d8e7c23d8938",
+      "evidence": "docs/development/mac-idle-probe-evidence.md",
+      "license": "GPL-3.0-or-later",
+      "rights": "Original ClasSICK framebuffer only;no desktop,emulator chrome,credentials or third-party pixels.",
+      "input": "synthetic",
+      "limitations": [
+        "Automatically frozen diagnostic,not live dragging",
+        "No motion or release qualification"
+      ]
     }
   ]
 }

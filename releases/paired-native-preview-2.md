@@ -1,5 +1,7 @@
 # Paired native preview 2 - first interactive window
 
+2026-10-24,SRC-0436/0437:automatic idle diagnostic reaches own PC004002DC/IPL7 after500 services,baseline1/loss0/delivery0/fault0 before deliberate GUI input. Normal ROM byte-identical;probe adds16B ROM/zero RAM,13 native controls/three IRQ veneers/five refusals pass.63PNG/twoGIF,own trial closed/preserved. Native source CI passes,Windows pending;Mac motion/PC GUI/release gates remain,286 unchanged. [Evidence](../docs/development/mac-idle-probe-evidence.md).
+
 2026-10-24,SRC-0434/0435:unchanged Mac ROM accepts one explicit button press/two records,fault0,but pointer fixed. UI-driven control observation is not clean idle;no runtime fix justified. Both prior source CI jobs pass,release gates unchanged. [Audit](../docs/development/mac-motion-audit-evidence.md).
 
 2026-10-24,SRC-0433: follow-up packet3 repeats255/-255/right-button2 after reverse automated gesture and recapture. Stop unchanged SKY trials;PC GUI left-drag and Mac motion remain open. Normal binary unchanged, no release freeze. [Current evidence](../docs/development/pc-following-motion-evidence.md).

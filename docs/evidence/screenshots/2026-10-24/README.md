@@ -25,3 +25,8 @@ Following-packet trial (SRC-0433),same product-pixel rights:
 - [Mac unchanged-ROM button1;motion remains unqualified.](mac-motion-audit-button.png)
 
 [Actual RAM comparison and limits](../../../development/mac-motion-audit-evidence.md).
+
+
+- [Mac automatic idle checkpoint:500 services,zero losses/faults.](mac-idle-checkpoint.png)
+
+[Actual guarded RAM result and limits](../../../development/mac-idle-probe-evidence.md).

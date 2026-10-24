@@ -21,3 +21,6 @@ SRC-0427:6295 checks/32 phase cases, three local profiles; persistent-request sc
 
 
 SRC-0434/0435: no supported runtime defect or code change. One reused verified ROM accepts one press/two records,fault0,pointer unchanged;pre-gesture control is not clean idle. Exact normalized pixel-state check passes;prior native audits reused,not rerun. [Actual audit and limits](../../docs/development/mac-motion-audit-evidence.md).
+
+
+2026-10-24,SRC-0436/0437:optional automatic idle checkpoint only;default ROM byte-identical,no new RAM or sample policy. Probe native twins/13 corruption controls/three veneers/five refusals pass. Guarded own PC/IPL7 then500 services/baseline1/loss0/delivery0/fault0;no motion/release pass. [Receipt](../../docs/development/mac-idle-probe-evidence.json).

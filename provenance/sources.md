@@ -4379,3 +4379,12 @@ losses1->3. UI-driven pause contaminates clean idle/one-pixel attribution.
 Two guarded own-RAM snapshots retained;all normalized framebuffer pixels match
 expected button state. Process closed,host preference preserved,original ROM
 unchanged. No motion/drag/release or physical claim. [Evidence](../docs/development/mac-motion-audit-evidence.md).
+
+
+## SRC-0437 - Original automatic idle checkpoint verification
+
+2026-10-24,native compile/identity/control checks and one authorized isolated
+original-ROM trial. Own PC004002DC/SR2710 guards500 services,one baseline,
+zero losses/deliveries/presses/faults before deliberate GUI input. Unmodified
+512x342 original framebuffer indexed. Closed owned process,ROM/host preference
+preserved. No hardware/historical/motion/release claim. [Evidence](../docs/development/mac-idle-probe-evidence.md).

@@ -428,3 +428,6 @@ balances unavailable. This is not evidence of quota savings. [Receipt](boot-inpu
 
 
 2026-10-24 Mac audit: one Copilot Sonnet5.5 low primary,37013B frozen public packet/32.95s/one read/zero writes,commands,tests. No supported code defect;lead rejects stronger physical/latch/host-cause claims and drops an already-existing optimization. Reuse unchanged native artifacts;Codex performs one bounded GUI/RAM comparison and pixel check. No routine fan-out/requalification/new native rebuild. One reported premium request;remaining all-four balances unavailable. [Receipt](mac-motion-audit-evidence.json).
+
+
+2026-10-24 Mac idle diagnostic:one Copilot Sonnet5.5 low primary returns12 usable replacements/three files in32.75s,32603 frozen-public bytes/one read/zero writes,commands,tests. Lead adopts and supplies native/control/CI verification and one scoped desktop trial. No second worker/requalification/fan-out;one reported premium request,all-four balances unavailable,no measured Codex saving. [Evidence](mac-idle-probe-evidence.json).
