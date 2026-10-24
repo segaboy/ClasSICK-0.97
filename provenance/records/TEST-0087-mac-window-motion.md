@@ -18,3 +18,6 @@ SRC-0424:5750 checks/32 phase cases, three local profiles and four compiled faul
 
 
 SRC-0427:6295 checks/32 phase cases, three local profiles; persistent-request scheduler and baseline-boundary oracle. Four actually compiled broken controls reject master-left-on, no-rearm, unstable rearm and externally originated loss left unmasked. Native trial separate. [Receipt](../../docs/development/mac-first-loss-evidence.md).
+
+
+SRC-0434/0435: no supported runtime defect or code change. One reused verified ROM accepts one press/two records,fault0,pointer unchanged;pre-gesture control is not clean idle. Exact normalized pixel-state check passes;prior native audits reused,not rerun. [Actual audit and limits](../../docs/development/mac-motion-audit-evidence.md).

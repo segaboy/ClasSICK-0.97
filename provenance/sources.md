@@ -4350,3 +4350,23 @@ sub-action is not isolated;no guest bug or general host-cause conclusion.
 Normal binary unchanged,three frames match expected pixels,VM/media/inventory
 preserved. Stop repeating the same SKY route;GUI drag/Mac motion/release gates
 remain open. [Actual evidence](../docs/development/pc-following-motion-evidence.md).
+
+
+## SRC-0434 - Original Mac controller audit and version-limited interface review
+
+2026-10-24,one Copilot original-public audit32.95s/37013B/one read/no writes,
+commands/tests. No supported defect/counterexample;lead dispositions distinguish
+sampled changes from physical causes and latch hypotheses. RR0 selector skip
+already exists,no optimization edit. Current publisher input guide reviewed
+as interface prose only;installed1.5 menus do not establish all newer controls.
+No tool source/manual implementation/sample inspected. CI40098551352 both jobs
+now pass. [Review](../docs/development/mac-motion-audit-evidence.md).
+
+## SRC-0435 - Original unchanged-ROM explicit-button comparison
+
+2026-10-24,one verified isolated b3cb3fe ROM boot,pre-gesture control plus
+explicit-button/one-pixel attempt. Press1/two records/fault0 but pointer fixed;
+losses1->3. UI-driven pause contaminates clean idle/one-pixel attribution.
+Two guarded own-RAM snapshots retained;all normalized framebuffer pixels match
+expected button state. Process closed,host preference preserved,original ROM
+unchanged. No motion/drag/release or physical claim. [Evidence](../docs/development/mac-motion-audit-evidence.md).

@@ -1433,6 +1433,28 @@
         "Diagnostic motion packet;no successful GUI left-drag or release qualification.",
         "Recapture precedes reverse gesture;packet source sub-action not uniquely isolated."
       ]
+    },
+    {
+      "id": "2026-10-24-mac-motion-audit-button",
+      "path": "docs/evidence/screenshots/2026-10-24/mac-motion-audit-button.png",
+      "sha256": "cd5add487ce7d8fd2065bb10c3c23e06cbe54d7cba188b92a09080a71438438f",
+      "bytes": 74339,
+      "width": 512,
+      "height": 342,
+      "captured_on": "2026-10-24",
+      "target": "native-mac68000",
+      "caption": "Unchanged native Mac ROM accepts one explicit button press,pattern1;pointer256,171 remains fixed and motion is unqualified.",
+      "alt": "Unchanged native Mac ROM accepts one explicit button press,pattern1;pointer256,171 remains fixed and motion is unqualified.",
+      "source_revision": "b3cb3fea29f510129b2c74f77ad5cd546d9fa119",
+      "compiled_source_revision": "b3cb3fea29f510129b2c74f77ad5cd546d9fa119",
+      "evidence": "docs/development/mac-motion-audit-evidence.md",
+      "license": "GPL-3.0-or-later",
+      "rights": "Original ClasSICK framebuffer only; no desktop, emulator chrome, credentials or third-party pixels.",
+      "input": "synthetic",
+      "limitations": [
+        "One accepted press,no accepted displacement or GUI drag/release qualification.",
+        "UI-driven pre-gesture pause is not a clean idle observation."
+      ]
     }
   ]
 }

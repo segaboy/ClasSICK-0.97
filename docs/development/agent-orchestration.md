@@ -425,3 +425,6 @@ balances unavailable. This is not evidence of quota savings. [Receipt](boot-inpu
 
 
 2026-10-24 following-packet diagnostic: one Copilot Sonnet5.5 low primary,19530B frozen public packet/55.23s/one read/no writes,commands or tests. Adopt12 exact replacements in6files; lead verifies201 checks/three profiles/three defects/seven refusals, native normal-image equality. No second worker, renewed qualification or code recreation. One reported premium request;all-four remaining balances unavailable. [Receipt](pc-following-motion-evidence.json).
+
+
+2026-10-24 Mac audit: one Copilot Sonnet5.5 low primary,37013B frozen public packet/32.95s/one read/zero writes,commands,tests. No supported code defect;lead rejects stronger physical/latch/host-cause claims and drops an already-existing optimization. Reuse unchanged native artifacts;Codex performs one bounded GUI/RAM comparison and pixel check. No routine fan-out/requalification/new native rebuild. One reported premium request;remaining all-four balances unavailable. [Receipt](mac-motion-audit-evidence.json).

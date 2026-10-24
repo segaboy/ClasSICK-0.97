@@ -1,0 +1,361 @@
+{
+  "date": "2026-10-24",
+  "baseline": "5a9a0e0",
+  "scope": "Original Mac controller audit and one unchanged-ROM pre-gesture/explicit-button comparison",
+  "worker": {
+    "name": "Copilot Sonnet5.5 low",
+    "execution": {
+      "round": "primary",
+      "worker": "copilot",
+      "exit_code": 0,
+      "outer_timeout": false,
+      "elapsed_seconds": 32.95,
+      "input_bytes": 37013,
+      "input_sha256": "271d8a18610b8e15b8158ded08924d259759038ef915d5ebcb97a1a83fa0ca5d",
+      "stderr_bytes": 0
+    },
+    "reads": 1,
+    "writes": 0,
+    "commands": 0,
+    "tests_executed": [],
+    "reported_premium_requests": 1,
+    "counterexample": null,
+    "findings": [
+      {
+        "id": "F1",
+        "kind": "contract limitation",
+        "evidence": "First loss is UNSTABLE, entry READY, RR3=9 (A and B external pending), previous=01000000 (phase valid, raw A=0, raw B=0, button up). Snapshots decode as: s1 PB=AF, A=44, B=44. s2 PB=9F, A=44, B=44. s3 PB=AF, A=4C, B=4C. PB&0x38 is 0x28 in s1, 0x18 in s2 and 0x28 in s3. Both second-phase bits (PB4 and PB5) flipped between s1 and s2 and flipped back by s3. The DCD bit (0x08) is 0 in s1 and s2 and 1 in both channels at s3.",
+        "impact": "The service code matches its SPEC-0072 contract. s1 and s2 differ, so UNSTABLE is the correct decision. The pattern is a double-axis edge in flight during the sampling window, which includes the 16-NOP guards and the reset writes. It does not show a code defect.",
+        "proposed_action": "No code change. Keep the stability, pending and loss checks as they are."
+      },
+      {
+        "id": "F2",
+        "kind": "host-injection hypothesis",
+        "evidence": "The PC follow-up repeats dx255/dy-255/right-button2 bursts. A burst like that can produce back-to-back edges on both axes faster than a physical mouse. The loss shows exactly such a simultaneous A+B edge. services5918 and VBL5916 means a service ran at almost every VBL, with SCC2.",
+        "impact": "The cause may be injection rate rather than the Mac code. The trace cannot separate host injection from a latch or ordering effect.",
+        "proposed_action": "Do not repeat blind GUI bursts. Use the observation below."
+      },
+      {
+        "id": "F3",
+        "kind": "unverified hardware question",
+        "evidence": "RR3 shows both A and B pending at service entry. RR0 DCD is still 0 in s1 and s2 and equals the remembered raw value 0. DCD reads 1 only at s3, after the reset-external and highest-IUS writes. The pending latch is therefore visible before the live DCD change. Per the packet, the latch is not an event queue and its reset behavior is unproven.",
+        "impact": "A latch that is set while live RR0 equals the remembered phase could be a hidden even edge (the edge went and came back, or arrived late), a stale latch, or a delayed RR0 update. The packet gives no basis to choose between these.",
+        "proposed_action": "Do not change the acknowledge algorithm or emulate the chip. Gather the observation below."
+      },
+      {
+        "id": "F4",
+        "kind": "no supported code defect",
+        "evidence": "Ordering is RR3, then s1, s2, ack, s3. This matches the SPEC. The scc_read path skips the selector for RR0, so the pointer returns to 0 after each complete access. Loss quiesce and baseline rearm are implemented. A hard-fault path would show fault non-zero, but fault is 0.",
+        "impact": "A counterexample would have to be invented from speculation, so none is provided.",
+        "proposed_action": "None."
+      }
+    ],
+    "lead_dispositions": [
+      {
+        "id": "F1",
+        "disposition": "adopt with changes",
+        "decision": "Sampled phase bits demonstrably change;strict UNSTABLE is correct. Do not infer a particular physical double-axis event."
+      },
+      {
+        "id": "F2",
+        "disposition": "defer",
+        "decision": "Host injection remains a hypothesis;physical edge rate and a shared Mac/PC cause are not established."
+      },
+      {
+        "id": "F3",
+        "disposition": "defer",
+        "decision": "Sequential reads around acknowledge do not establish which DCD view was live or a particular latch-reset algorithm."
+      },
+      {
+        "id": "F4",
+        "disposition": "adopt with changes",
+        "decision": "No supported defect/counterexample. RR0 selector is already skipped. Fault0 is this observation,not proof of all hard-fault paths."
+      },
+      {
+        "id": "next_observation",
+        "disposition": "adopt with changes",
+        "decision": "One unchanged-ROM comparison,not two cold runs. A toolbar pause can generate input,so label pre-gesture control,not clean idle. Success would not alone prove injection-rate causality. Existing test scope authorizes this run;no new approval requested."
+      }
+    ]
+  },
+  "lead_correction": "Proposed redundant RR0 selector optimization already exists;no code change made.",
+  "publisher_interface_review": {
+    "url": "https://docs.snowemu.com/manual/input",
+    "reviewed_on": "2026-10-24",
+    "scope": "Public user interface only;no emulator source or implementation inspected",
+    "version_limit": "Current online guide describes capture/release and speed controls. Installed1.5.0-317c188 stopped Input submenu shows only relative-fullscreen and alternate Cmd;do not assume those newer controls exist in this build.",
+    "actual_mode": "Relative hardware emulation verified in installed UI;absolute memory-patching mode not used"
+  },
+  "settings_checks": {
+    "original_primary_flag": "1",
+    "changed": false,
+    "restored_or_preserved": true,
+    "limitation": "Settings and Control Panel launch APIs exposed no controllable window;stopped those attempts.",
+    "help_check": "Snow --help produced0 output bytes,no lingering Snow process;no CLI capability inferred"
+  },
+  "trial": {
+    "verification": {
+      "source_revision": "b3cb3fea29f510129b2c74f77ad5cd546d9fa119",
+      "SHA256": "673a2cca57d1ec9ffd842f4c858fa4aafbcb042ec6f86445ae5717d4816c4965",
+      "all_current_source_hashes_match": true,
+      "archived_native_proofs_reused": true,
+      "seal_verified_now": true,
+      "fresh_isolated_profile": true,
+      "normal_speed": true,
+      "RelativeHw": true,
+      "new_runtime_code": false,
+      "new_compiler_build": false,
+      "known_trace_address": "00000B70",
+      "known_trace_bytes": 128,
+      "known_diagnostic_address": "00000BF0",
+      "known_diagnostic_bytes": 28,
+      "proposed_case": "Idle then explicit-button one-pixel coordinate click;no fixed-button drag;not full motion/drag qualification"
+    },
+    "before": {
+      "raw_rows": [
+        {
+          "address": "00000B70",
+          "hex": "4D575031000000020000008000000001"
+        },
+        {
+          "address": "00000B80",
+          "hex": "000011F90000000100000000000011FA"
+        },
+        {
+          "address": "00000B90",
+          "hex": "00000001000000010000000000000000"
+        },
+        {
+          "address": "00000BA0",
+          "hex": "0000000000000100000000AB00000050"
+        },
+        {
+          "address": "00000BB0",
+          "hex": "00000046000000000000000100000005"
+        },
+        {
+          "address": "00000BC0",
+          "hex": "00000000000000000000000000000000"
+        },
+        {
+          "address": "00000BD0",
+          "hex": "00000000000000020000000900AF4C4C"
+        },
+        {
+          "address": "00000BE0",
+          "hex": "009F4444009F4C4C0100000000000003"
+        },
+        {
+          "address": "00000BF0",
+          "hex": "4353303900000010000011F900000000"
+        },
+        {
+          "address": "00000C00",
+          "hex": "00000001609252530000000000000000"
+        }
+      ],
+      "trace": {
+        "tag": 1297567793,
+        "version": 2,
+        "bytes": 128,
+        "source_irq": 1,
+        "vbl": 4601,
+        "scc": 1,
+        "combined": 0,
+        "services": 4602,
+        "baselines": 1,
+        "losses": 1,
+        "queued": 0,
+        "peak": 0,
+        "deliveries": 0,
+        "pointer_x": 256,
+        "pointer_y": 171,
+        "window_x": 80,
+        "window_y": 70,
+        "pattern": 0,
+        "phase": 1,
+        "motion_stage": 5,
+        "raw_a": 0,
+        "raw_b": 0,
+        "buttons": 0,
+        "motion_cause": 0,
+        "cause": 0,
+        "loss_reason": 2,
+        "loss_rr3": 9,
+        "loss_s1": 11488332,
+        "loss_s2": 10437700,
+        "loss_s3": 10439756,
+        "loss_previous": 16777216,
+        "loss_phase": 3
+      },
+      "diagnostic": {
+        "magic": 1129525305,
+        "stage": 16,
+        "ticks": 4601,
+        "presses": 0,
+        "traps": 1,
+        "image_crc": 1620202067,
+        "fault": 0
+      }
+    },
+    "after": {
+      "raw_rows": [
+        {
+          "address": "00000B70",
+          "hex": "4D575031000000020000008000000001"
+        },
+        {
+          "address": "00000B80",
+          "hex": "00004F09000000030000000000004F0C"
+        },
+        {
+          "address": "00000B90",
+          "hex": "00000003000000030000000000000001"
+        },
+        {
+          "address": "00000BA0",
+          "hex": "0000000200000100000000AB00000050"
+        },
+        {
+          "address": "00000BB0",
+          "hex": "00000046000000010000000100000005"
+        },
+        {
+          "address": "00000BC0",
+          "hex": "00000000000000000000000000000000"
+        },
+        {
+          "address": "00000BD0",
+          "hex": "00000000000000020000000900AF4C4C"
+        },
+        {
+          "address": "00000BE0",
+          "hex": "009F4444009F4C4C0100000000000003"
+        },
+        {
+          "address": "00000BF0",
+          "hex": "435330390000001000004F0900000001"
+        },
+        {
+          "address": "00000C00",
+          "hex": "00000001609252530000000000000000"
+        }
+      ],
+      "trace": {
+        "tag": 1297567793,
+        "version": 2,
+        "bytes": 128,
+        "source_irq": 1,
+        "vbl": 20233,
+        "scc": 3,
+        "combined": 0,
+        "services": 20236,
+        "baselines": 3,
+        "losses": 3,
+        "queued": 0,
+        "peak": 1,
+        "deliveries": 2,
+        "pointer_x": 256,
+        "pointer_y": 171,
+        "window_x": 80,
+        "window_y": 70,
+        "pattern": 1,
+        "phase": 1,
+        "motion_stage": 5,
+        "raw_a": 0,
+        "raw_b": 0,
+        "buttons": 0,
+        "motion_cause": 0,
+        "cause": 0,
+        "loss_reason": 2,
+        "loss_rr3": 9,
+        "loss_s1": 11488332,
+        "loss_s2": 10437700,
+        "loss_s3": 10439756,
+        "loss_previous": 16777216,
+        "loss_phase": 3
+      },
+      "diagnostic": {
+        "magic": 1129525305,
+        "stage": 16,
+        "ticks": 20233,
+        "presses": 1,
+        "traps": 1,
+        "image_crc": 1620202067,
+        "fault": 0
+      }
+    },
+    "closed": {
+      "closed_utc": "2026-10-24T14:22:12.6398215Z",
+      "pid": 77668,
+      "closed": true,
+      "single_cold_start": true,
+      "host_primary_button_preserved": true,
+      "host_primary_flag": "1",
+      "new_runtime_code": false,
+      "result": "Explicit button accepted1, two deliveries; no accepted displacement; no CPU fault. Pre-gesture observation includes pause-control input and is not clean idle."
+    },
+    "sequence": [
+      "One cold boot,own ROM only,fresh isolated profiles,normal speed,RelativeHw",
+      "Activate own window,pause via observed toolbar,inspect original RAM;pre-gesture loss1 already present",
+      "Verify actual mouse mode and stopped Input menu;no mode/preference changed",
+      "Resume,wait1.2s,explicit right-selector click at501,445,wait1.2s,click502,445,wait1.2s",
+      "Wait12s with no commanded input,then pause via toolbar and read original RAM"
+    ],
+    "limits": [
+      "Both observations include UI interactions;not a clean idle experiment or isolated one-pixel hardware stimulus.",
+      "The second click did not produce a second accepted press;single press/two records observed.",
+      "Losses1->3 and baseline1->3 cannot be uniquely assigned to guest gestures versus pause/menu/cursor positioning.",
+      "Foreground trace fields and direct IRQ fields have different publication points;not latency/performance measurement."
+    ]
+  },
+  "pixel_check": {
+    "logical_size": [
+      512,
+      342
+    ],
+    "levels": [
+      [
+        34,
+        34,
+        34
+      ],
+      [
+        238,
+        238,
+        238
+      ]
+    ],
+    "different_bbox": null,
+    "all175104_pixels_match": true,
+    "interpretation": "same-core expected counter1/pattern1/pointer256,171;no independent renderer or motion proof",
+    "sha256": "cd5add487ce7d8fd2065bb10c3c23e06cbe54d7cba188b92a09080a71438438f",
+    "bytes": 74339,
+    "helper_sha256": "3cd784f2c140eed1785f238cc8dd9d87487b1a1212640055ea4d4e7ef0df0008"
+  },
+  "checks_actually_executed": [
+    "Archived ROM SHA/seal/current source input hashes verified;prior native twins/12 controls/veneer audits reused,not rerun",
+    "Two guarded original RAM snapshots decoded",
+    "Pure-RAM expected button-state helper built/run and all175104 normalized screenshot pixels matched",
+    "Initial helper compile refused misleading indentation;braces fixed before successful build/run;no production source changed"
+  ],
+  "completed_prior_CI": {
+    "source": "989f4535ad1712e4ea66016118a68c95ee171bb4",
+    "run": 40098551352,
+    "native": "success",
+    "Windows": "success"
+  },
+  "runtime_changed": false,
+  "new_native_build": false,
+  "release_ready": false,
+  "motion_passed": false,
+  "GUI_drag_passed": false,
+  "pc286": "Prior model/toolchain evidence retained;no new286 backend/target run",
+  "next": "Observation-only automatic idle checkpoint at a fixed service threshold,before any mouse-driven pause;contract/memory/native verification required. This record implements no checkpoint.",
+  "remaining_balances": {
+    "Copilot": "unavailable",
+    "Claude": "unavailable",
+    "Grok": "unavailable",
+    "Argon": "unavailable"
+  }
+}

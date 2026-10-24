@@ -134,3 +134,6 @@ overflow policy. Native sizes/stack and actual recovery must reverify. This
 changes loss interrupt gating deliberately; the prior observation-only slice
 remains separately identified. Compact samples are passed by pointer, avoiding
 the observed odd-address native aggregate copy.
+
+
+2026-10-24,SRC-0434/0435 audit adds no behavior: RR0 selector skip already exists,strict sampling/loss checks retained. Reused-ROM explicit button comparison confirms one press/two records,zero accepted displacement;UI pause can contaminate an idle observation. An automatic idle checkpoint is a future proposed slice,not implemented here. [Audit](../development/mac-motion-audit-evidence.md).

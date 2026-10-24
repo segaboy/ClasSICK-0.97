@@ -1,5 +1,11 @@
 # ClasSICK 0.97 working instructions
 
+2026-10-24,SRC-0434/0435:Mac audit finds no supported code fix. Reused verified
+ROM accepts1press/2records/fault0,pointer fixed;losses1->3,pre-gesture control
+not clean idle. Normalized pixels match;62PNG/twoGIF. Own process/host preference
+preserved;full source CI40098551352 passes. Runtime unchanged,Mac motion/PC GUI
+release gates remain;286 unchanged. [Audit](docs/development/mac-motion-audit-evidence.md).
+
 2026-10-24,SRC-0433: later PC packet3 again dx255/dy-255/right button2,
 not a reliable small relative left-drag route. Stop unchanged SKY drag retries.
 Normal binary unchanged;201checks/three profiles/native audits pass.61PNG/twoGIF,

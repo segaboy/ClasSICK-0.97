@@ -22,3 +22,6 @@ SRC-0424: bounded first-loss observation adopted from Copilot with lead hard-fau
 
 
 SRC-0426/0427: pointer-only snapshots native-boot without alignment fault. Producer identifies unstable sampling; original loss master-gating permits foreground recovery until stable fresh baseline. Local verified, new target pending. [Receipt](../../docs/development/mac-first-loss-evidence.md).
+
+
+SRC-0434/0435: no supported runtime defect or code change. One reused verified ROM accepts one press/two records,fault0,pointer unchanged;pre-gesture control is not clean idle. Exact normalized pixel-state check passes;prior native audits reused,not rerun. [Actual audit and limits](../../docs/development/mac-motion-audit-evidence.md).

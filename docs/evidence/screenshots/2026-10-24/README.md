@@ -20,3 +20,8 @@ Following-packet trial (SRC-0433),same product-pixel rights:
 - [Later packet3 repeats255/-255/right-button2;window intact,no GUI drag pass.](pc-following-motion-stopped.png)
 
 [Actual following-packet evidence and limits](../../../development/pc-following-motion-evidence.md).
+
+
+- [Mac unchanged-ROM button1;motion remains unqualified.](mac-motion-audit-button.png)
+
+[Actual RAM comparison and limits](../../../development/mac-motion-audit-evidence.md).

@@ -1,5 +1,7 @@
 # Paired native preview 2 - first interactive window
 
+2026-10-24,SRC-0434/0435:unchanged Mac ROM accepts one explicit button press/two records,fault0,but pointer fixed. UI-driven control observation is not clean idle;no runtime fix justified. Both prior source CI jobs pass,release gates unchanged. [Audit](../docs/development/mac-motion-audit-evidence.md).
+
 2026-10-24,SRC-0433: follow-up packet3 repeats255/-255/right-button2 after reverse automated gesture and recapture. Stop unchanged SKY trials;PC GUI left-drag and Mac motion remain open. Normal binary unchanged, no release freeze. [Current evidence](../docs/development/pc-following-motion-evidence.md).
 
 2026-10-24,SRC-0431: native PC diagnostic observes an automated one-pixel gesture as dx255/dy-255/right button2; clipping correct, GUI drag remains unqualified. Pixel replay classifies prior4x7 change as expected cursor restoration; no window damage found. Mac motion remains open, no release freeze. [Current evidence](../docs/development/pc-first-motion-evidence.md). Older dated observations below retain their original status.
