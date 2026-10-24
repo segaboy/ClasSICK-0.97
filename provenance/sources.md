@@ -4303,3 +4303,8 @@ or historical evidence; no worker transfer of this document.
 ## SRC-0427 - Original bounded SCC loss-quiescence artifact
 
 2026-10-23, one67.16s Copilot Sonnet5.5 low original-public proposal, no worker execution/writes. Lead adopts with two test-count corrections;6295 checks/32 phase cases/three local profiles/four compiled faulty controls pass. Engineering interrupt-gating change; native/target pending. [Receipt](../docs/development/mac-first-loss-evidence.json).
+
+
+## SRC-0428 - Verified original native loss-recovery trial
+
+2026-10-23, compiledb3cb3fe/ROM673a2cca/nativeCI40042117791. Seal/source hashes/twins/12 corruption controls/three veneers and resource budgets verified. Actual paused own trace records foreground recovery, two baselines/two losses and fault0; zero samples/presses, pointer/drag unqualified. Same-cold-run one-pixel case unconfirmed, no RAM re-read. Owned trial closed,55 PNG/two GIF, no release. [Receipt](../docs/development/mac-first-loss-evidence.json).

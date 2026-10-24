@@ -79,3 +79,35 @@ expected IO counts for the deliberate added mask write.6295 actual checks/
 pass. New native build/trial pending; no claimed successful recovery or drag.
 Both worker calls report one premium request each; balances unavailable. No
 additional model review, source research, native-app work, release or wiki.
+
+
+## Final native recovery qualification
+
+SRC-0428. Compiledb3cb3fe, CI40042117791 native success; exact ROM SHA256
+673a2cca57d1ec9ffd842f4c858fa4aafbcb042ec6f86445ae5717d4816c4965.
+23096B ROM used,304B BSS/964B graph/4996B conservative stack bound (284B
+largest frame). Source inputs/seal/twins/12 controls/three veneers pass before
+one fresh original-only trial. No new external code or emulator source.
+
+Foreground recovery observed after unstable input: retained first loss copied, two baselines/two losses,5918 foreground-observed services,VBL5916/SCC2, fault0. Zero delivered samples/presses; pointer256,171 and window80,70 remain. Motion and drag are NOT qualified.
+
+Retained loss: UNSTABLE2,RR3=9,snapshots AF4444/9F4444/AF4C4C,
+previous01000000,entry READY3. Unlike the preceding candidate, foreground
+now copies this record and continues service after loss. This qualifies bounded
+recovery, not complete motion, physical timing or a passing release. Final
+product capture shows0000; earlier0001 captures retain their own source/results.
+Same cold run later resumes for one paced one-pixel stroke after2s settling;
+no confirmed guest movement and no additional RAM snapshot. Not a passing test.
+
+All owned Snow/VM sessions closed; exact host settings, media, prior VM states
+and24 originals/held brief/UART/old rows/assets/tags preserved.55 public PNGs/
+two unchanged GIFs. No new animation because there is no qualified drag.
+Remaining input blockers: Mac coherent motion under the available GUI injection
+path and PC captured Windows dragging. Do not replay blind bursts, relax loss
+checks, or substitute E2 device-API demonstrations for E3/E4. Next use a bounded
+input-path observation/counterexample that can distinguish injection pacing
+from a guest defect.286 completed model/toolchain status is retained.
+
+Full source Windows CI remains in progress at this record; native success is
+separate. Two Copilot primaries report one premium request each; all remaining
+provider balances unavailable. No claim of net Codex-quota savings.

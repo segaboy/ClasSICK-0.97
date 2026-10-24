@@ -1279,6 +1279,28 @@
         "No successful native GUI drag/release/human/physical/System1 qualification.",
         "Mac first-loss and PC Mouse Keys negative results retained; host settings restored."
       ]
+    },
+    {
+      "id": "2026-10-23-mac-window-loss-recovery",
+      "path": "docs/evidence/screenshots/2026-10-23/mac-window-loss-recovery.png",
+      "sha256": "e104371c343ce10d770b9c60317da07362bc457c9140f7100feb2acd1018f087",
+      "bytes": 53539,
+      "width": 512,
+      "height": 342,
+      "captured_on": "2026-10-23",
+      "target": "native-mac68000",
+      "caption": "Original native Mac loss-recovery candidate: foreground resumes after rejected input, fault0; counter0000 and pointer motion/drag remain unqualified.",
+      "alt": "Original native Mac loss-recovery candidate: foreground resumes after rejected input, fault0; counter0000 and pointer motion/drag remain unqualified.",
+      "source_revision": "b3cb3fea29f510129b2c74f77ad5cd546d9fa119",
+      "compiled_source_revision": "b3cb3fea29f510129b2c74f77ad5cd546d9fa119",
+      "evidence": "docs/development/mac-first-loss-evidence.md",
+      "license": "GPL-3.0-or-later",
+      "rights": "Original ClasSICK framebuffer only; no desktop, emulator chrome, credentials or third-party pixels.",
+      "input": "synthetic",
+      "limitations": [
+        "Recovery/CPU-fault check only; zero delivered input samples in final trial.",
+        "No successful native GUI drag, human, physical, System1 or release qualification."
+      ]
     }
   ]
 }

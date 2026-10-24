@@ -1,5 +1,7 @@
 # Paired native preview 2 - first interactive window
 
+2026-10-23 update: original Mac ABI/loss-recovery fixes native-verify and bounded recovery passes, but final pointer samples remain zero. PC GUI drag remains unqualified.6295 local checks/55 indexed PNGs; no candidate freeze or release. [Evidence](../docs/development/mac-first-loss-evidence.md).
+
 Current2026-10-23 follow-up: rebuilt Mac RR15 ROM boots to stage16/fault0,
 with live VBL/SCC but zero accepted samples/three loss cycles. PC GUI presses
 reach0002; captured dragging still fails and one snapshot pixel difference is

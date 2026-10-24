@@ -268,7 +268,7 @@
     ]
   },
   "loss_quiescence": {
-    "status": "locally verified; native compilation/trial pending",
+    "status": "native verified and bounded foreground recovery observed; full pointer/input not qualified",
     "policy": "Mask SCC master once after LOSS, retain VIA service; restore only after successfully queued stable fresh baseline",
     "unchanged": "Stability/pending/delta/button/overflow/first-loss rules",
     "worker": {
@@ -327,5 +327,98 @@
     },
     "local_profiles": "Two targeted CTests each: Clang Debug, GCC Release, Clang ASan-UBSan",
     "remaining_balance": "unavailable"
-  }
+  },
+  "final_recovery_trial": {
+    "native": {
+      "source_revision": "b3cb3fea29f510129b2c74f77ad5cd546d9fa119",
+      "CI_run": 40042117791,
+      "native_job": "success",
+      "SHA256": "673a2cca57d1ec9ffd842f4c858fa4aafbcb042ec6f86445ae5717d4816c4965",
+      "ROM_used": 23096,
+      "data_bss": 304,
+      "graph": 964,
+      "stack_bound": 4996,
+      "largest_frame": 284,
+      "symbols": {
+        "cs_mac_trace": 2928,
+        "cs_mac_diag": 3056
+      },
+      "source_hashes": true,
+      "twins": true,
+      "seal": true,
+      "controls": 12,
+      "exact_veneers": 3,
+      "booted": true
+    },
+    "result": "Foreground recovery observed after unstable input: retained first loss copied, two baselines/two losses,5918 foreground-observed services,VBL5916/SCC2, fault0. Zero delivered samples/presses; pointer256,171 and window80,70 remain. Motion and drag are NOT qualified.",
+    "paused_trace": {
+      "tag": 1297567793,
+      "version": 2,
+      "bytes": 128,
+      "source_irq": 1,
+      "vbl": 5916,
+      "scc": 2,
+      "combined": 0,
+      "services": 5918,
+      "baselines": 2,
+      "losses": 2,
+      "queued": 0,
+      "peak": 0,
+      "deliveries": 0,
+      "pointer_x": 256,
+      "pointer_y": 171,
+      "window_x": 80,
+      "window_y": 70,
+      "pattern": 0,
+      "phase": 1,
+      "motion_stage": 5
+    },
+    "retained_first_loss": {
+      "reason": 2,
+      "rr3": 9,
+      "snapshot1": 11486276,
+      "snapshot2": 10437700,
+      "snapshot3": 11488332,
+      "previous": 16777216,
+      "inbox_phase": 3
+    },
+    "diagnostic": {
+      "magic": 1129525305,
+      "stage": 16,
+      "ticks": 5916,
+      "presses": 0,
+      "traps": 1,
+      "image_crc": 1620202067,
+      "fault": 0
+    },
+    "recovery_observed": true,
+    "full_input_passed": false,
+    "GUI_drag_passed": false,
+    "paced_case": "Same cold run resumed; host pointer prepositioned,2s settle, one-pixel stroke. No confirmed visual guest movement; no additional RAM snapshot, not a passing case.",
+    "closed": {
+      "closed_utc": "2026-10-24T00:00:35.3065068Z",
+      "pid": 41700,
+      "single_cold_start": true,
+      "result": "Loss recovery advances foreground: retained loss copied, two baselines/two losses, no CPU fault. Pointer/drag unqualified. Later one-pixel case shows no confirmed movement, no additional RAM snapshot",
+      "closed": true
+    },
+    "limits": [
+      "One paused snapshot; foreground and IRQ fields have different publication points, not timing/latency measurements",
+      "Unsupported ResetHighestIUS warning remains; no emulator source or fallback",
+      "No physical/reference/System1/native-app/full128K/B2 qualification"
+    ]
+  },
+  "latest_runtime_source": "b3cb3fea29f510129b2c74f77ad5cd546d9fa119",
+  "latest_status": "Recovery/ABI fixes verified; Mac pointer and PC GUI drag remain release blockers",
+  "CI": {
+    "source_run": 40042117791,
+    "native": "success",
+    "Windows": "in_progress at this record",
+    "preceding_full_runs_passed": [
+      40039752635,
+      40038429513,
+      40036196626
+    ]
+  },
+  "all_owned_sessions_closed": true
 }

@@ -53,3 +53,5 @@ These show current failed/partial qualification, not a release or successful dra
 - [pc-window-mousekeys-initial](pc-window-mousekeys-initial.png)
 
 - [pc-window-mousekeys-negative](pc-window-mousekeys-negative.png)
+
+- [Mac loss recovery, still no pointer/drag qualification.](mac-window-loss-recovery.png)

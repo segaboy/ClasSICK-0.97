@@ -1,5 +1,12 @@
 # ClasSICK 0.97 working instructions
 
+2026-10-23,SRC-0428: nativeb3cb3fe loss-gating trial shows foreground recovery,
+two baselines/two losses, fault0, but zero samples/presses and fixed pointer.
+6295 checks/three local profiles/four compiled recovery controls pass; native
+CI40042117791 passes,Windows pending.55 PNG/two GIF; sessions/settings/media/
+originals preserved. Mac motion/PC GUI drag/release remain blocked.
+[Receipt](docs/development/mac-first-loss-evidence.md).
+
 2026-10-23,SRC-0426/0427: nativeefbc62f accepts click0001/fault0; actual
 producer loss is UNSTABLE, foreground copy stale while IRQs advance. Original
 SCC loss-quiescence/rebaseline rearm passes6295 local checks/three profiles/
