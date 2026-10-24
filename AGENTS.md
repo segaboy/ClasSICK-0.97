@@ -1,5 +1,11 @@
 # ClasSICK 0.97 working instructions
 
+2026-10-24,SRC-0433: later PC packet3 again dx255/dy-255/right button2,
+not a reliable small relative left-drag route. Stop unchanged SKY drag retries.
+Normal binary unchanged;201checks/three profiles/native audits pass.61PNG/twoGIF,
+VM/media/inventory preserved. Mac motion/PC GUI/release gates open;286 unchanged.
+[Current evidence](docs/development/pc-following-motion-evidence.md).
+
 2026-10-24,SRC-0432: optional motion-later diagnostic waits for total packet
 count>=2;201 checks/three profiles/three compiled defects/seven mode refusals
 pass, normal EFI unchanged. Committed-source native later-packet build/trial

@@ -4339,3 +4339,14 @@ mode refusals;normal native image unchanged. Supported drag API has endpoint
 coordinates,no button or relative-delta option;no implementation inspected.
 Committed-source later-packet native trial pending. No historical/emulator/
 release/physical/native-app gate changes. [Evidence](../docs/development/pc-following-motion-evidence.md).
+
+
+## SRC-0433 - Original native following-packet trial
+
+2026-10-24, source989f453, one verified isolated boot. First gesture does not
+reach later probe;resume/recapture/reverse gesture observes packet3 with same
+dx255/dy-255/right-button2,errors0. Own RIP/magic verified first. Exact host
+sub-action is not isolated;no guest bug or general host-cause conclusion.
+Normal binary unchanged,three frames match expected pixels,VM/media/inventory
+preserved. Stop repeating the same SKY route;GUI drag/Mac motion/release gates
+remain open. [Actual evidence](../docs/development/pc-following-motion-evidence.md).

@@ -95,7 +95,108 @@
     "twins": 4,
     "corruption_controls": 27
   },
-  "later_native": "pending committed-source build and isolated trial",
+  "later_native": {
+    "verification": {
+      "source_revision": "989f4535ad1712e4ea66016118a68c95ee171bb4",
+      "EFI_SHA256": "83a70fecfe07bcc4615fce9583a7d0bee39099eae3852bddd07ee44f1432864e",
+      "EFI_bytes": 184832,
+      "disk_SHA256": "83d28b9a6f6cfdf74fd9c17af4d36d14cf93b5d39f6f99436704024a7e693c54",
+      "source_input_hashes_verified": true,
+      "writer_twins": true,
+      "O0_O2_twins": 4,
+      "corruptions": 27,
+      "omitted_probe_objects": 2,
+      "spin_preferred_addresses": [
+        "1002D0A2",
+        "1002D0A4"
+      ],
+      "magic": "4353504D4F543031",
+      "profile": "motion-later",
+      "field_lifetime": "post-reset header/X;last rawY only",
+      "trial_name": "ClasSICK-097-following-motion-20261024-a",
+      "trial_started": false
+    },
+    "trial_uuid": "aad63fa9-fc8a-4d95-89bf-e155bb162346",
+    "initial_location": {
+      "utc": "2026-10-24T13:35:10.5253775Z",
+      "RIP": "0000000010007447",
+      "in_own_spin": false,
+      "magic_verified": false,
+      "mailbox_decoded": false
+    },
+    "after_first_gesture": {
+      "utc": "2026-10-24T13:35:46.7327930Z",
+      "RIP": "0000000010007447",
+      "in_own_spin": false,
+      "magic_verified": false,
+      "mailbox_decoded": false
+    },
+    "after_reverse_gesture": {
+      "utc": "2026-10-24T13:36:52.7063984Z",
+      "RIP": "000000001002D0A4",
+      "in_own_spin": true,
+      "magic_verified": true,
+      "mailbox_decoded": false,
+      "words": {
+        "r8": "4353504D4F543031",
+        "r9": "0000000300000000",
+        "r10": "0000000000000001",
+        "r11": "000000FFFFFFFF01",
+        "r12": "0000000200000000",
+        "r13": "000001FF00000155",
+        "r14": "0000005000000046",
+        "r15": "0000000000000000"
+      }
+    },
+    "decoded_after_own_RIP_and_magic_checks": {
+      "packets": 3,
+      "errors": 0,
+      "post_reset_header": 0,
+      "post_reset_x": 0,
+      "last_raw_y": 1,
+      "dx": 255,
+      "dy": -255,
+      "buttons": 2,
+      "down_and_suppress": 0,
+      "pointer": [
+        511,
+        341
+      ],
+      "window": [
+        80,
+        70
+      ],
+      "inputs_and_dragging": [
+        0,
+        0
+      ]
+    },
+    "sequence": [
+      "One cold boot,initial pause after43.3456813 host seconds;no own spin",
+      "Own window activated and refreshed;accessibility canvas click captures,confirmed by fresh state",
+      "SKY default drag513,447 to514,447;pause shows no later-motion spin,frame pointer already at511,341",
+      "Resume/recapture followed by reverse SKY drag513,447 to512,447;pause shows own spin andpacket3"
+    ],
+    "limits": [
+      "Recapture occurs before the reverse gesture;packet3 cannot uniquely identify which individual host sub-action generated it.",
+      "Initial occluded UI screenshot excluded from evidence;only own framebuffer PNGs retained publicly.",
+      "No new claim about physical input,decoder defect or a universal host cause. Right-button2 does not qualify left dragging."
+    ],
+    "completion": {
+      "utc": "2026-10-24T13:37:25.4186768Z",
+      "cold_starts": 1,
+      "state": "poweroff",
+      "unregistered": true,
+      "existing_vm_inventory_preserved": true,
+      "running_state_preserved": true,
+      "post_trial_raw_roundtrip_equal": true,
+      "artifacts_retained": true,
+      "semantic_session_stop_observed": false,
+      "termination": "external poweroff from paused state"
+    },
+    "semantic_STOPPED": false,
+    "normal_runtime_changed": false
+  },
   "release_ready": false,
   "remaining_balances": {
     "Copilot": "unavailable",
@@ -103,5 +204,36 @@
     "Grok": "unavailable",
     "Argon": "unavailable"
   },
-  "gates": "Mac motion/PC GUI left-drag unqualified;286 unchanged;no source/reference/physical/System1/native-app/full128K/B2/release change"
+  "gates": "Mac motion/PC GUI left-drag unqualified;286 unchanged;no source/reference/physical/System1/native-app/full128K/B2/release change",
+  "pixel_check": {
+    "kind": "reuse unchanged shared-core expected-state outputs from SRC-0431;not independent oracle",
+    "results": [
+      {
+        "image": "initial.png",
+        "sha256": "7bd4dc9c78b1729f5d88da5f57ee1813666714caf17fce88913d97cee4abc5a7",
+        "logical_pixels_matched": 175104,
+        "expected_state": "expected-initial.bin"
+      },
+      {
+        "image": "after-drag.png",
+        "sha256": "b70ec8c601318a20084e0cc180e82d07adddced435de03483bc05620a294b3d4",
+        "logical_pixels_matched": 175104,
+        "expected_state": "expected-after.bin"
+      },
+      {
+        "image": "after-second.png",
+        "sha256": "b70ec8c601318a20084e0cc180e82d07adddced435de03483bc05620a294b3d4",
+        "logical_pixels_matched": 175104,
+        "expected_state": "expected-after.bin"
+      }
+    ],
+    "helper_sha256": "8d0b15c247f7d30e0c9ff3c68d536107b05dc4dfcc32a936451b11df8d9915b5"
+  },
+  "CI": {
+    "source": "989f4535ad1712e4ea66016118a68c95ee171bb4",
+    "run": 40098551352,
+    "m68k-rom": "success",
+    "windows-bootstrap": "in_progress at this observation"
+  },
+  "conclusion": "The later observed packet repeats dx255/dy-255/right-button2. Initial-position-only explanation is insufficient for the full attempted sequence. This SKY captured-VM route remains unsuitable for reliable small relative left-drag qualification;stop repeating it unchanged. No guest-policy fix justified."
 }

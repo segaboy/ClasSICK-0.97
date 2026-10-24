@@ -1367,6 +1367,72 @@
         "Diagnostic first packet, no successful GUI left-drag or release qualification.",
         "Header/X parser fields reset before observer; no retained raw header/X claim."
       ]
+    },
+    {
+      "id": "2026-10-24-pc-following-motion-initial",
+      "path": "docs/evidence/screenshots/2026-10-24/pc-following-motion-initial.png",
+      "sha256": "7bd4dc9c78b1729f5d88da5f57ee1813666714caf17fce88913d97cee4abc5a7",
+      "bytes": 4850,
+      "width": 1024,
+      "height": 768,
+      "captured_on": "2026-10-24",
+      "target": "native-x86_64",
+      "caption": "Original following-packet diagnostic before input.",
+      "alt": "Original following-packet diagnostic before input.",
+      "source_revision": "989f4535ad1712e4ea66016118a68c95ee171bb4",
+      "compiled_source_revision": "989f4535ad1712e4ea66016118a68c95ee171bb4",
+      "evidence": "docs/development/pc-following-motion-evidence.md",
+      "license": "GPL-3.0-or-later",
+      "rights": "Original ClasSICK framebuffer only; no desktop, emulator chrome, credentials or third-party pixels.",
+      "input": "synthetic",
+      "limitations": [
+        "Diagnostic motion packet;no successful GUI left-drag or release qualification.",
+        "Recapture precedes reverse gesture;packet source sub-action not uniquely isolated."
+      ]
+    },
+    {
+      "id": "2026-10-24-pc-following-motion-first",
+      "path": "docs/evidence/screenshots/2026-10-24/pc-following-motion-first.png",
+      "sha256": "b70ec8c601318a20084e0cc180e82d07adddced435de03483bc05620a294b3d4",
+      "bytes": 4840,
+      "width": 1024,
+      "height": 768,
+      "captured_on": "2026-10-24",
+      "target": "native-x86_64",
+      "caption": "After first one-pixel gesture:cursor at corner,no later-packet spin.",
+      "alt": "After first one-pixel gesture:cursor at corner,no later-packet spin.",
+      "source_revision": "989f4535ad1712e4ea66016118a68c95ee171bb4",
+      "compiled_source_revision": "989f4535ad1712e4ea66016118a68c95ee171bb4",
+      "evidence": "docs/development/pc-following-motion-evidence.md",
+      "license": "GPL-3.0-or-later",
+      "rights": "Original ClasSICK framebuffer only; no desktop, emulator chrome, credentials or third-party pixels.",
+      "input": "synthetic",
+      "limitations": [
+        "Diagnostic motion packet;no successful GUI left-drag or release qualification.",
+        "Recapture precedes reverse gesture;packet source sub-action not uniquely isolated."
+      ]
+    },
+    {
+      "id": "2026-10-24-pc-following-motion-stopped",
+      "path": "docs/evidence/screenshots/2026-10-24/pc-following-motion-stopped.png",
+      "sha256": "b70ec8c601318a20084e0cc180e82d07adddced435de03483bc05620a294b3d4",
+      "bytes": 4840,
+      "width": 1024,
+      "height": 768,
+      "captured_on": "2026-10-24",
+      "target": "native-x86_64",
+      "caption": "Later packet3 repeats255/-255/right-button2;window intact,no GUI drag pass.",
+      "alt": "Later packet3 repeats255/-255/right-button2;window intact,no GUI drag pass.",
+      "source_revision": "989f4535ad1712e4ea66016118a68c95ee171bb4",
+      "compiled_source_revision": "989f4535ad1712e4ea66016118a68c95ee171bb4",
+      "evidence": "docs/development/pc-following-motion-evidence.md",
+      "license": "GPL-3.0-or-later",
+      "rights": "Original ClasSICK framebuffer only; no desktop, emulator chrome, credentials or third-party pixels.",
+      "input": "synthetic",
+      "limitations": [
+        "Diagnostic motion packet;no successful GUI left-drag or release qualification.",
+        "Recapture precedes reverse gesture;packet source sub-action not uniquely isolated."
+      ]
     }
   ]
 }

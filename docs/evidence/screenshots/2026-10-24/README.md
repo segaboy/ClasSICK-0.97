@@ -11,3 +11,12 @@ Only original native ClasSICK framebuffer pixels, GPL-3.0-or-later.
 [Actual packet, source identities and limits](../../../development/pc-first-motion-evidence.md).
 [PNG identities](../manifest.json). One diagnostic stop, no successful drag or
 release claim. VM closed; existing inventory/media preserved. No new GIF.
+
+
+Following-packet trial (SRC-0433),same product-pixel rights:
+
+- [Original following-packet diagnostic before input.](pc-following-motion-initial.png)
+- [After first one-pixel gesture:cursor at corner,no later-packet spin.](pc-following-motion-first.png)
+- [Later packet3 repeats255/-255/right-button2;window intact,no GUI drag pass.](pc-following-motion-stopped.png)
+
+[Actual following-packet evidence and limits](../../../development/pc-following-motion-evidence.md).
