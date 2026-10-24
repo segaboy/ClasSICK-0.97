@@ -1,5 +1,7 @@
 # Paired native preview 2 - first interactive window
 
+2026-10-24,SRC-0431: native PC diagnostic observes an automated one-pixel gesture as dx255/dy-255/right button2; clipping correct, GUI drag remains unqualified. Pixel replay classifies prior4x7 change as expected cursor restoration; no window damage found. Mac motion remains open, no release freeze. [Current evidence](../docs/development/pc-first-motion-evidence.md). Older dated observations below retain their original status.
+
 2026-10-23 update: original Mac ABI/loss-recovery fixes native-verify and bounded recovery passes, but final pointer samples remain zero. PC GUI drag remains unqualified.6295 local checks/55 indexed PNGs; no candidate freeze or release. [Evidence](../docs/development/mac-first-loss-evidence.md).
 
 Current2026-10-23 follow-up: rebuilt Mac RR15 ROM boots to stage16/fault0,

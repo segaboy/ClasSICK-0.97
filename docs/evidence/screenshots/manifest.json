@@ -1301,6 +1301,72 @@
         "Recovery/CPU-fault check only; zero delivered input samples in final trial.",
         "No successful native GUI drag, human, physical, System1 or release qualification."
       ]
+    },
+    {
+      "id": "2026-10-24-pc-first-motion-initial",
+      "path": "docs/evidence/screenshots/2026-10-24/pc-first-motion-initial.png",
+      "sha256": "7bd4dc9c78b1729f5d88da5f57ee1813666714caf17fce88913d97cee4abc5a7",
+      "bytes": 4850,
+      "width": 1024,
+      "height": 768,
+      "captured_on": "2026-10-24",
+      "target": "native-x86_64",
+      "caption": "Original PC motion diagnostic before input; count0000, window80,70.",
+      "alt": "Original PC motion diagnostic before input; count0000, window80,70.",
+      "source_revision": "999f5bb7af939b4d4288ba6d351c8300924519fb",
+      "compiled_source_revision": "999f5bb7af939b4d4288ba6d351c8300924519fb",
+      "evidence": "docs/development/pc-first-motion-evidence.md",
+      "license": "GPL-3.0-or-later",
+      "rights": "Original ClasSICK framebuffer only; no desktop, emulator chrome, credentials or third-party pixels.",
+      "input": "synthetic",
+      "limitations": [
+        "Diagnostic first packet, no successful GUI left-drag or release qualification.",
+        "Header/X parser fields reset before observer; no retained raw header/X claim."
+      ]
+    },
+    {
+      "id": "2026-10-24-pc-first-motion-capture",
+      "path": "docs/evidence/screenshots/2026-10-24/pc-first-motion-capture.png",
+      "sha256": "7bd4dc9c78b1729f5d88da5f57ee1813666714caf17fce88913d97cee4abc5a7",
+      "bytes": 4850,
+      "width": 1024,
+      "height": 768,
+      "captured_on": "2026-10-24",
+      "target": "native-x86_64",
+      "caption": "Original PC diagnostic after initial capture attempts; no nonzero movement packet yet.",
+      "alt": "Original PC diagnostic after initial capture attempts; no nonzero movement packet yet.",
+      "source_revision": "999f5bb7af939b4d4288ba6d351c8300924519fb",
+      "compiled_source_revision": "999f5bb7af939b4d4288ba6d351c8300924519fb",
+      "evidence": "docs/development/pc-first-motion-evidence.md",
+      "license": "GPL-3.0-or-later",
+      "rights": "Original ClasSICK framebuffer only; no desktop, emulator chrome, credentials or third-party pixels.",
+      "input": "synthetic",
+      "limitations": [
+        "Diagnostic first packet, no successful GUI left-drag or release qualification.",
+        "Header/X parser fields reset before observer; no retained raw header/X claim."
+      ]
+    },
+    {
+      "id": "2026-10-24-pc-first-motion-stopped",
+      "path": "docs/evidence/screenshots/2026-10-24/pc-first-motion-stopped.png",
+      "sha256": "b70ec8c601318a20084e0cc180e82d07adddced435de03483bc05620a294b3d4",
+      "bytes": 4840,
+      "width": 1024,
+      "height": 768,
+      "captured_on": "2026-10-24",
+      "target": "native-x86_64",
+      "caption": "First decoded motion stops the diagnostic: dx255/dy-255/right button2, cursor clipped to511,341; no drag.",
+      "alt": "First decoded motion stops the diagnostic: dx255/dy-255/right button2, cursor clipped to511,341; no drag.",
+      "source_revision": "999f5bb7af939b4d4288ba6d351c8300924519fb",
+      "compiled_source_revision": "999f5bb7af939b4d4288ba6d351c8300924519fb",
+      "evidence": "docs/development/pc-first-motion-evidence.md",
+      "license": "GPL-3.0-or-later",
+      "rights": "Original ClasSICK framebuffer only; no desktop, emulator chrome, credentials or third-party pixels.",
+      "input": "synthetic",
+      "limitations": [
+        "Diagnostic first packet, no successful GUI left-drag or release qualification.",
+        "Header/X parser fields reset before observer; no retained raw header/X claim."
+      ]
     }
   ]
 }

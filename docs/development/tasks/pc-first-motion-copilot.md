@@ -19,3 +19,14 @@ Motion-mode words loaded into r8..r15 by the unchanged backend:
 Raw bytes are the actual parser fields retained from the completed packet, not reconstructed from decoded deltas. No history/host-cause claim from one packet. Before native register interpretation Codex verifies exact own spin RIP AND selected-mode magic. Normal previews exclude probe modules entirely; normal image byte equality must be checked by Codex. The build flag/wiring/package metadata and native verification are Codex's small integration work, not your deliverable.
 
 Return original exact unique replacements for platform/pc/input-probe.h/.c and full new tests/pc-input-motion-probe.c. Tests should intercept the noreturn backend via setjmp/longjmp, never execute native loop, check no effects over the graph and sentinel trace/context on ignored paths, exact independently literal-encoded words for signed mixed-axis reports/negative positions/counter saturation/raw-byte masking/non-left buttons, X-only and Y-only triggers, and unchanged graph/context/trace on capture. Keep existing tests/pc-input-probe.c unchanged. No tests that only compare implementation-generated expectations. Keep <=240 changed code lines. JSON only (no fences): {replacements:[{path,old,new}],files:[{path,content}],handoff:{result,actionable_findings:[],tests_executed:[],blockers:[],decisions_needed:[]}}.
+
+
+## Lead disposition after actual trial (SRC-0431,2026-10-24)
+
+The original brief above is retained as sent. Its raw-header/X lifetime claim
+was wrong: ps2-mouse.c resets those fields before returning PACKET. Adopted
+code exposes cleared parser state plus last raw Y, not captured raw header/X.
+No native packet header/X reconstruction is claimed. Synthetic nonzero fields
+in tests establish packing only. Decoded deltas/buttons and post-dispatch
+positions remain useful. Corrected SPEC-0073 and actual evidence supersede the
+brief's field semantics; no code/image or input-policy change was needed.

@@ -54,15 +54,19 @@ No mutable history, extra IO, allocation or runtime input-policy change.
 | --- | --- | --- |
 | r8 | original4353504D4F543031 magic | whole64-bit magic |
 | r9 | bus packets | bus errors |
-| r10 | retained decoder header | (raw X&255)<<8 OR (raw Y&255) |
+| r10 | post-reset decoder header (0 after PACKET) | (post-reset X&255)<<8 OR (last raw Y&255) |
 | r11 | signed dx as uint32 | signed dy as uint32 |
 | r12 | report buttons | down OR (suppress<<1) |
 | r13 | pointer X as uint32 | pointer Y as uint32 |
 | r14 | window X as uint32 | window Y as uint32 |
 | r15 | input count | dragging |
 
-Raw Y is the completed poll's last byte; raw fields are retained parser
-values, not re-encoded decoded deltas. Use exact own spin RIP AND this mode's
+SRC-0431 lifetime correction: after successful PACKET, the original decoder
+has already reset header and X to zero. They are cleared parser state, NOT
+captured raw packet bytes. Only raw Y remains as the completed poll's last
+byte. Synthetic nonzero header/X fixtures check word packing, not reachable
+successful-packet lifetime. No header/X reconstruction is claimed. Decoded
+deltas/buttons remain valid. Use exact own spin RIP AND this mode's
 magic before interpreting. A first packet is a diagnostic, not a host-cause,
 usability, successful drag or semantic STOPPED proof.
 

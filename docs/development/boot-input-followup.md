@@ -153,3 +153,6 @@ pending at this record; the preceding4cadc69 full native/Windows run passed.
 Final CI update: source0ce4c34e completes both native and Windows jobs successfully
 in [run40036196626](https://github.com/segaboy/ClasSICK-0.97/actions/runs/40036196626).
 This supersedes pending-source-CI wording above; input/release gates remain open.
+
+
+2026-10-24 correction,SRC-0431: the earlier4x7 pixel difference is now classified as cursor restoration. A pure-RAM shared-core replay of the observed counter2/pattern0/window80,70/pointer511,341 final state matches every logical pixel of that saved screenshot. No window damage found; the replay is not a reconstruction of its input history and does not qualify GUI drag. [Evidence](pc-first-motion-evidence.md).

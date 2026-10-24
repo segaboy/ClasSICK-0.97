@@ -14,3 +14,6 @@ reads. No model-usage equivalence is inferred. [Evidence](../../docs/development
 
 
 SRC-0430: legacy13/new35 literal-word checks, three host profiles, three compiled faulty controls and eight invalid macro/build/package modes verified. New native twin/corruption/import audits pass; source-committed trial remains separate. [Evidence](../../docs/development/pc-first-motion-evidence.md).
+
+
+SRC-0431: actual first-motion spin observed with guarded RIP/magic; dx255/dy-255/right button2. Header/X are post-reset parser state, not retained raw bytes; synthetic tests cover packing only. All-frame pixel replay matches; no GUI-drag/release pass. [Completed evidence](../../docs/development/pc-first-motion-evidence.md).

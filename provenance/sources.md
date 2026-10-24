@@ -4317,3 +4317,14 @@ or historical evidence; no worker transfer of this document.
 ## SRC-0430 - Original bounded first-motion worker artifact and verification
 
 2026-10-24, one Copilot Sonnet5.5 low original-public draft,41.16s/one packet view/no worker execution or writes. Lead adopts code/tests with numeric-mode/test-harness controls and explicit build/package integration;48 local checks/three profiles/three compiled defects/eight invalid-mode controls pass. Normal native executable is byte-identical. Diagnostic native trial pending. [Receipt](../docs/development/pc-first-motion-evidence.json).
+
+
+## SRC-0431 - Original native first-motion packet and framebuffer check
+
+2026-10-24, committed999f5bb7 diagnostic/CI40094774719 both jobs pass. Own
+RIP+magic verified: one-pixel GUI gesture yields dx255/dy-255/right button2,
+pointer clips511,341,window80,70,count0. No GUI drag pass or general host-cause
+proof. Lead corrects original brief's parser lifetime: header/X reset, only
+last rawY retained. All logical pixels match shared-core expected final states;
+old4x7 difference classified as cursor restoration, no window damage found.
+Original trial closed/media/inventory preserved. [Evidence](../docs/development/pc-first-motion-evidence.md).

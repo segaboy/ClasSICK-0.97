@@ -1,5 +1,13 @@
 # ClasSICK 0.97 working instructions
 
+2026-10-24,SRC-0431: first-motion source999f5bb7 full CI40094774719 passes.
+Actual guarded packet for one-pixel GUI gesture is dx255/dy-255/right button2;
+native clipping correct, no left drag. Header/X are cleared parser state,
+not retained raw bytes. Exact pixel replay clears prior4x7 damage suspicion.
+58 PNGs/two GIFs; owned VM closed/media/inventory preserved. Normal image
+unchanged; Mac motion and PC GUI drag still block release. Older pending
+entries below are historical. [Evidence](docs/development/pc-first-motion-evidence.md).
+
 2026-10-24,SRC-0429/0430: priorb3cb3fe full CI40042117791 passes. Optional
 first-motion PC probe passes48 checks/three profiles/three compiled defects/
 eight mode refusals; normal EFI byte-identical. Source-committed diagnostic

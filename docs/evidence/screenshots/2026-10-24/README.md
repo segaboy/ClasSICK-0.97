@@ -1,0 +1,13 @@
+# Original PC first-motion diagnostic,2026-10-24
+
+Only original native ClasSICK framebuffer pixels, GPL-3.0-or-later.
+512x342 monochrome logical canvas centered unscaled in1024x768.
+
+- [Original PC motion diagnostic before input; count0000, window80,70.](pc-first-motion-initial.png)
+- [Original PC diagnostic after initial capture attempts; no nonzero movement packet yet.](pc-first-motion-capture.png)
+- [First decoded motion stops the diagnostic: dx255/dy-255/right button2, cursor clipped to511,341; no drag.](pc-first-motion-stopped.png)
+
+
+[Actual packet, source identities and limits](../../../development/pc-first-motion-evidence.md).
+[PNG identities](../manifest.json). One diagnostic stop, no successful drag or
+release claim. VM closed; existing inventory/media preserved. No new GIF.

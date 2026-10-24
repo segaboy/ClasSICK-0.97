@@ -12,3 +12,6 @@ counted as passing without lead execution. [Evidence](../../docs/development/rel
 
 
 SRC-0430: opt-in first nonzero PACKET mode uses CSPMOT01/raw fields and existing const observer/backend. Default loss semantics and normal binary preserved. [Evidence](../../docs/development/pc-first-motion-evidence.md).
+
+
+SRC-0431: actual first-motion spin observed with guarded RIP/magic; dx255/dy-255/right button2. Header/X are post-reset parser state, not retained raw bytes; synthetic tests cover packing only. All-frame pixel replay matches; no GUI-drag/release pass. [Completed evidence](../../docs/development/pc-first-motion-evidence.md).

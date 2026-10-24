@@ -100,9 +100,139 @@
     "motion_twin_images": 4,
     "corruption_controls_each": 27,
     "motion_omitted_probe_controls": 2,
-    "new_native_trial": "pending final committed-source rebuild and isolated run"
+    "new_native_trial": "completed from committed source; diagnostic stop observed, GUI drag not qualified"
   },
   "release_ready": false,
   "gates": "Mac motion and PC GUI dragging remain unqualified; no release/physical/reference/System1/native-app/full128K claim",
-  "pc286": "Prior qualified model/toolchain status retained; no new far backend/target run"
+  "pc286": "Prior qualified model/toolchain status retained; no new far backend/target run",
+  "CI": {
+    "source": "999f5bb7af939b4d4288ba6d351c8300924519fb",
+    "run": 40094774719,
+    "m68k-rom": "success",
+    "windows-bootstrap": "success"
+  },
+  "native_trial": {
+    "source": "999f5bb7af939b4d4288ba6d351c8300924519fb",
+    "verification": {
+      "source_revision": "999f5bb7af939b4d4288ba6d351c8300924519fb",
+      "EFI_SHA256": "bf0b1026598ae00eb7bee19f7fe21c8b28dd770af06307141636f891115e8939",
+      "EFI_bytes": 184832,
+      "disk_SHA256": "a8aabdf2471cd0853685d0f9e11ac7cbacd0d7b110f6c17a03b4f93032f34094",
+      "source_input_hashes": true,
+      "writer_twins": true,
+      "O0_O2_twins": 4,
+      "corruptions": 27,
+      "omitted_probe_objects": 2,
+      "spin_preferred_addresses": [
+        "1002D092",
+        "1002D094"
+      ],
+      "magic": "4353504D4F543031",
+      "native_backend_instructions": "mov rcx,rax; eight fixed word loads; pause/jmp spin",
+      "trial_name": "ClasSICK-097-first-motion-20261024-a",
+      "trial_started": true,
+      "interpretation": "Preparation proof completed by this separate actual trial record"
+    },
+    "uuid": "3fa94726-d337-42c7-b5c9-5220dfe0b18c",
+    "raw_register_capture": {
+      "utc": "2026-10-24T12:51:44.8690669Z",
+      "RIP": "000000001002D094",
+      "in_own_spin": true,
+      "magic_verified": true,
+      "mailbox_decoded": false,
+      "words": {
+        "r8": "4353504D4F543031",
+        "r9": "0000000100000000",
+        "r10": "0000000000000001",
+        "r11": "000000FFFFFFFF01",
+        "r12": "0000000200000000",
+        "r13": "000001FF00000155",
+        "r14": "0000005000000046",
+        "r15": "0000000000000000"
+      }
+    },
+    "decoded_after_guard_checks": {
+      "packets": 1,
+      "errors": 0,
+      "post_reset_header": 0,
+      "post_reset_x": 0,
+      "last_raw_y": 1,
+      "dx": 255,
+      "dy": -255,
+      "buttons": 2,
+      "down": 0,
+      "suppress": 0,
+      "pointer": [
+        511,
+        341
+      ],
+      "window": [
+        80,
+        70
+      ],
+      "inputs": 0,
+      "dragging": 0
+    },
+    "sequence": [
+      "44.67 host seconds; no motion spin",
+      "Coordinate click did not capture mouse; no packet",
+      "Fresh accessibility canvas click then refreshed UI confirmed capture; no nonzero packet",
+      "Pause releases capture; resume and fresh observed canvas click recaptured",
+      "SKY default-button drag513,447 to514,447; first nonzero packet stops in own spin"
+    ],
+    "host_primary_button": "right (SwapMouseButtons1), observed only; no setting change",
+    "completion": {
+      "utc": "2026-10-24T12:54:49.9914933Z",
+      "cold_starts": 1,
+      "state": "poweroff",
+      "unregistered": true,
+      "existing_vm_inventory_preserved": true,
+      "running_state_preserved": true,
+      "post_trial_raw_roundtrip_equal": true,
+      "artifacts_retained": true,
+      "semantic_session_stop_observed": false,
+      "termination": "external poweroff from paused state"
+    },
+    "semantic_session_stop": false,
+    "conclusion": "One-pixel automated gesture produced decoded dx255/dy-255 and right-button2. Native pointer clips to511,341 and ignores right button for drag. Supports input-injection mismatch; does not prove a general host cause or qualify GUI dragging."
+  },
+  "field_lifetime_correction": {
+    "source": "platform/pc/ps2-mouse.c reset before PACKET return",
+    "r10": "Header and X are cleared parser state, not captured raw header/X. Last raw Y remains1. No reconstructed bytes asserted.",
+    "test_scope": "Synthetic nonzero parser-field fixtures verify packing only; they are not successful native packet states.",
+    "disposition": "Keep code/mailbox unchanged; correct SPEC, frozen-brief lead appendix and evidence. No input-policy change."
+  },
+  "pixel_check": {
+    "kind": "pure RAM shared-core replay; no GUI/device automation",
+    "helper_SHA256": "8d0b15c247f7d30e0c9ff3c68d536107b05dc4dfcc32a936451b11df8d9915b5",
+    "logical_crop": [
+      256,
+      213,
+      768,
+      555
+    ],
+    "results": [
+      {
+        "image": "initial.png",
+        "SHA256": "7bd4dc9c78b1729f5d88da5f57ee1813666714caf17fce88913d97cee4abc5a7",
+        "different_pixels": 0,
+        "difference_box": null
+      },
+      {
+        "image": "after-drag.png",
+        "SHA256": "b70ec8c601318a20084e0cc180e82d07adddced435de03483bc05620a294b3d4",
+        "different_pixels": 0,
+        "difference_box": null
+      },
+      {
+        "image": "after-gui-drag.png",
+        "SHA256": "2ffe23762a906fc2076eac7d9a3a71536ad17db12ee5adf11c121557a03da360",
+        "different_pixels": 0,
+        "difference_box": null
+      }
+    ],
+    "limits": "Same implementation expected-state comparison, not independent rendering oracle or GUI drag pass. Counter2 replay is a matching final-state construction, not a reconstruction of the older input history.",
+    "analysis_correction": "Initial Pillow comparison inverted Mono1MSB polarity; corrected to bit1=black before accepting counts.",
+    "result": "Initial and final frames match all175104 logical pixels; prior counter0002 corner-cursor capture also matches a known-final-state replay. Earlier4x7 difference is cursor restoration, no window damage found."
+  }
 }
