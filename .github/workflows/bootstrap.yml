@@ -185,6 +185,21 @@ jobs:
             ${{ runner.temp }}/classick-window-preview/Os-a/classick-loaded-app.map
             ${{ runner.temp }}/classick-window-preview/Os-a/native-window-disassembly.txt
           if-no-files-found: error
+      - name: Build automatic idle diagnostic twins (unbooted)
+        run: python3 scripts/Build-LoadedAppROM.py --window-drawing --window-idle-probe --tool-root "$RUNNER_TEMP/classick-m68k/root" --output "$RUNNER_TEMP/classick-window-idle"
+      - name: Verify idle diagnostic and unchanged normal ROM
+        run: python3 scripts/Verify-MacIdleProbe.py --normal "$RUNNER_TEMP/classick-window-preview" --probe "$RUNNER_TEMP/classick-window-idle" --output "$RUNNER_TEMP/classick-idle-verification.json"
+      - name: Retain automatic idle diagnostic
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
+        with:
+          name: classick-window-idle-mac
+          path: |
+            ${{ runner.temp }}/classick-window-idle/manifest.json
+            ${{ runner.temp }}/classick-window-idle/Os-a/classick-loaded-app.rom
+            ${{ runner.temp }}/classick-window-idle/Os-a/classick-loaded-app.map
+            ${{ runner.temp }}/classick-window-idle/Os-a/native-window-disassembly.txt
+            ${{ runner.temp }}/classick-idle-verification.json
+          if-no-files-found: error
       - name: Build declared alternate DCD-sense Mac candidate (unbooted)
         run: python3 scripts/Build-LoadedAppROM.py --window-drawing --dcd-invert 3 --tool-root "$RUNNER_TEMP/classick-m68k/root" --output "$RUNNER_TEMP/classick-window-inverted"
       - name: Retain alternate DCD-sense Mac candidate

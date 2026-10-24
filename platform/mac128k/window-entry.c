@@ -23,6 +23,12 @@
 #if CLASSICK_MAC_DCD_INVERT < 0 || CLASSICK_MAC_DCD_INVERT > 3
 #error "CLASSICK_MAC_DCD_INVERT must be 0..3"
 #endif
+#ifndef CLASSICK_MAC_IDLE_PROBE
+#define CLASSICK_MAC_IDLE_PROBE 0
+#endif
+#if CLASSICK_MAC_IDLE_PROBE < 0 || CLASSICK_MAC_IDLE_PROBE > 1
+#error "CLASSICK_MAC_IDLE_PROBE must be 0 or 1"
+#endif
 
 volatile cs_mac_diagnostics cs_mac_diag;
 _Static_assert(offsetof(cs_mac_diagnostics,traps)==16,"Trap assembly offset");
@@ -38,6 +44,10 @@ extern void cs_mac_window_scc_irq(void);
 extern void cs_mac_window_combined_irq(void);
 extern void cs_mac_window_install_vectors(void);
 void cs_mac_window_interrupt(uint32_t source);
+#if CLASSICK_MAC_IDLE_PROBE
+/* Diagnostic halt in window-irqs.S: self-branch, IPL7 held. Not a session stop. */
+__attribute__((noreturn)) void cs_mac_window_idle_checkpoint(void);
+#endif
 
 /* Own compact diagnostic record; not an ABI, never part of the 64B prefix. */
 struct cs_mac_window_trace {
@@ -173,6 +183,10 @@ static uint32_t observe(void)
         cs_mac_trace.loss_previous=motion.first_loss.previous;
         cs_mac_trace.loss_phase=motion.first_loss.inbox_phase;
         cs_mac_trace.loss_reason=motion.first_loss.reason;
+#if CLASSICK_MAC_IDLE_PROBE
+        /* Minimum service count, not a timing promise; trace is already copied. */
+        if(motion.services>=500u)cs_mac_window_idle_checkpoint();
+#endif
     }
     cs_m68k_foreground_leave(0,token);
     return dead;

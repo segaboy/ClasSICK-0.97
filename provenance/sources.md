@@ -1,5 +1,14 @@
 # Source catalog
 
+## SRC-0436 - Original automatic Mac idle diagnostic
+
+2026-10-24,one supervised Copilot original-public patch with lead integration
+and native controls. Optional compile-time checkpoint observes the existing
+trace under IPL7 after >=500 services;default code and sample policy excluded
+from change. New native build/trial pending at source commit. Published-source
+interface facts unchanged;no new manual or foreign implementation inspected.
+[Scope and results](../docs/development/mac-idle-probe-evidence.md).
+
 ## SRC-0188 - Claude original loaded-application demo artifact
 
 2026-10-15. One primary two-file portable demo assignment,4 bounded Reads/5 turns,126 C lines within300. Approved public API headers, original encoder/setup and brief only; no commands/edits/tests/web/MCP/subagents or prohibited inputs. Lead independently checks all366 resource bytes/offsets and twelve instruction bytes, corrects undefined permission macro names and adds real preparation/negative-program constructors. Returned read text is the authoritative private input snapshot; archive-time live-file copies are separately identified, not assumed immutable at read time. No historical authority or actual boot result.

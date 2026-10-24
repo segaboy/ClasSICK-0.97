@@ -39,9 +39,11 @@ def main():
     mode.add_argument('--selected-drawing',action='store_true',help='Build the SPEC-0047 direct native two-port candidate')
     mode.add_argument('--outline-drawing',action='store_true',help='Build the SPEC-0049 paired native outline preview')
     mode.add_argument('--window-drawing',action='store_true',help='Build the SPEC-0072 native Mac window preview')
+    p.add_argument('--window-idle-probe',action='store_true',help='Diagnostic: halt in a self-branch after >=500 services; window profile only')
     p.add_argument('--dcd-invert',type=int,choices=(0,1,2,3),default=0,help='Unverified raw RR0 DCD sense mask; window profile only')
     a=p.parse_args();native=a.native_drawing or a.selected_drawing or a.outline_drawing or a.window_drawing
     if a.dcd_invert and not a.window_drawing:p.error('--dcd-invert requires --window-drawing')
+    if a.window_idle_probe and not a.window_drawing:p.error('--window-idle-probe requires --window-drawing')
     repo=Path(__file__).resolve().parents[1];tools=Path(a.tool_root).resolve();out=Path(a.output).resolve()
     out.mkdir(parents=True,exist_ok=False);sys.dont_write_bytecode=True
     spec=spec_from_file_location('base_rom',repo/'scripts/Build-MacROM.py');h=module_from_spec(spec);spec.loader.exec_module(h)
@@ -93,6 +95,7 @@ def main():
         if a.selected_drawing or a.outline_drawing:flags+=['-DCLASSICK_SELECTED_DRAWING=1']
         if a.outline_drawing:flags+=['-DCLASSICK_OUTLINE_DRAWING=1']
         if a.window_drawing:flags+=['-DCLASSICK_MAC_DCD_INVERT='+str(a.dcd_invert)]
+        if a.window_idle_probe:flags+=['-DCLASSICK_MAC_IDLE_PROBE=1']
         for i,source in enumerate(sources):
             obj=folder/f'{i}.o';objects.append(obj);h.run([cc,*flags,'-c',repo/source,'-o',obj],env)
             if source not in ('platform/mac128k/loaded-entry.c','platform/mac128k/drawing-entry.c','platform/mac128k/native-drawing-entry.c','platform/mac128k/window-entry.c'):
@@ -109,6 +112,7 @@ def main():
         if a.selected_drawing:required=tuple(x for x in required if x!='cs_native_draw')+('cs_selected_draw','cs_qd_select_get','cs_qd_select_set')
         if a.outline_drawing:required=tuple(x for x in required if x not in ('cs_native_draw','cs_qd_rect','cs_qd_view_rect'))+('cs_outline_draw','cs_qd_view_outline','cs_qd_select_get','cs_qd_select_set')
         if a.window_drawing:required=('cs_mac_main','cs_mac_window_begin','cs_mac_motion_service','cs_foreground_step','cs_mac_window_via_irq','cs_mac_window_scc_irq','cs_mac_window_combined_irq','cs_mac_window_interrupt','cs_product_scene','cs_window_apply','cs_m68k_foreground_enter','cs_m68k_foreground_leave')
+        if a.window_idle_probe:required+=('cs_mac_window_idle_checkpoint',)
         if a.window_drawing and not any(name.startswith('cs_cursor_') for name in syms):raise ValueError('Disconnected cursor helper')
         if any(name not in syms for name in required):raise ValueError('Disconnected demonstration')
         cpu_callbacks=('cs_m68k_foreground_enter','cs_m68k_foreground_leave') if a.window_drawing else ()
@@ -128,6 +132,11 @@ def main():
                 if not 260<=at<=65536-len(expected) or image[at:at+len(expected)]!=expected:
                     raise ValueError('IRQ preservation/mask/RTE: '+name)
                 rows.append({'name':name,'source':source,'bytes':len(expected),'exact_opcodes_verified':True})
+            idle=syms.get('cs_mac_window_idle_checkpoint')
+            if a.window_idle_probe:
+                if idle is None or not 260<=idle-0x400000<=65534 or image[idle-0x400000:idle-0x400000+2]!=bytes.fromhex('60fe'):
+                    raise ValueError('Idle checkpoint spin')
+            elif idle is not None:raise ValueError('Idle checkpoint present in default ROM')
             at=syms['cs_mac_window_install_vectors']-0x400000
             for vector,name in zip((0x64,0x68,0x6C),('cs_mac_window_via_irq','cs_mac_window_scc_irq','cs_mac_window_combined_irq')):
                 if not 260<=at<=65526:raise ValueError('Vector installer span')
@@ -166,8 +175,10 @@ def main():
             except ValueError:pass
             else:raise ValueError('Corruption accepted')
         if a.window_drawing:
-            for offset in (40,syms['cs_mac_line_a_handler']-0x400000,
-                    syms['cs_mac_window_via_irq']-0x400000+3,syms['cs_mac_window_install_vectors']-0x400000+7):
+            controls=[40,syms['cs_mac_line_a_handler']-0x400000,
+                    syms['cs_mac_window_via_irq']-0x400000+3,syms['cs_mac_window_install_vectors']-0x400000+7]
+            if a.window_idle_probe:controls.append(syms['cs_mac_window_idle_checkpoint']-0x400000+1)
+            for offset in controls:
                 bad=bytearray(b);bad[offset]^=1;struct.pack_into('>I',bad,256,h.crc(bad))
                 try:audit(bad)
                 except ValueError:pass
@@ -191,7 +202,7 @@ def main():
          'workspace_begin':syms['__loaded_app_start'],'workspace_end':syms['__loaded_app_end'],
          'native_stack_base':0x2100,'native_stack_top':0x8000,'conservative_stack_bound':stack_bound,
          'individual_frame_max':max(x['bytes'] for x in frames),'stack_frames':frames,'symbols':syms,'corruption_controls':8})
-        if a.window_drawing:profiles[-1].update(irq_veneer_audit=irq_audit,resealed_native_corruption_controls=4)
+        if a.window_drawing:profiles[-1].update(irq_veneer_audit=irq_audit,resealed_native_corruption_controls=len(controls))
     if profiles[0]!=profiles[1]:raise ValueError('ROM twins differ')
     if program_source is not None:
         fixture=out/'program.o';binary=out/'program.bin'
@@ -203,6 +214,8 @@ def main():
      'original_program_bytes':len(bytes.fromhex(program_hex)),'execution_path':'direct-native-c' if native else 'guarded-68k-fixture',
      'module_count':len(sources),'selected_ports':bool(a.selected_drawing or a.outline_drawing),'outline_drawing':bool(a.outline_drawing),'native_drawing_context':('SPEC-0041' if native else None),'emulator_run':False,'system1_compatibility_proven':False,
      'inputs':{f:hashlib.sha256((repo/f).read_bytes().replace(b'\r\n',b'\n')).hexdigest() for f in (*sources,*headers)}}
+    if a.window_drawing:manifest['window_idle_probe']=bool(a.window_idle_probe)
+    if a.window_idle_probe:manifest['window_idle_probe_threshold']=500
     if a.window_drawing:manifest.update({'window_drawing':True,'native_drawing_context':None,
      'dcd_invert':a.dcd_invert,'dcd_invert_verified':False,'cpu_callbacks':list(cpu_callbacks),
      'board_profile':{'status':'engineering-upper-alias-hypothesis-unverified','scc_read_b':0x9FFFF8,'scc_read_a':0x9FFFFA,

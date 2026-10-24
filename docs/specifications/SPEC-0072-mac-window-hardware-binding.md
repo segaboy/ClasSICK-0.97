@@ -137,3 +137,22 @@ the observed odd-address native aggregate copy.
 
 
 2026-10-24,SRC-0434/0435 audit adds no behavior: RR0 selector skip already exists,strict sampling/loss checks retained. Reused-ROM explicit button comparison confirms one press/two records,zero accepted displacement;UI pause can contaminate an idle observation. An automatic idle checkpoint is a future proposed slice,not implemented here. [Audit](../development/mac-motion-audit-evidence.md).
+
+## Automatic idle checkpoint (engineering diagnostic, SRC-0436)
+
+Optional `--window-idle-probe` requires `--window-drawing`. Normal builds
+exclude its call and symbol. With `CLASSICK_MAC_IDLE_PROBE=1`, the existing
+foreground observer copies the trace with IPL7 held, then, only on its
+nonterminal path and at motion service count >=500, enters the original
+`cs_mac_window_idle_checkpoint` self-branch. Do not restore the exclusion
+token or perform additional MMIO, recovery, input delivery or allocations.
+The foreground may observe a count above500; this is not a clock promise.
+
+This is a frozen diagnostic, not a session STOPPED or input qualification.
+Retain the128B MWP1 v2 layout,304B total native BSS and964B session workspace.
+Require unchanged default ROM bytes, exact own checkpoint bytes60FE, existing
+IRQ audits and a resealed checkpoint-corruption refusal. A trial must check
+the known own PC and IPL7 before interpreting the frozen original RAM.
+Do not touch the guest window before the automatic checkpoint. Inspecting
+the frozen record afterwards cannot create earlier guest input. No historical,
+hardware, motion, release or other gate is advanced by a diagnostic halt.

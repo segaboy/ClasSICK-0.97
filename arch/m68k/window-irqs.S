@@ -37,4 +37,12 @@ cs_mac_window_install_vectors:
     .globl cs_mac_line_a_handler
 cs_mac_line_a_handler:
     jmp cs_mac_fault
+
+#if defined(CLASSICK_MAC_IDLE_PROBE) && CLASSICK_MAC_IDLE_PROBE
+    /* Diagnostic noreturn halt: IPL7 stays held, no MMIO. Bytes 60fe. */
+    .globl cs_mac_window_idle_checkpoint
+    .even
+cs_mac_window_idle_checkpoint:
+    bra.s cs_mac_window_idle_checkpoint
+#endif
     .section .note.GNU-stack,"",@progbits
