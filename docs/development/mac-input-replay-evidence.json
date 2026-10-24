@@ -1,0 +1,256 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-24",
+  "source_ids": [
+    "SRC-0438",
+    "SRC-0439"
+  ],
+  "scope": "Original input-data generator and bounded replay-interface trial;no runtime/input-policy change",
+  "worker": {
+    "round": "primary",
+    "worker": "copilot",
+    "exit_code": 0,
+    "outer_timeout": false,
+    "elapsed_seconds": 14.38,
+    "input_bytes": 2041,
+    "input_sha256": "7c0a6c2d822c129dfcf7e3387f87f496660a34f542fa46d4df88828c3fe325fa",
+    "stderr_bytes": 0,
+    "model": "claude-sonnet-5.5",
+    "effort": "low",
+    "frozen_reads": 1,
+    "commands": 0,
+    "writes": 0,
+    "tests_executed": [],
+    "reported_premium_requests": 1
+  },
+  "generator_verification": {
+    "checks": [
+      "single-x literal UTF-8 bytes/deltas/timestamps/receipt",
+      "single-x existing output byte preservation",
+      "slow-x literal UTF-8 bytes/deltas/timestamps/receipt",
+      "slow-x existing output byte preservation",
+      "refusal 0",
+      "refusal 1",
+      "refusal 2",
+      "refusal 3",
+      "refusal 4",
+      "refusal 5",
+      "refusal 6",
+      "refusal 7",
+      "missing parent no-effect refusal",
+      "maximum signed timestamp accepted"
+    ],
+    "passed": 14,
+    "native_replay_executed": false
+  },
+  "recording_interface": {
+    "installed_version": "Snow1.5.0-317c188",
+    "original_record_bytes": 214,
+    "sha256": "75639d59f122c380d86349dfdf1163d96cf1523b38debd1fa6b8876d927414b4",
+    "events": [
+      [
+        1241381460,
+        {
+          "MouseUpdateRelative": {
+            "relx": 0,
+            "rely": 0,
+            "btn": true
+          }
+        }
+      ],
+      [
+        1241881460,
+        {
+          "MouseUpdateRelative": {
+            "relx": 0,
+            "rely": 0,
+            "btn": false
+          }
+        }
+      ],
+      [
+        1306381460,
+        {
+          "MouseUpdateRelative": {
+            "relx": 18354,
+            "rely": 32767,
+            "btn": null
+          }
+        }
+      ]
+    ],
+    "content": "Original project gesture events only;no ROM/RAM/media/code",
+    "timestamp_units_origin_reset_and_delivery_semantics_verified": false
+  },
+  "replay_fixture": {
+    "path_outside_Git": "single-x.snowr",
+    "sha256": "143873a0196fcb199e564dca1615af14330e8a7e290784663da39ea1dc40be4d",
+    "bytes": 68,
+    "events": [
+      [
+        64000000,
+        {
+          "MouseUpdateRelative": {
+            "relx": 1,
+            "rely": 0,
+            "btn": null
+          }
+        }
+      ]
+    ]
+  },
+  "preflight": {
+    "compiled_source_revision": "6892de0f43b4409e5b0fd9160981d8e7c23d8938",
+    "rom_sha256": "673a2cca57d1ec9ffd842f4c858fa4aafbcb042ec6f86445ae5717d4816c4965",
+    "native_proofs_reused": true,
+    "current_source_hashes_match": true,
+    "trace_address": 2928,
+    "diagnostic_address": 3056,
+    "scope": "isolated unchanged normal ROM and original single-axis input data;timestamp/reset semantics unverified"
+  },
+  "trial": {
+    "recording_cold_starts": 1,
+    "normal_replay_cold_starts": 1,
+    "opened_fixture": {
+      "utc": "2026-10-24T17:33:17.907Z",
+      "fixture": "single-x.snowr",
+      "events": 1,
+      "relx": 1,
+      "rely": 0,
+      "button": null,
+      "timestamp": 64000000
+    },
+    "known_own_RAM_rows": [
+      {
+        "address": "00000B70",
+        "hex": "4D575031000000020000008000000001"
+      },
+      {
+        "address": "00000B80",
+        "hex": "00004F77000000000000000000004F77"
+      },
+      {
+        "address": "00000B90",
+        "hex": "00000002000000010000000000000000"
+      },
+      {
+        "address": "00000BA0",
+        "hex": "0000000000000100000000AB00000050"
+      },
+      {
+        "address": "00000BB0",
+        "hex": "00000046000000000000000100000005"
+      },
+      {
+        "address": "00000BC0",
+        "hex": "00000001000000000000000000000000"
+      },
+      {
+        "address": "00000BD0",
+        "hex": "00000000000000020000000000BF4444"
+      },
+      {
+        "address": "00000BE0",
+        "hex": "00BF4C4400AF4C440100000000000003"
+      },
+      {
+        "address": "00000BF0",
+        "hex": "435330390000001000004F7700000000"
+      },
+      {
+        "address": "00000C00",
+        "hex": "00000001609252530000000000000000"
+      }
+    ],
+    "trace": {
+      "tag": 1297567793,
+      "version": 2,
+      "bytes": 128,
+      "source_irq": 1,
+      "vbl": 20343,
+      "scc": 0,
+      "combined": 0,
+      "services": 20343,
+      "baselines": 2,
+      "losses": 1,
+      "queued": 0,
+      "peak": 0,
+      "deliveries": 0,
+      "pointer_x": 256,
+      "pointer_y": 171,
+      "window_x": 80,
+      "window_y": 70,
+      "pattern": 0,
+      "phase": 1,
+      "motion_stage": 5,
+      "raw_a": 1,
+      "raw_b": 0,
+      "buttons": 0,
+      "motion_cause": 0,
+      "cause": 0,
+      "loss_reason": 2,
+      "loss_rr3": 0,
+      "loss_s1": 12534852,
+      "loss_s2": 12536900,
+      "loss_s3": 11488324,
+      "loss_previous": 16777216,
+      "loss_phase": 3
+    },
+    "diagnostic": {
+      "magic": 1129525305,
+      "stage": 16,
+      "ticks": 20343,
+      "presses": 0,
+      "traps": 1,
+      "image_crc": 1620202067,
+      "fault": 0
+    },
+    "recording_closed": {
+      "closed": true,
+      "pid": 28852,
+      "utc": "2026-10-24T17:30:55.0034146Z",
+      "swap_mouse_buttons": "1"
+    },
+    "replay_closed": {
+      "closed": true,
+      "pid": 75536,
+      "utc": "2026-10-24T17:40:11.2189992Z",
+      "rom_sha256": "673a2cca57d1ec9ffd842f4c858fa4aafbcb042ec6f86445ae5717d4816c4965",
+      "swap_mouse_buttons": "1"
+    },
+    "accepted_displacement_observed": false,
+    "fixture_event_caused_loss_proven": false,
+    "precise_playback_timing_proven": false
+  },
+  "prior_CI": {
+    "run": 40111212874,
+    "compiled_source_revision": "6892de0f43b4409e5b0fd9160981d8e7c23d8938",
+    "m68k_rom": "success",
+    "windows_bootstrap": "success",
+    "url": "https://github.com/segaboy/ClasSICK-0.97/actions/runs/40111212874"
+  },
+  "screenshots": {
+    "new": 0,
+    "registered_PNG_count": 63,
+    "GIF_count": 2,
+    "reason": "No new visible movement;no duplicate framebuffer or invented animation"
+  },
+  "limits": [
+    "Recorded JSON shape is an observed installed interface,not emulator source or a stable documented ABI",
+    "Generator gap/timestamp units and playback origin/reset/late-event behavior remain unqualified",
+    "No pre-load own-RAM snapshot;GUI file selection and pause may introduce input,so first loss is not causally isolated to the fixture",
+    "Captured first loss has only X phase changes and RR3zero;do not infer physical timing,interrupt absence or a driver defect",
+    "Native twins/12 controls/IRQ/source proofs reused,not rerun;normal ROM and sample admission unchanged"
+  ],
+  "release_ready": false,
+  "Mac_motion_passed": false,
+  "PC_GUI_drag_passed": false,
+  "pc286": "Existing model/toolchain evidence retained;no new backend/target run",
+  "remaining_balances": {
+    "Copilot": "unavailable",
+    "Claude": "unavailable",
+    "Grok": "unavailable",
+    "Argon": "unavailable"
+  },
+  "next": "Establish an exclusion-safe pre-load control and playback timestamp/reset semantics before attributing the one-axis loss or changing the sampling contract"
+}

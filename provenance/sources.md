@@ -4388,3 +4388,20 @@ original-ROM trial. Own PC004002DC/SR2710 guards500 services,one baseline,
 zero losses/deliveries/presses/faults before deliberate GUI input. Unmodified
 512x342 original framebuffer indexed. Closed owned process,ROM/host preference
 preserved. No hardware/historical/motion/release claim. [Evidence](../docs/development/mac-idle-probe-evidence.md).
+
+
+## SRC-0438 - Original Snow input recording interface observation
+
+2026-10-24,installed1.5 black-box GUI with own ROM only. Original214B JSON
+record identifies MouseUpdateRelative fields and large18354/32767 navigation
+delta. No source read;timestamp origin/units/reset semantics remain unverified.
+[Scope](../docs/development/mac-input-replay-evidence.md).
+
+## SRC-0439 - Original replay generator and bounded one-event observation
+
+2026-10-24,one Copilot original-data generator,lead license/integration and14
+actual literal/refusal checks. Unchanged normal ROM opens one(+1,0) fixture;
+known RAM later retains X-only UNSTABLE loss/fault0/no displacement. Pre-load
+and playback timing are not isolated;causality/driver defect not established.
+No runtime change,new native compilation or motion/release pass.
+[Receipt](../docs/development/mac-input-replay-evidence.json).

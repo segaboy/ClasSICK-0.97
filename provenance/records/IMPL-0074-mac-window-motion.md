@@ -28,3 +28,6 @@ SRC-0434/0435: no supported runtime defect or code change. One reused verified R
 
 
 2026-10-24,SRC-0436/0437:optional automatic idle checkpoint only;default ROM byte-identical,no new RAM or sample policy. Probe native twins/13 corruption controls/three veneers/five refusals pass. Guarded own PC/IPL7 then500 services/baseline1/loss0/delivery0/fault0;no motion/release pass. [Receipt](../../docs/development/mac-idle-probe-evidence.json).
+
+
+2026-10-24,SRC-0438/0439:experimental original replay generator passes14 host checks;unchanged ROM trial later retains X-only UNSTABLE/RR3zero,fault0/no displacement. No pre-load/timing isolation,causal attribution,policy edit or new native compilation. Prior source CI40111212874 fully passes. [Evidence](../../docs/development/mac-input-replay-evidence.md).

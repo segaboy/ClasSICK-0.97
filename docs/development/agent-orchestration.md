@@ -431,3 +431,6 @@ balances unavailable. This is not evidence of quota savings. [Receipt](boot-inpu
 
 
 2026-10-24 Mac idle diagnostic:one Copilot Sonnet5.5 low primary returns12 usable replacements/three files in32.75s,32603 frozen-public bytes/one read/zero writes,commands,tests. Lead adopts and supplies native/control/CI verification and one scoped desktop trial. No second worker/requalification/fan-out;one reported premium request,all-four balances unavailable,no measured Codex saving. [Evidence](mac-idle-probe-evidence.json).
+
+
+2026-10-24 replay preparation:one Copilot Sonnet5.5 low primary,2041B/14.38s/one frozen read/no commands,writes,tests,usable original data-generator artifact. Lead integrates with license,executes14 literal/refusal checks and bounded installed-interface trials;no second worker/requalification/code recreation. Native artifacts reused. One reported premium request,all-four balances unavailable,no measured Codex savings. [Receipt](mac-input-replay-evidence.json).
