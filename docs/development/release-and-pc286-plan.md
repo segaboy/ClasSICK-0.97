@@ -68,3 +68,6 @@ contract proposal;handler ABI,whole-commit guarantees and qualified far access
 remain open. Native fast paths and all release gates are unchanged. The
 [live input checklist](paused-clock-evidence.md#next-live-control-planned-src-0443)
 adds an empty-input control before any loss is attributed to a replay fixture.
+
+
+2026-10-25,SRC-0444..0446:logical metadata/descriptive4-byte plan now compiles as C99 and C16;no far backing/commit/production binding. Paired release still primary. Desktop available,actual unchanged-ROM no-replay control is contaminated,so causal movement and PC GUI left drag remain open. No freeze or blind unchanged repeat. [Current evidence](pc286-bank-plan-evidence.md).

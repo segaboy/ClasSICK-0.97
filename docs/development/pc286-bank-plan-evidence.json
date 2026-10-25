@@ -1,0 +1,536 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-25",
+  "source_ids": [
+    "SRC-0444",
+    "SRC-0445",
+    "SRC-0446"
+  ],
+  "specification": "SPEC-0069",
+  "implementation": "IMPL-0076",
+  "tests": "TEST-0089",
+  "baseline_revision": "462e3a0d4fb7cd9a45b5930b05452f0313325b1f",
+  "scope": "Unbound C99/C16 logical metadata and descriptive four-byte bank plan; no far access, backing or commit execution",
+  "workers": {
+    "grok": {
+      "round": "primary",
+      "worker": "grok",
+      "exit_code": null,
+      "outer_timeout": true,
+      "elapsed_seconds": 240.78,
+      "input_bytes": 19221,
+      "input_sha256": "7dfbb1b8b8457b2c8754aa1eba695c0721200b814c560aed1c57cf5553178739",
+      "stderr_bytes": 117,
+      "artifact_received": false,
+      "model_selection": "CLI fallback warning; actual model not confirmed",
+      "retry": false
+    },
+    "copilot": {
+      "round": "fallback",
+      "worker": "copilot",
+      "exit_code": 0,
+      "outer_timeout": false,
+      "elapsed_seconds": 77.58,
+      "input_bytes": 19231,
+      "input_sha256": "81069c135d557943d06e212579f38f5e803b052a5495062af873090f7ac669aa",
+      "stderr_bytes": 0,
+      "model": "claude-sonnet-5.5",
+      "effort": "low",
+      "frozen_reads": 1,
+      "commands": 0,
+      "writes": 0,
+      "tests_executed": [],
+      "reported_premium_requests": 1,
+      "provider_requests": 2
+    }
+  },
+  "lead_changes": [
+    "Removed worker-disclosed self-assignment",
+    "Corrected final-byte smoke-test expectation after actual failure; final byte is valid",
+    "Clarified flag values and writable/disjoint output/array-capacity obligations",
+    "Integrated frozen oracle, C99 targets and pinned compiler/import harness"
+  ],
+  "host_profiles": [
+    "Clang Debug",
+    "GCC Release",
+    "Clang ASan/UBSan"
+  ],
+  "targeted_CTests_per_profile": 2,
+  "frozen_assertions": 176,
+  "frozen_failures": 0,
+  "frozen_pre_read_sha256": "3165a331784c5cd84230bf5263631f684b7e7e622b31ce4009b4c4dfe7e10ead",
+  "compiled_fault_controls": [
+    {
+      "case": "high-mask",
+      "compiled": true,
+      "exit_code": 1,
+      "detected_by_frozen_oracle": true
+    },
+    {
+      "case": "cross-bank",
+      "compiled": true,
+      "exit_code": 1,
+      "detected_by_frozen_oracle": true
+    },
+    {
+      "case": "partial-output",
+      "compiled": true,
+      "exit_code": 1,
+      "detected_by_frozen_oracle": true
+    }
+  ],
+  "initial_failures": [
+    "Worker smoke expected invalid last byte; frozen oracle passed",
+    "Initial object audit rejected own same-object EXTDEF; PUBDEF proves resolution",
+    "Initial cross-bank mutant failed compilation under unused-variable warnings; corrected mutant compiled and was rejected at runtime, not counted as a passing control"
+  ],
+  "compiler": {
+    "compiler_pin": "2026-10-01-Build",
+    "compiler_calls": 6,
+    "objects": 6,
+    "inputs": {
+      "arch/i286/c16.h": "0d7634a598aa92a0971f8e1bcf55b63df0f3820cb78d4f7817641b27544a3920",
+      "probes/pc286/bank-plan.h": "7650a2c753f561d341430fe796d5852fea1c276a3547af2a17bed63397bf3bf1",
+      "probes/pc286/bank-plan.c": "34201bf3b4d83c21d739a8a80d4a973f1b1fc5525c99fac87b30c63239473c56"
+    },
+    "records": [
+      {
+        "case": "ms-od",
+        "flags": [
+          "-zq",
+          "-2",
+          "-ms",
+          "-zl",
+          "-s",
+          "-od",
+          "-zastd=c99",
+          "-dCS_C16_REQUIRE_16BIT",
+          "-i=C:\\ClasSICK\\pc286-toolchain-20261023-a\\toolchain\\h",
+          "-fo=C:\\ClasSICK\\bank-plan-20261025-a\\final-c16\\ms-od.obj"
+        ],
+        "external_symbols": [
+          "cs_bm_validate_"
+        ],
+        "defined_symbols": [
+          "cs_bm_validate_",
+          "cs_bm_check_",
+          "cs_bm_plan4_"
+        ],
+        "unresolved_symbols": [],
+        "segments": [
+          [
+            "_TEXT",
+            "16",
+            "00000B3F"
+          ],
+          [
+            "CONST",
+            "16",
+            "00000000"
+          ],
+          [
+            "CONST2",
+            "16",
+            "00000000"
+          ],
+          [
+            "_DATA",
+            "16",
+            "00000000"
+          ]
+        ],
+        "object_bytes": 3456,
+        "object_sha256": "85bbee8aa0bbe3e5468da2a51f8a7e4ad556ddb3dfc1680db4617ab7222606e6"
+      },
+      {
+        "case": "ms-os",
+        "flags": [
+          "-zq",
+          "-2",
+          "-ms",
+          "-zl",
+          "-s",
+          "-os",
+          "-zastd=c99",
+          "-dCS_C16_REQUIRE_16BIT",
+          "-i=C:\\ClasSICK\\pc286-toolchain-20261023-a\\toolchain\\h",
+          "-fo=C:\\ClasSICK\\bank-plan-20261025-a\\final-c16\\ms-os.obj"
+        ],
+        "external_symbols": [
+          "cs_bm_validate_"
+        ],
+        "defined_symbols": [
+          "cs_bm_validate_",
+          "cs_bm_check_",
+          "cs_bm_plan4_"
+        ],
+        "unresolved_symbols": [],
+        "segments": [
+          [
+            "_TEXT",
+            "16",
+            "000006B8"
+          ],
+          [
+            "CONST",
+            "16",
+            "00000000"
+          ],
+          [
+            "CONST2",
+            "16",
+            "00000000"
+          ],
+          [
+            "_DATA",
+            "16",
+            "00000000"
+          ]
+        ],
+        "object_bytes": 2255,
+        "object_sha256": "5c7c3b2fef9fd1c37fd5ab0195e2f70d4005d2d9e5a633131b4af087fba0788f"
+      },
+      {
+        "case": "mm-od",
+        "flags": [
+          "-zq",
+          "-2",
+          "-mm",
+          "-zl",
+          "-s",
+          "-od",
+          "-zastd=c99",
+          "-dCS_C16_REQUIRE_16BIT",
+          "-i=C:\\ClasSICK\\pc286-toolchain-20261023-a\\toolchain\\h",
+          "-fo=C:\\ClasSICK\\bank-plan-20261025-a\\final-c16\\mm-od.obj"
+        ],
+        "external_symbols": [
+          "cs_bm_validate_"
+        ],
+        "defined_symbols": [
+          "cs_bm_validate_",
+          "cs_bm_check_",
+          "cs_bm_plan4_"
+        ],
+        "unresolved_symbols": [],
+        "segments": [
+          [
+            "bank-plan_TEXT",
+            "16",
+            "00000B41"
+          ],
+          [
+            "CONST",
+            "16",
+            "00000000"
+          ],
+          [
+            "CONST2",
+            "16",
+            "00000000"
+          ],
+          [
+            "_DATA",
+            "16",
+            "00000000"
+          ]
+        ],
+        "object_bytes": 3467,
+        "object_sha256": "95aad546a913df693067672a64282e6993bec10c30db0a4f4947b2631310ff4d"
+      },
+      {
+        "case": "mm-os",
+        "flags": [
+          "-zq",
+          "-2",
+          "-mm",
+          "-zl",
+          "-s",
+          "-os",
+          "-zastd=c99",
+          "-dCS_C16_REQUIRE_16BIT",
+          "-i=C:\\ClasSICK\\pc286-toolchain-20261023-a\\toolchain\\h",
+          "-fo=C:\\ClasSICK\\bank-plan-20261025-a\\final-c16\\mm-os.obj"
+        ],
+        "external_symbols": [
+          "cs_bm_validate_"
+        ],
+        "defined_symbols": [
+          "cs_bm_validate_",
+          "cs_bm_check_",
+          "cs_bm_plan4_"
+        ],
+        "unresolved_symbols": [],
+        "segments": [
+          [
+            "bank-plan_TEXT",
+            "16",
+            "000006BA"
+          ],
+          [
+            "CONST",
+            "16",
+            "00000000"
+          ],
+          [
+            "CONST2",
+            "16",
+            "00000000"
+          ],
+          [
+            "_DATA",
+            "16",
+            "00000000"
+          ]
+        ],
+        "object_bytes": 2266,
+        "object_sha256": "f1041341800212a0a1df62cae65f025d63e3acc70c4fc8a4fd47bb84d9941a09"
+      },
+      {
+        "case": "ml-od",
+        "flags": [
+          "-zq",
+          "-2",
+          "-ml",
+          "-zl",
+          "-s",
+          "-od",
+          "-zastd=c99",
+          "-dCS_C16_REQUIRE_16BIT",
+          "-i=C:\\ClasSICK\\pc286-toolchain-20261023-a\\toolchain\\h",
+          "-fo=C:\\ClasSICK\\bank-plan-20261025-a\\final-c16\\ml-od.obj"
+        ],
+        "external_symbols": [
+          "cs_bm_validate_"
+        ],
+        "defined_symbols": [
+          "cs_bm_validate_",
+          "cs_bm_check_",
+          "cs_bm_plan4_"
+        ],
+        "unresolved_symbols": [],
+        "segments": [
+          [
+            "bank-plan_TEXT",
+            "16",
+            "00000C4D"
+          ],
+          [
+            "CONST",
+            "16",
+            "00000000"
+          ],
+          [
+            "CONST2",
+            "16",
+            "00000000"
+          ],
+          [
+            "_DATA",
+            "16",
+            "00000000"
+          ]
+        ],
+        "object_bytes": 3749,
+        "object_sha256": "456e2c1cbb602ed2f912cedf67f1cdc0f6af285210a24a64041a45680bc834d3"
+      },
+      {
+        "case": "ml-os",
+        "flags": [
+          "-zq",
+          "-2",
+          "-ml",
+          "-zl",
+          "-s",
+          "-os",
+          "-zastd=c99",
+          "-dCS_C16_REQUIRE_16BIT",
+          "-i=C:\\ClasSICK\\pc286-toolchain-20261023-a\\toolchain\\h",
+          "-fo=C:\\ClasSICK\\bank-plan-20261025-a\\final-c16\\ml-os.obj"
+        ],
+        "external_symbols": [
+          "cs_bm_validate_"
+        ],
+        "defined_symbols": [
+          "cs_bm_validate_",
+          "cs_bm_check_",
+          "cs_bm_plan4_"
+        ],
+        "unresolved_symbols": [],
+        "segments": [
+          [
+            "bank-plan_TEXT",
+            "16",
+            "00000742"
+          ],
+          [
+            "CONST",
+            "16",
+            "00000000"
+          ],
+          [
+            "CONST2",
+            "16",
+            "00000000"
+          ],
+          [
+            "_DATA",
+            "16",
+            "00000000"
+          ]
+        ],
+        "object_bytes": 2409,
+        "object_sha256": "447482c6cc27c5b11aac9ca737f91676ccef72ee4b359347874ad092d7f80481"
+      }
+    ],
+    "linked": false,
+    "target_executed": false,
+    "scope": "Compiler metadata/import audit only, not complete ISA/ABI/runtime proof",
+    "stack_policy": "-s is diagnostic only; no production stack-check waiver"
+  },
+  "compiler_calls_total": 12,
+  "final_qualified_objects": 6,
+  "initial_calls": 6,
+  "final_harness_calls": 6,
+  "model_tests_execute_on_host": true,
+  "target_executed": false,
+  "linked_286": false,
+  "backing_admitted": false,
+  "far_backend_qualified": false,
+  "commit_executed": false,
+  "production_runtime_changed": false,
+  "native_fast_paths_changed": false,
+  "prior_CI": {
+    "run": 40214442019,
+    "source_revision": "462e3a0d4fb7cd9a45b5930b05452f0313325b1f",
+    "m68k_rom": "success",
+    "windows_bootstrap": "success"
+  },
+  "new_CI": "pending at source commit",
+  "mac_control": {
+    "ROM_SHA256": "673a2cca57d1ec9ffd842f4c858fa4aafbcb042ec6f86445ae5717d4816c4965",
+    "compiled_source": "6892de0f43b4409e5b0fd9160981d8e7c23d8938",
+    "executable": "Snow v1.5.0-317c188",
+    "initial": {
+      "tag": 1297567793,
+      "version": 2,
+      "bytes": 128,
+      "source_irq": 1,
+      "vbl": 192053,
+      "scc": 1,
+      "combined": 0,
+      "services": 192054,
+      "baselines": 1,
+      "losses": 1,
+      "queued": 0,
+      "peak": 0,
+      "deliveries": 0,
+      "pointer_x": 256,
+      "pointer_y": 171,
+      "window_x": 80,
+      "window_y": 70,
+      "pattern": 0,
+      "phase": 1,
+      "motion_stage": 5,
+      "raw_a": 0,
+      "raw_b": 0,
+      "buttons": 0,
+      "motion_cause": 0,
+      "cause": 0,
+      "loss_reason": 2,
+      "loss_rr3": 9,
+      "loss_s1": 15682636,
+      "loss_s2": 14632004,
+      "loss_s3": 10437708,
+      "loss_previous": 16777216,
+      "loss_phase": 3,
+      "diagnostic": {
+        "tag": 1129525305,
+        "stage": 16,
+        "ticks": 192053,
+        "presses": 0,
+        "traps": 1,
+        "image_crc": 1620202067,
+        "fault": 0
+      },
+      "trace_hex": "4d5750310000000200000080000000010002ee3500000001000000000002ee36000000010000000100000000000000000000000000000100000000ab00000050000000460000000000000001000000050000000000000000000000000000000000000000000000020000000900ef4c4c00df4444009f444c0100000000000003",
+      "diagnostic_hex": "43533039000000100002ee3500000000000000016092525300000000"
+    },
+    "reset_no_replay": {
+      "tag": 1297567793,
+      "version": 2,
+      "bytes": 128,
+      "source_irq": 1,
+      "vbl": 717,
+      "scc": 30,
+      "combined": 0,
+      "services": 745,
+      "baselines": 2,
+      "losses": 1,
+      "queued": 0,
+      "peak": 0,
+      "deliveries": 0,
+      "pointer_x": 256,
+      "pointer_y": 171,
+      "window_x": 80,
+      "window_y": 70,
+      "pattern": 0,
+      "phase": 1,
+      "motion_stage": 5,
+      "raw_a": 1,
+      "raw_b": 0,
+      "buttons": 0,
+      "motion_cause": 0,
+      "cause": 0,
+      "loss_reason": 2,
+      "loss_rr3": 1,
+      "loss_s1": 9391180,
+      "loss_s2": 11488332,
+      "loss_s3": 11488324,
+      "loss_previous": 16843008,
+      "loss_phase": 2,
+      "diagnostic": {
+        "tag": 1129525305,
+        "stage": 16,
+        "ticks": 717,
+        "presses": 0,
+        "traps": 1,
+        "image_crc": 1620202067,
+        "fault": 0
+      },
+      "trace_hex": "4d575031000000020000008000000001000002cd0000001e00000000000002e9000000020000000100000000000000000000000000000100000000ab000000500000004600000000000000010000000500000001000000000000000000000000000000000000000200000001008f4c4c00af4c4c00af4c440101010000000002",
+      "diagnostic_hex": "4353303900000010000002cd00000000000000016092525300000000"
+    },
+    "reset_count": 1,
+    "control_clean": false,
+    "replay_loaded": false,
+    "paused_clock_marker_qualified": false,
+    "empty_replay_control_executed": false,
+    "single_X_trial_executed": false,
+    "deliberate_viewport_gesture": false,
+    "owner_foreground_handoff": true,
+    "owned_session_closed": true,
+    "host_mouse_preference_preserved": true
+  },
+  "keyboard_route": {
+    "separate_unchanged_ROM_session": true,
+    "tab_exposes_control_focus": false,
+    "replay_loaded": false,
+    "guest_motion_result": false,
+    "owned_session_closed": true
+  },
+  "Mac_motion_passed": false,
+  "PC_GUI_drag_passed": false,
+  "PC_repeat_performed": false,
+  "release_ready": false,
+  "PNG_count": 63,
+  "GIF_count": 2,
+  "new_screenshot": false,
+  "next": "A qualified input-control route remains necessary before causal decoder changes or release; 286 next needs backing ownership/admission, infallible commit and qualified far conversion",
+  "remaining_balances": {
+    "Copilot": "unavailable",
+    "Claude": "unavailable",
+    "Grok": "unavailable",
+    "Argon": "unavailable"
+  }
+}

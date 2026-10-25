@@ -87,3 +87,6 @@ assets/releases/tags and retired OneNote/wiki preserved.
 No step above was executed by this checklist. A recorded loss remains a
 separate result from a proven cause;an accepted move remains separate from
 continuous dragging and paired-release qualification.
+
+
+2026-10-25,SRC-0446:actual foreground access restored,but initial and reset no-replay setup records retain loss. Stop before marker/empty replay/single-X;the planned checklist is incomplete. No controlled causal motion result. Own sessions closed,ROM/preference preserved. [Actual control](pc286-bank-plan-evidence.md).

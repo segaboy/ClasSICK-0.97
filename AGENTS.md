@@ -1,5 +1,7 @@
 # ClasSICK 0.97 working instructions
 
+2026-10-25,SRC-0444..0446/IMPL-0076/TEST-0089:C99 bank-plan prototype passes176 frozen assertions/three host profiles/three compiled defects/six final C16 objects. No far backend/commit/runtime change. Native no-replay control retains loss;no qualified motion/GUI/release pass. Own sessions closed/preferences preserved,63PNG/twoGIF,originals retained. [Evidence](docs/development/pc286-bank-plan-evidence.md).
+
 2026-10-25,SRC-0442/0443:first286 retained-view slice reviews five files/14 rows;lead checks source hashes and arithmetic bounds. Logical range/prevalidated4-byte commit is next proposal,no API/backend/runtime change or native tests. Planned live checklist adds empty control,not executed. Prior full CI passes,new CI pending.63PNG/twoGIF,originals preserved;release motion/GUI gates remain. [Evidence](docs/development/retained-views-evidence.md).
 
 2026-10-25,SRC-0440/0441:owner chooses independent work while using desktop. Original paused-clock candidate tool passes49 CLI cases/14 preserved legacy controls;portable Windows/Linux CI added. Native timing trial deferred,no input result;own process/ROM/preference preserved. Prior full CI passes,new CI pending.63PNG/twoGIF;motion/GUI/release gates open,286 unchanged. [Evidence](docs/development/paused-clock-evidence.md).

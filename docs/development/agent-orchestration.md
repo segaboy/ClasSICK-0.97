@@ -440,3 +440,6 @@ balances unavailable. This is not evidence of quota savings. [Receipt](boot-inpu
 
 
 2026-10-25 retained views:one Copilot Sonnet5.5 low primary,37455B/five original source files plus relevant contract excerpts,65.97s/one read/zero writes,commands,tests. Adopt14 rows after seven lead source/obligation corrections and arithmetic audit;no implementation recreation,second worker or requalification. One reported premium request;other workers idle,all-four balances unavailable,no measured Codex saving. [Receipt](retained-views-evidence.json).
+
+
+2026-10-25 C16 plan:Grok times out240.78s/no artifact/model-selection fallback warning,no retry. One Copilot Sonnet5.5 low fallback,19231B/77.58s/one read/no commands,writes,tests;four original files adopted with disclosed fixes. Codex integrates/executes frozen oracle,host/C16 controls and GUI checks. No other worker/fan-out;1reported premium request/2provider requests,remaining all-four balances unavailable. [Receipt](pc286-bank-plan-evidence.json).

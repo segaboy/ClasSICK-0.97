@@ -4434,3 +4434,21 @@ not complete coverage or a new production contract. [Inventory](../docs/developm
 and36 arithmetic bounding combinations. No implementation tests or target run.
 Empty-input control added to the future live checklist;not executed.
 [Evidence](../docs/development/retained-views-evidence.md).
+
+
+## SRC-0444 - Owner release continuation and desktop availability
+
+2026-10-25. Owner requires all work necessary toward the paired release with bounded286 progress and supplies an available desktop/foreground handoff. Existing source/implementation/trial gates remain.
+[Evidence](../docs/development/pc286-bank-plan-evidence.md).
+
+
+## SRC-0445 - Original C99/C16 logical bank-plan prototype
+
+2026-10-25. One bounded original Grok attempt returns no artifact;Copilot fallback supplies usable original code/tests/contract. Lead integrates with disclosed fixes and176 frozen assertions/three compiled defects/three host profiles/six final C16 objects. No far backend or runtime binding.
+[Evidence](../docs/development/pc286-bank-plan-evidence.md).
+
+
+## SRC-0446 - Lead original-ROM no-replay control
+
+2026-10-25. Verified unchanged ROM,own known records only. Initial and reset no-replay controls retain loss;no clean setup,qualified paused clock,empty replay,single-X or motion pass. Own sessions closed and preferences preserved. No new historical or physical claim.
+[Evidence](../docs/development/pc286-bank-plan-evidence.md).

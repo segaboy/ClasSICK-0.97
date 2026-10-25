@@ -119,3 +119,6 @@ references. Production caller retention and callout inventories remain open.
 Full-span preflight cannot make a later backend failure atomic: native support
 still needs an infallible stable commit or whole-operation staging. There is no
 native byte/chunk commit API or qualified far-pointer implementation here.
+
+
+2026-10-25,SRC-0444..0446/IMPL-0076/TEST-0089:adopt the separate [logical geometry/descriptive4-byte plan](../development/pc286-bank-plan-contract.md) prototype. Three host profiles/176 frozen assertions/three compiled defects and six final C16 objects verified. This is no backing admission,capability,commit execution,far backend or production ABI;the native infallible-commit obligation remains open. [Evidence](../development/pc286-bank-plan-evidence.md).
