@@ -4476,3 +4476,19 @@ Empty-input control added to the future live checklist;not executed.
 
 2026-10-25. Verified unchanged originalROM launches;controllers fail activation across ordinary/normal-local/fullscreen modes. Exact owned cleanup,no input result,new screenshot or PC repeat. Helper source/alternate-method approval pending.
 [Evidence](../docs/development/input-routes-and-catalog-evidence.md).
+
+
+## SRC-0451 - Original first-input record checkpoint
+
+2026-10-25,one supervised Copilot task over original observer excerpts. Pure
+trigger/header/tests and unique source replacements adopted with linked-gate
+and guard integration.14 unchanged pre-read cases/20 overlapping author cases,
+three host profiles/compiled controls. No new source/manual or target execution.
+[Evidence](../docs/development/mac-first-input-probe-evidence.md).
+
+## SRC-0452 - Lead native experiment cost and checkpoint verification
+
+2026-10-25,83f7b6f native CI40225525501/default identity/twins/IRQ/seal/cost
+proof reidentified;first-input native observer needs new compilation. Package
+evidence locator finding recorded for later preparation. Helper approval and
+actual motion/drag/release remain open. [Receipt](../docs/development/mac-first-input-probe-evidence.json).

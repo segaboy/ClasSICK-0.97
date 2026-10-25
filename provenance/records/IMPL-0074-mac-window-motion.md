@@ -34,3 +34,6 @@ SRC-0434/0435: no supported runtime defect or code change. One reused verified R
 
 
 SRC-0449:opt-in finite pending-edge experiment behind default0 macro. Two fields only under1;no extra IO. Exact normal image/native+8B/stack/target proofs pending;host tests and disclosed source/test corrections recorded. [Evidence](../../docs/development/input-routes-and-catalog-evidence.md).
+
+
+SRC-0451/0452:optional first-input/loss/5000-service checkpoint observer,shared own spin/no new RAM/trace/MMIO. Pure helper/tests adopted,linked gate added;native first-input proof and trial pending. Prior83f7b6f finite-defer costs verified. [Evidence](../../docs/development/mac-first-input-probe-evidence.md).

@@ -27,7 +27,7 @@ WINDOW_SOURCES=('arch/m68k/loaded-reset.S','arch/m68k/runtime.c','arch/m68k/comp
  'core/ui/window.c','apps/product-scene/scene.c','apps/window-scene/scene.c','apps/window-scene/input.c',
  'apps/window-scene/capture.c','apps/window-scene/inbox.c','apps/window-scene/foreground.c')
 WINDOW_HEADERS=('arch/m68k/loaded-rom.ld','arch/m68k/runtime.h','arch/m68k/exclusion.h','platform/mac128k/rom.h',
- 'platform/mac128k/window-session.h','platform/mac128k/motion.h','core/graphics/surface.h','core/graphics/cursor.h',
+ 'platform/mac128k/window-session.h','platform/mac128k/motion.h','platform/mac128k/input-probe.h','core/graphics/surface.h','core/graphics/cursor.h',
  'core/input/pointer.h','core/input/mouse.h','core/ui/window.h','core/services/traps.h','apps/product-scene/scene.h',
  'apps/window-scene/scene.h','apps/window-scene/input.h','apps/window-scene/capture.h','apps/window-scene/inbox.h',
  'apps/window-scene/foreground.h','scripts/Build-LoadedAppROM.py','scripts/Build-MacROM.py')
@@ -41,12 +41,15 @@ def main():
     mode.add_argument('--window-drawing',action='store_true',help='Build the SPEC-0072 native Mac window preview')
     p.add_argument('--window-idle-probe',action='store_true',help='Diagnostic: halt in a self-branch after >=500 services; window profile only')
     p.add_argument('--window-pending-defer-probe',action='store_true',help='Experimental one-service pending-edge defer; window profile only')
+    p.add_argument('--window-first-input-probe',action='store_true',help='Freeze copied trace on delivered input/loss or >=5000 services; window only')
     p.add_argument('--dcd-invert',type=int,choices=(0,1,2,3),default=0,help='Unverified raw RR0 DCD sense mask; window profile only')
     a=p.parse_args();native=a.native_drawing or a.selected_drawing or a.outline_drawing or a.window_drawing
     if a.dcd_invert and not a.window_drawing:p.error('--dcd-invert requires --window-drawing')
     if a.window_idle_probe and not a.window_drawing:p.error('--window-idle-probe requires --window-drawing')
     if a.window_pending_defer_probe and not a.window_drawing:p.error('--window-pending-defer-probe requires --window-drawing')
     if a.window_pending_defer_probe and a.window_idle_probe:p.error('Choose one diagnostic profile')
+    if a.window_first_input_probe and not a.window_drawing:p.error('--window-first-input-probe requires --window-drawing')
+    if a.window_first_input_probe and a.window_idle_probe:p.error('Choose one diagnostic profile')
     repo=Path(__file__).resolve().parents[1];tools=Path(a.tool_root).resolve();out=Path(a.output).resolve()
     out.mkdir(parents=True,exist_ok=False);sys.dont_write_bytecode=True
     spec=spec_from_file_location('base_rom',repo/'scripts/Build-MacROM.py');h=module_from_spec(spec);spec.loader.exec_module(h)
@@ -88,6 +91,7 @@ def main():
         sources=WINDOW_SOURCES;headers=WINDOW_HEADERS+tuple(specs)
         program_source=None;program_hex='';specification='SPEC-0072';profile='native-window-preview-v1'
         if a.window_pending_defer_probe:profile='native-window-pending-defer-probe-v1'
+        if a.window_first_input_probe:profile='native-window-'+('pending-defer-' if a.window_pending_defer_probe else '')+'first-input-probe-v1'
     profiles=[]
     for twin in ('a','b'):
         folder=out/('Os-'+twin);folder.mkdir();objects=[]
@@ -99,7 +103,8 @@ def main():
         if a.selected_drawing or a.outline_drawing:flags+=['-DCLASSICK_SELECTED_DRAWING=1']
         if a.outline_drawing:flags+=['-DCLASSICK_OUTLINE_DRAWING=1']
         if a.window_drawing:flags+=['-DCLASSICK_MAC_DCD_INVERT='+str(a.dcd_invert)]
-        if a.window_idle_probe:flags+=['-DCLASSICK_MAC_IDLE_PROBE=1']
+        if a.window_idle_probe or a.window_first_input_probe:flags+=['-DCLASSICK_MAC_IDLE_PROBE=1']
+        if a.window_first_input_probe:flags+=['-DCLASSICK_MAC_FIRST_INPUT_PROBE=1']
         if a.window_pending_defer_probe:flags+=['-DCLASSICK_MAC_PENDING_DEFER_PROBE=1']
         for i,source in enumerate(sources):
             obj=folder/f'{i}.o';objects.append(obj);h.run([cc,*flags,'-c',repo/source,'-o',obj],env)
@@ -117,7 +122,8 @@ def main():
         if a.selected_drawing:required=tuple(x for x in required if x!='cs_native_draw')+('cs_selected_draw','cs_qd_select_get','cs_qd_select_set')
         if a.outline_drawing:required=tuple(x for x in required if x not in ('cs_native_draw','cs_qd_rect','cs_qd_view_rect'))+('cs_outline_draw','cs_qd_view_outline','cs_qd_select_get','cs_qd_select_set')
         if a.window_drawing:required=('cs_mac_main','cs_mac_window_begin','cs_mac_motion_service','cs_foreground_step','cs_mac_window_via_irq','cs_mac_window_scc_irq','cs_mac_window_combined_irq','cs_mac_window_interrupt','cs_product_scene','cs_window_apply','cs_m68k_foreground_enter','cs_m68k_foreground_leave')
-        if a.window_idle_probe:required+=('cs_mac_window_idle_checkpoint',)
+        if a.window_idle_probe or a.window_first_input_probe:required+=('cs_mac_window_idle_checkpoint',)
+        if a.window_first_input_probe:required+=('cs_mac_first_input_probe_gate',)
         if a.window_drawing and not any(name.startswith('cs_cursor_') for name in syms):raise ValueError('Disconnected cursor helper')
         if any(name not in syms for name in required):raise ValueError('Disconnected demonstration')
         cpu_callbacks=('cs_m68k_foreground_enter','cs_m68k_foreground_leave') if a.window_drawing else ()
@@ -138,10 +144,11 @@ def main():
                     raise ValueError('IRQ preservation/mask/RTE: '+name)
                 rows.append({'name':name,'source':source,'bytes':len(expected),'exact_opcodes_verified':True})
             idle=syms.get('cs_mac_window_idle_checkpoint')
-            if a.window_idle_probe:
+            if a.window_idle_probe or a.window_first_input_probe:
                 if idle is None or not 260<=idle-0x400000<=65534 or image[idle-0x400000:idle-0x400000+2]!=bytes.fromhex('60fe'):
                     raise ValueError('Idle checkpoint spin')
             elif idle is not None:raise ValueError('Idle checkpoint present in default ROM')
+            if ('cs_mac_first_input_probe_gate' in syms)!=bool(a.window_first_input_probe):raise ValueError('First-input gate/profile mismatch')
             at=syms['cs_mac_window_install_vectors']-0x400000
             for vector,name in zip((0x64,0x68,0x6C),('cs_mac_window_via_irq','cs_mac_window_scc_irq','cs_mac_window_combined_irq')):
                 if not 260<=at<=65526:raise ValueError('Vector installer span')
@@ -182,7 +189,7 @@ def main():
         if a.window_drawing:
             controls=[40,syms['cs_mac_line_a_handler']-0x400000,
                     syms['cs_mac_window_via_irq']-0x400000+3,syms['cs_mac_window_install_vectors']-0x400000+7]
-            if a.window_idle_probe:controls.append(syms['cs_mac_window_idle_checkpoint']-0x400000+1)
+            if a.window_idle_probe or a.window_first_input_probe:controls.append(syms['cs_mac_window_idle_checkpoint']-0x400000+1)
             for offset in controls:
                 bad=bytearray(b);bad[offset]^=1;struct.pack_into('>I',bad,256,h.crc(bad))
                 try:audit(bad)
@@ -221,6 +228,8 @@ def main():
      'inputs':{f:hashlib.sha256((repo/f).read_bytes().replace(b'\r\n',b'\n')).hexdigest() for f in (*sources,*headers)}}
     if a.window_drawing:manifest['window_idle_probe']=bool(a.window_idle_probe)
     if a.window_drawing:manifest['window_pending_defer_probe']=bool(a.window_pending_defer_probe)
+    if a.window_drawing:manifest['window_first_input_probe']=bool(a.window_first_input_probe)
+    if a.window_first_input_probe:manifest['window_first_input_probe_limit']=5000
     if a.window_idle_probe:manifest['window_idle_probe_threshold']=500
     if a.window_drawing:manifest.update({'window_drawing':True,'native_drawing_context':None,
      'dcd_invert':a.dcd_invert,'dcd_invert_verified':False,'cpu_callbacks':list(cpu_callbacks),

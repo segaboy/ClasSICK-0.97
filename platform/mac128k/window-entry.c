@@ -3,6 +3,7 @@
 #include "rom.h"
 #include "window-session.h"
 #include "motion.h"
+#include "input-probe.h"
 #include "../../arch/m68k/exclusion.h"
 #include "../../core/services/traps.h"
 
@@ -28,6 +29,9 @@
 #endif
 #if CLASSICK_MAC_IDLE_PROBE < 0 || CLASSICK_MAC_IDLE_PROBE > 1
 #error "CLASSICK_MAC_IDLE_PROBE must be 0 or 1"
+#endif
+#if CLASSICK_MAC_FIRST_INPUT_PROBE && !CLASSICK_MAC_IDLE_PROBE
+#error "CLASSICK_MAC_FIRST_INPUT_PROBE requires CLASSICK_MAC_IDLE_PROBE=1"
 #endif
 
 volatile cs_mac_diagnostics cs_mac_diag;
@@ -164,6 +168,14 @@ __attribute__((noreturn)) static void fg_fatal(uint32_t code,int32_t cause)
     (void)cs_foreground_stop(&session.foreground);
     for(;;) { }
 }
+#if CLASSICK_MAC_FIRST_INPUT_PROBE
+/* Kept as an original linked proof point; GC drops it from every normal mode. */
+__attribute__((noinline)) int cs_mac_first_input_probe_gate(uint32_t services,
+    uint32_t losses,uint32_t deliveries)
+{
+    return cs_mac_first_input_ready(services,losses,deliveries);
+}
+#endif
 static uint32_t observe(void)
 {
     uint32_t token=cs_m68k_foreground_enter(0),dead=terminal;
@@ -183,7 +195,11 @@ static uint32_t observe(void)
         cs_mac_trace.loss_previous=motion.first_loss.previous;
         cs_mac_trace.loss_phase=motion.first_loss.inbox_phase;
         cs_mac_trace.loss_reason=motion.first_loss.reason;
-#if CLASSICK_MAC_IDLE_PROBE
+#if CLASSICK_MAC_FIRST_INPUT_PROBE
+        /* Freeze the copied record before any later UI action; not shutdown. */
+        if(cs_mac_first_input_probe_gate(cs_mac_trace.services,cs_mac_trace.losses,
+            cs_mac_trace.deliveries))cs_mac_window_idle_checkpoint();
+#elif CLASSICK_MAC_IDLE_PROBE
         /* Minimum service count, not a timing promise; trace is already copied. */
         if(motion.services>=500u)cs_mac_window_idle_checkpoint();
 #endif

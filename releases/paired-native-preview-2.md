@@ -241,3 +241,6 @@ TEST-0077 cases are unexecuted;current published pair unchanged.
 foreground harness. Production coordinator,CPU/ISR/SCC binding,real latency
 and full128K budget remain open. Original IC cases retain partial/unexecuted
 hardware scope;no Mac parity,release acceptance or new target run.
+
+
+SRC-0451/0452:83f7b6f finite-defer native proof passes with unchanged normal bytes,+476ROM/+8BSS/+8stack-bound,unbooted. First-input checkpoint preparation adds no motion pass;new native proof/trial pending. Before final freeze,parameterize the generic package SOURCE.txt evidence path,currently fixed to preview1. Helper approval and E1-E3 readiness remain open. [Evidence](../docs/development/mac-first-input-probe-evidence.md).

@@ -182,3 +182,23 @@ policy,not a diagnosis of the earlier ambiguous trace. Native builder option
 combination. Distinct profile name;normal byte identity,expected+8B BSS,current
 source/IRQ/stack proofs and exact target qualification are mandatory before
 any release adoption. Host tests pass;native proof/trial pending at this record.
+
+
+## First-input record checkpoint (engineering diagnostic,SRC-0451)
+
+--window-first-input-probe requires the window profile and refuses idle-probe;
+it may combine with pending-defer under a distinct profile name. It sets the
+validated FIRST_INPUT macro and the existing checkpoint-support macro. After
+the ordinary complete trace copy,only on the nonterminal observer path with
+IPL7 held,freeze if deliveries!=0 OR losses!=0 OR services>=5000. Keep the
+token held and enter the existing60FE own diagnostic spin;do not perform
+additional MMIO,delivery,recovery or allocations. No semantic STOPPED claim.
+The linked noinline gate must survive GC only in this mode. Header predicate
+tests do not replace native flag/link/spin verification. No new trace/RAM.
+
+This bounds by observed service count,not elapsed time or physical events.
+Require exact own PC/IPL7 and full original-record guards in a later trial.
+A first delivered sample may be a button;unread prefix/first loss remain
+visible. Default and finite-defer baseline images must remain byte-identical
+when the observation flag is off. Native cost and target behavior must be
+recorded;host tests alone do not qualify input. [Evidence](../development/mac-first-input-probe-evidence.md).

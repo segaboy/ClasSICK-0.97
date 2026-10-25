@@ -1,0 +1,202 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-25",
+  "source_ids": [
+    "SRC-0451",
+    "SRC-0452"
+  ],
+  "baseline_revision": "83f7b6f1459866265a669fb3b5b94a41858fc932",
+  "scope": "Original optional first-delivery/loss/service-count diagnostic;input policy unchanged",
+  "worker": {
+    "round": "first-input",
+    "worker": "copilot",
+    "exit_code": 0,
+    "outer_timeout": false,
+    "elapsed_seconds": 41.05,
+    "input_bytes": 7443,
+    "input_sha256": "9f3fb6084958c2a932ba82ae0a9b775caeb938a923c53686803ba42b1e45086a",
+    "stderr_bytes": 0,
+    "model": "claude-sonnet-5.5",
+    "effort": "low",
+    "prompt_reads": 3,
+    "input_directory_listings": 1,
+    "source_or_commands_outside_frozen_input": false,
+    "writes": 0,
+    "tests_executed": [],
+    "reported_premium_requests": 1
+  },
+  "worker_deviation": "Four view calls rather than requested one:three prompt views and one listing inside input directory. No extra source content. No retry/fan-out.",
+  "lead_changes": [
+    "Collapsed nested profile guard",
+    "Added noinline linked gate,required only in this native diagnostic,so a missing feature define cannot pass as an idle probe",
+    "Integrated builder/CI/default-and-defer baseline checks"
+  ],
+  "trigger": {
+    "deliveries_nonzero": true,
+    "losses_nonzero": true,
+    "service_fallback": 5000,
+    "elapsed_time_guarantee": false,
+    "semantic_shutdown": false,
+    "guest_memory_patch": false,
+    "extra_MMIO": false,
+    "extra_trace_fields": false,
+    "expected_added_BSS": 0,
+    "checkpoint_spin": "60fe",
+    "guarded_PC_and_IPL7_required": true
+  },
+  "tests": {
+    "author_literal_cases": 20,
+    "pre_read_frozen_cases": 14,
+    "overlapping_cases_are_not_additive": true,
+    "frozen_sha256": "31a9fe5b93294877738e4b9e965466f14530688f47cf2f3eff73a3f7f25206a5",
+    "frozen_unchanged": true,
+    "host_profiles": [
+      "Clang Debug",
+      "GCC Release",
+      "Clang ASan/UBSan"
+    ],
+    "targeted_CTests_per_profile": 2,
+    "controls": [
+      {
+        "case": "too-early",
+        "compiled": true,
+        "detected": true
+      },
+      {
+        "case": "ignore-loss",
+        "compiled": true,
+        "detected": true
+      },
+      {
+        "case": "ignore-delivery",
+        "compiled": true,
+        "detected": true
+      },
+      {
+        "case": "bad macro 2",
+        "refused": true
+      },
+      {
+        "case": "bad macro -1",
+        "refused": true
+      },
+      {
+        "case": "missing checkpoint dependency",
+        "named_refusal": true
+      },
+      {
+        "case": "builder ['--window-first-input-probe']",
+        "refused_before_output": true
+      },
+      {
+        "case": "builder ['--window-first-input-probe', '--drawing']",
+        "refused_before_output": true
+      },
+      {
+        "case": "builder ['--window-first-input-probe', '--native-drawing']",
+        "refused_before_output": true
+      },
+      {
+        "case": "builder ['--window-first-input-probe', '--selected-drawing']",
+        "refused_before_output": true
+      },
+      {
+        "case": "builder ['--window-first-input-probe', '--outline-drawing']",
+        "refused_before_output": true
+      },
+      {
+        "case": "builder ['--window-first-input-probe', '--window-drawing', '--window-idle-probe']",
+        "refused_before_output": true
+      },
+      {
+        "case": "builder ['--window-first-input-probe', '--window-pending-defer-probe']",
+        "refused_before_output": true
+      },
+      {
+        "case": "builder ['--window-first-input-probe', '--window-pending-defer-probe', '--drawing']",
+        "refused_before_output": true
+      },
+      {
+        "case": "builder ['--window-first-input-probe', '--window-pending-defer-probe', '--native-drawing']",
+        "refused_before_output": true
+      },
+      {
+        "case": "builder ['--window-first-input-probe', '--window-pending-defer-probe', '--selected-drawing']",
+        "refused_before_output": true
+      },
+      {
+        "case": "builder ['--window-first-input-probe', '--window-pending-defer-probe', '--outline-drawing']",
+        "refused_before_output": true
+      },
+      {
+        "case": "builder ['--window-first-input-probe', '--window-pending-defer-probe', '--window-drawing', '--window-idle-probe']",
+        "refused_before_output": true
+      }
+    ]
+  },
+  "prior_native": {
+    "source_revision": "83f7b6f1459866265a669fb3b5b94a41858fc932",
+    "CI_run": 40225525501,
+    "native_job": "success",
+    "windows_job": "success",
+    "verification": {
+      "schema_version": 1,
+      "profiles": [
+        {
+          "probe": false,
+          "rom_sha256": "673a2cca57d1ec9ffd842f4c858fa4aafbcb042ec6f86445ae5717d4816c4965",
+          "rom_used": 23096,
+          "native_data_bss": 304,
+          "stack_bound": 4996,
+          "resealed_controls": 4
+        },
+        {
+          "probe": true,
+          "rom_sha256": "cfa16dc2e816cc833fb6c2d51ca9088fdf26215c6aa989999783dbd08dcb4235",
+          "rom_used": 23572,
+          "native_data_bss": 312,
+          "stack_bound": 5004,
+          "resealed_controls": 4
+        }
+      ],
+      "normal_byte_identical_to_b3cb3fe": true,
+      "current_source_hashes_verified": true,
+      "mode_refusals": 6,
+      "probe_kind": "pending-defer",
+      "probe_spin_bytes": null,
+      "additional_ram_bytes": 8,
+      "trace_layout_bytes": 128,
+      "emulator_run": false,
+      "motion_or_release_qualification": false
+    },
+    "experiment": {
+      "sha256": "cfa16dc2e816cc833fb6c2d51ca9088fdf26215c6aa989999783dbd08dcb4235",
+      "ROM_bytes": 65536,
+      "ROM_used": 23572,
+      "BSS": 312,
+      "workspace": 964,
+      "stack_bound": 5004,
+      "largest_frame": 284,
+      "trace_address": 2936,
+      "diagnostic_address": 3064
+    },
+    "target_executed": false
+  },
+  "current_native_first_input": "pending source CI",
+  "current_native_default_and_defer_byte_comparisons": "pending source CI",
+  "new_trial": false,
+  "new_screenshot": false,
+  "PNG_count": 63,
+  "GIF_count": 2,
+  "Windows_helper": "approval pending;no implementation or use",
+  "Mac_motion_passed": false,
+  "PC_GUI_drag_passed": false,
+  "release_ready": false,
+  "package_finding": "Prepare-PairedRelease.py and its independent auditor hardcode preview-session-evidence.json in SOURCE.txt. Parameterize the evidence locator before a later window-release freeze;no package produced here.",
+  "remaining_balances": {
+    "Copilot": "unavailable",
+    "Claude": "unavailable",
+    "Grok": "unavailable",
+    "Argon": "unavailable"
+  }
+}

@@ -207,6 +207,28 @@ jobs:
             ${{ runner.temp }}/classick-window-defer/Os-a/native-window-disassembly.txt
             ${{ runner.temp }}/classick-defer-verification.json
           if-no-files-found: error
+      - name: Build strict first-input checkpoint twins (unbooted)
+        run: python3 scripts/Build-LoadedAppROM.py --window-drawing --window-first-input-probe --tool-root "$RUNNER_TEMP/classick-m68k/root" --output "$RUNNER_TEMP/classick-window-first-input"
+      - name: Verify strict first-input checkpoint and unchanged normal ROM
+        run: python3 scripts/Verify-MacIdleProbe.py --first-input --normal "$RUNNER_TEMP/classick-window-preview" --probe "$RUNNER_TEMP/classick-window-first-input" --output "$RUNNER_TEMP/classick-first-input-verification.json"
+      - name: Build finite-defer first-input checkpoint twins (unbooted)
+        run: python3 scripts/Build-LoadedAppROM.py --window-drawing --window-pending-defer-probe --window-first-input-probe --tool-root "$RUNNER_TEMP/classick-m68k/root" --output "$RUNNER_TEMP/classick-window-defer-first-input"
+      - name: Verify finite-defer first-input checkpoint and unchanged policy baseline
+        run: python3 scripts/Verify-MacIdleProbe.py --first-input --pending-defer --normal "$RUNNER_TEMP/classick-window-defer" --probe "$RUNNER_TEMP/classick-window-defer-first-input" --output "$RUNNER_TEMP/classick-defer-first-input-verification.json"
+      - name: Retain first-input checkpoints (unbooted)
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
+        with:
+          name: classick-window-first-input-mac
+          path: |
+            ${{ runner.temp }}/classick-window-first-input/manifest.json
+            ${{ runner.temp }}/classick-window-first-input/Os-a/classick-loaded-app.rom
+            ${{ runner.temp }}/classick-window-first-input/Os-a/classick-loaded-app.map
+            ${{ runner.temp }}/classick-window-defer-first-input/manifest.json
+            ${{ runner.temp }}/classick-window-defer-first-input/Os-a/classick-loaded-app.rom
+            ${{ runner.temp }}/classick-window-defer-first-input/Os-a/classick-loaded-app.map
+            ${{ runner.temp }}/classick-first-input-verification.json
+            ${{ runner.temp }}/classick-defer-first-input-verification.json
+          if-no-files-found: error
       - name: Build automatic idle diagnostic twins (unbooted)
         run: python3 scripts/Build-LoadedAppROM.py --window-drawing --window-idle-probe --tool-root "$RUNNER_TEMP/classick-m68k/root" --output "$RUNNER_TEMP/classick-window-idle"
       - name: Verify idle diagnostic and unchanged normal ROM

@@ -33,3 +33,6 @@ SRC-0434/0435: no supported runtime defect or code change. One reused verified R
 
 
 SRC-0449:normal6295 checks/32 phase-inversion cases retained;experimental214 assertions after two documented API-constant corrections,three host profiles,three compiled defects,two bad macros/default-zero/six builder refusals pass. Vacuous author assertions removed;final oracle not strictly author-blind. Native compile/byte identity/target motion pending. [Receipt](../../docs/development/input-routes-and-catalog-evidence.json).
+
+
+SRC-0451:two trigger CTests in three host profiles,14 unchanged frozen cases/20 overlapping author cases,three compiled defects,two bad macros,one dependency and12 builder refusals. First-input native flag/link/spin/default-byte proofs and live input remain pending. [Receipt](../../docs/development/mac-first-input-probe-evidence.json).

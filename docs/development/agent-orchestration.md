@@ -446,3 +446,6 @@ balances unavailable. This is not evidence of quota savings. [Receipt](boot-inpu
 
 
 2026-10-25:one Copilot primary per distinct lane:6354B/47.53s numeric286 catalog and19547B/104.47s Mac opt-in experiment. A cache EPERM justified the identical environment retry only;no model fan-out. Both return usable code,but lead reproduces/fixes a subtraction bug,invalid fixtures,vacuous assertions and one deferred-state guard. Always-true assertions,placeholder expectations and unverified fixtures must be reported as blockers,never credited as tests. Lead adopts artifacts,executes oracles/compiler controls and keeps native/GUI evidence separate.1reported premium request each;all balances unavailable. [Receipt](input-routes-and-catalog-evidence.json).
+
+
+2026-10-25 first-input observation:Copilot7443B/41.05s supplies usable header/test/three patches. Four view calls (three same-prompt views,one input-directory listing) violate one-read cap;no outside content/commands/writes/tests. Lead integrates linked gate/native profile guards and unchanged pre-read oracle;no second worker or implementation recreation. One reported premium request;all balances unavailable. [Receipt](mac-first-input-probe-evidence.json).
