@@ -1,5 +1,7 @@
 # Paired native preview 2 - first interactive window
 
+2026-10-25,SRC-0456..0462/IMPL-0078/TEST-0091:explicit fresh-helper approval recorded. Original host helper/fake guards/one-shot observer pass four focused CTests in three profiles;native input remains unqualified. Snow foreground refused,PC injected motion negative/device control positive;physical check NOT PERFORMED. Active-time cap exceeded,diagnostic run only;owned sessions closed/media preserved.286 binding proposal corrected,not implemented.65PNG/twoGIF;Mac motion/PC GUI drag/release gates remain. [Evidence](../docs/development/windows-input-helper-evidence.md).
+
 2026-10-25,SRC-0447..0450:opt-in Mac finite-defer experiment passes214 corrected-oracle checks/three host profiles/three compiled defects;normal6295 checks retained. Native byte/cost/trial proof pending.286 numeric catalog passes32 frozen checks/later bounds regression/six C16 witnesses. GUI activation fails;owned sessions closed,helper approval pending. No motion/drag/release pass;originals/63PNG/twoGIF preserved. [Evidence](../docs/development/input-routes-and-catalog-evidence.md).
 
 2026-10-25,SRC-0444..0446/IMPL-0076/TEST-0089:C99 bank-plan prototype passes176 frozen assertions/three host profiles/three compiled defects/six final C16 objects. No far backend/commit/runtime change. Native no-replay control retains loss;no qualified motion/GUI/release pass. Own sessions closed/preferences preserved,63PNG/twoGIF,originals retained. [Evidence](../docs/development/pc286-bank-plan-evidence.md).

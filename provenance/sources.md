@@ -4515,3 +4515,38 @@ Lead changes and fixture failures disclosed. [Review](../docs/development/paired
 35 overlapping frozen literal cases,two faulty controls and resealed same-length
 wrong locator rejected for each component. No native package/trial/publication.
 [Receipt](../docs/development/paired-evidence-locator.json).
+
+## SRC-0456 - Owner approval of fresh helper and isolated use
+
+2026-10-25. Owner explicitly approved the fresh worker/API-declarations-only Windows helper and its use on owned isolated Snow/VirtualBox sessions. The earlier excluded example remains excluded;no release/reference/physical permission expands.
+[Review](../docs/development/windows-input-helper-evidence.md).
+
+## SRC-0457 - Reviewed compiler SDK interface metadata
+
+2026-10-25. Pinned admitted LLVM-MinGW archive/header identities checked;selected declarations,type layouts,named constants only,including exact owned UIA metadata. No implementation bodies/examples sent. Identity record:docs/development/windows-input-sdk-identity.json.
+[Review](../docs/development/windows-input-helper-evidence.md).
+
+## SRC-0458 - Original fresh Windows helper artifacts
+
+2026-10-25. Fresh supervised Copilot primary and bounded correction/capture artifacts,reviewed and integrated by lead. No worker execution or repository edits. Host instrumentation only.
+[Review](../docs/development/windows-input-helper-evidence.md).
+
+## SRC-0459 - Owned isolated negative input controls
+
+2026-10-25. Verified normal original candidates;Snow foreground refusal/zero events,PC Windows-injection negative/device-control positive. Physical check not performed. Declared active-time bound exceeded;diagnostic only. Exact media/inventory cleanup preserved.
+[Review](../docs/development/windows-input-helper-evidence.md).
+
+## SRC-0460 - Original bounded observer artifact
+
+2026-10-25. Fresh Copilot one-shot observation/cleanup draft adopted with lead mkdir/finally,strict identity and post-pause corrections. No worker execution;default has no subprocess.
+[Review](../docs/development/windows-input-helper-evidence.md).
+
+## SRC-0461 - Lead host instrumentation verification
+
+2026-10-25. Four focused CTests in Clang/GCC/ASanUBSan,87 oracle/30 fake guard/11 observer methods;native compile/dry/inactive controls and compiled faulty controls. No native input qualification inferred.
+[Review](../docs/development/windows-input-helper-evidence.md).
+
+## SRC-0462 - Proposed 286 stable binding contract
+
+2026-10-25. Original public numeric model inputs only;fresh Copilot proposal adopted with corrections to bank maximum,borrow ordering,validation and epoch exhaustion. PROPOSED;no native binding,far conversion or new executed tests.
+[Review](../docs/development/windows-input-helper-evidence.md).

@@ -1,0 +1,481 @@
+{
+  "date": "2026-10-25",
+  "sources": [
+    "SRC-0456",
+    "SRC-0457",
+    "SRC-0458",
+    "SRC-0459",
+    "SRC-0460",
+    "SRC-0461",
+    "SRC-0462"
+  ],
+  "baseline_review_revision": "05629eed80ef7b33d679ec06747db99f3c3bca3e",
+  "native_source_revision": "1653c49785ad4a9eb2c4a84a87c44c188abd16f7",
+  "native_source_CI": {
+    "run": 40230241112,
+    "windows": "success",
+    "native": "success"
+  },
+  "scope": "Host instrumentation and proposed 286 binding only;no guest implementation/input-policy change",
+  "worker_calls": [
+    {
+      "task": "primary",
+      "model": "claude-sonnet-5.5",
+      "provider": "copilot",
+      "effort": "low",
+      "execution": {
+        "round": "primary",
+        "worker": "copilot",
+        "exit_code": 0,
+        "outer_timeout": false,
+        "elapsed_seconds": 163.77,
+        "input_bytes": 16627,
+        "input_sha256": "717de118e38ca7dae07c60fe0a257118971fbf4b5a7d365cd1a4346d483376ca",
+        "stderr_bytes": 0
+      },
+      "reported_premium_requests": 1,
+      "capture_sha256": "c28c485ca97143b9eb761c5c4f97a862ac0b2268712b06e32d92db7dbb88ecd4",
+      "worker_tests_executed": [],
+      "repository_writes": 0
+    },
+    {
+      "task": "correction",
+      "model": "claude-sonnet-5.5",
+      "provider": "copilot",
+      "effort": "low",
+      "execution": {
+        "round": "correction",
+        "worker": "copilot",
+        "exit_code": 0,
+        "outer_timeout": false,
+        "elapsed_seconds": 85.19,
+        "input_bytes": 28113,
+        "input_sha256": "e745c9d1745d36acd3573f02744fea9fc99d444959b5f9c7fb11029b39dee334",
+        "stderr_bytes": 0
+      },
+      "reported_premium_requests": 1,
+      "capture_sha256": "66bfa38a3a3333edd63b95946de27b9982ccfd9806f6274f626d49e96d15d740",
+      "worker_tests_executed": [],
+      "repository_writes": 0
+    },
+    {
+      "task": "capture",
+      "model": "claude-sonnet-5.5",
+      "provider": "copilot",
+      "effort": "low",
+      "execution": {
+        "round": "capture",
+        "worker": "copilot",
+        "exit_code": 0,
+        "outer_timeout": false,
+        "elapsed_seconds": 59.41,
+        "input_bytes": 17410,
+        "input_sha256": "b5699b4a066c06f273225f7363f4095cd19054c37e02090a7b13fa86ec114f2d",
+        "stderr_bytes": 0
+      },
+      "reported_premium_requests": 1,
+      "capture_sha256": "0d91b6ff3edb43ec436500c6b9d98ff0c6289752ce3c8bc6b47f59d239dfd1fd",
+      "worker_tests_executed": [],
+      "repository_writes": 0
+    },
+    {
+      "task": "budget",
+      "model": "claude-sonnet-5.5",
+      "provider": "copilot",
+      "effort": "low",
+      "execution": {
+        "round": "budget",
+        "worker": "copilot",
+        "exit_code": 0,
+        "outer_timeout": false,
+        "elapsed_seconds": 44.31,
+        "input_bytes": 4741,
+        "input_sha256": "876461b80210d39f5c46ab5d90d687bde1a4c051ede4aacdb5011a87edb13468",
+        "stderr_bytes": 0
+      },
+      "reported_premium_requests": 1,
+      "capture_sha256": "4613ab9b177277d2c5671bc3239bdd19953f29444ba757bfaff6cbebfe9619b4",
+      "worker_tests_executed": [],
+      "repository_writes": 0
+    },
+    {
+      "task": "binding-contract",
+      "model": "claude-sonnet-5.5",
+      "provider": "copilot",
+      "effort": "low",
+      "execution": {
+        "round": "binding-contract",
+        "worker": "copilot",
+        "exit_code": 0,
+        "outer_timeout": false,
+        "elapsed_seconds": 33.23,
+        "input_bytes": 18642,
+        "input_sha256": "39c9b5f8790400521428b080ab2f5c1c6aa95049187940d8661598dc68057071",
+        "stderr_bytes": 0
+      },
+      "reported_premium_requests": 1,
+      "capture_sha256": "92fbd00e0aac9aa8aacce16b1e976818735afbd439370ae0ff06cd53fc055f14",
+      "worker_tests_executed": [],
+      "repository_writes": 0
+    }
+  ],
+  "balances": {
+    "Copilot": "unavailable",
+    "Claude": "unavailable",
+    "Grok": "unavailable",
+    "Antigravity": "unavailable"
+  },
+  "checks": [
+    {
+      "compiler": "clang",
+      "native_adapter_and_capture_compile_link": true,
+      "dry_passed": true,
+      "inactive_live_refused_before_input": true
+    },
+    {
+      "compiler": "gcc",
+      "native_adapter_and_capture_compile_link": true,
+      "dry_passed": true,
+      "inactive_live_refused_before_input": true
+    },
+    {
+      "faulty_control": "observer omits pause",
+      "detected": true,
+      "native_backend_used": false
+    },
+    {
+      "profile": "clang",
+      "targeted_CTest_passed": 4,
+      "guard_assertions": 30,
+      "oracle_assertions": 87,
+      "observer_methods": 11,
+      "log_sha256": "972760939b704ee36cf79163d89ed7307d1244ab9251ec3471ada7084b275d77"
+    },
+    {
+      "profile": "gcc",
+      "targeted_CTest_passed": 4,
+      "guard_assertions": 30,
+      "oracle_assertions": 87,
+      "observer_methods": 11,
+      "log_sha256": "1c6e1579abdce484efdae92689d3ab35ce66355bb7168c65c64ae46a62b194b9"
+    },
+    {
+      "profile": "sanitized",
+      "targeted_CTest_passed": 4,
+      "guard_assertions": 30,
+      "oracle_assertions": 87,
+      "observer_methods": 11,
+      "log_sha256": "cff1c6006ba3fb05a949dceccf2058157539ac305cef422f3c869ed260099d9d"
+    }
+  ],
+  "earlier_core_checks": [
+    {
+      "profile": "clang",
+      "test": "author",
+      "stdout": "failures: 0",
+      "passed": true
+    },
+    {
+      "profile": "clang",
+      "test": "oracle",
+      "stdout": "oracle 87 checks, 0 failures",
+      "passed": true
+    },
+    {
+      "profile": "gcc",
+      "test": "author",
+      "stdout": "failures: 0",
+      "passed": true
+    },
+    {
+      "profile": "gcc",
+      "test": "oracle",
+      "stdout": "oracle 87 checks, 0 failures",
+      "passed": true
+    },
+    {
+      "profile": "san",
+      "test": "author",
+      "stdout": "failures: 0",
+      "passed": true
+    },
+    {
+      "profile": "san",
+      "test": "oracle",
+      "stdout": "oracle 87 checks, 0 failures",
+      "passed": true
+    },
+    {
+      "profile": "clang",
+      "native_compile_dry_inactive_passed": true,
+      "native_input_events": 0
+    },
+    {
+      "profile": "gcc",
+      "native_compile_dry_inactive_passed": true,
+      "native_input_events": 0
+    }
+  ],
+  "compiled_core_defects": [
+    {
+      "control": "ignore-row-validation",
+      "compiled": true,
+      "detected": true
+    },
+    {
+      "control": "skip-guard",
+      "compiled": true,
+      "detected": true
+    },
+    {
+      "control": "lose-owed-release",
+      "compiled": true,
+      "detected": true
+    },
+    {
+      "profile": "clang",
+      "native_hash_checks": 3,
+      "null_BCrypt_object_observed_working": true,
+      "UI_input": false
+    },
+    {
+      "profile": "gcc",
+      "native_hash_checks": 3,
+      "null_BCrypt_object_observed_working": true,
+      "UI_input": false
+    }
+  ],
+  "frozen_oracle": {
+    "note": "Original literal cases frozen before worker code/header is seen;may overlap author tests,not additive unique requirements. API adapter will be disclosed.",
+    "cases": [
+      {
+        "name": "released control",
+        "text": "0 0 10 N\n",
+        "accepted": true
+      },
+      {
+        "name": "small bounds",
+        "text": "-8 8 1000 N\n",
+        "accepted": true
+      },
+      {
+        "name": "one pair",
+        "text": "0 0 10 D\n1 0 20 N\n0 0 10 U\n",
+        "accepted": true
+      },
+      {
+        "name": "64 rows",
+        "text": "0 0 10 N\n0 0 10 N\n0 0 10 N\n0 0 10 N\n0 0 10 N\n0 0 10 N\n0 0 10 N\n0 0 10 N\n0 0 10 N\n0 0 10 N\n0 0 10 N\n0 0 10 N\n0 0 10 N\n0 0 10 N\n0 0 10 N\n0 0 10 N\n0 0 10 N\n0 0 10 N\n0 0 10 N\n0 0 10 N\n0 0 10 N\n0 0 10 N\n0 0 10 N\n0 0 10 N\n0 0 10 N\n0 0 10 N\n0 0 10 N\n0 0 10 N\n0 0 10 N\n0 0 10 N\n0 0 10 N\n0 0 10 N\n0 0 10 N\n0 0 10 N\n0 0 10 N\n0 0 10 N\n0 0 10 N\n0 0 10 N\n0 0 10 N\n0 0 10 N\n0 0 10 N\n0 0 10 N\n0 0 10 N\n0 0 10 N\n0 0 10 N\n0 0 10 N\n0 0 10 N\n0 0 10 N\n0 0 10 N\n0 0 10 N\n0 0 10 N\n0 0 10 N\n0 0 10 N\n0 0 10 N\n0 0 10 N\n0 0 10 N\n0 0 10 N\n0 0 10 N\n0 0 10 N\n0 0 10 N\n0 0 10 N\n0 0 10 N\n0 0 10 N\n0 0 10 N\n",
+        "accepted": true
+      },
+      {
+        "name": "30 seconds",
+        "text": "0 0 1000 N\n0 0 1000 N\n0 0 1000 N\n0 0 1000 N\n0 0 1000 N\n0 0 1000 N\n0 0 1000 N\n0 0 1000 N\n0 0 1000 N\n0 0 1000 N\n0 0 1000 N\n0 0 1000 N\n0 0 1000 N\n0 0 1000 N\n0 0 1000 N\n0 0 1000 N\n0 0 1000 N\n0 0 1000 N\n0 0 1000 N\n0 0 1000 N\n0 0 1000 N\n0 0 1000 N\n0 0 1000 N\n0 0 1000 N\n0 0 1000 N\n0 0 1000 N\n0 0 1000 N\n0 0 1000 N\n0 0 1000 N\n0 0 1000 N\n",
+        "accepted": true
+      },
+      {
+        "name": "empty",
+        "text": "",
+        "accepted": false
+      },
+      {
+        "name": "65 rows",
+        "text": "0 0 10 N\n0 0 10 N\n0 0 10 N\n0 0 10 N\n0 0 10 N\n0 0 10 N\n0 0 10 N\n0 0 10 N\n0 0 10 N\n0 0 10 N\n0 0 10 N\n0 0 10 N\n0 0 10 N\n0 0 10 N\n0 0 10 N\n0 0 10 N\n0 0 10 N\n0 0 10 N\n0 0 10 N\n0 0 10 N\n0 0 10 N\n0 0 10 N\n0 0 10 N\n0 0 10 N\n0 0 10 N\n0 0 10 N\n0 0 10 N\n0 0 10 N\n0 0 10 N\n0 0 10 N\n0 0 10 N\n0 0 10 N\n0 0 10 N\n0 0 10 N\n0 0 10 N\n0 0 10 N\n0 0 10 N\n0 0 10 N\n0 0 10 N\n0 0 10 N\n0 0 10 N\n0 0 10 N\n0 0 10 N\n0 0 10 N\n0 0 10 N\n0 0 10 N\n0 0 10 N\n0 0 10 N\n0 0 10 N\n0 0 10 N\n0 0 10 N\n0 0 10 N\n0 0 10 N\n0 0 10 N\n0 0 10 N\n0 0 10 N\n0 0 10 N\n0 0 10 N\n0 0 10 N\n0 0 10 N\n0 0 10 N\n0 0 10 N\n0 0 10 N\n0 0 10 N\n0 0 10 N\n",
+        "accepted": false
+      },
+      {
+        "name": "31 seconds",
+        "text": "0 0 1000 N\n0 0 1000 N\n0 0 1000 N\n0 0 1000 N\n0 0 1000 N\n0 0 1000 N\n0 0 1000 N\n0 0 1000 N\n0 0 1000 N\n0 0 1000 N\n0 0 1000 N\n0 0 1000 N\n0 0 1000 N\n0 0 1000 N\n0 0 1000 N\n0 0 1000 N\n0 0 1000 N\n0 0 1000 N\n0 0 1000 N\n0 0 1000 N\n0 0 1000 N\n0 0 1000 N\n0 0 1000 N\n0 0 1000 N\n0 0 1000 N\n0 0 1000 N\n0 0 1000 N\n0 0 1000 N\n0 0 1000 N\n0 0 1000 N\n0 0 1000 N\n",
+        "accepted": false
+      },
+      {
+        "name": "dx high",
+        "text": "9 0 10 N\n",
+        "accepted": false
+      },
+      {
+        "name": "dx low",
+        "text": "-9 0 10 N\n",
+        "accepted": false
+      },
+      {
+        "name": "dy high",
+        "text": "0 9 10 N\n",
+        "accepted": false
+      },
+      {
+        "name": "dy low",
+        "text": "0 -9 10 N\n",
+        "accepted": false
+      },
+      {
+        "name": "delay low",
+        "text": "0 0 9 N\n",
+        "accepted": false
+      },
+      {
+        "name": "delay high",
+        "text": "0 0 1001 N\n",
+        "accepted": false
+      },
+      {
+        "name": "delay negative",
+        "text": "0 0 -10 N\n",
+        "accepted": false
+      },
+      {
+        "name": "overflow",
+        "text": "9999999999999999999999999999999 0 10 N\n",
+        "accepted": false
+      },
+      {
+        "name": "delay overflow",
+        "text": "0 0 9999999999999999999999999999 N\n",
+        "accepted": false
+      },
+      {
+        "name": "bad button",
+        "text": "0 0 10 X\n",
+        "accepted": false
+      },
+      {
+        "name": "lower button",
+        "text": "0 0 10 n\n",
+        "accepted": false
+      },
+      {
+        "name": "release initially",
+        "text": "0 0 10 U\n",
+        "accepted": false
+      },
+      {
+        "name": "held end",
+        "text": "0 0 10 D\n",
+        "accepted": false
+      },
+      {
+        "name": "double down",
+        "text": "0 0 10 D\n0 0 10 D\n0 0 10 U\n",
+        "accepted": false
+      },
+      {
+        "name": "double release",
+        "text": "0 0 10 D\n0 0 10 U\n0 0 10 U\n",
+        "accepted": false
+      },
+      {
+        "name": "two pairs",
+        "text": "0 0 10 D\n0 0 10 U\n0 0 10 D\n0 0 10 U\n",
+        "accepted": false
+      },
+      {
+        "name": "trailing garbage",
+        "text": "0 0 10 N\nabc",
+        "accepted": false
+      },
+      {
+        "name": "extra token",
+        "text": "0 0 10 N 1\n",
+        "accepted": false
+      },
+      {
+        "name": "NUL",
+        "text": "0 0 10 N\n\u0000",
+        "accepted": false
+      },
+      {
+        "name": "non ASCII",
+        "text": "0 0 10 N\n\u00e9",
+        "accepted": false
+      },
+      {
+        "name": "huge buffer",
+        "text": "                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 ",
+        "accepted": false
+      }
+    ],
+    "runtime_obligations": [
+      "dry-run and malformed plan use zero callbacks",
+      "all-N zero-motion control uses zero delivery calls",
+      "successful D/move/U has three delivered events,no owed release",
+      "failed foreground guard while held never delivers cleanup to changed target",
+      "failed SendInput retains stopped result even if guarded cleanup succeeds",
+      "failed/blocked cleanup retains owed release",
+      "deadline stops further planned events;no prefix replay"
+    ]
+  },
+  "live": {
+    "Snow": {
+      "pid": 32944,
+      "result": "foreground refused before input",
+      "input_events": 0,
+      "cleanup": "exact-identity forced process close;not guest shutdown"
+    },
+    "PC": {
+      "uuid": "971ff8e7-8ee9-409b-8df8-5132222cd9a4",
+      "gui_pid": 12400,
+      "boot_disk_sha256": "66a105266a18b1f8e95593b88e7f8d6b7768a17200af33bd03d8fceadd8b5202",
+      "EFI_sha256": "de02e416fc92bc69fb4e07e41eb8a79a2f1cd00493e12104e1e47dba55e55d0f",
+      "Windows_injection": "SendInput return1 and owned capture verified;no guest pixel change",
+      "device_control": {
+        "relative_dx": 4,
+        "changed_pixels": 17,
+        "changed_bbox": [
+          512,
+          381,
+          520,
+          388
+        ],
+        "GUI_qualification": false
+      },
+      "physical_check": "not performed;owner unavailable",
+      "timing": {
+        "estimated_active_seconds": 1560.72,
+        "process_wall_seconds": 4189.13,
+        "declared_active_bound_seconds": 900,
+        "bound_exceeded": true,
+        "method": "RUNNING state intervals plus current interval,using owned VM process creation for log epoch;not calibrated CPU time",
+        "original_transition_count": 47
+      },
+      "cleanup": {
+        "utc": "2026-10-25T23:06:31.3175472Z",
+        "cold_starts": 1,
+        "state": "poweroff",
+        "unregistered": true,
+        "existing_vm_inventory_preserved": true,
+        "running_state_preserved": true,
+        "post_trial_raw_roundtrip_equal": true,
+        "artifacts_retained": true,
+        "semantic_session_stop_observed": false,
+        "termination": "external poweroff from paused state"
+      }
+    }
+  },
+  "release_ready": false,
+  "media": {
+    "PNG_total": 65,
+    "GIF_total": 2,
+    "new_GIF": false,
+    "unchanged_observer_frames": 139
+  },
+  "remaining": [
+    "Mac accepted displacement",
+    "PC GUI drag and release",
+    "post-drag input and paired evidence qualification",
+    "release freeze/package approval"
+  ],
+  "286": "Lead-corrected proposal only;no binding,far access,boot or new target tests",
+  "screenshot_admission_regression": {
+    "methods": 12,
+    "passed": true,
+    "initial_environment_failure": "restricted default temp Git init;owned writable temp retry passed"
+  },
+  "preservation": {
+    "originals": 24,
+    "held_brief": true,
+    "tags": true,
+    "unrelated_tracked_bytes": true,
+    "exact_staged_paths": 30,
+    "initial_check": "obsolete staged allowlist corrected"
+  }
+}

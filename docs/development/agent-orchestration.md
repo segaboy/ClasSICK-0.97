@@ -1,5 +1,9 @@
 # Agent Orchestration Protocol
 
+2026-10-25,SRC-0456..0462/IMPL-0078/TEST-0091:explicit fresh-helper approval recorded. Original host helper/fake guards/one-shot observer pass four focused CTests in three profiles;native input remains unqualified. Snow foreground refused,PC injected motion negative/device control positive;physical check NOT PERFORMED. Active-time cap exceeded,diagnostic run only;owned sessions closed/media preserved.286 binding proposal corrected,not implemented.65PNG/twoGIF;Mac motion/PC GUI drag/release gates remain. [Evidence](windows-input-helper-evidence.md).
+
+Five scoped Copilot calls reuse existing qualification;one primary plus necessary correction and distinct capture/observer/286 gaps. No redundant all-provider review. Proposed artifacts are not passing tests;raw transcripts remain private and Codex is sole writer. Four other-tool balances unavailable;five reported premium requests,not measured Codex savings.
+
 2026-10-19 Mac source continuation: Codex alone checks admitted published mouse prose/figures, after explicit owner disposition. No manual input or fresh task to workers; reuse completed Claude pointer draft and Copilot review. Source sufficiency is partial, Mac binding blocked. Next engineering draft should use one external primary and reviewed-public contracts only; a second worker requires a distinct unresolved risk. [Review](mac-pointer-source-review.md).
 
 Pointer-contract allocation2026-10-19: Claude primary195/90-line original contract/cases,111.14s,zero tools/writes/tests;spec cap exceeded. One distinct-risk Copilot cancellation/counter audit16.19s,one permitted prompt read,zero writes/tests;lead corrects erroneous/partial-context findings. Manuals withheld from both;Mac source lane held under policy,independent work unaffected. All case lists unexecuted. [Review](pointer-input-contract-review.md).

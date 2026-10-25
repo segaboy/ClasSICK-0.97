@@ -1,0 +1,95 @@
+{
+  "source": "SRC-0457",
+  "compiler_dependency": {
+    "archive_pin": "llvm-mingw-20260908-ucrt-x86_64",
+    "archive_sha256": "1bcf74d06b724aeecaa6412ca85f5b26fb1da770e7cdcefa9263c9c5c3ad34b6",
+    "headers": [
+      {
+        "header": "winuser.h",
+        "sha256": "39454012fc68ac9c617959d03a85eb926887622b1e9fff598b7942e7003f82d7",
+        "declarations": 17
+      },
+      {
+        "header": "processthreadsapi.h",
+        "sha256": "fa2a3887fbae6c61ee3c20027101dbe71492c1c2d63ab178746b16777cff052b",
+        "declarations": 2
+      },
+      {
+        "header": "winbase.h",
+        "sha256": "20e60d35e414f149ee5790af23d8a5551a2bb692025dd1d42071610dde5a2841",
+        "declarations": 1
+      },
+      {
+        "header": "fileapi.h",
+        "sha256": "2484faf2d31472d77d80f8f0c189cbf399cc1e739021888b20aefbb32d8bc11b",
+        "declarations": 2
+      },
+      {
+        "header": "synchapi.h",
+        "sha256": "f47fb669b60d0a6bb7f2c8e69bc334a0d1bc13b139aaee924f850686cba55ff3",
+        "declarations": 2
+      },
+      {
+        "header": "handleapi.h",
+        "sha256": "f5f310cba9ef7d9c67bc30349fa73572847e77ed356a166ac5e5f435237bb335",
+        "declarations": 1
+      },
+      {
+        "header": "sysinfoapi.h",
+        "sha256": "c7f9f86c9b6d20610c63897ba989145dbab70efda5d5c3eb0a48bf76e424c73a",
+        "declarations": 1
+      },
+      {
+        "header": "errhandlingapi.h",
+        "sha256": "fbbc422008445e0f0977984361d9fce142330474a833bce97d051c9b7825f466",
+        "declarations": 1
+      },
+      {
+        "header": "bcrypt.h",
+        "sha256": "6f120b951a60bddea2f1a9d39d968b2b3b7a8d3f4f35d2be5a2b7e0609078fd4",
+        "declarations": 6
+      }
+    ],
+    "facts_sha256": "0ba28d7fa66f36f2083a1afd4a8964c965796faaf01870c82bb008d1b1757153",
+    "scope": "Selected published API declarations,type layouts,named constants from already pinned compiler distribution;no examples/function bodies or SDK helper macros forwarded",
+    "headers_match_admitted_archive": true
+  },
+  "UIA_declarations": {
+    "headers_match_admitted_archive": true,
+    "headers": [
+      {
+        "header": "uiautomationclient.h",
+        "sha256": "21fb85ced6eebd2cfb06762688aa8c2b626e03df4236e821f3f766260918c8f0"
+      },
+      {
+        "header": "combaseapi.h",
+        "sha256": "421e53da8fafe245eefa6dad89766408f0cac2243f029eadef2981d38f9d38dc"
+      },
+      {
+        "header": "oleauto.h",
+        "sha256": "eb6eb39880e04ed5c6468e4ac5665d1e706a20222cc5c935e6e3874a4d0cd362"
+      },
+      {
+        "header": "objbase.h",
+        "sha256": "a9168a44573ada7177a7498318722ebfa2fb127784c6c49d762072704e85fba4"
+      },
+      {
+        "header": "wtypesbase.h",
+        "sha256": "f02e95b9683c12c4d971dbd652ca634e65861d23fede95400ccf559798d232a3"
+      },
+      {
+        "header": "wtypes.h",
+        "sha256": "93b31f7cb91d1d1993dd1fe5c8291bc72de388076a56f5d8a065f1d49cd3671e"
+      }
+    ],
+    "facts_sha256": "fa1011af189863d5baace3a07fe68346065a38fbd324ad4fed0fe252bc166a53",
+    "function_bodies_forwarded": false
+  },
+  "additional_review": {
+    "header": "oleauto.h",
+    "line": 84,
+    "interface": "VariantInit",
+    "declarations_only": true
+  },
+  "boundary": "Selected ABI declarations,type layouts,named constants only;no sample or implementation bodies forwarded. Installed pinned compiler bindings remain compiler dependencies."
+}

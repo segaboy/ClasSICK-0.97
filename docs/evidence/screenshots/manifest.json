@@ -1477,6 +1477,52 @@
         "Automatically frozen diagnostic,not live dragging",
         "No motion or release qualification"
       ]
+    },
+    {
+      "id": "2026-10-25-pc-injected-motion-unchanged",
+      "path": "docs/evidence/screenshots/2026-10-25/pc-injected-motion-unchanged.png",
+      "sha256": "7bd4dc9c78b1729f5d88da5f57ee1813666714caf17fce88913d97cee4abc5a7",
+      "bytes": 4850,
+      "width": 1024,
+      "height": 768,
+      "captured_on": "2026-10-25",
+      "target": "native-x86_64",
+      "caption": "Verified Windows injected motion leaves the original PC scene unchanged;GUI dragging remains unqualified.",
+      "alt": "Verified Windows injected motion leaves the original PC scene unchanged;GUI dragging remains unqualified.",
+      "source_revision": "1653c49785ad4a9eb2c4a84a87c44c188abd16f7",
+      "compiled_source_revision": "1653c49785ad4a9eb2c4a84a87c44c188abd16f7",
+      "evidence": "docs/development/windows-input-helper-evidence.md",
+      "license": "GPL-3.0-or-later",
+      "rights": "Original ClasSICK framebuffer only;no desktop,emulator chrome,credentials or third-party pixels.",
+      "input": "synthetic",
+      "limitations": [
+        "Diagnostic only:declared active-time bound was exceeded;not release qualification.",
+        "Physical mouse check not performed:operator unavailable.",
+        "No GUI drag/release or Mac input pass."
+      ]
+    },
+    {
+      "id": "2026-10-25-pc-device-motion-control",
+      "path": "docs/evidence/screenshots/2026-10-25/pc-device-motion-control.png",
+      "sha256": "81aea1893a0c812344fa3d7e50bfb3f10a3dce94063925a878da9b966504ac93",
+      "bytes": 4856,
+      "width": 1024,
+      "height": 768,
+      "captured_on": "2026-10-25",
+      "target": "native-x86_64",
+      "caption": "Separate virtual-device control moves the guest pointer four pixels;this is E2 diagnostic evidence,not a GUI dragging pass.",
+      "alt": "Separate virtual-device control moves the guest pointer four pixels;this is E2 diagnostic evidence,not a GUI dragging pass.",
+      "source_revision": "1653c49785ad4a9eb2c4a84a87c44c188abd16f7",
+      "compiled_source_revision": "1653c49785ad4a9eb2c4a84a87c44c188abd16f7",
+      "evidence": "docs/development/windows-input-helper-evidence.md",
+      "license": "GPL-3.0-or-later",
+      "rights": "Original ClasSICK framebuffer only;no desktop,emulator chrome,credentials or third-party pixels.",
+      "input": "synthetic",
+      "limitations": [
+        "Diagnostic only:declared active-time bound was exceeded;not release qualification.",
+        "Physical mouse check not performed:operator unavailable.",
+        "No GUI drag/release or Mac input pass."
+      ]
     }
   ]
 }

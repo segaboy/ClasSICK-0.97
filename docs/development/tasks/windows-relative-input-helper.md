@@ -1,7 +1,6 @@
 # Proposed original Windows relative-input test helper
 
-Status: reviewable proposal;implementation and use await the owner's explicit
-approval of a fresh,unexposed worker and this alternate desktop-input method.
+Status: owner explicitly approved the fresh helper and isolated tests on2026-10-25 (SRC-0456). Original implementation and actual limitations are recorded in [the evidence](../windows-input-helper-evidence.md). The former example remains excluded.
 Windows11. Codex remains sole writer/integrator/verifier. No implementation,
 source example,SDK body,manual page or private HQ material is included here.
 
@@ -64,3 +63,5 @@ Planned live controls,only after source/implementation review and approval:
 
 Foreground refusal remains a possible result. This proposal promises no fix
 to window activation and authorizes no workaround for a refused target.
+
+Qualified guard refinement: a nonempty client window is required. A physical client-area check may be replaced only by a current read-only captured indicator under the exact owned window;all base guards are rechecked after that query. No screen scraping or broad desktop accessibility traversal. This is not a GUI input pass.

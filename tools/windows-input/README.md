@@ -1,0 +1,27 @@
+# Original Windows test-input instrumentation
+
+Host development tool only;IMPL-0078/TEST-0091,SRC-0456..0461.
+The [review and actual tests](../../docs/development/windows-input-helper-evidence.md)
+define its narrow qualification and unresolved native input results.
+
+`helper.c` is C99 with an injected backend. ASCII rows are `dx dy delay button`
+followed by LF or CRLF. dx/dy:-8..8;delay:10..1000ms;button:N,D,U.1..64 rows,
+4096 bytes maximum,delay sum<=30000ms. One down/up pair maximum,released at end.
+N with zero motion performs no input. The runner revalidates mutable plans.
+Interrupted delivery never replays;cleanup is one guarded release,with an explicit
+owed-release result when target ownership is lost.
+
+`native.c` accepts `--target snow|vbox --plan PATH`;default is dry-run. `--live`
+requires an independently verified,owned isolated session and compile-bound
+`test-targets.h` generated outside Git. The exact schema is in native.c. No
+real PID/path/hash header or active helper binary belongs in this repo. CI builds
+fake guard tests with PID0 inactive bindings and compiles the read-only capture
+module;it performs no desktop input. With the pinned development environment,
+a manual host build uses C99,helper.c,native.c,capture.c,an outside-Git binding
+include directory,and user32/kernel32/bcrypt/ole32/oleaut32/uuid libraries.
+
+An accepted API event is not guest input acceptance. A foreground refusal is a
+valid stop. No focus hacks,desktop/security changes,preferences,hooks,services,
+arbitrary keyboard,network or guest patching. `capture.c` reads only the exact
+owned window's accessibility subtree and verifies the current captured indicator.
+It performs no accessibility action. The existing source and trial gates apply.
