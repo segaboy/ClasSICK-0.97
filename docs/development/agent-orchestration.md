@@ -434,3 +434,6 @@ balances unavailable. This is not evidence of quota savings. [Receipt](boot-inpu
 
 
 2026-10-24 replay preparation:one Copilot Sonnet5.5 low primary,2041B/14.38s/one frozen read/no commands,writes,tests,usable original data-generator artifact. Lead integrates with license,executes14 literal/refusal checks and bounded installed-interface trials;no second worker/requalification/code recreation. Native artifacts reused. One reported premium request,all-four balances unavailable,no measured Codex savings. [Receipt](mac-input-replay-evidence.json).
+
+
+2026-10-25:one Copilot Sonnet5.5 low primary,4730B/25.94s/one frozen read/no writes,commands,tests. Adopt original clock-candidate mode;lead fixes reproduced nonfinite JSON acceptance,integrates portable oracle/CI and executes49 unique cases (14 frozen legacy included). No second worker/requalification;one reported premium request,all-four balances unavailable. Owner is using desktop,so exact owned trial process closed and no further GUI input. [Receipt](paused-clock-evidence.json).

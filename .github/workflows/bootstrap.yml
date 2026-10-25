@@ -25,6 +25,11 @@ jobs:
         run: |
           python -B tests/screenshot-evidence.py
           if ($LASTEXITCODE -ne 0) { throw 'Screenshot evidence admission tests failed.' }
+      - name: Verify original mouse replay data controls
+        shell: powershell
+        run: |
+          python -B scripts/Test-SnowMouseReplay.py --output "$env:RUNNER_TEMP\classick-snow-replay"
+          if ($LASTEXITCODE -ne 0) { throw 'Mouse replay data controls failed.' }
       - name: Verify scene import contract consistency
         shell: powershell
         run: |
@@ -150,6 +155,8 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
+      - name: Verify original mouse replay data controls
+        run: python3 -B scripts/Test-SnowMouseReplay.py --output "$RUNNER_TEMP/classick-snow-replay"
       - name: Prepare hash-pinned workspace 68000 tools
         run: python3 scripts/Setup-M68k.py --output "$RUNNER_TEMP/classick-m68k"
       - name: Verify isolated native input owner closure

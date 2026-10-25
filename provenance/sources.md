@@ -4405,3 +4405,17 @@ known RAM later retains X-only UNSTABLE loss/fault0/no displacement. Pre-load
 and playback timing are not isolated;causality/driver defect not established.
 No runtime change,new native compilation or motion/release pass.
 [Receipt](../docs/development/mac-input-replay-evidence.json).
+
+
+## SRC-0440 - Owner chooses independent work while desktop is occupied
+
+2026-10-25,owner reply:"I’m using the computer—finish the independent work".
+Stop live interaction,close only the owned test process and finish original
+data tooling/local verification. Existing permissions and release gates stay.
+
+## SRC-0441 - Original paused-clock candidate mode and portable controls
+
+2026-10-25,one supervised original-public Copilot artifact,lead integration,
+reproduced nonfinite-JSON correction and49 final CLI cases. Fourteen legacy
+cases preserved;portable rerun is the same49 cases. No qualified real paused
+recording or native input run. [Evidence](../docs/development/paused-clock-evidence.md).

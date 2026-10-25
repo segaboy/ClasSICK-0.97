@@ -1,5 +1,7 @@
 # Paired native preview 2 - first interactive window
 
+2026-10-25,SRC-0440/0441:owner chooses independent work while using desktop. Original paused-clock candidate tool passes49 CLI cases/14 preserved legacy controls;portable Windows/Linux CI added. Native timing trial deferred,no input result;own process/ROM/preference preserved. Prior full CI passes,new CI pending.63PNG/twoGIF;motion/GUI/release gates open,286 unchanged. [Evidence](../docs/development/paused-clock-evidence.md).
+
 2026-10-24,SRC-0438/0439:original replay generator passes14 checks;unchanged-ROM one-event trial later retains X-only UNSTABLE/RR3zero,fault0/no displacement. Playback timing/pre-load GUI not isolated,no causal fix justified. Both prior source CI jobs pass;owned sessions/ROMs/preference preserved.63PNG/twoGIF,no new visible motion. Mac motion/PC GUI/release gates remain;286 unchanged. [Evidence](../docs/development/mac-input-replay-evidence.md).
 
 2026-10-24,SRC-0436/0437:automatic idle diagnostic reaches own PC004002DC/IPL7 after500 services,baseline1/loss0/delivery0/fault0 before deliberate GUI input. Normal ROM byte-identical;probe adds16B ROM/zero RAM,13 native controls/three IRQ veneers/five refusals pass.63PNG/twoGIF,own trial closed/preserved. Native source CI passes,Windows pending;Mac motion/PC GUI/release gates remain,286 unchanged. [Evidence](../docs/development/mac-idle-probe-evidence.md).
