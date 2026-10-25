@@ -437,3 +437,6 @@ balances unavailable. This is not evidence of quota savings. [Receipt](boot-inpu
 
 
 2026-10-25:one Copilot Sonnet5.5 low primary,4730B/25.94s/one frozen read/no writes,commands,tests. Adopt original clock-candidate mode;lead fixes reproduced nonfinite JSON acceptance,integrates portable oracle/CI and executes49 unique cases (14 frozen legacy included). No second worker/requalification;one reported premium request,all-four balances unavailable. Owner is using desktop,so exact owned trial process closed and no further GUI input. [Receipt](paused-clock-evidence.json).
+
+
+2026-10-25 retained views:one Copilot Sonnet5.5 low primary,37455B/five original source files plus relevant contract excerpts,65.97s/one read/zero writes,commands,tests. Adopt14 rows after seven lead source/obligation corrections and arithmetic audit;no implementation recreation,second worker or requalification. One reported premium request;other workers idle,all-four balances unavailable,no measured Codex saving. [Receipt](retained-views-evidence.json).

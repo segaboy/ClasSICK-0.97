@@ -75,6 +75,14 @@ Rules:
 ## 6. Retained-view audit
 Audit of call-into-guest retained views is future integration work and is NOT solved here. Existing callers that hold `cs_guest_view` across a callout must be inventoried, then moved to capabilities or per-operation access.
 
+2026-10-25,SRC-0442/0443:the [first five-file inventory](../development/retained-guest-views.md)
+distinguishes validation-only/consumed-before-execution spans from Toolbox
+views used during or after a trusted native handler. The handler forbids
+mutation/reentry/retention;no existing flat-code defect is established.
+The full audit remains open. Next proposal:logical range preflight and an
+infallible prevalidated4-byte call-stack commit. No C16 API/backend is adopted;
+resource/lifecycle/patch/drawing/bus/session internals remain unreviewed here.
+
 ## 7. Deferred production API
 - No flat-pointer API is proposed for a cross-bank logical span. Capabilities are the separate candidate surface; production integration remains deferred.
 - The model is not a security or physical-alias proof. Callers keep opaque capability fields, map and backing truthful and stable; forging Python objects is out of scope.

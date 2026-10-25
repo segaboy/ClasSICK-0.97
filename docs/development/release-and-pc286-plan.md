@@ -56,3 +56,15 @@ Next: restore available GUI observation, run the existing verified diagnostic
 and Mac candidates, then qualify exact parity before packaging. No new scope
 question is needed for those already approved trials.
 [Current results](release2-integration-evidence.json).
+
+2026-10-25,SRC-0442/0443:desktop input trials remain deferred while the owner
+uses the computer. The [first retained-view inventory](retained-guest-views.md)
+closes a bounded documentation prerequisite for P286-2:five files/14 reviewed
+rows,not the complete audit or a native backend. Scalar call-stack views are
+consumed before execution;Toolbox frame/argument views cross only a trusted
+native handler that forbids reentry/mutation/retention. Small spans may still
+cross banks. Logical preflight and a prevalidated4-byte commit are the next
+contract proposal;handler ABI,whole-commit guarantees and qualified far access
+remain open. Native fast paths and all release gates are unchanged. The
+[live input checklist](paused-clock-evidence.md#next-live-control-planned-src-0443)
+adds an empty-input control before any loss is attributed to a replay fixture.

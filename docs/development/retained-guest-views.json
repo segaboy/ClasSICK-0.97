@@ -1,0 +1,193 @@
+{
+  "slice": "Lead-reviewed first five-file slice at3e35bbd;not a production ABI or full retained-view inventory",
+  "rows": [
+    {
+      "row": 1,
+      "evidence": "core/memory/guest.h:14 cs_guest_region bytes/writable",
+      "retention": "Borrowed caller-owned backing;active runtime stability requirements apply",
+      "classification": "raw backing pointer",
+      "proposed_C16_action": "qualified bank descriptors/ownership admission;capability is a separate span operation",
+      "confidence": "high",
+      "path": "core/memory/guest.h",
+      "lead_disposition": "adopt scoped observation;C16 action remains a proposal",
+      "symbol": "cs_guest_region"
+    },
+    {
+      "row": 2,
+      "evidence": "guest.h:17,22-23 cs_guest_view/cs_guest_window; comment 18-20",
+      "retention": "valid only while map and buffers unchanged",
+      "classification": "flat view API",
+      "proposed_C16_action": "separate logical/capability surface for cross-bank spans;keep native fast paths;32767 chunk policy does not mean Toolbox inputs exceed256",
+      "confidence": "high",
+      "path": "core/memory/guest.h",
+      "lead_disposition": "adopt scoped observation;C16 action remains a proposal",
+      "symbol": "cs_guest_view/cs_guest_window"
+    },
+    {
+      "row": 3,
+      "evidence": "core/cpu/m68k-call.c:13 interval()",
+      "retention": "validation-only local;calls cs_guest_window,with no explicit execution callout or direct view dereference",
+      "classification": "validation-only",
+      "proposed_C16_action": "per-operation logical range check",
+      "confidence": "high",
+      "path": "core/cpu/m68k-call.c",
+      "lead_disposition": "adopt scoped observation;C16 action remains a proposal",
+      "symbol": "interval"
+    },
+    {
+      "row": 4,
+      "evidence": "m68k-call.c:70 cs_m68k_call_using a5 window",
+      "retention": "in scope through step loop 84-99, never dereferenced",
+      "classification": "validation-only",
+      "proposed_C16_action": "per-operation logical range check",
+      "confidence": "high",
+      "path": "core/cpu/m68k-call.c",
+      "lead_disposition": "adopt scoped observation;C16 action remains a proposal",
+      "symbol": "cs_m68k_call_using"
+    },
+    {
+      "row": 5,
+      "evidence": "m68k-call.c:71 acquire, :79 push.writable write",
+      "retention": "only local state/copy_frame between; consumed before step call",
+      "classification": "consumed-before-call write",
+      "proposed_C16_action": "per-operation 4-byte logical write after preflight",
+      "confidence": "high",
+      "path": "core/cpu/m68k-call.c",
+      "lead_disposition": "adopt scoped observation;C16 action remains a proposal",
+      "symbol": "cs_m68k_call_using"
+    },
+    {
+      "row": 6,
+      "evidence": "m68k-call.c:90-91 bus_step_bounded/execute; h:19,23-24",
+      "retention": "a5/push locals remain in scope;no post-step view dereference in this function;map/options/config immutable",
+      "classification": "guest execution boundary;no observed post-call span use",
+      "proposed_C16_action": "finish temporary C16 borrow before execution;do not infer lexical pointer absence",
+      "confidence": "medium",
+      "path": "core/cpu/m68k-call.c",
+      "lead_disposition": "adopt scoped observation;C16 action remains a proposal",
+      "symbol": "cs_m68k_call_using"
+    },
+    {
+      "row": 7,
+      "evidence": "personality/system1/toolbox.c:33 records_valid stack window; rechecked at :140",
+      "retention": "local; no deref",
+      "classification": "validation-only",
+      "proposed_C16_action": "per-operation logical range check",
+      "confidence": "high",
+      "path": "personality/system1/toolbox.c",
+      "lead_disposition": "adopt scoped observation;C16 action remains a proposal",
+      "symbol": "records_valid"
+    },
+    {
+      "row": 8,
+      "evidence": "toolbox.c:185 acquire; :234 handler; :244,:246 writes",
+      "retention": "checked frame extent<=42;post-handler frame writes<=10;infallible commit required",
+      "classification": "post-handler write, trusted native handler",
+      "proposed_C16_action": "preflighted logical commit;owned bytes alone do not guarantee atomic publication;native keeps flat path",
+      "confidence": "high",
+      "path": "personality/system1/toolbox.c",
+      "lead_disposition": "adopt scoped observation;C16 action remains a proposal",
+      "symbol": "cs_tb_step"
+    },
+    {
+      "row": 9,
+      "evidence": "toolbox.c:185, :196 cs_m68k_session_request_exit, :246",
+      "retention": "exit frame extent/writes6;borrow spans accepted exit request;session internals unreviewed",
+      "classification": "external call between acquire and write; no defect claimed",
+      "proposed_C16_action": "all preflight before exit request;no new fallible operation after accepted request;session review deferred",
+      "confidence": "medium",
+      "path": "personality/system1/toolbox.c",
+      "lead_disposition": "adopt scoped observation;C16 action remains a proposal",
+      "symbol": "cs_tb_step"
+    },
+    {
+      "row": 10,
+      "evidence": "toolbox.c:221,:230 input.span, :234 handler",
+      "retention": "borrowed for invocation only; span<=256 (line 22), total<=2048 (arithmetic bound)",
+      "classification": "read by trusted handler",
+      "proposed_C16_action": "native keeps borrow; C16 owned bounded copy or deferred ABI choice",
+      "confidence": "high",
+      "path": "personality/system1/toolbox.c",
+      "lead_disposition": "adopt scoped observation;C16 action remains a proposal",
+      "symbol": "cs_tb_step"
+    },
+    {
+      "row": 11,
+      "evidence": "toolbox.c:221,:239 views[i].writable; reply.output[16]",
+      "retention": "windows held across handler; written after; staged in reply.output<=16",
+      "classification": "post-handler write",
+      "proposed_C16_action": "keep reply staging; per-operation logical write or capability; commit infallible, no partial write",
+      "confidence": "high",
+      "path": "personality/system1/toolbox.c",
+      "lead_disposition": "adopt scoped observation;C16 action remains a proposal",
+      "symbol": "cs_tb_step"
+    },
+    {
+      "row": 12,
+      "evidence": "toolbox.h:19,21-23 cs_tb_input.span",
+      "retention": "invocation-only pointer ABI;max256-byte span may still cross bank;simultaneous borrows unresolved",
+      "classification": "raw pointer ABI to trusted handler",
+      "proposed_C16_action": "deferred C16 copy/accessor/ABI choice;not a claim that current arguments exceed32767",
+      "confidence": "medium",
+      "path": "personality/system1/toolbox.h",
+      "lead_disposition": "adopt scoped observation;C16 action remains a proposal",
+      "symbol": "cs_tb_input/cs_tb_handler"
+    },
+    {
+      "row": 13,
+      "evidence": "toolbox.c:174 CS_TB_RETAINED; toolbox.h:17 kept",
+      "retention": "kept refuses before per-dispatch frame/argument windows,but records_valid already made a validation-only acquisition",
+      "classification": "not a native borrow",
+      "proposed_C16_action": "none",
+      "confidence": "high",
+      "path": "personality/system1/toolbox.c",
+      "lead_disposition": "adopt scoped observation;C16 action remains a proposal",
+      "symbol": "cs_tb_step"
+    },
+    {
+      "row": 14,
+      "evidence": "m68k-call.c:29,69; toolbox.c:123,144,189,210,217 cs_guest_read",
+      "retention": "Scalar API exposes copied values,no raw view to these callers;callee internals unreviewed",
+      "classification": "not a borrow",
+      "proposed_C16_action": "per-operation logical read width 1/2/4",
+      "confidence": "high",
+      "path": "core/cpu/m68k-call.c",
+      "lead_disposition": "adopt scoped observation;C16 action remains a proposal",
+      "symbol": "cs_guest_read callers"
+    }
+  ],
+  "limits": "Source classifications only,not native qualification. Arithmetic bounds are not measured stack/RAM budgets. Other modules are unreviewed. No production ABI/specification adopted.",
+  "next_contract": "Validation-only logical range preflight plus infallible prevalidated4-byte call-stack commit;handler span ABI and multi-span transaction remain deferred",
+  "open_gaps": [
+    "qualified far-pointer conversion",
+    "infallible commit guarantee",
+    "alias proof and C alignment unproven",
+    "chunk-pointer lifetime beyond map immutability",
+    "handler span ABI",
+    "guest.c, m68k-bus, m68k-session, trap gateway unreviewed"
+  ],
+  "bounds": {
+    "call_stack_write": 4,
+    "toolbox_parameter_bytes": 32,
+    "toolbox_frame_checked_extent": 42,
+    "toolbox_frame_writes": 10,
+    "toolbox_exit_frame_extent_and_writes": 6,
+    "toolbox_reply_output": 16,
+    "toolbox_combined_guest_writes": 26,
+    "per_read_span": 256,
+    "all_read_spans": 2048,
+    "kind": "arithmetic only;not a measured allocation/stack/fit/performance proof"
+  },
+  "lead_review": [
+    "handler constraints sourced to toolbox.h,not SPEC-0069",
+    "in-scope locals are distinct from post-call use",
+    "even bounded small spans may cross banks",
+    "kept refusal occurs after directory validation",
+    "frame extent and modified-byte counts are different",
+    "preflight must precede accepted exit request",
+    "no new production bug,historical behavior or physical qualification claimed"
+  ],
+  "schema_version": 1,
+  "baseline_revision": "3e35bbd2f0474b0c5392e4c3e7066f2e2ed2edf6",
+  "status": "lead-reviewed scoped inventory;C16 changes remain proposals"
+}

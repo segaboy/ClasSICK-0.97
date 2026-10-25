@@ -1,5 +1,7 @@
 # Paired native preview 2 - first interactive window
 
+2026-10-25,SRC-0442/0443:first286 retained-view slice reviews five files/14 rows;lead checks source hashes and arithmetic bounds. Logical range/prevalidated4-byte commit is next proposal,no API/backend/runtime change or native tests. Planned live checklist adds empty control,not executed. Prior full CI passes,new CI pending.63PNG/twoGIF,originals preserved;release motion/GUI gates remain. [Evidence](../docs/development/retained-views-evidence.md).
+
 2026-10-25,SRC-0440/0441:owner chooses independent work while using desktop. Original paused-clock candidate tool passes49 CLI cases/14 preserved legacy controls;portable Windows/Linux CI added. Native timing trial deferred,no input result;own process/ROM/preference preserved. Prior full CI passes,new CI pending.63PNG/twoGIF;motion/GUI/release gates open,286 unchanged. [Evidence](../docs/development/paused-clock-evidence.md).
 
 2026-10-24,SRC-0438/0439:original replay generator passes14 checks;unchanged-ROM one-event trial later retains X-only UNSTABLE/RR3zero,fault0/no displacement. Playback timing/pre-load GUI not isolated,no causal fix justified. Both prior source CI jobs pass;owned sessions/ROMs/preference preserved.63PNG/twoGIF,no new visible motion. Mac motion/PC GUI/release gates remain;286 unchanged. [Evidence](../docs/development/mac-input-replay-evidence.md).

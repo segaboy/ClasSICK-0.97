@@ -1,0 +1,143 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-25",
+  "source_ids": [
+    "SRC-0442",
+    "SRC-0443"
+  ],
+  "scope": "First retained-view inventory for P286-2 plus planned live input controls;no runtime/API/backend implementation",
+  "baseline_revision": "3e35bbd2f0474b0c5392e4c3e7066f2e2ed2edf6",
+  "worker": {
+    "round": "primary",
+    "worker": "copilot",
+    "exit_code": 0,
+    "outer_timeout": false,
+    "elapsed_seconds": 65.97,
+    "input_bytes": 37455,
+    "input_sha256": "b5831bd0fb47f70c20d9ac6e7ce0e19bac12899a3ddf7dbc87cc67a88ed4a1da",
+    "stderr_bytes": 0,
+    "model": "claude-sonnet-5.5",
+    "effort": "low",
+    "frozen_reads": 1,
+    "commands": 0,
+    "writes": 0,
+    "tests_executed": [],
+    "reported_premium_requests": 1
+  },
+  "input_identity": {
+    "bytes": 37455,
+    "sha256": "b5831bd0fb47f70c20d9ac6e7ce0e19bac12899a3ddf7dbc87cc67a88ed4a1da",
+    "baseline": "3e35bbd2f0474b0c5392e4c3e7066f2e2ed2edf6",
+    "files": [
+      "core/memory/guest.h",
+      "core/cpu/m68k-call.h",
+      "core/cpu/m68k-call.c",
+      "personality/system1/toolbox.h",
+      "personality/system1/toolbox.c"
+    ],
+    "source_hashes": {
+      "core/memory/guest.h": "5a89e549470bd0f3ffe50e7fb714342ff7dc6af0d49a0c154a7baebdf7e113ff",
+      "core/cpu/m68k-call.h": "5f320112485dfd98cd868e290bc1d3efdb8a0f3e81fbb4eb81fb93e6494cab1d",
+      "core/cpu/m68k-call.c": "83979538a7bbd666eafa3f33c483dd559beb6ca69f2d3e754c0b5ec95b7c96a1",
+      "personality/system1/toolbox.h": "97d6fc0870d5c03de3e8e2c5355e2467e1fead330d3c21eef8e80920201740e3",
+      "personality/system1/toolbox.c": "02672fbbdc80db5442180f2cd459dcf48c64915f0541c4d4ade145378e7d3cf5"
+    }
+  },
+  "lead_review": {
+    "scope_files": [
+      "core/memory/guest.h",
+      "core/cpu/m68k-call.h",
+      "core/cpu/m68k-call.c",
+      "personality/system1/toolbox.h",
+      "personality/system1/toolbox.c"
+    ],
+    "source_hashes_match": true,
+    "rows": 14,
+    "worker_words": 950,
+    "reviewed_markdown_words": 872,
+    "lead_dispositions": [
+      "handler constraints sourced to toolbox.h,not SPEC-0069",
+      "in-scope locals are distinct from post-call use",
+      "even bounded small spans may cross banks",
+      "kept refusal occurs after directory validation",
+      "frame extent and modified-byte counts are different",
+      "preflight must precede accepted exit request",
+      "no new production bug,historical behavior or physical qualification claimed"
+    ],
+    "bounds": {
+      "call_stack_write": 4,
+      "toolbox_parameter_bytes": 32,
+      "toolbox_frame_checked_extent": 42,
+      "toolbox_frame_writes": 10,
+      "toolbox_exit_frame_extent_and_writes": 6,
+      "toolbox_reply_output": 16,
+      "toolbox_combined_guest_writes": 26,
+      "per_read_span": 256,
+      "all_read_spans": 2048,
+      "kind": "arithmetic only;not a measured allocation/stack/fit/performance proof"
+    },
+    "arithmetic_cases_checked": 36,
+    "implementation_tests_executed": [],
+    "runtime_changed": false,
+    "API_adopted": false
+  },
+  "source_rows": 14,
+  "source_files": 5,
+  "complete_production_inventory": false,
+  "accepted": "Scoped source classifications and arithmetic sizing inputs",
+  "deferred": [
+    "production C16 API/ABI",
+    "owned-copy vs accessor handler choice",
+    "infallible native commit or transaction-capable staging",
+    "physical alias and general alignment qualification",
+    "bank-offset/far-pointer conversion",
+    "remaining guest/resource/lifecycle/patch/drawing/bus/session routes"
+  ],
+  "bounds": {
+    "call_stack_write": 4,
+    "toolbox_parameter_bytes": 32,
+    "toolbox_frame_checked_extent": 42,
+    "toolbox_frame_writes": 10,
+    "toolbox_exit_frame_extent_and_writes": 6,
+    "toolbox_reply_output": 16,
+    "toolbox_combined_guest_writes": 26,
+    "per_read_span": 256,
+    "all_read_spans": 2048,
+    "kind": "arithmetic only;not a measured allocation/stack/fit/performance proof"
+  },
+  "arithmetic_check_scope": "36 bounding count/result/autopop combinations;not every record,allocation or runtime path",
+  "implementation_tests_executed": [],
+  "compiler_or_target_runs": [],
+  "new_screenshot": false,
+  "PNG_count": 63,
+  "GIF_count": 2,
+  "next_contract": "Validation-only logical range preflight plus infallible prevalidated4-byte call-stack commit;handler span ABI and multi-span transaction remain deferred",
+  "live_input_control": "Planned paused marker,guarded pre-load RAM,empty-input negative control,pending/completed playback and post record;no steps executed",
+  "prior_CI": {
+    "run": 40209302643,
+    "source_revision": "3e35bbd2f0474b0c5392e4c3e7066f2e2ed2edf6",
+    "m68k_rom": "success",
+    "windows_bootstrap": "success"
+  },
+  "new_CI": "pending at source commit",
+  "runtime_changed": false,
+  "native_fast_paths_changed": false,
+  "far_backend_qualified": false,
+  "release_ready": false,
+  "Mac_motion_passed": false,
+  "PC_GUI_drag_passed": false,
+  "preservation": [
+    "24 research originals",
+    "held brief",
+    "UART",
+    "old registry rows/assets/releases/tags",
+    "retired OneNote/wiki",
+    "existing source/native-app/physical/128K/B2/System1 gates"
+  ],
+  "remaining_balances": {
+    "Copilot": "unavailable",
+    "Claude": "unavailable",
+    "Grok": "unavailable",
+    "Argon": "unavailable"
+  }
+}

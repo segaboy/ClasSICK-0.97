@@ -53,3 +53,37 @@ or animation:63PNG/twoGIF remain. All originals,held brief,prior records/
 assets/releases/tags and retired OneNote/wiki preserved.
 
 [Machine-readable receipt](paused-clock-evidence.json).
+
+## Next live control (planned; SRC-0443)
+
+1. Wait for an undisturbed desktop. Reuse only a verified original ROM and
+   isolated profile;recheck identity/current inputs/seal. Do not infer
+   availability from a generic continuation request while the owner is busy.
+2. Keep execution paused during setup. Capture an actual original marker,
+   requiring identical integer timestamps and no mouse events. The tool's
+   opaque synthetic markers and valid JSON do not prove a paused emulator.
+3. Before loading input,read the complete known original record:MWP1 magic,
+   version/size,diagnostic magic/stage/fault,services,baselines,losses,queued,
+   deliveries,presses,pointer and window. Require a settled zero-loss control;
+   stop on contaminated setup,do not clear history to manufacture a control.
+4. Run a separate original empty-input control through the same setup/resume/
+   pause route. Require at least500 further services with no loss,input or
+   fault. This tests the actual control route;paused RAM equality alone cannot
+   exclude queued peripheral input or prove all GUI controls inert.
+5. For one single-X trial,derive a positive-offset candidate from its own
+   qualified paused marker. Recheck the pre-load record;after loading,require
+   unchanged paused RAM and pending playback before resume. No counter reset,
+   guest-memory patch or elapsed-time-to-cycle assumption.
+6. Resume once,with no extra viewport gestures. Confirm playback completion
+   and collect a guarded post record through the qualified control route.
+   Frontend completion is distinct from guest acceptance or physical timing.
+7. Report movement only when accepted records and pointer change agree with
+   the untouched other axis/button state. Preserve loss/fault evidence. A
+   completed frontend replay with no accepted movement is not a motion pass.
+8. Any failed guard,nonzero empty control,unqualified timestamp behavior or
+   interfering input makes attribution inconclusive. Do not weaken sample
+   admission,repeat blind bursts or credit a release/hardware/GUI pass.
+
+No step above was executed by this checklist. A recorded loss remains a
+separate result from a proven cause;an accepted move remains separate from
+continuous dragging and paired-release qualification.

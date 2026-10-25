@@ -4419,3 +4419,18 @@ data tooling/local verification. Existing permissions and release gates stay.
 reproduced nonfinite-JSON correction and49 final CLI cases. Fourteen legacy
 cases preserved;portable rerun is the same49 cases. No qualified real paused
 recording or native input run. [Evidence](../docs/development/paused-clock-evidence.md).
+
+
+## SRC-0442 - Original scoped retained guest-view inventory
+
+2026-10-25,one supervised Copilot review of five original public files and
+SPEC-0069 excerpts at3e35bbd. Fourteen source rows;worker950-word proposal,
+no commands,writes,tests,manuals or outside inputs. Lead-reviewed scope only,
+not complete coverage or a new production contract. [Inventory](../docs/development/retained-guest-views.md).
+
+## SRC-0443 - Lead retained-view review,bounds and planned input control
+
+2026-10-25,five source hashes checked,seven classification/obligation corrections
+and36 arithmetic bounding combinations. No implementation tests or target run.
+Empty-input control added to the future live checklist;not executed.
+[Evidence](../docs/development/retained-views-evidence.md).
