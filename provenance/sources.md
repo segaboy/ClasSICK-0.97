@@ -4452,3 +4452,27 @@ Empty-input control added to the future live checklist;not executed.
 
 2026-10-25. Verified unchanged ROM,own known records only. Initial and reset no-replay controls retain loss;no clean setup,qualified paused clock,empty replay,single-X or motion pass. Own sessions closed and preferences preserved. No new historical or physical claim.
 [Evidence](../docs/development/pc286-bank-plan-evidence.md).
+
+
+## SRC-0447 - Owner sustained paired-release and286 continuation
+
+2026-10-25. Owner requests continued work on Mac input/PC dragging through readiness for approval,alongside286;publication and source/role/platform gates persist.
+[Evidence](../docs/development/input-routes-and-catalog-evidence.md).
+
+
+## SRC-0448 - Original numeric backing catalog and checks
+
+2026-10-25. Copilot artifact,lead subtraction correction,32 pre-read assertions and later actual regression;three host profiles/six C16 witnesses,no far access or physical ownership proof.
+[Evidence](../docs/development/input-routes-and-catalog-evidence.md).
+
+
+## SRC-0449 - Original opt-in finite pending-edge experiment
+
+2026-10-25. Copilot draft/lead fixes and corrected214-assertion oracle;normal policy default0,three host profiles/compiled defects. Native compile/byte comparison/trial pending;no cause or motion claim.
+[Evidence](../docs/development/input-routes-and-catalog-evidence.md).
+
+
+## SRC-0450 - Lead desktop route attempts and helper proposal
+
+2026-10-25. Verified unchanged originalROM launches;controllers fail activation across ordinary/normal-local/fullscreen modes. Exact owned cleanup,no input result,new screenshot or PC repeat. Helper source/alternate-method approval pending.
+[Evidence](../docs/development/input-routes-and-catalog-evidence.md).

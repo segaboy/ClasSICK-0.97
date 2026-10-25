@@ -122,3 +122,6 @@ native byte/chunk commit API or qualified far-pointer implementation here.
 
 
 2026-10-25,SRC-0444..0446/IMPL-0076/TEST-0089:adopt the separate [logical geometry/descriptive4-byte plan](../development/pc286-bank-plan-contract.md) prototype. Three host profiles/176 frozen assertions/three compiled defects and six final C16 objects verified. This is no backing admission,capability,commit execution,far backend or production ABI;the native infallible-commit obligation remains open. [Evidence](../development/pc286-bank-plan-evidence.md).
+
+
+2026-10-25,SRC-0448/IMPL-0077/TEST-0090:adopt the separate [numeric backing-catalog prototype](../development/pc286-bank-catalog-contract.md). It bounds caller-supplied canonical intervals/native offsets,not actual physical ownership/representation or infallible access.32 frozen checks/later reproduced regression/three host profiles/six C16 closure witnesses verified;no native pointer,far conversion,commit,link/target run or production ABI.

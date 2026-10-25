@@ -15,6 +15,8 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--tool-root', required=True, type=Path)
     parser.add_argument('--output', required=True, type=Path)
+    parser.add_argument('--catalog', action='store_true',
+                        help='Compile the unbound catalog plus bank-plan closure witness')
     args = parser.parse_args()
     root = Path(__file__).resolve().parents[1]
     lock = json.loads((root / 'scripts/pc286-toolchain-lock.json').read_text(encoding='utf-8'))
@@ -28,6 +30,17 @@ def main():
     for key in ('WCC', 'WATCOM', 'INCLUDE', 'LIB', 'WCL', 'WLINK'):
         env.pop(key, None)
     tools = args.tool_root / 'binnt64'
+    source = root / 'probes/pc286/bank-plan.c'
+    public_names = {'cs_bm_validate_', 'cs_bm_check_', 'cs_bm_plan4_'}
+    input_names = ['arch/i286/c16.h', 'probes/pc286/bank-plan.h', 'probes/pc286/bank-plan.c']
+    if args.catalog:
+        # Original single-translation-unit witness, not a target link/ABI proof.
+        source = out / 'catalog-closure.c'
+        source.write_text('#include "' + (root / 'probes/pc286/bank-plan.c').as_posix() +
+                          '"\n#include "' + (root / 'probes/pc286/bank-catalog.c').as_posix() +
+                          '"\n', encoding='utf-8')
+        public_names.add('cs_bc_validate_')
+        input_names += ['probes/pc286/bank-catalog.h', 'probes/pc286/bank-catalog.c']
     rows = []
     for model in ('ms', 'mm', 'ml'):
         for opt in ('od', 'os'):
@@ -36,8 +49,7 @@ def main():
             flags = ['-zq', '-2', '-' + model, '-zl', '-s', '-' + opt,
                      '-zastd=c99', '-dCS_C16_REQUIRE_16BIT',
                      '-i=' + str(args.tool_root / 'h'), '-fo=' + str(obj)]
-            q = subprocess.run([str(tools / 'wcc.exe'), *flags,
-                                str(root / 'probes/pc286/bank-plan.c')],
+            q = subprocess.run([str(tools / 'wcc.exe'), *flags, str(source)],
                                cwd=out, env=env, stdin=subprocess.DEVNULL,
                                capture_output=True, timeout=25)
             (out / (name + '.log')).write_bytes(q.stdout + q.stderr)
@@ -54,7 +66,7 @@ def main():
                 externals += re.findall(r"\d+ - '([^']+)' Type:", block)
             for block in re.findall(r'PUBDEF\(90\).*?(?=\n\S+.*recnum:|\Z)', meta, re.S):
                 publics += re.findall(r"[0-9a-f]+h - '([^']+)' Type:", block)
-            if set(publics) != {'cs_bm_validate_', 'cs_bm_check_', 'cs_bm_plan4_'}:
+            if set(publics) != public_names:
                 raise ValueError(name + ': unexpected public definition set')
             unresolved = sorted(set(externals) - set(publics))
             if unresolved:
@@ -70,10 +82,11 @@ def main():
                              segments=segments, object_bytes=obj.stat().st_size,
                              object_sha256=hashlib.sha256(obj.read_bytes()).hexdigest()))
     inputs = {p: hashlib.sha256((root / p).read_bytes().replace(b'\r\n', b'\n')).hexdigest()
-              for p in ('arch/i286/c16.h', 'probes/pc286/bank-plan.h', 'probes/pc286/bank-plan.c')}
+              for p in input_names}
     report = dict(compiler_pin=lock['release'], compiler_calls=6, objects=6,
                   inputs=inputs, records=rows, linked=False, target_executed=False,
-                  scope='Compiler metadata/import audit only, not complete ISA/ABI/runtime proof',
+                  profile='catalog-closure' if args.catalog else 'bank-plan',
+                  scope='Compiler metadata/import audit only, not target link/complete ISA/ABI/runtime proof',
                   stack_policy='-s is diagnostic only; no production stack-check waiver')
     (out / 'report.json').write_text(json.dumps(report, indent=2) + '\n', encoding='utf-8')
     print('PASS: six 80286/USE16 unlinked objects, no unresolved imports; no target execution.')

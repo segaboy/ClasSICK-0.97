@@ -10,6 +10,14 @@
  * one complete selector/data transaction each; the target guarantees chip
  * access spacing and recovery. Producer operations are serialized by the
  * caller; foreground inbox operations are excluded around service(). */
+/* Opt-in engineering experiment; default 0 keeps the original layout/behavior. */
+#ifndef CLASSICK_MAC_PENDING_DEFER_PROBE
+#define CLASSICK_MAC_PENDING_DEFER_PROBE 0
+#endif
+#if (CLASSICK_MAC_PENDING_DEFER_PROBE)!=0 && (CLASSICK_MAC_PENDING_DEFER_PROBE)!=1
+#error CLASSICK_MAC_PENDING_DEFER_PROBE must be 0 or 1
+#endif
+
 enum { CS_MAC_SCC_A = 0, CS_MAC_SCC_B = 1 };
 
 typedef struct {
@@ -53,6 +61,10 @@ struct cs_mac_motion {
     int32_t cause;
     uint32_t services, samples, baselines, losses, peak_queued; /* saturate */
     struct cs_mac_motion_loss first_loss;
+#if CLASSICK_MAC_PENDING_DEFER_PROBE
+    uint32_t defer_pending;       /* 0, or expected RR3 (A=8/B=1) */
+    uint32_t defer_snapshot;      /* masked PB/RR0 endpoint */
+#endif
 };
 
 int cs_mac_motion_prepare(struct cs_mac_motion *m, const cs_mac_motion_io *io,

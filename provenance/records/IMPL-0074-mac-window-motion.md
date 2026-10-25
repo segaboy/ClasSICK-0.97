@@ -31,3 +31,6 @@ SRC-0434/0435: no supported runtime defect or code change. One reused verified R
 
 
 2026-10-24,SRC-0438/0439:experimental original replay generator passes14 host checks;unchanged ROM trial later retains X-only UNSTABLE/RR3zero,fault0/no displacement. No pre-load/timing isolation,causal attribution,policy edit or new native compilation. Prior source CI40111212874 fully passes. [Evidence](../../docs/development/mac-input-replay-evidence.md).
+
+
+SRC-0449:opt-in finite pending-edge experiment behind default0 macro. Two fields only under1;no extra IO. Exact normal image/native+8B/stack/target proofs pending;host tests and disclosed source/test corrections recorded. [Evidence](../../docs/development/input-routes-and-catalog-evidence.md).

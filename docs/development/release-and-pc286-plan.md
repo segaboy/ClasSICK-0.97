@@ -71,3 +71,6 @@ adds an empty-input control before any loss is attributed to a replay fixture.
 
 
 2026-10-25,SRC-0444..0446:logical metadata/descriptive4-byte plan now compiles as C99 and C16;no far backing/commit/production binding. Paired release still primary. Desktop available,actual unchanged-ROM no-replay control is contaminated,so causal movement and PC GUI left drag remain open. No freeze or blind unchanged repeat. [Current evidence](pc286-bank-plan-evidence.md).
+
+
+SRC-0447..0450:paired release remains primary. Opt-in finite Mac pending-edge policy is software-verified and queued for native proof;normal policy stays default0. Desktop activation fails across supported routes;alternate original helper is reviewable but approval pending.286 gains numeric backing preflight/compiler witnesses,not actual ownership/far/commit. Mac motion and PC GUI dragging remain open. [Checkpoint](input-routes-and-catalog-evidence.md).

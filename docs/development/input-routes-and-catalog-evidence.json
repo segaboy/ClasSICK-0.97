@@ -1,0 +1,397 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-25",
+  "source_ids": [
+    "SRC-0447",
+    "SRC-0448",
+    "SRC-0449",
+    "SRC-0450"
+  ],
+  "baseline_revision": "38e938b608024dc149267132f023422cbfb6b510",
+  "scope": "Opt-in original finite pending-edge experiment and unbound C16 numeric backing catalog;not a proven native input fix",
+  "workers": [
+    {
+      "task": "primary",
+      "model": "claude-sonnet-5.5",
+      "effort": "low",
+      "input_bytes": 6354,
+      "input_sha256": "9dae9429aa9a7f89f1c85af966726c91f4cf9a18b47d863dca931555e2cf46e7",
+      "elapsed_seconds": 47.53,
+      "reported_premium_requests": 1,
+      "commands": 0,
+      "writes": 0,
+      "tests_executed": []
+    },
+    {
+      "task": "mac-primary",
+      "model": "claude-sonnet-5.5",
+      "effort": "low",
+      "input_bytes": 19547,
+      "input_sha256": "0fc113117b8d4bb57006440f4d69e9b0074502b2d6a434bc1f81acef46e92a97",
+      "elapsed_seconds": 104.47,
+      "reported_premium_requests": 1,
+      "commands": 0,
+      "writes": 0,
+      "tests_executed": []
+    }
+  ],
+  "initial_worker_launch": {
+    "exit_code": 1,
+    "elapsed_seconds": 12.27,
+    "input_bytes": 6354,
+    "stderr_bytes": 4982,
+    "error": "EPERM extracting existing CLI cache",
+    "artifact": false,
+    "raw_failure_overwritten_by_environment_retry": true,
+    "source": "observed launcher output;sanitized scope only",
+    "retry": "identical packet with normal local access,not model retry"
+  },
+  "catalog": {
+    "specification": "SPEC-0069",
+    "implementation": "IMPL-0077",
+    "tests": "TEST-0090",
+    "frozen_assertions": 32,
+    "original_frozen_sha256": "d39de165d251e01c595125584321b54690b92d081247d7e1c8d401fab5c943b2",
+    "host_profiles": [
+      "Clang Debug",
+      "GCC Release",
+      "Clang ASan/UBSan"
+    ],
+    "targeted_CTests_per_profile": 2,
+    "initial_worker_fixture_failures": 21,
+    "original_oracle_missed_later_bounds_bug": true,
+    "lead_regression": "Bank beginning after owner end reproduced unsigned subtraction underflow;one failing regression before guard fix",
+    "lead_changes": [
+      "Corrected READ and even-size worker fixtures",
+      "Guard physical_base<=ram_end before subtraction",
+      "Clarified zero-length precedence and unmeasured initialization cost"
+    ],
+    "compiler_calls": 6,
+    "compiler_profile": "2026-10-01-Build",
+    "compiler_inputs": {
+      "arch/i286/c16.h": "0d7634a598aa92a0971f8e1bcf55b63df0f3820cb78d4f7817641b27544a3920",
+      "probes/pc286/bank-plan.h": "7650a2c753f561d341430fe796d5852fea1c276a3547af2a17bed63397bf3bf1",
+      "probes/pc286/bank-plan.c": "34201bf3b4d83c21d739a8a80d4a973f1b1fc5525c99fac87b30c63239473c56",
+      "probes/pc286/bank-catalog.h": "942bacde89cad3e2c5c93c972b92588dab633c4271faf1f1b58b0cd6b6d72217",
+      "probes/pc286/bank-catalog.c": "d4a0a4fc4f505f6ae9a05746cd918d75cf8ecdf5dad0f79f9bf94255bc104c54"
+    },
+    "objects": [
+      {
+        "case": "ms-od",
+        "sha256": "180c417fb9dbaa7c3c076a362f297ddfb195cc35aa23ff52e5d722ae208cee03",
+        "segments": [
+          [
+            "_TEXT",
+            "16",
+            "00000EC6"
+          ],
+          [
+            "CONST",
+            "16",
+            "00000000"
+          ],
+          [
+            "CONST2",
+            "16",
+            "00000000"
+          ],
+          [
+            "_DATA",
+            "16",
+            "00000000"
+          ]
+        ],
+        "unresolved_symbols": []
+      },
+      {
+        "case": "ms-os",
+        "sha256": "c321fcdf641f24d3fa3c280ef37b6f6dfb89aa7225b2a86161358bf5b3626cf1",
+        "segments": [
+          [
+            "_TEXT",
+            "16",
+            "000008D8"
+          ],
+          [
+            "CONST",
+            "16",
+            "00000000"
+          ],
+          [
+            "CONST2",
+            "16",
+            "00000000"
+          ],
+          [
+            "_DATA",
+            "16",
+            "00000000"
+          ]
+        ],
+        "unresolved_symbols": []
+      },
+      {
+        "case": "mm-od",
+        "sha256": "8d2e8ae9e2a9779490449e6899b637893486298710b4220c889d9180d4ad0ef8",
+        "segments": [
+          [
+            "catalog-closure_TEXT",
+            "16",
+            "00000EC9"
+          ],
+          [
+            "CONST",
+            "16",
+            "00000000"
+          ],
+          [
+            "CONST2",
+            "16",
+            "00000000"
+          ],
+          [
+            "_DATA",
+            "16",
+            "00000000"
+          ]
+        ],
+        "unresolved_symbols": []
+      },
+      {
+        "case": "mm-os",
+        "sha256": "e9188fe2607507357fb6c3400fc649fbc96b673bd3b67ca92d07441c8bfaf94c",
+        "segments": [
+          [
+            "catalog-closure_TEXT",
+            "16",
+            "000008DB"
+          ],
+          [
+            "CONST",
+            "16",
+            "00000000"
+          ],
+          [
+            "CONST2",
+            "16",
+            "00000000"
+          ],
+          [
+            "_DATA",
+            "16",
+            "00000000"
+          ]
+        ],
+        "unresolved_symbols": []
+      },
+      {
+        "case": "ml-od",
+        "sha256": "9a2434f9e13850c66538c493eb3a92731fb51427c1f2c1449e10c43ffb3197f6",
+        "segments": [
+          [
+            "catalog-closure_TEXT",
+            "16",
+            "00001040"
+          ],
+          [
+            "CONST",
+            "16",
+            "00000000"
+          ],
+          [
+            "CONST2",
+            "16",
+            "00000000"
+          ],
+          [
+            "_DATA",
+            "16",
+            "00000000"
+          ]
+        ],
+        "unresolved_symbols": []
+      },
+      {
+        "case": "ml-os",
+        "sha256": "e600f53c2be3b87735aadd7d710a41e8fb9b5a10b9f96d158e3d27282a4b9f91",
+        "segments": [
+          [
+            "catalog-closure_TEXT",
+            "16",
+            "000009BB"
+          ],
+          [
+            "CONST",
+            "16",
+            "00000000"
+          ],
+          [
+            "CONST2",
+            "16",
+            "00000000"
+          ],
+          [
+            "_DATA",
+            "16",
+            "00000000"
+          ]
+        ],
+        "unresolved_symbols": []
+      }
+    ],
+    "single_translation_unit_witness": true,
+    "linked_286": false,
+    "executed_286": false,
+    "native_pointer_or_backing_admission": false,
+    "far_conversion": false,
+    "ownership_or_hardware_alias_proof": false
+  },
+  "mac_experiment": {
+    "specification": "SPEC-0072",
+    "implementation": "IMPL-0074",
+    "tests": "TEST-0087",
+    "macro": "CLASSICK_MAC_PENDING_DEFER_PROBE",
+    "default": 0,
+    "normal_checks": 6295,
+    "phase_inversion_cases": 32,
+    "oracle_assertions": 214,
+    "original_frozen_sha256": "67f7cea54c30395dc8fb296ec1666d70fb202236bae7f11e376428401b3dffff",
+    "final_oracle_normalized_sha256": "b80ebd8d43132a08c9fae0e51a1db7210c350924e54e56b2ed019a8ffd8222f3",
+    "strict_final_author_blind": false,
+    "oracle_corrections": "Two existing inbox API return expectations OK->LOST;GCC warning-only formatting. Original frozen bytes retained outside Git",
+    "author_test_corrections": [
+      "Removed two vacuous ||1 assertions and meaningless snapshot condition",
+      "Encoded literal endpoints and positive constant-direction case",
+      "Used real inbox loss/discard/resume and fresh-storage lifecycle",
+      "Added missing-phase regression"
+    ],
+    "core_correction": "Deferred next pass without remembered phase must use specified pending failure,not skip to no-phase reason",
+    "host_profiles": [
+      "Clang Debug",
+      "GCC Release",
+      "Clang ASan/UBSan"
+    ],
+    "targeted_CTests_per_profile": 3,
+    "controls": [
+      {
+        "case": "unbounded-wait",
+        "compiled": true,
+        "exit_code": 1,
+        "detected": true
+      },
+      {
+        "case": "wrong-endpoint",
+        "compiled": true,
+        "exit_code": 1,
+        "detected": true
+      },
+      {
+        "case": "advance-early",
+        "compiled": true,
+        "exit_code": 1,
+        "detected": true
+      },
+      {
+        "case": "invalid macro 2",
+        "compiler_refused": true
+      },
+      {
+        "case": "invalid macro -1",
+        "compiler_refused": true
+      },
+      {
+        "case": "default-zero worker test",
+        "passed": true
+      },
+      {
+        "case": "builder []",
+        "refused_before_output": true
+      },
+      {
+        "case": "builder ['--drawing']",
+        "refused_before_output": true
+      },
+      {
+        "case": "builder ['--native-drawing']",
+        "refused_before_output": true
+      },
+      {
+        "case": "builder ['--selected-drawing']",
+        "refused_before_output": true
+      },
+      {
+        "case": "builder ['--outline-drawing']",
+        "refused_before_output": true
+      },
+      {
+        "case": "builder ['--window-drawing', '--window-idle-probe']",
+        "refused_before_output": true
+      }
+    ],
+    "io_reads_or_writes_added_per_service": 0,
+    "expected_added_native_bss_bytes": 8,
+    "native_compile": "pending source CI",
+    "native_default_byte_comparison": "pending source CI",
+    "native_trial": false,
+    "hardware_cause_or_chronology_proven": false
+  },
+  "desktop": {
+    "approved_verified_original_ROM": "673a2cca57d1ec9ffd842f4c858fa4aafbcb042ec6f86445ae5717d4816c4965",
+    "sessions": [
+      {
+        "pid": 40152,
+        "mode": "restricted normal launch",
+        "result": "activation failure"
+      },
+      {
+        "pid": 36212,
+        "mode": "normal local launch",
+        "result": "both controllers fail activation"
+      },
+      {
+        "pid": 35860,
+        "mode": "documented fullscreen launch",
+        "result": "activation failure for keyboard control"
+      }
+    ],
+    "owned_processes_closed": true,
+    "cleanup": "exact PID/path/executable SHA guarded forced lifecycle cleanup;not semantic guest shutdown",
+    "successful_input_operation_reported": false,
+    "known_guest_records_collected": false,
+    "locked_surface_observed": false,
+    "full_desktop_security_state_proven": false,
+    "host_settings_changed": false,
+    "new_PC_trial": false,
+    "new_screenshot": false,
+    "fullscreen_capture_excluded": "host overlay;no saved/public pixels",
+    "helper_proposal": "docs/development/tasks/windows-relative-input-helper.md",
+    "helper_approval": "pending;no implementation or alternate input used"
+  },
+  "prior_CI": {
+    "run": 40219036664,
+    "source_revision": "38e938b608024dc149267132f023422cbfb6b510",
+    "m68k_rom": "success",
+    "windows_bootstrap": "success"
+  },
+  "new_CI": "pending at source commit",
+  "Mac_motion_passed": false,
+  "PC_GUI_drag_passed": false,
+  "release_ready": false,
+  "release_frozen": false,
+  "PNG_count": 63,
+  "GIF_count": 2,
+  "preservation": [
+    "24 research originals",
+    "held brief",
+    "UART",
+    "prior records/assets/releases/tags",
+    "retired OneNote/wiki",
+    "native-app/source/physical/128K/B2/System1 gates"
+  ],
+  "remaining_balances": {
+    "Copilot": "unavailable",
+    "Claude": "unavailable",
+    "Grok": "unavailable",
+    "Argon": "unavailable"
+  }
+}

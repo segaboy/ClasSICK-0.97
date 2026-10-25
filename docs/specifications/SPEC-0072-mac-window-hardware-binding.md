@@ -156,3 +156,29 @@ the known own PC and IPL7 before interpreting the frozen original RAM.
 Do not touch the guest window before the automatic checkpoint. Inspecting
 the frozen record afterwards cannot create earlier guest input. No historical,
 hardware, motion, release or other gate is advanced by a diagnostic halt.
+
+
+## Opt-in finite pending-edge experiment (engineering,SRC-0449)
+
+CLASSICK_MAC_PENDING_DEFER_PROBE defaults0 and rejects values outside0/1.
+Default controller layout and acceptance policy remain. Flag1 adds two32-bit
+fields after first_loss. READY plus remembered phase and unquiesced master may
+defer one nonstable RR3zero pass only when s1 DCDs match old phase,exactly one
+final DCD differs,the other DCD/direction and button stay steady,and the moving
+direction bit changes at most once. Keep old phase/buttons,queue and counters
+except services;store masked PB/RR0 endpoint and single expected pending bit.
+
+The very next service cannot defer again. It must remain READY/have_phase,
+have three stable samples at that endpoint and exact matching RR3 bit,then
+pass the unchanged phase/pending admission path. Otherwise clear state and
+retain uncertainty/quiescence (UNSTABLE when nonstable,otherwise PENDING).
+Original invalid/epoch/unsupported-pending hard-fault precedence remains.
+Clear on WAIT,LOSS,hard fail,stop and fresh prepare. PRIMING cannot defer.
+
+No extra IO or unstable record acceptance,coalescing,timestamp guarantee,
+hidden-even-edge recovery or physical chronology. This is a new experimental
+policy,not a diagnosis of the earlier ambiguous trace. Native builder option
+--window-pending-defer-probe requires --window-drawing and refuses idle-probe
+combination. Distinct profile name;normal byte identity,expected+8B BSS,current
+source/IRQ/stack proofs and exact target qualification are mandatory before
+any release adoption. Host tests pass;native proof/trial pending at this record.

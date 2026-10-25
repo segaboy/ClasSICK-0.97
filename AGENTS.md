@@ -1,5 +1,7 @@
 # ClasSICK 0.97 working instructions
 
+2026-10-25,SRC-0447..0450:opt-in Mac finite-defer experiment passes214 corrected-oracle checks/three host profiles/three compiled defects;normal6295 checks retained. Native byte/cost/trial proof pending.286 numeric catalog passes32 frozen checks/later bounds regression/six C16 witnesses. GUI activation fails;owned sessions closed,helper approval pending. No motion/drag/release pass;originals/63PNG/twoGIF preserved. [Evidence](docs/development/input-routes-and-catalog-evidence.md).
+
 2026-10-25,SRC-0444..0446/IMPL-0076/TEST-0089:C99 bank-plan prototype passes176 frozen assertions/three host profiles/three compiled defects/six final C16 objects. No far backend/commit/runtime change. Native no-replay control retains loss;no qualified motion/GUI/release pass. Own sessions closed/preferences preserved,63PNG/twoGIF,originals retained. [Evidence](docs/development/pc286-bank-plan-evidence.md).
 
 2026-10-25,SRC-0442/0443:first286 retained-view slice reviews five files/14 rows;lead checks source hashes and arithmetic bounds. Logical range/prevalidated4-byte commit is next proposal,no API/backend/runtime change or native tests. Planned live checklist adds empty control,not executed. Prior full CI passes,new CI pending.63PNG/twoGIF,originals preserved;release motion/GUI gates remain. [Evidence](docs/development/retained-views-evidence.md).

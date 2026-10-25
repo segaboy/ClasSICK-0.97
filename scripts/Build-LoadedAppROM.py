@@ -40,10 +40,13 @@ def main():
     mode.add_argument('--outline-drawing',action='store_true',help='Build the SPEC-0049 paired native outline preview')
     mode.add_argument('--window-drawing',action='store_true',help='Build the SPEC-0072 native Mac window preview')
     p.add_argument('--window-idle-probe',action='store_true',help='Diagnostic: halt in a self-branch after >=500 services; window profile only')
+    p.add_argument('--window-pending-defer-probe',action='store_true',help='Experimental one-service pending-edge defer; window profile only')
     p.add_argument('--dcd-invert',type=int,choices=(0,1,2,3),default=0,help='Unverified raw RR0 DCD sense mask; window profile only')
     a=p.parse_args();native=a.native_drawing or a.selected_drawing or a.outline_drawing or a.window_drawing
     if a.dcd_invert and not a.window_drawing:p.error('--dcd-invert requires --window-drawing')
     if a.window_idle_probe and not a.window_drawing:p.error('--window-idle-probe requires --window-drawing')
+    if a.window_pending_defer_probe and not a.window_drawing:p.error('--window-pending-defer-probe requires --window-drawing')
+    if a.window_pending_defer_probe and a.window_idle_probe:p.error('Choose one diagnostic profile')
     repo=Path(__file__).resolve().parents[1];tools=Path(a.tool_root).resolve();out=Path(a.output).resolve()
     out.mkdir(parents=True,exist_ok=False);sys.dont_write_bytecode=True
     spec=spec_from_file_location('base_rom',repo/'scripts/Build-MacROM.py');h=module_from_spec(spec);spec.loader.exec_module(h)
@@ -84,6 +87,7 @@ def main():
             specs.append(found[0].relative_to(repo).as_posix())
         sources=WINDOW_SOURCES;headers=WINDOW_HEADERS+tuple(specs)
         program_source=None;program_hex='';specification='SPEC-0072';profile='native-window-preview-v1'
+        if a.window_pending_defer_probe:profile='native-window-pending-defer-probe-v1'
     profiles=[]
     for twin in ('a','b'):
         folder=out/('Os-'+twin);folder.mkdir();objects=[]
@@ -96,6 +100,7 @@ def main():
         if a.outline_drawing:flags+=['-DCLASSICK_OUTLINE_DRAWING=1']
         if a.window_drawing:flags+=['-DCLASSICK_MAC_DCD_INVERT='+str(a.dcd_invert)]
         if a.window_idle_probe:flags+=['-DCLASSICK_MAC_IDLE_PROBE=1']
+        if a.window_pending_defer_probe:flags+=['-DCLASSICK_MAC_PENDING_DEFER_PROBE=1']
         for i,source in enumerate(sources):
             obj=folder/f'{i}.o';objects.append(obj);h.run([cc,*flags,'-c',repo/source,'-o',obj],env)
             if source not in ('platform/mac128k/loaded-entry.c','platform/mac128k/drawing-entry.c','platform/mac128k/native-drawing-entry.c','platform/mac128k/window-entry.c'):
@@ -215,6 +220,7 @@ def main():
      'module_count':len(sources),'selected_ports':bool(a.selected_drawing or a.outline_drawing),'outline_drawing':bool(a.outline_drawing),'native_drawing_context':('SPEC-0041' if native else None),'emulator_run':False,'system1_compatibility_proven':False,
      'inputs':{f:hashlib.sha256((repo/f).read_bytes().replace(b'\r\n',b'\n')).hexdigest() for f in (*sources,*headers)}}
     if a.window_drawing:manifest['window_idle_probe']=bool(a.window_idle_probe)
+    if a.window_drawing:manifest['window_pending_defer_probe']=bool(a.window_pending_defer_probe)
     if a.window_idle_probe:manifest['window_idle_probe_threshold']=500
     if a.window_drawing:manifest.update({'window_drawing':True,'native_drawing_context':None,
      'dcd_invert':a.dcd_invert,'dcd_invert_verified':False,'cpu_callbacks':list(cpu_callbacks),

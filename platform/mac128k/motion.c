@@ -11,6 +11,12 @@ enum { WR9_RESET = 0xC0, WR9_NV = 0x02, WR9_MIE_NV = 0x0A,
  * three-byte by-value stack copy produced an odd word access on MC68000. */
 typedef struct { uint8_t pb, a, b; } snap;
 
+#if CLASSICK_MAC_PENDING_DEFER_PROBE
+#define DEFER_CLEAR(m) ((m)->defer_pending = (m)->defer_snapshot = 0u)
+#else
+#define DEFER_CLEAR(m) ((void)0)
+#endif
+
 static uint32_t sat(uint32_t v) { return v == UINT32_MAX ? v : v + 1u; }
 
 static void wr(struct cs_mac_motion *m, uint32_t ch, uint32_t reg, int v)
@@ -23,6 +29,7 @@ static int fail(struct cs_mac_motion *m, uint32_t stage, int32_t cause)
 {
     if (m->cause == CS_MAC_CAUSE_NONE) { m->stage = stage; m->cause = cause; }
     wr(m, CS_MAC_SCC_A, 9u, WR9_NV);
+    DEFER_CLEAR(m);
     m->phase = CS_MAC_MOTION_FAILED;
     return CS_MAC_MOTION_FAULT;
 }
@@ -54,6 +61,35 @@ static uint32_t pack(const snap *s)
 {
     return (uint32_t)s->pb << 16 | (uint32_t)s->a << 8 | s->b;
 }
+
+#if CLASSICK_MAC_PENDING_DEFER_PROBE
+static uint32_t ep(const snap *s)
+{
+    return (uint32_t)(s->pb & PB_MASK) << 16
+        | (uint32_t)(s->a & RR0_DCD) << 8 | (uint32_t)(s->b & RR0_DCD);
+}
+
+/* Expected RR3 bit if the first nonstable pass is exactly one DCD edge on one
+ * axis with everything else steady; otherwise 0. No IO. */
+static uint32_t defer_bit(const struct cs_mac_motion *m, const snap *s1,
+    const snap *s2, const snap *s3)
+{
+    uint32_t a1 = bit(s1->a, RR0_DCD), b1 = bit(s1->b, RR0_DCD);
+    uint32_t ch_a = bit(s3->a, RR0_DCD) != m->last_raw_a;
+    uint32_t ch_b = bit(s3->b, RR0_DCD) != m->last_raw_b;
+    int other = ch_a ? PB_Y2 : PB_X2, mover = ch_a ? PB_X2 : PB_Y2;
+    uint32_t btn = (s1->pb & PB_BUTTON) ? 0u : (uint32_t)CS_POINTER_LEFT;
+    if (a1 != m->last_raw_a || b1 != m->last_raw_b || ch_a == ch_b) return 0u;
+    if (((s1->pb ^ s2->pb) | (s2->pb ^ s3->pb)) & PB_BUTTON) return 0u;
+    if (btn != m->last_buttons) return 0u;
+    if (ch_a ? bit(s2->b, RR0_DCD) != b1 : bit(s2->a, RR0_DCD) != a1)
+        return 0u;
+    if (((s1->pb ^ s2->pb) | (s2->pb ^ s3->pb)) & other) return 0u;
+    if (((s1->pb ^ s2->pb) & mover) && ((s2->pb ^ s3->pb) & mover))
+        return 0u;
+    return ch_a ? RR3_EXT_A : RR3_EXT_B;
+}
+#endif
 
 /* Observation only: no IO. Keeps the first record; reason is written last. */
 static void note(struct cs_mac_motion *m, uint32_t reason, uint8_t rr3,
@@ -178,10 +214,12 @@ int cs_mac_motion_service(struct cs_mac_motion *m)
 
     switch (in->phase) {
     case CS_INBOX_LOSS:
+        DEFER_CLEAR(m);
         m->have_phase = 0u;
         quiesce(m);
         return CS_MAC_MOTION_LOST;
     case CS_INBOX_WAIT:
+        DEFER_CLEAR(m);
         if (!stable) { m->have_phase = 0u; return CS_MAC_MOTION_EMPTY; }
         if (cs_inbox_baseline(in, m->epoch, buttons) != CS_INBOX_OK)
             return fail(m, CS_MAC_STAGE_INBOX, CS_MAC_CAUSE_INBOX_RESULT);
@@ -202,6 +240,26 @@ int cs_mac_motion_service(struct cs_mac_motion *m)
         return fail(m, CS_MAC_STAGE_INBOX, CS_MAC_CAUSE_INBOX_STATE);
     }
 
+#if CLASSICK_MAC_PENDING_DEFER_PROBE
+    {
+        uint32_t dp = m->defer_pending, de = m->defer_snapshot;
+        DEFER_CLEAR(m);
+        if (dp) {
+            if (!m->have_phase || in->phase != CS_INBOX_READY || !stable
+                || rr3 != dp || ep(&s3) != de)
+                return uncertain(m, stable ? CS_MAC_LOSS_PENDING
+                    : CS_MAC_LOSS_UNSTABLE, rr3, &s1, &s2, &s3, entry);
+        } else if (in->phase == CS_INBOX_READY && m->have_phase
+            && !m->quiesced && !stable && rr3 == 0u) {
+            dp = defer_bit(m, &s1, &s2, &s3);
+            if (dp) {
+                m->defer_pending = dp;
+                m->defer_snapshot = ep(&s3);
+                return CS_MAC_MOTION_EMPTY;
+            }
+        }
+    }
+#endif
     if (!m->have_phase || !stable) {
         return uncertain(m, !m->have_phase ? CS_MAC_LOSS_NO_PHASE : CS_MAC_LOSS_UNSTABLE,
             rr3, &s1, &s2, &s3, entry);
@@ -244,6 +302,7 @@ int cs_mac_motion_stop(struct cs_mac_motion *m)
         && m->phase != CS_MAC_MOTION_FAILED)
         return CS_MAC_MOTION_STATE;
     wr(m, CS_MAC_SCC_A, 9u, WR9_NV);
+    DEFER_CLEAR(m);
     wr(m, CS_MAC_SCC_A, 1u, 0x00);
     wr(m, CS_MAC_SCC_A, 15u, 0x00);
     wr(m, CS_MAC_SCC_B, 1u, 0x00);

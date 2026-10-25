@@ -443,3 +443,6 @@ balances unavailable. This is not evidence of quota savings. [Receipt](boot-inpu
 
 
 2026-10-25 C16 plan:Grok times out240.78s/no artifact/model-selection fallback warning,no retry. One Copilot Sonnet5.5 low fallback,19231B/77.58s/one read/no commands,writes,tests;four original files adopted with disclosed fixes. Codex integrates/executes frozen oracle,host/C16 controls and GUI checks. No other worker/fan-out;1reported premium request/2provider requests,remaining all-four balances unavailable. [Receipt](pc286-bank-plan-evidence.json).
+
+
+2026-10-25:one Copilot primary per distinct lane:6354B/47.53s numeric286 catalog and19547B/104.47s Mac opt-in experiment. A cache EPERM justified the identical environment retry only;no model fan-out. Both return usable code,but lead reproduces/fixes a subtraction bug,invalid fixtures,vacuous assertions and one deferred-state guard. Always-true assertions,placeholder expectations and unverified fixtures must be reported as blockers,never credited as tests. Lead adopts artifacts,executes oracles/compiler controls and keeps native/GUI evidence separate.1reported premium request each;all balances unavailable. [Receipt](input-routes-and-catalog-evidence.json).
