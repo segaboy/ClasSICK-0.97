@@ -449,3 +449,6 @@ balances unavailable. This is not evidence of quota savings. [Receipt](boot-inpu
 
 
 2026-10-25 first-input observation:Copilot7443B/41.05s supplies usable header/test/three patches. Four view calls (three same-prompt views,one input-directory listing) violate one-read cap;no outside content/commands/writes/tests. Lead integrates linked gate/native profile guards and unchanged pre-read oracle;no second worker or implementation recreation. One reported premium request;all balances unavailable. [Receipt](mac-first-input-probe-evidence.json).
+
+
+2026-10-25 package locator:one Copilot Sonnet5.5 low primary,30543B/146.28s,nine adopted replacements/211 original test lines. One prompt read plus one input-directory listing exceeds one-read cap;no extra source content/writes/commands/tests. Lead preserves requested review schema,corrects two fixture errors,adds resealed controls and executes verification;no second worker/requalification. One reported premium request. All balances unavailable;no measured Codex saving. [Receipt](paired-evidence-locator.json).

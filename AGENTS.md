@@ -1,5 +1,7 @@
 # ClasSICK 0.97 working instructions
 
+2026-10-25,SRC-0453..0455:680cdec native/Windows CI passes;unbooted first-input profiles verify with unchanged normal bytes. Strict schema2 package evidence locator passes115 local checks/legacy tree comparison/35 overlapping frozen cases/two faulty controls;no release inputs frozen. Helper approval,Mac motion,PC GUI drag/release remain open;286 numeric catalog retained. [Evidence](docs/development/paired-evidence-locator.md).
+
 2026-10-25,SRC-0451/0452:first-input checkpoint host checks pass (14 frozen/20 overlapping author cases,three profiles/compiled defects);native first-input proof pending.83f7b6f finite-defer native proof preserves default bytes,+476ROM/+8BSS/+8stack-bound,unbooted. Helper approval/motion/PC drag/release remain open;preserve originals/63PNG/twoGIF. [Evidence](docs/development/mac-first-input-probe-evidence.md).
 
 2026-10-25,SRC-0447..0450:opt-in Mac finite-defer experiment passes214 corrected-oracle checks/three host profiles/three compiled defects;normal6295 checks retained. Native byte/cost/trial proof pending.286 numeric catalog passes32 frozen checks/later bounds regression/six C16 witnesses. GUI activation fails;owned sessions closed,helper approval pending. No motion/drag/release pass;originals/63PNG/twoGIF preserved. [Evidence](docs/development/input-routes-and-catalog-evidence.md).

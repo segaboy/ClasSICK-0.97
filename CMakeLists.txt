@@ -2625,3 +2625,9 @@ if(BUILD_TESTING)
     add_test(NAME mac-input-probe.trigger COMMAND classick_mac_input_probe_tests)
     add_test(NAME mac-input-probe.frozen COMMAND classick_mac_input_probe_oracle)
 endif()
+
+# Release locator fixtures are synthetic; no guest execution or release output.
+if(BUILD_TESTING AND Python3_Interpreter_FOUND)
+    add_test(NAME release.evidence-locator COMMAND ${Python3_EXECUTABLE} -B
+        ${CMAKE_SOURCE_DIR}/scripts/Test-PairedReleaseEvidence.py)
+endif()

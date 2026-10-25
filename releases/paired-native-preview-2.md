@@ -244,3 +244,6 @@ hardware scope;no Mac parity,release acceptance or new target run.
 
 
 SRC-0451/0452:83f7b6f finite-defer native proof passes with unchanged normal bytes,+476ROM/+8BSS/+8stack-bound,unbooted. First-input checkpoint preparation adds no motion pass;new native proof/trial pending. Before final freeze,parameterize the generic package SOURCE.txt evidence path,currently fixed to preview1. Helper approval and E1-E3 readiness remain open. [Evidence](../docs/development/mac-first-input-probe-evidence.md).
+
+
+SRC-0453..0455:680cdec full native/Windows CI passes;first-input observer profiles verify but remain unbooted. Package tools now support explicit schema2 evidence locator with legacy identity. No window candidate freeze/package or input pass;helper approval,Mac motion and PC GUI dragging remain open. [Evidence](../docs/development/paired-evidence-locator.md).

@@ -1,0 +1,128 @@
+{
+  "schema_version": 1,
+  "source_id": "SRC-0453",
+  "date": "2026-10-25",
+  "compiled_source_revision": "680cdecd7fe16554b822129679e68ef86191106f",
+  "CI": {
+    "run": 40228167578,
+    "url": "https://github.com/segaboy/ClasSICK-0.97/actions/runs/40228167578",
+    "conclusion": "success",
+    "jobs": [
+      {
+        "name": "windows-bootstrap",
+        "conclusion": "success",
+        "completedAt": "2026-10-25T20:13:38Z"
+      },
+      {
+        "name": "m68k-rom",
+        "conclusion": "success",
+        "completedAt": "2026-10-25T19:55:31Z"
+      }
+    ]
+  },
+  "native_profiles": [
+    {
+      "profile": "native-window-first-input-probe-v1",
+      "sha256": "28187f74ca327e76667538615e5a63ed17fe5c745d39f0b48166a70f64ee7a4d",
+      "ROM_used": 23176,
+      "BSS": 304,
+      "workspace": 964,
+      "stack_bound": 5000,
+      "largest_frame": 284,
+      "checkpoint": "0x4002dc",
+      "trace": "0xb70",
+      "diagnostic": "0xbf0",
+      "gate": "0x4005d8"
+    },
+    {
+      "profile": "native-window-pending-defer-first-input-probe-v1",
+      "sha256": "8d81ae30027735aae45345737ee5bd602feafdf370780ea981b5800159f1e25c",
+      "ROM_used": 23652,
+      "BSS": 312,
+      "workspace": 964,
+      "stack_bound": 5008,
+      "largest_frame": 284,
+      "checkpoint": "0x4002dc",
+      "trace": "0xb78",
+      "diagnostic": "0xbf8",
+      "gate": "0x4005d8"
+    }
+  ],
+  "native_verification": [
+    {
+      "schema_version": 1,
+      "profiles": [
+        {
+          "probe": false,
+          "rom_sha256": "673a2cca57d1ec9ffd842f4c858fa4aafbcb042ec6f86445ae5717d4816c4965",
+          "rom_used": 23096,
+          "native_data_bss": 304,
+          "stack_bound": 4996,
+          "resealed_controls": 4
+        },
+        {
+          "probe": true,
+          "rom_sha256": "28187f74ca327e76667538615e5a63ed17fe5c745d39f0b48166a70f64ee7a4d",
+          "rom_used": 23176,
+          "native_data_bss": 304,
+          "stack_bound": 5000,
+          "resealed_controls": 5
+        }
+      ],
+      "normal_byte_identical_to_b3cb3fe": true,
+      "baseline_byte_identical_to_83f7b6f": true,
+      "baseline_rom_sha256": "673a2cca57d1ec9ffd842f4c858fa4aafbcb042ec6f86445ae5717d4816c4965",
+      "current_source_hashes_verified": true,
+      "mode_refusals": 6,
+      "probe_kind": "first-input",
+      "probe_spin_bytes": "60fe",
+      "additional_ram_bytes": 0,
+      "trace_layout_bytes": 128,
+      "emulator_run": false,
+      "motion_or_release_qualification": false
+    },
+    {
+      "schema_version": 1,
+      "profiles": [
+        {
+          "probe": false,
+          "rom_sha256": "cfa16dc2e816cc833fb6c2d51ca9088fdf26215c6aa989999783dbd08dcb4235",
+          "rom_used": 23572,
+          "native_data_bss": 312,
+          "stack_bound": 5004,
+          "resealed_controls": 4
+        },
+        {
+          "probe": true,
+          "rom_sha256": "8d81ae30027735aae45345737ee5bd602feafdf370780ea981b5800159f1e25c",
+          "rom_used": 23652,
+          "native_data_bss": 312,
+          "stack_bound": 5008,
+          "resealed_controls": 5
+        }
+      ],
+      "normal_byte_identical_to_b3cb3fe": null,
+      "baseline_byte_identical_to_83f7b6f": true,
+      "baseline_rom_sha256": "cfa16dc2e816cc833fb6c2d51ca9088fdf26215c6aa989999783dbd08dcb4235",
+      "current_source_hashes_verified": true,
+      "mode_refusals": 6,
+      "probe_kind": "pending-defer-first-input",
+      "probe_spin_bytes": "60fe",
+      "additional_ram_bytes": 0,
+      "trace_layout_bytes": 128,
+      "emulator_run": false,
+      "motion_or_release_qualification": false
+    }
+  ],
+  "manifest_inputs_checked_against_compiled_Git_revision": true,
+  "target_executed": false,
+  "default_ROM_sha256": "673a2cca57d1ec9ffd842f4c858fa4aafbcb042ec6f86445ae5717d4816c4965",
+  "new_BSS_for_observer": 0,
+  "physical_timing_full128K_or_System1_proof": false,
+  "Mac_motion_passed": false,
+  "PC_GUI_drag_passed": false,
+  "release_ready": false,
+  "helper": "Owner-specific fresh-helper/source/method approval pending;no implementation or use",
+  "PNG_count": 63,
+  "GIF_count": 2
+}

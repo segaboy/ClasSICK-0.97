@@ -24,6 +24,8 @@ TOP_KEYS = {'schema_version', 'compiled_source_revision', 'evidence_revision', '
 COMPONENT_KEYS = {'name', 'version', 'tag', 'binary_input', 'standalone', 'archive',
                   'source_archive', 'payloads', 'documents'}
 DOC_NAMES = {'README.txt', 'RELEASE.txt'}
+V1_EVIDENCE_PATH = 'docs/development/preview-session-evidence.json'
+EVIDENCE_PATH = re.compile(r'docs/(?:[A-Za-z0-9][A-Za-z0-9_.-]*/)*[A-Za-z0-9][A-Za-z0-9_.-]*\.json')
 SUMS = 'SHA256SUMS.txt'
 FIXED_MEMBERS = ['COPYING', 'README.txt', 'RELEASE.txt', SUMS, 'SOURCE.txt']
 ZIP_TIME = (2026, 10, 19, 0, 0, 0)
@@ -39,7 +41,7 @@ BAD_CHARS = set('\\:*?<>|' + chr(34)) | {chr(c) for c in range(32)}
 RESERVED = {'CON', 'PRN', 'AUX', 'NUL'} | {p + str(i) for p in ('COM', 'LPT') for i in range(1, 10)}
 SOURCE_TEMPLATE = ('Compiled source: {src}\nQualification evidence: {ev}\n'
                    'Source: ' + REPO + '/tree/{src}\n'
-                   'Evidence: ' + REPO + '/blob/{ev}/docs/development/preview-session-evidence.json\n'
+                   'Evidence: ' + REPO + '/blob/{ev}/{path}\n'
                    'CI: {ci}\nLicense: GPL-3.0-or-later\n')
 
 
@@ -154,8 +156,16 @@ def load_config(path):
         config = json.loads(raw.decode('utf-8'), object_pairs_hook=no_duplicate_keys)
     except ValueError as exc:
         raise Refusal(f'config: invalid JSON ({exc})')
-    need(isinstance(config, dict) and set(config) == TOP_KEYS, 'config: unexpected top-level keys')
-    need(type(config['schema_version']) is int and config['schema_version'] == 1, 'config: schema_version must be 1')
+    need(isinstance(config, dict), 'config: unexpected top-level keys')
+    version = config.get('schema_version')
+    need(type(version) is int and version in (1, 2), 'config: schema_version must be 1 or 2')
+    need(set(config) == TOP_KEYS | ({'evidence_path'} if version == 2 else set()), 'config: unexpected top-level keys')
+    if version == 2:
+        path = config['evidence_path']
+        need(isinstance(path, str) and path.isascii() and EVIDENCE_PATH.fullmatch(path)
+             and not any(part.endswith('.') for part in path.split('/')[:-1]), 'config: bad evidence_path')
+    else:
+        config['evidence_path'] = V1_EVIDENCE_PATH
     for key in ('compiled_source_revision', 'evidence_revision'):
         need(isinstance(config[key], str) and REVISION.fullmatch(config[key]), f'config: bad {key}')
     need(config['compiled_source_revision'] != config['evidence_revision'], 'config: source and evidence pins must stay distinct')
@@ -250,7 +260,8 @@ def plan(args):
         inputs[name] = data
     inspect_source_zip(inputs['source.zip'])
     source_text = SOURCE_TEMPLATE.format(src=config['compiled_source_revision'],
-                                         ev=config['evidence_revision'], ci=config['ci_url']).encode('ascii')
+                                         ev=config['evidence_revision'], ci=config['ci_url'],
+                                         path=config['evidence_path']).encode('ascii')
     tree, components = {}, {}
     for key in sorted(config['components']):
         comp = config['components'][key]
@@ -272,6 +283,8 @@ def plan(args):
               'compiled_source_revision': config['compiled_source_revision'],
               'evidence_revision': config['evidence_revision'],
               'config_sha256': sha256(raw), 'components': components}
+    if config['schema_version'] == 2:
+        review['evidence_path'] = config['evidence_path']
     tree['review.json'] = (json.dumps(review, indent=2, sort_keys=True) + '\n').encode('ascii')
     tree['APPROVAL-PENDING.txt'] = marker(config)
     return tree

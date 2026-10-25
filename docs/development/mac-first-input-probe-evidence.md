@@ -52,3 +52,6 @@ unavailable. No provider-token equivalence or measured Codex saving.
 [Machine-readable receipt](mac-first-input-probe-evidence.json).
 
 Source83f7b6f CI40225525501 now passes both native and Windows jobs;the new first-input observer still needs its own native CI.
+
+
+Native completion,SRC-0453:680cdec CI40228167578 passes both jobs. Exact first-input profiles verify with normal/default-defer baseline bytes retained,+80ROM/zeroBSS/+4stack-bound for observation. Both remain unbooted. [Pinned compiler receipt](mac-input-native-verification.json).

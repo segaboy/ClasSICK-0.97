@@ -176,7 +176,7 @@ def audit_component(key, c, cfg, inputs, pkg, docs):
         f"Compiled source: {cfg['compiled_source_revision']}\n"
         f"Qualification evidence: {cfg['evidence_revision']}\n"
         f"Source: https://github.com/segaboy/ClasSICK-0.97/tree/{cfg['compiled_source_revision']}\n"
-        f"Evidence: https://github.com/segaboy/ClasSICK-0.97/blob/{cfg['evidence_revision']}/docs/development/preview-session-evidence.json\n"
+        f"Evidence: https://github.com/segaboy/ClasSICK-0.97/blob/{cfg['evidence_revision']}/{cfg['evidence_path']}\n"
         f"CI: {cfg['ci_url']}\nLicense: {cfg['license']}\n").encode()
     exp["SHA256SUMS.txt"] = None
     zpath = os.path.join(d, c["archive"])
@@ -228,6 +228,38 @@ def no_alias(path):
         path = parent
 
 
+TOP = {"schema_version", "compiled_source_revision", "evidence_revision", "ci_url", "license",
+       "inputs", "components", "unqualified"}
+V1_PATH = "docs/development/preview-session-evidence.json"
+EV_RE = re.compile(r"docs/(?:[A-Za-z0-9][A-Za-z0-9_.-]*/)*[A-Za-z0-9][A-Za-z0-9_.-]*\.json")
+
+
+def _nodup(pairs):
+    keys = [k for k, _ in pairs]
+    if len(keys) != len(set(keys)):
+        raise ValueError("duplicate JSON key")
+    return dict(pairs)
+
+
+def load_cfg(raw):
+    cfg = json.loads(raw, object_pairs_hook=_nodup)
+    if type(cfg) is not dict:
+        raise ValueError("not an object")
+    v = cfg.get("schema_version")
+    if type(v) is not int or v not in (1, 2):
+        raise ValueError("schema_version must be 1 or 2")
+    if set(cfg) != TOP | ({"evidence_path"} if v == 2 else set()):
+        raise ValueError("unexpected top-level keys")
+    if v == 2:
+        p = cfg["evidence_path"]
+        if not (isinstance(p, str) and p.isascii() and EV_RE.fullmatch(p)
+                and not any(s.endswith(".") for s in p.split("/")[:-1])):
+            raise ValueError("bad evidence_path")
+    else:
+        cfg["evidence_path"] = V1_PATH
+    return cfg
+
+
 def main():
     ap = argparse.ArgumentParser()
     for a in ("config", "inputs", "docs", "package"):
@@ -237,8 +269,8 @@ def main():
         no_alias(path)
     try:
         rawcfg = open(a.config, "rb").read()
-        cfg = json.loads(rawcfg)
-        if cfg["schema_version"] != 1 or set(cfg["components"]) != {"mac", "pc"} \
+        cfg = load_cfg(rawcfg)
+        if set(cfg["components"]) != {"mac", "pc"} \
                 or set(cfg["inputs"]) != {"rom.rom", "BOOTX64.EFI", "pc.img", "source.zip", "COPYING"}:
             raise ValueError("config schema/set mismatch")
     except (OSError, ValueError, KeyError) as e:
@@ -265,6 +297,8 @@ def main():
                   "compiled_source_revision": cfg["compiled_source_revision"],
                   "evidence_revision": cfg["evidence_revision"], "config_sha256": sha(rawcfg),
                   "components": {}}
+        if cfg["schema_version"] == 2:
+            review["evidence_path"] = cfg["evidence_path"]
         if not errors:
             for k, c in cfg["components"].items():
                 raw = audit_component(k, c, cfg, inputs, pkg, a.docs)

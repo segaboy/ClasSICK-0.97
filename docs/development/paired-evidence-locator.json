@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-25",
+  "source_ids": [
+    "SRC-0454",
+    "SRC-0455"
+  ],
+  "baseline_revision": "680cdecd7fe16554b822129679e68ef86191106f",
+  "scope": "Synthetic package evidence-locator extension only;no release inputs frozen",
+  "config_schema_1": "Existing exact keys,fixed preview1 locator,complete10-file synthetic tree byte-identical to admitted old builder",
+  "config_schema_2": "Required explicit ASCII docs/...json locator,pinned to separate evidence revision;strict top keys and duplicate rejection in both tools",
+  "review_json_schema": 1,
+  "review_v2_addition": "evidence_path",
+  "no_network_or_evidence_existence_check": true,
+  "worker": {
+    "round": "package",
+    "worker": "copilot",
+    "exit_code": 0,
+    "outer_timeout": false,
+    "elapsed_seconds": 146.28,
+    "input_bytes": 30543,
+    "input_sha256": "d4971b8d8622dbd7bd7fa39600a7003c536928034063b1d7233678671cbf7f3f",
+    "stderr_bytes": 0,
+    "model": "claude-sonnet-5.5",
+    "effort": "low",
+    "tool_names": [
+      "view",
+      "view"
+    ],
+    "tool_calls": 2,
+    "writes": 0,
+    "commands": 0,
+    "tests_executed": [],
+    "reported_premium_requests": 1,
+    "prompt_reads": 1,
+    "input_directory_listings": 1,
+    "other_content_read": false
+  },
+  "artifact_adoption": "Nine unique replacements and211 original test lines;no second worker or recreation",
+  "lead_changes": [
+    "Rejected unrequested review.json schema bump in both scripts",
+    "Fixed string/bytes fixture concatenation and missing regular-file ZIP type",
+    "Added same-length wrong locator with both checksum layers/review metadata resealed,for each component",
+    "Registered portable CTest and Linux CI check"
+  ],
+  "disclosed_failures": [
+    "First worker fixture raises TypeError before tests;restricted temporary-root cleanup also denied;subsequent tests use owned workspace temporary root",
+    "Second fixture rejected because ZIP entry lacked regular-file type;corrected",
+    "First lead reseal control used a different-length locator and hit earlier correct size refusal;changed to equal-length locator to exercise content check"
+  ],
+  "tests": {
+    "local_regression_with_old_builder": {
+      "result": "pass",
+      "checks": 115,
+      "failures": []
+    },
+    "frozen_literal_cases": 35,
+    "frozen_sha256": "863dbae18a54c77d86b1163b1e92b65f5416528475f5620a3cdc1aadf5910a2c",
+    "frozen_cases_overlap_author_cases": true,
+    "faulty_controls": [
+      {
+        "defect": "builder-old-locator",
+        "detected": true,
+        "checks_before_refusal": 5
+      },
+      {
+        "defect": "auditor-old-locator",
+        "detected": true,
+        "checks_before_refusal": 5
+      }
+    ],
+    "CTest": "PASS:release.evidence-locator,114 checks,11.52 seconds,Windows pinned Python;optional old-builder comparison separately passes115 checks"
+  },
+  "new_native_trial": false,
+  "new_screenshot": false,
+  "Mac_motion_passed": false,
+  "PC_GUI_drag_passed": false,
+  "release_ready": false,
+  "remaining_balances": {
+    "Copilot": "unavailable",
+    "Claude": "unavailable",
+    "Grok": "unavailable",
+    "Argon": "unavailable"
+  },
+  "worker_deviation": "One frozen-prompt view plus one input-directory listing exceeds one-read cap;no extra source content or commands/writes/tests."
+}

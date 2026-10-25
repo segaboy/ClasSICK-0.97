@@ -157,6 +157,8 @@ jobs:
           persist-credentials: false
       - name: Verify original mouse replay data controls
         run: python3 -B scripts/Test-SnowMouseReplay.py --output "$RUNNER_TEMP/classick-snow-replay"
+      - name: Verify synthetic paired-package evidence locators
+        run: python3 -B scripts/Test-PairedReleaseEvidence.py
       - name: Prepare hash-pinned workspace 68000 tools
         run: python3 scripts/Setup-M68k.py --output "$RUNNER_TEMP/classick-m68k"
       - name: Verify isolated native input owner closure

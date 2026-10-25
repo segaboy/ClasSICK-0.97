@@ -4492,3 +4492,26 @@ three host profiles/compiled controls. No new source/manual or target execution.
 proof reidentified;first-input native observer needs new compilation. Package
 evidence locator finding recorded for later preparation. Helper approval and
 actual motion/drag/release remain open. [Receipt](../docs/development/mac-first-input-probe-evidence.json).
+
+
+## SRC-0453 - Native first-input profiles and completed source CI
+
+2026-10-25,compiled680cdec CI40228167578 succeeds in Windows/native jobs.
+Exact manifests/images/source pins verified;normal673a2cca...c4965 unchanged,
+first-input observer+80ROM/zeroBSS/+4 conservative stack bound in each profile.
+Both new diagnostic profiles remain unbooted;no motion/drag/release pass.
+[Receipt](../docs/development/mac-input-native-verification.json).
+
+## SRC-0454 - Original configurable package evidence artifacts
+
+2026-10-25,one supervised Copilot primary over two frozen original public
+packaging scripts. Nine adopted replacements/211 test lines;strict schema2
+locator while preserving schema1 bytes. No worker execution or repository write.
+Lead changes and fixture failures disclosed. [Review](../docs/development/paired-evidence-locator.md).
+
+## SRC-0455 - Lead synthetic locator and compatibility checks
+
+2026-10-25,115 local checks including old-builder full-tree comparison,
+35 overlapping frozen literal cases,two faulty controls and resealed same-length
+wrong locator rejected for each component. No native package/trial/publication.
+[Receipt](../docs/development/paired-evidence-locator.json).
