@@ -1,5 +1,7 @@
 # Project status
 
+2026-10-26,SRC-0479/0480/SPEC-0074/IMPL-0082/TEST-0095:original isolated phase model passes4096 oracle cases/40475 assertions per four host profiles,two focused CTests/three faulty controls.286 six C16 objects/three refusals plus legacy regression pass,unlinked/unrun;68000 proof pending. No IO/IRQ/boot binding or normal input change;release gates remain,68PNG/twoGIF preserved. [Review](development/mac-polled-phase-model.md).
+
 2026-10-26,SRC-0478:c40cd29 fullCI/native MWR1 proof passes;normal/defer baseline bytes unchanged. Two actual automatic snapshots at own spin/IPL7 show500/5000 services,zero loss/delivery/fault. One host event lacks verified viewport targeting;no motion test/pass. All owned trials closed,68PNG/twoGIF and286 retained. Paired release gates remain. [Results](development/mac-register-checkpoint.md).
 
 2026-10-26,SRC-0476/0477/IMPL-0081/TEST-0094:existing Mac checkpoint gains original register mirror/strict decoder;seven host groups/10CLI cases/focused CTest and three faulty controls pass. Driver/default modes unchanged;native instruction/cost/equality/trial proof pending CI. Prior physical failures/release gates persist,68PNG/twoGIF and286 retained. [Review](development/mac-register-checkpoint.md).

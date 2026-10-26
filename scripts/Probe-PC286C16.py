@@ -14,8 +14,10 @@ def main():
     parser=argparse.ArgumentParser()
     parser.add_argument('--tool-root',required=True,type=Path)
     parser.add_argument('--output',required=True,type=Path)
+    parser.add_argument('--polled-phase',action='store_true',help='Compile only the isolated phase model;no segmented backend/run claim')
     args=parser.parse_args()
     root=Path(__file__).resolve().parents[1]
+    source=root/('probes/pc286/polled-phase.c' if args.polled_phase else 'probes/pc286/c16.c')
     lock=json.loads((root/'scripts/pc286-toolchain-lock.json').read_text())
     for row in lock['selected_members']:
         p=args.tool_root/row['path']
@@ -31,8 +33,9 @@ def main():
             obj=out/(name+'.obj')
             flags=['-zq','-2','-'+model,'-zl','-s','-'+opt,'-zastd=c99',
                    '-i='+str(args.tool_root/'h'),'-fo='+str(obj)]
+            if args.polled_phase:flags+=['-dCS_C16_REQUIRE_16BIT']
             if bad:flags+=['-dCS_C16_FALSE_ASSERT']
-            q=subprocess.run([str(tools/'wcc.exe'),*flags,str(root/'probes/pc286/c16.c')],
+            q=subprocess.run([str(tools/'wcc.exe'),*flags,str(source)],
                 cwd=out,env=env,stdin=subprocess.DEVNULL,capture_output=True,timeout=20)
             log=q.stdout+q.stderr;(out/(name+'.log')).write_bytes(log)
             if (q.returncode==0)==bad:
@@ -40,9 +43,9 @@ def main():
             row={'case':name,'model':model,'flags':flags,'exit_code':q.returncode,
                  'expected_success':not bad,'target_executed':False}
             if bad:
-                source=(root/'probes/pc286/c16.c').read_text().splitlines()
-                line=next(i+1 for i,s in enumerate(source) if 'cs_probe_expected_refusal' in s)
-                diagnostic=rf'c16\.c\({line}\): Error! E1020: Dimension cannot be 0 or negative'
+                lines=source.read_text().splitlines()
+                line=next(i+1 for i,s in enumerate(lines) if 'cs_probe_expected_refusal' in s)
+                diagnostic=rf'{re.escape(source.name)}\({line}\): Error! E1020: Dimension cannot be 0 or negative'
                 if not re.search(diagnostic,log.decode(errors='replace')) or obj.exists():
                     raise ValueError(name+': not the named assertion refusal')
             else:
@@ -65,13 +68,15 @@ def main():
                     object_sha256=hashlib.sha256(obj.read_bytes()).hexdigest(),
                     external_symbols=externals,compiler_metadata_80286=True,segments=segments)
             rows.append(row)
-    inputs={f:hashlib.sha256((root/f).read_bytes().replace(b'\r\n',b'\n')).hexdigest()
-            for f in ('arch/i286/c16.h','probes/pc286/c16.c')}
-    report={'specifications':['SPEC-0067'],'compiler_pin':lock['release'],
+    files=['arch/i286/c16.h',str(source.relative_to(root)).replace('\\','/')]
+    if args.polled_phase:files+=['platform/mac128k/polled-phase.c','platform/mac128k/polled-phase.h','core/input/pointer.h','scripts/Probe-PC286C16.py']
+    inputs={f:hashlib.sha256((root/f).read_bytes().replace(b'\r\n',b'\n')).hexdigest() for f in files}
+    report={'specifications':['SPEC-0067','SPEC-0074'] if args.polled_phase else ['SPEC-0067'],'compiler_pin':lock['release'],
             'compiler_calls':9,'objects':6,'expected_refusals':3,'inputs':inputs,
             'records':rows,'target_executed':False,'linked':False,
             'stack_policy':'-s is diagnostic only; no production waiver',
             'limits':'Metadata and helper checks are not a complete ISA or runtime proof.'}
+    if args.polled_phase:report['flat_span_premise_is_not_segmented_pointer_qualification']=True
     (out/'report.json').write_text(json.dumps(report,indent=2)+'\n',encoding='utf-8')
     print('C16 delta PASS: 9 compiler calls, 6 helper-free objects, 3 named refusals; no link/run.')
 

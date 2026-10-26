@@ -163,12 +163,26 @@ jobs:
           "$RUNNER_TEMP/store4-author"
           cc -std=c99 -Wall -Wextra -Wpedantic -Werror -Wconversion -Wsign-conversion -Iprobes/pc286 probes/pc286/bank-plan.c probes/pc286/bank-catalog.c probes/pc286/store4-model.c tests/pc286-store4-oracle.c -o "$RUNNER_TEMP/store4-oracle"
           "$RUNNER_TEMP/store4-oracle"
+      - name: Verify isolated phase-model host oracles
+        run: |
+          cc -std=c99 -pedantic-errors -Wall -Wextra -Werror -Wconversion -Wsign-conversion -I. platform/mac128k/polled-phase.c tests/mac-polled-phase.c -o "$RUNNER_TEMP/phase-author"
+          "$RUNNER_TEMP/phase-author"
+          cc -std=c99 -pedantic-errors -Wall -Wextra -Werror -Wconversion -Wsign-conversion -I. platform/mac128k/polled-phase.c tests/mac-polled-phase-oracle.c -o "$RUNNER_TEMP/phase-oracle"
+          "$RUNNER_TEMP/phase-oracle"
       - name: Verify bounded input observation with fake backend only
         run: python3 -B tests/input-phase.py
       - name: Verify synthetic paired-package evidence locators
         run: python3 -B scripts/Test-PairedReleaseEvidence.py
       - name: Prepare hash-pinned workspace 68000 tools
         run: python3 scripts/Setup-M68k.py --output "$RUNNER_TEMP/classick-m68k"
+      - name: Compile isolated phase-model 68000 objects
+        run: python3 scripts/Verify-MacPolledPhaseM68k.py --tool-root "$RUNNER_TEMP/classick-m68k/root" --output "$RUNNER_TEMP/classick-polled-phase"
+      - name: Retain isolated phase-model compiler proof
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
+        with:
+          name: classick-mac-polled-phase-objects
+          path: ${{ runner.temp }}/classick-polled-phase/manifest.json
+          if-no-files-found: error
       - name: Verify isolated native input owner closure
         run: python3 scripts/Verify-WindowInputM68k.py --tool-root "$RUNNER_TEMP/classick-m68k/root" --output "$RUNNER_TEMP/classick-window-input"
       - name: Verify isolated capture helper closure for68000

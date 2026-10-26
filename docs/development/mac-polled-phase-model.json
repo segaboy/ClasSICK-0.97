@@ -1,0 +1,435 @@
+{
+  "date": "2026-10-26",
+  "specification": "SPEC-0074",
+  "sources": [
+    "SRC-0479",
+    "SRC-0480"
+  ],
+  "implementation": "IMPL-0082",
+  "test": "TEST-0095",
+  "worker": {
+    "provider": "Copilot",
+    "model": "claude-sonnet-5.5",
+    "effort": "low",
+    "execution": {
+      "round": "primary",
+      "worker": "copilot",
+      "exit_code": 0,
+      "outer_timeout": false,
+      "elapsed_seconds": 54.2,
+      "input_bytes": 9567,
+      "input_sha256": "334c7d1d117ec3c2629a6d318e448684b4babcd75fbfa63fc179f39f258fe53d",
+      "stderr_bytes": 0
+    },
+    "frozen_inputs": {
+      "revision": "07f87394fa6fa6a22692e4696c4f5413090662e8",
+      "original_inputs": {
+        "core/input/pointer.h": "d0a53cdadbe728195ce2c35bc4ef0b2a1687351912c759eda1bf6b4c38abdc38",
+        "platform/mac128k/motion.h": "f9570aca93926210ca636e89cd7137206ea49bea1ef686b7f42dc2e2985ef21a",
+        "platform/mac128k/motion.c": "b2975851fddf2cf3df2cd6fd7edc013dc9a1ed50cb14c434afc1e45c9d067833"
+      },
+      "packet_bytes": 9567,
+      "packet_sha256": "334c7d1d117ec3c2629a6d318e448684b4babcd75fbfa63fc179f39f258fe53d"
+    },
+    "view_calls": 1,
+    "writes": 0,
+    "commands": 0,
+    "tests_executed": 0,
+    "reported_premium_requests": 1,
+    "artifact_code_test_lines": 254,
+    "capture_sha256": "f7bb7dd518127e0d29b993427f795ea38001b549ab52ebbdd7863b9e7490d28f"
+  },
+  "lead_corrections": [
+    "C11 assertion replaced by C99 type-size assertion",
+    "Author Y PB-only transition expected EMPTY;add actual reverse DCD case",
+    "Specify begin success as EMPTY and strengthen assertions",
+    "Frozen oracle draft removes redundant unspecified-return OR before worker inspection;later only splits adjacent if statements for GCC warning"
+  ],
+  "original_results": [
+    {
+      "name": "original-c99",
+      "compile_exit": 1,
+      "diagnostic": "In file included from C:\\ClasSICK\\mac-polled-phase-20261026-a\\proposal\\platform\\mac128k\\polled-phase.c:3:\r\nC:\\ClasSICK\\mac-polled-phase-20261026-a\\proposal\\platform\\mac128k/polled-phase.h:24:1: error: '_Static_assert' is a C11 extension [-Werror,-Wc11-extensions]\r\n   24 | _Static_assert(sizeof(cs_mac_polled_phase)<=64,\"Bounded polled state\");\r\n      | ^\r\n1 error generated.\r\nIn file included from C:\\ClasSICK\\mac-polled-phase-20261026-a\\proposal\\tests\\mac-polled-phase.c:5:\r\nC:\\ClasSICK\\mac-polled-phase-20261026-a\\proposal\\tests/../platform/mac128k/polled-phase.h:24:1: error: '_Static_assert' is a C11 extension [-Werror,-Wc11-extensions]\r\n   24 | _Static_assert(sizeof(cs_mac_polled_phase)<=64,\"Bounded polled state\");\r\n      | ^\r\n1 error generated.\r\n"
+    },
+    {
+      "name": "original-author",
+      "compile_exit": 0,
+      "run_exit": 1,
+      "stdout": "FAIL line 45: go(&s, 0, 1, 0, &o) == CS_MAC_POLLED_SAMPLE && o.dy == -1\r\nmac-polled-phase: FAILED\r\n"
+    },
+    {
+      "name": "original-oracle",
+      "compile_exit": 0,
+      "run_exit": 0,
+      "stdout": "polled phase oracle:4096 cases,40475 assertions\r\n"
+    }
+  ],
+  "host_checks": {
+    "oracle_sha256": "df2ee7d5e99d8a89483a0cdd08e977f30a896ad949970b61047454228c321de7",
+    "results": [
+      {
+        "profile": "clang",
+        "suite": "author",
+        "passed": true,
+        "stdout": "mac-polled-phase: ok"
+      },
+      {
+        "profile": "clang",
+        "suite": "oracle",
+        "passed": true,
+        "stdout": "polled phase oracle:4096 cases,40475 assertions"
+      },
+      {
+        "profile": "gcc64",
+        "suite": "author",
+        "passed": true,
+        "stdout": "mac-polled-phase: ok"
+      },
+      {
+        "profile": "gcc64",
+        "suite": "oracle",
+        "passed": true,
+        "stdout": "polled phase oracle:4096 cases,40475 assertions"
+      },
+      {
+        "profile": "gcc32",
+        "suite": "author",
+        "passed": true,
+        "stdout": "mac-polled-phase: ok"
+      },
+      {
+        "profile": "gcc32",
+        "suite": "oracle",
+        "passed": true,
+        "stdout": "polled phase oracle:4096 cases,40475 assertions"
+      },
+      {
+        "profile": "san",
+        "suite": "author",
+        "passed": true,
+        "stdout": "mac-polled-phase: ok"
+      },
+      {
+        "profile": "san",
+        "suite": "oracle",
+        "passed": true,
+        "stdout": "polled phase oracle:4096 cases,40475 assertions"
+      },
+      {
+        "compiled_fault": "accept-two-bit",
+        "detected": true,
+        "stdout": "FAIL:35:cs_mac_polled_step(&s,pb(nx,ny,nb),0x40u|dcd[nx],0x44u|dcd[ny],&o)==kind"
+      },
+      {
+        "compiled_fault": "emit-PB-only",
+        "detected": true,
+        "stdout": "FAIL:35:cs_mac_polled_step(&s,pb(nx,ny,nb),0x40u|dcd[nx],0x44u|dcd[ny],&o)==kind"
+      },
+      {
+        "compiled_fault": "retain-after-loss",
+        "detected": true,
+        "stdout": "FAIL:39:s.have_phase==0"
+      }
+    ],
+    "prototype_only": true,
+    "hardware_binding": false
+  },
+  "integrated_checks": [
+    {
+      "profile": "clang",
+      "focused_CTests": 2,
+      "passed": true,
+      "JUnit_sha256": "27d441be3b82f6f609f4615661969428fcd62bcfbabd069241897ac7acab1d1b"
+    },
+    {
+      "profile": "gcc64",
+      "focused_CTests": 2,
+      "passed": true,
+      "JUnit_sha256": "0cd5294eb8d9786cfa139af78b6e6bfbcca86786b9bd7a1af3c412365bb3d7d3"
+    },
+    {
+      "profile": "gcc32",
+      "focused_CTests": 2,
+      "passed": true,
+      "JUnit_sha256": "afef9de15dbec78601391f09eeb2cb93d659eb701cdce494f9ae7c981968d4c1"
+    },
+    {
+      "profile": "san",
+      "focused_CTests": 2,
+      "passed": true,
+      "JUnit_sha256": "680731d023f16ce43ba1b29bf643ad1fd2fa7b2fc21a2b5341065a220fe2489c"
+    }
+  ],
+  "oracle_history": [
+    {
+      "sha256": "eee6fb028211649743cf812872ede874d7abbed053999d708ddc13640541a719",
+      "vectors": 4096,
+      "output_read_before_freeze": false,
+      "revision_reason": "Remove redundant OR check of an unspecified begin success return;fresh initialized state still checked completely. Original frozen draft retained."
+    },
+    {
+      "previous_frozen_sha256": "eee6fb028211649743cf812872ede874d7abbed053999d708ddc13640541a719",
+      "current_sha256": "df2ee7d5e99d8a89483a0cdd08e977f30a896ad949970b61047454228c321de7",
+      "change": "Only split adjacent if statements onto separate lines for GCC -Wmisleading-indentation;no expected values or algorithm changed",
+      "after_worker_inspection": true
+    }
+  ],
+  "C16": {
+    "compiler_pin": "2026-10-01-Build",
+    "compiler_calls": 9,
+    "objects": 6,
+    "expected_refusals": 3,
+    "inputs": {
+      "arch/i286/c16.h": "0d7634a598aa92a0971f8e1bcf55b63df0f3820cb78d4f7817641b27544a3920",
+      "probes/pc286/polled-phase.c": "203568ccce49c1346d7f1bfcd4cce89490830b1c27e6460c1978597dadc29ed0",
+      "platform/mac128k/polled-phase.c": "537d6d62bf3177e16153c86ba4d42fee90a90192bf17e103fc635f5bf1518766",
+      "platform/mac128k/polled-phase.h": "889aa6a1314e32114722f8ef822de14b100f197927fc77b9768561ac1566428f",
+      "core/input/pointer.h": "d0a53cdadbe728195ce2c35bc4ef0b2a1687351912c759eda1bf6b4c38abdc38",
+      "scripts/Probe-PC286C16.py": "46fbe16f549dfdf209e242b0054d74b8dc6dd2595f578b6e1d209bc44565291d"
+    },
+    "records": [
+      {
+        "case": "ms-od",
+        "model": "ms",
+        "expected_success": true,
+        "exit_code": 0,
+        "target_executed": false,
+        "object_sha256": "0f006ed52acd7b360712e511bb7d874af1ba465c2a01f0b667f0579d276d9292",
+        "external_symbols": [],
+        "compiler_metadata_80286": true,
+        "segments": [
+          [
+            "_TEXT",
+            "16",
+            "000006AE"
+          ],
+          [
+            "CONST",
+            "16",
+            "00000000"
+          ],
+          [
+            "CONST2",
+            "16",
+            "00000010"
+          ],
+          [
+            "_DATA",
+            "16",
+            "00000000"
+          ]
+        ]
+      },
+      {
+        "case": "ms-os",
+        "model": "ms",
+        "expected_success": true,
+        "exit_code": 0,
+        "target_executed": false,
+        "object_sha256": "af502cd9c7d6d6d3cd89fbdcda5cff09ecc56c15ec4399c1ab0f19916abe375c",
+        "external_symbols": [],
+        "compiler_metadata_80286": true,
+        "segments": [
+          [
+            "_TEXT",
+            "16",
+            "00000391"
+          ],
+          [
+            "CONST",
+            "16",
+            "00000000"
+          ],
+          [
+            "CONST2",
+            "16",
+            "00000010"
+          ],
+          [
+            "_DATA",
+            "16",
+            "00000000"
+          ]
+        ]
+      },
+      {
+        "case": "ms-os-false-assert",
+        "model": "ms",
+        "expected_success": false,
+        "exit_code": 1,
+        "target_executed": false
+      },
+      {
+        "case": "mm-od",
+        "model": "mm",
+        "expected_success": true,
+        "exit_code": 0,
+        "target_executed": false,
+        "object_sha256": "95ac7a5f7abb0416912855ce2e961b56dc797d04bf8aaeaa40cc6dcb49e73c36",
+        "external_symbols": [],
+        "compiler_metadata_80286": true,
+        "segments": [
+          [
+            "polled-phase_TEXT",
+            "16",
+            "000006AE"
+          ],
+          [
+            "CONST",
+            "16",
+            "00000000"
+          ],
+          [
+            "CONST2",
+            "16",
+            "00000010"
+          ],
+          [
+            "_DATA",
+            "16",
+            "00000000"
+          ]
+        ]
+      },
+      {
+        "case": "mm-os",
+        "model": "mm",
+        "expected_success": true,
+        "exit_code": 0,
+        "target_executed": false,
+        "object_sha256": "727edcdf7bc7dc1412c0a29ee15b463aec9dd76bffbbfaa3a69ec323b1f5e7c3",
+        "external_symbols": [],
+        "compiler_metadata_80286": true,
+        "segments": [
+          [
+            "polled-phase_TEXT",
+            "16",
+            "00000391"
+          ],
+          [
+            "CONST",
+            "16",
+            "00000000"
+          ],
+          [
+            "CONST2",
+            "16",
+            "00000010"
+          ],
+          [
+            "_DATA",
+            "16",
+            "00000000"
+          ]
+        ]
+      },
+      {
+        "case": "mm-os-false-assert",
+        "model": "mm",
+        "expected_success": false,
+        "exit_code": 1,
+        "target_executed": false
+      },
+      {
+        "case": "ml-od",
+        "model": "ml",
+        "expected_success": true,
+        "exit_code": 0,
+        "target_executed": false,
+        "object_sha256": "ac32ce05ba1454e5920602cbab99530b4ac3ec1fef7f9298bc84177b6b51c599",
+        "external_symbols": [],
+        "compiler_metadata_80286": true,
+        "segments": [
+          [
+            "polled-phase_TEXT",
+            "16",
+            "0000077B"
+          ],
+          [
+            "CONST",
+            "16",
+            "00000000"
+          ],
+          [
+            "CONST2",
+            "16",
+            "00000010"
+          ],
+          [
+            "_DATA",
+            "16",
+            "00000000"
+          ]
+        ]
+      },
+      {
+        "case": "ml-os",
+        "model": "ml",
+        "expected_success": true,
+        "exit_code": 0,
+        "target_executed": false,
+        "object_sha256": "692d4042c8415aa2769d7fc191b6441d07f20ea7fa7241bdf4bd145839e02ef3",
+        "external_symbols": [],
+        "compiler_metadata_80286": true,
+        "segments": [
+          [
+            "polled-phase_TEXT",
+            "16",
+            "00000402"
+          ],
+          [
+            "CONST",
+            "16",
+            "00000000"
+          ],
+          [
+            "CONST2",
+            "16",
+            "00000010"
+          ],
+          [
+            "_DATA",
+            "16",
+            "00000000"
+          ]
+        ]
+      },
+      {
+        "case": "ml-os-false-assert",
+        "model": "ml",
+        "expected_success": false,
+        "exit_code": 1,
+        "target_executed": false
+      }
+    ],
+    "legacy_regression": {
+      "compiler_calls": 9,
+      "objects": 6,
+      "expected_refusals": 3
+    },
+    "linked": false,
+    "target_executed": false,
+    "flat_numeric_spans_are_not_a_segmented_backend": true,
+    "stack_check_suppression_diagnostic_only": true
+  },
+  "M68000": "compiler audit wired;pending new committed-source CI",
+  "state_bytes": 40,
+  "sample_bytes": 12,
+  "ROM_or_boot_binding": false,
+  "MMIO": false,
+  "IRQ": false,
+  "historical_qualification": false,
+  "hardware_sampling_qualified": false,
+  "release_ready": false,
+  "media": {
+    "PNG": 68,
+    "GIF": 2,
+    "new": 0
+  },
+  "remaining_provider_balances": {
+    "Copilot": "unavailable",
+    "Claude": "unavailable",
+    "Grok": "unavailable",
+    "Antigravity": "unavailable"
+  }
+}

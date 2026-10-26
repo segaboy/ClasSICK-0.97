@@ -4627,3 +4627,11 @@ wrong locator rejected for each component. No native package/trial/publication.
 ## SRC-0478 - Native MWR1 proof and actual automatic checkpoints
 
 2026-10-26. Corrected c40cd29 fullCI40327277294 succeeds;five own image/source/seal/twin proofs,three exact72B checkpoints/29 native controls each,51 additional resealed body defects detected. Two actual original-register snapshots at spin00400322/IPL7 report500/5000 services,zero loss/delivery/fault. Full-client host event lacks verified guest targeting,not a motion test. All owned sessions closed;normal baselines and source/physical/release gates retained. [Review](../docs/development/mac-register-checkpoint.md).
+
+## SRC-0479 - Original polling-phase model proposal
+
+2026-10-26. Fresh Copilot from9567 frozen reviewed-public/original bytes,one view/54.20s;three files/254 code-test lines,no worker execution/writes. Pure engineering model only;no manuals,HQ,untracked originals or hardware settings. [Review](../docs/development/mac-polled-phase-model.md).
+
+## SRC-0480 - Lead model adoption and independent verification
+
+2026-10-26. Four strict-C99 host profiles pass author/frozen4096-case oracle,40475 assertions each/two integrated CTests;three compiled faulty controls detected. C99/author expectation/begin-contract corrections and oracle formatting history disclosed. Six unlinked/unrun WCC16 objects/three named refusals,legacy facade regression pass. Native68000 audit pending;no IO/IRQ/boot or historical/physical qualification. [Receipt](../docs/development/mac-polled-phase-model.json).
