@@ -77,5 +77,13 @@
     "Claude": "unavailable",
     "Grok": "unavailable",
     "Antigravity": "unavailable"
+  },
+  "first_native_attempt": {
+    "source_revision": "d100c88cea050a32dc29d61bff31507cb1ffe81e",
+    "CI_run": 40326299729,
+    "native_result": "assembly failed:global short self-branch relocation/value outside byte field at source line67",
+    "target_execution": false,
+    "lead_correction": "Use local numeric self-branch at same exported spin label;exact60fe opcode still required",
+    "fixed_native_proof": "pending new committed-source CI"
   }
 }

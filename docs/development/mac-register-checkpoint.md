@@ -53,3 +53,5 @@ An initial CTest TEMP permission error is retained in the private log;rerun
 with owned TEMP/TMP passes. All four provider balances remain unavailable;
 the reported charge is not a quota balance or measured Codex saving.
 [Machine receipt](mac-register-checkpoint.json).
+
+First native attempt,d100c88/CI40326299729:assembler rejects the short branch to the exported global spin symbol (out-of-range byte-field value). Lead uses a local numeric self-branch at the same exported location;the native audit still requires exact60fe. No target ran;fixed native proof remains pending.

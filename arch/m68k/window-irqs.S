@@ -64,6 +64,6 @@ cs_mac_window_idle_checkpoint:
     movea.l 56(%a6),%a4
     .globl cs_mac_window_idle_spin
 cs_mac_window_idle_spin:
-    bra.s cs_mac_window_idle_spin
+0:  bra.s 0b
 #endif
     .section .note.GNU-stack,"",@progbits
