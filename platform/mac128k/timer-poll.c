@@ -62,6 +62,7 @@ int cs_mac_timer_poll_prepare(cs_mac_timer_poll *p, const cs_mac_motion_io *scc,
     const cs_mac_io *via, cs_window_inbox *inbox, uint32_t invert,
     uint32_t reload)
 {
+    static const struct cs_mac_motion zero;
     cs_mac_motion_io s;
     cs_mac_io v;
     uint8_t lo = (uint8_t)reload, hi = (uint8_t)(reload >> 8);
@@ -73,9 +74,12 @@ int cs_mac_timer_poll_prepare(cs_mac_timer_poll *p, const cs_mac_motion_io *scc,
         return CS_MAC_MOTION_ARGUMENT;
     s = *scc;
     v = *via;
-    p->motion = (struct cs_mac_motion){ .io = s, .inbox = inbox,
-        .epoch = inbox->epoch, .invert = invert,
-        .phase = CS_MAC_MOTION_PREPARED };
+    p->motion = zero;
+    p->motion.io = s;
+    p->motion.inbox = inbox;
+    p->motion.epoch = inbox->epoch;
+    p->motion.invert = invert;
+    p->motion.phase = CS_MAC_MOTION_PREPARED;
     p->via = v;
     p->reload = reload;
     if (cs_mac_polled_begin(&p->decoder, invert) != CS_MAC_POLLED_EMPTY)

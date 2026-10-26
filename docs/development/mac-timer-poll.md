@@ -42,3 +42,5 @@ dragging,human-use failures and paired release approval remain open.
 One reported Copilot premium request;all-four remaining balances unavailable.
 No second worker,retry,new chat,Codex subagent,OneNote/wiki or publication.
 [Contract](../specifications/SPEC-0075-mac-timer-poll.md),[receipt](mac-timer-poll.json).
+
+First native attempt768141f/CI40374370882 passes Linux host suites and normal ROM build,but timer link fails on implicit memset from the compound-literal initialization. Lead switches to the readonly-zero assignment form already verified in the original motion driver;no libc routine is introduced. Corrected native result remains pending.

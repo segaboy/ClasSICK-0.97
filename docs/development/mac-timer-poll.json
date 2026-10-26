@@ -47,7 +47,8 @@
     "Reached-stage diagnostics before IO;nonzero unreachable decoder failure cause;peak includes baseline",
     "Independent oracle corrects old inbox resume result before worker inspection;old frozen version retained",
     "Lead adds opt-in native binding,mode refusals,CMake and CI;no normal admission-policy edit",
-    "Private negative-control generator initially matched two NV writes;use unique prepare reset context before actual control compilation"
+    "Private negative-control generator initially matched two NV writes;use unique prepare reset context before actual control compilation",
+    "First native link exposes implicit memset from compound-literal initialization;use existing original readonly-zero assignment pattern,then rerun host/native checks."
   ],
   "original_strict_author_compile_exit": 1,
   "original_results": [
@@ -241,5 +242,93 @@
       ],
       "exit": 2
     }
-  ]
+  ],
+  "native_attempts": [
+    {
+      "revision": "768141f18f6a7431d4d6b12c073c6ae0fe10b338",
+      "CI_run": 40374370882,
+      "native_job": "failed linker:undefined memset from compound-literal initialization",
+      "host_Linux_author_and_oracle": "passed",
+      "normal_ROM_build": "passed before failure",
+      "correction": "Original readonly-zero structure assignment plus explicit fields,as in existing verified motion driver;no library routine added",
+      "corrected_native_result": "pending"
+    }
+  ],
+  "corrected_initialization_host_rerun": {
+    "host_checks": {
+      "oracle_sha256": "b41f66fd9608a068f9ef1ce24dcd23687d9aa822fbebbe749b3b6a6084989d5f",
+      "results": [
+        {
+          "profile": "clang",
+          "suite": "author",
+          "passed": true,
+          "stdout": "timer poll author:92 assertions,0 failures"
+        },
+        {
+          "profile": "clang",
+          "suite": "oracle",
+          "passed": true,
+          "stdout": "timer poll oracle:88 assertions"
+        },
+        {
+          "profile": "gcc64",
+          "suite": "author",
+          "passed": true,
+          "stdout": "timer poll author:92 assertions,0 failures"
+        },
+        {
+          "profile": "gcc64",
+          "suite": "oracle",
+          "passed": true,
+          "stdout": "timer poll oracle:88 assertions"
+        },
+        {
+          "profile": "gcc32",
+          "suite": "author",
+          "passed": true,
+          "stdout": "timer poll author:92 assertions,0 failures"
+        },
+        {
+          "profile": "gcc32",
+          "suite": "oracle",
+          "passed": true,
+          "stdout": "timer poll oracle:88 assertions"
+        },
+        {
+          "profile": "san",
+          "suite": "author",
+          "passed": true,
+          "stdout": "timer poll author:92 assertions,0 failures"
+        },
+        {
+          "profile": "san",
+          "suite": "oracle",
+          "passed": true,
+          "stdout": "timer poll oracle:88 assertions"
+        },
+        {
+          "compiled_fault": "enable-SCC-master",
+          "detected": true,
+          "stdout": "FAIL:59:e.log[i]==setup_writes[i]"
+        },
+        {
+          "compiled_fault": "omit-overrun-check",
+          "detected": true,
+          "stdout": "FAIL:72:tick(&p,&e)==CS_MAC_MOTION_LOST"
+        },
+        {
+          "compiled_fault": "deliver-unstable",
+          "detected": true,
+          "stdout": "FAIL:68:tick(&p,&e)==CS_MAC_MOTION_LOST"
+        }
+      ],
+      "target_executed": false
+    },
+    "clang_integrated": {
+      "profile": "clang",
+      "focused_CTests": 2,
+      "passed": true,
+      "JUnit_sha256": "1fcb5d22080acc7739d9b993aed6411ad606774b7e15d632d905e665c3d38de9"
+    }
+  }
 }
