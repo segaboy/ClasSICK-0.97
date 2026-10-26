@@ -4623,3 +4623,7 @@ wrong locator rejected for each component. No native package/trial/publication.
 ## SRC-0477 - Lead register-export integration and host verification
 
 2026-10-26. Seven host test groups/10 CLI cases and focused CTest pass;three faulty decoder controls detected. Lead copyright/offset/test/native-validator fixes. Actual target compilation,opcodes,corruption controls,budget,default-byte identity and observation pending committed-source CI. [Receipt](../docs/development/mac-register-checkpoint.json).
+
+## SRC-0478 - Native MWR1 proof and actual automatic checkpoints
+
+2026-10-26. Corrected c40cd29 fullCI40327277294 succeeds;five own image/source/seal/twin proofs,three exact72B checkpoints/29 native controls each,51 additional resealed body defects detected. Two actual original-register snapshots at spin00400322/IPL7 report500/5000 services,zero loss/delivery/fault. Full-client host event lacks verified guest targeting,not a motion test. All owned sessions closed;normal baselines and source/physical/release gates retained. [Review](../docs/development/mac-register-checkpoint.md).

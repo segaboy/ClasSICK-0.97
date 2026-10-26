@@ -30,3 +30,5 @@ in force. The opt-in phase rule is not a waiver for native DCD-changing losses.
 The286 port is progressing independently and is not a third paired-release gate.
 
 2026-10-26:SRC-0473..0475. [Actual native and physical results](native-input-qualification-20261026.md). Direct PC memory-read API returns E_NOTIMPL;do not repeat that route or broad-dump memory. Next diagnostic:original Mac checkpoint register export,with no motion-policy change.
+
+SRC-0478:c40cd29 fullCI and actual MWR1 automatic500/5000 controls pass. Native trace reading is now available without memory-view edits. Before any further motion test,confirm visible guest pointer and actual guest-viewport targeting;the recorded client point218,22 is not a qualified guest stimulus. Physical normal-build failures remain,phase physical check NOT PERFORMED. [Register results](mac-register-checkpoint.md).

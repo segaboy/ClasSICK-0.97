@@ -217,3 +217,5 @@ losses. Native compile/budget/trial and release gates persist.
 ## Diagnostic checkpoint register mirror (SRC-0476/0477)
 
 Existing idle/first-input checkpoints may expose the already-copied original record as MWR1 registers,then spin at IPL7. No producer/IRQ/IO/admission/recovery/default-mode change or guest-memory patch. Exact mapping,static offsets and native opcode audit are [specified here](../development/mac-register-checkpoint.md). Decoder format acceptance alone is not execution/input evidence. Native proof pending.
+
+SRC-0478 follow-up:c40cd29 fullCI/native opcode/offset/seal/default-byte proofs pass;actual original500/5000 automatic snapshots read through MWR1 at expected own spin/IPL7/fault0. No sampling-policy or mouse qualification follows. Full-client host guards do not prove guest-viewport targeting.

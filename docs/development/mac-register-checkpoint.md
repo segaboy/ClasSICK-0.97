@@ -55,3 +55,42 @@ the reported charge is not a quota balance or measured Codex saving.
 [Machine receipt](mac-register-checkpoint.json).
 
 First native attempt,d100c88/CI40326299729:assembler rejects the short branch to the exported global spin symbol (out-of-range byte-field value). Lead uses a local numeric self-branch at the same exported location;the native audit still requires exact60fe. No target ran;fixed native proof remains pending.
+
+## Verified native follow-up -SRC-0478
+
+Corrected source c40cd296ad538a7ac8b1d8b7d1b9082c46405458 passes both jobs of
+CI40327277294. The Linux decoder step and normal Windows checks pass. Lead
+reidentifies five64KiB images,43 committed inputs/seals/twins each. Normal and
+finite-defer baseline hashes remain673a2cca...c4965/cfa16dc2...4235. All three
+checkpoint profiles contain the exact72-byte original leaf with expected
+own-RAM operands and spin entry+70;21 resealed native controls plus8 ordinary
+corruptions each pass in CI. Lead separately detects17 resealed body defects
+per profile (51 total). No extra checkpoint BSS/workspace;normal304BSS and
+deferred312BSS remain. New idle ROM uses23184 bytes (+88 vs normal);strict
+first-input23244;deferred first-input23720. Stack bounds4996/5000/5008 are
+compiler bounds,not measurements. The assembly correction is now verified.
+
+Two bounded original-ROM trials successfully expose MWR1 at own PC00400322,
+SR2714 (IPL7),trace address00000B70,pointer256,171 and fault0. The idle
+checkpoint reports500 services/zero losses/zero deliveries;first-input warmup
+reports5000/zero/zero. The first record is saved directly from read-only AX;
+the second is explicitly transcribed from the successful initial AX result.
+A later attempted AX save occurs after close and fails;no raw AX file is
+claimed for that second observation. Both ROM hashes remain unchanged and
+owned processes close (76.81s stop request;180.45s wall-cap cleanup). No
+guest-state patch or semantic shutdown.
+
+The second trial's approved helper passes its zero-event guard and reports
+one delivered host move. Its recorded full-client point is218,22;targeting
+the guest image is not established. It is an empty/warmup control,not a guest
+motion test. A full-window ownership guard cannot substitute for confirming
+the guest viewport. Do not infer hardware/input failure or success from that
+event count,or repeat this setup as a qualified movement test.
+
+The new diagnostic read path works. It has not fixed native mouse behavior.
+Normal Mac/PC human usability checks remain failed;the earlier phase/defer
+physical check was not performed because its window had closed. No E3/E4,
+release freeze/publication,physical-hardware,System1 or native-app waiver.
+68 originalPNG/two priorGIF remain;no successful-drag animation is claimed.
+Next:ensure visible cursor/verified guest-viewport targeting before another
+movement test,and use this original register path for actual sampling evidence.

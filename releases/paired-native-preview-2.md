@@ -1,5 +1,7 @@
 # Paired native preview 2 - first interactive window
 
+2026-10-26,SRC-0478:c40cd29 fullCI/native MWR1 proof passes;normal/defer baseline bytes unchanged. Two actual automatic snapshots at own spin/IPL7 show500/5000 services,zero loss/delivery/fault. One host event lacks verified viewport targeting;no motion test/pass. All owned trials closed,68PNG/twoGIF and286 retained. Paired release gates remain. [Results](../docs/development/mac-register-checkpoint.md).
+
 2026-10-26,SRC-0476/0477/IMPL-0081/TEST-0094:existing Mac checkpoint gains original register mirror/strict decoder;seven host groups/10CLI cases/focused CTest and three faulty controls pass. Driver/default modes unchanged;native instruction/cost/equality/trial proof pending CI. Prior physical failures/release gates persist,68PNG/twoGIF and286 retained. [Review](../docs/development/mac-register-checkpoint.md).
 
 2026-10-26,SRC-0473..0475:6777f9d fullCI/native phase cost/identity pass;normal ROM unchanged. Desktop restored;normal Mac/PC physical checks fail usable pointer/dragging.175104 baseline logical pixels match;combined experiment boots,operator report pending. Direct PC read API E_NOTIMPL;owned trials closed/media/inventory preserved.68PNG/twoGIF;paired release NOT ready,286 retained. [Evidence](../docs/development/native-input-qualification-20261026.md).
