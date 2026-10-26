@@ -4651,3 +4651,11 @@ wrong locator rejected for each component. No native package/trial/publication.
 ## SRC-0484 - Lead timer-controller integration and host proof
 
 2026-10-26. Author92/independent88 assertions/four profiles,two focused CTests each,three compiled faulty controls pass/detect. Test corrections and stage/peak/native binding additions disclosed. Native build/default identity/trial pending. [Review](../docs/development/mac-timer-poll.md).
+
+## SRC-0485 - Native timer ROM identity and budget proof
+
+2026-10-26. Corrected104d5f2 nativeCI40375002875 succeeds;normal ROM unchanged,two timer images/seals/48 Git-LF inputs each and exact checkpoint controls verified. Timer adds608 ROM/56 static RAM,workspace unchanged;stack bound is an estimate. Windows job pending. [Review](../docs/development/mac-timer-poll.md).
+
+## SRC-0486 - Actual isolated original timer boot control
+
+2026-10-26. One saved original-register snapshot at own spin/IPL7 gives500 timer services,zero loss/delivery/fault,pointer256,171. Owned Early128K session closes69.45s,ROM unchanged. No mouse motion tested;occluded transient JPEG excluded from clean product gallery. [Review](../docs/development/mac-timer-poll.md).
