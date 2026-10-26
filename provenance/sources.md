@@ -4575,3 +4575,28 @@ wrong locator rejected for each component. No native package/trial/publication.
 
 2026-10-25. 69 oracle assertions/author suite in four host profiles,three faulty controls,six pinned80286/USE16 closure objects with no unresolved imports. No target link/execution or native provider qualified.
 [Evidence](../docs/development/input-review-and-store4.json).
+
+## SRC-0468 - Original conditional-latch test artifact
+
+2026-10-26. Fresh Copilot over reviewed public facts/original source only;selected engineering fixture,not exact hardware/Snow model. No manuals or worker execution.
+[Evidence](../docs/development/mac-latch-and-phase-evidence.json).
+
+## SRC-0469 - Lead latch verification and bounded desktop refusal
+
+2026-10-26. 209 checks/four profiles;corrected count/direction/model expectations and detected controls. Old verified finite-defer trial force-closed66.20s after desktop AccessDenied;no input/guest-state pass.
+[Evidence](../docs/development/mac-latch-and-phase-evidence.json).
+
+## SRC-0470 - Original opt-in phase-only no-decision artifact
+
+2026-10-26. Focused fresh worker proof/artifact;lead adopts only conditional endpoint reasoning. Macro0 default;no sample admission or physical loss theorem. No native observed fix.
+[Evidence](../docs/development/mac-latch-and-phase-evidence.json).
+
+## SRC-0471 - Lead phase noninterference and mode controls
+
+2026-10-26. 131072 transcripts/mode with60 intended no-decision differences,all other examined state/IO/results equal;four host profiles/nine focused suites,compiled guard defects and invalid-mode refusals. Native budget/byte identity pending new CI.
+[Evidence](../docs/development/mac-latch-and-phase-evidence.json).
+
+## SRC-0472 - Passing-source paired image preflight and remaining gates
+
+2026-10-26. 63bbccf full native/Windows CI40253599502 passes. Mac normal/inverted source/seal/budgets and PC binding/hash/twin inputs reidentified. Not frozen;desktop access,Mac motion,PC GUI drag/release,E4/package approval remain.
+[Evidence](../docs/development/mac-latch-and-phase-evidence.json).

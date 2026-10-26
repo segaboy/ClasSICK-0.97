@@ -91,6 +91,25 @@ static uint32_t defer_bit(const struct cs_mac_motion *m, const snap *s1,
 }
 #endif
 
+#if CLASSICK_MAC_PHASE_IDLE_PROBE
+/* Pure: every endpoint DCD and button equals the retained state. PB4/5 free. */
+static int idle_only(const struct cs_mac_motion *m, const snap *s1,
+    const snap *s2, const snap *s3)
+{
+    const snap *p[3];
+    int i;
+    p[0] = s1; p[1] = s2; p[2] = s3;
+    for (i = 0; i < 3; i++) {
+        uint32_t btn = (p[i]->pb & PB_BUTTON) ? 0u : (uint32_t)CS_POINTER_LEFT;
+        if (bit(p[i]->a, RR0_DCD) != m->last_raw_a
+            || bit(p[i]->b, RR0_DCD) != m->last_raw_b
+            || btn != m->last_buttons)
+            return 0;
+    }
+    return 1;
+}
+#endif
+
 /* Observation only: no IO. Keeps the first record; reason is written last. */
 static void note(struct cs_mac_motion *m, uint32_t reason, uint8_t rr3,
     const snap *s1, const snap *s2, const snap *s3, uint32_t entry)
@@ -259,6 +278,11 @@ int cs_mac_motion_service(struct cs_mac_motion *m)
             }
         }
     }
+#endif
+#if CLASSICK_MAC_PHASE_IDLE_PROBE
+    if (!stable && in->phase == CS_INBOX_READY && m->have_phase
+        && !m->quiesced && rr3 == 0u && idle_only(m, &s1, &s2, &s3))
+        return CS_MAC_MOTION_EMPTY;
 #endif
     if (!m->have_phase || !stable) {
         return uncertain(m, !m->have_phase ? CS_MAC_LOSS_NO_PHASE : CS_MAC_LOSS_UNSTABLE,

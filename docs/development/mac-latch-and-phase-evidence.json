@@ -1,0 +1,376 @@
+{
+  "date": "2026-10-26",
+  "source_ids": [
+    "SRC-0468",
+    "SRC-0469",
+    "SRC-0470",
+    "SRC-0471",
+    "SRC-0472"
+  ],
+  "baseline_revision": "63bbccf5f7bcae357482686cc43edf4e3c7d8d28",
+  "baseline_CI": {
+    "run": 40253599502,
+    "windows": "success",
+    "native": "success"
+  },
+  "worker_calls": [
+    {
+      "task": "latch",
+      "model": "claude-sonnet-5.5",
+      "effort": "low",
+      "provider": "Copilot",
+      "execution": {
+        "round": "latch",
+        "worker": "copilot",
+        "exit_code": 0,
+        "outer_timeout": false,
+        "elapsed_seconds": 144.86,
+        "input_bytes": 44990,
+        "input_sha256": "41149bb9230ec24afefb4caf79562c6a666c618193d227305c56374ec4d6475b",
+        "stderr_bytes": 0
+      },
+      "premium_requests": 1,
+      "worker_tests_executed": [],
+      "worker_repository_writes": 0,
+      "capture_sha256": "443000f8be9806d0b667959c2abf43ca44dba3b68b5c326ecf9f4f7e6470fab5"
+    },
+    {
+      "task": "idle-proof",
+      "model": "claude-sonnet-5.5",
+      "effort": "low",
+      "provider": "Copilot",
+      "execution": {
+        "round": "idle-proof",
+        "worker": "copilot",
+        "exit_code": 0,
+        "outer_timeout": false,
+        "elapsed_seconds": 67.08,
+        "input_bytes": 22509,
+        "input_sha256": "848dae3d536e4175bb2e5e914661cca21d4c2f37744818c50ba35e0925ae9f21",
+        "stderr_bytes": 0
+      },
+      "premium_requests": 1,
+      "worker_tests_executed": [],
+      "worker_repository_writes": 0,
+      "capture_sha256": "66b10ca6887d97282cb069521a70c436e7ff70131aada02bcf951600f067902f"
+    }
+  ],
+  "latch_checks": [
+    {
+      "profile": "clang",
+      "passed": true,
+      "stdout": "mac-motion-latch: 209 checks passed"
+    },
+    {
+      "profile": "gcc64",
+      "passed": true,
+      "stdout": "mac-motion-latch: 209 checks passed"
+    },
+    {
+      "profile": "gcc32",
+      "passed": true,
+      "stdout": "mac-motion-latch: 209 checks passed"
+    },
+    {
+      "profile": "san",
+      "passed": true,
+      "stdout": "mac-motion-latch: 209 checks passed"
+    }
+  ],
+  "latch_defects": [
+    {
+      "name": "drop-unstable",
+      "kind": "core",
+      "detected": true,
+      "stdout": "FAIL line 204: cs_mac_motion_service(&t->m) == CS_MAC_MOTION_LOST\r\nmac-motion-latch: FAILED after 106 checks"
+    },
+    {
+      "name": "unconditional-ext-clear",
+      "kind": "fixture",
+      "detected": true,
+      "stdout": "FAIL line 118: f.c[0].closed && f.c[0].latched == 0 && rr0(&f, 0) == 0 && rr3(&f) == 8\r\nmac-motion-latch: FAILED after 4 checks"
+    },
+    {
+      "name": "ius-clears-latch",
+      "kind": "fixture",
+      "detected": true,
+      "stdout": "FAIL line 129: rr3(&f) == 9 && f.c[0].ius == 1 && f.c[1].ius == 1 && f.c[0].resets == 3 && f.c[1].resets == 0\r\nmac-motion-latch: FAILED after 9 checks"
+    }
+  ],
+  "phase_checks": [
+    {
+      "profile": "clang",
+      "probe": 0,
+      "passed": true,
+      "stdout": "PASS"
+    },
+    {
+      "profile": "clang",
+      "probe": 1,
+      "passed": true,
+      "stdout": "PASS"
+    },
+    {
+      "profile": "gcc64",
+      "probe": 0,
+      "passed": true,
+      "stdout": "PASS"
+    },
+    {
+      "profile": "gcc64",
+      "probe": 1,
+      "passed": true,
+      "stdout": "PASS"
+    },
+    {
+      "profile": "gcc32",
+      "probe": 0,
+      "passed": true,
+      "stdout": "PASS"
+    },
+    {
+      "profile": "gcc32",
+      "probe": 1,
+      "passed": true,
+      "stdout": "PASS"
+    },
+    {
+      "profile": "san",
+      "probe": 0,
+      "passed": true,
+      "stdout": "PASS"
+    },
+    {
+      "profile": "san",
+      "probe": 1,
+      "passed": true,
+      "stdout": "PASS"
+    }
+  ],
+  "phase_noninterference": [
+    {
+      "profile": "clang",
+      "defer": 0,
+      "passed": true,
+      "stdout": "phase matrix:131072 transcripts,60 exact no-decision changes,defer0;all other results,state and IO identical"
+    },
+    {
+      "profile": "clang",
+      "defer": 1,
+      "passed": true,
+      "stdout": "phase matrix:131072 transcripts,60 exact no-decision changes,defer1;all other results,state and IO identical"
+    },
+    {
+      "profile": "gcc",
+      "defer": 0,
+      "passed": true,
+      "stdout": "phase matrix:131072 transcripts,60 exact no-decision changes,defer0;all other results,state and IO identical"
+    },
+    {
+      "profile": "gcc",
+      "defer": 1,
+      "passed": true,
+      "stdout": "phase matrix:131072 transcripts,60 exact no-decision changes,defer1;all other results,state and IO identical"
+    },
+    {
+      "profile": "san",
+      "defer": 0,
+      "passed": true,
+      "stdout": "phase matrix:131072 transcripts,60 exact no-decision changes,defer0;all other results,state and IO identical"
+    },
+    {
+      "profile": "san",
+      "defer": 1,
+      "passed": true,
+      "stdout": "phase matrix:131072 transcripts,60 exact no-decision changes,defer1;all other results,state and IO identical"
+    }
+  ],
+  "phase_guard_defects": [
+    {
+      "compiled_guard_defect": "ignore-pending",
+      "detected": true,
+      "stdout": "noninterference failure 33217 base3 probe1"
+    },
+    {
+      "compiled_guard_defect": "ignore-A-level",
+      "detected": true,
+      "stdout": "noninterference failure 960 base3 probe1"
+    },
+    {
+      "compiled_guard_defect": "bypass-defer",
+      "detected": true,
+      "stdout": "defer continuation failure"
+    },
+    {
+      "invalid_macro_2_refused": true
+    }
+  ],
+  "phase_cli_refusals": [
+    {
+      "flags": [
+        "--window-phase-idle-probe"
+      ],
+      "refused_before_output": true
+    },
+    {
+      "flags": [
+        "--native-drawing",
+        "--window-phase-idle-probe"
+      ],
+      "refused_before_output": true
+    },
+    {
+      "flags": [
+        "--window-drawing",
+        "--window-phase-idle-probe",
+        "--window-idle-probe"
+      ],
+      "refused_before_output": true
+    },
+    {
+      "flags": [
+        "--window-drawing",
+        "--window-phase-idle-probe",
+        "--window-first-input-probe"
+      ],
+      "refused_before_output": true
+    },
+    {
+      "flags": [
+        "--window-drawing",
+        "--window-phase-idle-probe",
+        "--window-pending-defer-probe",
+        "--window-idle-probe"
+      ],
+      "refused_before_output": true
+    }
+  ],
+  "final_checks": [
+    {
+      "profile": "clang",
+      "focused_CTests": 9,
+      "passed": true,
+      "JUnit_sha256": "92999172148b6e71b21a4216941bf02c5de185097b69ff5b444eca6f22a32d70"
+    },
+    {
+      "profile": "final-gcc",
+      "focused_CTests": 9,
+      "passed": true,
+      "JUnit_sha256": "75e2962a79d63f5fef65d11b203f78654659f6c229faf685ac33a984a0915e45"
+    },
+    {
+      "profile": "final-sanitized",
+      "focused_CTests": 9,
+      "passed": true,
+      "JUnit_sha256": "f152bef935dcb8072839016dd402bda494627d8043dd49a1a7ff88c384a15433"
+    },
+    {
+      "profile": "i686",
+      "focused_CTests": 9,
+      "passed": true,
+      "JUnit_sha256": "65ffcb9f2e617101fcc3b5c0a321e45c8d44d0313d565f318837a340c924e936"
+    }
+  ],
+  "candidate_preflight": {
+    "CI_run": 40253599502,
+    "CI_status": "both jobs success",
+    "inputs": [
+      {
+        "target": "classick-window-preview-mac",
+        "source_revision": "63bbccf5f7bcae357482686cc43edf4e3c7d8d28",
+        "image_sha256": "673a2cca57d1ec9ffd842f4c858fa4aafbcb042ec6f86445ae5717d4816c4965",
+        "native_inputs_verified": 43,
+        "seal_verified": true,
+        "ROM_used": 23096,
+        "BSS": 304,
+        "workspace_bytes": 964,
+        "stack_bound": 4996,
+        "new_trial": false
+      },
+      {
+        "target": "classick-window-inverted-mac",
+        "source_revision": "63bbccf5f7bcae357482686cc43edf4e3c7d8d28",
+        "image_sha256": "c73df41cb6720bc96c96de5a1a2784b59eade8c16b41c20c7ccd18a398623f7c",
+        "native_inputs_verified": 43,
+        "seal_verified": true,
+        "ROM_used": 23096,
+        "BSS": 304,
+        "workspace_bytes": 964,
+        "stack_bound": 4996,
+        "new_trial": false
+      },
+      {
+        "target": "native-x86_64",
+        "source_revision": "63bbccf5f7bcae357482686cc43edf4e3c7d8d28",
+        "EFI_sha256": "de02e416fc92bc69fb4e07e41eb8a79a2f1cd00493e12104e1e47dba55e55d0f",
+        "disk_sha256": "66a105266a18b1f8e95593b88e7f8d6b7768a17200af33bd03d8fceadd8b5202",
+        "EFI_bytes": 184320,
+        "disk_bytes": 67108864,
+        "input_hashes_verified": 18,
+        "writer_twins_equal": true,
+        "new_trial": false
+      }
+    ],
+    "frozen_for_release": false,
+    "release_ready": false
+  },
+  "trial": {
+    "preflight": {
+      "compiled_source_revision": "83f7b6f1459866265a669fb3b5b94a41858fc932",
+      "ROM_sha256": "cfa16dc2e816cc833fb6c2d51ca9088fdf26215c6aa989999783dbd08dcb4235",
+      "ROM_bytes": 65536,
+      "native_inputs_verified": true,
+      "own_seal_verified": true,
+      "profile": "Early128K/RelativeHw/finite-defer/normal speed/windowed",
+      "host_wall_cap_seconds": 180,
+      "known_own_ram": {
+        "trace": 2936,
+        "trace_bytes": 128,
+        "diag": 3064
+      },
+      "no_disks_shares_Apple_inputs": true,
+      "experimental_not_release_qualification": true
+    },
+    "cleanup": {
+      "status": "stop requested",
+      "host_seconds": 66.2,
+      "pid": 10628,
+      "process_exited": true,
+      "forced_process_cleanup": true,
+      "guest_shutdown_claimed": false,
+      "ROM_sha256": "cfa16dc2e816cc833fb6c2d51ca9088fdf26215c6aa989999783dbd08dcb4235"
+    },
+    "GUI_result": "GetCursorPos failed: Access is denied. (0x80070005)",
+    "read_only_normal_context_control": {
+      "target": "inactive PID0",
+      "attempted": 0,
+      "delivered": 0,
+      "foreground_pid": 0,
+      "cursor": null
+    },
+    "screen": "black capture excluded;no usable original-scene capture",
+    "own_ROM_runtime_status": "ResetHighestIUS reported unimplemented by emulator;6151 repeated warnings,no causal conclusion",
+    "native_input_passed": false,
+    "guest_state_or_pointer_observed": false
+  },
+  "new_phase_mode": {
+    "default": 0,
+    "software_layout_unchanged": true,
+    "native_compile_budget_and_default_byte_identity": "pending new committed-source CI",
+    "physical_Snow_and_release_qualification": false
+  },
+  "remaining_provider_balances": {
+    "Copilot": "unavailable",
+    "Claude": "unavailable",
+    "Grok": "unavailable",
+    "Antigravity": "unavailable"
+  },
+  "media": {
+    "PNG": 65,
+    "GIF": 2,
+    "new": 0
+  },
+  "release_ready": false,
+  "frozen_or_published_release": false,
+  "286": "Prior verified store4/C16 work retained unchanged;not a release prerequisite"
+}

@@ -1,5 +1,7 @@
 # ClasSICK 0.97 working instructions
 
+2026-10-26,SRC-0468..0472/IMPL-0080/TEST-0093:latch209/four host profiles and opt-in phase-only131072-transcript matrices pass;macro0 default,recorded DCD-changing loss not fixed.63bbccf fullCI/paired preflight pass. Bounded old-defer trial closed66.20s after Windows AccessDenied,no input pass. New phase native proof pending;desktop/Mac motion/PC GUI/release gates remain.65PNG/twoGIF,originals/286 retained. [Evidence](docs/development/mac-latch-and-phase-evidence.json).
+
 2026-10-25,SRC-0463..0467/IMPL-0079/TEST-0092:focused Mac source review isolates pre-ack instability;no speculative driver edit. Prior Windows CI i686 API-level failure reproduced/fixed.286 checked-write host model passes69 oracle assertions/author suite in four profiles and six80286/USE16 objects,unlinked/unrun;native provider remains open. No new VM/emulator trial or media;Mac motion/PC GUI drag/release still block release. [Evidence](docs/development/input-review-and-store4.json).
 
 2026-10-25,SRC-0456..0462/IMPL-0078/TEST-0091:explicit fresh-helper approval recorded. Original host helper/fake guards/one-shot observer pass four focused CTests in three profiles;native input remains unqualified. Snow foreground refused,PC injected motion negative/device control positive;physical check NOT PERFORMED. Active-time cap exceeded,diagnostic run only;owned sessions closed/media preserved.286 binding proposal corrected,not implemented.65PNG/twoGIF;Mac motion/PC GUI drag/release gates remain. [Evidence](docs/development/windows-input-helper-evidence.md).

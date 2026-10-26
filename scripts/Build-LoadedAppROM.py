@@ -42,6 +42,7 @@ def main():
     p.add_argument('--window-idle-probe',action='store_true',help='Diagnostic: halt in a self-branch after >=500 services; window profile only')
     p.add_argument('--window-pending-defer-probe',action='store_true',help='Experimental one-service pending-edge defer; window profile only')
     p.add_argument('--window-first-input-probe',action='store_true',help='Freeze copied trace on delivered input/loss or >=5000 services; window only')
+    p.add_argument('--window-phase-idle-probe',action='store_true',help='Experimental phase-only no-decision pass; window profile only')
     p.add_argument('--dcd-invert',type=int,choices=(0,1,2,3),default=0,help='Unverified raw RR0 DCD sense mask; window profile only')
     a=p.parse_args();native=a.native_drawing or a.selected_drawing or a.outline_drawing or a.window_drawing
     if a.dcd_invert and not a.window_drawing:p.error('--dcd-invert requires --window-drawing')
@@ -50,6 +51,8 @@ def main():
     if a.window_pending_defer_probe and a.window_idle_probe:p.error('Choose one diagnostic profile')
     if a.window_first_input_probe and not a.window_drawing:p.error('--window-first-input-probe requires --window-drawing')
     if a.window_first_input_probe and a.window_idle_probe:p.error('Choose one diagnostic profile')
+    if a.window_phase_idle_probe and not a.window_drawing:p.error('--window-phase-idle-probe requires --window-drawing')
+    if a.window_phase_idle_probe and (a.window_idle_probe or a.window_first_input_probe):p.error('Phase-idle probe is separate from checkpoint profiles')
     repo=Path(__file__).resolve().parents[1];tools=Path(a.tool_root).resolve();out=Path(a.output).resolve()
     out.mkdir(parents=True,exist_ok=False);sys.dont_write_bytecode=True
     spec=spec_from_file_location('base_rom',repo/'scripts/Build-MacROM.py');h=module_from_spec(spec);spec.loader.exec_module(h)
@@ -92,6 +95,7 @@ def main():
         program_source=None;program_hex='';specification='SPEC-0072';profile='native-window-preview-v1'
         if a.window_pending_defer_probe:profile='native-window-pending-defer-probe-v1'
         if a.window_first_input_probe:profile='native-window-'+('pending-defer-' if a.window_pending_defer_probe else '')+'first-input-probe-v1'
+        if a.window_phase_idle_probe:profile='native-window-phase-idle-'+('pending-defer-' if a.window_pending_defer_probe else '')+'probe-v1'
     profiles=[]
     for twin in ('a','b'):
         folder=out/('Os-'+twin);folder.mkdir();objects=[]
@@ -106,6 +110,7 @@ def main():
         if a.window_idle_probe or a.window_first_input_probe:flags+=['-DCLASSICK_MAC_IDLE_PROBE=1']
         if a.window_first_input_probe:flags+=['-DCLASSICK_MAC_FIRST_INPUT_PROBE=1']
         if a.window_pending_defer_probe:flags+=['-DCLASSICK_MAC_PENDING_DEFER_PROBE=1']
+        if a.window_phase_idle_probe:flags+=['-DCLASSICK_MAC_PHASE_IDLE_PROBE=1']
         for i,source in enumerate(sources):
             obj=folder/f'{i}.o';objects.append(obj);h.run([cc,*flags,'-c',repo/source,'-o',obj],env)
             if source not in ('platform/mac128k/loaded-entry.c','platform/mac128k/drawing-entry.c','platform/mac128k/native-drawing-entry.c','platform/mac128k/window-entry.c'):
@@ -228,6 +233,7 @@ def main():
      'inputs':{f:hashlib.sha256((repo/f).read_bytes().replace(b'\r\n',b'\n')).hexdigest() for f in (*sources,*headers)}}
     if a.window_drawing:manifest['window_idle_probe']=bool(a.window_idle_probe)
     if a.window_drawing:manifest['window_pending_defer_probe']=bool(a.window_pending_defer_probe)
+    if a.window_drawing:manifest['window_phase_idle_probe']=bool(a.window_phase_idle_probe)
     if a.window_drawing:manifest['window_first_input_probe']=bool(a.window_first_input_probe)
     if a.window_first_input_probe:manifest['window_first_input_probe_limit']=5000
     if a.window_idle_probe:manifest['window_idle_probe_threshold']=500

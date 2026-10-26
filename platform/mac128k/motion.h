@@ -18,6 +18,15 @@
 #error CLASSICK_MAC_PENDING_DEFER_PROBE must be 0 or 1
 #endif
 
+/* Opt-in engineering experiment; default 0. Unstable PB4/5-only passes with
+ * no DCD/button/RR3 evidence return EMPTY instead of loss. */
+#ifndef CLASSICK_MAC_PHASE_IDLE_PROBE
+#define CLASSICK_MAC_PHASE_IDLE_PROBE 0
+#endif
+#if (CLASSICK_MAC_PHASE_IDLE_PROBE)!=0 && (CLASSICK_MAC_PHASE_IDLE_PROBE)!=1
+#error CLASSICK_MAC_PHASE_IDLE_PROBE must be 0 or 1
+#endif
+
 enum { CS_MAC_SCC_A = 0, CS_MAC_SCC_B = 1 };
 
 typedef struct {

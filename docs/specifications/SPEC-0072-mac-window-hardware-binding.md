@@ -202,3 +202,14 @@ A first delivered sample may be a button;unread prefix/first loss remain
 visible. Default and finite-defer baseline images must remain byte-identical
 when the observation flag is off. Native cost and target behavior must be
 recorded;host tests alone do not qualify input. [Evidence](../development/mac-first-input-probe-evidence.md).
+
+## Opt-in phase-only no-decision experiment (SRC-0470/0471)
+
+CLASSICK_MAC_PHASE_IDLE_PROBE defaults0. When enabled,after existing defer
+continuation validation,an unstable READY/have-phase/nonquiesced pass withRR3zero
+and all three DCD/button observations equal to retained values returns EMPTY.
+PB4/5 alone may vary. No sample is admitted,no extra IO/state/layout is added;
+all other paths remain the base contract. This is conditional engineering,not
+a physical event-completeness theorem or a remedy for the retained DCD-changing
+losses. Native compile/budget/trial and release gates persist.
+[Actual checks and limitations](../development/mac-latch-and-phase-evidence.md).

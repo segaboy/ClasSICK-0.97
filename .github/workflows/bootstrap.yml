@@ -217,6 +217,24 @@ jobs:
             ${{ runner.temp }}/classick-window-defer/Os-a/native-window-disassembly.txt
             ${{ runner.temp }}/classick-defer-verification.json
           if-no-files-found: error
+      - name: Build opt-in phase-only no-decision experiments (unbooted)
+        run: |
+          python3 scripts/Build-LoadedAppROM.py --window-drawing --window-phase-idle-probe --tool-root "$RUNNER_TEMP/classick-m68k/root" --output "$RUNNER_TEMP/classick-window-phase-idle"
+          python3 scripts/Build-LoadedAppROM.py --window-drawing --window-phase-idle-probe --window-pending-defer-probe --tool-root "$RUNNER_TEMP/classick-m68k/root" --output "$RUNNER_TEMP/classick-window-phase-idle-defer"
+      - name: Retain phase-only no-decision experiments (unbooted)
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
+        with:
+          name: classick-window-phase-idle-mac
+          path: |
+            ${{ runner.temp }}/classick-window-phase-idle/manifest.json
+            ${{ runner.temp }}/classick-window-phase-idle/Os-a/classick-loaded-app.rom
+            ${{ runner.temp }}/classick-window-phase-idle/Os-a/classick-loaded-app.map
+            ${{ runner.temp }}/classick-window-phase-idle/Os-a/native-window-disassembly.txt
+            ${{ runner.temp }}/classick-window-phase-idle-defer/manifest.json
+            ${{ runner.temp }}/classick-window-phase-idle-defer/Os-a/classick-loaded-app.rom
+            ${{ runner.temp }}/classick-window-phase-idle-defer/Os-a/classick-loaded-app.map
+            ${{ runner.temp }}/classick-window-phase-idle-defer/Os-a/native-window-disassembly.txt
+          if-no-files-found: error
       - name: Build strict first-input checkpoint twins (unbooted)
         run: python3 scripts/Build-LoadedAppROM.py --window-drawing --window-first-input-probe --tool-root "$RUNNER_TEMP/classick-m68k/root" --output "$RUNNER_TEMP/classick-window-first-input"
       - name: Verify strict first-input checkpoint and unchanged normal ROM
