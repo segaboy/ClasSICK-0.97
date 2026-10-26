@@ -4,7 +4,9 @@
   "sources": [
     "SRC-0487",
     "SRC-0488",
-    "SRC-0489"
+    "SRC-0489",
+    "SRC-0490",
+    "SRC-0491"
   ],
   "implementation": "IMPL-0084",
   "test": "TEST-0097",
@@ -246,13 +248,155 @@
     "passed": 3,
     "JUnit_sha256": "207b2d26a05655936238753a25908967b2ceedbf0af60b8baca955e541124b77"
   },
-  "native_PC_build_trial": "pending",
+  "native_PC_build_trial": {
+    "source_revision": "d9df16d4c3b1212ff8ee731b16049df1fefbea93",
+    "CI_run": 40400556146,
+    "CI_result": "both jobs success",
+    "native_proof": {
+      "source_revision": "d9df16d4c3b1212ff8ee731b16049df1fefbea93",
+      "EFI_sha256": "f5d4d19467bdbe3feac8ee8e2d5400b384360109469c868b24bb92bd9e648e7e",
+      "raw_sha256": "7c295128d099d99852eda6264249dc1fb68b7f00ca5d2f3ed98903ee123ce9af",
+      "source_input_hashes_verified": true,
+      "extra_raw_source_hashes": {
+        "platform/pc/ps2-mouse.c": "10e992490e585eea077d794eebb9efdb79599906a7172a93e69451d9cb0d10d6",
+        "platform/pc/ps2-mouse.h": "66a3a43fe9e049074f7638207027d2842cbc4b57845e8eae5cfa85c352bc18f9",
+        "platform/pc/input-probe.c": "07a08f58e9c5785a88390439ddf8671fb7e8ffa5a57527e315874fc995f20fe7",
+        "platform/pc/input-probe.h": "c5d62113023b5511f67c8ce628353ded9c476a1c5b82d642c223ef9658b39918",
+        "scripts/Verify-UEFIImage.ps1": "4507d90fccbd1bbd13f45137b201553d5d08abb99ebb93e213ae086c23e08437"
+      },
+      "normal_EFI_unchanged": "de02e416fc92bc69fb4e07e41eb8a79a2f1cd00493e12104e1e47dba55e55d0f",
+      "writer_twins": true,
+      "compiler_twins": 4,
+      "corruption_rejections": 27,
+      "omitted_probe_controls": 2,
+      "spin": [
+        "1002D0F2",
+        "1002D0F4"
+      ],
+      "magic": "4353505241573031",
+      "profile": "raw-motion-later",
+      "trial_name": "ClasSICK-097-raw-packet-20261026-a",
+      "target_started": false
+    },
+    "actual_raw_control": {
+      "classification": "actual isolated virtual-device positive control;not GUI",
+      "RIP": "000000001002D0F4",
+      "words": {
+        "r8": "4353505241573031",
+        "r9": "0000000200000000",
+        "r10": "0000000900000100",
+        "r11": "0000000100000000",
+        "r12": "0000000100000002",
+        "r13": "00000101000000AB",
+        "r14": "0000005000000046",
+        "r15": "0000000000000000"
+      },
+      "packets": 2,
+      "errors": 0,
+      "raw_bytes": [
+        9,
+        1,
+        0
+      ],
+      "decoded_dx": 1,
+      "decoded_dy": 0,
+      "buttons": 1,
+      "pointer_down": 0,
+      "pointer_suppress": 1,
+      "pointer": [
+        257,
+        171
+      ],
+      "window": [
+        80,
+        70
+      ],
+      "press_count": 0,
+      "dragging": 0,
+      "baseline_note": "Initial held button is suppressed;no fabricated press.",
+      "device_events": {
+        "classification": "device-level positive control only;not GUI",
+        "events": [
+          [
+            0,
+            0,
+            1
+          ],
+          [
+            1,
+            0,
+            1
+          ],
+          [
+            0,
+            0,
+            0
+          ]
+        ],
+        "no_host_input_sent": true
+      }
+    },
+    "sessions": {
+      "pc-raw": {
+        "cleanup": {
+          "utc": "2026-10-26T21:11:03.3544761Z",
+          "cold_starts": 1,
+          "state": "poweroff",
+          "unregistered": true,
+          "existing_vm_inventory_preserved": true,
+          "running_state_preserved": true,
+          "post_trial_raw_roundtrip_equal": true,
+          "artifacts_retained": true,
+          "semantic_session_stop_observed": false,
+          "termination": "external poweroff from paused state"
+        },
+        "watchdog": {
+          "host_wall_seconds": 298.8840588,
+          "cap_seconds": 300,
+          "stop_requested": true,
+          "scope": "owned isolated original raw-packet diagnostic only"
+        }
+      },
+      "pc-primary": {
+        "cleanup": {
+          "utc": "2026-10-26T21:19:29.3432032Z",
+          "cold_starts": 1,
+          "state": "poweroff",
+          "unregistered": true,
+          "existing_vm_inventory_preserved": true,
+          "running_state_preserved": true,
+          "post_trial_raw_roundtrip_equal": true,
+          "artifacts_retained": true,
+          "semantic_session_stop_observed": false,
+          "termination": "external poweroff from paused state"
+        },
+        "watchdog": {
+          "host_wall_seconds": 230.7589406,
+          "cap_seconds": 300,
+          "stop_requested": true,
+          "scope": "owned isolated original normal-primary input test only"
+        }
+      }
+    },
+    "GUI_input_status": "not performed:activation and zero-event focus guards refuse",
+    "zero_event_preflight": {
+      "state": "target_refused",
+      "reason": "foreground",
+      "foreground_pid": 17752,
+      "expected_pid": 20124,
+      "attempted": 0,
+      "delivered": 0,
+      "foreground_process_observed": "LockApp"
+    },
+    "desktop_requirement": "User must unlock Windows;no authentication UI automated.",
+    "desktop_question_pending": true
+  },
   "normal_input_policy_changed": false,
   "release_ready": false,
   "media": {
-    "PNG": 69,
+    "PNG": 70,
     "GIF": 2,
-    "new": 1
+    "new": 2
   },
   "remaining_provider_balances": {
     "Copilot": "unavailable",

@@ -4671,3 +4671,11 @@ wrong locator rejected for each component. No native package/trial/publication.
 ## SRC-0489 - Lead raw-packet verification and286 witnesses
 
 2026-10-26. Four host profiles,2097152 raw reports/14680082 assertions each,author/mailbox suites,three CTests/three compiled controls pass. C99 assertion corrected.12 helper-free80286/USE16 objects/six named refusals,unlinked/unrun. Native build/trial pending. [Review](../docs/development/timer-and-pc-input.md).
+
+## SRC-0490 - Committed native PC raw proof and actual device control
+
+2026-10-26. d9df16d fullCI40400556146 passes. Normal EFI/disk unchanged;raw image/own-spin/source/media proofs pass. Actual virtual-device trace raw09/01/00 maps+1X/left1,pointer257,171,held baseline suppressed. Not GUI/human evidence. [Review](../docs/development/timer-and-pc-input.md).
+
+## SRC-0491 - Current Windows lock-screen focus refusal and cleanup
+
+2026-10-26. GUI activation and approved zero-event helper refuse;foregroundPID17752 is observed LockApp,zero input attempted. Desktop automation stops;owner unlock requested. Two owned VMs close,inventory/running states/media unchanged. No authentication automation or release waiver. [Review](../docs/development/timer-and-pc-input.md).

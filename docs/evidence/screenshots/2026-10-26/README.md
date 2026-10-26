@@ -10,3 +10,5 @@ research use,not release qualification or historical behavior evidence.
 [Identities and limitations](../../../development/native-input-qualification-20261026.md).
 
 [Timer ROM held-click result,count0001](mac-timer-click.png):original512x342 framebuffer export;movement/dragging unqualified.69PNG/twoGIF total after this addition. [Observation](../../../development/timer-and-pc-input.md).
+
+[PC raw device control](pc-raw-device-control.png):actual+1X virtual-device input,raw09/01/00,pointer257,171. GUI input not performed because Windows foreground control refused.70PNG/twoGIF after this addition. [Observation](../../../development/timer-and-pc-input.md).

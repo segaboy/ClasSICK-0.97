@@ -58,3 +58,5 @@ See [storage and publication policy](../../development/screenshot-evidence.md). 
 - [PC window boot,dragging and later input:five reviewed captures.](2026-10-22/README.md) — [TEST-0074](../../development/pc-window-boot-trial.md).
 
 - [Mac timer-path held click,count0001;no motion/drag qualification.](2026-10-26/mac-timer-click.png) — [evidence](../../development/timer-and-pc-input.md).
+
+- [PC raw device control,+1X;no GUI dragging pass.](2026-10-26/pc-raw-device-control.png) — [evidence](../../development/timer-and-pc-input.md).

@@ -1614,6 +1614,28 @@
         "Accepted held button only;no mouse-motion/window-drag or human qualification.",
         "No physical-hardware,System1 or release claim."
       ]
+    },
+    {
+      "id": "2026-10-26-pc-raw-device-control",
+      "path": "docs/evidence/screenshots/2026-10-26/pc-raw-device-control.png",
+      "sha256": "5c1e46aa4f459b4d8fda74502afc1ee0d6b279158ef373aed5bc990d1bf62376",
+      "bytes": 2045,
+      "width": 512,
+      "height": 342,
+      "captured_on": "2026-10-26",
+      "target": "native-x86_64",
+      "caption": "PC raw-packet diagnostic after virtual-device +1X control;pointer257,171,held startup button suppressed. GUI dragging is not qualified.",
+      "alt": "PC raw-packet diagnostic after virtual-device +1X control;pointer257,171,held startup button suppressed. GUI dragging is not qualified.",
+      "source_revision": "d9df16d4c3b1212ff8ee731b16049df1fefbea93",
+      "compiled_source_revision": "d9df16d4c3b1212ff8ee731b16049df1fefbea93",
+      "evidence": "docs/development/timer-and-pc-input.md",
+      "license": "GPL-3.0-or-later",
+      "rights": "Exact512x342 crop of original own guest framebuffer;no resize,retouch,desktop or emulator chrome.",
+      "input": "synthetic",
+      "limitations": [
+        "Virtual-device positive control only;not Windows GUI/human input or successful drag.",
+        "No historical,physical-hardware,System1 or release qualification."
+      ]
     }
   ]
 }

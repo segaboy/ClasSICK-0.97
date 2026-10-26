@@ -44,3 +44,35 @@ PC GUI dragging,human-use failures and paired release gates remain. No Apple/MS/
 emulator source,reference system,physical test,new platform,release/tag,OneNote/wiki
 or Codex subagent. All originals/held work/old evidence preserved.
 [Contract](../specifications/SPEC-0076-pc-raw-packet-probe.md),[receipt](timer-and-pc-input.json).
+
+## Committed native proof and current desktop blocker
+
+SRC-0490/0491. Source d9df16d fullCI40400556146 succeeds in both jobs. Local
+normal/raw O0/O2 twin builds and27 image-corruption/two omitted-probe controls
+pass. Normal EFI SHAde02e416..55d0f and64MiB disk66a10526..b5202 are unchanged.
+Raw EFI184832B SHAf5d4d194..8e7e and disk7c295128..e9af have independent media-
+writer twins,payload validation and committed Git-LF input hashes. Own raw spin
+1002D0F2/1002D0F4 andCSPRAW01 are checked before interpreting any register data.
+
+In the isolated raw VM,GUI activation fails before the planned capture click;
+pausedRIP10008F65 is not the diagnostic spin,so no raw data is inferred. Separate
+device control sends(0,0,left),(+1,0,left),(0,0,released). Actual own-spin words
+give packet2/errors0,raw09/01/00,dx1/dy0/left1,pointer257,171,window80,70,
+down0/suppress1/presses0/dragging0. Initial held baseline is correctly suppressed,
+not a fabricated press. This verifies the native raw path through the actual
+virtual peripheral,bus,decoder and observer;it does not qualify Windows GUI input.
+
+One fresh unchanged normal-PC trial checks the approved helper before any event.
+It refuses foreground acquisition:expectedPID20124,foregroundPID17752,zero events
+attempted/delivered. A read-only process-name query identifies LockApp. Windows is
+currently locked;this explains the current foreground refusal,not every earlier
+pointer failure. All desktop input stops and the owner is asked to unlock;no
+sign-in/security UI or settings are touched. No later trial proceeds without an
+unlocked desktop. Both owned VMs close/unregister at298.88/230.76s including the
+watchdog scope;inventory,running states and raw-media roundtrips are preserved.
+
+The [native PC device-control crop](../evidence/screenshots/2026-10-26/pc-raw-device-control.png)
+is unchanged product pixels,exact512x342 crop without scale/retouch.70PNG/twoGIF
+are indexed. No successful GUI drag or new dragging GIF. Mac motion/dragging and
+PC GUI dragging remain unqualified;release is not ready/frozen. User desktop
+unlock is required for the remaining actual host-input tests.
