@@ -1,6 +1,6 @@
 # Separate input-model candidate and286 compiler progress
 
-2026-10-26;SPEC-0074/SRC-0479..0480/IMPL-0082/TEST-0095.
+2026-10-26;SPEC-0074/SRC-0479..0481/IMPL-0082/TEST-0095.
 
 One supervised worker supplies an original pure phase decoder and author tests.
 Lead adopts the implementation unchanged;the header's C11 assertion is corrected
@@ -20,8 +20,11 @@ not change after seeing the implementation.
 
 The model has40-byte state/12-byte output,zero retained pointers,mutable globals
 or source-level library calls. It is not linked to a ROM or PC boot path. An
-isolated seven-object68000 audit is wired for O0/O2/Os twins,layout,imports,
-mutable-data and frame checks;actual native result remains pending source CI.
+isolated seven-object68000 audit passes at659d9ac in fullCI40367008180:
+O0/O2/Os twins match,40/12-byte layout is confirmed,no imports or mutable
+globals occur,and maximum single frame is72 bytes (O0),40 atO2/Os. All four
+manifest source hashes match committed Git-LF bytes. These are unlinked objects,
+not a target execution or whole-stack/physical-sampling qualification.
 
 286 progress:the pinned WCC16 compiler produces six helper-free80286/USE16
 objects across small/medium/large models and unoptimized/size settings;three

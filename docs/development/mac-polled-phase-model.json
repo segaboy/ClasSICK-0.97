@@ -3,7 +3,8 @@
   "specification": "SPEC-0074",
   "sources": [
     "SRC-0479",
-    "SRC-0480"
+    "SRC-0480",
+    "SRC-0481"
   ],
   "implementation": "IMPL-0082",
   "test": "TEST-0095",
@@ -412,7 +413,98 @@
     "flat_numeric_spans_are_not_a_segmented_backend": true,
     "stack_check_suppression_diagnostic_only": true
   },
-  "M68000": "compiler audit wired;pending new committed-source CI",
+  "M68000": {
+    "compiled_source": "659d9acc4c660b38945acd1ecbdeb4447db89e50",
+    "CI_run": 40367008180,
+    "CI_conclusion": "both jobs success",
+    "manifest_sha256": "3957360694a910e9d50c5a0a27b302be6ddf818c04bef0432e0360333d45991a",
+    "manifest": {
+      "specification": "SPEC-0074",
+      "cpu": "68000",
+      "compiler": "m68k-linux-gnu-gcc-13 (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0",
+      "object_compilations": 7,
+      "state_bytes": 40,
+      "sample_bytes": 12,
+      "records": [
+        {
+          "optimization": "O0",
+          "twins_equal": true,
+          "object_sha256": "cc7235e4af141459c1909833d48160ccc860b87b1b4e0bc51deab5a4bcd6861b",
+          "imports": [],
+          "mutable_globals": 0,
+          "frames": [
+            {
+              "function": "sat",
+              "bytes": 0
+            },
+            {
+              "function": "phase",
+              "bytes": 0
+            },
+            {
+              "function": "step_axis",
+              "bytes": 4
+            },
+            {
+              "function": "cs_mac_polled_begin",
+              "bytes": 0
+            },
+            {
+              "function": "cs_mac_polled_step",
+              "bytes": 72
+            }
+          ]
+        },
+        {
+          "optimization": "O2",
+          "twins_equal": true,
+          "object_sha256": "07fa3318af0d3eefa25d296c0bc262d424c766bbff3a8eee60639b007c16955a",
+          "imports": [],
+          "mutable_globals": 0,
+          "frames": [
+            {
+              "function": "cs_mac_polled_begin",
+              "bytes": 0
+            },
+            {
+              "function": "cs_mac_polled_step",
+              "bytes": 40
+            }
+          ]
+        },
+        {
+          "optimization": "Os",
+          "twins_equal": true,
+          "object_sha256": "be8d8e1fdc7ee74078f0d8589c03b95c8488666cf6f52ab79012cc573551fdae",
+          "imports": [],
+          "mutable_globals": 0,
+          "frames": [
+            {
+              "function": "cs_mac_polled_begin",
+              "bytes": 0
+            },
+            {
+              "function": "cs_mac_polled_step",
+              "bytes": 40
+            }
+          ]
+        }
+      ],
+      "inputs": {
+        "platform/mac128k/polled-phase.c": "537d6d62bf3177e16153c86ba4d42fee90a90192bf17e103fc635f5bf1518766",
+        "platform/mac128k/polled-phase.h": "889aa6a1314e32114722f8ef822de14b100f197927fc77b9768561ac1566428f",
+        "core/input/pointer.h": "d0a53cdadbe728195ce2c35bc4ef0b2a1687351912c759eda1bf6b4c38abdc38",
+        "scripts/Verify-MacPolledPhaseM68k.py": "0adcbb3b0eec68aaa208a17f4cb79f2b90d3bebf6e8cb844b069952b515dcd63"
+      },
+      "linked": false,
+      "target_executed": false,
+      "ROM_inputs_changed": false,
+      "hardware_sampling_or_whole_stack_qualified": false
+    },
+    "source_hashes_verified_against_git_LF": true,
+    "maximum_single_frame_bytes": 72,
+    "whole_stack_qualified": false
+  },
   "state_bytes": 40,
   "sample_bytes": 12,
   "ROM_or_boot_binding": false,

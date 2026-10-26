@@ -4635,3 +4635,7 @@ wrong locator rejected for each component. No native package/trial/publication.
 ## SRC-0480 - Lead model adoption and independent verification
 
 2026-10-26. Four strict-C99 host profiles pass author/frozen4096-case oracle,40475 assertions each/two integrated CTests;three compiled faulty controls detected. C99/author expectation/begin-contract corrections and oracle formatting history disclosed. Six unlinked/unrun WCC16 objects/three named refusals,legacy facade regression pass. Native68000 audit pending;no IO/IRQ/boot or historical/physical qualification. [Receipt](../docs/development/mac-polled-phase-model.json).
+
+## SRC-0481 - Committed-source isolated68000 compiler proof
+
+2026-10-26. Source659d9ac fullCI40367008180 succeeds in both jobs. Seven compilations confirm40/12-byte layout,O0/O2/Os twin identity,no imports/mutable globals and maximum72-byte single frame. Four manifest inputs match Git-LF source hashes. Unlinked/unrun;no hardware,whole-stack or release qualification. [Receipt](../docs/development/mac-polled-phase-model.json).
