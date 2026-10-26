@@ -17,7 +17,8 @@ requires an independently verified,owned isolated session and compile-bound
 real PID/path/hash header or active helper binary belongs in this repo. CI builds
 fake guard tests with PID0 inactive bindings and compiles the read-only capture
 module;it performs no desktop input. With the pinned development environment,
-a manual host build uses C99,helper.c,native.c,capture.c,an outside-Git binding
+a manual host build uses C99,`WINVER=0x0A00` and `_WIN32_WINNT=0x0A00`
+compiler definitions,helper.c,native.c,capture.c,an outside-Git binding
 include directory,and user32/kernel32/bcrypt/ole32/oleaut32/uuid libraries.
 
 An accepted API event is not guest input acceptance. A foreground refusal is a

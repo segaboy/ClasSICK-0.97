@@ -157,6 +157,12 @@ jobs:
           persist-credentials: false
       - name: Verify original mouse replay data controls
         run: python3 -B scripts/Test-SnowMouseReplay.py --output "$RUNNER_TEMP/classick-snow-replay"
+      - name: Verify original host-memory store4 experiment
+        run: |
+          cc -std=c99 -Wall -Wextra -Wpedantic -Werror -Wconversion -Wsign-conversion -Iprobes/pc286 probes/pc286/bank-plan.c probes/pc286/bank-catalog.c probes/pc286/store4-model.c tests/pc286-store4-model.c -o "$RUNNER_TEMP/store4-author"
+          "$RUNNER_TEMP/store4-author"
+          cc -std=c99 -Wall -Wextra -Wpedantic -Werror -Wconversion -Wsign-conversion -Iprobes/pc286 probes/pc286/bank-plan.c probes/pc286/bank-catalog.c probes/pc286/store4-model.c tests/pc286-store4-oracle.c -o "$RUNNER_TEMP/store4-oracle"
+          "$RUNNER_TEMP/store4-oracle"
       - name: Verify bounded input observation with fake backend only
         run: python3 -B tests/input-phase.py
       - name: Verify synthetic paired-package evidence locators

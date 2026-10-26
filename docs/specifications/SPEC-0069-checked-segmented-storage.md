@@ -125,3 +125,14 @@ native byte/chunk commit API or qualified far-pointer implementation here.
 
 
 2026-10-25,SRC-0448/IMPL-0077/TEST-0090:adopt the separate [numeric backing-catalog prototype](../development/pc286-bank-catalog-contract.md). It bounds caller-supplied canonical intervals/native offsets,not actual physical ownership/representation or infallible access.32 frozen checks/later reproduced regression/three host profiles/six C16 closure witnesses verified;no native pointer,far conversion,commit,link/target run or production ABI.
+
+## 9. Host-memory store4 experiment (2026-10-25)
+
+SRC-0466/0467 adds an original unbound checked-write experiment with borrowed
+<=32767-byte native object spans. Whole map/catalog/span validation and all four
+destinations precede the first store. Binding stability,true extents,liveness
+and nonaliasing remain caller obligations;the epoch is a numeric staleness
+label,not a capability. The [model contract](../development/pc286-store4-model.md)
+selects its exact refusal ordering,canonical spans and no-wrap epoch preflight.
+It does not adopt a production C16 guest-view ABI,far-memory provider or target
+link/boot claim. Existing models and flat production paths remain unchanged.

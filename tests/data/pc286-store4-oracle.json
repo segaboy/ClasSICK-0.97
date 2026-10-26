@@ -1,0 +1,457 @@
+{
+  "revision": "711bf8487ac6ca2372d1646517da71514f596bd1",
+  "fixture": "8 logical bytes:bank1=3 bytes via2+1 spans,bank2=5 via1+4 spans;all initial0xAA;value0x12345678",
+  "cases": [
+    {
+      "name": "within0",
+      "at": 0,
+      "result": 0,
+      "logical_bytes": [
+        18,
+        52,
+        86,
+        120,
+        170,
+        170,
+        170,
+        170
+      ]
+    },
+    {
+      "name": "cross2",
+      "at": 2,
+      "result": 0,
+      "logical_bytes": [
+        170,
+        170,
+        18,
+        52,
+        86,
+        120,
+        170,
+        170
+      ]
+    },
+    {
+      "name": "within4",
+      "at": 4,
+      "result": 0,
+      "logical_bytes": [
+        170,
+        170,
+        170,
+        170,
+        18,
+        52,
+        86,
+        120
+      ]
+    },
+    {
+      "name": "odd1",
+      "at": 1,
+      "result": 5,
+      "logical_bytes": [
+        170,
+        170,
+        170,
+        170,
+        170,
+        170,
+        170,
+        170
+      ]
+    },
+    {
+      "name": "past6",
+      "at": 6,
+      "result": 5,
+      "logical_bytes": [
+        170,
+        170,
+        170,
+        170,
+        170,
+        170,
+        170,
+        170
+      ]
+    },
+    {
+      "name": "odd7",
+      "at": 7,
+      "result": 5,
+      "logical_bytes": [
+        170,
+        170,
+        170,
+        170,
+        170,
+        170,
+        170,
+        170
+      ]
+    },
+    {
+      "name": "max24",
+      "at": 16777214,
+      "result": 5,
+      "logical_bytes": [
+        170,
+        170,
+        170,
+        170,
+        170,
+        170,
+        170,
+        170
+      ]
+    },
+    {
+      "name": "outside24",
+      "at": 16777216,
+      "result": 5,
+      "logical_bytes": [
+        170,
+        170,
+        170,
+        170,
+        170,
+        170,
+        170,
+        170
+      ]
+    },
+    {
+      "name": "lastspan_zero",
+      "at": 2,
+      "result": 7,
+      "logical_bytes": [
+        170,
+        170,
+        170,
+        170,
+        170,
+        170,
+        170,
+        170
+      ]
+    },
+    {
+      "name": "lastspan_null",
+      "at": 2,
+      "result": 7,
+      "logical_bytes": [
+        170,
+        170,
+        170,
+        170,
+        170,
+        170,
+        170,
+        170
+      ]
+    },
+    {
+      "name": "span_gap",
+      "at": 2,
+      "result": 7,
+      "logical_bytes": [
+        170,
+        170,
+        170,
+        170,
+        170,
+        170,
+        170,
+        170
+      ]
+    },
+    {
+      "name": "span_overlap",
+      "at": 2,
+      "result": 7,
+      "logical_bytes": [
+        170,
+        170,
+        170,
+        170,
+        170,
+        170,
+        170,
+        170
+      ]
+    },
+    {
+      "name": "span_wrong_id",
+      "at": 2,
+      "result": 7,
+      "logical_bytes": [
+        170,
+        170,
+        170,
+        170,
+        170,
+        170,
+        170,
+        170
+      ]
+    },
+    {
+      "name": "extra_span",
+      "at": 2,
+      "result": 7,
+      "logical_bytes": [
+        170,
+        170,
+        170,
+        170,
+        170,
+        170,
+        170,
+        170
+      ]
+    },
+    {
+      "name": "span_32768",
+      "at": 2,
+      "result": 7,
+      "logical_bytes": [
+        170,
+        170,
+        170,
+        170,
+        170,
+        170,
+        170,
+        170
+      ]
+    },
+    {
+      "name": "stale",
+      "at": 2,
+      "result": 4,
+      "logical_bytes": [
+        170,
+        170,
+        170,
+        170,
+        170,
+        170,
+        170,
+        170
+      ]
+    },
+    {
+      "name": "zero_current",
+      "at": 2,
+      "result": 1,
+      "logical_bytes": [
+        170,
+        170,
+        170,
+        170,
+        170,
+        170,
+        170,
+        170
+      ]
+    },
+    {
+      "name": "zero_expected",
+      "at": 2,
+      "result": 1,
+      "logical_bytes": [
+        170,
+        170,
+        170,
+        170,
+        170,
+        170,
+        170,
+        170
+      ]
+    },
+    {
+      "name": "no_write",
+      "at": 2,
+      "result": 6,
+      "logical_bytes": [
+        170,
+        170,
+        170,
+        170,
+        170,
+        170,
+        170,
+        170
+      ]
+    },
+    {
+      "name": "high_flags",
+      "at": 2,
+      "result": 2,
+      "logical_bytes": [
+        170,
+        170,
+        170,
+        170,
+        170,
+        170,
+        170,
+        170
+      ]
+    },
+    {
+      "name": "bad_backing",
+      "at": 2,
+      "result": 3,
+      "logical_bytes": [
+        170,
+        170,
+        170,
+        170,
+        170,
+        170,
+        170,
+        170
+      ]
+    },
+    {
+      "name": "null_map",
+      "at": 2,
+      "result": 1,
+      "logical_bytes": [
+        170,
+        170,
+        170,
+        170,
+        170,
+        170,
+        170,
+        170
+      ]
+    },
+    {
+      "name": "null_catalog",
+      "at": 2,
+      "result": 1,
+      "logical_bytes": [
+        170,
+        170,
+        170,
+        170,
+        170,
+        170,
+        170,
+        170
+      ]
+    },
+    {
+      "name": "null_spans",
+      "at": 2,
+      "result": 1,
+      "logical_bytes": [
+        170,
+        170,
+        170,
+        170,
+        170,
+        170,
+        170,
+        170
+      ]
+    },
+    {
+      "name": "too_many_spans",
+      "at": 2,
+      "result": 1,
+      "logical_bytes": [
+        170,
+        170,
+        170,
+        170,
+        170,
+        170,
+        170,
+        170
+      ]
+    },
+    {
+      "name": "bad_map_stale",
+      "at": 2,
+      "result": 2,
+      "logical_bytes": [
+        170,
+        170,
+        170,
+        170,
+        170,
+        170,
+        170,
+        170
+      ]
+    },
+    {
+      "name": "bad_backing_stale",
+      "at": 2,
+      "result": 3,
+      "logical_bytes": [
+        170,
+        170,
+        170,
+        170,
+        170,
+        170,
+        170,
+        170
+      ]
+    },
+    {
+      "name": "stale_bad_address",
+      "at": 1,
+      "result": 4,
+      "logical_bytes": [
+        170,
+        170,
+        170,
+        170,
+        170,
+        170,
+        170,
+        170
+      ]
+    },
+    {
+      "name": "bad_address_binding",
+      "at": 1,
+      "result": 5,
+      "logical_bytes": [
+        170,
+        170,
+        170,
+        170,
+        170,
+        170,
+        170,
+        170
+      ]
+    },
+    {
+      "name": "permission_binding",
+      "at": 2,
+      "result": 6,
+      "logical_bytes": [
+        170,
+        170,
+        170,
+        170,
+        170,
+        170,
+        170,
+        170
+      ]
+    }
+  ],
+  "header_sha256": "35962469b3e4fa21934e0cfb428a14bb7437213490502ca639ece8c23c6fff16"
+}

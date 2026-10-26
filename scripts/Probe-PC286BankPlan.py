@@ -17,7 +17,11 @@ def main():
     parser.add_argument('--output', required=True, type=Path)
     parser.add_argument('--catalog', action='store_true',
                         help='Compile the unbound catalog plus bank-plan closure witness')
+    parser.add_argument('--store4-model', action='store_true',
+                        help='Compile the host-memory experiment closure; not a native provider')
     args = parser.parse_args()
+    if args.catalog and args.store4_model:
+        parser.error('--catalog and --store4-model are separate profiles')
     root = Path(__file__).resolve().parents[1]
     lock = json.loads((root / 'scripts/pc286-toolchain-lock.json').read_text(encoding='utf-8'))
     for row in lock['selected_members']:
@@ -33,7 +37,7 @@ def main():
     source = root / 'probes/pc286/bank-plan.c'
     public_names = {'cs_bm_validate_', 'cs_bm_check_', 'cs_bm_plan4_'}
     input_names = ['arch/i286/c16.h', 'probes/pc286/bank-plan.h', 'probes/pc286/bank-plan.c']
-    if args.catalog:
+    if args.catalog or args.store4_model:
         # Original single-translation-unit witness, not a target link/ABI proof.
         source = out / 'catalog-closure.c'
         source.write_text('#include "' + (root / 'probes/pc286/bank-plan.c').as_posix() +
@@ -41,6 +45,11 @@ def main():
                           '"\n', encoding='utf-8')
         public_names.add('cs_bc_validate_')
         input_names += ['probes/pc286/bank-catalog.h', 'probes/pc286/bank-catalog.c']
+    if args.store4_model:
+        with source.open('a', encoding='utf-8') as f:
+            f.write('#include "' + (root / 'probes/pc286/store4-model.c').as_posix() + '"\n')
+        public_names.update(('cs_bs_store4_', 'cs_bs_epoch_next_'))
+        input_names += ['probes/pc286/store4-model.h', 'probes/pc286/store4-model.c']
     rows = []
     for model in ('ms', 'mm', 'ml'):
         for opt in ('od', 'os'):
@@ -85,7 +94,7 @@ def main():
               for p in input_names}
     report = dict(compiler_pin=lock['release'], compiler_calls=6, objects=6,
                   inputs=inputs, records=rows, linked=False, target_executed=False,
-                  profile='catalog-closure' if args.catalog else 'bank-plan',
+                  profile='store4-model-closure' if args.store4_model else 'catalog-closure' if args.catalog else 'bank-plan',
                   scope='Compiler metadata/import audit only, not target link/complete ISA/ABI/runtime proof',
                   stack_policy='-s is diagnostic only; no production stack-check waiver')
     (out / 'report.json').write_text(json.dumps(report, indent=2) + '\n', encoding='utf-8')

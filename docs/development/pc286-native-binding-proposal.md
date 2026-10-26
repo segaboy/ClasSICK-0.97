@@ -112,3 +112,8 @@ Qualified far conversion and alignment; physical alias proof; chunk lifetime acr
 
 ## Lead disposition (engineering only)
 SRC-0462: adopt with changes as a PROPOSED design, not an implementation authorization. D1 chooses one-shot preflight/commit; D2 retains separate illustrative STALE/BINDING results pending API review; D3 requires no-wrap exhaustion; D4 chooses complete per-call numeric validation initially; D5 defers transaction-capable providers. Address zero is valid when its four-byte span is admitted. All borrows precede commit. The worker's 65536-byte-bank example and bind-only validation shortcut were rejected against the current contracts. Map/binding changes, unlike guest-handle relocation inside fixed RAM, invalidate the epoch. No new test above was executed. Far conversion, physical ownership, C16 link/ABI and measured costs remain open.
+
+2026-10-25,SRC-0466/0467:the narrow [host-memory experiment](pc286-store4-model.md)
+is implemented and verified underSPEC-0069. Its model-only API/refusal/span
+choices are selected there. This does not finalize the proposed native provider
+or clear the physical ownership,far conversion,link/ABI or measured-cost gates.

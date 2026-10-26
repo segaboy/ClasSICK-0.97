@@ -1,5 +1,7 @@
 # ClasSICK 0.97 working instructions
 
+2026-10-25,SRC-0463..0467/IMPL-0079/TEST-0092:focused Mac source review isolates pre-ack instability;no speculative driver edit. Prior Windows CI i686 API-level failure reproduced/fixed.286 checked-write host model passes69 oracle assertions/author suite in four profiles and six80286/USE16 objects,unlinked/unrun;native provider remains open. No new VM/emulator trial or media;Mac motion/PC GUI drag/release still block release. [Evidence](docs/development/input-review-and-store4.json).
+
 2026-10-25,SRC-0456..0462/IMPL-0078/TEST-0091:explicit fresh-helper approval recorded. Original host helper/fake guards/one-shot observer pass four focused CTests in three profiles;native input remains unqualified. Snow foreground refused,PC injected motion negative/device control positive;physical check NOT PERFORMED. Active-time cap exceeded,diagnostic run only;owned sessions closed/media preserved.286 binding proposal corrected,not implemented.65PNG/twoGIF;Mac motion/PC GUI drag/release gates remain. [Evidence](docs/development/windows-input-helper-evidence.md).
 
 2026-10-25,SRC-0453..0455:680cdec native/Windows CI passes;unbooted first-input profiles verify with unchanged normal bytes. Strict schema2 package evidence locator passes115 local checks/legacy tree comparison/35 overlapping frozen cases/two faulty controls;no release inputs frozen. Helper approval,Mac motion,PC GUI drag/release remain open;286 numeric catalog retained. [Evidence](docs/development/paired-evidence-locator.md).

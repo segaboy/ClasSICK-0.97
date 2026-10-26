@@ -1,0 +1,439 @@
+{
+  "date": "2026-10-25",
+  "sources": [
+    "SRC-0463",
+    "SRC-0464",
+    "SRC-0465",
+    "SRC-0466",
+    "SRC-0467"
+  ],
+  "baseline_revision": "711bf8487ac6ca2372d1646517da71514f596bd1",
+  "prior_CI": {
+    "run": 40245682486,
+    "native": "success",
+    "windows": "failure",
+    "failure": "i686 SDK API declarations hidden without explicit Windows version definitions"
+  },
+  "SDK_fix": {
+    "targets": [
+      "classick_windows_input_guard",
+      "classick_windows_capture_compile"
+    ],
+    "definitions": [
+      "WINVER=0x0A00",
+      "_WIN32_WINNT=0x0A00"
+    ],
+    "before_reproduced": true,
+    "after_i686_four_helper_CTests_passed": true,
+    "guest_code_changed": false
+  },
+  "Mac_source_review": {
+    "reused_source": "SRC-0363",
+    "bytes": 88330952,
+    "sha256": "2a13683ee0e423ee3cdf2781a4ce6b4df65c1e069a269e4234fa6964b4a3bea0",
+    "pages": 394,
+    "printed_pages": [
+      56,
+      57,
+      58,
+      59,
+      177
+    ],
+    "figures_rechecked": [
+      57,
+      59,
+      177
+    ],
+    "first_loss_raw": [
+      11488332,
+      10437700,
+      10439756
+    ],
+    "pre_ack_masked_xor": 3147784,
+    "post_ack_masked_xor": 2056,
+    "conclusion": "Observed instability already exists before acknowledge;changing acknowledgement alone does not explain/fix this retained record",
+    "hardware_cause_established": false
+  },
+  "PC_docs": {
+    "Oracle": "https://docs.oracle.com/en/virtualization/virtualbox/7.2/user/working-with-vms.html",
+    "Snow": "https://docs.snowemu.com/manual/input",
+    "conclusion": "Documented capture requirements do not establish acceptance of Windows injected input;current Snow docs are not proof of installed1.5.0 UI",
+    "Microsoft_search_result": "excluded;no implementation or claims adopted"
+  },
+  "worker": {
+    "provider": "Copilot",
+    "model": "claude-sonnet-5.5",
+    "effort": "low",
+    "execution": {
+      "round": "store4",
+      "worker": "copilot",
+      "exit_code": 0,
+      "outer_timeout": false,
+      "elapsed_seconds": 109.7,
+      "input_bytes": 17161,
+      "input_sha256": "6c91da7dbe27dea9467e3903f911927c9aa8ad6448ba6c4357f0acb18151a61b",
+      "stderr_bytes": 0
+    },
+    "reported_premium_requests": 1,
+    "tool_calls": [
+      "view"
+    ],
+    "repository_writes": 0,
+    "tests_executed": [],
+    "artifact_lines": {
+      "header": 24,
+      "implementation": 151,
+      "author_tests": 146
+    },
+    "capture_sha256": "621c0422fda3866d2ce24c887efb9ff266f456c73c15b1c169504447432feab3"
+  },
+  "checks": {
+    "frozen_expectations_sha256": "95976ef6e4daf45dcac33014f52d40480573510be46fd13dceea196f21095068",
+    "results": [
+      {
+        "profile": "clang",
+        "suite": "author",
+        "passed": true,
+        "stdout": "pc286-store4-model: PASS"
+      },
+      {
+        "profile": "clang",
+        "suite": "oracle",
+        "passed": true,
+        "stdout": "store4 oracle: 69 assertions,0 failures;30 frozen cases plus post-review regressions"
+      },
+      {
+        "profile": "gcc",
+        "suite": "author",
+        "passed": true,
+        "stdout": "pc286-store4-model: PASS"
+      },
+      {
+        "profile": "gcc",
+        "suite": "oracle",
+        "passed": true,
+        "stdout": "store4 oracle: 69 assertions,0 failures;30 frozen cases plus post-review regressions"
+      },
+      {
+        "profile": "san",
+        "suite": "author",
+        "passed": true,
+        "stdout": "pc286-store4-model: PASS"
+      },
+      {
+        "profile": "san",
+        "suite": "oracle",
+        "passed": true,
+        "stdout": "store4 oracle: 69 assertions,0 failures;30 frozen cases plus post-review regressions"
+      },
+      {
+        "compiled_faulty_control": "three-stores",
+        "detected": true
+      },
+      {
+        "compiled_faulty_control": "ignored-late-null",
+        "detected": true
+      },
+      {
+        "compiled_faulty_control": "ignored-stale",
+        "detected": true
+      }
+    ]
+  },
+  "integrated_profiles": [
+    {
+      "profile": "Clang-Debug",
+      "focused_CTest_suites_passed": 6
+    },
+    {
+      "profile": "GCC-x64-Release",
+      "focused_CTest_suites_passed": 6
+    },
+    {
+      "profile": "Clang-ASanUBSan",
+      "focused_CTest_suites_passed": 6
+    },
+    {
+      "profile": "GCC-i686-Debug",
+      "focused_CTest_suites_passed": 6
+    }
+  ],
+  "frozen_expectations_sha256": "95976ef6e4daf45dcac33014f52d40480573510be46fd13dceea196f21095068",
+  "final_C16": {
+    "compiler_pin": "2026-10-01-Build",
+    "objects": 6,
+    "inputs": {
+      "arch/i286/c16.h": "0d7634a598aa92a0971f8e1bcf55b63df0f3820cb78d4f7817641b27544a3920",
+      "probes/pc286/bank-plan.h": "7650a2c753f561d341430fe796d5852fea1c276a3547af2a17bed63397bf3bf1",
+      "probes/pc286/bank-plan.c": "34201bf3b4d83c21d739a8a80d4a973f1b1fc5525c99fac87b30c63239473c56",
+      "probes/pc286/bank-catalog.h": "942bacde89cad3e2c5c93c972b92588dab633c4271faf1f1b58b0cd6b6d72217",
+      "probes/pc286/bank-catalog.c": "d4a0a4fc4f505f6ae9a05746cd918d75cf8ecdf5dad0f79f9bf94255bc104c54",
+      "probes/pc286/store4-model.h": "35962469b3e4fa21934e0cfb428a14bb7437213490502ca639ece8c23c6fff16",
+      "probes/pc286/store4-model.c": "569d418c2f6e0e67a7faf1f59ff24c4e5734887c31dbff65fad8f16f75125483"
+    },
+    "records": [
+      {
+        "case": "ms-od",
+        "external_symbols": [
+          "cs_bm_validate_",
+          "cs_bc_validate_",
+          "cs_bm_plan4_"
+        ],
+        "defined_symbols": [
+          "cs_bm_validate_",
+          "cs_bm_check_",
+          "cs_bm_plan4_",
+          "cs_bc_validate_",
+          "cs_bs_store4_",
+          "cs_bs_epoch_next_"
+        ],
+        "unresolved_symbols": [],
+        "segments": [
+          [
+            "_TEXT",
+            "16",
+            "000015AD"
+          ],
+          [
+            "CONST",
+            "16",
+            "00000000"
+          ],
+          [
+            "CONST2",
+            "16",
+            "00000000"
+          ],
+          [
+            "_DATA",
+            "16",
+            "00000000"
+          ]
+        ],
+        "object_bytes": 6845,
+        "object_sha256": "623358fa7ec1246a77659f44fcc63328f6f5c2171b79f5ef54eb257447b35c92"
+      },
+      {
+        "case": "ms-os",
+        "external_symbols": [
+          "cs_bm_validate_",
+          "cs_bc_validate_",
+          "cs_bm_plan4_"
+        ],
+        "defined_symbols": [
+          "cs_bm_validate_",
+          "cs_bm_check_",
+          "cs_bm_plan4_",
+          "cs_bc_validate_",
+          "cs_bs_store4_",
+          "cs_bs_epoch_next_"
+        ],
+        "unresolved_symbols": [],
+        "segments": [
+          [
+            "_TEXT",
+            "16",
+            "00000CFF"
+          ],
+          [
+            "CONST",
+            "16",
+            "00000000"
+          ],
+          [
+            "CONST2",
+            "16",
+            "00000000"
+          ],
+          [
+            "_DATA",
+            "16",
+            "00000000"
+          ]
+        ],
+        "object_bytes": 4523,
+        "object_sha256": "4345de1ce10ce910c7d84166437171cc7c1abf77c67e456cc4606c1d1a0de95e"
+      },
+      {
+        "case": "mm-od",
+        "external_symbols": [
+          "cs_bm_validate_",
+          "cs_bc_validate_",
+          "cs_bm_plan4_"
+        ],
+        "defined_symbols": [
+          "cs_bm_validate_",
+          "cs_bm_check_",
+          "cs_bm_plan4_",
+          "cs_bc_validate_",
+          "cs_bs_store4_",
+          "cs_bs_epoch_next_"
+        ],
+        "unresolved_symbols": [],
+        "segments": [
+          [
+            "catalog-closure_TEXT",
+            "16",
+            "000015B2"
+          ],
+          [
+            "CONST",
+            "16",
+            "00000000"
+          ],
+          [
+            "CONST2",
+            "16",
+            "00000000"
+          ],
+          [
+            "_DATA",
+            "16",
+            "00000000"
+          ]
+        ],
+        "object_bytes": 6853,
+        "object_sha256": "02a5de674f7cbf324f532b97db775be10e1cbd15a12775c6bb091f290c32af9e"
+      },
+      {
+        "case": "mm-os",
+        "external_symbols": [
+          "cs_bm_validate_",
+          "cs_bc_validate_",
+          "cs_bm_plan4_"
+        ],
+        "defined_symbols": [
+          "cs_bm_validate_",
+          "cs_bm_check_",
+          "cs_bm_plan4_",
+          "cs_bc_validate_",
+          "cs_bs_store4_",
+          "cs_bs_epoch_next_"
+        ],
+        "unresolved_symbols": [],
+        "segments": [
+          [
+            "catalog-closure_TEXT",
+            "16",
+            "00000D06"
+          ],
+          [
+            "CONST",
+            "16",
+            "00000000"
+          ],
+          [
+            "CONST2",
+            "16",
+            "00000000"
+          ],
+          [
+            "_DATA",
+            "16",
+            "00000000"
+          ]
+        ],
+        "object_bytes": 4545,
+        "object_sha256": "268c5e1762fc26ef6717f704109c0085679294352b4bc0a16ab2bc1bb1ced066"
+      },
+      {
+        "case": "ml-od",
+        "external_symbols": [
+          "cs_bm_validate_",
+          "cs_bc_validate_",
+          "cs_bm_plan4_"
+        ],
+        "defined_symbols": [
+          "cs_bm_validate_",
+          "cs_bm_check_",
+          "cs_bm_plan4_",
+          "cs_bc_validate_",
+          "cs_bs_store4_",
+          "cs_bs_epoch_next_"
+        ],
+        "unresolved_symbols": [],
+        "segments": [
+          [
+            "catalog-closure_TEXT",
+            "16",
+            "00001820"
+          ],
+          [
+            "CONST",
+            "16",
+            "00000000"
+          ],
+          [
+            "CONST2",
+            "16",
+            "00000000"
+          ],
+          [
+            "_DATA",
+            "16",
+            "00000000"
+          ]
+        ],
+        "object_bytes": 7496,
+        "object_sha256": "f909dfa914e8a47b10f1a533db0a66da1ce5f8921151d98ef9112971f7e2d8f2"
+      },
+      {
+        "case": "ml-os",
+        "external_symbols": [
+          "cs_bm_validate_",
+          "cs_bc_validate_",
+          "cs_bm_plan4_"
+        ],
+        "defined_symbols": [
+          "cs_bm_validate_",
+          "cs_bm_check_",
+          "cs_bm_plan4_",
+          "cs_bc_validate_",
+          "cs_bs_store4_",
+          "cs_bs_epoch_next_"
+        ],
+        "unresolved_symbols": [],
+        "segments": [
+          [
+            "catalog-closure_TEXT",
+            "16",
+            "00000E7E"
+          ],
+          [
+            "CONST",
+            "16",
+            "00000000"
+          ],
+          [
+            "CONST2",
+            "16",
+            "00000000"
+          ],
+          [
+            "_DATA",
+            "16",
+            "00000000"
+          ]
+        ],
+        "object_bytes": 4947,
+        "object_sha256": "582e72410998aa04f6798999281698d3d72c004d4439715f4f3c4c226f75d783"
+      }
+    ],
+    "linked": false,
+    "target_executed": false
+  },
+  "remaining_balances": {
+    "Copilot": "unavailable",
+    "Claude": "unavailable",
+    "Grok": "unavailable",
+    "Antigravity": "unavailable"
+  },
+  "native_provider_qualified": false,
+  "release_ready": false,
+  "new_VM_emulator_hardware_runs": 0,
+  "media": {
+    "PNG": 65,
+    "GIF": 2,
+    "new": 0
+  }
+}

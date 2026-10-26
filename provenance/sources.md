@@ -4550,3 +4550,28 @@ wrong locator rejected for each component. No native package/trial/publication.
 
 2026-10-25. Original public numeric model inputs only;fresh Copilot proposal adopted with corrections to bank maximum,borrow ordering,validation and epoch exhaustion. PROPOSED;no native binding,far conversion or new executed tests.
 [Review](../docs/development/windows-input-helper-evidence.md).
+
+## SRC-0463 - Focused admitted SCC latch and pre-ack review
+
+2026-10-25. Reidentified SRC-0363 and checked selected prose/page images;own trace pre-ack masked XOR300808 narrows diagnosis. No new historical/physical conclusion or manual transfer.
+[Evidence](../docs/development/input-review-and-store4.json).
+
+## SRC-0464 - Publisher PC input and capture documentation review
+
+2026-10-25. Oracle7.2/Snow current user-manual prose only;capture is not proof of injected-event acceptance. Installed Snow UI applicability remains open. Microsoft sample search result excluded,not a source.
+[Evidence](../docs/development/input-review-and-store4.json).
+
+## SRC-0465 - Host i686 API-level failure and scoped fix
+
+2026-10-25. Prior40245682486 Windows CI failure reproduced locally;explicit host-tool API-level defines fix four i686 helper tests. No guest/runtime or input-policy change.
+[Evidence](../docs/development/input-review-and-store4.json).
+
+## SRC-0466 - Original bounded host-memory store4 artifacts
+
+2026-10-25. Fresh Copilot original-only primary returns model/API/author tests;no worker execution/writes. Lead integrates with bytewise preservation and checked narrowing. SPEC-0069 host experiment only.
+[Evidence](../docs/development/input-review-and-store4.json).
+
+## SRC-0467 - Lead store4 host,compiled-defect and C16 verification
+
+2026-10-25. 69 oracle assertions/author suite in four host profiles,three faulty controls,six pinned80286/USE16 closure objects with no unresolved imports. No target link/execution or native provider qualified.
+[Evidence](../docs/development/input-review-and-store4.json).
