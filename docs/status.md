@@ -1,5 +1,7 @@
 # Project status
 
+2026-10-26,SRC-0482..0484/SPEC-0075/IMPL-0083/TEST-0096:separate timer-poll controller/inbox/native binding added opt-in. Author92/frozen88 assertions/four host profiles,two CTests each/three compiled defects pass. Native/default-ROM proof pending;no target/desktop run,input or release pass.68PNG/twoGIF/286 retained. [Review](development/mac-timer-poll.md).
+
 2026-10-26,SRC-0481:659d9ac fullCI40367008180 passes;seven68000 compilations,40/12-byte layout,O0/O2/Os twins,zero imports/mutable globals,max72-byte single frame verified against Git-LF inputs. Host/C16 proofs retained;no IO/IRQ/boot binding,target execution or release pass. [Review](development/mac-polled-phase-model.md).
 
 2026-10-26,SRC-0479/0480/SPEC-0074/IMPL-0082/TEST-0095:original isolated phase model passes4096 oracle cases/40475 assertions per four host profiles,two focused CTests/three faulty controls.286 six C16 objects/three refusals plus legacy regression pass,unlinked/unrun;68000 proof pending. No IO/IRQ/boot binding or normal input change;release gates remain,68PNG/twoGIF preserved. [Review](development/mac-polled-phase-model.md).

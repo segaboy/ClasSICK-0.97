@@ -4639,3 +4639,15 @@ wrong locator rejected for each component. No native package/trial/publication.
 ## SRC-0481 - Committed-source isolated68000 compiler proof
 
 2026-10-26. Source659d9ac fullCI40367008180 succeeds in both jobs. Seven compilations confirm40/12-byte layout,O0/O2/Os twin identity,no imports/mutable globals and maximum72-byte single frame. Four manifest inputs match Git-LF source hashes. Unlinked/unrun;no hardware,whole-stack or release qualification. [Receipt](../docs/development/mac-polled-phase-model.json).
+
+## SRC-0482 - Published timer and live-DCD interface review
+
+2026-10-26. Admitted SRC-0078/SRC-0363 identities and register prose/figures rechecked. Manual pages lead-only;reg7 ambiguity,clock-rate assumptions and manufacturer/sample algorithms excluded. [Review](../docs/development/mac-timer-poll.md).
+
+## SRC-0483 - Original bounded timer-controller proposal
+
+2026-10-26. Copilot Sonnet5.5 Low,20130 frozen bytes/one view/205.55s,three files/566 lines. No worker writes/commands/tests;one reported premium request. [Review](../docs/development/mac-timer-poll.md).
+
+## SRC-0484 - Lead timer-controller integration and host proof
+
+2026-10-26. Author92/independent88 assertions/four profiles,two focused CTests each,three compiled faulty controls pass/detect. Test corrections and stage/peak/native binding additions disclosed. Native build/default identity/trial pending. [Review](../docs/development/mac-timer-poll.md).

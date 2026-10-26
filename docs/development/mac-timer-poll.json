@@ -1,0 +1,245 @@
+{
+  "date": "2026-10-26",
+  "specification": "SPEC-0075",
+  "sources": [
+    "SRC-0482",
+    "SRC-0483",
+    "SRC-0484"
+  ],
+  "implementation": "IMPL-0083",
+  "test": "TEST-0096",
+  "worker": {
+    "provider": "Copilot",
+    "model": "claude-sonnet-5.5",
+    "effort": "low",
+    "execution": {
+      "round": "primary",
+      "worker": "copilot",
+      "exit_code": 0,
+      "outer_timeout": false,
+      "elapsed_seconds": 205.55,
+      "input_bytes": 20130,
+      "input_sha256": "75c3ef7572aa0a05828205346ff63f052bd34e88bfe9c8ddeb50e31c2b212b82",
+      "stderr_bytes": 0
+    },
+    "frozen_inputs": {
+      "revision": "b622d472cb84fe09d1183e480d3ff141584b377f",
+      "inputs": {
+        "platform/mac128k/motion.h": "f9570aca93926210ca636e89cd7137206ea49bea1ef686b7f42dc2e2985ef21a",
+        "platform/mac128k/polled-phase.h": "889aa6a1314e32114722f8ef822de14b100f197927fc77b9768561ac1566428f",
+        "platform/mac128k/polled-phase.c": "537d6d62bf3177e16153c86ba4d42fee90a90192bf17e103fc635f5bf1518766",
+        "platform/mac128k/rom.h": "65d6b789b7d809520773c77df787694010e2afcb0f8b05d7021b726c393705c7",
+        "apps/window-scene/inbox.h": "2bebf4901506814c270c4612b9170ad0dce2da58a037fa4e187f8a748bc3fa90"
+      },
+      "packet_bytes": 20130,
+      "packet_sha256": "75c3ef7572aa0a05828205346ff63f052bd34e88bfe9c8ddeb50e31c2b212b82"
+    },
+    "view_calls": 1,
+    "commands": 0,
+    "writes": 0,
+    "tests_executed": 0,
+    "original_artifact_lines": 566,
+    "reported_premium_requests": 1,
+    "capture_sha256": "c0018c6b7d4ca32b80adbdfb4b1769f02b1d4958f2210046c7af6269a834569f"
+  },
+  "lead_corrections": [
+    "Eight test byte conversions;inbox resume result BASELINE/fault result FAULTED;failure-line and assertion reporting",
+    "Reached-stage diagnostics before IO;nonzero unreachable decoder failure cause;peak includes baseline",
+    "Independent oracle corrects old inbox resume result before worker inspection;old frozen version retained",
+    "Lead adds opt-in native binding,mode refusals,CMake and CI;no normal admission-policy edit",
+    "Private negative-control generator initially matched two NV writes;use unique prepare reset context before actual control compilation"
+  ],
+  "original_strict_author_compile_exit": 1,
+  "original_results": [
+    {
+      "suite": "author",
+      "compile_exit": 0,
+      "run_exit": 2,
+      "stdout": ""
+    },
+    {
+      "suite": "oracle",
+      "compile_exit": 0,
+      "run_exit": 0,
+      "stdout": "timer poll oracle:88 assertions\r\n"
+    }
+  ],
+  "oracle_history": [
+    {
+      "sha256": "dd8a26e809c72935e2a0cc27060f8b90ce2659e74b3ecf4872ca0979a9937cc4",
+      "worker_output_inspected": false,
+      "cases": "protocol sequence,ordered motion,baseline/loss,recovery,overflow,stale epoch,refusals,alias/timer failures"
+    },
+    {
+      "previous": "dd8a26e809c72935e2a0cc27060f8b90ce2659e74b3ecf4872ca0979a9937cc4",
+      "sha256": "b41f66fd9608a068f9ef1ce24dcd23687d9aa822fbebbe749b3b6a6084989d5f",
+      "worker_output_inspected": false,
+      "change": "Use existing inbox resume documented implementation result BASELINE,not OK;old independent draft retained."
+    }
+  ],
+  "host_checks": {
+    "oracle_sha256": "b41f66fd9608a068f9ef1ce24dcd23687d9aa822fbebbe749b3b6a6084989d5f",
+    "results": [
+      {
+        "profile": "clang",
+        "suite": "author",
+        "passed": true,
+        "stdout": "timer poll author:92 assertions,0 failures"
+      },
+      {
+        "profile": "clang",
+        "suite": "oracle",
+        "passed": true,
+        "stdout": "timer poll oracle:88 assertions"
+      },
+      {
+        "profile": "gcc64",
+        "suite": "author",
+        "passed": true,
+        "stdout": "timer poll author:92 assertions,0 failures"
+      },
+      {
+        "profile": "gcc64",
+        "suite": "oracle",
+        "passed": true,
+        "stdout": "timer poll oracle:88 assertions"
+      },
+      {
+        "profile": "gcc32",
+        "suite": "author",
+        "passed": true,
+        "stdout": "timer poll author:92 assertions,0 failures"
+      },
+      {
+        "profile": "gcc32",
+        "suite": "oracle",
+        "passed": true,
+        "stdout": "timer poll oracle:88 assertions"
+      },
+      {
+        "profile": "san",
+        "suite": "author",
+        "passed": true,
+        "stdout": "timer poll author:92 assertions,0 failures"
+      },
+      {
+        "profile": "san",
+        "suite": "oracle",
+        "passed": true,
+        "stdout": "timer poll oracle:88 assertions"
+      },
+      {
+        "compiled_fault": "enable-SCC-master",
+        "detected": true,
+        "stdout": "FAIL:59:e.log[i]==setup_writes[i]"
+      },
+      {
+        "compiled_fault": "omit-overrun-check",
+        "detected": true,
+        "stdout": "FAIL:72:tick(&p,&e)==CS_MAC_MOTION_LOST"
+      },
+      {
+        "compiled_fault": "deliver-unstable",
+        "detected": true,
+        "stdout": "FAIL:68:tick(&p,&e)==CS_MAC_MOTION_LOST"
+      }
+    ],
+    "target_executed": false
+  },
+  "integrated_checks": [
+    {
+      "profile": "clang",
+      "focused_CTests": 2,
+      "passed": true,
+      "JUnit_sha256": "ba4fb7d918230b4b8a7cea97113b349a4791197bd08daa997f57250447bab752"
+    },
+    {
+      "profile": "gcc64",
+      "focused_CTests": 2,
+      "passed": true,
+      "JUnit_sha256": "274981759d86989f9b06c6aa8963b284e7786e56503d1ce7fba1a6d4436be77b"
+    },
+    {
+      "profile": "gcc32",
+      "focused_CTests": 2,
+      "passed": true,
+      "JUnit_sha256": "8149018a0d4f79ea1881b542fc1e4a285f86e53c0e52e73c871c8133dc8006ff"
+    },
+    {
+      "profile": "san",
+      "focused_CTests": 2,
+      "passed": true,
+      "JUnit_sha256": "b8b625cd11cf11cce3d955345d5701ed0f6638e2643fa03bfb34a3c90af7dbe2"
+    }
+  ],
+  "hardware_sources": [
+    {
+      "source": "SRC-0078",
+      "file": "SY6522-programming.pdf",
+      "bytes": 585409,
+      "pages": 7,
+      "sha256": "96f0d696218a4cebb1124f555dbb13774d125d3f735ab7630d1418fc047e92fe",
+      "locators": "PDF3..6,printed4..11,register diagrams/prose",
+      "excluded": "reg7 write/compare ambiguity;no assumed clock or period formula;no IER reads due known erratum"
+    },
+    {
+      "source": "SRC-0363",
+      "file": "scc_escc_um.pdf",
+      "bytes": 88330952,
+      "pages": 394,
+      "sha256": "2a13683ee0e423ee3cdf2781a4ce6b4df65c1e069a269e4234fa6964b4a3bea0",
+      "locators": "printed177/PDF184,DCD unlatched when WR15 enable is clear;existing selector/spacing facts reused",
+      "excluded": "manufacturer ISR recipes/symbolic listings/sample algorithms"
+    }
+  ],
+  "native_build_and_default_identity": "pending committed-source CI",
+  "boot_trials": 0,
+  "normal_driver_changed": false,
+  "physical_edge_completeness_qualified": false,
+  "timer_frequency_qualified": false,
+  "release_ready": false,
+  "media": {
+    "PNG": 68,
+    "GIF": 2,
+    "new": 0
+  },
+  "286": "Prior six C16 phase objects and legacy regression retained;this Mac-only MMIO controller is not a286 backend.",
+  "remaining_provider_balances": {
+    "Copilot": "unavailable",
+    "Claude": "unavailable",
+    "Grok": "unavailable",
+    "Antigravity": "unavailable"
+  },
+  "builder_mode_refusals": [
+    {
+      "flags": [
+        "--window-timer-poll-probe"
+      ],
+      "exit": 2
+    },
+    {
+      "flags": [
+        "--window-drawing",
+        "--window-timer-poll-probe",
+        "--window-pending-defer-probe"
+      ],
+      "exit": 2
+    },
+    {
+      "flags": [
+        "--window-drawing",
+        "--window-timer-poll-probe",
+        "--window-phase-idle-probe"
+      ],
+      "exit": 2
+    },
+    {
+      "flags": [
+        "--window-drawing",
+        "--window-timer-poll-probe",
+        "--window-first-input-probe"
+      ],
+      "exit": 2
+    }
+  ]
+}

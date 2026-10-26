@@ -3,6 +3,15 @@
 #include "rom.h"
 #include "window-session.h"
 #include "motion.h"
+#ifndef CLASSICK_MAC_TIMER_POLL_PROBE
+#define CLASSICK_MAC_TIMER_POLL_PROBE 0
+#endif
+#if CLASSICK_MAC_TIMER_POLL_PROBE != 0 && CLASSICK_MAC_TIMER_POLL_PROBE != 1
+#error CLASSICK_MAC_TIMER_POLL_PROBE must be 0 or 1
+#endif
+#if CLASSICK_MAC_TIMER_POLL_PROBE
+#include "timer-poll.h"
+#endif
 #include "input-probe.h"
 #include "../../arch/m68k/exclusion.h"
 #include "../../core/services/traps.h"
@@ -82,7 +91,21 @@ _Static_assert(offsetof(struct cs_mac_window_trace,loss_phase)==124,"MWR1 D7 off
 #endif
 
 static cs_mac_window_session session __attribute__((section(".loaded_app")));
+#if CLASSICK_MAC_TIMER_POLL_PROBE
+static cs_mac_timer_poll timer_motion;
+#define motion timer_motion.motion
+#define native_motion_prepare(scc,via) cs_mac_timer_poll_prepare(&timer_motion,scc,via,&session.inbox,(uint32_t)CLASSICK_MAC_DCD_INVERT,4096u)
+#define native_motion_arm() cs_mac_timer_poll_arm(&timer_motion)
+#define native_motion_service() cs_mac_timer_poll_service(&timer_motion)
+#define native_motion_stop() cs_mac_timer_poll_stop(&timer_motion)
+_Static_assert(sizeof(timer_motion)+sizeof(struct cs_mac_window_trace)<=448,"Timer experiment BSS budget");
+#else
 static struct cs_mac_motion motion;
+#define native_motion_prepare(scc,via) cs_mac_motion_prepare(&motion,scc,&session.inbox,(uint32_t)CLASSICK_MAC_DCD_INVERT)
+#define native_motion_arm() cs_mac_motion_arm(&motion)
+#define native_motion_service() cs_mac_motion_service(&motion)
+#define native_motion_stop() cs_mac_motion_stop(&motion)
+#endif
 static volatile uint32_t terminal;
 _Static_assert(sizeof(struct cs_mac_motion)+sizeof(struct cs_mac_window_trace)<=320,
     "Window entry BSS budget");
@@ -150,7 +173,7 @@ static void saturate(volatile uint32_t *v)
 static void isr_fatal(uint32_t code,int32_t cause)
 {
     via_write(0,14,0x7F);
-    (void)cs_mac_motion_stop(&motion);
+    (void)native_motion_stop();
     cs_mac_trace.cause=cause;cs_mac_diag.fault=code;terminal=1u;
 }
 void cs_mac_window_interrupt(uint32_t source)
@@ -165,8 +188,12 @@ void cs_mac_window_interrupt(uint32_t source)
         (void)via_read(0,1); /* CA1 acknowledge only; PB not sampled here */
         vbl=1;saturate(&cs_mac_diag.ticks);saturate(&cs_mac_trace.vbl);
     }
+#if !CLASSICK_MAC_TIMER_POLL_PROBE
     if(source==1u && !vbl)return; /* empty VIA: no fabricated baseline */
-    r=cs_mac_motion_service(&motion); /* one finite pass; RR3 authoritative */
+#else
+    (void)vbl; /* T1 controller checks IFR6;empty IRQ never creates baseline. */
+#endif
+    r=native_motion_service(); /* one finite pass;profile chooses RR3 or T1. */
     if(r==CS_MAC_MOTION_ARGUMENT || r==CS_MAC_MOTION_STATE || r==CS_MAC_MOTION_FAULT)
         isr_fatal(15,r);
 }
@@ -176,7 +203,7 @@ __attribute__((noreturn)) static void fg_fatal(uint32_t code,int32_t cause)
 {
     uint32_t token=cs_m68k_foreground_enter(0);
     if(!terminal){
-        via_write(0,14,0x7F);(void)cs_mac_motion_stop(&motion);
+        via_write(0,14,0x7F);(void)native_motion_stop();
         cs_mac_trace.cause=cause;cs_mac_diag.fault=code;terminal=1u;
     }
     cs_m68k_foreground_leave(0,token);
@@ -244,12 +271,12 @@ void cs_mac_main(void)
     if(r!=CS_MAC_WINDOW_OK){cs_mac_trace.cause=r;halt(3);}
     cs_mac_diag.stage=5;
     mio.cookie=0;mio.read=scc_read;mio.write=scc_write;mio.pb=motion_pb;
-    r=cs_mac_motion_prepare(&motion,&mio,&session.inbox,(uint32_t)CLASSICK_MAC_DCD_INVERT);
+    r=native_motion_prepare(&mio,&io);
     if(r!=CS_MAC_MOTION_OK){cs_mac_trace.cause=r;halt(12);}
     cs_mac_diag.stage=6;
     /* Still IPL7 and quiescent: install level 1/2/3 autovectors. */
     cs_mac_window_install_vectors();
-    r=cs_mac_motion_arm(&motion);
+    r=native_motion_arm();
     if(r!=CS_MAC_MOTION_OK){cs_mac_trace.cause=r;halt(13);}
     via_write(0,14,0x82); /* CA1 enable last */
     cs_mac_diag.stage=16u;cs_mac_diag.fault=0u;

@@ -68,9 +68,13 @@ def main():
     p.add_argument('--window-idle-probe',action='store_true',help='Diagnostic: halt in a self-branch after >=500 services; window profile only')
     p.add_argument('--window-pending-defer-probe',action='store_true',help='Experimental one-service pending-edge defer; window profile only')
     p.add_argument('--window-first-input-probe',action='store_true',help='Freeze copied trace on delivered input/loss or >=5000 services; window only')
+    p.add_argument('--window-timer-poll-probe',action='store_true',help='Separate timer-driven live-level polling experiment;window only')
     p.add_argument('--window-phase-idle-probe',action='store_true',help='Experimental phase-only no-decision pass; window profile only')
     p.add_argument('--dcd-invert',type=int,choices=(0,1,2,3),default=0,help='Unverified raw RR0 DCD sense mask; window profile only')
-    a=p.parse_args();native=a.native_drawing or a.selected_drawing or a.outline_drawing or a.window_drawing
+    a=p.parse_args()
+    if a.window_timer_poll_probe and not a.window_drawing:p.error('--window-timer-poll-probe requires --window-drawing')
+    if a.window_timer_poll_probe and (a.window_pending_defer_probe or a.window_phase_idle_probe or a.window_first_input_probe):p.error('Timer experiment cannot combine with SCC defer/phase/first-input experiments')
+    native=a.native_drawing or a.selected_drawing or a.outline_drawing or a.window_drawing
     if a.dcd_invert and not a.window_drawing:p.error('--dcd-invert requires --window-drawing')
     if a.window_idle_probe and not a.window_drawing:p.error('--window-idle-probe requires --window-drawing')
     if a.window_pending_defer_probe and not a.window_drawing:p.error('--window-pending-defer-probe requires --window-drawing')
@@ -113,14 +117,18 @@ def main():
         specification='SPEC-0049';profile='native-outline-preview-v1'
     if a.window_drawing:
         specs=[]
-        for number in ('0070','0072'):
+        for number in (('0070','0072','0074','0075') if a.window_timer_poll_probe else ('0070','0072')):
             found=sorted(repo.glob('docs/specifications/SPEC-'+number+'-*.md'))
             if len(found)!=1:raise ValueError('Specification lookup SPEC-'+number)
             specs.append(found[0].relative_to(repo).as_posix())
         sources=WINDOW_SOURCES;headers=WINDOW_HEADERS+tuple(specs)
+        if a.window_timer_poll_probe:
+            sources=tuple(x for x in sources if x!='platform/mac128k/motion.c')+('platform/mac128k/timer-poll.c','platform/mac128k/polled-phase.c')
+            headers+=('platform/mac128k/timer-poll.h','platform/mac128k/polled-phase.h')
         program_source=None;program_hex='';specification='SPEC-0072';profile='native-window-preview-v1'
         if a.window_pending_defer_probe:profile='native-window-pending-defer-probe-v1'
         if a.window_first_input_probe:profile='native-window-'+('pending-defer-' if a.window_pending_defer_probe else '')+'first-input-probe-v1'
+        if a.window_timer_poll_probe:profile='native-window-timer-poll-'+('idle-' if a.window_idle_probe else '')+'experiment-v1'
         if a.window_phase_idle_probe:profile='native-window-phase-idle-'+('pending-defer-' if a.window_pending_defer_probe else '')+'probe-v1'
     profiles=[]
     for twin in ('a','b'):
@@ -134,6 +142,7 @@ def main():
         if a.outline_drawing:flags+=['-DCLASSICK_OUTLINE_DRAWING=1']
         if a.window_drawing:flags+=['-DCLASSICK_MAC_DCD_INVERT='+str(a.dcd_invert)]
         if a.window_idle_probe or a.window_first_input_probe:flags+=['-DCLASSICK_MAC_IDLE_PROBE=1']
+        if a.window_timer_poll_probe:flags+=['-DCLASSICK_MAC_TIMER_POLL_PROBE=1']
         if a.window_first_input_probe:flags+=['-DCLASSICK_MAC_FIRST_INPUT_PROBE=1']
         if a.window_pending_defer_probe:flags+=['-DCLASSICK_MAC_PENDING_DEFER_PROBE=1']
         if a.window_phase_idle_probe:flags+=['-DCLASSICK_MAC_PHASE_IDLE_PROBE=1']
@@ -153,6 +162,7 @@ def main():
         if a.selected_drawing:required=tuple(x for x in required if x!='cs_native_draw')+('cs_selected_draw','cs_qd_select_get','cs_qd_select_set')
         if a.outline_drawing:required=tuple(x for x in required if x not in ('cs_native_draw','cs_qd_rect','cs_qd_view_rect'))+('cs_outline_draw','cs_qd_view_outline','cs_qd_select_get','cs_qd_select_set')
         if a.window_drawing:required=('cs_mac_main','cs_mac_window_begin','cs_mac_motion_service','cs_foreground_step','cs_mac_window_via_irq','cs_mac_window_scc_irq','cs_mac_window_combined_irq','cs_mac_window_interrupt','cs_product_scene','cs_window_apply','cs_m68k_foreground_enter','cs_m68k_foreground_leave')
+        if a.window_timer_poll_probe:required=tuple(x for x in required if x!='cs_mac_motion_service')+('cs_mac_timer_poll_service','cs_mac_polled_step')
         if a.window_idle_probe or a.window_first_input_probe:required+=('cs_mac_window_idle_checkpoint','cs_mac_window_idle_spin')
         if a.window_first_input_probe:required+=('cs_mac_first_input_probe_gate',)
         if a.window_drawing and not any(name.startswith('cs_cursor_') for name in syms):raise ValueError('Disconnected cursor helper')
@@ -257,6 +267,7 @@ def main():
      'original_program_bytes':len(bytes.fromhex(program_hex)),'execution_path':'direct-native-c' if native else 'guarded-68k-fixture',
      'module_count':len(sources),'selected_ports':bool(a.selected_drawing or a.outline_drawing),'outline_drawing':bool(a.outline_drawing),'native_drawing_context':('SPEC-0041' if native else None),'emulator_run':False,'system1_compatibility_proven':False,
      'inputs':{f:hashlib.sha256((repo/f).read_bytes().replace(b'\r\n',b'\n')).hexdigest() for f in (*sources,*headers)}}
+    if a.window_timer_poll_probe:manifest.update({'timer_poll_experiment':True,'timer_reload_count':4096,'timer_frequency_qualified':False,'physical_edge_completeness_qualified':False,'SCC_master_interrupts':False})
     if a.window_drawing:manifest['window_idle_probe']=bool(a.window_idle_probe)
     if a.window_drawing:manifest['window_pending_defer_probe']=bool(a.window_pending_defer_probe)
     if a.window_drawing:manifest['window_phase_idle_probe']=bool(a.window_phase_idle_probe)

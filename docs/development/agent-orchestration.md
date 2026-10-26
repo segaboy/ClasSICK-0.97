@@ -464,3 +464,7 @@ balances unavailable. This is not evidence of quota savings. [Receipt](boot-inpu
 
 
 2026-10-25 package locator:one Copilot Sonnet5.5 low primary,30543B/146.28s,nine adopted replacements/211 original test lines. One prompt read plus one input-directory listing exceeds one-read cap;no extra source content/writes/commands/tests. Lead preserves requested review schema,corrects two fixture errors,adds resealed controls and executes verification;no second worker/requalification. One reported premium request. All balances unavailable;no measured Codex saving. [Receipt](paired-evidence-locator.json).
+
+## Separate timer-controller slice -2026-10-26
+
+One Copilot Sonnet5.5 Low primary returns566 proposed lines in205.55s from20130 frozen reviewed-public/original bytes and paraphrased eligible interface facts;one view,no writes/commands/tests. Lead adopts sound code,corrects test conversions/two existing API expectations,adds stage/peak diagnostics and native integration. Frozen independent88-assertion oracle precedes output inspection;author92/four profiles and three compiled faults verify integration. One reported premium request;remaining balances unavailable. No redundant provider review or quota-equivalence claim. [Receipt](mac-timer-poll.md).
