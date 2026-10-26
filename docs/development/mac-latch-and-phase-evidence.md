@@ -98,3 +98,5 @@ request each;other providers idle,all-four balances unavailable. No cross-provid
 quota equivalence or measured saving. Raw captures/failed trials stay outside Git.
 286 work is preserved,not restarted or added as a release prerequisite.
 [Machine receipt](mac-latch-and-phase-evidence.json).
+
+2026-10-26 follow-up,SRC-0473..0475:6777f9d fullCI/native identity,cost and unchanged normal-ROM checks now pass. Actual normal Mac/PC physical checks fail usable pointer/dragging;combined experiment boots,but its operator result remains pending. Direct PC read API is unimplemented;all owned sessions closed. [Current receipt](native-input-qualification-20261026.md).

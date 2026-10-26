@@ -4600,3 +4600,18 @@ wrong locator rejected for each component. No native package/trial/publication.
 
 2026-10-26. 63bbccf full native/Windows CI40253599502 passes. Mac normal/inverted source/seal/budgets and PC binding/hash/twin inputs reidentified. Not frozen;desktop access,Mac motion,PC GUI drag/release,E4/package approval remain.
 [Evidence](../docs/development/mac-latch-and-phase-evidence.json).
+
+## SRC-0473 - Committed-source native phase experiment proof
+
+2026-10-26. 6777f9d CI40315483335 succeeds;three64KiB images,43 inputs/seals each verified;default bytes unchanged. Phase148ROM/zeroBSS/+12stack-bound;combined572ROM/+8BSS/+12stack-bound. Not target/input acceptance.
+[Review](../docs/development/native-input-qualification-20261026.md).
+
+## SRC-0474 - Owner physical checks and original framebuffer comparison
+
+2026-10-26. Desktop access restored. Normal Mac and PC owner checks fail usable pointer/dragging;PC63 frames/two unique images show upper-right clipped cross.175104 baseline logical pixels match Mac experiment/PC. Combined Mac physical report pending. All bounded owned trials closed;media/inventory preserved;no release waiver.
+[Review](../docs/development/native-input-qualification-20261026.md).
+
+## SRC-0475 - Published debugger read interface and actual refusal
+
+2026-10-26. Oracle published IMachineDebugger readPhysicalMemory/readVirtualMemory declarations/prose only;no implementation/manual samples. Exact16B own-image-header read in isolated PC returns E_NOTIMPL80004001,no memory returned. No broad dump,input injection or affected Windows raw-input work. Stop unsupported route.
+[Review](../docs/development/native-input-qualification-20261026.md).

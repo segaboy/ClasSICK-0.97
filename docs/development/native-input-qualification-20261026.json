@@ -1,0 +1,284 @@
+{
+  "date": "2026-10-26",
+  "source_ids": [
+    "SRC-0473",
+    "SRC-0474",
+    "SRC-0475"
+  ],
+  "native_verification": {
+    "source_revision": "6777f9d8c46994f5dff484e9f6d33913c7592ff8",
+    "CI_run": 40315483335,
+    "CI_conclusion": "success",
+    "profiles": [
+      {
+        "profile": "native-window-preview-v1",
+        "ROM_sha256": "673a2cca57d1ec9ffd842f4c858fa4aafbcb042ec6f86445ae5717d4816c4965",
+        "ROM_used": 23096,
+        "BSS": 304,
+        "workspace_bytes": 964,
+        "conservative_stack_bound": 4996,
+        "verified_inputs": 43,
+        "image_bytes": 65536,
+        "own_seal_verified": true,
+        "booted": false
+      },
+      {
+        "profile": "native-window-phase-idle-probe-v1",
+        "ROM_sha256": "f962a530df221e7359f23434260c741fca2b9910fcbf05485be99097345f2fd8",
+        "ROM_used": 23244,
+        "BSS": 304,
+        "workspace_bytes": 964,
+        "conservative_stack_bound": 5008,
+        "verified_inputs": 43,
+        "image_bytes": 65536,
+        "own_seal_verified": true,
+        "booted": false,
+        "delta_from_default": {
+          "ROM_used": 148,
+          "BSS": 0,
+          "workspace_bytes": 0,
+          "conservative_stack_bound": 12
+        }
+      },
+      {
+        "profile": "native-window-phase-idle-pending-defer-probe-v1",
+        "ROM_sha256": "440641013979d08cd9616fa911409868bddcf046c8a47273f4c64ae51675e15a",
+        "ROM_used": 23668,
+        "BSS": 312,
+        "workspace_bytes": 964,
+        "conservative_stack_bound": 5008,
+        "verified_inputs": 43,
+        "image_bytes": 65536,
+        "own_seal_verified": true,
+        "booted": false,
+        "delta_from_default": {
+          "ROM_used": 572,
+          "BSS": 8,
+          "workspace_bytes": 0,
+          "conservative_stack_bound": 12
+        }
+      }
+    ],
+    "default_bytes_unchanged": true,
+    "physical_or_release_qualification": false
+  },
+  "physical_observations": {
+    "date": "2026-10-26",
+    "Mac_normal": {
+      "ROM_sha256": "673a2cca57d1ec9ffd842f4c858fa4aafbcb042ec6f86445ae5717d4816c4965",
+      "owner_report": "The screen is visible, but when I mouse over it, my cursor is not visible, so I can't grab the titlebar of the window.",
+      "physical_check": "failed usable pointer/drag check",
+      "observed_guest_counter": 5,
+      "motion_qualified": false
+    },
+    "PC_normal": {
+      "disk_sha256": "66a105266a18b1f8e95593b88e7f8d6b7768a17200af33bd03d8fceadd8b5202",
+      "owner_report": "When I click in the window, I can tell that Virtualbox captures my mouse, but there is no cursor on the screen and I can't interact with anything.",
+      "physical_check": "failed usable pointer/interaction check",
+      "capture_method": "VBox guest framebuffer only;no input injection",
+      "comparison": {
+        "frames": 63,
+        "unique": [
+          {
+            "file": "initial.png",
+            "pixel_sha256": "fc35616101e173a6cdf00a087de676ddccf2f14b39cac974f269dddc4913fdae",
+            "difference_from_initial": null
+          },
+          {
+            "file": "frame-035.png",
+            "pixel_sha256": "d6464e16325ba3637426a6b11375c54a1b1116a71a46731068642a8bba5f7327",
+            "difference_from_initial": [
+              512,
+              213,
+              768,
+              388
+            ]
+          }
+        ]
+      },
+      "cursor_observation": {
+        "initial_cursor": {
+          "rect": [
+            509,
+            381,
+            516,
+            388
+          ],
+          "changed_pixels": 10,
+          "before": [
+            "####...",
+            "####...",
+            "####...",
+            "#######",
+            "####...",
+            "####...",
+            "####..."
+          ],
+          "after": [
+            "###....",
+            "###....",
+            "###....",
+            "###....",
+            "###....",
+            "###....",
+            "###...."
+          ]
+        },
+        "corner_cursor": {
+          "rect": [
+            764,
+            213,
+            768,
+            217
+          ],
+          "changed_pixels": 7,
+          "before": [
+            "....",
+            "....",
+            "....",
+            "...."
+          ],
+          "after": [
+            "####",
+            "...#",
+            "...#",
+            "...#"
+          ]
+        }
+      },
+      "cleanup": {
+        "utc": "2026-10-26T12:12:07.9374506Z",
+        "cold_starts": 1,
+        "state": "poweroff",
+        "unregistered": true,
+        "existing_vm_inventory_preserved": true,
+        "running_state_preserved": true,
+        "post_trial_raw_roundtrip_equal": true,
+        "artifacts_retained": true,
+        "semantic_session_stop_observed": false,
+        "termination": "external poweroff from paused state"
+      }
+    },
+    "not_a_sole_automation_failure": true,
+    "root_cause_established": false,
+    "release_ready": false
+  },
+  "baseline_pixel_parity": {
+    "Mac_original_capture_sha256": "66dfeac998bd18fca1392c140697f7e66d7d95a4c173bbc53d393d7bed330307",
+    "Mac_crop": [
+      245,
+      274,
+      757,
+      616
+    ],
+    "Mac_crop_size": [
+      512,
+      342
+    ],
+    "PC_crop": [
+      256,
+      213,
+      768,
+      555
+    ],
+    "logical_pixels_compared": 175104,
+    "threshold": 128,
+    "logical_differences": 0,
+    "full_color_images_equal": false,
+    "capture_processing": "Exact crops and binary comparison only;no resampling or retouching",
+    "input_qualification": false
+  },
+  "followup_trials": [
+    {
+      "trial": "snow-defer-unlocked",
+      "cleanup": {
+        "status": "wall cap reached",
+        "host_seconds": 180.36,
+        "pid": 36832,
+        "process_exited": true,
+        "forced_process_cleanup": true,
+        "guest_shutdown_claimed": false,
+        "ROM_sha256": "cfa16dc2e816cc833fb6c2d51ca9088fdf26215c6aa989999783dbd08dcb4235"
+      }
+    },
+    {
+      "trial": "snow-menu-primary",
+      "cleanup": {
+        "status": "wall cap reached",
+        "host_seconds": 300.22,
+        "pid": 8712,
+        "process_exited": true,
+        "forced_process_cleanup": true,
+        "guest_shutdown_claimed": false,
+        "ROM_sha256": "cfa16dc2e816cc833fb6c2d51ca9088fdf26215c6aa989999783dbd08dcb4235"
+      }
+    },
+    {
+      "trial": "snow-simple",
+      "cleanup": {
+        "status": "stop requested",
+        "host_seconds": 136.41,
+        "pid": 28520,
+        "process_exited": true,
+        "forced_process_cleanup": true,
+        "guest_shutdown_claimed": false,
+        "ROM_sha256": "673a2cca57d1ec9ffd842f4c858fa4aafbcb042ec6f86445ae5717d4816c4965"
+      }
+    },
+    {
+      "trial": "snow-phase",
+      "cleanup": {
+        "status": "wall cap reached",
+        "host_seconds": 300.64,
+        "pid": 3144,
+        "process_exited": true,
+        "forced_process_cleanup": true,
+        "guest_shutdown_claimed": false,
+        "ROM_sha256": "440641013979d08cd9616fa911409868bddcf046c8a47273f4c64ae51675e15a"
+      }
+    }
+  ],
+  "phase_experiment": {
+    "boot_observed": true,
+    "physical_report": "pending at checkpoint;question remains unanswered",
+    "input_qualified": false,
+    "own_RAM_trace_read": false
+  },
+  "PC_startup_control": {
+    "first_trial": "capture requested after five seconds returned0x0;no physical check",
+    "cleanup": "PowerShell5 child lacked Get-FileHash;recovered with current PowerShell7",
+    "media_and_inventory_verified": true,
+    "replacement": "fresh VM,original30-second wait,PowerShell7,enforced300-second cap"
+  },
+  "read_API": {
+    "uuid": "33dd04fb-43d5-46c6-be07-bfc3c115e64e",
+    "method": "IMachineDebugger.readPhysicalMemory",
+    "address": 268435456,
+    "bytes_requested": 16,
+    "only_own_image_header": true,
+    "input_injection": false,
+    "success": false,
+    "error": "Method MachineDebugger::readPhysicalMemory is not implemented",
+    "hresult": "80004001"
+  },
+  "read_API_cleanup": {
+    "utc": "2026-10-26T12:32:40.0731661Z",
+    "cold_starts": 1,
+    "state": "poweroff",
+    "unregistered": true,
+    "existing_vm_inventory_preserved": true,
+    "running_state_preserved": true,
+    "post_trial_raw_roundtrip_equal": true,
+    "artifacts_retained": true,
+    "semantic_session_stop_observed": false,
+    "termination": "external poweroff from paused state"
+  },
+  "release_ready": false,
+  "frozen": false,
+  "remaining_provider_balances": {
+    "Copilot": "unavailable",
+    "Claude": "unavailable",
+    "Grok": "unavailable",
+    "Antigravity": "unavailable"
+  }
+}

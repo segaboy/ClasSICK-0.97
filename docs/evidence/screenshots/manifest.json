@@ -1523,6 +1523,75 @@
         "Physical mouse check not performed:operator unavailable.",
         "No GUI drag/release or Mac input pass."
       ]
+    },
+    {
+      "id": "2026-10-26-pc-physical-baseline",
+      "path": "docs/evidence/screenshots/2026-10-26/pc-physical-baseline.png",
+      "sha256": "7bd4dc9c78b1729f5d88da5f57ee1813666714caf17fce88913d97cee4abc5a7",
+      "bytes": 4850,
+      "width": 1024,
+      "height": 768,
+      "captured_on": "2026-10-26",
+      "target": "native-x86_64",
+      "caption": "Initial PC framebuffer before the requested physical check.",
+      "alt": "Initial PC framebuffer before the requested physical check.",
+      "source_revision": "63bbccf5f7bcae357482686cc43edf4e3c7d8d28",
+      "compiled_source_revision": "63bbccf5f7bcae357482686cc43edf4e3c7d8d28",
+      "evidence": "docs/development/native-input-qualification-20261026.md",
+      "license": "GPL-3.0-or-later",
+      "rights": "Original ClasSICK scene only;Mac is an exact512x342 crop with no emulator chrome,desktop or unrelated pixels.",
+      "input": "none",
+      "limitations": [
+        "Negative or baseline diagnostic evidence;no motion/drag/release qualification.",
+        "Root cause and dynamic parity unestablished.",
+        "No physical-hardware,System1 compatibility or release claim."
+      ]
+    },
+    {
+      "id": "2026-10-26-pc-physical-corner",
+      "path": "docs/evidence/screenshots/2026-10-26/pc-physical-corner.png",
+      "sha256": "67280613b87642b9ef361e3acc6b784a8d68372675621c9251f3e3f518eca81b",
+      "bytes": 4845,
+      "width": 1024,
+      "height": 768,
+      "captured_on": "2026-10-26",
+      "target": "native-x86_64",
+      "caption": "PC physical-check observation:the tiny cross is clipped at the upper-right corner;no usable dragging was reported.",
+      "alt": "PC physical-check observation:the tiny cross is clipped at the upper-right corner;no usable dragging was reported.",
+      "source_revision": "63bbccf5f7bcae357482686cc43edf4e3c7d8d28",
+      "compiled_source_revision": "63bbccf5f7bcae357482686cc43edf4e3c7d8d28",
+      "evidence": "docs/development/native-input-qualification-20261026.md",
+      "license": "GPL-3.0-or-later",
+      "rights": "Original ClasSICK scene only;Mac is an exact512x342 crop with no emulator chrome,desktop or unrelated pixels.",
+      "input": "human-confirmed",
+      "limitations": [
+        "Negative or baseline diagnostic evidence;no motion/drag/release qualification.",
+        "Root cause and dynamic parity unestablished.",
+        "No physical-hardware,System1 compatibility or release claim."
+      ]
+    },
+    {
+      "id": "2026-10-26-mac-phase-baseline",
+      "path": "docs/evidence/screenshots/2026-10-26/mac-phase-baseline.png",
+      "sha256": "8fa8fb8d2ffb10af63efb443dd5acd6baa3d0af33606b20ddc1a647196ed4b4d",
+      "bytes": 19112,
+      "width": 512,
+      "height": 342,
+      "captured_on": "2026-10-26",
+      "target": "native-mac68000",
+      "caption": "Mac phase/defer experimental baseline;logical pixels match the initial PC scene,input remains unqualified.",
+      "alt": "Mac phase/defer experimental baseline;logical pixels match the initial PC scene,input remains unqualified.",
+      "source_revision": "6777f9d8c46994f5dff484e9f6d33913c7592ff8",
+      "compiled_source_revision": "6777f9d8c46994f5dff484e9f6d33913c7592ff8",
+      "evidence": "docs/development/native-input-qualification-20261026.md",
+      "license": "GPL-3.0-or-later",
+      "rights": "Original ClasSICK scene only;Mac is an exact512x342 crop with no emulator chrome,desktop or unrelated pixels.",
+      "input": "none",
+      "limitations": [
+        "Negative or baseline diagnostic evidence;no motion/drag/release qualification.",
+        "Root cause and dynamic parity unestablished.",
+        "No physical-hardware,System1 compatibility or release claim."
+      ]
     }
   ]
 }
