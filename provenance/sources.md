@@ -4659,3 +4659,15 @@ wrong locator rejected for each component. No native package/trial/publication.
 ## SRC-0486 - Actual isolated original timer boot control
 
 2026-10-26. One saved original-register snapshot at own spin/IPL7 gives500 timer services,zero loss/delivery/fault,pointer256,171. Owned Early128K session closes69.45s,ROM unchanged. No mouse motion tested;occluded transient JPEG excluded from clean product gallery. [Review](../docs/development/mac-timer-poll.md).
+
+## SRC-0487 - Actual Mac timer button/movement trials
+
+2026-10-26. Three isolated sessions close,ROM unchanged. Primary-aware held click accepted,count0001;movement/drag unqualified. Relative hardware mode retained,Absolute memory patching excluded. One reviewed unchanged product PNG published. [Review](../docs/development/timer-and-pc-input.md).
+
+## SRC-0488 - Original PC raw-packet artifact
+
+2026-10-26. Copilot45.83s/11411 frozen public bytes,239 lines,one view,no writes/commands/tests,one reported premium request. No decoder defect inferred;synthetic fixture is not native evidence. [Review](../docs/development/timer-and-pc-input.md).
+
+## SRC-0489 - Lead raw-packet verification and286 witnesses
+
+2026-10-26. Four host profiles,2097152 raw reports/14680082 assertions each,author/mailbox suites,three CTests/three compiled controls pass. C99 assertion corrected.12 helper-free80286/USE16 objects/six named refusals,unlinked/unrun. Native build/trial pending. [Review](../docs/development/timer-and-pc-input.md).

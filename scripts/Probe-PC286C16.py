@@ -15,9 +15,11 @@ def main():
     parser.add_argument('--tool-root',required=True,type=Path)
     parser.add_argument('--output',required=True,type=Path)
     parser.add_argument('--polled-phase',action='store_true',help='Compile only the isolated phase model;no segmented backend/run claim')
+    parser.add_argument('--ps2-packet',type=int,choices=(0,1),help='Compile the original decoder with default or raw diagnostic layout')
     args=parser.parse_args()
+    if args.polled_phase and args.ps2_packet is not None:parser.error('Choose one compiler witness')
     root=Path(__file__).resolve().parents[1]
-    source=root/('probes/pc286/polled-phase.c' if args.polled_phase else 'probes/pc286/c16.c')
+    source=root/('probes/pc286/ps2-packet.c' if args.ps2_packet is not None else 'probes/pc286/polled-phase.c' if args.polled_phase else 'probes/pc286/c16.c')
     lock=json.loads((root/'scripts/pc286-toolchain-lock.json').read_text())
     for row in lock['selected_members']:
         p=args.tool_root/row['path']
@@ -34,6 +36,7 @@ def main():
             flags=['-zq','-2','-'+model,'-zl','-s','-'+opt,'-zastd=c99',
                    '-i='+str(args.tool_root/'h'),'-fo='+str(obj)]
             if args.polled_phase:flags+=['-dCS_C16_REQUIRE_16BIT']
+            if args.ps2_packet is not None:flags+=['-dCS_C16_REQUIRE_16BIT','-dCLASSICK_PC_RAW_PACKET_PROBE='+str(args.ps2_packet)]
             if bad:flags+=['-dCS_C16_FALSE_ASSERT']
             q=subprocess.run([str(tools/'wcc.exe'),*flags,str(source)],
                 cwd=out,env=env,stdin=subprocess.DEVNULL,capture_output=True,timeout=20)
@@ -70,6 +73,7 @@ def main():
             rows.append(row)
     files=['arch/i286/c16.h',str(source.relative_to(root)).replace('\\','/')]
     if args.polled_phase:files+=['platform/mac128k/polled-phase.c','platform/mac128k/polled-phase.h','core/input/pointer.h','scripts/Probe-PC286C16.py']
+    if args.ps2_packet is not None:files+=['platform/pc/ps2-mouse.c','platform/pc/ps2-mouse.h','scripts/Probe-PC286C16.py']
     inputs={f:hashlib.sha256((root/f).read_bytes().replace(b'\r\n',b'\n')).hexdigest() for f in files}
     report={'specifications':['SPEC-0067','SPEC-0074'] if args.polled_phase else ['SPEC-0067'],'compiler_pin':lock['release'],
             'compiler_calls':9,'objects':6,'expected_refusals':3,'inputs':inputs,
@@ -77,6 +81,7 @@ def main():
             'stack_policy':'-s is diagnostic only; no production waiver',
             'limits':'Metadata and helper checks are not a complete ISA or runtime proof.'}
     if args.polled_phase:report['flat_span_premise_is_not_segmented_pointer_qualification']=True
+    if args.ps2_packet is not None:report.update(specifications=['SPEC-0067','SPEC-0076'],raw_packet_probe=args.ps2_packet,packet_layout_bytes=24 if args.ps2_packet else 12)
     (out/'report.json').write_text(json.dumps(report,indent=2)+'\n',encoding='utf-8')
     print('C16 delta PASS: 9 compiler calls, 6 helper-free objects, 3 named refusals; no link/run.')
 

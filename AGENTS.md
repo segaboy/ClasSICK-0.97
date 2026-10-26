@@ -1,5 +1,7 @@
 # ClasSICK 0.97 working instructions
 
+2026-10-26,SRC-0487..0489/SPEC-0076/IMPL-0084/TEST-0097:Mac timer held primary click accepted0001;motion/drag unqualified. PC opt-in raw trace passes2097152-report oracle/four profiles/three CTests/three compiled controls;normal policy unchanged.28612 objects/six refusals pass,unrun. Native PC trace pending.69PNG/twoGIF. [Review](docs/development/timer-and-pc-input.md).
+
 2026-10-26,SRC-0485/0486:104d5f2 nativeCI passes;normal ROM unchanged,timer experiment adds608ROM/56static RAM. Actual isolated Early128K boot gives500T1 services,zero loss/delivery/fault,then closes69.45s/ROM unchanged. No mouse motion/drag/release pass;WindowsCI pending.68PNG/twoGIF/286 retained. [Proof](docs/development/mac-timer-poll.md).
 
 2026-10-26,SRC-0482..0484/SPEC-0075/IMPL-0083/TEST-0096:separate timer-poll controller/inbox/native binding added opt-in. Author92/frozen88 assertions/four host profiles,two CTests each/three compiled defects pass. Native/default-ROM proof pending;no target/desktop run,input or release pass.68PNG/twoGIF/286 retained. [Review](docs/development/mac-timer-poll.md).

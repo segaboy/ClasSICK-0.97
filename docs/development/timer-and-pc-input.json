@@ -1,0 +1,263 @@
+{
+  "date": "2026-10-26",
+  "specification": "SPEC-0076",
+  "sources": [
+    "SRC-0487",
+    "SRC-0488",
+    "SRC-0489"
+  ],
+  "implementation": "IMPL-0084",
+  "test": "TEST-0097",
+  "Mac": {
+    "compiled_source": "104d5f2f19e5afeabfba29a808203ad58452a04d",
+    "CI_run": 40375002875,
+    "CI_result": "both jobs success",
+    "ROM_sha256": "7de4329b10bf34fa4f03f43def49fdaf8b1c34831cc3ebf11bfb2e3bfdc86606",
+    "trials": [
+      {
+        "status": "wall cap reached",
+        "host_seconds": 180.25,
+        "pid": 50072,
+        "process_exited": true,
+        "forced_process_cleanup": true,
+        "guest_shutdown_claimed": false,
+        "ROM_sha256": "7de4329b10bf34fa4f03f43def49fdaf8b1c34831cc3ebf11bfb2e3bfdc86606"
+      },
+      {
+        "status": "wall cap reached",
+        "host_seconds": 240.36,
+        "pid": 44604,
+        "process_exited": true,
+        "forced_process_cleanup": true,
+        "guest_shutdown_claimed": false,
+        "ROM_sha256": "7de4329b10bf34fa4f03f43def49fdaf8b1c34831cc3ebf11bfb2e3bfdc86606"
+      },
+      {
+        "status": "wall cap reached",
+        "host_seconds": 120.39,
+        "pid": 57680,
+        "process_exited": true,
+        "forced_process_cleanup": true,
+        "guest_shutdown_claimed": false,
+        "ROM_sha256": "7de4329b10bf34fa4f03f43def49fdaf8b1c34831cc3ebf11bfb2e3bfdc86606"
+      }
+    ],
+    "host_primary_readback": 1,
+    "host_setting_changed": false,
+    "held_primary": {
+      "counter": 1,
+      "pattern": "vertical stripes",
+      "helper_events_delivered": 2,
+      "guest_button_accepted": true
+    },
+    "relative_attempt": {
+      "host_events": 20,
+      "host_input_accepted": true,
+      "guest_motion_qualified": false,
+      "window_drag_qualified": false,
+      "scope_limit": "Windows acceleration turns -4 units into14 client pixels;later events leave the verified guest viewport although the window guard still holds. Do not count all20 as guest stimuli."
+    },
+    "initial_sky": "click/default-left drag no positive guest result;right-button primary opens menus",
+    "hardware_mode": "GUI confirms Relative(hardware emulation);Absolute(memory patching) excluded/not selected",
+    "tool_issues": [
+      "Default restricted process query cannot see owned elevated process;approved escalated identity query succeeds",
+      "One occluded UI capture excluded;fresh activate succeeds",
+      "One stale screenshot input refusal is reobserved before any retry"
+    ],
+    "screenshot": "docs/evidence/screenshots/2026-10-26/mac-timer-click.png",
+    "export_palette_RGB": [
+      [
+        34,
+        34,
+        34
+      ],
+      [
+        238,
+        238,
+        238
+      ]
+    ],
+    "image_review": "Initial review assertion assumed literal0/255;actual unchanged export has two grayscale tones34/238. Corrected the intake check;no image pixels edited."
+  },
+  "PC_worker": {
+    "provider": "Copilot",
+    "model": "claude-sonnet-5.5",
+    "effort": "low",
+    "execution": {
+      "round": "primary",
+      "worker": "copilot",
+      "exit_code": 0,
+      "outer_timeout": false,
+      "elapsed_seconds": 45.83,
+      "input_bytes": 11411,
+      "input_sha256": "9ab285b4e10721c4216427fe64afef9d939b2c51d56ff9c02a742930f319e268",
+      "stderr_bytes": 0
+    },
+    "inputs": {
+      "revision": "250c27b44f6b28390fbd0a69aa08c1abbae8ae1c",
+      "inputs": {
+        "platform/pc/ps2-mouse.h": "13a3006a516eb4d51c61e08b6d5b3601f4291fc9dc7d6e2be13f527fcaaacbc9",
+        "platform/pc/ps2-mouse.c": "0691455f1f5f99e8d8442526b011991c224d8e5429b64656f4175c6bb63fad0c",
+        "platform/pc/input-probe.h": "c5d62113023b5511f67c8ce628353ded9c476a1c5b82d642c223ef9658b39918",
+        "platform/pc/input-probe.c": "35c11308a51185472f12c9fdf6a23ad30f7aabb55fd637d2c42a819b2fe4b3bb",
+        "platform/pc/ps2-bus.h": "422c27a92d7323791cec451d534d8a0127d46a938e5b641a7c81caa2d4c9c8d9"
+      },
+      "packet_bytes": 11411,
+      "packet_sha256": "9ab285b4e10721c4216427fe64afef9d939b2c51d56ff9c02a742930f319e268"
+    },
+    "view_calls": 1,
+    "commands": 0,
+    "writes": 0,
+    "tests_executed": 0,
+    "original_artifact_lines": 239,
+    "reported_premium_requests": 1
+  },
+  "correction": "C11 assertion rejected by strict C99;replace with C99 numeric typedef assertion for existing decoder/286 compatibility. Decoder/observer adopted otherwise unchanged.",
+  "raw_checks": {
+    "rows": [
+      {
+        "profile": "clang",
+        "suite": "author",
+        "passed": true,
+        "stdout": "pc-raw-packet: ok"
+      },
+      {
+        "profile": "clang",
+        "suite": "oracle",
+        "passed": true,
+        "stdout": "raw oracle:2097152 reports,14680082 assertions"
+      },
+      {
+        "profile": "clang",
+        "suite": "mailbox",
+        "passed": true,
+        "stdout": "raw probe:12 assertions"
+      },
+      {
+        "profile": "gcc64",
+        "suite": "author",
+        "passed": true,
+        "stdout": "pc-raw-packet: ok"
+      },
+      {
+        "profile": "gcc64",
+        "suite": "oracle",
+        "passed": true,
+        "stdout": "raw oracle:2097152 reports,14680082 assertions"
+      },
+      {
+        "profile": "gcc64",
+        "suite": "mailbox",
+        "passed": true,
+        "stdout": "raw probe:12 assertions"
+      },
+      {
+        "profile": "gcc32",
+        "suite": "author",
+        "passed": true,
+        "stdout": "pc-raw-packet: ok"
+      },
+      {
+        "profile": "gcc32",
+        "suite": "oracle",
+        "passed": true,
+        "stdout": "raw oracle:2097152 reports,14680082 assertions"
+      },
+      {
+        "profile": "gcc32",
+        "suite": "mailbox",
+        "passed": true,
+        "stdout": "raw probe:12 assertions"
+      },
+      {
+        "profile": "san",
+        "suite": "author",
+        "passed": true,
+        "stdout": "pc-raw-packet: ok"
+      },
+      {
+        "profile": "san",
+        "suite": "oracle",
+        "passed": true,
+        "stdout": "raw oracle:2097152 reports,14680082 assertions"
+      },
+      {
+        "profile": "san",
+        "suite": "mailbox",
+        "passed": true,
+        "stdout": "raw probe:12 assertions"
+      },
+      {
+        "compiled_fault": "cleared-header",
+        "detected": true,
+        "stdout": "FAIL:17:p.raw_header==h && p.raw_x==x && p.raw_y==y"
+      },
+      {
+        "compiled_fault": "swapped-raw-XY",
+        "detected": true,
+        "stdout": "FAIL:17:p.raw_header==h && p.raw_x==x && p.raw_y==y"
+      },
+      {
+        "compiled_fault": "mailbox-post-reset-header",
+        "detected": true,
+        "stdout": "raw probe FAIL:30:actual[2]==UINT64_C(0x0000002A0000FF01)"
+      }
+    ],
+    "oracle_sha256": "63cfcc334db71799e57a61a8dac23a551e8353a15c983aa2e0980ad12acf3083"
+  },
+  "oracle_frozen": {
+    "sha256": "63cfcc334db71799e57a61a8dac23a551e8353a15c983aa2e0980ad12acf3083",
+    "worker_output_inspected": false,
+    "raw_reports": 2097152
+  },
+  "C16": {
+    "c16-default": {
+      "compiler_pin": "2026-10-01-Build",
+      "compiler_calls": 9,
+      "objects": 6,
+      "expected_refusals": 3,
+      "raw_packet_probe": 0,
+      "packet_layout_bytes": 12,
+      "inputs": {
+        "arch/i286/c16.h": "0d7634a598aa92a0971f8e1bcf55b63df0f3820cb78d4f7817641b27544a3920",
+        "probes/pc286/ps2-packet.c": "5887e5e3c9531859c542b2920ad4d3bcd96742215ec722748b2c94ba5a5c2041",
+        "platform/pc/ps2-mouse.c": "10e992490e585eea077d794eebb9efdb79599906a7172a93e69451d9cb0d10d6",
+        "platform/pc/ps2-mouse.h": "66a3a43fe9e049074f7638207027d2842cbc4b57845e8eae5cfa85c352bc18f9",
+        "scripts/Probe-PC286C16.py": "2cbae9345edb75240c8a6a534085b41e124334474b8328f82292afdea6c45614"
+      }
+    },
+    "c16-raw": {
+      "compiler_pin": "2026-10-01-Build",
+      "compiler_calls": 9,
+      "objects": 6,
+      "expected_refusals": 3,
+      "raw_packet_probe": 1,
+      "packet_layout_bytes": 24,
+      "inputs": {
+        "arch/i286/c16.h": "0d7634a598aa92a0971f8e1bcf55b63df0f3820cb78d4f7817641b27544a3920",
+        "probes/pc286/ps2-packet.c": "5887e5e3c9531859c542b2920ad4d3bcd96742215ec722748b2c94ba5a5c2041",
+        "platform/pc/ps2-mouse.c": "10e992490e585eea077d794eebb9efdb79599906a7172a93e69451d9cb0d10d6",
+        "platform/pc/ps2-mouse.h": "66a3a43fe9e049074f7638207027d2842cbc4b57845e8eae5cfa85c352bc18f9",
+        "scripts/Probe-PC286C16.py": "2cbae9345edb75240c8a6a534085b41e124334474b8328f82292afdea6c45614"
+      }
+    }
+  },
+  "integrated_CTests": {
+    "passed": 3,
+    "JUnit_sha256": "207b2d26a05655936238753a25908967b2ceedbf0af60b8baca955e541124b77"
+  },
+  "native_PC_build_trial": "pending",
+  "normal_input_policy_changed": false,
+  "release_ready": false,
+  "media": {
+    "PNG": 69,
+    "GIF": 2,
+    "new": 1
+  },
+  "remaining_provider_balances": {
+    "Copilot": "unavailable",
+    "Claude": "unavailable",
+    "Grok": "unavailable",
+    "Antigravity": "unavailable"
+  }
+}

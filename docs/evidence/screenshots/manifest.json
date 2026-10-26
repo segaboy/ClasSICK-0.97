@@ -1592,6 +1592,28 @@
         "Root cause and dynamic parity unestablished.",
         "No physical-hardware,System1 compatibility or release claim."
       ]
+    },
+    {
+      "id": "2026-10-26-mac-timer-click",
+      "path": "docs/evidence/screenshots/2026-10-26/mac-timer-click.png",
+      "sha256": "a8da24c967d6566e0c65a1a40902c32bd6020e5f750d8a0d89e816523f6ad271",
+      "bytes": 74351,
+      "width": 512,
+      "height": 342,
+      "captured_on": "2026-10-26",
+      "target": "native-mac68000",
+      "caption": "Original Mac timer ROM after a primary-aware held click:counter0001 and vertical stripes. Movement and dragging remain unqualified.",
+      "alt": "Original Mac timer ROM after a primary-aware held click:counter0001 and vertical stripes. Movement and dragging remain unqualified.",
+      "source_revision": "104d5f2f19e5afeabfba29a808203ad58452a04d",
+      "compiled_source_revision": "104d5f2f19e5afeabfba29a808203ad58452a04d",
+      "evidence": "docs/development/timer-and-pc-input.md",
+      "license": "GPL-3.0-or-later",
+      "rights": "Original ClasSICK framebuffer exported by the emulator screenshot control;no desktop,emulator chrome or reference pixels. Unmodified PNG.",
+      "input": "synthetic",
+      "limitations": [
+        "Accepted held button only;no mouse-motion/window-drag or human qualification.",
+        "No physical-hardware,System1 or release claim."
+      ]
     }
   ]
 }

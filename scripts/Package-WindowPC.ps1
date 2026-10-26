@@ -14,7 +14,7 @@ if([bool]$InputProbe -ne [bool]$isProbe){throw 'Input-probe media requires its e
 $probeMode=if($null -ne $proof.PSObject.Properties['window_input_probe_mode']){
     [string]$proof.window_input_probe_mode
 }elseif($isProbe){'loss'}else{'none'}
-if($probeMode -notin @('none','loss','motion','motion-later') -or ($isProbe -eq ($probeMode -eq 'none'))){throw 'Invalid probe mode metadata.'}
+if($probeMode -notin @('none','loss','motion','motion-later','raw-motion','raw-motion-later') -or ($isProbe -eq ($probeMode -eq 'none'))){throw 'Invalid probe mode metadata.'}
 $efi=Join-Path $BuildRoot 'payload/EFI/BOOT/BOOTX64.EFI'
 $hash=(Get-FileHash -LiteralPath $efi -Algorithm SHA256).Hash.ToLowerInvariant()
 if($hash -ne $proof.images[1].sha256){throw 'EFI payload differs from audited O2 candidate.'}

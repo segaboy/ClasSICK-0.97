@@ -3,7 +3,7 @@
 [CmdletBinding()]
 param([Parameter(Mandatory=$true)][string]$BuildRoot,
     [ValidateSet('none','ud','gp')][string]$FaultProbe='none',[switch]$SelectedDrawing,[switch]$OutlineDrawing,[switch]$WindowDrawing,[switch]$WindowInputProbe,
-    [ValidateSet('loss','motion','motion-later')][string]$WindowInputProbeMode='loss')
+    [ValidateSet('loss','motion','motion-later','raw-motion','raw-motion-later')][string]$WindowInputProbeMode='loss')
 Set-StrictMode -Version Latest
 $ErrorActionPreference='Stop'
 if(([int][bool]$SelectedDrawing+[int][bool]$OutlineDrawing+[int][bool]$WindowDrawing) -gt 1){throw 'Select only one drawing profile.'}
@@ -90,8 +90,9 @@ try {
                     $profileFlags=@()
                     if($WindowDrawing){$profileFlags+='-DCLASSICK_WINDOW_DRAWING=1'}
                     if($WindowInputProbe){$profileFlags+='-DCLASSICK_WINDOW_INPUT_PROBE=1'}
-                    if($WindowInputProbe -and $WindowInputProbeMode -in @('motion','motion-later')){$profileFlags+='-DCLASSICK_PC_INPUT_PROBE_MOTION=1'}
-                    if($WindowInputProbe -and $WindowInputProbeMode -eq 'motion-later'){$profileFlags+='-DCLASSICK_PC_INPUT_PROBE_SKIP_FIRST_PACKET=1'}
+                    if($WindowInputProbe -and $WindowInputProbeMode -in @('motion','motion-later','raw-motion','raw-motion-later')){$profileFlags+='-DCLASSICK_PC_INPUT_PROBE_MOTION=1'}
+                    if($WindowInputProbe -and $WindowInputProbeMode -in @('raw-motion','raw-motion-later')){$profileFlags+='-DCLASSICK_PC_RAW_PACKET_PROBE=1'}
+                    if($WindowInputProbe -and $WindowInputProbeMode -in @('motion-later','raw-motion-later')){$profileFlags+='-DCLASSICK_PC_INPUT_PROBE_SKIP_FIRST_PACKET=1'}
                     if($sources[$i] -eq 'platform/uefi/keyboard.c'){$profileFlags=@('-DCLASSICK_PC_MOUSE=1')}
                     if($SelectedDrawing -or $OutlineDrawing){$profileFlags+='-DCLASSICK_SELECTED_DRAWING=1'}
                     if($OutlineDrawing){$profileFlags+='-DCLASSICK_OUTLINE_DRAWING=1'}

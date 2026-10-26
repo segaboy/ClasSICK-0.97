@@ -2,6 +2,10 @@
 /* Copyright (C) 2026 Dean Howell. */
 #include "input-probe.h"
 
+#if (CLASSICK_PC_RAW_PACKET_PROBE+0)==1 && (CLASSICK_PC_INPUT_PROBE_MOTION+0)!=1
+#error CLASSICK_PC_RAW_PACKET_PROBE=1 requires CLASSICK_PC_INPUT_PROBE_MOTION=1
+#endif
+
 static uint64_t pair(uint32_t high,uint32_t low)
 {
     return ((uint64_t)high<<32)|(uint64_t)low;
@@ -19,10 +23,17 @@ int cs_pc_input_probe_observe(void *context,const unsigned char *trace,
 #if CLASSICK_PC_INPUT_PROBE_SKIP_FIRST_PACKET
     if(s->bus.packets<=1) return 0;
 #endif
+#if CLASSICK_PC_RAW_PACKET_PROBE
+    v[0]=UINT64_C(0x4353505241573031);
+    v[1]=pair(s->bus.packets,s->bus.errors);
+    v[2]=pair(s->delivery.packet.raw_header,
+        ((s->delivery.packet.raw_x&255u)<<8)|(s->delivery.packet.raw_y&255u));
+#else
     v[0]=CS_PC_INPUT_PROBE_MOTION_MAGIC;
     v[1]=pair(s->bus.packets,s->bus.errors);
     v[2]=pair(s->bus.decoder.header,
         (((uint32_t)s->bus.decoder.x&255u)<<8)|((uint32_t)s->bus.last_byte&255u));
+#endif
     /* Intentional two's-complement bit encoding of signed values. */
     v[3]=pair((uint32_t)s->delivery.packet.dx,(uint32_t)s->delivery.packet.dy);
     v[4]=pair(s->delivery.packet.buttons,

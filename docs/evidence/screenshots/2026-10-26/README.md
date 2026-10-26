@@ -8,3 +8,5 @@ its logical black/white pixels match the initial PC scene. No scaling or
 retouching,no desktop or emulator chrome. These are diagnostic images for
 research use,not release qualification or historical behavior evidence.
 [Identities and limitations](../../../development/native-input-qualification-20261026.md).
+
+[Timer ROM held-click result,count0001](mac-timer-click.png):original512x342 framebuffer export;movement/dragging unqualified.69PNG/twoGIF total after this addition. [Observation](../../../development/timer-and-pc-input.md).

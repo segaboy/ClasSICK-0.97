@@ -468,3 +468,7 @@ balances unavailable. This is not evidence of quota savings. [Receipt](boot-inpu
 ## Separate timer-controller slice -2026-10-26
 
 One Copilot Sonnet5.5 Low primary returns566 proposed lines in205.55s from20130 frozen reviewed-public/original bytes and paraphrased eligible interface facts;one view,no writes/commands/tests. Lead adopts sound code,corrects test conversions/two existing API expectations,adds stage/peak diagnostics and native integration. Frozen independent88-assertion oracle precedes output inspection;author92/four profiles and three compiled faults verify integration. One reported premium request;remaining balances unavailable. No redundant provider review or quota-equivalence claim. [Receipt](mac-timer-poll.md).
+
+## Raw-packet diagnostic -2026-10-26
+
+One Copilot primary45.83s/11411 frozen original-public bytes returns239 lines,one view/no execution or writes. Lead integrates sound code,corrects C99 numeric assertion and verifies frozen2097152-report oracle/mailbox/native build gates. No redundant provider. One reported premium request;all-four remaining balances unavailable,no quota-equivalence claim. [Receipt](timer-and-pc-input.md).

@@ -49,5 +49,10 @@ int cs_ps2_mouse_feed(cs_ps2_mouse *mouse, uint32_t byte, uint32_t corrupt,
     packet->dx = (int32_t)x - ((header & 0x10u) != 0u ? 256 : 0);
     packet->dy = (int32_t)byte - ((header & 0x20u) != 0u ? 256 : 0);
     packet->buttons = header & 7u;
+#if CLASSICK_PC_RAW_PACKET_PROBE
+    packet->raw_header = header;
+    packet->raw_x = x;
+    packet->raw_y = byte;
+#endif
     return CS_PS2_MOUSE_PACKET;
 }
