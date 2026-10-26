@@ -49,7 +49,7 @@ extern void cs_mac_window_combined_irq(void);
 extern void cs_mac_window_install_vectors(void);
 void cs_mac_window_interrupt(uint32_t source);
 #if CLASSICK_MAC_IDLE_PROBE
-/* Diagnostic halt in window-irqs.S: self-branch, IPL7 held. Not a session stop. */
+/* Diagnostic register mirror and self-branch, IPL7 held. Not a session stop. */
 __attribute__((noreturn)) void cs_mac_window_idle_checkpoint(void);
 #endif
 
@@ -65,6 +65,21 @@ struct cs_mac_window_trace {
 _Static_assert(sizeof(struct cs_mac_window_trace)==128,"MWP1 v2 size");
 _Static_assert(offsetof(struct cs_mac_window_trace,loss_reason)==100,"MWP1 v1 prefix");
 volatile struct cs_mac_window_trace cs_mac_trace;
+#if CLASSICK_MAC_IDLE_PROBE
+/* Offsets used by the register checkpoint in window-irqs.S. */
+_Static_assert(offsetof(struct cs_mac_window_trace,services)==28,"MWR1 D1 offset");
+_Static_assert(offsetof(struct cs_mac_window_trace,losses)==36,"MWR1 D2 offset");
+_Static_assert(offsetof(struct cs_mac_window_trace,deliveries)==48,"MWR1 D3 offset");
+_Static_assert(offsetof(struct cs_mac_window_trace,pointer_x)==52,"MWR1 A3 offset");
+_Static_assert(offsetof(struct cs_mac_window_trace,pointer_y)==56,"MWR1 A4 offset");
+_Static_assert(offsetof(struct cs_mac_window_trace,loss_reason)==100,"MWR1 D4 offset");
+_Static_assert(offsetof(struct cs_mac_window_trace,loss_rr3)==104,"MWR1 D5 offset");
+_Static_assert(offsetof(struct cs_mac_window_trace,loss_snap[0])==108,"MWR1 A0 offset");
+_Static_assert(offsetof(struct cs_mac_window_trace,loss_snap[1])==112,"MWR1 A1 offset");
+_Static_assert(offsetof(struct cs_mac_window_trace,loss_snap[2])==116,"MWR1 A2 offset");
+_Static_assert(offsetof(struct cs_mac_window_trace,loss_previous)==120,"MWR1 D6 offset");
+_Static_assert(offsetof(struct cs_mac_window_trace,loss_phase)==124,"MWR1 D7 offset");
+#endif
 
 static cs_mac_window_session session __attribute__((section(".loaded_app")));
 static struct cs_mac_motion motion;

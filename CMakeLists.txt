@@ -2313,6 +2313,7 @@ if(TARGET classick_native_present)
 endif()
 if(BUILD_TESTING AND Python3_Interpreter_FOUND)
     add_test(NAME uefi-window.trace-reader COMMAND ${Python3_EXECUTABLE} -B ${CMAKE_SOURCE_DIR}/tests/window-trace.py)
+    add_test(NAME mac-checkpoint.register-decoder COMMAND ${Python3_EXECUTABLE} -B ${CMAKE_SOURCE_DIR}/scripts/test_read_mac_register_trace.py)
 endif()
 
 # SPEC-0065 pure inbox:abstract caller exclusion,not a hardware/boot binding.

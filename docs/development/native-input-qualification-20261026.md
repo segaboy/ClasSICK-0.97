@@ -84,3 +84,5 @@ retained;no new286 claim follows from these tests. New screenshots are
 [indexed](../evidence/screenshots/2026-10-26/README.md);no successful-drag GIF
 was made. Black/occluded captures and verbose private logs stay outside Git.
 [Machine receipt](native-input-qualification-20261026.json).
+
+Owner follow-up:the experimental Snow window was already closed when the owner attempted to bring it forward. That physical check was NOT PERFORMED;the earlier pending status is resolved without an input result.

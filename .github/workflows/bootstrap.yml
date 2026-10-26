@@ -237,6 +237,8 @@ jobs:
           if-no-files-found: error
       - name: Build strict first-input checkpoint twins (unbooted)
         run: python3 scripts/Build-LoadedAppROM.py --window-drawing --window-first-input-probe --tool-root "$RUNNER_TEMP/classick-m68k/root" --output "$RUNNER_TEMP/classick-window-first-input"
+      - name: Check strict register-snapshot decoder
+        run: python3 -B scripts/test_read_mac_register_trace.py
       - name: Verify strict first-input checkpoint and unchanged normal ROM
         run: python3 scripts/Verify-MacIdleProbe.py --first-input --normal "$RUNNER_TEMP/classick-window-preview" --probe "$RUNNER_TEMP/classick-window-first-input" --output "$RUNNER_TEMP/classick-first-input-verification.json"
       - name: Build finite-defer first-input checkpoint twins (unbooted)

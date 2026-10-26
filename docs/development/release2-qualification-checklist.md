@@ -7,7 +7,7 @@ still provisional. No reduced goal,freeze or publication approval is inferred.
 |---|---|---|
 |Original source/shared renderer/legacy/native builds|6777f9d full CI passes|Retain source/native verification|
 |Mac normal/inverted and PC image identity/budget|Passing-source preflight complete|Retain exact source/hash pins;no new binary in Git|
-|Mac latch and phase-only hypothesis|209 fixture checks and131072-transcript matrices pass|Native cost/identity verified;combined experiment boots,physical result pending|
+|Mac latch and phase-only hypothesis|209 fixture checks and131072-transcript matrices pass|Native cost/identity verified;combined experiment boots,physical check not performed after cap|
 |Desktop input access|Restored by owner;visible simple-profile scene|Retain guards;do not equate access with guest input|
 |Mac accepted motion/drag|Normal physical check fails usable pointer/drag|Fresh source-verified bounded trial,clean baseline then small axis input/trace/frame comparison|
 |PC host GUI motion/drag/release|Physical check fails usable pointer/interaction;device-control route positive|Qualified host route or observed physical mouse check;do not repeat unchanged failed injection|

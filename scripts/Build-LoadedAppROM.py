@@ -4,6 +4,32 @@
 import argparse,hashlib,json,os,struct,sys
 from pathlib import Path
 from importlib.util import spec_from_file_location,module_from_spec
+
+def audit_register_checkpoint(image,syms,enabled):
+    """Exact original MWR1 leaf: mask, own-RAM loads, register data, spin."""
+    entry=syms.get('cs_mac_window_idle_checkpoint')
+    spin=syms.get('cs_mac_window_idle_spin')
+    if not enabled:
+        if entry is not None or spin is not None:raise ValueError('Checkpoint present in default ROM')
+        return None
+    trace=syms.get('cs_mac_trace',0);diag=syms.get('cs_mac_diag',0)
+    if trace%4 or diag%4 or not 0x400<=trace<=0x2100-128 or not 0x400<=diag<=0x2100-28:
+        raise ValueError('Checkpoint own-RAM operands')
+    expected=(bytes.fromhex('007c07002c7c')+struct.pack('>I',trace)
+        +bytes.fromhex('2a79')+struct.pack('>I',diag+24)+bytes.fromhex('203c4d575231'))
+    for reg,offset in enumerate((28,36,48,100,104,120,124),1):
+        expected+=struct.pack('>HH',0x202e+(reg<<9),offset)
+    for reg,offset in enumerate((108,112,116,52,56)):
+        expected+=struct.pack('>HH',0x206e+(reg<<9),offset)
+    expected+=bytes.fromhex('60fe')
+    if len(expected)!=72 or entry is None or spin!=entry+70 or entry%2 or not 260<=entry-0x400000<=65536-len(expected):
+        raise ValueError('Checkpoint native span/spin')
+    at=entry-0x400000
+    if image[at:at+len(expected)]!=expected:raise ValueError('Checkpoint register load/mask/spin encoding')
+    return {'format':'MWR1','entry':entry,'spin':spin,'bytes':72,'trace_address':trace,
+        'diag_fault_address':diag+24,'exact_opcodes_verified':True,'guest_memory_writes':0,
+        'MMIO_accesses':0,'additional_RAM_bytes':0,'semantic_session_shutdown':False}
+
 SOURCES=('arch/m68k/loaded-reset.S','arch/m68k/runtime.c','platform/mac128k/loop.c',
  'platform/mac128k/loaded-entry.c','apps/rom-scene/scene.c','core/graphics/surface.c',
  'core/services/traps.c','apps/service-probe/probe.c','core/cpu/m68k.c','apps/aline-probe/probe.c',
@@ -127,7 +153,7 @@ def main():
         if a.selected_drawing:required=tuple(x for x in required if x!='cs_native_draw')+('cs_selected_draw','cs_qd_select_get','cs_qd_select_set')
         if a.outline_drawing:required=tuple(x for x in required if x not in ('cs_native_draw','cs_qd_rect','cs_qd_view_rect'))+('cs_outline_draw','cs_qd_view_outline','cs_qd_select_get','cs_qd_select_set')
         if a.window_drawing:required=('cs_mac_main','cs_mac_window_begin','cs_mac_motion_service','cs_foreground_step','cs_mac_window_via_irq','cs_mac_window_scc_irq','cs_mac_window_combined_irq','cs_mac_window_interrupt','cs_product_scene','cs_window_apply','cs_m68k_foreground_enter','cs_m68k_foreground_leave')
-        if a.window_idle_probe or a.window_first_input_probe:required+=('cs_mac_window_idle_checkpoint',)
+        if a.window_idle_probe or a.window_first_input_probe:required+=('cs_mac_window_idle_checkpoint','cs_mac_window_idle_spin')
         if a.window_first_input_probe:required+=('cs_mac_first_input_probe_gate',)
         if a.window_drawing and not any(name.startswith('cs_cursor_') for name in syms):raise ValueError('Disconnected cursor helper')
         if any(name not in syms for name in required):raise ValueError('Disconnected demonstration')
@@ -148,11 +174,7 @@ def main():
                 if not 260<=at<=65536-len(expected) or image[at:at+len(expected)]!=expected:
                     raise ValueError('IRQ preservation/mask/RTE: '+name)
                 rows.append({'name':name,'source':source,'bytes':len(expected),'exact_opcodes_verified':True})
-            idle=syms.get('cs_mac_window_idle_checkpoint')
-            if a.window_idle_probe or a.window_first_input_probe:
-                if idle is None or not 260<=idle-0x400000<=65534 or image[idle-0x400000:idle-0x400000+2]!=bytes.fromhex('60fe'):
-                    raise ValueError('Idle checkpoint spin')
-            elif idle is not None:raise ValueError('Idle checkpoint present in default ROM')
+            audit_register_checkpoint(image,syms,a.window_idle_probe or a.window_first_input_probe)
             if ('cs_mac_first_input_probe_gate' in syms)!=bool(a.window_first_input_probe):raise ValueError('First-input gate/profile mismatch')
             at=syms['cs_mac_window_install_vectors']-0x400000
             for vector,name in zip((0x64,0x68,0x6C),('cs_mac_window_via_irq','cs_mac_window_scc_irq','cs_mac_window_combined_irq')):
@@ -194,7 +216,9 @@ def main():
         if a.window_drawing:
             controls=[40,syms['cs_mac_line_a_handler']-0x400000,
                     syms['cs_mac_window_via_irq']-0x400000+3,syms['cs_mac_window_install_vectors']-0x400000+7]
-            if a.window_idle_probe or a.window_first_input_probe:controls.append(syms['cs_mac_window_idle_checkpoint']-0x400000+1)
+            if a.window_idle_probe or a.window_first_input_probe:
+                start=syms['cs_mac_window_idle_checkpoint']-0x400000
+                controls.extend(start+x for x in (3,8,14,21,25,29,33,37,41,45,49,53,57,61,65,69,71))
             for offset in controls:
                 bad=bytearray(b);bad[offset]^=1;struct.pack_into('>I',bad,256,h.crc(bad))
                 try:audit(bad)
@@ -220,6 +244,8 @@ def main():
          'native_stack_base':0x2100,'native_stack_top':0x8000,'conservative_stack_bound':stack_bound,
          'individual_frame_max':max(x['bytes'] for x in frames),'stack_frames':frames,'symbols':syms,'corruption_controls':8})
         if a.window_drawing:profiles[-1].update(irq_veneer_audit=irq_audit,resealed_native_corruption_controls=len(controls))
+        if a.window_idle_probe or a.window_first_input_probe:
+            profiles[-1]['register_checkpoint']=audit_register_checkpoint(b,syms,True)
     if profiles[0]!=profiles[1]:raise ValueError('ROM twins differ')
     if program_source is not None:
         fixture=out/'program.o';binary=out/'program.bin'

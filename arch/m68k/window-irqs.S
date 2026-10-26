@@ -39,10 +39,31 @@ cs_mac_line_a_handler:
     jmp cs_mac_fault
 
 #if defined(CLASSICK_MAC_IDLE_PROBE) && CLASSICK_MAC_IDLE_PROBE
-    /* Diagnostic noreturn halt: IPL7 stays held, no MMIO. Bytes 60fe. */
+    /* Diagnostic noreturn halt: IPL7 explicitly held, no MMIO, no return.
+     * Exposes the copied MWR1 snapshot in registers; A0-A6 are raw data
+     * (A6 stays &cs_mac_trace until all record loads finish). Offsets are
+     * bound by C static assertions in window-entry.c. */
     .globl cs_mac_window_idle_checkpoint
     .even
 cs_mac_window_idle_checkpoint:
-    bra.s cs_mac_window_idle_checkpoint
+    ori.w   #0x0700,%sr
+    movea.l #cs_mac_trace,%a6
+    movea.l cs_mac_diag+24,%a5
+    move.l  #0x4D575231,%d0
+    move.l  28(%a6),%d1
+    move.l  36(%a6),%d2
+    move.l  48(%a6),%d3
+    move.l  100(%a6),%d4
+    move.l  104(%a6),%d5
+    move.l  120(%a6),%d6
+    move.l  124(%a6),%d7
+    movea.l 108(%a6),%a0
+    movea.l 112(%a6),%a1
+    movea.l 116(%a6),%a2
+    movea.l 52(%a6),%a3
+    movea.l 56(%a6),%a4
+    .globl cs_mac_window_idle_spin
+cs_mac_window_idle_spin:
+    bra.s cs_mac_window_idle_spin
 #endif
     .section .note.GNU-stack,"",@progbits

@@ -4615,3 +4615,11 @@ wrong locator rejected for each component. No native package/trial/publication.
 
 2026-10-26. Oracle published IMachineDebugger readPhysicalMemory/readVirtualMemory declarations/prose only;no implementation/manual samples. Exact16B own-image-header read in isolated PC returns E_NOTIMPL80004001,no memory returned. No broad dump,input injection or affected Windows raw-input work. Stop unsupported route.
 [Review](../docs/development/native-input-qualification-20261026.md).
+
+## SRC-0476 - Original bounded register-export artifact
+
+2026-10-26. Fresh Copilot,17119 frozen public/original bytes/one view/34.16s;native replacements,decoder/tests,no worker execution or repository changes. No manuals,HQ,untracked originals or excluded material. [Review](../docs/development/mac-register-checkpoint.md).
+
+## SRC-0477 - Lead register-export integration and host verification
+
+2026-10-26. Seven host test groups/10 CLI cases and focused CTest pass;three faulty decoder controls detected. Lead copyright/offset/test/native-validator fixes. Actual target compilation,opcodes,corruption controls,budget,default-byte identity and observation pending committed-source CI. [Receipt](../docs/development/mac-register-checkpoint.json).

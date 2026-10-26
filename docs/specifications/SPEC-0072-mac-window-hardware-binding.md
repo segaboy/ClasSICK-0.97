@@ -213,3 +213,7 @@ all other paths remain the base contract. This is conditional engineering,not
 a physical event-completeness theorem or a remedy for the retained DCD-changing
 losses. Native compile/budget/trial and release gates persist.
 [Actual checks and limitations](../development/mac-latch-and-phase-evidence.md).
+
+## Diagnostic checkpoint register mirror (SRC-0476/0477)
+
+Existing idle/first-input checkpoints may expose the already-copied original record as MWR1 registers,then spin at IPL7. No producer/IRQ/IO/admission/recovery/default-mode change or guest-memory patch. Exact mapping,static offsets and native opcode audit are [specified here](../development/mac-register-checkpoint.md). Decoder format acceptance alone is not execution/input evidence. Native proof pending.

@@ -1,0 +1,81 @@
+{
+  "date": "2026-10-26",
+  "sources": [
+    "SRC-0476",
+    "SRC-0477"
+  ],
+  "specification": "SPEC-0072",
+  "implementation": "IMPL-0081",
+  "test": "TEST-0094",
+  "worker": {
+    "provider": "Copilot",
+    "model": "claude-sonnet-5.5",
+    "effort": "low",
+    "execution": {
+      "round": "register-export",
+      "worker": "copilot",
+      "exit_code": 0,
+      "outer_timeout": false,
+      "elapsed_seconds": 34.16,
+      "input_bytes": 17119,
+      "input_sha256": "cc9d6f5f17f2b893783b6358dc8f9fe207f0837e8f54169fba5af7b902e149ad",
+      "stderr_bytes": 0
+    },
+    "frozen_inputs": {
+      "revision": "6777f9d8c46994f5dff484e9f6d33913c7592ff8",
+      "inputs": {
+        "arch/m68k/window-irqs.S": "3af9a63b960c665f56ec3de16a00e81280071435b6ec1234b6ac863c41f584f1",
+        "platform/mac128k/window-entry.c": "882646ddb62b5e1058712184ac4a89ebd6f667013c6593d0fd27788eeb54c2bb",
+        "platform/mac128k/rom.h": "65d6b789b7d809520773c77df787694010e2afcb0f8b05d7021b726c393705c7",
+        "platform/mac128k/input-probe.h": "33dbf2b81c82dcc287b63c9ea81ad520d03e4d053e799586bcde9a664e399c4f"
+      },
+      "packet_bytes": 17119,
+      "packet_sha256": "cc9d6f5f17f2b893783b6358dc8f9fe207f0837e8f54169fba5af7b902e149ad"
+    },
+    "view_calls": 1,
+    "repository_writes": 0,
+    "commands": 0,
+    "worker_tests": 0,
+    "reported_premium_requests": 1,
+    "output_sha256": "6b8397a8a415c09ace21100d3a556024b90be58fa3c64e84fe9ca9a77bfe6704"
+  },
+  "lead_changes": [
+    "Normalize copyright",
+    "Assert all three snapshot array offsets",
+    "Update actual native72-byte audit,spin symbol,manifest and17 resealed native controls",
+    "Add literal complete mapping and10 CLI cases",
+    "Integrate focused CTest and Linux CI decoder step"
+  ],
+  "host_tests": {
+    "unittest_groups": 7,
+    "CLI_cases": 10,
+    "focused_CTest_passed": true,
+    "JUnit_sha256": "e36f12620030dd4d50834f3832295ede85ee07fefb58e48665b19165c729946a",
+    "faulty_decoder_controls": [
+      {
+        "fault": "swap-snapshots",
+        "detected": true
+      },
+      {
+        "fault": "unsigned-coordinates",
+        "detected": true
+      },
+      {
+        "fault": "ignore-magic",
+        "detected": true
+      }
+    ],
+    "initial_CTest": "temporary directory permission error;rerun passes with owned TEMP/TMP;no source change needed"
+  },
+  "native_verification": "pending committed-source CI;no native execution or cost/equality claim yet",
+  "default_driver_policy_changed": false,
+  "new_flags": false,
+  "guest_memory_patches": false,
+  "release_ready": false,
+  "remaining_provider_balances": {
+    "Copilot": "unavailable",
+    "Claude": "unavailable",
+    "Grok": "unavailable",
+    "Antigravity": "unavailable"
+  }
+}

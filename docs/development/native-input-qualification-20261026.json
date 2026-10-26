@@ -242,7 +242,11 @@
     "boot_observed": true,
     "physical_report": "pending at checkpoint;question remains unanswered",
     "input_qualified": false,
-    "own_RAM_trace_read": false
+    "own_RAM_trace_read": false,
+    "owner_followup": {
+      "report": "There is no Snow window open that I can bring present.",
+      "disposition": "No physical test performed;owned trial had already reached its cap. Not a phase-experiment input failure or pass."
+    }
   },
   "PC_startup_control": {
     "first_trial": "capture requested after five seconds returned0x0;no physical check",

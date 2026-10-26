@@ -2,6 +2,7 @@
 # Copyright (C) 2026 Dean Howell.
 """Check original compile-only window diagnostic proofs; never starts a guest."""
 import argparse,hashlib,json,subprocess,sys
+from importlib.util import spec_from_file_location,module_from_spec
 from pathlib import Path
 
 def main():
@@ -11,6 +12,8 @@ def main():
     p.add_argument('--pending-defer',action='store_true',help='Verify the opt-in finite-defer experiment instead of the idle spin')
     p.add_argument('--first-input',action='store_true',help='Verify the first-input/loss/5000-service checkpoint, optionally over the defer baseline')
     a=p.parse_args();repo=Path(__file__).resolve().parents[1]
+    spec=spec_from_file_location('checkpoint_build',repo/'scripts/Build-LoadedAppROM.py')
+    build=module_from_spec(spec);spec.loader.exec_module(build)
     roots=[Path(a.normal),Path(a.probe)]
     manifests=[json.loads((r/'manifest.json').read_text()) for r in roots]
     baseline_defer=bool(a.first_input and a.pending_defer)
@@ -28,7 +31,10 @@ def main():
         assert ('cs_mac_first_input_probe_gate' in q['symbols'])==first
         if first:assert m['profile']=='native-window-'+('pending-defer-' if pending else '')+'first-input-probe-v1'
         elif enabled and a.pending_defer:assert m['profile']=='native-window-pending-defer-probe-v1'
-        assert q['corruption_controls']==8 and q['resealed_native_corruption_controls']==4+int(enabled and (a.first_input or not a.pending_defer))
+        checkpoint=bool(enabled and (a.first_input or not a.pending_defer))
+        assert q['corruption_controls']==8 and q['resealed_native_corruption_controls']==4+17*int(checkpoint)
+        native_export=build.audit_register_checkpoint(b,q['symbols'],checkpoint)
+        assert q.get('register_checkpoint')==native_export
         assert len(q['irq_veneer_audit'])==3 and all(x['exact_opcodes_verified'] for x in q['irq_veneer_audit'])
         assert q['native_data_bss']==304+8*int(pending) and q['workspace_end']-q['workspace_begin']==964
         assert q['conservative_stack_bound']<=0x8000-0x2100 and q['individual_frame_max']<=1024
@@ -37,7 +43,7 @@ def main():
         if enabled:
             assert q['image_sha256']!=expected and q['rom_used']>manifests[0]['profiles'][0]['rom_used']
         if enabled and (a.first_input or not a.pending_defer):
-            at=q['symbols'][label]-0x400000
+            at=q['symbols']['cs_mac_window_idle_spin']-0x400000
             if a.first_input:assert m['window_first_input_probe_limit']==5000
             else:assert m['window_idle_probe_threshold']==500
             assert b[at:at+2]==bytes.fromhex('60fe')
@@ -73,10 +79,10 @@ def main():
        'baseline_byte_identical_to_83f7b6f':True,'baseline_rom_sha256':expected,
        'current_source_hashes_verified':True,'mode_refusals':len(modes)+int(a.pending_defer or a.first_input),
        'probe_kind':('pending-defer-first-input' if a.pending_defer else 'first-input') if a.first_input else ('pending-defer' if a.pending_defer else 'idle-checkpoint'),
-       'probe_spin_bytes':'60fe' if a.first_input or not a.pending_defer else None,'additional_ram_bytes':8 if a.pending_defer and not a.first_input else 0,'trace_layout_bytes':128,
+       'probe_spin_bytes':'60fe' if a.first_input or not a.pending_defer else None,'register_export_format':'MWR1' if a.first_input or not a.pending_defer else None,'additional_ram_bytes':8 if a.pending_defer and not a.first_input else 0,'trace_layout_bytes':128,
        'emulator_run':False,'motion_or_release_qualification':False}
     Path(a.output).write_text(json.dumps(d,indent=2)+'\n')
-    print('PASS: baseline ROM unchanged, probe twins/'+('12' if a.pending_defer and not a.first_input else '13')+
+    print('PASS: baseline ROM unchanged, probe twins/'+str(q['corruption_controls']+q['resealed_native_corruption_controls'])+
           ' controls/three IRQ veneers, '+str(d['additional_ram_bytes'])+' added RAM bytes, '+str(d['mode_refusals'])+' refusals; no boot.')
 
 if __name__=='__main__':main()
