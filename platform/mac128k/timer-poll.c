@@ -5,6 +5,13 @@
 enum { T1CL = 4, T1CH = 5, T1LL = 6, T1LH = 7, ACR = 11, IFR = 13, IER = 14,
        IFR_T1 = 0x40 };
 
+/* Run-time WR15 after the alias test: probe keeps DCD enable on both channels. */
+#if CLASSICK_MAC_TIMER_REFRESH_PROBE
+#define RUN_WR15 8u
+#else
+#define RUN_WR15 0u
+#endif
+
 static uint8_t vr(const cs_mac_timer_poll *p, unsigned r)
 {
     return p->via.read(p->via.context, r);
@@ -101,12 +108,15 @@ int cs_mac_timer_poll_prepare(cs_mac_timer_poll *p, const cs_mac_motion_io *scc,
     p->motion.stage = CS_MAC_STAGE_READBACK_B;
     if (sr(p, CS_MAC_SCC_B, 15) != 0)
         return fail(p, CS_MAC_STAGE_READBACK_B, CS_MAC_CAUSE_READBACK);
-    sw(p, CS_MAC_SCC_A, 15, 0);
+    sw(p, CS_MAC_SCC_A, 15, RUN_WR15);
+#if CLASSICK_MAC_TIMER_REFRESH_PROBE
+    sw(p, CS_MAC_SCC_B, 15, RUN_WR15);
+#endif
     p->motion.stage = CS_MAC_STAGE_READBACK_A;
-    if (sr(p, CS_MAC_SCC_A, 15) != 0)
+    if (sr(p, CS_MAC_SCC_A, 15) != RUN_WR15)
         return fail(p, CS_MAC_STAGE_READBACK_A, CS_MAC_CAUSE_READBACK);
     p->motion.stage = CS_MAC_STAGE_READBACK_B;
-    if (sr(p, CS_MAC_SCC_B, 15) != 0)
+    if (sr(p, CS_MAC_SCC_B, 15) != RUN_WR15)
         return fail(p, CS_MAC_STAGE_READBACK_B, CS_MAC_CAUSE_READBACK);
 
     p->motion.stage = CS_MAC_STAGE_CONFIG;
@@ -186,6 +196,10 @@ int cs_mac_timer_poll_service(cs_mac_timer_poll *p)
         return fail(p, CS_MAC_STAGE_INBOX, CS_MAC_CAUSE_INBOX_STATE);
     if (ph == CS_INBOX_WAIT)
         p->decoder.have_phase = m->have_phase = 0;
+#if CLASSICK_MAC_TIMER_REFRESH_PROBE
+    sw(p, CS_MAC_SCC_A, 0, 0x10);
+    sw(p, CS_MAC_SCC_B, 0, 0x10);
+#endif
 
     pb1 = m->io.pb(m->io.cookie);
     a1 = sr(p, CS_MAC_SCC_A, 0);

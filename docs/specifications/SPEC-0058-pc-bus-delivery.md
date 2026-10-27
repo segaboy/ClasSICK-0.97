@@ -40,3 +40,15 @@ Existing native PC candidates include this changed controller source and must
 be rebuilt/requalified before a new target claim. Released payloads/tags remain
 immutable. No window boot binding,new device command,VM/emulator/hardware/
 reference run or release. Mac M1-M7 and other compatibility gates persist.
+
+## Startup stream-boundary correction -2026-10-27
+
+SRC-0501/0502 supersedes the old final F4-ACK then keyboard-AE recipe. After
+configuration response19,phase20 writes controllerAE,21 writesD4,22 sends mouseF4,
+23 waits for its ACK and enters READY24. F4 resends return23->21;all existing
+limits,faults,keyboard ownership,READY receipts and decoder/sign rules remain.
+Streaming starts last,so immediate valid reports behind its ACK are consumed in
+READY rather than silently discarded in a final startup command. There is no
+new queue,API/layout or claimed recovery from unknown prior wire loss. The lead
+frozen regression fails the old source and preserves both reports after the fix.
+This proves a startup defect,not the cause of every observed GUI failure.

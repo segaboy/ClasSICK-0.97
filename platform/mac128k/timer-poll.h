@@ -7,6 +7,18 @@
 #include "polled-phase.h"
 #include "rom.h"
 
+/* Opt-in engineering experiment; default 0 keeps behavior/API/layout. At 1,
+ * prepare leaves WR15 DCD enable (8) set on both channels and each admitted
+ * WAIT/PRIMING/READY service issues ResetExtStatus (WR0 0x10) to A then B
+ * before the first PB/RR0 triple. WR1 and SCC master stay off. Endpoint
+ * polling only; not a historical or proven root-cause fix. */
+#ifndef CLASSICK_MAC_TIMER_REFRESH_PROBE
+#define CLASSICK_MAC_TIMER_REFRESH_PROBE 0
+#endif
+#if (CLASSICK_MAC_TIMER_REFRESH_PROBE)!=0 && (CLASSICK_MAC_TIMER_REFRESH_PROBE)!=1
+#error CLASSICK_MAC_TIMER_REFRESH_PROBE must be 0 or 1
+#endif
+
 /* Opt-in timer-driven polling controller; the normal driver is unchanged.
  * Caller owns SCC/VIA T1/ACR exclusively. prepare/arm/stop run under IPL7 and
  * service runs in a serialized IPL7 ISR, with foreground inbox exclusion

@@ -105,13 +105,13 @@ static void t_happy(void) {
     static const struct { uint8_t k, v, ph; } s[] = {
         {0,0,2},{0,0,3},{0,0,4},{0,0,5},{1,0,6},{0,0,7},{0,0,8},{0,0,9},{2,0xFA,10},{0,0,11},{0,0,12},
         {2,0xFA,13},{2,0xAA,14},{2,0,15},{0,0,16},{0,0,17},{2,0xFA,18},{0,0,19},{1,0x10,20},{0,0,21},
-        {0,0,22},{2,0xFA,23},{0,0,24} };
+        {0,0,22},{0,0,23},{2,0xFA,24} };
     static const Ev e[] = {
         S(0), C(0xAD), S(0), C(0xA7), S(0), S(0), C(0xA9), S(1), D(0), S(0), C(0xA8),
         S(0), C(0xD4), S(0), X(0xF5), S(0x21), D(0xFA), S(0), C(0xD4), S(0), X(0xFF),
         S(0x21), D(0xFA), S(0x21), D(0xAA), S(0x21), D(0), S(0), C(0xD4), S(0), X(0xF6),
-        S(0x21), D(0xFA), S(0), C(0x20), S(1), D(0x10), S(0), C(0xD4), S(0), X(0xF4),
-        S(0x21), D(0xFA), S(0), C(0xAE) };
+        S(0x21), D(0xFA), S(0), C(0x20), S(1), D(0x10), S(0), C(0xAE), S(0), C(0xD4), S(0), X(0xF4),
+        S(0x21), D(0xFA) };
     int i;
     prime(1);
     for (i = 0; i < N(s); i++) {
@@ -142,7 +142,7 @@ static void t_timeouts(void) {
     flood(5, 1, 0x00, CS_PS2_SHORT_TICKS); flood(19, 1, 0x10, CS_PS2_SHORT_TICKS);
     flood(9, 0, 0xFA, CS_PS2_SHORT_TICKS); flood(12, 0, 0xFA, CS_PS2_SHORT_TICKS);
     flood(13, 0, 0xAA, CS_PS2_BAT_TICKS); flood(14, 0, 0x00, CS_PS2_SHORT_TICKS);
-    flood(17, 0, 0xFA, CS_PS2_SHORT_TICKS); flood(22, 0, 0xFA, CS_PS2_SHORT_TICKS);
+    flood(17, 0, 0xFA, CS_PS2_SHORT_TICKS); flood(23, 0, 0xFA, CS_PS2_SHORT_TICKS);
     prime(13); CK(P(1000 + CS_PS2_SHORT_TICKS) == CS_PS2_ACTIVE);
     prime(1); CK(P(1000 + CS_PS2_SHORT_TICKS - 1) == CS_PS2_ACTIVE && n == 2);
     prime(1); n = 0; CK(P(1000 + CS_PS2_SHORT_TICKS) == CS_PS2_TIMEOUT && n == 0);
@@ -158,11 +158,11 @@ static void t_fail(void) {
     static const struct { uint8_t ph, v, aux; uint32_t exp; } f[] = {
         {9,0xFC,1,CS_PS2_DEVICE},{9,0xFD,1,CS_PS2_DEVICE},{9,0x00,1,CS_PS2_DEVICE},{9,0xFF,1,CS_PS2_DEVICE},
         {9,0x55,1,CS_PS2_PROTOCOL},{12,0x55,1,CS_PS2_PROTOCOL},{17,0xAA,1,CS_PS2_PROTOCOL},
-        {22,0xFC,1,CS_PS2_DEVICE},{13,0xAB,1,CS_PS2_DEVICE},{14,0x03,1,CS_PS2_DEVICE},
+        {23,0xFC,1,CS_PS2_DEVICE},{13,0xAB,1,CS_PS2_DEVICE},{14,0x03,1,CS_PS2_DEVICE},
         {5,0x01,0,CS_PS2_CONTROLLER},{19,0x30,0,CS_PS2_CONTROLLER},{19,0x11,0,CS_PS2_CONTROLLER},
         {19,0x00,0,CS_PS2_CONTROLLER},{19,0x12,0,CS_PS2_CONTROLLER} };
     static const struct { uint8_t ph, v, aux, err; } t[] = {
-        {9,0xFA,1,0x80},{5,0x00,0,0x40},{14,0x00,1,0xC0},{13,0xAA,0,0x80},{19,0x10,0,0x80},{22,0xFA,1,0x40} };
+        {9,0xFA,1,0x80},{5,0x00,0,0x40},{14,0x00,1,0xC0},{13,0xAA,0,0x80},{19,0x10,0,0x80},{23,0xFA,1,0x40} };
     int i;
     for (i = 0; i < N(f); i++) {
         uint32_t r;
@@ -177,7 +177,7 @@ static void t_fail(void) {
 }
 
 static void t_retry(void) {
-    static const struct { uint8_t ph, rb, byte; } r[] = { {9,7,0xF5}, {12,10,0xFF}, {17,15,0xF6}, {22,20,0xF4} };
+    static const struct { uint8_t ph, rb, byte; } r[] = { {9,7,0xF5}, {12,10,0xFF}, {17,15,0xF6}, {23,21,0xF4} };
     int i, k;
     for (i = 0; i < 4; i++) {
         Ev e[6] = { S(0x21), D(0xFE), S(0), C(0xD4), S(0), X(r[i].byte) };

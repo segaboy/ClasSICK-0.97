@@ -1,0 +1,397 @@
+{
+  "date": "2026-10-27",
+  "baseline": "0547842ff39dd5c3878fd6c8c6f5b1f10385609e",
+  "sources": [
+    "SRC-0497",
+    "SRC-0498",
+    "SRC-0499",
+    "SRC-0500",
+    "SRC-0501",
+    "SRC-0502"
+  ],
+  "specifications": [
+    "SPEC-0077",
+    "SPEC-0040",
+    "SPEC-0058"
+  ],
+  "implementation": "IMPL-0085",
+  "test": "TEST-0098",
+  "scope": "Opt-in Mac experiment and reproduced PC startup byte-loss correction;paired release remains unqualified",
+  "worker_calls": [
+    {
+      "round": "primary",
+      "worker": "claude",
+      "exit_code": 0,
+      "outer_timeout": false,
+      "elapsed_seconds": 142.38,
+      "input_bytes": 31666,
+      "input_sha256": "df26b0241043a42a8d7ed4aa92ad1a2313a349df3950194955e9ec29baf072db",
+      "stderr_bytes": 0
+    },
+    {
+      "round": "pc-review",
+      "worker": "copilot",
+      "exit_code": 0,
+      "outer_timeout": false,
+      "elapsed_seconds": 45.48,
+      "input_bytes": 25873,
+      "input_sha256": "ef2151accaad9bcabe8ba9ba0a8cedc6b597cb4fca987f3d48e5ce6d9ad3e337",
+      "stderr_bytes": 0
+    },
+    {
+      "round": "pc-fix",
+      "worker": "copilot",
+      "exit_code": 0,
+      "outer_timeout": false,
+      "elapsed_seconds": 114.45,
+      "input_bytes": 41101,
+      "input_sha256": "945ba6e30f8a7147b708057d19a9f8571fff00e1577367bfe915444306782367",
+      "stderr_bytes": 0
+    }
+  ],
+  "worker_tests_executed": [],
+  "worker_controls": {
+    "Claude_tools": 0,
+    "Copilot_views_per_call": 1,
+    "worker_commands": 0,
+    "worker_writes": 0,
+    "excluded_inputs_sent": false
+  },
+  "usage": {
+    "Claude_reported_session_list_USD": 0.4980224,
+    "Copilot_reported_premium_requests": 2,
+    "remaining_balances": {
+      "Claude": null,
+      "Copilot": null,
+      "Grok": null,
+      "Antigravity": null
+    },
+    "measured_Codex_savings": null
+  },
+  "integration_corrections": [
+    "Mac test additions cover PB incoherence precedence,Gray loss and epoch refusal.",
+    "Removed tautological PC IO assertion;require one live-turn status read.",
+    "Correct literal ACK+6AUX+1keyboard count is8 data/7AUX.",
+    "New oracle targets added to existing sanitizer/strict-profile target list.",
+    "Initial default IR comparison differed only in path metadata;normalization excludes only ModuleID,source_filename,DIFile paths."
+  ],
+  "Mac": {
+    "runtime_macro_default": 0,
+    "refresh_assertions": 77,
+    "focused_CTests_per_profile": 3,
+    "profiles": [
+      "Clang Debug",
+      "GCC64",
+      "GCC32",
+      "ASan/UBSan"
+    ],
+    "fault_controls": [
+      {
+        "control": "missing-B-refresh",
+        "detected": true
+      },
+      {
+        "control": "wrong-B-mask",
+        "detected": true
+      },
+      {
+        "control": "invalid-macro2",
+        "compile_refused": true
+      }
+    ],
+    "builder_refusals": [
+      {
+        "case": [
+          "--window-timer-refresh-probe"
+        ],
+        "refused_without_output": true
+      },
+      {
+        "case": [
+          "--window-timer-refresh-probe",
+          "--window-timer-poll-probe"
+        ],
+        "refused_without_output": true
+      },
+      {
+        "case": [
+          "--window-drawing",
+          "--window-timer-poll-probe",
+          "--window-timer-refresh-probe",
+          "--window-phase-idle-probe"
+        ],
+        "refused_without_output": true
+      }
+    ],
+    "default_identity": {
+      "default_optimized_IR_equal": true,
+      "normalization": "ModuleID,source_filename and DIFile path metadata only",
+      "sha256": "74771fdb69e0337002200238cf966c97d8023439d159a0a09f36156a47851bd1",
+      "not_native_image_proof": true
+    },
+    "native_build_verified": false,
+    "refresh_ROM_booted": false,
+    "actual_prefixed_trace": {
+      "tag": 1297567793,
+      "version": 2,
+      "bytes": 128,
+      "source_irq": 1,
+      "vbl": 7252,
+      "scc": 0,
+      "combined": 0,
+      "services": 23049,
+      "baselines": 268,
+      "losses": 618,
+      "queued": 0,
+      "peak": 1,
+      "deliveries": 0,
+      "pointer_x": 256,
+      "pointer_y": 171,
+      "window_x": 80,
+      "window_y": 70,
+      "pattern": 0,
+      "phase": 1,
+      "motion_stage": 5,
+      "raw_a": 0,
+      "raw_b": 1,
+      "buttons": 0,
+      "motion_cause": 0,
+      "cause": 0,
+      "loss_reason": 2,
+      "loss_rr3": 0,
+      "loss_snap0": 12536908,
+      "loss_snap1": 11488332,
+      "loss_snap2": 0,
+      "loss_previous": 16777216,
+      "loss_phase": 3
+    },
+    "trace_sha256": "a6fac3ad2f286f0276cc558863d2b1e10fa08c5b6864b26d3abed9d3bc2fe2ee",
+    "closed": {
+      "status": "wall cap reached",
+      "host_seconds": 240.06,
+      "pid": 39084,
+      "process_exited": true,
+      "forced_process_cleanup": true,
+      "guest_shutdown_claimed": false,
+      "ROM_sha256": "7de4329b10bf34fa4f03f43def49fdaf8b1c34831cc3ebf11bfb2e3bfdc86606"
+    },
+    "not_quiet_host_control": true
+  },
+  "PC": {
+    "frozen_oracle": {
+      "oracle_sha256": "5cdc4b1bb0c49eb149785059f63371af5001e55c422d6467330e1efcceb99b90",
+      "fixture_sha256": "f880f1035ef8576ecc9d4d827de6b82c70e99f7a3c34a113c6e0a38aa99f9ce7",
+      "worker_fix_unseen": true,
+      "old_result": "stream boundary:ready=1 packets=0 seen=0 aux=12 errors=0 keyboard=29 violations=0 failures=1\n"
+    },
+    "old_result": "stream boundary:ready=1 packets=0 seen=0 aux=12 errors=0 keyboard=29 violations=0 failures=1",
+    "fixed_result": "stream boundary:ready=1 packets=2 seen=2 aux=12 errors=0 keyboard=29 violations=0 failures=0",
+    "focused_CTests_by_profile": {
+      "Clang Debug": 8,
+      "GCC64": 8,
+      "GCC32": 6,
+      "ASan/UBSan": 8
+    },
+    "additional_frozen_oracle_profiles": 4,
+    "startup_phases": {
+      "20": "AE",
+      "21": "D4",
+      "22": "F4",
+      "23": "ACK->READY24"
+    },
+    "decoder_changed": false,
+    "postfix_images": {
+      "normal": {
+        "sha256": "e634d1a4831dfd9970d839ffb6b6c596bea4315e4fc65db013b4b7ea3a00b955",
+        "twins": 4,
+        "corruption_controls": 27,
+        "omission_controls": 26
+      },
+      "raw-motion": {
+        "sha256": "9120a9686ba59092677d8ea0aba37cb535608712e61d1216d1db3bdff34a3fef",
+        "twins": 4,
+        "corruption_controls": 27,
+        "omission_controls": 28
+      }
+    },
+    "postfix_images_booted": false,
+    "prefixed_raw_proof": {
+      "EFI": "ddaebceea5e7135767af3b5d2e134ce6e0960b242bd743be3af8eb03c9123858",
+      "disk": "97d7684673bc2b5facf8d9ee2385ced4585d2521dedf1e9463d9d4510a726278",
+      "spin": [
+        "0x1002d0e2",
+        "0x1002d0e4"
+      ],
+      "profile": "raw-motion",
+      "twins": true,
+      "image_controls": 27,
+      "omitted_probe_controls": 2,
+      "source_hashes_verified": true
+    },
+    "prefixed_actual_raw": {
+      "bytes": [
+        "2A",
+        "FF",
+        "01"
+      ],
+      "dx": 255,
+      "dy": -255,
+      "buttons": 2,
+      "packet": 1,
+      "errors": 0,
+      "pointer": [
+        511,
+        341
+      ]
+    },
+    "prefixed_trial_closed": {
+      "utc": "2026-10-27T10:55:23.7231515Z",
+      "cold_starts": 1,
+      "state": "poweroff",
+      "unregistered": true,
+      "existing_vm_inventory_preserved": true,
+      "running_state_preserved": true,
+      "post_trial_raw_roundtrip_equal": true,
+      "artifacts_retained": true,
+      "semantic_session_stop_observed": false,
+      "termination": "external poweroff from paused state"
+    },
+    "GUI_root_cause_proven": false
+  },
+  "verification_log_identities": [
+    {
+      "name": "mac-refresh-final-tests-0.log",
+      "sha256": "256bf4e7dde367e7aa6b441184eda632a6356ff2cb45d4156a2a99b50d45f15d"
+    },
+    {
+      "name": "mac-refresh-final-tests-1.log",
+      "sha256": "bf5a58c4957fbe043ace271f450f6982e877cf9c1e0a3aa75880e011fd285585"
+    },
+    {
+      "name": "mac-refresh-final-tests-2.log",
+      "sha256": "40e376da46c165488b06839889859ba7e61dc46f9c77bf92c4788b6f10233c25"
+    },
+    {
+      "name": "mac-refresh-final-tests-3.log",
+      "sha256": "fd9a27eefbe4d80aa03163cf6853beedf82ee966d02b23ed9adac165220f4e57"
+    },
+    {
+      "name": "pc-oracle/fixed.log",
+      "sha256": "f1c9a45e31b67368e09a59c66183a2e1b5896970641433111f291b826c55cbe4"
+    },
+    {
+      "name": "pc-oracle/old.log",
+      "sha256": "2cbf1df13cdb1dc8979183e2b9971f565c5c4f282535aa8fae5ee57f061d9e7d"
+    },
+    {
+      "name": "pc-oracle/public-old.log",
+      "sha256": "2cbf1df13cdb1dc8979183e2b9971f565c5c4f282535aa8fae5ee57f061d9e7d"
+    },
+    {
+      "name": "pc-tests-final-0.log",
+      "sha256": "e975d9352e00d04641a694906065dc5813d26c382a899ea0b37d9c8972b6d289"
+    },
+    {
+      "name": "pc-tests-final-1.log",
+      "sha256": "8eea5282bfcfae91e225d4aa8e001d58b1177b5fa7ac116b8ccd8e8acf503658"
+    },
+    {
+      "name": "pc-tests-final-2.log",
+      "sha256": "8b87b59be70c1c2b78a7efb3b38d723d3f7c7d6ae1304325f718683f210234dc"
+    },
+    {
+      "name": "pc-tests-final-3.log",
+      "sha256": "b7dad8bfd3ab575a752d709a4add066e784e247e219703770c03f100d021c19c"
+    }
+  ],
+  "source_working_file_identities": [
+    {
+      "path": ".github/workflows/bootstrap.yml",
+      "bytes": 38212,
+      "sha256": "21d97547e99a77634f3a94a08842428db4c72141d1ca71983faee618b4dd6119"
+    },
+    {
+      "path": "CMakeLists.txt",
+      "bytes": 178519,
+      "sha256": "a652266b779f0f3ece0b27a005fcfd24fd0f9e6f4c0ee216ec65aa4b3fb60ea9"
+    },
+    {
+      "path": "docs/specifications/SPEC-0040-pc-mouse-controller.md",
+      "bytes": 4724,
+      "sha256": "e6150155939edcb354052a68942155954529fb85c9e3a5edb167d347e41473a2"
+    },
+    {
+      "path": "docs/specifications/SPEC-0058-pc-bus-delivery.md",
+      "bytes": 3383,
+      "sha256": "d9df39ea92727edf90bab5867f6ffd37c4e765afa92bf254383ec95546bd1be0"
+    },
+    {
+      "path": "platform/mac128k/timer-poll.c",
+      "bytes": 8614,
+      "sha256": "6093d88cf396f9e49eda8b9599e5838d2c474ac551be730fc16a88aa76be781e"
+    },
+    {
+      "path": "platform/mac128k/timer-poll.h",
+      "bytes": 2314,
+      "sha256": "486014b66da26d2d3941ab9517aeb8ce8b07d0e5bc102a808e4d67a69ab14e38"
+    },
+    {
+      "path": "platform/pc/ps2-bus.c",
+      "bytes": 7636,
+      "sha256": "cde646f143aceb86a6f2833321c69958d3c09b69337a4a03982f85de86c21959"
+    },
+    {
+      "path": "scripts/Build-LoadedAppROM.py",
+      "bytes": 26510,
+      "sha256": "adb7f85e6ec2f52394bf956db0836a4471168a95e3409741e22e826d6c570c83"
+    },
+    {
+      "path": "tests/ps2-bus-fixture.h",
+      "bytes": 2158,
+      "sha256": "4677bdf3d6b9133533a29dbd44bf7c6e1121aeec97cd260747d9bb6fd7b4ab0a"
+    },
+    {
+      "path": "tests/ps2-bus-independent.c",
+      "bytes": 14705,
+      "sha256": "6443f6f811c4f06583ed26aa8695c3144ef32933f61ad599195d26cc949c71e1"
+    },
+    {
+      "path": "docs/development/tasks/mac-timer-refresh-claude.md",
+      "bytes": 3316,
+      "sha256": "86199c64eb01848cc17f9ae2d9f5b9e6da0849ecaf76d42bb79d809b094e54ac"
+    },
+    {
+      "path": "docs/specifications/SPEC-0077-mac-timer-refresh.md",
+      "bytes": 2023,
+      "sha256": "4ab4043f8934eea94dbe8fe6993d94c3e8b8f7c37f7adbb593539ed2923b424d"
+    },
+    {
+      "path": "tests/mac-timer-refresh.c",
+      "bytes": 9442,
+      "sha256": "38a5db264025cfbc89ecebe0047f29296a603eb45315370c9d42115d1d2c88c1"
+    },
+    {
+      "path": "tests/ps2-stream-boundary-oracle.c",
+      "bytes": 1605,
+      "sha256": "39f8e42d792067f6259106c6fd8bcf5df5df4d4e88e062c0a05979d50f99be16"
+    },
+    {
+      "path": "tests/ps2-stream-boundary.c",
+      "bytes": 3585,
+      "sha256": "ee37cdadbc6233bf6e8706a529f212794defedf162df065df1db8590766199c1"
+    }
+  ],
+  "known_initial_failures": [
+    "Worker PC literal-byte expectations corrected from explicit fixture.",
+    "Sanitizer link initially failed for missing new-target inheritance;corrected.",
+    "Initial broad CTest selection included unbuilt old targets;built selected targets,then passed."
+  ],
+  "release_ready": false,
+  "Mac_motion_passed": false,
+  "PC_GUI_drag_passed": false,
+  "new_286_runtime": false,
+  "prior_286_compiler_proofs": "12 objects/six refusals retained,unlinked/unrun",
+  "screenshots_in_Git": 72,
+  "GIFs_in_Git": 2,
+  "preservation": "24 research originals,held brief,UART,prior tags/releases/assets and retired wiki preserved;no new reference/hardware/source exposure"
+}

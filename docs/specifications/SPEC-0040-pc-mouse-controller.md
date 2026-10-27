@@ -37,3 +37,15 @@ READY: no writes. Non-AUX bytes go through `cs_ps2_receive` (QUEUE propagates). 
 
 ## Native profile `CLASSICK_PC_MOUSE=1` (keyboard.c only)
 Default0 retains the legacy contract/tested behavior and v1 112-byte trace. Profile1 waits for complete bus READY before drawing or timing. Its trace stays112 bytes, version2:12/16 bus result/phase;36 saturated Space+left presses (serial `space=` is a compatibility label for combined input);52/56/60/64 keyboard+bus sums of errors/AUX/drained/resends;104 last byte;108 last verified configuration before final AE, not current hardware state. Queue-pop faults also set bus.result=QUEUE. Qualification remainsv1/keyboard-only. Mouse changes the count without changing Space's offset. Variants never link together. The native UEFI ABI remains x64-only; portable bus tests cover both widths/byte orders.
+
+## Startup stream-boundary correction -2026-10-27
+
+SRC-0501/0502 supersedes the old final F4-ACK then keyboard-AE recipe. After
+configuration response19,phase20 writes controllerAE,21 writesD4,22 sends mouseF4,
+23 waits for its ACK and enters READY24. F4 resends return23->21;all existing
+limits,faults,keyboard ownership,READY receipts and decoder/sign rules remain.
+Streaming starts last,so immediate valid reports behind its ACK are consumed in
+READY rather than silently discarded in a final startup command. There is no
+new queue,API/layout or claimed recovery from unknown prior wire loss. The lead
+frozen regression fails the old source and preserves both reports after the fix.
+This proves a startup defect,not the cause of every observed GUI failure.

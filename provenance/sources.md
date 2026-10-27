@@ -4704,3 +4704,27 @@ new capture;no guest implementation fix or release pass inferred.
 ## SRC-0496 - Fresh original Mac source review and lead dispositions
 
 2026-10-26. Copilot41.89s/30812 frozen reviewed-public bytes,one view,no commands/writes/tests,one reported premium-request cost. No demonstrated defect or proposed patch. Lead retains diagnostic gap with explicit corrections to trace ABI,button-only trigger,frequency and physical-target claims. New diagnostic contract/tests are proposals only. [Evidence](../docs/development/unlocked-input-evidence.md).
+
+## SRC-0497 - Actual original Mac RAM trace read
+
+2026-10-27. Paused existing MWP1 v2/128B at verified own symbol BA8:23049 services,268 baselines,618 losses,zero deliveries,pointer256,171;first UNSTABLE snapshots BF4C4C/AF4C4C. Before deliberately targeted motion is not quiet-host proof. Own Snow closes240.06s,ROM unchanged. [Evidence](../docs/development/timer-refresh-stream-boundary.md).
+
+## SRC-0498 - Actual original PC first raw checkpoint
+
+2026-10-27. Existing raw-motion profile reaches own1002D0E4/CSPRAW01 after a Sky gesture containing positioning/button events. Raw2A/FF/01 decodes255/-255/buttons2,packet1/errors0,pointer511,341. No isolated physical delta or sign defect inferred. Own VM closes with inventory/media preserved. [Evidence](../docs/development/timer-refresh-stream-boundary.md).
+
+## SRC-0499 - Original opt-in Mac SCC refresh artifact
+
+2026-10-27. Claude Opus5.5 Low returns bounded original controller/test replacements in142.38s from31666 reviewed-public/original bytes,no tools/writes/tests. Output exceeds280-line cap;lead integrates with disclosed test additions. Manuals and private/excluded material withheld. [Evidence](../docs/development/timer-refresh-stream-boundary.md).
+
+## SRC-0500 - Original PC streaming-boundary review
+
+2026-10-27. Copilot Sonnet5.5 Low45.48s/25873 frozen bytes,one view,no commands/writes/tests. Identifies final startup interval discarding early AUX reports. Lead reproduces loss before requesting fix;no claim this explains all GUI failures. [Evidence](../docs/development/timer-refresh-stream-boundary.md).
+
+## SRC-0501 - Original PC startup ordering correction
+
+2026-10-27. Qualified-author Copilot Sonnet5.5 Low114.45s/41101 frozen bytes,one view,no commands/writes/tests. Enable keyboard before D4/F4 and enter READY after final ACK;original tests/fixture updates adopted with literal-count and assertion corrections. [Evidence](../docs/development/timer-refresh-stream-boundary.md).
+
+## SRC-0502 - Lead integration and executed input verification
+
+2026-10-27. Mac77 assertions/three focused CTests/four profiles,two compiled faults and macro2 refusal pass;three builder refusals and default optimized IR identity pass. PC groups8/8 in three64-bit profiles and6/6 in GCC32 plus frozen boundary oracle in all four pass. Old code demonstrably loses both reports;fixed code preserves both. Native PC twins/corruption/omission checks pass;post-fix images unbooted,Mac native proof pending. [Evidence](../docs/development/timer-refresh-stream-boundary.md).

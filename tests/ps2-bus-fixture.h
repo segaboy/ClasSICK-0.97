@@ -38,13 +38,14 @@ static void bf_write(void *p,uint16_t port,uint8_t byte)
         else if(byte==0xA8)f->config&=(uint8_t)~0x20u;
         else if(byte==0xD4)f->prefix=1;
         else if(byte==0x20)pf_byte(&f->key,f->config,0);
-        else if(byte==0xAE){f->config&=(uint8_t)~0x10u;f->ready=1;}
+        else if(byte==0xAE)f->config&=(uint8_t)~0x10u;
         else ++f->key.violations;
     }else{
         if(!f->prefix){++f->key.violations;return;}f->prefix=0;
         if(byte!=0xF5 && byte!=0xFF && byte!=0xF6 && byte!=0xF4){++f->key.violations;return;}
         pf_byte(&f->key,0xFA,0x20);
         if(byte==0xFF){pf_byte(&f->key,0xAA,0x20);pf_byte(&f->key,0,0x20);}
+        if(byte==0xF4)f->ready=1; /* streaming starts at F4 ACK */
     }
 }
 static cs_ps2_io bf_io(bus_fixture *f)

@@ -226,6 +226,20 @@ jobs:
         run: |
           python3 scripts/Build-LoadedAppROM.py --window-drawing --window-timer-poll-probe --tool-root "$RUNNER_TEMP/classick-m68k/root" --output "$RUNNER_TEMP/classick-window-timer"
           python3 scripts/Build-LoadedAppROM.py --window-drawing --window-timer-poll-probe --window-idle-probe --tool-root "$RUNNER_TEMP/classick-m68k/root" --output "$RUNNER_TEMP/classick-window-timer-idle"
+      - name: Build and verify SCC status-refresh experiment (unbooted)
+        run: |
+          cc -std=c11 -pedantic-errors -Wall -Wextra -Werror -Wconversion -Wsign-conversion -DCLASSICK_MAC_TIMER_REFRESH_PROBE=1 -I. platform/mac128k/timer-poll.c platform/mac128k/polled-phase.c apps/window-scene/inbox.c tests/mac-timer-refresh.c -o "$RUNNER_TEMP/timer-refresh"
+          "$RUNNER_TEMP/timer-refresh"
+          python3 scripts/Build-LoadedAppROM.py --window-drawing --window-timer-poll-probe --window-timer-refresh-probe --tool-root "$RUNNER_TEMP/classick-m68k/root" --output "$RUNNER_TEMP/classick-window-timer-refresh"
+      - name: Retain SCC status-refresh experiment (unbooted)
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
+        with:
+          name: classick-window-timer-refresh-mac
+          path: |
+            ${{ runner.temp }}/classick-window-timer-refresh/manifest.json
+            ${{ runner.temp }}/classick-window-timer-refresh/Os-a/classick-loaded-app.rom
+            ${{ runner.temp }}/classick-window-timer-refresh/Os-a/classick-loaded-app.map
+          if-no-files-found: error
       - name: Retain separate timer polling experiments (unbooted)
         uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
         with:

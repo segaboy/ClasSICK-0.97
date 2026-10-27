@@ -29,22 +29,22 @@ static int command(uint32_t phase,uint16_t *port,uint8_t *value)
     else if(phase==2) *value=0xA7;
     else if(phase==4) *value=0xA9;
     else if(phase==6) *value=0xA8;
-    else if(phase==7 || phase==10 || phase==15 || phase==20) *value=0xD4;
+    else if(phase==7 || phase==10 || phase==15 || phase==21) *value=0xD4;
     else if(phase==18) *value=0x20;
-    else if(phase==23) *value=0xAE;
+    else if(phase==20) *value=0xAE;
     else {
         *port=0x60;
         if(phase==8) *value=0xF5;
         else if(phase==11) *value=0xFF;
         else if(phase==16) *value=0xF6;
-        else if(phase==21) *value=0xF4;
+        else if(phase==22) *value=0xF4;
         else return 0;
     }
     return 1;
 }
 static int awaits_aux(uint32_t phase)
 {
-    return phase==9 || phase==12 || phase==13 || phase==14 || phase==17 || phase==22;
+    return phase==9 || phase==12 || phase==13 || phase==14 || phase==17 || phase==23;
 }
 /* One AUX byte in an AUX wait phase: ACK, BAT or ID. */
 static uint32_t answer(cs_ps2_bus *b,uint32_t phase,uint8_t byte,uint64_t now)

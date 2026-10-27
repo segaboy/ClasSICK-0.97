@@ -1,5 +1,7 @@
 # Paired native preview 2 - first interactive window
 
+2026-10-27,SRC-0497..0502/SPEC-0077/IMPL-0085/TEST-0098:existing Mac RAM trace captured;opt-in refresh77 assertions/four profiles pass,native proof pending. PC startup AUX discard independently reproduced and corrected;focused suites/frozen oracle/four profiles and native image audits pass. Post-fix images unbooted;Mac motion/PC GUI dragging/release remain blocked.72PNG/twoGIF,286/originals preserved. [Evidence](../docs/development/timer-refresh-stream-boundary.md).
+
 2026-10-26,SRC-0492..0496:49b619c fullCI passes;helper physical-client guard fixed. Fresh physical repeats:PC cross clipped at upper-right;Mac cross stays centered,counter0002. Motion/dragging remain unqualified. Seven owned sessions closed. Copilot review finds no demonstrated defect;versioned activity trace is next proposed contract.72PNG/twoGIF;286/originals preserved. [Evidence](../docs/development/unlocked-input-evidence.md).
 
 2026-10-26,SRC-0490/0491:d9df16d fullCI passes,normal PC EFI/disk unchanged. Native raw device control09/01/00 gives+1X,left1,pointer257,171;not GUI evidence. Current foreground refusal is LockApp;zero-event guard sends nothing,all owned sessions close/media/inventory preserved. Unlock required;Mac motion/PC GUI/release remain open.70PNG/twoGIF/286 proofs retained. [Proof](../docs/development/timer-and-pc-input.md).
