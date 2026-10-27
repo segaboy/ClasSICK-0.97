@@ -8,3 +8,5 @@ remain. [Actual evidence](../../docs/development/windows-input-helper-evidence.m
 SRC-0492 supersedes the captured-indicator exception. Outside-client input is
 refused after the read-only query/base recheck. No guest or event-mapping change.
 [Correction](../../docs/development/unlocked-input-evidence.md).
+
+SRC-0504..0507:physical-left selector,owned-window positioning without input and exact fullscreen-root binding.83 fake assertions/four CTests/four profiles,five compiled defects/16 CLI controls pass;actual guest motion/drag remains unqualified. [Current evidence](../../docs/development/owned-window-input-evidence.md).

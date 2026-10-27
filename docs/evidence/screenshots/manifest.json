@@ -1681,6 +1681,52 @@
         "Counter0002 is observed;exact physical press count and CPU/phase trace are not captured.",
         "Direct host mouse in emulator;no physical Macintosh,System1 or release qualification."
       ]
+    },
+    {
+      "id": "2026-10-27-mac-refresh-held-click",
+      "path": "docs/evidence/screenshots/2026-10-27/mac-refresh-held-click.png",
+      "sha256": "cd5add487ce7d8fd2065bb10c3c23e06cbe54d7cba188b92a09080a71438438f",
+      "bytes": 74339,
+      "width": 512,
+      "height": 342,
+      "captured_on": "2026-10-27",
+      "target": "native-mac68000",
+      "caption": "Mac refresh experiment accepts a guarded physical-left held press:counter0001 and stripes;trace reports pointer256,171 and no displacement.",
+      "alt": "Original Mac scene with central cross,vertical stripes and counter0001.",
+      "source_revision": "3fab75ff8afdc09493684705dde94ebf5b8a1d9f",
+      "compiled_source_revision": "3fab75ff8afdc09493684705dde94ebf5b8a1d9f",
+      "evidence": "docs/development/owned-window-input-evidence.md",
+      "license": "GPL-3.0-or-later",
+      "rights": "Unmodified Snow camera export of our512x342 guest framebuffer;no desktop,emulator chrome or retouch.",
+      "input": "synthetic",
+      "limitations": [
+        "Host API acceptance is not guest motion or dragging qualification.",
+        "No human confirmation in these automated trials.",
+        "No physical Macintosh,System1,compatibility or release qualification."
+      ]
+    },
+    {
+      "id": "2026-10-27-pc-fullscreen-input-unchanged",
+      "path": "docs/evidence/screenshots/2026-10-27/pc-fullscreen-input-unchanged.png",
+      "sha256": "7bd4dc9c78b1729f5d88da5f57ee1813666714caf17fce88913d97cee4abc5a7",
+      "bytes": 4850,
+      "width": 1024,
+      "height": 768,
+      "captured_on": "2026-10-27",
+      "target": "native-x86_64",
+      "caption": "Fixed PC candidate after eight guarded relative movements and both held-button modes:counter0000 and window unchanged. Movement and dragging did not pass.",
+      "alt": "Original centered PC scene with unchanged checkerboard window and counter0000.",
+      "source_revision": "3fab75ff8afdc09493684705dde94ebf5b8a1d9f",
+      "compiled_source_revision": "3fab75ff8afdc09493684705dde94ebf5b8a1d9f",
+      "evidence": "docs/development/owned-window-input-evidence.md",
+      "license": "GPL-3.0-or-later",
+      "rights": "Unmodified VBoxManage export of our1024x768 guest framebuffer;no desktop,emulator chrome or retouch.",
+      "input": "synthetic",
+      "limitations": [
+        "Host API acceptance is not guest motion or dragging qualification.",
+        "No human confirmation in these automated trials.",
+        "No physical Macintosh,System1,compatibility or release qualification."
+      ]
     }
   ]
 }

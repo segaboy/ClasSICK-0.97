@@ -32,11 +32,14 @@ typedef struct {
   unsigned long long created;
 } wih_target;
 #include "test-targets.h"
+#ifndef WH_TARGET_WINDOW
+#define WH_TARGET_WINDOW ((UINT_PTR)0)
+#endif
 
 static HANDLE g_proc, g_file;
 static const wih_target *g_t;
 static HWND g_hwnd;
-static int g_swap;
+static int g_swap, g_physical_left, g_place;
 static ULONGLONG g_t0;
 
 typedef struct { DWORD pid; int n; HWND h; } EW;
@@ -54,6 +57,7 @@ static int alive(void) {
 static BOOL CALLBACK ew(HWND h, LPARAM l) {
   EW *e = (EW *)l;
   DWORD p = 0;
+  if (WH_TARGET_WINDOW && (UINT_PTR)h != WH_TARGET_WINDOW) return TRUE;
   GetWindowThreadProcessId(h, &p);
   if (p == e->pid && IsWindowVisible(h)) {
     RECT rc;
@@ -97,6 +101,7 @@ static int hash_ok(void) {
 
 static const char *g_why = "none";
 static int g_swap_known;
+static const char *g_place_out = "not attempted";
 
 /* Read-only: the input desktop must be named Default. */
 static int desktop_ok(void) {
@@ -156,6 +161,39 @@ static int guard(void *c) {
   return 1;
 }
 
+/* Positioning only: no cursor containment is required, and no input is ever sent. */
+static int position_ok(void) {
+  DWORD q = 0;
+  if (!alive()) return deny("process");
+  if (!IsWindow(g_hwnd) || !IsWindowVisible(g_hwnd)) return deny("window");
+  GetWindowThreadProcessId(g_hwnd, &q);
+  if (q != g_t->pid) return deny("owner");
+  if ((GetSystemMetrics(SM_SWAPBUTTON) != 0) != g_swap) return deny("mapping");
+  if (!desktop_ok()) return deny("desktop");
+  return 1;
+}
+
+static const char *place_window(void) {
+  if (!position_ok()) return g_why;
+  if (((short)GetAsyncKeyState(VK_LBUTTON) | (short)GetAsyncKeyState(VK_RBUTTON)) < 0)
+    return "button held";
+  if (!MoveWindow(g_hwnd, 100, 100, 1024, 854, TRUE)) { g_place_out = "MoveWindow failed"; return "MoveWindow"; }
+  g_place_out = "moved";
+  if (!position_ok()) { g_place_out = "moved; recheck failed"; return g_why; }
+  return NULL;
+}
+
+static int place_plan_ok(const wh_plan *p) {
+  return p->count == 1 && p->rows[0].button == 'N' && !p->rows[0].dx && !p->rows[0].dy;
+}
+
+static DWORD button_flags(int b) {
+  int right = g_swap && !g_physical_left;
+  if (b == 'D') return right ? MOUSEEVENTF_RIGHTDOWN : MOUSEEVENTF_LEFTDOWN;
+  if (b == 'U') return right ? MOUSEEVENTF_RIGHTUP : MOUSEEVENTF_LEFTUP;
+  return 0;
+}
+
 static int send_ev(void *c, int dx, int dy, int b) {
   INPUT in;
   UINT n;
@@ -167,8 +205,7 @@ static int send_ev(void *c, int dx, int dy, int b) {
   in.mi.dx = dx;
   in.mi.dy = dy;
   if (dx || dy) in.mi.dwFlags |= MOUSEEVENTF_MOVE;
-  if (b == 'D') in.mi.dwFlags |= (g_swap ? MOUSEEVENTF_RIGHTDOWN : MOUSEEVENTF_LEFTDOWN);
-  if (b == 'U') in.mi.dwFlags |= (g_swap ? MOUSEEVENTF_RIGHTUP : MOUSEEVENTF_LEFTUP);
+  in.mi.dwFlags |= button_flags(b);
   n = SendInput(1, &in, sizeof in);
   if (n != 1) err = GetLastError();
   f = GetForegroundWindow();
@@ -201,6 +238,7 @@ static const char *preflight(void) {
   g_swap = GetSystemMetrics(SM_SWAPBUTTON) != 0;
   g_swap_known = 1;
   if (!desktop_ok()) return "desktop";
+  if (g_place) return place_window();
   if (!fg_ok()) { SetForegroundWindow(g_hwnd); Sleep(150); }
   return guard(NULL) ? NULL : g_why;
 }
@@ -213,13 +251,15 @@ static void receipt(int live, const wh_result *r) {
   char cur[48] = "null";
   if (f) GetWindowThreadProcessId(f, &fp);
   if (GetCursorPos(&pt)) snprintf(cur, sizeof cur, "[%ld,%ld]", (long)pt.x, (long)pt.y);
-  printf("{\"live\":%s,\"state\":\"%s\",\"reason\":\"%s\",\"guard_detail\":\"%s\","
+  printf("{\"live\":%s,\"mode\":\"%s\",\"placement\":\"%s\",\"button_mode\":\"%s\",\"state\":\"%s\",\"reason\":\"%s\",\"guard_detail\":\"%s\","
          "\"foreground_pid\":%lu,\"expected_pid\":%lu,\"mapping_known\":%s,\"swap_buttons\":%s,"
          "\"cursor\":%s,\"rows_done\":%u,\"attempted\":%u,"
          "\"delivered\":%u,\"cleanup_tried\":%u,\"release_owed\":%d,"
          "\"capture_verified\":%s,\"capture_stage\":\"%s\",\"capture_hresult\":%ld,"
          "\"guest_accepted\":false}\n",
-         live ? "true" : "false", wh_status_name(r->state), r->reason, g_why,
+         live ? "true" : "false", g_place ? "place-window" : "input", g_place_out,
+         g_physical_left ? "physical-left" : "primary",
+         wh_status_name(r->state), r->reason, g_why,
          (unsigned long)fp, (unsigned long)(g_t ? g_t->pid : 0),
          g_swap_known ? "true" : "false",
          g_swap_known ? (g_swap ? "true" : "false") : "null", cur, r->rows_done,
@@ -240,6 +280,8 @@ int main(int argc, char **argv) {
   wh_backend be;
   for (i = 1; i < argc; i++) {
     if (!strcmp(argv[i], "--live") && !live) live = 1;
+    else if (!strcmp(argv[i], "--physical-left") && !g_physical_left) g_physical_left = 1;
+    else if (!strcmp(argv[i], "--place-window") && !g_place) g_place = 1;
     else if (!strcmp(argv[i], "--target") && !tn && i + 1 < argc) tn = argv[++i];
     else if (!strcmp(argv[i], "--plan") && !pf && i + 1 < argc) pf = argv[++i];
     else return refuse("arguments");
@@ -257,10 +299,11 @@ int main(int argc, char **argv) {
   fclose(f);
   st = wh_parse(buf, n, &pl);
   if (st) { fprintf(stderr, "refused: plan %s\n", wh_status_name(st)); return 2; }
+  if (g_place && !place_plan_ok(&pl)) return refuse("placement plan");
   be.ctx = NULL; be.now_ms = now_ms; be.sleep_ms = sleep_ms; be.guard = guard; be.send = send_ev;
   if (!live) {
     wh_run(&pl, &be, 1, &r);
-    printf("{\"live\":false,\"valid\":true,\"rows\":%u,\"total_ms\":%u,\"plan\":[", pl.count, pl.total_ms);
+    printf("{\"live\":false,\"valid\":true,\"mode\":\"%s\",\"placement\":\"not attempted\",\"button_mode\":\"%s\",\"rows\":%u,\"total_ms\":%u,\"plan\":[", g_place ? "place-window" : "input", g_physical_left ? "physical-left" : "primary", pl.count, pl.total_ms);
     for (i = 0; i < (int)pl.count; i++)
       printf("%s[%d,%d,%u,\"%c\"]", i ? "," : "", pl.rows[i].dx, pl.rows[i].dy,
              pl.rows[i].delay, pl.rows[i].button);
@@ -276,7 +319,8 @@ int main(int argc, char **argv) {
     st = 3;
   } else {
     g_t0 = GetTickCount64();
-    st = wh_run(&pl, &be, 0, &r);
+    if (g_place) { r.state = WH_OK; r.reason = "window positioned"; st = 0; }
+    else st = wh_run(&pl, &be, 0, &r);
     receipt(1, &r);
   }
   if (g_file) CloseHandle(g_file);

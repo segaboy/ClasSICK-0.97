@@ -21,6 +21,30 @@ a manual host build uses C99,`WINVER=0x0A00` and `_WIN32_WINNT=0x0A00`
 compiler definitions,helper.c,native.c,capture.c,an outside-Git binding
 include directory,and user32/kernel32/bcrypt/ole32/oleaut32/uuid libraries.
 
+`--physical-left` selects physical left down/up for a guest that consumes raw
+button identity. The default remains the Windows primary button. Receipts and
+dry-runs name the selected mode;neither mode changes the host's button setting.
+All process/foreground/desktop/client/mapping guards and guarded cleanup still
+apply. This selector does not establish that an emulator accepts injected input.
+
+`--place-window` (with `--target` and `--plan`; dry-run by default) is a separate
+positioning-only operation. The plan must be exactly one zero-motion N row, else
+it is refused before target access. With `--live` it verifies the compile-bound
+process, one visible owned window, Default desktop, button mapping
+and no held physical button, then calls MoveWindow once on that window only:
+screen position (100,100), size 1024x854, repaint. Base guards are rechecked
+afterward. This positioning-only operation needs neither foreground nor cursor
+containment, so a test window can leave a display occupied by another app without
+interacting with that app. It never requests foreground, calls SendInput or runs
+the plan;receipts report `mode` and `placement`. Normal input still requires
+foreground and physical client/root containment. No host setting is changed.
+
+An outside-Git target header may define `WH_TARGET_WINDOW` as the exact native
+window ID returned for the owned guest canvas. Enumeration still checks PID,
+visibility and nonzero client size;all input guards still apply. This separates
+a fullscreen guest from its same-process floating toolbar. With the default0,
+the original unique-visible-window rule applies. No live window ID enters Git.
+
 An accepted API event is not guest input acceptance. A foreground refusal is a
 valid stop. No focus hacks,desktop/security changes,preferences,hooks,services,
 arbitrary keyboard,network or guest patching. `capture.c` reads only the exact

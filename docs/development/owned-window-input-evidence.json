@@ -1,0 +1,538 @@
+{
+  "date": "2026-10-27",
+  "baseline": "c65e4afd67e75ae112a6cb39efb7fdf8ed440635",
+  "guest_source_revision": "3fab75ff8afdc09493684705dde94ebf5b8a1d9f",
+  "sources": [
+    "SRC-0504",
+    "SRC-0505",
+    "SRC-0506",
+    "SRC-0507"
+  ],
+  "implementation": "IMPL-0078",
+  "test": "TEST-0091",
+  "scope": "Windows host test instrumentation and actual isolated original Mac/PC diagnostic observations;no guest code change or release pass",
+  "CI": {
+    "conclusion": "success",
+    "headSha": "3fab75ff8afdc09493684705dde94ebf5b8a1d9f",
+    "jobs": [
+      {
+        "conclusion": "success",
+        "name": "m68k-rom",
+        "status": "completed"
+      },
+      {
+        "conclusion": "success",
+        "name": "windows-bootstrap",
+        "status": "completed"
+      }
+    ],
+    "status": "completed"
+  },
+  "helper": {
+    "physical_left_opt_in": true,
+    "default_primary_unchanged": true,
+    "placement_only": {
+      "x": 100,
+      "y": 100,
+      "width": 1024,
+      "height": 854,
+      "foreground_or_cursor_required": false,
+      "SendInput_calls": 0
+    },
+    "exact_window_binding_optional": true,
+    "input_foreground_and_physical_client_guards_retained": true,
+    "fake_native_assertions": 83,
+    "focused_CTests_per_profile": 4,
+    "profiles": [
+      "Clang Debug",
+      "GCC64",
+      "GCC32",
+      "ASan/UBSan"
+    ],
+    "controls": [
+      {
+        "control": "ignore-physical",
+        "compiled_fault_detected": true
+      },
+      {
+        "control": "always-left",
+        "compiled_fault_detected": true
+      },
+      {
+        "control": "ignore-window",
+        "compiled_fault_detected": true
+      },
+      {
+        "control": "ignore-held",
+        "compiled_fault_detected": true
+      },
+      {
+        "control": "accept-movement-plan",
+        "compiled_fault_detected": true
+      },
+      {
+        "cli_plan": "zero",
+        "live": false,
+        "physical_left": false,
+        "passed": true
+      },
+      {
+        "cli_plan": "zero",
+        "live": false,
+        "physical_left": true,
+        "passed": true
+      },
+      {
+        "cli_plan": "zero",
+        "live": true,
+        "physical_left": false,
+        "passed": true
+      },
+      {
+        "cli_plan": "zero",
+        "live": true,
+        "physical_left": true,
+        "passed": true
+      },
+      {
+        "cli_plan": "motion",
+        "live": false,
+        "physical_left": false,
+        "passed": true
+      },
+      {
+        "cli_plan": "motion",
+        "live": false,
+        "physical_left": true,
+        "passed": true
+      },
+      {
+        "cli_plan": "motion",
+        "live": true,
+        "physical_left": false,
+        "passed": true
+      },
+      {
+        "cli_plan": "motion",
+        "live": true,
+        "physical_left": true,
+        "passed": true
+      },
+      {
+        "cli_plan": "buttons",
+        "live": false,
+        "physical_left": false,
+        "passed": true
+      },
+      {
+        "cli_plan": "buttons",
+        "live": false,
+        "physical_left": true,
+        "passed": true
+      },
+      {
+        "cli_plan": "buttons",
+        "live": true,
+        "physical_left": false,
+        "passed": true
+      },
+      {
+        "cli_plan": "buttons",
+        "live": true,
+        "physical_left": true,
+        "passed": true
+      },
+      {
+        "cli_plan": "two",
+        "live": false,
+        "physical_left": false,
+        "passed": true
+      },
+      {
+        "cli_plan": "two",
+        "live": false,
+        "physical_left": true,
+        "passed": true
+      },
+      {
+        "cli_plan": "two",
+        "live": true,
+        "physical_left": false,
+        "passed": true
+      },
+      {
+        "cli_plan": "two",
+        "live": true,
+        "physical_left": true,
+        "passed": true
+      }
+    ],
+    "working_source_sha256": {
+      "tools/windows-input/native.c": "94305005f3ed5d613eb567737be278dc0687225ed579d67711cc605d49255e0d",
+      "tests/windows-input-native-guard.c": "69a3df1bb573232ada5b931da2e2b4f32744148dfd98676cdccaf2b2391c14a3",
+      "tools/windows-input/README.md": "d6d9f97326912c5401634b884d017fe64c412d5bcca9fd65d4297a953c57548a"
+    }
+  },
+  "worker": {
+    "round": "placement",
+    "worker": "copilot",
+    "exit_code": 0,
+    "outer_timeout": false,
+    "elapsed_seconds": 59.56,
+    "input_bytes": 23749,
+    "input_sha256": "fadc9ad6812cb4e4d1ba328c37b39d6e35a231f08eabeef183c3e6906beb031b",
+    "stderr_bytes": 0,
+    "model": "claude-sonnet-5.5",
+    "effort": "low",
+    "tool_views": 1,
+    "writes": 0,
+    "commands": 0,
+    "tests_executed": [],
+    "replacements_returned": 15,
+    "reported_premium_request_cost": 1,
+    "reported_provider_requests": 2,
+    "reported_nanoAIU": 11380450000,
+    "balances": {
+      "Claude": null,
+      "Copilot": null,
+      "Grok": null,
+      "Antigravity": null
+    },
+    "measured_Codex_savings": null
+  },
+  "integration_corrections": [
+    "Replace weak held-button assertion with checks of the actual return and both physical buttons.",
+    "Set successful placement result reason explicitly;no NULL receipt reason.",
+    "Recheck identity,owner,visibility,desktop and mapping after moving.",
+    "Owner says leave GLKVM on its display;positioning alone may move only owned window without foreground/cursor,while all input retains physical containment.",
+    "Exact outside-Git window-ID binding separates fullscreen guest from same-process floating toolbar."
+  ],
+  "Mac": {
+    "ROM_sha256": "a5fca8484098eaa8e8d87cee6371121df839a0d1aa70769a5c3580fd2943c3a9",
+    "native_trace": "docs/evidence/traces/2026-10-27/mac-refresh-paused.json",
+    "guarded_motion_events_accepted_by_Windows": 8,
+    "guarded_physical_left_events_accepted_by_Windows": 2,
+    "observed_counter": 1,
+    "pointer": [
+      256,
+      171
+    ],
+    "window": [
+      80,
+      70
+    ],
+    "services": 19839,
+    "baselines": 2,
+    "losses": 2,
+    "deliveries": 2,
+    "first_loss_reason": 6,
+    "first_loss_label": "two-bit Gray phase jump",
+    "first_loss_snapshots": [
+      "00AF4C4C",
+      "00AF4C4C",
+      "00000000"
+    ],
+    "fault": 0,
+    "motion_passed": false,
+    "drag_passed": false,
+    "caveat": "Earlier UI/capture actions can contribute activity;the first loss is not attributed to the guarded gesture. Recorded last-raw fields are not a complete prior quadrature endpoint."
+  },
+  "PC": {
+    "EFI_sha256": "e634d1a4831dfd9970d839ffb6b6c596bea4315e4fc65db013b4b7ea3a00b955",
+    "raw_disk_sha256": "fa627d5798f80c8e0b639aa6f4585bca73f29e375e3534ea39fdfb0ef0ee85d0",
+    "guarded_relative_events_accepted_by_Windows": 8,
+    "physical_left_events_accepted_by_Windows": 2,
+    "primary_events_accepted_by_Windows": 2,
+    "all_input_guards_passed": true,
+    "guest_capture_acceptance_confirmed": false,
+    "frame_comparisons": {
+      "before-capture": {
+        "changed_pixels": 0,
+        "sha256": "7bd4dc9c78b1729f5d88da5f57ee1813666714caf17fce88913d97cee4abc5a7"
+      },
+      "after-capture": {
+        "changed_pixels": 0,
+        "sha256": "7bd4dc9c78b1729f5d88da5f57ee1813666714caf17fce88913d97cee4abc5a7"
+      },
+      "after-relative-right": {
+        "changed_pixels": 0,
+        "sha256": "7bd4dc9c78b1729f5d88da5f57ee1813666714caf17fce88913d97cee4abc5a7"
+      },
+      "after-physical-left-held": {
+        "changed_pixels": 0,
+        "sha256": "7bd4dc9c78b1729f5d88da5f57ee1813666714caf17fce88913d97cee4abc5a7"
+      },
+      "after-primary-held": {
+        "changed_pixels": 0,
+        "sha256": "7bd4dc9c78b1729f5d88da5f57ee1813666714caf17fce88913d97cee4abc5a7"
+      },
+      "after-space": {
+        "changed_pixels": 0,
+        "sha256": "7bd4dc9c78b1729f5d88da5f57ee1813666714caf17fce88913d97cee4abc5a7"
+      }
+    },
+    "Space_interpretation": "A host key event was attempted;this window profile result is not interpreted as a keyboard test.",
+    "motion_passed": false,
+    "drag_passed": false
+  },
+  "trial_records": [
+    {
+      "directory": "pc-display1",
+      "closed": {
+        "utc": "2026-10-27T20:45:06.5475486Z",
+        "cold_starts": 1,
+        "state": "poweroff",
+        "unregistered": true,
+        "existing_vm_inventory_preserved": true,
+        "running_state_preserved": true,
+        "post_trial_raw_roundtrip_equal": true,
+        "artifacts_retained": true,
+        "semantic_session_stop_observed": false,
+        "termination": "external poweroff from paused state"
+      },
+      "watchdog": {
+        "host_wall_seconds": 241.9668986,
+        "cap_seconds": 270,
+        "stop_requested": false,
+        "scope": "owned isolated original continuous normal GUI input qualification only"
+      }
+    },
+    {
+      "directory": "pc-fs-ready",
+      "closed": {
+        "utc": "2026-10-27T20:59:06.5103179Z",
+        "cold_starts": 1,
+        "state": "poweroff",
+        "unregistered": true,
+        "existing_vm_inventory_preserved": true,
+        "running_state_preserved": true,
+        "post_trial_raw_roundtrip_equal": true,
+        "artifacts_retained": true,
+        "semantic_session_stop_observed": false,
+        "termination": "external poweroff from paused state"
+      },
+      "watchdog": {
+        "host_wall_seconds": 30.2989086,
+        "cap_seconds": 270,
+        "stop_requested": false,
+        "scope": "owned isolated original continuous normal GUI input qualification only"
+      }
+    },
+    {
+      "directory": "pc-full",
+      "closed": {
+        "utc": "2026-10-27T20:51:53.4370985Z",
+        "cold_starts": 1,
+        "state": "poweroff",
+        "unregistered": true,
+        "existing_vm_inventory_preserved": true,
+        "running_state_preserved": true,
+        "post_trial_raw_roundtrip_equal": true,
+        "artifacts_retained": true,
+        "semantic_session_stop_observed": false,
+        "termination": "external poweroff from paused state"
+      },
+      "watchdog": {
+        "host_wall_seconds": 242.3604559,
+        "cap_seconds": 270,
+        "stop_requested": false,
+        "scope": "owned isolated original continuous normal GUI input qualification only"
+      }
+    },
+    {
+      "directory": "pc-full-cli",
+      "closed": {
+        "utc": "2026-10-27T20:56:01.7134085Z",
+        "cold_starts": 1,
+        "state": "poweroff",
+        "unregistered": true,
+        "existing_vm_inventory_preserved": true,
+        "running_state_preserved": true,
+        "post_trial_raw_roundtrip_equal": true,
+        "artifacts_retained": true,
+        "semantic_session_stop_observed": false,
+        "termination": "external poweroff from paused state"
+      }
+    },
+    {
+      "directory": "pc-fullscreen-guarded",
+      "closed": {
+        "utc": "2026-10-27T21:11:06.0926577Z",
+        "cold_starts": 1,
+        "state": "poweroff",
+        "unregistered": true,
+        "existing_vm_inventory_preserved": true,
+        "running_state_preserved": true,
+        "post_trial_raw_roundtrip_equal": true,
+        "artifacts_retained": true,
+        "semantic_session_stop_observed": false,
+        "termination": "external poweroff from paused state"
+      },
+      "watchdog": {
+        "host_wall_seconds": 190.2931902,
+        "cap_seconds": 390,
+        "stop_requested": true,
+        "scope": "owned isolated original continuous normal GUI input qualification only"
+      }
+    },
+    {
+      "directory": "pc-fullscreen-input",
+      "closed": {
+        "startup_failed": true,
+        "state_observed_before_unregister": "aborted",
+        "unregistered": true,
+        "existing_vm_inventory_preserved": true,
+        "running_state_preserved": true,
+        "input_events": 0,
+        "failure": "transient startup lock;old readiness check aborted;cleanup Stop-Process denied;later exact own unregister verified",
+        "guest_shutdown_claimed": false
+      }
+    },
+    {
+      "directory": "pc-max",
+      "closed": {
+        "utc": "2026-10-27T20:21:16.4077774Z",
+        "cold_starts": 1,
+        "state": "poweroff",
+        "unregistered": true,
+        "existing_vm_inventory_preserved": true,
+        "running_state_preserved": true,
+        "post_trial_raw_roundtrip_equal": true,
+        "artifacts_retained": true,
+        "semantic_session_stop_observed": false,
+        "termination": "external poweroff from paused state"
+      },
+      "watchdog": {
+        "host_wall_seconds": 184.7882306,
+        "cap_seconds": 270,
+        "stop_requested": true,
+        "scope": "owned isolated original continuous normal GUI input qualification only"
+      }
+    },
+    {
+      "directory": "pc-placed",
+      "closed": {
+        "utc": "2026-10-27T20:36:53.1329549Z",
+        "cold_starts": 1,
+        "state": "poweroff",
+        "unregistered": true,
+        "existing_vm_inventory_preserved": true,
+        "running_state_preserved": true,
+        "post_trial_raw_roundtrip_equal": true,
+        "artifacts_retained": true,
+        "semantic_session_stop_observed": false,
+        "termination": "external poweroff from paused state"
+      },
+      "watchdog": {
+        "host_wall_seconds": 146.290185,
+        "cap_seconds": 270,
+        "stop_requested": true,
+        "scope": "owned isolated original continuous normal GUI input qualification only"
+      }
+    },
+    {
+      "directory": "pc-scene-ready",
+      "closed": {
+        "utc": "2026-10-27T21:06:13.3667470Z",
+        "cold_starts": 1,
+        "state": "poweroff",
+        "unregistered": true,
+        "existing_vm_inventory_preserved": true,
+        "running_state_preserved": true,
+        "post_trial_raw_roundtrip_equal": true,
+        "artifacts_retained": true,
+        "semantic_session_stop_observed": false,
+        "termination": "external poweroff from paused state"
+      },
+      "watchdog": {
+        "host_wall_seconds": 241.4456983,
+        "cap_seconds": 270,
+        "stop_requested": false,
+        "scope": "owned isolated original continuous normal GUI input qualification only"
+      }
+    },
+    {
+      "directory": "snow",
+      "closed": {
+        "host_seconds": 240.3144015,
+        "cap_seconds": 240,
+        "pid": 46368,
+        "process_exited": true,
+        "forced_cleanup": true,
+        "guest_shutdown_claimed": false,
+        "ROM_sha256": "a5fca8484098eaa8e8d87cee6371121df839a0d1aa70769a5c3580fd2943c3a9"
+      }
+    },
+    {
+      "directory": "snow-slow",
+      "closed": {
+        "host_seconds": 210.2023746,
+        "cap_seconds": 240,
+        "pid": 45560,
+        "process_exited": true,
+        "forced_cleanup": true,
+        "guest_shutdown_claimed": false,
+        "ROM_sha256": "a5fca8484098eaa8e8d87cee6371121df839a0d1aa70769a5c3580fd2943c3a9"
+      }
+    },
+    {
+      "directory": "snow-trace-complete",
+      "closed": {
+        "host_seconds": 178.5280442,
+        "cap_seconds": 360,
+        "pid": 28268,
+        "process_exited": true,
+        "forced_cleanup": true,
+        "guest_shutdown_claimed": false,
+        "ROM_sha256": "a5fca8484098eaa8e8d87cee6371121df839a0d1aa70769a5c3580fd2943c3a9"
+      }
+    },
+    {
+      "directory": "vbox",
+      "closed": {
+        "utc": "2026-10-27T20:17:30.3649090Z",
+        "cold_starts": 1,
+        "state": "poweroff",
+        "unregistered": true,
+        "existing_vm_inventory_preserved": true,
+        "running_state_preserved": true,
+        "post_trial_raw_roundtrip_equal": true,
+        "artifacts_retained": true,
+        "semantic_session_stop_observed": false,
+        "termination": "external poweroff from paused state"
+      },
+      "watchdog": {
+        "host_wall_seconds": 210.0060817,
+        "cap_seconds": 270,
+        "stop_requested": true,
+        "scope": "owned isolated original continuous normal GUI input qualification only"
+      }
+    }
+  ],
+  "cleanup": {
+    "all_owned_trial_VMs_unregistered": true,
+    "no_snow_process": true,
+    "existing_vm_inventory_preserved": true,
+    "running_state_preserved": true,
+    "GLKVM_not_controlled": true
+  },
+  "initial_failures": [
+    "One fake-control anchor matched two held-button guards;restricted the mutation to the first placement gate,then rebuilt and detected it.",
+    "One Snow trial exceeded240s cap by0.3144s:diagnostic only.",
+    "A fullscreen startup notice outlasted the old runner;subsequent exact-owned close verified.",
+    "One readiness script paused at0x0 video;replaced fixed delay with actual original-scene readiness.",
+    "A transient startup lock failed old startup check and cleanup stop was denied;VM observed aborted and exact unregister later verified. New bounded check tolerates transient startup-state reads."
+  ],
+  "release_ready": false,
+  "remaining": [
+    "Mac accepted axis motion and dragging",
+    "PC accepted GUI movement,drag,release/reentry/cancel/restoration",
+    "Failed human usability observations remain unresolved;new physical check not performed",
+    "Exact paired candidate freeze/package audit and final publication approval after input gates"
+  ],
+  "new_286_work": false,
+  "held_originals": 24,
+  "PNG_count": 74,
+  "success_drag_GIF_added": false,
+  "private_raw_capture_root": null
+}

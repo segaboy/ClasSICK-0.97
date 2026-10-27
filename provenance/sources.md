@@ -4732,3 +4732,19 @@ new capture;no guest implementation fix or release pass inferred.
 ## SRC-0503 - Committed native proof and safely stopped PC GUI trial
 
 2026-10-27. Source3fab75f native Mac CI succeeds;49 refresh inputs/seal/threeIRQ veneers and12 controls verified. Strict,timer andtimer-idle baseline bytes unchanged;refresh costs68ROM bytes/zeroRAM. Fixed PC media twins/committed inputs verified;raw candidate boots,zero GUI input sent. Desktop screenshot mismatch and automatic-review privacy refusal stop capture/input;own VM closes83.33s,media/inventory preserved. Windows CI status is recorded separately;no motion/drag/release pass. [Evidence](../docs/development/timer-refresh-stream-boundary.md).
+
+## SRC-0504 - Published Windows owned-window positioning interface
+
+2026-10-27. Microsoft Learn MoveWindow:declaration,parameters and return semantics only;updated2021-10-13,reviewed2026-10-27. https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-movewindow . No examples or implementation inspected. Host-only instrumentation fact,not historical Mac evidence. [Evidence](../docs/development/owned-window-input-evidence.md).
+
+## SRC-0505 - Original bounded owned-window placement artifact
+
+2026-10-27. Copilot Sonnet5.5 Low59.56s/23749B,one view,zero writes/commands/tests. Fifteen replacements adopted with disclosed lead safety/assertion/result corrections. One reported premium-request cost,two provider requests;remaining balances unknown. [Evidence](../docs/development/owned-window-input-evidence.md).
+
+## SRC-0506 - Executed host instrumentation and completed source CI
+
+2026-10-27. 83 fake native guard assertions/four focused CTests/four profiles,five compiled defects and16 CLI controls pass.3fab75f CI40569640275 completes successfully in Windows and native Mac. Physical-left,positioning-only and exact observed-window binding remain host-only;ordinary input containment retained. [Evidence](../docs/development/owned-window-input-evidence.md).
+
+## SRC-0507 - Display-separated original Mac and PC input observations
+
+2026-10-27. Owner directs tests to another display while GLKVM remains fullscreen elsewhere. Capture works on Display1;13 owned launch attempts close with media/inventory preserved. Mac held-left gives0001,fault0,two delivered records but fixed pointer;first loss6 Gray jump. PC12 guarded API mouse events leave scene unchanged. No movement/drag/E3/E4 or release pass.74PNG/twoGIF indexed;full own Mac trace retained. [Evidence](../docs/development/owned-window-input-evidence.md).
