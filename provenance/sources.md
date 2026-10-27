@@ -4760,3 +4760,23 @@ new capture;no guest implementation fix or release pass inferred.
 ## SRC-0510 - Executed original model study and native artifact measurements
 
 2026-10-27. Two pinned host compilers produce identical1664-case CSV/four trace candidates;five pre-output frozen cases/four trace expectations and two refusal controls pass. Three missing previous phase-bit assignments can produce the recorded Gray loss;no actual cause or event rate inferred. Original SVG/data/reproducer retained. Existing Mac64KiB ROM audit uses23772B;PC EFI180KiB/disk64MiB container hashes match. Distinct metrics,not completed System1/286 size. Zero new VM/emulator or target runs;release gates remain. [Study](../docs/research/input-sampling-study.md).
+
+## SRC-0511 - Bounded development-flow measurements
+
+2026-10-27;baseline a2fc1d7. Three public receipts:five worker waits490.32s;12of14 trial durations2306.68s,not active labor. Four selected context files228354 working-copy bytes,not billed tokens. Two completed Windows CI jobs815/1282s;largest step834s. No project speedup or quota saving measured. [Record](../docs/development/development-flow-sample.json).
+
+## SRC-0512 - Published process research:small batches
+
+2026-10-27 review;DORA/Google Cloud,[Working in small batches](https://dora.dev/capabilities/working-in-small-batches/). Eligible primary process prose only;no implementation/sample code or historical Mac evidence. Independently testable work/short feedback principles adapted by lead,not a quantified project prediction.
+
+## SRC-0513 - Published process research:work in process limits
+
+2026-10-27 review;DORA/Google Cloud,[Work in process limits](https://dora.dev/capabilities/wip-limits/). Eligible primary process prose only. Limit concurrent work and address constraints;application to release/286 lanes is a lead proposal preserving owner goals and gates.
+
+## SRC-0514 - Published process research:flow visibility
+
+2026-10-27 review;DORA/Google Cloud,[Visibility of work in the value stream](https://dora.dev/capabilities/work-visibility-in-value-stream/). Eligible primary process prose only. Distinguish lead/process time and rework;the bounded local sample lacks full active-time data. No code,manual samples or historical claims.
+
+## SRC-0515 - Bounded development-flow draft and lead review
+
+2026-10-27. Claude Opus5.5 Low36.12s/12218 reviewed-public bytes,zero tools/commands/writes/tests;draft exceeds150line/1100word caps. Lead adopts with timing/context/authority corrections. Six ranked opportunities and a three-slice measurement pilot are proposals only. No CI/runtime/policy rewrite,VM/emulator run,release or permission expansion. [Study](../docs/development/development-flow-study.md).

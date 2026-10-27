@@ -1,0 +1,379 @@
+{
+  "baseline": "a2fc1d71a8d544aa807f3c3781361f945e4d7cec",
+  "scope": "Bounded3-receipt sample,27October;not all project history or total active effort",
+  "receipt_identities": {
+    "docs/development/timer-refresh-stream-boundary.json": "781681e628d4971f5a11e3008ac817ca8dc850ae3f7397a433dab6f29d4f4f44",
+    "docs/development/owned-window-input-evidence.json": "b2b975a79c4b011852fd81a28441b65f31e58a5267ee74535ba1834c497770bf",
+    "docs/development/input-research-evidence.json": "6afe9f906e8ce38f929061dd44bc6cf5f787eb84b8b57079b466866e58737f27"
+  },
+  "worker_calls": [
+    {
+      "worker": "claude",
+      "elapsed_seconds": 142.38,
+      "input_bytes": 31666,
+      "input_sha256": "df26b0241043a42a8d7ed4aa92ad1a2313a349df3950194955e9ec29baf072db"
+    },
+    {
+      "worker": "copilot",
+      "elapsed_seconds": 45.48,
+      "input_bytes": 25873,
+      "input_sha256": "ef2151accaad9bcabe8ba9ba0a8cedc6b597cb4fca987f3d48e5ce6d9ad3e337"
+    },
+    {
+      "worker": "copilot",
+      "elapsed_seconds": 114.45,
+      "input_bytes": 41101,
+      "input_sha256": "945ba6e30f8a7147b708057d19a9f8571fff00e1577367bfe915444306782367"
+    },
+    {
+      "worker": "copilot",
+      "elapsed_seconds": 59.56,
+      "input_bytes": 23749,
+      "input_sha256": "fadc9ad6812cb4e4d1ba328c37b39d6e35a231f08eabeef183c3e6906beb031b"
+    },
+    {
+      "worker": "claude",
+      "elapsed_seconds": 128.45,
+      "input_bytes": 17144,
+      "input_sha256": "4ac4066ad32721e7207690c541d7eb75b99b2c1e7f1698d661edc372d95cc989"
+    }
+  ],
+  "worker_wait_seconds_sum": 490.32,
+  "worker_wait_seconds_median": 114.45,
+  "trial_wall_durations": [
+    {
+      "trial": "pc-display1",
+      "host_wall_seconds": 241.9668986
+    },
+    {
+      "trial": "pc-fs-ready",
+      "host_wall_seconds": 30.2989086
+    },
+    {
+      "trial": "pc-full",
+      "host_wall_seconds": 242.3604559
+    },
+    {
+      "trial": "pc-full-cli",
+      "host_wall_seconds": null
+    },
+    {
+      "trial": "pc-fullscreen-guarded",
+      "host_wall_seconds": 190.2931902
+    },
+    {
+      "trial": "pc-fullscreen-input",
+      "host_wall_seconds": null
+    },
+    {
+      "trial": "pc-max",
+      "host_wall_seconds": 184.7882306
+    },
+    {
+      "trial": "pc-placed",
+      "host_wall_seconds": 146.290185
+    },
+    {
+      "trial": "pc-scene-ready",
+      "host_wall_seconds": 241.4456983
+    },
+    {
+      "trial": "snow",
+      "host_wall_seconds": 240.3144015
+    },
+    {
+      "trial": "snow-slow",
+      "host_wall_seconds": 210.2023746
+    },
+    {
+      "trial": "snow-trace-complete",
+      "host_wall_seconds": 178.5280442
+    },
+    {
+      "trial": "vbox",
+      "host_wall_seconds": 210.0060817
+    },
+    {
+      "trial": "pc-physical-ready",
+      "host_wall_seconds": 190.1825637
+    }
+  ],
+  "known_trial_wall_seconds_sum": 2306.6770329,
+  "trial_durations_present": 12,
+  "trial_durations_missing": 2,
+  "trial_count": 14,
+  "qualification_gates_completed_in_trial_sample": 0,
+  "useful_diagnostic_results": [
+    "Actual Mac held button acceptance and Gray loss record",
+    "Concrete PC early AUX-byte loss reproduced/fixed",
+    "Display placement,capture and input-guard behavior distinguished",
+    "Offline sampling ambiguity enumerated"
+  ],
+  "context_file_measurements": [
+    {
+      "path": "AGENTS.md",
+      "Windows_working_copy_bytes": 94979,
+      "lines": 1042
+    },
+    {
+      "path": "docs/status.md",
+      "Windows_working_copy_bytes": 54574,
+      "lines": 597
+    },
+    {
+      "path": "docs/roadmap.md",
+      "Windows_working_copy_bytes": 24677,
+      "lines": 237
+    },
+    {
+      "path": "docs/development/agent-orchestration.md",
+      "Windows_working_copy_bytes": 54124,
+      "lines": 489
+    }
+  ],
+  "selected_public_context_bytes_sum": 228354,
+  "CI_sample": [
+    {
+      "id": 40569640275,
+      "conclusion": "success",
+      "m68k_seconds": 209,
+      "windows_seconds": 815,
+      "windows_started_utc": "2026-10-27T19:29:58Z",
+      "windows_completed_utc": "2026-10-27T19:43:33Z"
+    },
+    {
+      "id": 40586299701,
+      "conclusion": "success",
+      "m68k_seconds": 157,
+      "windows_seconds": 1282,
+      "windows_started_utc": "2026-10-27T21:22:54Z",
+      "windows_completed_utc": "2026-10-27T21:44:16Z"
+    }
+  ],
+  "Windows_CI_largest_steps": [
+    {
+      "completedAt": "2026-10-27T21:41:48Z",
+      "name": "Verify hosted core, loader, exceptions, devices, boot media and unloaded fault fixtures",
+      "startedAt": "2026-10-27T21:27:54Z",
+      "status": "completed",
+      "seconds": 834.0
+    },
+    {
+      "completedAt": "2026-10-27T21:27:09Z",
+      "name": "Verify two fresh hosted builds",
+      "startedAt": "2026-10-27T21:24:47Z",
+      "status": "completed",
+      "seconds": 142.0
+    },
+    {
+      "completedAt": "2026-10-27T21:24:20Z",
+      "name": "Verify screenshot evidence admission",
+      "startedAt": "2026-10-27T21:23:21Z",
+      "status": "completed",
+      "seconds": 59.0
+    },
+    {
+      "completedAt": "2026-10-27T21:42:59Z",
+      "name": "Build paired native outline PC preview candidate (unbooted)",
+      "startedAt": "2026-10-27T21:42:23Z",
+      "status": "completed",
+      "seconds": 36.0
+    },
+    {
+      "completedAt": "2026-10-27T21:42:23Z",
+      "name": "Build paired selected-port native PC candidate (unloaded)",
+      "startedAt": "2026-10-27T21:41:48Z",
+      "status": "completed",
+      "seconds": 35.0
+    },
+    {
+      "completedAt": "2026-10-27T21:43:33Z",
+      "name": "Build opt-in native window PC candidate (unbooted)",
+      "startedAt": "2026-10-27T21:42:59Z",
+      "status": "completed",
+      "seconds": 34.0
+    }
+  ],
+  "workflow_explicit_cache_declaration_found": false,
+  "bootstrap_internal_caching_evaluated": false,
+  "actual_Codex_quota_savings_measured": false,
+  "active_Codex_time_measured": false,
+  "CI_samples_causal_comparison": false,
+  "timing_caveat": "Worker times are provider wait;trial durations include setup/wait/cleanup and can overlap. Do not add them as total project labor or compare as a savings ratio. Context bytes are not loaded tokens or billed usage.",
+  "sources": [
+    "SRC-0511",
+    "SRC-0512",
+    "SRC-0513",
+    "SRC-0514",
+    "SRC-0515"
+  ],
+  "reviewed_process_sources": [
+    {
+      "title": "DORA:Working in small batches",
+      "url": "https://dora.dev/capabilities/working-in-small-batches/",
+      "reviewed": "2026-10-27",
+      "eligible": "Primary published process prose,no implementation/sample code inspected",
+      "reviewed_paraphrase": "Keep changes independently testable and small enough for prompt feedback. Smaller batches make AI-generated changes easier to inspect and integrate. Apply the principle to observable native behavior here,not web deployment."
+    },
+    {
+      "title": "DORA:Work in process limits",
+      "url": "https://dora.dev/capabilities/wip-limits/",
+      "reviewed": "2026-10-27",
+      "eligible": "Primary published process prose,no implementation/sample code inspected",
+      "reviewed_paraphrase": "Limit simultaneous work to capacity and help remove bottlenecks rather than starting more tasks when work waits. Do not turn this into a ban on the owner-required286 lane."
+    },
+    {
+      "title": "DORA:Visibility of work in the value stream",
+      "url": "https://dora.dev/capabilities/work-visibility-in-value-stream/",
+      "reviewed": "2026-10-27",
+      "eligible": "Primary published process prose,no implementation/sample code inspected",
+      "reviewed_paraphrase": "Measure whole-flow lead time,process time and downstream rework. Speeding a non-bottleneck stage may not shorten delivery. Our sample lacks complete active-time data,so it cannot yield a claimed percentage speedup."
+    }
+  ],
+  "review_worker": {
+    "round": "review",
+    "worker": "claude",
+    "exit_code": 0,
+    "outer_timeout": false,
+    "elapsed_seconds": 36.12,
+    "input_bytes": 12218,
+    "input_sha256": "5f973d1b95fcdbb8f661d6eeff8017625fa7f877ddf17737a08fafe07d9110a9",
+    "stderr_bytes": 0,
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "tools": [],
+    "worker_tests_executed": [],
+    "reported_session_list_USD": 0.1196762,
+    "proposed_lines": 168,
+    "proposed_words": 1380,
+    "output_cap_exceeded": true
+  },
+  "lead_dispositions": [
+    "Adopt report with correction:12of14 trial durations,not14 complete timed attempts.",
+    "Do not rank incomparable timing sums as measured project labor shares.",
+    "Actual context loading and Codex quota costs unmeasured.",
+    "Useful results include offline/code work outside trials;do not credit every result to native trials.",
+    "Existing authorization persists;research does not implement new CI,context or gating policy.",
+    "Stop an inconclusive route pending a new observation;do not automatically interrupt owner for every route failure."
+  ],
+  "CI_largest_step_share_percent": 65.05460218408736,
+  "static_verifier_reference_walk": {
+    "root": "scripts/Verify-LoadedApp.ps1",
+    "static_only": true,
+    "limitation": "Literal source references only;not runtime call counts,reachability proof,duplication or timing attribution. Dynamic calls and conditionals may differ.",
+    "nodes": {
+      "Verify-LoadedApp.ps1": {
+        "lines": 9,
+        "sha256_LF": "07b450cb9bcea64362179b08ce15220628f2ec7e21a5347ef8dc42a4cf4f88f5",
+        "cmake_build_lines": 0,
+        "ctest_lines": 0,
+        "configure_lines": 0
+      },
+      "Verify-LoadedAppObjects.ps1": {
+        "lines": 44,
+        "sha256_LF": "46655fa8908e221dcf7eb40c8c10cf5af5fcdab333152698db3227d78e4bc498",
+        "cmake_build_lines": 0,
+        "ctest_lines": 0,
+        "configure_lines": 0
+      },
+      "Verify-GuardedBus.ps1": {
+        "lines": 16,
+        "sha256_LF": "287d709110060d94afc23a77e8db7644b5472f18f8fc9e9dbdba2737ec78cb57",
+        "cmake_build_lines": 0,
+        "ctest_lines": 0,
+        "configure_lines": 0
+      },
+      "Verify-CodeImage.ps1": {
+        "lines": 8,
+        "sha256_LF": "c46b80f917eddb2a9df4ce1da0c993c892509fa6c86db449a5adc78e659e261c",
+        "cmake_build_lines": 0,
+        "ctest_lines": 0,
+        "configure_lines": 0
+      },
+      "Verify-CodeImageObjects.ps1": {
+        "lines": 47,
+        "sha256_LF": "293a8f6b391f8709a051fe90f28b0460b0f28b20b8cd07ad8e3262b4bf29d1c5",
+        "cmake_build_lines": 0,
+        "ctest_lines": 0,
+        "configure_lines": 0
+      },
+      "Verify-CodePreflight.ps1": {
+        "lines": 8,
+        "sha256_LF": "1c890ca1373c483305cb9a8eff79d5828d6acac7db253d1433505904547199ce",
+        "cmake_build_lines": 0,
+        "ctest_lines": 0,
+        "configure_lines": 0
+      },
+      "Verify-CodePreflightObjects.ps1": {
+        "lines": 47,
+        "sha256_LF": "4f4770541df01c0e1e54e2fcb74a01c38b7de6bb087346bd55e585f37abdcff3",
+        "cmake_build_lines": 0,
+        "ctest_lines": 0,
+        "configure_lines": 0
+      },
+      "Verify-ResourceResidency.ps1": {
+        "lines": 8,
+        "sha256_LF": "fe4137040fc3c5d7134c33c8fd73f8343f74ac8e107396bd3534a4fbaa4f624a",
+        "cmake_build_lines": 0,
+        "ctest_lines": 0,
+        "configure_lines": 0
+      },
+      "Verify-ResidencyObjects.ps1": {
+        "lines": 47,
+        "sha256_LF": "90d0cd16c1376bf70974c4721570469b1f1b63ccfbc5419e714f0f250ae58904",
+        "cmake_build_lines": 0,
+        "ctest_lines": 0,
+        "configure_lines": 0
+      },
+      "Verify-HeapLifecycle.ps1": {
+        "lines": 8,
+        "sha256_LF": "dc39abaf6ed410c8d73d3b9befd3cc0a615a3757786f179d5f4f347e1005d439",
+        "cmake_build_lines": 0,
+        "ctest_lines": 0,
+        "configure_lines": 0
+      }
+    },
+    "edges": [
+      [
+        "Verify-LoadedApp.ps1",
+        "Verify-GuardedBus.ps1"
+      ],
+      [
+        "Verify-LoadedApp.ps1",
+        "Verify-LoadedAppObjects.ps1"
+      ],
+      [
+        "Verify-GuardedBus.ps1",
+        "Verify-CodeImage.ps1"
+      ],
+      [
+        "Verify-CodeImage.ps1",
+        "Verify-CodePreflight.ps1"
+      ],
+      [
+        "Verify-CodeImage.ps1",
+        "Verify-CodeImageObjects.ps1"
+      ],
+      [
+        "Verify-CodePreflight.ps1",
+        "Verify-ResourceResidency.ps1"
+      ],
+      [
+        "Verify-CodePreflight.ps1",
+        "Verify-CodePreflightObjects.ps1"
+      ],
+      [
+        "Verify-ResourceResidency.ps1",
+        "Verify-HeapLifecycle.ps1"
+      ],
+      [
+        "Verify-ResourceResidency.ps1",
+        "Verify-ResidencyObjects.ps1"
+      ]
+    ]
+  },
+  "production_or_CI_changes": [],
+  "new_builds_or_VM_runs": 0,
+  "permission_scope": "Research only;desktop pause and current gates unchanged",
+  "remaining_quotas": "Kept privately if reported;not included in this public study."
+}
