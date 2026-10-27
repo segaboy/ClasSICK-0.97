@@ -4728,3 +4728,7 @@ new capture;no guest implementation fix or release pass inferred.
 ## SRC-0502 - Lead integration and executed input verification
 
 2026-10-27. Mac77 assertions/three focused CTests/four profiles,two compiled faults and macro2 refusal pass;three builder refusals and default optimized IR identity pass. PC groups8/8 in three64-bit profiles and6/6 in GCC32 plus frozen boundary oracle in all four pass. Old code demonstrably loses both reports;fixed code preserves both. Native PC twins/corruption/omission checks pass;post-fix images unbooted,Mac native proof pending. [Evidence](../docs/development/timer-refresh-stream-boundary.md).
+
+## SRC-0503 - Committed native proof and safely stopped PC GUI trial
+
+2026-10-27. Source3fab75f native Mac CI succeeds;49 refresh inputs/seal/threeIRQ veneers and12 controls verified. Strict,timer andtimer-idle baseline bytes unchanged;refresh costs68ROM bytes/zeroRAM. Fixed PC media twins/committed inputs verified;raw candidate boots,zero GUI input sent. Desktop screenshot mismatch and automatic-review privacy refusal stop capture/input;own VM closes83.33s,media/inventory preserved. Windows CI status is recorded separately;no motion/drag/release pass. [Evidence](../docs/development/timer-refresh-stream-boundary.md).

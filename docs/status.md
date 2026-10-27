@@ -1,5 +1,7 @@
 # Project status
 
+2026-10-27,SRC-0503:3fab75f native Mac job passes;strict/timer/idle ROMs unchanged,refresh adds68ROM bytes/zeroRAM. Fixed PC media twins/source identity pass;raw scene boots,zero GUI input. Desktop capture mismatch/privacy refusal stops trial;own VM closed83.33s/media preserved. Mac motion/PC GUI dragging and release remain open. [Evidence](development/timer-refresh-stream-boundary.md).
+
 2026-10-27,SRC-0497..0502/SPEC-0077/IMPL-0085/TEST-0098:existing Mac RAM trace captured;opt-in refresh77 assertions/four profiles pass,native proof pending. PC startup AUX discard independently reproduced and corrected;focused suites/frozen oracle/four profiles and native image audits pass. Post-fix images unbooted;Mac motion/PC GUI dragging/release remain blocked.72PNG/twoGIF,286/originals preserved. [Evidence](development/timer-refresh-stream-boundary.md).
 
 2026-10-26,SRC-0492..0496:49b619c fullCI passes;helper physical-client guard fixed. Fresh physical repeats:PC cross clipped at upper-right;Mac cross stays centered,counter0002. Motion/dragging remain unqualified. Seven owned sessions closed. Copilot review finds no demonstrated defect;versioned activity trace is next proposed contract.72PNG/twoGIF;286/originals preserved. [Evidence](development/unlocked-input-evidence.md).

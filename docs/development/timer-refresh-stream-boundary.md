@@ -50,7 +50,7 @@ all four profiles. Tests prove startup loss and its correction,not GUI root caus
 
 Post-fix PC normal EFIe634d1a4..b955 and raw EFI9120a968..3fef each pass four
 native twins/27 corruption controls;omission controls26/28 respectively. These
-images are unbooted/unpackaged. Source-committed manifest checks and independent
+images were unbooted/unpackaged at the code checkpoint. Source-committed manifest checks and independent
 media twins precede new trials. Reuse verified artifacts;do not rebuild unchanged
 code or repeat unchanged failed gestures without new diagnostic purpose.
 
@@ -67,3 +67,29 @@ Published-source,role,native-app,System1,physical128K/B2criterion6 gates persist
 
 [Contract](../specifications/SPEC-0077-mac-timer-refresh.md),
 [actual receipt](timer-refresh-stream-boundary.json).
+
+
+## Committed native verification and stopped GUI trial
+
+SRC-0503;source3fab75ff8afdc09493684705dde94ebf5b8a1d9f. Native Mac job in
+CI40569640275 succeeds. Strict673a2cca..c4965,timer7de4329b..86606 andtimer-idle
+141b4454..be20 ROMs are byte-identical to baseline. New refresh imageSHA
+a5fca8484098eaa8e8d87cee6371121df839a0d1aa70769a5c3580fd2943c3a9 has49
+Git-LF source hashes verified,valid seal,three exact IRQ veneers and12 builder
+corruption controls.23772 usedROM bytes (+68 vs timer),360B staticRAM (+0),964B
+workspace and4992B conservative nonrecursive stack bound unchanged. The latter
+is not measured high-water or physical128K qualification. Refresh ROM is unbooted.
+
+Both fixed PC media writer pairs agree;package subset and changed compiler inputs
+match committed source. One isolated fixed-raw boot shows the original scene and
+0000 in its own framebuffer export. No GUI input is sent. The Windows capture tool
+returns unrelated browser/desktop pixels despite own-VM accessibility text;the
+next capture request is rejected by automatic approval review for out-of-scope
+private content. Stop desktop capture/input,no private desktop screenshot enters
+Git. VM closes83.33s under180s cap;media/inventory/running states preserved.
+This is a boot observation,no new motion or dragging result. No unchanged retry.
+
+The receipt records the observed Windows CI status separately from native success.
+The remaining task is safe original-target input qualification on the verified
+Mac experiment and fixed PC candidate. Release gates remain open. No new worker
+call,source exposure,286 runtime,product screenshot or GIF;72PNG/twoGIF retained.

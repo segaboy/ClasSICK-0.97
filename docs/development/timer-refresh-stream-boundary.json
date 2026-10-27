@@ -7,7 +7,8 @@
     "SRC-0499",
     "SRC-0500",
     "SRC-0501",
-    "SRC-0502"
+    "SRC-0502",
+    "SRC-0503"
   ],
   "specifications": [
     "SPEC-0077",
@@ -129,7 +130,7 @@
       "sha256": "74771fdb69e0337002200238cf966c97d8023439d159a0a09f36156a47851bd1",
       "not_native_image_proof": true
     },
-    "native_build_verified": false,
+    "native_build_verified": true,
     "refresh_ROM_booted": false,
     "actual_prefixed_trace": {
       "tag": 1297567793,
@@ -214,7 +215,10 @@
         "omission_controls": 28
       }
     },
-    "postfix_images_booted": false,
+    "postfix_images_booted": {
+      "normal": false,
+      "raw-motion": true
+    },
     "prefixed_raw_proof": {
       "EFI": "ddaebceea5e7135767af3b5d2e134ce6e0960b242bd743be3af8eb03c9123858",
       "disk": "97d7684673bc2b5facf8d9ee2385ced4585d2521dedf1e9463d9d4510a726278",
@@ -393,5 +397,155 @@
   "prior_286_compiler_proofs": "12 objects/six refusals retained,unlinked/unrun",
   "screenshots_in_Git": 72,
   "GIFs_in_Git": 2,
-  "preservation": "24 research originals,held brief,UART,prior tags/releases/assets and retired wiki preserved;no new reference/hardware/source exposure"
+  "preservation": "24 research originals,held brief,UART,prior tags/releases/assets and retired wiki preserved;no new reference/hardware/source exposure",
+  "native_followup": {
+    "source": "SRC-0503",
+    "native": {
+      "source_revision": "3fab75ff8afdc09493684705dde94ebf5b8a1d9f",
+      "CI": 40569640275,
+      "native_job": "success",
+      "profiles": [
+        {
+          "name": "strict",
+          "ROM_sha256": "673a2cca57d1ec9ffd842f4c858fa4aafbcb042ec6f86445ae5717d4816c4965",
+          "size": 65536,
+          "sources_verified": 43,
+          "default_byte_identity": true,
+          "rom_used": 23096,
+          "static_RAM": 304,
+          "workspace": 964,
+          "conservative_stack_bound": 4996,
+          "seal_verified": true,
+          "IRQ_veneers_verified": 3,
+          "trace_address": 2928,
+          "corruption_controls": 12
+        },
+        {
+          "name": "timer",
+          "ROM_sha256": "7de4329b10bf34fa4f03f43def49fdaf8b1c34831cc3ebf11bfb2e3bfdc86606",
+          "size": 65536,
+          "sources_verified": 48,
+          "default_byte_identity": true,
+          "rom_used": 23704,
+          "static_RAM": 360,
+          "workspace": 964,
+          "conservative_stack_bound": 4992,
+          "seal_verified": true,
+          "IRQ_veneers_verified": 3,
+          "trace_address": 2984,
+          "corruption_controls": 12
+        },
+        {
+          "name": "timer-idle",
+          "ROM_sha256": "141b4454579bd5e9cb21c35b267241d14644036b3d8b50fadbb7bbadbbc5be20",
+          "size": 65536,
+          "sources_verified": 48,
+          "default_byte_identity": true,
+          "rom_used": 23792,
+          "static_RAM": 360,
+          "workspace": 964,
+          "conservative_stack_bound": 4992,
+          "seal_verified": true,
+          "IRQ_veneers_verified": 3,
+          "trace_address": 2984,
+          "corruption_controls": 29
+        },
+        {
+          "name": "refresh",
+          "ROM_sha256": "a5fca8484098eaa8e8d87cee6371121df839a0d1aa70769a5c3580fd2943c3a9",
+          "size": 65536,
+          "sources_verified": 49,
+          "default_byte_identity": false,
+          "rom_used": 23772,
+          "static_RAM": 360,
+          "workspace": 964,
+          "conservative_stack_bound": 4992,
+          "seal_verified": true,
+          "IRQ_veneers_verified": 3,
+          "trace_address": 2984,
+          "corruption_controls": 12
+        }
+      ],
+      "new_target_execution": false,
+      "refresh_cost_vs_timer": {
+        "ROM_bytes": 68,
+        "static_RAM_bytes": 0,
+        "workspace_bytes": 0,
+        "conservative_stack_bound_bytes": 0
+      }
+    },
+    "packages": {
+      "pc-fixed-normal": {
+        "source_revision": "3fab75ff8afdc09493684705dde94ebf5b8a1d9f",
+        "package_subset_verified_against_Git": 18,
+        "changed_compile_inputs_match_frozen_precommit_build": true,
+        "tracked_source_dirty": "Only preserved unrelated native-outline brief remains modified",
+        "EFI": "e634d1a4831dfd9970d839ffb6b6c596bea4315e4fc65db013b4b7ea3a00b955",
+        "disk": "fa627d5798f80c8e0b639aa6f4585bca73f29e375e3534ea39fdfb0ef0ee85d0",
+        "twin_equal": true
+      },
+      "pc-fixed-raw": {
+        "source_revision": "3fab75ff8afdc09493684705dde94ebf5b8a1d9f",
+        "package_subset_verified_against_Git": 21,
+        "changed_compile_inputs_match_frozen_precommit_build": true,
+        "tracked_source_dirty": "Only preserved unrelated native-outline brief remains modified",
+        "EFI": "9120a9686ba59092677d8ea0aba37cb535608712e61d1216d1db3bdff34a3fef",
+        "disk": "bd94c586437e2e11019df829a534878fa313805a0133267b3f7a3da6411df5ba",
+        "twin_equal": true
+      },
+      "raw_own_spin": [
+        "1002D0E2",
+        "1002D0E4"
+      ]
+    },
+    "CI": {
+      "conclusion": "",
+      "headSha": "3fab75ff8afdc09493684705dde94ebf5b8a1d9f",
+      "jobs": [
+        {
+          "conclusion": "success",
+          "name": "m68k-rom",
+          "status": "completed"
+        },
+        {
+          "conclusion": "",
+          "name": "windows-bootstrap",
+          "status": "in_progress"
+        }
+      ],
+      "status": "in_progress"
+    },
+    "fixed_raw_trial": {
+      "booted": true,
+      "GUI_input_events_sent": 0,
+      "result": "Initial original framebuffer shows scene/counter0000;no motion or dragging qualification.",
+      "capture_issue": "Windows tool returned unrelated desktop/browser pixels with own-VM accessibility text. Further desktop screenshot request rejected by automatic approval review for out-of-scope private content. No further desktop capture or input.",
+      "closed": {
+        "utc": "2026-10-27T19:33:42.2702005Z",
+        "cold_starts": 1,
+        "state": "poweroff",
+        "unregistered": true,
+        "existing_vm_inventory_preserved": true,
+        "running_state_preserved": true,
+        "post_trial_raw_roundtrip_equal": true,
+        "artifacts_retained": true,
+        "semantic_session_stop_observed": false,
+        "termination": "external poweroff from paused state"
+      },
+      "watchdog": {
+        "host_wall_seconds": 83.3327707,
+        "cap_seconds": 180,
+        "stop_requested": true,
+        "scope": "owned isolated original raw-packet diagnostic only"
+      }
+    },
+    "refresh_ROM_booted": false,
+    "release_ready": false,
+    "provider_remaining_balances": {
+      "Claude": null,
+      "Copilot": null,
+      "Grok": null,
+      "Antigravity": null
+    }
+  }
 }
