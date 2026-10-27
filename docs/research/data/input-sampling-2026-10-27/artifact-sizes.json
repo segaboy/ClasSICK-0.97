@@ -1,0 +1,30 @@
+{
+  "artifacts": [
+    {
+      "artifact": "Mac ROM",
+      "bytes": 65536,
+      "sha256": "a5fca8484098eaa8e8d87cee6371121df839a0d1aa70769a5c3580fd2943c3a9",
+      "source_revision": "3fab75ff8afdc09493684705dde94ebf5b8a1d9f"
+    },
+    {
+      "artifact": "PC EFI",
+      "bytes": 184320,
+      "sha256": "e634d1a4831dfd9970d839ffb6b6c596bea4315e4fc65db013b4b7ea3a00b955",
+      "source_revision": "3fab75ff8afdc09493684705dde94ebf5b8a1d9f"
+    },
+    {
+      "artifact": "PC disk container",
+      "bytes": 67108864,
+      "sha256": "fa627d5798f80c8e0b639aa6f4585bca73f29e375e3534ea39fdfb0ef0ee85d0",
+      "source_revision": "3fab75ff8afdc09493684705dde94ebf5b8a1d9f"
+    }
+  ],
+  "Mac_native_manifest_sha256": "abcaf3e5341e1b23c232a81150b2d24cc493d096184bf91552f58a26180b7bd5",
+  "Mac_original_program_bytes": 0,
+  "units": "byte counts;1KiB=1024B;1MiB=1048576B",
+  "limitation": "Distinct metrics;not a final System1,128K runtime or286 installed-size forecast.",
+  "Mac_audited_used_ROM_bytes": 23772,
+  "Mac_unused_ROM_file_capacity_bytes": 41764,
+  "Mac_audited_used_ROM_KiB": 23.21484375,
+  "RAM_categories_summed": false
+}

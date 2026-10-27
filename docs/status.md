@@ -1,5 +1,7 @@
 # Project status
 
+2026-10-27,SRC-0508..0510:ebfbfb9 fullCI passes. Research-only1664-case/two-compiler sampling study and four prior-PB replays agree;previous phase bits remain the Mac diagnostic gap. Five frozen cases/two refusals verified,existing artifact sizes/hashes measured;original SVG/data/blog fact pack saved. Zero new VM/emulator runs or production changes;desktop trials paused and release input gates open. [Study](research/input-sampling-study.md).
+
 2026-10-27,SRC-0504..0507:3fab75f fullCI passes. Display1 capture works;GLKVM left alone. Host helper83 fake checks/four CTests/four profiles and five compiled defects/16 CLI controls pass. Mac held-left gives0001/fault0,first loss6 Gray jump,pointer fixed. PC12 guarded API events leave pixels unchanged.13 owned attempts closed/preserved;motion/drag/release remain blocked.74PNG/twoGIF,286/originals retained. [Evidence](development/owned-window-input-evidence.md).
 
 2026-10-27,SRC-0503:3fab75f native Mac job passes;strict/timer/idle ROMs unchanged,refresh adds68ROM bytes/zeroRAM. Fixed PC media twins/source identity pass;raw scene boots,zero GUI input. Desktop capture mismatch/privacy refusal stops trial;own VM closed83.33s/media preserved. Mac motion/PC GUI dragging and release remain open. [Evidence](development/timer-refresh-stream-boundary.md).

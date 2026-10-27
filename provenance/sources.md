@@ -4748,3 +4748,15 @@ new capture;no guest implementation fix or release pass inferred.
 ## SRC-0507 - Display-separated original Mac and PC input observations
 
 2026-10-27. Owner directs tests to another display while GLKVM remains fullscreen elsewhere. Capture works on Display1;13 owned launch attempts close with media/inventory preserved. Mac held-left gives0001,fault0,two delivered records but fixed pointer;first loss6 Gray jump. PC12 guarded API mouse events leave scene unchanged. No movement/drag/E3/E4 or release pass.74PNG/twoGIF indexed;full own Mac trace retained. [Evidence](../docs/development/owned-window-input-evidence.md).
+
+## SRC-0508 - Completed source CI and owner-paused physical attempt
+
+2026-10-27. ebfbfb935ed560b687ffed931c0db94889ff9ce0 CI40586299701 completes Windows/native Mac successfully. A further physical PC attempt retains131 guest frames but lacks movement confirmation because fullscreen hides instructions;not a completed human test. Own VM closes190.18s<510s,media/inventory preserved;Mac profile unlaunched. Desktop tests remain paused. [Research follow-up](../docs/research/input-sampling-study.md).
+
+## SRC-0509 - Original bounded sampling-research proposal
+
+2026-10-27. Claude Opus5.5 Low128.45s/17144B,417 proposed artifact lines,zero tools/commands/writes/tests. Original research utility/note from frozen reviewed-public original code/contract/trace;no manuals,HQ,reference,emulator or held originals. Lead adopts with explicit result-validation and explanatory corrections. No new hardware contract or production change. [Receipt](../docs/development/input-research-evidence.json).
+
+## SRC-0510 - Executed original model study and native artifact measurements
+
+2026-10-27. Two pinned host compilers produce identical1664-case CSV/four trace candidates;five pre-output frozen cases/four trace expectations and two refusal controls pass. Three missing previous phase-bit assignments can produce the recorded Gray loss;no actual cause or event rate inferred. Original SVG/data/reproducer retained. Existing Mac64KiB ROM audit uses23772B;PC EFI180KiB/disk64MiB container hashes match. Distinct metrics,not completed System1/286 size. Zero new VM/emulator or target runs;release gates remain. [Study](../docs/research/input-sampling-study.md).

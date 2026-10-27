@@ -1,0 +1,153 @@
+{
+  "date": "2026-10-27",
+  "public_baseline": "ebfbfb935ed560b687ffed931c0db94889ff9ce0",
+  "native_artifact_source_revision": "3fab75ff8afdc09493684705dde94ebf5b8a1d9f",
+  "sources": [
+    "SRC-0508",
+    "SRC-0509",
+    "SRC-0510"
+  ],
+  "scope": "Research only:original software-model study and measured existing artifact footprint;desktop trials remain paused",
+  "worker": {
+    "round": "study",
+    "worker": "claude",
+    "exit_code": 0,
+    "outer_timeout": false,
+    "elapsed_seconds": 128.45,
+    "input_bytes": 17144,
+    "input_sha256": "4ac4066ad32721e7207690c541d7eb75b99b2c1e7f1698d661edc372d95cc989",
+    "stderr_bytes": 0,
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "artifact_lines": 417,
+    "note_words": 1041,
+    "tools": 0,
+    "commands": 0,
+    "writes": 0,
+    "tests_executed": [],
+    "reported_session_list_USD": 0.3757624
+  },
+  "usage": {
+    "remaining_allowances": "Provider account quota snapshots,when available,are kept privately;not published in this receipt.",
+    "measured_Codex_savings": null
+  },
+  "verification": {
+    "profiles": [
+      "pinned Clang64",
+      "pinned GCC64"
+    ],
+    "cases_per_profile": 1664,
+    "trace_candidates_per_profile": 4,
+    "sweep_csv_byte_equal": true,
+    "summaries_equal_except_compiler_metadata": true,
+    "strict_compile_diagnostics_empty": true,
+    "frozen_cases": 5,
+    "frozen_trace_rows": 4,
+    "existing_output_refused": true,
+    "changed_source_refused_before_output": true,
+    "sweep_csv_sha256": "e977f4434f69c148a4b9e3762fa6c94352a2d13d1c5af823e89b78833ad350ce",
+    "VM_or_emulator_runs": 0
+  },
+  "lead_corrections": [
+    "Enable strict compiler warnings as errors and conversion diagnostics.",
+    "Require exact unique Cartesian sweep coverage and legal endpoint return codes.",
+    "Require all four unique prior-PB candidates and successful baselines.",
+    "Public project contracts are engineering inputs,not primary historical evidence.",
+    "Model returnLOST3 maps to timer lossreason6 for the same Gray check,not a different mechanism.",
+    "Matching current readouts do not prove atomicity or uninterrupted coherence.",
+    "Representative prior PB bytes stand for two missing phase bits;other ignored bits are not reconstructed."
+  ],
+  "compiler_diagnostics": [],
+  "case_counts": {
+    "exact_emitted_unit_agreement": 256,
+    "hidden_nonzero_full_cadence_units": 704,
+    "opposite_sign_output": 192,
+    "other_mismatch": 128,
+    "whole_sample_loss": 384
+  },
+  "native_build_CI": {
+    "conclusion": "success",
+    "headSha": "ebfbfb935ed560b687ffed931c0db94889ff9ce0",
+    "jobs": [
+      {
+        "conclusion": "success",
+        "name": "m68k-rom",
+        "status": "completed"
+      },
+      {
+        "conclusion": "success",
+        "name": "windows-bootstrap",
+        "status": "completed"
+      }
+    ],
+    "status": "completed"
+  },
+  "artifact_measurements": {
+    "artifacts": [
+      {
+        "artifact": "Mac ROM",
+        "bytes": 65536,
+        "sha256": "a5fca8484098eaa8e8d87cee6371121df839a0d1aa70769a5c3580fd2943c3a9",
+        "source_revision": "3fab75ff8afdc09493684705dde94ebf5b8a1d9f"
+      },
+      {
+        "artifact": "PC EFI",
+        "bytes": 184320,
+        "sha256": "e634d1a4831dfd9970d839ffb6b6c596bea4315e4fc65db013b4b7ea3a00b955",
+        "source_revision": "3fab75ff8afdc09493684705dde94ebf5b8a1d9f"
+      },
+      {
+        "artifact": "PC disk container",
+        "bytes": 67108864,
+        "sha256": "fa627d5798f80c8e0b639aa6f4585bca73f29e375e3534ea39fdfb0ef0ee85d0",
+        "source_revision": "3fab75ff8afdc09493684705dde94ebf5b8a1d9f"
+      }
+    ],
+    "Mac_native_manifest_sha256": "abcaf3e5341e1b23c232a81150b2d24cc493d096184bf91552f58a26180b7bd5",
+    "Mac_original_program_bytes": 0,
+    "units": "byte counts;1KiB=1024B;1MiB=1048576B",
+    "limitation": "Distinct metrics;not a final System1,128K runtime or286 installed-size forecast.",
+    "Mac_audited_used_ROM_bytes": 23772,
+    "Mac_unused_ROM_file_capacity_bytes": 41764,
+    "Mac_audited_used_ROM_KiB": 23.21484375,
+    "RAM_categories_summed": false
+  },
+  "new_VM_or_emulator_runs": 0,
+  "production_files_changed": [],
+  "research_script": {
+    "path": "tools/research/study_mac_sampling.py",
+    "sha256": "57100a1fb2e3283c77385dda9725f049f0e0476da9696114fa07a5d8198c569a"
+  },
+  "data_csv_sha256": "e977f4434f69c148a4b9e3762fa6c94352a2d13d1c5af823e89b78833ad350ce",
+  "figure": {
+    "path": "docs/research/figures/endpoint-sampling.md",
+    "original": true,
+    "static_model_example": true,
+    "hardware_capture": false,
+    "XML_validated": true,
+    "matching_private_PNG_visually_inspected": true,
+    "generator": "tools/research/render_sampling_diagram.py",
+    "standalone_SVG_in_Git": false,
+    "standalone_SVG_sha256": "d628edee0d2015a598987bf64ff6d617f5c49948f0d02677e127483f2215d814",
+    "source_sha256": "3fab34743b9c58017c1df2d8899fad2030998be3ba69f8272a31fbd087be5be2",
+    "generator_output_byte_identical": true
+  },
+  "physical_attempt_followup": {
+    "completed_human_test": false,
+    "observer_frames": 131,
+    "closed_seconds": 190.1825637,
+    "cap_seconds": 510,
+    "media_inventory_preserved": true,
+    "no_Mac_launch": true,
+    "next_trial_requires_windowed_instructions_visible": true
+  },
+  "research_originals_preserved": 24,
+  "PNG_count": 74,
+  "GIF_count": 2,
+  "new_286_target_work": false,
+  "release_ready": false,
+  "data_json_sha256": "269c1ee3646fb7a3fa12044adc3132ff93504f2c216d686b074c0bc51da76366",
+  "data_JSON_roundtrip_matches_executed_CSV": true,
+  "format_adjustment": "Existing guard admits reviewed text/source formats;use JSON data,Mermaid Markdown and original SVG generator. Standalone SVG/CSV exports stay outside Git. No guard relaxation.",
+  "native_invert_build_value": 0
+}

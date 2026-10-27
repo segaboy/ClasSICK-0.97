@@ -1,0 +1,137 @@
+{
+  "cases": 1664,
+  "caveat": "endpoint agreement is not proof that no physical transitions were missed; inversion cannot restore information absent from endpoints",
+  "classes": {
+    "exact_emitted_unit_agreement": 256,
+    "hidden_nonzero_full_cadence_units": 704,
+    "opposite_sign_output": 192,
+    "other_mismatch": 128,
+    "whole_sample_loss": 384
+  },
+  "classes_by_steps": {
+    "0": {
+      "exact_emitted_unit_agreement": 128
+    },
+    "1": {
+      "exact_emitted_unit_agreement": 128
+    },
+    "10": {
+      "whole_sample_loss": 128
+    },
+    "11": {
+      "hidden_nonzero_full_cadence_units": 64,
+      "opposite_sign_output": 64
+    },
+    "12": {
+      "hidden_nonzero_full_cadence_units": 128
+    },
+    "2": {
+      "whole_sample_loss": 128
+    },
+    "3": {
+      "hidden_nonzero_full_cadence_units": 64,
+      "opposite_sign_output": 64
+    },
+    "4": {
+      "hidden_nonzero_full_cadence_units": 128
+    },
+    "5": {
+      "hidden_nonzero_full_cadence_units": 64,
+      "other_mismatch": 64
+    },
+    "6": {
+      "whole_sample_loss": 128
+    },
+    "7": {
+      "hidden_nonzero_full_cadence_units": 64,
+      "opposite_sign_output": 64
+    },
+    "8": {
+      "hidden_nonzero_full_cadence_units": 128
+    },
+    "9": {
+      "hidden_nonzero_full_cadence_units": 64,
+      "other_mismatch": 64
+    }
+  },
+  "endpoint_rc": {
+    "EMPTY": 896,
+    "LOST": 384,
+    "SAMPLE": 384
+  },
+  "study": "endpoint-only vs full-cadence polled-phase sampling",
+  "trace_candidates": [
+    {
+      "baseline_rc": 2,
+      "buttons": 0,
+      "dx": 0,
+      "dy": 0,
+      "prior_pb": "8F",
+      "prior_pb4": 0,
+      "prior_pb5": 0,
+      "rc": 3,
+      "rc_name": "LOST"
+    },
+    {
+      "baseline_rc": 2,
+      "buttons": 0,
+      "dx": 0,
+      "dy": 0,
+      "prior_pb": "9F",
+      "prior_pb4": 1,
+      "prior_pb5": 0,
+      "rc": 3,
+      "rc_name": "LOST"
+    },
+    {
+      "baseline_rc": 2,
+      "buttons": 0,
+      "dx": -1,
+      "dy": -1,
+      "prior_pb": "AF",
+      "prior_pb4": 0,
+      "prior_pb5": 1,
+      "rc": 0,
+      "rc_name": "SAMPLE"
+    },
+    {
+      "baseline_rc": 2,
+      "buttons": 0,
+      "dx": 0,
+      "dy": 0,
+      "prior_pb": "BF",
+      "prior_pb4": 1,
+      "prior_pb5": 1,
+      "rc": 3,
+      "rc_name": "LOST"
+    }
+  ],
+  "trace_note": "current PB=AF RR0A=RR0B=4C, invert 0; prior PB4/PB5 were not retained. Four logical candidates, not probabilities or proof of which axis moved. Model LOST(3) is distinct from wrapper loss_reason 6.",
+  "units": "emitted DCD units of the software model; not physical edges, pixels or elapsed time",
+  "other_mismatch_note": "All128 cases are same-direction emitted-unit undercounts,verified by lead.",
+  "verification": {
+    "profiles": [
+      "pinned Clang64",
+      "pinned GCC64"
+    ],
+    "cases_per_profile": 1664,
+    "trace_candidates_per_profile": 4,
+    "sweep_csv_byte_equal": true,
+    "summaries_equal_except_compiler_metadata": true,
+    "strict_compile_diagnostics_empty": true,
+    "frozen_cases": 5,
+    "frozen_trace_rows": 4,
+    "existing_output_refused": true,
+    "changed_source_refused_before_output": true,
+    "sweep_csv_sha256": "e977f4434f69c148a4b9e3762fa6c94352a2d13d1c5af823e89b78833ad350ce",
+    "VM_or_emulator_runs": 0
+  },
+  "original_inputs": {
+    "platform/mac128k/polled-phase.h": "889aa6a1314e32114722f8ef822de14b100f197927fc77b9768561ac1566428f",
+    "platform/mac128k/polled-phase.c": "537d6d62bf3177e16153c86ba4d42fee90a90192bf17e103fc635f5bf1518766",
+    "core/input/pointer.h": "d0a53cdadbe728195ce2c35bc4ef0b2a1687351912c759eda1bf6b4c38abdc38",
+    "docs/specifications/SPEC-0074-polled-phase-model.md": "b70596ea64c4fa6ff58aa55961c787f0a03266ee70e57baa49afe431c9896547",
+    "docs/evidence/traces/2026-10-27/mac-refresh-paused.json": "c3ab4483099ee660510b742eeef4d35de8e123642999b1e3930c50bbaa66365b"
+  },
+  "source_revision": "ebfbfb935ed560b687ffed931c0db94889ff9ce0"
+}
