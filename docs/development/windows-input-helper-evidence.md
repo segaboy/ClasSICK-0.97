@@ -11,8 +11,9 @@ No new guest input policy or production code changed.
 The Windows11 helper is qualified narrowly as host test instrumentation. It
 validates a bounded plan,process creation/path/hash,one eligible owned window,
 foreground,Default desktop and unchanged primary mapping. It checks the pointer
-inside that client or a current read-only UIA captured indicator under that exact
-owned window,then rechecks all base guards. Host return counts never mean guest
+inside that owned client. SRC-0492 supersedes the earlier captured-indicator
+exception:read-only capture metadata cannot grant input;after its query all base
+guards are rechecked before refusing an outside-client pointer. Host return counts never mean guest
 acceptance. No arbitrary window selector,focus bypass or global setting change.
 The compile-bound target header stays outside Git;CI uses only inactive fixtures.
 

@@ -1,5 +1,7 @@
 # Paired native preview 2 - first interactive window
 
+2026-10-26,SRC-0492/0493:desktop unlocked;capture indicator cannot authorize outside-client host input. Original helper safety fix passes four CTests/four profiles,31 author/30 frozen assertions and compiled bypass controls. PC corner-cross capture/Mac scene observed;both human checks unconfirmed. Three owned sessions closed. Release blocked;71PNG/twoGIF,286/originals retained. [Evidence](../docs/development/unlocked-input-evidence.md).
+
 2026-10-26,SRC-0490/0491:d9df16d fullCI passes,normal PC EFI/disk unchanged. Native raw device control09/01/00 gives+1X,left1,pointer257,171;not GUI evidence. Current foreground refusal is LockApp;zero-event guard sends nothing,all owned sessions close/media/inventory preserved. Unlock required;Mac motion/PC GUI/release remain open.70PNG/twoGIF/286 proofs retained. [Proof](../docs/development/timer-and-pc-input.md).
 
 2026-10-26,SRC-0487..0489/SPEC-0076/IMPL-0084/TEST-0097:Mac timer held primary click accepted0001;motion/drag unqualified. PC opt-in raw trace passes2097152-report oracle/four profiles/three CTests/three compiled controls;normal policy unchanged.28612 objects/six refusals pass,unrun. Native PC trace pending.69PNG/twoGIF. [Review](../docs/development/timer-and-pc-input.md).

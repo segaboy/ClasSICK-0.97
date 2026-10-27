@@ -26,3 +26,9 @@ valid stop. No focus hacks,desktop/security changes,preferences,hooks,services,
 arbitrary keyboard,network or guest patching. `capture.c` reads only the exact
 owned window's accessibility subtree and verifies the current captured indicator.
 It performs no accessibility action. The existing source and trial gates apply.
+
+SRC-0492 safety correction:read-only capture metadata never authorizes input.
+Physical WindowFromPoint/root/client containment is mandatory even when the
+owned UIA indicator says captured. A failed containment check may query that
+indicator for the receipt,then rechecks the base guards and refuses.
+[Verification and live limitations](../../docs/development/unlocked-input-evidence.md).

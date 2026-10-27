@@ -64,4 +64,4 @@ Planned live controls,only after source/implementation review and approval:
 Foreground refusal remains a possible result. This proposal promises no fix
 to window activation and authorizes no workaround for a refused target.
 
-Qualified guard refinement: a nonempty client window is required. A physical client-area check may be replaced only by a current read-only captured indicator under the exact owned window;all base guards are rechecked after that query. No screen scraping or broad desktop accessibility traversal. This is not a GUI input pass.
+Current guard refinement,SRC-0492:supersedes the former capture exception. A nonempty owned client and physical WindowFromPoint/root/client containment are required. Capture metadata never substitutes for containment. Query only the owned subtree,then recheck all base guards and refuse outside-client input. No broad desktop traversal or unsafe cleanup fallback. This is not a GUI input pass.

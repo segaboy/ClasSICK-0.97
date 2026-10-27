@@ -145,14 +145,11 @@ static int guard(void *c) {
          ScreenToClient(g_hwnd, &pt) && GetClientRect(g_hwnd, &rc) &&
          pt.x >= rc.left && pt.x < rc.right && pt.y >= rc.top && pt.y < rc.bottom;
   if (!phys) {
-    /* Only a current verified captured indicator may substitute for the physical check. */
+    /* Capture metadata is read-only receipt data; it never grants input. */
     memset(&g_cap, 0, sizeof g_cap);
     WH_CAPTURE_QUERY((void *)g_hwnd, (unsigned long)g_t->pid, &g_cap);
-    if (!g_cap.verified) return deny("client area");
     if (!base_ok()) return 0;
-    printf("{\"guard_capture\":{\"capture_verified\":true,\"stage\":\"%s\",\"hresult\":%ld}}\n",
-           g_cap.stage, g_cap.hr);
-    return 1;
+    return deny("client area");
   }
   printf("{\"guard_client\":[%ld,%ld],\"client_size\":[%ld,%ld]}\n",
          (long)pt.x,(long)pt.y,(long)(rc.right-rc.left),(long)(rc.bottom-rc.top));

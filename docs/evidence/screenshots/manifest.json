@@ -1636,6 +1636,28 @@
         "Virtual-device positive control only;not Windows GUI/human input or successful drag.",
         "No historical,physical-hardware,System1 or release qualification."
       ]
+    },
+    {
+      "id": "2026-10-26-pc-corner-pointer",
+      "path": "docs/evidence/screenshots/2026-10-26/pc-corner-pointer.png",
+      "sha256": "9300359b953d27749f82aced8a6791dc381aaa161541d98005c28cfd18e6e31e",
+      "bytes": 2016,
+      "width": 512,
+      "height": 342,
+      "captured_on": "2026-10-26",
+      "target": "native-x86_64",
+      "caption": "Original PC scene during the requested physical-mouse check:cross at upper-right,counter0000,window unchanged. Human result and dragging are unconfirmed.",
+      "alt": "Original PC scene with tiny cross at upper-right and checkerboard window unchanged.",
+      "source_revision": "d9df16d4c3b1212ff8ee731b16049df1fefbea93",
+      "compiled_source_revision": "d9df16d4c3b1212ff8ee731b16049df1fefbea93",
+      "evidence": "docs/development/unlocked-input-evidence.md",
+      "license": "GPL-3.0-or-later",
+      "rights": "Exact512x342 crop of our original guest framebuffer;no resize,retouch,desktop or emulator chrome.",
+      "input": "none",
+      "limitations": [
+        "No automation input was sent in this observation window;physical-mouse result awaits owner confirmation. Input classification does not assert a physical event caused the corner position.",
+        "No successful drag,physical target-hardware,System1 or release qualification."
+      ]
     }
   ]
 }

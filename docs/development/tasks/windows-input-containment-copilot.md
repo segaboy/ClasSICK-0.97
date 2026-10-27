@@ -1,0 +1,11 @@
+# Original Windows helper containment correction prompt
+
+Frozen public revision53324a085411506d95fa3999e5e84334e9720a6a. Exact input paths:tools/windows-input/native.c and tests/windows-input-native-guard.c.
+
+Windows11/ClasSICK0.97. Fresh supervised original-code proposal worker;Codex sole writer/integrator. Read packet once only;no other paths,commands,writes,web,SDK/manuals,delegation or tests. No new Windows APIs or RawInput work. Existing approved helper uses independently reviewed interface facts. Return usable exact replacements,not claimed tests.
+Actual reviewed test found native guard phys=false but UIA captured indicator=true;it allowed SendInput,which moved Windows cursor outside the VM,and primary-down went to Explorer. Helper then refused further events on foreground change;owned session closed and button released on owned titlebar. Indicator alone does NOT establish where injected Windows input will land.
+Task:smallest original safety patch plus useful native injected-fixture tests. In native.c,if physical WindowFromPoint/root/client-area check fails,always refuse even with verified captured indicator. Retain read-only query/receipt metadata if useful and retain post-query base_ok revalidation;do not grant input based on capture metadata. Keep process/hash/foreground/desktop/mapping checks,positive inside-client behavior and existing guarded cleanup unchanged. No fallback that sends outside-window release. Existing guard tests must change unsafe captured-outside acceptance to refusal and verify each post-query changed identity reason,not only a false return. Test zero native SendInput calls. No parser/ABI/new policy expansion.
+Return ONLY JSON {replacements:[{path,old,new}],handoff:{result,actionable_findings,tests_executed:[],blockers,decisions_needed}}. Exact replacements occur once;<=150 added/changed lines total. Handoff<=150words. Use paths tools/windows-input/native.c and tests/windows-input-native-guard.c only. Do not remove existing tests without preserving their useful assertions. No stable IDs assigned. Actual OS integration checks remain lead responsibility.
+
+
+Lead evidence qualification:the foreground change after down is observed;its exact recipient was not instrumented. Worker instructions and claims are proposals,not runtime evidence. Full capture stays outside Git.

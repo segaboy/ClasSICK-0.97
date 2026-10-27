@@ -4679,3 +4679,11 @@ wrong locator rejected for each component. No native package/trial/publication.
 ## SRC-0491 - Current Windows lock-screen focus refusal and cleanup
 
 2026-10-26. GUI activation and approved zero-event helper refuse;foregroundPID17752 is observed LockApp,zero input attempted. Desktop automation stops;owner unlock requested. Two owned VMs close,inventory/running states/media unchanged. No authentication automation or release waiver. [Review](../docs/development/timer-and-pc-input.md).
+
+## SRC-0492 - Original helper containment correction and verification
+
+2026-10-26. One bounded Copilot original-public artifact integrated after review. Physical containment is mandatory even with capture metadata.31 author/30 frozen guard assertions,four CTests in four profiles,two compiled restored-bypass detections and inactive native checks pass. No guest input fix claimed. [Evidence](../docs/development/unlocked-input-evidence.md).
+
+## SRC-0493 - Unlocked isolated input observations and physical check offer
+
+2026-10-26. Fresh original PC trial exposes unsafe metadata substitute;second run receives no automation input and records corner cross with unchanged window. Human result unconfirmed. Both VMs close/media/inventory preserved;second cleanup301.75s exceeds300s diagnostic bound. Mac timer human observation separately recorded. No release pass. [Evidence](../docs/development/unlocked-input-evidence.md).

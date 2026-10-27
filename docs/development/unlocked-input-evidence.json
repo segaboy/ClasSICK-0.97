@@ -1,0 +1,154 @@
+{
+  "date": "2026-10-26",
+  "baseline": "53324a085411506d95fa3999e5e84334e9720a6a",
+  "sources": [
+    "SRC-0492",
+    "SRC-0493"
+  ],
+  "scope": "Host helper safety correction and isolated original input observations;no production guest input policy change",
+  "worker": {
+    "provider": "Copilot",
+    "model": "claude-sonnet-5.5",
+    "effort": "low",
+    "execution": {
+      "round": "primary",
+      "worker": "copilot",
+      "exit_code": 0,
+      "outer_timeout": false,
+      "elapsed_seconds": 27.17,
+      "input_bytes": 17101,
+      "input_sha256": "32fde753804d078ea5b1b27b7371af259e75daa4b9054680f157d2e2d30b3d5a",
+      "stderr_bytes": 0
+    },
+    "reported_premium_request_cost": 1,
+    "views": 1,
+    "commands": 0,
+    "writes": 0,
+    "tests_executed": [],
+    "lead_corrections": [
+      "Removed disclosed always-true test assertion;not coverage.",
+      "Worker exact old locator required no normalization in this integration.",
+      "Foreground-after-down observation does not prove the exact recipient of the down event."
+    ]
+  },
+  "verification": {
+    "profiles": [
+      "Clang Debug",
+      "GCC64",
+      "GCC32",
+      "ASan/UBSan"
+    ],
+    "focused_CTests_per_profile": 4,
+    "native_guard_assertions": 31,
+    "frozen_guard_assertions": 30,
+    "old_guard_fails_frozen_oracle": true,
+    "compiled_restored_bypass_detected_by": [
+      "author",
+      "frozen"
+    ],
+    "inactive_helper": [
+      {
+        "live": false,
+        "returncode": 0,
+        "stdout_summary": "valid one-row dry-run"
+      },
+      {
+        "live": true,
+        "returncode": 3,
+        "stdout_summary": "inactive target refused;attempted0,delivered0,cleanup0"
+      }
+    ],
+    "initial_test_environment_failure": "Python observer TEMP directory was not writable;rerun with existing outside-Git approved TEMP/TMP directory passes all four profiles."
+  },
+  "trials": {
+    "pc": {
+      "closed": {
+        "utc": "2026-10-27T00:02:27.4918169Z",
+        "cold_starts": 1,
+        "state": "poweroff",
+        "unregistered": true,
+        "existing_vm_inventory_preserved": true,
+        "running_state_preserved": true,
+        "post_trial_raw_roundtrip_equal": true,
+        "artifacts_retained": true,
+        "semantic_session_stop_observed": false,
+        "termination": "external poweroff from paused state"
+      },
+      "watchdog": {
+        "host_wall_seconds": 165.2702365,
+        "cap_seconds": 300,
+        "stop_requested": true,
+        "scope": "owned isolated original normal-primary input test only"
+      }
+    },
+    "pc-human": {
+      "closed": {
+        "utc": "2026-10-27T00:15:27.4219296Z",
+        "cold_starts": 1,
+        "state": "poweroff",
+        "unregistered": true,
+        "existing_vm_inventory_preserved": true,
+        "running_state_preserved": true,
+        "post_trial_raw_roundtrip_equal": true,
+        "artifacts_retained": true,
+        "semantic_session_stop_observed": false,
+        "termination": "external poweroff from paused state"
+      },
+      "watchdog": {
+        "host_wall_seconds": 301.7476805,
+        "cap_seconds": 300,
+        "stop_requested": false,
+        "scope": "owned isolated original normal-primary input test only"
+      }
+    },
+    "snow-human": {
+      "closed": {
+        "status": "wall cap reached",
+        "host_seconds": 240.22,
+        "pid": 33536,
+        "process_exited": true,
+        "forced_process_cleanup": true,
+        "guest_shutdown_claimed": false,
+        "ROM_sha256": "7de4329b10bf34fa4f03f43def49fdaf8b1c34831cc3ebf11bfb2e3bfdc86606"
+      },
+      "last_read_only_observation": "Scene visible,counter0000,window unchanged at00:22:50UTC;no helper input.",
+      "human_result": "not confirmed before240s cap;no pass or new physical failure inferred."
+    }
+  },
+  "PC_frames": {
+    "frames": 150,
+    "unique_pixel_images": 2,
+    "groups": [
+      {
+        "sha256_rgb": "fc35616101e173a6cdf00a087de676ddccf2f14b39cac974f269dddc4913fdae",
+        "count": 1,
+        "first": "initial.png",
+        "last": "initial.png"
+      },
+      {
+        "sha256_rgb": "d6464e16325ba3637426a6b11375c54a1b1116a71a46731068642a8bba5f7327",
+        "count": 150,
+        "first": "frames/000.png",
+        "last": "frames/149.png"
+      }
+    ]
+  },
+  "normal_EFI_sha256": "de02e416fc92bc69fb4e07e41eb8a79a2f1cd00493e12104e1e47dba55e55d0f",
+  "normal_disk_sha256": "66a105266a18b1f8e95593b88e7f8d6b7768a17200af33bd03d8fceadd8b5202",
+  "Mac_timer_ROM_sha256": "7de4329b10bf34fa4f03f43def49fdaf8b1c34831cc3ebf11bfb2e3bfdc86606",
+  "human_confirmation": "Not received before bounded windows closed;pending owner response. No physical input pass or new physical failure inferred.",
+  "guest_input_policy_changed": false,
+  "release_ready": false,
+  "media": {
+    "PNG": 71,
+    "GIF": 2,
+    "new_PNG": 1
+  },
+  "pc286": "Prior12 C16 objects/six refusals retained;unlinked/unrun,no new286 runtime.",
+  "remaining_provider_balances": {
+    "Copilot": "unavailable",
+    "Claude": "unavailable",
+    "Grok": "unavailable",
+    "Antigravity": "unavailable"
+  }
+}

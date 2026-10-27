@@ -472,3 +472,7 @@ One Copilot Sonnet5.5 Low primary returns566 proposed lines in205.55s from20130 
 ## Raw-packet diagnostic -2026-10-26
 
 One Copilot primary45.83s/11411 frozen original-public bytes returns239 lines,one view/no execution or writes. Lead integrates sound code,corrects C99 numeric assertion and verifies frozen2097152-report oracle/mailbox/native build gates. No redundant provider. One reported premium request;all-four remaining balances unavailable,no quota-equivalence claim. [Receipt](timer-and-pc-input.md).
+
+## Windows containment correction -2026-10-26
+
+One Copilot Sonnet5.5 Low primary27.17s/17101 frozen public-original bytes,one view,zero commands/writes/tests. Lead integrates the small patch,removes a disclosed tautology and executes31 author/30 independently frozen native guard checks,four CTests/four profiles and compiled bypass controls. No redundant provider or retry. One reported premium-request cost;remaining balances unavailable. [Receipt](unlocked-input-evidence.md).

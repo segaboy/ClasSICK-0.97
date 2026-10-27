@@ -49,9 +49,10 @@ static void reset(void){static const wih_target t={L"vbox",L"",{0},7,42};g_t=&t;
 int main(void){int i;
  reset();C(guard(NULL)==1);C(queries==0&&inputs==0&&!g_cap.verified);
  reset();point_inside=0;C(guard(NULL)==0);C(queries==1&&!g_cap.verified&&inputs==0);
- reset();point_inside=0;captured=1;C(guard(NULL)==1);C(queries==1&&g_cap.verified&&inputs==0);
- point_inside=1;C(guard(NULL)==1);C(!g_cap.verified&&queries==1);
- for(i=1;i<=5;i++){reset();point_inside=0;captured=1;change_after_query=i;C(guard(NULL)==0);C(queries==1&&inputs==0);}
+ reset();point_inside=0;C(guard(NULL)==0&&!strcmp(g_why,"client area"));
+ reset();point_inside=0;captured=1;C(guard(NULL)==0);C(queries==1&&g_cap.verified&&inputs==0&&!strcmp(g_why,"client area"));
+ point_inside=1;C(guard(NULL)==1);C(!g_cap.verified&&queries==1&&inputs==0);
+ for(i=1;i<=5;i++){static const char*why[]={"","foreground","process","owner","mapping","desktop"};reset();point_inside=0;captured=1;change_after_query=i;C(guard(NULL)==0);C(queries==1&&inputs==0&&!strcmp(g_why,why[i]));}
  reset();foreground=0;C(guard(NULL)==0);C(queries==0&&inputs==0);
  reset();running=0;C(guard(NULL)==0);C(queries==0&&inputs==0);
  reset();owner=0;C(guard(NULL)==0);C(queries==0&&inputs==0);
