@@ -53,3 +53,54 @@ system,new platform,OneNote/wiki,Codex subagent or release/tag publication.
 
 Copilot reports one premium-request cost;all-four remaining balances unavailable.
 Other worker qualifications are reused. No provider token/quota equivalence claim.
+
+## Bounded GUI raw-checkpoint follow-up
+
+SRC-0494:two fresh isolated runs reuse the verified raw-motion-later candidate.
+One one-pixel Sky drag action includes positioning/button events;it is not an
+isolated physical delta. The cross jumps to the corner;window/counter remain.
+The first attempt is paused before its known checkpoint. One corrected repeat
+polls RIP for15.30s after the action but never sees the required1002D0F2/F4 spin
+or verified CSPRAW01 mailbox. No registers are decoded as packet data. No third
+repeat. Both VMs close at127.01/104.74s under180s caps,with media/inventory/running
+states preserved. No new screenshot is needed for the same corner scene.
+
+The existing profile selects raw-motion-later,whose predicate skips the first
+complete packet. This is a documented trigger limit,not proof of which reports
+arrived. Before another capture,review/select the existing first-motion profile
+or separate a later report. Do not change the decoder or invert signs from an
+unqualified snapshot. Five owned sessions are now closed;physical confirmations
+and both release input gates remain.
+
+## Repeated physical checks and source review
+
+SRC-0495:the owner withdraws the earlier reports as potentially inaccurate.
+Fresh repeats supersede them. PC:owner cannot see the guest cross.118 guest
+frames show initial center then upper-right clipping,window/counter unchanged.
+This records an unsuccessful usable-pointer check,not a decoded packet or root
+cause. No injected mouse events are sent in the physical repeat. Owned PC closes
+192.23s under270s cap,media/inventory/running states preserved.
+
+Mac:owner sees the cross staying centered during requested slow right/left and
+up/down movement. Its own scene reaches0002,showing button activity;exact physical
+press count is not confirmed. This normal timer candidate has no automatic idle
+stop. No CPU/phase-record trace is captured. The [unaltered camera export](../evidence/screenshots/2026-10-26/mac-timer-physical-stationary.png) is indexed.
+Pause/camera controls are used only after the physical report. The screenshot is
+resolved through Windows' actual known Desktop folder after the ordinary Desktop
+path is absent. Own Snow closes166.11s,ROM unchanged. No guest shutdown claimed.
+All seven owned sessions are closed.72PNG/twoGIF;no successful-drag animation.
+
+SRC-0496:one fresh Copilot original-code review takes41.89s/30812 frozen public
+bytes,one view,zero commands/writes/tests,one reported premium-request cost. No
+demonstrated defect or proposed patch. Lead retains a narrower diagnostic gap:
+observed phase changes,admitted nonzero motion and delivered motion need separate
+observables. Reject silent trace-field reuse,button-only early termination,an
+unverified timer-frequency inference and any physical-target-hardware claim.
+The first500-service idle control was not the physical candidate just tested.
+[Lead dispositions and next experiment](mac-stationary-pointer-review.md).
+
+Safety-fix49b619c completes normal CI40426162241 successfully in Windows and Mac.
+No further production code or candidate image changed. Remaining release blockers
+are usable Mac motion and PC GUI motion/dragging;286 compiler proofs retained,
+unrun. Two Copilot calls in this checkpoint report total two premium-request
+costs;all provider remaining balances unavailable.

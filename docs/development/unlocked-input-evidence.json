@@ -3,7 +3,10 @@
   "baseline": "53324a085411506d95fa3999e5e84334e9720a6a",
   "sources": [
     "SRC-0492",
-    "SRC-0493"
+    "SRC-0493",
+    "SRC-0494",
+    "SRC-0495",
+    "SRC-0496"
   ],
   "scope": "Host helper safety correction and isolated original input observations;no production guest input policy change",
   "worker": {
@@ -113,6 +116,77 @@
       },
       "last_read_only_observation": "Scene visible,counter0000,window unchanged at00:22:50UTC;no helper input.",
       "human_result": "not confirmed before240s cap;no pass or new physical failure inferred."
+    },
+    "pc-gui-raw": {
+      "closed": {
+        "utc": "2026-10-27T00:34:06.7874008Z",
+        "cold_starts": 1,
+        "state": "poweroff",
+        "unregistered": true,
+        "existing_vm_inventory_preserved": true,
+        "running_state_preserved": true,
+        "post_trial_raw_roundtrip_equal": true,
+        "artifacts_retained": true,
+        "semantic_session_stop_observed": false,
+        "termination": "external poweroff from paused state"
+      },
+      "watchdog": {
+        "host_wall_seconds": 127.0099451,
+        "cap_seconds": 180,
+        "stop_requested": true,
+        "scope": "owned isolated original raw-packet diagnostic only"
+      }
+    },
+    "pc-gui-raw-wait": {
+      "closed": {
+        "utc": "2026-10-27T00:36:57.4658072Z",
+        "cold_starts": 1,
+        "state": "poweroff",
+        "unregistered": true,
+        "existing_vm_inventory_preserved": true,
+        "running_state_preserved": true,
+        "post_trial_raw_roundtrip_equal": true,
+        "artifacts_retained": true,
+        "semantic_session_stop_observed": false,
+        "termination": "external poweroff from paused state"
+      },
+      "watchdog": {
+        "host_wall_seconds": 104.7432388,
+        "cap_seconds": 180,
+        "stop_requested": true,
+        "scope": "owned isolated original raw-packet diagnostic only"
+      }
+    },
+    "pc-human-repeat": {
+      "closed": {
+        "utc": "2026-10-27T00:44:45.3908852Z",
+        "cold_starts": 1,
+        "state": "poweroff",
+        "unregistered": true,
+        "existing_vm_inventory_preserved": true,
+        "running_state_preserved": true,
+        "post_trial_raw_roundtrip_equal": true,
+        "artifacts_retained": true,
+        "semantic_session_stop_observed": false,
+        "termination": "external poweroff from paused state"
+      },
+      "watchdog": {
+        "host_wall_seconds": 192.2307455,
+        "cap_seconds": 270,
+        "stop_requested": true,
+        "scope": "owned isolated original normal-primary input test only"
+      }
+    },
+    "snow-human-repeat": {
+      "closed": {
+        "status": "stop requested",
+        "host_seconds": 166.11,
+        "pid": 54084,
+        "process_exited": true,
+        "forced_process_cleanup": true,
+        "guest_shutdown_claimed": false,
+        "ROM_sha256": "7de4329b10bf34fa4f03f43def49fdaf8b1c34831cc3ebf11bfb2e3bfdc86606"
+      }
     }
   },
   "PC_frames": {
@@ -136,13 +210,18 @@
   "normal_EFI_sha256": "de02e416fc92bc69fb4e07e41eb8a79a2f1cd00493e12104e1e47dba55e55d0f",
   "normal_disk_sha256": "66a105266a18b1f8e95593b88e7f8d6b7768a17200af33bd03d8fceadd8b5202",
   "Mac_timer_ROM_sha256": "7de4329b10bf34fa4f03f43def49fdaf8b1c34831cc3ebf11bfb2e3bfdc86606",
-  "human_confirmation": "Not received before bounded windows closed;pending owner response. No physical input pass or new physical failure inferred.",
+  "human_confirmation": {
+    "earlier_reports": "Withdrawn by owner as potentially inaccurate;not passing/failing evidence.",
+    "PC_repeat": "Owner cannot see guest cross. Saved frames show center then clipped upper-right;no successful movement/drag qualification.",
+    "Mac_repeat": "Owner sees cross staying at center during requested slow movement in both axes. Own export counter0002;exact physical press count not confirmed. Motion check unsuccessful.",
+    "not_physical_target_hardware": "Directly connected host mouse used with Snow/VirtualBox;no actual Mac/PC286 hardware run."
+  },
   "guest_input_policy_changed": false,
   "release_ready": false,
   "media": {
-    "PNG": 71,
+    "PNG": 72,
     "GIF": 2,
-    "new_PNG": 1
+    "new_PNG": 2
   },
   "pc286": "Prior12 C16 objects/six refusals retained;unlinked/unrun,no new286 runtime.",
   "remaining_provider_balances": {
@@ -150,5 +229,85 @@
     "Claude": "unavailable",
     "Grok": "unavailable",
     "Antigravity": "unavailable"
-  }
+  },
+  "compiled_helper_source_revision": "49b619c5da8c8fdafa9ac857f201fb0514e4f315",
+  "GUI_raw_followup": {
+    "profile": "raw-motion-later",
+    "same_verified_original_candidate": true,
+    "first_attempt": "Paused before known checkpoint;no register interpretation.",
+    "bounded_repeat": {
+      "checkpoint_seen": false,
+      "wait_seconds": 15.2978907,
+      "known_spin": [
+        "1002d0f2",
+        "1002d0f4"
+      ],
+      "gesture": "one Sky 1pixel drag;includes positioning and button events;not an isolated physical delta",
+      "decode_permitted": false
+    },
+    "raw_bytes_observed": null,
+    "third_repeat": false,
+    "next_requirement": "Choose/review the existing first-motion profile or arrange a separated later report;do not infer raw bytes from scene or registers outside own checkpoint."
+  },
+  "code_CI": {
+    "revision": "49b619c5da8c8fdafa9ac857f201fb0514e4f315",
+    "run": 40426162241,
+    "Mac": "success",
+    "Windows": "success",
+    "overall": "success"
+  },
+  "PC_repeat_frames": {
+    "total": 118,
+    "groups": [
+      {
+        "count": 18,
+        "first": "000.png",
+        "last": "017.png",
+        "bbox_from_initial": null
+      },
+      {
+        "count": 100,
+        "first": "018.png",
+        "last": "117.png",
+        "bbox_from_initial": [
+          512,
+          213,
+          768,
+          388
+        ]
+      }
+    ],
+    "no_automation_input": true
+  },
+  "Mac_source_review": {
+    "worker": "Copilot",
+    "model": "claude-sonnet-5.5",
+    "effort": "low",
+    "execution": {
+      "round": "mac-review",
+      "worker": "copilot",
+      "exit_code": 0,
+      "outer_timeout": false,
+      "elapsed_seconds": 41.89,
+      "input_bytes": 30812,
+      "input_sha256": "f3218240253cef72da093c9f6f0949e0bbe5a64ee34da098c7b34ef93df757a0",
+      "stderr_bytes": 0
+    },
+    "views": 1,
+    "commands": 0,
+    "writes": 0,
+    "tests_executed": [],
+    "reported_premium_request_cost": 1,
+    "proposed_patch_count": 0,
+    "result": "No demonstrated defect in the supplied subset;no patch adopted.",
+    "lead_dispositions": {
+      "F1": "Accept internal consistency as limited source review,not hardware proof.",
+      "F2": "Retain missing DCD observations as a hypothesis;inversion alone cannot explain zero accepted displacement.",
+      "F3": "Adopt diagnostic gap with changes:separate motion counts from button-only sample counts;existing500-service idle control was not the physical-test candidate.",
+      "F4": "Keep documented ACR ownership;do not assert unreviewed hardware modes harmless.",
+      "experiment": "Adopt direction only;reject silent reuse of old trace slots and sample>=1 early stop. Require distinct format,explicit phase/motion observables and host readout/trigger contract before code."
+    }
+  },
+  "provider_calls_this_checkpoint": 2,
+  "provider_reported_premium_request_cost_this_checkpoint": 2
 }

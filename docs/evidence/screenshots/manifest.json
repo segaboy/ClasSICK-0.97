@@ -1658,6 +1658,29 @@
         "No automation input was sent in this observation window;physical-mouse result awaits owner confirmation. Input classification does not assert a physical event caused the corner position.",
         "No successful drag,physical target-hardware,System1 or release qualification."
       ]
+    },
+    {
+      "id": "2026-10-26-mac-timer-physical-stationary",
+      "path": "docs/evidence/screenshots/2026-10-26/mac-timer-physical-stationary.png",
+      "sha256": "6571c0fbe7c2b5879d80d02dd44bf55e7d9f2939c7b7eb70b7ba8159cc280566",
+      "bytes": 53393,
+      "width": 512,
+      "height": 342,
+      "captured_on": "2026-10-26",
+      "target": "native-mac68000",
+      "caption": "Mac timer-ROM physical-mouse repeat:counter0002;owner reports cross stays centered during slow movement. Dragging not qualified.",
+      "alt": "ClasSICK Mac timer scene with central cross,checkerboard window and counter0002.",
+      "source_revision": "104d5f2f19e5afeabfba29a808203ad58452a04d",
+      "compiled_source_revision": "104d5f2f19e5afeabfba29a808203ad58452a04d",
+      "evidence": "docs/development/unlocked-input-evidence.md",
+      "license": "GPL-3.0-or-later",
+      "rights": "Unmodified512x342 own guest framebuffer exported by Snow camera;no desktop,emulator chrome,reference pixels or retouch.",
+      "input": "human-confirmed",
+      "limitations": [
+        "Owner confirms stationary cross;this is an unsuccessful motion observation,not input acceptance or dragging qualification.",
+        "Counter0002 is observed;exact physical press count and CPU/phase trace are not captured.",
+        "Direct host mouse in emulator;no physical Macintosh,System1 or release qualification."
+      ]
     }
   ]
 }

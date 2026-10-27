@@ -4687,3 +4687,20 @@ wrong locator rejected for each component. No native package/trial/publication.
 ## SRC-0493 - Unlocked isolated input observations and physical check offer
 
 2026-10-26. Fresh original PC trial exposes unsafe metadata substitute;second run receives no automation input and records corner cross with unchanged window. Human result unconfirmed. Both VMs close/media/inventory preserved;second cleanup301.75s exceeds300s diagnostic bound. Mac timer human observation separately recorded. No release pass. [Evidence](../docs/development/unlocked-input-evidence.md).
+
+## SRC-0494 - Bounded GUI raw-checkpoint attempts
+
+2026-10-26. Two same-candidate raw-motion-later GUI trials close127.01/104.74s
+under180s caps,media/inventory preserved. Cross reaches corner;first pause is
+premature,one corrected15.30s poll never reaches known checkpoint. No raw-byte
+interpretation or third retry. Trigger profile must be accounted for before a
+new capture;no guest implementation fix or release pass inferred.
+[Evidence](../docs/development/unlocked-input-evidence.md).
+
+## SRC-0495 - Repeated directly connected mouse observations
+
+2026-10-26. Earlier owner reports withdrawn as potentially inaccurate. Fresh PC owner cannot see cross;frames show upper-right clipping. Mac owner sees cross stay centered;scene0002,exact press count unconfirmed,no CPU/phase trace. Own sessions close192.23/166.11s,media preserved. New unmodified Mac guest PNG indexed;72PNG/twoGIF. Neither motion nor dragging qualified. [Evidence](../docs/development/unlocked-input-evidence.md).
+
+## SRC-0496 - Fresh original Mac source review and lead dispositions
+
+2026-10-26. Copilot41.89s/30812 frozen reviewed-public bytes,one view,no commands/writes/tests,one reported premium-request cost. No demonstrated defect or proposed patch. Lead retains diagnostic gap with explicit corrections to trace ABI,button-only trigger,frequency and physical-target claims. New diagnostic contract/tests are proposals only. [Evidence](../docs/development/unlocked-input-evidence.md).

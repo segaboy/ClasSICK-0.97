@@ -1,6 +1,6 @@
 # Project status
 
-2026-10-26,SRC-0492/0493:desktop unlocked;capture indicator cannot authorize outside-client host input. Original helper safety fix passes four CTests/four profiles,31 author/30 frozen assertions and compiled bypass controls. PC corner-cross capture/Mac scene observed;both human checks unconfirmed. Three owned sessions closed. Release blocked;71PNG/twoGIF,286/originals retained. [Evidence](development/unlocked-input-evidence.md).
+2026-10-26,SRC-0492..0496:49b619c fullCI passes;helper physical-client guard fixed. Fresh physical repeats:PC cross clipped at upper-right;Mac cross stays centered,counter0002. Motion/dragging remain unqualified. Seven owned sessions closed. Copilot review finds no demonstrated defect;versioned activity trace is next proposed contract.72PNG/twoGIF;286/originals preserved. [Evidence](development/unlocked-input-evidence.md).
 
 2026-10-26,SRC-0490/0491:d9df16d fullCI passes,normal PC EFI/disk unchanged. Native raw device control09/01/00 gives+1X,left1,pointer257,171;not GUI evidence. Current foreground refusal is LockApp;zero-event guard sends nothing,all owned sessions close/media/inventory preserved. Unlock required;Mac motion/PC GUI/release remain open.70PNG/twoGIF/286 proofs retained. [Proof](development/timer-and-pc-input.md).
 

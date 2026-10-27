@@ -476,3 +476,7 @@ One Copilot primary45.83s/11411 frozen original-public bytes returns239 lines,on
 ## Windows containment correction -2026-10-26
 
 One Copilot Sonnet5.5 Low primary27.17s/17101 frozen public-original bytes,one view,zero commands/writes/tests. Lead integrates the small patch,removes a disclosed tautology and executes31 author/30 independently frozen native guard checks,four CTests/four profiles and compiled bypass controls. No redundant provider or retry. One reported premium-request cost;remaining balances unavailable. [Receipt](unlocked-input-evidence.md).
+
+## Stationary-pointer source review -2026-10-26
+
+One fresh Copilot Sonnet5.5 Low source review41.89s/30812 frozen public-original bytes,one view,no commands/writes/tests or patch. Lead retains the observability gap and corrects trace-ABI,button-trigger,frequency and physical-target overclaims. No extra provider or retry. One reported premium-request cost;all balances unavailable. [Dispositions](mac-stationary-pointer-review.md).
