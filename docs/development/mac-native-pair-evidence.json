@@ -1,0 +1,212 @@
+{
+  "date": "2026-10-28",
+  "classification": "original-native-capture-experiment",
+  "baseline_revision": "f6778b94a70cf5c503dae0c717f3be6edf9ba5f8",
+  "source_ids": [
+    "SRC-0529",
+    "SRC-0530"
+  ],
+  "specification": "SPEC-0081",
+  "implementation": "IMPL-0089",
+  "test": "TEST-0102",
+  "authority": "Standing original release work/fresh native coupling role;the previous one-step-only solo exception was completed separately under SRC-0525.",
+  "result": "Host paired callback tests pass;native call-free/guard proof pending. No admission or hardware-programming change.",
+  "worker": {
+    "provider": "GitHub Copilot",
+    "model": "claude-sonnet-5.5",
+    "effort": "low",
+    "execution": {
+      "round": "pair",
+      "worker": "copilot",
+      "exit_code": 0,
+      "outer_timeout": false,
+      "elapsed_seconds": 56.92,
+      "input_bytes": 46711,
+      "input_sha256": "c925500365057bf99b17af9a25dedbd51ddfa6c239460839894290d024af0490",
+      "stderr_bytes": 0
+    },
+    "actual_tools": [
+      {
+        "tool": "view",
+        "path": "frozen prompt"
+      }
+    ],
+    "commands_writes_tests_executed": 0,
+    "reported_usage": {
+      "premiumRequests": 1,
+      "totalApiDurationMs": 51775,
+      "sessionDurationMs": 53631,
+      "codeChanges": {
+        "linesAdded": 0,
+        "linesRemoved": 0,
+        "filesModified": []
+      }
+    },
+    "inputs": {
+      "docs/specifications/SPEC-0081-native-mac-pair-capture.md": "4528f64a93a5f424b991d403cf2d747f0ef283e9e7c68d3461e18d2e9602dba5",
+      "platform/mac128k/motion.h": "f9570aca93926210ca636e89cd7137206ea49bea1ef686b7f42dc2e2985ef21a",
+      "platform/mac128k/timer-poll.h": "8d4bb8e759fc6a32b230d8b11ff17a8839c12aaac7be8145c624c7934b7fef1d",
+      "platform/mac128k/timer-poll.c": "d3c83a4c2c0412e1ef283cbe110dbd166ef9740e77c87048c88d704b4abf24bb",
+      "platform/mac128k/window-entry.c": "129bc723f03a46ec501833fbb1ae2f7ab47a4df19b4cdccff3ea87e06097823d",
+      "tests/mac-timer-poll.c": "a20825530e118e9e7a09fd8182f870ec4a39d72fa95b3b3d0bf8097abd473e75"
+    },
+    "artifact_sha256": "55c5bef38702e3d1d6685664cc38a8d1728813586755b13e9dcadaecea6168c6"
+  },
+  "lead_corrections": [
+    "Preserve original static inline guard modifier at macro0;put static before inline attribute for compiler portability.",
+    "Remove unnecessary zero initialization of fully written trusted6-byte callback output.",
+    "Correct invalid Gray fixture;remove fake order string that did not observe native IO;pin distinct tuple fields and whole-object no-effect refusal."
+  ],
+  "host_profiles": [
+    {
+      "profile": "clang",
+      "exit_code": 0,
+      "elapsed_seconds": 4.594
+    },
+    {
+      "profile": "gcc64",
+      "exit_code": 0,
+      "elapsed_seconds": 3.5
+    },
+    {
+      "profile": "gcc32",
+      "exit_code": 0,
+      "elapsed_seconds": 3.796
+    },
+    {
+      "profile": "sanitized",
+      "exit_code": 0,
+      "elapsed_seconds": 4.204
+    }
+  ],
+  "focused_CTests_per_profile": 11,
+  "new_MMIO_operations": 0,
+  "new_assembly": false,
+  "old_profiles_required_unchanged": true,
+  "native_trial_results": [],
+  "release_ready": false,
+  "private_artifacts": "C:\\ClasSICK\\mac-native-pair-20261028-a",
+  "limits": [
+    "No actual throughput,timing or pointer qualification inferred from inlining.",
+    "Stable-pair/overrun/Gray/loss policy remains unchanged.",
+    "Target tests wait for native source/bytes/call-free64-NOP/IRQ/MAR1/bounds proof.",
+    "All historical,physical/full128K,source/role,edition,parity,B2,native-app,System1 and release-input gates remain."
+  ],
+  "preceding_rate_trials": {
+    "rate4": {
+      "preflight": {
+        "source_revision": "f6778b94a70cf5c503dae0c717f3be6edf9ba5f8",
+        "divisor": 4,
+        "ROM_sha256": "c4674966a553d8888fb4fa31a726c5be4bd40f96217235d7ae8de19eb64ff9bb",
+        "native_sources_and_bytes_verified": true,
+        "programmed_reload": 1024,
+        "physical_rate_qualified": false
+      },
+      "result": {
+        "decoded": {
+          "pairs": 32316,
+          "pb_x_changes": 591,
+          "pb_y_changes": 592,
+          "dcd_a_changes": 607,
+          "dcd_b_changes": 679,
+          "button_changes": 0,
+          "nonzero_queued": 0,
+          "buttononly_queued": 0,
+          "losses": 798,
+          "first_previous": 2162115652,
+          "first_s0": 15680580,
+          "first_s1": 14632004,
+          "first_reason": 2,
+          "first_service": 31184,
+          "format": "MAR1",
+          "pc": 4218716,
+          "omitted_fields": [
+            "tag",
+            "version",
+            "bytes",
+            "stable_pairs",
+            "last_observed",
+            "previous_accepted"
+          ],
+          "limitation": "Register subset only;not a full MWA1 record or root-cause proof."
+        },
+        "gesture": "One guarded sky.drag430,352->450,352;synthetic host input only",
+        "root_cause_proven": false
+      },
+      "closed": {
+        "host_seconds": 120.4509358,
+        "cap_seconds": 120,
+        "pid": 62668,
+        "process_exited": true,
+        "forced_cleanup": true,
+        "guest_shutdown_claimed": false,
+        "ROM_sha256": "c4674966a553d8888fb4fa31a726c5be4bd40f96217235d7ae8de19eb64ff9bb"
+      },
+      "input_attempted": true
+    },
+    "rate16": {
+      "preflight": {
+        "source_revision": "f6778b94a70cf5c503dae0c717f3be6edf9ba5f8",
+        "divisor": 16,
+        "ROM_sha256": "60edffa012560964727301c9beec26ebd60100fbdaa5463295cdedfed0e6473d",
+        "native_sources_and_bytes_verified": true,
+        "programmed_reload": 256,
+        "physical_rate_qualified": false
+      },
+      "result": {
+        "decoded": {
+          "pairs": 1124,
+          "pb_x_changes": 0,
+          "pb_y_changes": 0,
+          "dcd_a_changes": 0,
+          "dcd_b_changes": 0,
+          "button_changes": 0,
+          "nonzero_queued": 0,
+          "buttononly_queued": 0,
+          "losses": 1124,
+          "first_previous": 0,
+          "first_s0": 16729156,
+          "first_s1": 12534852,
+          "first_reason": 5,
+          "first_service": 1,
+          "format": "MAR1",
+          "pc": 4218716,
+          "omitted_fields": [
+            "tag",
+            "version",
+            "bytes",
+            "stable_pairs",
+            "last_observed",
+            "previous_accepted"
+          ],
+          "limitation": "Register subset only;not a full MWA1 record or root-cause proof."
+        },
+        "gesture": "One guarded sky.drag430,352->450,352;synthetic host input only",
+        "root_cause_proven": false
+      },
+      "closed": {
+        "host_seconds": 120.3457163,
+        "cap_seconds": 120,
+        "pid": 34904,
+        "process_exited": true,
+        "forced_cleanup": true,
+        "guest_shutdown_claimed": false,
+        "ROM_sha256": "60edffa012560964727301c9beec26ebd60100fbdaa5463295cdedfed0e6473d"
+      },
+      "input_attempted": false,
+      "qualification": "Overrun reason5 from first sampled pair,already halted before gesture. No mouse-input test credited."
+    }
+  },
+  "published_source_recheck": {
+    "source": "SRC-0363",
+    "printed_pages": [
+      57,
+      59,
+      173,
+      177
+    ],
+    "identity_rechecked": true,
+    "hash": "2a13683ee0e423ee3cdf2781a4ce6b4df65c1e069a269e4234fa6964b4a3bea0",
+    "disposition": "Do not assume WR1 enable is required for latch operation;no WR1 change adopted. Facts/prose only;no manual sample/listing imported or sent to worker."
+  }
+}

@@ -327,6 +327,29 @@ jobs:
             ${{ runner.temp }}/classick-window-rate16/Os-a/classick-loaded-app.rom
             ${{ runner.temp }}/classick-window-rate16/Os-a/classick-loaded-app.map
           if-no-files-found: error
+      - name: Verify native paired capture and build matched profiles (unbooted)
+        run: |
+          cc -std=c11 -pedantic-errors -Wall -Wextra -Werror -Wconversion -Wsign-conversion -DCLASSICK_MAC_TIMER_PAIR_PROBE=1 -DCLASSICK_MAC_TIMER_REFRESH_PROBE=1 -DCLASSICK_MAC_TIMER_ACTIVITY_PROBE=1 -I. platform/mac128k/activity.c platform/mac128k/timer-poll.c platform/mac128k/polled-phase.c apps/window-scene/inbox.c tests/mac-timer-pair.c -o "$RUNNER_TEMP/mac-pair"
+          "$RUNNER_TEMP/mac-pair"
+          for d in 1 4 16; do
+            python3 scripts/Build-LoadedAppROM.py --window-drawing --window-timer-poll-probe --window-timer-refresh-probe --window-idle-probe --window-timer-activity-probe --window-timer-recovery-probe --window-timer-pair-probe --window-timer-divisor "$d" --tool-root "$RUNNER_TEMP/classick-m68k/root" --output "$RUNNER_TEMP/classick-window-pair$d"
+          done
+      - name: Retain native paired capture proofs (unbooted)
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
+        with:
+          name: classick-window-pair-mac
+          path: |
+            ${{ runner.temp }}/classick-window-pair1/manifest.json
+            ${{ runner.temp }}/classick-window-pair1/Os-a/classick-loaded-app.rom
+            ${{ runner.temp }}/classick-window-pair1/Os-a/classick-loaded-app.map
+            ${{ runner.temp }}/classick-window-pair1/Os-a/native-pair-disassembly.txt
+            ${{ runner.temp }}/classick-window-pair4/manifest.json
+            ${{ runner.temp }}/classick-window-pair4/Os-a/classick-loaded-app.rom
+            ${{ runner.temp }}/classick-window-pair4/Os-a/classick-loaded-app.map
+            ${{ runner.temp }}/classick-window-pair16/manifest.json
+            ${{ runner.temp }}/classick-window-pair16/Os-a/classick-loaded-app.rom
+            ${{ runner.temp }}/classick-window-pair16/Os-a/classick-loaded-app.map
+          if-no-files-found: error
       - name: Retain separate timer polling experiments (unbooted)
         uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
         with:

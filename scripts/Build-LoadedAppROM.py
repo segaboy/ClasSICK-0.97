@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 # Copyright (C) 2026 Dean Howell.
 """Original first loaded-application ROM. Compiler only; never launches a guest."""
-import argparse,hashlib,json,os,struct,sys
+import argparse,hashlib,json,os,re,struct,sys
 from pathlib import Path
 from importlib.util import spec_from_file_location,module_from_spec
 
@@ -77,6 +77,7 @@ def main():
     p.add_argument('--window-timer-refresh-probe',action='store_true',help='Opt-in SCC status-refresh endpoint experiment;requires timer polling')
     p.add_argument('--window-timer-activity-probe',action='store_true',help='Passive MWA1 activity checkpoint;requires timer polling and idle checkpoint')
     p.add_argument('--window-timer-recovery-probe',action='store_true',help='Observe512 services after first activity;requires activity checkpoint')
+    p.add_argument('--window-timer-pair-probe',action='store_true',help='One native paired-read callback;requires recovery and refresh')
     p.add_argument('--window-timer-divisor',type=int,choices=(1,4,16),default=1,help='Experimental programmed reload divisor;nondefault requires recovery and refresh')
     p.add_argument('--window-phase-idle-probe',action='store_true',help='Experimental phase-only no-decision pass; window profile only')
     p.add_argument('--dcd-invert',type=int,choices=(0,1,2,3),default=0,help='Unverified raw RR0 DCD sense mask; window profile only')
@@ -87,6 +88,7 @@ def main():
     if a.window_timer_activity_probe and not (a.window_timer_poll_probe and a.window_idle_probe):p.error('--window-timer-activity-probe requires timer polling and --window-idle-probe')
     if a.window_timer_recovery_probe and not a.window_timer_activity_probe:p.error('--window-timer-recovery-probe requires --window-timer-activity-probe')
     if a.window_timer_divisor!=1 and not (a.window_timer_recovery_probe and a.window_timer_refresh_probe):p.error('Nondefault timer divisor requires recovery and refresh probes')
+    if a.window_timer_pair_probe and not (a.window_timer_recovery_probe and a.window_timer_refresh_probe):p.error('Pair probe requires recovery and refresh')
     native=a.native_drawing or a.selected_drawing or a.outline_drawing or a.window_drawing
     if a.dcd_invert and not a.window_drawing:p.error('--dcd-invert requires --window-drawing')
     if a.window_idle_probe and not a.window_drawing:p.error('--window-idle-probe requires --window-drawing')
@@ -133,6 +135,7 @@ def main():
         numbers=((('0070','0072','0074','0075','0077') if a.window_timer_refresh_probe else ('0070','0072','0074','0075')) if a.window_timer_poll_probe else ('0070','0072'))
         if a.window_timer_activity_probe:numbers+=('0078',)
         if a.window_timer_recovery_probe:numbers+=('0080',)
+        if a.window_timer_pair_probe:numbers+=('0081',)
         for number in numbers:
             found=sorted(repo.glob('docs/specifications/SPEC-'+number+'-*.md'))
             if len(found)!=1:raise ValueError('Specification lookup SPEC-'+number)
@@ -154,6 +157,7 @@ def main():
         if a.window_timer_refresh_probe:profile='native-window-timer-refresh-'+('idle-' if a.window_idle_probe else '')+'experiment-v1'
         if a.window_timer_activity_probe:profile='native-window-timer-activity-'+('refresh-' if a.window_timer_refresh_probe else '')+'checkpoint-v1';specification='SPEC-0078'
         if a.window_timer_recovery_probe:profile='native-window-timer-recovery-'+('refresh-' if a.window_timer_refresh_probe else '')+'checkpoint-v1';specification='SPEC-0080'
+        if a.window_timer_pair_probe:profile=profile.replace('checkpoint-v1','paired-checkpoint-v1');specification='SPEC-0081'
         if a.window_timer_divisor!=1:profile=profile.replace('checkpoint-v1','divisor'+str(a.window_timer_divisor)+'-checkpoint-v1')
         if a.window_phase_idle_probe:profile='native-window-phase-idle-'+('pending-defer-' if a.window_pending_defer_probe else '')+'probe-v1'
     profiles=[]
@@ -172,6 +176,7 @@ def main():
         if a.window_timer_refresh_probe:flags+=['-DCLASSICK_MAC_TIMER_REFRESH_PROBE=1']
         if a.window_timer_activity_probe:flags+=['-DCLASSICK_MAC_TIMER_ACTIVITY_PROBE=1']
         if a.window_timer_recovery_probe:flags+=['-DCLASSICK_MAC_TIMER_RECOVERY_PROBE=1']
+        if a.window_timer_pair_probe:flags+=['-DCLASSICK_MAC_TIMER_PAIR_PROBE=1']
         if a.window_timer_divisor!=1:flags+=['-DCLASSICK_MAC_TIMER_DIVISOR='+str(a.window_timer_divisor)]
         if a.window_first_input_probe:flags+=['-DCLASSICK_MAC_FIRST_INPUT_PROBE=1']
         if a.window_pending_defer_probe:flags+=['-DCLASSICK_MAC_PENDING_DEFER_PROBE=1']
@@ -198,6 +203,8 @@ def main():
         if a.window_timer_recovery_probe:required+=('cs_mac_activity_window_begin','cs_mac_activity_window_step','cs_mac_activity_gate')
         elif any(name.startswith('cs_mac_activity_window_') or name=='cs_mac_activity_gate' for name in syms):raise ValueError('Recovery gate in another profile')
         if (a.window_idle_probe and not a.window_timer_activity_probe) or a.window_first_input_probe:required+=('cs_mac_window_idle_checkpoint','cs_mac_window_idle_spin')
+        if a.window_timer_pair_probe:required+=('cs_mac_native_pair',)
+        elif 'cs_mac_native_pair' in syms:raise ValueError('Native pair in another profile')
         if a.window_first_input_probe:required+=('cs_mac_first_input_probe_gate',)
         if a.window_drawing and not any(name.startswith('cs_cursor_') for name in syms):raise ValueError('Disconnected cursor helper')
         if any(name not in syms for name in required):raise ValueError('Disconnected demonstration')
@@ -208,8 +215,29 @@ def main():
             raise ValueError('Unexpected interpreted application in native drawing profile')
         raw=folder/'loaded.raw';h.run([bins/'m68k-linux-gnu-objcopy','-O','binary',elf,raw],env)
         b=bytearray(raw.read_bytes());b.extend(bytes(65536-len(b)));struct.pack_into('>I',b,256,h.crc(b))
+        pair_proof=None
+        if a.window_timer_pair_probe:
+            listing=h.run([bins/'m68k-linux-gnu-objdump','-d','--disassemble=cs_mac_native_pair',elf],env)
+            (folder/'native-pair-disassembly.txt').write_text(listing)
+            body=listing.split('<cs_mac_native_pair>:',1)[1]
+            decoded=[]
+            for line in body.splitlines():
+                match=re.match(r'\s*([0-9a-f]+):\s+((?:[0-9a-f]{4}\s+)+)([a-z].*)$',line)
+                if match:
+                    address=int(match[1],16);raw=bytes.fromhex(match[2]);instruction=match[3].strip()
+                    decoded.append((address,raw,instruction))
+                    if instruction=='rts':break
+            if not decoded or decoded[0][0]!=syms['cs_mac_native_pair'] or decoded[-1][2]!='rts':raise ValueError('Native pair disassembly span')
+            if any(re.match(r'(?:jsr|jbsr|bsr[a-z]*|jmp)\b',x[2]) for x in decoded):raise ValueError('Native pair retained a call')
+            nops=[x[0] for x in decoded if x[2]=='nop']
+            if len(nops)!=64:raise ValueError('Native pair SCC recovery guard count')
+            start=decoded[0][0]-0x400000;end=decoded[-1][0]-0x400000+len(decoded[-1][1])
+            if not 260<=start<end<=65536 or end-start>1024:raise ValueError('Native pair ROM bounds')
+            pair_bytes=bytes(b[start:end]);pair_controls=[start,*[nops[i]-0x400000 for i in (0,16,32,48)],end-2,end-1]
+            pair_proof={'entry':decoded[0][0],'bytes':end-start,'call_free':True,'NOPs':64,'SCC_reads':4,'PB_reads':2,'MMIO_writes':0,'output_bytes':6,'sha256':hashlib.sha256(pair_bytes).hexdigest()}
         def audit_window_code(image):
             rows=[]
+            if pair_proof and image[start:end]!=pair_bytes:raise ValueError("Native pair code differs from audited compiler output")
             for source,name in enumerate(('cs_mac_window_via_irq','cs_mac_window_scc_irq','cs_mac_window_combined_irq'),1):
                 expected=(bytes.fromhex('007c070048e7fffe2f3c')+struct.pack('>I',source)
                     +bytes.fromhex('4eb9')+struct.pack('>I',syms['cs_mac_window_interrupt'])
@@ -276,6 +304,7 @@ def main():
                 controls.extend(start+x for x in (3,8,14,21,25,29,33,37,41,45,49,53,57,61,65,69,71))
             if a.window_timer_activity_probe:
                 controls.extend(syms['cs_mac_activity_checkpoint']-0x400000+x for x in range(74))
+            if pair_proof:controls.extend(pair_controls)
             for offset in controls:
                 bad=bytearray(b);bad[offset]^=1;struct.pack_into('>I',bad,256,h.crc(bad))
                 try:audit(bad)
@@ -305,6 +334,7 @@ def main():
             profiles[-1]['activity_register_checkpoint']=audit_activity_checkpoint(b,syms,True)
         if (a.window_idle_probe and not a.window_timer_activity_probe) or a.window_first_input_probe:
             profiles[-1]['register_checkpoint']=audit_register_checkpoint(b,syms,True)
+        if pair_proof:profiles[-1]['native_pair_capture']=pair_proof
     if profiles[0]!=profiles[1]:raise ValueError('ROM twins differ')
     if program_source is not None:
         fixture=out/'program.o';binary=out/'program.bin'
@@ -326,6 +356,7 @@ def main():
     if a.window_idle_probe and not a.window_timer_activity_probe:manifest['window_idle_probe_threshold']=500
     if a.window_timer_activity_probe:manifest['activity_checkpoint']={'tag':'MWA1','version':1,'bytes':80,'address':syms['cs_mac_activity_trace'],'minimum_services':500,'fallback_services':50000,'wall_time_qualified':False,'extra_MMIO_reads':0,'extra_MMIO_writes':0,'old_diagnostics_unchanged':True}
     if a.window_timer_recovery_probe:manifest['recovery_window']={'specification':'SPEC-0080','delay_services':512*a.window_timer_divisor,'minimum_services':500*a.window_timer_divisor,'fallback_services':50000*a.window_timer_divisor,'programmed_reload_divisor':a.window_timer_divisor,'state_bytes':16,'state_address':syms['cs_mac_activity_gate'],'timer_rate_qualified':False,'MAR1_exposes_completion_reason':False,'extra_MMIO_reads':0,'extra_MMIO_writes':0}
+    if a.window_timer_pair_probe:manifest['native_pair_capture']={'specification':'SPEC-0081','callback_count':1,'PB_reads':2,'SCC_reads':4,'new_MMIO_operations':0,'default_layout_unchanged':True}
     if a.window_drawing:manifest.update({'window_drawing':True,'native_drawing_context':None,
      'dcd_invert':a.dcd_invert,'dcd_invert_verified':False,'cpu_callbacks':list(cpu_callbacks),
      'board_profile':{'status':'engineering-upper-alias-hypothesis-unverified','scc_read_b':0x9FFFF8,'scc_read_a':0x9FFFFA,

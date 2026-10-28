@@ -4832,3 +4832,11 @@ new capture;no guest implementation fix or release pass inferred.
 ## SRC-0528 - Original bounded reload comparison
 
 2026-10-28. Existing SPEC-0075 prepare accepts a1..65535 reload;original experimental4096 is unqualified frequency. SPEC-0080 addendum compares only existing argument1024/256,with scaled diagnostic count limits. No new MMIO sequence,assembly,reference/manual input or other AI. Hosted controls and eventual native/target results stay in the [receipt](../docs/development/mac-recovery-window-evidence.json). This is an engineering experiment,not a historical or shipping configuration.
+
+## SRC-0529 - Fresh original paired-capture artifact
+
+2026-10-28. One bounded fresh Copilot Sonnet5.5 Low call receives46711reviewed original contract/code bytes;no manual,HQ,untracked research,credentials,held UART or prohibited implementation.56.92s,view-only;no worker commands/writes/tests. Lead preserves macro0 inline behavior,corrects Gray fixture and fake-order claim,integrates SPEC-0081/IMPL-0089/TEST-0102. No new assembly or hardware operations;native proof required. [Receipt](../docs/development/mac-native-pair-evidence.json).
+
+## SRC-0530 - Own reload comparison and narrow retained-interface check
+
+2026-10-28. Original divisor4 candidate reports798losses/zero queued motion after guarded synthetic gesture. Divisor16 reaches overrun reason5 from first sampled pair and is already halted before gesture;1124losses,no input test credited. Exact identities/coherent MAR1/owned cleanup recorded. Reidentified SRC-0363;checked published latch prose printed57/59/173/177,PDF+7. No WR1 change adopted,no sample/listing imported or pages sent to worker. Neither rate test nor later-manual prose proves cause,1984-part behavior or release input acceptance. [Receipt](../docs/development/mac-native-pair-evidence.json).

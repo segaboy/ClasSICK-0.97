@@ -27,6 +27,14 @@
 #error CLASSICK_MAC_PHASE_IDLE_PROBE must be 0 or 1
 #endif
 
+/* Opt-in experiment (SPEC-0081); default 0 keeps the IO layout unchanged. */
+#ifndef CLASSICK_MAC_TIMER_PAIR_PROBE
+#define CLASSICK_MAC_TIMER_PAIR_PROBE 0
+#endif
+#if (CLASSICK_MAC_TIMER_PAIR_PROBE)!=0 && (CLASSICK_MAC_TIMER_PAIR_PROBE)!=1
+#error CLASSICK_MAC_TIMER_PAIR_PROBE must be 0 or 1
+#endif
+
 enum { CS_MAC_SCC_A = 0, CS_MAC_SCC_B = 1 };
 
 typedef struct {
@@ -34,6 +42,10 @@ typedef struct {
     uint8_t (*read)(void *cookie, uint32_t channel, uint32_t reg);
     void (*write)(void *cookie, uint32_t channel, uint32_t reg, uint8_t v);
     uint8_t (*pb)(void *cookie);
+#if CLASSICK_MAC_TIMER_PAIR_PROBE
+    /* Writes PB,RR0A,RR0B,PB,RR0A,RR0B in that order; no other effects. */
+    void (*pair)(void *cookie, uint8_t out[6]);
+#endif
 } cs_mac_motion_io;
 
 enum { CS_MAC_MOTION_OK = 0, CS_MAC_MOTION_EMPTY = 1,

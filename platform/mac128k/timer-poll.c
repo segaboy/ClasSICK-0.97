@@ -75,6 +75,9 @@ int cs_mac_timer_poll_prepare(cs_mac_timer_poll *p, const cs_mac_motion_io *scc,
     uint8_t lo = (uint8_t)reload, hi = (uint8_t)(reload >> 8);
 
     if (!p || !scc || !via || !inbox || !scc->read || !scc->write || !scc->pb ||
+#if CLASSICK_MAC_TIMER_PAIR_PROBE
+        !scc->pair ||
+#endif
         !via->read || !via->write || invert > 3u || reload < 1u ||
         reload > 65535u || inbox->valid != CS_INBOX_VALID ||
         inbox->phase != CS_INBOX_WAIT || !inbox->epoch)
@@ -211,12 +214,21 @@ int cs_mac_timer_poll_service(cs_mac_timer_poll *p)
     sw(p, CS_MAC_SCC_B, 0, 0x10);
 #endif
 
+#if CLASSICK_MAC_TIMER_PAIR_PROBE
+    {
+        uint8_t g[6]; /* Trusted callback writes all six bytes. */
+        m->io.pair(m->io.cookie, g);
+        pb1 = g[0]; a1 = g[1]; b1 = g[2];
+        pb2 = g[3]; a2 = g[4]; b2 = g[5];
+    }
+#else
     pb1 = m->io.pb(m->io.cookie);
     a1 = sr(p, CS_MAC_SCC_A, 0);
     b1 = sr(p, CS_MAC_SCC_B, 0);
     pb2 = m->io.pb(m->io.cookie);
     a2 = sr(p, CS_MAC_SCC_A, 0);
     b2 = sr(p, CS_MAC_SCC_B, 0);
+#endif
     t1 = (vr(p, IFR) & IFR_T1) != 0;
     s0 = pb1 << 16 | a1 << 8 | b1;
     s1 = pb2 << 16 | a2 << 8 | b2;

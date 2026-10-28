@@ -61,6 +61,9 @@ static cs_mac_activity_window cs_mac_activity_gate;
 #if CLASSICK_MAC_TIMER_RECOVERY_PROBE && !(CLASSICK_MAC_TIMER_POLL_PROBE && CLASSICK_MAC_TIMER_ACTIVITY_PROBE && CLASSICK_MAC_IDLE_PROBE)
 #error Recovery observation requires timer polling,activity and idle checkpoint
 #endif
+#if CLASSICK_MAC_TIMER_PAIR_PROBE && !(CLASSICK_MAC_TIMER_POLL_PROBE && CLASSICK_MAC_TIMER_RECOVERY_PROBE && CLASSICK_MAC_TIMER_REFRESH_PROBE)
+#error Pair probe requires timer polling,recovery and refresh profiles
+#endif
 #if CLASSICK_MAC_FIRST_INPUT_PROBE && !CLASSICK_MAC_IDLE_PROBE
 #error "CLASSICK_MAC_FIRST_INPUT_PROBE requires CLASSICK_MAC_IDLE_PROBE=1"
 #endif
@@ -163,12 +166,21 @@ void cs_mac_line_a(cs_trap_frame *f)
 
 /* 16 NOPs = 64 clocks: >=8us at <=8MHz, covering SCC recovery plus the
  * 4-PCLK reset extra at 3.672MHz. Issued after every SCC byte access. */
+#if CLASSICK_MAC_TIMER_PAIR_PROBE
+#define PAIR_INL __attribute__((always_inline)) inline
+#else
+#define PAIR_INL
+#endif
+#if CLASSICK_MAC_TIMER_PAIR_PROBE
+static PAIR_INL void scc_guard(void)
+#else
 static inline void scc_guard(void)
+#endif
 {
     __asm__ volatile("nop; nop; nop; nop; nop; nop; nop; nop; "
                      "nop; nop; nop; nop; nop; nop; nop; nop" ::: "memory");
 }
-static uint8_t via_read(void *context,unsigned reg)
+static PAIR_INL uint8_t via_read(void *context,unsigned reg)
 {
     (void)context;
     return *(volatile uint8_t *)(uintptr_t)(CS_MAC_VIA+reg*512u);
@@ -178,15 +190,15 @@ static void via_write(void *context,unsigned reg,uint8_t value)
     (void)context;
     *(volatile uint8_t *)(uintptr_t)(CS_MAC_VIA+reg*512u)=value;
 }
-static volatile uint8_t *scc_ctrl_read(uint32_t channel)
+static PAIR_INL volatile uint8_t *scc_ctrl_read(uint32_t channel)
 {
     return (volatile uint8_t *)(uintptr_t)(channel==CS_MAC_SCC_A?CS_MAC_SCC_READ_A:CS_MAC_SCC_READ_B);
 }
-static volatile uint8_t *scc_ctrl_write(uint32_t channel)
+static PAIR_INL volatile uint8_t *scc_ctrl_write(uint32_t channel)
 {
     return (volatile uint8_t *)(uintptr_t)(channel==CS_MAC_SCC_A?CS_MAC_SCC_WRITE_A:CS_MAC_SCC_WRITE_B);
 }
-static uint8_t scc_read(void *cookie,uint32_t channel,uint32_t reg)
+static PAIR_INL uint8_t scc_read(void *cookie,uint32_t channel,uint32_t reg)
 {
     uint8_t v;
     (void)cookie;reg&=15u;
@@ -200,10 +212,22 @@ static void scc_write(void *cookie,uint32_t channel,uint32_t reg,uint8_t value)
     if(reg){*scc_ctrl_write(channel)=(uint8_t)reg;scc_guard();}
     *scc_ctrl_write(channel)=value;scc_guard();
 }
-static uint8_t motion_pb(void *cookie)
+static PAIR_INL uint8_t motion_pb(void *cookie)
 {
     return via_read(cookie,0);
 }
+#if CLASSICK_MAC_TIMER_PAIR_PROBE
+/* Helpers are forced inline with constant args: no calls in this routine. */
+void cs_mac_native_pair(void *cookie,uint8_t out[6])
+{
+    out[0]=motion_pb(cookie);
+    out[1]=scc_read(cookie,CS_MAC_SCC_A,0);
+    out[2]=scc_read(cookie,CS_MAC_SCC_B,0);
+    out[3]=motion_pb(cookie);
+    out[4]=scc_read(cookie,CS_MAC_SCC_A,0);
+    out[5]=scc_read(cookie,CS_MAC_SCC_B,0);
+}
+#endif
 static void saturate(volatile uint32_t *v)
 {
     if(*v!=UINT32_MAX)*v=*v+1u;
@@ -327,6 +351,9 @@ void cs_mac_main(void)
     if(r!=CS_MAC_WINDOW_OK){cs_mac_trace.cause=r;halt(3);}
     cs_mac_diag.stage=5;
     mio.cookie=0;mio.read=scc_read;mio.write=scc_write;mio.pb=motion_pb;
+#if CLASSICK_MAC_TIMER_PAIR_PROBE
+    mio.pair=cs_mac_native_pair;
+#endif
     r=native_motion_prepare(&mio,&io);
     if(r!=CS_MAC_MOTION_OK){cs_mac_trace.cause=r;halt(12);}
 #if CLASSICK_MAC_TIMER_RECOVERY_PROBE
