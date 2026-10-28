@@ -13,7 +13,7 @@
   "agents_used": [],
   "external_AI_calls": 0,
   "implementation_and_verification": "Codex alone;no new CPU assembly or hardware programming. Existing audited MAR1 leaf reused.",
-  "result": "Hosted recovery/window tests and refusal/fault/object controls pass. Native proof and normal-profile hash comparison pending. No target trials in this step.",
+  "result": "Windows and Mac CI pass;3379WindowsCTests/nine profiles. New native recovery diagnostic and exact old hashes verified. Hosted model recovers after the captured rejection under synthetic stable inputs;target recovery and release usability remain unqualified.",
   "scope": "Separate opt-in diagnostic extends observation after first activity. Sampler,cadence,decoder,loss policy and normal images intended unchanged;not a movement/drag fix.",
   "observed_input": {
     "origin": "Own admitted MAR1 snapshot in release-resumption-evidence.json",
@@ -182,6 +182,256 @@
     "MAR1 omits gate state/completion reason;fallback can truncate a late window.",
     "Host scripted register responses do not qualify latches,coherence,wiring or physical capture.",
     "The prior first-loss native snapshot did not observe subsequent recovery.",
-    "Mac/PC GUI/human movement,drag,release/restoration and all existing historical,physical/full128K,source/role,edition,parity,B2,native-app,System1 gates remain."
-  ]
+    "Mac/PC GUI/human movement,drag,release/restoration and all existing historical,physical/full128K,source/role,edition,parity,B2,native-app,System1 gates remain.",
+    "Added foreground instrumentation may perturb timing even though device programming and programmed cadence are unchanged.",
+    "MAR1 first_service is a sampled-pair index,not the separate gate arming-service count."
+  ],
+  "native_proof": {
+    "native-window-timer-activity-refresh-checkpoint-v1": {
+      "manifest_sha256": "d147751d58a6e7cdf189ef1d22c3d7f7344aede6b4891d26efd9e6870f76869f",
+      "image_sha256": "d4718e33b275e9f3063847ca884b3cabff07b4137c90c9fef14f1e535f0b29d9",
+      "source_inputs_match": true,
+      "twins_equal": true,
+      "ROM_used": 24528,
+      "static_RAM": 520,
+      "workspace_bytes": 964,
+      "conservative_stack_bound": 5056,
+      "individual_frame_max": 284
+    },
+    "native-window-preview-v1": {
+      "manifest_sha256": "6c10c4ecdb8d246f1931aae9e0a0f72f53e19509766b98dcf418efaaf28d23a8",
+      "image_sha256": "673a2cca57d1ec9ffd842f4c858fa4aafbcb042ec6f86445ae5717d4816c4965",
+      "source_inputs_match": true,
+      "twins_equal": true,
+      "ROM_used": 23096,
+      "static_RAM": 304,
+      "workspace_bytes": 964,
+      "conservative_stack_bound": 4996,
+      "individual_frame_max": 284
+    },
+    "native-window-timer-recovery-refresh-checkpoint-v1": {
+      "manifest_sha256": "94832931ee96a19593715f2dc0de8217403c18f17c68c93c16924a20ad9412c1",
+      "image_sha256": "e21061701487f9e525dab691b13d9f69eb7f5adacd63331d80344d68119c72e5",
+      "source_inputs_match": true,
+      "twins_equal": true,
+      "ROM_used": 24792,
+      "static_RAM": 536,
+      "workspace_bytes": 964,
+      "conservative_stack_bound": 5064,
+      "individual_frame_max": 284,
+      "gate": {
+        "specification": "SPEC-0080",
+        "delay_services": 512,
+        "minimum_services": 500,
+        "fallback_services": 50000,
+        "state_bytes": 16,
+        "state_address": 3336,
+        "timer_rate_qualified": false,
+        "MAR1_exposes_completion_reason": false,
+        "extra_MMIO_reads": 0,
+        "extra_MMIO_writes": 0
+      },
+      "register_checkpoint": {
+        "format": "MAR1",
+        "entry": 4218644,
+        "spin": 4218716,
+        "bytes": 74,
+        "trace_address": 2820,
+        "exact_opcodes_verified": true,
+        "guest_memory_writes": 0,
+        "MMIO_accesses": 0,
+        "additional_RAM_bytes": 0,
+        "semantic_session_shutdown": false
+      },
+      "resealed_controls": 78
+    },
+    "native-window-timer-refresh-experiment-v1": {
+      "manifest_sha256": "6d6ada7bb9315e08ff896f65240eef3853e17c3d28dd251b4e15a376f53eecc5",
+      "image_sha256": "a5fca8484098eaa8e8d87cee6371121df839a0d1aa70769a5c3580fd2943c3a9",
+      "source_inputs_match": true,
+      "twins_equal": true,
+      "ROM_used": 23772,
+      "static_RAM": 360,
+      "workspace_bytes": 964,
+      "conservative_stack_bound": 4992,
+      "individual_frame_max": 284
+    },
+    "native-window-timer-poll-experiment-v1": {
+      "manifest_sha256": "a7ee59cadbdc2bcb8646cdecaf9695d27c5c82096186e49792e40da1b2e478d6",
+      "image_sha256": "7de4329b10bf34fa4f03f43def49fdaf8b1c34831cc3ebf11bfb2e3bfdc86606",
+      "source_inputs_match": true,
+      "twins_equal": true,
+      "ROM_used": 23704,
+      "static_RAM": 360,
+      "workspace_bytes": 964,
+      "conservative_stack_bound": 4992,
+      "individual_frame_max": 284
+    },
+    "native-window-timer-poll-idle-experiment-v1": {
+      "manifest_sha256": "18142228c0d106d971da3ba1c61315b7a3de632ef8d449b6630d3160e7ef0694",
+      "image_sha256": "141b4454579bd5e9cb21c35b267241d14644036b3d8b50fadbb7bbadbbc5be20",
+      "source_inputs_match": true,
+      "twins_equal": true,
+      "ROM_used": 23792,
+      "static_RAM": 360,
+      "workspace_bytes": 964,
+      "conservative_stack_bound": 4992,
+      "individual_frame_max": 284
+    },
+    "diagnostic_increment": {
+      "ROM_used": 264,
+      "static_RAM": 16,
+      "conservative_stack_bound": 8,
+      "individual_frame_max": 0,
+      "workspace_bytes": 0
+    }
+  },
+  "native_CI": {
+    "headSha": "c23541c2dae0997a5f29a0b953fdbcd1cb1ecd96",
+    "job": [
+      {
+        "completedAt": "2026-10-28T15:19:31Z",
+        "conclusion": "success",
+        "name": "m68k-rom",
+        "startedAt": "2026-10-28T15:16:56Z"
+      }
+    ]
+  },
+  "code_revision": "c23541c2dae0997a5f29a0b953fdbcd1cb1ecd96",
+  "native_image": "e21061701487f9e525dab691b13d9f69eb7f5adacd63331d80344d68119c72e5",
+  "normal_Mac_hashes_retained": 5,
+  "verification_note": "Private artifact verifier corrected to the existing one-profile manifest schema:builder compares both fresh twins before serializing one summary. No source/build failure.",
+  "CI": {
+    "conclusion": "success",
+    "headSha": "c23541c2dae0997a5f29a0b953fdbcd1cb1ecd96",
+    "status": "completed",
+    "url": "https://github.com/segaboy/ClasSICK-0.97/actions/runs/40714340158",
+    "run": 40714340158,
+    "jobs": [
+      {
+        "completedAt": "2026-10-28T15:19:31Z",
+        "conclusion": "success",
+        "databaseId": 122907798883,
+        "name": "m68k-rom",
+        "startedAt": "2026-10-28T15:16:56Z",
+        "status": "completed",
+        "url": "https://github.com/segaboy/ClasSICK-0.97/actions/runs/40714340158/job/122907798883"
+      },
+      {
+        "completedAt": "2026-10-28T15:36:44Z",
+        "conclusion": "success",
+        "databaseId": 122907799311,
+        "name": "windows-bootstrap",
+        "startedAt": "2026-10-28T15:16:56Z",
+        "status": "completed",
+        "url": "https://github.com/segaboy/ClasSICK-0.97/actions/runs/40714340158/job/122907799311"
+      }
+    ],
+    "all_required_checks_passed": true,
+    "executed_CTests": 3379,
+    "profiles": [
+      {
+        "name": "media-verification/clang-hosted/debug-a",
+        "counts": {
+          "expected": 391,
+          "executed": 391,
+          "passed": 391,
+          "failed": 0,
+          "skipped_or_not_run": 0
+        },
+        "identity_sha256": "ce9ca5b9c9f33671785845edff36994539f08490fefaf7c02e654952f6631333"
+      },
+      {
+        "name": "media-verification/clang-hosted/debug-b",
+        "counts": {
+          "expected": 391,
+          "executed": 391,
+          "passed": 391,
+          "failed": 0,
+          "skipped_or_not_run": 0
+        },
+        "identity_sha256": "ce9ca5b9c9f33671785845edff36994539f08490fefaf7c02e654952f6631333"
+      },
+      {
+        "name": "media-verification/clang-hosted/release",
+        "counts": {
+          "expected": 391,
+          "executed": 391,
+          "passed": 391,
+          "failed": 0,
+          "skipped_or_not_run": 0
+        },
+        "identity_sha256": "ce9ca5b9c9f33671785845edff36994539f08490fefaf7c02e654952f6631333"
+      },
+      {
+        "name": "media-verification/clang-hosted/i686",
+        "counts": {
+          "expected": 355,
+          "executed": 355,
+          "passed": 355,
+          "failed": 0,
+          "skipped_or_not_run": 0
+        },
+        "identity_sha256": "8dd1ad1fe16deaadbb78f4fea82425fdbfb894725fb5988f717933cfae01f056"
+      },
+      {
+        "name": "media-verification/clang-hosted/sanitized",
+        "counts": {
+          "expected": 391,
+          "executed": 391,
+          "passed": 391,
+          "failed": 0,
+          "skipped_or_not_run": 0
+        },
+        "identity_sha256": "ce9ca5b9c9f33671785845edff36994539f08490fefaf7c02e654952f6631333"
+      },
+      {
+        "name": "media-verification/gcc-debug-a",
+        "counts": {
+          "expected": 374,
+          "executed": 374,
+          "passed": 374,
+          "failed": 0,
+          "skipped_or_not_run": 0
+        },
+        "identity_sha256": "8b1454bc4b8b5a1a90a0fded9a5bece2bb4ca8a911e44b4db55f3a02e42c5f9b"
+      },
+      {
+        "name": "media-verification/gcc-debug-b",
+        "counts": {
+          "expected": 374,
+          "executed": 374,
+          "passed": 374,
+          "failed": 0,
+          "skipped_or_not_run": 0
+        },
+        "identity_sha256": "8b1454bc4b8b5a1a90a0fded9a5bece2bb4ca8a911e44b4db55f3a02e42c5f9b"
+      },
+      {
+        "name": "media-verification/gcc-release",
+        "counts": {
+          "expected": 374,
+          "executed": 374,
+          "passed": 374,
+          "failed": 0,
+          "skipped_or_not_run": 0
+        },
+        "identity_sha256": "8b1454bc4b8b5a1a90a0fded9a5bece2bb4ca8a911e44b4db55f3a02e42c5f9b"
+      },
+      {
+        "name": "media-verification/gcc-i686",
+        "counts": {
+          "expected": 338,
+          "executed": 338,
+          "passed": 338,
+          "failed": 0,
+          "skipped_or_not_run": 0
+        },
+        "identity_sha256": "40775cd8ce6d5180609c70fd051ca2dc3eaf7e29367f71d21f3ad8e840a7455d"
+      }
+    ],
+    "reported_CTest_wall_seconds": 275.51,
+    "selected_stage_seconds": 735.0
+  },
+  "next": "Use the verified recovery diagnostic with a readiness/control check before the intended gesture;read first-loss and later queued-motion totals. Retest real Mac/PC movement and dragging before release approval."
 }
