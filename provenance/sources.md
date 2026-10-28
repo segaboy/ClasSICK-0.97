@@ -4840,3 +4840,9 @@ new capture;no guest implementation fix or release pass inferred.
 ## SRC-0530 - Own reload comparison and narrow retained-interface check
 
 2026-10-28. Original divisor4 candidate reports798losses/zero queued motion after guarded synthetic gesture. Divisor16 reaches overrun reason5 from first sampled pair and is already halted before gesture;1124losses,no input test credited. Exact identities/coherent MAR1/owned cleanup recorded. Reidentified SRC-0363;checked published latch prose printed57/59/173/177,PDF+7. No WR1 change adopted,no sample/listing imported or pages sent to worker. Neither rate test nor later-manual prose proves cause,1984-part behavior or release input acceptance. [Receipt](../docs/development/mac-native-pair-evidence.json).
+
+## SRC-0531 - Native paired capture and guest-accepted PC GUI packet
+
+2026-10-28 own observations only. SPEC-0081 native proof passes;eight old ROM profiles unchanged. Two isolated Snow trials close:divisor1 admits two button-only events with no losses;divisor4 motion is rejected as Gray phase skip6. No Mac motion pass. One verified existing original PC diagnostic cold boot accepts a synthetic GUI first nonzero packet2A FF01,dx255/dy-255,one packet/zero bus errors,clamping pointer511,341. The later device event hits an already halted checkpoint and adds no E2 positive. This new route observation does not replace prior physical negatives or qualify dragging. Existing VM inventory/media preserved;no human,reference or hardware claim. [Canonical receipt](../docs/development/mac-native-pair-evidence.json).
+
+SRC-0531 follow-up:an isolated existing second-nonzero-packet PC probe does not reach its checkpoint after a physical-left capture click and synthetic drag. Capture button and threshold both differ;no causal inference or continuous-input pass. Both PC sessions close with original media/inventory preserved.

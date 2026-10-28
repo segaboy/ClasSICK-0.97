@@ -5,3 +5,5 @@ SRC-0525/0526;SPEC-0080. Four compiler/width/sanitizer profiles pass eight focus
 [Canonical executed evidence](../../docs/development/mac-recovery-window-evidence.json).
 
 2026-10-28. Addendum:ten focused CTests pass in four profiles,including frozen numeric2048/8192 and200000/800000 window boundaries;three divisor builder and three specific macro refusals pass. Native rate profiles pending;the earlier3379-case CI belongs to c23541c.
+
+2026-10-28 follow-up:rate CI40762762576 succeeds in both jobs;scalar native and owned target outcomes completed,not pending. See the dated follow-up and SPEC-0081 comparison receipt;no target recovery/movement acceptance.

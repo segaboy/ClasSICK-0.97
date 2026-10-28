@@ -15,7 +15,7 @@
   "agents_used": [],
   "external_AI_calls": 0,
   "implementation_and_verification": "Codex alone;no new CPU assembly or hardware programming. Existing audited MAR1 leaf reused.",
-  "result": "Prior recovery probe target trial records164losses/zero queued movement. Shorter-reload diagnostic comparison host-verified;native proof pending. No release usability pass.",
+  "result": "Scalar recovery/rate native proofs and isolated trials complete;no admitted nonzero motion. Subsequent native pair/PC route findings are linked in the dated follow-up. Release remains blocked.",
   "scope": "Separate opt-in diagnostic extends observation after first activity. Sampler,cadence,decoder,loss policy and normal images intended unchanged;not a movement/drag fix.",
   "observed_input": {
     "origin": "Own admitted MAR1 snapshot in release-resumption-evidence.json",
@@ -517,7 +517,7 @@
     },
     "interpretation": "Input levels change repeatedly but no movement is queued. First rejection is unstable;remaining164 loss reasons are not individually recorded. Root cause and intended-gesture attribution remain unproved.",
     "rate_experiment": {
-      "status": "hosted pass;native pending",
+      "status": "Hosted/native proof complete;target outcomes in mac-native-pair-evidence.json;no motion acceptance",
       "divisors": [
         4,
         16
@@ -655,6 +655,22 @@
       "platform/mac128k/activity-window.c": "a8d11879dd35e78e4a8f356b9d3c074d4d953eaf2c3c11f2817c604069cc5fbb",
       "scripts/Build-LoadedAppROM.py": "63cfb2801dc9cbf9f31be11a3dac0a849ecf86ae72f06acfadb3e6a400d960df",
       "tests/mac-activity-rate.c": "aa0e0541a35fb48667fad8bbe10d782ebbb1cbef4784ae448e7f7959b17d3614"
+    },
+    "outcome": "Original scalar rate experiments and target trials completed;no admitted nonzero motion. New native pair comparison and PC GUI checkpoint follow-up are recorded separately.",
+    "native_followup": "mac-native-pair-evidence.json",
+    "native_status": "Scalar rates1/4/16 native proof complete;old recovery image unchanged. Rate4 motion rejected;rate16 pregesture overrun;no pointer pass.",
+    "CI": {
+      "run_id": 40762762576,
+      "revision": "f6778b94a70cf5c503dae0c717f3be6edf9ba5f8",
+      "m68k_rom": "success",
+      "windows": "success",
+      "full_CTest_count": 3397,
+      "profiles": 9,
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/segaboy/ClasSICK-0.97/actions/runs/40762762576",
+      "reported_CTest_wall_seconds": 267.4,
+      "selected_stage_seconds": 709.0
     }
   }
 }

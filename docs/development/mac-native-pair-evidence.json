@@ -4,13 +4,14 @@
   "baseline_revision": "f6778b94a70cf5c503dae0c717f3be6edf9ba5f8",
   "source_ids": [
     "SRC-0529",
-    "SRC-0530"
+    "SRC-0530",
+    "SRC-0531"
   ],
   "specification": "SPEC-0081",
   "implementation": "IMPL-0089",
   "test": "TEST-0102",
   "authority": "Standing original release work/fresh native coupling role;the previous one-step-only solo exception was completed separately under SRC-0525.",
-  "result": "Host paired callback tests pass;native call-free/guard proof pending. No admission or hardware-programming change.",
+  "result": "Native proof passes. Mac button-only admission observed;synthetic motion still produces invalid Gray transitions. PC GUI delivers a first raw packet,not usable dragging. Release remains blocked.",
   "worker": {
     "provider": "GitHub Copilot",
     "model": "claude-sonnet-5.5",
@@ -83,14 +84,149 @@
   "new_MMIO_operations": 0,
   "new_assembly": false,
   "old_profiles_required_unchanged": true,
-  "native_trial_results": [],
+  "native_trial_results": [
+    {
+      "divisor": 1,
+      "preflight": {
+        "source_revision": "8d488c66501d2e8fc04a7c2d4afc1fb0f18f33b0",
+        "divisor": 1,
+        "ROM_sha256": "3ecf4301c290d9fee7943019bf54c531f17dd2fc69b3339cdaa92c01f4641393",
+        "native_sources_and_bytes_verified": true,
+        "native_pair": {
+          "entry": 4195522,
+          "bytes": 194,
+          "call_free": true,
+          "NOPs": 64,
+          "SCC_reads": 4,
+          "PB_reads": 2,
+          "MMIO_writes": 0,
+          "output_bytes": 6,
+          "sha256": "725c1d57546f47ab59b19f13d07de7160d24caf7e1d5adec3900ead1263da3ee"
+        },
+        "spin": 4218872
+      },
+      "observation": {
+        "decoded": {
+          "pairs": 8320,
+          "pb_x_changes": 0,
+          "pb_y_changes": 0,
+          "dcd_a_changes": 0,
+          "dcd_b_changes": 0,
+          "button_changes": 2,
+          "nonzero_queued": 0,
+          "buttononly_queued": 2,
+          "losses": 0,
+          "first_previous": 0,
+          "first_s0": 0,
+          "first_s1": 0,
+          "first_reason": 0,
+          "first_service": 0,
+          "format": "MAR1",
+          "pc": 4218872,
+          "omitted_fields": [
+            "tag",
+            "version",
+            "bytes",
+            "stable_pairs",
+            "last_observed",
+            "previous_accepted"
+          ],
+          "limitation": "Register subset only;not a full MWA1 record or root-cause proof."
+        },
+        "input": "Synthetic guarded host GUI input only;gesture scope recorded separately",
+        "root_cause_proven": false
+      },
+      "cleanup": {
+        "host_seconds": 61.7818944,
+        "cap_seconds": 150,
+        "pid": 62484,
+        "process_exited": true,
+        "forced_cleanup": true,
+        "guest_shutdown_claimed": false,
+        "ROM_sha256": "3ecf4301c290d9fee7943019bf54c531f17dd2fc69b3339cdaa92c01f4641393"
+      },
+      "sequence": [
+        "Observe active ROM;guarded Windows-primary right click430,352;refresh;guarded Sky drag430,352 to450,352.",
+        "Diagnostic may have completed during the gap after capture click;no movement-test success credited."
+      ],
+      "evidence_level": "E3 synthetic host GUI;not E4 human"
+    },
+    {
+      "divisor": 4,
+      "preflight": {
+        "source_revision": "8d488c66501d2e8fc04a7c2d4afc1fb0f18f33b0",
+        "divisor": 4,
+        "ROM_sha256": "f2246d9af7bf10a6832d2eb8c8c37c97fcd8d849478662ac883338da98fbd169",
+        "native_sources_and_bytes_verified": true,
+        "native_pair": {
+          "entry": 4195522,
+          "bytes": 194,
+          "call_free": true,
+          "NOPs": 64,
+          "SCC_reads": 4,
+          "PB_reads": 2,
+          "MMIO_writes": 0,
+          "output_bytes": 6,
+          "sha256": "725c1d57546f47ab59b19f13d07de7160d24caf7e1d5adec3900ead1263da3ee"
+        },
+        "spin": 4218872
+      },
+      "observation": {
+        "decoded": {
+          "pairs": 12687,
+          "pb_x_changes": 129,
+          "pb_y_changes": 128,
+          "dcd_a_changes": 129,
+          "dcd_b_changes": 129,
+          "button_changes": 0,
+          "nonzero_queued": 0,
+          "buttononly_queued": 0,
+          "losses": 89,
+          "first_previous": 2160018500,
+          "first_s0": 11488332,
+          "first_s1": 11488332,
+          "first_reason": 6,
+          "first_service": 12467,
+          "format": "MAR1",
+          "pc": 4218872,
+          "omitted_fields": [
+            "tag",
+            "version",
+            "bytes",
+            "stable_pairs",
+            "last_observed",
+            "previous_accepted"
+          ],
+          "limitation": "Register subset only;not a full MWA1 record or root-cause proof."
+        },
+        "input": "Synthetic guarded host GUI input only;gesture scope recorded separately",
+        "root_cause_proven": false
+      },
+      "cleanup": {
+        "host_seconds": 40.2440412,
+        "cap_seconds": 150,
+        "pid": 63744,
+        "process_exited": true,
+        "forced_cleanup": true,
+        "guest_shutdown_claimed": false,
+        "ROM_sha256": "f2246d9af7bf10a6832d2eb8c8c37c97fcd8d849478662ac883338da98fbd169"
+      },
+      "sequence": [
+        "Observe active ROM;one guarded Sky drag430,352 to450,352 as first input.",
+        "Stable first rejected pair;reason6 Gray phase skip. No admitted nonzero motion."
+      ],
+      "evidence_level": "E3 synthetic host GUI;not E4 human"
+    }
+  ],
   "release_ready": false,
   "private_artifacts": "C:\\ClasSICK\\mac-native-pair-20261028-a",
   "limits": [
     "No actual throughput,timing or pointer qualification inferred from inlining.",
     "Stable-pair/overrun/Gray/loss policy remains unchanged.",
-    "Target tests wait for native source/bytes/call-free64-NOP/IRQ/MAR1/bounds proof.",
-    "All historical,physical/full128K,source/role,edition,parity,B2,native-app,System1 and release-input gates remain."
+    "All historical,physical/full128K,source/role,edition,parity,B2,native-app,System1 and release-input gates remain.",
+    "No native pair16 trial;no live noncheckpoint pair build. Diagnostic halts are deliberate.",
+    "Mac phase-change cause unproven;do not loosen loss policy or blame a specific emulator/device.",
+    "PC synthetic packet acceptance supersedes the prior negative for this new route only;old physical observations and full GUI/human drag gates stay open."
   ],
   "preceding_rate_trials": {
     "rate4": {
@@ -208,5 +344,284 @@
     "identity_rechecked": true,
     "hash": "2a13683ee0e423ee3cdf2781a4ce6b4df65c1e069a269e4234fa6964b4a3bea0",
     "disposition": "Do not assume WR1 enable is required for latch operation;no WR1 change adopted. Facts/prose only;no manual sample/listing imported or sent to worker."
+  },
+  "source_revision": "8d488c66501d2e8fc04a7c2d4afc1fb0f18f33b0",
+  "native_proofs": [
+    {
+      "divisor": 1,
+      "image_sha256": "3ecf4301c290d9fee7943019bf54c531f17dd2fc69b3339cdaa92c01f4641393",
+      "ROM_bytes": 65536,
+      "used_ROM": 24952,
+      "native_data_bss": 540,
+      "stack_bound": 5072,
+      "workspace_end": 33732,
+      "capture": {
+        "entry": 4195522,
+        "bytes": 194,
+        "call_free": true,
+        "NOPs": 64,
+        "SCC_reads": 4,
+        "PB_reads": 2,
+        "MMIO_writes": 0,
+        "output_bytes": 6,
+        "sha256": "725c1d57546f47ab59b19f13d07de7160d24caf7e1d5adec3900ead1263da3ee"
+      },
+      "resealed_controls": 85,
+      "MAR1": {
+        "format": "MAR1",
+        "entry": 4218800,
+        "spin": 4218872,
+        "bytes": 74,
+        "trace_address": 2820,
+        "exact_opcodes_verified": true,
+        "guest_memory_writes": 0,
+        "MMIO_accesses": 0,
+        "additional_RAM_bytes": 0,
+        "semantic_session_shutdown": false
+      },
+      "manifest_sha256": "900f9ffc457f02d372dae46f68381515be99769ddcfe7268858a539dcd32a0ed"
+    },
+    {
+      "divisor": 4,
+      "image_sha256": "f2246d9af7bf10a6832d2eb8c8c37c97fcd8d849478662ac883338da98fbd169",
+      "ROM_bytes": 65536,
+      "used_ROM": 24952,
+      "native_data_bss": 540,
+      "stack_bound": 5072,
+      "workspace_end": 33732,
+      "capture": {
+        "entry": 4195522,
+        "bytes": 194,
+        "call_free": true,
+        "NOPs": 64,
+        "SCC_reads": 4,
+        "PB_reads": 2,
+        "MMIO_writes": 0,
+        "output_bytes": 6,
+        "sha256": "725c1d57546f47ab59b19f13d07de7160d24caf7e1d5adec3900ead1263da3ee"
+      },
+      "resealed_controls": 85,
+      "MAR1": {
+        "format": "MAR1",
+        "entry": 4218800,
+        "spin": 4218872,
+        "bytes": 74,
+        "trace_address": 2820,
+        "exact_opcodes_verified": true,
+        "guest_memory_writes": 0,
+        "MMIO_accesses": 0,
+        "additional_RAM_bytes": 0,
+        "semantic_session_shutdown": false
+      },
+      "manifest_sha256": "7e350ac1142971475dfecfc6ce5f4a90377163de736afe00f2a1f01af5cc5c6c"
+    },
+    {
+      "divisor": 16,
+      "image_sha256": "0615af7b8cb95d6d3af29a92b514b4556376179c1d65afb09fefa08e0e246cc6",
+      "ROM_bytes": 65536,
+      "used_ROM": 24952,
+      "native_data_bss": 540,
+      "stack_bound": 5072,
+      "workspace_end": 33732,
+      "capture": {
+        "entry": 4195522,
+        "bytes": 194,
+        "call_free": true,
+        "NOPs": 64,
+        "SCC_reads": 4,
+        "PB_reads": 2,
+        "MMIO_writes": 0,
+        "output_bytes": 6,
+        "sha256": "725c1d57546f47ab59b19f13d07de7160d24caf7e1d5adec3900ead1263da3ee"
+      },
+      "resealed_controls": 85,
+      "MAR1": {
+        "format": "MAR1",
+        "entry": 4218800,
+        "spin": 4218872,
+        "bytes": 74,
+        "trace_address": 2820,
+        "exact_opcodes_verified": true,
+        "guest_memory_writes": 0,
+        "MMIO_accesses": 0,
+        "additional_RAM_bytes": 0,
+        "semantic_session_shutdown": false
+      },
+      "manifest_sha256": "6e242e82ca29355d92a887dcfac385365f5a9e919ec67f2b5c37f1c3d3594ff7"
+    }
+  ],
+  "unrun_variants": [
+    {
+      "divisor": 16,
+      "reason": "Native proof only;prior scalar rate16 overrun makes another aggressive-rate trial unjustified before a new discriminator."
+    }
+  ],
+  "regression_images": [
+    {
+      "profile": "native-window-timer-activity-refresh-checkpoint-v1",
+      "sha256": "d4718e33b275e9f3063847ca884b3cabff07b4137c90c9fef14f1e535f0b29d9",
+      "unchanged": true
+    },
+    {
+      "profile": "native-window-preview-v1",
+      "sha256": "673a2cca57d1ec9ffd842f4c858fa4aafbcb042ec6f86445ae5717d4816c4965",
+      "unchanged": true
+    },
+    {
+      "profile": "native-window-timer-recovery-refresh-checkpoint-v1",
+      "sha256": "e21061701487f9e525dab691b13d9f69eb7f5adacd63331d80344d68119c72e5",
+      "unchanged": true
+    },
+    {
+      "profile": "native-window-timer-refresh-experiment-v1",
+      "sha256": "a5fca8484098eaa8e8d87cee6371121df839a0d1aa70769a5c3580fd2943c3a9",
+      "unchanged": true
+    },
+    {
+      "profile": "native-window-timer-recovery-refresh-divisor16-checkpoint-v1",
+      "sha256": "60edffa012560964727301c9beec26ebd60100fbdaa5463295cdedfed0e6473d",
+      "unchanged": true
+    },
+    {
+      "profile": "native-window-timer-recovery-refresh-divisor4-checkpoint-v1",
+      "sha256": "c4674966a553d8888fb4fa31a726c5be4bd40f96217235d7ae8de19eb64ff9bb",
+      "unchanged": true
+    },
+    {
+      "profile": "native-window-timer-poll-experiment-v1",
+      "sha256": "7de4329b10bf34fa4f03f43def49fdaf8b1c34831cc3ebf11bfb2e3bfdc86606",
+      "unchanged": true
+    },
+    {
+      "profile": "native-window-timer-poll-idle-experiment-v1",
+      "sha256": "141b4454579bd5e9cb21c35b267241d14644036b3d8b50fadbb7bbadbbc5be20",
+      "unchanged": true
+    }
+  ],
+  "PC_same_boot_followup": {
+    "identity": {
+      "source": "2373430dcd71784e7288d7b981aa02a6cbd8106a",
+      "EFI": "9120a9686ba59092677d8ea0aba37cb535608712e61d1216d1db3bdff34a3fef",
+      "disk": "bd94c586437e2e11019df829a534878fa313805a0133267b3f7a3da6411df5ba",
+      "mode": "raw-motion",
+      "first_nonzero_report": true,
+      "normal_release_candidate": false,
+      "no_Windows_input_by_agent": true
+    },
+    "pre_input_registers": {
+      "rip": 268465223,
+      "rsp": 486460472,
+      "r8": 486477824,
+      "r9": 1,
+      "r10": 3,
+      "r11": 486478593,
+      "r12": 486461240,
+      "r13": 486129936,
+      "r14": 486460824,
+      "r15": 486460748
+    },
+    "GUI_checkpoint_registers": {
+      "rip": 268620004,
+      "rsp": 486460360,
+      "r8": 4851309537821929521,
+      "r9": 4294967296,
+      "r10": 180388691713,
+      "r11": 1099511627521,
+      "r12": 8589934592,
+      "r13": 2194728288597,
+      "r14": 343597383750,
+      "r15": 0
+    },
+    "map_symbol_RVA": "cs_pc_input_probe_halt=0x2d0c0;own mapped spinRVA0x2d0e4",
+    "raw_packet": {
+      "header": 42,
+      "X_byte": 255,
+      "Y_byte": 1,
+      "dx": 255,
+      "dy": -255,
+      "buttons": 2,
+      "packets": 1,
+      "errors": 0,
+      "pointer_after": [
+        511,
+        341
+      ],
+      "window_after": [
+        80,
+        70
+      ],
+      "inputs": 0,
+      "dragging": false
+    },
+    "result": "New synthetic GUI route reaches first nonzero packet checkpoint. Large initial delta clamps logical pointer to511,341;this is not proof of incorrect sign decoding or usable movement. Window unchanged;no drag pass.",
+    "E2_control": "One relative+1X IMouse event issued after GUI had already halted the diagnostic;registers unchanged. Not an independent E2 positive.",
+    "sequence": "Windowed Display1;verified visible own scene;primary-right click650,500 then Sky title-bar drag430,355 to450,355. No physical mouse observation.",
+    "cleanup": {
+      "utc": "2026-10-28T21:05:40.4314422Z",
+      "cold_starts": 1,
+      "state": "poweroff",
+      "unregistered": true,
+      "existing_vm_inventory_preserved": true,
+      "running_state_preserved": true,
+      "post_trial_raw_roundtrip_equal": true,
+      "artifacts_retained": true,
+      "semantic_session_stop_observed": false,
+      "termination": "external poweroff from paused state"
+    },
+    "timing": {
+      "host_seconds": 65.1350125,
+      "one_cold_start": true,
+      "same_boot_E3_then_E2": true,
+      "physical_input_claimed": false
+    },
+    "private_artifacts": "C:\\ClasSICK\\pc-sameboot-20261028-a"
+  },
+  "next_discriminator": "Separate large host-pointer warps from controlled relative movement;Mac needs edge-preserving acquisition or an identified bounded stream before any policy change. PC needs normal live-candidate motion/drag/release using the newly guest-accepted route. No repeat of unchanged negative routes.",
+  "CI": {
+    "run_id": 40767981074,
+    "revision": "8d488c66501d2e8fc04a7c2d4afc1fb0f18f33b0",
+    "m68k_rom": "success",
+    "windows": "success",
+    "full_CTest_count": 3406,
+    "profiles": 9,
+    "status": "completed",
+    "conclusion": "success",
+    "url": "https://github.com/segaboy/ClasSICK-0.97/actions/runs/40767981074",
+    "reported_CTest_wall_seconds": 256.98,
+    "selected_stage_seconds": 691.0
+  },
+  "PC_second_packet_followup": {
+    "identity": {
+      "EFI": "53114e09d7d18e461e2c6582a37cf232b26d73c89ca845a73119d49776b2cff8",
+      "disk": "3d8538f992cffa66db4bef0d834cdf8d7c95c51d9719e07af8adf0732deab3ce",
+      "mode": "raw-motion-later",
+      "packet_threshold": 2,
+      "source": "5b96dc76e49744fd3c7ecb19c149ba72c1c4e6bf",
+      "normal_release_candidate": false,
+      "native_twins_and_controls": "four twins/27corruption/28omission controls pass;two mediawriters match"
+    },
+    "pre_input_registers_text": "rip = 0x0000000010008f65\nrsp = 0x000000001cfecb28\nr8 = 0x000000000041d27d\nr9 = 0x000000001cff12b8\nr10 = 0x00000000100026d0\nr11 = 0x000000001cff1301\nr12 = 0x000000001cfecf38\nr13 = 0x000000001cf9c110\nr14 = 0x000000001cfecd98\nr15 = 0x000000001cfecd4c\n",
+    "post_input_registers_text": "rip = 0x0000000010007447\nrsp = 0x000000001cfecc38\nr8 = 0x000000001cff1000\nr9 = 0x0000000000000002\nr10 = 0x0000000000000003\nr11 = 0x000000001cff1301\nr12 = 0x000000001cfecf38\nr13 = 0x000000001cf9c110\nr14 = 0x000000001cfecd98\nr15 = 0x000000001cfecd4c\n",
+    "input_sequence": "Observed scene;physical-left capture click650,500;Sky drag430,355 to450,355;synthetic only.",
+    "result": "Second-nonzero-packet checkpoint not reached. Live general-purpose registers are not decoded as packet data. Both capture button and probe threshold differ from the first positive trial;no single-variable causal claim.",
+    "cleanup": {
+      "utc": "2026-10-28T21:13:19.6408599Z",
+      "cold_starts": 1,
+      "state": "poweroff",
+      "unregistered": true,
+      "existing_vm_inventory_preserved": true,
+      "running_state_preserved": true,
+      "post_trial_raw_roundtrip_equal": true,
+      "artifacts_retained": true,
+      "semantic_session_stop_observed": false,
+      "termination": "external poweroff from paused state"
+    },
+    "timing": {
+      "host_seconds": 53.2798664,
+      "one_cold_start": true,
+      "same_boot_E3_then_E2": false,
+      "physical_input_claimed": false
+    },
+    "private_artifacts": "C:\\ClasSICK\\pc-second-gui-20261028-a"
   }
 }
