@@ -77,6 +77,7 @@ def main():
     p.add_argument('--window-timer-refresh-probe',action='store_true',help='Opt-in SCC status-refresh endpoint experiment;requires timer polling')
     p.add_argument('--window-timer-activity-probe',action='store_true',help='Passive MWA1 activity checkpoint;requires timer polling and idle checkpoint')
     p.add_argument('--window-timer-recovery-probe',action='store_true',help='Observe512 services after first activity;requires activity checkpoint')
+    p.add_argument('--window-timer-divisor',type=int,choices=(1,4,16),default=1,help='Experimental programmed reload divisor;nondefault requires recovery and refresh')
     p.add_argument('--window-phase-idle-probe',action='store_true',help='Experimental phase-only no-decision pass; window profile only')
     p.add_argument('--dcd-invert',type=int,choices=(0,1,2,3),default=0,help='Unverified raw RR0 DCD sense mask; window profile only')
     a=p.parse_args()
@@ -85,6 +86,7 @@ def main():
     if a.window_timer_refresh_probe and not a.window_timer_poll_probe:p.error('--window-timer-refresh-probe requires --window-timer-poll-probe')
     if a.window_timer_activity_probe and not (a.window_timer_poll_probe and a.window_idle_probe):p.error('--window-timer-activity-probe requires timer polling and --window-idle-probe')
     if a.window_timer_recovery_probe and not a.window_timer_activity_probe:p.error('--window-timer-recovery-probe requires --window-timer-activity-probe')
+    if a.window_timer_divisor!=1 and not (a.window_timer_recovery_probe and a.window_timer_refresh_probe):p.error('Nondefault timer divisor requires recovery and refresh probes')
     native=a.native_drawing or a.selected_drawing or a.outline_drawing or a.window_drawing
     if a.dcd_invert and not a.window_drawing:p.error('--dcd-invert requires --window-drawing')
     if a.window_idle_probe and not a.window_drawing:p.error('--window-idle-probe requires --window-drawing')
@@ -152,6 +154,7 @@ def main():
         if a.window_timer_refresh_probe:profile='native-window-timer-refresh-'+('idle-' if a.window_idle_probe else '')+'experiment-v1'
         if a.window_timer_activity_probe:profile='native-window-timer-activity-'+('refresh-' if a.window_timer_refresh_probe else '')+'checkpoint-v1';specification='SPEC-0078'
         if a.window_timer_recovery_probe:profile='native-window-timer-recovery-'+('refresh-' if a.window_timer_refresh_probe else '')+'checkpoint-v1';specification='SPEC-0080'
+        if a.window_timer_divisor!=1:profile=profile.replace('checkpoint-v1','divisor'+str(a.window_timer_divisor)+'-checkpoint-v1')
         if a.window_phase_idle_probe:profile='native-window-phase-idle-'+('pending-defer-' if a.window_pending_defer_probe else '')+'probe-v1'
     profiles=[]
     for twin in ('a','b'):
@@ -169,6 +172,7 @@ def main():
         if a.window_timer_refresh_probe:flags+=['-DCLASSICK_MAC_TIMER_REFRESH_PROBE=1']
         if a.window_timer_activity_probe:flags+=['-DCLASSICK_MAC_TIMER_ACTIVITY_PROBE=1']
         if a.window_timer_recovery_probe:flags+=['-DCLASSICK_MAC_TIMER_RECOVERY_PROBE=1']
+        if a.window_timer_divisor!=1:flags+=['-DCLASSICK_MAC_TIMER_DIVISOR='+str(a.window_timer_divisor)]
         if a.window_first_input_probe:flags+=['-DCLASSICK_MAC_FIRST_INPUT_PROBE=1']
         if a.window_pending_defer_probe:flags+=['-DCLASSICK_MAC_PENDING_DEFER_PROBE=1']
         if a.window_phase_idle_probe:flags+=['-DCLASSICK_MAC_PHASE_IDLE_PROBE=1']
@@ -312,7 +316,7 @@ def main():
      'original_program_bytes':len(bytes.fromhex(program_hex)),'execution_path':'direct-native-c' if native else 'guarded-68k-fixture',
      'module_count':len(sources),'selected_ports':bool(a.selected_drawing or a.outline_drawing),'outline_drawing':bool(a.outline_drawing),'native_drawing_context':('SPEC-0041' if native else None),'emulator_run':False,'system1_compatibility_proven':False,
      'inputs':{f:hashlib.sha256((repo/f).read_bytes().replace(b'\r\n',b'\n')).hexdigest() for f in (*sources,*headers)}}
-    if a.window_timer_poll_probe:manifest.update({'timer_poll_experiment':True,'timer_reload_count':4096,'timer_frequency_qualified':False,'physical_edge_completeness_qualified':False,'SCC_master_interrupts':False})
+    if a.window_timer_poll_probe:manifest.update({'timer_poll_experiment':True,'timer_reload_count':4096//a.window_timer_divisor,'timer_frequency_qualified':False,'physical_edge_completeness_qualified':False,'SCC_master_interrupts':False})
     if a.window_timer_refresh_probe:manifest['timer_refresh_experiment']=True
     if a.window_drawing:manifest['window_idle_probe']=bool(a.window_idle_probe)
     if a.window_drawing:manifest['window_pending_defer_probe']=bool(a.window_pending_defer_probe)
@@ -321,7 +325,7 @@ def main():
     if a.window_first_input_probe:manifest['window_first_input_probe_limit']=5000
     if a.window_idle_probe and not a.window_timer_activity_probe:manifest['window_idle_probe_threshold']=500
     if a.window_timer_activity_probe:manifest['activity_checkpoint']={'tag':'MWA1','version':1,'bytes':80,'address':syms['cs_mac_activity_trace'],'minimum_services':500,'fallback_services':50000,'wall_time_qualified':False,'extra_MMIO_reads':0,'extra_MMIO_writes':0,'old_diagnostics_unchanged':True}
-    if a.window_timer_recovery_probe:manifest['recovery_window']={'specification':'SPEC-0080','delay_services':512,'minimum_services':500,'fallback_services':50000,'state_bytes':16,'state_address':syms['cs_mac_activity_gate'],'timer_rate_qualified':False,'MAR1_exposes_completion_reason':False,'extra_MMIO_reads':0,'extra_MMIO_writes':0}
+    if a.window_timer_recovery_probe:manifest['recovery_window']={'specification':'SPEC-0080','delay_services':512*a.window_timer_divisor,'minimum_services':500*a.window_timer_divisor,'fallback_services':50000*a.window_timer_divisor,'programmed_reload_divisor':a.window_timer_divisor,'state_bytes':16,'state_address':syms['cs_mac_activity_gate'],'timer_rate_qualified':False,'MAR1_exposes_completion_reason':False,'extra_MMIO_reads':0,'extra_MMIO_writes':0}
     if a.window_drawing:manifest.update({'window_drawing':True,'native_drawing_context':None,
      'dcd_invert':a.dcd_invert,'dcd_invert_verified':False,'cpu_callbacks':list(cpu_callbacks),
      'board_profile':{'status':'engineering-upper-alias-hypothesis-unverified','scc_read_b':0x9FFFF8,'scc_read_a':0x9FFFFA,

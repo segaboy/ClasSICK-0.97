@@ -60,3 +60,17 @@ validate hardware latching,atomicity,wiring,frequency or capture.
 Hosted recovery is not target recovery. All Mac/PC GUI/human movement,drag,
 release/restoration,physical/full128K,historical,edition,parity,B2criterion6,
 native-app,System1/ROM and human provenance gates remain.
+
+## 2026-10-28 addendum: bounded reload comparison
+
+SRC-0527/0528 records a target observation with164losses and zero queued motion.
+That result justifies comparing shorter programmed intervals;it proves no cause.
+--window-timer-divisor accepts1(default),4 or16. Nondefault requires recovery
+and refresh profiles. It changes only the already-approved prepare argument
+4096/divisor (1024 or256);there are no new device operations or assembly.
+CLASSICK_MAC_TIMER_DIVISOR has the same strict values/default. Observation
+delay,minimum and fallback counts scale by the divisor,using32-bit arithmetic.
+This preserves their programmed-count products,not measured time or frequency.
+Default compiled profiles and existing wire layouts must retain exact bytes.
+Higher interrupt load/overrun/starvation remain possible;all trials are bounded.
+Nondefault profiles are diagnostic experiments,not shipping configurations.

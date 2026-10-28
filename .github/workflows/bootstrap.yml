@@ -308,6 +308,25 @@ jobs:
             ${{ runner.temp }}/classick-window-recovery/Os-a/classick-loaded-app.rom
             ${{ runner.temp }}/classick-window-recovery/Os-a/classick-loaded-app.map
           if-no-files-found: error
+      - name: Verify diagnostic reload comparisons (unbooted)
+        run: |
+          for d in 4 16; do
+            cc -std=c11 -pedantic-errors -Wall -Wextra -Werror -Wconversion -Wsign-conversion -DCLASSICK_MAC_TIMER_DIVISOR=$d -I. platform/mac128k/activity-window.c tests/mac-activity-rate.c -o "$RUNNER_TEMP/mac-rate$d"
+            "$RUNNER_TEMP/mac-rate$d" "$d"
+            python3 scripts/Build-LoadedAppROM.py --window-drawing --window-timer-poll-probe --window-timer-refresh-probe --window-idle-probe --window-timer-activity-probe --window-timer-recovery-probe --window-timer-divisor "$d" --tool-root "$RUNNER_TEMP/classick-m68k/root" --output "$RUNNER_TEMP/classick-window-rate$d"
+          done
+      - name: Retain diagnostic reload comparisons (unbooted)
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
+        with:
+          name: classick-window-rates-mac
+          path: |
+            ${{ runner.temp }}/classick-window-rate4/manifest.json
+            ${{ runner.temp }}/classick-window-rate4/Os-a/classick-loaded-app.rom
+            ${{ runner.temp }}/classick-window-rate4/Os-a/classick-loaded-app.map
+            ${{ runner.temp }}/classick-window-rate16/manifest.json
+            ${{ runner.temp }}/classick-window-rate16/Os-a/classick-loaded-app.rom
+            ${{ runner.temp }}/classick-window-rate16/Os-a/classick-loaded-app.map
+          if-no-files-found: error
       - name: Retain separate timer polling experiments (unbooted)
         uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
         with:

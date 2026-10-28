@@ -4824,3 +4824,11 @@ new capture;no guest implementation fix or release pass inferred.
 ## SRC-0526 - Original recovery-window contract and captured-input regression
 
 2026-10-28. Codex-only SPEC-0080/IMPL-0088/TEST-0101 from admitted original contracts/code and the own SRC-0523 MAR1 record. Reproduce priorFF4444/pair9F4C44/8F4444 and loss2. The following stable baseline,adjacent DCD transition and later Gray loss are independently scripted synthetic inputs,not an observed trace or historical/hardware evidence. The opt-in512-service window retains foreground recovery opportunity;default sampler,device programming and old formats remain. No manual,third-party implementation or worker output used. Executed checks,native pending/results and exact limitations are in the [canonical receipt](../docs/development/mac-recovery-window-evidence.json).
+
+## SRC-0527 - Original post-loss target observation
+
+2026-10-28. Verified own e2106170...c72e5/c23541c ROM in fresh isolated admitted Snow Early128K session,one guarded synthetic titlebar gesture. Coherent MAR1 records12132pairs,164losses,zero queued motion/button reports;firstprevious80BF4444/pair009F444C/00AF4C4C,reason2 at11906. Raw levels change repeatedly. No remaining-loss reason breakdown,physical gesture or root cause proved. Owned process closed,ROM retained. [Receipt](../docs/development/mac-recovery-window-evidence.json).
+
+## SRC-0528 - Original bounded reload comparison
+
+2026-10-28. Existing SPEC-0075 prepare accepts a1..65535 reload;original experimental4096 is unqualified frequency. SPEC-0080 addendum compares only existing argument1024/256,with scaled diagnostic count limits. No new MMIO sequence,assembly,reference/manual input or other AI. Hosted controls and eventual native/target results stay in the [receipt](../docs/development/mac-recovery-window-evidence.json). This is an engineering experiment,not a historical or shipping configuration.

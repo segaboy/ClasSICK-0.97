@@ -17,7 +17,7 @@ int cs_mac_activity_window_step(cs_mac_activity_window *s,uint32_t services,uint
     if(services<s->last_service)return CS_MAC_AW_ARGUMENT;
     if(activity&&!s->armed){s->armed=1;s->first_service=services;}
     s->last_service=services;
-    if(services>=500u&&s->armed&&services-s->first_service>=CS_MAC_ACTIVITY_WINDOW_DELAY)
+    if(services>=CS_MAC_ACTIVITY_WINDOW_MINIMUM&&s->armed&&services-s->first_service>=CS_MAC_ACTIVITY_WINDOW_DELAY)
         return CS_MAC_AW_COMPLETE;
     return services>=CS_MAC_ACTIVITY_WINDOW_FALLBACK?CS_MAC_AW_FALLBACK:CS_MAC_AW_WAIT;
 }

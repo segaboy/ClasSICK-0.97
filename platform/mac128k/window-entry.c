@@ -18,6 +18,15 @@
 #if CLASSICK_MAC_TIMER_RECOVERY_PROBE != 0 && CLASSICK_MAC_TIMER_RECOVERY_PROBE != 1
 #error CLASSICK_MAC_TIMER_RECOVERY_PROBE must be0 or1
 #endif
+#ifndef CLASSICK_MAC_TIMER_DIVISOR
+#define CLASSICK_MAC_TIMER_DIVISOR 1
+#endif
+#if CLASSICK_MAC_TIMER_DIVISOR != 1 && CLASSICK_MAC_TIMER_DIVISOR != 4 && CLASSICK_MAC_TIMER_DIVISOR != 16
+#error CLASSICK_MAC_TIMER_DIVISOR must be1,4 or16
+#endif
+#if CLASSICK_MAC_TIMER_DIVISOR != 1 && !(CLASSICK_MAC_TIMER_RECOVERY_PROBE && CLASSICK_MAC_TIMER_REFRESH_PROBE)
+#error Nondefault timer divisor requires recovery and refresh probes
+#endif
 #if CLASSICK_MAC_TIMER_RECOVERY_PROBE
 #include "activity-window.h"
 static cs_mac_activity_window cs_mac_activity_gate;
@@ -125,7 +134,7 @@ _Static_assert(offsetof(cs_mac_activity,pairs)==12 &&
     offsetof(cs_mac_activity,first_service)==76,"MAR1 assembly offsets");
 #endif
 #define motion timer_motion.motion
-#define native_motion_prepare(scc,via) cs_mac_timer_poll_prepare(&timer_motion,scc,via,&session.inbox,(uint32_t)CLASSICK_MAC_DCD_INVERT,4096u)
+#define native_motion_prepare(scc,via) cs_mac_timer_poll_prepare(&timer_motion,scc,via,&session.inbox,(uint32_t)CLASSICK_MAC_DCD_INVERT,UINT32_C(4096)/CLASSICK_MAC_TIMER_DIVISOR)
 #define native_motion_arm() cs_mac_timer_poll_arm(&timer_motion)
 #define native_motion_service() cs_mac_timer_poll_service(&timer_motion)
 #define native_motion_stop() cs_mac_timer_poll_stop(&timer_motion)

@@ -4,7 +4,9 @@
   "classification": "original-engineering-diagnostic",
   "source_ids": [
     "SRC-0525",
-    "SRC-0526"
+    "SRC-0526",
+    "SRC-0527",
+    "SRC-0528"
   ],
   "specification": "SPEC-0080",
   "implementation": "IMPL-0088",
@@ -13,7 +15,7 @@
   "agents_used": [],
   "external_AI_calls": 0,
   "implementation_and_verification": "Codex alone;no new CPU assembly or hardware programming. Existing audited MAR1 leaf reused.",
-  "result": "Windows and Mac CI pass;3379WindowsCTests/nine profiles. New native recovery diagnostic and exact old hashes verified. Hosted model recovers after the captured rejection under synthetic stable inputs;target recovery and release usability remain unqualified.",
+  "result": "Prior recovery probe target trial records164losses/zero queued movement. Shorter-reload diagnostic comparison host-verified;native proof pending. No release usability pass.",
   "scope": "Separate opt-in diagnostic extends observation after first activity. Sampler,cadence,decoder,loss policy and normal images intended unchanged;not a movement/drag fix.",
   "observed_input": {
     "origin": "Own admitted MAR1 snapshot in release-resumption-evidence.json",
@@ -433,5 +435,226 @@
     "reported_CTest_wall_seconds": 275.51,
     "selected_stage_seconds": 735.0
   },
-  "next": "Use the verified recovery diagnostic with a readiness/control check before the intended gesture;read first-loss and later queued-motion totals. Retest real Mac/PC movement and dragging before release approval."
+  "next": "Use the verified recovery diagnostic with a readiness/control check before the intended gesture;read first-loss and later queued-motion totals. Retest real Mac/PC movement and dragging before release approval.",
+  "followup": {
+    "date": "2026-10-28",
+    "classification": "own-target-observation-and-original-parameter-experiment",
+    "baseline_revision": "81b5c7c",
+    "agents_used": [],
+    "source_ids": [
+      "SRC-0527",
+      "SRC-0528"
+    ],
+    "trial": {
+      "preflight": {
+        "source_revision": "c23541c2dae0997a5f29a0b953fdbcd1cb1ecd96",
+        "ROM_sha256": "e21061701487f9e525dab691b13d9f69eb7f5adacd63331d80344d68119c72e5",
+        "source_inputs_match": true,
+        "native_proofs_reused": true,
+        "probe": "SPEC-0080",
+        "UI_input": "one guarded synthetic gesture;classify independently from human qualification"
+      },
+      "observation": {
+        "decoded": {
+          "pairs": 12132,
+          "pb_x_changes": 140,
+          "pb_y_changes": 139,
+          "dcd_a_changes": 148,
+          "dcd_b_changes": 150,
+          "button_changes": 0,
+          "nonzero_queued": 0,
+          "buttononly_queued": 0,
+          "losses": 164,
+          "first_previous": 2160018500,
+          "first_s0": 10437708,
+          "first_s1": 11488332,
+          "first_reason": 2,
+          "first_service": 11906,
+          "format": "MAR1",
+          "pc": 4218716,
+          "omitted_fields": [
+            "tag",
+            "version",
+            "bytes",
+            "stable_pairs",
+            "last_observed",
+            "previous_accepted"
+          ],
+          "limitation": "Register subset only;not a full MWA1 record or root-cause proof."
+        },
+        "gesture": "One sky.drag at guarded own titlebar430,352->450,352;synthetic host input,not human acceptance.",
+        "no_movement_queued": true,
+        "root_cause_proven": false
+      },
+      "closed": {
+        "host_seconds": 440.9525926,
+        "cap_seconds": 600,
+        "pid": 61988,
+        "process_exited": true,
+        "forced_cleanup": true,
+        "guest_shutdown_claimed": false,
+        "ROM_sha256": "e21061701487f9e525dab691b13d9f69eb7f5adacd63331d80344d68119c72e5"
+      },
+      "registers": {
+        "d0": 1296126513,
+        "d1": 12132,
+        "d2": 140,
+        "d3": 139,
+        "d4": 148,
+        "d5": 150,
+        "d6": 0,
+        "d7": 0,
+        "a0": 0,
+        "a1": 164,
+        "a2": 2160018500,
+        "a3": 10437708,
+        "a4": 11488332,
+        "a5": 2,
+        "a6": 11906,
+        "pc": 4218716
+      },
+      "scope": "Synthetic host drag;not E4 or usable-input acceptance. Coherent MAR1 transcription at verified spin."
+    },
+    "interpretation": "Input levels change repeatedly but no movement is queued. First rejection is unstable;remaining164 loss reasons are not individually recorded. Root cause and intended-gesture attribution remain unproved.",
+    "rate_experiment": {
+      "status": "hosted pass;native pending",
+      "divisors": [
+        4,
+        16
+      ],
+      "reloads": [
+        1024,
+        256
+      ],
+      "delay_services": [
+        2048,
+        8192
+      ],
+      "fallback_services": [
+        200000,
+        800000
+      ],
+      "physical_frequency_qualified": false,
+      "hardware_sequence_changed": false,
+      "change": "Only the existing reviewed prepare reload argument and diagnostic gate limits. Programmed-count products retained,not measured time."
+    },
+    "host_profiles": [
+      {
+        "profile": "clang",
+        "exit_code": 0,
+        "elapsed_seconds": 4.469
+      },
+      {
+        "profile": "gcc64",
+        "exit_code": 0,
+        "elapsed_seconds": 4.313
+      },
+      {
+        "profile": "gcc32",
+        "exit_code": 0,
+        "elapsed_seconds": 4.625
+      },
+      {
+        "profile": "sanitized",
+        "exit_code": 0,
+        "elapsed_seconds": 3.859
+      }
+    ],
+    "focused_CTests_per_profile": 10,
+    "object_audits": [
+      {
+        "target": "i686-w64-mingw32",
+        "optimization": "0",
+        "imports_and_mutable_globals": "none",
+        "sha256": "bc9d8c58aa71ddc437b72c9c64d06c232898268f12581238bfbd687087ca7066"
+      },
+      {
+        "target": "i686-w64-mingw32",
+        "optimization": "2",
+        "imports_and_mutable_globals": "none",
+        "sha256": "c25065a9fe23d9aef00471f9c945070c6c7897d6d64e9d945ac4aeab67f0d17e"
+      },
+      {
+        "target": "x86_64-w64-mingw32",
+        "optimization": "0",
+        "imports_and_mutable_globals": "none",
+        "sha256": "bd6258411935c89df8a6b09ef01006ba0c268569d89f8043be6001610daa1079"
+      },
+      {
+        "target": "x86_64-w64-mingw32",
+        "optimization": "2",
+        "imports_and_mutable_globals": "none",
+        "sha256": "e4c7434ed7a409d656068accce8151def3555f095e703ea85c43d4eef5734e9f"
+      },
+      {
+        "target": "aarch64-none-elf",
+        "optimization": "0",
+        "imports_and_mutable_globals": "none",
+        "sha256": "4099a4d4263f00f29e7bc7cd783467f16c151813f453cd5120e60db277d3c4d7"
+      },
+      {
+        "target": "aarch64-none-elf",
+        "optimization": "2",
+        "imports_and_mutable_globals": "none",
+        "sha256": "821f585fb6bdf3968ea2f2d3832540d2d97ffddc8c8ebc6ae5dbc9716ca90695"
+      },
+      {
+        "target": "aarch64_be-none-elf",
+        "optimization": "0",
+        "imports_and_mutable_globals": "none",
+        "sha256": "cfc9ea11c79c0e4768775d492e6c9cba6c68984194580bd430f09c0298910ba6"
+      },
+      {
+        "target": "aarch64_be-none-elf",
+        "optimization": "2",
+        "imports_and_mutable_globals": "none",
+        "sha256": "0cda6c878924fe5368caa3283c0cd2d6a4e1c4d3f9b8601396579ebbc26c2601"
+      }
+    ],
+    "controls": [
+      {
+        "args": [
+          "--window-timer-divisor",
+          "4"
+        ],
+        "refused_before_output": true
+      },
+      {
+        "args": [
+          "--window-drawing",
+          "--window-timer-recovery-probe",
+          "--window-timer-divisor",
+          "16"
+        ],
+        "refused_before_output": true
+      },
+      {
+        "args": [
+          "--window-timer-divisor",
+          "2"
+        ],
+        "refused_before_output": true
+      },
+      {
+        "macro_divisor": "3",
+        "specific_refusal": "must be1,4 or16"
+      },
+      {
+        "macro_divisor": "4",
+        "specific_refusal": "requires recovery and refresh"
+      },
+      {
+        "macro_divisor": "16",
+        "specific_refusal": "requires recovery and refresh"
+      }
+    ],
+    "private_artifacts": "C:\\ClasSICK\\mac-recovery-trial-20261028-a",
+    "new_source_inputs": {
+      "platform/mac128k/window-entry.c": "129bc723f03a46ec501833fbb1ae2f7ab47a4df19b4cdccff3ea87e06097823d",
+      "platform/mac128k/activity-window.h": "8679942fed27c66b01e0d49b24cc051ef0ae963ae3f02d28fadd591ae912dfce",
+      "platform/mac128k/activity-window.c": "a8d11879dd35e78e4a8f356b9d3c074d4d953eaf2c3c11f2817c604069cc5fbb",
+      "scripts/Build-LoadedAppROM.py": "63cfb2801dc9cbf9f31be11a3dac0a849ecf86ae72f06acfadb3e6a400d960df",
+      "tests/mac-activity-rate.c": "aa0e0541a35fb48667fad8bbe10d782ebbb1cbef4784ae448e7f7959b17d3614"
+    }
+  }
 }
