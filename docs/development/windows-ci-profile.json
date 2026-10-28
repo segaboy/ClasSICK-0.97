@@ -1,0 +1,515 @@
+{
+  "date": "2026-10-28",
+  "classification": "project-verification",
+  "source_ids": [
+    "SRC-0518",
+    "SRC-0519",
+    "SRC-0520"
+  ],
+  "public_baseline_revision": "8cf6df67d1a416a7d2e011940860272c11107467",
+  "authority": "Owner authorizes profiling/shortening slow Windows CI while preserving required checks and keeping desktop tests paused.",
+  "result": "Profile existing successful CI;try two concurrent CTest cases within each serial build profile,retain all9profiles/testnames/twins/sanitizer controls/audits;add per-profileJUnit and total-stage timing artifacts. No cache or reuse shortcut.",
+  "baseline_CI": {
+    "run": 40586299701,
+    "job": 122478458200,
+    "source_revision": "ebfbfb935ed560b687ffed931c0db94889ff9ce0",
+    "url": "https://github.com/segaboy/ClasSICK-0.97/actions/runs/40586299701",
+    "profile": {
+      "schema_version": 1,
+      "source": {
+        "sha256": "7ac91905b3f30879c6cdeea51d4cdd7d75ac0a6de0ebe29db952215f2acb75ec",
+        "bytes": 2175742
+      },
+      "bounds": {
+        "start": "2026-10-27T21:27:54.0000000Z",
+        "end": "2026-10-27T21:41:48.0000000Z",
+        "interval": "half-open [start, end)"
+      },
+      "status": "pass",
+      "profiles": [
+        {
+          "name": "media-verification/clang-hosted/debug-a",
+          "path": "D:/a/ClasSICK-0.97/ClasSICK-0.97/build/media-verification/clang-hosted/debug-a",
+          "path_key": "d:/a/classick-0.97/classick-0.97/build/media-verification/clang-hosted/debug-a",
+          "status": "pass",
+          "open_line": 3668,
+          "close_line": 4442,
+          "open_utc": "2026-10-27T21:28:13.5844154Z",
+          "close_utc": "2026-10-27T21:29:02.5707741Z",
+          "log_span_seconds": 48.9863587,
+          "reported_real_seconds": 48.99,
+          "summed_case_seconds": 48.9,
+          "counts": {
+            "expected": 385,
+            "executed": 385,
+            "passed": 385,
+            "failed": 0,
+            "skipped_or_not_run": 0
+          },
+          "identity_sha256": "b0a5813da0f5b8ecd27f904e555bee82aae2fe1771d868315af65898f70231da",
+          "nonpassing_cases": [],
+          "occurrence": 1,
+          "id": "media-verification/clang-hosted/debug-a#1"
+        },
+        {
+          "name": "media-verification/clang-hosted/debug-b",
+          "path": "D:/a/ClasSICK-0.97/ClasSICK-0.97/build/media-verification/clang-hosted/debug-b",
+          "path_key": "d:/a/classick-0.97/classick-0.97/build/media-verification/clang-hosted/debug-b",
+          "status": "pass",
+          "open_line": 5008,
+          "close_line": 5782,
+          "open_utc": "2026-10-27T21:29:19.9327010Z",
+          "close_utc": "2026-10-27T21:30:08.5122635Z",
+          "log_span_seconds": 48.5795625,
+          "reported_real_seconds": 48.58,
+          "summed_case_seconds": 48.5,
+          "counts": {
+            "expected": 385,
+            "executed": 385,
+            "passed": 385,
+            "failed": 0,
+            "skipped_or_not_run": 0
+          },
+          "identity_sha256": "b0a5813da0f5b8ecd27f904e555bee82aae2fe1771d868315af65898f70231da",
+          "nonpassing_cases": [],
+          "occurrence": 1,
+          "id": "media-verification/clang-hosted/debug-b#1"
+        },
+        {
+          "name": "media-verification/clang-hosted/release",
+          "path": "D:/a/ClasSICK-0.97/ClasSICK-0.97/build/media-verification/clang-hosted/release",
+          "path_key": "d:/a/classick-0.97/classick-0.97/build/media-verification/clang-hosted/release",
+          "status": "pass",
+          "open_line": 6349,
+          "close_line": 7123,
+          "open_utc": "2026-10-27T21:30:32.0719231Z",
+          "close_utc": "2026-10-27T21:31:04.9597770Z",
+          "log_span_seconds": 32.8878539,
+          "reported_real_seconds": 32.89,
+          "summed_case_seconds": 32.82,
+          "counts": {
+            "expected": 385,
+            "executed": 385,
+            "passed": 385,
+            "failed": 0,
+            "skipped_or_not_run": 0
+          },
+          "identity_sha256": "b0a5813da0f5b8ecd27f904e555bee82aae2fe1771d868315af65898f70231da",
+          "nonpassing_cases": [],
+          "occurrence": 1,
+          "id": "media-verification/clang-hosted/release#1"
+        },
+        {
+          "name": "media-verification/clang-hosted/i686",
+          "path": "D:/a/ClasSICK-0.97/ClasSICK-0.97/build/media-verification/clang-hosted/i686",
+          "path_key": "d:/a/classick-0.97/classick-0.97/build/media-verification/clang-hosted/i686",
+          "status": "pass",
+          "open_line": 7643,
+          "close_line": 8345,
+          "open_utc": "2026-10-27T21:31:20.5263174Z",
+          "close_utc": "2026-10-27T21:32:00.9266877Z",
+          "log_span_seconds": 40.4003703,
+          "reported_real_seconds": 40.4,
+          "summed_case_seconds": 40.37,
+          "counts": {
+            "expected": 349,
+            "executed": 349,
+            "passed": 349,
+            "failed": 0,
+            "skipped_or_not_run": 0
+          },
+          "identity_sha256": "f552a1fb62c50916b5862c2f47eae8bd43236355905788bf9be39805e8c44e97",
+          "nonpassing_cases": [],
+          "occurrence": 1,
+          "id": "media-verification/clang-hosted/i686#1"
+        },
+        {
+          "name": "media-verification/clang-hosted/sanitized",
+          "path": "D:/a/ClasSICK-0.97/ClasSICK-0.97/build/media-verification/clang-hosted/sanitized",
+          "path_key": "d:/a/classick-0.97/classick-0.97/build/media-verification/clang-hosted/sanitized",
+          "status": "pass",
+          "open_line": 8915,
+          "close_line": 9689,
+          "open_utc": "2026-10-27T21:32:31.3480992Z",
+          "close_utc": "2026-10-27T21:33:58.4896775Z",
+          "log_span_seconds": 87.1415783,
+          "reported_real_seconds": 87.14,
+          "summed_case_seconds": 86.69,
+          "counts": {
+            "expected": 385,
+            "executed": 385,
+            "passed": 385,
+            "failed": 0,
+            "skipped_or_not_run": 0
+          },
+          "identity_sha256": "b0a5813da0f5b8ecd27f904e555bee82aae2fe1771d868315af65898f70231da",
+          "nonpassing_cases": [],
+          "occurrence": 1,
+          "id": "media-verification/clang-hosted/sanitized#1"
+        },
+        {
+          "name": "media-verification/gcc-debug-a",
+          "path": "D:/a/ClasSICK-0.97/ClasSICK-0.97/build/media-verification/gcc-debug-a",
+          "path_key": "d:/a/classick-0.97/classick-0.97/build/media-verification/gcc-debug-a",
+          "status": "pass",
+          "open_line": 10263,
+          "close_line": 11003,
+          "open_utc": "2026-10-27T21:34:27.6063782Z",
+          "close_utc": "2026-10-27T21:35:10.8973127Z",
+          "log_span_seconds": 43.2909345,
+          "reported_real_seconds": 43.29,
+          "summed_case_seconds": 43.11,
+          "counts": {
+            "expected": 368,
+            "executed": 368,
+            "passed": 368,
+            "failed": 0,
+            "skipped_or_not_run": 0
+          },
+          "identity_sha256": "2e3cc81353caaf24b83a0ed974faa350afc7bfce2cb45ed39ea5630d79ddd7cc",
+          "nonpassing_cases": [],
+          "occurrence": 1,
+          "id": "media-verification/gcc-debug-a#1"
+        },
+        {
+          "name": "media-verification/gcc-debug-b",
+          "path": "D:/a/ClasSICK-0.97/ClasSICK-0.97/build/media-verification/gcc-debug-b",
+          "path_key": "d:/a/classick-0.97/classick-0.97/build/media-verification/gcc-debug-b",
+          "status": "pass",
+          "open_line": 11546,
+          "close_line": 12286,
+          "open_utc": "2026-10-27T21:35:30.6162046Z",
+          "close_utc": "2026-10-27T21:36:14.0461658Z",
+          "log_span_seconds": 43.4299612,
+          "reported_real_seconds": 43.43,
+          "summed_case_seconds": 43.22,
+          "counts": {
+            "expected": 368,
+            "executed": 368,
+            "passed": 368,
+            "failed": 0,
+            "skipped_or_not_run": 0
+          },
+          "identity_sha256": "2e3cc81353caaf24b83a0ed974faa350afc7bfce2cb45ed39ea5630d79ddd7cc",
+          "nonpassing_cases": [],
+          "occurrence": 1,
+          "id": "media-verification/gcc-debug-b#1"
+        },
+        {
+          "name": "media-verification/gcc-release",
+          "path": "D:/a/ClasSICK-0.97/ClasSICK-0.97/build/media-verification/gcc-release",
+          "path_key": "d:/a/classick-0.97/classick-0.97/build/media-verification/gcc-release",
+          "status": "pass",
+          "open_line": 12829,
+          "close_line": 13569,
+          "open_utc": "2026-10-27T21:36:51.2721173Z",
+          "close_utc": "2026-10-27T21:37:24.2978703Z",
+          "log_span_seconds": 33.025753,
+          "reported_real_seconds": 33.02,
+          "summed_case_seconds": 32.87,
+          "counts": {
+            "expected": 368,
+            "executed": 368,
+            "passed": 368,
+            "failed": 0,
+            "skipped_or_not_run": 0
+          },
+          "identity_sha256": "2e3cc81353caaf24b83a0ed974faa350afc7bfce2cb45ed39ea5630d79ddd7cc",
+          "nonpassing_cases": [],
+          "occurrence": 1,
+          "id": "media-verification/gcc-release#1"
+        },
+        {
+          "name": "media-verification/gcc-i686",
+          "path": "D:/a/ClasSICK-0.97/ClasSICK-0.97/build/media-verification/gcc-i686",
+          "path_key": "d:/a/classick-0.97/classick-0.97/build/media-verification/gcc-i686",
+          "status": "pass",
+          "open_line": 14066,
+          "close_line": 14734,
+          "open_utc": "2026-10-27T21:37:44.2059693Z",
+          "close_utc": "2026-10-27T21:38:15.9425119Z",
+          "log_span_seconds": 31.7365426,
+          "reported_real_seconds": 31.74,
+          "summed_case_seconds": 31.69,
+          "counts": {
+            "expected": 332,
+            "executed": 332,
+            "passed": 332,
+            "failed": 0,
+            "skipped_or_not_run": 0
+          },
+          "identity_sha256": "e46ec165d48ff34287c8ffe1c5e0fc4274b22b66c7494e99809707e910a6e209",
+          "nonpassing_cases": [],
+          "occurrence": 1,
+          "id": "media-verification/gcc-i686#1"
+        }
+      ],
+      "top_slow_cases": [
+        {
+          "profile": "media-verification/clang-hosted/i686#1",
+          "number": 330,
+          "name": "release.evidence-locator",
+          "outcome": "Passed",
+          "seconds": 11.16,
+          "line": 8303,
+          "utc": "2026-10-27T21:31:58.7377565Z",
+          "text": "330/349 Test #330: release.evidence-locator ............   Passed   11.16 sec"
+        },
+        {
+          "profile": "media-verification/clang-hosted/sanitized#1",
+          "number": 209,
+          "name": "native-keyboard.failure",
+          "outcome": "Passed",
+          "seconds": 11.15,
+          "line": 9333,
+          "utc": "2026-10-27T21:33:10.8516394Z",
+          "text": "209/385 Test #209: native-keyboard.failure .............   Passed   11.15 sec"
+        },
+        {
+          "profile": "media-verification/clang-hosted/sanitized#1",
+          "number": 243,
+          "name": "native-loop.failure",
+          "outcome": "Passed",
+          "seconds": 9.52,
+          "line": 9401,
+          "utc": "2026-10-27T21:33:25.4933692Z",
+          "text": "243/385 Test #243: native-loop.failure .................   Passed    9.52 sec"
+        },
+        {
+          "profile": "media-verification/clang-hosted/debug-a#1",
+          "number": 366,
+          "name": "release.evidence-locator",
+          "outcome": "Passed",
+          "seconds": 7.64,
+          "line": 4400,
+          "utc": "2026-10-27T21:29:01.4031622Z",
+          "text": "366/385 Test #366: release.evidence-locator ............   Passed    7.64 sec"
+        },
+        {
+          "profile": "media-verification/gcc-debug-b#1",
+          "number": 349,
+          "name": "release.evidence-locator",
+          "outcome": "Passed",
+          "seconds": 7.62,
+          "line": 12244,
+          "utc": "2026-10-27T21:36:13.2359357Z",
+          "text": "349/368 Test #349: release.evidence-locator ............   Passed    7.62 sec"
+        },
+        {
+          "profile": "media-verification/clang-hosted/debug-b#1",
+          "number": 366,
+          "name": "release.evidence-locator",
+          "outcome": "Passed",
+          "seconds": 7.6,
+          "line": 5740,
+          "utc": "2026-10-27T21:30:07.6789434Z",
+          "text": "366/385 Test #366: release.evidence-locator ............   Passed    7.60 sec"
+        },
+        {
+          "profile": "media-verification/clang-hosted/release#1",
+          "number": 366,
+          "name": "release.evidence-locator",
+          "outcome": "Passed",
+          "seconds": 7.6,
+          "line": 7081,
+          "utc": "2026-10-27T21:31:04.2598775Z",
+          "text": "366/385 Test #366: release.evidence-locator ............   Passed    7.60 sec"
+        },
+        {
+          "profile": "media-verification/clang-hosted/sanitized#1",
+          "number": 366,
+          "name": "release.evidence-locator",
+          "outcome": "Passed",
+          "seconds": 7.57,
+          "line": 9647,
+          "utc": "2026-10-27T21:33:56.4394699Z",
+          "text": "366/385 Test #366: release.evidence-locator ............   Passed    7.57 sec"
+        },
+        {
+          "profile": "media-verification/gcc-debug-a#1",
+          "number": 349,
+          "name": "release.evidence-locator",
+          "outcome": "Passed",
+          "seconds": 7.53,
+          "line": 10961,
+          "utc": "2026-10-27T21:35:10.0854342Z",
+          "text": "349/368 Test #349: release.evidence-locator ............   Passed    7.53 sec"
+        },
+        {
+          "profile": "media-verification/gcc-release#1",
+          "number": 349,
+          "name": "release.evidence-locator",
+          "outcome": "Passed",
+          "seconds": 7.53,
+          "line": 13527,
+          "utc": "2026-10-27T21:37:23.6222428Z",
+          "text": "349/368 Test #349: release.evidence-locator ............   Passed    7.53 sec"
+        }
+      ],
+      "total_reported_ctest_wall_seconds": 409.48,
+      "selected_interval_seconds": 834.0,
+      "unattributed_seconds": 424.52,
+      "notes": [
+        "summed_case_seconds adds per-case durations; under parallel CTest it may exceed reported_real_seconds and is not wall time.",
+        "unattributed_seconds = selected interval minus reported CTest real time; it includes configure, build, object audits and other step work and is not proven waste.",
+        "No speedup, duplicate-check, quota or historical compatibility claim is made."
+      ]
+    },
+    "independent_crosscheck": {
+      "simple_log_case_rows": 3325,
+      "nine_profile_totals_seconds": 409.48
+    }
+  },
+  "controlled_comparison": {
+    "profile": "Fresh localClang Debug,Windows adaptersOFF;368 headless tests",
+    "order": [
+      1,
+      2,
+      2,
+      1
+    ],
+    "results": [
+      {
+        "jobs": 1,
+        "round": 1,
+        "elapsed_seconds": 60.782,
+        "exit_code": 0,
+        "tests": 368,
+        "failures": "0",
+        "outcome_identity": "d83574af3c5db209687b1094ccb7fbc65f3e756498995d330b4079f09713878d",
+        "junit": "jobs1-round1.xml"
+      },
+      {
+        "jobs": 2,
+        "round": 2,
+        "elapsed_seconds": 24.985,
+        "exit_code": 0,
+        "tests": 368,
+        "failures": "0",
+        "outcome_identity": "d83574af3c5db209687b1094ccb7fbc65f3e756498995d330b4079f09713878d",
+        "junit": "jobs2-round2.xml"
+      },
+      {
+        "jobs": 2,
+        "round": 3,
+        "elapsed_seconds": 25.312,
+        "exit_code": 0,
+        "tests": 368,
+        "failures": "0",
+        "outcome_identity": "d83574af3c5db209687b1094ccb7fbc65f3e756498995d330b4079f09713878d",
+        "junit": "jobs2-round3.xml"
+      },
+      {
+        "jobs": 1,
+        "round": 4,
+        "elapsed_seconds": 44.953,
+        "exit_code": 0,
+        "tests": 368,
+        "failures": "0",
+        "outcome_identity": "d83574af3c5db209687b1094ccb7fbc65f3e756498995d330b4079f09713878d",
+        "junit": "jobs1-round4.xml"
+      }
+    ],
+    "same_case_outcome_identity": true,
+    "limitation": "One local machine/profile,cache/order/load vary. Not a whole-stage/CI speedup or Codex-quota saving."
+  },
+  "new_checks": {
+    "profile_analyzer": "7 unittest methods and multiple malformed/failure/bounds subcases pass after selecting writable TEMP/TMP;initial environment permission failure retained privately.",
+    "existing_log_reproduction": "9complete profiles/3325executed passing cases/409.48reported CTestreal seconds from834stage seconds;424.52seconds unattributed includes configure/build/audits,not proven waste.",
+    "Windows_adapter_profile": {
+      "exit_code": 0,
+      "elapsed_seconds": 39.75,
+      "tests": 385
+    },
+    "PowerShell_syntax": "PASS:bothmodified verifiers parsed without errors",
+    "repository_guard": "PASS:1384text/source files,74registeredPNG,twoGIF;links/JSON/payload/commonsecret checks",
+    "preservation": "PASS:unrelated trackedbytes,24originals,heldbrief,tags and exactindex allowlists",
+    "new_CI": "pending",
+    "case_inventory_comparison": [
+      {
+        "file": "jobs1-round1.xml",
+        "count": 368,
+        "same_baseline_case_outcome_identity": true
+      },
+      {
+        "file": "jobs2-round2.xml",
+        "count": 368,
+        "same_baseline_case_outcome_identity": true
+      },
+      {
+        "file": "jobs2-round3.xml",
+        "count": 368,
+        "same_baseline_case_outcome_identity": true
+      },
+      {
+        "file": "jobs1-round4.xml",
+        "count": 368,
+        "same_baseline_case_outcome_identity": true
+      },
+      {
+        "file": "ui-jobs2.xml",
+        "count": 385,
+        "same_baseline_case_outcome_identity": true
+      }
+    ],
+    "workflow_failure_preservation": [
+      {
+        "kind": "pass",
+        "exit_code": 0,
+        "timing_result": "pass",
+        "elapsed_nonnegative": true
+      },
+      {
+        "kind": "failure",
+        "exit_code": 1,
+        "timing_result": "failed",
+        "elapsed_nonnegative": true
+      }
+    ]
+  },
+  "worker": {
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "input_bytes": 55338,
+    "input_sha256": "c56ccc108864e04b841bea7eb4fa1effa481d31d9d26b2f861b7c7ec66a4a0ad",
+    "desktop_paused": true,
+    "max_seconds": 240,
+    "tools_permitted": "None;stdin completepacket",
+    "excluded_inputs": "HQ,manuals,credentials,untracked research originals,held UART implementation/test bodies",
+    "round": "primary",
+    "worker": "claude",
+    "exit_code": null,
+    "outer_timeout": true,
+    "elapsed_seconds": 240.06,
+    "stderr_bytes": 0,
+    "actual_tools_used": [],
+    "worker_tests_executed": [],
+    "complete_response": false,
+    "recovered_artifacts": {
+      "scripts/Profile-WindowsCI.py": 220,
+      "tests/ci-profile.py_prefix": 97
+    },
+    "lead_disposition": "Outer240s cap reached;recover/adopt complete220line profiler and97line testprefix from text deltas. Lead completes synthetic tests and corrects skipped-case executed accounting. No retry/fan-out;cost/remaining quota unreported in incomplete capture."
+  },
+  "changes": {
+    "parallelism": "CTEST_PARALLEL_LEVEL=2 scoped only to existing Windows loaded verification step;profiles still serial,CTest fixture dependencies retained.",
+    "observability": "9ci-tests.xml reports plus stage UTC/Stopwatch/revision/status artifact,including failed-stage evidence. Existing nonzero checks remain.",
+    "profiler": "Reusable offline timestamp-bounded rawGHlog parser;incomplete/mismatched/duplicate/empty evidence refuses and failed/skipped evidence stays nonpassing."
+  },
+  "remaining_opportunities": [
+    {
+      "option": "Further parallelism or independent compiler-profile jobs",
+      "status": "Defer until complete CI comparison and contention evidence;fresh twins and dependent image/media checks remain mandatory."
+    },
+    {
+      "option": "Reduce process startup/object audit overhead",
+      "status": "Unattributed time is not duplication proof. Add deeper timing only if still a meaningful bottleneck."
+    },
+    {
+      "option": "Cache/skip repeated suites",
+      "status": "Not adopted;required coverage and fresh reproducibility retained."
+    }
+  ],
+  "scope": "No production code,VM/emulator/desktop/reference/hardware run,release or new historical/compatibility claim.24 research originals,held brief,UART bodies,IDs,tags,assets and instruction archives retained.",
+  "measurements_note": "Per-case summed durations are not wall time under concurrency. Provider wait/cost does not establish Codex quota savings."
+}

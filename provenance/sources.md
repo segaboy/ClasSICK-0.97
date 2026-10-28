@@ -4788,3 +4788,15 @@ new capture;no guest implementation fix or release pass inferred.
 ## SRC-0517 - Compact instruction draft and lead integration
 
 2026-10-28. One Claude Opus5.5 Low public-only draft at11ad7a9,72.52s/116236input bytes,zero tools/commands/writes/tests. Two usable proposed files adopted;16586result characters exceed15000cap. Lead preserves later parity supersession,corrects platform/boot/GIF/UART/exposure/control wording and integrates prospective canonical record rules. No retry,fan-out,new qualification or private HQ input. Complete frozen packets/captures stay outside Git; archival hashes,coverage navigation and actual verification are in the [receipt](../docs/development/workflow-compaction.json). Smaller files are not a measured quota saving.
+
+## SRC-0518 - Owner-authorized Windows CI profiling
+
+2026-10-28. Owner: "OK, move on to profiling the slow Windows CI stage. Find ways to shorten it without removing required checks, and keep desktop tests paused." Scope covers hosted CI/tooling measurements and bounded scheduling changes;no production/driver,desktop,VM/emulator,reference,hardware or release expansion. [Canonical receipt](../docs/development/windows-ci-profile.json).
+
+## SRC-0519 - Existing CI profile and controlled scheduling measurements
+
+2026-10-28. Original successful Windows run40586299701/sourceebfbfb9:834-second loaded-verification step,9profiles/3325executed passing cases,409.48reported CTestreal seconds. Complete prior log retained privately and reproduced with independent case/count cross-checks. Local368case same-build comparison order1/2/2/1 retains identical name/outcome identity. Bounded two-case concurrency proposed for the one CIstep;all compilers/profiles/fresh twins/sanitizer controls/object/media/fault checks retained. Stage timer and9JUnit reports add observability. PinnedCMake4.4.4 interface prose reviewed locally;no manual examples copied or forwarded. Whole-CI validation/result and limits are in the [receipt](../docs/development/windows-ci-profile.json);no generalized speedup or quota saving inferred.
+
+## SRC-0520 - Bounded CI profiler artifact recovery and review
+
+2026-10-28. Claude Opus5.5 Low receives55338 reviewed-public/original bytes,zero tools/writes/commands/tests. Outer240.06s limit ends incomplete response;complete220line parser and97line testprefix recovered from text deltas. Lead adopts/completes tests,corrects skipped-case execution accounting and independently checks real CI counts/timing. No retry or extra provider;capture has no final usage/cost figure. New tool is original developer evidence analysis,not Mac historical/runtime behavior. [Receipt](../docs/development/windows-ci-profile.json).

@@ -14,7 +14,7 @@ function Build-And-Test([string]$name, [string[]]$extra) {
     if ($LASTEXITCODE -ne 0) { throw "Configure failed: $name" }
     & cmake --build $build
     if ($LASTEXITCODE -ne 0) { throw "Build failed: $name" }
-    & ctest --test-dir $build --output-on-failure --no-tests=error
+    & ctest --test-dir $build --output-on-failure --no-tests=error --output-junit (Join-Path $build 'ci-tests.xml')
     if ($LASTEXITCODE -ne 0) { throw "Conformance failed: $name" }
 }
 try {

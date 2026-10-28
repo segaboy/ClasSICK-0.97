@@ -26,7 +26,7 @@ try {
         if($LASTEXITCODE -ne 0){throw "GCC configure failed: $name"}
         & cmake --build $directory
         if($LASTEXITCODE -ne 0){throw "GCC build failed: $name"}
-        & ctest --test-dir $directory --output-on-failure --no-tests=error
+        & ctest --test-dir $directory --output-on-failure --no-tests=error --output-junit (Join-Path $directory 'ci-tests.xml')
         if($LASTEXITCODE -ne 0){throw "GCC conformance failed: $name"}
     }
     $hostedHashes=[ordered]@{}
