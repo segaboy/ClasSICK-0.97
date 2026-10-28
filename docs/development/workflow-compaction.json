@@ -1,0 +1,285 @@
+{
+  "date": "2026-10-28",
+  "classification": "project-verification",
+  "source_ids": [
+    "SRC-0516",
+    "SRC-0517"
+  ],
+  "authority": "Owner requests workflow improvements:compact AGENTS/reduce duplicate recordkeeping,preserve every rule/history,desktop tests paused.",
+  "public_baseline_revision": "11ad7a937e58f752cfecda8b6805c76bc7f45ff7",
+  "result": "Adopt compact active public instructions and orchestration,immutable historical Git snapshots,and prospective canonical receipt/index rules. Private HQ compacted locally;private facts and identities not included here.",
+  "canonical_policy": "docs/development/recordkeeping.md",
+  "archives": [
+    {
+      "repository": "public",
+      "old_path": "AGENTS.md",
+      "archive_path": "AGENTS-history-2026-10-28.md",
+      "baseline_revision": "11ad7a937e58f752cfecda8b6805c76bc7f45ff7",
+      "working_sha256": "216ce557e6f0011ed4d5a8591895a6ce0ec649c90ea4ae51561701605ce4286a",
+      "working_bytes": 94979,
+      "git_sha256": "216ce557e6f0011ed4d5a8591895a6ce0ec649c90ea4ae51561701605ce4286a",
+      "git_bytes": 94979,
+      "git_blob": "bd25aa9dec78451482871a15d00ef4c05fa80a47",
+      "lines": 1042,
+      "archive_sha256": "216ce557e6f0011ed4d5a8591895a6ce0ec649c90ea4ae51561701605ce4286a",
+      "archive_bytes": 94979,
+      "relative_link_base_preserved": true
+    },
+    {
+      "repository": "public",
+      "old_path": "docs/development/agent-orchestration.md",
+      "archive_path": "docs/development/agent-orchestration-history-2026-10-28.md",
+      "baseline_revision": "11ad7a937e58f752cfecda8b6805c76bc7f45ff7",
+      "working_sha256": "f10b64835bd4ab8a30ef639167364d16c66317e45230749fe7b6c0640431ac14",
+      "working_bytes": 54124,
+      "git_sha256": "f10b64835bd4ab8a30ef639167364d16c66317e45230749fe7b6c0640431ac14",
+      "git_bytes": 54124,
+      "git_blob": "ee40e9b7e1f160f07137d8cc970b9bd23c05857d",
+      "lines": 489,
+      "archive_sha256": "f10b64835bd4ab8a30ef639167364d16c66317e45230749fe7b6c0640431ac14",
+      "archive_bytes": 54124,
+      "relative_link_base_preserved": true
+    }
+  ],
+  "context_metrics": [
+    {
+      "repository": "public",
+      "path": "AGENTS.md",
+      "before_Git_LF_bytes": 94979,
+      "after_bytes": 9327,
+      "before_lines": 1042,
+      "after_lines": 70,
+      "reduction_percent": 90.18
+    },
+    {
+      "repository": "public",
+      "path": "docs/development/agent-orchestration.md",
+      "before_Git_LF_bytes": 54124,
+      "after_bytes": 6988,
+      "before_lines": 489,
+      "after_lines": 45,
+      "reduction_percent": 87.09
+    }
+  ],
+  "worker": {
+    "round": "draft",
+    "worker": "claude",
+    "exit_code": 0,
+    "outer_timeout": false,
+    "elapsed_seconds": 72.52,
+    "input_bytes": 116236,
+    "input_sha256": "25fb753dbea12acfd26e177c6eb5a341153f86941bbe01842159a6b660737a77",
+    "stderr_bytes": 0,
+    "model": "claude-opus-5-5",
+    "effort": "low",
+    "permitted_inputs": "Complete reviewed public AGENTS and selected public orchestration sections only;no HQ,manuals,credentials,research originals or held implementation/test bodies",
+    "tools_used": [],
+    "tests_executed": [],
+    "num_turns": 1,
+    "reported_session_list_USD": 0.5330482000000001,
+    "result_characters": 16586,
+    "requested_max_characters": 15000,
+    "character_cap_exceeded": true,
+    "disposition": "Adopt two proposed files with explicit lead corrections;one call,no retry or second provider."
+  },
+  "coverage_index": [
+    {
+      "rule": "Name, GPL, inbound=outbound",
+      "old_lines": "936,950-953",
+      "new_section": "AGENTS Identity"
+    },
+    {
+      "rule": "Clean room, published editions, excluded drafts/cached summary, PDF outside Git",
+      "old_lines": "937-943,879-888,145-146",
+      "new_section": "AGENTS Clean room"
+    },
+    {
+      "rule": "Lead-only pages, paraphrases to workers",
+      "old_lines": "142-151",
+      "new_section": "AGENTS Clean room; ORCH Authority"
+    },
+    {
+      "rule": "Black-box platforms, no firmware internals/emulator source, FAT32 terms, firmware eligibility",
+      "old_lines": "863-877,902-903,915-921,996-1004",
+      "new_section": "AGENTS Clean room"
+    },
+    {
+      "rule": "Copyable research prompts",
+      "old_lines": "738-739",
+      "new_section": "AGENTS Clean room"
+    },
+    {
+      "rule": "Freestanding C, specs/provenance/tests, fixtures",
+      "old_lines": "944-949",
+      "new_section": "AGENTS Engineering"
+    },
+    {
+      "rule": "Native performance, size budgets deferred",
+      "old_lines": "192-198,872-874",
+      "new_section": "AGENTS Engineering"
+    },
+    {
+      "rule": "Native parity; third-party native app gate",
+      "old_lines": "422-434,820-831",
+      "new_section": "AGENTS Engineering"
+    },
+    {
+      "rule": "512x342 centered unscaled; 640x480 checked",
+      "old_lines": "460-471",
+      "new_section": "AGENTS Engineering"
+    },
+    {
+      "rule": "Unified x64 BIOS/UEFI goal",
+      "old_lines": "220-222",
+      "new_section": "AGENTS Engineering"
+    },
+    {
+      "rule": "286 hardware profile/lane",
+      "old_lines": "172-200",
+      "new_section": "AGENTS Engineering"
+    },
+    {
+      "rule": "UART role separation",
+      "old_lines": "375-383,923-927",
+      "new_section": "AGENTS Engineering/Preservation"
+    },
+    {
+      "rule": "System1 both directions",
+      "old_lines": "619-630",
+      "new_section": "AGENTS Gates"
+    },
+    {
+      "rule": "B2 criterion 6",
+      "old_lines": "898-903",
+      "new_section": "AGENTS Gates"
+    },
+    {
+      "rule": "Paired drag/release blocker, Release2 not ready, System unreleased",
+      "old_lines": "3-140,248,436-441",
+      "new_section": "AGENTS Gates"
+    },
+    {
+      "rule": "Three-scope trial approval, VM/session/preference preservation",
+      "old_lines": "133-151,107-112",
+      "new_section": "AGENTS Trials"
+    },
+    {
+      "rule": "24 originals, held brief, assets, no reset/stash/clean",
+      "old_lines": "149-150,688-696",
+      "new_section": "AGENTS Preservation"
+    },
+    {
+      "rule": "Screenshots/GIF exception",
+      "old_lines": "228,260-269",
+      "new_section": "AGENTS Preservation"
+    },
+    {
+      "rule": "OneNote/wiki retired",
+      "old_lines": "393-396,1036-1042",
+      "new_section": "AGENTS Process; ORCH Records"
+    },
+    {
+      "rule": "HQ separation, workstation paths",
+      "old_lines": "1026-1035",
+      "new_section": "AGENTS Process"
+    },
+    {
+      "rule": "No extra chats/agents; protect Codex",
+      "old_lines": "240,1028-1029",
+      "new_section": "AGENTS Process; ORCH Dispatch"
+    },
+    {
+      "rule": "Honest status",
+      "old_lines": "1030-1031",
+      "new_section": "AGENTS Gates/Process"
+    },
+    {
+      "rule": "Worker permissions/exclusions",
+      "old_lines": "664-675,O42-46",
+      "new_section": "ORCH Authority"
+    },
+    {
+      "rule": "One primary, distinct second, quota",
+      "old_lines": "O36-38,O48-52",
+      "new_section": "ORCH Dispatch"
+    },
+    {
+      "rule": "Role qualifications",
+      "old_lines": "O66-74,O82,O84",
+      "new_section": "ORCH Roles"
+    },
+    {
+      "rule": "Argon4 High, agy/copilot controls",
+      "old_lines": "O37,O54-64",
+      "new_section": "ORCH CLI controls"
+    },
+    {
+      "rule": "Briefs, handoff, test accounting, integration",
+      "old_lines": "O76-81",
+      "new_section": "ORCH Handoff"
+    },
+    {
+      "rule": "Transcripts private, records",
+      "old_lines": "O83",
+      "new_section": "ORCH Records"
+    }
+  ],
+  "coverage_note": "Lead-reviewed navigation,not a formal proof of semantic equivalence. Immutable complete original instructions and unchanged binding policies preserve every historical rule/scope;later owner amendments still take precedence. Source-line groups refer to old public AGENTS;O prefix refers to old orchestration.",
+  "lead_corrections": [
+    "Use .md snapshots at the original directory level; archive canonical Git blobs exactly and preserve working copies outsideGit.",
+    "Preserve SRC-0217/0218 parity supersession: no whole-Mac-completion prerequisite for native counterparts; detailed feature contracts and broad third-party gate remain.",
+    "Do not imply Mini vMac platform clearance or forbid future separately admitted original-ROM interoperability.",
+    "Explicit source-exposure stop/disposition, Microsoft/manual-sample/asset exclusions and UART role boundary.",
+    "Two existing exact GIF identities,not one; physical/GUI/human and build/boot distinctions remain truthful.",
+    "No invented one-retry rule or blanket ban on reporting measured percentages; bounded concrete retries and supported usage claims only.",
+    "Preserve established Claude/Grok controls and dated routing/entitlement limitations; scope/control supersessions remain in immutable history.",
+    "HQ compacted locally with private durable charter/edition/storage/licensing/registry rules; no HQ input sent externally.",
+    "Clarify implementation-input exclusion versus separately admitted lawful black-box references,without granting source inspection,worker transfer or redistribution."
+  ],
+  "checks_executed": [
+    {
+      "name": "Original Git instruction snapshots match every byte and SHA-256",
+      "result": "PASS",
+      "count": 3
+    },
+    {
+      "name": "Snapshots remain at original directory levels; relative-link bases retained",
+      "result": "PASS",
+      "count": 3
+    },
+    {
+      "name": "Indexed public repository guard",
+      "result": "PASS",
+      "text_source_files": 1380,
+      "registered_PNG": 74,
+      "registered_GIF": 2,
+      "scope": "Existing links/JSON/rights-index and payload/common-secret checks;human source review remains separate."
+    },
+    {
+      "name": "Unrelated tracked bytes,24 originals,held brief,tags and staged allowlists",
+      "result": "PASS"
+    }
+  ],
+  "changed_records": "One canonical public receipt and new placement policy,source intake and reusable worker brief. No status/roadmap/progress-journal/wiki updates;private HQ required intake references this receipt.",
+  "preserved_rules": [
+    "Clean-room published editions and exposure disposition",
+    "Native68000/native x86 parity correction;feature-contract and third-party gates",
+    "System1 interoperability both directions;separate reference/physical/128K/edition/B2criterion6/source/role/human gates",
+    "Codex sole writer;one bounded external primary/optional distinct-risk second;Argon4High and qualified actual controls",
+    "24 research originals,held brief,UART boundaries,old IDs/records/assets/tags/releases",
+    "Permanent OneNote AND Gitwiki retirement",
+    "Required provenance/spec/test/implementation/ADR/rights and publication reviews",
+    "No change to implementation/CI/release/reference/hardware permissions;desktop trials remain paused"
+  ],
+  "scope_exclusions": [
+    "Production or driver changes",
+    "CI configuration/profiling changes",
+    "Software builds",
+    "Desktop input,VM,emulator,reference or hardware runs",
+    "Release creation/tag/publication",
+    "Research-original or held-brief edits"
+  ],
+  "performance_claim": "Smaller active instruction files are measured bytes,not measured loaded tokens,execution speedup or Codex quota savings. Archives add storage and are loaded only for relevant historical scope.",
+  "remaining_blockers": "Paired mouse/drag release qualification remains incomplete;286 evidence retained,not newly executed.",
+  "future_selection": "After owner resumes development,apply existing bounded release-diagnostic/independent286 routing and the proposed three-slice timing pilot without broadening gates."
+}

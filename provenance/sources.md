@@ -4780,3 +4780,11 @@ new capture;no guest implementation fix or release pass inferred.
 ## SRC-0515 - Bounded development-flow draft and lead review
 
 2026-10-27. Claude Opus5.5 Low36.12s/12218 reviewed-public bytes,zero tools/commands/writes/tests;draft exceeds150line/1100word caps. Lead adopts with timing/context/authority corrections. Six ranked opportunities and a three-slice measurement pilot are proposals only. No CI/runtime/policy rewrite,VM/emulator run,release or permission expansion. [Study](../docs/development/development-flow-study.md).
+
+## SRC-0516 - Owner-authorized instruction and recordkeeping compaction
+
+2026-10-28. Owner: "OK, implement the workflow improvements. Start with compacting AGENTS.md and reducing duplicate recordkeeping. Preserve all rules and history, and keep desktop tests paused." Documentation/process scope only. Active entries link byte-identical historical Git snapshots; one canonical receipt per meaningful slice, required records/IDs retained and indexes updated only for their changed facts. No runtime, CI, trial, release, source/role or compatibility gate expansion. [Canonical receipt](../docs/development/workflow-compaction.json); [record placement](../docs/development/recordkeeping.md).
+
+## SRC-0517 - Compact instruction draft and lead integration
+
+2026-10-28. One Claude Opus5.5 Low public-only draft at11ad7a9,72.52s/116236input bytes,zero tools/commands/writes/tests. Two usable proposed files adopted;16586result characters exceed15000cap. Lead preserves later parity supersession,corrects platform/boot/GIF/UART/exposure/control wording and integrates prospective canonical record rules. No retry,fan-out,new qualification or private HQ input. Complete frozen packets/captures stay outside Git; archival hashes,coverage navigation and actual verification are in the [receipt](../docs/development/workflow-compaction.json). Smaller files are not a measured quota saving.
