@@ -3,11 +3,12 @@
   "classification": "original-engineering-and-own-candidate-observation",
   "source_ids": [
     "SRC-0521",
-    "SRC-0522"
+    "SRC-0522",
+    "SRC-0523"
   ],
   "public_baseline_revision": "5b96dc76e49744fd3c7ecb19c149ba72c1c4e6bf",
   "authority": "Owner resumes release work and own isolated candidate tests. Existing three-scope trial permission retained. No release/tag/reference/hardware approval.",
-  "result": "Passive Mac activity and PC second-report diagnostic integrated;release usability remains failed/unqualified. Native Mac proof and new trials pending.",
+  "result": "Windows/Mac CI passes3361WindowsCTests;normal PC/refresh Mac bytes unchanged. Native idle Mac mirror and PC second-zero-report E2 controls pass. Held physical PC test completes without first-nonzero checkpoint. Mac attempted input produces coherent raw-changing/unstable-pair snapshot;capture unconfirmed and no motion queued. Release still unqualified.",
   "specifications": [
     "SPEC-0078",
     "SPEC-0079"
@@ -335,6 +336,91 @@
         "sha256": "21658b354a583597d29da663b4ea9119388461baf2074cb414a55ea709175823",
         "bytes": 258
       }
+    },
+    {
+      "name": "pc-first-motion",
+      "identity": {
+        "source": "2373430dcd71784e7288d7b981aa02a6cbd8106a",
+        "EFI": "9120a9686ba59092677d8ea0aba37cb535608712e61d1216d1db3bdff34a3fef",
+        "disk": "bd94c586437e2e11019df829a534878fa313805a0133267b3f7a3da6411df5ba",
+        "mode": "raw-motion",
+        "first_nonzero_report": true,
+        "normal_release_candidate": false,
+        "no_Windows_input_by_agent": true
+      },
+      "closed": {
+        "utc": "2026-10-28T13:54:36.6322111Z",
+        "cold_starts": 1,
+        "state": "poweroff",
+        "unregistered": true,
+        "existing_vm_inventory_preserved": true,
+        "running_state_preserved": true,
+        "post_trial_raw_roundtrip_equal": true,
+        "artifacts_retained": true,
+        "semantic_session_stop_observed": false,
+        "termination": "external poweroff from paused state"
+      },
+      "result": "Readiness confirmed,but missing observe.json caused recorder refusal and immediate cleanup. User reports window closed before test. Invalid input test;no result credited.",
+      "harness_correction": "Remove missing observer dependency;hold window until explicit done.request or600s active backstop.",
+      "passed": false
+    },
+    {
+      "name": "pc-held-motion",
+      "identity": {
+        "source": "2373430dcd71784e7288d7b981aa02a6cbd8106a",
+        "EFI": "9120a9686ba59092677d8ea0aba37cb535608712e61d1216d1db3bdff34a3fef",
+        "disk": "bd94c586437e2e11019df829a534878fa313805a0133267b3f7a3da6411df5ba",
+        "mode": "raw-motion",
+        "first_nonzero_report": true,
+        "normal_release_candidate": false,
+        "no_Windows_input_by_agent": true
+      },
+      "closed": {
+        "state": "poweroff",
+        "artifacts_retained": true,
+        "running_state_preserved": true,
+        "post_trial_raw_roundtrip_equal": true,
+        "startup_failed": true,
+        "guest_shutdown_claimed": false,
+        "existing_vm_inventory_preserved": true,
+        "unregistered": true
+      },
+      "result": "Direct launcher did not reach readiness;poweroff startup failed. Cleanup initially encountered an exited launcher/access-denied race;owned VM then unregistered after process exit,roundtrip and inventory checks. No input test.",
+      "passed": false
+    },
+    {
+      "name": "pc-held-cli",
+      "identity": {
+        "source": "2373430dcd71784e7288d7b981aa02a6cbd8106a",
+        "EFI": "9120a9686ba59092677d8ea0aba37cb535608712e61d1216d1db3bdff34a3fef",
+        "disk": "bd94c586437e2e11019df829a534878fa313805a0133267b3f7a3da6411df5ba",
+        "mode": "raw-motion",
+        "first_nonzero_report": true,
+        "normal_release_candidate": false,
+        "no_Windows_input_by_agent": true
+      },
+      "closed": {
+        "utc": "2026-10-28T14:04:41.4352145Z",
+        "cold_starts": 1,
+        "state": "poweroff",
+        "unregistered": true,
+        "existing_vm_inventory_preserved": true,
+        "running_state_preserved": true,
+        "post_trial_raw_roundtrip_equal": true,
+        "artifacts_retained": true,
+        "semantic_session_stop_observed": false,
+        "termination": "external poweroff from paused state"
+      },
+      "result": "Qualified CLI GUI launcher reached paused readiness. Owner confirms capture and5s physical motion;no first-nonzero checkpoint. Guest PC remained in own timer read,not diagnostic spin. No movement/drag pass.",
+      "passed": false,
+      "input_phase": {
+        "active_phase_seconds": 32.9484908,
+        "done_requested": true,
+        "phase_cap_seconds": 600,
+        "missing_observer_dependency_removed": true,
+        "no_Windows_input_sent": true
+      },
+      "post_registers_sha256": "d172a4293289ebed444cd9e2706f3d6dac75f0f178128b3d61587d68353d1ce6"
     }
   ],
   "remaining": [
@@ -515,5 +601,443 @@
       ],
       "refused_before_output": true
     }
-  ]
+  ],
+  "native_Mac": {
+    "classick-window-activity-mac": {
+      "manifest_sha256": "7a55ec7a38ea90ac9313db3f0cd4a2035a588cf611bb5a45ac129bf9e4e09fd1",
+      "profile": {
+        "optimization": "-Os",
+        "image_sha256": "d4718e33b275e9f3063847ca884b3cabff07b4137c90c9fef14f1e535f0b29d9",
+        "image_size": 65536,
+        "rom_used": 24528,
+        "native_data_bss": 520,
+        "workspace_begin": 32768,
+        "workspace_end": 33732,
+        "native_stack_base": 8448,
+        "native_stack_top": 32768,
+        "conservative_stack_bound": 5056,
+        "individual_frame_max": 284,
+        "corruption_controls": 8,
+        "irq_veneer_audit": [
+          {
+            "name": "cs_mac_window_via_irq",
+            "source": 1,
+            "bytes": 28,
+            "exact_opcodes_verified": true
+          },
+          {
+            "name": "cs_mac_window_scc_irq",
+            "source": 2,
+            "bytes": 28,
+            "exact_opcodes_verified": true
+          },
+          {
+            "name": "cs_mac_window_combined_irq",
+            "source": 3,
+            "bytes": 28,
+            "exact_opcodes_verified": true
+          }
+        ],
+        "resealed_native_corruption_controls": 78,
+        "activity_register_checkpoint": {
+          "format": "MAR1",
+          "entry": 4218576,
+          "spin": 4218648,
+          "bytes": 74,
+          "trace_address": 2820,
+          "exact_opcodes_verified": true,
+          "guest_memory_writes": 0,
+          "MMIO_accesses": 0,
+          "additional_RAM_bytes": 0,
+          "semantic_session_shutdown": false
+        }
+      },
+      "source_inputs_match": true
+    },
+    "classick-window-timer-refresh-mac": {
+      "manifest_sha256": "9da85259d67184f7283da90a5840a3b792c0b7dffda3f45e6387fa17aac260cb",
+      "profile": {
+        "optimization": "-Os",
+        "image_sha256": "a5fca8484098eaa8e8d87cee6371121df839a0d1aa70769a5c3580fd2943c3a9",
+        "image_size": 65536,
+        "rom_used": 23772,
+        "native_data_bss": 360,
+        "workspace_begin": 32768,
+        "workspace_end": 33732,
+        "native_stack_base": 8448,
+        "native_stack_top": 32768,
+        "conservative_stack_bound": 4992,
+        "individual_frame_max": 284,
+        "corruption_controls": 8,
+        "irq_veneer_audit": [
+          {
+            "name": "cs_mac_window_via_irq",
+            "source": 1,
+            "bytes": 28,
+            "exact_opcodes_verified": true
+          },
+          {
+            "name": "cs_mac_window_scc_irq",
+            "source": 2,
+            "bytes": 28,
+            "exact_opcodes_verified": true
+          },
+          {
+            "name": "cs_mac_window_combined_irq",
+            "source": 3,
+            "bytes": 28,
+            "exact_opcodes_verified": true
+          }
+        ],
+        "resealed_native_corruption_controls": 4
+      },
+      "source_inputs_match": true
+    }
+  },
+  "normal_Mac_refresh_byte_identity": true,
+  "native_instrumentation_cost": {
+    "ROM_used_delta": 756,
+    "static_RAM_delta": 160,
+    "conservative_frame_sum_delta": 64,
+    "individual_frame_max_unchanged": 284,
+    "runtime_timing_measured": false,
+    "normal_candidates_unchanged": true,
+    "full128K_fit_proven": false
+  },
+  "PC_second_report_control": {
+    "level": "E2 guest-device API only",
+    "identity": {
+      "source": "2373430dcd71784e7288d7b981aa02a6cbd8106a",
+      "EFI": "1af7c81dd817b93e2dab879ca22d7a03d4ee562e93b30290b9e08eab6b355a66",
+      "disk": "973e871633600fa13975fb46ec9129e22702143e3c2d507cd622ffa70dafc6cd",
+      "mode": "raw-report-later",
+      "normal_release_candidate": false,
+      "level": "E2"
+    },
+    "registers": {
+      "rip": 268620004,
+      "rsp": 486460360,
+      "r8": 4851309538073391153,
+      "r9": 8589934592,
+      "r10": 34359738368,
+      "r11": 0,
+      "r12": 0,
+      "r13": 1099511627947,
+      "r14": 343597383750,
+      "r15": 0
+    },
+    "decoded": {
+      "format": "CSPRPT01",
+      "packets": 2,
+      "errors": 0,
+      "raw_header": 8,
+      "raw_x": 0,
+      "raw_y": 0,
+      "dx": 0,
+      "dy": 0,
+      "buttons": 0,
+      "pointer": [
+        256,
+        171
+      ],
+      "window": [
+        80,
+        70
+      ],
+      "inputs": 0,
+      "dragging": false
+    },
+    "checkpoint_observed": true,
+    "own_spin": 268620002,
+    "PC_offset_in_pause_branch_loop": 2,
+    "closed": {
+      "utc": "2026-10-28T13:45:10.2154132Z",
+      "cold_starts": 1,
+      "state": "poweroff",
+      "unregistered": true,
+      "existing_vm_inventory_preserved": true,
+      "running_state_preserved": true,
+      "post_trial_raw_roundtrip_equal": true,
+      "artifacts_retained": true,
+      "semantic_session_stop_observed": false,
+      "termination": "external poweroff from paused state"
+    },
+    "human_input_qualified": false
+  },
+  "Mac_trials": [
+    {
+      "name": "snow-activity",
+      "identity": "d4718e33b275e9f3063847ca884b3cabff07b4137c90c9fef14f1e535f0b29d9",
+      "closed": {
+        "host_seconds": 240.4690819,
+        "cap_seconds": 240,
+        "pid": 59932,
+        "process_exited": true,
+        "forced_cleanup": true,
+        "guest_shutdown_claimed": false,
+        "ROM_sha256": "d4718e33b275e9f3063847ca884b3cabff07b4137c90c9fef14f1e535f0b29d9"
+      },
+      "result": "Own scene booted;final mirror not captured before240s cleanup. Incomplete observation,not a failure of sampler."
+    },
+    {
+      "name": "snow-baseline",
+      "identity": "d4718e33b275e9f3063847ca884b3cabff07b4137c90c9fef14f1e535f0b29d9",
+      "registers": {
+        "d0": 1296126513,
+        "d1": 50000,
+        "d2": 0,
+        "d3": 0,
+        "d4": 0,
+        "d5": 0,
+        "d6": 0,
+        "d7": 0,
+        "a0": 0,
+        "a1": 0,
+        "a2": 0,
+        "a3": 0,
+        "a4": 0,
+        "a5": 0,
+        "a6": 0,
+        "pc": 4218648
+      },
+      "decoded": {
+        "pairs": 50000,
+        "pb_x_changes": 0,
+        "pb_y_changes": 0,
+        "dcd_a_changes": 0,
+        "dcd_b_changes": 0,
+        "button_changes": 0,
+        "nonzero_queued": 0,
+        "buttononly_queued": 0,
+        "losses": 0,
+        "first_previous": 0,
+        "first_s0": 0,
+        "first_s1": 0,
+        "first_reason": 0,
+        "first_service": 0,
+        "format": "MAR1",
+        "pc": 4218648,
+        "omitted_fields": [
+          "tag",
+          "version",
+          "bytes",
+          "stable_pairs",
+          "last_observed",
+          "previous_accepted"
+        ],
+        "limitation": "Register subset only;not a full MWA1 record or root-cause proof."
+      },
+      "method": "Lead transcription from visible original diagnostic register pane;verified D0/PC against native mirror and strict reader. AX text was stale and was excluded. No intentional mouse input.",
+      "closed": {
+        "host_seconds": 276.7974941,
+        "cap_seconds": 300,
+        "pid": 54800,
+        "process_exited": true,
+        "forced_cleanup": true,
+        "guest_shutdown_claimed": false,
+        "ROM_sha256": "d4718e33b275e9f3063847ca884b3cabff07b4137c90c9fef14f1e535f0b29d9"
+      },
+      "result": "Idle fallback at50000pairs,zero signal changes/queued reports/losses;baseline observer control only. No mouse movement or drag pass."
+    },
+    {
+      "name": "snow-physical-activity",
+      "identity": "d4718e33b275e9f3063847ca884b3cabff07b4137c90c9fef14f1e535f0b29d9",
+      "owner_observation": "I think I did? I do not think it captured the mouse.",
+      "human_capture_confirmed": false,
+      "method": "Visible original register-pane transcription at verified MAR1 spin;strict independent reader accepts. No agent mouse input;owner also moved the register panel. Exact intended gesture attribution remains uncertain.",
+      "registers": {
+        "d0": 1296126513,
+        "d1": 17817,
+        "d2": 1,
+        "d3": 1,
+        "d4": 0,
+        "d5": 0,
+        "d6": 0,
+        "d7": 0,
+        "a0": 0,
+        "a1": 1,
+        "a2": 2164212804,
+        "a3": 10439748,
+        "a4": 9389124,
+        "a5": 2,
+        "a6": 17817,
+        "pc": 4218648
+      },
+      "decoded": {
+        "pairs": 17817,
+        "pb_x_changes": 1,
+        "pb_y_changes": 1,
+        "dcd_a_changes": 0,
+        "dcd_b_changes": 0,
+        "button_changes": 0,
+        "nonzero_queued": 0,
+        "buttononly_queued": 0,
+        "losses": 1,
+        "first_previous": 2164212804,
+        "first_s0": 10439748,
+        "first_s1": 9389124,
+        "first_reason": 2,
+        "first_service": 17817,
+        "format": "MAR1",
+        "pc": 4218648,
+        "omitted_fields": [
+          "tag",
+          "version",
+          "bytes",
+          "stable_pairs",
+          "last_observed",
+          "previous_accepted"
+        ],
+        "limitation": "Register subset only;not a full MWA1 record or root-cause proof."
+      },
+      "closed": {
+        "host_seconds": 282.1121998,
+        "cap_seconds": 600,
+        "pid": 37024,
+        "process_exited": true,
+        "forced_cleanup": true,
+        "guest_shutdown_claimed": false,
+        "ROM_sha256": "d4718e33b275e9f3063847ca884b3cabff07b4137c90c9fef14f1e535f0b29d9"
+      },
+      "result": "Signals changed:PB4/PB5 observed once each;DCDa differs within first pair. First reason2 unstable pair at17817;zero queued motion. This is a changing-input observation,not proof of a root cause or usable movement."
+    }
+  ],
+  "screenshots": [
+    "docs/evidence/screenshots/2026-10-28/pc-physical-before.png",
+    "docs/evidence/screenshots/2026-10-28/pc-physical-clipped-pointer.png"
+  ],
+  "CI": {
+    "conclusion": "success",
+    "headSha": "2373430dcd71784e7288d7b981aa02a6cbd8106a",
+    "status": "completed",
+    "url": "https://github.com/segaboy/ClasSICK-0.97/actions/runs/40698810900",
+    "run": 40698810900,
+    "jobs": [
+      {
+        "completedAt": "2026-10-28T13:44:42Z",
+        "conclusion": "success",
+        "databaseId": 122852701562,
+        "name": "m68k-rom",
+        "startedAt": "2026-10-28T13:41:54Z",
+        "status": "completed",
+        "url": "https://github.com/segaboy/ClasSICK-0.97/actions/runs/40698810900/job/122852701562"
+      },
+      {
+        "completedAt": "2026-10-28T14:01:24Z",
+        "conclusion": "success",
+        "databaseId": 122852702168,
+        "name": "windows-bootstrap",
+        "startedAt": "2026-10-28T13:41:53Z",
+        "status": "completed",
+        "url": "https://github.com/segaboy/ClasSICK-0.97/actions/runs/40698810900/job/122852702168"
+      }
+    ],
+    "all_steps_success": true,
+    "profiles": [
+      {
+        "name": "media-verification/clang-hosted/debug-a",
+        "counts": {
+          "expected": 389,
+          "executed": 389,
+          "passed": 389,
+          "failed": 0,
+          "skipped_or_not_run": 0
+        },
+        "identity_sha256": "85340f91de480bff39bf13fcbb6f8a816d48b35d9cb50a9fb89aed9a56e85f21"
+      },
+      {
+        "name": "media-verification/clang-hosted/debug-b",
+        "counts": {
+          "expected": 389,
+          "executed": 389,
+          "passed": 389,
+          "failed": 0,
+          "skipped_or_not_run": 0
+        },
+        "identity_sha256": "85340f91de480bff39bf13fcbb6f8a816d48b35d9cb50a9fb89aed9a56e85f21"
+      },
+      {
+        "name": "media-verification/clang-hosted/release",
+        "counts": {
+          "expected": 389,
+          "executed": 389,
+          "passed": 389,
+          "failed": 0,
+          "skipped_or_not_run": 0
+        },
+        "identity_sha256": "85340f91de480bff39bf13fcbb6f8a816d48b35d9cb50a9fb89aed9a56e85f21"
+      },
+      {
+        "name": "media-verification/clang-hosted/i686",
+        "counts": {
+          "expected": 353,
+          "executed": 353,
+          "passed": 353,
+          "failed": 0,
+          "skipped_or_not_run": 0
+        },
+        "identity_sha256": "6caeefcd9f6e1b6d76a8a5299cb48a822a4b1d18969ba958af4224644152987a"
+      },
+      {
+        "name": "media-verification/clang-hosted/sanitized",
+        "counts": {
+          "expected": 389,
+          "executed": 389,
+          "passed": 389,
+          "failed": 0,
+          "skipped_or_not_run": 0
+        },
+        "identity_sha256": "85340f91de480bff39bf13fcbb6f8a816d48b35d9cb50a9fb89aed9a56e85f21"
+      },
+      {
+        "name": "media-verification/gcc-debug-a",
+        "counts": {
+          "expected": 372,
+          "executed": 372,
+          "passed": 372,
+          "failed": 0,
+          "skipped_or_not_run": 0
+        },
+        "identity_sha256": "bf0cff0f26d4bc43764d4c8ecc20810d36374b0db2f8d561f2daabfb9cda5645"
+      },
+      {
+        "name": "media-verification/gcc-debug-b",
+        "counts": {
+          "expected": 372,
+          "executed": 372,
+          "passed": 372,
+          "failed": 0,
+          "skipped_or_not_run": 0
+        },
+        "identity_sha256": "bf0cff0f26d4bc43764d4c8ecc20810d36374b0db2f8d561f2daabfb9cda5645"
+      },
+      {
+        "name": "media-verification/gcc-release",
+        "counts": {
+          "expected": 372,
+          "executed": 372,
+          "passed": 372,
+          "failed": 0,
+          "skipped_or_not_run": 0
+        },
+        "identity_sha256": "bf0cff0f26d4bc43764d4c8ecc20810d36374b0db2f8d561f2daabfb9cda5645"
+      },
+      {
+        "name": "media-verification/gcc-i686",
+        "counts": {
+          "expected": 336,
+          "executed": 336,
+          "passed": 336,
+          "failed": 0,
+          "skipped_or_not_run": 0
+        },
+        "identity_sha256": "f5271198e03a30a87fc3085111650c3d9dca96f7b5abed3865100678a11973b0"
+      }
+    ],
+    "executed_ctests": 3361,
+    "total_reported_ctest_wall_seconds": 277.48,
+    "stage_seconds": 724.0,
+    "comparison": "Four new CTests per profile;9profiles/3361executed passing cases. Existing required steps retained. Cross-run stage724s is not a causal speedup comparison."
+  },
+  "next": "Use the exact Mac raw endpoints to review sampling/recovery without changing admission from one observation;compare physical PC negative with device-control positive in the same boot before blaming the GUI or decoder."
 }

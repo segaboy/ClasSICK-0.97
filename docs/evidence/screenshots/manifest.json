@@ -1727,6 +1727,52 @@
         "No human confirmation in these automated trials.",
         "No physical Macintosh,System1,compatibility or release qualification."
       ]
+    },
+    {
+      "id": "2026-10-28-pc-physical-before",
+      "path": "docs/evidence/screenshots/2026-10-28/pc-physical-before.png",
+      "sha256": "7bd4dc9c78b1729f5d88da5f57ee1813666714caf17fce88913d97cee4abc5a7",
+      "bytes": 4850,
+      "width": 1024,
+      "height": 768,
+      "captured_on": "2026-10-28",
+      "target": "native-x86_64",
+      "caption": "PC physical trial before input:tiny cross in checkerboard center. No usable movement or drag qualification.",
+      "alt": "PC physical trial before input:tiny cross in checkerboard center. No usable movement or drag qualification.",
+      "source_revision": "3fab75ff8afdc09493684705dde94ebf5b8a1d9f",
+      "compiled_source_revision": "3fab75ff8afdc09493684705dde94ebf5b8a1d9f",
+      "evidence": "docs/evidence/screenshots/README.md",
+      "license": "GPL-3.0-or-later",
+      "rights": "Unmodified VBoxManage own1024x768 guest framebuffer export;original project scene/assets only,no desktop,emulator chrome,reference pixels or retouch.",
+      "input": "human-confirmed",
+      "limitations": [
+        "Owner confirms capture/movement attempt;does not confirm usable guest pointer.",
+        "The17 changed pixels suggest one clipped cross relocation;not calibrated motion,drag,release or restoration proof.",
+        "No physical hardware,System1,full128K or release qualification."
+      ]
+    },
+    {
+      "id": "2026-10-28-pc-physical-clipped-pointer",
+      "path": "docs/evidence/screenshots/2026-10-28/pc-physical-clipped-pointer.png",
+      "sha256": "b70ec8c601318a20084e0cc180e82d07adddced435de03483bc05620a294b3d4",
+      "bytes": 4840,
+      "width": 1024,
+      "height": 768,
+      "captured_on": "2026-10-28",
+      "target": "native-x86_64",
+      "caption": "PC physical trial later frame:cross clipped at lower-right edge after one jump;owner reports no visible pointer. Failed usability,not a successful drag.",
+      "alt": "PC physical trial later frame:cross clipped at lower-right edge after one jump;owner reports no visible pointer. Failed usability,not a successful drag.",
+      "source_revision": "3fab75ff8afdc09493684705dde94ebf5b8a1d9f",
+      "compiled_source_revision": "3fab75ff8afdc09493684705dde94ebf5b8a1d9f",
+      "evidence": "docs/evidence/screenshots/README.md",
+      "license": "GPL-3.0-or-later",
+      "rights": "Unmodified VBoxManage own1024x768 guest framebuffer export;original project scene/assets only,no desktop,emulator chrome,reference pixels or retouch.",
+      "input": "human-confirmed",
+      "limitations": [
+        "Owner confirms capture/movement attempt;does not confirm usable guest pointer.",
+        "The17 changed pixels suggest one clipped cross relocation;not calibrated motion,drag,release or restoration proof.",
+        "No physical hardware,System1,full128K or release qualification."
+      ]
     }
   ]
 }

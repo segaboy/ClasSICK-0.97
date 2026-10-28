@@ -62,3 +62,5 @@ See [storage and publication policy](../../development/screenshot-evidence.md). 
 - [PC raw device control,+1X;no GUI dragging pass.](2026-10-26/pc-raw-device-control.png) — [evidence](../../development/timer-and-pc-input.md).
 
 [2026-10-27 original refresh/PC negative input observations](2026-10-27/README.md):74PNG/twoGIF total;no successful-drag claim.
+
+[2026-10-28 PC physical input:before](2026-10-28/pc-physical-before.png) and [clipped pointer](2026-10-28/pc-physical-clipped-pointer.png). Failed usability;[canonical diagnostic evidence](../../development/release-resumption-evidence.json).
