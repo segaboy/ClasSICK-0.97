@@ -4,7 +4,8 @@
   "source_ids": [
     "SRC-0521",
     "SRC-0522",
-    "SRC-0523"
+    "SRC-0523",
+    "SRC-0524"
   ],
   "public_baseline_revision": "5b96dc76e49744fd3c7ecb19c149ba72c1c4e6bf",
   "authority": "Owner resumes release work and own isolated candidate tests. Existing three-scope trial permission retained. No release/tag/reference/hardware approval.",
@@ -1039,5 +1040,39 @@
     "stage_seconds": 724.0,
     "comparison": "Four new CTests per profile;9profiles/3361executed passing cases. Existing required steps retained. Cross-run stage724s is not a causal speedup comparison."
   },
-  "next": "Use the exact Mac raw endpoints to review sampling/recovery without changing admission from one observation;compare physical PC negative with device-control positive in the same boot before blaming the GUI or decoder."
+  "next": "Use the exact Mac raw endpoints to review sampling/recovery without changing admission from one observation;compare physical PC negative with device-control positive in the same boot before blaming the GUI or decoder.",
+  "bounded_followup_review": {
+    "provider": "xAI/Grok",
+    "requested_model": "grok-4.7",
+    "requested_effort": "low",
+    "resolved_model": null,
+    "execution": {
+      "round": "sampling-review",
+      "worker": "grok",
+      "exit_code": null,
+      "outer_timeout": true,
+      "elapsed_seconds": 241.05,
+      "input_bytes": 21594,
+      "input_sha256": "bf7af787d5412f16cdb80e671aed9e2cb73745e7d9eac1bf2af6dceb5af5d41f",
+      "stderr_bytes": 195
+    },
+    "input_revision": "81c9c40106c3e1c9fe8b9fb7752435b6a36532b9",
+    "input_files": {
+      "platform/mac128k/polled-phase.h": "889aa6a1314e32114722f8ef822de14b100f197927fc77b9768561ac1566428f",
+      "platform/mac128k/polled-phase.c": "537d6d62bf3177e16153c86ba4d42fee90a90192bf17e103fc635f5bf1518766",
+      "platform/mac128k/timer-poll.h": "8d4bb8e759fc6a32b230d8b11ff17a8839c12aaac7be8145c624c7934b7fef1d",
+      "platform/mac128k/timer-poll.c": "d3c83a4c2c0412e1ef283cbe110dbd166ef9740e77c87048c88d704b4abf24bb",
+      "platform/mac128k/activity.h": "aaeff160b206fc702b4473331ce65c64c003f32897b019df41aa1f8f1ca920cf"
+    },
+    "source": "Reviewed original code and exact own MAR1 observation only;no excluded input.",
+    "actual_tool_calls": 0,
+    "actual_commands_writes_tests": 0,
+    "artifact_returned": false,
+    "adopted_content": false,
+    "partial_reasoning_used": false,
+    "provider_usage_or_balance_reported": false,
+    "control_observation": "CLI warned preferred model unavailable/fallback;resolved model unreported. Catalog advertised generic read_file/search_tool/use_tool wrappers;permission filtering not newly qualified. No tool execution occurred.",
+    "disposition": "No retry/fanout. Hold further Grok dispatch until bounded model/control validation;working Copilot qualification retained.",
+    "brief": "docs/development/tasks/mac-changing-pair-review.md"
+  }
 }
