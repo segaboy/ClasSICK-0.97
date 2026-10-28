@@ -1,0 +1,519 @@
+{
+  "date": "2026-10-28",
+  "classification": "original-engineering-and-own-candidate-observation",
+  "source_ids": [
+    "SRC-0521",
+    "SRC-0522"
+  ],
+  "public_baseline_revision": "5b96dc76e49744fd3c7ecb19c149ba72c1c4e6bf",
+  "authority": "Owner resumes release work and own isolated candidate tests. Existing three-scope trial permission retained. No release/tag/reference/hardware approval.",
+  "result": "Passive Mac activity and PC second-report diagnostic integrated;release usability remains failed/unqualified. Native Mac proof and new trials pending.",
+  "specifications": [
+    "SPEC-0078",
+    "SPEC-0079"
+  ],
+  "implementations": [
+    "IMPL-0086",
+    "IMPL-0087"
+  ],
+  "tests": [
+    "TEST-0099",
+    "TEST-0100"
+  ],
+  "private_artifacts": "C:/ClasSICK/release-resume-20261028-a",
+  "workers": [
+    {
+      "task": "activity",
+      "provider": "GitHub Copilot",
+      "model": "claude-sonnet-5.5",
+      "effort": "low",
+      "execution": {
+        "round": "activity",
+        "worker": "copilot",
+        "exit_code": 0,
+        "outer_timeout": false,
+        "elapsed_seconds": 85.19,
+        "input_bytes": 17356,
+        "input_sha256": "286a2e45794c1ec2553992093c43717a610f23fbb6d4eb24a5fc2c482dc0f42b",
+        "stderr_bytes": 0
+      },
+      "actual_tool_calls": [
+        {
+          "tool": "view",
+          "target": "prompt.txt",
+          "range": null
+        },
+        {
+          "tool": "view",
+          "target": "frozen input directory",
+          "range": null
+        }
+      ],
+      "provider_reported_usage": {
+        "premiumRequests": 1,
+        "totalApiDurationMs": 75658,
+        "sessionDurationMs": 77530,
+        "codeChanges": {
+          "linesAdded": 0,
+          "linesRemoved": 0,
+          "filesModified": []
+        }
+      },
+      "worker_tests_executed": [],
+      "repository_edits": 0,
+      "disposition": "Original proposed artifacts adopted after lead review;no worker execution results credited.",
+      "deviation": "Extra prompt-only directory listing;no excluded input present."
+    },
+    {
+      "task": "report",
+      "provider": "GitHub Copilot",
+      "model": "claude-sonnet-5.5",
+      "effort": "low",
+      "execution": {
+        "round": "report",
+        "worker": "copilot",
+        "exit_code": 0,
+        "outer_timeout": false,
+        "elapsed_seconds": 61.78,
+        "input_bytes": 10401,
+        "input_sha256": "480efe2531c0d52e5fe6cf7582c72ae4ed75eb1c69a9762d04783fd47165f2df",
+        "stderr_bytes": 0
+      },
+      "actual_tool_calls": [
+        {
+          "tool": "view",
+          "target": "prompt.txt",
+          "range": null
+        },
+        {
+          "tool": "view",
+          "target": "prompt.txt",
+          "range": [
+            1,
+            2
+          ]
+        },
+        {
+          "tool": "view",
+          "target": "prompt.txt",
+          "range": [
+            1,
+            1
+          ]
+        }
+      ],
+      "provider_reported_usage": {
+        "premiumRequests": 1,
+        "totalApiDurationMs": 57776,
+        "sessionDurationMs": 59276,
+        "codeChanges": {
+          "linesAdded": 0,
+          "linesRemoved": 0,
+          "filesModified": []
+        }
+      },
+      "worker_tests_executed": [],
+      "repository_edits": 0,
+      "disposition": "Original proposed artifacts adopted after lead review;no worker execution results credited.",
+      "deviation": "Two redundant prompt-header reads;no additional input."
+    },
+    {
+      "task": "mirror",
+      "provider": "GitHub Copilot",
+      "model": "claude-sonnet-5.5",
+      "effort": "low",
+      "execution": {
+        "round": "mirror",
+        "worker": "copilot",
+        "exit_code": 0,
+        "outer_timeout": false,
+        "elapsed_seconds": 14.92,
+        "input_bytes": 2124,
+        "input_sha256": "92a21e73dfcfc0dc0f5f2ebb477d8094040dcf6b872ebd99188f0999630d04d4",
+        "stderr_bytes": 0
+      },
+      "actual_tool_calls": [
+        {
+          "tool": "view",
+          "target": "prompt.txt",
+          "range": null
+        }
+      ],
+      "provider_reported_usage": {
+        "premiumRequests": 1,
+        "totalApiDurationMs": 9632,
+        "sessionDurationMs": 11058,
+        "codeChanges": {
+          "linesAdded": 0,
+          "linesRemoved": 0,
+          "filesModified": []
+        }
+      },
+      "worker_tests_executed": [],
+      "repository_edits": 0,
+      "disposition": "Original proposed artifacts adopted after lead review;no worker execution results credited.",
+      "deviation": null
+    }
+  ],
+  "hosted_activity": [
+    {
+      "profile": "clang",
+      "exit_code": 0,
+      "elapsed_seconds": 3.593
+    },
+    {
+      "profile": "gcc64",
+      "exit_code": 0,
+      "elapsed_seconds": 4.594
+    },
+    {
+      "profile": "gcc32",
+      "exit_code": 0,
+      "elapsed_seconds": 4.688
+    },
+    {
+      "profile": "sanitized",
+      "exit_code": 0,
+      "elapsed_seconds": 4.031
+    }
+  ],
+  "hosted_report": [
+    {
+      "profile": "clang",
+      "exit_code": 0,
+      "elapsed_seconds": 3.985
+    },
+    {
+      "profile": "gcc64",
+      "exit_code": 0,
+      "elapsed_seconds": 3.5
+    },
+    {
+      "profile": "gcc32",
+      "exit_code": 0,
+      "elapsed_seconds": 4.296
+    },
+    {
+      "profile": "sanitized",
+      "exit_code": 0,
+      "elapsed_seconds": 3.532
+    }
+  ],
+  "freestanding_activity": [
+    {
+      "target": "i686-w64-mingw32",
+      "optimization": "0",
+      "imports_and_mutable_globals": "none"
+    },
+    {
+      "target": "i686-w64-mingw32",
+      "optimization": "2",
+      "imports_and_mutable_globals": "none"
+    },
+    {
+      "target": "x86_64-w64-mingw32",
+      "optimization": "0",
+      "imports_and_mutable_globals": "none"
+    },
+    {
+      "target": "x86_64-w64-mingw32",
+      "optimization": "2",
+      "imports_and_mutable_globals": "none"
+    },
+    {
+      "target": "aarch64-none-elf",
+      "optimization": "0",
+      "imports_and_mutable_globals": "none"
+    },
+    {
+      "target": "aarch64-none-elf",
+      "optimization": "2",
+      "imports_and_mutable_globals": "none"
+    },
+    {
+      "target": "aarch64_be-none-elf",
+      "optimization": "0",
+      "imports_and_mutable_globals": "none"
+    },
+    {
+      "target": "aarch64_be-none-elf",
+      "optimization": "2",
+      "imports_and_mutable_globals": "none"
+    }
+  ],
+  "MAR1_reader_auditor": "Five Python unittest methods pass,including74 per-byte opcode mutations and register/symbol/format refusals. Synthetic fixtures only.",
+  "PC_trials": [
+    {
+      "name": "pc-windowed",
+      "description": "Automated capture route mismatched;no guest-input acceptance.",
+      "closed": {
+        "utc": "2026-10-28T12:22:49.7513102Z",
+        "cold_starts": 1,
+        "state": "poweroff",
+        "unregistered": true,
+        "existing_vm_inventory_preserved": true,
+        "running_state_preserved": true,
+        "post_trial_raw_roundtrip_equal": true,
+        "artifacts_retained": true,
+        "semantic_session_stop_observed": false,
+        "termination": "external poweroff from paused state"
+      },
+      "passed": false
+    },
+    {
+      "name": "pc-physical",
+      "description": "Human captured/moved mouse;no visible cross. Guest frames show a clipped7-pixel cross after one jump;not usable movement/drag.",
+      "closed": {
+        "utc": "2026-10-28T12:29:24.0563713Z",
+        "cold_starts": 1,
+        "state": "poweroff",
+        "unregistered": true,
+        "existing_vm_inventory_preserved": true,
+        "running_state_preserved": true,
+        "post_trial_raw_roundtrip_equal": true,
+        "artifacts_retained": true,
+        "semantic_session_stop_observed": false,
+        "termination": "external poweroff from paused state"
+      },
+      "passed": false
+    },
+    {
+      "name": "pc-raw2",
+      "description": "User missed bounded window;not a human input test. No checkpoint trigger.",
+      "closed": {
+        "utc": "2026-10-28T12:49:53.1651499Z",
+        "cold_starts": 1,
+        "state": "poweroff",
+        "unregistered": true,
+        "existing_vm_inventory_preserved": true,
+        "running_state_preserved": true,
+        "post_trial_raw_roundtrip_equal": true,
+        "artifacts_retained": true,
+        "semantic_session_stop_observed": false,
+        "termination": "external poweroff from paused state"
+      },
+      "passed": false,
+      "identity": {
+        "EFI": "53114e09d7d18e461e2c6582a37cf232b26d73c89ca845a73119d49776b2cff8",
+        "disk": "3d8538f992cffa66db4bef0d834cdf8d7c95c51d9719e07af8adf0732deab3ce",
+        "mode": "raw-motion-later",
+        "packet_threshold": 2,
+        "source": "5b96dc76e49744fd3c7ecb19c149ba72c1c4e6bf",
+        "normal_release_candidate": false,
+        "native_twins_and_controls": "four twins/27corruption/28omission controls pass;two mediawriters match"
+      },
+      "pre-input-registers.txt": {
+        "sha256": "fe804c83a16ebc4b07d2bc734a24bfe81c9f2915e3147022f0dc22cc56455265",
+        "bytes": 258
+      },
+      "post-input-registers.txt": {
+        "sha256": "2e1c5427389ef88f0fb07fa29e93489f78d0d191478f6fb6f81b9ec09bad31c0",
+        "bytes": 258
+      }
+    },
+    {
+      "name": "pc-ready",
+      "description": "Paused readiness handshake completed;owner captured and moved physical mouse for5s,no visible pointer. No second-nonzero-report checkpoint;does not exclude zero-motion reports.",
+      "closed": {
+        "utc": "2026-10-28T13:00:35.6933592Z",
+        "cold_starts": 1,
+        "state": "poweroff",
+        "unregistered": true,
+        "existing_vm_inventory_preserved": true,
+        "running_state_preserved": true,
+        "post_trial_raw_roundtrip_equal": true,
+        "artifacts_retained": true,
+        "semantic_session_stop_observed": false,
+        "termination": "external poweroff from paused state"
+      },
+      "passed": false,
+      "pre-input-registers.txt": {
+        "sha256": "d172a4293289ebed444cd9e2706f3d6dac75f0f178128b3d61587d68353d1ce6",
+        "bytes": 258
+      },
+      "post-input-registers.txt": {
+        "sha256": "21658b354a583597d29da663b4ea9119388461baf2074cb414a55ea709175823",
+        "bytes": 258
+      }
+    }
+  ],
+  "remaining": [
+    "Mac visible motion/drag/release/restoration on exact candidate",
+    "PC GUI/human usable pointer and drag/release on exact candidate",
+    "Native diagnostic proof/trials do not qualify normal candidates",
+    "Physical/full128K,source/role,edition,parity,B2criterion6,native-app and both System1/ROM gates remain"
+  ],
+  "release_ready": false,
+  "new_286_execution": false,
+  "provider_balance": "Not reported by these scoped calls;provider usage is not Codex quota savings.",
+  "lead_corrections": [
+    "Use width-safe uint32 flag mask;preserve struct padding when testing caller bytes;correct PC raw header fixture.",
+    "Distinct MAR1 format and audited74-byte mirror;A6 base loaded last;old MWR1 excluded only in new profile. Worker finding miscounts loads:14 loads,not13;actual artifact/74-byte size is correct.",
+    "Add independent strict readers,opcode mutation controls,controller binding and native profile/bounds/refusal audits."
+  ],
+  "pc-report-build": {
+    "proof": {
+      "fault_probe": "none",
+      "window_input_probe": true,
+      "window_input_probe_mode": "raw-report-later",
+      "missing_input_probe_controls": 2,
+      "window_drawing": true,
+      "window_trace_version": 1,
+      "window_trace_offset": 2048,
+      "missing_window_controls": 9,
+      "outline_drawing": false,
+      "continuous_preview": true,
+      "missing_outline_controls": 0,
+      "selected_drawing": false,
+      "missing_selected_workload_controls": 0,
+      "missing_selected_core_controls": 0,
+      "images": [
+        {
+          "case": "clang-64-O0",
+          "sha256": "097092d4e4ffd47dfef9ca89189d5df7c65ed392f06b2704f81e7b6023992a4a",
+          "size_bytes": 270336,
+          "image_size": 282624,
+          "relocations": 3,
+          "status": "passed-unloaded"
+        },
+        {
+          "case": "clang-64-O2",
+          "sha256": "1af7c81dd817b93e2dab879ca22d7a03d4ee562e93b30290b9e08eab6b355a66",
+          "size_bytes": 184832,
+          "image_size": 200704,
+          "relocations": 3,
+          "status": "passed-unloaded"
+        }
+      ],
+      "image_rejections": 27,
+      "profile_rejections": 0,
+      "missing_transition_controls": 1,
+      "missing_exceptions_controls": 1,
+      "missing_presenter_controls": 1,
+      "missing_acpi_controls": 1,
+      "missing_ps2_controls": 1,
+      "missing_keyboard_controls": 1,
+      "missing_input_controls": 1,
+      "missing_byte_io_controls": 1,
+      "missing_uart_controls": 1,
+      "missing_native_uart_controls": 0,
+      "missing_service_controls": 1,
+      "missing_service_probe_controls": 1,
+      "missing_m68k_controls": 1,
+      "missing_aline_probe_controls": 0,
+      "missing_native_drawing_controls": 1,
+      "missing_mouse_button_controls": 1,
+      "missing_mouse_packet_controls": 1,
+      "missing_mouse_bus_controls": 1,
+      "missing_drawing_view_controls": 1,
+      "drawing_context_specification": "SPEC-0041",
+      "pc_mouse_profile": 1,
+      "keyboard_trace_version": 0,
+      "payload": "payload/EFI/BOOT/BOOTX64.EFI",
+      "payload_kind": "directory-tree-not-disk",
+      "loaded": false
+    },
+    "executed": false
+  },
+  "pc-normal-build": {
+    "proof": {
+      "fault_probe": "none",
+      "window_input_probe": false,
+      "window_input_probe_mode": "none",
+      "missing_input_probe_controls": 0,
+      "window_drawing": true,
+      "window_trace_version": 1,
+      "window_trace_offset": 2048,
+      "missing_window_controls": 9,
+      "outline_drawing": false,
+      "continuous_preview": true,
+      "missing_outline_controls": 0,
+      "selected_drawing": false,
+      "missing_selected_workload_controls": 0,
+      "missing_selected_core_controls": 0,
+      "images": [
+        {
+          "case": "clang-64-O0",
+          "sha256": "4c654a51aec6c989f493c8f800e7272888ca7977b006abd7485114ffdeb78942",
+          "size_bytes": 269824,
+          "image_size": 282624,
+          "relocations": 3,
+          "status": "passed-unloaded"
+        },
+        {
+          "case": "clang-64-O2",
+          "sha256": "e634d1a4831dfd9970d839ffb6b6c596bea4315e4fc65db013b4b7ea3a00b955",
+          "size_bytes": 184320,
+          "image_size": 196608,
+          "relocations": 3,
+          "status": "passed-unloaded"
+        }
+      ],
+      "image_rejections": 27,
+      "profile_rejections": 0,
+      "missing_transition_controls": 1,
+      "missing_exceptions_controls": 1,
+      "missing_presenter_controls": 1,
+      "missing_acpi_controls": 1,
+      "missing_ps2_controls": 1,
+      "missing_keyboard_controls": 1,
+      "missing_input_controls": 1,
+      "missing_byte_io_controls": 1,
+      "missing_uart_controls": 1,
+      "missing_native_uart_controls": 0,
+      "missing_service_controls": 1,
+      "missing_service_probe_controls": 1,
+      "missing_m68k_controls": 1,
+      "missing_aline_probe_controls": 0,
+      "missing_native_drawing_controls": 1,
+      "missing_mouse_button_controls": 1,
+      "missing_mouse_packet_controls": 1,
+      "missing_mouse_bus_controls": 1,
+      "missing_drawing_view_controls": 1,
+      "drawing_context_specification": "SPEC-0041",
+      "pc_mouse_profile": 1,
+      "keyboard_trace_version": 0,
+      "payload": "payload/EFI/BOOT/BOOTX64.EFI",
+      "payload_kind": "directory-tree-not-disk",
+      "loaded": false
+    },
+    "executed": false
+  },
+  "normal_PC_byte_identity": true,
+  "profile_refusal_checks": [
+    {
+      "flags": [
+        "-DCLASSICK_PC_INPUT_PROBE_REPORT=2"
+      ],
+      "refused": true
+    },
+    {
+      "flags": [
+        "-DCLASSICK_PC_INPUT_PROBE_REPORT=1"
+      ],
+      "refused": true
+    },
+    {
+      "flags": [
+        "-DCLASSICK_PC_INPUT_PROBE_REPORT=1",
+        "-DCLASSICK_PC_RAW_PACKET_PROBE=1",
+        "-DCLASSICK_PC_INPUT_PROBE_MOTION=1"
+      ],
+      "refused": true
+    },
+    {
+      "flags": [
+        "--window-timer-activity-probe"
+      ],
+      "refused_before_output": true
+    },
+    {
+      "flags": [
+        "--window-drawing",
+        "--window-timer-poll-probe",
+        "--window-timer-activity-probe"
+      ],
+      "refused_before_output": true
+    }
+  ]
+}

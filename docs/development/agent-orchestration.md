@@ -4,7 +4,7 @@ Compacted 2026-10-28. Earlier Git text is preserved in the [byte-identical snaps
 
 ## Authority
 
-- Conserve total ChatGPT/Codex effort, including briefing/context, review, integration and records. Codex alone selects tasks, decides, writes repositories, integrates and verifies; adopt sound worker artifacts instead of recreating them. Desktop/VM/emulator tests remain paused; this process change authorizes no feature, trial or release.
+- Conserve total ChatGPT/Codex effort, including briefing/context, review, integration and records. Codex alone selects tasks, decides, writes repositories, integrates and verifies; adopt sound worker artifacts instead of recreating them. Owner resumed approved own-candidate trials under SRC-0521;this protocol itself authorizes no feature,trial or release.
 - Standing worker permission: SRC-0149/0150/0179 extended by SRC-0223..0226 to Claude, Grok, Antigravity (`agy`) and Copilot. Workers receive only reviewed public ClasSICK contracts and original project code from the active owner-authorized slice.
 - Excluded from all workers: HQ, manuals and manual pages, untracked originals, credentials, held UART bodies, ROMs, media, disassembly, emulator source, and Apple or Microsoft implementation material. Reviewed paraphrases are allowed under the clean-room exposure policy.
 - Unqualified external kernel, driver, ABI, loader or runtime code is not assumed safe.

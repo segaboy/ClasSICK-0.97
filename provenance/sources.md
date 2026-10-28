@@ -4800,3 +4800,11 @@ new capture;no guest implementation fix or release pass inferred.
 ## SRC-0520 - Bounded CI profiler artifact recovery and review
 
 2026-10-28. Claude Opus5.5 Low receives55338 reviewed-public/original bytes,zero tools/writes/commands/tests. Outer240.06s limit ends incomplete response;complete220line parser and97line testprefix recovered from text deltas. Lead adopts/completes tests,corrects skipped-case execution accounting and independently checks real CI counts/timing. No retry or extra provider;capture has no final usage/cost figure. New tool is original developer evidence analysis,not Mac historical/runtime behavior. [Receipt](../docs/development/windows-ci-profile.json).
+
+## SRC-0521 - Owner resumes release work and reports failed physical input
+
+2026-10-28. Owner: "OK, let's work toward a release today. Get to work." Later readiness and physical observations authorize this resumed own-candidate lane under existing SRC-0402..0411 scopes. PC capture succeeds but owner reports no visible pointer after five seconds of physical movement. Record as failed usability,not as passing movement. No release/tag,reference,hardware or new286 execution authorization. [Receipt](../docs/development/release-resumption-evidence.json).
+
+## SRC-0522 - Original passive activity and second-report artifacts
+
+2026-10-28. Three bounded Copilot Sonnet5.5 Low calls for one Mac activity primary,a distinct PC report gap and fresh native mirror coupling. Reviewed-public/original inputs only;no HQ,manuals,untracked originals,credentials,held UART bodies or prohibited implementation. View-only controls,zero worker commands/writes/tests. Proposed artifacts adopted with lead corrections;actual usage,input identities,tool calls,executed checks and negative physical observations are in the [canonical receipt](../docs/development/release-resumption-evidence.json). New diagnostic evidence only,not historical behavior or release qualification.

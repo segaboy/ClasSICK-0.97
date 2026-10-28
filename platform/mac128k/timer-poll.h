@@ -6,6 +6,15 @@
 #include "motion.h"
 #include "polled-phase.h"
 #include "rom.h"
+#ifndef CLASSICK_MAC_TIMER_ACTIVITY_PROBE
+#define CLASSICK_MAC_TIMER_ACTIVITY_PROBE 0
+#endif
+#if CLASSICK_MAC_TIMER_ACTIVITY_PROBE != 0 && CLASSICK_MAC_TIMER_ACTIVITY_PROBE != 1
+#error CLASSICK_MAC_TIMER_ACTIVITY_PROBE must be 0 or 1
+#endif
+#if CLASSICK_MAC_TIMER_ACTIVITY_PROBE
+#include "activity.h"
+#endif
 
 /* Opt-in engineering experiment; default 0 keeps behavior/API/layout. At 1,
  * prepare leaves WR15 DCD enable (8) set on both channels and each admitted
@@ -34,6 +43,9 @@ typedef struct {
     cs_mac_polled_phase decoder;
     cs_mac_io via;
     uint32_t reload;
+#if CLASSICK_MAC_TIMER_ACTIVITY_PROBE
+    cs_mac_activity activity;
+#endif
 } cs_mac_timer_poll;
 _Static_assert(sizeof(void *) > 4 || sizeof(cs_mac_timer_poll) <= 320,
     "Bounded timer poll controller");

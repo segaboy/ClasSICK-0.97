@@ -275,6 +275,23 @@ jobs:
             ${{ runner.temp }}/classick-window-timer-refresh/Os-a/classick-loaded-app.rom
             ${{ runner.temp }}/classick-window-timer-refresh/Os-a/classick-loaded-app.map
           if-no-files-found: error
+      - name: Verify passive activity observer and build coherent checkpoint (unbooted)
+        run: |
+          cc -std=c11 -pedantic-errors -Wall -Wextra -Werror -Wconversion -Wsign-conversion -I. platform/mac128k/activity.c tests/mac-activity.c -o "$RUNNER_TEMP/mac-activity"
+          "$RUNNER_TEMP/mac-activity"
+          cc -std=c11 -pedantic-errors -Wall -Wextra -Werror -Wconversion -Wsign-conversion -DCLASSICK_MAC_TIMER_REFRESH_PROBE=1 -DCLASSICK_MAC_TIMER_ACTIVITY_PROBE=1 -I. platform/mac128k/activity.c platform/mac128k/timer-poll.c platform/mac128k/polled-phase.c apps/window-scene/inbox.c tests/mac-activity-binding.c -o "$RUNNER_TEMP/mac-activity-binding"
+          "$RUNNER_TEMP/mac-activity-binding"
+          python3 -B tests/mac-activity-reader.py
+          python3 scripts/Build-LoadedAppROM.py --window-drawing --window-timer-poll-probe --window-timer-refresh-probe --window-idle-probe --window-timer-activity-probe --tool-root "$RUNNER_TEMP/classick-m68k/root" --output "$RUNNER_TEMP/classick-window-activity"
+      - name: Retain passive activity checkpoint (unbooted)
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
+        with:
+          name: classick-window-activity-mac
+          path: |
+            ${{ runner.temp }}/classick-window-activity/manifest.json
+            ${{ runner.temp }}/classick-window-activity/Os-a/classick-loaded-app.rom
+            ${{ runner.temp }}/classick-window-activity/Os-a/classick-loaded-app.map
+          if-no-files-found: error
       - name: Retain separate timer polling experiments (unbooted)
         uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
         with:

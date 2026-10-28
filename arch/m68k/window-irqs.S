@@ -38,7 +38,7 @@ cs_mac_window_install_vectors:
 cs_mac_line_a_handler:
     jmp cs_mac_fault
 
-#if defined(CLASSICK_MAC_IDLE_PROBE) && CLASSICK_MAC_IDLE_PROBE
+#if defined(CLASSICK_MAC_IDLE_PROBE) && CLASSICK_MAC_IDLE_PROBE && !CLASSICK_MAC_TIMER_ACTIVITY_PROBE
     /* Diagnostic noreturn halt: IPL7 explicitly held, no MMIO, no return.
      * Exposes the copied MWR1 snapshot in registers; A0-A6 are raw data
      * (A6 stays &cs_mac_trace until all record loads finish). Offsets are

@@ -60,6 +60,9 @@ void cs_mac_window_interrupt(uint32_t source);
 #if CLASSICK_MAC_IDLE_PROBE
 /* Diagnostic register mirror and self-branch, IPL7 held. Not a session stop. */
 __attribute__((noreturn)) void cs_mac_window_idle_checkpoint(void);
+#if CLASSICK_MAC_TIMER_ACTIVITY_PROBE
+__attribute__((noreturn)) void cs_mac_activity_checkpoint(void);
+#endif
 #endif
 
 /* Own compact diagnostic record; not an ABI, never part of the 64B prefix. */
@@ -93,6 +96,21 @@ _Static_assert(offsetof(struct cs_mac_window_trace,loss_phase)==124,"MWR1 D7 off
 static cs_mac_window_session session __attribute__((section(".loaded_app")));
 #if CLASSICK_MAC_TIMER_POLL_PROBE
 static cs_mac_timer_poll timer_motion;
+#if CLASSICK_MAC_TIMER_ACTIVITY_PROBE
+#if !CLASSICK_MAC_IDLE_PROBE
+#error Activity checkpoint requires the opt-in idle checkpoint
+#endif
+/* Copied once under IPL7 immediately before the separate MAR1 checkpoint. */
+volatile cs_mac_activity cs_mac_activity_trace;
+_Static_assert(offsetof(cs_mac_activity,pairs)==12 &&
+    offsetof(cs_mac_activity,pb_x_changes)==16 && offsetof(cs_mac_activity,pb_y_changes)==20 &&
+    offsetof(cs_mac_activity,dcd_a_changes)==24 && offsetof(cs_mac_activity,dcd_b_changes)==28 &&
+    offsetof(cs_mac_activity,button_changes)==32 && offsetof(cs_mac_activity,nonzero_queued)==40 &&
+    offsetof(cs_mac_activity,buttononly_queued)==44 && offsetof(cs_mac_activity,losses)==48 &&
+    offsetof(cs_mac_activity,first_previous)==60 && offsetof(cs_mac_activity,first_s0)==64 &&
+    offsetof(cs_mac_activity,first_s1)==68 && offsetof(cs_mac_activity,first_reason)==72 &&
+    offsetof(cs_mac_activity,first_service)==76,"MAR1 assembly offsets");
+#endif
 #define motion timer_motion.motion
 #define native_motion_prepare(scc,via) cs_mac_timer_poll_prepare(&timer_motion,scc,via,&session.inbox,(uint32_t)CLASSICK_MAC_DCD_INVERT,4096u)
 #define native_motion_arm() cs_mac_timer_poll_arm(&timer_motion)
@@ -237,7 +255,15 @@ static uint32_t observe(void)
         cs_mac_trace.loss_previous=motion.first_loss.previous;
         cs_mac_trace.loss_phase=motion.first_loss.inbox_phase;
         cs_mac_trace.loss_reason=motion.first_loss.reason;
-#if CLASSICK_MAC_FIRST_INPUT_PROBE
+#if CLASSICK_MAC_TIMER_POLL_PROBE && CLASSICK_MAC_TIMER_ACTIVITY_PROBE
+        /* Counted services are not a wall-time or input-causality guarantee. */
+        if ((motion.services >= 500u &&
+             (timer_motion.activity.nonzero_queued || timer_motion.activity.losses)) ||
+            motion.services >= 50000u) {
+            cs_mac_activity_trace = timer_motion.activity;
+            cs_mac_activity_checkpoint();
+        }
+#elif CLASSICK_MAC_FIRST_INPUT_PROBE
         /* Freeze the copied record before any later UI action; not shutdown. */
         if(cs_mac_first_input_probe_gate(cs_mac_trace.services,cs_mac_trace.losses,
             cs_mac_trace.deliveries))cs_mac_window_idle_checkpoint();

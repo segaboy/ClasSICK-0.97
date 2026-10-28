@@ -30,6 +30,11 @@ def audit_register_checkpoint(image,syms,enabled):
         'diag_fault_address':diag+24,'exact_opcodes_verified':True,'guest_memory_writes':0,
         'MMIO_accesses':0,'additional_RAM_bytes':0,'semantic_session_shutdown':False}
 
+def audit_activity_checkpoint(image,syms,enabled):
+    spec=spec_from_file_location('mac_activity_audit',Path(__file__).with_name('Audit-MacActivityCheckpoint.py'))
+    module=module_from_spec(spec);spec.loader.exec_module(module)
+    return module.audit(image,syms,enabled)
+
 SOURCES=('arch/m68k/loaded-reset.S','arch/m68k/runtime.c','platform/mac128k/loop.c',
  'platform/mac128k/loaded-entry.c','apps/rom-scene/scene.c','core/graphics/surface.c',
  'core/services/traps.c','apps/service-probe/probe.c','core/cpu/m68k.c','apps/aline-probe/probe.c',
@@ -70,12 +75,14 @@ def main():
     p.add_argument('--window-first-input-probe',action='store_true',help='Freeze copied trace on delivered input/loss or >=5000 services; window only')
     p.add_argument('--window-timer-poll-probe',action='store_true',help='Separate timer-driven live-level polling experiment;window only')
     p.add_argument('--window-timer-refresh-probe',action='store_true',help='Opt-in SCC status-refresh endpoint experiment;requires timer polling')
+    p.add_argument('--window-timer-activity-probe',action='store_true',help='Passive MWA1 activity checkpoint;requires timer polling and idle checkpoint')
     p.add_argument('--window-phase-idle-probe',action='store_true',help='Experimental phase-only no-decision pass; window profile only')
     p.add_argument('--dcd-invert',type=int,choices=(0,1,2,3),default=0,help='Unverified raw RR0 DCD sense mask; window profile only')
     a=p.parse_args()
     if a.window_timer_poll_probe and not a.window_drawing:p.error('--window-timer-poll-probe requires --window-drawing')
     if a.window_timer_poll_probe and (a.window_pending_defer_probe or a.window_phase_idle_probe or a.window_first_input_probe):p.error('Timer experiment cannot combine with SCC defer/phase/first-input experiments')
     if a.window_timer_refresh_probe and not a.window_timer_poll_probe:p.error('--window-timer-refresh-probe requires --window-timer-poll-probe')
+    if a.window_timer_activity_probe and not (a.window_timer_poll_probe and a.window_idle_probe):p.error('--window-timer-activity-probe requires timer polling and --window-idle-probe')
     native=a.native_drawing or a.selected_drawing or a.outline_drawing or a.window_drawing
     if a.dcd_invert and not a.window_drawing:p.error('--dcd-invert requires --window-drawing')
     if a.window_idle_probe and not a.window_drawing:p.error('--window-idle-probe requires --window-drawing')
@@ -119,7 +126,9 @@ def main():
         specification='SPEC-0049';profile='native-outline-preview-v1'
     if a.window_drawing:
         specs=[]
-        for number in ((('0070','0072','0074','0075','0077') if a.window_timer_refresh_probe else ('0070','0072','0074','0075')) if a.window_timer_poll_probe else ('0070','0072')):
+        numbers=((('0070','0072','0074','0075','0077') if a.window_timer_refresh_probe else ('0070','0072','0074','0075')) if a.window_timer_poll_probe else ('0070','0072'))
+        if a.window_timer_activity_probe:numbers+=('0078',)
+        for number in numbers:
             found=sorted(repo.glob('docs/specifications/SPEC-'+number+'-*.md'))
             if len(found)!=1:raise ValueError('Specification lookup SPEC-'+number)
             specs.append(found[0].relative_to(repo).as_posix())
@@ -127,11 +136,15 @@ def main():
         if a.window_timer_poll_probe:
             sources=tuple(x for x in sources if x!='platform/mac128k/motion.c')+('platform/mac128k/timer-poll.c','platform/mac128k/polled-phase.c')
             headers+=('platform/mac128k/timer-poll.h','platform/mac128k/polled-phase.h')
+        if a.window_timer_activity_probe:
+            sources+=('platform/mac128k/activity.c','arch/m68k/activity-checkpoint.S')
+            headers+=('platform/mac128k/activity.h',)
         program_source=None;program_hex='';specification='SPEC-0072';profile='native-window-preview-v1'
         if a.window_pending_defer_probe:profile='native-window-pending-defer-probe-v1'
         if a.window_first_input_probe:profile='native-window-'+('pending-defer-' if a.window_pending_defer_probe else '')+'first-input-probe-v1'
         if a.window_timer_poll_probe:profile='native-window-timer-poll-'+('idle-' if a.window_idle_probe else '')+'experiment-v1'
         if a.window_timer_refresh_probe:profile='native-window-timer-refresh-'+('idle-' if a.window_idle_probe else '')+'experiment-v1'
+        if a.window_timer_activity_probe:profile='native-window-timer-activity-'+('refresh-' if a.window_timer_refresh_probe else '')+'checkpoint-v1';specification='SPEC-0078'
         if a.window_phase_idle_probe:profile='native-window-phase-idle-'+('pending-defer-' if a.window_pending_defer_probe else '')+'probe-v1'
     profiles=[]
     for twin in ('a','b'):
@@ -147,6 +160,7 @@ def main():
         if a.window_idle_probe or a.window_first_input_probe:flags+=['-DCLASSICK_MAC_IDLE_PROBE=1']
         if a.window_timer_poll_probe:flags+=['-DCLASSICK_MAC_TIMER_POLL_PROBE=1']
         if a.window_timer_refresh_probe:flags+=['-DCLASSICK_MAC_TIMER_REFRESH_PROBE=1']
+        if a.window_timer_activity_probe:flags+=['-DCLASSICK_MAC_TIMER_ACTIVITY_PROBE=1']
         if a.window_first_input_probe:flags+=['-DCLASSICK_MAC_FIRST_INPUT_PROBE=1']
         if a.window_pending_defer_probe:flags+=['-DCLASSICK_MAC_PENDING_DEFER_PROBE=1']
         if a.window_phase_idle_probe:flags+=['-DCLASSICK_MAC_PHASE_IDLE_PROBE=1']
@@ -167,7 +181,9 @@ def main():
         if a.outline_drawing:required=tuple(x for x in required if x not in ('cs_native_draw','cs_qd_rect','cs_qd_view_rect'))+('cs_outline_draw','cs_qd_view_outline','cs_qd_select_get','cs_qd_select_set')
         if a.window_drawing:required=('cs_mac_main','cs_mac_window_begin','cs_mac_motion_service','cs_foreground_step','cs_mac_window_via_irq','cs_mac_window_scc_irq','cs_mac_window_combined_irq','cs_mac_window_interrupt','cs_product_scene','cs_window_apply','cs_m68k_foreground_enter','cs_m68k_foreground_leave')
         if a.window_timer_poll_probe:required=tuple(x for x in required if x!='cs_mac_motion_service')+('cs_mac_timer_poll_service','cs_mac_polled_step')
-        if a.window_idle_probe or a.window_first_input_probe:required+=('cs_mac_window_idle_checkpoint','cs_mac_window_idle_spin')
+        if a.window_timer_activity_probe:required+=('cs_mac_activity_pair','cs_mac_activity_trace','cs_mac_activity_checkpoint','cs_mac_activity_spin')
+        elif any(name.startswith('cs_mac_activity_') for name in syms):raise ValueError('Unexpected activity observer in default profile')
+        if (a.window_idle_probe and not a.window_timer_activity_probe) or a.window_first_input_probe:required+=('cs_mac_window_idle_checkpoint','cs_mac_window_idle_spin')
         if a.window_first_input_probe:required+=('cs_mac_first_input_probe_gate',)
         if a.window_drawing and not any(name.startswith('cs_cursor_') for name in syms):raise ValueError('Disconnected cursor helper')
         if any(name not in syms for name in required):raise ValueError('Disconnected demonstration')
@@ -188,7 +204,13 @@ def main():
                 if not 260<=at<=65536-len(expected) or image[at:at+len(expected)]!=expected:
                     raise ValueError('IRQ preservation/mask/RTE: '+name)
                 rows.append({'name':name,'source':source,'bytes':len(expected),'exact_opcodes_verified':True})
-            audit_register_checkpoint(image,syms,a.window_idle_probe or a.window_first_input_probe)
+            audit_register_checkpoint(image,syms,(a.window_idle_probe and not a.window_timer_activity_probe) or a.window_first_input_probe)
+            audit_activity_checkpoint(image,syms,a.window_timer_activity_probe)
+            if a.window_timer_activity_probe:
+                activity=syms['cs_mac_activity_trace']
+                if activity%4 or not 0x400<=activity<=0x2100-80:raise ValueError('Activity record own-RAM bounds')
+                for other,size in ((syms['cs_mac_trace'],128),(syms['cs_mac_diag'],64)):
+                    if activity<other+size and other<activity+80:raise ValueError('Activity record overlaps prior diagnostics')
             if ('cs_mac_first_input_probe_gate' in syms)!=bool(a.window_first_input_probe):raise ValueError('First-input gate/profile mismatch')
             at=syms['cs_mac_window_install_vectors']-0x400000
             for vector,name in zip((0x64,0x68,0x6C),('cs_mac_window_via_irq','cs_mac_window_scc_irq','cs_mac_window_combined_irq')):
@@ -230,9 +252,11 @@ def main():
         if a.window_drawing:
             controls=[40,syms['cs_mac_line_a_handler']-0x400000,
                     syms['cs_mac_window_via_irq']-0x400000+3,syms['cs_mac_window_install_vectors']-0x400000+7]
-            if a.window_idle_probe or a.window_first_input_probe:
+            if (a.window_idle_probe and not a.window_timer_activity_probe) or a.window_first_input_probe:
                 start=syms['cs_mac_window_idle_checkpoint']-0x400000
                 controls.extend(start+x for x in (3,8,14,21,25,29,33,37,41,45,49,53,57,61,65,69,71))
+            if a.window_timer_activity_probe:
+                controls.extend(syms['cs_mac_activity_checkpoint']-0x400000+x for x in range(74))
             for offset in controls:
                 bad=bytearray(b);bad[offset]^=1;struct.pack_into('>I',bad,256,h.crc(bad))
                 try:audit(bad)
@@ -258,7 +282,9 @@ def main():
          'native_stack_base':0x2100,'native_stack_top':0x8000,'conservative_stack_bound':stack_bound,
          'individual_frame_max':max(x['bytes'] for x in frames),'stack_frames':frames,'symbols':syms,'corruption_controls':8})
         if a.window_drawing:profiles[-1].update(irq_veneer_audit=irq_audit,resealed_native_corruption_controls=len(controls))
-        if a.window_idle_probe or a.window_first_input_probe:
+        if a.window_timer_activity_probe:
+            profiles[-1]['activity_register_checkpoint']=audit_activity_checkpoint(b,syms,True)
+        if (a.window_idle_probe and not a.window_timer_activity_probe) or a.window_first_input_probe:
             profiles[-1]['register_checkpoint']=audit_register_checkpoint(b,syms,True)
     if profiles[0]!=profiles[1]:raise ValueError('ROM twins differ')
     if program_source is not None:
@@ -278,7 +304,8 @@ def main():
     if a.window_drawing:manifest['window_phase_idle_probe']=bool(a.window_phase_idle_probe)
     if a.window_drawing:manifest['window_first_input_probe']=bool(a.window_first_input_probe)
     if a.window_first_input_probe:manifest['window_first_input_probe_limit']=5000
-    if a.window_idle_probe:manifest['window_idle_probe_threshold']=500
+    if a.window_idle_probe and not a.window_timer_activity_probe:manifest['window_idle_probe_threshold']=500
+    if a.window_timer_activity_probe:manifest['activity_checkpoint']={'tag':'MWA1','version':1,'bytes':80,'address':syms['cs_mac_activity_trace'],'minimum_services':500,'fallback_services':50000,'wall_time_qualified':False,'extra_MMIO_reads':0,'extra_MMIO_writes':0,'old_diagnostics_unchanged':True}
     if a.window_drawing:manifest.update({'window_drawing':True,'native_drawing_context':None,
      'dcd_invert':a.dcd_invert,'dcd_invert_verified':False,'cpu_callbacks':list(cpu_callbacks),
      'board_profile':{'status':'engineering-upper-alias-hypothesis-unverified','scc_read_b':0x9FFFF8,'scc_read_a':0x9FFFFA,

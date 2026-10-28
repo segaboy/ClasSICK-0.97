@@ -62,4 +62,4 @@ complete histories. Keep all gates and source/role separation. The permanent
 OneNote/wiki retirement includes its Git queue, mirrors and manifest.
 
 Current implementation receipt: [workflow-compaction.json](workflow-compaction.json).
-Desktop, VM and emulator testing remains paused.
+Owner resumed approved own-candidate trials under SRC-0521;release publication remains separate.

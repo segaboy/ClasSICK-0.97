@@ -9,7 +9,8 @@ Compacted 2026-10-28 from public baseline `11ad7a937e58f752cfecda8b6805c76bc7f45
 - When relevant: [native parity](docs/development/native-parity-plan.md), [display](docs/development/display-target.md), [performance](docs/development/native-performance-plan.md), [x64 PC](docs/development/unified-x64-pc-plan.md), [286](docs/development/pc286-feasibility.md), [System1/ROM](docs/development/system1-rom-boot-requirements.md), [sources](docs/research/system1-sources.md), [releases](releases/README.md), [milestones](docs/roadmap.md).
 
 ## Current scope
-Current owner scope (2026-10-28, SRC-0518): profile and shorten the slow Windows CI stage while preserving every required check. Hosted builds, controlled measurements, tooling/CI changes and ordinary publication are authorized for this work. Desktop, VM and emulator tests remain PAUSED; production/driver features, releases/tags, reference and hardware runs remain separate. Existing owner permissions are retained. They are not broadened, and they are not silently revoked. When the owner resumes, reuse still-applicable permissions; do not invent fresh approval requirements or expand their scope. Paired release work is PRIMARY. The bounded 286 work is a separate lane. Current release evidence: [owned input](docs/development/owned-window-input-evidence.md); [sampling research](docs/development/input-research-evidence.json). Read their relevant sections, not the entire journal.
+Current owner scope (2026-10-28, SRC-0521): resume paired release work and retained approved isolated original-candidate trials. Use windowed Display1 and readiness handshake. Release/tag publication,reference and hardware runs remain separate. Paired release work is PRIMARY; bounded286 work remains separate. [Current diagnostic receipt](docs/development/release-resumption-evidence.json); [owned input](docs/development/owned-window-input-evidence.md). Earlier scopes retain their exact applicability.
+
 
 ## Identity and license
 

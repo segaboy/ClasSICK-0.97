@@ -89,6 +89,9 @@ int cs_mac_timer_poll_prepare(cs_mac_timer_poll *p, const cs_mac_motion_io *scc,
     p->motion.phase = CS_MAC_MOTION_PREPARED;
     p->via = v;
     p->reload = reload;
+#if CLASSICK_MAC_TIMER_ACTIVITY_PROBE
+    (void)cs_mac_activity_begin(&p->activity);
+#endif
     if (cs_mac_polled_begin(&p->decoder, invert) != CS_MAC_POLLED_EMPTY)
         return fail(p, CS_MAC_STAGE_CONFIG, CS_MAC_CAUSE_INBOX_RESULT);
 
@@ -147,6 +150,13 @@ static int whole_loss(cs_mac_timer_poll *p, uint32_t reason, uint32_t s0,
 {
     struct cs_mac_motion *m = &p->motion;
     cs_window_inbox *in = m->inbox;
+
+#if CLASSICK_MAC_TIMER_ACTIVITY_PROBE
+    uint32_t flags = CS_MAC_ACT_LOST;
+    if (((s0 ^ s1) & UINT32_C(0x00380808)) == 0u) flags |= CS_MAC_ACT_STABLE;
+    if (m->have_phase) flags |= CS_MAC_ACT_HAD_PHASE;
+    (void)cs_mac_activity_pair(&p->activity, s0, s1, flags, reason);
+#endif
 
     if (!m->first_loss.reason) {
         struct cs_mac_motion_loss *l = &m->first_loss;
@@ -240,6 +250,17 @@ int cs_mac_timer_poll_service(cs_mac_timer_poll *p)
         return fail(p, CS_MAC_STAGE_INBOX, CS_MAC_CAUSE_INBOX_RESULT);
     }
     if (in->count > m->peak_queued) m->peak_queued = in->count;
+#if CLASSICK_MAC_TIMER_ACTIVITY_PROBE
+    {
+        uint32_t flags = CS_MAC_ACT_STABLE | CS_MAC_ACT_ACCEPTED;
+        if (m->have_phase) flags |= CS_MAC_ACT_HAD_PHASE;
+        if (rc == CS_MAC_POLLED_SAMPLE) {
+            flags |= CS_MAC_ACT_QUEUED;
+            if (o.dx || o.dy) flags |= CS_MAC_ACT_MOTION;
+        }
+        (void)cs_mac_activity_pair(&p->activity, s0, s1, flags, 0u);
+    }
+#endif
     m->have_phase = p->decoder.have_phase;
     m->last_raw_a = (a2 >> 3) & 1u;
     m->last_raw_b = (b2 >> 3) & 1u;
