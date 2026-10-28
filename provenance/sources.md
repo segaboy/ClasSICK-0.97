@@ -4816,3 +4816,11 @@ new capture;no guest implementation fix or release pass inferred.
 ## SRC-0524 - Bounded follow-up review limit and routing hold
 
 2026-10-28. One xAI/Grok Low requested-model4.7 call receives21594reviewed-public/original bytes at81c9c4:exact own Mac snapshot and five original sampler/observer files. At241.05s outer deadline,no final artifact,tool execution,commands,writes,tests or usage/balance report;partial reasoning excluded. CLI warns preferred model unavailable/fallback;resolved model and generic wrapper permission filtering unqualified. No retry or fanout;new Grok jobs held pending bounded model/control validation. This is execution/routing evidence,not an adopted technical review or a Macintosh source. [Canonical receipt](../docs/development/release-resumption-evidence.json).
+
+## SRC-0525 - Owner requests a solo next step
+
+2026-10-28. Owner: "For the next step only, do not use the other agents. Move forward." This step uses Codex alone;standing orchestration is not permanently revoked. Continue authorized release development,with existing source/role,trial,hardware,reference and release gates unchanged. No external AI calls. [Receipt](../docs/development/mac-recovery-window-evidence.json).
+
+## SRC-0526 - Original recovery-window contract and captured-input regression
+
+2026-10-28. Codex-only SPEC-0080/IMPL-0088/TEST-0101 from admitted original contracts/code and the own SRC-0523 MAR1 record. Reproduce priorFF4444/pair9F4C44/8F4444 and loss2. The following stable baseline,adjacent DCD transition and later Gray loss are independently scripted synthetic inputs,not an observed trace or historical/hardware evidence. The opt-in512-service window retains foreground recovery opportunity;default sampler,device programming and old formats remain. No manual,third-party implementation or worker output used. Executed checks,native pending/results and exact limitations are in the [canonical receipt](../docs/development/mac-recovery-window-evidence.json).

@@ -76,6 +76,7 @@ def main():
     p.add_argument('--window-timer-poll-probe',action='store_true',help='Separate timer-driven live-level polling experiment;window only')
     p.add_argument('--window-timer-refresh-probe',action='store_true',help='Opt-in SCC status-refresh endpoint experiment;requires timer polling')
     p.add_argument('--window-timer-activity-probe',action='store_true',help='Passive MWA1 activity checkpoint;requires timer polling and idle checkpoint')
+    p.add_argument('--window-timer-recovery-probe',action='store_true',help='Observe512 services after first activity;requires activity checkpoint')
     p.add_argument('--window-phase-idle-probe',action='store_true',help='Experimental phase-only no-decision pass; window profile only')
     p.add_argument('--dcd-invert',type=int,choices=(0,1,2,3),default=0,help='Unverified raw RR0 DCD sense mask; window profile only')
     a=p.parse_args()
@@ -83,6 +84,7 @@ def main():
     if a.window_timer_poll_probe and (a.window_pending_defer_probe or a.window_phase_idle_probe or a.window_first_input_probe):p.error('Timer experiment cannot combine with SCC defer/phase/first-input experiments')
     if a.window_timer_refresh_probe and not a.window_timer_poll_probe:p.error('--window-timer-refresh-probe requires --window-timer-poll-probe')
     if a.window_timer_activity_probe and not (a.window_timer_poll_probe and a.window_idle_probe):p.error('--window-timer-activity-probe requires timer polling and --window-idle-probe')
+    if a.window_timer_recovery_probe and not a.window_timer_activity_probe:p.error('--window-timer-recovery-probe requires --window-timer-activity-probe')
     native=a.native_drawing or a.selected_drawing or a.outline_drawing or a.window_drawing
     if a.dcd_invert and not a.window_drawing:p.error('--dcd-invert requires --window-drawing')
     if a.window_idle_probe and not a.window_drawing:p.error('--window-idle-probe requires --window-drawing')
@@ -128,6 +130,7 @@ def main():
         specs=[]
         numbers=((('0070','0072','0074','0075','0077') if a.window_timer_refresh_probe else ('0070','0072','0074','0075')) if a.window_timer_poll_probe else ('0070','0072'))
         if a.window_timer_activity_probe:numbers+=('0078',)
+        if a.window_timer_recovery_probe:numbers+=('0080',)
         for number in numbers:
             found=sorted(repo.glob('docs/specifications/SPEC-'+number+'-*.md'))
             if len(found)!=1:raise ValueError('Specification lookup SPEC-'+number)
@@ -139,12 +142,16 @@ def main():
         if a.window_timer_activity_probe:
             sources+=('platform/mac128k/activity.c','arch/m68k/activity-checkpoint.S')
             headers+=('platform/mac128k/activity.h',)
+        if a.window_timer_recovery_probe:
+            sources+=('platform/mac128k/activity-window.c',)
+            headers+=('platform/mac128k/activity-window.h',)
         program_source=None;program_hex='';specification='SPEC-0072';profile='native-window-preview-v1'
         if a.window_pending_defer_probe:profile='native-window-pending-defer-probe-v1'
         if a.window_first_input_probe:profile='native-window-'+('pending-defer-' if a.window_pending_defer_probe else '')+'first-input-probe-v1'
         if a.window_timer_poll_probe:profile='native-window-timer-poll-'+('idle-' if a.window_idle_probe else '')+'experiment-v1'
         if a.window_timer_refresh_probe:profile='native-window-timer-refresh-'+('idle-' if a.window_idle_probe else '')+'experiment-v1'
         if a.window_timer_activity_probe:profile='native-window-timer-activity-'+('refresh-' if a.window_timer_refresh_probe else '')+'checkpoint-v1';specification='SPEC-0078'
+        if a.window_timer_recovery_probe:profile='native-window-timer-recovery-'+('refresh-' if a.window_timer_refresh_probe else '')+'checkpoint-v1';specification='SPEC-0080'
         if a.window_phase_idle_probe:profile='native-window-phase-idle-'+('pending-defer-' if a.window_pending_defer_probe else '')+'probe-v1'
     profiles=[]
     for twin in ('a','b'):
@@ -161,6 +168,7 @@ def main():
         if a.window_timer_poll_probe:flags+=['-DCLASSICK_MAC_TIMER_POLL_PROBE=1']
         if a.window_timer_refresh_probe:flags+=['-DCLASSICK_MAC_TIMER_REFRESH_PROBE=1']
         if a.window_timer_activity_probe:flags+=['-DCLASSICK_MAC_TIMER_ACTIVITY_PROBE=1']
+        if a.window_timer_recovery_probe:flags+=['-DCLASSICK_MAC_TIMER_RECOVERY_PROBE=1']
         if a.window_first_input_probe:flags+=['-DCLASSICK_MAC_FIRST_INPUT_PROBE=1']
         if a.window_pending_defer_probe:flags+=['-DCLASSICK_MAC_PENDING_DEFER_PROBE=1']
         if a.window_phase_idle_probe:flags+=['-DCLASSICK_MAC_PHASE_IDLE_PROBE=1']
@@ -183,6 +191,8 @@ def main():
         if a.window_timer_poll_probe:required=tuple(x for x in required if x!='cs_mac_motion_service')+('cs_mac_timer_poll_service','cs_mac_polled_step')
         if a.window_timer_activity_probe:required+=('cs_mac_activity_pair','cs_mac_activity_trace','cs_mac_activity_checkpoint','cs_mac_activity_spin')
         elif any(name.startswith('cs_mac_activity_') for name in syms):raise ValueError('Unexpected activity observer in default profile')
+        if a.window_timer_recovery_probe:required+=('cs_mac_activity_window_begin','cs_mac_activity_window_step','cs_mac_activity_gate')
+        elif any(name.startswith('cs_mac_activity_window_') or name=='cs_mac_activity_gate' for name in syms):raise ValueError('Recovery gate in another profile')
         if (a.window_idle_probe and not a.window_timer_activity_probe) or a.window_first_input_probe:required+=('cs_mac_window_idle_checkpoint','cs_mac_window_idle_spin')
         if a.window_first_input_probe:required+=('cs_mac_first_input_probe_gate',)
         if a.window_drawing and not any(name.startswith('cs_cursor_') for name in syms):raise ValueError('Disconnected cursor helper')
@@ -211,6 +221,11 @@ def main():
                 if activity%4 or not 0x400<=activity<=0x2100-80:raise ValueError('Activity record own-RAM bounds')
                 for other,size in ((syms['cs_mac_trace'],128),(syms['cs_mac_diag'],64)):
                     if activity<other+size and other<activity+80:raise ValueError('Activity record overlaps prior diagnostics')
+            if a.window_timer_recovery_probe:
+                gate=syms['cs_mac_activity_gate']
+                if gate%4 or not 0x400<=gate<=0x2100-16:raise ValueError('Recovery gate own-RAM bounds')
+                for other,size in ((syms['cs_mac_trace'],128),(syms['cs_mac_diag'],64),(syms['cs_mac_activity_trace'],80)):
+                    if gate<other+size and other<gate+16:raise ValueError('Recovery gate overlaps diagnostics')
             if ('cs_mac_first_input_probe_gate' in syms)!=bool(a.window_first_input_probe):raise ValueError('First-input gate/profile mismatch')
             at=syms['cs_mac_window_install_vectors']-0x400000
             for vector,name in zip((0x64,0x68,0x6C),('cs_mac_window_via_irq','cs_mac_window_scc_irq','cs_mac_window_combined_irq')):
@@ -306,6 +321,7 @@ def main():
     if a.window_first_input_probe:manifest['window_first_input_probe_limit']=5000
     if a.window_idle_probe and not a.window_timer_activity_probe:manifest['window_idle_probe_threshold']=500
     if a.window_timer_activity_probe:manifest['activity_checkpoint']={'tag':'MWA1','version':1,'bytes':80,'address':syms['cs_mac_activity_trace'],'minimum_services':500,'fallback_services':50000,'wall_time_qualified':False,'extra_MMIO_reads':0,'extra_MMIO_writes':0,'old_diagnostics_unchanged':True}
+    if a.window_timer_recovery_probe:manifest['recovery_window']={'specification':'SPEC-0080','delay_services':512,'minimum_services':500,'fallback_services':50000,'state_bytes':16,'state_address':syms['cs_mac_activity_gate'],'timer_rate_qualified':False,'MAR1_exposes_completion_reason':False,'extra_MMIO_reads':0,'extra_MMIO_writes':0}
     if a.window_drawing:manifest.update({'window_drawing':True,'native_drawing_context':None,
      'dcd_invert':a.dcd_invert,'dcd_invert_verified':False,'cpu_callbacks':list(cpu_callbacks),
      'board_profile':{'status':'engineering-upper-alias-hypothesis-unverified','scc_read_b':0x9FFFF8,'scc_read_a':0x9FFFFA,

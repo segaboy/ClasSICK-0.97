@@ -1,0 +1,187 @@
+{
+  "date": "2026-10-28",
+  "baseline_revision": "0adb4589974818c514c0db8785a7b057b558016a",
+  "classification": "original-engineering-diagnostic",
+  "source_ids": [
+    "SRC-0525",
+    "SRC-0526"
+  ],
+  "specification": "SPEC-0080",
+  "implementation": "IMPL-0088",
+  "test": "TEST-0101",
+  "authority": "Owner requests next step without other agents;continue currently authorized release work.",
+  "agents_used": [],
+  "external_AI_calls": 0,
+  "implementation_and_verification": "Codex alone;no new CPU assembly or hardware programming. Existing audited MAR1 leaf reused.",
+  "result": "Hosted recovery/window tests and refusal/fault/object controls pass. Native proof and normal-profile hash comparison pending. No target trials in this step.",
+  "scope": "Separate opt-in diagnostic extends observation after first activity. Sampler,cadence,decoder,loss policy and normal images intended unchanged;not a movement/drag fix.",
+  "observed_input": {
+    "origin": "Own admitted MAR1 snapshot in release-resumption-evidence.json",
+    "prior": "80FF4444",
+    "s0": "009F4C44",
+    "s1": "008F4444",
+    "pairs": 17817,
+    "first_reason": 2,
+    "capture_confirmed": false
+  },
+  "synthetic_continuation": {
+    "not_observed_hardware": true,
+    "sticky_loss_services": 64,
+    "handshake": "Existing inbox discard/resume,then claim/complete baseline",
+    "stable_baseline": "8F4444",
+    "adjacent_DCD_sample": "8F4C44",
+    "expected_dx": -1,
+    "expected_dy": 0,
+    "completed_window_services": 18329,
+    "activity_pairs_at_completion": 18265,
+    "meaning": "Distinct services versus observed pairs;recovery possible under supplied stable inputs,not proven on target."
+  },
+  "host_profiles": [
+    {
+      "profile": "clang",
+      "exit_code": 0,
+      "elapsed_seconds": 4.141
+    },
+    {
+      "profile": "gcc64",
+      "exit_code": 0,
+      "elapsed_seconds": 3.812
+    },
+    {
+      "profile": "gcc32",
+      "exit_code": 0,
+      "elapsed_seconds": 3.844
+    },
+    {
+      "profile": "sanitized",
+      "exit_code": 0,
+      "elapsed_seconds": 3.672
+    }
+  ],
+  "focused_ctests_per_profile": 8,
+  "frozen_gate_checks": 41,
+  "capture_and_recovery_checks": 1052,
+  "object_audits": [
+    {
+      "target": "i686-w64-mingw32",
+      "optimization": "0",
+      "imports_and_mutable_globals": "none",
+      "sha256": "3422930f6dddccc8369dfe7e6ebc07971753446993d0f59046269065b68b6a64"
+    },
+    {
+      "target": "i686-w64-mingw32",
+      "optimization": "2",
+      "imports_and_mutable_globals": "none",
+      "sha256": "c44fc00c75555c3aafa661f95a9454864272cffbb2a37776040e02d1e2c422d6"
+    },
+    {
+      "target": "x86_64-w64-mingw32",
+      "optimization": "0",
+      "imports_and_mutable_globals": "none",
+      "sha256": "e741ff82128df6f46d3d72f81b38fe7adaa36533bf69b0ef8fd856f63d3d789e"
+    },
+    {
+      "target": "x86_64-w64-mingw32",
+      "optimization": "2",
+      "imports_and_mutable_globals": "none",
+      "sha256": "153c97ad979602acdb6c1f8dca9f21272304593cd32ddd77fbc66e56c4eaad77"
+    },
+    {
+      "target": "aarch64-none-elf",
+      "optimization": "0",
+      "imports_and_mutable_globals": "none",
+      "sha256": "4099a4d4263f00f29e7bc7cd783467f16c151813f453cd5120e60db277d3c4d7"
+    },
+    {
+      "target": "aarch64-none-elf",
+      "optimization": "2",
+      "imports_and_mutable_globals": "none",
+      "sha256": "821f585fb6bdf3968ea2f2d3832540d2d97ffddc8c8ebc6ae5dbc9716ca90695"
+    },
+    {
+      "target": "aarch64_be-none-elf",
+      "optimization": "0",
+      "imports_and_mutable_globals": "none",
+      "sha256": "cfc9ea11c79c0e4768775d492e6c9cba6c68984194580bd430f09c0298910ba6"
+    },
+    {
+      "target": "aarch64_be-none-elf",
+      "optimization": "2",
+      "imports_and_mutable_globals": "none",
+      "sha256": "0cda6c878924fe5368caa3283c0cd2d6a4e1c4d3f9b8601396579ebbc26c2601"
+    }
+  ],
+  "controls": [
+    {
+      "fault": "immediate",
+      "frozen_test_detected": true,
+      "exit_code": 1
+    },
+    {
+      "fault": "sliding",
+      "frozen_test_detected": true,
+      "exit_code": 1
+    },
+    {
+      "flags": [
+        "-DCLASSICK_MAC_TIMER_RECOVERY_PROBE=2"
+      ],
+      "refused": true
+    },
+    {
+      "flags": [
+        "-DCLASSICK_MAC_TIMER_RECOVERY_PROBE=1"
+      ],
+      "refused": true
+    },
+    {
+      "flags": [
+        "-DCLASSICK_MAC_TIMER_RECOVERY_PROBE=1",
+        "-DCLASSICK_MAC_TIMER_POLL_PROBE=1",
+        "-DCLASSICK_MAC_TIMER_ACTIVITY_PROBE=1"
+      ],
+      "refused": true
+    }
+  ],
+  "builder_refusals": [
+    {
+      "arguments": [
+        "--window-timer-recovery-probe"
+      ],
+      "refused_before_output": true
+    },
+    {
+      "arguments": [
+        "--window-drawing",
+        "--window-timer-recovery-probe"
+      ],
+      "refused_before_output": true
+    },
+    {
+      "arguments": [
+        "--window-drawing",
+        "--window-timer-activity-probe",
+        "--window-timer-recovery-probe"
+      ],
+      "refused_before_output": true
+    }
+  ],
+  "inputs": {
+    "platform/mac128k/activity-window.c": "d6e6e1030aa9b96a1c62357e68960009466e4a40218142fb90b0412e651bf6bf",
+    "platform/mac128k/activity-window.h": "1c3091adbe94fbd976800139ba4f0e10393fe01047c8bcc7c20e9e04a0f98472",
+    "platform/mac128k/window-entry.c": "21113b97b2802b5bc0059f1baef3b1fc99a83ebb3be54504416ba35b0b994ae7",
+    "scripts/Build-LoadedAppROM.py": "5948780baa08131ecb64854e5c5ad4814da8f197ac80914e28c02dc3696e8ea7",
+    "tests/mac-activity-window.c": "575620cc1fc4b03f57d43078472a2c7f16d0045ce7326e653e76912150c43994",
+    "tests/mac-activity-recovery.c": "81315fee7081d695998cbdad892fee10079181a0815d5232170754a3f6019b18"
+  },
+  "private_artifacts": "C:/ClasSICK/mac-recovery-window-20261028-a",
+  "emulator_VM_reference_hardware_runs": 0,
+  "release_ready": false,
+  "limitations": [
+    "512/50000 are service counts,not a calibrated frequency or wall time.",
+    "MAR1 omits gate state/completion reason;fallback can truncate a late window.",
+    "Host scripted register responses do not qualify latches,coherence,wiring or physical capture.",
+    "The prior first-loss native snapshot did not observe subsequent recovery.",
+    "Mac/PC GUI/human movement,drag,release/restoration and all existing historical,physical/full128K,source/role,edition,parity,B2,native-app,System1 gates remain."
+  ]
+}

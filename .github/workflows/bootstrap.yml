@@ -292,6 +292,22 @@ jobs:
             ${{ runner.temp }}/classick-window-activity/Os-a/classick-loaded-app.rom
             ${{ runner.temp }}/classick-window-activity/Os-a/classick-loaded-app.map
           if-no-files-found: error
+      - name: Verify post-loss observation window and build recovery checkpoint (unbooted)
+        run: |
+          cc -std=c11 -pedantic-errors -Wall -Wextra -Werror -Wconversion -Wsign-conversion -I. platform/mac128k/activity-window.c tests/mac-activity-window.c -o "$RUNNER_TEMP/mac-activity-window"
+          "$RUNNER_TEMP/mac-activity-window"
+          cc -std=c11 -pedantic-errors -Wall -Wextra -Werror -Wconversion -Wsign-conversion -DCLASSICK_MAC_TIMER_REFRESH_PROBE=1 -DCLASSICK_MAC_TIMER_ACTIVITY_PROBE=1 -I. platform/mac128k/activity.c platform/mac128k/activity-window.c platform/mac128k/timer-poll.c platform/mac128k/polled-phase.c apps/window-scene/inbox.c tests/mac-activity-recovery.c -o "$RUNNER_TEMP/mac-activity-recovery"
+          "$RUNNER_TEMP/mac-activity-recovery"
+          python3 scripts/Build-LoadedAppROM.py --window-drawing --window-timer-poll-probe --window-timer-refresh-probe --window-idle-probe --window-timer-activity-probe --window-timer-recovery-probe --tool-root "$RUNNER_TEMP/classick-m68k/root" --output "$RUNNER_TEMP/classick-window-recovery"
+      - name: Retain recovery observation checkpoint (unbooted)
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
+        with:
+          name: classick-window-recovery-mac
+          path: |
+            ${{ runner.temp }}/classick-window-recovery/manifest.json
+            ${{ runner.temp }}/classick-window-recovery/Os-a/classick-loaded-app.rom
+            ${{ runner.temp }}/classick-window-recovery/Os-a/classick-loaded-app.map
+          if-no-files-found: error
       - name: Retain separate timer polling experiments (unbooted)
         uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
         with:

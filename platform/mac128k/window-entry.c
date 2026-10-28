@@ -12,6 +12,16 @@
 #if CLASSICK_MAC_TIMER_POLL_PROBE
 #include "timer-poll.h"
 #endif
+#ifndef CLASSICK_MAC_TIMER_RECOVERY_PROBE
+#define CLASSICK_MAC_TIMER_RECOVERY_PROBE 0
+#endif
+#if CLASSICK_MAC_TIMER_RECOVERY_PROBE != 0 && CLASSICK_MAC_TIMER_RECOVERY_PROBE != 1
+#error CLASSICK_MAC_TIMER_RECOVERY_PROBE must be0 or1
+#endif
+#if CLASSICK_MAC_TIMER_RECOVERY_PROBE
+#include "activity-window.h"
+static cs_mac_activity_window cs_mac_activity_gate;
+#endif
 #include "input-probe.h"
 #include "../../arch/m68k/exclusion.h"
 #include "../../core/services/traps.h"
@@ -38,6 +48,9 @@
 #endif
 #if CLASSICK_MAC_IDLE_PROBE < 0 || CLASSICK_MAC_IDLE_PROBE > 1
 #error "CLASSICK_MAC_IDLE_PROBE must be 0 or 1"
+#endif
+#if CLASSICK_MAC_TIMER_RECOVERY_PROBE && !(CLASSICK_MAC_TIMER_POLL_PROBE && CLASSICK_MAC_TIMER_ACTIVITY_PROBE && CLASSICK_MAC_IDLE_PROBE)
+#error Recovery observation requires timer polling,activity and idle checkpoint
 #endif
 #if CLASSICK_MAC_FIRST_INPUT_PROBE && !CLASSICK_MAC_IDLE_PROBE
 #error "CLASSICK_MAC_FIRST_INPUT_PROBE requires CLASSICK_MAC_IDLE_PROBE=1"
@@ -257,9 +270,17 @@ static uint32_t observe(void)
         cs_mac_trace.loss_reason=motion.first_loss.reason;
 #if CLASSICK_MAC_TIMER_POLL_PROBE && CLASSICK_MAC_TIMER_ACTIVITY_PROBE
         /* Counted services are not a wall-time or input-causality guarantee. */
+#if CLASSICK_MAC_TIMER_RECOVERY_PROBE
+        int completion=cs_mac_activity_window_step(&cs_mac_activity_gate,motion.services,
+            (timer_motion.activity.nonzero_queued || timer_motion.activity.buttononly_queued ||
+             timer_motion.activity.losses)?1u:0u);
+        if(completion<0){cs_mac_trace.cause=completion;halt(18);}
+        if(completion!=CS_MAC_AW_WAIT){
+#else
         if ((motion.services >= 500u &&
              (timer_motion.activity.nonzero_queued || timer_motion.activity.losses)) ||
             motion.services >= 50000u) {
+#endif
             cs_mac_activity_trace = timer_motion.activity;
             cs_mac_activity_checkpoint();
         }
@@ -299,6 +320,9 @@ void cs_mac_main(void)
     mio.cookie=0;mio.read=scc_read;mio.write=scc_write;mio.pb=motion_pb;
     r=native_motion_prepare(&mio,&io);
     if(r!=CS_MAC_MOTION_OK){cs_mac_trace.cause=r;halt(12);}
+#if CLASSICK_MAC_TIMER_RECOVERY_PROBE
+    if(cs_mac_activity_window_begin(&cs_mac_activity_gate)!=0)halt(18);
+#endif
     cs_mac_diag.stage=6;
     /* Still IPL7 and quiescent: install level 1/2/3 autovectors. */
     cs_mac_window_install_vectors();
