@@ -1911,6 +1911,50 @@
         "Dragging and release remain unqualified.",
         "No physical hardware,System1,full128K or release qualification."
       ]
+    },
+    {
+      "id": "2026-10-29-pc-native-device-dragged",
+      "path": "docs/evidence/screenshots/2026-10-29/pc-native-device-dragged.png",
+      "sha256": "29a206031578fbc2af0e7663011a5c104479a7e87ad8f84a4690a8ed3cbdae1f",
+      "bytes": 4890,
+      "width": 1024,
+      "height": 768,
+      "captured_on": "2026-10-29",
+      "target": "native-x86_64",
+      "caption": "Device-level PC control:window dragged20pixels right and12down,then released. GUI/human delivery is not qualified.",
+      "alt": "Device-level PC control:window dragged20pixels right and12down,then released. GUI/human delivery is not qualified.",
+      "source_revision": "10f83fe1ce60681e0f75ccbeb1470173522dbe04",
+      "compiled_source_revision": "722ef85ce73f61d854c45274749952389fb65740",
+      "evidence": "docs/evidence/screenshots/2026-10-29/README.md",
+      "license": "GPL-3.0-or-later",
+      "rights": "Unmodified own-product VBoxManage framebuffer export;original project scene only,no desktop,emulator chrome,reference pixels,retouch or private paths.",
+      "input": "synthetic",
+      "limitations": [
+        "E2 device-level controls only;not host GUI or human delivery.",
+        "No Mac motion,physical hardware,System1,full128K or release qualification."
+      ]
+    },
+    {
+      "id": "2026-10-29-pc-native-device-roundtrip",
+      "path": "docs/evidence/screenshots/2026-10-29/pc-native-device-roundtrip.png",
+      "sha256": "d4d5d1f97013a3f17220778ab53752f8a6d9857b1a75c52d89c89a7ea9a9f5ca",
+      "bytes": 4866,
+      "width": 1024,
+      "height": 768,
+      "captured_on": "2026-10-29",
+      "target": "native-x86_64",
+      "caption": "Device-level PC control:window and cursor returned to initial positions;all scene pixels restored apart from independently checked counter0002.",
+      "alt": "Device-level PC control:window and cursor returned to initial positions;all scene pixels restored apart from independently checked counter0002.",
+      "source_revision": "10f83fe1ce60681e0f75ccbeb1470173522dbe04",
+      "compiled_source_revision": "722ef85ce73f61d854c45274749952389fb65740",
+      "evidence": "docs/evidence/screenshots/2026-10-29/README.md",
+      "license": "GPL-3.0-or-later",
+      "rights": "Unmodified own-product VBoxManage framebuffer export;original project scene only,no desktop,emulator chrome,reference pixels,retouch or private paths.",
+      "input": "synthetic",
+      "limitations": [
+        "E2 device-level controls only;not host GUI or human delivery.",
+        "No Mac motion,physical hardware,System1,full128K or release qualification."
+      ]
     }
   ]
 }

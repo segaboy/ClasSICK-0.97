@@ -7,7 +7,8 @@
     "SRC-0544",
     "SRC-0545",
     "SRC-0546",
-    "SRC-0547"
+    "SRC-0547",
+    "SRC-0548"
   ],
   "specifications": [
     "SPEC-0052",
@@ -22,7 +23,8 @@
   ],
   "tests": [
     "TEST-0105",
-    "TEST-0106"
+    "TEST-0106",
+    "TEST-0107"
   ],
   "status": "Hosted checks and PC native/media proof pass;Mac native proof/CI and exact candidate trials pending. Paired release not ready.",
   "authority": "Owner directs finishing r2 review then the next release step;retained approved isolated original-candidate trials/source-role scopes apply. No release/reference/physical permissions expand.",
@@ -453,11 +455,200 @@
       "helper_event_count": 8,
       "helper_button_mapping": "swap_buttons=true;unchanged",
       "root_cause_proven": false
+    },
+    {
+      "target": "native-x86_64",
+      "source_revision": "722ef85ce73f61d854c45274749952389fb65740",
+      "payload_sha256": "19100bfbd3ea836579a09c58b989b50a0c6af8101a5137183cc2bd8b6b746f73",
+      "disk_sha256": "38d8d2065ce397709713e17e44b139ee67469036a06dbe0d4814fd0033be12b1",
+      "new_discriminator": "Normal right-primary capture then bounded small relative helper,not absolute Sky drag.",
+      "E3": {
+        "capture_confirmed": true,
+        "foreground_verified": true,
+        "physical_containment": false,
+        "host_cursor_reported": [
+          2,
+          2
+        ],
+        "actual_input_events": 0,
+        "guard_refusal": "client area",
+        "pixels_after_refused_route_unchanged": true,
+        "GUI_motion_or_drag_pass": false,
+        "limitations": "Capture metadata never bypasses physical containment. The mismatch is an observation,not proof of the complete prior root cause."
+      },
+      "E2": {
+        "interface": "Previously admitted public IMouse.PutMouseEvent on exact owned session",
+        "events": [
+          {
+            "name": "x-control",
+            "dx": -8,
+            "dy": 0,
+            "buttons": 0,
+            "class": "E2-device-API",
+            "guest_pass_inferred_from_API": false
+          },
+          {
+            "name": "y-control",
+            "dx": 0,
+            "dy": -8,
+            "buttons": 0,
+            "class": "E2-device-API",
+            "guest_pass_inferred_from_API": false
+          },
+          {
+            "name": "to-title",
+            "dx": -56,
+            "dy": -84,
+            "buttons": 0,
+            "class": "E2-device-API",
+            "guest_pass_inferred_from_API": false
+          },
+          {
+            "name": "title-down",
+            "dx": 0,
+            "dy": 0,
+            "buttons": 1,
+            "class": "E2-device-API",
+            "guest_pass_inferred_from_API": false
+          },
+          {
+            "name": "title-drag",
+            "dx": 20,
+            "dy": 12,
+            "buttons": 1,
+            "class": "E2-device-API",
+            "guest_pass_inferred_from_API": false
+          },
+          {
+            "name": "title-release",
+            "dx": 0,
+            "dy": 0,
+            "buttons": 0,
+            "class": "E2-device-API",
+            "guest_pass_inferred_from_API": false
+          },
+          {
+            "name": "released-move",
+            "dx": 8,
+            "dy": 0,
+            "buttons": 0,
+            "class": "E2-device-API",
+            "guest_pass_inferred_from_API": false
+          },
+          {
+            "name": "return-title",
+            "dx": -8,
+            "dy": 0,
+            "buttons": 0,
+            "class": "E2-device-API",
+            "guest_pass_inferred_from_API": false
+          },
+          {
+            "name": "return-down",
+            "dx": 0,
+            "dy": 0,
+            "buttons": 1,
+            "class": "E2-device-API",
+            "guest_pass_inferred_from_API": false
+          },
+          {
+            "name": "return-drag",
+            "dx": -20,
+            "dy": -12,
+            "buttons": 1,
+            "class": "E2-device-API",
+            "guest_pass_inferred_from_API": false
+          },
+          {
+            "name": "return-release",
+            "dx": 0,
+            "dy": 0,
+            "buttons": 0,
+            "class": "E2-device-API",
+            "guest_pass_inferred_from_API": false
+          },
+          {
+            "name": "roundtrip",
+            "dx": 64,
+            "dy": 92,
+            "buttons": 0,
+            "class": "E2-device-API",
+            "guest_pass_inferred_from_API": false
+          }
+        ],
+        "frame_controls": {
+          "E3_capture_left_relative_frames_equal": true,
+          "E3_change_bbox": null,
+          "E2_x_control_changed": [
+            501,
+            381,
+            516,
+            388
+          ],
+          "E2_y_control_changed": [
+            501,
+            373,
+            508,
+            388
+          ],
+          "E2_held_drag_changed": [
+            336,
+            283,
+            580,
+            439
+          ],
+          "E2_release_only_changed": null,
+          "E2_released_motion_bbox": [
+            465,
+            301,
+            480,
+            308
+          ],
+          "E2_roundtrip_initial_equal": false,
+          "E2_roundtrip_change_bbox": [
+            668,
+            503,
+            680,
+            515
+          ],
+          "E2_roundtrip_equal_outside_expected_counter": true,
+          "initial_counter": 0,
+          "final_counter": 2,
+          "counter_glyphs_checked": true,
+          "held_drag_displacement": [
+            20,
+            12
+          ],
+          "release_then_unheld_movement_changed_only_cursor": true,
+          "GUI_drag_passed": false
+        },
+        "accepted_scope": "Guest device-level axis,held drag,release and restoration controls only. Not GUI/human acceptance."
+      },
+      "cleanup": {
+        "utc": "2026-10-29T22:01:23.0555553Z",
+        "cold_starts": 1,
+        "state": "poweroff",
+        "unregistered": true,
+        "existing_vm_inventory_preserved": true,
+        "running_state_preserved": true,
+        "post_trial_raw_roundtrip_equal": true,
+        "artifacts_retained": true,
+        "semantic_session_stop_observed": false,
+        "termination": "external poweroff from paused state"
+      },
+      "time": {
+        "total_host_seconds": 199.7426556,
+        "active_upper_estimate_seconds": 178.6816159,
+        "total_cap": 900,
+        "active_cap": 600,
+        "lease_ended": true
+      },
+      "human_test": false
     }
   ],
   "preservation": "24research originals,held brief,UART role boundaries,old records,tags and registered media preserved. No OneNote/wiki or extra Codex agents.",
   "release_ready": false,
-  "next": "Explicit source-identified continuing divisor4 comparison,without changing decoding/loss or device sequences;PC still needs bounded relative/capture diagnosis. Earlier finite divisor4/16 failures stay valid. No release freeze or publication.",
+  "next": "Build/trial the committed continuing Mac divisor4 comparison after its source CI. PC device path has a bounded successful drag/release/scene-restoration control;captured GUI delivery remains separately blocked. No release publication.",
   "host_session_followup": {
     "profile": "Clang Debug",
     "executed": 3,
@@ -482,9 +673,11 @@
     "docs/evidence/screenshots/2026-10-29/pc-contrasting-cursor-start.png",
     "docs/evidence/screenshots/2026-10-29/pc-contrasting-cursor-clipped.png",
     "docs/evidence/screenshots/2026-10-29/mac-live-pair-start.png",
-    "docs/evidence/screenshots/2026-10-29/mac-live-pair-after-input.png"
+    "docs/evidence/screenshots/2026-10-29/mac-live-pair-after-input.png",
+    "docs/evidence/screenshots/2026-10-29/pc-native-device-dragged.png",
+    "docs/evidence/screenshots/2026-10-29/pc-native-device-roundtrip.png"
   ],
-  "indexed_PNGs": 82,
+  "indexed_PNGs": 84,
   "rate_comparison": {
     "source_baseline": "3f7cc9ffa5b0b9d8574a36d0d0afbbeec5374630",
     "specification": "SPEC-0083 dated rate amendment",
@@ -568,6 +761,8 @@
     },
     "native_proof": "pending source-pinnedCI",
     "target_trial": false,
-    "release_pass": false
+    "release_pass": false,
+    "implementation_revision": "10f83fe",
+    "publication": "Specific public push approval pending;no CI or Mac comparison run claimed."
   }
 }

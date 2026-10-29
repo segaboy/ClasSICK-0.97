@@ -16,3 +16,10 @@ Two unchanged original guest exports from one native PC boot. Windows input is d
 - [pc-contrasting-cursor-clipped](pc-contrasting-cursor-clipped.png)
 - [mac-live-pair-start](mac-live-pair-start.png)
 - [mac-live-pair-after-input](mac-live-pair-after-input.png)
+
+## Native PC device-control roundtrip
+
+SRC-0548/TEST-0107. Separate E2 controls on the same verified continuing PC build move both axes,drag the window20,12,release and move the pointer without further window movement. Returning both to the start restores every pixel except the independently checked click counter0002. The captured E3 helper is refused before sending any event because Windows reports its cursor at2,2 outside the owned client. E2 proves this scoped native behavior;GUI/human usability stays open. [Canonical receipt](../../../development/release-input-repair.json).
+
+- [Device-level dragged/released window](pc-native-device-dragged.png)
+- [Device-level scene roundtrip](pc-native-device-roundtrip.png)

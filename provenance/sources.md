@@ -4910,3 +4910,7 @@ Intel,Intel Quark SoC X1000 Core Developer Manual,October2013,order329679-001US,
 ## SRC-0547 - Original continuing rate-comparison amendment
 
 2026-10-29. Lead adopts explicit1/4/16reload-divisor composition under SPEC-0083,default1 unchanged,for a continuing comparison after SRC-0546. Earlier finite rate failures remain valid. One Copilot Sonnet5.5 Low call returns15replacement proposals from22719frozen public/original bytes,one view/no writes/commands/tests,reported1premium request. Lead repairs malformed JSON/removes duplicate guard/corrects wording and executes26builder refusals/five pre-output acceptances/nine entry-preprocessor controls. Native proof/trial pending. No decoder,MMIO sequence,assembly,loss relaxation,historical or physical claim. [Canonical receipt](../docs/development/release-input-repair.json).
+
+## SRC-0548 - Native PC device-control drag and captured GUI refusal
+
+2026-10-29;TEST-0107. One fresh isolated verified native PC session confirms capture,then refuses the guarded host-relative route before any event because physical cursor2,2 is outside the owned client. Twelve separately labelled admitted IMouse device events demonstrate axis movement,20/12held window drag,release,unheld cursor-only movement and exact scene return except independently checked counter0002. Two unchanged own-framebuffer exports indexed. VM closed/media roundtrip/inventory preserved. E2 acceptance does not replace E3/E4,Mac input or release gates. [Canonical receipt](../docs/development/release-input-repair.json).
