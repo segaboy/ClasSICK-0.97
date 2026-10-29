@@ -480,8 +480,131 @@
     }
   ],
   "ci": {
-    "status": "pending normal source-pinned CI",
-    "expected_change": "Two additional CTests per relevant profile;record actual totals after execution."
+    "status": "success",
+    "source_revision": "d78ad5e427f9ef3887e77dbb5cb90de9cfb95674",
+    "run": 40934066031,
+    "url": "https://github.com/segaboy/ClasSICK-0.97/actions/runs/40934066031",
+    "jobs": [
+      {
+        "name": "windows-bootstrap",
+        "id": 123659827177,
+        "conclusion": "success"
+      },
+      {
+        "name": "m68k-rom",
+        "id": 123659827689,
+        "conclusion": "success"
+      }
+    ],
+    "selected_windows_stage_executed_CTests": 3424,
+    "profiles": [
+      {
+        "name": "media-verification/clang-hosted/debug-a",
+        "counts": {
+          "expected": 396,
+          "executed": 396,
+          "passed": 396,
+          "failed": 0,
+          "skipped_or_not_run": 0
+        },
+        "identity_sha256": "316210d93770978fbdc5e1315eeb4ccda25c0da0bb50e833466129c7ebc84c7d"
+      },
+      {
+        "name": "media-verification/clang-hosted/debug-b",
+        "counts": {
+          "expected": 396,
+          "executed": 396,
+          "passed": 396,
+          "failed": 0,
+          "skipped_or_not_run": 0
+        },
+        "identity_sha256": "316210d93770978fbdc5e1315eeb4ccda25c0da0bb50e833466129c7ebc84c7d"
+      },
+      {
+        "name": "media-verification/clang-hosted/release",
+        "counts": {
+          "expected": 396,
+          "executed": 396,
+          "passed": 396,
+          "failed": 0,
+          "skipped_or_not_run": 0
+        },
+        "identity_sha256": "316210d93770978fbdc5e1315eeb4ccda25c0da0bb50e833466129c7ebc84c7d"
+      },
+      {
+        "name": "media-verification/clang-hosted/i686",
+        "counts": {
+          "expected": 360,
+          "executed": 360,
+          "passed": 360,
+          "failed": 0,
+          "skipped_or_not_run": 0
+        },
+        "identity_sha256": "7b0a0fc10b1a96895edbe0cc1975aa9b4f5d91c6cd1f79102ad198ddbff1fe4d"
+      },
+      {
+        "name": "media-verification/clang-hosted/sanitized",
+        "counts": {
+          "expected": 396,
+          "executed": 396,
+          "passed": 396,
+          "failed": 0,
+          "skipped_or_not_run": 0
+        },
+        "identity_sha256": "316210d93770978fbdc5e1315eeb4ccda25c0da0bb50e833466129c7ebc84c7d"
+      },
+      {
+        "name": "media-verification/gcc-debug-a",
+        "counts": {
+          "expected": 379,
+          "executed": 379,
+          "passed": 379,
+          "failed": 0,
+          "skipped_or_not_run": 0
+        },
+        "identity_sha256": "64bc71bdf8c6f6a4ca550e79691d8e48608da20163df3e97d7633b529b46bb2f"
+      },
+      {
+        "name": "media-verification/gcc-debug-b",
+        "counts": {
+          "expected": 379,
+          "executed": 379,
+          "passed": 379,
+          "failed": 0,
+          "skipped_or_not_run": 0
+        },
+        "identity_sha256": "64bc71bdf8c6f6a4ca550e79691d8e48608da20163df3e97d7633b529b46bb2f"
+      },
+      {
+        "name": "media-verification/gcc-release",
+        "counts": {
+          "expected": 379,
+          "executed": 379,
+          "passed": 379,
+          "failed": 0,
+          "skipped_or_not_run": 0
+        },
+        "identity_sha256": "64bc71bdf8c6f6a4ca550e79691d8e48608da20163df3e97d7633b529b46bb2f"
+      },
+      {
+        "name": "media-verification/gcc-i686",
+        "counts": {
+          "expected": 343,
+          "executed": 343,
+          "passed": 343,
+          "failed": 0,
+          "skipped_or_not_run": 0
+        },
+        "identity_sha256": "b7253da6304f8435efda15d76ced36636a1cabb78d2ad3fe8c7126388af3695c"
+      }
+    ],
+    "new_test_executions_inside_selected_stage": {
+      "pc286.span-build": 9,
+      "pc286.span-build-oracle": 9
+    },
+    "selected_stage_seconds": 560.0,
+    "reported_CTest_wall_seconds": 220.99,
+    "scope": "Actual parsed9-profile selected Windows verification stage;other required workflow checks/jobs also succeed. Not a target run. Follow-up receipt-only edits do not change relevant source/flags/dependencies."
   },
   "remaining": [
     "Real owned-memory provider admission,nonaliasing/lifetime proof and actual native access.",
