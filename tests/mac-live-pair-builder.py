@@ -17,9 +17,15 @@ bad=[['--window-timer-live-pair'],['--window-drawing','--window-timer-live-pair'
 bad += [live+[flag] for flag in ['--window-idle-probe','--window-timer-activity-probe',
         '--window-timer-recovery-probe','--window-first-input-probe',
         '--window-pending-defer-probe','--window-phase-idle-probe','--window-timer-pair-probe']]
-bad += [live+['--window-timer-divisor',str(n)] for n in (4,16)]
+bad += [live+['--window-timer-divisor',str(n)] for n in (2,8,32)]
+bad += [prefix+['--window-timer-divisor',str(n)] for n in (4,16)]
+bad += [['--window-timer-live-pair','--window-timer-divisor','4'],
+        ['--window-drawing','--window-timer-live-pair','--window-timer-divisor','16']]
+bad += [live+[flag,'--window-timer-divisor','4'] for flag in ['--window-idle-probe',
+        '--window-timer-activity-probe','--window-timer-recovery-probe','--window-first-input-probe',
+        '--window-pending-defer-probe','--window-phase-idle-probe','--window-timer-pair-probe']]
 bad += [prefix+['--window-timer-pair-probe'],prefix+['--window-timer-recovery-probe']]
-good=[live,prefix+['--window-idle-probe','--window-timer-activity-probe',
+good=[live,live+['--window-timer-divisor','1'],live+['--window-timer-divisor','4'],live+['--window-timer-divisor','16'],prefix+['--window-idle-probe','--window-timer-activity-probe',
                   '--window-timer-recovery-probe','--window-timer-pair-probe']]
 
 class BeforeOutput(Exception):

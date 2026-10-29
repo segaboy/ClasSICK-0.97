@@ -88,11 +88,11 @@ def main():
     if a.window_timer_refresh_probe and not a.window_timer_poll_probe:p.error('--window-timer-refresh-probe requires --window-timer-poll-probe')
     if a.window_timer_activity_probe and not (a.window_timer_poll_probe and a.window_idle_probe):p.error('--window-timer-activity-probe requires timer polling and --window-idle-probe')
     if a.window_timer_recovery_probe and not a.window_timer_activity_probe:p.error('--window-timer-recovery-probe requires --window-timer-activity-probe')
-    if a.window_timer_divisor!=1 and not (a.window_timer_recovery_probe and a.window_timer_refresh_probe):p.error('Nondefault timer divisor requires recovery and refresh probes')
+    if a.window_timer_divisor!=1 and not a.window_timer_live_pair and not (a.window_timer_recovery_probe and a.window_timer_refresh_probe):p.error('Nondefault timer divisor requires live pair or recovery and refresh probes')
     if a.window_timer_pair_probe and not (a.window_timer_recovery_probe and a.window_timer_refresh_probe):p.error('Pair probe requires recovery and refresh')
     if a.window_timer_live_pair:
         if not (a.window_drawing and a.window_timer_poll_probe and a.window_timer_refresh_probe):p.error('Live pair requires window drawing, timer poll and refresh')
-        if a.window_timer_pair_probe or a.window_idle_probe or a.window_timer_activity_probe or a.window_timer_recovery_probe or a.window_first_input_probe or a.window_pending_defer_probe or a.window_phase_idle_probe or a.window_timer_divisor!=1:p.error('Live pair forbids checkpoint diagnostic modes and nondefault divisor')
+        if a.window_timer_pair_probe or a.window_idle_probe or a.window_timer_activity_probe or a.window_timer_recovery_probe or a.window_first_input_probe or a.window_pending_defer_probe or a.window_phase_idle_probe:p.error('Live pair forbids checkpoint diagnostic modes')
         a.window_timer_pair_probe=True
     native=a.native_drawing or a.selected_drawing or a.outline_drawing or a.window_drawing
     if a.dcd_invert and not a.window_drawing:p.error('--dcd-invert requires --window-drawing')
@@ -164,7 +164,7 @@ def main():
         if a.window_timer_activity_probe:profile='native-window-timer-activity-'+('refresh-' if a.window_timer_refresh_probe else '')+'checkpoint-v1';specification='SPEC-0078'
         if a.window_timer_recovery_probe:profile='native-window-timer-recovery-'+('refresh-' if a.window_timer_refresh_probe else '')+'checkpoint-v1';specification='SPEC-0080'
         if a.window_timer_pair_probe:profile=profile.replace('checkpoint-v1','paired-checkpoint-v1');specification='SPEC-0081'
-        if a.window_timer_live_pair:profile='native-window-timer-live-pair-v1';specification='SPEC-0083'
+        if a.window_timer_live_pair:profile='native-window-timer-live-pair-'+('divisor'+str(a.window_timer_divisor)+'-' if a.window_timer_divisor!=1 else '')+'v1';specification='SPEC-0083'
         if a.window_timer_divisor!=1:profile=profile.replace('checkpoint-v1','divisor'+str(a.window_timer_divisor)+'-checkpoint-v1')
         if a.window_phase_idle_probe:profile='native-window-phase-idle-'+('pending-defer-' if a.window_pending_defer_probe else '')+'probe-v1'
     profiles=[]
@@ -357,7 +357,7 @@ def main():
      'inputs':{f:hashlib.sha256((repo/f).read_bytes().replace(b'\r\n',b'\n')).hexdigest() for f in (*sources,*headers)}}
     if a.window_timer_poll_probe:manifest.update({'timer_poll_experiment':True,'timer_reload_count':4096//a.window_timer_divisor,'timer_frequency_qualified':False,'physical_edge_completeness_qualified':False,'SCC_master_interrupts':False})
     if a.window_timer_refresh_probe:manifest['timer_refresh_experiment']=True
-    if a.window_timer_live_pair:manifest['timer_live_pair']={'live':True,'checkpoint':False,'halts_after_observation':False,'motion_claimed':False,'physical_timing_qualified':False,'new_MMIO_operations':0}
+    if a.window_timer_live_pair:manifest['timer_live_pair']={'live':True,'checkpoint':False,'halts_after_observation':False,'motion_claimed':False,'physical_timing_qualified':False,'programmed_reload_divisor':a.window_timer_divisor,'new_MMIO_operations':0}
     if a.window_drawing:manifest['window_idle_probe']=bool(a.window_idle_probe)
     if a.window_drawing:manifest['window_pending_defer_probe']=bool(a.window_pending_defer_probe)
     if a.window_drawing:manifest['window_phase_idle_probe']=bool(a.window_phase_idle_probe)

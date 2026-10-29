@@ -6,7 +6,8 @@
     "SRC-0543",
     "SRC-0544",
     "SRC-0545",
-    "SRC-0546"
+    "SRC-0546",
+    "SRC-0547"
   ],
   "specifications": [
     "SPEC-0052",
@@ -483,5 +484,90 @@
     "docs/evidence/screenshots/2026-10-29/mac-live-pair-start.png",
     "docs/evidence/screenshots/2026-10-29/mac-live-pair-after-input.png"
   ],
-  "indexed_PNGs": 82
+  "indexed_PNGs": 82,
+  "rate_comparison": {
+    "source_baseline": "3f7cc9ffa5b0b9d8574a36d0d0afbbeec5374630",
+    "specification": "SPEC-0083 dated rate amendment",
+    "hypothesis": "Continuing rate comparison may discriminate sampling/recovery behavior;not established cause or fix. Earlier finite divisor4/16 failures retained in SRC-0530/0531.",
+    "code_change": "Permit explicit continuing1/4/16divisors,distinct profiles and manifest field,divisor4nativeCIcomparison;no decoder/acquisition/assembly/loss change.",
+    "worker": {
+      "round": "rate",
+      "worker": "copilot",
+      "exit_code": 0,
+      "outer_timeout": false,
+      "elapsed_seconds": 41.75,
+      "input_bytes": 22719,
+      "input_sha256": "e30e2c8ef64d8fb39918288da06de78911ce213a2b293203768aae8fc9a407f6",
+      "stderr_bytes": 0,
+      "model": "claude-sonnet-5.5",
+      "effort": "low",
+      "views": 1,
+      "commands": 0,
+      "writes": 0,
+      "tests_executed": [],
+      "reported_premium_requests": 1,
+      "input_scope": "Frozen public own code/reviewed engineering contract excerpts only",
+      "lead_corrections": [
+        "Repair one malformed JSON delimiter;no paid retry.",
+        "Remove duplicate LIVE_PAIR preprocessor default/validation.",
+        "Exact40957services replaces worker greater-than wording.",
+        "Reject proposed host timer test as proof of window-entry guard compilation;lead runs9actual entry preprocess controls instead."
+      ]
+    },
+    "actual_checks": {
+      "builder_refusals": 26,
+      "accepted_before_first_output": 5,
+      "entry_preprocessor_controls": 9,
+      "results": [
+        {
+          "name": "live1",
+          "expected_acceptance": true,
+          "actual_returncode": 0
+        },
+        {
+          "name": "live4",
+          "expected_acceptance": true,
+          "actual_returncode": 0
+        },
+        {
+          "name": "live16",
+          "expected_acceptance": true,
+          "actual_returncode": 0
+        },
+        {
+          "name": "incomplete-live",
+          "expected_acceptance": false,
+          "actual_returncode": 1
+        },
+        {
+          "name": "ordinary-rate",
+          "expected_acceptance": false,
+          "actual_returncode": 1
+        },
+        {
+          "name": "live-checkpoint",
+          "expected_acceptance": false,
+          "actual_returncode": 1
+        },
+        {
+          "name": "unsupported-rate",
+          "expected_acceptance": false,
+          "actual_returncode": 1
+        },
+        {
+          "name": "invalid-live-value",
+          "expected_acceptance": false,
+          "actual_returncode": 1
+        },
+        {
+          "name": "old-recovery-rate",
+          "expected_acceptance": true,
+          "actual_returncode": 0
+        }
+      ]
+    },
+    "native_proof": "pending source-pinnedCI",
+    "target_trial": false,
+    "release_pass": false
+  }
 }

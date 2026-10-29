@@ -4906,3 +4906,7 @@ Intel,Intel Quark SoC X1000 Core Developer Manual,October2013,order329679-001US,
 ## SRC-0546 - Corrected native/host CI and continuing-candidate input observations
 
 2026-10-29,own project verification only. Source3f7cc9f both jobs pass run40958175249. Native continuing Mac ROM twins,all input identities,64NOP pair and symbol exclusions verified;ROM23988used bytes/native data364B/stack4996B bound. Mac40957services,332losses,three deliveries,pointer255,170 and counter0001 do not qualify dragging. PC confirms capture but clips at511,341;one synthetic GUI drag leaves window fixed. Four unchanged own-framebuffer PNGs indexed;both isolated sessions close,PC media/inventory preserved. No human,physical,full128K,System1 or release pass. [Canonical receipt](../docs/development/release-input-repair.json).
+
+## SRC-0547 - Original continuing rate-comparison amendment
+
+2026-10-29. Lead adopts explicit1/4/16reload-divisor composition under SPEC-0083,default1 unchanged,for a continuing comparison after SRC-0546. Earlier finite rate failures remain valid. One Copilot Sonnet5.5 Low call returns15replacement proposals from22719frozen public/original bytes,one view/no writes/commands/tests,reported1premium request. Lead repairs malformed JSON/removes duplicate guard/corrects wording and executes26builder refusals/five pre-output acceptances/nine entry-preprocessor controls. Native proof/trial pending. No decoder,MMIO sequence,assembly,loss relaxation,historical or physical claim. [Canonical receipt](../docs/development/release-input-repair.json).
