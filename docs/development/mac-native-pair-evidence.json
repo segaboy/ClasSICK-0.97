@@ -5,7 +5,9 @@
   "source_ids": [
     "SRC-0529",
     "SRC-0530",
-    "SRC-0531"
+    "SRC-0531",
+    "SRC-0532",
+    "SRC-0533"
   ],
   "specification": "SPEC-0081",
   "implementation": "IMPL-0089",
@@ -216,6 +218,72 @@
         "Stable first rejected pair;reason6 Gray phase skip. No admitted nonzero motion."
       ],
       "evidence_level": "E3 synthetic host GUI;not E4 human"
+    },
+    {
+      "date": "2026-10-29",
+      "divisor": 16,
+      "input_attempted": false,
+      "preflight": {
+        "source_revision": "8d488c66501d2e8fc04a7c2d4afc1fb0f18f33b0",
+        "divisor": 16,
+        "ROM_sha256": "0615af7b8cb95d6d3af29a92b514b4556376179c1d65afb09fefa08e0e246cc6",
+        "native_sources_and_bytes_verified": true,
+        "native_pair": {
+          "entry": 4195522,
+          "bytes": 194,
+          "call_free": true,
+          "NOPs": 64,
+          "SCC_reads": 4,
+          "PB_reads": 2,
+          "MMIO_writes": 0,
+          "output_bytes": 6,
+          "sha256": "725c1d57546f47ab59b19f13d07de7160d24caf7e1d5adec3900ead1263da3ee"
+        },
+        "spin": 4218872
+      },
+      "observation": {
+        "decoded": {
+          "pairs": 1516,
+          "pb_x_changes": 0,
+          "pb_y_changes": 0,
+          "dcd_a_changes": 0,
+          "dcd_b_changes": 0,
+          "button_changes": 0,
+          "nonzero_queued": 0,
+          "buttononly_queued": 0,
+          "losses": 1512,
+          "first_previous": 0,
+          "first_s0": 12534852,
+          "first_s1": 16729156,
+          "first_reason": 5,
+          "first_service": 1,
+          "format": "MAR1",
+          "pc": 4218872,
+          "omitted_fields": [
+            "tag",
+            "version",
+            "bytes",
+            "stable_pairs",
+            "last_observed",
+            "previous_accepted"
+          ],
+          "limitation": "Register subset only;not a full MWA1 record or root-cause proof."
+        },
+        "input": "No gesture attempted;already at coherent MAR1 spin before gesture",
+        "root_cause_proven": false,
+        "date": "2026-10-29",
+        "input_attempted": false
+      },
+      "cleanup": {
+        "host_seconds": 48.8597538,
+        "cap_seconds": 150,
+        "pid": 45096,
+        "process_exited": true,
+        "forced_cleanup": true,
+        "guest_shutdown_claimed": false,
+        "ROM_sha256": "0615af7b8cb95d6d3af29a92b514b4556376179c1d65afb09fefa08e0e246cc6"
+      },
+      "qualification": "Already halted before gesture;reason5 from first sampled pair. Not a Mac mouse-input test or throughput calibration."
     }
   ],
   "release_ready": false,
@@ -224,9 +292,9 @@
     "No actual throughput,timing or pointer qualification inferred from inlining.",
     "Stable-pair/overrun/Gray/loss policy remains unchanged.",
     "All historical,physical/full128K,source/role,edition,parity,B2,native-app,System1 and release-input gates remain.",
-    "No native pair16 trial;no live noncheckpoint pair build. Diagnostic halts are deliberate.",
     "Mac phase-change cause unproven;do not loosen loss policy or blame a specific emulator/device.",
-    "PC synthetic packet acceptance supersedes the prior negative for this new route only;old physical observations and full GUI/human drag gates stay open."
+    "PC synthetic packet acceptance supersedes the prior negative for this new route only;old physical observations and full GUI/human drag gates stay open.",
+    "Pair16 now tested with pregesture overrun;no live noncheckpoint paired build exists."
   ],
   "preceding_rate_trials": {
     "rate4": {
@@ -450,12 +518,7 @@
       "manifest_sha256": "6e242e82ca29355d92a887dcfac385365f5a9e919ec67f2b5c37f1c3d3594ff7"
     }
   ],
-  "unrun_variants": [
-    {
-      "divisor": 16,
-      "reason": "Native proof only;prior scalar rate16 overrun makes another aggressive-rate trial unjustified before a new discriminator."
-    }
-  ],
+  "unrun_variants": [],
   "regression_images": [
     {
       "profile": "native-window-timer-activity-refresh-checkpoint-v1",
@@ -623,5 +686,450 @@
       "physical_input_claimed": false
     },
     "private_artifacts": "C:\\ClasSICK\\pc-second-gui-20261028-a"
+  },
+  "superseded_unrun_variants": [
+    {
+      "recorded_on": "2026-10-28",
+      "original": {
+        "divisor": 16,
+        "reason": "Native proof only;prior scalar rate16 overrun makes another aggressive-rate trial unjustified before a new discriminator."
+      },
+      "superseded_on": "2026-10-29",
+      "actual_result": "Follow-up pair16 trial overran before input"
+    }
+  ],
+  "superseded_limits": [
+    {
+      "recorded_on": "2026-10-28",
+      "text": "No native pair16 trial;no live noncheckpoint pair build. Diagnostic halts are deliberate.",
+      "superseded_on": "2026-10-29"
+    }
+  ],
+  "followup_2026_10_29": {
+    "authority": "Existing SRC-0521 and scoped isolated-original-candidate approvals;owner Do it continues the proposed PC live input slice. No new permission or gate expansion.",
+    "baseline_revision": "f95d1c929ae8b443a48b042d2c93ca3e2871a06c",
+    "classification": "target-control-comparison;no production source change",
+    "source_ids": [
+      "SRC-0532",
+      "SRC-0533"
+    ],
+    "result": "PC capture-disabled mode permits guarded host event delivery but no guest change;separate same-boot E2 controls move cursor pixels. Default capture leaves host pointer outside client and guard refuses. Mac fast pair16 overruns before input. No release input pass.",
+    "trials": [
+      {
+        "name": "a",
+        "identity": {
+          "date": "2026-10-29",
+          "source": "3fab75ff8afdc09493684705dde94ebf5b8a1d9f",
+          "runtime_scope": "unchanged native PC code;normal continuous window candidate,no checkpoint",
+          "EFI": "e634d1a4831dfd9970d839ffb6b6c596bea4315e4fc65db013b4b7ea3a00b955",
+          "disk": "fa627d5798f80c8e0b639aa6f4585bca73f29e375e3534ea39fdfb0ef0ee85d0",
+          "prior_CI": "40767981074 both jobs pass at8d488c6;PC source unchanged",
+          "mode": "normal-live",
+          "physical_input_claimed": false,
+          "source_correction": {
+            "original_seed_claim": "2373430dcd71784e7288d7b981aa02a6cbd8106a",
+            "compiled_source_revision": "3fab75ff8afdc09493684705dde94ebf5b8a1d9f",
+            "basis": "Normal e634d1a4 payload/diskfa627d57 originates in the verified3fab75f normal build;seed copied2373430 from a diagnostic identity. Bytes were always checked independently."
+          }
+        },
+        "scope": "Original normal live native PC;windowed Display1;no human observation",
+        "helper_control": {
+          "live": true,
+          "mode": "input",
+          "placement": "not attempted",
+          "button_mode": "primary",
+          "state": "target_refused",
+          "reason": "client area",
+          "guard_detail": "client area",
+          "foreground_pid": 8932,
+          "expected_pid": 8932,
+          "mapping_known": true,
+          "swap_buttons": true,
+          "cursor": [
+            2,
+            2
+          ],
+          "rows_done": 0,
+          "attempted": 0,
+          "delivered": 0,
+          "cleanup_tried": 0,
+          "release_owed": 0,
+          "capture_verified": true,
+          "capture_stage": "verified",
+          "capture_hresult": 0,
+          "guest_accepted": false
+        },
+        "helper_move": {
+          "live": true,
+          "mode": "input",
+          "placement": "not attempted",
+          "button_mode": "primary",
+          "state": "target_refused",
+          "reason": "client area",
+          "guard_detail": "client area",
+          "foreground_pid": 8932,
+          "expected_pid": 8932,
+          "mapping_known": true,
+          "swap_buttons": true,
+          "cursor": [
+            2,
+            2
+          ],
+          "rows_done": 0,
+          "attempted": 0,
+          "delivered": 0,
+          "cleanup_tried": 0,
+          "release_owed": 0,
+          "capture_verified": true,
+          "capture_stage": "verified",
+          "capture_hresult": 0,
+          "guest_accepted": false
+        },
+        "cleanup": {
+          "utc": "2026-10-29T15:35:53.7067932Z",
+          "cold_starts": 1,
+          "state": "poweroff",
+          "unregistered": true,
+          "existing_vm_inventory_preserved": true,
+          "running_state_preserved": true,
+          "post_trial_raw_roundtrip_equal": true,
+          "artifacts_retained": true,
+          "semantic_session_stop_observed": false,
+          "termination": "external poweroff from paused state"
+        },
+        "timing": {
+          "host_seconds": 337.4382399,
+          "one_cold_start": true,
+          "same_boot_E3_then_E2": false,
+          "physical_input_claimed": false
+        },
+        "private_artifacts": "C:\\ClasSICK\\pc-live-motion-20261029-a",
+        "limits": [
+          "Helper guard refused all input;the timer closed this run before its planned device control. No movement/drag success.",
+          "A later Sky gesture was refused because user input was detected;it is not credited.",
+          "This live run reached its300-second input-phase backstop. Preparation was moved to a paused phase for subsequent trials."
+        ]
+      },
+      {
+        "name": "b",
+        "identity": {
+          "date": "2026-10-29",
+          "source": "3fab75ff8afdc09493684705dde94ebf5b8a1d9f",
+          "runtime_scope": "unchanged native PC code;normal continuous window candidate,no checkpoint",
+          "EFI": "e634d1a4831dfd9970d839ffb6b6c596bea4315e4fc65db013b4b7ea3a00b955",
+          "disk": "fa627d5798f80c8e0b639aa6f4585bca73f29e375e3534ea39fdfb0ef0ee85d0",
+          "prior_CI": "40767981074 both jobs pass at8d488c6;PC source unchanged",
+          "mode": "normal-live",
+          "physical_input_claimed": false,
+          "source_correction": {
+            "original_seed_claim": "2373430dcd71784e7288d7b981aa02a6cbd8106a",
+            "compiled_source_revision": "3fab75ff8afdc09493684705dde94ebf5b8a1d9f",
+            "basis": "Normal e634d1a4 payload/diskfa627d57 originates in the verified3fab75f normal build;seed copied2373430 from a diagnostic identity. Bytes were always checked independently."
+          }
+        },
+        "scope": "Original normal live native PC;windowed Display1;no human observation",
+        "helper_control": {
+          "live": true,
+          "mode": "input",
+          "placement": "not attempted",
+          "button_mode": "primary",
+          "state": "target_refused",
+          "reason": "client area",
+          "guard_detail": "client area",
+          "foreground_pid": 65580,
+          "expected_pid": 65580,
+          "mapping_known": true,
+          "swap_buttons": true,
+          "cursor": [
+            2,
+            2
+          ],
+          "rows_done": 0,
+          "attempted": 0,
+          "delivered": 0,
+          "cleanup_tried": 0,
+          "release_owed": 0,
+          "capture_verified": true,
+          "capture_stage": "verified",
+          "capture_hresult": 0,
+          "guest_accepted": false
+        },
+        "helper_move": {
+          "live": true,
+          "mode": "input",
+          "placement": "not attempted",
+          "button_mode": "primary",
+          "state": "target_refused",
+          "reason": "client area",
+          "guard_detail": "client area",
+          "foreground_pid": 65580,
+          "expected_pid": 65580,
+          "mapping_known": true,
+          "swap_buttons": true,
+          "cursor": [
+            2,
+            2
+          ],
+          "rows_done": 0,
+          "attempted": 0,
+          "delivered": 0,
+          "cleanup_tried": 0,
+          "release_owed": 0,
+          "capture_verified": true,
+          "capture_stage": "verified",
+          "capture_hresult": 0,
+          "guest_accepted": false
+        },
+        "cleanup": {
+          "utc": "2026-10-29T15:42:02.5291567Z",
+          "cold_starts": 1,
+          "state": "poweroff",
+          "unregistered": true,
+          "existing_vm_inventory_preserved": true,
+          "running_state_preserved": true,
+          "post_trial_raw_roundtrip_equal": true,
+          "artifacts_retained": true,
+          "semantic_session_stop_observed": false,
+          "termination": "external poweroff from paused state"
+        },
+        "timing": {
+          "host_seconds": 216.8978033,
+          "one_cold_start": true,
+          "same_boot_E3_then_E2": false,
+          "physical_input_claimed": false
+        },
+        "private_artifacts": "C:\\ClasSICK\\pc-live-motion-20261029-b",
+        "phase_timing": {
+          "readiness_seconds": 136.2190969,
+          "input_seconds": 46.1208869,
+          "readiness_cap": 240,
+          "input_cap": 120
+        },
+        "capture_policy": "Default",
+        "comparisons": {
+          "initial.png->capture.png": {
+            "changed_pixels": 0,
+            "bbox": null
+          },
+          "capture.png->helper-move.png": {
+            "changed_pixels": 0,
+            "bbox": null
+          },
+          "helper-move.png->E2-before.png": {
+            "changed_pixels": 0,
+            "bbox": null
+          },
+          "E2-before.png->E2-x.png": {
+            "changed_pixels": 13,
+            "bbox": [
+              512,
+              381,
+              517,
+              388
+            ]
+          },
+          "E2-x.png->E2-y.png": {
+            "changed_pixels": 10,
+            "bbox": [
+              512,
+              381,
+              517,
+              389
+            ]
+          }
+        },
+        "E2_events": [
+          {
+            "utc": "2026-10-29T15:41:59.4017859Z",
+            "api": "IMouse.PutMouseEvent",
+            "dx": 1,
+            "dy": 0,
+            "buttons": 0,
+            "evidence": "E2 only"
+          },
+          {
+            "utc": "2026-10-29T15:41:59.9960956Z",
+            "api": "IMouse.PutMouseEvent",
+            "dx": 0,
+            "dy": 1,
+            "buttons": 0,
+            "evidence": "E2 only"
+          }
+        ],
+        "qualification": "E2 small X/Y framebuffer response only;neither GUI movement nor drag/release qualifies."
+      },
+      {
+        "name": "c",
+        "identity": {
+          "date": "2026-10-29",
+          "source": "3fab75ff8afdc09493684705dde94ebf5b8a1d9f",
+          "runtime_scope": "unchanged native PC code;normal continuous window candidate,no checkpoint",
+          "EFI": "e634d1a4831dfd9970d839ffb6b6c596bea4315e4fc65db013b4b7ea3a00b955",
+          "disk": "fa627d5798f80c8e0b639aa6f4585bca73f29e375e3534ea39fdfb0ef0ee85d0",
+          "prior_CI": "40767981074 both jobs pass at8d488c6;PC source unchanged",
+          "mode": "normal-live",
+          "physical_input_claimed": false,
+          "source_correction": {
+            "original_seed_claim": "2373430dcd71784e7288d7b981aa02a6cbd8106a",
+            "compiled_source_revision": "3fab75ff8afdc09493684705dde94ebf5b8a1d9f",
+            "basis": "Normal e634d1a4 payload/diskfa627d57 originates in the verified3fab75f normal build;seed copied2373430 from a diagnostic identity. Bytes were always checked independently."
+          }
+        },
+        "scope": "Original normal live native PC;windowed Display1;no human observation",
+        "helper_control": {
+          "live": true,
+          "mode": "input",
+          "placement": "not attempted",
+          "button_mode": "primary",
+          "state": "ok",
+          "reason": "ok",
+          "guard_detail": "none",
+          "foreground_pid": 63996,
+          "expected_pid": 63996,
+          "mapping_known": true,
+          "swap_buttons": true,
+          "cursor": [
+            2551,
+            669
+          ],
+          "rows_done": 1,
+          "attempted": 0,
+          "delivered": 0,
+          "cleanup_tried": 0,
+          "release_owed": 0,
+          "capture_verified": false,
+          "capture_stage": "not queried",
+          "capture_hresult": 0,
+          "guest_accepted": false
+        },
+        "helper_move": {
+          "live": true,
+          "mode": "input",
+          "placement": "not attempted",
+          "button_mode": "primary",
+          "state": "ok",
+          "reason": "ok",
+          "guard_detail": "none",
+          "foreground_pid": 63996,
+          "expected_pid": 63996,
+          "mapping_known": true,
+          "swap_buttons": true,
+          "cursor": [
+            2554,
+            669
+          ],
+          "rows_done": 1,
+          "attempted": 1,
+          "delivered": 1,
+          "cleanup_tried": 0,
+          "release_owed": 0,
+          "capture_verified": false,
+          "capture_stage": "not queried",
+          "capture_hresult": 0,
+          "guest_accepted": false
+        },
+        "cleanup": {
+          "utc": "2026-10-29T15:46:13.3691358Z",
+          "cold_starts": 1,
+          "state": "poweroff",
+          "unregistered": true,
+          "existing_vm_inventory_preserved": true,
+          "running_state_preserved": true,
+          "post_trial_raw_roundtrip_equal": true,
+          "artifacts_retained": true,
+          "semantic_session_stop_observed": false,
+          "termination": "external poweroff from paused state"
+        },
+        "timing": {
+          "host_seconds": 67.0640317,
+          "one_cold_start": true,
+          "same_boot_E3_then_E2": false,
+          "physical_input_claimed": false
+        },
+        "private_artifacts": "C:\\ClasSICK\\pc-live-motion-20261029-c",
+        "phase_timing": {
+          "readiness_seconds": 8.7920749,
+          "input_seconds": 21.108951,
+          "readiness_cap": 240,
+          "input_cap": 120
+        },
+        "capture_policy": "Disabled",
+        "comparisons": {
+          "initial.png->capture.png": {
+            "changed_pixels": 0,
+            "bbox": null
+          },
+          "capture.png->helper-move.png": {
+            "changed_pixels": 0,
+            "bbox": null
+          },
+          "helper-move.png->E2-before.png": {
+            "changed_pixels": 0,
+            "bbox": null
+          },
+          "E2-before.png->E2-x.png": {
+            "changed_pixels": 13,
+            "bbox": [
+              512,
+              381,
+              517,
+              388
+            ]
+          },
+          "E2-x.png->E2-y.png": {
+            "changed_pixels": 10,
+            "bbox": [
+              512,
+              381,
+              517,
+              389
+            ]
+          }
+        },
+        "E2_events": [
+          {
+            "utc": "2026-10-29T15:46:10.0569758Z",
+            "api": "IMouse.PutMouseEvent",
+            "dx": 1,
+            "dy": 0,
+            "buttons": 0,
+            "evidence": "E2 only"
+          },
+          {
+            "utc": "2026-10-29T15:46:10.7222858Z",
+            "api": "IMouse.PutMouseEvent",
+            "dx": 0,
+            "dy": 1,
+            "buttons": 0,
+            "evidence": "E2 only"
+          }
+        ],
+        "qualification": "E2 small X/Y framebuffer response only;neither GUI movement nor drag/release qualifies."
+      }
+    ],
+    "Oracle_interface": {
+      "URL": "https://docs.oracle.com/en/virtualization/virtualbox/7.2/user/AdvancedTopics.html",
+      "edition": "User Guide Release7.2",
+      "accessed_on": "2026-10-29",
+      "section": "Configuring Automatic Mouse Capturing",
+      "review_scope": "Published per-VM GUI/MouseCapturePolicy interface values Default/HostComboOnly/Disabled only;not implementation or manual sample algorithms. Disabled read back on only the own disposable VM;no global settings changed.",
+      "initial_fetch": "virtualbox.org/manual/ch09.html fetch failed402;official Oracle7.2 manual used instead.",
+      "limits": "The setting does not promise uncaptured PS/2 delivery;this run supplies its own negative observation."
+    },
+    "Mac_mapping_review": {
+      "inputs": [
+        "SPEC-0072 hardware fact table",
+        "SPEC-0074 phase model",
+        "platform/mac128k/polled-phase.c"
+      ],
+      "finding": "C phase mapping and direction rules match the admitted engineering contract. This is not a fresh primary-page audit or physical channel/polarity qualification. Fixed sign inversion cannot repair a two-bit Gray jump;actual capture timing remains unproven.",
+      "new_manual_pages_read": 0
+    },
+    "physical_check": "Asked for15-second directly connected host-mouse check;answer pending at this checkpoint. No E4 observation credited.",
+    "workers": [],
+    "usage": "No external AI calls in this slice;no current provider balances queried or reported.",
+    "verification_reused": "Unchanged runtime CI40767981074 and documentation-head CI40770964718 success.3406 CTests in9profiles belong to prior source verification,not new tests in this slice.",
+    "release_ready": false,
+    "next_discriminator": "Actual host-mouse delivery in a held window with capture verified;do not relax guards or substitute E2. New Mac acquisition work must respect observed overrun/loss and admitted source contracts."
   }
 }

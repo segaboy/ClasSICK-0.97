@@ -1773,6 +1773,52 @@
         "The17 changed pixels suggest one clipped cross relocation;not calibrated motion,drag,release or restoration proof.",
         "No physical hardware,System1,full128K or release qualification."
       ]
+    },
+    {
+      "id": "2026-10-29-pc-host-input-unchanged",
+      "path": "docs/evidence/screenshots/2026-10-29/pc-host-input-unchanged.png",
+      "sha256": "7bd4dc9c78b1729f5d88da5f57ee1813666714caf17fce88913d97cee4abc5a7",
+      "bytes": 4850,
+      "width": 1024,
+      "height": 768,
+      "captured_on": "2026-10-29",
+      "target": "native-x86_64",
+      "caption": "PC after guarded Windows movement:guest pixels unchanged",
+      "alt": "PC after guarded Windows movement:guest pixels unchanged",
+      "source_revision": "f95d1c929ae8b443a48b042d2c93ca3e2871a06c",
+      "compiled_source_revision": "3fab75ff8afdc09493684705dde94ebf5b8a1d9f",
+      "evidence": "docs/evidence/screenshots/2026-10-29/README.md",
+      "license": "GPL-3.0-or-later",
+      "rights": "Unmodified own-product VBoxManage framebuffer export. Original project scene only;no desktop,emulator chrome,reference pixels,retouch,credentials or private paths.",
+      "input": "synthetic",
+      "limitations": [
+        "One live original PC boot with capture Disabled;not human input or target hardware.",
+        "Host delivery yields no guest pixels;the later two IMouse controls are E2 only.",
+        "No dragging,release,restoration,System1,full128K or release qualification."
+      ]
+    },
+    {
+      "id": "2026-10-29-pc-device-control-pointer",
+      "path": "docs/evidence/screenshots/2026-10-29/pc-device-control-pointer.png",
+      "sha256": "42b43446266ed893834302ca9e344173553ed1f8902120344e4a268c8c457a65",
+      "bytes": 4857,
+      "width": 1024,
+      "height": 768,
+      "captured_on": "2026-10-29",
+      "target": "native-x86_64",
+      "caption": "PC after separate device-level X/Y controls:small cursor response",
+      "alt": "PC after separate device-level X/Y controls:small cursor response",
+      "source_revision": "f95d1c929ae8b443a48b042d2c93ca3e2871a06c",
+      "compiled_source_revision": "3fab75ff8afdc09493684705dde94ebf5b8a1d9f",
+      "evidence": "docs/evidence/screenshots/2026-10-29/README.md",
+      "license": "GPL-3.0-or-later",
+      "rights": "Unmodified own-product VBoxManage framebuffer export. Original project scene only;no desktop,emulator chrome,reference pixels,retouch,credentials or private paths.",
+      "input": "synthetic",
+      "limitations": [
+        "One live original PC boot with capture Disabled;not human input or target hardware.",
+        "Host delivery yields no guest pixels;the later two IMouse controls are E2 only.",
+        "No dragging,release,restoration,System1,full128K or release qualification."
+      ]
     }
   ]
 }
