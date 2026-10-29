@@ -96,3 +96,95 @@ Next:review the checked-access contract and implementation as one bounded slice,
 then the capability layer and its native bridge separately. These are286 model
 advances;they do not solve the paired-release Mac/PC GUI input blockers or supply
 a linked/bootable286 system. This intake grants no new run or publication scope.
+
+## Revision2 review -2026-10-29 (SRC-0541)
+
+Baseline b68bef1a066d3cc0dd1a1fab031614c6351c1137. The new owner-supplied r2
+packet is45455bytes,SHA256
+e58db02042c9c9d4086817b358aec07173de2fbd6d39f396aa50cad44a5ddc7f.
+All19declared checksum rows pass;archive/member copies and identity manifest
+remain outside Git. Paths,case-insensitive uniqueness,symlink and encryption
+checks pass. The new packet has no private-HQ subtree;the previous private
+submissions and their dispositions are retained,not deleted or overwritten.
+
+This is a STATIC CONTRIBUTION REVIEW,not integration or executed qualification.
+Unlike the earlier packet's interface-only review,the lead now reads r2's
+span-bind,span-access and span-cap C bodies/headers,contracts,response and CMake
+deltas,and reviews the compiler-script diff. Submitted test bodies and the full
+compiler script are not reviewed or executed. No candidate tests/builds,worker dispatch,
+target runs or implementation changes occur. No new feature SPEC/IMPL/TEST/build
+acceptance or affected-lane source/role permission is assigned. Statements below
+about control flow are static observations,not passing or failing test results.
+
+### Earlier findings addressed in r2
+
+| Earlier issue | Static disposition |
+|---|---|
+| Stale builder overwrite | Addressed:the adopted builder/header/oracle are omitted from the packet;no replacement requested |
+| Duplicate CMake target/test names | Addressed:new-only access3/cap2 targets;existing builder and independent oracle retained |
+| Coupled compiler profile | Addressed in the proposed diff:separate --span-access/--span-cap and exclusivity checks;old --span-build control flow retained;not compiler-tested |
+| Unscoped public locator | Addressed for the checked-access API:read/write return values only;capability adds a rights-checked borrow;shared backend helper remains privileged |
+| Missing native-span cap | Addressed in borrow source:min(remaining,limit,bank room,native span available) |
+| Borrow expiry and error order | Substantially addressed in separate contracts,including deliberate BACKING/STALE insertions and valid-binding-only guest.c parity |
+| Misstated test independence/size | Corrected:literal oracle is author-written;all large counts remain self-reported;whole slices exceed worker output cap |
+
+### R2-1 - Registry initialization needs a fresh-context rule
+
+SliceB span-cap.c:5-14 resets issued/current to0 unconditionally. Owner-open
+then issues lifetime1 and generation0 again. The contract states lifetimes never
+recycle,but does not describe registry_init or forbid reinitializing a live
+registry/owner. Static trace:initialize,open owner,open cap;initialize the same
+registry again;open into the same owner. With the same epoch,the old cap's
+lifetime/generation can match again. This is an unexecuted reasoning trace.
+
+Before adopting B,explicitly restrict initialization to a fresh,unreferenced
+context lifetime and prohibit registry/owner address reuse while old caps can
+be used,OR provide a non-recycling reinitialization contract. Keep owner/registry
+alive throughout capability use,not merely throughout one returned run. Under
+an explicit fresh-only precondition,this is caller misuse rather than a runtime
+revival defect;the present wording does not establish that precondition.
+
+### R2-2 - A numeric epoch needs an identity domain
+
+SliceB open stores a caller-supplied binding_epoch (span-cap.c:56-107). Borrow
+compares map pointer and both numeric epochs (187-190),but records no binding
+identity. Two distinct valid environments can share that map pointer and epoch
+number while naming different backing spans. The checks alone cannot establish
+that this is the same binding 'the capability was opened on'.
+
+Choose one explicit contract before adoption:one authoritative active binding/
+epoch domain per owner/map lifetime,with advance-before-any-backing-change and
+no epoch reuse,OR an owner/provider identity captured at open and checked at
+borrow. Test the cross-binding same-map/same-number case under that chosen
+contract. This is an unresolved identity precondition,not proof of an observed
+unauthorized access or a security boundary. Do not invent physical ownership
+from pointer/number equality.
+
+### R2-3 - Shared helper preconditions need to be explicit
+
+span-bind.h exposes cs_sb_walk/find as backend primitives. Their bodies assume
+a validated map,truthful span/count extents,64-byte scratch arrays,valid bank
+index and the successful walk's matching scratch state. The inspected scalar
+and borrow callers supply validation first;no defect in those paths is found.
+Document those helper-only preconditions and stable/disjoint metadata duties;
+do not describe the helpers themselves as safe arbitrary-input entry points.
+
+### Disposition and next work
+
+SliceA:ready for a bounded qualification pass after clarifying helper
+preconditions;no scalar-path correctness defect identified in static review.
+That is not test acceptance or source certification. Verify its literal cases,
+independent expectations,host profiles and new pinned C16 closure before adopting.
+The proposed46/200000/300000 counts and12controls remain author reports.
+
+SliceB:defer adoption pending R2-1/R2-2 decisions and executed qualification.
+The new borrow implements the proposed rights and run-length checks,but its
+identity/lifetime context must be unambiguous. The proposed8000-window parity,
+20000drains,byte totals and15controls remain author reports. No production
+guest.c,ROM,CPU,device or existing286 probe is changed.
+
+Next:qualify A first;then B after those two context rules are resolved. Preserve
+the existing builder/oracle and old compiler modes. Link/ABI/alignment,stack
+high-water,physical ownership,target execution and measured performance remain
+open. The paired-release input blockers are unchanged. No other AI service was
+used for this review;remaining provider balances are unreported.
