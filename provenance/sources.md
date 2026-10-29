@@ -4902,3 +4902,7 @@ Intel,Intel Quark SoC X1000 Core Developer Manual,October2013,order329679-001US,
 ## SRC-0545 - Original release-input repair verification
 
 2026-10-29;IMPL-0091/0092;TEST-0105/0106. Executed focused host tests,argument fences and twin PC image/media/control checks are recorded in the [canonical receipt](../docs/development/release-input-repair.json). Earlier legacy-frame and unrelated local full-GCC-demo failures are preserved and distinguished. Native Mac proof,source-pinned CI and target observations are separately updated there;no historical,physical/full128K,System1,human or release acceptance follows from compilation or hosted checks.
+
+## SRC-0546 - Corrected native/host CI and continuing-candidate input observations
+
+2026-10-29,own project verification only. Source3f7cc9f both jobs pass run40958175249. Native continuing Mac ROM twins,all input identities,64NOP pair and symbol exclusions verified;ROM23988used bytes/native data364B/stack4996B bound. Mac40957services,332losses,three deliveries,pointer255,170 and counter0001 do not qualify dragging. PC confirms capture but clips at511,341;one synthetic GUI drag leaves window fixed. Four unchanged own-framebuffer PNGs indexed;both isolated sessions close,PC media/inventory preserved. No human,physical,full128K,System1 or release pass. [Canonical receipt](../docs/development/release-input-repair.json).

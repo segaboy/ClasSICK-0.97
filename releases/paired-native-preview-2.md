@@ -1,5 +1,7 @@
 # Paired native preview 2 - first interactive window
 
+2026-10-29,SRC-0542..0546:shared contrasting native cursor and continuing Mac paired-capture candidate implemented;corrected source3f7cc9f fullCI passes. Isolated boots show visible cursor/counter responses,but Mac phase loss and PC GUI drag remain blockers. No release freeze. [Canonical receipt](../docs/development/release-input-repair.json).
+
 2026-10-27,SRC-0504..0507:3fab75f fullCI passes. Display1 capture works;GLKVM left alone. Host helper83 fake checks/four CTests/four profiles and five compiled defects/16 CLI controls pass. Mac held-left gives0001/fault0,first loss6 Gray jump,pointer fixed. PC12 guarded API events leave pixels unchanged.13 owned attempts closed/preserved;motion/drag/release remain blocked.74PNG/twoGIF,286/originals retained. [Evidence](../docs/development/owned-window-input-evidence.md).
 
 2026-10-27,SRC-0503:3fab75f native Mac job passes;strict/timer/idle ROMs unchanged,refresh adds68ROM bytes/zeroRAM. Fixed PC media twins/source identity pass;raw scene boots,zero GUI input. Desktop capture mismatch/privacy refusal stops trial;own VM closed83.33s/media preserved. Mac motion/PC GUI dragging and release remain open. [Evidence](../docs/development/timer-refresh-stream-boundary.md).

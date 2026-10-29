@@ -1819,6 +1819,98 @@
         "Host delivery yields no guest pixels;the later two IMouse controls are E2 only.",
         "No dragging,release,restoration,System1,full128K or release qualification."
       ]
+    },
+    {
+      "id": "2026-10-29-pc-contrasting-cursor-start",
+      "path": "docs/evidence/screenshots/2026-10-29/pc-contrasting-cursor-start.png",
+      "sha256": "261f2b2fd52830cf808954114fa332b9a13e7d102b6270270ea2b68be226872f",
+      "bytes": 4864,
+      "width": 1024,
+      "height": 768,
+      "captured_on": "2026-10-29",
+      "target": "native-x86_64",
+      "caption": "Native PC candidate: contrasting cursor at its initial center.",
+      "alt": "Native PC candidate: contrasting cursor at its initial center.",
+      "source_revision": "3f7cc9ffa5b0b9d8574a36d0d0afbbeec5374630",
+      "compiled_source_revision": "722ef85ce73f61d854c45274749952389fb65740",
+      "evidence": "docs/evidence/screenshots/2026-10-29/README.md",
+      "license": "GPL-3.0-or-later",
+      "rights": "Unmodified export of our original guest framebuffer only;no desktop,emulator chrome,reference pixels,retouch or private paths.",
+      "input": "synthetic",
+      "limitations": [
+        "Synthetic GUI observations;no human confirmation or calibrated movement.",
+        "Dragging and release remain unqualified.",
+        "No physical hardware,System1,full128K or release qualification."
+      ]
+    },
+    {
+      "id": "2026-10-29-pc-contrasting-cursor-clipped",
+      "path": "docs/evidence/screenshots/2026-10-29/pc-contrasting-cursor-clipped.png",
+      "sha256": "b70ec8c601318a20084e0cc180e82d07adddced435de03483bc05620a294b3d4",
+      "bytes": 4840,
+      "width": 1024,
+      "height": 768,
+      "captured_on": "2026-10-29",
+      "target": "native-x86_64",
+      "caption": "Native PC after captured synthetic drag: cursor clipped at lower-right,window unchanged;drag failed.",
+      "alt": "Native PC after captured synthetic drag: cursor clipped at lower-right,window unchanged;drag failed.",
+      "source_revision": "3f7cc9ffa5b0b9d8574a36d0d0afbbeec5374630",
+      "compiled_source_revision": "722ef85ce73f61d854c45274749952389fb65740",
+      "evidence": "docs/evidence/screenshots/2026-10-29/README.md",
+      "license": "GPL-3.0-or-later",
+      "rights": "Unmodified export of our original guest framebuffer only;no desktop,emulator chrome,reference pixels,retouch or private paths.",
+      "input": "synthetic",
+      "limitations": [
+        "Synthetic GUI observations;no human confirmation or calibrated movement.",
+        "Dragging and release remain unqualified.",
+        "No physical hardware,System1,full128K or release qualification."
+      ]
+    },
+    {
+      "id": "2026-10-29-mac-live-pair-start",
+      "path": "docs/evidence/screenshots/2026-10-29/mac-live-pair-start.png",
+      "sha256": "c3b3a7c97e42817aaf8f0524215c2416df409c544f4dc9728fec7597b9c9ad4c",
+      "bytes": 53598,
+      "width": 512,
+      "height": 342,
+      "captured_on": "2026-10-29",
+      "target": "native-mac68000",
+      "caption": "Continuing Mac candidate: contrasting center cursor and original checkerboard scene.",
+      "alt": "Continuing Mac candidate: contrasting center cursor and original checkerboard scene.",
+      "source_revision": "3f7cc9ffa5b0b9d8574a36d0d0afbbeec5374630",
+      "compiled_source_revision": "3f7cc9ffa5b0b9d8574a36d0d0afbbeec5374630",
+      "evidence": "docs/evidence/screenshots/2026-10-29/README.md",
+      "license": "GPL-3.0-or-later",
+      "rights": "Unmodified export of our original guest framebuffer only;no desktop,emulator chrome,reference pixels,retouch or private paths.",
+      "input": "synthetic",
+      "limitations": [
+        "Synthetic GUI observations;no human confirmation or calibrated movement.",
+        "Dragging and release remain unqualified.",
+        "No physical hardware,System1,full128K or release qualification."
+      ]
+    },
+    {
+      "id": "2026-10-29-mac-live-pair-after-input",
+      "path": "docs/evidence/screenshots/2026-10-29/mac-live-pair-after-input.png",
+      "sha256": "2dcb56f34cc6ff146876d0b6321eb1277ffc2870a5766cf4322ccec6d77858ef",
+      "bytes": 74360,
+      "width": 512,
+      "height": 342,
+      "captured_on": "2026-10-29",
+      "target": "native-mac68000",
+      "caption": "Continuing Mac after input: counter0001 and stripes;pointer displacement is only one pixel per axis,not usable motion.",
+      "alt": "Continuing Mac after input: counter0001 and stripes;pointer displacement is only one pixel per axis,not usable motion.",
+      "source_revision": "3f7cc9ffa5b0b9d8574a36d0d0afbbeec5374630",
+      "compiled_source_revision": "3f7cc9ffa5b0b9d8574a36d0d0afbbeec5374630",
+      "evidence": "docs/evidence/screenshots/2026-10-29/README.md",
+      "license": "GPL-3.0-or-later",
+      "rights": "Unmodified export of our original guest framebuffer only;no desktop,emulator chrome,reference pixels,retouch or private paths.",
+      "input": "synthetic",
+      "limitations": [
+        "Synthetic GUI observations;no human confirmation or calibrated movement.",
+        "Dragging and release remain unqualified.",
+        "No physical hardware,System1,full128K or release qualification."
+      ]
     }
   ]
 }

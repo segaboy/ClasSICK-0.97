@@ -5,7 +5,8 @@
     "SRC-0542",
     "SRC-0543",
     "SRC-0544",
-    "SRC-0545"
+    "SRC-0545",
+    "SRC-0546"
   ],
   "specifications": [
     "SPEC-0052",
@@ -226,11 +227,28 @@
     "art_header_sha256_lf": "1c8128eaefeadb1c47847f883d2608e06a3f050573851f95a38182d49130fd61"
   },
   "native_Mac": {
-    "status": "pending source-pinned CI",
-    "target_run": false
+    "source_revision": "3f7cc9ffa5b0b9d8574a36d0d0afbbeec5374630",
+    "CI_run": 40958175249,
+    "Mac_job": 123743693862,
+    "job_conclusion": "success",
+    "artifact_id": 12934602659,
+    "ROM_sha256": "e0eedf90bcb489d70473d8e573a4ed5b3102d17123db825df03b80e6266f4c3d",
+    "ROM_bytes": 65536,
+    "all_input_hashes_and_committed_bytes_match": true,
+    "profile": "native-window-timer-live-pair-v1",
+    "twins_equal": true,
+    "live": true,
+    "checkpoint": false,
+    "pair_call_free": true,
+    "pair_NOPs": 64,
+    "activity_idle_first_input_symbols_absent": true,
+    "ROM_used": 23988,
+    "native_data_bss": 364,
+    "stack_bound": 4996,
+    "target_run": true
   },
   "CI": {
-    "status": "Initial source run failed two artwork-era verification assumptions;corrected checks await new CI.",
+    "status": "Both corrected source jobs pass",
     "attempts": [
       {
         "run": 40955882429,
@@ -239,13 +257,206 @@
         "Windows": "window-session normal/fault tests expected black-only masks;all six differing rows now check frozen white-halo masks and unchanged black image.",
         "Mac": "Idle/defer verifier fixed its normal ROM to pre-contrast historical bytes. Now validates the explicit current normal-profile twin baseline and current source hashes;historical hashes/comparisons are retained without falsely claiming current equality.",
         "required_other_native_checks_retained": true
+      },
+      {
+        "run": 40958175249,
+        "url": "https://github.com/segaboy/ClasSICK-0.97/actions/runs/40958175249",
+        "source_revision": "3f7cc9ffa5b0b9d8574a36d0d0afbbeec5374630",
+        "conclusion": "success",
+        "jobs": [
+          {
+            "name": "windows-bootstrap",
+            "id": 123743693538,
+            "conclusion": "success"
+          },
+          {
+            "name": "m68k-rom",
+            "id": 123743693862,
+            "conclusion": "success"
+          }
+        ],
+        "Windows_step22": {
+          "status": "pass",
+          "profiles": 9,
+          "counts": [
+            {
+              "expected": 398,
+              "executed": 398,
+              "passed": 398,
+              "failed": 0,
+              "skipped_or_not_run": 0
+            },
+            {
+              "expected": 398,
+              "executed": 398,
+              "passed": 398,
+              "failed": 0,
+              "skipped_or_not_run": 0
+            },
+            {
+              "expected": 398,
+              "executed": 398,
+              "passed": 398,
+              "failed": 0,
+              "skipped_or_not_run": 0
+            },
+            {
+              "expected": 362,
+              "executed": 362,
+              "passed": 362,
+              "failed": 0,
+              "skipped_or_not_run": 0
+            },
+            {
+              "expected": 398,
+              "executed": 398,
+              "passed": 398,
+              "failed": 0,
+              "skipped_or_not_run": 0
+            },
+            {
+              "expected": 381,
+              "executed": 381,
+              "passed": 381,
+              "failed": 0,
+              "skipped_or_not_run": 0
+            },
+            {
+              "expected": 381,
+              "executed": 381,
+              "passed": 381,
+              "failed": 0,
+              "skipped_or_not_run": 0
+            },
+            {
+              "expected": 381,
+              "executed": 381,
+              "passed": 381,
+              "failed": 0,
+              "skipped_or_not_run": 0
+            },
+            {
+              "expected": 345,
+              "executed": 345,
+              "passed": 345,
+              "failed": 0,
+              "skipped_or_not_run": 0
+            }
+          ],
+          "reported_ctest_wall_seconds": 275.5,
+          "required_native_checks_retained": true
+        }
       }
     ]
   },
-  "target_trials": [],
+  "target_trials": [
+    {
+      "target": "native-x86_64",
+      "identity": {
+        "source_revision": "722ef85ce73f61d854c45274749952389fb65740",
+        "EFI": "19100bfbd3ea836579a09c58b989b50a0c6af8101a5137183cc2bd8b6b746f73",
+        "disk": "38d8d2065ce397709713e17e44b139ee67469036a06dbe0d4814fd0033be12b1",
+        "payload_bytes": 184320,
+        "relevant_packaged_input_bytes_match_committed_revision": true,
+        "native_proof": "pc-native/efi-results.json,four twins/27corruptions/26omissions",
+        "new_discriminator": "Shared contrasting7x7 cursor on continuing normal PC scene,no input checkpoint.",
+        "display": "Display1 physical0,0..2560,1440;windowed right side,other displays untouched",
+        "normal_release_candidate": true,
+        "max_active_seconds": 600,
+        "max_total_seconds": 900
+      },
+      "class": "E3-synthetic-GUI",
+      "observations": [
+        "Initial native framebuffer matches all33 opaque cursor pixels at logical256,171.",
+        "Physical-left host click leaves mouse uncaptured;Windows-primary right click confirms captured in owned UIA indicator.",
+        "Later guest cross is clipped at logical511,341;one bounded Sky title-bar drag leaves window and counter unchanged.",
+        "No calibrated movement or drag pass. Initial wrong capture pixels excluded;ordinary owned-window activation restores correct capture."
+      ],
+      "capture_confirmed": true,
+      "motion_qualified": false,
+      "drag_passed": false,
+      "human_test": false,
+      "cleanup": {
+        "utc": "2026-10-29T21:44:27.6254703Z",
+        "cold_starts": 1,
+        "state": "poweroff",
+        "unregistered": true,
+        "existing_vm_inventory_preserved": true,
+        "running_state_preserved": true,
+        "post_trial_raw_roundtrip_equal": true,
+        "artifacts_retained": true,
+        "semantic_session_stop_observed": false,
+        "termination": "external poweroff from paused state"
+      },
+      "time": {
+        "total_host_seconds": 678.2244988,
+        "active_upper_estimate_seconds": 347.54961659999987,
+        "total_cap": 900,
+        "active_cap": 600,
+        "lease_ended": true
+      }
+    },
+    {
+      "target": "native-mac68000",
+      "class": "E3-synthetic-GUI",
+      "ROM_sha256": "e0eedf90bcb489d70473d8e573a4ed5b3102d17123db825df03b80e6266f4c3d",
+      "profile": "native-window-timer-live-pair-v1",
+      "observation": "Continuing activity-free candidate boots;primary click changes pattern/counter0001. Eight guarded -1X events accepted by Windows,not equivalent guest motion. Paused own MWP1v2 trace decoded from public memory UI;pointer255,170 versus initial256,171;no usable motion or dragging pass.",
+      "trace": {
+        "tag": 1297567793,
+        "version": 2,
+        "bytes": 128,
+        "source_irq": 1,
+        "vbl": 12885,
+        "scc": 0,
+        "combined": 0,
+        "services": 40957,
+        "baselines": 280,
+        "losses": 332,
+        "queued": 0,
+        "peak": 1,
+        "deliveries": 3,
+        "pointer_x": 255,
+        "pointer_y": 170,
+        "window_x": 80,
+        "window_y": 70,
+        "pattern": 1,
+        "phase": 1,
+        "motion_stage": 5,
+        "raw_a": 0,
+        "raw_b": 1,
+        "buttons": 0,
+        "motion_cause": 0,
+        "cause": 0,
+        "loss_reason": 6,
+        "loss_rr3": 0,
+        "loss_snap0": 16731204,
+        "loss_snap1": 12536900,
+        "loss_snap2": 0,
+        "loss_previous": 16777216,
+        "loss_phase": 3
+      },
+      "trace_method": "Own source/map pins cs_mac_trace at00000BAC,128bytes;read only via public Snow memory viewer after pause. UIA bytes agree with visible byte rows;no guest memory writes.",
+      "human_test": false,
+      "motion_qualified": false,
+      "drag_passed": false,
+      "cleanup": {
+        "host_seconds": 257.4541986,
+        "cap_seconds": 600,
+        "pid": 21916,
+        "process_exited": true,
+        "forced_cleanup": true,
+        "guest_shutdown_claimed": false,
+        "ROM_sha256": "e0eedf90bcb489d70473d8e573a4ed5b3102d17123db825df03b80e6266f4c3d"
+      },
+      "helper_event_count": 8,
+      "helper_button_mapping": "swap_buttons=true;unchanged",
+      "root_cause_proven": false
+    }
+  ],
   "preservation": "24research originals,held brief,UART role boundaries,old records,tags and registered media preserved. No OneNote/wiki or extra Codex agents.",
   "release_ready": false,
-  "next": "Run source-pinned CI,download verified continuing Mac image,then perform isolated windowed Mac/PC input and drag tests with visible cursor. Keep E1/E2/E3/E4 distinct.",
+  "next": "Explicit source-identified continuing divisor4 comparison,without changing decoding/loss or device sequences;PC still needs bounded relative/capture diagnosis. Earlier finite divisor4/16 failures stay valid. No release freeze or publication.",
   "host_session_followup": {
     "profile": "Clang Debug",
     "executed": 3,
@@ -265,5 +476,12 @@
     "rerun_policy": "Use existing task temporary directory and rerun only four failed cases;actual result retained separately.",
     "rerun_passed": 4,
     "all_381_cases_passed_with_recorded_setup_rerun": true
-  }
+  },
+  "screenshot_paths": [
+    "docs/evidence/screenshots/2026-10-29/pc-contrasting-cursor-start.png",
+    "docs/evidence/screenshots/2026-10-29/pc-contrasting-cursor-clipped.png",
+    "docs/evidence/screenshots/2026-10-29/mac-live-pair-start.png",
+    "docs/evidence/screenshots/2026-10-29/mac-live-pair-after-input.png"
+  ],
+  "indexed_PNGs": 82
 }
