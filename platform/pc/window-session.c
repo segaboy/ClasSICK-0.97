@@ -107,7 +107,6 @@ uint32_t cs_pc_window_session_start(cs_pc_window_session *s,
     cs_cursor_token token;
     cs_window_config window;
     cs_product_state product;
-    unsigned i;
     int r;
 
     if (!pws_preflight(s, c))
@@ -141,12 +140,7 @@ uint32_t cs_pc_window_session_start(cs_pc_window_session *s,
     s->presentation.rows = 0u;
     s->presentation.required = 0u;
     s->presentation.cause = 0;
-    /* Original 7x7 plus, hotspot 3,3; unused bits transparent. */
-    for (i = 0u; i < 32u; ++i) {
-        uint32_t used = (i & 1u) == 0u && i < 14u;
-        s->bits.mask[i] = (uint8_t)(!used ? 0u : i == 6u ? 0xFEu : 0x10u);
-        s->bits.image[i] = s->bits.mask[i];
-    }
+    cs_window_cursor_bits_init(&s->bits);
     s->art.bits = &s->bits;
     s->art.width = 7u;
     s->art.height = 7u;

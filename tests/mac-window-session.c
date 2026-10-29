@@ -75,7 +75,19 @@ int main(void)
     CHECK(session.inbox.phase==CS_INBOX_WAIT && session.inbox.epoch==1);
     CHECK(session.capture.phase==CS_CAPTURE_WAIT && session.capture.epoch==1);
     CHECK(ctx.enters==1 && ctx.leaves==1 && !ctx.bad && !ctx.masked);
-    CHECK(hash()==UINT32_C(2123700856)); /* Pre-worker TEST-0074 PC framebuffer oracle. */
+    /* Preserve TEST-0074's unchanged full-frame oracle with its original black
+     * plus. Only the independently tested cursor art changes in the new frame. */
+    {
+        cs_cursor_bits legacy = {{0},{0}};
+        const cs_cursor_art old_art = {&legacy,7u,7u,3u,3u};
+        for (unsigned row=0u;row<7u;++row)
+            legacy.mask[row*2u]=legacy.image[row*2u]=(uint8_t)(row==3u?0xFEu:0x10u);
+        CHECK(cs_cursor_hide(&session.cursor,session.input.token)==CS_CURSOR_OK);
+        CHECK(cs_cursor_show(&session.cursor,session.input.token,&old_art,256,171)==CS_CURSOR_OK);
+        CHECK(hash()==UINT32_C(2123700856));
+        CHECK(cs_cursor_hide(&session.cursor,session.input.token)==CS_CURSOR_OK);
+        CHECK(cs_cursor_show(&session.cursor,session.input.token,&session.art,256,171)==CS_CURSOR_OK);
+    }
     CHECK(session.input.pointer.x==256 && session.input.pointer.y==171);
     CHECK(cs_foreground_step(&session.foreground)==CS_FG_EMPTY); /* No fake baseline. */
     CHECK(cs_inbox_baseline(&session.inbox,1,0)==CS_INBOX_OK);

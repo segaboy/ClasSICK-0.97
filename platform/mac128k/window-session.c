@@ -29,7 +29,6 @@ int cs_mac_window_begin(cs_mac_window_session *session,uint8_t *canvas,
     cs_product_state product;
     cs_cursor_result cr;
     int r;
-    uint32_t i;
 
     if (session == NULL || canvas == NULL || hooks == NULL)
         return CS_MAC_WINDOW_ARGUMENT;
@@ -69,14 +68,7 @@ int cs_mac_window_begin(cs_mac_window_session *session,uint8_t *canvas,
     if (r != (int)CS_SURFACE_OK)
         return cs_mac_fault(session,(int32_t)r);
 
-    /* Original PC 7x7 plus: mask equals image. */
-    for (i = 0u; i < 32u; ++i) {
-        uint8_t v = 0u;
-        if ((i & 1u) == 0u && i < 14u)
-            v = (uint8_t)(i == 6u ? 0xFEu : 0x10u);
-        session->bits.mask[i] = v;
-        session->bits.image[i] = v;
-    }
+    cs_window_cursor_bits_init(&session->bits);
     session->art.bits = &session->bits;
     session->art.width = 7u;
     session->art.height = 7u;

@@ -196,14 +196,12 @@ int cs_win_window_open(cs_win_window *w, int visible, uint32_t buttons)
     cs_cursor_token tok;
     HINSTANCE hi;
     RECT rc;
-    int row;
     if (w == NULL || (visible != 0 && visible != 1) || buttons > 1u) return 0;
     memset(w, 0, sizeof *w);
     w->frame = (uint8_t *)calloc(80u * 480u, 1);
     w->scratch = (uint8_t *)calloc((size_t)640 * 480 * 4, 1);
     if (!w->frame || !w->scratch) goto bad;
-    for (row = 0; row < 7; row++)
-        w->bits.mask[row * 2] = w->bits.image[row * 2] = row == 3 ? 0xFE : 0x10;
+    cs_window_cursor_bits_init(&w->bits);
     w->art.bits = &w->bits;
     w->art.width = 7; w->art.height = 7; w->art.hot_x = 3; w->art.hot_y = 3;
     if (cs_surface_init(&w->surface, w->frame, 80u * 480u, 640, 480, 80,

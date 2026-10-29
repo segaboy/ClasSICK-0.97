@@ -1,0 +1,238 @@
+{
+  "date": "2026-10-29",
+  "baseline": "2ca756a39665d54b06825687ebdb0fdce3ce9551",
+  "sources": [
+    "SRC-0542",
+    "SRC-0543",
+    "SRC-0544",
+    "SRC-0545"
+  ],
+  "specifications": [
+    "SPEC-0052",
+    "SPEC-0055",
+    "SPEC-0061",
+    "SPEC-0081",
+    "SPEC-0083"
+  ],
+  "implementations": [
+    "IMPL-0091",
+    "IMPL-0092"
+  ],
+  "tests": [
+    "TEST-0105",
+    "TEST-0106"
+  ],
+  "status": "Hosted checks and PC native/media proof pass;Mac native proof/CI and exact candidate trials pending. Paired release not ready.",
+  "authority": "Owner directs finishing r2 review then the next release step;retained approved isolated original-candidate trials/source-role scopes apply. No release/reference/physical permissions expand.",
+  "changes": [
+    "Shared original7x7 black plus gains a white halo;33opaque pixels,13black and20white,same hotspot/footprint/payload. Used by Mac,PC and Windows preview.",
+    "Separate live Mac pair profile removes deliberate observation checkpoint by composition;existing finite diagnostics,device IO,assembly and loss/fault rules remain.",
+    "PC media provenance now includes the shared artwork header."
+  ],
+  "finding_limits": "Black-only art is indistinguishable on uniform black;not proof that all earlier missing-cursor reports were artwork-related. Measurement ROM deliberately halts;not proof that a live profile repairs signal loss.",
+  "workers": [
+    {
+      "role": "shared cursor art and visibility/restoration tests",
+      "round": "primary",
+      "worker": "copilot",
+      "exit_code": 0,
+      "outer_timeout": false,
+      "elapsed_seconds": 144.88,
+      "input_bytes": 9770,
+      "input_sha256": "77804f3f97e81e5a882587a41169c8f361686e4df8650b7ea968ef89e6f05604",
+      "stderr_bytes": 0,
+      "model": "claude-sonnet-5.5",
+      "effort": "Low",
+      "reported_premium_request_cost": 1,
+      "reported_api_duration_ms": 130575,
+      "tests_executed_by_worker": [],
+      "commands": 0,
+      "writes": 0,
+      "view_calls": 5,
+      "control_deviation": "Five views instead of one;only frozen prompt and its empty-of-other-inputs directory. Accepted after inspection;no retry."
+    },
+    {
+      "role": "continuing native paired-capture composition and host control",
+      "round": "primary",
+      "worker": "copilot",
+      "exit_code": 0,
+      "outer_timeout": false,
+      "elapsed_seconds": 70.7,
+      "input_bytes": 89365,
+      "input_sha256": "5e0820e73d9b2b563e644ebb08d044672f628578d476c8715aef6acfb23d42aa",
+      "stderr_bytes": 0,
+      "model": "claude-sonnet-5.5",
+      "effort": "Low",
+      "reported_premium_request_cost": 1,
+      "reported_api_duration_ms": 67135,
+      "tests_executed_by_worker": [],
+      "commands": 0,
+      "writes": 0,
+      "view_calls": 1,
+      "control_deviation": null
+    }
+  ],
+  "provider_remaining_balances": "Unreported for all providers;not queried. No quota equivalence or measured Codex saving.",
+  "lead_changes": [
+    "Header-local helper avoids duplicate fault-object definitions/new native imports.",
+    "Corrected proposed halo diff count24 to20 from frozen row geometry;poisoned initialization fixture.",
+    "Retained original TEST-0074 literal2123700856 framebuffer oracle by rendering original art temporarily,then restoring new art.",
+    "Live profile cites SPEC-0083,records contract input,and rejects first-input as well as idle/activity checkpoint symbol prefixes."
+  ],
+  "host_cursor": [
+    {
+      "profile": "clang",
+      "exit_code": 0,
+      "elapsed_seconds": 3.391,
+      "focused_cases": 11
+    },
+    {
+      "profile": "gcc64",
+      "exit_code": 0,
+      "elapsed_seconds": 6.063,
+      "focused_cases": 11
+    },
+    {
+      "profile": "gcc32",
+      "exit_code": 0,
+      "elapsed_seconds": 10.265,
+      "focused_cases": 11
+    },
+    {
+      "profile": "sanitized",
+      "exit_code": 0,
+      "elapsed_seconds": 6.438,
+      "focused_cases": 11
+    }
+  ],
+  "host_live_pair": [
+    {
+      "profile": "clang",
+      "exit_code": 0,
+      "focused_cases": 2,
+      "elapsed_seconds": 2.125
+    },
+    {
+      "profile": "gcc64",
+      "exit_code": 0,
+      "focused_cases": 2,
+      "elapsed_seconds": 2.75
+    },
+    {
+      "profile": "gcc32",
+      "exit_code": 0,
+      "focused_cases": 2,
+      "elapsed_seconds": 3.234
+    },
+    {
+      "profile": "sanitized",
+      "exit_code": 0,
+      "focused_cases": 2,
+      "elapsed_seconds": 3.422
+    }
+  ],
+  "builder_argument_controls": {
+    "refused_compositions": 14,
+    "accepted_before_first_output": 2,
+    "compiled_or_executed_guest": false
+  },
+  "earlier_failures": [
+    {
+      "scope": "First cursor Clang run",
+      "result": "Existing Mac full-frame oracle failed because art changed;literal hash preserved with original-art overlay,not learned/replaced."
+    },
+    {
+      "scope": "Overbroad local GCC64 all-target build",
+      "result": "Unchanged Windows demo HGDI_ERROR signed-conversion warning prevented full cache build. Log retained privately;affected target builds pass. Normal required CI still pending;this is not a full-build pass."
+    }
+  ],
+  "native_PC": {
+    "images": [
+      {
+        "case": "clang-64-O0",
+        "sha256": "98905633fd1e0d94f04d74b3326a721047ae92f0af8a6ba677bce31bf04124a6",
+        "size_bytes": 270336,
+        "image_size": 282624,
+        "relocations": 3,
+        "status": "passed-unloaded"
+      },
+      {
+        "case": "clang-64-O2",
+        "sha256": "19100bfbd3ea836579a09c58b989b50a0c6af8101a5137183cc2bd8b6b746f73",
+        "size_bytes": 184320,
+        "image_size": 196608,
+        "relocations": 3,
+        "status": "passed-unloaded"
+      }
+    ],
+    "image_rejections": 27,
+    "omitted_objects": 26,
+    "window_input_probe": false,
+    "continuous_preview": true,
+    "media": {
+      "specification": "SPEC-0062",
+      "session_specification": "SPEC-0061",
+      "diagnostic_input_probe": false,
+      "input_probe_mode": "none",
+      "continuous_preview": true,
+      "source_revision": "2ca756a39665d54b06825687ebdb0fdce3ce9551",
+      "tracked_source_dirty": true,
+      "inputs": {
+        "platform/uefi/window.c": "020560e0b3840c32764894fd1b5b32af4ca49d641a922f23ecb3ddd479d6b653",
+        "platform/uefi/window.h": "c76a06800546e60ffc35d09e0da47b7cc3c931305578911c0368c307b8e9c012",
+        "platform/uefi/entry.c": "263826e9373f1f7d13dbb10c8fc01f0858bc971aa4ce8afe899ca0b742eb2cce",
+        "platform/pc/window-session.c": "88bcd9733dcd04d7aca38c43f7b260900e0360166f0e455ccf95677e3e1e27a6",
+        "platform/pc/window-session.h": "2219eef76f805af841d8b162ad21b4f49642e8b26d83839ac65171bc0938922d",
+        "platform/pc/mono-present.c": "7a0756d79c05321499be2110edcc239623156db56f7dd248f54822565f0ebdb1",
+        "platform/pc/mono-present.h": "21ebb63a38ae1265902978be75f6321123386b97a56bfbf970d9b5951b239644",
+        "platform/pc/window-input.c": "6e7a512f0c76b57e561d6be76d347fb5bf2555c114cb4dadb5d3255f16540868",
+        "platform/pc/window-input.h": "b3e7b9e109b39fee2d186414d1710fb4384b347a1e5c1ff76548ffc1bd5493ca",
+        "apps/window-scene/input.c": "2b10f8c6de9349e41a02d3138abd8bb04a83b0d7eb8cc646c627a0e5d2a44b19",
+        "apps/window-scene/input.h": "1c8128eaefeadb1c47847f883d2608e06a3f050573851f95a38182d49130fd61",
+        "apps/window-scene/scene.c": "bc3f8ac625bd782d368709cf915a94bbd7f9a6c4dd810197a11ae157363afa3f",
+        "core/graphics/cursor.c": "c239ef42783ffaa446c59f7ba630b5b1cd78c95444449fa63b983f4c3bb98fe5",
+        "core/input/pointer.c": "d38b4b131f44a3ce8bf8019cdef8aa4e56e3d5c09f0bc9b154fd1f8ff920afa7",
+        "core/ui/window.c": "ddec6ccab8bf5148240d6269bf33374180ac60406b4ab50558809ff3e53aa18a",
+        "apps/product-scene/scene.c": "7488910c401285b1e211d3c6eb95a17f04683748ffa8fc2dba4e2659725872d2",
+        "scripts/Verify-UEFIImage.ps1": "7bf3fac9aeb1805eae5e7da8c2f2f7c9e816d2d1978faa37eb1e1a9818cd3fcc",
+        "scripts/Package-WindowPC.ps1": "09d852d9a8abecad40ff634812d6f6ca76ee17eaa0cbe1f18d290f39c898e680",
+        "docs/specifications/SPEC-0062-uefi-window-binding.md": "928412d6ad0c286a01ecb48476acd0e7e220b88b6cbea8cce59754d3736e1241"
+      },
+      "input_scope": "window binding subset;source revision identifies remaining inputs",
+      "efi_sha256": "19100bfbd3ea836579a09c58b989b50a0c6af8101a5137183cc2bd8b6b746f73",
+      "media": {
+        "image_sha256": "38d8d2065ce397709713e17e44b139ee67469036a06dbe0d4814fd0033be12b1",
+        "payload_sha256": "19100bfbd3ea836579a09c58b989b50a0c6af8101a5137183cc2bd8b6b746f73",
+        "image_bytes": 67108864,
+        "partition_first": 2048,
+        "partition_sectors": 126976,
+        "partition_name": "ClasSICK ESP",
+        "reserved_sectors": 78,
+        "fat_sectors": 985,
+        "clusters": 124928,
+        "payload_clusters": 360,
+        "free_clusters": 124565,
+        "header_crc": "7A6BB824",
+        "backup_crc": "F46774E1",
+        "loaded": false
+      },
+      "writer_twins_equal": true,
+      "target_executed": false,
+      "release": false
+    },
+    "payload_sha256": "19100bfbd3ea836579a09c58b989b50a0c6af8101a5137183cc2bd8b6b746f73",
+    "disk_sha256": "38d8d2065ce397709713e17e44b139ee67469036a06dbe0d4814fd0033be12b1",
+    "art_header_sha256_lf": "1c8128eaefeadb1c47847f883d2608e06a3f050573851f95a38182d49130fd61"
+  },
+  "native_Mac": {
+    "status": "pending source-pinned CI",
+    "target_run": false
+  },
+  "CI": {
+    "status": "pending code checkpoint"
+  },
+  "target_trials": [],
+  "preservation": "24research originals,held brief,UART role boundaries,old records,tags and registered media preserved. No OneNote/wiki or extra Codex agents.",
+  "release_ready": false,
+  "next": "Run source-pinned CI,download verified continuing Mac image,then perform isolated windowed Mac/PC input and drag tests with visible cursor. Keep E1/E2/E3/E4 distinct."
+}

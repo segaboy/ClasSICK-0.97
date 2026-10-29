@@ -4886,3 +4886,19 @@ Intel,Intel Quark SoC X1000 Core Developer Manual,October2013,order329679-001US,
 ## SRC-0541 - Revised286 contribution static review
 
 2026-10-29;owner-direct r2 packet rebased onb68bef1,45455bytes/SHA256e58db02042c9c9d4086817b358aec07173de2fbd6d39f396aa50cad44a5ddc7f. All19checksum rows verify;byte-identical originals remain privately retained. Lead reads the revised286 C implementations/headers,contracts,response,CMake deltas and compiler-script diff for contribution review only;no new implementation/test adoption,execution,worker call or affected-lane source/role admission. [Dated canonical review](../docs/development/pc286-followup-intake.md) records addressed packaging/borrow issues,an A qualification recommendation,and B registry-reinitialization/epoch-domain questions with explicitly unexecuted static traces. Author-generated test counts remain self-reported;existing SPEC-0082 and CLEANROM/affected-lane exclusions persist.
+
+## SRC-0542 - Owner returns priority to release readiness
+
+2026-10-29. Owner directs completing the r2 intake then moving to the next release step. Existing approved isolated original-candidate trials and source/role boundaries remain;no release/reference/physical permission expands. [Canonical release repair](../docs/development/release-input-repair.json).
+
+## SRC-0543 - Original shared contrasting cursor artifact
+
+2026-10-29. One Copilot Sonnet5.5 Low call from9770reviewed-public/original bytes returns128helper/test lines;zero commands/writes/tests. Five views instead of one remain inside the frozen input directory/prompt;deviation reviewed. Lead adopts as a header-local helper,corrects halo count20 and strengthens fixture initialization. Original7x7 geometry/hotspot retained with a white halo;not an Apple asset or historical-cursor reconstruction. Actual verification/usage and limits are in the [receipt](../docs/development/release-input-repair.json).
+
+## SRC-0544 - Original continuing paired-capture contract and artifact
+
+2026-10-29. SPEC-0083 composes the qualified SPEC-0081 callback into a continuing window without measurement checkpoints. One fresh Copilot Sonnet5.5 Low call receives89365reviewed-public/original bytes,one view,zero commands/writes/tests;111replacement/new lines. Lead adds SPEC-0083 source/profile identity and first-input checkpoint rejection. No manual,HQ,untracked original,excluded snippet,held UART,ROM/media or emulator implementation is supplied. No device/assembly/acquisition/loss policy change;native proof/trial still required. [Receipt](../docs/development/release-input-repair.json).
+
+## SRC-0545 - Original release-input repair verification
+
+2026-10-29;IMPL-0091/0092;TEST-0105/0106. Executed focused host tests,argument fences and twin PC image/media/control checks are recorded in the [canonical receipt](../docs/development/release-input-repair.json). Earlier legacy-frame and unrelated local full-GCC-demo failures are preserved and distinguished. Native Mac proof,source-pinned CI and target observations are separately updated there;no historical,physical/full128K,System1,human or release acceptance follows from compilation or hosted checks.

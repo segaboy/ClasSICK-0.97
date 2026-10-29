@@ -4,6 +4,24 @@
 #define CLASSICK_WINDOW_INPUT_H
 #include "scene.h"
 #include "../../core/input/mouse.h"
+
+/* Original7x7 black plus with a white halo;hotspot3,3.
+ * Truthful caller-owned bits object;NULL leaves everything unchanged.
+ * Header-local keeps fault-object/native import ABIs unchanged. */
+static inline void cs_window_cursor_bits_init(cs_cursor_bits *bits)
+{
+    unsigned i, r;
+    if (bits == NULL)
+        return;
+    for (i = 0u; i < 32u; i++)
+        bits->mask[i] = bits->image[i] = 0u;
+    /* Row bytes are MSB-first; the second byte of each 16-bit row stays 0. */
+    for (r = 0u; r < 7u; r++) {
+        bits->mask[2u * r] = (r >= 2u && r <= 4u) ? 0xFEu : 0x38u;
+        bits->image[2u * r] = (r == 3u) ? 0xFEu : 0x10u;
+    }
+}
+
 typedef struct {
     cs_pointer pointer;
     cs_mouse_button counter;

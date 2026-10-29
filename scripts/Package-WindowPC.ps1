@@ -27,7 +27,7 @@ if($LASTEXITCODE -ne 0){throw 'Window twin media generation failed.'}
 if((Get-FileHash -LiteralPath $disk).Hash -ne (Get-FileHash -LiteralPath $twin).Hash){throw 'Window media writers disagree.'}
 $check=@(& (Join-Path $PSScriptRoot 'Test-BootMedia.ps1') -Image $disk -Payload $efi -PassThru)[-1]
 $inputs=[ordered]@{}
-foreach($path in @('platform/uefi/window.c','platform/uefi/window.h','platform/uefi/entry.c','platform/pc/window-session.c','platform/pc/window-session.h','platform/pc/mono-present.c','platform/pc/mono-present.h','platform/pc/window-input.c','platform/pc/window-input.h','apps/window-scene/input.c','apps/window-scene/scene.c','core/graphics/cursor.c','core/input/pointer.c','core/ui/window.c','apps/product-scene/scene.c','scripts/Verify-UEFIImage.ps1','scripts/Package-WindowPC.ps1','docs/specifications/SPEC-0062-uefi-window-binding.md')){
+foreach($path in @('platform/uefi/window.c','platform/uefi/window.h','platform/uefi/entry.c','platform/pc/window-session.c','platform/pc/window-session.h','platform/pc/mono-present.c','platform/pc/mono-present.h','platform/pc/window-input.c','platform/pc/window-input.h','apps/window-scene/input.c','apps/window-scene/input.h','apps/window-scene/scene.c','core/graphics/cursor.c','core/input/pointer.c','core/ui/window.c','apps/product-scene/scene.c','scripts/Verify-UEFIImage.ps1','scripts/Package-WindowPC.ps1','docs/specifications/SPEC-0062-uefi-window-binding.md')){
     $bytes=[Text.Encoding]::UTF8.GetBytes([IO.File]::ReadAllText((Join-Path $repo $path)).Replace("`r`n","`n"))
     $digest=[Security.Cryptography.SHA256]::Create().ComputeHash($bytes)
     $inputs[$path]=($digest | ForEach-Object {$_.ToString('x2')}) -join ''
