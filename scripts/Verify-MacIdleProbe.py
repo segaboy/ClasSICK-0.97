@@ -17,8 +17,13 @@ def main():
     roots=[Path(a.normal),Path(a.probe)]
     manifests=[json.loads((r/'manifest.json').read_text()) for r in roots]
     baseline_defer=bool(a.first_input and a.pending_defer)
-    expected=('cfa16dc2e816cc833fb6c2d51ca9088fdf26215c6aa989999783dbd08dcb4235' if baseline_defer else
+    historical_expected=('cfa16dc2e816cc833fb6c2d51ca9088fdf26215c6aa989999783dbd08dcb4235' if baseline_defer else
               '673a2cca57d1ec9ffd842f4c858fa4aafbcb042ec6f86445ae5717d4816c4965')
+    # SRC-0543 intentionally changes artwork in the normal image. Compare the
+    # diagnostic with this run's source-matched normal-profile twins; retain
+    # the previous exact identities as historical comparisons,not current claims.
+    assert manifests[0]['profile']==('native-window-pending-defer-probe-v1' if baseline_defer else 'native-window-preview-v1')
+    expected=manifests[0]['profiles'][0]['image_sha256']
     label='cs_mac_window_idle_checkpoint';profiles=[]
     for enabled,r,m in zip((False,True),roots,manifests):
         q=m['profiles'][0];b=(r/'Os-a/classick-loaded-app.rom').read_bytes()
@@ -75,14 +80,16 @@ def main():
             '--tool-root',str(missing),'--output',str(missing),'--window-drawing',
             '--window-idle-probe',*flags],capture_output=True,text=True)
         assert result.returncode==2 and 'Choose one diagnostic profile' in result.stderr and not missing.exists()
-    d={'schema_version':1,'profiles':profiles,'normal_byte_identical_to_b3cb3fe':None if baseline_defer else True,
-       'baseline_byte_identical_to_83f7b6f':True,'baseline_rom_sha256':expected,
+    d={'schema_version':1,'profiles':profiles,'normal_byte_identical_to_b3cb3fe':None if baseline_defer else expected==historical_expected,
+       'baseline_byte_identical_to_83f7b6f':expected==historical_expected,'baseline_rom_sha256':expected,
+       'historical_pre_contrast_rom_sha256':historical_expected,
+       'baseline_identity_basis':'current normal-profile twins,exact bytes and current input hashes verified',
        'current_source_hashes_verified':True,'mode_refusals':len(modes)+int(a.pending_defer or a.first_input),
        'probe_kind':('pending-defer-first-input' if a.pending_defer else 'first-input') if a.first_input else ('pending-defer' if a.pending_defer else 'idle-checkpoint'),
        'probe_spin_bytes':'60fe' if a.first_input or not a.pending_defer else None,'register_export_format':'MWR1' if a.first_input or not a.pending_defer else None,'additional_ram_bytes':8 if a.pending_defer and not a.first_input else 0,'trace_layout_bytes':128,
        'emulator_run':False,'motion_or_release_qualification':False}
     Path(a.output).write_text(json.dumps(d,indent=2)+'\n')
-    print('PASS: baseline ROM unchanged, probe twins/'+str(q['corruption_controls']+q['resealed_native_corruption_controls'])+
+    print('PASS: source-matched normal baseline, probe twins/'+str(q['corruption_controls']+q['resealed_native_corruption_controls'])+
           ' controls/three IRQ veneers, '+str(d['additional_ram_bytes'])+' added RAM bytes, '+str(d['mode_refusals'])+' refusals; no boot.')
 
 if __name__=='__main__':main()

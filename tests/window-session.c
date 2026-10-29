@@ -147,7 +147,10 @@ static void test_start(void)
     CHECK(ses.queue.capacity == 8u && ses.queue.storage == ses.records);
     for (unsigned i = 0u; i < 32u; ++i) {
         uint8_t bit = (uint8_t)((i & 1u) || i >= 14u ? 0u : i == 6u ? 0xFEu : 0x10u);
-        CHECK(ses.bits.mask[i] == bit && ses.bits.image[i] == bit);
+        /* Frozen7x7 geometry:unchanged black plus,white one-pixel halo. */
+        uint8_t halo = (uint8_t)((i & 1u) || i >= 14u ? 0u :
+            (i >= 4u && i <= 8u) ? 0xFEu : 0x38u);
+        CHECK(ses.bits.mask[i] == halo && ses.bits.image[i] == bit);
     }
 }
 

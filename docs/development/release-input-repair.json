@@ -77,7 +77,8 @@
     "Header-local helper avoids duplicate fault-object definitions/new native imports.",
     "Corrected proposed halo diff count24 to20 from frozen row geometry;poisoned initialization fixture.",
     "Retained original TEST-0074 literal2123700856 framebuffer oracle by rendering original art temporarily,then restoring new art.",
-    "Live profile cites SPEC-0083,records contract input,and rejects first-input as well as idle/activity checkpoint symbol prefixes."
+    "Live profile cites SPEC-0083,records contract input,and rejects first-input as well as idle/activity checkpoint symbol prefixes.",
+    "Expanded local checks after initial selection missed window-session exact artwork assertions. Historical ROM identities remain reported;current-default profile/source/twin and all native corruption/IRQ/RAM/refusal checks persist."
   ],
   "host_cursor": [
     {
@@ -229,10 +230,40 @@
     "target_run": false
   },
   "CI": {
-    "status": "pending code checkpoint"
+    "status": "Initial source run failed two artwork-era verification assumptions;corrected checks await new CI.",
+    "attempts": [
+      {
+        "run": 40955882429,
+        "source_revision": "722ef85ce73f61d854c45274749952389fb65740",
+        "conclusion": "failure",
+        "Windows": "window-session normal/fault tests expected black-only masks;all six differing rows now check frozen white-halo masks and unchanged black image.",
+        "Mac": "Idle/defer verifier fixed its normal ROM to pre-contrast historical bytes. Now validates the explicit current normal-profile twin baseline and current source hashes;historical hashes/comparisons are retained without falsely claiming current equality.",
+        "required_other_native_checks_retained": true
+      }
+    ]
   },
   "target_trials": [],
   "preservation": "24research originals,held brief,UART role boundaries,old records,tags and registered media preserved. No OneNote/wiki or extra Codex agents.",
   "release_ready": false,
-  "next": "Run source-pinned CI,download verified continuing Mac image,then perform isolated windowed Mac/PC input and drag tests with visible cursor. Keep E1/E2/E3/E4 distinct."
+  "next": "Run source-pinned CI,download verified continuing Mac image,then perform isolated windowed Mac/PC input and drag tests with visible cursor. Keep E1/E2/E3/E4 distinct.",
+  "host_session_followup": {
+    "profile": "Clang Debug",
+    "executed": 3,
+    "passed": 3,
+    "cases": [
+      "window-session.normal",
+      "window-session.faults",
+      "window-session.freestanding"
+    ]
+  },
+  "local_full_suite": {
+    "profile": "Clang Debug qualified cache",
+    "cases": 381,
+    "initial_passed": 377,
+    "initial_failed": 4,
+    "failure_cause": "Process inherited unwritable default temporary directory;four Python fixture tests failed setup.",
+    "rerun_policy": "Use existing task temporary directory and rerun only four failed cases;actual result retained separately.",
+    "rerun_passed": 4,
+    "all_381_cases_passed_with_recorded_setup_rerun": true
+  }
 }
