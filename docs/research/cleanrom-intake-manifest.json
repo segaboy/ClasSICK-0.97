@@ -1,0 +1,118 @@
+{
+  "files": [
+    {
+      "name": "CLEANROM.ROM",
+      "bytes": 65536,
+      "sha256": "214fc980068a1b14e76d363b90d1681097edca258ca26bd7c28e694ccd01a970",
+      "byte_identical_copy": true
+    },
+    {
+      "name": "cleanrom-src.tar.gz",
+      "bytes": 20247,
+      "sha256": "06e5c2445b0e2bf0ba4283090c672167b1b70987f5e991b45e586060b28a9e65",
+      "byte_identical_copy": true
+    },
+    {
+      "name": "CLEANROM-build-notes.pdf",
+      "bytes": 439196,
+      "sha256": "0204d09c02a0d67371a86bab05bda8574b4a816d6f12d592b821e731ba9488c2",
+      "byte_identical_copy": true
+    }
+  ],
+  "archive_entries": [
+    {
+      "name": "macrom/README.md",
+      "bytes": 3233,
+      "type": "regular"
+    },
+    {
+      "name": "macrom/build.sh",
+      "bytes": 585,
+      "type": "regular"
+    },
+    {
+      "name": "macrom/src",
+      "bytes": 0,
+      "type": "directory"
+    },
+    {
+      "name": "macrom/src/rom.s",
+      "bytes": 37195,
+      "type": "regular"
+    },
+    {
+      "name": "macrom/tools",
+      "bytes": 0,
+      "type": "directory"
+    },
+    {
+      "name": "macrom/tools/finish_rom.py",
+      "bytes": 666,
+      "type": "regular"
+    },
+    {
+      "name": "macrom/tools/gen_assets.py",
+      "bytes": 9162,
+      "type": "regular"
+    },
+    {
+      "name": "macrom/test",
+      "bytes": 0,
+      "type": "directory"
+    },
+    {
+      "name": "macrom/test/macemu.c",
+      "bytes": 11497,
+      "type": "regular"
+    },
+    {
+      "name": "macrom/CLEANROM.ROM",
+      "bytes": 65536,
+      "type": "regular"
+    }
+  ],
+  "PDF": {
+    "pages": 9,
+    "metadata": {
+      "/Title": "CLEANROM: How the Clean-Room Mac 128K ROM Was Built",
+      "/Creator": "Chromium",
+      "/Producer": "Skia/PDF m153",
+      "/CreationDate": "D:20261029165006+00'00'",
+      "/ModDate": "D:20261029165006+00'00'"
+    },
+    "encrypted": false
+  },
+  "contents_reviewed": "None;metadata/container checks only",
+  "executed": false,
+  "archive_ROM_identity": {
+    "sha256": "214fc980068a1b14e76d363b90d1681097edca258ca26bd7c28e694ccd01a970",
+    "matches_separate_supplied_ROM": true,
+    "purpose": "Transport identity only;no byte decoding,header interpretation,disassembly or execution"
+  },
+  "eligibility": "HELD:PDF page2 declares excluded emulator implementation inputs. Source/ROM not admitted.",
+  "reviewed": [
+    "README narrative/build invocation/dependency declarations",
+    "PDF metadata and narrative on pages1-2",
+    "Archive member metadata and hashes only"
+  ],
+  "not_reviewed": [
+    "ROM code/header",
+    "rom.s",
+    "gen_assets.py",
+    "finish_rom.py",
+    "build.sh",
+    "test/macemu.c",
+    "remaining PDF implementation sections"
+  ],
+  "recorded_on": "2026-10-29",
+  "source_ids": [
+    "SRC-0534",
+    "SRC-0535"
+  ],
+  "implementation_eligibility": "excluded-under-current-project-rules",
+  "test_status": "Author report says no boot/harness run;not independently verified",
+  "publication_scope": "Sanitized identity/eligibility metadata only. Original attachments remain outside Git.",
+  "declared_excluded_inputs": [
+    "emulator implementation source"
+  ]
+}
