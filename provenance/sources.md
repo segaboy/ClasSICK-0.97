@@ -4862,3 +4862,19 @@ Oracle VirtualBox User Guide Release7.2,Advanced Topics,Configuring Automatic Mo
 ## SRC-0535 - Lead CLEANROM identity and eligibility review
 
 2026-10-29;original sanitized lead research record only. Executed hashes/copy equality,archive member/path/type/size inspection,PDF metadata and embedded/separate ROM hash comparison. Author's report says no ROM boot and no harness execution;not a passing-test submission. Further implementation review stopped on declared excluded inputs,owner notified privately,and no affected ClasSICK implementation was changed. [Lead review](../docs/research/cleanrom-intake-review.md) separates checks,claims,hold and existing-project continuation options. [Complete provenance-only follow-up prompt](../docs/development/tasks/cleanrom-provenance-followup.md) is for the original author conversation;it was not sent to another service. No new specification,test,implementation,trial or release acceptance is assigned. Existing independently sourced source/role and other project gates persist.
+
+## SRC-0536 - Owner narrowly admits the independent286 experiment
+
+2026-10-29. Owner authorizes the specific286 span-builder review/tests and conditional integration if provenance and verification pass,in reply to that exact scoped question. No permanent contributor-role decision or permission to review/reuse CLEANROM,Mac/SCC/VIA/ROM/68000 implementation is inferred. Prohibited inputs and existing gates remain. [Canonical receipt](../docs/development/pc286-span-build-evidence.json).
+
+## SRC-0537 - Original proposed286 span-builder contribution
+
+2026-10-29;owner-direct Claude claude-opus-5-5. Separate286 probes,tests,compiler-script delta and proposed contract/receipt received;exact public-candidate identities retained in the [receipt](../docs/development/pc286-span-build-evidence.json). Contributor discloses prior excluded Mac emulator-source exposure and asserts none was used for this unrelated286 experiment. Narrow SRC-0536 admission obtained before source review;not a general clean-room certification. Originals retained privately unchanged. Adopted with explicit lead changes;cloud test statements remain self-reported. Private context and excluded implementation are not forwarded or published.
+
+## SRC-0538 - Original span-builder lead verification and independent oracle
+
+2026-10-29. SPEC-0082/IMPL-0090/TEST-0104. Fresh Copilot Sonnet5.5 Low receives only frozen reviewed-public interfaces,contract and original literal expectations,without implementation/author tests. Lead corrects one fixture and null-pointer gap,integrates artifacts and executes host,C16 and faulty-control checks. Actual source identities,usage,output-cap deviation,CI and limits are in the [canonical receipt](../docs/development/pc286-span-build-evidence.json). No target/native execution,ownership proof,historical behavior or release acceptance.
+
+## SRC-0539 - Published Intel real-mode addressing interface
+
+Intel,Intel Quark SoC X1000 Core Developer Manual,October2013,order329679-001US,section5.2 Memory Addressing,printed/PDF66;accessed2026-10-29 at <https://www.intel.com/content/dam/support/us/en/documents/processors/quark/sb/intelquarkcore_devman_001.pdf>. Eligible narrow published prose:segment shifted four bits plus offset,paragraph bases,64KiB windows and explicit80286 real-mode compatibility. No implementation or instruction-operation/sample-code section used. Web text read;direct download returns403 and page-image request fails,so no local identity/hash or visual-page check is claimed. Only the addressing relation supports SPEC-0082;the strict sub-1MiB/no-wrap profile is our engineering restriction. No Quark-specific reset/A20 or modern-CPU behavior is transferred to286.

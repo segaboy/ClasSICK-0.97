@@ -1,0 +1,494 @@
+{
+  "date": "2026-10-29",
+  "baseline": "8a197ffe32853bd4c346aa2d0a833dfee7b6a903",
+  "ids": {
+    "sources": [
+      "SRC-0536",
+      "SRC-0537",
+      "SRC-0538",
+      "SRC-0539"
+    ],
+    "spec": "SPEC-0082",
+    "implementation": "IMPL-0090",
+    "test": "TEST-0104"
+  },
+  "scope": "Isolated original286 experiment;no production binding/link/target execution. No CLEANROM or affectedMac/ROM/CPU code adopted.",
+  "authority": "Owner reply to the exact narrow286 review/test/conditional-integration question. Contributor admission applies only to this independent lane;all prohibited-input exclusions remain.",
+  "intake": {
+    "all_declared_checksums_verified": 23,
+    "public_candidate_originals": [
+      {
+        "path": "CMakeLists.span-build.delta.cmake",
+        "bytes": 1101,
+        "sha256": "e144fe8151f6e67a88c3fa112f7c77a807d49fda590d1d0c3a1f685fcc1f13f4"
+      },
+      {
+        "path": "docs/development/pc286-span-build-contract.md",
+        "bytes": 4119,
+        "sha256": "3708bd66723a5d0de3b38fe5c8a6315d7a9ba942598491658bf468c4f200772f"
+      },
+      {
+        "path": "docs/development/pc286-span-build-evidence.md",
+        "bytes": 4984,
+        "sha256": "2ed09307d6f6aef8056d8d68b0d179e408571421ec1793b57fcea4e2cc8dea1e"
+      },
+      {
+        "path": "probes/pc286/span-build.c",
+        "bytes": 4769,
+        "sha256": "948348a64f4ede712bbed572bf5350026841ec3cdf38b998d6cd72fde6dd285e"
+      },
+      {
+        "path": "probes/pc286/span-build.h",
+        "bytes": 1716,
+        "sha256": "ba5ca87581b017413e88a562063b568a90ea3ed86d823c66dc0f7f8cf868b846"
+      },
+      {
+        "path": "scripts/Probe-PC286BankPlan.py",
+        "bytes": 8329,
+        "sha256": "7282bc03262ae8b996b8028b2331f452527a6840bd1213abaeeb26535f701398"
+      },
+      {
+        "path": "scripts/Probe-PC286BankPlan.py.diff",
+        "bytes": 4864,
+        "sha256": "b28a86492d81d2f7b444631f809c42807071e303439dfc0363cd83e4fa7a34bb"
+      },
+      {
+        "path": "tests/pc286-span-build.c",
+        "bytes": 9288,
+        "sha256": "e19c073be8fbb348e767aa6711bfc16c7934ff782f067d70c9a15e43e9e9a96f"
+      }
+    ],
+    "originals_preserved_outside_git": true,
+    "private_packet_and_HQ_material_not_published_or_forwarded": true
+  },
+  "contributor": {
+    "route": "Owner-direct Claude claude-opus-5-5 cloud session,not a Codex dispatch",
+    "claimed_tests": "Cloud tests are contributor reports only,not independently executed results here.",
+    "exposure": "Prior excluded Mac emulator-source exposure;no claimed overlap/input reuse for this separate286 slice. Narrow owner disposition obtained before code review."
+  },
+  "lead_changes": [
+    "Reject encoded0:0 in plan and bind to preserve non-NULL store4 invariant.",
+    "Clarify truthful extents,disjoint metadata/data and C16 metadata-window obligations.",
+    "Add implementation-blind oracle;correct its95-chunk fixture last two records to bank2/1byte and bank1/2bytes.",
+    "Retain192 general capacity but prove95 reachable maximum for this profile."
+  ],
+  "worker": {
+    "provider": "GitHub Copilot",
+    "model": "claude-sonnet-5.5",
+    "effort": "Low",
+    "calls": 1,
+    "elapsed_seconds": 78.7,
+    "frozen_input_bytes": 15096,
+    "frozen_input_sha256": "2b9548b67f4443496db4d0e5b98b5083fc32614b8b981f096a55a314d2012098",
+    "implementation_and_author_tests_absent": true,
+    "writes": 0,
+    "commands": 0,
+    "tests_executed_by_worker": [],
+    "output_lines": 293,
+    "output_cap": 270,
+    "cap_deviation": "Accepted after source review;no retry.",
+    "reported_premium_request_cost": 1,
+    "reported_model_calls": 3,
+    "reported_api_duration_ms": 69479,
+    "reported_session_duration_ms": 71528,
+    "remaining_balances": "Unavailable for all providers;not queried. No quota equivalence or measured Codex saving."
+  },
+  "host": {
+    "profiles": [
+      {
+        "profile": "clang",
+        "exit_code": 0,
+        "elapsed_seconds": 4.672
+      },
+      {
+        "profile": "gcc64",
+        "exit_code": 0,
+        "elapsed_seconds": 5.906
+      },
+      {
+        "profile": "gcc32",
+        "exit_code": 0,
+        "elapsed_seconds": 6.937
+      },
+      {
+        "profile": "sanitized",
+        "exit_code": 0,
+        "elapsed_seconds": 5.047
+      }
+    ],
+    "focused_tests_per_profile": 8,
+    "total_executions": 32,
+    "new_tests": [
+      "pc286.span-build",
+      "pc286.span-build-oracle"
+    ],
+    "checks": "Always-on checks;literal boundaries,error precedence,whole-output/arena preservation,BE cross-bank store,null tuple and95-chunk bound. No forged pointers."
+  },
+  "defect_and_cli_controls": [
+    {
+      "defect": "accept-null-tuple",
+      "compiled": true,
+      "detected": true,
+      "failed_checks": 4,
+      "exit_code": 1
+    },
+    {
+      "defect": "wrong-segment",
+      "compiled": true,
+      "detected": true,
+      "failed_checks": 9,
+      "exit_code": 1
+    },
+    {
+      "defect": "ignore-capacity",
+      "compiled": true,
+      "detected": true,
+      "failed_checks": 2,
+      "exit_code": 1
+    },
+    {
+      "defect": "skip-last-bind-check",
+      "compiled": true,
+      "detected": true,
+      "failed_checks": 12,
+      "exit_code": 1
+    },
+    {
+      "modes": [
+        "--span-build",
+        "--catalog"
+      ],
+      "refused_before_output": true
+    },
+    {
+      "modes": [
+        "--span-build",
+        "--store4-model"
+      ],
+      "refused_before_output": true
+    }
+  ],
+  "native": {
+    "compiler_pin": "2026-10-01-Build",
+    "objects": 4,
+    "compiler_calls": 6,
+    "inputs": {
+      "arch/i286/c16.h": "0d7634a598aa92a0971f8e1bcf55b63df0f3820cb78d4f7817641b27544a3920",
+      "probes/pc286/bank-plan.h": "7650a2c753f561d341430fe796d5852fea1c276a3547af2a17bed63397bf3bf1",
+      "probes/pc286/bank-plan.c": "34201bf3b4d83c21d739a8a80d4a973f1b1fc5525c99fac87b30c63239473c56",
+      "probes/pc286/bank-catalog.h": "942bacde89cad3e2c5c93c972b92588dab633c4271faf1f1b58b0cd6b6d72217",
+      "probes/pc286/bank-catalog.c": "d4a0a4fc4f505f6ae9a05746cd918d75cf8ecdf5dad0f79f9bf94255bc104c54",
+      "probes/pc286/store4-model.h": "35962469b3e4fa21934e0cfb428a14bb7437213490502ca639ece8c23c6fff16",
+      "probes/pc286/store4-model.c": "569d418c2f6e0e67a7faf1f59ff24c4e5734887c31dbff65fad8f16f75125483",
+      "probes/pc286/span-build.h": "690c714a7c1b1a2d905a41a894772db3a15a216abd12738b8997335de8bd53c1",
+      "probes/pc286/span-build.c": "be7b602cad44d9c42ddff68df619c5c13a389d26c1139d6d01f062a180306c79"
+    },
+    "records": [
+      {
+        "case": "mc-od",
+        "flags": [
+          "-zq",
+          "-2",
+          "-mc",
+          "-zl",
+          "-s",
+          "-od",
+          "-zastd=c99",
+          "-dCS_C16_REQUIRE_16BIT"
+        ],
+        "external_symbols": [
+          "cs_bm_validate_",
+          "cs_bc_validate_",
+          "cs_bm_plan4_"
+        ],
+        "defined_symbols": [
+          "cs_bm_validate_",
+          "cs_bm_check_",
+          "cs_bm_plan4_",
+          "cs_bc_validate_",
+          "cs_bs_store4_",
+          "cs_bs_epoch_next_",
+          "cs_bk_plan_",
+          "cs_bk_bind_"
+        ],
+        "unresolved_symbols": [],
+        "segments": [
+          [
+            "_TEXT",
+            "16",
+            "00001F81"
+          ],
+          [
+            "CONST",
+            "16",
+            "00000000"
+          ],
+          [
+            "CONST2",
+            "16",
+            "00000000"
+          ],
+          [
+            "_DATA",
+            "16",
+            "00000000"
+          ]
+        ],
+        "object_bytes": 9813,
+        "object_sha256": "8d4bd3913bef5238a571afd305c0275f0d6e0effad60d36f929b63783407396e"
+      },
+      {
+        "case": "mc-os",
+        "flags": [
+          "-zq",
+          "-2",
+          "-mc",
+          "-zl",
+          "-s",
+          "-os",
+          "-zastd=c99",
+          "-dCS_C16_REQUIRE_16BIT"
+        ],
+        "external_symbols": [
+          "cs_bm_validate_",
+          "cs_bc_validate_",
+          "cs_bm_plan4_"
+        ],
+        "defined_symbols": [
+          "cs_bm_validate_",
+          "cs_bm_check_",
+          "cs_bm_plan4_",
+          "cs_bc_validate_",
+          "cs_bs_store4_",
+          "cs_bs_epoch_next_",
+          "cs_bk_plan_",
+          "cs_bk_bind_"
+        ],
+        "unresolved_symbols": [],
+        "segments": [
+          [
+            "_TEXT",
+            "16",
+            "00001223"
+          ],
+          [
+            "CONST",
+            "16",
+            "00000000"
+          ],
+          [
+            "CONST2",
+            "16",
+            "00000000"
+          ],
+          [
+            "_DATA",
+            "16",
+            "00000000"
+          ]
+        ],
+        "object_bytes": 6232,
+        "object_sha256": "0172d0799fb55c732ec49d9154a7c759aa7f0554382ea0d8a8c8a3830501ecfa"
+      },
+      {
+        "case": "ml-od",
+        "flags": [
+          "-zq",
+          "-2",
+          "-ml",
+          "-zl",
+          "-s",
+          "-od",
+          "-zastd=c99",
+          "-dCS_C16_REQUIRE_16BIT"
+        ],
+        "external_symbols": [
+          "cs_bm_validate_",
+          "cs_bc_validate_",
+          "cs_bm_plan4_"
+        ],
+        "defined_symbols": [
+          "cs_bm_validate_",
+          "cs_bm_check_",
+          "cs_bm_plan4_",
+          "cs_bc_validate_",
+          "cs_bs_store4_",
+          "cs_bs_epoch_next_",
+          "cs_bk_plan_",
+          "cs_bk_bind_"
+        ],
+        "unresolved_symbols": [],
+        "segments": [
+          [
+            "catalog-closure_TEXT",
+            "16",
+            "00001F87"
+          ],
+          [
+            "CONST",
+            "16",
+            "00000000"
+          ],
+          [
+            "CONST2",
+            "16",
+            "00000000"
+          ],
+          [
+            "_DATA",
+            "16",
+            "00000000"
+          ]
+        ],
+        "object_bytes": 9834,
+        "object_sha256": "5e7edf4afcda048c9d080141b391723e575c6523b1e1e5b52a725ac5197d3886"
+      },
+      {
+        "case": "ml-os",
+        "flags": [
+          "-zq",
+          "-2",
+          "-ml",
+          "-zl",
+          "-s",
+          "-os",
+          "-zastd=c99",
+          "-dCS_C16_REQUIRE_16BIT"
+        ],
+        "external_symbols": [
+          "cs_bm_validate_",
+          "cs_bc_validate_",
+          "cs_bm_plan4_"
+        ],
+        "defined_symbols": [
+          "cs_bm_validate_",
+          "cs_bm_check_",
+          "cs_bm_plan4_",
+          "cs_bc_validate_",
+          "cs_bs_store4_",
+          "cs_bs_epoch_next_",
+          "cs_bk_plan_",
+          "cs_bk_bind_"
+        ],
+        "unresolved_symbols": [],
+        "segments": [
+          [
+            "catalog-closure_TEXT",
+            "16",
+            "0000122C"
+          ],
+          [
+            "CONST",
+            "16",
+            "00000000"
+          ],
+          [
+            "CONST2",
+            "16",
+            "00000000"
+          ],
+          [
+            "_DATA",
+            "16",
+            "00000000"
+          ]
+        ],
+        "object_bytes": 6256,
+        "object_sha256": "d3903bde6f202d5bb41623fe0f10b6457dc20f23dbe6d09f99fd8aae9f2d70cb"
+      }
+    ],
+    "refusals": [
+      {
+        "case": "ms-refused",
+        "flags": [
+          "-zq",
+          "-2",
+          "-ms",
+          "-zl",
+          "-s",
+          "-os",
+          "-zastd=c99",
+          "-dCS_C16_REQUIRE_16BIT"
+        ],
+        "returncode": 1
+      },
+      {
+        "case": "mm-refused",
+        "flags": [
+          "-zq",
+          "-2",
+          "-mm",
+          "-zl",
+          "-s",
+          "-os",
+          "-zastd=c99",
+          "-dCS_C16_REQUIRE_16BIT"
+        ],
+        "returncode": 1
+      }
+    ],
+    "linked": false,
+    "target_executed": false,
+    "scope": "Compiler metadata/import audit only, not target link/complete ISA/ABI/runtime proof",
+    "stack_policy": "-s is diagnostic only; no production stack-check waiver"
+  },
+  "native_listing_review": "Own mc/ml od/os conversion listings show high-word segment/low-word offset return. Selected mc-os bind stores AX at data+0 and DX at data+2;resolve loads offset/segment separately and adds only16-bit delta to offset. No full-ISA/ABI/stack or target-runtime claim.",
+  "existing_native_modes": {
+    "catalog": {
+      "objects": 6,
+      "linked": false,
+      "target_executed": false,
+      "all_unresolved_imports_empty": true
+    },
+    "store4": {
+      "objects": 6,
+      "linked": false,
+      "target_executed": false,
+      "all_unresolved_imports_empty": true
+    },
+    "default": {
+      "objects": 6,
+      "linked": false,
+      "target_executed": false,
+      "all_unresolved_imports_empty": true
+    }
+  },
+  "integrated_inputs": [
+    {
+      "path": "CMakeLists.txt",
+      "sha256_lf": "cf84c81fbfe42b56066c233aeacfbc1b0791234bd3a0fccbfa819af43714c9e7"
+    },
+    {
+      "path": "scripts/Probe-PC286BankPlan.py",
+      "sha256_lf": "7282bc03262ae8b996b8028b2331f452527a6840bd1213abaeeb26535f701398"
+    },
+    {
+      "path": "probes/pc286/span-build.h",
+      "sha256_lf": "690c714a7c1b1a2d905a41a894772db3a15a216abd12738b8997335de8bd53c1"
+    },
+    {
+      "path": "probes/pc286/span-build.c",
+      "sha256_lf": "be7b602cad44d9c42ddff68df619c5c13a389d26c1139d6d01f062a180306c79"
+    },
+    {
+      "path": "tests/pc286-span-build.c",
+      "sha256_lf": "e19c073be8fbb348e767aa6711bfc16c7934ff782f067d70c9a15e43e9e9a96f"
+    },
+    {
+      "path": "tests/pc286-span-build-oracle.c",
+      "sha256_lf": "4cb2668cc6f099e8a12536baea9004ebd59b23ee512e23b4b6335da3f422b7ca"
+    }
+  ],
+  "ci": {
+    "status": "pending normal source-pinned CI",
+    "expected_change": "Two additional CTests per relevant profile;record actual totals after execution."
+  },
+  "remaining": [
+    "Real owned-memory provider admission,nonaliasing/lifetime proof and actual native access.",
+    "Link/ABI/alignment/stack qualification and measured performance.",
+    "286 boot/target execution not performed.",
+    "Paired-release Mac motion/drag and PC GUI movement/drag remain unresolved;no release readiness claim.",
+    "Contributor/source human review remains separate;CLEANROM remains excluded."
+  ],
+  "next": "A bounded native link/provider-ABI witness under explicit owned-memory assumptions;no target binding or run granted by this receipt."
+}

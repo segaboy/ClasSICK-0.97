@@ -17,11 +17,18 @@ def main():
     parser.add_argument('--output', required=True, type=Path)
     parser.add_argument('--catalog', action='store_true',
                         help='Compile the unbound catalog plus bank-plan closure witness')
+    parser.add_argument('--span-build', action='store_true',
+                        help='Compile store4 plus the span construction experiment (far data only)')
     parser.add_argument('--store4-model', action='store_true',
                         help='Compile the host-memory experiment closure; not a native provider')
     args = parser.parse_args()
     if args.catalog and args.store4_model:
         parser.error('--catalog and --store4-model are separate profiles')
+    if args.span_build and (args.catalog or args.store4_model):
+        parser.error('--span-build is its own profile')
+    span = args.span_build
+    if span:
+        args.store4_model = True
     root = Path(__file__).resolve().parents[1]
     lock = json.loads((root / 'scripts/pc286-toolchain-lock.json').read_text(encoding='utf-8'))
     for row in lock['selected_members']:
@@ -50,8 +57,30 @@ def main():
             f.write('#include "' + (root / 'probes/pc286/store4-model.c').as_posix() + '"\n')
         public_names.update(('cs_bs_store4_', 'cs_bs_epoch_next_'))
         input_names += ['probes/pc286/store4-model.h', 'probes/pc286/store4-model.c']
-    rows = []
-    for model in ('ms', 'mm', 'ml'):
+    if span:
+        with source.open('a', encoding='utf-8') as f:
+            f.write('#include "' + (root / 'probes/pc286/span-build.c').as_posix() + '"\n')
+        public_names.update(('cs_bk_plan_', 'cs_bk_bind_'))
+        input_names += ['probes/pc286/span-build.h', 'probes/pc286/span-build.c']
+    rows, refusals = [], []
+    if span:
+        # Near-data models cannot hold a span pointer: the sizeof guard must refuse.
+        for model in ('ms', 'mm'):
+            flags = ['-zq', '-2', '-' + model, '-zl', '-s', '-os', '-zastd=c99',
+                     '-dCS_C16_REQUIRE_16BIT', '-i=' + str(args.tool_root / 'h'),
+                     '-fo=' + str(out / (model + '-refused.obj'))]
+            q = subprocess.run([str(tools / 'wcc.exe'), *flags, str(source)],
+                               cwd=out, env=env, stdin=subprocess.DEVNULL,
+                               capture_output=True, timeout=25)
+            (out / (model + '-refused.log')).write_bytes(q.stdout + q.stderr)
+            if q.returncode == 0:
+                raise ValueError(model + ': near-data model unexpectedly compiled')
+            guard = next(i for i, t in enumerate((root / 'probes/pc286/span-build.c').read_text(
+                encoding='utf-8').splitlines(), 1) if 'cs_bk_data_pointer_is_far' in t)
+            if ('span-build.c(%d)' % guard).encode() not in q.stdout + q.stderr:
+                raise ValueError(model + ': refused somewhere other than the far-data guard')
+            refusals.append(dict(case=model + '-refused', flags=flags, returncode=q.returncode))
+    for model in (('mc', 'ml') if span else ('ms', 'mm', 'ml')):
         for opt in ('od', 'os'):
             name = model + '-' + opt
             obj, listing = out / (name + '.obj'), out / (name + '.lst')
@@ -92,13 +121,15 @@ def main():
                              object_sha256=hashlib.sha256(obj.read_bytes()).hexdigest()))
     inputs = {p: hashlib.sha256((root / p).read_bytes().replace(b'\r\n', b'\n')).hexdigest()
               for p in input_names}
-    report = dict(compiler_pin=lock['release'], compiler_calls=6, objects=6,
-                  inputs=inputs, records=rows, linked=False, target_executed=False,
-                  profile='store4-model-closure' if args.store4_model else 'catalog-closure' if args.catalog else 'bank-plan',
+    report = dict(compiler_pin=lock['release'], compiler_calls=len(rows) + len(refusals),
+                  objects=len(rows), inputs=inputs, records=rows, refusals=refusals,
+                  linked=False, target_executed=False,
+                  profile='span-build-closure' if span else 'store4-model-closure' if args.store4_model else 'catalog-closure' if args.catalog else 'bank-plan',
                   scope='Compiler metadata/import audit only, not target link/complete ISA/ABI/runtime proof',
                   stack_policy='-s is diagnostic only; no production stack-check waiver')
     (out / 'report.json').write_text(json.dumps(report, indent=2) + '\n', encoding='utf-8')
-    print('PASS: six 80286/USE16 unlinked objects, no unresolved imports; no target execution.')
+    print('PASS: %d 80286/USE16 unlinked objects, %d expected refusals, no unresolved imports; '
+          'no target execution.' % (len(rows), len(refusals)))
 
 
 if __name__ == '__main__':

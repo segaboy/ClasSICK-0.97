@@ -84,7 +84,9 @@ One reported premium request;all-four remaining balances unavailable,no quota
 equivalence or measured Codex saving. Verbose captures remain outside Git.
 [Actual machine receipt](input-review-and-store4.json).
 
-Next286 task:qualify a small native span construction/conversion experiment for
-the pinned compiler under explicit owned-memory assumptions. This model does
+2026-10-29 follow-up:SPEC-0082 qualifies the isolated span construction/conversion
+probe for selected compiler models;[receipt](pc286-span-build-evidence.json).
+Next286 task:a bounded native link/provider-ABI witness under explicit
+owned-memory assumptions. This model does
 not clear that far-provider gate. Main release input investigation remains
 separate;no freeze,release,hardware,reference or native-application permission.
