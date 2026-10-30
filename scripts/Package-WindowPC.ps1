@@ -14,7 +14,7 @@ if([bool]$InputProbe -ne [bool]$isProbe){throw 'Input-probe media requires its e
 $probeMode=if($null -ne $proof.PSObject.Properties['window_input_probe_mode']){
     [string]$proof.window_input_probe_mode
 }elseif($isProbe){'loss'}else{'none'}
-if($probeMode -notin @('none','loss','motion','motion-later','raw-motion','raw-motion-later','raw-report-later') -or ($isProbe -eq ($probeMode -eq 'none'))){throw 'Invalid probe mode metadata.'}
+if($probeMode -notin @('none','loss','motion','motion-later','raw-motion','raw-motion-later','raw-report-later','raw-sequence','raw-sequence-first') -or ($isProbe -eq ($probeMode -eq 'none'))){throw 'Invalid probe mode metadata.'}
 $efi=Join-Path $BuildRoot 'payload/EFI/BOOT/BOOTX64.EFI'
 $hash=(Get-FileHash -LiteralPath $efi -Algorithm SHA256).Hash.ToLowerInvariant()
 if($hash -ne $proof.images[1].sha256){throw 'EFI payload differs from audited O2 candidate.'}
@@ -28,6 +28,12 @@ if((Get-FileHash -LiteralPath $disk).Hash -ne (Get-FileHash -LiteralPath $twin).
 $check=@(& (Join-Path $PSScriptRoot 'Test-BootMedia.ps1') -Image $disk -Payload $efi -PassThru)[-1]
 $inputs=[ordered]@{}
 foreach($path in @('platform/uefi/window.c','platform/uefi/window.h','platform/uefi/entry.c','platform/pc/window-session.c','platform/pc/window-session.h','platform/pc/mono-present.c','platform/pc/mono-present.h','platform/pc/window-input.c','platform/pc/window-input.h','apps/window-scene/input.c','apps/window-scene/input.h','apps/window-scene/scene.c','core/graphics/cursor.c','core/input/pointer.c','core/ui/window.c','apps/product-scene/scene.c','scripts/Verify-UEFIImage.ps1','scripts/Package-WindowPC.ps1','docs/specifications/SPEC-0062-uefi-window-binding.md')){
+    $bytes=[Text.Encoding]::UTF8.GetBytes([IO.File]::ReadAllText((Join-Path $repo $path)).Replace("`r`n","`n"))
+    $digest=[Security.Cryptography.SHA256]::Create().ComputeHash($bytes)
+    $inputs[$path]=($digest | ForEach-Object {$_.ToString('x2')}) -join ''
+}
+if($probeMode -in @('raw-sequence','raw-sequence-first')){
+    $path='docs/specifications/SPEC-0085-pc-byte-sequence.md'
     $bytes=[Text.Encoding]::UTF8.GetBytes([IO.File]::ReadAllText((Join-Path $repo $path)).Replace("`r`n","`n"))
     $digest=[Security.Cryptography.SHA256]::Create().ComputeHash($bytes)
     $inputs[$path]=($digest | ForEach-Object {$_.ToString('x2')}) -join ''

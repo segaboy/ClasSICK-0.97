@@ -4958,3 +4958,15 @@ Intel,Intel Quark SoC X1000 Core Developer Manual,October2013,order329679-001US,
 ## SRC-0559 - Isolated retained-phase native observation
 
 2026-10-30;TEST-0110. Source-efcf33f verified original witness3029aaeb..79ca9 boots in admitted isolated Snow128K. Two paused own-RAM reads pass the strict version3 reader. First loss6 retains previousX2/Y2,currentX1/Y3,an X-only model Gray jump;seven first-loss fields remain unchanged while services93206->168191. Losses319,deliveries0,pointer256,171,window80,70. Host controls only,no deliberate guest movement/drag;startup/UI effects are not a stationary-sensor control. One unchanged original framebuffer PNG is reviewed/indexed;owned process closes at446.244seconds with ROM unchanged. No hardware cause,motion/drag,physical/System1 or release claim. [Canonical trace and cleanup](../docs/development/mac-phase-witness-evidence.json).
+
+## SRC-0560 - Reviewed original PC byte-sequence contract/contribution
+
+2026-10-30. Owner asks to proceed. Lead adopts SPEC-0085 and selected PC-only original r4 recorder/header/native wiring/tests after review. Aggregate error steps cannot identify every original loss cause;length3 is a byte threshold,not a report/no-delivery proof. Existing source/role,trial and release gates persist;no affected Mac/ROM/68000 code admitted. [Canonical admission and limits](../docs/development/pc-sequence-evidence.json).
+
+## SRC-0561 - Bounded reader worker and lead integration
+
+2026-10-30. Initial Claude call returns ENOTFOUND before inference;one authorized network correction reuses the same15203-byte frozen prompt. Opus5.5 Low returns344reader/test lines in124.75seconds,zero tools/writes/tests. Lead adopts them,adds a malformed-addition case and independently demonstrates distinct real-bus loss paths with identical recorded words. No causal quota-savings claim;provider counters/list cost are not subscription charges. [Artifacts,corrections and actual usage](../docs/development/pc-sequence-evidence.json).
+
+## SRC-0562 - Executed PC byte-sequence local qualification
+
+2026-10-30;TEST-0111/IMPL-0094. Four compiler/sanitizer profiles pass recorder/legacy and fresh reader fixtures;independent ambiguity checks pass;final Clang suite390cases passes. Five pre-output literal vectors,four seeded defects,eight actual flag refusals and36old-mode COFF pairs pass. Normal native EFI remains byte-identical. Both48-byte/3-byte modes pass native twins/layout/import/omission/corruption and media writer/parser checks;images remain unbooted. Raw manifests retain dirty-working-tree provenance;clean sourceCI is pending. D0/API review,GUI/human input,physical/System1 and release gates stay open. [Canonical hashes,actual results and limits](../docs/development/pc-sequence-evidence.json).

@@ -1,0 +1,823 @@
+{
+  "date": "2026-10-30",
+  "baseline": "8eec7c3371acfa62a6fa357ce55d7429daa7e2af",
+  "source_ids": [
+    "SRC-0560",
+    "SRC-0561",
+    "SRC-0562"
+  ],
+  "specification": "SPEC-0085",
+  "implementation": "IMPL-0094",
+  "test": "TEST-0111",
+  "status": "Local host/native/media qualification passed;clean sourceCI pending;new PC images unbooted",
+  "authority": "Owner asks to perform the next isolated witness and PC-recorder qualification. Existing original-code/trial/source-role boundaries retained;no release/reference/hardware/native-application gate expanded.",
+  "source_admission": {
+    "archive_sha256": "0a9d5881a443911bb1ff76ce4d0cc5ae89e29ad515acaf1b09d007c135b67d24",
+    "review_scope": "Selected original PC-only recorder,header,native wiring,reader and author tests;full PC patch/copy identities previously checked in SRC-0558. No affected Mac/ROM/68000 input is adopted.",
+    "basis": "Owner-direct contribution carries original-project GPL headers and declares no PC/8042/BIOS/hypervisor source use. Lead reviews selected bodies against own public contracts. This is scoped eligibility,not independent author-history certification.",
+    "accepted_original_hashes": {
+      "platform/pc/input-probe.c": "3cb0deab11866a9f2e4293724a842768ef32d383e993c314282e52d2ad309692",
+      "platform/pc/input-probe.h": "cb9ba0a6fefba0ca88f0bd27be0a58c6e5fc324716af3a740fa992a78d51c193",
+      "platform/uefi/entry.c": "f4ded6ed8e55a4df22299018f66bd4506deb5a7b169dfa7896bdc78a272eed25",
+      "scripts/Package-WindowPC.ps1": "e7122ab174e67969079e09ff70bab7dea263e1d960bf0a88602a17e6cca40158",
+      "scripts/Verify-UEFIImage.ps1": "e1a11848d3375aa8891e538022c1b61de6cda1ffc3560b34f7b6c7a7f0aec25d",
+      "scripts/Read-PCInputSequence.py": "123d3dee836d5b34d7735dd6f02b4a9a5f85b20730a8be63949355a4004e195a",
+      "scripts/test_read_pc_input_sequence.py": "a7bc137dca58d58de30acd0cf46620fca0b0b57732f944922e7de64dc3feb2cc",
+      "tests/pc-sequence-probe.c": "5116551f5ac672c5afadc33ed540610a7a9c170339ad920140a5390bdd99cf64",
+      "tests/pc-sequence-short.c": "4fe164e4d6b6d2fccd07c4f1d592b78c761afa5e652dc25b25c3625b125c0bae",
+      "tests/pc-sequence-bus.c": "faefee465a10f501a3b31c728d1088cb776bf6538f68648bdc0c5d27bc3cb099"
+    }
+  },
+  "decisions": [
+    "Observe aggregate AUX/error-counter steps only;no decoder,controller or presentation policy change.",
+    "Use compatibility labels for ambiguous losses;gaps disqualify modeled alignment;counter saturation/reset assumptions remain external.",
+    "Three-byte mode is a byte threshold;timeout is inconclusive,not no-delivery or upstream-cause proof.",
+    "One nonreturning caller-owned context,only in explicit diagnostic mode;ordinary native output stays identical."
+  ],
+  "input_hashes_lf": {
+    "platform/pc/input-probe.c": "3cb0deab11866a9f2e4293724a842768ef32d383e993c314282e52d2ad309692",
+    "platform/pc/input-probe.h": "7f789c826849f25851358a0b0308bca024cb66644f8eb15e48aee717a2602abb",
+    "platform/uefi/entry.c": "f4ded6ed8e55a4df22299018f66bd4506deb5a7b169dfa7896bdc78a272eed25",
+    "scripts/Package-WindowPC.ps1": "6339af154fec6e46f704a24552b96fd4d69f275c82a62fa28ee8abcfa37bae65",
+    "scripts/Verify-UEFIImage.ps1": "ca57431b0e40f82019cb708ce8494c1963f1556499c077e85167df759f9ed96f",
+    "scripts/Read-PCInputSequence.py": "5f7247d8a704f79a79beb34b05cb3f0f7f67a081ab83d3268075a5fca8c22d9a",
+    "scripts/test_read_pc_input_sequence.py": "38b3c5784de3019efa5ec2cfe16ae914894f39c1ae638204fbb58abe5f179118",
+    "tests/pc-sequence-probe.c": "5116551f5ac672c5afadc33ed540610a7a9c170339ad920140a5390bdd99cf64",
+    "tests/pc-sequence-short.c": "4fe164e4d6b6d2fccd07c4f1d592b78c761afa5e652dc25b25c3625b125c0bae",
+    "tests/pc-sequence-bus.c": "faefee465a10f501a3b31c728d1088cb776bf6538f68648bdc0c5d27bc3cb099",
+    ".github/workflows/bootstrap.yml": "2c3a158ea05149ab7917eae3f91c7d404cfcabcde70fb04374b7c24d502abc59",
+    "CMakeLists.txt": "6dc5fedea287d2d1dd8c2033b8c4deb599439ce2ee798541797204943519d172",
+    "docs/specifications/SPEC-0085-pc-byte-sequence.md": "2e9acd4ba23dcc97d41ab8ab6159a3226834ce0bf953161a33f98c53bdf44696",
+    "docs/development/tasks/pc-sequence-reader-claude.md": "5f726afa77eca2da388d80b071f4fd4084705558a47f53384daeee18f9ba5b0c",
+    "tests/test_pc_input_sequence_reader.py": "9147207a5904d525ffea9841788b53911278f13e280c3f6fedc2b12507501779",
+    "tests/pc-sequence-ambiguity.c": "e47da90684fe27294291147513fd307f8ba0c799a9c0d6babd1ec7ce68d3f3b1"
+  },
+  "worker": {
+    "execution": {
+      "round": "primary",
+      "worker": "claude",
+      "exit_code": 0,
+      "outer_timeout": false,
+      "elapsed_seconds": 124.75,
+      "input_bytes": 15203,
+      "input_sha256": "6efbfa1ac0e946fc93986a4e65aafb036d0644207495b981a5dfb2b2642f42f2",
+      "stderr_bytes": 0
+    },
+    "model": "claude-opus-5-5",
+    "effort": "Low",
+    "artifact_lines": 344,
+    "tool_calls": 0,
+    "tests_executed_by_worker": [],
+    "handoff": {
+      "result": "I rewrote the reader to match SPEC-0085's names and refusal rules, and wrote a unittest file using literal vectors I worked out by hand. Nothing was run.",
+      "actionable_findings": [
+        "The original reader used old names (drop-overflow, lost-status, *_dropped) and printed a 'proportional delivery' note. Both are replaced with SPEC-0085's compatibility names. The size-based notes are removed.",
+        "Lines that start with r8..r15 but don't parse are now refused instead of skipped. Values longer than 16 hex digits are refused.",
+        "unpack now checks it gets exactly eight ints in the uint64 range, and rejects bool, float, str and negative values.",
+        "The summary adds alignment_qualified, which is true only when gaps is 0. Notes describe the losses as compatibility classifications and list the external limits.",
+        "On an error step the model resets its partial report. A byte flagged with an error that the model would have accepted is discarded as lost-status-compatible."
+      ],
+      "tests_executed": [],
+      "blockers": [],
+      "decisions_needed": [
+        "Lead to confirm that a line like 'r10' or 'r8 0x1 comment' should be refused rather than ignored.",
+        "Lead to confirm that the 'error' field stays the integer 0/1 rather than a bool."
+      ]
+    },
+    "format_correction": null,
+    "usage": {
+      "input_tokens": 2,
+      "cache_creation_input_tokens": 7458,
+      "cache_read_input_tokens": 1452,
+      "output_tokens": 15168,
+      "output_tokens_details": {
+        "thinking_tokens": 6878
+      },
+      "server_tool_use": {
+        "web_search_requests": 0,
+        "web_fetch_requests": 0
+      },
+      "service_tier": "standard",
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 7458,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "inference_geo": "global",
+      "iterations": [
+        {
+          "input_tokens": 2,
+          "output_tokens": 15168,
+          "cache_read_input_tokens": 1452,
+          "cache_creation_input_tokens": 7458,
+          "cache_creation": {
+            "ephemeral_5m_input_tokens": 0,
+            "ephemeral_1h_input_tokens": 7458
+          },
+          "type": "message"
+        }
+      ],
+      "speed": "standard",
+      "fallback_credit": null
+    },
+    "modelUsage": {
+      "claude-opus-5-5": {
+        "inputTokens": 2,
+        "outputTokens": 15168,
+        "cacheReadInputTokens": 1452,
+        "cacheCreationInputTokens": 7458,
+        "webSearchRequests": 0,
+        "costUSD": 0.3633224,
+        "contextWindow": 1000000,
+        "maxOutputTokens": 128000,
+        "thinkingTokens": 6878,
+        "canonicalModel": "claude-opus-5-5",
+        "provider": "firstParty",
+        "costBasis": "list"
+      }
+    },
+    "reported_list_cost_usd": 0.3633224
+  },
+  "initial_call": {
+    "result": "ENOTFOUND before inference;10 CLI-internal API-retry events;no artifact",
+    "elapsed_seconds": 186.5,
+    "reported_input_tokens": 0,
+    "reported_output_tokens": 0,
+    "reported_list_cost_usd": 0,
+    "disposition": "One authorized network-access correction uses the exact same frozen15203-byte prompt/model/controls;no further worker retry or fan-out."
+  },
+  "lead_changes": [
+    "Adopt344returned reader/test lines;add test license header and complete-record-plus-malformed-register case.",
+    "Update author conformance labels while retaining real bus kind/delta truth;wire a fresh bus fixture automatically before reader checks.",
+    "Add independent real-bus counterexample:ordinary unsynced loss and controller-status loss produce identical CSPSEQ01 words.",
+    "Clarify header threshold wording;add native packaging/spec provenance and CI profiles."
+  ],
+  "actual_verification": {
+    "recorder_and_legacy_profiles": [
+      {
+        "profile": "clang",
+        "exit_code": 0,
+        "cases": 7,
+        "elapsed_seconds": 8.985
+      },
+      {
+        "profile": "gcc64",
+        "exit_code": 0,
+        "cases": 7,
+        "elapsed_seconds": 14.625
+      },
+      {
+        "profile": "gcc32",
+        "exit_code": 0,
+        "cases": 7,
+        "elapsed_seconds": 16.391
+      },
+      {
+        "profile": "sanitized",
+        "exit_code": 0,
+        "cases": 7,
+        "elapsed_seconds": 14.516
+      }
+    ],
+    "fresh_reader_profiles": [
+      {
+        "profile": "clang",
+        "exit_code": 0,
+        "cases": 3
+      },
+      {
+        "profile": "gcc64",
+        "exit_code": 0,
+        "cases": 3
+      },
+      {
+        "profile": "gcc32",
+        "exit_code": 0,
+        "cases": 3
+      },
+      {
+        "profile": "sanitized",
+        "exit_code": 0,
+        "cases": 3
+      }
+    ],
+    "ambiguity_and_reader_supplement": [
+      {
+        "profile": "clang",
+        "exit_code": 0,
+        "cases": 2
+      },
+      {
+        "profile": "gcc64",
+        "exit_code": 0,
+        "cases": 2
+      },
+      {
+        "profile": "gcc32",
+        "exit_code": 0,
+        "cases": 2
+      },
+      {
+        "profile": "sanitized",
+        "exit_code": 0,
+        "cases": 2
+      }
+    ],
+    "final_full_suite": {
+      "profile": "Clang Debug",
+      "exit_code": 0,
+      "cases": 390,
+      "elapsed_seconds": 204.781
+    },
+    "pre_output_literal_oracles": [
+      {
+        "name": "ambiguous-unsynced",
+        "registers": "r8=4353505345513031\nr9=0100000000000001\nr10=1\nr11=0\nr12=0\nr13=0\nr14=0\nr15=0\n",
+        "events": [
+          "loss-unsynced-compatible"
+        ]
+      },
+      {
+        "name": "ambiguous-overflow",
+        "registers": "r8=4353505345513031\nr9=0300000000000004\nr10=20148\nr11=0\nr12=0\nr13=0\nr14=0\nr15=0\n",
+        "events": [
+          "header",
+          "x",
+          "loss-overflow-compatible"
+        ]
+      },
+      {
+        "name": "status-compatible",
+        "registers": "r8=4353505345513031\nr9=0200000000000002\nr10=108\nr11=0\nr12=0\nr13=0\nr14=0\nr15=0\n",
+        "events": [
+          "header",
+          "lost-status-compatible"
+        ]
+      },
+      {
+        "name": "model-mismatch",
+        "registers": "r8=4353505345513031\nr9=0100000000000000\nr10=1\nr11=0\nr12=0\nr13=0\nr14=0\nr15=0\n",
+        "events": [
+          "model-mismatch-drop-unsynced"
+        ]
+      },
+      {
+        "name": "signed9",
+        "registers": "r8=4353505345513031\nr9=0300000000000000\nr10=7f8038\nr11=0\nr12=0\nr13=0\nr14=0\nr15=0\n",
+        "events": [
+          "header",
+          "x",
+          "packet"
+        ],
+        "delta": [
+          -128,
+          -129
+        ]
+      }
+    ],
+    "literal_oracle_results": [
+      {
+        "name": "ambiguous-unsynced",
+        "pass": true
+      },
+      {
+        "name": "ambiguous-overflow",
+        "pass": true
+      },
+      {
+        "name": "status-compatible",
+        "pass": true
+      },
+      {
+        "name": "model-mismatch",
+        "pass": true
+      },
+      {
+        "name": "signed9",
+        "pass": true
+      }
+    ],
+    "seeded_defects": [
+      {
+        "name": "missing-error-flag",
+        "compiled": true,
+        "detected_at": "rec.flags==UINT64_C(2)",
+        "returncode": 1
+      },
+      {
+        "name": "gap-saturation-underflow",
+        "compiled": true,
+        "detected_at": "rec.gaps==255u",
+        "returncode": 1
+      },
+      {
+        "name": "reader-overstates-status-label",
+        "detected_at": "pre-output status-compatible oracle"
+      },
+      {
+        "name": "reader-ignores-malformed-known-register",
+        "detected_at": "complete record plus malformed known-register addition"
+      }
+    ],
+    "actual_composition_refusals": [
+      {
+        "name": "flag-two",
+        "returncode": 1
+      },
+      {
+        "name": "flag-empty",
+        "returncode": 1
+      },
+      {
+        "name": "length-zero",
+        "returncode": 1
+      },
+      {
+        "name": "length-49",
+        "returncode": 1
+      },
+      {
+        "name": "exclusive-MOTION",
+        "returncode": 1
+      },
+      {
+        "name": "exclusive-SKIP_FIRST_PACKET",
+        "returncode": 1
+      },
+      {
+        "name": "exclusive-REPORT",
+        "returncode": 1
+      },
+      {
+        "name": "exclusive-RAW",
+        "returncode": 1
+      }
+    ],
+    "legacy_objects": [
+      {
+        "profile": "clang",
+        "mode": "loss",
+        "optimization": "-O0",
+        "whole_COFF_equal_except_timestamp": true,
+        "normalized_sha256": "4a983bcf9fcab249dc926b32fb378e1910b36d30163f4a86ed9fb8e39486da9d"
+      },
+      {
+        "profile": "clang",
+        "mode": "loss",
+        "optimization": "-O2",
+        "whole_COFF_equal_except_timestamp": true,
+        "normalized_sha256": "ac17ee4f4687613deee27fb56b723060e57c6413241e3204826fd83f5c180bd2"
+      },
+      {
+        "profile": "clang",
+        "mode": "motion",
+        "optimization": "-O0",
+        "whole_COFF_equal_except_timestamp": true,
+        "normalized_sha256": "c21487e8e2de384f7d85ba4c07f9c5673e460885761466cc55b782cc9cc04390"
+      },
+      {
+        "profile": "clang",
+        "mode": "motion",
+        "optimization": "-O2",
+        "whole_COFF_equal_except_timestamp": true,
+        "normalized_sha256": "9770d3ecb52d29620385739803811c6b025da7395095619f90c8e2439055372d"
+      },
+      {
+        "profile": "clang",
+        "mode": "motion-later",
+        "optimization": "-O0",
+        "whole_COFF_equal_except_timestamp": true,
+        "normalized_sha256": "ce1e06ed17c21c73d9f66a5569dd54fd760a9b117fa329cf9c9336296bea473b"
+      },
+      {
+        "profile": "clang",
+        "mode": "motion-later",
+        "optimization": "-O2",
+        "whole_COFF_equal_except_timestamp": true,
+        "normalized_sha256": "6c3241fd2f4ce151c60e2bd233e41ac0b30e453f23c747b6c3b9b18f178b4d69"
+      },
+      {
+        "profile": "clang",
+        "mode": "raw-motion",
+        "optimization": "-O0",
+        "whole_COFF_equal_except_timestamp": true,
+        "normalized_sha256": "6f9960db241838a930e2350a1809b6084d02b1624b614c29f4dc6089d835569c"
+      },
+      {
+        "profile": "clang",
+        "mode": "raw-motion",
+        "optimization": "-O2",
+        "whole_COFF_equal_except_timestamp": true,
+        "normalized_sha256": "65cb9a8f5861e27444e7e0ff0cdc79c80f92f953b152bb5023e7b49a2afe22ee"
+      },
+      {
+        "profile": "clang",
+        "mode": "raw-motion-later",
+        "optimization": "-O0",
+        "whole_COFF_equal_except_timestamp": true,
+        "normalized_sha256": "8da5edcc915b2c07c712c761ae96fbe5f4cfe321764773daf4fa89f9bd2dbb17"
+      },
+      {
+        "profile": "clang",
+        "mode": "raw-motion-later",
+        "optimization": "-O2",
+        "whole_COFF_equal_except_timestamp": true,
+        "normalized_sha256": "d9dffce4c2783c794b4a5a4b0fe9deffccab7405b017b8f71b5c94c34e34f5dd"
+      },
+      {
+        "profile": "clang",
+        "mode": "raw-report-later",
+        "optimization": "-O0",
+        "whole_COFF_equal_except_timestamp": true,
+        "normalized_sha256": "a5d6c8b954edc84f5cbe932e042a181359cf63d712bd70efed55f57840e9b3ac"
+      },
+      {
+        "profile": "clang",
+        "mode": "raw-report-later",
+        "optimization": "-O2",
+        "whole_COFF_equal_except_timestamp": true,
+        "normalized_sha256": "104f0bbea82ef23255010efd636e0090ceeb2ec22f0fce736cccb74594f9ef4d"
+      },
+      {
+        "profile": "gcc64",
+        "mode": "loss",
+        "optimization": "-O0",
+        "whole_COFF_equal_except_timestamp": true,
+        "normalized_sha256": "f3761fdbf1e0e60971652437f44f4f9218bca9cd8d2bbd19269a9ea21770b058"
+      },
+      {
+        "profile": "gcc64",
+        "mode": "loss",
+        "optimization": "-O2",
+        "whole_COFF_equal_except_timestamp": true,
+        "normalized_sha256": "ec33337aa1d95a1187abce2b3eddc01d9a77fadd27c8dc4b8521733d6baae0b0"
+      },
+      {
+        "profile": "gcc64",
+        "mode": "motion",
+        "optimization": "-O0",
+        "whole_COFF_equal_except_timestamp": true,
+        "normalized_sha256": "af0bd80dfd96033714c90efdcd2ee3e5f3b13b1e80ef642acdc36b5ca4d97446"
+      },
+      {
+        "profile": "gcc64",
+        "mode": "motion",
+        "optimization": "-O2",
+        "whole_COFF_equal_except_timestamp": true,
+        "normalized_sha256": "9e289d80dc253d46d14bb38d4034b9b17c28ed0de0ac02b761b268136ec7a5ad"
+      },
+      {
+        "profile": "gcc64",
+        "mode": "motion-later",
+        "optimization": "-O0",
+        "whole_COFF_equal_except_timestamp": true,
+        "normalized_sha256": "330969fc35b04b18990629989cdc93027f7e6861c901b5cf4c814c3edeab50fa"
+      },
+      {
+        "profile": "gcc64",
+        "mode": "motion-later",
+        "optimization": "-O2",
+        "whole_COFF_equal_except_timestamp": true,
+        "normalized_sha256": "e1f4cd3c03568b0ebf8ded4d1dd22cce37229a4d846e65c777e194f9ceb6f292"
+      },
+      {
+        "profile": "gcc64",
+        "mode": "raw-motion",
+        "optimization": "-O0",
+        "whole_COFF_equal_except_timestamp": true,
+        "normalized_sha256": "223872328ff2f0918d65522cb9b5857a48877b9ae01e00eccea64e2390a756d7"
+      },
+      {
+        "profile": "gcc64",
+        "mode": "raw-motion",
+        "optimization": "-O2",
+        "whole_COFF_equal_except_timestamp": true,
+        "normalized_sha256": "970e8a9cd9206c0422ad3be7f05ae4e7f6ddffb122e03ccf10f2d23bebd6fe69"
+      },
+      {
+        "profile": "gcc64",
+        "mode": "raw-motion-later",
+        "optimization": "-O0",
+        "whole_COFF_equal_except_timestamp": true,
+        "normalized_sha256": "5d13bb56c99d26933f7cebaae71f705244a1f58bac707f15d68166dd216638ea"
+      },
+      {
+        "profile": "gcc64",
+        "mode": "raw-motion-later",
+        "optimization": "-O2",
+        "whole_COFF_equal_except_timestamp": true,
+        "normalized_sha256": "ee01c82d1e42c683e239fcf1b76019625047c31e5fee86344c53bc3788a6b171"
+      },
+      {
+        "profile": "gcc64",
+        "mode": "raw-report-later",
+        "optimization": "-O0",
+        "whole_COFF_equal_except_timestamp": true,
+        "normalized_sha256": "678952132c27a90da1589fc6f5c6ced8beb48eabdaea9e6a9596b49a9f67261c"
+      },
+      {
+        "profile": "gcc64",
+        "mode": "raw-report-later",
+        "optimization": "-O2",
+        "whole_COFF_equal_except_timestamp": true,
+        "normalized_sha256": "3474f5e960f534b8c978b54dea214ccb76d0e2523564dc4ea193ef2abf4e3b30"
+      },
+      {
+        "profile": "gcc32",
+        "mode": "loss",
+        "optimization": "-O0",
+        "whole_COFF_equal_except_timestamp": true,
+        "normalized_sha256": "83a76568220b8f630a730343455661c21436dd7a8e1ecf66e2a217de3ad800fa"
+      },
+      {
+        "profile": "gcc32",
+        "mode": "loss",
+        "optimization": "-O2",
+        "whole_COFF_equal_except_timestamp": true,
+        "normalized_sha256": "6f611784aeaef6f79fca541d66aca4ce8b05dec6a6630e18d7dc3f326b0e11ce"
+      },
+      {
+        "profile": "gcc32",
+        "mode": "motion",
+        "optimization": "-O0",
+        "whole_COFF_equal_except_timestamp": true,
+        "normalized_sha256": "406c0bf3aba116328177162371759d472cc88f69717609c3551f43f6a051a693"
+      },
+      {
+        "profile": "gcc32",
+        "mode": "motion",
+        "optimization": "-O2",
+        "whole_COFF_equal_except_timestamp": true,
+        "normalized_sha256": "a0bc5dfbd7323603fc5f4a86dfb78b40a7ed4f0b2f37ce2b1009a132271d581e"
+      },
+      {
+        "profile": "gcc32",
+        "mode": "motion-later",
+        "optimization": "-O0",
+        "whole_COFF_equal_except_timestamp": true,
+        "normalized_sha256": "82b109ff6005ba121e88aa21706d19faca83bcf4d53942f28cc944f21d3b2149"
+      },
+      {
+        "profile": "gcc32",
+        "mode": "motion-later",
+        "optimization": "-O2",
+        "whole_COFF_equal_except_timestamp": true,
+        "normalized_sha256": "aa0fe05f9deda2650d15b9e301bf6b3976b2ffa28fb5c13856036e8fd3bf277f"
+      },
+      {
+        "profile": "gcc32",
+        "mode": "raw-motion",
+        "optimization": "-O0",
+        "whole_COFF_equal_except_timestamp": true,
+        "normalized_sha256": "04de045f1f2874e81674da5f2b9a57733b3ad9b5c9c0d4396b98365b2fd7b920"
+      },
+      {
+        "profile": "gcc32",
+        "mode": "raw-motion",
+        "optimization": "-O2",
+        "whole_COFF_equal_except_timestamp": true,
+        "normalized_sha256": "6ae2a497746ccb836ef478b5400e9b0eed83331d0347577cb2016073279c5a22"
+      },
+      {
+        "profile": "gcc32",
+        "mode": "raw-motion-later",
+        "optimization": "-O0",
+        "whole_COFF_equal_except_timestamp": true,
+        "normalized_sha256": "5265215f757e83dd0160e6b7de31c83ff5d0bf6788982f528e0ce7fc72ca5ff6"
+      },
+      {
+        "profile": "gcc32",
+        "mode": "raw-motion-later",
+        "optimization": "-O2",
+        "whole_COFF_equal_except_timestamp": true,
+        "normalized_sha256": "b1bca0c42b78c2993b1be356b033521e62f1df07648f9020246b1c3aeb05955a"
+      },
+      {
+        "profile": "gcc32",
+        "mode": "raw-report-later",
+        "optimization": "-O0",
+        "whole_COFF_equal_except_timestamp": true,
+        "normalized_sha256": "e25dd9465b8692a663d17789d3f96f94defad10a5911d7e9d420b13e246157eb"
+      },
+      {
+        "profile": "gcc32",
+        "mode": "raw-report-later",
+        "optimization": "-O2",
+        "whole_COFF_equal_except_timestamp": true,
+        "normalized_sha256": "5324dccd1630a4e3295a859d5643218a642f939e3b9f527eb27efb2de342edfe"
+      }
+    ]
+  },
+  "native_builds": [
+    {
+      "mode": "normal",
+      "elapsed_seconds": 190.375,
+      "diagnostic_specification": null,
+      "sequence_bytes": 0,
+      "images": [
+        {
+          "case": "clang-64-O0",
+          "sha256": "98905633fd1e0d94f04d74b3326a721047ae92f0af8a6ba677bce31bf04124a6",
+          "size_bytes": 270336,
+          "image_size": 282624,
+          "relocations": 3,
+          "status": "passed-unloaded"
+        },
+        {
+          "case": "clang-64-O2",
+          "sha256": "19100bfbd3ea836579a09c58b989b50a0c6af8101a5137183cc2bd8b6b746f73",
+          "size_bytes": 184320,
+          "image_size": 196608,
+          "relocations": 3,
+          "status": "passed-unloaded"
+        }
+      ],
+      "corruption_rejections": 27,
+      "missing_probe_controls": 0,
+      "normal_EFI_byte_identical": true,
+      "executed": false
+    },
+    {
+      "mode": "raw-sequence",
+      "elapsed_seconds": 195.828,
+      "diagnostic_specification": "SPEC-0085",
+      "sequence_bytes": 48,
+      "images": [
+        {
+          "case": "clang-64-O0",
+          "sha256": "a88cbbc95b8faa42bab4418b3d631061256f77aa044c3b4e0a0cce7d89ba6fed",
+          "size_bytes": 271360,
+          "image_size": 286720,
+          "relocations": 3,
+          "status": "passed-unloaded"
+        },
+        {
+          "case": "clang-64-O2",
+          "sha256": "9718d1a65062dc386413137df5c16b170b86fd52d295d112f4499290ba5e8489",
+          "size_bytes": 184832,
+          "image_size": 200704,
+          "relocations": 3,
+          "status": "passed-unloaded"
+        }
+      ],
+      "corruption_rejections": 27,
+      "missing_probe_controls": 2,
+      "normal_EFI_byte_identical": null,
+      "executed": false
+    },
+    {
+      "mode": "raw-sequence-first",
+      "elapsed_seconds": 145.484,
+      "diagnostic_specification": "SPEC-0085",
+      "sequence_bytes": 3,
+      "images": [
+        {
+          "case": "clang-64-O0",
+          "sha256": "a0c9904e119b4a75d71da95785fd89ce1420cc20f5066ffc66ad3510f6eb8ebe",
+          "size_bytes": 271360,
+          "image_size": 286720,
+          "relocations": 3,
+          "status": "passed-unloaded"
+        },
+        {
+          "case": "clang-64-O2",
+          "sha256": "222e0d0ba9a4193a69cb9ec24249c52a4852e06976a8f058cd9459966fd34888",
+          "size_bytes": 184832,
+          "image_size": 200704,
+          "relocations": 3,
+          "status": "passed-unloaded"
+        }
+      ],
+      "corruption_rejections": 27,
+      "missing_probe_controls": 2,
+      "normal_EFI_byte_identical": null,
+      "executed": false
+    }
+  ],
+  "media": [
+    {
+      "input_probe_mode": "raw-sequence",
+      "efi_sha256": "9718d1a65062dc386413137df5c16b170b86fd52d295d112f4499290ba5e8489",
+      "media": {
+        "image_sha256": "bac2d5743c2ba316e4deb73506454cfa567609072b720f3c7f2a280f42322b26",
+        "payload_sha256": "9718d1a65062dc386413137df5c16b170b86fd52d295d112f4499290ba5e8489",
+        "image_bytes": 67108864,
+        "partition_first": 2048,
+        "partition_sectors": 126976,
+        "partition_name": "ClasSICK ESP",
+        "reserved_sectors": 78,
+        "fat_sectors": 985,
+        "clusters": 124928,
+        "payload_clusters": 361,
+        "free_clusters": 124564,
+        "header_crc": "7A6BB824",
+        "backup_crc": "F46774E1",
+        "loaded": false
+      },
+      "writer_twins_equal": true,
+      "source_revision": "8eec7c3371acfa62a6fa357ce55d7429daa7e2af",
+      "tracked_source_dirty": true,
+      "inputs": {
+        "platform/uefi/window.c": "020560e0b3840c32764894fd1b5b32af4ca49d641a922f23ecb3ddd479d6b653",
+        "platform/uefi/window.h": "c76a06800546e60ffc35d09e0da47b7cc3c931305578911c0368c307b8e9c012",
+        "platform/uefi/entry.c": "f4ded6ed8e55a4df22299018f66bd4506deb5a7b169dfa7896bdc78a272eed25",
+        "platform/pc/window-session.c": "88bcd9733dcd04d7aca38c43f7b260900e0360166f0e455ccf95677e3e1e27a6",
+        "platform/pc/window-session.h": "2219eef76f805af841d8b162ad21b4f49642e8b26d83839ac65171bc0938922d",
+        "platform/pc/mono-present.c": "7a0756d79c05321499be2110edcc239623156db56f7dd248f54822565f0ebdb1",
+        "platform/pc/mono-present.h": "21ebb63a38ae1265902978be75f6321123386b97a56bfbf970d9b5951b239644",
+        "platform/pc/window-input.c": "6e7a512f0c76b57e561d6be76d347fb5bf2555c114cb4dadb5d3255f16540868",
+        "platform/pc/window-input.h": "b3e7b9e109b39fee2d186414d1710fb4384b347a1e5c1ff76548ffc1bd5493ca",
+        "apps/window-scene/input.c": "2b10f8c6de9349e41a02d3138abd8bb04a83b0d7eb8cc646c627a0e5d2a44b19",
+        "apps/window-scene/input.h": "1c8128eaefeadb1c47847f883d2608e06a3f050573851f95a38182d49130fd61",
+        "apps/window-scene/scene.c": "bc3f8ac625bd782d368709cf915a94bbd7f9a6c4dd810197a11ae157363afa3f",
+        "core/graphics/cursor.c": "c239ef42783ffaa446c59f7ba630b5b1cd78c95444449fa63b983f4c3bb98fe5",
+        "core/input/pointer.c": "d38b4b131f44a3ce8bf8019cdef8aa4e56e3d5c09f0bc9b154fd1f8ff920afa7",
+        "core/ui/window.c": "ddec6ccab8bf5148240d6269bf33374180ac60406b4ab50558809ff3e53aa18a",
+        "apps/product-scene/scene.c": "7488910c401285b1e211d3c6eb95a17f04683748ffa8fc2dba4e2659725872d2",
+        "scripts/Verify-UEFIImage.ps1": "ca57431b0e40f82019cb708ce8494c1963f1556499c077e85167df759f9ed96f",
+        "scripts/Package-WindowPC.ps1": "6339af154fec6e46f704a24552b96fd4d69f275c82a62fa28ee8abcfa37bae65",
+        "docs/specifications/SPEC-0062-uefi-window-binding.md": "928412d6ad0c286a01ecb48476acd0e7e220b88b6cbea8cce59754d3736e1241",
+        "docs/specifications/SPEC-0085-pc-byte-sequence.md": "2e9acd4ba23dcc97d41ab8ab6159a3226834ce0bf953161a33f98c53bdf44696",
+        "platform/pc/input-probe.c": "3cb0deab11866a9f2e4293724a842768ef32d383e993c314282e52d2ad309692",
+        "platform/pc/input-probe.h": "7f789c826849f25851358a0b0308bca024cb66644f8eb15e48aee717a2602abb",
+        "platform/pc/x64/input-probe-halt.S": "778791b69c7151fde4b8fc2ac76c98da597c194852952b4087a0ebd2ec3cca6e"
+      },
+      "target_executed": false,
+      "release": false
+    },
+    {
+      "input_probe_mode": "raw-sequence-first",
+      "efi_sha256": "222e0d0ba9a4193a69cb9ec24249c52a4852e06976a8f058cd9459966fd34888",
+      "media": {
+        "image_sha256": "2c7634ab563e075c3b9cc4d94c53bc39381c11da40c446ebdd3c98fc4a3a05da",
+        "payload_sha256": "222e0d0ba9a4193a69cb9ec24249c52a4852e06976a8f058cd9459966fd34888",
+        "image_bytes": 67108864,
+        "partition_first": 2048,
+        "partition_sectors": 126976,
+        "partition_name": "ClasSICK ESP",
+        "reserved_sectors": 78,
+        "fat_sectors": 985,
+        "clusters": 124928,
+        "payload_clusters": 361,
+        "free_clusters": 124564,
+        "header_crc": "7A6BB824",
+        "backup_crc": "F46774E1",
+        "loaded": false
+      },
+      "writer_twins_equal": true,
+      "source_revision": "8eec7c3371acfa62a6fa357ce55d7429daa7e2af",
+      "tracked_source_dirty": true,
+      "inputs": {
+        "platform/uefi/window.c": "020560e0b3840c32764894fd1b5b32af4ca49d641a922f23ecb3ddd479d6b653",
+        "platform/uefi/window.h": "c76a06800546e60ffc35d09e0da47b7cc3c931305578911c0368c307b8e9c012",
+        "platform/uefi/entry.c": "f4ded6ed8e55a4df22299018f66bd4506deb5a7b169dfa7896bdc78a272eed25",
+        "platform/pc/window-session.c": "88bcd9733dcd04d7aca38c43f7b260900e0360166f0e455ccf95677e3e1e27a6",
+        "platform/pc/window-session.h": "2219eef76f805af841d8b162ad21b4f49642e8b26d83839ac65171bc0938922d",
+        "platform/pc/mono-present.c": "7a0756d79c05321499be2110edcc239623156db56f7dd248f54822565f0ebdb1",
+        "platform/pc/mono-present.h": "21ebb63a38ae1265902978be75f6321123386b97a56bfbf970d9b5951b239644",
+        "platform/pc/window-input.c": "6e7a512f0c76b57e561d6be76d347fb5bf2555c114cb4dadb5d3255f16540868",
+        "platform/pc/window-input.h": "b3e7b9e109b39fee2d186414d1710fb4384b347a1e5c1ff76548ffc1bd5493ca",
+        "apps/window-scene/input.c": "2b10f8c6de9349e41a02d3138abd8bb04a83b0d7eb8cc646c627a0e5d2a44b19",
+        "apps/window-scene/input.h": "1c8128eaefeadb1c47847f883d2608e06a3f050573851f95a38182d49130fd61",
+        "apps/window-scene/scene.c": "bc3f8ac625bd782d368709cf915a94bbd7f9a6c4dd810197a11ae157363afa3f",
+        "core/graphics/cursor.c": "c239ef42783ffaa446c59f7ba630b5b1cd78c95444449fa63b983f4c3bb98fe5",
+        "core/input/pointer.c": "d38b4b131f44a3ce8bf8019cdef8aa4e56e3d5c09f0bc9b154fd1f8ff920afa7",
+        "core/ui/window.c": "ddec6ccab8bf5148240d6269bf33374180ac60406b4ab50558809ff3e53aa18a",
+        "apps/product-scene/scene.c": "7488910c401285b1e211d3c6eb95a17f04683748ffa8fc2dba4e2659725872d2",
+        "scripts/Verify-UEFIImage.ps1": "ca57431b0e40f82019cb708ce8494c1963f1556499c077e85167df759f9ed96f",
+        "scripts/Package-WindowPC.ps1": "6339af154fec6e46f704a24552b96fd4d69f275c82a62fa28ee8abcfa37bae65",
+        "docs/specifications/SPEC-0062-uefi-window-binding.md": "928412d6ad0c286a01ecb48476acd0e7e220b88b6cbea8cce59754d3736e1241",
+        "docs/specifications/SPEC-0085-pc-byte-sequence.md": "2e9acd4ba23dcc97d41ab8ab6159a3226834ce0bf953161a33f98c53bdf44696",
+        "platform/pc/input-probe.c": "3cb0deab11866a9f2e4293724a842768ef32d383e993c314282e52d2ad309692",
+        "platform/pc/input-probe.h": "7f789c826849f25851358a0b0308bca024cb66644f8eb15e48aee717a2602abb",
+        "platform/pc/x64/input-probe-halt.S": "778791b69c7151fde4b8fc2ac76c98da597c194852952b4087a0ebd2ec3cca6e"
+      },
+      "target_executed": false,
+      "release": false
+    }
+  ],
+  "earlier_failures": [
+    "Initial direct Python invocation lacked the established writable TEMP/TMP override;two CLI tempfile cases were denied. All final CTest profiles use the established temp environment and pass;no product change for that environment error."
+  ],
+  "sourceCI": {
+    "status": "pending publication of exact integration revision",
+    "new_native_trial": false
+  },
+  "limits": [
+    "Native proofs are local working-tree builds over the pinned baseline plus recorded changes;original manifests retain tracked_source_dirty=true. Clean sourceCI is required before a new trial.",
+    "No new PC image executed;no GUI/human,physical stack high-water/PC hardware,Mac movement/drag,System1 or release acceptance.",
+    "Native frame threshold/EFI layout/omission/corruption checks do not prove measured high-water or universal PC compatibility.",
+    "No new research-original,UART,Mac/ROM/68000 source lane or human-provenance approval."
+  ],
+  "next": "Clean sourceCI/identities,then eligible read-only capture-context D0 and a separately labeled controlled-byte baseline before GUI/physical evidence. Existing ownership/capture/readiness/cleanup guards remain.",
+  "remaining_provider_balances_public": null,
+  "measured_Codex_savings": null,
+  "release_ready": false,
+  "worker_disposition": {
+    "accepted": true,
+    "decisions_resolved": [
+      "A recognizable known register without a value or with trailing non-hex content refuses.",
+      "The error field remains integer0/1:counter-step metadata,not a controller-status bit."
+    ],
+    "independence_limit": "The worker wrote reader and API tests together;this is not an implementation-withheld reviewer. Lead pre-output literal vectors and a separate hosted-bus indistinguishability case provide additional checks."
+  }
+}

@@ -6,14 +6,62 @@
 #error CLASSICK_PC_RAW_PACKET_PROBE=1 requires CLASSICK_PC_INPUT_PROBE_MOTION=1
 #endif
 
+#if !CLASSICK_PC_INPUT_PROBE_SEQUENCE
 static uint64_t pair(uint32_t high,uint32_t low)
 {
     return ((uint64_t)high<<32)|(uint64_t)low;
 }
+#endif
+
+#if CLASSICK_PC_INPUT_PROBE_SEQUENCE
+int cs_pc_input_sequence_begin(cs_pc_input_sequence *r)
+{
+    if(!r) return 1;
+    r->magic=CS_PC_INPUT_SEQUENCE_STARTED;
+    r->primed=0; r->was_ready=0; r->count=0; r->gaps=0;
+    r->auxiliary=0; r->errors=0; r->flags=0;
+    return 0;
+}
+
+/* One observation per loop turn, before the next poll. A READY poll consumes at
+ * most one controller byte, so an AUX-counter step of one between two READY
+ * observations identifies last_byte as the next report-stream byte. The byte
+ * that completes startup (seen while not yet READY) is never recorded. */
+static int sequence_observe(cs_pc_input_sequence *r,const cs_pc_window_session *s)
+{
+    uint64_t v[CS_PC_INPUT_PROBE_WORDS];
+    uint32_t ready,step,i;
+    if(!r||!s||r->magic!=CS_PC_INPUT_SEQUENCE_STARTED||r->count>=CS_PC_INPUT_SEQUENCE_BYTES) return 0;
+    ready=(s->bus.phase==CS_PS2_BUS_READY&&s->bus.result==CS_PS2_READY)?1u:0u;
+    if(!r->primed){
+        r->primed=1; r->auxiliary=s->bus.auxiliary; r->errors=s->bus.errors; r->was_ready=ready;
+        return 0;
+    }
+    step=s->bus.auxiliary-r->auxiliary;
+    if(r->was_ready&&ready&&step!=0u){
+        if(step>1u) r->gaps=(step-1u>=255u||r->gaps>=255u-(step-1u))?255u:r->gaps+(step-1u);
+        if(s->bus.errors!=r->errors) r->flags|=UINT64_C(1)<<r->count;
+        r->bytes[r->count]=(uint8_t)(s->bus.last_byte&255u);
+        ++r->count;
+    }
+    r->auxiliary=s->bus.auxiliary; r->errors=s->bus.errors; r->was_ready=ready;
+    if(r->count<CS_PC_INPUT_SEQUENCE_BYTES) return 0;
+    v[0]=CS_PC_INPUT_PROBE_SEQUENCE_MAGIC;
+    v[1]=r->flags|((uint64_t)r->gaps<<48)|((uint64_t)r->count<<56);
+    v[2]=0; v[3]=0; v[4]=0; v[5]=0; v[6]=0; v[7]=0;
+    for(i=0;i<CS_PC_INPUT_SEQUENCE_BYTES;++i)
+        v[2u+(i>>3)]|=(uint64_t)r->bytes[i]<<((i&7u)*8u);
+    cs_pc_input_probe_halt(v);
+}
+#endif
 
 int cs_pc_input_probe_observe(void *context,const unsigned char *trace,
     const cs_pc_window_session *s)
 {
+#if CLASSICK_PC_INPUT_PROBE_SEQUENCE
+    (void)trace;
+    return sequence_observe((cs_pc_input_sequence *)context,s);
+#else
     uint64_t v[CS_PC_INPUT_PROBE_WORDS];
     (void)context;
     (void)trace;
@@ -60,5 +108,6 @@ int cs_pc_input_probe_observe(void *context,const unsigned char *trace,
     /* Intentional two's-complement bit encoding of signed positions. */
     v[7]=pair((uint32_t)s->owner.pointer.x,(uint32_t)s->owner.pointer.y);
     cs_pc_input_probe_halt(v);
+#endif
 #endif
 }

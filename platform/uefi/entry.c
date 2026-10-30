@@ -97,6 +97,12 @@ void CS_EFIAPI cs_native_stop(cs_uefi_handoff *handoff)
     binding.observer=NULL;
 #endif
     binding.context=NULL;
+#if CLASSICK_WINDOW_INPUT_PROBE && CLASSICK_PC_INPUT_PROBE_SEQUENCE
+    /* Lives for the nonreturning loop below; the observer is its only writer. */
+    cs_pc_input_sequence sequence;
+    (void)cs_pc_input_sequence_begin(&sequence);
+    binding.context=&sequence;
+#endif
     volatile uint32_t *ready=(volatile uint32_t *)(uintptr_t)(layout.state_base+CS_X64_READY);
     (void)cs_native_window_loop(handoff,*ready,&binding,60,
         (unsigned char *)(uintptr_t)(handoff->trace_base+CS_UWIN_TRACE_OFFSET));
