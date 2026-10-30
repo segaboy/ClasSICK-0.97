@@ -68,3 +68,5 @@ See [storage and publication policy](../../development/screenshot-evidence.md). 
 2026-10-29:[Live PC host/device input comparison](2026-10-29/README.md);two own framebuffer PNGs,diagnostic only.
 
 - [2026-10-30 native phase-witness observation](2026-10-30/README.md):new boot capture reuses byte-identical registered pixels;new trace provenance is recorded separately.
+
+[2026-10-30 Mac user-directed jitter observation](2026-10-30/mac-user-jitter.png) — [trace and test limits](../../development/mac-human-witness-20261030.md); no drag or release qualification.

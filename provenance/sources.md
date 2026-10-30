@@ -5006,3 +5006,7 @@ Intel,Intel Quark SoC X1000 Core Developer Manual,October2013,order329679-001US,
 ## SRC-0571 - PC user-directed pointer check
 
 2026-10-30; TEST-0119. One original isolated PC candidate showed the cursor at the lower-right edge after the user reported capture and motion; the user did not see it return. The guest frames and observation limits are documented in the [canonical receipt](../docs/development/pc-human-pointer-20261030.md). No successful drag or release qualification.
+
+## SRC-0572 - Mac user-directed phase-witness check
+
+2026-10-30; TEST-0120. In one isolated original witness boot the user reported the cross jittering near the center. One paused cumulative own-guest record showed one delivered sample and 127 losses; no pre-input trace identifies their timing. [Observation, raw words and screenshot](../docs/development/mac-human-witness-20261030.md). No working-drag, hardware or release qualification.

@@ -2001,6 +2001,29 @@
         "Trial durations and stimuli differ;loss totals are not a rate or regression comparison.",
         "No physical Macintosh,full128K,System1 or release qualification."
       ]
+    },
+    {
+      "id": "2026-10-30-mac-user-jitter",
+      "path": "docs/evidence/screenshots/2026-10-30/mac-user-jitter.png",
+      "sha256": "73ae04afedbff95a89f135280520cebbff58291732500401fb89f4b15a3c04f8",
+      "bytes": 53598,
+      "width": 512,
+      "height": 342,
+      "captured_on": "2026-10-30",
+      "target": "native-mac68000",
+      "caption": "Original Mac witness scene after a user-directed mouse check; the user reported jitter near the center.",
+      "alt": "ClasSICK monochrome scene with a small cross near the center of a checkerboard window.",
+      "source_revision": "fd37959ff791fc2d2d02bad61695c81ebd581585",
+      "compiled_source_revision": "efcf33f9323d4761e1840fc717e5633b62d59bc8",
+      "evidence": "docs/evidence/screenshots/2026-10-30/README.md",
+      "license": "GPL-3.0-or-later",
+      "rights": "Unmodified Snow camera export of the original ClasSICK guest framebuffer only; no desktop, emulator chrome, reference pixels or private paths.",
+      "input": "human-confirmed",
+      "limitations": [
+        "The user reported jitter; usable motion and dragging did not pass.",
+        "No pre-input trace isolates the single recorded delivery from other host actions.",
+        "No physical Macintosh, System1 or release qualification."
+      ]
     }
   ]
 }
