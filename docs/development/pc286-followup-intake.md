@@ -188,3 +188,94 @@ the existing builder/oracle and old compiler modes. Link/ABI/alignment,stack
 high-water,physical ownership,target execution and measured performance remain
 open. The paired-release input blockers are unchanged. No other AI service was
 used for this review;remaining provider balances are unreported.
+
+## Revision3 review -2026-10-30 (SRC-0556)
+
+Baseline e11711836ec4ea875e88a8f795d4d6a7f822ce65. Owner supplies r3 as
+additional input,after the separate retained-phase diagnostic checkpoint.
+Archive:56445bytes,SHA256
+a50814bbf5e1be7d267b8347263ab13cd1628a0d70594bd82ffc2e1ee14ccd69.
+All25declared checksum rows verify against the26files (the checksum file is
+not self-listed). Safe paths,case-insensitive uniqueness,no symlinks/encryption
+and byte-identical external copies are verified. The nine unchanged members
+retain their r2 identities;they are not independently requalified by this review.
+The earlier source/role disposition persists;source certification is not inferred
+from the author's provenance statement or checksum equality.
+
+This is STATIC PROPOSAL REVIEW. The lead reviews the changed286 implementation,
+header and contract diffs;spot-checks the changed tests' registry/rebind cases;
+reviews the compiler-script delta,control/matrix scripts and submitted logs.
+The full compiler script matches its supplied diff against the baseline and
+parses as Python;it is not executed. No submitted test,mutant,compiler,build or
+target case is executed here. The response's held-lane section,root README and
+Mac brief remain unread/excluded. The PC-only report is reviewed as a proposal
+from public project observations;its API assumptions require eligible evidence.
+No contribution source is integrated,no worker is dispatched,and no new
+SPEC/IMPL/TEST/build acceptance or trial is assigned by this intake.
+
+### Earlier findings and remaining clarifications
+
+| Finding | R3 static disposition |
+|---|---|
+| R2-1 fresh registry | Addressed subject to caller lifetime rules:used counters cause STATE without mutation;caps now retain registry identity,including equal-number lifetimes in different registries |
+| R2-2 binding identity | Addressed in mechanism:owner captures one binding;borrow accepts no substitute;validated same-map rebind advances generation before replacing it |
+| R2-3 helper preconditions | Substantially documented:validated map,truthful bounded spans,matching64-byte index arrays and stable/disjoint metadata;one pointer wording correction remains |
+| Compiler closure | Proposed --span-cap now includes owner_rebind;old builder input remains unchanged;new pinned C16 qualification still required |
+| Submitted test evidence | Proposed same-map/same-epoch and equal-number/different-registry cases target the findings;author-written expectations/logs are not independent project results |
+
+**R3-1 pointer wording.** span-bind.h says cs_sb_env accepts "any env pointer
+value". It checks NULL then dereferences non-NULL. Require NULL or a valid
+readable environment object,plus truthful reachable array extents. This does
+not validate arbitrary native pointers or establish a security boundary. The
+shared helper and scalar bodies are otherwise unchanged from r2.
+
+**R3-2 advance versus rebind.** The contract permits backing changes after
+owner_advance,but separately prohibits binding edits in place and requires
+owner_rebind. Freeze one rule before qualification:advance invalidates current
+caps;all binding metadata/placement changes use a fresh stable binding and
+rebind. Ordinary data writes through a permitted writable run are separate.
+No registry/owner/binding/map/span storage may be recycled while a referencing
+capability can still be used. Counter checks do not establish physical ownership
+or protect against forged context fields. These are contract clarifications,
+not observed runtime failures.
+
+**R3-3 author verification controls.** The supplied logs report42suite runs
+across six Linux profiles and19detected mutants. None is credited as a project
+pass. The mutation driver counts compilation failure as detection,prints SITE?
+or MISSED without a failing final status,and does not itself require a clean
+baseline. Before reuse,require a passing baseline,unique replacement sites,
+successful mutant compilation and the intended failing assertion,with nonzero
+exit on a missed/invalid control. Its log reports runtime FAIL rather than
+build-fail for these19cases,but this does not independently verify that report.
+Pinned WCC,Windows profiles,link,ABI/alignment,stack high-water,physical ownership,
+target execution and measured performance remain open. No supplied shell or
+mutation script is run on the shared checkout.
+
+Disposition:A remains ready for bounded qualification after R3-1 wording;
+B's earlier identity objections have concrete proposed solutions,but adoption
+waits for R3-2 wording and executed qualification. Keep the author originals
+unchanged. Start with A,then B;preserve the existing builder/oracle and old
+compiler modes. This advances the review queue,not a bootable286 or release claim.
+
+### PC host-delivery proposal
+
+7575bytes,SHA256
+b64c5b8eeb6e465eb083d77e147d3e6d4b5bf4f6a4d12d34f39ea5473f1872c3.
+The report cites own-project observations and marks external API assumptions
+for verification;no emulator source is used. Its causal conclusions are narrowed:
+E2 proves the tested guest sequence,not every GUI-driven guest path. One guarded
+cursor2,2 refusal does not prove that all captured injection is impossible.
+Nominal PS/2 configuration does not exclude host absolute-to-relative conversion.
+Older physical checks on different candidates do not settle today's injection
+path. Ballistics,warp suppression and forwarding remain hypotheses.
+
+Useful next measurements,after a reviewed contract and eligible published API
+facts:read-only capture/DPI/physical-versus-logical cursor/clip context (D0),then
+a bounded multi-packet guest history under separately labeled controlled and
+physical stimuli (D2). First-packet-only halt cannot supply that history;new
+diagnostic code would need its own review/tests. The current helper uses
+GetCursorPos;the proposed physical-cursor/clip/DPI comparison is a new measurement,
+not an unchanged retry. Do not weaken owned-client containment,change global
+pointer settings or infer guest acceptance from capture metadata. No diagnostic
+or desktop trial is implemented/executed by this intake. Mac/PC motion and
+drag/release qualification remain open;the Mac brief is not a permitted input.
