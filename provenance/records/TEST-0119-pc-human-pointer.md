@@ -1,0 +1,3 @@
+# TEST-0119 - PC user-directed pointer check
+
+2026-10-30; SRC-0571. User confirmed capture/movement on the original continuous PC candidate. Guest captures show the cursor at the lower-right edge; the user reported it did not visibly move back. There were 80 and 67 captured frames in separate intervals with a gap; exact movement chronology and root cause are unknown. No automated input or drag was sent. The isolated VM and original inventory/media were preserved. This does not pass GUI drag, release or physical-hardware qualification. [Canonical receipt](../../docs/development/pc-human-pointer-20261030.md).

@@ -5002,3 +5002,7 @@ Intel,Intel Quark SoC X1000 Core Developer Manual,October2013,order329679-001US,
 ## SRC-0570 - Mac retained first-loss review
 
 2026-10-30; owner explicitly approved bounded fresh-worker review of original project code and the retained observation. No defect or hardware cause was established. Lead rejects an ambiguous timing proposal and preserves trace/MMIO contracts. Four existing hosted phase tests were rerun. [Lead review](../docs/development/mac-first-loss-lead-review.md).
+
+## SRC-0571 - PC user-directed pointer check
+
+2026-10-30; TEST-0119. One original isolated PC candidate showed the cursor at the lower-right edge after the user reported capture and motion; the user did not see it return. The guest frames and observation limits are documented in the [canonical receipt](../docs/development/pc-human-pointer-20261030.md). No successful drag or release qualification.
