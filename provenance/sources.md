@@ -4974,3 +4974,7 @@ Intel,Intel Quark SoC X1000 Core Developer Manual,October2013,order329679-001US,
 ## SRC-0563 - Clean source CI and controlled PC byte baseline
 
 2026-10-30;TEST-0112. Both source-f0c16cc CI jobs pass. Both diagnostic EFI/disk pairs match local builds byte for byte,and each declared input matches the source commit. One isolated original windowed VirtualBox device-route run records48bytes matching16 alternating +4/-4 modeled packets,zero gap/error steps.24 device calls were issued;the leaf stops at48bytes,so later calls are not claimed consumed. Paused RIP is the original source-matched spin jump. The initial/final own framebuffer is byte-identical to an existing indexed PNG;new capture provenance is recorded. Owned VM is closed/unregistered,inventory/running states and disk roundtrip preserved. This is E2,not GUI/human/drag/release acceptance. No other AI called. [Canonical receipt](../docs/development/pc-sequence-evidence.json).
+
+## SRC-0564 - 286 checked-access host qualification
+
+2026-10-30;TEST-0113. Isolated r4 checked-access proposal and original project dependencies; GCC and Clang author-suite and guest.c parity tests executed. Input identities, results and limitations: [canonical intake](../docs/development/pc286-followup-intake.md), [test record](records/TEST-0113-pc286-span-access-host.md). No implementation integrated, no target boot or release acceptance.

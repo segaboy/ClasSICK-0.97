@@ -371,3 +371,9 @@ Priority:finish the separate Mac witness build/trial dependency,then a bounded
 PC sequence CONTRACT/implementation review to enable a new measurement. Qualify
 A-then-B in the separate286 lane;defer C adoption until its lifecycle/exclusion
 contract and prerequisites pass. This packet closes no paired-release blocker.
+
+## Host checked-access qualification - 2026-10-30
+
+SRC-0564 / TEST-0113; baseline 40909e06b84992a077aac2547a7ffe21e3027a8a. In isolated scratch, the r4 checked-access and binding proposals and author tests were compiled with GCC 16.2.0 and Clang 23.1.1, C99, O2 and strict warnings. Each compiler passed the author's 46 literal cases, 200,000 differential operations against its flat reference (26,696 successful), and 300,000 operations against existing guest.c (39,961 successful). The literal oracle and differential generator are author-written; comparison with existing guest.c gives a separate parity check, not a completely independent test design. Exact input hashes and limitations are in TEST-0113. The scratch setup initially missed an existing header; after adding the unchanged header, all six tests passed. Seven proposal inputs match the preserved originals byte-for-byte after execution. No other AI was used.
+
+This is host evidence only. The proposal remains unintegrated: pinned C16 compiler/ABI, independent fault sensitivity, target link/execution, physical ownership and lifecycle guarantees remain open. It does not establish performance, 286 boot, Mac or PC mouse movement, dragging, or release readiness. Continue A qualification before considering B; retain all original intake material.
