@@ -17,6 +17,8 @@ def main():
     parser.add_argument('--output', required=True, type=Path)
     parser.add_argument('--catalog', action='store_true',
                         help='Compile the unbound catalog plus bank-plan closure witness')
+    parser.add_argument('--span-access', action='store_true',
+                        help='Compile checked-access closure; far data only')
     parser.add_argument('--span-build', action='store_true',
                         help='Compile store4 plus the span construction experiment (far data only)')
     parser.add_argument('--store4-model', action='store_true',
@@ -26,7 +28,11 @@ def main():
         parser.error('--catalog and --store4-model are separate profiles')
     if args.span_build and (args.catalog or args.store4_model):
         parser.error('--span-build is its own profile')
+    if args.span_access and (args.span_build or args.catalog or args.store4_model):
+        parser.error('--span-access is its own profile')
     span = args.span_build
+    if args.span_access:
+        args.catalog = True
     if span:
         args.store4_model = True
     root = Path(__file__).resolve().parents[1]
@@ -62,8 +68,15 @@ def main():
             f.write('#include "' + (root / 'probes/pc286/span-build.c').as_posix() + '"\n')
         public_names.update(('cs_bk_plan_', 'cs_bk_bind_'))
         input_names += ['probes/pc286/span-build.h', 'probes/pc286/span-build.c']
+    if args.span_access:
+        with source.open('a', encoding='utf-8') as f:
+            for part in ('span-bind', 'span-access'):
+                f.write('#include "' + (root / ('probes/pc286/' + part + '.c')).as_posix() + '"\n')
+        public_names.update(('cs_sb_env_', 'cs_sb_walk_', 'cs_sb_find_', 'cs_bx_read_', 'cs_bx_write_'))
+        input_names += ['probes/pc286/store4-model.h'] + [
+            'probes/pc286/' + part + ext for part in ('span-bind', 'span-access') for ext in ('.h', '.c')]
     rows, refusals = [], []
-    if span:
+    if span or args.span_access:
         # Near-data models cannot hold a span pointer: the sizeof guard must refuse.
         for model in ('ms', 'mm'):
             flags = ['-zq', '-2', '-' + model, '-zl', '-s', '-os', '-zastd=c99',
@@ -75,12 +88,14 @@ def main():
             (out / (model + '-refused.log')).write_bytes(q.stdout + q.stderr)
             if q.returncode == 0:
                 raise ValueError(model + ': near-data model unexpectedly compiled')
-            guard = next(i for i, t in enumerate((root / 'probes/pc286/span-build.c').read_text(
-                encoding='utf-8').splitlines(), 1) if 'cs_bk_data_pointer_is_far' in t)
-            if ('span-build.c(%d)' % guard).encode() not in q.stdout + q.stderr:
+            guard_file = 'span-bind.c' if args.span_access else 'span-build.c'
+            guard_name = 'cs_sb_data_pointer_is_far' if args.span_access else 'cs_bk_data_pointer_is_far'
+            guard = next(i for i, line in enumerate((root / 'probes/pc286' / guard_file).read_text(
+                encoding='utf-8').splitlines(), 1) if guard_name in line)
+            if (guard_file + '(%d)' % guard).encode() not in q.stdout + q.stderr:
                 raise ValueError(model + ': refused somewhere other than the far-data guard')
             refusals.append(dict(case=model + '-refused', flags=flags, returncode=q.returncode))
-    for model in (('mc', 'ml') if span else ('ms', 'mm', 'ml')):
+    for model in (('mc', 'ml') if span or args.span_access else ('ms', 'mm', 'ml')):
         for opt in ('od', 'os'):
             name = model + '-' + opt
             obj, listing = out / (name + '.obj'), out / (name + '.lst')
@@ -124,7 +139,7 @@ def main():
     report = dict(compiler_pin=lock['release'], compiler_calls=len(rows) + len(refusals),
                   objects=len(rows), inputs=inputs, records=rows, refusals=refusals,
                   linked=False, target_executed=False,
-                  profile='span-build-closure' if span else 'store4-model-closure' if args.store4_model else 'catalog-closure' if args.catalog else 'bank-plan',
+                  profile='span-access-closure' if args.span_access else 'span-build-closure' if span else 'store4-model-closure' if args.store4_model else 'catalog-closure' if args.catalog else 'bank-plan',
                   scope='Compiler metadata/import audit only, not target link/complete ISA/ABI/runtime proof',
                   stack_policy='-s is diagnostic only; no production stack-check waiver')
     (out / 'report.json').write_text(json.dumps(report, indent=2) + '\n', encoding='utf-8')

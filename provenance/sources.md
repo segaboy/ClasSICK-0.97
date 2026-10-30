@@ -4982,3 +4982,7 @@ Intel,Intel Quark SoC X1000 Core Developer Manual,October2013,order329679-001US,
 ## SRC-0565 - Original PC capture-context diagnostic and host qualification
 
 2026-10-30; owner-approved fresh-worker original host diagnostic, IMPL-0095 / TEST-0114. Reviewed API-interface facts only; source exposure excluded. [Canonical receipt](../docs/development/pc-capture-context-evidence.md). Fake-host checks do not prove GUI delivery or release readiness.
+
+## SRC-0566 - 286 checked-access isolated implementation and verification
+
+2026-10-30; narrow owner-admitted original contributor slice A plus lead pointer-size guard; SPEC-0086 / IMPL-0096 / TEST-0115. [Canonical receipt](../docs/development/pc286-span-access-evidence.md). Hosted and pinned-compiler results only; no target execution or paired-release acceptance.

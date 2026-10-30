@@ -2988,3 +2988,29 @@ if(BUILD_TESTING)
         add_test(NAME windows-input.capture-context-fake COMMAND ${Python3_EXECUTABLE} -B ${CMAKE_SOURCE_DIR}/tests/windows-capture-context.py $<TARGET_FILE:classick_windows_capture_context_fake>)
     endif()
 endif()
+
+# Isolated 286 checked-access model; no production native binding.
+# PROPOSED checked-access slice (SPEC-0069 section 1 over SPEC-0082 spans).
+# New targets only; the existing pc286.span-build targets are unchanged.
+# Insert after the span-build block. Host simulation only; no target run.
+if(BUILD_TESTING)
+    set(classick_span_access_src probes/pc286/span-access.c probes/pc286/span-bind.c probes/pc286/span-build.c probes/pc286/store4-model.c probes/pc286/bank-plan.c probes/pc286/bank-catalog.c)
+    add_executable(classick_span_access_tests tests/pc286-span-access.c ${classick_span_access_src})
+    add_executable(classick_span_access_oracle tests/pc286-span-access-oracle.c ${classick_span_access_src})
+    add_executable(classick_span_access_parity tests/pc286-span-access-parity.c ${classick_span_access_src})
+    target_link_libraries(classick_span_access_parity PRIVATE classick_memory) # unchanged guest.c
+    foreach(target IN ITEMS classick_span_access_tests classick_span_access_oracle classick_span_access_parity)
+        set_target_properties(${target} PROPERTIES C_STANDARD 99 C_STANDARD_REQUIRED ON)
+        target_include_directories(${target} PRIVATE ${CMAKE_SOURCE_DIR}/probes/pc286)
+        if(CMAKE_C_COMPILER_ID MATCHES "Clang|GNU")
+            target_compile_options(${target} PRIVATE -Wall -Wextra -Wpedantic -Werror -Wconversion -Wsign-conversion)
+        endif()
+        if(CLASSICK_SURFACE_SANITIZERS)
+            target_compile_options(${target} PRIVATE -fsanitize=address,undefined -fno-sanitize-recover=all -fno-omit-frame-pointer)
+            target_link_options(${target} PRIVATE -fsanitize=address,undefined)
+        endif()
+    endforeach()
+    add_test(NAME pc286.span-access COMMAND classick_span_access_tests)
+    add_test(NAME pc286.span-access-oracle COMMAND classick_span_access_oracle)
+    add_test(NAME pc286.span-access-parity COMMAND classick_span_access_parity)
+endif()
