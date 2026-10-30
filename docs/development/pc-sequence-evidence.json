@@ -4,7 +4,8 @@
   "source_ids": [
     "SRC-0560",
     "SRC-0561",
-    "SRC-0562"
+    "SRC-0562",
+    "SRC-0563"
   ],
   "specification": "SPEC-0085",
   "implementation": "IMPL-0094",
@@ -799,8 +800,28 @@
     "Initial direct Python invocation lacked the established writable TEMP/TMP override;two CLI tempfile cases were denied. All final CTest profiles use the established temp environment and pass;no product change for that environment error."
   ],
   "sourceCI": {
-    "status": "pending publication of exact integration revision",
-    "new_native_trial": false
+    "status": "both jobs success",
+    "run": 41077429624,
+    "url": "https://github.com/segaboy/ClasSICK-0.97/actions/runs/41077429624",
+    "revision": "f0c16cc3742fa52f340459b9fbcb388f101f82eb",
+    "verified_artifacts": [
+      {
+        "mode": "raw-sequence",
+        "EFI_sha256": "9718d1a65062dc386413137df5c16b170b86fd52d295d112f4499290ba5e8489",
+        "disk_sha256": "bac2d5743c2ba316e4deb73506454cfa567609072b720f3c7f2a280f42322b26",
+        "bytes": 48,
+        "inputs_match_commit": true,
+        "CI_and_local_images_match": true
+      },
+      {
+        "mode": "raw-sequence-first",
+        "EFI_sha256": "222e0d0ba9a4193a69cb9ec24249c52a4852e06976a8f058cd9459966fd34888",
+        "disk_sha256": "2c7634ab563e075c3b9cc4d94c53bc39381c11da40c446ebdd3c98fc4a3a05da",
+        "bytes": 3,
+        "inputs_match_commit": true,
+        "CI_and_local_images_match": true
+      }
+    ]
   },
   "limits": [
     "Native proofs are local working-tree builds over the pinned baseline plus recorded changes;original manifests retain tracked_source_dirty=true. Clean sourceCI is required before a new trial.",
@@ -808,7 +829,7 @@
     "Native frame threshold/EFI layout/omission/corruption checks do not prove measured high-water or universal PC compatibility.",
     "No new research-original,UART,Mac/ROM/68000 source lane or human-provenance approval."
   ],
-  "next": "Clean sourceCI/identities,then eligible read-only capture-context D0 and a separately labeled controlled-byte baseline before GUI/physical evidence. Existing ownership/capture/readiness/cleanup guards remain.",
+  "next": "Read-only D0 capture-context observation with a fresh qualified helper,then distinct GUI/physical route measurements;retain owned-client guards and source gates.",
   "remaining_provider_balances_public": null,
   "measured_Codex_savings": null,
   "release_ready": false,
@@ -819,5 +840,330 @@
       "The error field remains integer0/1:counter-step metadata,not a controller-status bit."
     ],
     "independence_limit": "The worker wrote reader and API tests together;this is not an implementation-withheld reviewer. Lead pre-output literal vectors and a separate hosted-bus indistinguishability case provide additional checks."
-  }
+  },
+  "sourceCI_initial": {
+    "status": "pending publication of exact integration revision",
+    "new_native_trial": false
+  },
+  "device_trial": {
+    "platform": "admitted isolated VirtualBox7.2.16,PS/2 pointer,windowed",
+    "source_revision": "f0c16cc3742fa52f340459b9fbcb388f101f82eb",
+    "EFI_sha256": "9718d1a65062dc386413137df5c16b170b86fd52d295d112f4499290ba5e8489",
+    "disk_sha256": "bac2d5743c2ba316e4deb73506454cfa567609072b720f3c7f2a280f42322b26",
+    "classification": "E2-device-API",
+    "configuration": "Single own disk;network,shares,clipboard,drag-and-drop,USB and audio disabled",
+    "requested_events": [
+      {
+        "index": 0,
+        "dx": 4,
+        "dy": 0,
+        "buttons": 0,
+        "class": "E2-device-API"
+      },
+      {
+        "index": 1,
+        "dx": -4,
+        "dy": 0,
+        "buttons": 0,
+        "class": "E2-device-API"
+      },
+      {
+        "index": 2,
+        "dx": 4,
+        "dy": 0,
+        "buttons": 0,
+        "class": "E2-device-API"
+      },
+      {
+        "index": 3,
+        "dx": -4,
+        "dy": 0,
+        "buttons": 0,
+        "class": "E2-device-API"
+      },
+      {
+        "index": 4,
+        "dx": 4,
+        "dy": 0,
+        "buttons": 0,
+        "class": "E2-device-API"
+      },
+      {
+        "index": 5,
+        "dx": -4,
+        "dy": 0,
+        "buttons": 0,
+        "class": "E2-device-API"
+      },
+      {
+        "index": 6,
+        "dx": 4,
+        "dy": 0,
+        "buttons": 0,
+        "class": "E2-device-API"
+      },
+      {
+        "index": 7,
+        "dx": -4,
+        "dy": 0,
+        "buttons": 0,
+        "class": "E2-device-API"
+      },
+      {
+        "index": 8,
+        "dx": 4,
+        "dy": 0,
+        "buttons": 0,
+        "class": "E2-device-API"
+      },
+      {
+        "index": 9,
+        "dx": -4,
+        "dy": 0,
+        "buttons": 0,
+        "class": "E2-device-API"
+      },
+      {
+        "index": 10,
+        "dx": 4,
+        "dy": 0,
+        "buttons": 0,
+        "class": "E2-device-API"
+      },
+      {
+        "index": 11,
+        "dx": -4,
+        "dy": 0,
+        "buttons": 0,
+        "class": "E2-device-API"
+      },
+      {
+        "index": 12,
+        "dx": 4,
+        "dy": 0,
+        "buttons": 0,
+        "class": "E2-device-API"
+      },
+      {
+        "index": 13,
+        "dx": -4,
+        "dy": 0,
+        "buttons": 0,
+        "class": "E2-device-API"
+      },
+      {
+        "index": 14,
+        "dx": 4,
+        "dy": 0,
+        "buttons": 0,
+        "class": "E2-device-API"
+      },
+      {
+        "index": 15,
+        "dx": -4,
+        "dy": 0,
+        "buttons": 0,
+        "class": "E2-device-API"
+      },
+      {
+        "index": 16,
+        "dx": 4,
+        "dy": 0,
+        "buttons": 0,
+        "class": "E2-device-API"
+      },
+      {
+        "index": 17,
+        "dx": -4,
+        "dy": 0,
+        "buttons": 0,
+        "class": "E2-device-API"
+      },
+      {
+        "index": 18,
+        "dx": 4,
+        "dy": 0,
+        "buttons": 0,
+        "class": "E2-device-API"
+      },
+      {
+        "index": 19,
+        "dx": -4,
+        "dy": 0,
+        "buttons": 0,
+        "class": "E2-device-API"
+      },
+      {
+        "index": 20,
+        "dx": 4,
+        "dy": 0,
+        "buttons": 0,
+        "class": "E2-device-API"
+      },
+      {
+        "index": 21,
+        "dx": -4,
+        "dy": 0,
+        "buttons": 0,
+        "class": "E2-device-API"
+      },
+      {
+        "index": 22,
+        "dx": 4,
+        "dy": 0,
+        "buttons": 0,
+        "class": "E2-device-API"
+      },
+      {
+        "index": 23,
+        "dx": -4,
+        "dy": 0,
+        "buttons": 0,
+        "class": "E2-device-API"
+      }
+    ],
+    "pre_input_registers": [
+      "rip = 0x0000000010008f85",
+      "rsp = 0x000000001cfecac8",
+      "r8 = 0x000000000039e06f",
+      "r9 = 0x000000001cff12a8",
+      "r10 = 0x00000000100026e0",
+      "r11 = 0x000000001cff1301",
+      "r12 = 0x000000001cfeced8",
+      "r13 = 0x000000001cf9c110",
+      "r14 = 0x000000001cfecd38",
+      "r15 = 0x000000001cfeccec"
+    ],
+    "paused_registers": [
+      "rip = 0x000000001002d1f4",
+      "rsp = 0x000000001cfecb58",
+      "r8 = 0x4353505345513031",
+      "r9 = 0x3000000000000000",
+      "r10 = 0x040800fc18000408",
+      "r11 = 0x1800040800fc1800",
+      "r12 = 0x00fc1800040800fc",
+      "r13 = 0x040800fc18000408",
+      "r14 = 0x1800040800fc1800",
+      "r15 = 0x00fc1800040800fc"
+    ],
+    "own_spin": "RIP 0x1002d1f4 is the jump back to original spin 0x1002d1f2;original source-matched O2 listing independently checked",
+    "bytes": [
+      8,
+      4,
+      0,
+      24,
+      252,
+      0,
+      8,
+      4,
+      0,
+      24,
+      252,
+      0,
+      8,
+      4,
+      0,
+      24,
+      252,
+      0,
+      8,
+      4,
+      0,
+      24,
+      252,
+      0,
+      8,
+      4,
+      0,
+      24,
+      252,
+      0,
+      8,
+      4,
+      0,
+      24,
+      252,
+      0,
+      8,
+      4,
+      0,
+      24,
+      252,
+      0,
+      8,
+      4,
+      0,
+      24,
+      252,
+      0
+    ],
+    "summary": {
+      "packets": 16,
+      "overflow_compatible": 0,
+      "unsynced_compatible": 0,
+      "status_compatible": 0,
+      "model_mismatches": 0,
+      "trailing_partial_bytes": 0,
+      "gaps": 0,
+      "alignment_qualified": true,
+      "sum_dx": 0,
+      "sum_dy": 0,
+      "max_abs_dx": 4,
+      "max_abs_dy": 0,
+      "button_states": [
+        0
+      ],
+      "notes": [
+        "Image identity, counter/non-reset assumptions and error-counter saturation remain external limits."
+      ],
+      "scope": "Modeled bytes delivered to this decoder; not physical origin, host intent, controller status or GUI acceptance."
+    },
+    "observed_sequence": "Eight repetitions of 08 04 00 18 FC 00,matching 16 alternating +4/-4 modeled packets;24 device calls issued,halt after48 bytes;do not assume remaining calls were consumed.",
+    "screenshots": {
+      "initial_and_final_sha256": "261f2b2fd52830cf808954114fa332b9a13e7d102b6270270ea2b68be226872f",
+      "both_byte_identical": true,
+      "indexed_existing": "docs/evidence/screenshots/2026-10-29/pc-contrasting-cursor-start.png",
+      "dimensions": [
+        1024,
+        768
+      ]
+    },
+    "cleanup": {
+      "state": "poweroff",
+      "unregistered": true,
+      "existing_vm_inventory_preserved": true,
+      "running_state_preserved": true,
+      "post_trial_raw_roundtrip_equal": true,
+      "termination": "external poweroff from paused state"
+    },
+    "active_upper_estimate_seconds": 61.14551139999999,
+    "scope_limits": [
+      "Device route baseline only;no GUI,physical/human motion,drag,hardware,System1 or release qualification.",
+      "No capture-context helper or GUI capture test was performed.",
+      "No other AI model used in this task."
+    ]
+  },
+  "capture_context_interface_facts": [
+    {
+      "fact": "GetCursorPos returns screen coordinates and requires read access to the window station and the input desktop.",
+      "source": "https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getcursorpos"
+    },
+    {
+      "fact": "GetPhysicalCursorPos returns physical coordinates; comparing it with the other result can inform, but cannot by itself prove, a DPI or capture cause.",
+      "source": "https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getphysicalcursorpos"
+    },
+    {
+      "fact": "GetClipCursor reports the confining rectangle, or screen dimensions when no rectangle confines the cursor.",
+      "source": "https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getclipcursor"
+    },
+    {
+      "fact": "GetCursorInfo returns global cursor information; its caller initializes the structure size.",
+      "source": "https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getcursorinfo"
+    },
+    {
+      "fact": "GetWindowDpiAwarenessContext reports the target window context independently of the querying thread awareness.",
+      "source": "https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getwindowdpiawarenesscontext"
+    }
+  ],
+  "capture_context_disposition": "Published interface facts only;no new helper or GUI input performed. Prior Windows example exposure remains excluded;fresh implementation lane applies. D0 remains unmeasured."
 }

@@ -5,3 +5,9 @@ SRC-0559 / TEST-0110. Actual isolated source-efcf33f original version3 witness R
 The new unchanged512x342 camera export is53598bytes,SHA256 c3b3a7c97e42817aaf8f0524215c2416df409c544f4dc9728fec7597b9c9ad4c. It is byte-identical to the already indexed image below,so its bytes are reused;that older manifest entry retains its original date/build. The canonical receipt records this new capture's source and identity. Original private camera output is retained. No desktop,emulator chrome,reference pixels or retouch. No movement/drag,historical,physical/System1 or release qualification.
 
 - [Guest scene;stored identical bytes](../2026-10-29/mac-live-pair-start.png)
+
+## PC device byte baseline
+
+SRC-0563 / TEST-0112. Original1024x768 guest framebuffer captured before and after the isolated device-only trial;both exports are4864bytes,SHA256 261f2b2fd52830cf808954114fa332b9a13e7d102b6270270ea2b68be226872f. They match an already indexed PNG byte for byte;the older manifest row retains its original date/source. The new capture source/identity and48-byte record are in the [canonical receipt](../../../development/pc-sequence-evidence.json). No GUI,physical/human,drag,System1 or release qualification.
+
+- [Guest scene;stored identical bytes](../2026-10-29/pc-contrasting-cursor-start.png)
