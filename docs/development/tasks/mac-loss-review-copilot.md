@@ -1,0 +1,3 @@
+# Mac first-loss review brief
+
+2026-10-30; owner explicitly approved a fresh Copilot review. Frozen public source baseline e4a9171785ca0675af05a2b543fb833274cb5f0a. The bounded packet contains only original project decoder/polling/inbox sources and the previously published own first-loss observation; no manuals, reference binaries, emulator source, Apple/Microsoft implementation, private HQ, credentials or held UART. The worker is asked to distinguish a demonstrated defect from hypotheses and propose a discriminating next test. No worker writes, commands, web, delegation, implementation or target run are authorized. Full prompt/stream remain outside Git; their identity and actual disposition are in [the review](../mac-first-loss-lead-review.md).
