@@ -66,3 +66,5 @@ See [storage and publication policy](../../development/screenshot-evidence.md). 
 [2026-10-28 PC physical input:before](2026-10-28/pc-physical-before.png) and [clipped pointer](2026-10-28/pc-physical-clipped-pointer.png). Failed usability;[canonical diagnostic evidence](../../development/release-resumption-evidence.json).
 
 2026-10-29:[Live PC host/device input comparison](2026-10-29/README.md);two own framebuffer PNGs,diagnostic only.
+
+- [2026-10-30 native phase-witness observation](2026-10-30/README.md):new boot capture reuses byte-identical registered pixels;new trace provenance is recorded separately.

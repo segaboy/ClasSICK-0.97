@@ -7,7 +7,8 @@
     "SRC-0553",
     "SRC-0554",
     "SRC-0555",
-    "SRC-0557"
+    "SRC-0557",
+    "SRC-0559"
   ],
   "specification": "SPEC-0084",
   "implementation": "IMPL-0093",
@@ -475,12 +476,166 @@
   "measured_Codex_savings": null,
   "preservation": "24 research originals,held brief,UART separation,old rows/tags/releases,86PNG and two reviewedGIF retained;no OneNote/wiki,extra chats or subagents.",
   "release_ready": false,
-  "next": "One admitted isolated original phase-witness trial after desktop readiness;read version3 only. Mac motion and PC GUI drag remain unqualified;do not repeat inconclusive routes without a new discriminating observation.",
+  "next": "PC byte-sequence contract/implementation qualification with ambiguous error causes and timeout limits explicit;Mac movement source investigation must retain loss policy and use this exact first-loss observation.",
   "native_build_initial": {
     "status": "not executed;source-pinned CI needed",
     "normal_ROM_identity": "pending source-matched native proof",
     "witness_ROM_identity": null,
     "RAM_and_stack": "pending native link/budget proof",
     "emulator_trial": false
+  },
+  "target_trial": {
+    "date": "2026-10-30",
+    "source_revision": "efcf33f9323d4761e1840fc717e5633b62d59bc8",
+    "observation_checkpoint": "ce5a420c913e7398d3faee6d354a2f5790bdfcc6",
+    "CI_run": 41047924725,
+    "artifact_id": 12973157869,
+    "ROM_sha256": "3029aaebf4c966b023b19fdf8e96bdc2c2f1f99ac4197999c65a857facc79ca9",
+    "platform": "Admitted black-box Snow1.5.0 Macintosh128K;own original ROM only",
+    "host_seconds": 446.2440505,
+    "cap_seconds": 600,
+    "paused_reads": {
+      "baseline": {
+        "words": [
+          "4D575031",
+          "00000003",
+          "00000080",
+          "00000001",
+          "00001CA9",
+          "00000000",
+          "00000000",
+          "00016C16",
+          "00000115",
+          "0000013F",
+          "00000000",
+          "00000001",
+          "00000000",
+          "00000100",
+          "000000AB",
+          "00000050",
+          "00000046",
+          "00000000",
+          "00000001",
+          "00000005",
+          "00000000",
+          "00000001",
+          "00000000",
+          "00000000",
+          "00000000",
+          "00000006",
+          "00000000",
+          "00EF4C4C",
+          "00AF4C4C",
+          "00000000",
+          "A9000000",
+          "00000003"
+        ]
+      },
+      "continued": {
+        "words": [
+          "4D575031",
+          "00000003",
+          "00000080",
+          "00000001",
+          "000033B6",
+          "00000000",
+          "00000000",
+          "000290FF",
+          "00000115",
+          "0000013F",
+          "00000000",
+          "00000001",
+          "00000000",
+          "00000100",
+          "000000AB",
+          "00000050",
+          "00000046",
+          "00000000",
+          "00000001",
+          "00000005",
+          "00000000",
+          "00000001",
+          "00000000",
+          "00000000",
+          "00000000",
+          "00000006",
+          "00000000",
+          "00EF4C4C",
+          "00AF4C4C",
+          "00000000",
+          "A9000000",
+          "00000003"
+        ]
+      }
+    },
+    "strict_reader": "Both32-word records accepted as version3",
+    "first_loss": {
+      "loss_reason": 6,
+      "loss_rr3": 0,
+      "loss_snap0": 15682636,
+      "loss_snap1": 11488332,
+      "loss_snap2": 0,
+      "loss_previous": 2835349504,
+      "loss_phase": 3
+    },
+    "previous": {
+      "known": true,
+      "x_phase": 2,
+      "y_phase": 2
+    },
+    "current": {
+      "x_phase": 1,
+      "y_phase": 3
+    },
+    "model_gray_jump_axes": [
+      "x"
+    ],
+    "consistent_with_gray_loss": true,
+    "services": [
+      93206,
+      168191
+    ],
+    "losses": [
+      319,
+      319
+    ],
+    "deliveries": [
+      0,
+      0
+    ],
+    "pointer": [
+      256,
+      171
+    ],
+    "window": [
+      80,
+      70
+    ],
+    "first_loss_immutable": true,
+    "input": "Host GUI control only;no deliberate guest movement/drag/physical stimulus. UI motion/startup may affect guest;not a stationary-sensor control.",
+    "control_observations": [
+      "Default left-button toolbar clicks did not activate controls;explicit right-button clicks did. No global mapping changed.",
+      "A Memory overlay intercepted one resume click;closed it,then verified running title and increasing services.",
+      "All bytes read through observed own-RAM UI while paused;full UI trees and capture originals stay private."
+    ],
+    "screenshot": "docs/evidence/screenshots/2026-10-29/mac-live-pair-start.png",
+    "cleanup": "Owned process closed at stop request;ROM unchanged;no guest shutdown claimed",
+    "scope_limits": [
+      "First retained engineering-phase observation only;not physical edge reconstruction,hardware cause or rate comparison.",
+      "No usable motion,drag,GUI/human input,physical128K/System1 or release acceptance.",
+      "No reference or affected source lane opened."
+    ],
+    "new_camera_capture": {
+      "sha256": "c3b3a7c97e42817aaf8f0524215c2416df409c544f4dc9728fec7597b9c9ad4c",
+      "bytes": 53598,
+      "dimensions": [
+        512,
+        342
+      ],
+      "captured_on": "2026-10-30",
+      "compiled_source_revision": "efcf33f9323d4761e1840fc717e5633b62d59bc8",
+      "storage": "New unchanged camera export is byte-identical to an existing registered PNG;reuse its stored bytes. Existing manifest keeps its original capture provenance.",
+      "evidence": "docs/evidence/screenshots/2026-10-30/README.md"
+    }
   }
 }
