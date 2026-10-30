@@ -4914,3 +4914,15 @@ Intel,Intel Quark SoC X1000 Core Developer Manual,October2013,order329679-001US,
 ## SRC-0548 - Native PC device-control drag and captured GUI refusal
 
 2026-10-29;TEST-0107. One fresh isolated verified native PC session confirms capture,then refuses the guarded host-relative route before any event because physical cursor2,2 is outside the owned client. Twelve separately labelled admitted IMouse device events demonstrate axis movement,20/12held window drag,release,unheld cursor-only movement and exact scene return except independently checked counter0002. Two unchanged own-framebuffer exports indexed. VM closed/media roundtrip/inventory preserved. E2 acceptance does not replace E3/E4,Mac input or release gates. [Canonical receipt](../docs/development/release-input-repair.json).
+
+## SRC-0549 - Owner approves queued repository publication and CI
+
+2026-10-29. Owner replies "Yes,do it" to the explicit request covering the three public commits throughd708ca6,HQ a39e294 and normalCI. Both approved pushes succeed. No release/tag,reference,physical or new source-role permission is inferred. [Canonical publication/CI receipt](../docs/development/release-input-repair.json).
+
+## SRC-0550 - Continuing native reload comparison and source CI
+
+2026-10-29,own-project verification only. Source-d708ca6 run40985694260 passes both jobs. Exact eligible original native artifact/all input fingerprints/twins/64NOP proof and unchanged default ROM checked. One isolated continuing divisor4 trial retains150927services,573losses,three deliveries,pointer255,170,window80,70 and no fault. Guarded16host events do not qualify motion. No drag is attempted after the failed motion prerequisite;no raw-count rate comparison or cause claim. Two unchanged own PNGs are indexed and the owned session closes with ROM unchanged. The separate subsequent source review is recorded without a quota-savings claim. [Canonical receipt](../docs/development/release-input-repair.json).
+
+## SRC-0551 - Bounded original control-flow review and lead dispositions
+
+2026-10-29. One fresh Copilot Sonnet5.5 Low call receives45358frozen public/original bytes atd708ca6,one prompt-only view,zero commands/writes/tests or returned artifacts,reported1premium request. Lead confirms only the narrow source ordering fact that rendering follows leave;no concrete exclusion defect is proved. Unmeasured timing claims,diagonal-motion explanation and causal count-ratio rules are rejected. Raw DCD previous bits do not retain the earlier PB quadrature phases. Per-reason counts remain an unimplemented measurement proposal,not a fix. Existing previous-phase research must be reused. No implementation or new trial follows from this review. [Dispositions and usage](../docs/development/release-input-repair.json).

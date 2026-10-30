@@ -8,7 +8,10 @@
     "SRC-0545",
     "SRC-0546",
     "SRC-0547",
-    "SRC-0548"
+    "SRC-0548",
+    "SRC-0549",
+    "SRC-0550",
+    "SRC-0551"
   ],
   "specifications": [
     "SPEC-0052",
@@ -24,7 +27,8 @@
   "tests": [
     "TEST-0105",
     "TEST-0106",
-    "TEST-0107"
+    "TEST-0107",
+    "TEST-0108"
   ],
   "status": "Hosted checks and PC native/media proof pass;Mac native proof/CI and exact candidate trials pending. Paired release not ready.",
   "authority": "Owner directs finishing r2 review then the next release step;retained approved isolated original-candidate trials/source-role scopes apply. No release/reference/physical permissions expand.",
@@ -251,7 +255,7 @@
     "target_run": true
   },
   "CI": {
-    "status": "Both corrected source jobs pass",
+    "status": "Both jobs pass for the rate-amendment source",
     "attempts": [
       {
         "run": 40955882429,
@@ -348,6 +352,94 @@
           ],
           "reported_ctest_wall_seconds": 275.5,
           "required_native_checks_retained": true
+        }
+      },
+      {
+        "run": 40985694260,
+        "url": "https://github.com/segaboy/ClasSICK-0.97/actions/runs/40985694260",
+        "source_revision": "d708ca6598a02bebc671550133760cc1736cda74",
+        "conclusion": "success",
+        "jobs": [
+          {
+            "name": "m68k-rom",
+            "id": 123836061817,
+            "conclusion": "success"
+          },
+          {
+            "name": "windows-bootstrap",
+            "id": 123836062239,
+            "conclusion": "success"
+          }
+        ],
+        "Windows_step22": {
+          "profiles": 9,
+          "counts": [
+            {
+              "expected": 398,
+              "executed": 398,
+              "passed": 398,
+              "failed": 0,
+              "skipped_or_not_run": 0
+            },
+            {
+              "expected": 398,
+              "executed": 398,
+              "passed": 398,
+              "failed": 0,
+              "skipped_or_not_run": 0
+            },
+            {
+              "expected": 398,
+              "executed": 398,
+              "passed": 398,
+              "failed": 0,
+              "skipped_or_not_run": 0
+            },
+            {
+              "expected": 362,
+              "executed": 362,
+              "passed": 362,
+              "failed": 0,
+              "skipped_or_not_run": 0
+            },
+            {
+              "expected": 398,
+              "executed": 398,
+              "passed": 398,
+              "failed": 0,
+              "skipped_or_not_run": 0
+            },
+            {
+              "expected": 381,
+              "executed": 381,
+              "passed": 381,
+              "failed": 0,
+              "skipped_or_not_run": 0
+            },
+            {
+              "expected": 381,
+              "executed": 381,
+              "passed": 381,
+              "failed": 0,
+              "skipped_or_not_run": 0
+            },
+            {
+              "expected": 381,
+              "executed": 381,
+              "passed": 381,
+              "failed": 0,
+              "skipped_or_not_run": 0
+            },
+            {
+              "expected": 345,
+              "executed": 345,
+              "passed": 345,
+              "failed": 0,
+              "skipped_or_not_run": 0
+            }
+          ],
+          "executed_CTests": 3442,
+          "reported_ctest_wall_seconds": 251.86
         }
       }
     ]
@@ -648,7 +740,7 @@
   ],
   "preservation": "24research originals,held brief,UART role boundaries,old records,tags and registered media preserved. No OneNote/wiki or extra Codex agents.",
   "release_ready": false,
-  "next": "Build/trial the committed continuing Mac divisor4 comparison after its source CI. PC device path has a bounded successful drag/release/scene-restoration control;captured GUI delivery remains separately blocked. No release publication.",
+  "next": "Stop unchanged polling-rate sweeps. Next Mac change needs a reviewed discriminating status-latch/phase-delivery hypothesis;do not relax loss checks or infer historical behavior. PC GUI delivery remains separate from passingE2controls. Paired release remains unready.",
   "host_session_followup": {
     "profile": "Clang Debug",
     "executed": 3,
@@ -675,9 +767,11 @@
     "docs/evidence/screenshots/2026-10-29/mac-live-pair-start.png",
     "docs/evidence/screenshots/2026-10-29/mac-live-pair-after-input.png",
     "docs/evidence/screenshots/2026-10-29/pc-native-device-dragged.png",
-    "docs/evidence/screenshots/2026-10-29/pc-native-device-roundtrip.png"
+    "docs/evidence/screenshots/2026-10-29/pc-native-device-roundtrip.png",
+    "docs/evidence/screenshots/2026-10-29/mac-live-rate4-start.png",
+    "docs/evidence/screenshots/2026-10-29/mac-live-rate4-after-input.png"
   ],
-  "indexed_PNGs": 84,
+  "indexed_PNGs": 86,
   "rate_comparison": {
     "source_baseline": "3f7cc9ffa5b0b9d8574a36d0d0afbbeec5374630",
     "specification": "SPEC-0083 dated rate amendment",
@@ -759,10 +853,259 @@
         }
       ]
     },
-    "native_proof": "pending source-pinnedCI",
-    "target_trial": false,
+    "native_proof": {
+      "source_revision": "d708ca6598a02bebc671550133760cc1736cda74",
+      "CI_run": 40985694260,
+      "Mac_job": 123836061817,
+      "artifact_id": 12947001314,
+      "ROM_sha256": "b6b9072e7f034d1839a15f6782ed6870e2721fb6677eef320201ef772c506f2f",
+      "ROM_bytes": 65536,
+      "all_input_hashes_and_committed_bytes_match": true,
+      "profile": "native-window-timer-live-pair-divisor4-v1",
+      "twins_equal": true,
+      "live": true,
+      "checkpoint": false,
+      "programmed_reload_divisor": 4,
+      "timer_reload_count": 1024,
+      "physical_timer_rate_qualified": false,
+      "pair_call_free": true,
+      "pair_NOPs": 64,
+      "activity_idle_first_input_symbols_absent": true,
+      "ROM_used": 23988,
+      "native_data_bss": 364,
+      "stack_bound": 4996,
+      "default_ROM_unchanged": "e0eedf90bcb489d70473d8e573a4ed5b3102d17123db825df03b80e6266f4c3d",
+      "native_pair_body_unchanged": true,
+      "target_run": true,
+      "job_conclusion": "success"
+    },
+    "target_trial": true,
     "release_pass": false,
     "implementation_revision": "10f83fe",
-    "publication": "Specific public push approval pending;no CI or Mac comparison run claimed."
+    "publication": "Published by approved push2026-10-29;normalCI40985694260bothjobs pass.",
+    "earlier_pending_publication": "Specific public push approval pending;no CI or Mac comparison run claimed.",
+    "earlier_native_proof_status": "pending source-pinnedCI",
+    "trial_result": {
+      "date_local": "2026-10-29",
+      "source_revision": "d708ca6598a02bebc671550133760cc1736cda74",
+      "CI_run": 40985694260,
+      "Mac_job_conclusion": "success",
+      "native": {
+        "source_revision": "d708ca6598a02bebc671550133760cc1736cda74",
+        "CI_run": 40985694260,
+        "Mac_job": 123836061817,
+        "artifact_id": 12947001314,
+        "ROM_sha256": "b6b9072e7f034d1839a15f6782ed6870e2721fb6677eef320201ef772c506f2f",
+        "ROM_bytes": 65536,
+        "all_input_hashes_and_committed_bytes_match": true,
+        "profile": "native-window-timer-live-pair-divisor4-v1",
+        "twins_equal": true,
+        "live": true,
+        "checkpoint": false,
+        "programmed_reload_divisor": 4,
+        "timer_reload_count": 1024,
+        "physical_timer_rate_qualified": false,
+        "pair_call_free": true,
+        "pair_NOPs": 64,
+        "activity_idle_first_input_symbols_absent": true,
+        "ROM_used": 23988,
+        "native_data_bss": 364,
+        "stack_bound": 4996,
+        "default_ROM_unchanged": "e0eedf90bcb489d70473d8e573a4ed5b3102d17123db825df03b80e6266f4c3d",
+        "native_pair_body_unchanged": true,
+        "target_run": true
+      },
+      "class": "E3-synthetic-host-delivery",
+      "events": [
+        {
+          "axis": "left",
+          "host_events": 8,
+          "host_accepted": true,
+          "expected_pid_verified": true,
+          "all_physical_foreground_client_guards_passed": true,
+          "swap_buttons": true,
+          "guest_acceptance_inferred_from_host": false
+        },
+        {
+          "axis": "up",
+          "host_events": 8,
+          "host_accepted": true,
+          "expected_pid_verified": true,
+          "all_physical_foreground_client_guards_passed": true,
+          "swap_buttons": true,
+          "guest_acceptance_inferred_from_host": false
+        }
+      ],
+      "trace": {
+        "tag": 1297567793,
+        "version": 2,
+        "bytes": 128,
+        "source_irq": 1,
+        "vbl": 11880,
+        "scc": 0,
+        "combined": 0,
+        "services": 150927,
+        "baselines": 514,
+        "losses": 573,
+        "queued": 0,
+        "peak": 1,
+        "deliveries": 3,
+        "pointer_x": 255,
+        "pointer_y": 170,
+        "window_x": 80,
+        "window_y": 70,
+        "pattern": 1,
+        "phase": 1,
+        "motion_stage": 5,
+        "raw_a": 0,
+        "raw_b": 1,
+        "buttons": 0,
+        "motion_cause": 0,
+        "cause": 0,
+        "loss_reason": 6,
+        "loss_rr3": 0,
+        "loss_snap0": 11488332,
+        "loss_snap1": 11488332,
+        "loss_snap2": 0,
+        "loss_previous": 16777216,
+        "loss_phase": 3
+      },
+      "input_observations": {
+        "counter": 1,
+        "window": [
+          80,
+          70
+        ],
+        "pointer": [
+          255,
+          170
+        ],
+        "initial_pointer": [
+          256,
+          171
+        ],
+        "motion_qualified": false,
+        "drag_test_executed": false,
+        "stop_reason": "Usable axis motion prerequisite did not pass;no drag attempt credited.",
+        "loop_continued": true,
+        "fault_observed": false,
+        "root_cause_proven": false
+      },
+      "interpretation": "A continuing divisor4 candidate still fails usable movement. Total counts cannot be compared as rates with the prior divisor1 trial:duration and stimulus differ. Tiny displacement cannot be causally assigned to the guarded movements;initial GUI actions also contribute. No further unchanged timer sweep justified.",
+      "cleanup": {
+        "host_seconds": 201.1017771,
+        "cap_seconds": 600,
+        "pid": 64880,
+        "process_exited": true,
+        "forced_cleanup": true,
+        "guest_shutdown_claimed": false,
+        "ROM_sha256": "b6b9072e7f034d1839a15f6782ed6870e2721fb6677eef320201ef772c506f2f"
+      },
+      "source_role_limits_unchanged": true,
+      "remaining_provider_balances": {
+        "Copilot": null,
+        "Claude": null,
+        "Grok": null,
+        "Antigravity": null
+      },
+      "new_worker_calls": 0
+    }
+  },
+  "publications": [
+    {
+      "date_local": "2026-10-29",
+      "authority": "Owner explicitly approves the three public commits throughd708ca6,HQ a39e294 and normalCI.",
+      "public_revision": "d708ca6598a02bebc671550133760cc1736cda74",
+      "HQ_revision": "a39e2944ed190a91646a606aeffe431b82c94a0a",
+      "pushes": "success",
+      "release_or_tag_published": false
+    }
+  ],
+  "control_flow_review": {
+    "classification": "reviewed worker proposals;no implementation or executed tests from the worker",
+    "source_revision": "d708ca6598a02bebc671550133760cc1736cda74",
+    "worker": {
+      "round": "control-flow",
+      "worker": "copilot",
+      "exit_code": 0,
+      "outer_timeout": false,
+      "elapsed_seconds": 59.52,
+      "input_bytes": 45358,
+      "input_sha256": "0307e36e7d6305cd858783d21497cc3ec1fb8adf29a375187e4d6bbb17f81407",
+      "stderr_bytes": 0,
+      "model": "claude-sonnet-5.5",
+      "effort": "low",
+      "view_calls": 1,
+      "other_tools": 0,
+      "writes": 0,
+      "commands": 0,
+      "tests_executed": [],
+      "usable_artifacts_returned": 0,
+      "reported_premium_requests": 1,
+      "reported_model_metrics": {
+        "claude-sonnet-5.5": {
+          "requests": {
+            "count": 2,
+            "cost": 1
+          },
+          "usage": {
+            "inputTokens": 34096,
+            "outputTokens": 5893,
+            "cacheReadTokens": 6411,
+            "cacheWriteTokens": 27517,
+            "reasoningTokens": 3688
+          },
+          "cacheExpiresAt": "2026-10-30T01:45:27.727Z",
+          "totalNanoAiu": 12869960000,
+          "aiCreditsStatus": "complete",
+          "tokenDetails": {
+            "input": {
+              "tokenCount": 168
+            },
+            "cache_read": {
+              "tokenCount": 6411
+            },
+            "cache_write": {
+              "tokenCount": 27517
+            },
+            "output": {
+              "tokenCount": 5893
+            }
+          }
+        }
+      },
+      "remaining_balance": null,
+      "measured_Codex_savings": null
+    },
+    "lead_dispositions": [
+      {
+        "proposal": "Bulk rendering is outside the foreground inbox exclusion hooks.",
+        "disposition": "adopt narrowly",
+        "basis": "Inspected enter/save-SR/leave and foreground.c claim,complete,recovery ordering;no concrete missing leave or whole-render exclusion defect found. This is not a latency bound."
+      },
+      {
+        "proposal": "Foreground slowness cannot cause Gray loss;numeric timer/ISR time estimates exclude it.",
+        "disposition": "reject",
+        "basis": "No measured critical-section/IRQ latencies or eligible clock proof was supplied. Absence of a demonstrated mask leak is not proof of sampling completeness."
+      },
+      {
+        "proposal": "A simultaneous two-channel DCD change is rejected as a diagonal step.",
+        "disposition": "reject",
+        "basis": "The decoder admits legal movement on both axes. Retained loss_previous holds raw DCD bits,not previous PB quadrature phases;the first stable snapshot cannot identify which axis made an illegal two-bit transition."
+      },
+      {
+        "proposal": "Rerun existing MAR1 activity case and use channel/count ratios as causal decision rules.",
+        "disposition": "defer/reject causal rules",
+        "basis": "Earlier activity observations are retained. Host events,services,losses and deliveries are not interchangeable counts;the proposed ratios do not prove hardware mapping or foreground causality. No unchanged rerun is authorized by this review."
+      },
+      {
+        "proposal": "Add per-reason loss counts.",
+        "disposition": "retain as unimplemented measurement proposal",
+        "basis": "Reason totals would distinguish aggregate loss classes,but cannot replace the missing previous decoder/PB phase. Any change still needs a bounded original diagnostic contract,native budget proof and actual verification."
+      }
+    ],
+    "implementation_changes": [],
+    "tests_executed_by_lead_for_this_review": [],
+    "next": "Reuse the existing previous-phase research and choose one sufficient new diagnostic;no unmeasured timing or decoder change adopted."
   }
 }

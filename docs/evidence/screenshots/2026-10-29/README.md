@@ -23,3 +23,10 @@ SRC-0548/TEST-0107. Separate E2 controls on the same verified continuing PC buil
 
 - [Device-level dragged/released window](pc-native-device-dragged.png)
 - [Device-level scene roundtrip](pc-native-device-roundtrip.png)
+
+## Continuing divisor4 comparison
+
+SRC-0550/TEST-0108. Both source-d708ca6CI jobs pass. Default ROM and pair-capture routine stay byte-identical. The explicit divisor4 candidate boots and continues150927services without a fault,but reports573losses,three deliveries and pointer255,170. Sixteen bounded host events and a click do not establish guest-motion attribution or calibrated movement. Usable motion fails;dragging is not attempted. The owned session closes in201.102seconds with its ROM unchanged. A separate subsequent source-only review is recorded in the canonical receipt. [Canonical identities and trace](../../../development/release-input-repair.json).
+
+- [mac-live-rate4-start](mac-live-rate4-start.png)
+- [mac-live-rate4-after-input](mac-live-rate4-after-input.png)

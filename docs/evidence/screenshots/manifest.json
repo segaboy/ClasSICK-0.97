@@ -1955,6 +1955,52 @@
         "E2 device-level controls only;not host GUI or human delivery.",
         "No Mac motion,physical hardware,System1,full128K or release qualification."
       ]
+    },
+    {
+      "id": "2026-10-29-mac-live-rate4-start",
+      "path": "docs/evidence/screenshots/2026-10-29/mac-live-rate4-start.png",
+      "sha256": "d5098beae14362c0e6fe99fb94d044d31217a05cb17001aacc43682392c6cce7",
+      "bytes": 53557,
+      "width": 512,
+      "height": 342,
+      "captured_on": "2026-10-29",
+      "target": "native-mac68000",
+      "caption": "Continuing divisor4 Mac candidate before input;original scene and contrasting pointer.",
+      "alt": "Continuing divisor4 Mac candidate before input;original scene and contrasting pointer.",
+      "source_revision": "d708ca6598a02bebc671550133760cc1736cda74",
+      "compiled_source_revision": "d708ca6598a02bebc671550133760cc1736cda74",
+      "evidence": "docs/evidence/screenshots/2026-10-29/README.md",
+      "license": "GPL-3.0-or-later",
+      "rights": "Unmodified Snow camera export of our original guest framebuffer only;no desktop,emulator chrome,reference pixels,retouch or private paths.",
+      "input": "synthetic",
+      "limitations": [
+        "Sixteen host events accepted by Windows;not a guest motion/human pass.",
+        "Trial durations and stimuli differ;loss totals are not a rate or regression comparison.",
+        "No physical Macintosh,full128K,System1 or release qualification."
+      ]
+    },
+    {
+      "id": "2026-10-29-mac-live-rate4-after-input",
+      "path": "docs/evidence/screenshots/2026-10-29/mac-live-rate4-after-input.png",
+      "sha256": "b5f6953ed665962f072f89228551655d7f9057b18f541f051557e4779f9b81dd",
+      "bytes": 74384,
+      "width": 512,
+      "height": 342,
+      "captured_on": "2026-10-29",
+      "target": "native-mac68000",
+      "caption": "Continuing divisor4 Mac after guarded X/Y delivery:counter0001,pointer255,170;usable movement and dragging still unqualified.",
+      "alt": "Continuing divisor4 Mac after guarded X/Y delivery:counter0001,pointer255,170;usable movement and dragging still unqualified.",
+      "source_revision": "d708ca6598a02bebc671550133760cc1736cda74",
+      "compiled_source_revision": "d708ca6598a02bebc671550133760cc1736cda74",
+      "evidence": "docs/evidence/screenshots/2026-10-29/README.md",
+      "license": "GPL-3.0-or-later",
+      "rights": "Unmodified Snow camera export of our original guest framebuffer only;no desktop,emulator chrome,reference pixels,retouch or private paths.",
+      "input": "synthetic",
+      "limitations": [
+        "Sixteen host events accepted by Windows;not a guest motion/human pass.",
+        "Trial durations and stimuli differ;loss totals are not a rate or regression comparison.",
+        "No physical Macintosh,full128K,System1 or release qualification."
+      ]
     }
   ]
 }
