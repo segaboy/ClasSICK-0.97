@@ -73,6 +73,15 @@ static cs_mac_activity_window cs_mac_activity_gate;
 #if CLASSICK_MAC_TIMER_LIVE_PAIR && (CLASSICK_MAC_IDLE_PROBE || CLASSICK_MAC_TIMER_ACTIVITY_PROBE || CLASSICK_MAC_TIMER_RECOVERY_PROBE || CLASSICK_MAC_FIRST_INPUT_PROBE || CLASSICK_MAC_PENDING_DEFER_PROBE || CLASSICK_MAC_PHASE_IDLE_PROBE)
 #error Live pair forbids checkpoint diagnostics
 #endif
+#ifndef CLASSICK_MAC_TIMER_PHASE_WITNESS
+#define CLASSICK_MAC_TIMER_PHASE_WITNESS 0
+#endif
+#if CLASSICK_MAC_TIMER_PHASE_WITNESS != 0 && CLASSICK_MAC_TIMER_PHASE_WITNESS != 1
+#error CLASSICK_MAC_TIMER_PHASE_WITNESS must be 0 or 1
+#endif
+#if CLASSICK_MAC_TIMER_PHASE_WITNESS && !(CLASSICK_MAC_TIMER_LIVE_PAIR && CLASSICK_MAC_TIMER_DIVISOR == 4)
+#error Phase witness requires live pair divisor 4
+#endif
 #if CLASSICK_MAC_TIMER_PAIR_PROBE && !CLASSICK_MAC_TIMER_LIVE_PAIR && !(CLASSICK_MAC_TIMER_POLL_PROBE && CLASSICK_MAC_TIMER_RECOVERY_PROBE && CLASSICK_MAC_TIMER_REFRESH_PROBE)
 #error Pair probe requires timer polling,recovery and refresh profiles
 #endif
@@ -348,7 +357,7 @@ void cs_mac_main(void)
     io.context=0;io.read=via_read;io.write=via_write;
     terminal=0u;
     cs_mac_diag.magic=UINT32_C(0x43533039);cs_mac_diag.stage=1;
-    cs_mac_trace.tag=UINT32_C(0x4D575031);cs_mac_trace.version=2u;
+    cs_mac_trace.tag=UINT32_C(0x4D575031);cs_mac_trace.version=CLASSICK_MAC_TIMER_PHASE_WITNESS?3u:2u;
     cs_mac_trace.bytes=(uint32_t)sizeof(struct cs_mac_window_trace);
     cs_mac_diag.image_crc=cs_mac_image_crc((const volatile uint8_t *)(uintptr_t)0x400000,CS_MAC_ROM_BYTES);
     if(cs_mac_diag.image_crc!=*(const volatile uint32_t *)(uintptr_t)0x400100)halt(1);

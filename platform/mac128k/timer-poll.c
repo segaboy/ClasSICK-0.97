@@ -148,8 +148,27 @@ int cs_mac_timer_poll_arm(cs_mac_timer_poll *p)
     return CS_MAC_MOTION_OK;
 }
 
+#if CLASSICK_MAC_TIMER_PHASE_WITNESS
+/* Predecessor decoder phases; must run before cs_mac_polled_step. */
+static uint32_t witness(const cs_mac_timer_poll *p)
+{
+    uint32_t w = UINT32_C(0x80000000);
+    if (p->motion.have_phase)
+        w |= ((uint32_t)p->decoder.x_phase & 3u) << 28 |
+            ((uint32_t)p->decoder.y_phase & 3u) << 26;
+    return w;
+}
+#define WHOLE_LOSS(p, r, a, b) whole_loss(p, r, a, b, wp)
+#else
+#define WHOLE_LOSS(p, r, a, b) whole_loss(p, r, a, b)
+#endif
+
 static int whole_loss(cs_mac_timer_poll *p, uint32_t reason, uint32_t s0,
-    uint32_t s1)
+    uint32_t s1
+#if CLASSICK_MAC_TIMER_PHASE_WITNESS
+    , uint32_t wp
+#endif
+    )
 {
     struct cs_mac_motion *m = &p->motion;
     cs_window_inbox *in = m->inbox;
@@ -169,6 +188,9 @@ static int whole_loss(cs_mac_timer_poll *p, uint32_t reason, uint32_t s0,
         l->snapshots[2] = 0;
         l->previous = m->have_phase << 24 | m->last_raw_a << 16 |
             m->last_raw_b << 8 | m->last_buttons;
+#if CLASSICK_MAC_TIMER_PHASE_WITNESS
+        l->previous |= wp;
+#endif
         l->inbox_phase = in->phase;
         l->reason = reason;
     }
@@ -189,6 +211,9 @@ int cs_mac_timer_poll_service(cs_mac_timer_poll *p)
     cs_pointer_sample o;
     uint32_t pb1, a1, b1, pb2, a2, b2, s0, s1, ph;
     int rc, ret, t1;
+#if CLASSICK_MAC_TIMER_PHASE_WITNESS
+    uint32_t wp;
+#endif
 
     if (!p)
         return CS_MAC_MOTION_ARGUMENT;
@@ -230,16 +255,19 @@ int cs_mac_timer_poll_service(cs_mac_timer_poll *p)
     b2 = sr(p, CS_MAC_SCC_B, 0);
 #endif
     t1 = (vr(p, IFR) & IFR_T1) != 0;
+#if CLASSICK_MAC_TIMER_PHASE_WITNESS
+    wp = witness(p);
+#endif
     s0 = pb1 << 16 | a1 << 8 | b1;
     s1 = pb2 << 16 | a2 << 8 | b2;
     if (((pb1 ^ pb2) & 0x38u) || ((a1 ^ a2) & 8u) || ((b1 ^ b2) & 8u))
-        return whole_loss(p, CS_MAC_LOSS_UNSTABLE, s0, s1);
+        return WHOLE_LOSS(p, CS_MAC_LOSS_UNSTABLE, s0, s1);
     if (t1)
-        return whole_loss(p, CS_MAC_TIMER_LOSS_OVERRUN, s0, s1);
+        return WHOLE_LOSS(p, CS_MAC_TIMER_LOSS_OVERRUN, s0, s1);
 
     rc = cs_mac_polled_step(&p->decoder, pb2, a2, b2, &o);
     if (rc == CS_MAC_POLLED_LOST)
-        return whole_loss(p, CS_MAC_TIMER_LOSS_GRAY, s0, s1);
+        return WHOLE_LOSS(p, CS_MAC_TIMER_LOSS_GRAY, s0, s1);
     if (rc == CS_MAC_POLLED_BASELINED) {
         if (ph != CS_INBOX_WAIT ||
             cs_inbox_baseline(in, m->epoch, o.buttons) != CS_INBOX_OK)
@@ -249,7 +277,7 @@ int cs_mac_timer_poll_service(cs_mac_timer_poll *p)
     } else if (rc == CS_MAC_POLLED_SAMPLE) {
         int r = cs_inbox_push(in, m->epoch, o.dx, o.dy, o.buttons);
         if (r == CS_INBOX_LOST)
-            return whole_loss(p, CS_MAC_LOSS_OVERFLOW, s0, s1);
+            return WHOLE_LOSS(p, CS_MAC_LOSS_OVERFLOW, s0, s1);
         if (r != CS_INBOX_OK)
             return fail(p, CS_MAC_STAGE_INBOX, CS_MAC_CAUSE_INBOX_RESULT);
         sat(&m->samples);

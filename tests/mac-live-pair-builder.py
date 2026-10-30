@@ -28,6 +28,16 @@ bad += [prefix+['--window-timer-pair-probe'],prefix+['--window-timer-recovery-pr
 good=[live,live+['--window-timer-divisor','1'],live+['--window-timer-divisor','4'],live+['--window-timer-divisor','16'],prefix+['--window-idle-probe','--window-timer-activity-probe',
                   '--window-timer-recovery-probe','--window-timer-pair-probe']]
 
+phase = live+['--window-timer-divisor','4','--window-timer-phase-witness']
+bad += [['--window-timer-phase-witness'],prefix+['--window-timer-phase-witness'],
+        prefix+['--window-timer-divisor','4','--window-timer-phase-witness'],
+        live+['--window-timer-phase-witness'],
+        live+['--window-timer-divisor','16','--window-timer-phase-witness']]
+bad += [phase+[flag] for flag in ['--window-idle-probe','--window-timer-activity-probe',
+        '--window-timer-recovery-probe','--window-first-input-probe',
+        '--window-pending-defer-probe','--window-phase-idle-probe','--window-timer-pair-probe']]
+good += [phase]
+
 class BeforeOutput(Exception):
     pass
 

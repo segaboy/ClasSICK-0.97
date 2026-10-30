@@ -16,6 +16,18 @@
 #include "activity.h"
 #endif
 
+/* SPEC-0084 opt-in diagnostic: first_loss.previous also records marker bit31
+ * and the predecessor decoder X/Y phases (bits 29..26). No state or MMIO. */
+#ifndef CLASSICK_MAC_TIMER_PHASE_WITNESS
+#define CLASSICK_MAC_TIMER_PHASE_WITNESS 0
+#endif
+#if (CLASSICK_MAC_TIMER_PHASE_WITNESS)!=0 && (CLASSICK_MAC_TIMER_PHASE_WITNESS)!=1
+#error CLASSICK_MAC_TIMER_PHASE_WITNESS must be 0 or 1
+#endif
+#if CLASSICK_MAC_TIMER_PHASE_WITNESS && !(CLASSICK_MAC_TIMER_PAIR_PROBE && CLASSICK_MAC_TIMER_POLL_PROBE && CLASSICK_MAC_TIMER_REFRESH_PROBE && CLASSICK_MAC_TIMER_LIVE_PAIR && CLASSICK_MAC_TIMER_DIVISOR == 4)
+#error Phase witness requires pair,poll,refresh,live pair and divisor 4
+#endif
+
 /* Opt-in engineering experiment; default 0 keeps behavior/API/layout. At 1,
  * prepare leaves WR15 DCD enable (8) set on both channels and each admitted
  * WAIT/PRIMING/READY service issues ResetExtStatus (WR0 0x10) to A then B

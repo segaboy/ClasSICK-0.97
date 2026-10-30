@@ -356,6 +356,24 @@ jobs:
             ${{ runner.temp }}/classick-window-live-pair-divisor4/Os-a/classick-loaded-app.map
             ${{ runner.temp }}/classick-window-live-pair-divisor4/Os-a/native-pair-disassembly.txt
           if-no-files-found: error
+      - name: Verify phase witness and build explicit diagnostic (unbooted)
+        run: |
+          python3 -B tests/test_mac_phase_witness.py
+          for w in 0 1; do
+            cc -std=c11 -pedantic-errors -Wall -Wextra -Werror -Wconversion -Wsign-conversion -DCLASSICK_MAC_TIMER_PAIR_PROBE=1 -DCLASSICK_MAC_TIMER_POLL_PROBE=1 -DCLASSICK_MAC_TIMER_REFRESH_PROBE=1 -DCLASSICK_MAC_TIMER_LIVE_PAIR=1 -DCLASSICK_MAC_TIMER_DIVISOR=4 -DCLASSICK_MAC_TIMER_PHASE_WITNESS=$w -I. platform/mac128k/timer-poll.c platform/mac128k/polled-phase.c apps/window-scene/inbox.c tests/mac-phase-witness.c -o "$RUNNER_TEMP/mac-phase-$w"
+            "$RUNNER_TEMP/mac-phase-$w"
+          done
+          python3 scripts/Build-LoadedAppROM.py --window-drawing --window-timer-poll-probe --window-timer-refresh-probe --window-timer-live-pair --window-timer-divisor 4 --window-timer-phase-witness --tool-root "$RUNNER_TEMP/classick-m68k/root" --output "$RUNNER_TEMP/classick-window-phase-witness"
+      - name: Retain explicit phase-witness diagnostic (unbooted)
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
+        with:
+          name: classick-window-phase-witness-mac
+          path: |
+            ${{ runner.temp }}/classick-window-phase-witness/manifest.json
+            ${{ runner.temp }}/classick-window-phase-witness/Os-a/classick-loaded-app.rom
+            ${{ runner.temp }}/classick-window-phase-witness/Os-a/classick-loaded-app.map
+            ${{ runner.temp }}/classick-window-phase-witness/Os-a/native-pair-disassembly.txt
+          if-no-files-found: error
       - name: Verify native paired capture and build matched profiles (unbooted)
         run: |
           cc -std=c11 -pedantic-errors -Wall -Wextra -Werror -Wconversion -Wsign-conversion -DCLASSICK_MAC_TIMER_PAIR_PROBE=1 -DCLASSICK_MAC_TIMER_REFRESH_PROBE=1 -DCLASSICK_MAC_TIMER_ACTIVITY_PROBE=1 -I. platform/mac128k/activity.c platform/mac128k/timer-poll.c platform/mac128k/polled-phase.c apps/window-scene/inbox.c tests/mac-timer-pair.c -o "$RUNNER_TEMP/mac-pair"

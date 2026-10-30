@@ -1,0 +1,385 @@
+{
+  "date": "2026-10-30",
+  "baseline": "051126394bc50bcbb2ecdfb60350dbb6d4503e5b",
+  "authority": "Owner approves prior public/HQ evidence pushes and asks for next task. Those two pushes succeed;standing original-release implementation/source/trial boundaries retained.",
+  "source_ids": [
+    "SRC-0552",
+    "SRC-0553",
+    "SRC-0554",
+    "SRC-0555"
+  ],
+  "specification": "SPEC-0084",
+  "implementation": "IMPL-0093",
+  "test": "TEST-0109",
+  "scope": "Opt-in original retained decoder-phase diagnostic and strict reader;not a mouse fix or new interface/historical source.",
+  "frozen_contract_sha256": "2b42267d4de79022df0e554c927d0bb421054796bf8086b82288330964ef45dd",
+  "accepted_contract_sha256": "3abe7d7d9888232ce897f041a25193025aec30f55d7e5b3fae6357560dd6cc25",
+  "input_hashes_lf": {
+    ".github/workflows/bootstrap.yml": "522327c8dc90f891d009a5d10f683055029c84bb70791ade708673ed100e79be",
+    "CMakeLists.txt": "9f394a52d81243bcb386ae3677689ca7406ede7ebc69835d5c64f547f039b840",
+    "docs/development/tasks/mac-phase-witness.md": "b25cf0abecc9ed7d72ea02d2edcc1fc64b0759328ffbf2790ab947ce1d898809",
+    "docs/specifications/SPEC-0084-retained-phase-witness.md": "3abe7d7d9888232ce897f041a25193025aec30f55d7e5b3fae6357560dd6cc25",
+    "platform/mac128k/timer-poll.c": "adca086d60d97a54be56a4ad4272273651665bc9bb0254b6c994947f39146750",
+    "platform/mac128k/timer-poll.h": "83d989699f97542a4720ae686d15a677a211d0094b5cc68401e326cc7f47edad",
+    "platform/mac128k/window-entry.c": "d4af6071490382e98d6a484484fe6df49eaf8874f2ef6cb524ce72ddc0f3e5dc",
+    "scripts/Build-LoadedAppROM.py": "f1b4b5639a6d8f18ada012594c65001e4341696e88cfe4336770f5bacb8142a4",
+    "scripts/Read-MacPhaseWitness.py": "fce2a24f07af5f4d5df78dcc2063fa57f2762c06b6849c4b95b8080d8311b3e4",
+    "tests/mac-live-pair-builder.py": "f60745b786e47efe23a1e0803b0328163dcd8957ca0370e47e52942e405f0499",
+    "tests/mac-phase-witness.c": "c123f7e9b6a7a7f2811cb448413b0ef488d7b0bc6f055ca54f1683fadb854a54",
+    "tests/test_mac_phase_witness.py": "d51c592074480090f7c79c63af421e3be399e57d8f72485449d4b8ca21356d93"
+  },
+  "changes": {
+    "persistent_state_fields_added": 0,
+    "native_trace_bytes": 128,
+    "opt_in_trace_version": 3,
+    "default_trace_version": 2,
+    "extra_MMIO_operations": 0,
+    "capture_precedes_decoder_and_enqueue": true,
+    "first_loss_retained": true,
+    "automatic_witness_word_and_argument": true,
+    "native_stack_cost": "pending cross-build audit",
+    "instrumentation_may_perturb_timing": true
+  },
+  "workers": {
+    "implementation": {
+      "round": "primary",
+      "worker": "claude",
+      "exit_code": 0,
+      "outer_timeout": false,
+      "elapsed_seconds": 92.69,
+      "input_bytes": 42843,
+      "input_sha256": "59dc6e072f2da2382e6a6a8b9916df5f7a47ef79cdbc8d58c1e7b2afa98569ab",
+      "stderr_bytes": 0,
+      "model": "claude-opus-5-5",
+      "effort": "low",
+      "tool_calls": 0,
+      "edits": 17,
+      "novel_lines": 199,
+      "tests_executed": [],
+      "reported_usage": {
+        "input_tokens": 2,
+        "cache_creation_input_tokens": 22965,
+        "cache_read_input_tokens": 1452,
+        "output_tokens": 10786,
+        "output_tokens_details": {
+          "thinking_tokens": 4698
+        },
+        "server_tool_use": {
+          "web_search_requests": 0,
+          "web_fetch_requests": 0
+        },
+        "service_tier": "standard",
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 22965,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "inference_geo": "global",
+        "iterations": [
+          {
+            "input_tokens": 2,
+            "output_tokens": 10786,
+            "cache_read_input_tokens": 1452,
+            "cache_creation_input_tokens": 22965,
+            "cache_creation": {
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 22965
+            },
+            "type": "message"
+          }
+        ],
+        "speed": "standard",
+        "fallback_credit": null
+      },
+      "reported_list_cost_USD": 0.39973840000000005,
+      "cost_basis": "provider list metric,not subscription charge",
+      "schema_deviation": "One extra closing JSON brace removed without retry."
+    },
+    "independent_oracle": {
+      "round": "primary",
+      "worker": "copilot",
+      "exit_code": 0,
+      "outer_timeout": false,
+      "elapsed_seconds": 280.12,
+      "input_bytes": 30187,
+      "input_sha256": "fb3bd5da75851ff79762dcd0acb84b8bf4ab8cc247e12c46d93d6f3658fc5543",
+      "stderr_bytes": 0,
+      "model": "claude-sonnet-5.5",
+      "effort": "low",
+      "implementation_and_author_logs_withheld": true,
+      "prompt_only_views": 2,
+      "input_directory_listings": 2,
+      "other_paths_or_tools": 0,
+      "writes": 0,
+      "tests_executed": [],
+      "returned_lines": 300,
+      "reported_premium_requests": 1,
+      "reported_model_metrics": {
+        "claude-sonnet-5.5": {
+          "requests": {
+            "count": 5,
+            "cost": 1
+          },
+          "usage": {
+            "inputTokens": 80785,
+            "outputTokens": 34362,
+            "cacheReadTokens": 48650,
+            "cacheWriteTokens": 31709,
+            "reasoningTokens": 26719
+          },
+          "cacheExpiresAt": "2026-10-30T10:42:20.326Z",
+          "totalNanoAiu": 42860950000,
+          "aiCreditsStatus": "complete",
+          "tokenDetails": {
+            "input": {
+              "tokenCount": 426
+            },
+            "cache_read": {
+              "tokenCount": 48650
+            },
+            "cache_write": {
+              "tokenCount": 31709
+            },
+            "output": {
+              "tokenCount": 34362
+            }
+          }
+        }
+      },
+      "deviation": "Four views instead of one;audited all paths as frozen prompt/input directory only. No implementation exposure."
+    }
+  },
+  "lead_corrections": [
+    "Resolved real decoder field names against the public header;DCD inversion affects direction,not phase-bit parity.",
+    "Removed extra JSON closing brace;no paid retry.",
+    "C test EQ originally evaluated side-effecting APIs twice;now single evaluation.",
+    "Replaced decoder-discovered inputs/successors with reviewed SPEC-0074 mappings and frozen literal words;expected literals unchanged.",
+    "Immutability test now recovers,rebaselines and actually causes a distinct second loss.",
+    "Reader tests use declared DecodeError,exact current phases,all signed fields,lowercase hex and unknown predecessors without inferred phases.",
+    "Resolved initial missing CMake include path;failure log retained.",
+    "Clarified no-loss word0 wording;frozen and accepted contract hashes retained."
+  ],
+  "actual_verification": {
+    "focused_host_CTests": [
+      {
+        "profile": "clang",
+        "exit_code": 0,
+        "focused_cases": 5,
+        "elapsed_seconds": 4.235
+      },
+      {
+        "profile": "gcc64",
+        "exit_code": 0,
+        "focused_cases": 5,
+        "elapsed_seconds": 7.282
+      },
+      {
+        "profile": "gcc32",
+        "exit_code": 0,
+        "focused_cases": 5,
+        "elapsed_seconds": 7.563
+      },
+      {
+        "profile": "sanitized",
+        "exit_code": 0,
+        "focused_cases": 5,
+        "elapsed_seconds": 7.266
+      }
+    ],
+    "reader_supplement": [
+      {
+        "profile": "gcc64",
+        "reader_case_passed": true
+      },
+      {
+        "profile": "gcc32",
+        "reader_case_passed": true
+      },
+      {
+        "profile": "sanitized",
+        "reader_case_passed": true
+      }
+    ],
+    "final_reader_methods": 10,
+    "lead_pre_output_frozen_vectors": [
+      {
+        "name": "Y-only",
+        "passed": true
+      },
+      {
+        "name": "both",
+        "passed": true
+      },
+      {
+        "name": "neither-inconsistent",
+        "passed": true
+      },
+      {
+        "name": "X-only",
+        "passed": true
+      },
+      {
+        "name": "unknown-80000000",
+        "passed": true
+      },
+      {
+        "name": "unknown-80010101",
+        "passed": true
+      }
+    ],
+    "builder_refusals": 38,
+    "builder_pre_output_acceptances": 6,
+    "entry_preprocessor_controls": [
+      {
+        "case": "witness-enabled",
+        "expected_accepted": true,
+        "actual_returncode": 0
+      },
+      {
+        "case": "explicit-disabled",
+        "expected_accepted": true,
+        "actual_returncode": 0
+      },
+      {
+        "case": "default-disabled",
+        "expected_accepted": true,
+        "actual_returncode": 0
+      },
+      {
+        "case": "CLASSICK_MAC_TIMER_PHASE_WITNESS=2",
+        "expected_accepted": false,
+        "actual_returncode": 1
+      },
+      {
+        "case": "CLASSICK_MAC_TIMER_PHASE_WITNESS=-1",
+        "expected_accepted": false,
+        "actual_returncode": 1
+      },
+      {
+        "case": "CLASSICK_MAC_TIMER_PAIR_PROBE=0",
+        "expected_accepted": false,
+        "actual_returncode": 1
+      },
+      {
+        "case": "CLASSICK_MAC_TIMER_POLL_PROBE=0",
+        "expected_accepted": false,
+        "actual_returncode": 1
+      },
+      {
+        "case": "CLASSICK_MAC_TIMER_REFRESH_PROBE=0",
+        "expected_accepted": false,
+        "actual_returncode": 1
+      },
+      {
+        "case": "CLASSICK_MAC_TIMER_LIVE_PAIR=0",
+        "expected_accepted": false,
+        "actual_returncode": 1
+      },
+      {
+        "case": "CLASSICK_MAC_TIMER_DIVISOR=1",
+        "expected_accepted": false,
+        "actual_returncode": 1
+      },
+      {
+        "case": "CLASSICK_MAC_TIMER_DIVISOR=16",
+        "expected_accepted": false,
+        "actual_returncode": 1
+      },
+      {
+        "case": "CLASSICK_MAC_IDLE_PROBE=1",
+        "expected_accepted": false,
+        "actual_returncode": 1
+      },
+      {
+        "case": "CLASSICK_MAC_TIMER_ACTIVITY_PROBE=1",
+        "expected_accepted": false,
+        "actual_returncode": 1
+      }
+    ],
+    "compiled_defect_and_reader_controls": [
+      {
+        "defect": "swapped-axis-bits",
+        "compiled": true,
+        "independent_oracle_detected": true,
+        "returncode": 1
+      },
+      {
+        "defect": "late-predecessor",
+        "compiled": true,
+        "independent_oracle_detected": true,
+        "returncode": 1
+      },
+      {
+        "defect": "missing-marker",
+        "compiled": true,
+        "independent_oracle_detected": true,
+        "returncode": 1
+      },
+      {
+        "defect": "reader-accepts-v2",
+        "independent_oracle_detected": true,
+        "returncode": 1
+      }
+    ],
+    "full_host_suite": {
+      "profile": "Clang Debug",
+      "exit_code": 0,
+      "cases": 384,
+      "elapsed_seconds": 95.484
+    },
+    "default_objects": [
+      {
+        "profile": "clang",
+        "optimization": "Os",
+        "default_macro_omitted": true,
+        "whole_COFF_object_equal_except_timestamp": true,
+        "timestamp_normalization": "Only bytes4..7 zeroed;all other bytes compared",
+        "normalized_sha256": "7898c954764cee6481dc3807b00203e5a8292eec2d8a6e31691d155ac495473b"
+      },
+      {
+        "profile": "gcc64",
+        "optimization": "Os",
+        "default_macro_omitted": true,
+        "whole_COFF_object_equal_except_timestamp": true,
+        "timestamp_normalization": "Only bytes4..7 zeroed;all other bytes compared",
+        "normalized_sha256": "c284012650680f80eb1b089522499c4aef38a4265a8b8c7ea778ebfda1a8ecbd"
+      },
+      {
+        "profile": "gcc32",
+        "optimization": "Os",
+        "default_macro_omitted": true,
+        "whole_COFF_object_equal_except_timestamp": true,
+        "timestamp_normalization": "Only bytes4..7 zeroed;all other bytes compared",
+        "normalized_sha256": "7996cf1e6fb6a8671b90612c3b820fab91eef524f61a2bc4204ea2ce0310394a"
+      },
+      {
+        "profile": "sanitized",
+        "whole_object_equal": false,
+        "code_and_all_relocations_equal": true,
+        "only_different_section": ".data",
+        "limitation": "No sanitized whole-object identity claim;source-location diagnostic data changed. Actual sanitizer tests pass."
+      }
+    ],
+    "sanitized_data_differences": {
+      "words": 14,
+      "all_correspond_to_line_numbers_of_unchanged_source_statements": true,
+      "full_object_identity_claimed": false
+    }
+  },
+  "earlier_failures": [
+    "Initial test-target build lacked the source-root include directory;fixed and rerun.",
+    "Initial raw COFF identity comparison differed only at timestamp for Clang;normalization is limited to bytes4..7.",
+    "Sanitized whole object differs in14.data source-site line words;code/all relocations and other sections equal. No sanitized whole-object identity claim."
+  ],
+  "native_build": {
+    "status": "not executed;source-pinned CI needed",
+    "normal_ROM_identity": "pending source-matched native proof",
+    "witness_ROM_identity": null,
+    "RAM_and_stack": "pending native link/budget proof",
+    "emulator_trial": false
+  },
+  "remaining_provider_balances_public": null,
+  "measured_Codex_savings": null,
+  "preservation": "24 research originals,held brief,UART separation,old rows/tags/releases,86PNG and two reviewedGIF retained;no OneNote/wiki,extra chats or subagents.",
+  "release_ready": false,
+  "next": "Source-pinned native cross-build/seal/IRQ/64NOP/default-ROM/RAM-stack verification,then one qualified isolated witness trial;do not infer a mouse fix from these host tests."
+}

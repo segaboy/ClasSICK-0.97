@@ -1,0 +1,7 @@
+# Retained decoder-phase witness task
+
+Continue the owner-authorized paired-release work on Windows11. Codex alone writes/integrates/verifies. Baseline051126394bc50bcbb2ecdfb60350dbb6d4503e5b. Implement only the reviewed SPEC-0084 diagnostic, not a mouse fix. Preserve all existing source/role,hardware,release and native gates.
+Primary worker:Claude/Opus5.5 Low returns bounded original C/builder/reader deltas. Independent Copilot receives only frozen contract and public API headers to author the test/oracle artifacts;no implementation,author commentary or logs. Frozen inputs go through established Read/view-only CLI controls;all transcripts/usage stay outside Git. No worker writes,commands,web,MCP,delegation or tests. No HQ,manuals,untracked research originals,credentials,UART,CLEANROM,ROM/media,Apple/MS or emulator implementation inputs.
+Contract:docs/specifications/SPEC-0084-retained-phase-witness.md. Read it in full. Implementation paths:platform/mac128k/timer-poll.h/.c,platform/mac128k/window-entry.c,scripts/Build-LoadedAppROM.py,scripts/Read-MacPhaseWitness.py. Independent artifacts:tests/mac-phase-witness.c,tests/test_mac_phase_witness.py. Lead handles CMake/CI wiring,argument fences,actual builds/tests and native proof. No new firmware/VM/hardware or release permission follows. No more rate sweep.
+
+Inputs are frozen from the named commit plus the lead-adopted contract. Exact contract identity is recorded in the canonical slice receipt before integration.

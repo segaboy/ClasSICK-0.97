@@ -4926,3 +4926,19 @@ Intel,Intel Quark SoC X1000 Core Developer Manual,October2013,order329679-001US,
 ## SRC-0551 - Bounded original control-flow review and lead dispositions
 
 2026-10-29. One fresh Copilot Sonnet5.5 Low call receives45358frozen public/original bytes atd708ca6,one prompt-only view,zero commands/writes/tests or returned artifacts,reported1premium request. Lead confirms only the narrow source ordering fact that rendering follows leave;no concrete exclusion defect is proved. Unmeasured timing claims,diagonal-motion explanation and causal count-ratio rules are rejected. Raw DCD previous bits do not retain the earlier PB quadrature phases. Per-reason counts remain an unimplemented measurement proposal,not a fix. Existing previous-phase research must be reused. No implementation or new trial follows from this review. [Dispositions and usage](../docs/development/release-input-repair.json).
+
+## SRC-0552 - Owner approves prior evidence publication and next task
+
+2026-10-30. Owner explicitly approves public0511263 and privateHQ a17b086,then asks to move to the next task. Both queued pushes succeed. Existing original-release/source/role/trial gates retain their scope;no release/tag/reference or hardware permission is inferred. [Current next-task receipt](../docs/development/mac-phase-witness-evidence.json).
+
+## SRC-0553 - Retained decoder-phase diagnostic contract
+
+2026-10-30. Lead adopts original SPEC-0084 from the existing SRC-0509/0510 phase-sampling study and SRC-0550/0551 gap. Opt-in version3 records earlier decoder phases in unused previous-word bits;128-byte trace and persistent layouts stay fixed. A pre-step temporary is needed for queue-overflow history. No new hardware fact,MMIO,decoder relaxation or movement fix. [Contract](../docs/specifications/SPEC-0084-retained-phase-witness.md).
+
+## SRC-0554 - Original implementation and independent oracle proposals
+
+2026-10-30. One Claude Opus5.5 Low call returns199novel implementation lines from42843frozen public/original bytes,zero tool calls/no tests. One independent Copilot Sonnet5.5 Low call receives30187contract/API-only bytes with implementation/logs withheld and returns300test lines/no execution. Its four prompt/input-directory-only views breach the one-view request;no excluded input or implementation was accessed. Lead corrects schema/test harness/fixture issues without changing frozen expected words or retrying. [Inputs,controls,dispositions and reported usage](../docs/development/mac-phase-witness-evidence.json).
+
+## SRC-0555 - Retained-phase local verification
+
+2026-10-30;TEST-0109/IMPL-0093. Four profiles pass five focused CTests each;final reader supplements and all384Clang cases pass. Six pre-output vectors,38builder refusals/six pre-output acceptances,13entry controls and four seeded defects verify the diagnostic/reader boundary. Three ordinary default-off COFF objects match except timestamps;sanitized code/relocations match with14source-site line-word changes. Native ROM identity,stack/RAM proof,CI and actual witness boot remain pending. No movement,physical,full128K,System1 or release claim. [Canonical receipt](../docs/development/mac-phase-witness-evidence.json).
