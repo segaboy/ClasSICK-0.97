@@ -6,7 +6,8 @@
     "SRC-0552",
     "SRC-0553",
     "SRC-0554",
-    "SRC-0555"
+    "SRC-0555",
+    "SRC-0557"
   ],
   "specification": "SPEC-0084",
   "implementation": "IMPL-0093",
@@ -371,15 +372,115 @@
     "Sanitized whole object differs in14.data source-site line words;code/all relocations and other sections equal. No sanitized whole-object identity claim."
   ],
   "native_build": {
-    "status": "not executed;source-pinned CI needed",
-    "normal_ROM_identity": "pending source-matched native proof",
-    "witness_ROM_identity": null,
-    "RAM_and_stack": "pending native link/budget proof",
-    "emulator_trial": false
+    "status": "source-pinned native compile/link/seal proof and both CI jobs pass;unbooted",
+    "source_revision": "efcf33f9323d4761e1840fc717e5633b62d59bc8",
+    "CI_run": 41047924725,
+    "profiles": [
+      {
+        "profile": "native-window-timer-live-pair-v1",
+        "ROM_sha256": "e0eedf90bcb489d70473d8e573a4ed5b3102d17123db825df03b80e6266f4c3d",
+        "ROM_bytes": 65536,
+        "ROM_used": 23988,
+        "native_data_bss": 364,
+        "stack_bound": 4996,
+        "workspace_bytes": 964,
+        "input_files": 51,
+        "all_committed_and_worktree_inputs_match": true,
+        "seal_vectors_and_IRQs_rechecked": true,
+        "map_symbols_match": true,
+        "manifest_sha256": "e820cae40485887747eb3efd6a302d12b8c65a47be61c8c8509776ce78fc8415",
+        "pair_body_sha256": "725c1d57546f47ab59b19f13d07de7160d24caf7e1d5adec3900ead1263da3ee"
+      },
+      {
+        "profile": "native-window-timer-live-pair-divisor4-v1",
+        "ROM_sha256": "b6b9072e7f034d1839a15f6782ed6870e2721fb6677eef320201ef772c506f2f",
+        "ROM_bytes": 65536,
+        "ROM_used": 23988,
+        "native_data_bss": 364,
+        "stack_bound": 4996,
+        "workspace_bytes": 964,
+        "input_files": 51,
+        "all_committed_and_worktree_inputs_match": true,
+        "seal_vectors_and_IRQs_rechecked": true,
+        "map_symbols_match": true,
+        "manifest_sha256": "839e8c3279672677bd7b9aaf367a748b0f94673e55168a2ef014dac7d099ad5c",
+        "pair_body_sha256": "725c1d57546f47ab59b19f13d07de7160d24caf7e1d5adec3900ead1263da3ee"
+      },
+      {
+        "profile": "native-window-timer-live-pair-divisor4-phase-witness-v1",
+        "ROM_sha256": "3029aaebf4c966b023b19fdf8e96bdc2c2f1f99ac4197999c65a857facc79ca9",
+        "ROM_bytes": 65536,
+        "ROM_used": 24068,
+        "native_data_bss": 364,
+        "stack_bound": 4996,
+        "workspace_bytes": 964,
+        "input_files": 52,
+        "all_committed_and_worktree_inputs_match": true,
+        "seal_vectors_and_IRQs_rechecked": true,
+        "map_symbols_match": true,
+        "manifest_sha256": "32d77cd6350533410fa211756288e0063066adfeedae6559cacaf4caa9ebcadc",
+        "pair_body_sha256": "725c1d57546f47ab59b19f13d07de7160d24caf7e1d5adec3900ead1263da3ee"
+      },
+      {
+        "profile": "native-window-preview-v1",
+        "ROM_sha256": "9cb884200e14d830ba7addee1d3423719e9477a80d9b55e18c5c893e7fe54931",
+        "ROM_bytes": 65536,
+        "ROM_used": 23148,
+        "native_data_bss": 304,
+        "stack_bound": 4992,
+        "workspace_bytes": 964,
+        "input_files": 43,
+        "all_committed_and_worktree_inputs_match": true,
+        "seal_vectors_and_IRQs_rechecked": true,
+        "map_symbols_match": true,
+        "manifest_sha256": "4a6f764132d93800686a8aea6366e871ad0fc4a93fada8d6e352d3717dd8ff51",
+        "pair_body_sha256": null
+      }
+    ],
+    "old_normal_preview_matches": true,
+    "old_normal_source_CI": 40985694260,
+    "old_live_controls_identical": true,
+    "phase_witness_added_ROM_bytes": 80,
+    "added_persistent_state_bytes": 0,
+    "native_frame_sum_bound_unchanged": true,
+    "physical_stack_high_water_measured": false,
+    "physical_128K_fit_qualified": false,
+    "target_run": false,
+    "release_ready": false,
+    "verification_corrections": [
+      "Initial verifier applied paired-control364B/4996B literals to the separate normal preview profile;corrected to profile-specific symbol/frame checks. No product change."
+    ],
+    "artifact_ids": {
+      "classick-window-preview-mac": 12973730828,
+      "classick-window-phase-witness-mac": 12973157869,
+      "classick-window-live-pair-mac": 12972908553,
+      "classick-window-live-pair-divisor4-mac": 12972384841
+    },
+    "CI_conclusion": "success",
+    "CI_url": "https://github.com/segaboy/ClasSICK-0.97/actions/runs/41047924725",
+    "CI_jobs": [
+      {
+        "databaseId": 124036505097,
+        "name": "windows-bootstrap",
+        "conclusion": "success"
+      },
+      {
+        "databaseId": 124036505231,
+        "name": "m68k-rom",
+        "conclusion": "success"
+      }
+    ]
   },
   "remaining_provider_balances_public": null,
   "measured_Codex_savings": null,
   "preservation": "24 research originals,held brief,UART separation,old rows/tags/releases,86PNG and two reviewedGIF retained;no OneNote/wiki,extra chats or subagents.",
   "release_ready": false,
-  "next": "Source-pinned native cross-build/seal/IRQ/64NOP/default-ROM/RAM-stack verification,then one qualified isolated witness trial;do not infer a mouse fix from these host tests."
+  "next": "One admitted isolated original phase-witness trial after desktop readiness;read version3 only. Mac motion and PC GUI drag remain unqualified;do not repeat inconclusive routes without a new discriminating observation.",
+  "native_build_initial": {
+    "status": "not executed;source-pinned CI needed",
+    "normal_ROM_identity": "pending source-matched native proof",
+    "witness_ROM_identity": null,
+    "RAM_and_stack": "pending native link/budget proof",
+    "emulator_trial": false
+  }
 }
