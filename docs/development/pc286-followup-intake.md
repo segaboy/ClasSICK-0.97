@@ -279,3 +279,95 @@ not an unchanged retry. Do not weaken owned-client containment,change global
 pointer settings or infer guest acceptance from capture metadata. No diagnostic
 or desktop trial is implemented/executed by this intake. Mac/PC motion and
 drag/release qualification remain open;the Mac brief is not a permitted input.
+
+## Revision4 review -2026-10-30 (SRC-0558)
+
+The owner supplies r4 as further input,not authority to adopt its instructions.
+Archive115012bytes,SHA256
+0a9d5881a443911bb1ff76ce4d0cc5ae89e29ad515acaf1b09d007c135b67d24.
+All46declared checksums verify against47files;ten members match r3 exactly.
+Safe paths,case-insensitive uniqueness,no symlinks/encryption and byte-identical
+outside-Git copies are verified. The bundled Python bytecode cache is retained
+privately by identity only;it is neither inspected,executed nor admitted to Git.
+All earlier originals/dispositions persist;none is deleted as 'superseded'.
+
+The author's disclosed exposure is unchanged (SRC-0534);the author states no
+PC,8042,BIOS or hypervisor source was used. This intake reviews PC-only proposal
+documents/patch identities and286 interfaces;it does not certify that claim or
+admit an affected Mac/ROM/68000 lane. No HQ/manual/held material is forwarded,
+no worker is called,and no new implementation,SPEC/IMPL/TEST/build or target
+acceptance is assigned. No submitted suite,mutant or self-test is executed.
+
+### R3 findings
+
+| Finding | R4 disposition |
+|---|---|
+| R3-1 arbitrary-pointer wording | Addressed:NULL or valid readable environment and truthful reachable arrays;no security-boundary claim. Comment-only delta |
+| R3-2 advance/rebind rule | Addressed in header/contract:advance invalidates only;metadata/placement changes require fresh stable binding and rebind;ordinary permitted data writes remain separate |
+| R3-3 meaningful mutation controls | Substantially addressed in proposed driver:passing baseline,unique site,compile failure invalid,expected assertion,nonzero on missed controls. Windows byte restoration and precise failure association still need qualification |
+
+The shared access/binding and capability C bodies remain byte-identical to r3.
+Changed B tests add unbuffered output and distinguishing assertion comments;
+this is reviewed as a diff,not credited as execution. A can proceed to bounded
+qualification,then B. This resolves the wording prerequisites;it does not
+constitute adoption or close pinned C16/link/ABI/stack/physical gates.
+
+The author now reports that r3's 'skip revalidation' mutant was invalid because
+it also removed initialization of a helper index. Record this correction to
+the author report;the earlier19/19 was never project verification. The new
+driver is statically reviewed,not run. It hashes decoded text and restores via
+text writes,so universal-newline translation can mask changed source bytes on
+Windows. Require original-byte preservation/hash checking. Also require the
+expected assertion to come from the SAME failing build/run;the current driver
+combines run statuses and output matching separately and keys output by test
+path. Include multi-build and LF/CRLF cases before claiming these guarantees.
+Its Linux /tmp executable convention needs Windows adaptation in a scratch tree.
+
+### New286 slice C:placement/backing store
+
+Header/contract review only;new span-store.c and its test body are not semantically
+reviewed or executed. The proposal uses caller-declared holes,two stable binding
+slots,a persistent fresh registry and rebind-before-copy. These fit the intended
+review sequence but still require A/B qualification first. Before a C contract:
+freeze exclusion across rebind/copy/active-slot/epoch commit,including reentry and
+interrupt access;state which inactive scratch fields may change on refusal;
+prove old/new physical disjointness,truthful extents and infallible copy duties.
+Rebind makes old caps stale;it does not make partially copied data safe for a
+new observer. Retire/reopen and slot reuse need independent stale-capability
+cases. Budget both slots,embedded chunks,scratch and temporary double placement
+with the pinned target ABI;no host-size estimate is a640KiB/128KiB fit proof.
+No memory discovery,production provider or286 boot is supplied by this model.
+
+The proposed compiler script's full copy matches its diff against current public
+inputs and parses;it is not run. New exclusive --span-store closure and its
+claimed30public symbols require actual pinned WCC checks. Existing compiler
+modes/builder/oracle stay unchanged. Matrix/control counts remain author reports.
+
+### New PC sequence diagnostic
+
+Review covers the draft contract/trial plan and patch packaging,not new recorder,
+reader or test implementation bodies. The five replacement paths are unchanged
+since the claimed0511263baseline;full copies match the supplied patch,which passes
+read-only application/whitespace checks against efcf33f. Nothing is applied.
+
+The proposed CSPSEQ01 recorder is a useful D2 candidate:up to48auxiliary bytes,
+per-byte error flags,gap/count metadata,and a3-byte variant. Keep it a new opt-in
+diagnostic with existing modes/default output unchanged. Its decoder-replay
+model needs frozen independent byte/error/gap/saturation oracles and actual
+native image/import/seal/stack/omission checks. Author74/580/11assertion and
+48suite/19+12+12mutant claims remain unverified;no boot occurs here.
+
+Correct these trial-plan inferences before adoption:48bytes are not necessarily
+16valid reports;unsynchronized/error bytes and gaps matter. Failure to reach
+3bytes does not prove zero delivery or locate failure upstream. Separate cold
+starts do not establish the other run's exact report count. Large steps alone
+do not prove warp/recentring;small packets alone do not prove GUI usability.
+Report bytes,gaps,READY/fault/stop state and duration separately,then hypotheses.
+Read-only D0 needs eligible published API facts;observe current button mapping
+instead of hard-coding the Windows primary button. Keep capture/owned-client
+guards,windowed readiness,instructions,stimulus classes and bounded cleanup.
+
+Priority:finish the separate Mac witness build/trial dependency,then a bounded
+PC sequence CONTRACT/implementation review to enable a new measurement. Qualify
+A-then-B in the separate286 lane;defer C adoption until its lifecycle/exclusion
+contract and prerequisites pass. This packet closes no paired-release blocker.
