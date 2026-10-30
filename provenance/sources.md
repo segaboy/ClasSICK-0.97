@@ -4990,3 +4990,7 @@ Intel,Intel Quark SoC X1000 Core Developer Manual,October2013,order329679-001US,
 ## SRC-0567 - PC GUI sequence observation attempt
 
 2026-10-30; TEST-0116. One isolated own-image trial reached the scene; the existing helper refused an outside-client click with no attempted event, and the window-control action failed activation. No recorder-stop record was obtained. Original guest images match an existing indexed screenshot; no GUI motion, drag or release pass. [Canonical receipt](../docs/development/pc-sequence-evidence.json).
+
+## SRC-0568 - Approved fresh owned-window context caller
+
+2026-10-30; IMPL-0097 / TEST-0117. Original read-only caller; fresh worker from approved public facts and project code, with separately executed host failure/cleanup tests. [Canonical evidence](../docs/development/pc-capture-context-evidence.md). No GUI movement, drag or release qualification.
