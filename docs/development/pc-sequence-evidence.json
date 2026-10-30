@@ -6,7 +6,8 @@
     "SRC-0561",
     "SRC-0562",
     "SRC-0563",
-    "SRC-0567"
+    "SRC-0567",
+    "SRC-0573"
   ],
   "specification": "SPEC-0085",
   "implementation": "IMPL-0094",
@@ -1186,6 +1187,28 @@
       "No confirmed capture, host gesture, guest motion or drag.",
       "No human, physical, reference, System1 or release qualification.",
       "The result does not identify the cause of the existing capture issue."
+    ]
+  },
+  "human_gui_trial_20261030_a": {
+    "date": "2026-10-30",
+    "test_id": "TEST-0121",
+    "classification": "User-directed GUI diagnostic; recorder threshold not reached, no byte sequence interpreted",
+    "source_revision": "f0c16cc3742fa52f340459b9fbcb388f101f82eb",
+    "efi_sha256": "9718d1a65062dc386413137df5c16b170b86fd52d295d112f4499290ba5e8489",
+    "disk_sha256": "bac2d5743c2ba316e4deb73506454cfa567609072b720f3c7f2a280f42322b26",
+    "user_observation": "User reported capture, movement, and immediate cursor appearance at lower-right without visible return.",
+    "frames": "58 original guest-only frames: six initial, then 52 clipped-corner; final matches the latter. The frames do not reconstruct every gesture.",
+    "initial_sha256": "261f2b2fd52830cf808954114fa332b9a13e7d102b6270270ea2b68be226872f",
+    "final_sha256": "b70ec8c601318a20084e0cc180e82d07adddced435de03483bc05620a294b3d4",
+    "paused_rip": "0000000010008f85",
+    "stop_condition": "Not at the source-matched recorder stop; no bytes or arrival counts inferred.",
+    "cleanup": "Own VM powered off/unregistered, existing VM inventory and running states preserved, disk roundtrip unchanged.",
+    "active_upper_seconds": 113.0480085,
+    "host_wall_seconds": 150.0192809,
+    "limitations": [
+      "No valid recorder-stop payload and no inference about how many bytes arrived.",
+      "No successful GUI drag, physical PC, System1 or release qualification.",
+      "No automated mouse input was sent during the user check."
     ]
   }
 }
