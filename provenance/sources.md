@@ -4978,3 +4978,7 @@ Intel,Intel Quark SoC X1000 Core Developer Manual,October2013,order329679-001US,
 ## SRC-0564 - 286 checked-access host qualification
 
 2026-10-30;TEST-0113. Isolated r4 checked-access proposal and original project dependencies; GCC and Clang author-suite and guest.c parity tests executed. Input identities, results and limitations: [canonical intake](../docs/development/pc286-followup-intake.md), [test record](records/TEST-0113-pc286-span-access-host.md). No implementation integrated, no target boot or release acceptance.
+
+## SRC-0565 - Original PC capture-context diagnostic and host qualification
+
+2026-10-30; owner-approved fresh-worker original host diagnostic, IMPL-0095 / TEST-0114. Reviewed API-interface facts only; source exposure excluded. [Canonical receipt](../docs/development/pc-capture-context-evidence.md). Fake-host checks do not prove GUI delivery or release readiness.
