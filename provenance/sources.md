@@ -4994,3 +4994,7 @@ Intel,Intel Quark SoC X1000 Core Developer Manual,October2013,order329679-001US,
 ## SRC-0568 - Approved fresh owned-window context caller
 
 2026-10-30; IMPL-0097 / TEST-0117. Original read-only caller; fresh worker from approved public facts and project code, with separately executed host failure/cleanup tests. [Canonical evidence](../docs/development/pc-capture-context-evidence.md). No GUI movement, drag or release qualification.
+
+## SRC-0569 - Owned PC read-only context observation
+
+2026-10-30; TEST-0118. Verified original caller observed matching logical/physical coordinates, visible cursor, a returned clip rectangle, DPI-context presence and no target-thread/UIA capture in one isolated session without input. Scope and cleanup: [canonical receipt](../docs/development/pc-capture-context-evidence.md). No GUI, drag or release pass.

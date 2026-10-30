@@ -13,3 +13,5 @@ SRC-0563 / TEST-0112. Original1024x768 guest framebuffer captured before and aft
 - [Guest scene;stored identical bytes](../2026-10-29/pc-contrasting-cursor-start.png)
 
 SRC-0567 / TEST-0116. A later isolated GUI-route attempt captured initial and final original guest framebuffers; both are byte-identical to the already indexed PNG identified above. The existing helper refused before sending input because the pointer was outside the owned client; the window-control action did not activate the window. No confirmed GUI input or guest movement. See the [canonical sequence receipt](../../../development/pc-sequence-evidence.json).
+
+SRC-0569 / TEST-0118: a later read-only context observation used the original PC candidate and captured initial and final guest frames; both match the indexed PNG above byte-for-byte. No input, GUI movement or drag was tested. [Observation receipt](../../../development/pc-capture-context-evidence.md).

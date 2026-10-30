@@ -1,0 +1,3 @@
+# TEST-0118 - Owned PC capture context observation
+
+2026-10-30; SRC-0569 / IMPL-0097. The verified caller returned success in paused and running states of one isolated owned PC session. Logical and physical cursor coordinates matched; the cursor was shown; clip-rectangle and target-context queries succeeded; target-thread and VirtualBox UIA capture indicators were absent. No input was sent. Original guest frames were byte-identical to the indexed image, and the owned session, inventory and media were preserved. No mouse movement, dragging, physical or release acceptance. [Canonical scope](../../docs/development/pc-capture-context-evidence.md).
