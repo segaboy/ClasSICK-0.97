@@ -11,3 +11,5 @@ Each of four Windows host profiles (GCC x64, Clang x64, GCC i686, and Clang ASan
 The prior default, catalog, store4 and span-build profiles also compiled: their 22 disassembly listings match the previously recorded listings after excluding the generated module path. Raw closure object hashes differ when generated in a different directory, so byte identity is not claimed for those objects. The default objects are byte-identical. No new target, emulator, hardware or reference run was performed. No other AI tool was used.
 
 Remaining: independent review of source provenance, actual segmented backing provider, stable ownership/nonaliasing and lifetime, target link/ABI/stack and execution, performance and boot qualification. The Mac motion/drag and PC GUI drag blockers remain open; this does not make the paired release ready. The separate capability and placement proposals are not adopted here.
+
+Source commit `1e10d65d0fc852f4583c80acb3c503b55b6c6e72` passed both Windows and native jobs in [CI run 41111093044](https://github.com/segaboy/ClasSICK-0.97/actions/runs/41111093044). This adds CI evidence, not target or release qualification.

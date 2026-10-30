@@ -1,0 +1,3 @@
+# TEST-0116 - Inconclusive PC GUI sequence attempt
+
+2026-10-30; SRC-0567. One isolated original PC diagnostic boot. Read-only capture query reported the indicator absent. The existing helper refused the requested click because the pointer was outside the owned client, with zero attempted events. The window-control tool then reported failed activation; no successful click was confirmed. The recorded RIP was not the diagnostic stop, so no byte sequence is interpreted. Original initial and final guest images match an existing indexed image. The owned VM was closed and unregistered, and existing inventory and media were preserved. This is not a motion, drag or release pass. [Exact scope and identities](../../docs/development/pc-sequence-evidence.json).

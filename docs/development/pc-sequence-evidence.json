@@ -5,7 +5,8 @@
     "SRC-0560",
     "SRC-0561",
     "SRC-0562",
-    "SRC-0563"
+    "SRC-0563",
+    "SRC-0567"
   ],
   "specification": "SPEC-0085",
   "implementation": "IMPL-0094",
@@ -1165,5 +1166,26 @@
       "source": "https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getwindowdpiawarenesscontext"
     }
   ],
-  "capture_context_disposition": "Published interface facts only;no new helper or GUI input performed. Prior Windows example exposure remains excluded;fresh implementation lane applies. D0 remains unmeasured."
+  "capture_context_disposition": "Published interface facts only;no new helper or GUI input performed. Prior Windows example exposure remains excluded;fresh implementation lane applies. D0 remains unmeasured.",
+  "gui_trial_20261030_b": {
+    "classification": "Inconclusive isolated GUI-route attempt; no confirmed guest input or dragging",
+    "date": "2026-10-30",
+    "source_revision": "f0c16cc3742fa52f340459b9fbcb388f101f82eb",
+    "efi_sha256": "9718d1a65062dc386413137df5c16b170b86fd52d295d112f4499290ba5e8489",
+    "disk_sha256": "bac2d5743c2ba316e4deb73506454cfa567609072b720f3c7f2a280f42322b26",
+    "test_id": "TEST-0116",
+    "capture_observation": "Existing read-only UIA probe reported capture indicator absent before any helper gesture. Capture metadata is not permission or proof of input delivery.",
+    "guarded_click": "Existing qualified helper refused because pointer was outside the owned client; attempted=0, delivered=0.",
+    "window_control": "Computer-use action returned failed to activate captured window; no successful click was confirmed.",
+    "diagnostic_stop": "Final RIP 0x10008f85 is not the sequence-recorder stop; no byte record interpreted.",
+    "guest_framebuffer": "Initial and final guest-only PNGs byte-identical, SHA-256 261f2b2fd52830cf808954114fa332b9a13e7d102b6270270ea2b68be226872f, matches indexed prior PNG.",
+    "cleanup": "Owned VM powered off and unregistered; original VM inventory, running states and disk roundtrip preserved.",
+    "active_upper_seconds": 127.6755049,
+    "host_wall_seconds": 210.9251576,
+    "limitations": [
+      "No confirmed capture, host gesture, guest motion or drag.",
+      "No human, physical, reference, System1 or release qualification.",
+      "The result does not identify the cause of the existing capture issue."
+    ]
+  }
 }

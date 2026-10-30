@@ -4986,3 +4986,7 @@ Intel,Intel Quark SoC X1000 Core Developer Manual,October2013,order329679-001US,
 ## SRC-0566 - 286 checked-access isolated implementation and verification
 
 2026-10-30; narrow owner-admitted original contributor slice A plus lead pointer-size guard; SPEC-0086 / IMPL-0096 / TEST-0115. [Canonical receipt](../docs/development/pc286-span-access-evidence.md). Hosted and pinned-compiler results only; no target execution or paired-release acceptance.
+
+## SRC-0567 - PC GUI sequence observation attempt
+
+2026-10-30; TEST-0116. One isolated own-image trial reached the scene; the existing helper refused an outside-client click with no attempted event, and the window-control action failed activation. No recorder-stop record was obtained. Original guest images match an existing indexed screenshot; no GUI motion, drag or release pass. [Canonical receipt](../docs/development/pc-sequence-evidence.json).
