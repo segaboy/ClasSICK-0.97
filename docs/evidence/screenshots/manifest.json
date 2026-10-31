@@ -2205,6 +2205,50 @@
         "Synthetic input on one isolated VM; no human or physical hardware qualification.",
         "No historical System 1 or paired-release qualification."
       ]
+    },
+    {
+      "id": "2026-10-31-pc-host-only-bottom",
+      "path": "docs/evidence/screenshots/2026-10-31/pc-host-only-bottom.png",
+      "sha256": "018b8f4f71b57660a5ed6a770a561ead603f359ecebb73e002006f3428503713",
+      "bytes": 4843,
+      "width": 1024,
+      "height": 768,
+      "captured_on": "2026-10-31",
+      "target": "native-x86_64",
+      "caption": "PC guest pointer at lower scene edge after guarded host movement.",
+      "alt": "Monochrome ClasSICK scene with cross at its lower edge.",
+      "source_revision": "aac0ba419c2c6e66b97c2e324768680c6a5c3dab",
+      "compiled_source_revision": "18a4f70fba5dec23c76b1907bc57821b53c8070a",
+      "evidence": "docs/development/host-input-20261031.md",
+      "license": "GPL-3.0-or-later",
+      "rights": "Original ClasSICK product framebuffer only; no emulator chrome, desktop or reference-system pixels.",
+      "input": "synthetic",
+      "limitations": [
+        "Guarded host input in one isolated VM; no human or physical hardware qualification.",
+        "No host-only drag or paired-release qualification."
+      ]
+    },
+    {
+      "id": "2026-10-31-pc-host-only-up",
+      "path": "docs/evidence/screenshots/2026-10-31/pc-host-only-up.png",
+      "sha256": "b59c4fbfa7766cd41685717cdf8db226d503491e5e573f9294223a9ae7a0b3d6",
+      "bytes": 4854,
+      "width": 1024,
+      "height": 768,
+      "captured_on": "2026-10-31",
+      "target": "native-x86_64",
+      "caption": "PC guest pointer moved upward from the edge through guarded host input.",
+      "alt": "Monochrome ClasSICK scene with cross inside the lower part of the scene.",
+      "source_revision": "aac0ba419c2c6e66b97c2e324768680c6a5c3dab",
+      "compiled_source_revision": "18a4f70fba5dec23c76b1907bc57821b53c8070a",
+      "evidence": "docs/development/host-input-20261031.md",
+      "license": "GPL-3.0-or-later",
+      "rights": "Original ClasSICK product framebuffer only; no emulator chrome, desktop or reference-system pixels.",
+      "input": "synthetic",
+      "limitations": [
+        "Guarded host input in one isolated VM; no human or physical hardware qualification.",
+        "No host-only drag or paired-release qualification."
+      ]
     }
   ]
 }
