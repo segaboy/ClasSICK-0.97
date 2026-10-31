@@ -5022,3 +5022,7 @@ Intel,Intel Quark SoC X1000 Core Developer Manual,October2013,order329679-001US,
 ## SRC-0575 - Short PC recorder device control
 
 2026-10-30; TEST-0123. An original three-byte recorder captured one device-level movement control in an isolated VirtualBox session. [Canonical observation](../docs/development/pc-sequence-evidence.json). Not GUI, human, drag or release acceptance.
+
+## SRC-0576 - Proposed 286 store footprint and feasibility review
+
+2026-10-30; TEST-0124. Owner-supplied slice C remains deferred after an actual pinned-compiler type-size measurement and host-only feasibility checks. [Canonical review](../docs/development/pc286-store-feasibility-review.md). No target boot, relocation performance or release qualification.
