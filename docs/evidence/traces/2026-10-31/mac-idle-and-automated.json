@@ -1,0 +1,60 @@
+{
+  "date": "2026-10-31",
+  "source_revision": "efcf33f9323d4761e1840fc717e5633b62d59bc8",
+  "rom_sha256": "3029aaebf4c966b023b19fdf8e96bdc2c2f1f99ac4197999c65a857facc79ca9",
+  "trace_address": "00000BAC",
+  "mapping": "source-matched own phase-witness linker map; big-endian MWP1 v3; read-only Snow memory UI",
+  "idle_rows": {
+    "00000BA0": "00 40 03 A4 00 40 03 B8 00 00 04 00 4D 57 50 31",
+    "00000BB0": "00 00 00 03 00 00 00 80 00 00 00 01 00 00 04 46",
+    "00000BC0": "00 00 00 00 00 00 00 00 00 00 36 3F 00 00 00 01",
+    "00000BD0": "00 00 00 00 00 00 00 00 00 00 00 01 00 00 00 00",
+    "00000BE0": "00 00 01 00 00 00 00 AB 00 00 00 50 00 00 00 46"
+  },
+  "after_gui_action_rows": {
+    "00000BA0": "00 40 03 A4 00 40 03 B8 00 00 04 00 4D 57 50 31",
+    "00000BB0": "00 00 00 03 00 00 00 80 00 00 00 01 00 00 08 F4",
+    "00000BC0": "00 00 00 00 00 00 00 00 00 00 71 AA 00 00 00 7E",
+    "00000BD0": "00 00 00 8C 00 00 00 01 00 00 00 01 00 00 00 00",
+    "00000BE0": "00 00 01 00 00 00 00 AB 00 00 00 50 00 00 00 46",
+    "00000C00": "00 00 00 01 00 00 00 00 00 00 00 00 00 00 00 00",
+    "00000C10": "00 00 00 06 00 00 00 00 00 EF 4C 4C 00 AF 4C 4C",
+    "00000C20": "00 00 00 00 A9 00 00 00 00 00 00 03 43 53 30 39"
+  },
+  "limits": [
+    "Selected read-only rows only, not a complete 128-byte trace.",
+    "Idle means no intentional guest-scene mouse input; host and window initialization effects are not excluded.",
+    "After interval includes resumption, GUI drag and later toolbar pause, so losses cannot be attributed to a single sub-action.",
+    "First-loss record does not classify later losses.",
+    "No physical/human motion, actual drag acceptance or release qualification."
+  ],
+  "empty_replay_control": {
+    "rom_sha256": "3029aaebf4c966b023b19fdf8e96bdc2c2f1f99ac4197999c65a857facc79ca9",
+    "fixture_sha256": "a5338d955b09046ec0b16f3a9625b7955c763aae07dc722e474e6078745f932f",
+    "fixture_contents": "empty JSON array followed by newline; original generated data",
+    "before_rows": {
+      "00000BA0": "00 40 03 A4 00 40 03 B8 00 00 04 00 4D 57 50 31",
+      "00000BB0": "00 00 00 03 00 00 00 80 00 00 00 01 00 00 05 84",
+      "00000BC0": "00 00 00 00 00 00 00 00 00 00 46 08 00 00 00 01",
+      "00000BD0": "00 00 00 00 00 00 00 00 00 00 00 01 00 00 00 00",
+      "00000BE0": "00 00 01 00 00 00 00 AB 00 00 00 50 00 00 00 46",
+      "00000BF0": "00 00 00 00 00 00 00 01 00 00 00 05 00 00 00 00",
+      "00000C00": "00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00",
+      "00000C10": "00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00",
+      "00000C20": "00 00 00 00 00 00 00 00 00 00 00 00 43 53 30 39"
+    },
+    "after_rows": {
+      "00000BA0": "00 40 03 A4 00 40 03 B8 00 00 04 00 4D 57 50 31",
+      "00000BB0": "00 00 00 03 00 00 00 80 00 00 00 01 00 00 09 1C",
+      "00000BC0": "00 00 00 00 00 00 00 00 00 00 73 B0 00 00 00 01",
+      "00000BD0": "00 00 00 00 00 00 00 00 00 00 00 01 00 00 00 00",
+      "00000BE0": "00 00 01 00 00 00 00 AB 00 00 00 50 00 00 00 46"
+    },
+    "summary": "Before services 17928, after 29616 (+11688); both baselines 1, losses 0, queued 0, deliveries 0 and pointer 256,171. Initial status/reason/fault words zero.",
+    "limits": [
+      "Selecting an empty fixture showed no explicit frontend playback-completion signal; do not claim confirmed playback completion.",
+      "No timestamp anchor, nonempty replay, actual motion, drag or release test.",
+      "Only selected rows saved; post-control full 128-byte trace not collected."
+    ]
+  }
+}

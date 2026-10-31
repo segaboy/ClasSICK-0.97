@@ -8,7 +8,8 @@
     "SRC-0563",
     "SRC-0567",
     "SRC-0573",
-    "SRC-0575"
+    "SRC-0575",
+    "SRC-0577"
   ],
   "specification": "SPEC-0085",
   "implementation": "IMPL-0094",
@@ -1240,5 +1241,77 @@
       "r14": "0000000000000000",
       "r15": "0000000000000000"
     }
+  },
+  "short_gui_trial_20261031_a": {
+    "date": "2026-10-31",
+    "test_id": "TEST-0125",
+    "source_revision": "f0c16cc3742fa52f340459b9fbcb388f101f82eb",
+    "classification": "E3 automated GUI acquisition/gesture; three bytes captured, no successful drag",
+    "efi_sha256": "222e0d0ba9a4193a69cb9ec24249c52a4852e06976a8f058cd9459966fd34888",
+    "disk_sha256": "2c7634ab563e075c3b9cc4d94c53bc39381c11da40c446ebdd3c98fc4a3a05da",
+    "sequence": [
+      "Original scene booted and was paused before input.",
+      "Canvas was clicked while paused; capture indicator remained absent.",
+      "Guest resumed; automated canvas click made VirtualBox report capture; paused guest did not reach recorder stop.",
+      "Pausing released capture; guest resumed and canvas click again made VirtualBox report capture.",
+      "One SKY drag was issued from window-relative (514,450) to (515,450); capture indicator still reported capture.",
+      "Guest paused at source-matched recorder spin; exact raw words recorded below."
+    ],
+    "raw_registers": {
+      "rip": "000000001002d1b4",
+      "r8": "4353505345513031",
+      "r9": "0300000000000000",
+      "r10": "000000000001ff2a",
+      "r11": "0000000000000000",
+      "r12": "0000000000000000",
+      "r13": "0000000000000000",
+      "r14": "0000000000000000",
+      "r15": "0000000000000000"
+    },
+    "recorder_result": "Three recorded bytes 2A FF 01, zero recorded gap and error flags; offline model interprets dx +255, dy -255, buttons 2, conditional on packet alignment.",
+    "guest_images": "Original guest framebuffer initial and after first capture matched existing SHA-256 261f2b2fd52830cf808954114fa332b9a13e7d102b6270270ea2b68be226872f. After movement matched existing SHA-256 b70ec8c601318a20084e0cc180e82d07adddced435de03483bc05620a294b3d4 (corner cursor).",
+    "cleanup": "Own VM powered off and unregistered; existing VM inventory, running states and roundtrip disk preserved. External poweroff, not guest shutdown.",
+    "lease": "113.01 seconds wall, active upper estimate 74.27 seconds; caps 240 and 180 respectively.",
+    "limitations": [
+      "Recorder begins before capture; initial and first-capture pause did not reach stop, but partial byte count and stream alignment remain unknown.",
+      "Second capture and drag occurred between pauses, so the three bytes cannot be attributed exclusively to either action.",
+      "Pointer capture metadata is not independent proof of physical delivery, and SKY drag button mapping and exact host motion are not established.",
+      "No physical/human input, successful dragging, real PC hardware, System 1 or release pass."
+    ]
+  },
+  "short_gui_guarded_helper_20261031_a": {
+    "date": "2026-10-31",
+    "test_id": "TEST-0125",
+    "classification": "E3 guarded-helper refusal; no helper input delivered",
+    "efi_sha256": "222e0d0ba9a4193a69cb9ec24249c52a4852e06976a8f058cd9459966fd34888",
+    "disk_sha256": "2c7634ab563e075c3b9cc4d94c53bc39381c11da40c446ebdd3c98fc4a3a05da",
+    "helper_sha256": "13b555a9645a0affef167d79212fb72a714ff9632e2ba73efcd76542db4858d4",
+    "sequence": "One own cold boot paused at the original scene, resumed, and SKY canvas click reported VirtualBox pointer capture. The previously qualified helper was bound to the exact owned process creation/path/hash and window, then asked for eight -1X relative events.",
+    "helper_receipt": {
+      "state": "target_refused",
+      "reason": "client area",
+      "foreground_matches_owned_pid": true,
+      "swap_buttons": true,
+      "cursor_reported": [
+        2,
+        2
+      ],
+      "owned_client_size": [
+        1024,
+        822
+      ],
+      "capture_verified": true,
+      "rows_done": 0,
+      "attempted": 0,
+      "delivered": 0
+    },
+    "guest_observation": "Paused RIP 0x10008f85 was not the recorder stop, so no byte count or sequence is inferred. Initial and final guest-only PNGs were identical, SHA-256 261f2b2fd52830cf808954114fa332b9a13e7d102b6270270ea2b68be226872f.",
+    "cleanup": "Own VM powered off/unregistered; existing VM inventory, running states and media roundtrip preserved.",
+    "lease": "94.63 seconds wall, active upper estimate 81.32 seconds; caps 240 and 180 respectively.",
+    "limits": [
+      "Guard refusal correctly prevented all helper events; capture status does not override containment.",
+      "Reported cursor coordinates and capture status are instantaneous observations, not proof of the cause or physical screen mapping.",
+      "No complete recorder payload, physical/human input, successful movement/drag, hardware or release qualification."
+    ]
   }
 }

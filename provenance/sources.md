@@ -5026,3 +5026,11 @@ Intel,Intel Quark SoC X1000 Core Developer Manual,October2013,order329679-001US,
 ## SRC-0576 - Proposed 286 store footprint and feasibility review
 
 2026-10-30; TEST-0124. Owner-supplied slice C remains deferred after an actual pinned-compiler type-size measurement and host-only feasibility checks. [Canonical review](../docs/development/pc286-store-feasibility-review.md). No target boot, relocation performance or release qualification.
+
+## SRC-0577 - Automated PC GUI first-byte observation
+
+2026-10-31; TEST-0125. An isolated original three-byte diagnostic recorded 2A FF 01 after an automated capture and a one-pixel SKY drag. [Canonical evidence](../docs/development/pc-sequence-evidence.json). Exact attribution and initial alignment are unknown; no human, successful dragging or release qualification.
+
+## SRC-0578 - Automated Mac idle and input contrast
+
+2026-10-31; TEST-0126. One isolated own-ROM session had zero recorded losses at idle, then 140 after later automated UI/input actions; the first retained reason was a Gray jump. [Canonical evidence](../docs/development/mac-automated-idle-20261031.md). No causal attribution, usable drag, physical hardware or release pass.
