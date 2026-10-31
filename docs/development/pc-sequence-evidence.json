@@ -7,7 +7,8 @@
     "SRC-0562",
     "SRC-0563",
     "SRC-0567",
-    "SRC-0573"
+    "SRC-0573",
+    "SRC-0575"
   ],
   "specification": "SPEC-0085",
   "implementation": "IMPL-0094",
@@ -1210,5 +1211,34 @@
       "No successful GUI drag, physical PC, System1 or release qualification.",
       "No automated mouse input was sent during the user check."
     ]
+  },
+  "short_device_control_20261030_a": {
+    "date": "2026-10-30",
+    "test_id": "TEST-0123",
+    "classification": "E2 isolated device-API control, 3-byte variant",
+    "source_revision": "f0c16cc3742fa52f340459b9fbcb388f101f82eb",
+    "efi_sha256": "222e0d0ba9a4193a69cb9ec24249c52a4852e06976a8f058cd9459966fd34888",
+    "disk_sha256": "2c7634ab563e075c3b9cc4d94c53bc39381c11da40c446ebdd3c98fc4a3a05da",
+    "stimulus": "One device-level +4 horizontal, 0 vertical, no-buttons event. No host GUI or human input.",
+    "stop_rip": "0x1002d1b4: source-matched recorder loop, image map spin entry 0x1002d1b2",
+    "record": "CSPSEQ01, count 3, gaps 0, error flags 0, bytes 08 04 00; existing offline reader models dx +4, dy 0, buttons 0.",
+    "before": "Paused at scene before stimulus; prior RIP 0x10008f85, not recorder stop.",
+    "cleanup": "Own VM externally powered off and unregistered; pre-existing VM inventory, running states, and disk roundtrip preserved.",
+    "images": "Guest-only initial and final screenshots retained outside Git; initial matches previously indexed image. No new meaningful drag image.",
+    "limits": [
+      "E2 device path only; no GUI or physical human movement or drag claim.",
+      "A three-byte record can be a button packet, may start without known alignment, and does not attribute a human symptom.",
+      "No physical hardware, System 1, or release acceptance."
+    ],
+    "raw_registers": {
+      "r8": "4353505345513031",
+      "r9": "0300000000000000",
+      "r10": "0000000000000408",
+      "r11": "0000000000000000",
+      "r12": "0000000000000000",
+      "r13": "0000000000000000",
+      "r14": "0000000000000000",
+      "r15": "0000000000000000"
+    }
   }
 }

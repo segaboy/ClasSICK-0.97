@@ -5014,3 +5014,11 @@ Intel,Intel Quark SoC X1000 Core Developer Manual,October2013,order329679-001US,
 ## SRC-0573 - PC user-directed byte diagnostic attempt
 
 2026-10-30; TEST-0121. User-reported capture/movement again placed the pointer at the lower-right edge in one original isolated diagnostic session. The 48-byte recorder did not reach its stop; no byte count or sequence is inferred. [Canonical evidence](../docs/development/pc-sequence-evidence.json). No successful drag or release acceptance.
+
+## SRC-0574 - 286 capability and borrow isolated model
+
+2026-10-30; owner-admitted r4 original contribution reviewed and integrated under SPEC-0087 / IMPL-0098 / TEST-0122. [Canonical receipt](../docs/development/pc286-span-cap-evidence.md). Isolated model only; no 286 boot, physical ownership or release qualification.
+
+## SRC-0575 - Short PC recorder device control
+
+2026-10-30; TEST-0123. An original three-byte recorder captured one device-level movement control in an isolated VirtualBox session. [Canonical observation](../docs/development/pc-sequence-evidence.json). Not GUI, human, drag or release acceptance.
