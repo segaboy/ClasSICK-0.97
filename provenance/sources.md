@@ -5050,3 +5050,7 @@ Intel,Intel Quark SoC X1000 Core Developer Manual,October2013,order329679-001US,
 ## SRC-0583 - Mac controlled input replay
 
 2026-10-31; TEST-0130. The same original small-X input data was selected in isolated timer-poll and interrupt-driven Mac sessions; their observed loss and delivery results differ. [Canonical evidence](../docs/development/mac-controlled-replay-20261031.md). No host-mouse drag or release pass.
+
+## SRC-0584 - Unattended host mouse checks
+
+2026-10-31; TEST-0131. Isolated Mac and PC host-input checks did not qualify mouse movement or dragging; the PC guard sent no movement, and a separate virtual-device control moved the pointer. [Canonical evidence](../docs/development/unattended-host-mouse-20261031.md). No human, physical-hardware or release pass.
