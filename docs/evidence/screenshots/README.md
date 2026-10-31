@@ -1,5 +1,7 @@
 # ClasSICK product screenshots
 
+Latest: [PC before](2026-10-31/pc-cursor15-initial.png) and [after a device-level drag sequence](2026-10-31/pc-cursor15-device-drag.png) with the larger cursor — [test and limitations](../../development/cursor-visibility-20261031.md).
+
 Latest: [PC cursor after a virtual-device recovery from a capture jump](2026-10-31/pc-device-recovery.png) — [test and limitations](../../development/pc-corner-recovery-20261031.md).
 
 Latest: [Mac window after a synthetic drag](2026-10-31/mac-after-device-drag.png) and [after movement following release](2026-10-31/mac-after-device-release.png) — [test and limitations](../../development/mac-controlled-replay-20261031.md).

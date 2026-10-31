@@ -2091,6 +2091,51 @@
         "Synthetic emulator replay, not captured host mouse or physical movement.",
         "No physical Macintosh, complete System 1 or release qualification."
       ]
+    },
+    {
+      "id": "2026-10-31-pc-cursor15-initial",
+      "path": "docs/evidence/screenshots/2026-10-31/pc-cursor15-initial.png",
+      "sha256": "dff98f96f9939bb0e177c56a1f84ada759021a3552fe3debb5f18fe1d0673f65",
+      "bytes": 4876,
+      "width": 1024,
+      "height": 768,
+      "captured_on": "2026-10-31",
+      "target": "native-x86_64",
+      "caption": "Original PC scene with larger cursor before the virtual-device test.",
+      "alt": "Monochrome ClasSICK scene with a checkerboard window and a high-contrast cross at its center.",
+      "source_revision": "18a4f70fba5dec23c76b1907bc57821b53c8070a",
+      "compiled_source_revision": "18a4f70fba5dec23c76b1907bc57821b53c8070a",
+      "evidence": "docs/development/cursor-visibility-20261031.md",
+      "license": "GPL-3.0-or-later",
+      "rights": "Unmodified VirtualBox guest framebuffer of the original ClasSICK scene only; no desktop, emulator chrome, reference pixels or retouch.",
+      "input": "synthetic",
+      "limitations": [
+        "Initial scene before the separately identified device input sequence.",
+        "No host-GUI mouse, physical PC, complete System 1 or release qualification."
+      ]
+    },
+    {
+      "id": "2026-10-31-pc-cursor15-device-drag",
+      "path": "docs/evidence/screenshots/2026-10-31/pc-cursor15-device-drag.png",
+      "sha256": "af6930fdd640df3f707aed112e033345cc479c5b9358f0144cb67f9feb87812d",
+      "bytes": 4893,
+      "width": 1024,
+      "height": 768,
+      "captured_on": "2026-10-31",
+      "target": "native-x86_64",
+      "caption": "Original PC scene after a virtual-device drag and release sequence.",
+      "alt": "Monochrome ClasSICK scene with the checkerboard window shifted right and down and a high-contrast cross on its title bar.",
+      "source_revision": "18a4f70fba5dec23c76b1907bc57821b53c8070a",
+      "compiled_source_revision": "18a4f70fba5dec23c76b1907bc57821b53c8070a",
+      "evidence": "docs/development/cursor-visibility-20261031.md",
+      "license": "GPL-3.0-or-later",
+      "rights": "Unmodified VirtualBox guest framebuffer of the original ClasSICK scene only; no desktop, emulator chrome, reference pixels or retouch.",
+      "input": "synthetic",
+      "limitations": [
+        "The sequence used the emulator device API (E2), not a host-GUI or physical mouse.",
+        "One final image does not independently establish each event or post-release behavior.",
+        "No physical PC, complete System 1 or release qualification."
+      ]
     }
   ]
 }
