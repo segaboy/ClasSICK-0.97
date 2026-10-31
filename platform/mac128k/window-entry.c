@@ -9,6 +9,9 @@
 #if CLASSICK_MAC_TIMER_POLL_PROBE != 0 && CLASSICK_MAC_TIMER_POLL_PROBE != 1
 #error CLASSICK_MAC_TIMER_POLL_PROBE must be 0 or 1
 #endif
+#if CLASSICK_MAC_FAST_COLLECT && (CLASSICK_MAC_TIMER_POLL_PROBE || CLASSICK_MAC_TIMER_PAIR_PROBE)
+#error Fast collect requires the interrupt-based motion driver
+#endif
 #if CLASSICK_MAC_TIMER_POLL_PROBE
 #include "timer-poll.h"
 #endif
@@ -198,12 +201,12 @@ void cs_mac_line_a(cs_trap_frame *f)
 
 /* 16 NOPs = 64 clocks: >=8us at <=8MHz, covering SCC recovery plus the
  * 4-PCLK reset extra at 3.672MHz. Issued after every SCC byte access. */
-#if CLASSICK_MAC_TIMER_PAIR_PROBE
+#if CLASSICK_MAC_TIMER_PAIR_PROBE || CLASSICK_MAC_FAST_COLLECT
 #define PAIR_INL __attribute__((always_inline)) inline
 #else
 #define PAIR_INL
 #endif
-#if CLASSICK_MAC_TIMER_PAIR_PROBE
+#if CLASSICK_MAC_TIMER_PAIR_PROBE || CLASSICK_MAC_FAST_COLLECT
 static PAIR_INL void scc_guard(void)
 #else
 static inline void scc_guard(void)
@@ -238,7 +241,7 @@ static PAIR_INL uint8_t scc_read(void *cookie,uint32_t channel,uint32_t reg)
     v=*scc_ctrl_read(channel);scc_guard();
     return v;
 }
-static void scc_write(void *cookie,uint32_t channel,uint32_t reg,uint8_t value)
+static PAIR_INL void scc_write(void *cookie,uint32_t channel,uint32_t reg,uint8_t value)
 {
     (void)cookie;reg&=15u;
     if(reg){*scc_ctrl_write(channel)=(uint8_t)reg;scc_guard();}
@@ -258,6 +261,24 @@ void cs_mac_native_pair(void *cookie,uint8_t out[6])
     out[3]=motion_pb(cookie);
     out[4]=scc_read(cookie,CS_MAC_SCC_A,0);
     out[5]=scc_read(cookie,CS_MAC_SCC_B,0);
+}
+#endif
+#if CLASSICK_MAC_FAST_COLLECT
+/* Experimental batch retains the ordinary service IO order and spacing. */
+void cs_mac_native_collect(void *cookie,uint8_t out[10])
+{
+    uint8_t r=scc_read(cookie,CS_MAC_SCC_A,3u);
+    out[0]=r;
+    if(r&0xF6u)return;
+    out[1]=motion_pb(cookie); out[2]=scc_read(cookie,CS_MAC_SCC_A,0u);
+    out[3]=scc_read(cookie,CS_MAC_SCC_B,0u);
+    out[4]=motion_pb(cookie); out[5]=scc_read(cookie,CS_MAC_SCC_A,0u);
+    out[6]=scc_read(cookie,CS_MAC_SCC_B,0u);
+    if(r&0x08u)scc_write(cookie,CS_MAC_SCC_A,0u,0x10u);
+    if(r&0x01u)scc_write(cookie,CS_MAC_SCC_B,0u,0x10u);
+    scc_write(cookie,CS_MAC_SCC_A,0u,0x38u);
+    out[7]=motion_pb(cookie); out[8]=scc_read(cookie,CS_MAC_SCC_A,0u);
+    out[9]=scc_read(cookie,CS_MAC_SCC_B,0u);
 }
 #endif
 static void saturate(volatile uint32_t *v)
@@ -386,6 +407,9 @@ void cs_mac_main(void)
     if(r!=CS_MAC_WINDOW_OK){cs_mac_trace.cause=r;halt(3);}
     cs_mac_diag.stage=5;
     mio.cookie=0;mio.read=scc_read;mio.write=scc_write;mio.pb=motion_pb;
+#if CLASSICK_MAC_FAST_COLLECT
+    mio.collect=cs_mac_native_collect;
+#endif
 #if CLASSICK_MAC_TIMER_PAIR_PROBE
     mio.pair=cs_mac_native_pair;
 #endif

@@ -42,12 +42,14 @@ static void quiesce(struct cs_mac_motion *m)
     m->quiesced = 1u;
 }
 
+#if !CLASSICK_MAC_FAST_COLLECT
 static void take(const struct cs_mac_motion *m, snap *s)
 {
     s->pb = m->io.pb(m->io.cookie);
     s->a = m->io.read(m->io.cookie, CS_MAC_SCC_A, 0u);
     s->b = m->io.read(m->io.cookie, CS_MAC_SCC_B, 0u);
 }
+#endif
 
 static int same(const snap *x, const snap *y)
 {
@@ -171,6 +173,9 @@ int cs_mac_motion_prepare(struct cs_mac_motion *m, const cs_mac_motion_io *io,
 {
     static const struct cs_mac_motion zero;
     if (!m || !io || !io->read || !io->write || !io->pb || !inbox
+#if CLASSICK_MAC_FAST_COLLECT
+        || !io->collect
+#endif
         || invert > 3u)
         return CS_MAC_MOTION_ARGUMENT;
     if (inbox->valid != CS_INBOX_VALID || inbox->phase != CS_INBOX_WAIT
@@ -259,6 +264,20 @@ int cs_mac_motion_service(struct cs_mac_motion *m)
     in = m->inbox;
 
     entry = in->phase;
+#if CLASSICK_MAC_FAST_COLLECT
+    {
+        uint8_t samples[10];
+        m->io.collect(m->io.cookie, samples);
+        rr3 = samples[0];
+        if (rr3 & ~(RR3_EXT_A | RR3_EXT_B) & 0xFF)
+            return fail(m, CS_MAC_STAGE_PENDING, CS_MAC_CAUSE_PENDING);
+        s1.pb=samples[1]; s1.a=samples[2]; s1.b=samples[3];
+        s2.pb=samples[4]; s2.a=samples[5]; s2.b=samples[6];
+        s3.pb=samples[7]; s3.a=samples[8]; s3.b=samples[9];
+    }
+    pend_a = bit(rr3, RR3_EXT_A);
+    pend_b = bit(rr3, RR3_EXT_B);
+#else
     rr3 = m->io.read(m->io.cookie, CS_MAC_SCC_A, 3u);
     if (rr3 & ~(RR3_EXT_A | RR3_EXT_B) & 0xFF)
         return fail(m, CS_MAC_STAGE_PENDING, CS_MAC_CAUSE_PENDING);
@@ -270,6 +289,7 @@ int cs_mac_motion_service(struct cs_mac_motion *m)
     if (pend_b) wr(m, CS_MAC_SCC_B, 0u, WR0_RESET_EXT);
     wr(m, CS_MAC_SCC_A, 0u, WR0_RESET_IUS); /* whole chip owned */
     take(m, &s3);
+#endif
     stable = same(&s1, &s2) && same(&s2, &s3);
 
     if (in->valid != CS_INBOX_VALID || in->epoch != m->epoch)

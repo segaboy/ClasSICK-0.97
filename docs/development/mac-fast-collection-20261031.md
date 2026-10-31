@@ -1,0 +1,13 @@
+<!-- SPDX-License-Identifier: GPL-3.0-or-later -->
+<!-- Copyright (C) 2026 Dean Howell. -->
+# Experimental Mac interrupt collection
+
+2026-10-31; SRC-0588 / SPEC-0091 / IMPL-0102 / TEST-0135. This opt-in experiment batches the existing SCC/VIA reads and writes in one native callback while retaining the prior SCC access spacing, triple-sample checks and loss rules. It is not enabled in the normal build. The intent is to reduce callback overhead; timing improvement and working host input are not established.
+
+The ordinary register-model suite, the fast-core version of that suite, a fast callback ordering/early-failure fixture and the existing timeline test passed with the pinned GCC toolchain. The two fast fixtures also passed under Clang AddressSanitizer and UndefinedBehaviorSanitizer. The ordering fixture models the callback; it is not an independent target-hardware observation. The original native experimental ROM passed the project's twin-build checks, used 23,568 ROM bytes, and has SHA-256 `b73b3d639db7fe93ff6c1cb1752174f5fc704c96a51f8a8f6efc7d10e9892e3d`. Inspection of the project's own linked collector showed no calls and 176 static NOPs; this count is not an independent runtime timing measurement. The rebuilt normal ROM was byte-identical to the previous candidate, SHA-256 `0ad01fe23b7a06bad000f136fae8a4a129226684b4b277aa21368eebc850dcec`. Build receipts remain in `C:\ClasSICK\mac-fast-collect-20261031-a`.
+
+One bounded, isolated Snow session booted the original experimental ROM with no disks or shared folders. Guarded primary-button and motion events were accepted by Windows, but the screen did not show reliable capture or guest movement. The capture state was not established, so this attempt does not decide whether faster collection fixes the Mac input problem. The owned process was externally closed and the ROM hash remained unchanged; guest shutdown was not observed. Receipts are retained at `C:\ClasSICK\mac-fast-host-20261031-a`.
+
+Claude `claude-opus-5-5`, Low, received a frozen 55,374-byte packet of reviewed public original code and returned a proposal without using tools or executing tests. The lead integrated and changed it, then ran the checks above. Provider-reported usage was 32,614 cache-creation input tokens, 1,452 cache-read input tokens, two other input tokens and 6,770 output tokens; the $0.3966104 list-basis estimate is not a subscription charge or measured Codex saving. Remaining allowance is unknown. The packet and transcript remain outside Git at `C:\ClasSICK\release2-completion-20261023-a\mac-fast-capture-20261031`.
+
+No Mac host drag, human input, physical Macintosh or paired-release qualification follows from this experiment. The original release blocker remains open.

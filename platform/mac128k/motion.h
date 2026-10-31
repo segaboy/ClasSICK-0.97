@@ -45,6 +45,14 @@ _Static_assert(CLASSICK_MAC_MOTION_TIMELINE==0 || CLASSICK_MAC_MOTION_TIMELINE==
 #error CLASSICK_MAC_TIMER_PAIR_PROBE must be 0 or 1
 #endif
 
+/* Opt-in native collection experiment; normal builds retain their layout. */
+#ifndef CLASSICK_MAC_FAST_COLLECT
+#define CLASSICK_MAC_FAST_COLLECT 0
+#endif
+#if (CLASSICK_MAC_FAST_COLLECT)!=0 && (CLASSICK_MAC_FAST_COLLECT)!=1
+#error CLASSICK_MAC_FAST_COLLECT must be 0 or 1
+#endif
+
 enum { CS_MAC_SCC_A = 0, CS_MAC_SCC_B = 1 };
 
 typedef struct {
@@ -55,6 +63,11 @@ typedef struct {
 #if CLASSICK_MAC_TIMER_PAIR_PROBE
     /* Writes PB,RR0A,RR0B,PB,RR0A,RR0B in that order; no other effects. */
     void (*pair)(void *cookie, uint8_t out[6]);
+#endif
+#if CLASSICK_MAC_FAST_COLLECT
+    /* RR3, then three PB/A/B triples and existing conditional acknowledgments.
+       Unexpected RR3 bits return immediately after storing out[0]. */
+    void (*collect)(void *cookie, uint8_t out[10]);
 #endif
 } cs_mac_motion_io;
 

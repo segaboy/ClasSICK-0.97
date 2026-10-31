@@ -62,7 +62,24 @@ static uint8_t pb(void *c)
     if(p->scripted){const uint8_t v[3]={0x88,0x48,0x28};return v[(p->snapshots-1u)%3u];}
     return (uint8_t)(p->pb ^ ((p->unstable && p->snapshots%3u==0u)?0x10u:0u));
 }
+#if CLASSICK_MAC_FAST_COLLECT
+/* Logged fake chip implements the same collector contract for core tests. */
+static void collect_fake(void *c,uint8_t o[10])
+{
+    o[0]=rd(c,0,3);
+    if(o[0]&0xF6u)return;
+    for(unsigned i=0;i<2u;i++){
+        o[1u+3u*i]=pb(c);o[2u+3u*i]=rd(c,0,0);o[3u+3u*i]=rd(c,1,0);
+    }
+    if(o[0]&8u)wr(c,0,0,0x10);
+    if(o[0]&1u)wr(c,1,0,0x10);
+    wr(c,0,0,0x38);
+    o[7]=pb(c);o[8]=rd(c,0,0);o[9]=rd(c,1,0);
+}
+static cs_mac_motion_io io={.cookie=&hw,.read=rd,.write=wr,.pb=pb,.collect=collect_fake};
+#else
 static cs_mac_motion_io io={&hw,rd,wr,pb};
+#endif
 /* Contract oracle: partial ordering and observed masks, not a duplicate driver. */
 static void prepared(void)
 {

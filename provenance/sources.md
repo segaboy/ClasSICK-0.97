@@ -5066,3 +5066,7 @@ Intel,Intel Quark SoC X1000 Core Developer Manual,October2013,order329679-001US,
 ## SRC-0587 - Guarded PC host input
 
 2026-10-31; SPEC-0090, IMPL-0101, TEST-0134. A guarded synthetic host drag and release moved the original PC window after virtual-device pointer setup. [Canonical evidence](../docs/development/host-input-20261031.md). Human input, Mac host motion and paired release remain unqualified.
+
+## SRC-0588 - Experimental Mac collection
+
+2026-10-31; SPEC-0091, IMPL-0102, TEST-0135. Optional original interrupt collection has hosted tests and a native twin build; an isolated captured-input attempt was inconclusive. [Canonical evidence](../docs/development/mac-fast-collection-20261031.md). Mac host motion and paired release remain unqualified.
