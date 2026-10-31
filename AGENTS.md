@@ -46,7 +46,7 @@ Current owner scope (2026-10-28, SRC-0521): resume paired release work and retai
 - Preserve target-specific historical, physical/full128K, three-edition/parity, B2, human-input, provenance-review, native-app and Linux gates. A result closes only its stated scope; human provenance review stays separate. Original/native-PC parity and deliberate Linux divergence are tracked separately.
 - System1 interoperability in both directions: original System1 disks on our ROM, and our System1 on an identified supported Apple ROM. Both are mandatory and unverified. References must be admitted separately.
 - B2 criterion 6: never relabel a firmware container hash as an image hash.
-- Release blocker: the paired Mac motion/drag and PC GUI drag/release blocker persists. Release2 is NOT ready.
+- Release blocker: an isolated PC passed synthetic host-only drag/release, and an experimental Mac fast/invert-3 build repeated a synthetic host drag/release. The normal Mac build, the prior failed human-input observations, physical polarity and paired release qualification remain open; Release2 is NOT ready. [PC evidence](docs/development/host-input-20261031.md#host-only-drag-and-release); [Mac evidence](docs/development/mac-fast-collection-20261031.md).
 - ROM and System have separate versions. System is unreleased. Published prereleases are immutable.
 - Build probes are not boots; an observed emulator boot is not physical validation, complete OS acceptance or compatibility proof. Keep E1 hosted, E2 device/API injection, E3 host GUI delivery and E4 human observations distinct; no substitution.
 
