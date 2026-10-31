@@ -80,3 +80,5 @@ See [storage and publication policy](../../development/screenshot-evidence.md). 
 [2026-10-31 PC guarded host drag](../../development/host-input-20261031.md): before, after drag and after release. Pointer positioning used a separate virtual-device control; no human qualification is claimed.
 
 [2026-10-31 PC host-only edge recovery](../../development/host-input-20261031.md#host-only-edge-recovery): original guest captures after downward and upward synthetic host movement; no host-only drag is claimed.
+
+[2026-10-31 PC host-only drag and release](../../development/host-input-20261031.md#host-only-drag-and-release): before, after drag and after release; synthetic host input only.

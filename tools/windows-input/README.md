@@ -41,7 +41,7 @@ foreground and physical client/root containment. No host setting is changed.
 
 `--place-capture-origin` is a separate positioning-only VBox experiment. It
 accepts only the same zero-motion plan, verifies the same bound process and
-window, moves that window to (-100,-100) without changing its size or activating
+window, moves that window to (-100,-140) without changing its size or activating
 it, and reports its client geometry and whether the previously observed screen
 point (2,2) lies in the owned client. A successful move or point observation
 never authorizes later input; each later event still uses the normal guard.

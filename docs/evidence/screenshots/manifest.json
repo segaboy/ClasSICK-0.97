@@ -2249,6 +2249,72 @@
         "Guarded host input in one isolated VM; no human or physical hardware qualification.",
         "No host-only drag or paired-release qualification."
       ]
+    },
+    {
+      "id": "2026-10-31-pc-host-only-drag-before",
+      "path": "docs/evidence/screenshots/2026-10-31/pc-host-only-drag-before.png",
+      "sha256": "76b8ffff5f769e37a536ec310dfe7425a2a29bfb5fcf281775799fa2a480cb9a",
+      "bytes": 4865,
+      "width": 1024,
+      "height": 768,
+      "captured_on": "2026-10-31",
+      "target": "native-x86_64",
+      "caption": "PC window before host-only drag.",
+      "alt": "Monochrome ClasSICK scene with pointer on the window title bar.",
+      "source_revision": "f7af7a53fd03fbb9f8942a3318bf10fc6b67431b",
+      "compiled_source_revision": "18a4f70fba5dec23c76b1907bc57821b53c8070a",
+      "evidence": "docs/development/host-input-20261031.md",
+      "license": "GPL-3.0-or-later",
+      "rights": "Original ClasSICK product framebuffer only; no emulator chrome, desktop or reference-system pixels.",
+      "input": "synthetic",
+      "limitations": [
+        "Synthetic host input on one isolated VM; no human or physical hardware qualification.",
+        "No historical System 1 or paired-release qualification."
+      ]
+    },
+    {
+      "id": "2026-10-31-pc-host-only-drag-after",
+      "path": "docs/evidence/screenshots/2026-10-31/pc-host-only-drag-after.png",
+      "sha256": "8a0ba596e80ef207b821d5b8ea5028462762345c2f0c8964350890453f8674ae",
+      "bytes": 4876,
+      "width": 1024,
+      "height": 768,
+      "captured_on": "2026-10-31",
+      "target": "native-x86_64",
+      "caption": "PC window shifted right after host-only drag.",
+      "alt": "Monochrome ClasSICK scene with checkerboard window shifted right.",
+      "source_revision": "f7af7a53fd03fbb9f8942a3318bf10fc6b67431b",
+      "compiled_source_revision": "18a4f70fba5dec23c76b1907bc57821b53c8070a",
+      "evidence": "docs/development/host-input-20261031.md",
+      "license": "GPL-3.0-or-later",
+      "rights": "Original ClasSICK product framebuffer only; no emulator chrome, desktop or reference-system pixels.",
+      "input": "synthetic",
+      "limitations": [
+        "Synthetic host input on one isolated VM; no human or physical hardware qualification.",
+        "No historical System 1 or paired-release qualification."
+      ]
+    },
+    {
+      "id": "2026-10-31-pc-host-only-drag-release",
+      "path": "docs/evidence/screenshots/2026-10-31/pc-host-only-drag-release.png",
+      "sha256": "c2f90268e99318a19d037c5f67e9af1a59fc501510d7c183fe3014050e9ef7ba",
+      "bytes": 4877,
+      "width": 1024,
+      "height": 768,
+      "captured_on": "2026-10-31",
+      "target": "native-x86_64",
+      "caption": "PC window after release and further host-only movement.",
+      "alt": "Monochrome ClasSICK scene with window stationary and pointer moved.",
+      "source_revision": "f7af7a53fd03fbb9f8942a3318bf10fc6b67431b",
+      "compiled_source_revision": "18a4f70fba5dec23c76b1907bc57821b53c8070a",
+      "evidence": "docs/development/host-input-20261031.md",
+      "license": "GPL-3.0-or-later",
+      "rights": "Original ClasSICK product framebuffer only; no emulator chrome, desktop or reference-system pixels.",
+      "input": "synthetic",
+      "limitations": [
+        "Synthetic host input on one isolated VM; no human or physical hardware qualification.",
+        "No historical System 1 or paired-release qualification."
+      ]
     }
   ]
 }

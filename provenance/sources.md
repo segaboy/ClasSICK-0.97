@@ -5070,3 +5070,11 @@ Intel,Intel Quark SoC X1000 Core Developer Manual,October2013,order329679-001US,
 ## SRC-0588 - Experimental Mac collection
 
 2026-10-31; SPEC-0091, IMPL-0102, TEST-0135. Two isolated boots exposed an odd-address fault in the optional collector; a corrected build and experimental direction setting showed guarded host dragging in Snow. [Canonical evidence](../docs/development/mac-fast-collection-20261031.md). Human input, physical Mac direction and paired release remain unqualified.
+
+## SRC-0589 - PC host-only drag
+
+2026-10-31; SPEC-0090, IMPL-0103, TEST-0136. The original PC window was positioned, dragged and released using synthetic host input alone in an isolated VM. [Canonical evidence](../docs/development/host-input-20261031.md#host-only-drag-and-release). Human, physical and paired-release qualification remain open.
+
+## SRC-0590 - Repeat Mac host drag
+
+2026-10-31; SPEC-0091, TEST-0137. A second isolated Snow session using the original experimental fast/invert-3 ROM showed host-input drag and later pointer motion with the window stationary. [Canonical evidence](../docs/development/mac-fast-collection-20261031.md#repeat-host-input-observation). Human, physical and paired-release qualification remain open.

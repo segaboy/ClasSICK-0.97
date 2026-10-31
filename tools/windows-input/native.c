@@ -181,7 +181,7 @@ static const char *place_window(void) {
     /* Owned VBox window only: move, without activation/input, far enough to
        investigate whether the captured host cursor can remain in its client.
        Recheck the regular physical containment guard before any later input. */
-    if (!SetWindowPos(g_hwnd, NULL, -100, -100, 0, 0,
+    if (!SetWindowPos(g_hwnd, NULL, -100, -140, 0, 0,
         SWP_NOSIZE | SWP_NOZORDER | SWP_NOACTIVATE | SWP_NOSENDCHANGING)) {
       g_place_out = "SetWindowPos failed"; return "SetWindowPos";
     }

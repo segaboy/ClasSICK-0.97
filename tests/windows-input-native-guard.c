@@ -94,7 +94,7 @@ int main(void){int i,mode;
  reset();move_ok=0;C(place_window()&&moves==1&&inputs==0&&!strcmp(g_place_out,"MoveWindow failed"));
  reset();change_on_move=1;C(place_window()==NULL&&moves==1&&inputs==0);C(guard(NULL)==0&&!strcmp(g_why,"foreground")&&inputs==0);
  for(i=2;i<=6;i++){static const char*w[]={"","foreground","desktop","mapping","process","owner","window"};reset();change_on_move=i;C(place_window()&&moves==1&&inputs==0&&!strcmp(g_why,w[i]));}
- reset();g_place=2;C(place_window()==NULL&&moves==1&&mv_h==g_hwnd&&mv_x==-100&&mv_y==-100&&mv_w==0&&mv_hh==0&&inputs==0);
+ reset();g_place=2;C(place_window()==NULL&&moves==1&&mv_h==g_hwnd&&mv_x==-100&&mv_y==-140&&mv_w==0&&mv_hh==0&&inputs==0);
  C(mv_flags==(SWP_NOSIZE|SWP_NOZORDER|SWP_NOACTIVATE|SWP_NOSENDCHANGING));
  reset();g_place=2;held=1;C(place_window()&&moves==0&&inputs==0);
  reset();g_place=2;move_ok=0;C(place_window()&&moves==1&&inputs==0&&!strcmp(g_place_out,"SetWindowPos failed"));
