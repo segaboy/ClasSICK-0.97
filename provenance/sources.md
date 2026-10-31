@@ -5041,4 +5041,4 @@ Intel,Intel Quark SoC X1000 Core Developer Manual,October2013,order329679-001US,
 
 ## SRC-0581 - Mac fast-poll experiments
 
-2026-10-31; TEST-0128. Three isolated original-ROM faster-poll experiments retained first-loss reason 5. [Canonical evidence](../docs/development/mac-fast-poll-experiments-20261031.md). None is an adopted fix or release qualification.
+2026-10-31; TEST-0128. Four isolated original-ROM faster-poll experiments retained first-loss reason 5. [Canonical evidence](../docs/development/mac-fast-poll-experiments-20261031.md). None is an adopted fix or release qualification.
