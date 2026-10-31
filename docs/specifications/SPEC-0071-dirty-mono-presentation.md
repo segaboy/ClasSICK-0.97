@@ -1,5 +1,7 @@
 # SPEC-0071 - Bounded dirty Mono presentation
 
+The cursor geometry and pixel bound below are superseded by [SPEC-0089](SPEC-0089-window-cursor-visibility.md); the remaining contract is unchanged.
+
 2026-10-23; SRC-0405..0407 / ADR-0082 / IMPL-0073 / TEST-0086.
 
 Add cs_pc_mono_present_rects without changing the old full-frame API. Accept

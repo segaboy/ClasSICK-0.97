@@ -1,5 +1,7 @@
 # SPEC-0059 - PC native window boot binding
 
+The cursor geometry below is superseded by [SPEC-0089](SPEC-0089-window-cursor-visibility.md); the remaining contract is unchanged.
+
 Accepted behavioral contract2026-10-22;SRC-0346..0348;ADR-0068;TEST-0070.
 Independent platform engineering design,not historical Macintosh evidence.
 Contract only:unimplemented,no new headers,fixtures,feature tests,build or trial.

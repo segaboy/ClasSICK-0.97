@@ -70,10 +70,10 @@ int cs_mac_window_begin(cs_mac_window_session *session,uint8_t *canvas,
 
     cs_window_cursor_bits_init(&session->bits);
     session->art.bits = &session->bits;
-    session->art.width = 7u;
-    session->art.height = 7u;
-    session->art.hot_x = 3u;
-    session->art.hot_y = 3u;
+    session->art.width = CS_WINDOW_CURSOR_SIZE;
+    session->art.height = CS_WINDOW_CURSOR_SIZE;
+    session->art.hot_x = CS_WINDOW_CURSOR_HOT;
+    session->art.hot_y = CS_WINDOW_CURSOR_HOT;
 
     session->stage = CS_MAC_WINDOW_STAGE_CURSOR_INIT;
     cr = cs_cursor_init(&session->cursor);

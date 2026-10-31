@@ -1,5 +1,7 @@
 # SPEC-0070 - Mac RAM window-session bootstrap
 
+The cursor geometry below is superseded by [SPEC-0089](SPEC-0089-window-cursor-visibility.md); the remaining contract is unchanged.
+
 2026-10-23; SRC-0402/0403 / ADR-0081 / IMPL-0072 / TEST-0085.
 
 This composes the existing surface, cursor, window-input owner, capture helper, inbox and foreground coordinator APIs into one owned session over a borrowed canvas. It contains no hardware binding: no SCC/VIA/MMIO, no interrupt or CPU primitive, no ROM entry, no boot script, no driver and no physical mapping assumption. It does not clear the held hardware-review lane.

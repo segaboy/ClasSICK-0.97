@@ -145,13 +145,12 @@ static void test_start(void)
     CHECK(ses.owner.product.value == 97u && ses.owner.product.progress == 16u
         && ses.owner.product.phases == 6u && ses.owner.product.pixels == NULL);
     CHECK(ses.queue.capacity == 8u && ses.queue.storage == ses.records);
-    for (unsigned i = 0u; i < 32u; ++i) {
-        uint8_t bit = (uint8_t)((i & 1u) || i >= 14u ? 0u : i == 6u ? 0xFEu : 0x10u);
-        /* Frozen7x7 geometry:unchanged black plus,white one-pixel halo. */
-        uint8_t halo = (uint8_t)((i & 1u) || i >= 14u ? 0u :
-            (i >= 4u && i <= 8u) ? 0xFEu : 0x38u);
-        CHECK(ses.bits.mask[i] == halo && ses.bits.image[i] == bit);
-    }
+    /* Literal center and edge rows of the enlarged cross and its halo. */
+    CHECK(ses.bits.mask[0] == 0x03u && ses.bits.mask[1] == 0x80u);
+    CHECK(ses.bits.image[0] == 0x01u && ses.bits.image[1] == 0u);
+    CHECK(ses.bits.mask[14] == 0xFFu && ses.bits.mask[15] == 0xFEu);
+    CHECK(ses.bits.image[14] == 0xFFu && ses.bits.image[15] == 0xFEu);
+    CHECK(ses.bits.mask[30] == 0u && ses.bits.mask[31] == 0u);
 }
 
 static void test_clock_stop(void)
@@ -250,6 +249,21 @@ static void test_real_reports(void)
     CHECK(ses.owner.pointer.suppress == 1u && ses.owner.window.dragging == 0u);
     CHECK(ses.published_frames == before); /* Cancel changes no visible pixels. */
     frames += ses.published_frames - 1u;
+}
+static void test_corner_damage(void)
+{
+    ++cases; setup();
+    CHECK(start_session(&ses, &cfg) == CS_PWS_OK);
+    ses.bus.phase = CS_PS2_BUS_READY; ses.bus.result = CS_PS2_READY;
+    ses.bus.keyboard.phase = CS_PS2_PHASE_READY; ses.bus.keyboard.result = CS_PS2_READY;
+    real_bytes(0x21u, 0x08u, 0u, 0u, 3u);
+    /* The observed bytes are a valid complete packet if aligned; this is a
+       synthetic rendering regression, not a claim about their original origin. */
+    real_bytes(0x21u, 0x2Au, 0xFFu, 0x01u, 3u);
+    CHECK(ses.owner.pointer.x == 511 && ses.owner.pointer.y == 341);
+    real_bytes(0x21u, 0x38u, 0xFBu, 0xFDu, 3u);
+    CHECK(ses.owner.pointer.x == 506 && ses.owner.pointer.y == 341);
+    /* real_bytes independently compares every output pixel to the canvas. */
 }
 #endif
 
@@ -355,7 +369,7 @@ int cs_test_begin(cs_window_input *owner, cs_cursor_state *cursor, cs_cursor_tok
     CHECK(owner == &ses.owner && cursor == &ses.cursor && art == &ses.art && buttons == 0u);
     CHECK(cs_cursor_query(cursor, &info) == CS_CURSOR_OK && info.phase == CS_CURSOR_HIDDEN);
     CHECK(info.token.binding == token.binding && info.token.revision == token.revision);
-    CHECK(art->width == 7u && art->height == 7u && art->hot_x == 3u && art->hot_y == 3u && art->bits == &ses.bits);
+    CHECK(art->width == 15u && art->height == 15u && art->hot_x == 7u && art->hot_y == 7u && art->bits == &ses.bits);
     CHECK(w->x == 80 && w->y == 70 && w->width == 224 && w->height == 144 && w->title == 18);
     CHECK(p->value == 97u && p->inputs == 0u && p->progress == 16u && p->phases == 6u
         && p->success == 1u && p->pixels == NULL);
@@ -512,7 +526,7 @@ int main(void)
 #ifdef CS_PWS_FAULTS
     test_faults(); frames = F.frames;
 #else
-    test_real_reports();
+    test_real_reports(); test_corner_damage();
 #endif
     printf("TEST-0072 %s: cases=%u checks=%u frames=%u failures=%u session_bytes=%zu\n",
 #ifdef CS_PWS_FAULTS

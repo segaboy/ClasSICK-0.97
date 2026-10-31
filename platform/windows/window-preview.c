@@ -203,7 +203,8 @@ int cs_win_window_open(cs_win_window *w, int visible, uint32_t buttons)
     if (!w->frame || !w->scratch) goto bad;
     cs_window_cursor_bits_init(&w->bits);
     w->art.bits = &w->bits;
-    w->art.width = 7; w->art.height = 7; w->art.hot_x = 3; w->art.hot_y = 3;
+    w->art.width = CS_WINDOW_CURSOR_SIZE; w->art.height = CS_WINDOW_CURSOR_SIZE;
+    w->art.hot_x = CS_WINDOW_CURSOR_HOT; w->art.hot_y = CS_WINDOW_CURSOR_HOT;
     if (cs_surface_init(&w->surface, w->frame, 80u * 480u, 640, 480, 80,
             CS_SURFACE_MONO1_MSB) != CS_SURFACE_OK ||
         cs_cursor_init(&w->cursor) != CS_CURSOR_OK ||

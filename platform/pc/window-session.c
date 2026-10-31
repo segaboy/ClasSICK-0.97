@@ -18,10 +18,12 @@ static cs_rect pws_cursor_rect(int32_t x, int32_t y)
 {
     cs_rect r;
 
-    r.left = x < INT32_MIN + 3 ? INT32_MIN : x - 3;
-    r.top = y < INT32_MIN + 3 ? INT32_MIN : y - 3;
-    r.right = x > INT32_MAX - 4 ? INT32_MAX : x + 4;
-    r.bottom = y > INT32_MAX - 4 ? INT32_MAX : y + 4;
+    r.left = x < INT32_MIN + CS_WINDOW_CURSOR_HOT ? INT32_MIN : x - CS_WINDOW_CURSOR_HOT;
+    r.top = y < INT32_MIN + CS_WINDOW_CURSOR_HOT ? INT32_MIN : y - CS_WINDOW_CURSOR_HOT;
+    r.right = x > INT32_MAX - (CS_WINDOW_CURSOR_SIZE - CS_WINDOW_CURSOR_HOT)
+        ? INT32_MAX : x + (CS_WINDOW_CURSOR_SIZE - CS_WINDOW_CURSOR_HOT);
+    r.bottom = y > INT32_MAX - (CS_WINDOW_CURSOR_SIZE - CS_WINDOW_CURSOR_HOT)
+        ? INT32_MAX : y + (CS_WINDOW_CURSOR_SIZE - CS_WINDOW_CURSOR_HOT);
     return r;
 }
 
@@ -142,10 +144,10 @@ uint32_t cs_pc_window_session_start(cs_pc_window_session *s,
     s->presentation.cause = 0;
     cs_window_cursor_bits_init(&s->bits);
     s->art.bits = &s->bits;
-    s->art.width = 7u;
-    s->art.height = 7u;
-    s->art.hot_x = 3u;
-    s->art.hot_y = 3u;
+    s->art.width = CS_WINDOW_CURSOR_SIZE;
+    s->art.height = CS_WINDOW_CURSOR_SIZE;
+    s->art.hot_x = CS_WINDOW_CURSOR_HOT;
+    s->art.hot_y = CS_WINDOW_CURSOR_HOT;
     token.binding = 0u;
     token.revision = 0u;
     r = (int)cs_surface_init(&s->canvas, c->canvas, c->canvas_capacity,

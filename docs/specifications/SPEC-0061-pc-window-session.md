@@ -1,5 +1,7 @@
 # SPEC-0061 - Firmware-neutral PC window session
 
+The cursor geometry below is superseded by [SPEC-0089](SPEC-0089-window-cursor-visibility.md); the remaining contract is unchanged.
+
 2026-10-22;original engineering leaf of SPEC-0059, using SPEC-0055/0057/0058/0060.
 Native API: [window-session.h](../../platform/pc/window-session.h).
 No UEFI, boot binding, allocation, clock hardware, UART or persistent binary ABI.

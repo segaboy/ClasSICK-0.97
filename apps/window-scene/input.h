@@ -5,7 +5,8 @@
 #include "scene.h"
 #include "../../core/input/mouse.h"
 
-/* Original7x7 black plus with a white halo;hotspot3,3.
+enum { CS_WINDOW_CURSOR_SIZE = 15, CS_WINDOW_CURSOR_HOT = 7 };
+/* Original 15x15 black plus with a white halo; hotspot 7,7.
  * Truthful caller-owned bits object;NULL leaves everything unchanged.
  * Header-local keeps fault-object/native import ABIs unchanged. */
 static inline void cs_window_cursor_bits_init(cs_cursor_bits *bits)
@@ -15,10 +16,12 @@ static inline void cs_window_cursor_bits_init(cs_cursor_bits *bits)
         return;
     for (i = 0u; i < 32u; i++)
         bits->mask[i] = bits->image[i] = 0u;
-    /* Row bytes are MSB-first; the second byte of each 16-bit row stays 0. */
-    for (r = 0u; r < 7u; r++) {
-        bits->mask[2u * r] = (r >= 2u && r <= 4u) ? 0xFEu : 0x38u;
-        bits->image[2u * r] = (r == 3u) ? 0xFEu : 0x10u;
+    /* Two MSB-first bytes per row; the sixteenth column remains clear. */
+    for (r = 0u; r < 15u; r++) {
+        bits->mask[2u * r] = (r >= 6u && r <= 8u) ? 0xFFu : 0x03u;
+        bits->mask[2u * r + 1u] = (r >= 6u && r <= 8u) ? 0xFEu : 0x80u;
+        bits->image[2u * r] = (r == 7u) ? 0xFFu : 0x01u;
+        bits->image[2u * r + 1u] = (r == 7u) ? 0xFEu : 0u;
     }
 }
 

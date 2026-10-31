@@ -1,5 +1,7 @@
 # SPEC-0056 - Original Windows hosted window preview
 
+The cursor geometry below is superseded by [SPEC-0089](SPEC-0089-window-cursor-visibility.md); the remaining contract is unchanged.
+
 Accepted2026-10-21;SRC-0332..0335;ADR-0064.
 Separate classick_window_preview executable;existing surface-demo unchanged.
 Shared native C owner,window,cursor,product backdrop and counter remain unchanged.

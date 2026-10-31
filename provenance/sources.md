@@ -5058,3 +5058,7 @@ Intel,Intel Quark SoC X1000 Core Developer Manual,October2013,order329679-001US,
 ## SRC-0585 - Native input timeline observations
 
 2026-10-31; IMPL-0099, TEST-0132. Original diagnostic timelines recorded unstable Mac signal samples and a PC virtual-device control. [Canonical evidence](../docs/development/input-timelines-20261031.md). Host mouse dragging and release qualification remain open.
+
+## SRC-0586 - Paired cursor visibility
+
+2026-10-31; SPEC-0089, IMPL-0100, TEST-0133. Original larger cursor and PC dirty-bound changes, with hosted checks and isolated candidate observations. [Canonical evidence](../docs/development/cursor-visibility-20261031.md). Host mouse and paired release remain unqualified.
