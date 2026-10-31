@@ -5054,3 +5054,7 @@ Intel,Intel Quark SoC X1000 Core Developer Manual,October2013,order329679-001US,
 ## SRC-0584 - Unattended host mouse checks
 
 2026-10-31; TEST-0131. Isolated Mac and PC host-input checks did not qualify mouse movement or dragging; the PC guard sent no movement, and a separate virtual-device control moved the pointer. [Canonical evidence](../docs/development/unattended-host-mouse-20261031.md). No human, physical-hardware or release pass.
+
+## SRC-0585 - Native input timeline observations
+
+2026-10-31; IMPL-0099, TEST-0132. Original diagnostic timelines recorded unstable Mac signal samples and a PC virtual-device control. [Canonical evidence](../docs/development/input-timelines-20261031.md). Host mouse dragging and release qualification remain open.

@@ -1,0 +1,16 @@
+{
+  "format": "MTL1",
+  "source": "Manually transcribed from the paused original diagnostic's memory viewer; not an independent memory dump",
+  "rom_sha256": "dbab7e3a60f5bb6f0432a17256db4a9ee7e327250452562812b70ea309d2b0b1",
+  "count": 6,
+  "overflow": "nonzero; exact value not independently transcribed",
+  "entries": [
+    {"service": "0000119F", "rr3": "00000000", "snapshots": ["00B74444", "00B74444", "00B74444"], "previous": "01000000", "inbox_phase": 3, "result": 0},
+    {"service": "000011A1", "rr3": "00000000", "snapshots": ["00BF4444", "00BF4444", "00BF4444"], "previous": "01000001", "inbox_phase": 3, "result": 0},
+    {"service": "00001725", "rr3": "00000008", "snapshots": ["00BF4C44", "00AF4444", "00AF4444"], "previous": "01000000", "inbox_phase": 3, "result": 3},
+    {"service": "00001744", "rr3": "00000008", "snapshots": ["00FF4C44", "00EF4444", "00AF4444"], "previous": "01000000", "inbox_phase": 3, "result": 3},
+    {"service": "00001765", "rr3": "00000008", "snapshots": ["00FF4C44", "00EF4444", "00AF4444"], "previous": "01000000", "inbox_phase": 3, "result": 3},
+    {"service": "00001784", "rr3": "00000008", "snapshots": ["00FF4C44", "00AF4444", "00EF4444"], "previous": "01000000", "inbox_phase": 3, "result": 3}
+  ],
+  "limits": "Service counts are not timestamps. GUI setup and pause may contribute. Overflow means later events were not retained. This diagnostic adds interrupt work."
+}

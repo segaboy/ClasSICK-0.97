@@ -3,7 +3,7 @@
 [CmdletBinding()]
 param([Parameter(Mandatory=$true)][string]$BuildRoot,
     [ValidateSet('none','ud','gp')][string]$FaultProbe='none',[switch]$SelectedDrawing,[switch]$OutlineDrawing,[switch]$WindowDrawing,[switch]$WindowInputProbe,
-    [ValidateSet('loss','motion','motion-later','raw-motion','raw-motion-later','raw-report-later','raw-sequence','raw-sequence-first')][string]$WindowInputProbeMode='loss')
+    [ValidateSet('loss','motion','motion-later','raw-motion','raw-motion-later','raw-report-later','raw-sequence','raw-sequence-first','timeline')][string]$WindowInputProbeMode='loss')
 Set-StrictMode -Version Latest
 $ErrorActionPreference='Stop'
 if(([int][bool]$SelectedDrawing+[int][bool]$OutlineDrawing+[int][bool]$WindowDrawing) -gt 1){throw 'Select only one drawing profile.'}
@@ -69,8 +69,9 @@ try {
         $allowedImports[[Array]::IndexOf($sources,'apps/window-scene/input.c')]='memcpy,cs_surface_init,cs_cursor_query,cs_cursor_hide,cs_pointer_begin,cs_pointer_sample_apply,cs_pointer_cancel,cs_mouse_button_begin,cs_mouse_button_sample,cs_window_begin,cs_window_apply,cs_window_scene_compose'
     }
     if($WindowInputProbe) {
-        $sources+=@('platform/pc/input-probe.c','platform/pc/x64/input-probe-halt.S')
-        $allowedImports[[Array]::IndexOf($sources,'platform/pc/input-probe.c')]='cs_pc_input_probe_halt'
+        $probeSource=if($WindowInputProbeMode -eq 'timeline'){'platform/pc/input-timeline.c'}else{'platform/pc/input-probe.c'}
+        $sources+=@($probeSource,'platform/pc/x64/input-probe-halt.S')
+        $allowedImports[[Array]::IndexOf($sources,$probeSource)]='cs_pc_input_probe_halt'
         $allowedImports[[Array]::IndexOf($sources,'platform/pc/x64/input-probe-halt.S')]=''
     }
     $common=@('-m64','-Wall','-Wextra','-Wpedantic','-Werror','-Wconversion','-Wsign-conversion',
@@ -96,6 +97,7 @@ try {
                     if($WindowInputProbe -and $WindowInputProbeMode -eq 'raw-report-later'){$profileFlags+='-DCLASSICK_PC_INPUT_PROBE_REPORT=1'}
                     if($WindowInputProbe -and $WindowInputProbeMode -in @('raw-sequence','raw-sequence-first')){$profileFlags+='-DCLASSICK_PC_INPUT_PROBE_SEQUENCE=1'}
                     if($WindowInputProbe -and $WindowInputProbeMode -eq 'raw-sequence-first'){$profileFlags+='-DCLASSICK_PC_INPUT_SEQUENCE_LENGTH=3'}
+                    if($WindowInputProbe -and $WindowInputProbeMode -eq 'timeline'){$profileFlags+='-DCLASSICK_PC_INPUT_TIMELINE=1'}
                     if($sources[$i] -eq 'platform/uefi/keyboard.c'){$profileFlags=@('-DCLASSICK_PC_MOUSE=1')}
                     if($SelectedDrawing -or $OutlineDrawing){$profileFlags+='-DCLASSICK_SELECTED_DRAWING=1'}
                     if($OutlineDrawing){$profileFlags+='-DCLASSICK_OUTLINE_DRAWING=1'}
@@ -131,7 +133,8 @@ try {
                 foreach($name in @('cs_native_window_loop','cs_pc_window_session_start','cs_pc_window_session_poll','cs_window_input_sample','cs_pc_mono_present','cs_pc_mono_present_rects')){if($mapText -notmatch ('\b'+$name+'\b')){throw 'Disconnected window profile.'}}
             }
             if($WindowInputProbe){
-                foreach($name in @('cs_pc_input_probe_observe','cs_pc_input_probe_halt','cs_pc_input_probe_spin')){
+                $probeObserver=if($WindowInputProbeMode -eq 'timeline'){'cs_pc_input_timeline_observe'}else{'cs_pc_input_probe_observe'}
+                foreach($name in @($probeObserver,'cs_pc_input_probe_halt','cs_pc_input_probe_spin')){
                     if($mapText -notmatch ('\b'+$name+'\b')){throw 'Disconnected input probe.'}
                 }
             }
@@ -242,7 +245,8 @@ try {
         $componentControls+=,@([Array]::IndexOf($sources,'apps/window-scene/input.c'),'window-owner','cs_window_input_')
     }
     if($WindowInputProbe){
-        $componentControls+=,@([Array]::IndexOf($sources,'platform/pc/input-probe.c'),'input-probe','cs_pc_input_probe_observe')
+        $probeObserver=if($WindowInputProbeMode -eq 'timeline'){'cs_pc_input_timeline_observe'}else{'cs_pc_input_probe_observe'}
+        $componentControls+=,@([Array]::IndexOf($sources,$probeSource),'input-probe',$probeObserver)
         $componentControls+=,@([Array]::IndexOf($sources,'platform/pc/x64/input-probe-halt.S'),'input-probe-halt','cs_pc_input_probe_halt')
     }
     foreach($control in $componentControls) {
@@ -257,7 +261,7 @@ try {
     $payload=Join-Path $BuildRoot 'payload/EFI/BOOT'; [void][IO.Directory]::CreateDirectory($payload)
     $packaged=Join-Path $payload 'BOOTX64.EFI'; Copy-Item -LiteralPath $release -Destination $packaged
     if((Get-FileHash -LiteralPath $packaged -Algorithm SHA256).Hash.ToLowerInvariant() -ne $results[1].sha256){throw 'EFI payload copy differs.'}
-    [ordered]@{diagnostic_specification=$(if($WindowInputProbeMode -in @('raw-sequence','raw-sequence-first')){'SPEC-0085'}else{$null});input_sequence_bytes=$(if($WindowInputProbeMode -eq 'raw-sequence'){48}elseif($WindowInputProbeMode -eq 'raw-sequence-first'){3}else{0});fault_probe=$FaultProbe;window_input_probe=[bool]$WindowInputProbe;window_input_probe_mode=$(if($WindowInputProbe){$WindowInputProbeMode}else{'none'});missing_input_probe_controls=(2*[int][bool]$WindowInputProbe);window_drawing=[bool]$WindowDrawing;window_trace_version=$(if($WindowDrawing){1}else{0});window_trace_offset=$(if($WindowDrawing){2048}else{0});missing_window_controls=(9*[int][bool]$WindowDrawing);outline_drawing=[bool]$OutlineDrawing;continuous_preview=([bool]$OutlineDrawing -or [bool]$WindowDrawing);missing_outline_controls=(3*[int][bool]$OutlineDrawing);selected_drawing=[bool]$SelectedDrawing;missing_selected_workload_controls=[int][bool]$SelectedDrawing;missing_selected_core_controls=[int][bool]$SelectedDrawing;images=$results;image_rejections=$mutations.Count;profile_rejections=[int]($FaultProbe -ne 'none');missing_transition_controls=1;missing_exceptions_controls=1;missing_presenter_controls=1;missing_acpi_controls=1;
+    [ordered]@{diagnostic_specification=$(if($WindowInputProbeMode -in @('raw-sequence','raw-sequence-first')){'SPEC-0085'}elseif($WindowInputProbeMode -eq 'timeline'){'SPEC-0088'}else{$null});input_sequence_bytes=$(if($WindowInputProbeMode -eq 'raw-sequence'){48}elseif($WindowInputProbeMode -eq 'raw-sequence-first'){3}else{0});fault_probe=$FaultProbe;window_input_probe=[bool]$WindowInputProbe;window_input_probe_mode=$(if($WindowInputProbe){$WindowInputProbeMode}else{'none'});missing_input_probe_controls=(2*[int][bool]$WindowInputProbe);window_drawing=[bool]$WindowDrawing;window_trace_version=$(if($WindowDrawing){1}else{0});window_trace_offset=$(if($WindowDrawing){2048}else{0});missing_window_controls=(9*[int][bool]$WindowDrawing);outline_drawing=[bool]$OutlineDrawing;continuous_preview=([bool]$OutlineDrawing -or [bool]$WindowDrawing);missing_outline_controls=(3*[int][bool]$OutlineDrawing);selected_drawing=[bool]$SelectedDrawing;missing_selected_workload_controls=[int][bool]$SelectedDrawing;missing_selected_core_controls=[int][bool]$SelectedDrawing;images=$results;image_rejections=$mutations.Count;profile_rejections=[int]($FaultProbe -ne 'none');missing_transition_controls=1;missing_exceptions_controls=1;missing_presenter_controls=1;missing_acpi_controls=1;
         missing_ps2_controls=1;missing_keyboard_controls=1;missing_input_controls=1;missing_byte_io_controls=1;
         missing_uart_controls=1;missing_native_uart_controls=([int](-not $WindowDrawing));missing_service_controls=1;missing_service_probe_controls=1;
         missing_m68k_controls=1;missing_aline_probe_controls=([int](-not $WindowDrawing));missing_native_drawing_controls=1;missing_mouse_button_controls=1;missing_mouse_packet_controls=1;missing_mouse_bus_controls=1;missing_drawing_view_controls=1;drawing_context_specification='SPEC-0041';pc_mouse_profile=1;keyboard_trace_version=$(if($WindowDrawing){0}else{2});

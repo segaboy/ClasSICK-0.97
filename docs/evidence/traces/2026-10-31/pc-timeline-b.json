@@ -1,0 +1,45 @@
+{
+  "magic": "CSPTIM01",
+  "count": 3,
+  "gaps": 0,
+  "unreliable": false,
+  "ready_baseline": true,
+  "stop_reason": "drained-marker",
+  "pointer": [
+    251,
+    174
+  ],
+  "entries": [
+    {
+      "byte": 56,
+      "used_before": 0,
+      "used_after": 1,
+      "delivery_kind": 0,
+      "error_changed": 0,
+      "session_phase": 1,
+      "owner_phase": 1,
+      "owner_stage": 4
+    },
+    {
+      "byte": 251,
+      "used_before": 1,
+      "used_after": 2,
+      "delivery_kind": 0,
+      "error_changed": 0,
+      "session_phase": 1,
+      "owner_phase": 1,
+      "owner_stage": 4
+    },
+    {
+      "byte": 253,
+      "used_before": 2,
+      "used_after": 0,
+      "delivery_kind": 1,
+      "error_changed": 0,
+      "session_phase": 1,
+      "owner_phase": 1,
+      "owner_stage": 4
+    }
+  ],
+  "scope": "Observed decoder state only; neither stream alignment nor host delivery is proven."
+}

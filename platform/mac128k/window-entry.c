@@ -164,15 +164,26 @@ _Static_assert(offsetof(cs_mac_activity,pairs)==12 &&
 #define native_motion_stop() cs_mac_timer_poll_stop(&timer_motion)
 _Static_assert(sizeof(timer_motion)+sizeof(struct cs_mac_window_trace)<=448,"Timer experiment BSS budget");
 #else
+#if CLASSICK_MAC_MOTION_TIMELINE
+/* Named own-RAM symbol permits locating the diagnostic without a memory scan. */
+struct cs_mac_motion cs_mac_timeline_motion;
+volatile uint32_t cs_mac_timeline_address;
+#define motion cs_mac_timeline_motion
+#else
 static struct cs_mac_motion motion;
+#endif
 #define native_motion_prepare(scc,via) cs_mac_motion_prepare(&motion,scc,&session.inbox,(uint32_t)CLASSICK_MAC_DCD_INVERT)
 #define native_motion_arm() cs_mac_motion_arm(&motion)
 #define native_motion_service() cs_mac_motion_service(&motion)
 #define native_motion_stop() cs_mac_motion_stop(&motion)
 #endif
 static volatile uint32_t terminal;
-_Static_assert(sizeof(struct cs_mac_motion)+sizeof(struct cs_mac_window_trace)<=320,
+_Static_assert(sizeof(struct cs_mac_motion)+sizeof(struct cs_mac_window_trace)<=
+    (CLASSICK_MAC_MOTION_TIMELINE?544u:320u),
     "Window entry BSS budget");
+#if CLASSICK_MAC_MOTION_TIMELINE && CLASSICK_MAC_TIMER_POLL_PROBE
+#error Motion timeline requires the interrupt-based motion driver
+#endif
 
 __attribute__((noreturn)) static void halt(uint32_t code)
 {
@@ -279,6 +290,9 @@ void cs_mac_window_interrupt(uint32_t source)
     (void)vbl; /* T1 controller checks IFR6;empty IRQ never creates baseline. */
 #endif
     r=native_motion_service(); /* one finite pass;profile chooses RR3 or T1. */
+#if CLASSICK_MAC_MOTION_TIMELINE
+    cs_mac_motion_timeline_commit(&motion,r);
+#endif
     if(r==CS_MAC_MOTION_ARGUMENT || r==CS_MAC_MOTION_STATE || r==CS_MAC_MOTION_FAULT)
         isr_fatal(15,r);
 }
@@ -377,6 +391,9 @@ void cs_mac_main(void)
 #endif
     r=native_motion_prepare(&mio,&io);
     if(r!=CS_MAC_MOTION_OK){cs_mac_trace.cause=r;halt(12);}
+#if CLASSICK_MAC_MOTION_TIMELINE
+    cs_mac_timeline_address=(uint32_t)(uintptr_t)&motion.timeline;
+#endif
 #if CLASSICK_MAC_TIMER_RECOVERY_PROBE
     if(cs_mac_activity_window_begin(&cs_mac_activity_gate)!=0)halt(18);
 #endif

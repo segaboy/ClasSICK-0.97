@@ -357,13 +357,21 @@ uint32_t cs_native_window_loop(const cs_uefi_handoff *h, uint32_t ready,
         w.ticks = timer.ticks;
         if (r != (uint32_t)CS_PMTIMER_OK) {
             (void)cs_pc_window_session_poll(s, timer.ticks, 0u);
+#if defined(CLASSICK_PC_INPUT_TIMELINE) && CLASSICK_PC_INPUT_TIMELINE
+            /* This separate diagnostic must see the failed poll once. */
+            if (b->observer) (void)b->observer(b->context, trace, s);
+#endif
             return uwin_finish(trace, &w, CS_UWIN_FAULT, CS_UWIN_CLOCK, CS_UWIN_CLOCK_MODULE, r);
         }
         r = cs_pc_window_session_poll(s, timer.ticks, 1u);
         w.current = s->stage == (uint32_t)CS_PWS_PUBLISH ? 1u : 0u;
-        if (r != (uint32_t)CS_PWS_OK)
+        if (r != (uint32_t)CS_PWS_OK) {
+#if defined(CLASSICK_PC_INPUT_TIMELINE) && CLASSICK_PC_INPUT_TIMELINE
+            if (b->observer) (void)b->observer(b->context, trace, s);
+#endif
             return uwin_finish(trace, &w, CS_UWIN_FAULT,
                 r == (uint32_t)CS_PWS_CLOCK ? (uint32_t)CS_UWIN_CLOCK : (uint32_t)CS_UWIN_SESSION,
                 r == (uint32_t)CS_PWS_CLOCK ? (uint32_t)CS_UWIN_CLOCK_MODULE : (uint32_t)CS_UWIN_SESSION_MODULE, r);
+        }
     }
 }

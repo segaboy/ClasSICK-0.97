@@ -148,7 +148,7 @@ jobs:
       - name: Build opt-in PC byte-sequence diagnostics (unbooted)
         shell: pwsh
         run: |
-          foreach ($mode in @('raw-sequence','raw-sequence-first')) {
+          foreach ($mode in @('raw-sequence','raw-sequence-first','timeline')) {
             $root = Join-Path 'build/pc-byte-sequence' $mode
             .\scripts\Verify-UEFIImage.ps1 -BuildRoot $root -WindowDrawing -WindowInputProbe -WindowInputProbeMode $mode
             .\scripts\Package-WindowPC.ps1 -BuildRoot $root -InputProbe -MediaWriter build\media-verification\clang-hosted\debug-a\classick_boot_media.exe -TwinWriter build\media-verification\gcc-i686\classick_boot_media.exe
@@ -446,6 +446,17 @@ jobs:
         run: |
           python3 scripts/Build-LoadedAppROM.py --window-drawing --window-phase-idle-probe --tool-root "$RUNNER_TEMP/classick-m68k/root" --output "$RUNNER_TEMP/classick-window-phase-idle"
           python3 scripts/Build-LoadedAppROM.py --window-drawing --window-phase-idle-probe --window-pending-defer-probe --tool-root "$RUNNER_TEMP/classick-m68k/root" --output "$RUNNER_TEMP/classick-window-phase-idle-defer"
+      - name: Build opt-in Mac motion timeline (unbooted)
+        run: python3 scripts/Build-LoadedAppROM.py --window-drawing --window-motion-timeline --tool-root "$RUNNER_TEMP/classick-m68k/root" --output "$RUNNER_TEMP/classick-window-motion-timeline"
+      - name: Retain Mac motion timeline diagnostic
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
+        with:
+          name: classick-window-motion-timeline-mac
+          path: |
+            ${{ runner.temp }}/classick-window-motion-timeline/manifest.json
+            ${{ runner.temp }}/classick-window-motion-timeline/Os-a/classick-loaded-app.rom
+            ${{ runner.temp }}/classick-window-motion-timeline/Os-a/classick-loaded-app.map
+          if-no-files-found: error
       - name: Retain phase-only no-decision experiments (unbooted)
         uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
         with:

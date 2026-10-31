@@ -1,0 +1,14 @@
+{
+  "magic": "CSPTIM01",
+  "count": 0,
+  "gaps": 0,
+  "unreliable": false,
+  "ready_baseline": true,
+  "stop_reason": "drained-marker",
+  "pointer": [
+    256,
+    171
+  ],
+  "entries": [],
+  "scope": "Observed decoder state only; neither stream alignment nor host delivery is proven."
+}

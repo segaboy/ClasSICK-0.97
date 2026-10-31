@@ -82,6 +82,7 @@ def main():
     p.add_argument('--window-timer-divisor',type=int,choices=(1,4,16),default=1,help='Experimental programmed reload divisor;nondefault requires recovery and refresh')
     p.add_argument('--window-timer-phase-witness',action='store_true',help='SPEC-0084 retained decoder-phase witness;requires live pair divisor4')
     p.add_argument('--window-phase-idle-probe',action='store_true',help='Experimental phase-only no-decision pass; window profile only')
+    p.add_argument('--window-motion-timeline',action='store_true',help='Observation-only bounded SCC input timeline; interrupt window profile only')
     p.add_argument('--dcd-invert',type=int,choices=(0,1,2,3),default=0,help='Unverified raw RR0 DCD sense mask; window profile only')
     a=p.parse_args()
     if a.window_timer_poll_probe and not a.window_drawing:p.error('--window-timer-poll-probe requires --window-drawing')
@@ -105,6 +106,7 @@ def main():
     if a.window_first_input_probe and a.window_idle_probe:p.error('Choose one diagnostic profile')
     if a.window_phase_idle_probe and not a.window_drawing:p.error('--window-phase-idle-probe requires --window-drawing')
     if a.window_phase_idle_probe and (a.window_idle_probe or a.window_first_input_probe):p.error('Phase-idle probe is separate from checkpoint profiles')
+    if a.window_motion_timeline and (not a.window_drawing or a.window_timer_poll_probe or a.window_idle_probe or a.window_first_input_probe or a.window_pending_defer_probe or a.window_phase_idle_probe):p.error('Motion timeline requires the normal interrupt window profile and no other probe')
     repo=Path(__file__).resolve().parents[1];tools=Path(a.tool_root).resolve();out=Path(a.output).resolve()
     out.mkdir(parents=True,exist_ok=False);sys.dont_write_bytecode=True
     spec=spec_from_file_location('base_rom',repo/'scripts/Build-MacROM.py');h=module_from_spec(spec);spec.loader.exec_module(h)
@@ -145,6 +147,7 @@ def main():
         if a.window_timer_pair_probe:numbers+=('0081',)
         if a.window_timer_live_pair:numbers+=('0083',)
         if a.window_timer_phase_witness:numbers+=('0084',)
+        if a.window_motion_timeline:numbers+=('0088',)
         for number in numbers:
             found=sorted(repo.glob('docs/specifications/SPEC-'+number+'-*.md'))
             if len(found)!=1:raise ValueError('Specification lookup SPEC-'+number)
@@ -171,6 +174,7 @@ def main():
         if a.window_timer_phase_witness:profile='native-window-timer-live-pair-divisor4-phase-witness-v1';specification='SPEC-0084'
         if a.window_timer_divisor!=1:profile=profile.replace('checkpoint-v1','divisor'+str(a.window_timer_divisor)+'-checkpoint-v1')
         if a.window_phase_idle_probe:profile='native-window-phase-idle-'+('pending-defer-' if a.window_pending_defer_probe else '')+'probe-v1'
+        if a.window_motion_timeline:profile='native-window-motion-timeline-v1';specification='SPEC-0088'
     profiles=[]
     for twin in ('a','b'):
         folder=out/('Os-'+twin);folder.mkdir();objects=[]
@@ -194,6 +198,7 @@ def main():
         if a.window_first_input_probe:flags+=['-DCLASSICK_MAC_FIRST_INPUT_PROBE=1']
         if a.window_pending_defer_probe:flags+=['-DCLASSICK_MAC_PENDING_DEFER_PROBE=1']
         if a.window_phase_idle_probe:flags+=['-DCLASSICK_MAC_PHASE_IDLE_PROBE=1']
+        if a.window_motion_timeline:flags+=['-DCLASSICK_MAC_MOTION_TIMELINE=1']
         for i,source in enumerate(sources):
             obj=folder/f'{i}.o';objects.append(obj);h.run([cc,*flags,'-c',repo/source,'-o',obj],env)
             if source not in ('platform/mac128k/loaded-entry.c','platform/mac128k/drawing-entry.c','platform/mac128k/native-drawing-entry.c','platform/mac128k/window-entry.c'):
@@ -220,6 +225,8 @@ def main():
         elif 'cs_mac_native_pair' in syms:raise ValueError('Native pair in another profile')
         if a.window_timer_live_pair and any(n.startswith(('cs_mac_activity','cs_mac_window_idle','cs_mac_first_input_probe')) for n in syms):raise ValueError('Checkpoint symbol in live pair profile')
         if a.window_first_input_probe:required+=('cs_mac_first_input_probe_gate',)
+        if a.window_motion_timeline:required+=('cs_mac_motion_timeline_commit','cs_mac_timeline_motion','cs_mac_timeline_address')
+        elif 'cs_mac_motion_timeline_commit' in syms:raise ValueError('Motion timeline in another profile')
         if a.window_drawing and not any(name.startswith('cs_cursor_') for name in syms):raise ValueError('Disconnected cursor helper')
         if any(name not in syms for name in required):raise ValueError('Disconnected demonstration')
         cpu_callbacks=('cs_m68k_foreground_enter','cs_m68k_foreground_leave') if a.window_drawing else ()
@@ -262,6 +269,10 @@ def main():
                 rows.append({'name':name,'source':source,'bytes':len(expected),'exact_opcodes_verified':True})
             audit_register_checkpoint(image,syms,(a.window_idle_probe and not a.window_timer_activity_probe) or a.window_first_input_probe)
             audit_activity_checkpoint(image,syms,a.window_timer_activity_probe)
+            if a.window_motion_timeline:
+                motion_addr=syms['cs_mac_timeline_motion']; pointer_addr=syms['cs_mac_timeline_address']
+                if motion_addr%2 or not 0xB00<=motion_addr<syms['__bss_end']:raise ValueError('Timeline motion own-RAM bounds')
+                if pointer_addr%2 or not 0xB00<=pointer_addr<=syms['__bss_end']-4:raise ValueError('Timeline pointer own-RAM bounds')
             if a.window_timer_activity_probe:
                 activity=syms['cs_mac_activity_trace']
                 if activity%4 or not 0x400<=activity<=0x2100-80:raise ValueError('Activity record own-RAM bounds')
@@ -364,6 +375,7 @@ def main():
     if a.window_timer_refresh_probe:manifest['timer_refresh_experiment']=True
     if a.window_timer_live_pair:manifest['timer_live_pair']={'live':True,'checkpoint':False,'halts_after_observation':False,'motion_claimed':False,'physical_timing_qualified':False,'programmed_reload_divisor':a.window_timer_divisor,'new_MMIO_operations':0}
     if a.window_timer_phase_witness:manifest['phase_witness']={'specification':'SPEC-0084','trace_version':3,'trace_bytes':128,'no_added_state_bytes':True,'no_added_MMIO':True}
+    if a.window_motion_timeline:manifest['motion_timeline']={'version':1,'capacity':6,'entry_bytes':32,'new_MMIO':False,'interrupt_timing_perturbed':True,'pointer_symbol':'cs_mac_timeline_address','motion_symbol':'cs_mac_timeline_motion'}
     if a.window_drawing:manifest['window_idle_probe']=bool(a.window_idle_probe)
     if a.window_drawing:manifest['window_pending_defer_probe']=bool(a.window_pending_defer_probe)
     if a.window_drawing:manifest['window_phase_idle_probe']=bool(a.window_phase_idle_probe)

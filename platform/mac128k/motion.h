@@ -27,6 +27,16 @@
 #error CLASSICK_MAC_PHASE_IDLE_PROBE must be 0 or 1
 #endif
 
+/* Observation-only bounded diagnostic; excluded from normal images. */
+#ifndef CLASSICK_MAC_MOTION_TIMELINE
+#define CLASSICK_MAC_MOTION_TIMELINE 0
+#endif
+#if (CLASSICK_MAC_MOTION_TIMELINE+0)!=0 && (CLASSICK_MAC_MOTION_TIMELINE+0)!=1
+#error CLASSICK_MAC_MOTION_TIMELINE must be 0 or 1
+#endif
+_Static_assert(CLASSICK_MAC_MOTION_TIMELINE==0 || CLASSICK_MAC_MOTION_TIMELINE==1,
+    "Motion timeline must be numeric 0 or 1");
+
 /* Opt-in experiment (SPEC-0081); default 0 keeps the IO layout unchanged. */
 #ifndef CLASSICK_MAC_TIMER_PAIR_PROBE
 #define CLASSICK_MAC_TIMER_PAIR_PROBE 0
@@ -74,6 +84,20 @@ struct cs_mac_motion_loss {
 };
 _Static_assert(sizeof(struct cs_mac_motion_loss)==28,"Loss record size");
 
+#if CLASSICK_MAC_MOTION_TIMELINE
+/* Input snapshots only: no timestamps or inference about unseen transitions.
+ * result is UINT32_MAX until the native caller commits the service result. */
+enum { CS_MAC_TIMELINE_CAPACITY=6 };
+struct cs_mac_timeline_entry {
+    uint32_t service, rr3, snapshots[3], previous, inbox_phase, result;
+};
+struct cs_mac_timeline {
+    uint32_t magic, count, pending, overflow;
+    struct cs_mac_timeline_entry entries[CS_MAC_TIMELINE_CAPACITY];
+};
+#define CS_MAC_TIMELINE_MAGIC UINT32_C(0x4D544C31)
+#endif
+
 struct cs_mac_motion {
     cs_mac_motion_io io;          /* copied */
     cs_window_inbox *inbox;       /* borrowed */
@@ -82,6 +106,9 @@ struct cs_mac_motion {
     int32_t cause;
     uint32_t services, samples, baselines, losses, peak_queued; /* saturate */
     struct cs_mac_motion_loss first_loss;
+#if CLASSICK_MAC_MOTION_TIMELINE
+    struct cs_mac_timeline timeline;
+#endif
 #if CLASSICK_MAC_PENDING_DEFER_PROBE
     uint32_t defer_pending;       /* 0, or expected RR3 (A=8/B=1) */
     uint32_t defer_snapshot;      /* masked PB/RR0 endpoint */
@@ -94,5 +121,11 @@ int cs_mac_motion_arm(struct cs_mac_motion *m);
 int cs_mac_motion_service(struct cs_mac_motion *m);
 int cs_mac_motion_stop(struct cs_mac_motion *m);
 
-_Static_assert(sizeof(struct cs_mac_motion)<=192,"Bounded motion controller");
+#if CLASSICK_MAC_MOTION_TIMELINE
+/* Call immediately after the serialized service returns; no IO or delivery. */
+void cs_mac_motion_timeline_commit(struct cs_mac_motion *m, int result);
+#endif
+
+_Static_assert(sizeof(struct cs_mac_motion)<=(CLASSICK_MAC_MOTION_TIMELINE?416u:192u),
+    "Bounded motion controller");
 #endif

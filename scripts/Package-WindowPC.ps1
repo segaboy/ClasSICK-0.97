@@ -14,7 +14,7 @@ if([bool]$InputProbe -ne [bool]$isProbe){throw 'Input-probe media requires its e
 $probeMode=if($null -ne $proof.PSObject.Properties['window_input_probe_mode']){
     [string]$proof.window_input_probe_mode
 }elseif($isProbe){'loss'}else{'none'}
-if($probeMode -notin @('none','loss','motion','motion-later','raw-motion','raw-motion-later','raw-report-later','raw-sequence','raw-sequence-first') -or ($isProbe -eq ($probeMode -eq 'none'))){throw 'Invalid probe mode metadata.'}
+if($probeMode -notin @('none','loss','motion','motion-later','raw-motion','raw-motion-later','raw-report-later','raw-sequence','raw-sequence-first','timeline') -or ($isProbe -eq ($probeMode -eq 'none'))){throw 'Invalid probe mode metadata.'}
 $efi=Join-Path $BuildRoot 'payload/EFI/BOOT/BOOTX64.EFI'
 $hash=(Get-FileHash -LiteralPath $efi -Algorithm SHA256).Hash.ToLowerInvariant()
 if($hash -ne $proof.images[1].sha256){throw 'EFI payload differs from audited O2 candidate.'}
@@ -38,9 +38,16 @@ if($probeMode -in @('raw-sequence','raw-sequence-first')){
     $digest=[Security.Cryptography.SHA256]::Create().ComputeHash($bytes)
     $inputs[$path]=($digest | ForEach-Object {$_.ToString('x2')}) -join ''
 }
+if($probeMode -eq 'timeline'){
+    $path='docs/specifications/SPEC-0088-input-timelines.md'
+    $bytes=[Text.Encoding]::UTF8.GetBytes([IO.File]::ReadAllText((Join-Path $repo $path)).Replace("`r`n","`n"))
+    $digest=[Security.Cryptography.SHA256]::Create().ComputeHash($bytes)
+    $inputs[$path]=($digest | ForEach-Object {$_.ToString('x2')}) -join ''
+}
 $head=(& git -C $repo rev-parse HEAD).Trim()
 if($isProbe){
-    foreach($path in @('platform/pc/input-probe.c','platform/pc/input-probe.h','platform/pc/x64/input-probe-halt.S')){
+    $probePaths=if($probeMode -eq 'timeline'){@('platform/pc/input-timeline.c','platform/pc/input-timeline.h','platform/pc/input-probe.h','platform/pc/x64/input-probe-halt.S')}else{@('platform/pc/input-probe.c','platform/pc/input-probe.h','platform/pc/x64/input-probe-halt.S')}
+    foreach($path in $probePaths){
         $bytes=[Text.Encoding]::UTF8.GetBytes([IO.File]::ReadAllText((Join-Path $repo $path)).Replace("`r`n","`n"))
         $digest=[Security.Cryptography.SHA256]::Create().ComputeHash($bytes)
         $inputs[$path]=($digest | ForEach-Object {$_.ToString('x2')}) -join ''

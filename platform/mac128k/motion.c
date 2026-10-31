@@ -62,6 +62,46 @@ static uint32_t pack(const snap *s)
     return (uint32_t)s->pb << 16 | (uint32_t)s->a << 8 | s->b;
 }
 
+#if CLASSICK_MAC_MOTION_TIMELINE
+/* Record the actual sampled triples, not inferred transitions. The record is
+ * committed by the serialized native caller only after service returns. */
+static void timeline_record(struct cs_mac_motion *m, uint8_t rr3,
+    const snap *s1, const snap *s2, const snap *s3, uint32_t entry,
+    int stable, uint32_t ra, uint32_t rb, uint32_t buttons)
+{
+    struct cs_mac_timeline *t = &m->timeline;
+    struct cs_mac_timeline_entry *e;
+    if (!rr3 && stable && (!m->have_phase ||
+        (ra == m->last_raw_a && rb == m->last_raw_b && buttons == m->last_buttons)))
+        return;
+    if (t->count >= CS_MAC_TIMELINE_CAPACITY) {
+        t->overflow = sat(t->overflow);
+        return;
+    }
+    e = &t->entries[t->count];
+    e->service = m->services;
+    e->rr3 = rr3;
+    e->snapshots[0] = pack(s1); e->snapshots[1] = pack(s2); e->snapshots[2] = pack(s3);
+    e->previous = m->have_phase << 24 | m->last_raw_a << 16
+        | m->last_raw_b << 8 | m->last_buttons;
+    e->inbox_phase = entry;
+    e->result = UINT32_MAX;
+    ++t->count;
+    t->pending = t->count;
+}
+
+void cs_mac_motion_timeline_commit(struct cs_mac_motion *m, int result)
+{
+    struct cs_mac_timeline *t;
+    if (!m) return;
+    t = &m->timeline;
+    if (t->magic != CS_MAC_TIMELINE_MAGIC || t->pending == 0u ||
+        t->pending > t->count || t->pending > CS_MAC_TIMELINE_CAPACITY) return;
+    t->entries[t->pending - 1u].result = (uint32_t)result;
+    t->pending = 0u;
+}
+#endif
+
 #if CLASSICK_MAC_PENDING_DEFER_PROBE
 static uint32_t ep(const snap *s)
 {
@@ -137,6 +177,9 @@ int cs_mac_motion_prepare(struct cs_mac_motion *m, const cs_mac_motion_io *io,
         || inbox->epoch == 0u)
         return CS_MAC_MOTION_STATE;
     *m = zero;
+#if CLASSICK_MAC_MOTION_TIMELINE
+    m->timeline.magic = CS_MAC_TIMELINE_MAGIC;
+#endif
     m->io = *io;
     m->inbox = inbox;
     m->epoch = inbox->epoch;
@@ -208,6 +251,10 @@ int cs_mac_motion_service(struct cs_mac_motion *m)
 
     if (!m) return CS_MAC_MOTION_ARGUMENT;
     if (m->phase != CS_MAC_MOTION_ARMED) return CS_MAC_MOTION_STATE;
+#if CLASSICK_MAC_MOTION_TIMELINE
+    /* An omitted commit stays visibly unknown; never apply a later result. */
+    m->timeline.pending = 0u;
+#endif
     m->services = sat(m->services);
     in = m->inbox;
 
@@ -230,6 +277,9 @@ int cs_mac_motion_service(struct cs_mac_motion *m)
     ra = bit(s3.a, RR0_DCD);
     rb = bit(s3.b, RR0_DCD);
     buttons = (s3.pb & PB_BUTTON) ? 0u : (uint32_t)CS_POINTER_LEFT;
+#if CLASSICK_MAC_MOTION_TIMELINE
+    timeline_record(m, rr3, &s1, &s2, &s3, entry, stable, ra, rb, buttons);
+#endif
 
     switch (in->phase) {
     case CS_INBOX_LOSS:

@@ -25,6 +25,12 @@
 #if CLASSICK_WINDOW_INPUT_PROBE
 #include "../pc/input-probe.h"
 #endif
+#if defined(CLASSICK_PC_INPUT_TIMELINE) && CLASSICK_PC_INPUT_TIMELINE
+#if !CLASSICK_WINDOW_INPUT_PROBE || CLASSICK_PC_INPUT_PROBE_SEQUENCE
+#error "Input timeline requires the exclusive window input probe profile"
+#endif
+#include "../pc/input-timeline.h"
+#endif
 #if CLASSICK_WINDOW_DRAWING
 #if defined(CLASSICK_SELECTED_DRAWING) || defined(CLASSICK_OUTLINE_DRAWING)
 #error "Window drawing is a separate explicit profile"
@@ -91,12 +97,20 @@ void CS_EFIAPI cs_native_stop(cs_uefi_handoff *handoff)
     cs_native_window_binding binding;
     binding.devices=&devices; binding.keyboard=&keyboard;
     binding.physical=0; binding.size=UINT64_C(1)<<47; binding.base=0;
-#if CLASSICK_WINDOW_INPUT_PROBE
+#if defined(CLASSICK_PC_INPUT_TIMELINE) && CLASSICK_PC_INPUT_TIMELINE
+    binding.observer=cs_pc_input_timeline_observe;
+#elif CLASSICK_WINDOW_INPUT_PROBE
     binding.observer=cs_pc_input_probe_observe;
 #else
     binding.observer=NULL;
 #endif
     binding.context=NULL;
+#if defined(CLASSICK_PC_INPUT_TIMELINE) && CLASSICK_PC_INPUT_TIMELINE
+    /* Diagnostic object lives for the nonreturning window loop. */
+    cs_pc_input_timeline timeline;
+    (void)cs_pc_input_timeline_begin(&timeline);
+    binding.context=&timeline;
+#endif
 #if CLASSICK_WINDOW_INPUT_PROBE && CLASSICK_PC_INPUT_PROBE_SEQUENCE
     /* Lives for the nonreturning loop below; the observer is its only writer. */
     cs_pc_input_sequence sequence;
