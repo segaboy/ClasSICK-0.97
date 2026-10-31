@@ -267,13 +267,15 @@ int cs_mac_motion_service(struct cs_mac_motion *m)
 #if CLASSICK_MAC_FAST_COLLECT
     {
         uint8_t samples[10];
+        /* Keep byte loads separate: the 68000 faults on odd word accesses. */
+        const volatile uint8_t *observed = samples;
         m->io.collect(m->io.cookie, samples);
-        rr3 = samples[0];
+        rr3 = observed[0];
         if (rr3 & ~(RR3_EXT_A | RR3_EXT_B) & 0xFF)
             return fail(m, CS_MAC_STAGE_PENDING, CS_MAC_CAUSE_PENDING);
-        s1.pb=samples[1]; s1.a=samples[2]; s1.b=samples[3];
-        s2.pb=samples[4]; s2.a=samples[5]; s2.b=samples[6];
-        s3.pb=samples[7]; s3.a=samples[8]; s3.b=samples[9];
+        s1.pb=observed[1]; s1.a=observed[2]; s1.b=observed[3];
+        s2.pb=observed[4]; s2.a=observed[5]; s2.b=observed[6];
+        s3.pb=observed[7]; s3.a=observed[8]; s3.b=observed[9];
     }
     pend_a = bit(rr3, RR3_EXT_A);
     pend_b = bit(rr3, RR3_EXT_B);

@@ -2561,6 +2561,7 @@ endif()
 if(BUILD_TESTING)
     add_test(NAME mac-motion.fast-core COMMAND classick_mac_motion_fast_tests)
     add_test(NAME mac-motion.fast-order COMMAND classick_mac_motion_fast_order)
+    add_test(NAME mac-motion.fast-alignment-audit COMMAND ${Python3_EXECUTABLE} -B ${CMAKE_SOURCE_DIR}/tests/mac-fast-alignment.py)
 endif()
 
 # Optional observation-only SCC timeline, absent from the normal core.

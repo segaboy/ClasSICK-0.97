@@ -5,6 +5,18 @@ import argparse,hashlib,json,os,re,struct,sys
 from pathlib import Path
 from importlib.util import spec_from_file_location,module_from_spec
 
+def audit_fast_frame_alignment(listing):
+    """Reject statically odd frame-relative word/long accesses in the service.
+
+    This narrow compiler-output check is not a proof about dynamic addresses.
+    """
+    match=re.search(r'^\s*[0-9a-fA-F]+ <cs_mac_motion_service>:\s*$(.*?)(?=^\s*[0-9a-fA-F]+ <[^>]+>:\s*$|\Z)',listing,re.M|re.S)
+    if not match:raise ValueError('Fast service disassembly missing')
+    for line in match.group(1).splitlines():
+        if re.search(r'\b(?:move|movem|cmp|add|sub|and|or|eor|tst|clr|neg|not)[wl]\b',line):
+            for offset in re.findall(r'%fp@\((-?\d+)\)',line):
+                if int(offset)%2:raise ValueError('Odd frame word/long access in fast service')
+
 def audit_register_checkpoint(image,syms,enabled):
     """Exact original MWR1 leaf: mask, own-RAM loads, register data, spin."""
     entry=syms.get('cs_mac_window_idle_checkpoint')
@@ -323,6 +335,7 @@ def main():
             irq_audit=audit_window_code(b)
             listing=h.run([bins/'m68k-linux-gnu-objdump','-d',elf],env)
             (folder/'native-window-disassembly.txt').write_text(listing)
+            if a.window_fast_collect:audit_fast_frame_alignment(listing)
         for offset in (0,4,8,40,128,256,1024,65535):
             bad=bytearray(b);bad[offset]^=1
             try:audit(bad)

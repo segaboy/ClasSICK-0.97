@@ -5069,4 +5069,4 @@ Intel,Intel Quark SoC X1000 Core Developer Manual,October2013,order329679-001US,
 
 ## SRC-0588 - Experimental Mac collection
 
-2026-10-31; SPEC-0091, IMPL-0102, TEST-0135. Optional original interrupt collection has hosted tests and a native twin build; an isolated captured-input attempt was inconclusive. [Canonical evidence](../docs/development/mac-fast-collection-20261031.md). Mac host motion and paired release remain unqualified.
+2026-10-31; SPEC-0091, IMPL-0102, TEST-0135. Two isolated boots exposed an odd-address fault in the optional collector; a corrected twin build passed a narrow alignment audit and a 40-second idle observation. [Canonical evidence](../docs/development/mac-fast-collection-20261031.md). Mac host motion and paired release remain unqualified.

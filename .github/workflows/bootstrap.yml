@@ -259,6 +259,8 @@ jobs:
           if-no-files-found: error
       - name: Build native Mac window candidate twins (unbooted)
         run: python3 scripts/Build-LoadedAppROM.py --window-drawing --tool-root "$RUNNER_TEMP/classick-m68k/root" --output "$RUNNER_TEMP/classick-window-preview"
+      - name: Build experimental Mac input collector twins (unbooted)
+        run: python3 scripts/Build-LoadedAppROM.py --window-drawing --window-fast-collect --tool-root "$RUNNER_TEMP/classick-m68k/root" --output "$RUNNER_TEMP/classick-window-fast-collect"
       - name: Retain native Mac window candidate
         uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
         with:
