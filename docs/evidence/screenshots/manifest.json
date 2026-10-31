@@ -2024,6 +2024,73 @@
         "No pre-input trace isolates the single recorded delivery from other host actions.",
         "No physical Macintosh, System1 or release qualification."
       ]
+    },
+    {
+      "id": "2026-10-31-pc-device-corner-recovery",
+      "path": "docs/evidence/screenshots/2026-10-31/pc-device-recovery.png",
+      "sha256": "a6d0edcf0c5b86cf06d39c84389929276d75432caf124065bf0ca8ee05b38588",
+      "bytes": 4838,
+      "width": 1024,
+      "height": 768,
+      "captured_on": "2026-10-31",
+      "target": "native-x86_64",
+      "caption": "Original PC scene after a virtual-device movement following a GUI capture jump.",
+      "alt": "ClasSICK monochrome scene with a small pointer near the lower-right corner.",
+      "source_revision": "40690d0a660e94277bde07c9339a3d253828a953",
+      "compiled_source_revision": "3fab75ff8afdc09493684705dde94ebf5b8a1d9f",
+      "evidence": "docs/development/pc-corner-recovery-20261031.md",
+      "license": "GPL-3.0-or-later",
+      "rights": "Unmodified VirtualBox guest framebuffer of the original ClasSICK scene only; no desktop, emulator chrome, reference pixels or retouch.",
+      "input": "synthetic",
+      "limitations": [
+        "The final motion used the emulator device API (E2), not a physical mouse or a successful host GUI drag.",
+        "The GUI capture phase produced a corner jump; it did not qualify normal mouse movement.",
+        "No physical PC, complete System 1 or release qualification."
+      ]
+    },
+    {
+      "id": "2026-10-31-mac-after-device-drag",
+      "path": "docs/evidence/screenshots/2026-10-31/mac-after-device-drag.png",
+      "sha256": "34d0a4144c0cd8278db6c86db46eb4368521e433321d0605ee9c481b2902b064",
+      "bytes": 53475,
+      "width": 512,
+      "height": 342,
+      "captured_on": "2026-10-31",
+      "target": "native-mac68000",
+      "caption": "Original Mac scene after a generated device-level drag and release.",
+      "alt": "Monochrome ClasSICK scene with a checkerboard window moved to the right and a small cross in its title bar.",
+      "source_revision": "40690d0a660e94277bde07c9339a3d253828a953",
+      "compiled_source_revision": "6892de0f43b4409e5b0fd9160981d8e7c23d8938",
+      "evidence": "docs/development/mac-controlled-replay-20261031.md",
+      "license": "GPL-3.0-or-later",
+      "rights": "Unmodified Snow camera export of the original ClasSICK guest framebuffer only; no desktop, emulator chrome, reference pixels or retouch.",
+      "input": "synthetic",
+      "limitations": [
+        "Synthetic emulator replay, not captured host mouse or physical movement.",
+        "No physical Macintosh, complete System 1 or release qualification."
+      ]
+    },
+    {
+      "id": "2026-10-31-mac-after-device-release",
+      "path": "docs/evidence/screenshots/2026-10-31/mac-after-device-release.png",
+      "sha256": "9fcbcd4e53d9b2fd229db5d3e517e0d0114b5a44c56c3e448f87727a7fb66564",
+      "bytes": 53475,
+      "width": 512,
+      "height": 342,
+      "captured_on": "2026-10-31",
+      "target": "native-mac68000",
+      "caption": "Original Mac scene after additional generated movement following release.",
+      "alt": "Monochrome ClasSICK scene with a checkerboard window moved to the right and a small cross in its title bar.",
+      "source_revision": "40690d0a660e94277bde07c9339a3d253828a953",
+      "compiled_source_revision": "6892de0f43b4409e5b0fd9160981d8e7c23d8938",
+      "evidence": "docs/development/mac-controlled-replay-20261031.md",
+      "license": "GPL-3.0-or-later",
+      "rights": "Unmodified Snow camera export of the original ClasSICK guest framebuffer only; no desktop, emulator chrome, reference pixels or retouch.",
+      "input": "synthetic",
+      "limitations": [
+        "Synthetic emulator replay, not captured host mouse or physical movement.",
+        "No physical Macintosh, complete System 1 or release qualification."
+      ]
     }
   ]
 }

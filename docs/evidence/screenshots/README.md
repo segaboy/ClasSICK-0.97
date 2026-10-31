@@ -1,5 +1,9 @@
 # ClasSICK product screenshots
 
+Latest: [PC cursor after a virtual-device recovery from a capture jump](2026-10-31/pc-device-recovery.png) — [test and limitations](../../development/pc-corner-recovery-20261031.md).
+
+Latest: [Mac window after a synthetic drag](2026-10-31/mac-after-device-drag.png) and [after movement following release](2026-10-31/mac-after-device-release.png) — [test and limitations](../../development/mac-controlled-replay-20261031.md).
+
 Machine-readable discovery: [manifest.json](manifest.json). All PNGs below are unchanged captures of the project's own product framebuffer. Captions, source pins, dimensions, hashes, license and observation limits are in the manifest. No Apple or reference-system content, emulator chrome, desktop or credentials are included.
 
 | Capture | Target | Evidence |

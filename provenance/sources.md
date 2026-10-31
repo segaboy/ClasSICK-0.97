@@ -5042,3 +5042,11 @@ Intel,Intel Quark SoC X1000 Core Developer Manual,October2013,order329679-001US,
 ## SRC-0581 - Mac fast-poll experiments
 
 2026-10-31; TEST-0128. Four isolated original-ROM faster-poll experiments retained first-loss reason 5. [Canonical evidence](../docs/development/mac-fast-poll-experiments-20261031.md). None is an adopted fix or release qualification.
+
+## SRC-0582 - PC corner recovery control
+
+2026-10-31; TEST-0129. An isolated original PC scene reproduced the GUI corner jump and then responded to a separately identified virtual-device movement. [Canonical evidence](../docs/development/pc-corner-recovery-20261031.md). No host-mouse dragging or release pass.
+
+## SRC-0583 - Mac controlled input replay
+
+2026-10-31; TEST-0130. The same original small-X input data was selected in isolated timer-poll and interrupt-driven Mac sessions; their observed loss and delivery results differ. [Canonical evidence](../docs/development/mac-controlled-replay-20261031.md). No host-mouse drag or release pass.
