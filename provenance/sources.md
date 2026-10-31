@@ -5038,3 +5038,7 @@ Intel,Intel Quark SoC X1000 Core Developer Manual,October2013,order329679-001US,
 ## SRC-0580 - PC captured cursor context and click-only record
 
 2026-10-31; TEST-0127. Original isolated PC session compared read-only cursor context before and after capture; no-drag automated clicks coincided with the same three-byte record. [Canonical evidence](../docs/development/pc-sequence-evidence.json). No proven root cause or human/drag/release acceptance.
+
+## SRC-0581 - Mac fast-poll experiments
+
+2026-10-31; TEST-0128. Two isolated original-ROM timing experiments retained first-loss reason 5 at divisor 16. [Canonical evidence](../docs/development/mac-fast-poll-experiments-20261031.md). Neither candidate is an adopted fix or release qualification.
