@@ -39,7 +39,7 @@ typedef struct {
 static HANDLE g_proc, g_file;
 static const wih_target *g_t;
 static HWND g_hwnd;
-static int g_swap, g_physical_left, g_place;
+static int g_swap, g_physical_left, g_place, g_capture_inspect;
 static ULONGLONG g_t0;
 
 typedef struct { DWORD pid; int n; HWND h; } EW;
@@ -177,9 +177,33 @@ static const char *place_window(void) {
   if (!position_ok()) return g_why;
   if (((short)GetAsyncKeyState(VK_LBUTTON) | (short)GetAsyncKeyState(VK_RBUTTON)) < 0)
     return "button held";
-  if (!MoveWindow(g_hwnd, 100, 100, 1024, 854, TRUE)) { g_place_out = "MoveWindow failed"; return "MoveWindow"; }
+  if (g_place == 2) {
+    /* Owned VBox window only: move, without activation/input, far enough to
+       investigate whether the captured host cursor can remain in its client.
+       Recheck the regular physical containment guard before any later input. */
+    if (!SetWindowPos(g_hwnd, NULL, -100, -100, 0, 0,
+        SWP_NOSIZE | SWP_NOZORDER | SWP_NOACTIVATE | SWP_NOSENDCHANGING)) {
+      g_place_out = "SetWindowPos failed"; return "SetWindowPos";
+    }
+  } else if (!MoveWindow(g_hwnd, 100, 100, 1024, 854, TRUE)) {
+    g_place_out = "MoveWindow failed"; return "MoveWindow";
+  }
   g_place_out = "moved";
   if (!position_ok()) { g_place_out = "moved; recheck failed"; return g_why; }
+  if (g_place == 2) {
+    RECT rc; POINT origin = {0,0}, probe = {2,2}; HWND hit; int origin_owned;
+    if (!GetClientRect(g_hwnd, &rc) || !ClientToScreen(g_hwnd, &origin)) {
+      g_place_out = "moved; geometry unavailable"; return "client geometry";
+    }
+    printf("{\"placement_client_screen\":[%ld,%ld,%ld,%ld]}\n",
+      (long)origin.x,(long)origin.y,(long)(rc.right-rc.left),(long)(rc.bottom-rc.top));
+    hit = WindowFromPoint(probe);
+    origin_owned = hit && GetAncestor(hit, GA_ROOT) == g_hwnd &&
+      ScreenToClient(g_hwnd, &probe) && probe.x >= rc.left && probe.x < rc.right &&
+      probe.y >= rc.top && probe.y < rc.bottom;
+    printf("{\"observed_origin_2_2_owned_client\":%s}\n",origin_owned ? "true" : "false");
+    if (!position_ok()) { g_place_out = "moved; recheck failed"; return g_why; }
+  }
   return NULL;
 }
 
@@ -218,6 +242,18 @@ static int send_ev(void *c, int dx, int dy, int b) {
 
 static unsigned long long now_ms(void *c) { (void)c; return GetTickCount64(); }
 static void sleep_ms(void *c, unsigned ms) { (void)c; Sleep(ms); }
+static const char *mode_name(void) {
+  return g_place == 2 ? "place-capture-origin" : g_place ? "place-window" :
+    g_capture_inspect ? "inspect-capture" : "input";
+}
+
+/* Read-only status: capture metadata is never an input authorization. */
+static const char *inspect_capture(void) {
+  if (!base_ok()) return g_why;
+  memset(&g_cap, 0, sizeof g_cap);
+  WH_CAPTURE_QUERY((void *)g_hwnd, (unsigned long)g_t->pid, &g_cap);
+  return base_ok() ? NULL : g_why;
+}
 
 static const char *preflight(void) {
   static wchar_t img[32768];
@@ -257,7 +293,7 @@ static void receipt(int live, const wh_result *r) {
          "\"delivered\":%u,\"cleanup_tried\":%u,\"release_owed\":%d,"
          "\"capture_verified\":%s,\"capture_stage\":\"%s\",\"capture_hresult\":%ld,"
          "\"guest_accepted\":false}\n",
-         live ? "true" : "false", g_place ? "place-window" : "input", g_place_out,
+         live ? "true" : "false", mode_name(), g_place_out,
          g_physical_left ? "physical-left" : "primary",
          wh_status_name(r->state), r->reason, g_why,
          (unsigned long)fp, (unsigned long)(g_t ? g_t->pid : 0),
@@ -282,6 +318,8 @@ int main(int argc, char **argv) {
     if (!strcmp(argv[i], "--live") && !live) live = 1;
     else if (!strcmp(argv[i], "--physical-left") && !g_physical_left) g_physical_left = 1;
     else if (!strcmp(argv[i], "--place-window") && !g_place) g_place = 1;
+    else if (!strcmp(argv[i], "--place-capture-origin") && !g_place) g_place = 2;
+    else if (!strcmp(argv[i], "--inspect-capture") && !g_capture_inspect) g_capture_inspect = 1;
     else if (!strcmp(argv[i], "--target") && !tn && i + 1 < argc) tn = argv[++i];
     else if (!strcmp(argv[i], "--plan") && !pf && i + 1 < argc) pf = argv[++i];
     else return refuse("arguments");
@@ -289,6 +327,7 @@ int main(int argc, char **argv) {
   if (!tn || !pf) return refuse("missing flag");
   ti = !strcmp(tn, "snow") ? 0 : !strcmp(tn, "vbox") ? 1 : -1;
   if (ti < 0) return refuse("unknown target");
+  if (g_place == 2 && ti != 1) return refuse("origin placement requires vbox");
   if (wcscmp(wih_targets[0].role, L"snow") || wcscmp(wih_targets[1].role, L"vbox"))
     return refuse("target header roles");
   g_t = &wih_targets[ti];
@@ -299,11 +338,12 @@ int main(int argc, char **argv) {
   fclose(f);
   st = wh_parse(buf, n, &pl);
   if (st) { fprintf(stderr, "refused: plan %s\n", wh_status_name(st)); return 2; }
-  if (g_place && !place_plan_ok(&pl)) return refuse("placement plan");
+  if (g_place && g_capture_inspect) return refuse("incompatible modes");
+  if ((g_place || g_capture_inspect) && !place_plan_ok(&pl)) return refuse("inspection/placement plan");
   be.ctx = NULL; be.now_ms = now_ms; be.sleep_ms = sleep_ms; be.guard = guard; be.send = send_ev;
   if (!live) {
     wh_run(&pl, &be, 1, &r);
-    printf("{\"live\":false,\"valid\":true,\"mode\":\"%s\",\"placement\":\"not attempted\",\"button_mode\":\"%s\",\"rows\":%u,\"total_ms\":%u,\"plan\":[", g_place ? "place-window" : "input", g_physical_left ? "physical-left" : "primary", pl.count, pl.total_ms);
+    printf("{\"live\":false,\"valid\":true,\"mode\":\"%s\",\"placement\":\"not attempted\",\"button_mode\":\"%s\",\"rows\":%u,\"total_ms\":%u,\"plan\":[", mode_name(), g_physical_left ? "physical-left" : "primary", pl.count, pl.total_ms);
     for (i = 0; i < (int)pl.count; i++)
       printf("%s[%d,%d,%u,\"%c\"]", i ? "," : "", pl.rows[i].dx, pl.rows[i].dy,
              pl.rows[i].delay, pl.rows[i].button);
@@ -320,6 +360,12 @@ int main(int argc, char **argv) {
   } else {
     g_t0 = GetTickCount64();
     if (g_place) { r.state = WH_OK; r.reason = "window positioned"; st = 0; }
+    else if (g_capture_inspect) {
+      why = inspect_capture();
+      r.state = why ? WH_E_TARGET : WH_OK;
+      r.reason = why ? why : "capture inspected";
+      st = why ? 3 : 0;
+    }
     else st = wh_run(&pl, &be, 0, &r);
     receipt(1, &r);
   }

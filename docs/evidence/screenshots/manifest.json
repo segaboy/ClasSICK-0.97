@@ -2136,6 +2136,75 @@
         "One final image does not independently establish each event or post-release behavior.",
         "No physical PC, complete System 1 or release qualification."
       ]
+    },
+    {
+      "id": "2026-10-31-pc-host-before",
+      "path": "docs/evidence/screenshots/2026-10-31/pc-host-before.png",
+      "sha256": "53e8e4bf48a10af7546961b67b5544f06ae8dca00bbfd0a5bccff5695c9594a0",
+      "bytes": 4853,
+      "width": 1024,
+      "height": 768,
+      "captured_on": "2026-10-31",
+      "target": "native-x86_64",
+      "caption": "PC window before guarded host drag; pointer positioned by virtual-device input.",
+      "alt": "Monochrome ClasSICK scene with pointer on the window title bar.",
+      "source_revision": "c839a88e9aedffa420582f457e383c76f52b6473",
+      "compiled_source_revision": "18a4f70fba5dec23c76b1907bc57821b53c8070a",
+      "evidence": "docs/development/host-input-20261031.md",
+      "license": "GPL-3.0-or-later",
+      "rights": "Original ClasSICK product framebuffer only; no emulator chrome, desktop or reference-system pixels.",
+      "input": "synthetic",
+      "limitations": [
+        "Pointer positioned using virtual-device input before the host gesture.",
+        "Synthetic input on one isolated VM; no human or physical hardware qualification.",
+        "No historical System 1 or paired-release qualification."
+      ]
+    },
+    {
+      "id": "2026-10-31-pc-host-drag",
+      "path": "docs/evidence/screenshots/2026-10-31/pc-host-drag.png",
+      "sha256": "1626863ed5dd0dae4846aaba5a48e8c8f9afb55865085d79c020c903873d3833",
+      "bytes": 4862,
+      "width": 1024,
+      "height": 768,
+      "captured_on": "2026-10-31",
+      "target": "native-x86_64",
+      "caption": "PC window after guarded synthetic host drag.",
+      "alt": "Monochrome ClasSICK scene with the checkerboard window shifted right.",
+      "source_revision": "c839a88e9aedffa420582f457e383c76f52b6473",
+      "compiled_source_revision": "18a4f70fba5dec23c76b1907bc57821b53c8070a",
+      "evidence": "docs/development/host-input-20261031.md",
+      "license": "GPL-3.0-or-later",
+      "rights": "Original ClasSICK product framebuffer only; no emulator chrome, desktop or reference-system pixels.",
+      "input": "synthetic",
+      "limitations": [
+        "Pointer positioned using virtual-device input before the host gesture.",
+        "Synthetic input on one isolated VM; no human or physical hardware qualification.",
+        "No historical System 1 or paired-release qualification."
+      ]
+    },
+    {
+      "id": "2026-10-31-pc-host-release",
+      "path": "docs/evidence/screenshots/2026-10-31/pc-host-release.png",
+      "sha256": "edceac62ff3ed14fe361e97ccfef586822ab1737710a68281b2b925615d91981",
+      "bytes": 4864,
+      "width": 1024,
+      "height": 768,
+      "captured_on": "2026-10-31",
+      "target": "native-x86_64",
+      "caption": "PC window after release and further guarded host motion.",
+      "alt": "Monochrome ClasSICK scene with the window remaining in place and pointer moved.",
+      "source_revision": "c839a88e9aedffa420582f457e383c76f52b6473",
+      "compiled_source_revision": "18a4f70fba5dec23c76b1907bc57821b53c8070a",
+      "evidence": "docs/development/host-input-20261031.md",
+      "license": "GPL-3.0-or-later",
+      "rights": "Original ClasSICK product framebuffer only; no emulator chrome, desktop or reference-system pixels.",
+      "input": "synthetic",
+      "limitations": [
+        "Pointer positioned using virtual-device input before the host gesture.",
+        "Synthetic input on one isolated VM; no human or physical hardware qualification.",
+        "No historical System 1 or paired-release qualification."
+      ]
     }
   ]
 }

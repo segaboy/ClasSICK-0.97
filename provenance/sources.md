@@ -5062,3 +5062,7 @@ Intel,Intel Quark SoC X1000 Core Developer Manual,October2013,order329679-001US,
 ## SRC-0586 - Paired cursor visibility
 
 2026-10-31; SPEC-0089, IMPL-0100, TEST-0133. Original larger cursor and PC dirty-bound changes, with hosted checks and isolated candidate observations. [Canonical evidence](../docs/development/cursor-visibility-20261031.md). Host mouse and paired release remain unqualified.
+
+## SRC-0587 - Guarded PC host input
+
+2026-10-31; SPEC-0090, IMPL-0101, TEST-0134. A guarded synthetic host drag and release moved the original PC window after virtual-device pointer setup. [Canonical evidence](../docs/development/host-input-20261031.md). Human input, Mac host motion and paired release remain unqualified.

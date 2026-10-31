@@ -39,6 +39,16 @@ interacting with that app. It never requests foreground, calls SendInput or runs
 the plan;receipts report `mode` and `placement`. Normal input still requires
 foreground and physical client/root containment. No host setting is changed.
 
+`--place-capture-origin` is a separate positioning-only VBox experiment. It
+accepts only the same zero-motion plan, verifies the same bound process and
+window, moves that window to (-100,-100) without changing its size or activating
+it, and reports its client geometry and whether the previously observed screen
+point (2,2) lies in the owned client. A successful move or point observation
+never authorizes later input; each later event still uses the normal guard.
+`--inspect-capture` is a separate read-only zero-plan mode which reports the
+existing owned-window capture indicator and rechecks base guards. It sends no
+input, does not change capture, and never substitutes for physical containment.
+
 An outside-Git target header may define `WH_TARGET_WINDOW` as the exact native
 window ID returned for the owned guest canvas. Enumeration still checks PID,
 visibility and nonzero client size;all input guards still apply. This separates

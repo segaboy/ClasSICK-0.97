@@ -21,6 +21,8 @@ static BOOL WINAPI close_fake(HDESK h){(void)h;return TRUE;}
 static BOOL WINAPI cursor_fake(LPPOINT p){p->x=p->y=10;return TRUE;}
 static HWND WINAPI point_fake(POINT p){(void)p;return (HWND)(UINT_PTR)(point_inside?1:3);}
 static BOOL WINAPI client_fake(HWND h,LPPOINT p){(void)h;(void)p;return TRUE;}
+static int geometry_ok=1;
+static BOOL WINAPI to_screen_fake(HWND h,LPPOINT p){(void)h;p->x=-92;p->y=-61;return geometry_ok;}
 static BOOL WINAPI rect_fake(HWND h,LPRECT p){(void)h;p->left=p->top=0;p->right=p->bottom=100;return TRUE;}
 static UINT WINAPI send_fake(UINT n,LPINPUT p,int size){(void)n;(void)size;last_input=*p;inputs++;return 0;}
 static void capture_fake(void*h,unsigned long p,wh_capture*out){(void)h;(void)p;queries++;out->verified=captured;out->stage="fixture";out->hr=0;if(change_after_query==1)foreground=0;if(change_after_query==2)running=0;if(change_after_query==3)owner=0;if(change_after_query==4)swap=0;if(change_after_query==5)default_desktop=0;}
@@ -38,12 +40,15 @@ static void capture_fake(void*h,unsigned long p,wh_capture*out){(void)h;(void)p;
 #define GetCursorPos cursor_fake
 #define WindowFromPoint point_fake
 #define ScreenToClient client_fake
+#define ClientToScreen to_screen_fake
 #define GetClientRect rect_fake
 #define SendInput send_fake
-static int moves,held,move_ok=1,change_on_move,mv_x,mv_y,mv_w,mv_hh,mv_r;static HWND mv_h;
+static int moves,held,move_ok=1,change_on_move,mv_x,mv_y,mv_w,mv_hh,mv_r;static HWND mv_h;static UINT mv_flags;
 static BOOL WINAPI move_fake(HWND h,int x,int y,int w,int hh,BOOL r){moves++;mv_h=h;mv_x=x;mv_y=y;mv_w=w;mv_hh=hh;mv_r=r;if(!move_ok)return FALSE;if(change_on_move==1)foreground=0;if(change_on_move==2)default_desktop=0;if(change_on_move==3)swap=0;if(change_on_move==4)running=0;if(change_on_move==5)owner=0;if(change_on_move==6)visible=0;return TRUE;}
+static BOOL WINAPI pos_fake(HWND h,HWND after,int x,int y,int w,int hh,UINT flags){(void)after;mv_flags=flags;return move_fake(h,x,y,w,hh,FALSE);}
 static SHORT WINAPI async_fake(int k){return ((held==1&&k==VK_LBUTTON)||(held==2&&k==VK_RBUTTON))?(SHORT)0x8000:0;}
 #define MoveWindow move_fake
+#define SetWindowPos pos_fake
 #define GetAsyncKeyState async_fake
 #define WH_CAPTURE_QUERY(h,p,o) capture_fake(h,p,o)
 #define WH_TARGET_WINDOW ((UINT_PTR)1)
@@ -52,7 +57,7 @@ static SHORT WINAPI async_fake(int k){return ((held==1&&k==VK_LBUTTON)||(held==2
 #undef main
 static unsigned checks,failures;
 #define C(x) do{checks++;if(!(x)){failures++;printf("FAIL %u line %d\n",checks,__LINE__);}}while(0)
-static void reset(void){static const wih_target t={L"vbox",L"",{0},7,42};g_t=&t;g_hwnd=(HWND)(UINT_PTR)1;g_proc=(HANDLE)(UINT_PTR)1;g_swap=1;running=visible=foreground=owner=default_desktop=swap=point_inside=1;captured=queries=change_after_query=inputs=0;moves=held=change_on_move=0;move_ok=1;g_place_out="not attempted";}
+static void reset(void){static const wih_target t={L"vbox",L"",{0},7,42};g_t=&t;g_hwnd=(HWND)(UINT_PTR)1;g_proc=(HANDLE)(UINT_PTR)1;g_swap=1;g_place=g_capture_inspect=0;running=visible=foreground=owner=default_desktop=swap=point_inside=1;captured=queries=change_after_query=inputs=0;moves=held=change_on_move=0;mv_flags=0;move_ok=geometry_ok=1;g_place_out="not attempted";}
 int main(void){int i,mode;
  {EW e;reset();e.pid=7;e.n=0;e.h=NULL;C(ew((HWND)(UINT_PTR)2,(LPARAM)&e)&&e.n==0);C(ew((HWND)(UINT_PTR)1,(LPARAM)&e)&&e.n==1&&e.h==(HWND)(UINT_PTR)1);owner=0;e.n=0;C(ew((HWND)(UINT_PTR)1,(LPARAM)&e)&&e.n==0);owner=1;visible=0;C(ew((HWND)(UINT_PTR)1,(LPARAM)&e)&&e.n==0);}
  reset();C(guard(NULL)==1);C(queries==0&&inputs==0&&!g_cap.verified);
@@ -89,7 +94,17 @@ int main(void){int i,mode;
  reset();move_ok=0;C(place_window()&&moves==1&&inputs==0&&!strcmp(g_place_out,"MoveWindow failed"));
  reset();change_on_move=1;C(place_window()==NULL&&moves==1&&inputs==0);C(guard(NULL)==0&&!strcmp(g_why,"foreground")&&inputs==0);
  for(i=2;i<=6;i++){static const char*w[]={"","foreground","desktop","mapping","process","owner","window"};reset();change_on_move=i;C(place_window()&&moves==1&&inputs==0&&!strcmp(g_why,w[i]));}
+ reset();g_place=2;C(place_window()==NULL&&moves==1&&mv_h==g_hwnd&&mv_x==-100&&mv_y==-100&&mv_w==0&&mv_hh==0&&inputs==0);
+ C(mv_flags==(SWP_NOSIZE|SWP_NOZORDER|SWP_NOACTIVATE|SWP_NOSENDCHANGING));
+ reset();g_place=2;held=1;C(place_window()&&moves==0&&inputs==0);
+ reset();g_place=2;move_ok=0;C(place_window()&&moves==1&&inputs==0&&!strcmp(g_place_out,"SetWindowPos failed"));
+ reset();g_place=2;geometry_ok=0;C(place_window()&&moves==1&&inputs==0&&!strcmp(g_place_out,"moved; geometry unavailable"));
+ for(i=2;i<=6;i++){reset();g_place=2;change_on_move=i;C(place_window()&&moves==1&&inputs==0);}
+ reset();g_place=2;point_inside=0;C(place_window()==NULL&&guard(NULL)==0&&!strcmp(g_why,"client area")&&inputs==0);
+ reset();captured=1;C(inspect_capture()==NULL&&queries==1&&g_cap.verified&&inputs==0);
+ for(i=1;i<=5;i++){reset();captured=1;change_after_query=i;C(inspect_capture()!=NULL&&queries==1&&inputs==0);}
  {wh_plan p;memset(&p,0,sizeof p);p.count=1;p.rows[0].button='N';p.rows[0].delay=10;C(place_plan_ok(&p));p.rows[0].button='D';C(!place_plan_ok(&p));p.rows[0].button='U';C(!place_plan_ok(&p));p.rows[0].button='N';p.rows[0].dx=1;C(!place_plan_ok(&p));p.rows[0].dx=0;p.rows[0].dy=-1;C(!place_plan_ok(&p));p.rows[0].dy=0;p.count=2;C(!place_plan_ok(&p));}
  {char *a1[]={"helper","--place-window","--place-window"};char *a2[]={"helper","--place-window"};g_place=0;C(native_cli_not_called(3,a1)==2);g_place=0;C(native_cli_not_called(2,a2)==2);g_place=0;}
+ {char *a1[]={"helper","--place-capture-origin","--place-window"};char *a2[]={"helper","--place-capture-origin","--target","snow","--plan","unused"};reset();C(native_cli_not_called(3,a1)==2);reset();C(native_cli_not_called(6,a2)==2);C(moves==0&&inputs==0);}
  printf("native guard %u checks, %u failures;zero native input\n",checks,failures);return failures?1:0;
 }

@@ -76,3 +76,5 @@ See [storage and publication policy](../../development/screenshot-evidence.md). 
 - [2026-10-30 native phase-witness observation](2026-10-30/README.md):new boot capture reuses byte-identical registered pixels;new trace provenance is recorded separately.
 
 [2026-10-30 Mac user-directed jitter observation](2026-10-30/mac-user-jitter.png) — [trace and test limits](../../development/mac-human-witness-20261030.md); no drag or release qualification.
+
+[2026-10-31 PC guarded host drag](../../development/host-input-20261031.md): before, after drag and after release. Pointer positioning used a separate virtual-device control; no human qualification is claimed.
