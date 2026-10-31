@@ -264,22 +264,7 @@ void cs_mac_native_pair(void *cookie,uint8_t out[6])
 }
 #endif
 #if CLASSICK_MAC_FAST_COLLECT
-/* Experimental batch retains the ordinary service IO order and spacing. */
-void cs_mac_native_collect(void *cookie,uint8_t out[10])
-{
-    uint8_t r=scc_read(cookie,CS_MAC_SCC_A,3u);
-    out[0]=r;
-    if(r&0xF6u)return;
-    out[1]=motion_pb(cookie); out[2]=scc_read(cookie,CS_MAC_SCC_A,0u);
-    out[3]=scc_read(cookie,CS_MAC_SCC_B,0u);
-    out[4]=motion_pb(cookie); out[5]=scc_read(cookie,CS_MAC_SCC_A,0u);
-    out[6]=scc_read(cookie,CS_MAC_SCC_B,0u);
-    if(r&0x08u)scc_write(cookie,CS_MAC_SCC_A,0u,0x10u);
-    if(r&0x01u)scc_write(cookie,CS_MAC_SCC_B,0u,0x10u);
-    scc_write(cookie,CS_MAC_SCC_A,0u,0x38u);
-    out[7]=motion_pb(cookie); out[8]=scc_read(cookie,CS_MAC_SCC_A,0u);
-    out[9]=scc_read(cookie,CS_MAC_SCC_B,0u);
-}
+#include "fast-collect.inc"
 #endif
 static void saturate(volatile uint32_t *v)
 {

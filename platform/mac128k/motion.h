@@ -54,6 +54,9 @@ _Static_assert(CLASSICK_MAC_MOTION_TIMELINE==0 || CLASSICK_MAC_MOTION_TIMELINE==
 #endif
 
 enum { CS_MAC_SCC_A = 0, CS_MAC_SCC_B = 1 };
+/* Shared by the motion core and the native collection path. */
+enum { CS_MAC_SCC_EXT_A = 0x08, CS_MAC_SCC_EXT_B = 0x01,
+       CS_MAC_SCC_RESET_EXT = 0x10, CS_MAC_SCC_RESET_IUS = 0x38 };
 
 typedef struct {
     void *cookie;

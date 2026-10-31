@@ -69,7 +69,7 @@ WINDOW_SOURCES=('arch/m68k/loaded-reset.S','arch/m68k/runtime.c','arch/m68k/comp
  'platform/mac128k/motion.c','core/graphics/surface.c','core/graphics/cursor.c','core/input/pointer.c','core/input/mouse.c',
  'core/ui/window.c','apps/product-scene/scene.c','apps/window-scene/scene.c','apps/window-scene/input.c',
  'apps/window-scene/capture.c','apps/window-scene/inbox.c','apps/window-scene/foreground.c')
-WINDOW_HEADERS=('arch/m68k/loaded-rom.ld','arch/m68k/runtime.h','arch/m68k/exclusion.h','platform/mac128k/rom.h',
+WINDOW_HEADERS=('arch/m68k/loaded-rom.ld','arch/m68k/runtime.h','arch/m68k/exclusion.h','platform/mac128k/rom.h','platform/mac128k/fast-collect.inc',
  'platform/mac128k/window-session.h','platform/mac128k/motion.h','platform/mac128k/input-probe.h','core/graphics/surface.h','core/graphics/cursor.h',
  'core/input/pointer.h','core/input/mouse.h','core/ui/window.h','core/services/traps.h','apps/product-scene/scene.h',
  'apps/window-scene/scene.h','apps/window-scene/input.h','apps/window-scene/capture.h','apps/window-scene/inbox.h',

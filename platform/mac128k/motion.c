@@ -3,8 +3,8 @@
 #include "motion.h"
 
 enum { WR9_RESET = 0xC0, WR9_NV = 0x02, WR9_MIE_NV = 0x0A,
-       WR0_RESET_EXT = 0x10, WR0_RESET_IUS = 0x38,
-       RR0_DCD = 0x08, RR3_EXT_A = 0x08, RR3_EXT_B = 0x01,
+       WR0_RESET_EXT = CS_MAC_SCC_RESET_EXT, WR0_RESET_IUS = CS_MAC_SCC_RESET_IUS,
+       RR0_DCD = 0x08, RR3_EXT_A = CS_MAC_SCC_EXT_A, RR3_EXT_B = CS_MAC_SCC_EXT_B,
        PB_MASK = 0x38, PB_BUTTON = 0x08, PB_X2 = 0x10, PB_Y2 = 0x20 };
 
 /* Keep compact byte samples, but pass them by address: the native compiler's

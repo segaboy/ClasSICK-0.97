@@ -5078,3 +5078,7 @@ Intel,Intel Quark SoC X1000 Core Developer Manual,October2013,order329679-001US,
 ## SRC-0590 - Repeat Mac host drag
 
 2026-10-31; SPEC-0091, TEST-0137. A second isolated Snow session using the original experimental fast/invert-3 ROM showed host-input drag and later pointer motion with the window stationary. [Canonical evidence](../docs/development/mac-fast-collection-20261031.md#repeat-host-input-observation). Human, physical and paired-release qualification remain open.
+
+## SRC-0591 - Actual Mac collector verification
+
+2026-10-31; SPEC-0091, IMPL-0104, TEST-0138. The actual original collector body is tested with instrumented accessors; four faulty variants are rejected, and experimental and normal ROM bytes remain unchanged. [Canonical evidence](../docs/development/mac-fast-collection-20261031.md#actual-collector-verification). Human, physical and paired-release qualification remain open.
