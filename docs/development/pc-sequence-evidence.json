@@ -9,7 +9,8 @@
     "SRC-0567",
     "SRC-0573",
     "SRC-0575",
-    "SRC-0577"
+    "SRC-0577",
+    "SRC-0580"
   ],
   "specification": "SPEC-0085",
   "implementation": "IMPL-0094",
@@ -1312,6 +1313,42 @@
       "Guard refusal correctly prevented all helper events; capture status does not override containment.",
       "Reported cursor coordinates and capture status are instantaneous observations, not proof of the cause or physical screen mapping.",
       "No complete recorder payload, physical/human input, successful movement/drag, hardware or release qualification."
+    ]
+  },
+  "captured_context_comparison_20261031_a": {
+    "date": "2026-10-31",
+    "test_id": "TEST-0127",
+    "source_revision": "f0c16cc3742fa52f340459b9fbcb388f101f82eb",
+    "efi_sha256": "222e0d0ba9a4193a69cb9ec24249c52a4852e06976a8f058cd9459966fd34888",
+    "disk_sha256": "2c7634ab563e075c3b9cc4d94c53bc39381c11da40c446ebdd3c98fc4a3a05da",
+    "context_caller_sha256": "7eb364ec27a33f1db591524fc6a3019612787995f9f770b0622e1ac2a13c658d",
+    "timeline": [
+      "Cold boot verified own scene and paused.",
+      "Resumed; read-only caller succeeded before capture. Windows logical and physical cursor positions both (675,512); target-thread GUI capture absent.",
+      "One SKY click at window-relative (514,450); VirtualBox UIA reported pointer captured. Read-only caller succeeded: logical and physical positions both (2,2); GUI-thread capture query reported absent.",
+      "A second centered SKY click while VirtualBox UIA still reported capture; read-only caller again reported both positions (2,2), GUI-thread capture absent. No drag was issued.",
+      "Paused at source-matched recorder spin, read exact original guest register words."
+    ],
+    "clip_rect": "Before and after capture Windows reported left 0, top -1440, right 4000, bottom 1440; the caller does not prove why that rectangle or cursor position was reported.",
+    "raw_registers": {
+      "rip": "000000001002d1b4",
+      "r8": "4353505345513031",
+      "r9": "0300000000000000",
+      "r10": "000000000001ff2a",
+      "r11": "0000000000000000",
+      "r12": "0000000000000000",
+      "r13": "0000000000000000",
+      "r14": "0000000000000000",
+      "r15": "0000000000000000"
+    },
+    "recorder_result": "Three bytes 2A FF 01, zero recorded gap/error flags. Reader models dx +255, dy -255, buttons 2 conditional on packet alignment. Same byte sequence as TEST-0125; no drag occurred in this trial.",
+    "screenshots": "Guest-only initial and final images match existing indexed identities 261f2b2fd52830cf808954114fa332b9a13e7d102b6270270ea2b68be226872f and b70ec8c601318a20084e0cc180e82d07adddced435de03483bc05620a294b3d4 respectively.",
+    "cleanup": "Own VM powered off/unregistered; existing inventory, running states and raw media roundtrip preserved.",
+    "lease": "116.91 seconds wall, active upper estimate 86.46 seconds; caps 240/180.",
+    "limits": [
+      "No recording of bytes before the three-byte stop; alignment and exact capture versus second-click attribution remain unknown.",
+      "Matching logical and physical API values at observation time rules out a difference between those returned values in this instance only; it does not prove DPI configuration, cursor physical location, or a root cause.",
+      "No explicit drag, helper-generated input, human movement, physical hardware, System 1 or release qualification."
     ]
   }
 }

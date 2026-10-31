@@ -5034,3 +5034,7 @@ Intel,Intel Quark SoC X1000 Core Developer Manual,October2013,order329679-001US,
 ## SRC-0578 - Automated Mac idle and input contrast
 
 2026-10-31; TEST-0126. One isolated own-ROM session had zero recorded losses at idle, then 140 after later automated UI/input actions; the first retained reason was a Gray jump. [Canonical evidence](../docs/development/mac-automated-idle-20261031.md). No causal attribution, usable drag, physical hardware or release pass.
+
+## SRC-0580 - PC captured cursor context and click-only record
+
+2026-10-31; TEST-0127. Original isolated PC session compared read-only cursor context before and after capture; no-drag automated clicks coincided with the same three-byte record. [Canonical evidence](../docs/development/pc-sequence-evidence.json). No proven root cause or human/drag/release acceptance.

@@ -1,0 +1,3 @@
+# TEST-0127 - PC captured cursor context and click-only record
+
+2026-10-31; SRC-0580 / SPEC-0085. One isolated original PC diagnostic run compared the approved read-only context caller before and after automated capture. Windows logical and physical cursor APIs agreed at both observations, changing from (675,512) to (2,2); a centered automated click retained (2,2). VirtualBox reported capture while the target-thread GUI capture query reported none. Without any drag, the own three-byte recorder stopped with 2A FF 01. Alignment and exact capture versus click attribution remain unknown. The owned VM and existing inventory/media were preserved. [Complete scope](../../docs/development/pc-sequence-evidence.json). No human, motion/drag, physical or release pass.
