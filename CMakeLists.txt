@@ -3098,6 +3098,21 @@ if(BUILD_TESTING)
     add_test(NAME pc286.span-cap-oracle COMMAND classick_span_cap_oracle)
 endif()
 
+# Isolated numeric C16 surface-validation model; never a production backend.
+if(BUILD_TESTING)
+    add_executable(classick_pc286_surface_numeric tests/pc286-surface-numeric.c probes/pc286/surface-numeric.c)
+    target_link_libraries(classick_pc286_surface_numeric PRIVATE classick_surfaces)
+    set_target_properties(classick_pc286_surface_numeric PROPERTIES C_STANDARD 99 C_STANDARD_REQUIRED ON)
+    if(CMAKE_C_COMPILER_ID MATCHES "Clang|GNU")
+        target_compile_options(classick_pc286_surface_numeric PRIVATE -Wall -Wextra -Wpedantic -Werror -Wconversion -Wsign-conversion)
+    endif()
+    if(CLASSICK_SURFACE_SANITIZERS)
+        target_compile_options(classick_pc286_surface_numeric PRIVATE -fsanitize=address,undefined -fno-sanitize-recover=all -fno-omit-frame-pointer)
+        target_link_options(classick_pc286_surface_numeric PRIVATE -fsanitize=address,undefined)
+    endif()
+    add_test(NAME pc286.surface-numeric COMMAND classick_pc286_surface_numeric)
+endif()
+
 # Compile the read-only owned-window caller; CI target bindings are inactive.
 if(BUILD_TESTING AND WIN32)
     add_executable(classick_owned_context_caller tools/windows-input/context-caller.c
