@@ -2315,6 +2315,29 @@
         "Synthetic host input on one isolated VM; no human or physical hardware qualification.",
         "No historical System 1 or paired-release qualification."
       ]
+    },
+    {
+      "id": "2026-11-01-pc-mono-span-after-drag",
+      "path": "docs/evidence/screenshots/2026-11-01/pc-mono-span-after-drag.png",
+      "sha256": "37ce38aae0995f1612ece160960014bffb5767613834d666c0e084c64faebb3b",
+      "bytes": 4893,
+      "width": 1024,
+      "height": 768,
+      "captured_on": "2026-11-01",
+      "target": "native-x86_64",
+      "caption": "PC optimized-drawing candidate after device-level drag and release.",
+      "alt": "Monochrome ClasSICK scene with the checkerboard window shifted right and down.",
+      "source_revision": "fcabeadc11359eabdee180cf55f93311ecd45a5c",
+      "compiled_source_revision": "e3cd4d867a34a72924cd7fe2693d450ca8758b64",
+      "evidence": "docs/development/mono-span-20261101.md",
+      "license": "GPL-3.0-or-later",
+      "rights": "Original ClasSICK product framebuffer only; no emulator chrome, desktop or reference-system pixels.",
+      "input": "synthetic",
+      "limitations": [
+        "Device-level input in one isolated headless VM; no host GUI, human or physical hardware qualification.",
+        "Built from a dirty source tree before commit; source comparison and limits are recorded in the evidence.",
+        "No historical System 1 or paired-release qualification."
+      ]
     }
   ]
 }

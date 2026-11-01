@@ -82,3 +82,5 @@ See [storage and publication policy](../../development/screenshot-evidence.md). 
 [2026-10-31 PC host-only edge recovery](../../development/host-input-20261031.md#host-only-edge-recovery): original guest captures after downward and upward synthetic host movement; no host-only drag is claimed.
 
 [2026-10-31 PC host-only drag and release](../../development/host-input-20261031.md#host-only-drag-and-release): before, after drag and after release; synthetic host input only.
+
+[2026-11-01 PC optimized-drawing device drag](2026-11-01/pc-mono-span-after-drag.png) — [staged device-input evidence](../../development/mono-span-20261101.md); not a host GUI or human test.
