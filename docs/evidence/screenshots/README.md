@@ -86,3 +86,5 @@ See [storage and publication policy](../../development/screenshot-evidence.md). 
 [2026-11-01 PC optimized-drawing device drag](2026-11-01/pc-mono-span-after-drag.png) — [staged device-input evidence](../../development/mono-span-20261101.md); not a host GUI or human test.
 
 [2026-11-01 PC optimized host drag](2026-11-01/pc-host-sustained-before.png): [before](2026-11-01/pc-host-sustained-before.png), [after](2026-11-01/pc-host-sustained-after.png) and [after release](2026-11-01/pc-host-sustained-release.png). Synthetic host input; [evidence and limits](../../development/mono-span-20261101.md).
+
+[2026-11-01 PC device corner checks](2026-11-01/pc-device-corner-top-left.png): [top left](2026-11-01/pc-device-corner-top-left.png), [top right](2026-11-01/pc-device-corner-top-right.png), [bottom right](2026-11-01/pc-device-corner-bottom-right.png), [bottom left](2026-11-01/pc-device-corner-bottom-left.png), [return inside](2026-11-01/pc-device-corner-return-interior.png). [Evidence and limits](../../development/mono-span-20261101.md).

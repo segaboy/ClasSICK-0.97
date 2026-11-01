@@ -2407,6 +2407,116 @@
         "Built before commit; exact payload reproduced from committed product sources as documented.",
         "No historical System 1 or paired-release qualification."
       ]
+    },
+    {
+      "id": "2026-11-01-pc-device-corner-top-left",
+      "path": "docs/evidence/screenshots/2026-11-01/pc-device-corner-top-left.png",
+      "sha256": "1a2dc1303ab954637be864f0261f90370591431a8f1ef6f13587d6fc7f55ca0f",
+      "bytes": 4843,
+      "width": 1024,
+      "height": 768,
+      "captured_on": "2026-11-01",
+      "target": "native-x86_64",
+      "caption": "PC optimized candidate with cursor at top left, after device-level input.",
+      "alt": "Monochrome ClasSICK scene with the pointer clipped at the top left corner.",
+      "source_revision": "06b8b93c92f7d633279ba24ace82a8a90af105f9",
+      "compiled_source_revision": "e3cd4d867a34a72924cd7fe2693d450ca8758b64",
+      "evidence": "docs/development/mono-span-20261101.md",
+      "license": "GPL-3.0-or-later",
+      "rights": "Original ClasSICK product framebuffer only; no emulator chrome, desktop or reference-system pixels.",
+      "input": "synthetic",
+      "limitations": [
+        "Device-level input in one isolated headless VM; no host GUI, human or physical hardware qualification.",
+        "No historical System 1 or paired-release qualification."
+      ]
+    },
+    {
+      "id": "2026-11-01-pc-device-corner-top-right",
+      "path": "docs/evidence/screenshots/2026-11-01/pc-device-corner-top-right.png",
+      "sha256": "ded4a8fd97b87f71510654029c9ed0701cd7c7357600e2e660d6171ba8baa5b8",
+      "bytes": 4847,
+      "width": 1024,
+      "height": 768,
+      "captured_on": "2026-11-01",
+      "target": "native-x86_64",
+      "caption": "PC optimized candidate with cursor at top right, after device-level input.",
+      "alt": "Monochrome ClasSICK scene with the pointer clipped at the top right corner.",
+      "source_revision": "06b8b93c92f7d633279ba24ace82a8a90af105f9",
+      "compiled_source_revision": "e3cd4d867a34a72924cd7fe2693d450ca8758b64",
+      "evidence": "docs/development/mono-span-20261101.md",
+      "license": "GPL-3.0-or-later",
+      "rights": "Original ClasSICK product framebuffer only; no emulator chrome, desktop or reference-system pixels.",
+      "input": "synthetic",
+      "limitations": [
+        "Device-level input in one isolated headless VM; no host GUI, human or physical hardware qualification.",
+        "No historical System 1 or paired-release qualification."
+      ]
+    },
+    {
+      "id": "2026-11-01-pc-device-corner-bottom-right",
+      "path": "docs/evidence/screenshots/2026-11-01/pc-device-corner-bottom-right.png",
+      "sha256": "9f932c1f8ed1c5d86db2ac1a371ee0f105f6b28aef02029302adc412695cc09d",
+      "bytes": 4844,
+      "width": 1024,
+      "height": 768,
+      "captured_on": "2026-11-01",
+      "target": "native-x86_64",
+      "caption": "PC optimized candidate with cursor at bottom right, after device-level input.",
+      "alt": "Monochrome ClasSICK scene with the pointer clipped at the bottom right corner.",
+      "source_revision": "06b8b93c92f7d633279ba24ace82a8a90af105f9",
+      "compiled_source_revision": "e3cd4d867a34a72924cd7fe2693d450ca8758b64",
+      "evidence": "docs/development/mono-span-20261101.md",
+      "license": "GPL-3.0-or-later",
+      "rights": "Original ClasSICK product framebuffer only; no emulator chrome, desktop or reference-system pixels.",
+      "input": "synthetic",
+      "limitations": [
+        "Device-level input in one isolated headless VM; no host GUI, human or physical hardware qualification.",
+        "No historical System 1 or paired-release qualification."
+      ]
+    },
+    {
+      "id": "2026-11-01-pc-device-corner-bottom-left",
+      "path": "docs/evidence/screenshots/2026-11-01/pc-device-corner-bottom-left.png",
+      "sha256": "6706889a295a23851603790ab85ed9dbe5f688bc91d0e0310641b2c4c924d177",
+      "bytes": 4846,
+      "width": 1024,
+      "height": 768,
+      "captured_on": "2026-11-01",
+      "target": "native-x86_64",
+      "caption": "PC optimized candidate with cursor at bottom left, after device-level input.",
+      "alt": "Monochrome ClasSICK scene with the pointer clipped at the bottom left corner.",
+      "source_revision": "06b8b93c92f7d633279ba24ace82a8a90af105f9",
+      "compiled_source_revision": "e3cd4d867a34a72924cd7fe2693d450ca8758b64",
+      "evidence": "docs/development/mono-span-20261101.md",
+      "license": "GPL-3.0-or-later",
+      "rights": "Original ClasSICK product framebuffer only; no emulator chrome, desktop or reference-system pixels.",
+      "input": "synthetic",
+      "limitations": [
+        "Device-level input in one isolated headless VM; no host GUI, human or physical hardware qualification.",
+        "No historical System 1 or paired-release qualification."
+      ]
+    },
+    {
+      "id": "2026-11-01-pc-device-corner-return-interior",
+      "path": "docs/evidence/screenshots/2026-11-01/pc-device-corner-return-interior.png",
+      "sha256": "3d00b55c2783b56194c0819c6e9a7fd836529236985165dfe6738cab58aba5b1",
+      "bytes": 4876,
+      "width": 1024,
+      "height": 768,
+      "captured_on": "2026-11-01",
+      "target": "native-x86_64",
+      "caption": "PC optimized candidate with cursor at return interior, after device-level input.",
+      "alt": "Monochrome ClasSICK scene with the pointer returned inside the scene.",
+      "source_revision": "06b8b93c92f7d633279ba24ace82a8a90af105f9",
+      "compiled_source_revision": "e3cd4d867a34a72924cd7fe2693d450ca8758b64",
+      "evidence": "docs/development/mono-span-20261101.md",
+      "license": "GPL-3.0-or-later",
+      "rights": "Original ClasSICK product framebuffer only; no emulator chrome, desktop or reference-system pixels.",
+      "input": "synthetic",
+      "limitations": [
+        "Device-level input in one isolated headless VM; no host GUI, human or physical hardware qualification.",
+        "No historical System 1 or paired-release qualification."
+      ]
     }
   ]
 }
