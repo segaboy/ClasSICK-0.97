@@ -9,8 +9,8 @@ still provisional. No reduced goal,freeze or publication approval is inferred.
 |Mac normal/inverted and PC image identity/budget|Passing-source preflight complete|Retain exact source/hash pins;no new binary in Git|
 |Mac latch and phase-only hypothesis|209 fixture checks and131072-transcript matrices pass|Native cost/identity verified;combined experiment boots,physical check not performed after cap|
 |Desktop input access|Restored by owner;visible simple-profile scene|Retain guards;do not equate access with guest input|
-|Mac accepted motion/drag|Normal physical check fails usable pointer/drag|Fresh source-verified bounded trial,clean baseline then small axis input/trace/frame comparison|
-|PC host GUI motion/drag/release|Physical check fails usable pointer/interaction;device-control route positive|Qualified host route or observed physical mouse check;do not repeat unchanged failed injection|
+|Mac accepted motion/drag|Optimized experimental fast/invert-3 ROM passed one guarded host drag/release; earlier normal physical check failed|Qualify normal collector, remaining E1-E3 cases and physical polarity; retain human failure|
+|PC host GUI motion/drag/release|Optimized candidate passed guarded host-only drag/release; earlier human check failed|Finish remaining E1-E3 cases and retain human failure|
 |E1-E3 on exact paired candidates|Incomplete native input qualification|Verify title hit,drag,release,reentry,cursor restoration and unchanged margins/counter|
 |E4 human|Normal Mac and PC checks performed and failed|Fix and repeat;do not waive a failed usability result|
 |Freeze/package/release approval|Not ready|After E1-E3,freeze sources/licenses/setup/checksums,run builder/auditor,then request final publication approval|
@@ -27,7 +27,7 @@ human E4. No historical/physical128K/System1/native-application claim follows.
 
 The original [release criteria](../../releases/paired-native-preview-2.md) remain
 in force. The opt-in phase rule is not a waiver for native DCD-changing losses.
-The286 port is progressing independently and is not a third paired-release gate.
+The286 port is progressing independently and is not a third paired-release gate. The [2026-11-01 optimized host-input evidence](mono-span-20261101.md#sustained-primary-button-qualification-on-optimized-candidates) supersedes the older host-input status only for its bounded observations.
 
 2026-10-26:SRC-0473..0475. [Actual native and physical results](native-input-qualification-20261026.md). Direct PC memory-read API returns E_NOTIMPL;do not repeat that route or broad-dump memory. Next diagnostic:original Mac checkpoint register export,with no motion-policy change.
 

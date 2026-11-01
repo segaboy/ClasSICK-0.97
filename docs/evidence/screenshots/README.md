@@ -84,3 +84,5 @@ See [storage and publication policy](../../development/screenshot-evidence.md). 
 [2026-10-31 PC host-only drag and release](../../development/host-input-20261031.md#host-only-drag-and-release): before, after drag and after release; synthetic host input only.
 
 [2026-11-01 PC optimized-drawing device drag](2026-11-01/pc-mono-span-after-drag.png) — [staged device-input evidence](../../development/mono-span-20261101.md); not a host GUI or human test.
+
+[2026-11-01 PC optimized host drag](2026-11-01/pc-host-sustained-before.png): [before](2026-11-01/pc-host-sustained-before.png), [after](2026-11-01/pc-host-sustained-after.png) and [after release](2026-11-01/pc-host-sustained-release.png). Synthetic host input; [evidence and limits](../../development/mono-span-20261101.md).

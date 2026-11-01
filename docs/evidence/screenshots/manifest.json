@@ -2338,6 +2338,75 @@
         "Built from a dirty source tree before commit; source comparison and limits are recorded in the evidence.",
         "No historical System 1 or paired-release qualification."
       ]
+    },
+    {
+      "id": "2026-11-01-pc-host-sustained-before",
+      "path": "docs/evidence/screenshots/2026-11-01/pc-host-sustained-before.png",
+      "sha256": "06248de0578093dfb42bed59079212008eccecad3d1801afcdfb097474bb0ff4",
+      "bytes": 4873,
+      "width": 1024,
+      "height": 768,
+      "captured_on": "2026-11-01",
+      "target": "native-x86_64",
+      "caption": "PC optimized candidate before guarded host drag.",
+      "alt": "Monochrome ClasSICK scene with a checkerboard window and the pointer on its title bar.",
+      "source_revision": "e4541cbd89ce3a19641431c330e7976b083b3200",
+      "compiled_source_revision": "e3cd4d867a34a72924cd7fe2693d450ca8758b64",
+      "evidence": "docs/development/mono-span-20261101.md",
+      "license": "GPL-3.0-or-later",
+      "rights": "Original ClasSICK product framebuffer only; no emulator chrome, desktop or reference-system pixels.",
+      "input": "synthetic",
+      "limitations": [
+        "Synthetic host input on one isolated VM; no human or physical hardware qualification.",
+        "Built before commit; exact payload reproduced from committed product sources as documented.",
+        "No historical System 1 or paired-release qualification."
+      ]
+    },
+    {
+      "id": "2026-11-01-pc-host-sustained-after",
+      "path": "docs/evidence/screenshots/2026-11-01/pc-host-sustained-after.png",
+      "sha256": "d0f01d9eef740e17d21ac2636b9e33e5e5278a7e6dc264b33a41fce123e0df45",
+      "bytes": 4876,
+      "width": 1024,
+      "height": 768,
+      "captured_on": "2026-11-01",
+      "target": "native-x86_64",
+      "caption": "PC optimized candidate after guarded host drag.",
+      "alt": "Monochrome ClasSICK scene with its checkerboard window shifted right.",
+      "source_revision": "e4541cbd89ce3a19641431c330e7976b083b3200",
+      "compiled_source_revision": "e3cd4d867a34a72924cd7fe2693d450ca8758b64",
+      "evidence": "docs/development/mono-span-20261101.md",
+      "license": "GPL-3.0-or-later",
+      "rights": "Original ClasSICK product framebuffer only; no emulator chrome, desktop or reference-system pixels.",
+      "input": "synthetic",
+      "limitations": [
+        "Synthetic host input on one isolated VM; no human or physical hardware qualification.",
+        "Built before commit; exact payload reproduced from committed product sources as documented.",
+        "No historical System 1 or paired-release qualification."
+      ]
+    },
+    {
+      "id": "2026-11-01-pc-host-sustained-release",
+      "path": "docs/evidence/screenshots/2026-11-01/pc-host-sustained-release.png",
+      "sha256": "c2ff06a3322b77b92b2f936dd3f302ad03a01ad6fb81e57e74ae4010a2dcd837",
+      "bytes": 4874,
+      "width": 1024,
+      "height": 768,
+      "captured_on": "2026-11-01",
+      "target": "native-x86_64",
+      "caption": "PC optimized candidate after release and further host movement.",
+      "alt": "Monochrome ClasSICK scene with the window stationary and the pointer moved after release.",
+      "source_revision": "e4541cbd89ce3a19641431c330e7976b083b3200",
+      "compiled_source_revision": "e3cd4d867a34a72924cd7fe2693d450ca8758b64",
+      "evidence": "docs/development/mono-span-20261101.md",
+      "license": "GPL-3.0-or-later",
+      "rights": "Original ClasSICK product framebuffer only; no emulator chrome, desktop or reference-system pixels.",
+      "input": "synthetic",
+      "limitations": [
+        "Synthetic host input on one isolated VM; no human or physical hardware qualification.",
+        "Built before commit; exact payload reproduced from committed product sources as documented.",
+        "No historical System 1 or paired-release qualification."
+      ]
     }
   ]
 }
