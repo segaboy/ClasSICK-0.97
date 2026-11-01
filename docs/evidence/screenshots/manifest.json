@@ -2517,6 +2517,94 @@
         "Device-level input in one isolated headless VM; no host GUI, human or physical hardware qualification.",
         "No historical System 1 or paired-release qualification."
       ]
+    },
+    {
+      "id": "2026-11-01-pc-device-reentry-second-drag",
+      "path": "docs/evidence/screenshots/2026-11-01/pc-device-reentry-second-drag.png",
+      "sha256": "0f444c24199687c16d971d1226ca0f96df735db2a38115bb62cf81bac7a83cec",
+      "bytes": 4891,
+      "width": 1024,
+      "height": 768,
+      "captured_on": "2026-11-01",
+      "target": "native-x86_64",
+      "caption": "PC optimized candidate during device-level second drag.",
+      "alt": "Monochrome ClasSICK scene showing the window during second drag.",
+      "source_revision": "fda182c49bc3bad0d4916783281c34060c880a83",
+      "compiled_source_revision": "e3cd4d867a34a72924cd7fe2693d450ca8758b64",
+      "evidence": "docs/development/mono-span-20261101.md",
+      "license": "GPL-3.0-or-later",
+      "rights": "Original ClasSICK product framebuffer only; no emulator chrome, desktop or reference-system pixels.",
+      "input": "synthetic",
+      "limitations": [
+        "Device-level input in one isolated headless VM; no host GUI, human or physical hardware qualification.",
+        "No historical System 1 or paired-release qualification."
+      ]
+    },
+    {
+      "id": "2026-11-01-pc-device-reentry-content-click",
+      "path": "docs/evidence/screenshots/2026-11-01/pc-device-reentry-content-click.png",
+      "sha256": "3b5b3ff4038a25603a731970a1a7c58c53c3287f7f2c89832e74713378b77ab4",
+      "bytes": 4739,
+      "width": 1024,
+      "height": 768,
+      "captured_on": "2026-11-01",
+      "target": "native-x86_64",
+      "caption": "PC optimized candidate during device-level content click.",
+      "alt": "Monochrome ClasSICK scene showing the window during content click.",
+      "source_revision": "fda182c49bc3bad0d4916783281c34060c880a83",
+      "compiled_source_revision": "e3cd4d867a34a72924cd7fe2693d450ca8758b64",
+      "evidence": "docs/development/mono-span-20261101.md",
+      "license": "GPL-3.0-or-later",
+      "rights": "Original ClasSICK product framebuffer only; no emulator chrome, desktop or reference-system pixels.",
+      "input": "synthetic",
+      "limitations": [
+        "Device-level input in one isolated headless VM; no host GUI, human or physical hardware qualification.",
+        "No historical System 1 or paired-release qualification."
+      ]
+    },
+    {
+      "id": "2026-11-01-pc-device-reentry-drag-outside",
+      "path": "docs/evidence/screenshots/2026-11-01/pc-device-reentry-drag-outside.png",
+      "sha256": "b335e15682d7a90ab0fc9654eb174622b6a8bf522312a3c27457f9921a75dbb5",
+      "bytes": 4612,
+      "width": 1024,
+      "height": 768,
+      "captured_on": "2026-11-01",
+      "target": "native-x86_64",
+      "caption": "PC optimized candidate during device-level drag outside.",
+      "alt": "Monochrome ClasSICK scene showing the window during drag outside.",
+      "source_revision": "fda182c49bc3bad0d4916783281c34060c880a83",
+      "compiled_source_revision": "e3cd4d867a34a72924cd7fe2693d450ca8758b64",
+      "evidence": "docs/development/mono-span-20261101.md",
+      "license": "GPL-3.0-or-later",
+      "rights": "Original ClasSICK product framebuffer only; no emulator chrome, desktop or reference-system pixels.",
+      "input": "synthetic",
+      "limitations": [
+        "Device-level input in one isolated headless VM; no host GUI, human or physical hardware qualification.",
+        "No historical System 1 or paired-release qualification."
+      ]
+    },
+    {
+      "id": "2026-11-01-pc-device-reentry-outside-release",
+      "path": "docs/evidence/screenshots/2026-11-01/pc-device-reentry-outside-release.png",
+      "sha256": "f5e1306635a1c8ce6f33ef6fcb76c2603893a7c1d9fc60da98750a8e2580f5fe",
+      "bytes": 4620,
+      "width": 1024,
+      "height": 768,
+      "captured_on": "2026-11-01",
+      "target": "native-x86_64",
+      "caption": "PC optimized candidate during device-level outside release.",
+      "alt": "Monochrome ClasSICK scene showing the window during outside release.",
+      "source_revision": "fda182c49bc3bad0d4916783281c34060c880a83",
+      "compiled_source_revision": "e3cd4d867a34a72924cd7fe2693d450ca8758b64",
+      "evidence": "docs/development/mono-span-20261101.md",
+      "license": "GPL-3.0-or-later",
+      "rights": "Original ClasSICK product framebuffer only; no emulator chrome, desktop or reference-system pixels.",
+      "input": "synthetic",
+      "limitations": [
+        "Device-level input in one isolated headless VM; no host GUI, human or physical hardware qualification.",
+        "No historical System 1 or paired-release qualification."
+      ]
     }
   ]
 }
