@@ -94,24 +94,36 @@ cs_surface_result cs_surface_fill(const cs_surface *surface, cs_rect rect,
     if (rect.left >= rect.right || rect.top >= rect.bottom) {
         return CS_SURFACE_OK;
     }
+    if (surface->format == CS_SURFACE_MONO1_MSB) {
+        size_t first = (size_t)rect.left / 8u;
+        size_t last = (size_t)(rect.right - 1) / 8u;
+        uint8_t head = (uint8_t)(0xffu >> ((uint32_t)rect.left % 8u));
+        uint8_t tail = (uint8_t)(0xffu << (7u - (uint32_t)(rect.right - 1) % 8u));
+        uint8_t fill = (uint8_t)(value != 0u ? 0xffu : 0x00u);
+        if (first == last) {
+            head = (uint8_t)(head & tail);
+        }
+        for (y = rect.top; y < rect.bottom; ++y) {
+            uint8_t *row = surface->storage + (size_t)y * surface->stride;
+            size_t i;
+            row[first] = (uint8_t)((row[first] & (uint8_t)~head) | (fill & head));
+            if (first != last) {
+                for (i = first + 1u; i < last; ++i) {
+                    row[i] = fill;
+                }
+                row[last] = (uint8_t)((row[last] & (uint8_t)~tail) | (fill & tail));
+            }
+        }
+        return CS_SURFACE_OK;
+    }
     for (y = rect.top; y < rect.bottom; ++y) {
         uint8_t *row = surface->storage + (size_t)y * surface->stride;
         for (x = rect.left; x < rect.right; ++x) {
-            if (surface->format == CS_SURFACE_MONO1_MSB) {
-                size_t byte_index = (size_t)x / 8u;
-                uint8_t mask = (uint8_t)(0x80u >> ((uint32_t)x % 8u));
-                if (value != 0u) {
-                    row[byte_index] = (uint8_t)(row[byte_index] | mask);
-                } else {
-                    row[byte_index] = (uint8_t)(row[byte_index] & (uint8_t)~mask);
-                }
-            } else {
-                size_t offset = (size_t)x * 4u;
-                row[offset] = (uint8_t)(value >> 24u);
-                row[offset + 1u] = (uint8_t)(value >> 16u);
-                row[offset + 2u] = (uint8_t)(value >> 8u);
-                row[offset + 3u] = (uint8_t)value;
-            }
+            size_t offset = (size_t)x * 4u;
+            row[offset] = (uint8_t)(value >> 24u);
+            row[offset + 1u] = (uint8_t)(value >> 16u);
+            row[offset + 2u] = (uint8_t)(value >> 8u);
+            row[offset + 3u] = (uint8_t)value;
         }
     }
     return CS_SURFACE_OK;

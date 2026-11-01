@@ -5082,3 +5082,7 @@ Intel,Intel Quark SoC X1000 Core Developer Manual,October2013,order329679-001US,
 ## SRC-0591 - Actual Mac collector verification
 
 2026-10-31; SPEC-0091, IMPL-0104, TEST-0138. The actual original collector body is tested with instrumented accessors; four faulty variants are rejected, and experimental and normal ROM bytes remain unchanged. [Canonical evidence](../docs/development/mac-fast-collection-20261031.md#actual-collector-verification). Human, physical and paired-release qualification remain open.
+
+## SRC-0592 - Monochrome fill spans
+
+2026-11-01; SPEC-0001, IMPL-0105, TEST-0139. Original byte-span filling preserves the surface contract; hosted oracle, native builds and an isolated PC device-level observation are recorded. [Canonical evidence](../docs/development/mono-span-20261101.md). Mac target performance and paired-release qualification remain open.

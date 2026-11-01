@@ -95,6 +95,8 @@ derived from this contract, not implementation helpers. It covers odd widths,
 minimal/extra stride, exact storage spans, unaligned storage, guards, padding,
 clipping, signed extremes, empty/outside/reversed rectangles, error precedence,
 constructor failures/overflow, malformed descriptors and independent surfaces.
+The monochrome span optimization retains this contract and is checked over all
+small endpoint alignments plus selected widths around the 512-pixel target.
 Tests must fail through process exit status even with `NDEBUG`.
 
 Required verification: pinned native Windows CMake/CTest, strict warnings,

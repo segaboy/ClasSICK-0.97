@@ -283,6 +283,101 @@ static int independent(void)
     return 0;
 }
 
+/* Wider spans exercise long byte interiors at and around the target width. */
+static int wide_spans(void)
+{
+    const int32_t widths[] = {255, 256, 511, 512, 513};
+    uint8_t actual[256], expected[256];
+    cs_surface s;
+    for (size_t w = 0; w < sizeof widths / sizeof widths[0]; ++w) {
+        int32_t width = widths[w];
+        int32_t points[] = {-2, 0, 1, 7, 8, 9, 127, 128, width - 1, width, width + 2};
+        for (size_t pad = 0; pad <= 2u; ++pad) {
+            size_t stride = ((size_t)width + 7u) / 8u + pad;
+            size_t span = stride * 3u;
+            CHECK(span + 2u <= sizeof actual);
+            for (size_t l = 0; l < sizeof points / sizeof points[0]; ++l)
+            for (size_t r = l; r < sizeof points / sizeof points[0]; ++r)
+            for (uint32_t value = 0; value < 2u; ++value) {
+                cs_rect rect = {points[l], -1, points[r], 2};
+                for (size_t i = 0; i < sizeof actual; ++i)
+                    actual[i] = (uint8_t)((i * 37u + l * 13u + r * 7u) % 256u);
+                memcpy(expected, actual, sizeof expected);
+                CHECK(cs_surface_init(&s, actual + 1, span, width, 3, stride,
+                    CS_SURFACE_MONO1_MSB) == CS_SURFACE_OK);
+                oracle(expected + 1, stride, width, 3, CS_SURFACE_MONO1_MSB, rect, value);
+                CHECK(cs_surface_fill(&s, rect, value) == CS_SURFACE_OK);
+                CHECK(memcmp(actual, expected, sizeof actual) == 0);
+            }
+        }
+    }
+    return 0;
+}
+
+/* Exhaustive mono spans: every alignment of left/right, clipping on all sides,
+ * empty and reversed rectangles, both colors, nonzero padding, guard bytes. */
+static int spans(void)
+{
+    enum { GUARD = 3 };
+    uint8_t actual[64];
+    uint8_t expected[64];
+    cs_surface s;
+    int32_t width;
+    int32_t left;
+    int32_t right;
+    int32_t top;
+    int32_t bottom;
+    size_t pad;
+    unsigned v;
+    unsigned bg;
+    unsigned long count = 0;
+    for (width = 1; width <= 25; ++width) {
+        for (pad = 0; pad <= 2; ++pad) {
+            size_t stride = ((size_t)width + 7u) / 8u + pad;
+            size_t span = stride * 2u;
+            CHECK(span + 2u * GUARD <= sizeof actual);
+            for (left = -2; left <= width + 2; ++left)
+            for (right = -2; right <= width + 2; ++right)
+            for (top = -1; top <= 2; ++top)
+            for (bottom = -1; bottom <= 2; ++bottom)
+            for (v = 0; v < 2u; ++v)
+            for (bg = 0; bg < 3u; ++bg) {
+                cs_rect rect;
+                size_t b;
+                rect.left = left;
+                rect.top = top;
+                rect.right = right;
+                rect.bottom = bottom;
+                for (b = 0; b < sizeof actual; ++b) {
+                    actual[b] = (uint8_t)(bg == 0u ? 0x00u : bg == 1u ? 0xffu :
+                        (b * 29u + (unsigned)(left + 2) * 7u +
+                         (unsigned)(right + 2) * 13u + (unsigned)(top + 1) * 3u) % 256u);
+                }
+                memcpy(expected, actual, sizeof expected);
+                CHECK(cs_surface_init(&s, actual + GUARD, span, width, 2, stride,
+                    CS_SURFACE_MONO1_MSB) == CS_SURFACE_OK);
+                if (left > right || top > bottom) {
+                    CHECK(cs_surface_fill(&s, rect, v) == CS_SURFACE_ERR_RECT);
+                } else {
+                    oracle(expected + GUARD, stride, width, 2, CS_SURFACE_MONO1_MSB, rect, v);
+                    CHECK(cs_surface_fill(&s, rect, v) == CS_SURFACE_OK);
+                }
+                if (memcmp(actual, expected, sizeof actual) != 0) {
+                    fprintf(stderr, "spans: w=%ld pad=%lu rect={%ld,%ld,%ld,%ld} v=%u bg=%u\n",
+                        (long)width, (unsigned long)pad, (long)left, (long)top,
+                        (long)right, (long)bottom, v, bg);
+                    return 1;
+                }
+                ++count;
+            }
+        }
+    }
+    CHECK(wide_spans() == 0);
+    printf("TEST-0004 spans: %lu small whole-buffer cases plus wide spans\n", count);
+    return 0;
+}
+
+
 int main(int argc, char **argv)
 {
     int result;
@@ -291,6 +386,7 @@ int main(int argc, char **argv)
     else if (strcmp(argv[1], "errors") == 0) { result = errors(); }
     else if (strcmp(argv[1], "matrix") == 0) { result = matrix(); }
     else if (strcmp(argv[1], "independent") == 0) { result = independent(); }
+    else if (strcmp(argv[1], "spans") == 0) { result = spans(); }
     else { return 2; }
     if (result == 0) { printf("TEST-0004 %s: PASS\n", argv[1]); }
     return result;

@@ -1722,7 +1722,7 @@ if(BUILD_TESTING)
     add_test(NAME bootstrap.hosted-smoke COMMAND classick_toolchain_smoke)
     set_tests_properties(bootstrap.hosted-smoke PROPERTIES
         PASS_REGULAR_EXPRESSION "ClasSICK 0.97 toolchain smoke: PASS")
-    foreach(suite layout errors matrix independent)
+    foreach(suite layout errors matrix independent spans)
         add_test(NAME surfaces.${suite} COMMAND classick_surface_tests ${suite})
     endforeach()
     foreach(suite layout errors matrix ownership)
