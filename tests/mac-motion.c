@@ -342,6 +342,20 @@ int main(void)
     fresh(0);baseline();inbox.count=17;hw.pending=8;
     CHECK(cs_mac_motion_service(&m)==CS_MAC_MOTION_FAULT);
     CHECK(m.pending_mismatch[0]==0 && m.loss_counts[2]==0);
+    for(unsigned k=0;k<4u;k++){
+        fresh(0);
+        if(k==0)CHECK(cs_mac_motion_service(&m)==CS_MAC_MOTION_BASELINED);
+        else baseline();
+        hw.pending=8;
+        if(k==1)hw.pb=0;
+        if(k==2){hw.pending=0;hw.raw[0]=8;}
+        CHECK(cs_mac_motion_service(&m)==CS_MAC_MOTION_LOST);
+        for(unsigned j=0;j<4u;j++)CHECK(m.pending_context[j]==(j==k?1u:0u));
+    }
+    fresh(0);baseline();hw.pending=0;hw.raw[0]=8;hw.pb=0;
+    CHECK(cs_mac_motion_service(&m)==CS_MAC_MOTION_LOST && m.pending_context[1]==1 && m.pending_context[2]==0);
+    fresh(0);baseline();m.pending_context[3]=UINT32_MAX;hw.pending=8;
+    CHECK(cs_mac_motion_service(&m)==CS_MAC_MOTION_LOST && m.pending_context[3]==UINT32_MAX);
 #endif
     printf("Mac motion: %u checks,32 phase/inversion cases; synthetic IO, no target execution.\n",checks);
     return 0;

@@ -256,8 +256,8 @@ def main():
         elif 'cs_mac_motion_timeline_commit' in syms:raise ValueError('Motion timeline in another profile')
         if a.window_fast_collect:required+=('cs_mac_native_collect',)
         elif 'cs_mac_native_collect' in syms:raise ValueError('Fast collector in another profile')
-        if a.window_loss_counts:required+=('cs_mac_loss_trace','cs_mac_pending_trace')
-        elif 'cs_mac_loss_trace' in syms or 'cs_mac_pending_trace' in syms:raise ValueError('Loss counts in another profile')
+        if a.window_loss_counts:required+=('cs_mac_loss_trace','cs_mac_pending_trace','cs_mac_context_trace')
+        elif any(n in syms for n in ('cs_mac_loss_trace','cs_mac_pending_trace','cs_mac_context_trace')):raise ValueError('Loss counts in another profile')
         if a.window_drawing and not any(name.startswith('cs_cursor_') for name in syms):raise ValueError('Disconnected cursor helper')
         if any(name not in syms for name in required):raise ValueError('Disconnected demonstration')
         cpu_callbacks=('cs_m68k_foreground_enter','cs_m68k_foreground_leave') if a.window_drawing else ()
@@ -313,6 +313,10 @@ def main():
                 if pending%2 or not 0xB00<=pending<=syms['__bss_end']-20:raise ValueError('Pending record own-RAM bounds')
                 for other,size in ((syms['cs_mac_trace'],128),(syms['cs_mac_diag'],64),(loss,20)):
                     if pending<other+size and other<pending+20:raise ValueError('Pending record overlaps diagnostics')
+                context=syms['cs_mac_context_trace']
+                if context%2 or not 0xB00<=context<=syms['__bss_end']-20:raise ValueError('Context record own-RAM bounds')
+                for other,size in ((syms['cs_mac_trace'],128),(syms['cs_mac_diag'],64),(loss,20),(pending,20)):
+                    if context<other+size and other<context+20:raise ValueError('Context record overlaps diagnostics')
             if a.window_timer_activity_probe:
                 activity=syms['cs_mac_activity_trace']
                 if activity%4 or not 0x400<=activity<=0x2100-80:raise ValueError('Activity record own-RAM bounds')
@@ -418,7 +422,7 @@ def main():
     if a.window_timer_phase_witness:manifest['phase_witness']={'specification':'SPEC-0084','trace_version':3,'trace_bytes':128,'no_added_state_bytes':True,'no_added_MMIO':True}
     if a.window_motion_timeline:manifest['motion_timeline']={'version':1,'capacity':6,'entry_bytes':32,'new_MMIO':False,'interrupt_timing_perturbed':True,'pointer_symbol':'cs_mac_timeline_address','motion_symbol':'cs_mac_timeline_motion'}
     if a.window_fast_collect:manifest['fast_collect']={'experimental':True,'same_MMIO_order_required':True,'new_MMIO':False,'host_input_qualified':False}
-    if a.window_loss_counts:manifest['loss_counts']={'tag':'MLC1','bytes':20,'address':syms['cs_mac_loss_trace'],'reasons':[1,2,3,4],'pending_tag':'MLP1','pending_address':syms['cs_mac_pending_trace'],'pending_bytes':20,'no_added_MMIO':True,'interrupt_timing_perturbed':True}
+    if a.window_loss_counts:manifest['loss_counts']={'tag':'MLC1','bytes':20,'address':syms['cs_mac_loss_trace'],'reasons':[1,2,3,4],'pending_tag':'MLP1','pending_address':syms['cs_mac_pending_trace'],'pending_bytes':20,'context_tag':'MLX1','context_address':syms['cs_mac_context_trace'],'context_bytes':20,'no_added_MMIO':True,'interrupt_timing_perturbed':True}
     if a.window_pending_idle_probe:manifest['pending_idle_probe']={'experimental':True,'hidden_transitions_may_be_discarded':True,'physical_qualification':False}
     if a.window_drawing:manifest['window_idle_probe']=bool(a.window_idle_probe)
     if a.window_drawing:manifest['window_pending_defer_probe']=bool(a.window_pending_defer_probe)

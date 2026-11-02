@@ -131,6 +131,8 @@ volatile struct cs_mac_window_trace cs_mac_trace;
 volatile uint32_t cs_mac_loss_trace[5];
 /* MLP1: tag, then A pending/no-change, A change/no-pending, B ditto. */
 volatile uint32_t cs_mac_pending_trace[5];
+/* MLX1: tag, then PRIMING, button changed, axis changed, other READY. */
+volatile uint32_t cs_mac_context_trace[5];
 #endif
 #if CLASSICK_MAC_IDLE_PROBE
 /* Offsets used by the register checkpoint in window-irqs.S. */
@@ -188,7 +190,7 @@ static struct cs_mac_motion motion;
 #endif
 static volatile uint32_t terminal;
 _Static_assert(sizeof(struct cs_mac_motion)+sizeof(struct cs_mac_window_trace)<=
-    (CLASSICK_MAC_MOTION_TIMELINE?544u:320u)+(CLASSICK_MAC_LOSS_COUNTS?32u:0u),
+    (CLASSICK_MAC_MOTION_TIMELINE?544u:320u)+(CLASSICK_MAC_LOSS_COUNTS?48u:0u),
     "Window entry BSS budget");
 #if CLASSICK_MAC_MOTION_TIMELINE && CLASSICK_MAC_TIMER_POLL_PROBE
 #error Motion timeline requires the interrupt-based motion driver
@@ -352,6 +354,7 @@ static uint32_t observe(void)
         for(unsigned i=0;i<4u;i++){
             cs_mac_loss_trace[i+1u]=motion.loss_counts[i];
             cs_mac_pending_trace[i+1u]=motion.pending_mismatch[i];
+            cs_mac_context_trace[i+1u]=motion.pending_context[i];
         }
 #endif
 #if CLASSICK_MAC_TIMER_POLL_PROBE && CLASSICK_MAC_TIMER_ACTIVITY_PROBE
@@ -393,6 +396,7 @@ void cs_mac_main(void)
 #if CLASSICK_MAC_LOSS_COUNTS
     cs_mac_loss_trace[0]=UINT32_C(0x4D4C4331);
     cs_mac_pending_trace[0]=UINT32_C(0x4D4C5031);
+    cs_mac_context_trace[0]=UINT32_C(0x4D4C5831);
 #endif
     cs_mac_trace.bytes=(uint32_t)sizeof(struct cs_mac_window_trace);
     cs_mac_diag.image_crc=cs_mac_image_crc((const volatile uint8_t *)(uintptr_t)0x400000,CS_MAC_ROM_BYTES);

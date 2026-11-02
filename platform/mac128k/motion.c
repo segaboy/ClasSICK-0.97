@@ -379,6 +379,9 @@ int cs_mac_motion_service(struct cs_mac_motion *m)
         r = uncertain(m, CS_MAC_LOSS_PENDING, rr3, &s1, &s2, &s3, entry);
         /* A single rejection can disagree on both channels. */
         if (r == CS_MAC_MOTION_LOST) {
+            uint32_t context = entry == CS_INBOX_PRIMING ? 0u :
+                buttons != m->last_buttons ? 1u : (ch_a || ch_b) ? 2u : 3u;
+            m->pending_context[context] = sat(m->pending_context[context]);
             if (ch_a != pend_a) {
                 uint32_t i = pend_a ? 0u : 1u;
                 m->pending_mismatch[i] = sat(m->pending_mismatch[i]);
