@@ -1,0 +1,9 @@
+<!-- SPDX-License-Identifier: GPL-3.0-or-later -->
+<!-- Copyright (C) 2026 Dean Howell. -->
+# SPEC-0094 - Mac baseline-consumption rearm experiment
+
+2026-11-01; SRC-0592 / SPEC-0072 / SPEC-0091 / SPEC-0092. An instrumented emulator observation recorded pending mismatches during PRIMING, while the foreground had yet to consume a fresh baseline. This opt-in experiment keeps the existing uncertainty and decoding rules but changes interrupt scheduling: after any successfully queued stable baseline, mask SCC master. While an intact PRIMING inbox remains in flight, a serialized service returns EMPTY without SCC/VIA reads, acknowledgments or state changes. Other interrupts remain available to allow foreground progress.
+
+After the foreground consumes the baseline and the inbox is READY, the next serialized service performs the usual complete sampling, acknowledgment and strict loss checks while master remains masked. On a valid EMPTY or successfully queued sample, restore SCC master last and clear the quiesced flag. On loss or fault keep it masked; preserve recovery, stop, epoch, overflow, malformed-state and first-loss behavior. The experiment uses no new state or hardware operation beyond the existing mask/unmask operations, but changes their timing and can coalesce unseen edges while masked. This is a hypothesis, not a proof of interrupt timing or behavior on any physical Macintosh.
+
+`--window-rearm-ready-probe` applies only to the interrupt-window profile, may combine with fast collection and observation counters, and refuses other behavior probes. Default builds exclude it. Model tests must cover baseline in flight, preserved pending data, coherent delivery after READY, strict mismatch loss, rearm ordering, recovery and malformed metadata. Native, emulator, human and hardware results are separate; successful model checks do not qualify a release.

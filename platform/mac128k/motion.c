@@ -42,6 +42,15 @@ static void quiesce(struct cs_mac_motion *m)
     m->quiesced = 1u;
 }
 
+#if CLASSICK_MAC_REARM_READY_PROBE
+static void rearm_ready(struct cs_mac_motion *m)
+{
+    if (!m->quiesced) return;
+    wr(m, CS_MAC_SCC_A, 9u, WR9_MIE_NV);
+    m->quiesced = 0u;
+}
+#endif
+
 #if !CLASSICK_MAC_FAST_COLLECT
 static void take(const struct cs_mac_motion *m, snap *s)
 {
@@ -267,6 +276,16 @@ int cs_mac_motion_service(struct cs_mac_motion *m)
     m->services = sat(m->services);
     in = m->inbox;
 
+#if CLASSICK_MAC_REARM_READY_PROBE
+    /* Do not acknowledge or decode while a valid baseline is in flight. */
+    if (m->quiesced && in->valid == CS_INBOX_VALID && in->epoch == m->epoch &&
+        in->phase == CS_INBOX_PRIMING && in->head < CS_INBOX_CAPACITY &&
+        in->count <= CS_INBOX_CAPACITY &&
+        (in->claimed == CS_INBOX_CLAIM_BASELINE ||
+         (in->claimed == CS_INBOX_NONE && in->count != 0u)))
+        return CS_MAC_MOTION_EMPTY;
+#endif
+
     entry = in->phase;
 #if CLASSICK_MAC_FAST_COLLECT
     {
@@ -323,10 +342,15 @@ int cs_mac_motion_service(struct cs_mac_motion *m)
         m->last_buttons = buttons;
         m->have_phase = 1u;
         m->baselines = sat(m->baselines);
+#if CLASSICK_MAC_REARM_READY_PROBE
+        /* Keep master off until a later READY pass has checked fresh input. */
+        quiesce(m);
+#else
         if (m->quiesced) { /* stable baseline queued: restore master last */
             wr(m, CS_MAC_SCC_A, 9u, WR9_MIE_NV);
             m->quiesced = 0u;
         }
+#endif
         return CS_MAC_MOTION_BASELINED;
     case CS_INBOX_READY:
     case CS_INBOX_PRIMING:
@@ -400,8 +424,12 @@ int cs_mac_motion_service(struct cs_mac_motion *m)
         dx = ((ra ^ (m->invert & 1u)) == bit(s3.pb, PB_X2)) ? 1 : -1;
     if (ch_b)
         dy = ((rb ^ ((m->invert >> 1) & 1u)) != bit(s3.pb, PB_Y2)) ? 1 : -1;
-    if (!ch_a && !ch_b && buttons == m->last_buttons)
+    if (!ch_a && !ch_b && buttons == m->last_buttons) {
+#if CLASSICK_MAC_REARM_READY_PROBE
+        if (in->phase == CS_INBOX_READY) rearm_ready(m);
+#endif
         return CS_MAC_MOTION_EMPTY;
+    }
 
     r = cs_inbox_push(in, m->epoch, dx, dy, buttons);
     m->samples = sat(m->samples);
@@ -418,6 +446,9 @@ int cs_mac_motion_service(struct cs_mac_motion *m)
     m->last_raw_b = rb;
     m->last_buttons = buttons;
     if (in->count > m->peak_queued) m->peak_queued = in->count;
+#if CLASSICK_MAC_REARM_READY_PROBE
+    if (in->phase == CS_INBOX_READY) rearm_ready(m);
+#endif
     return CS_MAC_MOTION_OK;
 }
 

@@ -98,6 +98,7 @@ def main():
     p.add_argument('--window-fast-collect',action='store_true',help='Experimental batched interrupt input collection; window profile only')
     p.add_argument('--window-loss-counts',action='store_true',help='Observation-only per-reason loss counts; interrupt window profile only')
     p.add_argument('--window-pending-idle-probe',action='store_true',help='Experimental pending-only unchanged-endpoint no-decision policy')
+    p.add_argument('--window-rearm-ready-probe',action='store_true',help='Experimental SCC rearm after baseline consumption')
     p.add_argument('--dcd-invert',type=int,choices=(0,1,2,3),default=0,help='Unverified raw RR0 DCD sense mask; window profile only')
     a=p.parse_args()
     if a.window_timer_poll_probe and not a.window_drawing:p.error('--window-timer-poll-probe requires --window-drawing')
@@ -125,6 +126,7 @@ def main():
     if a.window_fast_collect and (not a.window_drawing or a.window_timer_poll_probe or a.window_motion_timeline or a.window_pending_defer_probe or a.window_phase_idle_probe or a.window_idle_probe or a.window_first_input_probe):p.error('Fast collect requires the normal interrupt window profile without other probes')
     if a.window_loss_counts and (not a.window_drawing or a.window_timer_poll_probe or a.window_motion_timeline or a.window_pending_defer_probe or a.window_phase_idle_probe or a.window_idle_probe or a.window_first_input_probe):p.error('Loss counts require the interrupt window profile without other probes')
     if a.window_pending_idle_probe and (not a.window_drawing or a.window_timer_poll_probe or a.window_motion_timeline or a.window_pending_defer_probe or a.window_phase_idle_probe or a.window_idle_probe or a.window_first_input_probe):p.error('Pending-idle probe requires the interrupt window profile without other probes')
+    if a.window_rearm_ready_probe and (not a.window_drawing or a.window_timer_poll_probe or a.window_motion_timeline or a.window_pending_defer_probe or a.window_phase_idle_probe or a.window_idle_probe or a.window_first_input_probe or a.window_pending_idle_probe):p.error('Rearm-ready probe requires the interrupt window profile without other behavior probes')
     repo=Path(__file__).resolve().parents[1];tools=Path(a.tool_root).resolve();out=Path(a.output).resolve()
     out.mkdir(parents=True,exist_ok=False);sys.dont_write_bytecode=True
     spec=spec_from_file_location('base_rom',repo/'scripts/Build-MacROM.py');h=module_from_spec(spec);spec.loader.exec_module(h)
@@ -169,6 +171,7 @@ def main():
         if a.window_fast_collect:numbers+=('0091',)
         if a.window_loss_counts:numbers+=('0092',)
         if a.window_pending_idle_probe:numbers+=('0093',)
+        if a.window_rearm_ready_probe:numbers+=('0094',)
         for number in numbers:
             found=sorted(repo.glob('docs/specifications/SPEC-'+number+'-*.md'))
             if len(found)!=1:raise ValueError('Specification lookup SPEC-'+number)
@@ -199,6 +202,7 @@ def main():
         if a.window_fast_collect:profile='native-window-fast-collect-experiment-v1';specification='SPEC-0091'
         if a.window_loss_counts:profile='native-window-'+('fast-' if a.window_fast_collect else '')+'loss-counts-v1';specification='SPEC-0092'
         if a.window_pending_idle_probe:profile='native-window-'+('fast-' if a.window_fast_collect else '')+'pending-idle-probe-v1';specification='SPEC-0093'
+        if a.window_rearm_ready_probe:profile='native-window-'+('fast-' if a.window_fast_collect else '')+'rearm-ready-probe-v1';specification='SPEC-0094'
     profiles=[]
     for twin in ('a','b'):
         folder=out/('Os-'+twin);folder.mkdir();objects=[]
@@ -226,6 +230,7 @@ def main():
         if a.window_fast_collect:flags+=['-DCLASSICK_MAC_FAST_COLLECT=1']
         if a.window_loss_counts:flags+=['-DCLASSICK_MAC_LOSS_COUNTS=1']
         if a.window_pending_idle_probe:flags+=['-DCLASSICK_MAC_PENDING_IDLE_PROBE=1']
+        if a.window_rearm_ready_probe:flags+=['-DCLASSICK_MAC_REARM_READY_PROBE=1']
         for i,source in enumerate(sources):
             obj=folder/f'{i}.o';objects.append(obj);h.run([cc,*flags,'-c',repo/source,'-o',obj],env)
             if source not in ('platform/mac128k/loaded-entry.c','platform/mac128k/drawing-entry.c','platform/mac128k/native-drawing-entry.c','platform/mac128k/window-entry.c'):
@@ -424,6 +429,7 @@ def main():
     if a.window_fast_collect:manifest['fast_collect']={'experimental':True,'same_MMIO_order_required':True,'new_MMIO':False,'host_input_qualified':False}
     if a.window_loss_counts:manifest['loss_counts']={'tag':'MLC1','bytes':20,'address':syms['cs_mac_loss_trace'],'reasons':[1,2,3,4],'pending_tag':'MLP1','pending_address':syms['cs_mac_pending_trace'],'pending_bytes':20,'context_tag':'MLX1','context_address':syms['cs_mac_context_trace'],'context_bytes':20,'no_added_MMIO':True,'interrupt_timing_perturbed':True}
     if a.window_pending_idle_probe:manifest['pending_idle_probe']={'experimental':True,'hidden_transitions_may_be_discarded':True,'physical_qualification':False}
+    if a.window_rearm_ready_probe:manifest['rearm_ready_probe']={'experimental':True,'interrupts_masked_during_priming':True,'physical_qualification':False}
     if a.window_drawing:manifest['window_idle_probe']=bool(a.window_idle_probe)
     if a.window_drawing:manifest['window_pending_defer_probe']=bool(a.window_pending_defer_probe)
     if a.window_drawing:manifest['window_phase_idle_probe']=bool(a.window_phase_idle_probe)
