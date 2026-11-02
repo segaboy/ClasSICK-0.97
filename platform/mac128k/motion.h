@@ -53,6 +53,14 @@ _Static_assert(CLASSICK_MAC_MOTION_TIMELINE==0 || CLASSICK_MAC_MOTION_TIMELINE==
 #error CLASSICK_MAC_FAST_COLLECT must be 0 or 1
 #endif
 
+/* Observation-only per-reason counts, excluded from normal builds. */
+#ifndef CLASSICK_MAC_LOSS_COUNTS
+#define CLASSICK_MAC_LOSS_COUNTS 0
+#endif
+#if (CLASSICK_MAC_LOSS_COUNTS)!=0 && (CLASSICK_MAC_LOSS_COUNTS)!=1
+#error CLASSICK_MAC_LOSS_COUNTS must be 0 or 1
+#endif
+
 enum { CS_MAC_SCC_A = 0, CS_MAC_SCC_B = 1 };
 /* Shared by the motion core and the native collection path. */
 enum { CS_MAC_SCC_EXT_A = 0x08, CS_MAC_SCC_EXT_B = 0x01,
@@ -122,6 +130,9 @@ struct cs_mac_motion {
     int32_t cause;
     uint32_t services, samples, baselines, losses, peak_queued; /* saturate */
     struct cs_mac_motion_loss first_loss;
+#if CLASSICK_MAC_LOSS_COUNTS
+    uint32_t loss_counts[4]; /* reasons 1..4, saturating */
+#endif
 #if CLASSICK_MAC_MOTION_TIMELINE
     struct cs_mac_timeline timeline;
 #endif
@@ -142,6 +153,6 @@ int cs_mac_motion_stop(struct cs_mac_motion *m);
 void cs_mac_motion_timeline_commit(struct cs_mac_motion *m, int result);
 #endif
 
-_Static_assert(sizeof(struct cs_mac_motion)<=(CLASSICK_MAC_MOTION_TIMELINE?416u:192u),
+_Static_assert(sizeof(struct cs_mac_motion)<=(CLASSICK_MAC_MOTION_TIMELINE?416u:192u)+(CLASSICK_MAC_LOSS_COUNTS?16u:0u),
     "Bounded motion controller");
 #endif

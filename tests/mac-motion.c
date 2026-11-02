@@ -206,6 +206,10 @@ int main(void)
     CHECK(m.first_loss.snapshots[0]==0x080000u && m.first_loss.snapshots[1]==0x080000u);
     CHECK(m.first_loss.snapshots[2]==0x180000u && m.first_loss.previous==0x01000000u);
     CHECK(m.first_loss.inbox_phase==CS_INBOX_READY);
+#if CLASSICK_MAC_LOSS_COUNTS
+    CHECK(m.loss_counts[0]==0 && m.loss_counts[1]==1 &&
+          m.loss_counts[2]==0 && m.loss_counts[3]==0);
+#endif
     CHECK(hw.regs[0][9]==2);
     struct cs_mac_motion_loss first=m.first_loss;
     CHECK(cs_mac_motion_service(&m)==CS_MAC_MOTION_LOST);
@@ -217,6 +221,9 @@ int main(void)
     CHECK(cs_inbox_claim(&inbox,1)==CS_INBOX_BASELINE_ITEM);
     CHECK(cs_inbox_complete(&inbox,1,0)==CS_INBOX_OK);
     hw.raw[0]=8;CHECK(cs_mac_motion_service(&m)==CS_MAC_MOTION_LOST && m.losses==2);
+#if CLASSICK_MAC_LOSS_COUNTS
+    CHECK(m.loss_counts[1]==1 && m.loss_counts[2]==1);
+#endif
     CHECK(!memcmp(&first,&m.first_loss,sizeof first));
     CHECK(cs_mac_motion_stop(&m)==CS_MAC_MOTION_OK);
     CHECK(!memcmp(&first,&m.first_loss,sizeof first));
@@ -224,6 +231,10 @@ int main(void)
     baseline();m.have_phase=0;hw.unstable=1;
     CHECK(cs_mac_motion_service(&m)==CS_MAC_MOTION_LOST);
     CHECK(m.first_loss.reason==CS_MAC_LOSS_NO_PHASE && m.first_loss.previous==0);
+#if CLASSICK_MAC_LOSS_COUNTS
+    CHECK(m.loss_counts[0]==1 && m.loss_counts[1]==0 &&
+          m.loss_counts[2]==0 && m.loss_counts[3]==0);
+#endif
     CHECK(m.first_loss.snapshots[2]==0x180000u && m.first_loss.inbox_phase==CS_INBOX_READY);
     fresh(0);baseline();hw.pending=8;n=hw.calls;
     CHECK(cs_mac_motion_service(&m)==CS_MAC_MOTION_LOST && hw.calls-n==13);
@@ -234,15 +245,29 @@ int main(void)
     for(unsigned i=0;i<16;i++){hw.pb=(uint8_t)((i&1u)?8:0);CHECK(cs_mac_motion_service(&m)==CS_MAC_MOTION_OK);}
     hw.pb=0;CHECK(cs_mac_motion_service(&m)==CS_MAC_MOTION_LOST);
     CHECK(m.first_loss.reason==CS_MAC_LOSS_OVERFLOW && m.first_loss.rr3==0);
+#if CLASSICK_MAC_LOSS_COUNTS
+    CHECK(m.loss_counts[3]==1 && m.loss_counts[0]==0 &&
+          m.loss_counts[1]==0 && m.loss_counts[2]==0);
+#endif
     for(unsigned i=0;i<3;i++)CHECK(m.first_loss.snapshots[i]==0u);
     CHECK(m.first_loss.previous==0x01000000u && m.first_loss.inbox_phase==CS_INBOX_READY);
     fresh(0);baseline();CHECK(cs_inbox_uncertain(&inbox,1)==CS_INBOX_LOST);
     CHECK(cs_mac_motion_service(&m)==CS_MAC_MOTION_LOST && m.first_loss.reason==CS_MAC_LOSS_NONE);
+#if CLASSICK_MAC_LOSS_COUNTS
+    CHECK(m.loss_counts[0]==0 && m.loss_counts[1]==0 &&
+          m.loss_counts[2]==0 && m.loss_counts[3]==0);
+    fresh(0);baseline();m.loss_counts[1]=UINT32_MAX;hw.unstable=1;
+    CHECK(cs_mac_motion_service(&m)==CS_MAC_MOTION_LOST && m.loss_counts[1]==UINT32_MAX);
+#endif
     fresh(0);baseline();hw.pending=2;
     CHECK(cs_mac_motion_service(&m)==CS_MAC_MOTION_FAULT && m.first_loss.reason==CS_MAC_LOSS_NONE);
     /* Malformed inbox can refuse uncertain(): hard fault, not a loss record. */
     fresh(0);baseline();inbox.count=17;hw.unstable=1;
     CHECK(cs_mac_motion_service(&m)==CS_MAC_MOTION_FAULT && m.first_loss.reason==CS_MAC_LOSS_NONE);
+#if CLASSICK_MAC_LOSS_COUNTS
+    CHECK(m.loss_counts[0]==0 && m.loss_counts[1]==0 &&
+          m.loss_counts[2]==0 && m.loss_counts[3]==0);
+#endif
     fresh(0);
     const struct cs_mac_motion_loss empty={0};
     CHECK(!memcmp(&m.first_loss,&empty,sizeof empty));

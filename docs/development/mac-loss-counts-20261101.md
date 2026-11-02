@@ -1,0 +1,18 @@
+<!-- SPDX-License-Identifier: GPL-3.0-or-later -->
+<!-- Copyright (C) 2026 Dean Howell. -->
+# Mac loss classification
+
+2026-11-01; SRC-0592 / SPEC-0092 / IMPL-0107 / TEST-0150. The existing Mac trace records only the first loss. An opt-in diagnostic now counts accepted transitions into each existing loss category without changing the existing input or recovery rules. It adds interrupt and foreground instructions, so its timing is different and results cannot be treated as uninstrumented hardware behavior. The ordinary candidate images are unchanged: independently rebuilt twins of the normal and fast profiles matched `c88c3eddc6e47e82a865274c21c58fb085c4c0aacb1ae7e39693385fee663807` and `920d90bd16b204d4b159356f274273fff02c00f4a960c0cd78880c7ffb7bba1e` respectively.
+
+The original normal and fast diagnostic ROMs built as matching twins; their identities were `08e76832ae9a31d04297064cb8218c8e0d651ae00a59453953128fbd017e5a00` and `a5057129c56c4d282119c473756b4ba2c943166d86a04a767d520990c7f7adec`. Both used the experimental invert-3 setting, which is not verified for physical hardware. Each booted once in a fresh isolated Snow Early128K session with no disks or shared folders. Its own MLC1 and MWP1 records were read while paused before and after scene positioning, resumption, sixteen guarded host upward movements, and a later pause. The helper reported all sixteen Windows events accepted in each trial; capture was not verified and helper acceptance does not establish guest delivery.
+
+| Diagnostic profile | Additional unstable losses | Additional pending mismatches | Additional other losses | Additional deliveries |
+| --- | ---: | ---: | ---: | ---: |
+| Normal | 14 | 3 | 0 | 0 |
+| Fast | 6 | 534 | 0 | 20 |
+
+The [original trace prefixes and decoded counts](../evidence/traces/2026-11-01/mac-loss-counts.json) retain both pre- and post-interval snapshots. Both began with prior loss counts, and UI setup and pause may contribute. Different session timings and the instrumentation prevent attributing each loss to an event or measuring comparative performance. Pending mismatch describes a rejection by our software; it does not establish a cause or justify accepting uncertain input. Both owned processes were externally closed with unchanged ROM hashes; no guest shutdown is claimed. Neither profile has passed the human or physical gates, and this diagnostic does not fix the mouse or qualify the paired release.
+
+Windows GCC ran the original controller suite with the counter enabled and disabled for each collection mode; the enabled cases additionally verify all four classifications, reset, saturation, recovery, already-LOSS and invalid-inbox behavior. Both enabled variants passed Windows Clang AddressSanitizer and UndefinedBehaviorSanitizer; a separately compiled missing-counter mutant was rejected. Three unsupported builder combinations refused before creating output. One initial sanitizer invocation lacked its runtime DLL path and did not execute; a rerun with the existing toolchain directory on PATH passed. The initial CMake configuration could not find `llvm-nm`; after adding the existing tool directory, all four focused CMake tests passed. The 45 normal and 46 fast build-input hashes match the reviewed files. Build manifests, raw tool receipts and private window captures remain under `C:\ClasSICK\mac-loss-counts-20261101-a`.
+
+Next investigate the pending-mismatch cases with a bounded breakdown of which channel changed and which pending bit disagreed, while retaining the existing uncertainty policy. The current evidence does not support silently weakening that policy or selecting a physical polarity.

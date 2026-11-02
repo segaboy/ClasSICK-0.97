@@ -157,6 +157,10 @@ static void note(struct cs_mac_motion *m, uint32_t reason, uint8_t rr3,
     const snap *s1, const snap *s2, const snap *s3, uint32_t entry)
 {
     struct cs_mac_motion_loss *l = &m->first_loss;
+#if CLASSICK_MAC_LOSS_COUNTS
+    if (reason >= CS_MAC_LOSS_NO_PHASE && reason <= CS_MAC_LOSS_OVERFLOW)
+        m->loss_counts[reason - 1u] = sat(m->loss_counts[reason - 1u]);
+#endif
     if (l->reason != CS_MAC_LOSS_NONE) return;
     l->rr3 = rr3;
     l->snapshots[0] = pack(s1);
