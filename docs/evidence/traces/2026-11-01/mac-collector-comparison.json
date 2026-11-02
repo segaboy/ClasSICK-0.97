@@ -1,0 +1,119 @@
+{
+  "date": "2026-11-01",
+  "source_revision": "fec5f7e8d527b51c5964bb0c266717cf38bddf69",
+  "method": "Read only the project own MWP1 trace through paused Snow memory view; original emulated machine, 16 guarded host up events.",
+  "normal": {
+    "rom_sha256": "c88c3eddc6e47e82a865274c21c58fb085c4c0aacb1ae7e39693385fee663807",
+    "profile": "normal collector, invert 0",
+    "trace_address": "0xB70",
+    "before": {
+      "trace_prefix_hex": "4d575031000000020000008000000001000012ce0000000100000000000012cf000000010000000100000000000000000000000000000100000000ab00000050000000460000000000000001",
+      "decoded": {
+        "tag": "MWP1",
+        "version": 2,
+        "bytes": 128,
+        "source_irq": 1,
+        "vbl": 4814,
+        "scc": 1,
+        "combined": 0,
+        "services": 4815,
+        "baselines": 1,
+        "losses": 1,
+        "queued": 0,
+        "peak": 0,
+        "deliveries": 0,
+        "pointer_x": 256,
+        "pointer_y": 171,
+        "window_x": 80,
+        "window_y": 70,
+        "pattern": 0,
+        "phase": 1
+      }
+    },
+    "after": {
+      "trace_prefix_hex": "4d57503100000002000000800000000100001cf4000000120000000000001d06000000120000001200000000000000000000000000000100000000ab00000050000000460000000000000001",
+      "decoded": {
+        "tag": "MWP1",
+        "version": 2,
+        "bytes": 128,
+        "source_irq": 1,
+        "vbl": 7412,
+        "scc": 18,
+        "combined": 0,
+        "services": 7430,
+        "baselines": 18,
+        "losses": 18,
+        "queued": 0,
+        "peak": 0,
+        "deliveries": 0,
+        "pointer_x": 256,
+        "pointer_y": 171,
+        "window_x": 80,
+        "window_y": 70,
+        "pattern": 0,
+        "phase": 1
+      }
+    }
+  },
+  "experimental": {
+    "rom_sha256": "920d90bd16b204d4b159356f274273fff02c00f4a960c0cd78880c7ffb7bba1e",
+    "profile": "fast collector, invert 3",
+    "trace_address": "0xB74",
+    "before": {
+      "trace_prefix_hex": "4d57503100000002000000800000000200001172000000040000000000001176000000030000000300000000000000010000000000000100000000ab00000050000000460000000000000001",
+      "decoded": {
+        "tag": "MWP1",
+        "version": 2,
+        "bytes": 128,
+        "source_irq": 2,
+        "vbl": 4466,
+        "scc": 4,
+        "combined": 0,
+        "services": 4470,
+        "baselines": 3,
+        "losses": 3,
+        "queued": 0,
+        "peak": 1,
+        "deliveries": 0,
+        "pointer_x": 256,
+        "pointer_y": 171,
+        "window_x": 80,
+        "window_y": 70,
+        "pattern": 0,
+        "phase": 1
+      }
+    },
+    "after": {
+      "trace_prefix_hex": "4d57503100000002000000800000000100003970000001f30000000000003b60000001d8000001d800000000000000020000001a000001000000009100000050000000460000000000000001",
+      "decoded": {
+        "tag": "MWP1",
+        "version": 2,
+        "bytes": 128,
+        "source_irq": 1,
+        "vbl": 14704,
+        "scc": 499,
+        "combined": 0,
+        "services": 15200,
+        "baselines": 472,
+        "losses": 472,
+        "queued": 0,
+        "peak": 2,
+        "deliveries": 26,
+        "pointer_x": 256,
+        "pointer_y": 145,
+        "window_x": 80,
+        "window_y": 70,
+        "pattern": 0,
+        "phase": 1
+      }
+    }
+  },
+  "limitations": [
+    "One run per profile; intervals and host/window setup not strictly matched.",
+    "Each interval includes scene positioning, resume and pause actions; not every counter increase can be assigned to the planned events.",
+    "Host capture not verified; helper acceptance is not guest acceptance.",
+    "Profiles differ in both collector and inversion; these observations do not isolate the cause.",
+    "Trace counters are cumulative and retained first loss cannot classify later losses.",
+    "Not human, physical-hardware or complete release qualification."
+  ]
+}
