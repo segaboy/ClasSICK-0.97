@@ -61,6 +61,16 @@ _Static_assert(CLASSICK_MAC_MOTION_TIMELINE==0 || CLASSICK_MAC_MOTION_TIMELINE==
 #error CLASSICK_MAC_LOSS_COUNTS must be 0 or 1
 #endif
 
+/* Experimental no-decision treatment of pending-only, unchanged endpoints. */
+#ifndef CLASSICK_MAC_PENDING_IDLE_PROBE
+#define CLASSICK_MAC_PENDING_IDLE_PROBE 0
+#endif
+#if (CLASSICK_MAC_PENDING_IDLE_PROBE)!=0 && (CLASSICK_MAC_PENDING_IDLE_PROBE)!=1
+#error CLASSICK_MAC_PENDING_IDLE_PROBE must be 0 or 1
+#endif
+_Static_assert(CLASSICK_MAC_PENDING_IDLE_PROBE==0 || CLASSICK_MAC_PENDING_IDLE_PROBE==1,
+    "Pending-idle probe must be numeric 0 or 1");
+
 enum { CS_MAC_SCC_A = 0, CS_MAC_SCC_B = 1 };
 /* Shared by the motion core and the native collection path. */
 enum { CS_MAC_SCC_EXT_A = 0x08, CS_MAC_SCC_EXT_B = 0x01,

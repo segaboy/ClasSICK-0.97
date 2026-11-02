@@ -366,6 +366,14 @@ int cs_mac_motion_service(struct cs_mac_motion *m)
     }
     ch_a = ra != m->last_raw_a;
     ch_b = rb != m->last_raw_b;
+#if CLASSICK_MAC_PENDING_IDLE_PROBE
+    /* No movement or button decision: hidden even transitions remain unknown. */
+    if (in->phase == CS_INBOX_READY && !m->quiesced && rr3 &&
+        in->head < CS_INBOX_CAPACITY && in->count <= CS_INBOX_CAPACITY &&
+        (in->claimed == CS_INBOX_NONE || in->claimed == CS_INBOX_CLAIM_SAMPLE) &&
+        !ch_a && !ch_b && buttons == m->last_buttons)
+        return CS_MAC_MOTION_EMPTY;
+#endif
     if (ch_a != pend_a || ch_b != pend_b) {
 #if CLASSICK_MAC_LOSS_COUNTS
         r = uncertain(m, CS_MAC_LOSS_PENDING, rr3, &s1, &s2, &s3, entry);
