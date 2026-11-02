@@ -1,6 +1,6 @@
 {
   "date": "2026-11-01",
-  "source_revision": "fec5f7e8d527b51c5964bb0c266717cf38bddf69",
+  "first_observations_at_head": "fec5f7e8d527b51c5964bb0c266717cf38bddf69",
   "method": "Read only the project own MWP1 trace through paused Snow memory view; original emulated machine, 16 guarded host up events.",
   "normal": {
     "rom_sha256": "c88c3eddc6e47e82a865274c21c58fb085c4c0aacb1ae7e39693385fee663807",
@@ -112,8 +112,61 @@
     "One run per profile; intervals and host/window setup not strictly matched.",
     "Each interval includes scene positioning, resume and pause actions; not every counter increase can be assigned to the planned events.",
     "Host capture not verified; helper acceptance is not guest acceptance.",
-    "Profiles differ in both collector and inversion; these observations do not isolate the cause.",
     "Trace counters are cumulative and retained first loss cannot classify later losses.",
-    "Not human, physical-hardware or complete release qualification."
-  ]
+    "Not human, physical-hardware or complete release qualification.",
+    "The first normal profile differs from the experimental profile in collector and inversion; the additional normal/invert-3 build matches inversion but its session timing and setup are not controlled."
+  ],
+  "matched_normal_invert3": {
+    "rom_sha256": "0e55c79c6d283ec6f2acf2e694cb1f93ba0a2b22af9023565d41f3bea05306c5",
+    "profile": "normal collector, invert 3",
+    "trace_address": "0xB70",
+    "before": {
+      "trace_prefix_hex": "4d57503100000002000000800000000100000b3a000000010000000000000b3b000000010000000100000000000000000000000000000100000000ab00000050000000460000000000000001",
+      "decoded": {
+        "tag": "MWP1",
+        "version": 2,
+        "bytes": 128,
+        "source_irq": 1,
+        "vbl": 2874,
+        "scc": 1,
+        "combined": 0,
+        "services": 2875,
+        "baselines": 1,
+        "losses": 1,
+        "queued": 0,
+        "peak": 0,
+        "deliveries": 0,
+        "pointer_x": 256,
+        "pointer_y": 171,
+        "window_x": 80,
+        "window_y": 70,
+        "pattern": 0,
+        "phase": 1
+      }
+    },
+    "after": {
+      "trace_prefix_hex": "4d57503100000002000000800000000100001665000000110000000000001676000000120000001200000000000000000000000000000100000000ab00000050000000460000000000000001",
+      "decoded": {
+        "tag": "MWP1",
+        "version": 2,
+        "bytes": 128,
+        "source_irq": 1,
+        "vbl": 5733,
+        "scc": 17,
+        "combined": 0,
+        "services": 5750,
+        "baselines": 18,
+        "losses": 18,
+        "queued": 0,
+        "peak": 0,
+        "deliveries": 0,
+        "pointer_x": 256,
+        "pointer_y": 171,
+        "window_x": 80,
+        "window_y": 70,
+        "pattern": 0,
+        "phase": 1
+      }
+    }
+  }
 }
