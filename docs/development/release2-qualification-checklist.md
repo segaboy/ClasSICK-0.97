@@ -9,11 +9,11 @@ still provisional. No reduced goal,freeze or publication approval is inferred.
 |Mac normal/inverted and PC image identity/budget|Passing-source preflight complete|Retain exact source/hash pins;no new binary in Git|
 |Mac latch and phase-only hypothesis|209 fixture checks and131072-transcript matrices pass|Native cost/identity verified;combined experiment boots,physical check not performed after cap|
 |Desktop input access|Restored by owner;visible simple-profile scene|Retain guards;do not equate access with guest input|
-|Mac accepted motion/drag|Optimized experimental fast/invert-3 ROM passed one guarded host drag/release; earlier normal physical check failed|Qualify normal collector, remaining E1-E3 cases and physical polarity; retain human failure|
+|Mac accepted motion/drag|Optimized experimental fast/invert-3 ROM passed one guarded host drag/release; normal optimized ROM accepted a click but its pointer remained centered after guarded motion|Qualify normal collector, remaining E1-E3 cases and physical polarity; retain human failure|
 |PC host GUI motion/drag/release|Optimized candidate passed guarded host-only drag/release; earlier human check failed|Finish remaining E1-E3 cases and retain human failure|
 |E1-E3 on exact paired candidates|Incomplete native input qualification|Verify title hit,drag,release,reentry,cursor restoration and unchanged margins/counter|
 |E4 human|Normal Mac and PC checks performed and failed|Fix and repeat;do not waive a failed usability result|
-|Freeze/package/release approval|Not ready|After E1-E3,freeze sources/licenses/setup/checksums,run builder/auditor,then request final publication approval|
+|Freeze/package/release approval|Not ready; local non-release draft contains exact image copies and checksums|After E1-E3,complete source archive, licenses, final notes, builder/auditor and publication approval|
 
 After desktop availability changes,first verify ordinary access without sending
 input. Use the existing owned-process/creation/path/hash,foreground/capture and
