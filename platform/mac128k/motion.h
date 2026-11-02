@@ -132,6 +132,7 @@ struct cs_mac_motion {
     struct cs_mac_motion_loss first_loss;
 #if CLASSICK_MAC_LOSS_COUNTS
     uint32_t loss_counts[4]; /* reasons 1..4, saturating */
+    uint32_t pending_mismatch[4]; /* A pending/no-change, A change/no-pending, B ditto */
 #endif
 #if CLASSICK_MAC_MOTION_TIMELINE
     struct cs_mac_timeline timeline;
@@ -153,6 +154,6 @@ int cs_mac_motion_stop(struct cs_mac_motion *m);
 void cs_mac_motion_timeline_commit(struct cs_mac_motion *m, int result);
 #endif
 
-_Static_assert(sizeof(struct cs_mac_motion)<=(CLASSICK_MAC_MOTION_TIMELINE?416u:192u)+(CLASSICK_MAC_LOSS_COUNTS?16u:0u),
+_Static_assert(sizeof(struct cs_mac_motion)<=(CLASSICK_MAC_MOTION_TIMELINE?416u:192u)+(CLASSICK_MAC_LOSS_COUNTS?32u:0u),
     "Bounded motion controller");
 #endif

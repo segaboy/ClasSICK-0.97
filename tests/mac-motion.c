@@ -322,6 +322,27 @@ int main(void)
     CHECK(hw.regs[0][9]==2);
     hw.pending=0;w=hw.writes;
     CHECK(cs_mac_motion_service(&m)==CS_MAC_MOTION_STATE && hw.writes==w && hw.regs[0][9]==2);
+#if CLASSICK_MAC_LOSS_COUNTS
+    /* Classify each direction of disagreement on each channel. */
+    for(unsigned k=0;k<4u;k++){
+        fresh(0);baseline();
+        if(k==0)hw.pending=8; else if(k==1)hw.raw[0]=8;
+        else if(k==2)hw.pending=1; else hw.raw[1]=8;
+        CHECK(cs_mac_motion_service(&m)==CS_MAC_MOTION_LOST);
+        for(unsigned j=0;j<4u;j++)CHECK(m.pending_mismatch[j]==(j==k?1u:0u));
+        CHECK(m.loss_counts[2]==1);
+    }
+    fresh(0);baseline();hw.pending=8;hw.raw[1]=8;
+    CHECK(cs_mac_motion_service(&m)==CS_MAC_MOTION_LOST);
+    CHECK(m.pending_mismatch[0]==1 && m.pending_mismatch[1]==0 &&
+          m.pending_mismatch[2]==0 && m.pending_mismatch[3]==1);
+    CHECK(m.loss_counts[2]==1);
+    fresh(0);baseline();m.pending_mismatch[0]=UINT32_MAX;hw.pending=8;
+    CHECK(cs_mac_motion_service(&m)==CS_MAC_MOTION_LOST && m.pending_mismatch[0]==UINT32_MAX);
+    fresh(0);baseline();inbox.count=17;hw.pending=8;
+    CHECK(cs_mac_motion_service(&m)==CS_MAC_MOTION_FAULT);
+    CHECK(m.pending_mismatch[0]==0 && m.loss_counts[2]==0);
+#endif
     printf("Mac motion: %u checks,32 phase/inversion cases; synthetic IO, no target execution.\n",checks);
     return 0;
 }

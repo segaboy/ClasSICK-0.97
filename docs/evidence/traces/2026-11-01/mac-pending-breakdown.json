@@ -1,0 +1,57 @@
+{
+  "date": "2026-11-01",
+  "source_baseline": "698c05b",
+  "rom_sha256": "10a4d52350ce51a2d4a43d9de15e517c2d56d48129c64ad18ec60ebd2e591448",
+  "before": {
+    "mlp1_hex": "4d4c503100000004000000000000000400000000",
+    "mlc1_hex": "4d4c433100000000000000000000000400000000",
+    "mismatch": {
+      "a_pending_no_change": 4,
+      "a_change_no_pending": 0,
+      "b_pending_no_change": 4,
+      "b_change_no_pending": 0
+    },
+    "losses": {
+      "no_phase": 0,
+      "unstable": 0,
+      "pending": 4,
+      "overflow": 0
+    }
+  },
+  "after": {
+    "mlp1_hex": "4d4c5031000000b6000000000000022b00000000",
+    "mlc1_hex": "4d4c433100000000000000050000022b00000000",
+    "mismatch": {
+      "a_pending_no_change": 182,
+      "a_change_no_pending": 0,
+      "b_pending_no_change": 555,
+      "b_change_no_pending": 0
+    },
+    "losses": {
+      "no_phase": 0,
+      "unstable": 5,
+      "pending": 555,
+      "overflow": 0
+    }
+  },
+  "delta": {
+    "mismatch": {
+      "a_pending_no_change": 178,
+      "a_change_no_pending": 0,
+      "b_pending_no_change": 551,
+      "b_change_no_pending": 0
+    },
+    "losses": {
+      "no_phase": 0,
+      "unstable": 5,
+      "pending": 551,
+      "overflow": 0
+    }
+  },
+  "limits": [
+    "One instrumented Snow session; counters may count both channels for a single loss.",
+    "Setup, positioning and pause may contribute; event causation and host capture not established.",
+    "Same observed level with pending does not prove that no physical transitions occurred.",
+    "No physical or human test and no release qualification."
+  ]
+}
