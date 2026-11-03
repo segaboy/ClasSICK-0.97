@@ -2605,6 +2605,50 @@
         "Device-level input in one isolated headless VM; no host GUI, human or physical hardware qualification.",
         "No historical System 1 or paired-release qualification."
       ]
+    },
+    {
+      "id": "2026-11-03-pc-host-corner-attempt",
+      "path": "docs/evidence/screenshots/2026-11-03/pc-host-corner-attempt.png",
+      "sha256": "ab670643740f705c0b2449ce5432d65a286473111dc9d49090b1337fda551be6",
+      "bytes": 4863,
+      "width": 1024,
+      "height": 768,
+      "captured_on": "2026-11-03",
+      "target": "native-x86_64",
+      "caption": "PC candidate after an unsuccessful guarded host-input attempt to reach the top-left scene corner.",
+      "alt": "The monochrome ClasSICK scene after an automated PC mouse corner attempt.",
+      "source_revision": "1c36d88dd3ca7cecc0a9d4db9870bf59b41863ea",
+      "compiled_source_revision": "e3cd4d867a34a72924cd7fe2693d450ca8758b64",
+      "evidence": "docs/development/pc-host-edge-20261103.md",
+      "license": "GPL-3.0-or-later",
+      "rights": "Original ClasSICK product framebuffer only; no emulator chrome, desktop or reference-system pixels.",
+      "input": "synthetic",
+      "limitations": [
+        "The intended corner was not observed; no host-GUI edge or human pass.",
+        "No historical System 1, physical hardware or paired-release qualification."
+      ]
+    },
+    {
+      "id": "2026-11-03-pc-host-corner-reverse",
+      "path": "docs/evidence/screenshots/2026-11-03/pc-host-corner-reverse.png",
+      "sha256": "a3e67fc98c4d3f20ff726f2e1559ed03c198a6ede0690205a319d5bde8197eb6",
+      "bytes": 4848,
+      "width": 1024,
+      "height": 768,
+      "captured_on": "2026-11-03",
+      "target": "native-x86_64",
+      "caption": "PC guest after synthetic reverse movements during a host-capture calibration.",
+      "alt": "Monochrome ClasSICK scene with the pointer at the lower-right edge.",
+      "source_revision": "1c36d88dd3ca7cecc0a9d4db9870bf59b41863ea",
+      "compiled_source_revision": "e3cd4d867a34a72924cd7fe2693d450ca8758b64",
+      "evidence": "docs/development/pc-host-edge-20261103.md",
+      "license": "GPL-3.0-or-later",
+      "rights": "Original ClasSICK product framebuffer only; no emulator chrome, desktop or reference-system pixels.",
+      "input": "synthetic",
+      "limitations": [
+        "The negative-direction sequence did not reach the intended top-left corner; no host-GUI edge or human pass.",
+        "No historical System 1, physical hardware or paired-release qualification."
+      ]
     }
   ]
 }

@@ -90,3 +90,7 @@ See [storage and publication policy](../../development/screenshot-evidence.md). 
 [2026-11-01 PC device corner checks](2026-11-01/pc-device-corner-top-left.png): [top left](2026-11-01/pc-device-corner-top-left.png), [top right](2026-11-01/pc-device-corner-top-right.png), [bottom right](2026-11-01/pc-device-corner-bottom-right.png), [bottom left](2026-11-01/pc-device-corner-bottom-left.png), [return inside](2026-11-01/pc-device-corner-return-interior.png). [Evidence and limits](../../development/mono-span-20261101.md).
 
 [2026-11-01 PC device re-entry](2026-11-01/pc-device-reentry-second-drag.png): [second drag](2026-11-01/pc-device-reentry-second-drag.png), [content click](2026-11-01/pc-device-reentry-content-click.png), [boundary drag](2026-11-01/pc-device-reentry-drag-outside.png), [after release](2026-11-01/pc-device-reentry-outside-release.png). [Evidence and limits](../../development/mono-span-20261101.md).
+
+[2026-11-03 PC host corner attempt](2026-11-03/pc-host-corner-attempt.png): the intended corner was not observed. [Evidence and limits](../../development/pc-host-edge-20261103.md).
+
+[2026-11-03 PC host capture calibration](2026-11-03/pc-host-corner-reverse.png): the pointer remained near the lower-right after reverse movements. [Evidence and limits](../../development/pc-host-edge-20261103.md#captured-pointer-calibration).
