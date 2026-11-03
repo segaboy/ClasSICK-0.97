@@ -13,7 +13,7 @@ still provisional. No reduced goal,freeze or publication approval is inferred.
 |PC host GUI motion/drag/release|Optimized candidate passed guarded host-only drag/release; earlier human check failed|Finish remaining E1-E3 cases and retain human failure|
 |E1-E3 on exact paired candidates|Incomplete native input qualification|Verify title hit,drag,release,reentry,cursor restoration and unchanged margins/counter|
 |E4 human|Normal Mac and PC checks performed and failed|Fix and repeat;do not waive a failed usability result|
-|Freeze/package/release approval|Not ready; local non-release draft contains exact image copies and checksums|After E1-E3,complete source archive, licenses, final notes, builder/auditor and publication approval|
+|Freeze/package/release approval|Not ready; local non-release draft contains exact image copies and checksums. The archived project source independently reproduced the draft PC EFI payload under local tools.|After E1-E3, update the archive for the final candidates, complete licenses, final notes, builder/auditor and publication approval. [Source evidence](paired-preview2-source-prep-20261103.md)|
 
 After desktop availability changes,first verify ordinary access without sending
 input. Use the existing owned-process/creation/path/hash,foreground/capture and
