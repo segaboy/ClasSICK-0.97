@@ -2649,6 +2649,28 @@
         "The negative-direction sequence did not reach the intended top-left corner; no host-GUI edge or human pass.",
         "No historical System 1, physical hardware or paired-release qualification."
       ]
+    },
+    {
+      "id": "2026-11-03-pc-host-pair-attempt",
+      "path": "docs/evidence/screenshots/2026-11-03/pc-host-pair-attempt.png",
+      "sha256": "097f1f28215232f0b953faf9cff21505c4cc52e0651cf781732a638a3d9048fe",
+      "bytes": 4845,
+      "width": 1024,
+      "height": 768,
+      "captured_on": "2026-11-03",
+      "target": "native-x86_64",
+      "caption": "PC guest after an unsuccessful paired synthetic host-movement corner attempt.",
+      "alt": "Monochrome ClasSICK scene with the pointer near the lower-right edge.",
+      "source_revision": "6a33c188d99357087f61e45d3ee7dffd79c24f69",
+      "compiled_source_revision": "e3cd4d867a34a72924cd7fe2693d450ca8758b64",
+      "evidence": "docs/development/pc-host-edge-20261103.md",
+      "license": "GPL-3.0-or-later",
+      "rights": "Original ClasSICK product framebuffer only; no emulator chrome, desktop or reference-system pixels.",
+      "input": "synthetic",
+      "limitations": [
+        "A paired input workaround did not reach the intended top-left corner; no E3 corner or human pass.",
+        "No historical System 1, physical hardware or paired-release qualification."
+      ]
     }
   ]
 }
