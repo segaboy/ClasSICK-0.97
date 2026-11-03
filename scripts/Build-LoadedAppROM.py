@@ -96,6 +96,7 @@ def main():
     p.add_argument('--window-phase-idle-probe',action='store_true',help='Experimental phase-only no-decision pass; window profile only')
     p.add_argument('--window-motion-timeline',action='store_true',help='Observation-only bounded SCC input timeline; interrupt window profile only')
     p.add_argument('--window-fast-collect',action='store_true',help='Experimental batched interrupt input collection; window profile only')
+    p.add_argument('--window-short-collect',action='store_true',help='Experimental shortened SCC collection; requires fast collect')
     p.add_argument('--window-loss-counts',action='store_true',help='Observation-only per-reason loss counts; interrupt window profile only')
     p.add_argument('--window-pending-idle-probe',action='store_true',help='Experimental pending-only unchanged-endpoint no-decision policy')
     p.add_argument('--window-rearm-ready-probe',action='store_true',help='Experimental SCC rearm after baseline consumption')
@@ -125,6 +126,7 @@ def main():
     if a.window_phase_idle_probe and (a.window_idle_probe or a.window_first_input_probe):p.error('Phase-idle probe is separate from checkpoint profiles')
     if a.window_motion_timeline and (not a.window_drawing or a.window_timer_poll_probe or a.window_idle_probe or a.window_first_input_probe or a.window_pending_defer_probe or a.window_phase_idle_probe):p.error('Motion timeline requires the normal interrupt window profile and no other probe')
     if a.window_fast_collect and (not a.window_drawing or a.window_timer_poll_probe or a.window_motion_timeline or a.window_pending_defer_probe or a.window_phase_idle_probe or a.window_idle_probe or a.window_first_input_probe):p.error('Fast collect requires the normal interrupt window profile without other probes')
+    if a.window_short_collect and (not a.window_fast_collect or a.window_pending_idle_probe or a.window_rearm_ready_probe):p.error('Short collect requires fast collect without pending-idle or rearm-ready probes')
     if a.window_loss_counts and (not a.window_drawing or a.window_timer_poll_probe or a.window_motion_timeline or a.window_pending_defer_probe or a.window_phase_idle_probe or a.window_idle_probe or a.window_first_input_probe):p.error('Loss counts require the interrupt window profile without other probes')
     if a.window_pending_idle_probe and (not a.window_drawing or a.window_timer_poll_probe or a.window_motion_timeline or a.window_pending_defer_probe or a.window_phase_idle_probe or a.window_idle_probe or a.window_first_input_probe):p.error('Pending-idle probe requires the interrupt window profile without other probes')
     if a.window_rearm_ready_probe and (not a.window_drawing or a.window_timer_poll_probe or a.window_motion_timeline or a.window_pending_defer_probe or a.window_phase_idle_probe or a.window_idle_probe or a.window_first_input_probe or a.window_pending_idle_probe):p.error('Rearm-ready probe requires the interrupt window profile without other behavior probes')
@@ -171,6 +173,7 @@ def main():
         if a.window_timer_phase_witness:numbers+=('0084',)
         if a.window_motion_timeline:numbers+=('0088',)
         if a.window_fast_collect:numbers+=('0091',)
+        if a.window_short_collect:numbers+=('0096',)
         if a.window_loss_counts:numbers+=('0092',)
         if a.window_pending_idle_probe:numbers+=('0093',)
         if a.window_rearm_ready_probe:numbers+=('0094',)
@@ -207,6 +210,7 @@ def main():
         if a.window_pending_idle_probe:profile='native-window-'+('fast-' if a.window_fast_collect else '')+'pending-idle-probe-v1';specification='SPEC-0093'
         if a.window_rearm_ready_probe:profile='native-window-'+('fast-' if a.window_fast_collect else '')+'rearm-ready-probe-v1';specification='SPEC-0094'
         if a.window_wait_latch_probe:profile='native-window-'+('fast-' if a.window_fast_collect else '')+'wait-latch-probe-v1';specification='SPEC-0095'
+        if a.window_short_collect:profile='native-window-short-collect-experiment-v1';specification='SPEC-0096'
     profiles=[]
     for twin in ('a','b'):
         folder=out/('Os-'+twin);folder.mkdir();objects=[]
@@ -232,6 +236,7 @@ def main():
         if a.window_phase_idle_probe:flags+=['-DCLASSICK_MAC_PHASE_IDLE_PROBE=1']
         if a.window_motion_timeline:flags+=['-DCLASSICK_MAC_MOTION_TIMELINE=1']
         if a.window_fast_collect:flags+=['-DCLASSICK_MAC_FAST_COLLECT=1']
+        if a.window_short_collect:flags+=['-DCLASSICK_MAC_SHORT_COLLECT=1']
         if a.window_loss_counts:flags+=['-DCLASSICK_MAC_LOSS_COUNTS=1']
         if a.window_pending_idle_probe:flags+=['-DCLASSICK_MAC_PENDING_IDLE_PROBE=1']
         if a.window_rearm_ready_probe:flags+=['-DCLASSICK_MAC_REARM_READY_PROBE=1']
@@ -431,7 +436,8 @@ def main():
     if a.window_timer_live_pair:manifest['timer_live_pair']={'live':True,'checkpoint':False,'halts_after_observation':False,'motion_claimed':False,'physical_timing_qualified':False,'programmed_reload_divisor':a.window_timer_divisor,'new_MMIO_operations':0}
     if a.window_timer_phase_witness:manifest['phase_witness']={'specification':'SPEC-0084','trace_version':3,'trace_bytes':128,'no_added_state_bytes':True,'no_added_MMIO':True}
     if a.window_motion_timeline:manifest['motion_timeline']={'version':1,'capacity':6,'entry_bytes':32,'new_MMIO':False,'interrupt_timing_perturbed':True,'pointer_symbol':'cs_mac_timeline_address','motion_symbol':'cs_mac_timeline_motion'}
-    if a.window_fast_collect:manifest['fast_collect']={'experimental':True,'same_MMIO_order_required':True,'new_MMIO':False,'host_input_qualified':False}
+    if a.window_fast_collect:manifest['fast_collect']={'experimental':True,'same_MMIO_order_required':not a.window_short_collect,'new_MMIO':False,'host_input_qualified':False}
+    if a.window_short_collect:manifest['short_collect']={'pending_rr0_reused':True,'read_guard_nops':5,'write_guard_nops':8,'physical_qualification':False}
     if a.window_loss_counts:manifest['loss_counts']={'tag':'MLC1','bytes':20,'address':syms['cs_mac_loss_trace'],'reasons':[1,2,3,4],'pending_tag':'MLP1','pending_address':syms['cs_mac_pending_trace'],'pending_bytes':20,'context_tag':'MLX1','context_address':syms['cs_mac_context_trace'],'context_bytes':20,'no_added_MMIO':True,'interrupt_timing_perturbed':True}
     if a.window_pending_idle_probe:manifest['pending_idle_probe']={'experimental':True,'hidden_transitions_may_be_discarded':True,'physical_qualification':False}
     if a.window_rearm_ready_probe:manifest['rearm_ready_probe']={'experimental':True,'interrupts_masked_during_priming':True,'physical_qualification':False}
@@ -451,6 +457,9 @@ def main():
       'scc_write_b':0xBFFFF9,'scc_write_a':0xBFFFFB,'ab_select_bit':1,'dc_select_bit':2,'scc_byte_guard_nops':16},
      'interrupt_stack_margin':stack_margin,
      'proof_limits':['compile/link/seal only','no boot or hardware trial','SCC aliases, DCD sense, pending coherence and physical fit unverified','stack bound is a nonrecursive frame sum plus margin, not measured']})
+    if a.window_short_collect:
+        manifest['board_profile'].pop('scc_byte_guard_nops')
+        manifest['board_profile'].update({'scc_read_guard_nops':5,'scc_write_guard_nops':8})
     (out/'manifest.json').write_text(json.dumps(manifest,indent=2)+'\n')
     print('First loaded-app ROM twins PASS:',profiles[0]['rom_used'],'ROM bytes,',profiles[0]['workspace_end']-0x8000,'workspace bytes; no boot trial.')
 if __name__=='__main__':main()

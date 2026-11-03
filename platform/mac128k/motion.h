@@ -53,6 +53,19 @@ _Static_assert(CLASSICK_MAC_MOTION_TIMELINE==0 || CLASSICK_MAC_MOTION_TIMELINE==
 #error CLASSICK_MAC_FAST_COLLECT must be 0 or 1
 #endif
 
+/* Opt-in shorter SCC collection; target timing is not yet qualified. */
+#ifndef CLASSICK_MAC_SHORT_COLLECT
+#define CLASSICK_MAC_SHORT_COLLECT 0
+#endif
+#if (CLASSICK_MAC_SHORT_COLLECT)!=0 && (CLASSICK_MAC_SHORT_COLLECT)!=1
+#error CLASSICK_MAC_SHORT_COLLECT must be 0 or 1
+#endif
+_Static_assert(CLASSICK_MAC_SHORT_COLLECT==0 || CLASSICK_MAC_SHORT_COLLECT==1,
+    "Short collection must be numeric 0 or 1");
+#if CLASSICK_MAC_SHORT_COLLECT && !CLASSICK_MAC_FAST_COLLECT
+#error Short collection requires the fast collector
+#endif
+
 /* Observation-only per-reason counts, excluded from normal builds. */
 #ifndef CLASSICK_MAC_LOSS_COUNTS
 #define CLASSICK_MAC_LOSS_COUNTS 0

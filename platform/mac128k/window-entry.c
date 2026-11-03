@@ -220,9 +220,19 @@ static PAIR_INL void scc_guard(void)
 static inline void scc_guard(void)
 #endif
 {
+#if CLASSICK_MAC_SHORT_COLLECT
+    __asm__ volatile("nop; nop; nop; nop; nop; nop; nop; nop" ::: "memory");
+#else
     __asm__ volatile("nop; nop; nop; nop; nop; nop; nop; nop; "
                      "nop; nop; nop; nop; nop; nop; nop; nop" ::: "memory");
+#endif
 }
+#if CLASSICK_MAC_SHORT_COLLECT
+static PAIR_INL void scc_read_guard(void)
+{
+    __asm__ volatile("nop; nop; nop; nop; nop" ::: "memory");
+}
+#endif
 static PAIR_INL uint8_t via_read(void *context,unsigned reg)
 {
     (void)context;
@@ -246,7 +256,12 @@ static PAIR_INL uint8_t scc_read(void *cookie,uint32_t channel,uint32_t reg)
     uint8_t v;
     (void)cookie;reg&=15u;
     if(reg){*scc_ctrl_write(channel)=(uint8_t)reg;scc_guard();}
-    v=*scc_ctrl_read(channel);scc_guard();
+    v=*scc_ctrl_read(channel);
+#if CLASSICK_MAC_SHORT_COLLECT
+    scc_read_guard();
+#else
+    scc_guard();
+#endif
     return v;
 }
 static PAIR_INL void scc_write(void *cookie,uint32_t channel,uint32_t reg,uint8_t value)
