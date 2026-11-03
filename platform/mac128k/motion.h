@@ -81,6 +81,16 @@ _Static_assert(CLASSICK_MAC_PENDING_IDLE_PROBE==0 || CLASSICK_MAC_PENDING_IDLE_P
 _Static_assert(CLASSICK_MAC_REARM_READY_PROBE==0 || CLASSICK_MAC_REARM_READY_PROBE==1,
     "Rearm-ready probe must be numeric 0 or 1");
 
+/* Experimental post-sample pending check before publishing a baseline. */
+#ifndef CLASSICK_MAC_WAIT_LATCH_PROBE
+#define CLASSICK_MAC_WAIT_LATCH_PROBE 0
+#endif
+#if (CLASSICK_MAC_WAIT_LATCH_PROBE)!=0 && (CLASSICK_MAC_WAIT_LATCH_PROBE)!=1
+#error CLASSICK_MAC_WAIT_LATCH_PROBE must be 0 or 1
+#endif
+_Static_assert(CLASSICK_MAC_WAIT_LATCH_PROBE==0 || CLASSICK_MAC_WAIT_LATCH_PROBE==1,
+    "WAIT latch probe must be numeric 0 or 1");
+
 enum { CS_MAC_SCC_A = 0, CS_MAC_SCC_B = 1 };
 /* Shared by the motion core and the native collection path. */
 enum { CS_MAC_SCC_EXT_A = 0x08, CS_MAC_SCC_EXT_B = 0x01,

@@ -335,6 +335,16 @@ int cs_mac_motion_service(struct cs_mac_motion *m)
     case CS_INBOX_WAIT:
         DEFER_CLEAR(m);
         if (!stable) { m->have_phase = 0u; return CS_MAC_MOTION_EMPTY; }
+#if CLASSICK_MAC_WAIT_LATCH_PROBE
+        {
+            /* A latch may have closed after entry RR3 but before the samples.
+             * Leave it pending for a later pass rather than baselining it. */
+            uint8_t late = m->io.read(m->io.cookie, CS_MAC_SCC_A, 3u);
+            if (late & ~(RR3_EXT_A | RR3_EXT_B) & 0xFF)
+                return fail(m, CS_MAC_STAGE_PENDING, CS_MAC_CAUSE_PENDING);
+            if (late) { m->have_phase = 0u; return CS_MAC_MOTION_EMPTY; }
+        }
+#endif
         if (cs_inbox_baseline(in, m->epoch, buttons) != CS_INBOX_OK)
             return fail(m, CS_MAC_STAGE_INBOX, CS_MAC_CAUSE_INBOX_RESULT);
         m->last_raw_a = ra;

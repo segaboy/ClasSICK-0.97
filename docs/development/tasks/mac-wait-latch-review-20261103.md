@@ -1,0 +1,3 @@
+# Mac WAIT latch independent review brief
+
+2026-11-03; review the original Mac motion driver and its project-owned contracts at baseline `1818b4028757b71f7f415d569c6998c5aa51249f` for a concrete race consistent with pending/unchanged and unstable observations. Return a bounded hypothesis, a falsifiable test and limitations; do not run tools, modify the checkout, inspect manuals or proprietary code, or claim hardware proof. The frozen input packet contained only relevant reviewed project material and was kept outside Git. The [review receipt](../mac-wait-latch-20261103.md) records packet identity, findings, provider usage and independent validation.
