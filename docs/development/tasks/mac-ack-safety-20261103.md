@@ -1,0 +1,3 @@
+# Mac acknowledgement recovery safety review
+
+2026-11-03; independent read-only review of the original project motion controller, original inbox and fast collector, the scratch acknowledgement-split proposal and source-informed fixture, and ClasSICK's own captured trace at public baseline `8ba885613b4525d116530ae55f838374714078df`. Identify concrete ordering, ambiguity, button and state counterexamples; no external code, manuals, tools, checkout edits, web, delegation or test-execution claims. The [canonical receipt](../mac-fast-timing-20261103.md#rejected-split-recovery-proposal) records the exact input identity, result, provider-reported usage and independently executed counterexample.

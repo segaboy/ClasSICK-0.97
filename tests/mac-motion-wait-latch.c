@@ -78,6 +78,24 @@ int main(void)
     RUN(start(&t));t.f.hook_at=2;t.f.hook_ch=0;t.f.hook_val=1;
     CHECK(cs_mac_motion_service(&t.m)==CS_MAC_MOTION_EMPTY && rr3_reads==1u);
     CHECK(t.in.phase==CS_INBOX_WAIT && !t.in.count && rr3(&t.f)==8);
+    /* Two same-direction model steps can be indistinguishable from a bounce:
+     * the first latch freezes DCD while the second phase changes and returns.
+     * A reset can expose the second DCD level only in the third snapshot.
+     * Neither that changed snapshot nor a still-pending latch proves direction. */
+    for(unsigned ch=0;ch<2u;ch++){
+        RUN(start(&t));
+        CHECK(cs_mac_motion_service(&t.m)==CS_MAC_MOTION_BASELINED);
+        CHECK(cs_inbox_claim(&t.in,t.m.epoch)==CS_INBOX_BASELINE_ITEM);
+        CHECK(cs_inbox_complete(&t.in,t.m.epoch,0)==CS_INBOX_OK);
+        set(&t.f,(int)ch,1);
+        t.f.pb ^= ch ? PBY : PBX;
+        set(&t.f,(int)ch,0);
+        t.f.pb ^= ch ? PBY : PBX;
+        CHECK(t.f.c[ch].closed && t.f.c[ch].latched==1 && t.f.c[ch].live==0);
+        CHECK(cs_mac_motion_service(&t.m)==CS_MAC_MOTION_LOST);
+        CHECK(t.in.phase==CS_INBOX_LOSS && !t.in.count && t.m.losses==1u);
+        CHECK(t.m.first_loss.reason==CS_MAC_LOSS_UNSTABLE);
+    }
     printf("WAIT latch experiment: %u checks; synthetic IO, hardware timing unknown.\n",g_checks);
     return 0;
 }

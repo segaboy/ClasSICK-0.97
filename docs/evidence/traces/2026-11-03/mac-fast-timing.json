@@ -1,0 +1,200 @@
+{
+  "schema": "classick-own-mac-fast-timeline-1",
+  "date": "2026-11-03",
+  "source_revision": "8ba885613b4525d116530ae55f838374714078df",
+  "limits": [
+    "Scratch diagnostic filters for unstable READY samples; it changes timing and can overflow.",
+    "Host setup, clicks and pause may contribute to the interval; API delivery is not guest acceptance.",
+    "Runs have different elapsed times and no matching pre-input baseline in the 16-NOP run; counts cannot establish comparative rates.",
+    "No physical hardware, human input, guest shutdown or release qualification."
+  ],
+  "guard16": {
+    "identity": "original ClasSICK own MTL1; UI accessibility rows, manually transcribed",
+    "rom_sha256": "8ac46e20b92d963e3c0dc9c5a4b83e3cf42ae9bcb550ed8214e95efc5ba4b6d8",
+    "diagnostic": "scratch-only fast/invert-3 and WAIT probe; records only unstable READY passes",
+    "rows_hex": {
+      "b70": "01 00 00 00 00 00 00 03 4D 54 4C 31 00 00 00 03",
+      "b80": "00 00 00 00 00 00 00 00 00 00 1F 81 00 00 00 01",
+      "b90": "00 FF 44 44 00 BF 44 44 00 BF 44 4C 01 00 01 00",
+      "ba0": "00 00 00 03 00 00 00 03 00 00 20 95 00 00 00 01",
+      "bb0": "00 FF 44 44 00 BF 44 44 00 9F 44 4C 01 00 01 00",
+      "bc0": "00 00 00 03 00 00 00 03 00 00 24 B2 00 00 00 09",
+      "bd0": "00 8F 4C 44 00 8F 4C 44 00 8F 4C 4C 01 01 00 00",
+      "be0": "00 00 00 03 00 00 00 03 00 00 00 00 00 00 00 00"
+    },
+    "count": 3,
+    "overflow": 0,
+    "entries": [
+      {
+        "service": 8065,
+        "rr3": 1,
+        "snapshots": [
+          16729156,
+          12534852,
+          12534860
+        ],
+        "previous": 16777472,
+        "phase": 3,
+        "result": 3
+      },
+      {
+        "service": 8341,
+        "rr3": 1,
+        "snapshots": [
+          16729156,
+          12534852,
+          10437708
+        ],
+        "previous": 16777472,
+        "phase": 3,
+        "result": 3
+      },
+      {
+        "service": 9394,
+        "rr3": 9,
+        "snapshots": [
+          9391172,
+          9391172,
+          9391180
+        ],
+        "previous": 16842752,
+        "phase": 3,
+        "result": 3
+      }
+    ],
+    "limits": [
+      "no pre-input capture",
+      "scene positioning and pause may contribute",
+      "instrumentation changes timing",
+      "event association and host capture not established",
+      "not physical-hardware or human qualification"
+    ]
+  },
+  "guard8": {
+    "rom_sha256": "931f202fbeb2d50fb463289e9021af7ba1a85dd721c1b33fc79aa793ac8e88db",
+    "before_header": "4D544C31000000000000000000000000",
+    "rows_hex": {
+      "b70": "01 00 00 00 00 00 00 03 4D 54 4C 31 00 00 00 02",
+      "b80": "00 00 00 00 00 00 00 00 00 00 13 1A 00 00 00 01",
+      "b90": "00 9F 44 4C 00 9F 44 4C 00 9F 44 44 01 00 00 00",
+      "ba0": "00 00 00 03 00 00 00 03 00 00 13 79 00 00 00 01",
+      "bb0": "00 9F 44 4C 00 DF 44 4C 00 9F 44 44 01 00 00 00",
+      "bc0": "00 00 00 03 00 00 00 03 00 00 00 00 00 00 00 00"
+    },
+    "count": 2,
+    "overflow": 0,
+    "entries": [
+      {
+        "service": 4890,
+        "rr3": 1,
+        "snapshots": [
+          10437708,
+          10437708,
+          10437700
+        ],
+        "previous": 16777216,
+        "phase": 3,
+        "result": 3
+      },
+      {
+        "service": 4985,
+        "rr3": 1,
+        "snapshots": [
+          10437708,
+          14632012,
+          10437700
+        ],
+        "previous": 16777216,
+        "phase": 3,
+        "result": 3
+      }
+    ],
+    "mwp_rows_hex": {
+      "c40": "00 00 00 00 00 00 00 00 4D 57 50 31 00 00 00 02",
+      "c50": "00 00 00 80 00 00 00 01 00 00 17 72 00 00 00 20",
+      "c60": "00 00 00 00 00 00 17 92 00 00 00 03 00 00 00 03",
+      "c70": "00 00 00 00 00 00 00 02 00 00 00 1C 00 00 01 00",
+      "c80": "00 00 00 8F 00 00 00 50 00 00 00 46 00 00 00 00"
+    },
+    "mwp_cumulative_deliveries": 28,
+    "mwp_cumulative_losses": 3,
+    "mwp_final_pointer": [
+      256,
+      143
+    ],
+    "helper_attempted": 16,
+    "helper_delivered": 16,
+    "capture_verified": false
+  },
+  "pending_rr0_reuse": {
+    "rom_sha256": "8f4158028dab9065d652350b37e2e910015c9fc28ec27fe593980174db27db54",
+    "before_header": "4D544C31000000000000000000000000",
+    "rows_hex": {
+      "b70": "01 00 00 00 00 00 00 03 4D 54 4C 31 00 00 00 03",
+      "b80": "00 00 00 00 00 00 00 00 00 00 15 EE 00 00 00 01",
+      "b90": "00 DF 44 4C 00 9F 44 4C 00 9F 44 44 01 00 00 00",
+      "ba0": "00 00 00 03 00 00 00 03 00 00 16 7B 00 00 00 01",
+      "bb0": "00 9F 44 4C 00 9F 44 4C 00 BF 44 44 01 00 00 00",
+      "bc0": "00 00 00 03 00 00 00 03 00 00 1A 4B 00 00 00 09",
+      "bd0": "00 EF 4C 4C 00 AF 4C 4C 00 AF 4C 44 01 00 00 00",
+      "be0": "00 00 00 03 00 00 00 03 00 00 00 00 00 00 00 00"
+    },
+    "count": 3,
+    "overflow": 0,
+    "entries": [
+      {
+        "service": 5614,
+        "rr3": 1,
+        "snapshots": [
+          14632012,
+          10437708,
+          10437700
+        ],
+        "previous": 16777216,
+        "phase": 3,
+        "result": 3
+      },
+      {
+        "service": 5755,
+        "rr3": 1,
+        "snapshots": [
+          10437708,
+          10437708,
+          12534852
+        ],
+        "previous": 16777216,
+        "phase": 3,
+        "result": 3
+      },
+      {
+        "service": 6731,
+        "rr3": 9,
+        "snapshots": [
+          15682636,
+          11488332,
+          11488324
+        ],
+        "previous": 16777216,
+        "phase": 3,
+        "result": 3
+      }
+    ],
+    "mwp_rows_hex": {
+      "c40": "00 00 00 00 00 00 00 00 4D 57 50 31 00 00 00 02",
+      "c50": "00 00 00 80 00 00 00 01 00 00 1A 33 00 00 00 1F",
+      "c60": "00 00 00 00 00 00 1A 51 00 00 00 03 00 00 00 03",
+      "c70": "00 00 00 00 00 00 00 02 00 00 00 1C 00 00 01 00",
+      "c80": "00 00 00 8F 00 00 00 50 00 00 00 46 00 00 00 00"
+    },
+    "mwp_cumulative_deliveries": 28,
+    "mwp_cumulative_losses": 3,
+    "mwp_final_pointer": [
+      256,
+      143
+    ],
+    "helper_attempted": 16,
+    "helper_delivered": 16,
+    "capture_verified": false,
+    "sample_limits": "For a channel already pending at entry, snapshot 2 reuses its entire snapshot-1 RR0 byte; other RR0 status bits may be stale and snapshot 2 is not a second hardware read."
+  }
+}
