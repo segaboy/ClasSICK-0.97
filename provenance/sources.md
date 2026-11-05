@@ -5110,3 +5110,7 @@ Qt Group, published [QGuiApplication constructor, Platform-Specific Arguments](h
 ## SRC-0598 - Original monotone input coalescing
 
 2026-11-05; original SPEC-0097, supervised Claude proposal and lead review/tests. IMPL-0113 / TEST-0160. Pure optional inbox operation and experimental SHORT-only native binding; no historical source, emulator source or callback admission. [Canonical evidence](../docs/development/release-input-20261105.md#monotone-queue-fix).
+
+## SRC-0599 - Original PC diagnostic viewer
+
+2026-11-05; lead-authored SPEC-0098, IMPL-0114, TEST-0161, using original project Windows presentation/capture and admitted desktop-check interface patterns. Pure motion/header tests and bounded VM/viewer observations are engineering evidence only. No historical, third-party implementation, worker-code, Qt-fix or release claim. [Canonical evidence](../docs/development/release-input-20261105.md#original-pc-diagnostic-viewer).

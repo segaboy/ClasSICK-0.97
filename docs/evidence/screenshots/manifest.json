@@ -2715,6 +2715,29 @@
         "Bounded synthetic host sequence only; ambiguous movement omissions remain counted separately.",
         "Not full corner/stress, exclusive-capture, human, physical Macintosh, System1 or paired-release qualification."
       ]
+    },
+    {
+      "id": "2026-11-05-pc-device-drag",
+      "path": "docs/evidence/screenshots/2026-11-05/pc-device-drag.png",
+      "sha256": "c295c64d256f26a2b0c6b6029cd79b010c52ef6be8a79c3075f8f19d24cc7d7e",
+      "bytes": 4683,
+      "width": 1024,
+      "height": 768,
+      "captured_on": "2026-11-05",
+      "target": "native-x86_64",
+      "caption": "Original PC scene after E2 device-interface drag, release and content click; full frame matches the hosted graph.",
+      "alt": "Centered ClasSICK scene with shifted striped window, visible cross and counter0002; white PC margins.",
+      "source_revision": "0f8d85df5b6fe21508c22594e0dc20923d4eebe6",
+      "compiled_source_revision": "0f8d85df5b6fe21508c22594e0dc20923d4eebe6",
+      "evidence": "docs/development/release-input-20261105.md",
+      "license": "GPL-3.0-or-later",
+      "rights": "Unmodified VirtualBox framebuffer PNG of original ClasSICK guest pixels only; no desktop, emulator chrome, reference assets or retouch.",
+      "input": "synthetic",
+      "limitations": [
+        "E2 synthetic device-interface input only; does not qualify GUI capture, human input or physical hardware.",
+        "Actual196-call transcript includes the disclosed runner flattening error; no stationary titlebar press claim.",
+        "Paired release and remaining Mac qualification stay open."
+      ]
     }
   ]
 }

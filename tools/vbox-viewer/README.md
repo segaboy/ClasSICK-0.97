@@ -1,0 +1,9 @@
+# Bounded PC diagnostic viewer
+
+Original test frontend, [SPEC-0098](../../docs/specifications/SPEC-0098-pc-diagnostic-viewer.md). It displays a supplied **actual VM frame**, and records only its own guarded Windows mouse messages. It does not emulate, render the ClasSICK scene, generate input, call a VM API or repair VirtualBox Qt capture. The separate trial relay and its exact machine/process admission stay outside Git with the trial artifacts. This is not a distributable release frontend.
+
+CMake builds `classick_vbox_viewer_motion` and, with Windows adapters enabled, the real GUI compile check `classick_vbox_viewer_build`. CTest `vbox-viewer.motion-frame` executes the pure motion/header cases only. The GUI compile check deliberately has no configured trial directory; CI never launches it or a VM.
+
+A lead-admitted live build needs an outside-Git `viewer-target.h` defining `CS_VIEWER_ROOT` as one absolute trial directory. Build with C11, `UNICODE`, `_UNICODE`, `WINVER=0x0A00`, `_WIN32_WINNT=0x0A00`, user32 and gdi32. Pin that executable's hash, PID and creation ticks in the owned trial record. No runtime arguments. Follow SPEC-0098 for complete frame layout, bounded event schema, fresh frame/foreground/desktop guards, relay rejection and cleanup. An existing events.jsonl is refused. Escape, stop.request or the five-minute limit closes only this window and logs a release when needed.
+
+The standard Windows arrow remains visible; the guest cross comes from VM pixels. Startup makes one ordinary request to foreground its own window. Read-only `guard_bits` are freshness=1, own foreground=2, Default desktop=4; input requires7. These observations are not host-input or guest-acceptance proof. [Actual checks and failed control attempts](../../docs/development/release-input-20261105.md#original-pc-diagnostic-viewer) remain distinct.
