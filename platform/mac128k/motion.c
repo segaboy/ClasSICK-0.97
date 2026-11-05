@@ -181,6 +181,32 @@ static void note(struct cs_mac_motion *m, uint32_t reason, uint8_t rr3,
     l->reason = reason;
 }
 
+#if CLASSICK_MAC_SHORT_COLLECT
+/* Pure: a READY, phased, unquiesced pass whose three button samples all equal
+ * the retained button. Bounds/claim checked so no inconsistent inbox is kept. */
+static int drop_ok(const struct cs_mac_motion *m, const cs_window_inbox *in,
+    const snap *s1, const snap *s2, const snap *s3)
+{
+    unsigned held = m->last_buttons ? 0u : PB_BUTTON;
+    return in->phase == CS_INBOX_READY && m->have_phase && !m->quiesced
+        && in->head < CS_INBOX_CAPACITY && in->count <= CS_INBOX_CAPACITY
+        && (in->claimed == CS_INBOX_NONE || in->claimed == CS_INBOX_CLAIM_SAMPLE)
+        && (s1->pb & PB_BUTTON) == held && (s2->pb & PB_BUTTON) == held
+        && (s3->pb & PB_BUTTON) == held;
+}
+
+/* Omit uncertain displacement: publish nothing, rebaseline DCD to the
+ * post-ack sample, keep buttons/queue/epoch. A still-closed latch yields one
+ * later pending/no-change pass, dropped the same way. Not lossless capture. */
+static int drop(struct cs_mac_motion *m, uint32_t ra, uint32_t rb)
+{
+    m->last_raw_a = ra;
+    m->last_raw_b = rb;
+    m->motion_drops = sat(m->motion_drops);
+    return CS_MAC_MOTION_EMPTY;
+}
+#endif
+
 int cs_mac_motion_prepare(struct cs_mac_motion *m, const cs_mac_motion_io *io,
     cs_window_inbox *inbox, uint32_t invert)
 {
@@ -406,6 +432,11 @@ int cs_mac_motion_service(struct cs_mac_motion *m)
         && !m->quiesced && rr3 == 0u && idle_only(m, &s1, &s2, &s3))
         return CS_MAC_MOTION_EMPTY;
 #endif
+#if CLASSICK_MAC_SHORT_COLLECT
+    /* Button-changing or otherwise ineligible passes keep the full cancel. */
+    if (!stable && drop_ok(m, in, &s1, &s2, &s3))
+        return drop(m, ra, rb);
+#endif
     if (!m->have_phase || !stable) {
         return uncertain(m, !m->have_phase ? CS_MAC_LOSS_NO_PHASE : CS_MAC_LOSS_UNSTABLE,
             rr3, &s1, &s2, &s3, entry);
@@ -421,6 +452,21 @@ int cs_mac_motion_service(struct cs_mac_motion *m)
         return CS_MAC_MOTION_EMPTY;
 #endif
     if (ch_a != pend_a || ch_b != pend_b) {
+#if CLASSICK_MAC_SHORT_COLLECT
+        /* RR3 precedes the samples: a clean edge can arrive between them.
+         * With no entry pending bits we acknowledged no channel. A matching
+         * late latch can therefore be consumed by the next finite pass.
+         * Do not publish, update the baseline, or guess a missing edge here. */
+        if (rr3 == 0u && drop_ok(m, in, &s1, &s2, &s3) && (ch_a || ch_b)) {
+            uint8_t late = m->io.read(m->io.cookie, CS_MAC_SCC_A, 3u);
+            uint32_t expected = (ch_a ? RR3_EXT_A : 0u) | (ch_b ? RR3_EXT_B : 0u);
+            if (late & ~(RR3_EXT_A | RR3_EXT_B) & 0xFF)
+                return fail(m, CS_MAC_STAGE_PENDING, CS_MAC_CAUSE_PENDING);
+            if ((uint32_t)late == expected) return CS_MAC_MOTION_EMPTY;
+        }
+        /* The clean late-edge retry above takes precedence over dropping. */
+        if (drop_ok(m, in, &s1, &s2, &s3)) return drop(m, ra, rb);
+#endif
 #if CLASSICK_MAC_LOSS_COUNTS
         r = uncertain(m, CS_MAC_LOSS_PENDING, rr3, &s1, &s2, &s3, entry);
         /* A single rejection can disagree on both channels. */

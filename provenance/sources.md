@@ -5090,3 +5090,11 @@ Intel,Intel Quark SoC X1000 Core Developer Manual,October2013,order329679-001US,
 ## SRC-0593 - Qt display-scaling configuration and VBoxManage launch interface
 
 2026-11-05; Qt Group, Qt 6 High DPI documentation, environment-variable table, accessed 2026-11-05; installed Oracle VBoxManage 7.2.16 startvm public usage. Only the process-local configuration interface was used; no implementation source or sample algorithm. [URLs, trial and limits](../docs/development/release-input-20261105.md#pc-scaling-control).
+
+## SRC-0594 - Original late-edge and motion-omission engineering review
+
+2026-11-05; original public project code, source-informed model and supervised Claude proposals reviewed by Codex. SPEC-0096 / IMPL-0111 / TEST-0158. This is an engineering policy and original-model evidence, not a historical source or physical timing proof. [Canonical decisions, tests and limits](../docs/development/release-input-20261105.md#late-edge-race-diagnostic-masking-and-motion-omission).
+
+## SRC-0595 - Oracle host-key and automatic mouse-capture interface
+
+Oracle VirtualBox 7.2 User Guide, [Working with Virtual Machines](https://docs.oracle.com/en/virtualization/virtualbox/7.2/user/working-with-vms.html), Capturing and Releasing Keyboard and Mouse; accessed 2026-11-05. Public UI interface facts only, no emulator implementation or samples. [Own-candidate observations](../docs/development/release-input-20261105.md#pc-capture-context-discrimination) remain distinct from the documented interface.

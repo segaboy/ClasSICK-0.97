@@ -173,6 +173,9 @@ struct cs_mac_motion {
     int32_t cause;
     uint32_t services, samples, baselines, losses, peak_queued; /* saturate */
     struct cs_mac_motion_loss first_loss;
+#if CLASSICK_MAC_SHORT_COLLECT
+    uint32_t motion_drops; /* uncertain motion omitted, drag kept; saturates */
+#endif
 #if CLASSICK_MAC_LOSS_COUNTS
     uint32_t loss_counts[4]; /* reasons 1..4, saturating */
     uint32_t pending_mismatch[4]; /* A pending/no-change, A change/no-pending, B ditto */

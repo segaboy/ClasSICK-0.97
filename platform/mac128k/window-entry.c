@@ -126,6 +126,9 @@ struct cs_mac_window_trace {
 _Static_assert(sizeof(struct cs_mac_window_trace)==128,"MWP1 v2 size");
 _Static_assert(offsetof(struct cs_mac_window_trace,loss_reason)==100,"MWP1 v1 prefix");
 volatile struct cs_mac_window_trace cs_mac_trace;
+#if CLASSICK_MAC_SHORT_COLLECT
+volatile uint32_t cs_mac_motion_drop_trace[2]; /* MMD1: omitted motion, not cancellation */
+#endif
 #if CLASSICK_MAC_LOSS_COUNTS
 /* MLC1: tag then saturating accepted losses by reason 1..4. */
 volatile uint32_t cs_mac_loss_trace[5];
@@ -346,10 +349,26 @@ __attribute__((noinline)) int cs_mac_first_input_probe_gate(uint32_t services,
     return cs_mac_first_input_ready(services,losses,deliveries);
 }
 #endif
+#if CLASSICK_MAC_SHORT_COLLECT
+/* Foreground-owned; initialized explicitly with the rest of this image's state. */
+static uint32_t observed_services,observe_dirty;
+#endif
 static uint32_t observe(void)
 {
+#if CLASSICK_MAC_SHORT_COLLECT
+    /* Skip unchanged diagnostic copies before masking interrupts. Re-read the
+     * generation under exclusion below. Saturation deliberately never skips.
+     * These aligned longword reads must remain single MC68000 instructions. */
+    if(terminal)return 1u;
+    if(!observe_dirty && observed_services!=UINT32_MAX &&
+       *(volatile uint32_t *)&motion.services==observed_services)return 0u;
+#endif
     uint32_t token=cs_m68k_foreground_enter(0),dead=terminal;
     if(!dead){
+#if CLASSICK_MAC_SHORT_COLLECT
+        observed_services=motion.services;observe_dirty=0u;
+        cs_mac_motion_drop_trace[1]=motion.motion_drops;
+#endif
         cs_mac_trace.services=motion.services;cs_mac_trace.baselines=motion.baselines;
         cs_mac_trace.losses=motion.losses;cs_mac_trace.queued=session.inbox.count;
         cs_mac_trace.peak=motion.peak_queued;cs_mac_trace.motion_stage=motion.stage;
@@ -406,6 +425,11 @@ void cs_mac_main(void)
     cs_foreground_hooks hooks;cs_mac_io io;cs_mac_motion_io mio;int r;
     io.context=0;io.read=via_read;io.write=via_write;
     terminal=0u;
+#if CLASSICK_MAC_SHORT_COLLECT
+    observed_services=0u;observe_dirty=1u;
+    cs_mac_motion_drop_trace[0]=UINT32_C(0x4D4D4431);
+    cs_mac_motion_drop_trace[1]=0u;
+#endif
     cs_mac_diag.magic=UINT32_C(0x43533039);cs_mac_diag.stage=1;
     cs_mac_trace.tag=UINT32_C(0x4D575031);cs_mac_trace.version=CLASSICK_MAC_TIMER_PHASE_WITNESS?3u:2u;
 #if CLASSICK_MAC_LOSS_COUNTS
@@ -455,6 +479,9 @@ void cs_mac_main(void)
         if(r!=CS_FG_OK && r!=CS_FG_EMPTY && r!=CS_FG_BASELINED &&
            r!=CS_FG_DELIVERED && r!=CS_FG_RESET)fg_fatal(16,r);
         if(r==CS_FG_DELIVERED)saturate(&cs_mac_trace.deliveries);
+#if CLASSICK_MAC_SHORT_COLLECT
+        if(r!=CS_FG_EMPTY)observe_dirty=1u;
+#endif
         cs_mac_diag.presses=session.input.counter.presses;
     }
 }
