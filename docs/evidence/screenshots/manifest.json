@@ -2693,6 +2693,28 @@
         "One bounded synthetic host sequence; final counters still include one overflow, with setup and pause interactions not isolated.",
         "Not exclusive-capture, human, physical Macintosh, complete System1 or paired-release qualification."
       ]
+    },
+    {
+      "id": "2026-11-05-mac-monotone-drags",
+      "path": "docs/evidence/screenshots/2026-11-05/mac-monotone-drags.png",
+      "sha256": "7ce6668f946ce5bc28625167d49ab5fda71eb52154fa0cb4174d08c0e4029aee",
+      "bytes": 74395,
+      "width": 512,
+      "height": 342,
+      "captured_on": "2026-11-05",
+      "target": "native-mac68000",
+      "caption": "Original Mac scene after two guarded drags/releases with zero recorded hard losses.",
+      "alt": "ClasSICK striped window moved right and down, counter0005 after setup and two drags.",
+      "source_revision": "0f8d85df5b6fe21508c22594e0dc20923d4eebe6",
+      "compiled_source_revision": "0f8d85df5b6fe21508c22594e0dc20923d4eebe6",
+      "evidence": "docs/development/release-input-20261105.md",
+      "license": "GPL-3.0-or-later",
+      "rights": "Unmodified Snow camera export of original ClasSICK guest framebuffer only; no desktop, emulator chrome, reference pixels or retouch.",
+      "input": "synthetic",
+      "limitations": [
+        "Bounded synthetic host sequence only; ambiguous movement omissions remain counted separately.",
+        "Not full corner/stress, exclusive-capture, human, physical Macintosh, System1 or paired-release qualification."
+      ]
     }
   ]
 }
