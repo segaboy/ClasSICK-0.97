@@ -5086,3 +5086,7 @@ Intel,Intel Quark SoC X1000 Core Developer Manual,October2013,order329679-001US,
 ## SRC-0592 - Monochrome fill spans
 
 2026-11-01; SPEC-0001, IMPL-0105, TEST-0139. Original byte-span filling preserves the surface contract; hosted oracle, native builds and an isolated PC device-level observation are recorded. [Canonical evidence](../docs/development/mono-span-20261101.md). Mac target performance and paired-release qualification remain open.
+
+## SRC-0593 - Qt display-scaling configuration and VBoxManage launch interface
+
+2026-11-05; Qt Group, Qt 6 High DPI documentation, environment-variable table, accessed 2026-11-05; installed Oracle VBoxManage 7.2.16 startvm public usage. Only the process-local configuration interface was used; no implementation source or sample algorithm. [URLs, trial and limits](../docs/development/release-input-20261105.md#pc-scaling-control).

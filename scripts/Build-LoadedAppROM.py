@@ -437,7 +437,7 @@ def main():
     if a.window_timer_phase_witness:manifest['phase_witness']={'specification':'SPEC-0084','trace_version':3,'trace_bytes':128,'no_added_state_bytes':True,'no_added_MMIO':True}
     if a.window_motion_timeline:manifest['motion_timeline']={'version':1,'capacity':6,'entry_bytes':32,'new_MMIO':False,'interrupt_timing_perturbed':True,'pointer_symbol':'cs_mac_timeline_address','motion_symbol':'cs_mac_timeline_motion'}
     if a.window_fast_collect:manifest['fast_collect']={'experimental':True,'same_MMIO_order_required':not a.window_short_collect,'new_MMIO':False,'host_input_qualified':False}
-    if a.window_short_collect:manifest['short_collect']={'pending_rr0_reused':True,'read_guard_nops':5,'write_guard_nops':8,'physical_qualification':False}
+    if a.window_short_collect:manifest['short_collect']={'pending_rr0_reused':True,'quiet_axis_phase_ignored_in_ready':True,'read_guard_nops':5,'write_guard_nops':8,'physical_qualification':False}
     if a.window_loss_counts:manifest['loss_counts']={'tag':'MLC1','bytes':20,'address':syms['cs_mac_loss_trace'],'reasons':[1,2,3,4],'pending_tag':'MLP1','pending_address':syms['cs_mac_pending_trace'],'pending_bytes':20,'context_tag':'MLX1','context_address':syms['cs_mac_context_trace'],'context_bytes':20,'no_added_MMIO':True,'interrupt_timing_perturbed':True}
     if a.window_pending_idle_probe:manifest['pending_idle_probe']={'experimental':True,'hidden_transitions_may_be_discarded':True,'physical_qualification':False}
     if a.window_rearm_ready_probe:manifest['rearm_ready_probe']={'experimental':True,'interrupts_masked_during_priming':True,'physical_qualification':False}

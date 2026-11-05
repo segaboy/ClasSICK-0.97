@@ -1,0 +1,41 @@
+<!-- SPDX-License-Identifier: GPL-3.0-or-later -->
+<!-- Copyright (C) 2026 Dean Howell. -->
+# Mouse correction and release checks, 2026-11-05
+
+Baseline `48064aad6063e06d15bfc00b855e0f716038fbbf` passed both jobs in [CI](https://github.com/segaboy/ClasSICK-0.97/actions/runs/41705036533). Paired release remains blocked. This work does not waive the earlier failed human observations, physical qualification or remaining E1-E3 cases.
+
+## Mac correction
+
+The actual collector rejected an otherwise coherent X movement when only the quiet Y axis's direction-phase bit changed (and conversely). A new test failed before correction. SPEC-0096 now allows that unused phase change only in READY with retained state and no quiescence. Pending consistency, all three DCD samples, button stability and the moving axis's direction remain checked. WAIT and PRIMING are unchanged. The change remains confined to the opt-in short collector.
+
+The implementation-aware model matrix covers both axes, all four starting DCD states, all four direction-phase states, four polarity settings, four pending combinations, eight phase/button changes, and two in-pass injection positions: 4,096 cases per profile. Strict and corrected profiles pass 33,570 and 34,082 checks respectively, including hidden-edge controls, under GCC and Clang address/undefined-behavior sanitizers. A deliberately faulty moving-axis relaxation is rejected. Eight focused CTest suites pass. These are original model checks, not physical proofs. The characterization also demonstrates that three completed same-direction DCD edges can look identical to one edge even to the original strict sampler; neither version guarantees arbitrary-rate losslessness. We do not adopt the worker's broader claims about all possible hidden trajectories.
+
+Native twins pass: ROM SHA-256 `3790311804a3c88f7b41dae2c280043eed8faa33ae5e6f8eed90d602353a83dc`, 24,012 used ROM bytes, 964 workspace bytes. Flags: window, fast collection, short collection, WAIT-latch check, loss counts, invert=3. The isolated Snow Early128K session used RelativeHw, no disks/shares and the original image. Guarded upward movements visibly moved the guest cross; a sustained primary-button drag moved the window from x=80 to x=96, followed by leftward pointer movement with the window remaining at x=96. A second downward held drag advanced the counter to 2 but moved the window only five pixels, to y=75. It is not a complete second-drag pass.
+
+The final paused own record shows 127 cumulative deliveries and 21 cumulative losses (13 unstable, eight pending), pointer `(266,80)`, window `(96,75)`. The raw rows below are manually transcribed from the owned guest memory viewer. Counts include positioning and pauses; there was no clean phase-isolated loss baseline. API acceptance is not guest acceptance; the helper did not verify exclusive capture. One movement attempt was refused for foreign foreground before sending anything; a retry followed fresh owned-window selection. The owned process was externally stopped and its ROM hash remained unchanged, with no guest-shutdown claim. This confirms bounded motion/drag, not reliable input or a release pass.
+
+```text
+00000BD0 00 00 00 00 00 00 00 0D 00 00 00 08 00 00 00 00
+00000BE0 4D 57 50 31 00 00 00 02 00 00 00 80 00 00 00 01
+00000C00 00 00 00 15 00 00 00 15 00 00 00 00 00 00 00 0B
+00000C10 00 00 00 7F 00 00 01 0A 00 00 00 50 00 00 00 60
+00000C20 00 00 00 4B 00 00 00 00 00 00 00 01 00 00 00 05
+```
+
+Two earlier repeats of the unmodified short candidate did not produce a qualified drag: the first expired before the input helper was bound; the second sent 40 guarded upward events but did not capture a diagnostic result. Both closed under their watchdogs. Some UI calls used an incorrect button parameter and were not credited as successful control actions; the later trial used the documented `mouse_button` parameter and observed each result. No full-window capture is admitted as product media.
+
+The normal fast/invert-3 native twin rebuild retained SHA-256 `920d90bd16b204d4b159356f274273fff02c00f4a960c0cd78880c7ffb7bba1e`; the correction is absent with SHORT disabled. The SPEC-0096 source-locator correction was made after the experimental build; it does not change compiled inputs. Artifacts: `C:\ClasSICK\mac-axis-phase-20261105-a`; earlier attempts: `C:\ClasSICK\mac-short-repeat-20261105-a` and `-b`.
+
+## PC scaling control
+
+SRC-0593: Qt's published [High DPI configuration table](https://doc.qt.io/qt-6/highdpi.html) documents `QT_ENABLE_HIGHDPI_SCALING=0`; the installed VBoxManage 7.2.16 public usage documents `startvm --putenv`. Only these interface facts were used, no implementation source. Search excerpts also returned unrelated Qt declarations; those results were excluded, no source page opened and nothing from them reused or sent to the worker. The environment override was limited to one owned VM process. Whether this frontend actually honored it is unverified; no host-wide display setting changed.
+
+The original disk SHA-256 `94bba3d46dac625a7d2b4a1ae58d0e775326253191503710f4b9bb00f82f35b1` and EFI `8e871da4e540da3f09498e3729dce55d92c9f6f95ecec464dcf6b778f0b55435` were unchanged. Networking, sharing, clipboard, drag-and-drop, USB, audio and UART remained disabled. A sustained primary click yielded a verified capture indicator, but Windows pointer position again became `(2,2)`, outside the original window. After guarded placement of only the owned window around that point, 32 requested `(-8,-8)` movements were accepted by Windows; later checks showed `(0,0)`.
+
+The final guest frame did not reach the intended top-left. Its decoded RGB is pixel-identical to the already registered [failed corner frame](../evidence/screenshots/2026-11-03/pc-host-corner-attempt.png); changed pixels relative to this trial's initial frame lie only in `(503,375)-(520,392)`, exclusive right/bottom. This configuration did not fix the observed problem. The original final PNG SHA-256 is `ab670643740f705c0b2449ce5432d65a286473111dc9d49090b1337fda551be6`; no duplicate picture is added to Git.
+
+The VM was externally powered off and unregistered; existing inventory/running states and the post-trial raw disk roundtrip match. Total trial host time was 312.17 seconds, including preparation and paused waits. Initial binding attempts refused before input (multiple launcher processes, then inactive generated binding); the corrected helper bound the process owning the returned window. The receipts are at `C:\ClasSICK\pc-scale-trial-20261105-a`. No PC driver fix or E3/E4 pass follows.
+
+## Worker review
+
+Claude `claude-opus-5-5`, explicit Low, reviewed a frozen 40,435-byte original public-source packet, SHA-256 `26a1d009e6ca86de34b67b8bd13bc2f9453e2376cfd4714d38b9248e91452ac7`. It returned in 111.25 seconds with no tools or executed tests. The lead reproduced the quiet-axis defect and integrated its minimal acceptance rule; the diagnostic-field expansion was not adopted. Provider usage: two other input tokens, 23,426 cache-creation tokens, 1,452 cache-read tokens, 10,797 output tokens; $0.4036464 list-basis estimate, not billing or Codex savings. Remaining allowance was not reported. Raw packet/transcript: `C:\ClasSICK\release2-completion-20261023-a\mac-sampling-review-20261105\claude`.

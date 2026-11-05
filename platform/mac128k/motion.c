@@ -322,6 +322,18 @@ int cs_mac_motion_service(struct cs_mac_motion *m)
     ra = bit(s3.a, RR0_DCD);
     rb = bit(s3.b, RR0_DCD);
     buttons = (s3.pb & PB_BUTTON) ? 0u : (uint32_t)CS_POINTER_LEFT;
+#if CLASSICK_MAC_SHORT_COLLECT
+    if (!stable && in->phase == CS_INBOX_READY && m->have_phase && !m->quiesced) {
+        /* A quiet axis does not consume its direction phase. Retain every
+         * DCD, button and moving-axis phase check, including post-ack reads. */
+        unsigned mask = PB_BUTTON;
+        if (pend_a || ra != m->last_raw_a) mask |= PB_X2;
+        if (pend_b || rb != m->last_raw_b) mask |= PB_Y2;
+        stable = ((((s1.pb ^ s2.pb) | (s2.pb ^ s3.pb)) & mask) == 0u)
+            && ((((s1.a ^ s2.a) | (s2.a ^ s3.a)) & RR0_DCD) == 0)
+            && ((((s1.b ^ s2.b) | (s2.b ^ s3.b)) & RR0_DCD) == 0);
+    }
+#endif
 #if CLASSICK_MAC_MOTION_TIMELINE
     timeline_record(m, rr3, &s1, &s2, &s3, entry, stable, ra, rb, buttons);
 #endif
