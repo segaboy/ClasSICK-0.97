@@ -5106,3 +5106,7 @@ Oracle VirtualBox 7.2 User Guide, [Working with Virtual Machines](https://docs.o
 ## SRC-0597 - Qt legacy mouse and process-local DPI configuration
 
 Qt Group, published [QGuiApplication constructor, Platform-Specific Arguments](https://doc.qt.io/qt-6.12/qguiapplication.html#QGuiApplication) and [High DPI, Configuring Windows](https://doc.qt.io/qt-6/highdpi.html), accessed2026-11-05. Interface/configuration facts only: nowmpointer, comma-separated platform options, and dpiawareness levels. No implementation source, examples of routines or emulator source. Installed qualified VBoxManage startvm --putenv supplies a process-local override. [Original-PC observations](../docs/development/release-input-20261105.md#pc-legacy-mouse-observations) are separate from the documented interface and do not prove the override was honored internally.
+
+## SRC-0598 - Original monotone input coalescing
+
+2026-11-05; original SPEC-0097, supervised Claude proposal and lead review/tests. IMPL-0113 / TEST-0160. Pure optional inbox operation and experimental SHORT-only native binding; no historical source, emulator source or callback admission. [Canonical evidence](../docs/development/release-input-20261105.md#monotone-queue-fix).

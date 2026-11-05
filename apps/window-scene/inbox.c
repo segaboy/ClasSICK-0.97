@@ -137,6 +137,40 @@ int cs_inbox_push(cs_window_inbox *b, uint32_t epoch, int32_t dx, int32_t dy,
     return CS_INBOX_OK;
 }
 
+/* Same-direction checked int32 sum; returns 1 and writes *sum, else 0. */
+static int inbox_axis(int32_t a, int32_t v, int32_t *sum)
+{
+    if ((a < 0 && v > 0) || (a > 0 && v < 0)) return 0;
+    if (v > 0 && a > INT32_MAX - v) return 0;
+    if (v < 0 && a < INT32_MIN - v) return 0;
+    *sum = a + v;
+    return 1;
+}
+
+int cs_inbox_push_motion(cs_window_inbox *b, uint32_t epoch, int32_t dx,
+    int32_t dy, uint32_t buttons)
+{
+    uint32_t tail, prev;
+    int32_t sx, sy;
+    cs_pointer_sample *t;
+    if (!b || buttons > (uint32_t)CS_POINTER_BUTTON_MASK)
+        return CS_INBOX_ARGUMENT;
+    if (inbox_valid(b, epoch, 1)) return CS_INBOX_STATE;
+    if (b->phase == (uint32_t)CS_INBOX_READY && b->count >= 2u) {
+        tail = (b->head + b->count - 1u) % (uint32_t)CS_INBOX_CAPACITY;
+        prev = (b->head + b->count - 2u) % (uint32_t)CS_INBOX_CAPACITY;
+        t = &b->records[tail];
+        if (t->buttons == buttons && b->records[prev].buttons == buttons &&
+            (t->dx != 0 || t->dy != 0) && (dx != 0 || dy != 0) &&
+            inbox_axis(t->dx, dx, &sx) && inbox_axis(t->dy, dy, &sy)) {
+            t->dx = sx;
+            t->dy = sy;
+            return CS_INBOX_MERGED;
+        }
+    }
+    return cs_inbox_push(b, epoch, dx, dy, buttons);
+}
+
 int cs_inbox_uncertain(cs_window_inbox *b, uint32_t epoch)
 {
     uint32_t phase;

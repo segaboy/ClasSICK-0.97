@@ -45,6 +45,6 @@ foreach($twin in @('a','b')){
 }
 if($twins[0] -ne $twins[1]){throw 'Window EFI-ABI object twins differ.'}
 }
-@{efi_abi_object_twins_equal=$true;efi_image_changed=$false;specifications=@('SPEC-0065');object_audits=$checks;target_executed=$false} |
+@{efi_abi_object_twins_equal=$true;efi_image_changed=$false;specifications=@('SPEC-0065','SPEC-0097');object_audits=$checks;target_executed=$false} |
     ConvertTo-Json | Set-Content -LiteralPath (Join-Path $BuildRoot 'manifest.json') -Encoding UTF8
 Write-Output "$checks window-inbox object audits PASS."

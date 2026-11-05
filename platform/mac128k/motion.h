@@ -174,6 +174,7 @@ struct cs_mac_motion {
     uint32_t services, samples, baselines, losses, peak_queued; /* saturate */
     struct cs_mac_motion_loss first_loss;
 #if CLASSICK_MAC_SHORT_COLLECT
+    uint32_t motion_merges; /* accepted pushes combined with unread tail; saturates */
     uint32_t motion_drops; /* uncertain motion omitted, drag kept; saturates */
 #endif
 #if CLASSICK_MAC_LOSS_COUNTS

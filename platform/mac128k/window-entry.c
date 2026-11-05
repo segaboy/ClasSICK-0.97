@@ -127,6 +127,7 @@ _Static_assert(sizeof(struct cs_mac_window_trace)==128,"MWP1 v2 size");
 _Static_assert(offsetof(struct cs_mac_window_trace,loss_reason)==100,"MWP1 v1 prefix");
 volatile struct cs_mac_window_trace cs_mac_trace;
 #if CLASSICK_MAC_SHORT_COLLECT
+volatile uint32_t cs_mac_motion_merge_trace[2]; /* MCM1: accepted merged samples */
 volatile uint32_t cs_mac_motion_drop_trace[2]; /* MMD1: omitted motion, not cancellation */
 #endif
 #if CLASSICK_MAC_LOSS_COUNTS
@@ -375,6 +376,7 @@ static uint32_t observe(void)
 #if CLASSICK_MAC_SHORT_COLLECT
         observed_services=motion.services;observe_dirty=0u;
         cs_mac_motion_drop_trace[1]=motion.motion_drops;
+        cs_mac_motion_merge_trace[1]=motion.motion_merges;
 #endif
         cs_mac_trace.services=motion.services;cs_mac_trace.baselines=motion.baselines;
         cs_mac_trace.losses=motion.losses;cs_mac_trace.queued=session.inbox.count;
@@ -436,6 +438,8 @@ void cs_mac_main(void)
     observed_services=0u;observe_dirty=1u;
     cs_mac_motion_drop_trace[0]=UINT32_C(0x4D4D4431);
     cs_mac_motion_drop_trace[1]=0u;
+    cs_mac_motion_merge_trace[0]=UINT32_C(0x4D434D31);
+    cs_mac_motion_merge_trace[1]=0u;
 #endif
     cs_mac_diag.magic=UINT32_C(0x43533039);cs_mac_diag.stage=1;
     cs_mac_trace.tag=UINT32_C(0x4D575031);cs_mac_trace.version=CLASSICK_MAC_TIMER_PHASE_WITNESS?3u:2u;

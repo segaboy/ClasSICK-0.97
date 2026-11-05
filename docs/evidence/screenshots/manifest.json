@@ -2671,6 +2671,28 @@
         "A paired input workaround did not reach the intended top-left corner; no E3 corner or human pass.",
         "No historical System 1, physical hardware or paired-release qualification."
       ]
+    },
+    {
+      "id": "2026-11-05-mac-two-drags",
+      "path": "docs/evidence/screenshots/2026-11-05/mac-two-drags.png",
+      "sha256": "58c584dc9d4abec71036a0e5331b470f04f59674a1c39ab25046463cfbd60371",
+      "bytes": 53131,
+      "width": 512,
+      "height": 342,
+      "captured_on": "2026-11-05",
+      "target": "native-mac68000",
+      "caption": "Original Mac scene after guarded horizontal and vertical host drags and released motion.",
+      "alt": "ClasSICK checkerboard window moved right and downward, with counter0002.",
+      "source_revision": "767e2e5dd1fab79ac5fc20571a9c47703f4e29aa",
+      "compiled_source_revision": "767e2e5dd1fab79ac5fc20571a9c47703f4e29aa",
+      "evidence": "docs/development/release-input-20261105.md",
+      "license": "GPL-3.0-or-later",
+      "rights": "Unmodified Snow camera export of original ClasSICK guest framebuffer only; no desktop, emulator chrome, reference pixels or retouch.",
+      "input": "synthetic",
+      "limitations": [
+        "One bounded synthetic host sequence; final counters still include one overflow, with setup and pause interactions not isolated.",
+        "Not exclusive-capture, human, physical Macintosh, complete System1 or paired-release qualification."
+      ]
     }
   ]
 }

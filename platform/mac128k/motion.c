@@ -499,7 +499,14 @@ int cs_mac_motion_service(struct cs_mac_motion *m)
         return CS_MAC_MOTION_EMPTY;
     }
 
+#if CLASSICK_MAC_SHORT_COLLECT
+    r = cs_inbox_push_motion(in, m->epoch, dx, dy, buttons);
+#else
     r = cs_inbox_push(in, m->epoch, dx, dy, buttons);
+#endif
+#if CLASSICK_MAC_SHORT_COLLECT
+    if (r == CS_INBOX_MERGED) m->motion_merges = sat(m->motion_merges);
+#endif
     m->samples = sat(m->samples);
     if (r == CS_INBOX_LOST) {
         note(m, CS_MAC_LOSS_OVERFLOW, rr3, &s1, &s2, &s3, entry);
@@ -508,7 +515,7 @@ int cs_mac_motion_service(struct cs_mac_motion *m)
         m->losses = sat(m->losses);
         return CS_MAC_MOTION_LOST;
     }
-    if (r != CS_INBOX_OK)
+    if (r != CS_INBOX_OK && r != CS_INBOX_MERGED)
         return fail(m, CS_MAC_STAGE_INBOX, CS_MAC_CAUSE_INBOX_RESULT);
     m->last_raw_a = ra;
     m->last_raw_b = rb;

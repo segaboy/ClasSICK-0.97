@@ -221,6 +221,7 @@ def main():
          '-fno-asynchronous-unwind-tables','-fno-tree-loop-distribute-patterns','-fstack-usage',
          '-ffunction-sections','-fdata-sections','-Wall','-Wextra','-Werror','-Wconversion','-Wsign-conversion',
          '--sysroot='+str(tools),'-ffile-prefix-map='+str(repo)+'=.','-ffile-prefix-map='+str(folder)+'=.']
+        if not a.window_drawing:flags+=['-DCLASSICK_PRODUCT_ROM_CACHE=0']
         if a.selected_drawing or a.outline_drawing:flags+=['-DCLASSICK_SELECTED_DRAWING=1']
         if a.outline_drawing:flags+=['-DCLASSICK_OUTLINE_DRAWING=1']
         if a.window_drawing:flags+=['-DCLASSICK_MAC_DCD_INVERT='+str(a.dcd_invert)]

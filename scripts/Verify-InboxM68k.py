@@ -12,7 +12,7 @@ import subprocess
 
 SOURCES = ('apps/window-scene/inbox.c','tests/window-inbox-layout.c')
 HEADERS = ('apps/window-scene/inbox.h','core/input/pointer.h')
-APIS = ('cs_inbox_begin','cs_inbox_restart','cs_inbox_baseline','cs_inbox_push',
+APIS = ('cs_inbox_begin','cs_inbox_restart','cs_inbox_baseline','cs_inbox_push','cs_inbox_push_motion',
         'cs_inbox_uncertain','cs_inbox_claim','cs_inbox_complete',
         'cs_inbox_discard','cs_inbox_resume','cs_inbox_fault','cs_inbox_stop')
 
@@ -88,7 +88,7 @@ def main():
     if not helper_frames or max(helper_frames)>512:
         raise ValueError('Capture helper native frame bound')
     report = dict(helper_largest_frame=max(helper_frames),descriptor_bound_bytes=256,
-                  descriptor_bytes=records[0]['descriptor_bytes'],specifications=['SPEC-0065'], cpu='68000',
+                  descriptor_bytes=records[0]['descriptor_bytes'],specifications=['SPEC-0065','SPEC-0097'], cpu='68000',
                   inputs=inputs, object_compilations=12, closure_audits=6,
                   undefined_imports=0, mutable_data=0, records=records,
                   stack_note='Per-function compiler frames include ABI costs; not whole-system stack certification.',

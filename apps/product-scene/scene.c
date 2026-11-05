@@ -1,7 +1,12 @@
 /* SPDX-License-Identifier: GPL-3.0-or-later */
 /* Copyright (C) 2026 Dean Howell. Original product artwork and lettering. */
 #include "scene.h"
+#ifndef CLASSICK_PRODUCT_ROM_CACHE
+#define CLASSICK_PRODUCT_ROM_CACHE 1
+#endif
+#if CLASSICK_PRODUCT_ROM_CACHE
 #include "fixed-mono.h"
+#endif
 
 typedef struct {const cs_surface *s;int32_t width,height,top,x,y;} canvas;
 static const uint16_t title[13]={0x7927u,0x6497u,0x0C7Fu,0x01D7u,0x79CFu,
@@ -89,6 +94,7 @@ int cs_product_scene(const cs_surface *s,int32_t width,int32_t height,int32_t to
     cs_surface checked;canvas c;int ok=1;
     if(!state || state->phases>6 || state->success>1 || !validate(s,width,height,top,&checked))return 0;
     setup(&c,&checked,width,height,top);
+#if CLASSICK_PRODUCT_ROM_CACHE
     /* The fixed original preview artwork resides in ROM, not another RAM frame.
      * Exact geometry/state only; all other callers retain the generic painter. */
     if(width==512 && height==342 && checked.width==512 &&
@@ -106,6 +112,7 @@ int cs_product_scene(const cs_surface *s,int32_t width,int32_t height,int32_t to
             return fill(&c,352,286,80,20,0) && number(&c,352,state->inputs);
         return 1;
     }
+#endif
     /* Clear margins too, while preserving descriptor padding/tail bytes. */
     canvas background;setup(&background,&checked,width,height,top);background.x=0;background.y=0;
     ok&=fill(&background,0,0,width,height,0);

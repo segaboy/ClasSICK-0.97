@@ -215,6 +215,20 @@ int main(void)
         set(&t.f,(int)axis,1);set(&t.f,(int)axis,0);
         CHECK(cs_mac_motion_service(&t.m)==CS_MAC_MOTION_EMPTY);
         CHECK(t.m.motion_drops==UINT32_MAX && t.m.losses==0u);
+        /* Sustained same-direction edges combine, preserving total displacement. */
+        RUN(ready(&t,0,0,0));
+        for(unsigned i=0;i<1000u;i++){
+            set(&t.f,(int)axis,(int)((i+1u)&1u));
+            CHECK(cs_mac_motion_service(&t.m)==CS_MAC_MOTION_OK);
+            t.f.pb^=axis?PBY:PBX;
+        }
+        CHECK(t.in.count==2u && t.m.losses==0u && t.m.motion_merges==998u);
+        CHECK(axis?t.in.records[(t.in.head+1u)%CS_INBOX_CAPACITY].dy==999:
+            t.in.records[(t.in.head+1u)%CS_INBOX_CAPACITY].dx==-999);
+        t.m.motion_merges=UINT32_MAX;set(&t.f,(int)axis,1);
+        CHECK(cs_mac_motion_service(&t.m)==CS_MAC_MOTION_OK);
+        CHECK(t.m.motion_merges==UINT32_MAX && t.in.count==2u);
+        /* Alternating direction is deliberately NOT combined: overflow cancels. */
         RUN(ready(&t,0,0,0));
         for(unsigned i=0;i<CS_INBOX_CAPACITY;i++){
             set(&t.f,(int)axis,(int)((i+1u)&1u));

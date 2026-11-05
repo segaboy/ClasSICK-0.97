@@ -15,7 +15,7 @@ enum { CS_INBOX_CAPACITY=16 };
 enum { CS_INBOX_OK=0, CS_INBOX_EMPTY=1, CS_INBOX_BASELINE_ITEM=2,
     CS_INBOX_SAMPLE_ITEM=3, CS_INBOX_LOST=4, CS_INBOX_BASELINE=5,
     CS_INBOX_STOPPED=6, CS_INBOX_ARGUMENT=7, CS_INBOX_STATE=8,
-    CS_INBOX_FAULTED=9, CS_INBOX_EXHAUSTED=10 };
+    CS_INBOX_FAULTED=9, CS_INBOX_EXHAUSTED=10, CS_INBOX_MERGED=11 };
 enum { CS_INBOX_WAIT=1, CS_INBOX_PRIMING=2, CS_INBOX_READY=3,
     CS_INBOX_LOSS=4, CS_INBOX_FAULT=5, CS_INBOX_ENDED=6 };
 enum { CS_INBOX_NONE=0, CS_INBOX_CLAIM_BASELINE=1, CS_INBOX_CLAIM_SAMPLE=2 };
@@ -37,6 +37,12 @@ int cs_inbox_restart(cs_window_inbox*);
  * Immediately PRIMING;later records stage even while foreground rebaselines. */
 int cs_inbox_baseline(cs_window_inbox*,uint32_t epoch,uint32_t buttons);
 int cs_inbox_push(cs_window_inbox*,uint32_t epoch,int32_t dx,int32_t dy,uint32_t buttons);
+/* SPEC-0097 optional producer op; opt-in only (SHORT profile). READY with
+ * count>=2: if tail and predecessor buttons equal incoming, both vectors are
+ * nonzero, per-axis signs agree (zero joins either) and int32 sums fit, adds
+ * into the unread tail dx/dy only and returns MERGED. Never touches last.
+ * Otherwise exactly cs_inbox_push (including overflow loss). */
+int cs_inbox_push_motion(cs_window_inbox*,uint32_t epoch,int32_t dx,int32_t dy,uint32_t buttons);
 int cs_inbox_uncertain(cs_window_inbox*,uint32_t epoch);
 /* Claim oldest exactly once. Returns BASELINE_ITEM or SAMPLE_ITEM;last stable
  * during unmasked delivery. Pending claim refuses another with STATE. */
