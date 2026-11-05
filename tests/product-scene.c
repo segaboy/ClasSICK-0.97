@@ -85,6 +85,52 @@ static void updates(void)
         free(a);free(b);free(saved);
     }
 }
+static void bands(void)
+{
+    /* A partial repaint must match full-frame rows at every glyph boundary. */
+    static const int32_t edges[]={0,33,34,53,54,64,65,79,80,85,86,115,116,285,286,305,306,341};
+    const int32_t widths[2]={512,641},heights[2]={342,483};
+    for(unsigned mode=1;mode<=2;++mode)for(unsigned size=0;size<2;++size){
+        int32_t width=widths[size],height=heights[size],oy=(height-342)/2;
+        size_t row=mode==1?((size_t)width+7u)/8u:(size_t)width*4u,stride=row+3u,n=stride*(size_t)height+7u;
+        uint8_t *full=space(n);cs_surface sf;
+        cs_product_state state={97,1234,5,3,0,NULL};
+        CHECK(cs_surface_init(&sf,full,n,width,height,stride,(cs_surface_format)mode)==CS_SURFACE_OK);
+        CHECK(cs_product_scene(&sf,width,height,0,&state));
+        for(unsigned e=0;e<sizeof edges/sizeof edges[0];++e)for(int32_t h=1;h<=3;++h)for(int32_t k=-h;k<=1;++k){
+            int32_t top=oy+edges[e]+k,rows=h;
+            if(top<0 || top>=height)continue;
+            if(rows>height-top)rows=height-top;
+            size_t m=stride*(size_t)rows+7u;uint8_t *band=space(m);cs_surface sb;
+            CHECK(cs_surface_init(&sb,band,m,width,rows,stride,(cs_surface_format)mode)==CS_SURFACE_OK);
+            CHECK(cs_product_scene(&sb,width,height,top,&state));
+            CHECK(!memcmp(band,full+(size_t)top*stride,stride*(size_t)rows));
+            for(size_t i=stride*(size_t)rows;i<m;++i)CHECK(band[i]==0xA5);
+            free(band);
+        }
+        free(full);
+    }
+}
+static void cached(void)
+{
+    /* Height343 has the same zero origin as342 but takes the generic painter.
+     * Its first342 rows therefore provide an independent fallback comparison. */
+    const uint32_t inputs[]={0u,1u,1234u,UINT32_MAX};
+    for(unsigned n=0;n<sizeof inputs/sizeof inputs[0];++n){
+        size_t stride=69u;
+        cs_product_state state={97u,inputs[n],16u,6u,1u,NULL};
+        for(int32_t top=0;top<342;++top){
+            int32_t rows=top%3==0?1:342-top;
+            size_t bytes=stride*(size_t)rows+23u;
+            uint8_t *a=space(bytes),*b=space(bytes);cs_surface sa,sb;
+            CHECK(cs_surface_init(&sa,a,bytes,512,rows,stride,CS_SURFACE_MONO1_MSB)==CS_SURFACE_OK);
+            CHECK(cs_surface_init(&sb,b,bytes,512,rows,stride,CS_SURFACE_MONO1_MSB)==CS_SURFACE_OK);
+            CHECK(cs_product_scene(&sa,512,342,top,&state));
+            CHECK(cs_product_scene(&sb,512,343,top,&state));
+            CHECK(!memcmp(a,b,bytes));free(a);free(b);
+        }
+    }
+}
 static void errors(void)
 {
     uint8_t pixels[64*342];memset(pixels,0xA5,sizeof pixels);cs_surface s;
@@ -102,6 +148,7 @@ int main(int argc,char **argv)
     if(argc==3 && !strcmp(argv[1],"preview")){compare(argv[2]);return 0;}
     if(argc!=2)return 2;
     if(!strcmp(argv[1],"parity"))compare(NULL);
-    else if(!strcmp(argv[1],"updates"))updates();else if(!strcmp(argv[1],"errors"))errors();else return 2;
+    else if(!strcmp(argv[1],"updates"))updates();else if(!strcmp(argv[1],"errors"))errors();
+    else if(!strcmp(argv[1],"bands"))bands();else if(!strcmp(argv[1],"cached"))cached();else return 2;
     puts("PASS");return 0;
 }

@@ -67,3 +67,53 @@ Only the owned VM was positioned. It closed externally and was unregistered afte
 Two bounded Claude Opus5.5 Low calls used frozen original-public inputs, no tools or executed tests. Critical-latency review: 68,951 transmitted bytes, SHA-256 `46347ff6d0532630383342719f37c4369a51851384a38ed03381a9e1f2409633`, 116.09 seconds; 2 input +36,616 cache creation +1,452 cache read +10,562 output tokens, $0.5044664 list estimate. Motion-omission proposal: 53,951 bytes, SHA-256 `4e3b54f18f3bcdebcb9629edb21ad4db0e526210b45083202f8cac4090389f32`, 136.20 seconds; 2 input +30,904 cache creation +1,452 cache read +15,548 output tokens, $0.5584904 list estimate. Estimates are not bills or Codex quota savings. Remaining allowances for all four external services are unreported; Grok, Copilot and Antigravity were not invoked. Raw transcripts remain outside Git under `C:\ClasSICK\release2-completion-20261023-a`.
 
 Lead changes to the proposals: explicit startup initialization, reuse of the existing SHORT gate rather than another flag, native omitted-motion diagnostic, complete inbox eligibility on the late retry, and the whole-graph drag/release/cancel regression. Unmeasured worker cycle estimates and broad safety claims were not adopted. Next: finish the guarded live drag/release on this exact motion-omission image and read MMD1 separately from hard losses. PC frontend capture remains a distinct unresolved blocker. No release criteria, physical or human gate has been waived; release2 is not ready and no release was published.
+
+## Foreground backlog and native rendering
+
+SRC-0596 / IMPL-0112 / TEST-0159; baseline718223194f5a575708cde04e153615a86525e8d3 passed both jobs in CI42087041585. Paired release remains unqualified.
+
+The repeated a8905662 candidate moved the frame from(80,70) to(87,77), but recorded five hard losses, all overflow, and174 omitted passes. Its manually read deliveries field appeared zero despite visible updates; that transcription remains unresolved and is not used as proof of zero deliveries. Artifacts: C:/ClasSICK/mac-motion-drop-20261105-b. MFL1 was then added to distinguish foreground backlog from source ambiguity. It measures counter spans around nonempty foreground steps; these are separate volatile reads, paused observations only, not CPU-cycle or physical timing guarantees. Producer samples are push attempts, not interrupt services.
+
+The diagnostic-only ROM013063a096894ed314a824f4cae3129013305d18a043cc28e82916b75c3f47fa recorded109 nonempty completions,105 DELIVERED, maximum70 VBL ticks and maximum four producer attempts within a delivered step. It recorded two overflow losses and66 omitted motion passes; one guarded horizontal drag moved only seven pixels. Setup/counter rendering and UI interactions are included. These runs are not matched benchmarks. Artifacts: C:/ClasSICK/mac-foreground-latency-20261105-a.
+
+Three original optimizations now retain the same image/error contracts: clipped mono content is written as whole pattern bytes, fills advance row pointers without repeated multiplication, and glyph/number work outside the changed band is skipped. The final additional fast path copies the fixed original scene from read-only ROM, then updates the counter. Its exact gate is MONO1_MSB,width512,height342,physical width512,band within342 rows,value97,progress16,phases6,success1,pixelsNULL; all other callers retain the generic painter. No input policy or queue capacity was changed.
+
+The 21,888-byte artwork is generated solely by the original product renderer and surface code at7182231, state(97,0,16,6,1,NULL). Raw payload SHA-2565ac7431183aee9cd556e850acfcd0139f5d40192c9cadfa96ff473fe20aac9db. Original generator, archived source copies and payload are outside Git at C:/ClasSICK/product-rom-cache-20261105-a; the portable text initializer is apps/product-scene/fixed-mono.h. No Apple/reference artwork, ROM bytes or manual sample was used. The cache costs ROM/image bytes, not a second RAM framebuffer. Builders identify the header. Generic-height343 comparisons independently exercise the uncached painter with the same origin and visible342 rows.
+
+Executed final hosted checks:17 focused suites each under GCC and Clang address/undefined-behavior sanitizers, all pass. The window oracle compares10,040 full frames per profile, including widths2..17, masks, byte phases, clipped bands, both patterns and padding. Product bands cover glyph/number boundaries;1,368 cache comparisons span all342 starts and four counter values. These are hosted equivalence tests, not target timing or usability passes.
+
+The first optimized ROM21e98d82c519379ae4803998f8747e063ff7234678f68ef8d527280a9522ac69 used25,096 ROM bytes and observed maximum42 VBL ticks, eight arrivals,57 deliveries and zero hard losses at an intermediate checkpoint. Several foreground refusals sent no events; one48-event plan left the guest viewport and is not a qualified guest stimulus. A later upward plan moved the guest; the following reverse attempt was incomplete. The session closed under its600-second watchdog. Artifacts: C:/ClasSICK/mac-fast-content-20261105-a.
+
+The band-skipping ROMd7f56afa3924b0dedf5425f39450a9ce63ec91d387f72c135fd55821fa33dc3a used25,276 ROM bytes. A horizontal drag moved x80 to102 and released motion left the frame there; the second vertical attempt moved the pointer but not the frame. Final MFL1:159 nonempty,151 deliveries,max16 ticks,max2 arrivals. MLC1:one unstable,one pending,two overflow; omitted164. Thus that candidate did not fix the blocker. Artifacts: C:/ClasSICK/mac-fast-content-20261105-b.
+
+The final ROM-cache candidate b0e8537157b4167d0b9b5a49a932a537ce1546999028c8dae18cc6835b978a57 passes native twins,seals,veneers and stack checks:47,404 used ROM bytes,476 data/BSS bytes,964 workspace bytes,5,036 conservative stack bound. In isolated Snow Early128K/RelativeHw, a guarded horizontal drag moved the window from(80,70) to(104,70); released leftward motion left it there. A new vertical drag moved it to(104,92); released upward motion left it stationary. Final counter2. These are bounded synthetic host observations, not human or physical passes. Final MFL1:191 nonempty,188 deliveries,max11 ticks,max2 arrivals. MLC1 still recorded one overflow, other reasons zero;85 passes were omitted. Counts include setup and pause interactions, so the remaining overflow is not assigned to a particular phase. Complete loss-free/corner/repeated qualification is still required. Artifacts: C:/ClasSICK/mac-rom-cache-20261105-a.
+
+Raw final paused words (manual transcription, own RAM):
+
+```text
+BB0 4D464C31 000000BF 00000003 00004DB3
+BC0 00004DB5 0000000B 000000CD 000000CD
+BD0 00000002 000000BC 4D4C5831 00000000
+BE0 00000000 00000000 00000000 4D4C5031
+C00 4D4C4331 00000000 00000000 00000000
+C10 00000001 4D4D4431 00000055 4D575031
+C20 00000002 00000080 00000001 00005CFC
+C30 00000176 00000000 00005E10 00000002
+```
+
+Final native-PC cache build passes four compiler twins,27 image corruptions and26 omitted-object rejections. EFI SHA-256df284097539ed6b7c90700cb27589900b20d2e4c7574b7637ba5f387abba9fe9,207,360 bytes. Matching original disk writers and independent media verification pass. This new PC image has not yet booted. The first twin-writer invocation lacked the sanitizer runtime on PATH; it failed before writing its twin. The existing first file was preserved under a new scratch name, then both writers succeeded with the proper tool PATH. No compatibility or boot claim from that build.
+
+Four bounded Claude Opus5.5 Low calls used frozen original public input only, no tools or executed tests. A first bitmap-run proposal was tested then parked outside Git because the Mac uses pixelsNULL; it is not included. A latency proposal was narrowed to actual push-attempt counts rather than treating service counts as arrivals. Byte-pattern and band-skipping patches were integrated; lead added narrow-window and cache tests and moved the value modulus inside its band guard. Input byte/hash, wait seconds and provider counts:
+
+|Call|Bytes / SHA-256|Seconds|Input/cache-create/cache-read/output|List estimate|
+|---|---|---:|---|---:|
+|parked bitmap runs|16184 /1199087263650d85b44b40e4568dfdb0e4e74e243213bd532ab498768ead6a0d|45.44|2/8725/2361/4735|$0.1649802|
+|foreground diagnosis|85945 /41b6e3763cd33c2e588a8b5192bc58d7b07c3f6c44ec6dc8bf372cb6c1f63580|67.08|2/46271/2361/6395|$0.4985482|
+|mono content bytes|37166 /569bf4a696fe0411bb034bc0808617dc106d3602491f85b93ed9061f72ffe2af|84.42|2/19498/2361/9009|$0.3366442|
+|off-band work|16413 /c999ca74bfb74780605f1977e63fed7dc0c35eebae2d653c4b0feb3728fb40ae|83.92|2/8890/2361/9427|$0.2601402|
+
+Raw packets/transcripts stay under C:/ClasSICK/release2-completion-20261023-a. List estimates are not bills or Codex quota savings; remaining allowances for all external services are unreported. No Grok,Copilot or Antigravity call in this slice.
+
+## PC legacy-mouse observations
+
+SRC-0597. Two isolated runs of the unchanged94bba3d4 disk and8e871da4 EFI used process-local QT_QPA_PLATFORM=windows:nowmpointer. No global display preference changed. The first run's baseline preceded guarded window placement, so its movement cannot isolate placement effects. The second captured its baseline after placement, then sent twelve guarded host events per direction, without intervening UI actions. An exact15x15 original cross/halo matcher found framebuffer centers: baseline(512,384), negativeX(510,384), positiveX(555,384), negativeY(555,343), positiveY(555,367). Correct-sign motion is observed, but negativeX is only two pixels and host coordinates remained near the virtual-screen origin. No corner, drag, exclusive-capture or E4 pass follows. Both VMs were externally closed/unregistered with existing inventory/running states and raw disk roundtrip preserved. Artifacts: C:/ClasSICK/pc-legacy-mouse-20261105-a and -b. A distinct process-local legacy-plus-DPI comparison is prepared separately; its outcome is not implied here.

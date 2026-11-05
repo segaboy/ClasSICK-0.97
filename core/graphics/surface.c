@@ -94,17 +94,18 @@ cs_surface_result cs_surface_fill(const cs_surface *surface, cs_rect rect,
     if (rect.left >= rect.right || rect.top >= rect.bottom) {
         return CS_SURFACE_OK;
     }
+    /* Nonempty and clipped: top row is in storage; advance only while rows remain. */
     if (surface->format == CS_SURFACE_MONO1_MSB) {
         size_t first = (size_t)rect.left / 8u;
         size_t last = (size_t)(rect.right - 1) / 8u;
         uint8_t head = (uint8_t)(0xffu >> ((uint32_t)rect.left % 8u));
         uint8_t tail = (uint8_t)(0xffu << (7u - (uint32_t)(rect.right - 1) % 8u));
         uint8_t fill = (uint8_t)(value != 0u ? 0xffu : 0x00u);
+        uint8_t *row = surface->storage + (size_t)rect.top * surface->stride;
         if (first == last) {
             head = (uint8_t)(head & tail);
         }
-        for (y = rect.top; y < rect.bottom; ++y) {
-            uint8_t *row = surface->storage + (size_t)y * surface->stride;
+        for (y = rect.top;;) {
             size_t i;
             row[first] = (uint8_t)((row[first] & (uint8_t)~head) | (fill & head));
             if (first != last) {
@@ -113,17 +114,27 @@ cs_surface_result cs_surface_fill(const cs_surface *surface, cs_rect rect,
                 }
                 row[last] = (uint8_t)((row[last] & (uint8_t)~tail) | (fill & tail));
             }
+            if (++y >= rect.bottom) {
+                break;
+            }
+            row += surface->stride;
         }
         return CS_SURFACE_OK;
     }
-    for (y = rect.top; y < rect.bottom; ++y) {
-        uint8_t *row = surface->storage + (size_t)y * surface->stride;
-        for (x = rect.left; x < rect.right; ++x) {
-            size_t offset = (size_t)x * 4u;
-            row[offset] = (uint8_t)(value >> 24u);
-            row[offset + 1u] = (uint8_t)(value >> 16u);
-            row[offset + 2u] = (uint8_t)(value >> 8u);
-            row[offset + 3u] = (uint8_t)value;
+    {
+        uint8_t *row = surface->storage + (size_t)rect.top * surface->stride;
+        for (y = rect.top;;) {
+            for (x = rect.left; x < rect.right; ++x) {
+                size_t offset = (size_t)x * 4u;
+                row[offset] = (uint8_t)(value >> 24u);
+                row[offset + 1u] = (uint8_t)(value >> 16u);
+                row[offset + 2u] = (uint8_t)(value >> 8u);
+                row[offset + 3u] = (uint8_t)value;
+            }
+            if (++y >= rect.bottom) {
+                break;
+            }
+            row += surface->stride;
         }
     }
     return CS_SURFACE_OK;

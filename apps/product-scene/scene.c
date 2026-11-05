@@ -1,6 +1,7 @@
 /* SPDX-License-Identifier: GPL-3.0-or-later */
 /* Copyright (C) 2026 Dean Howell. Original product artwork and lettering. */
 #include "scene.h"
+#include "fixed-mono.h"
 
 typedef struct {const cs_surface *s;int32_t width,height,top,x,y;} canvas;
 static const uint16_t title[13]={0x7927u,0x6497u,0x0C7Fu,0x01D7u,0x79CFu,
@@ -28,26 +29,43 @@ static int fill(const canvas *c,int32_t x,int32_t y,int32_t w,int32_t h,uint32_t
     size_t first=(size_t)left/8u,last=(size_t)(right-1)/8u;
     uint8_t lm=(uint8_t)(UINT32_C(0xFF)>>((uint32_t)left&7u));
     uint8_t rm=(uint8_t)(UINT32_C(0xFF)<<(7u-((uint32_t)(right-1)&7u)));
-    for(int32_t row=top;row<bottom;++row){
-        uint8_t *p=c->s->storage+(size_t)row*c->s->stride;
-        for(size_t col=first;col<=last;++col){
-            uint8_t mask=0xFFu;if(col==first)mask&=lm;if(col==last)mask&=rm;
-            p[col]=black?(uint8_t)(p[col]|mask):(uint8_t)(p[col]&(uint8_t)~mask);
+    uint8_t v=black?0xFFu:0u;
+    if(first==last)lm&=rm;
+    /* top<bottom here; one checked multiply, then advance only while rows remain. */
+    uint8_t *p=c->s->storage+(size_t)top*c->s->stride;
+    for(int32_t row=top;;){
+        p[first]=(uint8_t)((p[first]&(uint8_t)~lm)|(v&lm));
+        if(first!=last){
+            for(size_t col=first+1u;col<last;++col)p[col]=v;
+            p[last]=(uint8_t)((p[last]&(uint8_t)~rm)|(v&rm));
         }
+        if(++row>=bottom)break;
+        p+=c->s->stride;
     }
     return 1;
 }
+/* A missed band would make every fill empty and successful. */
+static int rows_hit(const canvas *c,int32_t y,int32_t h)
+{
+    int32_t t=y+c->y;
+    return t<c->top+c->s->height && t+h>c->top;
+}
 static int glyph(const canvas *c,int32_t x,int32_t y,uint16_t bits,int32_t scale)
 {
-    int ok=1;
-    for(unsigned row=0;row<5;++row)for(unsigned col=0;col<3;++col)
-        if(bits&(UINT16_C(1)<<(14u-row*3u-col)))
-            ok&=fill(c,x+(int32_t)col*scale,y+(int32_t)row*scale,scale,scale,1);
+    int ok=1;int32_t ry=y;unsigned bit=1u<<14;
+    if(!rows_hit(c,y,5*scale))return 1;
+    for(unsigned row=0;row<5;++row,ry+=scale){
+        int32_t rx=x;
+        if(!rows_hit(c,ry,scale)){bit>>=3;continue;}
+        for(unsigned col=0;col<3;++col,rx+=scale,bit>>=1)
+            if(bits&bit)ok&=fill(c,rx,ry,scale,scale,1);
+    }
     return ok;
 }
 static int number(const canvas *c,int32_t x,uint32_t value)
 {
     int ok=1;
+    if(!rows_hit(c,286,20))return 1;
     for(unsigned i=0;i<4;++i){
         ok&=glyph(c,x+(int32_t)(3u-i)*20,286,digits[value%10u],4);value/=10u;
     }
@@ -71,6 +89,23 @@ int cs_product_scene(const cs_surface *s,int32_t width,int32_t height,int32_t to
     cs_surface checked;canvas c;int ok=1;
     if(!state || state->phases>6 || state->success>1 || !validate(s,width,height,top,&checked))return 0;
     setup(&c,&checked,width,height,top);
+    /* The fixed original preview artwork resides in ROM, not another RAM frame.
+     * Exact geometry/state only; all other callers retain the generic painter. */
+    if(width==512 && height==342 && checked.width==512 &&
+       checked.format==CS_SURFACE_MONO1_MSB && checked.height<=342-top &&
+       state->value==97u && state->progress==16u && state->phases==6u &&
+       state->success==1u && state->pixels==NULL){
+        const uint8_t *src=cs_product_fixed_mono+(size_t)top*64u;
+        uint8_t *dst=checked.storage;
+        for(int32_t row=0;;){
+            for(unsigned col=0u;col<64u;++col)dst[col]=src[col];
+            if(++row>=checked.height)break;
+            src+=64u;dst+=checked.stride;
+        }
+        if(state->inputs!=0u)
+            return fill(&c,352,286,80,20,0) && number(&c,352,state->inputs);
+        return 1;
+    }
     /* Clear margins too, while preserving descriptor padding/tail bytes. */
     canvas background;setup(&background,&checked,width,height,top);background.x=0;background.y=0;
     ok&=fill(&background,0,0,width,height,0);
@@ -84,10 +119,12 @@ int cs_product_scene(const cs_surface *s,int32_t width,int32_t height,int32_t to
     for(unsigned i=0;i<13;++i)ok&=glyph(&c,112+(int32_t)i*24,34,title[i],4);
     static const uint16_t app[3]={0x2BEDu,0x6BA4u,0x6BA4u};
     for(unsigned i=0;i<3;++i)ok&=glyph(&c,238+(int32_t)i*12,65,app[i],3);
-    uint32_t value=state->value%1000u;
-    ok&=glyph(&c,214,86,digits[value/100u],6);
-    ok&=glyph(&c,246,86,digits[(value/10u)%10u],6);
-    ok&=glyph(&c,278,86,digits[value%10u],6);
+    if(rows_hit(&c,86,30)){
+        uint32_t value=state->value%1000u;
+        ok&=glyph(&c,214,86,digits[value/100u],6);
+        ok&=glyph(&c,246,86,digits[(value/10u)%10u],6);
+        ok&=glyph(&c,278,86,digits[value%10u],6);
+    }
     ok&=fill(&c,48,128,416,80,1);ok&=fill(&c,52,132,408,72,0);
     if(state->pixels){
         for(unsigned y=0;y<64;++y)for(unsigned x=0;x<128;++x)

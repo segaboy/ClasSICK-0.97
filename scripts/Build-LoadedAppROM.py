@@ -211,6 +211,8 @@ def main():
         if a.window_rearm_ready_probe:profile='native-window-'+('fast-' if a.window_fast_collect else '')+'rearm-ready-probe-v1';specification='SPEC-0094'
         if a.window_wait_latch_probe:profile='native-window-'+('fast-' if a.window_fast_collect else '')+'wait-latch-probe-v1';specification='SPEC-0095'
         if a.window_short_collect:profile='native-window-short-collect-experiment-v1';specification='SPEC-0096'
+    if 'apps/product-scene/scene.c' in sources:
+        headers+=('apps/product-scene/fixed-mono.h',)
     profiles=[]
     for twin in ('a','b'):
         folder=out/('Os-'+twin);folder.mkdir();objects=[]

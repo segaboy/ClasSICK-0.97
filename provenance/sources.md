@@ -5098,3 +5098,11 @@ Intel,Intel Quark SoC X1000 Core Developer Manual,October2013,order329679-001US,
 ## SRC-0595 - Oracle host-key and automatic mouse-capture interface
 
 Oracle VirtualBox 7.2 User Guide, [Working with Virtual Machines](https://docs.oracle.com/en/virtualization/virtualbox/7.2/user/working-with-vms.html), Capturing and Releasing Keyboard and Mouse; accessed 2026-11-05. Public UI interface facts only, no emulator implementation or samples. [Own-candidate observations](../docs/development/release-input-20261105.md#pc-capture-context-discrimination) remain distinct from the documented interface.
+
+## SRC-0596 - Original foreground latency and native renderer optimization
+
+2026-11-05; original project source/artwork, supervised Claude proposals, lead implementation and original tests. SPEC-0001/0037/0054/0096; IMPL-0111/0112; TEST-0158/0159. Includes a read-only bitmap generated from original renderer revision7182231, no external artwork or reference bytes. [Canonical evidence and limits](../docs/development/release-input-20261105.md#foreground-backlog-and-native-rendering).
+
+## SRC-0597 - Qt legacy mouse and process-local DPI configuration
+
+Qt Group, published [QGuiApplication constructor, Platform-Specific Arguments](https://doc.qt.io/qt-6.12/qguiapplication.html#QGuiApplication) and [High DPI, Configuring Windows](https://doc.qt.io/qt-6/highdpi.html), accessed2026-11-05. Interface/configuration facts only: nowmpointer, comma-separated platform options, and dpiawareness levels. No implementation source, examples of routines or emulator source. Installed qualified VBoxManage startvm --putenv supplies a process-local override. [Original-PC observations](../docs/development/release-input-20261105.md#pc-legacy-mouse-observations) are separate from the documented interface and do not prove the override was honored internally.

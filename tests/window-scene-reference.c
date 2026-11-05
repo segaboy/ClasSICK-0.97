@@ -39,7 +39,8 @@ static cs_cursor_bits original_art(void)
     }
     return bits;
 }
-static void fixture(int32_t width,int32_t height,cs_surface_format format)
+static void fixture_config(int32_t width,int32_t height,cs_surface_format format,
+                           int32_t window_width,int32_t window_height,int32_t title)
 {
     size_t stride=(format==CS_SURFACE_MONO1_MSB?((size_t)width+7u)/8u:(size_t)width*4u)+7u;
     size_t length=stride*(size_t)height+17u;
@@ -49,7 +50,7 @@ static void fixture(int32_t width,int32_t height,cs_surface_format format)
     cs_cursor_bits bits=original_art();cs_cursor_art art={&bits,7u,11u,2u,4u};
     cs_cursor_token token;
     cs_window window;
-    const cs_window_config config={80,70,224,144,18};
+    const cs_window_config config={80,70,window_width,window_height,title};
     cs_window_scene_effect effect;
     cs_product_state product={97u,0u,16u,6u,1u,NULL};
     uint32_t seed=0x970054u;
@@ -84,11 +85,21 @@ static void fixture(int32_t width,int32_t height,cs_surface_format format)
     CHECK(cs_cursor_unbind(&cursor,token)==CS_CURSOR_OK);
     free(a);free(b);
 }
+static void fixture(int32_t width,int32_t height,cs_surface_format format)
+{
+    fixture_config(width,height,format,224,144,18);
+}
 int main(void)
 {
     fixture(512,342,CS_SURFACE_MONO1_MSB);fixture(640,480,CS_SURFACE_MONO1_MSB);
     fixture(1024,768,CS_SURFACE_RGBA8);fixture(515,345,CS_SURFACE_MONO1_MSB);
     fixture(513,343,CS_SURFACE_RGBA8);fixture(127,83,CS_SURFACE_MONO1_MSB);
     fixture(9,7,CS_SURFACE_RGBA8);fixture(8192,2,CS_SURFACE_MONO1_MSB);
+    /* Narrow content spans exercise single-byte masks and adjacent edge bytes;
+     * random positions cover byte phases, band clipping and both patterns. */
+    for(int32_t width=2;width<=17;++width){
+        fixture_config(515,345,CS_SURFACE_MONO1_MSB,width,19,1);
+        fixture_config(127,83,CS_SURFACE_MONO1_MSB,width,19,8);
+    }
     printf("Window composition reference PASS:%u complete frames,%u checks\n",frames,checks);return 0;
 }

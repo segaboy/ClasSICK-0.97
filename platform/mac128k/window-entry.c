@@ -136,6 +136,13 @@ volatile uint32_t cs_mac_loss_trace[5];
 volatile uint32_t cs_mac_pending_trace[5];
 /* MLX1: tag, then PRIMING, button changed, axis changed, other READY. */
 volatile uint32_t cs_mac_context_trace[5];
+#if CLASSICK_MAC_SHORT_COLLECT
+/* MFL1: tag, nonempty completions, last result, start/end VBL, max delivered
+ * VBL span, start/end samples, max delivered sample span, delivered count.
+ * Foreground-only writes; paused reads only (fields are not atomic together).
+ * Saturating source counters make spans lower bounds after saturation. */
+volatile uint32_t cs_mac_fg_latency_trace[10];
+#endif
 #endif
 #if CLASSICK_MAC_IDLE_PROBE
 /* Offsets used by the register checkpoint in window-irqs.S. */
@@ -436,6 +443,10 @@ void cs_mac_main(void)
     cs_mac_loss_trace[0]=UINT32_C(0x4D4C4331);
     cs_mac_pending_trace[0]=UINT32_C(0x4D4C5031);
     cs_mac_context_trace[0]=UINT32_C(0x4D4C5831);
+#if CLASSICK_MAC_SHORT_COLLECT
+    cs_mac_fg_latency_trace[0]=UINT32_C(0x4D464C31);
+    for(unsigned i=1u;i<10u;i++)cs_mac_fg_latency_trace[i]=0u;
+#endif
 #endif
     cs_mac_trace.bytes=(uint32_t)sizeof(struct cs_mac_window_trace);
     cs_mac_diag.image_crc=cs_mac_image_crc((const volatile uint8_t *)(uintptr_t)0x400000,CS_MAC_ROM_BYTES);
@@ -474,11 +485,36 @@ void cs_mac_main(void)
     cs_mac_diag.stage=16u;cs_mac_diag.fault=0u;
     __asm__ volatile("andi.w #0xF8FF,%%sr" ::: "cc","memory");
     for(;;){
+#if CLASSICK_MAC_SHORT_COLLECT && CLASSICK_MAC_LOSS_COUNTS
+        uint32_t fg_start,fg_samples;
+#endif
         if(observe())fg_fatal(17,0);
+#if CLASSICK_MAC_SHORT_COLLECT && CLASSICK_MAC_LOSS_COUNTS
+        fg_start=cs_mac_diag.ticks;
+        fg_samples=*(volatile uint32_t *)&motion.samples;
+#endif
         r=cs_foreground_step(&session.foreground);
         if(r!=CS_FG_OK && r!=CS_FG_EMPTY && r!=CS_FG_BASELINED &&
            r!=CS_FG_DELIVERED && r!=CS_FG_RESET)fg_fatal(16,r);
         if(r==CS_FG_DELIVERED)saturate(&cs_mac_trace.deliveries);
+#if CLASSICK_MAC_SHORT_COLLECT && CLASSICK_MAC_LOSS_COUNTS
+        if(r!=CS_FG_EMPTY){
+            uint32_t end=cs_mac_diag.ticks;
+            uint32_t samples=*(volatile uint32_t *)&motion.samples;
+            cs_mac_fg_latency_trace[3]=fg_start;
+            cs_mac_fg_latency_trace[4]=end;
+            cs_mac_fg_latency_trace[6]=fg_samples;
+            cs_mac_fg_latency_trace[7]=samples;
+            cs_mac_fg_latency_trace[2]=(uint32_t)r;
+            if(r==CS_FG_DELIVERED){
+                uint32_t span=end-fg_start,arrivals=samples-fg_samples;
+                if(span>cs_mac_fg_latency_trace[5])cs_mac_fg_latency_trace[5]=span;
+                if(arrivals>cs_mac_fg_latency_trace[8])cs_mac_fg_latency_trace[8]=arrivals;
+                saturate(&cs_mac_fg_latency_trace[9]);
+            }
+            saturate(&cs_mac_fg_latency_trace[1]);
+        }
+#endif
 #if CLASSICK_MAC_SHORT_COLLECT
         if(r!=CS_FG_EMPTY)observe_dirty=1u;
 #endif

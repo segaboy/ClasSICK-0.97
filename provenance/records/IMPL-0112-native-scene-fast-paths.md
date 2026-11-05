@@ -1,0 +1,5 @@
+# IMPL-0112 - Original native scene fast paths
+
+2026-11-05; SRC-0596, SPEC-0001/0037/0054, TEST-0159. Original GPL-3.0-or-later code and artwork only. Claude proposed the byte-pattern and band-skipping deltas; Codex reviewed/integrated them and implemented the fixed original artwork cache. Paths: apps/product-scene/scene.c and fixed-mono.h, apps/window-scene/scene.c, core/graphics/surface.c; build input identities include the new header.
+
+The mono window pattern writes clipped bytes once; fill loops advance by stride; off-band glyph/number work is skipped. Exact fixed native preview state/geometry may copy a 21,888-byte read-only original bitmap, then redraw the input counter. Other states and geometries use the generic painter. No new RAM framebuffer, queue capacity, event coalescing, API/error changes, external artwork or historical claim. [Design, generation identity, executed checks, native observations and limits](../../docs/development/release-input-20261105.md#foreground-backlog-and-native-rendering). Complete paired-release and human/physical qualification remain open.

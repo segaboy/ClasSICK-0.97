@@ -64,12 +64,71 @@ static int rect(const struct ctx *c, int32_t l, int32_t t, int32_t r, int32_t b,
     return cs_surface_fill(c->s, q, v) != CS_SURFACE_OK;
 }
 
+/* MONO1_MSB content: same pixels as the white fill plus the black stripe or
+ * checker fills, clipped the same way. The surface was validated by compose. */
+static void mono_content(const struct ctx *c, const cs_window *w)
+{
+    const cs_surface *s = c->s;
+    int32_t ct = w->y + w->title, base = c->ox + w->x;
+    int32_t l = mx(w->x + 1, 0) + c->ox;
+    int32_t r = mn(w->x + w->width - 1, CS_PRODUCT_WIDTH) + c->ox;
+    int32_t t = mx(mx(ct, 0) + c->oy, c->bt);
+    int32_t b = mn(mn(w->y + w->height - 1, CS_PRODUCT_HEIGHT) + c->oy, c->bb);
+    uint32_t q, k, hb, yb;
+    size_t first, last, i;
+    uint8_t head, tail, a, pat = 0u, e0, e1, v, *row;
+
+    if (r > s->width)
+        r = s->width;
+    if (l >= r || t >= b)
+        return;
+    /* Byte k-bit (MSB first) has local x = 8*(byte-base/8) + k - q. */
+    q = (uint32_t)base & 7u;
+    hb = ((uint32_t)base >> 3) & 1u;
+    a = (uint8_t)(0xFFu >> q);
+    for (k = 0u; k < 8u; k++)
+        if (((k + 8u - q) & 4u) != 0u)
+            pat = (uint8_t)(pat | (0x80u >> k));
+    first = (size_t)l / 8u;
+    last = (size_t)(r - 1) / 8u;
+    head = (uint8_t)(0xFFu >> ((uint32_t)l & 7u));
+    tail = (uint8_t)(0xFFu << (7u - ((uint32_t)(r - 1) & 7u)));
+    if (first == last)
+        head = (uint8_t)(head & tail);
+    row = s->storage + (size_t)t * s->stride;
+    for (;;) {
+        e0 = e1 = pat;
+        if (!w->pattern) {
+            /* Bits k>=q are in cell byte-base/8; bits k<q in the previous cell. */
+            yb = ((uint32_t)(t - c->oy - ct) >> 3) & 1u;
+            e0 = (hb ^ yb) ? a : (uint8_t)~a;
+            e1 = (uint8_t)~e0;
+        }
+        v = (first & 1u) ? e1 : e0;
+        row[first] = (uint8_t)((row[first] & (uint8_t)~head) | (v & head));
+        if (first != last) {
+            for (i = first + 1u; i < last; i++)
+                row[i] = (i & 1u) ? e1 : e0;
+            v = (last & 1u) ? e1 : e0;
+            row[last] = (uint8_t)((row[last] & (uint8_t)~tail) | (v & tail));
+        }
+        if (++t >= b)
+            return;
+        row += s->stride;
+    }
+}
+
 static int draw_window(const struct ctx *c, const cs_window *w, uint32_t blk, uint32_t wht)
 {
     int32_t ct = w->y + w->title, ce = w->y + w->height - 1, lx, by, bx;
     if (rect(c, w->x, w->y, w->x + w->width, w->y + w->height, blk) ||
-        rect(c, w->x + 1, w->y + 1, w->x + w->width - 1, w->y + w->title - 1, wht) ||
-        rect(c, w->x + 1, ct, w->x + w->width - 1, ce, wht))
+        rect(c, w->x + 1, w->y + 1, w->x + w->width - 1, w->y + w->title - 1, wht))
+        return 1;
+    if (c->s->format == CS_SURFACE_MONO1_MSB) {
+        mono_content(c, w);
+        return 0;
+    }
+    if (rect(c, w->x + 1, ct, w->x + w->width - 1, ce, wht))
         return 1;
     if (w->pattern) {
         for (lx = 4; lx < w->width - 1; lx += 8)
