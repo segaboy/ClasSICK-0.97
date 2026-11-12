@@ -2892,6 +2892,94 @@
         "Synthetic replay; no host-capture, human or physical-input qualification.",
         "Full-frame comparison is against a hosted project scene oracle, not a historical reference."
       ]
+    },
+    {
+      "id": "2026-11-12-pc-max-motion-right",
+      "path": "docs/evidence/screenshots/2026-11-12/pc-max-motion-right.png",
+      "sha256": "41ef11ae19c7d5a39994488819f14d5590363bb5df9b0a5ead68ff6608e57ca8",
+      "bytes": 4845,
+      "width": 1024,
+      "height": 768,
+      "captured_on": "2026-11-12",
+      "target": "native-x86_64",
+      "caption": "Original PC candidate after synthetic maximum-size right movement.",
+      "alt": "Centered monochrome ClasSICK scene with cursor at the result of a controlled device movement.",
+      "source_revision": "970c26f35e57ac71ffc31dd9102dac1f2b8a4bf2",
+      "compiled_source_revision": "0f8d85df5b6fe21508c22594e0dc20923d4eebe6",
+      "evidence": "docs/development/release-input-20261105.md",
+      "license": "GPL-3.0-or-later",
+      "rights": "Unmodified VirtualBox guest framebuffer PNG; no desktop, emulator chrome or reference pixels.",
+      "input": "synthetic",
+      "limitations": [
+        "Device-interface input only; ordinary GUI capture, human and physical input are not qualified.",
+        "Comparison is against the project hosted scene oracle, not historical evidence."
+      ]
+    },
+    {
+      "id": "2026-11-12-pc-max-motion-up",
+      "path": "docs/evidence/screenshots/2026-11-12/pc-max-motion-up.png",
+      "sha256": "22c7a0b8a0bbaebbca6fc63c547a83f24e64e5432d53799716172de76e84bb5e",
+      "bytes": 4844,
+      "width": 1024,
+      "height": 768,
+      "captured_on": "2026-11-12",
+      "target": "native-x86_64",
+      "caption": "Original PC candidate after synthetic maximum-size up movement.",
+      "alt": "Centered monochrome ClasSICK scene with cursor at the result of a controlled device movement.",
+      "source_revision": "970c26f35e57ac71ffc31dd9102dac1f2b8a4bf2",
+      "compiled_source_revision": "0f8d85df5b6fe21508c22594e0dc20923d4eebe6",
+      "evidence": "docs/development/release-input-20261105.md",
+      "license": "GPL-3.0-or-later",
+      "rights": "Unmodified VirtualBox guest framebuffer PNG; no desktop, emulator chrome or reference pixels.",
+      "input": "synthetic",
+      "limitations": [
+        "Device-interface input only; ordinary GUI capture, human and physical input are not qualified.",
+        "Comparison is against the project hosted scene oracle, not historical evidence."
+      ]
+    },
+    {
+      "id": "2026-11-12-pc-max-motion-down",
+      "path": "docs/evidence/screenshots/2026-11-12/pc-max-motion-down.png",
+      "sha256": "f5173d683e05f1bb369230c3615e230d1ba4ed1982b563e08b43a7fada0b3299",
+      "bytes": 4881,
+      "width": 1024,
+      "height": 768,
+      "captured_on": "2026-11-12",
+      "target": "native-x86_64",
+      "caption": "Original PC candidate after synthetic maximum-size down movement.",
+      "alt": "Centered monochrome ClasSICK scene with cursor at the result of a controlled device movement.",
+      "source_revision": "970c26f35e57ac71ffc31dd9102dac1f2b8a4bf2",
+      "compiled_source_revision": "0f8d85df5b6fe21508c22594e0dc20923d4eebe6",
+      "evidence": "docs/development/release-input-20261105.md",
+      "license": "GPL-3.0-or-later",
+      "rights": "Unmodified VirtualBox guest framebuffer PNG; no desktop, emulator chrome or reference pixels.",
+      "input": "synthetic",
+      "limitations": [
+        "Device-interface input only; ordinary GUI capture, human and physical input are not qualified.",
+        "Comparison is against the project hosted scene oracle, not historical evidence."
+      ]
+    },
+    {
+      "id": "2026-11-12-pc-max-motion-diagonal-reverse",
+      "path": "docs/evidence/screenshots/2026-11-12/pc-max-motion-diagonal-reverse.png",
+      "sha256": "1ccf1e5f78e5c40a01f9fcd8da44ea3caa4c725e82bb91a592e3cb1f3c464632",
+      "bytes": 4863,
+      "width": 1024,
+      "height": 768,
+      "captured_on": "2026-11-12",
+      "target": "native-x86_64",
+      "caption": "Original PC candidate after synthetic maximum-size diagonal reverse movement.",
+      "alt": "Centered monochrome ClasSICK scene with cursor at the result of a controlled device movement.",
+      "source_revision": "970c26f35e57ac71ffc31dd9102dac1f2b8a4bf2",
+      "compiled_source_revision": "0f8d85df5b6fe21508c22594e0dc20923d4eebe6",
+      "evidence": "docs/development/release-input-20261105.md",
+      "license": "GPL-3.0-or-later",
+      "rights": "Unmodified VirtualBox guest framebuffer PNG; no desktop, emulator chrome or reference pixels.",
+      "input": "synthetic",
+      "limitations": [
+        "Device-interface input only; ordinary GUI capture, human and physical input are not qualified.",
+        "Comparison is against the project hosted scene oracle, not historical evidence."
+      ]
     }
   ]
 }

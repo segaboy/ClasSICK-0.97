@@ -100,3 +100,5 @@ See [storage and publication policy](../../development/screenshot-evidence.md). 
 [2026-11-12 Mac candidate two-drag replay](2026-11-12/mac-candidate-anchored-drags.png): original guest image after two synthetic anchored drags; [evidence and limitations](../../development/release-input-20261105.md). This is not a host-capture or physical-input test.
 
 2026-11-12 Mac synthetic corner replay: [top left](2026-11-12/mac-candidate-corner-top-left.png), [top right](2026-11-12/mac-candidate-corner-top-right.png), [bottom right](2026-11-12/mac-candidate-corner-bottom-right.png), [bottom left](2026-11-12/mac-candidate-corner-bottom-left.png) and [return inside](2026-11-12/mac-candidate-corner-return.png). [Evidence and limits](../../development/release-input-20261105.md).
+
+2026-11-12 PC maximum device movements: [right](2026-11-12/pc-max-motion-right.png), [up](2026-11-12/pc-max-motion-up.png), [down](2026-11-12/pc-max-motion-down.png), [diagonal reverse](2026-11-12/pc-max-motion-diagonal-reverse.png). [Evidence and limits](../../development/release-input-20261105.md).
