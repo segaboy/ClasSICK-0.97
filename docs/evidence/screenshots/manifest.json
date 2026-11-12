@@ -2738,6 +2738,50 @@
         "Actual196-call transcript includes the disclosed runner flattening error; no stationary titlebar press claim.",
         "Paired release and remaining Mac qualification stay open."
       ]
+    },
+    {
+      "id": "2026-11-06-pc-viewer-content-click",
+      "path": "docs/evidence/screenshots/2026-11-06/pc-viewer-content-click.png",
+      "sha256": "8d3b75fc216672459d0f29366adf6d87651087b5463c81a8877acf2de13604f4",
+      "bytes": 4783,
+      "width": 1024,
+      "height": 768,
+      "captured_on": "2026-11-06",
+      "target": "native-x86_64",
+      "caption": "Original PC guest after diagnostic-viewer synthetic drags and a content click.",
+      "alt": "Centered monochrome ClasSICK scene with the striped window shifted right and down and counter 0003.",
+      "source_revision": "14351a198680da8591ba2a776707504607ca17fa",
+      "compiled_source_revision": "0f8d85df5b6fe21508c22594e0dc20923d4eebe6",
+      "evidence": "docs/development/release-input-20261105.md",
+      "license": "GPL-3.0-or-later",
+      "rights": "Unmodified VirtualBox framebuffer PNG of original ClasSICK guest pixels only; no desktop, emulator chrome, reference assets or retouch.",
+      "input": "synthetic",
+      "limitations": [
+        "Synthetic input through the original diagnostic viewer and relay; ordinary VirtualBox frontend capture remains unresolved.",
+        "No human, physical hardware, historical System 1 or paired-release qualification."
+      ]
+    },
+    {
+      "id": "2026-11-12-mac-candidate-anchored-drags",
+      "path": "docs/evidence/screenshots/2026-11-12/mac-candidate-anchored-drags.png",
+      "sha256": "33860ce539802c274ff156b6b57a4ebe0fd5151be68543809fa39c792a532637",
+      "bytes": 52261,
+      "width": 512,
+      "height": 342,
+      "captured_on": "2026-11-12",
+      "target": "native-mac68000",
+      "caption": "Original Mac candidate after two synthetic anchored drags and releases; counter 0002.",
+      "alt": "Monochrome ClasSICK scene with checkerboard window shifted right and up, pointer near its title bar and counter 0002.",
+      "source_revision": "14351a198680da8591ba2a776707504607ca17fa",
+      "compiled_source_revision": "0f8d85df5b6fe21508c22594e0dc20923d4eebe6",
+      "evidence": "docs/development/release-input-20261105.md",
+      "license": "GPL-3.0-or-later",
+      "rights": "Unmodified Snow camera export of the original ClasSICK guest framebuffer; no desktop, emulator chrome or reference pixels.",
+      "input": "synthetic",
+      "limitations": [
+        "Synthetic replay, not ordinary host capture or human input.",
+        "Experimental Mac fast/invert-3 candidate; no physical, historical System 1 or paired-release qualification."
+      ]
     }
   ]
 }

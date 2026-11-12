@@ -96,3 +96,5 @@ See [storage and publication policy](../../development/screenshot-evidence.md). 
 [2026-11-03 PC host capture calibration](2026-11-03/pc-host-corner-reverse.png): the pointer remained near the lower-right after reverse movements. [Evidence and limits](../../development/pc-host-edge-20261103.md#captured-pointer-calibration).
 
 [2026-11-03 PC paired host-movement attempt](2026-11-03/pc-host-pair-attempt.png): the intended top-left position was not observed. [Evidence and limits](../../development/pc-host-edge-20261103.md#paired-synthetic-movements).
+
+[2026-11-12 Mac candidate two-drag replay](2026-11-12/mac-candidate-anchored-drags.png): original guest image after two synthetic anchored drags; [evidence and limitations](../../development/release-input-20261105.md). This is not a host-capture or physical-input test.
