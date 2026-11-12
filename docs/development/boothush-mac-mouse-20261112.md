@@ -87,6 +87,20 @@ This did not restore the requested movement, and disabling trace publication
 made the normal diagnostics stale. Neither experiment was integrated or
 qualified as a fix. The Mac mouse timing blocker remains open.
 
+A third scratch ROM samples VIA port B earlier in the interrupt and uses that
+sample in the existing stability check. Its twin build SHA-256 was
+`a8e8c04ec49350fef15de47cb6f4d74803517b9c4712bb4e6e3ab8196d51c245`;
+this changes MMIO timing and is not admitted to the product. In a 16-run
+comparison across four start cycles, both ROMs reached `(288,171)` in all
+four 8,192-cycle, no-guard trials except that the baseline ended at 287 once.
+At 2,048 cycles with the 4,096-cycle guard, the baseline ended at 255 in all
+four trials, and the early-sample ROM ended at 257–259, with 27–31 omitted
+passes. All these runs reported zero hard losses and no pending steps. The
+experimental read improves one bounded case but does not fix the fast case;
+its extra device access and safety have not been qualified. The original code,
+experimental source and `early-comparison-matrix.json` remain in the private
+workspace. No production driver change or release pass follows.
+
 ## Feedback for BootHush developers
 
 1. `boothush.exe --help` exits 2 and prints JSON `{"status":"error",...,
