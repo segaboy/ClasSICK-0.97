@@ -78,6 +78,52 @@ class Short(unittest.TestCase):
         self.assertEqual(r["summary"]["trailing_partial_bytes"], 1)
 
 
+# Original diagnostic guest readout from the isolated 2026-11-12 PC GUI trial.
+# This is a captured stream, not a claim about host intent or packet origin.
+GUI_CAPTURE = """r8=4353505345513031
+r9=3000000000000000
+r10=ff2a01ff2801ff2a
+r11=2a01ff2800000801
+r12=01ff2800000801ff
+r13=ff2800000801ff2a
+r14=2800000801ff2a01
+r15=00000801ff2a01ff
+"""
+
+
+class CapturedGUI(unittest.TestCase):
+    def test_repeated_corner_reports(self):
+        result = reader.decode(GUI_CAPTURE)
+        packets = [(e["dx"], e["dy"], e["buttons"])
+                   for e in result["events"] if e["kind"] == 1]
+        self.assertEqual(packets, [
+            (255, -255, 2), (255, -255, 0), (255, -255, 2), (0, 0, 0),
+            (255, -255, 0), (255, -255, 2), (0, 0, 0), (255, -255, 0),
+            (255, -255, 2), (0, 0, 0), (255, -255, 0), (255, -255, 2),
+            (0, 0, 0), (255, -255, 0), (255, -255, 2), (0, 0, 0),
+        ])
+        summary = result["summary"]
+        self.assertEqual((summary["packets"], summary["gaps"],
+                          summary["trailing_partial_bytes"]), (16, 0, 0))
+        self.assertEqual((summary["sum_dx"], summary["sum_dy"]), (2805, -2805))
+        self.assertTrue(any("does not prove initial live packet alignment" in n
+                            for n in summary["notes"]))
+        hypotheses = result["boundary_hypotheses"]
+        self.assertEqual([(h["prefix_bytes_skipped"], h["modeled_packets"],
+                           h["model_mismatches"], h["sum_dx"], h["sum_dy"])
+                          for h in hypotheses], [
+            (0, 16, 0, 2805, -2805),
+            (1, 12, 5, 2040, -2040),
+            (2, 15, 1, 2550, -2550),
+        ])
+
+    def test_short_hypotheses_and_errors(self):
+        self.assertEqual(reader.boundary_hypotheses([], []), [])
+        h = reader.boundary_hypotheses([8], [1])
+        self.assertEqual(len(h), 1)
+        self.assertEqual((h[0]["compatible_losses"], h[0]["modeled_packets"]), (1, 0))
+
+
 class Refusals(unittest.TestCase):
     def test_formats(self):
         self.assertEqual(reader.parse_registers(REGS.replace("=", ": 0x")), reader.parse_registers(REGS))

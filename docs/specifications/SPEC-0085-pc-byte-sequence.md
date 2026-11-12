@@ -74,6 +74,17 @@ model_mismatches,trailing_partial_bytes,gaps,alignment_qualified,sum_dx,sum_dy,
 max_abs_dx/max_abs_dy,button_states,notes,scope. Never label compatible losses as
 proven drop causes. No proportional-delivery,warp,recentring or forwarding cause
 is inferred from packet size alone. With gaps,notes explicitly limit alignment.
+Even when gaps are zero, notes explicitly say that initial live packet alignment
+is unproven and that decoding assumes a starting state. The existing boolean is
+a modeled no-gap condition, not evidence of live alignment.
+
+The JSON output also includes `boundary_hypotheses`: separate model runs that
+assume a fresh report boundary after zero, one or two initial recorded bytes.
+Each reports its skipped prefix, packets, mismatches, compatible losses,
+trailing partial length and movement sums. Short records have fewer candidates.
+These are comparisons under assumptions, not proof of the live starting state,
+the contents of the omitted prefix or the cause of an observed stream. Gaps,
+counter saturation and unrecorded bytes may invalidate all of them.
 
 ## Qualification and trials
 

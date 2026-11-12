@@ -163,6 +163,41 @@ static void test_invalid(void)
     }
 }
 
+/* Original guest stream captured by the isolated 2026-11-12 GUI probe.
+ * This verifies the real decoder across all 48 bytes; it does not identify
+ * the host event source or establish initial stream alignment. */
+static void test_captured_gui_stream(void)
+{
+    static const uint8_t raw[] = {
+        0x2A,0xFF,0x01,0x28,0xFF,0x01,0x2A,0xFF,0x01,0x08,0x00,0x00,
+        0x28,0xFF,0x01,0x2A,0xFF,0x01,0x08,0x00,0x00,0x28,0xFF,0x01,
+        0x2A,0xFF,0x01,0x08,0x00,0x00,0x28,0xFF,0x01,0x2A,0xFF,0x01,
+        0x08,0x00,0x00,0x28,0xFF,0x01,0x2A,0xFF,0x01,0x08,0x00,0x00
+    };
+    static const uint8_t expected_buttons[] = {2,0,2,0,0,2,0,0,2,0,0,2,0,0,2,0};
+    static const uint8_t expected_motion[] = {1,1,1,0,1,1,0,1,1,0,1,1,0,1,1,0};
+    cs_ps2_mouse m;
+    cs_ps2_mouse_packet out = {0};
+    unsigned n=0;
+    size_t i;
+    CHECK(cs_ps2_mouse_begin(&m)==CS_PS2_MOUSE_MORE);
+    for(i=0;i<sizeof raw;i++) {
+        int r=cs_ps2_mouse_feed(&m,raw[i],0,&out);
+        if(i%3u!=2u) CHECK(r==CS_PS2_MOUSE_MORE);
+        else {
+            CHECK(r==CS_PS2_MOUSE_PACKET);
+            CHECK(n<sizeof expected_buttons);
+            if(n<sizeof expected_buttons) {
+                CHECK(out.buttons==expected_buttons[n]);
+                CHECK(out.dx==(expected_motion[n]?255:0));
+                CHECK(out.dy==(expected_motion[n]?-255:0));
+            }
+            ++n;
+        }
+    }
+    CHECK(n==16u && m.used==0u);
+}
+
 static void test_corrupt(void)
 {
     cs_ps2_mouse m, zero = {0, 0, 0};
@@ -187,6 +222,7 @@ int main(void)
 {
     test_button();
     test_literals();
+    test_captured_gui_stream();
     test_invalid();
     test_corrupt();
     test_exhaustive();

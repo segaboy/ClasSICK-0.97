@@ -109,6 +109,31 @@ def replay(data, errs):
     return out, used
 
 
+def boundary_hypotheses(data, errs):
+    """Model a fresh report boundary after zero, one or two prefix bytes.
+
+    These are alternatives, not a determination of the live decoder state.
+    The omitted prefix is unknown and no claim is made about its packets.
+    """
+    results = []
+    for skipped in range(min(3, len(data))):
+        events, trailing = replay(data[skipped:], errs[skipped:])
+        packets = [event for event in events if event["event"] == "packet"]
+        results.append({
+            "prefix_bytes_skipped": skipped,
+            "modeled_packets": len(packets),
+            "model_mismatches": sum(event["event"].startswith("model-mismatch")
+                                    for event in events),
+            "compatible_losses": sum(event["kind"] == 2 and
+                                     not event["event"].startswith("model-mismatch")
+                                     for event in events),
+            "trailing_partial_bytes": trailing,
+            "sum_dx": sum(event["dx"] for event in packets),
+            "sum_dy": sum(event["dy"] for event in packets),
+        })
+    return results
+
+
 def summarize(events, trailing, gaps):
     packets = [e for e in events if e["event"] == "packet"]
     s = {
@@ -133,6 +158,7 @@ def summarize(events, trailing, gaps):
         notes.append("Model mismatch: a byte the model would drop carried no error step; check image identity before interpreting.")
     if s["overflow_compatible"] or s["unsynced_compatible"] or s["status_compatible"]:
         notes.append("Compatible losses are classifications under model/history assumptions, not proven controller or host causes.")
+    notes.append("Zero recorded gaps does not prove initial live packet alignment; modeled decoding assumes its starting state.")
     notes.append("Image identity, counter/non-reset assumptions and error-counter saturation remain external limits.")
     s["notes"] = notes
     s["scope"] = SCOPE
@@ -143,7 +169,8 @@ def decode(text):
     data, errs, gaps = unpack(parse_registers(text))
     events, trailing = replay(data, errs)
     return {"format": "CSPSEQ01", "count": len(data), "bytes": data, "events": events,
-            "summary": summarize(events, trailing, gaps)}
+            "summary": summarize(events, trailing, gaps),
+            "boundary_hypotheses": boundary_hypotheses(data, errs)}
 
 
 def main(argv=None):
