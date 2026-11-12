@@ -5114,3 +5114,7 @@ Qt Group, published [QGuiApplication constructor, Platform-Specific Arguments](h
 ## SRC-0599 - Original PC diagnostic viewer
 
 2026-11-05; lead-authored SPEC-0098, IMPL-0114, TEST-0161, using original project Windows presentation/capture and admitted desktop-check interface patterns. Pure motion/header tests and bounded VM/viewer observations are engineering evidence only. No historical, third-party implementation, worker-code, Qt-fix or release claim. [Canonical evidence](../docs/development/release-input-20261105.md#original-pc-diagnostic-viewer).
+
+## SRC-0601 - Owner-selected BootHush Mac mouse runbook and black-box observations
+
+2026-11-12; owner-supplied `classick-097-mouse.md`, SHA-256 `54dc93e90597c5db161fb65a9f2b1dec18eae38275dce8072005ea474299c333`; byte-identical intake copy outside Git at `C:/ClasSICK/boothush-mouse-20261112-a/classick-097-mouse-intake.md`. BootHush published local CLI documentation and exact executable are used for interface and own-ROM black-box observations only. No emulator implementation, external ROM or reference media was inspected. IMPL-0115 / TEST-0162; [receipt and limits](../docs/development/boothush-mac-mouse-20261112.md).

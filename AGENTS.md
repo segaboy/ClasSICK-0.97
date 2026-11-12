@@ -9,7 +9,7 @@ Compacted 2026-10-28 from public baseline `11ad7a937e58f752cfecda8b6805c76bc7f45
 - When relevant: [native parity](docs/development/native-parity-plan.md), [display](docs/development/display-target.md), [performance](docs/development/native-performance-plan.md), [x64 PC](docs/development/unified-x64-pc-plan.md), [286](docs/development/pc286-feasibility.md), [System1/ROM](docs/development/system1-rom-boot-requirements.md), [sources](docs/research/system1-sources.md), [releases](releases/README.md), [milestones](docs/roadmap.md).
 
 ## Current scope
-Current owner scope (2026-10-28, SRC-0521): resume paired release work and retained approved isolated original-candidate trials. Use windowed Display1 and readiness handshake. Release/tag publication,reference and hardware runs remain separate. Paired release work is PRIMARY; bounded286 work remains separate. [Current diagnostic receipt](docs/development/release-resumption-evidence.json); [owned input](docs/development/owned-window-input-evidence.md). Earlier scopes retain their exact applicability.
+Current owner scope (2026-11-12): develop the Mac port only, using BootHush in place of Snow. Do not launch or use Snow. PC and 286 development are paused until the owner changes scope. The owner authorized BootHush tests of original Mac candidates; reference systems, physical hardware and release publication remain separate. [BootHush mouse evidence](docs/development/boothush-mac-mouse-20261112.md). Prior scopes and observations remain historical, not a requirement to resume paused work.
 
 
 ## Identity and license
@@ -52,7 +52,7 @@ Current owner scope (2026-10-28, SRC-0521): resume paired release work and retai
 
 ## Trials (when unpaused)
 
-- The owner's SRC-0402..0411 three-scope approval for isolated, verified original-candidate Snow and VirtualBox trials is retained. Publication, reference runs and physical hardware each remain separate.
+- Use BootHush for isolated, verified original Mac candidates in the current scope. Do not use Snow. VirtualBox and PC trials are paused with PC development. Publication, reference runs and physical hardware each remain separate.
 - Preserve existing VMs/media, close owned sessions, restore preferences and bound active time. Check actual foreground, physical owned-client containment and readiness; capture metadata/API returns are not guest acceptance. Stop an inconclusive route until a new discriminating observation/method exists. Use windowed Display1 with instructions visible; leave GLKVM/other displays untouched. Never fullscreen over the instructions.
 
 ## Preservation

@@ -2980,6 +2980,28 @@
         "Device-interface input only; ordinary GUI capture, human and physical input are not qualified.",
         "Comparison is against the project hosted scene oracle, not historical evidence."
       ]
+    },
+    {
+      "id": "2026-11-12-boothush-live-mouse",
+      "path": "docs/evidence/screenshots/2026-11-12/boothush-live-mouse.png",
+      "sha256": "eafeecb1af344865c576cce5c08a366b72e5144bef5c982185a02a4e462f3e6d",
+      "bytes": 697,
+      "width": 512,
+      "height": 342,
+      "captured_on": "2026-11-12",
+      "target": "native-mac68000",
+      "caption": "Original Mac candidate after automated live mouse movement and two clicks in BootHush.",
+      "alt": "Monochrome ClasSICK scene with striped window and counter 0002.",
+      "source_revision": "bf14c9de97487a75073ad7ccc4f872699caea257",
+      "compiled_source_revision": "0f8d85df5b6fe21508c22594e0dc20923d4eebe6",
+      "evidence": "docs/development/boothush-mac-mouse-20261112.md",
+      "license": "GPL-3.0-or-later",
+      "rights": "Original ClasSICK guest framebuffer; losslessly converted from BootHush PBM, with no desktop, emulator chrome or reference pixels.",
+      "input": "synthetic",
+      "limitations": [
+        "Automated host mouse movement and clicks; no successful live held drag or human/physical input.",
+        "Experimental Mac candidate; no historical System 1 or release qualification."
+      ]
     }
   ]
 }
