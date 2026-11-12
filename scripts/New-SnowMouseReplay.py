@@ -10,6 +10,7 @@ import sys
 
 MAX_TS = 2**63 - 1
 MAX_REC_BYTES = 4096
+CASE_COUNTS = {"single-x": 1, "slow-x": 8, "anchored-two-drag": 1119}
 
 
 def parse_args(argv):
@@ -20,7 +21,7 @@ def parse_args(argv):
     g.add_argument("--paused-recording")
     p.add_argument("--offset", type=int)
     p.add_argument("--gap", type=int, required=True)
-    p.add_argument("--case", required=True, choices=["single-x", "slow-x"])
+    p.add_argument("--case", required=True, choices=list(CASE_COUNTS))
     a = p.parse_args(argv)
     if a.paused_recording is None:
         if a.offset is not None:
@@ -31,12 +32,27 @@ def parse_args(argv):
 
 
 def build(case, start, gap):
-    count = 1 if case == "single-x" else 8
-    events = []
-    for i in range(count):
-        events.append([start + i * gap,
-                       {"MouseUpdateRelative": {"relx": 1, "rely": 0, "btn": None}}])
-    return events
+    if case != "anchored-two-drag":
+        return [[start + i * gap,
+                 {"MouseUpdateRelative": {"relx": 1, "rely": 0, "btn": None}}]
+                for i in range(CASE_COUNTS[case])]
+    # Establish the top-left corner before navigating to the title bar. Each
+    # entry is original synthetic data, not an observed or historical event.
+    motions = [(0, 0, False)]
+    for count, dx, dy in ((512, -1, 0), (342, 0, -1), (100, 1, 0), (80, 0, 1)):
+        motions.extend([(dx, dy, None)] * count)
+    motions.append((0, 0, True))
+    motions.extend([(1, 0, None)] * 32)
+    motions.append((0, 0, False))
+    motions.extend([(1, 0, None)] * 16)
+    motions.append((0, 0, True))
+    motions.extend([(0, -1, None)] * 24)
+    motions.append((0, 0, False))
+    motions.extend([(0, 1, None)] * 8)
+    assert len(motions) == CASE_COUNTS[case]
+    return [[start + i * gap,
+             {"MouseUpdateRelative": {"relx": dx, "rely": dy, "btn": button}}]
+            for i, (dx, dy, button) in enumerate(motions)]
 
 
 def reject_constant(_):
@@ -93,7 +109,7 @@ def main(argv=None):
         sys.exit("error: --start must be >= 0")
     if a.gap <= 0:
         sys.exit("error: --gap must be > 0")
-    count = 1 if a.case == "single-x" else 8
+    count = CASE_COUNTS[a.case]
     if start + (count - 1) * a.gap > MAX_TS:
         sys.exit("error: last timestamp exceeds 2**63-1")
     out = os.path.abspath(a.output)

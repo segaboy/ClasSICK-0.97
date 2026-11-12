@@ -62,3 +62,13 @@ pre-load control and the installed playback timing/reset semantics before
 attributing the captured X transition or revising the sampling contract.
 One reported Copilot premium request;other workers idle,all-four remaining
 balances unavailable. No measured Codex saving or provider-token equivalence.
+
+2026-11-12: `--case anchored-two-drag` generates 1,119 original synthetic
+records, first moving to the top-left corner, then to the title bar and through
+two drags/releases. Existing output/no-overwrite and timestamp bounds apply.
+The host test now passes 53 checks, including an independent clipped-position
+and title-drag model from three starting positions and a last-timestamp overflow
+refusal. With start 4,000,000,000 and gap 2,000,000, its event data matches the
+subsequently used fixture exactly; the generator appends a newline, so its file
+hash is different. Neither data generation nor the model establishes Snow's
+replay timing, host capture or physical behavior. [Observed trials and limits](release-input-20261105.md).

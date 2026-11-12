@@ -37,3 +37,5 @@ SRC-0449:opt-in finite pending-edge experiment behind default0 macro. Two fields
 
 
 SRC-0451/0452:optional first-input/loss/5000-service checkpoint observer,shared own spin/no new RAM/trace/MMIO. Pure helper/tests adopted,linked gate added;native first-input proof and trial pending. Prior83f7b6f finite-defer costs verified. [Evidence](../../docs/development/mac-first-input-probe-evidence.md).
+
+2026-11-12: the original replay generator adds a bounded anchored two-drag data case. [Data, verification and limits](../../docs/development/mac-input-replay-evidence.md).

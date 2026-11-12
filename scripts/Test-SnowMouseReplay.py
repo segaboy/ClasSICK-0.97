@@ -20,6 +20,29 @@ def good(out,z,times,extra=None):
 for case,times in [('single-x',[2000000]),('slow-x',[2000000,2500000,3000000,3500000,4000000,4500000,5000000,5500000])]:
     out=root/(case+'.snowr');good(out,legacy(out,2000000,500000,case),times);checks.append(case+' literal bytes/legacy receipt')
     before=out.read_bytes();z=legacy(out,2,3,case);assert z.returncode!=0 and out.read_bytes()==before;checks.append(case+' overwrite refusal')
+out=root/'anchored-two-drag.snowr';z=legacy(out,4000000000,2000000,'anchored-two-drag');assert z.returncode==0,z.stderr
+raw=out.read_bytes();events=json.loads(raw);receipt=json.loads(z.stdout)
+assert len(events)==1119 and receipt['event_count']==1119 and receipt['last_timestamp']==6236000000
+assert receipt['sha256']==hashlib.sha256(raw).hexdigest() and receipt['bytes']==len(raw)
+assert all(row[0]==4000000000+i*2000000 for i,row in enumerate(events))
+button_events=[(i,row[1]['MouseUpdateRelative']['btn']) for i,row in enumerate(events) if row[1]['MouseUpdateRelative']['btn'] is not None]
+assert button_events==[(0,False),(1035,True),(1068,False),(1085,True),(1110,False)]
+# Independent simple scene oracle: start at different positions, model clipping
+# and held-title drags, then verify the same final pointer and window.
+for initial in ((0,0),(511,341),(256,171)):
+    x,y=initial;wx,wy=80,70;down=False;grab=None;presses=[]
+    for _,record in events:
+        e=record['MouseUpdateRelative'];x=max(0,min(511,x+e['relx']));y=max(0,min(341,y+e['rely']))
+        if e['btn'] is True and not down:
+            down=True;presses.append((x,y));grab=(x-wx,y-wy) if wx<=x<wx+224 and wy<=y<wy+16 else None
+        elif e['btn'] is False:
+            down=False;grab=None
+        if down and grab is not None:wx,wy=x-grab[0],y-grab[1]
+    assert presses==[(100,80),(148,80)] and (x,y,wx,wy)==(148,64,112,46)
+checks.append('anchored two-drag timestamps, buttons and independent clamped scene oracle')
+before=raw;z=legacy(out,1,1,'anchored-two-drag');assert z.returncode!=0 and out.read_bytes()==before;checks.append('anchored output preserved')
+out=root/'anchored-overflow.snowr';z=legacy(out,2**63-1118,1,'anchored-two-drag');assert z.returncode!=0 and not out.exists();checks.append('anchored timestamp overflow refusal')
+out=root/'anchored-boundary.snowr';z=legacy(out,2**63-1-1118,1,'anchored-two-drag');assert z.returncode==0,z.stderr;assert json.loads(z.stdout)['last_timestamp']==2**63-1;checks.append('anchored exact timestamp boundary accepted')
 for i,(s,g,c) in enumerate([(-1,1,'single-x'),(0,0,'single-x'),(0,-1,'single-x'),(2**63,1,'single-x'),(2**63-7,1,'slow-x'),('1.5',1,'single-x'),(0,'1.5','slow-x'),(0,1,'bad-case')]):
     out=root/f'bad-legacy-{i}.snowr';z=legacy(out,s,g,c);assert z.returncode!=0 and not out.exists();checks.append('legacy refusal '+str(i))
 out=root/'missing/none.snowr';z=legacy(out,1,1,'single-x');assert z.returncode!=0 and not out.parent.exists();checks.append('legacy missing parent')

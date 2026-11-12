@@ -36,3 +36,5 @@ SRC-0449:normal6295 checks/32 phase-inversion cases retained;experimental214 ass
 
 
 SRC-0451:two trigger CTests in three host profiles,14 unchanged frozen cases/20 overlapping author cases,three compiled defects,two bad macros,one dependency and12 builder refusals. First-input native flag/link/spin/default-byte proofs and live input remain pending. [Receipt](../../docs/development/mac-first-input-probe-evidence.json).
+
+2026-11-12: replay-data generator verification passed 53 host checks, including the anchored two-drag case. [Evidence and scope](../../docs/development/mac-input-replay-evidence.md).
