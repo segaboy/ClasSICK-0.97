@@ -142,6 +142,27 @@ int main(void)
     env.span_count = n;
     CK(o1 == 0xDEADBEEFUL && memcmp(keep, sim, sizeof sim) == 0);
 
+    /* A malformed descriptor anywhere in the complete binding must refuse a
+     * cross-bank access before touching data. Exercise every descriptor and
+     * each independent metadata field, including banks outside the operand. */
+    env.spans = sp2;
+    for (i = 0; i < n; ++i) {
+        unsigned fault;
+        for (fault = 0; fault < 4u; ++fault) {
+            memcpy(sp2, sp, sizeof sp);
+            if (fault == 0u) sp2[i].bank ^= 0x80000000UL;
+            else if (fault == 1u) ++sp2[i].offset;
+            else if (fault == 2u) sp2[i].bytes = 0;
+            else sp2[i].data = NULL;
+            o1 = 0xDEADBEEFUL;
+            CK(cs_bx_read(&env, 0xFFFE, 4, 1, &o1) == CS_BX_BINDING);
+            CK(o1 == 0xDEADBEEFUL);
+            CK(cs_bx_write(&env, 0xFFFE, 4, 0x12345678UL) == CS_BX_BINDING);
+            CK(memcmp(keep, sim, sizeof sim) == 0);
+        }
+    }
+    env.spans = sp;
+
     /* Spans are separate native objects: bank 3's second chunk need not follow
      * its first. The byte at bank offset 32767 must use the second object. */
     memcpy(sp2, sp, sizeof sp);

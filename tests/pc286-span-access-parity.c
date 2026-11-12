@@ -70,6 +70,37 @@ static const uint32_t anchors[] = {0x0, 0x7FFE, 0x8000, 0xFFFC, 0xFFFE, 0x10000,
     0xFFFFEE, 0xFFFFF0, 0xFFFFFC, 0xFFFFFE, 0xFFFFFF, 0x1000000};
 static const uint32_t accesses[] = {1, 3, 5, 7, 2, 0, 9, 0x81, 0x80000001UL, 4, 6};
 
+/* Force wide accesses across independently chosen span and bank boundaries.
+ * Check concrete byte values as well as parity, so matching implementations
+ * cannot hide a shared endian error. */
+static void boundary_cases(cs_bx_env *e)
+{
+    static const uint32_t starts[] = {0x7FFEUL, 0xFFFEUL, 0x17FFEUL};
+    static const uint8_t expected[] = {0x89, 0xAB, 0xCD, 0xEF};
+    unsigned i, j;
+    for (i = 0; i < sizeof starts / sizeof starts[0]; ++i) {
+        uint32_t out = 0;
+        CK(cs_guest_write(&GMAP, starts[i], 4, 0x89ABCDEFUL) == CS_GUEST_OK);
+        CK(cs_bx_write(e, starts[i], 4, 0x89ABCDEFUL) == CS_BX_OK);
+        for (j = 0; j < 4; ++j) {
+            CK(*flat(starts[i] + j) == expected[j]);
+            CK(*phys(starts[i] + j) == expected[j]);
+        }
+        CK(cs_bx_read(e, starts[i], 4, 1, &out) == CS_BX_OK);
+        CK(out == 0x89ABCDEFUL);
+    }
+    {
+        uint8_t last0 = *phys(0x1FFFEUL), last1 = *phys(0x1FFFFUL);
+        uint32_t out = 0x13579BDFUL;
+        CK(cs_bx_write(e, 0x1FFFEUL, 4, 0x12345678UL) == CS_BX_ADDRESS);
+        CK(cs_bx_read(e, 0x1FFFEUL, 4, 1, &out) == CS_BX_ADDRESS);
+        CK(out == 0x13579BDFUL);
+        CK(*phys(0x1FFFEUL) == last0 && *phys(0x1FFFFUL) == last1);
+        CK(cs_bx_write(e, 0xFFFFUL, 2, 0x1234UL) == CS_BX_ADDRESS);
+        CK(equal_all());
+    }
+}
+
 int main(void)
 {
     cs_bk_chunk ch[16];
@@ -114,6 +145,7 @@ int main(void)
         if ((i & 16383u) == 0u) CK(equal_all());
     }
     CK(equal_all());
+    boundary_cases(&e);
     CK(seen[CS_BX_OK] && seen[CS_BX_ARGUMENT] && seen[CS_BX_WIDTH] && seen[CS_BX_ADDRESS] &&
        seen[CS_BX_PERMISSION] && !seen[CS_BX_BACKING] && !seen[CS_BX_STALE] && !seen[CS_BX_BINDING]);
     if (fails) {
