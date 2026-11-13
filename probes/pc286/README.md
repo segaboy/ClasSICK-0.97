@@ -1,9 +1,10 @@
-# Optional original PC286 compile-only probes
+# Original PC286 probes
 
-SRC-0386..0389;IMPL-0067/TEST-0079. These are standalone original inputs for an
-optional Windows-hosted WCC16 qualification. They are not part of CMake/CI's
-normal C11/runtime targets and have no target entry point. The C11 and bad-width
-cases intentionally fail in this pinned preparation profile.
+SRC-0386..0389;IMPL-0067/TEST-0079. The original toolchain probes are
+standalone inputs for an optional Windows-hosted WCC16 qualification. They are
+not part of CMake/CI's normal C11/runtime targets and have no target entry
+point. The C11 and bad-width cases intentionally fail in that profile. The
+separate BootHush diagnostics below do have target entry points.
 
 Obtain the exact publisher package named in
 [the tool lock](../../scripts/pc286-toolchain-lock.json),keep it outside Git,
@@ -22,3 +23,23 @@ No emulator/VM/firmware permission follows. Compiler calls have20-second caps.
 The selected ISA guard is deliberately nonexhaustive. Full logs stay outside Git.
 
 See the [review/results](../../docs/development/pc286-toolchain-preparation.md).
+
+## Headless 286 capability diagnostic
+
+[Test-BootHushPC286Capability.py](../../scripts/Test-BootHushPC286Capability.py)
+compiles the existing original capability model with the pinned WCC16 toolchain,
+then runs a generated diagnostic floppy headlessly in BootHush. It verifies
+cross-bank borrows, permission and lifetime refusals, and four fixed far-memory
+windows; three wrong-expectation controls and a near-data compiler refusal are
+included. Supply an already qualified toolchain, the BootHush executable and a
+new output directory outside the checkout:
+
+```powershell
+python -B scripts/Test-BootHushPC286Capability.py `
+  --tool-root C:/ClasSICK/pc286-toolchain-20261023-a/toolchain `
+  --emulator C:/Repos/boothush/out/windows/boothush.exe `
+  --output C:/ClasSICK/YOUR-NEW-CAPABILITY-TEST
+```
+
+The generated floppy is an original test fixture, not a 286 system disk.
+[Evidence and limitations](../../docs/development/pc286-capability-boot-20261113.md).
