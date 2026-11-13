@@ -9,7 +9,7 @@ Compacted 2026-10-28 from public baseline `11ad7a937e58f752cfecda8b6805c76bc7f45
 - When relevant: [native parity](docs/development/native-parity-plan.md), [display](docs/development/display-target.md), [performance](docs/development/native-performance-plan.md), [x64 PC](docs/development/unified-x64-pc-plan.md), [286](docs/development/pc286-feasibility.md), [System1/ROM](docs/development/system1-rom-boot-requirements.md), [sources](docs/research/system1-sources.md), [releases](releases/README.md), [milestones](docs/roadmap.md).
 
 ## Current scope
-Current owner scope (2026-11-12): develop the Mac port only, using BootHush in place of Snow. Do not launch or use Snow. PC and 286 development are paused until the owner changes scope. The owner authorized BootHush tests of original Mac candidates; reference systems, physical hardware and release publication remain separate. [BootHush mouse evidence](docs/development/boothush-mac-mouse-20261112.md). Prior scopes and observations remain historical, not a requirement to resume paused work.
+Current owner scope (2026-11-12): advance the Mac release and the 286 port using BootHush headlessly, keeping the desktop available to the owner. Do not use Snow or another emulator. Native x64 PC work remains paused. The owner authorized headless BootHush tests of original Mac and 286 candidates; reference systems, physical hardware and release publication remain separate. Report BootHush bugs and missing capabilities rather than switching emulators. [Headless evidence and developer report](docs/development/boothush-headless-20261112.md). Prior scopes and observations remain historical, not a requirement to resume paused work.
 
 
 ## Identity and license
@@ -52,7 +52,7 @@ Current owner scope (2026-11-12): develop the Mac port only, using BootHush in p
 
 ## Trials (when unpaused)
 
-- Use BootHush for isolated, verified original Mac candidates in the current scope. Do not use Snow. VirtualBox and PC trials are paused with PC development. Publication, reference runs and physical hardware each remain separate.
+- Use BootHush headlessly for isolated, verified original Mac and 286 candidates. Do not use Snow or another emulator. Native x64 PC trials remain paused. Publication, reference runs and physical hardware each remain separate.
 - Preserve existing VMs/media, close owned sessions, restore preferences and bound active time. Check actual foreground, physical owned-client containment and readiness; capture metadata/API returns are not guest acceptance. Stop an inconclusive route until a new discriminating observation/method exists. Use windowed Display1 with instructions visible; leave GLKVM/other displays untouched. Never fullscreen over the instructions.
 
 ## Preservation

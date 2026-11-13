@@ -104,3 +104,5 @@ See [storage and publication policy](../../development/screenshot-evidence.md). 
 2026-11-12 PC maximum device movements: [right](2026-11-12/pc-max-motion-right.png), [up](2026-11-12/pc-max-motion-up.png), [down](2026-11-12/pc-max-motion-down.png), [diagonal reverse](2026-11-12/pc-max-motion-diagonal-reverse.png). [Evidence and limits](../../development/release-input-20261105.md).
 
 [2026-11-12 BootHush Mac live mouse](2026-11-12/boothush-live-mouse.png): original guest image after automated movement and two clicks. The live held-drag attempt did not deliver a primary press. [Evidence and limits](../../development/boothush-mac-mouse-20261112.md).
+
+[2026-11-12 BootHush headless Mac drags](2026-11-12/boothush-headless-drag.png): original guest image after two injected-window drags, release movement and a content click. [Evidence and limits](../../development/boothush-headless-20261112.md).

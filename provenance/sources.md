@@ -5118,3 +5118,7 @@ Qt Group, published [QGuiApplication constructor, Platform-Specific Arguments](h
 ## SRC-0601 - Owner-selected BootHush Mac mouse runbook and black-box observations
 
 2026-11-12; owner-supplied `classick-097-mouse.md`, SHA-256 `54dc93e90597c5db161fb65a9f2b1dec18eae38275dce8072005ea474299c333`; byte-identical intake copy outside Git at `C:/ClasSICK/boothush-mouse-20261112-a/classick-097-mouse-intake.md`. BootHush published local CLI documentation and exact executable are used for interface and own-ROM black-box observations only. No emulator implementation, external ROM or reference media was inspected. IMPL-0115 / TEST-0162; [receipt and limits](../docs/development/boothush-mac-mouse-20261112.md).
+
+## SRC-0602 - Owner-supplied headless BootHush documentation and original target observations
+
+2026-11-12; supplied README SHA-256 `f4501c3608a4c8bb17780241a39b8613d58824dde2a5c9f3a87f44050457935c` and mouse runbook SHA-256 `b636a9c4b95936bcb86982b0eddb868ed789bbe5a941aa05ccb085a2714ca15d`; byte-identical intake copies outside Git at `C:/ClasSICK/boothush-headless-20261112-a`. Published BootHush interface documentation and exact executable were used for own-image black-box observations. IMPL-0116 / TEST-0163; [receipt and limits](../docs/development/boothush-headless-20261112.md). No emulator implementation, Apple or Microsoft code, or reference media was inspected.

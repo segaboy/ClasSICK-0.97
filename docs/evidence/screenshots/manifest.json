@@ -3002,6 +3002,28 @@
         "Automated host mouse movement and clicks; no successful live held drag or human/physical input.",
         "Experimental Mac candidate; no historical System 1 or release qualification."
       ]
+    },
+    {
+      "id": "2026-11-12-boothush-headless-drag",
+      "path": "docs/evidence/screenshots/2026-11-12/boothush-headless-drag.png",
+      "sha256": "6748aca29d2d6568006243459862806265d50db2980bbfc6b2fb4a6706451921",
+      "bytes": 677,
+      "width": 512,
+      "height": 342,
+      "captured_on": "2026-11-12",
+      "target": "native-mac68000",
+      "caption": "Original Mac candidate after two headless injected-window drags, release movements and a content click in BootHush.",
+      "alt": "Monochrome ClasSICK scene with shifted striped window and counter 0003.",
+      "source_revision": "3e8c1b18316f619d3d4a2867f712449c805e0818",
+      "compiled_source_revision": "0f8d85df5b6fe21508c22594e0dc20923d4eebe6",
+      "evidence": "docs/development/boothush-headless-20261112.md",
+      "license": "GPL-3.0-or-later",
+      "rights": "Original ClasSICK guest framebuffer, losslessly converted from BootHush PBM; no desktop, emulator chrome or reference pixels.",
+      "input": "synthetic",
+      "limitations": [
+        "Injected window messages, not operating-system mouse delivery or human/physical input.",
+        "Experimental Mac candidate; no historical System 1 or release qualification."
+      ]
     }
   ]
 }
