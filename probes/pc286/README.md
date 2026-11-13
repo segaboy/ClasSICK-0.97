@@ -48,3 +48,9 @@ The separate [span-construction diagnostic](../../scripts/Test-BootHushPC286Span
 executes the actual numeric planner and far-pointer binder at a 32,767-byte
 split and a nonzero segment offset, then checks cross-bank access and refusals.
 [Evidence](../../docs/development/boothush-developer-report-20261113-b.md).
+
+Add `--capability-chain` to run planned spans through the actual capability
+layer in one guest. The original two-track diagnostic loader is separately
+checked by [Test-BootHushPC286Loader.py](../../scripts/Test-BootHushPC286Loader.py).
+These remain original diagnostic media, not a 286 operating-system boot.
+[Evidence](../../docs/development/boothush-developer-report-20261113-c.md).

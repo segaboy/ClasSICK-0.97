@@ -10,3 +10,7 @@ or reference media was used. [Evidence](../../docs/development/boothush-develope
 Later 2026-11-13: The diagnostic additionally binds planned spans into the
 existing checked access model and exercises cross-span/bank transfers and
 refusals. [New evidence](../../docs/development/boothush-developer-report-20261113-b.md).
+
+Later 2026-11-13: Added an original planned-span-to-capability guest diagnostic
+and expanded the original diagnostic floppy loader to two tracks.
+[Evidence and limits](../../docs/development/boothush-developer-report-20261113-c.md).

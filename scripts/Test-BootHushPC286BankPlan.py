@@ -39,22 +39,32 @@ def run(args, cwd, env, log, timeout=30):
 
 def floppy(payload, entry):
     sectors = (len(payload) + 511) // 512
-    if not 1 <= sectors <= 14 or not 0 <= entry < len(payload):
-        raise ValueError("payload or entry does not fit the original one-track loader")
-    # Original diagnostic loader. Read sectors 2..N through the firmware's
-    # documented disk interface; load at 1000:0000, set DS=SS=1000 and jump
-    # to the linked entry. On read failure emit EE to the diagnostic POST port.
+    if not 1 <= sectors <= 29 or not 0 <= entry < len(payload):
+        raise ValueError("payload or entry does not fit the original two-track loader")
+    # Original diagnostic loader. Read through the firmware's documented disk
+    # interface at 1000:0000, set DS=SS=1000 and jump to the linked entry.
+    # On either read failure emit EE to the diagnostic POST port.
     boot = bytearray.fromhex("fa31c08ed0bc007c8ed8fbb800108ec031db")
-    boot += bytes([0xb8, sectors, 0x02]) + bytes.fromhex("b9020030f6cd1372")
-    branch = len(boot)
+    boot += bytes([0xb8, min(sectors, 14), 0x02]) + bytes.fromhex("b9020030f6cd1372")
+    branches = [len(boot)]
     boot.append(0)
+    if sectors > 14:
+        # Continue at cylinder 0, head 1, sector 1 into 1000:1c00. The
+        # first 14 sectors occupy 1c00h bytes, and at most 15 remain.
+        boot += bytes([0xb8, sectors - 14, 0x02])
+        boot += bytes.fromhex("bb001cb90100ba0001cd1372")
+        branches.append(len(boot))
+        boot.append(0)
     boot += bytes.fromhex("fab800108ed88ed0bcfefffbea") + struct.pack("<HH", entry, 0x1000)
     failure = len(boot)
     boot += bytes.fromhex("b0eee680ebfe")
-    displacement = failure - (branch + 1)
-    if not -128 <= displacement <= 127 or len(boot) > 510:
-        raise ValueError("loader branch or size invalid")
-    boot[branch] = displacement & 0xff
+    for branch in branches:
+        displacement = failure - (branch + 1)
+        if not -128 <= displacement <= 127:
+            raise ValueError("loader branch invalid")
+        boot[branch] = displacement & 0xff
+    if len(boot) > 510:
+        raise ValueError("loader size invalid")
     boot += bytes(510 - len(boot)) + b"\x55\xaa"
     return bytes(boot) + payload + bytes(1228800 - 512 - len(payload))
 

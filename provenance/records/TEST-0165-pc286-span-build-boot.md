@@ -11,3 +11,9 @@ limits](../../docs/development/boothush-developer-report-20261113.md).
 Later 2026-11-13: Twin 16-bit runs matched while executing planner, binder and
 checked read/write together; expected refusal controls reached `B5`, `B7` and
 `B8`. [New evidence](../../docs/development/boothush-developer-report-20261113-b.md).
+
+Later 2026-11-13: Two identical 16-bit runs exercised the planner, binder and
+capability together, with wrong-expectation controls; full payload and backing
+matched. Four original loader payload sizes, including both sides of the track
+boundary, passed, as did input refusals and the prior diagnostics.
+[Evidence](../../docs/development/boothush-developer-report-20261113-c.md).

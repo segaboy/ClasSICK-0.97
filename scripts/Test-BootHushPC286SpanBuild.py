@@ -24,8 +24,16 @@ def main():
     p.add_argument("--tool-root", required=True, type=Path)
     p.add_argument("--emulator", required=True, type=Path)
     p.add_argument("--output", required=True, type=Path)
+    p.add_argument("--capability-chain", action="store_true",
+                   help="exercise planned far spans through the capability layer")
     args = p.parse_args()
     try:
+        harness = ROOT / "probes/pc286/boot-memory-chain.c" if args.capability_chain else HARNESS
+        parts = ("bank-plan", "bank-catalog", "span-build", "span-bind", "span-cap") if args.capability_chain else PARTS
+        cases = (("baseline", None, 0xa9), ("bad-permission", "CS_CHAIN_MUTATE_PERMISSION", 0xc6),
+                 ("bad-stale", "CS_CHAIN_MUTATE_STALE", 0xc9)) if args.capability_chain else (
+                 ("baseline", None, 0xa8), ("bad-boundary", "CS_BUILD_MUTATE_BOUNDARY", 0xb5),
+                 ("bad-atomic", "CS_BUILD_MUTATE_ATOMIC", 0xb7), ("bad-epoch", "CS_BUILD_MUTATE_EPOCH", 0xb8))
         spec = importlib.util.spec_from_file_location("helpers", ROOT / "scripts/Test-BootHushPC286BankPlan.py")
         helpers = importlib.util.module_from_spec(spec)
         spec.loader.exec_module(helpers)
@@ -46,26 +54,23 @@ def main():
                  "-dCS_C16_REQUIRE_16BIT", "-i=" + str(tool / "h")]
         near_flags = ["-ms" if flag == "-mc" else flag for flag in flags]
         near = subprocess.run([str(x) for x in (wcc, *near_flags,
-                              "-fo=" + str(out / "near.obj"), HARNESS)], cwd=out, env=env,
+                              "-fo=" + str(out / "near.obj"), harness)], cwd=out, env=env,
                               stdin=subprocess.DEVNULL, capture_output=True, timeout=30, check=False,
                               creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0))
         near_log = near.stdout + b"\n--- stderr ---\n" + near.stderr
         (out / "near.log").write_bytes(near_log)
-        if near.returncode == 0 or re.search(rb"boot-span-build\.c\(\d+\): Error! E1020", near_log) is None:
+        if near.returncode == 0 or re.search(re.escape(harness.name.encode()) + rb"\(\d+\): Error! E1020", near_log) is None:
             raise ValueError("near-data pointer guard did not reject the target")
         objects = []
-        for part in PARTS:
+        for part in parts:
             obj = out / (part + ".obj")
             helpers.run([wcc, *flags, "-fo=" + str(obj), ROOT / ("probes/pc286/" + part + ".c")],
                         out, env, out / (part + "-compile.log"))
             objects.append(obj)
         observations = []
-        for name, mutant, expected in (("baseline", None, 0xa8),
-                                       ("bad-boundary", "CS_BUILD_MUTATE_BOUNDARY", 0xb5),
-                                       ("bad-atomic", "CS_BUILD_MUTATE_ATOMIC", 0xb7),
-                                       ("bad-epoch", "CS_BUILD_MUTATE_EPOCH", 0xb8)):
+        for name, mutant, expected in cases:
             obj, binary, mapfile = (out / (name + suffix) for suffix in (".obj", ".bin", ".map"))
-            helpers.run([wcc, *flags, *(["-d" + mutant] if mutant else []), "-fo=" + str(obj), HARNESS],
+            helpers.run([wcc, *flags, *(["-d" + mutant] if mutant else []), "-fo=" + str(obj), harness],
                         out, env, out / (name + "-compile.log"))
             helpers.run([wlink, "format", "raw", "bin", "option", "start=start_", "option", "nodefaultlibs",
                          "option", "map=" + str(mapfile), "name", binary, "file",
@@ -79,11 +84,9 @@ def main():
             with image.open("xb") as stream:
                 stream.write(helpers.floppy(payload, int(match.group(1), 16)))
             before = helpers.digest(image)
-            spans = [(0x10000, payload[:4096]), (0x11000, payload[4096:]),
-                     (0x27ffd, bytes.fromhex("44aabb00")), (0x30010, bytes.fromhex("ccdd88000000"))]
-            spans = [(address, data) for address, data in spans if data]
-            if any(len(data) > 4096 for _, data in spans):
-                raise ValueError("payload exceeds two inspection ranges")
+            spans = [(0x10000 + off, payload[off:off + 4096]) for off in range(0, len(payload), 4096)]
+            spans.extend(((0x27ffd, bytes.fromhex("44aabb00")),
+                          (0x30010, bytes.fromhex("ccdd88000000"))))
             inspect = []
             for address, data in spans:
                 inspect.extend(("--inspect", f"{hex(address)}:{len(data)}"))
@@ -103,8 +106,8 @@ def main():
                                  "floppy_unchanged": True, "complete_payload_and_backing_match": True})
         report = {"schema_version": 1, "compiler": "pinned Open Watcom 16-bit -2 -mc",
                   "emulator_sha256": helpers.digest(emulator), "near_data_guard_rejected": True,
-                  "source_sha256": {part: helpers.digest(ROOT / ("probes/pc286/" + part + ".c")) for part in PARTS},
-                  "harness_sha256": helpers.digest(HARNESS), "cases": observations,
+                  "source_sha256": {part: helpers.digest(ROOT / ("probes/pc286/" + part + ".c")) for part in parts},
+                  "harness_sha256": helpers.digest(harness), "cases": observations,
                   "limits": "Fixed test windows; no production provider, OS, physical hardware or release claim."}
         (out / "report.json").write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
         print(json.dumps(report, indent=2))
