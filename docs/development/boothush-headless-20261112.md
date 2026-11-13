@@ -55,6 +55,15 @@ with 29 omitted passes, and the 8,192-cycle no-guard case ended at `(287,171)`
 with two omissions. The probe's exit 1 correctly reports these failures. The
 Mac input problem is not fixed and no release has been made.
 
+The probe now also accepts `--all-directions`. With the 4,096-cycle guard,
+each of `(+32,0)`, `(-32,0)`, `(0,+32)` and `(0,-32)` reached its expected
+position at an edge interval of 4,096 cycles with no omissions. At 2,048
+cycles, the same four movements each ended one pixel in the opposite direction
+with 29 omitted passes and zero hard losses or pending steps. The tested
+result is in `direction-probe.json` in the private workspace. This shows the
+same failure on both axes in this emulator model; it does not prove the cause
+or establish physical timing.
+
 Two older timer-poll experimental ROMs were also compared at 8,192, 4,096 and
 2,048 cycles. An initial 65-million-cycle attempt injected movement before
 those ROMs reached ready and is invalid as a movement comparison. A later

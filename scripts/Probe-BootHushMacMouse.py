@@ -26,10 +26,10 @@ def word(data, address):
     return int.from_bytes(data[offset:offset + 4], "big")
 
 
-def probe(executable, rom, edge, guard):
+def probe(executable, rom, edge, guard, dx=32, dy=0):
     args = [str(executable), "--machine", "mac128k", "--rom", str(rom),
             "--cycles", "65000000", "--timeout-ms", "20000",
-            "--mouse-dcd-invert", "3", "--mouse-motion", "60000000:32:0",
+            "--mouse-dcd-invert", "3", "--mouse-motion", f"60000000:{dx}:{dy}",
             "--mouse-edge-cycles", str(edge), "--mouse-vbl-guard", str(guard),
             "--inspect", "0xb00:1024"]
     result = subprocess.run(args, capture_output=True, text=True, timeout=30,
@@ -59,7 +59,7 @@ def probe(executable, rom, edge, guard):
               "hard_losses": [word(data, 0xC04 + 4 * i) for i in range(1, 5)],
               "omitted_passes": word(data, 0xC1C),
               "merges": word(data, 0xC24)}
-    actual["passed"] = (actual["pointer"] == [288, 171] and
+    actual["passed"] = (actual["pointer"] == [256 + dx, 171 + dy] and
                         actual["window"] == [80, 70] and
                         actual["hard_losses"] == [0, 0, 0, 0] and
                         actual["omitted_passes"] == 0 and
@@ -74,6 +74,8 @@ def main():
     parser.add_argument("--emulator", required=True, type=Path)
     parser.add_argument("--rom", required=True, type=Path)
     parser.add_argument("--rom-sha256", required=True)
+    parser.add_argument("--all-directions", action="store_true",
+                        help="also test both directions on both axes at 4096 and 2048 cycles")
     parser.add_argument("--output", required=True, type=Path,
                         help="new JSON report path outside the source tree")
     args = parser.parse_args()
@@ -94,11 +96,22 @@ def main():
                             "dcd_invert": 3},
                   "results": results,
                   "limitations": "Synthetic BootHush input only; no physical or human qualification."}
+        if args.all_directions:
+            report["direction_matrix"] = [
+                {"delta": [dx, dy], "result": probe(args.emulator, args.rom, edge, 4096, dx, dy)}
+                for edge in (4096, 2048) for dx, dy in ((32, 0), (-32, 0), (0, 32), (0, -32))
+            ]
         with args.output.open("x", encoding="utf-8", newline="\n") as stream:
             json.dump(report, stream, indent=2)
             stream.write("\n")
-        print(json.dumps({"output": str(args.output), "results": results}, indent=2))
-        return 0 if all(item["passed"] for item in results) else 1
+        summary = {"output": str(args.output), "results": results}
+        if args.all_directions:
+            summary["direction_matrix"] = report["direction_matrix"]
+        print(json.dumps(summary, indent=2))
+        passed = all(item["passed"] for item in results)
+        if args.all_directions:
+            passed = passed and all(item["result"]["passed"] for item in report["direction_matrix"])
+        return 0 if passed else 1
     except (OSError, ValueError, json.JSONDecodeError, subprocess.TimeoutExpired) as exc:
         print(f"BootHush probe error: {exc}", file=sys.stderr)
         return 2
