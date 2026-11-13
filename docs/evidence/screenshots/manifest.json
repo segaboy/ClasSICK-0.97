@@ -3024,6 +3024,28 @@
         "Injected window messages, not operating-system mouse delivery or human/physical input.",
         "Experimental Mac candidate; no historical System 1 or release qualification."
       ]
+    },
+    {
+      "id": "2026-11-13-boothush-first-drag",
+      "path": "docs/evidence/screenshots/2026-11-13/boothush-first-drag.png",
+      "sha256": "6623c4c79b0b6d586e766bb42ac161730c4ee11b55ca8f50629a89a20bc92ff4",
+      "bytes": 524,
+      "width": 512,
+      "height": 342,
+      "captured_on": "2026-11-13",
+      "target": "native-mac68000",
+      "caption": "Original Mac candidate after the first headless replayed drag in BootHush.",
+      "alt": "Monochrome ClasSICK scene with a striped window shifted right and counter 0001.",
+      "source_revision": "90150575e401924dec06c7835528eaf7d19c90bb",
+      "compiled_source_revision": "0f8d85df5b6fe21508c22594e0dc20923d4eebe6",
+      "evidence": "docs/development/boothush-developer-report-20261113.md",
+      "license": "GPL-3.0-or-later",
+      "rights": "Original ClasSICK guest framebuffer, losslessly converted from BootHush PBM; no desktop, emulator chrome or reference pixels.",
+      "input": "synthetic",
+      "limitations": [
+        "Replayed injected-window input, not operating-system mouse delivery or human/physical input.",
+        "Experimental Mac candidate; no historical System 1 or release qualification."
+      ]
     }
   ]
 }

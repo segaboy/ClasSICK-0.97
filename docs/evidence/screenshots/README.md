@@ -106,3 +106,5 @@ See [storage and publication policy](../../development/screenshot-evidence.md). 
 [2026-11-12 BootHush Mac live mouse](2026-11-12/boothush-live-mouse.png): original guest image after automated movement and two clicks. The live held-drag attempt did not deliver a primary press. [Evidence and limits](../../development/boothush-mac-mouse-20261112.md).
 
 [2026-11-12 BootHush headless Mac drags](2026-11-12/boothush-headless-drag.png): original guest image after two injected-window drags, release movement and a content click. [Evidence and limits](../../development/boothush-headless-20261112.md).
+
+[2026-11-13 BootHush first Mac drag](2026-11-13/boothush-first-drag.png): original guest image after the first replayed synthetic drag. [Evidence and limits](../../development/boothush-developer-report-20261113.md).

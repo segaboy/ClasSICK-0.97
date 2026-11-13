@@ -5126,3 +5126,7 @@ Qt Group, published [QGuiApplication constructor, Platform-Specific Arguments](h
 ## SRC-0603 - Owner-supplied BootHush correlated mouse witness guide
 
 2026-11-13; `mac-mouse-witness.md`, SHA-256 `05308bb4d5008d388b494b084734414f5c4825c51f42a38e2ca85ac2189ce81b`; byte-identical intake copy outside Git at `C:/ClasSICK/boothush-mouse-witness-20261113-b/mac-mouse-witness-intake.md`. Local published CLI interface facts and own-image black-box observations only. No emulator implementation or reference media inspected. IMPL-0116 / TEST-0163; [receipt and limits](../docs/development/boothush-paired-20261113.md#correlated-witness-and-edge-rate-sweep--later-on-2026-11-13).
+
+## SRC-0604 - Owner-supplied BootHush capture and x64 guides
+
+2026-11-13; `headless-capture.md` SHA-256 `b5f84b694c88462f682f8f173a4bee4816fa34b2ecb51af79028e5a35c56945d` and `classick-x64.md` SHA-256 `fcf433edc3541ee5034065bf74ca30427f108d37c992d0826a809e58d972df87`; byte-identical intake copies outside Git in `C:/ClasSICK/boothush-20261113-c`. Public CLI interface facts and original-image black-box observations only. No emulator implementation or reference media inspected. [Evidence, identities and limitations](../docs/development/boothush-developer-report-20261113.md).
