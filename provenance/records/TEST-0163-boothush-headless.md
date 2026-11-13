@@ -22,3 +22,8 @@ controls passed with the full payload and both banks inspected at one stop;
 the prior single-range mode also passed. The x64 media verifier accepted the
 matching payload and rejected a mismatch but did not execute it. [Identities,
 results and limitations](../../docs/development/boothush-paired-20261113.md).
+
+Later 2026-11-13: SRC-0603 correlated witness comparisons and 36 four-axis
+edge-rate cases were run. Fast cases still fail; witness enablement preserved
+the compared result and frame. The new x64 capability probe reported access
+denied and no implemented or executed guest. [Evidence and limits](../../docs/development/boothush-paired-20261113.md#correlated-witness-and-edge-rate-sweep--later-on-2026-11-13).

@@ -76,12 +76,18 @@ def main():
     parser.add_argument("--rom-sha256", required=True)
     parser.add_argument("--all-directions", action="store_true",
                         help="also test both directions on both axes at 4096 and 2048 cycles")
+    parser.add_argument("--sweep-edges", nargs="+", type=int, metavar="CYCLES",
+                        help="also test each selected edge interval in all four directions")
     parser.add_argument("--output", required=True, type=Path,
                         help="new JSON report path outside the source tree")
     args = parser.parse_args()
     try:
         if args.output.exists():
             raise ValueError("report already exists")
+        if args.sweep_edges and (len(args.sweep_edges) > 32 or
+                                 len(set(args.sweep_edges)) != len(args.sweep_edges) or
+                                 any(edge < 1 or edge > 65536 for edge in args.sweep_edges)):
+            raise ValueError("sweep requires at most 32 distinct edge intervals from 1 to 65536")
         if len(args.rom_sha256) != 64 or any(c not in "0123456789abcdef" for c in args.rom_sha256):
             raise ValueError("expected ROM SHA-256 must be lowercase hexadecimal")
         if args.rom.stat().st_size != 65536 or sha256(args.rom) != args.rom_sha256:
@@ -101,16 +107,25 @@ def main():
                 {"delta": [dx, dy], "result": probe(args.emulator, args.rom, edge, 4096, dx, dy)}
                 for edge in (4096, 2048) for dx, dy in ((32, 0), (-32, 0), (0, 32), (0, -32))
             ]
+        if args.sweep_edges:
+            report["edge_sweep"] = [
+                {"delta": [dx, dy], "result": probe(args.emulator, args.rom, edge, 4096, dx, dy)}
+                for edge in args.sweep_edges for dx, dy in ((32, 0), (-32, 0), (0, 32), (0, -32))
+            ]
         with args.output.open("x", encoding="utf-8", newline="\n") as stream:
             json.dump(report, stream, indent=2)
             stream.write("\n")
         summary = {"output": str(args.output), "results": results}
         if args.all_directions:
             summary["direction_matrix"] = report["direction_matrix"]
+        if args.sweep_edges:
+            summary["edge_sweep"] = report["edge_sweep"]
         print(json.dumps(summary, indent=2))
         passed = all(item["passed"] for item in results)
         if args.all_directions:
             passed = passed and all(item["result"]["passed"] for item in report["direction_matrix"])
+        if args.sweep_edges:
+            passed = passed and all(item["result"]["passed"] for item in report["edge_sweep"])
         return 0 if passed else 1
     except (OSError, ValueError, json.JSONDecodeError, subprocess.TimeoutExpired) as exc:
         print(f"BootHush probe error: {exc}", file=sys.stderr)

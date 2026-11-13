@@ -12,3 +12,7 @@ emulator implementation code or reference media was inspected or reused.
 
 2026-11-13: Added optional readiness-relative Mac input and simultaneous 286
 memory inspection, retaining the existing modes. [Results and scope](../../docs/development/boothush-paired-20261113.md).
+
+Later 2026-11-13: The original timing probe gained an optional bounded
+four-direction edge-interval sweep; existing cases and default behavior remain.
+SRC-0603 / TEST-0163; [results and scope](../../docs/development/boothush-paired-20261113.md#correlated-witness-and-edge-rate-sweep--later-on-2026-11-13).

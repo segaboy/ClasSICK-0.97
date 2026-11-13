@@ -95,3 +95,64 @@ receipt; neither is required for the tests run here.
 
 No release was published. Mac timing, host/human input and other standing gates
 remain open, and x64 execution cannot be assessed with this BootHush build.
+
+## Correlated witness and edge-rate sweep — later on 2026-11-13
+
+The owner supplied the correlated witness guide, SRC-0603. Its SHA-256 is
+`05308bb4d5008d388b494b084734414f5c4825c51f42a38e2ca85ac2189ce81b`,
+matching the local BootHush documentation; a byte-identical intake copy is at
+`C:/ClasSICK/boothush-mouse-witness-20261113-b/mac-mouse-witness-intake.md`.
+BootHush checkout `b6c2367` documented the new interface; the independently
+identified executable was SHA-256
+`c71e27c6ff3b7e11cd00dbee7d64240be26fb0e0ec4c1f3bfe0ec1aca9130522`.
+Source revision alone does not prove executable build provenance.
+
+The exact original ROM was run headlessly with and without witness capture for
+each of 2,048 and 4,096 edge cycles, with guard 4,096 and `(+32,0)` input.
+Within each pair, the complete result JSON and guest framebuffer were equal.
+At 2,048 the pointer ended `(255,171)`, with 29 guest-reported omissions;
+at 4,096 it ended `(288,171)`, with none. Each delivered 64 modeled transitions
+and had no pending transitions. The detailed witness range reached its end and
+reported zero dropped rows in both runs (594 and 649 rows, respectively).
+
+One concrete sequence at 2,048 is: X phase 2 and SCC pending at cycle
+60,006,236; X phase 0 at 60,008,286 while SCC remained pending; level 2 accepted
+at 60,008,554; the first subsequent relevant VIA phase read at 60,009,664.
+The precise-timing CPU mode is disabled; witness instruction context and shared
+cycle stamps are not measurements of physical bus timing. This demonstrates a
+modeled phase change while the interrupt was pending, not the cause of any
+specific guest omission. A prior own-project counterexample rejects inferring
+unobserved edge direction from ambiguous latch samples; see
+[the split-recovery result](mac-fast-timing-20261103.md#rejected-split-recovery-proposal).
+No guest mouse behavior or hardware-spacing policy was changed.
+
+For BootHush developers: the detailed witness reports the device and interrupt
+events but does not report writes to selected guest RAM, so it cannot directly
+associate an individual guest-owned omission or timeline update with those
+events. An optional, bounded, address-filtered RAM-write witness in the same
+ordered stream would close that diagnostic gap. Include write width, address,
+written value, instruction context and cycle, the existing drop/coverage flags,
+and an explicit statement of timing granularity. It must not modify the guest;
+compare traced and untraced stop state and frame. A timing-validated model would
+be separately useful; do not silently present the current model as physical.
+
+The existing timing probe now accepts an optional bounded `--sweep-edges` list.
+Its four-direction sweep at guard 4,096 produced the following **observed
+passes out of four**, under this ROM and emulator configuration:
+
+| Edge cycles | 2048 | 2304 | 2560 | 2816 | 3072 | 3328 | 3584 | 3840 | 4096 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| Passes | 0 | 0 | 0 | 0 | 2 | 4 | 4 | 4 | 4 |
+
+At 2,304 and 2,560, some final displacements were opposite to the requested
+direction. The sweep narrows a model-dependent boundary; it does not establish
+a safe physical rate, behavior between sampled intervals or a fix. The script
+correctly returned exit 1 for failing cases; a duplicate-interval input was
+rejected with exit 2. Detailed witness, uninstrumented comparisons and sweep
+outputs remain outside Git at `C:/ClasSICK/boothush-mouse-witness-20261113-b`.
+
+The new `--x64-capability` check returned exit 1, `0x80070005`,
+`implemented:false` and `guest_executed:false` in this execution environment.
+This does not establish host-wide WHPX availability. Current BootHush docs
+still identify x64 CPU and UEFI execution as unimplemented; the PC release
+cannot be boot-tested using BootHush yet. No other emulator was used.
