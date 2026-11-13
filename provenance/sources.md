@@ -5134,3 +5134,7 @@ Qt Group, published [QGuiApplication constructor, Platform-Specific Arguments](h
 ## SRC-0605 - Owner-supplied updated BootHush Mac witness and x64 guides
 
 2026-11-13; `mac-mouse-witness.md` SHA-256 `7fe91a8bc458eb8481022bd8b333f75744c763ec552b59255a5bbe23a2e904a5` and `classick-x64.md` SHA-256 `a762a8cb1a4b79bfcb9f0fc08c29396009d9d42bef86833a0c0ae83f89f8aff4`; byte-identical intake copies outside Git in `C:/ClasSICK/boothush-20261113-d`. Public CLI interface facts and original-image black-box observations only. No emulator implementation or reference media inspected. [Evidence, identities and limitations](../docs/development/boothush-developer-report-20261113-b.md).
+
+## SRC-0606 - Owner-directed Not Super Tilt Bro original Mac input observation
+
+2026-11-13; selected local GPL-3.0-or-later original Mac controls probe and BootHush public M0110 interface; identity manifest and byte-identical intake copies outside Git at `C:/ClasSICK/tilt-intake-20261113-a/intake`. Untracked, concurrently changing local files are identified by exact hashes. Includes only original probe observations and emulator interface facts; excludes game-derived implementations, NES ROMs, game assets, emulator implementation and reference media. SPEC-0099 / IMPL-0119 / TEST-0166. [Review and limits](../docs/development/tilt-keyboard-intake-20261113.md).
