@@ -15,7 +15,7 @@ import subprocess
 import sys
 
 ROOT = Path(__file__).resolve().parents[1]
-PARTS = ("bank-plan", "bank-catalog", "span-build")
+PARTS = ("bank-plan", "bank-catalog", "span-build", "span-bind", "span-access")
 HARNESS = ROOT / "probes/pc286/boot-span-build.c"
 
 
@@ -61,7 +61,9 @@ def main():
             objects.append(obj)
         observations = []
         for name, mutant, expected in (("baseline", None, 0xa8),
-                                       ("bad-boundary", "CS_BUILD_MUTATE_BOUNDARY", 0xb5)):
+                                       ("bad-boundary", "CS_BUILD_MUTATE_BOUNDARY", 0xb5),
+                                       ("bad-atomic", "CS_BUILD_MUTATE_ATOMIC", 0xb7),
+                                       ("bad-epoch", "CS_BUILD_MUTATE_EPOCH", 0xb8)):
             obj, binary, mapfile = (out / (name + suffix) for suffix in (".obj", ".bin", ".map"))
             helpers.run([wcc, *flags, *(["-d" + mutant] if mutant else []), "-fo=" + str(obj), HARNESS],
                         out, env, out / (name + "-compile.log"))

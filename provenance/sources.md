@@ -5130,3 +5130,7 @@ Qt Group, published [QGuiApplication constructor, Platform-Specific Arguments](h
 ## SRC-0604 - Owner-supplied BootHush capture and x64 guides
 
 2026-11-13; `headless-capture.md` SHA-256 `b5f84b694c88462f682f8f173a4bee4816fa34b2ecb51af79028e5a35c56945d` and `classick-x64.md` SHA-256 `fcf433edc3541ee5034065bf74ca30427f108d37c992d0826a809e58d972df87`; byte-identical intake copies outside Git in `C:/ClasSICK/boothush-20261113-c`. Public CLI interface facts and original-image black-box observations only. No emulator implementation or reference media inspected. [Evidence, identities and limitations](../docs/development/boothush-developer-report-20261113.md).
+
+## SRC-0605 - Owner-supplied updated BootHush Mac witness and x64 guides
+
+2026-11-13; `mac-mouse-witness.md` SHA-256 `7fe91a8bc458eb8481022bd8b333f75744c763ec552b59255a5bbe23a2e904a5` and `classick-x64.md` SHA-256 `a762a8cb1a4b79bfcb9f0fc08c29396009d9d42bef86833a0c0ae83f89f8aff4`; byte-identical intake copies outside Git in `C:/ClasSICK/boothush-20261113-d`. Public CLI interface facts and original-image black-box observations only. No emulator implementation or reference media inspected. [Evidence, identities and limitations](../docs/development/boothush-developer-report-20261113-b.md).

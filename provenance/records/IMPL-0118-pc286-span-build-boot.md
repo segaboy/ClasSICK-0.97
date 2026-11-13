@@ -6,3 +6,7 @@ execute the existing original span planner/binder with the pinned 16-bit
 compiler and fixed original BootHush windows. GPL-3.0-or-later. No production
 memory ownership, full OS or hardware claim follows; no external implementation
 or reference media was used. [Evidence](../../docs/development/boothush-developer-report-20261113.md).
+
+Later 2026-11-13: The diagnostic additionally binds planned spans into the
+existing checked access model and exercises cross-span/bank transfers and
+refusals. [New evidence](../../docs/development/boothush-developer-report-20261113-b.md).

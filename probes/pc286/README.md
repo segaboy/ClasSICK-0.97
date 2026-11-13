@@ -46,4 +46,5 @@ The generated floppy is an original test fixture, not a 286 system disk.
 
 The separate [span-construction diagnostic](../../scripts/Test-BootHushPC286SpanBuild.py)
 executes the actual numeric planner and far-pointer binder at a 32,767-byte
-split and a nonzero segment offset. [Evidence](../../docs/development/boothush-developer-report-20261113.md).
+split and a nonzero segment offset, then checks cross-bank access and refusals.
+[Evidence](../../docs/development/boothush-developer-report-20261113-b.md).
