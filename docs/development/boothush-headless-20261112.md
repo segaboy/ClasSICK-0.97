@@ -131,6 +131,19 @@ that documented single-range behavior is buggy.
 
 ### Other capabilities to consider
 
+- Allow headless input schedules to begin relative to a guest-ready condition,
+  with a separate bounded timeout and an explicit result when readiness is
+  never reached. This is useful because different ROMs have different startup
+  times. In the initial timer-profile runs above, movement was scheduled at
+  cycle 60,000,000 and BootHush reported all 64 steps delivered, but the guest
+  was still at startup stage 4 at the 65,000,000-cycle stop. A separate
+  readiness run for the divisor-4 timer ROM reached stage 16 only at cycle
+  77,711,848. The existing `--until` stops that run, and a new invocation starts
+  from reset; fixed-cycle input must therefore be rescheduled manually. This
+  is documented scheduling behavior, not an emulator correctness bug. A
+  deterministic readiness-triggered schedule would reduce invalid comparisons;
+  it must retain explicit cycle limits, accepted/delivered input counts and
+  record/replay identity.
 - A bounded, opt-in 286 execution/device witness with cycle-stamped instruction
   locations, selected physical memory accesses, I/O and IRQ events, filters,
   explicit dropped-row counts and no guest-visible side effects. The documented
