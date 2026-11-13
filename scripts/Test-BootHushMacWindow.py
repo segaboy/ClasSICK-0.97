@@ -16,6 +16,8 @@ import sys
 
 ROM_SHA256 = "faf37c6f96f8eb2ee6cf7a1e58a8b1b9538055d2fc89493c7419eeea816f6c8c"
 ROOT = Path(__file__).resolve().parents[1]
+READY_CONDITION = "0xc48:4:1"
+EVENT_ORIGIN = 100000000
 EVENTS = (
     "100000000:256:171:0", "108000000:100:80:0", "120000000:100:80:1",
     "128000000:132:80:2", "136000000:132:80:3", "144000000:148:80:0",
@@ -47,6 +49,12 @@ def run(args, log):
 
 def decode(record):
     memory = record.get("memory", {})
+    if "memory_ranges" in record:
+        ranges = record["memory_ranges"]
+        if (len(ranges) != 2 or ranges[1].get("address") != 0x8000 or
+                len(bytes.fromhex(ranges[1].get("bytes", ""))) != 512):
+            raise ValueError("unexpected additional diagnostic span")
+        memory = ranges[0]
     if memory.get("address") != 0xB00:
         raise ValueError("unexpected diagnostic address")
     data = bytes.fromhex(memory.get("bytes", ""))
@@ -71,6 +79,8 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--emulator", required=True, type=Path)
     parser.add_argument("--rom", required=True, type=Path)
+    parser.add_argument("--after-ready", action="store_true",
+                        help="schedule input after the guest readiness flag; requires multi-range inspection")
     parser.add_argument("--output", required=True, type=Path,
                         help="new scratch directory outside the repository")
     args = parser.parse_args()
@@ -83,17 +93,37 @@ def main():
         if rom.stat().st_size != 65536 or sha(rom) != ROM_SHA256:
             raise ValueError("anchored ROM identity mismatch")
         out.mkdir(parents=True, exist_ok=False)
+        ready_cycle = None
+        inspect = ["--inspect", "0xb00:1024"]
+        if args.after_ready:
+            calibration = run([emulator, "--machine", "mac128k", "--rom", rom,
+                               "--cycles", 80000000, "--timeout-ms", 20000,
+                               "--until", READY_CONDITION, "--inspect", "0xb00:1024"],
+                              out / "readiness.log")
+            ready_cycle = calibration.get("cycles")
+            if (calibration.get("status") != "condition_met" or
+                    not isinstance(ready_cycle, int) or ready_cycle <= 0):
+                raise ValueError("guest readiness was not observed")
+            inspect += ["--inspect", "0x8000:512"]
         observations = []
         for index, (cycles, pointer, window, presses, pattern) in enumerate(CHECKPOINTS):
             frame = out / f"checkpoint-{index}.pbm"
             trace = out / f"checkpoint-{index}.bhmouse"
+            limit = cycles if ready_cycle is None else ready_cycle + cycles - EVENT_ORIGIN
             command = [emulator, "--machine", "mac128k", "--rom", rom,
-                       "--cycles", cycles, "--timeout-ms", 20000,
+                       "--cycles", limit, "--timeout-ms", 20000,
                        "--mouse-dcd-invert", 3, "--mouse-record", trace,
-                       "--inspect", "0xb00:1024", "--frame", frame]
+                       *inspect, "--frame", frame]
+            if args.after_ready:
+                command.extend(("--input-after", READY_CONDITION))
+            event_count = 0
             for event in EVENTS:
-                if int(event.split(":", 1)[0]) <= cycles:
+                event_cycle, rest = event.split(":", 1)
+                if int(event_cycle) <= cycles:
+                    if args.after_ready:
+                        event = f"{int(event_cycle) - EVENT_ORIGIN}:{rest}"
                     command.extend(("--window-mouse", event))
+                    event_count += 1
             record = run(command, out / f"checkpoint-{index}.log")
             actual = decode(record)
             expected = {"pointer": list(pointer), "window": list(window),
@@ -104,19 +134,25 @@ def main():
                     record.get("input_source") != "injected_window_messages" or
                     record.get("mouse", {}).get("pending") != 0 or actual != expected):
                 raise ValueError(f"checkpoint {index}: expected {expected}, observed {actual}; see log")
+            if args.after_ready:
+                schedule = record.get("input_schedule", {})
+                if (schedule.get("ready") is not True or schedule.get("ready_cycle") != ready_cycle or
+                        schedule.get("scheduled") != event_count or schedule.get("accepted") != event_count):
+                    raise ValueError(f"checkpoint {index}: readiness or input schedule mismatch")
             if not frame.read_bytes().startswith(b"P4\n512 342\n"):
                 raise ValueError(f"checkpoint {index}: unexpected frame format")
-            observations.append({"requested_cycles": cycles, "actual_cycles": record["cycles"],
+            observations.append({"requested_cycles": limit, "actual_cycles": record["cycles"],
                                  "guest": actual, "mouse": record["mouse"],
                                  "frame_sha256": sha(frame), "trace_sha256": sha(trace)})
         replay_frame = out / "replay.pbm"
         replay = run([emulator, "--machine", "mac128k", "--rom", rom,
-                      "--cycles", CHECKPOINTS[-1][0], "--timeout-ms", 20000,
+                      "--cycles", limit, "--timeout-ms", 20000,
                       "--mouse-replay", out / "checkpoint-3.bhmouse",
-                      "--inspect", "0xb00:1024", "--frame", replay_frame], out / "replay.log")
+                      *inspect, "--frame", replay_frame], out / "replay.log")
+        memory_key = "memory_ranges" if args.after_ready else "memory"
         if (replay.get("status") != "cycle_limit" or
                 replay.get("cycles") != record.get("cycles") or
-                replay.get("memory") != record.get("memory") or
+                replay.get(memory_key) != record.get(memory_key) or
                 replay_frame.read_bytes() != (out / "checkpoint-3.pbm").read_bytes()):
             raise ValueError("record/replay cycle, memory or framebuffer mismatch")
         report = {"schema_version": 1, "emulator_sha256": sha(emulator),
@@ -124,6 +160,9 @@ def main():
                   "replay_cycle_memory_frame_match": True,
                   "input_class": "injected_window_messages",
                   "limits": "No physical mouse, actual OS mouse delivery, hardware or release claim."}
+        if args.after_ready:
+            report["readiness"] = {"condition": READY_CONDITION, "cycle": ready_cycle,
+                                   "inspection_ranges": 2}
         (out / "report.json").write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
         print(json.dumps(report, indent=2))
         return 0

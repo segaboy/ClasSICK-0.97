@@ -9,3 +9,6 @@ models; generated images remain outside Git. GPL-3.0-or-later. BootHush is
 used through its documented black-box interface. No Apple, Microsoft or
 emulator implementation code or reference media was inspected or reused.
 [Evidence and scope](../../docs/development/boothush-headless-20261112.md).
+
+2026-11-13: Added optional readiness-relative Mac input and simultaneous 286
+memory inspection, retaining the existing modes. [Results and scope](../../docs/development/boothush-paired-20261113.md).

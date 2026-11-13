@@ -25,6 +25,8 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--tool-root", required=True, type=Path)
     parser.add_argument("--emulator", required=True, type=Path)
+    parser.add_argument("--multi-inspect", action="store_true",
+                        help="inspect the entire payload and both banks in a single stop")
     parser.add_argument("--output", required=True, type=Path,
                         help="new scratch directory outside the repository")
     args = parser.parse_args()
@@ -77,36 +79,49 @@ def main():
             with image.open("xb") as stream:
                 stream.write(helpers.floppy(payload, entry))
             before, runs = helpers.digest(image), []
-            # BootHush accepts one inspection span per invocation. These are
-            # separate deterministic cold boots, not one atomic snapshot.
-            for label, address, expected_bytes in (
-                    ("code", 0x10000, payload[:4096]),
-                    ("bank-a", 0x20000, bytes.fromhex("00000044aabb")),
-                    ("bank-b", 0x30000, bytes.fromhex("ccdd88000000"))):
+            spans = [("code", 0x10000, payload[:4096])]
+            if args.multi_inspect and len(payload) > 4096:
+                spans.append(("code-rest", 0x11000, payload[4096:]))
+            spans.extend((("bank-a", 0x20000, bytes.fromhex("00000044aabb")),
+                          ("bank-b", 0x30000, bytes.fromhex("ccdd88000000"))))
+            if any(len(data) > 4096 for _, _, data in spans):
+                raise ValueError("diagnostic payload exceeds supported inspection spans")
+            groups = [spans] if args.multi_inspect else [[span] for span in spans]
+            for group in groups:
+                label = "combined" if args.multi_inspect else group[0][0]
+                inspect = []
+                for _, address, expected_bytes in group:
+                    inspect.extend(("--inspect", f"{hex(address)}:{len(expected_bytes)}"))
                 stdout = helpers.run([emulator, "--machine", "pc286", "--floppy", image,
                                       "--cycles", "8000000", "--timeout-ms", "20000",
-                                      "--until-post", hex(expected), "--inspect",
-                                      f"{hex(address)}:{len(expected_bytes)}"],
+                                      "--until-post", hex(expected), *inspect],
                                      out, env, out / (name + "-" + label + ".log"))
                 result = json.loads(stdout)
-                memory = result.pop("memory", {})
                 if (result.get("status") != "condition_met" or result.get("post") != expected or
-                        result.get("cs") != 0x1000 or memory.get("address") != address or
-                        bytes.fromhex(memory.get("bytes", "")) != expected_bytes):
+                        result.get("cs") != 0x1000):
                     raise ValueError(f"{name}/{label}: unexpected guest result or inspected bytes")
+                memories = result.pop("memory_ranges", []) if args.multi_inspect else [result.pop("memory", {})]
+                if len(memories) != len(group):
+                    raise ValueError(f"{name}/{label}: missing inspection ranges")
+                for memory, (_, address, expected_bytes) in zip(memories, group):
+                    if (memory.get("address") != address or
+                            bytes.fromhex(memory.get("bytes", "")) != expected_bytes):
+                        raise ValueError(f"{name}/{label}: unexpected inspected bytes")
                 runs.append({"observation": label, "result": result, "bytes_match": True})
             if (len({r["result"]["cycles"] for r in runs}) != 1 or
                     len({r["result"]["pc"] for r in runs}) != 1 or helpers.digest(image) != before):
                 raise ValueError(f"{name}: repeated runs diverged or input image changed")
             observations.append({"case": name, "expected_post": expected, "entry": entry,
                                  "payload_bytes": len(payload), "payload_sha256": helpers.digest(binary),
-                                 "inspected_payload_bytes": min(len(payload), 4096),
+                                 "inspected_payload_bytes": len(payload) if args.multi_inspect else min(len(payload), 4096),
                                  "floppy_sha256": before, "floppy_unchanged": True, "runs": runs})
         sources = {part: helpers.digest(ROOT / ("probes/pc286/" + part + ".c")) for part in PARTS}
         report = {"schema_version": 1, "compiler": "pinned Open Watcom 16-bit -2 -mc",
                   "emulator_sha256": helpers.digest(emulator), "source_sha256": sources,
                   "harness_sha256": helpers.digest(HARNESS), "cases": observations,
-                  "limits": "Fixed test windows; separate cold-boot observations; no production provider, OS or hardware claim."}
+                  "limits": ("Fixed test windows; " +
+                             ("simultaneous inspection; " if args.multi_inspect else "separate cold-boot observations; ") +
+                             "no production provider, OS or hardware claim.")}
         (out / "report.json").write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
         print(json.dumps(report, indent=2))
         return 0
