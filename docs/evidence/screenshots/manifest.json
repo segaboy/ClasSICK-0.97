@@ -3046,6 +3046,28 @@
         "Replayed injected-window input, not operating-system mouse delivery or human/physical input.",
         "Experimental Mac candidate; no historical System 1 or release qualification."
       ]
+    },
+    {
+      "id": "2026-11-13-boothush-queued-key",
+      "path": "docs/evidence/screenshots/2026-11-13/boothush-queued-key.png",
+      "sha256": "acec2cea98052e1a8e041c2f88721b84b714cbc194a2a46ee038ebf24ab10150",
+      "bytes": 534,
+      "width": 512,
+      "height": 342,
+      "captured_on": "2026-11-13",
+      "target": "native-mac68000",
+      "caption": "Original Mac candidate after a modeled key press and release remained queued in BootHush.",
+      "alt": "Monochrome ClasSICK scene with a centered cross and counter 0000.",
+      "source_revision": "5d99706c5a93ef3c8aa58ed55ad6211f9a26e464",
+      "compiled_source_revision": "0f8d85df5b6fe21508c22594e0dc20923d4eebe6",
+      "evidence": "docs/development/tilt-keyboard-intake-20261113.md",
+      "license": "GPL-3.0-or-later",
+      "rights": "Original ClasSICK guest framebuffer, losslessly converted from BootHush PBM; no desktop, emulator chrome or reference pixels.",
+      "input": "synthetic",
+      "limitations": [
+        "The keyboard witness observed queued transitions without guest delivery in this bounded test.",
+        "Experimental Mac candidate; no historical System 1 or release qualification."
+      ]
     }
   ]
 }

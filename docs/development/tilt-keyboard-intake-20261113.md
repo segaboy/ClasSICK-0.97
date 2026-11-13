@@ -47,6 +47,9 @@ the neutral run. `keyboard_witness.pending` counts scheduled key events, not
 unconsumed device queue entries; its zero must not be read as guest acceptance.
 This demonstrates a missing keyboard path in this bounded candidate/model
 configuration, not a universal claim about every ClasSICK build.
+The [guest-only keyed frame](../evidence/screenshots/2026-11-13/boothush-queued-key.png)
+was losslessly converted from PBM, decoded and indexed; the neutral frame had
+identical pixels. The queue conclusion comes from the witness, not the image.
 
 ## Original ClasSICK parser
 

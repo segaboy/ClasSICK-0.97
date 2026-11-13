@@ -108,3 +108,5 @@ See [storage and publication policy](../../development/screenshot-evidence.md). 
 [2026-11-12 BootHush headless Mac drags](2026-11-12/boothush-headless-drag.png): original guest image after two injected-window drags, release movement and a content click. [Evidence and limits](../../development/boothush-headless-20261112.md).
 
 [2026-11-13 BootHush first Mac drag](2026-11-13/boothush-first-drag.png): original guest image after the first replayed synthetic drag. [Evidence and limits](../../development/boothush-developer-report-20261113.md).
+
+[2026-11-13 Mac queued-key observation](2026-11-13/boothush-queued-key.png): the candidate's unchanged guest image after modeled key transitions remained queued. [Evidence and limits](../../development/tilt-keyboard-intake-20261113.md).
