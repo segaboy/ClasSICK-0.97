@@ -29,7 +29,7 @@ static int event_valid(const cs_pointer_event *e)
 {
     uint32_t f=e->flags;
     if (e->x<0 || e->x>=CS_POINTER_WIDTH || e->y<0 || e->y>=CS_POINTER_HEIGHT
-        || (e->buttons&~7u)!=0u || (f&~255u)!=0u) return 0;
+        || (e->buttons & ~(uint32_t)7u)!=0u || (f & ~(uint32_t)255u)!=0u) return 0;
     if (f&CS_POINTER_CANCELLED) {
         return e->buttons==0u && (f== (CS_POINTER_CANCELLED|CS_POINTER_SUPPRESSED)
             || f== (CS_POINTER_CANCELLED|CS_POINTER_SUPPRESSED|CS_POINTER_RELEASE));

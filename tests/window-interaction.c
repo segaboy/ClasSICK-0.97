@@ -98,6 +98,8 @@ int main(void)
     refused(&w,(cs_pointer_event){0,342,0u,0u},CS_WINDOW_ARGUMENT);
     refused(&w,(cs_pointer_event){0,0,256u,0u},CS_WINDOW_ARGUMENT);
     refused(&w,(cs_pointer_event){0,0,0u,8u},CS_WINDOW_ARGUMENT);
+    refused(&w,(cs_pointer_event){0,0,UINT32_C(0x00010000),0u},CS_WINDOW_ARGUMENT);
+    refused(&w,(cs_pointer_event){0,0,0u,UINT32_C(0x80000000)},CS_WINDOW_ARGUMENT);
     refused(&w,(cs_pointer_event){0,0,CS_POINTER_PRESS,1u},CS_WINDOW_ARGUMENT);
     refused(&w,(cs_pointer_event){0,0,press|CS_POINTER_RELEASE,1u},CS_WINDOW_ARGUMENT);
     refused(&w,(cs_pointer_event){0,0,press|CS_POINTER_SUPPRESSED,1u},CS_WINDOW_ARGUMENT);
