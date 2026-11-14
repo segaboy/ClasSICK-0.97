@@ -1,0 +1,13 @@
+<!-- SPDX-License-Identifier: GPL-3.0-or-later -->
+<!-- Copyright (C) 2026 Dean Howell. -->
+# BootHush x64 model coordination — 2026-11-14
+
+The owner directed BootHush-only testing and development toward paired-native-preview-2. This receipt records a **tool test**, not a change to ClasSICK implementation, source eligibility, release criteria or qualification. The user-observable milestone and gates remain in [the release plan](../../releases/paired-native-preview-2.md) and [the prior integration receipt](boothush-paired-20261114.md).
+
+BootHush commit `7b11f985beaacd7151c73ab84dfbd7cfe85ee49a` reports an independently tested host-side, bounded x64 EFI memory model. Its own receipt is `C:/Repos/boothush/docs/x64-efi-memory-evidence-20261114.md` at that revision. It records 17 passing CTest targets (the 137-test Python target contains ten unsupplied-fixture skips). The tested unchanged CLI has SHA-256 `1f306c427d1a8c42b9d547b2b25a424e4b4e6a389a52ae5861d030e0fe43bc25`. The new model is a host-test library and is not linked to that CLI.
+
+One optional test extracts and maps the existing original ClasSICK candidate, disk SHA-256 `80c279a69264cb07f2042bf14503c0687fa32e71057ee1196fc8174afbeeae4f`, EFI SHA-256 `df284097539ed6b7c90700cb27589900b20d2e4c7574b7637ba5f387abba9fe9`. In a synthetic model the complete 54-page image span is marked LoaderCode, and an adjacent allocation does not overlap it. This is a tool integration experiment; the uniform type is an approximation, not evidence of the image's real section types or runtime behavior. It does not run EFI code or prove a UEFI boot, service call, native input, visual parity or release qualification. The known exact candidate is from the earlier receipt, not a newly frozen release image.
+
+The port's separately recorded headless regression reproduced its existing movement and keyboard-fault scenarios with the same CLI. Its game-derived source and emulator implementations are not implementation inputs to ClasSICK; neither the port result nor this host test establishes physical hardware behavior. No ClasSICK code, contract or compatibility claim was derived from them.
+
+Remaining release work includes a functioning BootHush x64 CPU and guest-callable firmware/device path, exact-candidate E1–E3 qualification on both targets, resolution and retesting of failed human-input observations, physical polarity and any applicable separate gates, final source/license/package evidence and separate owner publication approval. This test closes none of those gates. Native x64 PC development remains paused under the current owner scope; improving BootHush's machine remains the active dependency.
