@@ -26,7 +26,8 @@ def main():
     runtime=p.add_mutually_exclusive_group(required=True)
     runtime.add_argument('--runtime-library',type=Path);runtime.add_argument('--assembler',type=Path)
     p.add_argument('--host-cc',required=True,type=Path);p.add_argument('--emulator',required=True,type=Path)
-    p.add_argument('--output',required=True,type=Path);p.add_argument('--timing-markers',action='store_true');a=p.parse_args()
+    p.add_argument('--output',required=True,type=Path);p.add_argument('--timing-markers',action='store_true')
+    p.add_argument('--natural-start',action='store_true',help='test the continuous sequence from the shared pointer initial position');a=p.parse_args()
     try:
         h=module('helpers',ROOT/'scripts/Test-BootHushPC286BankPlan.py')
         oracle=module('compositor',ROOT/'scripts/Test-BootHushPC286SharedCompositor.py')
@@ -53,7 +54,8 @@ def main():
         host=ROOT/'probes/pc286/window-host-sequence.c';objects=[]
         for source in (*sources,guest):
             obj=out/(str(source.relative_to(ROOT)).replace('\\','-').replace('/','-')+'.obj')
-            extra=['-dCS_P286_TIMING_MARKERS'] if a.timing_markers and source==guest else []
+            extra=(['-dCS_P286_TIMING_MARKERS'] if a.timing_markers and source==guest else [])
+            if a.natural_start and source==guest:extra+=['-dCS_P286_NATURAL_START']
             h.run([wcc,*flags,*extra,'-fo='+str(obj),source],out,env,out/(obj.name+'.log'));objects.append(obj)
         if assembler:
             obj=out/'original-arithmetic.obj'
@@ -83,6 +85,12 @@ def main():
                ('moved',3,132,80,112,70,0,1,1,1),('released',5,132,64,112,54,0,0,0,1),
                ('post-release',6,148,64,112,54,0,0,0,1),('content',10,148,112,112,54,1,0,1,2),
                ('content-release',11,148,112,112,54,1,0,0,2))
+        if a.natural_start:
+            keys=[0x75]*6+[0x29,0x74,0x75,0x29]+[0x72]*3+[0x29,0x29]
+            cases=(('initial',0,256,171,80,70,0,0,0,0),('title',6,256,75,80,70,0,0,0,0),
+                   ('pressed',7,256,75,80,70,0,1,1,1),('moved',9,272,59,96,54,0,1,1,1),
+                   ('released',10,272,59,96,54,0,0,0,1),('post-release',13,272,107,96,54,0,0,0,1),
+                   ('content',14,272,107,96,54,1,0,1,2),('content-release',15,272,107,96,54,1,0,0,2))
         observations=[]
         for name,count,px,py,wx,wy,pattern,drag,button,presses in cases:
             frame=out/(name+'.ppm');pbm=out/(name+'.pbm')
@@ -97,7 +105,7 @@ def main():
             if (result.get('status')!='condition_met' or result.get('post')!=0xb0+count or
                 bytes.fromhex(result['memory']['bytes'])!=expected or h.digest(image)!=before):
                 raise ValueError(name+': guest state mismatch or changed input')
-            h.run([hostexe,str(count),pbm],out,env,out/(name+'-host.log'))
+            h.run([hostexe,('n'+str(count)) if a.natural_start else str(count),pbm],out,env,out/(name+'-host.log'))
             oracle.compare(pbm.read_bytes(),frame.read_bytes(),margin_white=True)
             observations.append({'name':name,'guest_result':result,'host_pbm_sha256':h.digest(pbm),
                                  'ega_ppm_sha256':h.digest(frame),'canvas_pixels_match':512*342,
@@ -120,6 +128,7 @@ def main():
                 'payload_bytes':binary.stat().st_size,'payload_sha256':h.digest(binary),'floppy_sha256':before,
                 'bss_start':bss_start,'bss_bytes':bss_size,'bss_poisoned_before_load':True,
                 'timing_markers':a.timing_markers,
+                'natural_start':a.natural_start,
                 'cases':observations,'floppy_unchanged':True,'pixel_mutations_rejected':2,
                 'limits':'Same-source hosted/286 scripted input; experimental helpers require review; no Mac boot, E3/E4 or physical claim.'}
         (out/'report.json').write_text(json.dumps(report,indent=2)+'\n',encoding='utf-8')

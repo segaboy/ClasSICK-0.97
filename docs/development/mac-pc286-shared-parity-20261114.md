@@ -301,3 +301,66 @@ Use `scripts/Test-BootHushPC286PresentEdges.py` with the same pinned tool root,
 assembler and emulator, `--pc-results` pointing to the uninstrumented session
 above, and a new output directory. These are emulator observations, not an
 exhaustive geometry proof or a physical display test.
+
+## Natural initial position
+
+The preceding seven-state 286 fixture deliberately pre-positioned the pointer
+to `(100,80)` in code, so it did not prove that the initial visible position
+matched the Mac. An opt-in `--natural-start` build now leaves the shared
+owner's initial `(256,171)` position untouched. In separate BootHush runs it
+matches the existing Mac ROM's pointer, `(80,70)` window, zero presses/pattern,
+all 175,104 canvas pixels and all 48,896 white-margin pixels. The hosted
+reference also matches. Mac stop was cycle 100,000,002; 286 POST `b0` was cycle
+3,935,711. The 21,034-byte 286 payload SHA-256 is
+`4b9c6465265bb8f2c31557fb1f30449fdb6160b81783862c30cfe03047186332`,
+test floppy SHA-256
+`27ebcf1e36f3a35417af0b75d33590dcce4f44815e823b5b6acd80ee4c3e6f16`,
+and Mac PBM SHA-256
+`2c952f820d085441c34e5e8d4b63852c4c223dab52002a8b9ad01d7e4b24361b`.
+Receipts and exact commands are `C:/Repos/.task-temp/pc286-natural-start-20261114-a`
+and `C:/Repos/.task-temp/mac-pc286-natural-start-20261114-a`.
+
+The pre-positioned seven-state sequence was rerun separately against the same
+current sources in `C:/Repos/.task-temp/pc286-shared-session-20261114-n` and
+`C:/Repos/.task-temp/mac-pc286-parity-20261114-j`. These are two distinct 286
+builds; the subsequent continuous test below addresses the intervening
+scripted input path. To repeat, add `--natural-start` to
+the shared-session build and use its output with
+`scripts/Test-BootHushMac286NaturalStart.py`; use fresh output directories.
+
+The Mac image is still from the earlier source revision. On this workstation
+`wsl.exe --list --quiet` returned `WSL/E_ACCESSDENIED` in the current execution
+environment; the existing Mac build script expects a Linux m68k cross-toolchain.
+This check does not establish that no alternate permitted build environment is
+available. A fresh source-matched Mac build, broader paired input, production
+286 binding, remaining qualification and separate publication approval are
+still required.
+
+### Continuous modeled interaction from initial state
+
+The natural-start fixture was extended to accept a 15-key sequence from the
+center position: move to the title, hold, drag right and up, release, move to
+content, press and release. Eight 286 cold runs check successive prefixes of
+the same sequence; the last executes all fifteen keys in one boot. The actual
+Mac ROM receives corresponding injected window messages in one run. Pointer,
+window, button, counter, pattern, all 175,104 canvas pixels and all 48,896
+286 margin pixels match at all eight checkpoints. The recorded Mac mouse
+trace replays with identical capture cycles, memory and images. The 286
+fixture is still diagnostic and the Mac ROM is from an earlier revision.
+
+With BootHush's default 8,192-cycle edge setting, the successful run is
+`C:/Repos/.task-temp/mac-pc286-natural-parity-20261114-d`; its trace SHA-256
+is `11a57a8a24dc166ebb39209a3f317be243685f64a463813f9cb5ec9f4eada495`.
+Equivalent runs using 16,384 and 32,768 modeled cycles per edge are in
+`mac-pc286-natural-parity-20261114-e` and `-c`. Their shared 286 results are
+`C:/Repos/.task-temp/pc286-natural-session-20261114-b`.
+
+The earlier `mac-pc286-natural-parity-20261114-a` used closer event/checkpoint
+spacing: at the drag checkpoint the Mac pointer/window were `(272,73)` /
+`(96,68)` rather than `(272,59)` / `(96,54)`, despite zero reported loss and
+pending steps. The subsequent 32,768-cycle attempt `-b` sampled the first
+96-pixel movement before its scheduled steps could finish, so it is invalid
+as a settled comparison. The passing runs allow more time between events and
+checkpoints. These results do not prove a particular cause, a physical speed
+threshold, or that the original faster schedule would eventually settle; they
+leave responsiveness and real input qualification open.

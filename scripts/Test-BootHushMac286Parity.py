@@ -21,6 +21,13 @@ CASES=(('initial',116000000,100,80,80,70,0,0,0),('pressed',126000000,100,80,80,7
        ('moved',142000000,132,80,112,70,0,1,1),('released',158000000,132,64,112,54,0,0,1),
        ('post-release',166000000,148,64,112,54,0,0,1),('content',198000000,148,112,112,54,1,1,2),
        ('content-release',206000000,148,112,112,54,1,0,2))
+NATURAL_EVENTS=('100000000:256:171:0','108000000:256:75:0','120000000:256:75:1',
+                '132000000:272:75:2','144000000:272:59:2','156000000:272:59:3',
+                '168000000:272:107:0','180000000:272:107:1','192000000:272:107:3')
+NATURAL_CASES=(('initial',104000000,256,171,80,70,0,0,0),('title',118000000,256,75,80,70,0,0,0),
+               ('pressed',130000000,256,75,80,70,0,1,1),('moved',154000000,272,59,96,54,0,1,1),
+               ('released',166000000,272,59,96,54,0,0,1),('post-release',178000000,272,107,96,54,0,0,1),
+               ('content',190000000,272,107,96,54,1,1,2),('content-release',202000000,272,107,96,54,1,0,2))
 
 def sha(path):return hashlib.sha256(path.read_bytes()).hexdigest()
 def module(name,path):
@@ -29,7 +36,8 @@ def module(name,path):
 def main():
     p=argparse.ArgumentParser(description=__doc__)
     p.add_argument('--emulator',required=True,type=Path);p.add_argument('--mac-rom',required=True,type=Path)
-    p.add_argument('--pc-results',required=True,type=Path);p.add_argument('--output',required=True,type=Path);a=p.parse_args()
+    p.add_argument('--pc-results',required=True,type=Path);p.add_argument('--output',required=True,type=Path)
+    p.add_argument('--edge-cycles',type=int,help='optional modeled mouse edge interval');a=p.parse_args()
     try:
         exe=a.emulator.resolve(strict=True);rom=a.mac_rom.resolve(strict=True);pc=a.pc_results.resolve(strict=True);out=a.output.resolve()
         if out==ROOT or ROOT in out.parents:raise ValueError('output must be outside the repository')
@@ -39,13 +47,17 @@ def main():
             raise ValueError('286 report, emulator or floppy identity mismatch')
         for name,digest in report['source_sha256'].items():
             if sha(ROOT/name)!=digest:raise ValueError('286 source identity changed: '+name)
+        natural=report.get('natural_start',False)
+        cases=NATURAL_CASES if natural else CASES;events=NATURAL_EVENTS if natural else EVENTS
+        stop=cases[-1][1]
         oracle=module('compositor',ROOT/'scripts/Test-BootHushPC286SharedCompositor.py')
         out.mkdir(parents=True,exist_ok=False);series_path=out/'mac.pbmseq';trace=out/'mac.bhmouse'
-        cmd=[str(exe),'--machine','mac128k','--rom',str(rom),'--cycles','206000000','--timeout-ms','20000',
+        cmd=[str(exe),'--machine','mac128k','--rom',str(rom),'--cycles',str(stop),'--timeout-ms','20000',
              '--mouse-dcd-invert','3','--mouse-record',str(trace),'--capture-series',str(series_path),
              '--capture-memory','0xc04:192']
-        for _,cycle,*_ in CASES:cmd+=['--capture-cycle',str(cycle)]
-        for event in EVENTS:cmd+=['--window-mouse',event]
+        if a.edge_cycles is not None:cmd+=['--mouse-edge-cycles',str(a.edge_cycles)]
+        for _,cycle,*_ in cases:cmd+=['--capture-cycle',str(cycle)]
+        for event in events:cmd+=['--window-mouse',event]
         result=subprocess.run(cmd,capture_output=True,text=True,timeout=25,creationflags=getattr(subprocess,'CREATE_NO_WINDOW',0))
         (out/'run.log').write_text(result.stdout+'\n--- stderr ---\n'+result.stderr,encoding='utf-8')
         if result.returncode:raise ValueError('Mac run failed; see run.log')
@@ -53,11 +65,11 @@ def main():
         if (data['status']!='cycle_limit' or data.get('input_source')!='injected_window_messages' or
             data.get('mouse',{}).get('pending')!=0 or series['rom_sha256']!=MAC_SHA or
             series['executable_sha256']!=sha(exe) or
-            (series['requested'],series['processed'],series['pending'],series['missing_images'],series['dropped'])!=(7,7,0,0,0)):
+            (series['requested'],series['processed'],series['pending'],series['missing_images'],series['dropped'])!=(len(cases),len(cases),0,0,0)):
             raise ValueError('Mac run incomplete or capture identity mismatch')
         payload=series_path.read_bytes();observations=[]
         pc_cases={case['name']:case for case in report['cases']}
-        for expected,sample in zip(CASES,series['samples']):
+        for expected,sample in zip(cases,series['samples']):
             name,cycle,px,py,wx,wy,pattern,held,presses=expected
             if sample['requested']!=cycle or not sample['processed'] or not sample['image_available']:
                 raise ValueError(name+': missing requested Mac capture')
@@ -81,24 +93,25 @@ def main():
                 'mac_pbm_sha256':sha(mac_frame),'pc_ega_ppm_sha256':sha(pcframe),
                 'normalized_canvas_pixels_match':512*342,'pc_white_margin_pixels_match':640*350-512*342})
         replay_path=out/'replay.pbmseq'
-        replay_cmd=[str(exe),'--machine','mac128k','--rom',str(rom),'--cycles','206000000',
+        replay_cmd=[str(exe),'--machine','mac128k','--rom',str(rom),'--cycles',str(stop),
                     '--timeout-ms','20000','--mouse-replay',str(trace),'--capture-series',str(replay_path),
                     '--capture-memory','0xc04:192']
-        for _,cycle,*_ in CASES:replay_cmd+=['--capture-cycle',str(cycle)]
+        for _,cycle,*_ in cases:replay_cmd+=['--capture-cycle',str(cycle)]
         replay=subprocess.run(replay_cmd,capture_output=True,text=True,timeout=25,
                               creationflags=getattr(subprocess,'CREATE_NO_WINDOW',0))
         (out/'replay.log').write_text(replay.stdout+'\n--- stderr ---\n'+replay.stderr,encoding='utf-8')
         if replay.returncode:raise ValueError('Mac replay failed; see replay.log')
         rep=json.loads(replay.stdout);rseries=rep['frame_series']
         if (rep['status']!='cycle_limit' or rep['cycles']!=data['cycles'] or
-            rseries['processed']!=7 or rseries['pending']!=0 or rseries['dropped']!=0 or
+            rseries['processed']!=len(cases) or rseries['pending']!=0 or rseries['dropped']!=0 or
             replay_path.read_bytes()!=payload):raise ValueError('Mac replay frame or stop mismatch')
         for first,second in zip(series['samples'],rseries['samples']):
             if first['cycle']!=second['cycle'] or first['memory']!=second['memory']:
                 raise ValueError('Mac replay memory or checkpoint cycle mismatch')
         summary={'status':'pass','boothush_sha256':sha(exe),'mac_rom_sha256':MAC_SHA,
                  'pc_payload_sha256':report['payload_sha256'],'pc_floppy_sha256':report['floppy_sha256'],
-                 'pc_runtime_library_sha256':report['runtime_library_sha256'],'events':EVENTS,
+                 'pc_runtime_library_sha256':report['runtime_library_sha256'],'events':events,'natural_start':natural,
+                 'requested_edge_cycles':a.edge_cycles,
                  'mouse':data['mouse'],'checkpoints':observations,'mac_replay_cycle_memory_frames_match':True,
                  'limits':'Injected Mac window messages and scheduled 286 keyboard; no hardware, human, production boot or release claim.'}
         (out/'report.json').write_text(json.dumps(summary,indent=2)+'\n',encoding='utf-8')
