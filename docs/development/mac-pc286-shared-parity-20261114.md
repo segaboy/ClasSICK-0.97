@@ -132,3 +132,53 @@ The 16 relevant hosted CTest cases (surface, numeric model, compositor, cursor
 and window) also passed in `C:/Repos/.task-temp/classick-host-20261114-c`.
 The numeric model is independent but does not by itself cover every C16 input;
 the physical and release limits above are unchanged.
+
+## Original arithmetic helpers, no runtime library
+
+The next experiment removes the third-party runtime from this particular
+286 window build. `arch/i286/watcom-arithmetic.asm` independently implements
+the compiler-emitted 32-bit multiply and signed/unsigned divide helpers using
+the observed register convention. Unsigned division uses two 16-bit divides
+when the divisor fits, and a restoring algorithm otherwise. Zero division and
+signed `INT32_MIN / -1` are outside the C operations' defined domain. This is
+not a claim that the compiler's entire runtime ABI is implemented.
+
+`scripts/Test-BootHushPC286Arithmetic.py` builds a guest without a runtime
+library and checks 259 directed and deterministic pseudorandom operand pairs
+against independently computed Python integer products, quotients and
+remainders, including negative and boundary operands. The deliberate wrong
+expectation fails as intended. The current assembler, extracted as a tool
+from the previously identified archive without running its installer, is
+`2026-10-01-Build`, SHA-256
+`9e779dda024c6cee24943f917b0f761ce862951caec0a4c0fbadbc760895c0cb`.
+The complete original helper source SHA-256 is
+`2e58dc63e94fc66c57b4af1173cc2876e8e7f00d5cd97164e2c8ec4865574d60`;
+the oracle receipt is `C:/Repos/.task-temp/pc286-arithmetic-test-20261114-c`.
+No third-party runtime implementation source was consulted or incorporated.
+
+The full 286 window fixture links with `nodefaultlibs`, the original helpers,
+and no runtime library; the link map lists no `clibs.lib` modules. Its
+21,066-byte payload SHA-256 is
+`a7e808a78eb2f413806cb71e868b1ffe6316891304245b95a8f47d4dfe82db1b`,
+its floppy SHA-256 is
+`65e79893261b25602e63019c542423fed535d8042a398a4831258a4238b5c1ac`.
+All seven same-source 286 comparisons, all seven Mac/286 checkpoints and the
+Mac replay pass. Receipts are `C:/Repos/.task-temp/pc286-shared-session-20261114-h`
+and `C:/Repos/.task-temp/mac-pc286-parity-20261114-e`. The 13 C16 surface
+boundary checks also pass without a runtime library in
+`C:/Repos/.task-temp/pc286-surface-boundaries-20261114-b`.
+
+The helper's initial unoptimized division raised the modeled initial-render
+checkpoint from 4,836,929 to 6,526,306 cycles; the 16-bit-divisor fast path
+reduced it to 4,915,331. These are model cycle counts for these particular
+test images and inputs, not a real-time usability qualification. The helper,
+compiler output, platform bindings, memory/stack budget, production boot and
+all other applicable milestone gates still require their own review and
+evidence. The earlier runtime-library licensing hold applies to those earlier
+library-linked experiments, not to this runtime-free test payload.
+
+To reproduce, substitute `--assembler C:/Repos/.task-temp/pc286-independent-arith-20261114-a/wasm.exe`
+for `--runtime-library` in the shared-session command above. Use the same
+`--tool-root`, `--assembler`, `--emulator` and a fresh `--output` for
+`scripts/Test-BootHushPC286Arithmetic.py` and
+`scripts/Test-BootHushPC286SurfaceValidate.py`.

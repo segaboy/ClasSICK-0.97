@@ -22,16 +22,23 @@ def module(name,path):
 
 def main():
     p=argparse.ArgumentParser(description=__doc__)
-    p.add_argument('--tool-root',required=True,type=Path);p.add_argument('--runtime-library',required=True,type=Path)
+    p.add_argument('--tool-root',required=True,type=Path)
+    runtime=p.add_mutually_exclusive_group(required=True)
+    runtime.add_argument('--runtime-library',type=Path);runtime.add_argument('--assembler',type=Path)
     p.add_argument('--host-cc',required=True,type=Path);p.add_argument('--emulator',required=True,type=Path)
     p.add_argument('--output',required=True,type=Path);a=p.parse_args()
     try:
         h=module('helpers',ROOT/'scripts/Test-BootHushPC286BankPlan.py')
         oracle=module('compositor',ROOT/'scripts/Test-BootHushPC286SharedCompositor.py')
-        tool=a.tool_root.resolve(strict=True);lib=a.runtime_library.resolve(strict=True)
+        tool=a.tool_root.resolve(strict=True)
+        lib=a.runtime_library.resolve(strict=True) if a.runtime_library else None
+        assembler=a.assembler.resolve(strict=True) if a.assembler else None
         cc=a.host_cc.resolve(strict=True);exe=a.emulator.resolve(strict=True);out=a.output.resolve()
         if out==ROOT or ROOT in out.parents:raise ValueError('output must be outside the repository')
-        if h.digest(lib)!=oracle.LIB_SHA:raise ValueError('runtime library hash mismatch')
+        if lib and h.digest(lib)!=oracle.LIB_SHA:raise ValueError('runtime library hash mismatch')
+        if assembler:
+            arith=module('arithmetic',ROOT/'scripts/Test-BootHushPC286Arithmetic.py')
+            if h.digest(assembler)!=arith.ASM_SHA:raise ValueError('assembler identity mismatch')
         lock=json.loads((ROOT/'scripts/pc286-toolchain-lock.json').read_text(encoding='utf-8'))
         for row in lock['selected_members']:
             item=tool/row['path']
@@ -47,14 +54,18 @@ def main():
         for source in (*sources,guest):
             obj=out/(str(source.relative_to(ROOT)).replace('\\','-').replace('/','-')+'.obj')
             h.run([wcc,*flags,'-fo='+str(obj),source],out,env,out/(obj.name+'.log'));objects.append(obj)
+        if assembler:
+            obj=out/'original-arithmetic.obj'
+            h.run([assembler,'-zq','-2','-ms','-fo='+str(obj),ROOT/'arch/i286/watcom-arithmetic.asm'],
+                  out,env,out/'arithmetic-assemble.log');objects.append(obj)
         binary=out/'session.bin';mapping=out/'session.map'
         h.run([wlink,'format','raw','bin','option','start=start_','option','nodefaultlibs',
                'option','map='+str(mapping),'name',binary,'file',','.join(str(x) for x in objects),
-               'library',lib],out,env,out/'link.log')
+               *(['library',lib] if lib else [])],out,env,out/'link.log')
         text=mapping.read_text(encoding='utf-8',errors='replace')
         entry=re.search(r'Entry point address:\s*([0-9a-fA-F]+)',text)
         used=sorted(set(re.findall(r'clibs\.lib\(([^)]+)\)',text,re.I)))
-        if not entry or used!=['i4d','i4m']:
+        if not entry or used!=(['i4d','i4m'] if lib else []):
             raise ValueError('unexpected link entry or runtime module set')
         image=out/'session.img'
         with image.open('xb') as f:f.write(floppy(binary.read_bytes(),int(entry.group(1),16)))
@@ -93,11 +104,13 @@ def main():
             except ValueError:continue
             raise ValueError('pixel comparison missed deliberate mutation')
         report={'status':'pass','toolchain':lock['release'],'boothush_sha256':h.digest(exe),
-                'host_compiler_sha256':h.digest(cc),'runtime_library_sha256':h.digest(lib),'runtime_modules':used,
-                'source_sha256':{str(x.relative_to(ROOT)).replace('\\','/'):h.digest(x) for x in (*sources,guest,host)},
+                'host_compiler_sha256':h.digest(cc),'runtime_library_sha256':h.digest(lib) if lib else None,
+                'assembler_sha256':h.digest(assembler) if assembler else None,'runtime_modules':used,
+                'source_sha256':{str(x.relative_to(ROOT)).replace('\\','/'):h.digest(x) for x in
+                                 (*sources,guest,host,*((ROOT/'arch/i286/watcom-arithmetic.asm',) if assembler else ()))},
                 'payload_bytes':binary.stat().st_size,'payload_sha256':h.digest(binary),'floppy_sha256':before,
                 'cases':observations,'floppy_unchanged':True,'pixel_mutations_rejected':2,
-                'limits':'Same-source hosted/286 scripted input; runtime not cleared for release; no Mac boot, E3/E4 or physical claim.'}
+                'limits':'Same-source hosted/286 scripted input; experimental helpers require review; no Mac boot, E3/E4 or physical claim.'}
         (out/'report.json').write_text(json.dumps(report,indent=2)+'\n',encoding='utf-8')
         print(json.dumps(report,indent=2));return 0
     except (OSError,ValueError,KeyError) as exc:
