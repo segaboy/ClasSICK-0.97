@@ -547,6 +547,14 @@ and code review, production boot, physical and human checks, and the separate
 release decision remain open. None of these emulator tests establishes physical
 controller behavior or release qualification.
 
+As a sensitivity check, `scripts/Test-PC286KeyboardConfig.py` compiles the
+same hosted test against three deliberately broken variants: ignoring pending
+output, waiting one poll too long, and accepting a disabled keyboard. Each
+fails at its expected distinct assertion, while the unmodified baseline passes.
+Compiler identity, commands and source hashes are in
+`C:/Repos/.task-temp/pc286-keyboard-config-mutations-20261114-c/report.json`.
+These are host-software checks, not additional physical evidence.
+
 ## Four-track diagnostic loader
 
 The existing test-only floppy loader now reads a fourth bounded track, raising

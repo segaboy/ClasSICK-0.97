@@ -5,4 +5,6 @@ timeouts, pending output, status faults and invalid calls. A BootHush 286
 diagnostic checks normal translation and controlled refusal of disabled
 translation and pending output, including IRQ mask restoration. Emulator
 observations do not qualify physical controllers, concurrent input or release.
+Three deliberately broken hosted variants are detected by their expected
+individual test failures; the baseline still passes.
 [Evidence](../../docs/development/mac-pc286-shared-parity-20261114.md).
