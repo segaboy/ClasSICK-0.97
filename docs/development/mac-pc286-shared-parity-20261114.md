@@ -588,6 +588,38 @@ The first harness attempt in sibling `-a` stopped on a test-script variable
 error before failure injection and is preserved. These are modeled failure
 cases, not a physical BIOS or production-loader qualification.
 
+### Experimental payload corruption check
+
+The original test-only loader offers an opt-in 16-bit additive sum over the
+linked payload bytes, excluding sector padding. It signals `ed` on a mismatch
+before the payload entry point; BIOS read failures continue to signal `ee`.
+It is a diagnostic experiment, not a security or authenticity mechanism: equal
+and opposite byte changes can cancel, as the negative control demonstrates.
+The default loader remains unchanged. Source and tests are independently
+developed here; no firmware implementation was consulted.
+
+On BootHush SHA-256 `5d4f610e98cbb8b03476f28929d6e5c0f64b941aafac3c7d5b6ef12c76c7eeb3`,
+`scripts/Test-BootHushPC286LoaderChecksum.py` passed 19 cases covering valid
+payloads up to 30,208 bytes, single-byte corruption at track boundaries, ignored
+sector padding, a deliberate undetected balanced corruption, and an injected
+failure at each read. Commands, inputs, hashes and responses are in
+`C:/Repos/.task-temp/pc286-loader-checksum-20261114-b/report.json`.
+The ordinary bounds and read-failure checks were rerun in
+`C:/Repos/.task-temp/pc286-loader-bounds-20261114-c/report.json`.
+
+With `--verify-payload --natural-start --raw-keyboard`, the actual 22,374-byte
+shared 286 diagnostic (payload SHA-256 `9a443bdaf9a753be3c41bca3a4b5d72ce60d0e517a3f672a486f2d4b585c2c82`)
+passes its eight state and pixel checkpoints with poisoned BSS. Its checked
+floppy SHA-256 is `432b0fbfb01d2f3e7369209e3f0a1aa296bd0fc646a85d9c7e76c67cef9c986d`;
+the build, commands and observations are in
+`C:/Repos/.task-temp/pc286-checksummed-session-20261114-a/report.json`.
+That session also matches the source-matched Mac build at all eight modeled
+checkpoints and in mouse-trace replay at 4,096 modeled cycles per edge:
+`C:/Repos/.task-temp/mac-pc286-checked-loader-parity-20261114-b/report.json`.
+The first parity invocation used an incorrect manifest path and stopped before
+running a guest. These tests establish neither physical reliability nor a
+production disk format, boot path, human input qualification or release.
+
 ### Natural-start stack observation
 
 The stack runner now follows the input mode and starting point in the source

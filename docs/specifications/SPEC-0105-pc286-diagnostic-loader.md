@@ -12,6 +12,13 @@ entry within the payload. Failed reads report `ee`; BSS clearing and optional
 test-only poisoning retain the earlier loader behavior. A too-large payload or
 out-of-range entry is rejected before media creation.
 
+An optional diagnostic mode sums exactly the payload bytes modulo 65,536 and
+compares them with the value embedded at image creation. A mismatch reports
+`ed` before entry. Padding is excluded. This detects the tested single-byte
+corruptions but does not authenticate the image or detect all damage; for
+example, balanced byte changes can preserve the sum. It is disabled by
+default and does not define a production media-integrity contract.
+
 The model is tested against BootHush, including boundary and short-read
 controls. Real BIOS geometry, media, failure handling, memory layout, boot
 drive selection, hard-disk installation and release qualification remain open.

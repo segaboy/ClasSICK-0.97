@@ -13,7 +13,7 @@ TRACKS=((14,0x0002,0x0000,0),(15,0x0001,0x0100,14*SECTOR),
 MAX_PAYLOAD=59*SECTOR
 FLOPPY_BYTES=1228800
 
-def floppy(payload,entry,*,bss_end=None,poison_bss=False,poison_stack=None):
+def floppy(payload,entry,*,bss_end=None,poison_bss=False,poison_stack=None,verify_payload=False):
     if not isinstance(payload,bytes):raise TypeError('payload must be bytes')
     sectors=(len(payload)+SECTOR-1)//SECTOR
     if not 1<=len(payload)<=MAX_PAYLOAD or not 0<=entry<len(payload):
@@ -36,6 +36,13 @@ def floppy(payload,entry,*,bss_end=None,poison_bss=False,poison_stack=None):
         code+=b'\xbb'+struct.pack('<H',bx)+b'\xb8'+bytes((count,2))
         code+=b'\xb9'+struct.pack('<H',cx)+b'\xba'+struct.pack('<H',dx)+bytes.fromhex('cd1372')
         branches.append(len(code));code.append(0);remaining-=count
+    checksum_branch=None
+    if verify_payload:
+        # Sum exactly the linked payload bytes, excluding last-sector padding.
+        # This detects simple corruption; it is not an authenticity check.
+        code+=bytes.fromhex('b80010 8ed8 31db 31f6 b9')+struct.pack('<H',len(payload))
+        code+=bytes.fromhex('fc 31c0 ac 01c3 e2fb 81fb')+struct.pack('<H',sum(payload)&0xffff)
+        code+=bytes.fromhex('75');checksum_branch=len(code);code.append(0)
     if bss_end is not None and bss_end>len(payload):
         # The last read may include sector padding. Clear all linked BSS and
         # alignment padding explicitly; never assume power-on RAM is zero.
@@ -47,10 +54,15 @@ def floppy(payload,entry,*,bss_end=None,poison_bss=False,poison_stack=None):
         code+=b'\xb9'+struct.pack('<H',0xfffe-bss_end)+b'\xb0'+bytes([poison_stack])+bytes.fromhex('f3aa')
     code+=bytes.fromhex('fab800108ed88ed0bcfefffbea')+struct.pack('<HH',entry,0x1000)
     failure=len(code);code+=bytes.fromhex('b0eee680ebfe')
+    checksum_failure=len(code);code+=bytes.fromhex('b0ede680ebfe') if verify_payload else b''
     for at in branches:
         delta=failure-(at+1)
         if not -128<=delta<=127:raise ValueError('loader branch out of range')
         code[at]=delta&255
+    if checksum_branch is not None:
+        delta=checksum_failure-(checksum_branch+1)
+        if not -128<=delta<=127:raise ValueError('checksum branch out of range')
+        code[checksum_branch]=delta&255
     if len(code)>510:raise ValueError('loader exceeds boot sector')
     code+=bytes(510-len(code))+b'\x55\xaa'
     return bytes(code)+payload+bytes(FLOPPY_BYTES-SECTOR-len(payload))

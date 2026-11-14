@@ -30,6 +30,7 @@ def main():
     p.add_argument('--host-cc',required=True,type=Path);p.add_argument('--emulator',required=True,type=Path)
     p.add_argument('--output',required=True,type=Path);p.add_argument('--timing-markers',action='store_true')
     p.add_argument('--natural-start',action='store_true',help='test the continuous sequence from the shared pointer initial position')
+    p.add_argument('--verify-payload',action='store_true',help='enable experimental diagnostic payload checksum')
     p.add_argument('--raw-keyboard',action='store_true',help='experimental translated set-1 make/break polling')
     p.add_argument('--irq-unmask-control',action='store_true',help='test-only unmask before taking IRQ1 ownership')
     p.add_argument('--config-control',choices=('bad-translation','pending-output'),help='test-only controller refusal');a=p.parse_args()
@@ -88,7 +89,7 @@ def main():
         if bss_start<binary.stat().st_size:raise ValueError('BSS overlaps initialized payload')
         image=out/'session.img'
         with image.open('xb') as f:f.write(floppy(binary.read_bytes(),int(entry.group(1),16),
-                                                 bss_end=bss_end,poison_bss=True))
+                                                 bss_end=bss_end,poison_bss=True,verify_payload=a.verify_payload))
         before=h.digest(image)
         if a.config_control:
             cmd=[exe,'--machine','pc286','--floppy',image,'--cycles','10000000','--timeout-ms','20000',
@@ -195,6 +196,7 @@ def main():
                 'bss_start':bss_start,'bss_bytes':bss_size,'bss_poisoned_before_load':True,
                 'timing_markers':a.timing_markers,
                 'natural_start':a.natural_start,
+                'verify_payload':a.verify_payload,
                 'raw_keyboard':a.raw_keyboard,
                 'irq_unmask_control':a.irq_unmask_control,
                 'config_control':a.config_control,
