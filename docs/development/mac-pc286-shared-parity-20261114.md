@@ -358,9 +358,10 @@ Equivalent runs using 16,384 and 32,768 modeled cycles per edge are in
 The earlier `mac-pc286-natural-parity-20261114-a` used closer event/checkpoint
 spacing: at the drag checkpoint the Mac pointer/window were `(272,73)` /
 `(96,68)` rather than `(272,59)` / `(96,54)`, despite zero reported loss and
-pending steps. The subsequent 32,768-cycle attempt `-b` sampled the first
+pending steps. Its next capture at 144 million cycles did show the expected
+position, window and released state, and its later content state was correct;
+the intermediate checkpoint still failed. The subsequent 32,768-cycle attempt `-b` sampled the first
 96-pixel movement before its scheduled steps could finish, so it is invalid
 as a settled comparison. The passing runs allow more time between events and
-checkpoints. These results do not prove a particular cause, a physical speed
-threshold, or that the original faster schedule would eventually settle; they
-leave responsiveness and real input qualification open.
+checkpoints. These results do not prove a particular cause or a physical speed
+threshold; they leave responsiveness and real input qualification open.
