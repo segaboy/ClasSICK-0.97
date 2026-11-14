@@ -24,10 +24,12 @@ def main():
     root.mkdir(parents=True, exist_ok=False)
     exe_hash = sha(exe.read_bytes());cases = []
 
-    def run(name, data, post, offsets):
+    def run(name, data, post, offsets, fail_read=None):
         path = root/(name+'.img');path.write_bytes(data)
         command = [str(exe), '--machine', 'pc286', '--hard-disk', str(path),
                    '--cycles', '8000000', '--timeout-ms', '20000', '--until-post', hex(post)]
+        if fail_read is not None:
+            command += ['--fail-hard-disk-read', fail_read]
         for offset in offsets:
             command += ['--inspect', hex(0x10000+offset)+':1']
         result = subprocess.run(command, capture_output=True, text=True, timeout=25,
@@ -36,6 +38,10 @@ def main():
             raise RuntimeError(name+': '+result.stdout+result.stderr)
         response = json.loads(result.stdout)
         assert response['status'] == 'condition_met' and response['post'] == post
+        if fail_read is not None:
+            fault = response['hard_disk_read_failure']
+            assert fault['injected'] == 1 and fault['bios_status'] == 32
+            assert [fault[x] for x in ('cylinder','head','sector')] == [int(x) for x in fail_read.split(':')]
         assert sha(path.read_bytes()) == sha(data)
         rows = response.get('memory_ranges', []) if len(offsets)>1 else [response['memory']]
         assert [row['address'] for row in rows] == [0x10000+offset for offset in offsets]
@@ -75,6 +81,11 @@ def main():
     assert data[:SECTOR].count(bytes.fromhex('b90100ba8003')) == 1
     index = bad[:SECTOR].index(bytes.fromhex('b90100ba8003'));bad[index+1] = 0
     assert run('invalid-fourth-sector', bad, 0xee, [50*SECTOR-1, 50*SECTOR]) == [payload[50*SECTOR-1], 0]
+    for chs, offset in (('0:0:2',0), ('0:1:1',16*SECTOR),
+                        ('0:2:1',33*SECTOR), ('0:3:1',50*SECTOR)):
+        offsets = ([offset-1] if offset else []) + [offset]
+        expected = ([payload[offset-1]] if offset else []) + [0]
+        assert run('injected-'+chs.replace(':','-'), data, 0xee, offsets, fail_read=chs) == expected
     assert sha(exe.read_bytes()) == exe_hash
     report = {'status':'pass', 'emulator_sha256':exe_hash, 'cases':cases,
               'source_sha256':{f.name:sha(f.read_bytes()) for f in

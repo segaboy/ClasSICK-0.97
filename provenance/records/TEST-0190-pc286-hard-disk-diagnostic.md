@@ -7,3 +7,8 @@ also boots from the generated model disk and matches hosted and Mac state/pixel
 checkpoints. BootHush observations do not establish physical disk or BIOS
 behavior, installation, production boot or release qualification.
 [Evidence](../../docs/development/mac-pc286-shared-parity-20261114.md).
+
+The later BootHush built-in BIOS injector failed each of the four generated
+maximum-payload reads and each of the actual session image's three reads.
+The expected failure stop, prior-byte retention and untouched failing byte
+were observed with unchanged media; this remains modeled fault evidence.

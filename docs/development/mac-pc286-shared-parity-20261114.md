@@ -670,6 +670,27 @@ or mislabeled the disk as floppy media; each was
 refused before a paired guest run in
 `C:/Repos/.task-temp/mac-hard-disk-media-admission-20261114-b/report.json`.
 These are identity and admission checks, not image authentication.
+
+BootHush subsequently added explicit fixed-disk read-failure injection. With
+its twin-built executable SHA-256
+`703da7b4b3883f899cff6b17d221a3afce69bcf4d04e21d07718252ed2b6c0b0`,
+the diagnostic loader suite passed 13 modeled runs, including failures on
+each of four read starts. Each signaled `ee` before the payload entry, retained
+the last byte of any previous read, and left the failing read's first byte
+untouched. The actual 22,374-byte shared-window image uses three reads; an
+independent fault test injected each of those failures with the same
+observations. The original disk and payload hashes remained unchanged.
+The no-fault shared session again passed all eight hosted checkpoints and
+matched the Mac in eight state/pixel checkpoints plus replay.
+
+Exact commands and results are in
+`C:/Repos/.task-temp/pc286-hard-disk-loader-20261114-e/report.json`,
+`C:/Repos/.task-temp/pc286-hard-disk-session-failures-20261114-c/report.json`,
+`C:/Repos/.task-temp/pc286-shared-hard-disk-20261114-d/report.json`, and
+`C:/Repos/.task-temp/mac-pc286-hard-disk-parity-20261114-e/report.json`.
+The injector itself, its independently generated tests and partial-build
+limits are recorded in `C:/Repos/boothush/docs/pc286-hard-disk-fault-20261114.md`.
+These are synthetic built-in firmware failures, not physical controller tests.
 Firmware/geometry variation, boot drive selection, partitions, installation,
 failure recovery, full byte coverage, human input, physical trials and release
 qualification remain open.
