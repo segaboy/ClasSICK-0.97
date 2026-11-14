@@ -4,6 +4,12 @@
 
 Current policy amendment: [independent implementation and provenance](independent-implementation-20261114.md) supersedes conflicting earlier blanket emulator-source restrictions recorded below. The current [shared-window experiment](mac-pc286-shared-parity-20261114.md) reports eight matching modeled Mac/286 states, including a Windows-built source-matched Mac image and a 286 diagnostic with an optional payload check. It is not a production boot, release candidate or completed milestone. The dated direction-time status below is historical; the linked experiment and [Windows toolchain evidence](windows-m68k-toolchain-20261114.md) describe the newer modeled results and remaining gates.
 
+A later bounded experiment boots the 286 diagnostic from a generated whole
+disk, and copies and verifies that diagnostic on a freshly generated blank
+model disk. This is progress on the disk path, not a production installer or
+physical-hardware result; the same [evidence](mac-pc286-shared-parity-20261114.md#whole-disk-286-diagnostic)
+records the open media, error-recovery, review and release gates.
+
 2026-11-14, SRC-0608. The owner pauses x64 work and replaces the PC x64 target of the next paired release with a native 286 target. The initially requested BootHush-only test environment, active BootHush and Not Super Tilt Bro work, evidence sharing, clean-room restrictions and separate release approvals continue. This direction supersedes ADR-0078's Mac/x64 pairing and the x64-specific part of paired-native-preview-2 for the next release; their historical records and published releases remain unchanged. It does not imply a release has been prepared or approved.
 
 The existing interactive-preview goal is retained: on each target a user can move an original cursor, drag and release one original window, and toggle its content once per press without trails. The same semantic sequence and original 512x342 logical image must match on both native targets. The 286 target begins with the already identified PC/AT 5170-class 6 MHz, 640 KiB and EGA profile; a keyboard-driven pointer is the documented initial input candidate, not yet an implemented or physically qualified replacement for a mouse. Its EGA output centers the unscaled logical canvas at (64,4) in 640x350. The input mapping, adapter, firmware/boot and exact media contracts must be reviewed and implemented before a release candidate can be asserted. No PC version, reduced-scope waiver, hard-disk installation claim or application compatibility claim is assigned here.

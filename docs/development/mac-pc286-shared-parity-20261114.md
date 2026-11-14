@@ -691,6 +691,46 @@ Exact commands and results are in
 The injector itself, its independently generated tests and partial-build
 limits are recorded in `C:/Repos/boothush/docs/pc286-hard-disk-fault-20261114.md`.
 These are synthetic built-in firmware failures, not physical controller tests.
+
+### Disposable-disk copy and boot experiment
+
+[SPEC-0108](../specifications/SPEC-0108-pc286-diagnostic-disk-copy.md),
+IMPL-0135 / TEST-0191. An original test guest on a newly generated floppy
+wrote the 45-sector prefix of the shared-window diagnostic image to a newly
+generated blank modeled fixed disk, read those bytes into a separate RAM
+region, and compared them. The host saved a new disk snapshot and verified its
+entire 21,411,840-byte SHA-256 was the intended
+`c44a7498c35a3340cf8a7ce93c2d689cf1a920599a4e60d862b7f6acc6890d8c`.
+A separate BootHush run booted that snapshot to the expected initial shared
+window state. No existing user media were modified.
+
+With newly added BootHush write-failure injection, a failed write reached `e1`
+and the saved disposable disk remained blank. A failed subsequent read reached
+`e2` after the completed write, and its snapshot matched the written disk:
+there is no rollback. A mutation of staged sector padding passed the guest's
+readback of its own input but produced a different full-disk hash, which the
+host identity control rejected. Commands, generated images, hashes, guest
+results and explicit limits are in
+`C:/Repos/.task-temp/pc286-diagnostic-install-20261114-b/report.json`.
+
+```powershell
+$py = 'C:/Users/segab/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/python.exe'
+$bh = 'C:/Repos/.task-temp/boothush-pc-hard-fault-twins-20261114-c/a/boothush.exe'
+& $py -B scripts/Test-BootHushPC286DiagnosticInstall.py --emulator $bh --session C:/Repos/.task-temp/pc286-shared-hard-disk-20261114-d --output C:/Repos/.task-temp/NEW-DIAGNOSTIC-INSTALL
+```
+
+That snapshot is byte-identical to the independently generated disk used in
+`C:/Repos/.task-temp/pc286-shared-hard-disk-20261114-e/report.json`, which
+passed all eight hosted checkpoints on the same BootHush executable. The Mac
+comparison and trace replay passed in
+`C:/Repos/.task-temp/mac-pc286-hard-disk-parity-20261114-f/report.json`. The
+full eight checkpoints were run on the independently generated identical image;
+only the initial boot was run directly on the saved copy. This remains a
+destructive whole-disk model experiment with no partitioning, filesystem,
+existing-media protection, error recovery, physical trial or production
+installer. Its modeled BIOS accepts this transfer across track boundaries;
+physical firmware behavior is not established.
+
 Firmware/geometry variation, boot drive selection, partitions, installation,
 failure recovery, full byte coverage, human input, physical trials and release
 qualification remain open.
