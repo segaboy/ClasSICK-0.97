@@ -212,3 +212,26 @@ See `C:/Repos/.task-temp/pc286-three-track-20261114-c` and run
 new output directory. This improves one diagnostic's startup contract; it does
 not establish general BIOS behavior, stack high-water, physical operation or
 a production loader.
+
+### Modeled stack observation
+
+The test-only loader can additionally fill the available near-data/stack gap
+with a chosen byte before switching to its new stack. The bounded eleven-key
+window sequence was run twice with different fill bytes (`5a` and `a5`) and
+the whole gap was inspected in two cold runs per fill. Both reached the same
+final frame as the uninstrumented sequence. The earliest changed offset was
+`0xfbde`, 1,056 bytes below initial SP `0xfffe`; 21,476 bytes between the BSS
+end `0xa7fa` and that offset remained at the fill value in each run. Both runs
+stopped at modeled cycle 56,238,947. This is an observed touched span for
+these inputs and emulator firmware, not a worst-case stack bound: writes equal
+to the fill byte can be invisible, untested paths may use more, and physical
+interrupt timing is not represented. It does not close the memory-budget gate.
+
+The images, full ranges, exact commands, hashes and results are retained in
+`C:/Repos/.task-temp/pc286-stack-window-20261114-a`; run
+`scripts/Test-BootHushPC286Stack.py --emulator $bh --pc-results`
+`C:/Repos/.task-temp/pc286-shared-session-20261114-k --output`
+`C:/Repos/.task-temp/NEW-STACK-TEST`. The associated loader regression is
+`C:/Repos/.task-temp/pc286-three-track-20261114-d`, with nine invalid inputs.
+The matching Mac replay receipt is
+`C:/Repos/.task-temp/mac-pc286-parity-20261114-g`.

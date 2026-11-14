@@ -23,7 +23,8 @@ def main():
             try:floppy(payload,entry)
             except ValueError:continue
             raise ValueError('invalid loader input accepted')
-        for kwargs in ({'bss_end':5},{'bss_end':0xf001},{'poison_bss':True}):
+        for kwargs in ({'bss_end':5},{'bss_end':0xf001},{'poison_bss':True},
+                       {'poison_stack':0x5a},{'bss_end':100,'poison_stack':256}):
             try:floppy(b'abcdef',0,**kwargs)
             except ValueError:continue
             raise ValueError('invalid BSS range accepted')
@@ -88,7 +89,7 @@ def main():
                 (out/f'{label}-{run}.json').write_text(json.dumps({'command':cmd,'result':data},indent=2)+'\n',encoding='utf-8')
             cases.append({'name':label,'bss_bytes':end-len(payload),'value':value,'floppy_sha256':before})
         report={'status':'pass','boothush_sha256':sha(exe),'max_payload':MAX_PAYLOAD,
-                'invalid_inputs_rejected':7,'cases':cases,
+                'invalid_inputs_rejected':9,'cases':cases,
                 'limits':'Diagnostic floppy; not a production bootloader, install, or physical test.'}
         (out/'report.json').write_text(json.dumps(report,indent=2)+'\n',encoding='utf-8')
         print(json.dumps(report,indent=2));return 0

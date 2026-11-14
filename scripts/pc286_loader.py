@@ -13,7 +13,7 @@ TRACKS=((14,0x0002,0x0000,0),(15,0x0001,0x0100,14*SECTOR),
 MAX_PAYLOAD=44*SECTOR
 FLOPPY_BYTES=1228800
 
-def floppy(payload,entry,*,bss_end=None,poison_bss=False):
+def floppy(payload,entry,*,bss_end=None,poison_bss=False,poison_stack=None):
     if not isinstance(payload,bytes):raise TypeError('payload must be bytes')
     sectors=(len(payload)+SECTOR-1)//SECTOR
     if not 1<=len(payload)<=MAX_PAYLOAD or not 0<=entry<len(payload):
@@ -21,6 +21,8 @@ def floppy(payload,entry,*,bss_end=None,poison_bss=False):
     if bss_end is not None and (not isinstance(bss_end,int) or not len(payload)<=bss_end<=0xf000):
         raise ValueError('BSS end outside diagnostic near-data bounds')
     if poison_bss and bss_end is None:raise ValueError('BSS poison requires a BSS range')
+    if poison_stack is not None and (bss_end is None or not isinstance(poison_stack,int) or not 0<=poison_stack<=255):
+        raise ValueError('stack poison requires a BSS range and a byte')
     # Read each bounded track into 1000:0000; on any failure emit EE.
     code=bytearray.fromhex('fa31c08ed0bc007c8ed8fbb800108ec0')
     if poison_bss and bss_end>len(payload):
@@ -39,6 +41,10 @@ def floppy(payload,entry,*,bss_end=None,poison_bss=False):
         # alignment padding explicitly; never assume power-on RAM is zero.
         code+=bytes.fromhex('b80010 8ec0 fc bf')+struct.pack('<H',len(payload))
         code+=b'\xb9'+struct.pack('<H',bss_end-len(payload))+bytes.fromhex('30c0 f3aa')
+    if poison_stack is not None:
+        # Diagnostic instrumentation only; the bootstrap still uses SS=0.
+        code+=bytes.fromhex('b80010 8ec0 fc bf')+struct.pack('<H',bss_end)
+        code+=b'\xb9'+struct.pack('<H',0xfffe-bss_end)+b'\xb0'+bytes([poison_stack])+bytes.fromhex('f3aa')
     code+=bytes.fromhex('fab800108ed88ed0bcfefffbea')+struct.pack('<HH',entry,0x1000)
     failure=len(code);code+=bytes.fromhex('b0eee680ebfe')
     for at in branches:
