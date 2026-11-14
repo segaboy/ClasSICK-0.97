@@ -62,3 +62,10 @@ experiment while this toolchain route was investigated. Its tests and rejected
 change are recorded in `C:/Repos/Not-Super-Tilt-Bro/docs/mouse-title-evidence.md`.
 The result is a BootHush-model observation and is not a ClasSICK hardware
 specification or release result; game code was not transferred.
+
+The port subsequently used BootHush's mouse witness to count multiple modeled
+phase changes between successive SCC-A reads during its fast-input case. See
+the port's same evidence record for identities, controls and limitations.
+That event-count technique may be applied to a source-matched ClasSICK ROM
+once available; neither its game-specific addresses nor its observations are
+admitted as physical hardware behavior.
