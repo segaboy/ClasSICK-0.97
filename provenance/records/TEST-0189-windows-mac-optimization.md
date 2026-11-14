@@ -10,3 +10,8 @@ These are bounded model tests, not physical performance or release readiness.
 Five-million-cycle startup sampling and a separate stop-on-stage run observed
 the `-O2` profile reaching its ready stage earlier in this model; the latter
 is an instruction-boundary observation, not a physical-performance claim.
+
+The later modeled VBL-guard comparison kept `-Os` and tried four guard values
+at the faster input schedule; all failed at the first movement checkpoint.
+The slower schedule passed with guard zero. Exact conditions and retained
+failure records are in the same evidence; no physical speed claim follows.

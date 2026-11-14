@@ -170,3 +170,34 @@ outcome above; it does not prove real-hardware timing. Commands, capture data,
 source/manifest hashes and stages are in
 `C:/Repos/.task-temp/mac-os-startup-20261114-b` and
 `C:/Repos/.task-temp/mac-o2-startup-20261114-b`.
+
+### Modeled VBL guard comparison
+
+The paired runner accepts an explicit `--vbl-guard` so the input bridge's
+guard can be compared without changing guest code. Failed runs retain their
+exact emulator command, output and first failed assertion in the fresh output
+directory; a pre-existing output directory is never used for that failure
+record. On BootHush SHA-256
+`370f7a12a31bed9908813686a0cbd6bb197065b5e5d3e443fc48ad843e69f28d`,
+the same source-matched Mac ROM and 286 hard-disk session were tested at
+2,048 modeled cycles per edge. At the title checkpoint, all four guards
+failed the expected pointer `(256,75)`:
+
+| VBL guard cycles | Observed pointer | Guest-reported omissions |
+| --- | --- | --- |
+| 0 | (256,189) | 76 |
+| 1,024 | (256,191) | 74 |
+| 2,048 | (256,185) | 74 |
+| 4,096 | (256,188) | 73 |
+
+At 4,096 cycles per edge and guard zero, all eight paired checkpoints and
+mouse replay passed. The output directories are
+`C:/Repos/.task-temp/mac-vblguard-GUARD-edgeEDGE-20261114-b`, substituting
+the table values and `2048`, or `0` and `4096` for the passing case. The four
+failure records contain `command.json`, `run.log` and `error.txt`; later
+checkpoints were not evaluated after the first assertion failure. The passing
+run's four Mac-manifest and four media-admission negative controls are in
+`C:/Repos/.task-temp/mac-guard-admission-20261114-a` and
+`C:/Repos/.task-temp/mac-guard-media-admission-20261114-a`.
+Changing the modeled guard did not resolve this fast-input case; these few
+schedules are not a physical speed threshold or a sole-cause diagnosis.

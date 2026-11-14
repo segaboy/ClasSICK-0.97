@@ -38,7 +38,9 @@ def main():
     p.add_argument('--emulator',required=True,type=Path);p.add_argument('--mac-rom',required=True,type=Path)
     p.add_argument('--pc-results',required=True,type=Path);p.add_argument('--output',required=True,type=Path)
     p.add_argument('--mac-manifest',type=Path,help='source-matched experimental Mac build manifest')
-    p.add_argument('--edge-cycles',type=int,help='optional modeled mouse edge interval');a=p.parse_args()
+    p.add_argument('--edge-cycles',type=int,help='optional modeled mouse edge interval')
+    p.add_argument('--vbl-guard',type=int,help='optional modeled VBL guard in cycles');a=p.parse_args()
+    created=False
     try:
         exe=a.emulator.resolve(strict=True);rom=a.mac_rom.resolve(strict=True);pc=a.pc_results.resolve(strict=True);out=a.output.resolve()
         if out==ROOT or ROOT in out.parents:raise ValueError('output must be outside the repository')
@@ -78,13 +80,15 @@ def main():
         cases=NATURAL_CASES if natural else CASES;events=NATURAL_EVENTS if natural else EVENTS
         stop=cases[-1][1]
         oracle=module('compositor',ROOT/'scripts/Test-BootHushPC286SharedCompositor.py')
-        out.mkdir(parents=True,exist_ok=False);series_path=out/'mac.pbmseq';trace=out/'mac.bhmouse'
+        out.mkdir(parents=True,exist_ok=False);created=True;series_path=out/'mac.pbmseq';trace=out/'mac.bhmouse'
         cmd=[str(exe),'--machine','mac128k','--rom',str(rom),'--cycles',str(stop),'--timeout-ms','20000',
              '--mouse-dcd-invert','3','--mouse-record',str(trace),'--capture-series',str(series_path),
              '--capture-memory',hex(start)+':'+str(end-start)]
         if a.edge_cycles is not None:cmd+=['--mouse-edge-cycles',str(a.edge_cycles)]
+        if a.vbl_guard is not None:cmd+=['--mouse-vbl-guard',str(a.vbl_guard)]
         for _,cycle,*_ in cases:cmd+=['--capture-cycle',str(cycle)]
         for event in events:cmd+=['--window-mouse',event]
+        (out/'command.json').write_text(json.dumps(cmd,indent=2)+'\n',encoding='utf-8')
         result=subprocess.run(cmd,capture_output=True,text=True,timeout=25,creationflags=getattr(subprocess,'CREATE_NO_WINDOW',0))
         (out/'run.log').write_text(result.stdout+'\n--- stderr ---\n'+result.stderr,encoding='utf-8')
         if result.returncode:raise ValueError('Mac run failed; see run.log')
@@ -145,14 +149,16 @@ def main():
                  'parity_script_sha256':sha(Path(__file__)),
                  'pc_payload_sha256':report['payload_sha256'],'pc_media_sha256':media_sha,'pc_media':media,
                  'pc_runtime_library_sha256':report['runtime_library_sha256'],'events':events,'natural_start':natural,
-                 'requested_edge_cycles':a.edge_cycles,
+                 'requested_edge_cycles':a.edge_cycles,'requested_vbl_guard':a.vbl_guard,
                  'mouse':data['mouse'],'checkpoints':observations,'mac_replay_cycle_memory_frames_match':True,
                  'limits':'Injected Mac window messages and scheduled 286 keyboard; no hardware, human, production boot or release claim.'}
         if media=='floppy':summary['pc_floppy_sha256']=media_sha
         (out/'report.json').write_text(json.dumps(summary,indent=2)+'\n',encoding='utf-8')
-        (out/'command.json').write_text(json.dumps(cmd,indent=2)+'\n',encoding='utf-8')
         print(json.dumps(summary,indent=2));return 0
     except (OSError,ValueError,KeyError,subprocess.TimeoutExpired) as exc:
+        if created:
+            try:(out/'error.txt').write_text(str(exc)+'\n',encoding='utf-8')
+            except OSError:pass
         print('Mac/286 parity test failed: '+str(exc),file=sys.stderr);return 1
 
 if __name__=='__main__':sys.exit(main())
