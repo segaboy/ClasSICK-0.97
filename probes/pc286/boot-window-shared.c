@@ -5,6 +5,7 @@
 #include "../../arch/i286/c16.h"
 #include "../../apps/window-scene/input.h"
 #include "../../platform/pc286/ega-mono.h"
+#include "../../platform/pc286/keyboard-pointer.h"
 
 #if !defined(__WATCOMC__) || !defined(_M_I86)
 #error Requires the pinned 16-bit Open Watcom target
@@ -47,25 +48,25 @@ void start(void)
 {
     cs_surface surface;cs_cursor_state cursor;cs_cursor_token token;cs_cursor_bits bits;
     cs_cursor_art art;cs_window_config config;cs_product_state product;cs_window_input owner;
-    cs_pointer_sample sample;unsigned key,scan,count=0,button=0;int result,old_x,old_y;
+    cs_pointer_sample sample;cs_pc286_keyboard_pointer keyboard;
+    unsigned key,count=0;int result,old_x,old_y;
     config.x=80;config.y=70;config.width=224;config.height=144;config.title=18;
     product.value=97;product.inputs=0;product.progress=16;product.phases=6;product.success=1;product.pixels=0;
     if(cs_surface_init(&surface,canvas,sizeof(canvas),512,342,64,CS_SURFACE_MONO1_MSB)!=CS_SURFACE_OK)fail(0xe0);
     cs_window_cursor_bits_init(&bits);art.bits=&bits;art.width=15;art.height=15;art.hot_x=7;art.hot_y=7;
     if(cs_cursor_init(&cursor)!=CS_CURSOR_OK || cs_cursor_bind(&cursor,&surface,saved,sizeof(saved),&token)!=CS_CURSOR_OK)fail(0xe1);
     if(cs_window_input_begin(&owner,&cursor,token,&art,&config,&product,0)!=CS_WINDOW_INPUT_OK)fail(0xe2);
+    if(!cs_pc286_keyboard_pointer_begin(&keyboard))fail(0xe6);
 #ifdef CS_P286_PREPOSITION_TEST
     sample.dx=-156;sample.dy=-91;sample.buttons=0;
     result=cs_window_input_sample(&owner,&sample);
     if(result!=CS_WINDOW_INPUT_OK && result!=CS_WINDOW_INPUT_CHANGED)fail(0xe3);
 #endif
-    video_mode();white_display();present(0,0,512,342);publish(&owner,count,button);post(0xb0);
+    video_mode();white_display();present(0,0,512,342);publish(&owner,count,keyboard.held);post(0xb0);
     for(;;) {
-        key=read_key();scan=key>>8;sample.dx=0;sample.dy=0;
-        if(scan==0x4b)sample.dx=-16;else if(scan==0x4d)sample.dx=16;
-        else if(scan==0x48)sample.dy=-16;else if(scan==0x50)sample.dy=16;
-        else if((key&0xffu)==0x20u)button^=1u;else continue;
-        sample.buttons=button;old_x=(int)owner.pointer.x;old_y=(int)owner.pointer.y;
+        key=read_key();
+        if(!cs_pc286_keyboard_pointer_key(&keyboard,(uint16_t)key,&sample))continue;
+        old_x=(int)owner.pointer.x;old_y=(int)owner.pointer.y;
 #ifdef CS_P286_TIMING_MARKERS
         post((unsigned char)(0xc0u+count));
 #endif
@@ -84,6 +85,6 @@ void start(void)
 #ifdef CS_P286_TIMING_MARKERS
         post((unsigned char)(0xe0u+count));
 #endif
-        ++count;publish(&owner,count,button);post((unsigned char)(0xb0u+(count&0x3fu)));
+        ++count;publish(&owner,count,keyboard.held);post((unsigned char)(0xb0u+(count&0x3fu)));
     }
 }

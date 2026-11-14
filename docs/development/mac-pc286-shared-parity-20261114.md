@@ -411,3 +411,30 @@ and 1,271,624 shared-sample cycles in
 marker overhead and is not a physical timing result. Provenance, source-matched
 Mac builds, remaining input cases, stack worst case, human/physical reviews,
 production loader and release gates remain open.
+
+## Reusable keyboard pointer mapping
+
+The 286 diagnostic now calls `platform/pc286/keyboard-pointer.c`; its
+[SPEC-0102](../specifications/SPEC-0102-pc286-keyboard-pointer.md) separates
+the key-word mapping from BIOS delivery. The mapping keeps the existing
+16-pixel arrow steps and Space toggle. The caller owns state and failure
+handling. Space toggles on every delivered event; the BIOS-level fixture does
+not distinguish a real release from typematic repeat and therefore does not
+establish the milestone's once-per-physical-press behavior.
+
+The independent hosted test exhaustively checks all 65,536 key words for both
+held states, unknown-key atomicity, invalid state and null refusals: 131,072
+key/state combinations pass. Build with the same `$cc` flags above, replacing
+the two source arguments with `tests/pc286-keyboard-pointer.c` and
+`platform/pc286/keyboard-pointer.c`, then run the resulting new executable.
+
+The 21,164-byte runtime-free 286 payload SHA-256 is
+`a46ae6c33f15dbb97927e71d4712b1e67080cf132f8825a951db79a3ee82550a`;
+test floppy SHA-256 is
+`131295a95ba9e14d481608cae4b6cbff6db0f8ca9a920f36a62e58b8fcaadf28`.
+Eight natural-start 286 checkpoints, the Mac comparison and trace replay pass
+in `C:/Repos/.task-temp/pc286-input-platform-session-20261114-a` and
+`C:/Repos/.task-temp/mac-pc286-input-platform-20261114-a`. The EGA edge and
+mutation tests also pass in `C:/Repos/.task-temp/pc286-input-platform-edges-20261114-a`.
+These are scheduled emulator inputs; the production input, responsiveness,
+source-matched Mac build, hardware, human and release gates remain open.
