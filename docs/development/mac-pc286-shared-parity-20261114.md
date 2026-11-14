@@ -577,6 +577,17 @@ state/pixel checkpoints in
 small enough not to invoke the fourth track; the generated maximum-length
 fixture exercises that read. Hardware and release requirements remain open.
 
+The later four-track run additionally injects a separate BIOS read failure at
+each track start (`0:0:2`, `0:1:1`, `1:0:1`, `1:1:1`). In all four cases
+BootHush reports the requested injected failure and the loader reaches `ee`
+without executing the payload. For later tracks, the last byte of the prior
+track remains loaded while the first byte of the failing track stays zero;
+the input image hash remains unchanged. Full commands, image identities and
+observations are in `C:/Repos/.task-temp/pc286-loader-failures-20261114-b`.
+The first harness attempt in sibling `-a` stopped on a test-script variable
+error before failure injection and is preserved. These are modeled failure
+cases, not a physical BIOS or production-loader qualification.
+
 ### Natural-start stack observation
 
 The stack runner now follows the input mode and starting point in the source

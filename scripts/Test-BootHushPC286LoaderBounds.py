@@ -64,10 +64,34 @@ def main():
     response=json.loads(result.stdout)
     assert response['status']=='condition_met' and bytes.fromhex(response['memory']['bytes'])!=payload[offset:]
     assert sha(image.read_bytes())==sha(mutant)
+    short_cmd,short_response=cmd,response
+    # Inject failure at each of the four bounded track reads. Previously read
+    # bytes remain, the failing track is not read, and the payload is not run.
+    image=root/('payload-%d.img'%MAX_PAYLOAD);image_sha=sha(image.read_bytes());failures=[]
+    for chs,offset in (('0:0:2',0),('0:1:1',14*512),('1:0:1',29*512),('1:1:1',44*512)):
+        addresses=([0x10000+offset-1] if offset else [])+[0x10000+offset]
+        cmd=[str(exe),'--machine','pc286','--floppy',str(image),'--cycles','8000000',
+             '--timeout-ms','20000','--fail-floppy-read',chs,'--until-post','0xee']
+        for address in addresses:cmd+=['--inspect',hex(address)+':1']
+        result=subprocess.run(cmd,capture_output=True,text=True,timeout=25,
+                              creationflags=getattr(subprocess,'CREATE_NO_WINDOW',0))
+        if result.returncode:raise RuntimeError(result.stdout+result.stderr)
+        response=json.loads(result.stdout)
+        rows=response.get('memory_ranges',[]) if len(addresses)>1 else [response.get('memory',{})]
+        assert response['status']=='condition_met' and response['post']==0xee
+        fault=response['floppy_read_failure']
+        assert fault['injected']==1 and fault['bios_status']==32
+        assert [fault[x] for x in ('cylinder','head','sector')]==[int(x) for x in chs.split(':')]
+        assert [row['address'] for row in rows]==addresses
+        actual=[bytes.fromhex(row['bytes'])[0] for row in rows]
+        assert actual==([payload[offset-1],0] if offset else [0])
+        assert sha(image.read_bytes())==image_sha
+        failures.append({'chs':chs,'command':cmd,'result':response})
     report={'status':'pass','emulator_sha256':sha(exe.read_bytes()),'cases':reports,
             'source_sha256':{p.name:sha(p.read_bytes()) for p in
                              (Path(__file__),Path(__file__).with_name('pc286_loader.py'))},
-            'short_read_control':{'floppy_sha256':sha(mutant),'command':cmd,'result':response},
+            'short_read_control':{'floppy_sha256':sha(mutant),'command':short_cmd,'result':short_response},
+            'injected_track_failures':failures,
             'limits':'Diagnostic BIOS reads in BootHush only; no production loader or physical claim.'}
     (root/'report.json').write_text(json.dumps(report,indent=2)+'\n',encoding='utf-8')
     print(json.dumps(report,indent=2))

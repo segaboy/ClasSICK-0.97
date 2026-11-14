@@ -84,6 +84,7 @@ def main():
     mode.add_argument('--selected-drawing',action='store_true',help='Build the SPEC-0047 direct native two-port candidate')
     mode.add_argument('--outline-drawing',action='store_true',help='Build the SPEC-0049 paired native outline preview')
     mode.add_argument('--window-drawing',action='store_true',help='Build the SPEC-0072 native Mac window preview')
+    p.add_argument('--window-optimize-speed',action='store_true',help='Experimental -O2 window build instead of -Os')
     p.add_argument('--window-keyboard-probe',action='store_true',help='Experimental polled M0110 keyboard on the native window profile')
     p.add_argument('--window-idle-probe',action='store_true',help='Diagnostic: halt in a self-branch after >=500 services; window profile only')
     p.add_argument('--window-pending-defer-probe',action='store_true',help='Experimental one-service pending-edge defer; window profile only')
@@ -106,6 +107,7 @@ def main():
     p.add_argument('--window-wait-latch-probe',action='store_true',help='Experimental pending check before baseline publication')
     p.add_argument('--dcd-invert',type=int,choices=(0,1,2,3),default=0,help='Unverified raw RR0 DCD sense mask; window profile only')
     a=p.parse_args()
+    if a.window_optimize_speed and not a.window_drawing:p.error('--window-optimize-speed requires --window-drawing')
     if a.window_keyboard_probe and not a.window_drawing:p.error('--window-keyboard-probe requires --window-drawing')
     if a.window_timer_poll_probe and not a.window_drawing:p.error('--window-timer-poll-probe requires --window-drawing')
     if a.window_timer_poll_probe and (a.window_pending_defer_probe or a.window_phase_idle_probe or a.window_first_input_probe):p.error('Timer experiment cannot combine with SCC defer/phase/first-input experiments')
@@ -233,10 +235,12 @@ def main():
         if a.window_keyboard_probe:profile+='-keyboard-experiment';specification='SPEC-0100'
     if 'apps/product-scene/scene.c' in sources:
         headers+=('apps/product-scene/fixed-mono.h',)
+    if a.window_optimize_speed:profile+='-o2-experiment'
+    optimization='-O2' if a.window_optimize_speed else '-Os'
     profiles=[]
     for twin in ('a','b'):
-        folder=out/('Os-'+twin);folder.mkdir();objects=[]
-        flags=['-mcpu=68000','-Wa,-m68000','-Os','-std=c11','-ffreestanding','-fno-builtin',
+        folder=out/(optimization[1:]+'-'+twin);folder.mkdir();objects=[]
+        flags=['-mcpu=68000','-Wa,-m68000',optimization,'-std=c11','-ffreestanding','-fno-builtin',
          '-fno-pic','-fno-pie','-fno-common','-fno-stack-protector','-fno-unwind-tables',
          '-fno-asynchronous-unwind-tables','-fno-tree-loop-distribute-patterns','-fstack-usage',
          '-ffunction-sections','-fdata-sections','-Wall','-Wextra','-Werror','-Wconversion','-Wsign-conversion',
@@ -435,7 +439,7 @@ def main():
         stack_bound=sum(x['bytes'] for x in frames)+stack_margin
         if stack_bound>0x8000-0x2100:raise ValueError('Conservative native stack reserve exceeded: '+str(stack_bound))
         image=folder/'classick-loaded-app.rom';image.write_bytes(b)
-        profiles.append({'optimization':'-Os','image_sha256':hashlib.sha256(b).hexdigest(),'image_size':len(b),
+        profiles.append({'optimization':optimization,'image_sha256':hashlib.sha256(b).hexdigest(),'image_size':len(b),
          'rom_used':syms['__rom_end']-0x400000,'native_data_bss':syms['__bss_end']-0xB00,
          'workspace_begin':syms['__loaded_app_start'],'workspace_end':syms['__loaded_app_end'],
          'native_stack_base':0x2100,'native_stack_top':0x8000,'conservative_stack_bound':stack_bound,

@@ -133,3 +133,28 @@ implementation input. These Mac/286 results are headless emulator injection,
 not human or physical input. Production 286 boot, fast-input behavior,
 complete provenance and review, physical/human qualification, source-matched
 release packaging and separate owner publication approval remain open.
+
+### Optimization comparison
+
+The native window builder now offers the opt-in `--window-optimize-speed`
+experiment (`-O2`); the normal build remains `-Os`. With identical sources,
+toolchain, other flags and test schedules, both options produced matching ROM
+twins. The `-Os` control remained byte-identical to `6b622b2b...` and used
+48,008 bytes. The `-O2` ROM SHA-256 is
+`f76c37f793dfd2e2758471f7130a38d700d56a4e1158d66996ce5987c528d696`,
+using 59,044 bytes. Both passed all eight Mac/286 checkpoints and replay at
+4,096 modeled cycles per mouse edge. At 2,048, `-Os` failed the title state
+with pointer `(256,188)` and 73 omissions; `-O2` failed with `(256,183)` and
+81 omissions. These schedules and outcomes do not establish that one compiler
+option is generally slower, nor a physical threshold. The size-optimized
+profile remains the working candidate; neither profile closes fast-input or
+release qualification.
+
+Builds and manifests are `C:/Repos/.task-temp/mac-windows-o2-20261114-a` and
+`C:/Repos/.task-temp/mac-windows-os-speed-control-20261114-a`. The paired
+receipts are `C:/Repos/.task-temp/mac-o2-parity-4096-20261114-a` and
+`C:/Repos/.task-temp/mac-os-parity-4096-20261114-c`; failed faster runs and
+their logs are `C:/Repos/.task-temp/mac-o2-parity-2048-20261114-a` and
+`C:/Repos/.task-temp/mac-os-parity-2048-20261114-b`. Four manifest rejection
+controls were rerun against the current `-Os` build in
+`C:/Repos/.task-temp/mac-os-admission-20261114-b`.
