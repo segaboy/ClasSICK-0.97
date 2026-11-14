@@ -622,6 +622,32 @@ The first parity invocation used an incorrect manifest path and stopped before
 running a guest. These tests establish neither physical reliability nor a
 production disk format, boot path, human input qualification or release.
 
+### Scheduled-input accounting
+
+The shared-session runner now requires the BootHush `pc_keyboard_input`
+result for runs with scheduled scancodes. It checks that no byte was rejected,
+the bytes needed for the observed checkpoint were accepted, and the accepted
+and pending totals account for the schedule. A stop can precede an optional
+trailing repeat or break, so pending input is recorded rather than assumed
+delivered. Acceptance is into the emulator model; the separate guest state
+and pixel assertions establish the observed behavior, not human or physical
+input. The prior BootHush executable does not emit this field; use the new
+interface described in `C:/Repos/boothush/docs/pc286-input-accounting-20261114.md`.
+
+On BootHush SHA-256
+`62daf36a8d1e034667fbd73dd09a2a6134a6a0144ea56010d327b41fd110d9da`,
+the checked 286 payload and all eight hosted state/pixel comparisons passed;
+at the final checkpoint, 63 of 63 scheduled bytes were model-accepted and
+none were rejected or pending. The exact build and results are in
+`C:/Repos/.task-temp/pc286-input-accounting-session-20261114-b/report.json`.
+The matching Mac/286 state and pixel comparison and Mac replay passed at
+4,096 modeled cycles per edge in
+`C:/Repos/.task-temp/mac-pc286-input-accounting-parity-20261114-b/report.json`.
+The BootHush executable was rebuilt from a fresh CLI object linked to recorded
+existing core objects, not a source-complete or distribution-qualified build.
+These results do not close the production boot, fast mouse, physical, human,
+provenance, or release gates.
+
 ### Natural-start stack observation
 
 The stack runner now follows the input mode and starting point in the source

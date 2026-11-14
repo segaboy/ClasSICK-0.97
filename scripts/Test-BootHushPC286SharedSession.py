@@ -134,6 +134,7 @@ def main():
             frame=out/(name+'.ppm');pbm=out/(name+'.pbm')
             cmd=[exe,'--machine','pc286','--floppy',image,'--cycles','100000000','--timeout-ms','20000',
                  '--until-post',hex(0xb0+count),'--inspect','0x60000:17','--frame',frame]
+            scheduled=0;required_accepted=0
             for n,code in enumerate(keys[:count]):
                 cycle=6000000+n*5000000
                 if a.raw_keyboard and code==0x29:
@@ -142,6 +143,11 @@ def main():
                 elif a.raw_keyboard:
                     sequence=((cycle,0xe0),(cycle+1000,code),(cycle+100000,0xe0),(cycle+101000,0xf0),(cycle+102000,code))
                 else:sequence=((cycle,code),(cycle+100000,0xf0),(cycle+101000,code))
+                scheduled+=len(sequence)
+                # A POST at the resulting state can precede a trailing repeat
+                # or break. The make (and its prefix) must already be accepted.
+                trailing=(1 if code==0x29 and n in (6,13) else 0) if a.raw_keyboard and code==0x29 else (3 if a.raw_keyboard else 2)
+                required_accepted=scheduled-trailing
                 for when,value in sequence:
                     cmd+=['--scancode',f'{when}:{value}']
             result=json.loads(h.run(cmd,out,env,out/(name+'-boot.log')))
@@ -149,6 +155,12 @@ def main():
             if (result.get('status')!='condition_met' or result.get('post')!=0xb0+count or
                 bytes.fromhex(result['memory']['bytes'])!=expected or h.digest(image)!=before):
                 raise ValueError(name+': guest state mismatch or changed input')
+            if scheduled:
+                delivery=result.get('pc_keyboard_input')
+                if (not delivery or delivery.get('scheduled')!=scheduled or delivery.get('rejected')!=0 or
+                    delivery.get('accepted',-1)<required_accepted or
+                    delivery.get('accepted',-1)+delivery.get('pending',-1)!=scheduled):
+                    raise ValueError(name+': missing or inconsistent modeled keyboard delivery accounting')
             h.run([hostexe,('n'+str(count)) if a.natural_start else str(count),pbm],out,env,out/(name+'-host.log'))
             oracle.compare(pbm.read_bytes(),frame.read_bytes(),margin_white=True)
             observations.append({'name':name,'guest_result':result,'host_pbm_sha256':h.digest(pbm),
