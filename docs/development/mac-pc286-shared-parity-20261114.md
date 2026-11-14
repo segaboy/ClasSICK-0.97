@@ -546,3 +546,25 @@ That ROM predates the current source; a source-matched Mac build, provenance
 and code review, production boot, physical and human checks, and the separate
 release decision remain open. None of these emulator tests establishes physical
 controller behavior or release qualification.
+
+## Four-track diagnostic loader
+
+The existing test-only floppy loader now reads a fourth bounded track, raising
+its payload ceiling from 22,528 to 30,208 bytes; this provides room for the
+experimental 22,374-byte interactive diagnostic to grow. This is not a
+production loader or an installer. [SPEC-0105](../specifications/SPEC-0105-pc286-diagnostic-loader.md)
+records the exact geometry and limitations.
+
+On BootHush executable SHA-256
+`5d4f610e98cbb8b03476f28929d6e5c0f64b941aafac3c7d5b6ef12c76c7eeb3`,
+`scripts/Test-BootHushPC286LoaderBounds.py` generated payloads of 22,528,
+22,529 and 30,208 bytes, inspected data across track boundaries and at the
+end, and rejected 30,209 bytes. A separate mutated image with only 14 sectors
+in the final read failed its last-sector comparison as expected. Media hashes,
+commands, source hashes and observations are in
+`C:/Repos/.task-temp/pc286-loader-four-track-20261114-b/report.json`.
+The existing raw-keyboard interactive session still passes its eight 286
+state/pixel checkpoints in
+`C:/Repos/.task-temp/pc286-four-track-regression-20261114-a`. This payload is
+small enough not to invoke the fourth track; the generated maximum-length
+fixture exercises that read. Hardware and release requirements remain open.

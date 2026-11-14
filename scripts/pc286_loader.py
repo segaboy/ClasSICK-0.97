@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # SPDX-License-Identifier: GPL-3.0-or-later
 # Copyright (C) 2026 Dean Howell.
-"""Original three-track diagnostic loader for an already linked 286 payload.
+"""Original four-track diagnostic loader for an already linked 286 payload.
 
 This builds test media only. It is not a production loader or installer.
 """
@@ -9,8 +9,8 @@ import struct
 
 SECTOR=512
 TRACKS=((14,0x0002,0x0000,0),(15,0x0001,0x0100,14*SECTOR),
-        (15,0x0101,0x0000,29*SECTOR))
-MAX_PAYLOAD=44*SECTOR
+        (15,0x0101,0x0000,29*SECTOR),(15,0x0101,0x0100,44*SECTOR))
+MAX_PAYLOAD=59*SECTOR
 FLOPPY_BYTES=1228800
 
 def floppy(payload,entry,*,bss_end=None,poison_bss=False,poison_stack=None):
