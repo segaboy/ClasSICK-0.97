@@ -182,3 +182,33 @@ for `--runtime-library` in the shared-session command above. Use the same
 `--tool-root`, `--assembler`, `--emulator` and a fresh `--output` for
 `scripts/Test-BootHushPC286Arithmetic.py` and
 `scripts/Test-BootHushPC286SurfaceValidate.py`.
+
+## Explicit uninitialized-data startup
+
+The prior diagnostic loader did not explicitly clear the linked BSS and could
+therefore accidentally rely on BootHush's initial RAM state. Its new optional
+bounded startup clear starts after the initialized payload and ends at the
+linked BSS end. It leaves at least 4,094 bytes below the initial stack pointer;
+that bound is a guard, not a measured stack requirement or a complete memory
+budget. A test-only option first poisons this range before loading. The window
+runner reads the actual BSS bounds from its link map and now hashes the loader
+and relevant test scripts along with the sources.
+
+The unchanged 21,066-byte original-helper payload has SHA-256
+`a7e808a78eb2f413806cb71e868b1ffe6316891304245b95a8f47d4dfe82db1b`.
+Its poisoned-then-cleared test floppy SHA-256 is
+`949545f33c73fc54773fb4f4d15228ed384cb86be1712d8298dab0565ac88ae9`;
+its BSS starts at offset 21,066 and spans 21,936 bytes. Seven hosted/286
+comparisons and seven Mac/286 comparisons with replay pass; exact receipts
+are `C:/Repos/.task-temp/pc286-shared-session-20261114-j` and
+`C:/Repos/.task-temp/mac-pc286-parity-20261114-f`.
+
+The independent loader regression checks every byte of a 21,994-byte poisoned
+range after clearing and a deliberately mutated clear that leaves it at `a5`;
+both distinguishable outcomes, eight payload sizes, an injected third-read
+failure and seven invalid arguments pass. The input images remain unchanged.
+See `C:/Repos/.task-temp/pc286-three-track-20261114-c` and run
+`scripts/Test-BootHushPC286ThreeTrack.py` with the recorded executable and a
+new output directory. This improves one diagnostic's startup contract; it does
+not establish general BIOS behavior, stack high-water, physical operation or
+a production loader.

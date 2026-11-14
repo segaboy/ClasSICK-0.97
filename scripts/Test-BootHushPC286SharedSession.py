@@ -67,8 +67,13 @@ def main():
         used=sorted(set(re.findall(r'clibs\.lib\(([^)]+)\)',text,re.I)))
         if not entry or used!=(['i4d','i4m'] if lib else []):
             raise ValueError('unexpected link entry or runtime module set')
+        bss=re.search(r'^_BSS\s+BSS\s+DGROUP\s+([0-9a-fA-F]+)\s+([0-9a-fA-F]+)',text,re.M)
+        if not bss:raise ValueError('missing linked BSS bounds')
+        bss_start,bss_size=(int(x,16) for x in bss.groups());bss_end=bss_start+bss_size
+        if bss_start<binary.stat().st_size:raise ValueError('BSS overlaps initialized payload')
         image=out/'session.img'
-        with image.open('xb') as f:f.write(floppy(binary.read_bytes(),int(entry.group(1),16)))
+        with image.open('xb') as f:f.write(floppy(binary.read_bytes(),int(entry.group(1),16),
+                                                 bss_end=bss_end,poison_bss=True))
         before=h.digest(image);hostexe=out/'host-sequence.exe'
         h.run([cc,'-std=c11','-O2','-Wall','-Wextra','-Werror','-DCLASSICK_PRODUCT_ROM_CACHE=0',
                host,*sources,'-o',hostexe],out,env,out/'host-build.log')
@@ -107,8 +112,12 @@ def main():
                 'host_compiler_sha256':h.digest(cc),'runtime_library_sha256':h.digest(lib) if lib else None,
                 'assembler_sha256':h.digest(assembler) if assembler else None,'runtime_modules':used,
                 'source_sha256':{str(x.relative_to(ROOT)).replace('\\','/'):h.digest(x) for x in
-                                 (*sources,guest,host,*((ROOT/'arch/i286/watcom-arithmetic.asm',) if assembler else ()))},
+                                 (*sources,guest,host,ROOT/'scripts/pc286_loader.py',
+                                  ROOT/'scripts/Test-BootHushPC286BankPlan.py',
+                                  ROOT/'scripts/Test-BootHushPC286SharedCompositor.py',Path(__file__),
+                                  *((ROOT/'arch/i286/watcom-arithmetic.asm',) if assembler else ()))},
                 'payload_bytes':binary.stat().st_size,'payload_sha256':h.digest(binary),'floppy_sha256':before,
+                'bss_start':bss_start,'bss_bytes':bss_size,'bss_poisoned_before_load':True,
                 'cases':observations,'floppy_unchanged':True,'pixel_mutations_rejected':2,
                 'limits':'Same-source hosted/286 scripted input; experimental helpers require review; no Mac boot, E3/E4 or physical claim.'}
         (out/'report.json').write_text(json.dumps(report,indent=2)+'\n',encoding='utf-8')

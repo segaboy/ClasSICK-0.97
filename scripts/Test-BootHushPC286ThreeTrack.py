@@ -23,6 +23,10 @@ def main():
             try:floppy(payload,entry)
             except ValueError:continue
             raise ValueError('invalid loader input accepted')
+        for kwargs in ({'bss_end':5},{'bss_end':0xf001},{'poison_bss':True}):
+            try:floppy(b'abcdef',0,**kwargs)
+            except ValueError:continue
+            raise ValueError('invalid BSS range accepted')
         out.mkdir(parents=True,exist_ok=False);cases=[]
         for size in (6,7168,7169,14848,14849,22016,22017,MAX_PAYLOAD):
             payload=bytes.fromhex('b0a4e680ebfe')+bytes((i*13+7)&255 for i in range(size-6))
@@ -55,8 +59,36 @@ def main():
                     (out/f'{label}-{run}.json').write_text(json.dumps({'command':cmd,'result':data},indent=2)+'\n',encoding='utf-8')
                 cases.append({'size':size,'third_track_failure':fail,'floppy_sha256':before,
                               'all_loaded_bytes_match':True,'floppy_unchanged':True})
+        # Poison the complete interval before loading, then verify that the
+        # bounded startup clear actually overwrites it. Mutate only the clear
+        # value for a control that must return the poison across the interval.
+        payload=bytes.fromhex('b0a4e680ebfe');end=22000
+        baseline=floppy(payload,0,bss_end=end,poison_bss=True)
+        clear=bytes.fromhex('30c0f3aa');assert baseline[:510].count(clear)==1
+        mutant=baseline.replace(clear,bytes.fromhex('b0a5f3aa'),1)
+        for label,image_bytes,value in (('bss-clear',baseline,0),('bss-mutant',mutant,0xa5)):
+            image=out/(label+'.img')
+            with image.open('xb') as f:f.write(image_bytes)
+            before=sha(image)
+            for run,start in enumerate(range(len(payload),end,16384)):
+                length=min(16384,end-start);cmd=[str(exe),'--machine','pc286','--floppy',str(image),
+                    '--cycles','8000000','--timeout-ms','20000','--until-post','0xa4'];ranges=[]
+                for offset in range(0,length,4096):
+                    n=min(4096,length-offset);address=0x10000+start+offset
+                    cmd+=['--inspect',f'{hex(address)}:{n}'];ranges.append((address,n))
+                result=subprocess.run(cmd,capture_output=True,text=True,timeout=25,
+                    creationflags=getattr(subprocess,'CREATE_NO_WINDOW',0))
+                if result.returncode:raise ValueError(label+': '+result.stdout+result.stderr)
+                data=json.loads(result.stdout)
+                rows=data.get('memory_ranges',[]) if len(ranges)>1 else [data.get('memory',{})]
+                if (data.get('status')!='condition_met' or data.get('post')!=0xa4 or len(rows)!=len(ranges)
+                    or sha(image)!=before or any(row.get('address')!=address or
+                    bytes.fromhex(row.get('bytes',''))!=bytes([value])*n for row,(address,n) in zip(rows,ranges))):
+                    raise ValueError(label+': BSS mismatch or changed image')
+                (out/f'{label}-{run}.json').write_text(json.dumps({'command':cmd,'result':data},indent=2)+'\n',encoding='utf-8')
+            cases.append({'name':label,'bss_bytes':end-len(payload),'value':value,'floppy_sha256':before})
         report={'status':'pass','boothush_sha256':sha(exe),'max_payload':MAX_PAYLOAD,
-                'invalid_inputs_rejected':4,'cases':cases,
+                'invalid_inputs_rejected':7,'cases':cases,
                 'limits':'Diagnostic floppy; not a production bootloader, install, or physical test.'}
         (out/'report.json').write_text(json.dumps(report,indent=2)+'\n',encoding='utf-8')
         print(json.dumps(report,indent=2));return 0

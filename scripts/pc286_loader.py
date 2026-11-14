@@ -13,13 +13,20 @@ TRACKS=((14,0x0002,0x0000,0),(15,0x0001,0x0100,14*SECTOR),
 MAX_PAYLOAD=44*SECTOR
 FLOPPY_BYTES=1228800
 
-def floppy(payload,entry):
+def floppy(payload,entry,*,bss_end=None,poison_bss=False):
     if not isinstance(payload,bytes):raise TypeError('payload must be bytes')
     sectors=(len(payload)+SECTOR-1)//SECTOR
     if not 1<=len(payload)<=MAX_PAYLOAD or not 0<=entry<len(payload):
         raise ValueError('payload or entry outside diagnostic loader bounds')
+    if bss_end is not None and (not isinstance(bss_end,int) or not len(payload)<=bss_end<=0xf000):
+        raise ValueError('BSS end outside diagnostic near-data bounds')
+    if poison_bss and bss_end is None:raise ValueError('BSS poison requires a BSS range')
     # Read each bounded track into 1000:0000; on any failure emit EE.
     code=bytearray.fromhex('fa31c08ed0bc007c8ed8fbb800108ec0')
+    if poison_bss and bss_end>len(payload):
+        # Test-only: establish nonzero initial memory before the BIOS reads.
+        code+=bytes.fromhex('fc bf')+struct.pack('<H',len(payload))+b'\xb9'+struct.pack('<H',bss_end-len(payload))
+        code+=bytes.fromhex('b0a5 f3aa')
     remaining=sectors;branches=[]
     for capacity,cx,dx,bx in TRACKS:
         count=min(remaining,capacity)
@@ -27,6 +34,11 @@ def floppy(payload,entry):
         code+=b'\xbb'+struct.pack('<H',bx)+b'\xb8'+bytes((count,2))
         code+=b'\xb9'+struct.pack('<H',cx)+b'\xba'+struct.pack('<H',dx)+bytes.fromhex('cd1372')
         branches.append(len(code));code.append(0);remaining-=count
+    if bss_end is not None and bss_end>len(payload):
+        # The last read may include sector padding. Clear all linked BSS and
+        # alignment padding explicitly; never assume power-on RAM is zero.
+        code+=bytes.fromhex('b80010 8ec0 fc bf')+struct.pack('<H',len(payload))
+        code+=b'\xb9'+struct.pack('<H',bss_end-len(payload))+bytes.fromhex('30c0 f3aa')
     code+=bytes.fromhex('fab800108ed88ed0bcfefffbea')+struct.pack('<HH',entry,0x1000)
     failure=len(code);code+=bytes.fromhex('b0eee680ebfe')
     for at in branches:
