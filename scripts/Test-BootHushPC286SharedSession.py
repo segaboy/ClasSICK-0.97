@@ -29,7 +29,8 @@ def main():
     p.add_argument('--host-cc',required=True,type=Path);p.add_argument('--emulator',required=True,type=Path)
     p.add_argument('--output',required=True,type=Path);p.add_argument('--timing-markers',action='store_true')
     p.add_argument('--natural-start',action='store_true',help='test the continuous sequence from the shared pointer initial position')
-    p.add_argument('--raw-keyboard',action='store_true',help='experimental translated set-1 make/break polling');a=p.parse_args()
+    p.add_argument('--raw-keyboard',action='store_true',help='experimental translated set-1 make/break polling')
+    p.add_argument('--irq-unmask-control',action='store_true',help='test-only unmask before taking IRQ1 ownership');a=p.parse_args()
     try:
         h=module('helpers',ROOT/'scripts/Test-BootHushPC286BankPlan.py')
         oracle=module('compositor',ROOT/'scripts/Test-BootHushPC286SharedCompositor.py')
@@ -39,6 +40,7 @@ def main():
         cc=a.host_cc.resolve(strict=True);exe=a.emulator.resolve(strict=True);out=a.output.resolve()
         if out==ROOT or ROOT in out.parents:raise ValueError('output must be outside the repository')
         if a.raw_keyboard and not a.natural_start:raise ValueError('raw keyboard test requires natural start')
+        if a.irq_unmask_control and not a.raw_keyboard:raise ValueError('IRQ control requires raw keyboard')
         if lib and h.digest(lib)!=oracle.LIB_SHA:raise ValueError('runtime library hash mismatch')
         if assembler:
             arith=module('arithmetic',ROOT/'scripts/Test-BootHushPC286Arithmetic.py')
@@ -60,6 +62,7 @@ def main():
             extra=(['-dCS_P286_TIMING_MARKERS'] if a.timing_markers and source==guest else [])
             if not a.natural_start and source==guest:extra+=['-dCS_P286_PREPOSITION_TEST']
             if a.raw_keyboard and source==guest:extra+=['-dCS_P286_RAW_KEYBOARD']
+            if a.irq_unmask_control and source==guest:extra+=['-dCS_P286_IRQ_TEST_UNMASK']
             h.run([wcc,*flags,*extra,'-fo='+str(obj),source],out,env,out/(obj.name+'.log'));objects.append(obj)
         if assembler:
             obj=out/'original-arithmetic.obj'
@@ -120,6 +123,19 @@ def main():
             observations.append({'name':name,'guest_result':result,'host_pbm_sha256':h.digest(pbm),
                                  'ega_ppm_sha256':h.digest(frame),'canvas_pixels_match':512*342,
                                  'margin_pixels_match':640*350-512*342})
+        irq_observation=None
+        if a.raw_keyboard:
+            cmd=[exe,'--machine','pc286','--floppy',image,'--cycles','10000000','--timeout-ms','20000',
+                 '--until-post','0xb0','--inspect','0x60011:6']
+            irq_result=json.loads(h.run(cmd,out,env,out/'irq-mask-boot.log'))
+            raw=bytes.fromhex(irq_result['memory']['bytes'])
+            if irq_result.get('status')!='condition_met' or len(raw)!=6:raise ValueError('missing IRQ observation')
+            before_flags,after_flags,before_mask,after_mask=struct.unpack('<HHBB',raw)
+            if (before_flags&0x200)!=(after_flags&0x200) or after_mask!=(before_mask|2):
+                raise ValueError('keyboard IRQ mask or interrupt-enable state changed unexpectedly')
+            if a.irq_unmask_control and before_mask&2:raise ValueError('IRQ control did not start unmasked')
+            irq_observation={'before_flags':before_flags,'after_flags':after_flags,
+                             'before_mask':before_mask,'after_mask':after_mask,'command':[str(x) for x in cmd]}
         # Prove the pixel comparison rejects one changed canvas pixel and one margin pixel.
         raw=(out/'initial.ppm').read_bytes();pbm=(out/'initial.pbm').read_bytes();header=len(b'P6\n640 350\n255\n')
         for x,y in ((100,100),(0,0)):
@@ -142,6 +158,8 @@ def main():
                 'timing_markers':a.timing_markers,
                 'natural_start':a.natural_start,
                 'raw_keyboard':a.raw_keyboard,
+                'irq_unmask_control':a.irq_unmask_control,
+                'irq_mask_observation':irq_observation,
                 'cases':observations,'floppy_unchanged':True,'pixel_mutations_rejected':2,
                 'limits':'Same-source hosted/286 scripted input; experimental helpers require review; no Mac boot, E3/E4 or physical claim.'}
         (out/'report.json').write_text(json.dumps(report,indent=2)+'\n',encoding='utf-8')

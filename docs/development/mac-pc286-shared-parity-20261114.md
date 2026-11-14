@@ -451,7 +451,7 @@ repeat control are in `C:/Repos/.task-temp/pc286-keyscan-host-20261114-a`;
 reproduce with `scripts/Test-PC286KeyboardScan.py --cc $cc --output` and a
 fresh output directory.
 
-The opt-in 286 raw fixture masks interrupts after BIOS video setup and polls
+The initial opt-in 286 raw fixture masked interrupts after BIOS video setup and polled
 controller ports. It assumes translated set 1 and stops on reported errors;
 no controller initialization, translation verification, interrupt coexistence
 or recovery is implemented. BootHush's own firmware configures translation
@@ -475,3 +475,21 @@ remains separately tested in `C:/Repos/.task-temp/pc286-bios-input-20261114-a`.
 Reproduce the raw fixture using the natural-start shared-session command plus
 `--raw-keyboard`, then the usual Mac parity runner. These are E2-style modeled
 events, not human or physical input, and the limitations in SPEC-0103 remain.
+
+The follow-up fixture masks only IRQ1 while preserving the other PIC mask bits
+and the prior interrupt-enable bit. In the normal BootHush setup the mask was
+`fe` before and after; a separate test first unmasked IRQ1 and observed
+`fc` become `fe`, with the interrupt-enable bit still set. All eight state and
+image checkpoints pass in both cases. The test-only control is not used in
+the normal image; neither run establishes physical interrupt coexistence or
+restoration of the original mask on exit.
+
+The current 21,904-byte raw diagnostic payload SHA-256 is
+`c29b81963e95dc4a7fa6326ccc75a89ac3a22999f9dbb9483f14ec84e31bf8b7`,
+and test floppy SHA-256 is
+`120f4a2a0b7db9857daa4f40a87d91d24571c4f43d718699eea7f0c2dc13e1f8`.
+The current receipts are `C:/Repos/.task-temp/pc286-raw-input-20261114-e`,
+`C:/Repos/.task-temp/pc286-irq-control-20261114-a`, and
+`C:/Repos/.task-temp/mac-pc286-raw-input-20261114-b`. The latter compares all
+eight Mac/286 checkpoints and replays the Mac trace. The original whole-
+interrupt-mask experiment remains preserved above as history.

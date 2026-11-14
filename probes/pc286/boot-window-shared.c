@@ -20,14 +20,32 @@ static void video_mode(void);
 static unsigned short read_key(void);
 #pragma aux read_key = "xor ah,ah" "int 16h" value [ax] modify [ax bx cx dx si di];
 #ifdef CS_P286_RAW_KEYBOARD
-static void mask_interrupts(void);
-#pragma aux mask_interrupts = "cli" modify exact [];
+static void mask_keyboard_irq(void);
+#pragma aux mask_keyboard_irq = "pushf" "cli" "in al,21h" "or al,02h" "out 21h,al" "popf" modify [ax];
+#ifdef CS_P286_IRQ_TEST_UNMASK
+static void test_unmask_keyboard_irq(void);
+#pragma aux test_unmask_keyboard_irq = "pushf" "cli" "in al,21h" "and al,0fdh" "out 21h,al" "popf" modify [ax];
+#endif
 static unsigned char key_status(void);
 #pragma aux key_status = "in al,64h" value [al] modify exact [];
 static unsigned char key_byte(void);
 #pragma aux key_byte = "in al,60h" value [al] modify exact [];
+static unsigned char irq_mask(void);
+#pragma aux irq_mask = "in al,21h" value [al] modify exact [];
+static unsigned short flags_word(void);
+#pragma aux flags_word = "pushf" "pop ax" value [ax] modify exact [];
 #endif
 static void fail(unsigned char value) { post(value); for (;;) { } }
+
+#ifdef CS_P286_RAW_KEYBOARD
+static void publish_irq(unsigned before_flags,unsigned after_flags,unsigned before_mask,unsigned after_mask)
+{
+    unsigned char __far *r=(unsigned char __far *)0x60000011UL;
+    r[0]=(unsigned char)before_flags;r[1]=(unsigned char)(before_flags>>8);
+    r[2]=(unsigned char)after_flags;r[3]=(unsigned char)(after_flags>>8);
+    r[4]=(unsigned char)before_mask;r[5]=(unsigned char)after_mask;
+}
+#endif
 
 static void white_display(void)
 {
@@ -59,7 +77,7 @@ void start(void)
     cs_cursor_art art;cs_window_config config;cs_product_state product;cs_window_input owner;
     cs_pointer_sample sample;
 #ifdef CS_P286_RAW_KEYBOARD
-    cs_pc286_set2_pointer keyboard;unsigned status;
+    cs_pc286_set2_pointer keyboard;unsigned status,flags_before,flags_after,mask_before,mask_after;
 #else
     cs_pc286_keyboard_pointer keyboard;unsigned key;
 #endif
@@ -82,9 +100,14 @@ void start(void)
 #endif
     video_mode();white_display();present(0,0,512,342);
 #ifdef CS_P286_RAW_KEYBOARD
-    /* Experimental polling owns the keyboard stream and stops BIOS IRQs.
-     * Translated set-1 controller output is an explicit precondition. */
-    mask_interrupts();
+    /* Experimental polling owns IRQ1; other interrupt mask bits and the
+     * prior interrupt-enable state are preserved. Set-1 is a precondition. */
+#ifdef CS_P286_IRQ_TEST_UNMASK
+    test_unmask_keyboard_irq();
+#endif
+    flags_before=flags_word();mask_before=irq_mask();mask_keyboard_irq();
+    flags_after=flags_word();mask_after=irq_mask();
+    publish_irq(flags_before,flags_after,mask_before,mask_after);
 #endif
     publish(&owner,count,keyboard.held);post(0xb0);
     for(;;) {

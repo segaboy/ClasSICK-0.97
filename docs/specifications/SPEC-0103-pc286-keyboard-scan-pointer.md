@@ -27,9 +27,11 @@ timeouts, event queue overflow, interrupt sharing and recovery belong to the
 caller. A missing break or dropped byte cannot be inferred by this decoder.
 Physical key repeat and rollover remain unqualified.
 
-An opt-in diagnostic disables interrupts after BIOS video setup, polls the
-controller output and assumes translated set 1, matching the observed built-in
+An opt-in diagnostic masks IRQ1 after BIOS video setup while preserving the
+other PIC mask bits and the previous interrupt-enable state, then polls the
+controller and assumes translated set 1, matching the observed built-in
 BootHush firmware configuration. It halts on reported status or decoder
 errors. It cannot safely serve as a full OS input driver: it does not configure
-or verify the controller, handle other interrupt sources, schedule fairly, or
-recover. [Evidence](../development/mac-pc286-shared-parity-20261114.md).
+or verify the controller, restore the original IRQ mask on exit, establish
+interrupt coexistence, schedule fairly, or recover.
+[Evidence](../development/mac-pc286-shared-parity-20261114.md).
