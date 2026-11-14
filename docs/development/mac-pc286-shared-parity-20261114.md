@@ -289,3 +289,15 @@ Reproduce by running `Test-BootHushPC286SharedSession.py` with the original
 assembler as above and `--timing-markers`, then run
 `scripts/Test-BootHushPC286Timing.py` with that result directory, `$bh` and a
 fresh output directory. Repeat without the flag for the uninstrumented checks.
+
+The actual optimized adapter was separately compiled into eight original
+boundary fixtures: full canvas, all four corners, negative clipping, a
+byte-crossing rectangle and an empty rectangle. For each, an independent
+Python oracle checks all 224,000 EGA pixels including the white margins and
+byte-aligned update extent; one changed canvas pixel and one changed margin
+pixel are each rejected. Source, tool, image and frame identities, commands
+and results are in `C:/Repos/.task-temp/pc286-present-edges-20261114-b`.
+Use `scripts/Test-BootHushPC286PresentEdges.py` with the same pinned tool root,
+assembler and emulator, `--pc-results` pointing to the uninstrumented session
+above, and a new output directory. These are emulator observations, not an
+exhaustive geometry proof or a physical display test.
