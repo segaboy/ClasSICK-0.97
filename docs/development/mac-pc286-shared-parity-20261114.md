@@ -373,3 +373,5 @@ are `C:/Repos/.task-temp/pc286-natural-session-20261114-c` and
 `C:/Repos/.task-temp/mac-pc286-natural-parity-20261114-f`; their payload and
 media hashes are unchanged from the natural test above. The pre-positioned
 regression is `C:/Repos/.task-temp/pc286-shared-session-20261114-o`.
+The eight EGA edge checks and two pixel-mutation controls were repeated on
+the current source in `C:/Repos/.task-temp/pc286-present-edges-20261114-c`.
