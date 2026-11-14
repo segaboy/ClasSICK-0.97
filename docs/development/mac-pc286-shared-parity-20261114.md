@@ -677,3 +677,9 @@ legacy comparison, mutation control, source attribution and limits are in
 demonstrates another bounded guest/toolchain exercise; its game-informed code
 is not a ClasSICK implementation input and it closes no ClasSICK release or
 physical-hardware criterion.
+
+The port subsequently extended its opt-in title experiment to use that native
+C movement component for both characters. Its modeled multi-key and rendering
+observations are in the same canonical port evidence. They exercise BootHush
+and the Windows 68000 compiler; the game-informed component is not admitted as
+a ClasSICK implementation input and the port is not a ClasSICK release test.
