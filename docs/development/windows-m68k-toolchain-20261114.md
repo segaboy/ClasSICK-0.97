@@ -56,3 +56,9 @@ the 286 candidate. Record the complete archive and subordinate compiler,
 assembler, linker, header and runtime identities. Four frontend hashes alone
 do not establish a reproducible toolchain. Until those steps and all other
 milestone criteria pass, there is no qualified paired release.
+
+The separate Not Super Tilt Bro project continued a branchless mouse-sampling
+experiment while this toolchain route was investigated. Its tests and rejected
+change are recorded in `C:/Repos/Not-Super-Tilt-Bro/docs/mouse-title-evidence.md`.
+The result is a BootHush-model observation and is not a ClasSICK hardware
+specification or release result; game code was not transferred.
