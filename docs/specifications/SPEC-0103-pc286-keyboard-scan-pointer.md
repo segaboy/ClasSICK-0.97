@@ -29,9 +29,11 @@ Physical key repeat and rollover remain unqualified.
 
 An opt-in diagnostic masks IRQ1 after BIOS video setup while preserving the
 other PIC mask bits and the previous interrupt-enable state, then polls the
-controller and assumes translated set 1, matching the observed built-in
-BootHush firmware configuration. It halts on reported status or decoder
-errors. It cannot safely serve as a full OS input driver: it does not configure
-or verify the controller, restore the original IRQ mask on exit, establish
-interrupt coexistence, schedule fairly, or recover.
+controller and checks for translated set 1 and an enabled keyboard under
+[SPEC-0104](SPEC-0104-pc286-keyboard-config.md). It halts on reported status
+or decoder errors; on configuration refusal it restores the prior IRQ mask.
+It cannot safely serve as a full OS input driver: it does not configure the
+controller, distinguish a racing input byte from a query reply, restore the
+original IRQ mask during normal operation, establish interrupt coexistence,
+schedule fairly, or recover.
 [Evidence](../development/mac-pc286-shared-parity-20261114.md).

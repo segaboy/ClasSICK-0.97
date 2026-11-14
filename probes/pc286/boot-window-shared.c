@@ -7,6 +7,7 @@
 #include "../../platform/pc286/ega-mono.h"
 #include "../../platform/pc286/keyboard-pointer.h"
 #include "../../platform/pc286/keyboard-set2.h"
+#include "../../platform/pc286/keyboard-config.h"
 
 #if !defined(__WATCOMC__) || !defined(_M_I86)
 #error Requires the pinned 16-bit Open Watcom target
@@ -27,13 +28,25 @@ static void test_unmask_keyboard_irq(void);
 #pragma aux test_unmask_keyboard_irq = "pushf" "cli" "in al,21h" "and al,0fdh" "out 21h,al" "popf" modify [ax];
 #endif
 static unsigned char key_status(void);
-#pragma aux key_status = "in al,64h" value [al] modify exact [];
+#pragma aux key_status = "in al,64h" value [al] modify [ax];
 static unsigned char key_byte(void);
-#pragma aux key_byte = "in al,60h" value [al] modify exact [];
+#pragma aux key_byte = "in al,60h" value [al] modify [ax];
 static unsigned char irq_mask(void);
-#pragma aux irq_mask = "in al,21h" value [al] modify exact [];
+#pragma aux irq_mask = "in al,21h" value [al] modify [ax];
 static unsigned short flags_word(void);
-#pragma aux flags_word = "pushf" "pop ax" value [ax] modify exact [];
+#pragma aux flags_word = "pushf" "pop ax" value [ax] modify [ax];
+static void key_command(unsigned char value);
+#pragma aux key_command = "out 64h,al" parm [al] modify exact [];
+static void restore_irq_mask(unsigned char value);
+#pragma aux restore_irq_mask = "pushf" "cli" "out 21h,al" "popf" parm [al] modify exact [];
+#ifdef CS_P286_CONFIG_BAD_TRANSLATION
+static void test_bad_translation(void);
+#pragma aux test_bad_translation = "mov al,60h" "out 64h,al" "xor al,al" "out 60h,al" modify [ax];
+#endif
+#ifdef CS_P286_CONFIG_PENDING
+static void test_pending_output(void);
+#pragma aux test_pending_output = "mov al,20h" "out 64h,al" modify [ax];
+#endif
 #endif
 static void fail(unsigned char value) { post(value); for (;;) { } }
 
@@ -44,6 +57,12 @@ static void publish_irq(unsigned before_flags,unsigned after_flags,unsigned befo
     r[0]=(unsigned char)before_flags;r[1]=(unsigned char)(before_flags>>8);
     r[2]=(unsigned char)after_flags;r[3]=(unsigned char)(after_flags>>8);
     r[4]=(unsigned char)before_mask;r[5]=(unsigned char)after_mask;
+}
+static void publish_config(unsigned result,unsigned value,unsigned mask,unsigned status)
+{
+    unsigned char __far *r=(unsigned char __far *)0x60000017UL;
+    r[0]=(unsigned char)result;r[1]=(unsigned char)value;
+    r[2]=(unsigned char)mask;r[3]=(unsigned char)status;
 }
 #endif
 
@@ -77,7 +96,9 @@ void start(void)
     cs_cursor_art art;cs_window_config config;cs_product_state product;cs_window_input owner;
     cs_pointer_sample sample;
 #ifdef CS_P286_RAW_KEYBOARD
-    cs_pc286_set2_pointer keyboard;unsigned status,flags_before,flags_after,mask_before,mask_after;
+    cs_pc286_set2_pointer keyboard;cs_pc286_keyboard_config cfg;
+    unsigned status,flags_before,flags_after,mask_before,mask_after;
+    volatile unsigned observed_mask,observed_status;
 #else
     cs_pc286_keyboard_pointer keyboard;unsigned key;
 #endif
@@ -108,6 +129,26 @@ void start(void)
     flags_before=flags_word();mask_before=irq_mask();mask_keyboard_irq();
     flags_after=flags_word();mask_after=irq_mask();
     publish_irq(flags_before,flags_after,mask_before,mask_after);
+#ifdef CS_P286_CONFIG_BAD_TRANSLATION
+    test_bad_translation();
+#endif
+#ifdef CS_P286_CONFIG_PENDING
+    test_pending_output();
+#endif
+    if(cs_pc286_keyboard_config_begin(&cfg,10000u)!=CS_286_CFG_WAIT)fail(0xe9);
+    do {
+        result=cs_pc286_keyboard_config_step(&cfg,key_status());
+        if(result==CS_286_CFG_SEND)key_command(0x20);
+        else if(result==CS_286_CFG_READ)result=cs_pc286_keyboard_config_reply(&cfg,key_byte());
+    } while(result==CS_286_CFG_WAIT || result==CS_286_CFG_SEND);
+    if(result!=CS_286_CFG_READY) {
+        restore_irq_mask((unsigned char)mask_before);
+        observed_mask=irq_mask();observed_status=key_status();
+        publish_config((unsigned)result,cfg.value,observed_mask,observed_status);
+        fail(0xe9);
+    }
+    observed_mask=irq_mask();observed_status=key_status();
+    publish_config((unsigned)result,cfg.value,observed_mask,observed_status);
 #endif
     publish(&owner,count,keyboard.held);post(0xb0);
     for(;;) {

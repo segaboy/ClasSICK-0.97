@@ -16,7 +16,8 @@ ROOT=Path(__file__).resolve().parents[1]
 SOURCES=('core/graphics/surface.c','core/graphics/cursor.c','core/input/pointer.c',
          'core/input/mouse.c','core/ui/window.c','apps/product-scene/scene.c',
          'apps/window-scene/scene.c','apps/window-scene/input.c','platform/pc286/ega-mono.c',
-         'platform/pc286/keyboard-pointer.c','platform/pc286/keyboard-set2.c')
+         'platform/pc286/keyboard-pointer.c','platform/pc286/keyboard-set2.c',
+         'platform/pc286/keyboard-config.c')
 
 def module(name,path):
     spec=importlib.util.spec_from_file_location(name,path);m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m);return m
@@ -30,7 +31,8 @@ def main():
     p.add_argument('--output',required=True,type=Path);p.add_argument('--timing-markers',action='store_true')
     p.add_argument('--natural-start',action='store_true',help='test the continuous sequence from the shared pointer initial position')
     p.add_argument('--raw-keyboard',action='store_true',help='experimental translated set-1 make/break polling')
-    p.add_argument('--irq-unmask-control',action='store_true',help='test-only unmask before taking IRQ1 ownership');a=p.parse_args()
+    p.add_argument('--irq-unmask-control',action='store_true',help='test-only unmask before taking IRQ1 ownership')
+    p.add_argument('--config-control',choices=('bad-translation','pending-output'),help='test-only controller refusal');a=p.parse_args()
     try:
         h=module('helpers',ROOT/'scripts/Test-BootHushPC286BankPlan.py')
         oracle=module('compositor',ROOT/'scripts/Test-BootHushPC286SharedCompositor.py')
@@ -41,6 +43,7 @@ def main():
         if out==ROOT or ROOT in out.parents:raise ValueError('output must be outside the repository')
         if a.raw_keyboard and not a.natural_start:raise ValueError('raw keyboard test requires natural start')
         if a.irq_unmask_control and not a.raw_keyboard:raise ValueError('IRQ control requires raw keyboard')
+        if a.config_control and not a.raw_keyboard:raise ValueError('config control requires raw keyboard')
         if lib and h.digest(lib)!=oracle.LIB_SHA:raise ValueError('runtime library hash mismatch')
         if assembler:
             arith=module('arithmetic',ROOT/'scripts/Test-BootHushPC286Arithmetic.py')
@@ -63,6 +66,8 @@ def main():
             if not a.natural_start and source==guest:extra+=['-dCS_P286_PREPOSITION_TEST']
             if a.raw_keyboard and source==guest:extra+=['-dCS_P286_RAW_KEYBOARD']
             if a.irq_unmask_control and source==guest:extra+=['-dCS_P286_IRQ_TEST_UNMASK']
+            if a.config_control and source==guest:
+                extra+=['-dCS_P286_CONFIG_BAD_TRANSLATION' if a.config_control=='bad-translation' else '-dCS_P286_CONFIG_PENDING']
             h.run([wcc,*flags,*extra,'-fo='+str(obj),source],out,env,out/(obj.name+'.log'));objects.append(obj)
         if assembler:
             obj=out/'original-arithmetic.obj'
@@ -84,7 +89,32 @@ def main():
         image=out/'session.img'
         with image.open('xb') as f:f.write(floppy(binary.read_bytes(),int(entry.group(1),16),
                                                  bss_end=bss_end,poison_bss=True))
-        before=h.digest(image);hostexe=out/'host-sequence.exe'
+        before=h.digest(image)
+        if a.config_control:
+            cmd=[exe,'--machine','pc286','--floppy',image,'--cycles','10000000','--timeout-ms','20000',
+                 '--until-post','0xe9','--inspect','0x60011:10']
+            result=json.loads(h.run(cmd,out,env,out/'config-control-boot.log'))
+            raw=bytes.fromhex(result['memory']['bytes'])
+            if result.get('status')!='condition_met' or result.get('post')!=0xe9 or len(raw)!=10 or h.digest(image)!=before:
+                raise ValueError('controller control did not reach refusal')
+            old_flags,new_flags,old_mask,new_mask,reason,value,restored,status=struct.unpack('<HHBBBBBB',raw)
+            expected=7 if a.config_control=='bad-translation' else 4
+            if (reason!=expected or restored!=old_mask or new_mask!=(old_mask|2) or
+                (old_flags&0x200)!=(new_flags&0x200) or (a.irq_unmask_control and old_mask&2) or
+                (a.config_control=='bad-translation' and value&0x50) or
+                (a.config_control=='pending-output' and not status&1)):
+                raise ValueError('wrong controller refusal or IRQ restoration')
+            report={'status':'pass','control':a.config_control,'boothush_sha256':h.digest(exe),
+                    'payload_sha256':h.digest(binary),'floppy_sha256':before,'reason':reason,
+                    'configuration_value':value,'status_after_refusal':status,'mask_before':old_mask,
+                    'mask_during':new_mask,'mask_restored':restored,'flags_before':old_flags,
+                    'flags_after':new_flags,'command':[str(x) for x in cmd],
+                    'source_sha256':{str(x.relative_to(ROOT)).replace('\\','/'):h.digest(x) for x in
+                                     (*sources,guest,ROOT/'platform/pc286/keyboard-config.h',ROOT/'scripts/pc286_loader.py')},
+                    'limits':'Injected diagnostic refusal in BootHush, not a physical controller result.'}
+            (out/'report.json').write_text(json.dumps(report,indent=2)+'\n',encoding='utf-8')
+            print(json.dumps(report,indent=2));return 0
+        hostexe=out/'host-sequence.exe'
         h.run([cc,'-std=c11','-O2','-Wall','-Wextra','-Werror','-DCLASSICK_PRODUCT_ROM_CACHE=0',
                host,*sources,'-o',hostexe],out,env,out/'host-build.log')
         keys=[0x29,0x74,0x74,0x75,0x29,0x74,0x72,0x72,0x72,0x29,0x29]
@@ -136,6 +166,14 @@ def main():
             if a.irq_unmask_control and before_mask&2:raise ValueError('IRQ control did not start unmasked')
             irq_observation={'before_flags':before_flags,'after_flags':after_flags,
                              'before_mask':before_mask,'after_mask':after_mask,'command':[str(x) for x in cmd]}
+            cmd=[exe,'--machine','pc286','--floppy',image,'--cycles','10000000','--timeout-ms','20000',
+                 '--until-post','0xb0','--inspect','0x60017:4']
+            config_result=json.loads(h.run(cmd,out,env,out/'config-ready-boot.log'))
+            config=bytes.fromhex(config_result['memory']['bytes'])
+            if (config_result.get('status')!='condition_met' or len(config)!=4 or config[0]!=3 or
+                (config[1]&0x50)!=0x40 or config[2]!=after_mask or config[3]&0xe1):
+                raise ValueError('configuration query not ready or stream not empty')
+            irq_observation['config_result']=list(config)
         # Prove the pixel comparison rejects one changed canvas pixel and one margin pixel.
         raw=(out/'initial.ppm').read_bytes();pbm=(out/'initial.pbm').read_bytes();header=len(b'P6\n640 350\n255\n')
         for x,y in ((100,100),(0,0)):
@@ -149,7 +187,7 @@ def main():
                 'source_sha256':{str(x.relative_to(ROOT)).replace('\\','/'):h.digest(x) for x in
                                  (*sources,guest,host,ROOT/'platform/pc286/ega-mono.h',
                                   ROOT/'platform/pc286/keyboard-pointer.h',ROOT/'scripts/pc286_loader.py',
-                                  ROOT/'platform/pc286/keyboard-set2.h',
+                                  ROOT/'platform/pc286/keyboard-set2.h',ROOT/'platform/pc286/keyboard-config.h',
                                   ROOT/'scripts/Test-BootHushPC286BankPlan.py',
                                   ROOT/'scripts/Test-BootHushPC286SharedCompositor.py',Path(__file__),
                                   *((ROOT/'arch/i286/watcom-arithmetic.asm',) if assembler else ()))},
@@ -159,6 +197,7 @@ def main():
                 'natural_start':a.natural_start,
                 'raw_keyboard':a.raw_keyboard,
                 'irq_unmask_control':a.irq_unmask_control,
+                'config_control':a.config_control,
                 'irq_mask_observation':irq_observation,
                 'cases':observations,'floppy_unchanged':True,'pixel_mutations_rejected':2,
                 'limits':'Same-source hosted/286 scripted input; experimental helpers require review; no Mac boot, E3/E4 or physical claim.'}

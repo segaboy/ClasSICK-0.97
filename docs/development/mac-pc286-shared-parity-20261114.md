@@ -503,3 +503,46 @@ its current ROM and evidence are identified in
 faster-mouse timing failure remains open. The port's game-derived code is not
 used as a ClasSICK implementation input, and neither result establishes
 physical Mac behavior or qualifies this release.
+
+## Bounded 286 controller configuration query
+
+[SPEC-0104](../specifications/SPEC-0104-pc286-keyboard-config.md) describes the
+new opt-in preflight. It rejects existing output without consuming it, waits
+only a bounded number of polls, and accepts an enabled keyboard with controller
+translation. A racing keyboard byte remains indistinguishable from the query
+response: the diagnostic requires a quiescent controller and is not a
+complete input driver. It restores the prior IRQ1 mask on preflight refusal.
+
+The standalone host test `tests/pc286-keyboard-config.c`, compiled with the
+same `$cc` and `-std=c99 -O2 -Wall -Wextra -Werror -Wconversion
+-Wsign-conversion`, passed all 256 configuration replies, both timeouts,
+pending output, status faults and invalid calls. The BootHush raw-session
+test passed eight state and full-pixel checkpoints using payload SHA-256
+`9a443bdaf9a753be3c41bca3a4b5d72ce60d0e517a3f672a486f2d4b585c2c82`
+(22,374 bytes) and floppy SHA-256
+`ae9fc4c62417c6d426033778d7e76f66c7f9582c69945443009ab40efb1e4e07`.
+Full commands, source and tool hashes, and results are retained in
+`C:/Repos/.task-temp/pc286-config-input-20261114-e/report.json`.
+The independent EGA edge cases and two mutation controls pass in
+`C:/Repos/.task-temp/pc286-config-edges-20261114-b`. The BIOS input variant
+passes in `C:/Repos/.task-temp/pc286-config-bios-20261114-a`.
+
+Separate test-only controls declined configuration `00` and pending output,
+respectively, restoring a deliberately unmasked IRQ1 from `fe` to `fc`; the
+pending-output status remained set. Receipts, including commands and hashes,
+are in `C:/Repos/.task-temp/pc286-config-bad-20261114-d` and
+`C:/Repos/.task-temp/pc286-config-pending-20261114-d`. The test-only control
+changes controller configuration; the ordinary query does not. An earlier
+diagnostic incorrectly declared that an inline port read did not modify AX;
+the compiler therefore reused a stale value. The corrected declaration and
+rerun are recorded alongside preserved failed experiments in the local
+`pc286-config-*-20261114-a` through `-c` directories.
+
+The existing Mac image SHA-256
+`faf37c6f96f8eb2ee6cf7a1e58a8b1b9538055d2fc89493c7419eeea816f6c8c`
+matches the 286 diagnostic at eight modeled checkpoints and its injected mouse
+trace replays in `C:/Repos/.task-temp/mac-pc286-config-parity-20261114-b`.
+That ROM predates the current source; a source-matched Mac build, provenance
+and code review, production boot, physical and human checks, and the separate
+release decision remain open. None of these emulator tests establishes physical
+controller behavior or release qualification.
