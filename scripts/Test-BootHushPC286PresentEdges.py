@@ -61,7 +61,7 @@ def main():
                '-dCLASSICK_PRODUCT_ROM_CACHE=0','-i='+str(tool/'h'),'-i='+str(out)]
         sources=('core/graphics/surface.c','core/graphics/cursor.c','core/input/pointer.c',
                  'core/input/mouse.c','core/ui/window.c','apps/product-scene/scene.c',
-                 'apps/window-scene/scene.c','apps/window-scene/input.c')
+                 'apps/window-scene/scene.c','apps/window-scene/input.c','platform/pc286/ega-mono.c')
         objects=[]
         for name in sources:
             obj=out/(name.replace('/','-')+'.obj')
@@ -101,7 +101,8 @@ def main():
             raise ValueError('oracle accepted mutated '+label+' pixel')
         summary={'status':'pass','boothush_sha256':sha(exe),'assembler_sha256':sha(assembler),
                  'source_sha256':{name:sha(ROOT/name) for name in (*sources,'arch/i286/watcom-arithmetic.asm',
-                    'probes/pc286/boot-window-shared.c','probes/pc286/boot-present-edge.c')},'cases':observations,
+                    'platform/pc286/ega-mono.h','probes/pc286/boot-window-shared.c',
+                    'probes/pc286/boot-present-edge.c')},'cases':observations,
                  'pixel_mutations_rejected':2,
                  'limits':'Original modeled edge fixture; no physical display or release qualification.'}
         (out/'report.json').write_text(json.dumps(summary,indent=2)+'\n',encoding='utf-8');print(json.dumps(summary,indent=2));return 0

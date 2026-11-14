@@ -375,3 +375,39 @@ media hashes are unchanged from the natural test above. The pre-positioned
 regression is `C:/Repos/.task-temp/pc286-shared-session-20261114-o`.
 The eight EGA edge checks and two pixel-mutation controls were repeated on
 the current source in `C:/Repos/.task-temp/pc286-present-edges-20261114-c`.
+
+## Reusable 286 EGA adapter
+
+The original EGA byte-publication code now lives in
+`platform/pc286/ega-mono.c`, under the explicitly bounded
+[SPEC-0101](../specifications/SPEC-0101-pc286-ega-mono-present.md), and the
+diagnostic calls that shared platform implementation. Its caller still sets
+the mode and supplies valid, nonoverlapping buffers. This advances the actual
+platform binding; it is not a production boot or hardware qualification.
+
+Thirteen hosted rectangle cases compare all 28,000 output bytes against an
+independent intersection oracle, check guards and null refusals. Compile and
+run from the repository with the recorded local Clang:
+
+```powershell
+$cc = 'C:/ClasSICK/bootstrap-clean-source-verified/.tools/llvm-mingw/llvm-mingw-20260908-ucrt-x86_64/bin/clang.exe'
+& $cc -std=c99 -O2 -Wall -Wextra -Werror -Wconversion -Wsign-conversion `
+  tests/pc286-ega-mono.c platform/pc286/ega-mono.c -o C:/Repos/.task-temp/NEW-ega-test.exe
+& C:/Repos/.task-temp/NEW-ega-test.exe
+```
+
+Eight 286 display-edge fixtures with two mutation controls pass in
+`C:/Repos/.task-temp/pc286-platform-edges-20261114-b`. The runtime-free
+21,084-byte natural-start payload SHA-256 is
+`4c2fd6cdf15bef2422faf9fd07e818187964069ff937654b493cf123af8678ec`;
+its test floppy SHA-256 is
+`2bf9b93d36c473e8224cff6a9fbcbd1862b64d76d83909a470b28affbd71ad50`.
+All eight hosted/286 checkpoints and the matching Mac replay pass in
+`C:/Repos/.task-temp/pc286-platform-session-20261114-b` and
+`C:/Repos/.task-temp/mac-pc286-platform-parity-20261114-b`. The separate
+instrumented pre-positioned drag measures 373,535 modeled publication cycles
+and 1,271,624 shared-sample cycles in
+`C:/Repos/.task-temp/pc286-platform-timing-measure-20261114-b`; it includes
+marker overhead and is not a physical timing result. Provenance, source-matched
+Mac builds, remaining input cases, stack worst case, human/physical reviews,
+production loader and release gates remain open.

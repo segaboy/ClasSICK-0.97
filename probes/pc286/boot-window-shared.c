@@ -4,6 +4,7 @@
  * compositor. Compiler runtime modules remain unreviewed for distribution. */
 #include "../../arch/i286/c16.h"
 #include "../../apps/window-scene/input.h"
+#include "../../platform/pc286/ega-mono.h"
 
 #if !defined(__WATCOMC__) || !defined(_M_I86)
 #error Requires the pinned 16-bit Open Watcom target
@@ -26,20 +27,8 @@ static void white_display(void)
 
 static void present(int left,int top,int right,int bottom)
 {
-    unsigned x,y,first,last,width;
     unsigned char __far *video=(unsigned char __far *)0xa0000000UL;
-    unsigned char __far *dst;
-    const unsigned char *src;
-    if(left<0)left=0;if(top<0)top=0;if(right>512)right=512;if(bottom>342)bottom=342;
-    if(left>=right || top>=bottom)return;
-    first=(unsigned)left/8u;last=((unsigned)right+7u)/8u;
-    width=last-first;
-    src=canvas+(unsigned)top*64u+first;
-    dst=video+((unsigned)top+4u)*80u+first+8u;
-    for(y=(unsigned)top;y<(unsigned)bottom;++y) {
-        for(x=0;x<width;++x)dst[x]=(unsigned char)~src[x];
-        if(y+1u<(unsigned)bottom) {src+=64u;dst+=80u;}
-    }
+    if(!cs_pc286_ega_publish(canvas,video,left,top,right,bottom))fail(0xe5);
 }
 
 static void publish(const cs_window_input *o,unsigned count,unsigned button)

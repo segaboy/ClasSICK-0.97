@@ -15,7 +15,7 @@ from pc286_loader import floppy
 ROOT=Path(__file__).resolve().parents[1]
 SOURCES=('core/graphics/surface.c','core/graphics/cursor.c','core/input/pointer.c',
          'core/input/mouse.c','core/ui/window.c','apps/product-scene/scene.c',
-         'apps/window-scene/scene.c','apps/window-scene/input.c')
+         'apps/window-scene/scene.c','apps/window-scene/input.c','platform/pc286/ega-mono.c')
 
 def module(name,path):
     spec=importlib.util.spec_from_file_location(name,path);m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m);return m
@@ -121,7 +121,7 @@ def main():
                 'host_compiler_sha256':h.digest(cc),'runtime_library_sha256':h.digest(lib) if lib else None,
                 'assembler_sha256':h.digest(assembler) if assembler else None,'runtime_modules':used,
                 'source_sha256':{str(x.relative_to(ROOT)).replace('\\','/'):h.digest(x) for x in
-                                 (*sources,guest,host,ROOT/'scripts/pc286_loader.py',
+                                 (*sources,guest,host,ROOT/'platform/pc286/ega-mono.h',ROOT/'scripts/pc286_loader.py',
                                   ROOT/'scripts/Test-BootHushPC286BankPlan.py',
                                   ROOT/'scripts/Test-BootHushPC286SharedCompositor.py',Path(__file__),
                                   *((ROOT/'arch/i286/watcom-arithmetic.asm',) if assembler else ()))},
