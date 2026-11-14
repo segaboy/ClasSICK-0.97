@@ -5142,3 +5142,7 @@ Qt Group, published [QGuiApplication constructor, Platform-Specific Arguments](h
 ## SRC-0607 - Owner-directed keyboard recovery observation and BootHush interfaces
 
 2026-11-14; Not Super Tilt Bro `3db162d` movement-evidence and provenance documents, plus BootHush `f41ddc5` keyboard, mouse witness and PC/AT interface documentation. Byte-identical intake copies and identity manifest are outside Git at `C:/ClasSICK/boothush-intake-20261114-a`. The separate game's reported one-shot fault recovery is a test-scenario lead, not evidence that ClasSICK recovers or that physical hardware behaves so. Game-derived code, assets, NES media, emulator implementation and reference media are excluded. [Review and observations](../docs/development/boothush-paired-20261114.md).
+
+## SRC-0608 - Owner replaces the x64 release target with 286
+
+2026-11-14; owner directs pausing x64 work and pursuing a paired Mac128K/286 release, while retaining BootHush and Not Super Tilt Bro development and the original clean-room, test, evidence, preservation and approval boundaries. [Direction and initial gates](../docs/development/mac-286-paired-direction-20261114.md). This is an owner decision, not historical hardware evidence or publication approval.
