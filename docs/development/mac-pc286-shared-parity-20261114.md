@@ -495,3 +495,11 @@ eight Mac/286 checkpoints and replays the Mac trace. The original whole-
 interrupt-mask experiment remains preserved above as history.
 The eight independent EGA edge checks and two mutation controls also pass on
 the current source in `C:/Repos/.task-temp/pc286-raw-input-edges-20261114-b`.
+
+The separate Not Super Tilt Bro port added mouse-start and keyboard-play hints
+at commit `2563388`, with 22 modeled title/action checks and BootHush replay;
+its current ROM and evidence are identified in
+`C:/Repos/Not-Super-Tilt-Bro/docs/mouse-title-evidence.md`. Its independent
+faster-mouse timing failure remains open. The port's game-derived code is not
+used as a ClasSICK implementation input, and neither result establishes
+physical Mac behavior or qualifies this release.
