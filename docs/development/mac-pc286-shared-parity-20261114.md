@@ -365,3 +365,11 @@ the intermediate checkpoint still failed. The subsequent 32,768-cycle attempt `-
 as a settled comparison. The passing runs allow more time between events and
 checkpoints. These results do not prove a particular cause or a physical speed
 threshold; they leave responsiveness and real input qualification open.
+
+The 286 source now defaults to the natural shared position; only the explicit
+`CS_P286_PREPOSITION_TEST` build option selects the older aligned fixture.
+Both variants were rebuilt and checked. The current natural run and Mac replay
+are `C:/Repos/.task-temp/pc286-natural-session-20261114-c` and
+`C:/Repos/.task-temp/mac-pc286-natural-parity-20261114-f`; their payload and
+media hashes are unchanged from the natural test above. The pre-positioned
+regression is `C:/Repos/.task-temp/pc286-shared-session-20261114-o`.

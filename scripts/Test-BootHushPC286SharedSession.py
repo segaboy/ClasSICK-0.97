@@ -55,7 +55,7 @@ def main():
         for source in (*sources,guest):
             obj=out/(str(source.relative_to(ROOT)).replace('\\','-').replace('/','-')+'.obj')
             extra=(['-dCS_P286_TIMING_MARKERS'] if a.timing_markers and source==guest else [])
-            if a.natural_start and source==guest:extra+=['-dCS_P286_NATURAL_START']
+            if not a.natural_start and source==guest:extra+=['-dCS_P286_PREPOSITION_TEST']
             h.run([wcc,*flags,*extra,'-fo='+str(obj),source],out,env,out/(obj.name+'.log'));objects.append(obj)
         if assembler:
             obj=out/'original-arithmetic.obj'

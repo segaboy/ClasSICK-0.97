@@ -65,7 +65,7 @@ void start(void)
     cs_window_cursor_bits_init(&bits);art.bits=&bits;art.width=15;art.height=15;art.hot_x=7;art.hot_y=7;
     if(cs_cursor_init(&cursor)!=CS_CURSOR_OK || cs_cursor_bind(&cursor,&surface,saved,sizeof(saved),&token)!=CS_CURSOR_OK)fail(0xe1);
     if(cs_window_input_begin(&owner,&cursor,token,&art,&config,&product,0)!=CS_WINDOW_INPUT_OK)fail(0xe2);
-#ifndef CS_P286_NATURAL_START
+#ifdef CS_P286_PREPOSITION_TEST
     sample.dx=-156;sample.dy=-91;sample.buttons=0;
     result=cs_window_input_sample(&owner,&sample);
     if(result!=CS_WINDOW_INPUT_OK && result!=CS_WINDOW_INPUT_CHANGED)fail(0xe3);
