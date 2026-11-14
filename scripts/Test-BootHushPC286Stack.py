@@ -13,6 +13,7 @@ from pc286_loader import floppy
 
 ROOT=Path(__file__).resolve().parents[1]
 KEYS=(0x29,0x74,0x74,0x75,0x29,0x74,0x72,0x72,0x72,0x29,0x29)
+NATURAL_KEYS=(0x75,)*6+(0x29,0x74,0x75,0x29)+(0x72,)*3+(0x29,0x29)
 def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
 
 def main():
@@ -31,6 +32,10 @@ def main():
         entry=re.search(r'Entry point address:\s*([0-9a-fA-F]+)',mapping)
         if not entry:raise ValueError('missing entry')
         bss_end=report['bss_start']+report['bss_bytes'];reference=next(c for c in report['cases'] if c['name']=='content-release')
+        keys=NATURAL_KEYS if report.get('natural_start') else KEYS
+        raw=report.get('raw_keyboard',False)
+        if raw and not report.get('natural_start'):
+            raise ValueError('raw scan replay requires the natural-start session')
         out.mkdir(parents=True,exist_ok=False);results=[]
         for value in (0x5a,0xa5):
             image=out/f'stack-{value:02x}.img'
@@ -40,20 +45,26 @@ def main():
             for run,start in enumerate(range(bss_end,0xfffe,16384)):
                 n=min(16384,0xfffe-start);frame=out/f'frame-{value:02x}-{run}.ppm'
                 cmd=[str(exe),'--machine','pc286','--floppy',str(image),'--cycles','100000000',
-                     '--timeout-ms','20000','--until-post','0xbb','--frame',str(frame)]
+                     '--timeout-ms','20000','--until-post',hex(0xb0+len(keys)),'--frame',str(frame)]
                 ranges=[]
                 for off in range(0,n,4096):
                     size=min(4096,n-off);address=0x10000+start+off
                     cmd+=['--inspect',f'{hex(address)}:{size}'];ranges.append((address,size))
-                for i,key in enumerate(KEYS):
+                for i,key in enumerate(keys):
                     cycle=6000000+i*5000000
-                    for when,code in ((cycle,key),(cycle+100000,0xf0),(cycle+101000,key)):
+                    if raw and key==0x29:
+                        sequence=((cycle,key),(cycle+100000,key)) if i in (6,13) else ((cycle,0xf0),(cycle+1000,key))
+                    elif raw:
+                        sequence=((cycle,0xe0),(cycle+1000,key),(cycle+100000,0xe0),
+                                  (cycle+101000,0xf0),(cycle+102000,key))
+                    else:sequence=((cycle,key),(cycle+100000,0xf0),(cycle+101000,key))
+                    for when,code in sequence:
                         cmd+=['--scancode',f'{when}:{code}']
                 result=subprocess.run(cmd,capture_output=True,text=True,timeout=25,
                                       creationflags=getattr(subprocess,'CREATE_NO_WINDOW',0))
                 if result.returncode:raise ValueError('stack run failed: '+result.stdout+result.stderr)
                 data=json.loads(result.stdout);rows=data.get('memory_ranges',[]) if len(ranges)>1 else [data.get('memory',{})]
-                if (data.get('status')!='condition_met' or data.get('post')!=0xbb or sha(image)!=before or
+                if (data.get('status')!='condition_met' or data.get('post')!=0xb0+len(keys) or sha(image)!=before or
                     sha(frame)!=reference['ega_ppm_sha256'] or len(rows)!=len(ranges)):
                     raise ValueError('stack run image, stop or frame mismatch')
                 for row,(address,size) in zip(rows,ranges):
@@ -69,6 +80,8 @@ def main():
             results.append({'poison':value,'floppy_sha256':before,'lowest_changed_offset':lowest,
                             'observed_span_bytes':0xfffe-lowest,'untouched_prefix_bytes':lowest-bss_end,'cycles':cycles})
         summary={'status':'pass','boothush_sha256':sha(exe),'payload_sha256':sha(payload),
+                 'test_sha256':sha(Path(__file__)),'session_report_sha256':sha(pc/'report.json'),
+                 'natural_start':bool(report.get('natural_start')),'raw_keyboard':bool(raw),
                  'bss_end':bss_end,'initial_stack_pointer':0xfffe,'runs':results,
                  'limits':'Only an observed lower bound for this modeled sequence; same-value writes can evade canaries; no hardware, worst-case or release claim.'}
         (out/'report.json').write_text(json.dumps(summary,indent=2)+'\n',encoding='utf-8');print(json.dumps(summary,indent=2));return 0

@@ -569,6 +569,22 @@ state/pixel checkpoints in
 small enough not to invoke the fourth track; the generated maximum-length
 fixture exercises that read. Hardware and release requirements remain open.
 
+### Natural-start stack observation
+
+The stack runner now follows the input mode and starting point in the source
+session instead of always replaying the older pre-positioned BIOS sequence.
+An initial attempt with the old sequence failed its final-frame comparison;
+the preserved incomplete output is `C:/Repos/.task-temp/pc286-config-stack-20261114-a`.
+With the current raw-input payload SHA-256 `9a443bda...`, two poison patterns
+each observed a 1,056-byte touched span, with 20,168 untouched bytes between
+the BSS end and the lowest observed write. Both finished the same 15-input
+natural-start sequence and matched the reference image. Commands and full-gap
+memory observations are in `C:/Repos/.task-temp/pc286-config-stack-20261114-c`.
+The older pre-positioned BIOS mode also passes with two poison patterns in
+`C:/Repos/.task-temp/pc286-bios-stack-20261114-a` (1,048 observed bytes).
+Canaries can miss same-value writes; these observations do not prove maximum
+stack depth, interrupt worst cases, physical performance or release readiness.
+
 The Not Super Tilt Bro port also fixed its prototype damage counter wrapping;
 its changed title ROM, BootHush regression and limitations are identified in
 `C:/Repos/Not-Super-Tilt-Bro/docs/two-character-evidence.md` and
