@@ -72,6 +72,14 @@ def main():
     payload = bytearray((i * 37 + i // 251) & 255 for i in range(MAX_PAYLOAD))
     payload[:6] = bytes.fromhex('b0a5e680ebfe')
     image = floppy(bytes(payload), 0, verify_payload=True)
+    # A BIOS that reports success after an incomplete read must not lead to
+    # entry when the resulting byte sum differs from the expected payload.
+    short = bytearray(image)
+    needle = bytes.fromhex('bb0058b80f02')
+    assert short[:SECTOR].count(needle) == 1
+    short[short[:SECTOR].index(needle) + 4] = 14
+    response = run('short-final-read-control', short, 0xed, MAX_PAYLOAD-SECTOR)
+    assert bytes.fromhex(response['memory']['bytes']) == b'\x00'
     for chs in ('0:0:2', '0:1:1', '1:0:1', '1:1:1'):
         response = run('read-failure-' + chs.replace(':', '-'), image, 0xee, fail_read=chs)
         fault = response['floppy_read_failure']

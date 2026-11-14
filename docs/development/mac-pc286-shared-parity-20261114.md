@@ -599,11 +599,13 @@ The default loader remains unchanged. Source and tests are independently
 developed here; no firmware implementation was consulted.
 
 On BootHush SHA-256 `5d4f610e98cbb8b03476f28929d6e5c0f64b941aafac3c7d5b6ef12c76c7eeb3`,
-`scripts/Test-BootHushPC286LoaderChecksum.py` passed 19 cases covering valid
+`scripts/Test-BootHushPC286LoaderChecksum.py` passed 20 cases covering valid
 payloads up to 30,208 bytes, single-byte corruption at track boundaries, ignored
-sector padding, a deliberate undetected balanced corruption, and an injected
-failure at each read. Commands, inputs, hashes and responses are in
-`C:/Repos/.task-temp/pc286-loader-checksum-20261114-b/report.json`.
+sector padding, a deliberately shortened final read, an undetected balanced
+corruption, and an injected failure at each read. The shortened read is a
+mutated diagnostic that reports success after reading one sector too few; in
+this case the sum catches the missing bytes. Commands, inputs, hashes and
+responses are in `C:/Repos/.task-temp/pc286-loader-checksum-20261114-c/report.json`.
 The ordinary bounds and read-failure checks were rerun in
 `C:/Repos/.task-temp/pc286-loader-bounds-20261114-c/report.json`.
 
