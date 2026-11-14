@@ -9,6 +9,10 @@ Compacted 2026-10-28 from public baseline `11ad7a937e58f752cfecda8b6805c76bc7f45
 - When relevant: [native parity](docs/development/native-parity-plan.md), [display](docs/development/display-target.md), [performance](docs/development/native-performance-plan.md), [x64 PC](docs/development/unified-x64-pc-plan.md), [286](docs/development/pc286-feasibility.md), [System1/ROM](docs/development/system1-rom-boot-requirements.md), [sources](docs/research/system1-sources.md), [releases](releases/README.md), [milestones](docs/roadmap.md).
 
 ## Current scope
+Owner direction (2026-11-14): do not use WSL for this work. Move the Mac
+68000 build to a Windows-native toolchain; preserve historical Linux toolchain
+records. The experimental transition and its unclosed checks are recorded in
+[Windows m68k toolchain](docs/development/windows-m68k-toolchain-20261114.md).
 Owner amendment (2026-11-14, SRC-0608): pause all x64 work and replace the x64 half of the next paired release with a native 286 PC/AT target. The immediate goal is the existing interactive-window preview on Mac128K and 286, with the same substantive behavior and parity/qualification requirements, subject to the 286 input and display contracts. BootHush and Not Super Tilt Bro remain active in support of both projects. The prior Mac/x64 plan and evidence remain historical; do not develop the x64 guest or erase its work. [Current direction](docs/development/mac-286-paired-direction-20261114.md).
 Current owner scope (2026-11-12): advance the Mac release and the 286 port using BootHush headlessly, keeping the desktop available to the owner. Do not use Snow or another emulator. Native x64 PC work remains paused. The owner authorized headless BootHush tests of original Mac and 286 candidates; reference systems, physical hardware and release publication remain separate. Report BootHush bugs and missing capabilities rather than switching emulators. [Headless evidence and developer report](docs/development/boothush-headless-20261112.md). Prior scopes and observations remain historical, not a requirement to resume paused work.
 

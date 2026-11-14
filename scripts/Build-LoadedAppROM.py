@@ -76,6 +76,8 @@ WINDOW_HEADERS=('arch/m68k/loaded-rom.ld','arch/m68k/runtime.h','arch/m68k/exclu
  'apps/window-scene/foreground.h','scripts/Build-LoadedAppROM.py','scripts/Build-MacROM.py')
 def main():
     p=argparse.ArgumentParser();p.add_argument('--tool-root',required=True);p.add_argument('--output',required=True)
+    p.add_argument('--windows-native',action='store_true',help='Experimental Windows m68k ELF tools: tool-root is the bin directory')
+    p.add_argument('--windows-prefix',default='m68k-unknown-elf-',help='Windows native m68k executable prefix')
     mode=p.add_mutually_exclusive_group()
     mode.add_argument('--drawing',action='store_true',help='Build the SPEC-0036 interpreted drawing candidate')
     mode.add_argument('--native-drawing',action='store_true',help='Build the SPEC-0038 direct native drawing candidate')
@@ -134,10 +136,22 @@ def main():
     if a.window_rearm_ready_probe and (not a.window_drawing or a.window_timer_poll_probe or a.window_motion_timeline or a.window_pending_defer_probe or a.window_phase_idle_probe or a.window_idle_probe or a.window_first_input_probe or a.window_pending_idle_probe):p.error('Rearm-ready probe requires the interrupt window profile without other behavior probes')
     if a.window_wait_latch_probe and (not a.window_drawing or a.window_timer_poll_probe or a.window_motion_timeline or a.window_pending_defer_probe or a.window_phase_idle_probe or a.window_idle_probe or a.window_first_input_probe or a.window_pending_idle_probe or a.window_rearm_ready_probe):p.error('WAIT latch probe requires the interrupt window profile without other behavior probes')
     repo=Path(__file__).resolve().parents[1];tools=Path(a.tool_root).resolve();out=Path(a.output).resolve()
-    out.mkdir(parents=True,exist_ok=False);sys.dont_write_bytecode=True
+    sys.dont_write_bytecode=True;native_toolchain=None
+    if a.windows_native:
+        if os.name!='nt':raise ValueError('Windows native toolchain requires a Windows host')
+        native_spec=spec_from_file_location('m68k_windows_toolchain',repo/'scripts/m68k_windows_toolchain.py')
+        native_module=module_from_spec(native_spec);native_spec.loader.exec_module(native_module)
+        native_paths,native_toolchain=native_module.inspect(tools,a.windows_prefix)
+        bins=tools;cc=native_paths['gcc'];nm=native_paths['nm'];objcopy=native_paths['objcopy'];objdump=native_paths['objdump']
+    else:
+        if a.windows_prefix!='m68k-unknown-elf-':raise ValueError('--windows-prefix requires --windows-native')
+        bins=tools/'usr/bin';cc=bins/'m68k-linux-gnu-gcc-13';nm=bins/'m68k-linux-gnu-nm'
+        objcopy=bins/'m68k-linux-gnu-objcopy';objdump=bins/'m68k-linux-gnu-objdump'
+    out.mkdir(parents=True,exist_ok=False)
     spec=spec_from_file_location('base_rom',repo/'scripts/Build-MacROM.py');h=module_from_spec(spec);spec.loader.exec_module(h)
-    env=os.environ.copy();env['LD_LIBRARY_PATH']=str(tools/'usr/lib/x86_64-linux-gnu')
-    env['PATH']=str(tools/'usr/bin')+os.pathsep+env.get('PATH','');bins=tools/'usr/bin';cc=bins/'m68k-linux-gnu-gcc-13'
+    env=os.environ.copy()
+    if not a.windows_native:env['LD_LIBRARY_PATH']=str(tools/'usr/lib/x86_64-linux-gnu')
+    env['PATH']=str(bins)+os.pathsep+env.get('PATH','')
     sources=SOURCES;headers=HEADERS;program_source='apps/loaded-rom-app/program.S'
     program_hex='204d213c5a5a5a5a70614e75';specification='SPEC-0035';profile='first-loaded-rom-app-v1'
     if a.drawing:
@@ -226,7 +240,8 @@ def main():
          '-fno-pic','-fno-pie','-fno-common','-fno-stack-protector','-fno-unwind-tables',
          '-fno-asynchronous-unwind-tables','-fno-tree-loop-distribute-patterns','-fstack-usage',
          '-ffunction-sections','-fdata-sections','-Wall','-Wextra','-Werror','-Wconversion','-Wsign-conversion',
-         '--sysroot='+str(tools),'-ffile-prefix-map='+str(repo)+'=.','-ffile-prefix-map='+str(folder)+'=.']
+         '-ffile-prefix-map='+str(repo)+'=.','-ffile-prefix-map='+str(folder)+'=.']
+        if not a.windows_native:flags+=['--sysroot='+str(tools)]
         if not a.window_drawing:flags+=['-DCLASSICK_PRODUCT_ROM_CACHE=0']
         if a.selected_drawing or a.outline_drawing:flags+=['-DCLASSICK_SELECTED_DRAWING=1']
         if a.outline_drawing:flags+=['-DCLASSICK_OUTLINE_DRAWING=1']
@@ -254,7 +269,7 @@ def main():
         for i,source in enumerate(sources):
             obj=folder/f'{i}.o';objects.append(obj);h.run([cc,*flags,'-c',repo/source,'-o',obj],env)
             if source not in ('platform/mac128k/loaded-entry.c','platform/mac128k/drawing-entry.c','platform/mac128k/native-drawing-entry.c','platform/mac128k/window-entry.c'):
-                for line in h.run([bins/'m68k-linux-gnu-nm','--defined-only','--format=posix',obj],env).splitlines():
+                for line in h.run([nm,'--defined-only','--format=posix',obj],env).splitlines():
                     fields=line.split()
                     if len(fields)>1 and fields[1] in 'BbCcDdGgSsVv':raise ValueError('Mutable core global: '+source+' '+line)
         elf=folder/'classick-loaded-app.elf'
@@ -291,11 +306,11 @@ def main():
         forbidden=('cs_image_','cs_m68k_','cs_drawing_app_','cs_aline_probe')+(('cs_guest_','cs_memory_','cs_resource','cs_rsrc_','cs_code_','cs_system1_','cs_trap_','cs_service_','cs_qd_','cs_mac_loop_') if a.window_drawing else ())
         if native and any(name.startswith(forbidden) and name not in cpu_callbacks for name in syms):
             raise ValueError('Unexpected interpreted application in native drawing profile')
-        raw=folder/'loaded.raw';h.run([bins/'m68k-linux-gnu-objcopy','-O','binary',elf,raw],env)
+        raw=folder/'loaded.raw';h.run([objcopy,'-O','binary',elf,raw],env)
         b=bytearray(raw.read_bytes());b.extend(bytes(65536-len(b)));struct.pack_into('>I',b,256,h.crc(b))
         pair_proof=None
         if a.window_timer_pair_probe:
-            listing=h.run([bins/'m68k-linux-gnu-objdump','-d','--disassemble=cs_mac_native_pair',elf],env)
+            listing=h.run([objdump,'-d','--disassemble=cs_mac_native_pair',elf],env)
             (folder/'native-pair-disassembly.txt').write_text(listing)
             body=listing.split('<cs_mac_native_pair>:',1)[1]
             decoded=[]
@@ -384,7 +399,7 @@ def main():
         irq_audit=[]
         if a.window_drawing:
             irq_audit=audit_window_code(b)
-            listing=h.run([bins/'m68k-linux-gnu-objdump','-d',elf],env)
+            listing=h.run([objdump,'-d',elf],env)
             (folder/'native-window-disassembly.txt').write_text(listing)
             if a.window_fast_collect:audit_fast_frame_alignment(listing)
         for offset in (0,4,8,40,128,256,1024,65535):
@@ -435,13 +450,18 @@ def main():
     if program_source is not None:
         fixture=out/'program.o';binary=out/'program.bin'
         h.run([cc,'-mcpu=68000','-Wa,-m68000','-c',repo/program_source,'-o',fixture],env)
-        h.run([bins/'m68k-linux-gnu-objcopy','-O','binary','--only-section=.text',fixture,binary],env)
+        h.run([objcopy,'-O','binary','--only-section=.text',fixture,binary],env)
         if binary.read_bytes()!=bytes.fromhex(program_hex):raise ValueError('Original program encoding mismatch')
     manifest={'schema_version':1,'specification':specification,'profile':profile,
      'compiler':h.run([cc,'--version'],env).splitlines()[0],'profiles':[profiles[0]],'twins_equal':True,
      'original_program_bytes':len(bytes.fromhex(program_hex)),'execution_path':'direct-native-c' if native else 'guarded-68k-fixture',
      'module_count':len(sources),'selected_ports':bool(a.selected_drawing or a.outline_drawing),'outline_drawing':bool(a.outline_drawing),'native_drawing_context':('SPEC-0041' if native else None),'emulator_run':False,'system1_compatibility_proven':False,
      'inputs':{f:hashlib.sha256((repo/f).read_bytes().replace(b'\r\n',b'\n')).hexdigest() for f in (*sources,*headers)}}
+    if a.windows_native:
+        _,after=native_module.inspect(tools,a.windows_prefix)
+        if native_toolchain!=after:raise ValueError('Native toolchain changed during build')
+        manifest['native_windows_toolchain']=native_toolchain
+        manifest['inputs']['scripts/m68k_windows_toolchain.py']=hashlib.sha256((repo/'scripts/m68k_windows_toolchain.py').read_bytes().replace(b'\r\n',b'\n')).hexdigest()
     if a.window_timer_poll_probe:manifest.update({'timer_poll_experiment':True,'timer_reload_count':4096//a.window_timer_divisor,'timer_frequency_qualified':False,'physical_edge_completeness_qualified':False,'SCC_master_interrupts':False})
     if a.window_timer_refresh_probe:manifest['timer_refresh_experiment']=True
     if a.window_timer_live_pair:manifest['timer_live_pair']={'live':True,'checkpoint':False,'halts_after_observation':False,'motion_claimed':False,'physical_timing_qualified':False,'programmed_reload_divisor':a.window_timer_divisor,'new_MMIO_operations':0}
