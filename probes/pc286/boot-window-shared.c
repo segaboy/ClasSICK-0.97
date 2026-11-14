@@ -26,13 +26,20 @@ static void white_display(void)
 
 static void present(int left,int top,int right,int bottom)
 {
-    unsigned x,y,first,last;
+    unsigned x,y,first,last,width;
     unsigned char __far *video=(unsigned char __far *)0xa0000000UL;
+    unsigned char __far *dst;
+    const unsigned char *src;
     if(left<0)left=0;if(top<0)top=0;if(right>512)right=512;if(bottom>342)bottom=342;
     if(left>=right || top>=bottom)return;
     first=(unsigned)left/8u;last=((unsigned)right+7u)/8u;
-    for(y=(unsigned)top;y<(unsigned)bottom;++y)
-        for(x=first;x<last;++x)video[(y+4u)*80u+x+8u]=(unsigned char)~canvas[y*64u+x];
+    width=last-first;
+    src=canvas+(unsigned)top*64u+first;
+    dst=video+((unsigned)top+4u)*80u+first+8u;
+    for(y=(unsigned)top;y<(unsigned)bottom;++y) {
+        for(x=0;x<width;++x)dst[x]=(unsigned char)~src[x];
+        if(y+1u<(unsigned)bottom) {src+=64u;dst+=80u;}
+    }
 }
 
 static void publish(const cs_window_input *o,unsigned count,unsigned button)
@@ -68,7 +75,13 @@ void start(void)
         else if(scan==0x48)sample.dy=-16;else if(scan==0x50)sample.dy=16;
         else if((key&0xffu)==0x20u)button^=1u;else continue;
         sample.buttons=button;old_x=(int)owner.pointer.x;old_y=(int)owner.pointer.y;
+#ifdef CS_P286_TIMING_MARKERS
+        post((unsigned char)(0xc0u+count));
+#endif
         result=cs_window_input_sample(&owner,&sample);
+#ifdef CS_P286_TIMING_MARKERS
+        post((unsigned char)(0xd0u+count));
+#endif
         if(result!=CS_WINDOW_INPUT_OK && result!=CS_WINDOW_INPUT_CHANGED)fail(0xe4);
         present((int)owner.render.dirty.left,(int)owner.render.dirty.top,
                 (int)owner.render.dirty.right,(int)owner.render.dirty.bottom);
@@ -77,6 +90,9 @@ void start(void)
         present(old_x-7,old_y-7,old_x+8,old_y+8);
         present((int)owner.pointer.x-7,(int)owner.pointer.y-7,
                 (int)owner.pointer.x+8,(int)owner.pointer.y+8);
+#ifdef CS_P286_TIMING_MARKERS
+        post((unsigned char)(0xe0u+count));
+#endif
         ++count;publish(&owner,count,button);post((unsigned char)(0xb0u+(count&0x3fu)));
     }
 }

@@ -26,7 +26,7 @@ def main():
     runtime=p.add_mutually_exclusive_group(required=True)
     runtime.add_argument('--runtime-library',type=Path);runtime.add_argument('--assembler',type=Path)
     p.add_argument('--host-cc',required=True,type=Path);p.add_argument('--emulator',required=True,type=Path)
-    p.add_argument('--output',required=True,type=Path);a=p.parse_args()
+    p.add_argument('--output',required=True,type=Path);p.add_argument('--timing-markers',action='store_true');a=p.parse_args()
     try:
         h=module('helpers',ROOT/'scripts/Test-BootHushPC286BankPlan.py')
         oracle=module('compositor',ROOT/'scripts/Test-BootHushPC286SharedCompositor.py')
@@ -53,7 +53,8 @@ def main():
         host=ROOT/'probes/pc286/window-host-sequence.c';objects=[]
         for source in (*sources,guest):
             obj=out/(str(source.relative_to(ROOT)).replace('\\','-').replace('/','-')+'.obj')
-            h.run([wcc,*flags,'-fo='+str(obj),source],out,env,out/(obj.name+'.log'));objects.append(obj)
+            extra=['-dCS_P286_TIMING_MARKERS'] if a.timing_markers and source==guest else []
+            h.run([wcc,*flags,*extra,'-fo='+str(obj),source],out,env,out/(obj.name+'.log'));objects.append(obj)
         if assembler:
             obj=out/'original-arithmetic.obj'
             h.run([assembler,'-zq','-2','-ms','-fo='+str(obj),ROOT/'arch/i286/watcom-arithmetic.asm'],
@@ -118,6 +119,7 @@ def main():
                                   *((ROOT/'arch/i286/watcom-arithmetic.asm',) if assembler else ()))},
                 'payload_bytes':binary.stat().st_size,'payload_sha256':h.digest(binary),'floppy_sha256':before,
                 'bss_start':bss_start,'bss_bytes':bss_size,'bss_poisoned_before_load':True,
+                'timing_markers':a.timing_markers,
                 'cases':observations,'floppy_unchanged':True,'pixel_mutations_rejected':2,
                 'limits':'Same-source hosted/286 scripted input; experimental helpers require review; no Mac boot, E3/E4 or physical claim.'}
         (out/'report.json').write_text(json.dumps(report,indent=2)+'\n',encoding='utf-8')

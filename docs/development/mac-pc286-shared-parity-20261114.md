@@ -250,3 +250,42 @@ keyboard rollover were not qualified. Exact schedules, JSON, images and hashes
 are in `C:/Repos/.task-temp/pc286-input-rate-20261114-a`. Reproduce with
 `scripts/Test-BootHushPC286InputRate.py` using the same executable and
 `pc286-shared-session-20261114-k` plus a fresh output directory.
+
+### EGA copy measurement and improvement
+
+Optional diagnostic POST markers isolate the first 16-pixel drag into shared
+input/scene work and EGA publication. The instrumented pre-change fixture
+spent 1,271,624 modeled cycles in the shared sample and 833,782 in publication
+(`C:/Repos/.task-temp/pc286-timing-20261114-a`). Its source and image identity,
+build options, matching seven checkpoint frames and schedules are in
+`C:/Repos/.task-temp/pc286-shared-timing-20261114-a`. Intervals include marker
+overhead and are BootHush estimates, not physical measurements.
+
+The EGA adapter now computes the source and destination row addresses once per
+row instead of repeating multiplications for every byte. The same instrumented
+drag measured 1,271,624 shared-sample cycles and 400,139 publication cycles,
+about 52% less publication work, in `C:/Repos/.task-temp/pc286-timing-20261114-c`.
+Seven instrumented state and full-pixel checks still pass in
+`C:/Repos/.task-temp/pc286-shared-timing-20261114-c`. An intermediate version
+(`-b`) measured 398,591 cycles but was revised to avoid computing a source
+pointer beyond the array after the last row.
+
+The uninstrumented 21,088-byte payload SHA-256 is
+`6a6b14dc8991918c045cef0a1f3bc0a5fd95ca85adde37034ec761f5d2263c79`,
+and test floppy SHA-256 is
+`4974fbea22221ccb26ea2af90a13aec4a8bc847ee8beb958e3caa7ce703df845`.
+Seven same-source 286 and seven Mac/286 comparisons plus replay pass in
+`C:/Repos/.task-temp/pc286-shared-session-20261114-m` and
+`C:/Repos/.task-temp/mac-pc286-parity-20261114-i`. The two-fill stack test
+again observes a 1,056-byte touched span in
+`C:/Repos/.task-temp/pc286-stack-window-20261114-c`.
+The four input-rate cases all reach the same final state and pixels in
+`C:/Repos/.task-temp/pc286-input-rate-20261114-c`; the fastest sequence
+finishes at cycle 15,523,853 instead of 17,713,107 before this change. A
+backlog remains. No physical speed, worst-case stack, user-acceptance or
+production-release claim follows.
+
+Reproduce by running `Test-BootHushPC286SharedSession.py` with the original
+assembler as above and `--timing-markers`, then run
+`scripts/Test-BootHushPC286Timing.py` with that result directory, `$bh` and a
+fresh output directory. Repeat without the flag for the uninstrumented checks.
