@@ -235,3 +235,18 @@ The images, full ranges, exact commands, hashes and results are retained in
 `C:/Repos/.task-temp/pc286-three-track-20261114-d`, with nine invalid inputs.
 The matching Mac replay receipt is
 `C:/Repos/.task-temp/mac-pc286-parity-20261114-g`.
+
+### Input-rate characterization
+
+The same eleven 286 key presses, each with its corresponding break sequence,
+were scheduled with starts 5,000,000, 1,000,000, 500,000 and 250,000 modeled
+cycles apart. Every run reached the same final state and all final pixels;
+the respective stop cycles were 56,238,947; 18,472,973; 17,713,107; and
+17,713,107. At the shortest period the last make was due at 8,500,000 cycles,
+so the final response followed roughly 9.2 million modeled cycles later. This
+indicates a modeled backlog in this scenario, not an established physical
+latency or usable-input-rate threshold; intermediate responses and physical
+keyboard rollover were not qualified. Exact schedules, JSON, images and hashes
+are in `C:/Repos/.task-temp/pc286-input-rate-20261114-a`. Reproduce with
+`scripts/Test-BootHushPC286InputRate.py` using the same executable and
+`pc286-shared-session-20261114-k` plus a fresh output directory.
