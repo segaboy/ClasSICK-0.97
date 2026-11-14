@@ -75,3 +75,8 @@ The next critical step is a genuine C16-compatible shared compositor and
 presentation binding, followed by same-sequence Mac/286 state and pixel
 comparisons. BIOS and EGA behavior here are BootHush-model observations;
 E1–E4, physical and human testing, budgets, review and release gates remain.
+
+Subsequent work extended the diagnostic loader limit to 22,528 bytes and
+exercised the actual shared compositor on the modeled 286, including seven
+Mac/286 comparisons. See [shared-window evidence](mac-pc286-shared-parity-20261114.md)
+for the current results, runtime licensing hold and remaining release gates.

@@ -28,7 +28,8 @@ static int fill(const canvas *c,int32_t x,int32_t y,int32_t w,int32_t h,uint32_t
     if(left>=right || top>=bottom)return 1;
     top-=c->top;bottom-=c->top;
     if(c->s->format==CS_SURFACE_RGBA8){
-        cs_rect rect={left,top,right,bottom};
+        cs_rect rect;
+        rect.left=left;rect.top=top;rect.right=right;rect.bottom=bottom;
         return cs_surface_fill(c->s,rect,black?UINT32_C(0x000000FF):UINT32_C(0xFFFFFFFF))==CS_SURFACE_OK;
     }
     size_t first=(size_t)left/8u,last=(size_t)(right-1)/8u;

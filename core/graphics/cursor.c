@@ -2,8 +2,8 @@
 /* Copyright (C) 2026 Dean Howell. */
 #include "cursor.h"
 
-_Static_assert(sizeof(cs_cursor_state) <= 64u, "cursor state over 64 bytes");
-_Static_assert(sizeof(cs_cursor_bits) == 64u, "cursor bits not 64 bytes");
+typedef char cs_cursor_state_must_fit[(sizeof(cs_cursor_state) <= 64u) ? 1 : -1];
+typedef char cs_cursor_bits_must_be_64[(sizeof(cs_cursor_bits) == 64u) ? 1 : -1];
 
 #define CUR_FRAME_MAX 8192
 #define CUR_CANVAS_W 512

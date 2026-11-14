@@ -24,7 +24,7 @@ def main():
             except ValueError:continue
             raise ValueError('invalid loader input accepted')
         out.mkdir(parents=True,exist_ok=False);cases=[]
-        for size in (6,7168,7169,14848,14849,MAX_PAYLOAD):
+        for size in (6,7168,7169,14848,14849,22016,22017,MAX_PAYLOAD):
             payload=bytes.fromhex('b0a4e680ebfe')+bytes((i*13+7)&255 for i in range(size-6))
             image=out/f'payload-{size}.img'
             with image.open('xb') as f:f.write(floppy(payload,0))
