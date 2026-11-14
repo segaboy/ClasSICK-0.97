@@ -1,5 +1,15 @@
 # Clean-room policy
 
+> **Current owner amendment, 2026-11-14:** The project now follows the
+> [independent implementation and provenance policy](../development/independent-implementation-20261114.md).
+> The same developer may work on ClasSICK and project-owned BootHush; the
+> recorded BootHush exposure does not require a separate implementer or stop
+> ClasSICK development. Blanket emulator-source exclusions and automatic
+> exposure/role separation below are superseded to the extent described by that
+> amendment. Apple/Microsoft implementation, protected assets, licensing,
+> evidence, reference-trial and release boundaries remain. The historical file
+> and dated decisions are preserved; other unconflicted requirements still apply.
+
 Status: **binding project policy**, established 2026-10-07 before implementation.
 
 ## Compatibility boundary

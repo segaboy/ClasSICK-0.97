@@ -1,6 +1,6 @@
 # Contributing to ClasSICK 0.97
 
-Read [the clean-room policy](docs/clean-room/POLICY.md) before opening an issue,
+Read [the independent implementation policy](docs/development/independent-implementation-20261114.md) and its [historical policy](docs/clean-room/POLICY.md) before opening an issue,
 PR, experiment, or AI-assisted task. It applies to all public surfaces, including
 attachments, commit messages, branch history, and CI artifacts.
 
@@ -13,7 +13,7 @@ agreed before acceptance. Retain accurate authorship/copyright notices and decla
 any third-party material. You must own the contribution or have sufficient rights
 to provide it under these terms. No copyright assignment or separate CLA is imposed.
 
-The project license does not waive the clean-room policy or grant rights in Apple
+The project license does not waive the independent implementation policy or grant rights in Apple
 software/assets or proprietary applications. Incompatible or uncertain-origin
 dependencies must not be merged. Do not attach protected implementations to ask
 about license compatibility. See [license scope](COPYRIGHT.md).

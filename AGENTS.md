@@ -18,13 +18,15 @@ Current owner scope (2026-11-12): advance the Mac release and the 286 port using
 - Keep the exact name **ClasSICK 0.97**.
 - Project code, documentation and assets are GPL-3.0-or-later (owner, 2026-10-07). Contributions are inbound=outbound. Changing either needs explicit owner approval. Third-party inputs need their own license and provenance review.
 
-## Clean room and sources
+## Independent implementation and sources
+
+- Owner amendment 2026-11-14: [independent implementation and provenance](docs/development/independent-implementation-20261114.md) is the current policy. Its explicit amendments supersede conflicting blanket emulator-source, automatic exposure-stop and research/implementation role-separation language in older records. Preserve those records as history. Work on ClasSICK and our own BootHush may be done by the same developer; the recorded BootHush exposure is not a blocker.
 
 - The goal is behavioral compatibility. Apple's implementation is never a source.
-- Never fetch, inspect, copy, disassemble, decompile, translate or prompt with prohibited implementation inputs: Apple or Microsoft implementation code, Apple ROM/media code, leaked source, disassembly, emulator source, firmware internals, copied protected assets or their derivatives. No manual sample code is an implementation input. Separately admitted lawful black-box reference use remains subject to POLICY; it grants no source inspection, worker transfer or redistribution.
+- Never fetch, inspect, copy, disassemble, decompile, translate or prompt with prohibited implementation inputs: Apple or Microsoft implementation code, Apple ROM/media code, leaked source, disassembly, firmware internals, copied protected assets or their derivatives. Do not assume third-party emulator source or manual samples are eligible: assess provenance, license and the independent-code goal first. Separately admitted lawful black-box reference use remains subject to POLICY; it grants no source inspection, worker transfer or redistribution.
 - Use published editions only (SRC-0067). The 1984-85 CONFIDENTIAL pre-release drafts are excluded (SRC-0070). Facts that came from them must be re-sourced. The excluded cached summary stays excluded. The owner's Inside Macintosh PDF stays outside Git.
 - A source with uncertain provenance is ineligible until reviewed. Do not adopt firmware based on product or license names. Record source IDs plus edition, page and section.
-- On uncertain/prohibited exposure, stop the affected lane, exclude the material and record/notify privately as required by POLICY; owner disposition controls restart. Reviewed interface-fact paraphrases may go to fresh workers within SRC-0402..0411; manual pages remain lead-only.
+- On uncertain rights or prohibited material, exclude and quarantine the affected material, record the issue and resolve the affected contribution before use or publication. Continue independent authorized work. Do not claim permitted study or a tool observation automatically proves eligibility, originality or hardware behavior. Manual pages remain lead-only unless explicitly authorized.
 - Microsoft FAT32 terms are accepted for PC boot tooling only, outside the System 0.97 clean-room scope.
 - Admit exact platform/source/build before any trial. Existing Snow and VirtualBox clearance is black-box only (SRC-0059/0076); no emulator fork/source or firmware extraction. Mini vMac availability is not clearance; QEMU, OVMF and MAME remain uncleared. Independent distributions do not require Apple ROMs; reference-only interoperability stays separately gated.
 - Keep historical facts, observations, decisions and implementations distinct. A later manual does not prove 1984 behavior.

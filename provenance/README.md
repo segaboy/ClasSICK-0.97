@@ -1,5 +1,7 @@
 # Provenance ledger
 
+Current owner amendment: [independent implementation and provenance](../docs/development/independent-implementation-20261114.md) permits the same developer to work on ClasSICK and project-owned BootHush without an automatic exposure stop. Source-specific rights, original implementation, meaningful tests, accurate evidence and licensing review remain. Older role-separation language is historical where it conflicts.
+
 Every major compatibility subsystem must trace behavior through:
 
 **eligible source -> independently written specification -> test -> original implementation**.
