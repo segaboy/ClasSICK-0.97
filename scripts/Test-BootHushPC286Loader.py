@@ -61,8 +61,38 @@ def main():
             except ValueError:
                 continue
             raise ValueError("invalid loader input was accepted")
+        # The payload crosses the track boundary. Each injection matches the
+        # starting CHS of one loader read, not the firmware bootstrap read.
+        payload = code + bytes((i * 13 + 7) & 255 for i in range(7169-len(code)))
+        failure_cases = []
+        for name, chs, expected in (
+            ("first-track", "0:0:2", bytes(7169)),
+            ("second-track", "0:1:1", payload[:7168] + b"\0"),
+        ):
+            image = out / f"failure-{name}.img"
+            with image.open("xb") as stream:
+                stream.write(h.floppy(payload, 0))
+            before = h.digest(image)
+            args = [emulator, "--machine", "pc286", "--floppy", image,
+                    "--fail-floppy-read", chs, "--cycles", "8000000",
+                    "--timeout-ms", "20000", "--until-post", "0xee",
+                    "--inspect", "0x10000:4096", "--inspect", "0x11000:3073"]
+            result = json.loads(h.run(args, out, os.environ.copy(), out / f"failure-{name}.log"))
+            ranges = result.pop("memory_ranges", [])
+            fault = result.get("floppy_read_failure", {})
+            actual = b"".join(bytes.fromhex(row.get("bytes", "")) for row in ranges)
+            selected = [int(x) for x in chs.split(":")]
+            if (result.get("status") != "condition_met" or result.get("post") != 0xee or
+                    len(ranges) != 2 or [x.get("address") for x in ranges] != [0x10000,0x11000] or
+                    actual != expected or fault.get("injected") != 1 or fault.get("bios_status") != 32 or
+                    [fault.get(x) for x in ("cylinder","head","sector")] != selected or
+                    h.digest(image) != before):
+                raise ValueError(f"{name}: injection, stopped state, loaded bytes or disk mismatch")
+            failure_cases.append({"name": name, "chs": chs, "result": result,
+                                  "floppy_sha256": before, "floppy_unchanged": True,
+                                  "memory_matches_expected": True})
         report = {"schema_version": 1, "emulator_sha256": h.digest(emulator), "cases": observations,
-                  "invalid_inputs_rejected": 4,
+                  "invalid_inputs_rejected": 4, "injected_failures": failure_cases,
                   "limits": "Original diagnostic floppy only; no system installation or hardware claim."}
         (out / "report.json").write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
         print(json.dumps(report, indent=2))

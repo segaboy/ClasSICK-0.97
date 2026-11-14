@@ -5138,3 +5138,7 @@ Qt Group, published [QGuiApplication constructor, Platform-Specific Arguments](h
 ## SRC-0606 - Owner-directed Not Super Tilt Bro original Mac input observation
 
 2026-11-13; selected local GPL-3.0-or-later original Mac controls probe and BootHush public M0110 interface; identity manifest and byte-identical intake copies outside Git at `C:/ClasSICK/tilt-intake-20261113-a/intake`. Untracked, concurrently changing local files are identified by exact hashes. Includes only original probe observations and emulator interface facts; excludes game-derived implementations, NES ROMs, game assets, emulator implementation and reference media. SPEC-0099 / IMPL-0119 / TEST-0166. [Review and limits](../docs/development/tilt-keyboard-intake-20261113.md).
+
+## SRC-0607 - Owner-directed keyboard recovery observation and BootHush interfaces
+
+2026-11-14; Not Super Tilt Bro `3db162d` movement-evidence and provenance documents, plus BootHush `f41ddc5` keyboard, mouse witness and PC/AT interface documentation. Byte-identical intake copies and identity manifest are outside Git at `C:/ClasSICK/boothush-intake-20261114-a`. The separate game's reported one-shot fault recovery is a test-scenario lead, not evidence that ClasSICK recovers or that physical hardware behaves so. Game-derived code, assets, NES media, emulator implementation and reference media are excluded. [Review and observations](../docs/development/boothush-paired-20261114.md).
