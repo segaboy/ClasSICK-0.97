@@ -104,3 +104,31 @@ Production 286 boot/presentation, runtime admission, full budgets, input and
 performance qualification, matching candidate builds, E1-E4 dispositions,
 human/physical trials, provenance review, packaging and separate publication
 approval remain open. Do not treat this experiment as a completed milestone.
+
+## Narrow surface arithmetic follow-up
+
+After the preceding recorded run, surface validation selects `uint32_t` as its
+wide intermediate only when both `size_t` and `ptrdiff_t` maxima fit in it;
+larger hosts retain `uintmax_t`. Positive dimensions are int32, and the RGBA
+multiplication is preceded by the existing `SIZE_MAX / 4` guard. This removes
+the two 64-bit runtime modules from the current 286 link; `i4d` and `i4m`
+remain, and the same runtime review remains open. The new 21,084-byte payload
+SHA-256 is `8a33cfde760dd130807688bc92edb80e6c64aa7f1af222023f89f2923d555122`,
+and floppy SHA-256 is
+`050cef45dffecb66bf8e531d62a09132dbead2b8030d64c5cecadfb97ded20d7`.
+The same seven state/image/margin checks and replay passed; receipts are
+`C:/Repos/.task-temp/pc286-shared-session-20261114-f` and
+`C:/Repos/.task-temp/mac-pc286-parity-20261114-d`. A separate static-compositor
+comparison is `C:/Repos/.task-temp/pc286-shared-compositor-20261114-b`.
+
+The real C16 `cs_surface_init` additionally passed 13 boundary cases in
+BootHush, including row-size, stride, storage and `PTRDIFF_MAX` boundaries.
+An intentionally incorrect expectation reached its failure marker, proving
+the fixture detects a mismatch. Exact commands, inputs, image hashes and
+results are in `C:/Repos/.task-temp/pc286-surface-boundaries-20261114-a`;
+reproduce with `scripts/Test-BootHushPC286SurfaceValidate.py` using the same
+tool root, runtime and BootHush paths as above and a new output directory.
+The 16 relevant hosted CTest cases (surface, numeric model, compositor, cursor
+and window) also passed in `C:/Repos/.task-temp/classick-host-20261114-c`.
+The numeric model is independent but does not by itself cover every C16 input;
+the physical and release limits above are unchanged.

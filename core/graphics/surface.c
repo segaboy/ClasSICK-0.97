@@ -2,10 +2,19 @@
 /* Copyright (C) 2026 Dean Howell. */
 #include "surface.h"
 
+/* On narrow hosts, 32 bits already represent every positive int32_t dimension
+ * and every size_t value. Avoid unnecessary 64-bit helper calls on C16 while
+ * retaining uintmax_t for wider size_t and ptrdiff_t ranges. */
+#if SIZE_MAX <= UINT32_MAX && PTRDIFF_MAX <= UINT32_MAX
+typedef uint32_t cs_surface_wide;
+#else
+typedef uintmax_t cs_surface_wide;
+#endif
+
 static cs_surface_result validate(uint8_t *storage, size_t storage_size,
     int32_t width, int32_t height, size_t stride, cs_surface_format format)
 {
-    uintmax_t row_bytes;
+    cs_surface_wide row_bytes;
     size_t span;
 
     if (storage == NULL) {
@@ -17,7 +26,7 @@ static cs_surface_result validate(uint8_t *storage, size_t storage_size,
     if (width <= 0 || height <= 0) {
         return CS_SURFACE_ERR_DIMENSION;
     }
-    row_bytes = (uintmax_t)(uint32_t)width;
+    row_bytes = (cs_surface_wide)(uint32_t)width;
     if (format == CS_SURFACE_MONO1_MSB) {
         row_bytes = row_bytes / 8u + (row_bytes % 8u != 0u ? 1u : 0u);
     } else {
@@ -33,11 +42,11 @@ static cs_surface_result validate(uint8_t *storage, size_t storage_size,
         return CS_SURFACE_ERR_STRIDE;
     }
     /* stride is nonzero here. Check before narrowing height or multiplying. */
-    if ((uintmax_t)(uint32_t)height > SIZE_MAX / stride) {
+    if ((cs_surface_wide)(uint32_t)height > SIZE_MAX / stride) {
         return CS_SURFACE_ERR_OVERFLOW;
     }
     span = stride * (size_t)height;
-    if ((uintmax_t)span > (uintmax_t)PTRDIFF_MAX) {
+    if ((cs_surface_wide)span > (cs_surface_wide)PTRDIFF_MAX) {
         return CS_SURFACE_ERR_OVERFLOW;
     }
     if (storage_size < span) {

@@ -54,7 +54,7 @@ def main():
         text=mapping.read_text(encoding='utf-8',errors='replace')
         entry=re.search(r'Entry point address:\s*([0-9a-fA-F]+)',text)
         used=sorted(set(re.findall(r'clibs\.lib\(([^)]+)\)',text,re.I)))
-        if not entry or used!=['i4d','i4m','i8d086','i8m086']:
+        if not entry or used!=['i4d','i4m']:
             raise ValueError('unexpected link entry or runtime module set')
         image=out/'session.img'
         with image.open('xb') as f:f.write(floppy(binary.read_bytes(),int(entry.group(1),16)))
