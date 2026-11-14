@@ -36,7 +36,7 @@ def main():
         prior.get('mac_rom_sha256') != sha(rom) or prior.get('mac_manifest_sha256') != sha(manifest)):
         raise ValueError('passing baseline identity mismatch')
     out.mkdir(parents=True, exist_ok=False);cases = []
-    for name in ('image','hash','type'):
+    for name in ('image','hash','type','wrong-geometry'):
         folder = out/name;folder.mkdir();image = folder/'session.img'
         shutil.copyfile(pc/'session.img', image)
         altered = dict(baseline)
@@ -45,8 +45,10 @@ def main():
                 stream.seek(-1, 2);byte = stream.read(1);stream.seek(-1, 2);stream.write(bytes([byte[0]^1]))
         elif name == 'hash':
             altered['media_sha256'] = '0'*64
-        else:
+        elif name == 'type':
             altered['media'] = 'unknown'
+        else:
+            altered['media'] = 'floppy'
         (folder/'report.json').write_text(json.dumps(altered, indent=2)+'\n', encoding='utf-8')
         dest = out/(name+'-run')
         cmd = [sys.executable,'-B',str(ROOT/'scripts/Test-BootHushMac286Parity.py'),
@@ -54,7 +56,9 @@ def main():
                '--pc-results',str(folder),'--output',str(dest)]
         result = subprocess.run(cmd, capture_output=True, text=True, timeout=15,
                                 creationflags=getattr(subprocess,'CREATE_NO_WINDOW',0))
-        expected = 'unsupported 286 diagnostic media' if name == 'type' else '286 report, emulator or media identity mismatch'
+        expected = ('unsupported 286 diagnostic media' if name == 'type' else
+                    '286 diagnostic media size mismatch' if name == 'wrong-geometry' else
+                    '286 report, emulator or media identity mismatch')
         if result.returncode == 0 or dest.exists() or expected not in result.stderr:
             raise ValueError(name+': wrong refusal or guest run began: '+result.stderr)
         cases.append({'name':name,'command':cmd,'exit_code':result.returncode,'stderr':result.stderr.strip()})

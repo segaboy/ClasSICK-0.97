@@ -67,6 +67,9 @@ def main():
         media=report.get('media','floppy')
         if media not in ('floppy','hard-disk'):
             raise ValueError('unsupported 286 diagnostic media')
+        expected_media_bytes=1228800 if media=='floppy' else 615*4*17*512
+        if (pc/'session.img').stat().st_size!=expected_media_bytes:
+            raise ValueError('286 diagnostic media size mismatch')
         if report['status']!='pass' or report['boothush_sha256']!=sha(exe) or sha(pc/'session.img')!=media_sha:
             raise ValueError('286 report, emulator or media identity mismatch')
         for name,digest in report['source_sha256'].items():

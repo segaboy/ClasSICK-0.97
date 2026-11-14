@@ -657,17 +657,18 @@ original diagnostic image hash stayed `432b0fbf...`.
 
 Canonical results and commands are in
 `C:/Repos/.task-temp/pc286-shared-hard-disk-20261114-b/report.json`,
-`C:/Repos/.task-temp/mac-pc286-hard-disk-parity-20261114-b/report.json`, and
+`C:/Repos/.task-temp/mac-pc286-hard-disk-parity-20261114-c/report.json`, and
 the corresponding `pc286-shared-floppy-control-20261114-b` and
-`mac-pc286-floppy-control-parity-20261114-b` directories. BootHush executable
+`mac-pc286-floppy-control-parity-20261114-c` directories. BootHush executable
 SHA-256 is `62daf36a8d1e034667fbd73dd09a2a6134a6a0144ea56010d327b41fd110d9da`;
 its source-rebuild limitations are recorded in
 `C:/Repos/boothush/docs/pc286-input-accounting-20261114.md`.
 Four altered Mac manifests were refused before a guest run in
-`C:/Repos/.task-temp/mac-hard-disk-admission-20261114-a`. Three further
-controls changed the disk image, recorded media hash, or media type; each was
+`C:/Repos/.task-temp/mac-hard-disk-admission-20261114-a`. Four further
+controls changed the disk image, recorded media hash, unsupported media type,
+or mislabeled the disk as floppy media; each was
 refused before a paired guest run in
-`C:/Repos/.task-temp/mac-hard-disk-media-admission-20261114-a/report.json`.
+`C:/Repos/.task-temp/mac-hard-disk-media-admission-20261114-b/report.json`.
 These are identity and admission checks, not image authentication.
 Firmware/geometry variation, boot drive selection, partitions, installation,
 failure recovery, full byte coverage, human input, physical trials and release
