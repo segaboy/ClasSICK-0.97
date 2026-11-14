@@ -641,3 +641,11 @@ its changed title ROM, BootHush regression and limitations are identified in
 `C:/Repos/Not-Super-Tilt-Bro/docs/two-character-evidence.md` and
 `C:/Repos/Not-Super-Tilt-Bro/docs/mouse-title-evidence.md`. This is port work,
 not a ClasSICK implementation input or release qualification.
+
+The port also built an opt-in mouse-title/keyboard-play ROM whose player-one
+velocity step calls Windows-compiled 68000 C. Its BootHush regression,
+legacy comparison, mutation control, source attribution and limits are in
+`C:/Repos/Not-Super-Tilt-Bro/docs/windows-native-c-evidence.md`. This
+demonstrates another bounded guest/toolchain exercise; its game-informed code
+is not a ClasSICK implementation input and it closes no ClasSICK release or
+physical-hardware criterion.

@@ -2,7 +2,7 @@
 <!-- Copyright (C) 2026 Dean Howell. -->
 # Owner direction: Mac and 286 paired release
 
-Current policy amendment: [independent implementation and provenance](independent-implementation-20261114.md) supersedes conflicting earlier blanket emulator-source restrictions recorded below. The current [shared-window experiment](mac-pc286-shared-parity-20261114.md) reports seven matching modeled Mac/286 states and their limits; it is not a release candidate or completed milestone.
+Current policy amendment: [independent implementation and provenance](independent-implementation-20261114.md) supersedes conflicting earlier blanket emulator-source restrictions recorded below. The current [shared-window experiment](mac-pc286-shared-parity-20261114.md) reports eight matching modeled Mac/286 states, including a Windows-built source-matched Mac image and a 286 diagnostic with an optional payload check. It is not a production boot, release candidate or completed milestone. The dated direction-time status below is historical; the linked experiment and [Windows toolchain evidence](windows-m68k-toolchain-20261114.md) describe the newer modeled results and remaining gates.
 
 2026-11-14, SRC-0608. The owner pauses x64 work and replaces the PC x64 target of the next paired release with a native 286 target. The initially requested BootHush-only test environment, active BootHush and Not Super Tilt Bro work, evidence sharing, clean-room restrictions and separate release approvals continue. This direction supersedes ADR-0078's Mac/x64 pairing and the x64-specific part of paired-native-preview-2 for the next release; their historical records and published releases remain unchanged. It does not imply a release has been prepared or approved.
 
