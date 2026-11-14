@@ -158,3 +158,15 @@ their logs are `C:/Repos/.task-temp/mac-o2-parity-2048-20261114-a` and
 `C:/Repos/.task-temp/mac-os-parity-2048-20261114-b`. Four manifest rejection
 controls were rerun against the current `-Os` build in
 `C:/Repos/.task-temp/mac-os-admission-20261114-b`.
+
+`scripts/Test-BootHushMacStartup.py` samples the source-matched images' own
+diagnostic stages every five million modeled cycles. In this setup the first
+sample at ready stage 16 was 65 million for `-Os` and 55 million for `-O2`.
+A separate stop-on-stage run observed stage 16 at modeled instruction
+boundaries 60,936,878 (`-Os`) and 53,465,154 (`-O2`), within those brackets.
+Both had fault zero at all samples. The ready-stage result
+shows a startup tradeoff alongside the larger `-O2` ROM and worse fast-input
+outcome above; it does not prove real-hardware timing. Commands, capture data,
+source/manifest hashes and stages are in
+`C:/Repos/.task-temp/mac-os-startup-20261114-b` and
+`C:/Repos/.task-temp/mac-o2-startup-20261114-b`.
