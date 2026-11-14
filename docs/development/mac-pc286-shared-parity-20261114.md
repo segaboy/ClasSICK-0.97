@@ -493,3 +493,5 @@ The current receipts are `C:/Repos/.task-temp/pc286-raw-input-20261114-e`,
 `C:/Repos/.task-temp/mac-pc286-raw-input-20261114-b`. The latter compares all
 eight Mac/286 checkpoints and replays the Mac trace. The original whole-
 interrupt-mask experiment remains preserved above as history.
+The eight independent EGA edge checks and two mutation controls also pass on
+the current source in `C:/Repos/.task-temp/pc286-raw-input-edges-20261114-b`.
