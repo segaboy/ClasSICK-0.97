@@ -3,6 +3,12 @@
 #include "rom.h"
 #include "window-session.h"
 #include "motion.h"
+#if CLASSICK_MAC_KEYBOARD_PROBE
+#include "keyboard.h"
+static cs_mac_keyboard keyboard;
+/* KBD1, event/invalid/timeout counts, bitmap low/high, last 8 transitions. */
+volatile uint32_t cs_mac_keyboard_trace[14];
+#endif
 #ifndef CLASSICK_MAC_TIMER_POLL_PROBE
 #define CLASSICK_MAC_TIMER_POLL_PROBE 0
 #endif
@@ -459,6 +465,10 @@ void cs_mac_main(void)
     cs_mac_probe();if(cs_mac_diag.traps!=1)halt(2);
     cs_mac_diag.stage=3;
     cs_mac_via_init(&io);
+#if CLASSICK_MAC_KEYBOARD_PROBE
+    cs_mac_keyboard_begin(&keyboard);
+    cs_mac_keyboard_trace[0]=UINT32_C(0x4b424431);
+#endif
     cs_mac_diag.stage=4;
     hooks.enter=cs_m68k_foreground_enter;hooks.leave=cs_m68k_foreground_leave;hooks.cookie=0;
     /* begin initializes the NOLOAD session; nothing old is read. */
@@ -489,6 +499,19 @@ void cs_mac_main(void)
     cs_mac_diag.stage=16u;cs_mac_diag.fault=0u;
     __asm__ volatile("andi.w #0xF8FF,%%sr" ::: "cc","memory");
     for(;;){
+#if CLASSICK_MAC_KEYBOARD_PROBE
+        cs_m0110_event key;
+        int kr=cs_mac_keyboard_step(&keyboard,&io,cs_mac_diag.ticks,&key);
+        if(kr==CS_MAC_KEY_EVENT){
+            uint32_t word=4u+key.position/32u,bit=UINT32_C(1)<<(key.position%32u);
+            uint32_t count=cs_mac_keyboard_trace[1];
+            if(key.pressed)cs_mac_keyboard_trace[word]|=bit;
+            else cs_mac_keyboard_trace[word]&=~bit;
+            cs_mac_keyboard_trace[6u+(count%8u)]=(key.position<<1)|key.pressed;
+            saturate(&cs_mac_keyboard_trace[1]);
+        }else if(kr==CS_MAC_KEY_INVALID)saturate(&cs_mac_keyboard_trace[2]);
+        else if(kr==CS_MAC_KEY_TIMEOUT)cs_mac_keyboard_trace[3]=1u;
+#endif
 #if CLASSICK_MAC_SHORT_COLLECT && CLASSICK_MAC_LOSS_COUNTS
         uint32_t fg_start,fg_samples;
 #endif

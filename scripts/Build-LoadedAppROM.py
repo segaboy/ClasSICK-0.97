@@ -82,6 +82,7 @@ def main():
     mode.add_argument('--selected-drawing',action='store_true',help='Build the SPEC-0047 direct native two-port candidate')
     mode.add_argument('--outline-drawing',action='store_true',help='Build the SPEC-0049 paired native outline preview')
     mode.add_argument('--window-drawing',action='store_true',help='Build the SPEC-0072 native Mac window preview')
+    p.add_argument('--window-keyboard-probe',action='store_true',help='Experimental polled M0110 keyboard on the native window profile')
     p.add_argument('--window-idle-probe',action='store_true',help='Diagnostic: halt in a self-branch after >=500 services; window profile only')
     p.add_argument('--window-pending-defer-probe',action='store_true',help='Experimental one-service pending-edge defer; window profile only')
     p.add_argument('--window-first-input-probe',action='store_true',help='Freeze copied trace on delivered input/loss or >=5000 services; window only')
@@ -103,6 +104,7 @@ def main():
     p.add_argument('--window-wait-latch-probe',action='store_true',help='Experimental pending check before baseline publication')
     p.add_argument('--dcd-invert',type=int,choices=(0,1,2,3),default=0,help='Unverified raw RR0 DCD sense mask; window profile only')
     a=p.parse_args()
+    if a.window_keyboard_probe and not a.window_drawing:p.error('--window-keyboard-probe requires --window-drawing')
     if a.window_timer_poll_probe and not a.window_drawing:p.error('--window-timer-poll-probe requires --window-drawing')
     if a.window_timer_poll_probe and (a.window_pending_defer_probe or a.window_phase_idle_probe or a.window_first_input_probe):p.error('Timer experiment cannot combine with SCC defer/phase/first-input experiments')
     if a.window_timer_refresh_probe and not a.window_timer_poll_probe:p.error('--window-timer-refresh-probe requires --window-timer-poll-probe')
@@ -183,6 +185,9 @@ def main():
             if len(found)!=1:raise ValueError('Specification lookup SPEC-'+number)
             specs.append(found[0].relative_to(repo).as_posix())
         sources=WINDOW_SOURCES;headers=WINDOW_HEADERS+tuple(specs)
+        if a.window_keyboard_probe:
+            sources+=('platform/mac128k/keyboard.c','core/input/m0110-reply.c')
+            headers+=('platform/mac128k/keyboard.h','core/input/m0110-reply.h','docs/specifications/SPEC-0099-m0110-reply.md','docs/specifications/SPEC-0100-mac-keyboard-experiment.md')
         if a.window_timer_poll_probe:
             sources=tuple(x for x in sources if x!='platform/mac128k/motion.c')+('platform/mac128k/timer-poll.c','platform/mac128k/polled-phase.c')
             headers+=('platform/mac128k/timer-poll.h','platform/mac128k/polled-phase.h')
@@ -211,6 +216,7 @@ def main():
         if a.window_rearm_ready_probe:profile='native-window-'+('fast-' if a.window_fast_collect else '')+'rearm-ready-probe-v1';specification='SPEC-0094'
         if a.window_wait_latch_probe:profile='native-window-'+('fast-' if a.window_fast_collect else '')+'wait-latch-probe-v1';specification='SPEC-0095'
         if a.window_short_collect:profile='native-window-short-collect-experiment-v1';specification='SPEC-0096'
+        if a.window_keyboard_probe:profile+='-keyboard-experiment';specification='SPEC-0100'
     if 'apps/product-scene/scene.c' in sources:
         headers+=('apps/product-scene/fixed-mono.h',)
     profiles=[]
@@ -225,6 +231,7 @@ def main():
         if a.selected_drawing or a.outline_drawing:flags+=['-DCLASSICK_SELECTED_DRAWING=1']
         if a.outline_drawing:flags+=['-DCLASSICK_OUTLINE_DRAWING=1']
         if a.window_drawing:flags+=['-DCLASSICK_MAC_DCD_INVERT='+str(a.dcd_invert)]
+        if a.window_keyboard_probe:flags+=['-DCLASSICK_MAC_KEYBOARD_PROBE=1']
         if a.window_idle_probe or a.window_first_input_probe:flags+=['-DCLASSICK_MAC_IDLE_PROBE=1']
         if a.window_timer_poll_probe:flags+=['-DCLASSICK_MAC_TIMER_POLL_PROBE=1']
         if a.window_timer_refresh_probe:flags+=['-DCLASSICK_MAC_TIMER_REFRESH_PROBE=1']
@@ -260,6 +267,7 @@ def main():
         if a.selected_drawing:required=tuple(x for x in required if x!='cs_native_draw')+('cs_selected_draw','cs_qd_select_get','cs_qd_select_set')
         if a.outline_drawing:required=tuple(x for x in required if x not in ('cs_native_draw','cs_qd_rect','cs_qd_view_rect'))+('cs_outline_draw','cs_qd_view_outline','cs_qd_select_get','cs_qd_select_set')
         if a.window_drawing:required=('cs_mac_main','cs_mac_window_begin','cs_mac_motion_service','cs_foreground_step','cs_mac_window_via_irq','cs_mac_window_scc_irq','cs_mac_window_combined_irq','cs_mac_window_interrupt','cs_product_scene','cs_window_apply','cs_m68k_foreground_enter','cs_m68k_foreground_leave')
+        if a.window_keyboard_probe:required+=('cs_mac_keyboard_step','cs_m0110_reply','cs_mac_keyboard_trace')
         if a.window_timer_poll_probe:required=tuple(x for x in required if x!='cs_mac_motion_service')+('cs_mac_timer_poll_service','cs_mac_polled_step')
         if a.window_timer_activity_probe:required+=('cs_mac_activity_pair','cs_mac_activity_trace','cs_mac_activity_checkpoint','cs_mac_activity_spin')
         elif any(name.startswith('cs_mac_activity_') for name in syms):raise ValueError('Unexpected activity observer in default profile')
