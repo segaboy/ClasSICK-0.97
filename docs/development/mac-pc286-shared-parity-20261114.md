@@ -438,3 +438,40 @@ in `C:/Repos/.task-temp/pc286-input-platform-session-20261114-a` and
 mutation tests also pass in `C:/Repos/.task-temp/pc286-input-platform-edges-20261114-a`.
 These are scheduled emulator inputs; the production input, responsiveness,
 source-matched Mac build, hardware, human and release gates remain open.
+
+## Experimental scan-code press and release
+
+The earlier BIOS key-word path cannot distinguish Space release from repeat.
+An independent limited software decoder now handles set-1 and set-2 make,
+break, prefixes, repeat suppression and explicit error refusal under
+[SPEC-0103](../specifications/SPEC-0103-pc286-keyboard-scan-pointer.md).
+It derives the existing pointer samples from received bytes; it is not a full
+keyboard/controller driver. The host regression and an intentionally broken
+repeat control are in `C:/Repos/.task-temp/pc286-keyscan-host-20261114-a`;
+reproduce with `scripts/Test-PC286KeyboardScan.py --cc $cc --output` and a
+fresh output directory.
+
+The opt-in 286 raw fixture masks interrupts after BIOS video setup and polls
+controller ports. It assumes translated set 1 and stops on reported errors;
+no controller initialization, translation verification, interrupt coexistence
+or recovery is implemented. BootHush's own firmware configures translation
+for this model; its source and observed behavior are not physical-hardware
+proof. The initial attempt `C:/Repos/.task-temp/pc286-raw-input-20261114-a`
+assumed untransformed set 2 and timed out without movement, exposing this
+assumption. The corrected opt-in fixture uses translated set 1; no change to
+the emulator was needed.
+
+BootHush injected set-2 make/break events, including a repeated Space make
+before each break. The translated stream produced exactly the two expected
+presses and releases through all eight natural-start 286 checkpoints; all
+canvas and margin pixels match and Mac capture/replay also matches. The
+21,822-byte payload SHA-256 is
+`a9fb7b6ed4027bb39f0b4759d5adae95ec22aa397808adfa7b26cddb50e07799`;
+floppy SHA-256 is
+`a34add7885d48a640b2dc2b9457a59e8f215a999f581e1a5bc8f1c21befb2596`.
+Receipts are `C:/Repos/.task-temp/pc286-raw-input-20261114-b` and
+`C:/Repos/.task-temp/mac-pc286-raw-input-20261114-a`. The BIOS-key variant
+remains separately tested in `C:/Repos/.task-temp/pc286-bios-input-20261114-a`.
+Reproduce the raw fixture using the natural-start shared-session command plus
+`--raw-keyboard`, then the usual Mac parity runner. These are E2-style modeled
+events, not human or physical input, and the limitations in SPEC-0103 remain.

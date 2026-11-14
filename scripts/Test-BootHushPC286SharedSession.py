@@ -16,7 +16,7 @@ ROOT=Path(__file__).resolve().parents[1]
 SOURCES=('core/graphics/surface.c','core/graphics/cursor.c','core/input/pointer.c',
          'core/input/mouse.c','core/ui/window.c','apps/product-scene/scene.c',
          'apps/window-scene/scene.c','apps/window-scene/input.c','platform/pc286/ega-mono.c',
-         'platform/pc286/keyboard-pointer.c')
+         'platform/pc286/keyboard-pointer.c','platform/pc286/keyboard-set2.c')
 
 def module(name,path):
     spec=importlib.util.spec_from_file_location(name,path);m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m);return m
@@ -28,7 +28,8 @@ def main():
     runtime.add_argument('--runtime-library',type=Path);runtime.add_argument('--assembler',type=Path)
     p.add_argument('--host-cc',required=True,type=Path);p.add_argument('--emulator',required=True,type=Path)
     p.add_argument('--output',required=True,type=Path);p.add_argument('--timing-markers',action='store_true')
-    p.add_argument('--natural-start',action='store_true',help='test the continuous sequence from the shared pointer initial position');a=p.parse_args()
+    p.add_argument('--natural-start',action='store_true',help='test the continuous sequence from the shared pointer initial position')
+    p.add_argument('--raw-keyboard',action='store_true',help='experimental translated set-1 make/break polling');a=p.parse_args()
     try:
         h=module('helpers',ROOT/'scripts/Test-BootHushPC286BankPlan.py')
         oracle=module('compositor',ROOT/'scripts/Test-BootHushPC286SharedCompositor.py')
@@ -37,6 +38,7 @@ def main():
         assembler=a.assembler.resolve(strict=True) if a.assembler else None
         cc=a.host_cc.resolve(strict=True);exe=a.emulator.resolve(strict=True);out=a.output.resolve()
         if out==ROOT or ROOT in out.parents:raise ValueError('output must be outside the repository')
+        if a.raw_keyboard and not a.natural_start:raise ValueError('raw keyboard test requires natural start')
         if lib and h.digest(lib)!=oracle.LIB_SHA:raise ValueError('runtime library hash mismatch')
         if assembler:
             arith=module('arithmetic',ROOT/'scripts/Test-BootHushPC286Arithmetic.py')
@@ -57,6 +59,7 @@ def main():
             obj=out/(str(source.relative_to(ROOT)).replace('\\','-').replace('/','-')+'.obj')
             extra=(['-dCS_P286_TIMING_MARKERS'] if a.timing_markers and source==guest else [])
             if not a.natural_start and source==guest:extra+=['-dCS_P286_PREPOSITION_TEST']
+            if a.raw_keyboard and source==guest:extra+=['-dCS_P286_RAW_KEYBOARD']
             h.run([wcc,*flags,*extra,'-fo='+str(obj),source],out,env,out/(obj.name+'.log'));objects.append(obj)
         if assembler:
             obj=out/'original-arithmetic.obj'
@@ -99,7 +102,13 @@ def main():
                  '--until-post',hex(0xb0+count),'--inspect','0x60000:17','--frame',frame]
             for n,code in enumerate(keys[:count]):
                 cycle=6000000+n*5000000
-                for when,value in ((cycle,code),(cycle+100000,0xf0),(cycle+101000,code)):
+                if a.raw_keyboard and code==0x29:
+                    # Button press gets a repeated make; release is a real break.
+                    sequence=((cycle,code),(cycle+100000,code)) if n in (6,13) else ((cycle,0xf0),(cycle+1000,code))
+                elif a.raw_keyboard:
+                    sequence=((cycle,0xe0),(cycle+1000,code),(cycle+100000,0xe0),(cycle+101000,0xf0),(cycle+102000,code))
+                else:sequence=((cycle,code),(cycle+100000,0xf0),(cycle+101000,code))
+                for when,value in sequence:
                     cmd+=['--scancode',f'{when}:{value}']
             result=json.loads(h.run(cmd,out,env,out/(name+'-boot.log')))
             expected=struct.pack('<4sBBHHHHBBB',b'S286',count,button,px,py,wx,wy,pattern,drag,presses)
@@ -124,6 +133,7 @@ def main():
                 'source_sha256':{str(x.relative_to(ROOT)).replace('\\','/'):h.digest(x) for x in
                                  (*sources,guest,host,ROOT/'platform/pc286/ega-mono.h',
                                   ROOT/'platform/pc286/keyboard-pointer.h',ROOT/'scripts/pc286_loader.py',
+                                  ROOT/'platform/pc286/keyboard-set2.h',
                                   ROOT/'scripts/Test-BootHushPC286BankPlan.py',
                                   ROOT/'scripts/Test-BootHushPC286SharedCompositor.py',Path(__file__),
                                   *((ROOT/'arch/i286/watcom-arithmetic.asm',) if assembler else ()))},
@@ -131,6 +141,7 @@ def main():
                 'bss_start':bss_start,'bss_bytes':bss_size,'bss_poisoned_before_load':True,
                 'timing_markers':a.timing_markers,
                 'natural_start':a.natural_start,
+                'raw_keyboard':a.raw_keyboard,
                 'cases':observations,'floppy_unchanged':True,'pixel_mutations_rejected':2,
                 'limits':'Same-source hosted/286 scripted input; experimental helpers require review; no Mac boot, E3/E4 or physical claim.'}
         (out/'report.json').write_text(json.dumps(report,indent=2)+'\n',encoding='utf-8')

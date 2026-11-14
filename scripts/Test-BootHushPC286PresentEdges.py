@@ -62,7 +62,7 @@ def main():
         sources=('core/graphics/surface.c','core/graphics/cursor.c','core/input/pointer.c',
                  'core/input/mouse.c','core/ui/window.c','apps/product-scene/scene.c',
                  'apps/window-scene/scene.c','apps/window-scene/input.c','platform/pc286/ega-mono.c',
-                 'platform/pc286/keyboard-pointer.c')
+                 'platform/pc286/keyboard-pointer.c','platform/pc286/keyboard-set2.c')
         objects=[]
         for name in sources:
             obj=out/(name.replace('/','-')+'.obj')
@@ -102,7 +102,8 @@ def main():
             raise ValueError('oracle accepted mutated '+label+' pixel')
         summary={'status':'pass','boothush_sha256':sha(exe),'assembler_sha256':sha(assembler),
                  'source_sha256':{name:sha(ROOT/name) for name in (*sources,'arch/i286/watcom-arithmetic.asm',
-                    'platform/pc286/ega-mono.h','platform/pc286/keyboard-pointer.h','probes/pc286/boot-window-shared.c',
+                    'platform/pc286/ega-mono.h','platform/pc286/keyboard-pointer.h','platform/pc286/keyboard-set2.h',
+                    'probes/pc286/boot-window-shared.c',
                     'probes/pc286/boot-present-edge.c')},'cases':observations,
                  'pixel_mutations_rejected':2,
                  'limits':'Original modeled edge fixture; no physical display or release qualification.'}

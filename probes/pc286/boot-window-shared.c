@@ -6,6 +6,7 @@
 #include "../../apps/window-scene/input.h"
 #include "../../platform/pc286/ega-mono.h"
 #include "../../platform/pc286/keyboard-pointer.h"
+#include "../../platform/pc286/keyboard-set2.h"
 
 #if !defined(__WATCOMC__) || !defined(_M_I86)
 #error Requires the pinned 16-bit Open Watcom target
@@ -18,6 +19,14 @@ static void video_mode(void);
 #pragma aux video_mode = "mov ax,0010h" "int 10h" modify [ax bx cx dx si di];
 static unsigned short read_key(void);
 #pragma aux read_key = "xor ah,ah" "int 16h" value [ax] modify [ax bx cx dx si di];
+#ifdef CS_P286_RAW_KEYBOARD
+static void mask_interrupts(void);
+#pragma aux mask_interrupts = "cli" modify exact [];
+static unsigned char key_status(void);
+#pragma aux key_status = "in al,64h" value [al] modify exact [];
+static unsigned char key_byte(void);
+#pragma aux key_byte = "in al,60h" value [al] modify exact [];
+#endif
 static void fail(unsigned char value) { post(value); for (;;) { } }
 
 static void white_display(void)
@@ -48,24 +57,47 @@ void start(void)
 {
     cs_surface surface;cs_cursor_state cursor;cs_cursor_token token;cs_cursor_bits bits;
     cs_cursor_art art;cs_window_config config;cs_product_state product;cs_window_input owner;
-    cs_pointer_sample sample;cs_pc286_keyboard_pointer keyboard;
-    unsigned key,count=0;int result,old_x,old_y;
+    cs_pointer_sample sample;
+#ifdef CS_P286_RAW_KEYBOARD
+    cs_pc286_set2_pointer keyboard;unsigned status;
+#else
+    cs_pc286_keyboard_pointer keyboard;unsigned key;
+#endif
+    unsigned count=0;int result,old_x,old_y;
     config.x=80;config.y=70;config.width=224;config.height=144;config.title=18;
     product.value=97;product.inputs=0;product.progress=16;product.phases=6;product.success=1;product.pixels=0;
     if(cs_surface_init(&surface,canvas,sizeof(canvas),512,342,64,CS_SURFACE_MONO1_MSB)!=CS_SURFACE_OK)fail(0xe0);
     cs_window_cursor_bits_init(&bits);art.bits=&bits;art.width=15;art.height=15;art.hot_x=7;art.hot_y=7;
     if(cs_cursor_init(&cursor)!=CS_CURSOR_OK || cs_cursor_bind(&cursor,&surface,saved,sizeof(saved),&token)!=CS_CURSOR_OK)fail(0xe1);
     if(cs_window_input_begin(&owner,&cursor,token,&art,&config,&product,0)!=CS_WINDOW_INPUT_OK)fail(0xe2);
+#ifdef CS_P286_RAW_KEYBOARD
+    if(!cs_pc286_set2_begin(&keyboard))fail(0xe6);
+#else
     if(!cs_pc286_keyboard_pointer_begin(&keyboard))fail(0xe6);
+#endif
 #ifdef CS_P286_PREPOSITION_TEST
     sample.dx=-156;sample.dy=-91;sample.buttons=0;
     result=cs_window_input_sample(&owner,&sample);
     if(result!=CS_WINDOW_INPUT_OK && result!=CS_WINDOW_INPUT_CHANGED)fail(0xe3);
 #endif
-    video_mode();white_display();present(0,0,512,342);publish(&owner,count,keyboard.held);post(0xb0);
+    video_mode();white_display();present(0,0,512,342);
+#ifdef CS_P286_RAW_KEYBOARD
+    /* Experimental polling owns the keyboard stream and stops BIOS IRQs.
+     * Translated set-1 controller output is an explicit precondition. */
+    mask_interrupts();
+#endif
+    publish(&owner,count,keyboard.held);post(0xb0);
     for(;;) {
+#ifdef CS_P286_RAW_KEYBOARD
+        do {status=key_status();} while(!(status&1u));
+        if(status&0xe0u)fail(0xe7);
+        result=cs_pc286_set1_feed(&keyboard,key_byte(),&sample);
+        if(result<0)fail(0xe8);
+        if(!result)continue;
+#else
         key=read_key();
         if(!cs_pc286_keyboard_pointer_key(&keyboard,(uint16_t)key,&sample))continue;
+#endif
         old_x=(int)owner.pointer.x;old_y=(int)owner.pointer.y;
 #ifdef CS_P286_TIMING_MARKERS
         post((unsigned char)(0xc0u+count));
