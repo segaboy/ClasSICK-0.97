@@ -5146,3 +5146,7 @@ Qt Group, published [QGuiApplication constructor, Platform-Specific Arguments](h
 ## SRC-0608 - Owner replaces the x64 release target with 286
 
 2026-11-14; owner directs pausing x64 work and pursuing a paired Mac128K/286 release, while retaining BootHush and Not Super Tilt Bro development and the original clean-room, test, evidence, preservation and approval boundaries. [Direction and initial gates](../docs/development/mac-286-paired-direction-20261114.md). This is an owner decision, not historical hardware evidence or publication approval.
+
+## SRC-0609 - Windows-hosted 68000 compiler bundle
+
+2026-11-14; user-supplied NeoGeoSDK Windows GCC 16.2.0 bundle, archive SHA-256 `18d36e1233b54fb2346e134ac849edc436db4e3f1cd50fdea5435aa02c1e5ba2`. Used as an experimental build tool; it supplies no Apple behavioral input. Package provenance, tool trust, licensing and any distributed runtime require review. [Source record](records/SRC-0609-windows-m68k-toolchain.md); [build and test evidence](../docs/development/windows-m68k-toolchain-20261114.md).

@@ -37,11 +37,31 @@ def main():
     p=argparse.ArgumentParser(description=__doc__)
     p.add_argument('--emulator',required=True,type=Path);p.add_argument('--mac-rom',required=True,type=Path)
     p.add_argument('--pc-results',required=True,type=Path);p.add_argument('--output',required=True,type=Path)
+    p.add_argument('--mac-manifest',type=Path,help='source-matched experimental Mac build manifest')
     p.add_argument('--edge-cycles',type=int,help='optional modeled mouse edge interval');a=p.parse_args()
     try:
         exe=a.emulator.resolve(strict=True);rom=a.mac_rom.resolve(strict=True);pc=a.pc_results.resolve(strict=True);out=a.output.resolve()
         if out==ROOT or ROOT in out.parents:raise ValueError('output must be outside the repository')
-        if sha(rom)!=MAC_SHA:raise ValueError('Mac ROM identity mismatch')
+        mac_sha=sha(rom);manifest_sha=None
+        if a.mac_manifest:
+            manifest=a.mac_manifest.resolve(strict=True);build=json.loads(manifest.read_text(encoding='utf-8'))
+            if (not build.get('twins_equal') or not build.get('window_drawing') or
+                build.get('dcd_invert')!=3 or not build.get('short_collect') or
+                not build.get('loss_counts') or build['profiles'][0]['image_sha256']!=mac_sha):
+                raise ValueError('Mac manifest, profile or image mismatch')
+            for name,digest in build['inputs'].items():
+                item=(ROOT/name).resolve(strict=True)
+                if ROOT not in item.parents:raise ValueError('Mac manifest input outside repository')
+                if hashlib.sha256(item.read_bytes().replace(b'\r\n',b'\n')).hexdigest()!=digest:
+                    raise ValueError('Mac source identity changed: '+name)
+            symbols=build['profiles'][0]['symbols'];manifest_sha=sha(manifest)
+            trace_address=symbols['cs_mac_trace'];diag=symbols['cs_mac_diag']
+            loss=symbols['cs_mac_loss_trace'];drop=symbols['cs_mac_motion_drop_trace']
+            start=min(trace_address,diag,loss,drop);end=max(trace_address+128,diag+28,loss+20,drop+8)
+            if start<0 or end>0x2000 or end-start>4096:raise ValueError('Mac diagnostic symbols outside RAM')
+        else:
+            if mac_sha!=MAC_SHA:raise ValueError('Mac ROM identity mismatch')
+            trace_address,diag,loss,drop,start,end=0xc28,0xca8,0xc04,0xc18,0xc04,0xcc4
         report=json.loads((pc/'report.json').read_text(encoding='utf-8'))
         if report['status']!='pass' or report['boothush_sha256']!=sha(exe) or sha(pc/'session.img')!=report['floppy_sha256']:
             raise ValueError('286 report, emulator or floppy identity mismatch')
@@ -54,7 +74,7 @@ def main():
         out.mkdir(parents=True,exist_ok=False);series_path=out/'mac.pbmseq';trace=out/'mac.bhmouse'
         cmd=[str(exe),'--machine','mac128k','--rom',str(rom),'--cycles',str(stop),'--timeout-ms','20000',
              '--mouse-dcd-invert','3','--mouse-record',str(trace),'--capture-series',str(series_path),
-             '--capture-memory','0xc04:192']
+             '--capture-memory',hex(start)+':'+str(end-start)]
         if a.edge_cycles is not None:cmd+=['--mouse-edge-cycles',str(a.edge_cycles)]
         for _,cycle,*_ in cases:cmd+=['--capture-cycle',str(cycle)]
         for event in events:cmd+=['--window-mouse',event]
@@ -63,7 +83,7 @@ def main():
         if result.returncode:raise ValueError('Mac run failed; see run.log')
         data=json.loads(result.stdout);series=data['frame_series']
         if (data['status']!='cycle_limit' or data.get('input_source')!='injected_window_messages' or
-            data.get('mouse',{}).get('pending')!=0 or series['rom_sha256']!=MAC_SHA or
+            data.get('mouse',{}).get('pending')!=0 or series['rom_sha256']!=mac_sha or
             series['executable_sha256']!=sha(exe) or
             (series['requested'],series['processed'],series['pending'],series['missing_images'],series['dropped'])!=(len(cases),len(cases),0,0,0)):
             raise ValueError('Mac run incomplete or capture identity mismatch')
@@ -74,12 +94,15 @@ def main():
             if sample['requested']!=cycle or not sample['processed'] or not sample['image_available']:
                 raise ValueError(name+': missing requested Mac capture')
             memory=bytes.fromhex(sample['memory']['bytes'])
-            if len(memory)!=192 or sample['memory']['address']!=0xc04:raise ValueError('unexpected diagnostics')
-            def word(address):return int.from_bytes(memory[address-0xc04:address-0xc04+4],'big')
-            actual={'pointer':[word(0xc5c),word(0xc60)],'window':[word(0xc64),word(0xc68)],
-                    'pattern':word(0xc6c),'held':word(0xc80),'presses':word(0xcb4),
-                    'losses':[word(0xc04+i*4) for i in range(1,5)],'omissions':word(0xc1c),
-                    'stage':word(0xcac),'fault':word(0xcc0)}
+            if len(memory)!=end-start or sample['memory']['address']!=start:raise ValueError('unexpected diagnostics')
+            def word(address):return int.from_bytes(memory[address-start:address-start+4],'big')
+            if (word(trace_address)!=0x4d575031 or word(trace_address+4)!=2 or word(trace_address+8)!=128 or
+                word(loss)!=0x4d4c4331 or word(drop)!=0x4d4d4431 or word(diag)!=0x43533039):
+                raise ValueError(name+': diagnostic identity mismatch')
+            actual={'pointer':[word(trace_address+52),word(trace_address+56)],'window':[word(trace_address+60),word(trace_address+64)],
+                    'pattern':word(trace_address+68),'held':word(trace_address+88),'presses':word(diag+12),
+                    'losses':[word(loss+i*4) for i in range(1,5)],'omissions':word(drop+4),
+                    'stage':word(diag+4),'fault':word(diag+24)}
             want={'pointer':[px,py],'window':[wx,wy],'pattern':pattern,'held':held,'presses':presses,
                   'losses':[0,0,0,0],'omissions':0,'stage':16,'fault':0}
             if actual!=want:raise ValueError(name+': unexpected Mac state '+str(actual))
@@ -95,7 +118,7 @@ def main():
         replay_path=out/'replay.pbmseq'
         replay_cmd=[str(exe),'--machine','mac128k','--rom',str(rom),'--cycles',str(stop),
                     '--timeout-ms','20000','--mouse-replay',str(trace),'--capture-series',str(replay_path),
-                    '--capture-memory','0xc04:192']
+                    '--capture-memory',hex(start)+':'+str(end-start)]
         for _,cycle,*_ in cases:replay_cmd+=['--capture-cycle',str(cycle)]
         replay=subprocess.run(replay_cmd,capture_output=True,text=True,timeout=25,
                               creationflags=getattr(subprocess,'CREATE_NO_WINDOW',0))
@@ -108,7 +131,11 @@ def main():
         for first,second in zip(series['samples'],rseries['samples']):
             if first['cycle']!=second['cycle'] or first['memory']!=second['memory']:
                 raise ValueError('Mac replay memory or checkpoint cycle mismatch')
-        summary={'status':'pass','boothush_sha256':sha(exe),'mac_rom_sha256':MAC_SHA,
+        if sha(rom)!=mac_sha or sha(pc/'session.img')!=report['floppy_sha256']:
+            raise ValueError('input image changed during parity test')
+        if a.mac_manifest and sha(manifest)!=manifest_sha:raise ValueError('Mac manifest changed during test')
+        summary={'status':'pass','boothush_sha256':sha(exe),'mac_rom_sha256':mac_sha,'mac_manifest_sha256':manifest_sha,
+                 'parity_script_sha256':sha(Path(__file__)),
                  'pc_payload_sha256':report['payload_sha256'],'pc_floppy_sha256':report['floppy_sha256'],
                  'pc_runtime_library_sha256':report['runtime_library_sha256'],'events':events,'natural_start':natural,
                  'requested_edge_cycles':a.edge_cycles,

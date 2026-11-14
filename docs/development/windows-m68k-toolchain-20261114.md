@@ -69,3 +69,67 @@ the port's same evidence record for identities, controls and limitations.
 That event-count technique may be applied to a source-matched ClasSICK ROM
 once available; neither its game-specific addresses nor its observations are
 admitted as physical hardware behavior.
+
+## First Windows-native Mac build and paired model tests
+
+Later on 2026-11-14 the owner supplied the archive, locally named
+`C:/Repos/.task-temp/x-tools-v3-win (1).zip`. Its 110,878,379 bytes match the
+publisher's SHA-256 above. A checked extraction into a new directory rejected
+unsafe names, symlinks and duplicates and passed ZIP CRC checks. An inventory
+independently compared all 1,441 extracted files (262,305,993 bytes) against
+the archive before and after a second build; the two inventory reports are
+byte-identical, SHA-256
+`d2f02846d177e6815cfd5b9054fc3390efc67e6a2b415f90d34a55b18d7be3a5`.
+The complete report is `C:/Repos/.task-temp/m68k-windows-inventory-20261114-a.json`;
+`scripts/Inventory-WindowsM68kToolchain.py` reproduces the comparison with
+explicit archive, extracted root and fresh output paths. The archive includes
+GNU compiler and runtime license materials; their presence does not finish
+third-party provenance, compiler trust or distribution review.
+
+The Windows native intake identifies `m68k-unknown-elf` GCC 16.2.0, with
+front-end hashes in `C:/Repos/.task-temp/m68k-windows-intake-20261114-a.json`.
+Two independent invocations each built identical ROM twins from the current
+window sources, using `--windows-native --window-drawing --window-fast-collect
+--window-short-collect --window-loss-counts --dcd-invert 3`. The 65,536-byte
+ROM SHA-256 is `6b622b2b163b86acdd3de54d1f656082ac55874830ebc1d58c204d06f36ef65a`;
+the image uses 48,008 ROM bytes, 488 native data/BSS bytes, 964 workspace
+bytes, and a calculated conservative stack bound of 4,736 bytes. Those are
+build calculations, not a measured physical worst case. The selected link map
+lists the project's objects and no `libgcc` or `libc` archive; review remains
+open. The first and second complete builds are in
+`C:/Repos/.task-temp/mac-windows-candidate-20261114-a` and `-b`; the first
+manifest SHA-256 is
+`dee2b29fdfe35b2259f71550f5664b16090d2e38bf0e9c1c75f0d9893a5337fd`.
+Source fingerprints, flags, symbol map, tool identities, stack frames and
+image-audit results are in the manifest and its adjacent files. GCC 16's
+output size and behavior must not be assumed equivalent to the previous GCC 13
+build merely because both target the 68000.
+
+`scripts/Test-BootHushMac286Parity.py --mac-manifest` now verifies the image,
+profile, normalized source fingerprints and diagnostic symbol bounds from the
+build manifest, plus guest diagnostic tags. Four altered manifests—image,
+source, profile and symbol bounds—were rejected before the guest ran in
+`C:/Repos/.task-temp/mac-windows-admission-20261114-a`. This check is an
+integrity comparison, not cryptographic proof that an untrusted manifest was
+honestly produced. The original pinned-ROM mode also passes its regression.
+
+At default 8,192 and explicit 4,096 modeled edge cycles, the new Mac ROM and
+the current 286 diagnostic matched all eight natural-start input/state and
+full-pixel checkpoints; the recorded Mac mouse trace replayed identically.
+Receipts with commands and identities are
+`C:/Repos/.task-temp/mac-windows-pc286-parity-20261114-c` and
+`C:/Repos/.task-temp/mac-windows-parity-4096-20261114-b`. The 286 payload is
+SHA-256 `9a443bdaf9a753be3c41bca3a4b5d72ce60d0e517a3f672a486f2d4b585c2c82`.
+At 2,048 cycles the paired check failed at the title-position checkpoint:
+guest pointer `(256,188)` instead of `(256,75)`, with 73 reported omissions.
+The failed run is `C:/Repos/.task-temp/mac-windows-parity-2048-20261114-a`.
+BootHush's separate, ready-checked four-direction speed investigation is
+documented in `C:/Repos/boothush/docs/mac-mouse-witness.md`.
+
+The port also used this Windows compiler for a separate source-informed native-C
+movement diagnostic; `C:/Repos/Not-Super-Tilt-Bro/docs/windows-native-c-evidence.md`
+contains its identities and limits. Its game-derived code is not a ClasSICK
+implementation input. These Mac/286 results are headless emulator injection,
+not human or physical input. Production 286 boot, fast-input behavior,
+complete provenance and review, physical/human qualification, source-matched
+release packaging and separate owner publication approval remain open.
