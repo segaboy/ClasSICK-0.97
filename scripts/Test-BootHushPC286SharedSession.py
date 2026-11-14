@@ -11,6 +11,7 @@ import re
 import struct
 import sys
 from pc286_loader import floppy
+from pc286_hard_disk_loader import hard_disk
 
 ROOT=Path(__file__).resolve().parents[1]
 SOURCES=('core/graphics/surface.c','core/graphics/cursor.c','core/input/pointer.c',
@@ -31,6 +32,7 @@ def main():
     p.add_argument('--output',required=True,type=Path);p.add_argument('--timing-markers',action='store_true')
     p.add_argument('--natural-start',action='store_true',help='test the continuous sequence from the shared pointer initial position')
     p.add_argument('--verify-payload',action='store_true',help='enable experimental diagnostic payload checksum')
+    p.add_argument('--hard-disk',action='store_true',help='use the experimental whole-disk diagnostic loader')
     p.add_argument('--raw-keyboard',action='store_true',help='experimental translated set-1 make/break polling')
     p.add_argument('--irq-unmask-control',action='store_true',help='test-only unmask before taking IRQ1 ownership')
     p.add_argument('--config-control',choices=('bad-translation','pending-output'),help='test-only controller refusal');a=p.parse_args()
@@ -88,11 +90,13 @@ def main():
         bss_start,bss_size=(int(x,16) for x in bss.groups());bss_end=bss_start+bss_size
         if bss_start<binary.stat().st_size:raise ValueError('BSS overlaps initialized payload')
         image=out/'session.img'
-        with image.open('xb') as f:f.write(floppy(binary.read_bytes(),int(entry.group(1),16),
+        loader=hard_disk if a.hard_disk else floppy
+        media_option='--hard-disk' if a.hard_disk else '--floppy'
+        with image.open('xb') as f:f.write(loader(binary.read_bytes(),int(entry.group(1),16),
                                                  bss_end=bss_end,poison_bss=True,verify_payload=a.verify_payload))
         before=h.digest(image)
         if a.config_control:
-            cmd=[exe,'--machine','pc286','--floppy',image,'--cycles','10000000','--timeout-ms','20000',
+            cmd=[exe,'--machine','pc286',media_option,image,'--cycles','10000000','--timeout-ms','20000',
                  '--until-post','0xe9','--inspect','0x60011:10']
             result=json.loads(h.run(cmd,out,env,out/'config-control-boot.log'))
             raw=bytes.fromhex(result['memory']['bytes'])
@@ -106,13 +110,15 @@ def main():
                 (a.config_control=='pending-output' and not status&1)):
                 raise ValueError('wrong controller refusal or IRQ restoration')
             report={'status':'pass','control':a.config_control,'boothush_sha256':h.digest(exe),
-                    'payload_sha256':h.digest(binary),'floppy_sha256':before,'reason':reason,
+                    'payload_sha256':h.digest(binary),'media_sha256':before,'media':'hard-disk' if a.hard_disk else 'floppy','reason':reason,
                     'configuration_value':value,'status_after_refusal':status,'mask_before':old_mask,
                     'mask_during':new_mask,'mask_restored':restored,'flags_before':old_flags,
                     'flags_after':new_flags,'command':[str(x) for x in cmd],
                     'source_sha256':{str(x.relative_to(ROOT)).replace('\\','/'):h.digest(x) for x in
-                                     (*sources,guest,ROOT/'platform/pc286/keyboard-config.h',ROOT/'scripts/pc286_loader.py')},
+                                     (*sources,guest,ROOT/'platform/pc286/keyboard-config.h',ROOT/'scripts/pc286_loader.py',
+                                      *((ROOT/'scripts/pc286_hard_disk_loader.py',) if a.hard_disk else ()))},
                     'limits':'Injected diagnostic refusal in BootHush, not a physical controller result.'}
+            if not a.hard_disk:report['floppy_sha256']=before
             (out/'report.json').write_text(json.dumps(report,indent=2)+'\n',encoding='utf-8')
             print(json.dumps(report,indent=2));return 0
         hostexe=out/'host-sequence.exe'
@@ -132,7 +138,7 @@ def main():
         observations=[]
         for name,count,px,py,wx,wy,pattern,drag,button,presses in cases:
             frame=out/(name+'.ppm');pbm=out/(name+'.pbm')
-            cmd=[exe,'--machine','pc286','--floppy',image,'--cycles','100000000','--timeout-ms','20000',
+            cmd=[exe,'--machine','pc286',media_option,image,'--cycles','100000000','--timeout-ms','20000',
                  '--until-post',hex(0xb0+count),'--inspect','0x60000:17','--frame',frame]
             scheduled=0;required_accepted=0
             for n,code in enumerate(keys[:count]):
@@ -163,12 +169,13 @@ def main():
                     raise ValueError(name+': missing or inconsistent modeled keyboard delivery accounting')
             h.run([hostexe,('n'+str(count)) if a.natural_start else str(count),pbm],out,env,out/(name+'-host.log'))
             oracle.compare(pbm.read_bytes(),frame.read_bytes(),margin_white=True)
-            observations.append({'name':name,'guest_result':result,'host_pbm_sha256':h.digest(pbm),
+            observations.append({'name':name,'command':[str(x) for x in cmd],
+                                 'guest_result':result,'host_pbm_sha256':h.digest(pbm),
                                  'ega_ppm_sha256':h.digest(frame),'canvas_pixels_match':512*342,
                                  'margin_pixels_match':640*350-512*342})
         irq_observation=None
         if a.raw_keyboard:
-            cmd=[exe,'--machine','pc286','--floppy',image,'--cycles','10000000','--timeout-ms','20000',
+            cmd=[exe,'--machine','pc286',media_option,image,'--cycles','10000000','--timeout-ms','20000',
                  '--until-post','0xb0','--inspect','0x60011:6']
             irq_result=json.loads(h.run(cmd,out,env,out/'irq-mask-boot.log'))
             raw=bytes.fromhex(irq_result['memory']['bytes'])
@@ -179,7 +186,7 @@ def main():
             if a.irq_unmask_control and before_mask&2:raise ValueError('IRQ control did not start unmasked')
             irq_observation={'before_flags':before_flags,'after_flags':after_flags,
                              'before_mask':before_mask,'after_mask':after_mask,'command':[str(x) for x in cmd]}
-            cmd=[exe,'--machine','pc286','--floppy',image,'--cycles','10000000','--timeout-ms','20000',
+            cmd=[exe,'--machine','pc286',media_option,image,'--cycles','10000000','--timeout-ms','20000',
                  '--until-post','0xb0','--inspect','0x60017:4']
             config_result=json.loads(h.run(cmd,out,env,out/'config-ready-boot.log'))
             config=bytes.fromhex(config_result['memory']['bytes'])
@@ -194,27 +201,32 @@ def main():
             try:oracle.compare(pbm,bytes(altered),margin_white=True)
             except ValueError:continue
             raise ValueError('pixel comparison missed deliberate mutation')
-        report={'status':'pass','toolchain':lock['release'],'boothush_sha256':h.digest(exe),
+        report={'status':'pass','invocation':[sys.executable,*sys.argv],
+                'toolchain':lock['release'],'boothush_sha256':h.digest(exe),
                 'host_compiler_sha256':h.digest(cc),'runtime_library_sha256':h.digest(lib) if lib else None,
                 'assembler_sha256':h.digest(assembler) if assembler else None,'runtime_modules':used,
                 'source_sha256':{str(x.relative_to(ROOT)).replace('\\','/'):h.digest(x) for x in
                                  (*sources,guest,host,ROOT/'platform/pc286/ega-mono.h',
                                   ROOT/'platform/pc286/keyboard-pointer.h',ROOT/'scripts/pc286_loader.py',
+                                  *((ROOT/'scripts/pc286_hard_disk_loader.py',) if a.hard_disk else ()),
                                   ROOT/'platform/pc286/keyboard-set2.h',ROOT/'platform/pc286/keyboard-config.h',
                                   ROOT/'scripts/Test-BootHushPC286BankPlan.py',
                                   ROOT/'scripts/Test-BootHushPC286SharedCompositor.py',Path(__file__),
                                   *((ROOT/'arch/i286/watcom-arithmetic.asm',) if assembler else ()))},
-                'payload_bytes':binary.stat().st_size,'payload_sha256':h.digest(binary),'floppy_sha256':before,
+                'payload_bytes':binary.stat().st_size,'payload_sha256':h.digest(binary),'media_sha256':before,
                 'bss_start':bss_start,'bss_bytes':bss_size,'bss_poisoned_before_load':True,
                 'timing_markers':a.timing_markers,
                 'natural_start':a.natural_start,
                 'verify_payload':a.verify_payload,
+                'media':'hard-disk' if a.hard_disk else 'floppy',
                 'raw_keyboard':a.raw_keyboard,
                 'irq_unmask_control':a.irq_unmask_control,
                 'config_control':a.config_control,
                 'irq_mask_observation':irq_observation,
-                'cases':observations,'floppy_unchanged':True,'pixel_mutations_rejected':2,
+                'cases':observations,'media_unchanged':True,'pixel_mutations_rejected':2,
                 'limits':'Same-source hosted/286 scripted input; experimental helpers require review; no Mac boot, E3/E4 or physical claim.'}
+        if not a.hard_disk:
+            report['floppy_sha256']=before;report['floppy_unchanged']=True
         (out/'report.json').write_text(json.dumps(report,indent=2)+'\n',encoding='utf-8')
         print(json.dumps(report,indent=2));return 0
     except (OSError,ValueError,KeyError) as exc:

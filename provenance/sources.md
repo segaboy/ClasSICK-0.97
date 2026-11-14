@@ -5150,3 +5150,7 @@ Qt Group, published [QGuiApplication constructor, Platform-Specific Arguments](h
 ## SRC-0609 - Windows-hosted 68000 compiler bundle
 
 2026-11-14; user-supplied NeoGeoSDK Windows GCC 16.2.0 bundle, archive SHA-256 `18d36e1233b54fb2346e134ac849edc436db4e3f1cd50fdea5435aa02c1e5ba2`. Used as an experimental build tool; it supplies no Apple behavioral input. Package provenance, tool trust, licensing and any distributed runtime require review. [Source record](records/SRC-0609-windows-m68k-toolchain.md); [build and test evidence](../docs/development/windows-m68k-toolchain-20261114.md).
+
+## SRC-0610 - BootHush PC/AT modeled disk interface
+
+2026-11-14; project-owned BootHush `docs/pc-at.md` at commit `638a8078e83a7c0ea02451a904a8d82f0ee315ee`, working-file SHA-256 `d944c95fb0df9784f7295ba4870c291d4819812ac1fb119203848ab689e363bc`. Its built-in firmware and geometry describe the emulator's test interface, not a physical IBM PC/AT or BIOS. Used with original project test code under the independent-implementation policy; no Apple/Microsoft implementation, external firmware or third-party bootloader used. SPEC-0107 / IMPL-0134 / TEST-0190; [canonical evidence](../docs/development/mac-pc286-shared-parity-20261114.md#whole-disk-286-diagnostic).

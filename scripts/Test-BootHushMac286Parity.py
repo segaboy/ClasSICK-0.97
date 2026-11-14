@@ -63,8 +63,12 @@ def main():
             if mac_sha!=MAC_SHA:raise ValueError('Mac ROM identity mismatch')
             trace_address,diag,loss,drop,start,end=0xc28,0xca8,0xc04,0xc18,0xc04,0xcc4
         report=json.loads((pc/'report.json').read_text(encoding='utf-8'))
-        if report['status']!='pass' or report['boothush_sha256']!=sha(exe) or sha(pc/'session.img')!=report['floppy_sha256']:
-            raise ValueError('286 report, emulator or floppy identity mismatch')
+        media_sha=report.get('media_sha256') or report['floppy_sha256']
+        media=report.get('media','floppy')
+        if media not in ('floppy','hard-disk'):
+            raise ValueError('unsupported 286 diagnostic media')
+        if report['status']!='pass' or report['boothush_sha256']!=sha(exe) or sha(pc/'session.img')!=media_sha:
+            raise ValueError('286 report, emulator or media identity mismatch')
         for name,digest in report['source_sha256'].items():
             if sha(ROOT/name)!=digest:raise ValueError('286 source identity changed: '+name)
         natural=report.get('natural_start',False)
@@ -131,16 +135,17 @@ def main():
         for first,second in zip(series['samples'],rseries['samples']):
             if first['cycle']!=second['cycle'] or first['memory']!=second['memory']:
                 raise ValueError('Mac replay memory or checkpoint cycle mismatch')
-        if sha(rom)!=mac_sha or sha(pc/'session.img')!=report['floppy_sha256']:
+        if sha(rom)!=mac_sha or sha(pc/'session.img')!=media_sha:
             raise ValueError('input image changed during parity test')
         if a.mac_manifest and sha(manifest)!=manifest_sha:raise ValueError('Mac manifest changed during test')
         summary={'status':'pass','boothush_sha256':sha(exe),'mac_rom_sha256':mac_sha,'mac_manifest_sha256':manifest_sha,
                  'parity_script_sha256':sha(Path(__file__)),
-                 'pc_payload_sha256':report['payload_sha256'],'pc_floppy_sha256':report['floppy_sha256'],
+                 'pc_payload_sha256':report['payload_sha256'],'pc_media_sha256':media_sha,'pc_media':media,
                  'pc_runtime_library_sha256':report['runtime_library_sha256'],'events':events,'natural_start':natural,
                  'requested_edge_cycles':a.edge_cycles,
                  'mouse':data['mouse'],'checkpoints':observations,'mac_replay_cycle_memory_frames_match':True,
                  'limits':'Injected Mac window messages and scheduled 286 keyboard; no hardware, human, production boot or release claim.'}
+        if media=='floppy':summary['pc_floppy_sha256']=media_sha
         (out/'report.json').write_text(json.dumps(summary,indent=2)+'\n',encoding='utf-8')
         (out/'command.json').write_text(json.dumps(cmd,indent=2)+'\n',encoding='utf-8')
         print(json.dumps(summary,indent=2));return 0

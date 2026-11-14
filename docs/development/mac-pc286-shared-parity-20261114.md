@@ -622,6 +622,57 @@ The first parity invocation used an incorrect manifest path and stopped before
 running a guest. These tests establish neither physical reliability nor a
 production disk format, boot path, human input qualification or release.
 
+### Whole-disk 286 diagnostic
+
+[SPEC-0107](../specifications/SPEC-0107-pc286-hard-disk-diagnostic.md),
+IMPL-0134 / TEST-0190. To investigate the hard-disk dependency, an original
+generator creates a fresh whole-disk image using BootHush's documented
+615-cylinder, four-head, 17-sector model. Its original boot sector reads drive
+`80h`, clears declared BSS, optionally checks the same limited additive sum
+as the floppy diagnostic, and jumps to the linked payload. This takes geometry
+from the emulator's own documented contract; it is a model observation, not a
+documented fact about a particular physical disk or BIOS. The image is not
+partitioned, has no installer or filesystem, and is not a production medium.
+
+The bounded test generated payloads of 6, 8,192, 8,193, 16,897, 25,601 and
+30,208 bytes, checked selected track-boundary and BSS bytes, rejected seven
+invalid input combinations, and verified unchanged media. A corrupted last
+byte led to `ed`; an invalid fourth-read sector led to `ee` after earlier
+bytes had loaded. A deliberately balanced two-byte change passed, exposing
+the additive check's limitation. The nine modeled runs, full commands,
+source/image/emulator hashes and observations are in
+`C:/Repos/.task-temp/pc286-hard-disk-loader-20261114-c/report.json`.
+They do not prove every loaded byte or physical disk behavior.
+
+The same 22,374-byte original shared-window payload SHA-256
+`9a443bdaf9a753be3c41bca3a4b5d72ce60d0e517a3f672a486f2d4b585c2c82`
+booted from the generated 21,411,840-byte disk SHA-256
+`c44a7498c35a3340cf8a7ce93c2d689cf1a920599a4e60d862b7f6acc6890d8c`.
+All eight hosted state and full-pixel comparisons passed with poisoned BSS,
+and the final input accounting reported 63 accepted, zero rejected and zero
+pending model bytes. The disk remained unchanged. The source-matched Mac ROM
+matched all eight checkpoints and replay at 4,096 modeled cycles per edge.
+The floppy control also passed both the host and paired comparison; its
+original diagnostic image hash stayed `432b0fbf...`.
+
+Canonical results and commands are in
+`C:/Repos/.task-temp/pc286-shared-hard-disk-20261114-b/report.json`,
+`C:/Repos/.task-temp/mac-pc286-hard-disk-parity-20261114-b/report.json`, and
+the corresponding `pc286-shared-floppy-control-20261114-b` and
+`mac-pc286-floppy-control-parity-20261114-b` directories. BootHush executable
+SHA-256 is `62daf36a8d1e034667fbd73dd09a2a6134a6a0144ea56010d327b41fd110d9da`;
+its source-rebuild limitations are recorded in
+`C:/Repos/boothush/docs/pc286-input-accounting-20261114.md`.
+Four altered Mac manifests were refused before a guest run in
+`C:/Repos/.task-temp/mac-hard-disk-admission-20261114-a`. Three further
+controls changed the disk image, recorded media hash, or media type; each was
+refused before a paired guest run in
+`C:/Repos/.task-temp/mac-hard-disk-media-admission-20261114-a/report.json`.
+These are identity and admission checks, not image authentication.
+Firmware/geometry variation, boot drive selection, partitions, installation,
+failure recovery, full byte coverage, human input, physical trials and release
+qualification remain open.
+
 ### Scheduled-input accounting
 
 The shared-session runner now requires the BootHush `pc_keyboard_input`
