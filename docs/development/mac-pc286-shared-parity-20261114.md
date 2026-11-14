@@ -568,3 +568,9 @@ state/pixel checkpoints in
 `C:/Repos/.task-temp/pc286-four-track-regression-20261114-a`. This payload is
 small enough not to invoke the fourth track; the generated maximum-length
 fixture exercises that read. Hardware and release requirements remain open.
+
+The Not Super Tilt Bro port also fixed its prototype damage counter wrapping;
+its changed title ROM, BootHush regression and limitations are identified in
+`C:/Repos/Not-Super-Tilt-Bro/docs/two-character-evidence.md` and
+`C:/Repos/Not-Super-Tilt-Bro/docs/mouse-title-evidence.md`. This is port work,
+not a ClasSICK implementation input or release qualification.
