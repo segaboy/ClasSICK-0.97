@@ -1131,6 +1131,10 @@ rate. The newer executable also passed the eight modeled Mac/286 parity
 checks and replay in `C:/Repos/.task-temp/mac-pc286-queue-parity-20261115-a`.
 The BootHush snapshot contract and its independent device tests are documented
 in `C:/Repos/boothush/docs/pc286-input-accounting-20261114.md`.
+Nine package controls and two bounded readiness checks also passed on the
+new executable in `C:/Repos/.task-temp/classick-queue-snapshot-controls-20261115-a`;
+the matching, still unqualified engineering snapshot is
+`C:/Repos/.task-temp/classick-paired-engineering-snapshot-20261115-k`.
 
 ```powershell
 $py = 'C:/Users/segab/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/python.exe'
