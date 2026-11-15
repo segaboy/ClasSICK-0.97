@@ -14,3 +14,6 @@ The baseline also ran both documented bounded readiness commands: Mac reached
 its condition at cycle 60,936,878; 286 reached POST `b0` at cycle 4,208,555.
 Checksums still matched after both runs. These are modeled readiness checks,
 not evidence of physical hardware, human operation or release qualification.
+An independently prepared snapshot from committed tooling is at
+`C:/Repos/.task-temp/classick-paired-engineering-snapshot-20261115-c`; its
+manifest records the source commit and checksums of its contents.

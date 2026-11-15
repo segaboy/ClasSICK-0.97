@@ -850,6 +850,12 @@ demonstrates another bounded guest/toolchain exercise; its game-informed code
 is not a ClasSICK implementation input and it closes no ClasSICK release or
 physical-hardware criterion.
 
+The port's follow-up corrected a local player-one jab movement lock and
+exercised the mouse-to-keyboard handoff, both characters and pixel output on
+BootHush. See `C:/Repos/Not-Super-Tilt-Bro/docs/windows-native-c-evidence.md`
+for the reproduction and limits. The game-informed implementation is not a
+ClasSICK source input, and this does not close a paired-release criterion.
+
 The port subsequently extended its opt-in title experiment to use that native
 C movement component for both characters. Its modeled multi-key and rendering
 observations are in the same canonical port evidence. They exercise BootHush
