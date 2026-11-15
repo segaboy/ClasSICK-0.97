@@ -18,3 +18,5 @@ The same copy and fault controls later passed with the new CRC-checked
 diagnostic; the source and copied disk identities are in the linked evidence.
 The same controls subsequently passed with the optional model-geometry check
 and CRC both enabled; this remains a generated-disk experiment.
+The copy and fault controls were repeated successfully on the rebuilt
+active-profile BootHush twin, as recorded in the same evidence.

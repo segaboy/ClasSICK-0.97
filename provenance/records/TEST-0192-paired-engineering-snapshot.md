@@ -33,3 +33,7 @@ Nine snapshot controls also passed for the geometry-plus-CRC session in
 `C:/Repos/.task-temp/classick-geometry-snapshot-controls-20261115-a`.
 The corresponding committed-tooling snapshot is retained at
 `C:/Repos/.task-temp/classick-paired-engineering-snapshot-20261115-f`.
+The nine controls were repeated on the active-profile BootHush twin in
+`C:/Repos/.task-temp/classick-active-twin-snapshot-controls-20261115-a`.
+The corresponding unqualified snapshot is retained at
+`C:/Repos/.task-temp/classick-paired-engineering-snapshot-20261115-g`.

@@ -951,6 +951,27 @@ identified as an unadmitted research lead in
 `docs/research/pc286-bios-interface-lead-20261115.md`. Its 1987 publication
 does not establish 1984 firmware behavior and informed none of this model code.
 
+### Rebuilt active BootHush profiles
+
+Two fresh active-profile BootHush builds produced the same executable SHA-256
+`678f374a8adad6a32ea31f8da69ccf15c75f6568a7d679f56bbb73952e93890b`.
+The build, exact tools, sources and retained prebuilt x64 media archive are
+recorded in `C:/Repos/boothush/docs/active-profile-build-20261115.md`. It
+rebuilds Mac, 286 and NES components but is not a source-complete distribution
+or provenance qualification; no paused x64 source was compiled.
+
+On this executable the CRC and geometry diagnostic passed 33 loader cases
+(`C:/Repos/.task-temp/pc286-active-twin-loader-20261115-a/report.json`),
+fresh-disk copy and injected failures (`pc286-active-twin-copy-20261115-a`),
+the eight-state session (`pc286-active-twin-session-20261115-a`), and all
+eight paired frames, state checks and replay
+(`mac-pc286-active-twin-parity-20261115-a`). Nine snapshot controls passed
+in `classick-active-twin-snapshot-controls-20261115-a`; these paths are under
+`C:/Repos/.task-temp`. BootHush's independent 25-case 286 suite and the port's
+title and combat checks also passed on this executable. This is emulator and
+software evidence; fast input, production boot and installer, source review,
+physical/human qualification and release decisions remain open.
+
 The unqualified engineering snapshot now includes checksummed guest-only
 initial and content PBM frames from the paired run, plus bounded headless
 readiness commands. Seven integrity and preservation controls passed, and the
