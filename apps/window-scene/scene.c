@@ -32,11 +32,11 @@ static int art_ok(const cs_cursor_art *a)
     for (i = 0; i < 32u; i++) {
         unsigned row = i / 2u, col = (i % 2u) * 8u;
         unsigned valid = 0;
-        unsigned b;
-        if (row < a->height)
-            for (b = 0; b < 8u; b++)
-                if (col + b < a->width)
-                    valid |= 0x80u >> b;
+        if (row < a->height && col < a->width) {
+            unsigned n = a->width - col;
+            if (n > 8u) n = 8u;
+            valid = (0xffu << (8u - n)) & 0xffu;
+        }
         if ((a->bits->mask[i] & ~valid) || (a->bits->image[i] & ~valid) ||
             (a->bits->image[i] & (unsigned)~a->bits->mask[i]))
             return 0;

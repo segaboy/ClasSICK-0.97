@@ -1191,3 +1191,53 @@ the final PPM. FFmpeg SHA-256 is
 The complete BootHush command, guest result and recorded executable/media
 identities are in `capture-report.json` in that directory. This is a modeled
 diagnostic demonstration, not a human-input, physical or release test.
+
+### Cursor art validation optimization
+
+The shared scene's existing validation checked each bit individually to form
+the allowed mask for every cursor-art byte. It now calculates the equivalent
+mask once per byte, retaining bounds, image-subset-of-mask and refusal rules.
+The implementation uses an unsigned shift bounded to 0..7, including on the
+16-bit 286 compiler. It is original project code, not a change to the artwork
+or to Macintosh compatibility claims.
+
+An independently expressed per-bit reference checked 196,608 single-bit
+mask/image combinations across all widths and heights 1..16, plus valid mixed
+patterns, invalid hotspots, dimensions and null bits. The old and optimized
+validators passed the single-bit suite; the optimized suite also passed with
+Windows Clang AddressSanitizer/UndefinedBehaviorSanitizer. A control removing
+the top allowed bit failed at width 1, height 1. The original scene reference
+test passed 10,040 complete frames and 40,520 checks. An initial link attempt
+using section garbage collection failed on unresolved symbols; linking the
+actual scene dependencies succeeded. A first sanitizer launch lacked the
+runtime DLL on PATH; the corrected launch passed. Test programs and commands
+are reproducible with:
+
+```powershell
+$cc = 'C:/ClasSICK/bootstrap-clean-source-verified/.tools/llvm-mingw/llvm-mingw-20260908-ucrt-x86_64/bin/clang.exe'
+$env:PATH = (Split-Path $cc) + ';' + $env:PATH
+& $cc -std=c11 -O2 -Wall -Wextra -Werror tests/window-scene-art-exhaustive.c core/graphics/surface.c core/graphics/cursor.c apps/product-scene/scene.c -o C:/Repos/.task-temp/NEW-ART-TEST.exe
+& C:/Repos/.task-temp/NEW-ART-TEST.exe
+```
+
+The rebuilt Mac ROM SHA-256 is
+`32d7a5e8c897aae3bdd02ac2dc551c2eca23578bd3e942a2a99d869dbd6ad944`;
+the 286 payload and diagnostic disk SHA-256 are
+`bb0f402bbf7b9d22d7999f7afc6e44f8defdc74de4acc012af2f349818dfd336` and
+`a01bb95b6a3840a0a5a889951d75c421bb4823b1189a8cfae1e17d7b4089350e`.
+With BootHush SHA-256 `e84e214750c69907f6c5052397243661392810d1f1b14e357d6387a29008885d`,
+all eight 286 states, all pixels, eight Mac/286 comparisons and Mac replay
+passed at 4,096 modeled cycles per edge. At 2,048, the Mac title checkpoint
+still failed with pointer `(256,189)` and 70 omissions. The exact builds,
+input schedules, frames and source/tool identities are in the
+`mac-art-mask-20261115-a`, `pc286-art-mask-session-20261115-a`,
+`mac-pc286-art-mask-parity-20261115-a` and `mac-art-mask-fast-20261115-a`
+directories under `C:/Repos/.task-temp`.
+
+At the fastest passing 125,000-cycle input-group period, the observed final
+stop after the last scheduled byte fell from 7,043,672 to 6,862,428 modeled
+cycles; the same three faster burst settings still filled the emulator queue.
+The full rate report is `C:/Repos/.task-temp/pc286-art-mask-rate-20261115-a`.
+These are model-specific results, not physical performance or release
+qualification. The production loader, fast Mac input, human/physical tests
+and other paired-release criteria remain open.
