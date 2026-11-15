@@ -33,6 +33,7 @@ def main():
     p.add_argument('--natural-start',action='store_true',help='test the continuous sequence from the shared pointer initial position')
     p.add_argument('--verify-payload',action='store_true',help='enable experimental diagnostic payload checksum')
     p.add_argument('--verify-crc16',action='store_true',help='use the experimental fixed-disk CRC-16 check')
+    p.add_argument('--verify-geometry',action='store_true',help='check the modeled fixed-disk geometry before loading')
     p.add_argument('--hard-disk',action='store_true',help='use the experimental whole-disk diagnostic loader')
     p.add_argument('--raw-keyboard',action='store_true',help='experimental translated set-1 make/break polling')
     p.add_argument('--irq-unmask-control',action='store_true',help='test-only unmask before taking IRQ1 ownership')
@@ -50,6 +51,7 @@ def main():
         if a.config_control and not a.raw_keyboard:raise ValueError('config control requires raw keyboard')
         if a.verify_crc16 and (not a.hard_disk or a.verify_payload):
             raise ValueError('CRC-16 requires fixed disk and cannot be combined with the additive check')
+        if a.verify_geometry and not a.hard_disk:raise ValueError('geometry preflight requires fixed disk')
         if lib and h.digest(lib)!=oracle.LIB_SHA:raise ValueError('runtime library hash mismatch')
         if assembler:
             arith=module('arithmetic',ROOT/'scripts/Test-BootHushPC286Arithmetic.py')
@@ -96,7 +98,8 @@ def main():
         loader=hard_disk if a.hard_disk else floppy
         media_option='--hard-disk' if a.hard_disk else '--floppy'
         options={'bss_end':bss_end,'poison_bss':True,'verify_payload':a.verify_payload}
-        if a.hard_disk:options['verify_crc16']=a.verify_crc16
+        if a.hard_disk:
+            options['verify_crc16']=a.verify_crc16;options['verify_geometry']=a.verify_geometry
         with image.open('xb') as f:f.write(loader(binary.read_bytes(),int(entry.group(1),16),**options))
         before=h.digest(image)
         if a.config_control:
@@ -226,6 +229,7 @@ def main():
                 'natural_start':a.natural_start,
                 'verify_payload':a.verify_payload,
                 'verify_crc16':a.verify_crc16,
+                'verify_geometry':a.verify_geometry,
                 'keyboard_schedule_start':schedule_start,
                 'media':'hard-disk' if a.hard_disk else 'floppy',
                 'raw_keyboard':a.raw_keyboard,

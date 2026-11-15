@@ -917,6 +917,38 @@ $bh = 'C:/Repos/.task-temp/boothush-pc-hard-fault-twins-20261114-c/a/boothush.ex
 & $py -B scripts/Test-BootHushPC286SharedSession.py --tool-root C:/ClasSICK/pc286-toolchain-20261023-a/toolchain --assembler C:/Repos/.task-temp/pc286-independent-arith-20261114-a/wasm.exe --host-cc C:/ClasSICK/bootstrap-clean-source-verified/.tools/llvm-mingw/llvm-mingw-20260908-ucrt-x86_64/bin/clang.exe --emulator $bh --output C:/Repos/.task-temp/NEW-CRC-SESSION --natural-start --raw-keyboard --verify-crc16 --hard-disk
 ```
 
+### Model geometry preflight
+
+The optional fixed-disk diagnostic now queries and compares the built-in
+BootHush model's documented 615-cylinder, four-head, 17-sector, one-drive
+geometry before payload reads. It reports `ef` on a query failure or mismatch.
+It still selects drive `80h` and assumes this exact model; it is neither
+general disk discovery nor a physical-disk protection mechanism.
+
+Thirty-three loader cases passed in
+`C:/Repos/.task-temp/pc286-hard-disk-geometry-20261115-a/report.json`.
+Controls deliberately changed the expected cylinder or head result or queried
+an invalid drive; each stopped at `ef` before the payload was loaded. The
+full shared session with both CRC and preflight passed all eight states and
+images, starting its scheduled keys after a separate readiness observation;
+its exact command and tool/source identities are in
+`C:/Repos/.task-temp/pc286-shared-geometry-crc-20261115-a/report.json`.
+The generated disk SHA-256 is
+`39139fed7c6f0274e785ac38c8ee8660f1525a6d540f4af710d2434f63af37af`.
+The paired model sequence and replay passed at 4,096 cycles per mouse edge in
+`C:/Repos/.task-temp/mac-pc286-geometry-crc-parity-20261115-a/report.json`.
+The fresh-disk copy, boot and injected error controls passed in
+`C:/Repos/.task-temp/pc286-diagnostic-install-geometry-20261115-a/report.json`;
+nine snapshot controls passed in
+`C:/Repos/.task-temp/classick-geometry-snapshot-controls-20261115-a/report.json`.
+Add `--verify-geometry` to the shared-session reproduction above. None of
+these results changes the physical, installer or release gates.
+
+A potentially useful later IBM-published BIOS interface reference has been
+identified as an unadmitted research lead in
+`docs/research/pc286-bios-interface-lead-20261115.md`. Its 1987 publication
+does not establish 1984 firmware behavior and informed none of this model code.
+
 The unqualified engineering snapshot now includes checksummed guest-only
 initial and content PBM frames from the paired run, plus bounded headless
 readiness commands. Seven integrity and preservation controls passed, and the

@@ -17,3 +17,5 @@ were observed with unchanged media; this remains modeled fault evidence.
 the equal-and-opposite modification missed by the additive sum was rejected.
 The initial input schedule preceded CRC startup and was corrected after a
 separate readiness observation. [Evidence](../../docs/development/mac-pc286-shared-parity-20261114.md).
+The later geometry-preflight suite passed 33 cases, including wrong expected
+cylinder/head counts and an invalid drive, with no payload loaded on refusal.

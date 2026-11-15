@@ -11,3 +11,6 @@ physical BIOS behavior and release qualification remain open.
 2026-11-15: an optional independently implemented bitwise CRC-16 was added
 under SPEC-0107. It is error detection for the generated diagnostic, not an
 authenticity, physical BIOS or installer claim.
+An optional model-geometry check now refuses an unexpected result before the
+payload read. It is derived from BootHush's documented model, not a physical
+drive contract.

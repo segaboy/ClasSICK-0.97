@@ -42,6 +42,10 @@ def main():
                 if sha(destination/filename)!=digest:raise ValueError('snapshot checksum mismatch: '+filename)
             if 'NOT A RELEASE' not in (destination/'README.txt').read_text(encoding='utf-8'):
                 raise ValueError('snapshot classification missing')
+            snapshot=json.loads((destination/'snapshot.json').read_text(encoding='utf-8'))
+            session=json.loads((c/'report.json').read_text(encoding='utf-8'))
+            if snapshot['pc_geometry_preflight']!=bool(session.get('verify_geometry')):
+                raise ValueError('snapshot geometry profile not recorded')
             diag=json.loads(manifest.read_text(encoding='utf-8'))['profiles'][0]['symbols']['cs_mac_diag']
             commands=([str(exe),'--machine','mac128k','--rom',str(destination/'mac.rom'),
                        '--cycles','100000000','--timeout-ms','20000','--until',hex(diag+4)+':4:16'],

@@ -99,6 +99,17 @@ def main():
         offsets = ([offset-1] if offset else []) + [offset]
         expected = ([sample[offset-1]] if offset else []) + [0]
         assert run('crc-read-failure-'+chs.replace(':','-'), crc_image, 0xee, offsets, fail_read=chs) == expected
+    # Geometry preflight must stop before loading if the model reports a
+    # different drive geometry or does not recognize the queried drive.
+    guarded = hard_disk(bytes(sample), 0, verify_crc16=True, verify_geometry=True)
+    assert run('geometry-valid-max', guarded, 0xa5, [0, len(sample)-1]) == [sample[0], sample[-1]]
+    for name,needle,replacement in (
+            ('geometry-wrong-cylinders', bytes.fromhex('81f99166'), bytes.fromhex('81f99165')),
+            ('geometry-wrong-heads', bytes.fromhex('81fa0103'), bytes.fromhex('81fa0102')),
+            ('geometry-invalid-drive', bytes.fromhex('b80008ba8000cd13'), bytes.fromhex('b80008ba8100cd13'))):
+        assert guarded[:SECTOR].count(needle)==1
+        altered = bytearray(guarded);at=guarded.index(needle);altered[at:at+len(needle)]=replacement
+        assert run(name, altered, 0xef, [0]) == [0]
     # Invalid fourth-track sector creates a modeled BIOS read error after the
     # first three reads. This tests our error branch, not physical media failure.
     bad = bytearray(data)

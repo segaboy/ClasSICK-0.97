@@ -29,7 +29,7 @@ def crc16(payload):
 
 
 def hard_disk(payload, entry, *, bss_end=None, poison_bss=False, verify_payload=False,
-              verify_crc16=False):
+              verify_crc16=False, verify_geometry=False):
     if not isinstance(payload, bytes):
         raise TypeError('payload must be bytes')
     if not 1 <= len(payload) <= MAX_PAYLOAD or not 0 <= entry < len(payload):
@@ -43,6 +43,21 @@ def hard_disk(payload, entry, *, bss_end=None, poison_bss=False, verify_payload=
     # The test medium is explicitly drive 80h and has the model geometry
     # above. Real BIOS drive selection and geometry require separate work.
     code = bytearray.fromhex('fa31c08ed0bc007c8ed8fbb800108ec0')
+    geometry_branches = []
+    if verify_geometry:
+        # Refuse a different built-in model geometry before reading payload.
+        # This tests the model contract, not a physical-drive safety check.
+        code += bytes.fromhex('b80008 ba8000 cd13 72')
+        geometry_branches.append(len(code));code.append(0)
+        code += bytes.fromhex('81f99166 75') # CX: max cylinder 614, 17 sectors
+        geometry_branches.append(len(code));code.append(0)
+        code += bytes.fromhex('81fa0103 75') # DX: max head 3, one drive
+        geometry_branches.append(len(code));code.append(0)
+        code += bytes.fromhex('eb06')
+        geometry_failure = len(code);code += bytes.fromhex('b0efe680ebfe')
+        for offset in geometry_branches:
+            code[offset] = (geometry_failure-offset-1) & 255
+        code += bytes.fromhex('b80010 8ec0') # restore destination segment
     if poison_bss and bss_end > len(payload):
         code += bytes.fromhex('fc bf') + struct.pack('<H', len(payload))
         code += b'\xb9' + struct.pack('<H', bss_end-len(payload)) + bytes.fromhex('b0a5 f3aa')

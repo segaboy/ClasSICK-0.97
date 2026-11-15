@@ -32,3 +32,9 @@ additive profile and old media remain unchanged. CRC detects the tested
 balanced-byte corruption that the sum misses, but has collisions and provides
 no authenticity, malicious-tamper protection, production boot or installer
 guarantee. [Evidence](../development/mac-pc286-shared-parity-20261114.md).
+
+The optional model-only geometry preflight queries BootHush's built-in fixed
+disk interface and requires its documented 615-cylinder, four-head, 17-sector,
+single-drive result before reading any payload. Refusal reports `ef`. Its
+expected register values and drive selection are tied to this model; this is
+not geometry discovery or disk selection for a physical installation.

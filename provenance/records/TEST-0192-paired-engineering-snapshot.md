@@ -29,3 +29,5 @@ profiles. Nine controls passed separately for each in
 negative cases reject no payload check and conflicting check declarations.
 A committed-tooling CRC snapshot is retained at
 `C:/Repos/.task-temp/classick-paired-engineering-snapshot-20261115-e`.
+Nine snapshot controls also passed for the geometry-plus-CRC session in
+`C:/Repos/.task-temp/classick-geometry-snapshot-controls-20261115-a`.
