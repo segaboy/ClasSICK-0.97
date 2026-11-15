@@ -21,3 +21,5 @@ and CRC both enabled; this remains a generated-disk experiment.
 The copy and fault controls were repeated successfully on the rebuilt
 active-profile BootHush twin, as recorded in the same evidence.
 The copy and fault controls also passed with the retry-enabled diagnostic.
+They passed again for the version that saves the retry counter across modeled
+firmware calls; the linked evidence identifies the image and commands.

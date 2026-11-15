@@ -24,3 +24,6 @@ the executable's build scope and identity are in the linked evidence.
 The subsequent model-only recovery profile passed 44 loader cases and six
 actual-window-image transient/persistent fault cases on the newer BootHush
 twin. This does not qualify physical recovery or installation.
+The DI-preserving version passed 47 cases. In a test-only guest that changed
+DI after each modeled firmware call, transient recovery and the three-attempt
+failure bound still held; removing the save/restore exceeded that bound.

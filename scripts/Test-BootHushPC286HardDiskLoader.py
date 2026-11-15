@@ -8,7 +8,9 @@ import hashlib
 import json
 from pathlib import Path
 import subprocess
+from unittest.mock import patch
 
+import pc286_hard_disk_loader as disk_loader
 from pc286_hard_disk_loader import hard_disk, crc16, MAX_PAYLOAD, SECTOR
 
 
@@ -122,7 +124,7 @@ def main():
         assert run('retry-persistent-'+chs.replace(':','-'),retried,0xee,offsets,fail_read=chs,injected=3)==expected
     # Force the first reset to request an unsupported operation after an
     # injected read failure; the guest must stop instead of continuing.
-    reset=bytes.fromhex('b80000ba8000cd13')
+    reset=bytes.fromhex('b80000ba800057cd135f')
     assert retried[:SECTOR].count(reset)==4
     failed_reset=bytearray(retried);at=retried.index(reset);failed_reset[at+2]=0xff
     assert run('retry-reset-failure',failed_reset,0xee,[0],fail_read_once='0:0:2')==[0]
@@ -130,6 +132,28 @@ def main():
     for name,options in (('retry-no-check',{}),('retry-additive',{'verify_payload':True})):
         basic=hard_disk(collision_payload,0,retry_reads=True,**options)
         assert run(name,basic,0xa5,[0],fail_read_once='0:0:2')==[collision_payload[0]]
+    # Test-only firmware-call wrapper overwrites DI after INT 13h using MOV,
+    # which preserves carry, then restores DI from the stack. This models a
+    # clobber at the call boundary without changing BootHush's firmware.
+    with patch.object(disk_loader,'_retry_bios_call',return_value=bytes.fromhex('57 cd13 bf0000 5f')):
+        clobbered=hard_disk(collision_payload,0,retry_reads=True)
+    assert run('retry-di-clobber-once',clobbered,0xa5,[0],fail_read_once='0:0:2')==[collision_payload[0]]
+    assert run('retry-di-clobber-persistent',clobbered,0xee,[0],fail_read='0:0:2',injected=3)==[0]
+    # Remove preservation in the same test-only wrapper: persistent failure
+    # must escape the three-attempt bound, proving the control is sensitive.
+    with patch.object(disk_loader,'_retry_bios_call',return_value=bytes.fromhex('cd13 bf0000')):
+        unprotected=hard_disk(collision_payload,0,retry_reads=True)
+    unprotected_path=root/'retry-di-unprotected.img';unprotected_path.write_bytes(unprotected)
+    command=[str(exe),'--machine','pc286','--hard-disk',str(unprotected_path),'--cycles','200000',
+             '--timeout-ms','20000','--fail-hard-disk-read','0:0:2','--inspect','0x10000:1']
+    result=subprocess.run(command,capture_output=True,text=True,timeout=25,
+                          creationflags=getattr(subprocess,'CREATE_NO_WINDOW',0))
+    if result.returncode:raise RuntimeError(result.stdout+result.stderr)
+    response=json.loads(result.stdout)
+    assert response['status']=='cycle_limit' and response['hard_disk_read_failure']['injected']>3
+    assert response['memory']['bytes']=='00' and sha(unprotected_path.read_bytes())==sha(unprotected)
+    cases.append({'name':'retry-di-unprotected-control','disk_sha256':sha(unprotected),
+                  'command':command,'result':response})
     # Invalid fourth-track sector creates a modeled BIOS read error after the
     # first three reads. This tests our error branch, not physical media failure.
     bad = bytearray(data)

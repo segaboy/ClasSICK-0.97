@@ -47,3 +47,9 @@ preserving DI for its attempt counter; that is not a reviewed physical BIOS
 contract. CRC, geometry checks and default no-retry behavior are independent
 options; earlier images remain unchanged. This is not a production recovery
 procedure, safe installer or physical-hardware qualification.
+
+2026-11-15 follow-up: the retry loop now saves and restores its own DI attempt
+counter around both modeled read and reset calls, while preserving their
+returned carry status. The earlier DI-preservation assumption above describes
+the prior image, not this revision. Other firmware, stack and physical-machine
+assumptions remain unqualified.

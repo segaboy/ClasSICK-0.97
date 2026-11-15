@@ -28,6 +28,11 @@ def crc16(payload):
     return value
 
 
+def _retry_bios_call():
+    # PUSH/POP leave the BIOS carry result intact while retaining our counter.
+    return bytes.fromhex('57 cd13 5f')
+
+
 def hard_disk(payload, entry, *, bss_end=None, poison_bss=False, verify_payload=False,
               verify_crc16=False, verify_geometry=False, retry_reads=False):
     if not isinstance(payload, bytes):
@@ -73,16 +78,15 @@ def hard_disk(payload, entry, *, bss_end=None, poison_bss=False, verify_payload=
             code += bytes.fromhex('cd1372')
             read_branches.append(len(code));code.append(0)
         else:
-            # The built-in model preserves DI across these BIOS calls. This
-            # is not a reviewed physical BIOS register-preservation contract.
+            # Save the attempt counter around each modeled firmware call.
             code += bytes.fromhex('bf0300');retry_start=len(code)
             code += bytes.fromhex('b80010 8ec0')
             code += b'\xbb'+struct.pack('<H',bx)+b'\xb8'+bytes((count,2))
             code += b'\xb9'+struct.pack('<H',cx)+b'\xba'+struct.pack('<H',dx)
-            code += bytes.fromhex('cd13 73');success=len(code);code.append(0)
+            code += _retry_bios_call()+b'\x73';success=len(code);code.append(0)
             # Decrement remaining attempts; zero takes the near failure jump.
             code += bytes.fromhex('4f 7503 e9');near_fail_branches.append(len(code));code += b'\0\0'
-            code += bytes.fromhex('b80000 ba8000 cd13 7303 e9')
+            code += bytes.fromhex('b80000 ba8000')+_retry_bios_call()+bytes.fromhex('7303 e9')
             near_fail_branches.append(len(code));code += b'\0\0'
             code += b'\xeb';back=len(code);code.append(0)
             for offset,target in ((success,len(code)),(back,retry_start)):

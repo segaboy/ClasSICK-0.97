@@ -17,3 +17,5 @@ drive contract.
 The optional diagnostic retry profile makes three modeled attempts and
 resets between failures; its DI-preservation dependency and physical limits
 are recorded in SPEC-0107 and the linked evidence.
+The later retry loop saves its own DI across the calls; this removes that
+particular assumption without qualifying other firmware behavior.

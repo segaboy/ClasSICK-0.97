@@ -984,6 +984,37 @@ above and use the new BootHush twin. The separate game title and combat tests
 also passed on that twin. Neither emulator observation proves physical disk
 recovery, human interaction, a safe installer or a completed release.
 
+### Retry counter preservation
+
+The first retry diagnostic relied on the model preserving DI across disk
+calls. The follow-up saves and restores its attempt counter around each read
+and reset; the POP does not change the returned carry condition. This removes
+that specific assumption, but does not qualify physical firmware, stack or
+other register behavior.
+
+Forty-seven loader cases passed in
+`C:/Repos/.task-temp/pc286-retry-di-preservation-20261115-a/report.json`.
+For a test-only guest, the generated call wrapper set DI to zero after each
+modeled firmware call using a flag-preserving move. With save/restore, a
+transient failure recovered and a persistent failure stopped after exactly
+three attempts. Removing the save/restore in the test-only control reached
+the bounded cycle limit after 3,999 injected failures, demonstrating that
+the control can expose a lost counter. This is a software mutation test,
+not an observation that any physical BIOS changes DI.
+
+The updated diagnostic disk SHA-256 is
+`a1404d32f6acd81452bf6f4991789aea279a7caa955646913fb673e44c6b527b`.
+The complete 286 session and its three transient/three persistent failures,
+all eight paired state/pixel checks and replay, generated-disk copy controls,
+and nine snapshot controls passed in the respective
+`pc286-preserved-di-session-20261115-a`,
+`pc286-preserved-di-session-faults-20261115-a`,
+`mac-pc286-preserved-di-parity-20261115-a`, `pc286-preserved-di-copy-20261115-a`
+and `classick-preserved-di-snapshot-controls-20261115-a` directories under
+`C:/Repos/.task-temp`. Reports contain the exact commands, source and image
+identities. The emulator remains the active twin `ef7b5d9c...`. None of these
+observations changes the release, physical or safe-installation gates.
+
 A potentially useful later IBM-published BIOS interface reference has been
 identified as an unadmitted research lead in
 `docs/research/pc286-bios-interface-lead-20261115.md`. Its 1987 publication
