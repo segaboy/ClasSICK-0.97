@@ -17,31 +17,41 @@ from pc286_loader import floppy, MAX_PAYLOAD
 from pc286_hard_disk_loader import DISK_BYTES, SECTOR
 
 ROOT = Path(__file__).resolve().parents[1]
+BLOB_OFFSET = 256
+SECTORS_PER_TRACK = 17
 
 
 def sha(path):return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
-def stage2(prefix):
+def stage2(prefix, *, corrupt_readback=False):
     if not prefix or len(prefix) % SECTOR:
         raise ValueError('sector-aligned nonempty target required')
-    count = len(prefix)//SECTOR;blob = 128;scratch = (blob+len(prefix)+15)&~15
-    if count > 127 or scratch+len(prefix) > 0xf000 or blob+len(prefix) > MAX_PAYLOAD:
+    count = len(prefix)//SECTOR;blob = BLOB_OFFSET;scratch = (blob+len(prefix)+15)&~15
+    if count > 4*SECTORS_PER_TRACK or scratch+len(prefix) > 0xf000 or blob+len(prefix) > MAX_PAYLOAD:
         raise ValueError('diagnostic staging exceeds memory or disk limits')
     code = bytearray.fromhex('b80010 8ed8 8ec0 fb')
     branches = []
     for operation, address in ((3,blob),(2,scratch)):
-        code += b'\xbb'+struct.pack('<H',address)+bytes((0xb8,count,operation))
-        code += bytes.fromhex('b90100 ba8000 cd13 72')
-        branches.append(len(code));code.append(0)
+        remaining = count;head = 0;offset = 0
+        while remaining:
+            part = min(remaining, SECTORS_PER_TRACK)
+            code += b'\xbb'+struct.pack('<H',address+offset)+bytes((0xb8,part,operation))
+            code += bytes.fromhex('b90100 ba')+struct.pack('<H',(head<<8)|0x80)
+            code += bytes.fromhex('cd13 72');branches.append((len(code),operation));code.append(0)
+            remaining-=part;head+=1;offset+=part*SECTOR
+    if corrupt_readback:
+        # Test-only corruption of the readback buffer after BIOS returns.
+        code += bytes.fromhex('8036')+struct.pack('<H',scratch)+b'\x01'
     code += bytes.fromhex('fc be')+struct.pack('<H',blob)
     code += b'\xbf'+struct.pack('<H',scratch)+b'\xb9'+struct.pack('<H',len(prefix))
-    code += bytes.fromhex('f3a6 75');branches.append(len(code));code.append(0)
+    code += bytes.fromhex('f3a6 75');branches.append((len(code),4));code.append(0)
     code += bytes.fromhex('b0ac e680 ebfe')
     failures = []
     for value in (0xe1,0xe2,0xe3):
         failures.append(len(code));code += bytes((0xb0,value,0xe6,0x80,0xeb,0xfe))
-    for offset,target in zip(branches,failures):
+    for offset,operation in branches:
+        target=failures[{3:0,2:1,4:2}[operation]]
         delta = target-offset-1
         if not -128 <= delta <= 127:raise ValueError('branch outside diagnostic range')
         code[offset] = delta & 255
@@ -92,21 +102,32 @@ def main():
     expected=bytes.fromhex(prior['cases'][0]['guest_result']['memory']['bytes'])
     if bytes.fromhex(boot['result']['memory']['bytes'])!=expected:
         raise ValueError('installed diagnostic did not reach expected initial state')
-    failed_write=out/'failed-write.img'
-    write_fault=run('write-failure',['--floppy',source,'--hard-disk',blank,'--disk-out',failed_write,
-                                     '--until-post','0xe1','--fail-hard-disk-write','0:0:1'],0xe1)
-    if write_fault['result']['hard_disk_write_failure']['injected']!=1 or sha(failed_write)!=blank_sha:
-        raise ValueError('write failure did not preserve the modeled blank disk')
-    failed_read=out/'failed-read-after-write.img'
-    fault=run('read-failure',['--floppy',source,'--hard-disk',blank,'--disk-out',failed_read,'--until-post','0xe2',
-                              '--fail-hard-disk-read','0:0:1'],0xe2)
-    if fault['result']['hard_disk_read_failure']['injected']!=1:
-        raise ValueError('verification read failure was not injected')
-    if sha(failed_read)!=before['disk']:
-        raise ValueError('read failure did not retain the preceding completed write')
+    write_faults=[];read_faults=[]
+    for head in range((prefix_size//SECTOR+SECTORS_PER_TRACK-1)//SECTORS_PER_TRACK):
+        chs=f'0:{head}:1';written=head*SECTORS_PER_TRACK*SECTOR
+        failed_write=out/('failed-write-%d.img'%head)
+        write_fault=run('write-failure-%d'%head,['--floppy',source,'--hard-disk',blank,'--disk-out',failed_write,
+                        '--until-post','0xe1','--fail-hard-disk-write',chs],0xe1)
+        expected=hashlib.sha256(prefix[:written]+bytes(DISK_BYTES-written)).hexdigest()
+        if write_fault['result']['hard_disk_write_failure']['injected']!=1 or sha(failed_write)!=expected:
+            raise ValueError('write failure did not preserve exactly the preceding modeled writes')
+        write_faults.append(write_fault)
+        failed_read=out/('failed-read-after-write-%d.img'%head)
+        fault=run('read-failure-%d'%head,['--floppy',source,'--hard-disk',blank,'--disk-out',failed_read,
+                  '--until-post','0xe2','--fail-hard-disk-read',chs],0xe2)
+        if fault['result']['hard_disk_read_failure']['injected']!=1 or sha(failed_read)!=before['disk']:
+            raise ValueError('verification failure did not retain the preceding completed writes')
+        read_faults.append(fault)
+    corrupted_reader=out/'corrupted-readback-floppy.img'
+    corrupted_reader.write_bytes(floppy(stage2(prefix,corrupt_readback=True),0))
+    mismatched_disk=out/'mismatched-readback-disk.img'
+    mismatch=run('readback-mismatch',['--floppy',corrupted_reader,'--hard-disk',blank,
+                                      '--disk-out',mismatched_disk,'--until-post','0xe3'],0xe3)
+    if sha(mismatched_disk)!=before['disk']:
+        raise ValueError('readback mutation unexpectedly altered the disk')
     # Change a staged padding byte: guest readback still agrees with its input,
     # but the host's whole-image identity check must reject the resulting disk.
-    mutant=bytearray(source.read_bytes());mutant[SECTOR+128+prefix_size-1]^=1
+    mutant=bytearray(source.read_bytes());mutant[SECTOR+BLOB_OFFSET+prefix_size-1]^=1
     mutated_source=out/'mutated-installer-floppy.img';mutated_source.write_bytes(mutant)
     mutated_disk=out/'mutated-installed.img'
     mutation=run('mutated-copy',['--floppy',mutated_source,'--hard-disk',blank,
@@ -120,8 +141,8 @@ def main():
             'installed_disk_sha256':sha(installed),'mutated_disk_sha256':sha(mutated_disk),
             'stage_bytes':prefix_size,'source_sha256':{p.name:sha(p) for p in
                 (Path(__file__),Path(__file__).with_name('pc286_loader.py'),Path(__file__).with_name('pc286_hard_disk_loader.py'))},
-            'copy':copy,'boot':boot,'injected_write_failure':write_fault,
-            'injected_verification_failure':fault,'mutated_copy':mutation,
+            'copy':copy,'boot':boot,'injected_write_failures':write_faults,
+            'injected_verification_failures':read_faults,'readback_mismatch':mismatch,'mutated_copy':mutation,
             'limits':'Fresh whole-disk BootHush test only; no partitioning, recovery, physical installation or production claim.'}
     (out/'report.json').write_text(json.dumps(report,indent=2)+'\n',encoding='utf-8')
     print(json.dumps({'status':'pass','report':str(out/'report.json'),'installed_sha256':sha(installed)}))

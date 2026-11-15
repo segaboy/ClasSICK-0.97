@@ -8,3 +8,9 @@ the blank modeled disk and the latter retained the preceding completed write.
 A changed input produced a different disk that the host identity check
 rejected. This is model evidence, not production or physical qualification.
 [Evidence](../../docs/development/mac-pc286-shared-parity-20261114.md).
+
+2026-11-15: three track-bounded writes and three track-bounded reads replaced
+the test guest's single cross-track operation. Each operation was separately
+failed and the entire resulting disk compared against the expected partial
+state. A separate guest-side readback mutation reached the mismatch stop. The
+successful generated disk still matched the same identity and booted.

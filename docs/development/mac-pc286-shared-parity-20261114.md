@@ -731,6 +731,34 @@ existing-media protection, error recovery, physical trial or production
 installer. Its modeled BIOS accepts this transfer across track boundaries;
 physical firmware behavior is not established.
 
+#### Track-bounded follow-up
+
+On 2026-11-15 the diagnostic guest was changed to split that 45-sector copy
+into three modeled tracks: 17, 17 and 11 sectors. It writes all three, then
+reads them into a separate RAM region using the same boundaries and compares
+all 45 sectors. The saved disk again matches SHA-256
+`c44a7498c35a3340cf8a7ce93c2d689cf1a920599a4e60d862b7f6acc6890d8c`
+and boots to the expected initial state.
+
+Each of the three writes and each of the three verification reads was failed
+in a separate BootHush run. For the writes, the entire saved disk matched
+exactly the prefix written before the selected failure and zeros thereafter;
+the first failure left it blank, while later failures left earlier tracks
+written. For each verification-read failure, all preceding writes remained on
+disk. A separate test-only mutation of the readback RAM reached the `e3`
+mismatch stop while leaving the disk's intended contents intact. A changed
+staged padding byte was also detected by the host's full-image hash check.
+No rollback or real-media safety is claimed.
+
+`C:/Repos/.task-temp/pc286-diagnostic-install-20261115-b/report.json` records
+the input identities, commands, six injected failures, mismatch and successful
+copy/boot. It uses BootHush SHA-256
+`370f7a12a31bed9908813686a0cbd6bb197065b5e5d3e443fc48ad843e69f28d` and
+the source-matched session at `C:/Repos/.task-temp/pc286-shared-hard-disk-20261114-e`.
+The earlier single-transfer observations remain historical. Track splitting
+reduces an identified model-specific assumption; it does not qualify real
+geometry, BIOS behavior, interrupted writes, recovery or installation.
+
 Firmware/geometry variation, boot drive selection, partitions, installation,
 failure recovery, full byte coverage, human input, physical trials and release
 qualification remain open.

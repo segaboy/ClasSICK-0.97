@@ -19,6 +19,15 @@ must reject an image with changed staged data even if the guest's readback
 matches the changed input. The model accepts the single contiguous transfer
 across track boundaries; that is not a physical BIOS guarantee.
 
+2026-11-15 follow-up: the diagnostic test guest splits the generated image's
+writes and reads at the 17-sector boundaries of the BootHush model instead
+of relying on that cross-track transfer. Each read/write is still a modeled
+BIOS request with drive `80h`, not a reviewed physical-media contract.
+The fault test independently fails every written track and every verification
+read, comparing the entire saved disk to the exact prefix successfully
+written before the failure. A separate test-only RAM mutation exercises the
+readback-mismatch branch. Prior completed writes are not rolled back.
+
 This experiment has no partition table, filesystem, disk selection, consent
 UI, recovery, power-loss handling or real-media protection. It is not a
 production installer or authorization to install on physical hardware.
