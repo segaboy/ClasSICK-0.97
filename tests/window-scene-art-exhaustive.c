@@ -32,7 +32,7 @@ int main(void)
     unsigned long checks=0;
     memset(&bits,0,sizeof bits);art.bits=&bits;art.hot_x=art.hot_y=0;
     for (width=1;width<=16u;++width) for (height=1;height<=16u;++height) {
-        art.width=width;art.height=height;
+        art.width=(uint8_t)width;art.height=(uint8_t)height;
         if (art_ok(&art)!=reference(&art)) return 1;
         for (index=0;index<32u;++index) for (bit=0;bit<8u;++bit) for (kind=0;kind<3u;++kind) {
             memset(&bits,0,sizeof bits);
@@ -53,9 +53,9 @@ int main(void)
             }
         }
         if (!art_ok(&art) || !reference(&art)) return 1;
-        art.hot_x=width;
+        art.hot_x=(uint8_t)width;
         if (art_ok(&art)!=reference(&art)) return 1;
-        art.hot_x=0;art.hot_y=height;
+        art.hot_x=0;art.hot_y=(uint8_t)height;
         if (art_ok(&art)!=reference(&art)) return 1;
         art.hot_y=0;memset(&bits,0,sizeof bits);
     }

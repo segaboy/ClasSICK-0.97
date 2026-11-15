@@ -54,3 +54,7 @@ readiness checks passed again in
 `C:/Repos/.task-temp/classick-queue-snapshot-controls-20261115-a`.
 The new unqualified snapshot is
 `C:/Repos/.task-temp/classick-paired-engineering-snapshot-20261115-k`.
+The cursor-art optimization passed nine controls in
+`C:/Repos/.task-temp/classick-art-mask-snapshot-controls-20261115-a`; its
+unqualified snapshot is
+`C:/Repos/.task-temp/classick-paired-engineering-snapshot-20261115-l`.

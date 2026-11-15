@@ -1241,3 +1241,11 @@ The full rate report is `C:/Repos/.task-temp/pc286-art-mask-rate-20261115-a`.
 These are model-specific results, not physical performance or release
 qualification. The production loader, fast Mac input, human/physical tests
 and other paired-release criteria remain open.
+
+The exhaustive test is also registered as `window-scene.art-exhaustive`;
+that test and `window-scene.reference` passed in
+`C:/Repos/.task-temp/classick-art-cmake-20261115-a`. Nine snapshot controls
+and both bounded readiness checks passed in
+`C:/Repos/.task-temp/classick-art-mask-snapshot-controls-20261115-a`, and
+the corresponding unqualified engineering snapshot is
+`C:/Repos/.task-temp/classick-paired-engineering-snapshot-20261115-l`.
