@@ -784,6 +784,12 @@ human input qualification, Mac fast input, production 286 boot and safe
 installation, proper release packaging and separate publication approval are
 still open.
 
+A second snapshot was then created after committing the preparation tool:
+`C:/Repos/.task-temp/classick-paired-engineering-snapshot-20261115-b`. Its
+record identifies repository commit `bf6cb92c2c2f5b621bb6050230a20406311fc483`
+and the exact tool hash. The ROM and disk identities and all limitations are
+the same; neither snapshot is a release candidate.
+
 Firmware/geometry variation, boot drive selection, partitions, installation,
 failure recovery, full byte coverage, human input, physical trials and release
 qualification remain open.
