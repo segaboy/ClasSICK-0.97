@@ -60,6 +60,9 @@ def main():
                                     (b'\0', 0, {'bss_end': 0}),
                                     (b'\0', 0, {'bss_end': 0xf001}),
                                     (b'\0', 0, {'poison_bss': True}),
+                                    (b'\0', 0, {'stack_canary_start': 0xc000}),
+                                    (b'\0', 0, {'bss_end': 2, 'stack_canary_start': 1}),
+                                    (b'\0', 0, {'bss_end': 2, 'stack_canary_start': 0xfffe}),
                                     (b'\0', 0, {'verify_payload': True, 'verify_crc16': True})):
         try:
             hard_disk(payload, entry, **options)

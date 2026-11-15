@@ -34,7 +34,8 @@ def _retry_bios_call():
 
 
 def hard_disk(payload, entry, *, bss_end=None, poison_bss=False, verify_payload=False,
-              verify_crc16=False, verify_geometry=False, retry_reads=False):
+              verify_crc16=False, verify_geometry=False, retry_reads=False,
+              stack_canary_start=None):
     if not isinstance(payload, bytes):
         raise TypeError('payload must be bytes')
     if not 1 <= len(payload) <= MAX_PAYLOAD or not 0 <= entry < len(payload):
@@ -45,6 +46,10 @@ def hard_disk(payload, entry, *, bss_end=None, poison_bss=False, verify_payload=
         raise ValueError('BSS poison requires a BSS range')
     if verify_payload and verify_crc16:
         raise ValueError('choose one diagnostic payload check')
+    if stack_canary_start is not None and (bss_end is None or
+            not isinstance(stack_canary_start, int) or
+            not bss_end <= stack_canary_start < 0xfffe):
+        raise ValueError('stack canary must start after BSS and below the initial stack')
     # The test medium is explicitly drive 80h and has the model geometry
     # above. Real BIOS drive selection and geometry require separate work.
     code = bytearray.fromhex('fa31c08ed0bc007c8ed8fbb800108ec0')
@@ -117,6 +122,11 @@ def hard_disk(payload, entry, *, bss_end=None, poison_bss=False, verify_payload=
     if bss_end is not None and bss_end > len(payload):
         code += bytes.fromhex('b80010 8ec0 fc bf') + struct.pack('<H', len(payload))
         code += b'\xb9' + struct.pack('<H', bss_end-len(payload)) + bytes.fromhex('30c0 f3aa')
+    if stack_canary_start is not None:
+        # Diagnostic-only stack watermark; the boot loader still uses its own
+        # separate 0000:7c00 stack until just before the payload entry.
+        code += bytes.fromhex('b80010 8ec0 fc bf') + struct.pack('<H', stack_canary_start)
+        code += b'\xb9' + struct.pack('<H', 0xfffe-stack_canary_start) + bytes.fromhex('b0a5 f3aa')
     code += bytes.fromhex('fab800108ed88ed0bcfefffbea') + struct.pack('<HH', entry, 0x1000)
     read_failure = len(code);code += bytes.fromhex('b0eee680ebfe')
     checksum_failure = len(code)

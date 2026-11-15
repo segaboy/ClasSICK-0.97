@@ -952,13 +952,11 @@ these results changes the physical, installer or release gates.
 
 ### Bounded modeled read recovery
 
-The diagnostic fixed-disk loader now optionally retries a failed payload
-read up to three times, resetting the built-in disk shim between attempts.
-It stops at `ee` after the third failure or a failed reset. The implementation
-is original to this diagnostic and relies on the BootHush model preserving DI
-across those calls; it is not based on the unadmitted IBM lead, and it is not
-a reviewed physical BIOS contract or a production installer. The default
-non-retrying profile remains available.
+The diagnostic fixed-disk loader optionally retries a failed payload read up
+to three times, resetting the built-in disk shim between attempts. It stops at
+`ee` after the third failure or a failed reset. This initial version relied on
+the model preserving DI; the later counter-preservation test is recorded below.
+It is not a reviewed physical BIOS contract or a production installer.
 
 BootHush added a separately tested one-shot read-failure injector, recorded in
 `C:/Repos/boothush/docs/pc286-hard-disk-fault-20261114.md`. With its active
@@ -1052,3 +1050,35 @@ packaged Mac and 286 images each reached their modeled readiness condition;
 their files still matched their checksums after execution. The commands and
 observations are in `C:/Repos/.task-temp/classick-snapshot-controls-20261115-c/report.json`
 and TEST-0192. This is not a release candidate or physical qualification.
+
+### Diagnostic stack watermark
+
+To investigate the missing 286 memory budget, an optional diagnostic loader
+fills offsets `c020` through `fffd` of the payload segment with `a5` before
+entering the same 22,374-byte window payload. The payload's linked BSS ends at
+`ad16`; the instrumented disk SHA-256 is
+`23bef093117439c32a1391401b89d7143f6ac55344a2ecc05d97ed2356b2330b`.
+The payload SHA-256 and BootHush executable are the preserved-DI identities
+above. Each of the eight natural-start, raw-keyboard checkpoints reached the
+same diagnostic state and pixel-identical EGA frame as the earlier session;
+the changed-byte watermark extended at least 1,070 bytes below initial SP
+`fffe`. The canary floor remained unchanged. A separate tiny guest with 128
+pushes marked the expected 256-byte depth, and a synthetic floor change was
+detected. The ordinary loader's 47-case regression also passed.
+
+This is a changed-byte lower bound for these modeled runs, not a measured
+maximum: writes matching `a5`, skipped addresses, paths and interrupts not
+observed by the test can escape detection. It does not establish the full
+640 KiB budget, actual physical BIOS use, a production stack or a release
+gate. The exact commands and input identities, all eight logs, pixel hashes,
+known-depth control and limitations are in
+`C:/Repos/.task-temp/pc286-stack-canary-20261115-c/report.json`; the loader
+regression is `C:/Repos/.task-temp/pc286-stack-loader-regression-20261115-b/report.json`.
+Both are generated artifacts outside Git.
+
+```powershell
+$py = 'C:/Users/segab/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/python.exe'
+$bh = 'C:/Repos/.task-temp/boothush-transient-active-twins-20261115-b/a/boothush-active.exe'
+& $py -B scripts/Test-BootHushPC286StackCanary.py --session C:/Repos/.task-temp/pc286-preserved-di-session-20261115-a --emulator $bh --output C:/Repos/.task-temp/NEW-STACK-CANARY
+& $py -B scripts/Test-BootHushPC286HardDiskLoader.py --emulator $bh --output C:/Repos/.task-temp/NEW-LOADER-REGRESSION
+```
