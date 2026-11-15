@@ -58,8 +58,13 @@ def main():
         if (row['mac_state']['fault'] or row['mac_state']['omissions'] or any(row['mac_state']['losses']) or
             row['normalized_canvas_pixels_match']!=512*342 or row['pc_white_margin_pixels_match']!=640*350-512*342):
             raise ValueError('paired checkpoint did not satisfy modeled checks')
+    frames={row['name']:row for row in parity['checkpoints']}
+    for name in ('initial','content'):
+        if sha(paired.parent/(name+'.pbm'))!=frames[name]['mac_pbm_sha256']:
+            raise ValueError('paired frame identity mismatch: '+name)
     head=subprocess.run(['git','rev-parse','HEAD'],cwd=ROOT,capture_output=True,text=True,check=True,timeout=10).stdout.strip()
-    inputs={'mac.rom':rom,'pc286-diagnostic.img':disk,'mac-build-manifest.json':manifest,
+    inputs={'mac.rom':rom,'pc286-diagnostic.img':disk,'initial.pbm':paired.parent/'initial.pbm',
+            'content.pbm':paired.parent/'content.pbm','mac-build-manifest.json':manifest,
             'pc286-session-report.json':pcreport,'paired-report.json':paired}
     input_hashes={name:sha(path) for name,path in inputs.items()}
     exe_hash=sha(exe);out.mkdir(parents=True,exist_ok=False)
@@ -71,6 +76,11 @@ def main():
           'The paired results are scheduled emulator input, not human or physical testing.\n\n'
           'Open work includes production 286 boot and safe installation, Mac fast-input behavior, source/tool and '
           'provenance reviews, physical and human qualification, release packaging, and the separate owner publication decision.\n'
+          'The PBM files are guest-only Mac frames from the paired model run.\n\n'
+          'For a bounded headless check, set $snapshot to this directory and $bh to the recorded BootHush executable.\n'
+          f'& $bh --machine mac128k --rom "$snapshot/mac.rom" --cycles 100000000 --timeout-ms 20000 --until {hex(mac["profiles"][0]["symbols"]["cs_mac_diag"]+4)}:4:16\n'
+          '& $bh --machine pc286 --hard-disk "$snapshot/pc286-diagnostic.img" --cycles 10000000 --timeout-ms 20000 --until-post 0xb0 --inspect 0x60000:17\n\n'
+          'These checks show modeled readiness only; they do not replace the paired interaction tests.\n'
           'See docs/development/mac-286-paired-direction-20261114.md and the linked evidence in the source repository.\n')
     (out/'README.txt').write_text(note,encoding='utf-8')
     record={'classification':'unqualified engineering snapshot; not a release candidate',

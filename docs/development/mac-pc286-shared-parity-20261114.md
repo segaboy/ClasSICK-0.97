@@ -861,3 +861,11 @@ two-character combat after modeled mouse Start. The source, scheduled input,
 per-frame checks and limits remain in its canonical native-C evidence above.
 This supplies a separate BootHush integration scenario, not evidence of a
 physical Mac, a complete game or a ClasSICK implementation source.
+
+The unqualified engineering snapshot now includes checksummed guest-only
+initial and content PBM frames from the paired run, plus bounded headless
+readiness commands. Seven integrity and preservation controls passed, and the
+packaged Mac and 286 images each reached their modeled readiness condition;
+their files still matched their checksums after execution. The commands and
+observations are in `C:/Repos/.task-temp/classick-snapshot-controls-20261115-c/report.json`
+and TEST-0192. This is not a release candidate or physical qualification.
