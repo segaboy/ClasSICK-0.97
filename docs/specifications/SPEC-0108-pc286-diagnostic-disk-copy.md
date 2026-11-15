@@ -32,3 +32,11 @@ This experiment has no partition table, filesystem, disk selection, consent
 UI, recovery, power-loss handling or real-media protection. It is not a
 production installer or authorization to install on physical hardware.
 [Evidence](../development/mac-pc286-shared-parity-20261114.md).
+
+2026-11-15 opt-in model experiment: before writing, the test guest reads the
+exact prefix it will overwrite and requires every byte in that prefix to be
+zero. It reports `e4` for a nonzero prefix and `e5` for a preflight read
+failure, before writes. This bounded check does not inspect the rest of the
+disk, detect meaningful zero-filled data, authenticate a device, select a
+target, protect partitions or qualify real media. Its host continues to
+generate disposable disks; it is not a production safety guarantee.

@@ -1,5 +1,10 @@
 # TEST-0191 - Disposable-disk copy and boot in BootHush
 
+2026-11-15 follow-up: an opt-in generated-media prefix preflight, failure
+cases and an out-of-prefix limitation control are recorded in the
+[canonical evidence](../../docs/development/mac-pc286-shared-parity-20261114.md#disposable-copy-prefix-preflight).
+The test does not qualify an installer or physical disk safety.
+
 2026-11-14; SPEC-0108 / IMPL-0135. An original guest wrote and read back a
 45-sector diagnostic prefix on a newly generated blank disk. The entire saved
 disk matched the intended image and booted to the shared-window initial state.

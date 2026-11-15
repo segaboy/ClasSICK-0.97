@@ -1249,3 +1249,46 @@ and both bounded readiness checks passed in
 `C:/Repos/.task-temp/classick-art-mask-snapshot-controls-20261115-a`, and
 the corresponding unqualified engineering snapshot is
 `C:/Repos/.task-temp/classick-paired-engineering-snapshot-20261115-l`.
+
+### Disposable-copy prefix preflight
+
+The opt-in SPEC-0108 test guest now reads the exact 23,040-byte prefix it
+would overwrite and refuses nonzero bytes before writing. Against separately
+generated BootHush disks, four nonzero positions including track boundaries
+and the last prefix byte each reached `e4` with the entire target unchanged;
+an omitted-guard control overwrote the generated nonblank prefix. Three
+preflight read failures reached `e5` without writes. Three selected write
+failures and three post-write read failures produced their expected error
+codes and exact respective disk contents. A test-only readback mutation
+reached `e3`. A blank target copied successfully and the resulting image
+booted to the recorded initial state.
+
+The out-of-prefix control deliberately placed a nonzero byte immediately
+after the checked area; the copy proceeded and preserved it. This is an
+explicit limit: checking zero bytes in a prefix cannot prove an entire disk
+is blank, identify a disk safely, protect a partition, or authorize physical
+installation. This is a generated-image experiment, not a production
+installer. The original unguarded profile and older evidence remain intact.
+
+BootHush executable SHA-256
+`3aec7ffc0062d950f8f62088baf5c17ed95c70a9f1737776157a5a38568aa7f8`;
+guarded floppy SHA-256
+`94588aad7528421f64614c3d48255863e9c571a0cbadaa0b84f0b4cf15ceae20`;
+resulting diagnostic disk SHA-256
+`a01bb95b6a3840a0a5a889951d75c421bb4823b1189a8cfae1e17d7b4089350e`.
+The tests, commands, generated media and exact outcomes are in
+`C:/Repos/.task-temp/pc286-guarded-diagnostic-copy-20261115-d/report.json`.
+The emulator's selected-occurrence fault facility and separate device test
+are documented in `C:/Repos/boothush/docs/pc286-hard-disk-fault-20261114.md`.
+The new emulator also passed eight paired states/pixel checks and replay in
+`C:/Repos/.task-temp/mac-pc286-ordinal-parity-20261115-a`.
+The unguarded generator was compared with the prior committed implementation
+for six prefix sizes and both normal/corrupt-readback modes: output bytes or
+refusal matched in all 12 comparisons. Both versions refused the 58-sector
+fixture because an existing short branch exceeded range; that larger fixture
+is not covered by this change.
+
+```powershell
+$py = 'C:/Users/segab/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/python.exe'
+& $py -B scripts/Test-BootHushPC286DiagnosticInstall.py --emulator C:/Repos/.task-temp/boothush-read-ordinal-active-20261115-a/a/boothush-active.exe --session C:/Repos/.task-temp/pc286-art-mask-session-20261115-a --output C:/Repos/.task-temp/NEW-GUARDED-COPY
+```
