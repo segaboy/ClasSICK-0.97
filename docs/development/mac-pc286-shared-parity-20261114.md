@@ -1136,3 +1136,26 @@ in `C:/Repos/boothush/docs/pc286-input-accounting-20261114.md`.
 $py = 'C:/Users/segab/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/python.exe'
 & $py -B scripts/Test-BootHushPC286RawInputRate.py --emulator C:/Repos/.task-temp/boothush-pc-queue-active-20261115-a/a/boothush-active.exe --pc-results C:/Repos/.task-temp/pc286-queue-session-20261115-a --output C:/Repos/.task-temp/NEW-RAW-INPUT-RATE
 ```
+
+### Unadopted covered-cursor publication experiment
+
+An opt-in diagnostic experiment skipped the old or new cursor's EGA copy
+only when the scene's dirty rectangle contained its whole un-clipped
+footprint. A same-source build without that option served as control. Both
+passed the eight normal state and full-pixel checkpoints. Across the five
+non-overflow burst periods above, the final stop relative to the last input
+changed by +367, -3,957, -4,331, -4,172 and -2,444 modeled cycles; the
+three faster cases still stopped with a full model queue and the same accepted
+counts. The change did not meaningfully resolve the multi-million-cycle
+backlog in this scenario and was not adopted. It is not a physical
+performance result or a general proof of safe cursor clipping.
+
+Control payload SHA-256
+`9a443bdaf9a753be3c41bca3a4b5d72ce60d0e517a3f672a486f2d4b585c2c82`;
+experimental payload SHA-256
+`6c137707056d098e038e24102882429dc3c637de1d8a09000bbf8842d3ac13a0`.
+The builds, eight rate runs, exact commands and hashes are retained under
+`C:/Repos/.task-temp/pc286-covered-{control,experiment}*20261115-a`.
+The experimental source copies remain in
+`C:/Repos/.task-temp/pc286-covered-source-20261115-a`; their hashes are in
+the associated session reports. Current working source retains the baseline.
