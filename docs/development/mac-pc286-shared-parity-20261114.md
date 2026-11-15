@@ -1096,3 +1096,43 @@ and `C:/Repos/.task-temp/classick-watermark-snapshot-controls-20261115-b`;
 the refused run and output remain in their `-a` siblings. The corresponding
 unqualified snapshot is `C:/Repos/.task-temp/classick-paired-engineering-snapshot-20261115-j`,
 with source commit and checksums in its manifest. It is not a release candidate.
+
+### Raw 286 input bursts and model queue
+
+The current CRC/geometry/retry fixed-disk session's 15 input groups and 63
+scheduled set-2 bytes were retimed to investigate the raw input path while
+the guest redraws. At 5,000,000, 1,000,000, 500,000, 250,000 and 125,000
+modeled cycles between groups, all eight selected state and complete-frame
+checkpoints matched, and all 63 scheduled bytes were accepted. At the
+125,000 setting the final stop was 7,043,672 modeled cycles after the last
+scheduled byte. These are cold-run checkpoint comparisons and a bounded
+backlog observation, not a claim about every intermediate instant.
+
+At 62,500, 31,250 and 10,000 cycles per group, intra-group byte spacing was
+scaled down to preserve order. BootHush stopped with `machine_fault` on one
+rejected byte, respectively after accepting 57, 47 and 42; 5, 15 and 20
+later bytes were still scheduled. The newer emulator's side-effect-free
+controller snapshot showed its output queue at 32/32 in each of those runs;
+the five slower final stops showed 0/32. Its queue is a model constraint, not
+a physical controller measurement. The model accepted translation prefixes
+without necessarily producing output bytes. These results do not prove real
+input speed, key rollover, human responsiveness, or a production driver.
+
+BootHush executable SHA-256
+`e84e214750c69907f6c5052397243661392810d1f1b14e357d6387a29008885d`;
+input disk SHA-256
+`a1404d32f6acd81452bf6f4991789aea279a7caa955646913fb673e44c6b527b`.
+The complete schedule, commands, output snapshots and input/source identities
+are in `C:/Repos/.task-temp/pc286-raw-queue-rate-20261115-a/report.json`.
+The earlier executable's corresponding characterization is
+`C:/Repos/.task-temp/pc286-raw-input-rate-20261115-d/report.json`;
+status, stop cycle, final state, frame and input accounting matched for every
+rate. The newer executable also passed the eight modeled Mac/286 parity
+checks and replay in `C:/Repos/.task-temp/mac-pc286-queue-parity-20261115-a`.
+The BootHush snapshot contract and its independent device tests are documented
+in `C:/Repos/boothush/docs/pc286-input-accounting-20261114.md`.
+
+```powershell
+$py = 'C:/Users/segab/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/python.exe'
+& $py -B scripts/Test-BootHushPC286RawInputRate.py --emulator C:/Repos/.task-temp/boothush-pc-queue-active-20261115-a/a/boothush-active.exe --pc-results C:/Repos/.task-temp/pc286-queue-session-20261115-a --output C:/Repos/.task-temp/NEW-RAW-INPUT-RATE
+```
