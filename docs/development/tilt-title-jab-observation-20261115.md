@@ -21,3 +21,7 @@ keyboard-controlled prototype, with its own local collision rules and
 mutation tests. Its canonical evidence remains the port record above. This
 is a port and BootHush model observation only; it does not admit game-derived
 logic into ClasSICK or establish a release criterion.
+
+The port's later direction/jump keyboard-combination and mutation tests are
+recorded in that same port evidence. This is a model/guest observation; the
+game-derived input behavior remains outside ClasSICK implementation inputs.
