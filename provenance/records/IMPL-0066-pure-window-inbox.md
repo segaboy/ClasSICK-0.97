@@ -8,3 +8,8 @@ complete(no claim) STATE correction. Algorithms/storage original engineering,
 no manuals/prohibited input or reconstructed private structures. Zero imports/
 mutable globals,shared native68000/x64 C. No production bridge,ISR/MMIO/CPU
 exclusion,boot inputs,target run or release. [Actual evidence](../../docs/development/window-inbox-evidence.md).
+
+2026-11-15: SPEC-0097's optional motion push and strict push now share an
+internal enqueue operation after their existing checks. This eliminates a
+duplicate metadata validation on the motion fallback; the contract and caller
+exclusion remain unchanged. [Current test evidence](../../docs/development/windows-m68k-toolchain-20261114.md).

@@ -10,3 +10,8 @@ The caller owns the same single non-nesting producer, foreground serialization a
 Lead review: core/input/pointer.c ptr_axis clamps before addition (including int32 extremes); button suppression changes only with button state. The original window consumes absolute pointer positions and preserves its press-time grab offset. With unchanged buttons and per-axis monotone motion, terminal pointer/window coordinates agree; intermediate event flags, paints, delivery counts and loss counts need not. The latter counters continue to count delivered records and actual hard losses, not raw arrivals. A zero tail or incoming vector uses strict fallback. tests/window-motion-integration.c checks the real graph and complete final frames, including button hit positions, reversal and clamping. This is not admission for arbitrary callback clients.
 
 SHORT alone uses the optional push. Its saturating motion_merges counter counts accepted merges, independent of uncertain-motion drops and hard losses. MCM1 is two uint32 words (tag 0x4D434D31 then copied merge count), explicitly initialized and copied by the existing bounded observation section; read paused. No descriptor capacity increase or additional exclusion region. Normal collector remains strict. The worker's pure clamp-model test is supplementary; the lead's full owner/render test is the integration authority.
+
+2026-11-15 implementation refinement: after the public entry point validates
+arguments and metadata, the fallback may use the same internal validated push
+operation as strict push. This does not relax validation, exclusion,
+refusal precedence, overflow handling, or record ordering.

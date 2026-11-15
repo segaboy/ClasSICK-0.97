@@ -30,3 +30,10 @@ is correctly assigned to the existing interleaving oracle. No hardware run.
 Software-pass means the described synthetic scenario passed,not physical
 capture/CPU timing. Partial/unexecuted components remain open. TEST-0077's
 dated planned record and TEST-0076's prior results remain unchanged.
+
+2026-11-15 follow-up: twelve hosted inbox, foreground and Mac session tests
+passed after removing duplicate motion-fallback validation. The first run had
+one infrastructure failure because its freestanding target was not built;
+building that target and rerunning produced 12/12. The new Windows-built ROM
+passed the bounded 4,096-cycle paired model sequence but still failed at
+2,048 cycles. [Commands, identities and limits](../../docs/development/windows-m68k-toolchain-20261114.md).

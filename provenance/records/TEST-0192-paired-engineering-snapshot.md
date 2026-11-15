@@ -17,3 +17,6 @@ not evidence of physical hardware, human operation or release qualification.
 An independently prepared snapshot from committed tooling is at
 `C:/Repos/.task-temp/classick-paired-engineering-snapshot-20261115-c`; its
 manifest records the source commit and checksums of its contents.
+After the inbox refinement, all seven controls, including both modeled
+readiness runs, passed again with the new Mac ROM and matching paired report
+in `C:/Repos/.task-temp/classick-inbox-snapshot-controls-20261115-a`.

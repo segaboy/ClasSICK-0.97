@@ -244,3 +244,47 @@ sole cause of missed phases, establish a physical speed limit or justify
 relaxing the existing ambiguity rules. A complete source-level and physical
 review would be required before any comparable diagnostic policy could be
 used as a release candidate.
+
+### Direct omission trace and validated enqueue refinement
+
+On 2026-11-15, the existing ROM `6b622b2b...` was traced at its internal
+motion-omission field, rather than only the periodically published copy.
+Its exact linked ELF has SHA-256 `818ca890f8e1665c01c83b3a75f0fd6cbf143aa34e5a56dcd6ed9b29cc096c9f`;
+the Windows 68000 `nm` reports `motion` at `0xb0c` with size 168. A separate
+compile of `offsetof` using this profile's SHORT, FAST and LOSS_COUNTS defines
+reported offset 116 and structure size 168. The source, generated assembly
+and commands are retained in `C:/Repos/.task-temp/mac-motion-offset-20261115-a`.
+The resulting `0xb80:4` range is valid for this image only. Its own executable
+disassembly identifies the increment/store at `0x4014d0`; no Apple code was
+inspected. See `C:/Repos/boothush/docs/mac-mouse-witness.md` for the witness
+reproduction and event ordering.
+
+All four directions at 2,048 modeled cycles per edge had 24 internal
+increments; the matching 4,096 cases had none. In the first +X omission, the
+modeled SCC had a latched pending status across multiple phase changes and the
+guest's collected pre/post-ack values differed before the counter write. This
+is evidence of a modeled ambiguity, not a physical timing measurement or proof
+of a unique cause. Traced and untraced frames and stopped guest results matched.
+
+The inbox's strict and coalescing paths now share an internal validated enqueue,
+so a non-merge motion fallback does not repeat metadata validation. The public
+argument, epoch and state checks, precedence, exclusion and overflow semantics
+remain as in SPEC-0097. Existing tests compare fallback to strict enqueue,
+including malformed inputs, full queues and a claimed-record sentinel. With
+the Windows native toolchain, two rebuilt ROM twins matched; the new ROM is
+SHA-256 `a320e666352666326337d8fa9f41729b68a1a3e054ebec775fad7be4ecc0e4cd`
+and uses 47,940 bytes versus the control's 48,008. The build manifest and
+source/tool hashes are in `C:/Repos/.task-temp/mac-inbox-single-validation-20261115-a`.
+
+The 4,096-cycle/4,096-guard BootHush paired sequence and replay passed all
+eight state and full-frame comparisons in
+`C:/Repos/.task-temp/mac-inbox-single-validation-edge4096-20261115-a`.
+At 2,048, the title checkpoint still failed, pointer `(256,188)` instead of
+`(256,75)` and 71 guest omissions, in sibling `edge2048` output. The prior
+control reported 73 on this schedule; neither passes and the difference is
+not a speed or physical-hardware claim. Twelve hosted tests passed in
+`C:/Repos/.task-temp/classick-inbox-single-validation-host-20261115-c` after
+building all named test and freestanding targets. Earlier isolated configure
+attempts lacked `nm` and Python respectively; the first test run also omitted
+the Mac freestanding object. Those attempts remain in sibling directories and
+the corrected run's CTest logs. Release and fast-input gates remain open.

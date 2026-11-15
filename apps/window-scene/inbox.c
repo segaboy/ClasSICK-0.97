@@ -117,13 +117,12 @@ int cs_inbox_baseline(cs_window_inbox *b, uint32_t epoch, uint32_t buttons)
     return CS_INBOX_OK;
 }
 
-int cs_inbox_push(cs_window_inbox *b, uint32_t epoch, int32_t dx, int32_t dy,
+/* Caller has checked the arguments and canonical metadata under its existing
+ * exclusion. Shared by both public push paths to avoid validating twice. */
+static int inbox_push_valid(cs_window_inbox *b, int32_t dx, int32_t dy,
     uint32_t buttons)
 {
     uint32_t slot;
-    if (!b || buttons > (uint32_t)CS_POINTER_BUTTON_MASK)
-        return CS_INBOX_ARGUMENT;
-    if (inbox_valid(b, epoch, 1)) return CS_INBOX_STATE;
     if (b->phase != (uint32_t)CS_INBOX_PRIMING &&
         b->phase != (uint32_t)CS_INBOX_READY)
         return inbox_unavailable(b->phase);
@@ -135,6 +134,15 @@ int cs_inbox_push(cs_window_inbox *b, uint32_t epoch, int32_t dx, int32_t dy,
     b->records[slot].buttons = buttons;
     b->count = b->count + 1u;
     return CS_INBOX_OK;
+}
+
+int cs_inbox_push(cs_window_inbox *b, uint32_t epoch, int32_t dx, int32_t dy,
+    uint32_t buttons)
+{
+    if (!b || buttons > (uint32_t)CS_POINTER_BUTTON_MASK)
+        return CS_INBOX_ARGUMENT;
+    if (inbox_valid(b, epoch, 1)) return CS_INBOX_STATE;
+    return inbox_push_valid(b, dx, dy, buttons);
 }
 
 /* Same-direction checked int32 sum; returns 1 and writes *sum, else 0. */
@@ -168,7 +176,7 @@ int cs_inbox_push_motion(cs_window_inbox *b, uint32_t epoch, int32_t dx,
             return CS_INBOX_MERGED;
         }
     }
-    return cs_inbox_push(b, epoch, dx, dy, buttons);
+    return inbox_push_valid(b, dx, dy, buttons);
 }
 
 int cs_inbox_uncertain(cs_window_inbox *b, uint32_t epoch)
