@@ -1082,3 +1082,17 @@ $bh = 'C:/Repos/.task-temp/boothush-transient-active-twins-20261115-b/a/boothush
 & $py -B scripts/Test-BootHushPC286StackCanary.py --session C:/Repos/.task-temp/pc286-preserved-di-session-20261115-a --emulator $bh --output C:/Repos/.task-temp/NEW-STACK-CANARY
 & $py -B scripts/Test-BootHushPC286HardDiskLoader.py --emulator $bh --output C:/Repos/.task-temp/NEW-LOADER-REGRESSION
 ```
+
+After committing the watermark tooling, the default, non-instrumented 286
+session was rebuilt against the updated loader source. Its disk and payload
+hashes remained the preserved-DI identities above. Eight modeled paired
+states, all normalized pixels and Mac replay matched at explicitly selected
+4,096-cycle edge and VBL guard settings. Nine snapshot controls and both
+bounded readiness checks passed. The initial parity run omitted the explicit
+guard option; although its model checks passed, the snapshot identity guard
+correctly refused that incomplete declaration. The corrected run and
+controls are `C:/Repos/.task-temp/mac-pc286-watermark-source-parity-20261115-b`
+and `C:/Repos/.task-temp/classick-watermark-snapshot-controls-20261115-b`;
+the refused run and output remain in their `-a` siblings. The corresponding
+unqualified snapshot is `C:/Repos/.task-temp/classick-paired-engineering-snapshot-20261115-j`,
+with source commit and checksums in its manifest. It is not a release candidate.

@@ -45,3 +45,7 @@ The DI-preserving image passed nine controls in
 `C:/Repos/.task-temp/classick-preserved-di-snapshot-controls-20261115-a`.
 Its unqualified snapshot is retained at
 `C:/Repos/.task-temp/classick-paired-engineering-snapshot-20261115-i`.
+After the stack-tooling change, nine controls passed for the rebuilt default
+286 session in `C:/Repos/.task-temp/classick-watermark-snapshot-controls-20261115-b`.
+The corresponding unqualified snapshot is
+`C:/Repos/.task-temp/classick-paired-engineering-snapshot-20261115-j`.
