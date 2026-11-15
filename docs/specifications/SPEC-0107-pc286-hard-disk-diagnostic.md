@@ -38,3 +38,12 @@ disk interface and requires its documented 615-cylinder, four-head, 17-sector,
 single-drive result before reading any payload. Refusal reports `ef`. Its
 expected register values and drive selection are tied to this model; this is
 not geometry discovery or disk selection for a physical installation.
+
+An optional model-only read-retry profile makes at most three attempts per
+payload read. After each of the first two failed reads it resets the modeled
+disk; a failed reset or third failed read reports `ee`. Each retry restores
+the read request registers. The prototype relies on the BootHush shim
+preserving DI for its attempt counter; that is not a reviewed physical BIOS
+contract. CRC, geometry checks and default no-retry behavior are independent
+options; earlier images remain unchanged. This is not a production recovery
+procedure, safe installer or physical-hardware qualification.

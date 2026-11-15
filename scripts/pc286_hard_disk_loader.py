@@ -29,7 +29,7 @@ def crc16(payload):
 
 
 def hard_disk(payload, entry, *, bss_end=None, poison_bss=False, verify_payload=False,
-              verify_crc16=False, verify_geometry=False):
+              verify_crc16=False, verify_geometry=False, retry_reads=False):
     if not isinstance(payload, bytes):
         raise TypeError('payload must be bytes')
     if not 1 <= len(payload) <= MAX_PAYLOAD or not 0 <= entry < len(payload):
@@ -62,15 +62,34 @@ def hard_disk(payload, entry, *, bss_end=None, poison_bss=False, verify_payload=
         code += bytes.fromhex('fc bf') + struct.pack('<H', len(payload))
         code += b'\xb9' + struct.pack('<H', bss_end-len(payload)) + bytes.fromhex('b0a5 f3aa')
     remaining = (len(payload)+SECTOR-1)//SECTOR
-    read_branches = []
+    read_branches = [];near_fail_branches = []
     for capacity, cx, dx, bx in TRACKS:
         count = min(remaining, capacity)
         if not count:
             break
-        code += b'\xbb' + struct.pack('<H', bx) + b'\xb8' + bytes((count, 2))
-        code += b'\xb9' + struct.pack('<H', cx) + b'\xba' + struct.pack('<H', dx)
-        code += bytes.fromhex('cd1372')
-        read_branches.append(len(code));code.append(0);remaining -= count
+        if not retry_reads:
+            code += b'\xbb' + struct.pack('<H', bx) + b'\xb8' + bytes((count, 2))
+            code += b'\xb9' + struct.pack('<H', cx) + b'\xba' + struct.pack('<H', dx)
+            code += bytes.fromhex('cd1372')
+            read_branches.append(len(code));code.append(0)
+        else:
+            # The built-in model preserves DI across these BIOS calls. This
+            # is not a reviewed physical BIOS register-preservation contract.
+            code += bytes.fromhex('bf0300');retry_start=len(code)
+            code += bytes.fromhex('b80010 8ec0')
+            code += b'\xbb'+struct.pack('<H',bx)+b'\xb8'+bytes((count,2))
+            code += b'\xb9'+struct.pack('<H',cx)+b'\xba'+struct.pack('<H',dx)
+            code += bytes.fromhex('cd13 73');success=len(code);code.append(0)
+            # Decrement remaining attempts; zero takes the near failure jump.
+            code += bytes.fromhex('4f 7503 e9');near_fail_branches.append(len(code));code += b'\0\0'
+            code += bytes.fromhex('b80000 ba8000 cd13 7303 e9')
+            near_fail_branches.append(len(code));code += b'\0\0'
+            code += b'\xeb';back=len(code);code.append(0)
+            for offset,target in ((success,len(code)),(back,retry_start)):
+                delta=target-offset-1
+                if not -128<=delta<=127:raise ValueError('retry branch out of range')
+                code[offset]=delta & 255
+        remaining -= count
     checksum_branch = None
     if verify_payload:
         # Same limited additive check as the separate floppy diagnostic.
@@ -105,6 +124,10 @@ def hard_disk(payload, entry, *, bss_end=None, poison_bss=False, verify_payload=
         if not -128 <= delta <= 127:
             raise ValueError('diagnostic branch out of range')
         code[offset] = delta & 255
+    for offset in near_fail_branches:
+        delta=read_failure-(offset+2)
+        if not -32768<=delta<=32767:raise ValueError('retry failure branch out of range')
+        code[offset:offset+2]=struct.pack('<h',delta)
     if len(code) > 510:
         raise ValueError('diagnostic boot sector overflow')
     code += bytes(510-len(code)) + b'\x55\xaa'

@@ -25,12 +25,14 @@ def main():
     root.mkdir(parents=True, exist_ok=False)
     exe_hash = sha(exe.read_bytes());cases = []
 
-    def run(name, data, post, offsets, fail_read=None):
+    def run(name, data, post, offsets, fail_read=None, fail_read_once=None, injected=1):
         path = root/(name+'.img');path.write_bytes(data)
         command = [str(exe), '--machine', 'pc286', '--hard-disk', str(path),
                    '--cycles', '40000000', '--timeout-ms', '20000', '--until-post', hex(post)]
         if fail_read is not None:
             command += ['--fail-hard-disk-read', fail_read]
+        if fail_read_once is not None:
+            command += ['--fail-hard-disk-read-once', fail_read_once]
         for offset in offsets:
             command += ['--inspect', hex(0x10000+offset)+':1']
         result = subprocess.run(command, capture_output=True, text=True, timeout=25,
@@ -39,10 +41,12 @@ def main():
             raise RuntimeError(name+': '+result.stdout+result.stderr)
         response = json.loads(result.stdout)
         assert response['status'] == 'condition_met' and response['post'] == post
-        if fail_read is not None:
+        if fail_read is not None or fail_read_once is not None:
             fault = response['hard_disk_read_failure']
-            assert fault['injected'] == 1 and fault['bios_status'] == 32
-            assert [fault[x] for x in ('cylinder','head','sector')] == [int(x) for x in fail_read.split(':')]
+            selected=fail_read if fail_read is not None else fail_read_once
+            assert fault['injected'] == injected and fault['bios_status'] == 32
+            assert [fault[x] for x in ('cylinder','head','sector')] == [int(x) for x in selected.split(':')]
+            if fail_read_once is not None:assert fault['limit']==1
         assert sha(path.read_bytes()) == sha(data)
         rows = response.get('memory_ranges', []) if len(offsets)>1 else [response['memory']]
         assert [row['address'] for row in rows] == [0x10000+offset for offset in offsets]
@@ -110,6 +114,22 @@ def main():
         assert guarded[:SECTOR].count(needle)==1
         altered = bytearray(guarded);at=guarded.index(needle);altered[at:at+len(needle)]=replacement
         assert run(name, altered, 0xef, [0]) == [0]
+    retried=hard_disk(bytes(sample),0,verify_crc16=True,verify_geometry=True,retry_reads=True)
+    for chs,offset in (('0:0:2',0),('0:1:1',16*SECTOR),('0:2:1',33*SECTOR),('0:3:1',50*SECTOR)):
+        assert run('retry-once-'+chs.replace(':','-'),retried,0xa5,[offset],fail_read_once=chs)==[sample[offset]]
+        offsets=([offset-1] if offset else [])+[offset]
+        expected=([sample[offset-1]] if offset else [])+[0]
+        assert run('retry-persistent-'+chs.replace(':','-'),retried,0xee,offsets,fail_read=chs,injected=3)==expected
+    # Force the first reset to request an unsupported operation after an
+    # injected read failure; the guest must stop instead of continuing.
+    reset=bytes.fromhex('b80000ba8000cd13')
+    assert retried[:SECTOR].count(reset)==4
+    failed_reset=bytearray(retried);at=retried.index(reset);failed_reset[at+2]=0xff
+    assert run('retry-reset-failure',failed_reset,0xee,[0],fail_read_once='0:0:2')==[0]
+    # Retry is independently selectable with no check or the older sum.
+    for name,options in (('retry-no-check',{}),('retry-additive',{'verify_payload':True})):
+        basic=hard_disk(collision_payload,0,retry_reads=True,**options)
+        assert run(name,basic,0xa5,[0],fail_read_once='0:0:2')==[collision_payload[0]]
     # Invalid fourth-track sector creates a modeled BIOS read error after the
     # first three reads. This tests our error branch, not physical media failure.
     bad = bytearray(data)

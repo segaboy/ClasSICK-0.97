@@ -946,6 +946,44 @@ nine snapshot controls passed in
 Add `--verify-geometry` to the shared-session reproduction above. None of
 these results changes the physical, installer or release gates.
 
+### Bounded modeled read recovery
+
+The diagnostic fixed-disk loader now optionally retries a failed payload
+read up to three times, resetting the built-in disk shim between attempts.
+It stops at `ee` after the third failure or a failed reset. The implementation
+is original to this diagnostic and relies on the BootHush model preserving DI
+across those calls; it is not based on the unadmitted IBM lead, and it is not
+a reviewed physical BIOS contract or a production installer. The default
+non-retrying profile remains available.
+
+BootHush added a separately tested one-shot read-failure injector, recorded in
+`C:/Repos/boothush/docs/pc286-hard-disk-fault-20261114.md`. With its active
+twin executable SHA-256
+`ef7b5d9cf89fd0cc0eb1a816b5e489ffc34931349370a178c0579267dcc2ff2a`,
+44 generated loader cases passed in
+`C:/Repos/.task-temp/pc286-retry-loader-final-20261115-b/report.json`. These
+include transient and persistent faults at each of four track starts and a
+deliberately failed reset, plus retry with the additive or no payload check.
+At each track a single injected failure recovered;
+three persistent failures reached `ee`. The full shared-window image likewise
+passed three transient recovery and three persistent refusal cases in
+`C:/Repos/.task-temp/pc286-retry-final-faults-20261115-a/report.json`.
+
+The CRC/geometry/retry disk SHA-256 is
+`a580ce5642035b4c013979e22807989adf42b0f297ce33e83204ec77b7354230`;
+its unchanged payload SHA-256 is
+`9a443bdaf9a753be3c41bca3a4b5d72ce60d0e517a3f672a486f2d4b585c2c82`.
+The session, Mac/286 full-pixel parity and replay, generated-disk copy and
+fault tests, and nine snapshot controls passed in the respective
+`pc286-retry-final-session-20261115-a`,
+`mac-pc286-retry-final-parity-20261115-a`, `pc286-retry-final-copy-20261115-a`
+and `classick-retry-final-snapshot-controls-20261115-a` directories under
+`C:/Repos/.task-temp`. Each report records exact commands and identities.
+To reproduce the session, add `--retry-reads` to the CRC/geometry command
+above and use the new BootHush twin. The separate game title and combat tests
+also passed on that twin. Neither emulator observation proves physical disk
+recovery, human interaction, a safe installer or a completed release.
+
 A potentially useful later IBM-published BIOS interface reference has been
 identified as an unadmitted research lead in
 `docs/research/pc286-bios-interface-lead-20261115.md`. Its 1987 publication

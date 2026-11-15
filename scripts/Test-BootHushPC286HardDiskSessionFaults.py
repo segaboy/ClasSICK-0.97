@@ -37,7 +37,7 @@ def main():
     data = payload.read_bytes();out.mkdir(parents=True, exist_ok=False);cases=[]
     for chs, offset in (('0:0:2',0), ('0:1:1',16*512), ('0:2:1',33*512)):
         offsets = ([offset-1] if offset else [])+[offset]
-        cmd = [str(exe),'--machine','pc286','--hard-disk',str(disk),'--cycles','8000000',
+        cmd = [str(exe),'--machine','pc286','--hard-disk',str(disk),'--cycles','12000000',
                '--timeout-ms','20000','--until-post','0xee','--fail-hard-disk-read',chs]
         for address in offsets:cmd += ['--inspect',hex(0x10000+address)+':1']
         result = subprocess.run(cmd,capture_output=True,text=True,timeout=25,
@@ -47,12 +47,25 @@ def main():
         rows = response['memory_ranges'] if len(offsets)>1 else [response['memory']]
         expected = ([data[offset-1]] if offset else [])+[0]
         if (response['status']!='condition_met' or response['post']!=0xee or
-            fault['injected']!=1 or fault['bios_status']!=32 or
+            fault['injected']!=(3 if prior.get('retry_reads') else 1) or fault['bios_status']!=32 or
             [fault[x] for x in ('cylinder','head','sector')]!=[int(x) for x in chs.split(':')] or
             [row['address'] for row in rows]!=[0x10000+x for x in offsets] or
             [bytes.fromhex(row['bytes'])[0] for row in rows]!=expected):
             raise ValueError('unexpected loader failure behavior at '+chs)
         cases.append({'chs':chs,'command':cmd,'result':response})
+        if prior.get('retry_reads'):
+            cmd=[str(exe),'--machine','pc286','--hard-disk',str(disk),'--cycles','12000000',
+                 '--timeout-ms','20000','--until-post','0xb0','--fail-hard-disk-read-once',chs,
+                 '--inspect','0x60000:17']
+            result=subprocess.run(cmd,capture_output=True,text=True,timeout=25,
+                                  creationflags=getattr(subprocess,'CREATE_NO_WINDOW',0))
+            if result.returncode:raise RuntimeError(result.stdout+result.stderr)
+            response=json.loads(result.stdout);fault=response['hard_disk_read_failure']
+            if (response['status']!='condition_met' or response['post']!=0xb0 or
+                fault['injected']!=1 or fault.get('limit')!=1 or
+                response['memory']['bytes']!=prior['cases'][0]['guest_result']['memory']['bytes']):
+                raise ValueError('transient read did not recover to the expected state at '+chs)
+            cases.append({'chs':chs,'kind':'transient','command':cmd,'result':response})
     if sha(disk)!=disk_sha or sha(payload)!=payload_sha or sha(exe)!=exe_sha:
         raise ValueError('input changed')
     result={'status':'pass','disk_sha256':disk_sha,'payload_sha256':payload_sha,

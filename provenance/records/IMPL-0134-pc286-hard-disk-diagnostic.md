@@ -14,3 +14,6 @@ authenticity, physical BIOS or installer claim.
 An optional model-geometry check now refuses an unexpected result before the
 payload read. It is derived from BootHush's documented model, not a physical
 drive contract.
+The optional diagnostic retry profile makes three modeled attempts and
+resets between failures; its DI-preservation dependency and physical limits
+are recorded in SPEC-0107 and the linked evidence.

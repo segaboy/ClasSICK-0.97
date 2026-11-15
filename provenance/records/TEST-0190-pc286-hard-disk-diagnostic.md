@@ -21,3 +21,6 @@ The later geometry-preflight suite passed 33 cases, including wrong expected
 cylinder/head counts and an invalid drive, with no payload loaded on refusal.
 All 33 cases also passed on the newly rebuilt active-profile BootHush twin;
 the executable's build scope and identity are in the linked evidence.
+The subsequent model-only recovery profile passed 44 loader cases and six
+actual-window-image transient/persistent fault cases on the newer BootHush
+twin. This does not qualify physical recovery or installation.

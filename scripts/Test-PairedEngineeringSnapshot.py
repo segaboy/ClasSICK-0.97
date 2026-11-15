@@ -46,6 +46,8 @@ def main():
             session=json.loads((c/'report.json').read_text(encoding='utf-8'))
             if snapshot['pc_geometry_preflight']!=bool(session.get('verify_geometry')):
                 raise ValueError('snapshot geometry profile not recorded')
+            if snapshot['pc_read_retries']!=bool(session.get('retry_reads')):
+                raise ValueError('snapshot retry profile not recorded')
             diag=json.loads(manifest.read_text(encoding='utf-8'))['profiles'][0]['symbols']['cs_mac_diag']
             commands=([str(exe),'--machine','mac128k','--rom',str(destination/'mac.rom'),
                        '--cycles','100000000','--timeout-ms','20000','--until',hex(diag+4)+':4:16'],
