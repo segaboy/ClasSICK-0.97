@@ -19,3 +19,6 @@ failure records are in the same evidence; no physical speed claim follows.
 2026-11-15: a scratch experiment coalescing diagnostic copies passed the
 slower paired scenario but still failed the faster one. The experiment was
 not adopted; its retained source, builds and outcomes are in the evidence.
+Another scratch experiment skipped repeated empty foreground polling until a
+new producer service. It too passed the slower scenario and failed the faster
+one; the source was removed after recording the retained result.

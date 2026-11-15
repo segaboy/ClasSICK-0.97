@@ -288,3 +288,25 @@ building all named test and freestanding targets. Earlier isolated configure
 attempts lacked `nm` and Python respectively; the first test run also omitted
 the Mac freestanding object. Those attempts remain in sibling directories and
 the corrected run's CTest logs. Release and fast-input gates remain open.
+
+### Unadopted idle foreground polling experiment
+
+With the inbox refinement as control, a separate scratch change skipped a
+repeated empty foreground step while the interrupt producer's service counter
+had not changed; a saturated counter never skipped. Terminal observation was
+still checked. It did not change motion decoding, but would have required
+additional concurrency and fault-detection review before adoption.
+
+The source and patch are preserved in
+`C:/Repos/.task-temp/mac-foreground-idle-experiment-source-20261115-a`;
+the modified source SHA-256 is
+`a028ad3f01807f35880b8a035d9c3bd66dbf7b35f44e2373a717b4f3bf1f77bc`.
+Windows-built twins and their source/tool manifest are in
+`C:/Repos/.task-temp/mac-foreground-idle-skip-20261115-a`; the ROM SHA-256 is
+`3c472245ac5327143209f6840dea369dcf06156b9184e60caa77e1686a990161`.
+At 4,096 modeled cycles per edge, the eight paired states, pixels and replay
+passed in `C:/Repos/.task-temp/mac-fg-idle-skip-edge4096-20261115-a`.
+At 2,048 the title checkpoint again failed, pointer `(256,191)` rather than
+`(256,75)`, with 70 omissions; its command and failure are in the sibling
+`edge2048` directory. The candidate was removed from the working source.
+These observations do not establish a physical speed or a fix.
