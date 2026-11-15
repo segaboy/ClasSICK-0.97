@@ -759,6 +759,31 @@ The earlier single-transfer observations remain historical. Track splitting
 reduces an identified model-specific assumption; it does not qualify real
 geometry, BIOS behavior, interrupted writes, recovery or installation.
 
+### Local engineering snapshot for review
+
+2026-11-15; IMPL-0136 / TEST-0192. A fresh local snapshot contains the
+source-matched Mac ROM, the generated 286 diagnostic disk, their build/session
+records, the eight-checkpoint paired report and SHA-256 checksums. It is
+explicitly labelled **unqualified**, not a release candidate or an installer.
+The preparation tool validates selected source and image identities, the
+emulator, the exact current parity runner, all eight modeled checkpoint
+results and replay before creating a new directory. These self-reported
+identities are integrity checks, not independent provenance review or proof of
+physical behavior. No release has been published.
+
+The local snapshot is
+`C:/Repos/.task-temp/classick-paired-engineering-snapshot-20261115-a`; the
+control report is `C:/Repos/.task-temp/classick-snapshot-controls-20261115-a/report.json`.
+The controls independently verify all output checksums; changed ROM, source
+fingerprint, disk identity and parity-script identity are refused before
+output creation, and a pre-existing directory is left intact. The snapshot's
+`snapshot.json` records the repository base and exact preparation-script hash;
+the latter was uncommitted at snapshot time. Commands and test inputs are in
+the control report. Current source/tool licensing, human review, physical and
+human input qualification, Mac fast input, production 286 boot and safe
+installation, proper release packaging and separate publication approval are
+still open.
+
 Firmware/geometry variation, boot drive selection, partitions, installation,
 failure recovery, full byte coverage, human input, physical trials and release
 qualification remain open.
