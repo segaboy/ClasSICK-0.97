@@ -1,5 +1,13 @@
 # Independent ROM and System releases
 
+**Current direction (2026-11-14):** the next paired interactive-window
+milestone targets Mac128K and native 286, replacing the older x64 half.
+The original behavior, parity, provenance, human/physical qualification and
+release requirements remain; see the [current direction](../docs/development/mac-286-paired-direction-20261114.md)
+and [current modeled evidence](../docs/development/mac-pc286-shared-parity-20261114.md).
+No Mac/286 release candidate or publication has been established. The dated
+Mac/x64 plans and published releases below remain historical.
+
 Next release goal proposed2026-10-19: [paired-native-preview-2](paired-native-preview-2.md),one interactive original native window with pointer/cursor and matched Mac/PC behavior. Proposed0.4ROM/0.2PC alpha versions,not assigned published versions. Contract/source sufficiency comes first;no implementation/trial/release authorized by this plan.
 
 Published2026-10-19: [paired ROM0.3.0-alpha.1 / PC0.1.0-alpha.1 receipt](paired-native-preview-1-publication.json). Both experimental prereleases have four verified public assets each. Source/license/setup/checksums included;System unreleased and stated preview limits remain. Older dated approval/preparation paragraphs below are history.

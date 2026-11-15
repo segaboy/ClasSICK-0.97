@@ -1,5 +1,13 @@
 # Paired native preview 2 - first interactive window
 
+**Current owner direction (2026-11-14):** the next paired target is Mac128K
+and native 286; the x64 half of this older plan is paused. The interactive
+behavior and applicable acceptance and qualification gates are retained, not
+reduced. The authoritative amendment and present limitations are in the
+[Mac/286 direction](../docs/development/mac-286-paired-direction-20261114.md)
+and [shared-window evidence](../docs/development/mac-pc286-shared-parity-20261114.md).
+The dated records below remain history; no candidate or release is implied.
+
 2026-10-29,SRC-0542..0546:shared contrasting native cursor and continuing Mac paired-capture candidate implemented;corrected source3f7cc9f fullCI passes. Isolated boots show visible cursor/counter responses,but Mac phase loss and PC GUI drag remain blockers. No release freeze. [Canonical receipt](../docs/development/release-input-repair.json).
 
 2026-10-27,SRC-0504..0507:3fab75f fullCI passes. Display1 capture works;GLKVM left alone. Host helper83 fake checks/four CTests/four profiles and five compiled defects/16 CLI controls pass. Mac held-left gives0001/fault0,first loss6 Gray jump,pointer fixed. PC12 guarded API events leave pixels unchanged.13 owned attempts closed/preserved;motion/drag/release remain blocked.74PNG/twoGIF,286/originals retained. [Evidence](../docs/development/owned-window-input-evidence.md).
