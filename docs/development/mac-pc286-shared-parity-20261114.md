@@ -855,6 +855,8 @@ exercised the mouse-to-keyboard handoff, both characters and pixel output on
 BootHush. See `C:/Repos/Not-Super-Tilt-Bro/docs/windows-native-c-evidence.md`
 for the reproduction and limits. The game-informed implementation is not a
 ClasSICK source input, and this does not close a paired-release criterion.
+The subsequent player-two velocity correction and modeled held-key resumption
+are recorded at the same port evidence link, with the same source boundary.
 
 The port subsequently extended its opt-in title experiment to use that native
 C movement component for both characters. Its modeled multi-key and rendering
