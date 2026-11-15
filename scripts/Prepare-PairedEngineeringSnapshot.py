@@ -37,7 +37,8 @@ def main():
         if ROOT not in item.parents or hashlib.sha256(item.read_bytes().replace(b'\r\n',b'\n')).hexdigest()!=digest:
             raise ValueError('Mac source identity changed: '+name)
     if (pcdata.get('status')!='pass' or pcdata.get('media')!='hard-disk' or
-        not pcdata.get('natural_start') or not pcdata.get('raw_keyboard') or not pcdata.get('verify_payload') or
+        not pcdata.get('natural_start') or not pcdata.get('raw_keyboard') or
+        bool(pcdata.get('verify_payload'))==bool(pcdata.get('verify_crc16')) or
         pcdata.get('media_sha256')!=sha(disk) or pcdata.get('payload_sha256')!=sha(pc/'session.bin') or
         pcdata.get('boothush_sha256')!=sha(exe)):
         raise ValueError('286 session identity or profile mismatch')
@@ -76,6 +77,7 @@ def main():
           'The paired results are scheduled emulator input, not human or physical testing.\n\n'
           'Open work includes production 286 boot and safe installation, Mac fast-input behavior, source/tool and '
           'provenance reviews, physical and human qualification, release packaging, and the separate owner publication decision.\n'
+          'The 286 diagnostic uses '+('CRC-16' if pcdata.get('verify_crc16') else 'an additive sum')+' for accidental payload errors; neither authenticates it.\n'
           'The PBM files are guest-only Mac frames from the paired model run.\n\n'
           'For a bounded headless check, set $snapshot to this directory and $bh to the recorded BootHush executable.\n'
           f'& $bh --machine mac128k --rom "$snapshot/mac.rom" --cycles 100000000 --timeout-ms 20000 --until {hex(mac["profiles"][0]["symbols"]["cs_mac_diag"]+4)}:4:16\n'
@@ -87,6 +89,7 @@ def main():
             'repository_head':head,'preparation_script_sha256':sha(Path(__file__)),
             'boothush_sha256':exe_hash,'input_sha256':input_hashes,
             'mac_rom_sha256':sha(rom),'pc_disk_sha256':sha(disk),'pc_payload_sha256':sha(pc/'session.bin'),
+            'pc_payload_check':'crc16' if pcdata.get('verify_crc16') else 'additive-sum',
             'limits':'Self-reported build/source identities are integrity checks, not independent review, physical proof or authenticity.'}
     (out/'snapshot.json').write_text(json.dumps(record,indent=2)+'\n',encoding='utf-8')
     files=[out/name for name in (*inputs.keys(),'README.txt','snapshot.json')]

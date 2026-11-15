@@ -76,6 +76,11 @@ def main():
     data=json.loads((pc/'report.json').read_text(encoding='utf-8'));data['media_sha256']='0'*64
     (altered_pc/'report.json').write_text(json.dumps(data),encoding='utf-8')
     run('disk_identity',c=altered_pc,expected_error='286 session identity or profile mismatch')
+    for name,additive,crc in (('no_payload_check',False,False),('conflicting_payload_checks',True,True)):
+        data=json.loads((pc/'report.json').read_text(encoding='utf-8'))
+        data['verify_payload']=additive;data['verify_crc16']=crc
+        (altered_pc/'report.json').write_text(json.dumps(data),encoding='utf-8')
+        run(name,c=altered_pc,expected_error='286 session identity or profile mismatch')
     data=json.loads(parity.read_text(encoding='utf-8'));data['parity_script_sha256']='0'*64
     altered_parity=out/'altered-parity.json';altered_parity.write_text(json.dumps(data),encoding='utf-8')
     run('parity_identity',q=altered_parity,expected_error='paired observation or source identity mismatch')

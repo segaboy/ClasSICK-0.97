@@ -12,3 +12,8 @@ The later BootHush built-in BIOS injector failed each of the four generated
 maximum-payload reads and each of the actual session image's three reads.
 The expected failure stop, prior-byte retention and untouched failing byte
 were observed with unchanged media; this remains modeled fault evidence.
+
+2026-11-15: 29 loader cases and a full eight-state CRC disk session passed;
+the equal-and-opposite modification missed by the additive sum was rejected.
+The initial input schedule preceded CRC startup and was corrected after a
+separate readiness observation. [Evidence](../../docs/development/mac-pc286-shared-parity-20261114.md).

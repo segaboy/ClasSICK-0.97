@@ -3,12 +3,13 @@
 # Copyright (C) 2026 Dean Howell.
 """Exercise original fixed-disk diagnostic media in bounded BootHush runs."""
 import argparse
+import binascii
 import hashlib
 import json
 from pathlib import Path
 import subprocess
 
-from pc286_hard_disk_loader import hard_disk, MAX_PAYLOAD, SECTOR
+from pc286_hard_disk_loader import hard_disk, crc16, MAX_PAYLOAD, SECTOR
 
 
 def sha(data):
@@ -27,7 +28,7 @@ def main():
     def run(name, data, post, offsets, fail_read=None):
         path = root/(name+'.img');path.write_bytes(data)
         command = [str(exe), '--machine', 'pc286', '--hard-disk', str(path),
-                   '--cycles', '8000000', '--timeout-ms', '20000', '--until-post', hex(post)]
+                   '--cycles', '40000000', '--timeout-ms', '20000', '--until-post', hex(post)]
         if fail_read is not None:
             command += ['--fail-hard-disk-read', fail_read]
         for offset in offsets:
@@ -52,7 +53,8 @@ def main():
                                     (b'\0', -1, {}), (b'\0', 1, {}),
                                     (b'\0', 0, {'bss_end': 0}),
                                     (b'\0', 0, {'bss_end': 0xf001}),
-                                    (b'\0', 0, {'poison_bss': True})):
+                                    (b'\0', 0, {'poison_bss': True}),
+                                    (b'\0', 0, {'verify_payload': True, 'verify_crc16': True})):
         try:
             hard_disk(payload, entry, **options)
         except ValueError:
@@ -75,6 +77,28 @@ def main():
     collision = bytearray(hard_disk(collision_payload, 0, verify_payload=True))
     collision[SECTOR+6] += 1;collision[SECTOR+7] -= 1
     assert run('balanced-corruption-control', collision, 0xa5, [6, 7]) == [0x11, 0x1f]
+    # Independent host-library oracle and a control that the additive sum
+    # misses. CRC is error detection, not authentication or a safety proof.
+    assert crc16(b'123456789') == binascii.crc_hqx(b'123456789', 0xffff) == 0x29b1
+    for length in (6, 16*SECTOR+1, 50*SECTOR+1, MAX_PAYLOAD):
+        sample = bytearray((i*37+i//251)&255 for i in range(length))
+        sample[:6] = bytes.fromhex('b0a5e680ebfe')
+        assert crc16(sample) == binascii.crc_hqx(sample, 0xffff)
+        crc_image = hard_disk(bytes(sample), 0, verify_crc16=True)
+        assert run('crc-valid-%d'%length, crc_image, 0xa5, [0, length-1]) == [sample[0], sample[-1]]
+        corrupted = bytearray(crc_image);corrupted[SECTOR+length-1] ^= 1
+        assert run('crc-corrupt-%d'%length, corrupted, 0xed, [length-1]) == [corrupted[SECTOR+length-1]]
+        if length % SECTOR:
+            padding = bytearray(crc_image);padding[SECTOR+length] ^= 1
+            assert run('crc-padding-%d'%length, padding, 0xa5, [length-1]) == [sample[-1]]
+    crc_collision = bytearray(hard_disk(collision_payload, 0, verify_crc16=True))
+    crc_collision[SECTOR+6] += 1;crc_collision[SECTOR+7] -= 1
+    assert run('crc-balanced-corruption', crc_collision, 0xed, [6, 7]) == [0x11, 0x1f]
+    for chs, offset in (('0:0:2',0), ('0:1:1',16*SECTOR),
+                        ('0:2:1',33*SECTOR), ('0:3:1',50*SECTOR)):
+        offsets = ([offset-1] if offset else []) + [offset]
+        expected = ([sample[offset-1]] if offset else []) + [0]
+        assert run('crc-read-failure-'+chs.replace(':','-'), crc_image, 0xee, offsets, fail_read=chs) == expected
     # Invalid fourth-track sector creates a modeled BIOS read error after the
     # first three reads. This tests our error branch, not physical media failure.
     bad = bytearray(data)

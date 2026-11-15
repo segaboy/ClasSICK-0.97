@@ -32,6 +32,7 @@ def main():
     p.add_argument('--output',required=True,type=Path);p.add_argument('--timing-markers',action='store_true')
     p.add_argument('--natural-start',action='store_true',help='test the continuous sequence from the shared pointer initial position')
     p.add_argument('--verify-payload',action='store_true',help='enable experimental diagnostic payload checksum')
+    p.add_argument('--verify-crc16',action='store_true',help='use the experimental fixed-disk CRC-16 check')
     p.add_argument('--hard-disk',action='store_true',help='use the experimental whole-disk diagnostic loader')
     p.add_argument('--raw-keyboard',action='store_true',help='experimental translated set-1 make/break polling')
     p.add_argument('--irq-unmask-control',action='store_true',help='test-only unmask before taking IRQ1 ownership')
@@ -47,6 +48,8 @@ def main():
         if a.raw_keyboard and not a.natural_start:raise ValueError('raw keyboard test requires natural start')
         if a.irq_unmask_control and not a.raw_keyboard:raise ValueError('IRQ control requires raw keyboard')
         if a.config_control and not a.raw_keyboard:raise ValueError('config control requires raw keyboard')
+        if a.verify_crc16 and (not a.hard_disk or a.verify_payload):
+            raise ValueError('CRC-16 requires fixed disk and cannot be combined with the additive check')
         if lib and h.digest(lib)!=oracle.LIB_SHA:raise ValueError('runtime library hash mismatch')
         if assembler:
             arith=module('arithmetic',ROOT/'scripts/Test-BootHushPC286Arithmetic.py')
@@ -92,8 +95,9 @@ def main():
         image=out/'session.img'
         loader=hard_disk if a.hard_disk else floppy
         media_option='--hard-disk' if a.hard_disk else '--floppy'
-        with image.open('xb') as f:f.write(loader(binary.read_bytes(),int(entry.group(1),16),
-                                                 bss_end=bss_end,poison_bss=True,verify_payload=a.verify_payload))
+        options={'bss_end':bss_end,'poison_bss':True,'verify_payload':a.verify_payload}
+        if a.hard_disk:options['verify_crc16']=a.verify_crc16
+        with image.open('xb') as f:f.write(loader(binary.read_bytes(),int(entry.group(1),16),**options))
         before=h.digest(image)
         if a.config_control:
             cmd=[exe,'--machine','pc286',media_option,image,'--cycles','10000000','--timeout-ms','20000',
@@ -135,14 +139,14 @@ def main():
                    ('pressed',7,256,75,80,70,0,1,1,1),('moved',9,272,59,96,54,0,1,1,1),
                    ('released',10,272,59,96,54,0,0,0,1),('post-release',13,272,107,96,54,0,0,0,1),
                    ('content',14,272,107,96,54,1,0,1,2),('content-release',15,272,107,96,54,1,0,0,2))
-        observations=[]
+        observations=[];schedule_start=6000000
         for name,count,px,py,wx,wy,pattern,drag,button,presses in cases:
             frame=out/(name+'.ppm');pbm=out/(name+'.pbm')
             cmd=[exe,'--machine','pc286',media_option,image,'--cycles','100000000','--timeout-ms','20000',
                  '--until-post',hex(0xb0+count),'--inspect','0x60000:17','--frame',frame]
             scheduled=0;required_accepted=0
             for n,code in enumerate(keys[:count]):
-                cycle=6000000+n*5000000
+                cycle=schedule_start+n*5000000
                 if a.raw_keyboard and code==0x29:
                     # Button press gets a repeated make; release is a real break.
                     sequence=((cycle,code),(cycle+100000,code)) if n in (6,13) else ((cycle,0xf0),(cycle+1000,code))
@@ -161,6 +165,9 @@ def main():
             if (result.get('status')!='condition_met' or result.get('post')!=0xb0+count or
                 bytes.fromhex(result['memory']['bytes'])!=expected or h.digest(image)!=before):
                 raise ValueError(name+': guest state mismatch or changed input')
+            if name=='initial' and a.verify_crc16:
+                # CRC startup is longer; never queue keys before controller setup.
+                schedule_start=max(schedule_start,result['cycles']+2000000)
             if scheduled:
                 delivery=result.get('pc_keyboard_input')
                 if (not delivery or delivery.get('scheduled')!=scheduled or delivery.get('rejected')!=0 or
@@ -218,6 +225,8 @@ def main():
                 'timing_markers':a.timing_markers,
                 'natural_start':a.natural_start,
                 'verify_payload':a.verify_payload,
+                'verify_crc16':a.verify_crc16,
+                'keyboard_schedule_start':schedule_start,
                 'media':'hard-disk' if a.hard_disk else 'floppy',
                 'raw_keyboard':a.raw_keyboard,
                 'irq_unmask_control':a.irq_unmask_control,

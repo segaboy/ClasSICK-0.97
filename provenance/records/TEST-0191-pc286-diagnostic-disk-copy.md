@@ -14,3 +14,5 @@ the test guest's single cross-track operation. Each operation was separately
 failed and the entire resulting disk compared against the expected partial
 state. A separate guest-side readback mutation reached the mismatch stop. The
 successful generated disk still matched the same identity and booted.
+The same copy and fault controls later passed with the new CRC-checked
+diagnostic; the source and copied disk identities are in the linked evidence.

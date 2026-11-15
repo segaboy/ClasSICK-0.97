@@ -23,3 +23,12 @@ The geometry source is SRC-0610, BootHush's own documented model in
 Unknown real geometry, boot-drive selection, partitioning, installation, BIOS
 variation, disk error recovery, integrity/authenticity, review and physical
 testing remain open. [Evidence](../development/mac-pc286-shared-parity-20261114.md).
+
+2026-11-15: the fixed-disk diagnostic also offers an alternative CRC-16 over
+exactly the linked payload bytes: polynomial `0x1021`, initial value `0xffff`,
+no reflected input or output and no final XOR. It is selected instead of, not
+alongside, the original additive option. A mismatch reports `ed`. The original
+additive profile and old media remain unchanged. CRC detects the tested
+balanced-byte corruption that the sum misses, but has collisions and provides
+no authenticity, malicious-tamper protection, production boot or installer
+guarantee. [Evidence](../development/mac-pc286-shared-parity-20261114.md).

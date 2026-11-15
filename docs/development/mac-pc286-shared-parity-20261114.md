@@ -868,6 +868,55 @@ per-frame checks and limits remain in its canonical native-C evidence above.
 This supplies a separate BootHush integration scenario, not evidence of a
 physical Mac, a complete game or a ClasSICK implementation source.
 
+## Optional CRC-16 diagnostic payload check
+
+The 286 whole-disk diagnostic's previous additive sum accepts equal and
+opposite byte changes. SPEC-0107 now permits an independently written bitwise
+CRC-16 with polynomial `0x1021`, initial `0xffff`, no reflection and no final
+XOR. The guest checks only linked payload bytes before entry, and reports
+`ed` on mismatch. The host calculation was compared with Python's separately
+implemented `binascii.crc_hqx`, including `123456789 -> 29b1`; that standard
+library is an oracle in the test, not linked into the 286 image. CRC has
+collisions and is not authentication or protection against malicious changes.
+The additive profile remains available and produces the identical earlier
+disk; old artifacts were preserved.
+
+The fixed-disk loader test passed 29 modeled cases, covering short and maximum
+payloads, track boundaries, unchanged sector padding, single-byte corruption,
+balanced corruption that the sum misses, and injected failures on all four
+read tracks. Exact source and emulator hashes, inputs, image hashes, commands
+and outcomes are in `C:/Repos/.task-temp/pc286-hard-disk-crc16-20261115-b/report.json`.
+The first shared-window CRC run at `pc286-shared-crc16-20261115-a` failed:
+its keys were scheduled at 6 million cycles while CRC startup was still
+running, and the guest rejected a pending input stream. The corrected runner
+observes a separate initial boot before choosing a start at least two million
+cycles afterward. In `pc286-shared-crc16-20261115-b/report.json`, readiness
+occurred at 7,520,373 and input started at 9,520,373 modeled cycles; all eight
+state and pixel comparisons passed. The additive control remained ready at
+4,208,555 with its unchanged 6-million-cycle schedule. These are model timing
+observations, not physical performance measurements.
+
+The CRC disk SHA-256 is
+`e802001caeba5a184abde2902536375354c644dfaa273ef66fbf575f475df7f5`;
+the unchanged linked payload is `9a443bdaf9a753be3c41bca3a4b5d72ce60d0e517a3f672a486f2d4b585c2c82`.
+The Mac and CRC disk passed all eight paired full-pixel checkpoints and replay
+at 4,096 modeled cycles per mouse edge in
+`C:/Repos/.task-temp/mac-pc286-crc16-parity-20261115-a/report.json`. The
+disposable disk-copy run in `C:/Repos/.task-temp/pc286-diagnostic-install-crc16-20261115-a/report.json`
+also passed copy, boot, track read/write failure, mismatch and altered-input
+controls. The entire copied disk matched the generated source. Nine snapshot
+controls, including rejecting disabled or conflicting checksum modes, passed
+in `C:/Repos/.task-temp/classick-crc-snapshot-controls-20261115-a/report.json`.
+Neither the disk nor that copy workflow is a production loader, safe physical
+installer, physical-hardware result or release candidate.
+
+```powershell
+$py = 'C:/Users/segab/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/python.exe'
+$bh = 'C:/Repos/.task-temp/boothush-pc-hard-fault-twins-20261114-c/a/boothush.exe'
+& $py -B scripts/Test-BootHushPC286HardDiskLoader.py --emulator $bh --output C:/Repos/.task-temp/NEW-CRC-LOADER-TEST
+& $py -B scripts/Test-BootHushPC286SharedSession.py --tool-root C:/ClasSICK/pc286-toolchain-20261023-a/toolchain --assembler C:/Repos/.task-temp/pc286-independent-arith-20261114-a/wasm.exe --host-cc C:/ClasSICK/bootstrap-clean-source-verified/.tools/llvm-mingw/llvm-mingw-20260908-ucrt-x86_64/bin/clang.exe --emulator $bh --output C:/Repos/.task-temp/NEW-CRC-SESSION --natural-start --raw-keyboard --verify-crc16 --hard-disk
+```
+
 The unqualified engineering snapshot now includes checksummed guest-only
 initial and content PBM frames from the paired run, plus bounded headless
 readiness commands. Seven integrity and preservation controls passed, and the

@@ -7,3 +7,7 @@ bootloader or protected disk image was used. It generates a disposable whole
 disk and is not an installer or production boot contract. Source review,
 physical BIOS behavior and release qualification remain open.
 [Evidence](../../docs/development/mac-pc286-shared-parity-20261114.md).
+
+2026-11-15: an optional independently implemented bitwise CRC-16 was added
+under SPEC-0107. It is error detection for the generated diagnostic, not an
+authenticity, physical BIOS or installer claim.

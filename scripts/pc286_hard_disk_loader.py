@@ -18,7 +18,18 @@ TRACKS = ((16, 0x0002, 0x0080, 0),
           (9, 0x0001, 0x0380, 50 * SECTOR))
 
 
-def hard_disk(payload, entry, *, bss_end=None, poison_bss=False, verify_payload=False):
+def crc16(payload):
+    """CRC-16, polynomial 0x1021, initial 0xffff, no reflection or final XOR."""
+    value = 0xffff
+    for byte in payload:
+        value ^= byte << 8
+        for _ in range(8):
+            value = ((value << 1) ^ (0x1021 if value & 0x8000 else 0)) & 0xffff
+    return value
+
+
+def hard_disk(payload, entry, *, bss_end=None, poison_bss=False, verify_payload=False,
+              verify_crc16=False):
     if not isinstance(payload, bytes):
         raise TypeError('payload must be bytes')
     if not 1 <= len(payload) <= MAX_PAYLOAD or not 0 <= entry < len(payload):
@@ -27,6 +38,8 @@ def hard_disk(payload, entry, *, bss_end=None, poison_bss=False, verify_payload=
         raise ValueError('BSS end outside diagnostic near-data bounds')
     if poison_bss and bss_end is None:
         raise ValueError('BSS poison requires a BSS range')
+    if verify_payload and verify_crc16:
+        raise ValueError('choose one diagnostic payload check')
     # The test medium is explicitly drive 80h and has the model geometry
     # above. Real BIOS drive selection and geometry require separate work.
     code = bytearray.fromhex('fa31c08ed0bc007c8ed8fbb800108ec0')
@@ -49,13 +62,27 @@ def hard_disk(payload, entry, *, bss_end=None, poison_bss=False, verify_payload=
         code += bytes.fromhex('b80010 8ed8 31db 31f6 b9') + struct.pack('<H', len(payload))
         code += bytes.fromhex('fc 31c0 ac 01c3 e2fb 81fb') + struct.pack('<H', sum(payload)&0xffff)
         code += b'\x75';checksum_branch = len(code);code.append(0)
+    elif verify_crc16:
+        # Original bitwise implementation of the specified CRC. Preserve CX
+        # around the eight-bit inner loop; cover only linked payload bytes.
+        code += bytes.fromhex('b80010 8ed8 bbffff 31f6 b9') + struct.pack('<H',len(payload))
+        code += bytes.fromhex('fc')
+        byte_start = len(code)
+        code += bytes.fromhex('ac 30c7 51 b108') # LODSB; XOR AL,BH; PUSH CX; CL=8
+        bit_start = len(code)
+        code += bytes.fromhex('d1e3 7304 81f32110 fec9 75')
+        code.append((bit_start-(len(code)+1)) & 255)
+        code += bytes.fromhex('59 e2')
+        code.append((byte_start-(len(code)+1)) & 255)
+        code += bytes.fromhex('81fb') + struct.pack('<H',crc16(payload))
+        code += b'\x75';checksum_branch = len(code);code.append(0)
     if bss_end is not None and bss_end > len(payload):
         code += bytes.fromhex('b80010 8ec0 fc bf') + struct.pack('<H', len(payload))
         code += b'\xb9' + struct.pack('<H', bss_end-len(payload)) + bytes.fromhex('30c0 f3aa')
     code += bytes.fromhex('fab800108ed88ed0bcfefffbea') + struct.pack('<HH', entry, 0x1000)
     read_failure = len(code);code += bytes.fromhex('b0eee680ebfe')
     checksum_failure = len(code)
-    if verify_payload:
+    if verify_payload or verify_crc16:
         code += bytes.fromhex('b0ede680ebfe')
     for offset, target in [(i, read_failure) for i in read_branches] + (
             [(checksum_branch, checksum_failure)] if checksum_branch is not None else []):
