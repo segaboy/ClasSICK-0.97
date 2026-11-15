@@ -40,3 +40,8 @@ failure, before writes. This bounded check does not inspect the rest of the
 disk, detect meaningful zero-filled data, authenticate a device, select a
 target, protect partitions or qualify real media. Its host continues to
 generate disposable disks; it is not a production safety guarantee.
+
+The diagnostic generator also handles 52..58 staged sectors using an
+expanded staging offset and near error branches. The 58-sector limit here
+comes from the test floppy's payload bound and staging layout, not a BIOS or
+physical-media limit. Shorter existing generator profiles retain their bytes.

@@ -4,6 +4,9 @@
 cases and an out-of-prefix limitation control are recorded in the
 [canonical evidence](../../docs/development/mac-pc286-shared-parity-20261114.md#disposable-copy-prefix-preflight).
 The test does not qualify an installer or physical disk safety.
+The later four-track follow-up tested 52- and 58-sector generated prefixes,
+guarded and unguarded, and fourth-track faults; short-profile bytes were
+preserved. See the same evidence record for exact commands and limitations.
 
 2026-11-14; SPEC-0108 / IMPL-0135. An original guest wrote and read back a
 45-sector diagnostic prefix on a newly generated blank disk. The entire saved

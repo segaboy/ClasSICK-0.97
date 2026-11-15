@@ -27,7 +27,12 @@ def sha(path):return hashlib.sha256(path.read_bytes()).hexdigest()
 def stage2(prefix, *, corrupt_readback=False, require_blank_prefix=False):
     if not prefix or len(prefix) % SECTOR:
         raise ValueError('sector-aligned nonempty target required')
-    count = len(prefix)//SECTOR;blob = BLOB_OFFSET;scratch = (blob+len(prefix)+15)&~15
+    count = len(prefix)//SECTOR
+    # Four-track code needs near error branches and additional staging room.
+    # Keep the established shorter profiles byte-identical.
+    near_errors=count>3*SECTORS_PER_TRACK
+    blob = 2*BLOB_OFFSET if near_errors else BLOB_OFFSET
+    scratch = (blob+len(prefix)+15)&~15
     if count > 4*SECTORS_PER_TRACK or scratch+len(prefix) > 0xf000 or blob+len(prefix) > MAX_PAYLOAD:
         raise ValueError('diagnostic staging exceeds memory or disk limits')
     code = bytearray.fromhex('b80010 8ed8 8ec0 fb')
@@ -51,14 +56,20 @@ def stage2(prefix, *, corrupt_readback=False, require_blank_prefix=False):
             part = min(remaining, SECTORS_PER_TRACK)
             code += b'\xbb'+struct.pack('<H',address+offset)+bytes((0xb8,part,operation))
             code += bytes.fromhex('b90100 ba')+struct.pack('<H',(head<<8)|0x80)
-            code += bytes.fromhex('cd13 72');branches.append((len(code),operation));code.append(0)
+            if near_errors:
+                code += bytes.fromhex('cd13 7303 e9');near_branches.append((len(code),operation));code += b'\0\0'
+            else:
+                code += bytes.fromhex('cd13 72');branches.append((len(code),operation));code.append(0)
             remaining-=part;head+=1;offset+=part*SECTOR
     if corrupt_readback:
         # Test-only corruption of the readback buffer after BIOS returns.
         code += bytes.fromhex('8036')+struct.pack('<H',scratch)+b'\x01'
     code += bytes.fromhex('fc be')+struct.pack('<H',blob)
     code += b'\xbf'+struct.pack('<H',scratch)+b'\xb9'+struct.pack('<H',len(prefix))
-    code += bytes.fromhex('f3a6 75');branches.append((len(code),4));code.append(0)
+    if near_errors:
+        code += bytes.fromhex('f3a6 7403 e9');near_branches.append((len(code),6));code += b'\0\0'
+    else:
+        code += bytes.fromhex('f3a6 75');branches.append((len(code),4));code.append(0)
     code += bytes.fromhex('b0ac e680 ebfe')
     failures = []
     for value in (0xe1,0xe2,0xe3)+((0xe4,0xe5) if require_blank_prefix else ()):
@@ -69,7 +80,7 @@ def stage2(prefix, *, corrupt_readback=False, require_blank_prefix=False):
         if not -128 <= delta <= 127:raise ValueError('branch outside diagnostic range')
         code[offset] = delta & 255
     for offset,operation in near_branches:
-        delta=failures[{4:3,5:4}[operation]]-(offset+2)
+        delta=failures[{3:0,2:1,6:2,4:3,5:4}[operation]]-(offset+2)
         if not -32768<=delta<=32767:raise ValueError('near branch outside diagnostic range')
         code[offset:offset+2]=struct.pack('<h',delta)
     if len(code)>blob:raise ValueError('installer exceeds staging offset')
@@ -226,6 +237,38 @@ def main():
     guarded_mismatch=run('guarded-mismatch',['--floppy',guarded_mutant,'--hard-disk',blank,
                          '--disk-out',guarded_mismatch_disk,'--until-post','0xe3'],0xe3)
     if sha(guarded_mismatch_disk)!=before['disk']:raise ValueError('guarded readback mutation changed disk')
+    # Exercise the fourth-track boundary and largest prefix allowed by the
+    # 512-byte stage offset, with original generated media only.
+    long_cases=[]
+    for sectors in (52,58):
+        fixture=bytes((i*37+i//251)&255 for i in range(sectors*SECTOR))
+        for enable_guard in (False,True):
+            label='long-%d-%s'%(sectors,'guarded' if enable_guard else 'plain')
+            long_floppy=out/(label+'.img');long_floppy.write_bytes(floppy(stage2(fixture,require_blank_prefix=enable_guard),0))
+            long_sha=sha(long_floppy)
+            long_output=out/(label+'-disk.img')
+            long_result=run(label,['--floppy',long_floppy,'--hard-disk',blank,'--disk-out',long_output,
+                                   '--until-post','0xac'],0xac)
+            expected=hashlib.sha256(fixture+bytes(DISK_BYTES-len(fixture))).hexdigest()
+            if sha(long_output)!=expected or sha(long_floppy)!=long_sha:raise ValueError(label+': disk differs or source changed')
+            long_cases.append({'sectors':sectors,'guarded':enable_guard,'floppy_sha256':long_sha,
+                               'disk_sha256':sha(long_output),'result':long_result})
+            if sectors==58 and enable_guard:
+                for kind,option,post in (('preflight','--fail-hard-disk-read','0xe5'),
+                                         ('write','--fail-hard-disk-write','0xe1'),
+                                         ('verify','--fail-hard-disk-read-at','0xe2')):
+                    target=out/(label+'-'+kind+'-disk.img')
+                    selected='0:3:1:2' if kind=='verify' else '0:3:1'
+                    outcome=run(label+'-'+kind,['--floppy',long_floppy,'--hard-disk',blank,
+                                '--disk-out',target,'--until-post',post,option,selected],int(post,16))
+                    written=51*SECTOR if kind=='write' else (0 if kind=='preflight' else len(fixture))
+                    expected=hashlib.sha256(fixture[:written]+bytes(DISK_BYTES-written)).hexdigest()
+                    fault=outcome['result']['hard_disk_write_failure' if kind=='write' else 'hard_disk_read_failure']
+                    if (sha(target)!=expected or sha(long_floppy)!=long_sha or fault['injected']!=1 or
+                            (kind=='verify' and (fault['matched']!=2 or fault['occurrence']!=2))):
+                        raise ValueError(label+' '+kind+': unexpected fault or partial disk')
+                    long_cases.append({'sectors':sectors,'guarded':True,'fault':kind,
+                                       'disk_sha256':sha(target),'result':outcome})
     if (sha(disk)!=before['disk'] or sha(payload)!=before['payload'] or sha(exe)!=before['emulator'] or
         sha(report_path)!=before['session_report'] or sha(blank)!=blank_sha or sha(source)!=source_sha):
         raise ValueError('input changed during diagnostic installation')
@@ -239,6 +282,7 @@ def main():
             'guard_refusals':guard_refusals,'guarded_read_failures':preflight_failures,
             'guarded_write_failures':guarded_write_failures,'guarded_verify_failures':guarded_verify_failures,
             'guarded_readback_mismatch':guarded_mismatch,
+            'four_track_cases':long_cases,
             'unguarded_overwrite':unguarded,'outside_prefix_control':outside_result,
             'limits':'Fresh whole-disk BootHush test only; no partitioning, recovery, physical installation or production claim.'}
     (out/'report.json').write_text(json.dumps(report,indent=2)+'\n',encoding='utf-8')

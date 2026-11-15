@@ -1285,10 +1285,31 @@ The new emulator also passed eight paired states/pixel checks and replay in
 The unguarded generator was compared with the prior committed implementation
 for six prefix sizes and both normal/corrupt-readback modes: output bytes or
 refusal matched in all 12 comparisons. Both versions refused the 58-sector
-fixture because an existing short branch exceeded range; that larger fixture
-is not covered by this change.
+fixture because an existing short branch exceeded range; the later
+four-track follow-up below addresses that failure.
 
 ```powershell
 $py = 'C:/Users/segab/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/python.exe'
 & $py -B scripts/Test-BootHushPC286DiagnosticInstall.py --emulator C:/Repos/.task-temp/boothush-read-ordinal-active-20261115-a/a/boothush-active.exe --session C:/Repos/.task-temp/pc286-art-mask-session-20261115-a --output C:/Repos/.task-temp/NEW-GUARDED-COPY
 ```
+
+### Four-track diagnostic copy boundary
+
+The previously observed 58-sector branch-range refusal was an emitter limit,
+not a demonstrated disk limit. For 52..58 sectors the diagnostic generator
+now uses a 512-byte staging offset and near error branches; the shorter
+profiles remain byte-identical. Twenty-four comparisons against the previous
+generator covered six shorter lengths, both preflight settings and both
+normal and deliberately corrupted readback. An earlier comparison attempt
+exposed the 58-sector refusal and is retained as an observation, not a pass.
+
+On the same BootHush executable as above, independently generated 52- and
+58-sector prefixes copied to fresh blank images with and without the guard;
+complete disk snapshots matched. For the 58-sector guarded case, fourth-track
+preflight, write and verification faults each reached their expected stop and
+the entire disk matched the appropriate zero, partial-write or completed-write
+state. Original source floppies and input disks were preserved. The complete
+run, commands, source and artifact hashes are in
+`C:/Repos/.task-temp/pc286-fourtrack-guarded-copy-20261115-b/report.json`.
+These are disposable model disks, not a production installer, physical BIOS
+contract, or assurance about other media layouts.
