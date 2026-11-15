@@ -1163,3 +1163,31 @@ The builds, eight rate runs, exact commands and hashes are retained under
 The experimental source copies remain in
 `C:/Repos/.task-temp/pc286-covered-source-20261115-a`; their hashes are in
 the associated session reports. Current working source retains the baseline.
+
+### User-requested 286 display capture
+
+On 2026-11-15 the owner asked to see the current 286 boot. The unqualified
+snapshot `classick-paired-engineering-snapshot-20261115-k` fixed-disk image,
+SHA-256 `a1404d32f6acd81452bf6f4991789aea279a7caa955646913fb673e44c6b527b`,
+booted in BootHush executable SHA-256
+`e84e214750c69907f6c5052397243661392810d1f1b14e357d6387a29008885d`.
+The previously tested natural-start keyboard schedule produced a window drag,
+release and content change; all 63 scheduled bytes were accepted, the final
+state matched and the final 640x350 EGA frame hash was
+`4df2e3d7049a2e6d1d066d158c61866a2334c412a4fd793e3dca7dd6919db0cc`.
+
+The guest-only recording contains 67 frames at five frames per modeled
+second (13.4 seconds); it includes boot and scripted interaction, without
+desktop capture or audio. GIF SHA-256
+`cf600ccfea3663677310c140629cc98d0bee1493d11e9ed0619c6dd0a07d7739`,
+MP4 SHA-256 `07f4bc54e5f3c94d7ab60531121659d0dc3bcc1b65bd577d40ede6c06a858419`,
+and lossless final PNG SHA-256
+`84975e953cdddd9c825705fb698c48db375fdf13886c0984bc698a4732ba24dd`.
+These generated assets, the original Y4M and PPM, full run and conversion
+inputs remain outside Git under `C:/Repos/.task-temp/classick-286-show-20261115-a`.
+The GIF scales nearest-neighbor and the MP4 is lossy; the PNG derives from
+the final PPM. FFmpeg SHA-256 is
+`851aa8ea5366b5af33c0681cc292d662829c7088e9ac96f6e9b37030e6835ba4`.
+The complete BootHush command, guest result and recorded executable/media
+identities are in `capture-report.json` in that directory. This is a modeled
+diagnostic demonstration, not a human-input, physical or release test.
