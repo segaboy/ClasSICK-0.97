@@ -1282,6 +1282,10 @@ The emulator's selected-occurrence fault facility and separate device test
 are documented in `C:/Repos/boothush/docs/pc286-hard-disk-fault-20261114.md`.
 The new emulator also passed eight paired states/pixel checks and replay in
 `C:/Repos/.task-temp/mac-pc286-ordinal-parity-20261115-a`.
+Nine snapshot controls and both bounded readiness checks passed in
+`C:/Repos/.task-temp/classick-ordinal-snapshot-controls-20261115-a`. The
+matching unqualified engineering snapshot is
+`C:/Repos/.task-temp/classick-paired-engineering-snapshot-20261115-m`.
 The unguarded generator was compared with the prior committed implementation
 for six prefix sizes and both normal/corrupt-readback modes: output bytes or
 refusal matched in all 12 comparisons. Both versions refused the 58-sector

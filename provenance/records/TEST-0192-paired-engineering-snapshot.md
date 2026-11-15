@@ -58,3 +58,8 @@ The cursor-art optimization passed nine controls in
 `C:/Repos/.task-temp/classick-art-mask-snapshot-controls-20261115-a`; its
 unqualified snapshot is
 `C:/Repos/.task-temp/classick-paired-engineering-snapshot-20261115-l`.
+With the selected-read-occurrence BootHush build, nine controls and two
+bounded readiness checks passed in
+`C:/Repos/.task-temp/classick-ordinal-snapshot-controls-20261115-a`; the
+corresponding unqualified snapshot is
+`C:/Repos/.task-temp/classick-paired-engineering-snapshot-20261115-m`.
