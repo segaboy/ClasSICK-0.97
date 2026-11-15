@@ -20,3 +20,5 @@ manifest records the source commit and checksums of its contents.
 After the inbox refinement, all seven controls, including both modeled
 readiness runs, passed again with the new Mac ROM and matching paired report
 in `C:/Repos/.task-temp/classick-inbox-snapshot-controls-20261115-a`.
+The corresponding committed-tooling snapshot is
+`C:/Repos/.task-temp/classick-paired-engineering-snapshot-20261115-d`.
