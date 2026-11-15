@@ -27,3 +27,5 @@ profiles. Nine controls passed separately for each in
 `C:/Repos/.task-temp/classick-sum-snapshot-controls-20261115-a` and
 `C:/Repos/.task-temp/classick-crc-snapshot-controls-20261115-a`; the two new
 negative cases reject no payload check and conflicting check declarations.
+A committed-tooling CRC snapshot is retained at
+`C:/Repos/.task-temp/classick-paired-engineering-snapshot-20261115-e`.
