@@ -15,3 +15,9 @@ permitted implementation inputs for ClasSICK. This pointer does not grant
 eligibility to copy those materials. Any future ClasSICK input or display
 change must follow the current provenance and independently developed
 implementation policy and rely on eligible specifications and evidence.
+
+The port later exercised stage-specific damage in the same mouse-started,
+keyboard-controlled prototype, with its own local collision rules and
+mutation tests. Its canonical evidence remains the port record above. This
+is a port and BootHush model observation only; it does not admit game-derived
+logic into ClasSICK or establish a release criterion.
