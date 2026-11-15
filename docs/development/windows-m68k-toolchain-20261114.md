@@ -201,3 +201,46 @@ run's four Mac-manifest and four media-admission negative controls are in
 `C:/Repos/.task-temp/mac-guard-media-admission-20261114-a`.
 Changing the modeled guard did not resolve this fast-input case; these few
 schedules are not a physical speed threshold or a sole-cause diagnosis.
+
+### Unadopted diagnostic-copy coalescing experiment
+
+2026-11-15. The question was whether repeated foreground diagnostic copies
+under interrupt exclusion materially contribute to fast modeled mouse loss.
+An opt-in scratch change delayed only the foreground diagnostic copy until
+the next VBL or at most 32 qualifying foreground checks. Terminal faults
+remained checked, copied fields remained under the existing exclusion, and no
+input or queue rule was intentionally changed. Diagnostic values could be
+stale during the delay; this was an experiment, not a qualified trace contract.
+
+The source baseline was commit `f9a0a90ef495d98dfd521c7f6eb6d664cef9af8e`.
+The exact original experimental source files and patch remain in
+`C:/Repos/.task-temp/mac-observer-experiment-source-20261115-a`; the
+`window-entry.c` SHA-256 is
+`ace2ce36066dc23ebf36c03c6a9674923e4fec65cdd873bc8558eeaf608b1331`,
+and the builder SHA-256 is
+`1cef04106fe9ed88ae1909222fb5abb9289e868850065cd419a2bccda0dca543`.
+The experiment is not included in the working source. Both builds used the
+Windows 68000 toolchain and the same `-Os` short/loss-count profile. Their
+complete manifests, flags, source hashes and matching ROM twins are in
+`C:/Repos/.task-temp/mac-observe-control-20261115-a` and
+`C:/Repos/.task-temp/mac-observe-vbl-20261115-a`. The control ROM remained
+`6b622b2b...`; the experimental ROM SHA-256 was
+`b6f845d3edc07515b7d2f47ae928672e52955d24ba678da0d1fb5e93e521f9ab`.
+
+With BootHush SHA-256
+`370f7a12a31bed9908813686a0cbd6bb197065b5e5d3e443fc48ad843e69f28d`,
+both images passed the eight paired checkpoints and replay at 4,096 modeled
+cycles per edge. At 2,048, both failed the title checkpoint: the unchanged
+control ended at `(256,188)` with 73 guest-reported omissions; the experiment
+ended at `(256,194)` with 69. The expected position was `(256,75)`. These
+different omission counts do not establish an improvement; neither image
+passed the faster case. Commands, run logs and failures are retained in the
+`mac-observe-{control,vbl}-edge{4096,2048}-20261115-a` directories under
+`C:/Repos/.task-temp`. Initial invocations used an incorrect ROM subdirectory
+and stopped before running guests; they created no output directories.
+
+The trial was not adopted. It does not close any release gate, determine the
+sole cause of missed phases, establish a physical speed limit or justify
+relaxing the existing ambiguity rules. A complete source-level and physical
+review would be required before any comparable diagnostic policy could be
+used as a release candidate.

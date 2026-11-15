@@ -15,3 +15,7 @@ The later modeled VBL-guard comparison kept `-Os` and tried four guard values
 at the faster input schedule; all failed at the first movement checkpoint.
 The slower schedule passed with guard zero. Exact conditions and retained
 failure records are in the same evidence; no physical speed claim follows.
+
+2026-11-15: a scratch experiment coalescing diagnostic copies passed the
+slower paired scenario but still failed the faster one. The experiment was
+not adopted; its retained source, builds and outcomes are in the evidence.
