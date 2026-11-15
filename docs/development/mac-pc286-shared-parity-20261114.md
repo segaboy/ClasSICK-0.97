@@ -824,3 +824,9 @@ C movement component for both characters. Its modeled multi-key and rendering
 observations are in the same canonical port evidence. They exercise BootHush
 and the Windows 68000 compiler; the game-informed component is not admitted as
 a ClasSICK implementation input and the port is not a ClasSICK release test.
+
+On 2026-11-15 the port also exercised its dual-C title build through local
+two-character combat after modeled mouse Start. The source, scheduled input,
+per-frame checks and limits remain in its canonical native-C evidence above.
+This supplies a separate BootHush integration scenario, not evidence of a
+physical Mac, a complete game or a ClasSICK implementation source.
