@@ -39,3 +39,5 @@ The corresponding unqualified snapshot is retained at
 `C:/Repos/.task-temp/classick-paired-engineering-snapshot-20261115-g`.
 Nine controls passed again for the retry-enabled session in
 `C:/Repos/.task-temp/classick-retry-final-snapshot-controls-20261115-a`.
+The corresponding unqualified snapshot is retained at
+`C:/Repos/.task-temp/classick-paired-engineering-snapshot-20261115-h`.
