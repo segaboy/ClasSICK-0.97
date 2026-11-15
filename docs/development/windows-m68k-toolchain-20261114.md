@@ -310,3 +310,27 @@ At 2,048 the title checkpoint again failed, pointer `(256,191)` rather than
 `(256,75)`, with 70 omissions; its command and failure are in the sibling
 `edge2048` directory. The candidate was removed from the working source.
 These observations do not establish a physical speed or a fix.
+
+### Unadopted SCC-first interrupt experiment
+
+2026-11-15. To test whether VBL bookkeeping before SCC servicing contributed
+to modeled fast-input loss, a scratch build serviced the motion path first
+for SCC/combined interrupt entries, then handled the VIA pending state. It
+passed the eight paired state and full-pixel checkpoints plus replay at
+4,096 cycles per edge. At 2,048, the first title movement still failed:
+pointer `(256,181)` instead of `(256,75)`, with 74 guest omissions and no
+reported hard loss. The preceding shared-art build reported `(256,189)` and
+70 omissions on its own corresponding run; these different outputs do not
+establish an improvement or a physical rate.
+
+Experimental ROM SHA-256
+`16e4e8b8588b4595cda458bcdcaec411a41b1145e24c6481ddf03a35838440f4`;
+BootHush SHA-256
+`3aec7ffc0062d950f8f62088baf5c17ed95c70a9f1737776157a5a38568aa7f8`.
+Build and input identities are in
+`C:/Repos/.task-temp/mac-scc-first-build-20261115-a`,
+`mac-scc-first-normal-20261115-a` and `mac-scc-first-fast-20261115-a`.
+The original and modified source copies are in
+`C:/Repos/.task-temp/mac-scc-first-source-20261115-a`; the working file was
+restored byte-for-byte. This experiment changes interrupt ordering and was
+not adopted or qualified on physical hardware.
