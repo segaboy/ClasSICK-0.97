@@ -122,3 +122,28 @@ See `C:/Repos/boothush/docs/relative-mouse-20261116.md` for implementation tests
 The next round M1R1 will use this emulator, the burst ROM, and edge 4096 to test
 responsiveness, all four boundaries and host capture release. Human disposition
 is pending. This candidate does not replace or relabel the frozen review ZIP.
+
+## M1R1 capture failure and M1R2 admission
+
+Owner report: "I clicked in, but the window closed." M1R1 stopped after
+61.234 seconds with `input_error`, zero completed captures, zero raw packets
+and zero mouse samples. This was not the five-minute limit. Guest movement,
+boundary reach and responsiveness were not tested; retain the M1 failures.
+Original media, logs and guest video remain in
+`C:/Repos/boothush/out/qualification-20261116-a/M1R1-mac`.
+
+BootHush's separate agent-operated diagnostic reproduced startup failure and
+identified `ClipCursor`, Win32 error 5 (access denied), before capture could
+complete. The [BootHush receipt](../../../boothush/docs/relative-mouse-20261116.md)
+records the diagnostic session, API-contract sources and automated tests.
+An attempted second agent UI inspection timed out; its untouched session
+reached the time limit and is not a capture pass.
+
+M1R2 uses explicit unconfined relative input: the host pointer remains visible
+and free, click inside starts input, F12 stops it, and focus loss releases it.
+No confinement API or desktop permission change is used. The enlarged-FIFO
+ROM and edge-4096 timing remain unchanged. BootHush twin executable SHA-256:
+`5d86fb1bec512cf8ea965437004ce33914dcb00c591e994f3497740745e8c4bc`.
+Build/validation receipts:
+`C:/Repos/.task-temp/boothush-relative-free-20261116-a`.
+M1R2 human result is pending; the frozen archive and release gates are unchanged.
