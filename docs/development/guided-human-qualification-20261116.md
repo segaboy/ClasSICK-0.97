@@ -209,3 +209,26 @@ The Windows pointer remains visibly unconfined; this is not absolute alignment
 between the two pointers. F9/F10 allow bounded adjustment, F12 stops input.
 Human comfort, lag and continued interaction correctness remain pending.
 Frozen release files are unchanged.
+
+## M1R3 result and 300-percent retest
+
+Owner report: "Slightly too fast... Does this have anything to do with how far
+the emulator is zoomed in?" The session used 400 percent throughout (zero
+runtime gain changes), with 1803 raw packets, 1802 scaled samples, 11264 pin
+steps, zero pending input, zero omissions/losses/overflows/faults and FIFO
+peak 283. It reached the five-minute limit normally with unchanged inputs.
+Sensitivity remains slightly too fast; other case results are not inferred
+from this short response. Evidence and separate feedback:
+`C:/Repos/boothush/out/qualification-20261116-a/M1R3-mac`.
+
+BootHush computes guest pixels as raw counts times gain divided by actual
+integer display scale. Rendering multiplies guest pixels by that same scale,
+so zoom does not multiply on-screen speed (apart from pixel quantization).
+Larger zoom enlarges the whole canvas, so crossing it requires farther travel
+at the same on-screen speed. This differs from Windows pointer acceleration
+and does not imply alignment between the two visible pointers.
+
+M1R4 keeps the same BootHush and 2048-record ROM identities, edge 4096,
+inversion 3, VBL guard 4096 and 2x zoom; only initial sensitivity becomes
+300 percent (25 percent slower than M1R3). This is a configuration retest,
+not a new build or a human pass. Comfort and precise interaction remain pending.
