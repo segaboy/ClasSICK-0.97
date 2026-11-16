@@ -6,7 +6,7 @@ from pathlib import Path
 from importlib.util import spec_from_file_location,module_from_spec
 
 def audit_fast_frame_alignment(listing):
-    """Reject statically odd frame-relative word/long accesses in the service.
+    """Reject statically odd frame/stack-relative word/long service accesses.
 
     This narrow compiler-output check is not a proof about dynamic addresses.
     """
@@ -14,7 +14,7 @@ def audit_fast_frame_alignment(listing):
     if not match:raise ValueError('Fast service disassembly missing')
     for line in match.group(1).splitlines():
         if re.search(r'\b(?:move|movem|cmp|add|sub|and|or|eor|tst|clr|neg|not)[wl]\b',line):
-            for offset in re.findall(r'%fp@\((-?\d+)\)',line):
+            for offset in re.findall(r'%(?:fp|sp)@\((-?\d+)\)',line):
                 if int(offset)%2:raise ValueError('Odd frame word/long access in fast service')
 
 def audit_register_checkpoint(image,syms,enabled):
@@ -101,12 +101,14 @@ def main():
     p.add_argument('--window-motion-timeline',action='store_true',help='Observation-only bounded SCC input timeline; interrupt window profile only')
     p.add_argument('--window-fast-collect',action='store_true',help='Experimental batched interrupt input collection; window profile only')
     p.add_argument('--window-short-collect',action='store_true',help='Experimental shortened SCC collection; requires fast collect')
+    p.add_argument('--window-c-abi-irq',action='store_true',help='Experimental C-ABI interrupt save set; requires short collector')
     p.add_argument('--window-loss-counts',action='store_true',help='Observation-only per-reason loss counts; interrupt window profile only')
     p.add_argument('--window-pending-idle-probe',action='store_true',help='Experimental pending-only unchanged-endpoint no-decision policy')
     p.add_argument('--window-rearm-ready-probe',action='store_true',help='Experimental SCC rearm after baseline consumption')
     p.add_argument('--window-wait-latch-probe',action='store_true',help='Experimental pending check before baseline publication')
     p.add_argument('--dcd-invert',type=int,choices=(0,1,2,3),default=0,help='Unverified raw RR0 DCD sense mask; window profile only')
     a=p.parse_args()
+    if a.window_c_abi_irq and not a.window_short_collect:p.error('--window-c-abi-irq requires --window-short-collect')
     if a.window_optimize_speed and not a.window_drawing:p.error('--window-optimize-speed requires --window-drawing')
     if a.window_keyboard_probe and not a.window_drawing:p.error('--window-keyboard-probe requires --window-drawing')
     if a.window_timer_poll_probe and not a.window_drawing:p.error('--window-timer-poll-probe requires --window-drawing')
@@ -236,6 +238,7 @@ def main():
     if 'apps/product-scene/scene.c' in sources:
         headers+=('apps/product-scene/fixed-mono.h',)
     if a.window_optimize_speed:profile+='-o2-experiment'
+    if a.window_c_abi_irq:profile+='-c-abi-irq-experiment'
     optimization='-O2' if a.window_optimize_speed else '-Os'
     profiles=[]
     for twin in ('a','b'):
@@ -266,6 +269,7 @@ def main():
         if a.window_motion_timeline:flags+=['-DCLASSICK_MAC_MOTION_TIMELINE=1']
         if a.window_fast_collect:flags+=['-DCLASSICK_MAC_FAST_COLLECT=1']
         if a.window_short_collect:flags+=['-DCLASSICK_MAC_SHORT_COLLECT=1']
+        if a.window_c_abi_irq:flags+=['-DCLASSICK_MAC_C_ABI_IRQ=1']
         if a.window_loss_counts:flags+=['-DCLASSICK_MAC_LOSS_COUNTS=1']
         if a.window_pending_idle_probe:flags+=['-DCLASSICK_MAC_PENDING_IDLE_PROBE=1']
         if a.window_rearm_ready_probe:flags+=['-DCLASSICK_MAC_REARM_READY_PROBE=1']
@@ -336,9 +340,11 @@ def main():
             rows=[]
             if pair_proof and image[start:end]!=pair_bytes:raise ValueError("Native pair code differs from audited compiler output")
             for source,name in enumerate(('cs_mac_window_via_irq','cs_mac_window_scc_irq','cs_mac_window_combined_irq'),1):
-                expected=(bytes.fromhex('007c070048e7fffe2f3c')+struct.pack('>I',source)
+                save='c0c0' if a.window_c_abi_irq else 'fffe'
+                restore='0303' if a.window_c_abi_irq else '7fff'
+                expected=(bytes.fromhex('007c070048e7'+save+'2f3c')+struct.pack('>I',source)
                     +bytes.fromhex('4eb9')+struct.pack('>I',syms['cs_mac_window_interrupt'])
-                    +bytes.fromhex('588f4cdf7fff4e73'))
+                    +bytes.fromhex('588f4cdf'+restore+'4e73'))
                 at=syms[name]-0x400000
                 if not 260<=at<=65536-len(expected) or image[at:at+len(expected)]!=expected:
                     raise ValueError('IRQ preservation/mask/RTE: '+name)
@@ -473,6 +479,7 @@ def main():
     if a.window_motion_timeline:manifest['motion_timeline']={'version':1,'capacity':6,'entry_bytes':32,'new_MMIO':False,'interrupt_timing_perturbed':True,'pointer_symbol':'cs_mac_timeline_address','motion_symbol':'cs_mac_timeline_motion'}
     if a.window_fast_collect:manifest['fast_collect']={'experimental':True,'same_MMIO_order_required':not a.window_short_collect,'new_MMIO':a.window_short_collect,'host_input_qualified':False}
     if a.window_short_collect:manifest['short_collect']={'pending_rr0_reused':True,'quiet_axis_phase_ignored_in_ready':True,'late_pending_retry':True,'motion_omission_preserves_unchanged_button':True,'change_gated_observation':True,'read_guard_nops':5,'write_guard_nops':8,'physical_qualification':False}
+    if a.window_c_abi_irq:manifest['c_abi_irq']={'experimental':True,'veneer_saved':['D0','D1','A0','A1'],'callee_preserves':'D2-D7/A2-A6','physical_qualification':False}
     if a.window_loss_counts:manifest['loss_counts']={'tag':'MLC1','bytes':20,'address':syms['cs_mac_loss_trace'],'reasons':[1,2,3,4],'pending_tag':'MLP1','pending_address':syms['cs_mac_pending_trace'],'pending_bytes':20,'context_tag':'MLX1','context_address':syms['cs_mac_context_trace'],'context_bytes':20,'no_added_MMIO':True,'interrupt_timing_perturbed':True}
     if a.window_pending_idle_probe:manifest['pending_idle_probe']={'experimental':True,'hidden_transitions_may_be_discarded':True,'physical_qualification':False}
     if a.window_rearm_ready_probe:manifest['rearm_ready_probe']={'experimental':True,'interrupts_masked_during_priming':True,'physical_qualification':False}

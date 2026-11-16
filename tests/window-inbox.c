@@ -78,6 +78,45 @@ static void invalid_metadata(void)
         UNCHANGED(cs_inbox_push(&box,box.epoch,0,0,8),CS_INBOX_ARGUMENT);
     }
 }
+
+/* SPEC-0065 metadata lattice: independent admission table, boundary values,
+ * and full-object no-write checks on every refusal. Stop is valid in all
+ * canonical phases, so it exposes validation without queue-data assumptions. */
+static void metadata_matrix(void)
+{
+    const uint32_t phases[]={0,1,2,3,4,5,6,7,UINT32_MAX};
+    const uint32_t heads[]={0,1,15,16,UINT32_MAX};
+    const uint32_t counts[]={0,1,16,17,UINT32_MAX};
+    const uint32_t claims[]={0,1,2,3,UINT32_MAX};
+    unsigned cases=0;
+    for(unsigned p=0;p<9;++p) for(unsigned h=0;h<5;++h)
+    for(unsigned n=0;n<5;++n) for(unsigned c=0;c<5;++c)
+    for(unsigned identity=0;identity<4;++identity){
+        uint32_t phase=phases[p],head=heads[h],count=counts[n],claim=claims[c];
+        int valid=0;
+        if(head<16 && count<=16 && claim<=2){
+            /* Six independent contract rows, not the implementation switch. */
+            valid=(phase==1 && head==0 && count==0 && claim==0)
+                ||(phase==2 && claim!=2 && (claim==1 || count!=0))
+                ||(phase==3 && claim!=1)
+                ||phase==4 ||(phase==5 && claim==0)
+                ||(phase==6 && head==0 && count==0 && claim==0);
+        }
+        valid=valid && identity==0;
+        memset(&box,0xA5,sizeof box);
+        box.valid=identity==1 ? 0u : CS_INBOX_VALID;
+        box.epoch=identity==2 ? 0u : 7u;
+        box.phase=phase;box.head=head;box.count=count;box.claimed=claim;
+        if(valid){
+            CHECK(cs_inbox_stop(&box,7)==CS_INBOX_STOPPED);
+            CHECK(box.phase==CS_INBOX_ENDED && !box.head && !box.count && !box.claimed);
+        }else{
+            UNCHANGED(cs_inbox_stop(&box,identity==3 ? 8u : 7u),CS_INBOX_STATE);
+        }
+        ++cases;
+    }
+    CHECK(cases==4500);
+}
 static void ordered_wrap(void)
 {
     ready();uint32_t total=0;
@@ -158,6 +197,6 @@ static void saturation_and_stop(void)
 }
 int main(void)
 {
-    refusals();invalid_metadata();ordered_wrap();losses_and_priming();saturation_and_stop();
+    refusals();invalid_metadata();metadata_matrix();ordered_wrap();losses_and_priming();saturation_and_stop();
     printf("window-inbox contract:%u assertions;2400 ordered records;bytes=%zu\n",checks,sizeof box);return 0;
 }

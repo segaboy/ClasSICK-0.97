@@ -515,3 +515,155 @@ register saves between the all-register veneer and compiler-generated C
 prologues. No narrower save mask was adopted: that would require a separate
 calling-convention contract and register/SR/stack preservation controls. It
 is an optimization candidate, not a proven fix or a changed hardware claim.
+
+## Native interrupt preservation and queue validation - 2026-11-16
+
+This follow-up implements and tests that experiment; the preceding no-adoption
+statement describes its earlier checkpoint. Baseline public source is
+`86e6d2c74783d661492c08fce44745841a1a02e2`. Codex independently wrote and
+self-reviewed the changes from SPEC-0072, SPEC-0065 and the project's own
+generated code. No Apple/Microsoft code, protected assets or game-derived
+implementation informed the changes. Human provenance review remains open.
+
+BootHush `40b4279` now exposes stopped D0-D7/A0-A7/PC/SR through
+`--mac-cpu-state 1`. Its canonical interface, original tests and build receipt
+are `C:/Repos/boothush/docs/mac-cpu-state.md`. The tested twin executable is
+`C:/Repos/.task-temp/boothush-cpu-state-active-20261116-a/a/boothush-active.exe`,
+SHA-256 `a4c51633e9ee1a2a935eae270f54959d2d72f5ea3f6bd8c5a085264904d0edd7`.
+BootHush's adapter uses its existing, separately licensed CPU public getters;
+no third-party emulator implementation was imported into ClasSICK. Its focused
+suite passes 48 tests, with two optional fixture skips.
+
+### Preservation contract and controls
+
+`--window-c-abi-irq` requires SHORT and remains opt-in. The veneers save
+D0/D1/A0/A1; the pinned compiled C graph preserves D2-D7/A2-A6. The complete
+entry/return contract still preserves all registers and interrupted SR/stack,
+raises IPL7 before shared state, passes the same 32-bit source and uses RTE.
+The default full-register save set and conservative stack allowance remain.
+The builder audits exact native save/restore/mask/call/RTE bytes for all three
+veneers. Its alignment check now rejects odd static SP-relative word/long
+accesses as well as FP-relative accesses; dynamic addresses remain unproved.
+
+`scripts/Test-MacInterruptABI.py` executes the actual assembly veneers using
+original TRAP-generated exception frames and a C stress handler. It checks all
+registers, complete SR, source argument, active IPL7, return PC and stack for
+three sources, two initial SR values, both save sets and Os/O2: 24 positives.
+Eight controls cover missing D1 preservation, RTS instead of RTE, absent IPL7
+and an assembly callee that violates D7 preservation. That bad callee is
+correctly tolerated by the full wrapper and rejected by the C-ABI wrapper.
+The forced compiler frame actively exercises A6, not merely its sentinel.
+
+Final commands, generated original source, disassembly, ROM hashes and stopped
+states are in `C:/Repos/.task-temp/mac-irq-abi-controls-20261116-e/report.json`.
+Two earlier fixture attempts hit GCC's m68k.cc:5257 internal error with an
+explicit inline-assembly A6 clobber. The final fixture instead forces LINK/UNLK
+with `-fno-omit-frame-pointer`; normal product builds did not hit that error.
+Earlier successful B/C fixture runs did not actively exercise A6 and are not
+the final proof. Three invalid-option/macro refusals also pass in
+`mac-irq-option-controls-20261116-a/report.json` under the same scratch root.
+
+`scripts/Test-MacInterruptPreservation.py` independently replays the first and
+longest complete SCC spans at both tested edge spacings in the actual revised
+ROM. Four spans preserve D0-D7/A0-A6, pop exactly six stack bytes, and restore
+the exact PC and complete SR read from the interrupted frame. Eighteen
+deliberate checker corruptions are detected. The final receipt is
+`classick-ready-production-irq-20261116-b/report.json`. Earlier receipts used
+register/stack/partial-SR comparison; this one also checks saved SR/PC.
+This samples four production paths, not every interrupt, C call or compiler.
+
+### Shared queue cost without weaker admission
+
+The canonical inbox validator now handles common READY directly, then uses
+an exhaustive switch with explicit LOSS acceptance and unknown-phase refusal.
+Tag, epoch, head, count and claim checks remain. There is no new admission,
+state, layout, sampling rule or historical behavior claim. The new independent
+metadata table exercises 4,500 phase/boundary/identity combinations and checks
+all bytes on refusal. It passes against both the previous and revised code.
+
+The hosted contract now reports 19,025 assertions including that matrix.
+O0/O2 pass; four compiled bad-validator controls are detected (unknown phase,
+READY claim, LOSS refusal and head bound). Exact compiler commands, sources,
+hashes and results are in `inbox-metadata-controls-20261116-a/report.json`;
+the driver is `C:/Repos/.task-temp/check-inbox-metadata-20261116.py`.
+Thirty focused host tests pass (29 in `classick-ready-host-test-20261116-a.log`
+plus `classick-ready-foreground-test-20261116-a.log`), including freestanding,
+phase, loss, collection order, alignment and foreground integration checks.
+
+Both revised Windows-native image builds have matching twins, 47,932 ROM bytes,
+488 data/BSS bytes, workspace 32768..33732 and conservative nonrecursive stack
+bound 4,716 bytes within the 24,320-byte reserve. Build manifests identify the
+compiler, tool hashes, all 49 normalized source inputs and native opcode audits.
+
+| Build under `C:/Repos/.task-temp/` | ROM SHA-256 | Save set |
+| --- | --- | --- |
+| `mac-ready-full-irq-20261116-a` | `e598255c3acc25d62d9f852b454a4d3cd17b1276133afc8ecf15a593b570d8ec` | Default full |
+| `mac-ready-irq-20261116-b` | `60554b8af25260af44dd8d430ee64527686496bac7d338ca2a30db4c3ba7e710` | Experimental C ABI |
+
+Before the queue change, option-off twins in `mac-c-abi-off-20261116-a`
+reproduced retained ROM `933fe32575ad2a56e0d5ffe16f5d7bc9c327d856f363e95661f1a2489aa88172`.
+The initial C-ABI-only twins in `mac-c-abi-irq-20261116-a` have ROM
+`c08c4e3f96b98487681fa6627fa92744e1f4de93822c3cef0ae70db83fe9acaa`.
+Those earlier manifests predate final builder/specification edits; use the
+two revised builds above for current source matching. An omit-frame-pointer
+experiment produced exactly the C-ABI-only image, so its flag was removed;
+its manifest and all input sources are preserved in
+`mac-input-omit-frame-20261116-a` and the sibling `-source` directory.
+The first READY experiment omitted diagnostic counters (`mac-ready-irq-20261116-a`);
+it is not the like-for-like timing comparison below.
+
+### Measured results and continuing release blocker
+
+All comparisons use this same BootHush executable, +32 X at cycle 100,000,000,
+stop at 105,000,000, inversion 3, guard 4,096, trace 99,999,000..100,300,000.
+Expected final X is 288. Every traced/plain pair matches complete JSON and
+frame bytes, with complete undropped selected witness ranges.
+
+| Variant | Max complete IPL7 cycles, edge 2,048 / 4,096 | Fast final X / omissions | Slow final X / omissions |
+| --- | --- | --- | --- |
+| Previous full save | 4,836 / 4,834 | 252 / 16 | 288 / 0 |
+| C ABI only | 4,660 / 4,658 | 246 / 12 | 288 / 0 |
+| READY validator, full save | 4,782 / 4,780 | 254 / 16 | 288 / 0 |
+| READY validator, C ABI | 4,604 / 4,604 | 276 / 12 | 288 / 0 |
+
+Reports are respectively `classick-c-abi-off-mask-20261116-a`,
+`classick-c-abi-irq-mask-20261116-a`,
+`classick-ready-full-irq-mask-20261116-a` and
+`classick-ready-irq-mask-20261116-a`, each `report.json` under the scratch root.
+`classick-ready-irq-profile-20261116-a.json` attributes the selected 4,604-cycle
+span to motion 2,220, inbox 1,108, collector 716, C wrapper 330, veneer 152
+and diagnostic increment 78. These are model instruction-boundary costs,
+not physical timings or proof that one cost causes every omission.
+
+The fresh 286 hard-disk diagnostic in `pc286-cpu-state-session-20261116-a`
+passes eight state/full-EGA cases and two pixel-mutant controls, retaining
+payload `bb0f402bbf7b9d22d7999f7afc6e44f8defdc74de4acc012af2f349818dfd336`
+and disk `a01bb95b6a3840a0a5a889951d75c421bb4823b1189a8cfae1e17d7b4089350e`.
+Both revised Mac images match it at eight states, all 175,104 canvas pixels,
+48,896 white margin pixels and complete Mac replay at edge/guard 4,096:
+`mac286-ready-full-irq-4096-20261116-a/report.json` and
+`mac286-ready-irq-4096-20261116-a/report.json`.
+
+At edge 2,048 both fail the first title checkpoint. Default full-save pointer
+is `(256,195)` with 54 omissions; C ABI is `(256,211)` with 40, versus expected
+`(256,75)`. Both have stage 16, fault zero and no hard losses. The matching
+`2048` directories and sibling logs retain these failures. Fewer cycles or
+omissions does not close the fast-input gate; C ABI remains experimental.
+
+Reproduction uses the existing native builder with `--windows-native
+--window-drawing --window-fast-collect --window-short-collect --window-loss-counts
+--dcd-invert 3`, adding `--window-c-abi-irq` only for that experiment.
+Use `Test-MacInterruptABI.py --tool-bin M68K_BIN --emulator EXE --output NEW`,
+then the existing probe, attribution and paired runners with the exact commands
+retained in their reports. No WSL, external AI service or other emulator ran.
+
+The port independently uses the same observation API at ten real native
+movement/jab calls after mouse Start; its canonical receipt at revision
+`7138c9c` is `C:/Repos/Not-Super-Tilt-Bro/docs/native-call-preservation.md`.
+It checks native game integration and three bad-callee controls. The eligible
+transfer is the test method and tool interface, not its game implementation.
+
+Paired-native-preview-2 remains incomplete: fast input, production 286 boot/
+installation, remaining target/input qualification, physical and human evidence,
+source/tool/provenance review and separately approved publication remain open.
+No release candidate, release, physical behavior or playable game is asserted.

@@ -3,7 +3,16 @@
 /* Original GNU 68000 interrupt veneers. Each raises IPL to 7 before any
  * shared-state touch, saves D0-D7/A0-A6, passes one 32-bit source argument
  * (1 VIA, 2 SCC, 3 combined) to cs_mac_window_interrupt, restores, RTE.
+ * An explicit C-ABI experiment saves only D0/D1/A0/A1 here; the called C
+ * graph must preserve D2-D7/A2-A6. Default remains full-register saving.
  * No vector installation here. Never executed by host tests. */
+
+#ifndef CLASSICK_MAC_C_ABI_IRQ
+#define CLASSICK_MAC_C_ABI_IRQ 0
+#endif
+#if CLASSICK_MAC_C_ABI_IRQ != 0 && CLASSICK_MAC_C_ABI_IRQ != 1
+#error CLASSICK_MAC_C_ABI_IRQ must be 0 or 1
+#endif
 
     .text
     .extern cs_mac_window_interrupt
@@ -13,11 +22,19 @@
     .even
 \name:
     ori.w   #0x0700,%sr
+#if CLASSICK_MAC_C_ABI_IRQ
+    movem.l %d0-%d1/%a0-%a1,-(%sp)
+#else
     movem.l %d0-%d7/%a0-%a6,-(%sp)
+#endif
     move.l  #\source,-(%sp)
     jsr     cs_mac_window_interrupt
     addq.l  #4,%sp
+#if CLASSICK_MAC_C_ABI_IRQ
+    movem.l (%sp)+,%d0-%d1/%a0-%a1
+#else
     movem.l (%sp)+,%d0-%d7/%a0-%a6
+#endif
     rte
     .endm
 

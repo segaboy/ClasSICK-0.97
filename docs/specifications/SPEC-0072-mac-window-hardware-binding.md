@@ -219,3 +219,24 @@ losses. Native compile/budget/trial and release gates persist.
 Existing idle/first-input checkpoints may expose the already-copied original record as MWR1 registers,then spin at IPL7. No producer/IRQ/IO/admission/recovery/default-mode change or guest-memory patch. Exact mapping,static offsets and native opcode audit are [specified here](../development/mac-register-checkpoint.md). Decoder format acceptance alone is not execution/input evidence. Native proof pending.
 
 SRC-0478 follow-up:c40cd29 fullCI/native opcode/offset/seal/default-byte proofs pass;actual original500/5000 automatic snapshots read through MWR1 at expected own spin/IPL7/fault0. No sampling-policy or mouse qualification follows. Full-client host guards do not prove guest-viewport targeting.
+
+## Opt-in C-ABI interrupt preservation experiment - 2026-11-16
+
+An original engineering refinement may preserve D0/D1/A0/A1 in the veneer
+and rely on the pinned compiled C call graph to preserve D2-D7/A2-A6. The
+aggregate entry/return contract still preserves all registers, interrupted
+SR and stack, raises IPL7 before any shared-state access, passes the same
+32-bit source and uses RTE. This is not an external callback ABI or a new
+hardware fact. No arbitrary assembly or unreviewed compiler may be called.
+
+`CLASSICK_MAC_C_ABI_IRQ` defaults to zero; only zero and one are accepted.
+The builder option `--window-c-abi-irq` requires the experimental SHORT profile,
+records a distinct profile and exact save-mask opcodes, and keeps the existing
+conservative stack allowance. With the option off the image bytes must match.
+Before adopting a candidate, original native tests must check all registers,
+SR, A7, source argument and active mask for each of the three veneers, plus
+deliberate missing-save, wrong-return and bad-callee controls. Native timing,
+paired state/pixel/replay and physical/human gates remain separate.
+
+Native alignment inspection rejects statically odd word/long accesses through
+both the frame and stack pointers. This is not a proof about dynamic addresses.

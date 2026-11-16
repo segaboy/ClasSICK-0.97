@@ -12,11 +12,13 @@ static int inbox_valid(const cs_window_inbox *b, uint32_t epoch, int check)
     if (b->valid != CS_INBOX_VALID || b->epoch == 0u) return CS_INBOX_STATE;
     if (check && b->epoch != epoch) return CS_INBOX_STATE;
     phase = b->phase; count = b->count; claimed = b->claimed;
-    if (phase < (uint32_t)CS_INBOX_WAIT || phase > (uint32_t)CS_INBOX_ENDED)
-        return CS_INBOX_STATE;
     if (b->head >= (uint32_t)CS_INBOX_CAPACITY) return CS_INBOX_STATE;
     if (count > (uint32_t)CS_INBOX_CAPACITY) return CS_INBOX_STATE;
     if (claimed > (uint32_t)CS_INBOX_CLAIM_SAMPLE) return CS_INBOX_STATE;
+    /* READY is the interrupt producer's usual state. Check it directly;
+     * the exhaustive switch below rejects all unrecognized phase values. */
+    if (phase == (uint32_t)CS_INBOX_READY)
+        return claimed == (uint32_t)CS_INBOX_CLAIM_BASELINE ? CS_INBOX_STATE : 0;
     switch (phase) {
     case CS_INBOX_WAIT:
     case CS_INBOX_ENDED:
@@ -31,12 +33,10 @@ static int inbox_valid(const cs_window_inbox *b, uint32_t epoch, int check)
         if (claimed == (uint32_t)CS_INBOX_NONE && count == 0u)
             return CS_INBOX_STATE;
         break;
-    case CS_INBOX_READY:
-        if (claimed == (uint32_t)CS_INBOX_CLAIM_BASELINE)
-            return CS_INBOX_STATE;
+    case CS_INBOX_LOSS:
         break;
     default:
-        break;
+        return CS_INBOX_STATE;
     }
     return 0;
 }

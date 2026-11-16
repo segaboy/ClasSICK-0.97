@@ -37,3 +37,8 @@ one infrastructure failure because its freestanding target was not built;
 building that target and rerunning produced 12/12. The new Windows-built ROM
 passed the bounded 4,096-cycle paired model sequence but still failed at
 2,048 cycles. [Commands, identities and limits](../../docs/development/windows-m68k-toolchain-20261114.md).
+
+2026-11-16: a 4,500-case independent metadata table passes before and after
+READY-first validation; the contract has 19,025 assertions. O0/O2 pass and four
+compiled bad-validator controls fail as expected. No hardware/ISR proof follows
+from the host table. [Canonical receipt and native follow-up](../../docs/development/windows-m68k-toolchain-20261114.md#native-interrupt-preservation-and-queue-validation---2026-11-16).

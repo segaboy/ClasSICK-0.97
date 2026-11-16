@@ -13,3 +13,8 @@ exclusion,boot inputs,target run or release. [Actual evidence](../../docs/develo
 internal enqueue operation after their existing checks. This eliminates a
 duplicate metadata validation on the motion fallback; the contract and caller
 exclusion remain unchanged. [Current test evidence](../../docs/development/windows-m68k-toolchain-20261114.md).
+
+2026-11-16: original READY-first metadata validation removes redundant phase
+dispatch without weakening SPEC-0065's admission/refusal contract. Codex wrote
+and self-reviewed it; no external implementation input. [Boundary oracle,
+native measurements and review limits](../../docs/development/windows-m68k-toolchain-20261114.md#native-interrupt-preservation-and-queue-validation---2026-11-16).
