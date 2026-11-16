@@ -1353,3 +1353,15 @@ and `C:/Repos/.task-temp/mac-pc286-write-ordinal-parity-20261115-a/report.json`.
 $py = 'C:/Users/segab/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/python.exe'
 & $py -B scripts/Test-BootHushPC286DiagnosticInstall.py --emulator C:/Repos/.task-temp/boothush-write-ordinal-active-20261115-a/a/boothush-active.exe --session C:/Repos/.task-temp/pc286-art-mask-session-20261115-a --output C:/Repos/.task-temp/NEW-WRITE-RETRY
 ```
+
+The subsequent reset-failure control used BootHush active twin SHA-256
+`f795a383e4f949a62f258559041cf3dc5360b0cca29a2f146cb2507fd496b8cc`.
+For each of the three tracks, the guest encountered a synthetic first write
+failure and then a synthetic reset failure. It reached `e1` after one write
+attempt and left exactly the expected preceding-track bytes in the saved
+image. The successful and persistent write-failure cases and prior controls
+also passed. The complete report and commands are
+`C:/Repos/.task-temp/pc286-reset-retry-20261115-b/report.json`. BootHush's
+separate reset API test and limitations are documented in its
+`docs/pc286-hard-disk-fault-20261114.md`. This closes only that model test;
+it does not demonstrate real-controller failures or safe physical recovery.

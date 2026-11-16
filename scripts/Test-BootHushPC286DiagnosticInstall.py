@@ -270,7 +270,16 @@ def main():
         expected=hashlib.sha256(prefix[:written]+bytes(DISK_BYTES-written)).hexdigest()
         if persistent['result']['hard_disk_write_failure']['injected']!=3 or sha(stopped)!=expected:
             raise ValueError('retry did not stop after three failed writes with expected partial disk')
+        reset_disk=out/('retry-reset-stopped-%d.img'%head)
+        reset=run('retry-reset-failure-%d'%head,['--floppy',retry_source,'--hard-disk',blank,
+                  '--disk-out',reset_disk,'--until-post','0xe1','--fail-hard-disk-write-at',chs+':1',
+                  '--fail-hard-disk-reset-at','1'],0xe1)
+        if (reset['result']['hard_disk_write_failure']['matched']!=1 or
+                reset['result']['hard_disk_write_failure']['injected']!=1 or
+                reset['result']['hard_disk_reset_failure']['injected']!=1 or sha(reset_disk)!=expected):
+            raise ValueError('failed reset did not stop before another write or changed partial disk')
         retry_cases.append({'head':head,'transient':transient,'persistent':persistent,
+                            'failed_reset':reset,'reset_disk_sha256':sha(reset_disk),
                             'recovered_sha256':sha(recovered),'stopped_sha256':sha(stopped)})
     # A first-write transient must stop the original no-retry guest.
     control_disk=out/'no-retry-control.img'

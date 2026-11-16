@@ -10,6 +10,9 @@ preserved. See the same evidence record for exact commands and limitations.
 The later write-retry experiment exercised transient and persistent modeled
 write failures on each track plus a no-retry control. Its reset-failure and
 physical-media paths remain untested. [Evidence](../../docs/development/mac-pc286-shared-parity-20261114.md#disposable-copy-write-retry).
+The subsequent model test injected reset failure after a failed write on each
+track and checked that no second write occurred. Physical reset behavior
+remains untested; the same evidence link records both runs.
 
 2026-11-14; SPEC-0108 / IMPL-0135. An original guest wrote and read back a
 45-sector diagnostic prefix on a newly generated blank disk. The entire saved
