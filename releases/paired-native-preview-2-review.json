@@ -1,0 +1,21 @@
+{
+  "date": "2026-11-16",
+  "classification": "release review package; approval pending",
+  "source_revision": "ec36cc5ce2ae014c258f8c98d4ddb96784b34e42",
+  "archive_name": "classick-paired-preview-2-review-20261116-a.zip",
+  "archive_bytes": 4837667,
+  "archive_sha256": "926a7f402efe5e8fce53c5474734f1fbb2f338160bf59b4fd62c4e9a09354f53",
+  "identical_preparations": 2,
+  "verified_package_members": 47,
+  "committed_build_and_preparation_inputs": 79,
+  "negative_controls_rejected": ["altered ROM", "missing license", "extra file", "altered source archive"],
+  "packaged_image_boots": ["Mac stage 16", "286 POST B0"],
+  "decoded_animations": {"paired_checkpoints": 8, "port_recovery": 32},
+  "video": "131 frames at 10 fps; full FFmpeg decode passed; final frame matches paired qualification",
+  "source_archive": "Complete git archive of source_revision; unrelated dirty files and private HQ excluded",
+  "candidate_record": "releases/paired-native-preview-2-mac286.json",
+  "canonical_receipt": "docs/development/paired-preview-readiness-20261116.md",
+  "ready_for_release": false,
+  "published": false,
+  "limits": "Package integrity and scoped BootHush checks do not replace owner disposition of incomplete qualification or separate publication approval. No immutable public version or tag changed."
+}

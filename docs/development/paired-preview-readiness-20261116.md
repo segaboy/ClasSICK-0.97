@@ -146,6 +146,19 @@ that prototype is not part of the ClasSICK binary pair.
 
 ## Release disposition
 
+The prepared source-matched package is frozen at implementation/source
+revision `ec36cc5ce2ae014c258f8c98d4ddb96784b34e42`. Two independent preparations
+produce identical 4,837,667-byte ZIPs, SHA-256
+`926a7f402efe5e8fce53c5474734f1fbb2f338160bf59b4fd62c4e9a09354f53`.
+All 47 package members and 79 committed build/preparation inputs verify.
+Altered ROM, missing license, extra-file and altered-source controls are
+rejected. Both packaged images boot to their named readiness conditions;
+all eight paired GIF frames and 32 port GIF frames decode. The standalone
+verifier also checks the embedded source archive and original license.
+Receipt: [`releases/paired-native-preview-2-review.json`](../../releases/paired-native-preview-2-review.json).
+Retained archive: `C:/Repos/.task-temp/classick-paired-preview-2-review-20261116-a.zip`;
+checks: `C:/Repos/.task-temp/paired-review-checks-20261116.json`.
+
 The review package uses the fixed-profile preview loader and installer above.
 The Mac/286 current preparation record is
 [`releases/paired-native-preview-2-mac286.json`](../../releases/paired-native-preview-2-mac286.json).
