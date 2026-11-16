@@ -667,3 +667,16 @@ Paired-native-preview-2 remains incomplete: fast input, production 286 boot/
 installation, remaining target/input qualification, physical and human evidence,
 source/tool/provenance review and separately approved publication remain open.
 No release candidate, release, physical behavior or playable game is asserted.
+
+### Retained engineering snapshot
+
+After commit `7b1b36d4b474d212ee06b4cb3330e7356278d5b1`, the existing guarded
+snapshot preparer accepted all current Mac and 286 source fingerprints and
+the slower paired receipt. It prepared
+`C:/Repos/.task-temp/classick-paired-engineering-snapshot-20261116-b` with
+the default full-register-save ROM, diagnostic disk, original frames, build/
+test records, checksums and conspicuous unqualified markers. The C-ABI image
+remains a separate experiment. This snapshot is not a release candidate or
+installer; the previously retained snapshot remains untouched. The indexed
+repository guard passes 1,819 text/source files, 134 registered PNGs and two
+reviewed GIFs; independent provenance review is not established by that guard.
