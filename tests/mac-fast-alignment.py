@@ -29,3 +29,9 @@ except ValueError:
     pass
 else:
     raise AssertionError('accepted missing service')
+
+for name in ('cs_mac_motion_samples','motion_decode','motion_decode.constprop.0'):
+    bad=listing('rts')+'00401300 <'+name+'>:\n  401300: 0000 movel %d0,%sp@(3)\n'
+    try:builder.audit_fast_frame_alignment(bad)
+    except ValueError:pass
+    else:raise AssertionError('accepted odd deferred-decode access: '+name)

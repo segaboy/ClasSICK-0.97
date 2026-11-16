@@ -26,7 +26,7 @@ int main(void)
     int hook;
     for(pending=0;pending<4;pending++)for(hook=-1;hook<2;hook++){
         fx_t seed,ref,opt;
-        uint8_t a[10]={0},b[10]={0};
+        uint32_t a[4]={0},b[4]={0};
         fx_init(&seed,PBB);both(&seed);
         if(pending&1u)set(&seed,0,1);
         if(pending&2u)set(&seed,1,1);
@@ -38,7 +38,7 @@ int main(void)
         short_reads[0]=short_reads[1]=0;proposed_collect(&opt,b);
         CHECK(short_reads[0]==((pending&1u)?2u:3u));
         CHECK(short_reads[1]==((pending&2u)?2u:3u));
-        CHECK(memcmp(a,b,10)==0);
+        CHECK(memcmp(a,b,sizeof a)==0);
         CHECK(rr3(&ref)==rr3(&opt));
         CHECK(ref.c[0].resets==opt.c[0].resets && ref.c[1].resets==opt.c[1].resets);
     }

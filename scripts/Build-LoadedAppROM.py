@@ -10,12 +10,14 @@ def audit_fast_frame_alignment(listing):
 
     This narrow compiler-output check is not a proof about dynamic addresses.
     """
-    match=re.search(r'^\s*[0-9a-fA-F]+ <cs_mac_motion_service>:\s*$(.*?)(?=^\s*[0-9a-fA-F]+ <[^>]+>:\s*$|\Z)',listing,re.M|re.S)
-    if not match:raise ValueError('Fast service disassembly missing')
-    for line in match.group(1).splitlines():
-        if re.search(r'\b(?:move|movem|cmp|add|sub|and|or|eor|tst|clr|neg|not)[wl]\b',line):
-            for offset in re.findall(r'%(?:fp|sp)@\((-?\d+)\)',line):
-                if int(offset)%2:raise ValueError('Odd frame word/long access in fast service')
+    if not re.search(r'^\s*[0-9a-fA-F]+ <cs_mac_motion_service>:\s*$',listing,re.M):
+        raise ValueError('Fast service disassembly missing')
+    pattern=r'^\s*[0-9a-fA-F]+ <(?:cs_mac_motion_service|cs_mac_motion_samples|motion_decode(?:\.[^>]*)?)>:\s*$(.*?)(?=^\s*[0-9a-fA-F]+ <[^>]+>:\s*$|\Z)'
+    for match in re.finditer(pattern,listing,re.M|re.S):
+        for line in match.group(1).splitlines():
+            if re.search(r'\b(?:move|movem|cmp|add|sub|and|or|eor|tst|clr|neg|not)[wl]\b',line):
+                for offset in re.findall(r'%(?:fp|sp)@\((-?\d+)\)',line):
+                    if int(offset)%2:raise ValueError('Odd frame word/long access in fast service')
 
 def audit_register_checkpoint(image,syms,enabled):
     """Exact original MWR1 leaf: mask, own-RAM loads, register data, spin."""
@@ -70,7 +72,7 @@ WINDOW_SOURCES=('arch/m68k/loaded-reset.S','arch/m68k/runtime.c','arch/m68k/comp
  'core/ui/window.c','apps/product-scene/scene.c','apps/window-scene/scene.c','apps/window-scene/input.c',
  'apps/window-scene/capture.c','apps/window-scene/inbox.c','apps/window-scene/foreground.c')
 WINDOW_HEADERS=('arch/m68k/loaded-rom.ld','arch/m68k/runtime.h','arch/m68k/exclusion.h','platform/mac128k/rom.h','platform/mac128k/fast-collect.inc',
- 'platform/mac128k/window-session.h','platform/mac128k/motion.h','platform/mac128k/input-probe.h','core/graphics/surface.h','core/graphics/cursor.h',
+ 'platform/mac128k/window-session.h','platform/mac128k/capture-queue.h','platform/mac128k/motion.h','platform/mac128k/input-probe.h','core/graphics/surface.h','core/graphics/cursor.h',
  'core/input/pointer.h','core/input/mouse.h','core/ui/window.h','core/services/traps.h','apps/product-scene/scene.h',
  'apps/window-scene/scene.h','apps/window-scene/input.h','apps/window-scene/capture.h','apps/window-scene/inbox.h',
  'apps/window-scene/foreground.h','scripts/Build-LoadedAppROM.py','scripts/Build-MacROM.py')
@@ -101,6 +103,7 @@ def main():
     p.add_argument('--window-motion-timeline',action='store_true',help='Observation-only bounded SCC input timeline; interrupt window profile only')
     p.add_argument('--window-fast-collect',action='store_true',help='Experimental batched interrupt input collection; window profile only')
     p.add_argument('--window-short-collect',action='store_true',help='Experimental shortened SCC collection; requires fast collect')
+    p.add_argument('--window-buffered-collect',action='store_true',help='Capture in IRQ and decode in foreground; requires short collector')
     p.add_argument('--window-c-abi-irq',action='store_true',help='Experimental C-ABI interrupt save set; requires short collector')
     p.add_argument('--window-loss-counts',action='store_true',help='Observation-only per-reason loss counts; interrupt window profile only')
     p.add_argument('--window-pending-idle-probe',action='store_true',help='Experimental pending-only unchanged-endpoint no-decision policy')
@@ -108,6 +111,7 @@ def main():
     p.add_argument('--window-wait-latch-probe',action='store_true',help='Experimental pending check before baseline publication')
     p.add_argument('--dcd-invert',type=int,choices=(0,1,2,3),default=0,help='Unverified raw RR0 DCD sense mask; window profile only')
     a=p.parse_args()
+    if a.window_buffered_collect and not a.window_short_collect:p.error('--window-buffered-collect requires --window-short-collect')
     if a.window_c_abi_irq and not a.window_short_collect:p.error('--window-c-abi-irq requires --window-short-collect')
     if a.window_optimize_speed and not a.window_drawing:p.error('--window-optimize-speed requires --window-drawing')
     if a.window_keyboard_probe and not a.window_drawing:p.error('--window-keyboard-probe requires --window-drawing')
@@ -194,6 +198,7 @@ def main():
         if a.window_motion_timeline:numbers+=('0088',)
         if a.window_fast_collect:numbers+=('0091',)
         if a.window_short_collect:numbers+=('0096',)
+        if a.window_buffered_collect:numbers+=('0109',)
         if a.window_loss_counts:numbers+=('0092',)
         if a.window_pending_idle_probe:numbers+=('0093',)
         if a.window_rearm_ready_probe:numbers+=('0094',)
@@ -238,6 +243,7 @@ def main():
     if 'apps/product-scene/scene.c' in sources:
         headers+=('apps/product-scene/fixed-mono.h',)
     if a.window_optimize_speed:profile+='-o2-experiment'
+    if a.window_buffered_collect:profile+='-buffered-collect'
     if a.window_c_abi_irq:profile+='-c-abi-irq-experiment'
     optimization='-O2' if a.window_optimize_speed else '-Os'
     profiles=[]
@@ -269,6 +275,7 @@ def main():
         if a.window_motion_timeline:flags+=['-DCLASSICK_MAC_MOTION_TIMELINE=1']
         if a.window_fast_collect:flags+=['-DCLASSICK_MAC_FAST_COLLECT=1']
         if a.window_short_collect:flags+=['-DCLASSICK_MAC_SHORT_COLLECT=1']
+        if a.window_buffered_collect:flags+=['-DCLASSICK_MAC_BUFFERED_COLLECT=1']
         if a.window_c_abi_irq:flags+=['-DCLASSICK_MAC_C_ABI_IRQ=1']
         if a.window_loss_counts:flags+=['-DCLASSICK_MAC_LOSS_COUNTS=1']
         if a.window_pending_idle_probe:flags+=['-DCLASSICK_MAC_PENDING_IDLE_PROBE=1']
@@ -479,6 +486,7 @@ def main():
     if a.window_motion_timeline:manifest['motion_timeline']={'version':1,'capacity':6,'entry_bytes':32,'new_MMIO':False,'interrupt_timing_perturbed':True,'pointer_symbol':'cs_mac_timeline_address','motion_symbol':'cs_mac_timeline_motion'}
     if a.window_fast_collect:manifest['fast_collect']={'experimental':True,'same_MMIO_order_required':not a.window_short_collect,'new_MMIO':a.window_short_collect,'host_input_qualified':False}
     if a.window_short_collect:manifest['short_collect']={'pending_rr0_reused':True,'quiet_axis_phase_ignored_in_ready':True,'late_pending_retry':True,'motion_omission_preserves_unchanged_button':True,'change_gated_observation':True,'read_guard_nops':5,'write_guard_nops':8,'physical_qualification':False}
+    if a.window_buffered_collect:manifest['buffered_collect']={'capacity':128,'entry_bytes':20,'decode':'foreground','overflow':'cancel-and-rebaseline','physical_qualification':False}
     if a.window_c_abi_irq:manifest['c_abi_irq']={'experimental':True,'veneer_saved':['D0','D1','A0','A1'],'callee_preserves':'D2-D7/A2-A6','physical_qualification':False}
     if a.window_loss_counts:manifest['loss_counts']={'tag':'MLC1','bytes':20,'address':syms['cs_mac_loss_trace'],'reasons':[1,2,3,4],'pending_tag':'MLP1','pending_address':syms['cs_mac_pending_trace'],'pending_bytes':20,'context_tag':'MLX1','context_address':syms['cs_mac_context_trace'],'context_bytes':20,'no_added_MMIO':True,'interrupt_timing_perturbed':True}
     if a.window_pending_idle_probe:manifest['pending_idle_probe']={'experimental':True,'hidden_transitions_may_be_discarded':True,'physical_qualification':False}

@@ -2,6 +2,10 @@
 <!-- Copyright (C) 2026 Dean Howell. -->
 # Input cost and post-interaction observation follow-up
 
+Later continuation: [buffered input and paired qualification](paired-preview-readiness-20261116.md)
+fixes the fast-input regression at the stated modeled rates. This earlier
+receipt and its failed measurements remain historical evidence.
+
 2026-11-16, continuing from `837be60`; SPEC-0097 / SRC-0598 / IMPL-0113 /
 TEST-0189. Codex independently implemented and self-reviewed the changes.
 No game, Apple/Microsoft or third-party emulator implementation informed the

@@ -119,9 +119,9 @@ typedef struct {
     void (*pair)(void *cookie, uint8_t out[6]);
 #endif
 #if CLASSICK_MAC_FAST_COLLECT
-    /* RR3, then three PB/A/B triples and existing conditional acknowledgments.
+    /* RR3, then three packed PB<<16|A<<8|B observations and acknowledgments.
        Unexpected RR3 bits return immediately after storing out[0]. */
-    void (*collect)(void *cookie, uint8_t out[10]);
+    void (*collect)(void *cookie, uint32_t out[4]);
 #endif
 } cs_mac_motion_io;
 
@@ -141,7 +141,7 @@ enum { CS_MAC_CAUSE_NONE = 0, CS_MAC_CAUSE_READBACK = 1,
 
 enum { CS_MAC_LOSS_NONE = 0, CS_MAC_LOSS_NO_PHASE = 1,
        CS_MAC_LOSS_UNSTABLE = 2, CS_MAC_LOSS_PENDING = 3,
-       CS_MAC_LOSS_OVERFLOW = 4 };
+       CS_MAC_LOSS_OVERFLOW = 4, CS_MAC_LOSS_CAPTURE = 5 };
 
 /* First actual transition to loss since prepare; observation only.
  * snapshots[i]=PB<<16|RR0A<<8|RR0B; previous=have_phase<<24|last_raw_a<<16|
@@ -196,6 +196,14 @@ int cs_mac_motion_prepare(struct cs_mac_motion *m, const cs_mac_motion_io *io,
 int cs_mac_motion_arm(struct cs_mac_motion *m);
 int cs_mac_motion_service(struct cs_mac_motion *m);
 int cs_mac_motion_stop(struct cs_mac_motion *m);
+#if CLASSICK_MAC_FAST_COLLECT
+/* Serialized foreground decode of an already collected observation. A
+ * nonnegative late_pending supplies the RR3 observed after that capture;
+ * -1 retains the synchronous service's conditional live read. */
+int cs_mac_motion_samples(struct cs_mac_motion *m, const uint32_t raw[4], int late_pending);
+/* Explicit lost-capture cancellation; zero snapshots mean no accepted sample. */
+int cs_mac_motion_capture_lost(struct cs_mac_motion *m);
+#endif
 
 #if CLASSICK_MAC_MOTION_TIMELINE
 /* Call immediately after the serialized service returns; no IO or delivery. */

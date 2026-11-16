@@ -3,6 +3,17 @@
 #include "rom.h"
 #include "window-session.h"
 #include "motion.h"
+#ifndef CLASSICK_MAC_BUFFERED_COLLECT
+#define CLASSICK_MAC_BUFFERED_COLLECT 0
+#endif
+#if CLASSICK_MAC_BUFFERED_COLLECT && !CLASSICK_MAC_SHORT_COLLECT
+#error Buffered collection requires SHORT collection
+#endif
+#if CLASSICK_MAC_BUFFERED_COLLECT
+#include "capture-queue.h"
+static cs_mac_capture_queue captures;
+volatile uint32_t cs_mac_capture_trace[4];
+#endif
 #if CLASSICK_MAC_KEYBOARD_PROBE
 #include "keyboard.h"
 static cs_mac_keyboard keyboard;
@@ -335,13 +346,63 @@ void cs_mac_window_interrupt(uint32_t source)
 #else
     (void)vbl; /* T1 controller checks IFR6;empty IRQ never creates baseline. */
 #endif
+#if CLASSICK_MAC_BUFFERED_COLLECT
+    {
+        cs_mac_capture v;
+        cs_mac_native_collect(0,v.raw);
+        if(v.raw[0]&~UINT32_C(9)){
+            v.raw[1]=v.raw[2]=v.raw[3]=0;v.late=0;
+        }else v.late=scc_read(0,CS_MAC_SCC_A,3u);
+        cs_mac_capture_push(&captures,&v);
+    }
+    r=CS_MAC_MOTION_OK;
+#else
     r=native_motion_service(); /* one finite pass;profile chooses RR3 or T1. */
+#endif
 #if CLASSICK_MAC_MOTION_TIMELINE
     cs_mac_motion_timeline_commit(&motion,r);
 #endif
     if(r==CS_MAC_MOTION_ARGUMENT || r==CS_MAC_MOTION_STATE || r==CS_MAC_MOTION_FAULT)
         isr_fatal(15,r);
 }
+
+#if CLASSICK_MAC_BUFFERED_COLLECT
+/* Failure/recovery MMIO transactions remain indivisible with IRQ collection. */
+static void motion_write_serialized(void *cookie,uint32_t ch,uint32_t reg,uint8_t v)
+{
+    uint32_t token=cs_m68k_foreground_enter(0);
+    scc_write(cookie,ch,reg,v);
+    cs_m68k_foreground_leave(0,token);
+}
+static int consume_captures(void)
+{
+    unsigned n;
+    int r=CS_MAC_MOTION_EMPTY;
+    for(n=0;n<32u;n++){
+        cs_mac_capture v;
+        uint32_t token=cs_m68k_foreground_enter(0);
+        int available=cs_mac_capture_pop(&captures,&v);
+        cs_m68k_foreground_leave(0,token);
+        if(available<0){r=cs_mac_motion_capture_lost(&motion);break;}
+        if(!available)break;
+        r=cs_mac_motion_samples(&motion,v.raw,(int)v.late);
+        if(r==CS_MAC_MOTION_LOST){
+            token=cs_m68k_foreground_enter(0);
+            cs_mac_capture_clear(&captures);
+            cs_m68k_foreground_leave(0,token);
+            break;
+        }
+        if(r==CS_MAC_MOTION_ARGUMENT || r==CS_MAC_MOTION_STATE || r==CS_MAC_MOTION_FAULT)return r;
+    }
+    if(motion.quiesced && session.inbox.phase==CS_INBOX_WAIT){
+        uint32_t token=cs_m68k_foreground_enter(0);
+        cs_mac_capture_clear(&captures);
+        r=native_motion_service();
+        cs_m68k_foreground_leave(0,token);
+    }
+    return r;
+}
+#endif
 
 /* Foreground: quiesce under exclusion, stop the coordinator outside it once. */
 __attribute__((noreturn)) static void fg_fatal(uint32_t code,int32_t cause)
@@ -377,10 +438,19 @@ static uint32_t observe(void)
     if(!observe_dirty && observed_services!=UINT32_MAX &&
        *(volatile uint32_t *)&motion.services==observed_services)return 0u;
 #endif
+#if CLASSICK_MAC_BUFFERED_COLLECT
+    uint32_t dead=terminal;
+#else
     uint32_t token=cs_m68k_foreground_enter(0),dead=terminal;
+#endif
     if(!dead){
 #if CLASSICK_MAC_SHORT_COLLECT
         observed_services=motion.services;observe_dirty=0u;
+#if CLASSICK_MAC_BUFFERED_COLLECT
+        cs_mac_capture_trace[1]=captures.count;
+        cs_mac_capture_trace[2]=captures.peak;
+        cs_mac_capture_trace[3]=captures.losses;
+#endif
         cs_mac_motion_drop_trace[1]=motion.motion_drops;
         cs_mac_motion_merge_trace[1]=motion.motion_merges;
 #endif
@@ -431,10 +501,17 @@ static uint32_t observe(void)
         if(motion.services>=500u)cs_mac_window_idle_checkpoint();
 #endif
     }
+#if !CLASSICK_MAC_BUFFERED_COLLECT
     cs_m68k_foreground_leave(0,token);
+#endif
     return dead;
 }
 
+#if CLASSICK_MAC_BUFFERED_COLLECT
+/* Both inbox producer and consumer now run on this single foreground stack. */
+static uint32_t foreground_serial_enter(void *cookie){(void)cookie;return 0;}
+static void foreground_serial_leave(void *cookie,uint32_t token){(void)cookie;(void)token;}
+#endif
 void cs_mac_main(void)
 {
     cs_foreground_hooks hooks;cs_mac_io io;cs_mac_motion_io mio;int r;
@@ -470,12 +547,22 @@ void cs_mac_main(void)
     cs_mac_keyboard_trace[0]=UINT32_C(0x4b424431);
 #endif
     cs_mac_diag.stage=4;
+#if CLASSICK_MAC_BUFFERED_COLLECT
+    hooks.enter=foreground_serial_enter;hooks.leave=foreground_serial_leave;hooks.cookie=0;
+#else
     hooks.enter=cs_m68k_foreground_enter;hooks.leave=cs_m68k_foreground_leave;hooks.cookie=0;
+#endif
     /* begin initializes the NOLOAD session; nothing old is read. */
     r=cs_mac_window_begin(&session,(uint8_t *)(uintptr_t)0x1A700,CS_MAC_SCREEN_BYTES,&hooks);
     if(r!=CS_MAC_WINDOW_OK){cs_mac_trace.cause=r;halt(3);}
     cs_mac_diag.stage=5;
     mio.cookie=0;mio.read=scc_read;mio.write=scc_write;mio.pb=motion_pb;
+#if CLASSICK_MAC_BUFFERED_COLLECT
+    mio.write=motion_write_serialized;
+    cs_mac_capture_clear(&captures);captures.peak=0;captures.losses=0;
+    cs_mac_capture_trace[0]=UINT32_C(0x4d435131);
+    cs_mac_capture_trace[1]=cs_mac_capture_trace[2]=cs_mac_capture_trace[3]=0;
+#endif
 #if CLASSICK_MAC_FAST_COLLECT
     mio.collect=cs_mac_native_collect;
 #endif
@@ -514,6 +601,10 @@ void cs_mac_main(void)
 #endif
 #if CLASSICK_MAC_SHORT_COLLECT && CLASSICK_MAC_LOSS_COUNTS
         uint32_t fg_start,fg_samples;
+#endif
+#if CLASSICK_MAC_BUFFERED_COLLECT
+        r=consume_captures();
+        if(r==CS_MAC_MOTION_ARGUMENT || r==CS_MAC_MOTION_STATE || r==CS_MAC_MOTION_FAULT)fg_fatal(15,r);
 #endif
         if(observe())fg_fatal(17,0);
 #if CLASSICK_MAC_SHORT_COLLECT && CLASSICK_MAC_LOSS_COUNTS

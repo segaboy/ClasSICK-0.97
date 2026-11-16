@@ -15,7 +15,7 @@ static uint8_t motion_pb(void *c){return pb(c);}
 
 static void actual_collector_case(uint8_t pending)
 {
-    uint8_t out[10];
+    uint32_t out[4];
     unsigned start, snapshots, at;
     fresh(0);memset(out,0xA5,sizeof out);
     hw.raw[0]=0x20;hw.raw[1]=0x40;hw.pb=0x88;hw.pending=pending;
@@ -24,12 +24,12 @@ static void actual_collector_case(uint8_t pending)
     CHECK(out[0]==pending && hw.access[start].reg==3 && !hw.access[start].write);
     if(pending&0xF6u){
         CHECK(hw.accesses==start+1u && hw.snapshots==snapshots);
-        for(unsigned i=1;i<10u;i++)CHECK(out[i]==0xA5);
+        for(unsigned i=1;i<4u;i++)CHECK(out[i]==0xA5A5A5A5u);
         return;
     }
     CHECK(hw.snapshots==snapshots+3u);
     for(unsigned i=0;i<3u;i++){
-        CHECK(out[1u+3u*i]==0x88 && out[2u+3u*i]==0x20 && out[3u+3u*i]==0x40);
+        CHECK(out[1u+i]==0x00882040u);
     }
     at=start+1u;
     for(unsigned i=0;i<2u;i++){

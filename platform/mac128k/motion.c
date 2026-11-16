@@ -7,9 +7,12 @@ enum { WR9_RESET = 0xC0, WR9_NV = 0x02, WR9_MIE_NV = 0x0A,
        RR0_DCD = 0x08, RR3_EXT_A = CS_MAC_SCC_EXT_A, RR3_EXT_B = CS_MAC_SCC_EXT_B,
        PB_MASK = 0x38, PB_BUTTON = 0x08, PB_X2 = 0x10, PB_Y2 = 0x20 };
 
-/* Keep compact byte samples, but pass them by address: the native compiler's
- * three-byte by-value stack copy produced an odd word access on MC68000. */
-typedef struct { uint8_t pb, a, b; } snap;
+/* Aligned packed observations: PB in bits 16..23, A in 8..15, B in 0..7.
+ * No endian-dependent byte alias or odd word access is required. */
+typedef struct { uint32_t value; } snap;
+#define SNAP_PB(s) ((uint8_t)((s)->value >> 16))
+#define SNAP_A(s) ((uint8_t)((s)->value >> 8))
+#define SNAP_B(s) ((uint8_t)(s)->value)
 
 #if CLASSICK_MAC_PENDING_DEFER_PROBE
 #define DEFER_CLEAR(m) ((m)->defer_pending = (m)->defer_snapshot = 0u)
@@ -54,23 +57,23 @@ static void rearm_ready(struct cs_mac_motion *m)
 #if !CLASSICK_MAC_FAST_COLLECT
 static void take(const struct cs_mac_motion *m, snap *s)
 {
-    s->pb = m->io.pb(m->io.cookie);
-    s->a = m->io.read(m->io.cookie, CS_MAC_SCC_A, 0u);
-    s->b = m->io.read(m->io.cookie, CS_MAC_SCC_B, 0u);
+    uint32_t p = m->io.pb(m->io.cookie);
+    uint32_t a = m->io.read(m->io.cookie, CS_MAC_SCC_A, 0u);
+    uint32_t b = m->io.read(m->io.cookie, CS_MAC_SCC_B, 0u);
+    s->value = p << 16 | a << 8 | b;
 }
 #endif
 
 static int same(const snap *x, const snap *y)
 {
-    return ((x->pb ^ y->pb) & PB_MASK) == 0 && ((x->a ^ y->a) & RR0_DCD) == 0
-        && ((x->b ^ y->b) & RR0_DCD) == 0;
+    return ((x->value ^ y->value) & UINT32_C(0x00380808)) == 0u;
 }
 
 static uint32_t bit(uint8_t v, int mask) { return (v & mask) ? 1u : 0u; }
 
 static uint32_t pack(const snap *s)
 {
-    return (uint32_t)s->pb << 16 | (uint32_t)s->a << 8 | s->b;
+    return s->value;
 }
 
 #if CLASSICK_MAC_MOTION_TIMELINE
@@ -116,8 +119,8 @@ void cs_mac_motion_timeline_commit(struct cs_mac_motion *m, int result)
 #if CLASSICK_MAC_PENDING_DEFER_PROBE
 static uint32_t ep(const snap *s)
 {
-    return (uint32_t)(s->pb & PB_MASK) << 16
-        | (uint32_t)(s->a & RR0_DCD) << 8 | (uint32_t)(s->b & RR0_DCD);
+    return (uint32_t)(SNAP_PB(s) & PB_MASK) << 16
+        | (uint32_t)(SNAP_A(s) & RR0_DCD) << 8 | (uint32_t)(SNAP_B(s) & RR0_DCD);
 }
 
 /* Expected RR3 bit if the first nonstable pass is exactly one DCD edge on one
@@ -125,18 +128,18 @@ static uint32_t ep(const snap *s)
 static uint32_t defer_bit(const struct cs_mac_motion *m, const snap *s1,
     const snap *s2, const snap *s3)
 {
-    uint32_t a1 = bit(s1->a, RR0_DCD), b1 = bit(s1->b, RR0_DCD);
-    uint32_t ch_a = bit(s3->a, RR0_DCD) != m->last_raw_a;
-    uint32_t ch_b = bit(s3->b, RR0_DCD) != m->last_raw_b;
+    uint32_t a1 = bit(SNAP_A(s1), RR0_DCD), b1 = bit(SNAP_B(s1), RR0_DCD);
+    uint32_t ch_a = bit(SNAP_A(s3), RR0_DCD) != m->last_raw_a;
+    uint32_t ch_b = bit(SNAP_B(s3), RR0_DCD) != m->last_raw_b;
     int other = ch_a ? PB_Y2 : PB_X2, mover = ch_a ? PB_X2 : PB_Y2;
-    uint32_t btn = (s1->pb & PB_BUTTON) ? 0u : (uint32_t)CS_POINTER_LEFT;
+    uint32_t btn = (SNAP_PB(s1) & PB_BUTTON) ? 0u : (uint32_t)CS_POINTER_LEFT;
     if (a1 != m->last_raw_a || b1 != m->last_raw_b || ch_a == ch_b) return 0u;
-    if (((s1->pb ^ s2->pb) | (s2->pb ^ s3->pb)) & PB_BUTTON) return 0u;
+    if (((SNAP_PB(s1) ^ SNAP_PB(s2)) | (SNAP_PB(s2) ^ SNAP_PB(s3))) & PB_BUTTON) return 0u;
     if (btn != m->last_buttons) return 0u;
-    if (ch_a ? bit(s2->b, RR0_DCD) != b1 : bit(s2->a, RR0_DCD) != a1)
+    if (ch_a ? bit(SNAP_B(s2), RR0_DCD) != b1 : bit(SNAP_A(s2), RR0_DCD) != a1)
         return 0u;
-    if (((s1->pb ^ s2->pb) | (s2->pb ^ s3->pb)) & other) return 0u;
-    if (((s1->pb ^ s2->pb) & mover) && ((s2->pb ^ s3->pb) & mover))
+    if (((SNAP_PB(s1) ^ SNAP_PB(s2)) | (SNAP_PB(s2) ^ SNAP_PB(s3))) & other) return 0u;
+    if (((SNAP_PB(s1) ^ SNAP_PB(s2)) & mover) && ((SNAP_PB(s2) ^ SNAP_PB(s3)) & mover))
         return 0u;
     return ch_a ? RR3_EXT_A : RR3_EXT_B;
 }
@@ -151,9 +154,9 @@ static int idle_only(const struct cs_mac_motion *m, const snap *s1,
     int i;
     p[0] = s1; p[1] = s2; p[2] = s3;
     for (i = 0; i < 3; i++) {
-        uint32_t btn = (p[i]->pb & PB_BUTTON) ? 0u : (uint32_t)CS_POINTER_LEFT;
-        if (bit(p[i]->a, RR0_DCD) != m->last_raw_a
-            || bit(p[i]->b, RR0_DCD) != m->last_raw_b
+        uint32_t btn = (SNAP_PB(p[i]) & PB_BUTTON) ? 0u : (uint32_t)CS_POINTER_LEFT;
+        if (bit(SNAP_A(p[i]), RR0_DCD) != m->last_raw_a
+            || bit(SNAP_B(p[i]), RR0_DCD) != m->last_raw_b
             || btn != m->last_buttons)
             return 0;
     }
@@ -191,8 +194,8 @@ static int drop_ok(const struct cs_mac_motion *m, const cs_window_inbox *in,
     return in->phase == CS_INBOX_READY && m->have_phase && !m->quiesced
         && in->head < CS_INBOX_CAPACITY && in->count <= CS_INBOX_CAPACITY
         && (in->claimed == CS_INBOX_NONE || in->claimed == CS_INBOX_CLAIM_SAMPLE)
-        && (s1->pb & PB_BUTTON) == held && (s2->pb & PB_BUTTON) == held
-        && (s3->pb & PB_BUTTON) == held;
+        && (SNAP_PB(s1) & PB_BUTTON) == held && (SNAP_PB(s2) & PB_BUTTON) == held
+        && (SNAP_PB(s3) & PB_BUTTON) == held;
 }
 
 /* Omit uncertain displacement: publish nothing, rebaseline DCD to the
@@ -283,7 +286,82 @@ static int uncertain(struct cs_mac_motion *m, uint32_t reason, uint8_t rr3,
     return CS_MAC_MOTION_LOST;
 }
 
+#if CLASSICK_MAC_FAST_COLLECT
+static int motion_decode(struct cs_mac_motion *m, const uint32_t samples[4], int late_pending);
+
+/* Keep the ordinary READY pass separate from exceptional/loss handling.
+ * The same snapshots are decoded by the full path if any fast precondition
+ * fails. No second hardware collection and no guessed transition. */
 int cs_mac_motion_service(struct cs_mac_motion *m)
+{
+    uint32_t raw[4];
+    if (!m) return CS_MAC_MOTION_ARGUMENT;
+    if (m->phase != CS_MAC_MOTION_ARMED) return CS_MAC_MOTION_STATE;
+#if CLASSICK_MAC_REARM_READY_PROBE
+    const cs_window_inbox *in = m->inbox;
+    if (m->quiesced && in->valid == CS_INBOX_VALID && in->epoch == m->epoch &&
+        in->phase == CS_INBOX_PRIMING && in->head < CS_INBOX_CAPACITY &&
+        in->count <= CS_INBOX_CAPACITY &&
+        (in->claimed == CS_INBOX_CLAIM_BASELINE ||
+         (in->claimed == CS_INBOX_NONE && in->count != 0u))) {
+        m->services = sat(m->services);
+        return CS_MAC_MOTION_EMPTY;
+    }
+#endif
+    m->io.collect(m->io.cookie, raw);
+    return cs_mac_motion_samples(m, raw, -1);
+}
+
+int cs_mac_motion_samples(struct cs_mac_motion *m, const uint32_t raw[4], int late_pending)
+{
+    uint32_t ra, rb, buttons, ca, cb, pending;
+    int32_t dx = 0, dy = 0;
+    cs_window_inbox *in;
+    int r;
+    if (!m || !raw || late_pending < -1 || late_pending > 255)
+        return CS_MAC_MOTION_ARGUMENT;
+    if (m->phase != CS_MAC_MOTION_ARMED) return CS_MAC_MOTION_STATE;
+    m->services = sat(m->services);
+    in = m->inbox;
+    pending = raw[0];
+    if (pending & ~UINT32_C(9))
+        return fail(m, CS_MAC_STAGE_PENDING, CS_MAC_CAUSE_PENDING);
+    if (in->valid != CS_INBOX_VALID || in->epoch != m->epoch ||
+        in->phase != CS_INBOX_READY || !m->have_phase || m->quiesced ||
+        (((raw[1] ^ raw[2]) | (raw[2] ^ raw[3])) & UINT32_C(0x00380808)))
+        return motion_decode(m, raw, late_pending);
+    ra = (raw[3] >> 11) & 1u;
+    rb = (raw[3] >> 3) & 1u;
+    buttons = (raw[3] & UINT32_C(0x00080000)) ? 0u : CS_POINTER_LEFT;
+    ca = ra != m->last_raw_a; cb = rb != m->last_raw_b;
+    if (ca != ((pending >> 3) & 1u) || cb != (pending & 1u))
+        return motion_decode(m, raw, late_pending);
+    if (!ca && !cb && buttons == m->last_buttons) return CS_MAC_MOTION_EMPTY;
+    if (ca) dx = ((ra ^ (m->invert & 1u)) == ((raw[3] >> 20) & 1u)) ? 1 : -1;
+    if (cb) dy = ((rb ^ ((m->invert >> 1) & 1u)) != ((raw[3] >> 21) & 1u)) ? 1 : -1;
+#if CLASSICK_MAC_SHORT_COLLECT
+    r = cs_inbox_push_motion(in, m->epoch, dx, dy, buttons);
+    if (r == CS_INBOX_MERGED) m->motion_merges = sat(m->motion_merges);
+#else
+    r = cs_inbox_push(in, m->epoch, dx, dy, buttons);
+#endif
+    m->samples = sat(m->samples);
+    if (r == CS_INBOX_LOST) {
+        snap a = {raw[1]}, b = {raw[2]}, c = {raw[3]};
+        note(m, CS_MAC_LOSS_OVERFLOW, (uint8_t)pending, &a, &b, &c, CS_INBOX_READY);
+        m->have_phase = 0u; quiesce(m); m->losses = sat(m->losses);
+        return CS_MAC_MOTION_LOST;
+    }
+    if (r != CS_INBOX_OK && r != CS_INBOX_MERGED)
+        return fail(m, CS_MAC_STAGE_INBOX, CS_MAC_CAUSE_INBOX_RESULT);
+    m->last_raw_a = ra; m->last_raw_b = rb; m->last_buttons = buttons;
+    if (in->count > m->peak_queued) m->peak_queued = in->count;
+    return CS_MAC_MOTION_OK;
+}
+static int motion_decode(struct cs_mac_motion *m, const uint32_t samples[4], int late_pending)
+#else
+int cs_mac_motion_service(struct cs_mac_motion *m)
+#endif
 {
     cs_window_inbox *in;
     uint8_t rr3;
@@ -292,6 +370,9 @@ int cs_mac_motion_service(struct cs_mac_motion *m)
     snap s1, s2, s3;
     int stable, r;
     uint32_t entry;
+#if CLASSICK_MAC_FAST_COLLECT
+    (void)late_pending; /* Some non-SHORT profiles do not need a late read. */
+#endif
 
     if (!m) return CS_MAC_MOTION_ARGUMENT;
     if (m->phase != CS_MAC_MOTION_ARMED) return CS_MAC_MOTION_STATE;
@@ -299,7 +380,9 @@ int cs_mac_motion_service(struct cs_mac_motion *m)
     /* An omitted commit stays visibly unknown; never apply a later result. */
     m->timeline.pending = 0u;
 #endif
+#if !CLASSICK_MAC_FAST_COLLECT
     m->services = sat(m->services);
+#endif
     in = m->inbox;
 
 #if CLASSICK_MAC_REARM_READY_PROBE
@@ -315,16 +398,10 @@ int cs_mac_motion_service(struct cs_mac_motion *m)
     entry = in->phase;
 #if CLASSICK_MAC_FAST_COLLECT
     {
-        uint8_t samples[10];
-        /* Keep byte loads separate: the 68000 faults on odd word accesses. */
-        const volatile uint8_t *observed = samples;
-        m->io.collect(m->io.cookie, samples);
-        rr3 = observed[0];
+        rr3 = (uint8_t)samples[0];
         if (rr3 & ~(RR3_EXT_A | RR3_EXT_B) & 0xFF)
             return fail(m, CS_MAC_STAGE_PENDING, CS_MAC_CAUSE_PENDING);
-        s1.pb=observed[1]; s1.a=observed[2]; s1.b=observed[3];
-        s2.pb=observed[4]; s2.a=observed[5]; s2.b=observed[6];
-        s3.pb=observed[7]; s3.a=observed[8]; s3.b=observed[9];
+        s1.value = samples[1]; s2.value = samples[2]; s3.value = samples[3];
     }
     pend_a = bit(rr3, RR3_EXT_A);
     pend_b = bit(rr3, RR3_EXT_B);
@@ -345,9 +422,9 @@ int cs_mac_motion_service(struct cs_mac_motion *m)
 
     if (in->valid != CS_INBOX_VALID || in->epoch != m->epoch)
         return fail(m, CS_MAC_STAGE_INBOX, CS_MAC_CAUSE_INBOX_STATE);
-    ra = bit(s3.a, RR0_DCD);
-    rb = bit(s3.b, RR0_DCD);
-    buttons = (s3.pb & PB_BUTTON) ? 0u : (uint32_t)CS_POINTER_LEFT;
+    ra = bit(SNAP_A(&s3), RR0_DCD);
+    rb = bit(SNAP_B(&s3), RR0_DCD);
+    buttons = (SNAP_PB(&s3) & PB_BUTTON) ? 0u : (uint32_t)CS_POINTER_LEFT;
 #if CLASSICK_MAC_SHORT_COLLECT
     if (!stable && in->phase == CS_INBOX_READY && m->have_phase && !m->quiesced) {
         /* A quiet axis does not consume its direction phase. Retain every
@@ -355,9 +432,9 @@ int cs_mac_motion_service(struct cs_mac_motion *m)
         unsigned mask = PB_BUTTON;
         if (pend_a || ra != m->last_raw_a) mask |= PB_X2;
         if (pend_b || rb != m->last_raw_b) mask |= PB_Y2;
-        stable = ((((s1.pb ^ s2.pb) | (s2.pb ^ s3.pb)) & mask) == 0u)
-            && ((((s1.a ^ s2.a) | (s2.a ^ s3.a)) & RR0_DCD) == 0)
-            && ((((s1.b ^ s2.b) | (s2.b ^ s3.b)) & RR0_DCD) == 0);
+        stable = ((((SNAP_PB(&s1) ^ SNAP_PB(&s2)) | (SNAP_PB(&s2) ^ SNAP_PB(&s3))) & mask) == 0u)
+            && ((((SNAP_A(&s1) ^ SNAP_A(&s2)) | (SNAP_A(&s2) ^ SNAP_A(&s3))) & RR0_DCD) == 0)
+            && ((((SNAP_B(&s1) ^ SNAP_B(&s2)) | (SNAP_B(&s2) ^ SNAP_B(&s3))) & RR0_DCD) == 0);
     }
 #endif
 #if CLASSICK_MAC_MOTION_TIMELINE
@@ -377,7 +454,11 @@ int cs_mac_motion_service(struct cs_mac_motion *m)
         {
             /* A latch may have closed after entry RR3 but before the samples.
              * Leave it pending for a later pass rather than baselining it. */
-            uint8_t late = m->io.read(m->io.cookie, CS_MAC_SCC_A, 3u);
+            uint8_t late =
+#if CLASSICK_MAC_FAST_COLLECT
+                late_pending >= 0 ? (uint8_t)late_pending :
+#endif
+                m->io.read(m->io.cookie, CS_MAC_SCC_A, 3u);
             if (late & ~(RR3_EXT_A | RR3_EXT_B) & 0xFF)
                 return fail(m, CS_MAC_STAGE_PENDING, CS_MAC_CAUSE_PENDING);
             if (late) { m->have_phase = 0u; return CS_MAC_MOTION_EMPTY; }
@@ -458,7 +539,11 @@ int cs_mac_motion_service(struct cs_mac_motion *m)
          * late latch can therefore be consumed by the next finite pass.
          * Do not publish, update the baseline, or guess a missing edge here. */
         if (rr3 == 0u && drop_ok(m, in, &s1, &s2, &s3) && (ch_a || ch_b)) {
-            uint8_t late = m->io.read(m->io.cookie, CS_MAC_SCC_A, 3u);
+            uint8_t late =
+#if CLASSICK_MAC_FAST_COLLECT
+                late_pending >= 0 ? (uint8_t)late_pending :
+#endif
+                m->io.read(m->io.cookie, CS_MAC_SCC_A, 3u);
             uint32_t expected = (ch_a ? RR3_EXT_A : 0u) | (ch_b ? RR3_EXT_B : 0u);
             if (late & ~(RR3_EXT_A | RR3_EXT_B) & 0xFF)
                 return fail(m, CS_MAC_STAGE_PENDING, CS_MAC_CAUSE_PENDING);
@@ -489,9 +574,9 @@ int cs_mac_motion_service(struct cs_mac_motion *m)
 #endif
     }
     if (ch_a)
-        dx = ((ra ^ (m->invert & 1u)) == bit(s3.pb, PB_X2)) ? 1 : -1;
+        dx = ((ra ^ (m->invert & 1u)) == bit(SNAP_PB(&s3), PB_X2)) ? 1 : -1;
     if (ch_b)
-        dy = ((rb ^ ((m->invert >> 1) & 1u)) != bit(s3.pb, PB_Y2)) ? 1 : -1;
+        dy = ((rb ^ ((m->invert >> 1) & 1u)) != bit(SNAP_PB(&s3), PB_Y2)) ? 1 : -1;
     if (!ch_a && !ch_b && buttons == m->last_buttons) {
 #if CLASSICK_MAC_REARM_READY_PROBE
         if (in->phase == CS_INBOX_READY) rearm_ready(m);
@@ -526,6 +611,16 @@ int cs_mac_motion_service(struct cs_mac_motion *m)
 #endif
     return CS_MAC_MOTION_OK;
 }
+
+#if CLASSICK_MAC_FAST_COLLECT
+int cs_mac_motion_capture_lost(struct cs_mac_motion *m)
+{
+    snap empty = {0};
+    if (!m) return CS_MAC_MOTION_ARGUMENT;
+    if (m->phase != CS_MAC_MOTION_ARMED) return CS_MAC_MOTION_STATE;
+    return uncertain(m, CS_MAC_LOSS_CAPTURE, 0, &empty, &empty, &empty, m->inbox->phase);
+}
+#endif
 
 int cs_mac_motion_stop(struct cs_mac_motion *m)
 {

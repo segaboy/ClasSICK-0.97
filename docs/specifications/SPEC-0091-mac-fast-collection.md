@@ -7,3 +7,13 @@ An opt-in interrupt-driver experiment batches the existing SCC/VIA collection in
 Read RR3 first. If it has any bits outside the two owned external/status bits, return immediately to the existing fault path. Otherwise read PB, RR0A, RR0B twice; acknowledge external status on each pending channel, then acknowledge IUS on A; read PB, RR0A, RR0B once more. Keep the existing access-spacing guards after every SCC access. The caller retains all existing entry checks, triple-stability tests, event validation, queue behavior, button safety, loss and recovery rules. Callback output is borrowed only for the call. The experiment cannot be combined with timer polling.
 
 Host fixtures must exercise the unchanged core suite and compile the actual collector body against instrumented SCC/VIA accessors to check read/write order, conditional acknowledgements, early failure and refusal of a missing collector. The core and collector share the relevant SCC constants. Native compiler output and real target observations are separate checks. No claim of timing improvement, host mouse operation, physical Macintosh behavior or release readiness follows from the flag or a successful build.
+
+2026-11-16 representation refinement: the callback writes four aligned
+uint32 values: RR3, then three observations packed as PB<<16 | A<<8 | B.
+This avoids odd-address word loads and endian-dependent decoding. The native
+68000 collector may use explicit byte stores into these aligned big-endian
+words; the portable collector uses shifts. Neither representation changes
+the hardware access sequence. The normal READY decode may take a separate
+fast path only when all original checks hold; exceptional cases consume the
+same captured observations through the complete decoder without recapture.
+SPEC-0109 separately defines deferred foreground consumption.

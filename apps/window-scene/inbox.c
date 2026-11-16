@@ -152,17 +152,11 @@ static inline int inbox_axis(int32_t a, int32_t v, int32_t *sum)
      * overflow or reverse direction; avoid the general checked-add path. */
     if (v == 0) { *sum = a; return 1; }
     if (a == 0) { *sum = v; return 1; }
-    if ((a < 0 && v > 0) || (a > 0 && v < 0)) return 0;
-#if defined(__GNUC__) || defined(__clang__)
-    /* Checked compiler arithmetic maps to the target overflow condition without
-     * ever evaluating an overflowing signed C addition. */
-    return !__builtin_add_overflow(a, v, sum);
-#else
+    if ((a ^ v) < 0) return 0;
     if (v > 0 && a > INT32_MAX - v) return 0;
     if (v < 0 && a < INT32_MIN - v) return 0;
     *sum = a + v;
     return 1;
-#endif
 }
 
 /* This is an interrupt-producer hot path. Inline its private validation and

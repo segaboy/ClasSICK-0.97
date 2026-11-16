@@ -64,17 +64,19 @@ static uint8_t pb(void *c)
 }
 #if CLASSICK_MAC_FAST_COLLECT
 /* Logged fake chip implements the same collector contract for core tests. */
-static void collect_fake(void *c,uint8_t o[10])
+static void collect_fake(void *c,uint32_t o[4])
 {
     o[0]=rd(c,0,3);
     if(o[0]&0xF6u)return;
     for(unsigned i=0;i<2u;i++){
-        o[1u+3u*i]=pb(c);o[2u+3u*i]=rd(c,0,0);o[3u+3u*i]=rd(c,1,0);
+        uint32_t p=pb(c),a=rd(c,0,0),b=rd(c,1,0);
+        o[1u+i]=p<<16|a<<8|b;
     }
     if(o[0]&8u)wr(c,0,0,0x10);
     if(o[0]&1u)wr(c,1,0,0x10);
     wr(c,0,0,0x38);
-    o[7]=pb(c);o[8]=rd(c,0,0);o[9]=rd(c,1,0);
+    uint32_t p=pb(c),a=rd(c,0,0),b=rd(c,1,0);
+    o[3]=p<<16|a<<8|b;
 }
 static cs_mac_motion_io io={.cookie=&hw,.read=rd,.write=wr,.pb=pb,.collect=collect_fake};
 #else
