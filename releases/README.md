@@ -11,6 +11,12 @@ disposition. A source-matched review package is prepared; release approval
 and publication remain open. The dated Mac/x64 plans and published releases
 below remain historical.
 
+The [refreshed cursor review package](paired-native-preview-2-cursor-review.json)
+includes the faster shared Mono cursor, rebuilt native images, passing paired
+pixel/install/replay checks and prepared human retests. Its
+[canonical receipt](../docs/development/cursor-byte-composition-20261116.md)
+keeps modeled response improvements and the remaining human issue distinct.
+
 Next release goal proposed2026-10-19: [paired-native-preview-2](paired-native-preview-2.md),one interactive original native window with pointer/cursor and matched Mac/PC behavior. Proposed0.4ROM/0.2PC alpha versions,not assigned published versions. Contract/source sufficiency comes first;no implementation/trial/release authorized by this plan.
 
 Published2026-10-19: [paired ROM0.3.0-alpha.1 / PC0.1.0-alpha.1 receipt](paired-native-preview-1-publication.json). Both experimental prereleases have four verified public assets each. Source/license/setup/checksums included;System unreleased and stated preview limits remain. Older dated approval/preparation paragraphs below are history.

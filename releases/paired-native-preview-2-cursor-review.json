@@ -1,0 +1,38 @@
+{
+  "date": "2026-11-16",
+  "classification": "release review package; approval pending",
+  "source_revision": "e21a295c204965f300f97ea370a94e602c0af425",
+  "archive_name": "ClasSICK-Mac286-Cursor-Review.zip",
+  "archive_bytes": 4875147,
+  "archive_sha256": "c9b093a70bc0249860ef61d5a564d27cfc592761b3a2e49aba43cb4f4310a964",
+  "identical_preparations": 2,
+  "verified_package_members": 53,
+  "committed_build_and_preparation_inputs": 80,
+  "negative_controls_rejected": [
+    "altered ROM",
+    "missing license",
+    "extra file",
+    "altered source archive"
+  ],
+  "packaged_image_boots": [
+    "Mac stage 16",
+    "286 POST B0"
+  ],
+  "decoded_animations": {
+    "paired_checkpoints": 8,
+    "port_recovery": 32
+  },
+  "video": "131 frames at 10 fps; full FFmpeg decode passed; final frame matches paired qualification",
+  "source_archive": "Complete git archive of source_revision; unrelated dirty files and private HQ excluded",
+  "candidate_record": "releases/paired-native-preview-2-mac286.json",
+  "canonical_receipt": "docs/development/cursor-byte-composition-20261116.md",
+  "ready_for_release": false,
+  "published": false,
+  "limits": "Package integrity and scoped BootHush checks do not replace owner disposition of incomplete qualification or separate publication approval. No immutable public version or tag changed.",
+  "previous_review": "releases/paired-native-preview-2-review.json",
+  "prepared_human_rounds": [
+    "M1R5 Mac response/drag, 300 percent gain at 2x",
+    "P1R1 286 hold/release Space and arrows"
+  ],
+  "human_round_status": "Prepared only; no window opened or human result inferred"
+}

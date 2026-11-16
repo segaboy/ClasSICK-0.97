@@ -139,3 +139,30 @@ remaining cancellation/fault matrix, physical validation and independent
 review remain incomplete. No owner waiver, publication, version assignment,
 tag, complete game port or System release is inferred. A new source-matched
 review package is appropriate; release readiness remains false.
+
+## Completed package verification
+
+The [refreshed package record](../../releases/paired-native-preview-2-cursor-review.json)
+pins the archive and source revision `e21a295c204965f300f97ea370a94e602c0af425`.
+Two independent preparations are byte-identical: 4875147 bytes, SHA-256
+`c9b093a70bc0249860ef61d5a564d27cfc592761b3a2e49aba43cb4f4310a964`.
+All 53 members and 80 committed build/preparation inputs verify. Altered ROM,
+missing license, extra-file and altered-source controls are rejected.
+The packaged Mac reaches stage 16 and the packaged 286 reaches POST B0.
+Both GIFs decode (eight paired checkpoints and 32 retained port frames).
+The source archive excludes unrelated working changes and private HQ content.
+
+The repository guard passed after correcting an older cross-repository
+relative link to an immutable BootHush source URL. Guard success is scoped
+to indexed text, links, registered images, payload and common-secret checks;
+it does not provide independent provenance review.
+
+Local review folder:
+`C:/Repos/Release-Review/ClasSICK-Mac286-Cursor-20261116/`.
+It contains `ClasSICK-Mac286-Cursor-Review.zip`, the verified unpacked package,
+`package-checks.json`, and `START-HERE.md`. M1R5 Mac and P1R1 286 launchers
+were prepared with pinned inputs and complete five-minute recording; neither
+was launched. Their output directories are outside the immutable package.
+The Mac plan keeps unconfined relative input, gain 300% and zoom 2x.
+The 286 plan uses the new raw-keyboard disk and the corrected hold/release
+instructions. Original human recordings and the earlier review remain intact.
