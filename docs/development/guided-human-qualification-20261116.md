@@ -147,3 +147,65 @@ ROM and edge-4096 timing remain unchanged. BootHush twin executable SHA-256:
 Build/validation receipts:
 `C:/Repos/.task-temp/boothush-relative-free-20261116-a`.
 M1R2 human result is pending; the frozen archive and release gates are unchanged.
+
+## M1R2 result and sensitivity investigation
+
+Owner report: "OK, I did all the things. I was able to touch all four corners
+with the mouse, and the windows never closed. However, was not relative. I had
+to move my local cursor VERY far to reach each corner."
+Corner reach and absence of unexpected closure passed by owner report. Mouse
+travel/perceived relative behavior remains unsatisfactory. Lag improvement was
+not explicitly reported and is not inferred from this response.
+
+The session reached its five-minute limit normally with unchanged inputs:
+1210 raw packets, two starts/two releases, 1055 scaled samples, 4704 pin steps,
+zero pending input, zero omissions, zero decoder/FIFO losses, FIFO peak 120,
+and zero guest fault. These counters support complete guest consumption, not
+acceptable sensitivity. Original session and separate feedback/analysis are
+in `C:/Repos/boothush/out/qualification-20261116-a/M1R2-mac`.
+`corners.gif` is a 26-second excerpt of the guest video beginning at second
+100; `derived-media.json` records the conversion and hashes. No desktop pixels
+were captured and the excerpt is not a substitute for the owner report.
+
+BootHush adds explicit linear gain (default unchanged at 100 percent), initial/
+final settings in JSON and F9/F10 adjustment. Its native tests cover signed
+fractional carry, limits, repeats, reset on gain change, host-only shortcuts,
+focus handling and signed-range rejection. The CLI retains exact scaled-vector
+replay at 100 and 400 percent. Source-matched executable twins:
+`fe262bc58ae58cb1d9b22ae5f409b71693e6ebf0fd305e4846692a5873588de8`.
+Build/validation: `C:/Repos/.task-temp/boothush-mouse-gain-20261116-a`.
+
+Stress traces multiply the accepted M1R2 vectors while preserving all event
+times and button states. They are controlled rate tests, not raw-packet replay
+or physical latency measurements. At edge 4096, the existing 512-entry FIFO
+overflows at 2x and 4x. A 1024-entry candidate passes 2x (peak 637) but still
+overflows at 4x. All endpoints happen to match the independent clamped-vector
+oracle, proving why endpoint agreement cannot stand in for loss accounting.
+Failed controls are retained in `human-gain-stress-20261116-a/report.json`
+and `human-gain-stress-1024-20261116-a/report.json` under `C:/Repos/.task-temp`.
+
+The selected 2048-entry candidate passes the 1x/2x/4x traces: FIFO peaks
+120/637/1404 respectively, zero overflows, zero decoder losses or omissions,
+zero pending input and zero faults, with all three oracle endpoints matching.
+Receipt: `C:/Repos/.task-temp/human-gain-stress-2048-20261116-a/report.json`.
+This does not establish lossless handling of every possible rate or latency.
+
+The 128/512/1024/2048 FIFO contracts pass at O0 and O2. Both enlarged native
+candidates retain eight paired state/pixel checkpoints and exact Mac replay;
+the selected candidate still cancels deliberate excessive-burst overflow,
+releases the drag and accepts fresh exact movement. Selected receipts:
+`mac-human-gain-parity-2048-20261116-a/parity/report.json` and
+`mac-human-gain-recovery-2048-20261116-a/report.json` under `C:/Repos/.task-temp`.
+
+The selected native ROM twins use 49,500 ROM bytes, 504 native data/BSS bytes,
+41,944 workspace bytes at 32768-74712 and the unchanged conservative 4,924-byte
+stack bound. The linker checks screen/workspace separation. ROM SHA-256:
+`e6c0163867fe969075ccb4ef2dd9030830e1e9df9e5764476eda117027be1370`;
+manifest: `C:/Repos/.task-temp/mac-human-gain-2048-20261116-a/manifest.json`.
+
+M1R3 is admitted for an owner sensitivity test at 400 percent, edge 4096,
+inversion 3, VBL guard 4096 and display scale 2, with the emulator/ROM above.
+The Windows pointer remains visibly unconfined; this is not absolute alignment
+between the two pointers. F9/F10 allow bounded adjustment, F12 stops input.
+Human comfort, lag and continued interaction correctness remain pending.
+Frozen release files are unchanged.

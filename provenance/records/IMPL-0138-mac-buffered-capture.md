@@ -12,3 +12,11 @@ Original project code and the owner's own-candidate motion trace are the inputs;
 no external guest implementation is used. AI-assisted implementation and
 author self-review; independent review remains pending. See the
 [guided human receipt](../../docs/development/guided-human-qualification-20261116.md).
+
+## Sensitivity follow-up, 2026-11-16
+
+Explicit power-of-two burst capacities 512/1024/2048 retain the existing
+default, 128-record batch and overflow/rebaseline algorithm. The selected
+2048-entry workspace candidate follows failed 512/1024 faster-input controls.
+Implementation, memory bounds and identities are in the
+[guided human receipt](../../docs/development/guided-human-qualification-20261116.md).

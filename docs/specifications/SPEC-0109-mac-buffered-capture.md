@@ -60,3 +60,13 @@ This is a bounded buffering experiment, not a guarantee that a faster input
 rate is sustainable. Qualification requires both capacity variants' host
 contracts, the recorded human trace, loss/pending counters, pixel parity and
 new human feedback. The queue must still reject deliberate excessive bursts.
+
+The M1R2 accepted vectors scaled by two/four overflowed the 512-record FIFO
+despite matching final endpoints. Burst builds may now explicitly select
+512, 1024 or 2048 records with `--window-capture-capacity`; default remains 512.
+These power-of-two capacities preserve the queue's mask indexing. The batch
+stays 128; overflow/rebaseline behavior is unchanged. Each build must prove
+its actual workspace extent and stack separation, then pass rate-specific
+trace, loss, recovery and pixel checks. A larger capacity does not establish
+sustained throughput, latency or a physical mouse rate. The guided human
+receipt records the selected candidate and failed smaller-capacity controls.

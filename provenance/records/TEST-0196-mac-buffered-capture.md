@@ -16,3 +16,12 @@ capture losses, retains eight-state paired pixels, and still detects and recover
 from deliberate excessive input. Detailed identities, failed pacing controls
 and the pending M1R1 human retest are in the
 [guided human receipt](../../docs/development/guided-human-qualification-20261116.md).
+
+## Sensitivity follow-up, 2026-11-16
+
+Host contracts pass at all four capacities and both optimization levels.
+The selected 2048-entry native image retains paired pixels/replay and explicit
+excessive-rate recovery, and consumes the M1R2 accepted vectors scaled by
+1/2/4 without losses. Smaller-buffer failures remain retained. These are
+modeled checks; M1R3 human sensitivity is pending. See the
+[guided human receipt](../../docs/development/guided-human-qualification-20261116.md).

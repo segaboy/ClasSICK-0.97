@@ -17,7 +17,9 @@ def main():
     p=argparse.ArgumentParser(description=__doc__)
     p.add_argument('--cc',type=Path,required=True);p.add_argument('--output',type=Path,required=True)
     p.add_argument('--burst',action='store_true',help='Exercise the experimental 512-entry FIFO')
+    p.add_argument('--capacity',type=int,choices=(512,1024,2048),help='Explicit burst capacity (default 512)')
     a=p.parse_args();cc=a.cc.resolve(strict=True);out=a.output.resolve()
+    if a.capacity is not None and not a.burst:p.error('--capacity requires --burst')
     if out==ROOT or ROOT in out.parents:raise ValueError('output must be outside repository')
     out.mkdir(parents=True,exist_ok=False);cases=[]
     for opt in ('-O0','-O2'):
@@ -26,6 +28,7 @@ def main():
                  '-Wconversion','-Wsign-conversion','-DCLASSICK_MAC_FAST_COLLECT=1',
                  '-DCLASSICK_MAC_SHORT_COLLECT=1','-DCLASSICK_MAC_LOSS_COUNTS=1',
                  '-DCLASSICK_MAC_BURST_CAPTURE='+str(int(a.burst)),
+                 '-DCLASSICK_MAC_BURST_CAPACITY='+str(a.capacity or 512),
                  str(ROOT/SOURCES[0]),str(ROOT/SOURCES[2]),str(ROOT/SOURCES[5]),'-o',str(exe)]
         commands=[command,[str(exe)]];logs=[]
         for cmd in commands:
@@ -35,7 +38,7 @@ def main():
             (out/(opt[1:]+'.log')).write_text('\n'.join(logs))
             if r.returncode:raise RuntimeError(r.stdout+r.stderr)
         cases.append({'optimization':opt,'commands':commands,'output':logs[-1], 'exe_sha256':sha(exe)})
-    report={'status':'pass','capacity':512 if a.burst else 128,'cases':cases,'compiler_sha256':sha(cc),
+    report={'status':'pass','capacity':(a.capacity or 512) if a.burst else 128,'cases':cases,'compiler_sha256':sha(cc),
             'source_sha256':{n:sha(ROOT/n) for n in SOURCES},'scope':'host contracts; no target timing claim'}
     (out/'report.json').write_text(json.dumps(report,indent=2)+'\n')
     print(json.dumps({'status':'pass','profiles':len(cases),'report':str(out/'report.json')}))
