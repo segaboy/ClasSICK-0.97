@@ -4,7 +4,14 @@
 #define CS_MAC_CAPTURE_QUEUE_H
 #include <stdint.h>
 /* Caller excludes interrupts for foreground access. No hidden atomics. */
-enum { CS_MAC_CAPTURE_CAPACITY = 128 };
+#ifndef CLASSICK_MAC_BURST_CAPTURE
+#define CLASSICK_MAC_BURST_CAPTURE 0
+#endif
+#if CLASSICK_MAC_BURST_CAPTURE != 0 && CLASSICK_MAC_BURST_CAPTURE != 1
+#error CLASSICK_MAC_BURST_CAPTURE must be 0 or 1
+#endif
+enum { CS_MAC_CAPTURE_CAPACITY = CLASSICK_MAC_BURST_CAPTURE ? 512 : 128,
+       CS_MAC_CAPTURE_BATCH = CLASSICK_MAC_BURST_CAPTURE ? 128 : 32 };
 typedef struct { uint32_t raw[4], late; } cs_mac_capture;
 typedef struct {
     uint32_t head, count, overflow, peak, losses;

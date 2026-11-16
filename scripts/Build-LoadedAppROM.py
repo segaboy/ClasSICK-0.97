@@ -104,6 +104,7 @@ def main():
     p.add_argument('--window-fast-collect',action='store_true',help='Experimental batched interrupt input collection; window profile only')
     p.add_argument('--window-short-collect',action='store_true',help='Experimental shortened SCC collection; requires fast collect')
     p.add_argument('--window-buffered-collect',action='store_true',help='Capture in IRQ and decode in foreground; requires short collector')
+    p.add_argument('--window-burst-capture',action='store_true',help='Experimental 512-record workspace FIFO and 128-record decode batch; requires buffered collector')
     p.add_argument('--window-c-abi-irq',action='store_true',help='Experimental C-ABI interrupt save set; requires short collector')
     p.add_argument('--window-loss-counts',action='store_true',help='Observation-only per-reason loss counts; interrupt window profile only')
     p.add_argument('--window-pending-idle-probe',action='store_true',help='Experimental pending-only unchanged-endpoint no-decision policy')
@@ -111,6 +112,7 @@ def main():
     p.add_argument('--window-wait-latch-probe',action='store_true',help='Experimental pending check before baseline publication')
     p.add_argument('--dcd-invert',type=int,choices=(0,1,2,3),default=0,help='Unverified raw RR0 DCD sense mask; window profile only')
     a=p.parse_args()
+    if a.window_burst_capture and not a.window_buffered_collect:p.error('--window-burst-capture requires --window-buffered-collect')
     if a.window_buffered_collect and not a.window_short_collect:p.error('--window-buffered-collect requires --window-short-collect')
     if a.window_c_abi_irq and not a.window_short_collect:p.error('--window-c-abi-irq requires --window-short-collect')
     if a.window_optimize_speed and not a.window_drawing:p.error('--window-optimize-speed requires --window-drawing')
@@ -276,6 +278,7 @@ def main():
         if a.window_fast_collect:flags+=['-DCLASSICK_MAC_FAST_COLLECT=1']
         if a.window_short_collect:flags+=['-DCLASSICK_MAC_SHORT_COLLECT=1']
         if a.window_buffered_collect:flags+=['-DCLASSICK_MAC_BUFFERED_COLLECT=1']
+        if a.window_burst_capture:flags+=['-DCLASSICK_MAC_BURST_CAPTURE=1']
         if a.window_c_abi_irq:flags+=['-DCLASSICK_MAC_C_ABI_IRQ=1']
         if a.window_loss_counts:flags+=['-DCLASSICK_MAC_LOSS_COUNTS=1']
         if a.window_pending_idle_probe:flags+=['-DCLASSICK_MAC_PENDING_IDLE_PROBE=1']
@@ -486,7 +489,7 @@ def main():
     if a.window_motion_timeline:manifest['motion_timeline']={'version':1,'capacity':6,'entry_bytes':32,'new_MMIO':False,'interrupt_timing_perturbed':True,'pointer_symbol':'cs_mac_timeline_address','motion_symbol':'cs_mac_timeline_motion'}
     if a.window_fast_collect:manifest['fast_collect']={'experimental':True,'same_MMIO_order_required':not a.window_short_collect,'new_MMIO':a.window_short_collect,'host_input_qualified':False}
     if a.window_short_collect:manifest['short_collect']={'pending_rr0_reused':True,'quiet_axis_phase_ignored_in_ready':True,'late_pending_retry':True,'motion_omission_preserves_unchanged_button':True,'change_gated_observation':True,'read_guard_nops':5,'write_guard_nops':8,'physical_qualification':False}
-    if a.window_buffered_collect:manifest['buffered_collect']={'capacity':128,'entry_bytes':20,'decode':'foreground','overflow':'cancel-and-rebaseline','physical_qualification':False}
+    if a.window_buffered_collect:manifest['buffered_collect']={'capacity':512 if a.window_burst_capture else 128,'batch':128 if a.window_burst_capture else 32,'storage':'application-workspace' if a.window_burst_capture else 'native-bss','entry_bytes':20,'decode':'foreground','overflow':'cancel-and-rebaseline','physical_qualification':False}
     if a.window_c_abi_irq:manifest['c_abi_irq']={'experimental':True,'veneer_saved':['D0','D1','A0','A1'],'callee_preserves':'D2-D7/A2-A6','physical_qualification':False}
     if a.window_loss_counts:manifest['loss_counts']={'tag':'MLC1','bytes':20,'address':syms['cs_mac_loss_trace'],'reasons':[1,2,3,4],'pending_tag':'MLP1','pending_address':syms['cs_mac_pending_trace'],'pending_bytes':20,'context_tag':'MLX1','context_address':syms['cs_mac_context_trace'],'context_bytes':20,'no_added_MMIO':True,'interrupt_timing_perturbed':True}
     if a.window_pending_idle_probe:manifest['pending_idle_probe']={'experimental':True,'hidden_transitions_may_be_discarded':True,'physical_qualification':False}

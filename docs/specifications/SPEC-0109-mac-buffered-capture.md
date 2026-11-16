@@ -44,3 +44,19 @@ baseline; unchanged existing core profiles; actual BootHush interrupt/register
 checks; full frame parity at the specified injected rates; finite memory and
 stack bounds. No rate, physical polarity, real hardware, human input or release
 qualification follows solely from implementation or a host test.
+
+## Human-motion burst experiment, 2026-11-16
+
+The M1 human trace overran the 128-entry FIFO seven times and reported
+unresponsive/incomplete pointer travel. An explicit `--window-burst-capture`
+build uses 512 records and removes at most 128 per foreground iteration.
+The 10,260-byte FIFO moves to the existing application workspace rather than
+consuming native global or stack space. The linker must still prove workspace
+separation from the screen. Initialization, ordered decode, button handling,
+overflow cancellation and diagnostic format are unchanged. The default
+128/32 profile and frozen review image remain preserved.
+
+This is a bounded buffering experiment, not a guarantee that a faster input
+rate is sustainable. Qualification requires both capacity variants' host
+contracts, the recorded human trace, loss/pending counters, pixel parity and
+new human feedback. The queue must still reject deliberate excessive bursts.

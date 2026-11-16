@@ -8,6 +8,13 @@ independent-implementation policy; no independent human review asserted.
 No Apple/Microsoft implementation, firmware, game code or new third-party
 implementation input was used. Existing unrelated edits remain preserved.
 
+Human qualification update, 2026-11-16: the owner reported lag and incomplete
+pointer boundary reach in the first Mac round, while drag, release and pattern
+changes worked. The frozen candidate is not human-qualified. The
+[guided human receipt](guided-human-qualification-20261116.md) retains that
+failure and the distinct enlarged-FIFO/relative-mouse candidate prepared for
+a focused retest. The original archive and release disposition remain unchanged.
+
 ## Buffered Mac input
 
 The new `--window-buffered-collect` build option captures into a 128-entry

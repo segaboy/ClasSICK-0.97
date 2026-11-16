@@ -46,7 +46,7 @@ def main():
              'held':word(t+88),'losses':word(t+36),'first_reason':word(t+100),
              'capture_queue':[word(q+i*4) for i in range(4)],'fault':word(diag+24),'presses':word(diag+12)}
         if (row['held'] or row['fault'] or row['first_reason']!=5 or row['losses']<1 or
-            row['capture_queue'][0:3]!=[0x4d435131,0,128] or row['capture_queue'][3]<1):
+            row['capture_queue'][0:3]!=[0x4d435131,0,b['buffered_collect']['capacity']] or row['capture_queue'][3]<1):
             raise ValueError('overrun did not cancel and drain: '+str(row))
         observations.append(row)
     before,after=observations

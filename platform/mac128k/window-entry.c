@@ -11,7 +11,13 @@
 #endif
 #if CLASSICK_MAC_BUFFERED_COLLECT
 #include "capture-queue.h"
+#if CLASSICK_MAC_BURST_CAPTURE
+/* The larger explicit FIFO belongs to the admitted application workspace,
+ * away from native globals and the exception/foreground stack. */
+static cs_mac_capture_queue captures __attribute__((section(".loaded_app")));
+#else
 static cs_mac_capture_queue captures;
+#endif
 volatile uint32_t cs_mac_capture_trace[4];
 #endif
 #if CLASSICK_MAC_KEYBOARD_PROBE
@@ -378,7 +384,7 @@ static int consume_captures(void)
 {
     unsigned n;
     int r=CS_MAC_MOTION_EMPTY;
-    for(n=0;n<32u;n++){
+    for(n=0;n<CS_MAC_CAPTURE_BATCH;n++){
         cs_mac_capture v;
         uint32_t token=cs_m68k_foreground_enter(0);
         int available=cs_mac_capture_pop(&captures,&v);
