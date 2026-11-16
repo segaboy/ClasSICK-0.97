@@ -334,3 +334,159 @@ The original and modified source copies are in
 `C:/Repos/.task-temp/mac-scc-first-source-20261115-a`; the working file was
 restored byte-for-byte. This experiment changes interrupt ordering and was
 not adopted or qualified on physical hardware.
+
+## Interrupt mask and instruction cost investigation - 2026-11-16
+
+Question: how much of the failing fast mouse schedule is spent with the guest
+unable to accept another SCC interrupt, and which original routines consume
+that interval? This increment implements original SPEC-0097 checked arithmetic
+and private-helper inlining, plus a reproducible symbol-correlated analyzer.
+It does not change input acceptance, sample validation, queue capacity, device
+guards or the release criterion. Source baseline is
+`56856406f43314cacb4c57e0f60dbb3029e97ef7`; unrelated local work was preserved.
+Codex performed this work without external AI tools, WSL, reference software,
+physical trials or prohibited implementation inputs.
+
+### Tool evidence and eligibility
+
+BootHush commits `3b7f25b` and
+`a746c1fc79967cc13b62f6087df3a2f25033b14a` add SR-mask observations and optional
+instruction boundaries to the existing bounded detailed witness. Its canonical
+format and limits are in `C:/Repos/boothush/docs/mac-mouse-witness.md`.
+The final Windows active-profile twins produce executable SHA-256
+`cd3992737cc78ef5758a376872cac8005e7b959157b4be69349f31141c68fe9b`;
+the exact build inputs are in
+`C:/Repos/.task-temp/boothush-step-active-20261116-b/report.json`.
+Forty-five focused tests pass; two optional external-fixture cases skip.
+The original BootHush observer uses the CPU dependency's public SR accessor
+declaration; no third-party CPU implementation was copied into ClasSICK or used
+to design its inbox change. This is permitted project-owned tool work under
+the owner amendment, not admission of third-party implementation or proof of
+hardware timing.
+
+The original port title lookup at
+`5b285d2bc712f39939d21422e2d7630799f91c85` and final regression record
+`c3512be56a44e86b5b896892ba71f54cd87be0bc` provide a separate polling control.
+`C:/Repos/Not-Super-Tilt-Bro/docs/mouse-title-evidence.md` records shorter
+modeled SCC-read intervals, all 160 phase/boundary tests and the continuing
+fast-input losses. Its title stays at IPL7 while polling, whereas ClasSICK uses
+interrupts. The transferred finding is this distinction and the measurement
+method. No port implementation or game-derived source was imported.
+
+### Retained implementation and checks
+
+`apps/window-scene/inbox.c` retains canonical validation, monotone direction
+checks, int32 bounds, button boundaries and strict fallback. Supported compilers
+use checked addition and inline the producer's private helpers; the existing
+guarded C arithmetic remains the portable path. `tests/window-inbox-motion.c`
+adds a separately calculated 64-bit oracle for 6,561 two-axis combinations of
+nine signed/boundary values, comparing the entire resulting inbox. All 70,242
+checks pass. Thirty focused motion/collector/inbox CTests pass in
+`C:/Repos/.task-temp/classick-inbox-single-validation-host-20261115-c`;
+the current logs are `C:/Repos/.task-temp/classick-inline-host-test-20261116-a.log`
+and `classick-inline-host-build-20261116-a.log`.
+
+Windows-native `-Os` Mac twins in
+`C:/Repos/.task-temp/mac-inbox-inline-20261116-b/manifest.json` match at SHA-256
+`933fe32575ad2a56e0d5ffe16f5d7bc9c327d856f363e95661f1a2489aa88172`.
+The ROM uses 47,916 bytes (28 fewer than control), BSS 488 bytes, workspace
+32,768..33,732, and conservative nonrecursive stack bound 4,720 bytes within
+the 24,320-byte reserve; largest individual frame is 300 bytes. These are
+compiler/linker budgets, not measured physical stack use. All existing image,
+alignment, veneer and corruption guards remain active. Build command:
+
+```powershell
+python -B scripts/Build-LoadedAppROM.py --tool-root M68K_BIN --windows-native --window-drawing --window-fast-collect --window-short-collect --window-loss-counts --dcd-invert 3 --output NEW_MAC_BUILD
+```
+
+The source-matched 286 whole-disk run in
+`C:/Repos/.task-temp/pc286-inline-session-20261116-a/report.json` passes all
+eight hosted-state/full-EGA comparisons and two pixel mutation controls.
+The payload hash is `bb0f402bbf7b9d22d7999f7afc6e44f8defdc74de4acc012af2f349818dfd336`;
+disk hash is `a01bb95b6a3840a0a5a889951d75c421bb4823b1189a8cfae1e17d7b4089350e`.
+The same native Mac/286 sequence passes all eight 175,104-pixel normalized
+canvas comparisons, white margins and Mac replay at edge/guard 4,096 in
+`C:/Repos/.task-temp/mac286-inline-4096-20261116-a/report.json`.
+At edge 2,048 it still fails the title checkpoint: pointer `(256,197)` instead
+of `(256,75)`, 54 omissions, no hard loss, stage 16 and fault zero. The command
+and failure are retained in `mac286-inline-2048-20261116-a` and its sibling log.
+This is not a fast-input fix or a production 286 boot/installer.
+
+### Same-build timing comparison
+
+Both runs request +32 X pixels at cycle 100,000,000, stop at 105,000,000, and
+trace 99,999,000..100,300,000 with inversion 3 / VBL guard 4,096. The original
+control ROM is `32d7a5e8c897aae3bdd02ac2dc551c2eca23578bd3e942a2a99d869dbd6ad944`.
+Exact commands, JSON, complete frames and traces are in
+`C:/Repos/.task-temp/classick-baseline-steps-20261116-a/report.json` and
+`C:/Repos/.task-temp/classick-inbox-inline-mask-20261116-a/report.json`.
+Every traced/untraced pair matches in complete stopped JSON and frame bytes;
+all selected ranges finish with no dropped witness rows and 64 delivered phases.
+
+| Edge cycles | Control longest complete IPL7 span | Revised span | Control/revised final X | Control/revised omissions |
+| --- | --- | --- | --- | --- |
+| 2,048 | 5,450 | 4,836 | 252 / 252 | 22 / 16 |
+| 4,096 | 5,464 | 4,834 | 288 / 288 | 0 / 0 |
+
+Expected X is 288. The measured complete spans fall about 11%; the fast final
+position remains wrong. These are schedule-specific instruction-boundary model
+observations, not a physical speed envelope or a causal percentage of losses.
+The revised fast SCC span still exceeds its 4,096-cycle DCD-change interval.
+
+`scripts/Analyze-MacInterruptWitness.py` checks the ROM/manifest identity,
+linked text-symbol addresses, mask-chain continuity, dropped/range flags and
+complete step coverage before attributing the longest identified SCC span.
+Two synthetic analysis tests include incomplete, censored and inconsistent
+evidence controls. Its final result is
+`C:/Repos/.task-temp/classick-inbox-inline-profile-20261116-a.json`: 4,836
+cycles comprise motion service 2,212, inbox push 1,172, collector 716, interrupt
+wrapper 330, veneer 328 and diagnostic increment 78. Calls are charged to their
+caller; returns to their callee. This identifies the next optimization targets
+without weakening the device checks or assuming a foreground-only cause.
+
+### Preserved, unadopted experiments
+
+Direct sample storage, a single stability comparison, and selective O2/O3/LTO
+compilation did not resolve the fast case. The working motion source and build
+script were restored before the retained inbox change. Each scratch build has
+matching twins, a manifest and a sibling `-source` directory containing all
+49 inputs verified against that manifest; no existing source/evidence was lost.
+The compiler variants change only `window-entry.c`, `motion.c` and `inbox.c`
+optimization; the rest remains `-Os`. LTO also changes the diagnostic layout,
+so its results were decoded through its own manifest symbols.
+
+| Scratch build under `C:/Repos/.task-temp/` | ROM SHA-256 | Result |
+| --- | --- | --- |
+| `mac-direct-capture-20261116-a` | `4a48db6f4432208eb59190dc8274de4b19a2b414b3d32cd9ddbc7eb32ae568d5` | Short trace only; longest observed IPL7 span 5,300; no full parity claim |
+| `mac-single-stability-20261116-b` | `107990255e8d2cca915169db5cbad452d0cc5f14b48804c256ec2ccea9676ae7` | Fast +X ends 250 with 20 omissions |
+| `mac-input-o2-20261116-a` | `0b9f343152dd1a73e00e632397893c75bb608aebf909118edc0a8c426ee48dae` | Fast +X ends 251 with 25 omissions |
+| `mac-input-o3-20261116-a` | `45e1a7e99384c2be1d7fdc52c85a502dae01fd3406c115b4e397967b8a7a8500` | Fast +X ends 255 with 21 omissions |
+| `mac-input-lto-20261116-a` | `26b0077ce0e74f7751875015b0199eb6cfd3cd075bf1f3d488ea8ac3248bdf83` | Fast +X ends 250 with 16 omissions |
+
+The four full comparisons pass their slow +X control at X=288 with no omissions
+and preserve traced/untraced equality. Their exact commands and frames are in
+the corresponding `classick-single-stability-mask-20261116-a`,
+`classick-input-o2-mask-20261116-a`, `classick-input-o3-mask-20261116-a` and
+`classick-input-lto-mask-20261116-a` reports. An intermediate checked-add-only
+ROM (`a60b5b5c716fdf08250ae2167c67e317701247de3a59f718c181c371c5009d3b`)
+is likewise preserved in `mac-inbox-overflow-20261116-a`; its independent
+instruction attribution identified the remaining helper-call overhead.
+
+The paired milestone remains incomplete. Production media, fast input,
+source/tool/provenance review, physical and human qualification and separately
+approved publication remain open. The scoped model improvements above do not
+waive or satisfy those gates.
+
+### Repository guard control
+
+The indexed guard initially rejected the already tracked original 286
+`arch/i286/watcom-arithmetic.asm` (introduced at
+`6681abd48060e389716bf7efc4d6b90affe23acc`). Its source whitelist now admits
+`.asm` alongside `.s`; UTF-8, NUL, size, provenance and secret checks remain.
+`scripts/Test-RepositorySourceTypes.py` tests the real guard using isolated
+copies of the index: original assembly passes, NUL-containing assembly and
+an executable extension fail. All three controls pass and the real index is
+unchanged, as recorded in
+`C:/Repos/.task-temp/classick-source-type-guards-20261116-b/report.json`.
+The initial control run correctly rejected NUL data but expected the wrong
+error stage; that assertion was corrected without weakening the guard.

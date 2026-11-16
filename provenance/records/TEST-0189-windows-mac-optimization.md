@@ -22,3 +22,16 @@ not adopted; its retained source, builds and outcomes are in the evidence.
 Another scratch experiment skipped repeated empty foreground polling until a
 new producer service. It too passed the slower scenario and failed the faster
 one; the source was removed after recording the retained result.
+
+2026-11-16: SPEC-0097 checked arithmetic/helper inlining passes 70,242 inbox
+checks (including a new 6,561-case wide-arithmetic oracle), 30 focused CTests,
+native ROM twins and the slower eight-state Mac/286 full-pixel/replay comparison.
+BootHush's new bounded mask/instruction witness shows shorter measured SCC
+spans; the fast paired case still fails. Two analyzer tests reject incomplete
+and inconsistent trace evidence. Five other compiler/source experiments were
+preserved and not adopted. [Canonical identities, commands, results and limits](../../docs/development/windows-m68k-toolchain-20261114.md#interrupt-mask-and-instruction-cost-investigation-2026-11-16).
+
+The source-type guard also passes three isolated-index controls: original
+`.asm` source is accepted, NUL data and executable extensions are rejected,
+and the real index remains unchanged. This restores validation of the existing
+original 286 assembly without admitting binary payloads; see the same receipt.

@@ -15,3 +15,10 @@ SHORT alone uses the optional push. Its saturating motion_merges counter counts 
 arguments and metadata, the fallback may use the same internal validated push
 operation as strict push. This does not relax validation, exclusion,
 refusal precedence, overflow handling, or record ordering.
+
+2026-11-16 implementation refinement: a compiler's checked-add operation may
+implement the representable signed sum, with the existing guarded C arithmetic
+as the portable fallback. Only successful sums may update the unread record.
+Inlining the producer's private helpers may reduce native call overhead; it
+does not remove metadata validation or change any refusal or fallback above.
+An independent 64-bit arithmetic oracle covers both axes at signed boundaries.

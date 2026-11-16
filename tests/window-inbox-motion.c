@@ -214,10 +214,35 @@ static void test_oracle(void)
     CHECK(total > 0);
 }
 
+/* Independent wide-arithmetic oracle for both axes and sign/overflow edges. */
+static void test_arithmetic_matrix(void)
+{
+    static const int32_t values[] = { INT32_MIN, INT32_MIN+1, -32769, -1,
+        0, 1, 32767, INT32_MAX-1, INT32_MAX };
+    unsigned i,j,k,l;
+    for(i=0;i<9u;i++)for(j=0;j<9u;j++)for(k=0;k<9u;k++)for(l=0;l<9u;l++) {
+        int32_t ax=values[i],ay=values[j],dx=values[k],dy=values[l];
+        int64_t sx=(int64_t)ax+dx,sy=(int64_t)ay+dy;
+        int merge=(ax!=0 || ay!=0) && (dx!=0 || dy!=0)
+            && (int64_t)ax*dx>=0 && (int64_t)ay*dy>=0
+            && sx>=INT32_MIN && sx<=INT32_MAX && sy>=INT32_MIN && sy<=INT32_MAX;
+        ready();push(1,1,0u);push(ax,ay,0u);snap=b;
+        if(merge) {
+            snap.records[2].dx=(int32_t)sx;snap.records[2].dy=(int32_t)sy;
+        } else {
+            snap.records[3].dx=dx;snap.records[3].dy=dy;snap.records[3].buttons=0u;
+            snap.count=3u;
+        }
+        CHECK(cs_inbox_push_motion(&b,1u,dx,dy,0u)==(merge?CS_INBOX_MERGED:CS_INBOX_OK));
+        CHECK(memcmp(&b,&snap,sizeof b)==0);
+    }
+}
+
 int main(void)
 {
     test_basic(); test_priming(); test_buttons(); test_signs();
     test_overflow(); test_wrap_full_claim(); test_malformed(); test_oracle();
+    test_arithmetic_matrix();
     printf("window-inbox-motion: %d/%d checks passed\n", checks - fails, checks);
     return fails != 0;
 }

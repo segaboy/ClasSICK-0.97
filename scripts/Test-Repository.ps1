@@ -37,7 +37,8 @@ foreach ($entry in ($batchJson | ConvertFrom-Json)) {
     $indexedText[[string]$entry.path] = [string]$entry.content
     $indexedSizes[[string]$entry.path] = [long]$entry.size
 }
-$allowedExtensions = @('.md','.json','.yml','.yaml','.ps1','.py','.c','.h','.cmake','.txt','.s','.ld','.inc','.rc','.manifest')
+# Both assembly source dialects remain subject to the text, size and rights checks.
+$allowedExtensions = @('.md','.json','.yml','.yaml','.ps1','.py','.c','.h','.cmake','.txt','.s','.asm','.ld','.inc','.rc','.manifest')
 $allowedNames = @('.gitignore','.gitattributes','CODEOWNERS','CMakeLists.txt','LICENSE')
 $forbiddenDirectories = '(^|/)(reference|private|quarantine|local|\.tools|\.downloads|build|out|artifacts)(/|$)'
 $secretSignatures = '(?m)-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----|\bgh[pousr]_[A-Za-z0-9]{30,}\b|\bgithub_pat_[A-Za-z0-9_]{50,}\b|\bAKIA[0-9A-Z]{16}\b|\bsk-(?:proj-)?[A-Za-z0-9_-]{40,}\b'

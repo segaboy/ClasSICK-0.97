@@ -146,15 +146,26 @@ int cs_inbox_push(cs_window_inbox *b, uint32_t epoch, int32_t dx, int32_t dy,
 }
 
 /* Same-direction checked int32 sum; returns 1 and writes *sum, else 0. */
-static int inbox_axis(int32_t a, int32_t v, int32_t *sum)
+static inline int inbox_axis(int32_t a, int32_t v, int32_t *sum)
 {
     if ((a < 0 && v > 0) || (a > 0 && v < 0)) return 0;
+#if defined(__GNUC__) || defined(__clang__)
+    /* Checked compiler arithmetic maps to the target overflow condition without
+     * ever evaluating an overflowing signed C addition. */
+    return !__builtin_add_overflow(a, v, sum);
+#else
     if (v > 0 && a > INT32_MAX - v) return 0;
     if (v < 0 && a < INT32_MIN - v) return 0;
     *sum = a + v;
     return 1;
+#endif
 }
 
+/* This is an interrupt-producer hot path. Inline its private validation and
+ * enqueue helpers where supported; keep the canonical checks and fallback. */
+#if defined(__GNUC__) || defined(__clang__)
+__attribute__((flatten))
+#endif
 int cs_inbox_push_motion(cs_window_inbox *b, uint32_t epoch, int32_t dx,
     int32_t dy, uint32_t buttons)
 {
