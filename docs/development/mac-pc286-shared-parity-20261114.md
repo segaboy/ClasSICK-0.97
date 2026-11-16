@@ -1317,3 +1317,39 @@ run, commands, source and artifact hashes are in
 `C:/Repos/.task-temp/pc286-fourtrack-guarded-copy-20261115-b/report.json`.
 These are disposable model disks, not a production installer, physical BIOS
 contract, or assurance about other media layouts.
+
+### Disposable-copy write retry
+
+An opt-in SPEC-0108 diagnostic now retries each write up to three times,
+resetting the modeled disk between failures and preserving its retry counter
+around firmware calls. A reset failure or exhaustion reaches `e1`. The
+original profiles are unchanged. The independent BootHush write-occurrence
+facility injected the first write failure on each of three tracks: all three
+copies recovered and produced the exact intended whole-disk image. Persistent
+failure on each track stopped after three injections, preserving exactly the
+preceding modeled writes. A no-retry control stopped on its first failure,
+and the existing guarded, verification and long-prefix controls passed.
+Only complete modeled no-transfer faults were exercised; neither partial
+physical writes, power loss nor a failed reset were demonstrated. This does
+not qualify an installer, identify or protect real media, or make the paired
+release complete.
+
+BootHush active-profile twin SHA-256
+`3faa76ecc77c2e8d5010e1267ee76755e577ac1252a7127619d93683c432b924`;
+the complete fresh-image commands, hashes, logs and results are in
+`C:/Repos/.task-temp/pc286-write-retry-20261115-b/report.json`. Independent
+emulator device tests, interface semantics, and model limitations are in
+`C:/Repos/boothush/docs/pc286-hard-disk-fault-20261114.md`. This guest was
+developed independently for ClasSICK and does not incorporate game source.
+Twenty-eight byte comparisons with the preceding generator confirmed the
+unchanged default profiles across seven prefix sizes and both guard and
+readback-mutation settings. On the same emulator, the native 286 window
+session and eight modeled Mac/286 state and full-pixel comparisons with Mac
+replay passed at 4,096 modeled cycles per mouse edge; identities and results
+are in `C:/Repos/.task-temp/pc286-write-ordinal-session-20261115-a/report.json`
+and `C:/Repos/.task-temp/mac-pc286-write-ordinal-parity-20261115-a/report.json`.
+
+```powershell
+$py = 'C:/Users/segab/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/python.exe'
+& $py -B scripts/Test-BootHushPC286DiagnosticInstall.py --emulator C:/Repos/.task-temp/boothush-write-ordinal-active-20261115-a/a/boothush-active.exe --session C:/Repos/.task-temp/pc286-art-mask-session-20261115-a --output C:/Repos/.task-temp/NEW-WRITE-RETRY
+```

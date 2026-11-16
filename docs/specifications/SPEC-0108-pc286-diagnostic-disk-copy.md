@@ -45,3 +45,11 @@ The diagnostic generator also handles 52..58 staged sectors using an
 expanded staging offset and near error branches. The 58-sector limit here
 comes from the test floppy's payload bound and staging layout, not a BIOS or
 physical-media limit. Shorter existing generator profiles retain their bytes.
+
+An additional opt-in diagnostic profile makes at most three attempts for
+each modeled write and issues a disk reset between failures. It restores the
+attempt counter around modeled firmware calls and reloads the request; a
+reset failure or exhausted attempts leads to `e1`. Verification and the
+optional prefix preflight remain separate. This profile has not established
+physical write atomicity, reset behavior, recovery from partial writes or a
+safe retry procedure for real media.

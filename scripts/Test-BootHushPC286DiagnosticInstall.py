@@ -24,13 +24,13 @@ SECTORS_PER_TRACK = 17
 def sha(path):return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
-def stage2(prefix, *, corrupt_readback=False, require_blank_prefix=False):
+def stage2(prefix, *, corrupt_readback=False, require_blank_prefix=False, retry_writes=False):
     if not prefix or len(prefix) % SECTOR:
         raise ValueError('sector-aligned nonempty target required')
     count = len(prefix)//SECTOR
     # Four-track code needs near error branches and additional staging room.
     # Keep the established shorter profiles byte-identical.
-    near_errors=count>3*SECTORS_PER_TRACK
+    near_errors=count>3*SECTORS_PER_TRACK or retry_writes
     blob = 2*BLOB_OFFSET if near_errors else BLOB_OFFSET
     scratch = (blob+len(prefix)+15)&~15
     if count > 4*SECTORS_PER_TRACK or scratch+len(prefix) > 0xf000 or blob+len(prefix) > MAX_PAYLOAD:
@@ -54,9 +54,23 @@ def stage2(prefix, *, corrupt_readback=False, require_blank_prefix=False):
         remaining = count;head = 0;offset = 0
         while remaining:
             part = min(remaining, SECTORS_PER_TRACK)
+            if operation==3 and retry_writes:
+                # Three attempts, with a reset between failures. Preserve the
+                # counter across BIOS calls, and reload the full request.
+                code += bytes.fromhex('bf0300')
+                retry=len(code)
             code += b'\xbb'+struct.pack('<H',address+offset)+bytes((0xb8,part,operation))
             code += bytes.fromhex('b90100 ba')+struct.pack('<H',(head<<8)|0x80)
-            if near_errors:
+            if operation==3 and retry_writes:
+                code += bytes.fromhex('57 cd13 5f 73');success=len(code);code.append(0)
+                code += bytes.fromhex('4f 7503 e9');near_branches.append((len(code),3));code += b'\0\0'
+                code += bytes.fromhex('57 b80000 ba8000 cd13 5f 7303 e9')
+                near_branches.append((len(code),3));code += b'\0\0'
+                code += b'\xe9'+struct.pack('<h',retry-(len(code)+3))
+                delta=len(code)-success-1
+                if not -128<=delta<=127:raise ValueError('retry success branch outside range')
+                code[success]=delta & 255
+            elif near_errors:
                 code += bytes.fromhex('cd13 7303 e9');near_branches.append((len(code),operation));code += b'\0\0'
             else:
                 code += bytes.fromhex('cd13 72');branches.append((len(code),operation));code.append(0)
@@ -237,6 +251,33 @@ def main():
     guarded_mismatch=run('guarded-mismatch',['--floppy',guarded_mutant,'--hard-disk',blank,
                          '--disk-out',guarded_mismatch_disk,'--until-post','0xe3'],0xe3)
     if sha(guarded_mismatch_disk)!=before['disk']:raise ValueError('guarded readback mutation changed disk')
+    # Exercise a bounded retry only on freshly generated diagnostic media.
+    # The original unguarded and guarded profiles are deliberately unchanged.
+    retry_source=out/'retry-guarded-floppy.img'
+    retry_source.write_bytes(floppy(stage2(prefix,require_blank_prefix=True,retry_writes=True),0))
+    retry_cases=[]
+    for head in range((prefix_size//SECTOR+SECTORS_PER_TRACK-1)//SECTORS_PER_TRACK):
+        chs=f'0:{head}:1';written=head*SECTORS_PER_TRACK*SECTOR
+        recovered=out/('retry-recovered-%d.img'%head)
+        transient=run('retry-transient-%d'%head,['--floppy',retry_source,'--hard-disk',blank,
+                      '--disk-out',recovered,'--until-post','0xac','--fail-hard-disk-write-at',chs+':1'],0xac)
+        fault=transient['result']['hard_disk_write_failure']
+        if (fault['matched'],fault['injected'],sha(recovered))!=(2,1,before['disk']):
+            raise ValueError('retry did not recover transient write without changing result')
+        stopped=out/('retry-stopped-%d.img'%head)
+        persistent=run('retry-persistent-%d'%head,['--floppy',retry_source,'--hard-disk',blank,
+                       '--disk-out',stopped,'--until-post','0xe1','--fail-hard-disk-write',chs],0xe1)
+        expected=hashlib.sha256(prefix[:written]+bytes(DISK_BYTES-written)).hexdigest()
+        if persistent['result']['hard_disk_write_failure']['injected']!=3 or sha(stopped)!=expected:
+            raise ValueError('retry did not stop after three failed writes with expected partial disk')
+        retry_cases.append({'head':head,'transient':transient,'persistent':persistent,
+                            'recovered_sha256':sha(recovered),'stopped_sha256':sha(stopped)})
+    # A first-write transient must stop the original no-retry guest.
+    control_disk=out/'no-retry-control.img'
+    no_retry=run('no-retry-control',['--floppy',guarded,'--hard-disk',blank,'--disk-out',control_disk,
+                 '--until-post','0xe1','--fail-hard-disk-write-at','0:0:1:1'],0xe1)
+    if sha(control_disk)!=blank_sha or no_retry['result']['hard_disk_write_failure']['injected']!=1:
+        raise ValueError('no-retry control did not stop without writing')
     # Exercise the fourth-track boundary and largest prefix allowed by the
     # 512-byte stage offset, with original generated media only.
     long_cases=[]
@@ -283,6 +324,7 @@ def main():
             'guarded_write_failures':guarded_write_failures,'guarded_verify_failures':guarded_verify_failures,
             'guarded_readback_mismatch':guarded_mismatch,
             'four_track_cases':long_cases,
+            'retry_floppy_sha256':sha(retry_source),'write_retry_cases':retry_cases,'no_retry_control':no_retry,
             'unguarded_overwrite':unguarded,'outside_prefix_control':outside_result,
             'limits':'Fresh whole-disk BootHush test only; no partitioning, recovery, physical installation or production claim.'}
     (out/'report.json').write_text(json.dumps(report,indent=2)+'\n',encoding='utf-8')
