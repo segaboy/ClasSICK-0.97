@@ -490,3 +490,28 @@ unchanged, as recorded in
 `C:/Repos/.task-temp/classick-source-type-guards-20261116-b/report.json`.
 The initial control run correctly rejected NUL data but expected the wrong
 error stage; that assertion was corrected without weakening the guard.
+
+### Follow-up sampling control
+
+After the retained inbox change, a separate original experiment evaluated the
+eligible three-sample stability predicate once in a non-inlined byte helper.
+All 30 focused host tests and native image twins passed, but the same-build
+timing comparison regressed: longest complete IPL7 spans were 5,312 / 5,310
+cycles at edge intervals 2,048 / 4,096. The fast +32 X request ended at X=257
+with 25 omissions; the slow control reached X=288 with none. Both traced/plain
+pairs matched. This experiment was rejected and `motion.c` restored exactly.
+
+ROM SHA-256 `0de1d1ac21e69dbf11221eac04d286e1e5220415addeb2eace5ac205a34ba48e`;
+47,900 ROM bytes. Manifest and all 49 hash-verified source inputs are preserved
+in `C:/Repos/.task-temp/mac-masked-stability-20261116-a` and its `-source`
+sibling. Commands, states and frames are in
+`C:/Repos/.task-temp/classick-masked-stability-mask-20261116-a/report.json`;
+host logs are `classick-masked-host-build-20261116-a.log` and
+`classick-masked-host-test-20261116-a.log` in the same scratch root. The
+previously recorded engineering snapshot remains the retained result.
+
+Inspection of our generated interrupt boundary also identified duplicate
+register saves between the all-register veneer and compiler-generated C
+prologues. No narrower save mask was adopted: that would require a separate
+calling-convention contract and register/SR/stack preservation controls. It
+is an optimization candidate, not a proven fix or a changed hardware claim.
