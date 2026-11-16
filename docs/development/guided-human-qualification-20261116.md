@@ -291,3 +291,22 @@ delivery, foreground consumption and cursor composition before changing
 axis gains. P1 can independently qualify the 286 keyboard path and shared
 scene interactions; it cannot close this Mac issue. Frozen release files
 and the unqualified release disposition remain unchanged.
+
+## P1 286 admission
+
+The first 286 owner round uses the unchanged preview hard disk
+`6f17583422edf2eddd4e5c325020a3538b4333a0a3305ca350b99cf91e992ba6`,
+the previously validated BootHush executable
+`fe262bc58ae58cb1d9b22ae5f409b71693e6ebf0fd305e4846692a5873588de8`,
+and the original diagnostic font
+`0d2224d4908bd4856e001b1e7aeb2409b92ebd785d5691d41db6253759ea0517`.
+The native window is scale 2, limited to five minutes with complete guest
+video at 5 fps, accepted keyboard log and final diagnostics at `0x60000:17`.
+The launcher verifies input hashes before opening; mounted disk changes are
+not saved. No scheduled guest inputs are supplied.
+
+Prepared plan and resulting session directory:
+`C:/Repos/boothush/out/qualification-20261116-a/P1-pc286`.
+The owner is to check arrow-key movement, Space-toggle drag/release and
+pattern changes. Human feedback is pending. Mac M1/M2 and subsequent 286
+cases remain open; this admission is not a passing result.
