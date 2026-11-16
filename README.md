@@ -1,5 +1,11 @@
 # ClasSICK 0.97
 
+Current work, 2026-11-16: the active pair is Mac68000 and native 286; x64
+development is paused. [Latest continuation and cross-project evidence](docs/development/input-followup-20261116.md)
+records the current tested images, BootHush capability and remaining release
+dependencies. The paired release is still unqualified. Entries below retain
+their dated historical scope.
+
 2026-10-19 source-review continuation, SRC-0314/0315: owner clears narrow published mouse review; earlier hold resolved, declaration excluded. First pointer/input contract/inventory slice complete with Mac adapter gaps M1-M7; no code, tests, build or trial. Next recommended: bounded cursor composition contract. [Review](docs/development/mac-pointer-source-review.md). Older held checkpoints below are historical. Existing gates and released capabilities remain unchanged.
 
 2026-10-19: release2 pointer/input engineering contract reviewed;68 cases unexecuted. PC GUI/device/human evidence separated;Mac motion source review held for owner disposition. No runtime/release change. [Review](docs/development/pointer-input-contract-review.md).

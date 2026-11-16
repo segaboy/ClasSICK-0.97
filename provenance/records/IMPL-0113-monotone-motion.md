@@ -1,5 +1,9 @@
 # IMPL-0113 - Optional monotone input coalescing
 
+2026-11-16 follow-up: zero operands bypass general checked addition while
+preserving SPEC-0097's sum and admission rules. Original portable code,
+self-reviewed by Codex; [measurements and limitations](../../docs/development/input-followup-20261116.md).
+
 2026-11-16: original compiler-assisted checked addition and selective private
 helper inlining reduce the native producer cost without changing SPEC-0097.
 The portable C addition path remains available to the 286 compiler. Codex

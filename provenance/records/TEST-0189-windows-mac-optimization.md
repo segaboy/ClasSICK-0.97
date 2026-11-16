@@ -35,3 +35,9 @@ The source-type guard also passes three isolated-index controls: original
 `.asm` source is accepted, NUL data and executable extensions are rejected,
 and the real index remains unchanged. This restores validation of the existing
 original 286 assembly without admitting binary payloads; see the same receipt.
+
+2026-11-16 follow-up: zero-operand refinement passes five rebuilt inbox tests,
+native Mac twins, traced/plain comparisons and the slower eight-state paired
+full-pixel/replay test on the new BootHush build. Fast +X still fails.
+[Canonical receipt](../../docs/development/input-followup-20261116.md) owns
+identities, commands, costs and limits; no release gate is closed.

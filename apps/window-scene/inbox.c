@@ -148,6 +148,10 @@ int cs_inbox_push(cs_window_inbox *b, uint32_t epoch, int32_t dx, int32_t dy,
 /* Same-direction checked int32 sum; returns 1 and writes *sum, else 0. */
 static inline int inbox_axis(int32_t a, int32_t v, int32_t *sum)
 {
+    /* Pure horizontal/vertical motion has an idle axis. Its sum cannot
+     * overflow or reverse direction; avoid the general checked-add path. */
+    if (v == 0) { *sum = a; return 1; }
+    if (a == 0) { *sum = v; return 1; }
     if ((a < 0 && v > 0) || (a > 0 && v < 0)) return 0;
 #if defined(__GNUC__) || defined(__clang__)
     /* Checked compiler arithmetic maps to the target overflow condition without

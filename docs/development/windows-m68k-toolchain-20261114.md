@@ -680,3 +680,8 @@ remains a separate experiment. This snapshot is not a release candidate or
 installer; the previously retained snapshot remains untouched. The indexed
 repository guard passes 1,819 text/source files, 134 registered PNGs and two
 reviewed GIFs; independent provenance review is not established by that guard.
+
+The subsequent [input and post-interaction follow-up](input-followup-20261116.md)
+records a small zero-axis cost reduction, the new BootHush later-PC stop,
+port recovery-jump feedback and another passing slower paired comparison.
+Fast motion and the remaining release requirements stay open.
