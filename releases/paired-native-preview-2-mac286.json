@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "candidate": "paired-native-preview-2",
+  "date": "2026-11-16",
+  "status": "modeled-pair-prepared-for-release-review",
+  "ready_for_review": true,
+  "ready_for_release": false,
+  "published": false,
+  "native_targets": ["68000 Macintosh 128K", "80286 PC/AT 5170, 6 MHz, 640 KiB, EGA"],
+  "proposed_versions": {"rom": "0.4.0-alpha.1", "pc": "0.2.0-alpha.1"},
+  "current_version_registry_unchanged": "releases/components.json",
+  "supersedes_active_target_plan": "releases/paired-native-preview-2.json",
+  "receipt": "docs/development/paired-preview-readiness-20261116.md",
+  "trying": "releases/TRYING-paired-mac286.md",
+  "images": {
+    "mac/classick.rom": {"bytes": 65536, "sha256": "baa542304ec55bcfd2fecae7c594bb8e161275e49f6c3145886f2ab2f52f75be"},
+    "pc286/hard-disk.img": {"bytes": 21411840, "sha256": "6f17583422edf2eddd4e5c325020a3538b4333a0a3305ca350b99cf91e992ba6"},
+    "pc286/install-floppy.img": {"bytes": 1228800, "sha256": "399d69b06a5fc231a47a08118440a71caf6d707ecb21a8054c9946b983c7bc6b"}
+  },
+  "tested_emulator_sha256": "8860227d991a6c6d252815019c2458a1b0af3cae49306ce43e7fdaff5dd04e3b",
+  "completed": [
+    "Windows-native source-matched Mac twins and native 286 payload; no external 286 runtime modules",
+    "Mac buffered IRQ capture; 29 rebuilt motion/inbox tests and 12132 FIFO assertions at each of O0/O2",
+    "Mac full-register interrupt preservation and excessive-burst cancel/rebaseline",
+    "16 fixed-profile boot/install cases with actual failure injections and unchanged refusal targets",
+    "8 shared states at each of edge-2048 and edge-4096; complete pixels, margins and replay",
+    "14 additional three-way state/pixel checkpoints covering four-corner clamping, cursor restoration and repeated content presses",
+    "Original installer font, screenshots, checkpoint GIF and 13.1-second continuous Mac MP4"
+  ],
+  "acceptance": {
+    "E1": "Scoped host, scalar-state and rendering checks pass; earlier legacy regressions remain separately recorded",
+    "E2": "Exact images pass the named scheduled-input/installation checks; startup-held and full target cancellation/fault matrix remain incomplete",
+    "E3": "Actual visible host GUI input not qualified for this pair",
+    "E4": "Human operation unavailable; author visual capture inspection is not E4",
+    "physical": "Unverified under current BootHush-only testing direction",
+    "provenance": "Author self-review and repository guard; independent human/tool/source review pending"
+  },
+  "owner_disposition_required": [
+    "Accept the stated incomplete/unavailable input, physical and independent-review criteria for this bounded experimental preview, or retain them as release blockers",
+    "Separate publication decision after package review; no tag or release is authorized by this record"
+  ],
+  "preserved_long_term_gates": ["historical and edition identity", "physical/full128K", "B2 criterion 6", "both System1/ROM interoperability directions", "native external applications", "Linux complete edition"],
+  "scope": "One original native window and cursor; no replacement System release, general application compatibility or completed game port"
+}

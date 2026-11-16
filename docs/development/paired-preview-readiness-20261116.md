@@ -77,9 +77,86 @@ for 1,558 cycles inside a 3,420-cycle SCC span, identified in
 foreground inbox exclusion is the material architectural change. Failed
 attempts are not passing qualifications; the new API is opt-in.
 
-## Remaining paired work
+## Preview boot disk and installer
 
-The fast-input regression above is fixed at the tested rates. Production
-286 media/installer work, the other existing release gates, physical/human
-qualification, source/tool review and publication disposition remain separate.
-This receipt does not declare a completed release or waive any such gate.
+SPEC-0110 / IMPL-0139 / TEST-0197 add original assembly for a 329-byte boot
+sector and 1,302-byte installer. The existing native window payload remains
+22,382 bytes with 21,936 BSS bytes, ending at near offset 44,318; the stack
+starts at 65,534. This is a linked separation budget, not a measured worst-case
+stack bound. The installer staging ends at 27,136 below scratch at 28,672.
+No external runtime modules are linked. The supported disk model is exactly
+615/4/17, 21,411,840 bytes, owned in full without a partition table/filesystem.
+
+The installer checks the staged prefix, asks for INSTALL, scans the entire
+target for zeros, writes/verifies payload sectors and commits the boot sector
+last. The loader checks memory/geometry, retries reads and verifies CRC before
+entering the unchanged payload. These are original preview paths qualified
+in BootHush's BIOS model, not physical installation guarantees.
+
+Retained build: `C:/Repos/.task-temp/pc286-preview-media-20261116-c/media.json`.
+Hard disk: `6f17583422edf2eddd4e5c325020a3538b4333a0a3305ca350b99cf91e992ba6`.
+Floppy: `399d69b06a5fc231a47a08118440a71caf6d707ecb21a8054c9946b983c7bc6b`.
+Payload: `bb0f402bbf7b9d22d7999f7afc6e44f8defdc74de4acc012af2f349818dfd336`.
+
+`C:/Repos/.task-temp/pc286-preview-qualification-20261116-b/report.json`
+passes 16 media cases: prompt, cancel, installation, installed boot, occupied
+first/last byte, corrupted staged data, persistent payload/boot-sector write
+failures, preflight read failure, transient write/read recovery, bad payload
+CRC, first/final payload-sector read failures and boot read retry. Failure
+injection counts are checked. Refusal images stay unchanged; successful
+installation is byte-identical to the complete prepared disk. Installed boot
+reaches POST B0 at 7,205,065 modeled cycles. All eight native interaction
+states match their prior independently-oracled frames and memory. Prior
+payload mutation/IRQ checks are explicitly inherited, not represented as
+fresh media tests; this loader clears BSS without the old diagnostic poison.
+
+Both final disk/ROM comparisons pass all eight states at edge intervals
+2,048 and 4,096, with zero omissions/losses/faults, exact 175,104-pixel canvas,
+48,896 white margin pixels and cycle/memory/frame replay. Reports are
+`paired-preview-parity-2048-20261116-a/report.json` and the corresponding
+4096 directory under `C:/Repos/.task-temp`. These supersede the earlier
+diagnostic-disk pairing for the prepared package.
+
+`paired-preview-edges-20261116-c/report.json` adds 14 checkpoints over 172
+samples on the same images: four-corner drag/clamp, release, cursor restoration,
+content hover and three press/release pairs with repeated keyboard makes.
+An independent scalar oracle checks state/counts; shared hosted rendering and
+both native frames match at every checkpoint. Mac input uses relative motion
+at edge 2,048. Earlier -a rejected out-of-canvas window-message arguments;
+-b exceeded the 1,024 scheduled-input limit in a longer PC sequence. These
+were harness refusals, not passing guest checks; the bounded -c is retained.
+
+## Capture evidence
+
+`scripts/Capture-PairedPreview.py` generated
+`C:/Repos/.task-temp/paired-preview-captures-20261116-a/capture.json`.
+The GIF shows eight matched checkpoints at one second each; it does not
+represent continuous synchronized platform timing. The MP4 is an actual
+continuous Mac guest-time capture: 131 samples at 10 fps, 13.1 seconds, no
+audio. Its final frame exactly matches qualification. FFmpeg decoding passes;
+the paired and installer PNGs and a decoded video frame were visually
+inspected. This is author inspection of emulator output, not E4 human input.
+
+BootHush's original diagnostic lettering enables readable installer/error
+captures without a firmware font. Font SHA-256:
+`0d2224d4908bd4856e001b1e7aeb2409b92ebd785d5691d41db6253759ea0517`.
+It has deliberately limited glyph coverage and is not historical EGA artwork.
+The port separately rendered its already-qualified recovery-jump samples;
+that prototype is not part of the ClasSICK binary pair.
+
+## Release disposition
+
+The review package uses the fixed-profile preview loader and installer above.
+The Mac/286 current preparation record is
+[`releases/paired-native-preview-2-mac286.json`](../../releases/paired-native-preview-2-mac286.json).
+The old x64 plan remains historical. The fast-input regression, original
+installation path, modeled parity and review packaging are now concrete.
+No public version/tag or published immutable prerelease was changed.
+
+Open: actual GUI-host input and human disposition, physical Mac polarity/full
+128K/PC hardware qualification, independent source/tool/provenance review,
+startup-held and full target cancellation/fault acceptance, and the existing
+historical/edition/System interoperability gates. The sustained stress test
+above covers one cancellation/rebaseline path, not every failure mode.
+The owner must explicitly dispose of unavailable criteria before declaring
+this bounded experimental preview release-ready. Publication is separate.

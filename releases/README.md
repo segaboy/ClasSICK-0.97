@@ -5,8 +5,11 @@ milestone targets Mac128K and native 286, replacing the older x64 half.
 The original behavior, parity, provenance, human/physical qualification and
 release requirements remain; see the [current direction](../docs/development/mac-286-paired-direction-20261114.md)
 and [current modeled evidence](../docs/development/mac-pc286-shared-parity-20261114.md).
-No Mac/286 release candidate or publication has been established. The dated
-Mac/x64 plans and published releases below remain historical.
+The [current Mac/286 review record](paired-native-preview-2-mac286.json)
+identifies the tested ROM, boot disk, installer, evidence and remaining owner
+disposition. A source-matched review package is prepared; release approval
+and publication remain open. The dated Mac/x64 plans and published releases
+below remain historical.
 
 Next release goal proposed2026-10-19: [paired-native-preview-2](paired-native-preview-2.md),one interactive original native window with pointer/cursor and matched Mac/PC behavior. Proposed0.4ROM/0.2PC alpha versions,not assigned published versions. Contract/source sufficiency comes first;no implementation/trial/release authorized by this plan.
 

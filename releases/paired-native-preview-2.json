@@ -1,5 +1,6 @@
 {
   "schema_version": 1,
+  "historical_plan_notice": "The active Mac/286 preparation is releases/paired-native-preview-2-mac286.json. Fields below preserve the older x64 planning snapshot, not current authorization or progress.",
   "candidate": "paired-native-preview-2",
   "status": "pc-controller-delivery-verified-window-boot-unbound",
   "goal": "first interactive original native window",

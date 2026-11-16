@@ -1,7 +1,7 @@
 # ClasSICK 0.97
 
 Current work, 2026-11-16: the active pair is Mac68000 and native 286; x64
-development is paused. [Latest continuation and cross-project evidence](docs/development/input-followup-20261116.md)
+development is paused. [Latest continuation and cross-project evidence](docs/development/paired-preview-readiness-20261116.md)
 records the current tested images, BootHush capability and remaining release
 dependencies. The paired release is still unqualified. Entries below retain
 their dated historical scope.
