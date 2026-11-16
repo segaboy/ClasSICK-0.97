@@ -232,3 +232,62 @@ M1R4 keeps the same BootHush and 2048-record ROM identities, edge 4096,
 inversion 3, VBL guard 4096 and 2x zoom; only initial sensitivity becomes
 300 percent (25 percent slower than M1R3). This is a configuration retest,
 not a new build or a human pass. Comfort and precise interaction remain pending.
+
+## M1R4 recording and axis investigation
+
+Owner report: "Horizontal movement feels faster than vertical movement in the
+emulator... Maybe you should just record a video of the emulator while I move
+the mouse..." After requested horizontal/vertical sweeps and a circle/square,
+the owner reported "ok, done." This confirms completion of the requested
+recording, not acceptance of sensitivity or a new interaction pass.
+
+M1R4 closed normally after 223.860 wall seconds, with unchanged inputs and
+300-percent gain throughout. It retained 2700 raw packets, two starts/releases,
+2698 scaled samples and 12862 pin steps. Pending input, decoder losses,
+omissions, FIFO overflows and guest faults were all zero; FIFO peak was 40.
+The 512x342 guest video contains 1119 frames at 5 fps without truncation.
+Original evidence remains in
+`C:/Repos/boothush/out/qualification-20261116-a/M1R4-mac`.
+No agent test motions were injected during the human session.
+
+The actual recording excerpt `M1R4-axis-analysis/axis-comparison.mp4` covers
+guest seconds 201-221; its manifest records source/output hashes and FFmpeg
+conversion. The contact sheet was visually inspected. Some sweeps reach the
+left/top limits, so their endpoint displacement cannot measure unconstrained
+physical hand travel. The recording contains guest pixels, not the Windows
+pointer or the user's hand. The trace records accepted scaled vectors, not
+raw device counts. A 5-fps recording cannot resolve a 20-ms delay.
+
+Headless replay of the complete recorded trace exactly matches final guest
+RAM and pixels. All 31 checked recording frames, sampled from 201.8 through
+219.8 seconds, also exactly match replay. This validates the replay against
+the captured guest behavior; it does not qualify host-device handling.
+Reproduction, commands and comparisons: `M1R4-axis-analysis/video-analysis.json`
+under the same qualification root.
+
+Controlled equal-axis tests use identical accepted vectors, edge 4096,
+inversion 3, VBL guard 4096 and the unchanged emulator/2048-record ROM.
+All eight cases (single 64-pixel bursts and 64 one-pixel events at about
+125 Hz, each in four directions) move exactly 64 pixels on the requested
+axis with zero loss, omission, pending input, overflow or fault.
+First diagnostic completion of the bursts takes 135.1-137.1 modeled ms.
+For the streams, completion after the last input takes 62.3-65.4 ms for X
+and 85.4-86.2 ms for Y. These are guest diagnostic writes after composition,
+not physical device-to-screen latency. Receipts:
+`C:/Repos/.task-temp/equal-axis-20261116-a/report.json` and
+`completion-timing.json` in that directory.
+
+Thirty-two further stream runs vary the start across eight offsets spanning
+one VBL period. All complete exactly without loss. In 15 of the 16 paired
+direction/timing comparisons, Y settles 16.5-23.9 modeled ms later than X;
+one comparison reverses the difference by 4.6 ms. This supports a small,
+timing-dependent response difference in these workloads, not different
+movement gain or proof of the cause of the owner's perception. Receipt:
+`C:/Repos/.task-temp/axis-phase-20261116-a/report.json`.
+
+No code, sensitivity or zoom was changed during this investigation. Mac
+responsiveness remains open. Further attribution should separate quadrature
+delivery, foreground consumption and cursor composition before changing
+axis gains. P1 can independently qualify the 286 keyboard path and shared
+scene interactions; it cannot close this Mac issue. Frozen release files
+and the unqualified release disposition remain unchanged.

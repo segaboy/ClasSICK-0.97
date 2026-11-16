@@ -25,3 +25,9 @@ excessive-rate recovery, and consumes the M1R2 accepted vectors scaled by
 1/2/4 without losses. Smaller-buffer failures remain retained. These are
 modeled checks; M1R3 human sensitivity is pending. See the
 [guided human receipt](../../docs/development/guided-human-qualification-20261116.md).
+
+M1R4 follow-up: the recorded trace reproduces final RAM/frame and all 31
+sampled video frames exactly. Eight equal-distance axis cases and 32 varied
+start-time streams complete without input loss. A small timing-dependent
+axis completion difference remains; human responsiveness is not qualified.
+The same guided receipt owns commands, identities, results and limits.
