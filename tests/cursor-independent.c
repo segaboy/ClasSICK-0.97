@@ -422,11 +422,34 @@ static void padding_prefix(void) {
       CK(cs_cursor_unbind(&st,t)==CS_CURSOR_OK); }
 }
 
+/* Exhaust every art width/hotspot and destination byte alignment, including
+ * left/right clipping and a centered canvas whose origin is not byte aligned.
+ * Expected pixels still come from the independent per-pixel oracle above. */
+static void mono_row_matrix(void) {
+    size_t layout;
+    int32_t w, hx, alignment;
+    cs_cursor_bits bits;
+    cs_cursor_art art;
+    for (layout = 0; layout < 3; layout++) {
+        for (w = 1; w <= 16; w++) {
+            for (hx = 0; hx < w; hx++) {
+                mk(&bits, &art, w, 3, hx, 1, 0);
+                for (alignment = 0; alignment < 8; alignment++) {
+                    seq(&LS[layout], &art, 32 + alignment, 100);
+                    seq(&LS[layout], &art, alignment, 0);
+                    seq(&LS[layout], &art, 511 - alignment, 341);
+                }
+            }
+        }
+    }
+}
+
 int main(void) {
     size_t i;
     for (i = 0; i < sizeof LS / sizeof LS[0]; i++) { det(&LS[i]); motion(&LS[i], 40); }
     life();
     padding_prefix();
+    mono_row_matrix();
     printf("cursor-independent: %d failing checks\n", fails);
     return fails != 0;
 }

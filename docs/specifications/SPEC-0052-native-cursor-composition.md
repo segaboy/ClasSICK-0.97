@@ -249,6 +249,18 @@ The section 3 layout and the stack target are theoretical. Nothing here was buil
 
 This is not a full 128K System certification.
 
+## Byte-row execution amendment, 2026-11-16
+
+The Mono implementation may assemble each validated art row from its two
+explicit bytes, align it using unsigned shifts, and compose at most three
+destination bytes. Preserve the exact clipped masks, packed whole-byte save
+prefix, transparent pixels and all original refusal ordering/atomicity.
+Restore masks may be computed once per rectangle in temporary storage rather
+than once per row; no persistent state, ABI or capacity changes are introduced.
+The independent per-pixel oracle remains the conformance path. RGBA semantics
+and implementation remain per-pixel. Measure native timing, image size and
+stack against the retained scalar baseline before selecting the optimization.
+
 
 ## Helper verification checkpoint -2026-10-20
 

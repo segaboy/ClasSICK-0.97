@@ -21,6 +21,9 @@ def main():
     a=p.parse_args();cfg=read(a.inputs);paths={k:Path(v).resolve() for k,v in cfg['paths'].items()};out=a.output.resolve()
     if out==ROOT or ROOT in out.parents:raise ValueError('output must be external')
     candidate=read(ROOT/'releases/paired-native-preview-2-mac286.json')
+    receipt=Path(candidate['receipt'])
+    if receipt.is_absolute() or '..' in receipt.parts or receipt.parts[:2]!=('docs','development'):
+        raise ValueError('qualification receipt must be a repository development record')
     mac=read(paths['mac-build']/'manifest.json');q=read(paths['qualification']/'report.json')
     media=read(paths['pc-media']/'media.json');pcdir=Path(q['session']);pc=read(pcdir/'report.json')
     fast=read(paths['parity-fast']/'report.json');slow=read(paths['parity-slow']/'report.json')
@@ -59,7 +62,7 @@ def main():
     for name,digest in mac['inputs'].items():admitted(name,digest,True)
     for name,digest in {**pc['source_sha256'],**edges['source_sha256']}.items():admitted(name,digest)
     for name in ('scripts/Prepare-PairedPreviewReview.py','scripts/Verify-PairedPreviewReview.py','scripts/Capture-PairedPreview.py',
-                 'releases/paired-native-preview-2-mac286.json','releases/TRYING-paired-mac286.md'):
+                 'releases/paired-native-preview-2-mac286.json','releases/TRYING-paired-mac286.md',receipt.as_posix()):
         admitted(name,sha(ROOT/name))
     out.mkdir(parents=True,exist_ok=False)
     def copy(source,name):
@@ -71,7 +74,7 @@ def main():
         (ROOT/'releases/TRYING-paired-mac286.md','TRYING.md'),
         (ROOT/'releases/TRYING-paired-mac286.md','TRYING.txt'),
         (ROOT/'releases/paired-native-preview-2-mac286.json','candidate.json'),
-        (ROOT/'docs/development/paired-preview-readiness-20261116.md','QUALIFICATION.md'),
+        (ROOT/receipt,'QUALIFICATION.md'),
         (ROOT/'scripts/Verify-PairedPreviewReview.py','verify-package.py')):copy(source,name)
     reports={'mac-build.json':paths['mac-build']/'manifest.json','pc286-media.json':paths['pc-media']/'media.json',
              'pc286-qualification.json':paths['qualification']/'report.json','pc286-session.json':pcdir/'report.json',

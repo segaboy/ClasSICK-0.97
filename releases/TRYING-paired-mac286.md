@@ -15,7 +15,7 @@ Physical machines and general BIOS/storage compatibility are unqualified.
 ## Bounded headless runs
 
 Use the already identified local BootHush active-profile executable. Its
-SHA-256 is `8860227d991a6c6d252815019c2458a1b0af3cae49306ce43e7fdaff5dd04e3b`.
+SHA-256 is `fe262bc58ae58cb1d9b22ae5f409b71693e6ebf0fd305e4846692a5873588de8`.
 No emulator/compiler/FFmpeg binary is bundled. These commands need no WSL,
 desktop window or other emulator. In PowerShell, set `$preview` to the
 unpacked directory and `$bh` to that executable. Use new output filenames.
@@ -39,7 +39,8 @@ These polarity/timing choices are model observations, not hardware settings.
 The 286 keyboard adapter moves 16 pixels per arrow make; holding Space holds
 the primary button, releasing Space releases it. Repeated Space makes do
 not create additional clicks. Escape is not an exit command. Bounded command
-runs end automatically. Actual host GUI/human input remains unqualified.
+runs end automatically. This refreshed pair needs human qualification; prior Mac owner feedback
+and unresolved response issues are retained in the source human receipt.
 
 ## Installer and failure codes
 
@@ -76,7 +77,7 @@ Use the pinned Windows-native m68k tools and Open Watcom/assembler from those
 manifests, plus the existing Windows Clang for hosted checks.
 
 ```text
-python -B scripts/Build-LoadedAppROM.py --windows-native --tool-root M68K_BIN --window-drawing --window-fast-collect --window-short-collect --window-buffered-collect --window-loss-counts --dcd-invert3 --output NEW_MAC_BUILD
+python -B scripts/Build-LoadedAppROM.py --windows-native --tool-root M68K_BIN --window-drawing --window-fast-collect --window-short-collect --window-buffered-collect --window-burst-capture --window-capture-capacity 2048 --window-loss-counts --dcd-invert 3 --output NEW_MAC_BUILD
 python -B scripts/Test-BootHushPC286SharedSession.py --tool-root WATCOM_ROOT --assembler WASM --host-cc CLANG --emulator BOOTHUSH --output NEW_PC_PAYLOAD --natural-start --raw-keyboard --verify-crc16 --verify-geometry --retry-reads --hard-disk
 python -B scripts/Build-PC286PreviewMedia.py --session NEW_PC_PAYLOAD --assembler WASM --linker WLINK --output NEW_PC_MEDIA
 python -B font/make_diagnostic_font.py --output NEW_FONT

@@ -250,19 +250,66 @@ static void cur_restore(const cs_cursor_state *st)
     const uint8_t *src = st->payload;
     int32_t l = st->save_left, r = st->save_right, y, c;
     uint8_t *row;
-    uint8_t m;
+    uint8_t masks[3];
+    int32_t first = 0, count = 0;
+
+    if (l == r)
+        return;
+    if (st->format == CS_SURFACE_MONO1_MSB) {
+        first = l / 8;
+        count = (r - 1) / 8 - first + 1;
+        for (c = 0; c < count; c++)
+            masks[c] = cur_bits_in(first + c, l, r);
+    }
 
     for (y = st->save_top; y < st->save_bottom; y++) {
         row = s->storage + (size_t)y * s->stride;
         if (st->format == CS_SURFACE_MONO1_MSB) {
-            for (c = l / 8; c <= (r - 1) / 8; c++) {
-                m = cur_bits_in(c, l, r);
-                row[(size_t)c] = (uint8_t)((row[(size_t)c] & ~m) | (*src & m));
+            for (c = 0; c < count; c++) {
+                uint8_t m = masks[c];
+                row[(size_t)(first + c)] =
+                    (uint8_t)((row[(size_t)(first + c)] & ~m) | (*src & m));
                 src++;
             }
         } else {
             for (c = 4 * l; c < 4 * r; c++)
                 row[(size_t)c] = *src++;
+        }
+    }
+}
+
+/* At most three destination bytes per row. All validation has completed.
+ * Shift an explicitly assembled 16-bit art row into a 24-bit destination
+ * window; clipped edge masks preserve margins, padding and transparent bits.
+ * No native word loads, endian assumptions or per-pixel division are needed. */
+static void cur_mono_save_draw(cs_cursor_state *st, const cs_cursor_art *art,
+    int32_t ax, int32_t ay)
+{
+    const cs_surface *s = st->surface;
+    const cs_cursor_bits *bits = art->bits;
+    uint8_t *dst = st->payload;
+    int32_t l = st->save_left, r = st->save_right;
+    int32_t first = l / 8, count = (r - 1) / 8 - first + 1;
+    int32_t y, c;
+    unsigned skip = (unsigned)(l - ax);
+    unsigned shift = 8u - ((unsigned)l & 7u);
+    uint8_t clips[3];
+
+    for (c = 0; c < count; c++)
+        clips[c] = cur_bits_in(first + c, l, r);
+    for (y = st->save_top; y < st->save_bottom; y++) {
+        unsigned at = (unsigned)(y - ay) * 2u;
+        uint32_t mask = ((uint32_t)bits->mask[at] << 8) | bits->mask[at + 1u];
+        uint32_t ink = ((uint32_t)bits->image[at] << 8) | bits->image[at + 1u];
+        uint8_t *row = s->storage + (size_t)y * s->stride + (size_t)first;
+        mask = ((mask << skip) & UINT32_C(0xffff)) << shift;
+        ink = ((ink << skip) & UINT32_C(0xffff)) << shift;
+        for (c = 0; c < count; c++) {
+            uint8_t m = (uint8_t)((mask >> 16) & clips[c]);
+            *dst++ = row[c];
+            row[c] = (uint8_t)((row[c] & ~m) | ((ink >> 16) & m));
+            mask <<= 8;
+            ink <<= 8;
         }
     }
 }
@@ -283,7 +330,6 @@ static void cur_save_draw(cs_cursor_state *st, const cs_cursor_art *art,
     int32_t b = cur_min(ay + art->height,
         cur_min(st->frame_h, st->origin_y + CUR_CANVAS_H));
     int32_t row_y, c, i, lo, hi;
-    int mono = st->format == CS_SURFACE_MONO1_MSB;
     uint8_t *row;
     uint8_t v;
     uint32_t at, k; /* Art index<=31; frame byte index<=32767. */
@@ -299,10 +345,16 @@ static void cur_save_draw(cs_cursor_state *st, const cs_cursor_art *art,
     st->save_top = (int16_t)t;
     st->save_right = (int16_t)r;
     st->save_bottom = (int16_t)b;
+    if (l == r)
+        return;
+    if (st->format == CS_SURFACE_MONO1_MSB) {
+        cur_mono_save_draw(st, art, ax, ay);
+        return;
+    }
     for (row_y = t; row_y < b; row_y++) {
         row = s->storage + (size_t)row_y * s->stride;
-        lo = mono ? l / 8 : 4 * l;
-        hi = mono ? (r - 1) / 8 + 1 : 4 * r;
+        lo = 4 * l;
+        hi = 4 * r;
         for (c = lo; c < hi; c++)
             *dst++ = row[(size_t)c];
         for (c = l; c < r; c++) {
@@ -311,21 +363,12 @@ static void cur_save_draw(cs_cursor_state *st, const cs_cursor_art *art,
             bit = 0x80u >> (i % 8);
             if ((bits->mask[at] & bit) == 0u)
                 continue;
-            if (mono) {
-                k = (uint32_t)(c / 8);
-                v = (uint8_t)(0x80u >> (c % 8));
-                if ((bits->image[at] & bit) != 0u)
-                    row[k] = (uint8_t)(row[k] | v);
-                else
-                    row[k] = (uint8_t)(row[k] & ~v);
-            } else {
-                k = (uint32_t)c * 4u;
-                v = (bits->image[at] & bit) != 0u ? (uint8_t)0x00u : (uint8_t)0xFFu;
-                row[k] = v;
-                row[k + 1u] = v;
-                row[k + 2u] = v;
-                row[k + 3u] = (uint8_t)0xFFu;
-            }
+            k = (uint32_t)c * 4u;
+            v = (bits->image[at] & bit) != 0u ? (uint8_t)0x00u : (uint8_t)0xFFu;
+            row[k] = v;
+            row[k + 1u] = v;
+            row[k + 2u] = v;
+            row[k + 3u] = (uint8_t)0xFFu;
         }
     }
 }

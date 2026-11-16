@@ -36,8 +36,8 @@ owner's observations separate.
 | --- | --- | --- | --- |
 | M1 | Mac | Boot scene; move in all four directions; drag the small guest window by its blank title strip; release and move away; click its patterned content twice. Pointer follows direction, only the held drag moves the window, and each content press toggles its pattern. | Failed pointer responsiveness/boundary reach; drag/release/pattern pass by owner report |
 | M2 | Mac | Edges/corners, leave/reenter the viewport, rapid reversal, focus change during a held drag, return and resume. Look for stuck input, drift, missing redraw or lingering corruption. | Not run |
-| P1 | 286 | Boot the same logical scene; arrows move the pointer; tap Space to hold, arrows drag, tap Space again to release; content press/release changes the pattern. | Not run |
-| P2 | 286 | Held/repeated arrows, release, focus switch and return, restart with a key held; distinguish keyboard release from the guest's Space button toggle. | Not run |
+| P1 | 286 | Boot the same logical scene; arrows move the pointer; hold Space while arrows drag, release Space to release the button; one content tap changes the pattern. | No keys received in first session; original toggle instructions corrected below; human input remains untested |
+| P2 | 286 | Held/repeated arrows, release, focus switch and return, restart with a key held; verify Space release and focus-loss release clear the held button. | Not run |
 | I1 | 286 installer | Use a new disposable blank virtual disk: inspect prompt, cancel and verify unchanged media; fresh session install, retain new disk output and boot it. Never select a host/physical disk. | Not run |
 | T1 | Port follow-up | Separate prototype session: mouse title, both players' supported movement/jump/attack controls, simultaneous keys and focus loss. This is not part of the ClasSICK binary pair. | Not run |
 
@@ -134,7 +134,7 @@ Original media, logs and guest video remain in
 
 BootHush's separate agent-operated diagnostic reproduced startup failure and
 identified `ClipCursor`, Win32 error 5 (access denied), before capture could
-complete. The [BootHush receipt](../../../boothush/docs/relative-mouse-20261116.md)
+complete. The [BootHush receipt](https://github.com/segaboy/boothush/blob/3f8afe06ddd6d876c8b7796d707d3611b25fbbc4/docs/relative-mouse-20261116.md)
 records the diagnostic session, API-contract sources and automated tests.
 An attempted second agent UI inspection timed out; its untouched session
 reached the time limit and is not a capture pass.
@@ -310,3 +310,23 @@ Prepared plan and resulting session directory:
 The owner is to check arrow-key movement, Space-toggle drag/release and
 pattern changes. Human feedback is pending. Mac M1/M2 and subsequent 286
 cases remain open; this admission is not a passing result.
+
+## P1 outcome and control-instruction correction
+
+P1 reached its 300-second limit normally with zero accepted/logged keys,
+zero pending keys, ready POST B0 and the initial pointer/window/pattern state.
+Inputs were unchanged. Its 1500-frame capture reached the configured video
+limit (`truncated: true`); original logs and media remain in the session
+directory above. The owner subsequently requested more release progress,
+without reporting test actions or results. This is an idle boot observation,
+not a human input pass. The owned window was confirmed closed.
+
+The handoff instructions incorrectly described Space as a toggle. Inspection
+of the admitted raw-keyboard payload and `platform/pc286/keyboard-set2.c`
+confirms that Space make holds and Space break releases; repeated makes are
+ignored. The older BIOS-keyboard diagnostic used a toggle. The P1 handoff and
+its original plan are preserved as the erroneous instructions, not silently
+rewritten as a valid test. Subsequent P1/P2 rounds must **hold Space while
+moving with arrows, then release Space**; one tap in content makes one click.
+The release TRYING document already described the correct raw-keyboard
+behavior. BootHush's general human guide is corrected to distinguish images.
