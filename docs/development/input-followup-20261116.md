@@ -78,3 +78,20 @@ Fast Mac input, production 286 boot/install, remaining target/input and
 human/physical qualification, source/tool/provenance review and separately
 approved publication remain open. No release candidate or completed release
 is asserted. No WSL, external AI service, other emulator or desktop input ran.
+
+## Retained continuation snapshot
+
+After implementation commit `3482a3cf4dc23c1a3d6210ed91f48a52817d2b4f`, the
+existing guarded preparer validated the current source fingerprints and made
+`C:/Repos/.task-temp/classick-paired-engineering-snapshot-20261116-c`.
+It contains the exact Mac ROM and diagnostic disk, build/test records,
+original frames, instructions, checksums and explicit unqualified markers.
+Its two documented readiness commands reach Mac stage 16 at 60,901,050 cycles
+and 286 POST b0 at 7,509,810 cycles. Prior snapshots remain unchanged.
+
+Related local revisions are BootHush
+`76861e7b51bcf1fee8bf0cc9360abc02545ef4d8` and port
+`443ec9aaac74e08cf9b1b6fa679b07b514846b60`. The repository guard passes 1,820
+indexed text/source files, 134 registered PNGs and two reviewed GIFs. This
+does not establish independent provenance review. CLI access to GitHub failed
+because `github.com` could not be resolved; remote publication is unverified.
