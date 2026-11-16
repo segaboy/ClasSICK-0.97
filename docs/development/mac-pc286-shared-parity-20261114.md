@@ -1365,3 +1365,22 @@ also passed. The complete report and commands are
 separate reset API test and limitations are documented in its
 `docs/pc286-hard-disk-fault-20261114.md`. This closes only that model test;
 it does not demonstrate real-controller failures or safe physical recovery.
+
+### Input-cost refinement snapshot - 2026-11-16
+
+Source `d2b106538dab40500f0ba507398f885e667b8b43` reduces measured Mac
+inbox overhead while preserving the original contract. The
+[canonical optimization receipt](windows-m68k-toolchain-20261114.md#interrupt-mask-and-instruction-cost-investigation-2026-11-16)
+owns its source, build, tool and test identities, including the failing fast
+schedule and passing slower eight-state full-pixel/replay comparison. Nine
+snapshot controls pass in
+`C:/Repos/.task-temp/classick-inline-snapshot-controls-20261116-a/report.json`.
+
+The source-matched bundle with image manifests, frames, instructions and
+`SHA256SUMS` is
+`C:/Repos/.task-temp/classick-paired-engineering-snapshot-20261116-a`.
+Its two bounded readiness commands reach the Mac stage-16 condition at
+60,911,720 modeled cycles and the 286 `b0` condition at 7,509,810 cycles.
+The complete outputs are `C:/Repos/.task-temp/snapshot-mac-readiness-20261116-a.json`
+and `snapshot-pc-readiness-20261116-a.json`. This is explicitly an unqualified
+engineering snapshot, not a release candidate or production installer.
