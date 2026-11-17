@@ -1,5 +1,11 @@
 # ClasSICK 0.97
 
+Current release work, 2026-11-17: the owner has authorized the bounded
+Mac68000 / native 286 experimental pair without further human testing.
+Automated qualification passes; [release receipt](docs/development/paired-release-20261117.md)
+and [setup](releases/TRYING-mac286-20261117.md) state the supported profile and
+remaining limitations. Publication identities are recorded separately.
+
 Current work, 2026-11-16: the active pair is Mac68000 and native 286; x64
 development is paused. [Latest continuation and cross-project evidence](docs/development/paired-preview-readiness-20261116.md)
 records the current tested images, BootHush capability and remaining release

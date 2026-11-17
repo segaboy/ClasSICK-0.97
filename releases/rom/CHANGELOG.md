@@ -1,5 +1,13 @@
 # ClasSICK ROM release history
 
+## 0.4.0-alpha.1 - 2026-11-17
+
+- Paired native Mac68000/286 interactive-window preview, faster byte-row cursor
+  composition, original click/drag behavior and exact shared pixel checks.
+- 286 whole-disk boot/installer with occupied-target refusal, CRC, retries and
+  boot-sector-last installation. Mac uses qualified 4096-cycle input profile.
+- [Notes](0.4.0-alpha.1.md); human response and physical/compatibility limitations remain explicit.
+
 ## 0.3.0-alpha.1 - 2026-10-19
 
 - Shared portable C compiled to native68000 draws the branded512x342 outline ring/two rails,six phases,result0097 and counter;paired native x86-64 PC preview.

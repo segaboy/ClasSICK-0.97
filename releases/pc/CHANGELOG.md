@@ -1,5 +1,13 @@
 # ClasSICK native PC preview release history
 
+## 0.2.0-alpha.1 - 2026-11-17
+
+- Paired native Mac68000/286 interactive-window preview, faster byte-row cursor
+  composition, original click/drag behavior and exact shared pixel checks.
+- 286 whole-disk boot/installer with occupied-target refusal, CRC, retries and
+  boot-sector-last installation. Mac uses qualified 4096-cycle input profile.
+- [Notes](0.2.0-alpha.1.md); human response and physical/compatibility limitations remain explicit.
+
 ## 0.1.0-alpha.1 - 2026-10-19
 
 - First published experimental native x86-64 UEFI preview,paired with ROM0.3.0-alpha.1. Shared portable C draws the monochrome512x342 branded ring/rails scene,centered in the tested1024x768 framebuffer.

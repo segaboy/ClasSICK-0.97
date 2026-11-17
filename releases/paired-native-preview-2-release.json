@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "status": "experimental-release",
+  "authorization": "authorized",
+  "component_versions": {"rom": "0.4.0-alpha.1", "pc": "0.2.0-alpha.1"},
+  "scope": "Paired original native interactive-window preview for modeled Macintosh 128K/68000 and PC/AT 286. System software remains unreleased.",
+  "owner_authorization": {
+    "date": "2026-11-17",
+    "instruction": "Just finish the release without me. Do it now, and don't stop until you are done.",
+    "disposition": "Complete automated qualification and publish this bounded experimental pair without further human testing. This supersedes the prior separate-publication and further-human-test prerequisites for this preview only; it does not mark those tests passed."
+  },
+  "receipt": "docs/development/paired-release-20261117.md",
+  "tested_emulator_sha256": "9dc2f28425bafd10114cfde9ab5c439d61234873854cfa1c211cdcfb26bda82d",
+  "mouse_profile": {"edge_cycles": 4096, "dcd_invert": 3, "vbl_guard": 4096},
+  "acceptance": {
+    "E1": "Existing scoped host tests and independent pixel oracles pass; not complete historical or System acceptance.",
+    "E2": "46 input-profile checks include 44 loss-free axis/diagonal cases, a loss-free owner-trace replay at 4096 and a required 27-omission negative control at 2048. Exact media passes 16 install/failure checks, eight native states and eight paired pixel/replay checkpoints.",
+    "E3": "Prior live Mac input was delivered and recorded. No new host-input qualification is claimed by headless checks.",
+    "E4": "M1R5 failed the owner's relative-speed/axis expectations. M1R6b was an idle boot with zero input. 286 human testing remains incomplete. Owner directs release without further human testing.",
+    "physical": "Unverified; all current target qualification uses BootHush.",
+    "provenance": "Author source/rights review and repository guards; independent human provenance/toolchain review remains pending."
+  },
+  "limitations": [
+    "Experimental preview, not a complete operating system or general Macintosh application compatibility release.",
+    "Mac 2048-cycle mouse edge spacing loses intermediate movements in the retained trace and is unsupported for this release. Use the stated 4096-cycle profile.",
+    "Host pointer gain, perceived relative speed and axis latency remain unqualified. Automated replay is not a human mouse-feel pass.",
+    "PC preview uses keyboard arrows and held Space for pointer/button input; it is not a PC mouse driver.",
+    "286 installer supports only a blank whole disk in the stated 615/4/17 model; physical BIOS/storage compatibility is unverified.",
+    "Historical edition identity, physical/full128K, B2, System1 interoperability in both directions, native external applications, Linux and independent provenance review remain open.",
+    "The separate Not Super Tilt Bro prototype is incomplete; optional port media is evidence, not a delivered game release.",
+    "BootHush/compiler/FFmpeg binaries and reference firmware are not included. The exact tested emulator is identified by hash."
+  ]
+}

@@ -1,5 +1,13 @@
 # Independent ROM and System releases
 
+Current disposition, 2026-11-17: ROM **0.4.0-alpha.1** / native 286 PC
+**0.2.0-alpha.1** are authorized as the paired experimental preview.
+[Release decision](paired-native-preview-2-release.json),
+[qualification](../docs/development/paired-release-20261117.md) and
+[setup](TRYING-mac286-20261117.md) supersede the earlier further-human-test
+and separate-publication prerequisites for this preview only. Actual remote
+publication is recorded in a separate receipt. Dated text below is history.
+
 **Current direction (2026-11-14):** the next paired interactive-window
 milestone targets Mac128K and native 286, replacing the older x64 half.
 The original behavior, parity, provenance, human/physical qualification and

@@ -5154,3 +5154,13 @@ Qt Group, published [QGuiApplication constructor, Platform-Specific Arguments](h
 ## SRC-0610 - BootHush PC/AT modeled disk interface
 
 2026-11-14; project-owned BootHush `docs/pc-at.md` at commit `638a8078e83a7c0ea02451a904a8d82f0ee315ee`, working-file SHA-256 `d944c95fb0df9784f7295ba4870c291d4819812ac1fb119203848ab689e363bc`. Its built-in firmware and geometry describe the emulator's test interface, not a physical IBM PC/AT or BIOS. Used with original project test code under the independent-implementation policy; no Apple/Microsoft implementation, external firmware or third-party bootloader used. SPEC-0107 / IMPL-0134 / TEST-0190; [canonical evidence](../docs/development/mac-pc286-shared-parity-20261114.md#whole-disk-286-diagnostic).
+
+
+## SRC-0611 - Owner-authorized paired experimental release and original qualification
+
+2026-11-17; owner explicitly directs completing and publishing the paired release
+without further human testing. Original project source, retained owner-input
+trace, BootHush modeled observations and original packaging checks support this
+bounded experimental disposition; no new historical or protected implementation
+source is admitted. TEST-0199; [canonical receipt](../docs/development/paired-release-20261117.md).
+Human/physical/independent-review limitations remain explicit.

@@ -1,5 +1,11 @@
 # Milestone roadmap
 
+2026-11-17: paired Mac68000 / native 286 interactive-window preview passes
+automated qualification and is owner-authorized for experimental publication
+without further human testing. [Current receipt](development/paired-release-20261117.md).
+Physical, full System, historical, independent-review and broader input gates
+remain open; x64 remains paused. Earlier entries below retain dated scope.
+
 Current owner delivery rule2026-10-16: native Mac and native x86 PC capabilities
 advance in step. [ADR-0043](adr/0043-coupled-native-mac-pc-parity.md) supersedes the
 earlier blanket native-app wait; [the paired plan](development/native-parity-plan.md)
