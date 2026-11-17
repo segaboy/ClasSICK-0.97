@@ -199,3 +199,34 @@ evidence is retained by the port project.
 The cross-project contribution is additional scheduled-input/state/framebuffer
 validation of BootHush. Game-derived code, tests and assets stay in that project
 and do not implement ClasSICK services. No new physical-hardware claim follows.
+
+## MFS metadata and native disk transport
+
+Later on 2026-11-17, SPEC-0112 / IMPL-0142 / TEST-0201 add the bounded MFS
+volume-header and single-directory-entry reader. Host Release/sanitizer checks,
+routine CTest and seven native Mac/286 baseline/defect outcomes pass.
+[Metadata receipt and remaining format gates](mfs-metadata-20261117.md).
+
+SPEC-0113 / IMPL-0143 / TEST-0202 add an explicit native 286 provider for a
+declared subrange of original PC floppy media. Six actual-media native tests
+pass, including MFS header/known-entry acquisition and injected-read failure.
+[Transport mapping, identities and limitations](pc286-floppy-provider-20261117.md).
+The Mac lane still needs its physical floppy provider; neither lane mounts or
+boots the selected System Disk. Directory enumeration/map/fork services and
+the native 286 legacy execution boundary remain outstanding.
+
+BootHush 5d613614dd4f17d605de75ecc3f38c9129079488 adds a selected-sector GCR
+checksum fault. Sixteen focused and 22 default CLI tests pass; two optional
+ClasSICK-fixture tests were unset and skipped. Original guest retries reject
+the persistent fault, and a fresh run with injection removed succeeds without
+changing the input image. This is a boot-error testing capability, not a boot.
+[Documented fault interface](https://github.com/segaboy/boothush/blob/5d613614dd4f17d605de75ecc3f38c9129079488/docs/mac-floppy.md).
+
+Not Super Tilt Bro 67b58989bf3ca78206456bcaadd27405ce622940 adds opt-in
+native aerial steering/drift for both players. The focused 14 gameplay cases,
+522-step arithmetic probe, six native-call checks and defect controls pass on
+the same 7adb8a74 BootHush build; broader 20/34-case regressions retain their
+previous exact emulator identity. Seven older profiles remain byte-identical.
+[Original gameplay evidence](https://github.com/segaboy/Not-Super-Tilt-Bro/blob/67b58989bf3ca78206456bcaadd27405ce622940/docs/aerial-control-evidence.md).
+This supplies additional native-call/input/observer validation; game code and
+assets remain in the port and do not become ClasSICK implementation inputs.

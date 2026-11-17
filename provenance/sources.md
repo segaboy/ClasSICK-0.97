@@ -5180,3 +5180,12 @@ applications/accessories and persistent file operations. The standalone 286
 must execute that disk-resident 68k code with ClasSICK services. Workload success
 and complete ROM/instruction coverage remain separate claims. BootHush and
 Not Super Tilt Bro must continue advancing alongside this priority.
+
+## SRC-0613 - Published MFS metadata fields
+
+2026-11-17; scoped reread of the already admitted SRC-0071 published 1985
+Inside Macintosh, II-120 through II-123/Figures6-8. Numeric volume/directory
+fields and structural boundaries inform SPEC-0112 / IMPL-0142 / TEST-0201;
+API, failure contracts and all code/fixtures are original. No protected
+implementation or disk input; allocation-map packing and January1984
+compatibility remain unverified. [Source review](records/SRC-0613-mfs-metadata-fields.md).

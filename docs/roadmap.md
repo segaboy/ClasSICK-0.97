@@ -1,5 +1,11 @@
 # Milestone roadmap
 
+2026-11-17 storage increment: bounded MFS metadata now runs natively on both
+CPUs, and the286 reads original metadata through an actual modeled floppy
+provider. [Metadata](development/mfs-metadata-20261117.md) and
+[transport](development/pc286-floppy-provider-20261117.md) receipts retain
+explicit filesystem, System boot and physical limitations.
+
 2026-11-17: the next owner-selected milestone is the same original Macintosh
 System Disk booting against ClasSICK on Mac128K and native 286. Exact image identity
 is pending; neither disk boot is implemented or verified.
