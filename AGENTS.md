@@ -10,7 +10,9 @@ Compacted 2026-10-28 from public baseline `11ad7a937e58f752cfecda8b6805c76bc7f45
 
 ## Current scope
 Owner direction (2026-11-17, SRC-0612): the next milestone is booting the owner-selected
-Macintosh System Disk against ClasSICK on original Mac and native 286. Bounded
+Macintosh System Disk against ClasSICK on original Mac and native 286, including
+full use of its programs and persistent file operations. BootHush and Tilt remain
+active supporting projects. Bounded
 private BootHush trials are authorized once the exact image is identified. Follow
 the [current milestone](docs/development/system-disk-boot-20261117.md); preserve
 native 286 services, explicit legacy-code boundaries and separate physical claims.

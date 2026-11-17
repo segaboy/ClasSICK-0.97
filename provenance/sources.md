@@ -5174,3 +5174,9 @@ black-box BootHush trials once that input is identified, not source inspection,
 redistribution or a compatibility claim. Original project source audit and
 [canonical milestone](../docs/development/system-disk-boot-20261117.md) record the
 current gaps, acceptance criteria and native 286/legacy-code boundary.
+
+Owner clarification: fully using the disk includes its startup, System, Finder,
+applications/accessories and persistent file operations. The standalone 286
+must execute that disk-resident 68k code with ClasSICK services. Workload success
+and complete ROM/instruction coverage remain separate claims. BootHush and
+Not Super Tilt Bro must continue advancing alongside this priority.
