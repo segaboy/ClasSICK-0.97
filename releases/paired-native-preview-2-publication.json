@@ -1,0 +1,176 @@
+{
+  "schema_version": 1,
+  "status": "published",
+  "experimental": true,
+  "owner_disposition": "releases/paired-native-preview-2-release.json",
+  "source_revision": "22a7e2dea0d452b620d5c6bd8cfc820c975972e6",
+  "build_source_revision": "e21a295c204965f300f97ea370a94e602c0af425",
+  "qualification_receipt": "docs/development/paired-release-20261117.md",
+  "releases": [
+    {
+      "tag": "rom-v0.4.0-alpha.1",
+      "id": 448749107,
+      "url": "https://github.com/segaboy/ClasSICK-0.97/releases/tag/rom-v0.4.0-alpha.1",
+      "published_at": "2026-11-17T14:33:35Z",
+      "prerelease": true,
+      "annotated_tag_object": "6119d254477085a5fa1d857c192cf2a8c2e40c4f",
+      "tag_target": "22a7e2dea0d452b620d5c6bd8cfc820c975972e6",
+      "assets": [
+        {
+          "name": "ClasSICK-Mac286-0.4.0-alpha.1-0.2.0-alpha.1.zip",
+          "id": 759383156,
+          "bytes": 9390175,
+          "sha256": "4436d2a449e2273616446cdcd9324d6a413dd4a108c26e1899a9cb06996fc21d",
+          "url": "https://github.com/segaboy/ClasSICK-0.97/releases/download/rom-v0.4.0-alpha.1/ClasSICK-Mac286-0.4.0-alpha.1-0.2.0-alpha.1.zip"
+        },
+        {
+          "name": "ClasSICK-Mac286-source-22a7e2d.zip",
+          "id": 759383154,
+          "bytes": 4641695,
+          "sha256": "25062e6dc72a34733ccdba1225bfd5a34e92f58036215dc19984a4eba150c8b5",
+          "url": "https://github.com/segaboy/ClasSICK-0.97/releases/download/rom-v0.4.0-alpha.1/ClasSICK-Mac286-source-22a7e2d.zip"
+        },
+        {
+          "name": "TRYING.md",
+          "id": 759383155,
+          "bytes": 5859,
+          "sha256": "f7aeee63712981281bfc0254bb5ecfd3d14c8420a97d9b579cb38e071ff707c0",
+          "url": "https://github.com/segaboy/ClasSICK-0.97/releases/download/rom-v0.4.0-alpha.1/TRYING.md"
+        },
+        {
+          "name": "mac-window.mp4",
+          "id": 759383157,
+          "bytes": 15870,
+          "sha256": "65696648c2b1c633bd676832d1d205e3fcb45f25f52979f0155e522738bdafc4",
+          "url": "https://github.com/segaboy/ClasSICK-0.97/releases/download/rom-v0.4.0-alpha.1/mac-window.mp4"
+        },
+        {
+          "name": "paired-checkpoints.gif",
+          "id": 759383151,
+          "bytes": 162648,
+          "sha256": "096c1e491dac690f121cf3fb82533bbd15cb0f04d4730c43be1e3e2dedc87aa5",
+          "url": "https://github.com/segaboy/ClasSICK-0.97/releases/download/rom-v0.4.0-alpha.1/paired-checkpoints.gif"
+        },
+        {
+          "name": "paired-preview.png",
+          "id": 759383186,
+          "bytes": 15810,
+          "sha256": "dfa0e3fd8b05866daef4b7b1fc8a55d9409bd9d1b78a673d9ef048d8482c34f6",
+          "url": "https://github.com/segaboy/ClasSICK-0.97/releases/download/rom-v0.4.0-alpha.1/paired-preview.png"
+        },
+        {
+          "name": "release-verification.json",
+          "id": 759383189,
+          "bytes": 2597,
+          "sha256": "946ca4cb161149d5aeeb96f0bbea802ce63f23478373b8babb964bab4ae2f6fa",
+          "url": "https://github.com/segaboy/ClasSICK-0.97/releases/download/rom-v0.4.0-alpha.1/release-verification.json"
+        },
+        {
+          "name": "SHA256SUMS",
+          "id": 759383194,
+          "bytes": 638,
+          "sha256": "f085a61296ac69fb8d07ae18248c4c97c4bf0803e46d256c1321ebf35f169b91",
+          "url": "https://github.com/segaboy/ClasSICK-0.97/releases/download/rom-v0.4.0-alpha.1/SHA256SUMS"
+        }
+      ]
+    },
+    {
+      "tag": "pc-v0.2.0-alpha.1",
+      "id": 448749100,
+      "url": "https://github.com/segaboy/ClasSICK-0.97/releases/tag/pc-v0.2.0-alpha.1",
+      "published_at": "2026-11-17T14:33:35Z",
+      "prerelease": true,
+      "annotated_tag_object": "e998ca765a4654508b2184f0d11b24c3101ef271",
+      "tag_target": "22a7e2dea0d452b620d5c6bd8cfc820c975972e6",
+      "assets": [
+        {
+          "name": "ClasSICK-Mac286-0.4.0-alpha.1-0.2.0-alpha.1.zip",
+          "id": 759383136,
+          "bytes": 9390175,
+          "sha256": "4436d2a449e2273616446cdcd9324d6a413dd4a108c26e1899a9cb06996fc21d",
+          "url": "https://github.com/segaboy/ClasSICK-0.97/releases/download/pc-v0.2.0-alpha.1/ClasSICK-Mac286-0.4.0-alpha.1-0.2.0-alpha.1.zip"
+        },
+        {
+          "name": "ClasSICK-Mac286-source-22a7e2d.zip",
+          "id": 759383141,
+          "bytes": 4641695,
+          "sha256": "25062e6dc72a34733ccdba1225bfd5a34e92f58036215dc19984a4eba150c8b5",
+          "url": "https://github.com/segaboy/ClasSICK-0.97/releases/download/pc-v0.2.0-alpha.1/ClasSICK-Mac286-source-22a7e2d.zip"
+        },
+        {
+          "name": "TRYING.md",
+          "id": 759383137,
+          "bytes": 5859,
+          "sha256": "f7aeee63712981281bfc0254bb5ecfd3d14c8420a97d9b579cb38e071ff707c0",
+          "url": "https://github.com/segaboy/ClasSICK-0.97/releases/download/pc-v0.2.0-alpha.1/TRYING.md"
+        },
+        {
+          "name": "mac-window.mp4",
+          "id": 759383139,
+          "bytes": 15870,
+          "sha256": "65696648c2b1c633bd676832d1d205e3fcb45f25f52979f0155e522738bdafc4",
+          "url": "https://github.com/segaboy/ClasSICK-0.97/releases/download/pc-v0.2.0-alpha.1/mac-window.mp4"
+        },
+        {
+          "name": "paired-checkpoints.gif",
+          "id": 759383138,
+          "bytes": 162648,
+          "sha256": "096c1e491dac690f121cf3fb82533bbd15cb0f04d4730c43be1e3e2dedc87aa5",
+          "url": "https://github.com/segaboy/ClasSICK-0.97/releases/download/pc-v0.2.0-alpha.1/paired-checkpoints.gif"
+        },
+        {
+          "name": "paired-preview.png",
+          "id": 759383173,
+          "bytes": 15810,
+          "sha256": "dfa0e3fd8b05866daef4b7b1fc8a55d9409bd9d1b78a673d9ef048d8482c34f6",
+          "url": "https://github.com/segaboy/ClasSICK-0.97/releases/download/pc-v0.2.0-alpha.1/paired-preview.png"
+        },
+        {
+          "name": "release-verification.json",
+          "id": 759383175,
+          "bytes": 2597,
+          "sha256": "946ca4cb161149d5aeeb96f0bbea802ce63f23478373b8babb964bab4ae2f6fa",
+          "url": "https://github.com/segaboy/ClasSICK-0.97/releases/download/pc-v0.2.0-alpha.1/release-verification.json"
+        },
+        {
+          "name": "SHA256SUMS",
+          "id": 759383179,
+          "bytes": 638,
+          "sha256": "f085a61296ac69fb8d07ae18248c4c97c4bf0803e46d256c1321ebf35f169b91",
+          "url": "https://github.com/segaboy/ClasSICK-0.97/releases/download/pc-v0.2.0-alpha.1/SHA256SUMS"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "package_files": 74,
+    "frozen_source_inputs": 80,
+    "current_image_inputs": 72,
+    "package_negative_controls_rejected": 30,
+    "deterministic_preparations_equal": true,
+    "mac_input_profile_checks": 46,
+    "pc_media_cases": 16,
+    "pc_native_states": 8,
+    "paired_pixel_checkpoints": 8,
+    "gif_decoded_frames": 8,
+    "mp4_decoded_frames": 131,
+    "draft_assets_downloaded_and_matched": 16,
+    "public_assets_downloaded_and_matched": 16
+  },
+  "ci": {
+    "run_id": 44103890003,
+    "url": "https://github.com/segaboy/ClasSICK-0.97/actions/runs/44103890003",
+    "status_at_publication": "in_progress",
+    "scope": "Legacy bootstrap and broad hosted/source CI. Exact release-image BootHush and packaging checks passed separately; no CI success inferred."
+  },
+  "limitations": [
+    "Experimental preview, not a complete operating system or general Macintosh application compatibility release.",
+    "Mac 2048-cycle mouse edge spacing loses intermediate movements in the retained trace and is unsupported for this release. Use the stated 4096-cycle profile.",
+    "Host pointer gain, perceived relative speed and axis latency remain unqualified. Automated replay is not a human mouse-feel pass.",
+    "PC preview uses keyboard arrows and held Space for pointer/button input; it is not a PC mouse driver.",
+    "286 installer supports only a blank whole disk in the stated 615/4/17 model; physical BIOS/storage compatibility is unverified.",
+    "Historical edition identity, physical/full128K, B2, System1 interoperability in both directions, native external applications, Linux and independent provenance review remain open.",
+    "The separate Not Super Tilt Bro prototype is incomplete; optional port media is evidence, not a delivered game release.",
+    "BootHush/compiler/FFmpeg binaries and reference firmware are not included. The exact tested emulator is identified by hash."
+  ]
+}

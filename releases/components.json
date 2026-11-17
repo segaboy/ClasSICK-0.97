@@ -6,13 +6,13 @@
     "rom": {
       "name": "ClasSICK ROM",
       "version": "0.4.0-alpha.1",
-      "state": "prepared-experimental-prerelease",
+      "state": "prerelease",
       "tag_prefix": "rom-v",
       "candidate_record": "releases/paired-native-preview-2-release.json",
-      "publication_record": "releases/rom/0.3.0-alpha.1-publication.json",
+      "publication_record": "releases/paired-native-preview-2-publication.json",
       "release_notes": "releases/rom/0.4.0-alpha.1.md",
       "changelog": "releases/rom/CHANGELOG.md",
-      "latest_published_version": "0.3.0-alpha.1"
+      "latest_published_version": "0.4.0-alpha.1"
     },
     "system": {
       "name": "ClasSICK System software",
@@ -27,13 +27,13 @@
     "pc": {
       "name": "ClasSICK PC Preview",
       "version": "0.2.0-alpha.1",
-      "state": "prepared-experimental-prerelease",
+      "state": "prerelease",
       "tag_prefix": "pc-v",
       "candidate_record": "releases/paired-native-preview-2-release.json",
       "release_notes": "releases/pc/0.2.0-alpha.1.md",
       "changelog": "releases/pc/CHANGELOG.md",
-      "latest_published_version": "0.1.0-alpha.1",
-      "publication_record": "releases/pc/0.1.0-alpha.1-publication.json"
+      "latest_published_version": "0.2.0-alpha.1",
+      "publication_record": "releases/paired-native-preview-2-publication.json"
     }
   }
 }

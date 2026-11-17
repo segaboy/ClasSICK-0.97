@@ -1,10 +1,12 @@
 # ClasSICK 0.97
 
-Current release work, 2026-11-17: the owner has authorized the bounded
-Mac68000 / native 286 experimental pair without further human testing.
-Automated qualification passes; [release receipt](docs/development/paired-release-20261117.md)
-and [setup](releases/TRYING-mac286-20261117.md) state the supported profile and
-remaining limitations. Publication identities are recorded separately.
+Published 2026-11-17: [ROM 0.4.0-alpha.1](https://github.com/segaboy/ClasSICK-0.97/releases/tag/rom-v0.4.0-alpha.1) and [native 286 PC Preview 0.2.0-alpha.1](https://github.com/segaboy/ClasSICK-0.97/releases/tag/pc-v0.2.0-alpha.1).
+The paired experimental interactive-window release includes both targets,
+corresponding source, checksums, screenshots, GIF and video. All 16 public
+asset downloads match. [Publication receipt](releases/paired-native-preview-2-publication.json),
+[qualification](docs/development/paired-release-20261117.md), and
+[setup and limits](releases/TRYING-mac286-20261117.md). System remains unreleased;
+human mouse feel and physical hardware remain unqualified.
 
 Current work, 2026-11-16: the active pair is Mac68000 and native 286; x64
 development is paused. [Latest continuation and cross-project evidence](docs/development/paired-preview-readiness-20261116.md)

@@ -100,3 +100,16 @@ Project contributions remain GPL-3.0-or-later. No external implementation or
 runtime was added. Author source/rights review and repository guards do not
 substitute for independent human provenance review. Exact worker elapsed times
 and provider usage are unmeasured.
+
+## Published outcome
+
+Both annotated tags point to `22a7e2dea0d452b620d5c6bd8cfc820c975972e6`.
+The [publication receipt](../../releases/paired-native-preview-2-publication.json)
+records both public experimental releases and all 16 downloaded asset hashes.
+The 74-file paired package is 9,390,175 bytes, SHA-256
+`4436d2a449e2273616446cdcd9324d6a413dd4a108c26e1899a9cb06996fc21d`.
+Two preparations are identical; 30 tamper controls reject. Eight decoded GIF
+frames match the PNGs and all 131 MP4 frames decode. The builder replaces a
+filename suffix when choosing its ZIP name; the external ZIP was renamed to
+retain both complete version strings, without changing bytes. Prior releases,
+frozen reviews and unrelated dirty work remain unchanged.

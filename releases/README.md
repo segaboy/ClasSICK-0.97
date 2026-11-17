@@ -1,12 +1,13 @@
 # Independent ROM and System releases
 
-Current disposition, 2026-11-17: ROM **0.4.0-alpha.1** / native 286 PC
-**0.2.0-alpha.1** are authorized as the paired experimental preview.
-[Release decision](paired-native-preview-2-release.json),
-[qualification](../docs/development/paired-release-20261117.md) and
-[setup](TRYING-mac286-20261117.md) supersede the earlier further-human-test
-and separate-publication prerequisites for this preview only. Actual remote
-publication is recorded in a separate receipt. Dated text below is history.
+Published 2026-11-17: **ROM 0.4.0-alpha.1 / native 286 PC 0.2.0-alpha.1**.
+The [publication receipt](paired-native-preview-2-publication.json) records
+actual release IDs, annotated tags, eight assets per release and all 16
+matching public downloads. [Qualification](../docs/development/paired-release-20261117.md)
+and [setup](TRYING-mac286-20261117.md) state the supported 4096-cycle Mac
+input profile and incomplete human/physical/compatibility gates. The owner
+authorized this bounded experimental release without further human testing.
+Dated preparation text below remains historical.
 
 **Current direction (2026-11-14):** the next paired interactive-window
 milestone targets Mac128K and native 286, replacing the older x64 half.
@@ -47,9 +48,9 @@ our implementation's development releases. R-001's historical identity remains o
 
 | Component | Current development version | Release state | Tag format |
 | --- | --- | --- | --- |
-| ClasSICK ROM | 0.3.0-alpha.1 | Published experimental prerelease, 2026-10-19 | rom-v0.3.0-alpha.1 |
+| ClasSICK ROM | 0.4.0-alpha.1 | Published experimental prerelease, 2026-11-17 | rom-v0.4.0-alpha.1 |
 | ClasSICK System software | Unassigned | Unreleased | system-vMAJOR.MINOR.PATCH |
-| ClasSICK PC Preview | 0.1.0-alpha.1 | Published experimental prerelease, 2026-10-19 | pc-v0.1.0-alpha.1 |
+| ClasSICK PC Preview | 0.2.0-alpha.1 | Published experimental native 286 prerelease, 2026-11-17 | pc-v0.2.0-alpha.1 |
 
 Versions use MAJOR.MINOR.PATCH, optionally followed by alpha.N, beta.N or rc.N.
 Group fixes into the next candidate; advance the minor version for a substantial
@@ -60,6 +61,13 @@ The common CMake build harness has no umbrella product version. Shared core and
 tool changes are identified by their source revisions and evidence.
 
 ## Current paired releases
+
+[ROM notes](rom/0.4.0-alpha.1.md), [286 notes](pc/0.2.0-alpha.1.md),
+[shared setup](TRYING-mac286-20261117.md) and the
+[publication receipt](paired-native-preview-2-publication.json) describe the
+current native Mac68000/286 interactive-window preview. System is unreleased.
+
+## Prior paired release, 2026-10-19
 
 [ROM notes](rom/0.3.0-alpha.1.md), [Mac setup](rom/TRYING-0.3.0-alpha.1.md),
 [PC notes](pc/0.1.0-alpha.1.md) and [PC setup](pc/TRYING-0.1.0-alpha.1.md)
@@ -77,6 +85,7 @@ System remains unreleased; human PC capture/GUI and other limits stay explicit.
 
 | ROM | System/workload | State |
 | --- | --- | --- |
+| ClasSICK ROM 0.4.0-alpha.1 / PC 0.2.0-alpha.1 | Original native interactive window | BootHush automated pixel/input/media checks pass; human response and physical hardware unqualified |
 | ClasSICK ROM0.3.0-alpha.1 | Embedded original native drawing workload | Snow Early128K observed; human2 clicks pass; physical/full128K/mini-vMac unqualified |
 | ClasSICK ROM | ClasSICK replacement System disk | Required; not tested; no System release exists |
 | ClasSICK ROM | Owner-designated original System 1 disks | Required; not tested; exact reference/media admission still required |
