@@ -1,5 +1,10 @@
 # Milestone roadmap
 
+2026-11-17: the next owner-selected milestone is the same original Macintosh
+System Disk booting against ClasSICK on Mac128K and native 286. Exact image identity
+is pending; neither disk boot is implemented or verified.
+[Acceptance and implementation order](development/system-disk-boot-20261117.md).
+
 2026-11-17: paired Mac68000 / native 286 interactive-window preview passes
 automated qualification and is owner-authorized for experimental publication
 without further human testing. [Current receipt](development/paired-release-20261117.md).

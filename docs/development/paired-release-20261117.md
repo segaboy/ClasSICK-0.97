@@ -113,3 +113,17 @@ frames match the PNGs and all 131 MP4 frames decode. The builder replaces a
 filename suffix when choosing its ZIP name; the external ZIP was renamed to
 retain both complete version strings, without changing bytes. Prior releases,
 frozen reviews and unrelated dirty work remain unchanged.
+
+## Post-publication Release-mode test repair
+
+The broader Windows CI run 44103890003 failed while compiling the Mac keyboard
+test: Release defines NDEBUG and removed assertions that contained test operations,
+leaving eight unused parameter/variable diagnostics under -Werror. The m68k job
+succeeded. A test-local NDEBUG undef before the headers retains those assertions
+in Release without changing production ROM or 286 sources or published assets.
+
+On 2026-11-17 a fresh Windows Clang 23.1.1/CMake 4.4.4 Release build reproduced
+all eight baseline errors; the same classick_mac_keyboard_tests target then built
+with -O3 -DNDEBUG and the existing warning-as-error flags. The
+mac.keyboard.transport CTest passed (1/1). CMakeLists.txt was unchanged. This is
+a focused test-harness repair, not a claim that the entire cloud suite has passed.

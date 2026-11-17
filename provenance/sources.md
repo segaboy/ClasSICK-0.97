@@ -5164,3 +5164,13 @@ trace, BootHush modeled observations and original packaging checks support this
 bounded experimental disposition; no new historical or protected implementation
 source is admitted. TEST-0199; [canonical receipt](../docs/development/paired-release-20261117.md).
 Human/physical/independent-review limitations remain explicit.
+
+## SRC-0612 - Owner-selected System Disk boot on Mac and 286
+
+2026-11-17; owner makes booting their selected Macintosh System Disk against
+ClasSICK on original Mac and 286 the next goal and confirms a local image exists.
+Exact path/media identity remains pending. This authorizes bounded private
+black-box BootHush trials once that input is identified, not source inspection,
+redistribution or a compatibility claim. Original project source audit and
+[canonical milestone](../docs/development/system-disk-boot-20261117.md) record the
+current gaps, acceptance criteria and native 286/legacy-code boundary.

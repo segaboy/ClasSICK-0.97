@@ -1,5 +1,9 @@
 # ClasSICK 0.97
 
+Next milestone, 2026-11-17: boot the owner-selected Macintosh System Disk against
+ClasSICK on Mac128K and native 286. [Acceptance, current gaps and implementation order](docs/development/system-disk-boot-20261117.md).
+The disk image is not yet identified; neither System Disk boot is verified.
+
 Published 2026-11-17: [ROM 0.4.0-alpha.1](https://github.com/segaboy/ClasSICK-0.97/releases/tag/rom-v0.4.0-alpha.1) and [native 286 PC Preview 0.2.0-alpha.1](https://github.com/segaboy/ClasSICK-0.97/releases/tag/pc-v0.2.0-alpha.1).
 The paired experimental interactive-window release includes both targets,
 corresponding source, checksums, screenshots, GIF and video. All 16 public
@@ -8,10 +12,10 @@ asset downloads match. [Publication receipt](releases/paired-native-preview-2-pu
 [setup and limits](releases/TRYING-mac286-20261117.md). System remains unreleased;
 human mouse feel and physical hardware remain unqualified.
 
-Current work, 2026-11-16: the active pair is Mac68000 and native 286; x64
+Historical work checkpoint, 2026-11-16: the active pair is Mac68000 and native 286; x64
 development is paused. [Latest continuation and cross-project evidence](docs/development/paired-preview-readiness-20261116.md)
 records the current tested images, BootHush capability and remaining release
-dependencies. The paired release is still unqualified. Entries below retain
+dependencies. At that checkpoint the paired release was still unqualified. Entries below retain
 their dated historical scope.
 
 2026-10-19 source-review continuation, SRC-0314/0315: owner clears narrow published mouse review; earlier hold resolved, declaration excluded. First pointer/input contract/inventory slice complete with Mac adapter gaps M1-M7; no code, tests, build or trial. Next recommended: bounded cursor composition contract. [Review](docs/development/mac-pointer-source-review.md). Older held checkpoints below are historical. Existing gates and released capabilities remain unchanged.

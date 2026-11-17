@@ -1,5 +1,9 @@
 /* SPDX-License-Identifier: GPL-3.0-or-later */
 /* Copyright (C) 2026 Dean Howell. */
+/* Assertions execute test operations and must remain active in Release builds. */
+#ifdef NDEBUG
+#undef NDEBUG
+#endif
 #include "../platform/mac128k/keyboard.h"
 #include <assert.h>
 #include <stdio.h>

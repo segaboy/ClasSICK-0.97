@@ -9,6 +9,12 @@ Compacted 2026-10-28 from public baseline `11ad7a937e58f752cfecda8b6805c76bc7f45
 - When relevant: [native parity](docs/development/native-parity-plan.md), [display](docs/development/display-target.md), [performance](docs/development/native-performance-plan.md), [x64 PC](docs/development/unified-x64-pc-plan.md), [286](docs/development/pc286-feasibility.md), [System1/ROM](docs/development/system1-rom-boot-requirements.md), [sources](docs/research/system1-sources.md), [releases](releases/README.md), [milestones](docs/roadmap.md).
 
 ## Current scope
+Owner direction (2026-11-17, SRC-0612): the next milestone is booting the owner-selected
+Macintosh System Disk against ClasSICK on original Mac and native 286. Bounded
+private BootHush trials are authorized once the exact image is identified. Follow
+the [current milestone](docs/development/system-disk-boot-20261117.md); preserve
+native 286 services, explicit legacy-code boundaries and separate physical claims.
+
 Owner direction (2026-11-17, SRC-0611): finish and publish the bounded paired
 ROM 0.4.0-alpha.1 / native 286 PC 0.2.0-alpha.1 experimental release without
 further human testing. Automated qualification and accurate limitations remain

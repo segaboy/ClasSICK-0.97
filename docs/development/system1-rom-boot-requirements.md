@@ -1,5 +1,10 @@
 # System 1 and ROM boot compatibility requirements - 2026-10-14
 
+Current owner direction, 2026-11-17: the selected System Disk on ClasSICK is now
+the immediate Mac/286 goal. [Current milestone and trial scope](system-disk-boot-20261117.md)
+supersede the documentation-only/future-go-ahead statements below for that exact
+private disk. The reverse compatibility requirement and historical record remain.
+
 Owner requirement, SRC-0164. Required, not yet demonstrated. This records target
 behavior; it is not implementation evidence or a new boot/reference trial.
 
