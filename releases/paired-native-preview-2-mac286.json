@@ -45,9 +45,9 @@
   ],
   "acceptance": {
     "E1": "Scoped cursor/scene/input host checks and independent pixel oracles pass; not a full historical regression or complete System claim",
-    "E2": "Exact new images pass scheduled-input, media, replay and recovery checks; startup-held and complete cancellation/fault matrix remain incomplete",
-    "E3": "Earlier Mac live GUI delivery observed; refreshed pair has not completed host GUI qualification; earlier 286 P1 accepted zero keys",
-    "E4": "Earlier Mac owner reports include successful corners/drag/pattern and unresolved response/sensitivity complaints; new pair needs human retest; 286 P1 unattempted",
+    "E2": "Exact new images pass scheduled-input, media, replay and recovery checks; startup-held and complete cancellation/fault matrix remain incomplete M1R5 owner-trace replay now reproduces 27 guest motion omissions at edge spacing 2048; spacing 4096 avoids them in replay only.",
+    "E3": "M1R5 completed a live Mac session with 2483 accepted mouse samples; guest video and logs retained. New 286 P1R1 remains unattempted; earlier P1 accepted zero keys.",
+    "E4": "M1R5 on 2026-11-17 fails owner relative-speed/axis expectations. Drag and pattern changes pass by owner report; corners approximately reachable. Human response qualification remains blocked; 286 unattempted.",
     "physical": "Unverified under current BootHush-only testing direction",
     "provenance": "Author self-review and repository guard; independent human/tool/source review pending"
   },
@@ -65,5 +65,6 @@
   ],
   "scope": "One original native window and cursor; no replacement System release, general application compatibility or completed game port",
   "revision": "cursor-byte-composition-20261116",
-  "prior_frozen_review": "releases/paired-native-preview-2-review.json"
+  "prior_frozen_review": "releases/paired-native-preview-2-review.json",
+  "human_followup_receipt": "docs/development/guided-human-qualification-20261116.md"
 }

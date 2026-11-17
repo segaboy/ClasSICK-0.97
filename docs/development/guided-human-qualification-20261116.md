@@ -330,3 +330,81 @@ rewritten as a valid test. Subsequent P1/P2 rounds must **hold Space while
 moving with arrows, then release Space**; one tap in content makes one click.
 The release TRYING document already described the correct raw-keyboard
 behavior. BootHush's general human guide is corrected to distinguish images.
+
+## M1R5 owner result, 2026-11-17
+
+The refreshed cursor-byte ROM from the frozen review package was tested at
+2x scale, relative-free input, 300-percent gain and edge spacing 2048.
+ROM SHA-256: `5d48f7877386e30f8e45e0456f528e93c1990aa7dd5b7ef37b40ddd7cf1de5a0`.
+BootHush SHA-256: `fe262bc58ae58cb1d9b22ae5f409b71693e6ebf0fd305e4846692a5873588de8`.
+The owner confirmed the window was visible; the desktop helper was unavailable.
+The agent launched the guarded session and injected no guest input or activation.
+
+The owner reports that the Windows pointer is still faster, horizontal movement
+feels faster than vertical, and relative movement fails the intended behavior.
+Corners were approximately reachable; dragging and pattern changes worked.
+This is a **failed human responsiveness result**, not a four-corner precision
+pass. Release/focus behavior was not explicitly reported for this round.
+
+The completed 300.109-second session accepted 2483 mouse samples and delivered
+11058 pin steps; pending input, guest losses, faults and capture FIFO overflow
+were zero. It nevertheless recorded **27 guest motion omissions**, with FIFO
+peak 185. Final pointer is (328,196), window (231,110), pattern 0. The trace
+contains scaled guest vectors, not raw mouse counts or Windows-pointer travel.
+Its 5-fps, 1500-frame guest capture reaches the configured recording cap; the
+report correctly marks it truncated. PNG and MP4 conversions succeeded.
+
+Original session artifacts and the separate attributed feedback receipt are in
+`C:/Repos/Release-Review/ClasSICK-Mac286-Cursor-20261116/M1R5-mac/`.
+Original hashed files, including the incomplete observations template, remain
+unchanged. Session JSON SHA-256:
+`31e1145e75a290b90488d299df0c795c68290d5478858d461f5a398e67723725`.
+Mouse trace SHA-256:
+`081d544555ab3be94b66ff308a5b5a719fe329f809dfec1bf0cd054a661dbf37`.
+The final guest PNG was visually inspected after completion; it shows the moved
+window and original scene. That single frame cannot verify movement quality.
+
+Headless replay reproduces all 27 omissions at spacing 2048. Changing only trace
+spacing to 4096 yields zero omissions and FIFO peak 87. Both final frames match
+the original: an equal final endpoint can conceal intermediate missing motion.
+The slower pin timing is a diagnostic control, not a demonstrated sensitivity
+or latency fix. Receipt:
+`C:/Repos/.task-temp/m1r5-analysis-20261117-a/report.json`.
+
+The previous M1R4 and synthetic timing results remain scoped observations. This
+new owner trace exposes a condition those checks did not cover. The current
+candidate remains unqualified; neither the frozen archive nor any image was
+rewritten. No ClasSICK/game implementation or compatibility contract changed.
+
+## M1R6 diagnostic admission, 2026-11-17
+
+BootHush now offers an optional log of raw counts, scaled guest vectors and
+sampled Windows-pointer displacement. Its
+[immutable diagnostic receipt](https://github.com/segaboy/boothush/blob/c4a4cd5ab659d8310f176d89eeb84916c89f9329/docs/pointer-observation-20261117.md)
+owns the format, host-sampling limitations, original implementation and tests.
+That is a local commit; remote availability is not asserted. It changes no
+ClasSICK code, host mouse setting or relative-axis gain calculation.
+
+Executable SHA-256:
+`9dc2f28425bafd10114cfde9ab5c439d61234873854cfa1c211cdcfb26bda82d`.
+Identical build twins, four hidden C++ checks and 47 Python cases pass (three
+optional fixture cases skipped). Replaying the actual M1R5 trace with the new
+executable produces the same 2048/4096 results and exact final pixels as before.
+Receipt: `C:/Repos/.task-temp/m1r5-pointer-build-20261117-b/report.json`.
+
+The proposed M1R6 uses the same packaged ROM, 2x scale and 300-percent gain.
+Edge spacing changes to 4096 to isolate the loss-free replay control; this may
+alter delivery latency and does not establish acceptable mouse feel. The
+five-minute plan records guest video, scaled replay input and the new pointer
+log. The intended actions are short horizontal/vertical sweeps, each slowly
+and then more quickly, with pauses and no sensitivity adjustment or edge hits.
+This can discriminate total displacement from delayed delivery; host packet
+coalescing prevents interpreting individual log rows as exact OS acceleration.
+
+Prepared plan:
+`C:/Repos/Release-Review/ClasSICK-Mac286-Cursor-20261116/M1R6-pointer-20261117/launch.ps1`.
+The guarded P1R2 plan in `P1R2-pc286-20261117/` refreshes the 286 launcher identity
+for the unchanged packaged disk/font. Previous plans remain preserved and
+refuse the changed launcher hash. These are admissions, not executed human
+passes; launch/handoff and subsequent observations belong in the local workflow
+and a dated follow-up to this receipt. Release qualification remains blocked.
