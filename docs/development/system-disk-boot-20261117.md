@@ -2,6 +2,25 @@
 <!-- Copyright (C) 2026 Dean Howell. -->
 # Owner-selected System Disk boot milestone - 2026-11-17
 
+## Current checkpoint - 2026-11-18
+
+The exact private image is identified and read through both native providers.
+[Identity and metadata](selected-disk-survey-20261118.md),
+[Mac IWM provider](mac-floppy-provider-20261118.md),
+[MFS volume service](mfs-volume-20261118.md), and
+[complete fork-read integration](mfs-media-20261118.md) contain the scoped
+evidence. Both lanes read all10 files/20 forks/284392 logical bytes with matching
+digests and repeatable state. The original image is unchanged. Its January1984
+release identity remains unverified; the filename is not version evidence.
+
+Implementation-order items1-3 now have their stated bounded read-only service
+coverage. Resource transport, boot handoff/initial state, production 286 memory
+and legacy execution integration, required ROM services, write persistence and
+full-use acceptance remain unfinished. Historical API completeness and physical
+timing are separate from the current model results. No System/Finder startup
+or desktop is credited. The audit and older checkpoints below retain their
+dated state and are superseded only for the exact new claims above.
+
 ## Direction and exact target
 
 SRC-0612 records the owner's new priority: make the selected Macintosh System

@@ -2,7 +2,9 @@
 
 2026-11-17: paired preview publication is complete. The next owner-selected goal
 is [System Disk boot on Mac and 286](development/system-disk-boot-20261117.md).
-The exact disk image and both boot results remain unverified.
+2026-11-18: the exact image is identified and both native targets read every
+file/fork reproducibly. [Read-only evidence](development/mfs-media-20261118.md).
+Both System/Finder boot results and full-use acceptance remain unverified.
 
 2026-10-19 source-review continuation, SRC-0314/0315: owner clears narrow published mouse review; earlier hold resolved, declaration excluded. First pointer/input contract/inventory slice complete with Mac adapter gaps M1-M7; no code, tests, build or trial. Next recommended: bounded cursor composition contract. [Review](development/mac-pointer-source-review.md). Older held checkpoints below are historical. Existing gates and released capabilities remain unchanged.
 

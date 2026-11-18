@@ -1,5 +1,11 @@
 # Milestone roadmap
 
+2026-11-18: exact selected-media identity and native Mac/286 full-fork reads
+are verified. [Read-only integration](development/mfs-media-20261118.md)
+closes the current provider/directory/fork prerequisites. Next are streamed
+resource access, bounded 286 memory integration and a reviewed startup handoff.
+System/Finder boot, persistent writes and the full-use workload remain open.
+
 2026-11-17 storage increment: bounded MFS metadata now runs natively on both
 CPUs, and the286 reads original metadata through an actual modeled floppy
 provider. [Metadata](development/mfs-metadata-20261117.md) and

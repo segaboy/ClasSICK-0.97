@@ -1,5 +1,13 @@
 # Project status
 
+2026-11-18: both native targets read the selected disk's 10 files and 20 forks,
+with identical results across 284392 logical bytes. The new Mac IWM provider
+and shared MFS volume reader pass original failure and recovery controls.
+[Media evidence](development/mfs-media-20261118.md). Resource loading,
+startup handoff and the 286 legacy execution bridge remain in progress;
+System/Finder boot and full use are not established. The November17 paired
+preview is published; older release/input entries below retain dated scope.
+
 2026-10-29,SRC-0542..0546:shared contrasting native cursor and continuing Mac paired-capture candidate implemented;corrected source3f7cc9f fullCI passes. Isolated boots show visible cursor/counter responses,but Mac phase loss and PC GUI drag remain blockers. No release freeze. [Canonical receipt](development/release-input-repair.json).
 
 2026-10-27,SRC-0508..0510:ebfbfb9 fullCI passes. Research-only1664-case/two-compiler sampling study and four prior-PB replays agree;previous phase bits remain the Mac diagnostic gap. Five frozen cases/two refusals verified,existing artifact sizes/hashes measured;original SVG/data/blog fact pack saved. Zero new VM/emulator runs or production changes;desktop trials paused and release input gates open. [Study](research/input-sampling-study.md).

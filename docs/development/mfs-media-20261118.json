@@ -1,0 +1,464 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-18",
+  "test": "TEST-0209",
+  "scope": "Native read-only MFS media integration; no startup or persistence claim",
+  "source_sha256": {
+    "core/storage/block-read.c": "a8f9ce972e05d5278a93e94e6316bd4f008101cacd0cc9d93c047735a3e66baa",
+    "core/storage/mfs-read.c": "62356ec2340dc7296f7f2ebf9496349f51bb111c0d1b1a71a417c53a4772cb91",
+    "core/storage/mfs-volume.c": "df375f049c80021c385d04fadc2e9a4285decc11cc61ffe81683b62d896edbcd",
+    "core/storage/block-read.h": "18bbc57ff7a28a12eff52d95c0d878bb7c2a7f16f581cd45848e5947cdc5f1da",
+    "core/storage/mfs-read.h": "4c839f4ac4fe672c56e9d9a3ff76a797af4f2116594dee94acd01c63b0ea4280",
+    "core/storage/mfs-volume.h": "76800fc306275240a9153da80880fd158b4f8be374c65b3632830d2dcd156e17",
+    "probes/storage/mfs-media.c": "78744b345bb265aef03cfa2fecd697907449ec60995709bbedcab149401d2b50",
+    "probes/storage/mfs-media.h": "1e0d880d94973eb34e9dbd35f65113883170476d34f00b8ff793dd848fb972f3",
+    "docs/specifications/SPEC-0115-mfs-volume-reader.md": "bf29b79a08882623d47b418d832b361674aa0419c909e4920210239d2496d51d",
+    "docs/specifications/SPEC-0112-mfs-metadata-reader.md": "fac1d8a3e184a92e56e79bc87fda8ab88e1d70a38c9261622e46e73e7a700735",
+    "scripts/Test-MfsVolumeMedia.py": "152d40dce2932dcc5c7b308b9aa54c2b4b7f04db866e4b900f09f1266ca785b7",
+    "scripts/pc286-toolchain-lock.json": "eb4b93b16d3343f37273d334bae4af4660af45317308d7a39d948fe2186f2f59",
+    "arch/i286/c16.h": "0d7634a598aa92a0971f8e1bcf55b63df0f3820cb78d4f7817641b27544a3920",
+    "scripts/pc286_loader.py": "f2945b96bfa70a5a06790732c6b31aea94b40b906c37ead041c9e023708ac6d1",
+    "platform/pc286/boothush-floppy-read.c": "07ad1b62f9b17ed630579d6fef08105abb41c496d8134dd5628d72041acbd6ac",
+    "platform/pc286/boothush-floppy-read.h": "b408e21c1411acf3ee078f8718bfdad3b9d823524e8250cd33424575858160ed",
+    "probes/pc286/boot-mfs-media.c": "dc29a9788a899a2e38845ae35a660b017a83b6e5ba044ae4da3369f65df19e08",
+    "scripts/m68k_windows_toolchain.py": "0f662037cfcb2171a00d9be83cccc1560937277bf74f78e908e448c83a4c7627",
+    "arch/m68k/mac-reset.S": "b40c0b860836bfe398053251ffd810c98a1fae17ea049132573415475eaa013d",
+    "arch/m68k/mac-rom.ld": "5d5b7d93dde8b7ae395832955d43baede81f82df50a9b2cda07a2146dd40ae65",
+    "platform/mac128k/iwm-read.c": "75e81244adc3a4282b3e01e90e0e47425a7953994cf4725d34d088096baa7260",
+    "platform/mac128k/iwm-read.h": "d6fafe57e1fa15889c4979a9c0b074910d4c8ea93431c37cf079e81fde5fbf15",
+    "platform/mac128k/iwm-capture.S": "84bbf0e060eb706f92b81777629715acbffbd498aa4e60cdbe41f3f3ebf60cee",
+    "probes/mac128k/mfs-media.c": "841cc35257d7c691640d6834932a4f663b8de1a495d2a7e9bca70321c393bb91"
+  },
+  "tool_sha256": {
+    "emulator": "7adb8a74cef009b7c532df24458c3a5db6b77725356fdb31e5ac4966d7ed971a",
+    "python": "23e0c7f169e3fc760fdedc799cc2673d8d320b6355c97ac2bdce55a28e52dff1",
+    "pc286:binnt64/wcc.exe": "ba98a515edf58c21d69ca14600573930decb94aae64f914fc103465e890a8987",
+    "pc286:binnt64/wccd.dll": "ff5131d9d2638e6839915d4329b2e39178e229c1af80620f89296b7f3a5c2e90",
+    "pc286:binnt64/wdis.exe": "1d6b4dbcb93215a906b3dad21f6b432805aa54181054bed948361719d0f8eb3c",
+    "pc286:binnt64/wlink.exe": "480433043bf88e34dd46d3d8277f3e85a33b2589f012bc04f82ad3fa6751c801",
+    "pc286:binnt64/wlinkd.dll": "c6538c2570057ee1b73955f70eee64f8cb0db80bd6182437d0ce0a597bb57471",
+    "pc286:binnt64/dmpobj.exe": "74956da2a89d85a8a5de0c7e87bf305f6d05e7a88f6d124c9bae03e2a8e8f480",
+    "pc286:license.txt": "b5e6676779126951c3bf84547b577ec7370b073791ca6072aa5568c62a2d7aef",
+    "pc286:h/stdint.h": "f381e49067a625235d75859cd6725e672aadfc328bf2fb4ea181f37ef4d99f4d",
+    "pc286:h/stddef.h": "85c3ebd6d75f3a2ad74e9ed8c54f9a0bb22d39b3d48c8d33a4acec260714184d",
+    "pc286:h/_comdef.h": "601de6f145cf5a5e63db92574b0d76bc2fcac64929482ca52c4f2c8c1eccabf7",
+    "pc286:h/limits.h": "97c3496421b53a333260e78de12dc1fd045e65c083a1be8c2cfaa09c8f7a1877",
+    "pc286:h/stdbool.h": "f7e8733fb0896bf65d17c99bb9c54d274239c3d96fe98f52b8f1420ebc337607",
+    "m68k:gcc": "35e82461e0cfd0e4d89be95920546155c28aabbd88227dec941c5027d1dfbe30",
+    "m68k:nm": "114ba98342ca2023cf00edb3c79d5f80ccf99f4978ff2e28086d1d6fb5e0929a",
+    "m68k:objcopy": "631d6dcdd0a58fde628c56ded48aa8f05df0bbca0ce1ccd74156b75d103706fe",
+    "m68k:objdump": "cd558fa890b6624a7478abdcbbbc882d6db193a34717123c6883215f0f02d390"
+  },
+  "builds": {
+    "pc286": {
+      "payload_bytes": 4790,
+      "payload_sha256": "402b31283237487605ad78fed564030f9fab74141687e14e23897302120f0005",
+      "bss_start": 4790,
+      "bss_bytes": 4478,
+      "report_address": 72886,
+      "runtime_modules": []
+    },
+    "mac128k": {
+      "rom_sha256": "a7ac6d3d2e1f903ae1cbc89a559119a218e00ec7a75b56689ebc15747b2b28dc",
+      "payload_bytes": 5752,
+      "diag_address": 6772,
+      "report_address": 2816,
+      "runtime_modules": []
+    }
+  },
+  "original_media": {
+    "logical_sha256": "be1a51113cdcc441eb4248193c8626a71471793970464cfb64bf049a61c5dd7b",
+    "expected_report_words": [
+      1296454486,
+      2,
+      1,
+      2,
+      16,
+      11,
+      2,
+      4,
+      2967,
+      802217902,
+      0,
+      0
+    ],
+    "observed": [
+      {
+        "lane": "pc286",
+        "case": "baseline",
+        "report_words": [
+          1296454486,
+          2,
+          1,
+          2,
+          16,
+          11,
+          2,
+          4,
+          2967,
+          802217902,
+          0,
+          0
+        ],
+        "status": "condition_met",
+        "modeled_cycles": 2114683,
+        "full_original_payload_matches": true
+      },
+      {
+        "lane": "pc286",
+        "case": "late-fault",
+        "report_words": [
+          1296454486,
+          1,
+          8,
+          2,
+          16,
+          11,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "status": "condition_met",
+        "modeled_cycles": 853575,
+        "full_original_payload_matches": true,
+        "floppy_read_failure": {
+          "cylinder": 2,
+          "head": 1,
+          "sector": 8,
+          "injected": 1,
+          "bios_status": 32
+        }
+      },
+      {
+        "lane": "pc286",
+        "case": "fresh-recovery",
+        "report_words": [
+          1296454486,
+          2,
+          1,
+          2,
+          16,
+          11,
+          2,
+          4,
+          2967,
+          802217902,
+          0,
+          0
+        ],
+        "status": "condition_met",
+        "modeled_cycles": 2114683,
+        "full_original_payload_matches": true
+      },
+      {
+        "lane": "mac128k",
+        "case": "baseline",
+        "report_words": [
+          1296454486,
+          2,
+          1,
+          2,
+          16,
+          11,
+          2,
+          4,
+          2967,
+          802217902,
+          0,
+          0
+        ],
+        "status": "condition_met",
+        "modeled_cycles": 47073758,
+        "diagnostic_words": [
+          183,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "lane": "mac128k",
+        "case": "late-fault",
+        "report_words": [
+          1296454486,
+          1,
+          8,
+          2,
+          16,
+          11,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "status": "condition_met",
+        "modeled_cycles": 16868546,
+        "diagnostic_words": [
+          212,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "mac_floppy_checksum_fault": {
+          "kind": "synthetic_gcr_data_checksum",
+          "mode": "persistent",
+          "track": 1,
+          "sector": 10,
+          "altered_nibbles": 3
+        }
+      },
+      {
+        "lane": "mac128k",
+        "case": "fresh-recovery",
+        "report_words": [
+          1296454486,
+          2,
+          1,
+          2,
+          16,
+          11,
+          2,
+          4,
+          2967,
+          802217902,
+          0,
+          0
+        ],
+        "status": "condition_met",
+        "modeled_cycles": 47073758,
+        "diagnostic_words": [
+          183,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ]
+  },
+  "selected_media": {
+    "container_sha256": "1e03b75a05bbf441ae4e1808f70e38ffe0a07e3cc3298de151c0d2775552c647",
+    "logical_sha256": "af412a6e3ef312ec51b6d53e99ca65e3246ab047650df835ce4f29f58f9f65c1",
+    "observed": [
+      {
+        "lane": "pc286",
+        "case": "baseline",
+        "report_words": [
+          1296454486,
+          2,
+          1,
+          10,
+          391,
+          109,
+          10,
+          20,
+          284392,
+          1229986664,
+          0,
+          0
+        ],
+        "status": "condition_met",
+        "modeled_cycles": 289021817,
+        "full_original_payload_matches": true
+      },
+      {
+        "lane": "pc286",
+        "case": "repeat",
+        "report_words": [
+          1296454486,
+          2,
+          1,
+          10,
+          391,
+          109,
+          10,
+          20,
+          284392,
+          1229986664,
+          0,
+          0
+        ],
+        "status": "condition_met",
+        "modeled_cycles": 289021817,
+        "full_original_payload_matches": true
+      },
+      {
+        "lane": "mac128k",
+        "case": "baseline",
+        "report_words": [
+          1296454486,
+          2,
+          1,
+          10,
+          391,
+          109,
+          10,
+          20,
+          284392,
+          1229986664,
+          0,
+          0
+        ],
+        "status": "condition_met",
+        "modeled_cycles": 2552834114,
+        "diagnostic_words": [
+          183,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "lane": "mac128k",
+        "case": "repeat",
+        "report_words": [
+          1296454486,
+          2,
+          1,
+          10,
+          391,
+          109,
+          10,
+          20,
+          284392,
+          1229986664,
+          0,
+          0
+        ],
+        "status": "condition_met",
+        "modeled_cycles": 2552834114,
+        "diagnostic_words": [
+          183,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ]
+  },
+  "report_sha256": {
+    "original": "be618e1bfcc2dd35ce4d215f8208a79b3a8d3db3357badb14f329be2eccc1fe0",
+    "selected": "838e55324fcd9a6b7f906d08590a67d0120d87e23d2bd959a032f17e327988cc"
+  },
+  "cycle_and_timeout_ms_budgets": {
+    "original": [
+      [
+        400000000,
+        30000
+      ]
+    ],
+    "selected": [
+      [
+        4000000000,
+        60000
+      ]
+    ]
+  },
+  "source_tool_build_identities_match_between_reports": true,
+  "all_inputs_unchanged": true,
+  "sanitization": "Explicit allowlist: no commands, private paths, transfer images, filenames from media, file bytes or reference frames. Original code and media remain separate from private runtime transfers.",
+  "limits": [
+    "Read-only native diagnostic integration, not File Manager traps or System startup.",
+    "Selected volume is a private runtime input; only counters and digests are published.",
+    "PC transfer uses logical sectors at an original diagnostic offset, not the final product bridge.",
+    "Injected original-media failure is late in the file but confined to one 256-byte request.",
+    "Both target builds share the core; equal digests are not independent historical implementation validation.",
+    "No physical hardware or write/persistence qualification."
+  ],
+  "post_verification_formatting": {
+    "docs/development/mac-floppy-provider-20261118.md": {
+      "tested_sha256": "f3b2c58d376d85551315fd2353617ea4b16d3b8796a1774c200cafb21d2cc7c6",
+      "formatted_sha256": "4a62d447447c2241b08e634609765d812d5242f225c48935bd2bcd34a637277c",
+      "change": "terminal newline normalization only; all preceding bytes identical"
+    },
+    "docs/development/mfs-volume-20261118.md": {
+      "tested_sha256": "cb6fff34f115717457690cc87437253c8981486b77cd33cc17a14a39b0f59045",
+      "formatted_sha256": "468b1cf3894919355bbe62bdab70d8b6194d938d1f0ea8f5ed44b31de81c43ad",
+      "change": "terminal newline normalization only; all preceding bytes identical"
+    },
+    "docs/development/selected-disk-survey-20261118.md": {
+      "tested_sha256": "1ca995b33b2f70c77069476b3e16016493b1802cfb31657c20fc803eab921560",
+      "formatted_sha256": "2bfa2cdd9aaf906848e56aba66928ba49b40011f8e8a683ac01f3e84a93e6ac4",
+      "change": "terminal newline normalization only; all preceding bytes identical"
+    },
+    "probes/mac128k/mfs-media.c": {
+      "tested_sha256": "841cc35257d7c691640d6834932a4f663b8de1a495d2a7e9bca70321c393bb91",
+      "formatted_sha256": "8d06630f1f276c627f6d2eceb130f846b4cb316de7e33776fadacf4f1fb77db3",
+      "change": "terminal newline normalization only; all preceding bytes identical"
+    },
+    "probes/pc286/boot-mfs-media.c": {
+      "tested_sha256": "dc29a9788a899a2e38845ae35a660b017a83b6e5ba044ae4da3369f65df19e08",
+      "formatted_sha256": "773ceb7b584fd3edd2136e2a731143a71a8131348f895aad8054908110135e54",
+      "change": "terminal newline normalization only; all preceding bytes identical"
+    },
+    "probes/storage/mfs-media.c": {
+      "tested_sha256": "78744b345bb265aef03cfa2fecd697907449ec60995709bbedcab149401d2b50",
+      "formatted_sha256": "22a32c9b1a97075bc94822e42e64b2b6d5d188ddad5e7654f249a1001f5b4906",
+      "change": "terminal newline normalization only; all preceding bytes identical"
+    },
+    "probes/storage/mfs-media.h": {
+      "tested_sha256": "1e0d880d94973eb34e9dbd35f65113883170476d34f00b8ff793dd848fb972f3",
+      "formatted_sha256": "7cad17ae8ef964706d0e1f43e601d297546ee9787a065b14acf822e8b6b13543",
+      "change": "terminal newline normalization only; all preceding bytes identical"
+    },
+    "provenance/records/IMPL-0144-mac-floppy-provider.md": {
+      "tested_sha256": "171e6e2eee4cfa39ea1f7260a3059b800c4a744dc038d8d68a9e8bd943faf659",
+      "formatted_sha256": "4668bbf5888619bc4fdced9483b5094310ccc3d6fc0aee84101e53f34703cd58",
+      "change": "terminal newline normalization only; all preceding bytes identical"
+    },
+    "provenance/records/IMPL-0145-mfs-volume-reader.md": {
+      "tested_sha256": "fa9a3118c2f5f73ff1f6cfcdb1df0e76132036bd76f60f7ba843f7b9e128b710",
+      "formatted_sha256": "e66ba16636fc6bcf9a89fc40a1fdb29d1100b0b311536b4f6391aa884464aed1",
+      "change": "terminal newline normalization only; all preceding bytes identical"
+    },
+    "provenance/records/SRC-0614-selected-disk-structure.md": {
+      "tested_sha256": "14cc9fb43c4f152659d734ebddadffafa6812c0cec7f8bf8b783a3fd46810313",
+      "formatted_sha256": "dfa839ac07df22f9aa30916db50155feeef31d06810e75a9cee15158e8616e42",
+      "change": "terminal newline normalization only; all preceding bytes identical"
+    },
+    "provenance/records/SRC-0615-modeled-mac-floppy-interface.md": {
+      "tested_sha256": "d1055471956fe58638df7e319f14c2d1af7a8c652387ab453be80f86c05c61c4",
+      "formatted_sha256": "0d01d2f793a62f9fced118bb825d73bd9acab49eab515475b5e4a585f3d04bff",
+      "change": "terminal newline normalization only; all preceding bytes identical"
+    },
+    "provenance/records/TEST-0203-mac-floppy-provider.md": {
+      "tested_sha256": "3e1703e524588b5f1d5f6aee25dd8c67e1ef692b955a1d3bc335c7f69843935f",
+      "formatted_sha256": "b57c076a80227fb497c211326fb0ad2d17c3e478b1c6b1e0ee126476e4f81e77",
+      "change": "terminal newline normalization only; all preceding bytes identical"
+    },
+    "provenance/records/TEST-0204-mfs-volume-reader.md": {
+      "tested_sha256": "d8e2cf8d11e78e4e842af4cbcf337971c252f3060936a61932dfa92f574706e7",
+      "formatted_sha256": "9eb109726db3a44fd6d06d45815de1861b3603041a4e732133af05e5c5f92b94",
+      "change": "terminal newline normalization only; all preceding bytes identical"
+    },
+    "provenance/records/TEST-0205-selected-disk-survey.md": {
+      "tested_sha256": "d415e5b0e43d394ff37c0ccfaf2522e1bacdbd6b59302624f73c33aeecfebecd",
+      "formatted_sha256": "ffc47916d0897654074017b7d4d243693cca3d30e9550ecf4beb9914edc83230",
+      "change": "terminal newline normalization only; all preceding bytes identical"
+    },
+    "tests/mfs-volume.c": {
+      "tested_sha256": "8214cb7966c138d5384595a2d872f4fdd1d51dde523aeeeaefd8cdbd4dd8418d",
+      "formatted_sha256": "dea7b74152d0bfed00ec50d2f3ed8f693cf0825369892dd66633688f454811ab",
+      "change": "terminal newline normalization only; all preceding bytes identical"
+    }
+  }
+}

@@ -1,0 +1,371 @@
+{
+  "schema_version": 1,
+  "classification": "bounded read-only black-box observation; not a boot",
+  "disk": {
+    "bytes": 419284,
+    "sha256": "1e03b75a05bbf441ae4e1808f70e38ffe0a07e3cc3298de151c0d2775552c647",
+    "container": "Disk Copy 4.2",
+    "data_bytes": 409600,
+    "tag_bytes": 9600,
+    "encoding_byte": 0,
+    "format_byte": 2,
+    "private_magic": 256,
+    "header_name_length": 11
+  },
+  "emulator_sha256": "7adb8a74cef009b7c532df24458c3a5db6b77725356fdb31e5ac4966d7ed971a",
+  "rom_sha256": "5d48f7877386e30f8e45e0456f528e93c1990aa7dd5b7ef37b40ddd7cf1de5a0",
+  "source_sha256": {
+    "platform/pc286/boothush-floppy-read.c": "07ad1b62f9b17ed630579d6fef08105abb41c496d8134dd5628d72041acbd6ac",
+    "platform/pc286/boothush-floppy-read.h": "b408e21c1411acf3ee078f8718bfdad3b9d823524e8250cd33424575858160ed",
+    "probes/pc286/selected-disk-survey.c": "51b2c1217624de462cbc694615941b4d25bbeb78b609f3d92cd9e52c8f9f86f1",
+    "core/storage/block-read.c": "a8f9ce972e05d5278a93e94e6316bd4f008101cacd0cc9d93c047735a3e66baa",
+    "core/storage/block-read.h": "18bbc57ff7a28a12eff52d95c0d878bb7c2a7f16f581cd45848e5947cdc5f1da",
+    "core/storage/mfs-read.c": "62356ec2340dc7296f7f2ebf9496349f51bb111c0d1b1a71a417c53a4772cb91",
+    "core/storage/mfs-read.h": "4c839f4ac4fe672c56e9d9a3ff76a797af4f2116594dee94acd01c63b0ea4280",
+    "arch/i286/c16.h": "0d7634a598aa92a0971f8e1bcf55b63df0f3820cb78d4f7817641b27544a3920",
+    "scripts/pc286_loader.py": "f2945b96bfa70a5a06790732c6b31aea94b40b906c37ead041c9e023708ac6d1",
+    "scripts/Survey-SelectedDisk.py": "db059b617c12c014dea30a07623162d3756bb572c98feb910226d8a6c260eef2"
+  },
+  "pc286_lock_sha256": "eb4b93b16d3343f37273d334bae4af4660af45317308d7a39d948fe2186f2f59",
+  "payload_sha256": "27368ef7b53d11a7f71e8efb4cf65ccfceedc2b9721e51df0f00f730a5c5d5ae",
+  "payload_bytes": 2999,
+  "bss": [
+    3000,
+    6642
+  ],
+  "transfer": {
+    "first_sector": 60,
+    "blocks": 800,
+    "transfer_sha256": "cac76821b939bb38a01003f63f97ed686793ae31d28fe1865331da024b28b616",
+    "no_volume_sha256": "b8f34aaa52995e0d14fdaf05ec6bde49557411396fae209c910897247a376ce5",
+    "tags_carried": false
+  },
+  "mac_repeatable": true,
+  "survey_repeatable": true,
+  "controls": {
+    "header_fault_returns_io": true,
+    "no_volume_returns_signature": true
+  },
+  "disk_checks": [
+    {
+      "after": "mac-cold-1",
+      "selected_disk_unchanged": true
+    },
+    {
+      "after": "mac-cold-2",
+      "selected_disk_unchanged": true
+    },
+    {
+      "after": "mac-cold-3",
+      "selected_disk_unchanged": true
+    },
+    {
+      "after": "selected-cold-1",
+      "selected_disk_unchanged": true
+    },
+    {
+      "after": "selected-cold-2",
+      "selected_disk_unchanged": true
+    },
+    {
+      "after": "selected-cold-3",
+      "selected_disk_unchanged": true
+    },
+    {
+      "after": "selected-header-fault",
+      "selected_disk_unchanged": true
+    },
+    {
+      "after": "original-no-volume",
+      "selected_disk_unchanged": true
+    },
+    {
+      "after": "final",
+      "selected_disk_unchanged": true
+    }
+  ],
+  "mac": [
+    {
+      "run": 1,
+      "status": "cycle_limit",
+      "cycles": 100000010,
+      "pc": 4219576,
+      "mac_floppy": {
+        "observation": "modeled_iwm",
+        "media_present": true,
+        "write_protected": true,
+        "external_selected": false,
+        "controller_enabled": false,
+        "motor_on": false,
+        "disk_changed": true,
+        "step_outward": false,
+        "select_line": true,
+        "track": 0,
+        "control": 0,
+        "mode": 0,
+        "step_commands": 0,
+        "nibbles_delivered": 0,
+        "disabled_data_reads": 0,
+        "not_ready_data_reads": 0,
+        "ignored_data_writes": 0,
+        "eject_commands": 0
+      },
+      "frame_sha256": "2c952f820d085441c34e5e8d4b63852c4c223dab52002a8b9ad01d7e4b24361b"
+    },
+    {
+      "run": 2,
+      "status": "cycle_limit",
+      "cycles": 100000010,
+      "pc": 4219576,
+      "mac_floppy": {
+        "observation": "modeled_iwm",
+        "media_present": true,
+        "write_protected": true,
+        "external_selected": false,
+        "controller_enabled": false,
+        "motor_on": false,
+        "disk_changed": true,
+        "step_outward": false,
+        "select_line": true,
+        "track": 0,
+        "control": 0,
+        "mode": 0,
+        "step_commands": 0,
+        "nibbles_delivered": 0,
+        "disabled_data_reads": 0,
+        "not_ready_data_reads": 0,
+        "ignored_data_writes": 0,
+        "eject_commands": 0
+      },
+      "frame_sha256": "2c952f820d085441c34e5e8d4b63852c4c223dab52002a8b9ad01d7e4b24361b"
+    },
+    {
+      "run": 3,
+      "status": "cycle_limit",
+      "cycles": 100000010,
+      "pc": 4219576,
+      "mac_floppy": {
+        "observation": "modeled_iwm",
+        "media_present": true,
+        "write_protected": true,
+        "external_selected": false,
+        "controller_enabled": false,
+        "motor_on": false,
+        "disk_changed": true,
+        "step_outward": false,
+        "select_line": true,
+        "track": 0,
+        "control": 0,
+        "mode": 0,
+        "step_commands": 0,
+        "nibbles_delivered": 0,
+        "disabled_data_reads": 0,
+        "not_ready_data_reads": 0,
+        "ignored_data_writes": 0,
+        "eject_commands": 0
+      },
+      "frame_sha256": "2c952f820d085441c34e5e8d4b63852c4c223dab52002a8b9ad01d7e4b24361b"
+    }
+  ],
+  "native286": [
+    {
+      "case": "selected-cold-1",
+      "media_sha256": "cac76821b939bb38a01003f63f97ed686793ae31d28fe1865331da024b28b616",
+      "fault": null,
+      "post": 188,
+      "report_sha256": "bcb2e1087b2e251443e9aece29c5339272612603f796fd4c21e1c16f908f1ed4",
+      "public": {
+        "stage": 5,
+        "header_result": "OK",
+        "master_read_failed": false,
+        "layout_version": 1,
+        "volume": {
+          "created": 2535177865,
+          "backup": 1662286608,
+          "attributes": 0,
+          "file_count": 10,
+          "dir_first": 4,
+          "dir_blocks": 12,
+          "alloc_count": 391,
+          "alloc_bytes": 1024,
+          "clump_bytes": 8192,
+          "alloc_first": 16,
+          "next_file": 12,
+          "free_blocks": 109,
+          "name_length": 11
+        },
+        "enumeration": {
+          "active_entries": 10,
+          "entry_bounds_failures": 0,
+          "blocks_with_nonzero_tail": 0,
+          "directory_read_errors": 0
+        },
+        "packings": {
+          "A_high_nibble_first": {
+            "forks_checked": 20,
+            "forks_consistent": 20,
+            "forks_bad_link": 0,
+            "forks_loop": 0,
+            "forks_length_mismatch": 0,
+            "map_used": 282,
+            "map_unused": 109,
+            "map_invalid": 0
+          },
+          "B_low_nibble_first": {
+            "forks_checked": 20,
+            "forks_consistent": 10,
+            "forks_bad_link": 10,
+            "forks_loop": 0,
+            "forks_length_mismatch": 0,
+            "map_used": 154,
+            "map_unused": 119,
+            "map_invalid": 118
+          }
+        }
+      },
+      "cycles": 1334641
+    },
+    {
+      "case": "selected-cold-2",
+      "media_sha256": "cac76821b939bb38a01003f63f97ed686793ae31d28fe1865331da024b28b616",
+      "fault": null,
+      "post": 188,
+      "report_sha256": "bcb2e1087b2e251443e9aece29c5339272612603f796fd4c21e1c16f908f1ed4",
+      "public": {
+        "stage": 5,
+        "header_result": "OK",
+        "master_read_failed": false,
+        "layout_version": 1,
+        "volume": {
+          "created": 2535177865,
+          "backup": 1662286608,
+          "attributes": 0,
+          "file_count": 10,
+          "dir_first": 4,
+          "dir_blocks": 12,
+          "alloc_count": 391,
+          "alloc_bytes": 1024,
+          "clump_bytes": 8192,
+          "alloc_first": 16,
+          "next_file": 12,
+          "free_blocks": 109,
+          "name_length": 11
+        },
+        "enumeration": {
+          "active_entries": 10,
+          "entry_bounds_failures": 0,
+          "blocks_with_nonzero_tail": 0,
+          "directory_read_errors": 0
+        },
+        "packings": {
+          "A_high_nibble_first": {
+            "forks_checked": 20,
+            "forks_consistent": 20,
+            "forks_bad_link": 0,
+            "forks_loop": 0,
+            "forks_length_mismatch": 0,
+            "map_used": 282,
+            "map_unused": 109,
+            "map_invalid": 0
+          },
+          "B_low_nibble_first": {
+            "forks_checked": 20,
+            "forks_consistent": 10,
+            "forks_bad_link": 10,
+            "forks_loop": 0,
+            "forks_length_mismatch": 0,
+            "map_used": 154,
+            "map_unused": 119,
+            "map_invalid": 118
+          }
+        }
+      },
+      "cycles": 1334641
+    },
+    {
+      "case": "selected-cold-3",
+      "media_sha256": "cac76821b939bb38a01003f63f97ed686793ae31d28fe1865331da024b28b616",
+      "fault": null,
+      "post": 188,
+      "report_sha256": "bcb2e1087b2e251443e9aece29c5339272612603f796fd4c21e1c16f908f1ed4",
+      "public": {
+        "stage": 5,
+        "header_result": "OK",
+        "master_read_failed": false,
+        "layout_version": 1,
+        "volume": {
+          "created": 2535177865,
+          "backup": 1662286608,
+          "attributes": 0,
+          "file_count": 10,
+          "dir_first": 4,
+          "dir_blocks": 12,
+          "alloc_count": 391,
+          "alloc_bytes": 1024,
+          "clump_bytes": 8192,
+          "alloc_first": 16,
+          "next_file": 12,
+          "free_blocks": 109,
+          "name_length": 11
+        },
+        "enumeration": {
+          "active_entries": 10,
+          "entry_bounds_failures": 0,
+          "blocks_with_nonzero_tail": 0,
+          "directory_read_errors": 0
+        },
+        "packings": {
+          "A_high_nibble_first": {
+            "forks_checked": 20,
+            "forks_consistent": 20,
+            "forks_bad_link": 0,
+            "forks_loop": 0,
+            "forks_length_mismatch": 0,
+            "map_used": 282,
+            "map_unused": 109,
+            "map_invalid": 0
+          },
+          "B_low_nibble_first": {
+            "forks_checked": 20,
+            "forks_consistent": 10,
+            "forks_bad_link": 10,
+            "forks_loop": 0,
+            "forks_length_mismatch": 0,
+            "map_used": 154,
+            "map_unused": 119,
+            "map_invalid": 118
+          }
+        }
+      },
+      "cycles": 1334641
+    },
+    {
+      "case": "selected-header-fault",
+      "media_sha256": "cac76821b939bb38a01003f63f97ed686793ae31d28fe1865331da024b28b616",
+      "fault": "2:0:3",
+      "post": 189,
+      "report_sha256": "3bca7f569629340f67a9d6e5640761f54b88fb7b8d50e7ac0bb23f0cc7b8c267",
+      "public": {
+        "stage": 1,
+        "header_result": "IO",
+        "master_read_failed": false,
+        "layout_version": 1
+      },
+      "cycles": 166603
+    },
+    {
+      "case": "original-no-volume",
+      "media_sha256": "b8f34aaa52995e0d14fdaf05ec6bde49557411396fae209c910897247a376ce5",
+      "fault": null,
+      "post": 189,
+      "report_sha256": "7f71e891864e10efd79d20130086b312bafe2f607cf1f758019e13675f6b2c91",
+      "public": {
+        "stage": 1,
+        "header_result": "SIGNATURE",
+        "master_read_failed": false,
+        "layout_version": 1
+      },
+      "cycles": 210381
+    }
+  ]
+}

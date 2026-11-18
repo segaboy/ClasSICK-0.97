@@ -5189,3 +5189,15 @@ fields and structural boundaries inform SPEC-0112 / IMPL-0142 / TEST-0201;
 API, failure contracts and all code/fixtures are original. No protected
 implementation or disk input; allocation-map packing and January1984
 compatibility remain unverified. [Source review](records/SRC-0613-mfs-metadata-fields.md).
+
+## SRC-0614 - Selected-image MFS structural observation
+
+2026-11-18; exact private input identity, repeated native metadata observations,
+and high-first allocation-map consistency support a narrow read-only profile.
+No protected implementation is a source. [Review](records/SRC-0614-selected-disk-structure.md).
+
+## SRC-0615 - Original modeled Mac floppy interface
+
+2026-11-18; reviewed original BootHush documentation/fixtures supply model interface
+facts for the independently authored IWM reader. Third-party implementation and
+confidential material remain excluded. [Review](records/SRC-0615-modeled-mac-floppy-interface.md).

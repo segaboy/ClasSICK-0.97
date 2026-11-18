@@ -2,7 +2,10 @@
 
 Next milestone, 2026-11-17: boot the owner-selected Macintosh System Disk against
 ClasSICK on Mac128K and native 286. [Acceptance, current gaps and implementation order](docs/development/system-disk-boot-20261117.md).
-The disk image is not yet identified; neither System Disk boot is verified.
+2026-11-18: the exact disk is identified. Native Mac and 286 readers traverse
+all 10 files and 20 forks with matching counts and digests in repeated runs.
+[Read-only media evidence](docs/development/mfs-media-20261118.md).
+System/Finder startup and the full-use workload remain unfinished.
 
 Published 2026-11-17: [ROM 0.4.0-alpha.1](https://github.com/segaboy/ClasSICK-0.97/releases/tag/rom-v0.4.0-alpha.1) and [native 286 PC Preview 0.2.0-alpha.1](https://github.com/segaboy/ClasSICK-0.97/releases/tag/pc-v0.2.0-alpha.1).
 The paired experimental interactive-window release includes both targets,
