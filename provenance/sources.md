@@ -5201,3 +5201,9 @@ No protected implementation is a source. [Review](records/SRC-0614-selected-disk
 2026-11-18; reviewed original BootHush documentation/fixtures supply model interface
 facts for the independently authored IWM reader. Third-party implementation and
 confidential material remain excluded. [Review](records/SRC-0615-modeled-mac-floppy-interface.md).
+
+## SRC-0616 - Published 68000 address and stack instructions
+
+2026-11-18; scoped Motorola1992/NXP primary-manual review admits base-family
+LEA/PEA/LINK.W/UNLK and DBcc encoding/behavior facts for SPEC-0118. No protected
+code or manual samples transferred. [Review](records/SRC-0616-m68k-address-stack-instructions.md).

@@ -250,6 +250,52 @@ static cs_m68k_result jump(transaction *t,uint16_t word)
     }
     t->frame.pc=at;t->report->branch_taken=1;return CS_M68K_OK;
 }
+static cs_m68k_result address_instruction(transaction *t,uint16_t word)
+{
+    uint32_t at;cs_m68k_result status=control_address(t,word,&at);
+    if(status!=CS_M68K_OK) return status;
+    if((word&0xF1C0u)==0x41C0u) t->frame.a[(word>>9)&7u]=at;
+    else {
+        if(t->frame.a[7]<4) {t->report->memory=CS_GUEST_ADDRESS;return CS_M68K_ADDRESS;}
+        uint32_t slot=t->frame.a[7]-4;
+        status=stack_span(t,slot,4);
+        if(status!=CS_M68K_OK) return status;
+        status=preflight_store(t,slot,4,at);
+        if(status!=CS_M68K_OK) return status;
+        t->frame.a[7]=slot;
+    }
+    t->frame.pc=t->cursor;return CS_M68K_OK;
+}
+static cs_m68k_result frame_instruction(transaction *t,uint16_t word)
+{
+    unsigned reg=word&7u;
+    /* A7 alias ordering is outside the admitted bounded profile. */
+    if(reg==7) return CS_M68K_OPCODE;
+    uint32_t slot,value;cs_m68k_result status;
+    if((word&8u)==0) {
+        status=extension(t,2,&value);
+        if(status!=CS_M68K_OK) return status;
+        if(t->frame.a[7]<4) {t->report->memory=CS_GUEST_ADDRESS;return CS_M68K_ADDRESS;}
+        slot=t->frame.a[7]-4;
+        status=stack_span(t,slot,4);
+        if(status!=CS_M68K_OK) return status;
+        status=preflight_store(t,slot,4,t->frame.a[reg]);
+        if(status!=CS_M68K_OK) return status;
+        status=add_offset(t,slot,sign_extend(value,16),&t->frame.a[7]);
+        if(status!=CS_M68K_OK) return status;
+        t->frame.a[reg]=slot;
+    } else {
+        slot=t->frame.a[reg];
+        status=stack_span(t,slot,4);
+        if(status!=CS_M68K_OK) return status;
+        status=read_value(t,slot,4,CS_GUEST_READ,&value,CS_M68K_GUARD_READ);
+        if(status!=CS_M68K_OK) return status;
+        status=add_offset(t,slot,4,&t->frame.a[7]);
+        if(status!=CS_M68K_OK) return status;
+        t->frame.a[reg]=value;
+    }
+    t->frame.pc=t->cursor;return CS_M68K_OK;
+}
 static cs_m68k_result aline(transaction *t,cs_trap_gateway *g,uint16_t word)
 {
     cs_m68k_bus_report *r=t->report;cs_guest_view view;
@@ -319,6 +365,8 @@ static cs_m68k_result step(const cs_guest_map *m,cs_trap_gateway *g,
     }
     else if(word==0x4E71u) t.frame.pc=t.cursor;
     else if(word==0x4E75u) status=return_instruction(&t);
+    else if((word&0xF1C0u)==0x41C0u || (word&0xFFC0u)==0x4840u) status=address_instruction(&t,word);
+    else if((word&0xFFF0u)==0x4E50u) status=frame_instruction(&t,word);
     else if((word&0xFFC0u)==0x4E80u || (word&0xFFC0u)==0x4EC0u) status=jump(&t,word);
     else if(kind==10) status=aline(&t,g,word);
     else status=CS_M68K_OPCODE;
@@ -348,6 +396,27 @@ cs_m68k_result cs_m68k_bus_step(const cs_guest_map *m,cs_trap_gateway *g,
 {return cs_m68k_bus_step_options(m,g,f,r,0);}
 
 typedef struct {uintptr_t at;size_t bytes;} native_span;
+/* C99 native compilers use owned member-offset queries. On the admitted
+ * ABIs these offsets are the corresponding type alignments. Keep the C11
+ * query where available; no reserved keyword is redefined. */
+#if defined(__STDC_VERSION__) && __STDC_VERSION__ >= 201112L
+#define CS_BUS_ALIGNMENT(type) _Alignof(type)
+#else
+#define CS_BUS_ALIGNMENT_TYPE(type) \
+    typedef struct {unsigned char prefix;type value;} cs_bus_alignment_##type; \
+    typedef char cs_bus_alignment_check_##type[ \
+        (offsetof(cs_bus_alignment_##type,value)!=0 && \
+        (offsetof(cs_bus_alignment_##type,value)& \
+        (offsetof(cs_bus_alignment_##type,value)-1u))==0)?1:-1]
+CS_BUS_ALIGNMENT_TYPE(cs_guest_map);
+CS_BUS_ALIGNMENT_TYPE(cs_trap_gateway);
+CS_BUS_ALIGNMENT_TYPE(cs_trap_frame);
+CS_BUS_ALIGNMENT_TYPE(cs_m68k_bus_report);
+CS_BUS_ALIGNMENT_TYPE(cs_m68k_stack_limits);
+CS_BUS_ALIGNMENT_TYPE(cs_m68k_guard);
+CS_BUS_ALIGNMENT_TYPE(cs_guest_region);
+#define CS_BUS_ALIGNMENT(type) offsetof(cs_bus_alignment_##type,value)
+#endif
 static int span(native_span *out,const void *object,size_t bytes)
 {
     uintptr_t at=(uintptr_t)object;
@@ -364,14 +433,14 @@ static int envelope(const cs_guest_map *m,const cs_trap_gateway *g,
     if(!span(&controls[0],m,sizeof *m) || !span(&controls[1],g,sizeof *g) ||
         !span(&controls[2],f,sizeof *f) || !span(&controls[3],r,sizeof *r) ||
         !span(&controls[4],limits,sizeof *limits) || !span(&controls[5],guard,sizeof *guard)) return 0;
-    if(((uintptr_t)m&(_Alignof(cs_guest_map)-1u))!=0 ||
-        ((uintptr_t)g&(_Alignof(cs_trap_gateway)-1u))!=0 ||
-        ((uintptr_t)f&(_Alignof(cs_trap_frame)-1u))!=0 ||
-        ((uintptr_t)r&(_Alignof(cs_m68k_bus_report)-1u))!=0 ||
-        ((uintptr_t)limits&(_Alignof(cs_m68k_stack_limits)-1u))!=0 ||
-        ((uintptr_t)guard&(_Alignof(cs_m68k_guard)-1u))!=0) return 0;
+    if(((uintptr_t)m&(CS_BUS_ALIGNMENT(cs_guest_map)-1u))!=0 ||
+        ((uintptr_t)g&(CS_BUS_ALIGNMENT(cs_trap_gateway)-1u))!=0 ||
+        ((uintptr_t)f&(CS_BUS_ALIGNMENT(cs_trap_frame)-1u))!=0 ||
+        ((uintptr_t)r&(CS_BUS_ALIGNMENT(cs_m68k_bus_report)-1u))!=0 ||
+        ((uintptr_t)limits&(CS_BUS_ALIGNMENT(cs_m68k_stack_limits)-1u))!=0 ||
+        ((uintptr_t)guard&(CS_BUS_ALIGNMENT(cs_m68k_guard)-1u))!=0) return 0;
     if(m->count==0 || m->count>CS_GUEST_MAX_REGIONS ||
-        ((uintptr_t)m->regions&(_Alignof(cs_guest_region)-1u))!=0 ||
+        ((uintptr_t)m->regions&(CS_BUS_ALIGNMENT(cs_guest_region)-1u))!=0 ||
         !span(&controls[n++],m->regions,m->count*sizeof *m->regions)) return 0;
     if(guard->check==0 || ((guard->context==0)!=(guard->context_bytes==0))) return 0;
     if(guard->context!=0 && !span(&controls[n++],guard->context,guard->context_bytes)) return 0;
@@ -380,11 +449,15 @@ static int envelope(const cs_guest_map *m,const cs_trap_gateway *g,
     if(cs_guest_validate(m)!=CS_GUEST_OK) return 0;
     for(size_t i=0;i<m->count;++i) {
         native_span backing;
-        if(!span(&backing,m->regions[i].bytes,m->regions[i].size)) return 0;
+        /* A 32-bit guest extent must fit one native object before narrowing
+         * to size_t or performing pointer arithmetic on a C16 target. */
+        if((sizeof(size_t)<sizeof(uint32_t) && m->regions[i].size>(uint32_t)SIZE_MAX) ||
+            (sizeof(ptrdiff_t)<=sizeof(uint32_t) && m->regions[i].size>(uint32_t)PTRDIFF_MAX) ||
+            !span(&backing,m->regions[i].bytes,(size_t)m->regions[i].size)) return 0;
         for(size_t j=0;j<n;++j) if(overlaps(backing,controls[j])) return 0;
         for(size_t j=0;j<i;++j) {
             native_span previous;
-            if(!span(&previous,m->regions[j].bytes,m->regions[j].size) ||
+            if(!span(&previous,m->regions[j].bytes,(size_t)m->regions[j].size) ||
                 overlaps(backing,previous)) return 0;
         }
     }
