@@ -123,6 +123,28 @@ cs_pg_result cs_pc286_guest_retire(cs_pc286_guest *s, uint32_t generation)
     return CS_PG_OK;
 }
 
+cs_pg_result cs_pc286_guest_validate(const cs_pc286_guest *s, uint32_t generation)
+{
+    return live(s, generation);
+}
+
+cs_pg_result cs_pc286_guest_span(const cs_pc286_guest *s, uint32_t generation,
+    uint32_t at, uint32_t bytes, uint32_t access)
+{
+    cs_pg_result result;
+    uint16_t i;
+    if (access == 0UL || (access & 0xfffffff8UL) != 0UL) return CS_PG_ARGUMENT;
+    result = live(s, generation);
+    if (result != CS_PG_OK) return result;
+    if (bytes == 0UL || at >= 0x1000000UL || bytes > 0x1000000UL - at) return CS_PG_ADDRESS;
+    for (i = 0; i < s->region_count; ++i) {
+        const cs_pg_region *r = &s->regions[i];
+        if (at >= r->base && bytes <= r->bytes && at - r->base <= r->bytes - bytes)
+            return (r->flags & access) == access ? CS_PG_OK : CS_PG_PERMISSION;
+    }
+    return CS_PG_ADDRESS;
+}
+
 static cs_pg_result resolve(const cs_pc286_guest *s, uint32_t generation,
     uint32_t at, unsigned width, uint32_t access, volatile uint8_t __far **destinations)
 {

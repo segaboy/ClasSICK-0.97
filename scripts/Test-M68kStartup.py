@@ -38,15 +38,16 @@ def main():
         m68k,identity=native.inspect(args.m68k_bin)
         inputs=[*CORE,PROBE,ROOT/'probes/cpu/m68k-startup.h',ROOT/'probes/mac128k/m68k-startup.c',
                 ROOT/'probes/pc286/boot-m68k-startup.c',ROOT/'core/cpu/m68k-bus.h',ROOT/'core/cpu/m68k-guard.h',
+                ROOT/'core/cpu/m68k-backend.h',
                 ROOT/'core/cpu/m68k.h',ROOT/'core/memory/guest.h',ROOT/'core/services/traps.h',
                 ROOT/'tests/m68k-startup.c',ROOT/'tests/m68k-bus.c',ROOT/'tests/m68k-guard.c',
-                ROOT/'apps/memory-probe/probe.c',ROOT/'apps/memory-probe/probe.h',ROOT/'apps/memory-probe/program.h',
+                ROOT/'apps/memory-probe/probe.c',ROOT/'apps/memory-probe/probe.h',ROOT/'apps/memory-probe/program.h',ROOT/'apps/aline-probe/program.h',
                 ROOT/'docs/specifications/SPEC-0118-m68k-address-stack.md',ROOT/'provenance/records/SRC-0616-m68k-address-stack-instructions.md',
                 ROOT/'arch/i286/c16.h',ROOT/'arch/m68k/mac-reset.S',ROOT/'arch/m68k/mac-rom.ld',
                 ROOT/'scripts/m68k_windows_toolchain.py',ROOT/'scripts/Test-BootHushPC286BankPlan.py',
                 ROOT/'scripts/pc286_loader.py',lock_path,Path(__file__)]
         source_hashes={str(path.relative_to(ROOT)).replace('\\','/'):helpers.digest(path) for path in inputs}
-        tool_paths={'host_cc':cc,'emulator':emulator,'pc286_lock':lock_path}
+        tool_paths={'host_cc':cc,'emulator':emulator,'pc286_lock':lock_path,'python':Path(sys.executable).resolve(strict=True)}
         tool_paths.update({'pc286:'+row['path']:tool/row['path'] for row in lock['selected_members']})
         tool_paths.update({'m68k:'+name:path for name,path in m68k.items()})
         tool_hashes={name:helpers.digest(path) for name,path in tool_paths.items()}

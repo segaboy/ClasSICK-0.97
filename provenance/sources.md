@@ -5207,3 +5207,9 @@ confidential material remain excluded. [Review](records/SRC-0615-modeled-mac-flo
 2026-11-18; scoped Motorola1992/NXP primary-manual review admits base-family
 LEA/PEA/LINK.W/UNLK and DBcc encoding/behavior facts for SPEC-0118. No protected
 code or manual samples transferred. [Review](records/SRC-0616-m68k-address-stack-instructions.md).
+
+## SRC-0617 - Published boot-header metadata
+
+2026-11-18; Apple1992 file-format documentation and March1987 DV03 establish
+field widths and order for SPEC-0119. The historical128K startup entry and
+machine-state contract remain unresolved. [Review](records/SRC-0617-published-boot-header-fields.md).

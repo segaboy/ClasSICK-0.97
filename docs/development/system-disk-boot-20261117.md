@@ -14,12 +14,19 @@ digests and repeatable state. The original image is unchanged. Its January1984
 release identity remains unverified; the filename is not version evidence.
 
 Implementation-order items1-3 now have their stated bounded read-only service
-coverage. Resource transport, boot handoff/initial state, production 286 memory
-and legacy execution integration, required ROM services, write persistence and
-full-use acceptance remain unfinished. Historical API completeness and physical
-timing are separate from the current model results. No System/Finder startup
-or desktop is credited. The audit and older checkpoints below retain their
-dated state and are superseded only for the exact new claims above.
+coverage. [Streamed resources](resource-transport-20261118.md) and
+[selected-media preflight](resource-media-20261118.md) additionally validate all
+eight nonempty resource forks:75 type records and273 references on both targets.
+[Boot-header metadata](mac-boot-header-20261118.md) agrees across both providers.
+The native286 banked interpreter executes original128KiB workloads through the
+same decoder, with atomic refusal and retained flat-runtime regression coverage.
+These component results do not initialize the selected System or Finder.
+
+Boot handoff/initial state, bank-aware runtime services, required ROM services,
+write persistence and full-use acceptance remain unfinished. Historical API
+completeness and physical timing are separate from the current model results.
+No System/Finder startup or desktop is credited. The audit and older checkpoints
+below retain their dated state and are superseded only for these exact claims.
 
 ## Direction and exact target
 

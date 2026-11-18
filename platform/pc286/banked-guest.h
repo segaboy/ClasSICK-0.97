@@ -41,6 +41,11 @@ cs_pg_result cs_pc286_guest_bind(cs_pc286_guest *service,
     const cs_pg_bank *banks, uint16_t bank_count,
     uint32_t arena_first, uint32_t arena_bytes, uint32_t *generation);
 cs_pg_result cs_pc286_guest_retire(cs_pc286_guest *service, uint32_t generation);
+/* Numeric-only admission for a stable scalar transaction owner. Neither
+ * operation reads backing or publishes a borrowed native pointer. */
+cs_pg_result cs_pc286_guest_validate(const cs_pc286_guest *service, uint32_t generation);
+cs_pg_result cs_pc286_guest_span(const cs_pc286_guest *service, uint32_t generation,
+    uint32_t address, uint32_t bytes, uint32_t access);
 cs_pg_result cs_pc286_guest_read(const cs_pc286_guest *service, uint32_t generation,
     uint32_t address, unsigned width, uint32_t access, uint32_t *out);
 cs_pg_result cs_pc286_guest_write(const cs_pc286_guest *service, uint32_t generation,
