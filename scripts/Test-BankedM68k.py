@@ -31,7 +31,7 @@ def main():
     args = parser.parse_args()
     try:
         sources = [*NATIVE, *[ROOT / name for name in (
-            "core/cpu/m68k-bus.h", "core/cpu/m68k-guard.h", "core/cpu/m68k-backend.h", "core/cpu/m68k.h",
+            "core/cpu/m68k-bus.h", "core/cpu/m68k-guard.h", "core/cpu/m68k-backend.h", "core/cpu/m68k-transfer.h", "core/cpu/m68k.h",
             "core/memory/guest.h", "core/services/traps.h", "platform/pc286/banked-guest.h",
             "platform/pc286/m68k-banked.h", "arch/i286/c16.h", "scripts/pc286_loader.py",
             "scripts/pc286-toolchain-lock.json", "tests/m68k-bus.c", "tests/m68k-guard.c",

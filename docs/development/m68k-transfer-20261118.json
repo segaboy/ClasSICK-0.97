@@ -1,0 +1,1509 @@
+{
+  "license": "GPL-3.0-or-later",
+  "date": "2026-11-18",
+  "scope": "SPEC-0123 / IMPL-0153 / TEST-0214 original bounded DBcc/MOVEM transactions; no System startup claim",
+  "canonical_report": "m68k-transfer-20261118-b/report.json",
+  "reports": {
+    "m68k-transfer-20261118-b": {
+      "sha256": "707852965d1a6ac9155697f76f7fa48765912a1de99d643a61b8ace7ce0629bd",
+      "status": "pass",
+      "inputs_unchanged": true,
+      "host_invocations": 39,
+      "pc286_cases": 5,
+      "mac128k_cases": 6,
+      "shared_final_source_mismatches": []
+    },
+    "m68k-transfer-flat-regression-20261118-b": {
+      "sha256": "ab34c8114631d0d59192ffc6c4f0bb711c66a4105f8db79e18bf29697441edab",
+      "status": "pass",
+      "inputs_unchanged": true,
+      "host_invocations": 30,
+      "pc286_cases": 4,
+      "mac128k_cases": 5,
+      "shared_final_source_mismatches": []
+    },
+    "m68k-transfer-banked-regression-20261118-b": {
+      "sha256": "2b4e5217603459dff9ea32d2fe124ee149efd3fe8d29c22a4a4f1095c9161e5a",
+      "status": "pass",
+      "inputs_unchanged": true,
+      "host_invocations": 36,
+      "pc286_cases": 5,
+      "mac128k_cases": 0,
+      "shared_final_source_mismatches": []
+    },
+    "m68k-transfer-20261118-a": {
+      "sha256": "da18687fa396fe638b09fe811bb8403f03eeaaba031b37b3714892fb73107050",
+      "status": "pass",
+      "inputs_unchanged": true,
+      "host_invocations": 39,
+      "pc286_cases": 5,
+      "mac128k_cases": 6,
+      "shared_final_source_mismatches": [
+        "core/cpu/m68k-bus.c",
+        "tests/m68k-transfer.c"
+      ]
+    }
+  },
+  "qualified_source_sha256": {
+    "core/cpu/m68k-bus.c": "6ce3eddbaf9ea5cbf5133db4538a00f01373d3ada1326d187e831bd65efbb016",
+    "core/cpu/m68k.c": "c6c169c175a71bb24d2f6f375d5bca7dea4469ae4407c43159b3b27c6db613b8",
+    "core/memory/guest.c": "9678b43e3dc82df2f66119794f08cb2a0dbd85c07a031085daba35b230b6f8a1",
+    "core/services/traps.c": "585adf0742f51390bc44ba086b58e22361bb7188c1205bcc11968875f0cbb1ef",
+    "probes/cpu/m68k-transfer.c": "077972879b69755fec72c21615f3ef624cf19d226c56d0b9dd3bd10b3c25fb08",
+    "platform/pc286/banked-guest.c": "57c7a22c753a37fac4fad5788a02cc67bc8144341ea318cfa452ce98b802a801",
+    "platform/pc286/m68k-banked.c": "1fbaccc69e0d547f0a0177d99125ab7482f20e5093d8eb62f091de53f2d20e31",
+    "platform/pc286/m68k-transfer.c": "922f7c240354dd282f89c7c32fa9fcae7f48605865343e7f5382c0abbd797263",
+    "probes/pc286/boot-m68k-transfer.c": "e6d13d0266fca9021e9e4831212cea4147173ed81fea06de0d4cd1513c216931",
+    "probes/mac128k/m68k-transfer.c": "23f2a70accc6b946837e62af86a3cc628f024abcacea62f306e0ccf26076f5cf",
+    "core/cpu/m68k-bus.h": "a0a8fa1ca3075be2c3f6eecfe18f45ef0c3db3c338af00d5451edc293ad2ce0a",
+    "core/cpu/m68k-backend.h": "ff6ec3ba2db9a128387936cd2ded9a9dc514e0f11f56923f8156718226c9715e",
+    "core/cpu/m68k-guard.h": "b518410b3dfed00ed66dd17c3e704f332ff9aa77806b4f5475f23e9fef3d58f9",
+    "core/cpu/m68k-transfer.h": "086fdb735a20e6c06f8e7c02e0cd8d06f538f0812de0a7ca4a15181dc43c4bcd",
+    "core/cpu/m68k.h": "1f19932c23f2a27f3764861f38d50cf4f68517b0a1a67b939a1bed12b1770b2c",
+    "core/memory/guest.h": "5a89e549470bd0f3ffe50e7fb714342ff7dc6af0d49a0c154a7baebdf7e113ff",
+    "core/services/traps.h": "a3346547364a2237027dbe1d134b81129e80f9731f4c49c813fc9f68563fd782",
+    "platform/pc286/banked-guest.h": "ec4652ab3f0b44f1c14f05d53cc0c76c1fb8630e6644c340fe3e09637ac37c98",
+    "platform/pc286/m68k-banked.h": "4f888dd5a4adc7b28fc1628d21769fe0e290f980d721c725f888478ce091c04a",
+    "platform/pc286/m68k-transfer.h": "910098b2954877602b3ce3dff7622013349cc5b887ff3a9f09073d6d206e4d10",
+    "probes/cpu/m68k-transfer.h": "e8b3b529330170377032eb7e8f70f512317d8eec5ffd85a61161d30a51e5bdcf",
+    "tests/m68k-transfer.c": "f8807e82c299b6ac68bdaa59dcd7a9cbc82c498218c554ab37e44bbe1990e2fa",
+    "tests/m68k-startup.c": "1bf90d3922cecf2a3856b67e763f3e946fa303622a394c6896ef432c0696cc04",
+    "tests/m68k-bus.c": "7be0e92c7875fbb0c1afc2ad3fffa4cb8e6e15e615204462b8c254700523a1ae",
+    "tests/m68k-guard.c": "3f382d6c7aa840944b945bd5379593fb27480aa6cb1e4df2074d4c71109c6ff9",
+    "apps/memory-probe/probe.c": "2a03f73d68e51bff03aebed5add244003abb0fe5a5d1526d224a54ecf444b019",
+    "apps/memory-probe/probe.h": "841249c2ff18f41c4674421129707bc75be4553799ebfc65cf07e11eea49a09f",
+    "apps/memory-probe/program.h": "f5b9c19be4dcba1127f61b43994afb789e79fd444120c976e5b73935554215c3",
+    "apps/aline-probe/program.h": "945b01c5806a30634321915a5e80a7b556e96f4ad0828fbb618b2899ee93b2fe",
+    "docs/specifications/SPEC-0123-m68k-loop-register-transfer.md": "f61979eb9d9f57eb9911becc5868f35fc6b55f1a3e243c474cb957dd11324d2c",
+    "docs/specifications/SPEC-0120-banked-m68k-execution.md": "338c15e675c7a6a0b553d43b67ebbc40c7cb6670ef2e49f593e01c83171877ce",
+    "docs/specifications/SPEC-0118-m68k-address-stack.md": "db0159c444409f5d7c7fb6a5d568da390caab459576fe632bb622cd502299625",
+    "docs/specifications/SPEC-0117-pc286-banked-guest-memory.md": "ce6f63e84ea10b87376978a07c317e4258f3c6b1cdda34bef5569d165c002bbf",
+    "docs/specifications/SPEC-0022-guest-memory-execution.md": "2e324c509f1df56678e1214a5091140afabfd28e423cb65ba2c7b57f13564689",
+    "docs/specifications/SPEC-0026-bounded-guest-calls.md": "6dffacf5c12e02a5098ede1bee05ca46ff3a4c973cb91d4ac2af07b5a10171bf",
+    "docs/specifications/SPEC-0034-owned-image-execution.md": "79796e74a09607220c9d097e26f6bc1b86bcb003416996e38cd46a37534393bc",
+    "provenance/records/SRC-0616-m68k-address-stack-instructions.md": "6402ea677b8ff80d300f79e8024e3c2535bf2611d58ef82fd9c175b5d98f2e63",
+    "provenance/records/SRC-0618-movem-instruction.md": "64fd1b31d84adad01154c055481e18e40a95fbe1a719892da9cbf2c685589929",
+    "arch/i286/c16.h": "0d7634a598aa92a0971f8e1bcf55b63df0f3820cb78d4f7817641b27544a3920",
+    "arch/m68k/mac-reset.S": "b40c0b860836bfe398053251ffd810c98a1fae17ea049132573415475eaa013d",
+    "arch/m68k/mac-rom.ld": "5d5b7d93dde8b7ae395832955d43baede81f82df50a9b2cda07a2146dd40ae65",
+    "scripts/m68k_windows_toolchain.py": "0f662037cfcb2171a00d9be83cccc1560937277bf74f78e908e448c83a4c7627",
+    "scripts/pc286_loader.py": "f2945b96bfa70a5a06790732c6b31aea94b40b906c37ead041c9e023708ac6d1",
+    "scripts/Test-M68kStartup.py": "f25fdfae98b79b0f83022542195df59feff68aa29c640ede53fab2469da5cfd4",
+    "scripts/Test-BankedM68k.py": "2c257d75ac291596933936a12f14b4d4fadcff3314b32f18e8606a8f173a8357",
+    "scripts/pc286-toolchain-lock.json": "eb4b93b16d3343f37273d334bae4af4660af45317308d7a39d948fe2186f2f59",
+    "scripts/Test-M68kTransfer.py": "fa165992cfefc73545b617441a89c625453543ca2b8ac255dfbfd94c3e4950e2"
+  },
+  "tool_sha256": {
+    "host_cc": "93303edd5791e4b60682f819267a34c349e5f52d052d067e006e76d21cc82ea4",
+    "emulator": "7adb8a74cef009b7c532df24458c3a5db6b77725356fdb31e5ac4966d7ed971a",
+    "python": "23e0c7f169e3fc760fdedc799cc2673d8d320b6355c97ac2bdce55a28e52dff1",
+    "pc286:binnt64/wcc.exe": "ba98a515edf58c21d69ca14600573930decb94aae64f914fc103465e890a8987",
+    "pc286:binnt64/wccd.dll": "ff5131d9d2638e6839915d4329b2e39178e229c1af80620f89296b7f3a5c2e90",
+    "pc286:binnt64/wdis.exe": "1d6b4dbcb93215a906b3dad21f6b432805aa54181054bed948361719d0f8eb3c",
+    "pc286:binnt64/wlink.exe": "480433043bf88e34dd46d3d8277f3e85a33b2589f012bc04f82ad3fa6751c801",
+    "pc286:binnt64/wlinkd.dll": "c6538c2570057ee1b73955f70eee64f8cb0db80bd6182437d0ce0a597bb57471",
+    "pc286:binnt64/dmpobj.exe": "74956da2a89d85a8a5de0c7e87bf305f6d05e7a88f6d124c9bae03e2a8e8f480",
+    "pc286:license.txt": "b5e6676779126951c3bf84547b577ec7370b073791ca6072aa5568c62a2d7aef",
+    "pc286:h/stdint.h": "f381e49067a625235d75859cd6725e672aadfc328bf2fb4ea181f37ef4d99f4d",
+    "pc286:h/stddef.h": "85c3ebd6d75f3a2ad74e9ed8c54f9a0bb22d39b3d48c8d33a4acec260714184d",
+    "pc286:h/_comdef.h": "601de6f145cf5a5e63db92574b0d76bc2fcac64929482ca52c4f2c8c1eccabf7",
+    "pc286:h/limits.h": "97c3496421b53a333260e78de12dc1fd045e65c083a1be8c2cfaa09c8f7a1877",
+    "pc286:h/stdbool.h": "f7e8733fb0896bf65d17c99bb9c54d274239c3d96fe98f52b8f1420ebc337607",
+    "m68k:gcc": "35e82461e0cfd0e4d89be95920546155c28aabbd88227dec941c5027d1dfbe30",
+    "m68k:nm": "114ba98342ca2023cf00edb3c79d5f80ccf99f4978ff2e28086d1d6fb5e0929a",
+    "m68k:objcopy": "631d6dcdd0a58fde628c56ded48aa8f05df0bbca0ce1ccd74156b75d103706fe",
+    "m68k:objdump": "cd558fa890b6624a7478abdcbbbc882d6db193a34717123c6883215f0f02d390"
+  },
+  "qualified_inputs_unchanged": true,
+  "postqualification_worktree_notice": "Subsequent separately scoped services work may change working source files. These are the exact final-b qualification identities; they do not assert the latest worktree matches.",
+  "lf_normalization": {
+    "core/cpu/m68k-transfer.h": {
+      "tested_sha256": "086fdb735a20e6c06f8e7c02e0cd8d06f538f0812de0a7ca4a15181dc43c4bcd",
+      "git_lf_sha256": "7aeacdfdbb2babb63cca3a9f22e22edf6a32c6059fb80247e0ea35a2ff99f595",
+      "crlf_pairs_replaced": 19,
+      "index_bytes_match_lf_only_normalization": true
+    },
+    "platform/pc286/banked-guest.h": {
+      "tested_sha256": "ec4652ab3f0b44f1c14f05d53cc0c76c1fb8630e6644c340fe3e09637ac37c98",
+      "git_lf_sha256": "5e0423461b63d3d8379e28c1674ecf50d1397f808bb85c9ee69683b2a61cc237",
+      "crlf_pairs_replaced": 58,
+      "index_bytes_match_lf_only_normalization": true
+    },
+    "tests/m68k-guard.c": {
+      "tested_sha256": "3f382d6c7aa840944b945bd5379593fb27480aa6cb1e4df2074d4c71109c6ff9",
+      "git_lf_sha256": "ce4e84b0b1c486a2b31e5d729b71dd730faf8a4b3878e3568c2c6a165d04731f",
+      "crlf_pairs_replaced": 310,
+      "index_bytes_match_lf_only_normalization": true
+    },
+    "docs/specifications/SPEC-0123-m68k-loop-register-transfer.md": {
+      "tested_sha256": "f61979eb9d9f57eb9911becc5868f35fc6b55f1a3e243c474cb957dd11324d2c",
+      "git_lf_sha256": "e633644da6310145db4b40ca3374267faea81113cf54ab38e1a405f01d3395f7",
+      "crlf_pairs_replaced": 85,
+      "index_bytes_match_lf_only_normalization": true
+    }
+  },
+  "hosted": [
+    {
+      "profile": "release",
+      "suite": "transfer",
+      "case": "",
+      "result": "M68K transfer: 596298 checks passed",
+      "sha256": "ba7bbdf24d0fe8e4f65e9691614872bd1447721a2afaf28f5aeb456e7bbd599b",
+      "checks": 596298
+    },
+    {
+      "profile": "release",
+      "suite": "startup",
+      "case": "",
+      "result": "M68K startup: 27589 checks passed",
+      "sha256": "1a78fadd404ffbe06f2909ea07301757b10f5a600c4bea23501657feb1402115"
+    },
+    {
+      "profile": "release",
+      "suite": "bus",
+      "case": "registers",
+      "result": "exit 0",
+      "sha256": "5311ea2b6438da297d53e62eb76aa69885c7009bbb0a24efdc6ea45d30d574be"
+    },
+    {
+      "profile": "release",
+      "suite": "bus",
+      "case": "operands",
+      "result": "exit 0",
+      "sha256": "5311ea2b6438da297d53e62eb76aa69885c7009bbb0a24efdc6ea45d30d574be"
+    },
+    {
+      "profile": "release",
+      "suite": "bus",
+      "case": "branches",
+      "result": "exit 0",
+      "sha256": "5311ea2b6438da297d53e62eb76aa69885c7009bbb0a24efdc6ea45d30d574be"
+    },
+    {
+      "profile": "release",
+      "suite": "bus",
+      "case": "failures",
+      "result": "exit 0",
+      "sha256": "5311ea2b6438da297d53e62eb76aa69885c7009bbb0a24efdc6ea45d30d574be"
+    },
+    {
+      "profile": "release",
+      "suite": "bus",
+      "case": "services",
+      "result": "exit 0",
+      "sha256": "5311ea2b6438da297d53e62eb76aa69885c7009bbb0a24efdc6ea45d30d574be"
+    },
+    {
+      "profile": "release",
+      "suite": "bus",
+      "case": "probe",
+      "result": "exit 0",
+      "sha256": "5311ea2b6438da297d53e62eb76aa69885c7009bbb0a24efdc6ea45d30d574be"
+    },
+    {
+      "profile": "release",
+      "suite": "guard",
+      "case": "events",
+      "result": "ok",
+      "sha256": "5b0d16510ff5931cdb086f394e2d736695058c1b3d5ef3a7735f64d715a3c4e2"
+    },
+    {
+      "profile": "release",
+      "suite": "guard",
+      "case": "atomicity",
+      "result": "ok",
+      "sha256": "5b0d16510ff5931cdb086f394e2d736695058c1b3d5ef3a7735f64d715a3c4e2"
+    },
+    {
+      "profile": "release",
+      "suite": "guard",
+      "case": "control",
+      "result": "ok",
+      "sha256": "5b0d16510ff5931cdb086f394e2d736695058c1b3d5ef3a7735f64d715a3c4e2"
+    },
+    {
+      "profile": "release",
+      "suite": "guard",
+      "case": "services",
+      "result": "ok",
+      "sha256": "5b0d16510ff5931cdb086f394e2d736695058c1b3d5ef3a7735f64d715a3c4e2"
+    },
+    {
+      "profile": "release",
+      "suite": "guard",
+      "case": "aliases",
+      "result": "ok",
+      "sha256": "5b0d16510ff5931cdb086f394e2d736695058c1b3d5ef3a7735f64d715a3c4e2"
+    },
+    {
+      "profile": "sanitized",
+      "suite": "transfer",
+      "case": "",
+      "result": "M68K transfer: 596298 checks passed",
+      "sha256": "f9f5863a5338108e4f6a2b7ae6a9cf19378ba94a5d741bb2732e63c1b80695b4",
+      "checks": 596298
+    },
+    {
+      "profile": "sanitized",
+      "suite": "startup",
+      "case": "",
+      "result": "M68K startup: 27589 checks passed",
+      "sha256": "ff22a16bcbc2598091c371fa85ccc53fc465d2999d47c3d6b82eb717e727d6b3"
+    },
+    {
+      "profile": "sanitized",
+      "suite": "bus",
+      "case": "registers",
+      "result": "exit 0",
+      "sha256": "6f6170f5edc4966ecfa3689971862dc94c8bb68c0bf59f5a614c9f5bde7e8891"
+    },
+    {
+      "profile": "sanitized",
+      "suite": "bus",
+      "case": "operands",
+      "result": "exit 0",
+      "sha256": "6f6170f5edc4966ecfa3689971862dc94c8bb68c0bf59f5a614c9f5bde7e8891"
+    },
+    {
+      "profile": "sanitized",
+      "suite": "bus",
+      "case": "branches",
+      "result": "exit 0",
+      "sha256": "6f6170f5edc4966ecfa3689971862dc94c8bb68c0bf59f5a614c9f5bde7e8891"
+    },
+    {
+      "profile": "sanitized",
+      "suite": "bus",
+      "case": "failures",
+      "result": "exit 0",
+      "sha256": "6f6170f5edc4966ecfa3689971862dc94c8bb68c0bf59f5a614c9f5bde7e8891"
+    },
+    {
+      "profile": "sanitized",
+      "suite": "bus",
+      "case": "services",
+      "result": "exit 0",
+      "sha256": "6f6170f5edc4966ecfa3689971862dc94c8bb68c0bf59f5a614c9f5bde7e8891"
+    },
+    {
+      "profile": "sanitized",
+      "suite": "bus",
+      "case": "probe",
+      "result": "exit 0",
+      "sha256": "6f6170f5edc4966ecfa3689971862dc94c8bb68c0bf59f5a614c9f5bde7e8891"
+    },
+    {
+      "profile": "sanitized",
+      "suite": "guard",
+      "case": "events",
+      "result": "ok",
+      "sha256": "b03c4e25dddee05f3c95bd6d0768be7c7278c56828e03a8d25f8f2499083285a"
+    },
+    {
+      "profile": "sanitized",
+      "suite": "guard",
+      "case": "atomicity",
+      "result": "ok",
+      "sha256": "b03c4e25dddee05f3c95bd6d0768be7c7278c56828e03a8d25f8f2499083285a"
+    },
+    {
+      "profile": "sanitized",
+      "suite": "guard",
+      "case": "control",
+      "result": "ok",
+      "sha256": "b03c4e25dddee05f3c95bd6d0768be7c7278c56828e03a8d25f8f2499083285a"
+    },
+    {
+      "profile": "sanitized",
+      "suite": "guard",
+      "case": "services",
+      "result": "ok",
+      "sha256": "b03c4e25dddee05f3c95bd6d0768be7c7278c56828e03a8d25f8f2499083285a"
+    },
+    {
+      "profile": "sanitized",
+      "suite": "guard",
+      "case": "aliases",
+      "result": "ok",
+      "sha256": "b03c4e25dddee05f3c95bd6d0768be7c7278c56828e03a8d25f8f2499083285a"
+    },
+    {
+      "profile": "c99",
+      "suite": "transfer",
+      "case": "",
+      "result": "M68K transfer: 596298 checks passed",
+      "sha256": "6a713ab8a264c476b7927fe7002e962a63e574298a13239d31567ff05332d175",
+      "checks": 596298
+    },
+    {
+      "profile": "c99",
+      "suite": "startup",
+      "case": "",
+      "result": "M68K startup: 27589 checks passed",
+      "sha256": "404f4c0ec649bfbfede2de311d50b4111ccc8e803befcb9f6e9cb76ac73d97f7"
+    },
+    {
+      "profile": "c99",
+      "suite": "bus",
+      "case": "registers",
+      "result": "exit 0",
+      "sha256": "46f46508786e3bd0eb46dfee15ae8881c27fab0a88e730ec55a77ee6d1338b62"
+    },
+    {
+      "profile": "c99",
+      "suite": "bus",
+      "case": "operands",
+      "result": "exit 0",
+      "sha256": "46f46508786e3bd0eb46dfee15ae8881c27fab0a88e730ec55a77ee6d1338b62"
+    },
+    {
+      "profile": "c99",
+      "suite": "bus",
+      "case": "branches",
+      "result": "exit 0",
+      "sha256": "46f46508786e3bd0eb46dfee15ae8881c27fab0a88e730ec55a77ee6d1338b62"
+    },
+    {
+      "profile": "c99",
+      "suite": "bus",
+      "case": "failures",
+      "result": "exit 0",
+      "sha256": "46f46508786e3bd0eb46dfee15ae8881c27fab0a88e730ec55a77ee6d1338b62"
+    },
+    {
+      "profile": "c99",
+      "suite": "bus",
+      "case": "services",
+      "result": "exit 0",
+      "sha256": "46f46508786e3bd0eb46dfee15ae8881c27fab0a88e730ec55a77ee6d1338b62"
+    },
+    {
+      "profile": "c99",
+      "suite": "bus",
+      "case": "probe",
+      "result": "exit 0",
+      "sha256": "46f46508786e3bd0eb46dfee15ae8881c27fab0a88e730ec55a77ee6d1338b62"
+    },
+    {
+      "profile": "c99",
+      "suite": "guard",
+      "case": "events",
+      "result": "ok",
+      "sha256": "23b80df93fdc9517a53523025f1a1f80b522bcf5a3181228552fab8fdbcbdcef"
+    },
+    {
+      "profile": "c99",
+      "suite": "guard",
+      "case": "atomicity",
+      "result": "ok",
+      "sha256": "23b80df93fdc9517a53523025f1a1f80b522bcf5a3181228552fab8fdbcbdcef"
+    },
+    {
+      "profile": "c99",
+      "suite": "guard",
+      "case": "control",
+      "result": "ok",
+      "sha256": "23b80df93fdc9517a53523025f1a1f80b522bcf5a3181228552fab8fdbcbdcef"
+    },
+    {
+      "profile": "c99",
+      "suite": "guard",
+      "case": "services",
+      "result": "ok",
+      "sha256": "23b80df93fdc9517a53523025f1a1f80b522bcf5a3181228552fab8fdbcbdcef"
+    },
+    {
+      "profile": "c99",
+      "suite": "guard",
+      "case": "aliases",
+      "result": "ok",
+      "sha256": "23b80df93fdc9517a53523025f1a1f80b522bcf5a3181228552fab8fdbcbdcef"
+    }
+  ],
+  "c16": [
+    {
+      "model": "ms",
+      "objects": [
+        {
+          "sha256": "8ed39bdf5adc07d9c59fcb11e2321a84c8059f16b6df619319eda4d46ad984e2",
+          "imports": [
+            "cs_guest_read_",
+            "cs_guest_validate_",
+            "cs_guest_window_",
+            "cs_m68k_aline_"
+          ],
+          "use16_segment_bytes": [
+            7632,
+            0,
+            0,
+            0
+          ],
+          "source": "core/cpu/m68k-bus.c"
+        },
+        {
+          "sha256": "14babb15d9775291d3a5fcb0cc1be89450940bcc14a133e6b3c126e99c231b44",
+          "imports": [
+            "cs_trap_call_"
+          ],
+          "use16_segment_bytes": [
+            1074,
+            0,
+            0,
+            0
+          ],
+          "source": "core/cpu/m68k.c"
+        },
+        {
+          "sha256": "9898bd12c1d6fa45d430600c72203b39f5770201c6d0d568e1ba2bffaef2da5e",
+          "imports": [],
+          "use16_segment_bytes": [
+            785,
+            0,
+            0,
+            0
+          ],
+          "source": "core/memory/guest.c"
+        },
+        {
+          "sha256": "3d6f7809f61e1618a7a08be1399891c25223487d72b40afc3d04eb90a21336e3",
+          "imports": [],
+          "use16_segment_bytes": [
+            1372,
+            0,
+            0,
+            0
+          ],
+          "source": "core/services/traps.c"
+        },
+        {
+          "sha256": "8e9c34f71ad74008b4ec766bbac1e94c47ce702bb293f0e612d770ee2992f26c",
+          "imports": [
+            "cs_guest_read_",
+            "cs_guest_validate_",
+            "cs_guest_window_",
+            "cs_guest_write_",
+            "cs_m68k_bus_step_transfer_"
+          ],
+          "use16_segment_bytes": [
+            1858,
+            0,
+            0,
+            0,
+            602
+          ],
+          "source": "probes/cpu/m68k-transfer.c"
+        }
+      ],
+      "scope": "Object/import qualification; native execution uses small model."
+    },
+    {
+      "model": "mc",
+      "objects": [
+        {
+          "sha256": "4ebfff1a239292b55248eac8155fba6338568003b914c7b49d8f92cd6a680e86",
+          "imports": [
+            "cs_guest_read_",
+            "cs_guest_validate_",
+            "cs_guest_window_",
+            "cs_m68k_aline_"
+          ],
+          "use16_segment_bytes": [
+            9045,
+            0,
+            0,
+            0
+          ],
+          "source": "core/cpu/m68k-bus.c"
+        },
+        {
+          "sha256": "4508f6072b0c1aaa148122d1dece352235b1dd7cf2fbe13c650273ee6cf0d2eb",
+          "imports": [
+            "cs_trap_call_"
+          ],
+          "use16_segment_bytes": [
+            1286,
+            0,
+            0,
+            0
+          ],
+          "source": "core/cpu/m68k.c"
+        },
+        {
+          "sha256": "e744e6aaa7bda8e084abac1b12b0fb329377c63cedeaa42e6c66daabc6c5bb1f",
+          "imports": [],
+          "use16_segment_bytes": [
+            894,
+            0,
+            0,
+            0
+          ],
+          "source": "core/memory/guest.c"
+        },
+        {
+          "sha256": "b5bca1295b4223b23e89db23a8dbfbd6b53d592c0f6e10df2d25e68a687565b3",
+          "imports": [],
+          "use16_segment_bytes": [
+            1671,
+            0,
+            0,
+            0
+          ],
+          "source": "core/services/traps.c"
+        },
+        {
+          "sha256": "cd33e50a4984a808c0ac674742d85c856dae8f467b0dadaf6202bae5944d84bf",
+          "imports": [
+            "cs_guest_read_",
+            "cs_guest_validate_",
+            "cs_guest_window_",
+            "cs_guest_write_",
+            "cs_m68k_bus_step_transfer_"
+          ],
+          "use16_segment_bytes": [
+            2096,
+            0,
+            0,
+            0,
+            620
+          ],
+          "source": "probes/cpu/m68k-transfer.c"
+        }
+      ],
+      "scope": "Object/import qualification; native execution uses small model."
+    }
+  ],
+  "pc286_native_objects": [
+    {
+      "sha256": "c62d9453154ebfd0986141e8631da51bf650c82d4f64f6309c23c9aca367de57",
+      "imports": [],
+      "use16_segment_bytes": [
+        2570,
+        0,
+        0,
+        0
+      ],
+      "source": "platform/pc286/banked-guest.c"
+    },
+    {
+      "sha256": "79f99824d971c60dd99e2c67bdf0e4e69dc23d6a08ea5d90787c5ba2d6703e40",
+      "imports": [
+        "cs_pc286_guest_read_",
+        "cs_pc286_guest_span_",
+        "cs_pc286_guest_validate_",
+        "cs_pc286_guest_write_"
+      ],
+      "use16_segment_bytes": [
+        406,
+        0,
+        0,
+        0
+      ],
+      "source": "platform/pc286/m68k-banked.c"
+    },
+    {
+      "sha256": "4bf1db896395a3c3207bb3c7dc1cc47ca1fea2cd465aec66911f7e376d6b562f",
+      "imports": [
+        "cs_pc286_guest_write_bytes_",
+        "cs_pc286_m68k_backend_"
+      ],
+      "use16_segment_bytes": [
+        162,
+        0,
+        0,
+        0
+      ],
+      "source": "platform/pc286/m68k-transfer.c"
+    },
+    {
+      "sha256": "e343e5437f9c7b74c2fa656aa98603d3be15200382fcab2f22122bbda2d81b03",
+      "imports": [
+        "cs_m68k_bus_step_transfer_",
+        "cs_m68k_transfer_probe_",
+        "cs_pc286_guest_bind_",
+        "cs_pc286_guest_read_",
+        "cs_pc286_guest_retire_",
+        "cs_pc286_guest_write_",
+        "cs_pc286_guest_write_bytes_",
+        "cs_pc286_m68k_transfer_backend_"
+      ],
+      "use16_segment_bytes": [
+        2392,
+        0,
+        0,
+        0,
+        982
+      ],
+      "source": "probes/pc286/boot-m68k-transfer.c"
+    }
+  ],
+  "pc286": [
+    {
+      "case": "baseline",
+      "expected_post": 186,
+      "mutation_object": null,
+      "payload_bytes": 18251,
+      "payload_sha256": "596cf4c6adcf927faf61a0eb6f879888920ccdbbfe8c69a51c3f987be255f9b0",
+      "bss_start": 18252,
+      "bss_bytes": 1584,
+      "linked_near_end": 19836,
+      "initial_stack_top": 65534,
+      "runtime_modules": [],
+      "floppy_sha256": "2e7724a4e9913259b2b8434dd7843bd3de7083f8cd8a9f25ed4f38e3568feee4",
+      "loader_poison_bss": true,
+      "loader_clear_bss": true,
+      "loader_payload_checksum": true,
+      "loaded_payload_matches": true,
+      "physical_ram": {
+        "0x49fdf": "960102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f",
+        "0x52000": "20",
+        "0x53000": "2122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f4069"
+      },
+      "inspection_groups": [
+        [
+          [
+            65536,
+            4096
+          ],
+          [
+            69632,
+            4096
+          ],
+          [
+            73728,
+            4096
+          ],
+          [
+            77824,
+            4096
+          ]
+        ],
+        [
+          [
+            81920,
+            1867
+          ],
+          [
+            303071,
+            32
+          ],
+          [
+            335872,
+            1
+          ],
+          [
+            339968,
+            33
+          ]
+        ]
+      ],
+      "replays": [
+        {
+          "status": "condition_met",
+          "cycles": 14108393,
+          "pc": 81397,
+          "machine": "pc286",
+          "cs": 4096,
+          "ip": 15861,
+          "halted": false,
+          "post": 186
+        },
+        {
+          "status": "condition_met",
+          "cycles": 14108393,
+          "pc": 81397,
+          "machine": "pc286",
+          "cs": 4096,
+          "ip": 15861,
+          "halted": false,
+          "post": 186
+        }
+      ],
+      "input_unchanged": true
+    },
+    {
+      "case": "dbf-condition",
+      "expected_post": 225,
+      "mutation_object": {
+        "sha256": "a98e5440a984fa4d85009651d6946c1b2acace4ee6d79fee362651d59ad112c3",
+        "imports": [
+          "cs_guest_read_",
+          "cs_guest_validate_",
+          "cs_guest_window_",
+          "cs_m68k_aline_"
+        ],
+        "use16_segment_bytes": [
+          7627,
+          0,
+          0,
+          0
+        ]
+      },
+      "payload_bytes": 18246,
+      "payload_sha256": "bf18b4abe39ee439005fa0b07f0f372e86e7bba0c12b9e11f6fee42184980624",
+      "bss_start": 18246,
+      "bss_bytes": 1584,
+      "linked_near_end": 19830,
+      "initial_stack_top": 65534,
+      "runtime_modules": [],
+      "floppy_sha256": "f8eae1921b3532e4fb0d6b903c83669678554e2a770eb9e93ceb0a0e8a8df2b9",
+      "loader_poison_bss": true,
+      "loader_clear_bss": true,
+      "loader_payload_checksum": true,
+      "loaded_payload_matches": true,
+      "physical_ram": {},
+      "inspection_groups": [
+        [
+          [
+            65536,
+            4096
+          ],
+          [
+            69632,
+            4096
+          ],
+          [
+            73728,
+            4096
+          ],
+          [
+            77824,
+            4096
+          ]
+        ],
+        [
+          [
+            81920,
+            1862
+          ]
+        ]
+      ],
+      "replays": [
+        {
+          "status": "condition_met",
+          "cycles": 319726,
+          "pc": 81392,
+          "machine": "pc286",
+          "cs": 4096,
+          "ip": 15856,
+          "halted": false,
+          "post": 225
+        },
+        {
+          "status": "condition_met",
+          "cycles": 319726,
+          "pc": 81392,
+          "machine": "pc286",
+          "cs": 4096,
+          "ip": 15856,
+          "halted": false,
+          "post": 225
+        }
+      ],
+      "input_unchanged": true
+    },
+    {
+      "case": "mask-order",
+      "expected_post": 226,
+      "mutation_object": {
+        "sha256": "9aae9e55e00ceb57db6753b87ccf5a9fc881e5e869dd22abc5463c5c4aa3462b",
+        "imports": [
+          "cs_guest_read_",
+          "cs_guest_validate_",
+          "cs_guest_window_",
+          "cs_m68k_aline_"
+        ],
+        "use16_segment_bytes": [
+          7626,
+          0,
+          0,
+          0
+        ]
+      },
+      "payload_bytes": 18245,
+      "payload_sha256": "7a74b2b9c91d4a9453999d29f14f4ef2500e3a53ae4b77747dbf7cf06d4928ff",
+      "bss_start": 18246,
+      "bss_bytes": 1584,
+      "linked_near_end": 19830,
+      "initial_stack_top": 65534,
+      "runtime_modules": [],
+      "floppy_sha256": "7633eded5fd11decc86d91d54c96542bfbc9f54a51d65611303ab435333c49e9",
+      "loader_poison_bss": true,
+      "loader_clear_bss": true,
+      "loader_payload_checksum": true,
+      "loaded_payload_matches": true,
+      "physical_ram": {},
+      "inspection_groups": [
+        [
+          [
+            65536,
+            4096
+          ],
+          [
+            69632,
+            4096
+          ],
+          [
+            73728,
+            4096
+          ],
+          [
+            77824,
+            4096
+          ]
+        ],
+        [
+          [
+            81920,
+            1861
+          ]
+        ]
+      ],
+      "replays": [
+        {
+          "status": "condition_met",
+          "cycles": 417139,
+          "pc": 81391,
+          "machine": "pc286",
+          "cs": 4096,
+          "ip": 15855,
+          "halted": false,
+          "post": 226
+        },
+        {
+          "status": "condition_met",
+          "cycles": 417139,
+          "pc": 81391,
+          "machine": "pc286",
+          "cs": 4096,
+          "ip": 15855,
+          "halted": false,
+          "post": 226
+        }
+      ],
+      "input_unchanged": true
+    },
+    {
+      "case": "predecrement-base",
+      "expected_post": 227,
+      "mutation_object": {
+        "sha256": "27be7472b69392f772d19075558b4da950ff0be5f403db560f016e8bf422b514",
+        "imports": [
+          "cs_guest_read_",
+          "cs_guest_validate_",
+          "cs_guest_window_",
+          "cs_m68k_aline_"
+        ],
+        "use16_segment_bytes": [
+          7662,
+          0,
+          0,
+          0
+        ]
+      },
+      "payload_bytes": 18281,
+      "payload_sha256": "3c2f8d24959de412780e728c8c9c6620bd219d476f98a5e18379dba2c860fd70",
+      "bss_start": 18282,
+      "bss_bytes": 1584,
+      "linked_near_end": 19866,
+      "initial_stack_top": 65534,
+      "runtime_modules": [],
+      "floppy_sha256": "b20e7f6a7d24a7f783c83bca602f9b4aeec7f59a0a6446b9e4551489addb7a39",
+      "loader_poison_bss": true,
+      "loader_clear_bss": true,
+      "loader_payload_checksum": true,
+      "loaded_payload_matches": true,
+      "physical_ram": {},
+      "inspection_groups": [
+        [
+          [
+            65536,
+            4096
+          ],
+          [
+            69632,
+            4096
+          ],
+          [
+            73728,
+            4096
+          ],
+          [
+            77824,
+            4096
+          ]
+        ],
+        [
+          [
+            81920,
+            1897
+          ]
+        ]
+      ],
+      "replays": [
+        {
+          "status": "condition_met",
+          "cycles": 422491,
+          "pc": 81427,
+          "machine": "pc286",
+          "cs": 4096,
+          "ip": 15891,
+          "halted": false,
+          "post": 227
+        },
+        {
+          "status": "condition_met",
+          "cycles": 422491,
+          "pc": 81427,
+          "machine": "pc286",
+          "cs": 4096,
+          "ip": 15891,
+          "halted": false,
+          "post": 227
+        }
+      ],
+      "input_unchanged": true
+    },
+    {
+      "case": "early-frame",
+      "expected_post": 229,
+      "mutation_object": {
+        "sha256": "e83630ae458ef1861863c33eab5d42b3dbd02bf671ff379b2ce3ae4743ff3ba3",
+        "imports": [
+          "cs_guest_read_",
+          "cs_guest_validate_",
+          "cs_guest_window_",
+          "cs_m68k_aline_"
+        ],
+        "use16_segment_bytes": [
+          7649,
+          0,
+          0,
+          0
+        ]
+      },
+      "payload_bytes": 18268,
+      "payload_sha256": "6852995e13f114d3ca0e895d084fcbce17e66f9754e2972e53dc5de0742102eb",
+      "bss_start": 18268,
+      "bss_bytes": 1584,
+      "linked_near_end": 19852,
+      "initial_stack_top": 65534,
+      "runtime_modules": [],
+      "floppy_sha256": "9160a906e8e99948e76f94efdab5abf0ff87e875580ebf1e01c172bbf6233b3a",
+      "loader_poison_bss": true,
+      "loader_clear_bss": true,
+      "loader_payload_checksum": true,
+      "loaded_payload_matches": true,
+      "physical_ram": {},
+      "inspection_groups": [
+        [
+          [
+            65536,
+            4096
+          ],
+          [
+            69632,
+            4096
+          ],
+          [
+            73728,
+            4096
+          ],
+          [
+            77824,
+            4096
+          ]
+        ],
+        [
+          [
+            81920,
+            1884
+          ]
+        ]
+      ],
+      "replays": [
+        {
+          "status": "condition_met",
+          "cycles": 691970,
+          "pc": 81414,
+          "machine": "pc286",
+          "cs": 4096,
+          "ip": 15878,
+          "halted": false,
+          "post": 229
+        },
+        {
+          "status": "condition_met",
+          "cycles": 691970,
+          "pc": 81414,
+          "machine": "pc286",
+          "cs": 4096,
+          "ip": 15878,
+          "halted": false,
+          "post": 229
+        }
+      ],
+      "input_unchanged": true
+    }
+  ],
+  "mac128k": [
+    {
+      "case": "O0",
+      "expected_marker": 186,
+      "result": {
+        "status": "condition_met",
+        "cycles": 2079794,
+        "pc": 4194712,
+        "machine": "mac128k",
+        "vbl": 15
+      },
+      "rom_sha256": "c3ef88d6600487eec8a5cc2dae217f3424fc9ab8db9d2d58baea8d14021d263f",
+      "raw_bytes": 20712,
+      "diag_address": 2816,
+      "diag_hex": "000000ba000000000000000000000000000000000000000000000000",
+      "memory_boundaries": {
+        "__data_start": 2816,
+        "__data_end": 2816,
+        "__bss_start": 2816,
+        "__bss_end": 3504
+      },
+      "data_bss_limit": 8192,
+      "stack_bottom": 8192,
+      "initial_stack_top": 16384,
+      "local_compiler_frames": [
+        "probes/mac128k/m68k-transfer.c:6:6:cs_mac_main\t0\tstatic",
+        "probes/mac128k/m68k-transfer.c:7:6:cs_mac_line_a_handler\t0\tstatic",
+        "probes/cpu/m68k-transfer.c:15:13:fill\t8\tstatic",
+        "probes/cpu/m68k-transfer.c:16:12:same\t12\tstatic",
+        "probes/cpu/m68k-transfer.c:17:12:all\t4\tstatic",
+        "probes/cpu/m68k-transfer.c:18:13:save\t4\tstatic",
+        "probes/cpu/m68k-transfer.c:19:13:p16\t0\tstatic",
+        "probes/cpu/m68k-transfer.c:20:13:p32\t8\tdynamic,bounded",
+        "probes/cpu/m68k-transfer.c:21:17:g32\t0\tstatic",
+        "probes/cpu/m68k-transfer.c:22:24:valid\t8\tdynamic,bounded",
+        "probes/cpu/m68k-transfer.c:23:24:span\t32\tdynamic,bounded",
+        "probes/cpu/m68k-transfer.c:25:24:read_scalar\t24\tdynamic,bounded",
+        "probes/cpu/m68k-transfer.c:27:24:write_scalar\t20\tdynamic,bounded",
+        "probes/cpu/m68k-transfer.c:29:24:write_bytes\t40\tdynamic,bounded",
+        "probes/cpu/m68k-transfer.c:38:12:permit\t4\tstatic",
+        "probes/cpu/m68k-transfer.c:40:13:setup\t16\tdynamic,bounded",
+        "probes/cpu/m68k-transfer.c:54:23:step\t20\tdynamic,bounded",
+        "probes/cpu/m68k-transfer.c:55:10:cs_m68k_transfer_probe\t16\tdynamic,bounded",
+        "core/cpu/m68k-bus.c:17:13:copy_frame\t4\tstatic",
+        "core/cpu/m68k-bus.c:22:13:begin\t0\tstatic",
+        "core/cpu/m68k-bus.c:32:23:done\t0\tstatic",
+        "core/cpu/m68k-bus.c:34:23:permit\t36\tdynamic,bounded",
+        "core/cpu/m68k-bus.c:43:23:read_value\t32\tdynamic,bounded",
+        "core/cpu/m68k-bus.c:54:23:extension\t28\tdynamic,bounded",
+        "core/cpu/m68k-bus.c:61:17:mask\t0\tstatic",
+        "core/cpu/m68k-bus.c:63:13:flags\t8\tdynamic,bounded",
+        "core/cpu/m68k-bus.c:69:23:effective\t16\tdynamic,bounded",
+        "core/cpu/m68k-bus.c:81:23:source\t40\tdynamic,bounded",
+        "core/cpu/m68k-bus.c:98:23:preflight_store\t40\tdynamic,bounded",
+        "core/cpu/m68k-bus.c:113:23:stack_span\t0\tstatic",
+        "core/cpu/m68k-bus.c:122:23:move\t60\tdynamic,bounded",
+        "core/cpu/m68k-bus.c:143:12:condition\t16\tstatic",
+        "core/cpu/m68k-bus.c:155:23:target\t28\tdynamic,bounded",
+        "core/cpu/m68k-bus.c:165:23:branch\t48\tdynamic,bounded",
+        "core/cpu/m68k-bus.c:195:23:return_instruction\t32\tdynamic,bounded",
+        "core/cpu/m68k-bus.c:205:17:sign_extend\t4\tstatic",
+        "core/cpu/m68k-bus.c:210:23:add_offset\t4\tstatic",
+        "core/cpu/m68k-bus.c:222:23:control_address\t44\tdynamic,bounded",
+        "core/cpu/m68k-bus.c:241:23:counted_branch\t40\tdynamic,bounded",
+        "core/cpu/m68k-bus.c:257:23:transfer_span\t36\tdynamic,bounded",
+        "core/cpu/m68k-bus.c:271:23:multiple_registers\t96\tdynamic,bounded",
+        "core/cpu/m68k-bus.c:322:23:jump\t24\tdynamic,bounded",
+        "core/cpu/m68k-bus.c:340:23:address_instruction\t28\tdynamic,bounded",
+        "core/cpu/m68k-bus.c:356:23:frame_instruction\t44\tdynamic,bounded",
+        "core/cpu/m68k-bus.c:386:23:aline\t48\tdynamic,bounded",
+        "core/cpu/m68k-bus.c:410:23:step\t264\tdynamic,bounded",
+        "core/cpu/m68k-bus.c:490:16:cs_m68k_bus_step_options\t48\tdynamic,bounded",
+        "core/cpu/m68k-bus.c:493:16:cs_m68k_bus_step_bounded\t48\tdynamic,bounded",
+        "core/cpu/m68k-bus.c:497:16:cs_m68k_bus_step\t20\tdynamic,bounded",
+        "core/cpu/m68k-bus.c:525:12:span\t4\tstatic",
+        "core/cpu/m68k-bus.c:531:12:overlaps\t0\tstatic",
+        "core/cpu/m68k-bus.c:533:12:envelope\t124\tdynamic,bounded",
+        "core/cpu/m68k-bus.c:571:16:cs_m68k_bus_step_guarded\t48\tdynamic,bounded",
+        "core/cpu/m68k-bus.c:579:16:cs_m68k_bus_step_admitted\t48\tdynamic,bounded",
+        "core/cpu/m68k-bus.c:588:16:cs_m68k_bus_guard_validate\t24\tdynamic,bounded",
+        "core/cpu/m68k-bus.c:593:12:backend_envelope\t88\tdynamic,bounded",
+        "core/cpu/m68k-bus.c:613:16:cs_m68k_bus_step_backend\t48\tdynamic,bounded",
+        "core/cpu/m68k-bus.c:621:16:cs_m68k_bus_step_transfer\t48\tdynamic,bounded",
+        "core/cpu/m68k.c:4:12:mode\t0\tstatic",
+        "core/cpu/m68k.c:5:12:span\t0\tstatic",
+        "core/cpu/m68k.c:7:12:contains\t0\tstatic",
+        "core/cpu/m68k.c:9:13:begin\t0\tstatic",
+        "core/cpu/m68k.c:17:23:finish\t0\tstatic",
+        "core/cpu/m68k.c:19:16:cs_m68k_aline\t16\tdynamic,bounded",
+        "core/cpu/m68k.c:30:17:read32\t0\tstatic",
+        "core/cpu/m68k.c:32:13:write32\t0\tstatic",
+        "core/cpu/m68k.c:34:16:cs_m68k_step\t52\tdynamic,bounded",
+        "core/memory/guest.c:4:17:cs_guest_validate\t20\tstatic",
+        "core/memory/guest.c:22:17:cs_guest_window\t20\tdynamic,bounded",
+        "core/memory/guest.c:40:24:operand\t24\tdynamic,bounded",
+        "core/memory/guest.c:49:17:cs_guest_read\t44\tdynamic,bounded",
+        "core/memory/guest.c:59:17:cs_guest_write\t36\tdynamic,bounded",
+        "core/services/traps.c:5:12:rom_address\t0\tstatic",
+        "core/services/traps.c:9:12:config_valid\t8\tdynamic,bounded",
+        "core/services/traps.c:19:12:state_valid\t4\tdynamic,bounded",
+        "core/services/traps.c:23:12:executable\t8\tdynamic,bounded",
+        "core/services/traps.c:27:16:cs_trap_decode\t0\tstatic",
+        "core/services/traps.c:39:16:cs_trap_init\t8\tdynamic,bounded",
+        "core/services/traps.c:51:16:cs_trap_get\t8\tdynamic,bounded",
+        "core/services/traps.c:59:16:cs_trap_set\t8\tdynamic,bounded",
+        "core/services/traps.c:67:23:intrinsic\t24\tdynamic,bounded",
+        "core/services/traps.c:78:13:begin_report\t0\tstatic",
+        "core/services/traps.c:84:16:cs_trap_call\t28\tdynamic,bounded",
+        "core/services/traps.c:100:16:cs_trap_direct\t20\tdynamic,bounded"
+      ],
+      "function_bytes": {
+        "cs_mac_main": 20,
+        "cs_mac_line_a_handler": 18,
+        "fill": 50,
+        "same": 70,
+        "all": 50,
+        "save": 136,
+        "p16": 36,
+        "p32": 68,
+        "g32": 90,
+        "valid": 30,
+        "span": 62,
+        "read_scalar": 66,
+        "write_scalar": 44,
+        "write_bytes": 120,
+        "permit": 128,
+        "setup": 508,
+        "step": 2088,
+        "cs_m68k_transfer_probe": 1552,
+        "copy_frame": 128,
+        "begin": 138,
+        "done": 20,
+        "read_value": 234,
+        "extension": 76,
+        "mask": 38,
+        "flags": 118,
+        "effective": 220,
+        "source": 328,
+        "preflight_store": 344,
+        "stack_span": 136,
+        "move": 514,
+        "condition": 614,
+        "target": 176,
+        "branch": 520,
+        "return_instruction": 158,
+        "sign_extend": 72,
+        "add_offset": 114,
+        "control_address": 570,
+        "counted_branch": 350,
+        "transfer_span": 270,
+        "multiple_registers": 1194,
+        "jump": 292,
+        "address_instruction": 262,
+        "frame_instruction": 488,
+        "aline": 510,
+        "cs_m68k_bus_step_options": 50,
+        "cs_m68k_bus_step_bounded": 62,
+        "cs_m68k_bus_step": 34,
+        "overlaps": 50,
+        "envelope": 946,
+        "cs_m68k_bus_step_guarded": 92,
+        "cs_m68k_bus_step_admitted": 176,
+        "cs_m68k_bus_guard_validate": 54,
+        "backend_envelope": 520,
+        "cs_m68k_bus_step_backend": 94,
+        "cs_m68k_bus_step_transfer": 130,
+        "mode": 38,
+        "contains": 62,
+        "finish": 20,
+        "cs_m68k_aline": 270,
+        "read32": 90,
+        "write32": 74,
+        "cs_m68k_step": 1102,
+        "cs_guest_validate": 412,
+        "cs_guest_window": 326,
+        "operand": 106,
+        "cs_guest_read": 144,
+        "cs_guest_write": 104,
+        "rom_address": 54,
+        "config_valid": 342,
+        "state_valid": 46,
+        "executable": 68,
+        "cs_trap_decode": 242,
+        "cs_trap_init": 230,
+        "cs_trap_get": 126,
+        "cs_trap_set": 98,
+        "intrinsic": 158,
+        "begin_report": 96,
+        "cs_trap_call": 330,
+        "cs_trap_direct": 146
+      },
+      "runtime_modules": [],
+      "rom_artifact_unchanged": true,
+      "loaded_rom_inspection": "Not attempted; this emulator inspection API admits RAM/video only."
+    },
+    {
+      "case": "Os",
+      "expected_marker": 186,
+      "result": {
+        "status": "condition_met",
+        "cycles": 951196,
+        "pc": 4194708,
+        "machine": "mac128k",
+        "vbl": 7
+      },
+      "rom_sha256": "3ebd233868694c6e19230ccbee0d9193dc01388723d71d85588ecc5a17df4a3a",
+      "raw_bytes": 12552,
+      "diag_address": 2816,
+      "diag_hex": "000000ba000000000000000000000000000000000000000000000000",
+      "memory_boundaries": {
+        "__data_start": 2816,
+        "__data_end": 2816,
+        "__bss_start": 2816,
+        "__bss_end": 3504
+      },
+      "data_bss_limit": 8192,
+      "stack_bottom": 8192,
+      "initial_stack_top": 16384,
+      "local_compiler_frames": [
+        "probes/mac128k/m68k-transfer.c:6:6:cs_mac_main\t0\tstatic",
+        "probes/mac128k/m68k-transfer.c:7:6:cs_mac_line_a_handler\t0\tstatic",
+        "probes/cpu/m68k-transfer.c:18:13:save\t0\tstatic",
+        "probes/cpu/m68k-transfer.c:38:12:permit\t0\tstatic",
+        "probes/cpu/m68k-transfer.c:29:24:write_bytes\t28\tdynamic,bounded",
+        "probes/cpu/m68k-transfer.c:23:24:span\t28\tdynamic,bounded",
+        "probes/cpu/m68k-transfer.c:27:24:write_scalar\t0\tstatic",
+        "probes/cpu/m68k-transfer.c:25:24:read_scalar\t4\tstatic",
+        "probes/cpu/m68k-transfer.c:22:24:valid\t0\tstatic",
+        "probes/cpu/m68k-transfer.c:54:23:step\t20\tdynamic,bounded",
+        "probes/cpu/m68k-transfer.c:16:12:same.constprop\t0\tstatic",
+        "probes/cpu/m68k-transfer.c:40:13:setup\t0\tstatic",
+        "probes/cpu/m68k-transfer.c:55:10:cs_m68k_transfer_probe\t24\tstatic",
+        "core/cpu/m68k-bus.c:34:23:permit\t40\tdynamic,bounded",
+        "core/cpu/m68k-bus.c:113:23:stack_span\t8\tstatic",
+        "core/cpu/m68k-bus.c:143:12:condition\t24\tstatic",
+        "core/cpu/m68k-bus.c:525:12:span\t4\tstatic",
+        "core/cpu/m68k-bus.c:98:23:preflight_store\t40\tdynamic,bounded",
+        "core/cpu/m68k-bus.c:43:23:read_value\t40\tdynamic,bounded",
+        "core/cpu/m68k-bus.c:54:23:extension\t28\tdynamic,bounded",
+        "core/cpu/m68k-bus.c:69:23:effective\t12\tstatic",
+        "core/cpu/m68k-bus.c:155:23:target\t28\tdynamic,bounded",
+        "core/cpu/m68k-bus.c:210:23:add_offset\t4\tstatic",
+        "core/cpu/m68k-bus.c:222:23:control_address\t52\tdynamic,bounded",
+        "core/cpu/m68k-bus.c:533:12:envelope\t132\tdynamic,bounded",
+        "core/cpu/m68k-bus.c:593:12:backend_envelope.constprop\t92\tdynamic,bounded",
+        "core/cpu/m68k-bus.c:410:23:step\t320\tdynamic,bounded",
+        "core/cpu/m68k-bus.c:490:16:cs_m68k_bus_step_options\t48\tdynamic,bounded",
+        "core/cpu/m68k-bus.c:493:16:cs_m68k_bus_step_bounded\t48\tdynamic,bounded",
+        "core/cpu/m68k-bus.c:497:16:cs_m68k_bus_step\t20\tdynamic,bounded",
+        "core/cpu/m68k-bus.c:571:16:cs_m68k_bus_step_guarded\t48\tdynamic,bounded",
+        "core/cpu/m68k-bus.c:579:16:cs_m68k_bus_step_admitted\t60\tdynamic,bounded",
+        "core/cpu/m68k-bus.c:588:16:cs_m68k_bus_guard_validate\t24\tdynamic,bounded",
+        "core/cpu/m68k-bus.c:613:16:cs_m68k_bus_step_backend\t48\tdynamic,bounded",
+        "core/cpu/m68k-bus.c:621:16:cs_m68k_bus_step_transfer\t52\tdynamic,bounded",
+        "core/cpu/m68k.c:5:12:span\t0\tstatic",
+        "core/cpu/m68k.c:7:12:contains\t0\tstatic",
+        "core/cpu/m68k.c:19:16:cs_m68k_aline\t28\tdynamic,bounded",
+        "core/cpu/m68k.c:34:16:cs_m68k_step\t64\tdynamic,bounded",
+        "core/memory/guest.c:4:17:cs_guest_validate\t28\tstatic",
+        "core/memory/guest.c:22:17:cs_guest_window\t40\tdynamic,bounded",
+        "core/memory/guest.c:40:24:operand\t24\tdynamic,bounded",
+        "core/memory/guest.c:49:17:cs_guest_read\t28\tdynamic,bounded",
+        "core/memory/guest.c:59:17:cs_guest_write\t36\tdynamic,bounded",
+        "core/services/traps.c:5:12:rom_address.isra\t0\tstatic",
+        "core/services/traps.c:23:12:executable\t16\tdynamic,bounded",
+        "core/services/traps.c:9:12:config_valid\t28\tdynamic,bounded",
+        "core/services/traps.c:19:12:state_valid\t0\tstatic",
+        "core/services/traps.c:27:16:cs_trap_decode\t8\tstatic",
+        "core/services/traps.c:39:16:cs_trap_init\t12\tdynamic,bounded",
+        "core/services/traps.c:51:16:cs_trap_get\t16\tdynamic,bounded",
+        "core/services/traps.c:59:16:cs_trap_set\t12\tdynamic,bounded",
+        "core/services/traps.c:67:23:intrinsic\t24\tdynamic,bounded",
+        "core/services/traps.c:84:16:cs_trap_call\t32\tdynamic,bounded",
+        "core/services/traps.c:100:16:cs_trap_direct\t24\tdynamic,bounded"
+      ],
+      "function_bytes": {
+        "cs_mac_main": 14,
+        "cs_mac_line_a_handler": 12,
+        "save": 50,
+        "permit": 98,
+        "write_bytes": 86,
+        "span": 54,
+        "write_scalar": 12,
+        "read_scalar": 52,
+        "valid": 12,
+        "step": 4102,
+        "setup": 452,
+        "cs_m68k_transfer_probe": 1144,
+        "stack_span": 84,
+        "condition": 226,
+        "preflight_store": 234,
+        "read_value": 144,
+        "extension": 52,
+        "effective": 136,
+        "target": 120,
+        "add_offset": 60,
+        "control_address": 418,
+        "envelope": 598,
+        "cs_m68k_bus_step_options": 44,
+        "cs_m68k_bus_step_bounded": 54,
+        "cs_m68k_bus_step": 28,
+        "cs_m68k_bus_step_guarded": 86,
+        "cs_m68k_bus_step_admitted": 154,
+        "cs_m68k_bus_guard_validate": 38,
+        "cs_m68k_bus_step_backend": 84,
+        "cs_m68k_bus_step_transfer": 108,
+        "contains": 48,
+        "cs_m68k_aline": 216,
+        "cs_m68k_step": 630,
+        "cs_guest_validate": 184,
+        "cs_guest_window": 190,
+        "operand": 116,
+        "cs_guest_read": 88,
+        "cs_guest_write": 86,
+        "executable": 62,
+        "config_valid": 178,
+        "state_valid": 28,
+        "cs_trap_decode": 144,
+        "cs_trap_init": 126,
+        "cs_trap_get": 98,
+        "cs_trap_set": 90,
+        "intrinsic": 132,
+        "cs_trap_call": 236,
+        "cs_trap_direct": 148
+      },
+      "runtime_modules": [],
+      "rom_artifact_unchanged": true,
+      "loaded_rom_inspection": "Not attempted; this emulator inspection API admits RAM/video only."
+    },
+    {
+      "case": "dbf-condition",
+      "expected_marker": 225,
+      "result": {
+        "status": "condition_met",
+        "cycles": 78854,
+        "pc": 4194708,
+        "machine": "mac128k",
+        "vbl": 0
+      },
+      "rom_sha256": "43d04ff3a69b053f7f8b9d6be774ff4c2e3679a5e36ea6f99344b9684f5660c0",
+      "raw_bytes": 12540,
+      "diag_address": 2816,
+      "diag_hex": "000000e1000000000000000000000000000000000000000000000000",
+      "memory_boundaries": {
+        "__data_start": 2816,
+        "__data_end": 2816,
+        "__bss_start": 2816,
+        "__bss_end": 3504
+      },
+      "data_bss_limit": 8192,
+      "stack_bottom": 8192,
+      "initial_stack_top": 16384,
+      "runtime_modules": [],
+      "rom_artifact_unchanged": true,
+      "loaded_rom_inspection": "Not attempted; this emulator inspection API admits RAM/video only."
+    },
+    {
+      "case": "mask-order",
+      "expected_marker": 226,
+      "result": {
+        "status": "condition_met",
+        "cycles": 223008,
+        "pc": 4194708,
+        "machine": "mac128k",
+        "vbl": 1
+      },
+      "rom_sha256": "9332a71d30c2cee71ff3cfb212757be6968d5782921760acca47ee5928d3bd44",
+      "raw_bytes": 12524,
+      "diag_address": 2816,
+      "diag_hex": "000000e2000000000000000000000000000000000000000000000000",
+      "memory_boundaries": {
+        "__data_start": 2816,
+        "__data_end": 2816,
+        "__bss_start": 2816,
+        "__bss_end": 3504
+      },
+      "data_bss_limit": 8192,
+      "stack_bottom": 8192,
+      "initial_stack_top": 16384,
+      "runtime_modules": [],
+      "rom_artifact_unchanged": true,
+      "loaded_rom_inspection": "Not attempted; this emulator inspection API admits RAM/video only."
+    },
+    {
+      "case": "predecrement-base",
+      "expected_marker": 227,
+      "result": {
+        "status": "condition_met",
+        "cycles": 226268,
+        "pc": 4194708,
+        "machine": "mac128k",
+        "vbl": 1
+      },
+      "rom_sha256": "906519ba7e8ffe1c210dd48f8c0d35e1798ce03144a4cce5a00993c578be47f7",
+      "raw_bytes": 12572,
+      "diag_address": 2816,
+      "diag_hex": "000000e3000000000000000000000000000000000000000000000000",
+      "memory_boundaries": {
+        "__data_start": 2816,
+        "__data_end": 2816,
+        "__bss_start": 2816,
+        "__bss_end": 3504
+      },
+      "data_bss_limit": 8192,
+      "stack_bottom": 8192,
+      "initial_stack_top": 16384,
+      "runtime_modules": [],
+      "rom_artifact_unchanged": true,
+      "loaded_rom_inspection": "Not attempted; this emulator inspection API admits RAM/video only."
+    },
+    {
+      "case": "early-frame",
+      "expected_marker": 229,
+      "result": {
+        "status": "condition_met",
+        "cycles": 632990,
+        "pc": 4194708,
+        "machine": "mac128k",
+        "vbl": 4
+      },
+      "rom_sha256": "bcc43729b6e5882c0487415a5ebfa7126d75f0f6688b44667b7d9cb2d22a5757",
+      "raw_bytes": 12580,
+      "diag_address": 2816,
+      "diag_hex": "000000e5000000000000000000000000000000000000000000000000",
+      "memory_boundaries": {
+        "__data_start": 2816,
+        "__data_end": 2816,
+        "__bss_start": 2816,
+        "__bss_end": 3504
+      },
+      "data_bss_limit": 8192,
+      "stack_bottom": 8192,
+      "initial_stack_top": 16384,
+      "runtime_modules": [],
+      "rom_artifact_unchanged": true,
+      "loaded_rom_inspection": "Not attempted; this emulator inspection API admits RAM/video only."
+    }
+  ],
+  "mutation_sha256": {
+    "dbf-condition": "b77e36026b1fef50d6917934eca9c62514008adaa8ce1264364a9fb72b4fee1b",
+    "mask-order": "7b5363464875226949f9b77693b1cf2f8b34e7f8772f4abb85598da954647079",
+    "predecrement-base": "f0aef093199a55c430e1423ed0867ae38bb6243f1bf7111cfb5e59851a0ce873",
+    "early-frame": "cb0daed76ab7e7fd591fe63531add1bc431d7091570e78c59fbcd81e5c6d7efb"
+  },
+  "limits": "Original bounded DBcc/MOVEM interpreter qualification. Native286 executes the small model, including 128KiB guest backing and 64byte writes across three physical banks; compact model is object/import qualification only. Mac tests execute original68000 ROM probes with unchanged reset/linker memory bounds. No protected program, complete CPU, Resource Manager, System startup, persistence or physical hardware claim. Local compiler frames are not cumulative stack proof. Modeled cycles are not hardware timing. Only the declared tool/source closure is pinned; no wider transitive toolchain claim.",
+  "retained_alignment_reproduction": {
+    "report_sha256": "7d926292664cdb0b73ffe04df3d8e95e230f4985b2bbcdd0e306702bce3a5b3e",
+    "status": "confirmed-pre-fix-undefined-behavior",
+    "exit_code": 1,
+    "source_sha256": "59aead1c0cea84cd3b193c1d1d5479db1245c968c7299d164bc53aa8d6b2573a",
+    "binary_sha256": "c1272b704e718079d00e8d9721ef3a7ca4f782ddf042f85e454b5e5c35e11db2",
+    "stderr_sha256": "fe4431274c08a12f0e808ae9d9afc1cb82d3c34cbd017ad8b679b28f129204d4",
+    "scope": "Retained pre-fix original binary; misaligned wrapper member access before alignment refusal. Current corrected sources are qualified separately."
+  },
+  "coordinator_cmake_integration": {
+    "tests_passed": 14,
+    "tests_failed": 0,
+    "log": "startup-write-integration-20261118-a/cpu-ctest.log",
+    "log_sha256": "f5f82919457d928b9444594ca181129530e7c8f1f2c09adb99b0135516250517",
+    "scope": "Separately coordinated CMake integration; not part of canonical harness source closure."
+  }
+}

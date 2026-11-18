@@ -38,7 +38,7 @@ def main():
         m68k,identity=native.inspect(args.m68k_bin)
         inputs=[*CORE,PROBE,ROOT/'probes/cpu/m68k-startup.h',ROOT/'probes/mac128k/m68k-startup.c',
                 ROOT/'probes/pc286/boot-m68k-startup.c',ROOT/'core/cpu/m68k-bus.h',ROOT/'core/cpu/m68k-guard.h',
-                ROOT/'core/cpu/m68k-backend.h',
+                ROOT/'core/cpu/m68k-backend.h',ROOT/'core/cpu/m68k-transfer.h',
                 ROOT/'core/cpu/m68k.h',ROOT/'core/memory/guest.h',ROOT/'core/services/traps.h',
                 ROOT/'tests/m68k-startup.c',ROOT/'tests/m68k-bus.c',ROOT/'tests/m68k-guard.c',
                 ROOT/'apps/memory-probe/probe.c',ROOT/'apps/memory-probe/probe.h',ROOT/'apps/memory-probe/program.h',ROOT/'apps/aline-probe/program.h',

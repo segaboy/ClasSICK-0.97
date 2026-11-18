@@ -50,4 +50,9 @@ cs_pg_result cs_pc286_guest_read(const cs_pc286_guest *service, uint32_t generat
     uint32_t address, unsigned width, uint32_t access, uint32_t *out);
 cs_pg_result cs_pc286_guest_write(const cs_pc286_guest *service, uint32_t generation,
     uint32_t address, unsigned width, uint32_t value);
+/* SPEC-0123: one atomic byte transfer, length 1..64 (otherwise WIDTH).
+ * Stable near source remains within its native segment; no retained pointer.
+ * Full generation/geometry/coverage/permission checks precede all writes. */
+cs_pg_result cs_pc286_guest_write_bytes(const cs_pc286_guest *service, uint32_t generation,
+    uint32_t address, unsigned bytes, const uint8_t *source);
 #endif

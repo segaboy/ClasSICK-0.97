@@ -5213,3 +5213,19 @@ code or manual samples transferred. [Review](records/SRC-0616-m68k-address-stack
 2026-11-18; Apple1992 file-format documentation and March1987 DV03 establish
 field widths and order for SPEC-0119. The historical128K startup entry and
 machine-state contract remain unresolved. [Review](records/SRC-0617-published-boot-header-fields.md).
+
+## SRC-0618 - Published MOVEM instruction behavior
+
+2026-11-18; scoped NXP-hosted Motorola1992 primary-manual facts support the
+original68000 register-transfer profile. [Review](records/SRC-0618-movem-instruction.md).
+
+## SRC-0619 - Original modeled Macintosh sector writes
+
+2026-11-18; project-owned writable-copy and GCR/handshake contracts support
+SPEC-0125 without historical or physical inference.
+[Review](records/SRC-0619-modeled-mac-sector-write.md).
+
+## SRC-0620 - Original modeled native286 floppy writes
+
+2026-11-18; explicit BootHush built-in BIOS sector-write behavior supports
+the standalone native286 provider. [Review](records/SRC-0620-pc286-floppy-sector-write.md).

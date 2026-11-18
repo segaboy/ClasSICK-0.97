@@ -204,3 +204,38 @@ cs_pg_result cs_pc286_guest_write(const cs_pc286_guest *s, uint32_t generation,
     for (i = 0; i < width; ++i) *destinations[i] = staged[4u - width + i];
     return CS_PG_OK;
 }
+
+cs_pg_result cs_pc286_guest_write_bytes(const cs_pc286_guest *s, uint32_t generation,
+    uint32_t at, unsigned bytes, const uint8_t *source)
+{
+    volatile uint8_t __far *destinations[64];
+    const cs_pg_region *region = NULL;
+    cs_pg_result result;
+    uint16_t i;
+    unsigned n;
+    if (source == NULL) return CS_PG_ARGUMENT;
+    if (bytes == 0u || bytes > 64u) return CS_PG_WIDTH;
+    if ((uint32_t)bytes > 0x10000UL - (uint32_t)(uintptr_t)source) return CS_PG_ARGUMENT;
+    result = live(s, generation);
+    if (result != CS_PG_OK) return result;
+    if (at >= 0x1000000UL || (uint32_t)bytes > 0x1000000UL - at) return CS_PG_ADDRESS;
+    for (i = 0; i < s->region_count; ++i) {
+        const cs_pg_region *candidate = &s->regions[i];
+        if (at >= candidate->base && bytes <= candidate->bytes &&
+            at - candidate->base <= candidate->bytes - bytes) { region = candidate; break; }
+    }
+    if (region == NULL) return CS_PG_ADDRESS;
+    if ((region->flags & CS_PG_WRITE) == 0UL) return CS_PG_PERMISSION;
+    for (n = 0; n < bytes; ++n) {
+        uint32_t offset = at + (uint32_t)n - region->base;
+        uint16_t bank = region->first_bank;
+        uint32_t encoded;
+        while (offset >= s->banks[bank].bytes) { offset -= s->banks[bank].bytes; ++bank; }
+        encoded = ((uint32_t)s->banks[bank].segment << 16) |
+            ((uint32_t)s->banks[bank].offset + offset);
+        destinations[n] = (volatile uint8_t __far *)encoded;
+    }
+    /* All source bytes are in DS, excluded from every destination bank. */
+    for (n = 0; n < bytes; ++n) *destinations[n] = source[n];
+    return CS_PG_OK;
+}

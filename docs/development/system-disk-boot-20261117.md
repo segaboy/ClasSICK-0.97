@@ -22,8 +22,16 @@ The native286 banked interpreter executes original128KiB workloads through the
 same decoder, with atomic refusal and retained flat-runtime regression coverage.
 These component results do not initialize the selected System or Finder.
 
+[Startup-file selection](startup-files-20261118.md) now resolves both names from
+the selected header and opens their resource sources on both native targets;
+39type records/144references and post-return source checks agree. Original
+[Mac sector writes](mac-floppy-write-20261118.md) and
+[286 sector writes](pc286-floppy-write-20261118.md) pass explicit-copy export and
+fresh read-only restart checks. These writes use original fixtures, not the
+selected medium, and do not yet implement file-level mutations.
+
 Boot handoff/initial state, bank-aware runtime services, required ROM services,
-write persistence and full-use acceptance remain unfinished. Historical API
+filesystem write operations and full-use acceptance remain unfinished. Historical API
 completeness and physical timing are separate from the current model results.
 No System/Finder startup or desktop is credited. The audit and older checkpoints
 below retain their dated state and are superseded only for these exact claims.

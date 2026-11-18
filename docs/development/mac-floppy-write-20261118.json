@@ -1,0 +1,686 @@
+{
+  "schema_version": 1,
+  "status": "pass",
+  "external_report_sha256": "7991e0fca21f063c3179994393487de17b650c208d6c90f20fbe6c5c1fbbd996",
+  "source_sha256": {
+    "platform/mac128k/iwm-read.c": "75e81244adc3a4282b3e01e90e0e47425a7953994cf4725d34d088096baa7260",
+    "platform/mac128k/iwm-read.h": "d6fafe57e1fa15889c4979a9c0b074910d4c8ea93431c37cf079e81fde5fbf15",
+    "platform/mac128k/iwm-capture.S": "84bbf0e060eb706f92b81777629715acbffbd498aa4e60cdbe41f3f3ebf60cee",
+    "platform/mac128k/iwm-write.c": "58090840064d28f54f5fa0543195c59437fa282c4ec465736d2e4cec64a2eefe",
+    "platform/mac128k/iwm-write.h": "78de1dd13ebffa8c6a6d4765bf9a330143a66cade3625bfe5fd5ba7020ed0bab",
+    "platform/mac128k/iwm-send.S": "cacb91b5a34f6ccad4e1255c58bdf32feabfabe92bafb7b06e99a97b5bf25f8a",
+    "core/storage/block-read.h": "18bbc57ff7a28a12eff52d95c0d878bb7c2a7f16f581cd45848e5947cdc5f1da",
+    "tests/mac-floppy-write.c": "58cf05b19a61d42dc4837b65a44aae6130915111fe0c49acbe24e6593f82a2ee",
+    "probes/mac128k/floppy-write.c": "c2140f6d6da7f66e1505faabb8606758d24709ff730a60b83fe3575206a7b1b0",
+    "arch/m68k/mac-reset.S": "b40c0b860836bfe398053251ffd810c98a1fae17ea049132573415475eaa013d",
+    "arch/m68k/mac-rom.ld": "5d5b7d93dde8b7ae395832955d43baede81f82df50a9b2cda07a2146dd40ae65",
+    "scripts/m68k_windows_toolchain.py": "0f662037cfcb2171a00d9be83cccc1560937277bf74f78e908e448c83a4c7627",
+    "scripts/Test-MacFloppyRead.py": "54ea6da35abc35aae9086d9638e1669436afffecb281031cd6b27f6bb3ed9d40",
+    "docs/specifications/SPEC-0125-modeled-mac-sector-write.md": "0c49da2217b1fd4b9efe759f6d2e5fc5c7f08ef0a58c9123743994284605aae4",
+    "provenance/records/SRC-0619-modeled-mac-sector-write.md": "c3ca75bf9524b17dac769da8edfd846d6fa45ee4bae1741378d530d0628737c2",
+    "scripts/Test-MacFloppyWrite.py": "b2fb1a180ef0c50cc6ef8631ea2ca7f53ba8c83c0dc3b71a77c0ab57ef03fd30"
+  },
+  "tool_sha256": {
+    "emulator": "3d48d7515d3492ac796d3899ed2c47603d3330e3f0f64352fd29ed6a78284ff4",
+    "host_cc": "93303edd5791e4b60682f819267a34c349e5f52d052d067e006e76d21cc82ea4",
+    "python": "c7612d427853d8cf4b9c857243ab3eea706852f66d0a3e945820968800afae80",
+    "gcc": "35e82461e0cfd0e4d89be95920546155c28aabbd88227dec941c5027d1dfbe30",
+    "nm": "114ba98342ca2023cf00edb3c79d5f80ccf99f4978ff2e28086d1d6fb5e0929a",
+    "objcopy": "631d6dcdd0a58fde628c56ded48aa8f05df0bbca0ce1ccd74156b75d103706fe",
+    "objdump": "cd558fa890b6624a7478abdcbbbc882d6db193a34717123c6883215f0f02d390"
+  },
+  "hosted": [
+    {
+      "profile": "release",
+      "output": "Mac write encoder: 13710 checks passed",
+      "sha256": "ea369e15b52d6cfa458fcb4e5edd5cdd22a446326f5bc71a8b3a215e7f1948f7"
+    },
+    {
+      "profile": "sanitized",
+      "output": "Mac write encoder: 13710 checks passed",
+      "sha256": "2174c3644006d7bb67dec47584115fc973e63197aa2d09a6717f68c5a7063aea"
+    }
+  ],
+  "builds": [
+    {
+      "case": "probe-0-0",
+      "payload_bytes": 3176,
+      "rom_sha256": "2a217d6b92873a1ae485ea2eefded26e26448daa4758ac8dc1fd1374b3cb98a0"
+    },
+    {
+      "case": "probe-1-0",
+      "payload_bytes": 3140,
+      "rom_sha256": "dace4a9f7416f5e8909b7234c8bf674fccae703b427f608a60ec2747212ef7e2"
+    },
+    {
+      "case": "probe-2-0",
+      "payload_bytes": 3196,
+      "rom_sha256": "f8bc96199609dbd4b261011d2eb2293bafc84b9f823a0a7418c90e7bc7b52393"
+    },
+    {
+      "case": "probe-3-0",
+      "payload_bytes": 3208,
+      "rom_sha256": "8bc246311204b7d9ca7421241f94e9d2d4f0dc7a02becd19cca7c3673147e76d"
+    },
+    {
+      "case": "probe-0-1",
+      "payload_bytes": 3188,
+      "rom_sha256": "97c56030977c55e025579c6446d916fcacc0ce183dc3303c493beb1b08487ab6"
+    },
+    {
+      "case": "probe-1-1",
+      "payload_bytes": 3152,
+      "rom_sha256": "290b648be64b9d836c73ecd5081cdbf88f9813ffc216c793e1f2f4158bd9e986"
+    },
+    {
+      "case": "probe-2-1",
+      "payload_bytes": 3208,
+      "rom_sha256": "6ea7c05a6eda75da8e7999520a1c869fa5cfe83786e0c0abbff625f6ea9d4a0c"
+    },
+    {
+      "case": "probe-3-1",
+      "payload_bytes": 3208,
+      "rom_sha256": "4343de91df29115acffd1dd9585d448f59b55c3e9c0355d61576eab4434263f7"
+    }
+  ],
+  "outcomes": [
+    {
+      "case": "raw-write-read",
+      "diag": [
+        184,
+        11,
+        0,
+        11,
+        22,
+        0,
+        0,
+        0
+      ],
+      "result": {
+        "status": "condition_met",
+        "cycles": 48654314,
+        "pc": 4197046,
+        "machine": "mac128k",
+        "vbl": 373,
+        "mac_floppy_write": {
+          "enabled": true,
+          "error": false,
+          "gate_open": false,
+          "pending_bytes": 0,
+          "accepted_bytes": 7799,
+          "committed_sectors": 11,
+          "rejected_records": 0
+        },
+        "mac_floppy": {
+          "observation": "modeled_iwm",
+          "media_present": true,
+          "write_protected": false,
+          "external_selected": false,
+          "controller_enabled": true,
+          "motor_on": true,
+          "disk_changed": true,
+          "step_outward": false,
+          "select_line": false,
+          "track": 0,
+          "control": 16,
+          "mode": 0,
+          "step_commands": 238,
+          "nibbles_delivered": 93142,
+          "disabled_data_reads": 0,
+          "not_ready_data_reads": 160899,
+          "ignored_data_writes": 0,
+          "eject_commands": 0
+        },
+        "cpu": {
+          "pc": 4197046,
+          "sr": 9984,
+          "d": [
+            184,
+            0,
+            129,
+            11,
+            243,
+            11,
+            0,
+            0
+          ],
+          "a": [
+            4617,
+            2849,
+            3362,
+            2848,
+            4196520,
+            4197480,
+            0,
+            16348
+          ]
+        },
+        "memory": {
+          "address": 2816,
+          "bytes": "000000b80000000b000000000000000b00000016000000000000000000000000"
+        }
+      }
+    },
+    {
+      "case": "raw-fresh-read",
+      "diag": [
+        184,
+        11,
+        0,
+        11,
+        11,
+        0,
+        0,
+        0
+      ],
+      "result": {
+        "status": "condition_met",
+        "cycles": 22410696,
+        "pc": 4197044,
+        "machine": "mac128k",
+        "vbl": 172,
+        "mac_floppy": {
+          "observation": "modeled_iwm",
+          "media_present": true,
+          "write_protected": true,
+          "external_selected": false,
+          "controller_enabled": true,
+          "motor_on": true,
+          "disk_changed": true,
+          "step_outward": true,
+          "select_line": false,
+          "track": 0,
+          "control": 17,
+          "mode": 0,
+          "step_commands": 238,
+          "nibbles_delivered": 45128,
+          "disabled_data_reads": 0,
+          "not_ready_data_reads": 77781,
+          "ignored_data_writes": 0,
+          "eject_commands": 0
+        },
+        "cpu": {
+          "pc": 4197044,
+          "sr": 9984,
+          "d": [
+            184,
+            0,
+            129,
+            11,
+            11,
+            0,
+            0,
+            0
+          ],
+          "a": [
+            4617,
+            2849,
+            3362,
+            2848,
+            0,
+            4197444,
+            0,
+            16352
+          ]
+        },
+        "memory": {
+          "address": 2816,
+          "bytes": "000000b80000000b000000000000000b0000000b000000000000000000000000"
+        }
+      }
+    },
+    {
+      "case": "raw-protected-refusal",
+      "diag": [
+        184,
+        11,
+        4,
+        11,
+        22,
+        0,
+        0,
+        0
+      ],
+      "result": {
+        "status": "condition_met",
+        "cycles": 46331442,
+        "pc": 4197046,
+        "machine": "mac128k",
+        "vbl": 355,
+        "mac_floppy": {
+          "observation": "modeled_iwm",
+          "media_present": true,
+          "write_protected": true,
+          "external_selected": false,
+          "controller_enabled": true,
+          "motor_on": true,
+          "disk_changed": true,
+          "step_outward": false,
+          "select_line": false,
+          "track": 0,
+          "control": 16,
+          "mode": 0,
+          "step_commands": 238,
+          "nibbles_delivered": 87698,
+          "disabled_data_reads": 0,
+          "not_ready_data_reads": 151473,
+          "ignored_data_writes": 0,
+          "eject_commands": 0
+        },
+        "cpu": {
+          "pc": 4197046,
+          "sr": 9984,
+          "d": [
+            184,
+            0,
+            74,
+            129,
+            11,
+            243,
+            11,
+            0
+          ],
+          "a": [
+            4617,
+            2849,
+            4197500,
+            3362,
+            2848,
+            4196520,
+            0,
+            16344
+          ]
+        },
+        "memory": {
+          "address": 2816,
+          "bytes": "000000b80000000b000000040000000b00000016000000000000000000000000"
+        }
+      },
+      "original_unchanged": true
+    },
+    {
+      "case": "raw-full-export",
+      "bytes": 409600,
+      "sha256": "c7e8ff0132610806dff88b350125dacc6d70aeb339fde2861dfc8f9c99013259",
+      "all_other_sectors_and_tags_preserved": true
+    },
+    {
+      "case": "raw-bad-checksum",
+      "diag": [
+        184,
+        1,
+        0,
+        1,
+        2,
+        0,
+        0,
+        0
+      ],
+      "result": {
+        "status": "error",
+        "cycles": 4132678,
+        "pc": 4197044,
+        "machine": "mac128k",
+        "vbl": 31,
+        "mac_floppy_write": {
+          "enabled": true,
+          "error": true,
+          "gate_open": false,
+          "pending_bytes": 0,
+          "accepted_bytes": 709,
+          "committed_sectors": 0,
+          "rejected_records": 1
+        },
+        "mac_floppy": {
+          "observation": "modeled_iwm",
+          "media_present": true,
+          "write_protected": false,
+          "external_selected": false,
+          "controller_enabled": true,
+          "motor_on": true,
+          "disk_changed": true,
+          "step_outward": false,
+          "select_line": false,
+          "track": 0,
+          "control": 16,
+          "mode": 0,
+          "step_commands": 80,
+          "nibbles_delivered": 5497,
+          "disabled_data_reads": 0,
+          "not_ready_data_reads": 9927,
+          "ignored_data_writes": 0,
+          "eject_commands": 0
+        },
+        "cpu": {
+          "pc": 4197044,
+          "sr": 9984,
+          "d": [
+            184,
+            0,
+            91,
+            0,
+            205,
+            0,
+            0,
+            0
+          ],
+          "a": [
+            4617,
+            2849,
+            3362,
+            2848,
+            0,
+            0,
+            0,
+            16360
+          ]
+        },
+        "error": "floppy snapshot refused after incomplete or invalid write",
+        "memory": {
+          "address": 2816,
+          "bytes": "000000b800000001000000000000000100000002000000000000000000000000"
+        }
+      }
+    },
+    {
+      "case": "dc42-write-read",
+      "diag": [
+        184,
+        11,
+        0,
+        11,
+        22,
+        0,
+        0,
+        0
+      ],
+      "result": {
+        "status": "condition_met",
+        "cycles": 48698786,
+        "pc": 4197046,
+        "machine": "mac128k",
+        "vbl": 373,
+        "mac_floppy_write": {
+          "enabled": true,
+          "error": false,
+          "gate_open": false,
+          "pending_bytes": 0,
+          "accepted_bytes": 7799,
+          "committed_sectors": 11,
+          "rejected_records": 0
+        },
+        "mac_floppy": {
+          "observation": "modeled_iwm",
+          "media_present": true,
+          "write_protected": false,
+          "external_selected": false,
+          "controller_enabled": true,
+          "motor_on": true,
+          "disk_changed": true,
+          "step_outward": false,
+          "select_line": false,
+          "track": 0,
+          "control": 16,
+          "mode": 0,
+          "step_commands": 238,
+          "nibbles_delivered": 91409,
+          "disabled_data_reads": 0,
+          "not_ready_data_reads": 157893,
+          "ignored_data_writes": 0,
+          "eject_commands": 0
+        },
+        "cpu": {
+          "pc": 4197046,
+          "sr": 9984,
+          "d": [
+            184,
+            0,
+            109,
+            11,
+            129,
+            243,
+            11,
+            0
+          ],
+          "a": [
+            4617,
+            2849,
+            4197490,
+            3362,
+            2848,
+            4196520,
+            0,
+            16344
+          ]
+        },
+        "memory": {
+          "address": 2816,
+          "bytes": "000000b80000000b000000000000000b00000016000000000000000000000000"
+        }
+      }
+    },
+    {
+      "case": "dc42-fresh-read",
+      "diag": [
+        184,
+        11,
+        0,
+        11,
+        11,
+        0,
+        0,
+        0
+      ],
+      "result": {
+        "status": "condition_met",
+        "cycles": 22455162,
+        "pc": 4197044,
+        "machine": "mac128k",
+        "vbl": 172,
+        "mac_floppy": {
+          "observation": "modeled_iwm",
+          "media_present": true,
+          "write_protected": true,
+          "external_selected": false,
+          "controller_enabled": true,
+          "motor_on": true,
+          "disk_changed": true,
+          "step_outward": true,
+          "select_line": false,
+          "track": 0,
+          "control": 17,
+          "mode": 0,
+          "step_commands": 238,
+          "nibbles_delivered": 44731,
+          "disabled_data_reads": 0,
+          "not_ready_data_reads": 77071,
+          "ignored_data_writes": 0,
+          "eject_commands": 0
+        },
+        "cpu": {
+          "pc": 4197044,
+          "sr": 9984,
+          "d": [
+            184,
+            0,
+            109,
+            129,
+            11,
+            11,
+            0,
+            0
+          ],
+          "a": [
+            4617,
+            2849,
+            3362,
+            2848,
+            0,
+            4197454,
+            0,
+            16348
+          ]
+        },
+        "memory": {
+          "address": 2816,
+          "bytes": "000000b80000000b000000000000000b0000000b000000000000000000000000"
+        }
+      }
+    },
+    {
+      "case": "dc42-protected-refusal",
+      "diag": [
+        184,
+        11,
+        4,
+        11,
+        22,
+        0,
+        0,
+        0
+      ],
+      "result": {
+        "status": "condition_met",
+        "cycles": 47505068,
+        "pc": 4197046,
+        "machine": "mac128k",
+        "vbl": 364,
+        "mac_floppy": {
+          "observation": "modeled_iwm",
+          "media_present": true,
+          "write_protected": true,
+          "external_selected": false,
+          "controller_enabled": true,
+          "motor_on": true,
+          "disk_changed": true,
+          "step_outward": false,
+          "select_line": false,
+          "track": 0,
+          "control": 16,
+          "mode": 0,
+          "step_commands": 238,
+          "nibbles_delivered": 94321,
+          "disabled_data_reads": 0,
+          "not_ready_data_reads": 162928,
+          "ignored_data_writes": 0,
+          "eject_commands": 0
+        },
+        "cpu": {
+          "pc": 4197046,
+          "sr": 9984,
+          "d": [
+            184,
+            0,
+            109,
+            129,
+            11,
+            74,
+            243,
+            11
+          ],
+          "a": [
+            4617,
+            2849,
+            4197512,
+            3362,
+            2848,
+            4196520,
+            0,
+            16340
+          ]
+        },
+        "memory": {
+          "address": 2816,
+          "bytes": "000000b80000000b000000040000000b00000016000000000000000000000000"
+        }
+      },
+      "original_unchanged": true
+    },
+    {
+      "case": "dc42-full-export",
+      "bytes": 419284,
+      "sha256": "06c1ddb87483160621790ea4c524a03d93b9b6545f914b99b68c1ffe961acb47",
+      "all_other_sectors_and_tags_preserved": true
+    },
+    {
+      "case": "dc42-bad-checksum",
+      "diag": [
+        184,
+        1,
+        0,
+        1,
+        2,
+        0,
+        0,
+        0
+      ],
+      "result": {
+        "status": "error",
+        "cycles": 4201890,
+        "pc": 4197044,
+        "machine": "mac128k",
+        "vbl": 32,
+        "mac_floppy_write": {
+          "enabled": true,
+          "error": true,
+          "gate_open": false,
+          "pending_bytes": 0,
+          "accepted_bytes": 709,
+          "committed_sectors": 0,
+          "rejected_records": 1
+        },
+        "mac_floppy": {
+          "observation": "modeled_iwm",
+          "media_present": true,
+          "write_protected": false,
+          "external_selected": false,
+          "controller_enabled": true,
+          "motor_on": true,
+          "disk_changed": true,
+          "step_outward": false,
+          "select_line": false,
+          "track": 0,
+          "control": 16,
+          "mode": 0,
+          "step_commands": 80,
+          "nibbles_delivered": 4939,
+          "disabled_data_reads": 0,
+          "not_ready_data_reads": 8958,
+          "ignored_data_writes": 0,
+          "eject_commands": 0
+        },
+        "cpu": {
+          "pc": 4197044,
+          "sr": 9984,
+          "d": [
+            184,
+            0,
+            91,
+            0,
+            34,
+            0,
+            0,
+            0
+          ],
+          "a": [
+            4629,
+            2849,
+            3362,
+            2848,
+            0,
+            0,
+            0,
+            16360
+          ]
+        },
+        "error": "floppy snapshot refused after incomplete or invalid write",
+        "memory": {
+          "address": 2816,
+          "bytes": "000000b800000001000000000000000100000002000000000000000000000000"
+        }
+      }
+    }
+  ],
+  "inputs_unchanged": true,
+  "limits": "Original modeled sector writes only; no MFS mutation, protected media, physical drive or System startup."
+}
