@@ -7,6 +7,12 @@ all 10 files and 20 forks with matching counts and digests in repeated runs.
 [Read-only media evidence](docs/development/mfs-media-20261118.md).
 System/Finder startup and the full-use workload remain unfinished.
 
+The November 19 disk-startup developer build produces a 64 KiB Mac ROM
+and a native 286 installer without embedding a System Disk. Both start
+68k code loaded from a separate floppy. The Mac now reaches its Line-A
+vector on the supplied disk. The 286 interpreter still stops during disk
+startup. [Build and test the startup artifacts](docs/development/disk-startup-build-20261119.md).
+
 Published 2026-11-17: [ROM 0.4.0-alpha.1](https://github.com/segaboy/ClasSICK-0.97/releases/tag/rom-v0.4.0-alpha.1) and [native 286 PC Preview 0.2.0-alpha.1](https://github.com/segaboy/ClasSICK-0.97/releases/tag/pc-v0.2.0-alpha.1).
 The paired experimental interactive-window release includes both targets,
 corresponding source, checksums, screenshots, GIF and video. All 16 public

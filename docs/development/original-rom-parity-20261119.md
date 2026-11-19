@@ -15,6 +15,12 @@ Macintosh completed 38 in-range CPU steps and reached its Line-A vector.
 System and Finder execution remain open. The service-family table below
 records the state at the time of the audit. All full-use gates remain open.
 
+The [disk-startup developer profile](disk-startup-build-20261119.md) builds a
+Mac ROM and a native 286 installer from explicit source lists. The published
+interactive-window preview retains its separate build and release identity.
+The developer profile still needs the original ROM services and the full
+disk-software and hardware qualifications defined below.
+
 ## Product definition
 
 The Mac deliverable is an independently implemented replacement for the

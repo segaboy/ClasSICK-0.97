@@ -21,6 +21,16 @@ records both observations and eight generated controls. The [initial receipt](bo
 records the experimental register and stack state. The [pointer profile](../specifications/SPEC-0137-startup-globals.md)
 initializes four low-memory values on each target.
 
+The [standalone developer ROM and 286 installer](disk-startup-build-20261119.md)
+now boot from a separate data floppy using target-owned entry points. Three
+[cold starts on the supplied disk](installed-disk-startup-20261119.md)
+reproduced the same boundary on these artifacts. The 64 KiB ROM completed 38
+disk steps and reached its vector 10 entry at $4004CE. After a normal
+installation, the 286 entered its dispatcher three times and halted with
+POST D2 during the third call. Only the diagnostic build above reports the
+guest PC at refusal. The standalone builds exclude the demo scene, test
+programs, diagnostic stop counters and synthetic return marker.
+
 In a separate [segment load](streamed-segment-load-20261119.md), both native
 targets copied the selected Shell's 3,140-byte first segment into guest RAM.
 The resolved entry was 254 bytes into the body. Generated workloads exercised
