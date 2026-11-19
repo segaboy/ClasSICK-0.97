@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # SPDX-License-Identifier: GPL-3.0-or-later
 # Copyright (C) 2026 Dean Howell.
-"""Qualify opt-in bank-backed GetTrapAddress with atomic six-byte completion."""
+"""Qualify banked Get/SetTrapAddress and a direct call to a retrieved guest routine."""
 import argparse
 import hashlib
 import importlib.util
@@ -18,7 +18,8 @@ CORE = [SERVICE, ROOT / "core/cpu/m68k-bus.c", ROOT / "core/cpu/m68k.c",
         ROOT / "core/memory/guest.c", ROOT / "core/services/traps.c"]
 NATIVE = [*CORE, ROOT / "platform/pc286/banked-guest.c", ROOT / "platform/pc286/m68k-banked.c",
           ROOT / "platform/pc286/m68k-transfer.c", ROOT / "probes/pc286/boot-banked-services.c"]
-EMULATOR_SHA = "7adb8a74cef009b7c532df24458c3a5db6b77725356fdb31e5ac4966d7ed971a"
+EMULATORS = {"7adb8a74cef009b7c532df24458c3a5db6b77725356fdb31e5ac4966d7ed971a",
+             "3d48d7515d3492ac796d3899ed2c47603d3330e3f0f64352fd29ed6a78284ff4"}
 
 
 def sha(path):
@@ -36,17 +37,19 @@ def main():
             "core/cpu/m68k-backend.h", "core/cpu/m68k-transfer.h", "core/cpu/m68k.h",
             "core/memory/guest.h", "core/services/traps.h", "platform/pc286/banked-guest.h",
             "platform/pc286/m68k-banked.h", "platform/pc286/m68k-transfer.h", "arch/i286/c16.h", "scripts/pc286_loader.py",
-            "scripts/pc286-toolchain-lock.json", "tests/banked-services.c",
+            "scripts/pc286-toolchain-lock.json", "tests/banked-services.c", "tests/banked-trap-set.c",
+            "tests/services.c", "apps/service-probe/probe.c", "apps/service-probe/probe.h",
             "docs/specifications/SPEC-0020-shared-trap-address-services.md",
             "docs/specifications/SPEC-0025-guest-memory-traps.md",
             "docs/specifications/SPEC-0117-pc286-banked-guest-memory.md",
             "docs/specifications/SPEC-0120-banked-m68k-execution.md",
             "docs/specifications/SPEC-0123-m68k-loop-register-transfer.md",
             "docs/specifications/SPEC-0124-banked-gettrap-service.md",
+            "docs/specifications/SPEC-0129-banked-settrap-service.md",
             "provenance/records/SRC-0618-movem-instruction.md")], Path(__file__)]
         before = {path.relative_to(ROOT).as_posix(): sha(path) for path in sources}
         cc, tool, emulator = args.cc.resolve(strict=True), args.tool_root.resolve(strict=True), args.emulator.resolve(strict=True)
-        if sha(emulator) != EMULATOR_SHA:
+        if sha(emulator) not in EMULATORS:
             raise ValueError("emulator does not match admitted original-fixture profile")
         lock = json.loads((ROOT / "scripts/pc286-toolchain-lock.json").read_text(encoding="utf-8"))
         tool_paths = {"host_cc": cc, "emulator": emulator, "python": Path(sys.executable).resolve(strict=True)}
@@ -85,22 +88,42 @@ def main():
         for profile, language, flags in (("release", "c11", ["-O3", "-DNDEBUG"]),
                 ("sanitized", "c11", ["-O1", "-fsanitize=address,undefined", "-fno-sanitize-recover=all", "-fno-omit-frame-pointer"]),
                 ("c99", "c99", ["-O2"])):
-            binary = out / (profile + ".exe")
-            run([cc, "-std=" + language, *warnings, *flags, *CORE, ROOT / "tests/banked-services.c", "-o", binary], profile + "-build")
-            answer = run([binary], profile + "-test")
-            hosted.append({"profile": profile, "result": answer.decode().strip(), "sha256": sha(binary)})
+            for fixture in ("banked-services", "banked-trap-set"):
+                label = profile + "-" + fixture
+                binary = out / (label + ".exe")
+                run([cc, "-std=" + language, *warnings, *flags, *CORE, ROOT / ("tests/" + fixture + ".c"),
+                     "-o", binary], label + "-build")
+                answer = run([binary], label + "-test")
+                hosted.append({"profile": profile, "fixture": fixture, "result": answer.decode().strip(), "sha256": sha(binary)})
+        binary = out / "services.exe"
+        run([cc, "-std=c11", *warnings, "-O2", ROOT / "tests/services.c", ROOT / "core/services/traps.c",
+             ROOT / "apps/service-probe/probe.c", "-o", binary], "services-build")
+        generic_suites = ["decode", "directory", "calls", "failures", "probe"]
+        for suite in generic_suites:
+            run([binary, suite], "services-" + suite)
         text = SERVICE.read_text(encoding="utf-8")
+        store = "    report->memory=backend->write_bytes(b->context,scratch,6,bytes);"
         replacements = {
             "early-frame": ("    report->memory=backend->write_bytes(b->context,scratch,6,bytes);",
                             "    copy_frame(frame,&proposed);\n    report->memory=backend->write_bytes(b->context,scratch,6,bytes);"),
             "split-store": ("    report->memory=backend->write_bytes(b->context,scratch,6,bytes);",
                             "    report->memory=b->write(b->context,scratch,2,proposed.sr);\n"
                             "    if(report->memory==CS_GUEST_OK)report->memory=b->write(b->context,scratch+2,4,proposed.pc);"),
-            "signature": ("    if(target!=gateway->config.get_token){", "    if(0){")}
+            "signature": ("if(target!=gateway->config.get_token){", "if(0){"),
+            "early-directory": (store, "    if(setting)publish_gateway->entries[set_index]=set_address;\n" + store),
+            "early-set-frame": (store, "    if(setting)copy_frame(frame,&proposed);\n" + store),
+            "split-set-store": (store, "    if(setting){report->memory=b->write(b->context,scratch,2,proposed.sr);\n"
+                                     "        if(report->memory==CS_GUEST_OK)report->memory=b->write(b->context,scratch+2,4,proposed.pc);\n"
+                                     "    }else " + store.strip()),
+            "set-signature": ("if(target!=gateway->config.set_token){", "if(0){")}
         cases = (("optimized", "-os", None, 0xb8), ("unoptimized-service", "-od", None, 0xb8),
                  ("bad-early-frame", "-os", "early-frame", 0xe1),
                  ("bad-split-store", "-os", "split-store", 0xe2),
-                 ("bad-signature", "-os", "signature", 0xe3))
+                 ("bad-signature", "-os", "signature", 0xe3),
+                 ("bad-early-directory", "-os", "early-directory", 0xe4),
+                 ("bad-early-set-frame", "-os", "early-set-frame", 0xe5),
+                 ("bad-split-set-store", "-os", "split-set-store", 0xe6),
+                 ("bad-set-signature", "-os", "set-signature", 0xe7))
         observations = []
         for name, optimization, defect, marker in cases:
             service = SERVICE
@@ -133,7 +156,7 @@ def main():
             image.write_bytes(loader.floppy(payload, int(entry.group(1), 16), verify_payload=True))
             original_hash = sha(image)
             ranges = [(0x10000 + offset, min(4096, len(payload) - offset)) for offset in range(0, len(payload), 4096)]
-            expected_ram = {0x38ffc: "271000", 0x41000: "00", 0x42000: "9002"}
+            expected_ram = {0x38ffc: "271000", 0x41000: "00", 0x42000: "9214"}
             if defect is None:
                 ranges += [(address, len(bytes.fromhex(value))) for address, value in expected_ram.items()]
             # CLI inspection has a 16KiB total cap. A larger payload uses fresh
@@ -179,8 +202,8 @@ def main():
             raise ValueError("compiler/header/emulator changed during qualification")
         report = {"status": "pass", "source_sha256": before, "inputs_unchanged": True,
                   "tool_sha256": tool_hashes, "toolchain": lock, "commands": commands, "hosted": hosted,
-                  "pc286": observations,
-                  "limits": "Original native286 opt-in GetTrapAddress only. No Set, memory manager, protected program, physical target or System startup claim. Unoptimized case changes service-wrapper optimization only."}
+                  "pc286": observations, "generic_suites": generic_suites,
+                  "limits": "Original native286 fixture for two trap-address services and explicit guest JSR/RTS. Automatic patch dispatch, memory managers, System startup and physical hardware remain open. Unoptimized case changes service-wrapper optimization only."}
         (out / "report.json").write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
         print(json.dumps({"status": "pass", "hosted": len(hosted), "pc286": len(observations), "report": str(out / "report.json")}))
         return 0

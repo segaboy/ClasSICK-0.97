@@ -3472,6 +3472,39 @@ if(BUILD_TESTING)
     add_test(NAME m68k.register-transfers COMMAND classick_m68k_transfer_tests)
 endif()
 
+# SPEC-0127/0128/0129/0132: hosted checks for disk startup and the native trap directory.
+if(BUILD_TESTING)
+    set(classick_mfs_sources core/storage/block-read.c core/storage/mfs-read.c core/storage/mfs-volume.c)
+    set(classick_code_stream_sources
+        ${classick_mfs_sources} core/storage/mac-boot-header.c core/storage/startup-files.c
+        formats/resourcefork/transport.c formats/resourcefork/mfs-transport.c
+        personality/system1/code-stream.c)
+    add_executable(classick_code_stream_tests tests/code-stream.c probes/storage/code-stream.c ${classick_code_stream_sources})
+    add_executable(classick_code_row_tests tests/code-stream-row.c personality/system1/code-stream-row.c ${classick_code_stream_sources})
+    add_executable(classick_mfs_write_tests tests/mfs-write.c core/storage/mfs-write.c ${classick_mfs_sources})
+    add_executable(classick_boot_image_tests tests/mac-boot-image.c core/storage/mac-boot-image.c
+        core/storage/mac-boot-header.c core/storage/block-read.c)
+    add_executable(classick_banked_set_tests tests/banked-trap-set.c personality/system1/banked-services.c)
+    target_link_libraries(classick_banked_set_tests PRIVATE classick_memory)
+    foreach(target classick_code_stream_tests classick_code_row_tests classick_mfs_write_tests classick_banked_set_tests classick_boot_image_tests)
+        set_target_properties(${target} PROPERTIES C_STANDARD 11 C_STANDARD_REQUIRED ON)
+        if(CMAKE_C_COMPILER_ID MATCHES "Clang|GNU")
+            target_compile_options(${target} PRIVATE -Wall -Wextra -Werror -Wconversion -Wsign-conversion)
+        endif()
+        if(CLASSICK_SURFACE_SANITIZERS)
+            target_compile_options(${target} PRIVATE -fsanitize=address,undefined -fno-sanitize-recover=all -fno-omit-frame-pointer)
+            target_link_options(${target} PRIVATE -fsanitize=address,undefined)
+        endif()
+    endforeach()
+    add_test(NAME storage.code-stream COMMAND ${Python3_EXECUTABLE} -B ${CMAKE_SOURCE_DIR}/tests/code-stream-model.py
+        tables $<TARGET_FILE:classick_code_stream_tests>)
+    add_test(NAME storage.code-stream-row COMMAND ${Python3_EXECUTABLE} -B ${CMAKE_SOURCE_DIR}/tests/code-stream-model.py
+        row $<TARGET_FILE:classick_code_row_tests>)
+    add_test(NAME storage.mfs-write COMMAND classick_mfs_write_tests)
+    add_test(NAME storage.mac-boot-image COMMAND classick_boot_image_tests)
+    add_test(NAME m68k.banked-trap-set COMMAND classick_banked_set_tests)
+endif()
+
 # SPEC-0124: explicitly admitted banked GetTrapAddress service transactions.
 if(BUILD_TESTING)
     add_executable(classick_banked_services_tests tests/banked-services.c personality/system1/banked-services.c)

@@ -135,5 +135,44 @@ void start(void)
     seed(&frame);
     if(cs_s1_banked_step(&backend,&gateway,&frame,&report,&limits,&guard)!=CS_M68K_OK ||
         frame.a[0]!=0x401234UL || !scratch(&o,0x27100000UL,0x9002UL))fail(0xde);
+    /* Install an independently authored RAM routine, look it up, call it
+     * with JSR (A0), and return to the caller on the split guest stack. */
+    put(&o,0x9200,2,0x7017); /* MOVEQ #23,D0 */
+    put(&o,0x9202,2,0x207c);put(&o,0x9204,4,0x9340);
+    put(&o,0x9208,2,0xa047);
+    put(&o,0x920a,2,0x207c);put(&o,0x920c,4,0);
+    put(&o,0x9210,2,0xa146);
+    put(&o,0x9212,2,0x4e90);put(&o,0x9214,2,0x4e71);
+    put(&o,0x9340,2,0x762a);put(&o,0x9342,2,0x4e75); /* MOVEQ #42,D3; RTS */
+    seed(&frame);frame.pc=0x9200;
+    for(unsigned i=0;i<2u;++i)
+        if(cs_s1_banked_trap_step(&backend,&gateway,&frame,&report,&limits,&guard)!=CS_M68K_OK)fail(0xc0);
+    if(frame.pc!=0x9208 || frame.a[0]!=0x9340 || frame.d[0]!=23)fail(0xc1);
+    copy(&before,&frame,sizeof frame);
+    put(&o,0x10ffcUL,4,0x11223344UL);put(&o,0x11000UL,2,0x5566);
+    if(cs_s1_banked_step(&backend,&gateway,&frame,&report,&limits,&guard)!=CS_M68K_POLICY)fail(0xc2);
+    o.fault=0x11001UL;
+    if(cs_s1_banked_trap_step(&backend,&gateway,&frame,&report,&limits,&guard)!=CS_M68K_ADDRESS ||
+        report.memory!=CS_GUEST_PERMISSION || !report.cpu.service_called)fail(0xc3);
+    if(!equal(&gateway,&saved_gateway,sizeof gateway))fail(0xe4);
+    if(!equal(&frame,&before,sizeof frame))fail(0xe5);
+    if(!scratch(&o,0x11223344UL,0x5566))fail(0xe6);
+    o.fault=0xffffffffUL;
+    gateway.entries[CS_TRAP_SET]=config.get_token;
+    if(cs_s1_banked_trap_step(&backend,&gateway,&frame,&report,&limits,&guard)!=CS_M68K_POLICY ||
+        report.cpu.service_called || !equal(&frame,&before,sizeof frame))fail(0xe7);
+    gateway.entries[CS_TRAP_SET]=config.set_token;
+    if(!equal(&gateway,&saved_gateway,sizeof gateway) || !scratch(&o,0x11223344UL,0x5566))fail(0xc4);
+    if(cs_s1_banked_trap_step(&backend,&gateway,&frame,&report,&limits,&guard)!=CS_M68K_OK ||
+        !scratch(&o,0x27100000UL,0x920a))fail(0xc5);
+    saved_gateway.entries[23]=0x9340;
+    if(!equal(&gateway,&saved_gateway,sizeof gateway))fail(0xc6);
+    for(unsigned i=0;i<6u;++i)
+        if(cs_s1_banked_trap_step(&backend,&gateway,&frame,&report,&limits,&guard)!=CS_M68K_OK)fail(0xc7);
+    if(frame.pc!=0x9216 || frame.a[7]!=0x11002UL || frame.a[0]!=0x9340 ||
+        frame.d[3]!=42 || !scratch(&o,0x27100000UL,0x9214) ||
+        !equal(&gateway,&saved_gateway,sizeof gateway))fail(0xc8);
+    if(*far_byte(0x31007ffbUL)!=0x5a || *far_byte(0x31007fffUL)!=0xa5 ||
+        *far_byte(0x41000001UL)!=0x69 || *far_byte(0x42000002UL)!=0x96)fail(0xc9);
     post(0xb8);for(;;) { }
 }

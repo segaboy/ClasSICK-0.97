@@ -28,18 +28,25 @@ def build(session,assembler,linker,out):
     if hashlib.sha256(payload).hexdigest()!=report['payload_sha256']:raise ValueError('payload changed')
     for n,d in report['source_sha256'].items():
         if sha(ROOT/n)!=d:raise ValueError('session source changed: '+n)
-    if sha(assembler)!='9e779dda024c6cee24943f917b0f761ce862951caec0a4c0fbadbc760895c0cb':
-        raise ValueError('assembler identity mismatch')
-    lock=json.loads((ROOT/'scripts/pc286-toolchain-lock.json').read_text())
-    expected_linker=next(r for r in lock['selected_members'] if r['path']=='binnt64/wlink.exe')
-    if sha(linker)!=expected_linker['sha256'] or linker.stat().st_size!=expected_linker['bytes']:
-        raise ValueError('linker identity mismatch')
     mapping=(session/'session.map').read_text()
     entry=int(re.search(r'Entry point address:\s*([0-9a-fA-F]+)',mapping)[1],16)
     bss_end=report['bss_start']+report['bss_bytes']
     bss=re.search(r'^_BSS\s+BSS\s+DGROUP\s+([0-9a-fA-F]+)\s+([0-9a-fA-F]+)',mapping,re.M)
     if not bss or [int(v,16) for v in bss.groups()]!=[report['bss_start'],report['bss_bytes']]:
         raise ValueError('BSS map/report disagreement')
+    result=build_install_media(payload,entry,bss_end,assembler,linker,out)
+    result['session_report_sha256']=sha(session/'report.json')
+    (out/'media.json').write_text(json.dumps(result,indent=2)+'\n')
+    return result
+
+def build_install_media(payload,entry,bss_end,assembler,linker,out):
+    """Package one near-model native payload with the SPEC-0110 installer."""
+    if sha(assembler)!='9e779dda024c6cee24943f917b0f761ce862951caec0a4c0fbadbc760895c0cb':
+        raise ValueError('assembler identity mismatch')
+    lock=json.loads((ROOT/'scripts/pc286-toolchain-lock.json').read_text())
+    expected_linker=next(r for r in lock['selected_members'] if r['path']=='binnt64/wlink.exe')
+    if sha(linker)!=expected_linker['sha256'] or linker.stat().st_size!=expected_linker['bytes']:
+        raise ValueError('linker identity mismatch')
     if not 0<=entry<len(payload)<=59*512 or not len(payload)<=bss_end<0xf000:
         raise ValueError('payload or BSS outside the near-segment budget')
     sectors=(len(payload)+511)//512
@@ -77,13 +84,12 @@ def build(session,assembler,linker,out):
     sources=('platform/pc286/preview-boot.asm','platform/pc286/preview-install.asm',
              'scripts/Build-PC286PreviewMedia.py','scripts/pc286_loader.py','scripts/pc286_hard_disk_loader.py',
              'scripts/pc286-toolchain-lock.json')
-    result={'status':'built-unqualified','session_report_sha256':sha(session/'report.json'),
-            'payload_sha256':report['payload_sha256'],'constants':constants,'boot_bytes':len(boot),
+    result={'status':'built-unqualified',
+            'payload_sha256':hashlib.sha256(payload).hexdigest(),'constants':constants,'boot_bytes':len(boot),
             'installer_bytes':len(installer),'assembler_sha256':sha(assembler),'linker_sha256':sha(linker),
             'commands':commands,'source_sha256':{n:sha(ROOT/n) for n in sources},
             'images':{n:sha(out/n) for n in ('hard-disk.img','install-floppy.img','installer-stage.bin')},
             'limits':'fixed BootHush BIOS profile; physical/human/release qualification pending'}
-    (out/'media.json').write_text(json.dumps(result,indent=2)+'\n')
     return result
 def main():
     p=argparse.ArgumentParser(description=__doc__)

@@ -161,3 +161,7 @@ logical-medium SHA256 is
 This confirms selection and structural resource-source preparation for that
 exact input. It neither exposes the names/content nor establishes executable
 loading, INIT behavior, launch readiness or System boot.
+
+The [subsequent Macintosh retry qualification](startup-checksum-retry-20261119.md)
+uses generated media to compare one-shot and persistent checksum errors during
+this same startup-file preparation.

@@ -158,3 +158,16 @@ disk, excluded research original or held UART body was accessed in this slice.
 The expected selected test executable is the separately pinned active-profile
 build with SHA-256 7adb8a74cef009b7c532df24458c3a5db6b77725356fdb31e5ac4966d7ed971a.
 Any later experiment must verify that identity and retain its model-only limits.
+
+## Startup block reader, 2026-11-19
+
+An additional startup binding wraps the single-attempt reader. After an actual
+decoded checksum mismatch it recaptures the requested block once in the same
+boot. Only a completely validated read publishes to the caller. Any other
+failure or a second mismatch returns the provider's refusal. The binding counts
+each extra attempt, including failed ones, in an unsigned 32-bit diagnostic.
+This is an original bounded recovery policy for startup-file preparation.
+The existing raw sector reader and sector-write callbacks retain their
+single-attempt interfaces. The separate opt-in BootHush checksum experiment
+uses the exact binary and fixture identities recorded in the
+[startup retry receipt](../development/startup-checksum-retry-20261119.md).

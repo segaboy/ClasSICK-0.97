@@ -5249,3 +5249,14 @@ Exact locators, applicability limits and retrieval method are in the
 [source review](records/SRC-0622-original-rom-responsibilities.md).
 No protected implementation or assets, confidential drafts or new historical
 execution observations were used.
+
+## SRC-0623 - Modeled boot drive selection and transient Macintosh read errors
+
+2026-11-19. Project-owned BootHush
+`cc182c2311616aff8137ac848c89b1f049acb707`, dual-build executable SHA-256
+`5fa45b7542409300b7604606a78c81d4ee95e888a57c592a83d0cec43ce1056e`.
+The explicit hard-disk boot selector leaves the separate data floppy on BIOS
+drive zero. The one-shot Mac fault changes one returned checksum nibble on the
+selected sector. These are modeled test interfaces. See the original project's
+[integration notes](https://github.com/segaboy/boothush/blob/cc182c2311616aff8137ac848c89b1f049acb707/docs/classick-integration.md)
+and the [installed reader qualification](../docs/development/installed-startup-20261119.md).

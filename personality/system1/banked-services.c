@@ -69,8 +69,8 @@ static int permit(const cs_m68k_guard *guard,cs_m68k_guard_kind kind,
     event.word=word;event.before=before;event.proposed=proposed;
     return guard->check(guard->context,&event)!=0;
 }
-cs_m68k_result cs_s1_banked_step(const cs_m68k_transfer_backend *backend,
-    const cs_trap_gateway *gateway,cs_trap_frame *frame,cs_m68k_bus_report *report,
+static cs_m68k_result banked_step(const cs_m68k_transfer_backend *backend,
+    const cs_trap_gateway *gateway,cs_trap_gateway *publish_gateway,cs_trap_frame *frame,cs_m68k_bus_report *report,
     const cs_m68k_stack_limits *limits,const cs_m68k_guard *guard)
 {
     if(!envelope(backend,gateway,frame,report,limits,guard))return CS_M68K_ARGUMENT;
@@ -97,7 +97,8 @@ cs_m68k_result cs_s1_banked_step(const cs_m68k_transfer_backend *backend,
     if(!permit(guard,CS_M68K_GUARD_INSTRUCTION,frame,&proposed,word,frame->pc,2,5))
         return done(report,CS_M68K_POLICY);
     (void)cs_trap_decode(word,&report->cpu.service.decoded);
-    if(word!=0xa146u && word!=0xa046u){
+    int setting=word==0xa047u && publish_gateway!=0;
+    if(word!=0xa146u && word!=0xa046u && !setting){
         report->cpu.service.status=CS_TRAP_UNSUPPORTED_FORMAT;return done(report,CS_M68K_POLICY);
     }
     if(frame->a[7]<6 || frame->a[7]-6<limits->base || frame->a[7]-6<0x400UL){
@@ -110,18 +111,24 @@ cs_m68k_result cs_s1_banked_step(const cs_m68k_transfer_backend *backend,
     report->memory=b->span(b->context,scratch,6,CS_GUEST_WRITE);
     if(report->memory!=CS_GUEST_OK)return done(report,CS_M68K_ADDRESS);
     uint32_t target;
-    cs_trap_result service=cs_trap_get(gateway,CS_TRAP_GET,&target);
+    cs_trap_result service=cs_trap_get(gateway,(uint16_t)(setting?CS_TRAP_SET:CS_TRAP_GET),&target);
     if(service!=CS_TRAP_OK){report->cpu.service.status=service;return done(report,CS_M68K_SERVICE);}
     report->cpu.service.target=target;
-    if(target!=gateway->config.get_token){
-        report->cpu.service.status=CS_TRAP_UNSUPPORTED_FORMAT;return done(report,CS_M68K_POLICY);
+    if(setting){
+        if(target!=gateway->config.set_token){
+            report->cpu.service.status=CS_TRAP_UNSUPPORTED_FORMAT;return done(report,CS_M68K_POLICY);
+        }
+    }else{
+        if(target!=gateway->config.get_token){
+            report->cpu.service.status=CS_TRAP_UNSUPPORTED_FORMAT;return done(report,CS_M68K_POLICY);
+        }
     }
     report->cpu.service_called=1;
-    uint32_t value;
-    service=cs_trap_get(gateway,(uint16_t)frame->d[0],&value);
+    uint16_t set_index=(uint16_t)frame->d[0];uint32_t set_address=frame->a[0],value=0;
+    service=setting?cs_trap_check_set(gateway,set_index,set_address):cs_trap_get(gateway,(uint16_t)frame->d[0],&value);
     report->cpu.service.status=service;
     if(service!=CS_TRAP_OK)return done(report,CS_M68K_SERVICE);
-    if((word&0x0100u)!=0)proposed.a[0]=value;
+    if(!setting && (word&0x0100u)!=0)proposed.a[0]=value;
     uint16_t low=(uint16_t)frame->d[0];
     proposed.sr=(uint16_t)((frame->sr&0xfff0u)|(low==0?4u:((low&0x8000u)?8u:0u)));
     proposed.pc=frame->pc+2;
@@ -132,5 +139,14 @@ cs_m68k_result cs_s1_banked_step(const cs_m68k_transfer_backend *backend,
     for(unsigned i=0;i<4u;++i)bytes[i+2u]=(uint8_t)(proposed.pc>>((3u-i)*8u));
     report->memory=backend->write_bytes(b->context,scratch,6,bytes);
     if(report->memory!=CS_GUEST_OK)return done(report,CS_M68K_ADDRESS);
+    if(setting)publish_gateway->entries[set_index]=set_address;
     copy_frame(frame,&proposed);return done(report,CS_M68K_OK);
 }
+cs_m68k_result cs_s1_banked_step(const cs_m68k_transfer_backend *backend,
+    const cs_trap_gateway *gateway,cs_trap_frame *frame,cs_m68k_bus_report *report,
+    const cs_m68k_stack_limits *limits,const cs_m68k_guard *guard)
+{return banked_step(backend,gateway,0,frame,report,limits,guard);}
+cs_m68k_result cs_s1_banked_trap_step(const cs_m68k_transfer_backend *backend,
+    cs_trap_gateway *gateway,cs_trap_frame *frame,cs_m68k_bus_report *report,
+    const cs_m68k_stack_limits *limits,const cs_m68k_guard *guard)
+{return banked_step(backend,gateway,gateway,frame,report,limits,guard);}

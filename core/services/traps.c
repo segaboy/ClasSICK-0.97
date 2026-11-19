@@ -56,13 +56,19 @@ cs_trap_result cs_trap_get(const cs_trap_gateway *gateway,uint16_t number,uint32
     if(!executable(&gateway->config,gateway->entries[number])) return CS_TRAP_STATE;
     *out=gateway->entries[number]; return CS_TRAP_OK;
 }
-cs_trap_result cs_trap_set(cs_trap_gateway *gateway,uint16_t number,uint32_t address)
+cs_trap_result cs_trap_check_set(const cs_trap_gateway *gateway,uint16_t number,uint32_t address)
 {
     if(gateway==0) return CS_TRAP_ARGUMENT;
     if(!state_valid(gateway)) return CS_TRAP_STATE;
     if(number>=CS_TRAP_ENTRIES) return CS_TRAP_NUMBER;
     if(!executable(&gateway->config,address)) return CS_TRAP_ADDRESS;
-    gateway->entries[number]=address; return CS_TRAP_OK;
+    return CS_TRAP_OK;
+}
+cs_trap_result cs_trap_set(cs_trap_gateway *gateway,uint16_t number,uint32_t address)
+{
+    cs_trap_result result=cs_trap_check_set(gateway,number,address);
+    if(result!=CS_TRAP_OK)return result;
+    gateway->entries[number]=address;return CS_TRAP_OK;
 }
 static cs_trap_result intrinsic(cs_trap_gateway *g,uint32_t target,cs_trap_frame *frame,int pass_a0)
 {

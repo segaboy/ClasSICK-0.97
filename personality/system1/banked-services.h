@@ -14,4 +14,12 @@
 cs_m68k_result cs_s1_banked_step(const cs_m68k_transfer_backend *backend,
     const cs_trap_gateway *gateway,cs_trap_frame *frame,cs_m68k_bus_report *report,
     const cs_m68k_stack_limits *limits,const cs_m68k_guard *guard);
+/* SPEC-0129: separate explicit Get+canonical A047 Set profile. Same native
+ * envelope and immutable/exclusive call lifetime. Set prepares one directory
+ * delta; after the final atomic six-byte RAM write, its directory assignment
+ * and frame publication cannot fail. No guest patch dispatch, active manager,
+ * A147 or other A-line expansion. The Get-only entry above is unchanged. */
+cs_m68k_result cs_s1_banked_trap_step(const cs_m68k_transfer_backend *backend,
+    cs_trap_gateway *gateway,cs_trap_frame *frame,cs_m68k_bus_report *report,
+    const cs_m68k_stack_limits *limits,const cs_m68k_guard *guard);
 #endif

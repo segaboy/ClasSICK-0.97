@@ -10,3 +10,11 @@ Codex implementer; coordinating review and separate read-only review.
 [Canonical receipt](../../docs/development/mac-floppy-provider-20261118.md)
 owns results, exact input identities, retained failures and model-only limits.
 GPL-3.0-or-later; independent human provenance review remains open.
+
+## Startup checksum recovery, 2026-11-19
+
+The independently authored `platform/mac128k/startup-floppy.[ch]` adds one
+bounded checksum retry to the native startup-files entry point under SPEC-0114.
+Source basis is the existing provider contract and the original BootHush fault
+interface. No reference media or third-party implementation was used.
+[Implementation and evidence](../../docs/development/startup-checksum-retry-20261119.md)

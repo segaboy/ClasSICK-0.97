@@ -20,6 +20,10 @@ typedef struct { cs_trap_result status; cs_trap_word decoded; uint32_t target,pc
 cs_trap_result cs_trap_decode(uint16_t word,cs_trap_word *out);
 cs_trap_result cs_trap_init(cs_trap_gateway *out,const cs_trap_config *config);
 cs_trap_result cs_trap_get(const cs_trap_gateway *gateway,uint16_t number,uint32_t *out);
+/* SPEC-0129: pure Set validation, identical state/index/address precedence to
+ * cs_trap_set. No directory entry is read or changed. Stable exclusive native
+ * ownership is required if the caller later publishes a prepared assignment. */
+cs_trap_result cs_trap_check_set(const cs_trap_gateway *gateway,uint16_t number,uint32_t address);
 cs_trap_result cs_trap_set(cs_trap_gateway *gateway,uint16_t number,uint32_t address);
 cs_trap_result cs_trap_call(cs_trap_gateway *gateway,uint16_t word,cs_trap_frame *frame,cs_trap_report *report);
 cs_trap_result cs_trap_direct(cs_trap_gateway *gateway,uint32_t target,cs_trap_frame *frame,cs_trap_report *report);

@@ -7,7 +7,28 @@ defines the ROM/installed-286 responsibilities and the four-disk acceptance
 corpus. This receipt retains the earlier selected-System-Disk evidence. Broader
 ROM coverage and other-disk results must not be inferred from those probes.
 
-## Current checkpoint - 2026-11-18
+## Current checkpoint - 2026-11-19
+
+The [installed 286 reader](installed-startup-20261119.md) opens both resource
+maps from the separate supplied disk. Both native targets validate its Shell
+jump-table metadata under the explicit [post-header offset profile](code-stream-20261119.md).
+The [existing-fork writer](mfs-write-20261119.md) persists bounded changes on
+generated media. A [native 286 trap test](banked-settrap-service-20261119.md)
+installs, retrieves and calls a project-authored guest routine. The native Mac
+and installed 286 also [execute a generated two-sector program](boot-block-image-20261119.md)
+from a separate floppy and return the value encoded on that disk. The remaining
+startup work includes the original boot calling convention, RAM initialization,
+trap dispatch and actual disk-based System/Finder execution.
+
+BootHush cc182c2 supports an explicit hard-disk start with separate floppy
+media and a one-shot Mac checksum error. The [native Macintosh startup reader](startup-checksum-retry-20261119.md)
+recovers from a single corrupt checksum and reports a persistent error after
+one retry. Tilt's two-player fast-fall trials
+ran on this build and the prior build. All 1,376 sampled checkpoints agreed.
+The observation supports the repeatability of the emulator's keyboard and
+framebuffer tests. [Tilt verification](https://github.com/segaboy/Not-Super-Tilt-Bro/blob/03504bb2f2b1a9aa49c5e3c26a6402b1672d6dbf/docs/fast-fall-evidence.md).
+
+## Previous checkpoint - 2026-11-18
 
 The exact private image is identified and read through both native providers.
 [Identity and metadata](selected-disk-survey-20261118.md),

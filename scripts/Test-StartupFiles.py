@@ -86,6 +86,7 @@ def main():
         sources += [ROOT/'scripts/m68k_windows_toolchain.py', ROOT/'arch/m68k/mac-reset.S',
                     ROOT/'arch/m68k/mac-rom.ld', ROOT/'platform/mac128k/iwm-read.c',
                     ROOT/'platform/mac128k/iwm-read.h', ROOT/'platform/mac128k/iwm-capture.S',
+                    ROOT/'platform/mac128k/startup-floppy.c', ROOT/'platform/mac128k/startup-floppy.h',
                     ROOT/'probes/mac128k/startup-files.c']
     before_sources = {p.relative_to(ROOT).as_posix(): sha(p) for p in sources}
     if pc:
@@ -277,7 +278,7 @@ def main():
         linker.write_text(link_text.replace('LENGTH = 0x1500', 'LENGTH = 0x3500').replace('__bss_end <= 0x2000', '__bss_end <= 0x4000'))
         mac_sources = [reset, *CORE, SHARED,
                        ROOT/'platform/mac128k/iwm-read.c', ROOT/'platform/mac128k/iwm-capture.S',
-                       ROOT/'probes/mac128k/startup-files.c']
+                       ROOT/'platform/mac128k/startup-floppy.c', ROOT/'probes/mac128k/startup-files.c']
         for index, source in enumerate(mac_sources):
             obj = out/('mac-'+str(index)+'.o')
             flags = ['-mcpu=68000', '-Os', '-ffreestanding', '-fno-builtin', '-nostdlib']
