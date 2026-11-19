@@ -46,6 +46,7 @@ def main():
             "docs/specifications/SPEC-0123-m68k-loop-register-transfer.md",
             "docs/specifications/SPEC-0124-banked-gettrap-service.md",
             "docs/specifications/SPEC-0129-banked-settrap-service.md",
+            "docs/specifications/SPEC-0135-banked-patch-dispatch.md",
             "provenance/records/SRC-0618-movem-instruction.md")], Path(__file__)]
         before = {path.relative_to(ROOT).as_posix(): sha(path) for path in sources}
         cc, tool, emulator = args.cc.resolve(strict=True), args.tool_root.resolve(strict=True), args.emulator.resolve(strict=True)
@@ -115,7 +116,10 @@ def main():
             "split-set-store": (store, "    if(setting){report->memory=b->write(b->context,scratch,2,proposed.sr);\n"
                                      "        if(report->memory==CS_GUEST_OK)report->memory=b->write(b->context,scratch+2,4,proposed.pc);\n"
                                      "    }else " + store.strip()),
-            "set-signature": ("if(target!=gateway->config.set_token){", "if(0){")}
+            "set-signature": ("if(target!=gateway->config.set_token){", "if(0){"),
+            "patch-early-frame": ("    report->memory=backend->write_bytes(backend->scalar.context,slot,4,bytes);",
+                "    copy_frame(frame,proposed);\n    report->memory=backend->write_bytes(backend->scalar.context,slot,4,bytes);"),
+            "patch-drop-a0-restore": ("if(!(call->word&0x0100u))proposed->a[0]=call->a0;", "/* suppressed restore */")}
         cases = (("optimized", "-os", None, 0xb8), ("unoptimized-service", "-od", None, 0xb8),
                  ("bad-early-frame", "-os", "early-frame", 0xe1),
                  ("bad-split-store", "-os", "split-store", 0xe2),
@@ -123,7 +127,9 @@ def main():
                  ("bad-early-directory", "-os", "early-directory", 0xe4),
                  ("bad-early-set-frame", "-os", "early-set-frame", 0xe5),
                  ("bad-split-set-store", "-os", "split-set-store", 0xe6),
-                 ("bad-set-signature", "-os", "set-signature", 0xe7))
+                 ("bad-set-signature", "-os", "set-signature", 0xe7),
+                 ("bad-patch-early-frame", "-os", "patch-early-frame", 0xea),
+                 ("bad-patch-a0", "-os", "patch-drop-a0-restore", 0xeb))
         observations = []
         for name, optimization, defect, marker in cases:
             service = SERVICE
@@ -156,7 +162,7 @@ def main():
             image.write_bytes(loader.floppy(payload, int(entry.group(1), 16), verify_payload=True))
             original_hash = sha(image)
             ranges = [(0x10000 + offset, min(4096, len(payload) - offset)) for offset in range(0, len(payload), 4096)]
-            expected_ram = {0x38ffc: "271000", 0x41000: "00", 0x42000: "9214"}
+            expected_ram = {0x38ffc: "948200", 0x41000: "00", 0x42000: "9412"}
             if defect is None:
                 ranges += [(address, len(bytes.fromhex(value))) for address, value in expected_ram.items()]
             # CLI inspection has a 16KiB total cap. A larger payload uses fresh
@@ -203,7 +209,7 @@ def main():
         report = {"status": "pass", "source_sha256": before, "inputs_unchanged": True,
                   "tool_sha256": tool_hashes, "toolchain": lock, "commands": commands, "hosted": hosted,
                   "pc286": observations, "generic_suites": generic_suites,
-                  "limits": "Original native286 fixture for two trap-address services and explicit guest JSR/RTS. Automatic patch dispatch, memory managers, System startup and physical hardware remain open. Unoptimized case changes service-wrapper optimization only."}
+                  "limits": "Original 286 fixture for native Get/Set, RAM patch interception and guest chaining. Toolbox, saved native entry stubs, System startup and physical hardware remain open. Unoptimized case changes service-wrapper optimization only."}
         (out / "report.json").write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
         print(json.dumps({"status": "pass", "hosted": len(hosted), "pc286": len(observations), "report": str(out / "report.json")}))
         return 0

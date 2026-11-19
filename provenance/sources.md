@@ -5260,3 +5260,26 @@ drive zero. The one-shot Mac fault changes one returned checksum nibble on the
 selected sector. These are modeled test interfaces. See the original project's
 [integration notes](https://github.com/segaboy/boothush/blob/cc182c2311616aff8137ac848c89b1f049acb707/docs/classick-integration.md)
 and the [installed reader qualification](../docs/development/installed-startup-20261119.md).
+
+## SRC-0624 - Four guest low-memory pointers
+
+Apple's published Inside Macintosh, Volumes II and III (1985), locates MemTop,
+SoundBase, ROMBase and ScrnBase. The [source review](records/SRC-0624-four-128k-globals.md)
+identifies the 128 KiB account and the canonical main screen and sound buffer
+addresses. SPEC-0137 defines the bounded initialization used on both guests.
+
+## SRC-0625 - Entry field in a Macintosh startup block
+
+The 1987 Mac Zap user manual describes a branch field at offset two in the
+startup blocks. [Edition, locator and limits](records/SRC-0625-boot-entry-field.md).
+The handoff uses an experimental load address and register profile.
+
+## SRC-0626 - BootHush completed RAM step observer
+
+2026-11-19. Project-owned BootHush revision
+`69596d6af629061d1f09fc1430279093b8c2c3fb`, executable SHA-256
+`c709c7f10b5f8e2a908cc2f06a74192269073dda52e8aa4f7d23a80dac89ac28`.
+The CLI counts steps begun in a caller-selected low RAM range and separately
+counts returns from the CPU step. A PC match alone cannot establish either
+count. See the [project command contract](https://github.com/segaboy/boothush/tree/69596d6af629061d1f09fc1430279093b8c2c3fb)
+and the [paired handoff qualification](../docs/development/boot-handoff-20261119.md).

@@ -25,4 +25,3 @@ void cs_mac_main(void)
     cs_mac_diag[0]=(uint32_t)result;
     for(;;) { }
 }
-void cs_mac_line_a_handler(void){cs_mac_diag[7]=UINT32_C(0xf002);for(;;) { }}

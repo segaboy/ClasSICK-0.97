@@ -22,4 +22,18 @@ cs_m68k_result cs_s1_banked_step(const cs_m68k_transfer_backend *backend,
 cs_m68k_result cs_s1_banked_trap_step(const cs_m68k_transfer_backend *backend,
     cs_trap_gateway *gateway,cs_trap_frame *frame,cs_m68k_bus_report *report,
     const cs_m68k_stack_limits *limits,const cs_m68k_guard *guard);
+/* SPEC-0135. Each CPU owner supplies a zero-initialized, disjoint private
+ * state and retains it with the same directory, guest memory and stack. */
+#define CS_S1_PATCH_DEPTH 4
+typedef struct {
+    uint32_t slot,continuation,a0,a1,d1,d2;
+    uint16_t word;
+} cs_s1_patch_call;
+typedef struct {
+    unsigned depth;
+    cs_s1_patch_call calls[CS_S1_PATCH_DEPTH];
+} cs_s1_patch_state;
+cs_m68k_result cs_s1_banked_patch_step(const cs_m68k_transfer_backend *backend,
+    cs_trap_gateway *gateway,cs_trap_frame *frame,cs_m68k_bus_report *report,
+    const cs_m68k_stack_limits *limits,const cs_m68k_guard *guard,cs_s1_patch_state *state);
 #endif

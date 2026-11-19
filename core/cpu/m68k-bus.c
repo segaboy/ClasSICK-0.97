@@ -66,6 +66,11 @@ static void flags(cs_trap_frame *f,uint32_t value,unsigned width)
     uint32_t sign=width==1?0x80u:width==2?0x8000u:0x80000000u;
     f->sr=(uint16_t)((f->sr&0xFFF0u)|(value==0?4u:((value&sign)?8u:0u)));
 }
+static uint32_t sign_extend(uint32_t value,unsigned bits)
+{
+    uint32_t sign=bits==8?0x80u:0x8000u;
+    return (value&sign)!=0?value|(bits==8?0xFFFFFF00u:0xFFFF0000u):value;
+}
 static cs_m68k_result effective(transaction *t,unsigned mode,unsigned reg,unsigned width,uint32_t *at)
 {
     uint32_t step=width==1 && reg==7?2u:width;
@@ -74,6 +79,12 @@ static cs_m68k_result effective(transaction *t,unsigned mode,unsigned reg,unsign
         *at=t->frame.a[reg];
         if(mode==3) t->frame.a[reg]+=step;
         return CS_M68K_OK;
+    }
+    if(mode==7 && reg==0) {
+        uint32_t address;
+        cs_m68k_result status=extension(t,2,&address);
+        if(status==CS_M68K_OK) *at=sign_extend(address,16);
+        return status;
     }
     if(mode==7 && reg==1) return extension(t,4,at);
     return CS_M68K_OPCODE;
@@ -201,11 +212,6 @@ static cs_m68k_result return_instruction(transaction *t)
     status=target(t,at);
     if(status!=CS_M68K_OK) return status;
     t->frame.pc=at;t->frame.a[7]+=4;return CS_M68K_OK;
-}
-static uint32_t sign_extend(uint32_t value,unsigned bits)
-{
-    uint32_t sign=bits==8?0x80u:0x8000u;
-    return (value&sign)!=0?value|(bits==8?0xFFFFFF00u:0xFFFF0000u):value;
 }
 static cs_m68k_result add_offset(transaction *t,uint32_t base,uint32_t offset,uint32_t *out)
 {

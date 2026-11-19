@@ -14,7 +14,7 @@ from code_stream_fixture import original_media
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("suite", choices=("tables", "row"))
+    parser.add_argument("suite", choices=("tables", "row", "load"))
     parser.add_argument("executable", type=Path)
     args = parser.parse_args()
     sizes = [(180, 20)]
@@ -24,7 +24,11 @@ def main():
         media = []
         for rows, segments in sizes:
             path = Path(directory) / f"rows-{rows}-segments-{segments}.raw"
-            path.write_bytes(original_media(rows, segments)[0])
+            if args.suite == "load":
+                raw, _ = original_media(rows, segments, after_header=True, fixture_result=37)
+            else:
+                raw, _ = original_media(rows, segments)
+            path.write_bytes(raw)
             media.append(path)
         return subprocess.run([args.executable.resolve(strict=True), *media], timeout=120).returncode
 

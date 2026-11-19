@@ -62,8 +62,61 @@ static void registers(void)
     setup(&x);word(x.code,move_word(1,0,0,1,0));unchanged_failure(&x,CS_M68K_OPCODE);
     setup(&x);word(x.code,0x70FF);REQUIRE(step(&x)==CS_M68K_OK && x.frame.d[0]==UINT32_MAX && x.frame.sr==0x2718);
 }
+static void absolute_short(void)
+{
+    fixture x;
+    const cs_m68k_bus_options data24={CS_M68K_DATA24,NULL,NULL};
+
+    /* Two distinct extension words, source before destination. The last source
+     * byte at $7fff is legal for MOVE.B despite the odd effective address. */
+    for(unsigned width=1;width<=4;width*=2) {
+        setup(&x);
+        x.regions[1].base=0x7fc0;
+        unsigned offset=64-width;
+        x.data[offset]=0x80;
+        word(x.code,move_word(width,7,0,7,0));
+        word(x.code+2,(uint16_t)(0x7fc0+offset));word(x.code+4,0x7fc4);
+        REQUIRE(step(&x)==CS_M68K_OK && x.frame.pc==0x401006 && x.frame.sr==0x2718);
+        REQUIRE(!memcmp(x.data+4,x.data+offset,width) && x.data[3]==0xcc && x.data[4+width]==0xcc);
+    }
+
+    /* A low positive address with a negative operand exercises the independent
+     * sign extension of MOVEA.W. MOVEA.L retains all source bits. */
+    for(unsigned width=2;width<=4;width*=2) {
+        setup(&x);word(x.code,move_word(width,7,0,1,3));word(x.code+2,0x1804);
+        longword(x.data+4,0x80011234);
+        REQUIRE(step(&x)==CS_M68K_OK && x.frame.a[3]==(width==2?0xffff8001u:0x80011234u));
+        REQUIRE(x.frame.pc==0x401004 && x.frame.sr==0x271f);
+    }
+
+    for(unsigned dest=0;dest<=1;++dest) {
+        setup(&x);
+        x.regions[1].base=0xff8000;
+        x.regions[2].base=0x8000; /* Deliberate decoy for zero extension. */
+        word(x.code,dest?move_word(2,0,2,7,0):move_word(2,7,0,0,2));
+        word(x.code+2,0x8000);word(x.data,0x1357);word(x.stack,0x99aa);
+        unchanged_failure(&x,CS_M68K_ADDRESS);
+        REQUIRE(x.report.address==0xffff8000u);
+        REQUIRE(cs_m68k_bus_step_options(&x.map,&x.gateway,&x.frame,&x.report,&data24)==CS_M68K_OK);
+        REQUIRE(x.frame.pc==0x401004 && x.stack[0]==0x99 && x.stack[1]==0xaa);
+        if(dest) REQUIRE(x.data[0]==1 && x.data[1]==2 && x.frame.d[2]==0xabcd0102u);
+        else REQUIRE(x.frame.d[2]==0xabcd1357u);
+    }
+
+    /* The source postincrement is tentative until the extension and destination
+     * checks complete. Capture all registers, gateway state and mapped bytes. */
+    for(unsigned failure=0;failure<3;++failure) {
+        setup(&x);word(x.code,move_word(2,3,0,7,0));word(x.code+2,failure==1?0x1801:0x1804);
+        if(failure==0)x.regions[0].size=2;
+        if(failure==2)x.regions[1].flags=CS_GUEST_READ;
+        unchanged_failure(&x,CS_M68K_ADDRESS);
+    }
+    setup(&x);word(x.code,move_word(1,7,0,1,4));word(x.code+2,0x1800);
+    unchanged_failure(&x,CS_M68K_OPCODE);
+}
 static void operands(void)
 {
+    absolute_short();
     for(unsigned width=1;width<=4;width*=2) for(unsigned mode=2;mode<=4;++mode)
     for(unsigned reg=0;reg<8;++reg) for(unsigned dest=0;dest<2;++dest) {
         fixture x;setup(&x);uint8_t *bytes=reg==7?x.stack:x.data;uint32_t base=reg==7?0x300000u:0x1800u;

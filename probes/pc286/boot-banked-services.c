@@ -174,5 +174,39 @@ void start(void)
         !equal(&gateway,&saved_gateway,sizeof gateway))fail(0xc8);
     if(*far_byte(0x31007ffbUL)!=0x5a || *far_byte(0x31007fffUL)!=0xa5 ||
         *far_byte(0x41000001UL)!=0x69 || *far_byte(0x42000002UL)!=0x96)fail(0xc9);
+    /* Execute A017/A117 normally after installing a replacement. The old
+     * address travels through GetTrapAddress and A2 into the handler's JSR. */
+    cs_s1_patch_state patches;
+    zero(&patches,sizeof patches);
+    put(&o,0x9400,2,0x7017);put(&o,0x9402,2,0xa146);
+    put(&o,0x9404,2,0x2448); /* MOVEA.L A0,A2 */
+    put(&o,0x9406,2,0x207c);put(&o,0x9408,4,0x9480);
+    put(&o,0x940c,2,0xa047);
+    put(&o,0x940e,2,0xa017);put(&o,0x9410,2,0xa117);put(&o,0x9412,2,0x4e71);
+    put(&o,0x9480,2,0x4e92); /* JSR (A2) to previous guest handler */
+    put(&o,0x9482,2,0x7211);put(&o,0x9484,2,0x70ff);
+    put(&o,0x9486,2,0x207c);put(&o,0x9488,4,0x1234);
+    put(&o,0x948c,2,0x4e75);
+    seed(&frame);frame.pc=0x9400;
+    for(unsigned i=0;i<5u;++i)
+        if(cs_s1_banked_patch_step(&backend,&gateway,&frame,&report,&limits,&guard,&patches)!=CS_M68K_OK)fail(0xca);
+    if(frame.pc!=0x940e || frame.a[2]!=0x9340 || gateway.entries[23]!=0x9480)fail(0xcb);
+    o.fault=0x11001UL;copy(&before,&frame,sizeof frame);
+    if(cs_s1_banked_patch_step(&backend,&gateway,&frame,&report,&limits,&guard,&patches)!=CS_M68K_ADDRESS ||
+        patches.depth!=0 || !equal(&frame,&before,sizeof frame) || !scratch(&o,0x27100000UL,0x940e))fail(0xea);
+    o.fault=0xffffffffUL;
+    for(unsigned pass=0;pass<2u;++pass){
+        frame.d[3]=0;
+        for(unsigned i=0;i<8u;++i){
+            if(cs_s1_banked_patch_step(&backend,&gateway,&frame,&report,&limits,&guard,&patches)!=CS_M68K_OK)fail(0xcc);
+            if(i==0u && (frame.pc!=0x9480 || patches.depth!=1 ||
+                frame.a[7]!=0x10ffeUL))fail(0xcd);
+        }
+        if(frame.pc!=0x9410UL+2u*pass || frame.a[7]!=0x11002UL || patches.depth!=0 ||
+            frame.sr!=0x2718 || frame.d[0]!=0xffffffffUL || frame.d[1]!=0 ||
+            frame.d[3]!=42 || frame.a[0]!=(pass?0x1234UL:0x9480UL))fail(0xeb);
+    }
+    if(cs_s1_banked_patch_step(&backend,&gateway,&frame,&report,&limits,&guard,&patches)!=CS_M68K_OK ||
+        frame.pc!=0x9414 || !scratch(&o,0x94820000UL,0x9412))fail(0xce);
     post(0xb8);for(;;) { }
 }

@@ -3481,12 +3481,18 @@ if(BUILD_TESTING)
         personality/system1/code-stream.c)
     add_executable(classick_code_stream_tests tests/code-stream.c probes/storage/code-stream.c ${classick_code_stream_sources})
     add_executable(classick_code_row_tests tests/code-stream-row.c personality/system1/code-stream-row.c ${classick_code_stream_sources})
+    add_executable(classick_code_load_tests tests/code-stream-load.c personality/system1/code-stream-load.c
+        personality/system1/code-stream-row.c ${classick_code_stream_sources})
+    add_executable(classick_startup_globals_tests tests/startup-globals.c personality/system1/startup-globals.c)
+    add_executable(classick_file_io_tests tests/file-io.c personality/system1/file-io.c
+        core/memory/guest.c core/storage/mfs-write.c ${classick_mfs_sources})
     add_executable(classick_mfs_write_tests tests/mfs-write.c core/storage/mfs-write.c ${classick_mfs_sources})
     add_executable(classick_boot_image_tests tests/mac-boot-image.c core/storage/mac-boot-image.c
         core/storage/mac-boot-header.c core/storage/block-read.c)
     add_executable(classick_banked_set_tests tests/banked-trap-set.c personality/system1/banked-services.c)
     target_link_libraries(classick_banked_set_tests PRIVATE classick_memory)
-    foreach(target classick_code_stream_tests classick_code_row_tests classick_mfs_write_tests classick_banked_set_tests classick_boot_image_tests)
+    foreach(target classick_code_stream_tests classick_code_row_tests classick_code_load_tests classick_mfs_write_tests
+        classick_banked_set_tests classick_boot_image_tests classick_startup_globals_tests classick_file_io_tests)
         set_target_properties(${target} PROPERTIES C_STANDARD 11 C_STANDARD_REQUIRED ON)
         if(CMAKE_C_COMPILER_ID MATCHES "Clang|GNU")
             target_compile_options(${target} PRIVATE -Wall -Wextra -Werror -Wconversion -Wsign-conversion)
@@ -3500,6 +3506,11 @@ if(BUILD_TESTING)
         tables $<TARGET_FILE:classick_code_stream_tests>)
     add_test(NAME storage.code-stream-row COMMAND ${Python3_EXECUTABLE} -B ${CMAKE_SOURCE_DIR}/tests/code-stream-model.py
         row $<TARGET_FILE:classick_code_row_tests>)
+    add_test(NAME storage.code-stream-load COMMAND ${Python3_EXECUTABLE} -B ${CMAKE_SOURCE_DIR}/tests/code-stream-model.py
+        load $<TARGET_FILE:classick_code_load_tests>)
+    add_test(NAME startup.low-memory-pointers COMMAND classick_startup_globals_tests)
+    add_test(NAME storage.file-io COMMAND ${Python3_EXECUTABLE} -B ${CMAKE_SOURCE_DIR}/tests/file-io-model.py
+        $<TARGET_FILE:classick_file_io_tests>)
     add_test(NAME storage.mfs-write COMMAND classick_mfs_write_tests)
     add_test(NAME storage.mac-boot-image COMMAND classick_boot_image_tests)
     add_test(NAME m68k.banked-trap-set COMMAND classick_banked_set_tests)

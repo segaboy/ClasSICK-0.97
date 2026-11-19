@@ -17,6 +17,7 @@ ROOT=Path(__file__).resolve().parents[1]
 COMMON=[ROOT/'core/storage'/name for name in ('block-read.c','mfs-read.c','mfs-volume.c')]
 WRITE=ROOT/'core/storage/mfs-write.c'
 SHARED=ROOT/'probes/storage/mfs-write.c'
+FILE_SERVICE=[ROOT/'core/memory/guest.c',ROOT/'personality/system1/file-io.c']
 FORKS=([16,17,22,23,18,19],[20,21],[24,25])
 LENGTHS=(2437,17,513)
 
@@ -43,7 +44,7 @@ def container_result(source,logical):
 def logical_result(original,style):
     output=bytearray(original)
     operations=[(0,500,524 if style==2 else 1036 if style==3 else 1100,0x31)]
-    if style==1:operations += [(1,3,11,0x53),(2,500,13,0x75),(0,2400,37,0x97),(0,0,512,0xb9)]
+    if style==1:operations += [(1,3,11,0x53),(2,500,13,0x75),(0,2400,37,0x97),(0,0,512,0xb9),(0,1000,96,0x41)]
     for fork,offset,count,salt in operations:
         for i in range(count):
             logical=offset+i
@@ -91,6 +92,9 @@ def main():
         ROOT/'scripts/m68k_windows_toolchain.py',ROOT/'scripts/pc286_loader.py',ROOT/'scripts/Test-MfsVolumeMedia.py',
         ROOT/'docs/specifications/SPEC-0128-mfs-fork-overwrite.md',ROOT/'docs/specifications/SPEC-0115-mfs-volume-reader.md',
         ROOT/'docs/specifications/SPEC-0125-modeled-mac-sector-write.md',ROOT/'docs/specifications/SPEC-0126-pc286-floppy-sector-write.md']
+    sources += [*FILE_SERVICE,*(x.with_suffix('.h') for x in FILE_SERVICE),
+        ROOT/'core/services/traps.h',ROOT/'probes/mac128k/file-io-traps.S',
+        ROOT/'tests/file-io.c',ROOT/'docs/specifications/SPEC-0136-file-io.md']
     before_sources={x.relative_to(ROOT).as_posix():sha(x) for x in sources}
     before_tools={name:sha(path) for name,path in tools.items()}
     out.mkdir(parents=True,exist_ok=False)
@@ -105,12 +109,21 @@ def main():
         if result.returncode and not allow_failure:raise ValueError(label+' failed; see retained output')
         return result
     warnings=['-Wall','-Wextra','-Werror','-Wconversion','-Wsign-conversion']
+    host_media=out/'generated-host.raw'
+    host_media.write_bytes(original)
     for name,flags in (('release',['-O3','-DNDEBUG']),('sanitized',['-O1','-g','-fsanitize=address,undefined','-fno-sanitize-recover=all'])):
         binary=out/('host-'+name+'.exe')
         run([cc,'-std=c11',*warnings,*flags,*COMMON,WRITE,ROOT/'tests/mfs-write.c','-o',binary],'host-'+name+'-build')
         result=run([binary],'host-'+name+'-test').stdout.decode().strip()
         if not re.fullmatch(r'MFS write: [0-9]+ checks passed',result):raise ValueError('missing host result')
         hosts.append({'profile':name,'result':result,'sha256':sha(binary)})
+        file_test=out/('file-io-'+name+'.exe')
+        run([cc,'-std=c11',*warnings,*flags,*COMMON,WRITE,*FILE_SERVICE,ROOT/'tests/file-io.c','-o',file_test],
+            'file-io-'+name+'-build')
+        result=run([file_test,host_media],'file-io-'+name+'-test').stdout.decode().strip()
+        if not re.fullmatch(r'File I/O: [0-9]+ checks passed',result) or host_media.read_bytes()!=original:
+            raise ValueError('file service host checks or fixture identity differ')
+        hosts.append({'profile':name,'result':result,'sha256':sha(file_test)})
     source=WRITE.read_text(encoding='utf-8')
     definitions={
         'skip-chain':('result=cs_mfsv_fork_validate(volume,entry,fork);','result=CS_MFSV_OK;',0,0xd1),
@@ -131,8 +144,9 @@ def main():
         run([m68k['gcc'],'-mcpu=68000','-std=c99','-Os',*warnings,'-ffreestanding','-fno-builtin','-nostdlib',
              '-I'+str(WRITE.parent),'-DPROBE_CASE='+str(mode),'-Wl,--build-id=none',
              '-Wl,-T,'+str(ROOT/'probes/mac128k/mfs-write.ld'),ROOT/'arch/m68k/mac-reset.S',
-             *COMMON,core,SHARED,ROOT/'platform/mac128k/iwm-read.c',ROOT/'platform/mac128k/iwm-capture.S',
+             *COMMON,core,*FILE_SERVICE,SHARED,ROOT/'platform/mac128k/iwm-read.c',ROOT/'platform/mac128k/iwm-capture.S',
              ROOT/'platform/mac128k/iwm-write.c',ROOT/'platform/mac128k/iwm-send.S',ROOT/'probes/mac128k/mfs-write.c',
+             ROOT/'probes/mac128k/file-io-traps.S',
              '-o',elf],label+'-build')
         if run([m68k['nm'],'-u',elf],label+'-imports').stdout.strip():raise ValueError('Mac runtime import')
         symbols=run([m68k['nm'],'-n',elf],label+'-symbols').stdout.decode()
@@ -153,7 +167,7 @@ def main():
         objects=[]
         flags=['-zq','-2','-ms','-zl','-s','-os','-zastd=c99','-we','-dCS_C16_REQUIRE_16BIT',
                '-dPROBE_CASE='+str(mode),'-i='+str(tool/'h'),'-i='+str(WRITE.parent)]
-        for i,path in enumerate([*COMMON,core,SHARED,ROOT/'platform/pc286/boothush-floppy-read.c',
+        for i,path in enumerate([*COMMON,core,*FILE_SERVICE,SHARED,ROOT/'platform/pc286/boothush-floppy-read.c',
                                  ROOT/'platform/pc286/boothush-floppy-write.c',ROOT/'probes/pc286/boot-mfs-write.c']):
             obj=out/(label+'-'+str(i)+'.obj')
             run([tool/'binnt64/wcc.exe',*flags,'-fo='+str(obj),path],label+'-compile-'+str(i))
@@ -211,6 +225,7 @@ def main():
             if words[2]!=4 or words[10]!=2967 or words[11]!=fork_digest(expected[style]) or words[13]:
                 raise ValueError('full fork oracle differs')
             if mode==0 and words[3:10]!=[0,512,0,0,0,9,6]:raise ValueError('successful write accounting differs')
+            if words[14]!={0:0x5036,1:0x5236}.get(mode,0):raise ValueError('file parameter-block checks missing')
             if mode==2 and words[3:10]!=[8,12,17,2,1,2,1]:raise ValueError('uncertain failed-sector prefix differs')
             if mode==3 and words[3:10]!=[8,1036,23,1,0,3,2]:raise ValueError('late read-failure prefix differs')
         if before!={str(path):sha(path) for path in inputs}:raise ValueError('source input changed')
@@ -264,7 +279,7 @@ def main():
             'limits':'Original disposable fixtures only; existing logical fork overwrite, no allocation or metadata mutation. '
                      'Per-sector commits, explicit uncertain failed sector, no whole-fork rollback/durable-flush promise. '
                      '286 fresh boot replaces only original test loader outside preserved logical MFS region. '
-                     'Modeled native providers, no owner image, File Manager/startup or physical hardware claim.'}
+                     'Canonical synchronous Read/Write only; no allocation, full File Manager, owner image, startup or physical claim.'}
     (out/'report.json').write_text(json.dumps(report,indent=2)+'\n',encoding='utf-8')
     print(json.dumps({'status':'pass','native_runs':len(observations),'report':str(out/'report.json')}))
 

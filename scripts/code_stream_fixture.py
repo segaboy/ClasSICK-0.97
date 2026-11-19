@@ -7,7 +7,7 @@ import struct
 from resource_media_fixture import _item, _resource_fork
 
 
-def original_media(rows=180, segments=20, *, after_header=False):
+def original_media(rows=180, segments=20, *, after_header=False, fixture_result=None):
     if not 1 <= segments <= rows <= 8192:
         raise ValueError('original CODE fixture dimensions')
     table = bytearray()
@@ -16,9 +16,16 @@ def original_media(rows=180, segments=20, *, after_header=False):
     for index in range(segments):
         count = rows//segments + (index < rows % segments)
         body = struct.pack('>HH', first*8, count) + bytes((index*17+j*11)&255 for j in range(16))
+        if fixture_result is not None and index == 0:
+            if not after_header or not 0 <= fixture_result <= 127:
+                raise ValueError('fixture routine requires the post-header profile and a positive MOVEQ operand')
+            # Original routine at body offset two: MOVEQ #value,D0; RTS.
+            body = body[:4] + bytes((0x4e,0x71,0x70,fixture_result,0x4e,0x75)) + bytes(614)
         resources.append(_item(index+1, body))
         for slot in range(count):
             routine=(0 if after_header else 4)+2*(slot % 8)
+            if fixture_result is not None and index == 0 and slot == 0:
+                routine = 2
             table.extend(struct.pack('>HHHH', routine, 0x3f3c, index+1, 0xa9f0))
         first += count
     code0 = struct.pack('>IIII', 32+len(table), 256, len(table), 32) + table

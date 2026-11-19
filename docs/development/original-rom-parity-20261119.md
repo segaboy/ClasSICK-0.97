@@ -8,8 +8,10 @@ This is the current completion contract and responsibility audit, not a claim
 that the contract has been implemented or that a complete API inventory exists.
 
 After this audit, the [November 19 implementation checkpoint](system-disk-boot-20261117.md#current-checkpoint---2026-11-19)
-added installed-disk startup reads, execution of a generated disk program on
-both targets, and tested MFS fork overwrites. The service-family table below
+added execution of startup instructions from the supplied System Disk on
+both targets, streamed Shell segment loading and guest file I/O on generated
+media. The installed 286 reached $808E and the Macintosh completed seven
+in-range CPU steps. System and Finder execution remain open. The service-family table below
 records the state at the time of the audit. All full-use gates remain open.
 
 ## Product definition

@@ -46,6 +46,8 @@ def main():
     parser.add_argument('--lane', choices=('pc286', 'mac128k', 'both'), default='both')
     parser.add_argument('--disk', type=Path, help='explicit private DC42 runtime input; never used by default')
     parser.add_argument('--routine-base', choices=('literal','after-header'), default='literal')
+    parser.add_argument('--load-segment', action='store_true', help='materialize the first resolved Shell segment')
+    parser.add_argument('--fixture-result', type=int, default=37, help='original load-fixture MOVEQ operand, 0..127')
     parser.add_argument('--cycles', type=int, default=1200000000)
     parser.add_argument('--timeout-ms', type=int, default=30000)
     args = parser.parse_args()
@@ -66,6 +68,14 @@ def main():
     if selected and selected_sha != '1e03b75a05bbf441ae4e1808f70e38ffe0a07e3cc3298de151c0d2775552c647':
         raise ValueError('private disk is not the designated System Disk')
     after_header = args.routine_base == 'after-header'
+    if args.load_segment and (not after_header or not 0 <= args.fixture_result <= 127):
+        parser.error('segment loads use after-header and fixture-result 0..127')
+    load_api=[ROOT/'personality/system1'/name for name in ('code-stream-row.c','code-stream-load.c')]
+    load_probe=ROOT/'probes/storage/code-stream-load.c'
+    native_shared=load_probe if args.load_segment else SHARED
+    native_core=CORE+load_api if args.load_segment else CORE
+    guest_defines=['CS_EXECUTE_FIXTURE'] if args.load_segment and not selected else []
+    pc_cpu=[ROOT/'core/cpu/m68k.c', ROOT/'core/services/traps.c'] if pc and guest_defines else []
     base_define = 'CS_PROBE_ROUTINE_BASE=CS_CSTREAM_AFTER_HEADER' if after_header else 'CS_PROBE_ROUTINE_BASE=CS_CSTREAM_RESOURCE_START'
     tools = {'emulator': exe, 'python': Path(sys.executable).resolve(), 'host_cc': args.cc.resolve(strict=True)}
     sources = [*CORE, *(p.with_suffix('.h') for p in CORE), SHARED, SHARED.with_suffix('.h'),
@@ -84,6 +94,10 @@ def main():
                ROOT/'docs/specifications/SPEC-0113-boothush-pc286-floppy-provider.md',
                ROOT/'docs/specifications/SPEC-0114-boothush-mac-floppy-provider.md', Path(__file__).resolve()]
     native, native_identity, m68k, tool = None, None, {}, None
+    if args.load_segment:
+        sources += [*load_api, *(p.with_suffix('.h') for p in load_api),load_probe,
+                    ROOT/'docs/specifications/SPEC-0134-streamed-segment-load.md',ROOT/'tests/code-stream-load.c',
+                    *pc_cpu, *(p.with_suffix('.h') for p in pc_cpu)]
     if pc:
         tool = args.tool_root.resolve(strict=True)
         lock_path = ROOT/'scripts/pc286-toolchain-lock.json'
@@ -110,7 +124,9 @@ def main():
     before_tools = {key: sha(path) for key, path in tools.items()}
     media_helper = module('startup_container', ROOT/'scripts/Test-MfsVolumeMedia.py')
     fixture = module('startup_fixture', ROOT/'scripts/code_stream_fixture.py')
-    logical, oracle = (media_helper.dc42_data(selected), None) if selected else fixture.original_media(after_header=after_header)
+    original_answer=args.fixture_result if args.load_segment else None
+    logical, oracle = (media_helper.dc42_data(selected), None) if selected else fixture.original_media(
+        after_header=after_header, fixture_result=original_answer)
     expected = oracle['expected'] if oracle else None
     out.mkdir(parents=True, exist_ok=False)
     raw_disk = out/'logical-transfer.raw'
@@ -146,6 +162,9 @@ def main():
     host_exact.write_bytes(fixture.original_media(8192,64)[0])
     host_over.write_bytes(fixture.original_media(65,65)[0])
     hosted, mutants, container_controls = [], [], []
+    load_fixture = out/'original-load-host.raw'
+    if args.load_segment:
+        load_fixture.write_bytes(fixture.original_media(after_header=True,fixture_result=37)[0])
     warning = ['-Wall', '-Wextra', '-Werror', '-Wconversion', '-Wsign-conversion']
     for label, options in [('release', ['-O3', '-DNDEBUG']),
                            ('sanitized', ['-O1', '-fsanitize=address,undefined',
@@ -157,6 +176,14 @@ def main():
         if not re.fullmatch(r'Code stream: [0-9]+ checks passed', message):
             raise ValueError('host test did not complete')
         hosted.append({'profile': label, 'result': message, 'binary_sha256': sha(binary)})
+        if args.load_segment:
+            load_binary=out/(label+'-load.exe')
+            run([cc,'-std=c11',*warning,*options,*CORE,*load_api,ROOT/'tests/code-stream-load.c',
+                 '-o',load_binary],label+'-load-compile')
+            checked=run([load_binary,load_fixture],label+'-load-test').decode().strip()
+            if not re.fullmatch(r'Code stream load: [0-9]+ checks passed',checked):
+                raise ValueError('host load tests did not complete')
+            hosted.append({'profile':label+'-load','result':checked,'binary_sha256':sha(load_binary)})
     coordinator = ROOT/'personality/system1/code-stream.c'
     original_code = coordinator.read_text()
     mutations = [
@@ -205,7 +232,8 @@ def main():
         flags = ['-zq', '-2', '-ms', '-zl', '-s', '-os', '-zastd=c99', '-we',
                  '-dCS_C16_REQUIRE_16BIT','-d'+base_define, '-i='+str(tool/'h')]
         objects = []
-        for index, source in enumerate([*CORE, SHARED, ROOT/'platform/pc286/boothush-floppy-read.c',
+        flags.extend('-d'+name for name in guest_defines)
+        for index, source in enumerate([*native_core,*pc_cpu,native_shared, ROOT/'platform/pc286/boothush-floppy-read.c',
                                         ROOT/'probes/pc286/boot-code-stream.c']):
             obj = out/('pc-'+str(index)+'.obj')
             run([tool/'binnt64/wcc.exe', *flags, '-fo='+str(obj), source], 'pc-compile-'+str(index))
@@ -226,8 +254,6 @@ def main():
         payload = binary.read_bytes()
         bss_start, bss_size = (int(value, 16) for value in bss.groups())
         report_address = 0x10000+int(report.group(1), 16)
-        if len(payload)+64 > 16384:
-            raise ValueError('full payload plus report exceeds single-run inspection budget')
         image = bytearray(loader.floppy(payload, int(entry.group(1), 16), bss_end=bss_start+bss_size,
                                        poison_bss=True, verify_payload=True))
         image[60*512:860*512] = logical
@@ -240,10 +266,10 @@ def main():
                            'linked_bytes_below_stack': bss_start+bss_size,
                            'report_address': report_address, 'runtime_modules': []}
 
-        def pc_command(marker, fault):
+        def pc_command(marker, fault, pieces):
             cmd = [exe, '--machine', 'pc286', '--floppy', media, '--cycles', str(args.cycles),
                    '--timeout-ms', str(args.timeout_ms), '--until-post', hex(marker)]
-            for address, chunk in spans:
+            for address, chunk in pieces:
                 cmd += ['--inspect', hex(address)+':'+str(len(chunk))]
             cmd += ['--inspect', hex(report_address)+':64']
             if fault:
@@ -254,22 +280,31 @@ def main():
         for name, fault in ([('baseline', False), ('late-fault', True), ('fresh-recovery', False)]
                             if expected else [('baseline', False), ('repeat', False)]):
             marker = 0xb8
-            result = json.loads(run(pc_command(marker, fault), 'pc-'+name))
-            memories = result.pop('memory_ranges', [])
-            if (result.get('status') != 'condition_met' or result.get('post') != marker or
-                    result.get('cs') != 0x1000 or len(memories) != len(spans)+1):
-                raise ValueError('286 '+name+': missing stop or full payload inspection')
-            for memory, (address, chunk) in zip(memories[:-1], spans):
-                if memory.get('address') != address or bytes.fromhex(memory.get('bytes', '')) != chunk:
-                    raise ValueError('286 loaded payload differs')
-            if memories[-1].get('address') != report_address:
-                raise ValueError('286 report address differs')
-            words = list(struct.unpack('<16I', bytes.fromhex(memories[-1]['bytes'])))
+            windows = [spans] if len(payload)+64 <= 16384 else [spans[i:i+3] for i in range(0,len(spans),3)]
+            words = None
+            for pass_number, pieces in enumerate(windows):
+                result = json.loads(run(pc_command(marker, fault, pieces), 'pc-'+name+'-'+str(pass_number)))
+                memories = result.pop('memory_ranges', [])
+                if (result.get('status') != 'condition_met' or result.get('post') != marker or
+                        result.get('cs') != 0x1000 or len(memories) != len(pieces)+1):
+                    raise ValueError('286 '+name+': missing stop or payload inspection')
+                for memory, (address, chunk) in zip(memories[:-1], pieces):
+                    if memory.get('address') != address or bytes.fromhex(memory.get('bytes', '')) != chunk:
+                        raise ValueError('286 loaded payload differs')
+                if memories[-1].get('address') != report_address:
+                    raise ValueError('286 report address differs')
+                observed = list(struct.unpack('<16I', bytes.fromhex(memories[-1]['bytes'])))
+                if words is not None and words != observed:
+                    raise ValueError('286 stop report differs between payload windows')
+                words = observed
             if fault:
                 injection = result.get('floppy_read_failure', {})
                 if [injection.get(k) for k in ('injected', 'cylinder', 'head', 'sector')] != [1, *oracle['pc_fault']]:
                     raise ValueError('missing exact injected 286 sector failure')
-            validate(words, oracle, fault)
+            if args.load_segment:
+                validate_load(words, oracle, fault, original_answer)
+            else:
+                validate(words, oracle, fault)
             if sha(media) != pc_media_sha:
                 raise ValueError('286 transfer media changed')
             observations.append({'lane': 'pc286', 'case': name, 'report': words, 'result': result,
@@ -282,19 +317,22 @@ def main():
         reset_text = (ROOT/'arch/m68k/mac-reset.S').read_text()
         if reset_text.count('.long 0x4000') != 1:
             raise ValueError('reset stack anchor changed')
-        reset.write_text(reset_text.replace('.long 0x4000', '.long 0x8000'))
+        stack_top = 0xc000 if args.load_segment else 0x8000
+        bss_limit = stack_top - 0x2000
+        reset.write_text(reset_text.replace('.long 0x4000', '.long '+hex(stack_top)))
         linker = out/'code-stream-rom.ld'
         link_text = (ROOT/'arch/m68k/mac-rom.ld').read_text()
         if link_text.count('LENGTH = 0x1500') != 1 or link_text.count('__bss_end <= 0x2000') != 1:
             raise ValueError('linker memory anchors changed')
-        linker.write_text(link_text.replace('LENGTH = 0x1500', 'LENGTH = 0x5500').replace('__bss_end <= 0x2000', '__bss_end <= 0x6000'))
-        mac_sources = [reset, *CORE, SHARED,
+        linker.write_text(link_text.replace('LENGTH = 0x1500', 'LENGTH = '+hex(bss_limit-0xb00)).replace('__bss_end <= 0x2000', '__bss_end <= '+hex(bss_limit)))
+        mac_sources = [reset, *native_core, native_shared,
                        ROOT/'platform/mac128k/iwm-read.c', ROOT/'platform/mac128k/iwm-capture.S',
                        ROOT/'probes/mac128k/code-stream.c']
         for index, source in enumerate(mac_sources):
             obj = out/('mac-'+str(index)+'.o')
             flags = ['-mcpu=68000', '-Os', '-ffreestanding', '-fno-builtin', '-nostdlib']
             if source.suffix == '.c':
+                flags.extend('-D'+name for name in guest_defines)
                 flags += ['-D'+base_define,'-std=c99', '-Wall', '-Wextra', '-Werror', '-Wconversion',
                           '-Wsign-conversion', '-fstack-usage']
             run([m68k['gcc'], *flags, '-c', source, '-o', obj], 'mac-compile-'+str(index))
@@ -315,7 +353,7 @@ def main():
 
         diag_address, report_address = symbol('cs_mac_diag'), symbol('cs_code_stream_report')
         data_start, bss_start, bss_end = symbol('__data_start'), symbol('__bss_start'), symbol('__bss_end')
-        if (data_start != 0xb00 or not data_start <= bss_start <= bss_end <= 0x6000 or
+        if (data_start != 0xb00 or not data_start <= bss_start <= bss_end <= bss_limit or
                 not data_start <= diag_address <= bss_end-28 or
                 not data_start <= report_address <= bss_end-64):
             raise ValueError('Mac linked objects exceed the isolated probe memory budget')
@@ -323,15 +361,15 @@ def main():
         payload = raw.read_bytes()
         if not 260 <= len(payload) <= 65536:
             raise ValueError('Mac probe outside 64 KiB ROM budget')
-        if int.from_bytes(payload[:4], 'big') != 0x8000:
-            raise ValueError('Mac reset stack does not match the explicit 0x6000..0x8000 budget')
+        if int.from_bytes(payload[:4], 'big') != stack_top:
+            raise ValueError('Mac reset stack does not match probe budget')
         rom.write_bytes(payload+bytes([255])*(65536-len(payload)))
         rom_sha = sha(rom)
         builds['mac128k'] = {'rom_sha256': rom_sha, 'payload_bytes': len(payload),
                             'diag_address': diag_address, 'report_address': report_address,
                             'data_start': data_start, 'bss_start': bss_start, 'bss_end': bss_end,
-                            'data_bss_bytes': bss_end-data_start, 'data_bss_limit': 0x6000,
-                            'stack_reserved_bottom': 0x6000, 'stack_initial_top': 0x8000,
+                            'data_bss_bytes': bss_end-data_start, 'data_bss_limit': bss_limit,
+                            'stack_reserved_bottom': bss_limit, 'stack_initial_top': stack_top,
                             'framebuffer_start': 0x1a700, 'local_compiler_frames': frames,
                             'probe_reset_sha256': sha(reset), 'probe_linker_sha256': sha(linker),
                             'runtime_modules': []}
@@ -360,7 +398,10 @@ def main():
                     [injection.get(k) for k in ('track', 'sector')] != oracle['mac_fault'] or
                     injection.get('altered_nibbles', 0) < 1):
                     raise ValueError('missing exact Mac checksum injection')
-            validate(words, oracle, fault)
+            if args.load_segment:
+                validate_load(words, oracle, fault, original_answer)
+            else:
+                validate(words, oracle, fault)
             if sha(rom) != rom_sha or sha(raw_disk) != raw_sha:
                 raise ValueError('Mac input changed')
             observations.append({'lane': 'mac128k', 'case': name, 'report': words, 'diag': diag,
@@ -385,6 +426,7 @@ def main():
               'm68k_identity': native_identity, 'builds': builds, 'observed': observations,
               'commands': commands, 'expected_original': oracle, 'private_runtime_input': bool(selected),
               'routine_base': args.routine_base, 'selected_container_sha256': selected_sha, 'logical_media_sha256': raw_sha,
+              'materialize_segment': args.load_segment, 'fixture_execution_enabled': bool(guest_defines),
               'inputs_unchanged': True, 'hosted': hosted, 'mutants': mutants, 'container_controls': container_controls,
               'code_metadata_ready': all(row['report'][2] == 0 and row['report'][14] == 0xb8
                                                  for row in observations if row['case'] != 'late-fault'),
@@ -397,6 +439,10 @@ def main():
                         'Optional private media receives no fixed-sector injection or original-fixture count oracle.'}
     if not report['code_metadata_ready']:
         report['status'] = 'observed-refusal'
+    if args.load_segment:
+        report['limits'] = ('One resolved Shell segment in isolated scratch memory. Original fixtures alone '
+                            'contain an invoked MOVEQ/RTS routine. Private builds only copy the body. '
+                            'No Finder launch, patched A5 jump table, installed runtime, or hardware claim.')
     (out/'report.json').write_text(json.dumps(report, indent=2)+'\n', encoding='utf-8')
     print(json.dumps({'status': report['status'], 'cases': len(observations), 'report': str(out/'report.json')}))
     return 0
@@ -418,6 +464,20 @@ def validate(words, oracle, fault):
         raise ValueError('runtime CODE refusal is inconsistent')
     elif words[1:3] == [2,12] and (words[3] != 7 or words[7] not in (1,2,3,4) or words[8] >= words[5]):
         raise ValueError('runtime routine-range classification is inconsistent')
+
+
+def validate_load(words, oracle, fault, answer):
+    if len(words) != 16 or words[0] != 0x43534c31 or any(words[7:14]+words[15:]):
+        raise ValueError('bad segment-load report')
+    if fault:
+        if words[1:7] != [2,4,0,0,0,0] or words[14] != 0xd2:
+            raise ValueError('wrong segment-load injected failure')
+    elif oracle:
+        if words[1:7] != [4,0,620,2,1,answer] or words[14] != 0xb8:
+            raise ValueError('original routine failed: '+repr(words))
+    elif words[1:3] != [4,0] or words[14] != 0xb8 or words[5:7] != [0,0] or not (
+            2 <= words[3] <= 16384 and words[4] % 2 == 0 and words[4] <= words[3]-2):
+        raise ValueError('private copy-only load refused or inconsistent: '+repr(words))
 
 
 if __name__ == '__main__':

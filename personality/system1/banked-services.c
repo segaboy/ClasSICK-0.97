@@ -16,6 +16,7 @@ CS_BANK_SERVICE_TYPE(cs_trap_frame);
 CS_BANK_SERVICE_TYPE(cs_m68k_bus_report);
 CS_BANK_SERVICE_TYPE(cs_m68k_stack_limits);
 CS_BANK_SERVICE_TYPE(cs_m68k_guard);
+CS_BANK_SERVICE_TYPE(cs_s1_patch_state);
 #define CS_BANK_SERVICE_ALIGNMENT(type) offsetof(cs_bank_service_align_##type,value)
 #endif
 static int span(native_span *out,const void *object,size_t bytes)
@@ -26,9 +27,9 @@ static int span(native_span *out,const void *object,size_t bytes)
 }
 static int envelope(const cs_m68k_transfer_backend *b,const cs_trap_gateway *gateway,
     const cs_trap_frame *frame,const cs_m68k_bus_report *report,
-    const cs_m68k_stack_limits *limits,const cs_m68k_guard *guard)
+    const cs_m68k_stack_limits *limits,const cs_m68k_guard *guard,const cs_s1_patch_state *patch)
 {
-    native_span objects[8];size_t count=7;
+    native_span objects[9];size_t count=7;
     if(!span(&objects[0],b,sizeof *b) || !span(&objects[1],gateway,sizeof *gateway) ||
         !span(&objects[2],frame,sizeof *frame) || !span(&objects[3],report,sizeof *report) ||
         !span(&objects[4],limits,sizeof *limits) || !span(&objects[5],guard,sizeof *guard))return 0;
@@ -42,6 +43,8 @@ static int envelope(const cs_m68k_transfer_backend *b,const cs_trap_gateway *gat
         b->write_bytes==0 || !span(&objects[6],b->scalar.context,b->scalar.context_bytes) ||
         guard->check==0 || ((guard->context==0)!=(guard->context_bytes==0)))return 0;
     if(guard->context!=0 && !span(&objects[count++],guard->context,guard->context_bytes))return 0;
+    if(patch!=0 && (((uintptr_t)patch&(CS_BANK_SERVICE_ALIGNMENT(cs_s1_patch_state)-1u))!=0 ||
+        !span(&objects[count++],patch,sizeof *patch)))return 0;
     for(size_t i=0;i<count;++i)for(size_t j=0;j<i;++j)
         if(objects[i].at<objects[j].at+objects[j].bytes && objects[j].at<objects[i].at+objects[i].bytes)return 0;
     return 1;
@@ -69,11 +72,77 @@ static int permit(const cs_m68k_guard *guard,cs_m68k_guard_kind kind,
     event.word=word;event.before=before;event.proposed=proposed;
     return guard->check(guard->context,&event)!=0;
 }
+static cs_m68k_result patch_read(const cs_m68k_bus_backend *b,cs_m68k_bus_report *report,
+    const cs_m68k_guard *guard,const cs_trap_frame *frame,const cs_trap_frame *proposed,
+    cs_m68k_guard_kind kind,uint32_t address,unsigned bytes,unsigned access,uint32_t *value)
+{
+    report->address=address;report->bytes=bytes;report->access=access;
+    if(!permit(guard,kind,frame,proposed,report->cpu.word,address,bytes,access))
+        return done(report,CS_M68K_POLICY);
+    report->memory=b->read(b->context,address,bytes,access,value);
+    return report->memory==CS_GUEST_OK?CS_M68K_OK:done(report,CS_M68K_ADDRESS);
+}
+static cs_m68k_result enter_patch(const cs_m68k_transfer_backend *backend,const cs_m68k_guard *guard,
+    cs_trap_frame *frame,cs_trap_frame *proposed,cs_m68k_bus_report *report,
+    uint32_t base,cs_s1_patch_state *state,uint32_t target)
+{
+    uint32_t next=frame->pc+2,unused,slot;
+    if(state->depth==CS_S1_PATCH_DEPTH)return done(report,CS_M68K_POLICY);
+    if(frame->a[7]-base<6u || frame->a[7]<0x404u)return done(report,CS_M68K_ADDRESS);
+    slot=frame->a[7]-4;
+    if((slot<=target && target<slot+4) || (slot<=next && next<slot+4))
+        return done(report,CS_M68K_POLICY);
+    cs_m68k_result status=patch_read(&backend->scalar,report,guard,frame,proposed,
+        CS_M68K_GUARD_TARGET,target,2,CS_GUEST_READ|CS_GUEST_EXECUTE,&unused);
+    if(status!=CS_M68K_OK)return status;
+    report->address=slot;report->bytes=4;report->access=CS_GUEST_WRITE;
+    if(!permit(guard,CS_M68K_GUARD_WRITE,frame,proposed,report->cpu.word,slot,4,CS_GUEST_WRITE))
+        return done(report,CS_M68K_POLICY);
+    report->memory=backend->scalar.span(backend->scalar.context,slot,4,CS_GUEST_WRITE);
+    if(report->memory!=CS_GUEST_OK)return done(report,CS_M68K_ADDRESS);
+    proposed->pc=target;proposed->a[7]=slot;
+    if(!permit(guard,CS_M68K_GUARD_COMMIT,frame,proposed,report->cpu.word,target,0,0))
+        return done(report,CS_M68K_POLICY);
+    uint8_t bytes[4];
+    for(unsigned i=0;i<4u;++i)bytes[i]=(uint8_t)(next>>((3u-i)*8u));
+    report->memory=backend->write_bytes(backend->scalar.context,slot,4,bytes);
+    if(report->memory!=CS_GUEST_OK)return done(report,CS_M68K_ADDRESS);
+    cs_s1_patch_call *call=&state->calls[state->depth++];
+    call->slot=slot;call->continuation=next;call->word=report->cpu.word;
+    call->a0=frame->a[0];call->a1=frame->a[1];call->d1=frame->d[1];call->d2=frame->d[2];
+    report->branch_taken=1;report->subroutine=1;
+    copy_frame(frame,proposed);
+    return done(report,CS_M68K_OK);
+}
+static cs_m68k_result leave_patch(const cs_m68k_bus_backend *b,const cs_m68k_guard *guard,
+    cs_trap_frame *frame,cs_trap_frame *proposed,cs_m68k_bus_report *report,cs_s1_patch_state *state)
+{
+    const cs_s1_patch_call *call=&state->calls[state->depth-1u];
+    uint32_t next,unused;
+    cs_m68k_result status=patch_read(b,report,guard,frame,proposed,CS_M68K_GUARD_READ,
+        call->slot,4,CS_GUEST_READ,&next);
+    if(status!=CS_M68K_OK)return status;
+    if(next!=call->continuation)return done(report,CS_M68K_POLICY);
+    status=patch_read(b,report,guard,frame,proposed,CS_M68K_GUARD_TARGET,next,2,
+        CS_GUEST_READ|CS_GUEST_EXECUTE,&unused);
+    if(status!=CS_M68K_OK)return status;
+    proposed->pc=next;proposed->a[7]+=4;
+    proposed->d[1]=call->d1;proposed->d[2]=call->d2;proposed->a[1]=call->a1;
+    if(!(call->word&0x0100u))proposed->a[0]=call->a0;
+    uint16_t low=(uint16_t)frame->d[0];
+    proposed->sr=(uint16_t)((frame->sr&0xfff0u)|(low==0?4u:((low&0x8000u)?8u:0u)));
+    if(!permit(guard,CS_M68K_GUARD_COMMIT,frame,proposed,report->cpu.word,next,0,0))
+        return done(report,CS_M68K_POLICY);
+    --state->depth;
+    copy_frame(frame,proposed);
+    return done(report,CS_M68K_OK);
+}
 static cs_m68k_result banked_step(const cs_m68k_transfer_backend *backend,
     const cs_trap_gateway *gateway,cs_trap_gateway *publish_gateway,cs_trap_frame *frame,cs_m68k_bus_report *report,
-    const cs_m68k_stack_limits *limits,const cs_m68k_guard *guard)
+    const cs_m68k_stack_limits *limits,const cs_m68k_guard *guard,cs_s1_patch_state *patch)
 {
-    if(!envelope(backend,gateway,frame,report,limits,guard))return CS_M68K_ARGUMENT;
+    if(!envelope(backend,gateway,frame,report,limits,guard,patch))return CS_M68K_ARGUMENT;
+    if(patch!=0 && patch->depth>CS_S1_PATCH_DEPTH)return CS_M68K_ARGUMENT;
     const cs_m68k_bus_backend *b=&backend->scalar;
     begin(report,frame);report->memory=b->validate(b->context);
     if(report->memory!=CS_GUEST_OK)return done(report,CS_M68K_ADDRESS);
@@ -92,11 +161,33 @@ static cs_m68k_result banked_step(const cs_m68k_transfer_backend *backend,
     report->memory=b->read(b->context,frame->pc,2,5,&fetched);
     if(report->memory!=CS_GUEST_OK)return done(report,CS_M68K_ADDRESS);
     uint16_t word=(uint16_t)fetched;report->cpu.word=word;
-    if((word&0xf000u)!=0xa000u)return cs_m68k_bus_step_transfer(backend,frame,report,limits,guard);
+    cs_m68k_stack_limits active;
+    int returning=0;
+    if(patch!=0 && patch->depth!=0){
+        const cs_s1_patch_call *call=&patch->calls[patch->depth-1u];
+        if((call->slot&1u) || call->slot<=limits->base || limits->size<4 ||
+            call->slot-limits->base>limits->size-4 || (call->continuation&1u) ||
+            call->continuation>0xfffffeUL || (call->word&0xfe00u)!=0xa000u ||
+            frame->a[7]>call->slot)return done(report,CS_M68K_POLICY);
+        active.base=limits->base;active.size=call->slot-limits->base;
+        limits=&active;
+        returning=word==0x4e75u && frame->a[7]==call->slot;
+    }
+    if((word&0xf000u)!=0xa000u && !returning)
+        return cs_m68k_bus_step_transfer(backend,frame,report,limits,guard);
     cs_trap_frame proposed;copy_frame(&proposed,frame);
     if(!permit(guard,CS_M68K_GUARD_INSTRUCTION,frame,&proposed,word,frame->pc,2,5))
         return done(report,CS_M68K_POLICY);
+    if(returning)return leave_patch(b,guard,frame,&proposed,report,patch);
     (void)cs_trap_decode(word,&report->cpu.service.decoded);
+    if(patch!=0 && (word&0xfe00u)==0xa000u){
+        uint32_t installed;
+        cs_trap_result lookup=cs_trap_get(gateway,(uint16_t)(word&0xffu),&installed);
+        if(lookup!=CS_TRAP_OK){report->cpu.service.status=lookup;return done(report,CS_M68K_SERVICE);}
+        report->cpu.service.target=installed;
+        if(installed>=gateway->config.ram_begin && installed<gateway->config.ram_end)
+            return enter_patch(backend,guard,frame,&proposed,report,limits->base,patch,installed);
+    }
     int setting=word==0xa047u && publish_gateway!=0;
     if(word!=0xa146u && word!=0xa046u && !setting){
         report->cpu.service.status=CS_TRAP_UNSUPPORTED_FORMAT;return done(report,CS_M68K_POLICY);
@@ -145,8 +236,15 @@ static cs_m68k_result banked_step(const cs_m68k_transfer_backend *backend,
 cs_m68k_result cs_s1_banked_step(const cs_m68k_transfer_backend *backend,
     const cs_trap_gateway *gateway,cs_trap_frame *frame,cs_m68k_bus_report *report,
     const cs_m68k_stack_limits *limits,const cs_m68k_guard *guard)
-{return banked_step(backend,gateway,0,frame,report,limits,guard);}
+{return banked_step(backend,gateway,0,frame,report,limits,guard,0);}
 cs_m68k_result cs_s1_banked_trap_step(const cs_m68k_transfer_backend *backend,
     cs_trap_gateway *gateway,cs_trap_frame *frame,cs_m68k_bus_report *report,
     const cs_m68k_stack_limits *limits,const cs_m68k_guard *guard)
-{return banked_step(backend,gateway,gateway,frame,report,limits,guard);}
+{return banked_step(backend,gateway,gateway,frame,report,limits,guard,0);}
+cs_m68k_result cs_s1_banked_patch_step(const cs_m68k_transfer_backend *backend,
+    cs_trap_gateway *gateway,cs_trap_frame *frame,cs_m68k_bus_report *report,
+    const cs_m68k_stack_limits *limits,const cs_m68k_guard *guard,cs_s1_patch_state *state)
+{
+    if(state==0)return CS_M68K_ARGUMENT;
+    return banked_step(backend,gateway,gateway,frame,report,limits,guard,state);
+}
