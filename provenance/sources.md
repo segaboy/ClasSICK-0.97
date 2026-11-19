@@ -5283,3 +5283,19 @@ The CLI counts steps begun in a caller-selected low RAM range and separately
 counts returns from the CPU step. A PC match alone cannot establish either
 count. See the [project command contract](https://github.com/segaboy/boothush/tree/69596d6af629061d1f09fc1430279093b8c2c3fb)
 and the [paired handoff qualification](../docs/development/boot-handoff-20261119.md).
+
+## SRC-0627 - Original Macintosh RAM address decoding
+
+Apple's published 1985 hardware description establishes the repetition of
+RAM addresses on the Macintosh 128K. The [source review](records/SRC-0627-original-ram-addressing.md)
+identifies the low four MiB scope, the reset overlay distinction and the
+inference used to map $03FFF0 onto a physical 128 KiB machine.
+
+## SRC-0628 - BootHush Macintosh RAM mirror model
+
+Project-owned BootHush revision `066e85d9d93417c9917c1b12a51f85802163b998`,
+executable SHA-256 `a00fb8b507d79b0f0b88026c2e9cd613a6a7bd78c3aae10858bb5735e4f6db98`.
+Two independent builds matched. The [emulator qualification](https://github.com/segaboy/boothush/blob/066e85d9d93417c9917c1b12a51f85802163b998/docs/mac128k-ram.md)
+and [ClasSICK trial](../docs/development/boot-handoff-ram-alias-20261119.md)
+describe the modeled bus and preserved physical inspection boundaries. SRC-0627
+supplies the hardware facts independently.

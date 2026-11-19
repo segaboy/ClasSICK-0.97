@@ -5,6 +5,7 @@
 #include <string.h>
 #include "../apps/memory-probe/probe.h"
 #include "../apps/aline-probe/program.h"
+#include "../core/cpu/m68k-guard.h"
 #define REQUIRE(e) do {if(!(e)){fprintf(stderr,"line %d: %s\n",__LINE__,#e);exit(1);}} while(0)
 typedef struct {
     uint8_t code[64],data[64],stack[64];cs_guest_region regions[3];cs_guest_map map;
@@ -114,9 +115,85 @@ static void absolute_short(void)
     setup(&x);word(x.code,move_word(1,7,0,1,4));word(x.code+2,0x1800);
     unchanged_failure(&x,CS_M68K_OPCODE);
 }
+typedef struct {cs_m68k_guard_kind kind;uint32_t address;} move_guard_point;
+static int permit_except(const void *context,const cs_m68k_guard_event *event)
+{
+    const move_guard_point *denied=context;
+    return denied->kind!=event->kind || denied->address!=event->address;
+}
+static void displacement_and_index(void)
+{
+    fixture x;
+    setup(&x);x.frame.a[4]=0x1810;x.frame.d[2]=0xcafefffcu;
+    x.frame.a[3]=42;x.frame.d[5]=12;
+    word(x.code,move_word(2,7,2,5,4));word(x.code+2,46);word(x.code+4,0xfffa);
+    word(x.code+6,move_word(2,6,4,1,6));word(x.code+8,0x20fe);
+    word(x.code+10,move_word(4,7,3,6,4));word(x.code+12,0xb8fe);word(x.code+14,0x58fc);
+    word(x.code+16,move_word(1,5,4,6,4));word(x.code+18,9);word(x.code+20,0xb001);
+    word(x.code+48,0xf90d);longword(x.code+52,0x81ac3567);
+    REQUIRE(step(&x)==CS_M68K_OK && x.frame.pc==0x401006 && x.frame.sr==0x2718);
+    REQUIRE(x.data[10]==0xf9 && x.data[11]==0x0d && x.data[9]==0xcc && x.data[12]==0xcc);
+    REQUIRE(step(&x)==CS_M68K_OK && x.frame.a[6]==0xfffff90du && x.frame.sr==0x2718);
+    REQUIRE(step(&x)==CS_M68K_OK && x.frame.pc==0x401010);
+    REQUIRE(!memcmp(x.data+24,x.code+52,4) && x.data[23]==0xcc && x.data[28]==0xcc);
+    REQUIRE(step(&x)==CS_M68K_OK && x.frame.pc==0x401016 && x.data[59]==0xac);
+
+    /* Destination indexing sees the proposed source postincrement. */
+    setup(&x);x.frame.d[2]=2;
+    word(x.code,move_word(2,3,0,6,0));word(x.code+2,0x2000);
+    word(x.data,0xed32);
+    REQUIRE(step(&x)==CS_M68K_OK && x.frame.a[0]==0x1802 && x.data[4]==0xed && x.data[5]==0x32);
+
+    /* Full-width base arithmetic precedes the configured data-address policy. */
+    setup(&x);x.frame.a[0]=0xaa001804u;
+    word(x.code,move_word(2,5,0,0,0));word(x.code+2,0xfffe);word(x.data+2,0x3a8c);
+    unchanged_failure(&x,CS_M68K_ADDRESS);
+    const cs_m68k_bus_options data24={CS_M68K_DATA24,NULL,NULL};
+    REQUIRE(cs_m68k_bus_step_options(&x.map,&x.gateway,&x.frame,&x.report,&data24)==CS_M68K_OK);
+    REQUIRE(x.frame.d[0]==0xabcd3a8cu && x.frame.sr==0x2710);
+
+    /* Negative PC displacement, including a negative longword index. */
+    setup(&x);x.frame.pc+=24;x.frame.d[7]=0xfffffff0u;
+    word(x.code+24,move_word(4,7,3,1,1));word(x.code+26,0x78fc);
+    longword(x.code+6,0x80abcdf1u);
+    REQUIRE(step(&x)==CS_M68K_OK && x.frame.a[1]==0x80abcdf1u && x.frame.sr==0x271f);
+    for(unsigned reg=2;reg<=3;++reg){
+        setup(&x);word(x.code,move_word(2,3,0,7,reg));word(x.code+2,8);
+        unchanged_failure(&x,CS_M68K_OPCODE);
+    }
+    for(unsigned bit=8;bit<=10;++bit){
+        setup(&x);word(x.code,move_word(2,3,0,6,0));word(x.code+2,(uint16_t)(1u<<bit));
+        unchanged_failure(&x,CS_M68K_OPCODE);
+    }
+    setup(&x);word(x.code,move_word(4,3,0,5,0));word(x.code+2,1);
+    unchanged_failure(&x,CS_M68K_ADDRESS);
+    setup(&x);x.regions[0].size=2;word(x.code,move_word(2,7,3,0,1));
+    unchanged_failure(&x,CS_M68K_ADDRESS);
+    setup(&x);x.frame.a[0]=0xfffffff0u;x.frame.d[0]=0x30;
+    word(x.code,move_word(2,6,0,0,1));word(x.code+2,0x08d0);
+    unchanged_failure(&x,CS_M68K_ADDRESS);
+
+    const move_guard_point points[]={
+        {CS_M68K_GUARD_EXTENSION,0x401002},{CS_M68K_GUARD_READ,0x40100c},
+        {CS_M68K_GUARD_EXTENSION,0x401004},{CS_M68K_GUARD_WRITE,0x1804},
+        {CS_M68K_GUARD_COMMIT,0x401006}
+    };
+    const cs_m68k_stack_limits limits={0x300000,64};
+    for(unsigned i=0;i<sizeof points/sizeof points[0];++i){
+        setup(&x);x.frame.d[1]=2;
+        word(x.code,move_word(2,7,2,6,0));word(x.code+2,10);word(x.code+4,0x1002);
+        cs_trap_frame before=x.frame;cs_trap_gateway gateway=x.gateway;
+        uint8_t data[64];memcpy(data,x.data,sizeof data);
+        const cs_m68k_guard guard={permit_except,&points[i],sizeof points[i]};
+        REQUIRE(cs_m68k_bus_step_guarded(&x.map,&x.gateway,&x.frame,&x.report,&limits,&guard)==CS_M68K_POLICY);
+        REQUIRE(!memcmp(&before,&x.frame,sizeof before) && !memcmp(&gateway,&x.gateway,sizeof gateway) &&
+            !memcmp(data,x.data,sizeof data));
+    }
+}
 static void operands(void)
 {
     absolute_short();
+    displacement_and_index();
     for(unsigned width=1;width<=4;width*=2) for(unsigned mode=2;mode<=4;++mode)
     for(unsigned reg=0;reg<8;++reg) for(unsigned dest=0;dest<2;++dest) {
         fixture x;setup(&x);uint8_t *bytes=reg==7?x.stack:x.data;uint32_t base=reg==7?0x300000u:0x1800u;
@@ -183,7 +260,7 @@ static void failures(void)
             case 4:x.regions[0].size=4;break;case 5:x.regions[0].flags=1;break;
             case 6:x.regions[2].base=0x1800;break;case 7:x.frame.sr=0x071F;break;
             case 8:x.frame.sr=0xA71F;break;case 9:x.frame.pc++;break;
-            case 10:word(x.code,move_word(4,5,0,0,0));break;
+            case 10:word(x.code,move_word(4,7,5,0,0));break;
             case 11:word(x.code,move_word(4,0,0,7,4));break;
             case 12:word(x.code,0x4AFC);break;
             case 13:word(x.code,move_word(2,4,0,0,0));x.frame.a[0]=0;break;

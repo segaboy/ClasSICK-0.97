@@ -2,7 +2,7 @@
 /* Copyright (C) 2026 Dean Howell. */
 #include "../../core/storage/mac-boot-image.h"
 #include "../../platform/pc286/boothush-floppy-read.h"
-#include "../../platform/pc286/m68k-banked.h"
+#include "../../platform/pc286/mac128k-ram.h"
 #include "../../personality/system1/startup-globals.h"
 
 enum { LOAD_REFUSED = 1, SETUP_FAILED, STEP_REFUSED, OUTSIDE, BOUNDARY_POPPED, BUDGET, BOUNDARY };
@@ -59,7 +59,7 @@ static int setup(void)
     }
     if (cs_pc286_guest_bind(&memory.guest, &region, 1, banks, 4, 0x30000UL,
             0x20000UL, &memory.generation) != CS_PG_OK ||
-        cs_pc286_m68k_backend(&backend, &memory) != CS_PG_OK ||
+        cs_pc286_mac128k_backend(&backend, &memory) != CS_PG_OK ||
         !cs_mac128k_seed_startup_globals(low_globals, sizeof low_globals) ||
         !write_span(0x100, low_globals, sizeof low_globals) ||
         !write_span(0x8000, image.blocks, sizeof image.blocks))

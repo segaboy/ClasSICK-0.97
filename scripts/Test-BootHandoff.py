@@ -17,11 +17,36 @@ from pc286_hard_disk_loader import DISK_BYTES
 
 original = import_module("Test-BootBlockImage")
 ROOT = original.ROOT
-PC = original.PC[:-1] + ["personality/system1/startup-globals.c", "probes/pc286/boot-handoff.c"]
+PC = original.PC[:-1] + ["platform/pc286/mac128k-ram.c", "personality/system1/startup-globals.c",
+                         "probes/pc286/boot-handoff.c"]
 MAC = original.MAC[:-1] + ["personality/system1/startup-globals.c", "probes/mac128k/boot-handoff.c",
                            "probes/mac128k/boot-handoff-entry.S"]
-PIN = "c709c7f10b5f8e2a908cc2f06a74192269073dda52e8aa4f7d23a80dac89ac28"
+PIN = "a00fb8b507d79b0f0b88026c2e9cd613a6a7bd78c3aae10858bb5735e4f6db98"
 SELECTED = "1e03b75a05bbf441ae4e1808f70e38ffe0a07e3cc3298de151c0d2775552c647"
+
+
+def alias_fixture():
+    disk = original.fixture(0)
+    # Bracket both writes with sentinels. Also exercise the last word below
+    # the 4 MiB aperture boundary and an independent read via a different alias.
+    program = [
+        struct.pack(">HII", 0x23fc, 0x52616d31, 0x1ffec),    # MOVE.L #guard,abs.L
+        struct.pack(">HII", 0x23fc, 0x11223344, 0x03fff0),
+        struct.pack(">HII", 0x23fc, 0x55667788, 0x3ffff4),
+        struct.pack(">HII", 0x23fc, 0x090a0b0c, 0x01fff8),
+        struct.pack(">HHI", 0x33fc, 0xa0a1, 0x01fffc),     # MOVE.W #guard,abs.L
+        struct.pack(">HHI", 0x33fc, 0xf00d, 0x3ffffe),
+        struct.pack(">HI", 0x2039, 0x3ffff0),                # MOVE.L abs.L,D0
+        struct.pack(">HI", 0x23c0, 0x9100),                  # MOVE.L D0,abs.L
+        struct.pack(">HI", 0x2239, 0x03fff4),                # Same read via D1
+        struct.pack(">HI", 0x23c1, 0x9104),
+        struct.pack(">HI", 0x3439, 0x01fffe),                # Same word via D2
+        struct.pack(">HI", 0x33c2, 0x9108),
+        struct.pack(">H", 0x4e75),
+    ]
+    body = b"".join(program)
+    disk[510:510+len(body)] = body
+    return disk, len(program) + 1  # Plus branch through the boot-block entry.
 
 
 def dependencies():
@@ -29,7 +54,8 @@ def dependencies():
         "platform/pc286/preview-install.asm", "scripts/Test-BootBlockImage.py",
         "scripts/Build-PC286PreviewMedia.py", "scripts/pc286_hard_disk_loader.py", "scripts/pc286_loader.py",
         "scripts/pc286-toolchain-lock.json", "scripts/m68k_windows_toolchain.py", "scripts/Test-MfsVolumeMedia.py",
-        "scripts/Test-BootHandoff.py", "docs/specifications/SPEC-0133-boot-handoff.md"])
+        "scripts/Test-BootHandoff.py", "docs/specifications/SPEC-0133-boot-handoff.md",
+        "docs/specifications/SPEC-0139-mac128k-ram-aperture.md"])
     queue = list(PC + MAC)
     while queue:
         file = ROOT / queue.pop()
@@ -85,6 +111,9 @@ def build(args, out):
         raise ValueError("Mac imports unresolved")
     macmap = "\n".join(compile_tool([m68k["nm"], "-n", elf]))
     diag = original.symbol(r"^([\da-fA-F]+) [BD] cs_mac_diag$", macmap)
+    aline = original.symbol(r"^([\da-fA-F]+) T cs_mac_line_a_handler$", macmap)
+    after_aline = min(int(line.split()[0], 16) for line in macmap.splitlines() if
+                      re.fullmatch(r"[\da-fA-F]+ [Tt] .+", line) and int(line.split()[0], 16) > aline)
     compile_tool([m68k["objcopy"], "-O", "binary", elf, macbin])
     native = macbin.read_bytes()
     if len(native) > 65536:
@@ -126,7 +155,7 @@ def build(args, out):
         raise ValueError("install or build inputs changed")
     return dict(source_sha256=before, emulator_sha256=PIN, m68k=identity, build_commands=commands,
                 pc_payload_sha256=sha(pcbin), installed_sha256=sha(installed), rom_sha256=sha(rom),
-                installer=installer, mac_diag=diag, pc_summary=0x10000+report)
+                installer=installer, mac_diag=diag, mac_aline=[aline, after_aline], pc_summary=0x10000+report)
 
 
 def pc_summary(exe, installed, carrier, address, fault=False, generated=False):
@@ -210,6 +239,20 @@ def trial(exe, built, manifest, scratch, logical, name, count, mac_floppy=None, 
         first = mac_summary(exe, built/"mac.rom", mac_floppy, ["--until-mac-ram-steps", "0x8002:2:1"])
         later = mac_summary(exe, built/"mac.rom", mac_floppy, ["--until-mac-ram-steps", f"0x8000:1024:{count}"])
         result = dict(name=name, mac_entry=entry, mac_first=first, mac_bounded=later, pc=pc)
+        if name == "selected" and later["condition_met"]:
+            result["mac_extended"] = []
+            for target in (256, 4096, 65536):
+                observed = mac_summary(exe, built/"mac.rom", mac_floppy,
+                                       ["--until-mac-ram-steps", f"0x8000:1024:{target}"])
+                result["mac_extended"].append(dict(target=target, **observed))
+                if not observed["condition_met"]:
+                    start, end = manifest["mac_aline"]
+                    if start <= observed["pc"] < end:
+                        at_handler = mac_summary(exe, built/"mac.rom", mac_floppy, ["--until-pc", hex(start)])
+                        if not at_handler["condition_met"] or at_handler["pc"] != start:
+                            raise ValueError("owned Line-A boundary could not be reproduced")
+                        result["mac_line_a_entry"] = at_handler
+                    break
         if name == "unmapped-write":
             if (later.get("fault") != dict(operation="write8", address=0x800000)
                     or later["started"] != 2 or later["returned"] != 1
@@ -237,6 +280,37 @@ def trial(exe, built, manifest, scratch, logical, name, count, mac_floppy=None, 
     if before != [sha(p) for p in media]:
         raise ValueError("read-only input changed")
     return result
+
+
+def check_alias(exe, built, manifest):
+    disk, count = alias_fixture()
+    name = "mirrored-ram"
+    case = trial(exe, built, manifest, built, disk, name, count)
+    if (case["mac_bounded"]["pc"] != 0x7ffe or case["mac_bounded"]["returned"] != count or
+            not case["mac_bounded"]["condition_met"] or case["pc"] !=
+            dict(stop=5, completed_steps=count, pc=0x7ffe, first_successor=0x81fe, cpu_status=0)):
+        raise ValueError("mirrored-RAM fixture did not return through its stack slot on both targets")
+    expected = [(0x1ffec, bytes.fromhex("52616d31 11223344 55667788 090a0b0c a0a1 f00d")),
+                (0x9100, bytes.fromhex("11223344 55667788 f00d"))]
+    for lane in ("mac128k", "pc286"):
+        if lane == "mac128k":
+            args = ["--rom", built/"mac.rom", "--floppy", built/(name+".raw"),
+                    "--until-mac-ram-steps", f"0x8000:1024:{count}"]
+            offset = 0
+        else:
+            args = ["--boot-drive", "hard-disk", "--hard-disk", built/"installed.img",
+                    "--floppy", built/(name+"-transport.img"), "--until-post", "0xbd"]
+            offset = 0x30000
+        for address, content in expected:
+            args.extend(["--inspect", f"{offset+address}:{len(content)}"])
+        result = guest(exe, lane, args, 250000000)
+        observed = result.get("memory_ranges", [])
+        if (result.get("status") != "condition_met" or len(observed) != len(expected) or
+            any(row["address"] != offset+address or bytes.fromhex(row["bytes"]) != content
+                for row, (address, content) in zip(observed, expected))):
+            raise ValueError("physical RAM sentinel or alias readback mismatch: " + lane)
+    case["physical_guards_and_readback"] = "matched both lanes"
+    return case
 
 
 def main():
@@ -291,6 +365,7 @@ def main():
                                                        ("direct-boundary", direct, False),
                                                        ("unmapped-write", unmapped, False),
                                                        ("bad-header", bad, False), ("failed-read", authored, True))]
+        report["trials"].append(check_alias(args.emulator, out, report))
         report["status"] = "generated-controls-pass"
     if sha(args.emulator) != PIN:
         raise ValueError("emulator changed during run")

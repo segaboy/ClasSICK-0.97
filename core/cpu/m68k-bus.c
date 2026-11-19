@@ -71,6 +71,7 @@ static uint32_t sign_extend(uint32_t value,unsigned bits)
     uint32_t sign=bits==8?0x80u:0x8000u;
     return (value&sign)!=0?value|(bits==8?0xFFFFFF00u:0xFFFF0000u):value;
 }
+static cs_m68k_result control_address(transaction *t,unsigned mode,unsigned reg,uint32_t *at);
 static cs_m68k_result effective(transaction *t,unsigned mode,unsigned reg,unsigned width,uint32_t *at)
 {
     uint32_t step=width==1 && reg==7?2u:width;
@@ -80,14 +81,7 @@ static cs_m68k_result effective(transaction *t,unsigned mode,unsigned reg,unsign
         if(mode==3) t->frame.a[reg]+=step;
         return CS_M68K_OK;
     }
-    if(mode==7 && reg==0) {
-        uint32_t address;
-        cs_m68k_result status=extension(t,2,&address);
-        if(status==CS_M68K_OK) *at=sign_extend(address,16);
-        return status;
-    }
-    if(mode==7 && reg==1) return extension(t,4,at);
-    return CS_M68K_OPCODE;
+    return control_address(t,mode,reg,at);
 }
 static cs_m68k_result source(transaction *t,unsigned mode,unsigned reg,unsigned width,uint32_t *value)
 {
@@ -143,6 +137,7 @@ static cs_m68k_result move(transaction *t,uint16_t word)
     }
     if(dm==0) t->frame.d[dr]=(t->frame.d[dr]&~mask(width))|value;
     else {
+        if(dm==7 && dr>1) return CS_M68K_OPCODE;
         uint32_t at;status=effective(t,dm,dr,width,&at);
         if(status!=CS_M68K_OK) return status;
         if(t->options!=0 && t->options->data_policy==CS_M68K_DATA24) at&=0xFFFFFFu;
@@ -225,9 +220,8 @@ static cs_m68k_result add_offset(transaction *t,uint32_t base,uint32_t offset,ui
     }
     return CS_M68K_OK;
 }
-static cs_m68k_result control_address(transaction *t,uint16_t word,uint32_t *at)
+static cs_m68k_result control_address(transaction *t,unsigned mode,unsigned reg,uint32_t *at)
 {
-    unsigned mode=(word>>3)&7u,reg=word&7u;
     if(mode==2) {*at=t->frame.a[reg];return CS_M68K_OK;}
     if(mode==7 && reg==1) return extension(t,4,at);
     if(mode!=5 && mode!=6 && !(mode==7 && (reg==0 || reg==2 || reg==3))) return CS_M68K_OPCODE;
@@ -295,7 +289,7 @@ static cs_m68k_result multiple_registers(transaction *t,uint16_t word)
         at=t->frame.a[reg];status=add_offset(t,at,(uint32_t)bytes,&after);
         if(status!=CS_M68K_OK)return status;
     } else {
-        status=control_address(t,word,&at);
+        status=control_address(t,mode,reg,&at);
         if(status!=CS_M68K_OK)return status;
     }
     t->report->access=load?CS_GUEST_READ:CS_GUEST_WRITE;
@@ -327,7 +321,7 @@ static cs_m68k_result multiple_registers(transaction *t,uint16_t word)
 }
 static cs_m68k_result jump(transaction *t,uint16_t word)
 {
-    uint32_t at;cs_m68k_result status=control_address(t,word,&at);
+    uint32_t at;cs_m68k_result status=control_address(t,(word>>3)&7u,word&7u,&at);
     if(status!=CS_M68K_OK) return status;
     status=target(t,at);
     if(status!=CS_M68K_OK) return status;
@@ -345,7 +339,7 @@ static cs_m68k_result jump(transaction *t,uint16_t word)
 }
 static cs_m68k_result address_instruction(transaction *t,uint16_t word)
 {
-    uint32_t at;cs_m68k_result status=control_address(t,word,&at);
+    uint32_t at;cs_m68k_result status=control_address(t,(word>>3)&7u,word&7u,&at);
     if(status!=CS_M68K_OK) return status;
     if((word&0xF1C0u)==0x41C0u) t->frame.a[(word>>9)&7u]=at;
     else {

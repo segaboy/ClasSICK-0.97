@@ -10,12 +10,15 @@ ROM coverage and other-disk results must not be inferred from those probes.
 ## Current checkpoint - 2026-11-19
 
 Two cold trials on each target executed startup code from the supplied
-System Disk. Both entered RAM at $8002 and completed a step to $808A. With
-the absolute-short MOVE implementation the installed 286 completed a second
-step before its decoder stopped at $808E. On the Mac, BootHush observed eight
-steps starting in the loaded sectors, seven returning, then a modeled machine
-fault. The [handoff receipt](boot-handoff-20261119.md) records the experimental
-entry state, generated controls and limits. The [published pointer profile](../specifications/SPEC-0137-startup-globals.md)
+System Disk. Both entered RAM at $8002 and completed a step to $808A.
+On the Mac, BootHush observed **38 completed steps** in the loaded sectors
+and reached the replacement ROM's Line-A handler at $400B24. In the
+earlier model a read at $03FFF0 stopped execution on the eighth step.
+Apple documents the 128 KiB RAM mirrors. Correcting the mapping advanced the
+same ROM and disk to service dispatch. The installed 286 completed two
+steps and its decoder stopped at $808E. The [paired rerun](boot-handoff-ram-alias-20261119.md)
+records both observations and eight generated controls. The [initial receipt](boot-handoff-20261119.md)
+records the experimental register and stack state. The [pointer profile](../specifications/SPEC-0137-startup-globals.md)
 initializes four low-memory values on each target.
 
 In a separate [segment load](streamed-segment-load-20261119.md), both native
@@ -31,7 +34,9 @@ startup path and bringing up System and Finder remain release gates.
 Tilt built and ran its moving side tilt on the same BootHush build. Across
 six combat cases, both players could cover ground during the attack and land
 a hit missed by the earlier ROM. All twelve framebuffer series and keyboard
-witnesses matched the prior emulator. [Tilt evidence](https://github.com/segaboy/Not-Super-Tilt-Bro/blob/55e65564cd4be1f34801284240ada8916adc26ec/docs/side-dash-evidence.md).
+witnesses matched the prior emulator. Repeating the 384 captures after the
+RAM correction also reproduced the guest states and final GIF.
+[Tilt evidence](https://github.com/segaboy/Not-Super-Tilt-Bro/blob/11f5d6d8e8d7711b1a59ae70deb2130f59c14fed/docs/side-dash-evidence.md).
 
 ## Earlier November 19 checks
 
