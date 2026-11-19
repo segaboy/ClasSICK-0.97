@@ -1,7 +1,9 @@
 # Target matrix
 
-No OS target is implemented at bootstrap. Distinguish verified tooling from a
-planned supported target; do not infer hardware support from a directory name.
+The table below is the historical bootstrap plan, not current implementation
+status. The native Mac/286 preview is published; full ROM parity and installed 286
+disk compatibility remain incomplete. See the [2026-11-19 target audit](../development/original-rom-parity-20261119.md).
+x64 remains paused and current emulator trials use BootHush only.
 
 | Target | Stage | Execution strategy | Status / release gate |
 | --- | --- | --- | --- |

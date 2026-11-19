@@ -9,6 +9,15 @@ Compacted 2026-10-28 from public baseline `11ad7a937e58f752cfecda8b6805c76bc7f45
 - When relevant: [native parity](docs/development/native-parity-plan.md), [display](docs/development/display-target.md), [performance](docs/development/native-performance-plan.md), [x64 PC](docs/development/unified-x64-pc-plan.md), [286](docs/development/pc286-feasibility.md), [System1/ROM](docs/development/system1-rom-boot-requirements.md), [sources](docs/research/system1-sources.md), [releases](releases/README.md), [milestones](docs/roadmap.md).
 
 ## Current scope
+Owner clarification (2026-11-19, SRC-0621): define completion against the original
+Macintosh 128K/64K-ROM responsibilities and all supplied disk software. The 286
+installer must deliver equivalent native services plus execution of the disks'
+68k startup, System/Finder, patches/resources, applications and accessories.
+Preserve useful work outside the ROM in System/app, PC runtime, demo, tooling or
+other-port deliverables. Follow [the parity audit and R1-R8 completion gates](docs/development/original-rom-parity-20261119.md)
+and ADR-0084. Component tests and the published demonstration do not establish
+complete ROM parity. This component boundary does not erase wider project goals.
+
 Owner direction (2026-11-17, SRC-0612): the next milestone is booting the owner-selected
 Macintosh System Disk against ClasSICK on original Mac and native 286, including
 full use of its programs and persistent file operations. BootHush and Tilt remain

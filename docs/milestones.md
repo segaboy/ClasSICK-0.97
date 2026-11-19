@@ -1,5 +1,11 @@
 # Current milestones and release tracks
 
+2026-11-19: [original ROM parity audit](development/original-rom-parity-20261119.md)
+defines R1-R8 completion gates, the 24 ROM service families, all four supplied
+disk identities and the installed 286 equivalent. No family is complete; the
+existing installer deploys the preview only. Preserve and assign non-ROM work
+to separate deliverables. The audit is documentation, not a new runtime pass.
+
 2026-11-17: paired preview publication is complete. The next owner-selected goal
 is [System Disk boot on Mac and 286](development/system-disk-boot-20261117.md).
 2026-11-18: the exact image is identified and both native targets read every

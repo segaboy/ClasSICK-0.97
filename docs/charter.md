@@ -1,5 +1,15 @@
 # Project charter
 
+Owner clarification 2026-11-19 (SRC-0621 / ADR-0084): completion of the original
+Mac ROM component means original 128K/64K-ROM responsibility coverage plus the
+supplied-disk workloads, without absorbing disk software or extensions. The
+286 installer delivers equivalent native services and the execution boundary
+for disk-resident 68k startup, System/Finder, patches/resources and applications.
+This supersedes application-only wording below for that admitted disk workload.
+Useful System, desktop, demo, tooling and other-port work remains separate;
+wider edition goals are preserved rather than added to ROM completion.
+[Current completion gates and audit](development/original-rom-parity-20261119.md).
+
 Owner clarification2026-10-16 (SRC-0217): complete the native68000 Mac
 experience and reach the same experience through a native x86 PC port in step.
 Each advancement requires its corresponding native PC behavior and explicit

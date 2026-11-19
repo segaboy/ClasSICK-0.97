@@ -1,5 +1,10 @@
 # Architecture decision records
 
+2026-11-19: accepted [ADR-0084](0084-original-rom-parity-boundary.md) defines
+original-ROM component completion, the installed 286 equivalent with disk-system
+68k execution, and preservation of useful non-ROM work in separate products.
+[Audit and completion gates](../development/original-rom-parity-20261119.md).
+
 2026-10-19: [ADR-0059](0059-native-pointer-input-contract.md) freezes SPEC-0051 original pointer/input semantics and68 unexecuted cases. Core-only contract,no code/adapter/trial;Mac source lane held pending owner disposition.
 
 2026-10-19: [ADR-0058](0058-next-paired-release-goal.md) recommends the next cursor/interactive-window paired release goal and first source/input contract slice. Planning only,no feature tests or changed published pointers.

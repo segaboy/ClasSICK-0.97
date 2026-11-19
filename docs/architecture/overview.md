@@ -1,5 +1,13 @@
 # Architecture overview
 
+2026-11-19: [ADR-0084](../adr/0084-original-rom-parity-boundary.md) defines the
+production original-ROM boundary and the installed 286 equivalent. The PC legacy
+boundary includes disk-resident 68k startup/System/Finder/patch/resource code,
+not just applications. Our managers stay native. Separate disk System/desktop,
+diagnostic/demo and extension products retain useful work outside the ROM.
+The older diagram below describes shared layers, not the production link manifest.
+[Responsibility register and completion gates](../development/original-rom-parity-20261119.md).
+
 Current delivery rule2026-10-16: native68000 Mac and native x86 PC capabilities
 advance together; legacy68k application execution on PC is a separate compatible
 entry path to the same native managers. The interpreter is not an OS portability

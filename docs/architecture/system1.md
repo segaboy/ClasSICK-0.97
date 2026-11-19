@@ -1,6 +1,10 @@
 # System 1 compatibility personality
 
-Status: architecture plan; no historical API semantics have been implemented.
+2026-11-19: partial implementations and probes now exist. Their current limits
+are listed in the [ROM responsibility register](../development/original-rom-parity-20261119.md).
+The text below preserves the architecture plan; it is not a current coverage report.
+The original-ROM baseline and the separate System/application distribution have
+distinct completion gates under ADR-0084.
 
 ## Profiles
 

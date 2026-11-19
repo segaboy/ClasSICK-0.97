@@ -1,5 +1,12 @@
 # Milestone roadmap
 
+2026-11-19: original-ROM responsibility parity now governs this component's
+completion. Next: routine/interface coverage, exact startup/patch contracts and
+separate production-ROM/installed-286/demo build manifests, followed by paired
+integration and all supplied-disk workloads. The 286 installer/runtime includes
+68k disk-system execution. [Audit, reuse assignments and exit gates](development/original-rom-parity-20261119.md).
+No code or existing preview release is changed by this scope audit.
+
 2026-11-18: exact selected-media identity and native Mac/286 full-fork reads
 are verified. [Read-only integration](development/mfs-media-20261118.md)
 closes the current provider/directory/fork prerequisites. Next are streamed

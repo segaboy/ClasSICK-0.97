@@ -1,5 +1,11 @@
 # Compatibility status
 
+Current 2026-11-19: [original ROM parity audit](../development/original-rom-parity-20261119.md)
+owns the family-level responsibility register, supplied-disk inventory and
+completion gates. Partial implementations/probes and the native preview exist;
+System/Finder startup and complete-ROM coverage remain open. The table below
+is retained as the historical bootstrap baseline, not a current coverage claim.
+
 Baseline candidate: January 1984 Macintosh System 1.0/System 0.97.
 Exact reference profile remains unverified; see R-001 in the research backlog.
 

@@ -2,6 +2,11 @@
 <!-- Copyright (C) 2026 Dean Howell. -->
 # Owner-selected System Disk boot milestone - 2026-11-17
 
+2026-11-19 scope clarification: the [original ROM parity audit](original-rom-parity-20261119.md)
+defines the ROM/installed-286 responsibilities and the four-disk acceptance
+corpus. This receipt retains the earlier selected-System-Disk evidence. Broader
+ROM coverage and other-disk results must not be inferred from those probes.
+
 ## Current checkpoint - 2026-11-18
 
 The exact private image is identified and read through both native providers.
@@ -66,8 +71,8 @@ distributed dependency or public fixture. No Apple ROM is required for this lane
 
 | Lane | Required result | Current state |
 | --- | --- | --- |
-| Mac128K in BootHush | Cold start with independently built ClasSICK ROM and the exact selected disk reaches the disk's usable desktop and completes the full-use workload below. | No selected-disk run; guest floppy/System boot path absent. |
-| Native 286 in BootHush | Native 286 ClasSICK provides the required ROM/OS services and a defined legacy-code/media bridge for the same disk payload; the same full-use workload completes without a host OS dependency inside the guest. | No selected-disk run; bridge, filesystem and broad 68000 execution absent. |
+| Mac128K in BootHush | Cold start with independently built ClasSICK ROM and the exact selected disk reaches the disk's usable desktop and completes the full-use workload below. | Selected-disk read/resource/header probes pass; integrated System/Finder startup and full use remain unverified. |
+| Native 286 in BootHush | Native 286 ClasSICK provides the required ROM/OS services and a defined legacy-code/media bridge for the same disk payload; the same full-use workload completes without a host OS dependency inside the guest. | Native selected-disk reads and original banked execution probes pass; installed full runtime, broad services and System/Finder startup remain incomplete. |
 | Original physical Macintosh | The independently built replacement ROM and selected disk repeat the Mac acceptance workload on identified original hardware. | Required, unverified; emulator success does not close this row. |
 | Physical 286 | An identified native 286 machine repeats the selected workload using a declared media-transfer method. | Unverified; no claim from emulator behavior. |
 

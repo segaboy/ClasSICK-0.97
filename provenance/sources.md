@@ -5229,3 +5229,23 @@ SPEC-0125 without historical or physical inference.
 
 2026-11-18; explicit BootHush built-in BIOS sector-write behavior supports
 the standalone native286 provider. [Review](records/SRC-0620-pc286-floppy-sector-write.md).
+
+## SRC-0621 - Owner-defined original ROM parity and installed 286 equivalent
+
+2026-11-19; owner requires comparison with published original-Macintosh facts,
+clear complete-ROM goals, the same original ROM responsibilities without extra
+product features, compatibility with supplied disks and preservation/reassignment
+of useful work outside that scope. The 286 installer must deliver equivalent
+services plus the ability to execute the original disks' 68k code, including their
+system software. This is a requirement, not a historical or runtime result.
+[Audit, component boundaries and completion gates](../docs/development/original-rom-parity-20261119.md);
+[ADR-0084](../docs/adr/0084-original-rom-parity-boundary.md).
+
+## SRC-0622 - Published original ROM responsibility review
+
+2026-11-19; published Apple Inside Macintosh I-III (1985) and IV (1986) introduction
+establish the reviewed 64K-ROM family/manager and RAM-software boundaries.
+Exact locators, applicability limits and retrieval method are in the
+[source review](records/SRC-0622-original-rom-responsibilities.md).
+No protected implementation or assets, confidential drafts or new historical
+execution observations were used.
