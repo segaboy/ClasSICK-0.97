@@ -2,6 +2,11 @@
 <!-- Copyright (C) 2026 Dean Howell. -->
 # Build and boot the disk-startup developer targets
 
+The same commands now build and qualify the [November 20 native trap and
+instruction checkpoint](disk-startup-services-20261120.md). Its receipt
+has the current emulator pin and artifact identities. The figures below
+describe the November 19 build.
+
 This Windows-native build produces a 64 KiB developer ROM for the Macintosh
 128K and a bootable installer floppy for the 286. Each target reads its
 startup program from a separate Macintosh disk when it boots. The build

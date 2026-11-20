@@ -2,6 +2,11 @@
 <!-- Copyright (C) 2026 Dean Howell. -->
 # SPEC-0141 - Build the disk-startup developer ROM and installer
 
+The November 20 build adds [SPEC-0143's native register traps](SPEC-0143-mac-native-trap-address.md)
+and the 286 instruction support in SPEC-0142/0145. The Mac's Line-A
+terminal-only behavior below describes the November 19 profile. See the
+[subsequent generated cold starts](../development/disk-startup-services-20261120.md).
+
 The Windows-native builder takes the m68k tool directory, 286 toolchain,
 assembler and a new output directory. Build both products from explicit
 project source lists without a disk, emulator, installed environment or

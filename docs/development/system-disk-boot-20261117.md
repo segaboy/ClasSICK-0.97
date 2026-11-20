@@ -7,6 +7,17 @@ defines the ROM/installed-286 responsibilities and the four-disk acceptance
 corpus. This receipt retains the earlier selected-System-Disk evidence. Broader
 ROM coverage and other-disk results must not be inferred from those probes.
 
+## November 20 disk-startup results
+
+Three cold runs identified **NewPtr** as the first ROM service requested by
+the supplied System Disk. A separately qualified diagnostic selected the
+published service name. The standalone Mac ROM handles GetTrapAddress and
+SetTrapAddress, but the disk still stops on its first allocation request.
+Two additional 286 decoder builds passed their generated controls; the
+diagnostic still reports an unsupported instruction at $808E after two
+completed steps. [Service identification](startup-service-labels-20261120.md)
+and [paired disk trials](startup-service-boundary-20261120.md).
+
 ## Current checkpoint - 2026-11-19
 
 Two cold trials on each target executed startup code from the supplied

@@ -20,7 +20,7 @@ ROOT = media.ROOT
 ROM = "disk-startup-mac128k.rom"
 INSTALLER = "disk-startup-286-installer.img"
 SHARED = ["core/storage/block-read.c", "core/storage/mac-boot-header.c", "personality/system1/startup-globals.c"]
-MAC = [*SHARED, "arch/m68k/disk-startup-reset.S", "platform/mac128k/iwm-read.c",
+MAC = [*SHARED, "core/services/traps.c", "arch/m68k/disk-startup-reset.S", "platform/mac128k/iwm-read.c",
        "platform/mac128k/iwm-capture.S", "platform/mac128k/startup-floppy.c", "platform/mac128k/disk-startup.c"]
 PC = [*SHARED, "core/cpu/m68k.c", "core/cpu/m68k-bus.c", "core/memory/guest.c",
       "core/services/traps.c", "platform/pc286/banked-guest.c", "platform/pc286/m68k-banked.c",
@@ -97,11 +97,19 @@ def build(m68k_bin, tool, assembler, output):
             raise ValueError("missing stack report or C frames exceed startup stack reservation")
         image = raw.read_bytes()
         vectors = struct.unpack_from(">64I", image)
+        service_pcs = {field: symbols[label] for field, label in (
+            ("get_trap_address_pc", "cs_mac_get_trap_address"),
+            ("set_trap_address_pc", "cs_mac_set_trap_address"),
+            ("service_return_pc", "cs_mac_startup_service_return"),
+            ("line_a_pc", "cs_mac_startup_line_a"),
+            ("startup_stop_pc", "cs_mac_startup_stop"))}
         if (len(image) != symbols["__rom_end"]-0x400000 or len(image) > 65536 or
             vectors[:2] != (0x4000, symbols["cs_mac_reset"]) or
             any(addr != symbols["cs_mac_startup_line_a" if i == 10 else "cs_mac_startup_stop"]
                 for i, addr in enumerate(vectors[2:], 2)) or
-            any(addr & 1 or not 0x400104 <= addr < symbols["__rom_code_end"] for addr in vectors[1:]) or
+            len(set(service_pcs.values())) != len(service_pcs) or
+            any(addr & 1 or not 0x400104 <= addr < symbols["__rom_code_end"]
+                for addr in (*vectors[1:], *service_pcs.values())) or
             not 0xb00 <= symbols["__data_start"] <= symbols["__bss_end"] <= 0x2000 <= vectors[0] <= 0x7800):
             raise ValueError("Mac ROM vectors or linked layout differ")
         (result/ROM).write_bytes(image.ljust(65536, b"\xff"))
@@ -135,7 +143,7 @@ def build(m68k_bin, tool, assembler, output):
             mac=dict(rom_used=len(image), reset_sp=vectors[0], reset_pc=vectors[1],
                      exception_vectors=list(vectors[2:]), ram_data_start=symbols["__data_start"],
                      ram_bss_end=symbols["__bss_end"], entry_stack_top=0x7800,
-                     startup_stop_pc=symbols["cs_mac_startup_stop"], c_stack_frames=dict(sorted(frames.items())),
+                     **service_pcs, c_stack_frames=dict(sorted(frames.items())),
                      iwm_wire_bytes=706, iwm_decoded_bytes=524),
             pc=dict(payload_sha256=sha(binary), installed_disk_sha256=package["images"]["hard-disk.img"],
                     entry=int(entry[1], 16), start_pc=0x10000+int(entry[1], 16),

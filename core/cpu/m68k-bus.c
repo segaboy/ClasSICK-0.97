@@ -146,6 +146,96 @@ static cs_m68k_result move(transaction *t,uint16_t word)
     }
     flags(&t->frame,value,width);return CS_M68K_OK;
 }
+enum { IMM_OR=0, IMM_AND=2, IMM_SUB=4, IMM_ADD=6, IMM_EOR=10, IMM_CMP=12 };
+static uint32_t logical_immediate(unsigned op,uint32_t left,uint32_t right)
+{
+    if(op==IMM_OR)return left|right;
+    if(op==IMM_AND)return left&right;
+    return left^right;
+}
+static cs_m68k_result read_alu_operand(transaction *t,unsigned mode,unsigned reg,unsigned width,
+    uint32_t *at,uint32_t *value)
+{
+    if(mode==0){*value=t->frame.d[reg]&mask(width);return CS_M68K_OK;}
+    /* A read/modify/write instruction evaluates its EA exactly once. */
+    cs_m68k_result status=effective(t,mode,reg,width,at);
+    if(status!=CS_M68K_OK)return status;
+    if(t->options!=0 && t->options->data_policy==CS_M68K_DATA24)*at&=0xffffffu;
+    return read_value(t,*at,width,CS_GUEST_READ,value,CS_M68K_GUARD_READ);
+}
+static cs_m68k_result store_alu_operand(transaction *t,unsigned mode,unsigned reg,unsigned width,
+    uint32_t at,uint32_t value)
+{
+    if(mode!=0)return preflight_store(t,at,width,value);
+    t->frame.d[reg]=(t->frame.d[reg]&~mask(width))|value;
+    return CS_M68K_OK;
+}
+static uint32_t arithmetic_result(transaction *t,unsigned op,unsigned width,uint32_t left,uint32_t right)
+{
+    uint32_t operand_mask=mask(width),sign=(operand_mask>>1)+1u;
+    int add=op==IMM_ADD;
+    uint32_t value=(add?left+right:left-right)&operand_mask;
+    int carry=add?value<left:left<right;
+    uint32_t overflow=(add?~(left^right):(left^right))&(left^value)&sign;
+    flags(&t->frame,value,width);
+    if(carry)t->frame.sr|=1u;
+    if(overflow)t->frame.sr|=2u;
+    if(op!=IMM_CMP)t->frame.sr=(uint16_t)((t->frame.sr&0xffefu)|(carry?16u:0u));
+    return value;
+}
+static cs_m68k_result immediate(transaction *t,uint16_t word)
+{
+    unsigned op=word>>8,size=(word>>6)&3u,mode=(word>>3)&7u,reg=word&7u;
+    int logical=op==IMM_OR || op==IMM_AND || op==IMM_EOR;
+    if(!logical && op!=IMM_ADD && op!=IMM_SUB && op!=IMM_CMP)return CS_M68K_OPCODE;
+    int ccr=logical && (word&0xffu)==0x3cu;
+    if(!ccr && (size==3 || mode==1 || (mode==7 && reg>1)))return CS_M68K_OPCODE;
+    unsigned width=1u<<size;
+    uint32_t operand_mask=mask(width),right,left,at=0,value;
+    cs_m68k_result status=extension(t,width==4?4u:2u,&right);
+    if(status!=CS_M68K_OK)return status;
+    if(ccr){
+        value=logical_immediate(op,t->frame.sr,right);
+        t->frame.sr=(uint16_t)((t->frame.sr&0xffe0u)|(value&0x1fu));
+        return CS_M68K_OK;
+    }
+    right&=operand_mask;
+    status=read_alu_operand(t,mode,reg,width,&at,&left);
+    if(status!=CS_M68K_OK)return status;
+    if(logical){
+        value=logical_immediate(op,left,right);
+        flags(&t->frame,value,width);
+    } else {
+        value=arithmetic_result(t,op,width,left,right);
+        if(op==IMM_CMP)return CS_M68K_OK;
+    }
+    return store_alu_operand(t,mode,reg,width,at,value);
+}
+static cs_m68k_result quick_or_unary(transaction *t,uint16_t word)
+{
+    unsigned size=(word>>6)&3u,mode=(word>>3)&7u,reg=word&7u,width=1u<<size;
+    int quick=(word>>12)==5u;
+    if(size==3 || (mode==7 && reg>1) || (mode==1 && (!quick || width==1)))
+        return CS_M68K_OPCODE;
+    uint32_t amount=(word>>9)&7u;
+    if(amount==0)amount=8u;
+    if(mode==1){
+        if(word&0x0100u)t->frame.a[reg]-=amount;
+        else t->frame.a[reg]+=amount;
+        return CS_M68K_OK;
+    }
+    uint32_t at=0,value;
+    cs_m68k_result status=read_alu_operand(t,mode,reg,width,&at,&value);
+    if(status!=CS_M68K_OK)return status;
+    if(quick)value=arithmetic_result(t,(word&0x0100u)?IMM_SUB:IMM_ADD,width,value,amount);
+    else {
+        int test=(word>>8)==0x4au;
+        if(!test)value=0;
+        flags(&t->frame,value,width);
+        if(test)return CS_M68K_OK;
+    }
+    return store_alu_operand(t,mode,reg,width,at,value);
+}
 static int condition(unsigned c,uint16_t sr)
 {
     int n=(sr&8u)!=0,z=(sr&4u)!=0,v=(sr&2u)!=0,carry=(sr&1u)!=0;
@@ -446,9 +536,13 @@ static cs_m68k_result step(const cs_guest_map *m,cs_trap_gateway *g,
     /* A null legacy dispatch still reaches the native gateway. Guarded stepping
      * refuses the entire A-line class before either service route is entered. */
     if((guard!=0 || backend!=0) && kind==10) return done(r,CS_M68K_POLICY);
-    if(kind>=1 && kind<=3) {status=move(&t,word);t.frame.pc=t.cursor;}
+    if(kind==0) {status=immediate(&t,word);t.frame.pc=t.cursor;}
+    else if(kind>=1 && kind<=3) {status=move(&t,word);t.frame.pc=t.cursor;}
     else if(kind==6) status=branch(&t,word);
     else if((word&0xF0F8u)==0x50C8u)status=counted_branch(&t,word);
+    else if((kind==5 && (word&0xc0u)!=0xc0u) || (word>>8)==0x42u || (word>>8)==0x4au) {
+        status=quick_or_unary(&t,word);t.frame.pc=t.cursor;
+    }
     else if((word&0xFB80u)==0x4880u)status=multiple_registers(&t,word);
     else if((word&0xF100u)==0x7000u) {
         uint32_t value=word&0xFFu;

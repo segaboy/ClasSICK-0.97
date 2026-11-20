@@ -190,8 +190,132 @@ static void displacement_and_index(void)
             !memcmp(data,x.data,sizeof data));
     }
 }
+static void immediate_alu(void)
+{
+    const unsigned operations[]={0,2,4,6,10,12};
+    fixture x;setup(&x);
+    for(unsigned width=1;width<=4;width*=2){
+        const int64_t modulus=INT64_C(1)<<(8*width),half=modulus/2;
+        const uint32_t bits=(uint32_t)(modulus-1);
+        const uint32_t samples[]={0,1,(uint32_t)half-1,(uint32_t)half,(uint32_t)half+1,bits-1,bits};
+        unsigned size=width==1?0u:width==2?1u:2u;
+        for(unsigned k=0;k<6;++k)for(unsigned i=0;i<7;++i)for(unsigned j=0;j<7;++j)
+        for(unsigned extend=0;extend<2;++extend){
+            unsigned op=operations[k];
+            uint32_t a=samples[i],b=samples[j];
+            int64_t ua=a,ub=b,sa=ua>=half?ua-modulus:ua,sb=ub>=half?ub-modulus:ub;
+            int64_t unbounded=0,signed_result=0;
+            uint32_t answer;
+            int arithmetic=op==4 || op==6 || op==12;
+            if(arithmetic){
+                unbounded=op==6?ua+ub:ua-ub;signed_result=op==6?sa+sb:sa-sb;
+                answer=(uint32_t)unbounded&bits;
+            } else answer=op==0?(a|b):op==2?(a&b):(a^b);
+            unsigned carry=unbounded<0 || unbounded>=modulus;
+            unsigned overflow=signed_result < -half || signed_result >= half;
+            unsigned expected_x=arithmetic && op!=12 ? carry : extend;
+            uint16_t sr=(uint16_t)(0x2700u+16u*expected_x+(answer>=(uint32_t)half?8u:0u)+
+                (answer==0?4u:0u)+2u*overflow+carry);
+            uint32_t upper=UINT32_C(0xa7b6c5d4)&~bits;
+            x.frame.pc=0x401000;x.frame.sr=(uint16_t)(0x270fu+16u*extend);x.frame.d[4]=upper|a;
+            word(x.code,(uint16_t)((op<<8)|(size<<6)|4u));
+            if(width==4)longword(x.code+2,b);
+            else word(x.code+2,(uint16_t)(b|(width==1?0x5d00u:0u)));
+            REQUIRE(step(&x)==CS_M68K_OK && x.frame.pc==(width==4?0x401006u:0x401004u));
+            REQUIRE(x.frame.sr==sr && x.frame.d[4]==(upper|(op==12?a:answer)));
+        }
+    }
+    /* Big-endian RMW at an absolute word address, indexed compare of read-only
+     * data, and byte postincrement of A7 (two-byte stride) each use one EA. */
+    setup(&x);word(x.code,0x0678);word(x.code+2,1);word(x.code+4,0x1802);
+    word(x.data+2,0xffff);REQUIRE(step(&x)==CS_M68K_OK && x.frame.sr==0x2715);
+    REQUIRE(x.data[2]==0 && x.data[3]==0 && x.data[1]==0xcc && x.data[4]==0xcc);
+    word(x.code+6,0x0c70);word(x.code+8,0x8000);word(x.code+10,0x1002);
+    x.frame.d[1]=0;x.regions[1].flags=CS_GUEST_READ;
+    REQUIRE(step(&x)==CS_M68K_OK && x.frame.sr==0x271b && x.frame.pc==0x40100c);
+    word(x.code+12,0x0a1f);word(x.code+14,0xff);x.stack[32]=0x0f;
+    REQUIRE(step(&x)==CS_M68K_OK && x.stack[32]==0xf0 && x.stack[33]==0xcc && x.frame.a[7]==0x300022);
+    /* X,N,Z,V,C are the five implemented bits of the logical CCR special forms. */
+    for(unsigned i=0;i<3;++i){
+        const uint16_t opcode[]={0x003c,0x023c,0x0a3c},expected[]={0x271f,0x2701,0x271e};
+        setup(&x);x.frame.sr=0x2715;word(x.code,opcode[i]);word(x.code+2,0xf0ebu);
+        if(i==1)word(x.code+2,0xf0ebu&~0x10u);
+        REQUIRE(step(&x)==CS_M68K_OK && x.frame.sr==expected[i] && x.frame.pc==0x401004);
+    }
+    /* Destination read succeeds but store permission fails: proposed (A0)+
+     * and flags remain invisible. CMPI permits read-only memory. */
+    setup(&x);x.regions[1].flags=CS_GUEST_READ;word(x.code,0x0058);word(x.code+2,0xffff);
+    unchanged_failure(&x,CS_M68K_ADDRESS);
+    word(x.code,0x0c58);REQUIRE(step(&x)==CS_M68K_OK && x.frame.a[0]==0x1802 && x.data[0]==0xcc);
+    setup(&x);word(x.code,0x06b9);longword(x.code+2,1);x.regions[0].size=6;
+    unchanged_failure(&x,CS_M68K_ADDRESS);
+    static const uint16_t refused[]={0x00c0,0x0648,0x0c7a,0x0c7b,0x063c,0x007c,0x027c,0x0a7c,0x0800,0x0100};
+    for(unsigned i=0;i<sizeof refused/sizeof refused[0];++i){
+        setup(&x);word(x.code,refused[i]);unchanged_failure(&x,CS_M68K_OPCODE);
+    }
+}
+static void quick_and_unary(void)
+{
+    fixture x;setup(&x);
+    for(unsigned size=0;size<3;++size){
+        unsigned width=1u<<size;
+        int64_t modulus=INT64_C(1)<<(8*width),half=modulus/2;
+        uint32_t bits=(uint32_t)(modulus-1);
+        uint32_t samples[]={0,1,7,(uint32_t)half-1,(uint32_t)half,(uint32_t)half+7,bits-7,bits};
+        for(unsigned n=0;n<8;++n){
+            uint32_t left=samples[n],upper=UINT32_C(0x4a219eb7)&~bits;
+            for(unsigned amount=1;amount<=8;++amount)for(unsigned sub=0;sub<2;++sub){
+                int64_t delta=sub?-(int64_t)amount:(int64_t)amount;
+                int64_t u=(int64_t)left+delta,s=(left>=(uint32_t)half?(int64_t)left-modulus:(int64_t)left)+delta;
+                uint32_t result=(uint32_t)u&bits;
+                unsigned carry=u<0 || u>=modulus,v=s < -half || s>=half;
+                uint16_t sr=(uint16_t)(0x2700u+(carry?17u:0u)+2u*v+(result==0?4u:0u)+(result>=(uint32_t)half?8u:0u));
+                x.frame.d[3]=upper|left;x.frame.pc=0x401000;x.frame.sr=0x271f;
+                word(x.code,(uint16_t)(0x5003u+((amount&7u)<<9)+(sub<<8)+(size<<6)));
+                REQUIRE(step(&x)==CS_M68K_OK && x.frame.d[3]==(upper|result) && x.frame.sr==sr && x.frame.pc==0x401002);
+            }
+            for(unsigned extend=0;extend<2;++extend){
+                x.frame.d[3]=upper|left;x.frame.pc=0x401000;x.frame.sr=(uint16_t)(0x270fu+(extend<<4));
+                word(x.code,(uint16_t)(0x4a03u+(size<<6)));word(x.code+2,(uint16_t)(0x4203u+(size<<6)));
+                REQUIRE(step(&x)==CS_M68K_OK && x.frame.d[3]==(upper|left) &&
+                    x.frame.sr==(0x2700u+(extend<<4)+(left==0?4u:0u)+(left>=(uint32_t)half?8u:0u)));
+                REQUIRE(step(&x)==CS_M68K_OK && x.frame.d[3]==upper && x.frame.sr==(0x2704u+(extend<<4)));
+            }
+        }
+    }
+    /* Both encodings for An operate across the full register and preserve CCR. */
+    for(unsigned size=1;size<=2;++size){
+        setup(&x);x.frame.a[6]=0xfffffffcu;
+        word(x.code,(uint16_t)(0x500eu+(size<<6)));word(x.code+2,(uint16_t)(0x510eu+(size<<6)));
+        REQUIRE(step(&x)==CS_M68K_OK && x.frame.a[6]==4 && x.frame.sr==0x271f);
+        REQUIRE(step(&x)==CS_M68K_OK && x.frame.a[6]==0xfffffffcu && x.frame.sr==0x271f);
+    }
+    setup(&x);x.frame.a[0]=0x1804;word(x.data+2,0x8000);
+    /* SUBQ.W #1,-(A0); TST.W (A0)+; CLR.B -(A7). */
+    word(x.code,0x5360);word(x.code+2,0x4a58);word(x.code+4,0x4227);
+    REQUIRE(step(&x)==CS_M68K_OK && x.frame.a[0]==0x1802 && x.data[2]==0x7f && x.data[3]==0xff && x.frame.sr==0x2702);
+    x.regions[1].flags=CS_GUEST_READ;
+    REQUIRE(step(&x)==CS_M68K_OK && x.frame.a[0]==0x1804 && x.frame.sr==0x2700);
+    REQUIRE(step(&x)==CS_M68K_OK && x.frame.a[7]==0x30001e && x.stack[30]==0 && x.stack[31]==0xcc && x.frame.sr==0x2704);
+    for(unsigned op=0;op<2;++op){
+        setup(&x);x.regions[1].flags=CS_GUEST_READ;word(x.code,op?0x4258:0x5258);
+        unchanged_failure(&x,CS_M68K_ADDRESS);
+    }
+    const cs_m68k_stack_limits limits={0x300000,64};
+    const move_guard_point denied_read={CS_M68K_GUARD_READ,0x1800};
+    const cs_m68k_guard guard={permit_except,&denied_read,sizeof denied_read};
+    setup(&x);word(x.code,0x4258);
+    REQUIRE(cs_m68k_bus_step_guarded(&x.map,&x.gateway,&x.frame,&x.report,&limits,&guard)==CS_M68K_POLICY);
+    REQUIRE(x.frame.pc==0x401000 && x.frame.a[0]==0x1800 && x.data[0]==0xcc && x.frame.sr==0x271f);
+    static const uint16_t illegal[]={0x5208,0x4208,0x4a48,0x427a,0x4a7b,0x4abc,0x42c0,0x4ac0,0x50c0};
+    for(unsigned i=0;i<sizeof illegal/sizeof illegal[0];++i){
+        setup(&x);word(x.code,illegal[i]);unchanged_failure(&x,CS_M68K_OPCODE);
+    }
+}
 static void operands(void)
 {
+    quick_and_unary();
+    immediate_alu();
     absolute_short();
     displacement_and_index();
     for(unsigned width=1;width<=4;width*=2) for(unsigned mode=2;mode<=4;++mode)

@@ -47,7 +47,7 @@ cs_mac_reset:
 .Lload:
     jsr cs_mac_load_startup_disk
     tst.l %d0
-    beq.s cs_mac_startup_stop
+    beq.w cs_mac_startup_stop
 
     /* Development handoff profile. The disk takes control directly. */
     move.l #0x7800,%sp
@@ -69,10 +69,86 @@ cs_mac_reset:
     move.w #0x2700,%sr
     jmp 0x8002
 
-    /* Keep the unimplemented Line-A vector identifiable in the link map. */
+    /* With D0-D2/A0-A1 saved, SR and the faulting PC are at 20/22(SP).
+       Select the continuation before calling guest code: the routine may
+       update its own entry or the caller's trap word before returning. */
     .global cs_mac_startup_line_a
 cs_mac_startup_line_a:
-    nop
+    movem.l %d0-%d2/%a0-%a1,-(%sp)
+    move.w 20(%sp),%d1
+    andi.w #0xa000,%d1
+    cmpi.w #0x2000,%d1
+    bne.w cs_mac_startup_stop
+    move.l 22(%sp),%d1
+    btst #0,%d1
+    bne.w cs_mac_startup_stop
+    cmpi.l #0x410000,%d1
+    bcc.w cs_mac_startup_stop
+    movea.l %d1,%a0
+    moveq #0,%d1
+    move.w (%a0),%d1
+    addq.l #2,22(%sp)
+    btst #8,%d1
+    bne.s .Lreturns_a0
+    pea .Lrestore_a0
+    bra.s .Llookup
+.Lreturns_a0:
+    pea .Lrestore_regs
+.Llookup:
+    move.l %d1,-(%sp)
+    jsr cs_mac_trap_target
+    addq.l #4,%sp
+    tst.l %d0
+    beq.w cs_mac_startup_stop
+    move.l %d0,-(%sp)
+    movem.l 8(%sp),%d0-%d2/%a0-%a1
+    rts                         /* enter handler; its RTS pops our continuation */
+.Lrestore_a0:
+    movea.l 12(%sp),%a0
+.Lrestore_regs:
+    tst.w %d0
+    move.w %sr,%d1
+    andi.w #0x000f,%d1
+    andi.w #0xfff0,20(%sp)
+    or.w %d1,20(%sp)
+    move.l 4(%sp),%d1
+    move.l 8(%sp),%d2
+    movea.l 16(%sp),%a1
+    lea 20(%sp),%sp
+    .global cs_mac_startup_service_return
+cs_mac_startup_service_return:
+    rte
+
+    /* Actual ROM addresses returned by GetTrapAddress. The only C result
+       allowed out of the direct Get wrapper is A0; direct calls retain CCR. */
+    .global cs_mac_get_trap_address
+cs_mac_get_trap_address:
+    move.w %sr,-(%sp)
+    movem.l %d0-%d1/%a1,-(%sp)
+    move.l %d0,-(%sp)
+    jsr cs_mac_trap_get_value
+    addq.l #4,%sp
+    tst.l %d0
+    beq.s cs_mac_startup_stop
+    movea.l %d0,%a0
+    movem.l (%sp)+,%d0-%d1/%a1
+    move.w (%sp)+,%ccr
+    rts
+
+    .global cs_mac_set_trap_address
+cs_mac_set_trap_address:
+    move.w %sr,-(%sp)
+    movem.l %d0-%d1/%a0-%a1,-(%sp)
+    move.l %a0,-(%sp)
+    move.l %d0,-(%sp)
+    jsr cs_mac_trap_set_value
+    addq.l #8,%sp
+    tst.l %d0
+    beq.s cs_mac_startup_stop
+    movem.l (%sp)+,%d0-%d1/%a0-%a1
+    move.w (%sp)+,%ccr
+    rts
+
     .global cs_mac_startup_stop
 cs_mac_startup_stop:
     stop #0x2700

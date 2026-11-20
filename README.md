@@ -13,6 +13,10 @@ and a native 286 installer without embedding a System Disk. Both start
 vector on the supplied disk. The 286 interpreter still stops during disk
 startup. [Build and test the startup artifacts](docs/development/disk-startup-build-20261119.md).
 
+On November 20, three read-only trials identified NewPtr as the first service
+the supplied disk needs on the Mac. The installed 286 still stops on its
+third dispatch. [Current startup results](docs/development/startup-service-boundary-20261120.md).
+
 Published 2026-11-17: [ROM 0.4.0-alpha.1](https://github.com/segaboy/ClasSICK-0.97/releases/tag/rom-v0.4.0-alpha.1) and [native 286 PC Preview 0.2.0-alpha.1](https://github.com/segaboy/ClasSICK-0.97/releases/tag/pc-v0.2.0-alpha.1).
 The paired experimental interactive-window release includes both targets,
 corresponding source, checksums, screenshots, GIF and video. All 16 public

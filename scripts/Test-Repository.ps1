@@ -49,7 +49,9 @@ foreach ($path in $files) {
     if ($path -match $forbiddenDirectories) { throw "Excluded payload directory tracked: $path" }
     $leaf = [IO.Path]::GetFileName($path)
     $extension = [IO.Path]::GetExtension($path).ToLowerInvariant()
-    if ($allowedExtensions -notcontains $extension -and $allowedNames -notcontains $leaf -and -not $registeredScreenshots.ContainsKey($path) -and -not $registeredAnimations.ContainsKey($path)) {
+    # SPEC-0144's shared C/assembler X-macro list has a reviewed text grammar.
+    $serviceList = $path -ceq 'probes/mac128k/service-labels.def'
+    if (-not $serviceList -and $allowedExtensions -notcontains $extension -and $allowedNames -notcontains $leaf -and -not $registeredScreenshots.ContainsKey($path) -and -not $registeredAnimations.ContainsKey($path)) {
         throw "Non-source/text payload needs explicit policy review: $path"
     }
     if ($leaf -match '^(\.env($|\.)|credentials|secrets|id_rsa|id_ed25519)') {
@@ -58,6 +60,13 @@ foreach ($path in $files) {
     if ($registeredScreenshots.ContainsKey($path) -or $registeredAnimations.ContainsKey($path)) { continue }
     if (-not $indexedText.ContainsKey($path) -or $indexedSizes[$path] -gt 1048576) { throw "Unexpected index size: $path" }
     $content = $indexedText[$path]
+    if ($serviceList) {
+        foreach ($row in ($content -split '\r?\n')) {
+            if ($row -cnotmatch '^\s*(?:/\*[^*]*\*/|CS_SERVICE\(0x[0-9a-f]{4}, [A-Za-z][A-Za-z0-9]*\))?\s*$') {
+                throw "Unexpected service definition in $path"
+            }
+        }
+    }
     if ($content.Contains([char]0)) { throw "Binary content in text file: $path" }
     if ($content -match $secretSignatures) { throw "Possible credential in $path (value withheld)" }
     if ($extension -eq '.json') { $null = $content | ConvertFrom-Json }
