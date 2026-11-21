@@ -10,3 +10,7 @@ unlisted services, and misleading values on both sides of the real call.
 A loop without a trap and a direct jump to a terminal test that an actual
 gateway visit is necessary. A second independent link checks executable
 identity. See the [qualification receipt](../../docs/development/startup-service-labels-20261120.md).
+
+The [unhandled-service tests](../../docs/development/startup-unhandled-service-20261121.md)
+exercise successful allocation, a guest patch, a subsequent refused service,
+and direct, stale, unknown, no-call and faulting controls.

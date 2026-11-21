@@ -1,6 +1,29 @@
 /* SPDX-License-Identifier: GPL-3.0-or-later */
 /* Copyright (C) 2026 Dean Howell. */
     .text
+#ifdef CS_DIAG_UNHANDLED
+    .global __wrap_cs_mac_trap_target
+__wrap_cs_mac_trap_target:
+    move.l 4(%sp),-(%sp)
+    jsr __real_cs_mac_trap_target
+    addq.l #4,%sp
+    tst.l %d0
+    bne.s .Lreturn
+    /* Only the lookup made by the native Line-A dispatcher is an observed
+       service request. A direct guest call to this helper keeps its zero. */
+    move.l (%sp),%d0
+    cmpi.l #cs_mac_startup_line_a,%d0
+    bcs.s .Ldirect_refusal
+    cmpi.l #cs_mac_startup_service_return,%d0
+    bcs.s cs_diag_gateway
+.Ldirect_refusal:
+    moveq #0,%d0
+.Lreturn:
+    rts
+    .global cs_diag_gateway
+cs_diag_gateway:
+    move.w 6(%sp),%d0         /* Low word of the dispatcher's uint32_t argument. */
+#else
     .global __wrap_cs_mac_load_startup_disk
 __wrap_cs_mac_load_startup_disk:
     jsr __real_cs_mac_load_startup_disk
@@ -16,6 +39,7 @@ cs_diag_gateway:
        Read that one word only, as the normal vector-10 calling interface. */
     movea.l 2(%sp),%a0
     move.w (%a0),%d0
+#endif
     move.w %d0,%d1
     andi.w #0xf000,%d1
     cmpi.w #0xa000,%d1

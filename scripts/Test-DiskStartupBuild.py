@@ -44,10 +44,25 @@ def patched_fixture():
 
 
 def program_disk(program):
+    if not 0 < len(program) <= 1024-510:
+        raise ValueError("generated code must fit the two startup sectors")
     image = bytearray(409600)
     struct.pack_into(">HHh", image, 0, 0x4c4b, 0x6000, 510-4)
     image[510:510+len(program)] = program
     return image
+
+
+def new_ptr_disks(m68k_bin, out):
+    tools, _ = builder.inspect(m68k_bin)
+    source = builder.ROOT/"tests/startup-new-ptr.S"
+    obj = out/"new-ptr-fixtures.o"
+    subprocess.run([tools["gcc"], "-m68000", "-c", source, "-o", obj], check=True, timeout=60)
+    disks = {}
+    for section in ("allocations", "limits", "patching"):
+        raw = out/f"new-ptr-{section}.bin"
+        subprocess.run([tools["objcopy"], "-j", "."+section, "-O", "binary", obj, raw], check=True, timeout=60)
+        disks[section] = program_disk(raw.read_bytes())
+    return disks
 
 
 def immediate_disk():
@@ -102,7 +117,7 @@ class ColdCase:
     failure_post: int = 0
 
 
-def cold_cases(pc, mac):
+def cold_cases(pc, mac, allocation_disks):
     for name, value in (("first", 0x37), ("alternate", 0x82), ("retry", 0x37)):
         yield ColdCase(name, fixture(value), bytes([value]) + bytes(7), value, 0)
     bad = fixture(0x37)
@@ -114,6 +129,17 @@ def cold_cases(pc, mac):
     yield ColdCase("patched-trap", patched_fixture(), bytes.fromhex("4353503100008300"))
     yield ColdCase("immediate", immediate_disk(), bytes.fromhex("0000000611200005"))
     yield ColdCase("quick-unary", quick_disk(), bytes.fromhex("fffffe008000fff8"))
+    # Compare the caller's actual pointers, guest writes and preserved register
+    # results. The completion marker follows the last result in each disk.
+    new_ptr = 0x400004 if pc else mac["new_ptr_pc"]
+    allocations = struct.pack(">III", new_ptr, 0x10080, 0x10086) + bytes.fromhex(
+        "00000055 11223344 0000a080 0000a088 00000000 00c70000 00000000 00007800")
+    limits = bytes.fromhex("ffffff94 00000000 ff94 1234ff94 00000000 ff94 "
+                           "00010080 00000000 0000 00010082 ba0000ce ee00 0000ff94 00000000 ff94 "
+                           "0000a080 0000 0000a082")
+    patching = bytes.fromhex("00009400 00003456 00010080 00000000")
+    for name, expected in (("allocations", allocations), ("limits", limits), ("patching", patching)):
+        yield ColdCase("new-ptr-"+name, allocation_disks[name], expected, marker_offset=len(expected))
     for name, instruction in (("uninstalled-os", "a017"), ("toolbox", "a800"), ("reserved-tst", "4a48")):
         yield ColdCase(name, refusal_disk(instruction), bytes(7)+b"\x5a", failure_post=0xd2)
     if pc:
@@ -159,9 +185,12 @@ def verify(args):
     if sha(blank) != blank_sha or sha(installed) != record["pc"]["installed_disk_sha256"]:
         raise ValueError("installer output differs from expected entire disk")
     observations = []
+    fixture_source = builder.ROOT/"tests/startup-new-ptr.S"
+    fixture_hash = sha(fixture_source)
+    allocation_disks = new_ptr_disks(args.m68k_bin, out)
     for lane in ("mac128k", "pc286"):
         pc = lane == "pc286"
-        for case in cold_cases(pc, record["mac"]):
+        for case in cold_cases(pc, record["mac"], allocation_disks):
             name, logical = case.name, case.disk
             source = out/f"{name}-{lane}.img"
             source.write_bytes(logical.ljust(1228800, b"\0") if pc else logical)
@@ -177,7 +206,7 @@ def verify(args):
                 opts += (["--until-post", case.failure_post] if pc else ["--until-pc", record["mac"]["startup_stop_pc"]])
             else:
                 opts += ["--until", f"{marker+case.marker_offset}:1:{case.marker}"]
-            opts += ["--inspect", f"{marker}:8"]
+            opts += ["--inspect", f"{marker}:{len(case.expected)}"]
             row = guest(lane, opts, cycles=250000000 if pc else 16000000)
             view = row["memory"]
             if case.failure_post:
@@ -200,9 +229,10 @@ def verify(args):
             observations.append(dict(case=name, lane=lane, cycles=row["cycles"], pc=row["pc"],
                                      marker=view["bytes"], source_sha256=before))
     if (sha(installed) != record["pc"]["installed_disk_sha256"] or sha(args.emulator) != EMULATOR or
+            sha(fixture_source) != fixture_hash or
             any(sha(bundle/n) != h for n, h in record["artifacts"].items())):
         raise ValueError("tested runtime or emulator changed")
-    report = dict(status="generated-controls-pass", runner_sha256=sha(Path(__file__)),
+    report = dict(status="generated-controls-pass", runner_sha256=sha(Path(__file__)), fixture_sha256=fixture_hash,
                   manifest_sha256=sha(bundle/"manifest.json"),
                   installed_sha256=sha(installed), emulator_sha256=EMULATOR, observations=observations)
     (out/"report.json").write_text(json.dumps(report, indent=2)+"\n", encoding="utf-8")

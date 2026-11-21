@@ -60,3 +60,33 @@
     movea.l #0xabcdef,%a0
     moveq #-1,%d0
     rts
+
+    .section .new_ptr,"ax"
+    moveq #0x1e,%d0
+    .word 0xa146
+    movea.l %a0,%a2               /* Save the ROM address supplied to guest code. */
+    move.l #0x55a3ffff,0x10080
+    moveq #17,%d1
+    moveq #18,%d2
+    movea.l #0x11223344,%a1
+    moveq #3,%d0
+    move.w #0x271f,%sr
+    jsr (%a2)
+    move.w %sr,0x9100
+    move.l %d0,0x9102
+    move.l %a0,0x9106
+    move.w 0x220,0x910a
+    move.l (%a0),0x910c           /* Plain allocation leaves all four bytes. */
+    move.l %d1,0x9110
+    move.l %a1,0x9114
+    move.l %d2,0x9118
+    move.l %sp,0x911c
+    move.l #0x12340000,%d0
+    move.w #0x270f,%sr
+    jsr (%a2)
+    move.w %sr,0x9120
+    move.l %d0,0x9122
+    move.l %a0,0x9126
+    move.w 0x220,0x912a
+    move.b #0xbc,0x913c
+1:  bra.s 1b

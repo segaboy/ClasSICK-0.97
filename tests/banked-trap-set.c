@@ -277,8 +277,51 @@ static void patch_dispatch(void)
     init(&f,0xa017);f.gateway.entries[23]=0x10fe;snapshot(&f,&before);
     REQUIRE(patched(&f,&state)==CS_M68K_POLICY && state.depth==0);unchanged(&f,&before);
 }
+/* Only the standalone startup profile binds this token. Stopping at the
+ * callback deliberately checks routing independently of allocation results. */
+static unsigned newptr_calls;
+static cs_m68k_result observe_newptr(const cs_trap_frame *before,cs_trap_frame *next,
+    cs_m68k_bus_report *report,uint32_t scratch,const cs_m68k_guard *guard)
+{
+    REQUIRE(before!=next && guard!=NULL && scratch==before->a[7]-6);
+    REQUIRE(report->cpu.service.target==CS_S1_STARTUP_NEW_PTR_TOKEN);
+    ++newptr_calls;
+    return CS_M68K_POLICY;
+}
+static cs_m68k_result startup(fixture *f,cs_s1_patch_state *state)
+{
+    return cs_s1_banked_startup_step(&f->backend,&f->gateway,&f->frame,&f->report,
+                                      &f->limits,&f->guard,state,observe_newptr);
+}
+static void newptr_routing(void)
+{
+    fixture f;
+    cs_s1_patch_state state={0};
+    saved before;
+    for(unsigned flags=0;flags<4;++flags){
+        init(&f,(uint16_t)(0xa11eu|(flags<<9)));
+        f.gateway.entries[0x1e]=CS_S1_STARTUP_NEW_PTR_TOKEN;
+        snapshot(&f,&before);newptr_calls=0;
+        REQUIRE(patched(&f,&state)==CS_M68K_POLICY && newptr_calls==0);
+        unchanged(&f,&before);
+        REQUIRE(startup(&f,&state)==CS_M68K_POLICY && newptr_calls==1);
+        unchanged(&f,&before);
+        f.policy.deny=4;
+        REQUIRE(startup(&f,&state)==CS_M68K_POLICY && newptr_calls==1);
+        unchanged(&f,&before);
+        f.policy.deny=0;
+        f.gateway.entries[0x1e]=f.gateway.config.unsupported_token;
+        REQUIRE(startup(&f,&state)==CS_M68K_POLICY && newptr_calls==1);
+        f.gateway.entries[0x1e]=0x1040;
+        f.ram[0x40]=0x4e;f.ram[0x41]=0x75;
+        REQUIRE(startup(&f,&state)==CS_M68K_OK && state.depth==1 && f.frame.pc==0x1040);
+        f.frame.a[0]=0x1234;
+        REQUIRE(startup(&f,&state)==CS_M68K_OK && state.depth==0 && f.frame.pc==0x1002);
+        REQUIRE(f.frame.a[0]==0x1234 && newptr_calls==1);
+    }
+}
 int main(void)
 {
-    successes();pure_validation();failures();envelopes();patch_dispatch();
+    successes();pure_validation();failures();envelopes();patch_dispatch();newptr_routing();
     printf("banked SetTrapAddress: %u checks\n",checks);return 0;
 }

@@ -38,3 +38,19 @@ Qualify all names on newly generated disks and independently exercise aliases,
 unknown OS and Toolbox calls, a reserved bit, misleading adjacent values and
 a run that never calls the gateway. The developer ROM and 286 installer have
 separate source lists and qualified identities.
+
+## Optional observation of unhandled services
+
+With `--unhandled-only`, retain the product Line-A vector, loader, dispatch
+directory and service returns. Wrap only the call to `cs_mac_trap_target`.
+Forward its original argument and successful return value. A zero result
+from the Line-A dispatcher's lookup reaches the diagnostic gateway, which
+classifies the service argument using the same finite catalog and terminals.
+Direct calls from guest memory to the helper are outside this observation.
+An absent gateway at the bounded horizon or a prior modeled CPU stop yields
+`no-unhandled-service-observed`. A service admitted by the resolver can
+later report its own error without producing a classification.
+
+Mode-specific generated controls and the selected trial must bind the same
+mode, executable twins, source identities and emulator. Qualify the default
+first-call mode separately. [Unhandled service trial](../development/startup-unhandled-service-20261121.md).

@@ -139,7 +139,8 @@ static cs_m68k_result leave_patch(const cs_m68k_bus_backend *b,const cs_m68k_gua
 }
 static cs_m68k_result banked_step(const cs_m68k_transfer_backend *backend,
     const cs_trap_gateway *gateway,cs_trap_gateway *publish_gateway,cs_trap_frame *frame,cs_m68k_bus_report *report,
-    const cs_m68k_stack_limits *limits,const cs_m68k_guard *guard,cs_s1_patch_state *patch)
+    const cs_m68k_stack_limits *limits,const cs_m68k_guard *guard,cs_s1_patch_state *patch,
+    cs_s1_startup_newptr_fn newptr)
 {
     if(!envelope(backend,gateway,frame,report,limits,guard,patch))return CS_M68K_ARGUMENT;
     if(patch!=0 && patch->depth>CS_S1_PATCH_DEPTH)return CS_M68K_ARGUMENT;
@@ -167,7 +168,8 @@ static cs_m68k_result banked_step(const cs_m68k_transfer_backend *backend,
         const cs_s1_patch_call *call=&patch->calls[patch->depth-1u];
         if((call->slot&1u) || call->slot<=limits->base || limits->size<4 ||
             call->slot-limits->base>limits->size-4 || (call->continuation&1u) ||
-            call->continuation>0xfffffeUL || (call->word&0xfe00u)!=0xa000u ||
+            call->continuation>0xfffffeUL || ((call->word&0xfe00u)!=0xa000u &&
+                !(newptr && (call->word&0xf9ffu)==0xa11eu)) ||
             frame->a[7]>call->slot)return done(report,CS_M68K_POLICY);
         active.base=limits->base;active.size=call->slot-limits->base;
         limits=&active;
@@ -180,7 +182,8 @@ static cs_m68k_result banked_step(const cs_m68k_transfer_backend *backend,
         return done(report,CS_M68K_POLICY);
     if(returning)return leave_patch(b,guard,frame,&proposed,report,patch);
     (void)cs_trap_decode(word,&report->cpu.service.decoded);
-    if(patch!=0 && (word&0xfe00u)==0xa000u){
+    int allocating=newptr!=0 && (word&0xf9ffu)==0xa11eu;
+    if(patch!=0 && ((word&0xfe00u)==0xa000u || allocating)){
         uint32_t installed;
         cs_trap_result lookup=cs_trap_get(gateway,(uint16_t)(word&0xffu),&installed);
         if(lookup!=CS_TRAP_OK){report->cpu.service.status=lookup;return done(report,CS_M68K_SERVICE);}
@@ -189,7 +192,8 @@ static cs_m68k_result banked_step(const cs_m68k_transfer_backend *backend,
             return enter_patch(backend,guard,frame,&proposed,report,limits->base,patch,installed);
     }
     int setting=word==0xa047u && publish_gateway!=0;
-    if(word!=0xa146u && word!=0xa046u && !setting){
+    if(word!=0xa146u && word!=0xa046u && !setting &&
+        !(allocating && report->cpu.service.target==CS_S1_STARTUP_NEW_PTR_TOKEN)){
         report->cpu.service.status=CS_TRAP_UNSUPPORTED_FORMAT;return done(report,CS_M68K_POLICY);
     }
     if(frame->a[7]<6 || frame->a[7]-6<limits->base || frame->a[7]-6<0x400UL){
@@ -201,6 +205,12 @@ static cs_m68k_result banked_step(const cs_m68k_transfer_backend *backend,
         return done(report,CS_M68K_POLICY);
     report->memory=b->span(b->context,scratch,6,CS_GUEST_WRITE);
     if(report->memory!=CS_GUEST_OK)return done(report,CS_M68K_ADDRESS);
+    if(allocating){
+        report->cpu.service_called=1;
+        cs_m68k_result result=newptr(frame,&proposed,report,scratch,guard);
+        if(result==CS_M68K_OK)copy_frame(frame,&proposed);
+        return done(report,result);
+    }
     uint32_t target;
     cs_trap_result service=cs_trap_get(gateway,(uint16_t)(setting?CS_TRAP_SET:CS_TRAP_GET),&target);
     if(service!=CS_TRAP_OK){report->cpu.service.status=service;return done(report,CS_M68K_SERVICE);}
@@ -236,15 +246,23 @@ static cs_m68k_result banked_step(const cs_m68k_transfer_backend *backend,
 cs_m68k_result cs_s1_banked_step(const cs_m68k_transfer_backend *backend,
     const cs_trap_gateway *gateway,cs_trap_frame *frame,cs_m68k_bus_report *report,
     const cs_m68k_stack_limits *limits,const cs_m68k_guard *guard)
-{return banked_step(backend,gateway,0,frame,report,limits,guard,0);}
+{return banked_step(backend,gateway,0,frame,report,limits,guard,0,0);}
 cs_m68k_result cs_s1_banked_trap_step(const cs_m68k_transfer_backend *backend,
     cs_trap_gateway *gateway,cs_trap_frame *frame,cs_m68k_bus_report *report,
     const cs_m68k_stack_limits *limits,const cs_m68k_guard *guard)
-{return banked_step(backend,gateway,gateway,frame,report,limits,guard,0);}
+{return banked_step(backend,gateway,gateway,frame,report,limits,guard,0,0);}
 cs_m68k_result cs_s1_banked_patch_step(const cs_m68k_transfer_backend *backend,
     cs_trap_gateway *gateway,cs_trap_frame *frame,cs_m68k_bus_report *report,
     const cs_m68k_stack_limits *limits,const cs_m68k_guard *guard,cs_s1_patch_state *state)
 {
     if(state==0)return CS_M68K_ARGUMENT;
-    return banked_step(backend,gateway,gateway,frame,report,limits,guard,state);
+    return banked_step(backend,gateway,gateway,frame,report,limits,guard,state,0);
+}
+cs_m68k_result cs_s1_banked_startup_step(const cs_m68k_transfer_backend *backend,
+    cs_trap_gateway *gateway,cs_trap_frame *frame,cs_m68k_bus_report *report,
+    const cs_m68k_stack_limits *limits,const cs_m68k_guard *guard,cs_s1_patch_state *state,
+    cs_s1_startup_newptr_fn newptr)
+{
+    if(state==0 || newptr==0)return CS_M68K_ARGUMENT;
+    return banked_step(backend,gateway,gateway,frame,report,limits,guard,state,newptr);
 }

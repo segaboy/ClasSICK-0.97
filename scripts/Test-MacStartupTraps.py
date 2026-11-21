@@ -44,8 +44,14 @@ def main():
     after_trap = bytes.fromhex("13fc00bc0000913c60fe")
     cases = {"registers": body, "unsupported": before_trap + bytes.fromhex("a800") + after_trap,
              "odd-set": before_trap + bytes.fromhex("7017207c00008301a047") + after_trap}
+    if "new_ptr_pc" in manifest["mac"]:
+        direct = out / "direct-new-ptr.bin"
+        subprocess.run([tool["objcopy"], "-j", ".new_ptr", "-O", "binary", obj, direct], check=True)
+        cases["direct-new-ptr"] = direct.read_bytes()
     observations = []
     for name, code in cases.items():
+        if not 0 < len(code) <= 512:
+            raise ValueError(name + ": caller crosses startup area")
         image = bytearray(409600)
         struct.pack_into(">HHh", image, 0, 0x4c4b, 0x6000, 512-4)
         image[512:512+len(code)] = code
@@ -54,7 +60,7 @@ def main():
         before = sha(disk)
         machine = [args.emulator, "--machine", "mac128k", "--rom", rom, "--floppy", disk,
                    "--cycles", "16000000", "--timeout-ms", "25000", "--inspect", "0x9100:68"]
-        if name == "registers":
+        if name in ("registers", "direct-new-ptr"):
             machine += ["--until", "0x913c:1:0xbc"]
         else:
             machine += ["--until-pc", str(manifest["mac"]["startup_stop_pc"])]
@@ -71,6 +77,11 @@ def main():
                 0x7800,0x2710,get,0x271f,set_address,0x271b,0x2714,0x12345678,
                 0x2718,0x12345678,0x2718,0xabcdef,0xffffffff,17,18,19,0x11112222,0x7800,0xbc)
             struct.pack_into(">I", expected, 64, set_address)
+        elif name == "direct-new-ptr":
+            struct.pack_into(">HIIHIIIIIHIIH", expected, 0, 0x2714, 0, 0x10080, 0,
+                             0x55a3ffff, 17, 0x11223344, 18, 0x7800,
+                             0x2708, 0x1234ff94, 0, 0xff94)
+            expected[60] = 0xbc
         else:
             expected[61] = 0x55
         if seen != expected:
@@ -80,7 +91,7 @@ def main():
                   script_sha256=sha(Path(__file__)), fixture_sha256=sha(fixture), emulator_sha256=sha(args.emulator),
                   program_sha256=sha(program), cases=observations)
     (out / "report.json").write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
-    print("Native Macintosh Get/Set and patched trap checks passed.")
+    print("Native Macintosh register trap checks passed.")
 
 
 if __name__ == "__main__":

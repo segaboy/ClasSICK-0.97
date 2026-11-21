@@ -36,4 +36,17 @@ typedef struct {
 cs_m68k_result cs_s1_banked_patch_step(const cs_m68k_transfer_backend *backend,
     cs_trap_gateway *gateway,cs_trap_frame *frame,cs_m68k_bus_report *report,
     const cs_m68k_stack_limits *limits,const cs_m68k_guard *guard,cs_s1_patch_state *state);
+
+/* SPEC-0146. The standalone 286 runtime owns the exclusive fixed RAM map,
+ * heap and service callback. Admission precedes delegation: a RAM patch
+ * takes priority and only the bound original NewPtr token enters native C.
+ * The callback preflights all of its writes before publishing the result. */
+#define CS_S1_STARTUP_NEW_PTR_TOKEN UINT32_C(0x400004)
+typedef cs_m68k_result (*cs_s1_startup_newptr_fn)(const cs_trap_frame *before,
+    cs_trap_frame *proposed,cs_m68k_bus_report *report,uint32_t scratch,
+    const cs_m68k_guard *guard);
+cs_m68k_result cs_s1_banked_startup_step(const cs_m68k_transfer_backend *backend,
+    cs_trap_gateway *gateway,cs_trap_frame *frame,cs_m68k_bus_report *report,
+    const cs_m68k_stack_limits *limits,const cs_m68k_guard *guard,cs_s1_patch_state *state,
+    cs_s1_startup_newptr_fn newptr);
 #endif

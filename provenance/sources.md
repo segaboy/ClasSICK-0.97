@@ -5299,3 +5299,9 @@ Two independent builds matched. The [emulator qualification](https://github.com/
 and [ClasSICK trial](../docs/development/boot-handoff-ram-alias-20261119.md)
 describe the modeled bus and preserved physical inspection boundaries. SRC-0627
 supplies the hardware facts independently.
+
+## SRC-0629 - Last Memory Manager error on the original Macintosh
+
+The 1985 Macintosh Software Supplement identifies the last-error word at
+$0220. The [source review](records/SRC-0629-original-memory-error.md) records
+what is known about its relationship to a direct assembly call to NewPtr.

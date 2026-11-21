@@ -5,6 +5,7 @@
 #include "../../core/storage/mac-boot-header.h"
 #include "../../personality/system1/banked-services.h"
 #include "../../personality/system1/startup-globals.h"
+#include "../../personality/system1/startup-heap.h"
 
 static cs_pc286_m68k_memory memory;
 static cs_m68k_transfer_backend backend;
@@ -18,7 +19,7 @@ static union {
         cs_mac_boot_header header;
     } load;
     uint8_t globals[CS_MAC128K_GLOBALS_BYTES];
-    struct { cs_trap_gateway traps; cs_s1_patch_state patches; } running;
+    struct { cs_trap_gateway traps; cs_s1_patch_state patches; cs_startup_heap heap; } running;
 } phase;
 
 static void post(uint8_t code);
@@ -61,6 +62,79 @@ static int seed(uint32_t address,const uint8_t *source,unsigned bytes)
     return 1;
 }
 
+/* The fixed, exclusive four-bank layout in bind_ram() is valid for the
+ * entire native runtime. Call only after preflighting the full guest range. */
+static volatile uint8_t __far *bank_address(uint32_t at)
+{
+    const cs_pg_bank *bank=&memory.guest.banks[(unsigned)(at>>15)];
+    return (volatile uint8_t __far *)(((uint32_t)bank->segment<<16) |
+                                      (bank->offset+(at&0x7fffUL)));
+}
+
+static void clear_ram(uint32_t address,uint32_t bytes)
+{
+    while(bytes){
+        unsigned count=(unsigned)(0x8000UL-(address&0x7fffUL));
+        if(bytes<count)count=(unsigned)bytes;
+        volatile uint8_t __far *p=bank_address(address);
+        address+=count;bytes-=count;
+        while(count--)*p++=0;
+    }
+}
+
+/* The callback is called only for a NewPtr entry resolved to our ROM token.
+ * It receives a validated CPU/stack and the proposed, unpublished frame. */
+cs_m68k_result cs_pc286_startup_new_ptr(const cs_trap_frame *before,
+    cs_trap_frame *next,cs_m68k_bus_report *report,uint32_t scratch,const cs_m68k_guard *guard)
+{
+    cs_startup_heap candidate=phase.running.heap;
+    cs_mm_reply reply;
+    uint32_t zone,limit;
+    cs_m68k_guard_event event;
+    event.kind=CS_M68K_GUARD_READ;event.address=0x118;event.bytes=4;event.access=CS_GUEST_READ;
+    event.word=report->cpu.word;event.before=before;event.proposed=next;
+    if(!guard->check(guard->context,&event))return CS_M68K_POLICY;
+    report->memory=backend.scalar.read(backend.scalar.context,0x118,4,CS_GUEST_READ,&zone);
+    if(report->memory!=CS_GUEST_OK)return CS_M68K_ADDRESS;
+    event.address=0x130;
+    if(!guard->check(guard->context,&event))return CS_M68K_POLICY;
+    report->memory=backend.scalar.read(backend.scalar.context,0x130,4,CS_GUEST_READ,&limit);
+    if(report->memory!=CS_GUEST_OK)return CS_M68K_ADDRESS;
+    if(!cs_startup_new_ptr(&candidate,zone,limit,report->cpu.word,before->d[0],&reply))
+        return CS_M68K_POLICY;
+
+    uint32_t clear=reply.code==0 && (report->cpu.word&0x0200u)?before->d[0]:0;
+    if(clear){
+        /* The hardware frame is live until return and cannot be zeroed. */
+        if(reply.value<scratch+6 && scratch<reply.value+clear)return CS_M68K_POLICY;
+        event.kind=CS_M68K_GUARD_WRITE;event.address=reply.value;event.bytes=clear;event.access=CS_GUEST_WRITE;
+        if(!guard->check(guard->context,&event))return CS_M68K_POLICY;
+        report->memory=backend.scalar.span(backend.scalar.context,reply.value,clear,CS_GUEST_WRITE);
+        if(report->memory!=CS_GUEST_OK)return CS_M68K_ADDRESS;
+    }
+    event.kind=CS_M68K_GUARD_WRITE;event.address=CS_STARTUP_MEM_ERR;event.bytes=2;event.access=CS_GUEST_WRITE;
+    if(!guard->check(guard->context,&event))return CS_M68K_POLICY;
+    report->memory=backend.scalar.span(backend.scalar.context,CS_STARTUP_MEM_ERR,2,CS_GUEST_WRITE);
+    if(report->memory!=CS_GUEST_OK)return CS_M68K_ADDRESS;
+    uint16_t code=(uint16_t)reply.code;
+    next->d[0]=(before->d[0]&0xffff0000UL)|code;
+    next->a[0]=reply.value;
+    next->sr=(uint16_t)((before->sr&0xfff0u)|(code==0?4u:((code&0x8000u)?8u:0u)));
+    next->pc=before->pc+2;
+    event.kind=CS_M68K_GUARD_COMMIT;event.address=next->pc;event.bytes=0;event.access=0;
+    if(!guard->check(guard->context,&event))return CS_M68K_POLICY;
+
+    /* The outer dispatcher preflighted all six scratch bytes. Use only
+     * stable ordinary RAM now; none of these stores can subsequently fail. */
+    clear_ram(reply.value,clear);
+    *bank_address(CS_STARTUP_MEM_ERR)=(uint8_t)(code>>8);
+    *bank_address(CS_STARTUP_MEM_ERR+1)=(uint8_t)code;
+    *bank_address(scratch)=(uint8_t)(next->sr>>8);*bank_address(scratch+1)=(uint8_t)next->sr;
+    for(unsigned n=0;n<4;++n)*bank_address(scratch+2+n)=(uint8_t)(next->pc>>((3u-n)*8u));
+    phase.running.heap=candidate;
+    return CS_M68K_OK;
+}
+
 void start(void)
 {
     static const cs_m68k_guard guard={allow,NULL,0};
@@ -75,13 +149,16 @@ void start(void)
     /* Release the floppy provider and both native sector buffers. A clean
      * temporary page is needed because only four globals are initialized. */
     for(unsigned i=0;i<sizeof phase.globals;++i)phase.globals[i]=0;
-    if(!cs_mac128k_seed_startup_globals(phase.globals,sizeof phase.globals) ||
-        !seed(CS_MAC128K_GLOBALS_BASE,phase.globals,sizeof phase.globals))fail(0xd1);
-    if(cs_trap_init(&phase.running.traps,&directory)!=CS_TRAP_OK)fail(0xd1);
+    if(!cs_mac128k_seed_startup_globals(phase.globals,sizeof phase.globals))fail(0xd1);
+    cs_startup_heap_globals(phase.globals);
+    if(!seed(CS_MAC128K_GLOBALS_BASE,phase.globals,sizeof phase.globals))fail(0xd1);
+    if(cs_trap_init(&phase.running.traps,&directory)!=CS_TRAP_OK ||
+        cs_trap_set(&phase.running.traps,0x1e,CS_S1_STARTUP_NEW_PTR_TOKEN)!=CS_TRAP_OK)fail(0xd1);
+    cs_startup_heap_init(&phase.running.heap);
     uint8_t *state=(uint8_t *)&phase.running.patches;
     for(unsigned i=0;i<sizeof phase.running.patches;++i)state[i]=0;
     cpu.pc=0x8002;cpu.a[0]=0x8000;cpu.a[7]=0x7800;cpu.sr=0x2700;
     for(;;)
-        if(cs_s1_banked_patch_step(&backend,&phase.running.traps,&cpu,&report,&stack,
-                &guard,&phase.running.patches)!=CS_M68K_OK)fail(0xd2);
+        if(cs_s1_banked_startup_step(&backend,&phase.running.traps,&cpu,&report,&stack,
+                &guard,&phase.running.patches,cs_pc286_startup_new_ptr)!=CS_M68K_OK)fail(0xd2);
 }

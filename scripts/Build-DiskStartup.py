@@ -19,7 +19,8 @@ media = import_module("Build-PC286PreviewMedia")
 ROOT = media.ROOT
 ROM = "disk-startup-mac128k.rom"
 INSTALLER = "disk-startup-286-installer.img"
-SHARED = ["core/storage/block-read.c", "core/storage/mac-boot-header.c", "personality/system1/startup-globals.c"]
+SHARED = ["core/storage/block-read.c", "core/storage/mac-boot-header.c",
+          "personality/system1/startup-globals.c", "personality/system1/startup-heap.c"]
 MAC = [*SHARED, "core/services/traps.c", "arch/m68k/disk-startup-reset.S", "platform/mac128k/iwm-read.c",
        "platform/mac128k/iwm-capture.S", "platform/mac128k/startup-floppy.c", "platform/mac128k/disk-startup.c"]
 PC = [*SHARED, "core/cpu/m68k.c", "core/cpu/m68k-bus.c", "core/memory/guest.c",
@@ -100,6 +101,10 @@ def build(m68k_bin, tool, assembler, output):
         service_pcs = {field: symbols[label] for field, label in (
             ("get_trap_address_pc", "cs_mac_get_trap_address"),
             ("set_trap_address_pc", "cs_mac_set_trap_address"),
+            ("new_ptr_pc", "cs_mac_new_ptr"),
+            ("new_ptr_dispatch_pc", "cs_mac_new_ptr_dispatch"),
+            ("new_ptr_success_pc", "cs_mac_new_ptr_success"),
+            ("new_ptr_failure_pc", "cs_mac_new_ptr_failure"),
             ("service_return_pc", "cs_mac_startup_service_return"),
             ("line_a_pc", "cs_mac_startup_line_a"),
             ("startup_stop_pc", "cs_mac_startup_stop"))}
@@ -124,9 +129,15 @@ def build(m68k_bin, tool, assembler, output):
             "option", "map="+str(mapping), "name", binary, "file", ",".join(objects))
         text = mapping.read_text()
         entry = re.search(r"Entry point address:\s*([0-9a-fA-F]+)", text)
-        step = re.search(r"^\s*([0-9a-fA-F]+)[+*]?\s+cs_s1_banked_patch_step_\s*$", text, re.M)
+        native_pcs = {}
+        for field, name in (("startup_step_pc", "cs_s1_banked_startup_step_"),
+                            ("new_ptr_pc", "cs_pc286_startup_new_ptr_")):
+            match = re.search(r"^\s*([0-9a-fA-F]+)[+*]?\s+"+name+r"\s*$", text, re.M)
+            if not match or int(match[1], 16) >= binary.stat().st_size:
+                raise ValueError("missing native PC inside payload: " + name)
+            native_pcs[field] = 0x10000 + int(match[1], 16)
         bss = re.search(r"^_BSS\s+BSS\s+DGROUP\s+([\da-fA-F]+)\s+([\da-fA-F]+)", text, re.M)
-        if not entry or not step or not bss or ".lib" in text.lower():
+        if not entry or not bss or ".lib" in text.lower():
             raise ValueError("unexpected PC link map")
         base, size = [int(v, 16) for v in bss.groups()]
         if base < binary.stat().st_size:
@@ -147,7 +158,7 @@ def build(m68k_bin, tool, assembler, output):
                      iwm_wire_bytes=706, iwm_decoded_bytes=524),
             pc=dict(payload_sha256=sha(binary), installed_disk_sha256=package["images"]["hard-disk.img"],
                     entry=int(entry[1], 16), start_pc=0x10000+int(entry[1], 16),
-                    startup_step_pc=0x10000+int(step[1], 16), payload_bytes=binary.stat().st_size, bss_start=base, bss_bytes=size,
+                    **native_pcs, payload_bytes=binary.stat().st_size, bss_start=base, bss_bytes=size,
                     boot_stack_top=0xfffe, guest_stack_top=0x7800),
             limits="Experimental startup only. Complete ROM services, application workload and physical hardware remain open.")
         (result/"manifest.json").write_text(json.dumps(manifest, indent=2)+"\n", encoding="utf-8")

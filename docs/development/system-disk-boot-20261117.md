@@ -7,6 +7,14 @@ defines the ROM/installed-286 responsibilities and the four-disk acceptance
 corpus. This receipt retains the earlier selected-System-Disk evidence. Broader
 ROM coverage and other-disk results must not be inferred from those probes.
 
+## November 21 disk-startup results
+
+The Mac completed 906 instructions in the supplied disk's boot sectors after
+the ROM successfully allocated memory with NewPtr. Three cold diagnostic boots
+identified PBMountVol as the next missing service. On the installed 286 the
+allocator passed its guest-code tests. Execution of the supplied disk still
+stops during the third interpreter dispatch. [Paired trial and build identities](startup-allocation-boundary-20261121.md).
+
 ## November 20 disk-startup results
 
 Three cold runs identified **NewPtr** as the first ROM service requested by

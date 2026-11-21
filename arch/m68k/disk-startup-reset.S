@@ -1,5 +1,9 @@
 /* SPDX-License-Identifier: GPL-3.0-or-later */
 /* Copyright (C) 2026 Dean Howell. */
+    .global cs_mac_current_zone,cs_mac_application_limit,cs_mac_memory_error
+    .set cs_mac_current_zone,0x0118
+    .set cs_mac_application_limit,0x0130
+    .set cs_mac_memory_error,0x0220
     .section .vectors,"a"
     .global cs_mac_startup_vectors
 cs_mac_startup_vectors:
@@ -153,4 +157,47 @@ cs_mac_set_trap_address:
 cs_mac_startup_stop:
     stop #0x2700
     bra.s cs_mac_startup_stop
+
+    /* The directory publishes the plain entry for direct JSR. The selector
+       for a mediated call comes from its actual instruction. */
+    .global cs_mac_new_ptr
+cs_mac_new_ptr:
+    move.l #0xa11e,-(%sp)
+    bra.s .Lnew_ptr
+    .global cs_mac_new_ptr_clear
+cs_mac_new_ptr_clear:
+    move.l #0xa31e,-(%sp)
+    bra.s .Lnew_ptr
+    .global cs_mac_new_ptr_sys
+cs_mac_new_ptr_sys:
+    move.l #0xa51e,-(%sp)
+    bra.s .Lnew_ptr
+    .global cs_mac_new_ptr_sys_clear
+cs_mac_new_ptr_sys_clear:
+    move.l #0xa71e,-(%sp)
+    .global cs_mac_new_ptr_dispatch
+cs_mac_new_ptr_dispatch:
+.Lnew_ptr:
+    move.w %sr,-(%sp)
+    movem.l %d0-%d1/%a1,-(%sp)
+    move.l 14(%sp),-(%sp)
+    move.l %d0,-(%sp)
+    jsr cs_mac_allocate_startup_ptr
+    lea 8(%sp),%sp
+    cmpi.l #-1,%d0
+    beq.w cs_mac_startup_stop
+    movea.l %d0,%a0
+    movem.l (%sp)+,%d0-%d1/%a1
+    move.w (%sp)+,%ccr
+    addq.l #4,%sp
+    cmpa.l #0,%a0
+    beq.s cs_mac_new_ptr_failure
+    .global cs_mac_new_ptr_success
+cs_mac_new_ptr_success:
+    clr.w %d0
+    rts
+    .global cs_mac_new_ptr_failure
+cs_mac_new_ptr_failure:
+    move.w cs_mac_memory_error,%d0
+    rts
     .section .note.GNU-stack,"",@progbits
